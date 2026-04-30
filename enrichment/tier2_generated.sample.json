@@ -1,0 +1,96 @@
+{
+  "Art.4.1": {
+    "business_description": "Personal data means any information relating to an identified or identifiable natural person. The scope is deliberately broad — name, email, phone number, IP address, location data, cookie identifiers, and even combinations of information that together identify someone all qualify. The key test is identifiability: if the data can be linked back to a living individual, directly or indirectly, it is personal data. Information about companies or deceased persons is not personal data. A common misconception is that only obviously identifying data like names applies — pseudonymised data where the key is held separately still counts as personal data under the General Data Protection Regulation (GDPR).",
+    "query_keywords": {
+      "exact": [
+        "any information relating to an identified or identifiable natural person",
+        "personal data",
+        "identifiable natural person",
+        "online identifier"
+      ],
+      "practitioner": [
+        "what counts as personal data",
+        "is this personal data",
+        "personal data definition",
+        "identifiable person",
+        "pseudonymised data",
+        "IP address personal data",
+        "cookie data personal data",
+        "indirect identification"
+      ],
+      "scenario": [
+        "determining whether data is personal data",
+        "IP addresses in server logs",
+        "employee ID numbers",
+        "pseudonymised datasets with separate key",
+        "combinations of data that identify individuals"
+      ],
+      "confusion": [
+        "anonymous data",
+        "special category data"
+      ]
+    }
+  },
+  "Art.13": {
+    "business_description": "When collecting personal data directly from individuals, the controller must provide a defined set of information at the point of collection — not later. The mandatory categories from Art.13.1 are: identity and contact details of the controller; contact details of the Data Protection Officer (DPO) if designated; purposes and legal basis for processing; legitimate interests pursued (if Art.6.1.f applies); and any recipients or categories of recipients. Art.13.2 adds: retention periods; rights of the data subject including withdrawal of consent; the right to complain to a supervisory authority; and whether provision of data is a statutory or contractual requirement. This is the legal basis for the privacy notice or layered privacy information shown at data collection points.",
+    "query_keywords": {
+      "exact": [
+        "at the time when personal data are obtained",
+        "identity and the contact details of the controller",
+        "purposes of the processing and the legal basis",
+        "retention period"
+      ],
+      "practitioner": [
+        "privacy notice",
+        "privacy information",
+        "fair processing notice",
+        "what to tell individuals when collecting data",
+        "data collection disclosure",
+        "transparency at point of collection",
+        "layered privacy notice",
+        "Art.13 information"
+      ],
+      "scenario": [
+        "sign-up form collecting personal data",
+        "employee data collected at onboarding",
+        "customer data collected at purchase",
+        "what to include in a privacy notice",
+        "cookie banner and data collection"
+      ],
+      "confusion": [
+        "Art.14",
+        "Art.12"
+      ]
+    }
+  },
+  "Art.83.4": {
+    "business_description": "The lower administrative fine tier under the General Data Protection Regulation (GDPR) applies to infringements of obligations imposed on controllers and processors under specific articles: Art.8 (children's consent), Art.11 (processing not requiring identification), Art.25–39 (the core controller and processor obligations including Data Protection Impact Assessments (DPIAs), records of processing, security measures, breach notification, and Data Protection Officer (DPO) requirements), Art.42–43 (certification bodies and monitoring bodies). The maximum fine is €10 million or 2% of global annual turnover — whichever is higher. This tier covers procedural and organisational failures; the higher Art.83.5 tier applies to violations of fundamental principles and data subject rights.",
+    "query_keywords": {
+      "exact": [
+        "10 000 000 EUR",
+        "2% of the total worldwide annual turnover",
+        "Articles 8, 11, 25 to 39, 42 and 43",
+        "obligations of the controller and the processor"
+      ],
+      "practitioner": [
+        "lower fine tier",
+        "2% fine GDPR",
+        "10 million fine GDPR",
+        "procedural GDPR violations",
+        "Art.83.4 fine",
+        "which fines for which violations",
+        "GDPR fine tiers"
+      ],
+      "scenario": [
+        "failure to designate a DPO when required",
+        "no records of processing activities",
+        "DPIA not conducted for high-risk processing",
+        "breach not notified within 72 hours",
+        "processor agreement missing mandatory clauses"
+      ],
+      "confusion": [
+        "Art.83.5"
+      ]
+    }
+  }
+}

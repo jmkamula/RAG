@@ -1,0 +1,24 @@
+# Secrets
+.env
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+venv/
+.venv/
+
+# Data - don't commit large files or DB data
+chromadb_data/
+*.db
+*.sqlite
+
+# Results - keep CSVs but not large outputs  
+results/eval_before_*.csv
+results/eval_after_*.csv
+
+# OS
+.DS_Store

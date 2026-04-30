@@ -1,0 +1,22 @@
+id,status,query,expected_type,actual_type,expected_refs,actual_refs,failures,warnings,latency_ms,notes
+1,PASS,what are our access rights gaps?,gap_analysis,gap_analysis,A.5.18,A.5.18 A.5.19 A.8.19 A.5.9 9.2,,,7604,A.5.18 is NC (F001/F005). Physical controls must not appear.
+2,PASS,what are our main compliance gaps?,gap_analysis,gap_analysis,A.5.18 A.5.26,A.5.18 A.5.26 A.5.19 A.8.19 A.5.9 9.2,,,8475,Both NCs must appear. No physical/dev controls.
+3,PASS,show me our OFI findings,gap_analysis,gap_analysis,A.5.19 A.8.19 9.2,A.5.19 A.8.19 A.5.9 9.2,,,6633,"4 real OFIs: F003(A.5.9), F004(A.5.19), F006(A.8.19), F007(9.2)"
+4,PASS,what NC findings do we have?,gap_analysis,gap_analysis,A.5.18 A.5.26,A.5.18 A.5.26,,,8464,Exactly 2 NCs: access register (F001) and IR drill (F002)
+5,FAIL,what should we do to close the access rights NC?,implementation,ambiguous,A.5.18,,MISSING required ref: A.5.18 | MISSING required phrase: 'access' | MISSING required phrase: 'register',"type mismatch: expected implementation, got ambiguous",1606,Implementation query — should give specific actions for A.5.18 NC
+6,PASS,supplier assessment gaps,gap_analysis,gap_analysis,A.5.19,A.5.19 A.5.18 A.8.19 A.5.9 9.2,,,6954,A.5.19 OFI (F004) — business partners not assessed
+7,PASS,ChatGPT policy gaps,gap_analysis,gap_analysis,A.8.19,A.5.18 A.8.19 A.5.19 A.5.9 9.2,,,5794,A.8.19 OFI (F006) — no software allow/deny list
+8,PASS,incident response gaps,gap_analysis,gap_analysis,A.5.26,A.5.26 A.8.19 A.5.19 A.5.18 9.2,,,6568,A.5.26 NC (F002) — IR drill not conducted
+9,PASS,what is our ISO 27001 posture?,gap_analysis,gap_analysis,A.5.18 A.5.26,A.5.18 A.5.26 A.5.19 A.8.19 A.5.9 5.1 5.2,,,7273,Full posture overview — should mention cert status and all finding types
+10,PASS,are we certified?,posture_check,posture_check,,A.5.18 A.5.19 A.8.19 A.5.9 9.2,,,7943,"Arion is certified (URS, April 2025). Answer should confirm."
+11,FAIL,are we GDPR compliant?,cross_framework,cross_framework,A.5.18 A.5.26,6.11.1 6.11.2 6.11.3,MISSING required ref: A.5.18 | MISSING required ref: A.5.26,,6997,"Should explain ISO 27701 bridge, not flat 'not compliant' assertion"
+12,FAIL,GDPR Art.32 compliance status,cross_framework,cross_framework,,A.5.18 A.5.19 A.8.19 6.11.1 9.2,MISSING required phrase: 'Art.32',,11436,Art.32 = security of processing — should map to A.5.26 and A.5.18
+13,FAIL,what is a NC?,definition,definition,,A.5.18 A.5.26 A.5.19 A.8.19 A.5.9,FORBIDDEN phrase present: 'A.5.18',,9678,"Definition query — generic explanation, not Arion-specific"
+14,PASS,what does OFI mean?,definition,definition,,A.5.19 A.8.19 A.5.9 9.2,,,12347,Definition query
+15,PASS,what is ISO 27001?,definition,definition,,A.5.18 A.5.19 A.8.19 A.5.9 5.1 5.2,,,10193,Standard definition
+16,WARN,what documents do we need to address the access rights NC?,gap_analysis,document_inventory,A.5.18,A.5.18,,"type mismatch: expected gap_analysis, got document_inventory",11170,Should return Access Rights Management Procedure checklist
+17,FAIL,what must our access control policy contain?,document_content,ambiguous,A.5.15 A.5.18,,MISSING required ref: A.5.15 | MISSING required ref: A.5.18 | MISSING required phrase: 'access',"type mismatch: expected document_content, got ambiguous",1908,Document content query — should list required elements
+18,FAIL,what are our physical security gaps?,,ambiguous,,,MISSING required phrase: 'N/A' | MISSING required phrase: 'not applicable',,1800,All physical controls are N/A for Arion. Should say so clearly.
+19,FAIL,what are our software development security gaps?,,ambiguous,,,MISSING required phrase: 'N/A' | MISSING required phrase: 'not applicable',,1301,All dev controls are N/A for Arion (no software dev).
+20,WARN,how do we implement a formal access rights review?,implementation,posture_check,A.5.18,A.5.18 A.5.19 A.8.19 9.2,,"type mismatch: expected implementation, got posture_check",14659,Implementation guidance for A.5.18 OFI from F005
+21,FAIL,how should we prepare for our next ISO 27001 surveillance audit?,implementation,ambiguous,9.2,,MISSING required ref: 9.2 | MISSING required phrase: 'audit',"type mismatch: expected implementation, got ambiguous",1768,9.2 OFI (F007) — audit reports missing control list

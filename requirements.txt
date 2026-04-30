@@ -1,0 +1,24 @@
+# ArionComply Ingestion Pipeline — Python Dependencies
+#
+# Install with:
+#   pip install -r requirements.txt
+#
+# Python 3.10+ required (uses match statements and dataclass features)
+
+# ── Vector store ──────────────────────────────────────────────────────────────
+chromadb>=0.6.0                  # vector store (dev)
+# qdrant-client>=1.7.0           # vector store (prod) — uncomment when ready
+
+# ── Embedding APIs ────────────────────────────────────────────────────────────
+openai>=1.0.0                    # OpenAI embeddings (text-embedding-3-*)
+anthropic>=0.25.0                # Claude API (LLM answers) + voyage-3 embeddings
+
+# ── Graph database ────────────────────────────────────────────────────────────
+neo4j>=5.0.0                     # Neo4j Python driver
+
+# ── Document parsing ──────────────────────────────────────────────────────────
+openpyxl>=3.1.0                  # Excel spreadsheet parsing (.xlsx)
+pymupdf>=1.24.0                  # PDF text extraction (ISO/GDPR PDFs)
+
+# ── Core utilities ────────────────────────────────────────────────────────────
+python-dotenv>=1.0.0             # Load .env file for API keys
