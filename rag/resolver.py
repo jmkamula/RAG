@@ -21,7 +21,7 @@ import traceback as _tb
 from dataclasses import dataclass, field
 from typing import Optional, Callable
 
-from rag.taxonomy import QUERY_TAXONOMY, get_taxonomy_type, TaxonomyEntry
+from rag.taxonomy import get_taxonomy_type, TaxonomyEntry
 
 logger = logging.getLogger(__name__)
 
@@ -39,6 +39,7 @@ class GraphResult:
     primary_nodes:   list = field(default_factory=list)
     secondary_nodes: list = field(default_factory=list)
     doc_contexts:    dict = field(default_factory=dict)
+    node_ids_input:  int  = 0   # count of node_ids passed to _expand() — for trace
 
     @property
     def all_nodes(self) -> list:
@@ -137,6 +138,13 @@ class ResolverTrace:
     short_circuit:   bool = False
     answer_source:   str  = "llm"
 
+    # Retrieval policy snapshot (from TaxonomyEntry at dispatch time)
+    policy_posture:      bool = True
+    policy_vector:       bool = True
+    policy_graph:        bool = True
+    policy_doc_inv:      bool = False
+    policy_short_circuit:bool = False
+
     neo4j_ms:    int = 0
     vector_ms:   int = 0
     postgres_ms: int = 0
@@ -164,6 +172,7 @@ class ResolverTrace:
             f"    classifier   : {self.classifier_type}",
             f"    taxonomy     : {self.taxonomy_type}",
             f"    handler      : {self.handler_name}",
+            f"    policy       : posture={self.policy_posture} vector={self.policy_vector} graph={self.policy_graph} doc_inv={self.policy_doc_inv} short_circuit={self.policy_short_circuit}",
             f"    posture      : total={self.posture_total} NC={self.posture_nc} OFI={self.posture_ofi} NA={self.posture_na}",
             f"    node_ids_in  : {self.node_ids_built}",
             f"    nodes_out    : primary={self.nodes_primary} secondary={self.nodes_secondary}",
@@ -324,7 +333,9 @@ class Resolver:
     def __init__(self, retriever, expander, posture: dict):
         self._retriever = retriever
         self._expander  = expander
-        self._posture   = posture
+        # One-level-deep copy: protects both the outer dict and inner value dicts
+        # Full deepcopy is unnecessary — inner values contain only strings/ints
+        self._posture   = {k: dict(v) for k, v in posture.items()} if posture else {}
 
         self._handlers: dict[str, Callable] = {
             "POSTURE_STATUS":     self._resolve_posture_status,
@@ -338,6 +349,58 @@ class Resolver:
             "EVENT_RESPONSE":     self._resolve_event_response,
         }
 
+    # --- shared retrieval helper ---
+
+    def _retrieve_and_expand(
+        self,
+        req:            ResolveRequest,
+        entry:          "TaxonomyEntry" = None,
+        n_vector:       int = 10,
+        n_expand:       int = 8,
+        extra_node_ids: list = None,
+    ) -> tuple:
+        """
+        Shared retrieval pattern used by most handlers.
+        When entry is provided, uses its retrieval policy (vector_n, expand_n).
+        Falls back to n_vector / n_expand for callers that pre-date the policy.
+
+        Returns: (GraphResult, vector_results, neo4j_ms, vector_ms, node_ids_count)
+        """
+        # Policy-driven sizes override explicit args when entry is provided
+        if entry is not None:
+            n_vector = entry.vector_n if entry.vector_n > 0 else n_vector
+            n_expand = entry.expand_n if entry.expand_n > 0 else n_expand
+
+        extra = extra_node_ids or []
+
+        # Vector retrieval — skipped if policy says use_vector=False
+        if entry is None or entry.use_vector:
+            vector_t0 = time.time()
+            v_results = self._retriever.search(req.query, n=n_vector, standards=req.standards)
+            vector_ms = int((time.time() - vector_t0) * 1000)
+            vector_ids = [
+                r.node_id for r in v_results.results[:n_expand]
+                if r.node_id not in extra
+            ]
+        else:
+            v_results  = type("V", (), {"results": []})()
+            vector_ms  = 0
+            vector_ids = []
+
+        node_ids = extra + vector_ids
+
+        # Graph expansion — skipped if policy says use_graph=False
+        if entry is None or entry.use_graph:
+            neo4j_t0 = time.time()
+            gr       = self._expand(node_ids, req)
+            neo4j_ms = int((time.time() - neo4j_t0) * 1000)
+        else:
+            gr       = GraphResult.empty()
+            neo4j_ms = 0
+
+        gr.node_ids_input = len(node_ids)
+        return gr, v_results.results, neo4j_ms, vector_ms, len(node_ids)
+
     # --- dispatch ---
 
     def resolve(self, request: ResolveRequest) -> ResolvedContext:
@@ -345,24 +408,38 @@ class Resolver:
         entry   = get_taxonomy_type(request.classifier_type)
         handler = self._handlers.get(entry.type_id, self._resolve_default)
 
-        posture = self._posture or {}
+        posture = self._posture if entry.use_posture else {}
         trace   = ResolverTrace(
-            query           = request.query,
-            classifier_type = request.classifier_type,
-            taxonomy_type   = entry.type_id,
-            handler_name    = handler.__name__,
-            posture_total   = len(posture),
-            posture_nc      = sum(1 for v in posture.values() if v.get("finding") == "NC"),
-            posture_ofi     = sum(1 for v in posture.values() if v.get("finding") == "OFI"),
-            posture_na      = sum(1 for v in posture.values() if v.get("finding") == "N/A"),
+            query                = request.query,
+            classifier_type      = request.classifier_type,
+            taxonomy_type        = entry.type_id,
+            handler_name         = handler.__name__,
+            posture_total        = len(posture),
+            posture_nc           = sum(1 for v in posture.values() if v.get("finding") == "NC"),
+            posture_ofi          = sum(1 for v in posture.values() if v.get("finding") == "OFI"),
+            posture_na           = sum(1 for v in posture.values() if v.get("finding") == "N/A"),
+            # Snapshot the retrieval policy declared in taxonomy
+            policy_posture       = entry.use_posture,
+            policy_vector        = entry.use_vector,
+            policy_graph         = entry.use_graph,
+            policy_doc_inv       = entry.use_doc_inventory,
+            policy_short_circuit = entry.allow_short_circuit,
         )
 
         try:
+            # ── Short-circuit: policy says no LLM needed ──────────────────
+            if entry.allow_short_circuit and entry.type_id == "DOCUMENT_STATUS":
+                # DOCUMENT_STATUS is the only current short-circuit type.
+                # When more types are added, the pattern extends here.
+                pass  # handler itself returns short_circuit_answer
+
             result = handler(request, entry)
             gn = result.graph_nodes
             trace.nodes_primary   = len(gn.primary_nodes)
             trace.nodes_secondary = len(gn.secondary_nodes)
-            trace.node_ids_built  = trace.nodes_primary + trace.nodes_secondary
+            # node_ids_built = true input count, stored on GraphResult by _retrieve_and_expand
+            # Handlers that bypass the helper set gr.node_ids_input directly
+            trace.node_ids_built  = gn.node_ids_input if gn.node_ids_input > 0                                     else trace.nodes_primary + trace.nodes_secondary
             trace.doc_contexts    = len(gn.doc_contexts)
             trace.vector_results  = len(result.vector_nodes or [])
             trace.short_circuit   = result.has_short_circuit
@@ -389,9 +466,9 @@ class Resolver:
                 f"  call:  {trace.error_call}\n"
                 f"  hint:  {trace.error_hint}"
             )
-            # Re-raise so arion_graph.py error handling fires
-            # trace is attached to result — available even on exception
-            raise
+            # Return empty context with trace — caller (arion_graph.py) handles errors
+            # Re-raising here discards the trace; returning preserves observability
+            return result
 
         trace.total_ms = round((time.time() - t0) * 1000)
         result.trace   = trace
@@ -419,24 +496,15 @@ class Resolver:
     def _resolve_posture_status(self, req, entry):
         posture          = _filter_posture(self._posture, req.topic_ref)
         posture_node_ids = _posture_nc_ofi_ids(self._posture, req.topic_ref)
-
-        vector_t0 = time.time()
-        v_results = self._retriever.search(req.query, n=10, standards=req.standards)
-        vector_ms = int((time.time() - vector_t0) * 1000)
-
-        vector_ids = [r.node_id for r in v_results.results[:5] if r.node_id not in posture_node_ids]
-        node_ids   = posture_node_ids + vector_ids
-
-        neo4j_t0 = time.time()
-        gr = self._expand(node_ids, req)
-        neo4j_ms = int((time.time() - neo4j_t0) * 1000)
-
+        gr, v_nodes, neo4j_ms, vector_ms, _nids = self._retrieve_and_expand(
+            req, entry=entry, extra_node_ids=posture_node_ids
+        )
         return ResolvedContext(
             taxonomy_type   = "POSTURE_STATUS",
             taxonomy_entry  = entry,
             posture_nodes   = posture,
             graph_nodes     = gr,
-            vector_nodes    = v_results.results,
+            vector_nodes    = v_nodes,
             document_alerts = req.tenant_context.document_alerts or [],
             neo4j_ms        = neo4j_ms,
             vector_ms       = vector_ms,
@@ -447,32 +515,22 @@ class Resolver:
     def _resolve_remediation_guide(self, req, entry):
         posture          = _filter_posture(self._posture, req.topic_ref)
         posture_node_ids = _posture_nc_ofi_ids(self._posture, req.topic_ref)
-
-        vector_t0 = time.time()
-        v_results = self._retriever.search(req.query, n=12, standards=req.standards)
-        vector_ms = int((time.time() - vector_t0) * 1000)
-
-        vector_ids = [r.node_id for r in v_results.results[:8] if r.node_id not in posture_node_ids]
-        node_ids   = posture_node_ids + vector_ids
-
-        neo4j_t0 = time.time()
-        gr = self._expand(node_ids, req)
-
-        if req.topic_ref and self._expander._is_online():
-            doc_inv = self._expander.get_document_inventory(
+        gr, v_nodes, neo4j_ms, vector_ms, _ = self._retrieve_and_expand(
+            req, entry=entry, extra_node_ids=posture_node_ids
+        )
+        # Doc inventory: appended after expand — topic-specific checklist
+        if req.topic_ref and self._is_expander_online():
+            _merge_doc_inv(gr, self._expander.get_document_inventory(
                 tenant_id = req.tenant_context.tenant_id,
                 standards = req.standards,
                 topic_ref = req.topic_ref,
-            )
-            _merge_doc_inv(gr, doc_inv)
-
-        neo4j_ms = int((time.time() - neo4j_t0) * 1000)
+            ))
         return ResolvedContext(
             taxonomy_type   = "REMEDIATION_GUIDE",
             taxonomy_entry  = entry,
             posture_nodes   = posture,
             graph_nodes     = gr,
-            vector_nodes    = v_results.results,
+            vector_nodes    = v_nodes,
             document_alerts = req.tenant_context.document_alerts or [],
             neo4j_ms        = neo4j_ms,
             vector_ms       = vector_ms,
@@ -485,7 +543,7 @@ class Resolver:
         neo4j_t0 = time.time()
         gr = GraphResult.empty()
 
-        if self._expander._is_online():
+        if self._is_expander_online():
             doc_inv = self._expander.get_document_inventory(
                 tenant_id = req.tenant_context.tenant_id,
                 standards = req.standards,
@@ -508,6 +566,7 @@ class Resolver:
             neo4j_ms += int((time.time() - neo4j_t0b) * 1000)
             gr.primary_nodes   = gr2.primary_nodes
             gr.secondary_nodes = gr2.secondary_nodes
+            gr.node_ids_input  = len(node_ids)   # for trace accuracy
             for k, v in gr2.doc_contexts.items():
                 if k not in gr.doc_contexts:
                     gr.doc_contexts[k] = v
@@ -524,21 +583,15 @@ class Resolver:
         )
 
     def _resolve_standard_knowledge(self, req, entry):
-        vector_t0 = time.time()
-        v_results = self._retriever.search(req.query, n=8, standards=req.standards)
-        vector_ms = int((time.time() - vector_t0) * 1000)
-
-        neo4j_t0 = time.time()
-        node_ids = [r.node_id for r in v_results.results[:6]]
-        gr       = self._expand(node_ids, req)
-        neo4j_ms = int((time.time() - neo4j_t0) * 1000)
-
+        gr, v_nodes, neo4j_ms, vector_ms, _nids = self._retrieve_and_expand(
+            req, entry=entry
+        )
         return ResolvedContext(
             taxonomy_type   = "STANDARD_KNOWLEDGE",
             taxonomy_entry  = entry,
             posture_nodes   = {},
             graph_nodes     = gr,
-            vector_nodes    = v_results.results,
+            vector_nodes    = v_nodes,
             document_alerts = [],
             neo4j_ms        = neo4j_ms,
             vector_ms       = vector_ms,
@@ -548,24 +601,15 @@ class Resolver:
 
     def _resolve_cross_framework(self, req, entry):
         posture_node_ids = _posture_nc_ofi_ids(self._posture)
-
-        vector_t0 = time.time()
-        v_results = self._retriever.search(req.query, n=12, standards=req.standards)
-        vector_ms = int((time.time() - vector_t0) * 1000)
-
-        vector_ids = [r.node_id for r in v_results.results[:8] if r.node_id not in posture_node_ids]
-        node_ids   = posture_node_ids + vector_ids
-
-        neo4j_t0 = time.time()
-        gr = self._expand(node_ids, req)
-        neo4j_ms = int((time.time() - neo4j_t0) * 1000)
-
+        gr, v_nodes, neo4j_ms, vector_ms, _nids = self._retrieve_and_expand(
+            req, entry=entry, extra_node_ids=posture_node_ids
+        )
         return ResolvedContext(
             taxonomy_type   = "CROSS_FRAMEWORK",
             taxonomy_entry  = entry,
             posture_nodes   = self._posture,
             graph_nodes     = gr,
-            vector_nodes    = v_results.results,
+            vector_nodes    = v_nodes,
             document_alerts = req.tenant_context.document_alerts or [],
             neo4j_ms        = neo4j_ms,
             vector_ms       = vector_ms,
@@ -574,31 +618,21 @@ class Resolver:
     def _resolve_evidence_check(self, req, entry):
         posture          = _filter_posture(self._posture, req.topic_ref)
         posture_node_ids = _posture_nc_ofi_ids(self._posture, req.topic_ref)
-
-        vector_t0 = time.time()
-        v_results = self._retriever.search(req.query, n=10, standards=req.standards)
-        vector_ms = int((time.time() - vector_t0) * 1000)
-
-        vector_ids = [r.node_id for r in v_results.results[:6] if r.node_id not in posture_node_ids]
-        node_ids   = posture_node_ids + vector_ids
-
-        neo4j_t0 = time.time()
-        gr = self._expand(node_ids, req)
-        if req.topic_ref and self._expander._is_online():
-            doc_inv = self._expander.get_document_inventory(
+        gr, v_nodes, neo4j_ms, vector_ms, _ = self._retrieve_and_expand(
+            req, entry=entry, extra_node_ids=posture_node_ids
+        )
+        if req.topic_ref and self._is_expander_online():
+            _merge_doc_inv(gr, self._expander.get_document_inventory(
                 tenant_id = req.tenant_context.tenant_id,
                 standards = req.standards,
                 topic_ref = req.topic_ref,
-            )
-            _merge_doc_inv(gr, doc_inv)
-        neo4j_ms = int((time.time() - neo4j_t0) * 1000)
-
+            ))
         return ResolvedContext(
             taxonomy_type   = "EVIDENCE_CHECK",
             taxonomy_entry  = entry,
             posture_nodes   = posture,
             graph_nodes     = gr,
-            vector_nodes    = v_results.results,
+            vector_nodes    = v_nodes,
             document_alerts = req.tenant_context.document_alerts or [],
             neo4j_ms        = neo4j_ms,
             vector_ms       = vector_ms,
@@ -615,21 +649,15 @@ class Resolver:
         )
 
     def _resolve_event_response(self, req, entry):
-        vector_t0 = time.time()
-        v_results = self._retriever.search(req.query, n=10, standards=req.standards)
-        vector_ms = int((time.time() - vector_t0) * 1000)
-
-        neo4j_t0 = time.time()
-        node_ids = [r.node_id for r in v_results.results[:8]]
-        gr       = self._expand(node_ids, req)
-        neo4j_ms = int((time.time() - neo4j_t0) * 1000)
-
+        gr, v_nodes, neo4j_ms, vector_ms, _nids = self._retrieve_and_expand(
+            req, entry=entry
+        )
         return ResolvedContext(
             taxonomy_type   = "EVENT_RESPONSE",
             taxonomy_entry  = entry,
             posture_nodes   = {},
             graph_nodes     = gr,
-            vector_nodes    = v_results.results,
+            vector_nodes    = v_nodes,
             document_alerts = [],
             neo4j_ms        = neo4j_ms,
             vector_ms       = vector_ms,
@@ -641,8 +669,19 @@ class Resolver:
 
     # --- _expand: always returns GraphResult, never raises ---
 
+    def _is_expander_online(self) -> bool:
+        """Check expander availability. Prefers public is_online(); falls back to _is_online()."""
+        for method_name in ("is_online", "_is_online"):
+            fn = getattr(self._expander, method_name, None)
+            if fn:
+                try:
+                    return bool(fn())
+                except Exception:
+                    return False
+        return False
+
     def _expand(self, node_ids: list, req: ResolveRequest) -> GraphResult:
-        if not node_ids or not self._expander._is_online():
+        if not node_ids or not self._is_expander_online():
             return GraphResult.empty()
         try:
             from rag.classifier import QueryIntent, QuestionType, QueryDimensions

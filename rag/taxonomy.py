@@ -42,12 +42,26 @@ class TaxonomyEntry:
     answer_shape:  str        # describes the expected output structure
     tier:          int        # 1=DB-first, 2=LLM-synthesis, 3=cross-cutting, 4=event
 
-    # ── Data sources ──────────────────────────────────────────────────────
+    # ── Data sources (legacy — used by _expand() QueryIntent) ───────────
     primary_source:   str     # "postgres" | "graph" | "postgres+graph"
     needs_posture:    bool    # requires posture_controls data
     needs_graph:      bool    # requires Neo4j graph traversal
     needs_chroma:     bool    # requires ChromaDB vector retrieval
     can_short_circuit:bool    # True = answer directly from DB without LLM
+
+    # ── Retrieval Policy (Phase 2a) ───────────────────────────────────────
+    # These fields are ENFORCED by the resolver dispatcher.
+    # Each handler only calls the sources declared here.
+    # Adding a new taxonomy type = set these fields + write one handler.
+    use_posture:         bool = True   # query posture_controls (Postgres)
+    use_vector:          bool = True   # query ChromaDB for semantic context
+    use_graph:           bool = True   # query Neo4j for structured graph data
+    use_doc_inventory:   bool = False  # call get_document_inventory (Neo4j)
+    allow_short_circuit: bool = False  # return direct DB answer without LLM
+    # vector_n:  how many vector results to fetch (default varies by handler)
+    # expand_n:  how many nodes to pass to _expand() (default varies by handler)
+    vector_n:            int  = 10
+    expand_n:            int  = 8
 
     # ── JFYI rules (evaluated after primary answer) ───────────────────────
     jfyi_rules:    tuple[str, ...] = field(default_factory=tuple)
@@ -90,6 +104,14 @@ QUERY_TAXONOMY: dict[str, TaxonomyEntry] = {
         needs_graph       = False,
         needs_chroma      = False,
         can_short_circuit = False,   # needs LLM to synthesise multiple findings
+        # ── Retrieval policy ──
+        use_posture        = True,
+        use_vector         = True,
+        use_graph          = True,
+        use_doc_inventory  = False,
+        allow_short_circuit= False,
+        vector_n           = 10,
+        expand_n           = 5,
         jfyi_rules        = (
             "related_controls",
             "audit_timeline",
@@ -119,6 +141,14 @@ QUERY_TAXONOMY: dict[str, TaxonomyEntry] = {
         needs_graph       = False,
         needs_chroma      = False,
         can_short_circuit = True,    # pure DB lookup, no LLM needed
+        # ── Retrieval policy ──
+        use_posture        = False,
+        use_vector         = False,
+        use_graph          = False,
+        use_doc_inventory  = False,
+        allow_short_circuit= True,
+        vector_n           = 0,
+        expand_n           = 0,
         jfyi_rules        = (
             "linked_findings",
             "upload_instructions",
@@ -155,6 +185,14 @@ QUERY_TAXONOMY: dict[str, TaxonomyEntry] = {
         needs_graph       = True,
         needs_chroma      = True,
         can_short_circuit = False,
+        # ── Retrieval policy ──
+        use_posture        = True,
+        use_vector         = True,
+        use_graph          = True,
+        use_doc_inventory  = True,   # fetches checklist for topic_ref
+        allow_short_circuit= False,
+        vector_n           = 12,
+        expand_n           = 8,
         jfyi_rules        = (
             "related_findings",
             "document_alerts",
@@ -184,6 +222,14 @@ QUERY_TAXONOMY: dict[str, TaxonomyEntry] = {
         needs_graph       = True,
         needs_chroma      = True,
         can_short_circuit = False,
+        # ── Retrieval policy ──
+        use_posture        = False,
+        use_vector         = True,
+        use_graph          = True,
+        use_doc_inventory  = True,   # checklist is primary content source
+        allow_short_circuit= False,
+        vector_n           = 10,
+        expand_n           = 6,
         jfyi_rules        = (
             "upload_status",
             "linked_controls",
@@ -214,6 +260,14 @@ QUERY_TAXONOMY: dict[str, TaxonomyEntry] = {
         needs_graph       = True,
         needs_chroma      = True,
         can_short_circuit = False,
+        # ── Retrieval policy ──
+        use_posture        = False,
+        use_vector         = True,
+        use_graph          = True,
+        use_doc_inventory  = False,
+        allow_short_circuit= False,
+        vector_n           = 8,
+        expand_n           = 6,
         jfyi_rules        = (
             "our_posture_on_this",
             "related_controls",
@@ -244,6 +298,14 @@ QUERY_TAXONOMY: dict[str, TaxonomyEntry] = {
         needs_graph       = True,
         needs_chroma      = True,
         can_short_circuit = False,
+        # ── Retrieval policy ──
+        use_posture        = True,
+        use_vector         = True,
+        use_graph          = True,
+        use_doc_inventory  = False,
+        allow_short_circuit= False,
+        vector_n           = 12,
+        expand_n           = 8,
         jfyi_rules        = (
             "iso27701_load_status",
             "missing_privacy_docs",
@@ -272,6 +334,14 @@ QUERY_TAXONOMY: dict[str, TaxonomyEntry] = {
         needs_graph       = True,
         needs_chroma      = True,
         can_short_circuit = False,
+        # ── Retrieval policy ──
+        use_posture        = True,
+        use_vector         = True,
+        use_graph          = True,
+        use_doc_inventory  = True,
+        allow_short_circuit= False,
+        vector_n           = 10,
+        expand_n           = 6,
         jfyi_rules        = (
             "document_alerts",
             "audit_timeline",
@@ -302,6 +372,14 @@ QUERY_TAXONOMY: dict[str, TaxonomyEntry] = {
         needs_graph       = False,
         needs_chroma      = False,
         can_short_circuit = False,
+        # ── Retrieval policy ──
+        use_posture        = True,
+        use_vector         = False,
+        use_graph          = False,
+        use_doc_inventory  = False,
+        allow_short_circuit= False,
+        vector_n           = 0,
+        expand_n           = 0,
         jfyi_rules        = (
             "cert_surveillance_date",
             "document_alerts",
@@ -334,6 +412,14 @@ QUERY_TAXONOMY: dict[str, TaxonomyEntry] = {
         needs_graph       = True,
         needs_chroma      = True,
         can_short_circuit = False,
+        # ── Retrieval policy ──
+        use_posture        = False,
+        use_vector         = True,
+        use_graph          = True,
+        use_doc_inventory  = False,
+        allow_short_circuit= False,
+        vector_n           = 10,
+        expand_n           = 8,
         jfyi_rules        = (
             "notification_deadlines",
             "dpa_contact",
