@@ -89,10 +89,12 @@ class ResolvedContext:
     """
     taxonomy_type:   str
     taxonomy_entry:  TaxonomyEntry
-    posture_nodes:   dict
+    posture_nodes:   dict          # {node_id: {finding, gap, control_ref, confirmation_status, ...}}
     graph_nodes:     GraphResult
     vector_nodes:    list
     document_alerts: list
+    posture_confirmed:  int = 0   # count of confirmed/overridden findings
+    posture_draft:      int = 0   # count of draft findings
 
     short_circuit_answer: Optional[str] = None
     answer_source:        str = "llm"
@@ -138,6 +140,10 @@ class ResolverTrace:
     short_circuit:   bool = False
     answer_source:   str  = "llm"
 
+    # Posture confirmation counts
+    posture_confirmed:   int  = 0
+    posture_draft:       int  = 0
+
     # Retrieval policy snapshot (from TaxonomyEntry at dispatch time)
     policy_posture:      bool = True
     policy_vector:       bool = True
@@ -174,6 +180,7 @@ class ResolverTrace:
             f"    handler      : {self.handler_name}",
             f"    policy       : posture={self.policy_posture} vector={self.policy_vector} graph={self.policy_graph} doc_inv={self.policy_doc_inv} short_circuit={self.policy_short_circuit}",
             f"    posture      : total={self.posture_total} NC={self.posture_nc} OFI={self.posture_ofi} NA={self.posture_na}",
+            f"    confirmation : confirmed={self.posture_confirmed} draft={self.posture_draft}",
             f"    node_ids_in  : {self.node_ids_built}",
             f"    nodes_out    : primary={self.nodes_primary} secondary={self.nodes_secondary}",
             f"    doc_contexts : {self.doc_contexts}",
@@ -437,6 +444,21 @@ class Resolver:
             gn = result.graph_nodes
             trace.nodes_primary   = len(gn.primary_nodes)
             trace.nodes_secondary = len(gn.secondary_nodes)
+
+            # Count confirmed vs draft posture findings — used by assembler for LLM prompt
+            posture = result.posture_nodes or {}
+            result.posture_confirmed = sum(
+                1 for v in posture.values()
+                if v.get("confirmation_status") in ("confirmed", "overridden")
+            )
+            result.posture_draft = sum(
+                1 for v in posture.values()
+                if v.get("confirmation_status") == "draft"
+                or v.get("confirmation_status") is None  # legacy rows
+            )
+            trace.posture_confirmed = result.posture_confirmed
+            trace.posture_draft     = result.posture_draft
+
             # node_ids_built = true input count, stored on GraphResult by _retrieve_and_expand
             # Handlers that bypass the helper set gr.node_ids_input directly
             trace.node_ids_built  = gn.node_ids_input if gn.node_ids_input > 0                                     else trace.nodes_primary + trace.nodes_secondary

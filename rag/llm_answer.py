@@ -63,6 +63,10 @@ Examples of correct citation:
   Say: "Your encryption policy has an OFI finding (ISO 27001 A.8.24) — it does not \
 explicitly scope personal data at rest and in transit."
   Not: "A.8.24 requires an encryption policy. Your policy may need review."
+- CONFIRMATION RULE: Findings marked [DRAFT] are system-proposed and pending
+  human confirmation. Present them as indicative: "Our records suggest..." or
+  "A preliminary assessment indicates...". Findings with no [DRAFT] tag have
+  been confirmed by a qualified reviewer and should be stated as facts.
 - GLOSSARY RULE: Use formal audit terms (NC, OFI, Comply) throughout. They are \
 internationally recognised and must match the client's audit records.
   However, when a term appears for the first time in a conversation, or when the \
@@ -681,18 +685,24 @@ class LLMAnswer:
 
         for i, node in enumerate(node_list, 1):
             num_to_node[i] = node
-            rec = (posture or {}).get(node.node_id, {})
-            finding = rec.get("finding", "")
-            gap     = rec.get("gap_description", "")
-            evidence= rec.get("evidence_text", "")
+            rec    = (posture or {}).get(node.node_id, {})
+            finding        = rec.get("finding", "")
+            gap            = rec.get("gap_description", "")
+            evidence       = rec.get("evidence_text", "")
+            confirm_status = rec.get("confirmation_status")  # None = legacy row
 
-            posture_tag  = f" [{finding}]" if finding else " [Not yet assessed]"
+            # Confirmation label: DRAFT findings are indicative, not authoritative
+            is_confirmed = confirm_status in ("confirmed", "overridden")
+            is_draft     = confirm_status == "draft" or confirm_status is None
+            confirm_label = "" if is_confirmed else " [DRAFT]"
+
+            posture_tag  = f" [{finding}{confirm_label}]" if finding else " [Not yet assessed]"
             if finding == "NC":
-                posture_line = f"Posture: ✗ NC — {gap}\n" if gap else "Posture: ✗ NC\n"
+                posture_line = f"Posture: ✗ NC{confirm_label} — {gap}\n" if gap else f"Posture: ✗ NC{confirm_label}\n"
             elif finding == "OFI":
-                posture_line = f"Posture: △ OFI — {gap}\n" if gap else "Posture: △ OFI\n"
+                posture_line = f"Posture: △ OFI{confirm_label} — {gap}\n" if gap else f"Posture: △ OFI{confirm_label}\n"
             elif finding == "Comply":
-                posture_line = f"Posture: ✓ Comply — {evidence}\n" if evidence else "Posture: ✓ Comply\n"
+                posture_line = f"Posture: ✓ Comply{confirm_label} — {evidence}\n" if evidence else f"Posture: ✓ Comply{confirm_label}\n"
             elif finding == "N/A":
                 posture_line = "Posture: — N/A (excluded from scope — DO NOT REPORT AS GAP)\n"
             else:
