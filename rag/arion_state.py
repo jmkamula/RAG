@@ -35,6 +35,8 @@ class ArionState(TypedDict):
     # ── Turn tracking ──────────────────────────────────────────────────────
     turn_count:   int                    # increments each completed turn
     clarif_count: int                    # resets after successful answer
+    taxonomy_options_map: dict           # letter → taxonomy_id for clarif responses
+    original_query: str                  # original query before clarif response
 
     # ── Per-turn inputs ────────────────────────────────────────────────────
     query:        str                    # current user query
@@ -62,6 +64,7 @@ class ArionState(TypedDict):
 
     # ── Error handling ─────────────────────────────────────────────────────
     error:        str
+    resolver_trace: object          # ResolverTrace from last resolve() call
 
 
 def make_initial_state(tenant: TenantProfile, query: str = "") -> ArionState:
@@ -72,6 +75,8 @@ def make_initial_state(tenant: TenantProfile, query: str = "") -> ArionState:
         role            = tenant.role[0] if tenant.role else "controller",
         turn_count      = 0,
         clarif_count    = 0,
+        taxonomy_options_map = None,
+        original_query  = "",
         query           = query,
         intent_type     = "",
         focus_refs      = [],
@@ -89,4 +94,5 @@ def make_initial_state(tenant: TenantProfile, query: str = "") -> ArionState:
         posture_findings= {},
         answer_source   = "",
         error           = "",
+        resolver_trace  = None,
     )

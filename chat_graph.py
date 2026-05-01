@@ -201,6 +201,7 @@ def main():
         print("Hello! I'm your ArionComply advisor for ISO 27001 and GDPR. "
               "What would you like to explore?\n")
 
+        turn_number = 0
         while True:
             try:
                 user_input = input(f"{C.BOLD}You:{C.RESET} ").strip()
@@ -217,9 +218,10 @@ def main():
                 break
 
             if user_input.lower() == "/reset":
-                session_id = f"arion_{int(time.time())}"
-                cfg        = {"configurable": {"thread_id": session_id}}
-                init_state = make_initial_state(tenant)
+                session_id  = f"arion_{int(time.time())}"
+                cfg         = {"configurable": {"thread_id": session_id}}
+                init_state  = make_initial_state(tenant)
+                turn_number = 0
                 print(f"{C.DIM}Session reset.{C.RESET}\n")
                 continue
 
@@ -250,10 +252,16 @@ def main():
             print(f"{C.DIM}Thinking...{C.RESET}")
 
             try:
-                result = graph.invoke(
-                    {**init_state, "query": user_input},
-                    cfg,
+                # First turn: pass full init_state to seed the graph
+                # Subsequent turns: pass only the query — LangGraph restores
+                # the rest from the Postgres checkpoint (preserving turn_count,
+                # needs_clarif, taxonomy_options_map, etc.)
+                invoke_input = (
+                    {**init_state, "query": user_input}
+                    if turn_number == 0
+                    else {"query": user_input}
                 )
+                result = graph.invoke(invoke_input, cfg)
             except Exception as e:
                 print(f"{C.RED}Error: {e}{C.RESET}\n")
                 import traceback
@@ -261,6 +269,7 @@ def main():
                 continue
 
             total_ms = round((time.time() - t0) * 1000)
+            turn_number += 1
 
             # Handle clarification
             if result.get("needs_clarif") and result.get("clarif_question"):

@@ -647,6 +647,12 @@ CLEAR_INTENT_PHRASES = [
      "gap_analysis", []),
     (re.compile(r'\bwhat\s+(?:NC|OFI)\s+(?:do\s+we\s+have|findings?\s+do\s+we)\b', re.IGNORECASE),
      "gap_analysis", []),
+    (re.compile(r'\bwhat\s+are\s+our\s+(?:NC|OFI)\s+findings?\b', re.IGNORECASE),
+     "gap_analysis", []),
+    (re.compile(r'\bour\s+(?:NC|OFI)\s+findings?\b', re.IGNORECASE),
+     "gap_analysis", []),
+    (re.compile(r'\blist\s+(?:our\s+)?(?:NC|OFI|non.conformit|non-conformit)\b', re.IGNORECASE),
+     "gap_analysis", []),
 
     # Glossary / definition queries — bypass clarification, answer directly
     (re.compile(r'\bwhat\s+(?:is|are)\s+(?:an?\s+)?(?:NC|OFI|ISMS|DPIA|DPA|RoPA|DSR|DSAR)\b', re.IGNORECASE),

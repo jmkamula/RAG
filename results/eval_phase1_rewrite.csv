@@ -1,0 +1,22 @@
+id,status,query,expected_type,actual_type,expected_refs,actual_refs,failures,warnings,latency_ms,notes
+1,PASS,what are our access rights gaps?,gap_analysis,gap_analysis,A.5.18,Art.15 A.5.18 A.8.19 A.8.3 9.2,,,10104,A.5.18 NC. Physical/dev controls must not appear.
+2,PASS,what are our main compliance gaps?,gap_analysis,gap_analysis,A.5.18 A.5.26,A.5.26 A.5.18 A.8.19 A.5.19 9.2,,,9604,Both NCs must appear.
+3,PASS,show me our OFI findings,gap_analysis,gap_analysis,A.5.19 A.8.19 9.2,A.8.19 A.5.9 A.5.19 9.2,,,7492,4 real OFIs.
+4,PASS,what NC findings do we have?,gap_analysis,gap_analysis,A.5.18 A.5.26,A.5.26 A.5.18 9.2,,,9191,Exactly 2 NCs.
+5,PASS,what should we do to close the access rights NC?,implementation,implementation,A.5.18,A.5.18 A.8.19 A.5.19 9.2,,,10701,Implementation query for A.5.18 NC.
+6,PASS,supplier assessment gaps,gap_analysis,gap_analysis,A.5.19,A.5.19 A.5.21 A.5.20 A.5.22 9.2,,,12782,A.5.19 OFI.
+7,PASS,ChatGPT policy gaps,gap_analysis,gap_analysis,A.8.19,A.5.26 A.8.19 A.5.9 A.5.19 9.2,,,7246,A.8.19 OFI.
+8,PASS,incident response gaps,gap_analysis,gap_analysis,A.5.26,A.5.26 A.5.27 A.5.24 A.5.25 9.2,,,9103,A.5.26 NC.
+9,PASS,what is our ISO 27001 posture?,gap_analysis,gap_analysis,,A.5.26 A.5.18 A.8.19 A.5.19 9.2 5.2,,,7769,Full posture overview.
+10,PASS,are we certified?,posture_check,posture_check,,A.5.26 A.5.18 A.8.19 A.5.19 9.2,,,9542,"Arion is certified (URS, April 2025). Checks certif is mentioned."
+11,PASS,are we GDPR compliant?,cross_framework,cross_framework,,Art.28 Art.13 Art.5,,,9256,Should explain ISO 27701 bridge.
+12,PASS,GDPR Art.32 compliance status,cross_framework,cross_framework,,Art.32 Art.32.1 Art.32.1.b Art.32.2 Art.32.3,,,10658,Art.32 = security of processing.
+13,PASS,what is a NC?,definition,definition,,10.2,,,9750,Definition.
+14,PASS,what does OFI mean?,definition,definition,,,,,6842,Definition.
+15,PASS,what is ISO 27001?,definition,definition,,5.2 6.1 4.4,,,11149,Standard definition.
+16,PASS,what documents do we need to address the access rights NC?,document_inventory,document_inventory,A.5.18,,,,13,Document checklist for A.5.18.
+17,PASS,what must our access control policy contain?,document_content,document_content,A.5.18,A.5.18 A.5.15 A.8.2 A.8.3 A.8.19,,,11763,Document content query.
+18,FAIL,what are our physical security gaps?,,gap_analysis,,,MISSING required phrase: 'not applicable',,3926,Physical controls N/A. Short-circuit returns N/A message.
+19,FAIL,what are our software development security gaps?,,gap_analysis,,A.8.25 A.8.26 A.8.28 A.8.19 A.5.26 A.5.18,MISSING required phrase: 'not applicable',,13113,Dev controls N/A. Short-circuit returns N/A message.
+20,PASS,how do we implement a formal access rights review?,implementation,implementation,A.5.18,A.5.18 A.8.3 A.5.16 A.8.2 A.5.15,,,13316,Implementation guidance for A.5.18.
+21,PASS,how should we prepare for our next ISO 27001 surveillance audit?,implementation,implementation,9.2,A.5.18 A.5.26 A.5.19 9.2 9.1,,,13638,9.2 OFI.

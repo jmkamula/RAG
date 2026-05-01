@@ -152,46 +152,13 @@ def make_classify_node(
         # Override: "just answer" / "skip" → force best-effort
         if query.lower().strip() in OVERRIDE_PHRASES:
             return {
-                "intent_type":   "gap_analysis",   # best-effort default
+                "intent_type":   "unknown",
                 "focus_refs":    state.get("focus_refs", []),
                 "needs_posture": True,
                 "confidence":    0.5,
                 "needs_clarif":  False,
                 "clarif_question": "",
-                "clarif_count":  0,
             }
-
-        # Clarification response: user replied to a taxonomy question (a/b/c)
-        # Route through process_clarification instead of re-classifying as new query
-        import re as _re
-        _is_clarif_response = (
-            state.get("turn_count", 0) > 0            # not first turn
-            and state.get("needs_clarif") is True     # clarif question was shown
-            and state.get("clarif_count", 0) > 0      # we did ask a clarif question
-            and bool(state.get("clarif_question"))    # there is a pending question
-            and _re.match(r"^[a-c][.)\s]*$", query.strip().lower())
-        )
-        if _is_clarif_response:
-            # Map letter directly to intent type from taxonomy_options_map
-            # stored in state (set when we returned the clarif question)
-            tmap = state.get("taxonomy_options_map") or {}
-            letter = query.strip().lower()[0]
-            taxonomy_id = tmap.get(letter)
-            from rag.taxonomy import CLASSIFIER_TO_TAXONOMY
-            TAXONOMY_TO_CLASSIFIER = {v: k for k, v in CLASSIFIER_TO_TAXONOMY.items()}
-            if taxonomy_id:
-                intent_type = TAXONOMY_TO_CLASSIFIER.get(taxonomy_id, "gap_analysis")
-                return {
-                    "intent_type":    intent_type,
-                    "focus_refs":     state.get("focus_refs", []),
-                    "needs_posture":  intent_type in ("gap_analysis", "posture_check"),
-                    "confidence":     0.95,
-                    "needs_clarif":   False,
-                    "clarif_question": "",
-                    "clarif_count":   0,
-                    # Keep original query for retrieval
-                    "query":          state.get("original_query", state["query"]),
-                }
 
         # Build a minimal SessionContext from graph state
         from rag.classifier import SessionContext, QuestionType
@@ -222,16 +189,13 @@ def make_classify_node(
                         "clarif_count":   count,
                     }
                 return {
-                    "intent_type":       "ambiguous",
-                    "focus_refs":        [],
-                    "needs_posture":     False,
-                    "confidence":        0.0,
-                    "needs_clarif":      True,
-                    "clarif_question":   intake.clarification or "",
-                    "clarif_count":      count,
-                    "turn_count":        state["turn_count"] + 1,  # advance so next turn is follow-up
-                    "taxonomy_options_map": getattr(intake, "taxonomy_options_map", {}) or {},
-                    "original_query":    query,
+                    "intent_type":    "ambiguous",
+                    "focus_refs":     [],
+                    "needs_posture":  False,
+                    "confidence":     0.0,
+                    "needs_clarif":   True,
+                    "clarif_question": intake.clarification or "",
+                    "clarif_count":   count,
                 }
             if intake.state == IntakeState.NO_MATCH:
                 return {
@@ -295,12 +259,22 @@ def make_classify_node(
 
 
 def _is_scope_na_query(query: str) -> bool:
-    """True for physical security or software dev queries — N/A for Arion."""
-    import re as _re
-    return (
-        bool(_re.search(r'\bphysical\s+security\s+(?:gaps?|findings?|controls?|posture)\b', query, _re.IGNORECASE)) or
-        bool(_re.search(r'\bsoftware\s+(?:development|dev)\s+security\s+(?:gaps?|findings?|controls?)\b', query, _re.IGNORECASE))
-    )
+    """
+    Returns True if the query is asking about controls that are N/A
+    for Arion Networks scope (physical security, software development).
+    These have a deterministic answer — no LLM needed.
+    """
+    SCOPE_NA_PATTERNS = [
+        r'physical\s+security\s+(?:gaps?|findings?|controls?|posture|status)',
+        r'physical\s+(?:access|entry|perimeter|premises)\s+(?:gaps?|controls?|security)',
+        r'software\s+(?:development|dev(?:elopment)?)\s+security\s+(?:gaps?|findings?|controls?)',
+        r'secure\s+(?:coding|development|software\s+dev)\s+(?:gaps?|controls?|posture)',
+    ]
+    for pat in SCOPE_NA_PATTERNS:
+        if re.search(pat, query, re.IGNORECASE):
+            return True
+    return False
+
 
 def _answer_scope_na(query: str, posture: dict) -> str:
     """
@@ -357,6 +331,32 @@ def _answer_scope_na(query: str, posture: dict) -> str:
     return (
         "The controls related to this area are marked not applicable "
         "for Arion Networks and are excluded from your ISMS scope."
+    )
+
+
+
+def _is_scope_na_query(query: str) -> bool:
+    PATTERNS = [
+        r'\bphysical\s+security\s+(?:gaps?|findings?|controls?|posture|status)\b',
+        r'\bsoftware\s+(?:development|dev)\s+security\s+(?:gaps?|findings?|controls?)\b',
+    ]
+    return any(re.search(p, query, re.IGNORECASE) for p in PATTERNS)
+
+
+def _answer_scope_na(query: str, posture: dict) -> str:
+    q = query.lower()
+    if re.search(r'physical\s+security|physical\s+access', q):
+        return (
+            "Physical security controls (A.7.x) are marked not applicable "
+            "for Arion Networks. Your ISMS scope excludes physical premises "
+            "controls - Arion operates as a cloud-based organisation. "
+            "No physical security gaps apply to your organisation."
+        )
+    return (
+        "Software development security controls (A.8.25-A.8.31) are marked "
+        "not applicable for Arion Networks. Your ISMS scope excludes software "
+        "development - Arion Networks does not develop software products. "
+        "No software development security gaps exist in your scope."
     )
 
 
@@ -427,73 +427,150 @@ def make_retrieve_node(
             document_topic_ref = doc_topic,
         )
 
-        # ── Scope N/A short-circuit ───────────────────────────────────────
-        # Physical security (A.7.x) and dev controls (A.8.25-31) are N/A.
-        # Don't surface unrelated findings for these scope-excluded queries.
-        if _is_scope_na_query(state["query"]):
-            na_answer = _answer_scope_na(state["query"], posture)
-            return {
-                **state,
-                "answer_text":   na_answer,
-                "answer":        na_answer,
-                "cited_refs":    [],
-                "question_type": "gap_analysis",
-                "confidence":    1.0,
-                "answer_source": "postgres",
-            }
-
-        # ── Resolver: dispatch to per-taxonomy data sources ──────────────
-        # Replaces ~190 lines of inline retrieval assembly.
-        # Each taxonomy type gets the right sources (DB / graph / vector / both).
-        from rag.resolver import Resolver, ResolveRequest
-        from rag.taxonomy  import get_taxonomy_type
-
-        _resolver = Resolver(
-            retriever = retriever,
-            expander  = expander,
-            posture   = posture,
+        # ── Vector search ──────────────────────────────────────────────────
+        search = retriever.search(
+            query     = state["query"],
+            n         = 15,
+            standards = intent.standards_scope,
         )
-        _req = ResolveRequest(
-            query            = state["query"],
-            classifier_type  = state["intent_type"],
-            tenant_context   = tenant,   # TenantProfile has tenant_id + document_alerts
-            topic_ref        = intent.document_topic_ref,
-            standards        = intent.standards_scope,
-            history          = [],
-        )
-        _resolved = _resolver.resolve(_req)
 
-        # Short-circuit: Resolver found a direct Postgres answer
-        if _resolved.has_short_circuit:
-            return {
-                **state,
-                "answer_text":   _resolved.short_circuit_answer,
-                "answer":        _resolved.short_circuit_answer,
-                "cited_refs":    [],
-                "question_type": state["intent_type"],
-                "confidence":    1.0,
-                "answer_source": "postgres",
-            }
+        # ── Build node_ids ─────────────────────────────────────────────────
+        def _node_valid(standard_id: str, ref: str) -> bool:
+            """Validate that a standard_id:ref pair is well-formed.
+            Only allows standards in the tenant's applicable_standards scope.
+            """
+            # Must be in tenant's scope
+            if standard_id not in tenant.applicable_standards:
+                return False
+            if standard_id == "GDPR:2016/679":
+                return ref.startswith("Art.")
+            if "27001" in standard_id:
+                return (ref.startswith("A.") or
+                        bool(_re.match(r"^\d+[.]\d", ref)))
+            if "27701" in standard_id:
+                return (ref.startswith("6.") or ref.startswith("7.") or
+                        bool(_re.match(r"^\d+[.]\d", ref)))
+            return bool(ref)  # allow any non-empty ref for unknown standards
 
-        # Store resolver trace in state for ANALYTICS display
-        # (before we check for short-circuit so it's always available)
-        _trace = getattr(_resolved, "trace", None)
+        # 1. Cited refs — from classifier phrase match or explicit ref
+        anchor_refs = intent.cited_refs if intent.cited_refs else intent.resolved_refs
+        cited_node_ids = [
+            f"{s}:{r}"
+            for s in intent.standards_scope
+            for r in anchor_refs
+            if _node_valid(s, r)
+        ]
 
-        # Build expanded from resolved context
-        # graph_nodes is always GraphResult after Phase 1 rewrite
-        _gr              = _resolved.graph_nodes
-        expanded_nodes   = _gr.all_nodes if hasattr(_gr, "all_nodes") else list(_gr)
-        doc_contexts     = _resolved.doc_contexts   # property on ResolvedContext
+        # 2. Posture nodes — include NC/OFI/Comply but NOT N/A
+        # N/A controls are excluded from Arion's scope — never surface as gaps
+        posture_node_ids = [
+            node_id for node_id, rec in posture.items()
+            if node_id not in cited_node_ids
+            and rec.get("finding") != "N/A"
+        ]
+
+        # 3. Obligation-implied nodes — deterministic from client facts
+        #    These are legally mandatory for this client — cannot be missed
+        implied_node_ids = []
+        if hasattr(tenant, "facts") and tenant.facts is not None:
+            try:
+                implied_node_ids = expander.get_implied_controls(
+                    facts     = tenant.facts,
+                    standards = intent.standards_scope,
+                )
+                # Exclude already-included nodes
+                already = set(cited_node_ids + posture_node_ids)
+                implied_node_ids = [n for n in implied_node_ids if n not in already]
+            except Exception:
+                pass  # fail silently — vector search covers most cases
+
+        # 4. Open incident obligations — controls triggered by active incidents
         incident_contexts = []
-        neo4j_ms         = _resolved.neo4j_ms
+        incident_node_ids = []
+        try:
+            incident_contexts = expander.get_incident_obligations(
+                tenant_id = tenant.tenant_id,
+                standards = intent.standards_scope,
+            )
+            already = set(cited_node_ids + posture_node_ids + implied_node_ids)
+            for inc in incident_contexts:
+                for nid in inc.triggered_node_ids:
+                    if nid not in already:
+                        incident_node_ids.append(nid)
+                        already.add(nid)
+        except Exception:
+            pass
+
+        # 5. Vector results — semantic similarity, top 3 when we have strong anchors
+        has_anchors = bool(cited_node_ids or posture_node_ids)
+        vector_ids  = search.node_ids()[:3] if has_anchors else search.node_ids()[:10]
+
+        node_ids = list(dict.fromkeys(
+            cited_node_ids +
+            posture_node_ids +
+            implied_node_ids +
+            incident_node_ids +
+            vector_ids
+        ))[:25]
+
+        # ── Graph expansion ────────────────────────────────────────────────
+        t0 = time.time()
+        expanded = expander.expand(node_ids, intent)
+        neo4j_ms = round((time.time() - t0) * 1000)
+
+        # ── Document contexts (when needs_documentation) ───────────────
+        doc_contexts = {}
+        if intent.dimensions.needs_documentation:
+            try:
+                # For document_inventory/content — use topic ref or all nodes
+                if intent.question_type.value in (
+                    "document_inventory", "document_content"
+                ):
+                    if intent.document_topic_ref:
+                        # Pin the topic control as a mandatory cited ref
+                        topic_node_id = None
+                        for std in intent.standards_scope:
+                            candidate = f"{std}:{intent.document_topic_ref}"
+                            check = expander._get_driver().session().run(
+                                "MATCH (n:RequirementNode {id: $id}) RETURN n.id",
+                                id=candidate
+                            ).single()
+                            if check:
+                                topic_node_id = candidate
+                                break
+                        if topic_node_id and topic_node_id not in cited_node_ids:
+                            cited_node_ids.insert(0, topic_node_id)
+
+                        ctx = expander.get_document_checklist(
+                            control_ref = intent.document_topic_ref,
+                            tenant_id   = tenant.tenant_id,
+                        )
+                        if ctx:
+                            doc_contexts[f"{intent.standards_scope[0]}:{intent.document_topic_ref}"] = ctx
+                    else:
+                        inv = expander.get_document_inventory(
+                            tenant_id = tenant.tenant_id,
+                            standards = intent.standards_scope,
+                        )
+                        for ctx in inv:
+                            doc_contexts[ctx.node_id] = ctx
+                else:
+                    # Mixed query — fetch for selected node_ids
+                    doc_contexts = expander.get_document_requirements(
+                        node_ids  = node_ids[:10],
+                        tenant_id = tenant.tenant_id,
+                        standards = intent.standards_scope,
+                    )
+            except Exception:
+                pass
 
         # ── Rank + Answer in one Mistral call ──────────────────────────────
         # Pass all non-informational nodes as a numbered list.
         # Mistral selects the most relevant nodes and answers from them.
         # No position bias — every node gets equal attention.
         all_nodes = [
-            n for n in expanded_nodes
-            if not getattr(n, 'is_informational', False)
+            n for n in (expanded.primary_nodes + expanded.secondary_nodes)
+            if not n.is_informational
         ]
 
         standards_str = " + ".join(
@@ -523,7 +600,34 @@ def make_retrieve_node(
                     "answer_source": "postgres",
                 }
 
+        # ── Scope N/A short-circuit ───────────────────────────────────────
+        # Physical security (A.7.x) and dev controls (A.8.25-31) are N/A.
+        # Don't surface unrelated findings for these scope-excluded queries.
+        if _is_scope_na_query(state["query"]):
+            na_answer = _answer_scope_na(state["query"], posture)
+            return {
+                **state,
+                "answer_text":   na_answer,
+                "answer":        na_answer,
+                "cited_refs":    [],
+                "question_type": "gap_analysis",
+                "confidence":    1.0,
+                "answer_source": "postgres",
+            }
 
+        
+        # Scope N/A short-circuit
+        if _is_scope_na_query(state["query"]):
+            na_answer = _answer_scope_na(state["query"], posture)
+            return {
+                **state,
+                "answer_text":   na_answer,
+                "answer":        na_answer,
+                "cited_refs":    [],
+                "question_type": "gap_analysis",
+                "confidence":    1.0,
+                "answer_source": "postgres",
+            }
 
         result = llm.rank_and_answer(
             query            = state["query"],
@@ -544,7 +648,6 @@ def make_retrieve_node(
             "posture_findings": result.posture_findings,
             "node_count":     len(all_nodes),
             "neo4j_ms":       neo4j_ms,
-            "resolver_trace": _trace,
         }
 
     return retrieve
@@ -671,42 +774,36 @@ def get_checkpointer(db_path: str = None):
     """
     Get the appropriate checkpointer for the current environment.
 
-    Uses SESSIONS_DATABASE_URL (arioncomply_sessions) — separate from
-    COMPLIANCE_DATABASE_URL (arioncomply_compliance) by design:
-      - compliance: 7-year retention, audit-critical
-      - sessions:   90-day retention, reconstructible, purge-safe
-
     Priority:
-      1. SESSIONS_DATABASE_URL → PostgresSaver (arioncomply_sessions)
-      2. DATABASE_URL fallback  → PostgresSaver (dev convenience)
-      3. Neither set            → SqliteSaver at ~/.arioncomply/sessions.db
+      1. DATABASE_URL + langgraph-checkpoint-postgres installed
+             → PostgresSaver  (production — persistent, multi-tenant)
+      2. DATABASE_URL set but package missing
+             → SqliteSaver with warning (install: pip install langgraph-checkpoint-postgres)
+      3. No DATABASE_URL / dev mode
+             → SqliteSaver at ~/.arioncomply/sessions.db
 
-    Setup: psql arioncomply_sessions < db/schema_sessions.sql
+    To enable PostgresSaver:
+        pip install langgraph-checkpoint-postgres
+        # DATABASE_URL is already set in .env
     """
     import logging
     _log = logging.getLogger(__name__)
 
-    # Sessions DB has its own URL — keeps compliance and session data separate
-    sessions_url = (
-        os.getenv("SESSIONS_DATABASE_URL") or
-        os.getenv("DATABASE_URL", "").replace(
-            "arioncomply_compliance", "arioncomply_sessions"
-        )
-    )
-
-    if sessions_url and "arioncomply" in sessions_url:
+    db_url = os.getenv("DATABASE_URL")
+    if db_url:
         try:
             from langgraph.checkpoint.postgres import PostgresSaver
-            saver = PostgresSaver.from_conn_string(sessions_url)
-            _log.info(f"Checkpointer: PostgresSaver ({sessions_url.split('@')[-1]})")
+            saver = PostgresSaver.from_conn_string(db_url)
+            _log.info("Checkpointer: PostgresSaver (persistent)")
             return saver
         except ImportError:
             _log.warning(
-                "langgraph-checkpoint-postgres not installed — falling back to SQLite. "
+                "DATABASE_URL is set but langgraph-checkpoint-postgres is not installed. "
+                "Sessions will not persist across restarts. "
                 "Install: pip install langgraph-checkpoint-postgres"
             )
 
-    # SQLite fallback
+    # SQLite fallback — persistent within a single process, single machine
     if db_path is None:
         home   = os.path.expanduser("~")
         db_dir = os.path.join(home, ".arioncomply")

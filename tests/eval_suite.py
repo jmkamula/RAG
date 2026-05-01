@@ -42,14 +42,15 @@ class EvalCase:
 
 @dataclass
 class EvalResult:
-    case:       EvalCase
-    answer:     str
-    refs:       list
-    qtype:      str
-    latency_ms: int
-    passed:     list
-    warnings:   list
-    failures:   list
+    case:           EvalCase
+    answer:         str
+    refs:           list
+    qtype:          str
+    latency_ms:     int
+    passed:         list
+    warnings:       list
+    failures:       list
+    resolver_trace: object = None   # ResolverTrace from pipeline state
 
     @property
     def status(self):
@@ -332,10 +333,12 @@ def run_case(case: EvalCase, pipeline: EvalPipeline) -> EvalResult:
             passed=[], warnings=[], failures=[f"Pipeline exception: {e}"],
         )
 
-    latency_ms = int((time.time() - t0) * 1000)
-    answer = result.get("answer_text", "") or ""
-    refs   = result.get("cited_refs",   []) or []
-    qtype  = result.get("intent_type",  "") or ""
+    latency_ms     = int((time.time() - t0) * 1000)
+    answer         = result.get("answer_text",    "") or ""
+    refs           = result.get("cited_refs",     []) or []
+    qtype          = result.get("intent_type",    "") or ""
+    resolver_trace = result.get("resolver_trace", None)
+    trace  = result.get("resolver_trace")
 
     passed, warnings, failures = [], [], []
 
@@ -387,6 +390,7 @@ def run_case(case: EvalCase, pipeline: EvalPipeline) -> EvalResult:
         case=case, answer=answer, refs=refs, qtype=qtype,
         latency_ms=latency_ms,
         passed=passed, warnings=warnings, failures=failures,
+        resolver_trace=resolver_trace,
     )
 
 
@@ -394,7 +398,7 @@ def run_case(case: EvalCase, pipeline: EvalPipeline) -> EvalResult:
 # Output helpers
 # ---------------------------------------------------------------------------
 
-def print_results(results: list, verbose: bool = False) -> None:
+def print_results(results: list, verbose: bool = False, trace: bool = False) -> None:
     n  = len(results)
     np = sum(1 for r in results if r.status == "PASS")
     nw = sum(1 for r in results if r.status == "WARN")
@@ -412,6 +416,9 @@ def print_results(results: list, verbose: bool = False) -> None:
         )
         for f in r.failures:  print(f"         \u2717 {f}")
         for w in r.warnings:  print(f"         \u26a0 {w}")
+        if trace and r.status in ("FAIL", "WARN") and r.resolver_trace:
+            if r.resolver_trace and hasattr(r.resolver_trace, "full_trace"):
+                print(r.resolver_trace.full_trace())
         if verbose:
             print(f"\n         Query:  {r.case.query}")
             print(f"         Type:   {r.qtype}")
@@ -449,6 +456,8 @@ def main() -> None:
     p.add_argument("--tag")
     p.add_argument("--test",    type=int)
     p.add_argument("--verbose", action="store_true")
+    p.add_argument("--trace",   action="store_true",
+                   help="Print full ResolverTrace for FAIL/WARN tests")
     p.add_argument("--csv")
     p.add_argument("--dry",     action="store_true")
     p.add_argument("--pause",   type=float, default=1.0)
@@ -487,10 +496,17 @@ def main() -> None:
         print(f"         {icon} {r.status:4s}  {r.latency_ms}ms  type={r.qtype}")
         for f in r.failures[:2]:
             print(f"         \u2717 {f}")
+        # --trace: print resolver trace for FAIL/WARN
+        if getattr(args, 'trace', False) and r.status in ('FAIL', 'WARN'):
+            _t = getattr(r, 'resolver_trace', None)
+            if _t and hasattr(_t, 'full_trace'):
+                print(_t.full_trace())
+            elif _t:
+                print(f'         [trace] {_t}')
         if args.pause > 0 and i < len(cases):
             time.sleep(args.pause)
 
-    print_results(results, verbose=args.verbose)
+    print_results(results, verbose=args.verbose, trace=getattr(args,"trace",False))
 
     if args.csv:
         write_csv(results, args.csv)
