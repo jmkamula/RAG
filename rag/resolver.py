@@ -18,6 +18,7 @@ from __future__ import annotations
 import logging
 import time
 import traceback as _tb
+import uuid
 from dataclasses import dataclass, field
 from typing import Optional, Callable
 
@@ -36,10 +37,13 @@ class GraphResult:
     Single unified type for all Neo4j output.
     Eliminates type inconsistencies between ExpandedContext, lists, and None.
     """
-    primary_nodes:   list = field(default_factory=list)
-    secondary_nodes: list = field(default_factory=list)
-    doc_contexts:    dict = field(default_factory=dict)
-    node_ids_input:  int  = 0   # count of node_ids passed to _expand() — for trace
+    primary_nodes:      list = field(default_factory=list)
+    secondary_nodes:    list = field(default_factory=list)
+    doc_contexts:       dict = field(default_factory=dict)
+    node_ids_input:     int  = 0    # count of node_ids passed to _expand() — for trace
+    # Phase 3 granularity fields
+    posture_ids_used:   list = field(default_factory=list)  # NC/OFI ids passed to expand
+    vector_top_scores:  list = field(default_factory=list)  # [(node_id, score), ...]
 
     @property
     def all_nodes(self) -> list:
@@ -77,7 +81,10 @@ class ResolveRequest:
     tenant_context:  object
     topic_ref:       Optional[str]
     standards:       list
-    history:         list = field(default_factory=list)
+    history:         list  = field(default_factory=list)
+    # Observability — set by caller, propagated through the full trace
+    request_id:      str   = field(default_factory=lambda: str(uuid.uuid4()))
+    tenant_id:       str   = ""   # denormalised from tenant_context for fast access
 
 
 @dataclass
@@ -89,12 +96,12 @@ class ResolvedContext:
     """
     taxonomy_type:   str
     taxonomy_entry:  TaxonomyEntry
-    posture_nodes:   dict          # {node_id: {finding, gap, control_ref, confirmation_status, ...}}
+    posture_nodes:   dict             # {node_id: {finding, gap, control_ref, confirmation_status, ...}}
     graph_nodes:     GraphResult
     vector_nodes:    list
     document_alerts: list
-    posture_confirmed:  int = 0   # count of confirmed/overridden findings
-    posture_draft:      int = 0   # count of draft findings
+    posture_confirmed:  int = 0       # count of confirmed/overridden findings
+    posture_draft:      int = 0       # count of draft findings
 
     short_circuit_answer: Optional[str] = None
     answer_source:        str = "llm"
@@ -121,6 +128,10 @@ class ResolvedContext:
 
 @dataclass
 class ResolverTrace:
+    # ── Identity — links this trace to a specific request and tenant ──────
+    request_id:      str = ""   # UUID — set from ResolveRequest.request_id
+    tenant_id:       str = ""   # set from ResolveRequest.tenant_id
+
     query:           str = ""
     classifier_type: str = ""
     taxonomy_type:   str = ""
@@ -144,6 +155,11 @@ class ResolverTrace:
     posture_confirmed:   int  = 0
     posture_draft:       int  = 0
 
+    # Retrieval granularity (Phase 3) — noted from review report
+    strategy:            str  = ""    # e.g. "posture_first+vector_supplement"
+    posture_ids_used:    list = field(default_factory=list)   # NC/OFI node_ids passed to expand
+    vector_top_scores:   list = field(default_factory=list)   # top-3 [(node_id, score), ...]
+
     # Retrieval policy snapshot (from TaxonomyEntry at dispatch time)
     policy_posture:      bool = True
     policy_vector:       bool = True
@@ -161,30 +177,47 @@ class ResolverTrace:
     error_hint: Optional[str] = None
 
     def summary_line(self) -> str:
+        rid = self.request_id[:8] if self.request_id else "--------"
         if self.error:
-            return f"RESOLVER ERROR  handler={self.handler_name}  error={self.error}"
+            return f"[{rid}] RESOLVER ERROR  handler={self.handler_name}  error={self.error}"
         if self.short_circuit:
-            return f"{self.taxonomy_type}  short_circuit=True  source={self.answer_source}  {self.total_ms}ms"
+            return f"[{rid}] {self.taxonomy_type}  strategy={self.strategy}  short_circuit=True  {self.total_ms}ms"
         return (
-            f"{self.taxonomy_type}  NC={self.posture_nc}  OFI={self.posture_ofi}  "
+            f"[{rid}] {self.taxonomy_type}  strategy={self.strategy}  "
+            f"NC={self.posture_nc}  OFI={self.posture_ofi}  "
             f"primary={self.nodes_primary}  secondary={self.nodes_secondary}  "
-            f"docs={self.doc_contexts}  neo4j={self.neo4j_ms}ms"
+            f"docs={self.doc_contexts}  {self.total_ms}ms"
         )
 
     def full_trace(self) -> str:
+        # Format posture_ids_used — show refs not raw UUIDs
+        _pids = ", ".join(
+            p.split(":")[-1] if ":" in p else p
+            for p in (self.posture_ids_used or [])[:6]
+        ) or "none"
+        _vscore_str = ", ".join(
+            f"{nid.split(':')[-1]}={score}"
+            for nid, score in (self.vector_top_scores or [])[:3]
+        ) or "none"
+
         lines = [
             "  [resolver trace]",
+            f"    request_id   : {self.request_id}",
+            f"    tenant_id    : {self.tenant_id or '(not set)'}",
             f"    query        : {self.query[:80]}",
             f"    classifier   : {self.classifier_type}",
             f"    taxonomy     : {self.taxonomy_type}",
             f"    handler      : {self.handler_name}",
+            f"    strategy     : {self.strategy}",
             f"    policy       : posture={self.policy_posture} vector={self.policy_vector} graph={self.policy_graph} doc_inv={self.policy_doc_inv} short_circuit={self.policy_short_circuit}",
             f"    posture      : total={self.posture_total} NC={self.posture_nc} OFI={self.posture_ofi} NA={self.posture_na}",
             f"    confirmation : confirmed={self.posture_confirmed} draft={self.posture_draft}",
+            f"    posture_ids  : {_pids}",
             f"    node_ids_in  : {self.node_ids_built}",
             f"    nodes_out    : primary={self.nodes_primary} secondary={self.nodes_secondary}",
             f"    doc_contexts : {self.doc_contexts}",
             f"    vector_hits  : {self.vector_results}",
+            f"    vector_scores: {_vscore_str}",
             f"    short_circuit: {self.short_circuit} ({self.answer_source})",
             f"    timing       : neo4j={self.neo4j_ms}ms vector={self.vector_ms}ms postgres={self.postgres_ms}ms total={self.total_ms}ms",
         ]
@@ -405,7 +438,13 @@ class Resolver:
             gr       = GraphResult.empty()
             neo4j_ms = 0
 
-        gr.node_ids_input = len(node_ids)
+        gr.node_ids_input    = len(node_ids)
+        gr.posture_ids_used  = list(extra)   # the posture NC/OFI ids we passed in
+        gr.vector_top_scores = [
+            (r.node_id, round(float(r.score), 3))
+            for r in (v_results.results[:3] if hasattr(v_results, "results") else [])
+            if hasattr(r, "score")
+        ]
         return gr, v_results.results, neo4j_ms, vector_ms, len(node_ids)
 
     # --- dispatch ---
@@ -416,11 +455,28 @@ class Resolver:
         handler = self._handlers.get(entry.type_id, self._resolve_default)
 
         posture = self._posture if entry.use_posture else {}
+        # Resolve tenant_id — prefer explicit field, fall back to tenant_context
+        _tenant_id = request.tenant_id or getattr(
+            request.tenant_context, "tenant_id", ""
+        ) or ""
+
+        # Strategy label: describes the retrieval pattern this query will use
+        _strategy_parts = []
+        if entry.use_posture:   _strategy_parts.append("posture")
+        if entry.use_vector:    _strategy_parts.append("vector")
+        if entry.use_graph:     _strategy_parts.append("graph")
+        if entry.use_doc_inventory: _strategy_parts.append("doc_inventory")
+        if entry.allow_short_circuit: _strategy_parts.append("short_circuit")
+        _strategy = "+".join(_strategy_parts) or "none"
+
         trace   = ResolverTrace(
+            request_id           = request.request_id,
+            tenant_id            = str(_tenant_id),
             query                = request.query,
             classifier_type      = request.classifier_type,
             taxonomy_type        = entry.type_id,
             handler_name         = handler.__name__,
+            strategy             = _strategy,
             posture_total        = len(posture),
             posture_nc           = sum(1 for v in posture.values() if v.get("finding") == "NC"),
             posture_ofi          = sum(1 for v in posture.values() if v.get("finding") == "OFI"),
@@ -444,6 +500,10 @@ class Resolver:
             gn = result.graph_nodes
             trace.nodes_primary   = len(gn.primary_nodes)
             trace.nodes_secondary = len(gn.secondary_nodes)
+
+            # Granularity: which posture nodes were used + top vector scores
+            trace.posture_ids_used   = gn.posture_ids_used
+            trace.vector_top_scores  = gn.vector_top_scores
 
             # Count confirmed vs draft posture findings — used by assembler for LLM prompt
             posture = result.posture_nodes or {}

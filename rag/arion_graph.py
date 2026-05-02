@@ -294,13 +294,7 @@ def make_classify_node(
     return classify
 
 
-def _is_scope_na_query(query: str) -> bool:
-    """True for physical security or software dev queries — N/A for Arion."""
-    import re as _re
-    return (
-        bool(_re.search(r'\bphysical\s+security\s+(?:gaps?|findings?|controls?|posture)\b', query, _re.IGNORECASE)) or
-        bool(_re.search(r'\bsoftware\s+(?:development|dev)\s+security\s+(?:gaps?|findings?|controls?)\b', query, _re.IGNORECASE))
-    )
+from rag.scope_na import is_scope_na_query as _is_scope_na_query
 
 def _answer_scope_na(query: str, posture: dict) -> str:
     """
@@ -456,10 +450,14 @@ def make_retrieve_node(
         _req = ResolveRequest(
             query            = state["query"],
             classifier_type  = state["intent_type"],
-            tenant_context   = tenant,   # TenantProfile has tenant_id + document_alerts
+            tenant_context   = tenant,
             topic_ref        = intent.document_topic_ref,
             standards        = intent.standards_scope,
             history          = [],
+            # Observability: thread_id from LangGraph state = conversation request_id
+            # tenant_id denormalised for fast trace access without hitting tenant_context
+            request_id       = state.get("thread_id") or state.get("session_id") or "",
+            tenant_id        = str(getattr(tenant, "tenant_id", "") or ""),
         )
         _resolved = _resolver.resolve(_req)
 
@@ -536,6 +534,19 @@ def make_retrieve_node(
             incident_contexts= incident_contexts if incident_contexts else None,
         )
 
+
+        # ── Write structured trace to DB (best-effort, never blocks answer) ─
+        if _trace:
+            try:
+                _write_request_trace(
+                    posture_db = posture_db if "posture_db" in dir() else None,
+                    trace      = _trace,
+                    tenant     = tenant,
+                    topic_ref  = getattr(intent, "document_topic_ref", None),
+                )
+            except Exception as _te:
+                logger.debug(f"[trace] write skipped: {_te}")
+
         return {
             "answer_text":    result.answer_text,
             "verified":       result.verified,
@@ -548,6 +559,100 @@ def make_retrieve_node(
         }
 
     return retrieve
+
+
+def _write_request_trace(posture_db, trace, tenant, topic_ref) -> None:
+    """
+    Write one row to request_trace_log.
+    Best-effort — called in a try/except so failures never block answers.
+    posture_db: the Postgres connection/engine used for posture queries.
+    """
+    if not posture_db or not trace:
+        return
+
+    tenant_id = str(getattr(tenant, "tenant_id", "") or "")
+    if not tenant_id:
+        return
+
+    sql = """
+        INSERT INTO request_trace_log (
+            request_id, tenant_id,
+            query_text, classifier_type, taxonomy_type, handler_name,
+            strategy, topic_ref,
+            policy_posture, policy_vector, policy_graph,
+            policy_doc_inv, policy_short_circuit,
+            node_ids_built, nodes_primary, nodes_secondary,
+            vector_hits, doc_contexts,
+            posture_ids_used, vector_top_scores,
+            posture_total, posture_nc, posture_ofi,
+            posture_confirmed, posture_draft,
+            short_circuit, answer_source,
+            neo4j_ms, vector_ms, postgres_ms, total_ms,
+            error_type, error_hint,
+            traced_at
+        ) VALUES (
+            %(request_id)s, %(tenant_id)s::UUID,
+            %(query_text)s, %(classifier_type)s, %(taxonomy_type)s, %(handler_name)s,
+            %(strategy)s, %(topic_ref)s,
+            %(policy_posture)s, %(policy_vector)s, %(policy_graph)s,
+            %(policy_doc_inv)s, %(policy_short_circuit)s,
+            %(node_ids_built)s, %(nodes_primary)s, %(nodes_secondary)s,
+            %(vector_hits)s, %(doc_contexts)s,
+            %(posture_ids_used)s, %(vector_top_scores)s::JSONB,
+            %(posture_total)s, %(posture_nc)s, %(posture_ofi)s,
+            %(posture_confirmed)s, %(posture_draft)s,
+            %(short_circuit)s, %(answer_source)s,
+            %(neo4j_ms)s, %(vector_ms)s, %(postgres_ms)s, %(total_ms)s,
+            %(error_type)s, %(error_hint)s,
+            NOW()
+        )
+        ON CONFLICT DO NOTHING
+    """
+    import json
+    params = {
+        "request_id":         trace.request_id or "",
+        "tenant_id":          tenant_id,
+        "query_text":         trace.query[:500],
+        "classifier_type":    trace.classifier_type,
+        "taxonomy_type":      trace.taxonomy_type,
+        "handler_name":       trace.handler_name,
+        "strategy":           trace.strategy,
+        "topic_ref":          topic_ref,
+        "policy_posture":     trace.policy_posture,
+        "policy_vector":      trace.policy_vector,
+        "policy_graph":       trace.policy_graph,
+        "policy_doc_inv":     trace.policy_doc_inv,
+        "policy_short_circuit": trace.policy_short_circuit,
+        "node_ids_built":     trace.node_ids_built,
+        "nodes_primary":      trace.nodes_primary,
+        "nodes_secondary":    trace.nodes_secondary,
+        "vector_hits":        trace.vector_results,
+        "doc_contexts":       trace.doc_contexts,
+        "posture_ids_used":   trace.posture_ids_used or [],
+        "vector_top_scores":  json.dumps(trace.vector_top_scores or []),
+        "posture_total":      trace.posture_total,
+        "posture_nc":         trace.posture_nc,
+        "posture_ofi":        trace.posture_ofi,
+        "posture_confirmed":  trace.posture_confirmed,
+        "posture_draft":      trace.posture_draft,
+        "short_circuit":      trace.short_circuit,
+        "answer_source":      trace.answer_source,
+        "neo4j_ms":           trace.neo4j_ms,
+        "vector_ms":          trace.vector_ms,
+        "postgres_ms":        trace.postgres_ms,
+        "total_ms":           trace.total_ms,
+        "error_type":         type(trace.error).__name__ if trace.error else None,
+        "error_hint":         trace.error_hint,
+    }
+
+    # Support psycopg2 connection, SQLAlchemy engine, or connection pool
+    if hasattr(posture_db, "execute"):
+        posture_db.execute(sql, params)
+    elif hasattr(posture_db, "connect"):
+        with posture_db.connect() as conn:
+            conn.execute(sql, params)
+            if hasattr(conn, "commit"):
+                conn.commit()
 
 
 def _node_exists_check(node_id: str, retriever) -> bool:
