@@ -769,10 +769,13 @@ class LLMAnswer:
                     status = ""
                     if item.status == "present":
                         status = " ✓"
-                    elif item.status in (None, "missing"):
+                    elif item.status == "missing":
                         status = " ✗"
-                    gdpr = " [GDPR required]" if item.gdpr_required else ""
-                    cl_lines.append(f"  -{status} {item.text}{gdpr}")
+                    elif item.status is None:
+                        status = " ?"   # not yet assessed
+                    gdpr    = " [GDPR required]" if item.gdpr_required else ""
+                    excerpt = f" — {item.excerpt}" if item.excerpt and item.status == "missing" else ""
+                    cl_lines.append(f"  -{status} {item.text}{gdpr}{excerpt}")
                 if ctx.should_contain:
                     cl_lines.append("  Should also contain:")
                     for item in ctx.should_contain[:3]:

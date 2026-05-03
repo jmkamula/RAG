@@ -96,12 +96,12 @@ class ResolvedContext:
     """
     taxonomy_type:   str
     taxonomy_entry:  TaxonomyEntry
-    posture_nodes:   dict             # {node_id: {finding, gap, control_ref, confirmation_status, ...}}
+    posture_nodes:      dict          # {node_id: {finding, gap, control_ref, confirmation_status, ...}}
     graph_nodes:     GraphResult
     vector_nodes:    list
     document_alerts: list
-    posture_confirmed:  int = 0       # count of confirmed/overridden findings
-    posture_draft:      int = 0       # count of draft findings
+    posture_confirmed:  int = 0   # count of confirmed/overridden findings
+    posture_draft:      int = 0   # count of draft findings
 
     short_circuit_answer: Optional[str] = None
     answer_source:        str = "llm"
@@ -607,6 +607,7 @@ class Resolver:
                 standards = req.standards,
                 topic_ref = req.topic_ref,
             ))
+        self._enrich_doc_contexts(gr.doc_contexts)
         return ResolvedContext(
             taxonomy_type   = "REMEDIATION_GUIDE",
             taxonomy_entry  = entry,
@@ -653,6 +654,7 @@ class Resolver:
                 if k not in gr.doc_contexts:
                     gr.doc_contexts[k] = v
 
+        self._enrich_doc_contexts(gr.doc_contexts)
         return ResolvedContext(
             taxonomy_type   = "DOCUMENT_CONTENT",
             taxonomy_entry  = entry,
@@ -709,6 +711,7 @@ class Resolver:
                 standards = req.standards,
                 topic_ref = req.topic_ref,
             ))
+        self._enrich_doc_contexts(gr.doc_contexts)
         return ResolvedContext(
             taxonomy_type   = "EVIDENCE_CHECK",
             taxonomy_entry  = entry,
@@ -761,6 +764,42 @@ class Resolver:
                 except Exception:
                     return False
         return False
+
+
+    # --- doc context enrichment from posture ---
+
+    def _enrich_doc_contexts(self, doc_contexts: dict) -> dict:
+        """
+        Enrich DocumentContext checklist items with status/confidence/excerpt
+        from self._posture (Postgres posture_controls).
+        Neo4j returns status=None — this fills it from confirmed posture data.
+        Comply→present, NC/OFI→missing, N/A→not_applicable, None→None.
+        """
+        if not doc_contexts or not self._posture:
+            return doc_contexts
+
+        posture_by_ref = {}
+        for node_id, data in self._posture.items():
+            ref = data.get('control_ref') or node_id.split(':')[-1]
+            if ref:
+                posture_by_ref[ref] = data
+
+        _STATUS = {'Comply': 'present', 'NC': 'missing', 'OFI': 'missing', 'N/A': 'not_applicable'}
+
+        for node_id, ctx in doc_contexts.items():
+            ref  = getattr(ctx, 'control_ref', None)
+            data = posture_by_ref.get(ref, {})
+            if not data:
+                continue
+            status     = _STATUS.get(data.get('finding', ''))
+            confidence = data.get('confidence')
+            excerpt    = data.get('gap_description') or data.get('evidence_text')
+            for item in list(getattr(ctx, 'must_contain', [])) + list(getattr(ctx, 'should_contain', [])):
+                if item.status is None:
+                    item.status     = status
+                    item.confidence = confidence
+                    item.excerpt    = excerpt
+        return doc_contexts
 
     def _expand(self, node_ids: list, req: ResolveRequest) -> GraphResult:
         if not node_ids or not self._is_expander_online():

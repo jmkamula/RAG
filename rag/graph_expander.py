@@ -663,32 +663,17 @@ class GraphExpander:
     ) -> dict[str, "DocumentContext"]:
         """
         Fetch DocumentRequirement + ChecklistItems for a set of control node_ids.
-        Called when intent.dimensions.needs_documentation is True.
-
-        Returns: {node_id: DocumentContext}
-        Only returns nodes that actually have DocumentRequirements in Neo4j.
-        Merges DETECTED_IN status if tenant has uploaded documents.
+        Returns: {node_id: DocumentContext} with status=None on all items.
+        Status enrichment (present/missing) is done by the resolver using
+        posture_controls data — not here.  Neo4j stays generic.
         """
         if not node_ids or not self._is_online():
             return {}
 
-        # Guard: check if ClientDocument label exists (only loaded after doc pipeline runs)
-        # Avoids flooding logs with UnknownLabelWarning on every document query
-        if not getattr(self, '_client_doc_label_exists', None):
-            try:
-                driver = self._get_driver()
-                with driver.session() as s:
-                    r = s.run("CALL db.labels() YIELD label WHERE label='ClientDocument' RETURN count(*) AS n")
-                    self._client_doc_label_exists = r.single()["n"] > 0
-            except Exception:
-                self._client_doc_label_exists = False
-
         try:
             driver = self._get_driver()
             with driver.session() as s:
-                # Use simpler query without DETECTED_IN if ClientDocument not yet loaded
-                if not self._client_doc_label_exists:
-                    result = s.run("""
+                result = s.run("""
                     UNWIND $node_ids AS nid
                     MATCH (n:RequirementNode {id: nid})
                           -[:REQUIRES_DOCUMENT]->(req:DocumentRequirement)
@@ -705,70 +690,39 @@ class GraphExpander:
                         item.text           AS item_text,
                         type(rel)           AS category_rel,
                         item.gdpr_aligned   AS gdpr_required,
-                        item.rationale      AS rationale,
-                        NULL AS det_status, NULL AS det_confidence,
-                        NULL AS det_excerpt, NULL AS det_page
+                        item.rationale      AS rationale
                     ORDER BY req.trigger_type, n.ref,
                              item.gdpr_aligned DESC, item.text
-                    """, node_ids=node_ids, tenant_id=tenant_id, standards=standards)
-                else:
-                    result = s.run("""
-                    UNWIND $node_ids AS nid
-                    MATCH (n:RequirementNode {id: nid})
-                          -[:REQUIRES_DOCUMENT]->(req:DocumentRequirement)
-                          -[rel:MUST_CONTAIN|SHOULD_CONTAIN]->(item:ChecklistItem)
-                    OPTIONAL MATCH (item)-[det:DETECTED_IN]->(doc:ClientDocument
-                        {tenant_id: $tenant_id})
-                    RETURN
-                        n.id                AS node_id,
-                        n.ref               AS control_ref,
-                        req.id              AS req_id,
-                        req.document_title  AS document_title,
-                        req.document_type   AS document_type,
-                        req.trigger_type    AS trigger_type,
-                        req.description     AS description,
-                        item.id             AS item_id,
-                        item.text           AS item_text,
-                        type(rel)           AS category_rel,
-                        item.gdpr_aligned   AS gdpr_required,  -- Neo4j uses gdpr_aligned; Python/Postgres use gdpr_required
-                        item.rationale      AS rationale,
-                        doc.filename        AS document_name,
-                        det.confidence      AS det_confidence,
-                        det.excerpt         AS det_excerpt,
-                        det.page            AS det_page,
-                        det.status          AS det_status
-                    ORDER BY n.id, item.gdpr_aligned DESC, item.text
-                """, node_ids=node_ids, tenant_id=tenant_id)
+                """, node_ids=node_ids)
 
-                # Group rows into DocumentContext objects
                 contexts: dict[str, DocumentContext] = {}
                 for row in result:
-                    nid  = row["node_id"]
+                    nid = row["node_id"]
                     if nid not in contexts:
                         contexts[nid] = DocumentContext(
-                            control_ref   = row["control_ref"],
-                            node_id       = nid,
-                            document_title= row["document_title"],
-                            document_type = row["document_type"],
-                            trigger_type  = row["trigger_type"],
-                            description   = row["description"],
-                            must_contain  = [],
-                            should_contain= [],
+                            control_ref    = row["control_ref"],
+                            node_id        = nid,
+                            document_title = row["document_title"],
+                            document_type  = row["document_type"],
+                            trigger_type   = row["trigger_type"],
+                            description    = row["description"],
+                            must_contain   = [],
+                            should_contain = [],
                         )
-                    ctx = contexts[nid]
+                    ctx  = contexts[nid]
                     item = ChecklistItemResult(
-                        item_id      = row["item_id"],
-                        text         = row["item_text"],
-                        category     = "must" if row["category_rel"] == "MUST_CONTAIN"
-                                       else "should",
-                        gdpr_required= bool(row["gdpr_required"]),
-                        rationale    = row["rationale"] or "",
-                        status       = row["det_status"],
-                        confidence   = row["det_confidence"],
-                        excerpt      = row["det_excerpt"],
-                        section      = None,
-                        page         = row["det_page"],
-                        document_name= row["document_name"],
+                        item_id       = row["item_id"],
+                        text          = row["item_text"],
+                        category      = "must" if row["category_rel"] == "MUST_CONTAIN"
+                                        else "should",
+                        gdpr_required = bool(row["gdpr_required"]),
+                        rationale     = row["rationale"] or "",
+                        status        = None,   # enriched by resolver from posture_controls
+                        confidence    = None,
+                        excerpt       = None,
+                        section       = None,
+                        page          = None,
+                        document_name = None,
                     )
                     if item.category == "must":
                         ctx.must_contain.append(item)
@@ -778,6 +732,10 @@ class GraphExpander:
                 return contexts
 
         except Exception as e:
+            import logging
+            logging.getLogger(__name__).warning(
+                f"get_checklist_items failed: {e}"
+            )
             return {}
 
     def get_document_inventory(
@@ -789,50 +747,22 @@ class GraphExpander:
         """
         Return all document requirements for this tenant's applicable standards.
         Used for DOCUMENT_INVENTORY queries: "what documents do we need?"
-
-        When topic_ref is set, scopes to that control only.
-        When topic_ref is None, returns full inventory for all standards.
+        Returns DocumentContext objects with status=None — enriched by resolver.
+        Neo4j stays generic: no ClientDocument or DETECTED_IN references.
         """
         if not self._is_online():
             return []
 
         try:
-            # Reuse ClientDocument label check from get_checklist_items
-            if not getattr(self, '_client_doc_label_exists', None):
-                try:
-                    drv = self._get_driver()
-                    with drv.session() as s:
-                        r = s.run("CALL db.labels() YIELD label WHERE label='ClientDocument' RETURN count(*) AS n")
-                        self._client_doc_label_exists = r.single()["n"] > 0
-                except Exception:
-                    self._client_doc_label_exists = False
-
-            _has_client_doc = self._client_doc_label_exists
-            _opt_match = (
-                "OPTIONAL MATCH (item)-[det:DETECTED_IN]->"
-                "(:ClientDocument {tenant_id: $tenant_id})"
-                if _has_client_doc else ""
-            )
-            _det_fields = (
-                "det.status AS det_status, det.confidence AS det_confidence,"
-                "det.excerpt AS det_excerpt, det.page AS det_page"
-                if _has_client_doc else
-                "NULL AS det_status, NULL AS det_confidence,"
-                "NULL AS det_excerpt, NULL AS det_page"
-            )
-
             driver = self._get_driver()
             with driver.session() as s:
                 if topic_ref:
-                    # Scoped to one control
                     result = s.run("""
                         MATCH (n:RequirementNode)
                         WHERE n.ref = $topic_ref
                           AND n.standard_id IN $standards
                         MATCH (n)-[:REQUIRES_DOCUMENT]->(req:DocumentRequirement)
                               -[rel:MUST_CONTAIN|SHOULD_CONTAIN]->(item:ChecklistItem)
-                        OPTIONAL MATCH (item)-[det:DETECTED_IN]->
-                            (:ClientDocument {tenant_id: $tenant_id})
                         RETURN
                             n.id AS node_id, n.ref AS control_ref,
                             req.id AS req_id, req.document_title AS document_title,
@@ -842,23 +772,15 @@ class GraphExpander:
                             item.id AS item_id, item.text AS item_text,
                             type(rel) AS category_rel,
                             item.gdpr_aligned AS gdpr_required,
-                            item.rationale AS rationale,
-                            det.status AS det_status,
-                            det.confidence AS det_confidence,
-                            det.excerpt AS det_excerpt,
-                            det.page AS det_page
+                            item.rationale AS rationale
                         ORDER BY item.gdpr_aligned DESC, item.text
-                    """, topic_ref=topic_ref, standards=standards,
-                         tenant_id=tenant_id)
+                    """, topic_ref=topic_ref, standards=standards)
                 else:
-                    # Full inventory from obligation chain
                     result = s.run("""
                         MATCH (n:RequirementNode)
-                              -[:REQUIRES_DOCUMENT]->(req:DocumentRequirement)
-                              -[rel:MUST_CONTAIN|SHOULD_CONTAIN]->(item:ChecklistItem)
                         WHERE n.standard_id IN $standards
-                        OPTIONAL MATCH (item)-[det:DETECTED_IN]->
-                            (:ClientDocument {tenant_id: $tenant_id})
+                        MATCH (n)-[:REQUIRES_DOCUMENT]->(req:DocumentRequirement)
+                              -[rel:MUST_CONTAIN|SHOULD_CONTAIN]->(item:ChecklistItem)
                         RETURN
                             n.id AS node_id, n.ref AS control_ref,
                             req.id AS req_id, req.document_title AS document_title,
@@ -868,44 +790,38 @@ class GraphExpander:
                             item.id AS item_id, item.text AS item_text,
                             type(rel) AS category_rel,
                             item.gdpr_aligned AS gdpr_required,
-                            item.rationale AS rationale,
-                            det.status AS det_status,
-                            det.confidence AS det_confidence,
-                            det.excerpt AS det_excerpt,
-                            det.page AS det_page
-                        ORDER BY req.trigger_type, n.ref,
-                                 item.gdpr_aligned DESC, item.text
-                    """, standards=standards, tenant_id=tenant_id)
+                            item.rationale AS rationale
+                        ORDER BY n.ref, item.gdpr_aligned DESC, item.text
+                    """, standards=standards)
 
-                # Build DocumentContext list
                 contexts: dict[str, DocumentContext] = {}
                 for row in result:
                     nid = row["node_id"]
                     if nid not in contexts:
                         contexts[nid] = DocumentContext(
-                            control_ref   = row["control_ref"],
-                            node_id       = nid,
-                            document_title= row["document_title"],
-                            document_type = row["document_type"],
-                            trigger_type  = row["trigger_type"],
-                            description   = row["description"],
-                            must_contain  = [],
-                            should_contain= [],
+                            control_ref    = row["control_ref"],
+                            node_id        = nid,
+                            document_title = row["document_title"],
+                            document_type  = row["document_type"],
+                            trigger_type   = row["trigger_type"],
+                            description    = row["description"],
+                            must_contain   = [],
+                            should_contain = [],
                         )
-                    ctx = contexts[nid]
+                    ctx  = contexts[nid]
                     item = ChecklistItemResult(
-                        item_id      = row["item_id"],
-                        text         = row["item_text"],
-                        category     = "must" if row["category_rel"] == "MUST_CONTAIN"
-                                       else "should",
-                        gdpr_required= bool(row["gdpr_required"]),
-                        rationale    = row["rationale"] or "",
-                        status       = row["det_status"],
-                        confidence   = row["det_confidence"],
-                        excerpt      = row["det_excerpt"],
-                        section      = None,
-                        page         = row["det_page"],
-                        document_name= None,
+                        item_id       = row["item_id"],
+                        text          = row["item_text"],
+                        category      = "must" if row["category_rel"] == "MUST_CONTAIN"
+                                        else "should",
+                        gdpr_required = bool(row["gdpr_required"]),
+                        rationale     = row["rationale"] or "",
+                        status        = None,   # enriched by resolver
+                        confidence    = None,
+                        excerpt       = None,
+                        section       = None,
+                        page          = None,
+                        document_name = None,
                     )
                     if item.category == "must":
                         ctx.must_contain.append(item)
@@ -915,7 +831,12 @@ class GraphExpander:
                 return list(contexts.values())
 
         except Exception as e:
+            import logging
+            logging.getLogger(__name__).warning(
+                f"get_document_inventory failed: {e}"
+            )
             return []
+
 
     def get_document_checklist(
         self,
@@ -934,29 +855,7 @@ class GraphExpander:
         if not self._is_online():
             return None
 
-        # Guard: skip ClientDocument OPTIONAL MATCH if label not yet loaded
-        if not getattr(self, '_client_doc_label_exists', None):
-            try:
-                drv = self._get_driver()
-                with drv.session() as s:
-                    r = s.run("CALL db.labels() YIELD label WHERE label='ClientDocument' RETURN count(*) AS n")
-                    self._client_doc_label_exists = r.single()["n"] > 0
-            except Exception:
-                self._client_doc_label_exists = False
 
-        _opt_detected = (
-            "OPTIONAL MATCH (item)-[det:DETECTED_IN]->"
-            "(doc:ClientDocument {tenant_id: $tenant_id})"
-        ) if self._client_doc_label_exists else ""
-        _doc_fields = (
-            "doc.filename AS document_name,"
-            "det.status AS det_status, det.confidence AS det_confidence,"
-            "det.excerpt AS det_excerpt, det.page AS det_page"
-        ) if self._client_doc_label_exists else (
-            "NULL AS document_name,"
-            "NULL AS det_status, NULL AS det_confidence,"
-            "NULL AS det_excerpt, NULL AS det_page"
-        )
 
         try:
             driver = self._get_driver()
@@ -965,12 +864,12 @@ class GraphExpander:
                 if standard_id:
                     where += " AND n.standard_id = $standard_id"
 
-                result = s.run(f"""
+                result = s.run("""
                     MATCH (n:RequirementNode)
-                    WHERE {where}
+                    WHERE n.ref = $ref
+                    AND ($standard_id = '' OR n.standard_id = $standard_id)
                     MATCH (n)-[:REQUIRES_DOCUMENT]->(req:DocumentRequirement)
                           -[rel:MUST_CONTAIN|SHOULD_CONTAIN]->(item:ChecklistItem)
-                    {_opt_detected}
                     RETURN
                         n.id AS node_id, n.ref AS control_ref,
                         req.document_title AS document_title,
@@ -980,8 +879,7 @@ class GraphExpander:
                         item.id AS item_id, item.text AS item_text,
                         type(rel) AS category_rel,
                         item.gdpr_aligned AS gdpr_required,
-                        item.rationale AS rationale,
-                        {_doc_fields}
+                        item.rationale AS rationale
                     ORDER BY item.gdpr_aligned DESC, item.text
                 """, ref=control_ref, tenant_id=tenant_id,
                      standard_id=standard_id or "")
