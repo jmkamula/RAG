@@ -247,6 +247,7 @@ def _write_posture_controls(
     """
     updated = 0
     created = 0
+    skipped = 0
 
     with conn.cursor() as cur:
         for (control_ref, standard_id), group in groups.items():
@@ -283,6 +284,7 @@ def _write_posture_controls(
                     if ex_status == "confirmed" or ex_source in ("workbook", "assessor", "audit"):
                         logger.info(f"  ⊘ {control_ref} protected — source={ex_source} status={ex_status} ({ex_finding}) — skipped")
                         cur.execute(f"RELEASE SAVEPOINT {sp}")
+                        skipped += 1
                         continue
 
                     # Preserve workbook assessment alongside document finding
@@ -348,7 +350,7 @@ def _write_posture_controls(
                     f"{type(e).__name__}: {e}"
                 )
 
-    return updated, created
+    return updated, created, skipped
 
 
 # =============================================================================
@@ -399,17 +401,19 @@ def write_findings(
         if f.finding not in ("not_addressed", None):
             groups.setdefault((f.control_ref, f.standard_id), []).append(f)
 
-    posture_updated, posture_created = _write_posture_controls(groups, tenant_id, conn)
+    posture_updated, posture_created, posture_skipped = _write_posture_controls(groups, tenant_id, conn)
 
     summary = {
         "written":           written,
         "posture_updated":   posture_updated,
         "posture_created":   posture_created,
+        "posture_skipped":   posture_skipped,
         "controls_assessed": [ref for ref, _ in groups.keys()],
     }
     logger.info(
         f"Stage 4 complete: {written} findings written, "
-        f"{posture_updated} posture updated, {posture_created} posture created"
+        f"{posture_updated} posture updated, {posture_created} posture created, "
+        f"{posture_skipped} skipped (source guard)"
     )
     return summary
 
