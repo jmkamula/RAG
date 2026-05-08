@@ -280,8 +280,8 @@ def _write_posture_controls(
                     ex_id, ex_finding, ex_source, ex_status = existing
 
                     # Never overwrite confirmed findings
-                    if ex_status == "confirmed":
-                        logger.info(f"  ⊘ {control_ref} already confirmed ({ex_finding}) — skipped")
+                    if ex_status == "confirmed" or ex_source in ("workbook", "assessor", "audit"):
+                        logger.info(f"  ⊘ {control_ref} protected — source={ex_source} status={ex_status} ({ex_finding}) — skipped")
                         cur.execute(f"RELEASE SAVEPOINT {sp}")
                         continue
 
