@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArionComply — Review Queue</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f7f4;color:#1a1a18;font-size:14px;line-height:1.5}
+.topbar{background:#fff;border-bottom:1px solid #e5e4df;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.logo{font-size:15px;font-weight:600;color:#1a1a18;letter-spacing:-0.3px}
+.logo span{color:#534AB7}
+.badge{font-size:11px;background:#EEEDFE;color:#3C3489;padding:2px 8px;border-radius:20px;font-weight:500}
+.api-config{display:flex;align-items:center;gap:8px}
+.api-config input{font-size:12px;padding:5px 10px;border:1px solid #e5e4df;border-radius:6px;width:260px;background:#f8f7f4;color:#1a1a18}
+.api-config input:focus{outline:none;border-color:#534AB7}
+.btn-connect{font-size:12px;padding:5px 12px;background:#534AB7;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:500}
+.btn-connect:hover{background:#3C3489}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#ccc;display:inline-block}
+.status-dot.ok{background:#1D9E75}
+.status-dot.err{background:#E24B4A}
+.layout{display:grid;grid-template-columns:220px 1fr;height:calc(100vh - 52px)}
+.sidebar{background:#fff;border-right:1px solid #e5e4df;padding:16px 0;overflow-y:auto}
+.sidebar-section{padding:4px 16px 12px;font-size:11px;font-weight:600;color:#888780;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px}
+.filter-btn{display:flex;align-items:center;gap:8px;width:100%;padding:7px 16px;background:none;border:none;cursor:pointer;font-size:13px;color:#444441;text-align:left;border-radius:0}
+.filter-btn:hover{background:#f8f7f4}
+.filter-btn.active{background:#EEEDFE;color:#3C3489;font-weight:500}
+.filter-btn .count{margin-left:auto;font-size:11px;background:#f1efe8;color:#888780;padding:1px 6px;border-radius:10px;font-weight:500}
+.filter-btn.active .count{background:#CECBF6;color:#3C3489}
+.finding-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-nc{background:#E24B4A}
+.dot-ofi{background:#EF9F27}
+.dot-comply{background:#1D9E75}
+.dot-all{background:#7F77DD}
+.main{overflow-y:auto;padding:20px 24px}
+.main-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.main-title{font-size:16px;font-weight:600;color:#1a1a18}
+.main-sub{font-size:13px;color:#888780;margin-top:2px}
+.toolbar{display:flex;gap:8px;align-items:center}
+.btn-refresh{font-size:12px;padding:5px 10px;background:#fff;border:1px solid #e5e4df;border-radius:6px;cursor:pointer;color:#444441;display:flex;align-items:center;gap:4px}
+.btn-refresh:hover{background:#f8f7f4}
+.controls-list{display:flex;flex-direction:column;gap:8px}
+.control-card{background:#fff;border:1px solid #e5e4df;border-radius:10px;padding:14px 16px;cursor:pointer;transition:border-color 0.15s}
+.control-card:hover{border-color:#AFA9EC}
+.control-card.selected{border-color:#534AB7;box-shadow:0 0 0 3px #EEEDFE}
+.card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.card-ref{font-size:13px;font-weight:600;color:#1a1a18}
+.card-std{font-size:11px;color:#888780;margin-top:1px}
+.card-badges{display:flex;gap:6px;flex-shrink:0}
+.pill{font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500}
+.pill-nc{background:#FCEBEB;color:#A32D2D}
+.pill-ofi{background:#FAEEDA;color:#854F0B}
+.pill-comply{background:#EAF3DE;color:#3B6D11}
+.pill-na{background:#f1efe8;color:#5F5E5A}
+.pill-source{background:#f1efe8;color:#5F5E5A}
+.card-gap{font-size:12px;color:#5F5E5A;margin-top:8px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-meta{display:flex;align-items:center;gap:12px;margin-top:10px;font-size:11px;color:#888780}
+.card-meta i{font-size:13px;vertical-align:-1px}
+.detail-panel{position:fixed;right:0;top:52px;bottom:0;width:380px;background:#fff;border-left:1px solid #e5e4df;overflow-y:auto;transform:translateX(100%);transition:transform 0.2s ease;z-index:50}
+.detail-panel.open{transform:translateX(0)}
+.detail-header{padding:16px 20px;border-bottom:1px solid #e5e4df;display:flex;align-items:center;justify-content:space-between}
+.detail-title{font-size:15px;font-weight:600}
+.btn-close{background:none;border:none;cursor:pointer;color:#888780;padding:4px;border-radius:6px;font-size:18px;line-height:1}
+.btn-close:hover{background:#f8f7f4;color:#1a1a18}
+.detail-body{padding:20px}
+.detail-section{margin-bottom:20px}
+.detail-label{font-size:11px;font-weight:600;color:#888780;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+.detail-value{font-size:13px;color:#1a1a18;line-height:1.6}
+.detail-value.muted{color:#5F5E5A}
+.system-box{background:#f8f7f4;border:1px solid #e5e4df;border-radius:8px;padding:10px 12px;font-size:12px;color:#5F5E5A;line-height:1.6}
+.system-box .diff{color:#A32D2D;font-weight:500}
+.action-area{border-top:1px solid #e5e4df;padding:16px 20px}
+.action-tabs{display:flex;gap:4px;margin-bottom:14px;background:#f8f7f4;border-radius:8px;padding:3px}
+.action-tab{flex:1;padding:6px;text-align:center;font-size:12px;font-weight:500;border:none;background:none;cursor:pointer;border-radius:6px;color:#888780}
+.action-tab.active{background:#fff;color:#1a1a18;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
+.form-group{margin-bottom:12px}
+.form-label{font-size:12px;font-weight:500;color:#444441;margin-bottom:4px;display:block}
+.form-select{width:100%;padding:7px 10px;border:1px solid #e5e4df;border-radius:6px;font-size:13px;background:#fff;color:#1a1a18}
+.form-select:focus{outline:none;border-color:#534AB7}
+.form-textarea{width:100%;padding:7px 10px;border:1px solid #e5e4df;border-radius:6px;font-size:13px;resize:vertical;min-height:72px;font-family:inherit;background:#fff;color:#1a1a18}
+.form-textarea:focus{outline:none;border-color:#534AB7}
+.btn-confirm{width:100%;padding:9px;background:#534AB7;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-confirm:hover{background:#3C3489}
+.btn-confirm:disabled{opacity:0.5;cursor:not-allowed}
+.btn-override{width:100%;padding:9px;background:#fff;color:#854F0B;border:1px solid #EF9F27;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer}
+.btn-override:hover{background:#FAEEDA}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a18;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:500;z-index:200;opacity:0;transition:opacity 0.2s;pointer-events:none}
+.toast.show{opacity:1}
+.empty{text-align:center;padding:48px 24px;color:#888780}
+.empty i{font-size:32px;display:block;margin-bottom:12px;color:#D3D1C7}
+.loading{text-align:center;padding:32px;color:#888780;font-size:13px}
+.pagination{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid #e5e4df}
+.pagination-info{font-size:12px;color:#888780}
+.pagination-btns{display:flex;gap:6px}
+.btn-page{font-size:12px;padding:5px 10px;background:#fff;border:1px solid #e5e4df;border-radius:6px;cursor:pointer;color:#444441}
+.btn-page:disabled{opacity:0.4;cursor:not-allowed}
+.btn-page:not(:disabled):hover{background:#f8f7f4}
+.conflict-badge{font-size:11px;background:#FAEEDA;color:#854F0B;border:1px solid #FAC775;padding:3px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px}
+.hours-warn{color:#854F0B}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo">Arion<span>Comply</span></div>
+    <div class="badge">Review Queue</div>
+    <span class="status-dot" id="status-dot"></span>
+    <span id="status-text" style="font-size:12px;color:#888780">not connected</span>
+  </div>
+  <div class="api-config">
+    <input type="text" id="api-url" placeholder="API URL" value="http://localhost:8080">
+    <input type="password" id="api-key" placeholder="X-API-Key" value="arion_dev_key_2026">
+    <button class="btn-connect" onclick="connect()">Connect</button>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-section">Filter by finding</div>
+    <button class="filter-btn active" onclick="setFilter('all')" id="f-all">
+      <span class="finding-dot dot-all"></span> All findings
+      <span class="count" id="c-all">—</span>
+    </button>
+    <button class="filter-btn" onclick="setFilter('NC')" id="f-NC">
+      <span class="finding-dot dot-nc"></span> Non-conformity
+      <span class="count" id="c-NC">—</span>
+    </button>
+    <button class="filter-btn" onclick="setFilter('OFI')" id="f-OFI">
+      <span class="finding-dot dot-ofi"></span> Opportunity
+      <span class="count" id="c-OFI">—</span>
+    </button>
+    <button class="filter-btn" onclick="setFilter('Comply')" id="f-Comply">
+      <span class="finding-dot dot-comply"></span> Comply
+      <span class="count" id="c-Comply">—</span>
+    </button>
+
+    <div class="sidebar-section" style="margin-top:8px">Filter by source</div>
+    <button class="filter-btn active" onclick="setSource('all')" id="s-all">
+      <i class="ti ti-list" style="font-size:14px" aria-hidden="true"></i> All sources
+    </button>
+    <button class="filter-btn" onclick="setSource('assessor')" id="s-assessor">
+      <i class="ti ti-user-check" style="font-size:14px" aria-hidden="true"></i> Assessor
+    </button>
+    <button class="filter-btn" onclick="setSource('document')" id="s-document">
+      <i class="ti ti-file-text" style="font-size:14px" aria-hidden="true"></i> Document
+    </button>
+    <button class="filter-btn" onclick="setSource('workbook')" id="s-workbook">
+      <i class="ti ti-table" style="font-size:14px" aria-hidden="true"></i> Workbook
+    </button>
+  </div>
+
+  <div class="main" id="main-content">
+    <div class="empty">
+      <i class="ti ti-plug-connected-x" aria-hidden="true"></i>
+      Enter your API URL and key above, then click Connect
+    </div>
+  </div>
+</div>
+
+<div class="detail-panel" id="detail-panel">
+  <div class="detail-header">
+    <div>
+      <div class="detail-title" id="dp-title">—</div>
+      <div style="font-size:12px;color:#888780;margin-top:2px" id="dp-std">—</div>
+    </div>
+    <button class="btn-close" onclick="closeDetail()" aria-label="Close"><i class="ti ti-x"></i></button>
+  </div>
+  <div class="detail-body">
+    <div class="detail-section">
+      <div class="detail-label">Current finding</div>
+      <div id="dp-finding" style="display:flex;gap:8px;align-items:center"></div>
+    </div>
+    <div class="detail-section" id="dp-system-section">
+      <div class="detail-label">System proposed</div>
+      <div class="system-box" id="dp-system"></div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">Gap description</div>
+      <div class="detail-value" id="dp-gap">—</div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-label">Metadata</div>
+      <div class="detail-value muted" id="dp-meta"></div>
+    </div>
+  </div>
+  <div class="action-area">
+    <div class="action-tabs">
+      <button class="action-tab active" onclick="setTab('confirm')" id="tab-confirm">Confirm</button>
+      <button class="action-tab" onclick="setTab('override')" id="tab-override">Override</button>
+    </div>
+    <div id="tab-confirm-body">
+      <div class="form-group">
+        <label class="form-label">Reason (optional)</label>
+        <textarea class="form-textarea" id="confirm-reason" placeholder="Add a note for the audit trail..."></textarea>
+      </div>
+      <button class="btn-confirm" id="btn-confirm-action" onclick="confirmControl()">
+        <i class="ti ti-check" aria-hidden="true"></i> Confirm finding
+      </button>
+    </div>
+    <div id="tab-override-body" style="display:none">
+      <div class="form-group">
+        <label class="form-label">Change finding to</label>
+        <select class="form-select" id="override-finding">
+          <option value="NC">NC — Non-conformity</option>
+          <option value="OFI">OFI — Opportunity for improvement</option>
+          <option value="Comply">Comply</option>
+          <option value="N/A">N/A — Not applicable</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Updated gap description</label>
+        <textarea class="form-textarea" id="override-gap" placeholder="Describe the updated assessment..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Reason for override</label>
+        <textarea class="form-textarea" id="override-reason" placeholder="Why are you changing the system finding?"></textarea>
+      </div>
+      <button class="btn-override" onclick="overrideControl()">
+        <i class="ti ti-edit" aria-hidden="true"></i> Override finding
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let API_URL = 'http://localhost:8080';
+let API_KEY = 'arion_dev_key_2026';
+let currentFilter = 'all';
+let currentSource = 'all';
+let currentPage = 0;
+const PAGE_SIZE = 20;
+let totalCount = 0;
+let selectedControl = null;
+
+function connect() {
+  API_URL = document.getElementById('api-url').value.trim();
+  API_KEY = document.getElementById('api-key').value.trim();
+  loadQueue();
+}
+
+async function api(path, opts={}) {
+  const r = await fetch(API_URL + path, {
+    ...opts,
+    headers: {
+      'X-API-Key': API_KEY,
+      'Content-Type': 'application/json',
+      ...(opts.headers||{})
+    }
+  });
+  if (!r.ok) {
+    const err = await r.json().catch(()=>({detail: r.statusText}));
+    throw new Error(err.detail || r.statusText);
+  }
+  return r.json();
+}
+
+async function loadQueue() {
+  const main = document.getElementById('main-content');
+  main.innerHTML = '<div class="loading"><i class="ti ti-loader-2" aria-hidden="true"></i> Loading...</div>';
+  try {
+    const params = new URLSearchParams({limit: PAGE_SIZE, offset: currentPage * PAGE_SIZE});
+    if (currentFilter !== 'all') params.set('finding', currentFilter);
+    if (currentSource !== 'all') params.set('source', currentSource);
+    const data = await api('/api/v1/review-queue?' + params);
+    totalCount = data.total;
+    setStatus(true);
+    await loadCounts();
+    renderQueue(data.controls, data.total);
+  } catch(e) {
+    setStatus(false);
+    main.innerHTML = `<div class="empty"><i class="ti ti-alert-circle" aria-hidden="true"></i>${e.message}</div>`;
+  }
+}
+
+async function loadCounts() {
+  const findings = ['NC','OFI','Comply'];
+  const all = await api('/api/v1/review-queue?limit=1');
+  document.getElementById('c-all').textContent = all.total;
+  for (const f of findings) {
+    try {
+      const d = await api(`/api/v1/review-queue?finding=${f}&limit=1`);
+      document.getElementById('c-' + f).textContent = d.total;
+    } catch(e) {}
+  }
+}
+
+function findingPill(finding) {
+  const map = {NC:'pill-nc', OFI:'pill-ofi', Comply:'pill-comply', 'N/A':'pill-na'};
+  return `<span class="pill ${map[finding]||'pill-na'}">${finding}</span>`;
+}
+
+function renderQueue(controls, total) {
+  const main = document.getElementById('main-content');
+  const filterLabel = currentFilter === 'all' ? 'All findings' : currentFilter;
+  const srcLabel = currentSource === 'all' ? '' : ` · ${currentSource}`;
+
+  let html = `
+    <div class="main-header">
+      <div>
+        <div class="main-title">${filterLabel}${srcLabel}</div>
+        <div class="main-sub">${total} control${total !== 1 ? 's' : ''} pending review</div>
+      </div>
+      <div class="toolbar">
+        <button class="btn-refresh" onclick="loadQueue()">
+          <i class="ti ti-refresh" aria-hidden="true"></i> Refresh
+        </button>
+      </div>
+    </div>
+    <div class="controls-list">`;
+
+  if (!controls.length) {
+    html += `<div class="empty"><i class="ti ti-circle-check" aria-hidden="true"></i>No controls match this filter</div>`;
+  }
+
+  for (const c of controls) {
+    const hasConflict = c.system_finding && c.system_finding !== c.finding;
+    const hours = Math.round(c.hours_in_draft);
+    const hoursWarn = hours > 72;
+    const safeC = JSON.stringify(c).replace(/"/g,'&quot;');
+
+    html += `
+      <div class="control-card${selectedControl?.id === c.id ? ' selected' : ''}"
+           onclick='selectControl(${safeC})'>
+        <div class="card-header">
+          <div>
+            <div class="card-ref">${c.control_ref}</div>
+            <div class="card-std">${c.standard_id}</div>
+          </div>
+          <div class="card-badges">
+            ${hasConflict ? `<span class="conflict-badge"><i class="ti ti-alert-triangle" aria-hidden="true"></i>conflict</span>` : ''}
+            ${findingPill(c.finding)}
+            <span class="pill pill-source">${c.source}</span>
+          </div>
+        </div>
+        <div class="card-gap">${c.gap_description || '—'}</div>
+        <div class="card-meta">
+          <span class="${hoursWarn ? 'hours-warn' : ''}">
+            <i class="ti ti-clock" aria-hidden="true"></i> ${hours}h in draft
+          </span>
+          <span><i class="ti ti-shield-check" aria-hidden="true"></i> ${c.confidence || '—'}</span>
+          ${c.previously_overridden ? '<span><i class="ti ti-history" aria-hidden="true"></i> prev. overridden</span>' : ''}
+        </div>
+      </div>`;
+  }
+
+  html += `</div>`;
+
+  if (total > PAGE_SIZE) {
+    const start = currentPage * PAGE_SIZE + 1;
+    const end = Math.min((currentPage + 1) * PAGE_SIZE, total);
+    html += `
+      <div class="pagination">
+        <span class="pagination-info">Showing ${start}–${end} of ${total}</span>
+        <div class="pagination-btns">
+          <button class="btn-page" onclick="changePage(-1)" ${currentPage === 0 ? 'disabled' : ''}>
+            <i class="ti ti-chevron-left" aria-hidden="true"></i> Prev
+          </button>
+          <button class="btn-page" onclick="changePage(1)" ${end >= total ? 'disabled' : ''}>
+            Next <i class="ti ti-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>`;
+  }
+
+  main.innerHTML = html;
+}
+
+function selectControl(c) {
+  selectedControl = c;
+
+  document.getElementById('dp-title').textContent = c.control_ref;
+  document.getElementById('dp-std').textContent = c.standard_id;
+
+  document.getElementById('dp-finding').innerHTML =
+    findingPill(c.finding) +
+    `<span class="pill pill-source">${c.source}</span>` +
+    (c.confidence ? `<span style="font-size:12px;color:#888780">${c.confidence} confidence</span>` : '');
+
+  const sysSection = document.getElementById('dp-system-section');
+  if (c.system_finding) {
+    sysSection.style.display = '';
+    const diff = c.system_finding !== c.finding;
+    document.getElementById('dp-system').innerHTML =
+      `${diff ? `<span class="diff">${c.system_finding}</span> → <strong>${c.finding}</strong> (assessor override)` : `<span>${c.system_finding}</span>`}` +
+      (c.system_gap ? `<br><span style="color:#888780">${c.system_gap}</span>` : '') +
+      (c.system_proposed_at ? `<br><span style="color:#B4B2A9;font-size:11px">${new Date(c.system_proposed_at).toLocaleDateString()}</span>` : '');
+  } else {
+    sysSection.style.display = 'none';
+  }
+
+  document.getElementById('dp-gap').textContent = c.gap_description || '—';
+  document.getElementById('dp-meta').innerHTML =
+    `${Math.round(c.hours_in_draft)}h in draft` +
+    (c.previously_overridden ? ' · previously overridden' : '') +
+    (c.confirmation_status !== 'draft' ? ` · ${c.confirmation_status}` : '');
+
+  document.getElementById('override-finding').value = c.finding;
+  document.getElementById('override-gap').value = c.gap_description || '';
+  document.getElementById('confirm-reason').value = '';
+  document.getElementById('override-reason').value = '';
+  setTab('confirm');
+
+  document.getElementById('detail-panel').classList.add('open');
+  document.querySelectorAll('.control-card').forEach(el => el.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+}
+
+function closeDetail() {
+  document.getElementById('detail-panel').classList.remove('open');
+  selectedControl = null;
+  document.querySelectorAll('.control-card').forEach(el => el.classList.remove('selected'));
+}
+
+function setTab(tab) {
+  document.getElementById('tab-confirm-body').style.display = tab === 'confirm' ? '' : 'none';
+  document.getElementById('tab-override-body').style.display = tab === 'override' ? '' : 'none';
+  document.getElementById('tab-confirm').classList.toggle('active', tab === 'confirm');
+  document.getElementById('tab-override').classList.toggle('active', tab === 'override');
+}
+
+async function confirmControl() {
+  if (!selectedControl) return;
+  const btn = document.getElementById('btn-confirm-action');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader-2" aria-hidden="true"></i> Confirming...';
+  try {
+    await api(`/api/v1/posture/${selectedControl.id}/confirm`, {
+      method: 'POST',
+      body: JSON.stringify({reason: document.getElementById('confirm-reason').value})
+    });
+    showToast(`✓ ${selectedControl.control_ref} confirmed`);
+    closeDetail();
+    currentPage = 0;
+    await loadQueue();
+  } catch(e) {
+    showToast(`Error: ${e.message}`);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> Confirm finding';
+  }
+}
+
+async function overrideControl() {
+  if (!selectedControl) return;
+  try {
+    await api(`/api/v1/posture/${selectedControl.id}/override`, {
+      method: 'POST',
+      body: JSON.stringify({
+        finding: document.getElementById('override-finding').value,
+        gap_description: document.getElementById('override-gap').value,
+        reason: document.getElementById('override-reason').value
+      })
+    });
+    showToast(`✓ ${selectedControl.control_ref} overridden`);
+    closeDetail();
+    currentPage = 0;
+    await loadQueue();
+  } catch(e) {
+    showToast(`Error: ${e.message}`);
+  }
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  currentPage = 0;
+  document.querySelectorAll('[id^="f-"]').forEach(el => el.classList.remove('active'));
+  document.getElementById('f-' + f).classList.add('active');
+  loadQueue();
+}
+
+function setSource(s) {
+  currentSource = s;
+  currentPage = 0;
+  document.querySelectorAll('[id^="s-"]').forEach(el => el.classList.remove('active'));
+  document.getElementById('s-' + s).classList.add('active');
+  loadQueue();
+}
+
+function changePage(dir) {
+  currentPage += dir;
+  loadQueue();
+}
+
+function setStatus(ok) {
+  document.getElementById('status-dot').className = 'status-dot ' + (ok ? 'ok' : 'err');
+  document.getElementById('status-text').textContent = ok ? 'connected' : 'disconnected';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+connect();
+</script>
+</body>
+</html>

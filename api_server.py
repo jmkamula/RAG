@@ -46,6 +46,7 @@ from fastapi import (
 )
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 # ── Path setup ────────────────────────────────────────────────────────────────
@@ -177,6 +178,11 @@ app = FastAPI(
     version     = "1.0.0",
     lifespan    = lifespan,
 )
+
+# Serve static UI files
+_static = Path("/data/arioncomply/static")
+_static.mkdir(parents=True, exist_ok=True)
+app.mount("/ui", StaticFiles(directory=str(_static), html=True), name="ui")
 
 app.add_middleware(
     CORSMiddleware,
