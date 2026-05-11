@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArionComply — Consultant</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f7f4;color:#1a1a18;font-size:14px;line-height:1.5;height:100vh;overflow:hidden}
+
+/* ── Topbar ── */
+.topbar{background:#fff;border-bottom:1px solid #e5e4df;padding:0 20px;height:50px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:10px}
+.logo{font-size:15px;font-weight:600;letter-spacing:-0.3px}
+.logo span{color:#534AB7}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#ccc}
+.status-dot.ok{background:#1D9E75}
+.status-dot.err{background:#E24B4A}
+.status-text{font-size:12px;color:#888780}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.topbar-input{font-size:12px;padding:4px 9px;border:1px solid #e5e4df;border-radius:6px;background:#f8f7f4;color:#1a1a18;width:220px}
+.topbar-input:focus{outline:none;border-color:#534AB7}
+.btn-sm{font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;font-weight:500}
+.btn-primary{background:#534AB7;color:#fff;border:none}
+.btn-primary:hover{background:#3C3489}
+.btn-outline{background:#fff;color:#444441;border:1px solid #e5e4df}
+.btn-outline:hover{background:#f8f7f4}
+
+/* ── App layout ── */
+.app{display:grid;grid-template-columns:200px 1fr 360px;height:calc(100vh - 50px)}
+
+/* ── Sidebar ── */
+.sidebar{background:#fff;border-right:1px solid #e5e4df;display:flex;flex-direction:column;overflow:hidden}
+.nav-section{padding:12px 12px 4px;font-size:10px;font-weight:600;color:#B4B2A9;text-transform:uppercase;letter-spacing:0.6px}
+.nav-item{display:flex;align-items:center;gap:8px;padding:7px 12px;cursor:pointer;font-size:13px;color:#5F5E5A;border-radius:0;border:none;background:none;width:100%;text-align:left}
+.nav-item:hover{background:#f8f7f4;color:#1a1a18}
+.nav-item.active{background:#EEEDFE;color:#3C3489;font-weight:500}
+.nav-item i{font-size:15px;flex-shrink:0}
+.nav-badge{margin-left:auto;font-size:10px;background:#CECBF6;color:#3C3489;padding:1px 6px;border-radius:10px;font-weight:600}
+.nav-item:not(.active) .nav-badge{background:#f1efe8;color:#888780}
+.sidebar-divider{height:1px;background:#f1efe8;margin:6px 0}
+.filter-group{padding:4px 0;flex:1;overflow-y:auto}
+.filter-label{padding:8px 12px 3px;font-size:10px;font-weight:600;color:#B4B2A9;text-transform:uppercase;letter-spacing:0.6px}
+.filter-item{display:flex;align-items:center;gap:7px;padding:5px 12px;cursor:pointer;font-size:12px;color:#5F5E5A;border:none;background:none;width:100%;text-align:left}
+.filter-item:hover{background:#f8f7f4}
+.filter-item.active{color:#3C3489;font-weight:500}
+.fdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.fdot-all{background:#7F77DD}
+.fdot-nc{background:#E24B4A}
+.fdot-ofi{background:#EF9F27}
+.fdot-comply{background:#1D9E75}
+.fcount{margin-left:auto;font-size:10px;color:#B4B2A9;font-weight:500}
+.filter-item.active .fcount{color:#7F77DD}
+
+/* ── Main panel ── */
+.main{overflow:hidden;display:flex;flex-direction:column;background:#f8f7f4}
+.main-toolbar{background:#fff;border-bottom:1px solid #e5e4df;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.main-title{font-size:14px;font-weight:600}
+.main-sub{font-size:12px;color:#888780;margin-top:1px}
+.main-body{flex:1;overflow-y:auto;padding:14px 16px}
+
+/* ── Queue cards ── */
+.queue-list{display:flex;flex-direction:column;gap:7px}
+.qcard{background:#fff;border:1px solid #e5e4df;border-radius:9px;padding:12px 14px;cursor:pointer;transition:border-color 0.12s}
+.qcard:hover{border-color:#AFA9EC}
+.qcard.active{border-color:#534AB7;box-shadow:0 0 0 3px #EEEDFE}
+.qcard-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.qcard-ref{font-size:13px;font-weight:600}
+.qcard-std{font-size:11px;color:#888780;margin-top:1px}
+.qcard-pills{display:flex;gap:5px;flex-shrink:0}
+.pill{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500}
+.p-nc{background:#FCEBEB;color:#A32D2D}
+.p-ofi{background:#FAEEDA;color:#854F0B}
+.p-comply{background:#EAF3DE;color:#3B6D11}
+.p-na{background:#f1efe8;color:#5F5E5A}
+.p-src{background:#f1efe8;color:#5F5E5A}
+.p-conf{background:#EAF3DE;color:#3B6D11}
+.qcard-gap{font-size:11px;color:#5F5E5A;margin-top:7px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.qcard-meta{display:flex;gap:10px;margin-top:8px;font-size:10px;color:#B4B2A9}
+.conflict-pill{font-size:10px;background:#FAEEDA;color:#854F0B;border:1px solid #FAC775;padding:2px 6px;border-radius:5px}
+.hours-warn{color:#854F0B}
+.pagination{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid #e5e4df}
+.pag-info{font-size:11px;color:#888780}
+.pag-btns{display:flex;gap:5px}
+.btn-page{font-size:11px;padding:4px 9px;background:#fff;border:1px solid #e5e4df;border-radius:5px;cursor:pointer;color:#444441}
+.btn-page:disabled{opacity:0.4;cursor:not-allowed}
+.btn-page:not(:disabled):hover{background:#f8f7f4}
+
+/* ── Chat panel ── */
+.chat-wrap{display:flex;flex-direction:column;height:100%}
+.chat-messages{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:14px}
+.msg{display:flex;flex-direction:column;gap:4px}
+.msg-user{align-items:flex-end}
+.msg-assistant{align-items:flex-start}
+.msg-bubble{max-width:85%;padding:9px 12px;border-radius:10px;font-size:13px;line-height:1.6}
+.msg-user .msg-bubble{background:#534AB7;color:#fff;border-radius:10px 10px 2px 10px}
+.msg-assistant .msg-bubble{background:#fff;border:1px solid #e5e4df;color:#1a1a18;border-radius:10px 10px 10px 2px}
+.msg-refs{display:flex;flex-wrap:wrap;gap:4px;padding:0 2px}
+.ref-tag{font-size:10px;background:#EEEDFE;color:#3C3489;padding:2px 7px;border-radius:5px;font-weight:500}
+.msg-meta{font-size:10px;color:#B4B2A9;padding:0 2px}
+.chat-input-wrap{border-top:1px solid #e5e4df;padding:12px 14px;background:#fff;flex-shrink:0}
+.chat-input-row{display:flex;gap:8px;align-items:flex-end}
+.chat-textarea{flex:1;padding:8px 11px;border:1px solid #e5e4df;border-radius:8px;font-size:13px;resize:none;font-family:inherit;min-height:36px;max-height:120px;background:#fff;color:#1a1a18;line-height:1.5}
+.chat-textarea:focus{outline:none;border-color:#534AB7}
+.btn-send{padding:8px 14px;background:#534AB7;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;flex-shrink:0;height:36px;display:flex;align-items:center;gap:5px}
+.btn-send:hover{background:#3C3489}
+.btn-send:disabled{opacity:0.5;cursor:not-allowed}
+.chat-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#B4B2A9;gap:8px}
+.chat-empty i{font-size:28px}
+.chat-empty p{font-size:13px}
+.chat-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px}
+.suggest-btn{font-size:11px;padding:5px 10px;background:#fff;border:1px solid #e5e4df;border-radius:6px;cursor:pointer;color:#5F5E5A}
+.suggest-btn:hover{border-color:#AFA9EC;color:#3C3489}
+.typing-indicator{display:flex;align-items:center;gap:4px;padding:9px 12px;background:#fff;border:1px solid #e5e4df;border-radius:10px 10px 10px 2px;width:fit-content}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:#B4B2A9;animation:bounce 1.2s infinite}
+.typing-dot:nth-child(2){animation-delay:0.2s}
+.typing-dot:nth-child(3){animation-delay:0.4s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+.msg-clarification .msg-bubble{background:#EEEDFE;border:1px solid #AFA9EC;color:#1a1a18;border-radius:10px 10px 10px 2px}
+.clarif-options{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.clarif-opt{font-size:12px;padding:7px 11px;background:#fff;border:1px solid #AFA9EC;border-radius:7px;cursor:pointer;color:#3C3489;text-align:left;font-weight:500}
+.clarif-opt:hover{background:#EEEDFE}
+.clarif-label{font-size:10px;color:#7F77DD;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+
+/* ── Documents panel ── */
+.docs-wrap{display:flex;flex-direction:column;gap:12px}
+.drop-zone{border:2px dashed #D3D1C7;border-radius:10px;padding:28px 20px;text-align:center;cursor:pointer;transition:border-color 0.15s,background 0.15s;background:#fff}
+.drop-zone:hover,.drop-zone.drag-over{border-color:#534AB7;background:#EEEDFE}
+.drop-zone i{font-size:28px;color:#B4B2A9;display:block;margin-bottom:8px}
+.drop-zone p{font-size:13px;color:#5F5E5A}
+.drop-zone span{font-size:11px;color:#B4B2A9;display:block;margin-top:4px}
+.drop-zone input{display:none}
+.upload-list{display:flex;flex-direction:column;gap:7px}
+.upload-card{background:#fff;border:1px solid #e5e4df;border-radius:9px;padding:12px 14px}
+.upload-top{display:flex;align-items:center;gap:10px}
+.upload-icon{width:32px;height:32px;border-radius:7px;background:#EEEDFE;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.upload-icon i{font-size:16px;color:#534AB7}
+.upload-info{flex:1;min-width:0}
+.upload-name{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.upload-size{font-size:10px;color:#B4B2A9;margin-top:1px}
+.upload-status{font-size:11px;font-weight:500;flex-shrink:0}
+.us-queued{color:#888780}
+.us-processing{color:#854F0B}
+.us-completed{color:#1D9E75}
+.us-failed{color:#A32D2D}
+.upload-trace{margin-top:10px;display:flex;flex-direction:column;gap:4px}
+.trace-stage{display:flex;align-items:center;gap:8px;font-size:11px}
+.stage-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.stage-ok{background:#1D9E75}
+.stage-pending{background:#D3D1C7}
+.stage-active{background:#EF9F27}
+.stage-error{background:#E24B4A}
+.stage-name{color:#5F5E5A;width:55px;flex-shrink:0}
+.stage-ms{color:#B4B2A9;margin-left:auto}
+.stage-detail{color:#888780}
+.upload-summary{margin-top:8px;padding:8px 10px;background:#f8f7f4;border-radius:6px;font-size:11px;color:#5F5E5A;display:flex;gap:14px}
+.sum-item{display:flex;flex-direction:column;align-items:center;gap:1px}
+.sum-val{font-size:14px;font-weight:600;color:#1a1a18}
+.sum-lbl{font-size:9px;color:#B4B2A9;text-transform:uppercase}
+
+/* ── Detail panel ── */
+.detail{background:#fff;border-left:1px solid #e5e4df;display:flex;flex-direction:column;overflow:hidden}
+.detail-header{padding:14px 16px;border-bottom:1px solid #e5e4df;display:flex;align-items:flex-start;justify-content:space-between;flex-shrink:0}
+.detail-title{font-size:14px;font-weight:600}
+.detail-std{font-size:11px;color:#888780;margin-top:2px}
+.btn-close{background:none;border:none;cursor:pointer;color:#B4B2A9;padding:2px;font-size:16px;line-height:1;border-radius:4px}
+.btn-close:hover{background:#f8f7f4;color:#1a1a18}
+.detail-body{flex:1;overflow-y:auto;padding:16px}
+.dl{margin-bottom:16px}
+.dl-label{font-size:10px;font-weight:600;color:#B4B2A9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px}
+.dl-value{font-size:13px;color:#1a1a18;line-height:1.6}
+.dl-value.muted{color:#5F5E5A}
+.sys-box{background:#f8f7f4;border:1px solid #e5e4df;border-radius:7px;padding:9px 11px;font-size:12px;color:#5F5E5A;line-height:1.6}
+.sys-diff{color:#A32D2D;font-weight:500}
+.action-wrap{border-top:1px solid #e5e4df;padding:14px 16px;flex-shrink:0}
+.tabs{display:flex;gap:3px;background:#f8f7f4;border-radius:7px;padding:3px;margin-bottom:12px}
+.tab{flex:1;padding:5px;text-align:center;font-size:12px;font-weight:500;border:none;background:none;cursor:pointer;border-radius:5px;color:#888780}
+.tab.active{background:#fff;color:#1a1a18;box-shadow:0 1px 3px rgba(0,0,0,0.07)}
+.form-group{margin-bottom:10px}
+.form-label{font-size:11px;font-weight:500;color:#444441;margin-bottom:3px;display:block}
+.form-select,.form-textarea{width:100%;padding:6px 9px;border:1px solid #e5e4df;border-radius:6px;font-size:12px;background:#fff;color:#1a1a18;font-family:inherit}
+.form-textarea{resize:vertical;min-height:60px}
+.form-select:focus,.form-textarea:focus{outline:none;border-color:#534AB7}
+.btn-confirm{width:100%;padding:8px;background:#534AB7;color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
+.btn-confirm:hover{background:#3C3489}
+.btn-confirm:disabled{opacity:0.5;cursor:not-allowed}
+.btn-override{width:100%;padding:8px;background:#fff;color:#854F0B;border:1px solid #EF9F27;border-radius:7px;font-size:12px;font-weight:500;cursor:pointer}
+.btn-override:hover{background:#FAEEDA}
+.detail-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#D3D1C7;gap:8px;padding:20px}
+.detail-empty i{font-size:32px}
+.detail-empty p{font-size:12px;color:#B4B2A9;text-align:center}
+
+/* ── Shared ── */
+.empty{text-align:center;padding:40px 20px;color:#B4B2A9}
+.empty i{font-size:28px;display:block;margin-bottom:10px;color:#D3D1C7}
+.empty p{font-size:12px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a18;color:#fff;padding:9px 18px;border-radius:7px;font-size:12px;font-weight:500;z-index:999;opacity:0;transition:opacity 0.2s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo">Arion<span>Comply</span></div>
+    <span class="status-dot" id="sdot"></span>
+    <span class="status-text" id="stext">not connected</span>
+  </div>
+  <div class="topbar-right">
+    <input class="topbar-input" id="api-url" type="text" placeholder="API URL" value="http://172.211.244.144:8080">
+    <input class="topbar-input" id="api-key" type="password" placeholder="X-API-Key" value="arion_dev_key_2026" style="width:160px">
+    <button class="btn-sm btn-primary" onclick="connect()">Connect</button>
+  </div>
+</div>
+
+<div class="app">
+
+  <!-- ── Sidebar ── -->
+  <div class="sidebar">
+    <div class="nav-section">Workspace</div>
+    <button class="nav-item active" id="nav-queue" onclick="setMode('queue')">
+      <i class="ti ti-clipboard-check" aria-hidden="true"></i> Review queue
+      <span class="nav-badge" id="nb-queue">—</span>
+    </button>
+    <button class="nav-item" id="nav-chat" onclick="setMode('chat')">
+      <i class="ti ti-message-2" aria-hidden="true"></i> Chat
+    </button>
+    <button class="nav-item" id="nav-docs" onclick="setMode('docs')">
+      <i class="ti ti-cloud-upload" aria-hidden="true"></i> Documents
+    </button>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="filter-group" id="queue-filters">
+      <div class="filter-label">Finding</div>
+      <button class="filter-item active" id="ff-all" onclick="setFilter('all')">
+        <span class="fdot fdot-all"></span> All <span class="fcount" id="fc-all">—</span>
+      </button>
+      <button class="filter-item" id="ff-NC" onclick="setFilter('NC')">
+        <span class="fdot fdot-nc"></span> NC <span class="fcount" id="fc-NC">—</span>
+      </button>
+      <button class="filter-item" id="ff-OFI" onclick="setFilter('OFI')">
+        <span class="fdot fdot-ofi"></span> OFI <span class="fcount" id="fc-OFI">—</span>
+      </button>
+      <button class="filter-item" id="ff-Comply" onclick="setFilter('Comply')">
+        <span class="fdot fdot-comply"></span> Comply <span class="fcount" id="fc-Comply">—</span>
+      </button>
+
+      <div class="filter-label" style="margin-top:6px">Source</div>
+      <button class="filter-item active" id="fs-all" onclick="setSource('all')">
+        <i class="ti ti-list" style="font-size:12px" aria-hidden="true"></i> All
+      </button>
+      <button class="filter-item" id="fs-assessor" onclick="setSource('assessor')">
+        <i class="ti ti-user-check" style="font-size:12px" aria-hidden="true"></i> Assessor
+      </button>
+      <button class="filter-item" id="fs-document" onclick="setSource('document')">
+        <i class="ti ti-file-text" style="font-size:12px" aria-hidden="true"></i> Document
+      </button>
+      <button class="filter-item" id="fs-workbook" onclick="setSource('workbook')">
+        <i class="ti ti-table" style="font-size:12px" aria-hidden="true"></i> Workbook
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Main panel ── -->
+  <div class="main">
+
+    <!-- Queue toolbar -->
+    <div class="main-toolbar" id="toolbar-queue">
+      <div>
+        <div class="main-title" id="queue-title">Review queue</div>
+        <div class="main-sub" id="queue-sub">—</div>
+      </div>
+      <button class="btn-sm btn-outline" onclick="loadQueue()">
+        <i class="ti ti-refresh" aria-hidden="true"></i> Refresh
+      </button>
+    </div>
+
+    <!-- Chat toolbar -->
+    <div class="main-toolbar" id="toolbar-chat" style="display:none">
+      <div>
+        <div class="main-title">Compliance chat</div>
+        <div class="main-sub">Ask questions about your compliance posture</div>
+      </div>
+      <button class="btn-sm btn-outline" onclick="clearChat()">
+        <i class="ti ti-trash" aria-hidden="true"></i> Clear
+      </button>
+    </div>
+
+    <!-- Docs toolbar -->
+    <div class="main-toolbar" id="toolbar-docs" style="display:none">
+      <div>
+        <div class="main-title">Document intake</div>
+        <div class="main-sub">Upload policies, procedures, and evidence documents</div>
+      </div>
+    </div>
+
+    <!-- Queue body -->
+    <div class="main-body" id="body-queue">
+      <div class="empty"><i class="ti ti-plug-connected-x" aria-hidden="true"></i><p>Connect to load the review queue</p></div>
+    </div>
+
+    <!-- Chat body -->
+    <div class="main-body" id="body-chat" style="display:none;padding:0;overflow:hidden">
+      <div class="chat-wrap">
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-empty" id="chat-empty">
+            <i class="ti ti-message-2" aria-hidden="true"></i>
+            <p>Ask a compliance question</p>
+          </div>
+        </div>
+        <div class="chat-suggestions" id="chat-suggestions">
+          <button class="suggest-btn" onclick="sendSuggestion('what are our NC findings?')">NC findings</button>
+          <button class="suggest-btn" onclick="sendSuggestion('what are our main compliance gaps?')">Compliance gaps</button>
+          <button class="suggest-btn" onclick="sendSuggestion('are we GDPR compliant?')">GDPR status</button>
+          <button class="suggest-btn" onclick="sendSuggestion('what is our ISO 27001 posture?')">ISO posture</button>
+          <button class="suggest-btn" onclick="sendSuggestion('show me our OFI findings')">OFI findings</button>
+        </div>
+        <div class="chat-input-wrap">
+          <div class="chat-input-row">
+            <textarea class="chat-textarea" id="chat-input" placeholder="Ask a compliance question..." rows="1"
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>
+            <button class="btn-send" id="btn-send" onclick="sendChat()">
+              <i class="ti ti-send" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Docs body -->
+    <div class="main-body" id="body-docs" style="display:none">
+      <div class="docs-wrap">
+        <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()"
+          ondragover="event.preventDefault();this.classList.add('drag-over')"
+          ondragleave="this.classList.remove('drag-over')"
+          ondrop="handleDrop(event)">
+          <i class="ti ti-cloud-upload" aria-hidden="true"></i>
+          <p>Drop a document here or click to browse</p>
+          <span>Supported: .pdf .docx .xlsx .csv .txt .md — max 50MB</span>
+          <input type="file" id="file-input" accept=".pdf,.docx,.doc,.xlsx,.xls,.txt,.csv,.md"
+            onchange="handleFileSelect(event)">
+        </div>
+        <div class="upload-list" id="upload-list"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Detail panel ── -->
+  <div class="detail" id="detail-panel">
+    <div class="detail-empty" id="detail-empty">
+      <i class="ti ti-hand-click" aria-hidden="true"></i>
+      <p>Select a control from the queue to review and confirm</p>
+    </div>
+    <div id="detail-content" style="display:none;flex-direction:column;height:100%">
+      <div class="detail-header">
+        <div>
+          <div class="detail-title" id="dp-ref">—</div>
+          <div class="detail-std" id="dp-std">—</div>
+        </div>
+        <button class="btn-close" onclick="closeDetail()" aria-label="Close"><i class="ti ti-x"></i></button>
+      </div>
+      <div class="detail-body">
+        <div class="dl">
+          <div class="dl-label">Finding</div>
+          <div id="dp-finding"></div>
+        </div>
+        <div class="dl" id="dp-sys-wrap">
+          <div class="dl-label">System proposed</div>
+          <div class="sys-box" id="dp-sys"></div>
+        </div>
+        <div class="dl">
+          <div class="dl-label">Gap description</div>
+          <div class="dl-value" id="dp-gap">—</div>
+        </div>
+        <div class="dl">
+          <div class="dl-label">Details</div>
+          <div class="dl-value muted" id="dp-meta">—</div>
+        </div>
+      </div>
+      <div class="action-wrap">
+        <div class="tabs">
+          <button class="tab active" id="tab-confirm" onclick="setTab('confirm')">Confirm</button>
+          <button class="tab" id="tab-override" onclick="setTab('override')">Override</button>
+        </div>
+        <div id="body-confirm">
+          <div class="form-group">
+            <label class="form-label">Reason (optional)</label>
+            <textarea class="form-textarea" id="confirm-reason" placeholder="Note for audit trail..."></textarea>
+          </div>
+          <button class="btn-confirm" id="btn-confirm" onclick="doConfirm()">
+            <i class="ti ti-check" aria-hidden="true"></i> Confirm finding
+          </button>
+        </div>
+        <div id="body-override" style="display:none">
+          <div class="form-group">
+            <label class="form-label">Change finding to</label>
+            <select class="form-select" id="ov-finding">
+              <option value="NC">NC — Non-conformity</option>
+              <option value="OFI">OFI — Opportunity for improvement</option>
+              <option value="Comply">Comply</option>
+              <option value="N/A">N/A — Not applicable</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Updated gap description</label>
+            <textarea class="form-textarea" id="ov-gap" placeholder="Updated assessment..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Reason for override</label>
+            <textarea class="form-textarea" id="ov-reason" placeholder="Why are you changing this?"></textarea>
+          </div>
+          <button class="btn-override" onclick="doOverride()">
+            <i class="ti ti-edit" aria-hidden="true"></i> Override finding
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let API_URL = document.getElementById('api-url').value;
+let API_KEY = document.getElementById('api-key').value;
+let mode = 'queue';
+let qFilter = 'all', qSource = 'all', qPage = 0;
+const PAGE = 20;
+let qTotal = 0;
+let selected = null;
+let chatHistory = [];
+let uploads = {};
+
+function connect() {
+  API_URL = document.getElementById('api-url').value.trim();
+  API_KEY = document.getElementById('api-key').value.trim();
+  loadQueue();
+}
+
+async function api(path, opts={}) {
+  const r = await fetch(API_URL + path, {
+    ...opts,
+    headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json', ...(opts.headers||{})}
+  });
+  if (!r.ok) {
+    const e = await r.json().catch(()=>({detail:r.statusText}));
+    throw new Error(e.detail || r.statusText);
+  }
+  return r.json();
+}
+
+async function apiForm(path, formData) {
+  const r = await fetch(API_URL + path, {
+    method: 'POST',
+    headers: {'X-API-Key': API_KEY},
+    body: formData
+  });
+  if (!r.ok) {
+    const e = await r.json().catch(()=>({detail:r.statusText}));
+    throw new Error(e.detail || r.statusText);
+  }
+  return r.json();
+}
+
+// ── Mode switching ──
+function setMode(m) {
+  mode = m;
+  ['queue','chat','docs'].forEach(x => {
+    document.getElementById('nav-'+x).classList.toggle('active', x===m);
+    document.getElementById('toolbar-'+x).style.display = x===m ? '' : 'none';
+    document.getElementById('body-'+x).style.display = x===m ? '' : 'none';
+  });
+  document.getElementById('queue-filters').style.display = m==='queue' ? '' : 'none';
+  if (m === 'queue' && qTotal === 0) loadQueue();
+}
+
+// ── Queue ──
+async function loadQueue() {
+  const body = document.getElementById('body-queue');
+  body.innerHTML = '<div class="empty"><i class="ti ti-loader-2" aria-hidden="true"></i><p>Loading...</p></div>';
+  try {
+    const p = new URLSearchParams({limit:PAGE, offset:qPage*PAGE});
+    if (qFilter !== 'all') p.set('finding', qFilter);
+    if (qSource !== 'all') p.set('source', qSource);
+    const d = await api('/api/v1/review-queue?'+p);
+    qTotal = d.total;
+    setStatus(true);
+    loadCounts();
+    renderQueue(d.controls, d.total);
+  } catch(e) {
+    setStatus(false);
+    body.innerHTML = `<div class="empty"><i class="ti ti-alert-circle" aria-hidden="true"></i><p>${e.message}</p></div>`;
+  }
+}
+
+async function loadCounts() {
+  try {
+    const all = await api('/api/v1/review-queue?limit=1');
+    document.getElementById('fc-all').textContent = all.total;
+    document.getElementById('nb-queue').textContent = all.total;
+    for (const f of ['NC','OFI','Comply']) {
+      const d = await api(`/api/v1/review-queue?finding=${f}&limit=1`);
+      document.getElementById('fc-'+f).textContent = d.total;
+    }
+  } catch(e) {}
+}
+
+function pill(finding) {
+  const m = {NC:'p-nc',OFI:'p-ofi',Comply:'p-comply','N/A':'p-na'};
+  return `<span class="pill ${m[finding]||'p-na'}">${finding}</span>`;
+}
+
+function renderQueue(controls, total) {
+  const body = document.getElementById('body-queue');
+  const fl = qFilter==='all'?'All findings':qFilter;
+  const sl = qSource==='all'?'':` · ${qSource}`;
+  document.getElementById('queue-title').textContent = fl + sl;
+  document.getElementById('queue-sub').textContent = `${total} control${total!==1?'s':''} pending review`;
+
+  if (!controls.length) {
+    body.innerHTML = '<div class="empty"><i class="ti ti-circle-check" aria-hidden="true"></i><p>No controls match this filter</p></div>';
+    return;
+  }
+
+  let html = '<div class="queue-list">';
+  for (const c of controls) {
+    const conflict = c.system_finding && c.system_finding !== c.finding;
+    const hours = Math.round(c.hours_in_draft);
+    const warn = hours > 72;
+    const safe = JSON.stringify(c).replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    html += `
+      <div class="qcard${selected?.id===c.id?' active':''}" onclick='selectControl(${safe})'>
+        <div class="qcard-top">
+          <div>
+            <div class="qcard-ref">${c.control_ref}</div>
+            <div class="qcard-std">${c.standard_id}</div>
+          </div>
+          <div class="qcard-pills">
+            ${conflict?'<span class="conflict-pill"><i class="ti ti-alert-triangle" aria-hidden="true"></i> conflict</span>':''}
+            ${pill(c.finding)}
+            <span class="pill p-src">${c.source}</span>
+          </div>
+        </div>
+        <div class="qcard-gap">${c.gap_description||'—'}</div>
+        <div class="qcard-meta">
+          <span class="${warn?'hours-warn':''}"><i class="ti ti-clock" aria-hidden="true"></i> ${hours}h</span>
+          <span><i class="ti ti-shield-check" aria-hidden="true"></i> ${c.confidence||'—'}</span>
+          ${c.previously_overridden?'<span><i class="ti ti-history" aria-hidden="true"></i> prev. overridden</span>':''}
+        </div>
+      </div>`;
+  }
+  html += '</div>';
+
+  if (total > PAGE) {
+    const s = qPage*PAGE+1, e2 = Math.min((qPage+1)*PAGE, total);
+    html += `<div class="pagination">
+      <span class="pag-info">${s}–${e2} of ${total}</span>
+      <div class="pag-btns">
+        <button class="btn-page" onclick="changePage(-1)" ${qPage===0?'disabled':''}>Prev</button>
+        <button class="btn-page" onclick="changePage(1)" ${e2>=total?'disabled':''}>Next</button>
+      </div>
+    </div>`;
+  }
+
+  body.innerHTML = html;
+}
+
+function selectControl(c) {
+  selected = c;
+  document.getElementById('detail-empty').style.display = 'none';
+  const dc = document.getElementById('detail-content');
+  dc.style.display = 'flex';
+
+  document.getElementById('dp-ref').textContent = c.control_ref;
+  document.getElementById('dp-std').textContent = c.standard_id;
+  document.getElementById('dp-finding').innerHTML =
+    pill(c.finding) + ` <span class="pill p-src">${c.source}</span>` +
+    (c.confidence ? ` <span style="font-size:10px;color:#B4B2A9">${c.confidence}</span>` : '');
+
+  const sysWrap = document.getElementById('dp-sys-wrap');
+  if (c.system_finding) {
+    sysWrap.style.display = '';
+    const diff = c.system_finding !== c.finding;
+    document.getElementById('dp-sys').innerHTML =
+      (diff ? `<span class="sys-diff">${c.system_finding}</span> → <strong>${c.finding}</strong>` : c.system_finding) +
+      (c.system_gap ? `<br>${c.system_gap}` : '') +
+      (c.system_proposed_at ? `<br><span style="color:#D3D1C7;font-size:10px">${new Date(c.system_proposed_at).toLocaleDateString()}</span>` : '');
+  } else {
+    sysWrap.style.display = 'none';
+  }
+
+  document.getElementById('dp-gap').textContent = c.gap_description || '—';
+  document.getElementById('dp-meta').innerHTML =
+    `${Math.round(c.hours_in_draft)}h in draft` +
+    (c.previously_overridden ? ' · previously overridden' : '') +
+    (c.confirmation_status !== 'draft' ? ` · <strong>${c.confirmation_status}</strong>` : '');
+
+  document.getElementById('ov-finding').value = c.finding;
+  document.getElementById('ov-gap').value = c.gap_description || '';
+  document.getElementById('confirm-reason').value = '';
+  document.getElementById('ov-reason').value = '';
+  setTab('confirm');
+
+  document.querySelectorAll('.qcard').forEach(el => el.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+function closeDetail() {
+  selected = null;
+  document.getElementById('detail-empty').style.display = '';
+  document.getElementById('detail-content').style.display = 'none';
+  document.querySelectorAll('.qcard').forEach(el => el.classList.remove('active'));
+}
+
+function setTab(t) {
+  document.getElementById('body-confirm').style.display = t==='confirm'?'':'none';
+  document.getElementById('body-override').style.display = t==='override'?'':'none';
+  document.getElementById('tab-confirm').classList.toggle('active', t==='confirm');
+  document.getElementById('tab-override').classList.toggle('active', t==='override');
+}
+
+async function doConfirm() {
+  if (!selected) return;
+  const btn = document.getElementById('btn-confirm');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader-2" aria-hidden="true"></i> Confirming...';
+  try {
+    await api(`/api/v1/posture/${selected.id}/confirm`, {
+      method:'POST', body:JSON.stringify({reason:document.getElementById('confirm-reason').value})
+    });
+    toast(`✓ ${selected.control_ref} confirmed`);
+    closeDetail(); qPage=0; await loadQueue();
+  } catch(e) { toast(`Error: ${e.message}`); }
+  finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> Confirm finding';
+  }
+}
+
+async function doOverride() {
+  if (!selected) return;
+  try {
+    await api(`/api/v1/posture/${selected.id}/override`, {
+      method:'POST', body:JSON.stringify({
+        finding: document.getElementById('ov-finding').value,
+        gap_description: document.getElementById('ov-gap').value,
+        reason: document.getElementById('ov-reason').value
+      })
+    });
+    toast(`✓ ${selected.control_ref} overridden`);
+    closeDetail(); qPage=0; await loadQueue();
+  } catch(e) { toast(`Error: ${e.message}`); }
+}
+
+function setFilter(f) {
+  qFilter = f; qPage = 0;
+  document.querySelectorAll('[id^="ff-"]').forEach(el=>el.classList.remove('active'));
+  document.getElementById('ff-'+f).classList.add('active');
+  loadQueue();
+}
+
+function setSource(s) {
+  qSource = s; qPage = 0;
+  document.querySelectorAll('[id^="fs-"]').forEach(el=>el.classList.remove('active'));
+  document.getElementById('fs-'+s).classList.add('active');
+  loadQueue();
+}
+
+function changePage(d) { qPage += d; loadQueue(); }
+
+// ── Chat ──
+function appendMsg(role, text, refs, ms) {
+  const empty = document.getElementById('chat-empty');
+  if (empty) empty.remove();
+  const sugg = document.getElementById('chat-suggestions');
+  if (sugg) sugg.style.display = 'none';
+
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = `msg msg-${role}`;
+
+  if (role === 'user') {
+    div.innerHTML = `<div class="msg-bubble">${text}</div>`;
+  } else if (role === 'clarification') {
+    div.className = 'msg msg-assistant msg-clarification';
+    // Parse options (a), (b), (c) from clarification text
+    const lines = text.split('\n');
+    const intro = lines.filter(l => !l.match(/^\s*\([a-c]\)/)).join(' ').trim();
+    const options = lines.filter(l => l.match(/^\s*\([a-c]\)/));
+    let inner = `<div class="msg-bubble">`;
+    inner += `<div class="clarif-label"><i class="ti ti-help-circle"></i> Clarification needed</div>`;
+    inner += `<div>${intro.replace(/\n/g,'<br>')}</div>`;
+    if (options.length) {
+      inner += `<div class="clarif-options">`;
+      options.forEach(opt => {
+        const clean = opt.trim();
+        inner += `<button class="clarif-opt" onclick="sendClarification('${clean.replace(/'/g,"\'")}')">
+          ${clean}
+        </button>`;
+      });
+      inner += `</div>`;
+    }
+    inner += `</div>`;
+    if (ms) inner += `<div class="msg-meta">${(ms/1000).toFixed(1)}s</div>`;
+    div.innerHTML = inner;
+  } else {
+    let inner = `<div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div>`;
+    if (refs && refs.length) {
+      inner += `<div class="msg-refs">${refs.map(r=>`<span class="ref-tag">${r}</span>`).join('')}</div>`;
+    }
+    if (ms) inner += `<div class="msg-meta">${(ms/1000).toFixed(1)}s</div>`;
+    div.innerHTML = inner;
+  }
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg msg-assistant';
+  div.id = 'typing';
+  div.innerHTML = `<div class="typing-indicator">
+    <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+  </div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const q = input.value.trim();
+  if (!q) return;
+  input.value = '';
+  input.style.height = '';
+
+  appendMsg('user', q);
+  chatHistory.push({role:'user', content:q});
+  showTyping();
+
+  const btn = document.getElementById('btn-send');
+  btn.disabled = true;
+
+  try {
+    const sid = 'ui_' + (window._sessionId || (window._sessionId = Date.now().toString(36)));
+    const d = await api('/api/v1/chat', {
+      method:'POST',
+      body:JSON.stringify({question:q, session_id:sid})
+    });
+    removeTyping();
+    const msgRole = d.type === 'clarification' ? 'clarification' : 'assistant';
+    appendMsg(msgRole, d.answer || '(no answer)', d.refs, d.latency_ms);
+    chatHistory.push({role:'assistant', content:d.answer});
+  } catch(e) {
+    removeTyping();
+    appendMsg('assistant', `Error: ${e.message}`, [], 0);
+  } finally {
+    btn.disabled = false;
+    input.focus();
+  }
+}
+
+function sendSuggestion(q) {
+  document.getElementById('chat-input').value = q;
+  sendChat();
+}
+
+function sendClarification(option) {
+  // User clicked a clarification option — send it as a message
+  document.getElementById('chat-input').value = option;
+  sendChat();
+}
+
+function clearChat() {
+  chatHistory = [];
+  window._sessionId = Date.now().toString(36);
+  document.getElementById('chat-messages').innerHTML = `
+    <div class="chat-empty" id="chat-empty">
+      <i class="ti ti-message-2" aria-hidden="true"></i>
+      <p>Ask a compliance question</p>
+    </div>`;
+  document.getElementById('chat-suggestions').style.display = '';
+}
+
+// ── Documents ──
+function handleFileSelect(e) {
+  const file = e.target.files[0];
+  if (file) uploadFile(file);
+  e.target.value = '';
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) uploadFile(file);
+}
+
+async function uploadFile(file) {
+  const uploadId = 'tmp_' + Date.now();
+  const card = addUploadCard(uploadId, file.name, file.size);
+
+  try {
+    const fd = new FormData();
+    fd.append('file', file);
+    const d = await apiForm('/api/v1/documents/upload', fd);
+    card.dataset.uploadId = d.upload_id;
+    uploads[d.upload_id] = {name:file.name, size:file.size, status:'queued'};
+    updateCardStatus(card, 'processing');
+    pollStatus(d.upload_id, card);
+  } catch(e) {
+    updateCardStatus(card, 'failed', e.message);
+  }
+}
+
+function addUploadCard(id, name, size) {
+  const list = document.getElementById('upload-list');
+  const mb = (size / 1048576).toFixed(2);
+  const div = document.createElement('div');
+  div.className = 'upload-card';
+  div.id = 'uc_' + id;
+  div.innerHTML = `
+    <div class="upload-top">
+      <div class="upload-icon"><i class="ti ti-file-text" aria-hidden="true"></i></div>
+      <div class="upload-info">
+        <div class="upload-name">${name}</div>
+        <div class="upload-size">${mb} MB</div>
+      </div>
+      <span class="upload-status us-queued">Queued</span>
+    </div>
+    <div class="upload-trace" id="trace_${id}">
+      ${['read','enrich','extract','write'].map(s=>`
+        <div class="trace-stage" id="stage_${id}_${s}">
+          <span class="stage-dot stage-pending"></span>
+          <span class="stage-name">${s}</span>
+          <span class="stage-detail">—</span>
+          <span class="stage-ms"></span>
+        </div>`).join('')}
+    </div>`;
+  list.prepend(div);
+  return div;
+}
+
+async function pollStatus(uploadId, card) {
+  const stages = ['read','enrich','extract','write'];
+  let completed = false;
+  let attempts = 0;
+
+  while (!completed && attempts < 60) {
+    await new Promise(r => setTimeout(r, 2000));
+    attempts++;
+    try {
+      const d = await api(`/api/v1/documents/${uploadId}/status`);
+      const cardId = card.id.replace('uc_','');
+
+      if (d.status === 'completed') {
+        completed = true;
+        updateCardStatus(card, 'completed');
+        stages.forEach(s => {
+          const el = document.getElementById(`stage_${cardId}_${s}`);
+          if (el) {
+            el.querySelector('.stage-dot').className = 'stage-dot stage-ok';
+            el.querySelector('.stage-detail').textContent = stageDetail(s, d);
+            if (s==='extract' && d.total_ms) el.querySelector('.stage-ms').textContent = `${d.total_ms}ms total`;
+          }
+        });
+        addUploadSummary(card, cardId, d);
+        toast(`✓ ${d.filename} processed — ${d.findings_written||0} findings`);
+        loadCounts();
+      } else if (d.status === 'failed') {
+        completed = true;
+        updateCardStatus(card, 'failed', d.error_type);
+        const el = document.getElementById(`stage_${cardId}_write`);
+        if (el) el.querySelector('.stage-dot').className = 'stage-dot stage-error';
+      } else {
+        updateCardStatus(card, 'processing');
+      }
+    } catch(e) {}
+  }
+}
+
+function stageDetail(stage, d) {
+  if (stage==='read') return d.token_estimate ? `~${d.token_estimate} tokens` : '—';
+  if (stage==='enrich') return d.doc_type || '—';
+  if (stage==='extract') return d.findings_written!=null ? `${d.findings_written} findings` : '—';
+  if (stage==='write') return d.posture_created!=null ?
+    `+${d.posture_created} created, ${d.posture_updated||0} updated, ${d.posture_skipped||0} skipped` : '—';
+  return '—';
+}
+
+function addUploadSummary(card, id, d) {
+  const existing = card.querySelector('.upload-summary');
+  if (existing) existing.remove();
+  const div = document.createElement('div');
+  div.className = 'upload-summary';
+  div.innerHTML = `
+    <div class="sum-item"><span class="sum-val">${d.findings_written||0}</span><span class="sum-lbl">Findings</span></div>
+    <div class="sum-item"><span class="sum-val">${d.posture_created||0}</span><span class="sum-lbl">Created</span></div>
+    <div class="sum-item"><span class="sum-val">${d.posture_updated||0}</span><span class="sum-lbl">Updated</span></div>
+    <div class="sum-item"><span class="sum-val">${d.posture_skipped||0}</span><span class="sum-lbl">Skipped</span></div>
+    <div class="sum-item"><span class="sum-val">${d.total_ms!=null?Math.round(d.total_ms/1000)+'s':'—'}</span><span class="sum-lbl">Duration</span></div>`;
+  card.appendChild(div);
+}
+
+function updateCardStatus(card, status, detail='') {
+  const el = card.querySelector('.upload-status');
+  el.className = `upload-status us-${status}`;
+  const labels = {queued:'Queued',processing:'Processing...',completed:'Complete',failed:'Failed'};
+  el.textContent = detail ? `Failed: ${detail.slice(0,30)}` : labels[status];
+}
+
+// ── Shared ──
+function setStatus(ok) {
+  document.getElementById('sdot').className = 'status-dot ' + (ok?'ok':'err');
+  document.getElementById('stext').textContent = ok ? 'connected' : 'disconnected';
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+connect();
+</script>
+</body>
+</html>

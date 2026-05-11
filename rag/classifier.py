@@ -666,6 +666,14 @@ CLEAR_INTENT_PHRASES = [
     (re.compile(r'\bexplain\s+(?:what\s+)?(?:NC|OFI|ISMS|DPIA|DPA|a\s+control|an\s+article)\b', re.IGNORECASE),
      "definition", []),
 
+    # Evidence / record-keeping queries — map to document_content
+    (re.compile(r'\bevidence\s+(?:do\s+(?:i|we)\s+need|to\s+keep|required|needed)\b', re.IGNORECASE),
+     "document_content", []),
+    (re.compile(r'\bwhat\s+records?\s+(?:do\s+(?:i|we)\s+need|(?:must|should)\s+(?:i|we)\s+keep|are\s+required)\b', re.IGNORECASE),
+     "document_content", []),
+    (re.compile(r'\bwhat\s+(?:audit\s+)?evidence\s+(?:is\s+required|do\s+we\s+need|should\s+we\s+have)\b', re.IGNORECASE),
+     "document_content", []),
+
     # Document content queries — bypass clarification, go direct
     (re.compile(r'\bwhat\s+(?:must|should)\s+our\s+\w+\s+policy\s+(?:include|contain)\b', re.IGNORECASE),
      "document_content", []),

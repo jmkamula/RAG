@@ -425,6 +425,12 @@ async def chat(
         answer     = result.get("answer_text", "") or result.get("answer", "")
         qtype      = result.get("question_type")
         refs       = result.get("cited_refs", [])
+
+        # When pipeline needs clarification, surface the question to the user
+        if not answer and result.get("needs_clarif") and result.get("clarif_question"):
+            answer = result.get("clarif_question", "")
+            qtype  = "clarification"
+            refs   = []
         latency_ms = int((time.time() - t_start) * 1000)
 
         if hasattr(qtype, "value"):
