@@ -781,23 +781,11 @@ def build_arion_graph(
 def get_checkpointer(db_path: str = None):
     """
     Get the appropriate checkpointer for the current environment.
-
-    Uses SESSIONS_DATABASE_URL (arioncomply_sessions) — separate from
-    COMPLIANCE_DATABASE_URL (arioncomply_compliance) by design:
-      - compliance: 7-year retention, audit-critical
-      - sessions:   90-day retention, reconstructible, purge-safe
-
-    Priority:
-      1. SESSIONS_DATABASE_URL → PostgresSaver (arioncomply_sessions)
-      2. DATABASE_URL fallback  → PostgresSaver (dev convenience)
-      3. Neither set            → SqliteSaver at ~/.arioncomply/sessions.db
-
-    Setup: psql arioncomply_sessions < db/schema_sessions.sql
+    Uses psycopg v3 for PostgresSaver, InMemorySaver as fallback.
     """
     import logging
     _log = logging.getLogger(__name__)
 
-    # Sessions DB has its own URL — keeps compliance and session data separate
     sessions_url = (
         os.getenv("SESSIONS_DATABASE_URL") or
         os.getenv("DATABASE_URL", "").replace(
@@ -807,30 +795,19 @@ def get_checkpointer(db_path: str = None):
 
     if sessions_url and "arioncomply" in sessions_url:
         try:
+            import psycopg
             from langgraph.checkpoint.postgres import PostgresSaver
-            conn = __import__('psycopg2').connect(sessions_url)
+            conn = psycopg.connect(sessions_url)
             saver = PostgresSaver(conn)
             saver.setup()
             _log.info(f"Checkpointer: PostgresSaver ({sessions_url.split('@')[-1]})")
             return saver
-        except ImportError:
-            _log.warning(
-                "langgraph-checkpoint-postgres not installed — falling back to SQLite. "
-                "Install: pip install langgraph-checkpoint-postgres"
-            )
         except Exception as _e:
-            _log.warning(f"PostgresSaver failed ({_e}) — falling back to SQLite")
+            _log.warning(f"PostgresSaver failed ({_e}) — falling back to InMemorySaver")
 
-    # SQLite fallback
-    if db_path is None:
-        home   = os.path.expanduser("~")
-        db_dir = os.path.join(home, ".arioncomply")
-        os.makedirs(db_dir, exist_ok=True)
-        db_path = os.path.join(db_dir, "sessions.db")
-
-    from langgraph.checkpoint.sqlite import SqliteSaver
-    _log.info(f"Checkpointer: SqliteSaver ({db_path})")
-    return SqliteSaver.from_conn_string(db_path)
+    from langgraph.checkpoint.memory import InMemorySaver
+    _log.info("Checkpointer: InMemorySaver (sessions persist for process lifetime)")
+    return InMemorySaver()
 
 def _is_scope_na_query(query: str) -> bool:
     """True for physical security or software dev queries — N/A for Arion."""
@@ -1316,56 +1293,3 @@ def build_arion_graph(
 
 # ── Convenience: get default checkpointer ───────────────────────────────────
 
-def get_checkpointer(db_path: str = None):
-    """
-    Get the appropriate checkpointer for the current environment.
-
-    Uses SESSIONS_DATABASE_URL (arioncomply_sessions) — separate from
-    COMPLIANCE_DATABASE_URL (arioncomply_compliance) by design:
-      - compliance: 7-year retention, audit-critical
-      - sessions:   90-day retention, reconstructible, purge-safe
-
-    Priority:
-      1. SESSIONS_DATABASE_URL → PostgresSaver (arioncomply_sessions)
-      2. DATABASE_URL fallback  → PostgresSaver (dev convenience)
-      3. Neither set            → SqliteSaver at ~/.arioncomply/sessions.db
-
-    Setup: psql arioncomply_sessions < db/schema_sessions.sql
-    """
-    import logging
-    _log = logging.getLogger(__name__)
-
-    # Sessions DB has its own URL — keeps compliance and session data separate
-    sessions_url = (
-        os.getenv("SESSIONS_DATABASE_URL") or
-        os.getenv("DATABASE_URL", "").replace(
-            "arioncomply_compliance", "arioncomply_sessions"
-        )
-    )
-
-    if sessions_url and "arioncomply" in sessions_url:
-        try:
-            from langgraph.checkpoint.postgres import PostgresSaver
-            conn = __import__('psycopg2').connect(sessions_url)
-            saver = PostgresSaver(conn)
-            saver.setup()
-            _log.info(f"Checkpointer: PostgresSaver ({sessions_url.split('@')[-1]})")
-            return saver
-        except ImportError:
-            _log.warning(
-                "langgraph-checkpoint-postgres not installed — falling back to SQLite. "
-                "Install: pip install langgraph-checkpoint-postgres"
-            )
-        except Exception as _e:
-            _log.warning(f"PostgresSaver failed ({_e}) — falling back to SQLite")
-
-    # SQLite fallback
-    if db_path is None:
-        home   = os.path.expanduser("~")
-        db_dir = os.path.join(home, ".arioncomply")
-        os.makedirs(db_dir, exist_ok=True)
-        db_path = os.path.join(db_dir, "sessions.db")
-
-    from langgraph.checkpoint.sqlite import SqliteSaver
-    _log.info(f"Checkpointer: SqliteSaver ({db_path})")
-    return SqliteSaver.from_conn_string(db_path)

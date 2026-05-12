@@ -118,7 +118,7 @@ async def lifespan(app: FastAPI):
         from rag.llm_answer        import LLMAnswer
         from rag.classifier        import QueryClassifier
         from vector.retriever      import VectorRetriever
-        from langgraph.checkpoint.memory import InMemorySaver
+        from rag.arion_graph import get_checkpointer
 
         cfg       = OrchestratorConfig()
         retriever = VectorRetriever(
@@ -149,7 +149,7 @@ async def lifespan(app: FastAPI):
                 retriever      = retriever,
             ),
             posture       = posture,
-            checkpointer  = InMemorySaver(),
+            checkpointer  = get_checkpointer(),
         )
         app.state.retriever     = retriever
         app.state.expander      = expander
@@ -403,7 +403,11 @@ async def chat(
 
     t_start    = time.time()
     trace_id   = request.state.trace_id
+    # Prefix thread_id with tenant_id — prevents cross-tenant session collision
     session_id = body.session_id or f"api_{uuid.uuid4().hex[:8]}"
+    # Prefix with tenant_id — prevents cross-tenant session collision
+    thread_id  = f"{key_info.tenant_id[:8]}:{session_id}"
+    thread_id  = f"{key_info.tenant_id[:8]}:{session_id}"
 
     # Refresh tenant context (cached, TTL=60s)
     try:
@@ -415,7 +419,7 @@ async def chat(
         tenant = None
 
     try:
-        cfg    = {"configurable": {"thread_id": session_id}}
+        cfg    = {"configurable": {"thread_id": thread_id}}
         state  = make_initial_state(tenant, query=body.question)
         result = await asyncio.get_event_loop().run_in_executor(
             None,
