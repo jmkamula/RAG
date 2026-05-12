@@ -640,8 +640,11 @@ class Resolver:
         v_results = self._retriever.search(req.query, n=10, standards=req.standards)
         vector_ms = int((time.time() - vector_t0) * 1000)
 
-        vector_ids = [r.node_id for r in v_results.results[:6] if r.node_id not in posture_node_ids]
-        node_ids   = posture_node_ids + vector_ids
+        # Limit vector_ids to 4 (was 6) to leave budget room for xfw GDPR nodes
+        # The graph expander adds xfw nodes on top of these — budget=14 handles both
+        # Limit to top 3 posture + top 3 vector - preserves budget for xfw GDPR nodes
+        vector_ids = [r.node_id for r in v_results.results[:3] if r.node_id not in posture_node_ids]
+        node_ids   = posture_node_ids[:3] + vector_ids
 
         if node_ids:
             neo4j_t0b = time.time()

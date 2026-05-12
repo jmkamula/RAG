@@ -336,8 +336,18 @@ SELECTION ORDER:
 1. NC nodes relevant to the query (always include)
 2. OFI nodes relevant to the query
 3. Nodes whose obligation directly addresses the query
-4. Cross-framework controls that implement a selected obligation
+4. Cross-framework nodes that implement the same obligation (GDPR, ISO 27701, NIS2 etc) — include these alongside primary nodes, not as an afterthought
 5. Comply nodes with relevant evidence
+
+CROSS-FRAMEWORK RULE: When a query topic has nodes from multiple standards (e.g. ISO 27001 A.5.15 AND GDPR Art.32 both address access control security), select nodes from ALL relevant standards. A complete answer addresses the full regulatory picture.
+For Arion Networks: ISO 27001 is the primary framework. ISO 27701 maps to GDPR. Always include relevant cross-framework nodes when they exist in the node list.
+
+CROSS-FRAMEWORK GUARDRAILS:
+- Only cite a GDPR article if it has a direct, material relationship to the query topic. Do not cite GDPR articles merely because they appear in the node list.
+- A direct relationship means: the ISO control explicitly implements or supports that GDPR obligation (e.g. A.5.18 access rights → Art.32.1.b confidentiality of processing).
+- An indirect or tangential relationship (e.g. Art.5 general principles appearing because of a distant graph traversal) should NOT be cited unless the query explicitly asks about it.
+- FOCUS RULE: For document_content and gap_analysis queries, select ISO posture nodes first (NC, OFI), then add GDPR nodes only where the relationship is direct. Do not pad with loosely related nodes from either standard.
+- SUPPLIER DRIFT: Do not include supplier controls (A.5.19, A.5.20) in access control evidence answers unless the query explicitly mentions suppliers or third parties.
 
 CRITICAL: A node's posture status comes ONLY from its [NC], [OFI], [Comply], or
 [Not yet assessed] tag. If a node has no posture tag, it is unassessed — never
@@ -678,56 +688,113 @@ class LLMAnswer:
         """
         t0 = time.time()
 
-        # ── Format nodes as numbered list ─────────────────────────────────
-        node_list   = [n for n in nodes if not n.is_informational]
-        num_to_node = {}
-        node_lines  = []
+        # ── Infer primary standard from intent and query ──────────────────
+        def _infer_primary_std(intent, query_text, nodes, posture):
+            q = query_text.lower()
+            if "gdpr" in q or "art." in q or "article " in q:
+                return "GDPR:2016/679"
+            if "nis2" in q or "nis 2" in q:
+                return "NIS2"
+            if "soc2" in q or "soc 2" in q:
+                return "SOC2"
+            from rag.classifier import QuestionType
+            if intent and intent.question_type == QuestionType.CROSS_FRAMEWORK:
+                for n in nodes:
+                    if not n.standard_id.startswith("ISO"):
+                        return n.standard_id
+            return "ISO27001:2022"
 
-        for i, node in enumerate(node_list, 1):
+        primary_std = _infer_primary_std(intent, query, nodes, posture)
+
+        # ── Format nodes as two-layer numbered list ────────────────────────
+        node_list          = [n for n in nodes if not n.is_informational]
+        num_to_node        = {}
+        node_lines         = []
+        primary_nodes_list = [n for n in node_list
+                              if n.standard_id == primary_std or n.source != "xfw"]
+        xfw_nodes_list     = [n for n in node_list
+                              if n.source == "xfw" and n.standard_id != primary_std]
+
+        # XFW relationship map: node_id → set of primary refs it links to
+        xfw_rel_map = {}
+        for n in xfw_nodes_list:
+            linked = set()
+            for edge in getattr(n, "xfw_edges", []):
+                if n.node_id == edge.target_id:
+                    linked.add(edge.source_id.split(":")[-1])
+                else:
+                    linked.add(edge.target_id.split(":")[-1])
+            xfw_rel_map[n.node_id] = linked
+
+        node_counter = 0
+
+        # Layer 1 - exclude N/A nodes (out of scope - never show to LLM)
+        primary_nodes_list = [n for n in primary_nodes_list
+                              if (posture or {}).get(n.node_id, {}).get("finding") != "N/A"]
+        node_lines.append(f"\n--- LAYER 1: {_standard_label(primary_std)} OBLIGATION NODES ---")
+        for node in primary_nodes_list:
+            node_counter += 1
+            i = node_counter
             num_to_node[i] = node
-            rec    = (posture or {}).get(node.node_id, {})
+
+            rec            = (posture or {}).get(node.node_id, {})
             finding        = rec.get("finding", "")
             gap            = rec.get("gap_description", "")
             evidence       = rec.get("evidence_text", "")
-            confirm_status = rec.get("confirmation_status")  # None = legacy row
+            confirm_status = rec.get("confirmation_status")
+            confirm_label  = "" if confirm_status in ("confirmed", "overridden") else " [DRAFT]"
 
-            # Confirmation label: DRAFT findings are indicative, not authoritative
-            is_confirmed = confirm_status in ("confirmed", "overridden")
-            is_draft     = confirm_status == "draft" or confirm_status is None
-            confirm_label = "" if is_confirmed else " [DRAFT]"
-
-            posture_tag  = f" [{finding}{confirm_label}]" if finding else " [Not yet assessed]"
+            posture_tag = f" [{finding}{confirm_label}]" if finding else " [Not yet assessed]"
             if finding == "NC":
-                posture_line = f"Posture: ✗ NC{confirm_label} — {gap}\n" if gap else f"Posture: ✗ NC{confirm_label}\n"
+                posture_line = f"Posture: ✗ NC{confirm_label} - {gap}\n" if gap else f"Posture: ✗ NC{confirm_label}\n"
             elif finding == "OFI":
-                posture_line = f"Posture: △ OFI{confirm_label} — {gap}\n" if gap else f"Posture: △ OFI{confirm_label}\n"
+                posture_line = f"Posture: △ OFI{confirm_label} - {gap}\n" if gap else f"Posture: △ OFI{confirm_label}\n"
             elif finding == "Comply":
-                posture_line = f"Posture: ✓ Comply{confirm_label} — {evidence}\n" if evidence else f"Posture: ✓ Comply{confirm_label}\n"
+                posture_line = f"Posture: ✓ Comply{confirm_label} - {evidence}\n" if evidence else f"Posture: ✓ Comply{confirm_label}\n"
             elif finding == "N/A":
-                posture_line = "Posture: — N/A (excluded from scope — DO NOT REPORT AS GAP)\n"
+                posture_line = "Posture: - N/A (excluded from scope - DO NOT REPORT AS GAP)\n"
             else:
                 posture_line = ""
 
-            # Get obligation text from metadata (stored separately from embedding)
-            # Fall back to first 400 chars of document, then title
             obligation = (
                 node.metadata.get("obligation_text", "")
                 or node.metadata.get("business_description", "")
                 or (node.document or "")[:400]
-                or node.title
-                or ""
+                or node.title or ""
             )[:400]
-            node_lines.append(
-                RANK_AND_ANSWER_NODE_TEMPLATE.format(
-                    num            = i,
-                    ref            = node.ref,
-                    standard_label = _standard_label(node.standard_id),
-                    source_type    = "Article" if node.standard_id.startswith("GDPR") else "Control",
-                    posture_tag    = posture_tag,
-                    posture_line   = posture_line,
-                    obligation_text= obligation,
-                )
-            )
+
+            node_lines.append(RANK_AND_ANSWER_NODE_TEMPLATE.format(
+                num=i, ref=node.ref,
+                standard_label=_standard_label(node.standard_id),
+                source_type="Article" if node.standard_id.startswith("GDPR") else "Control",
+                posture_tag=posture_tag, posture_line=posture_line,
+                obligation_text=obligation, xfw_tag="",
+            ))
+
+        # Layer 2
+        if xfw_nodes_list:
+            node_lines.append("\n--- LAYER 2: CROSS-FRAMEWORK NODES ---")
+            for node in xfw_nodes_list:
+                node_counter += 1
+                i = node_counter
+                num_to_node[i] = node
+
+                linked  = xfw_rel_map.get(node.node_id, set())
+                xfw_tag = f" [XFW→ {', '.join(sorted(linked))}]" if linked else " [XFW]"
+                obligation = (
+                    node.metadata.get("obligation_text", "")
+                    or node.metadata.get("business_description", "")
+                    or (node.document or "")[:400]
+                    or node.title or ""
+                )[:400]
+
+                node_lines.append(RANK_AND_ANSWER_NODE_TEMPLATE.format(
+                    num=i, ref=node.ref,
+                    standard_label=_standard_label(node.standard_id),
+                    source_type="Article",
+                    posture_tag=" [Not yet assessed]", posture_line="",
+                    obligation_text=obligation, xfw_tag=xfw_tag,
+                ))
 
         nodes_block = "\n".join(node_lines)
 
@@ -782,12 +849,13 @@ class LLMAnswer:
                         cl_lines.append(f"    - {item.text}")
             checklist_block = "\n".join(cl_lines)
 
+        xfw_summary = f" ({len(xfw_nodes_list)} cross-framework)" if xfw_nodes_list else ""
         user = f"""QUERY: {query}{incident_header}
 
-COMPLIANCE NODES ({len(node_list)} total):
+COMPLIANCE NODES ({len(primary_nodes_list)} primary{xfw_summary}):
 {nodes_block}{checklist_block}
 
-Output the SELECTED: line first, then your answer directly (no headers or labels)."""
+Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directly."""
 
         # ── Single Mistral call ───────────────────────────────────────────
         raw = self._call_llm(

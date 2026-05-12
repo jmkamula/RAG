@@ -118,7 +118,7 @@ async def lifespan(app: FastAPI):
         from rag.llm_answer        import LLMAnswer
         from rag.classifier        import QueryClassifier
         from vector.retriever      import VectorRetriever
-        from langgraph.checkpoint.memory import MemorySaver
+        from langgraph.checkpoint.memory import InMemorySaver
 
         cfg       = OrchestratorConfig()
         retriever = VectorRetriever(
@@ -149,7 +149,7 @@ async def lifespan(app: FastAPI):
                 retriever      = retriever,
             ),
             posture       = posture,
-            checkpointer  = MemorySaver(),
+            checkpointer  = InMemorySaver(),
         )
         app.state.retriever     = retriever
         app.state.expander      = expander

@@ -257,8 +257,14 @@ def make_classify_node(
             }
 
         else:
-            # Follow-up turn
-            intent = classifier.classify_query(query, session, [])
+            # Follow-up turn — build history from graph state for context
+            _history = []
+            if state.get("original_query"):
+                _history.append({"role": "user", "content": state["original_query"]})
+            if state.get("answer_text"):
+                _history.append({"role": "assistant", "content": state["answer_text"][:400]})
+            _history.append({"role": "user", "content": query})
+            intent = classifier.classify_query(query, session, _history)
             if intent.clarification_question:
                 count = state["clarif_count"] + 1
                 if count >= 2:
@@ -802,7 +808,9 @@ def get_checkpointer(db_path: str = None):
     if sessions_url and "arioncomply" in sessions_url:
         try:
             from langgraph.checkpoint.postgres import PostgresSaver
-            saver = PostgresSaver.from_conn_string(sessions_url)
+            conn = __import__('psycopg2').connect(sessions_url)
+            saver = PostgresSaver(conn)
+            saver.setup()
             _log.info(f"Checkpointer: PostgresSaver ({sessions_url.split('@')[-1]})")
             return saver
         except ImportError:
@@ -810,6 +818,8 @@ def get_checkpointer(db_path: str = None):
                 "langgraph-checkpoint-postgres not installed — falling back to SQLite. "
                 "Install: pip install langgraph-checkpoint-postgres"
             )
+        except Exception as _e:
+            _log.warning(f"PostgresSaver failed ({_e}) — falling back to SQLite")
 
     # SQLite fallback
     if db_path is None:
@@ -1336,7 +1346,9 @@ def get_checkpointer(db_path: str = None):
     if sessions_url and "arioncomply" in sessions_url:
         try:
             from langgraph.checkpoint.postgres import PostgresSaver
-            saver = PostgresSaver.from_conn_string(sessions_url)
+            conn = __import__('psycopg2').connect(sessions_url)
+            saver = PostgresSaver(conn)
+            saver.setup()
             _log.info(f"Checkpointer: PostgresSaver ({sessions_url.split('@')[-1]})")
             return saver
         except ImportError:
@@ -1344,6 +1356,8 @@ def get_checkpointer(db_path: str = None):
                 "langgraph-checkpoint-postgres not installed — falling back to SQLite. "
                 "Install: pip install langgraph-checkpoint-postgres"
             )
+        except Exception as _e:
+            _log.warning(f"PostgresSaver failed ({_e}) — falling back to SQLite")
 
     # SQLite fallback
     if db_path is None:

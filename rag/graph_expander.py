@@ -217,7 +217,7 @@ NODE_BUDGET: dict[QuestionType, int] = {
     QuestionType.CROSS_FRAMEWORK:     18,
     QuestionType.FREE_ASSESSMENT:     22,
     QuestionType.DOCUMENT_INVENTORY:   8,   # structured query — fewer nodes needed
-    QuestionType.DOCUMENT_CONTENT:     5,   # single control focus
+    QuestionType.DOCUMENT_CONTENT:    14,   # increased for xfw coverage
     QuestionType.UNKNOWN:             12,
 }
 
