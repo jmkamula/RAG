@@ -694,10 +694,10 @@ def make_update_session_node():
     """
     def update_session(state: ArionState) -> dict:
         return {
-            "turn_count":  state["turn_count"] + 1,
-            "clarif_count": 0,
-            # focus_refs already set correctly by classify_node
-            # cited_refs from answer further refine what was discussed
+            "turn_count":    state["turn_count"] + 1,
+            "clarif_count":  0,
+            "needs_clarif":  False,
+            "clarif_question": "",
         }
 
     return update_session
@@ -1241,10 +1241,10 @@ def make_update_session_node():
     """
     def update_session(state: ArionState) -> dict:
         return {
-            "turn_count":  state["turn_count"] + 1,
-            "clarif_count": 0,
-            # focus_refs already set correctly by classify_node
-            # cited_refs from answer further refine what was discussed
+            "turn_count":    state["turn_count"] + 1,
+            "clarif_count":  0,
+            "needs_clarif":  False,
+            "clarif_question": "",
         }
 
     return update_session
