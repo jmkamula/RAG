@@ -780,8 +780,8 @@ def build_arion_graph(
 
 def get_checkpointer(db_path: str = None):
     """
-    Get the appropriate checkpointer for the current environment.
-    Uses psycopg v3 for PostgresSaver, InMemorySaver as fallback.
+    Sync checkpointer for graph.invoke() — uses PostgresSaver (psycopg v3).
+    For async streaming use get_async_checkpointer().
     """
     import logging
     _log = logging.getLogger(__name__)
@@ -806,7 +806,39 @@ def get_checkpointer(db_path: str = None):
             _log.warning(f"PostgresSaver failed ({_e}) — falling back to InMemorySaver")
 
     from langgraph.checkpoint.memory import InMemorySaver
-    _log.info("Checkpointer: InMemorySaver (sessions persist for process lifetime)")
+    _log.info("Checkpointer: InMemorySaver")
+    return InMemorySaver()
+
+
+async def get_async_checkpointer():
+    """
+    Async checkpointer for graph.astream_events() — uses AsyncPostgresSaver (psycopg v3 async).
+    Falls back to InMemorySaver if Postgres unavailable.
+    """
+    import logging
+    _log = logging.getLogger(__name__)
+
+    sessions_url = (
+        os.getenv("SESSIONS_DATABASE_URL") or
+        os.getenv("DATABASE_URL", "").replace(
+            "arioncomply_compliance", "arioncomply_sessions"
+        )
+    )
+
+    if sessions_url and "arioncomply" in sessions_url:
+        try:
+            import psycopg
+            from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
+            conn = await psycopg.AsyncConnection.connect(sessions_url)
+            saver = AsyncPostgresSaver(conn)
+            await saver.setup()
+            _log.info(f"AsyncCheckpointer: AsyncPostgresSaver ({sessions_url.split('@')[-1]})")
+            return saver
+        except Exception as _e:
+            _log.warning(f"AsyncPostgresSaver failed ({_e}) — falling back to InMemorySaver")
+
+    from langgraph.checkpoint.memory import InMemorySaver
+    _log.info("AsyncCheckpointer: InMemorySaver")
     return InMemorySaver()
 
 def _is_scope_na_query(query: str) -> bool:

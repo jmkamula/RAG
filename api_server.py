@@ -118,7 +118,7 @@ async def lifespan(app: FastAPI):
         from rag.llm_answer        import LLMAnswer
         from rag.classifier        import QueryClassifier
         from vector.retriever      import VectorRetriever
-        from rag.arion_graph import get_checkpointer
+        from rag.arion_graph import get_checkpointer, get_async_checkpointer
 
         cfg       = OrchestratorConfig()
         retriever = VectorRetriever(
@@ -150,6 +150,21 @@ async def lifespan(app: FastAPI):
             ),
             posture       = posture,
             checkpointer  = get_checkpointer(),
+        )
+        # Async graph for streaming — AsyncPostgresSaver for session persistence
+        async_checkpointer = await get_async_checkpointer()
+        app.state.arion_graph_async = build_arion_graph(
+            tenant      = tenant,
+            retriever   = retriever,
+            expander    = expander,
+            assembler   = ContextAssembler(tenant_profile=tenant),
+            llm         = LLMAnswer(),
+            classifier  = QueryClassifier(
+                tenant_profile = tenant,
+                retriever      = retriever,
+            ),
+            posture       = posture,
+            checkpointer  = async_checkpointer,
         )
         app.state.retriever     = retriever
         app.state.expander      = expander
@@ -450,6 +465,120 @@ async def chat(
     except Exception as e:
         logger.error(f"Chat error: {e}", exc_info=True)
         raise HTTPException(500, f"Pipeline error: {e}")
+
+
+# =============================================================================
+# CHAT STREAM ROUTER
+# =============================================================================
+
+@app.get("/api/v1/chat/stream", tags=["chat"])
+async def chat_stream(
+    question:   str,
+    request:    Request,
+    session_id: Optional[str] = None,
+    key_info:   APIKeyInfo    = Depends(require_scope("chat")),
+):
+    """
+    Stream compliance answer via Server-Sent Events.
+    Events:
+      data: {"type": "status",  "text": "Thinking..."}
+      data: {"type": "token",   "text": "...answer chunk..."}
+      data: {"type": "done",    "refs": [...], "latency_ms": N}
+      data: {"type": "error",   "text": "..."}
+    """
+    from fastapi.responses import StreamingResponse
+    from rag.arion_state import make_initial_state
+    import json as _json
+
+    if not request.app.state.arion_graph:
+        raise HTTPException(503, "RAG pipeline not available")
+
+    t_start    = time.time()
+    sid        = session_id or f"api_{uuid.uuid4().hex[:8]}"
+    thread_id  = f"{key_info.tenant_id[:8]}:{sid}"
+
+    try:
+        cache  = request.app.state.tenant_cache
+        ctx    = cache.load(key_info.tenant_id)
+        tenant = ctx.profile
+    except Exception:
+        tenant = None
+
+    async def event_generator():
+        def sse(data: dict) -> str:
+            return "data: " + _json.dumps(data) + "\n\n"
+
+        try:
+            yield sse({"type": "status", "text": "Analysing your question..."})
+
+            state = make_initial_state(tenant, query=question)
+            cfg   = {"configurable": {"thread_id": thread_id}}
+            graph = getattr(request.app.state, "arion_graph_async",
+                            request.app.state.arion_graph)
+
+            answer_text = ""
+            refs        = []
+            qtype       = None
+
+            async for event in graph.astream_events(state, cfg, version="v2"):
+                kind = event.get("event", "")
+                name = event.get("name", "")
+
+                if kind == "on_chain_start" and name == "classify":
+                    yield sse({"type": "status", "text": "Classifying intent..."})
+
+                elif kind == "on_chain_start" and name == "retrieve":
+                    yield sse({"type": "status", "text": "Retrieving compliance context..."})
+
+                elif kind == "on_chain_end" and not answer_text:
+                    # Handles retrieve, clarify, and all short-circuit paths
+                    _out = event.get("data", {}).get("output", {})
+                    if not isinstance(_out, dict):
+                        continue
+
+                    # Get answer from any node that produces one
+                    candidate = _out.get("answer_text", "") or _out.get("answer", "")
+
+                    # Clarification check
+                    if not candidate and _out.get("needs_clarif") and _out.get("clarif_question"):
+                        candidate = _out.get("clarif_question", "")
+                        qtype = "clarification"
+
+                    if candidate:
+                        answer_text = candidate
+                        refs  = _out.get("cited_refs", []) or []
+                        if qtype != "clarification":
+                            qtype = _out.get("question_type") or _out.get("answer_source")
+                        # Strip selection artifacts
+                        answer_text = answer_text.lstrip()
+                        while answer_text.upper().startswith("SELECTED"):
+                            nl = answer_text.find("\n")
+                            answer_text = (answer_text[nl+1:] if nl != -1 else "").lstrip()
+                        # Stream in chunks
+                        for i in range(0, len(answer_text), 50):
+                            yield sse({"type": "token", "text": answer_text[i:i+50]})
+                            await asyncio.sleep(0)
+
+            latency_ms = int((time.time() - t_start) * 1000)
+            if hasattr(qtype, "value"):
+                qtype = qtype.value
+            yield sse({"type": "done", "refs": refs if isinstance(refs, list) else [],
+                       "latency_ms": latency_ms, "answer_type": qtype})
+
+        except Exception as e:
+            logger.error(f"Stream error: {e}", exc_info=True)
+            yield sse({"type": "error", "text": str(e)})
+
+
+    return StreamingResponse(
+        event_generator(),
+        media_type = "text/event-stream",
+        headers    = {
+            "Cache-Control":               "no-cache",
+            "X-Accel-Buffering":           "no",
+            "Access-Control-Allow-Origin": "*",
+        },
+    )
 
 
 # =============================================================================
