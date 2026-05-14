@@ -208,9 +208,16 @@ class RowMappers:
     @staticmethod
     def soa(raw: dict, tenant_id: str) -> dict | None:
         """Statement of Applicability → posture_controls"""
-        ref = _to_str(raw.get('Control ID'))
-        if not ref or not re.match(r'^\d', ref):
+        raw_ref = _to_str(raw.get('Control ID'))
+        if not raw_ref or not re.match(r'^\d', raw_ref):
             return None  # skip section headers like "5", "Organizational Controls"
+
+        # Canonical form: ISO 27001 Annex A subclauses use the 'A.' prefix
+        # everywhere in the system (schema v14). The workbook ships them
+        # bare ("5.18" not "A.5.18") so we normalize at import time —
+        # otherwise we recreate the dedup bug that v14 just cleaned up.
+        from rag.framework_refs import normalize_control_ref
+        ref = normalize_control_ref(raw_ref, 'ISO27001:2022') or raw_ref
 
         applicable = raw.get('Applicable')
         status     = raw.get('Status')

@@ -395,11 +395,17 @@ def _write_posture_controls(
     created = 0
     skipped = 0
 
+    from rag.framework_refs import normalize_control_ref
+
     with conn.cursor() as cur:
-        for (control_ref, standard_id), group in groups.items():
+        for (raw_ref, standard_id), group in groups.items():
             agg = _aggregate_findings(group)
             if not agg:
                 continue
+
+            # Canonical form: ISO 27001 Annex A always uses 'A.' prefix.
+            # Prevents the "5.18 vs A.5.18" duplicate-row bug.
+            control_ref = normalize_control_ref(raw_ref, standard_id) or raw_ref
 
             finding    = agg["finding"]
             gap_desc   = agg["gap_description"]

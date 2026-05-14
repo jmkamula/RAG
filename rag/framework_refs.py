@@ -70,6 +70,34 @@ def group_refs_by_framework(
     return out
 
 
+def normalize_control_ref(ref: str | None, standard_id: str | None) -> str | None:
+    """
+    Return the canonical control_ref for the given standard.
+
+    For ISO 27001:2022, Annex A controls (clauses 5-8) use the 'A.' prefix
+    (e.g. 'A.5.18'). Main body clauses (4.x, 9.x, 10.x) and bare clause
+    roots ('6', '7', '8') stay as-is. Anything already starting 'A.' is
+    left untouched. Other standards pass through unchanged.
+
+    The rule: an ISO27001:2022 ref that starts with '5.', '6.', '7.', or
+    '8.' (i.e. an Annex A subclause) gets the prefix; clauses 9.x and
+    10.x are main body (Performance / Improvement) so they keep their
+    bare form. This matches the existing data after migration v14 and
+    the official ISO 27001:2022 Annex A naming.
+    """
+    if not ref:
+        return ref
+    if standard_id != "ISO27001:2022":
+        return ref
+    if ref.startswith("A."):
+        return ref
+    # Annex A subclause pattern: digit (5-8) dot digit(s) [dot digit(s)]*
+    import re
+    if re.match(r"^[5-8]\.\d", ref):
+        return f"A.{ref}"
+    return ref
+
+
 def render_framework_refs(refs: list | None) -> str:
     """
     Render grouped framework refs as a single inline clause for prose.
