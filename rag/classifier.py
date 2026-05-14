@@ -59,6 +59,7 @@ class TenantProfile:
     facts:                object = None   # ClientFacts instance — drives obligation implication
     posture_data:         dict  = field(default_factory=dict)   # full posture for clarifier context
     document_alerts:      list  = field(default_factory=list)   # missing doc alerts for clarifier
+    uploaded_documents:   list  = field(default_factory=list)   # actually-uploaded files
 
 
 @dataclass
@@ -224,6 +225,22 @@ DOCUMENT_INVENTORY_PHRASES: list[str] = [
     "document checklist", "documents we need", "what policies do we need",
     "what procedures do we need", "documentation requirements",
     "what do we need to have in place",
+    # Upload-status phrasings — these are inventory-shaped queries
+    # ("which documents have we uploaded", "what's missing", etc.)
+    "have we uploaded", "we have uploaded", "have been uploaded",
+    "haven't been uploaded", "have not been uploaded",
+    "not uploaded", "missing documents", "unuploaded documents",
+    "documents missing", "which documents",
+    # Synonyms — users naturally say submitted / delivered / provided / shared
+    # / sent instead of "uploaded". Keep these aligned with the patterns in
+    # rag/arion_graph.py:_UPLOAD_STATUS_PATTERNS.
+    "have we submitted", "we have submitted", "have been submitted",
+    "not submitted", "not yet submitted",
+    "have we delivered", "we have delivered",
+    "have we provided", "we have provided",
+    "have we shared",   "we have shared",
+    "have we sent",     "we have sent",
+    "did we submit",    "did we upload",
 ]
 
 DOCUMENT_CONTENT_PHRASES: list[str] = [
@@ -360,106 +377,6 @@ Key distinction — posture_check vs implementation:
 - cited_refs: extract article numbers (Art.X, Art.X.Y.Z) and ISO refs (A.X.XX, X.X.X)
 - confidence < 0.7 if genuinely ambiguous
 - If active_refs are set in session, the query almost certainly relates to them"""
-
-
-# ── Document query phrase detection ───────────────────────────────────────────
-
-DOCUMENTATION_PHRASES: list[str] = [
-    "document", "policy", "procedure", "evidence",
-    "what do we need to have", "required documentation",
-    "what should our", "what must", "checklist",
-    "what goes in", "prove compliance", "audit evidence",
-    "what policies", "what procedures", "documentation requirements",
-    "mandatory documents", "required documents", "what documents",
-    "document checklist", "documents we need",
-    "what should be in", "what items", "what sections",
-    "policy template", "policy contain", "procedure contain",
-    "dpa contain", "contract contain",
-]
-
-DOCUMENT_INVENTORY_PHRASES: list[str] = [
-    "mandatory documents", "required documents", "what documents do we need",
-    "document checklist", "documents we need", "what policies do we need",
-    "what procedures do we need", "documentation requirements",
-    "what do we need to have in place",
-]
-
-DOCUMENT_CONTENT_PHRASES: list[str] = [
-    "what should our policy include", "what must a",
-    "what should be in our", "what goes in", "policy template",
-    "what must our", "what should our procedure", "what items",
-    "what sections", "checklist for", "policy contain", "must contain",
-]
-
-# Topic → control_ref map for document queries
-# "what documents do we need for encryption?" → A.8.24
-DOCUMENT_TOPIC_MAP: dict[str, str] = {
-    "cryptography":        "A.8.24",
-    "encryption":          "A.8.24",
-    "data masking":        "A.8.11",
-    "masking":             "A.8.11",
-    "incident":            "A.5.24",
-    "incident response":   "A.5.24",
-    "breach":              "Art.33",
-    "data breach":         "Art.33",
-    "cloud":               "A.5.23",
-    "cloud services":      "A.5.23",
-    "cloud storage":       "A.5.23",
-    "processor":           "Art.28",
-    "dpa":                 "Art.28",
-    "data processing":     "Art.28",
-    "privacy notice":      "Art.13",
-    "privacy policy":      "Art.13",
-    "access rights":       "A.5.18",
-    "access control":      "A.5.15",
-    "risk assessment":     "6.1.2",
-    "risk":                "6.1.2",
-    "remote working":      "A.6.7",
-    "remote work":         "A.6.7",
-    "software development":"A.8.25",
-    "secure development":  "A.8.25",
-    "internal audit":      "9.2",
-    "audit":               "9.2",
-    "management review":   "9.3",
-    "isms policy":         "5.2",
-    "information security policy": "5.2",
-    "isms scope":          "4.3",
-    "dsar":                "Art.15",
-    "data subject":        "Art.15",
-    "ropa":                "Art.30",
-    "records of processing": "Art.30",
-}
-
-
-def _detect_document_dimensions(query: str) -> tuple[bool, str | None]:
-    """
-    Detect if query is asking about documents/evidence.
-    Returns (needs_documentation, document_topic_ref).
-    """
-    q = query.lower()
-    needs_doc = any(phrase in q for phrase in DOCUMENTATION_PHRASES)
-
-    # Try to resolve a topic ref from the query
-    topic_ref = None
-    for topic, ref in DOCUMENT_TOPIC_MAP.items():
-        if topic in q:
-            topic_ref = ref
-            break
-
-    return needs_doc, topic_ref
-
-
-def _detect_document_question_type(query: str) -> QuestionType | None:
-    """
-    Detect if query is specifically a document inventory or content query.
-    Returns the specific QuestionType or None if not a pure document query.
-    """
-    q = query.lower()
-    if any(phrase in q for phrase in DOCUMENT_CONTENT_PHRASES):
-        return QuestionType.DOCUMENT_CONTENT
-    if any(phrase in q for phrase in DOCUMENT_INVENTORY_PHRASES):
-        return QuestionType.DOCUMENT_INVENTORY
-    return None
 
 
 INTAKE_CLASSIFIER_PROMPT = """You are classifying an initial user description of what they are working on.
@@ -621,15 +538,15 @@ CLEAR_INTENT_PHRASES = [
     # "have we uploaded" is unambiguous — always about file upload
     # Broader questions like "what is missing to evidence X" go through LLM classifier
     # to preserve context-aware routing for complex questions
-    (re.compile(r'\bhave\s+we\s+uploaded\s+(?:our|the)\b', re.IGNORECASE),
+    (re.compile(r'\bhave\s+we\s+uploaded\b', re.IGNORECASE),
+     "document_inventory", []),
+    (re.compile(r'\bwhich\s+documents?\s+have\s+we\s+uploaded\b', re.IGNORECASE),
+     "document_inventory", []),
+    (re.compile(r'\b(?:we\s+have|have\s+been)\s+uploaded\b', re.IGNORECASE),
      "document_inventory", []),
     (re.compile(r'\b(?:is|are)\s+(?:our|the)\s+[\w\s]{3,40}(?:policy|procedure|plan|playbook)\s+(?:uploaded|in\s+the\s+system|on\s+the\s+platform)\b', re.IGNORECASE),
      "document_inventory", []),
     (re.compile(r'\bwhich\s+documents?\s+(?:have\s+(?:not|yet)\s+been|are\s+(?:not|still)?)\s+uploaded\b', re.IGNORECASE),
-     "document_inventory", []),
-    (re.compile(r'\bwhat\s+documents?\s+(?:are\s+)?(?:missing|needed|required|do\s+we\s+need\s+to\s+upload)\b', re.IGNORECASE),
-     "document_inventory", []),
-    (re.compile(r'\bwhich\s+documents?\s+(?:are\s+)?(?:missing|not\s+uploaded|haven\'t\s+been\s+uploaded)\b', re.IGNORECASE),
      "document_inventory", []),
     (re.compile(r'\bwhat\s+documents?\s+(?:are\s+)?(?:missing|needed|required|do\s+we\s+need\s+to\s+upload)\b', re.IGNORECASE),
      "document_inventory", []),
@@ -787,6 +704,28 @@ class QueryClassifier:
         explicit_result = self._check_explicit(user_input)
         if explicit_result:
             return explicit_result
+
+        # 1b. Document inventory/content queries are unambiguous by design —
+        # they must never trigger clarification. Bypass clustering entirely.
+        doc_qtype = _detect_document_question_type(user_input)
+        if doc_qtype is not None:
+            _, doc_topic = _detect_document_dimensions(user_input)
+            active_refs  = [doc_topic] if doc_topic else []
+            session = SessionContext(
+                tenant_profile = self.tenant,
+                standards      = self.tenant.applicable_standards,
+                role           = self.tenant.role[0] if self.tenant.role else None,
+                intent_type    = doc_qtype,
+                active_refs    = active_refs,
+                active_cluster = doc_topic,
+            )
+            return IntakeResult(
+                state         = IntakeState.CLEAR,
+                session       = session,
+                clusters      = [],
+                clarification = None,
+                raw_input     = user_input,
+            )
 
         # 2. Vector search on the full description
         results = self.retriever.search(
@@ -1064,6 +1003,21 @@ class QueryClassifier:
         Builds client context from document_alerts and posture so the
         clarifier can cite specific known facts rather than abstract options.
         """
+        # Safety net: if LLM intake classifier recognises this as a document
+        # query, bypass clarification — document queries are answered directly
+        # by design (DOCUMENT_INVENTORY_PHRASES / DOCUMENT_CONTENT_PHRASES
+        # cover the obvious phrasings; this catches LLM-detected paraphrases).
+        llm_qtype = self._llm_classify_intake(user_input, clusters)
+        if llm_qtype in (QuestionType.DOCUMENT_INVENTORY, QuestionType.DOCUMENT_CONTENT):
+            session = self._build_session(user_input, clusters[0], llm_qtype)
+            return IntakeResult(
+                state         = IntakeState.CLEAR,
+                session       = session,
+                clarification = None,
+                clusters      = clusters,
+                raw_input     = user_input,
+            )
+
         client_context   = self._build_client_context_for_clarification(
             user_input, clusters
         )
@@ -1460,7 +1414,11 @@ class QueryClassifier:
             document_topic_ref  = doc_topic,
         )
 
-        if confidence < 0.7:
+        # Document queries are unambiguous by design — answer directly, never clarify
+        is_doc_query = qtype in (
+            QuestionType.DOCUMENT_INVENTORY, QuestionType.DOCUMENT_CONTENT,
+        )
+        if confidence < 0.7 and not is_doc_query:
             intent.clarification_question = self._write_low_conf_clarification(
                 query, session, parsed.get("reasoning", "")
             )

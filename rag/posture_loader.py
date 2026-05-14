@@ -323,23 +323,66 @@ def load_document_alerts(pg_conn, tenant_id: str) -> list[dict]:
         return []
 
 
+def load_uploaded_documents(pg_conn, tenant_id: str) -> list[dict]:
+    """
+    Load documents the tenant has actually delivered, from client_documents.
+    Source of truth is client_documents.document_status — the intake pipeline
+    transitions it to 'uploaded' once a file is processed against a registered
+    entry. document_uploads is an audit log; document_status is the state.
+
+    Used to answer "which documents have we uploaded / submitted" (positive
+    polarity); contrast with load_document_alerts which lists registered-but-
+    missing docs (document_status='registered').
+    """
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+            cur.execute("""
+                SELECT
+                    id::text          AS doc_id,
+                    platform_ref,
+                    external_ref,
+                    document_title,
+                    filename,
+                    document_type     AS doc_type,
+                    document_status,
+                    uploaded_at::text,
+                    control_refs
+                FROM client_documents
+                WHERE tenant_id       = %s::uuid
+                  AND is_active       = TRUE
+                  AND document_status IN ('uploaded', 'processing', 'active')
+                ORDER BY uploaded_at DESC NULLS LAST, document_title NULLS LAST
+            """, (tenant_id,))
+            cols = [d[0] for d in cur.description]
+            return [dict(zip(cols, row)) for row in cur.fetchall()]
+    except Exception as e:
+        logger.warning(f"load_uploaded_documents failed: {e}")
+        try:
+            pg_conn.rollback()
+        except Exception:
+            pass
+        return []
+
+
 def load_tenant_context(pg_conn, tenant_id: str) -> dict:
     """
     Load all tenant context in one call:
-      posture         — dict of assessed controls
-      facts           — ClientFacts dataclass
-      scope           — TenantScope (standards + relationships)
-      document_alerts — list of missing/overdue document alerts
+      posture            — dict of assessed controls
+      facts              — ClientFacts dataclass
+      scope              — TenantScope (standards + relationships)
+      document_alerts    — list of missing/overdue document alerts
+      uploaded_documents — list of files actually uploaded to the platform
 
-    Returns dict with keys: posture, facts, scope, document_alerts
     Used by chat.py on startup to replace all hardcodes.
     """
     from rag.scope_loader import load_tenant_scope
 
-    posture         = load_posture(pg_conn, tenant_id)
-    facts           = load_client_facts(pg_conn, tenant_id)
-    scope           = load_tenant_scope(pg_conn, tenant_id)
-    document_alerts = load_document_alerts(pg_conn, tenant_id)
+    posture            = load_posture(pg_conn, tenant_id)
+    facts              = load_client_facts(pg_conn, tenant_id)
+    scope              = load_tenant_scope(pg_conn, tenant_id)
+    document_alerts    = load_document_alerts(pg_conn, tenant_id)
+    uploaded_documents = load_uploaded_documents(pg_conn, tenant_id)
 
     critical = sum(1 for a in document_alerts if a.get("alert_type") == "CRITICAL")
     warning  = sum(1 for a in document_alerts if a.get("alert_type") == "WARNING")
@@ -348,11 +391,13 @@ def load_tenant_context(pg_conn, tenant_id: str) -> dict:
         f"Tenant context loaded: {len(posture)} posture controls, "
         f"queryable={scope.queryable_standards}, "
         f"gdpr_evaluable={scope.can_evaluate_gdpr}, "
-        f"doc_alerts={len(document_alerts)} ({critical} critical, {warning} warning)"
+        f"doc_alerts={len(document_alerts)} ({critical} critical, {warning} warning), "
+        f"uploaded={len(uploaded_documents)}"
     )
     return {
-        "posture":          posture,
-        "facts":            facts,
-        "scope":            scope,
-        "document_alerts":  document_alerts,
+        "posture":            posture,
+        "facts":              facts,
+        "scope":              scope,
+        "document_alerts":    document_alerts,
+        "uploaded_documents": uploaded_documents,
     }

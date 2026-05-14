@@ -36,6 +36,7 @@ DB schema expectations (actual columns as of schema v8):
 from __future__ import annotations
 
 import logging
+import re
 import uuid
 from typing import Optional
 
@@ -111,33 +112,160 @@ def _numeric_to_conf_label(value: float) -> str:
 # Called BEFORE the main transaction opens — uses autocommit-safe pattern.
 # =============================================================================
 
+_DOC_REF_PATTERN = re.compile(r'(DOC\d{3})', re.IGNORECASE)
+_CD_STATUS_UPLOADED = "uploaded"
+
+
+def _match_registered_document(
+    tenant_id: str,
+    filename:  str,
+    cur,
+) -> Optional[tuple[str, str | None]]:
+    """
+    Try to match `filename` to a pre-registered client_documents row
+    via the agreed resolution order. Returns (doc_id, current_status)
+    on hit, None on miss.
+
+    Resolution order (mirrors tools/doc_uploader.py):
+      1. external_ref via DOC-prefix in the filename (DOC006_*.pdf → DOC006)
+      2. exact filename match
+      3. fuzzy title-keyword match (words >3 chars from the filename
+         intersect with words >3 chars in document_title)
+    """
+    # 1. DOC-prefix → external_ref
+    m = _DOC_REF_PATTERN.search(filename or "")
+    if m:
+        ext_ref = m.group(1).upper()
+        cur.execute(
+            """
+            SELECT id, document_status FROM client_documents
+            WHERE tenant_id = %s
+              AND external_ref = %s
+              AND is_active = TRUE
+            LIMIT 1
+            """,
+            (tenant_id, ext_ref),
+        )
+        row = cur.fetchone()
+        if row:
+            return (str(row[0]), row[1])
+
+    # 2. Exact filename match on a *registered* row (has external_ref or
+    # platform_ref). We deliberately skip orphan rows here so a prior
+    # bad upload doesn't shadow the real registry entry.
+    cur.execute(
+        """
+        SELECT id, document_status FROM client_documents
+        WHERE tenant_id   = %s
+          AND filename    = %s
+          AND is_active   = TRUE
+          AND (external_ref IS NOT NULL OR platform_ref IS NOT NULL)
+        LIMIT 1
+        """,
+        (tenant_id, filename),
+    )
+    row = cur.fetchone()
+    if row:
+        return (str(row[0]), row[1])
+
+    # 3. Fuzzy title-keyword match against registered rows only
+    stem      = re.sub(r'\.[A-Za-z0-9]{1,5}$', '', filename or '')
+    # Split on non-alphanumerics including '_' — Python \W keeps '_' as a
+    # word char, which would leave "Access_Control_Policy" as one token.
+    keywords  = {w.lower() for w in re.split(r'[\W_]+', stem) if len(w) > 3}
+    if keywords:
+        cur.execute(
+            """
+            SELECT id, document_title, document_status FROM client_documents
+            WHERE tenant_id   = %s
+              AND is_active   = TRUE
+              AND document_title IS NOT NULL
+              AND (external_ref IS NOT NULL OR platform_ref IS NOT NULL)
+            """,
+            (tenant_id,),
+        )
+        best, best_overlap = None, 0
+        for row in cur.fetchall():
+            title_words = {w.lower() for w in re.split(r'[\W_]+', row[1] or '') if len(w) > 3}
+            overlap     = len(keywords & title_words)
+            # Require at least 2 overlapping significant words to avoid
+            # generic single-word matches (e.g. "policy")
+            if overlap >= 2 and overlap > best_overlap:
+                best, best_overlap = row, overlap
+        if best:
+            return (str(best[0]), best[2])
+
+    # 4. Final fallback — match orphan row by filename so re-uploads
+    # of the same file consolidate instead of creating more orphans.
+    cur.execute(
+        """
+        SELECT id, document_status FROM client_documents
+        WHERE tenant_id  = %s
+          AND filename   = %s
+          AND is_active  = TRUE
+        LIMIT 1
+        """,
+        (tenant_id, filename),
+    )
+    row = cur.fetchone()
+    if row:
+        return (str(row[0]), row[1])
+
+    return None
+
+
 def _ensure_client_document(
     tenant_id: str,
     filename:  str,
     conn,
 ) -> str:
     """
-    Return the client_documents.id for this filename+tenant.
-    Creates a new 'registered' record if none exists.
-    Uses a savepoint so the outer transaction is not affected.
+    Return the client_documents.id for this upload + tenant.
+
+    Resolution:
+      - Try to match a pre-registered row (external_ref → filename → title).
+      - On match: update filename + transition document_status to 'uploaded'
+        so document_alerts no longer flags it as missing.
+      - On miss: create a new row with a platform_ref allocated via
+        PlatformRefGenerator (CD-{TENANT_SHORT}-{N}).
+
+    Uses savepoints so a registry update / insert failure cannot poison
+    the surrounding findings transaction.
     """
     with conn.cursor() as cur:
-        # Check existing
-        cur.execute(
-            """
-            SELECT id FROM client_documents
-            WHERE tenant_id = %s
-              AND filename  = %s
-              AND is_active = TRUE
-            LIMIT 1
-            """,
-            (tenant_id, filename),
-        )
-        row = cur.fetchone()
-        if row:
-            return str(row[0])
+        # ── Registry match ────────────────────────────────────────────────
+        match = _match_registered_document(tenant_id, filename, cur)
+        if match:
+            doc_id, current_status = match
+            cur.execute("SAVEPOINT sp_cd_update")
+            try:
+                # Only transition registered→uploaded; never downgrade
+                # an already-active doc back to uploaded.
+                cur.execute(
+                    """
+                    UPDATE client_documents
+                       SET filename         = COALESCE(NULLIF(filename, ''), %s),
+                           document_status  = CASE
+                               WHEN document_status = 'registered' THEN %s
+                               ELSE document_status
+                           END,
+                           is_metadata_only = FALSE
+                     WHERE id = %s AND tenant_id = %s
+                    """,
+                    (filename, _CD_STATUS_UPLOADED, doc_id, tenant_id),
+                )
+                cur.execute("RELEASE SAVEPOINT sp_cd_update")
+                logger.info(
+                    f"Linked upload to registered doc: {filename} → {doc_id} "
+                    f"(was {current_status})"
+                )
+            except Exception as e:
+                cur.execute("ROLLBACK TO SAVEPOINT sp_cd_update")
+                cur.execute("RELEASE SAVEPOINT sp_cd_update")
+                logger.warning(f"Could not update registered doc {doc_id}: {e}")
+            return doc_id
 
-        # Create new record
+        # ── No registry hit: create a fresh row with platform_ref ────────
         doc_id = str(uuid.uuid4())
         cur.execute("SAVEPOINT sp_client_doc")
         try:
@@ -150,15 +278,15 @@ def _ensure_client_document(
                 ON CONFLICT DO NOTHING
                 """,
                 (doc_id, tenant_id, filename,
-                 _CD_STATUS_REGISTERED, _RETENTION_CLASS),
+                 _CD_STATUS_UPLOADED, _RETENTION_CLASS),
             )
             cur.execute("RELEASE SAVEPOINT sp_client_doc")
-            logger.debug(f"Created client_documents record: {filename} → {doc_id}")
+            logger.info(f"Created client_documents row: {filename} → {doc_id}")
         except Exception as e:
             cur.execute("ROLLBACK TO SAVEPOINT sp_client_doc")
             cur.execute("RELEASE SAVEPOINT sp_client_doc")
             logger.warning(f"Could not create client_documents for {filename}: {e}")
-            # Retry fetch — may have been created by concurrent process
+            # Concurrent insert race — try once more to find it
             cur.execute(
                 "SELECT id FROM client_documents WHERE tenant_id=%s AND filename=%s LIMIT 1",
                 (tenant_id, filename),
@@ -167,6 +295,24 @@ def _ensure_client_document(
             if row:
                 return str(row[0])
             raise RuntimeError(f"Cannot resolve client_document for {filename}") from e
+
+        # Allocate platform_ref for the new row (CD-ARN-NNNN)
+        cur.execute("SAVEPOINT sp_cd_platform_ref")
+        try:
+            from db.ref_generator import PlatformRefGenerator
+            cur.execute(
+                "SELECT short_code FROM tenants WHERE id = %s",
+                (tenant_id,),
+            )
+            short_row = cur.fetchone()
+            short = (short_row[0] if short_row and short_row[0] else "TEN").upper()
+            gen = PlatformRefGenerator(conn, tenant_id, tenant_short=short)
+            gen.assign("client_documents", doc_id)
+            cur.execute("RELEASE SAVEPOINT sp_cd_platform_ref")
+        except Exception as e:
+            cur.execute("ROLLBACK TO SAVEPOINT sp_cd_platform_ref")
+            cur.execute("RELEASE SAVEPOINT sp_cd_platform_ref")
+            logger.warning(f"platform_ref allocation skipped for {doc_id}: {e}")
 
         return doc_id
 

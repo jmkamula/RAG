@@ -171,17 +171,23 @@ class DocumentPipeline:
 
     def run(
         self,
-        file_path: str,
-        tenant_id: str,
-        upload_id: Optional[str] = None,
+        file_path:         str,
+        tenant_id:         str,
+        upload_id:         Optional[str] = None,
+        original_filename: Optional[str] = None,
     ) -> PipelineResult:
         """
         Process one document.
         Returns PipelineResult with status and counts.
+
+        original_filename: the user-facing name (e.g. "Access_Control_Policy.docx").
+        Used for registry lookup; falls back to the disk basename. API uploads
+        store the file with a UUID name, so without this the DOC-prefix /
+        title matchers can never link to the pre-registered client_documents row.
         """
         t_start    = time.time()
         file_path  = str(Path(file_path).resolve())
-        file_name  = Path(file_path).name
+        file_name  = original_filename or Path(file_path).name
         trace_id   = str(uuid.uuid4())
         upload_id  = upload_id or str(uuid.uuid4())
 

@@ -435,10 +435,21 @@ async def chat(
 
     try:
         cfg    = {"configurable": {"thread_id": thread_id}}
-        state  = make_initial_state(tenant, query=body.question)
+        # Use full initial state only on the FIRST turn for this thread.
+        # On follow-ups, pass just the new query so the checkpointer's
+        # persisted state (turn_count, needs_clarif, taxonomy_options_map,
+        # etc.) is preserved instead of being overwritten by defaults.
+        graph     = request.app.state.arion_graph
+        prior     = await asyncio.get_event_loop().run_in_executor(
+            None, lambda: graph.get_state(cfg)
+        )
+        has_prior = bool(prior and getattr(prior, "values", None))
+        state     = ({"query": body.question}
+                     if has_prior
+                     else make_initial_state(tenant, query=body.question))
         result = await asyncio.get_event_loop().run_in_executor(
             None,
-            lambda: request.app.state.arion_graph.invoke(state, cfg),
+            lambda: graph.invoke(state, cfg),
         )
 
         answer     = result.get("answer_text", "") or result.get("answer", "")
@@ -511,10 +522,20 @@ async def chat_stream(
         try:
             yield sse({"type": "status", "text": "Analysing your question..."})
 
-            state = make_initial_state(tenant, query=question)
             cfg   = {"configurable": {"thread_id": thread_id}}
             graph = getattr(request.app.state, "arion_graph_async",
                             request.app.state.arion_graph)
+            # Use full initial state only on the FIRST turn for this thread.
+            # On follow-ups, pass just the new query so the checkpointer's
+            # persisted state survives instead of being reset to defaults.
+            try:
+                prior     = await graph.aget_state(cfg)
+                has_prior = bool(prior and getattr(prior, "values", None))
+            except Exception:
+                has_prior = False
+            state = ({"query": question}
+                     if has_prior
+                     else make_initial_state(tenant, query=question))
 
             answer_text = ""
             refs        = []
@@ -602,11 +623,12 @@ class DocumentStatus(BaseModel):
 
 
 def _run_pipeline(
-    file_path:  str,
-    tenant_id:  str,
-    upload_id:  str,
-    db_url:     str,
-    api_key:    str,
+    file_path:         str,
+    tenant_id:         str,
+    upload_id:         str,
+    db_url:            str,
+    api_key:           str,
+    original_filename: Optional[str] = None,
 ):
     """Run document pipeline in background thread."""
     from rag.intake.doc_pipeline import DocumentPipeline
@@ -615,7 +637,8 @@ def _run_pipeline(
         api_key = api_key,
         trace   = True,
     )
-    result = pipeline.run(file_path, tenant_id, upload_id)
+    result = pipeline.run(file_path, tenant_id, upload_id,
+                          original_filename=original_filename)
     logger.info(
         f"Pipeline complete: {result.document_name} "
         f"status={result.status} findings={result.findings_count}"
@@ -672,16 +695,15 @@ async def upload_document(
         with conn.cursor() as cur:
             cur.execute("""
                 INSERT INTO document_uploads (
-                    id, tenant_id, original_name, stored_path,
-                    file_size_bytes, status, uploaded_by
-                ) VALUES (%s, %s::uuid, %s, %s, %s, 'queued', %s::uuid)
+                    id, tenant_id, filename, storage_path,
+                    extraction_status, uploaded_by
+                ) VALUES (%s, %s::uuid, %s, %s, 'pending', %s::uuid)
                 ON CONFLICT (id) DO NOTHING
             """, (
                 upload_id,
                 key_info.tenant_id,
                 file.filename,
                 str(file_path),
-                len(contents),
                 key_info.user_id,
             ))
         conn.commit()
@@ -695,11 +717,12 @@ async def upload_document(
     api_key = os.getenv("ANTHROPIC_API_KEY", "")
     background_tasks.add_task(
         _run_pipeline,
-        file_path  = str(file_path),
-        tenant_id  = key_info.tenant_id,
-        upload_id  = upload_id,
-        db_url     = DATABASE_URL,
-        api_key    = api_key,
+        file_path         = str(file_path),
+        tenant_id         = key_info.tenant_id,
+        upload_id         = upload_id,
+        db_url            = DATABASE_URL,
+        api_key           = api_key,
+        original_filename = file.filename,
     )
 
     logger.info(

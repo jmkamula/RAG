@@ -308,24 +308,64 @@ def _merge_doc_inv(gr: GraphResult, doc_inv) -> None:
         gr.doc_contexts.update(doc_inv)
 
 
+_POSITIVE_UPLOAD_MARKERS = (
+    "have we uploaded", "we have uploaded", "we uploaded",
+    "documents uploaded", "uploaded documents",
+    "what is uploaded", "what's uploaded", "what are uploaded",
+    "show uploaded", "list uploaded", "list of uploaded",
+    "which documents have we uploaded",
+)
+_NEGATIVE_UPLOAD_MARKERS = (
+    "not uploaded", "haven't been uploaded", "have not been uploaded",
+    "not yet uploaded", "yet to be uploaded", "still need to upload",
+    "do we need to upload", "missing", "unuploaded",
+)
+
+
 def _build_document_status_answer(query: str, alerts: list) -> Optional[str]:
     import re
+    # Polarity guard: this builder only knows the "missing/registered" side.
+    # The arion_graph upload short-circuit owns positive-polarity answers
+    # (it has access to uploaded_documents). If we somehow reach here on a
+    # positive query, bail out rather than emit a misleading "NOT uploaded"
+    # list assembled by title-word matching.
+    q = query.lower()
+    is_negative = any(m in q for m in _NEGATIVE_UPLOAD_MARKERS)
+    is_positive = (not is_negative) and any(m in q for m in _POSITIVE_UPLOAD_MARKERS)
+    if is_positive:
+        return None
     if not alerts:
         return (
             "All registered documents appear to have been uploaded, "
             "or no documents have been registered yet."
         )
-    query_lower = query.lower()
-    relevant = []
-    for alert in alerts:
-        title       = (alert.get("document_title") or "").lower()
-        title_words = [w for w in re.split(r"\W+", title) if len(w) > 4]
-        if any(w in query_lower for w in title_words):
-            relevant.append(alert)
     is_all = re.search(
         r"\b(all|missing|unuploaded|not.{0,10}uploaded)\s+(documents?|files?|policies)\b",
         query, re.IGNORECASE,
+    ) or re.search(
+        r"\b(documents?|files?|policies)\s+(are\s+)?(missing|unuploaded|not\s+uploaded)\b",
+        query, re.IGNORECASE,
     )
+    # Title-word match only for *specific* doc lookups — never when the user
+    # asked the bulk "all/missing" form. Otherwise the noun "documents" in
+    # alert titles ("Policy Document Template") coincidentally filters the
+    # list down to 3 of 48, hiding the rest.
+    query_lower = query.lower()
+    relevant = []
+    if not is_all:
+        # Strip the generic noun before matching so "documents" / "policy" in
+        # the query can't pull in every alert whose title contains those words.
+        _GENERIC = {"documents", "document", "files", "file",
+                    "policies", "policy", "procedures", "procedure",
+                    "template", "templates", "process", "processes", "plan", "plans"}
+        for alert in alerts:
+            title       = (alert.get("document_title") or "").lower()
+            title_words = [
+                w for w in re.split(r"\W+", title)
+                if len(w) > 4 and w not in _GENERIC
+            ]
+            if any(w in query_lower for w in title_words):
+                relevant.append(alert)
     if not relevant and not is_all:
         return None
     lines = []

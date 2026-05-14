@@ -180,10 +180,11 @@ class TenantContextCache:
         finally:
             pg.close()
 
-        posture         = ctx_data["posture"]
-        facts           = ctx_data["facts"]
-        scope           = ctx_data["scope"]
-        document_alerts = ctx_data["document_alerts"]
+        posture            = ctx_data["posture"]
+        facts              = ctx_data["facts"]
+        scope              = ctx_data["scope"]
+        document_alerts    = ctx_data["document_alerts"]
+        uploaded_documents = ctx_data.get("uploaded_documents", [])
 
         # Build TenantProfile with all context fields
         # ClientFacts has sector, role booleans — no company_name field
@@ -209,6 +210,7 @@ class TenantContextCache:
             facts                = facts,
             posture_data         = posture,
             document_alerts      = document_alerts,
+            uploaded_documents   = uploaded_documents,
         )
 
         return TenantContext(
