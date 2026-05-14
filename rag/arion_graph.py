@@ -66,6 +66,9 @@ _UPLOAD_STATUS_PATTERNS = [
     re.compile(rf'\b(?:is|are)\s+(?:our|the)\s+[\w\s]{{2,40}}(?:policy|procedure|plan|playbook|document)s?\s+(?:{_UPLOAD_VERB}|in\s+the\s+system|on\s+the\s+platform)\b', re.IGNORECASE),
     re.compile(rf'\bwhich\s+documents?\s+(?:have\s+(?:not|yet)\s+been|are\s+(?:not|still)?)\s+{_UPLOAD_VERB}\b', re.IGNORECASE),
     re.compile(r'\bshow\s+(?:me\s+)?(?:missing|unuploaded)\s+documents?\b', re.IGNORECASE),
+    # "what/which documents are missing?", "are any documents missing?"
+    re.compile(r'\b(?:what|which|any)\s+documents?\s+(?:are\s+)?(?:missing|unuploaded)\b', re.IGNORECASE),
+    re.compile(r'\bdocuments?\s+(?:are\s+)?(?:missing|unuploaded|not\s+(?:yet\s+)?(?:uploaded|submitted))\b', re.IGNORECASE),
 ]
 
 
@@ -265,10 +268,25 @@ def _answer_upload_status(
                 f"  • {a['document_title']} ({a['external_ref']}) "
                 f"— linked to: {a.get('linked_controls', '')}"
             )
-    if info and not critical and not warning:
-        lines.append("Registered but not yet uploaded:")
-        for a in info[:5]:
-            lines.append(f"  • {a['document_title']} ({a['external_ref']})")
+    if info:
+        if not critical and not warning:
+            lines.append("Registered but not yet uploaded:")
+            for a in info[:5]:
+                lines.append(f"  • {a['document_title']} ({a['external_ref']})")
+            if len(info) > 5:
+                lines.append(
+                    f"  … and {len(info) - 5} more registered but not yet "
+                    f"linked to findings."
+                )
+        else:
+            # Critical/warning already listed individually; summarise the
+            # rest so the LLM composer (and the user) know they exist.
+            lines.append("")
+            lines.append(
+                f"There are also {len(info)} additional documents registered "
+                f"but not yet uploaded (not currently linked to any open "
+                f"NC or OFI findings)."
+            )
 
     if lines:
         lines.append("")
@@ -278,6 +296,45 @@ def _answer_upload_status(
         )
 
     return "\n".join(lines) if lines else None
+
+
+# ── Thin upload-specific wrapper around LLMAnswer.compose() ──────────────────
+
+# Refs we expect to see preserved in any upload-status answer
+_REF_PATTERN = re.compile(r'\b(?:DOC\d{3}|CD-[A-Z]{2,4}-\d{3,4})\b')
+
+
+def _compose_upload_status_answer(
+    query:                str,
+    deterministic_answer: str,
+    llm,
+) -> str:
+    """
+    Polish a deterministic upload-status answer into conversational prose
+    via LLMAnswer.compose(). Extracts the DOC/CD refs and the 'Upload: …'
+    action hint from the deterministic text so the composer can preserve
+    them. On any failure compose() returns the deterministic text unchanged.
+    """
+    if not deterministic_answer:
+        return deterministic_answer
+
+    required_refs = list(set(_REF_PATTERN.findall(deterministic_answer)))
+
+    action_hint = None
+    for line in deterministic_answer.splitlines():
+        s = line.strip()
+        if s.startswith("Upload:") or "tools/doc_uploader.py" in s:
+            action_hint = s
+            break
+
+    return llm.compose(
+        query              = query,
+        deterministic_text = deterministic_answer,
+        required_refs      = required_refs,
+        action_hint        = action_hint,
+    )
+
+
 from vector.retriever      import VectorRetriever
 
 
@@ -621,14 +678,21 @@ def make_retrieve_node(
                 uploaded = _uploaded,
             )
             if pg_answer:
+                # Fact-preserving prose polish over the deterministic answer.
+                # Falls back to pg_answer on any failure — never regresses.
+                composed = _compose_upload_status_answer(
+                    query                = state["query"],
+                    deterministic_answer = pg_answer,
+                    llm                  = llm,
+                )
                 return {
                     **state,
-                    "answer_text":   pg_answer,
-                    "answer":        pg_answer,
+                    "answer_text":   composed,
+                    "answer":        composed,
                     "cited_refs":    [],
                     "question_type": "document_inventory",
                     "confidence":    1.0,
-                    "answer_source": "postgres",
+                    "answer_source": "postgres+llm",
                 }
 
         # ── Resolver: dispatch to per-taxonomy data sources ──────────────

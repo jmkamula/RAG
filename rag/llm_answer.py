@@ -970,6 +970,127 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             was_corrected    = was_corrected,
         )
 
+    # ── Compose (prose polish over a verified deterministic answer) ───────────
+
+    _COMPOSE_SYSTEM = (
+        "You rewrite a deterministic compliance status report into a brief, "
+        "conversational answer for a compliance practitioner.\n"
+        "\n"
+        "Rules — these are absolute:\n"
+        "1. Restate only the facts in the report. Never invent document refs "
+        "(DOC###, CD-###-####), control refs (e.g. A.5.18, Art.32), upload "
+        "dates, or finding severities.\n"
+        "2. Preserve every reference exactly as written in the report.\n"
+        "3. If the report contains an action hint (e.g. 'Upload: …'), keep it "
+        "intact at the end on its own line.\n"
+        "4. Keep the answer short. A specific-doc yes/no answer is 1-2 "
+        "sentences. A list-style answer can be longer but stays tight.\n"
+        "5. Use plain prose. Bullet lists are fine when the report has bullets, "
+        "but do not add Markdown headings.\n"
+        "6. Do not add caveats, disclaimers, suggestions, or 'next steps' "
+        "beyond what the report says.\n"
+        "7. Never apologise. Never say 'as an AI'. Never speculate."
+    )
+
+    # Ref shapes the composer must not invent
+    _COMPOSE_REF_PATTERN = re.compile(
+        r'\b(?:DOC\d{3}|CD-[A-Z]{2,4}-\d{3,4}|'
+        r'A\.\d+(?:\.\d+)*|Art\.\d+(?:\(\d+\))?)\b'
+    )
+
+    def compose(
+        self,
+        query:                str,
+        deterministic_text:   str,
+        *,
+        required_refs:        list[str] | None = None,
+        action_hint:          str | None       = None,
+        model:                str | None       = None,
+        max_tokens:           int              = 400,
+    ) -> str:
+        """
+        Polish a verified deterministic answer into conversational prose.
+
+        The deterministic text is the source of truth: we send it to the
+        small/fast model as a fact sheet and ask for a tight rewrite. The
+        rewrite is validated three ways before being returned:
+          1. Every entry in `required_refs` survived verbatim
+          2. The action_hint (if given) survived or is re-attached
+          3. No NEW refs appeared (no DOC###, CD-###, A.x.y or Art.X that
+             wasn't already in the deterministic input)
+
+        On any failure (LLM error, empty output, missing required refs,
+        invented refs) we return `deterministic_text` unchanged — never
+        silently regress.
+
+        Args:
+            query:              the user's original question
+            deterministic_text: the verified answer to polish
+            required_refs:      refs that MUST appear verbatim in the output
+                                (e.g. ["DOC006", "A.5.18"]); empty list to
+                                skip required-ref enforcement
+            action_hint:        a single line (e.g. "Upload: python3 …")
+                                re-attached if the rewrite drops it
+            model:              override model (default: verify_model)
+            max_tokens:         cap on rewrite size
+
+        Returns:
+            Prose rewrite on success; `deterministic_text` on any failure.
+        """
+        if not deterministic_text:
+            return deterministic_text
+
+        required_refs = [r for r in (required_refs or []) if r]
+
+        # Snapshot every ref shape in the deterministic input — the composer
+        # is not allowed to introduce a ref that's not in this set.
+        allowed_refs = set(self._COMPOSE_REF_PATTERN.findall(deterministic_text))
+
+        user_message = (
+            f"User question:\n{query.strip()}\n\n"
+            f"Deterministic status report (the truth — restate only this):\n"
+            f"\"\"\"\n{deterministic_text.strip()}\n\"\"\"\n\n"
+            f"Rewrite the report as a brief conversational answer to the "
+            f"user's question. Preserve every document and control reference "
+            f"exactly as written. Do NOT mention any document or control "
+            f"reference that does not appear in the report above. If the "
+            f"report says '37 additional doc(s)' or similar summary, keep "
+            f"that summary as-is — do not expand it by listing extra docs."
+        )
+
+        try:
+            composed = self._call_llm(
+                system     = self._COMPOSE_SYSTEM,
+                user       = user_message,
+                model      = model or self.verify_model,
+                max_tokens = max_tokens,
+                step       = "compose",
+            )
+        except Exception:
+            return deterministic_text
+
+        composed = (composed or "").strip()
+        if not composed:
+            return deterministic_text
+
+        # 1. Required refs must survive
+        for ref in required_refs:
+            if ref not in composed:
+                return deterministic_text
+
+        # 2. No invented refs — every ref in the rewrite must have been in
+        # the deterministic input
+        seen_refs = set(self._COMPOSE_REF_PATTERN.findall(composed))
+        invented  = seen_refs - allowed_refs
+        if invented:
+            return deterministic_text
+
+        # 3. Re-attach action hint if dropped
+        if action_hint and action_hint not in composed:
+            composed = composed.rstrip() + "\n\n" + action_hint
+
+        return composed
+
     def _answer_document_query(
         self,
         query:        str,
