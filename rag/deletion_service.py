@@ -54,7 +54,7 @@ MANUAL_REVIEW_TABLES = {
     "posture_controls", "posture_history", "posture_pending",
     "isms_audits", "document_findings", "document_sections",
     "incidents", "incident_timeline", "incident_documents",
-    "incident_obligations",
+    "incident_obligations", "incident_classifications",
 }
 
 # PII fields per table — anonymised on erasure request

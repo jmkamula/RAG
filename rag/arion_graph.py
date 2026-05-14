@@ -769,7 +769,13 @@ def make_retrieve_node(
         _gr              = _resolved.graph_nodes
         expanded_nodes   = _gr.all_nodes if hasattr(_gr, "all_nodes") else list(_gr)
         doc_contexts     = _resolved.doc_contexts   # property on ResolvedContext
-        incident_contexts = []
+        # Read active incidents + their materialized obligations from Postgres
+        # (enriched by Neo4j for required-document IDs). Returns [] if either
+        # store unavailable — chat still works without incident context.
+        incident_contexts = expander.get_incident_obligations(
+            tenant_id = state["tenant_id"],
+            standards = state["standards"],
+        )
         neo4j_ms         = _resolved.neo4j_ms
 
         # ── Rank + Answer in one Mistral call ──────────────────────────────

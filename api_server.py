@@ -130,6 +130,7 @@ async def lifespan(app: FastAPI):
             neo4j_user     = cfg.neo4j_user,
             neo4j_password = cfg.neo4j_password,
             retriever      = retriever,
+            pg_pool        = app.state.pg_pool,   # for incident_obligations reads
         )
 
         # Load tenant context for pipeline warm-up

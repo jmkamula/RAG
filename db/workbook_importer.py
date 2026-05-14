@@ -138,6 +138,61 @@ def _to_list(v, sep=',') -> list[str]:
     if not s or s.lower() in ('none', 'n/a', '-'): return []
     return [x.strip() for x in s.split(sep) if x.strip()]
 
+
+# =============================================================================
+# Incident classification derivation
+# =============================================================================
+# Translates the workbook "Breach Classification" + "PII Involved" cells into
+# incident_classifications rows. Background: see
+# memory/incident_obligations_model.md (workbook translation table).
+
+def _derive_incident_classifications(
+    breach_cls:   str | None,
+    pii_involved: bool | None,
+) -> list[dict]:
+    """
+    Workbook cell vocabulary → list of incident_classifications row dicts.
+
+    Mapping:
+      non breach            → []                              (not compliance-relevant)
+      anything else         → ISO_27035 category=unspecified  (source='workbook')
+      + PII mentioned OR    → also GDPR breach_cia=confidentiality
+        pii_involved=True     (source='derived', confidence=0.500)
+
+    The 'derived' confidentiality value is a starting guess — workbook cells
+    don't pin which CIA dimensions were violated; curator confirms or adds
+    integrity/availability via review queue (human-in-the-loop).
+    """
+    cls_str = (breach_cls or '').strip().lower()
+    if cls_str == 'non breach':
+        return []
+
+    classifications: list[dict] = [
+        {
+            'standard_id': 'ISO_27035',
+            'dimension':   'category',
+            'value':       'unspecified',
+            'source':      'workbook',
+            'confidence':  None,
+        }
+    ]
+
+    is_pii = (
+        'pii'  in cls_str
+        or 'both' in cls_str
+        or pii_involved is True
+    )
+    if is_pii:
+        classifications.append({
+            'standard_id': 'GDPR',
+            'dimension':   'breach_cia',
+            'value':       'confidentiality',
+            'source':      'derived',
+            'confidence':  0.500,
+        })
+
+    return classifications
+
 def _soa_finding(applicable, status) -> str:
     """Map SoA Applicable + Status to posture finding."""
     app = _to_bool(applicable)
@@ -310,7 +365,12 @@ class RowMappers:
 
     @staticmethod
     def incidents(raw: dict, tenant_id: str) -> dict | None:
-        """Incident Log → incidents"""
+        """Incident Log → incidents (+ derived incident_classifications)
+
+        Replaces the legacy `incident_type` text column with classification
+        rows. The returned dict carries a `_classifications` key consumed by
+        `_upsert_incident`; it is popped before the incidents row INSERT.
+        """
         inc_id = _to_str(raw.get('Incident ID'))
         if not inc_id or not inc_id.startswith('INC'):
             return None
@@ -324,14 +384,6 @@ class RowMappers:
         resolved   = _to_date(raw.get('Resolution Date'))
         count      = _to_int(raw.get('Data Subjects Affected (approx. number of individuals)'))
 
-        # Derive incident_type from breach classification
-        if breach_cls:
-            inc_type = breach_cls.lower().replace(' ', '_')
-        elif pii:
-            inc_type = 'pii_breach'
-        else:
-            inc_type = 'infosec_incident'
-
         # Derive severity from affected count
         severity = 'low'
         if count and count > 100:  severity = 'high'
@@ -340,7 +392,6 @@ class RowMappers:
         return {
             'tenant_id':               tenant_id,
             'external_ref':            inc_id,
-            'incident_type':           inc_type,
             'title':                   asset_name or f"Incident {inc_id}",
             'status':                  'closed' if resolved else 'open',
             'severity':                severity,
@@ -356,6 +407,8 @@ class RowMappers:
             'lessons_learned':         _to_str(raw.get('Lessons Learned')),
             'evidence_collected':      _to_bool(raw.get('Evidence Collected  (Y/N)')),
             'workbook_imported':       True,
+            '_classifications':        _derive_incident_classifications(
+                                            breach_cls, pii),
         }
 
     @staticmethod
@@ -718,9 +771,58 @@ class WorkbookImporter:
             if self._tenant_short:
                 print(f"\n  Assigning platform references...")
                 self.assign_platform_refs_after_import()
+            # Materialize obligations from any incidents+classifications
+            # written in this import. Idempotent: also picks up any older
+            # incidents that hadn't been materialized yet. Gracefully
+            # skipped if Neo4j unavailable.
+            self._materialize_obligations()
 
         report.print_summary()
         return report
+
+    def _materialize_obligations(self) -> None:
+        """
+        Run the obligation materializer for this tenant after import.
+        Resolves each incident's Postgres classifications through Neo4j
+        (:ClassificationValue -[:MANIFESTS_AS]-> :Event
+         -[:TRIGGERS_OBLIGATION]-> :RequirementNode) and writes the
+        resulting obligation rows. Idempotent. Skipped if Neo4j is offline
+        or env vars are missing — import still succeeds; obligations can be
+        materialized later via `python3 rag/incident_materializer.py`.
+        """
+        try:
+            import os
+            from dotenv import load_dotenv
+            from neo4j import GraphDatabase
+            from rag.incident_materializer import IncidentMaterializer
+
+            load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
+            uri = os.getenv('NEO4J_URI')
+            if not uri:
+                print("  ⚠ obligations not materialized: NEO4J_URI not set")
+                return
+
+            driver = GraphDatabase.driver(
+                uri,
+                auth=(os.getenv('NEO4J_USER'), os.getenv('NEO4J_PASSWORD')),
+            )
+            try:
+                m = IncidentMaterializer(self._pg, driver)
+                results = m.materialize_for_tenant(self._tenant_id)
+                inserted = sum(r.obligations_inserted for r in results.values())
+                skipped  = sum(r.obligations_skipped  for r in results.values())
+                unresolved = {tup for r in results.values()
+                                  for tup in r.unresolved_classifications}
+                print(f"\n  Obligations materialized: "
+                      f"{inserted} inserted, {skipped} already present")
+                if unresolved:
+                    print(f"  ⚠ unresolved classification triples "
+                          f"(no MANIFESTS_AS Event): {unresolved}")
+            finally:
+                driver.close()
+        except Exception as e:
+            # Never fail the import on materializer error — log and move on.
+            print(f"  ⚠ obligations not materialized: {e}")
 
     # ── Extract ──────────────────────────────────────────────────────────────
 
@@ -799,6 +901,8 @@ class WorkbookImporter:
             try:
                 if config.table == "isms_audits":
                     self._upsert_audit(config.table, dict(row.mapped))
+                elif config.table == "incidents":
+                    self._upsert_incident(dict(row.mapped))
                 else:
                     self._upsert(config.table, row.mapped, config.upsert_on)
                 row.action = "insert"
@@ -880,6 +984,63 @@ class WorkbookImporter:
         )
         with self._pg.cursor() as cur:
             cur.execute(sql, values)
+
+    def _upsert_incident(self, data: dict) -> None:
+        """
+        Special upsert for incidents — pops the `_classifications` payload,
+        UPSERTs the incidents row with RETURNING id, then writes one
+        incident_classifications row per derived classification.
+
+        Replaces the legacy single-table write path because the workbook's
+        breach-classification cell now expands into N classification rows
+        (see _derive_incident_classifications + memory).
+        """
+        classifications = data.pop('_classifications', None) or []
+        insert_data = {k: v for k, v in data.items() if v is not None}
+        if not insert_data:
+            return
+
+        cols         = list(insert_data.keys())
+        values       = list(insert_data.values())
+        placeholders = ', '.join(['%s'] * len(cols))
+        col_list     = ', '.join(cols)
+        update_cols  = [c for c in cols
+                        if c not in ('tenant_id', 'id', 'external_ref')]
+        update_clause = ', '.join(
+            f"{c} = EXCLUDED.{c}" for c in update_cols
+        )
+
+        sql_incident = (
+            f"INSERT INTO incidents ({col_list}) "
+            f"VALUES ({placeholders}) "
+            f"ON CONFLICT (tenant_id, external_ref) "
+            f"DO UPDATE SET {update_clause} "
+            f"RETURNING id"
+        )
+
+        sql_classification = (
+            "INSERT INTO incident_classifications "
+            "  (incident_id, tenant_id, standard_id, dimension, value, "
+            "   source, confidence) "
+            "VALUES (%s, %s, %s, %s, %s, %s, %s) "
+            "ON CONFLICT (incident_id, standard_id, dimension, value) "
+            "DO NOTHING"
+        )
+
+        with self._pg.cursor() as cur:
+            cur.execute(sql_incident, values)
+            incident_id = cur.fetchone()[0]
+
+            for c in classifications:
+                cur.execute(sql_classification, (
+                    incident_id,
+                    insert_data['tenant_id'],
+                    c['standard_id'],
+                    c['dimension'],
+                    c['value'],
+                    c['source'],
+                    c['confidence'],
+                ))
 
     def _assign_platform_ref(
         self,

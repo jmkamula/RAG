@@ -197,13 +197,52 @@ class DocumentContext:
 class IncidentObligationContext:
     """Controls triggered by an open incident."""
     incident_id:    str
-    incident_type:  str
+    incident_type:  str           # derived display label (see _derive_incident_display_label)
     title:          str
     severity:       str
     deadline_at:    str | None
-    urgency:        str         # "overdue"|"critical"|"urgent"|"soon"|"on_track"
+    urgency:        str           # "overdue"|"critical"|"urgent"|"soon"|"on_track"|"no_deadline"
     triggered_node_ids: list[str]
     required_documents: list[str]   # DocumentRequirement ids
+
+
+def _derive_incident_display_label(classifications: list[dict]) -> str:
+    """
+    One display label for IncidentObligationContext.incident_type, derived
+    from the incident's classifications. Preference order:
+      1. GDPR breach (PII/regulatory exposure is most salient to users)
+      2. ISO 27035 mechanism (specific value, or 'Information Security
+         Incident' when value=unspecified)
+      3. Fallback 'Incident'
+    Replaces the dropped `incidents.incident_type` column.
+    """
+    for c in classifications:
+        if c['standard_id'] == 'GDPR' and c['dimension'] == 'breach_cia':
+            return "Personal Data Breach"
+    for c in classifications:
+        if c['standard_id'] == 'ISO_27035' and c['dimension'] == 'category':
+            v = c['value']
+            if v == 'unspecified':
+                return "Information Security Incident"
+            return v.replace('_', ' ').title()
+    return "Incident"
+
+
+def _compute_urgency(deadline_at) -> str:
+    """
+    Same urgency buckets as v_incidents_open + the old Cypher reader.
+    Accepts datetime or None. Returns 'no_deadline' for None.
+    """
+    if not deadline_at:
+        return "no_deadline"
+    from datetime import datetime, timezone
+    now = datetime.now(timezone.utc)
+    hours_remaining = (deadline_at - now).total_seconds() / 3600
+    if hours_remaining < 0:    return "overdue"
+    if hours_remaining < 12:   return "critical"
+    if hours_remaining < 48:   return "urgent"
+    if hours_remaining < 168:  return "soon"      # 7 days
+    return "on_track"
 
 
 # ── Node budget per question type ─────────────────────────────────────────────
@@ -311,6 +350,8 @@ class GraphExpander:
         neo4j_password: str,
         retriever,                  # VectorRetriever — for ChromaDB content
         connection_timeout: int = 5,
+        pg_pool         = None,     # Optional psycopg2 pool for incident reads;
+                                    # if None, falls back to per-call connection
     ):
         self._uri      = neo4j_uri
         self._auth     = (neo4j_user, neo4j_password)
@@ -318,6 +359,7 @@ class GraphExpander:
         self._timeout  = connection_timeout
         self._driver   = None
         self._online   = None       # None = not yet tested
+        self._pg_pool  = pg_pool
 
     # ── Public API ─────────────────────────────────────────────────────────
 
@@ -933,95 +975,176 @@ class GraphExpander:
         standards:  list[str],
     ) -> list["IncidentObligationContext"]:
         """
-        Query Neo4j for open incidents and their triggered obligations.
-        Called every retrieve pass — open incidents always add to mandatory pool.
+        Open/in-progress incidents with their materialized obligations,
+        filtered to obligations whose standard_id is in `standards`.
 
-        Reads from Neo4j Incident nodes (synced from Postgres).
-        Falls back to empty list if no incidents or Neo4j offline.
+        Reads from Postgres (incidents, incident_classifications,
+        incident_obligations) and enriches with Neo4j for
+        REQUIRES_DOCUMENT IDs. Per the locked architecture, incidents are
+        instances in Postgres and Events/RequirementNodes are definitions
+        in Neo4j — :Incident nodes are never projected to Neo4j.
 
-        NOTE: Incident nodes are not yet synced to Neo4j — incidents live in
-        Postgres only. This method returns empty until the Neo4j sync is built.
-        Suppressed to avoid repeated warnings about missing labels.
+        Behaviour rules:
+          - Returns [] if Postgres unavailable (graceful degradation).
+          - Required-document enrichment requires Neo4j; falls back to []
+            for that field if Neo4j is offline (rest of context still
+            populated).
+          - Per-incident urgency = earliest unmet obligation's deadline_at,
+            falling back to incidents.deadline_at headline.
+          - Display label comes from classifications, not from a column.
+
+        Background: memory/incident_obligations_model.md.
         """
-        if not self._is_online():
+        conn = self._get_pg_conn()
+        if conn is None:
             return []
 
-        # Guard: check if Incident label exists before querying
-        # Avoids flooding logs with UnknownLabelWarning on every query
-        if not getattr(self, '_incident_label_exists', None):
-            try:
-                driver = self._get_driver()
-                with driver.session() as s:
-                    r = s.run("CALL db.labels() YIELD label WHERE label='Incident' RETURN count(*) AS n")
-                    self._incident_label_exists = r.single()["n"] > 0
-            except Exception:
-                self._incident_label_exists = False
-
-        if not self._incident_label_exists:
-            return []  # Incident nodes not yet in Neo4j — skip silently
-
         try:
-            driver = self._get_driver()
-            with driver.session() as s:
-                result = s.run("""
-                    MATCH (i:Incident {tenant_id: $tenant_id})
-                    WHERE i.status IN ['open', 'in_progress']
-                    MATCH (i)-[:INSTANCE_OF]->(e:Event)
-                          -[:TRIGGERS_OBLIGATION]->(n:RequirementNode)
-                    WHERE n.standard_id IN $standards
-                    OPTIONAL MATCH (e)-[:REQUIRES_DOCUMENT]->(req:DocumentRequirement)
-                    RETURN
-                        i.id            AS incident_id,
-                        i.incident_type AS incident_type,
-                        i.title         AS title,
-                        i.severity      AS severity,
-                        i.deadline_at   AS deadline_at,
-                        i.status        AS status,
-                        collect(DISTINCT n.id)   AS triggered_node_ids,
-                        collect(DISTINCT req.id) AS required_documents
-                    ORDER BY i.severity, i.deadline_at
-                """, tenant_id=tenant_id, standards=standards)
+            contexts: list[IncidentObligationContext] = []
+            with conn.cursor() as cur:
+                # Set RLS tenant context — TRUE = transaction-local; clears
+                # on commit/rollback. Required when connection is from the
+                # app pool (arioncomply_app role has no BYPASSRLS).
+                cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                            (str(tenant_id),))
+                # Open/in-progress incidents that have at least one obligation
+                # in scope for the requested standards.
+                cur.execute("""
+                    SELECT i.id, i.title, i.severity, i.deadline_at
+                    FROM incidents i
+                    WHERE i.tenant_id = %s
+                      AND i.is_active = TRUE
+                      AND i.status IN ('open','in_progress')
+                      AND EXISTS (
+                          SELECT 1 FROM incident_obligations o
+                          WHERE o.incident_id = i.id
+                            AND o.standard_id = ANY(%s)
+                      )
+                    ORDER BY i.severity, i.deadline_at NULLS LAST
+                """, (str(tenant_id), list(standards)))
+                incidents = cur.fetchall()
 
-                incidents = []
-                from datetime import datetime, timezone
-                now = datetime.now(timezone.utc)
+                for inc_id, title, severity, inc_deadline_at in incidents:
+                    # Classifications drive the display label + Neo4j doc-req lookup
+                    cur.execute("""
+                        SELECT standard_id, dimension, value
+                        FROM incident_classifications
+                        WHERE incident_id = %s AND is_active = TRUE
+                    """, (str(inc_id),))
+                    classifications = [
+                        {'standard_id': r[0], 'dimension': r[1], 'value': r[2]}
+                        for r in cur.fetchall()
+                    ]
 
-                for row in result:
-                    deadline_at = row["deadline_at"]
-                    if deadline_at:
-                        try:
-                            hours_remaining = (
-                                deadline_at.to_native() - now
-                            ).total_seconds() / 3600
-                            if hours_remaining < 0:
-                                urgency = "overdue"
-                            elif hours_remaining < 12:
-                                urgency = "critical"
-                            elif hours_remaining < 48:
-                                urgency = "urgent"
-                            elif hours_remaining < 168:
-                                urgency = "soon"
-                            else:
-                                urgency = "on_track"
-                        except Exception:
-                            urgency = "unknown"
-                    else:
-                        urgency = "no_deadline"
+                    cur.execute("""
+                        SELECT control_ref, standard_id, deadline_at, is_met
+                        FROM incident_obligations
+                        WHERE incident_id = %s
+                          AND standard_id = ANY(%s)
+                    """, (str(inc_id), list(standards)))
+                    obligations = cur.fetchall()
+                    if not obligations:
+                        continue   # filtered out by standards
 
-                    incidents.append(IncidentObligationContext(
-                        incident_id        = row["incident_id"],
-                        incident_type      = row["incident_type"],
-                        title              = row["title"] or row["incident_type"],
-                        severity           = row["severity"],
-                        deadline_at        = str(deadline_at) if deadline_at else None,
-                        urgency            = urgency,
-                        triggered_node_ids = list(row["triggered_node_ids"]),
-                        required_documents = [r for r in row["required_documents"] if r],
+                    # Earliest unmet obligation deadline → fall back to
+                    # incidents.deadline_at headline if no per-obligation
+                    # deadline is set.
+                    unmet_deadlines = [d for _, _, d, met in obligations
+                                       if not met and d is not None]
+                    effective_deadline = min(unmet_deadlines, default=inc_deadline_at)
+
+                    required_documents = self._fetch_required_documents_for(classifications)
+
+                    contexts.append(IncidentObligationContext(
+                        incident_id        = str(inc_id),
+                        incident_type      = _derive_incident_display_label(classifications),
+                        title              = title or "(untitled incident)",
+                        severity           = severity or "medium",
+                        deadline_at        = effective_deadline.isoformat()
+                                              if effective_deadline else None,
+                        urgency            = _compute_urgency(effective_deadline),
+                        triggered_node_ids = [r[0] for r in obligations],
+                        required_documents = required_documents,
                     ))
 
-                return incidents
+            # Commit the read-only transaction so the set_config is cleared
+            # and the connection returns to the pool in a clean state.
+            try:
+                conn.commit()
+            except Exception:
+                pass
+            return contexts
 
-        except Exception as e:
+        except Exception:
+            try:
+                conn.rollback()
+            except Exception:
+                pass
+            return []
+        finally:
+            self._release_pg_conn(conn)
+
+    def _get_pg_conn(self):
+        """
+        Acquire a Postgres connection. Uses the pool if one was injected at
+        construction time (preferred for concurrent use); otherwise builds a
+        fresh connection per call (fallback for tests / one-off scripts).
+        Returns None if Postgres is unavailable.
+        Caller MUST call `_release_pg_conn` on the returned connection.
+        """
+        if self._pg_pool is not None:
+            try:
+                return self._pg_pool.getconn()
+            except Exception:
+                return None
+        try:
+            from rag.posture_loader import build_pg_conn
+            return build_pg_conn()
+        except Exception:
+            return None
+
+    def _release_pg_conn(self, conn) -> None:
+        """Return a connection to the pool, or close it if from fallback."""
+        if conn is None:
+            return
+        if self._pg_pool is not None:
+            try:
+                self._pg_pool.putconn(conn)
+            except Exception:
+                pass
+        else:
+            try:
+                conn.close()
+            except Exception:
+                pass
+
+    def _fetch_required_documents_for(
+        self,
+        classifications: list[dict],
+    ) -> list[str]:
+        """DocumentRequirement ids triggered by Events bound to these
+        classifications. Returns [] if Neo4j offline or no classifications."""
+        if not classifications or not self._is_online():
+            return []
+        try:
+            driver = self._get_driver()
+            triples = [
+                [c['standard_id'], c['dimension'], c['value']]
+                for c in classifications
+            ]
+            with driver.session() as s:
+                result = s.run("""
+                    UNWIND $triples AS t
+                    MATCH (v:ClassificationValue {
+                            standard_id: t[0],
+                            dimension:   t[1],
+                            value:       t[2]
+                          })-[:MANIFESTS_AS]->(e:Event)
+                          -[:REQUIRES_DOCUMENT]->(rd:DocumentRequirement)
+                    RETURN DISTINCT rd.id AS doc_id
+                """, triples=triples)
+                return [r['doc_id'] for r in result if r['doc_id']]
+        except Exception:
             return []
 
     def _is_online(self) -> bool:

@@ -60,6 +60,26 @@ EVENT_PERSONAL_DATA_BREACH = Event(
     requires_documents = ["req:Art.33:breach_notification"],
 )
 
+EVENT_INFOSEC_INCIDENT = Event(
+    id               = "event:information_security_incident",
+    event_type       = "information_security_incident",
+    category         = "incident",
+    title            = "Information Security Incident",
+    description      = "Compromise of confidentiality, integrity, or "
+                       "availability of information assets where no personal "
+                       "data is established to be involved. Generic ISO 27001 "
+                       "incident path — complements event:personal_data_breach "
+                       "for the PII subset.",
+    legal_deadline   = None,
+    severity_default = "medium",
+    triggers         = [
+        EventTrigger("ISO27001:2022:A.5.26",  None,  "Invoke incident response procedure"),
+        EventTrigger("ISO27001:2022:A.5.27",  None,  "Conduct post-incident lessons learned"),
+        EventTrigger("ISO27001:2022:6.1.2",   None,  "Update risk assessment"),
+    ],
+    requires_documents = [],
+)
+
 EVENT_SUPERVISORY_INQUIRY = Event(
     id               = "event:supervisory_authority_inquiry",
     event_type       = "supervisory_authority_inquiry",
@@ -230,6 +250,7 @@ EVENT_SYSTEM_CHANGE = Event(
 ALL_EVENTS: list[Event] = [
     # Incidents
     EVENT_PERSONAL_DATA_BREACH,
+    EVENT_INFOSEC_INCIDENT,
     EVENT_SUPERVISORY_INQUIRY,
     EVENT_AUDIT_NONCONFORMITY,
     EVENT_CERTIFICATION_AUDIT,
