@@ -369,12 +369,10 @@ def load_uploaded_documents(pg_conn, tenant_id: str) -> list[dict]:
                             ) sub
                         ),
                         -- Fallback: if findings haven't been written yet,
-                        -- use the cached refs (assumed ISO 27001 — the
-                        -- only assessed framework before this change).
-                        CASE WHEN cd.control_refs IS NULL OR array_length(cd.control_refs, 1) IS NULL
-                             THEN NULL
-                             ELSE ARRAY(SELECT 'ISO27001:2022:' || r FROM unnest(cd.control_refs) r)
-                        END
+                        -- the cached column already holds fully-qualified
+                        -- STANDARD:VERSION:REF entries (intake writes them
+                        -- that way). No framework guesswork here.
+                        cd.control_refs
                     ) AS framework_refs
                 FROM client_documents cd
                 WHERE cd.tenant_id       = %s::uuid

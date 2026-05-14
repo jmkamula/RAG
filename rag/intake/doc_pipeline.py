@@ -337,14 +337,23 @@ class DocumentPipeline:
                 _file_size, _sha256 = None, None
             _mime, _ = mimetypes.guess_type(file_name)
 
+            # control_refs cached on client_documents store fully-qualified
+            # STANDARD:VERSION:REF entries so cross-framework attribution
+            # survives without the loader having to assume a framework.
+            # The live read in load_uploaded_documents prefers
+            # document_findings, but if those are absent the cached column
+            # is now framework-correct by itself.
             doc_metadata = {
                 "file_size_bytes": _file_size,
                 "mime_type":       _mime,
                 "checksum_sha256": _sha256,
                 "page_count":      doc.page_count,
                 "document_type":   doc.doc_type,
-                "control_refs":    sorted({f.control_ref for f in findings
-                                           if f.control_ref}),
+                "control_refs":    sorted({
+                    f"{f.standard_id}:{f.control_ref}"
+                    for f in findings
+                    if f.control_ref and f.standard_id
+                }),
             }
 
             import psycopg2

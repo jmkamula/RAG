@@ -428,13 +428,27 @@ class RowMappers:
         }
         status = status_map.get((status_raw or '').lower(), 'open')
 
+        # Cross-framework: workbook ships ISMS + PIMS columns separately.
+        # Storage is unified into a single STANDARD:VERSION:REF array
+        # so adding more frameworks doesn't require a schema change.
+        isms_raw = _to_list(raw.get('ISMS Applicable Controls')) or []
+        pims_raw = _to_list(raw.get('PIMS Applicable Controls')) or []
+        # Each workbook entry is "<ref> <description>" — keep the leading
+        # token only. Skip empty entries.
+        control_refs = sorted({
+            f"ISO27001:2022:{c.split(' ', 1)[0]}"
+            for c in isms_raw if c and c.split(' ', 1)[0]
+        } | {
+            f"ISO27701:2019:{c.split(' ', 1)[0]}"
+            for c in pims_raw if c and c.split(' ', 1)[0]
+        })
+
         return {
             'tenant_id':             tenant_id,
             'external_ref':          risk_id,   # used for upsert
             'treatment_option':      option,
             'treatment_action':      _to_str(raw.get('Treatment Action')),
-            'isms_controls':         _to_list(raw.get('ISMS Applicable Controls')),
-            'pims_controls':         _to_list(raw.get('PIMS Applicable Controls')),
+            'control_refs':          control_refs,
             'implementation_date':   _to_date(raw.get('Implementation Date')),
             'residual_risk_level':   _to_int(raw.get('Residual Risk Level after Treatment')),
             'treatment_status':      status,
@@ -502,6 +516,9 @@ class RowMappers:
 
         notes = _to_str(raw.get('Findings') or raw.get('Auditor Notes'))
 
+        # Cross-framework: a single audit may cover multiple standards.
+        # Default to ISO 27001 since the workbook doesn't yet carry a
+        # framework column — extend here once it does.
         return {
             'tenant_id':         tenant_id,
             'external_ref':      audit_id,
@@ -510,7 +527,7 @@ class RowMappers:
             'auditor_name':      auditor,
             'auditor_org':       auditor_org,
             'scope':             _to_str(raw.get('Scope')),
-            'standard_id':       'ISO27001:2022',
+            'standard_ids':      ['ISO27001:2022'],
             'finding_refs':      finding_refs,
             'notes':             notes,
             'workbook_imported': True,
@@ -837,7 +854,8 @@ class WorkbookImporter:
         col_list     = ', '.join(cols)
 
         update_cols = [c for c in insert_data.keys()
-                       if c not in ('tenant_id', 'id', 'external_ref', 'standard_id')]
+                       if c not in ('tenant_id', 'id', 'external_ref',
+                                    'standard_id', 'standard_ids')]
         update_clause = ', '.join(
             f"{c} = EXCLUDED.{c}" for c in update_cols
         )
