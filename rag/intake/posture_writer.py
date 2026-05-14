@@ -503,11 +503,77 @@ def _write_posture_controls(
 # PUBLIC API
 # =============================================================================
 
+def _persist_document_metadata(
+    tenant_id: str,
+    doc_id:    str,
+    metadata:  dict,
+    conn,
+) -> None:
+    """
+    Stamp file + content metadata on the client_documents row after intake.
+    Sets uploaded_at = NOW() so the registry-import timestamp no longer
+    masquerades as the actual upload time. All fields are COALESCEd into
+    existing values when the new value is NULL, so this is idempotent
+    across re-uploads.
+
+    Expected metadata keys (all optional):
+      file_size_bytes, mime_type, checksum_sha256,
+      page_count, document_type, control_refs (list[str])
+    """
+    if not metadata:
+        return
+    control_refs = metadata.get("control_refs")
+    if control_refs is not None and not isinstance(control_refs, list):
+        control_refs = list(control_refs)
+
+    with conn.cursor() as cur:
+        cur.execute("SAVEPOINT sp_cd_metadata")
+        try:
+            cur.execute(
+                """
+                UPDATE client_documents
+                   SET file_size_bytes = COALESCE(%s, file_size_bytes),
+                       mime_type       = COALESCE(%s, mime_type),
+                       checksum_sha256 = COALESCE(%s, checksum_sha256),
+                       page_count      = COALESCE(%s, page_count),
+                       document_type   = COALESCE(%s, document_type),
+                       control_refs    = COALESCE(%s, control_refs),
+                       uploaded_at     = NOW()
+                 WHERE id = %s AND tenant_id = %s
+                """,
+                (
+                    metadata.get("file_size_bytes"),
+                    metadata.get("mime_type"),
+                    metadata.get("checksum_sha256"),
+                    metadata.get("page_count"),
+                    metadata.get("document_type"),
+                    control_refs,
+                    doc_id, tenant_id,
+                ),
+            )
+            cur.execute("RELEASE SAVEPOINT sp_cd_metadata")
+            logger.debug(
+                f"Stamped metadata on {doc_id}: "
+                f"type={metadata.get('document_type')} "
+                f"pages={metadata.get('page_count')} "
+                f"ctrls={len(control_refs or [])}"
+            )
+        except Exception as e:
+            cur.execute("ROLLBACK TO SAVEPOINT sp_cd_metadata")
+            cur.execute("RELEASE SAVEPOINT sp_cd_metadata")
+            logger.warning(
+                f"client_documents metadata stamp failed for {doc_id}: "
+                f"{type(e).__name__}: {e}"
+            )
+
+
 def write_findings(
     findings:  list[DocumentFinding],
     tenant_id: str,
     upload_id: str,
     conn,
+    *,
+    metadata:  Optional[dict] = None,
 ) -> dict:
     """
     Stage 4 entry point. Write all findings to document_findings and
@@ -518,6 +584,12 @@ def write_findings(
       - This function uses savepoints for per-row fault isolation
       - _ensure_client_document() runs inside savepoint before batch
       - update_upload_status() must be called separately by caller
+
+    Args:
+      metadata: optional dict of file/content metadata to stamp on
+                client_documents (file_size_bytes, mime_type, checksum_sha256,
+                page_count, document_type, control_refs). When present,
+                uploaded_at is also refreshed to NOW().
 
     Returns summary dict.
     """
@@ -537,6 +609,10 @@ def write_findings(
     filename = findings[0].document_name if findings else "unknown"
     doc_id   = _ensure_client_document(tenant_id, filename, conn)
     logger.debug(f"client_documents.id = {doc_id}")
+
+    # ── Stamp file/content metadata + actual uploaded_at ──────────────────
+    if metadata:
+        _persist_document_metadata(tenant_id, doc_id, metadata, conn)
 
     # ── Stage 4A: document_findings ───────────────────────────────────────
     written = _write_document_findings(findings, tenant_id, doc_id, conn)

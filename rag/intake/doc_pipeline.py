@@ -324,10 +324,36 @@ class DocumentPipeline:
             logger.info(f"Stage 4: Writing {len(findings)} findings to DB")
             t4 = time.time()
 
+            # Bundle file/content metadata so the writer can stamp it on
+            # client_documents alongside the registry linkage update.
+            import hashlib
+            import mimetypes
+            _path_obj = Path(file_path)
+            try:
+                _file_bytes = _path_obj.read_bytes()
+                _file_size  = len(_file_bytes)
+                _sha256     = hashlib.sha256(_file_bytes).hexdigest()
+            except Exception:
+                _file_size, _sha256 = None, None
+            _mime, _ = mimetypes.guess_type(file_name)
+
+            doc_metadata = {
+                "file_size_bytes": _file_size,
+                "mime_type":       _mime,
+                "checksum_sha256": _sha256,
+                "page_count":      doc.page_count,
+                "document_type":   doc.doc_type,
+                "control_refs":    sorted({f.control_ref for f in findings
+                                           if f.control_ref}),
+            }
+
             import psycopg2
             conn = psycopg2.connect(self.db_url)
             try:
-                summary = write_findings(findings, tenant_id, upload_id, conn)
+                summary = write_findings(
+                    findings, tenant_id, upload_id, conn,
+                    metadata = doc_metadata,
+                )
                 conn.commit()
             except Exception as e:
                 conn.rollback()

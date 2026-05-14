@@ -125,6 +125,70 @@ _STOP_WORDS = {
 }
 
 
+_FRAMEWORK_DISPLAY = {
+    "ISO27001": ("ISO 27001",  "controls"),
+    "ISO27701": ("ISO 27701",  "controls"),
+    "GDPR":     ("GDPR",       "articles"),
+    "NIST":     ("NIST",       "controls"),
+    "SOC2":     ("SOC 2",      "criteria"),
+    "HIPAA":    ("HIPAA",      "safeguards"),
+}
+
+
+def _group_refs_by_framework(refs: list | None) -> list[tuple[str, str, list[str]]]:
+    """
+    Parse fully-qualified refs ("STANDARD:VERSION:REF", e.g.
+    "ISO27001:2022:A.5.1") and group by standard. Returns a list of
+    (display_name, noun, sorted_refs) tuples, ordered by a stable framework
+    priority (ISO 27001 → ISO 27701 → GDPR → others alphabetically).
+    Bare refs without a STANDARD: prefix are bucketed as "Other".
+    """
+    if not refs:
+        return []
+
+    groups: dict[str, list[str]] = {}
+    for raw in refs:
+        if not raw:
+            continue
+        # Split on first colon: STANDARD : everything-else
+        # Then strip the version from the rest if it has one.
+        parts = raw.split(":", 2)
+        if len(parts) == 3:
+            standard, _version, control = parts
+        elif len(parts) == 2:
+            standard, control = parts
+        else:
+            standard, control = "OTHER", parts[0]
+        groups.setdefault(standard, []).append(control)
+
+    # Stable priority for display
+    priority = ["ISO27001", "ISO27701", "GDPR", "NIST", "SOC2", "HIPAA"]
+    ordered_keys  = [k for k in priority if k in groups]
+    ordered_keys += sorted(k for k in groups if k not in priority)
+
+    out = []
+    for k in ordered_keys:
+        display, noun = _FRAMEWORK_DISPLAY.get(k, (k, "controls"))
+        out.append((display, noun, sorted(set(groups[k]))))
+    return out
+
+
+def _render_framework_refs(refs: list | None) -> str:
+    """
+    Render grouped framework refs as a single inline clause for a deterministic
+    answer. Examples:
+      one framework  → "ISO 27001 controls A.5.1, A.5.12"
+      two+           → "ISO 27001 controls A.5.1, A.5.12; GDPR articles Art.32"
+      none           → ""
+    """
+    groups = _group_refs_by_framework(refs)
+    if not groups:
+        return ""
+    parts = [f"{display} {noun} {', '.join(items)}"
+             for display, noun, items in groups]
+    return "; ".join(parts)
+
+
 def _title_match_against(query: str, items: list, title_key: str) -> list:
     """
     Find items whose title overlaps the query by ≥2 significant words.
@@ -174,18 +238,22 @@ def _answer_upload_status(
         up_hits = _title_match_against(query, uploaded, "document_title")
         if up_hits:
             d = up_hits[0]
-            title = d.get("document_title") or d.get("filename") or "the requested document"
-            ref   = d.get("external_ref") or d.get("platform_ref") or ""
-            ref_s = f" ({ref})" if ref else ""
-            when  = d.get("uploaded_at")
-            when_s = f" on {when[:10]}" if when else ""
+            title    = d.get("document_title") or d.get("filename") or "the requested document"
+            ref      = d.get("external_ref") or d.get("platform_ref") or ""
+            ref_s    = f" ({ref})" if ref else ""
+            when     = d.get("uploaded_at")
+            when_s   = f" on {when[:10]}" if when else ""
+            doc_type = d.get("doc_type") or ""
+            type_s   = f" ({doc_type})" if doc_type else ""
             extras = []
-            controls = d.get("control_refs")
-            if controls:
-                extras.append(f"linked to controls {', '.join(controls)}")
+            if d.get("page_count"):
+                extras.append(f"{d['page_count']} pages")
+            framework_clause = _render_framework_refs(d.get("framework_refs"))
+            if framework_clause:
+                extras.append(f"assessed against {framework_clause}")
             extra_s = f" — {'; '.join(extras)}" if extras else ""
             return (
-                f"Yes — {title}{ref_s} has been uploaded{when_s}{extra_s}. "
+                f"Yes — {title}{ref_s}{type_s} has been uploaded{when_s}{extra_s}. "
                 f"Document status: {d.get('document_status', 'uploaded')}."
             )
 
@@ -212,11 +280,14 @@ def _answer_upload_status(
             )
         lines = [f"Uploaded documents ({len(uploaded)} total):"]
         for d in uploaded[:20]:
-            title = d.get("document_title") or d.get("filename") or "?"
-            ref   = d.get("external_ref") or d.get("platform_ref") or ""
-            ref_s = f" ({ref})" if ref else ""
-            status = d.get("document_status") or "uploaded"
-            lines.append(f"  • {title}{ref_s} [{status}]")
+            title    = d.get("document_title") or d.get("filename") or "?"
+            ref      = d.get("external_ref") or d.get("platform_ref") or ""
+            ref_s    = f" ({ref})" if ref else ""
+            doc_type = d.get("doc_type") or ""
+            type_s   = f" — {doc_type}" if doc_type else ""
+            when     = d.get("uploaded_at")
+            when_s   = f", uploaded {when[:10]}" if when else ""
+            lines.append(f"  • {title}{ref_s}{type_s}{when_s}")
         if len(uploaded) > 20:
             lines.append(f"  … and {len(uploaded) - 20} more")
         return "\n".join(lines)

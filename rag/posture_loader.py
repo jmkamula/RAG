@@ -337,22 +337,50 @@ def load_uploaded_documents(pg_conn, tenant_id: str) -> list[dict]:
     try:
         with pg_conn.cursor() as cur:
             cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+            # control_refs is read LIVE from document_findings rather than the
+            # cached client_documents.control_refs column. Reason: as new
+            # extractors (ISO 27701, GDPR) start writing findings against
+            # already-uploaded docs, those new frameworks must surface
+            # automatically without re-running intake. The cached column is
+            # still populated by intake as a fast-path / fallback.
             cur.execute("""
                 SELECT
-                    id::text          AS doc_id,
-                    platform_ref,
-                    external_ref,
-                    document_title,
-                    filename,
-                    document_type     AS doc_type,
-                    document_status,
-                    uploaded_at::text,
-                    control_refs
-                FROM client_documents
-                WHERE tenant_id       = %s::uuid
-                  AND is_active       = TRUE
-                  AND document_status IN ('uploaded', 'processing', 'active')
-                ORDER BY uploaded_at DESC NULLS LAST, document_title NULLS LAST
+                    cd.id::text          AS doc_id,
+                    cd.platform_ref,
+                    cd.external_ref,
+                    cd.document_title,
+                    cd.filename,
+                    cd.document_type     AS doc_type,
+                    cd.document_status,
+                    cd.uploaded_at::text,
+                    cd.page_count,
+                    cd.file_size_bytes,
+                    cd.mime_type,
+                    COALESCE(
+                        (
+                            SELECT array_agg(s_ref ORDER BY s_ref)
+                            FROM (
+                                SELECT DISTINCT
+                                    df.standard_id || ':' || df.control_ref AS s_ref
+                                FROM document_findings df
+                                WHERE df.document_id = cd.id
+                                  AND df.tenant_id   = cd.tenant_id
+                                  AND df.is_active   = TRUE
+                            ) sub
+                        ),
+                        -- Fallback: if findings haven't been written yet,
+                        -- use the cached refs (assumed ISO 27001 — the
+                        -- only assessed framework before this change).
+                        CASE WHEN cd.control_refs IS NULL OR array_length(cd.control_refs, 1) IS NULL
+                             THEN NULL
+                             ELSE ARRAY(SELECT 'ISO27001:2022:' || r FROM unnest(cd.control_refs) r)
+                        END
+                    ) AS framework_refs
+                FROM client_documents cd
+                WHERE cd.tenant_id       = %s::uuid
+                  AND cd.is_active       = TRUE
+                  AND cd.document_status IN ('uploaded', 'processing', 'active')
+                ORDER BY cd.uploaded_at DESC NULLS LAST, cd.document_title NULLS LAST
             """, (tenant_id,))
             cols = [d[0] for d in cur.description]
             return [dict(zip(cols, row)) for row in cur.fetchall()]
