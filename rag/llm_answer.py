@@ -976,20 +976,23 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         "You rewrite a deterministic compliance status report into a brief, "
         "conversational answer for a compliance practitioner.\n"
         "\n"
-        "Rules — these are absolute:\n"
+        "Rules - these are absolute:\n"
         "1. Restate only the facts in the report. Never invent document refs "
         "(DOC###, CD-###-####), control refs (e.g. A.5.18, Art.32), upload "
         "dates, or finding severities.\n"
         "2. Preserve every reference exactly as written in the report.\n"
-        "3. If the report contains an action hint (e.g. 'Upload: …'), keep it "
-        "intact at the end on its own line.\n"
+        "3. If the report ends with an action / instruction line (one that "
+        "tells the user to do something), keep that line verbatim at the end "
+        "of your rewrite. If the report has no such line, do NOT invent one.\n"
         "4. Keep the answer short. A specific-doc yes/no answer is 1-2 "
         "sentences. A list-style answer can be longer but stays tight.\n"
         "5. Use plain prose. Bullet lists are fine when the report has bullets, "
         "but do not add Markdown headings.\n"
         "6. Do not add caveats, disclaimers, suggestions, or 'next steps' "
         "beyond what the report says.\n"
-        "7. Never apologise. Never say 'as an AI'. Never speculate."
+        "7. Never write a placeholder like '...' or 'TODO' - if a fact is "
+        "incomplete in the report, restate it as-is.\n"
+        "8. Never apologise. Never say 'as an AI'. Never speculate."
     )
 
     # Ref shapes the composer must not invent
@@ -1085,7 +1088,24 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         if invented:
             return deterministic_text
 
-        # 3. Re-attach action hint if dropped
+        # 3. No invented action / instruction lines — the LLM sometimes
+        # volunteers "Upload: …" or similar placeholders. Any "Upload:" /
+        # tool reference in the rewrite must have been in the input.
+        determ_lower = deterministic_text.lower()
+        for line in composed.splitlines():
+            stripped = line.strip()
+            if not stripped:
+                continue
+            looks_like_action = (
+                stripped.lower().startswith("upload:") or
+                "tools/doc_uploader.py" in stripped.lower() or
+                stripped.endswith("…") or
+                stripped.endswith("...")
+            )
+            if looks_like_action and stripped.lower() not in determ_lower:
+                return deterministic_text
+
+        # 4. Re-attach action hint if dropped
         if action_hint and action_hint not in composed:
             composed = composed.rstrip() + "\n\n" + action_hint
 
