@@ -404,9 +404,17 @@ class ContextAssembler:
                 )
                 if inc.deadline_at:
                     lines.append(f"   Deadline: {inc.deadline_at}")
+                # Render obligations grouped by framework so a GDPR breach
+                # incident clearly shows "GDPR articles Art.33" rather than
+                # collapsing every framework into a flat ref list.
+                from rag.framework_refs import render_framework_refs
+                obligations_clause = (
+                    render_framework_refs(inc.triggered_node_ids)
+                    or ', '.join(nid.split(':')[-1]
+                                 for nid in inc.triggered_node_ids)
+                )
                 lines.append(
-                    f"   Obligations triggered: "
-                    f"{', '.join(nid.split(':')[-1] for nid in inc.triggered_node_ids)}"
+                    f"   Obligations triggered: {obligations_clause}"
                 )
 
         if others:

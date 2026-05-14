@@ -307,7 +307,8 @@ def load_document_alerts(pg_conn, tenant_id: str) -> list[dict]:
                 SELECT
                     platform_ref, external_ref, document_title,
                     document_status, alert_type, alert_message,
-                    linked_controls, linked_findings, worst_finding_score
+                    linked_controls, linked_control_refs,
+                    linked_findings, worst_finding_score
                 FROM document_alerts
                 WHERE alert_type IN ('CRITICAL', 'WARNING', 'INFO')
                 ORDER BY worst_finding_score NULLS LAST, document_title

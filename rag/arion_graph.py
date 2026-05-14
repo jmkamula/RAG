@@ -125,68 +125,12 @@ _STOP_WORDS = {
 }
 
 
-_FRAMEWORK_DISPLAY = {
-    "ISO27001": ("ISO 27001",  "controls"),
-    "ISO27701": ("ISO 27701",  "controls"),
-    "GDPR":     ("GDPR",       "articles"),
-    "NIST":     ("NIST",       "controls"),
-    "SOC2":     ("SOC 2",      "criteria"),
-    "HIPAA":    ("HIPAA",      "safeguards"),
-}
-
-
-def _group_refs_by_framework(refs: list | None) -> list[tuple[str, str, list[str]]]:
-    """
-    Parse fully-qualified refs ("STANDARD:VERSION:REF", e.g.
-    "ISO27001:2022:A.5.1") and group by standard. Returns a list of
-    (display_name, noun, sorted_refs) tuples, ordered by a stable framework
-    priority (ISO 27001 → ISO 27701 → GDPR → others alphabetically).
-    Bare refs without a STANDARD: prefix are bucketed as "Other".
-    """
-    if not refs:
-        return []
-
-    groups: dict[str, list[str]] = {}
-    for raw in refs:
-        if not raw:
-            continue
-        # Split on first colon: STANDARD : everything-else
-        # Then strip the version from the rest if it has one.
-        parts = raw.split(":", 2)
-        if len(parts) == 3:
-            standard, _version, control = parts
-        elif len(parts) == 2:
-            standard, control = parts
-        else:
-            standard, control = "OTHER", parts[0]
-        groups.setdefault(standard, []).append(control)
-
-    # Stable priority for display
-    priority = ["ISO27001", "ISO27701", "GDPR", "NIST", "SOC2", "HIPAA"]
-    ordered_keys  = [k for k in priority if k in groups]
-    ordered_keys += sorted(k for k in groups if k not in priority)
-
-    out = []
-    for k in ordered_keys:
-        display, noun = _FRAMEWORK_DISPLAY.get(k, (k, "controls"))
-        out.append((display, noun, sorted(set(groups[k]))))
-    return out
-
-
-def _render_framework_refs(refs: list | None) -> str:
-    """
-    Render grouped framework refs as a single inline clause for a deterministic
-    answer. Examples:
-      one framework  → "ISO 27001 controls A.5.1, A.5.12"
-      two+           → "ISO 27001 controls A.5.1, A.5.12; GDPR articles Art.32"
-      none           → ""
-    """
-    groups = _group_refs_by_framework(refs)
-    if not groups:
-        return ""
-    parts = [f"{display} {noun} {', '.join(items)}"
-             for display, noun, items in groups]
-    return "; ".join(parts)
+# Framework-aware ref helpers live in rag/framework_refs.py so they can be
+# shared between arion_graph and context_assembler without circular import.
+from rag.framework_refs import (
+    group_refs_by_framework  as _group_refs_by_framework,
+    render_framework_refs    as _render_framework_refs,
+)
 
 
 def _title_match_against(query: str, items: list, title_key: str) -> list:
@@ -263,8 +207,12 @@ def _answer_upload_status(
             title = a.get("document_title") or "the requested document"
             ref   = a.get("external_ref") or ""
             ref_s = f" ({ref})" if ref else ""
-            controls = a.get("linked_controls") or ""
-            ctl_s = f" It is linked to controls: {controls}." if controls else ""
+            # Prefer the structured array from the view; fall back to the
+            # flat string for older snapshots.
+            framework_clause = _render_framework_refs(a.get("linked_control_refs"))
+            if not framework_clause and a.get("linked_controls"):
+                framework_clause = a["linked_controls"]
+            ctl_s = f" It is linked to {framework_clause}." if framework_clause else ""
             return (
                 f"No — {title}{ref_s} is registered but has not yet been "
                 f"uploaded to the platform.{ctl_s}"
@@ -322,13 +270,22 @@ def _answer_upload_status(
     warning  = [a for a in relevant if a.get("alert_type") == "WARNING"]
     info     = [a for a in relevant if a.get("alert_type") == "INFO"]
 
+    def _link_clause(a: dict) -> str:
+        """Framework-aware 'linked to …' clause for one alert."""
+        rendered = _render_framework_refs(a.get("linked_control_refs"))
+        if rendered:
+            return rendered
+        # Legacy fallback when the structured array is unavailable
+        flat = a.get("linked_controls")
+        return flat if flat else "unknown"
+
     if critical:
         lines.append("The following documents are registered but NOT yet uploaded "
                      "and are linked to open NC findings:")
         for a in critical:
             lines.append(
                 f"  • {a['document_title']} ({a['external_ref']}) "
-                f"— linked to controls: {a.get('linked_controls', 'unknown')}"
+                f"— linked to {_link_clause(a)}"
             )
     if warning:
         if lines:
@@ -337,7 +294,7 @@ def _answer_upload_status(
         for a in warning:
             lines.append(
                 f"  • {a['document_title']} ({a['external_ref']}) "
-                f"— linked to: {a.get('linked_controls', '')}"
+                f"— linked to {_link_clause(a)}"
             )
     if info:
         if not critical and not warning:
