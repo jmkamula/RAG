@@ -326,32 +326,44 @@ def _answer_upload_status(
     return "\n".join(lines) if lines else None
 
 
-# ── Thin upload-specific wrapper around LLMAnswer.compose() ──────────────────
+# ── Generic short-circuit → LLM polish helper ────────────────────────────────
 
-# Refs we expect to see preserved in any upload-status answer
-_REF_PATTERN = re.compile(r'\b(?:DOC\d{3}|CD-[A-Z]{2,4}-\d{3,4})\b')
+# Entity-identifier refs that MUST survive any rewrite verbatim. These name
+# specific things (a document, a control row in our DB) — dropping them
+# would change which entity the answer is about. Cross-references like
+# A.x.y or Art.X are not in this set: compose()'s internal no-invention
+# guard still prevents the LLM from making them up, but the LLM may omit
+# them when refocusing prose on the user's actual question.
+_SHORT_CIRCUIT_REQUIRED_REF_PATTERN = re.compile(
+    r'\bDOC\d{3}\b'
+    r'|\bCD-[A-Z]{2,4}-\d{3,4}\b'
+)
+
+# Lines that look like a CLI action the user is expected to run.
+_ACTION_HINT_MARKERS = ("upload:", "run:", "tools/")
 
 
-def _compose_upload_status_answer(
+def polish_short_circuit_answer(
     query:                str,
     deterministic_answer: str,
     llm,
 ) -> str:
     """
-    Polish a deterministic upload-status answer into conversational prose
-    via LLMAnswer.compose(). Extracts the DOC/CD refs and the 'Upload: …'
-    action hint from the deterministic text so the composer can preserve
-    them. On any failure compose() returns the deterministic text unchanged.
+    Polish any deterministic short-circuit answer into conversational prose
+    via LLMAnswer.compose(). Extracts every ref shape and action-hint line
+    from the deterministic text so the composer can preserve them verbatim.
+    On any failure compose() returns the deterministic text unchanged —
+    the short-circuit invariant (no data loss) is preserved.
     """
     if not deterministic_answer:
         return deterministic_answer
 
-    required_refs = list(set(_REF_PATTERN.findall(deterministic_answer)))
+    required_refs = list(set(_SHORT_CIRCUIT_REQUIRED_REF_PATTERN.findall(deterministic_answer)))
 
     action_hint = None
     for line in deterministic_answer.splitlines():
         s = line.strip()
-        if s.startswith("Upload:") or "tools/doc_uploader.py" in s:
+        if any(m in s.lower() for m in _ACTION_HINT_MARKERS):
             action_hint = s
             break
 
@@ -681,14 +693,19 @@ def make_retrieve_node(
         # Don't surface unrelated findings for these scope-excluded queries.
         if _is_scope_na_query(state["query"]):
             na_answer = _answer_scope_na(state["query"], posture)
+            composed = polish_short_circuit_answer(
+                query                = state["query"],
+                deterministic_answer = na_answer,
+                llm                  = llm,
+            )
             return {
                 **state,
-                "answer_text":   na_answer,
-                "answer":        na_answer,
+                "answer_text":   composed,
+                "answer":        composed,
                 "cited_refs":    [],
                 "question_type": "gap_analysis",
                 "confidence":    1.0,
-                "answer_source": "postgres",
+                "answer_source": "postgres+llm",
             }
 
         # ── Postgres short-circuit for upload status questions ─────────────
@@ -708,7 +725,7 @@ def make_retrieve_node(
             if pg_answer:
                 # Fact-preserving prose polish over the deterministic answer.
                 # Falls back to pg_answer on any failure — never regresses.
-                composed = _compose_upload_status_answer(
+                composed = polish_short_circuit_answer(
                     query                = state["query"],
                     deterministic_answer = pg_answer,
                     llm                  = llm,
@@ -750,14 +767,19 @@ def make_retrieve_node(
 
         # Short-circuit: Resolver found a direct Postgres answer
         if _resolved.has_short_circuit:
+            composed = polish_short_circuit_answer(
+                query                = state["query"],
+                deterministic_answer = _resolved.short_circuit_answer,
+                llm                  = llm,
+            )
             return {
                 **state,
-                "answer_text":   _resolved.short_circuit_answer,
-                "answer":        _resolved.short_circuit_answer,
+                "answer_text":   composed,
+                "answer":        composed,
                 "cited_refs":    [],
                 "question_type": state["intent_type"],
                 "confidence":    1.0,
-                "answer_source": "postgres",
+                "answer_source": "postgres+llm",
             }
 
         # Store resolver trace in state for ANALYTICS display
