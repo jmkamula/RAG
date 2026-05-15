@@ -831,6 +831,11 @@ def make_retrieve_node(
             standards        = standards_str,
             doc_contexts     = doc_contexts     if doc_contexts     else None,
             incident_contexts= incident_contexts if incident_contexts else None,
+            # Scope guard: only standards the tenant has enrolled in
+            # (direct + bridged) are citable. xfw expansion is filtered
+            # to this set so we never reference a framework the client
+            # hasn't actually rolled out.
+            scope_standards  = list(getattr(tenant, "applicable_standards", []) or []),
         )
 
 

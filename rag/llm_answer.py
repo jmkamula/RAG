@@ -244,7 +244,8 @@ class ComplianceAnswer:
     answer_text:      str
     question_type:    QuestionType
     tenant_name:      str
-    # References cited in the answer
+    # References cited in the answer (union of primary + xfw — kept flat
+    # for backward compatibility with state["cited_refs"] consumers)
     cited_refs:       list[str]
     # Posture findings surfaced in the answer
     posture_findings: dict        # ref → finding
@@ -257,6 +258,12 @@ class ComplianceAnswer:
     # Was the answer regenerated after verification failure?
     was_corrected:    bool = False
     correction_note:  str  = ""
+    # Layered selection — refs chosen from each layer. Lets downstream
+    # consumers (UI badges, trace, multi-framework drill-down) tell
+    # primary-framework citations apart from cross-framework citations
+    # without re-parsing the answer text.
+    primary_refs:     list[str] = field(default_factory=list)
+    xfw_refs:         list[str] = field(default_factory=list)
 
 
 
@@ -268,17 +275,36 @@ class ComplianceAnswer:
 RANK_AND_ANSWER_SYSTEM = """You are a compliance advisor for {tenant_name}, \
 specialising in {standards}. You give precise, actionable compliance guidance.
 
-You will receive numbered compliance nodes and a user query.
+You will receive numbered compliance nodes grouped into two layers:
+  LAYER 1 — primary obligation nodes for the framework the query targets
+  LAYER 2 — cross-framework (XFW) nodes from other frameworks that map
+            to a Layer 1 node (each carries an [XFW→ ref] tag showing
+            which Layer 1 ref it links to)
 
-STEP 1 — output exactly one line:
-SELECTED: 3, 1, 7, 2, 5
-(the node numbers most relevant to the query, best first)
+STEP 1 — output exactly TWO lines, in this order, even if one is empty:
+SELECTED_PRIMARY: 3, 1, 7
+SELECTED_XFW: 11, 12
 
-Selection count guidance:
+Rules for these two lines:
+- SELECTED_PRIMARY contains ONLY numbers from LAYER 1. Best first.
+- SELECTED_XFW contains ONLY numbers from LAYER 2. Each entry must
+  directly relate to one of your SELECTED_PRIMARY refs — read the
+  [XFW→ ref] tag on the node to confirm. Drop xfw nodes whose linked
+  ref isn't in SELECTED_PRIMARY.
+- If no Layer 2 nodes were presented, OR none directly support your
+  answer, output "SELECTED_XFW:" with nothing after the colon.
+- Never put a Layer 1 number in SELECTED_XFW or vice versa.
+
+Selection count guidance (applies to SELECTED_PRIMARY):
 - Gap analysis queries: select 5-7 nodes (focus on NC/OFI findings)
 - Implementation queries: select 7-10 nodes (broader coverage needed)
 - Definition queries: select 3-5 nodes (tight focus)
 - Posture check queries: select 5-8 nodes (all assessed controls)
+
+SELECTED_XFW count: 0-3 is typical. Only include xfw nodes that add a
+materially different obligation (e.g. GDPR Art.32 added alongside ISO
+A.5.18 for an access-control answer). Padding the xfw line with weakly-
+related nodes is worse than leaving it empty.
 
 STEP 2 — write your compliance answer.
 Rules for your answer:
@@ -300,15 +326,13 @@ Rules for your answer:
   Do NOT surface unrelated findings (e.g. A.5.18) in response to a physical or dev query.
 - UNASSESSED ≠ GAP: "Not yet assessed" means not evaluated, not that there is a finding.
   Only report controls explicitly marked NC or OFI from the posture data.
-- STANDARDS SCOPE: Arion Networks has enrolled in:
-    ISO 27001:2022 (certified, URS April 2025)
-    ISO 27701:2019 (implementing — not yet certified)
-  GDPR is evaluable INDIRECTLY via ISO 27701 Annex D mapping.
-  When asked about GDPR compliance: reference ISO 27701 controls that map to the
-  relevant GDPR articles, then state the posture on those controls.
-  Example: "GDPR Art.32 is addressed by ISO 27701 6.11.1 (privacy risk assessment).
-            Your current posture on 6.11.1 is [finding]."
-  Never claim Arion "implements GDPR" — they implement ISO 27701 which maps to GDPR.
+- STANDARDS SCOPE — only frameworks listed in the SCOPE block below are
+  citable. Frameworks outside this list are NOT implemented by the tenant
+  and must NEVER appear in your answer, even as an "indirect" bridge or
+  example. If the user asks about a framework that isn't in scope, say
+  plainly that it isn't currently in scope and offer to address the
+  closest framework that IS in scope.
+{scope_block}
 - Always use full readable citations: "ISO 27001 A.8.24" not "A.8.24", "GDPR Art. 32" not "Art.32".
 
 GLOSSARY RULE:
@@ -328,9 +352,7 @@ CONTROLS vs ARTICLES — always be precise about the source:
     It maps to GDPR requirements but is a certifiable standard, not a law.
   GDPR uses ARTICLES — refer to them as "GDPR Art. 32" or "GDPR article 32".
     GDPR is EU law, not a certifiable standard.
-  ARION NETWORKS: implements ISO 27701 for privacy, not GDPR directly.
-    Always reference ISO 27701 controls when advising on privacy obligations.
-    Only reference GDPR articles when a client explicitly asks about the law.
+  NIS2 / DORA / eIDAS use ARTICLES — refer to them as "NIS2 Art.21" etc.
 
 SELECTION ORDER:
 1. NC nodes relevant to the query (always include)
@@ -675,6 +697,7 @@ class LLMAnswer:
         standards:        str  = "ISO 27001 + GDPR",
         doc_contexts:     dict | None = None,   # node_id → DocumentContext
         incident_contexts:list | None = None,   # list[IncidentObligationContext]
+        scope_standards:  list[str] | None = None,   # tenant's queryable standards
     ) -> "ComplianceAnswer":
         """
         Combined rank + answer in a single Mistral call.
@@ -717,6 +740,21 @@ class LLMAnswer:
                               if n.standard_id == primary_std or n.source != "xfw"]
         xfw_nodes_list     = [n for n in node_list
                               if n.source == "xfw" and n.standard_id != primary_std]
+
+        # Scope guard: drop nodes from standards the tenant hasn't
+        # enrolled in (direct or via maps_to/satisfies bridge). Graph
+        # traversal can pull in any standard with an IMPLEMENTS/SUPPORTS
+        # edge — citing a framework the client doesn't actually have is a
+        # compliance reporting error. As tenants enrol new standards,
+        # `scope_standards` widens and xfw auto-extends.
+        # primary_std is always kept (it IS the answer's anchor framework)
+        # even if the scope list is somehow stale.
+        if scope_standards:
+            _scope_set       = set(scope_standards) | {primary_std}
+            xfw_nodes_list   = [n for n in xfw_nodes_list
+                                if n.standard_id in _scope_set]
+            primary_nodes_list = [n for n in primary_nodes_list
+                                  if n.standard_id in _scope_set]
 
         # XFW relationship map: node_id → set of primary refs it links to
         xfw_rel_map = {}
@@ -801,10 +839,29 @@ class LLMAnswer:
 
         nodes_block = "\n".join(node_lines)
 
+        # ── Build dynamic SCOPE block from tenant's enrolled standards ────
+        # As the tenant adds frameworks, this widens automatically — no
+        # prompt edits needed when NIS2/DORA/SOC2 come online.
+        if scope_standards:
+            _scope_lines = [
+                f"    - {_standard_label(sid)}"
+                for sid in scope_standards
+            ]
+            scope_block = (
+                "  SCOPE — frameworks this tenant has enrolled in and may "
+                "be cited:\n" + "\n".join(_scope_lines)
+            )
+        else:
+            scope_block = (
+                "  SCOPE — cite only frameworks present in the node list "
+                "below (no scope override was provided)."
+            )
+
         # ── Build system + user messages ──────────────────────────────────
         system = RANK_AND_ANSWER_SYSTEM.format(
             tenant_name = tenant_name or "your organisation",
             standards   = standards,
+            scope_block = scope_block,
         )
 
         # ── Build incident context header ─────────────────────────────────
@@ -885,26 +942,53 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                 metadata   = {"node_count": len(node_list)},
             )
 
-        # ── Parse SELECTED line and answer ────────────────────────────────
-        selected_nums, answer_text = self._parse_rank_answer(raw, num_to_node)
-        selected_nodes = [num_to_node[n] for n in selected_nums if n in num_to_node]
+        # ── Parse SELECTED_PRIMARY / SELECTED_XFW lines and answer ────────
+        # Build layer-membership sets so the parser can police misrouted
+        # selections (e.g. xfw number accidentally placed in primary line).
+        primary_count = len(primary_nodes_list)
+        xfw_count     = len(xfw_nodes_list)
+        primary_nums_set = set(range(1, primary_count + 1))
+        xfw_nums_set     = set(range(primary_count + 1, primary_count + xfw_count + 1))
+
+        selected_primary_nums, selected_xfw_nums, answer_text = self._parse_rank_answer(
+            raw, num_to_node,
+            primary_nums = primary_nums_set,
+            xfw_nums     = xfw_nums_set,
+        )
+        selected_primary_nodes = [num_to_node[n] for n in selected_primary_nums
+                                  if n in num_to_node]
+        selected_xfw_nodes     = [num_to_node[n] for n in selected_xfw_nums
+                                  if n in num_to_node]
+        selected_nodes = selected_primary_nodes + selected_xfw_nodes
 
         # ── Log selection ─────────────────────────────────────────────────
         if logger:
+            def _layered_fmt(nodes):
+                return "\n".join(
+                    f"  {n.ref} [{(posture or {}).get(n.node_id, {}).get('finding', '?')}]"
+                    for n in nodes
+                ) or "  (none)"
             logger.log_call(
                 step       = "selected",
                 model      = self.answer_model,
-                system     = f"Selected {len(selected_nodes)}/{len(node_list)} nodes",
+                system     = (
+                    f"Selected {len(selected_primary_nodes)} primary + "
+                    f"{len(selected_xfw_nodes)} xfw / {len(node_list)} total"
+                ),
                 user       = "",
-                response   = f"SELECTED: {selected_nums}\n" + "\n".join(
-                    f"  {n.ref} [{(posture or {}).get(n.node_id, {}).get('finding', '?')}]"
-                    for n in selected_nodes
+                response   = (
+                    f"SELECTED_PRIMARY: {selected_primary_nums}\n"
+                    f"{_layered_fmt(selected_primary_nodes)}\n"
+                    f"SELECTED_XFW: {selected_xfw_nums}\n"
+                    f"{_layered_fmt(selected_xfw_nodes)}"
                 ),
                 latency_ms = 0,
             )
 
         # ── Extract cited refs and posture findings ────────────────────────
         cited_refs      = self._extract_refs(answer_text)
+        primary_refs    = [n.ref for n in selected_primary_nodes]
+        xfw_refs        = [n.ref for n in selected_xfw_nodes]
         posture_findings = {}
         for node in selected_nodes:
             rec = (posture or {}).get(node.node_id, {})
@@ -912,10 +996,25 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                 posture_findings[node.ref] = rec["finding"]
 
         # ── Verification against selected nodes + checklists ─────────────
-        selected_context = "\n\n".join(
-            f"{node.ref}: {node.metadata.get('obligation_text', '') or node.title}"
-            for node in selected_nodes
-        )
+        # Label each block so the verifier sees the layered structure —
+        # XFW refs are legitimate citations, not unsupported claims.
+        def _node_lines(nodes):
+            return "\n\n".join(
+                f"{n.ref}: {n.metadata.get('obligation_text', '') or n.title}"
+                for n in nodes
+            )
+        selected_context_parts = []
+        if selected_primary_nodes:
+            selected_context_parts.append(
+                "PRIMARY NODES (the framework the query targets):\n"
+                + _node_lines(selected_primary_nodes)
+            )
+        if selected_xfw_nodes:
+            selected_context_parts.append(
+                "CROSS-FRAMEWORK NODES (related obligations from other frameworks):\n"
+                + _node_lines(selected_xfw_nodes)
+            )
+        selected_context = "\n\n".join(selected_context_parts) or _node_lines(selected_nodes)
         # Append checklist content to verification context so verifier
         # doesn't flag GDPR-required checklist items as unsupported
         if doc_contexts:
@@ -949,13 +1048,22 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                     user   = (
                         f"{user}\n\nYour previous answer had these issues:\n"
                         + "\n".join(f"- {i}" for i in verification.issues)
-                        + "\n\nPlease correct ONLY those specific issues. Keep all NC findings, OFI findings, and correctly-labeled [Not yet assessed] items. Start with SELECTED: line."
+                        + "\n\nPlease correct ONLY those specific issues. Keep all "
+                          "NC findings, OFI findings, and correctly-labeled "
+                          "[Not yet assessed] items. Start with SELECTED_PRIMARY: "
+                          "and SELECTED_XFW: lines (same format as before)."
                     ),
                     model      = self.answer_model,
                     max_tokens = self.max_tokens,
                     step       = "correct",
                 )
-                _, answer_text = self._parse_rank_answer(corrected, num_to_node)
+                # Parse with the same layer-membership sets so a corrected
+                # answer can rebalance primary/xfw selections if needed.
+                _, _, answer_text = self._parse_rank_answer(
+                    corrected, num_to_node,
+                    primary_nums = primary_nums_set,
+                    xfw_nums     = xfw_nums_set,
+                )
                 was_corrected  = True
 
         latency_ms = round((time.time() - t0) * 1000)
@@ -971,6 +1079,8 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             model_used       = self.answer_model,
             latency_ms       = latency_ms,
             was_corrected    = was_corrected,
+            primary_refs     = primary_refs,
+            xfw_refs         = xfw_refs,
         )
 
     # ── Compose (prose polish over a verified deterministic answer) ───────────
@@ -1242,39 +1352,92 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         self,
         raw:          str,
         num_to_node:  dict,
-    ) -> tuple[list[int], str]:
+        primary_nums: set[int] | None = None,
+        xfw_nums:     set[int] | None = None,
+    ) -> tuple[list[int], list[int], str]:
         """
-        Parse the SELECTED: line and answer from rank_and_answer output.
-        Returns (selected_nums, answer_text).
-        Falls back gracefully if SELECTED line is missing.
-        """
-        selected_nums = []
-        answer_text   = raw.strip()
+        Parse SELECTED_PRIMARY: and SELECTED_XFW: lines (and the answer)
+        from rank_and_answer output.
 
-        # Find SELECTED: line
-        m = re.search(r"SELECTED\s*:\s*([\d,\s]+)", raw, re.IGNORECASE)
-        if m:
-            for part in m.group(1).split(","):
+        Returns (selected_primary, selected_xfw, answer_text).
+
+        primary_nums / xfw_nums (when provided) are the valid node-number
+        sets for each layer. Used to police misrouted selections — e.g. if
+        the LLM puts a Layer 2 number in SELECTED_PRIMARY, we move it.
+        Without them, parser trusts the LLM's grouping.
+
+        Fallback chain:
+          1. SELECTED_PRIMARY: / SELECTED_XFW: — preferred two-line format
+          2. Legacy SELECTED: — treated as all-primary
+          3. Neither — every node is selected as primary (preserves the
+             pre-layered behavior so the pipeline never blocks on a parse)
+        """
+        primary  : list[int] = []
+        xfw      : list[int] = []
+        answer   : str       = raw.strip()
+        consumed : list[tuple[int, int]] = []  # (start, end) of lines to strip
+
+        def _parse_ints(s: str, valid: set[int] | None) -> list[int]:
+            out: list[int] = []
+            for part in s.split(","):
                 part = part.strip()
                 if part.isdigit():
                     n = int(part)
-                    if n in num_to_node:
-                        selected_nums.append(n)
-            # Remove SELECTED line from answer text
-            answer_text = raw[m.end():].strip()
-            # Strip leading labels including bold markdown variants
-            # e.g. "COMPLIANCE ANSWER:", "**COMPLIANCE ANSWER:**", "STEP 2 —"
-            # Strip label-only first line (e.g. "**COMPLIANCE ANSWER:**")
-            answer_text = re.sub(
+                    if n in num_to_node and (valid is None or n in valid):
+                        out.append(n)
+            return out
+
+        # Preferred format
+        m_primary = re.search(
+            r"SELECTED[_\s]PRIMARY\s*:\s*([\d,\s]*)", raw, re.IGNORECASE
+        )
+        m_xfw = re.search(
+            r"SELECTED[_\s]XFW\s*:\s*([\d,\s]*)", raw, re.IGNORECASE
+        )
+        if m_primary:
+            primary = _parse_ints(m_primary.group(1), primary_nums)
+            consumed.append((m_primary.start(), m_primary.end()))
+        if m_xfw:
+            xfw = _parse_ints(m_xfw.group(1), xfw_nums)
+            consumed.append((m_xfw.start(), m_xfw.end()))
+
+        # Legacy fallback — only if neither preferred line was present
+        if not m_primary and not m_xfw:
+            m_legacy = re.search(r"SELECTED\s*:\s*([\d,\s]+)", raw, re.IGNORECASE)
+            if m_legacy:
+                # Treat legacy SELECTED as primary; route any Layer 2 numbers
+                # to xfw if we know the layer membership.
+                all_nums = _parse_ints(m_legacy.group(1), None)
+                if xfw_nums is not None:
+                    primary = [n for n in all_nums if n not in xfw_nums]
+                    xfw     = [n for n in all_nums if n in xfw_nums]
+                else:
+                    primary = all_nums
+                consumed.append((m_legacy.start(), m_legacy.end()))
+
+        # Strip the consumed SELECTED lines (and any leading whitespace
+        # they leave behind) from the answer text. Strip back-to-front so
+        # earlier offsets stay valid.
+        if consumed:
+            answer = raw
+            for start, end in sorted(consumed, key=lambda t: t[0], reverse=True):
+                answer = answer[:start] + answer[end:]
+            answer = answer.strip()
+            # Strip a label-only first line (e.g. "**COMPLIANCE ANSWER:**")
+            answer = re.sub(
                 r"^(?:\*{0,2}(?:COMPLIANCE\s+ANSWER|ANSWER|PART\s*\d|STEP\s*\d)\*{0,2}[:\s—-]*\n+)",
-                "", answer_text, flags=re.IGNORECASE
+                "", answer, flags=re.IGNORECASE
             ).strip()
 
-        # Fallback: use all nodes if SELECTED not found
-        if not selected_nums:
-            selected_nums = list(num_to_node.keys())
+        # Last-resort fallback — preserve historical "use everything" behavior
+        if not primary and not xfw:
+            if primary_nums is not None:
+                primary = [n for n in num_to_node if n in primary_nums]
+                xfw     = [n for n in num_to_node if xfw_nums and n in xfw_nums]
+            else:
+                primary = list(num_to_node.keys())
 
-        return selected_nums, answer_text
+        return primary, xfw, answer
 
     def _call_llm(
         self,
