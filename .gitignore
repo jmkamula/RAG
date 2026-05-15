@@ -13,12 +13,15 @@ venv/
 
 # Data - don't commit large files or DB data
 chromadb_data/
+chroma_db/
 *.db
 *.sqlite
 
-# Results - keep CSVs but not large outputs  
-results/eval_before_*.csv
-results/eval_after_*.csv
+# Results - keep CSVs but not large outputs
+results/eval_*.csv
+
+# Archive - inactive code kept locally, not tracked
+archive/
 
 # OS
 .DS_Store
