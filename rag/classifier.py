@@ -930,13 +930,20 @@ class QueryClassifier:
                     "cross_framework":    QuestionType.CROSS_FRAMEWORK,
                 }
                 qtype = qtype_map.get(qtype_str, QuestionType.GAP_ANALYSIS)
+                # Phrase match captures the intent; explicit refs in the
+                # query add specificity (e.g. "what is ISO 27001 control
+                # A.6.4?" matches "what is ISO 27001" but the user named
+                # A.6.4). Union them so downstream graph expansion can
+                # seed on the exact node_id.
+                explicit = [r[0] for r in EXPLICIT_REF_PATTERN.findall(user_input)]
+                active   = list(dict.fromkeys(explicit + list(primary_refs)))
                 session = SessionContext(
                     tenant_profile = self.tenant,
                     standards      = self.tenant.applicable_standards,
                     role           = None,
                     intent_type    = qtype,
-                    active_refs    = primary_refs,
-                    active_cluster = primary_refs[0] if primary_refs else None,
+                    active_refs    = active,
+                    active_cluster = active[0] if active else None,
                 )
                 return IntakeResult(
                     state         = IntakeState.CLEAR,
@@ -1078,12 +1085,18 @@ class QueryClassifier:
                     relevant_docs.append(alert)
 
             if relevant_docs:
+                from rag.framework_refs import render_framework_refs as _render_framework_refs
                 for doc in relevant_docs[:3]:
                     alert_type = doc.get("alert_type", "INFO")
+                    linked = (
+                        _render_framework_refs(doc.get("linked_control_refs"))
+                        or doc.get("linked_controls")
+                        or "no linked controls"
+                    )
                     lines.append(
                         f"- {doc['document_title']} ({doc['external_ref']}) is registered "
                         f"but NOT yet uploaded (status: {alert_type.lower()}, "
-                        f"linked to: {doc.get('linked_controls', 'no linked controls')})"
+                        f"linked to: {linked})"
                     )
             elif doc_alerts:
                 # No specific match — give a summary
@@ -1502,15 +1515,19 @@ class QueryClassifier:
                     QuestionType.GAP_ANALYSIS,
                     QuestionType.POSTURE_CHECK,
                 )
-                # Phrase match is precise — use only the matched refs
-                # Never append stale session.active_refs here
-                resolved = list(dict.fromkeys(primary_refs))[:8]
+                # Phrase match captures intent; explicit refs in the query
+                # add specificity (e.g. "what is ISO 27001 control A.6.4?"
+                # matches the "what is ISO 27001" phrase but the user named
+                # A.6.4 — we must keep it so resolver seeds graph expansion).
+                explicit = [r[0] for r in EXPLICIT_REF_PATTERN.findall(query)]
+                cited    = list(dict.fromkeys(explicit + list(primary_refs)))
+                resolved = cited[:8]
                 return QueryIntent(
                     question_type   = qtype,
                     standards_scope = session.standards,
                     role_filter     = session.role,
                     needs_posture   = needs_posture,
-                    cited_refs      = primary_refs,
+                    cited_refs      = cited,
                     resolved_refs   = resolved,
                     confidence      = 0.88,
                     raw_query       = query,

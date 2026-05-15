@@ -82,6 +82,10 @@ class ResolveRequest:
     topic_ref:       Optional[str]
     standards:       list
     history:         list  = field(default_factory=list)
+    # Explicit refs extracted from the query (e.g. ["A.6.4"], ["Art.32"]).
+    # Used to seed graph expansion by exact node_id when the user names
+    # a specific control — semantic vector search alone misses bare refs.
+    cited_refs:      list  = field(default_factory=list)
     # Observability — set by caller, propagated through the full trace
     request_id:      str   = field(default_factory=lambda: str(uuid.uuid4()))
     tenant_id:       str   = ""   # denormalised from tenant_context for fast access
@@ -279,6 +283,41 @@ def _posture_nc_ofi_ids(posture: dict, topic_ref: Optional[str] = None) -> list:
     return result
 
 
+def _cited_ref_node_ids(cited_refs: list, standards: list) -> list:
+    """
+    Build candidate node_ids from explicit refs in the query, scoped to the
+    request's standards. Format: "{standard_id}:{ref}" (e.g.
+    "ISO27001:2022:A.6.4", "GDPR:2016/679:Art.32"). Returns refs paired with
+    *every* standard whose family matches the ref prefix — Neo4j UNWIND
+    tolerates non-existent ids, and the budget caps how many actually expand.
+
+    Why: vector search alone often misses queries like "what is A.6.4?" —
+    the ref string is short, generic, and semantically thin, so the right
+    node ranks below noisier matches. Seeding by exact id fixes that.
+    """
+    if not cited_refs or not standards:
+        return []
+    seeds, seen = [], set()
+    for ref in cited_refs:
+        if not ref:
+            continue
+        # ISO control refs (A.X.X) and ISO clauses (e.g. "6.1.2") → ISO standards
+        # Art./Recital → non-ISO directive/regulation standards
+        is_iso_like = ref.startswith("A.") or (ref[:1].isdigit() and "." in ref)
+        for std in standards:
+            std_family = std.split(":", 1)[0]  # "ISO27001:2022" → "ISO27001"
+            is_iso_std = std_family.upper().startswith("ISO")
+            if is_iso_like and not is_iso_std:
+                continue
+            if (not is_iso_like) and is_iso_std:
+                continue
+            nid = f"{std}:{ref}"
+            if nid not in seen:
+                seen.add(nid)
+                seeds.append(nid)
+    return seeds
+
+
 def _filter_posture(posture: dict, topic_ref: Optional[str]) -> dict:
     """Filter posture to topic_ref + related clause. Falls back to full posture."""
     if not topic_ref or not posture:
@@ -368,29 +407,32 @@ def _build_document_status_answer(query: str, alerts: list) -> Optional[str]:
                 relevant.append(alert)
     if not relevant and not is_all:
         return None
+    from rag.framework_refs import render_framework_refs as _render_framework_refs
     lines = []
     if relevant:
         for doc in relevant:
             atype    = doc.get("alert_type", "INFO")
             title    = doc.get("document_title", "Unknown")
             ref      = doc.get("external_ref", "")
-            controls = doc.get("linked_controls", "")
+            rendered = _render_framework_refs(doc.get("linked_control_refs"))
+            controls = rendered or doc.get("linked_controls") or ""
             icon     = "CRITICAL" if atype == "CRITICAL" else "WARNING" if atype == "WARNING" else "INFO"
-            lines.append(f"[{icon}] {title} ({ref}) — registered but NOT uploaded.")
-            if controls:
-                lines.append(f"  Linked controls: {controls}")
+            ctl_clause = f" — linked to {controls}" if controls else ""
+            lines.append(f"[{icon}] {title} ({ref}){ctl_clause} — registered but NOT uploaded.")
     elif is_all:
         critical = [a for a in alerts if a.get("alert_type") == "CRITICAL"]
         warning  = [a for a in alerts if a.get("alert_type") == "WARNING"]
         info     = [a for a in alerts if a.get("alert_type") == "INFO"]
+        def _ctl(a):
+            return _render_framework_refs(a.get("linked_control_refs")) or a.get("linked_controls") or ""
         if critical:
             lines.append(f"CRITICAL ({len(critical)} docs) — linked to NC findings:")
             for a in critical:
-                lines.append(f"  - {a['document_title']} ({a['external_ref']}) -> {a.get('linked_controls','')}")
+                lines.append(f"  - {a['document_title']} ({a['external_ref']}) -> {_ctl(a)}")
         if warning:
             lines.append(f"WARNING ({len(warning)} docs) — linked to OFI findings:")
             for a in warning[:5]:
-                lines.append(f"  - {a['document_title']} ({a['external_ref']}) -> {a.get('linked_controls','')}")
+                lines.append(f"  - {a['document_title']} ({a['external_ref']}) -> {_ctl(a)}")
         if info:
             lines.append(f"{len(info)} additional doc(s) registered but not uploaded.")
     if not lines:
@@ -637,8 +679,13 @@ class Resolver:
     def _resolve_remediation_guide(self, req, entry):
         posture          = _filter_posture(self._posture, req.topic_ref)
         posture_node_ids = _posture_nc_ofi_ids(self._posture, req.topic_ref)
+        # Seed expansion with refs the user named explicitly — vector search
+        # alone misses "how do we implement A.6.4?" because the ref string
+        # carries no semantic signal.
+        cited_seeds      = _cited_ref_node_ids(req.cited_refs, req.standards)
+        seeds            = cited_seeds + [n for n in posture_node_ids if n not in cited_seeds]
         gr, v_nodes, neo4j_ms, vector_ms, _ = self._retrieve_and_expand(
-            req, entry=entry, extra_node_ids=posture_node_ids
+            req, entry=entry, extra_node_ids=seeds
         )
         # Doc inventory: appended after expand — topic-specific checklist
         if req.topic_ref and self._is_expander_online():
@@ -662,6 +709,11 @@ class Resolver:
     def _resolve_document_content(self, req, entry):
         posture          = _filter_posture(self._posture, req.topic_ref)
         posture_node_ids = _posture_nc_ofi_ids(self._posture, req.topic_ref)
+        # Seed expansion with refs the user named explicitly. topic_ref is
+        # only populated for DOCUMENT_INVENTORY/CONTENT by the slow path —
+        # the fast classifier leaves it empty, so cited_refs is the only
+        # reliable way to anchor "what should the A.6.4 policy contain?"
+        cited_seeds      = _cited_ref_node_ids(req.cited_refs, req.standards)
 
         neo4j_t0 = time.time()
         gr = GraphResult.empty()
@@ -683,8 +735,9 @@ class Resolver:
         # Limit vector_ids to 4 (was 6) to leave budget room for xfw GDPR nodes
         # The graph expander adds xfw nodes on top of these — budget=14 handles both
         # Limit to top 3 posture + top 3 vector - preserves budget for xfw GDPR nodes
-        vector_ids = [r.node_id for r in v_results.results[:3] if r.node_id not in posture_node_ids]
-        node_ids   = posture_node_ids[:3] + vector_ids
+        _exclude   = set(posture_node_ids) | set(cited_seeds)
+        vector_ids = [r.node_id for r in v_results.results[:3] if r.node_id not in _exclude]
+        node_ids   = cited_seeds + posture_node_ids[:3] + vector_ids
 
         if node_ids:
             neo4j_t0b = time.time()
@@ -710,8 +763,12 @@ class Resolver:
         )
 
     def _resolve_standard_knowledge(self, req, entry):
+        # Definitional queries ("what is A.6.4?") often name a specific
+        # control whose ref string is too thin for vector search to rank
+        # correctly. Seed expansion with the exact node_id when present.
+        cited_seeds = _cited_ref_node_ids(req.cited_refs, req.standards)
         gr, v_nodes, neo4j_ms, vector_ms, _nids = self._retrieve_and_expand(
-            req, entry=entry
+            req, entry=entry, extra_node_ids=cited_seeds
         )
         return ResolvedContext(
             taxonomy_type   = "STANDARD_KNOWLEDGE",

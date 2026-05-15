@@ -626,18 +626,21 @@ class LLMAnswer:
             show_warning  = relevant_warning  or []
 
             if show_critical or show_warning:
+                from rag.framework_refs import render_framework_refs as _render_framework_refs
+                def _ctl(a):
+                    return _render_framework_refs(a.get("linked_control_refs")) or a.get("linked_controls") or ""
                 alert_lines = []
                 for a in show_critical[:5]:
                     alert_lines.append(
                         f"  CRITICAL — {a['document_title']} ({a['external_ref']}) "
                         f"is registered but NOT uploaded. "
-                        f"Linked to NC on: {a.get('linked_controls','')}"
+                        f"Linked to NC on: {_ctl(a)}"
                     )
                 for a in show_warning[:3]:
                     alert_lines.append(
                         f"  WARNING — {a['document_title']} ({a['external_ref']}) "
                         f"is registered but NOT uploaded. "
-                        f"Linked to OFI on: {a.get('linked_controls','')}"
+                        f"Linked to OFI on: {_ctl(a)}"
                     )
                 doc_alert_note = (
                     "\nDOCUMENT UPLOAD STATUS — files registered but not yet uploaded:\n"
@@ -974,18 +977,26 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
 
     _COMPOSE_SYSTEM = (
         "You rewrite a deterministic compliance status report into a brief, "
-        "conversational answer for a compliance practitioner.\n"
+        "conversational answer for a compliance practitioner. The audience "
+        "is an auditor or compliance owner who needs every control reference "
+        "the report contains — these refs are the answer's audit trail, not "
+        "metadata, and dropping any is a compliance failure.\n"
         "\n"
         "Rules - these are absolute:\n"
         "1. Restate only the facts in the report. Never invent document refs "
         "(DOC###, CD-###-####), control refs (e.g. A.5.18, Art.32), upload "
         "dates, or finding severities.\n"
-        "2. Preserve every reference exactly as written in the report.\n"
+        "2. PRESERVE EVERY REFERENCE EXACTLY AS WRITTEN. This includes every "
+        "DOC###, CD-###-####, ISO clause (A.x.y), and Article (Art.X / Art.32) "
+        "that appears in the report. If the report lists 14 control refs, your "
+        "rewrite must include all 14. Refs are NEVER optional, NEVER trimmed "
+        "for brevity, NEVER summarised as 'multiple controls'.\n"
         "3. If the report ends with an action / instruction line (one that "
         "tells the user to do something), keep that line verbatim at the end "
         "of your rewrite. If the report has no such line, do NOT invent one.\n"
-        "4. Keep the answer short. A specific-doc yes/no answer is 1-2 "
-        "sentences. A list-style answer can be longer but stays tight.\n"
+        "4. Keep the prose tight, but never at the cost of dropping a ref. "
+        "A specific-doc yes/no answer is 1-2 sentences PLUS its refs. A "
+        "list-style answer stays tight in framing but lists every entry.\n"
         "5. Use plain prose. Bullet lists are fine when the report has bullets, "
         "but do not add Markdown headings.\n"
         "6. Do not add caveats, disclaimers, suggestions, or 'next steps' "

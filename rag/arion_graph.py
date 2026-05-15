@@ -235,7 +235,9 @@ def _answer_upload_status(
             type_s   = f" — {doc_type}" if doc_type else ""
             when     = d.get("uploaded_at")
             when_s   = f", uploaded {when[:10]}" if when else ""
-            lines.append(f"  • {title}{ref_s}{type_s}{when_s}")
+            framework_clause = _render_framework_refs(d.get("framework_refs"))
+            asses_s  = f"; assessed against {framework_clause}" if framework_clause else ""
+            lines.append(f"  • {title}{ref_s}{type_s}{when_s}{asses_s}")
         if len(uploaded) > 20:
             lines.append(f"  … and {len(uploaded) - 20} more")
         return "\n".join(lines)
@@ -328,15 +330,18 @@ def _answer_upload_status(
 
 # ── Generic short-circuit → LLM polish helper ────────────────────────────────
 
-# Entity-identifier refs that MUST survive any rewrite verbatim. These name
-# specific things (a document, a control row in our DB) — dropping them
-# would change which entity the answer is about. Cross-references like
-# A.x.y or Art.X are not in this set: compose()'s internal no-invention
-# guard still prevents the LLM from making them up, but the LLM may omit
-# them when refocusing prose on the user's actual question.
+# Every ref shape that MUST survive any rewrite verbatim:
+#   - DOC###, CD-XXX-### : entity identifiers (which document/control)
+#   - A.x.y              : ISO 27001/27701 clause numbers (which control the
+#                          finding/document maps to — auditors need these)
+#   - Art.X              : GDPR / NIS2 articles (cross-framework attribution)
+# Dropping any of these silently changes the answer's compliance content.
+# The LLM should rephrase prose, never drop refs.
 _SHORT_CIRCUIT_REQUIRED_REF_PATTERN = re.compile(
     r'\bDOC\d{3}\b'
     r'|\bCD-[A-Z]{2,4}-\d{3,4}\b'
+    r'|\bA\.\d+(?:\.\d+)*\b'
+    r'|\bArt\.\s?\d+(?:\(\d+\))?\b'
 )
 
 # Lines that look like a CLI action the user is expected to run.
@@ -758,6 +763,9 @@ def make_retrieve_node(
             topic_ref        = intent.document_topic_ref,
             standards        = intent.standards_scope,
             history          = [],
+            # Explicit refs from the query — used by handlers to seed graph
+            # expansion when the user names a specific control by ref
+            cited_refs       = list(getattr(intent, "cited_refs", []) or []),
             # Observability: thread_id from LangGraph state = conversation request_id
             # tenant_id denormalised for fast trace access without hitting tenant_context
             request_id       = state.get("thread_id") or state.get("session_id") or "",
