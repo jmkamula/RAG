@@ -658,10 +658,28 @@ class Resolver:
     # --- Tier 2: Posture-first ---
 
     def _resolve_posture_status(self, req, entry):
-        posture          = _filter_posture(self._posture, req.topic_ref)
-        posture_node_ids = _posture_nc_ofi_ids(self._posture, req.topic_ref)
+        # When the user names a specific ref ("are we A.6.4 compliant?"), seed
+        # graph expansion with that ref AND restrict posture to refs the user
+        # cited — otherwise the LLM gets unrelated NC/OFI findings and writes
+        # them up as if they answered the question. Mirrors the seeding done
+        # for REMEDIATION_GUIDE / DOCUMENT_CONTENT in commit 0b55716; this
+        # handler was missed in that pass.
+        cited_seeds = _cited_ref_node_ids(req.cited_refs, req.standards)
+        if cited_seeds:
+            cited_set = set(req.cited_refs)
+            posture   = {
+                k: v for k, v in self._posture.items()
+                if (v.get("control_ref") in cited_set)
+                or any(k.endswith(f":{r}") for r in cited_set)
+            }
+            posture_node_ids = list(posture.keys())
+            seeds            = cited_seeds + [n for n in posture_node_ids if n not in cited_seeds]
+        else:
+            posture          = _filter_posture(self._posture, req.topic_ref)
+            posture_node_ids = _posture_nc_ofi_ids(self._posture, req.topic_ref)
+            seeds            = posture_node_ids
         gr, v_nodes, neo4j_ms, vector_ms, _nids = self._retrieve_and_expand(
-            req, entry=entry, extra_node_ids=posture_node_ids
+            req, entry=entry, extra_node_ids=seeds
         )
         return ResolvedContext(
             taxonomy_type   = "POSTURE_STATUS",

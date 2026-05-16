@@ -276,10 +276,19 @@ RANK_AND_ANSWER_SYSTEM = """You are a compliance advisor for {tenant_name}, \
 specialising in {standards}. You give precise, actionable compliance guidance.
 
 You will receive numbered compliance nodes grouped into two layers:
-  LAYER 1 — primary obligation nodes for the framework the query targets
+  LAYER 1 — primary obligation nodes for the framework the query targets.
+            Posture comes directly from the [NC] / [OFI] / [Comply] /
+            [Not yet assessed] tag on the node.
   LAYER 2 — cross-framework (XFW) nodes from other frameworks that map
-            to a Layer 1 node (each carries an [XFW→ ref] tag showing
-            which Layer 1 ref it links to)
+            to a Layer 1 node. Each carries:
+              * an [XFW→ ref] tag listing the linked Layer 1 refs
+              * an [Addressed via ref, ref, ...] posture tag when any of
+                those linked primaries have been assessed
+              * a "Posture from linked primaries:" block enumerating the
+                finding (NC/OFI/Comply/Not yet assessed) for each linked
+                ref. THIS IS THE ONLY SOURCE OF POSTURE FOR A LAYER 2
+                NODE. Never assign NC/OFI/Comply to a Layer 2 node from
+                its obligation text alone.
 
 STEP 1 — output exactly TWO lines, in this order, even if one is empty:
 SELECTED_PRIMARY: 3, 1, 7
@@ -374,6 +383,15 @@ CROSS-FRAMEWORK GUARDRAILS:
 CRITICAL: A node's posture status comes ONLY from its [NC], [OFI], [Comply], or
 [Not yet assessed] tag. If a node has no posture tag, it is unassessed — never
 call it NC or OFI based on the obligation text alone.
+
+XFW POSTURE INHERITANCE: Layer 2 nodes never carry a direct [NC]/[OFI]/[Comply]
+tag of their own — they carry [Addressed via A.5.x, ...] and a "Posture from
+linked primaries" block. To describe a Layer 2 node's posture, summarise the
+findings of its linked primaries (e.g. "GDPR Art.32 is addressed via A.5.15
+[Comply] and A.5.18 [NC — register incomplete] — the access-register gap is the
+residual Art.32 risk to close"). NEVER state that a Layer 2 article is NC, OFI
+or Comply by itself — always attribute the finding to the linked primary
+control. If [Addressed via ...] is absent, the Layer 2 node is unassessed.
 
 DOCUMENT CHECKLIST GUIDANCE:
 When DOCUMENT CHECKLISTS are provided below the nodes:
@@ -716,18 +734,49 @@ class LLMAnswer:
 
         # ── Infer primary standard from intent and query ──────────────────
         def _infer_primary_std(intent, query_text, nodes, posture):
+            # Primary anchors on the standard whose posture the tenant actually
+            # owns. A query that mentions GDPR/NIS2 by name does NOT make those
+            # the primary — those flow through Layer 2 and inherit posture from
+            # the linked primary controls (see xfw inheritance in the Layer 2
+            # block below). Otherwise asking "what's our GDPR Art.32 status?"
+            # would route into Layer 1 as [Not yet assessed] and the inheritance
+            # path is never exercised.
+            postured_stds: set[str] = set()
+            for nid in (posture or {}):
+                parts = nid.split(":")
+                if len(parts) >= 2:
+                    postured_stds.add(":".join(parts[:2]))
+
             q = query_text.lower()
+            keyword_candidates: list[str] = []
             if "gdpr" in q or "art." in q or "article " in q:
-                return "GDPR:2016/679"
+                keyword_candidates.append("GDPR:2016/679")
             if "nis2" in q or "nis 2" in q:
-                return "NIS2"
+                keyword_candidates.append("NIS2")
             if "soc2" in q or "soc 2" in q:
-                return "SOC2"
+                keyword_candidates.append("SOC2")
+
+            # Only honour a keyword hint if the tenant has posture for that
+            # standard — i.e. it's a directly-evaluated framework, not an
+            # xfw-inherited one.
+            for c in keyword_candidates:
+                if c in postured_stds:
+                    return c
+
             from rag.classifier import QuestionType
             if intent and intent.question_type == QuestionType.CROSS_FRAMEWORK:
                 for n in nodes:
-                    if not n.standard_id.startswith("ISO"):
+                    if n.standard_id in postured_stds:
                         return n.standard_id
+
+            # Default: tenant's primary postured framework, or ISO 27001 as
+            # the conventional anchor when no posture is loaded yet.
+            if postured_stds:
+                # Prefer ISO27001:2022 if present (the typical tenant anchor),
+                # otherwise pick a deterministic one.
+                if "ISO27001:2022" in postured_stds:
+                    return "ISO27001:2022"
+                return sorted(postured_stds)[0]
             return "ISO27001:2022"
 
         primary_std = _infer_primary_std(intent, query, nodes, posture)
@@ -736,10 +785,14 @@ class LLMAnswer:
         node_list          = [n for n in nodes if not n.is_informational]
         num_to_node        = {}
         node_lines         = []
+        # Layer split is standard-based: Layer 1 is the primary postured
+        # framework, Layer 2 is everything else (including nodes that came
+        # in as "cited" from vector search — those still need to inherit
+        # posture from primary controls via the xfw bridge).
         primary_nodes_list = [n for n in node_list
-                              if n.standard_id == primary_std or n.source != "xfw"]
+                              if n.standard_id == primary_std]
         xfw_nodes_list     = [n for n in node_list
-                              if n.source == "xfw" and n.standard_id != primary_std]
+                              if n.standard_id != primary_std]
 
         # Scope guard: drop nodes from standards the tenant hasn't
         # enrolled in (direct or via maps_to/satisfies bridge). Graph
@@ -766,6 +819,24 @@ class LLMAnswer:
                 else:
                     linked.add(edge.target_id.split(":")[-1])
             xfw_rel_map[n.node_id] = linked
+
+        # Anti-hallucination guard: xfw nodes without a bridge to any
+        # primary control cannot inherit posture and are prone to fabricated
+        # findings. Drop them entirely so the LLM never sees an unanchored
+        # Layer 2 node. Bridge data lives in Neo4j IMPLEMENTS/SUPPORTS
+        # edges via graph_expander; an empty linked set means the edge
+        # context was lost or the node was loose lateral traffic.
+        xfw_nodes_list = [n for n in xfw_nodes_list if xfw_rel_map.get(n.node_id)]
+
+        # Posture-by-ref lookup so xfw nodes can inherit posture from
+        # linked primary controls even when the primary control was not
+        # retrieved into primary_nodes_list (the bridge spans the full
+        # posture table, not just what graph traversal returned).
+        posture_by_ref: dict[str, dict] = {}
+        for _nid, _rec in (posture or {}).items():
+            _ref = _rec.get("control_ref") or _nid.split(":")[-1]
+            if _ref:
+                posture_by_ref[_ref] = _rec
 
         node_counter = 0
 
@@ -812,7 +883,12 @@ class LLMAnswer:
                 obligation_text=obligation, xfw_tag="",
             ))
 
-        # Layer 2
+        # Layer 2 — xfw nodes inherit posture from their linked primary
+        # controls. The tag becomes [Addressed via A.5.18, ...] and a
+        # "Posture from linked primaries" block enumerates each linked
+        # ref's finding. The LLM is told (in the prompt) never to invent
+        # a posture for a Layer 2 node directly — only quote or summarise
+        # from these inherited lines.
         if xfw_nodes_list:
             node_lines.append("\n--- LAYER 2: CROSS-FRAMEWORK NODES ---")
             for node in xfw_nodes_list:
@@ -820,8 +896,54 @@ class LLMAnswer:
                 i = node_counter
                 num_to_node[i] = node
 
-                linked  = xfw_rel_map.get(node.node_id, set())
-                xfw_tag = f" [XFW→ {', '.join(sorted(linked))}]" if linked else " [XFW]"
+                linked_refs  = sorted(xfw_rel_map[node.node_id])
+                detail_lines = []
+                has_assessed = False
+                for _ref in linked_refs:
+                    _rec   = posture_by_ref.get(_ref, {})
+                    _f     = _rec.get("finding", "")
+                    _cs    = _rec.get("confirmation_status")
+                    _cl    = "" if _cs in ("confirmed", "overridden") else " [DRAFT]"
+                    if _f == "NC":
+                        has_assessed = True
+                        _gap = _rec.get("gap_description", "")
+                        detail_lines.append(
+                            f"  - {_ref} [NC{_cl}]"
+                            + (f" — {_gap}" if _gap else "")
+                        )
+                    elif _f == "OFI":
+                        has_assessed = True
+                        _gap = _rec.get("gap_description", "")
+                        detail_lines.append(
+                            f"  - {_ref} [OFI{_cl}]"
+                            + (f" — {_gap}" if _gap else "")
+                        )
+                    elif _f == "Comply":
+                        has_assessed = True
+                        _evd = _rec.get("evidence_text", "")
+                        detail_lines.append(
+                            f"  - {_ref} [Comply{_cl}]"
+                            + (f" — {_evd}" if _evd else "")
+                        )
+                    elif _f == "N/A":
+                        detail_lines.append(
+                            f"  - {_ref} [N/A — excluded from primary scope]"
+                        )
+                    else:
+                        detail_lines.append(f"  - {_ref} [Not yet assessed]")
+
+                if has_assessed:
+                    posture_tag  = f" [Addressed via {', '.join(linked_refs)}]"
+                    posture_line = (
+                        "Posture from linked primaries:\n"
+                        + "\n".join(detail_lines) + "\n"
+                    )
+                else:
+                    posture_tag  = " [Not yet assessed]"
+                    posture_line = ""
+
+                xfw_tag = f" [XFW→ {', '.join(linked_refs)}]"
+
                 obligation = (
                     node.metadata.get("obligation_text", "")
                     or node.metadata.get("business_description", "")
@@ -833,7 +955,7 @@ class LLMAnswer:
                     num=i, ref=node.ref,
                     standard_label=_standard_label(node.standard_id),
                     source_type="Article",
-                    posture_tag=" [Not yet assessed]", posture_line="",
+                    posture_tag=posture_tag, posture_line=posture_line,
                     obligation_text=obligation, xfw_tag=xfw_tag,
                 ))
 
