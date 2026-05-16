@@ -637,6 +637,7 @@ def write_findings(
         "posture_created":   posture_created,
         "posture_skipped":   posture_skipped,
         "controls_assessed": [ref for ref, _ in groups.keys()],
+        "doc_id":            doc_id,
     }
     logger.info(
         f"Stage 4 complete: {written} findings written, "

@@ -28,7 +28,7 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 26/26 PASS before any restart.
+# Must be 28/28 PASS before any restart.
 # Whenever you add a user-facing feature/fix, append an EvalCase that would
 # have failed pre-change and passes post-change — see the feedback-memory rule.
 ```
@@ -94,7 +94,7 @@ The FIRST copy of each function is the correct/patched version.
 The graph uses the LAST definition — so duplicates shadow fixes.
 
 **Fix approach:** For each duplicate, keep the first definition, remove the second.
-After removing duplicates, always run eval (26/26 must pass) before restarting.
+After removing duplicates, always run eval (28/28 must pass) before restarting.
 
 ### 2. Clarification loop (depends on fix #1)
 Query: "what documents are missing?" triggers clarification instead of
@@ -148,11 +148,12 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- File: results/eval_20260516_1540_expanded2.csv (26 cases — 21 core + 5 feature-locked)
-- Score: 26/26 PASS
+- File: results/eval_20260516_1700_xfw_proposals.csv (28 cases — 21 core + 7 feature-locked)
+- Score: 28/28 PASS
 - Never deploy with a regression below the current case count
 - Cases 22-26 lock in: cited refs in POSTURE_STATUS / STANDARD_KNOWLEDGE,
   xfw posture inheritance, Layer-2 anti-hallucination, uploaded-doc short-circuit
+- Cases 27-28 lock in: xfw proposer HITL queue (chat surface + isolation guard)
 - TODO: add case for incident obligations once the chat surface (commit 40ad607)
   exposes a non-clarification answer path
 

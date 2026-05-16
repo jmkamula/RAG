@@ -616,6 +616,15 @@ CLEAR_INTENT_PHRASES = [
      "document_inventory", []),
     (re.compile(r'\bwhat\s+policies?\s+(?:do\s+we\s+need|are\s+required)\b', re.IGNORECASE),
      "document_inventory", []),
+
+    # XFW proposals review queue — routes to the DOCUMENT_STATUS handler, which
+    # detects the xfw phrasing and short-circuits with the proposal list.
+    # Keeping the phrase under document_inventory keeps the classifier
+    # surface minimal; the resolver decides the answer shape.
+    (re.compile(r'\b(?:cross[\s-]?framework|xfw)\b.*\b(?:pending|review|need\s+(?:review|confirm)|to\s+confirm|proposals?)\b', re.IGNORECASE),
+     "document_inventory", []),
+    (re.compile(r'\b(?:pending|proposed|unconfirmed)\b.*\b(?:cross[\s-]?framework|xfw)\b', re.IGNORECASE),
+     "document_inventory", []),
 ]
 
 

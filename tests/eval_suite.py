@@ -343,6 +343,40 @@ EVAL_CASES = [
     # (commit 40ad607) lands the Postgres + Neo4j shape, but the chat surface
     # still routes every "incident obligations" phrasing through
     # clarification. Add once the classifier recognises the intent.
+
+    EvalCase(
+        id=27,
+        query="what cross-framework findings need review?",
+        tags=["xfw_proposals", "documents", "short_circuit", "hitl"],
+        expected_type="document_inventory",
+        # End-to-end lock for the intake xfw_proposer + chat surface:
+        # - intake hook walks IMPLEMENTS and writes proposals (else DB empty)
+        # - classifier CLEAR_INTENT_PHRASE routes the query
+        # - resolver short-circuits with the proposals list
+        # The "←" arrow is structural (proposal-line format) so a regression
+        # to a generic doc-status answer would lose it.
+        must_contain=["cross-framework finding", "GDPR", "Art.", "←"],
+        must_not_contain=["not applicable"],
+        notes="Locks in xfw_proposer + classifier+resolver short-circuit chain.",
+    ),
+
+    EvalCase(
+        id=28,
+        query="what NC findings do we have?",
+        tags=["posture", "nc", "xfw_proposals_isolation"],
+        expected_refs=["A.5.18", "A.5.26"],
+        expected_type="gap_analysis",
+        must_contain=["NC", "A.5.18", "A.5.26"],
+        # Isolation guard: pending xfw proposals must NOT leak into a normal
+        # NC-findings posture query. The HITL queue lives in its own short
+        # circuit; if its phrasing appears here, the pattern matcher is
+        # over-firing.
+        must_not_contain=[
+            "cross-framework finding(s) pending review",
+            "pending review:",
+        ],
+        notes="Negative test: xfw proposal listing must not pollute posture answers.",
+    ),
 ]
 
 

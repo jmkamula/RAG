@@ -380,6 +380,46 @@ class DocumentPipeline:
                     pass
                 conn.close()
 
+            # ── Stage 4.5: xfw proposer ───────────────────────────────────────
+            # Walk Neo4j IMPLEMENTS edges from each just-written finding and
+            # propose mirror findings on xfw-bridged standards (filtered by
+            # tenant_evaluation_scope). Proposals land in document_findings with
+            # confirmed_by IS NULL — the HITL queue. Failures here are logged
+            # and swallowed: Stage 4 has already committed; an xfw failure must
+            # not poison the upload.
+            try:
+                from rag.intake.xfw_proposer import propose_for_findings
+                from neo4j import GraphDatabase
+                _neo_driver = GraphDatabase.driver(
+                    os.getenv("NEO4J_URI", "bolt://localhost:7687"),
+                    auth=(os.getenv("NEO4J_USER", "neo4j"),
+                          os.getenv("NEO4J_PASSWORD", "")),
+                )
+                _xfw_conn = psycopg2.connect(self.db_url)
+                try:
+                    with _xfw_conn.cursor() as _cur:
+                        _cur.execute("SET app.tenant_id = %s", (tenant_id,))
+                    _xfw_summary = propose_for_findings(
+                        tenant_id   = tenant_id,
+                        document_id = summary["doc_id"],
+                        findings    = findings,
+                        conn        = _xfw_conn,
+                        driver      = _neo_driver,
+                    )
+                    _xfw_conn.commit()
+                    logger.info(f"Stage 4.5: {_xfw_summary}")
+                except Exception:
+                    _xfw_conn.rollback()
+                    raise
+                finally:
+                    _xfw_conn.close()
+                    _neo_driver.close()
+            except Exception as e:
+                logger.warning(
+                    f"xfw_proposer hook failed (Stage 4 already committed): "
+                    f"{type(e).__name__}: {e}"
+                )
+
             s4_ms = int((time.time() - t4) * 1000)
 
             tracer.write(

@@ -16,6 +16,8 @@ Phase 1 fixes applied (per review report):
 from __future__ import annotations
 
 import logging
+import os
+import re
 import time
 import traceback as _tb
 import uuid
@@ -361,6 +363,86 @@ _NEGATIVE_UPLOAD_MARKERS = (
 )
 
 
+# ── XFW proposals short-circuit ────────────────────────────────────────────────
+# Matches: "what cross-framework findings need review?", "show pending xfw
+# proposals", "list xfw findings pending review", "cross-framework proposals?",
+# "xfw findings to confirm". Lives at module scope so the regex is compiled
+# once.
+_XFW_PROPOSALS_PATTERN = re.compile(
+    r"\b(?:"
+    r"cross[\s-]?framework(?:\s+(?:findings?|proposals?|mappings?))?"
+    r"|xfw(?:\s+(?:findings?|proposals?|mappings?))?"
+    r")\b.*\b(?:pending|review|need\s+(?:review|confirm)|to\s+confirm|proposals?)\b"
+    r"|"
+    r"\b(?:pending|proposed|unconfirmed)\b.*\b(?:cross[\s-]?framework|xfw)\b",
+    re.IGNORECASE,
+)
+
+
+def _build_xfw_proposals_answer(tenant_id: str) -> Optional[str]:
+    """
+    Read pending xfw_bridge proposals from document_findings and format as a
+    short-circuit answer. Caps the visible list at 20; the chat can be asked
+    for more later. Returns None on DB error so the caller falls back to the
+    normal handler.
+    """
+    if not tenant_id:
+        return None
+    db_url = os.environ.get("DATABASE_URL")
+    if not db_url:
+        return None
+    try:
+        import psycopg2
+        conn = psycopg2.connect(db_url)
+        try:
+            with conn.cursor() as cur:
+                cur.execute("SET app.tenant_id = %s", (tenant_id,))
+                cur.execute(
+                    """
+                    SELECT df.standard_id, df.control_ref, df.status,
+                           df.inferred_from_standard_id,
+                           df.inferred_from_control_ref,
+                           cd.document_title
+                      FROM document_findings df
+                 LEFT JOIN client_documents cd ON cd.id = df.document_id
+                     WHERE df.tenant_id        = %s
+                       AND df.inference_source = 'xfw_bridge'
+                       AND df.confirmed_by IS NULL
+                       AND df.is_active       = TRUE
+                     ORDER BY df.standard_id, df.control_ref
+                    """,
+                    (tenant_id,),
+                )
+                rows = cur.fetchall()
+        finally:
+            conn.close()
+    except Exception as e:
+        logger.warning(f"xfw proposals lookup failed: {type(e).__name__}: {e}")
+        return None
+
+    if not rows:
+        return (
+            "No cross-framework findings are pending review. "
+            "Proposals appear here after document intake walks the IMPLEMENTS "
+            "bridge to your enrolled standards."
+        )
+
+    lines = [f"{len(rows)} cross-framework finding(s) pending review:"]
+    CAP = 20
+    for std, ref, status, src_std, src_ref, doc_title in rows[:CAP]:
+        src_clause = f" ← {src_std}:{src_ref}" if src_std and src_ref else ""
+        doc_clause = f"  ({doc_title})" if doc_title else ""
+        lines.append(f"  - {std}:{ref} [{status}]{src_clause}{doc_clause}")
+    if len(rows) > CAP:
+        lines.append(f"  ... and {len(rows) - CAP} more.")
+    lines.append("")
+    lines.append(
+        "Confirm or reject each proposal in the review queue — confirmation "
+        "stamps confirmed_by/confirmed_at; rejection deactivates the row."
+    )
+    return "\n".join(lines)
+
+
 def _build_document_status_answer(query: str, alerts: list) -> Optional[str]:
     import re
     # Polarity guard: this builder only knows the "missing/registered" side.
@@ -642,6 +724,23 @@ class Resolver:
     # --- Tier 1: DB-first ---
 
     def _resolve_document_status(self, req, entry):
+        # xfw-proposals short-circuit (HITL queue) — when the user asks about
+        # pending cross-framework findings, read document_findings directly
+        # and return the proposal list. Bypasses the missing-docs builder
+        # below entirely.
+        if _XFW_PROPOSALS_PATTERN.search(req.query or ""):
+            xfw_answer = _build_xfw_proposals_answer(req.tenant_id)
+            if xfw_answer is not None:
+                return ResolvedContext(
+                    taxonomy_type        = "DOCUMENT_STATUS",
+                    taxonomy_entry       = entry,
+                    posture_nodes        = {},
+                    graph_nodes          = GraphResult.empty(),
+                    vector_nodes         = [],
+                    document_alerts      = [],
+                    short_circuit_answer = xfw_answer,
+                    answer_source        = "postgres",
+                )
         alerts = req.tenant_context.document_alerts or []
         answer = _build_document_status_answer(req.query, alerts)
         return ResolvedContext(
