@@ -617,6 +617,10 @@ class DocumentStatus(BaseModel):
     posture_created:  Optional[int] = None
     posture_updated:  Optional[int] = None
     posture_skipped:  Optional[int] = None
+    # Stage 4.5 (xfw_proposer) — populated when the xfw trace row landed
+    proposals_written: Optional[int] = None
+    proposals_skipped: Optional[int] = None
+    xfw_targets:       Optional[list[str]] = None
     total_ms:        Optional[int] = None
     had_error:       Optional[bool] = None
     error_type:      Optional[str] = None
@@ -757,12 +761,14 @@ async def document_status(
     try:
         set_session(conn, key_info.tenant_id)
         with conn.cursor() as cur:
-            # Try v_intake_runs first (has full trace data)
+            # Try v_intake_runs first (has full trace data including xfw stage)
             cur.execute("""
                 SELECT
                     upload_id, filename, doc_type, standard_ids,
                     findings_written, posture_created, posture_updated,
-                    posture_skipped, total_ms, had_error, error_type,
+                    posture_skipped,
+                    proposals_written, proposals_skipped, xfw_targets,
+                    total_ms, had_error, error_type,
                     started_at::text
                 FROM v_intake_runs
                 WHERE upload_id = %s
@@ -774,6 +780,7 @@ async def document_status(
 
             if row:
                 (uid, fname, doc_type, std_ids, fw, pc, pu, ps,
+                 prop_written, prop_skipped, xfw_tgts,
                  total_ms, had_error, error_type, started_at) = row
                 # Determine status from trace
                 if had_error:
@@ -794,6 +801,8 @@ async def document_status(
                     raise HTTPException(404, f"Upload not found: {upload_id}")
                 doc_status, fname, started_at = row2
                 doc_type = std_ids = fw = pc = pu = ps = total_ms = None
+                prop_written = prop_skipped = None
+                xfw_tgts = None
                 had_error = error_type = None
 
         return DocumentStatus(
@@ -806,6 +815,9 @@ async def document_status(
             posture_created  = pc,
             posture_updated  = pu,
             posture_skipped  = ps,
+            proposals_written = prop_written,
+            proposals_skipped = prop_skipped,
+            xfw_targets       = xfw_tgts,
             total_ms         = total_ms,
             had_error        = had_error,
             error_type       = error_type,
@@ -1044,6 +1056,200 @@ async def override_posture(
     except Exception as e:
         conn.rollback()
         logger.error(f"Override failed: {e}", exc_info=True)
+        raise HTTPException(500, str(e))
+    finally:
+        pool.putconn(conn)
+
+
+# =============================================================================
+# XFW PROPOSALS — HITL queue from the intake xfw_proposer (commit 01de40e).
+# Reads/writes document_findings rows where inference_source='xfw_bridge'.
+# Confirm flips confirmed_by/confirmed_at; reject sets is_active=FALSE so the
+# row is preserved for audit but no longer surfaces.
+# =============================================================================
+
+@app.get("/api/v1/xfw-proposals", tags=["hitl"])
+async def list_xfw_proposals(
+    request:     Request,
+    key_info:    APIKeyInfo  = Depends(require_scope("hitl")),
+    standard_id: Optional[str] = None,
+    limit:       int           = 50,
+    offset:      int           = 0,
+):
+    """
+    List pending cross-framework proposals for the tenant. Each row is a
+    document_findings entry written by xfw_proposer with confirmed_by IS NULL.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            filters = [
+                "df.tenant_id        = %s::uuid",
+                "df.inference_source = 'xfw_bridge'",
+                "df.confirmed_by IS NULL",
+                "df.is_active       = TRUE",
+            ]
+            params: list = [key_info.tenant_id]
+            if standard_id:
+                filters.append("df.standard_id = %s")
+                params.append(standard_id)
+            where = " AND ".join(filters)
+
+            cur.execute(
+                f"""
+                SELECT df.id, df.standard_id, df.control_ref, df.status,
+                       df.confidence,
+                       df.inferred_from_standard_id, df.inferred_from_control_ref,
+                       df.document_id, cd.document_title, df.extracted_at::text
+                  FROM document_findings df
+             LEFT JOIN client_documents cd ON cd.id = df.document_id
+                 WHERE {where}
+                 ORDER BY df.standard_id, df.control_ref
+                 LIMIT %s OFFSET %s
+                """,
+                params + [limit, offset],
+            )
+            rows = cur.fetchall()
+
+            cur.execute(
+                f"SELECT COUNT(*) FROM document_findings df WHERE {where}",
+                params,
+            )
+            total = cur.fetchone()[0]
+
+        proposals = [
+            {
+                "id":                       str(r[0]),
+                "standard_id":              r[1],
+                "control_ref":              r[2],
+                "status":                   r[3],
+                "confidence":               r[4],
+                "inferred_from_standard_id": r[5],
+                "inferred_from_control_ref": r[6],
+                "document_id":              str(r[7]) if r[7] else None,
+                "document_title":           r[8],
+                "extracted_at":             r[9],
+            }
+            for r in rows
+        ]
+        return {"proposals": proposals, "total": total, "limit": limit, "offset": offset}
+    finally:
+        pool.putconn(conn)
+
+
+@app.post("/api/v1/xfw-proposals/{proposal_id}/confirm", tags=["hitl"])
+async def confirm_xfw_proposal(
+    proposal_id: str,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("hitl")),
+):
+    """Confirm a pending xfw proposal — stamps confirmed_by + confirmed_at."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                UPDATE document_findings
+                   SET confirmed_by = %s::uuid,
+                       confirmed_at = NOW()
+                 WHERE id               = %s::uuid
+                   AND tenant_id        = %s::uuid
+                   AND inference_source = 'xfw_bridge'
+                   AND confirmed_by IS NULL
+                   AND is_active       = TRUE
+             RETURNING standard_id, control_ref, status
+                """,
+                (key_info.user_id, proposal_id, key_info.tenant_id),
+            )
+            row = cur.fetchone()
+            if not row:
+                raise HTTPException(
+                    404,
+                    f"Proposal {proposal_id} not found, already confirmed, or not pending."
+                )
+        conn.commit()
+        logger.info(
+            f"xfw proposal confirmed: {row[0]}:{row[1]} "
+            f"by user={key_info.user_id[:8]} tenant={key_info.tenant_id[:8]}"
+        )
+        return {
+            "id":            proposal_id,
+            "standard_id":   row[0],
+            "control_ref":   row[1],
+            "status":        row[2],
+            "confirmed_by":  key_info.user_id,
+            "trace_id":      request.state.trace_id,
+        }
+    except HTTPException:
+        conn.rollback()
+        raise
+    except Exception as e:
+        conn.rollback()
+        logger.error(f"xfw confirm failed: {e}", exc_info=True)
+        raise HTTPException(500, str(e))
+    finally:
+        pool.putconn(conn)
+
+
+@app.post("/api/v1/xfw-proposals/{proposal_id}/reject", tags=["hitl"])
+async def reject_xfw_proposal(
+    proposal_id: str,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("hitl")),
+):
+    """
+    Reject a pending xfw proposal — sets is_active=FALSE so it's preserved
+    for audit but no longer surfaces in the queue.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                UPDATE document_findings
+                   SET is_active       = FALSE,
+                       deleted_at      = NOW(),
+                       deleted_by      = %s::uuid,
+                       deletion_reason = 'xfw_proposal_rejected'
+                 WHERE id               = %s::uuid
+                   AND tenant_id        = %s::uuid
+                   AND inference_source = 'xfw_bridge'
+                   AND confirmed_by IS NULL
+                   AND is_active       = TRUE
+             RETURNING standard_id, control_ref
+                """,
+                (key_info.user_id, proposal_id, key_info.tenant_id),
+            )
+            row = cur.fetchone()
+            if not row:
+                raise HTTPException(
+                    404,
+                    f"Proposal {proposal_id} not found or not pending."
+                )
+        conn.commit()
+        logger.info(
+            f"xfw proposal rejected: {row[0]}:{row[1]} "
+            f"by user={key_info.user_id[:8]} tenant={key_info.tenant_id[:8]}"
+        )
+        return {
+            "id":           proposal_id,
+            "standard_id":  row[0],
+            "control_ref":  row[1],
+            "rejected_by":  key_info.user_id,
+            "trace_id":     request.state.trace_id,
+        }
+    except HTTPException:
+        conn.rollback()
+        raise
+    except Exception as e:
+        conn.rollback()
+        logger.error(f"xfw reject failed: {e}", exc_info=True)
         raise HTTPException(500, str(e))
     finally:
         pool.putconn(conn)

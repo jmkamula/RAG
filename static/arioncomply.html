@@ -891,7 +891,7 @@ function addUploadCard(id, name, size) {
       <span class="upload-status us-queued">Queued</span>
     </div>
     <div class="upload-trace" id="trace_${id}">
-      ${['read','enrich','extract','write'].map(s=>`
+      ${['read','enrich','extract','write','xfw'].map(s=>`
         <div class="trace-stage" id="stage_${id}_${s}">
           <span class="stage-dot stage-pending"></span>
           <span class="stage-name">${s}</span>
@@ -904,7 +904,7 @@ function addUploadCard(id, name, size) {
 }
 
 async function pollStatus(uploadId, card) {
-  const stages = ['read','enrich','extract','write'];
+  const stages = ['read','enrich','extract','write','xfw'];
   let completed = false;
   let attempts = 0;
 
@@ -947,6 +947,13 @@ function stageDetail(stage, d) {
   if (stage==='extract') return d.findings_written!=null ? `${d.findings_written} findings` : '—';
   if (stage==='write') return d.posture_created!=null ?
     `+${d.posture_created} created, ${d.posture_updated||0} updated, ${d.posture_skipped||0} skipped` : '—';
+  if (stage==='xfw') {
+    if (d.proposals_written==null) return '—';
+    const targets = (d.xfw_targets||[]).map(s=>s.split(':')[0]).join(', ');
+    return targets
+      ? `${d.proposals_written} proposals → ${targets}`
+      : `${d.proposals_written} proposals`;
+  }
   return '—';
 }
 
@@ -960,6 +967,7 @@ function addUploadSummary(card, id, d) {
     <div class="sum-item"><span class="sum-val">${d.posture_created||0}</span><span class="sum-lbl">Created</span></div>
     <div class="sum-item"><span class="sum-val">${d.posture_updated||0}</span><span class="sum-lbl">Updated</span></div>
     <div class="sum-item"><span class="sum-val">${d.posture_skipped||0}</span><span class="sum-lbl">Skipped</span></div>
+    <div class="sum-item"><span class="sum-val">${d.proposals_written||0}</span><span class="sum-lbl">Proposals</span></div>
     <div class="sum-item"><span class="sum-val">${d.total_ms!=null?Math.round(d.total_ms/1000)+'s':'—'}</span><span class="sum-lbl">Duration</span></div>`;
   card.appendChild(div);
 }

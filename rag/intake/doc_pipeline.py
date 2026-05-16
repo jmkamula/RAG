@@ -108,6 +108,8 @@ class IntakeTracer:
             "extraction_path", "doc_type", "standard_ids", "explicit_refs_found",
             "llm_calls", "findings_raw", "findings_kept",
             "findings_written", "posture_created", "posture_updated", "posture_skipped",
+            # Stage 4.5 (xfw_proposer) metrics
+            "proposals_written", "proposals_skipped", "xfw_targets",
         }
         for k, v in metrics.items():
             if k in allowed:
@@ -387,38 +389,67 @@ class DocumentPipeline:
             # confirmed_by IS NULL — the HITL queue. Failures here are logged
             # and swallowed: Stage 4 has already committed; an xfw failure must
             # not poison the upload.
-            try:
-                from rag.intake.xfw_proposer import propose_for_findings
-                from neo4j import GraphDatabase
-                _neo_driver = GraphDatabase.driver(
-                    os.getenv("NEO4J_URI", "bolt://localhost:7687"),
-                    auth=(os.getenv("NEO4J_USER", "neo4j"),
-                          os.getenv("NEO4J_PASSWORD", "")),
+            t4_5 = time.time()
+            _xfw_written = 0
+            _xfw_skipped = 0
+            _xfw_targets: list[str] = []
+            _xfw_error: Optional[str] = None
+            _xfw_doc_id  = summary.get("doc_id")
+            if not findings or not _xfw_doc_id:
+                # Nothing extracted → nothing to walk. Skip silently — this is
+                # the empty-extraction path (e.g. LLM failure) and emitting an
+                # error here would mask the real Stage 3 problem.
+                logger.debug(
+                    "Stage 4.5 skipped: no findings or doc_id unresolved "
+                    f"(findings={len(findings)}, doc_id={_xfw_doc_id})"
                 )
-                _xfw_conn = psycopg2.connect(self.db_url)
+            else:
                 try:
-                    with _xfw_conn.cursor() as _cur:
-                        _cur.execute("SET app.tenant_id = %s", (tenant_id,))
-                    _xfw_summary = propose_for_findings(
-                        tenant_id   = tenant_id,
-                        document_id = summary["doc_id"],
-                        findings    = findings,
-                        conn        = _xfw_conn,
-                        driver      = _neo_driver,
+                    from rag.intake.xfw_proposer import propose_for_findings
+                    from neo4j import GraphDatabase
+                    _neo_driver = GraphDatabase.driver(
+                        os.getenv("NEO4J_URI", "bolt://localhost:7687"),
+                        auth=(os.getenv("NEO4J_USER", "neo4j"),
+                              os.getenv("NEO4J_PASSWORD", "")),
                     )
-                    _xfw_conn.commit()
-                    logger.info(f"Stage 4.5: {_xfw_summary}")
-                except Exception:
-                    _xfw_conn.rollback()
-                    raise
-                finally:
-                    _xfw_conn.close()
-                    _neo_driver.close()
-            except Exception as e:
-                logger.warning(
-                    f"xfw_proposer hook failed (Stage 4 already committed): "
-                    f"{type(e).__name__}: {e}"
-                )
+                    _xfw_conn = psycopg2.connect(self.db_url)
+                    try:
+                        with _xfw_conn.cursor() as _cur:
+                            _cur.execute("SET app.tenant_id = %s", (tenant_id,))
+                        _xfw_summary = propose_for_findings(
+                            tenant_id   = tenant_id,
+                            document_id = _xfw_doc_id,
+                            findings    = findings,
+                            conn        = _xfw_conn,
+                            driver      = _neo_driver,
+                        )
+                        _xfw_conn.commit()
+                        _xfw_written = _xfw_summary.proposals_written
+                        _xfw_skipped = _xfw_summary.proposals_skipped
+                        _xfw_targets = sorted(_xfw_summary.standards_targeted)
+                        logger.info(f"Stage 4.5: {_xfw_summary}")
+                    except Exception:
+                        _xfw_conn.rollback()
+                        raise
+                    finally:
+                        _xfw_conn.close()
+                        _neo_driver.close()
+                except Exception as e:
+                    _xfw_error = f"{type(e).__name__}: {e}"
+                    logger.warning(
+                        f"xfw_proposer hook failed (Stage 4 already committed): "
+                        f"{_xfw_error}"
+                    )
+
+            tracer.write(
+                "xfw",
+                int((time.time() - t4_5) * 1000),
+                status            = "error" if _xfw_error else "ok",
+                error_detail      = _xfw_error,
+                proposals_written = _xfw_written,
+                proposals_skipped = _xfw_skipped,
+                xfw_targets       = _xfw_targets,
+            )
 
             s4_ms = int((time.time() - t4) * 1000)
 
