@@ -264,6 +264,85 @@ EVAL_CASES = [
         must_contain=["audit"],
         notes="9.2 OFI.",
     ),
+
+    # ── Feature-locked cases ────────────────────────────────────────────────
+    # Each case below locks in a specific commit. If the commit's behaviour
+    # regresses, the named case must fail. See feedback memory
+    # `feedback_eval_with_each_feature`.
+
+    EvalCase(
+        id=22,
+        query="are we ISO 27001 A.6.4 compliant?",
+        tags=["posture", "cited_ref"],
+        expected_refs=["A.6.4"],
+        expected_type="posture_check",
+        must_contain=["A.6.4", "disciplinary"],
+        # The pre-fix bug returned unrelated NC/OFI findings (A.5.18 etc.) and
+        # never mentioned A.6.4. Forbid those refs in the answer so the case
+        # fails the moment the cited-ref handling regresses.
+        must_not_contain=["A.5.18", "A.5.12"],
+        notes="Commit 432605c: POSTURE_STATUS handler must seed cited refs.",
+    ),
+
+    EvalCase(
+        id=23,
+        query="what is ISO 27001 control A.6.4?",
+        tags=["definition", "cited_ref"],
+        expected_refs=["A.6.4"],
+        expected_type="definition",
+        must_contain=["A.6.4", "disciplinary"],
+        notes="Commit 0b55716: STANDARD_KNOWLEDGE handler seeds cited refs.",
+    ),
+
+    EvalCase(
+        id=24,
+        query="what is our GDPR Art.32 status?",
+        tags=["cross_framework", "xfw_inheritance", "gdpr"],
+        expected_refs=["Art.32"],
+        expected_type="cross_framework",
+        # Art.32 is a Layer-2 node and must NEVER carry a standalone NC/OFI
+        # tag — its posture is inherited from linked ISO controls. The answer
+        # must reference at least one A.5.x bridge control.
+        must_contain=["Art.32", "A.5"],
+        must_not_contain=["Art.32 [NC]", "Art.32 [OFI]", "Art.32 is a non-conformity"],
+        notes="Commit 432605c: Art.32 posture via xfw inheritance, never direct.",
+    ),
+
+    EvalCase(
+        id=25,
+        query="is GDPR Art.5 a non-conformity?",
+        tags=["cross_framework", "xfw_inheritance", "gdpr"],
+        expected_refs=["Art.5"],
+        expected_type="cross_framework",
+        # Lock in xfw inheritance behavioural contract:
+        #   (1) the answer mentions Art.5 (the query subject)
+        #   (2) it cites at least one ISO bridge control (A.5.x)
+        #   (3) it NEVER attaches an NC/OFI tag to Art.5 itself — Layer-2
+        #       nodes always inherit posture from linked primaries.
+        # Skip a strict "addressed via" phrasing check — the LLM uses
+        # equivalent phrasings ("implemented through", "covered by") and
+        # the load-bearing test is the anti-hallucination one below.
+        must_contain=["Art.5", "A.5"],
+        must_not_contain=["Art.5 [NC]", "Art.5 [OFI]", "Art.5 is a non-conformity"],
+        notes="Commit 432605c: anti-hallucination on Layer-2 posture.",
+    ),
+
+    EvalCase(
+        id=26,
+        query="what documents have we uploaded?",
+        tags=["documents", "short_circuit", "upload_inventory"],
+        expected_type="document_inventory",
+        # The short-circuit path reads client_documents.is_uploaded and lists
+        # actual titles + uploaded_at dates. A regression would either fall
+        # back to a generic checklist or hallucinate doc names.
+        must_contain=["Access Control Policy", "uploaded"],
+        notes="Commit 9998c22: uploaded-doc short-circuit names real titles.",
+    ),
+
+    # TODO id=27 incident obligations — pending. The classifications model
+    # (commit 40ad607) lands the Postgres + Neo4j shape, but the chat surface
+    # still routes every "incident obligations" phrasing through
+    # clarification. Add once the classifier recognises the intent.
 ]
 
 
