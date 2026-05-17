@@ -304,11 +304,22 @@ Rules for these two lines:
   answer, output "SELECTED_XFW:" with nothing after the colon.
 - Never put a Layer 1 number in SELECTED_XFW or vice versa.
 
-Selection count guidance (applies to SELECTED_PRIMARY):
-- Gap analysis queries: select 5-7 nodes (focus on NC/OFI findings)
-- Implementation queries: select 7-10 nodes (broader coverage needed)
-- Definition queries: select 3-5 nodes (tight focus)
-- Posture check queries: select 5-8 nodes (all assessed controls)
+Selection guidance (applies to SELECTED_PRIMARY) — completeness over brevity:
+- Select every primary node materially relevant to the query. Do not impose
+  an artificial count cap. The two-list design (PRIMARY for completeness,
+  XFW for focused cross-framework support) exists so that primary coverage
+  can be exhaustive.
+- For "list all X" / "show me our X" / "what are our X" queries (e.g.
+  "show me our OFI findings", "what NCs do we have?"), include EVERY
+  finding of the requested type in posture data — never truncate. This
+  means EVERY node tagged [NC] or [OFI] in LAYER 1, including ISO clauses
+  in the N.M format (e.g. 9.2 internal audit, 6.1 risk assessment) — NOT
+  just Annex A controls. Clause-level findings count and must be listed.
+- For topic-scoped queries (e.g. "access rights gaps", "encryption posture"),
+  include all NC/OFI findings whose obligation directly addresses the topic.
+  Omit findings unrelated to the topic rather than capping by count.
+- Definition queries: keep tight focus — only the node(s) being defined and
+  immediate ancestors/children that clarify the definition.
 
 SELECTED_XFW count: 0-3 is typical. Only include xfw nodes that add a
 materially different obligation (e.g. GDPR Art.32 added alongside ISO

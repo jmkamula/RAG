@@ -91,13 +91,19 @@ EVAL_CASES = [
     EvalCase(
         id=3, query="show me our OFI findings",
         tags=["gap", "core", "ofi"],
+        # The 3 "outlier" OFIs: A.5.19 (suppliers), A.8.19 (software install),
+        # 9.2 (a clause, not Annex A). Pre-fix llm_answer.py:307 capped
+        # gap_analysis at 5-7 nodes; the LLM included 2 NCs first (per
+        # selection-order rule) then 5 OFIs from the 8, silently dropping
+        # the outliers ~50% of runs. Fix: removed the cap and added an
+        # explicit "include clause format" rule to the prompt.
         expected_refs=["A.5.19", "A.8.19", "9.2"],
         forbidden_refs=["A.7.5", "A.6.7"],
         expected_type="gap_analysis",
         must_contain=["OFI"],
         must_not_contain=["A.7.5", "A.6.7"],
         min_findings=3,
-        notes="4 real OFIs.",
+        notes="Locks in exhaustive-list rule for gap_analysis (no count cap).",
     ),
 
     EvalCase(
