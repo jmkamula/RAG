@@ -65,6 +65,14 @@ class ParsedDocument:
     # Branching decision
     extraction_path:  ExtractionPath = ExtractionPath.FULL_DOCUMENT
 
+    # Normalized markdown rendering of the source binary, populated by Stage 1
+    # when the format has a structure-preserving converter (e.g. mammoth for
+    # docx). When present, the extractor uses this as LLM input instead of the
+    # flat paragraph-join in full_text — preserves tables, headings, lists.
+    markdown:         Optional[str] = None
+    source_sha256:    Optional[str] = None
+    converter:        Optional[str] = None
+
 
 @dataclass
 class DocumentChunk:

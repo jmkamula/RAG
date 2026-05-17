@@ -66,9 +66,12 @@ def read_document(
     doc = reader(file_path, file_name)
     doc.upload_id = upload_id
 
-    # Compute token estimate from full text
+    # Compute token estimate. Prefer markdown when present — it's what the
+    # extractor actually feeds the LLM, and for table-heavy docs it's
+    # materially larger than the paragraph-only join below.
     doc.full_text     = "\n\n".join(s.text for s in doc.raw_sections if s.text.strip())
-    doc.token_estimate = len(doc.full_text) // CHARS_PER_TOKEN
+    sizing_text       = doc.markdown if doc.markdown else doc.full_text
+    doc.token_estimate = len(sizing_text) // CHARS_PER_TOKEN
 
     logger.info(
         f"Read {file_name}: {len(doc.raw_sections)} sections, "
@@ -181,6 +184,28 @@ def _read_docx(file_path: str, file_name: str) -> ParsedDocument:
     except ImportError:
         raise ImportError("python-docx required: pip install python-docx")
 
+    # Markdown rendering via mammoth — captures tables, headings, and lists
+    # that the paragraph walk below ignores. Surfaced on ParsedDocument.markdown
+    # and used as the LLM input when present (see extractor._extract_full).
+    md_text:     Optional[str] = None
+    src_sha:     Optional[str] = None
+    md_converter: Optional[str] = None
+    try:
+        import hashlib, io
+        import mammoth
+        from importlib.metadata import version as _pkg_version
+        with open(file_path, "rb") as _fh:
+            _bytes = _fh.read()
+        src_sha = hashlib.sha256(_bytes).hexdigest()
+        _result = mammoth.convert_to_markdown(io.BytesIO(_bytes))
+        md_text = _result.value or None
+        try:
+            md_converter = f"mammoth/{_pkg_version('mammoth')}"
+        except Exception:
+            md_converter = "mammoth"
+    except Exception as e:
+        logger.warning(f"mammoth markdown conversion failed for {file_name}: {e}")
+
     doc      = docx.Document(file_path)
     sections = []
 
@@ -235,6 +260,9 @@ def _read_docx(file_path: str, file_name: str) -> ParsedDocument:
         original_name = file_name,
         raw_sections  = sections,
         page_count    = 0,  # DOCX doesn't easily expose page count
+        markdown      = md_text,
+        source_sha256 = src_sha,
+        converter     = md_converter,
     )
 
 

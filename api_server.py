@@ -648,11 +648,9 @@ def _run_pipeline(
         f"Pipeline complete: {result.document_name} "
         f"status={result.status} findings={result.findings_count}"
     )
-    # Clean up temp file
-    try:
-        Path(file_path).unlink(missing_ok=True)
-    except Exception:
-        pass
+    # Original is preserved as evidence — auditors will ask for the file that
+    # backs each finding, and re-parsing depends on it. Right-to-erasure goes
+    # through DELETE /api/v1/documents/{id} (separate workstream).
 
 
 @app.post("/api/v1/documents/upload", tags=["documents"])
@@ -687,10 +685,21 @@ async def upload_document(
 
     upload_id = str(uuid.uuid4())
     safe_name = f"{upload_id}{suffix}"
-    file_path = UPLOAD_DIR / safe_name
+
+    # Tenant-namespace the storage path so cross-tenant traversal is impossible
+    # by construction. Originals are kept (not unlinked post-processing) so the
+    # findings have a chain-of-custody binary to point back to.
+    tenant_dir = UPLOAD_DIR / key_info.tenant_id
+    tenant_dir.mkdir(parents=True, exist_ok=True)
+    file_path = tenant_dir / safe_name
 
     # Save to disk
     file_path.write_bytes(contents)
+
+    # Chain-of-custody: hash + size at the moment we accepted the bytes.
+    import hashlib as _hl
+    file_sha256 = _hl.sha256(contents).hexdigest()
+    byte_size   = len(contents)
 
     # Register in document_uploads
     pool = request.app.state.pg_pool
@@ -701,8 +710,9 @@ async def upload_document(
             cur.execute("""
                 INSERT INTO document_uploads (
                     id, tenant_id, filename, storage_path,
-                    extraction_status, uploaded_by
-                ) VALUES (%s, %s::uuid, %s, %s, 'pending', %s::uuid)
+                    extraction_status, uploaded_by,
+                    sha256, byte_size
+                ) VALUES (%s, %s::uuid, %s, %s, 'pending', %s::uuid, %s, %s)
                 ON CONFLICT (id) DO NOTHING
             """, (
                 upload_id,
@@ -710,6 +720,8 @@ async def upload_document(
                 file.filename,
                 str(file_path),
                 key_info.user_id,
+                file_sha256,
+                byte_size,
             ))
         conn.commit()
     except Exception as e:

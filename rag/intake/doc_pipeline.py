@@ -365,6 +365,44 @@ class DocumentPipeline:
                     findings, tenant_id, upload_id, conn,
                     metadata = doc_metadata,
                 )
+
+                # Persist the parsed markdown alongside the findings so the
+                # extractor's input is reproducible without the original
+                # binary. Skipped silently for formats with no markdown
+                # renderer yet (pdf/xlsx/csv/txt).
+                if doc.markdown:
+                    import hashlib as _hl
+                    _md_bytes = doc.markdown.encode("utf-8")
+                    _md_sha   = _hl.sha256(_md_bytes).hexdigest()
+                    with conn.cursor() as _cur:
+                        _cur.execute(
+                            """
+                            INSERT INTO document_text (
+                                upload_id, tenant_id, markdown,
+                                markdown_sha256, source_sha256,
+                                converter, byte_count
+                            ) VALUES (
+                                %s::uuid, %s::uuid, %s, %s, %s, %s, %s
+                            )
+                            ON CONFLICT (upload_id) DO UPDATE SET
+                                markdown        = EXCLUDED.markdown,
+                                markdown_sha256 = EXCLUDED.markdown_sha256,
+                                source_sha256   = EXCLUDED.source_sha256,
+                                converter       = EXCLUDED.converter,
+                                byte_count      = EXCLUDED.byte_count,
+                                parsed_at       = now()
+                            """,
+                            (
+                                upload_id,
+                                tenant_id,
+                                doc.markdown,
+                                _md_sha,
+                                doc.source_sha256 or _sha256 or "",
+                                doc.converter or "unknown",
+                                len(_md_bytes),
+                            ),
+                        )
+
                 conn.commit()
             except Exception as e:
                 conn.rollback()

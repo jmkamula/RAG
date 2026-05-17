@@ -17,6 +17,7 @@ import logging
 import re
 import time
 import urllib.request
+import urllib.error
 from typing import Optional
 
 from .models import (
@@ -133,8 +134,13 @@ def _extract_full(
     chunks = _chunk_controls(controls, MAX_CONTROLS_PER_CALL)
     all_findings = []
 
+    # Prefer structured markdown when the reader produced it (currently docx
+    # via mammoth). It preserves tables/headings/lists that doc.full_text —
+    # built from a paragraph join — silently drops.
+    doc_text = doc.markdown if doc.markdown else doc.full_text
+
     for chunk_controls in chunks:
-        text = _build_doc_context(doc) + "\n\n" + doc.full_text
+        text = _build_doc_context(doc) + "\n\n" + doc_text
 
         raw = _llm_extract(
             text       = text,
@@ -297,6 +303,16 @@ def _llm_extract(
         with urllib.request.urlopen(req, timeout=60) as resp:
             data = json.loads(resp.read())
         return data["content"][0]["text"]
+    except urllib.error.HTTPError as e:
+        try:
+            err_body = e.read().decode()[:500]
+        except Exception:
+            err_body = "<no body>"
+        logger.error(
+            f"LLM extraction failed for {doc_name} [{chunk_hint}]: "
+            f"HTTP {e.code}: {err_body}"
+        )
+        return "[]"
     except Exception as e:
         logger.error(f"LLM extraction failed for {doc_name} [{chunk_hint}]: {e}")
         return "[]"
