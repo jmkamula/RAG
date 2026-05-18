@@ -733,6 +733,10 @@ class DocumentPipeline:
             conn = psycopg2.connect(self.db_url)
             try:
                 with conn.cursor() as cur:
+                    # series_id / version_no are nulled out so the row
+                    # doesn't claim a slot in the visible version sequence
+                    # (schema_v20). The dup-tombstone remains queryable by
+                    # /status via upload_id, just not via /versions.
                     cur.execute(
                         """
                         UPDATE document_uploads
@@ -740,7 +744,9 @@ class DocumentPipeline:
                                dup_of_upload_id  = %s::uuid,
                                processed_at      = now(),
                                error_message     = NULL,
-                               findings_count    = 0
+                               findings_count    = 0,
+                               series_id         = NULL,
+                               version_no        = NULL
                          WHERE id = %s::uuid
                         """,
                         (dup_of_upload_id, upload_id),

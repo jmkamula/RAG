@@ -628,6 +628,11 @@ class DocumentStatus(BaseModel):
     # Set when the upload was rejected as a duplicate of an existing one
     # (Layer 2 markdown match — Layer 1 byte match returns 409 instead).
     dup_of_upload_id: Optional[str] = None
+    # schema_v20 — present on non-duplicate rows. version_no=1 for the first
+    # upload of a given filename; subsequent same-filename uploads with new
+    # content increment within the same series_id.
+    series_id:  Optional[str] = None
+    version_no: Optional[int] = None
 
 
 def _run_pipeline(
@@ -745,17 +750,44 @@ async def upload_document(
     # Save to disk
     file_path.write_bytes(contents)
 
-    # Register in document_uploads
+    # Register in document_uploads. (series_id, version_no) come from
+    # schema_v20: same filename re-uploaded with different content joins the
+    # existing series as the next version. The lookup + insert run in one
+    # transaction so concurrent same-filename uploads collide on the
+    # uniq_document_uploads_series_version index rather than producing
+    # duplicate version_no values.
+    series_id  = None
+    version_no = None
     conn = pool.getconn()
     try:
         set_session(conn, key_info.tenant_id, key_info.user_id)
         with conn.cursor() as cur:
             cur.execute("""
+                SELECT series_id, MAX(version_no)
+                  FROM document_uploads
+                 WHERE tenant_id = %s::uuid
+                   AND filename  = %s
+                   AND extraction_status <> 'duplicate'
+                   AND series_id IS NOT NULL
+                 GROUP BY series_id
+                 LIMIT 1
+            """, (key_info.tenant_id, file.filename))
+            row = cur.fetchone()
+            if row:
+                series_id  = str(row[0])
+                version_no = int(row[1]) + 1
+            else:
+                series_id  = str(uuid.uuid4())
+                version_no = 1
+
+            cur.execute("""
                 INSERT INTO document_uploads (
                     id, tenant_id, filename, storage_path,
                     extraction_status, uploaded_by,
-                    sha256, byte_size
-                ) VALUES (%s, %s::uuid, %s, %s, 'pending', %s::uuid, %s, %s)
+                    sha256, byte_size,
+                    series_id, version_no
+                ) VALUES (%s, %s::uuid, %s, %s, 'pending', %s::uuid, %s, %s,
+                          %s::uuid, %s)
                 ON CONFLICT (id) DO NOTHING
             """, (
                 upload_id,
@@ -765,6 +797,8 @@ async def upload_document(
                 key_info.user_id,
                 file_sha256,
                 byte_size,
+                series_id,
+                version_no,
             ))
         conn.commit()
     except Exception as e:
@@ -795,6 +829,8 @@ async def upload_document(
         "filename":   file.filename,
         "status":     "queued",
         "size_mb":    round(size_mb, 2),
+        "series_id":  series_id,
+        "version_no": version_no,
         "trace_id":   request.state.trace_id,
         "message":    "Processing started. Poll /status for progress.",
     }
@@ -859,7 +895,8 @@ async def document_status(
             # produced a trace row would otherwise appear as 404.
             cur.execute("""
                 SELECT extraction_status, filename, uploaded_at::text,
-                       dup_of_upload_id::text
+                       dup_of_upload_id::text,
+                       series_id::text, version_no
                   FROM document_uploads
                  WHERE id = %s::uuid
                    AND tenant_id = %s::uuid
@@ -869,9 +906,12 @@ async def document_status(
             if not row and not row2:
                 raise HTTPException(404, f"Upload not found: {upload_id}")
 
-            dup_of = None
+            dup_of      = None
+            series_id   = None
+            version_no  = None
             if row2:
-                u_status, u_filename, u_uploaded_at, u_dup_of = row2
+                (u_status, u_filename, u_uploaded_at, u_dup_of,
+                 u_series_id, u_version_no) = row2
                 # extraction_status='duplicate' is the authoritative signal
                 # for the rejection path. Override any trace-derived status.
                 if u_status == "duplicate":
@@ -881,6 +921,8 @@ async def document_status(
                     fname = u_filename
                 if not started_at and u_uploaded_at:
                     started_at = u_uploaded_at
+                series_id  = u_series_id
+                version_no = u_version_no
 
         return DocumentStatus(
             upload_id        = upload_id,
@@ -900,7 +942,81 @@ async def document_status(
             error_type       = error_type,
             started_at       = started_at,
             dup_of_upload_id = dup_of,
+            series_id        = series_id,
+            version_no       = version_no,
         )
+    finally:
+        pool.putconn(conn)
+
+
+class DocumentVersion(BaseModel):
+    upload_id:         str
+    version_no:        int
+    filename:          str
+    uploaded_at:       str
+    extraction_status: str
+    markdown_sha256:   Optional[str] = None
+    findings_count:    Optional[int] = None
+
+
+@app.get(
+    "/api/v1/documents/{series_id}/versions",
+    tags=["documents"],
+)
+async def list_document_versions(
+    series_id: str,
+    request:   Request,
+    key_info:  APIKeyInfo = Depends(require_scope("documents")),
+):
+    """
+    List the upload history of a document series, oldest version first.
+
+    Series membership is set on upload (schema_v20): same filename, different
+    content joins the series as the next version. Duplicate uploads are not
+    members — they're tombstones pointing at the canonical upload.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT u.id::text,
+                       u.version_no,
+                       u.filename,
+                       u.uploaded_at::text,
+                       u.extraction_status,
+                       t.markdown_sha256,
+                       u.findings_count
+                  FROM document_uploads u
+             LEFT JOIN document_text   t ON t.upload_id = u.id
+                 WHERE u.series_id = %s::uuid
+                   AND u.tenant_id = %s::uuid
+                 ORDER BY u.version_no
+            """, (series_id, key_info.tenant_id))
+            rows = cur.fetchall()
+
+        if not rows:
+            raise HTTPException(404, f"Series not found: {series_id}")
+
+        versions = [
+            DocumentVersion(
+                upload_id         = r[0],
+                version_no        = r[1],
+                filename          = r[2],
+                uploaded_at       = r[3],
+                extraction_status = r[4],
+                markdown_sha256   = r[5],
+                findings_count    = r[6],
+            )
+            for r in rows
+        ]
+        return {
+            "series_id":     series_id,
+            "filename":      versions[0].filename,
+            "version_count": len(versions),
+            "versions":      [v.model_dump() for v in versions],
+        }
     finally:
         pool.putconn(conn)
 
