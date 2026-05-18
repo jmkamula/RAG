@@ -52,11 +52,20 @@ TABLE_ONLY_TEXT = (
 )
 
 
-def _build_fixture(path: Path) -> None:
-    """Synthesize a .docx where A.5.30 evidence lives ONLY in a table cell."""
+def _build_fixture(path: Path, run_marker: str = "") -> None:
+    """Synthesize a .docx where A.5.30 evidence lives ONLY in a table cell.
+
+    `run_marker` is embedded in the document so each test run produces a
+    distinct sha256 + markdown_sha256, sidestepping the v19 idempotency
+    indexes (uniq_document_uploads_tenant_sha256 and
+    uniq_document_text_tenant_markdown_sha256).
+    """
     doc = Document()
 
     doc.add_heading("Business Continuity Policy (Test Fixture)", level=1)
+
+    if run_marker:
+        doc.add_paragraph(f"Run marker: {run_marker}")
 
     doc.add_heading("1. Purpose", level=2)
     doc.add_paragraph(
@@ -101,7 +110,14 @@ def main() -> int:
     fixture_dir = _ROOT / "tests" / "fixtures"
     fixture_dir.mkdir(parents=True, exist_ok=True)
     fixture_path = fixture_dir / f"_test_table_only_{upload_id[:8]}.docx"
-    _build_fixture(fixture_path)
+    # Embed the upload_id in the fixture so every test run produces a
+    # unique sha256 / markdown_sha256 and the v19 idempotency indexes
+    # don't reject the second run as a duplicate of the first.
+    _build_fixture(fixture_path, run_marker=upload_id)
+
+    import hashlib as _hl
+    file_bytes  = fixture_path.read_bytes()
+    file_sha256 = _hl.sha256(file_bytes).hexdigest()
 
     # Pre-register the upload row so document_text's FK is satisfied.
     conn = psycopg2.connect(db_url)
@@ -120,7 +136,7 @@ def main() -> int:
                     TENANT_ID,
                     fixture_path.name,
                     str(fixture_path),
-                    "test-fixture",
+                    file_sha256,
                     fixture_path.stat().st_size,
                 ),
             )

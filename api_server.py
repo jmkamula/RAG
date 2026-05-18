@@ -625,6 +625,9 @@ class DocumentStatus(BaseModel):
     had_error:       Optional[bool] = None
     error_type:      Optional[str] = None
     started_at:      Optional[str] = None
+    # Set when the upload was rejected as a duplicate of an existing one
+    # (Layer 2 markdown match — Layer 1 byte match returns 409 instead).
+    dup_of_upload_id: Optional[str] = None
 
 
 def _run_pipeline(
@@ -683,6 +686,52 @@ async def upload_document(
             f"File too large: {size_mb:.1f}MB. Maximum: {MAX_UPLOAD_MB}MB"
         )
 
+    # Hash the bytes BEFORE we touch disk or the DB. Layer 1 of the dedup
+    # contract (schema_v19): if these bytes have already been accepted for
+    # this tenant, reject the upload with 409 and point at the canonical
+    # upload_id. No file is written, no DB row is created, no background
+    # work is queued.
+    import hashlib as _hl
+    file_sha256 = _hl.sha256(contents).hexdigest()
+    byte_size   = len(contents)
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT id, filename, uploaded_at, extraction_status
+                  FROM document_uploads
+                 WHERE tenant_id = %s::uuid
+                   AND sha256    = %s
+                   AND extraction_status <> 'duplicate'
+                 LIMIT 1
+            """, (key_info.tenant_id, file_sha256))
+            existing = cur.fetchone()
+    finally:
+        pool.putconn(conn)
+
+    if existing:
+        existing_id, existing_name, existing_at, existing_status = existing
+        logger.info(
+            f"Upload rejected as duplicate (bytes match): "
+            f"new={file.filename} canonical={existing_id} "
+            f"tenant={key_info.tenant_id[:8]}"
+        )
+        raise HTTPException(
+            status_code=409,
+            detail={
+                "error":                "duplicate_upload",
+                "message":              "Identical file already uploaded.",
+                "canonical_upload_id":  str(existing_id),
+                "canonical_filename":   existing_name,
+                "canonical_uploaded_at": existing_at.isoformat() if existing_at else None,
+                "canonical_status":     existing_status,
+                "match_type":           "source_bytes",
+            },
+        )
+
     upload_id = str(uuid.uuid4())
     safe_name = f"{upload_id}{suffix}"
 
@@ -696,13 +745,7 @@ async def upload_document(
     # Save to disk
     file_path.write_bytes(contents)
 
-    # Chain-of-custody: hash + size at the moment we accepted the bytes.
-    import hashlib as _hl
-    file_sha256 = _hl.sha256(contents).hexdigest()
-    byte_size   = len(contents)
-
     # Register in document_uploads
-    pool = request.app.state.pg_pool
     conn = pool.getconn()
     try:
         set_session(conn, key_info.tenant_id, key_info.user_id)
@@ -802,20 +845,42 @@ async def document_status(
                 else:
                     doc_status = "processing"
             else:
-                # Fall back to document_uploads table
-                cur.execute("""
-                    SELECT status, original_name, created_at::text
-                    FROM document_uploads
-                    WHERE id = %s AND tenant_id = %s::uuid
-                """, (upload_id, key_info.tenant_id))
-                row2 = cur.fetchone()
-                if not row2:
-                    raise HTTPException(404, f"Upload not found: {upload_id}")
-                doc_status, fname, started_at = row2
                 doc_type = std_ids = fw = pc = pu = ps = total_ms = None
                 prop_written = prop_skipped = None
                 xfw_tgts = None
                 had_error = error_type = None
+                fname = ""
+                doc_status = "pending"
+                started_at = None
+
+            # Always consult document_uploads for the authoritative status +
+            # dup_of pointer. The trace view doesn't know about 'duplicate' or
+            # the dup_of_upload_id column, so a v19-rejected upload that never
+            # produced a trace row would otherwise appear as 404.
+            cur.execute("""
+                SELECT extraction_status, filename, uploaded_at::text,
+                       dup_of_upload_id::text
+                  FROM document_uploads
+                 WHERE id = %s::uuid
+                   AND tenant_id = %s::uuid
+            """, (upload_id, key_info.tenant_id))
+            row2 = cur.fetchone()
+
+            if not row and not row2:
+                raise HTTPException(404, f"Upload not found: {upload_id}")
+
+            dup_of = None
+            if row2:
+                u_status, u_filename, u_uploaded_at, u_dup_of = row2
+                # extraction_status='duplicate' is the authoritative signal
+                # for the rejection path. Override any trace-derived status.
+                if u_status == "duplicate":
+                    doc_status = "duplicate"
+                    dup_of     = u_dup_of
+                if not fname and u_filename:
+                    fname = u_filename
+                if not started_at and u_uploaded_at:
+                    started_at = u_uploaded_at
 
         return DocumentStatus(
             upload_id        = upload_id,
@@ -834,6 +899,7 @@ async def document_status(
             had_error        = had_error,
             error_type       = error_type,
             started_at       = started_at,
+            dup_of_upload_id = dup_of,
         )
     finally:
         pool.putconn(conn)

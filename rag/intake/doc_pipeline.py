@@ -238,6 +238,48 @@ class DocumentPipeline:
                 section_count  = len(doc.raw_sections),
             )
 
+            # ── Stage 1.5: markdown-content dedup ─────────────────────────────
+            # Layer 2 of the v19 idempotency contract. Layer 1 (source bytes)
+            # ran at the API edge. If two different exports of the same content
+            # slip through (e.g. DOCX vs PDF, same paragraphs), the markdown
+            # hash catches it here — before any LLM cost is incurred.
+            if doc.markdown and not self.dry_run:
+                import hashlib as _hl_dup
+                _md_sha_pre = _hl_dup.sha256(doc.markdown.encode("utf-8")).hexdigest()
+                _canonical = self._find_markdown_duplicate(
+                    tenant_id, _md_sha_pre, exclude_upload_id=upload_id,
+                )
+                if _canonical:
+                    msg = (
+                        f"Content already present (matches upload "
+                        f"{_canonical[:8]}). No findings written."
+                    )
+                    logger.info(
+                        f"Pipeline aborted as duplicate (markdown match): "
+                        f"upload_id={upload_id[:8]} dup_of={_canonical[:8]}"
+                    )
+                    self._mark_duplicate(upload_id, _canonical, file_path)
+                    tracer.write(
+                        "duplicate", 0, status="duplicate",
+                        error_type="markdown_dup",
+                        error_detail=msg,
+                        dup_of_upload_id=_canonical,
+                    )
+                    return PipelineResult(
+                        upload_id       = upload_id,
+                        tenant_id       = tenant_id,
+                        document_name   = file_name,
+                        doc_type        = doc.doc_type,
+                        standard_ids    = doc.standard_ids,
+                        extraction_path = "duplicate",
+                        findings_count  = 0,
+                        controls_assessed = [],
+                        controls_updated  = [],
+                        status      = "duplicate",
+                        error       = msg,
+                        duration_ms = int((time.time() - t_start) * 1000),
+                    )
+
             # ── Stage 2: Enrich ───────────────────────────────────────────────
             logger.info(f"Stage 2: Enriching — ~{doc.token_estimate:,} tokens")
             t2 = time.time()
@@ -643,6 +685,79 @@ class DocumentPipeline:
             conn.close()
         except Exception as e:
             logger.debug(f"Status update failed: {e}")
+
+    def _find_markdown_duplicate(
+        self,
+        tenant_id:           str,
+        markdown_sha256:     str,
+        exclude_upload_id:   str,
+    ) -> Optional[str]:
+        """Return canonical upload_id if another non-duplicate row already
+        holds this markdown hash for the tenant, else None."""
+        try:
+            import psycopg2
+            conn = psycopg2.connect(self.db_url)
+            try:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT dt.upload_id
+                          FROM document_text dt
+                          JOIN document_uploads du ON du.id = dt.upload_id
+                         WHERE dt.tenant_id        = %s::uuid
+                           AND dt.markdown_sha256  = %s
+                           AND dt.upload_id       <> %s::uuid
+                           AND du.extraction_status <> 'duplicate'
+                         LIMIT 1
+                        """,
+                        (tenant_id, markdown_sha256, exclude_upload_id),
+                    )
+                    row = cur.fetchone()
+                    return str(row[0]) if row else None
+            finally:
+                conn.close()
+        except Exception as e:
+            logger.warning(f"markdown dup-check failed: {e}")
+            return None
+
+    def _mark_duplicate(
+        self,
+        upload_id:        str,
+        dup_of_upload_id: str,
+        file_path:        str,
+    ) -> None:
+        """Mark upload as a duplicate of an existing row and delete the
+        redundant file from disk. Best-effort — failures are logged."""
+        try:
+            import psycopg2
+            conn = psycopg2.connect(self.db_url)
+            try:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        UPDATE document_uploads
+                           SET extraction_status = 'duplicate',
+                               dup_of_upload_id  = %s::uuid,
+                               processed_at      = now(),
+                               error_message     = NULL,
+                               findings_count    = 0
+                         WHERE id = %s::uuid
+                        """,
+                        (dup_of_upload_id, upload_id),
+                    )
+                conn.commit()
+            finally:
+                conn.close()
+        except Exception as e:
+            logger.warning(f"mark duplicate failed for {upload_id}: {e}")
+
+        try:
+            from pathlib import Path as _P
+            _p = _P(file_path)
+            if _p.exists():
+                _p.unlink()
+        except Exception as e:
+            logger.debug(f"duplicate file unlink failed for {file_path}: {e}")
 
     def _print_dry_run(self, findings, doc) -> None:
         print(f"\n{'='*60}")
