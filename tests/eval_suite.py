@@ -101,9 +101,16 @@ EVAL_CASES = [
         forbidden_refs=["A.7.5", "A.6.7"],
         expected_type="gap_analysis",
         must_contain=["OFI"],
-        must_not_contain=["A.7.5", "A.6.7"],
+        # "A.9.2" / "A.10." / "A.4." are anti-patterns: clauses 4-10 are
+        # body clauses, not Annex A — Annex A only has groups 5-8. The LLM
+        # used to label clause 9.2 as "A.9.2"; the prompt now forbids this.
+        must_not_contain=["A.7.5", "A.6.7", "A.9.2", "A.10.", "A.4."],
         min_findings=3,
-        notes="Locks in exhaustive-list rule for gap_analysis (no count cap).",
+        notes=(
+            "Locks in exhaustive-list rule for gap_analysis (no count cap) "
+            "AND the clause-vs-Annex-A labeling rule (no 'A.' prefix on "
+            "body clauses 4-10)."
+        ),
     ),
 
     EvalCase(

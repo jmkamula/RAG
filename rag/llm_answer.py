@@ -364,9 +364,20 @@ When a term appears for the first time in an answer, define it briefly inline:
 If the user asks what a term means, explain it fully and show which controls carry that finding.
 After defining a term once in an answer, use it without re-defining it.
 
-CONTROLS vs ARTICLES — always be precise about the source:
-  ISO 27001 uses CONTROLS — refer to them as "ISO 27001 control A.8.24" or
-    "ISO 27001 clause 9.2". Never call an ISO 27001 item an "article".
+CONTROLS vs CLAUSES vs ARTICLES — always be precise about the source:
+  ISO 27001:2022 has TWO distinct numbering systems — DO NOT mix them:
+    1. ANNEX A CONTROLS — refs always start with "A." and use groups 5-8
+       only: A.5.x (organizational), A.6.x (people), A.7.x (physical),
+       A.8.x (technological). Cite as "ISO 27001 control A.8.24".
+    2. BODY CLAUSES (management system requirements) — refs are bare
+       N.M format with NO "A." prefix: 4.x context, 5.x leadership,
+       6.x planning, 7.x support, 8.x operation, 9.x performance
+       evaluation (incl. 9.2 internal audit, 9.3 management review),
+       10.x improvement. Cite as "ISO 27001 clause 9.2" — NEVER as
+       "A.9.2" or "Annex A 9.2". There is no Annex A group 9 or 10.
+    ANTI-PATTERN to avoid: writing "A.9.2", "A.10.1", "A.4.1" — these
+       refs are clauses, not Annex A items. The leading "A." is wrong.
+    Never call an ISO 27001 item an "article".
   ISO 27701 uses CONTROLS — refer to them as "ISO 27701 control 6.11.1".
     ISO 27701 extends ISO 27001 with privacy management controls.
     It maps to GDPR requirements but is a certifiable standard, not a law.
@@ -1088,6 +1099,7 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             primary_nums = primary_nums_set,
             xfw_nums     = xfw_nums_set,
         )
+        answer_text = self._normalize_clause_refs(answer_text)
         selected_primary_nodes = [num_to_node[n] for n in selected_primary_nums
                                   if n in num_to_node]
         selected_xfw_nodes     = [num_to_node[n] for n in selected_xfw_nums
@@ -1197,6 +1209,7 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                     primary_nums = primary_nums_set,
                     xfw_nums     = xfw_nums_set,
                 )
+                answer_text   = self._normalize_clause_refs(answer_text)
                 was_corrected  = True
 
         latency_ms = round((time.time() - t0) * 1000)
@@ -1836,6 +1849,14 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                 return True
 
         return False
+
+    # ISO 27001 body clauses (groups 4-10) have no "A." prefix.
+    # The LLM occasionally hallucinates "A.9.2", "A.10.1", etc.
+    # Strip the erroneous "A." before these clause groups programmatically.
+    _SPURIOUS_ANNEX_RE = re.compile(r'\bA\.((?:4|9|10)\.\d+)\b')
+
+    def _normalize_clause_refs(self, text: str) -> str:
+        return self._SPURIOUS_ANNEX_RE.sub(r'\1', text)
 
     def _extract_refs(self, text: str) -> list[str]:
         """Extract article and control references from answer text."""

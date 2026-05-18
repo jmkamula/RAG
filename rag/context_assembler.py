@@ -453,6 +453,21 @@ class ContextAssembler:
 
     # ── Node renderers ─────────────────────────────────────────────────
 
+    def _ref_label(self, node: ExpandedNode) -> str:
+        std = node.standard_id.split(":", 1)[0]
+        ref = node.ref
+        if std == "ISO27001":
+            # Annex A controls start with "A."; everything else (4.x–10.x)
+            # is a body clause. Anchoring this distinction at the input
+            # level stops the LLM auto-prefixing clauses with "A.".
+            kind = "control" if ref.startswith("A.") else "clause"
+            return f"ISO 27001 {kind} {ref}"
+        if std == "ISO27701":
+            return f"ISO 27701 control {ref}"
+        if std == "GDPR":
+            return f"GDPR {ref}"
+        return f"{std} {ref}"
+
     def _render_node_full(
         self,
         node:    ExpandedNode,
@@ -460,7 +475,7 @@ class ContextAssembler:
         intent:  QueryIntent,
     ) -> str:
         """Full node content for primary obligations."""
-        lines = [f"── {node.ref}: {node.title}"]
+        lines = [f"── {self._ref_label(node)}: {node.title}"]
 
         # Extract layers from the vector document
         doc_layers = self._parse_document_layers(node.document)
