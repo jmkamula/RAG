@@ -38,7 +38,7 @@ from __future__ import annotations
 
 import os
 import time
-from typing import Literal
+from typing import Literal, Optional
 
 from langgraph.graph import StateGraph, END
 
@@ -74,6 +74,49 @@ _UPLOAD_STATUS_PATTERNS = [
 
 def _is_upload_status_query(query: str) -> bool:
     return any(p.search(query) for p in _UPLOAD_STATUS_PATTERNS)
+
+
+# ── Posture timeline query helpers (schema_v21 / posture_status_log) ────────
+#
+# "How did A.5.18 evolve?", "timeline for Art.32", "show me the history of
+# the access control posture". The handler reads posture_status_log directly
+# and short-circuits before the resolver — no LLM dependency on a control
+# the LLM may not remember.
+
+_TIMELINE_PATTERNS = [
+    re.compile(r'\b(?:timeline|history|evolution)\s+(?:for|of)\b',                       re.IGNORECASE),
+    re.compile(r'\bhow\s+(?:did|has)\s+.+\s+(?:evolve|change|progress)\b',                re.IGNORECASE),
+    re.compile(r'\bshow\s+(?:me\s+)?(?:the\s+)?(?:posture\s+)?(?:timeline|history)\b',    re.IGNORECASE),
+    re.compile(r'\bwhen\s+did\s+.+\s+(?:change|become|move|transition)\b',                re.IGNORECASE),
+    re.compile(r'\b(?:posture|status)\s+(?:changes?|transitions?)\s+(?:for|over\s+time)\b', re.IGNORECASE),
+]
+
+# Control-ref shapes the timeline can talk about: ISO Annex A clauses
+# (A.5.18, A.6.4), GDPR articles (Art.32, Article 5), and plain dotted
+# numeric refs (5.18, 8.16) — same set the classifier already recognises.
+_TIMELINE_REF_PATTERN = re.compile(
+    r'\b(A\.\d+(?:\.\d+)*)\b'
+    r'|\b(Art(?:icle)?\.?\s?\d+(?:\(\d+\))?)\b'
+    r'|\b(\d+\.\d+(?:\.\d+)?)\b',
+    re.IGNORECASE,
+)
+
+
+def _is_timeline_query(query: str) -> bool:
+    return any(p.search(query) for p in _TIMELINE_PATTERNS)
+
+
+def _extract_timeline_ref(query: str, focus_refs: list[str]) -> Optional[str]:
+    """Prefer the classifier's focus_refs (canonicalised upstream). Fall
+    back to in-query regex extraction when the classifier didn't surface
+    anything."""
+    for r in focus_refs or []:
+        if r:
+            return r
+    m = _TIMELINE_REF_PATTERN.search(query or "")
+    if not m:
+        return None
+    return next((g for g in m.groups() if g), None)
 
 
 _POSITIVE_UPLOAD_MARKERS = (
@@ -326,6 +369,80 @@ def _answer_upload_status(
         )
 
     return "\n".join(lines) if lines else None
+
+
+# ── Posture timeline answerer (schema_v21) ───────────────────────────────────
+
+def _answer_control_timeline(
+    query:       str,
+    tenant_id:   str,
+    control_ref: str,
+) -> Optional[str]:
+    """
+    Return a deterministic answer for a "timeline of <control>" query by
+    reading posture_status_log. Returns None when the control has no
+    history rows for the tenant — that falls through to the resolver,
+    which can answer about current posture even when history is empty.
+    """
+    if not tenant_id or not control_ref:
+        return None
+
+    db_url = os.getenv("DATABASE_URL", "")
+    if not db_url:
+        return None
+
+    try:
+        import psycopg2
+        conn = psycopg2.connect(db_url)
+    except Exception:
+        return None
+
+    try:
+        with conn.cursor() as cur:
+            # RLS uses app.tenant_id — set before reading.
+            cur.execute("SET LOCAL app.tenant_id = %s", (tenant_id,))
+            cur.execute(
+                """
+                SELECT h.changed_at::date::text,
+                       h.status_before, h.status_after,
+                       h.source,
+                       u.filename, u.version_no,
+                       h.evidence_citation,
+                       h.standard_id
+                  FROM posture_status_log h
+             LEFT JOIN document_uploads   u ON u.id = h.source_upload_id
+                 WHERE h.tenant_id   = %s::uuid
+                   AND h.control_ref = %s
+                 ORDER BY h.changed_at
+                """,
+                (tenant_id, control_ref),
+            )
+            rows = cur.fetchall()
+    finally:
+        conn.close()
+
+    if not rows:
+        return None
+
+    standards = sorted({r[7] for r in rows if r[7]})
+    std_hint  = f" ({', '.join(standards)})" if standards else ""
+
+    lines = [f"Timeline for {control_ref}{std_hint}:", ""]
+    for r in rows:
+        changed_at, before, after, source, fname, ver_no, evidence, _ = r
+        if before is None:
+            transition = f"first recorded as {after}"
+        else:
+            transition = f"{before} → {after}"
+        src = f"from {fname}" if fname else f"via {source}"
+        if ver_no is not None:
+            src += f" (v{ver_no})"
+        line = f"- {changed_at}: {transition} {src}."
+        if evidence:
+            line += f' Evidence: "{evidence[:200]}".'
+        lines.append(line)
+
+    return "\n".join(lines)
 
 
 # ── Generic short-circuit → LLM polish helper ────────────────────────────────
@@ -712,6 +829,43 @@ def make_retrieve_node(
                 "confidence":    1.0,
                 "answer_source": "postgres+llm",
             }
+
+        # ── Postgres short-circuit for posture timeline queries ────────────
+        # "How did A.5.18 evolve?" / "show me the timeline for Art.32".
+        # Reads posture_status_log directly — no LLM dependency on a
+        # control's history the LLM doesn't have. Returns None when the
+        # control has no history rows; falls through to the resolver in
+        # that case so the user gets the current posture instead of a
+        # "no data" dead-end.
+        if _is_timeline_query(state["query"]):
+            _ref = _extract_timeline_ref(state["query"], state.get("focus_refs", []))
+            if _ref:
+                _tl_answer = _answer_control_timeline(
+                    query       = state["query"],
+                    tenant_id   = str(getattr(tenant, "tenant_id", "") or ""),
+                    control_ref = _ref,
+                )
+                if _tl_answer:
+                    composed = polish_short_circuit_answer(
+                        query                = state["query"],
+                        deterministic_answer = _tl_answer,
+                        llm                  = llm,
+                    )
+                    return {
+                        **state,
+                        "answer_text":   composed,
+                        "answer":        composed,
+                        "cited_refs":    [_ref],
+                        # intent_type is what downstream consumers (including
+                        # eval_suite) read; question_type is for legacy paths
+                        # and the chat sync handler. Set both so the timeline
+                        # short-circuit shows up as posture_check end-to-end
+                        # even when classify falls back to 'unknown'.
+                        "intent_type":   "posture_check",
+                        "question_type": "posture_check",
+                        "confidence":    1.0,
+                        "answer_source": "postgres+llm",
+                    }
 
         # ── Postgres short-circuit for upload status questions ─────────────
         # Runs BEFORE the resolver: the resolver's DOCUMENT_STATUS handler

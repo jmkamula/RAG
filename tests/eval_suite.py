@@ -390,6 +390,21 @@ EVAL_CASES = [
         ],
         notes="Negative test: xfw proposal listing must not pollute posture answers.",
     ),
+
+    EvalCase(
+        id=29,
+        query="show me the timeline for A.6.4",
+        tags=["posture", "timeline", "short_circuit", "history"],
+        expected_refs=["A.6.4"],
+        expected_type="posture_check",
+        # Stage 3 lock: the posture_status_log short-circuit reads the
+        # demo-seeded timeline rows for A.6.4 (NULL→OFI on 2026-03-15,
+        # OFI→Comply on 2026-05-06). A regression would either lose the
+        # dates, drop the transition arrow, or fall through to a generic
+        # posture answer that doesn't reference the prior state.
+        must_contain=["A.6.4", "2026-03-15", "2026-05-06", "OFI", "Comply"],
+        notes="Stage 3: posture timeline short-circuit (schema_v21).",
+    ),
 ]
 
 

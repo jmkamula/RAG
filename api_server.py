@@ -1055,6 +1055,94 @@ async def list_documents(
 
 
 # =============================================================================
+# POSTURE TIMELINE
+# =============================================================================
+
+class PostureHistoryEntry(BaseModel):
+    changed_at:        str
+    status_before:     Optional[str] = None
+    status_after:      str
+    source:            str
+    source_upload_id:  Optional[str] = None
+    source_filename:   Optional[str] = None
+    source_version_no: Optional[int] = None
+    evidence_citation: Optional[str] = None
+    confidence:        Optional[str] = None
+
+
+@app.get(
+    "/api/v1/posture/{control_ref}/history",
+    tags=["documents"],
+)
+async def posture_history(
+    control_ref: str,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("documents")),
+    standard_id: Optional[str] = None,
+):
+    """
+    Return the timeline of status transitions for a control.
+
+    A control_ref can exist under multiple standards (e.g. ISO 27001
+    "A.5.18" and a custom framework). If standard_id is omitted, all
+    standards are returned interleaved by changed_at; pass standard_id
+    to scope to one framework.
+
+    Each entry includes the driving upload's filename + version_no when
+    the change came from document intake (schema_v21 source='document').
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            params: list = [key_info.tenant_id, control_ref]
+            sql = """
+                SELECT h.changed_at::text,
+                       h.status_before, h.status_after,
+                       h.source, h.source_upload_id::text,
+                       u.filename, u.version_no,
+                       h.evidence_citation, h.confidence,
+                       h.standard_id
+                  FROM posture_status_log h
+             LEFT JOIN document_uploads   u ON u.id = h.source_upload_id
+                 WHERE h.tenant_id   = %s::uuid
+                   AND h.control_ref = %s
+            """
+            if standard_id:
+                sql += " AND h.standard_id = %s"
+                params.append(standard_id)
+            sql += " ORDER BY h.changed_at"
+            cur.execute(sql, params)
+            rows = cur.fetchall()
+
+        entries = [
+            PostureHistoryEntry(
+                changed_at        = r[0],
+                status_before     = r[1],
+                status_after      = r[2],
+                source            = r[3],
+                source_upload_id  = r[4],
+                source_filename   = r[5],
+                source_version_no = r[6],
+                evidence_citation = r[7],
+                confidence        = r[8],
+            )
+            for r in rows
+        ]
+        standards = sorted({r[9] for r in rows})
+        return {
+            "control_ref":   control_ref,
+            "standard_id":   standard_id,
+            "standards":     standards,
+            "entry_count":   len(entries),
+            "entries":       [e.model_dump() for e in entries],
+        }
+    finally:
+        pool.putconn(conn)
+
+
+# =============================================================================
 # HITL ROUTER
 # =============================================================================
 

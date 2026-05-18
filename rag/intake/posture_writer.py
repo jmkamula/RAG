@@ -382,14 +382,61 @@ def _write_document_findings(
 # STAGE 4B: aggregate findings → posture_controls (one row per control)
 # =============================================================================
 
+def _log_status_change(
+    cur,
+    *,
+    tenant_id:         str,
+    posture_id:        str,
+    control_ref:       str,
+    standard_id:       str,
+    status_before:     Optional[str],
+    status_after:      str,
+    confidence:        Optional[str],
+    evidence:          Optional[str],
+    source_upload_id:  Optional[str],
+) -> None:
+    """
+    Append one row to posture_status_log (schema_v21).
+
+    Called inside the per-control savepoint, so a logging failure rolls back
+    the parent posture_controls write too — keeps the audit trail and the
+    state in sync. Caller is responsible for short-circuiting when
+    status_before == status_after (we don't log non-transitions).
+    """
+    cur.execute(
+        """
+        INSERT INTO posture_status_log (
+            tenant_id, posture_id, control_ref, standard_id,
+            status_before, status_after,
+            source, source_upload_id,
+            evidence_citation, confidence
+        ) VALUES (
+            %s::uuid, %s::uuid, %s, %s,
+            %s, %s,
+            'document', %s::uuid,
+            %s, %s
+        )
+        """,
+        (
+            tenant_id, posture_id, control_ref, standard_id,
+            status_before, status_after,
+            source_upload_id,
+            (evidence or "")[:500] or None,
+            confidence,
+        ),
+    )
+
+
 def _write_posture_controls(
     groups:    dict[tuple, list[DocumentFinding]],
     tenant_id: str,
     conn,
-) -> tuple[int, int]:
+    upload_id: Optional[str] = None,
+) -> tuple[int, int, int]:
     """
-    Upsert posture_controls from aggregated findings.
-    Returns (posture_updated, posture_created).
+    Upsert posture_controls from aggregated findings. Append a
+    posture_status_log row on every create or status change (schema_v21).
+    Returns (posture_updated, posture_created, posture_skipped).
     """
     updated = 0
     created = 0
@@ -461,6 +508,19 @@ def _write_posture_controls(
                         (finding, gap_desc[:1000], confidence,
                          finding, _PC_STATUS_DRAFT, ex_id),
                     )
+                    if ex_finding != finding:
+                        _log_status_change(
+                            cur,
+                            tenant_id        = tenant_id,
+                            posture_id       = ex_id,
+                            control_ref      = control_ref,
+                            standard_id      = standard_id,
+                            status_before    = ex_finding,
+                            status_after     = finding,
+                            confidence       = confidence,
+                            evidence         = gap_desc,
+                            source_upload_id = upload_id,
+                        )
                     cur.execute(f"RELEASE SAVEPOINT {sp}")
                     updated += 1
                     logger.info(f"  ↻ posture_controls: {control_ref} → {finding} (was {ex_finding})")
@@ -489,6 +549,18 @@ def _write_posture_controls(
                             _PC_STATUS_DRAFT,
                             finding, _RETENTION_CLASS,
                         ),
+                    )
+                    _log_status_change(
+                        cur,
+                        tenant_id        = tenant_id,
+                        posture_id       = posture_id,
+                        control_ref      = control_ref,
+                        standard_id      = standard_id,
+                        status_before    = None,
+                        status_after     = finding,
+                        confidence       = confidence,
+                        evidence         = gap_desc,
+                        source_upload_id = upload_id,
                     )
                     cur.execute(f"RELEASE SAVEPOINT {sp}")
                     created += 1
@@ -629,7 +701,9 @@ def write_findings(
         if f.finding not in ("not_addressed", None):
             groups.setdefault((f.control_ref, f.standard_id), []).append(f)
 
-    posture_updated, posture_created, posture_skipped = _write_posture_controls(groups, tenant_id, conn)
+    posture_updated, posture_created, posture_skipped = _write_posture_controls(
+        groups, tenant_id, conn, upload_id=upload_id,
+    )
 
     summary = {
         "written":           written,
