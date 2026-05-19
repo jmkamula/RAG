@@ -810,6 +810,50 @@ def make_retrieve_node(
             document_topic_ref = doc_topic,
         )
 
+        # ── Acknowledge-gap short-circuit ─────────────────────────────────
+        # Recognises "acknowledge the A.5.1 review record gap because X" and
+        # writes status='acknowledged' on the matching tenant_evidence_gaps
+        # row. Deterministic confirmation answer — no LLM, no resolver.
+        # Per [[human_in_the_loop_positioning]]: acknowledging suppresses the
+        # gap from the headline but does NOT flip the verdict to Comply.
+        try:
+            from rag.posture.acknowledge_chat import (
+                parse_acknowledge_intent,
+                acknowledge_gap,
+                render_acknowledge_answer,
+            )
+            _ack_intent = parse_acknowledge_intent(state["query"])
+            if _ack_intent is not None:
+                import psycopg2
+                _pg_conn = psycopg2.connect(
+                    host     = os.getenv("POSTGRES_HOST", "127.0.0.1"),
+                    dbname   = "arioncomply_compliance",
+                    user     = "arioncomply_app",
+                    password = os.getenv("POSTGRES_PASSWORD"),
+                )
+                try:
+                    _ack_result = acknowledge_gap(
+                        _pg_conn,
+                        tenant_id = str(getattr(tenant, "tenant_id", "") or ""),
+                        intent    = _ack_intent,
+                    )
+                finally:
+                    _pg_conn.close()
+                _ack_answer = render_acknowledge_answer(_ack_result, _ack_intent)
+                return {
+                    **state,
+                    "answer_text":   _ack_answer,
+                    "answer":        _ack_answer,
+                    "cited_refs":    [_ack_intent.control_ref],
+                    "intent_type":   "posture_check",
+                    "question_type": "posture_check",
+                    "confidence":    1.0,
+                    "answer_source": "postgres",
+                }
+        except Exception as _ack_exc:
+            get_logger().warning("acknowledge short-circuit failed: %s", _ack_exc)
+            # Fall through to normal pipeline.
+
         # ── Scope N/A short-circuit ───────────────────────────────────────
         # Physical security (A.7.x) and dev controls (A.8.25-31) are N/A.
         # Don't surface unrelated findings for these scope-excluded queries.

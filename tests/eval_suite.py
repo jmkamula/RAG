@@ -480,6 +480,36 @@ EVAL_CASES = [
     ),
 
     EvalCase(
+        id=34,
+        query=("acknowledge the A.5.1 communication record gap because we "
+               "post the policy on the intranet and email new versions to "
+               "all staff"),
+        tags=["posture", "engine", "acknowledge", "tenant_evidence_gaps"],
+        expected_refs=["A.5.1"],
+        expected_type="posture_check",
+        # Commit 5 (chat surface): the acknowledge short-circuit recognises
+        # the ack-trigger verb + control ref + role + optional rationale, then
+        # writes status='acknowledged' on the matching tenant_evidence_gaps
+        # row. Idempotent: first run produces "Acknowledged: A.5.1
+        # [communication_record]…", subsequent runs produce "already
+        # acknowledged" — both confirm the surface is wired.
+        #
+        # Per [[human_in_the_loop_positioning]]: acknowledging suppresses the
+        # gap from the headline list but the verdict STAYS OFI/NC. The forbid
+        # below catches a regression where ack flips the posture to Comply.
+        must_contain=["acknowledged", "A.5.1"],
+        must_not_contain=[
+            "flipped to Comply", "posture is now Comply",
+            "A.5.1 [Comply]", "A.5.1 is Comply",
+        ],
+        notes=(
+            "Locks in the acknowledge-gap chat surface (commit 5). "
+            "Idempotent assertion via 'acknowledged' substring matches both "
+            "the first-write and the already-acknowledged repeat paths."
+        ),
+    ),
+
+    EvalCase(
         id=32,
         query="what documents do we need for A.5.29?",
         tags=["documents", "rename", "evidence_model", "uncurated"],

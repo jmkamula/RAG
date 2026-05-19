@@ -134,6 +134,10 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
     """
     try:
         from rag.posture.engine_runner import compute_engine_verdicts
+        from rag.posture.gap_writer import (
+            upsert_evidence_gaps,
+            get_acknowledged_leaves,
+        )
 
         neo4j_driver = _build_engine_neo4j_driver()
         if neo4j_driver is None:
@@ -145,6 +149,19 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
                 neo4j_driver.close()
             except Exception:
                 pass
+
+        # Persist gaps before overlaying. Acknowledgements written by the
+        # chat surface live on these rows; we need them in sync with the
+        # engine's current view *before* we read which ones are acknowledged.
+        if verdicts:
+            try:
+                stats = upsert_evidence_gaps(pg_conn, tenant_id, verdicts)
+                logger.info(
+                    "tenant_evidence_gaps: opened=%d updated=%d resolved=%d",
+                    stats.opened, stats.updated, stats.resolved,
+                )
+            except Exception as e:
+                logger.warning("gap upsert skipped: %s", e)
 
         overrides = 0
         for cid, verdict in verdicts.items():
@@ -161,38 +178,74 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
                 # still the authoritative inventory; this would be visible
                 # in a later iteration when we have a richer view.
                 continue
-            row["finding"]            = verdict.posture
-            row["engine_gap_list"]    = list(verdict.gap_list)
-            row["engine_reason"]      = verdict.reason
-            row["engine_overridden"]  = True
+
+            # Suppress acknowledged leaves from the headline. Verdict stays
+            # OFI/NC (HITL: client owns posture; ack ≠ Comply) but the
+            # gap_description and engine_gap_list reflect only unacknowledged
+            # gaps. The full audit trail is queryable via tenant_evidence_gaps
+            # directly. If a control has *all* its failing leaves acknowledged,
+            # we still keep the OFI posture per the model (B in the design call).
+            try:
+                acked = get_acknowledged_leaves(pg_conn, tenant_id, cid)
+            except Exception:
+                acked = {}
+
+            unacked_leaves = [l for l in verdict.leaves if l.leaf_id not in acked]
+            acked_count = len(acked)
+
+            row["finding"]               = verdict.posture
+            row["engine_reason"]         = verdict.reason
+            row["engine_overridden"]     = True
+            row["engine_acked_count"]    = acked_count
+            row["engine_acked_leaves"]   = sorted(acked.keys())
+            row["engine_gap_list"]       = _rebuild_gap_list(unacked_leaves)
+
             # When the engine flips Comply→OFI/NC, the stored gap_description
             # is stale (it's the original evidence summary from the curated
             # upload). Replace it with a short auditor-facing gap line built
-            # from the engine's reason + gap_list so the LLM presents the
-            # actual missing artifacts, not the policy summary.
+            # from the engine's reason + unacked gap roles so the LLM
+            # presents the actual missing artifacts, not the policy summary.
             if verdict.posture in ("OFI", "NC"):
-                # Short auditor-style line. The verbose per-leaf detail lives
-                # in engine_gap_list for callers (e.g. a dedicated A.5.1
-                # explainer) that want to render every item; gap_description
-                # is consumed wherever Layer-1 *and* Layer-2 prose surfaces
-                # this control, so it must stay summary-length.
                 missing_roles = sorted({
-                    l.role for l in verdict.leaves
+                    l.role for l in unacked_leaves
                     if not l.satisfied and l.role
                 })
+                ack_suffix = (
+                    f" ({acked_count} acknowledged)" if acked_count else ""
+                )
                 if missing_roles:
                     row["gap_description"] = (
-                        f"{verdict.reason}; missing artifacts of type: "
+                        f"{verdict.reason}{ack_suffix}; missing artifacts of type: "
                         + ", ".join(missing_roles)
                     )
                 elif verdict.reason:
-                    row["gap_description"] = verdict.reason
+                    row["gap_description"] = verdict.reason + ack_suffix
             overrides += 1
         return overrides
 
     except Exception as e:
         logger.warning("posture engine overlay skipped (%s: %s)", type(e).__name__, e)
         return 0
+
+
+def _rebuild_gap_list(unacked_leaves) -> list:
+    """Per-leaf gap text for callers wanting the full list (e.g. detailed
+    explainer surface). Same format as ControlVerdict.gap_list but filtered
+    to non-acknowledged leaves."""
+    gaps: list[str] = []
+    for v in unacked_leaves:
+        if getattr(v, "counts_as_comply", False):
+            continue
+        role = v.role or v.evidence_type
+        if not v.fresh and v.satisfied:
+            gaps.append(f"[{role}] artifact is stale — consider refreshing")
+            continue
+        if v.items_unrecognised:
+            for item in v.items_unrecognised:
+                gaps.append(f"[{role}] auditors expect: {item} — we couldn't find it")
+        else:
+            gaps.append(f"[{role}] no matching artifact uploaded")
+    return gaps
 
 
 def _build_engine_neo4j_driver():
