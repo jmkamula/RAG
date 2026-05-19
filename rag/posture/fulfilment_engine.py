@@ -53,6 +53,11 @@ class LeafSpec:
     should_items:   list[str]    = field(default_factory=list)
     freshness_days: Optional[int] = None
     title:          str          = ""
+    # control_ref + standard_id let the leaf evaluator do coarse Phase-1
+    # matching against (control_ref, status, evidence_type) findings when
+    # the extractor hasn't tagged findings by checklist_item_id yet.
+    control_ref:    str          = ""
+    standard_id:    str          = ""
 
 
 @dataclass

@@ -42,13 +42,23 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
     Returns dict keyed by node_id (e.g. "ISO27001:2022:A.5.18"):
       {finding, gap_description, action_required, source,
        source_authority, platform_ref, external_ref, confidence,
-       remediation_status, soa_notes}
+       remediation_status, soa_notes, engine_gap_list?, engine_reason?,
+       engine_overridden?}
 
     Only returns rows where finding is not 'Not assessed' —
     unassessed controls have no posture data to provide.
 
     N/A controls ARE included (source='workbook', finding='N/A')
     so the pipeline can correctly exclude them from obligation checks.
+
+    Posture engine overlay (commit 4):
+      After loading posture_controls, the fulfilment engine is consulted
+      for every curated FulfilmentSpec. For *multi-leaf* specs only
+      (composition adds new info), the engine verdict overrides the
+      posture_controls finding and the gap_list is attached to the row.
+      Single-leaf specs are skipped — they don't tell us anything
+      posture_controls doesn't already know. Engine failure is silent
+      fallback to posture_controls per the layered design.
     """
     try:
         with pg_conn.cursor() as cur:
@@ -100,14 +110,107 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
         if nid:
             posture[nid] = rec
 
+    # Fulfilment-engine overlay: override multi-leaf curated verdicts.
+    engine_overrides = _apply_engine_overlay(posture, tenant_id, pg_conn)
+
     logger.info(
         f"load_posture: {len(posture)} controls loaded for {tenant_id} "
         f"({sum(1 for r in posture.values() if r['finding']=='NC')} NC, "
         f"{sum(1 for r in posture.values() if r['finding']=='OFI')} OFI, "
         f"{sum(1 for r in posture.values() if r['finding']=='Comply')} Comply, "
-        f"{sum(1 for r in posture.values() if r['finding']=='N/A')} N/A)"
+        f"{sum(1 for r in posture.values() if r['finding']=='N/A')} N/A; "
+        f"engine_overrides={engine_overrides})"
     )
     return posture
+
+
+def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
+    """Run the fulfilment engine and apply multi-leaf verdicts on top of
+    posture_controls values. Returns the number of overrides applied.
+
+    Silent fallback: any exception (Neo4j unavailable, etc.) returns 0;
+    the posture dict is unchanged. The engine is an overlay, not a hard
+    dependency.
+    """
+    try:
+        from rag.posture.engine_runner import compute_engine_verdicts
+
+        neo4j_driver = _build_engine_neo4j_driver()
+        if neo4j_driver is None:
+            return 0
+        try:
+            verdicts = compute_engine_verdicts(pg_conn, neo4j_driver, tenant_id)
+        finally:
+            try:
+                neo4j_driver.close()
+            except Exception:
+                pass
+
+        overrides = 0
+        for cid, verdict in verdicts.items():
+            # Skip single-leaf specs (no composition value over posture_controls)
+            if len(verdict.leaves) <= 1:
+                continue
+            # Skip non-determinative postures
+            if verdict.posture in ("UNKNOWN", "deferred", "NotApplicable"):
+                continue
+            row = posture.get(cid)
+            if row is None:
+                # Engine has a verdict but tenant has no posture_controls
+                # row for it. Don't manufacture one — posture_controls is
+                # still the authoritative inventory; this would be visible
+                # in a later iteration when we have a richer view.
+                continue
+            row["finding"]            = verdict.posture
+            row["engine_gap_list"]    = list(verdict.gap_list)
+            row["engine_reason"]      = verdict.reason
+            row["engine_overridden"]  = True
+            # When the engine flips Comply→OFI/NC, the stored gap_description
+            # is stale (it's the original evidence summary from the curated
+            # upload). Replace it with a short auditor-facing gap line built
+            # from the engine's reason + gap_list so the LLM presents the
+            # actual missing artifacts, not the policy summary.
+            if verdict.posture in ("OFI", "NC"):
+                # Short auditor-style line. The verbose per-leaf detail lives
+                # in engine_gap_list for callers (e.g. a dedicated A.5.1
+                # explainer) that want to render every item; gap_description
+                # is consumed wherever Layer-1 *and* Layer-2 prose surfaces
+                # this control, so it must stay summary-length.
+                missing_roles = sorted({
+                    l.role for l in verdict.leaves
+                    if not l.satisfied and l.role
+                })
+                if missing_roles:
+                    row["gap_description"] = (
+                        f"{verdict.reason}; missing artifacts of type: "
+                        + ", ".join(missing_roles)
+                    )
+                elif verdict.reason:
+                    row["gap_description"] = verdict.reason
+            overrides += 1
+        return overrides
+
+    except Exception as e:
+        logger.warning("posture engine overlay skipped (%s: %s)", type(e).__name__, e)
+        return 0
+
+
+def _build_engine_neo4j_driver():
+    """Lazy import + build a Neo4j driver from .env, or None if unavailable.
+
+    Module-level import would couple posture_loader to neo4j availability;
+    lazy import keeps the engine an opt-in overlay."""
+    try:
+        from neo4j import GraphDatabase
+        uri  = os.getenv("NEO4J_URI")
+        user = os.getenv("NEO4J_USER")
+        pwd  = os.getenv("NEO4J_PASSWORD")
+        if not (uri and user and pwd):
+            return None
+        return GraphDatabase.driver(uri, auth=(user, pwd))
+    except Exception as e:
+        logger.warning("Neo4j driver for posture engine unavailable: %s", e)
+        return None
 
 
 def load_client_facts(pg_conn, tenant_id: str):

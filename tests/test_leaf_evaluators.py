@@ -203,21 +203,21 @@ def test_no_must_items_is_vacuously_satisfied():
         return False, "vacuously fresh too"
     return True, "no MUST items → satisfied + fresh (defensible Comply)"
 
-def test_wrong_evidence_type_rejected():
-    must_items = [("item:A.5.1:scope", "Scope")]
-    pg_rows = []
+def test_generic_evaluator_works_across_types():
+    # GenericLeafEvaluator handles any evidence_type with the same logic.
+    # Here: drill_record with one MUST item satisfied → satisfied=True.
+    must_items = [("item:A.5.29:drill_scenario", "Scenarios tested")]
+    pg_rows = [("item:A.5.29:drill_scenario", datetime.now(timezone.utc) - timedelta(days=20))]
     ev = _evaluator(must_items, pg_rows)
-    bogus = LeafSpec(
-        leaf_id="req:test:wrong",
+    drill_leaf = LeafSpec(
+        leaf_id="req:test:drill",
         evidence_type="drill_record",
         must_items=["x"],
     )
-    v = ev(bogus, _ec())
-    if v.satisfied:
-        return False, "wrong evidence_type should not be satisfied"
-    if "handles 'policy' only" not in v.reason:
-        return False, f"reason should explain mismatch, got: {v.reason}"
-    return True, "wrong evidence_type → unsatisfied with diagnostic"
+    v = ev(drill_leaf, _ec())
+    if not v.satisfied:
+        return False, f"drill_record should be satisfied when MUST item present, got reason: {v.reason}"
+    return True, "evaluator generic across evidence_types (drill_record path works)"
 
 
 # ── Runner ────────────────────────────────────────────────────────────────────
@@ -230,7 +230,7 @@ TESTS = [
     test_fresh_artifact_passes_check,
     test_no_freshness_constraint_always_fresh,
     test_no_must_items_is_vacuously_satisfied,
-    test_wrong_evidence_type_rejected,
+    test_generic_evaluator_works_across_types,
 ]
 
 

@@ -447,6 +447,39 @@ EVAL_CASES = [
     ),
 
     EvalCase(
+        id=33,
+        query="are we ISO 27001 A.5.1 compliant?",
+        tags=["posture", "engine", "fulfilment_spec", "multi_leaf"],
+        expected_refs=["A.5.1"],
+        expected_type="posture_check",
+        # Pre-commit-4: posture_controls.finding for A.5.1 was 'Comply' because
+        # the tenant uploaded a policy and the extractor only checked policy
+        # presence — auditors, however, expect four artifacts (policy, approval,
+        # communication record, review record). Commit 4 wires the fulfilment
+        # engine into load_posture: A.5.1's 4-leaf FulfilmentSpec evaluates
+        # 1/4 satisfied → OFI, with the missing 3 leaves surfaced in the chat
+        # answer's gap list. This case locks in:
+        #   - engine overrides posture_controls for multi-leaf curated specs
+        #   - chat surface exposes the engine's gap_list (specific missing items)
+        #   - 'Comply' is forbidden for A.5.1 — the headline anti-regression.
+        must_contain=["A.5.1", "OFI"],
+        # Forbid A.5.1-specific Comply tags. The plain word "Comply" can't be
+        # forbidden — it appears in the cross-framework rendering of other
+        # ISO controls that address GDPR Art.32 (e.g. A.5.24 [Comply]).
+        must_not_contain=[
+            "A.5.1 [Comply]",
+            "A.5.1 is Comply",
+            "A.5.1 currently rated as Comply",
+            "A.5.1 currently rated as a Comply",
+        ],
+        notes=(
+            "Headline lock-in for the fulfilment engine. Would have failed "
+            "pre-commit-4 (answered Comply); passes post-commit-4 (OFI with "
+            "review/approval/communication gaps surfaced)."
+        ),
+    ),
+
+    EvalCase(
         id=32,
         query="what documents do we need for A.5.29?",
         tags=["documents", "rename", "evidence_model", "uncurated"],

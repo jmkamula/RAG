@@ -1,4 +1,4 @@
-"""ArionComply — per-evidence-type leaf evaluators.
+"""ArionComply — leaf evaluators.
 
 Each evaluator returns a LeafVerdict for one EvidenceRequirement leaf, given
 a tenant. The evaluator's job is to:
@@ -17,11 +17,13 @@ Per [[rls_tenant_context_for_app_user]]: every Postgres read runs after
 SELECT set_config('app.tenant_id', %s, TRUE) on the same transaction —
 mandatory for arioncomply_app role which has no BYPASSRLS.
 
-This module ships the policy evaluator (commit 3). Per-type evaluators for
-the other 23 evidence_types arrive as needed. The shared shape (the
-LeafEvaluatorFn signature) means the engine doesn't care which evaluator
-runs for which leaf — wiring at commit 4 builds a dispatch table by
-evidence_type.
+GenericLeafEvaluator handles every evidence_type the same way at Phase 1:
+match-by-type + checklist-coverage. Per-type specialisations (e.g.
+register_entry that counts rows within an artifact, attestation_record
+that requires a signatory) are future work — the shared shape stays.
+
+PolicyLeafEvaluator is preserved as a thin alias for backwards-compat with
+the commit-3 tests.
 """
 from __future__ import annotations
 
@@ -32,8 +34,10 @@ from rag.posture.applies_when import EvalContext
 from rag.posture.fulfilment_engine import LeafSpec, LeafVerdict
 
 
-class PolicyLeafEvaluator:
-    """Evaluator for evidence_type='policy' leaves.
+class GenericLeafEvaluator:
+    """Evaluator handling any evidence_type with the same generic shape:
+    Neo4j → MUST item ids, Postgres → present-status findings on those ids
+    for current artifacts of the leaf's type, returns a LeafVerdict.
 
     Bound to a (pg_conn, neo4j_driver, tenant_id) triple at construction;
     call the instance with (leaf, eval_ctx) to get a LeafVerdict.
@@ -45,17 +49,6 @@ class PolicyLeafEvaluator:
         self._tenant_id = tenant_id
 
     def __call__(self, leaf: LeafSpec, ctx: EvalContext) -> LeafVerdict:
-        if leaf.evidence_type != "policy":
-            return LeafVerdict(
-                leaf_id            = leaf.leaf_id,
-                role               = "",
-                evidence_type      = leaf.evidence_type,
-                satisfied          = False,
-                fresh              = False,
-                reason             = f"this evaluator handles 'policy' only; got {leaf.evidence_type!r}",
-                items_unrecognised = list(leaf.must_items),
-            )
-
         # 1. Get MUST checklist item ids (id + text) from Neo4j
         must_items = self._fetch_must_items(leaf.leaf_id)
         if not must_items:
@@ -74,10 +67,12 @@ class PolicyLeafEvaluator:
         must_item_ids   = [it[0] for it in must_items]
         must_item_texts = {it[0]: it[1] for it in must_items}
 
-        # 2. Postgres: which items are 'present' for current policy artifacts?
+        # 2. Postgres: which items are 'present' for current artifacts of this type?
         recognised_ids, latest_uploaded_at = self._fetch_recognised_items(
-            evidence_type   = "policy",
+            evidence_type   = leaf.evidence_type,
             must_item_ids   = must_item_ids,
+            control_ref     = leaf.control_ref,
+            standard_id     = leaf.standard_id,
         )
 
         # 3. Determine satisfied + freshness
@@ -122,8 +117,25 @@ class PolicyLeafEvaluator:
         self,
         evidence_type: str,
         must_item_ids: list[str],
+        control_ref:   str,
+        standard_id:   str,
     ) -> tuple[set[str], datetime | None]:
         """Returns (set of recognised item_ids, latest matching upload datetime).
+
+        Phase 1 (today's data): the extractor doesn't tag findings by
+        checklist_item_id — it writes (control_ref, status) at the control
+        level. We use *coarse matching*: if there's any 'present' finding
+        for this (control_ref, standard_id) backed by an artifact of the
+        leaf's evidence_type, we treat ALL the leaf's MUST items as
+        implicitly recognised. This produces realistic verdicts:
+          - A.5.1 with policy uploaded → policy leaf satisfied;
+                approval/communication/review leaves unsatisfied (no
+                artifacts of those types for A.5.1).
+          - 5.2 with policy uploaded → policy leaf satisfied → Comply.
+
+        Phase 2 (when the extractor populates checklist_item_id on findings):
+        the per-item path below kicks in automatically — if any per-item
+        rows match, they take precedence over the coarse signal.
 
         RLS-scoped via set_config; querying as arioncomply_app means we MUST
         set app.tenant_id, even though we also filter by tenant_id explicitly.
@@ -136,6 +148,8 @@ class PolicyLeafEvaluator:
                 "SELECT set_config('app.tenant_id', %s, TRUE)",
                 (self._tenant_id,),
             )
+
+            # ── Phase 2 path: per-checklist-item findings ────────────────
             cur.execute("""
                 SELECT df.checklist_item_id,
                        cd.uploaded_at
@@ -150,16 +164,42 @@ class PolicyLeafEvaluator:
                   AND df.status           = 'present'
                   AND df.is_active        = TRUE
             """, (self._tenant_id, evidence_type, list(must_item_ids)))
-            rows = cur.fetchall()
+            per_item_rows = cur.fetchall()
 
-        recognised: set[str] = set()
-        latest_uploaded_at: datetime | None = None
-        for item_id, uploaded_at in rows:
-            recognised.add(item_id)
-            if uploaded_at is not None:
-                if latest_uploaded_at is None or uploaded_at > latest_uploaded_at:
-                    latest_uploaded_at = uploaded_at
-        return recognised, latest_uploaded_at
+            if per_item_rows:
+                recognised: set[str] = set()
+                latest: datetime | None = None
+                for item_id, uploaded_at in per_item_rows:
+                    recognised.add(item_id)
+                    if uploaded_at is not None and (latest is None or uploaded_at > latest):
+                        latest = uploaded_at
+                return recognised, latest
+
+            # ── Phase 1 fallback: coarse (control, evidence_type) match ──
+            if not control_ref or not standard_id:
+                # Insufficient identifiers to do coarse match
+                return set(), None
+            cur.execute("""
+                SELECT cd.uploaded_at
+                FROM document_findings df
+                JOIN client_documents cd
+                  ON cd.id = df.document_id
+                WHERE cd.tenant_id     = %s
+                  AND cd.evidence_type = %s
+                  AND cd.is_active     = TRUE
+                  AND cd.is_current    = TRUE
+                  AND df.control_ref   = %s
+                  AND df.standard_id   = %s
+                  AND df.status        = 'present'
+                  AND df.is_active     = TRUE
+                ORDER BY cd.uploaded_at DESC NULLS LAST
+                LIMIT 1
+            """, (self._tenant_id, evidence_type, control_ref, standard_id))
+            row = cur.fetchone()
+            if row is None:
+                return set(), None
+            # Coarse signal: treat all MUST items as implicitly recognised.
+            return set(must_item_ids), row[0]
 
     # ── Freshness check ──────────────────────────────────────────────────────
 
@@ -201,3 +241,7 @@ class PolicyLeafEvaluator:
         if satisfied and not fresh:
             return f"all {total} MUST items recognised but {freshness_reason}"
         return f"{nrec}/{total} MUST items recognised; {freshness_reason}"
+
+
+# Backwards-compat alias for the commit-3 tests
+PolicyLeafEvaluator = GenericLeafEvaluator
