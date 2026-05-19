@@ -405,6 +405,68 @@ EVAL_CASES = [
         must_contain=["A.6.4", "2026-03-15", "2026-05-06", "OFI", "Comply"],
         notes="Stage 3: posture timeline short-circuit (schema_v21).",
     ),
+
+    EvalCase(
+        id=30,
+        query="have we uploaded our business continuity policy?",
+        tags=["documents", "short_circuit", "upload_inventory", "registry_link"],
+        expected_type="document_inventory",
+        # API uploads save the file as {upload_id}.{ext} on disk. Before the
+        # readers.read_document(original_filename=…) plumbing fix, that UUID
+        # name leaked through to Finding.document_name, so posture_writer's
+        # registry matcher (_match_registered_document) missed DOC007 on
+        # every BCP upload and created an orphan client_documents row —
+        # leaving DOC007 stuck at document_status='registered'. The bot then
+        # told users their BCP "has not yet been uploaded" even though the
+        # findings had landed. This case locks in the linkage: uploading
+        # "Business Continuity Policy.docx" must surface DOC007 as uploaded.
+        must_contain=["Business Continuity Policy", "uploaded"],
+        must_not_contain=["not yet been uploaded", "not uploaded"],
+        notes="BCP registry linkage: original_filename must reach the matcher.",
+    ),
+
+    EvalCase(
+        id=31,
+        query="what must our ISMS scope statement contain?",
+        tags=["documents", "rename", "evidence_model", "document_content"],
+        expected_refs=["4.3"],
+        expected_type="document_content",
+        # Commit 1 of the evidence-model rename. The chat path now traverses
+        #   RequirementNode -[:SATISFIED_BY]-> FulfilmentSpec
+        #                     -[:REQUIRES_EVIDENCE]-> EvidenceRequirement
+        # instead of the old direct (n)-[:REQUIRES_DOCUMENT]->(:DocumentRequirement)
+        # edge. The 4.3 ISMS Scope Statement is one of the 18 hand-curated
+        # leaves; a regression on the FulfilmentSpec hop would drop its
+        # checklist entirely (no must-items returned).
+        must_contain=["Boundaries", "ISMS", "must"],
+        must_not_contain=["FulfilmentSpec", "REQUIRES_EVIDENCE", "EvidenceRequirement"],
+        notes=(
+            "Locks in REQUIRES_DOCUMENT->REQUIRES_EVIDENCE rename and the "
+            "FulfilmentSpec traversal hop in graph_expander."
+        ),
+    ),
+
+    EvalCase(
+        id=32,
+        query="what documents do we need for A.5.29?",
+        tags=["documents", "rename", "evidence_model", "uncurated"],
+        expected_refs=["A.5.29"],
+        # After commit 1, A.5.29 has a FulfilmentSpec with
+        # curation_status='uncurated' and zero REQUIRES_EVIDENCE edges (no
+        # hand-curated leaves). The chat path must return a graceful answer
+        # that mentions A.5.29 and does NOT (a) hallucinate a checklist of
+        # made-up requirements, or (b) leak internal model names. Forbidden
+        # phrases catch the two regression modes.
+        must_contain=["A.5.29"],
+        must_not_contain=[
+            "FulfilmentSpec", "REQUIRES_EVIDENCE", "EvidenceRequirement",
+            "curation_status", "uncurated",
+        ],
+        notes=(
+            "Locks in graceful empty-curation handling for the 408 controls "
+            "with curation_status='uncurated' post-migration."
+        ),
+    ),
 ]
 
 

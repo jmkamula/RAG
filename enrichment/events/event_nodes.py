@@ -34,8 +34,8 @@ class Event:
     legal_deadline:      str | None   # headline deadline if any
     severity_default:    str          # "critical" | "high" | "medium" | "low"
     triggers:            list[EventTrigger] = field(default_factory=list)
-    requires_documents:  list[str]    = field(default_factory=list)
-    # DocumentRequirement ids e.g. "req:Art.33:breach_notification"
+    requires_evidence:  list[str]    = field(default_factory=list)
+    # EvidenceRequirement ids e.g. "req:Art.33:breach_notification"
 
 
 # ── Incident events ───────────────────────────────────────────────────────────
@@ -57,7 +57,7 @@ EVENT_PERSONAL_DATA_BREACH = Event(
         EventTrigger("ISO27001:2022:A.5.27",  None,      "Conduct post-incident lessons learned"),
         EventTrigger("ISO27001:2022:6.1.2",   None,      "Update risk assessment"),
     ],
-    requires_documents = ["req:Art.33:breach_notification"],
+    requires_evidence = ["req:Art.33:breach_notification"],
 )
 
 EVENT_INFOSEC_INCIDENT = Event(
@@ -77,7 +77,7 @@ EVENT_INFOSEC_INCIDENT = Event(
         EventTrigger("ISO27001:2022:A.5.27",  None,  "Conduct post-incident lessons learned"),
         EventTrigger("ISO27001:2022:6.1.2",   None,  "Update risk assessment"),
     ],
-    requires_documents = [],
+    requires_evidence = [],
 )
 
 EVENT_SUPERVISORY_INQUIRY = Event(
@@ -96,7 +96,7 @@ EVENT_SUPERVISORY_INQUIRY = Event(
         EventTrigger("ISO27001:2022:9.2",     None,  "Internal audit evidence required"),
         EventTrigger("ISO27001:2022:6.1.2",   None,  "Risk assessment evidence required"),
     ],
-    requires_documents = [],
+    requires_evidence = [],
 )
 
 EVENT_AUDIT_NONCONFORMITY = Event(
@@ -113,7 +113,7 @@ EVENT_AUDIT_NONCONFORMITY = Event(
         EventTrigger("ISO27001:2022:10.1",  None,  "Continual improvement process"),
         EventTrigger("ISO27001:2022:9.2",   None,  "Follow-up audit may be required"),
     ],
-    requires_documents = [],
+    requires_evidence = [],
 )
 
 EVENT_CERTIFICATION_AUDIT = Event(
@@ -132,7 +132,7 @@ EVENT_CERTIFICATION_AUDIT = Event(
         EventTrigger("ISO27001:2022:6.1.3", None,  "Risk treatment plan must be current"),
         EventTrigger("ISO27001:2022:5.2",   None,  "IS Policy must be current and approved"),
     ],
-    requires_documents = [],
+    requires_evidence = [],
 )
 
 # ── Request events ────────────────────────────────────────────────────────────
@@ -150,7 +150,7 @@ EVENT_DSAR = Event(
         EventTrigger("GDPR:2016/679:Art.15",  "1 month",  "Provide copy of personal data"),
         EventTrigger("GDPR:2016/679:Art.12",  "1 month",  "Respond transparently within deadline"),
     ],
-    requires_documents = ["req:Art.15:dsar_response"],
+    requires_evidence = ["req:Art.15:dsar_response"],
 )
 
 EVENT_ERASURE_REQUEST = Event(
@@ -167,7 +167,7 @@ EVENT_ERASURE_REQUEST = Event(
         EventTrigger("GDPR:2016/679:Art.12",  "1 month",  "Respond transparently within deadline"),
         EventTrigger("GDPR:2016/679:Art.19",  None,       "Notify processors of erasure obligation"),
     ],
-    requires_documents = [],
+    requires_evidence = [],
 )
 
 EVENT_RESTRICTION_REQUEST = Event(
@@ -183,7 +183,7 @@ EVENT_RESTRICTION_REQUEST = Event(
         EventTrigger("GDPR:2016/679:Art.18",  "1 month",  "Restrict processing"),
         EventTrigger("GDPR:2016/679:Art.12",  "1 month",  "Respond transparently"),
     ],
-    requires_documents = [],
+    requires_evidence = [],
 )
 
 # ── Change events ─────────────────────────────────────────────────────────────
@@ -204,7 +204,7 @@ EVENT_NEW_PROCESSING = Event(
         EventTrigger("GDPR:2016/679:Art.6",   "before",        "Confirm lawful basis"),
         EventTrigger("ISO27001:2022:6.1.2",   "before",        "Risk assessment update"),
     ],
-    requires_documents = [],
+    requires_evidence = [],
 )
 
 EVENT_NEW_PROCESSOR = Event(
@@ -223,7 +223,7 @@ EVENT_NEW_PROCESSOR = Event(
         EventTrigger("ISO27001:2022:A.5.20",   "before",  "Security requirements in agreement"),
         EventTrigger("ISO27001:2022:A.5.21",   None,      "ICT supply chain security"),
     ],
-    requires_documents = ["req:Art.28:data_processing_agreement"],
+    requires_evidence = ["req:Art.28:data_processing_agreement"],
 )
 
 EVENT_SYSTEM_CHANGE = Event(
@@ -242,7 +242,7 @@ EVENT_SYSTEM_CHANGE = Event(
         EventTrigger("ISO27001:2022:A.8.25",  None,      "Secure development lifecycle"),
         EventTrigger("GDPR:2016/679:Art.30",  None,      "Update records of processing"),
     ],
-    requires_documents = [],
+    requires_evidence = [],
 )
 
 # ── Complete registry ──────────────────────────────────────────────────────────
@@ -348,7 +348,7 @@ if __name__ == "__main__":
     print(f"\nEvent registry:")
     for e in ALL_EVENTS:
         deadline = f"  [{e.legal_deadline}]" if e.legal_deadline else ""
-        docs = f"  → {len(e.requires_documents)} doc(s)" if e.requires_documents else ""
+        docs = f"  → {len(e.requires_evidence)} doc(s)" if e.requires_evidence else ""
         print(f"  {e.event_type:40s} {e.severity_default:8s}{deadline}{docs}")
 
     print(f"\nPhrase detection test:")

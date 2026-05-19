@@ -157,8 +157,8 @@ class DocumentContext:
     """
     control_ref:    str
     node_id:        str
-    document_title: str
-    document_type:  str
+    title: str
+    evidence_type:  str
     trigger_type:   str         # "universal" | "profile_fact" | "operational"
     description:    str
     must_contain:   list[ChecklistItemResult]
@@ -203,7 +203,7 @@ class IncidentObligationContext:
     deadline_at:    str | None
     urgency:        str           # "overdue"|"critical"|"urgent"|"soon"|"on_track"|"no_deadline"
     triggered_node_ids: list[str]
-    required_documents: list[str]   # DocumentRequirement ids
+    required_evidence: list[str]   # EvidenceRequirement ids
 
 
 def _derive_incident_display_label(classifications: list[dict]) -> str:
@@ -704,7 +704,7 @@ class GraphExpander:
         standards: list[str],
     ) -> dict[str, "DocumentContext"]:
         """
-        Fetch DocumentRequirement + ChecklistItems for a set of control node_ids.
+        Fetch EvidenceRequirement + ChecklistItems for a set of control node_ids.
         Returns: {node_id: DocumentContext} with status=None on all items.
         Status enrichment (present/missing) is done by the resolver using
         posture_controls data — not here.  Neo4j stays generic.
@@ -718,14 +718,15 @@ class GraphExpander:
                 result = s.run("""
                     UNWIND $node_ids AS nid
                     MATCH (n:RequirementNode {id: nid})
-                          -[:REQUIRES_DOCUMENT]->(req:DocumentRequirement)
+                          -[:SATISFIED_BY]->(:FulfilmentSpec)
+                          -[:REQUIRES_EVIDENCE]->(req:EvidenceRequirement)
                           -[rel:MUST_CONTAIN|SHOULD_CONTAIN]->(item:ChecklistItem)
                     RETURN
                         n.id                AS node_id,
                         n.ref               AS control_ref,
                         req.id              AS req_id,
-                        req.document_title  AS document_title,
-                        req.document_type   AS document_type,
+                        req.title           AS title,
+                        req.evidence_type   AS evidence_type,
                         req.trigger_type    AS trigger_type,
                         req.description     AS description,
                         item.id             AS item_id,
@@ -744,8 +745,8 @@ class GraphExpander:
                         contexts[nid] = DocumentContext(
                             control_ref    = row["control_ref"],
                             node_id        = nid,
-                            document_title = row["document_title"],
-                            document_type  = row["document_type"],
+                            title = row["title"],
+                            evidence_type  = row["evidence_type"],
                             trigger_type   = row["trigger_type"],
                             description    = row["description"],
                             must_contain   = [],
@@ -803,12 +804,13 @@ class GraphExpander:
                         MATCH (n:RequirementNode)
                         WHERE n.ref = $topic_ref
                           AND n.standard_id IN $standards
-                        MATCH (n)-[:REQUIRES_DOCUMENT]->(req:DocumentRequirement)
+                        MATCH (n)-[:SATISFIED_BY]->(:FulfilmentSpec)
+                              -[:REQUIRES_EVIDENCE]->(req:EvidenceRequirement)
                               -[rel:MUST_CONTAIN|SHOULD_CONTAIN]->(item:ChecklistItem)
                         RETURN
                             n.id AS node_id, n.ref AS control_ref,
-                            req.id AS req_id, req.document_title AS document_title,
-                            req.document_type AS document_type,
+                            req.id AS req_id, req.title AS title,
+                            req.evidence_type AS evidence_type,
                             req.trigger_type AS trigger_type,
                             req.description AS description,
                             item.id AS item_id, item.text AS item_text,
@@ -821,12 +823,13 @@ class GraphExpander:
                     result = s.run("""
                         MATCH (n:RequirementNode)
                         WHERE n.standard_id IN $standards
-                        MATCH (n)-[:REQUIRES_DOCUMENT]->(req:DocumentRequirement)
+                        MATCH (n)-[:SATISFIED_BY]->(:FulfilmentSpec)
+                              -[:REQUIRES_EVIDENCE]->(req:EvidenceRequirement)
                               -[rel:MUST_CONTAIN|SHOULD_CONTAIN]->(item:ChecklistItem)
                         RETURN
                             n.id AS node_id, n.ref AS control_ref,
-                            req.id AS req_id, req.document_title AS document_title,
-                            req.document_type AS document_type,
+                            req.id AS req_id, req.title AS title,
+                            req.evidence_type AS evidence_type,
                             req.trigger_type AS trigger_type,
                             req.description AS description,
                             item.id AS item_id, item.text AS item_text,
@@ -843,8 +846,8 @@ class GraphExpander:
                         contexts[nid] = DocumentContext(
                             control_ref    = row["control_ref"],
                             node_id        = nid,
-                            document_title = row["document_title"],
-                            document_type  = row["document_type"],
+                            title = row["title"],
+                            evidence_type  = row["evidence_type"],
                             trigger_type   = row["trigger_type"],
                             description    = row["description"],
                             must_contain   = [],
@@ -910,12 +913,13 @@ class GraphExpander:
                     MATCH (n:RequirementNode)
                     WHERE n.ref = $ref
                     AND ($standard_id = '' OR n.standard_id = $standard_id)
-                    MATCH (n)-[:REQUIRES_DOCUMENT]->(req:DocumentRequirement)
+                    MATCH (n)-[:SATISFIED_BY]->(:FulfilmentSpec)
+                          -[:REQUIRES_EVIDENCE]->(req:EvidenceRequirement)
                           -[rel:MUST_CONTAIN|SHOULD_CONTAIN]->(item:ChecklistItem)
                     RETURN
                         n.id AS node_id, n.ref AS control_ref,
-                        req.document_title AS document_title,
-                        req.document_type AS document_type,
+                        req.title AS title,
+                        req.evidence_type AS evidence_type,
                         req.trigger_type AS trigger_type,
                         req.description AS description,
                         item.id AS item_id, item.text AS item_text,
@@ -932,8 +936,8 @@ class GraphExpander:
                         ctx = DocumentContext(
                             control_ref   = row["control_ref"],
                             node_id       = row["node_id"],
-                            document_title= row["document_title"],
-                            document_type = row["document_type"],
+                            title= row["title"],
+                            evidence_type = row["evidence_type"],
                             trigger_type  = row["trigger_type"],
                             description   = row["description"],
                             must_contain  = [],
@@ -980,7 +984,7 @@ class GraphExpander:
 
         Reads from Postgres (incidents, incident_classifications,
         incident_obligations) and enriches with Neo4j for
-        REQUIRES_DOCUMENT IDs. Per the locked architecture, incidents are
+        REQUIRES_EVIDENCE IDs. Per the locked architecture, incidents are
         instances in Postgres and Events/RequirementNodes are definitions
         in Neo4j — :Incident nodes are never projected to Neo4j.
 
@@ -1053,7 +1057,7 @@ class GraphExpander:
                                        if not met and d is not None]
                     effective_deadline = min(unmet_deadlines, default=inc_deadline_at)
 
-                    required_documents = self._fetch_required_documents_for(classifications)
+                    required_evidence = self._fetch_required_evidence_for(classifications)
 
                     contexts.append(IncidentObligationContext(
                         incident_id        = str(inc_id),
@@ -1064,7 +1068,7 @@ class GraphExpander:
                                               if effective_deadline else None,
                         urgency            = _compute_urgency(effective_deadline),
                         triggered_node_ids = [r[0] for r in obligations],
-                        required_documents = required_documents,
+                        required_evidence = required_evidence,
                     ))
 
             # Commit the read-only transaction so the set_config is cleared
@@ -1118,11 +1122,11 @@ class GraphExpander:
             except Exception:
                 pass
 
-    def _fetch_required_documents_for(
+    def _fetch_required_evidence_for(
         self,
         classifications: list[dict],
     ) -> list[str]:
-        """DocumentRequirement ids triggered by Events bound to these
+        """EvidenceRequirement ids triggered by Events bound to these
         classifications. Returns [] if Neo4j offline or no classifications."""
         if not classifications or not self._is_online():
             return []
@@ -1140,7 +1144,7 @@ class GraphExpander:
                             dimension:   t[1],
                             value:       t[2]
                           })-[:MANIFESTS_AS]->(e:Event)
-                          -[:REQUIRES_DOCUMENT]->(rd:DocumentRequirement)
+                          -[:REQUIRES_EVIDENCE]->(rd:EvidenceRequirement)
                     RETURN DISTINCT rd.id AS doc_id
                 """, triples=triples)
                 return [r['doc_id'] for r in result if r['doc_id']]

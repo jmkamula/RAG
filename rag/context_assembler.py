@@ -337,8 +337,8 @@ class ContextAssembler:
             if node_id not in primary_ids:
                 continue
 
-            lines.append(f"\n── {ctx.control_ref}: {ctx.document_title}")
-            lines.append(f"   Type: {ctx.document_type}  |  Trigger: {ctx.trigger_type}")
+            lines.append(f"\n── {ctx.control_ref}: {ctx.title}")
+            lines.append(f"   Type: {ctx.evidence_type}  |  Trigger: {ctx.trigger_type}")
 
             if ctx.has_document_uploaded:
                 # Show evaluation results

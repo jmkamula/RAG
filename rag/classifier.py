@@ -115,7 +115,7 @@ class QueryDimensions:
                          always True for compliance queries
     needs_posture:       fetch tenant posture findings for context
                          True when query references OUR status
-    needs_documentation: fetch DocumentRequirement + ChecklistItems
+    needs_documentation: fetch EvidenceRequirement + ChecklistItems
                          True when query references documents/evidence
 
     Examples:

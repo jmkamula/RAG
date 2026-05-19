@@ -35,8 +35,8 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                 for t in event.triggers:
                     print(f"    → {t.control_id}" +
                           (f" [{t.deadline}]" if t.deadline else ""))
-                if event.requires_documents:
-                    print(f"  documents: {event.requires_documents}")
+                if event.requires_evidence:
+                    print(f"  documents: {event.requires_evidence}")
                 continue
 
             # ── MERGE Event node ──────────────────────────────────────────
@@ -87,10 +87,10 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                 ).consume()
                 total_triggers += 1
 
-            # ── MERGE REQUIRES_DOCUMENT relationships ─────────────────────
-            for doc_req_id in event.requires_documents:
+            # ── MERGE REQUIRES_EVIDENCE relationships ─────────────────────
+            for doc_req_id in event.requires_evidence:
                 exists = s.run(
-                    "MATCH (r:DocumentRequirement {id: $id}) RETURN r.id",
+                    "MATCH (r:EvidenceRequirement {id: $id}) RETURN r.id",
                     id=doc_req_id
                 ).single()
 
@@ -100,8 +100,8 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
 
                 s.run("""
                     MATCH (e:Event {id: $event_id})
-                    MATCH (r:DocumentRequirement {id: $doc_req_id})
-                    MERGE (e)-[:REQUIRES_DOCUMENT]->(r)
+                    MATCH (r:EvidenceRequirement {id: $doc_req_id})
+                    MERGE (e)-[:REQUIRES_EVIDENCE]->(r)
                 """,
                     event_id   = event.id,
                     doc_req_id = doc_req_id,
@@ -110,7 +110,7 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
 
             print(f"  ✓ {event.event_type:40s} "
                   f"{len(event.triggers)} triggers  "
-                  f"{len(event.requires_documents)} docs")
+                  f"{len(event.requires_evidence)} docs")
 
     driver.close()
 
@@ -120,7 +120,7 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
     else:
         print(f"✓ Event nodes:              {total_events}")
         print(f"✓ TRIGGERS_OBLIGATION rels: {total_triggers}")
-        print(f"✓ REQUIRES_DOCUMENT rels:   {total_doc_rels}")
+        print(f"✓ REQUIRES_EVIDENCE rels:   {total_doc_rels}")
 
     if missing:
         print(f"\n⚠ {len(missing)} nodes not found:")
@@ -136,14 +136,14 @@ def verify(uri: str, user: str, password: str) -> None:
         stats = s.run("""
             MATCH (e:Event) WITH count(e) AS events
             MATCH ()-[t:TRIGGERS_OBLIGATION]->() WITH events, count(t) AS trigs
-            MATCH (e2:Event)-[:REQUIRES_DOCUMENT]->() WITH events, trigs, count(e2) AS doc_rels
+            MATCH (e2:Event)-[:REQUIRES_EVIDENCE]->() WITH events, trigs, count(e2) AS doc_rels
             RETURN events, trigs, doc_rels
         """).single()
 
         print(f"\nNeo4j verification:")
         print(f"  Event nodes:              {stats['events']}")
         print(f"  TRIGGERS_OBLIGATION rels: {stats['trigs']}")
-        print(f"  Event REQUIRES_DOCUMENT:  {stats['doc_rels']}")
+        print(f"  Event REQUIRES_EVIDENCE:  {stats['doc_rels']}")
 
         by_cat = s.run("""
             MATCH (e:Event)

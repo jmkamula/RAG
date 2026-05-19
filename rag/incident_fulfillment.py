@@ -2,24 +2,27 @@
 ArionComply — Incident Obligation Fulfillment Checker
 
 Flips `incident_obligations.is_met` to TRUE when a document linked to the
-incident satisfies the obligation's :DocumentRequirement.
+incident satisfies the obligation's :EvidenceRequirement.
 
 Architecture:
-  Per-obligation, look up Neo4j :DocumentRequirement(s) for the obligation's
-  (standard_id, control_ref) pair. The DocumentRequirement carries a
-  `document_type` (e.g. 'breach_notification', 'risk_assessment'). Then check
+  Per-obligation, look up Neo4j :EvidenceRequirement(s) for the obligation's
+  (standard_id, control_ref) pair. The EvidenceRequirement carries an
+  `evidence_type` (e.g. 'breach_notification', 'risk_assessment'). Then check
   Postgres incident_documents → client_documents: is there a linked document
   with matching client_documents.document_type? If yes → mark obligation met.
+  (Note the cross-vocab join: Neo4j evidence_type values match Postgres
+  client_documents.document_type values — same vocabulary, different column
+  names until commit 3 also renames the Postgres column.)
 
 Behavioural rules:
   - Additive only: never flip met=TRUE back to FALSE. Matches
     [[incident-obligations-model]]: obligations are an audit-defensible record.
-  - Skip obligations with no :DocumentRequirement in Neo4j — these stay
+  - Skip obligations with no :EvidenceRequirement in Neo4j — these stay
     manual-only; a curator confirms them via separate workflow (e.g.,
-    A.5.26 'Invoke incident response procedure' has no doc-type to match).
+    A.5.26 'Invoke incident response procedure' has no evidence-type to match).
   - Idempotent: re-running is a no-op if state is already consistent.
   - Cross-vocabulary match: obligation.control_ref is the full ref like
-    'ISO27001:2022:6.1.2' or 'GDPR:2016/679:Art.33'; the DocumentRequirement
+    'ISO27001:2022:6.1.2' or 'GDPR:2016/679:Art.33'; the EvidenceRequirement
     holds the suffix ('6.1.2', 'Art.33') and standard separately. We split
     on the last ':' to bridge.
 
@@ -54,7 +57,7 @@ class FulfillmentResult:
     obligations_checked:  int  = 0
     obligations_newly_met: int = 0
     obligations_already_met: int = 0
-    obligations_no_doc_req: int = 0   # no :DocumentRequirement in Neo4j — manual only
+    obligations_no_doc_req: int = 0   # no :EvidenceRequirement in Neo4j — manual only
     obligations_pending:  int  = 0    # has doc-req, but no matching document linked
     errors:               list[str] = field(default_factory=list)
 
@@ -216,7 +219,7 @@ class IncidentFulfillmentChecker:
         standard_id: str,        # e.g., "ISO27001:2022"
     ) -> list[str]:
         """
-        :DocumentRequirement.standard_id holds the full standard
+        :EvidenceRequirement.standard_id holds the full standard
         (e.g. 'ISO27001:2022'), and .control_ref holds only the suffix
         (e.g. '6.1.2', 'Art.33'). Split the obligation's full ref to bridge.
         """
@@ -232,12 +235,12 @@ class IncidentFulfillmentChecker:
 
         with self._neo4j.session() as s:
             r = s.run("""
-                MATCH (rd:DocumentRequirement {
+                MATCH (rd:EvidenceRequirement {
                         standard_id: $std,
                         control_ref: $suffix
                       })
-                WHERE rd.document_type IS NOT NULL
-                RETURN DISTINCT rd.document_type AS dt
+                WHERE rd.evidence_type IS NOT NULL
+                RETURN DISTINCT rd.evidence_type AS dt
             """, std=standard_id, suffix=ctl_suffix)
             return [row['dt'] for row in r if row['dt']]
 

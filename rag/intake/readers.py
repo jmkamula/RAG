@@ -35,16 +35,24 @@ CHARS_PER_TOKEN = 4
 # =============================================================================
 
 def read_document(
-    file_path: str,
-    upload_id: Optional[str] = None,
+    file_path:         str,
+    upload_id:         Optional[str] = None,
+    original_filename: Optional[str] = None,
 ) -> ParsedDocument:
     """
     Read a document and return a ParsedDocument with raw sections.
     Dispatches to the appropriate reader based on file extension.
+
+    original_filename: user-facing name (e.g. "Business Continuity Policy.docx").
+    Stored on ParsedDocument.original_name and propagated to every Finding's
+    document_name, which is what posture_writer uses to match the upload back
+    to its pre-registered client_documents row (DOC-prefix / title fuzzy).
+    Without this, API uploads (saved as {upload_id}.{ext}) can never link to
+    the registry and findings land on a fresh orphan row.
     """
     path      = Path(file_path)
     ext       = path.suffix.lower().lstrip(".")
-    file_name = path.name
+    file_name = original_filename or path.name
 
     readers = {
         "pdf":  _read_pdf,

@@ -1,15 +1,15 @@
 """
-ArionComply — Document Requirements
+ArionComply — Evidence Requirements
 
-Defines what documents are required per control and what each must contain.
-Three trigger types:
+Defines what evidence is required per control and what each artifact must
+contain. Three trigger types:
   universal     → required for every client in scope
   profile_fact  → required when a client fact is true
   operational   → required when an event occurs
 
-Each DocumentRequirement links to:
-  - One RequirementNode (the control it satisfies)
-  - Multiple ChecklistItems (what the document must contain)
+Each EvidenceRequirement links upward to a FulfilmentSpec (created by the
+loader, one spec per RequirementNode) and downward to ChecklistItems via
+MUST_CONTAIN / SHOULD_CONTAIN.
 
 This is standards knowledge — shared across all tenants, version-controlled.
 """
@@ -27,31 +27,31 @@ class ChecklistItem:
 
 
 @dataclass
-class DocumentRequirement:
-    id:               str          # "req:{control_ref}:{doc_type_slug}"
+class EvidenceRequirement:
+    id:               str          # "req:{control_ref}:{evidence_type_slug}"
     control_ref:      str          # "A.8.24"
     standard_id:      str          # "ISO27001:2022"
-    document_type:    str          # "policy" | "procedure" | "dpa" | "programme" etc.
-    document_title:   str          # human-readable e.g. "Use of Cryptography Policy"
+    evidence_type:    str          # "policy" | "procedure" | "dpa" | "audit_programme" etc.
+    title:            str          # human-readable e.g. "Use of Cryptography Policy"
     trigger_type:     str          # "universal" | "profile_fact" | "operational"
                                    # profile_fact: required when ClientFact is True
                                    # the specific fact is encoded in ClientFacts/ObligationRule
                                    # not stored here — derived from obligation chain
     trigger_event:    str | None   # event name when trigger_type == "operational"
                                    # e.g. "personal_data_breach", "data_subject_access_request"
-    description:      str          # why this document is required
+    description:      str          # why this evidence is required
     must_contain:     list[ChecklistItem] = field(default_factory=list)
     should_contain:   list[ChecklistItem] = field(default_factory=list)
 
 
 # ── Universal documents — ISO 27001 ───────────────────────────────────────────
 
-REQ_ISMS_SCOPE = DocumentRequirement(
+REQ_ISMS_SCOPE = EvidenceRequirement(
     id            = "req:4.3:isms_scope",
     control_ref   = "4.3",
     standard_id   = "ISO27001:2022",
-    document_type = "scope_statement",
-    document_title= "ISMS Scope Statement",
+    evidence_type = "scope_statement",
+    title= "ISMS Scope Statement",
     trigger_type  = "universal",
     trigger_event = None,
     description   = "Every ISO 27001 organisation must define and document the scope of its ISMS",
@@ -68,12 +68,12 @@ REQ_ISMS_SCOPE = DocumentRequirement(
     ],
 )
 
-REQ_ISMS_POLICY = DocumentRequirement(
+REQ_ISMS_POLICY = EvidenceRequirement(
     id            = "req:5.2:information_security_policy",
     control_ref   = "5.2",
     standard_id   = "ISO27001:2022",
-    document_type = "policy",
-    document_title= "Information Security Policy",
+    evidence_type = "policy",
+    title= "Information Security Policy",
     trigger_type  = "universal",
     trigger_event = None,
     description   = "Top management must establish an information security policy appropriate to the organisation",
@@ -91,12 +91,12 @@ REQ_ISMS_POLICY = DocumentRequirement(
     ],
 )
 
-REQ_RISK_ASSESSMENT = DocumentRequirement(
+REQ_RISK_ASSESSMENT = EvidenceRequirement(
     id            = "req:6.1.2:risk_assessment",
     control_ref   = "6.1.2",
     standard_id   = "ISO27001:2022",
-    document_type = "risk_assessment",
-    document_title= "Information Security Risk Assessment",
+    evidence_type = "risk_assessment",
+    title= "Information Security Risk Assessment",
     trigger_type  = "universal",
     trigger_event = None,
     description   = "Organisation must define and apply a risk assessment process",
@@ -116,12 +116,12 @@ REQ_RISK_ASSESSMENT = DocumentRequirement(
     ],
 )
 
-REQ_RISK_TREATMENT = DocumentRequirement(
+REQ_RISK_TREATMENT = EvidenceRequirement(
     id            = "req:6.1.3:risk_treatment_plan",
     control_ref   = "6.1.3",
     standard_id   = "ISO27001:2022",
-    document_type = "risk_treatment_plan",
-    document_title= "Risk Treatment Plan",
+    evidence_type = "risk_treatment_plan",
+    title= "Risk Treatment Plan",
     trigger_type  = "universal",
     trigger_event = None,
     description   = "Organisation must select and implement risk treatment options",
@@ -137,12 +137,12 @@ REQ_RISK_TREATMENT = DocumentRequirement(
     ],
 )
 
-REQ_INTERNAL_AUDIT = DocumentRequirement(
+REQ_INTERNAL_AUDIT = EvidenceRequirement(
     id            = "req:9.2:internal_audit_programme",
     control_ref   = "9.2",
     standard_id   = "ISO27001:2022",
-    document_type = "audit_programme",
-    document_title= "Internal Audit Programme",
+    evidence_type = "audit_programme",
+    title= "Internal Audit Programme",
     trigger_type  = "universal",
     trigger_event = None,
     description   = "Organisation must conduct internal audits at planned intervals",
@@ -160,12 +160,12 @@ REQ_INTERNAL_AUDIT = DocumentRequirement(
     ],
 )
 
-REQ_MANAGEMENT_REVIEW = DocumentRequirement(
+REQ_MANAGEMENT_REVIEW = EvidenceRequirement(
     id            = "req:9.3:management_review",
     control_ref   = "9.3",
     standard_id   = "ISO27001:2022",
-    document_type = "management_review_minutes",
-    document_title= "Management Review Minutes",
+    evidence_type = "management_review_minutes",
+    title= "Management Review Minutes",
     trigger_type  = "universal",
     trigger_event = None,
     description   = "Top management must review the ISMS at planned intervals",
@@ -186,12 +186,12 @@ REQ_MANAGEMENT_REVIEW = DocumentRequirement(
 
 # ── Universal — GDPR ──────────────────────────────────────────────────────────
 
-REQ_PRIVACY_NOTICE_DIRECT = DocumentRequirement(
+REQ_PRIVACY_NOTICE_DIRECT = EvidenceRequirement(
     id            = "req:Art.13:privacy_notice",
     control_ref   = "Art.13",
     standard_id   = "GDPR:2016/679",
-    document_type = "privacy_notice",
-    document_title= "Privacy Notice (Data Collected Directly)",
+    evidence_type = "privacy_notice",
+    title= "Privacy Notice (Data Collected Directly)",
     trigger_type  = "universal",
     trigger_event = None,
     description   = "Controllers must provide privacy notice when collecting personal data directly",
@@ -213,12 +213,12 @@ REQ_PRIVACY_NOTICE_DIRECT = DocumentRequirement(
     ],
 )
 
-REQ_RECORDS_PROCESSING = DocumentRequirement(
+REQ_RECORDS_PROCESSING = EvidenceRequirement(
     id            = "req:Art.30:records_of_processing",
     control_ref   = "Art.30",
     standard_id   = "GDPR:2016/679",
-    document_type = "records_of_processing",
-    document_title= "Records of Processing Activities (RoPA)",
+    evidence_type = "records_of_processing",
+    title= "Records of Processing Activities (RoPA)",
     trigger_type  = "universal",
     trigger_event = None,
     description   = "Controllers must maintain records of all processing activities under Art.30",
@@ -240,12 +240,12 @@ REQ_RECORDS_PROCESSING = DocumentRequirement(
 
 # ── Profile-fact — cloud/processors ───────────────────────────────────────────
 
-REQ_DPA = DocumentRequirement(
+REQ_DPA = EvidenceRequirement(
     id            = "req:Art.28:data_processing_agreement",
     control_ref   = "Art.28",
     standard_id   = "GDPR:2016/679",
-    document_type = "data_processing_agreement",
-    document_title= "Data Processing Agreement (DPA)",
+    evidence_type = "data_processing_agreement",
+    title= "Data Processing Agreement (DPA)",
     trigger_type  = "profile_fact",
     trigger_event = None,
     description   = "Mandatory written contract with every processor under Art.28.3",
@@ -266,12 +266,12 @@ REQ_DPA = DocumentRequirement(
     ],
 )
 
-REQ_CLOUD_SERVICES_POLICY = DocumentRequirement(
+REQ_CLOUD_SERVICES_POLICY = EvidenceRequirement(
     id            = "req:A.5.23:cloud_services_policy",
     control_ref   = "A.5.23",
     standard_id   = "ISO27001:2022",
-    document_type = "policy",
-    document_title= "Information Security for Use of Cloud Services Policy",
+    evidence_type = "policy",
+    title= "Information Security for Use of Cloud Services Policy",
     trigger_type  = "profile_fact",
     trigger_event = None,
     description   = "A.5.23 requires a topic-specific policy for cloud service usage",
@@ -291,12 +291,12 @@ REQ_CLOUD_SERVICES_POLICY = DocumentRequirement(
     ],
 )
 
-REQ_ENCRYPTION_POLICY = DocumentRequirement(
+REQ_ENCRYPTION_POLICY = EvidenceRequirement(
     id            = "req:A.8.24:encryption_policy",
     control_ref   = "A.8.24",
     standard_id   = "ISO27001:2022",
-    document_type = "policy",
-    document_title= "Use of Cryptography Policy",
+    evidence_type = "policy",
+    title= "Use of Cryptography Policy",
     trigger_type  = "universal",
     trigger_event = None,
     description   = "A.8.24 requires a policy on effective use of cryptography",
@@ -316,12 +316,12 @@ REQ_ENCRYPTION_POLICY = DocumentRequirement(
     ],
 )
 
-REQ_INCIDENT_RESPONSE = DocumentRequirement(
+REQ_INCIDENT_RESPONSE = EvidenceRequirement(
     id            = "req:A.5.24:incident_response_procedure",
     control_ref   = "A.5.24",
     standard_id   = "ISO27001:2022",
-    document_type = "procedure",
-    document_title= "Information Security Incident Response Procedure",
+    evidence_type = "procedure",
+    title= "Information Security Incident Response Procedure",
     trigger_type  = "universal",
     trigger_event = None,
     description   = "A.5.24 requires documented incident management processes",
@@ -341,12 +341,12 @@ REQ_INCIDENT_RESPONSE = DocumentRequirement(
     ],
 )
 
-REQ_DATA_MASKING = DocumentRequirement(
+REQ_DATA_MASKING = EvidenceRequirement(
     id            = "req:A.8.11:data_masking_procedure",
     control_ref   = "A.8.11",
     standard_id   = "ISO27001:2022",
-    document_type = "procedure",
-    document_title= "Data Masking Procedure",
+    evidence_type = "procedure",
+    title= "Data Masking Procedure",
     trigger_type  = "universal",
     trigger_event = None,
     description   = "A.8.11 requires procedures for masking personal data in non-production environments",
@@ -363,12 +363,12 @@ REQ_DATA_MASKING = DocumentRequirement(
     ],
 )
 
-REQ_ACCESS_RIGHTS = DocumentRequirement(
+REQ_ACCESS_RIGHTS = EvidenceRequirement(
     id            = "req:A.5.18:access_rights_procedure",
     control_ref   = "A.5.18",
     standard_id   = "ISO27001:2022",
-    document_type = "procedure",
-    document_title= "Access Rights Management Procedure",
+    evidence_type = "procedure",
+    title= "Access Rights Management Procedure",
     trigger_type  = "universal",
     trigger_event = None,
     description   = "A.5.18 requires procedures for provisioning, review and revocation of access rights",
@@ -385,12 +385,12 @@ REQ_ACCESS_RIGHTS = DocumentRequirement(
     ],
 )
 
-REQ_REMOTE_WORKING = DocumentRequirement(
+REQ_REMOTE_WORKING = EvidenceRequirement(
     id            = "req:A.6.7:remote_working_policy",
     control_ref   = "A.6.7",
     standard_id   = "ISO27001:2022",
-    document_type = "policy",
-    document_title= "Remote Working Policy",
+    evidence_type = "policy",
+    title= "Remote Working Policy",
     trigger_type  = "profile_fact",
     trigger_event = None,
     description   = "A.6.7 requires a policy covering information security for remote working",
@@ -408,12 +408,12 @@ REQ_REMOTE_WORKING = DocumentRequirement(
     ],
 )
 
-REQ_SECURE_DEVELOPMENT = DocumentRequirement(
+REQ_SECURE_DEVELOPMENT = EvidenceRequirement(
     id            = "req:A.8.25:secure_development_policy",
     control_ref   = "A.8.25",
     standard_id   = "ISO27001:2022",
-    document_type = "policy",
-    document_title= "Secure Development Lifecycle Policy",
+    evidence_type = "policy",
+    title= "Secure Development Lifecycle Policy",
     trigger_type  = "profile_fact",
     trigger_event = None,
     description   = "A.8.25 requires rules for secure development when organisation develops software",
@@ -433,12 +433,12 @@ REQ_SECURE_DEVELOPMENT = DocumentRequirement(
 
 # ── Operational documents ─────────────────────────────────────────────────────
 
-REQ_BREACH_NOTIFICATION = DocumentRequirement(
+REQ_BREACH_NOTIFICATION = EvidenceRequirement(
     id            = "req:Art.33:breach_notification",
     control_ref   = "Art.33",
     standard_id   = "GDPR:2016/679",
-    document_type = "breach_notification",
-    document_title= "Personal Data Breach Notification to Supervisory Authority",
+    evidence_type = "breach_notification",
+    title= "Personal Data Breach Notification to Supervisory Authority",
     trigger_type  = "operational",
     trigger_event = "personal_data_breach",
     description   = "Art.33 requires notification to supervisory authority within 72 hours of becoming aware of a breach",
@@ -454,12 +454,12 @@ REQ_BREACH_NOTIFICATION = DocumentRequirement(
     ],
 )
 
-REQ_DSAR_RESPONSE = DocumentRequirement(
+REQ_DSAR_RESPONSE = EvidenceRequirement(
     id            = "req:Art.15:dsar_response",
     control_ref   = "Art.15",
     standard_id   = "GDPR:2016/679",
-    document_type = "dsar_response",
-    document_title= "Data Subject Access Request Response",
+    evidence_type = "dsar_response",
+    title= "Data Subject Access Request Response",
     trigger_type  = "operational",
     trigger_event = "data_subject_access_request",
     description   = "Art.15 requires response to access requests within one month",
@@ -481,7 +481,7 @@ REQ_DSAR_RESPONSE = DocumentRequirement(
 
 # ── Complete registry ──────────────────────────────────────────────────────────
 
-ALL_DOCUMENT_REQUIREMENTS: list[DocumentRequirement] = [
+ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     # Universal — ISO 27001
     REQ_ISMS_SCOPE,
     REQ_ISMS_POLICY,
@@ -510,28 +510,28 @@ ALL_DOCUMENT_REQUIREMENTS: list[DocumentRequirement] = [
 ]
 
 
-def get_requirements_for_control(control_ref: str) -> list[DocumentRequirement]:
-    return [r for r in ALL_DOCUMENT_REQUIREMENTS if r.control_ref == control_ref]
+def get_requirements_for_control(control_ref: str) -> list[EvidenceRequirement]:
+    return [r for r in ALL_EVIDENCE_REQUIREMENTS if r.control_ref == control_ref]
 
 
-def get_requirements_by_trigger(trigger_type: str) -> list[DocumentRequirement]:
-    return [r for r in ALL_DOCUMENT_REQUIREMENTS if r.trigger_type == trigger_type]
+def get_requirements_by_trigger(trigger_type: str) -> list[EvidenceRequirement]:
+    return [r for r in ALL_EVIDENCE_REQUIREMENTS if r.trigger_type == trigger_type]
 
 
 if __name__ == "__main__":
     from collections import Counter
-    trigger_counts = Counter(r.trigger_type for r in ALL_DOCUMENT_REQUIREMENTS)
+    trigger_counts = Counter(r.trigger_type for r in ALL_EVIDENCE_REQUIREMENTS)
     total_items = sum(
         len(r.must_contain) + len(r.should_contain)
-        for r in ALL_DOCUMENT_REQUIREMENTS
+        for r in ALL_EVIDENCE_REQUIREMENTS
     )
-    must_items = sum(len(r.must_contain) for r in ALL_DOCUMENT_REQUIREMENTS)
+    must_items = sum(len(r.must_contain) for r in ALL_EVIDENCE_REQUIREMENTS)
     gdpr_items = sum(
         sum(1 for i in r.must_contain if i.gdpr_aligned)
-        for r in ALL_DOCUMENT_REQUIREMENTS
+        for r in ALL_EVIDENCE_REQUIREMENTS
     )
 
-    print(f"Document requirements: {len(ALL_DOCUMENT_REQUIREMENTS)}")
+    print(f"Evidence requirements: {len(ALL_EVIDENCE_REQUIREMENTS)}")
     for trigger, count in trigger_counts.items():
         print(f"  {trigger:15s}: {count}")
     print(f"\nChecklist items:")
@@ -539,7 +539,7 @@ if __name__ == "__main__":
     print(f"  Must-contain: {must_items}")
     print(f"  GDPR-aligned: {gdpr_items}")
     print(f"\nControls covered:")
-    for r in ALL_DOCUMENT_REQUIREMENTS:
+    for r in ALL_EVIDENCE_REQUIREMENTS:
         gdpr_count = sum(1 for i in r.must_contain if i.gdpr_aligned)
         flag = " [GDPR items]" if gdpr_count else ""
-        print(f"  {r.control_ref:15s} {r.trigger_type:15s} {r.document_title}{flag}")
+        print(f"  {r.control_ref:15s} {r.trigger_type:15s} {r.title}{flag}")

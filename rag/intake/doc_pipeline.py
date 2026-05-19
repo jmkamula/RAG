@@ -228,7 +228,11 @@ class DocumentPipeline:
             # ── Stage 1: Read ─────────────────────────────────────────────────
             logger.info(f"Stage 1: Reading {file_name}")
             t1 = time.time()
-            doc = read_document(file_path, upload_id=upload_id)
+            doc = read_document(
+                file_path,
+                upload_id         = upload_id,
+                original_filename = file_name,
+            )
             s1_ms = int((time.time() - t1) * 1000)
 
             tracer.write(

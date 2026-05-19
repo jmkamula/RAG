@@ -1034,7 +1034,7 @@ class LLMAnswer:
                 std_id = ":".join(node_id.split(":")[:2]) if ":" in node_id else ""
                 full_ref = _format_ref(std_id, ctx.control_ref) if std_id else ctx.control_ref
                 cl_lines.append(
-                    f"\n{full_ref} — {ctx.document_title} [{ctx.trigger_type}]"
+                    f"\n{full_ref} — {ctx.title} [{ctx.trigger_type}]"
                 )
                 for item in ctx.must_contain:
                     status = ""
@@ -1165,7 +1165,7 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         if doc_contexts:
             cl_lines = ["\nDOCUMENT CHECKLISTS (these are the authoritative requirements):"]
             for node_id, ctx in list(doc_contexts.items())[:3]:
-                cl_lines.append(f"{ctx.control_ref} — {ctx.document_title}")
+                cl_lines.append(f"{ctx.control_ref} — {ctx.title}")
                 for item in ctx.must_contain:
                     gdpr = " [GDPR required]" if item.gdpr_required else ""
                     cl_lines.append(f"  - {item.text}{gdpr}")
@@ -1401,9 +1401,9 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
 
         for node_id, ctx in doc_contexts.items():
             checklist_lines.append(
-                f"\n{ctx.control_ref}: {ctx.document_title}"
+                f"\n{ctx.control_ref}: {ctx.title}"
             )
-            checklist_lines.append(f"Type: {ctx.document_type}")
+            checklist_lines.append(f"Type: {ctx.evidence_type}")
             checklist_lines.append(f"Purpose: {ctx.description}")
 
             if ctx.has_document_uploaded:

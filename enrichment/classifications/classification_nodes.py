@@ -7,7 +7,7 @@ Classification dimensions and allowed values bridge per-tenant incidents
 Each ClassificationDimension is owned by a standard and describes an axis on
 which an incident can be classified. Each ClassificationValue is one allowed
 value on that dimension, and MANIFESTS_AS zero or more :Event nodes — those
-events' TRIGGERS_OBLIGATION + REQUIRES_DOCUMENT edges define what must be
+events' TRIGGERS_OBLIGATION + REQUIRES_EVIDENCE edges define what must be
 done to resolve an incident classified with that value.
 
 Loaded into Neo4j as graph nodes; Postgres `incident_classifications` rows
