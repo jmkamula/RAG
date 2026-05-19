@@ -596,7 +596,7 @@ def _persist_document_metadata(
 
     Expected metadata keys (all optional):
       file_size_bytes, mime_type, checksum_sha256,
-      page_count, document_type, control_refs (list[str])
+      page_count, evidence_type, control_refs (list[str])
     """
     if not metadata:
         return
@@ -614,7 +614,7 @@ def _persist_document_metadata(
                        mime_type       = COALESCE(%s, mime_type),
                        checksum_sha256 = COALESCE(%s, checksum_sha256),
                        page_count      = COALESCE(%s, page_count),
-                       document_type   = COALESCE(%s, document_type),
+                       evidence_type   = COALESCE(%s, evidence_type),
                        control_refs    = COALESCE(%s, control_refs),
                        uploaded_at     = NOW()
                  WHERE id = %s AND tenant_id = %s
@@ -624,7 +624,7 @@ def _persist_document_metadata(
                     metadata.get("mime_type"),
                     metadata.get("checksum_sha256"),
                     metadata.get("page_count"),
-                    metadata.get("document_type"),
+                    metadata.get("evidence_type"),
                     control_refs,
                     doc_id, tenant_id,
                 ),
@@ -632,7 +632,7 @@ def _persist_document_metadata(
             cur.execute("RELEASE SAVEPOINT sp_cd_metadata")
             logger.debug(
                 f"Stamped metadata on {doc_id}: "
-                f"type={metadata.get('document_type')} "
+                f"type={metadata.get('evidence_type')} "
                 f"pages={metadata.get('page_count')} "
                 f"ctrls={len(control_refs or [])}"
             )
@@ -666,7 +666,7 @@ def write_findings(
     Args:
       metadata: optional dict of file/content metadata to stamp on
                 client_documents (file_size_bytes, mime_type, checksum_sha256,
-                page_count, document_type, control_refs). When present,
+                page_count, evidence_type, control_refs). When present,
                 uploaded_at is also refreshed to NOW().
 
     Returns summary dict.

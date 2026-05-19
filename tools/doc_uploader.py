@@ -43,7 +43,7 @@ def find_registered_docs(pg) -> list[dict]:
         cur.execute("""
             SELECT
                 id::text, platform_ref, external_ref,
-                document_title, document_type, filename,
+                document_title, evidence_type, filename,
                 storage_path, is_metadata_only
             FROM client_documents
             WHERE tenant_id = %s

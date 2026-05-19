@@ -351,7 +351,7 @@ def load_uploaded_documents(pg_conn, tenant_id: str) -> list[dict]:
                     cd.external_ref,
                     cd.document_title,
                     cd.filename,
-                    cd.document_type     AS doc_type,
+                    cd.evidence_type     AS doc_type,
                     cd.document_status,
                     cd.uploaded_at::text,
                     cd.page_count,

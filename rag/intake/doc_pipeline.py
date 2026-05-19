@@ -396,7 +396,7 @@ class DocumentPipeline:
                 "mime_type":       _mime,
                 "checksum_sha256": _sha256,
                 "page_count":      doc.page_count,
-                "document_type":   doc.doc_type,
+                "evidence_type":   doc.doc_type,
                 "control_refs":    sorted({
                     f"{f.standard_id}:{f.control_ref}"
                     for f in findings

@@ -9,10 +9,7 @@ Architecture:
   (standard_id, control_ref) pair. The EvidenceRequirement carries an
   `evidence_type` (e.g. 'breach_notification', 'risk_assessment'). Then check
   Postgres incident_documents → client_documents: is there a linked document
-  with matching client_documents.document_type? If yes → mark obligation met.
-  (Note the cross-vocab join: Neo4j evidence_type values match Postgres
-  client_documents.document_type values — same vocabulary, different column
-  names until commit 3 also renames the Postgres column.)
+  with matching client_documents.evidence_type? If yes → mark obligation met.
 
 Behavioural rules:
   - Additive only: never flip met=TRUE back to FALSE. Matches
@@ -187,7 +184,7 @@ class IncidentFulfillmentChecker:
                 WHERE id.incident_id = %s
                   AND id.tenant_id   = %s
                   AND id.is_active   = TRUE
-                  AND cd.document_type = ANY(%s)
+                  AND cd.evidence_type = ANY(%s)
                 LIMIT 1
             """, (str(incident_id), str(tenant_id), doc_types))
             return cur.fetchone() is not None

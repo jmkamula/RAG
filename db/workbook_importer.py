@@ -352,7 +352,7 @@ class RowMappers:
             'filename':         f"{doc_id}_{title[:40].replace(' ','_')}.pdf",
             'storage_path':     None,           # not uploaded yet
             'document_title':   title,
-            'document_type':    'policy',       # refined later when uploaded
+            'evidence_type':    'policy',       # refined later when uploaded
             'document_owner':   _to_str(raw.get('Owner')),
             'version':          version,
             'approval_status':  _to_str(raw.get('Appproval Status')),
