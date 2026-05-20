@@ -150,6 +150,10 @@ class GenericLeafEvaluator:
             )
 
             # ── Phase 2 path: per-checklist-item findings ────────────────
+            # df.review_status = 'approved' enforces the HITL Stage-1 gate
+            # (commit 4): findings that haven't been user-approved don't feed
+            # the engine. Pre-deploy rows were backfilled to 'approved' by the
+            # schema migration so existing tenants aren't quietly downgraded.
             cur.execute("""
                 SELECT df.checklist_item_id,
                        cd.uploaded_at
@@ -163,6 +167,7 @@ class GenericLeafEvaluator:
                   AND df.checklist_item_id = ANY(%s)
                   AND df.status           = 'present'
                   AND df.is_active        = TRUE
+                  AND df.review_status    = 'approved'
             """, (self._tenant_id, evidence_type, list(must_item_ids)))
             per_item_rows = cur.fetchall()
 
@@ -179,6 +184,7 @@ class GenericLeafEvaluator:
             if not control_ref or not standard_id:
                 # Insufficient identifiers to do coarse match
                 return set(), None
+            # Same HITL Stage-1 gate as the Phase-2 path above.
             cur.execute("""
                 SELECT cd.uploaded_at
                 FROM document_findings df
@@ -192,6 +198,7 @@ class GenericLeafEvaluator:
                   AND df.standard_id   = %s
                   AND df.status        = 'present'
                   AND df.is_active     = TRUE
+                  AND df.review_status = 'approved'
                 ORDER BY cd.uploaded_at DESC NULLS LAST
                 LIMIT 1
             """, (self._tenant_id, evidence_type, control_ref, standard_id))

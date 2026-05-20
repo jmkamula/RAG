@@ -163,6 +163,20 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
             except Exception as e:
                 logger.warning("gap upsert skipped: %s", e)
 
+            # Persist engine verdicts as Stage-2 proposals on posture_controls
+            # (commit 4 of the HITL rollout). Idempotent: only writes when the
+            # verdict text or reason has changed since the last proposal. The
+            # in-memory overlay below still applies; commit 5 will gate the
+            # overlay on engine_proposal_status='approved'.
+            try:
+                proposed = _persist_engine_proposals(pg_conn, tenant_id, verdicts)
+                if proposed:
+                    logger.info(
+                        "engine_proposals: wrote/refreshed %d row(s)", proposed,
+                    )
+            except Exception as e:
+                logger.warning("engine proposal persist skipped: %s", e)
+
         overrides = 0
         for cid, verdict in verdicts.items():
             # Skip single-leaf specs (no composition value over posture_controls)
@@ -226,6 +240,108 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
     except Exception as e:
         logger.warning("posture engine overlay skipped (%s: %s)", type(e).__name__, e)
         return 0
+
+
+def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
+    """Write engine verdicts to posture_controls.engine_proposed_* as Stage-2
+    proposals (HITL rollout commit 4). Returns the number of rows written.
+
+    Scope mirrors the in-memory overlay below: only multi-leaf curated specs
+    with determinative postures (NC/OFI/Comply/N/A) are persisted. Single-leaf
+    specs are skipped — posture_controls.finding already represents their
+    state — and indeterminate verdicts (UNKNOWN/deferred/NotApplicable)
+    likewise don't produce a proposal.
+
+    Idempotent: a row is only re-proposed when (engine_proposed_finding,
+    engine_proposal_reason) changes vs. the last persisted value. This keeps
+    the load path free of write churn while implementing decision 4 of
+    [[hitl-two-stage-approval-design]] — "any engine-input change retriggers
+    a fresh proposal cycle". A reset back to 'proposed' invalidates any prior
+    'approved' on a different verdict, which is exactly the intent.
+
+    Snapshots the reason at write time (decision 5): never recomputed on read.
+
+    Writes commit at the end. Any exception rolls back and the caller falls
+    back to the in-memory overlay alone — the persistence is best-effort.
+    """
+    if not verdicts:
+        return 0
+
+    proposable: list[tuple[str, str, str]] = []  # (cid, posture, reason)
+    for cid, verdict in verdicts.items():
+        if len(verdict.leaves) <= 1:
+            continue
+        if verdict.posture in ("UNKNOWN", "deferred", "NotApplicable"):
+            continue
+        proposable.append((cid, verdict.posture, verdict.reason or ""))
+
+    if not proposable:
+        return 0
+
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
+            )
+            written = 0
+            for cid, posture, reason in proposable:
+                # cid is the node_id form "STD:control_ref" — engine_runner
+                # produces these via spec_builder. Parse out the components
+                # used by posture_controls.
+                if ":" in cid:
+                    *_, control_ref = cid.split(":")
+                    standard_id_full = cid.rsplit(":", 1)[0]
+                else:
+                    # Defensive fallback: skip unparseable ids.
+                    continue
+
+                cur.execute(
+                    """
+                    SELECT engine_proposed_finding, engine_proposal_reason
+                      FROM posture_controls
+                     WHERE tenant_id   = %s
+                       AND standard_id = %s
+                       AND control_ref = %s
+                       AND is_active   = TRUE
+                     LIMIT 1
+                    """,
+                    (tenant_id, standard_id_full, control_ref),
+                )
+                cur_row = cur.fetchone()
+                if cur_row is None:
+                    # No posture_controls row for this engine verdict yet —
+                    # mirrors the overlay's "don't manufacture" rule. The
+                    # writer (commit 2) creates rows on extraction, so this
+                    # only fires for controls the tenant hasn't touched.
+                    continue
+                cur_finding, cur_reason = cur_row
+                if cur_finding == posture and (cur_reason or "") == reason:
+                    # Idempotent — nothing to write.
+                    continue
+
+                cur.execute(
+                    """
+                    UPDATE posture_controls
+                       SET engine_proposed_finding = %s,
+                           engine_proposed_at      = NOW(),
+                           engine_proposal_status  = 'proposed',
+                           engine_proposal_reason  = %s
+                     WHERE tenant_id   = %s
+                       AND standard_id = %s
+                       AND control_ref = %s
+                       AND is_active   = TRUE
+                    """,
+                    (posture, reason, tenant_id, standard_id_full, control_ref),
+                )
+                written += cur.rowcount
+        pg_conn.commit()
+        return written
+    except Exception:
+        try:
+            pg_conn.rollback()
+        except Exception:
+            pass
+        raise
 
 
 def _rebuild_gap_list(unacked_leaves) -> list:
