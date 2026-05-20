@@ -530,6 +530,68 @@ EVAL_CASES = [
             "with curation_status='uncurated' post-migration."
         ),
     ),
+
+    EvalCase(
+        id=35,
+        query="what findings need review?",
+        tags=["posture", "hitl", "stage1", "review_queue"],
+        expected_type="posture_check",
+        # Stage-1 review queue surface (HITL two-stage commit 3): the
+        # short-circuit recognises the list verb and renders the per-control
+        # pending counts directly from document_findings, bypassing the LLM
+        # and the normal posture/standard pipeline.
+        #
+        # Idempotent assertion: with pending rows the render starts
+        # "Pending review (N control(s)):"; with an empty queue it returns
+        # "No pending findings to review." Both contain "pending" + "review"
+        # — so the case passes regardless of whether the approve case below
+        # has already drained the queue on a prior run.
+        must_contain=["pending", "review"],
+        must_not_contain=[
+            "FulfilmentSpec", "REQUIRES_EVIDENCE", "EvidenceRequirement",
+            "I need more information",
+        ],
+        notes=(
+            "Locks the Stage-1 review-queue chat surface "
+            "(parse_stage1_intent + list_queue). Read-only — does not "
+            "mutate document_findings or posture_controls. Idempotent "
+            "anchors handle both populated and drained queue states."
+        ),
+    ),
+
+    EvalCase(
+        id=36,
+        query="approve findings for A.5.1",
+        tags=["posture", "hitl", "stage1", "approve"],
+        expected_refs=["A.5.1"],
+        expected_type="posture_check",
+        # Stage-1 batch approval surface (HITL two-stage commit 3): the
+        # short-circuit recognises the approve verb + "findings" object +
+        # control ref, promotes all pending document_findings rows for
+        # A.5.1 to review_status='approved', and flips the live
+        # posture_controls row to confirmation_status='document_confirmed'.
+        #
+        # Idempotent assertion via "approved" substring: matches both the
+        # first-write success path ("Approved N extracted finding(s)…")
+        # and the no_pending repeat path ("…already been approved or
+        # rejected"). Pattern mirrors the acknowledge EvalCase (id=34).
+        #
+        # Per [[human_in_the_loop_positioning]]: the client owns posture.
+        # The forbid below catches a regression where the surface fails
+        # to fire and the normal LLM pipeline answers a posture lookup
+        # for A.5.1 instead.
+        must_contain=["approved", "A.5.1"],
+        must_not_contain=[
+            "FulfilmentSpec", "REQUIRES_EVIDENCE", "EvidenceRequirement",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks the Stage-1 batch-approval chat surface "
+            "(approve_findings_for_control + posture promotion). "
+            "Idempotent anchor 'approved' matches both first-write and "
+            "no_pending repeat paths. Pairs with id=35 (list)."
+        ),
+    ),
 ]
 
 

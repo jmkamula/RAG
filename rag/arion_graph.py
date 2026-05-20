@@ -854,6 +854,70 @@ def make_retrieve_node(
             get_logger().warning("acknowledge short-circuit failed: %s", _ack_exc)
             # Fall through to normal pipeline.
 
+        # ── Stage-1 batch-approval short-circuit ──────────────────────────
+        # Recognises "approve findings for A.5.1" / "reject findings for
+        # A.5.18 because X" / "show pending findings [for A.5.1]" / "what
+        # findings need review?". Implements the first HITL gate from
+        # [[hitl-two-stage-approval-design]]: extraction proposes into
+        # system_finding, this surface promotes the bundle to live finding
+        # once the user approves.
+        try:
+            from rag.posture.stage1_review_chat import (
+                parse_stage1_intent,
+                list_pending_for_control,
+                list_queue,
+                approve_findings_for_control,
+                reject_findings_for_control,
+                render_stage1_answer,
+            )
+            _s1_intent = parse_stage1_intent(state["query"])
+            if _s1_intent is not None:
+                import psycopg2
+                _pg_conn = psycopg2.connect(
+                    host     = os.getenv("POSTGRES_HOST", "127.0.0.1"),
+                    dbname   = "arioncomply_compliance",
+                    user     = "arioncomply_app",
+                    password = os.getenv("POSTGRES_PASSWORD"),
+                )
+                try:
+                    _tenant_id = str(getattr(tenant, "tenant_id", "") or "")
+                    _s1_listing = None
+                    _s1_result  = {}
+                    if _s1_intent.action == "list_queue":
+                        _s1_listing = list_queue(_pg_conn, _tenant_id)
+                    elif _s1_intent.action == "list_one":
+                        _s1_listing = list_pending_for_control(
+                            _pg_conn, _tenant_id, _s1_intent.control_ref,
+                        )
+                    elif _s1_intent.action == "approve":
+                        _s1_result = approve_findings_for_control(
+                            _pg_conn, _tenant_id, _s1_intent.control_ref,
+                        )
+                    elif _s1_intent.action == "reject":
+                        _s1_result = reject_findings_for_control(
+                            _pg_conn, _tenant_id, _s1_intent.control_ref,
+                            _s1_intent.rationale,
+                        )
+                finally:
+                    _pg_conn.close()
+                _s1_answer = render_stage1_answer(
+                    _s1_result, _s1_intent, listing=_s1_listing,
+                )
+                _refs = [_s1_intent.control_ref] if _s1_intent.control_ref else []
+                return {
+                    **state,
+                    "answer_text":   _s1_answer,
+                    "answer":        _s1_answer,
+                    "cited_refs":    _refs,
+                    "intent_type":   "posture_check",
+                    "question_type": "posture_check",
+                    "confidence":    1.0,
+                    "answer_source": "postgres",
+                }
+        except Exception as _s1_exc:
+            get_logger().warning("stage1 review short-circuit failed: %s", _s1_exc)
+            # Fall through to normal pipeline.
+
         # ── Scope N/A short-circuit ───────────────────────────────────────
         # Physical security (A.7.x) and dev controls (A.8.25-31) are N/A.
         # Don't surface unrelated findings for these scope-excluded queries.

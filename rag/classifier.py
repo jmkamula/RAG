@@ -625,6 +625,21 @@ CLEAR_INTENT_PHRASES = [
      "document_inventory", []),
     (re.compile(r'\b(?:pending|proposed|unconfirmed)\b.*\b(?:cross[\s-]?framework|xfw)\b', re.IGNORECASE),
      "document_inventory", []),
+
+    # Stage-1 extraction-review queue (HITL two-stage rollout) — routes to
+    # posture_check so the retrieve_node's stage1_review_chat short-circuit
+    # can fire. Order matters: the xfw patterns above must match first so
+    # cross-framework queries reach the xfw resolver instead.
+    (re.compile(r'\b(?:approve|reject|accept|confirm|deny)\s+(?:findings?|extractions?|proposals?)\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bwhat\s+findings?\s+(?:need|needs|require)\s+(?:review|approval)\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bfindings?\s+(?:need|needing|awaiting)\s+(?:review|approval)\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\b(?:show|list)\s+(?:me\s+)?pending\s+findings?\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\breview\s+(?:queue|findings?)\b', re.IGNORECASE),
+     "posture_check", []),
 ]
 
 
