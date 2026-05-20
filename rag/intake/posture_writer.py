@@ -244,7 +244,13 @@ def _ensure_client_document(
                 cur.execute(
                     """
                     UPDATE client_documents
-                       SET filename         = COALESCE(NULLIF(filename, ''), %s),
+                       SET filename         = CASE
+                               -- Registry seeds DOC###_Title.pdf placeholders that lie
+                               -- about the actual file extension. When matched, replace
+                               -- the placeholder with the upload's real filename.
+                               WHEN filename ~ '^DOC[0-9]+_.*\\.pdf$' THEN %s
+                               ELSE COALESCE(NULLIF(filename, ''), %s)
+                           END,
                            document_status  = CASE
                                WHEN document_status = 'registered' THEN %s
                                ELSE document_status
@@ -252,7 +258,7 @@ def _ensure_client_document(
                            is_metadata_only = FALSE
                      WHERE id = %s AND tenant_id = %s
                     """,
-                    (filename, _CD_STATUS_UPLOADED, doc_id, tenant_id),
+                    (filename, filename, _CD_STATUS_UPLOADED, doc_id, tenant_id),
                 )
                 cur.execute("RELEASE SAVEPOINT sp_cd_update")
                 logger.info(
