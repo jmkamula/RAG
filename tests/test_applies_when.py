@@ -281,6 +281,44 @@ def test_eval_phase2_rejected():
             return True, "fact_value rejected at eval time"
     return False, "Phase 2 function not rejected"
 
+def test_eval_phase2_register_count_rejected():
+    ast = parse('register_count("policy")')
+    try:
+        evaluate(ast, _ectx())
+    except EvalError as e:
+        if "Phase 2" in str(e):
+            return True, "register_count rejected at eval time"
+    return False, "register_count not rejected at eval time"
+
+def test_eval_phase2_date_after_rejected():
+    ast = parse('date_after("last_reviewed", "2024-01-01")')
+    try:
+        evaluate(ast, _ectx())
+    except EvalError as e:
+        if "Phase 2" in str(e):
+            return True, "date_after rejected at eval time"
+    return False, "date_after not rejected at eval time"
+
+def test_parse_phase2_funcs_parse_cleanly():
+    # All three Phase-2 reservations must parse without raising — the contract
+    # is "parser-known, eval-rejected". A future curator's typo'd Phase-1 expr
+    # should surface as an unknown-function ValidationError, not a ParseError;
+    # locking parse-cleanliness here keeps the seam unambiguous.
+    from rag.posture.applies_when import FuncCall
+    sources = [
+        'fact_value("headcount")',
+        'register_count("policy")',
+        'date_after("last_reviewed", "2024-01-01")',
+    ]
+    for src in sources:
+        try:
+            ast = parse(src)
+        except Exception as e:
+            return False, f"{src!r} failed to parse: {type(e).__name__}: {e}"
+        if not isinstance(ast, FuncCall):
+            return False, f"{src!r} parsed to {type(ast).__name__}, expected FuncCall"
+    return True, "all three Phase-2 funcs parse cleanly to FuncCall"
+
 
 # ── Renderer tests ────────────────────────────────────────────────────────────
 
@@ -343,6 +381,9 @@ TESTS = [
     test_eval_supply_exists_via_injected_fn,
     test_eval_supply_count_with_comparison,
     test_eval_phase2_rejected,
+    test_eval_phase2_register_count_rejected,
+    test_eval_phase2_date_after_rejected,
+    test_parse_phase2_funcs_parse_cleanly,
     # Renderer
     test_render_humanizes_known_slugs,
     test_render_supply_exists_strips_er_prefix,

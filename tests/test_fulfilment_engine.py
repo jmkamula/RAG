@@ -16,7 +16,7 @@ from pathlib import Path
 _ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(_ROOT))
 
-from rag.posture.applies_when import EvalContext
+from rag.posture.applies_when import EvalContext, LexError
 from rag.posture.fulfilment_engine import (
     Edge,
     LeafSpec,
@@ -193,6 +193,46 @@ def test_spec_level_applies_when_false_is_NotApplicable():
     return True, "spec-level applies_when=False → NotApplicable, no leaves walked"
 
 
+def test_spec_level_applies_when_NULL_always_applies():
+    # Phase-1 contract: applies_when=None at spec level short-circuits to True
+    # without invoking the parser. The first curator's day-1 NULL row must
+    # never be misread as "always blocks".
+    leaf = _leaf("L")
+    spec = SpecDescriptor(
+        spec_id="s", op="ALL", curation_status="curated", control_id="c",
+        applies_when=None,
+        children=[Edge(role="r", applies_when=None, target=leaf)],
+    )
+    ev = _make_satisfying_evaluator({"L": True})
+    v = evaluate_control(spec, ev, _ec())
+    if not v.applies:
+        return False, "applies should be True when spec-level applies_when is NULL"
+    if v.posture != "Comply":
+        return False, f"expected Comply with NULL spec applies_when, got {v.posture}"
+    if not v.leaves:
+        return False, "leaf should be evaluated when spec applies_when is NULL"
+    return True, "spec-level applies_when=NULL → always applies, tree walked"
+
+
+def test_edge_level_applies_when_NULL_always_applies():
+    # Phase-1 contract: applies_when=None at edge level means the edge is
+    # always live — the leaf is evaluated and contributes to composition.
+    leaf = _leaf("L")
+    spec = SpecDescriptor(
+        spec_id="s", op="ALL", curation_status="curated", control_id="c",
+        children=[Edge(role="r", applies_when=None, target=leaf)],
+    )
+    ev = _make_satisfying_evaluator({"L": False})  # not satisfied → must surface as gap
+    v = evaluate_control(spec, ev, _ec())
+    if v.posture != "OFI":
+        return False, f"NULL edge applies_when must evaluate leaf — expected OFI, got {v.posture}"
+    if not v.gap_list:
+        return False, "edge with NULL applies_when must surface gaps from its unsatisfied leaf"
+    if not any(g.leaf_id == "L" for g in v.leaves):
+        return False, "leaf must appear in verdict.leaves when edge applies_when is NULL"
+    return True, "edge-level applies_when=NULL → always applies, leaf evaluated"
+
+
 def test_spec_level_applies_when_true_does_walk():
     leaf = _leaf("L")
     spec = SpecDescriptor(
@@ -229,6 +269,77 @@ def test_edge_level_applies_when_false_skips_leaf():
     if any("L2" in g for g in v.gap_list):
         return False, "L2 should not appear in gap list"
     return True, "edge applies_when=False makes the leaf invisible"
+
+
+def test_edge_level_applies_when_false_appears_in_reason_footnote():
+    # Phase-1 contract: gated-off edges count toward the
+    # ", N gated off by applies_when" footnote on ControlVerdict.reason so the
+    # curator can see that an edge existed but was skipped — distinguishing
+    # "no children at all" from "all children gated off for this tenant".
+    leaves = [_leaf("L1"), _leaf("L2"), _leaf("L3")]
+    spec = SpecDescriptor(
+        spec_id="s", op="ALL", curation_status="curated", control_id="c",
+        children=[
+            Edge(role="r1", applies_when=None, target=leaves[0]),
+            Edge(role="r2", applies_when='fact("public_authority")', target=leaves[1]),
+            Edge(role="r3", applies_when='fact("public_authority")', target=leaves[2]),
+        ],
+    )
+    ev = _make_satisfying_evaluator({"L1": True})
+    v = evaluate_control(spec, ev, _ec())
+    if "2 gated off by applies_when" not in v.reason:
+        return False, f"expected '2 gated off by applies_when' in reason, got {v.reason!r}"
+    return True, f"reason footnote surfaces gated-off count: {v.reason!r}"
+
+
+def test_no_gated_edges_omits_footnote():
+    # Companion to the footnote test: when nothing is gated off, the reason
+    # must NOT carry the footnote (silence is signal — a curator scanning
+    # reasons should only see the phrase when an applies_when actually fired).
+    leaves = [_leaf("L1"), _leaf("L2")]
+    spec = SpecDescriptor(
+        spec_id="s", op="ALL", curation_status="curated", control_id="c",
+        children=[Edge(role="r1", applies_when=None, target=leaves[0]),
+                  Edge(role="r2", applies_when=None, target=leaves[1])],
+    )
+    ev = _make_satisfying_evaluator({"L1": True, "L2": True})
+    v = evaluate_control(spec, ev, _ec())
+    if "gated off by applies_when" in v.reason:
+        return False, f"reason should not mention gating when none occurred: {v.reason!r}"
+    return True, f"no-gating reason is clean: {v.reason!r}"
+
+
+def test_empty_applies_when_string_propagates_LexError():
+    # Phase-1 contract: an empty applies_when string at the engine boundary
+    # is a curator error (NULL is the sentinel for 'always applies', not '').
+    # The engine must propagate LexError so the bad row is loud, not silent.
+    leaf = _leaf("L")
+    spec = SpecDescriptor(
+        spec_id="s", op="ALL", curation_status="curated", control_id="c",
+        applies_when="",   # empty string — must raise, not treat as always-applies
+        children=[Edge(role="r", applies_when=None, target=leaf)],
+    )
+    ev = _make_satisfying_evaluator({"L": True})
+    try:
+        evaluate_control(spec, ev, _ec())
+    except LexError:
+        return True, "empty applies_when at spec level raises LexError"
+    return False, "empty applies_when string did not raise — curator error went silent"
+
+
+def test_empty_edge_applies_when_string_propagates_LexError():
+    # Same contract at the edge level.
+    leaf = _leaf("L")
+    spec = SpecDescriptor(
+        spec_id="s", op="ALL", curation_status="curated", control_id="c",
+        children=[Edge(role="r", applies_when="", target=leaf)],
+    )
+    ev = _make_satisfying_evaluator({"L": True})
+    try:
+        evaluate_control(spec, ev, _ec())
+    except LexError:
+        return True, "empty applies_when at edge level raises LexError"
+    return False, "empty edge applies_when string did not raise"
 
 
 # ── Nested specs ──────────────────────────────────────────────────────────────
@@ -306,8 +417,14 @@ TESTS = [
     test_AT_LEAST_N_threshold,
     # applies_when
     test_spec_level_applies_when_false_is_NotApplicable,
+    test_spec_level_applies_when_NULL_always_applies,
+    test_edge_level_applies_when_NULL_always_applies,
     test_spec_level_applies_when_true_does_walk,
     test_edge_level_applies_when_false_skips_leaf,
+    test_edge_level_applies_when_false_appears_in_reason_footnote,
+    test_no_gated_edges_omits_footnote,
+    test_empty_applies_when_string_propagates_LexError,
+    test_empty_edge_applies_when_string_propagates_LexError,
     # nesting
     test_nested_spec_child_rolls_up,
     # corner cases
