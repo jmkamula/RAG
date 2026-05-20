@@ -10,3 +10,4 @@
 - [applies_when warning suppression](applies_when_warning_suppression.md) — Neo4j 01N52 fires every engine sweep because applies_when is empty on all 429 specs/25 edges; suppress at driver level
 - [applies_when Phase-1 regression tests](applies_when_phase1_regression_tests.md) — Phase-1 contract locked 2026-05-20 (76d6bc5): 31 DSL + 20 engine tests pin NULL/False/edge-skip+footnote/Phase-2/empty-string behaviour
 - [Neo4j graph unused-element warnings](neo4j_graph_unused_element_warnings.md) — RELATED_TO rel type and `confidence` edge property absent from data but referenced by graph_expander; resolve schema questions then suppress with applies_when
+- [Claude Code hooks run under /bin/sh](claude_code_hooks_run_under_sh.md) — hooks on this VM execute under dash, not bash; write POSIX (case/single-bracket), never [[ ]]; active example is .claude/settings.json memory-sync hook
