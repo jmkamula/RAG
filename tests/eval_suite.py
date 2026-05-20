@@ -446,6 +446,59 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Stage-2 engine-verdict approval (HITL two-stage commit 5) ──
+    # MUST run before case 33: commit 5 gates the in-memory overlay on
+    # engine_proposal_status='approved'. Without prior Stage-2 approval,
+    # A.5.1's live finding stays at the document-confirmed value and case
+    # 33 would no longer see the engine's OFI overlay. id=38 (approve)
+    # therefore precedes id=33 in eval execution order — same trick the
+    # acknowledge case (id=34) and Stage-1 approve case (id=36) use to
+    # keep state idempotent across runs.
+    EvalCase(
+        id=37,
+        query="what engine verdicts need review?",
+        tags=["posture", "hitl", "stage2", "engine_proposals"],
+        expected_type="posture_check",
+        # Stage-2 review-queue chat surface: read-only. Idempotent anchors
+        # "engine" + "review" match both the populated list and the
+        # post-approval "No engine verdicts are pending review" path.
+        must_contain=["engine", "review"],
+        must_not_contain=[
+            "FulfilmentSpec", "REQUIRES_EVIDENCE", "EvidenceRequirement",
+            "I need more information",
+        ],
+        notes=(
+            "Locks the Stage-2 engine-verdict review-queue chat surface "
+            "(parse_stage2_intent + list_pending_proposals). Read-only."
+        ),
+    ),
+
+    EvalCase(
+        id=38,
+        query="approve engine verdict for A.5.1",
+        tags=["posture", "hitl", "stage2", "approve"],
+        expected_refs=["A.5.1"],
+        expected_type="posture_check",
+        # Stage-2 batch-approval chat surface: promotes the persisted engine
+        # proposal (commit 4) to live finding and flips
+        # confirmation_status='engine_confirmed'.
+        #
+        # Idempotent anchor "approved" matches both the first-write success
+        # ("Approved engine verdict for A.5.1: 'Comply' → 'OFI'. A.5.1 is now
+        # engine_confirmed.") and the already-approved repeat path ("Engine
+        # verdict for A.5.1 is already approved.").
+        must_contain=["approved", "A.5.1"],
+        must_not_contain=[
+            "FulfilmentSpec", "REQUIRES_EVIDENCE", "EvidenceRequirement",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks the Stage-2 engine-verdict approval surface. Pairs with "
+            "id=37 (list). Position-critical: must precede id=33 so the "
+            "live finding is flipped before the 'A.5.1 compliant?' check."
+        ),
+    ),
+
     EvalCase(
         id=33,
         query="are we ISO 27001 A.5.1 compliant?",

@@ -918,6 +918,72 @@ def make_retrieve_node(
             get_logger().warning("stage1 review short-circuit failed: %s", _s1_exc)
             # Fall through to normal pipeline.
 
+        # ── Stage-2 engine-verdict approval short-circuit ─────────────────
+        # Recognises "approve engine verdict for A.5.1" / "reject engine
+        # verdict for A.5.1 because X" / "show pending engine proposals" /
+        # "what engine verdicts need review?". Promotes the persisted engine
+        # proposal (commit 4) to live finding once approved.
+        # The "engine verdict|proposal" object word keeps this surface
+        # disjoint from [[stage1_review_chat]]'s "findings|extractions".
+        try:
+            from rag.posture.stage2_approval_chat import (
+                parse_stage2_intent,
+                list_pending_proposals,
+                get_proposal_for_control,
+                approve_engine_proposal,
+                reject_engine_proposal,
+                render_stage2_answer,
+            )
+            _s2_intent = parse_stage2_intent(state["query"])
+            if _s2_intent is not None:
+                import psycopg2
+                _pg_conn = psycopg2.connect(
+                    host     = os.getenv("POSTGRES_HOST", "127.0.0.1"),
+                    dbname   = "arioncomply_compliance",
+                    user     = "arioncomply_app",
+                    password = os.getenv("POSTGRES_PASSWORD"),
+                )
+                try:
+                    _tenant_id = str(getattr(tenant, "tenant_id", "") or "")
+                    _s2_listing  = None
+                    _s2_proposal = None
+                    _s2_result   = {}
+                    if _s2_intent.action == "list_queue":
+                        _s2_listing = list_pending_proposals(_pg_conn, _tenant_id)
+                    elif _s2_intent.action == "list_one":
+                        _s2_proposal = get_proposal_for_control(
+                            _pg_conn, _tenant_id, _s2_intent.control_ref,
+                        )
+                    elif _s2_intent.action == "approve":
+                        _s2_result = approve_engine_proposal(
+                            _pg_conn, _tenant_id, _s2_intent.control_ref,
+                        )
+                    elif _s2_intent.action == "reject":
+                        _s2_result = reject_engine_proposal(
+                            _pg_conn, _tenant_id, _s2_intent.control_ref,
+                            _s2_intent.rationale,
+                        )
+                finally:
+                    _pg_conn.close()
+                _s2_answer = render_stage2_answer(
+                    _s2_result, _s2_intent,
+                    listing=_s2_listing, proposal=_s2_proposal,
+                )
+                _refs = [_s2_intent.control_ref] if _s2_intent.control_ref else []
+                return {
+                    **state,
+                    "answer_text":   _s2_answer,
+                    "answer":        _s2_answer,
+                    "cited_refs":    _refs,
+                    "intent_type":   "posture_check",
+                    "question_type": "posture_check",
+                    "confidence":    1.0,
+                    "answer_source": "postgres",
+                }
+        except Exception as _s2_exc:
+            get_logger().warning("stage2 approval short-circuit failed: %s", _s2_exc)
+            # Fall through to normal pipeline.
+
         # ── Scope N/A short-circuit ───────────────────────────────────────
         # Physical security (A.7.x) and dev controls (A.8.25-31) are N/A.
         # Don't surface unrelated findings for these scope-excluded queries.

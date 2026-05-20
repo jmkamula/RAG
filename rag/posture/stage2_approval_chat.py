@@ -1,0 +1,542 @@
+"""ArionComply — chat surface for Stage-2 approval of engine verdicts.
+
+Recognises queries like:
+  "approve engine verdict for A.5.1"
+  "approve engine proposal for A.5.1"
+  "reject engine verdict for A.5.1 because we accept the policy-only signal"
+  "show pending engine proposals"
+  "what engine verdicts need review?"
+
+Implements the second HITL gate from [[hitl-two-stage-approval-design]]:
+the fulfilment engine writes verdicts to posture_controls.engine_proposed_*
+(commit 4); this surface promotes a proposed verdict to live finding once
+the user approves. Approval flips posture_controls.finding to
+engine_proposed_finding, sets confirmation_status='engine_confirmed', and
+logs the transition with change_kind='engine'.
+
+Per [[human_in_the_loop_positioning]]: the platform proposes, the client
+decides. Rejection preserves the audit trail (status='rejected'); the live
+finding is not touched.
+
+Distinct from [[stage1_review_chat]]: Stage-1 batch-approves extraction
+findings (document_findings.review_status); Stage-2 approves engine
+verdicts (posture_controls.engine_proposal_status). They operate on
+different rows and different vocabularies — the object words
+("engine verdict|proposal" vs "findings|extractions") disambiguate.
+"""
+from __future__ import annotations
+
+import logging
+import re
+import uuid
+from dataclasses import dataclass
+from typing import Optional
+
+logger = logging.getLogger(__name__)
+
+
+# ── Slot grammar ──────────────────────────────────────────────────────────────
+
+_APPROVE_RE = re.compile(
+    r"\b(?:approve|accept|confirm)\b",
+    re.IGNORECASE,
+)
+_REJECT_RE = re.compile(
+    r"\b(?:reject|deny)\b",
+    re.IGNORECASE,
+)
+# List/queue verbs. The Stage-2 object words ("engine verdict|proposal")
+# must appear in the list query as well so we don't collide with Stage-1's
+# "what findings need review?" surface.
+_LIST_RE = re.compile(
+    r"\b(?:"
+    r"pending\s+engine\s+(?:verdicts?|proposals?)|"
+    r"engine\s+(?:verdicts?|proposals?)\s+(?:need|needing|awaiting)\s+(?:review|approval)|"
+    r"engine\s+review\s+(?:queue|verdicts?|proposals?)|"
+    r"what\s+engine\s+(?:verdicts?|proposals?)\s+(?:need|needs|require)"
+    r")\b",
+    re.IGNORECASE,
+)
+# Object word: "engine verdict" / "engine proposal" — required for
+# approve/reject so we don't collide with Stage-1's "findings" / "extractions"
+# vocabulary, and so we don't fire on "approve the policy" / "accept A.5.1
+# as Comply".
+_OBJECT_RE = re.compile(
+    r"\bengine\s+(?:verdicts?|proposals?)\b",
+    re.IGNORECASE,
+)
+# Control reference — same shape as [[stage1_review_chat]] and
+# [[acknowledge_chat]].
+_CONTROL_RE = re.compile(
+    r"\b("
+    r"A\.\d+(?:\.\d+)*"
+    r"|Art\.\d+(?:\.\d+[a-z]?)*"
+    r"|\d\.\d+(?:\.\d+)?"
+    r")\b",
+)
+_RATIONALE_RE = re.compile(
+    r"(?:\bbecause\b|\bsince\b|\breason:?\b|—|-)\s*(?P<reason>.+?)\s*\.?\s*$",
+    re.IGNORECASE,
+)
+
+
+@dataclass
+class Stage2Intent:
+    action:      str                # 'approve' | 'reject' | 'list_one' | 'list_queue'
+    control_ref: Optional[str]
+    rationale:   str
+    raw_query:   str
+
+
+def parse_stage2_intent(query: str) -> Optional[Stage2Intent]:
+    """Returns a Stage2Intent if the query is recognisably a Stage-2 engine
+    verdict approval / rejection / review request, else None. Conservative
+    grammar: approve/reject require both a verb AND the 'engine verdict' /
+    'engine proposal' object words AND a control ref."""
+    if not query:
+        return None
+
+    is_approve = bool(_APPROVE_RE.search(query))
+    is_reject  = bool(_REJECT_RE.search(query))
+    is_list    = bool(_LIST_RE.search(query))
+
+    if not (is_approve or is_reject or is_list):
+        return None
+
+    ctrl_m = _CONTROL_RE.search(query)
+    ctrl   = ctrl_m.group(1) if ctrl_m else None
+
+    if is_approve or is_reject:
+        if not _OBJECT_RE.search(query):
+            return None
+        if not ctrl:
+            return None
+        rationale = ""
+        if is_reject:
+            r_m = _RATIONALE_RE.search(query)
+            if r_m:
+                rationale = (r_m.group("reason") or "").strip().rstrip(".")
+        return Stage2Intent(
+            action      = "approve" if is_approve else "reject",
+            control_ref = ctrl,
+            rationale   = rationale,
+            raw_query   = query,
+        )
+
+    return Stage2Intent(
+        action      = "list_one" if ctrl else "list_queue",
+        control_ref = ctrl,
+        rationale   = "",
+        raw_query   = query,
+    )
+
+
+# ── Read paths ────────────────────────────────────────────────────────────────
+
+def list_pending_proposals(pg_conn, tenant_id: str) -> list[dict]:
+    """Return all rows with engine_proposal_status='proposed', sorted by
+    standard_id, control_ref. Each row carries the proposed finding, the
+    live finding it would overwrite, and the snapshotted reason."""
+    with pg_conn.cursor() as cur:
+        cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+        cur.execute(
+            """
+            SELECT standard_id, control_ref, finding,
+                   engine_proposed_finding, engine_proposed_at::text,
+                   engine_proposal_reason
+              FROM posture_controls
+             WHERE tenant_id              = %s
+               AND engine_proposal_status = 'proposed'
+               AND is_active              = TRUE
+             ORDER BY standard_id, control_ref
+            """,
+            (tenant_id,),
+        )
+        return [
+            {
+                "standard_id":      r[0],
+                "control_ref":      r[1],
+                "live_finding":     r[2],
+                "proposed_finding": r[3],
+                "proposed_at":      r[4],
+                "reason":           r[5] or "",
+            }
+            for r in cur.fetchall()
+        ]
+
+
+def get_proposal_for_control(
+    pg_conn, tenant_id: str, control_ref: str,
+) -> Optional[dict]:
+    """Read the engine proposal state for one control. Returns None if no
+    posture_controls row exists for the (tenant, control_ref)."""
+    with pg_conn.cursor() as cur:
+        cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+        cur.execute(
+            """
+            SELECT id::text, standard_id, finding,
+                   engine_proposed_finding, engine_proposal_status,
+                   engine_proposed_at::text, engine_proposal_reason
+              FROM posture_controls
+             WHERE tenant_id   = %s
+               AND control_ref = %s
+               AND is_active   = TRUE
+             LIMIT 1
+            """,
+            (tenant_id, control_ref),
+        )
+        row = cur.fetchone()
+        if row is None:
+            return None
+        return {
+            "posture_id":       row[0],
+            "standard_id":      row[1],
+            "live_finding":     row[2],
+            "proposed_finding": row[3],
+            "status":           row[4],
+            "proposed_at":      row[5],
+            "reason":           row[6] or "",
+        }
+
+
+# ── Write paths ───────────────────────────────────────────────────────────────
+
+def approve_engine_proposal(
+    pg_conn,
+    tenant_id:    str,
+    control_ref:  str,
+    reviewed_by:  str = "chat_user",
+) -> dict:
+    """Promote the engine proposal to live finding for one control.
+
+    Effects (single transaction):
+      - posture_controls.finding              ← engine_proposed_finding
+      - posture_controls.engine_proposal_status='approved'
+      - posture_controls.engine_approved_by / engine_approved_at
+      - posture_controls.confirmation_status  ='engine_confirmed'
+      - posture_status_log row with change_kind='engine'
+
+    Returns:
+      {'ok': True,  'control_ref': X, 'standard_id': S,
+       'prior_finding': F0, 'new_finding': F1, 'reason': R}
+      {'ok': False, 'reason': 'no_proposal' | 'already_approved' |
+                             'no_posture_row' | 'db_error', ...}
+
+    Idempotency: re-running on a row whose status is already 'approved'
+    returns reason='already_approved' rather than re-writing. A subsequent
+    engine sweep that produces an UNCHANGED verdict is also a no-op (see
+    posture_loader._persist_engine_proposals). A CHANGED verdict resets the
+    proposal back to 'proposed', and this function must be called again to
+    re-approve.
+    """
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+
+            cur.execute(
+                """
+                SELECT id, standard_id, finding,
+                       engine_proposed_finding, engine_proposal_status,
+                       engine_proposal_reason
+                  FROM posture_controls
+                 WHERE tenant_id   = %s
+                   AND control_ref = %s
+                   AND is_active   = TRUE
+                 LIMIT 1
+                """,
+                (tenant_id, control_ref),
+            )
+            row = cur.fetchone()
+            if row is None:
+                return {"ok": False, "reason": "no_posture_row"}
+            (posture_id, standard_id, live_finding,
+             proposed_finding, status, reason_snap) = row
+
+            if status == "approved":
+                return {
+                    "ok": False, "reason": "already_approved",
+                    "control_ref": control_ref,
+                    "standard_id": standard_id,
+                    "live_finding": live_finding,
+                }
+            if not proposed_finding or status != "proposed":
+                return {
+                    "ok": False, "reason": "no_proposal",
+                    "control_ref": control_ref,
+                    "standard_id": standard_id,
+                }
+
+            cur.execute(
+                """
+                UPDATE posture_controls
+                   SET finding                = %s,
+                       engine_proposal_status = 'approved',
+                       engine_approved_by     = %s::uuid,
+                       engine_approved_at     = NOW(),
+                       confirmation_status    = 'engine_confirmed',
+                       source                 = 'engine'
+                 WHERE id = %s
+                """,
+                (proposed_finding, _uuid_or_null(reviewed_by), posture_id),
+            )
+
+            cur.execute(
+                """
+                INSERT INTO posture_status_log (
+                    tenant_id, posture_id, control_ref, standard_id,
+                    status_before, status_after,
+                    source, evidence_citation,
+                    change_kind
+                ) VALUES (
+                    %s::uuid, %s::uuid, %s, %s,
+                    %s, %s,
+                    'engine', %s,
+                    'engine'
+                )
+                """,
+                (
+                    tenant_id, posture_id, control_ref, standard_id,
+                    live_finding, proposed_finding,
+                    f"Stage-2 approval: {reason_snap or 'engine verdict'}",
+                ),
+            )
+
+        pg_conn.commit()
+        return {
+            "ok":            True,
+            "control_ref":   control_ref,
+            "standard_id":   standard_id,
+            "prior_finding": live_finding,
+            "new_finding":   proposed_finding,
+            "reason":        reason_snap or "",
+        }
+    except Exception as e:
+        logger.warning("stage2_approval_chat.approve: db error: %s", e)
+        try:
+            pg_conn.rollback()
+        except Exception:
+            pass
+        return {"ok": False, "reason": "db_error", "error": str(e)}
+
+
+def reject_engine_proposal(
+    pg_conn,
+    tenant_id:    str,
+    control_ref:  str,
+    rationale:    str,
+    reviewed_by:  str = "chat_user",
+) -> dict:
+    """Reject the engine proposal. Sets engine_proposal_status='rejected'
+    and stamps engine_approved_by / engine_approved_at (the field doubles as
+    "decided by / at" — fkey + index already exist). The live finding is
+    NOT touched: rejection preserves the audit trail without applying the
+    engine verdict. The rationale text appends to engine_proposal_reason so
+    the snapshot stays useful for review.
+
+    Returns:
+      {'ok': True,  'control_ref': X, 'proposed_finding': F}
+      {'ok': False, 'reason': 'no_proposal' | 'no_rationale' | 'db_error'}
+    """
+    if not rationale or not rationale.strip():
+        return {"ok": False, "reason": "no_rationale"}
+
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+
+            cur.execute(
+                """
+                SELECT id, standard_id, engine_proposed_finding,
+                       engine_proposal_status, engine_proposal_reason
+                  FROM posture_controls
+                 WHERE tenant_id   = %s
+                   AND control_ref = %s
+                   AND is_active   = TRUE
+                 LIMIT 1
+                """,
+                (tenant_id, control_ref),
+            )
+            row = cur.fetchone()
+            if row is None:
+                return {"ok": False, "reason": "no_proposal"}
+            posture_id, standard_id, proposed_finding, status, prior_reason = row
+            if not proposed_finding or status != "proposed":
+                return {
+                    "ok": False, "reason": "no_proposal",
+                    "control_ref": control_ref,
+                    "standard_id": standard_id,
+                }
+
+            new_reason = (
+                f"{prior_reason} | rejected: {rationale[:300]}"
+                if prior_reason
+                else f"rejected: {rationale[:300]}"
+            )
+            cur.execute(
+                """
+                UPDATE posture_controls
+                   SET engine_proposal_status = 'rejected',
+                       engine_approved_by     = %s::uuid,
+                       engine_approved_at     = NOW(),
+                       engine_proposal_reason = %s
+                 WHERE id = %s
+                """,
+                (_uuid_or_null(reviewed_by), new_reason, posture_id),
+            )
+
+        pg_conn.commit()
+        return {
+            "ok":               True,
+            "control_ref":      control_ref,
+            "standard_id":      standard_id,
+            "proposed_finding": proposed_finding,
+        }
+    except Exception as e:
+        logger.warning("stage2_approval_chat.reject: db error: %s", e)
+        try:
+            pg_conn.rollback()
+        except Exception:
+            pass
+        return {"ok": False, "reason": "db_error", "error": str(e)}
+
+
+def _uuid_or_null(s: str) -> Optional[str]:
+    """Same chat_user placeholder helper as [[stage1_review_chat]]."""
+    if not s:
+        return None
+    try:
+        return str(uuid.UUID(s))
+    except (ValueError, AttributeError):
+        return None
+
+
+# ── Answer formatting ─────────────────────────────────────────────────────────
+
+def render_stage2_answer(
+    result: dict,
+    intent: Stage2Intent,
+    listing: Optional[list[dict]] = None,
+    proposal: Optional[dict] = None,
+) -> str:
+    """Deterministic Stage-2 answer. Mirrors the [[stage1_review_chat]]
+    pattern: no LLM polish."""
+    if intent.action == "list_queue":
+        if not listing:
+            return (
+                "No engine verdicts are pending review. The engine writes a "
+                "proposal whenever the multi-leaf fulfilment evaluation "
+                "differs from the live posture finding; this list is empty "
+                "either because every proposal has been approved/rejected "
+                "or because no curated multi-leaf spec disagrees with the "
+                "current finding."
+            )
+        lines = [f"Engine verdicts pending review ({len(listing)}):"]
+        for r in listing:
+            lines.append(
+                f"  • {r['control_ref']} ({r['standard_id']}): "
+                f"engine proposes {r['proposed_finding']!r}, "
+                f"live is {r['live_finding']!r} — "
+                f"approve with \"approve engine verdict for {r['control_ref']}\""
+            )
+        if listing:
+            sample = listing[0]
+            reason = sample.get("reason") or ""
+            if reason:
+                lines.append("")
+                lines.append(
+                    f"Reason for {sample['control_ref']}: {reason[:160]}"
+                )
+        return "\n".join(lines)
+
+    if intent.action == "list_one":
+        ctrl = intent.control_ref
+        if not proposal:
+            return (
+                f"No engine proposal on file for {ctrl}. Either the control "
+                f"has no curated multi-leaf FulfilmentSpec, or the engine "
+                f"hasn't run yet for this tenant."
+            )
+        status = proposal["status"]
+        if status == "none" or not proposal.get("proposed_finding"):
+            return (
+                f"{ctrl}: engine has no current proposal (status: "
+                f"{status!r}). Posture stays at "
+                f"{proposal['live_finding']!r}."
+            )
+        if status == "approved":
+            return (
+                f"{ctrl}: engine verdict {proposal['proposed_finding']!r} "
+                f"already approved. Live finding: "
+                f"{proposal['live_finding']!r}."
+            )
+        if status == "rejected":
+            return (
+                f"{ctrl}: engine verdict {proposal['proposed_finding']!r} "
+                f"was rejected. Live finding stays "
+                f"{proposal['live_finding']!r}.\n"
+                f"Reason: {proposal['reason']}"
+            )
+        return (
+            f"{ctrl}: engine proposes {proposal['proposed_finding']!r}, "
+            f"live finding is {proposal['live_finding']!r}.\n"
+            f"Reason: {proposal['reason']}\n"
+            f"Approve with \"approve engine verdict for {ctrl}\" or "
+            f"\"reject engine verdict for {ctrl} because <reason>\"."
+        )
+
+    ctrl = intent.control_ref
+    if intent.action == "approve":
+        if result.get("ok"):
+            return (
+                f"Approved engine verdict for {ctrl}: "
+                f"{result['prior_finding']!r} → {result['new_finding']!r}. "
+                f"{ctrl} is now engine_confirmed."
+            )
+        reason = result.get("reason", "unknown")
+        if reason == "already_approved":
+            return (
+                f"Engine verdict for {ctrl} is already approved. Live "
+                f"finding stays {result.get('live_finding', '?')!r}."
+            )
+        if reason == "no_proposal":
+            return (
+                f"No engine proposal pending for {ctrl}. Either the engine "
+                f"hasn't produced a verdict yet, or the proposal was "
+                f"already approved or rejected."
+            )
+        if reason == "no_posture_row":
+            return (
+                f"No posture row for {ctrl}. Approve the extraction findings "
+                f"first to create one."
+            )
+        if reason == "db_error":
+            return (
+                f"Couldn't approve engine verdict for {ctrl} due to a "
+                f"database error. Please try again."
+            )
+        return f"Couldn't approve engine verdict for {ctrl} (reason: {reason})."
+
+    if intent.action == "reject":
+        if result.get("ok"):
+            return (
+                f"Rejected engine verdict for {ctrl} (proposed "
+                f"{result['proposed_finding']!r}). The live finding is "
+                f"unchanged; the rejection reason is recorded."
+            )
+        reason = result.get("reason", "unknown")
+        if reason == "no_rationale":
+            return (
+                f"To reject the engine verdict for {ctrl}, please include "
+                f"a reason: \"reject engine verdict for {ctrl} because "
+                f"<reason>\"."
+            )
+        if reason == "no_proposal":
+            return f"No engine proposal pending for {ctrl}."
+        if reason == "db_error":
+            return (
+                f"Couldn't reject engine verdict for {ctrl} due to a "
+                f"database error. Please try again."
+            )
+        return f"Couldn't reject engine verdict for {ctrl} (reason: {reason})."
+
+    return f"Stage-2 approval surface — unrecognised action: {intent.action}"

@@ -640,6 +640,21 @@ CLEAR_INTENT_PHRASES = [
      "posture_check", []),
     (re.compile(r'\breview\s+(?:queue|findings?)\b', re.IGNORECASE),
      "posture_check", []),
+
+    # Stage-2 engine-verdict approval queue (HITL two-stage rollout) —
+    # routes to posture_check so retrieve_node's stage2_approval_chat
+    # short-circuit can fire. Object words ("engine verdict|proposal")
+    # keep these patterns disjoint from the Stage-1 patterns above.
+    (re.compile(r'\b(?:approve|reject|accept|confirm|deny)\s+engine\s+(?:verdicts?|proposals?)\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bwhat\s+engine\s+(?:verdicts?|proposals?)\s+(?:need|needs|require)\s+(?:review|approval)\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bengine\s+(?:verdicts?|proposals?)\s+(?:need|needing|awaiting)\s+(?:review|approval)\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\b(?:show|list)\s+(?:me\s+)?pending\s+engine\s+(?:verdicts?|proposals?)\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bengine\s+review\s+(?:queue|verdicts?|proposals?)\b', re.IGNORECASE),
+     "posture_check", []),
 ]
 
 

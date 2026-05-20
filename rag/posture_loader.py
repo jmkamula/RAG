@@ -80,7 +80,8 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
                     soa_notes,
                     remediation_status,
                     linked_policies,
-                    last_updated
+                    last_updated,
+                    engine_proposal_status
                 FROM posture_controls
                 WHERE tenant_id = %s
                   AND finding != 'Not assessed'
@@ -191,6 +192,15 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
                 # row for it. Don't manufacture one — posture_controls is
                 # still the authoritative inventory; this would be visible
                 # in a later iteration when we have a richer view.
+                continue
+
+            # HITL Stage-2 gate (commit 5): only apply the in-memory overlay
+            # when the engine proposal for this row has been user-approved.
+            # 'proposed' / 'rejected' / 'none' keep the live posture_controls
+            # finding untouched. The persisted proposal (commit 4) still
+            # records the engine's view so the Stage-2 chat surface can list
+            # it; we just don't preempt the user's decision in the answer.
+            if row.get("engine_proposal_status") != "approved":
                 continue
 
             # Suppress acknowledged leaves from the headline. Verdict stays
