@@ -400,14 +400,21 @@ def _log_status_change(
     confidence:        Optional[str],
     evidence:          Optional[str],
     source_upload_id:  Optional[str],
+    change_kind:       str = "extraction",
 ) -> None:
     """
-    Append one row to posture_status_log (schema_v21).
+    Append one row to posture_status_log (schema_v21 + v24).
 
     Called inside the per-control savepoint, so a logging failure rolls back
     the parent posture_controls write too — keeps the audit trail and the
     state in sync. Caller is responsible for short-circuiting when
     status_before == status_after (we don't log non-transitions).
+
+    change_kind tags the audit row per schema_v24:
+      extraction      — document-intake proposed/promoted finding
+      engine          — fulfilment engine proposed/promoted finding
+      assessor        — manual override
+      acknowledgement — gap acknowledgement
     """
     cur.execute(
         """
@@ -415,12 +422,14 @@ def _log_status_change(
             tenant_id, posture_id, control_ref, standard_id,
             status_before, status_after,
             source, source_upload_id,
-            evidence_citation, confidence
+            evidence_citation, confidence,
+            change_kind
         ) VALUES (
             %s::uuid, %s::uuid, %s, %s,
             %s, %s,
             'document', %s::uuid,
-            %s, %s
+            %s, %s,
+            %s
         )
         """,
         (
@@ -429,6 +438,7 @@ def _log_status_change(
             source_upload_id,
             (evidence or "")[:500] or None,
             confidence,
+            change_kind,
         ),
     )
 
@@ -440,8 +450,21 @@ def _write_posture_controls(
     upload_id: Optional[str] = None,
 ) -> tuple[int, int, int]:
     """
-    Upsert posture_controls from aggregated findings. Append a
-    posture_status_log row on every create or status change (schema_v21).
+    Stage extraction proposals into posture_controls.system_finding. The live
+    posture_controls.finding is *not* touched — Stage-1 batch approval
+    ([[hitl-two-stage-approval-design]]) promotes the proposal to the live
+    finding once the user approves the extraction's per-finding list.
+
+    Append a posture_status_log row on every create or system_finding change
+    (schema_v21 + v24, change_kind='extraction').
+
+    Source guard: extracted findings never overwrite assessor/workbook/audit
+    rows, nor any row in a *_confirmed state (confirmed, document_confirmed,
+    engine_confirmed) — the user has spoken, so a fresh extraction does not
+    silently retract that decision. Re-proposal on a confirmed row arrives
+    through the digest-driven invalidation path (separate workstream), not
+    through the writer.
+
     Returns (posture_updated, posture_created, posture_skipped).
     """
     updated = 0
@@ -449,6 +472,12 @@ def _write_posture_controls(
     skipped = 0
 
     from rag.framework_refs import normalize_control_ref
+
+    # All *_confirmed states must be preserved by an extraction sweep.
+    # Listed explicitly so a new confirmation state can't be added without
+    # a deliberate review of this guard.
+    _PROTECTED_STATES = ("confirmed", "document_confirmed", "engine_confirmed")
+    _PROTECTED_SOURCES = ("workbook", "assessor", "audit")
 
     with conn.cursor() as cur:
         for (raw_ref, standard_id), group in groups.items():
@@ -467,10 +496,9 @@ def _write_posture_controls(
             sp = f"sp_pc_{control_ref.replace('.', '').replace(' ', '')}"
             cur.execute(f"SAVEPOINT {sp}")
             try:
-                # Check for existing posture row
                 cur.execute(
                     """
-                    SELECT id, finding, source, confirmation_status
+                    SELECT id, finding, source, confirmation_status, system_finding
                     FROM posture_controls
                     WHERE tenant_id   = %s
                       AND control_ref = %s
@@ -483,67 +511,71 @@ def _write_posture_controls(
                 existing = cur.fetchone()
 
                 if existing:
-                    ex_id, ex_finding, ex_source, ex_status = existing
+                    ex_id, ex_finding, ex_source, ex_status, ex_system = existing
 
-                    # Never overwrite confirmed findings
-                    if ex_status == "confirmed" or ex_source in ("workbook", "assessor", "audit"):
-                        logger.info(f"  ⊘ {control_ref} protected — source={ex_source} status={ex_status} ({ex_finding}) — skipped")
+                    if ex_status in _PROTECTED_STATES or ex_source in _PROTECTED_SOURCES:
+                        logger.info(
+                            f"  ⊘ {control_ref} protected — "
+                            f"source={ex_source} status={ex_status} "
+                            f"({ex_finding}) — skipped"
+                        )
                         cur.execute(f"RELEASE SAVEPOINT {sp}")
                         skipped += 1
                         continue
 
-                    # Preserve workbook assessment alongside document finding
-                    if ex_source == "workbook" and ex_finding != finding:
-                        gap_desc = (
-                            f"[Document: {finding}] {gap_desc}\n"
-                            f"[Workbook: {ex_finding}]"
-                        )
-
+                    # Stage proposal only — live `finding` stays untouched.
+                    # `source='document'` is informational on the proposal
+                    # track; the active assessment lineage is set on
+                    # Stage-1 promotion (commit 3).
                     cur.execute(
                         """
                         UPDATE posture_controls
-                        SET finding             = %s,
-                            gap_description     = %s,
+                        SET gap_description     = %s,
                             confidence          = %s,
                             source              = 'document',
                             system_finding      = %s,
-                            system_proposed_at  = NOW(),
-                            confirmation_status = %s
+                            system_proposed_at  = NOW()
                         WHERE id = %s
                         """,
-                        (finding, gap_desc[:1000], confidence,
-                         finding, _PC_STATUS_DRAFT, ex_id),
+                        (gap_desc[:1000], confidence, finding, ex_id),
                     )
-                    if ex_finding != finding:
+                    if ex_system != finding:
                         _log_status_change(
                             cur,
                             tenant_id        = tenant_id,
                             posture_id       = ex_id,
                             control_ref      = control_ref,
                             standard_id      = standard_id,
-                            status_before    = ex_finding,
+                            status_before    = ex_system,
                             status_after     = finding,
                             confidence       = confidence,
                             evidence         = gap_desc,
                             source_upload_id = upload_id,
+                            change_kind      = "extraction",
                         )
                     cur.execute(f"RELEASE SAVEPOINT {sp}")
                     updated += 1
-                    logger.info(f"  ↻ posture_controls: {control_ref} → {finding} (was {ex_finding})")
+                    logger.info(
+                        f"  ↻ posture_controls: {control_ref} "
+                        f"system_finding={finding} (live={ex_finding}, awaiting Stage-1)"
+                    )
 
                 else:
+                    # New control: live `finding` stays at the schema default
+                    # 'Not assessed'. The extraction proposal lives in
+                    # system_finding until Stage-1 promotion.
                     posture_id = str(uuid.uuid4())
                     cur.execute(
                         """
                         INSERT INTO posture_controls (
                             id, tenant_id, control_ref, standard_id,
-                            finding, gap_description, confidence,
+                            gap_description, confidence,
                             source, confirmation_status,
                             system_finding, system_proposed_at,
                             is_active, retention_class
                         ) VALUES (
                             %s, %s, %s, %s,
-                            %s, %s, %s,
+                            %s, %s,
                             'document', %s,
                             %s, NOW(),
                             TRUE, %s
@@ -551,7 +583,7 @@ def _write_posture_controls(
                         """,
                         (
                             posture_id, tenant_id, control_ref, standard_id,
-                            finding, gap_desc[:1000], confidence,
+                            gap_desc[:1000], confidence,
                             _PC_STATUS_DRAFT,
                             finding, _RETENTION_CLASS,
                         ),
@@ -567,10 +599,14 @@ def _write_posture_controls(
                         confidence       = confidence,
                         evidence         = gap_desc,
                         source_upload_id = upload_id,
+                        change_kind      = "extraction",
                     )
                     cur.execute(f"RELEASE SAVEPOINT {sp}")
                     created += 1
-                    logger.info(f"  + posture_controls: {control_ref} → {finding}")
+                    logger.info(
+                        f"  + posture_controls: {control_ref} "
+                        f"system_finding={finding} (live=Not assessed, awaiting Stage-1)"
+                    )
 
             except Exception as e:
                 cur.execute(f"ROLLBACK TO SAVEPOINT {sp}")

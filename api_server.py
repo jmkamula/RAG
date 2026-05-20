@@ -607,6 +607,23 @@ async def chat_stream(
 # DOCUMENTS ROUTER
 # =============================================================================
 
+class DocumentFindingSummary(BaseModel):
+    """
+    Per-finding row surfaced on the intake-completion response so the user
+    can see what extraction proposed before approving via the Stage-1 review
+    queue ([[hitl-two-stage-approval-design]]). Counts alone aren't enough
+    for HITL: the user needs control_ref + extracted status + excerpt to
+    judge whether to approve or reject each finding.
+    """
+    finding_id:    str
+    control_ref:   str
+    standard_id:   str
+    status:        str           # present | missing | partial
+    confidence:    str           # high | medium | low
+    excerpt:       Optional[str] = None
+    review_status: str           # pending | approved | rejected | expired
+
+
 class DocumentStatus(BaseModel):
     upload_id:       str
     filename:        str
@@ -633,6 +650,10 @@ class DocumentStatus(BaseModel):
     # content increment within the same series_id.
     series_id:  Optional[str] = None
     version_no: Optional[int] = None
+    # schema_v24 — per-finding enumeration so the chat surface can present
+    # the extraction's proposals for Stage-1 batch approval. Empty list when
+    # the upload is still processing or produced no findings.
+    findings: list[DocumentFindingSummary] = []
 
 
 def _run_pipeline(
@@ -924,6 +945,45 @@ async def document_status(
                 series_id  = u_series_id
                 version_no = u_version_no
 
+            # Per-finding enumeration (schema_v24) — let the UI render the
+            # Stage-1 batch-approve queue for this upload. We scope to
+            # findings extracted after the upload started (extracted_at >=
+            # uploaded_at) because document_findings.document_id points at
+            # client_documents.id, not the upload_id — siblings of the same
+            # filename would otherwise leak in.
+            findings_list: list[DocumentFindingSummary] = []
+            if fname and started_at:
+                cur.execute("""
+                    SELECT df.id::text,
+                           df.control_ref,
+                           df.standard_id,
+                           df.status,
+                           df.confidence,
+                           df.excerpt,
+                           df.review_status
+                      FROM document_findings df
+                      JOIN client_documents  cd ON cd.id = df.document_id
+                     WHERE df.tenant_id   = %s::uuid
+                       AND cd.tenant_id   = %s::uuid
+                       AND lower(cd.filename) = lower(%s)
+                       AND df.is_active   = TRUE
+                       AND df.extracted_at >= %s::timestamptz
+                     ORDER BY df.control_ref, df.extracted_at
+                """, (
+                    key_info.tenant_id, key_info.tenant_id,
+                    fname, started_at,
+                ))
+                for r in cur.fetchall():
+                    findings_list.append(DocumentFindingSummary(
+                        finding_id    = r[0],
+                        control_ref   = r[1],
+                        standard_id   = r[2],
+                        status        = r[3],
+                        confidence    = r[4],
+                        excerpt       = r[5],
+                        review_status = r[6],
+                    ))
+
         return DocumentStatus(
             upload_id        = upload_id,
             filename         = fname or "",
@@ -944,6 +1004,7 @@ async def document_status(
             dup_of_upload_id = dup_of,
             series_id        = series_id,
             version_no       = version_no,
+            findings         = findings_list,
         )
     finally:
         pool.putconn(conn)
