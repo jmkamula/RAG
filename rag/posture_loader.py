@@ -386,7 +386,14 @@ def _build_engine_neo4j_driver():
         pwd  = os.getenv("NEO4J_PASSWORD")
         if not (uri and user and pwd):
             return None
-        return GraphDatabase.driver(uri, auth=(user, pwd))
+        # Phase-1 specs/edges carry NULL applies_when (see [[applies-when-phase1-regression-tests]]);
+        # silence the UNRECOGNIZED-property notification spec_builder.py would otherwise emit
+        # on every engine sweep. Remove once any FulfilmentSpec actually populates the key.
+        return GraphDatabase.driver(
+            uri,
+            auth=(user, pwd),
+            notifications_disabled_classifications=["UNRECOGNIZED"],
+        )
     except Exception as e:
         logger.warning("Neo4j driver for posture engine unavailable: %s", e)
         return None
