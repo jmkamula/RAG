@@ -165,16 +165,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .upload-review.collapsed .review-header i{transform:rotate(-90deg)}
 .upload-review.collapsed .review-list,.upload-review.collapsed .review-footer{display:none}
 .review-list{max-height:280px;overflow-y:auto;border-top:1px solid #e5e4df;background:#fff}
-.review-row{display:grid;grid-template-columns:64px 64px 78px 46px 1fr;gap:8px;align-items:center;padding:5px 10px;border-bottom:1px solid #f0efea;font-size:10.5px}
+.review-row{display:grid;grid-template-columns:18px 90px 64px 70px 46px 1fr auto;gap:7px;align-items:center;padding:5px 10px;border-bottom:1px solid #f0efea;font-size:10.5px}
 .review-row:last-child{border-bottom:none}
-.review-ctrl{font-family:'SF Mono',Menlo,Consolas,monospace;font-weight:600;color:#1a1a18;white-space:nowrap}
+.review-row.acting{opacity:.45;pointer-events:none}
+.review-check{margin:0;cursor:pointer}
+.review-ctrl{font-family:'SF Mono',Menlo,Consolas,monospace;font-weight:600;color:#1a1a18;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
+.review-xfw-badge{font-family:inherit;font-weight:600;font-size:8.5px;letter-spacing:.4px;padding:1px 4px;border-radius:3px;background:#EEEDFE;color:#534AB7;cursor:help}
 .review-std{color:#888780;font-size:10px;white-space:nowrap}
 .review-pill{display:inline-flex;align-items:center;gap:5px;color:#5F5E5A}
 .review-pill::before{content:"";width:6px;height:6px;border-radius:50%;display:inline-block;background:#B4B2A9}
 .review-pill.present::before{background:#1D9E75}
 .review-pill.partial::before{background:#EF9F27}
+.review-pill.missing::before{background:#A32D2D}
 .review-conf{color:#888780}
 .review-excerpt{color:#5F5E5A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.review-actions{display:flex;gap:4px}
+.review-btn{font-size:10px;padding:2px 7px;border:1px solid #D3D1C7;border-radius:4px;background:#fff;cursor:pointer;color:#5F5E5A;font-weight:500}
+.review-btn:hover{background:#f8f7f4}
+.review-btn.approve:hover{border-color:#1D9E75;color:#1D9E75}
+.review-btn.reject:hover{border-color:#A32D2D;color:#A32D2D}
+.review-bulkbar{position:sticky;top:0;background:#f8f7f4;border-bottom:1px solid #e5e4df;padding:6px 10px;display:flex;align-items:center;gap:8px;font-size:10.5px;color:#5F5E5A;z-index:1}
+.review-bulkbar .review-check{margin-right:2px}
+.review-bulkbar .selcount{color:#888780;margin-right:auto}
 .review-footer{padding:6px 10px;border-top:1px solid #e5e4df;font-size:10px;color:#888780;background:#fff}
 
 /* ── Detail panel ── */
@@ -1063,26 +1075,127 @@ function addStage1Queue(card, id, d) {
     const stat = (f.status || '').toLowerCase();
     const conf = (f.confidence || '').toLowerCase();
     const exc  = escHtml(f.excerpt);
-    return `<div class="review-row">
-      <span class="review-ctrl">${escHtml(f.control_ref)}</span>
+    const fid  = escHtml(f.finding_id);
+    const xfw  = f.inference_source && f.inference_source !== 'extracted';
+    const xfwBadge = xfw
+      ? `<span class="review-xfw-badge" title="Inferred from ${escHtml(f.inferred_from_control_ref||'?')} (${escHtml((f.inferred_from_standard_id||'').split(':')[0]||'?')})">xfw</span>`
+      : '';
+    return `<div class="review-row" data-fid="${fid}">
+      <input type="checkbox" class="review-check" data-fid="${fid}" onchange="updateBulkCount(this)">
+      <span class="review-ctrl">${escHtml(f.control_ref)}${xfwBadge}</span>
       <span class="review-std">${escHtml(std)}</span>
       <span class="review-pill ${escHtml(stat)}">${escHtml(stat)}</span>
       <span class="review-conf">${escHtml(conf)}</span>
       <span class="review-excerpt" title="${exc}">${exc}</span>
+      <span class="review-actions">
+        <button class="review-btn approve" onclick="rowApprove(this,'${fid}')">Approve</button>
+        <button class="review-btn reject"  onclick="rowReject(this,'${fid}')">Reject</button>
+      </span>
     </div>`;
   }).join('');
 
-  const sample = pending[0].control_ref || 'A.5.1';
   const div = document.createElement('div');
   div.className = 'upload-review';
   div.innerHTML = `
     <div class="review-header" onclick="this.parentElement.classList.toggle('collapsed')">
       <i class="ti ti-chevron-down" aria-hidden="true"></i>
-      Stage-1 review queue (${pending.length} pending)
+      Stage-1 review queue (<span class="review-count">${pending.length}</span> pending)
     </div>
-    <div class="review-list">${rows}</div>
-    <div class="review-footer">Approve via chat — e.g. "approve findings for ${escHtml(sample)}"</div>`;
+    <div class="review-list">
+      <div class="review-bulkbar">
+        <input type="checkbox" class="review-check review-selall" onchange="toggleSelectAll(this)">
+        <span class="selcount">0 selected</span>
+        <button class="review-btn approve" onclick="bulkApprove(this)">Approve selected</button>
+        <button class="review-btn reject"  onclick="bulkReject(this)">Reject selected</button>
+      </div>
+      ${rows}
+    </div>`;
   card.appendChild(div);
+}
+
+function _reviewListOf(el) { return el.closest('.upload-review'); }
+
+function updateBulkCount(checkbox) {
+  const panel = _reviewListOf(checkbox);
+  if (!panel) return;
+  const n = panel.querySelectorAll('.review-row .review-check:checked').length;
+  const counter = panel.querySelector('.selcount');
+  if (counter) counter.textContent = `${n} selected`;
+  const total = panel.querySelectorAll('.review-row .review-check').length;
+  const selAll = panel.querySelector('.review-selall');
+  if (selAll) selAll.checked = n > 0 && n === total;
+}
+
+function toggleSelectAll(checkbox) {
+  const panel = _reviewListOf(checkbox);
+  if (!panel) return;
+  panel.querySelectorAll('.review-row .review-check').forEach(c => { c.checked = checkbox.checked; });
+  updateBulkCount(checkbox);
+}
+
+async function rowApprove(btn, fid) {
+  const row = btn.closest('.review-row');
+  await _doFindingAction([fid], 'approve', '', [row]);
+}
+
+async function rowReject(btn, fid) {
+  const rationale = prompt('Reason for rejecting this finding?');
+  if (!rationale || !rationale.trim()) return;
+  const row = btn.closest('.review-row');
+  await _doFindingAction([fid], 'reject', rationale.trim(), [row]);
+}
+
+async function bulkApprove(btn) {
+  const panel = _reviewListOf(btn);
+  const checks = panel.querySelectorAll('.review-row .review-check:checked');
+  if (!checks.length) { toast('Nothing selected.'); return; }
+  const ids = [...checks].map(c => c.dataset.fid);
+  const rows = [...checks].map(c => c.closest('.review-row'));
+  await _doFindingAction(ids, 'approve', '', rows);
+}
+
+async function bulkReject(btn) {
+  const panel = _reviewListOf(btn);
+  const checks = panel.querySelectorAll('.review-row .review-check:checked');
+  if (!checks.length) { toast('Nothing selected.'); return; }
+  const rationale = prompt(`Reason for rejecting ${checks.length} finding(s)?`);
+  if (!rationale || !rationale.trim()) return;
+  const ids  = [...checks].map(c => c.dataset.fid);
+  const rows = [...checks].map(c => c.closest('.review-row'));
+  await _doFindingAction(ids, 'reject', rationale.trim(), rows);
+}
+
+async function _doFindingAction(finding_ids, action, rationale, rows) {
+  rows.forEach(r => r.classList.add('acting'));
+  try {
+    const body = action === 'approve'
+      ? {finding_ids}
+      : {finding_ids, rationale};
+    const r = await api(`/api/v1/findings/${action}`, {
+      method: 'POST',
+      body:   JSON.stringify(body),
+    });
+    const panel = rows[0] && _reviewListOf(rows[0]);
+    rows.forEach(r => r.remove());
+    if (panel) {
+      const remaining = panel.querySelectorAll('.review-row').length;
+      const countEl = panel.querySelector('.review-count');
+      if (countEl) countEl.textContent = remaining;
+      if (!remaining) panel.remove();
+      else updateBulkCount(panel.querySelector('.review-check'));
+    }
+    if (action === 'approve') {
+      const n = r.approved || finding_ids.length;
+      toast(`✓ Approved ${n} finding${n===1?'':'s'}`);
+    } else {
+      const n = r.rejected || finding_ids.length;
+      toast(`✓ Rejected ${n} finding${n===1?'':'s'}`);
+    }
+    loadCounts();
+  } catch(e) {
+    rows.forEach(r => r.classList.remove('acting'));
+    toast(`Failed: ${e.message}`);
+  }
 }
 
 function updateCardStatus(card, status, detail='') {

@@ -417,6 +417,199 @@ def reject_findings_for_control(
         return {"ok": False, "reason": "db_error", "error": str(e)}
 
 
+def approve_findings_by_ids(
+    pg_conn,
+    tenant_id:    str,
+    finding_ids:  list[str],
+    reviewed_by:  str = "chat_user",
+) -> dict:
+    """Per-finding-id variant of [[approve_findings_for_control]]. Promotes
+    only the named findings and recomputes each touched control's headline
+    from ALL currently-approved+active findings (not just this batch) so
+    partial approval doesn't overwrite a prior high-priority promotion.
+
+    Returns:
+      {'ok': True, 'approved': N, 'controls': [{control_ref, standard_id,
+       finding, prior_finding}, ...]}
+      {'ok': False, 'reason': 'no_pending' | 'db_error'}
+    """
+    if not finding_ids:
+        return {"ok": False, "reason": "no_pending"}
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+
+            cur.execute(
+                """
+                UPDATE document_findings
+                   SET review_status = 'approved',
+                       reviewed_by   = %s::uuid,
+                       reviewed_at   = NOW()
+                 WHERE tenant_id     = %s::uuid
+                   AND id            = ANY(%s::uuid[])
+                   AND review_status = 'pending'
+                   AND is_active     = TRUE
+                RETURNING control_ref, standard_id
+                """,
+                (_uuid_or_null(reviewed_by), tenant_id, finding_ids),
+            )
+            touched_rows = cur.fetchall()
+            if not touched_rows:
+                return {"ok": False, "reason": "no_pending"}
+
+            seen: set[tuple[str, str]] = set()
+            control_results: list[dict] = []
+            for control_ref, standard_id in touched_rows:
+                key = (control_ref, standard_id)
+                if key in seen:
+                    continue
+                seen.add(key)
+                control_results.append(_recompute_posture_for_control(
+                    cur, tenant_id, control_ref, standard_id, reviewed_by,
+                ))
+
+        pg_conn.commit()
+        return {
+            "ok":       True,
+            "approved": len(touched_rows),
+            "controls": control_results,
+        }
+    except Exception as e:
+        logger.warning("stage1_review_chat.approve_by_ids: db error: %s", e)
+        try:
+            pg_conn.rollback()
+        except Exception:
+            pass
+        return {"ok": False, "reason": "db_error", "error": str(e)}
+
+
+def _recompute_posture_for_control(
+    cur, tenant_id: str, control_ref: str, standard_id: str, reviewed_by: str,
+) -> dict:
+    """Recompute the posture_controls.finding headline from ALL active+
+    approved document_findings for (control_ref, standard_id). Logs the
+    transition iff the headline actually changes."""
+    cur.execute(
+        """
+        SELECT status
+          FROM document_findings
+         WHERE tenant_id     = %s::uuid
+           AND control_ref   = %s
+           AND standard_id   = %s
+           AND review_status = 'approved'
+           AND is_active     = TRUE
+        """,
+        (tenant_id, control_ref, standard_id),
+    )
+    statuses = [r[0] for r in cur.fetchall()]
+    if not statuses:
+        return {"control_ref": control_ref, "standard_id": standard_id,
+                "finding": None, "prior_finding": None,
+                "no_approved_remaining": True}
+
+    promoted = [_DF_STATUS_TO_FINDING.get(s, "Not assessed") for s in statuses]
+    headline = max(promoted, key=lambda f: _FINDING_PRIORITY.get(f, -1))
+
+    cur.execute(
+        """
+        SELECT id, finding
+          FROM posture_controls
+         WHERE tenant_id   = %s::uuid
+           AND control_ref = %s
+           AND standard_id = %s
+           AND is_active   = TRUE
+         LIMIT 1
+        """,
+        (tenant_id, control_ref, standard_id),
+    )
+    pc = cur.fetchone()
+    if not pc:
+        return {"control_ref": control_ref, "standard_id": standard_id,
+                "finding": headline, "prior_finding": None,
+                "no_posture_row": True}
+    posture_id, prior_finding = pc
+
+    cur.execute(
+        """
+        UPDATE posture_controls
+           SET finding             = %s,
+               confirmation_status = 'document_confirmed',
+               confirmed_by        = %s::uuid,
+               confirmed_at        = NOW(),
+               source              = 'document'
+         WHERE id = %s
+        """,
+        (headline, _uuid_or_null(reviewed_by), posture_id),
+    )
+
+    if prior_finding != headline:
+        cur.execute(
+            """
+            INSERT INTO posture_status_log (
+                tenant_id, posture_id, control_ref, standard_id,
+                status_before, status_after,
+                source, evidence_citation, change_kind
+            ) VALUES (
+                %s::uuid, %s::uuid, %s, %s,
+                %s, %s,
+                'document', %s, 'extraction'
+            )
+            """,
+            (tenant_id, posture_id, control_ref, standard_id,
+             prior_finding, headline,
+             f"Stage-1 per-finding approval (headline recomputed)"),
+        )
+    return {"control_ref": control_ref, "standard_id": standard_id,
+            "finding": headline, "prior_finding": prior_finding}
+
+
+def reject_findings_by_ids(
+    pg_conn,
+    tenant_id:    str,
+    finding_ids:  list[str],
+    rationale:    str,
+    reviewed_by:  str = "chat_user",
+) -> dict:
+    """Per-finding-id variant of [[reject_findings_for_control]]. Marks the
+    named findings rejected + is_active=false. Posture is not touched —
+    rejection is an audit-preserving alternative to silent deletion."""
+    if not rationale or not rationale.strip():
+        return {"ok": False, "reason": "no_rationale"}
+    if not finding_ids:
+        return {"ok": False, "reason": "no_pending"}
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+            cur.execute(
+                """
+                UPDATE document_findings
+                   SET review_status    = 'rejected',
+                       rejection_reason = %s,
+                       reviewed_by      = %s::uuid,
+                       reviewed_at      = NOW(),
+                       is_active        = FALSE
+                 WHERE tenant_id     = %s::uuid
+                   AND id            = ANY(%s::uuid[])
+                   AND review_status = 'pending'
+                   AND is_active     = TRUE
+                """,
+                (rationale[:500], _uuid_or_null(reviewed_by),
+                 tenant_id, finding_ids),
+            )
+            n = cur.rowcount
+            if n == 0:
+                return {"ok": False, "reason": "no_pending"}
+        pg_conn.commit()
+        return {"ok": True, "rejected": n}
+    except Exception as e:
+        logger.warning("stage1_review_chat.reject_by_ids: db error: %s", e)
+        try:
+            pg_conn.rollback()
+        except Exception:
+            pass
+        return {"ok": False, "reason": "db_error", "error": str(e)}
+
+
 def _uuid_or_null(s: str) -> Optional[str]:
     """Convert a free-text reviewer string to a UUID where possible. The
     chat surface uses 'chat_user' as a placeholder until session-bound user

@@ -622,6 +622,12 @@ class DocumentFindingSummary(BaseModel):
     confidence:    str           # high | medium | low
     excerpt:       Optional[str] = None
     review_status: str           # pending | approved | rejected | expired
+    # schema_v22 — distinguish native extractions ('extracted') from
+    # cross-framework mirrors written by xfw_proposer ('xfw_bridge'). The UI
+    # uses this to badge xfw-derived rows in the Stage-1 queue.
+    inference_source: str        # extracted | xfw_bridge
+    inferred_from_control_ref: Optional[str] = None
+    inferred_from_standard_id: Optional[str] = None
 
 
 class DocumentStatus(BaseModel):
@@ -962,7 +968,10 @@ async def document_status(
                            df.status,
                            df.confidence,
                            df.excerpt,
-                           df.review_status
+                           df.review_status,
+                           df.inference_source,
+                           df.inferred_from_control_ref,
+                           df.inferred_from_standard_id
                       FROM document_findings df
                       JOIN client_documents  cd ON cd.id = df.document_id
                      WHERE df.tenant_id   = %s::uuid
@@ -984,6 +993,9 @@ async def document_status(
                         confidence    = r[4],
                         excerpt       = r[5],
                         review_status = r[6],
+                        inference_source = r[7],
+                        inferred_from_control_ref = r[8],
+                        inferred_from_standard_id = r[9],
                     ))
 
         return DocumentStatus(
@@ -1659,6 +1671,82 @@ async def bulk_confirm(
         conn.rollback()
         logger.error(f"Bulk confirm failed: {e}", exc_info=True)
         raise HTTPException(500, str(e))
+    finally:
+        pool.putconn(conn)
+
+
+# ── Stage-1 per-finding approve/reject ────────────────────────────────────────
+# REST mirror of the chat surface ([[hitl-two-stage-approval-design]] Stage 1).
+# Chat path uses approve_findings_for_control (whole-control); these endpoints
+# use approve_findings_by_ids so the UI can act per-finding or in bulk across
+# multiple controls. Same posture aggregate logic, recomputed from ALL
+# approved+active rows so partial approvals don't overwrite each other.
+
+class FindingActionRequest(BaseModel):
+    finding_ids: list[str]
+    rationale:   Optional[str] = None   # required for reject
+
+
+@app.post("/api/v1/findings/approve", tags=["hitl"])
+async def findings_approve(
+    body:     FindingActionRequest,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_scope("hitl")),
+):
+    if not body.finding_ids:
+        raise HTTPException(400, "finding_ids is required")
+    from rag.posture.stage1_review_chat import approve_findings_by_ids
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        result = approve_findings_by_ids(
+            conn,
+            tenant_id    = key_info.tenant_id,
+            finding_ids  = body.finding_ids,
+            reviewed_by  = key_info.user_id or "chat_user",
+        )
+        if result.get("ok"):
+            cache = request.app.state.tenant_cache
+            if cache:
+                cache.invalidate(key_info.tenant_id)
+            return result
+        if result.get("reason") == "no_pending":
+            raise HTTPException(404, "No pending findings match the supplied IDs")
+        raise HTTPException(500, result.get("error", "approve failed"))
+    finally:
+        pool.putconn(conn)
+
+
+@app.post("/api/v1/findings/reject", tags=["hitl"])
+async def findings_reject(
+    body:     FindingActionRequest,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_scope("hitl")),
+):
+    if not body.finding_ids:
+        raise HTTPException(400, "finding_ids is required")
+    if not body.rationale or not body.rationale.strip():
+        raise HTTPException(400, "rationale is required for reject")
+    from rag.posture.stage1_review_chat import reject_findings_by_ids
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        result = reject_findings_by_ids(
+            conn,
+            tenant_id    = key_info.tenant_id,
+            finding_ids  = body.finding_ids,
+            rationale    = body.rationale,
+            reviewed_by  = key_info.user_id or "chat_user",
+        )
+        if result.get("ok"):
+            return result
+        if result.get("reason") == "no_pending":
+            raise HTTPException(404, "No pending findings match the supplied IDs")
+        raise HTTPException(500, result.get("error", "reject failed"))
     finally:
         pool.putconn(conn)
 
