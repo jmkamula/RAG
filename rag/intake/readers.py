@@ -59,6 +59,7 @@ def read_document(
         "docx": _read_docx,
         "doc":  _read_docx,
         "xlsx": _read_xlsx,
+        "xlsm": _read_xlsx,
         "xls":  _read_xlsx,
         "txt":  _read_txt,
         "csv":  _read_csv,
@@ -298,10 +299,14 @@ _EVIDENCE_ALIASES = [
 
 
 def _fuzzy_col(headers: list[str], aliases: list[str]) -> Optional[int]:
-    """Find column index by fuzzy name matching."""
+    """Find column index by fuzzy name matching.
+    Empty headers are skipped: `"" in alias` is always True and would
+    otherwise match any alias against any blank column."""
     headers_lower = [h.lower().strip() for h in headers]
     for alias in aliases:
         for i, h in enumerate(headers_lower):
+            if not h:
+                continue
             if alias in h or h in alias:
                 return i
     return None
@@ -312,6 +317,67 @@ def _is_compliance_workbook(headers: list[str]) -> bool:
     has_control = _fuzzy_col(headers, _CONTROL_REF_ALIASES) is not None
     has_finding = _fuzzy_col(headers, _FINDING_ALIASES) is not None
     return has_control and has_finding
+
+
+# Standards used to validate the "control_ref" column actually contains
+# parseable refs. Header detection only — the enricher still detects
+# per-document standards from content keywords later.
+_HEADER_DETECT_STANDARDS = ("ISO27001:2022", "GDPR:2016/679")
+
+
+def _looks_like_ref(value) -> bool:
+    """True if value normalizes to a control ref under any known standard."""
+    from .ref_normalizer import normalize_ref  # local: avoid import cycle at module load
+    if not value:
+        return False
+    s = str(value).strip()
+    if not s:
+        return False
+    return any(normalize_ref(s, std) for std in _HEADER_DETECT_STANDARDS)
+
+
+def _find_data_header(rows: list, max_scan: int = 30) -> Optional[tuple]:
+    """Locate the real data-table header in a sheet, skipping document-metadata
+    bands (Title/Owner/Revision History/etc.) that real-world ISMS workbooks
+    place above the actual table.
+
+    Returns (header_idx, ctrl_col, find_col, gap_col, evid_col) or None.
+
+    Validation: the header row passes `_is_compliance_workbook`, has
+    ctrl_col != find_col (rejects same-column degenerate fuzzy matches), and
+    at least 2 of the next 8 non-empty values in ctrl_col normalize to a
+    known control ref under any standard.
+    """
+    for idx, row in enumerate(rows[:max_scan]):
+        if not any(c for c in row if c is not None):
+            continue
+        header = [str(c).strip() if c is not None else "" for c in row]
+        ctrl_col = _fuzzy_col(header, _CONTROL_REF_ALIASES)
+        find_col = _fuzzy_col(header, _FINDING_ALIASES)
+        if ctrl_col is None or find_col is None or ctrl_col == find_col:
+            continue
+        examined = 0
+        hits = 0
+        for next_row in rows[idx + 1:idx + 1 + 30]:
+            if examined >= 8:
+                break
+            if next_row is None or len(next_row) <= ctrl_col:
+                continue
+            val = next_row[ctrl_col]
+            if val is None or not str(val).strip():
+                continue
+            examined += 1
+            if _looks_like_ref(val):
+                hits += 1
+                if hits >= 2:
+                    return (
+                        idx,
+                        ctrl_col,
+                        find_col,
+                        _fuzzy_col(header, _GAP_ALIASES),
+                        _fuzzy_col(header, _EVIDENCE_ALIASES),
+                    )
+    return None
 
 
 def _normalise_finding_value(val: str) -> str:
@@ -359,37 +425,30 @@ def _read_xlsx(file_path: str, file_name: str) -> ParsedDocument:
         if not rows:
             continue
 
-        # Find header row (first non-empty row)
-        header_row = None
-        header_idx = 0
-        for i, row in enumerate(rows):
-            if any(cell for cell in row if cell is not None):
-                header_row = [str(c).strip() if c is not None else "" for c in row]
-                header_idx = i
-                break
+        # Locate the real data-table header, skipping any document-metadata
+        # band (Title/Owner/Revision History/etc.). Returns None if the sheet
+        # is not a structured compliance table — those fall through to the
+        # narrative branch below.
+        hdr = _find_data_header(rows)
 
-        if header_row is None:
-            continue
-
-        if _is_compliance_workbook(header_row):
-            # Structured compliance workbook — parse as data
-            col_ctrl  = _fuzzy_col(header_row, _CONTROL_REF_ALIASES)
-            col_find  = _fuzzy_col(header_row, _FINDING_ALIASES)
-            col_gap   = _fuzzy_col(header_row, _GAP_ALIASES)
-            col_evid  = _fuzzy_col(header_row, _EVIDENCE_ALIASES)
+        if hdr is not None:
+            header_idx, col_ctrl, col_find, col_gap, col_evid = hdr
+            header_row = [
+                str(c).strip() if c is not None else "" for c in rows[header_idx]
+            ]
 
             structured_rows = []
             for row in rows[header_idx + 1:]:
-                ctrl = row[col_ctrl] if col_ctrl is not None else None
-                find = row[col_find] if col_find is not None else None
+                ctrl = row[col_ctrl] if col_ctrl is not None and len(row) > col_ctrl else None
+                find = row[col_find] if col_find is not None and len(row) > col_find else None
                 if not ctrl or not find:
                     continue
                 structured_rows.append({
                     "control_ref":    str(ctrl).strip(),
                     "finding_raw":    str(find).strip(),
                     "finding":        _normalise_finding_value(str(find)),
-                    "gap_description": str(row[col_gap]).strip() if col_gap is not None and row[col_gap] else "",
-                    "evidence_text":   str(row[col_evid]).strip() if col_evid is not None and row[col_evid] else "",
+                    "gap_description": str(row[col_gap]).strip() if col_gap is not None and len(row) > col_gap and row[col_gap] else "",
+                    "evidence_text":   str(row[col_evid]).strip() if col_evid is not None and len(row) > col_evid and row[col_evid] else "",
                 })
 
             # Represent as a single section with structured metadata

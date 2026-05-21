@@ -4,7 +4,7 @@
 - [SQL dry-run nested transaction trap](sql_dry_run_nested_transaction.md) — outer BEGIN/ROLLBACK doesn't undo a SQL file that has its own COMMIT; that mistake bypassed a permission gate once
 - [RLS tenant context for app user](rls_tenant_context_for_app_user.md) — set_config('app.tenant_id', ..., TRUE) is mandatory for any Postgres read; `arioncomply_app` does not bypass RLS, only the `arioncomply` superuser does
 - [Extend eval suite with each feature](feedback_eval_with_each_feature.md) — every user-facing RAG change must add an EvalCase to tests/eval_suite.py in the same commit; would-have-failed-before, passes-after
-- [xfw stage CHECK constraint bug](xfw_stage_check_constraint_bug.md) — intake_trace_log.stage doesn't include 'xfw' → Stage 4.5 UI chip can never light up green; latent one-liner, separate commit
+- [xfw stage CHECK constraint bug](xfw_stage_check_constraint_bug.md) — RESOLVED 2026-05-21 via schema_v26; follow-ups: raise tracer swallow to warning, add eval asserting xfw_targets non-NULL
 - [HITL two-stage approval design](hitl_two_stage_approval_design.md) — SHIPPED 2026-05-20 across 0a0eb01..58401ee; findings-approval then engine-verdict approval; 6 design decisions intact (batch approval, 7-day TTL, digest-resets, snapshot reasons)
 - [HITL two-stage rollout gotchas](hitl_two_stage_rollout_gotchas.md) — non-obvious scars: CHECK/trigger drift on confirmation guard, SECURITY DEFINER, Stage-1/2 grammar disjointness, overlay gate change, chat-user placeholder, eval case 38 ordering
 - [applies_when warning suppression](applies_when_warning_suppression.md) — RESOLVED 2026-05-20: engine-driver suppression for UNRECOGNIZED notifications; revert once any spec/edge actually populates applies_when

@@ -1,11 +1,29 @@
 ---
 name: xfw-stage-check-constraint-bug
-description: "intake_trace_log CHECK constraint blocks stage='xfw' inserts, so the new Stage 4.5 chip in the upload UI can never light up green. Latent — one-line fix, not yet committed."
+description: "RESOLVED 2026-05-21 via schema_v26_xfw_stage_constraint.sql — 'xfw' added to intake_trace_log.stage CHECK so Stage-4.5 trace rows land and the UI chip can render xfw_targets."
 metadata: 
   node_type: memory
   type: project
   originSessionId: 9eeea5c7-cafb-4a85-9b32-8f0ceef552bf
 ---
+
+**RESOLVED 2026-05-21** — `db/schema_v26_xfw_stage_constraint.sql` widened the
+CHECK to include `'xfw'`. Verified in-conversation: empty `xfw_targets` for
+upload `5a8ec7f5-...` was caused by the swallowed CheckViolation; constraint
+now reads `read|enrich|extract|write|xfw|complete|failed`.
+
+Optional follow-up from the original recipe — still un-done:
+- Raise the tracer's swallowed exception from `logger.debug` to
+  `logger.warning` in `rag/intake/doc_pipeline.py` so the next constraint
+  mismatch is loud instead of silent.
+- Add an eval case asserting `proposals_written` is an integer (not NULL)
+  on a fresh upload with findings>0 — see [[feedback-eval-with-each-feature]].
+
+---
+
+Historical context below.
+
+
 
 `schema_v17_xfw_trace.sql` added `proposals_written`/`proposals_skipped`/`xfw_targets` columns and rewrote `v_intake_runs` to aggregate `WHERE stage = 'xfw'`, but **forgot to update the stage CHECK constraint**:
 

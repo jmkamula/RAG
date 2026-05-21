@@ -75,7 +75,7 @@ CORS_ORIGINS   = os.getenv("CORS_ORIGINS", "*").split(",")
 MAX_UPLOAD_MB  = int(os.getenv("MAX_UPLOAD_MB", "50"))
 
 SUPPORTED_EXTENSIONS = {
-    ".pdf", ".docx", ".doc", ".xlsx", ".xls", ".txt", ".csv", ".md"
+    ".pdf", ".docx", ".doc", ".xlsx", ".xlsm", ".xls", ".txt", ".csv", ".md"
 }
 
 
@@ -630,6 +630,7 @@ class DocumentStatus(BaseModel):
     status:          str
     doc_type:        Optional[str] = None
     standard_ids:    Optional[str] = None
+    token_estimate:  Optional[int] = None
     findings_written: Optional[int] = None
     posture_created:  Optional[int] = None
     posture_updated:  Optional[int] = None
@@ -877,6 +878,7 @@ async def document_status(
             cur.execute("""
                 SELECT
                     upload_id, filename, doc_type, standard_ids,
+                    token_estimate,
                     findings_written, posture_created, posture_updated,
                     posture_skipped,
                     proposals_written, proposals_skipped, xfw_targets,
@@ -891,7 +893,7 @@ async def document_status(
             row = cur.fetchone()
 
             if row:
-                (uid, fname, doc_type, std_ids, fw, pc, pu, ps,
+                (uid, fname, doc_type, std_ids, tok_est, fw, pc, pu, ps,
                  prop_written, prop_skipped, xfw_tgts,
                  total_ms, had_error, error_type, started_at) = row
                 # Determine status from trace
@@ -902,7 +904,7 @@ async def document_status(
                 else:
                     doc_status = "processing"
             else:
-                doc_type = std_ids = fw = pc = pu = ps = total_ms = None
+                doc_type = std_ids = tok_est = fw = pc = pu = ps = total_ms = None
                 prop_written = prop_skipped = None
                 xfw_tgts = None
                 had_error = error_type = None
@@ -990,6 +992,7 @@ async def document_status(
             status           = doc_status,
             doc_type         = doc_type,
             standard_ids     = std_ids,
+            token_estimate   = tok_est,
             findings_written = fw,
             posture_created  = pc,
             posture_updated  = pu,

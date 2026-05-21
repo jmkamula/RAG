@@ -144,6 +144,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .us-processing{color:#854F0B}
 .us-completed{color:#1D9E75}
 .us-failed{color:#A32D2D}
+.us-duplicate{color:#5F5E5A}
 .upload-trace{margin-top:10px;display:flex;flex-direction:column;gap:4px}
 .trace-stage{display:flex;align-items:center;gap:8px;font-size:11px}
 .stage-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
@@ -154,10 +155,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .stage-name{color:#5F5E5A;width:55px;flex-shrink:0}
 .stage-ms{color:#B4B2A9;margin-left:auto}
 .stage-detail{color:#888780}
-.upload-summary{margin-top:8px;padding:8px 10px;background:#f8f7f4;border-radius:6px;font-size:11px;color:#5F5E5A;display:flex;gap:14px}
+.upload-summary,.upload-dup-notice{margin-top:8px;padding:8px 10px;background:#f8f7f4;border-radius:6px;font-size:11px;color:#5F5E5A;display:flex;gap:14px}
 .sum-item{display:flex;flex-direction:column;align-items:center;gap:1px}
 .sum-val{font-size:14px;font-weight:600;color:#1a1a18}
 .sum-lbl{font-size:9px;color:#B4B2A9;text-transform:uppercase}
+.upload-review{margin-top:8px;background:#f8f7f4;border-radius:6px;font-size:11px;overflow:hidden}
+.review-header{padding:8px 10px;cursor:pointer;display:flex;align-items:center;gap:6px;color:#5F5E5A;font-weight:500;user-select:none}
+.review-header i{font-size:12px;transition:transform .15s;color:#888780}
+.upload-review.collapsed .review-header i{transform:rotate(-90deg)}
+.upload-review.collapsed .review-list,.upload-review.collapsed .review-footer{display:none}
+.review-list{max-height:280px;overflow-y:auto;border-top:1px solid #e5e4df;background:#fff}
+.review-row{display:grid;grid-template-columns:64px 64px 78px 46px 1fr;gap:8px;align-items:center;padding:5px 10px;border-bottom:1px solid #f0efea;font-size:10.5px}
+.review-row:last-child{border-bottom:none}
+.review-ctrl{font-family:'SF Mono',Menlo,Consolas,monospace;font-weight:600;color:#1a1a18;white-space:nowrap}
+.review-std{color:#888780;font-size:10px;white-space:nowrap}
+.review-pill{display:inline-flex;align-items:center;gap:5px;color:#5F5E5A}
+.review-pill::before{content:"";width:6px;height:6px;border-radius:50%;display:inline-block;background:#B4B2A9}
+.review-pill.present::before{background:#1D9E75}
+.review-pill.partial::before{background:#EF9F27}
+.review-conf{color:#888780}
+.review-excerpt{color:#5F5E5A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.review-footer{padding:6px 10px;border-top:1px solid #e5e4df;font-size:10px;color:#888780;background:#fff}
 
 /* ── Detail panel ── */
 .detail{background:#fff;border-left:1px solid #e5e4df;display:flex;flex-direction:column;overflow:hidden}
@@ -338,9 +356,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           ondrop="handleDrop(event)">
           <i class="ti ti-cloud-upload" aria-hidden="true"></i>
           <p>Drop a document here or click to browse</p>
-          <span>Supported: .pdf .docx .xlsx .csv .txt .md — max 50MB</span>
-          <input type="file" id="file-input" accept=".pdf,.docx,.doc,.xlsx,.xls,.txt,.csv,.md"
-            onchange="handleFileSelect(event)">
+          <span>Supported: .pdf .docx .xlsx .xlsm .csv .txt .md — max 50MB</span>
+          <input type="file" id="file-input" accept=".pdf,.docx,.doc,.xlsx,.xlsm,.xls,.txt,.csv,.md"
+            multiple onchange="handleFileSelect(event)">
         </div>
         <div class="upload-list" id="upload-list"></div>
       </div>
@@ -461,7 +479,16 @@ async function apiForm(path, formData) {
   });
   if (!r.ok) {
     const e = await r.json().catch(()=>({detail:r.statusText}));
-    throw new Error(e.detail || r.statusText);
+    const detail = e.detail;
+    // 409 duplicate_upload returns a structured detail object — preserve it so
+    // the caller can branch on detail.error instead of parsing the message.
+    if (r.status === 409 && detail && typeof detail === 'object') {
+      const err = new Error(detail.message || 'Duplicate upload');
+      err.status = 409;
+      err.detail = detail;
+      throw err;
+    }
+    throw new Error(typeof detail === 'string' ? detail : (detail && detail.message) || r.statusText);
   }
   return r.json();
 }
@@ -846,20 +873,18 @@ function clearChat() {
 
 // ── Documents ──
 function handleFileSelect(e) {
-  const file = e.target.files[0];
-  if (file) uploadFile(file);
+  for (const file of e.target.files) uploadFile(file);
   e.target.value = '';
 }
 
 function handleDrop(e) {
   e.preventDefault();
   document.getElementById('drop-zone').classList.remove('drag-over');
-  const file = e.dataTransfer.files[0];
-  if (file) uploadFile(file);
+  for (const file of e.dataTransfer.files) uploadFile(file);
 }
 
 async function uploadFile(file) {
-  const uploadId = 'tmp_' + Date.now();
+  const uploadId = 'tmp_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
   const card = addUploadCard(uploadId, file.name, file.size);
 
   try {
@@ -871,8 +896,53 @@ async function uploadFile(file) {
     updateCardStatus(card, 'processing');
     pollStatus(d.upload_id, card);
   } catch(e) {
+    if (e.status === 409 && e.detail && e.detail.error === 'duplicate_upload') {
+      updateCardStatus(card, 'duplicate', e.detail.canonical_filename || '');
+      addDuplicateNotice(card, e.detail);
+      toast(`Duplicate: ${file.name} matches ${e.detail.canonical_filename}`);
+      enrichDuplicateCard(card, e.detail);
+      return;
+    }
     updateCardStatus(card, 'failed', e.message);
   }
+}
+
+function addDuplicateNotice(card, detail) {
+  const div = document.createElement('div');
+  div.className = 'upload-dup-notice';
+  const when = detail.canonical_uploaded_at
+    ? new Date(detail.canonical_uploaded_at).toLocaleString()
+    : 'earlier';
+  div.innerHTML = `
+    <div class="sum-item" style="flex:1">
+      <span class="sum-lbl">Identical file already uploaded as
+      <strong>${escHtml(detail.canonical_filename||'')}</strong> on ${escHtml(when)}.
+      <span class="dup-review-state"></span></span>
+    </div>`;
+  card.appendChild(div);
+}
+
+async function enrichDuplicateCard(card, detail) {
+  const canonicalId = detail.canonical_upload_id;
+  if (!canonicalId) return;
+  const stateEl = card.querySelector('.dup-review-state');
+  try {
+    const d = await api(`/api/v1/documents/${canonicalId}/status`);
+    if (d.status !== 'completed') {
+      if (stateEl) stateEl.textContent = ` Original is still ${d.status}.`;
+      return;
+    }
+    const cardId = card.id.replace('uc_','');
+    fillTrace(cardId, d);
+    addUploadSummary(card, cardId, d);
+    const pending = (d.findings || []).filter(f => f.review_status === 'pending');
+    if (pending.length) {
+      if (stateEl) stateEl.textContent = ` ${pending.length} finding${pending.length===1?'':'s'} still pending Stage-1 review:`;
+      addStage1Queue(card, cardId, d);
+    } else {
+      if (stateEl) stateEl.textContent = ' All findings approved.';
+    }
+  } catch(_) {}
 }
 
 function addUploadCard(id, name, size) {
@@ -918,15 +988,9 @@ async function pollStatus(uploadId, card) {
       if (d.status === 'completed') {
         completed = true;
         updateCardStatus(card, 'completed');
-        stages.forEach(s => {
-          const el = document.getElementById(`stage_${cardId}_${s}`);
-          if (el) {
-            el.querySelector('.stage-dot').className = 'stage-dot stage-ok';
-            el.querySelector('.stage-detail').textContent = stageDetail(s, d);
-            if (s==='extract' && d.total_ms) el.querySelector('.stage-ms').textContent = `${d.total_ms}ms total`;
-          }
-        });
+        fillTrace(cardId, d);
         addUploadSummary(card, cardId, d);
+        addStage1Queue(card, cardId, d);
         toast(`✓ ${d.filename} processed — ${d.findings_written||0} findings`);
         loadCounts();
       } else if (d.status === 'failed') {
@@ -939,6 +1003,16 @@ async function pollStatus(uploadId, card) {
       }
     } catch(e) {}
   }
+}
+
+function fillTrace(cardId, d) {
+  ['read','enrich','extract','write','xfw'].forEach(s => {
+    const el = document.getElementById(`stage_${cardId}_${s}`);
+    if (!el) return;
+    el.querySelector('.stage-dot').className = 'stage-dot stage-ok';
+    el.querySelector('.stage-detail').textContent = stageDetail(s, d);
+    if (s==='extract' && d.total_ms) el.querySelector('.stage-ms').textContent = `${d.total_ms}ms total`;
+  });
 }
 
 function stageDetail(stage, d) {
@@ -972,11 +1046,54 @@ function addUploadSummary(card, id, d) {
   card.appendChild(div);
 }
 
+function escHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function addStage1Queue(card, id, d) {
+  const existing = card.querySelector('.upload-review');
+  if (existing) existing.remove();
+  const pending = (d.findings || []).filter(f => f.review_status === 'pending');
+  if (!pending.length) return;
+
+  const rows = pending.map(f => {
+    const std  = (f.standard_id || '').split(':')[0];
+    const stat = (f.status || '').toLowerCase();
+    const conf = (f.confidence || '').toLowerCase();
+    const exc  = escHtml(f.excerpt);
+    return `<div class="review-row">
+      <span class="review-ctrl">${escHtml(f.control_ref)}</span>
+      <span class="review-std">${escHtml(std)}</span>
+      <span class="review-pill ${escHtml(stat)}">${escHtml(stat)}</span>
+      <span class="review-conf">${escHtml(conf)}</span>
+      <span class="review-excerpt" title="${exc}">${exc}</span>
+    </div>`;
+  }).join('');
+
+  const sample = pending[0].control_ref || 'A.5.1';
+  const div = document.createElement('div');
+  div.className = 'upload-review';
+  div.innerHTML = `
+    <div class="review-header" onclick="this.parentElement.classList.toggle('collapsed')">
+      <i class="ti ti-chevron-down" aria-hidden="true"></i>
+      Stage-1 review queue (${pending.length} pending)
+    </div>
+    <div class="review-list">${rows}</div>
+    <div class="review-footer">Approve via chat — e.g. "approve findings for ${escHtml(sample)}"</div>`;
+  card.appendChild(div);
+}
+
 function updateCardStatus(card, status, detail='') {
   const el = card.querySelector('.upload-status');
   el.className = `upload-status us-${status}`;
-  const labels = {queued:'Queued',processing:'Processing...',completed:'Complete',failed:'Failed'};
-  el.textContent = detail ? `Failed: ${detail.slice(0,30)}` : labels[status];
+  const labels = {queued:'Queued',processing:'Processing...',completed:'Complete',failed:'Failed',duplicate:'Duplicate'};
+  if (status === 'duplicate') {
+    el.textContent = 'Duplicate';
+  } else {
+    el.textContent = detail ? `Failed: ${detail.slice(0,30)}` : labels[status];
+  }
 }
 
 // ── Shared ──
