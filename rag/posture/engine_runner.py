@@ -17,6 +17,7 @@ from rag.posture.fulfilment_engine import ControlVerdict, evaluate_control
 from rag.posture.leaf_evaluators import GenericLeafEvaluator
 from rag.posture.spec_builder import (
     build_spec_descriptor,
+    build_spec_resolver,
     list_curated_control_ids,
 )
 
@@ -56,12 +57,17 @@ def compute_engine_verdicts(
     verdicts: dict[str, ControlVerdict] = {}
 
     with neo4j_driver.session() as s:
+        # spec_resolver is built once per session — its internal memo dedupes
+        # repeat lookups when several derived specs share a dependency (e.g.
+        # GDPR Art.32 and Art.5.1.f both deriving from ISO A.8.24).
+        resolver = build_spec_resolver(s)
         for cid in control_ids:
             try:
                 spec = build_spec_descriptor(s, cid)
                 if spec is None:
                     continue
-                verdicts[cid] = evaluate_control(spec, evaluator, eval_ctx)
+                verdicts[cid] = evaluate_control(spec, evaluator, eval_ctx,
+                                                 spec_resolver=resolver)
             except Exception as e:
                 logger.warning(
                     "engine_runner: evaluating %s failed: %s", cid, e

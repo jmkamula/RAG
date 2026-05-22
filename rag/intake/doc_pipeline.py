@@ -83,7 +83,8 @@ class IntakeTracer:
     ) -> None:
         """
         Write one trace row. Keyword args map directly to intake_trace_log columns.
-        Never raises — all exceptions are caught and logged at DEBUG level.
+        Never raises — exceptions are logged at WARNING so schema drift (e.g. a
+        stage missing from the CHECK constraint) surfaces in api.log.
         """
         if not self.enabled:
             return
@@ -131,7 +132,7 @@ class IntakeTracer:
             conn.close()
             logger.debug(f"  [trace] {stage} {status} {stage_ms}ms")
         except Exception as e:
-            logger.debug(f"  [trace] write failed (non-fatal): {type(e).__name__}: {e}")
+            logger.warning(f"  [trace] write failed (non-fatal): {type(e).__name__}: {e}")
 
 
 # =============================================================================

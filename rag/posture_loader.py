@@ -357,21 +357,13 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
 def _rebuild_gap_list(unacked_leaves) -> list:
     """Per-leaf gap text for callers wanting the full list (e.g. detailed
     explainer surface). Same format as ControlVerdict.gap_list but filtered
-    to non-acknowledged leaves."""
-    gaps: list[str] = []
-    for v in unacked_leaves:
-        if getattr(v, "counts_as_comply", False):
-            continue
-        role = v.role or v.evidence_type
-        if not v.fresh and v.satisfied:
-            gaps.append(f"[{role}] artifact is stale — consider refreshing")
-            continue
-        if v.items_unrecognised:
-            for item in v.items_unrecognised:
-                gaps.append(f"[{role}] auditors expect: {item} — we couldn't find it")
-        else:
-            gaps.append(f"[{role}] no matching artifact uploaded")
-    return gaps
+    to non-acknowledged leaves.
+
+    Delegates to the engine's _build_gaps so the polite Phase-C copy applies
+    uniformly — never branch the wording on caller, only on classification."""
+    from rag.posture.fulfilment_engine import _build_gaps
+    our_g, tenant_g = _build_gaps(list(unacked_leaves), None)
+    return our_g + tenant_g
 
 
 def _build_engine_neo4j_driver():

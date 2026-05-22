@@ -1,6 +1,6 @@
 ---
 name: xfw-stage-check-constraint-bug
-description: "RESOLVED 2026-05-21 via schema_v26_xfw_stage_constraint.sql — 'xfw' added to intake_trace_log.stage CHECK so Stage-4.5 trace rows land and the UI chip can render xfw_targets."
+description: "RESOLVED 2026-05-21 via schema_v26 + 2026-05-22 follow-ups: tracer swallow raised to WARNING and test_intake_table_extraction.py asserts intake_trace_log.xfw_targets non-NULL on a fresh upload."
 metadata: 
   node_type: memory
   type: project
@@ -12,12 +12,16 @@ CHECK to include `'xfw'`. Verified in-conversation: empty `xfw_targets` for
 upload `5a8ec7f5-...` was caused by the swallowed CheckViolation; constraint
 now reads `read|enrich|extract|write|xfw|complete|failed`.
 
-Optional follow-up from the original recipe — still un-done:
-- Raise the tracer's swallowed exception from `logger.debug` to
-  `logger.warning` in `rag/intake/doc_pipeline.py` so the next constraint
-  mismatch is loud instead of silent.
-- Add an eval case asserting `proposals_written` is an integer (not NULL)
-  on a fresh upload with findings>0 — see [[feedback-eval-with-each-feature]].
+**Follow-ups closed 2026-05-22:**
+- Tracer's swallowed exception now logs at `logger.warning` in
+  `rag/intake/doc_pipeline.py:134` so the next CHECK mismatch surfaces in
+  `api.log` instead of hiding at debug.
+- `tests/test_intake_table_extraction.py` adds Assertion 4: after the
+  synthetic .docx upload runs, an `intake_trace_log` row with `stage='xfw'`
+  and `xfw_targets IS NOT NULL` must exist for the upload_id. Empty array
+  is acceptable — the bug we guard against is structural (CHECK constraint
+  blocks the INSERT, row missing entirely). Confirmed PASS with
+  `xfw_targets=['GDPR:2016/679']` on 2026-05-22.
 
 ---
 

@@ -9,16 +9,22 @@ Public surface:
     build_spec_descriptor(neo4j_session, control_id) -> SpecDescriptor | None
     build_specs_for_controls(neo4j_driver, control_ids) -> dict[control_id, SpecDescriptor]
     list_curated_control_ids(neo4j_driver) -> list[str]
+    build_spec_resolver(neo4j_session) -> SpecResolverFn
 
 Phase 1: handles flat specs (one level of leaves under FulfilmentSpec).
 Nested FulfilmentSpec children are recognised by the walker but the only
 shape currently in the data is RequirementNode → FulfilmentSpec → leaves.
 Nesting is added when curators need it (e.g. Walk 2's 9.2 internal/external
 audit ANY-of branch).
+
+Phase 2 (this commit): DERIVES_FROM edges on FulfilmentSpec become ControlRef
+edges on the SpecDescriptor. build_spec_resolver returns a closure suitable
+for evaluate_spec's spec_resolver parameter, so the engine can walk derived
+specs end-to-end against Neo4j.
 """
 from __future__ import annotations
 
-from rag.posture.fulfilment_engine import Edge, LeafSpec, SpecDescriptor
+from rag.posture.fulfilment_engine import ControlRef, Edge, LeafSpec, SpecDescriptor, SpecResolverFn
 
 
 _SPEC_QUERY = """
@@ -48,10 +54,26 @@ RETURN
 """
 
 
+_DERIVES_FROM_QUERY = """
+MATCH (rn:RequirementNode {id: $control_id})-[:SATISFIED_BY]->(fs:FulfilmentSpec)
+MATCH (fs)-[df:DERIVES_FROM]->(target:RequirementNode)
+RETURN
+    target.id          AS target_control_id,
+    df.role            AS role,
+    df.applies_when    AS applies_when,
+    df.title           AS title,
+    df.scope_items     AS scope_items
+ORDER BY df.role
+"""
+
+
 def build_spec_descriptor(neo4j_session, control_id: str) -> SpecDescriptor | None:
     """Build a SpecDescriptor for one control by reading its FulfilmentSpec
     subtree. Returns None if the control has no spec at all (i.e. the
-    migration didn't create one — should not happen post-commit-1)."""
+    migration didn't create one — should not happen post-commit-1).
+
+    Pulls both REQUIRES_EVIDENCE children (LeafSpec edges) and DERIVES_FROM
+    children (ControlRef edges) — a spec can have either or both."""
     rows = list(neo4j_session.run(_SPEC_QUERY, control_id=control_id))
     if not rows:
         return None
@@ -70,7 +92,7 @@ def build_spec_descriptor(neo4j_session, control_id: str) -> SpecDescriptor | No
     for row in rows:
         leaf_id = row["leaf_id"]
         if leaf_id is None:
-            # Spec exists but has no REQUIRES_EVIDENCE children (uncurated case)
+            # Spec exists but has no REQUIRES_EVIDENCE children
             continue
         leaf = LeafSpec(
             leaf_id        = leaf_id,
@@ -88,6 +110,18 @@ def build_spec_descriptor(neo4j_session, control_id: str) -> SpecDescriptor | No
             target       = leaf,
         )
         spec.children.append(edge)
+
+    # DERIVES_FROM children — emitted as ControlRef edges
+    for row in neo4j_session.run(_DERIVES_FROM_QUERY, control_id=control_id):
+        spec.children.append(Edge(
+            role         = row["role"] or "",
+            applies_when = row["applies_when"],
+            target       = ControlRef(
+                target_control_id = row["target_control_id"],
+                title             = row["title"] or "",
+                scope_items       = list(row["scope_items"]) if row["scope_items"] else None,
+            ),
+        ))
 
     return spec
 
@@ -117,3 +151,24 @@ def list_curated_control_ids(neo4j_driver) -> list[str]:
             ORDER BY rn.id
         """)
         return [row["control_id"] for row in result]
+
+
+def build_spec_resolver(neo4j_session) -> SpecResolverFn:
+    """Return a SpecResolverFn that resolves control_id → SpecDescriptor against
+    the given Neo4j session, with per-call memoization so a single engine query
+    only reads each control once even if multiple parents reference it.
+
+    Pass this into evaluate_spec/evaluate_control as spec_resolver to walk
+    derived specs end-to-end. The session is captured by closure — caller
+    owns its lifetime."""
+    cache: dict[str, SpecDescriptor] = {}
+
+    def resolve(control_id: str) -> SpecDescriptor:
+        if control_id not in cache:
+            spec = build_spec_descriptor(neo4j_session, control_id)
+            if spec is None:
+                raise KeyError(f"no FulfilmentSpec for {control_id!r}")
+            cache[control_id] = spec
+        return cache[control_id]
+
+    return resolve

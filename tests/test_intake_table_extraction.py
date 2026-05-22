@@ -222,11 +222,52 @@ def main() -> int:
         _cleanup(upload_id, fixture_path)
         return 1
 
+    # ── Assertion 4: intake_trace_log has an xfw row with xfw_targets set ──
+    # The v17→v26 regression had stage='xfw' missing from the CHECK constraint,
+    # so the trace INSERT raised and (pre-WARNING fix) was swallowed at DEBUG.
+    # Asserting the row exists with xfw_targets IS NOT NULL catches both:
+    # the row is absent if the INSERT blows up; xfw_targets is NULL only if
+    # the writer never gets the kwarg. Empty array '{}' is still non-NULL,
+    # which is fine — the regression we're guarding against is structural.
+    conn = psycopg2.connect(db_url)
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SET app.tenant_id = %s", (TENANT_ID,))
+            cur.execute(
+                """
+                SELECT stage_status, xfw_targets, proposals_written
+                FROM intake_trace_log
+                WHERE upload_id = %s AND stage = 'xfw'
+                """,
+                (upload_id,),
+            )
+            xfw_row = cur.fetchone()
+    finally:
+        conn.close()
+
+    if xfw_row is None:
+        print(
+            "[FAIL] no intake_trace_log row with stage='xfw' for this upload — "
+            "Stage 4.5 trace was dropped (CHECK constraint or writer regression)"
+        )
+        _cleanup(upload_id, fixture_path)
+        return 1
+
+    xfw_status, xfw_targets, xfw_written = xfw_row
+    if xfw_targets is None:
+        print(
+            f"[FAIL] intake_trace_log.xfw_targets is NULL "
+            f"(status={xfw_status!r}, proposals_written={xfw_written})"
+        )
+        _cleanup(upload_id, fixture_path)
+        return 1
+
     print(
         f"[PASS] findings={result.findings_count}  "
         f"{TABLE_ONLY_CONTROL} matched  "
         f"md_bytes={byte_count}  converter={converter}  "
-        f"src_sha={src_sha[:12]}..."
+        f"src_sha={src_sha[:12]}...  "
+        f"xfw_status={xfw_status} xfw_targets={xfw_targets}"
     )
 
     _cleanup(upload_id, fixture_path)
