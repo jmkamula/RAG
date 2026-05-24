@@ -3902,6 +3902,58 @@ SPEC_ART_17 = DerivedSpec(
 )
 
 
+SPEC_ART_5_1_A = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.5.1.a",
+    control_ref  = "Art.5.1.a",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Lawfulness, fairness and transparency (derived via Art.6 + Art.13)",
+    description  = (
+        "Art.5.1.a is the composite GDPR principle that personal data shall "
+        "be processed lawfully, fairly and in a transparent manner. The "
+        "principle breaks down into three operational anchors: lawfulness "
+        "is the dedicated Art.6 ask (a lawful basis per processing "
+        "activity); transparency is operationalised by Art.13/14 (privacy "
+        "notice — Art.13 is the directly-collected case and already "
+        "curated standalone). Fairness has no dedicated operational "
+        "article — it is the residual duty not to mislead and not to "
+        "process in ways data subjects would not reasonably expect, "
+        "policed through Art.5.2 accountability and Art.13 transparency "
+        "rather than a separate artefact. Art.14 (data collected "
+        "indirectly) is the complementary transparency angle but is "
+        "uncurated; revisit when it lands."
+    ),
+    # Art.5.1.a binds controllers (and processors under DPA flow-through).
+    # Same gate as the other GDPR specs.
+    applies_when = None,  # TODO: tighten when ClientFacts catalog supports controller/processor flag
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "Art.6",
+            target_standard_id = "GDPR:2016/679",
+            role               = "lawfulness",
+            title              = "Lawful basis per processing activity (Art.6) implements Art.5.1.a lawfulness",
+            # Transitive derivation — Art.6 IS the operationalisation of the
+            # lawfulness limb of Art.5.1.a. Engine resolves Art.6 through its
+            # A.5.34 + A.5.31 derivations plus the lawful basis register.
+            # Mirrors the principle → operational article pattern (Art.5.1.f
+            # → Art.32, Art.5.1.c → Art.25, Art.5.2 → Art.24).
+        ),
+        DerivedFrom(
+            target_control_ref = "Art.13",
+            target_standard_id = "GDPR:2016/679",
+            role               = "transparency",
+            title              = "Privacy notice (Art.13) implements Art.5.1.a transparency",
+            # Transitive derivation — Art.13 carries the data-subject-facing
+            # transparency artefacts (identity, purposes, lawful basis,
+            # recipients, retention, rights, complaints, transfers) required
+            # by the transparency limb of Art.5.1.a. Art.14 (indirect
+            # collection) is uncurated; when it lands it can be added here
+            # without breaking the existing edge.
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
@@ -3913,6 +3965,7 @@ ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_6,
     SPEC_ART_16,
     SPEC_ART_17,
+    SPEC_ART_5_1_A,
 ]
 
 
