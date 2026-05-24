@@ -3490,6 +3490,46 @@ SPEC_ART_5_1_E = DerivedSpec(
 )
 
 
+SPEC_ART_5_1_C = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.5.1.c",
+    control_ref  = "Art.5.1.c",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Data minimisation (derived via Art.25)",
+    description  = (
+        "Art.5.1.c is the GDPR principle that personal data shall be "
+        "'adequate, relevant and limited to what is necessary in relation "
+        "to the purposes for which they are processed' (data "
+        "minimisation). Art.25.2 is the operational implementation: by "
+        "default, only personal data necessary for each specific purpose "
+        "are processed (covering amount, extent, storage period, "
+        "accessibility). Plus Art.25's A.5.34 derivation carries the "
+        "retention_minimisation policy item. Art.6 (lawful basis defines "
+        "the 'purposes' against which minimisation is measured) is the "
+        "complementary angle but is uncurated; revisit when Art.6 is "
+        "curated."
+    ),
+    # Same gate as the other GDPR specs — until ClientFacts catalog
+    # supports a controller/processor flag, leave open.
+    applies_when = None,  # TODO: tighten when ClientFacts catalog supports it
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "Art.25",
+            target_standard_id = "GDPR:2016/679",
+            role               = "minimum_by_default",
+            title              = "Default minimum data (Art.25.2) implements Art.5.1.c minimisation",
+            # Transitive derivation — Art.25.2's default_amount and
+            # default_extent items in the privacy-default configuration
+            # record directly enforce data minimisation, and Art.25's
+            # A.5.34 scope already includes retention_minimisation. Engine
+            # cycle guard handles the recursion through Art.25 → ISO
+            # 27001 deps. Mirrors the principle → operational article
+            # pattern established by Art.5.1.f → Art.32 and Art.5.2 → Art.24.
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
@@ -3497,6 +3537,7 @@ ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_24,
     SPEC_ART_5_2,
     SPEC_ART_5_1_E,
+    SPEC_ART_5_1_C,
 ]
 
 
