@@ -156,6 +156,16 @@ with d.session() as s:
 - Cases 27-28 lock in: xfw proposer HITL queue (chat surface + isolation guard)
 - TODO: add case for incident obligations once the chat surface (commit 40ad607)
   exposes a non-clarification answer path
+- TODO: add case for SPEC_ART_25 (GDPR Art.25 DPbD DerivedSpec, 6 deps + 1 direct
+  evidence leaf) once engine→chat wiring exposes engine verdicts. Engine-level
+  derivation already covered parametrically by tests/test_fulfilment_engine.py
+  derives_from suite.
+- Known stale cases (data drift since baseline): #4, #24, #25, #28 fail because
+  A.5.26 dropped out of NC findings (only X.* synthetic IDs remain NC) and the
+  xfw inheritance answer paths no longer cite A.5.x bridge controls. Tied to
+  Stage-1 approval work landed post-baseline. Fix alongside Thread 2
+  (engine→chat wiring) by either updating case expectations or restoring the
+  load-bearing posture state in fixtures.
 
 ## Git
 ```bash

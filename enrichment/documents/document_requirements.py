@@ -3110,8 +3110,165 @@ SPEC_ART_32 = DerivedSpec(
 )
 
 
+SPEC_ART_25 = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.25",
+    control_ref  = "Art.25",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Data protection by design and by default (derived via ISO 27001)",
+    description  = (
+        "Art.25 requires data protection to be integrated into systems and "
+        "processes from the outset (Art.25.1) and to default to processing "
+        "only the minimum personal data necessary (Art.25.2). Most of this "
+        "is captured by ISO 27001 controls that establish security at design "
+        "time, plus a direct-evidence requirement (Art.25.2 privacy-default "
+        "configuration record) that ISO doesn't capture as a discrete artifact."
+    ),
+    # Art.25 binds controllers. We don't yet have an 'is_controller' ClientFact;
+    # processors implementing on behalf of controllers carry the same artefacts
+    # through their DPA, so we leave applies_when open until facts gain the
+    # controller/processor flag. See [[posture-engine-alignment-plan-2026-05-22]].
+    applies_when = None,  # TODO: tighten to 'is_controller' when ClientFacts catalog supports it
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "A.5.8",
+            target_standard_id = "ISO27001:2022",
+            role               = "design_time_integration",
+            title              = "Security/privacy integrated into project management (Art.25.1)",
+            # Whole control — A.5.8's security gates at initiation, requirements
+            # capture and pre-go-live assessment ARE the design-time integration
+            # mechanism Art.25.1 requires when systems are built or procured.
+        ),
+        DerivedFrom(
+            target_control_ref = "A.8.27",
+            target_standard_id = "ISO27001:2022",
+            role               = "architecture_principles",
+            title              = "Secure system architecture and engineering principles (Art.25.1)",
+            # Whole control — Art.25.1 requires effective implementation of
+            # data-protection principles; A.8.27's defense-in-depth, least
+            # privilege, fail-safe defaults and complete-mediation principles
+            # are the engineering substrate for that effectiveness.
+        ),
+        DerivedFrom(
+            target_control_ref = "A.8.25",
+            target_standard_id = "ISO27001:2022",
+            role               = "secure_sdlc",
+            title              = "Privacy by design in the development lifecycle (Art.25.1)",
+            # A.8.25 is profile_fact (only when the tenant develops software).
+            # For non-developer tenants this edge short-circuits via the target
+            # spec's applies_when — Art.25.1 still binds them but through
+            # procurement (A.5.8 + A.5.34) rather than internal development.
+        ),
+        DerivedFrom(
+            target_control_ref = "A.8.11",
+            target_standard_id = "ISO27001:2022",
+            role               = "pseudonymisation",
+            title              = "Pseudonymisation as a design-time safeguard (Art.25.1)",
+            # Art.25.1 explicitly names pseudonymisation as an example design
+            # measure. Restrict to the items that bear on the design-measure
+            # angle — masking scope, techniques, and explicit personal-data
+            # coverage. Roles, testing and exceptions are governance and not
+            # load-bearing for Art.25.1's design obligation.
+            scope_items = [
+                "item:A.8.11:scope",
+                "item:A.8.11:techniques",
+                "item:A.8.11:personal_data",
+            ],
+        ),
+        DerivedFrom(
+            target_control_ref = "A.5.34",
+            target_standard_id = "ISO27001:2022",
+            role               = "privacy_policy",
+            title              = "Privacy and PII protection requirements (Art.25.1/.2)",
+            # Restrict to the items that anchor PbD/PbDefault — applicable laws
+            # (GDPR identified), PII inventory (what to protect), retention &
+            # minimisation (Art.25.2 storage period default), and the link to
+            # security controls (Art.25.1 design integration). Lawful basis,
+            # data subject rights, breach handling and DPO role are governance
+            # adjacents covered by other articles, not Art.25.
+            scope_items = [
+                "item:A.5.34:applicable_laws",
+                "item:A.5.34:pii_inventory",
+                "item:A.5.34:retention_minimisation",
+                "item:A.5.34:security_controls_ref",
+            ],
+        ),
+        DerivedFrom(
+            target_control_ref = "A.8.10",
+            target_standard_id = "ISO27001:2022",
+            role               = "deletion_by_default",
+            title              = "Storage period bounded by retention triggers (Art.25.2)",
+            # Whole control — Art.25.2's "period of storage" default is met
+            # when the tenant has retention triggers that cause deletion when
+            # data is no longer needed, including in backups (item:A.8.10:scope_systems).
+        ),
+    ],
+    direct_evidence = [
+        EvidenceRequirement(
+            id            = "req:Art.25:default_settings_record",
+            control_ref   = "Art.25",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "configuration_record",
+            title         = "Privacy-default configuration record (Art.25.2)",
+            trigger_type  = "universal",
+            trigger_event = None,
+            description   = (
+                "Art.25.2 requires that, by default, only personal data which "
+                "are necessary for each specific purpose are processed. This is "
+                "a system property — a record listing the personal-data systems "
+                "and confirming that their default settings minimise the amount, "
+                "extent, storage period, and accessibility of personal data. "
+                "ISO 27001 does not require this as a discrete artifact; "
+                "Art.25.2 does."
+            ),
+            freshness_days = 365,
+            must_contain   = [
+                ChecklistItem(
+                    "item:Art.25:default_systems_inventoried",
+                    "Personal-data systems inventoried (links to Art.30 records)",
+                    "must", True, "Art.25.2 — scope of obligation",
+                ),
+                ChecklistItem(
+                    "item:Art.25:default_amount",
+                    "Default collection minimises the amount of personal data per purpose",
+                    "must", True, "Art.25.2 — amount of personal data collected",
+                ),
+                ChecklistItem(
+                    "item:Art.25:default_extent",
+                    "Default processing minimises the extent of processing per purpose",
+                    "must", True, "Art.25.2 — extent of their processing",
+                ),
+                ChecklistItem(
+                    "item:Art.25:default_storage",
+                    "Default storage period set to the minimum necessary per purpose",
+                    "must", True, "Art.25.2 — period of their storage",
+                ),
+                ChecklistItem(
+                    "item:Art.25:default_accessibility",
+                    "Default accessibility limited — data not made accessible to indefinite recipients without intervention",
+                    "must", True, "Art.25.2 — accessibility",
+                ),
+            ],
+            should_contain = [
+                ChecklistItem(
+                    "item:Art.25:default_exception_register",
+                    "Exception register for higher-than-default settings with documented justification",
+                    "should", True, "Demonstrates accountability",
+                ),
+                ChecklistItem(
+                    "item:Art.25:default_review_dpia_link",
+                    "Reference to DPIA process for changes to defaults that increase risk",
+                    "should", True, "Art.35 linkage",
+                ),
+            ],
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
+    SPEC_ART_25,
 ]
 
 
