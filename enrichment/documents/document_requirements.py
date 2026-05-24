@@ -4005,6 +4005,50 @@ SPEC_ART_5_1_B = DerivedSpec(
 )
 
 
+SPEC_ART_5_1_D = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.5.1.d",
+    control_ref  = "Art.5.1.d",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Accuracy (derived via Art.16)",
+    description  = (
+        "Art.5.1.d requires that personal data be 'accurate and, where "
+        "necessary, kept up to date; every reasonable step must be taken "
+        "to ensure that personal data that are inaccurate, having regard "
+        "to the purposes for which they are processed, are erased or "
+        "rectified without delay'. Art.16 (right to rectification) is the "
+        "operational article that implements both arms: the reactive arm "
+        "(rectifying inaccurate data on request — covered by the Art.16 "
+        "procedure's intake / location / correction / response steps) and "
+        "the proactive arm (the procedure's data_location and "
+        "correction_record items make controller-initiated correction "
+        "auditable, satisfying the 'every reasonable step' duty). "
+        "Erasure of inaccurate data is not a separate Art.17 ground "
+        "(Art.17.1.d is unlawful processing, not inaccuracy), so this "
+        "spec does not derive from Art.17; the rectification path is the "
+        "operational answer to Art.5.1.d inaccurate data."
+    ),
+    # Art.5.1.d binds controllers (and processors via DPA flow-through).
+    applies_when = None,  # TODO: tighten when ClientFacts catalog supports controller/processor flag
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "Art.16",
+            target_standard_id = "GDPR:2016/679",
+            role               = "rectification",
+            title              = "Right to rectification (Art.16) implements Art.5.1.d accuracy",
+            # Single recursive derivation — Art.16's procedure carries both
+            # the reactive duty (respond to data subject rectification
+            # requests) and the proactive duty (the data_location and
+            # correction_record items make controller-initiated accuracy
+            # maintenance auditable). Engine resolves Art.16 through its
+            # A.5.34 dep + procedure. Mirrors the principle → operational
+            # article pattern (Art.5.1.f → Art.32, Art.5.1.c → Art.25,
+            # Art.5.2 → Art.24, Art.5.1.a → Art.6 + Art.13).
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
@@ -4018,6 +4062,7 @@ ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_17,
     SPEC_ART_5_1_A,
     SPEC_ART_5_1_B,
+    SPEC_ART_5_1_D,
 ]
 
 
