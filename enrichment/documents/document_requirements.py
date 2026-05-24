@@ -3530,6 +3530,129 @@ SPEC_ART_5_1_C = DerivedSpec(
 )
 
 
+SPEC_ART_6 = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.6",
+    control_ref  = "Art.6",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Lawfulness of processing (derived via ISO 27001 + lawful basis register)",
+    description  = (
+        "Art.6 requires that processing be lawful only if and to the extent "
+        "that at least one of six lawful bases applies (consent, contract, "
+        "legal obligation, vital interests, public interest, legitimate "
+        "interests). ISO covers the policy commitment via A.5.34's "
+        "lawful_basis item ('lawful basis identified per processing "
+        "activity') and the law identification via A.5.31's legal/regulatory "
+        "register (confirming GDPR is enrolled with a stated compliance "
+        "approach). ISO does NOT capture the per-activity lawful basis "
+        "register as a discrete artifact — that is the Art.6-specific "
+        "auditor-facing artefact, added here as direct evidence. Art.7 "
+        "(consent conditions) and Art.13/14 (informing data subjects of "
+        "the basis) are complementary; Art.13 privacy notice is already "
+        "curated as a standalone EvidenceRequirement and carries the "
+        "communication arm."
+    ),
+    # Art.6 binds controllers (and processors via DPA flow-through). Same gate
+    # as the other GDPR specs — leave open until ClientFacts catalog gains a
+    # controller/processor flag.
+    applies_when = None,  # TODO: tighten to 'is_controller OR is_processor' when ClientFacts catalog supports it
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "A.5.34",
+            target_standard_id = "ISO27001:2022",
+            role               = "lawful_basis_policy",
+            title              = "Lawful basis identified in privacy policy (Art.6)",
+            # Restrict to the items that bear on Art.6 — knowing GDPR applies
+            # (applicable_laws) and committing at policy level that a lawful
+            # basis is identified per activity (lawful_basis). The other
+            # A.5.34 items (pii_inventory / data_subject_rights / retention /
+            # security_controls_ref / breach_handling) are governed by
+            # sibling articles (Art.30 / Art.15-22 / Art.5.1.e / Art.32 /
+            # Art.33) and excluded here.
+            scope_items = [
+                "item:A.5.34:applicable_laws",
+                "item:A.5.34:lawful_basis",
+            ],
+        ),
+        DerivedFrom(
+            target_control_ref = "A.5.31",
+            target_standard_id = "ISO27001:2022",
+            role               = "legal_register",
+            title              = "GDPR enrolled in legal/regulatory register (Art.6)",
+            # Restrict to the items that prove the tenant has identified the
+            # GDPR obligation and stated a compliance approach. Contractual
+            # / per-item-owner / last-verified items are A.5.31 governance
+            # not load-bearing for Art.6's lawfulness gate.
+            scope_items = [
+                "item:A.5.31:laws_listed",
+                "item:A.5.31:jurisdictions",
+                "item:A.5.31:compliance_approach",
+            ],
+        ),
+    ],
+    direct_evidence = [
+        EvidenceRequirement(
+            id            = "req:Art.6:lawful_basis_register",
+            control_ref   = "Art.6",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "lawful_basis_register",
+            title         = "Lawful basis register (Art.6)",
+            trigger_type  = "universal",
+            trigger_event = None,
+            description   = (
+                "Art.6 obliges the controller to be able to point to a "
+                "specific lawful basis per processing activity. A register "
+                "(or RoPA extension) listing each activity with the chosen "
+                "basis, its justification, and — for consent or legitimate "
+                "interests — the supporting record (consent capture or "
+                "LIA) is the auditor-facing artifact. ISO does not require "
+                "this as a discrete artifact; Art.6 does."
+            ),
+            freshness_days = 365,
+            must_contain   = [
+                ChecklistItem(
+                    "item:Art.6:activities_enumerated",
+                    "Processing activities enumerated (links to Art.30 RoPA)",
+                    "must", True, "Art.6.1 — basis applies per activity",
+                ),
+                ChecklistItem(
+                    "item:Art.6:basis_per_activity",
+                    "Chosen lawful basis named per activity (one of Art.6.1.a-f)",
+                    "must", True, "Art.6.1 — at least one of (a)-(f) applies",
+                ),
+                ChecklistItem(
+                    "item:Art.6:justification",
+                    "Justification recorded for the chosen basis per activity",
+                    "must", True, "Art.5.2 accountability",
+                ),
+                ChecklistItem(
+                    "item:Art.6:consent_link",
+                    "For consent-based activities, link to Art.7 consent capture record",
+                    "must", True, "Art.7 — conditions for consent",
+                ),
+                ChecklistItem(
+                    "item:Art.6:lia_link",
+                    "For legitimate-interests activities, link to LIA (necessity + balance test)",
+                    "must", True, "Art.6.1.f — overriding interests test",
+                ),
+            ],
+            should_contain = [
+                ChecklistItem(
+                    "item:Art.6:reviewed",
+                    "Register reviewed within freshness window when activities or bases change",
+                    "should", True, "Accountability — kept current",
+                ),
+                ChecklistItem(
+                    "item:Art.6:basis_change_log",
+                    "Log of lawful basis changes per activity (drives Art.13 notice amendments)",
+                    "should", True, "Art.5.2 + Art.13 alignment",
+                ),
+            ],
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
@@ -3538,6 +3661,7 @@ ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_5_2,
     SPEC_ART_5_1_E,
     SPEC_ART_5_1_C,
+    SPEC_ART_6,
 ]
 
 
