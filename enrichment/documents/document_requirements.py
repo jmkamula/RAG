@@ -3436,12 +3436,67 @@ SPEC_ART_5_2 = DerivedSpec(
 )
 
 
+SPEC_ART_5_1_E = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.5.1.e",
+    control_ref  = "Art.5.1.e",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Storage limitation (derived via A.5.33 retention + Art.25)",
+    description  = (
+        "Art.5.1.e is the GDPR principle that personal data shall be kept "
+        "in a form permitting identification of data subjects for no "
+        "longer than is necessary for the purposes for which the data are "
+        "processed ('storage limitation'). Two derivations: A.5.33 "
+        "records retention policy (concrete retention schedule with legal "
+        "drivers and disposal at end of retention) and Art.25 "
+        "(by-default minimum storage period — Art.25.2 — plus A.8.10 "
+        "deletion procedure, both reached transitively through Art.25's "
+        "derivations). Art.17 right-to-erasure is the data-subject-side "
+        "counterpart but is uncurated; revisit when Art.17 is curated."
+    ),
+    # Storage limitation binds controllers and processors processing on
+    # behalf of controllers. Same gate as the other GDPR specs.
+    applies_when = None,  # TODO: tighten to 'is_controller OR is_processor' when ClientFacts catalog supports it
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "A.5.33",
+            target_standard_id = "ISO27001:2022",
+            role               = "retention_policy",
+            title              = "Records retention schedule and disposal (Art.5.1.e)",
+            # Restrict to the retention/disposal items. A.5.33's
+            # protection_requirements item (access control, encryption,
+            # immutability) is Art.32 territory, not Art.5.1.e — excluded
+            # from scope to keep this derivation focused on the storage-
+            # period dimension.
+            scope_items = [
+                "item:A.5.33:records_schedule",
+                "item:A.5.33:retention_periods",
+                "item:A.5.33:retention_drivers",
+                "item:A.5.33:disposal",
+            ],
+        ),
+        DerivedFrom(
+            target_control_ref = "Art.25",
+            target_standard_id = "GDPR:2016/679",
+            role               = "by_default_minimum_storage",
+            title              = "Default storage period minimised + operational deletion (Art.5.1.e via Art.25)",
+            # Transitive derivation — Art.25's spec already requires
+            # Art.25.2's default_storage item (period of their storage set
+            # to minimum necessary) AND derives from A.8.10 (information
+            # deletion procedure). Both load-bearing for Art.5.1.e's
+            # operational ask. Engine cycle guard handles the recursion.
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
     SPEC_ART_5_1_F,
     SPEC_ART_24,
     SPEC_ART_5_2,
+    SPEC_ART_5_1_E,
 ]
 
 
