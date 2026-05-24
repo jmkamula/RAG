@@ -3308,10 +3308,105 @@ SPEC_ART_5_1_F = DerivedSpec(
 )
 
 
+SPEC_ART_24 = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.24",
+    control_ref  = "Art.24",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Responsibility of the controller — accountability (derived via ISO 27001)",
+    description  = (
+        "Art.24 makes the controller responsible for implementing T&O "
+        "measures to ENSURE and to be ABLE TO DEMONSTRATE compliance with "
+        "the Regulation, for reviewing and updating those measures, and "
+        "for implementing data protection policies (Art.24.2). The ask is "
+        "governance maturity, not new substantive obligations — Art.25/28/"
+        "30/32/33/35/37 carry the substance. This spec derives from the "
+        "ISO 27001 management-system clauses + annex controls that build "
+        "the governance posture: leadership, named owners, management "
+        "review, a policy framework, the GDPR-specific privacy policy, "
+        "and a compliance-review function."
+    ),
+    # Art.24 binds controllers. Same gate as the other GDPR specs — leave
+    # open until ClientFacts catalog supports a controller/processor flag.
+    applies_when = None,  # TODO: tighten to 'is_controller' when ClientFacts catalog supports it
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "5.1",
+            target_standard_id = "ISO27001:2022",
+            role               = "leadership_commitment",
+            title              = "Top management leadership and commitment (Art.24.1)",
+            # Whole control — Clause 5.1 is the management-clause anchor for
+            # accountability: top management owns the ISMS, allocates
+            # resources, integrates it into business processes. Art.24's
+            # "controller responsibility" maps directly to that ownership.
+        ),
+        DerivedFrom(
+            target_control_ref = "5.3",
+            target_standard_id = "ISO27001:2022",
+            role               = "named_authorities",
+            title              = "Roles, responsibilities and authorities assigned (Art.24.1)",
+            # Whole control — Art.24 accountability requires named owners
+            # for compliance posture; Clause 5.3 is the ISO mechanism for
+            # role assignment with decision rights.
+        ),
+        DerivedFrom(
+            target_control_ref = "9.3",
+            target_standard_id = "ISO27001:2022",
+            role               = "review_and_update",
+            title              = "Periodic management review of measures (Art.24.1 — 'reviewed and updated')",
+            # Whole control — Art.24.1's second sentence ("Those measures
+            # shall be reviewed and updated where necessary") is satisfied
+            # by the management-review cadence in Clause 9.3.
+        ),
+        DerivedFrom(
+            target_control_ref = "A.5.1",
+            target_standard_id = "ISO27001:2022",
+            role               = "policy_framework",
+            title              = "Information security policies framework (Art.24.2)",
+            # Whole control — Art.24.2 ("appropriate data protection
+            # policies") is met by the A.5.1 policy framework: a policy
+            # exists, is approved, is communicated, and is reviewed. All
+            # four A.5.1 EvidenceRequirements load-bearing for the
+            # accountability frame.
+        ),
+        DerivedFrom(
+            target_control_ref = "A.5.34",
+            target_standard_id = "ISO27001:2022",
+            role               = "privacy_governance",
+            title              = "Privacy and PII protection — accountability slice (Art.24.2)",
+            # Restrict to the items that bear on accountability — knowing
+            # the applicable law, the lawful-basis discipline, enabling
+            # data subject rights, linking policy to security controls,
+            # and breach-handling readiness. pii_inventory (RoPA / Art.30
+            # territory) and retention_minimisation (Art.5.1.e / Art.25.2)
+            # are governed by sibling articles and excluded here.
+            scope_items = [
+                "item:A.5.34:applicable_laws",
+                "item:A.5.34:lawful_basis",
+                "item:A.5.34:data_subject_rights",
+                "item:A.5.34:security_controls_ref",
+                "item:A.5.34:breach_handling",
+            ],
+        ),
+        DerivedFrom(
+            target_control_ref = "A.5.36",
+            target_standard_id = "ISO27001:2022",
+            role               = "demonstrate_compliance",
+            title              = "Compliance review records (Art.24.1 — 'to be able to demonstrate')",
+            # Whole control — Art.24.1's accountability bite is being
+            # ABLE TO DEMONSTRATE that processing complies. A.5.36's
+            # compliance-review records (schedule, scope, findings,
+            # corrective actions, named owner) ARE that demonstration.
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
     SPEC_ART_5_1_F,
+    SPEC_ART_24,
 ]
 
 
