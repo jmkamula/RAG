@@ -3402,11 +3402,46 @@ SPEC_ART_24 = DerivedSpec(
 )
 
 
+SPEC_ART_5_2 = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.5.2",
+    control_ref  = "Art.5.2",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Accountability principle (derived via Art.24)",
+    description  = (
+        "Art.5.2 is the GDPR accountability principle: 'The controller "
+        "shall be responsible for, and be able to demonstrate compliance "
+        "with, paragraph 1.' Art.24 is the operational article that "
+        "implements this principle in detail (T&O measures to ensure and "
+        "demonstrate compliance, review and update, data protection "
+        "policies). Rather than duplicating Art.24's ISO 27001 "
+        "derivations, this spec resolves transitively through Art.24."
+    ),
+    # Same gate as Art.24 — until ClientFacts catalog supports a controller
+    # flag, leave open. See [[posture-engine-alignment-plan-2026-05-22]].
+    applies_when = None,  # TODO: tighten to 'is_controller' when ClientFacts catalog supports it
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "Art.24",
+            target_standard_id = "GDPR:2016/679",
+            role               = "controller_responsibility",
+            title              = "Controller responsibility and demonstrability (Art.24) implements Art.5.2",
+            # Single recursive derivation — Art.24 IS the operationalisation
+            # of Art.5.2's accountability principle. Engine resolves Art.24
+            # transitively through its six ISO 27001 management-system /
+            # annex governance dependencies. Mirrors the Art.5.1.f → Art.32
+            # pattern (principle → operational article).
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
     SPEC_ART_5_1_F,
     SPEC_ART_24,
+    SPEC_ART_5_2,
 ]
 
 
