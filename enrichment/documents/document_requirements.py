@@ -3764,6 +3764,144 @@ SPEC_ART_16 = DerivedSpec(
 )
 
 
+SPEC_ART_17 = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.17",
+    control_ref  = "Art.17",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Right to erasure (derived via ISO 27001 + erasure procedure)",
+    description  = (
+        "Art.17 gives data subjects the right to obtain erasure of personal "
+        "data without undue delay on any of six grounds (Art.17.1.a-f: no "
+        "longer necessary, consent withdrawn, objection, unlawful "
+        "processing, legal obligation, child consent), subject to the "
+        "Art.17.3 exceptions (freedom of expression, legal obligation, "
+        "public interest, archiving, legal claims). The operational ask "
+        "spans (1) policy commitment + PII inventory + retention "
+        "alignment, (2) the actual deletion mechanism including backups "
+        "and replicas, and (3) an erasure-specific procedure covering "
+        "grounds assessment, exception handling, public-data notification "
+        "(Art.17.2), and onward notification (Art.19). ISO covers (1) via "
+        "A.5.34 and (2) via A.8.10 (information deletion); (3) is a "
+        "GDPR-specific artefact added as direct evidence. Art.12 / Art.19 "
+        "are uncurated; revisit when they land."
+    ),
+    # Art.17 binds controllers. Same gate as the other GDPR specs.
+    applies_when = None,  # TODO: tighten to 'is_controller' when ClientFacts catalog supports it
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "A.5.34",
+            target_standard_id = "ISO27001:2022",
+            role               = "rights_inventory_retention",
+            title              = "Rights enabled + PII inventory + retention alignment (Art.17)",
+            # Restrict to the three items that bear on erasure — the rights
+            # commitment, the inventory needed to locate data, and the
+            # retention/minimisation discipline that drives Art.17.1.a
+            # ('no longer necessary') and intersects with Art.5.1.e.
+            # applicable_laws / lawful_basis / security / breach are
+            # governed by sibling articles and excluded.
+            scope_items = [
+                "item:A.5.34:data_subject_rights",
+                "item:A.5.34:pii_inventory",
+                "item:A.5.34:retention_minimisation",
+            ],
+        ),
+        DerivedFrom(
+            target_control_ref = "A.8.10",
+            target_standard_id = "ISO27001:2022",
+            role               = "deletion_mechanism",
+            title              = "Information deletion procedure incl. backups/replicas (Art.17)",
+            # Whole control — Art.17's bite is that erasure must reach every
+            # copy including backups; A.8.10's scope_systems item already
+            # requires the procedure to cover backups and replicas, and the
+            # deletion_methods / verification / records items make the
+            # erasure auditable. Aligned with the Art.5.1.e storage-limitation
+            # use of A.8.10 reached transitively via Art.25.
+        ),
+    ],
+    direct_evidence = [
+        EvidenceRequirement(
+            id            = "req:Art.17:erasure_procedure",
+            control_ref   = "Art.17",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "erasure_procedure",
+            title         = "Erasure procedure (Art.17)",
+            trigger_type  = "universal",
+            trigger_event = None,
+            description   = (
+                "Art.17 requires the controller to erase personal data "
+                "without undue delay on any of the six grounds, subject "
+                "to the Art.17.3 exceptions. The procedure must cover "
+                "intake, identity verification, ground assessment, "
+                "exception assessment (with documented refusal where "
+                "applicable), erasure across all systems including "
+                "backups/replicas (links to A.8.10), Art.17.2 "
+                "notification of public-disclosure recipients where the "
+                "controller has made the data public, and Art.19 "
+                "notification of routine recipients. ISO does not "
+                "require this combination as a discrete artifact; "
+                "Art.17 does."
+            ),
+            freshness_days = 365,
+            must_contain   = [
+                ChecklistItem(
+                    "item:Art.17:intake_channel",
+                    "Intake channel published and accessible to data subjects",
+                    "must", True, "Art.12.2 — facilitate exercise of rights",
+                ),
+                ChecklistItem(
+                    "item:Art.17:identity_verification",
+                    "Identity verification step (proportionate, not over-collecting)",
+                    "must", True, "Art.12.6 — verify identity of requester",
+                ),
+                ChecklistItem(
+                    "item:Art.17:grounds_assessment",
+                    "Assessment of which Art.17.1 ground applies (a-f) recorded per request",
+                    "must", True, "Art.17.1 — six grounds for erasure",
+                ),
+                ChecklistItem(
+                    "item:Art.17:exception_assessment",
+                    "Assessment of Art.17.3 exceptions with documented refusal grounds where applicable",
+                    "must", True, "Art.17.3 — five exception categories",
+                ),
+                ChecklistItem(
+                    "item:Art.17:erasure_scope_backups",
+                    "Erasure scope covers backups and replicas (links to A.8.10:scope_systems)",
+                    "must", True, "Art.17.1 — without undue delay across all instances",
+                ),
+                ChecklistItem(
+                    "item:Art.17:erasure_record",
+                    "Erasure recorded with what was deleted, when, by whom, verification (links to A.8.10:records)",
+                    "must", True, "Art.5.2 accountability",
+                ),
+                ChecklistItem(
+                    "item:Art.17:response_deadline",
+                    "Response to data subject within one month (extendable by two months for complex requests)",
+                    "must", True, "Art.12.3 — one-month deadline",
+                ),
+                ChecklistItem(
+                    "item:Art.17:recipient_notification",
+                    "Notification to recipients per Art.19 unless impossible or disproportionate",
+                    "must", True, "Art.19 — onward notification obligation",
+                ),
+            ],
+            should_contain = [
+                ChecklistItem(
+                    "item:Art.17:public_disclosure_step",
+                    "Step for Art.17.2 public-disclosure cases — reasonable measures to inform controllers processing the public data",
+                    "should", True, "Art.17.2 — public-disclosure notification",
+                ),
+                ChecklistItem(
+                    "item:Art.17:legal_hold_check",
+                    "Legal-hold check before erasure (links to A.8.10:legal_hold)",
+                    "should", True, "Art.17.3 — legal obligation / claims exception",
+                ),
+            ],
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
@@ -3774,6 +3912,7 @@ ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_5_1_C,
     SPEC_ART_6,
     SPEC_ART_16,
+    SPEC_ART_17,
 ]
 
 
