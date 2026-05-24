@@ -4110,6 +4110,53 @@ SPEC_ART_5_1 = DerivedSpec(
 )
 
 
+SPEC_ART_5 = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.5",
+    control_ref  = "Art.5",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Principles relating to processing of personal data (Art.5 umbrella)",
+    description  = (
+        "Art.5 is the top-level GDPR principles article. It binds Art.5.1 "
+        "(the six sub-principles: lawfulness/fairness/transparency, purpose "
+        "limitation, data minimisation, accuracy, storage limitation, "
+        "integrity and confidentiality) and Art.5.2 (the accountability "
+        "principle that the controller shall be responsible for, and able "
+        "to demonstrate compliance with, paragraph 1). op=ALL — both "
+        "paragraphs must comply for Art.5 to comply. Resolves "
+        "transitively through Art.5.1 (6-child roll-up via .a-.f) and "
+        "Art.5.2 (single-edge via Art.24). Engine cycle guard + "
+        "memoisation handle the three-layer depth (Art.5 → Art.5.1 → "
+        "Art.5.1.x → operational article → ISO 27001 control)."
+    ),
+    # Art.5 binds controllers (and processors via DPA flow-through).
+    applies_when = None,  # TODO: tighten when ClientFacts catalog supports controller/processor flag
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "Art.5.1",
+            target_standard_id = "GDPR:2016/679",
+            role               = "principles",
+            title              = "Six processing principles (Art.5.1) implement Art.5",
+            # Transitive derivation through the six-child Art.5.1 umbrella.
+            # Engine resolves Art.5.1 → Art.5.1.a..f → operational articles
+            # → ISO 27001 deps. Memoisation prevents re-evaluation when
+            # Art.6 / Art.13 / Art.24 / Art.25 / Art.32 are reached via
+            # multiple paths.
+        ),
+        DerivedFrom(
+            target_control_ref = "Art.5.2",
+            target_standard_id = "GDPR:2016/679",
+            role               = "accountability",
+            title              = "Controller accountability for the principles (Art.5.2) implements Art.5",
+            # Transitive derivation — Art.5.2 derives from Art.24 which
+            # carries the six ISO 27001 management-system + annex
+            # governance dependencies. The accountability arm of Art.5
+            # joins the principles arm in op=ALL semantics.
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
@@ -4125,6 +4172,7 @@ ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_5_1_B,
     SPEC_ART_5_1_D,
     SPEC_ART_5_1,
+    SPEC_ART_5,
 ]
 
 
