@@ -3266,9 +3266,52 @@ SPEC_ART_25 = DerivedSpec(
 )
 
 
+SPEC_ART_5_1_F = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.5.1.f",
+    control_ref  = "Art.5.1.f",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Integrity and confidentiality (derived via Art.32)",
+    description  = (
+        "Art.5.1.f is the GDPR principle that personal data shall be "
+        "processed in a manner ensuring appropriate security — protection "
+        "against unauthorised or unlawful processing and against accidental "
+        "loss, destruction, damage, using appropriate technical or "
+        "organisational measures. Art.32 is the dedicated operational "
+        "article that implements this principle in detail (state of the "
+        "art measures, pseudonymisation/encryption, CIA + resilience, "
+        "restoration, periodic testing). Rather than duplicating Art.32's "
+        "ISO 27001 derivations, this spec resolves transitively through "
+        "Art.32; if Art.32 complies, Art.5.1.f complies."
+    ),
+    # Same gate as Art.32 — until ClientFacts catalog gains a controller flag,
+    # leave open. See [[posture-engine-alignment-plan-2026-05-22]].
+    applies_when = None,  # TODO: tighten to 'is_controller' when ClientFacts catalog supports it
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "Art.32",
+            target_standard_id = "GDPR:2016/679",
+            role               = "security_of_processing",
+            title              = "Operational T&O measures (Art.32) implement Art.5.1.f",
+            # Single recursive derivation — Art.32 IS the operationalisation
+            # of Art.5.1.f. Engine resolves Art.32 transitively through its
+            # five ISO 27001 dependencies + Art.32.1.d resilience test leaf.
+            # Cycle guard at fulfilment_engine.evaluate_spec prevents loops.
+            #
+            # "Unauthorised or unlawful processing" in Art.5.1.f means
+            # breaches of integrity/confidentiality (e.g. unauthorised
+            # access), not Art.6 legal-basis violations — so Art.6 is not
+            # part of this derivation. Likewise Art.25 (design-time) covers
+            # a different angle than Art.5.1.f's operational ask.
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
+    SPEC_ART_5_1_F,
 ]
 
 
