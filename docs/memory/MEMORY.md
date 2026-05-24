@@ -13,3 +13,4 @@
 - [Claude Code hooks run under /bin/sh](claude_code_hooks_run_under_sh.md) — hooks on this VM execute under dash, not bash; write POSIX (case/single-bracket), never [[ ]]; active example is .claude/settings.json memory-sync hook
 - [Posture/engine alignment plan 2026-05-22](posture_engine_alignment_plan_2026_05_22.md) — ACTIVE plan: Phases A-D to fix Stage-1 contract violation, curate 410 uncurated specs, ship polite gap surface; Stage-1 contract change ships after curation completes
 - [Curation document templates idea](curation_document_templates_idea.md) — FUTURE: ship template documents alongside each EvidenceRequirement so tenants get a starting draft pre-aligned to MUST items; not in current scope
+- [Engine verdict verification snippet](engine_verdict_verification_snippet.md) — `compute_engine_verdicts(pg, neo, TENANT)` returns dict[control_id, ControlVerdict]; stderr/2>/dev/null + Cypher `AS alias` gotchas captured
