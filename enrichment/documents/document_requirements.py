@@ -3653,6 +3653,117 @@ SPEC_ART_6 = DerivedSpec(
 )
 
 
+SPEC_ART_16 = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.16",
+    control_ref  = "Art.16",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Right to rectification (derived via ISO 27001 + rectification procedure)",
+    description  = (
+        "Art.16 gives data subjects the right to obtain rectification of "
+        "inaccurate personal data without undue delay (Art.12.3 sets the "
+        "one-month response deadline) and to have incomplete personal data "
+        "completed. The operational ask is twofold: (1) policy commitment "
+        "to enabling the right, plus a personal-data inventory so the "
+        "controller knows where to find data to correct; and (2) a "
+        "concrete procedure covering intake, identity verification "
+        "(Art.12.6), location across all systems, the correction itself, "
+        "response to the data subject (Art.12.3), and onward notification "
+        "to recipients (Art.19). ISO covers (1) via A.5.34's "
+        "data_subject_rights + pii_inventory items; (2) is a GDPR-specific "
+        "operational artefact added here as direct evidence. Art.12 "
+        "(modalities) and Art.19 (notification) are referenced but "
+        "themselves uncurated; revisit when they land."
+    ),
+    # Art.16 binds controllers. Same gate as the other GDPR specs.
+    applies_when = None,  # TODO: tighten to 'is_controller' when ClientFacts catalog supports it
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "A.5.34",
+            target_standard_id = "ISO27001:2022",
+            role               = "rights_policy_and_inventory",
+            title              = "Data subject rights enabled + PII inventory available (Art.16)",
+            # Restrict to the two items that bear on rectification — the
+            # policy commitment that the right is enabled, and the PII
+            # inventory that makes location-across-systems possible. Other
+            # A.5.34 items (lawful_basis / retention_minimisation / security
+            # / breach) are governed by sibling articles and excluded.
+            scope_items = [
+                "item:A.5.34:data_subject_rights",
+                "item:A.5.34:pii_inventory",
+            ],
+        ),
+    ],
+    direct_evidence = [
+        EvidenceRequirement(
+            id            = "req:Art.16:rectification_procedure",
+            control_ref   = "Art.16",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "rectification_procedure",
+            title         = "Rectification procedure (Art.16)",
+            trigger_type  = "universal",
+            trigger_event = None,
+            description   = (
+                "Art.16 requires the controller to rectify inaccurate "
+                "personal data without undue delay and to complete "
+                "incomplete data. The procedure must cover intake, "
+                "identity verification (Art.12.6), data location across "
+                "all systems including replicas, the correction step "
+                "itself, response to the data subject within one month "
+                "(Art.12.3), and onward notification to recipients per "
+                "Art.19. ISO does not require this as a discrete "
+                "artifact; Art.16 does."
+            ),
+            freshness_days = 365,
+            must_contain   = [
+                ChecklistItem(
+                    "item:Art.16:intake_channel",
+                    "Intake channel published and accessible to data subjects",
+                    "must", True, "Art.12.2 — facilitate exercise of rights",
+                ),
+                ChecklistItem(
+                    "item:Art.16:identity_verification",
+                    "Identity verification step (proportionate, not over-collecting)",
+                    "must", True, "Art.12.6 — verify identity of requester",
+                ),
+                ChecklistItem(
+                    "item:Art.16:data_location",
+                    "Data location workflow across all systems including replicas (links to Art.30 RoPA)",
+                    "must", True, "Art.16 — rectification across all instances",
+                ),
+                ChecklistItem(
+                    "item:Art.16:correction_record",
+                    "Correction recorded with what was changed, when, by whom",
+                    "must", True, "Art.5.2 accountability",
+                ),
+                ChecklistItem(
+                    "item:Art.16:response_deadline",
+                    "Response to data subject within one month (extendable by two months for complex requests)",
+                    "must", True, "Art.12.3 — one-month deadline",
+                ),
+                ChecklistItem(
+                    "item:Art.16:recipient_notification",
+                    "Notification to recipients per Art.19 unless impossible or disproportionate",
+                    "must", True, "Art.19 — onward notification obligation",
+                ),
+            ],
+            should_contain = [
+                ChecklistItem(
+                    "item:Art.16:supplementary_statement",
+                    "Mechanism for supplementary statement when correction is contested",
+                    "should", True, "Art.16 — completion via supplementary statement",
+                ),
+                ChecklistItem(
+                    "item:Art.16:refusal_grounds",
+                    "Documented grounds for refusing manifestly unfounded or excessive requests",
+                    "should", True, "Art.12.5 — handling unfounded requests",
+                ),
+            ],
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
@@ -3662,6 +3773,7 @@ ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_5_1_E,
     SPEC_ART_5_1_C,
     SPEC_ART_6,
+    SPEC_ART_16,
 ]
 
 
