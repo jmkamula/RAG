@@ -4049,6 +4049,67 @@ SPEC_ART_5_1_D = DerivedSpec(
 )
 
 
+SPEC_ART_5_1 = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.5.1",
+    control_ref  = "Art.5.1",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Principles relating to processing of personal data (Art.5.1 umbrella)",
+    description  = (
+        "Art.5.1 is the umbrella paragraph listing the six sub-principles "
+        "(a) lawfulness/fairness/transparency, (b) purpose limitation, "
+        "(c) data minimisation, (d) accuracy, (e) storage limitation, "
+        "(f) integrity and confidentiality. All six are individually "
+        "curated as DerivedSpecs that resolve through operational "
+        "articles and ISO 27001 controls; this spec aggregates them. "
+        "op=ALL — every sub-principle must comply for the umbrella to "
+        "comply, consistent with GDPR's binding-conjunctive reading of "
+        "Art.5.1. Engine cycle guard handles transitive resolution "
+        "through each sub-principle's deps."
+    ),
+    # Art.5.1 binds controllers (and processors via DPA flow-through).
+    applies_when = None,  # TODO: tighten when ClientFacts catalog supports controller/processor flag
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "Art.5.1.a",
+            target_standard_id = "GDPR:2016/679",
+            role               = "lawfulness_fairness_transparency",
+            title              = "Lawfulness, fairness and transparency (Art.5.1.a)",
+        ),
+        DerivedFrom(
+            target_control_ref = "Art.5.1.b",
+            target_standard_id = "GDPR:2016/679",
+            role               = "purpose_limitation",
+            title              = "Purpose limitation (Art.5.1.b)",
+        ),
+        DerivedFrom(
+            target_control_ref = "Art.5.1.c",
+            target_standard_id = "GDPR:2016/679",
+            role               = "data_minimisation",
+            title              = "Data minimisation (Art.5.1.c)",
+        ),
+        DerivedFrom(
+            target_control_ref = "Art.5.1.d",
+            target_standard_id = "GDPR:2016/679",
+            role               = "accuracy",
+            title              = "Accuracy (Art.5.1.d)",
+        ),
+        DerivedFrom(
+            target_control_ref = "Art.5.1.e",
+            target_standard_id = "GDPR:2016/679",
+            role               = "storage_limitation",
+            title              = "Storage limitation (Art.5.1.e)",
+        ),
+        DerivedFrom(
+            target_control_ref = "Art.5.1.f",
+            target_standard_id = "GDPR:2016/679",
+            role               = "integrity_confidentiality",
+            title              = "Integrity and confidentiality (Art.5.1.f)",
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
@@ -4063,6 +4124,7 @@ ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_5_1_A,
     SPEC_ART_5_1_B,
     SPEC_ART_5_1_D,
+    SPEC_ART_5_1,
 ]
 
 
