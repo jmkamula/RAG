@@ -3954,6 +3954,57 @@ SPEC_ART_5_1_A = DerivedSpec(
 )
 
 
+SPEC_ART_5_1_B = DerivedSpec(
+    spec_id      = "spec:GDPR:2016/679:Art.5.1.b",
+    control_ref  = "Art.5.1.b",
+    standard_id  = "GDPR:2016/679",
+    op           = "ALL",
+    title        = "Purpose limitation (derived via Art.6 + Art.30)",
+    description  = (
+        "Art.5.1.b requires that personal data be collected for specified, "
+        "explicit and legitimate purposes and not further processed in a "
+        "way incompatible with those purposes. Two operational anchors: "
+        "Art.6 establishes the legitimate purpose tied to a lawful basis "
+        "(its lawful basis register names the purpose per activity), and "
+        "Art.30 RoPA enumerates purposes per processing activity ('the "
+        "specified, explicit' bit). The further-processing-compatibility "
+        "test (Art.6.4) is the residual ask — it sits inside Art.6 but "
+        "is not separately operationalised here; a compatibility "
+        "assessment record could be added as direct evidence later. "
+        "Art.89 (safeguards for archiving / scientific / statistical "
+        "purposes) is the exception carve-out and is uncurated; revisit "
+        "when it lands."
+    ),
+    # Art.5.1.b binds controllers (and processors via DPA flow-through).
+    applies_when = None,  # TODO: tighten when ClientFacts catalog supports controller/processor flag
+    derives_from = [
+        DerivedFrom(
+            target_control_ref = "Art.6",
+            target_standard_id = "GDPR:2016/679",
+            role               = "legitimate_purpose",
+            title              = "Lawful basis ties processing to a legitimate purpose (Art.6) implements Art.5.1.b",
+            # Transitive derivation — Art.6 binds each activity to a lawful
+            # basis with a stated justification (lawful basis register's
+            # 'purposes' + 'justification' must-items), which is the
+            # 'legitimate' limb of specified/explicit/legitimate. Engine
+            # resolves Art.6 through its A.5.34/A.5.31 deps + register.
+        ),
+        DerivedFrom(
+            target_control_ref = "Art.30",
+            target_standard_id = "GDPR:2016/679",
+            role               = "purposes_enumerated",
+            title              = "RoPA enumerates purposes per activity (Art.30.1.b) implements Art.5.1.b specified/explicit",
+            # Transitive derivation — Art.30's purposes must-item carries
+            # the 'specified, explicit' arm: the controller has written
+            # down the purpose of each processing activity. Combined with
+            # Art.6's legitimacy ask, this covers the upfront purpose
+            # discipline. Further-processing compatibility (Art.6.4) is
+            # the residual gap noted in description.
+        ),
+    ],
+)
+
+
 ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_32,
     SPEC_ART_25,
@@ -3966,6 +4017,7 @@ ALL_DERIVED_SPECS: list[DerivedSpec] = [
     SPEC_ART_16,
     SPEC_ART_17,
     SPEC_ART_5_1_A,
+    SPEC_ART_5_1_B,
 ]
 
 
