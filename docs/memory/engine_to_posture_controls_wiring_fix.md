@@ -29,7 +29,7 @@ After all three: 15/20 GDPR verdicts persist as Stage-2 proposals (status='propo
 3. User approves via `approve engine verdict for Art.32` → finding flips Not assessed→OFI, confirmation_status→engine_confirmed
 4. Next `load_posture` includes the row (filter passes) → overlay applies (status=approved) → chat answer cites OFI with engine_reason + engine_gap_list
 
-**How to apply:** The active plan ([[posture-engine-alignment-plan-2026-05-22]]) Phase B (bulk GDPR curation) and Phase D (Stage-1 contract change) still pending. This wiring fix is infrastructure both will rely on — Phase B's curated specs will start producing engine verdicts, and Phase D's engine-kick-after-Stage-1 needs the posture_controls rows that the backfill created.
+**How to apply:** Phase D (Stage-1 contract change) shipped same session via [[stage1-contract-change-path-a-2026-05-25]] — Stage-1 no longer mutates `posture_controls.finding`, Arion's 27 Stage-1 flips were reverted. Phase B (bulk GDPR curation) still pending. This wiring fix remains infrastructure Phase B will rely on — its curated specs will start producing engine verdicts that this filter + backfill now accept.
 
 **Tenant scope:** Backfill only ran on Arion Networks (`00000000-0000-0000-0000-000000000001`). New tenants will need the same backfill — consider rolling it into the tenant-onboarding path or running it lazily when the engine first encounters a missing row.
 
