@@ -28,7 +28,7 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 28/28 PASS before any restart.
+# Must be 39/39 PASS before any restart.
 # Whenever you add a user-facing feature/fix, append an EvalCase that would
 # have failed pre-change and passes post-change — see the feedback-memory rule.
 ```
@@ -94,7 +94,7 @@ The FIRST copy of each function is the correct/patched version.
 The graph uses the LAST definition — so duplicates shadow fixes.
 
 **Fix approach:** For each duplicate, keep the first definition, remove the second.
-After removing duplicates, always run eval (28/28 must pass) before restarting.
+After removing duplicates, always run eval (39/39 must pass) before restarting.
 
 ### 2. Clarification loop (depends on fix #1)
 Query: "what documents are missing?" triggers clarification instead of
@@ -148,24 +148,26 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- File: results/eval_20260516_1700_xfw_proposals.csv (28 cases — 21 core + 7 feature-locked)
-- Score: 28/28 PASS
+- File: results/eval_20260525_1314_path_a.csv (39 cases — 21 core + 18 feature-locked)
+- Score: 39/39 PASS, 0 WARN, 0 FAIL
 - Never deploy with a regression below the current case count
 - Cases 22-26 lock in: cited refs in POSTURE_STATUS / STANDARD_KNOWLEDGE,
   xfw posture inheritance, Layer-2 anti-hallucination, uploaded-doc short-circuit
 - Cases 27-28 lock in: xfw proposer HITL queue (chat surface + isolation guard)
+- Cases 33-36 lock in: Stage-1 HITL surfaces (list / approve / acknowledge)
+- Cases 37-38 lock in: Stage-2 HITL surfaces (engine-verdict list / approve)
+- Case 39 locks in: [DRAFT] label fix — document_confirmed rows must not be
+  hedged via the CONFIRMATION RULE
+- Prior known-stale cases (#2, #3, #4, #24, #25, #28) restored to PASS on
+  2026-05-25 via Path A: replayed status_before from posture_status_log to
+  revert the 27 Stage-1-driven finding mutations, and stripped the offending
+  UPDATE from stage1_review_chat.py (commit d6329c4). Stage-1 now only
+  confirms evidence; engine + Stage-2 own posture.
 - TODO: add case for incident obligations once the chat surface (commit 40ad607)
   exposes a non-clarification answer path
 - TODO: add case for SPEC_ART_25 (GDPR Art.25 DPbD DerivedSpec, 6 deps + 1 direct
-  evidence leaf) once engine→chat wiring exposes engine verdicts. Engine-level
-  derivation already covered parametrically by tests/test_fulfilment_engine.py
-  derives_from suite.
-- Known stale cases (data drift since baseline): #4, #24, #25, #28 fail because
-  A.5.26 dropped out of NC findings (only X.* synthetic IDs remain NC) and the
-  xfw inheritance answer paths no longer cite A.5.x bridge controls. Tied to
-  Stage-1 approval work landed post-baseline. Fix alongside Thread 2
-  (engine→chat wiring) by either updating case expectations or restoring the
-  load-bearing posture state in fixtures.
+  evidence leaf). Engine→chat wiring landed 2026-05-25 (commit 9ac0ac3); the
+  prerequisite is now met but the regression test still needs writing.
 
 ## Git
 ```bash
