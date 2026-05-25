@@ -645,6 +645,42 @@ EVAL_CASES = [
             "no_pending repeat paths. Pairs with id=35 (list)."
         ),
     ),
+
+    EvalCase(
+        id=39,
+        query="what is our posture on A.5.1?",
+        tags=["posture", "confirmation_label", "document_confirmed"],
+        expected_refs=["A.5.1"],
+        # expected_type intentionally omitted — the classifier routes
+        # "what is our posture on X?" to `definition` rather than
+        # `posture_check`. The label-fix contract is type-agnostic;
+        # locking expected_type here would WARN on a tangential signal.
+        # Confirmation-label regression: A.5.1 carries
+        # confirmation_status='document_confirmed' (Stage-1 approved).
+        # Pre-fix llm_answer.py treated only {confirmed, overridden} as
+        # non-draft and tagged the prompt context with [<finding> DRAFT].
+        # The CONFIRMATION RULE in SYSTEM_PROMPT then forces the LLM to
+        # hedge ("Our records suggest…" / "A preliminary assessment
+        # indicates…") instead of stating the posture as fact.
+        # Post-fix the tuple includes {document_confirmed, engine_confirmed}
+        # so the [DRAFT] tag is dropped and the LLM states the finding
+        # directly. Finding kept loose (Comply vs engine-driven OFI per
+        # case 33) — the regression signal is the hedging phrases, not
+        # the verdict text.
+        must_contain=["A.5.1"],
+        must_not_contain=[
+            "preliminary assessment",
+            "Our records suggest",
+            "could you clarify",
+            "I need more information",
+        ],
+        notes=(
+            "Locks the [DRAFT] label fix: document_confirmed rows must "
+            "be presented as facts, not hedged via the CONFIRMATION RULE. "
+            "Depends on id=36 having previously flipped A.5.1 to "
+            "document_confirmed (or the existing seeded state)."
+        ),
+    ),
 ]
 
 
