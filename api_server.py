@@ -1751,6 +1751,145 @@ async def findings_reject(
         pool.putconn(conn)
 
 
+# ── Stage-1 read endpoints ────────────────────────────────────────────────────
+# REST mirror of `what findings need review?` and `pending findings for X`
+# chat surfaces. The UI uses these to render the Stage-1 review tab; the
+# write side is /api/v1/findings/{approve,reject} which take finding_ids.
+
+@app.get("/api/v1/stage1/queue", tags=["hitl"])
+async def stage1_queue(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_scope("hitl")),
+):
+    """List controls with pending document_findings, grouped by control_ref."""
+    from rag.posture.stage1_review_chat import list_queue
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        controls = list_queue(conn, key_info.tenant_id)
+        return {"controls": controls, "total": len(controls)}
+    finally:
+        pool.putconn(conn)
+
+
+@app.get("/api/v1/stage1/queue/{control_ref}", tags=["hitl"])
+async def stage1_queue_for_control(
+    control_ref: str,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("hitl")),
+):
+    """Per-control pending findings with excerpts, status, confidence."""
+    from rag.posture.stage1_review_chat import list_pending_for_control
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        findings = list_pending_for_control(conn, key_info.tenant_id, control_ref)
+        return {"control_ref": control_ref, "findings": findings, "total": len(findings)}
+    finally:
+        pool.putconn(conn)
+
+
+# ── Stage-2 endpoints ─────────────────────────────────────────────────────────
+# REST mirror of the Stage-2 engine-verdict approval chat surface. Approving
+# here is the only path (besides the chat surface) that mutates
+# posture_controls.finding for engine-proposed verdicts — Stage-1 confirms
+# evidence only per [[stage1-contract-change-path-a-2026-05-25]].
+
+class Stage2RejectRequest(BaseModel):
+    rationale: str
+
+
+@app.get("/api/v1/stage2/queue", tags=["hitl"])
+async def stage2_queue(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_scope("hitl")),
+):
+    """List posture_controls with engine_proposal_status='proposed'."""
+    from rag.posture.stage2_approval_chat import list_pending_proposals
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        proposals = list_pending_proposals(conn, key_info.tenant_id)
+        return {"proposals": proposals, "total": len(proposals)}
+    finally:
+        pool.putconn(conn)
+
+
+@app.post("/api/v1/stage2/{control_ref}/approve", tags=["hitl"])
+async def stage2_approve(
+    control_ref: str,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("hitl")),
+):
+    """Approve the engine verdict for one control. Flips posture_controls.finding
+    to engine_proposed_finding, status to engine_confirmed."""
+    from rag.posture.stage2_approval_chat import approve_engine_proposal
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        result = approve_engine_proposal(
+            conn,
+            tenant_id   = key_info.tenant_id,
+            control_ref = control_ref,
+            reviewed_by = key_info.user_id or "chat_user",
+        )
+        if result.get("ok"):
+            cache = request.app.state.tenant_cache
+            if cache:
+                cache.invalidate(key_info.tenant_id)
+            return result
+        reason = result.get("reason", "unknown")
+        if reason in ("no_posture_row", "no_proposal"):
+            raise HTTPException(404, f"No pending engine proposal for {control_ref}")
+        if reason == "already_approved":
+            raise HTTPException(409, f"Engine proposal for {control_ref} already approved")
+        raise HTTPException(500, result.get("error", "approve failed"))
+    finally:
+        pool.putconn(conn)
+
+
+@app.post("/api/v1/stage2/{control_ref}/reject", tags=["hitl"])
+async def stage2_reject(
+    control_ref: str,
+    body:        Stage2RejectRequest,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("hitl")),
+):
+    """Reject the engine verdict for one control. Sets status to 'rejected';
+    posture_controls.finding is NOT touched."""
+    if not body.rationale or not body.rationale.strip():
+        raise HTTPException(400, "rationale is required for reject")
+    from rag.posture.stage2_approval_chat import reject_engine_proposal
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        result = reject_engine_proposal(
+            conn,
+            tenant_id   = key_info.tenant_id,
+            control_ref = control_ref,
+            rationale   = body.rationale,
+            reviewed_by = key_info.user_id or "chat_user",
+        )
+        if result.get("ok"):
+            return result
+        reason = result.get("reason", "unknown")
+        if reason in ("no_posture_row", "no_proposal"):
+            raise HTTPException(404, f"No pending engine proposal for {control_ref}")
+        raise HTTPException(500, result.get("error", "reject failed"))
+    finally:
+        pool.putconn(conn)
+
+
 # =============================================================================
 # POSTURE ROUTER
 # =============================================================================

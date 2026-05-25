@@ -263,33 +263,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="sidebar-divider"></div>
 
     <div class="filter-group" id="queue-filters">
-      <div class="filter-label">Finding</div>
-      <button class="filter-item active" id="ff-all" onclick="setFilter('all')">
-        <span class="fdot fdot-all"></span> All <span class="fcount" id="fc-all">—</span>
-      </button>
-      <button class="filter-item" id="ff-NC" onclick="setFilter('NC')">
-        <span class="fdot fdot-nc"></span> NC <span class="fcount" id="fc-NC">—</span>
-      </button>
-      <button class="filter-item" id="ff-OFI" onclick="setFilter('OFI')">
-        <span class="fdot fdot-ofi"></span> OFI <span class="fcount" id="fc-OFI">—</span>
-      </button>
-      <button class="filter-item" id="ff-Comply" onclick="setFilter('Comply')">
-        <span class="fdot fdot-comply"></span> Comply <span class="fcount" id="fc-Comply">—</span>
-      </button>
-
-      <div class="filter-label" style="margin-top:6px">Source</div>
-      <button class="filter-item active" id="fs-all" onclick="setSource('all')">
-        <i class="ti ti-list" style="font-size:12px" aria-hidden="true"></i> All
-      </button>
-      <button class="filter-item" id="fs-assessor" onclick="setSource('assessor')">
-        <i class="ti ti-user-check" style="font-size:12px" aria-hidden="true"></i> Assessor
-      </button>
-      <button class="filter-item" id="fs-document" onclick="setSource('document')">
-        <i class="ti ti-file-text" style="font-size:12px" aria-hidden="true"></i> Document
-      </button>
-      <button class="filter-item" id="fs-workbook" onclick="setSource('workbook')">
-        <i class="ti ti-table" style="font-size:12px" aria-hidden="true"></i> Workbook
-      </button>
+      <div class="filter-label muted" style="padding:0 8px">Tip</div>
+      <div style="padding:0 8px;font-size:11px;color:#9C9A8E;line-height:1.5">
+        Stage 1 confirms evidence extracted from your documents.
+        Stage 2 approves engine-derived posture verdicts.
+      </div>
     </div>
   </div>
 
@@ -298,9 +276,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
     <!-- Queue toolbar -->
     <div class="main-toolbar" id="toolbar-queue">
-      <div>
-        <div class="main-title" id="queue-title">Review queue</div>
-        <div class="main-sub" id="queue-sub">—</div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <div>
+          <div class="main-title" id="queue-title">Review queue</div>
+          <div class="main-sub" id="queue-sub">—</div>
+        </div>
+        <div class="tabs" style="margin-left:8px">
+          <button class="tab active" id="stab-1" onclick="setStage(1)">Stage 1 · Evidence <span class="fcount" id="sc-1">—</span></button>
+          <button class="tab" id="stab-2" onclick="setStage(2)">Stage 2 · Engine <span class="fcount" id="sc-2">—</span></button>
+        </div>
       </div>
       <button class="btn-sm btn-outline" onclick="loadQueue()">
         <i class="ti ti-refresh" aria-hidden="true"></i> Refresh
@@ -458,10 +442,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
 let mode = 'queue';
-let qFilter = 'all', qSource = 'all', qPage = 0;
-const PAGE = 20;
-let qTotal = 0;
-let selected = null;
+let stage = 1;                 // 1 = evidence (Stage-1), 2 = engine (Stage-2)
+let s1Controls = [];           // last-loaded Stage-1 control list
+let s2Proposals = [];          // last-loaded Stage-2 proposal list
+let s1Details = {};            // control_ref -> [{finding_id, status, confidence, excerpt}]
+let selected = null;           // currently-selected card (s1 control or s2 proposal)
 let chatHistory = [];
 let uploads = {};
 
@@ -514,37 +499,47 @@ function setMode(m) {
     document.getElementById('body-'+x).style.display = x===m ? '' : 'none';
   });
   document.getElementById('queue-filters').style.display = m==='queue' ? '' : 'none';
-  if (m === 'queue' && qTotal === 0) loadQueue();
+  if (m === 'queue') loadQueue();
 }
 
-// ── Queue ──
+// ── Queue (Stage 1 / Stage 2 two-stage HITL) ──
+function setStage(s) {
+  stage = s;
+  document.getElementById('stab-1').classList.toggle('active', s===1);
+  document.getElementById('stab-2').classList.toggle('active', s===2);
+  closeDetail();
+  loadQueue();
+}
+
 async function loadQueue() {
   const body = document.getElementById('body-queue');
   body.innerHTML = '<div class="empty"><i class="ti ti-loader-2" aria-hidden="true"></i><p>Loading...</p></div>';
   try {
-    const p = new URLSearchParams({limit:PAGE, offset:qPage*PAGE});
-    if (qFilter !== 'all') p.set('finding', qFilter);
-    if (qSource !== 'all') p.set('source', qSource);
-    const d = await api('/api/v1/review-queue?'+p);
-    qTotal = d.total;
-    setStatus(true);
-    loadCounts();
-    renderQueue(d.controls, d.total);
+    if (stage === 1) {
+      const d = await api('/api/v1/stage1/queue');
+      s1Controls = d.controls;
+      setStatus(true);
+      renderStage1(d.controls, d.total);
+    } else {
+      const d = await api('/api/v1/stage2/queue');
+      s2Proposals = d.proposals;
+      setStatus(true);
+      renderStage2(d.proposals, d.total);
+    }
+    loadStageCounts();
   } catch(e) {
     setStatus(false);
     body.innerHTML = `<div class="empty"><i class="ti ti-alert-circle" aria-hidden="true"></i><p>${e.message}</p></div>`;
   }
 }
 
-async function loadCounts() {
+async function loadStageCounts() {
   try {
-    const all = await api('/api/v1/review-queue?limit=1');
-    document.getElementById('fc-all').textContent = all.total;
-    document.getElementById('nb-queue').textContent = all.total;
-    for (const f of ['NC','OFI','Comply']) {
-      const d = await api(`/api/v1/review-queue?finding=${f}&limit=1`);
-      document.getElementById('fc-'+f).textContent = d.total;
-    }
+    const s1 = await api('/api/v1/stage1/queue');
+    const s2 = await api('/api/v1/stage2/queue');
+    document.getElementById('sc-1').textContent = s1.total;
+    document.getElementById('sc-2').textContent = s2.total;
+    document.getElementById('nb-queue').textContent = (s1.total + s2.total);
   } catch(e) {}
 }
 
@@ -553,99 +548,164 @@ function pill(finding) {
   return `<span class="pill ${m[finding]||'p-na'}">${finding}</span>`;
 }
 
-function renderQueue(controls, total) {
+function statusPill(status) {
+  const m = {present:'p-comply',partial:'p-ofi',missing:'p-nc'};
+  return `<span class="pill ${m[status]||'p-na'}">${status}</span>`;
+}
+
+function renderStage1(controls, total) {
   const body = document.getElementById('body-queue');
-  const fl = qFilter==='all'?'All findings':qFilter;
-  const sl = qSource==='all'?'':` · ${qSource}`;
-  document.getElementById('queue-title').textContent = fl + sl;
-  document.getElementById('queue-sub').textContent = `${total} control${total!==1?'s':''} pending review`;
+  document.getElementById('queue-title').textContent = 'Stage 1 · Evidence review';
+  document.getElementById('queue-sub').textContent =
+    `${total} control${total!==1?'s':''} with pending document findings — confirm evidence to advance to Stage 2`;
 
   if (!controls.length) {
-    body.innerHTML = '<div class="empty"><i class="ti ti-circle-check" aria-hidden="true"></i><p>No controls match this filter</p></div>';
+    body.innerHTML = '<div class="empty"><i class="ti ti-circle-check" aria-hidden="true"></i><p>Stage 1 queue is empty</p></div>';
     return;
   }
 
   let html = '<div class="queue-list">';
   for (const c of controls) {
-    const conflict = c.system_finding && c.system_finding !== c.finding;
-    const hours = Math.round(c.hours_in_draft);
-    const warn = hours > 72;
     const safe = JSON.stringify(c).replace(/'/g,"\\'").replace(/"/g,'&quot;');
     html += `
-      <div class="qcard${selected?.id===c.id?' active':''}" onclick='selectControl(${safe})'>
+      <div class="qcard" data-ref="${c.control_ref}" onclick='selectStage1(${safe}, event)'>
         <div class="qcard-top">
           <div>
             <div class="qcard-ref">${c.control_ref}</div>
             <div class="qcard-std">${c.standard_id}</div>
           </div>
           <div class="qcard-pills">
-            ${conflict?'<span class="conflict-pill"><i class="ti ti-alert-triangle" aria-hidden="true"></i> conflict</span>':''}
-            ${pill(c.finding)}
-            <span class="pill p-src">${c.source}</span>
+            <span class="pill p-src">${c.pending_count} pending</span>
           </div>
         </div>
-        <div class="qcard-gap">${c.gap_description||'—'}</div>
-        <div class="qcard-meta">
-          <span class="${warn?'hours-warn':''}"><i class="ti ti-clock" aria-hidden="true"></i> ${hours}h</span>
-          <span><i class="ti ti-shield-check" aria-hidden="true"></i> ${c.confidence||'—'}</span>
-          ${c.previously_overridden?'<span><i class="ti ti-history" aria-hidden="true"></i> prev. overridden</span>':''}
-        </div>
+        <div class="qcard-gap muted">Click to preview evidence excerpts</div>
       </div>`;
   }
   html += '</div>';
-
-  if (total > PAGE) {
-    const s = qPage*PAGE+1, e2 = Math.min((qPage+1)*PAGE, total);
-    html += `<div class="pagination">
-      <span class="pag-info">${s}–${e2} of ${total}</span>
-      <div class="pag-btns">
-        <button class="btn-page" onclick="changePage(-1)" ${qPage===0?'disabled':''}>Prev</button>
-        <button class="btn-page" onclick="changePage(1)" ${e2>=total?'disabled':''}>Next</button>
-      </div>
-    </div>`;
-  }
-
   body.innerHTML = html;
 }
 
-function selectControl(c) {
-  selected = c;
+function renderStage2(proposals, total) {
+  const body = document.getElementById('body-queue');
+  document.getElementById('queue-title').textContent = 'Stage 2 · Engine verdicts';
+  document.getElementById('queue-sub').textContent =
+    `${total} engine proposal${total!==1?'s':''} pending — approve to apply verdict to posture`;
+
+  if (!proposals.length) {
+    body.innerHTML = '<div class="empty"><i class="ti ti-circle-check" aria-hidden="true"></i><p>Stage 2 queue is empty</p></div>';
+    return;
+  }
+
+  let html = '<div class="queue-list">';
+  for (const p of proposals) {
+    const safe = JSON.stringify(p).replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    const proposed = p.proposed_finding;
+    const live     = p.live_finding;
+    html += `
+      <div class="qcard" data-ref="${p.control_ref}" onclick='selectStage2(${safe}, event)'>
+        <div class="qcard-top">
+          <div>
+            <div class="qcard-ref">${p.control_ref}</div>
+            <div class="qcard-std">${p.standard_id}</div>
+          </div>
+          <div class="qcard-pills">
+            <span class="pill p-src">${live||'—'}</span>
+            <span style="font-size:11px;color:#9C9A8E">→</span>
+            ${pill(proposed)}
+          </div>
+        </div>
+        <div class="qcard-gap">${p.reason || '—'}</div>
+      </div>`;
+  }
+  html += '</div>';
+  body.innerHTML = html;
+}
+
+async function selectStage1(c, ev) {
+  selected = {kind: 's1', ...c};
   document.getElementById('detail-empty').style.display = 'none';
-  const dc = document.getElementById('detail-content');
-  dc.style.display = 'flex';
+  document.getElementById('detail-content').style.display = 'flex';
 
   document.getElementById('dp-ref').textContent = c.control_ref;
   document.getElementById('dp-std').textContent = c.standard_id;
   document.getElementById('dp-finding').innerHTML =
-    pill(c.finding) + ` <span class="pill p-src">${c.source}</span>` +
-    (c.confidence ? ` <span style="font-size:10px;color:#B4B2A9">${c.confidence}</span>` : '');
+    `<span class="pill p-src">${c.pending_count} pending finding(s)</span>`;
+  document.getElementById('dp-sys-wrap').style.display = 'none';
+  document.getElementById('dp-gap').innerHTML = '<i class="ti ti-loader-2"></i> Loading…';
+  document.getElementById('dp-meta').textContent = '—';
 
-  const sysWrap = document.getElementById('dp-sys-wrap');
-  if (c.system_finding) {
-    sysWrap.style.display = '';
-    const diff = c.system_finding !== c.finding;
-    document.getElementById('dp-sys').innerHTML =
-      (diff ? `<span class="sys-diff">${c.system_finding}</span> → <strong>${c.finding}</strong>` : c.system_finding) +
-      (c.system_gap ? `<br>${c.system_gap}` : '') +
-      (c.system_proposed_at ? `<br><span style="color:#D3D1C7;font-size:10px">${new Date(c.system_proposed_at).toLocaleDateString()}</span>` : '');
-  } else {
-    sysWrap.style.display = 'none';
+  // Configure action panel for Stage 1
+  configureActionPanel('s1');
+
+  document.querySelectorAll('.qcard').forEach(el => el.classList.remove('active'));
+  if (ev) ev.currentTarget.classList.add('active');
+
+  try {
+    const d = await api(`/api/v1/stage1/queue/${encodeURIComponent(c.control_ref)}`);
+    s1Details[c.control_ref] = d.findings;
+    const gap = document.getElementById('dp-gap');
+    if (!d.findings.length) {
+      gap.innerHTML = '<span class="muted">(no pending findings)</span>';
+      return;
+    }
+    let h = '';
+    for (const f of d.findings) {
+      h += `<div style="margin-bottom:10px;padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA">
+        <div style="display:flex;gap:6px;margin-bottom:4px">
+          ${statusPill(f.status)}
+          <span style="font-size:10px;color:#9C9A8E">${f.confidence||'—'}</span>
+        </div>
+        <div style="font-size:12px;color:#3A382E;line-height:1.4">${(f.excerpt||'(no excerpt)').replace(/</g,'&lt;')}</div>
+      </div>`;
+    }
+    gap.innerHTML = h;
+    const ids = d.findings.map(f => f.finding_id);
+    document.getElementById('dp-meta').textContent = `${ids.length} finding ID(s) will be approved together`;
+  } catch(e) {
+    document.getElementById('dp-gap').textContent = `Error: ${e.message}`;
   }
+}
 
-  document.getElementById('dp-gap').textContent = c.gap_description || '—';
-  document.getElementById('dp-meta').innerHTML =
-    `${Math.round(c.hours_in_draft)}h in draft` +
-    (c.previously_overridden ? ' · previously overridden' : '') +
-    (c.confirmation_status !== 'draft' ? ` · <strong>${c.confirmation_status}</strong>` : '');
+function selectStage2(p, ev) {
+  selected = {kind: 's2', ...p};
+  document.getElementById('detail-empty').style.display = 'none';
+  document.getElementById('detail-content').style.display = 'flex';
 
-  document.getElementById('ov-finding').value = c.finding;
-  document.getElementById('ov-gap').value = c.gap_description || '';
+  document.getElementById('dp-ref').textContent = p.control_ref;
+  document.getElementById('dp-std').textContent = p.standard_id;
+  document.getElementById('dp-finding').innerHTML =
+    `<span class="pill p-src">${p.live_finding||'—'}</span> → ${pill(p.proposed_finding)}`;
+  document.getElementById('dp-sys-wrap').style.display = 'none';
+  document.getElementById('dp-gap').innerHTML =
+    `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${(p.reason||'(no reason snapshotted)').replace(/</g,'&lt;')}</div>`;
+  document.getElementById('dp-meta').textContent =
+    `Proposed at: ${p.proposed_at ? new Date(p.proposed_at).toLocaleString() : '—'}`;
+
+  configureActionPanel('s2');
+  document.querySelectorAll('.qcard').forEach(el => el.classList.remove('active'));
+  if (ev) ev.currentTarget.classList.add('active');
+}
+
+function configureActionPanel(kind) {
+  // Reuse the existing confirm/override tab structure for the two-stage
+  // approve/reject pair. Stage 1 and Stage 2 share the same UI shape.
+  document.getElementById('tab-confirm').textContent = kind==='s1' ? 'Approve evidence' : 'Approve verdict';
+  document.getElementById('tab-override').textContent = 'Reject';
+  document.getElementById('btn-confirm').innerHTML = '<i class="ti ti-check"></i> ' +
+    (kind==='s1' ? 'Approve all pending findings' : 'Apply engine verdict');
+  // Approve panel: hide the legacy "Reason (optional)" textarea — neither
+  // Stage-1 nor Stage-2 approve takes a reason field today.
+  document.getElementById('confirm-reason').parentElement.style.display = 'none';
+  // Reject panel: hide the legacy finding-override selector and gap edit;
+  // only the rationale textarea is needed.
+  document.getElementById('ov-finding').parentElement.style.display = 'none';
+  document.getElementById('ov-gap').parentElement.style.display = 'none';
+  const labels = document.querySelectorAll('#body-override .form-label');
+  if (labels.length) labels[labels.length-1].textContent = 'Rejection reason (required)';
+  document.querySelector('#body-override .btn-override').innerHTML = '<i class="ti ti-x"></i> Reject';
   document.getElementById('confirm-reason').value = '';
   document.getElementById('ov-reason').value = '';
   setTab('confirm');
-
-  document.querySelectorAll('.qcard').forEach(el => el.classList.remove('active'));
-  event.currentTarget.classList.add('active');
 }
 
 function closeDetail() {
@@ -666,50 +726,51 @@ async function doConfirm() {
   if (!selected) return;
   const btn = document.getElementById('btn-confirm');
   btn.disabled = true;
-  btn.innerHTML = '<i class="ti ti-loader-2" aria-hidden="true"></i> Confirming...';
+  btn.innerHTML = '<i class="ti ti-loader-2"></i> Working…';
   try {
-    await api(`/api/v1/posture/${selected.id}/confirm`, {
-      method:'POST', body:JSON.stringify({reason:document.getElementById('confirm-reason').value})
-    });
-    toast(`✓ ${selected.control_ref} confirmed`);
-    closeDetail(); qPage=0; await loadQueue();
+    if (selected.kind === 's1') {
+      const ids = (s1Details[selected.control_ref] || []).map(f => f.finding_id);
+      if (!ids.length) throw new Error('No pending findings to approve');
+      await api('/api/v1/findings/approve', {
+        method:'POST', body:JSON.stringify({finding_ids: ids})
+      });
+      toast(`✓ ${selected.control_ref} evidence approved (${ids.length} finding${ids.length!==1?'s':''})`);
+    } else {
+      await api(`/api/v1/stage2/${encodeURIComponent(selected.control_ref)}/approve`, {method:'POST'});
+      toast(`✓ ${selected.control_ref} engine verdict applied`);
+    }
+    closeDetail();
+    await loadQueue();
   } catch(e) { toast(`Error: ${e.message}`); }
   finally {
     btn.disabled = false;
-    btn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> Confirm finding';
+    btn.innerHTML = '<i class="ti ti-check"></i> ' +
+      (selected?.kind==='s1' ? 'Approve all pending findings' : 'Apply engine verdict');
   }
 }
 
 async function doOverride() {
   if (!selected) return;
+  const rationale = document.getElementById('ov-reason').value.trim();
+  if (!rationale) { toast('Rejection reason is required'); return; }
   try {
-    await api(`/api/v1/posture/${selected.id}/override`, {
-      method:'POST', body:JSON.stringify({
-        finding: document.getElementById('ov-finding').value,
-        gap_description: document.getElementById('ov-gap').value,
-        reason: document.getElementById('ov-reason').value
-      })
-    });
-    toast(`✓ ${selected.control_ref} overridden`);
-    closeDetail(); qPage=0; await loadQueue();
+    if (selected.kind === 's1') {
+      const ids = (s1Details[selected.control_ref] || []).map(f => f.finding_id);
+      if (!ids.length) throw new Error('No pending findings to reject');
+      await api('/api/v1/findings/reject', {
+        method:'POST', body:JSON.stringify({finding_ids: ids, rationale})
+      });
+      toast(`✓ ${selected.control_ref} findings rejected`);
+    } else {
+      await api(`/api/v1/stage2/${encodeURIComponent(selected.control_ref)}/reject`, {
+        method:'POST', body:JSON.stringify({rationale})
+      });
+      toast(`✓ ${selected.control_ref} engine verdict rejected`);
+    }
+    closeDetail();
+    await loadQueue();
   } catch(e) { toast(`Error: ${e.message}`); }
 }
-
-function setFilter(f) {
-  qFilter = f; qPage = 0;
-  document.querySelectorAll('[id^="ff-"]').forEach(el=>el.classList.remove('active'));
-  document.getElementById('ff-'+f).classList.add('active');
-  loadQueue();
-}
-
-function setSource(s) {
-  qSource = s; qPage = 0;
-  document.querySelectorAll('[id^="fs-"]').forEach(el=>el.classList.remove('active'));
-  document.getElementById('fs-'+s).classList.add('active');
-  loadQueue();
-}
-
-function changePage(d) { qPage += d; loadQueue(); }
 
 // ── Chat ──
 function appendMsg(role, text, refs, ms) {
@@ -1004,7 +1065,7 @@ async function pollStatus(uploadId, card) {
         addUploadSummary(card, cardId, d);
         addStage1Queue(card, cardId, d);
         toast(`✓ ${d.filename} processed — ${d.findings_written||0} findings`);
-        loadCounts();
+        loadStageCounts();
       } else if (d.status === 'failed') {
         completed = true;
         updateCardStatus(card, 'failed', d.error_type);
@@ -1191,7 +1252,7 @@ async function _doFindingAction(finding_ids, action, rationale, rows) {
       const n = r.rejected || finding_ids.length;
       toast(`✓ Rejected ${n} finding${n===1?'':'s'}`);
     }
-    loadCounts();
+    loadStageCounts();
   } catch(e) {
     rows.forEach(r => r.classList.remove('acting'));
     toast(`Failed: ${e.message}`);
