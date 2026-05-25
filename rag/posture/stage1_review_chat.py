@@ -309,40 +309,22 @@ def approve_findings_for_control(
                 }
             posture_id, prior_finding, prior_status, prior_source = pc
 
+            # Stage-1 contract per [[posture-engine-alignment-plan-2026-05-22]]
+            # Phase D: confirm the *evidence*, not the posture. We mark the
+            # control as document_confirmed (the human accepted the extracted
+            # findings) but leave posture_controls.finding untouched — the
+            # fulfilment engine + Stage-2 are the only path that mutates it.
+            # No posture_status_log row either; this isn't a finding change.
             cur.execute(
                 """
                 UPDATE posture_controls
-                   SET finding             = %s,
-                       confirmation_status = 'document_confirmed',
+                   SET confirmation_status = 'document_confirmed',
                        confirmed_by        = %s::uuid,
                        confirmed_at        = NOW(),
                        source              = 'document'
                  WHERE id = %s
                 """,
-                (headline, _uuid_or_null(reviewed_by), posture_id),
-            )
-
-            # Log the live transition. change_kind='extraction' since this
-            # is an extraction-driven promotion, not an engine verdict.
-            cur.execute(
-                """
-                INSERT INTO posture_status_log (
-                    tenant_id, posture_id, control_ref, standard_id,
-                    status_before, status_after,
-                    source, evidence_citation,
-                    change_kind
-                ) VALUES (
-                    %s::uuid, %s::uuid, %s, %s,
-                    %s, %s,
-                    'document', %s,
-                    'extraction'
-                )
-                """,
-                (
-                    tenant_id, posture_id, control_ref, standard_id,
-                    prior_finding, headline,
-                    f"Stage-1 batch approval of {len(finding_ids)} finding(s)",
-                ),
+                (_uuid_or_null(reviewed_by), posture_id),
             )
 
         pg_conn.commit()
@@ -529,36 +511,23 @@ def _recompute_posture_for_control(
                 "no_posture_row": True}
     posture_id, prior_finding = pc
 
+    # Stage-1 contract per [[posture-engine-alignment-plan-2026-05-22]]
+    # Phase D: confirm the *evidence*, not the posture. See sibling site in
+    # approve_findings_for_control above. headline + prior_finding are still
+    # returned to the caller so the chat surface can describe what was
+    # approved without claiming a posture change.
     cur.execute(
         """
         UPDATE posture_controls
-           SET finding             = %s,
-               confirmation_status = 'document_confirmed',
+           SET confirmation_status = 'document_confirmed',
                confirmed_by        = %s::uuid,
                confirmed_at        = NOW(),
                source              = 'document'
          WHERE id = %s
         """,
-        (headline, _uuid_or_null(reviewed_by), posture_id),
+        (_uuid_or_null(reviewed_by), posture_id),
     )
 
-    if prior_finding != headline:
-        cur.execute(
-            """
-            INSERT INTO posture_status_log (
-                tenant_id, posture_id, control_ref, standard_id,
-                status_before, status_after,
-                source, evidence_citation, change_kind
-            ) VALUES (
-                %s::uuid, %s::uuid, %s, %s,
-                %s, %s,
-                'document', %s, 'extraction'
-            )
-            """,
-            (tenant_id, posture_id, control_ref, standard_id,
-             prior_finding, headline,
-             f"Stage-1 per-finding approval (headline recomputed)"),
-        )
     return {"control_ref": control_ref, "standard_id": standard_id,
             "finding": headline, "prior_finding": prior_finding}
 
@@ -675,14 +644,21 @@ def render_stage1_answer(
     if intent.action == "approve":
         if result.get("ok"):
             n = result["approved"]
-            f = result["finding"]
-            prior = result.get("prior_finding")
-            if prior and prior != f:
-                tail = f' Posture flipped from "{prior}" to "{f}".'
-            elif prior == f:
-                tail = f' Posture stays at "{f}" (extraction matched current).'
+            f = result.get("finding")
+            # Stage-1 no longer mutates posture_controls.finding — it only
+            # confirms the evidence. The headline below describes what the
+            # *evidence* suggests; the engine + Stage-2 are responsible for
+            # any posture change.
+            if f:
+                tail = (
+                    f' The extracted evidence indicates "{f}" — the engine '
+                    f'will propose a posture update for your Stage-2 review.'
+                )
             else:
-                tail = f' Posture is now "{f}".'
+                tail = (
+                    " The engine will propose a posture update for your "
+                    "Stage-2 review."
+                )
             return (
                 f"Approved {n} extracted finding(s) for {ctrl}. "
                 f"{ctrl} is now document_confirmed.{tail}"
