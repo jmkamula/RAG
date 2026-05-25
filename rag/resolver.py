@@ -673,7 +673,7 @@ class Resolver:
             posture = result.posture_nodes or {}
             result.posture_confirmed = sum(
                 1 for v in posture.values()
-                if v.get("confirmation_status") in ("confirmed", "overridden")
+                if v.get("confirmation_status") in ("confirmed", "overridden", "document_confirmed", "engine_confirmed")
             )
             result.posture_draft = sum(
                 1 for v in posture.values()

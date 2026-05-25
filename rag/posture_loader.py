@@ -180,8 +180,13 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
 
         overrides = 0
         for cid, verdict in verdicts.items():
-            # Skip single-leaf specs (no composition value over posture_controls)
-            if len(verdict.leaves) <= 1:
+            # Skip specs with no composition value over posture_controls.
+            # A verdict composes when it has multiple direct leaves OR derives
+            # from at least one other control (ControlRef edge). The original
+            # gate only checked leaves and missed every derives_from-based
+            # composition — e.g. GDPR Art.32 (1 leaf, 5 derived), Art.5
+            # (0 leaves, 2 derived).
+            if len(verdict.leaves) <= 1 and not verdict.derived_from:
                 continue
             # Skip non-determinative postures
             if verdict.posture in ("UNKNOWN", "deferred", "NotApplicable"):
@@ -279,7 +284,12 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
 
     proposable: list[tuple[str, str, str]] = []  # (cid, posture, reason)
     for cid, verdict in verdicts.items():
-        if len(verdict.leaves) <= 1:
+        # Mirror of the overlay gate above: persist a proposal when the
+        # verdict adds composition (multi-leaf or derives_from). Without
+        # the derived_from check, GDPR umbrella specs (Art.5, Art.24,
+        # Art.32, Art.25) silently dropped — they have ≤1 direct leaf but
+        # compose 2-6 dependencies.
+        if len(verdict.leaves) <= 1 and not verdict.derived_from:
             continue
         if verdict.posture in ("UNKNOWN", "deferred", "NotApplicable"):
             continue

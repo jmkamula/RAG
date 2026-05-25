@@ -14,3 +14,4 @@
 - [Posture/engine alignment plan 2026-05-22](posture_engine_alignment_plan_2026_05_22.md) — ACTIVE plan: Phases A-D to fix Stage-1 contract violation, curate 410 uncurated specs, ship polite gap surface; Stage-1 contract change ships after curation completes
 - [Curation document templates idea](curation_document_templates_idea.md) — FUTURE: ship template documents alongside each EvidenceRequirement so tenants get a starting draft pre-aligned to MUST items; not in current scope
 - [Engine verdict verification snippet](engine_verdict_verification_snippet.md) — `compute_engine_verdicts(pg, neo, TENANT)` returns dict[control_id, ControlVerdict]; stderr/2>/dev/null + Cypher `AS alias` gotchas captured
+- [Engine→posture_controls wiring fix](engine_to_posture_controls_wiring_fix.md) — SHIPPED 2026-05-25: [DRAFT] label tuple + leaves<=1 filter + GDPR backfill (schema_v27); 15/20 GDPR verdicts now reach Stage-2 surface; Phase B/D pending

@@ -876,7 +876,7 @@ class LLMAnswer:
             gap            = rec.get("gap_description", "")
             evidence       = rec.get("evidence_text", "")
             confirm_status = rec.get("confirmation_status")
-            confirm_label  = "" if confirm_status in ("confirmed", "overridden") else " [DRAFT]"
+            confirm_label  = "" if confirm_status in ("confirmed", "overridden", "document_confirmed", "engine_confirmed") else " [DRAFT]"
 
             posture_tag = f" [{finding}{confirm_label}]" if finding else " [Not yet assessed]"
             if finding == "NC":
@@ -925,7 +925,7 @@ class LLMAnswer:
                     _rec   = posture_by_ref.get(_ref, {})
                     _f     = _rec.get("finding", "")
                     _cs    = _rec.get("confirmation_status")
-                    _cl    = "" if _cs in ("confirmed", "overridden") else " [DRAFT]"
+                    _cl    = "" if _cs in ("confirmed", "overridden", "document_confirmed", "engine_confirmed") else " [DRAFT]"
                     if _f == "NC":
                         has_assessed = True
                         _gap = _rec.get("gap_description", "")
