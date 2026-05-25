@@ -690,43 +690,67 @@ async function selectStage2(p, ev) {
   try {
     const d = await api(`/api/v1/stage2/queue/${encodeURIComponent(p.control_ref)}`);
     const v = d.verdict;
+    const esc = s => (s||'').replace(/</g,'&lt;');
     if (!v) {
-      // Engine couldn't be re-evaluated (Neo4j down?); leave the snapshot reason in place
-      const gap = document.getElementById('dp-gap');
-      gap.innerHTML = gap.innerHTML.replace(/<div style="margin-top:10px">.*?<\/div>/, '');
+      // Engine couldn't be re-evaluated (Neo4j down?); show snapshot reason only
+      document.getElementById('dp-gap').innerHTML =
+        `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${esc(p.reason||'(engine unavailable)')}</div>`;
       return;
     }
-    const fw = (v.frameworks_derived_from || []).join(', ');
+    const fw = (v.frameworks_derived_from || []).map(esc).join(', ');
     const sat = v.children.filter(c => c.satisfied).length;
     const tot = v.children.length;
-    let h = `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${(p.reason||'').replace(/</g,'&lt;')}</div>`;
-    h += `<div style="margin-top:14px;font-size:11px;color:#3A382E;font-weight:600">
-            Composition · ${sat}/${tot} satisfied${fw?` · derived from ${fw.replace(/</g,'&lt;')}`:''}
-          </div>`;
+
+    let h = `<div style="font-size:11px;color:#3A382E;font-weight:600">
+              Composition · ${sat} of ${tot} satisfied${fw?` · derived from ${fw}`:''}
+            </div>`;
     h += '<div style="margin-top:6px">';
     for (const c of v.children) {
-      const label = c.satisfied ? '<span class="pill p-comply">satisfied</span>' : '<span class="pill p-ofi">pending</span>';
+      const label = c.satisfied
+        ? '<span class="pill p-comply">satisfied</span>'
+        : '<span class="pill p-ofi">pending</span>';
+      // Build the primary label + subtitle row
+      let primary, sub;
       if (c.kind === 'leaf') {
-        h += `<div style="padding:6px 8px;margin-top:4px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;font-size:11px;display:flex;justify-content:space-between;align-items:center;gap:8px">
-          <span><i class="ti ti-file-text" style="font-size:11px"></i> ${(c.evidence_type||'leaf').replace(/</g,'&lt;')}${c.role?` <span style="color:#9C9A8E">(${c.role.replace(/</g,'&lt;')})</span>`:''}</span>
-          ${label}
-        </div>`;
+        // Prefer EvidenceRequirement.title, fall back to evidence_type (deduped if role==evt)
+        primary = c.title ? esc(c.title)
+                          : esc(c.evidence_type || 'leaf');
+        sub = c.role && c.role !== c.evidence_type ? `role: ${esc(c.role)}` : '';
       } else {
-        const ref = (c.from_control_ref||'').replace(/</g,'&lt;');
-        const std = (c.from_standard||'').replace(/</g,'&lt;');
-        const post = (c.from_posture||'').replace(/</g,'&lt;');
-        h += `<div style="padding:6px 8px;margin-top:4px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;font-size:11px;display:flex;justify-content:space-between;align-items:center;gap:8px">
-          <span><i class="ti ti-arrow-merge-alt-right" style="font-size:11px"></i> <strong>${ref}</strong> <span style="color:#9C9A8E">${std}</span> · ${post}${c.role?` <span style="color:#9C9A8E">(${c.role.replace(/</g,'&lt;')})</span>`:''}</span>
-          ${label}
-        </div>`;
+        // Derived control: "A.8.10 — Information deletion · OFI"
+        const ref = esc(c.from_control_ref);
+        const ttl = c.title ? ` — ${esc(c.title)}` : '';
+        primary = `<strong>${ref}</strong>${ttl}`;
+        sub = `${esc(c.from_standard)}${c.role?` · role: ${esc(c.role)}`:''} · posture: ${esc(c.from_posture)}`;
       }
+      h += `<div style="padding:8px 10px;margin-top:4px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;font-size:11px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+          <span>${primary}</span>
+          ${label}
+        </div>
+        ${sub?`<div style="margin-top:3px;color:#9C9A8E;font-size:10px">${sub}</div>`:''}`;
+      // For pending leaves, show the missing MUST items
+      if (c.kind === 'leaf' && !c.satisfied && c.items_unrecognised && c.items_unrecognised.length) {
+        h += '<ul style="margin:6px 0 0;padding:0 0 0 16px;color:#854F0B;font-size:10px;line-height:1.5">';
+        for (const it of c.items_unrecognised) h += `<li>${esc(it)}</li>`;
+        h += '</ul>';
+      }
+      // For pending derived deps with a humanized reason, show it
+      if (c.kind === 'derived' && !c.satisfied && c.reason) {
+        h += `<div style="margin-top:4px;color:#854F0B;font-size:10px">${esc(c.reason)}</div>`;
+      }
+      h += '</div>';
     }
     h += '</div>';
     document.getElementById('dp-gap').innerHTML = h;
+    // Also surface the humanized top-line reason in the meta footer for compactness
+    const meta = `Proposed at: ${p.proposed_at ? new Date(p.proposed_at).toLocaleString() : '—'}` +
+      (v.reason ? ` · ${esc(v.reason)}` : '');
+    document.getElementById('dp-meta').innerHTML = meta;
   } catch(e) {
-    const gap = document.getElementById('dp-gap');
-    gap.innerHTML = gap.innerHTML.replace(/<div style="margin-top:10px">.*?<\/div>/,
-      `<div style="margin-top:10px;font-size:11px;color:#a44">Couldn't load derivation: ${e.message}</div>`);
+    document.getElementById('dp-gap').innerHTML =
+      `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${(p.reason||'').replace(/</g,'&lt;')}</div>
+       <div style="margin-top:8px;font-size:11px;color:#a44">Couldn't load derivation: ${e.message}</div>`;
   }
 }
 

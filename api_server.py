@@ -1852,6 +1852,7 @@ async def stage2_proposal_detail(
                 v = evaluate_one_control(conn, neo, key_info.tenant_id, cid)
                 if v is not None:
                     verdict = _serialize_verdict(v)
+                    _enrich_titles(neo, verdict)
             finally:
                 try: neo.close()
                 except Exception: pass
@@ -1864,6 +1865,31 @@ async def stage2_proposal_detail(
         }
     finally:
         pool.putconn(conn)
+
+
+# Engine reason strings are useful for debugging but read as machine output.
+# Rewrite the two common patterns ('ALL: N/M children satisfied', 'N/M MUST
+# items recognised; K unrecognised') into UI-friendly form. The structured
+# verdict tree carries the same info, so this is purely cosmetic.
+import re as _re
+_REASON_ALL_RE = _re.compile(r"^ALL: (\d+)/(\d+) children satisfied$")
+_REASON_LEAF_RE = _re.compile(r"^(\d+)/(\d+) MUST items recognised; (\d+) unrecognised$")
+
+
+def _humanize_reason(s: str) -> str:
+    if not s:
+        return ""
+    m = _REASON_ALL_RE.match(s)
+    if m:
+        sat, tot = int(m.group(1)), int(m.group(2))
+        return f"{sat} of {tot} evidence sources satisfied"
+    m = _REASON_LEAF_RE.match(s)
+    if m:
+        rec, tot, unr = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if rec == 0:
+            return f"No required items recognised yet ({unr} missing)"
+        return f"{rec} of {tot} required items recognised ({unr} missing)"
+    return s
 
 
 def _serialize_verdict(v) -> dict:
@@ -1880,8 +1906,9 @@ def _serialize_verdict(v) -> dict:
             "evidence_type": leaf.evidence_type,
             "role":          leaf.role or None,
             "leaf_id":       leaf.leaf_id,
+            "title":         "",  # filled by _enrich_titles
             "satisfied":     leaf.counts_as_comply,
-            "reason":        leaf.reason or "",
+            "reason":        _humanize_reason(leaf.reason or ""),
             "items_unrecognised": list(leaf.items_unrecognised or []),
         })
     frameworks: set[str] = set()
@@ -1898,18 +1925,52 @@ def _serialize_verdict(v) -> dict:
             "from_standard":     sub_std,
             "from_control_ref":  sub_ref,
             "from_posture":      sub.posture,
+            "title":             "",  # filled by _enrich_titles
             "satisfied":         sub.posture == "Comply",
-            "reason":            sub.reason or "",
+            "reason":            _humanize_reason(sub.reason or ""),
         })
     return {
         "control_id":              v.control_id,
         "posture":                 v.posture,
         "applies":                 v.applies,
         "curation_status":         v.curation_status,
-        "reason":                  v.reason or "",
+        "reason":                  _humanize_reason(v.reason or ""),
         "children":                children,
         "frameworks_derived_from": sorted(frameworks),
     }
+
+
+def _enrich_titles(neo4j_driver, verdict: dict) -> None:
+    """Look up RequirementNode.title and EvidenceRequirement.title for every
+    child in the verdict so the UI can render 'A.8.10 — Information deletion'
+    instead of just 'A.8.10'. Mutates the verdict dict in place. Best-effort:
+    any Neo4j failure leaves titles empty and the UI falls back to refs."""
+    if not verdict or not verdict.get("children"):
+        return
+    ids = []
+    for c in verdict["children"]:
+        if c["kind"] == "leaf" and c.get("leaf_id"):
+            ids.append(c["leaf_id"])
+        elif c["kind"] == "derived" and c.get("from_control_id"):
+            ids.append(c["from_control_id"])
+    if not ids:
+        return
+    try:
+        with neo4j_driver.session() as s:
+            rs = s.run(
+                "UNWIND $ids AS i "
+                "OPTIONAL MATCH (n) WHERE n.id = i "
+                "RETURN i AS id, n.title AS title",
+                ids=ids,
+            )
+            titles = {row["id"]: (row["title"] or "") for row in rs}
+    except Exception:
+        return
+    for c in verdict["children"]:
+        if c["kind"] == "leaf":
+            c["title"] = titles.get(c.get("leaf_id"), "") or ""
+        else:
+            c["title"] = titles.get(c.get("from_control_id"), "") or ""
 
 
 @app.post("/api/v1/stage2/{control_ref}/approve", tags=["hitl"])
