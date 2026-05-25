@@ -1821,6 +1821,97 @@ async def stage2_queue(
         pool.putconn(conn)
 
 
+@app.get("/api/v1/stage2/queue/{control_ref}", tags=["hitl"])
+async def stage2_proposal_detail(
+    control_ref: str,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("hitl")),
+):
+    """Stage-2 detail: re-evaluate this control's engine verdict so the UI
+    can render the derived_from chain (which children are satisfied vs
+    pending) and the source framework. Persisted proposal_reason is just a
+    short string ("ALL: 1/N satisfied") — the structured tree must be
+    recomputed because we don't snapshot it at proposal time."""
+    from rag.posture.stage2_approval_chat import get_proposal_for_control
+    from rag.posture.engine_runner import evaluate_one_control
+    from rag.posture_loader import _build_engine_neo4j_driver
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        proposal = get_proposal_for_control(conn, key_info.tenant_id, control_ref)
+        if proposal is None:
+            raise HTTPException(404, f"No posture_controls row for {control_ref}")
+
+        cid = f"{proposal['standard_id']}:{control_ref}"
+        verdict = None
+        neo = _build_engine_neo4j_driver()
+        if neo is not None:
+            try:
+                v = evaluate_one_control(conn, neo, key_info.tenant_id, cid)
+                if v is not None:
+                    verdict = _serialize_verdict(v)
+            finally:
+                try: neo.close()
+                except Exception: pass
+
+        return {
+            "control_ref": control_ref,
+            "standard_id": proposal["standard_id"],
+            "proposal":    proposal,
+            "verdict":     verdict,
+        }
+    finally:
+        pool.putconn(conn)
+
+
+def _serialize_verdict(v) -> dict:
+    """Flatten a ControlVerdict + immediate derived_from chain into JSON.
+
+    Recurses one level into derived_from so the UI can label each child as
+    satisfied/pending without paying the full recursive walk cost. Direct
+    leaves are flattened as siblings of derived children — both contribute
+    to the parent's composition the same way."""
+    children = []
+    for leaf in (v.leaves or []):
+        children.append({
+            "kind":          "leaf",
+            "evidence_type": leaf.evidence_type,
+            "role":          leaf.role or None,
+            "leaf_id":       leaf.leaf_id,
+            "satisfied":     leaf.counts_as_comply,
+            "reason":        leaf.reason or "",
+            "items_unrecognised": list(leaf.items_unrecognised or []),
+        })
+    frameworks: set[str] = set()
+    for role, sub in (v.derived_from or []):
+        parts = (sub.control_id or "").rsplit(":", 1)
+        sub_std = parts[0] if len(parts) == 2 else ""
+        sub_ref = parts[1] if len(parts) == 2 else (sub.control_id or "")
+        if sub_std:
+            frameworks.add(sub_std)
+        children.append({
+            "kind":              "derived",
+            "role":              role or None,
+            "from_control_id":   sub.control_id,
+            "from_standard":     sub_std,
+            "from_control_ref":  sub_ref,
+            "from_posture":      sub.posture,
+            "satisfied":         sub.posture == "Comply",
+            "reason":            sub.reason or "",
+        })
+    return {
+        "control_id":              v.control_id,
+        "posture":                 v.posture,
+        "applies":                 v.applies,
+        "curation_status":         v.curation_status,
+        "reason":                  v.reason or "",
+        "children":                children,
+        "frameworks_derived_from": sorted(frameworks),
+    }
+
+
 @app.post("/api/v1/stage2/{control_ref}/approve", tags=["hitl"])
 async def stage2_approve(
     control_ref: str,

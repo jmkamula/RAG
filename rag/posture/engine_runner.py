@@ -11,6 +11,7 @@ values per the layered design.
 from __future__ import annotations
 
 import logging
+from typing import Optional
 
 from rag.posture.applies_when import EvalContext, EvalError
 from rag.posture.fulfilment_engine import ControlVerdict, evaluate_control
@@ -76,6 +77,38 @@ def compute_engine_verdicts(
                 continue
 
     return verdicts
+
+
+def evaluate_one_control(
+    pg_conn,
+    neo4j_driver,
+    tenant_id: str,
+    control_id: str,
+) -> Optional[ControlVerdict]:
+    """Evaluate a single control without iterating the full curated set.
+
+    Used by the Stage-2 detail UI to render the derived_from tree for one
+    proposal without paying the full compute_engine_verdicts cost. Same
+    error-tolerant contract: returns None on any failure rather than
+    raising.
+    """
+    try:
+        eval_ctx = _build_eval_context(pg_conn, neo4j_driver, tenant_id)
+    except Exception as e:
+        logger.warning("evaluate_one_control: building EvalContext failed: %s", e)
+        return None
+
+    evaluator = GenericLeafEvaluator(pg_conn, neo4j_driver, tenant_id)
+    try:
+        with neo4j_driver.session() as s:
+            resolver = build_spec_resolver(s)
+            spec = build_spec_descriptor(s, control_id)
+            if spec is None:
+                return None
+            return evaluate_control(spec, evaluator, eval_ctx, spec_resolver=resolver)
+    except Exception as e:
+        logger.warning("evaluate_one_control(%s) failed: %s", control_id, e)
+        return None
 
 
 # ── EvalContext assembly ──────────────────────────────────────────────────────
