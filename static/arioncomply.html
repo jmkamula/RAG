@@ -666,7 +666,13 @@ async function selectHeatCell(c, ev) {
   document.getElementById('dp-std').textContent = c.display_name || c.standard_id;
   document.getElementById('dp-finding').innerHTML = pill(c.finding);
   document.getElementById('dp-sys-wrap').style.display = 'none';
-  document.getElementById('dp-gap').textContent = c.gap_excerpt || '(no gap or evidence text recorded)';
+  // Initial render uses the (possibly humanized) gap excerpt from the
+  // dashboard payload. We then try to fetch the engine verdict tree to
+  // upgrade the panel to the same rich derivation view shown on the
+  // Engine approval surface — same data, same renderer.
+  document.getElementById('dp-gap').innerHTML =
+    `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${escapeHtml(c.gap_excerpt || '(no gap or evidence text recorded)')}</div>
+     <div style="margin-top:10px;font-size:11px;color:#9C9A8E"><i class="ti ti-loader-2"></i> Loading derivation…</div>`;
 
   // Confirmation status + engine state in the meta footer.
   const bits = [];
@@ -681,6 +687,28 @@ async function selectHeatCell(c, ev) {
   // Highlight the active cell.
   document.querySelectorAll('.heat-cell').forEach(el => el.classList.remove('active'));
   if (ev && ev.currentTarget) ev.currentTarget.classList.add('active');
+
+  // Fetch the engine verdict so the dashboard detail panel matches the
+  // Engine approval detail panel for the same control. The endpoint
+  // returns a verdict for any control with a curated fulfilment spec,
+  // including already-approved ones.
+  try {
+    const d = await api(`/api/v1/stage2/queue/${encodeURIComponent(c.control_ref)}`);
+    if (selected !== null && selected.control_ref === c.control_ref && d.verdict) {
+      document.getElementById('dp-gap').innerHTML =
+        renderVerdictTree(d.verdict, d.standard_id || c.standard_id || '');
+    } else if (selected !== null && selected.control_ref === c.control_ref) {
+      // No engine verdict — drop the spinner and keep the gap excerpt only.
+      document.getElementById('dp-gap').innerHTML =
+        `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${escapeHtml(c.gap_excerpt || '(no engine verdict; no gap text recorded)')}</div>`;
+    }
+  } catch (e) {
+    if (selected !== null && selected.control_ref === c.control_ref) {
+      document.getElementById('dp-gap').innerHTML =
+        `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${escapeHtml(c.gap_excerpt || '')}</div>
+         <div style="margin-top:8px;font-size:11px;color:#9C9A8E">No derivation tree available for this control.</div>`;
+    }
+  }
 }
 
 function configureDashboardActions(c) {
@@ -918,6 +946,89 @@ async function selectStage1(c, ev) {
   }
 }
 
+// ─── Shared engine verdict tree renderer ─────────────────────────────────
+// Renders the composition tree produced by /api/v1/stage2/queue/{ref}.
+// Used by selectStage2 (Engine approval panel) AND selectHeatCell
+// (Dashboard detail panel) so the tenant sees the same derivation story
+// whether they're approving the verdict or browsing posture.
+//
+// Inputs:
+//   verdict  — the .verdict object from the Stage-2 detail response
+//   selfStd  — the control's own standard_id (so we can label same-standard
+//              children as "Composed of sub-articles" not "Derived from")
+// Returns:   HTML string (innerHTML for the gap-description container).
+function renderVerdictTree(verdict, selfStd) {
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');
+  if (!verdict || !Array.isArray(verdict.children)) {
+    return '<div class="muted">(no engine derivation available for this control)</div>';
+  }
+  const v = verdict;
+  const externalFw = (v.frameworks_derived_from || []).filter(x => x !== selfStd);
+  const fw  = externalFw.map(esc).join(', ');
+  const sat = v.children.filter(c => c.satisfied).length;
+  const tot = v.children.length;
+
+  let h = `<div style="font-size:11px;color:#3A382E;font-weight:600">
+            Composition · ${sat} of ${tot} satisfied${fw?` · derived from ${fw}`:''}
+          </div>`;
+
+  // Render a sat/pending marker + title for one child (leaf or derived).
+  const renderRow = (label, sub, satisfied) => {
+    const mark = satisfied
+      ? '<span style="color:#2F8F4D;font-weight:600">✓</span>'
+      : '<span style="color:#B5651B;font-weight:600">✗</span>';
+    return `<li style="margin-top:3px">
+      <span style="display:inline-block;min-width:14px">${mark}</span>
+      <strong>${label}</strong>${sub?` — <span style="color:#3A382E">${sub}</span>`:''}
+    </li>`;
+  };
+
+  const leaves  = v.children.filter(c => c.kind === 'leaf');
+  const derived = v.children.filter(c => c.kind === 'derived');
+
+  // Group derived children by source standard. Same-standard groups are
+  // structural composition (paragraphs/sub-articles); different-standard
+  // groups are cross-framework derivation. The header text and icon
+  // distinguish the two cases.
+  const grouped = {};
+  for (const c of derived) {
+    const std = c.from_standard || '—';
+    (grouped[std] = grouped[std] || []).push(c);
+  }
+
+  h += '<div style="margin-top:6px">';
+  for (const std of Object.keys(grouped)) {
+    let rows = '';
+    for (const c of grouped[std]) {
+      rows += renderRow(esc(c.from_control_ref || '?'), esc(c.title || ''), c.satisfied);
+    }
+    const isStructural = std === selfStd;
+    const header = isStructural
+      ? `<i class="ti ti-list-tree" style="vertical-align:middle"></i>
+         Composed of sub-articles`
+      : `<i class="ti ti-arrow-back-up" style="vertical-align:middle"></i>
+         Derived from <strong>${esc(std)}</strong>`;
+    h += `<div style="margin-top:6px;padding:8px 10px;background:#fff;border:1px dashed #D9D5C5;border-radius:5px;font-size:11px;line-height:1.5">
+      <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">${header}</div>
+      <ul style="margin:0;padding:0 0 0 4px;list-style:none">${rows}</ul>
+    </div>`;
+  }
+
+  if (leaves.length) {
+    let rows = '';
+    for (const c of leaves) {
+      const primary = esc(c.title || c.evidence_type || 'leaf');
+      rows += renderRow(primary, '', c.satisfied);
+    }
+    h += `<div style="margin-top:6px;padding:8px 10px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;font-size:11px;line-height:1.5">
+      <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">Direct evidence</div>
+      <ul style="margin:0;padding:0 0 0 4px;list-style:none">${rows}</ul>
+    </div>`;
+  }
+  h += '</div>';
+  return h;
+}
+
 async function selectStage2(p, ev) {
   selected = {kind: 's2', ...p};
   document.getElementById('detail-empty').style.display = 'none';
@@ -938,96 +1049,18 @@ async function selectStage2(p, ev) {
   document.querySelectorAll('.qcard').forEach(el => el.classList.remove('active'));
   if (ev) ev.currentTarget.classList.add('active');
 
-  // Fetch the engine verdict tree so we can show derivation source + children
   try {
     const d = await api(`/api/v1/stage2/queue/${encodeURIComponent(p.control_ref)}`);
     const v = d.verdict;
     const esc = s => (s||'').replace(/</g,'&lt;');
     if (!v) {
-      // Engine couldn't be re-evaluated (Neo4j down?); show snapshot reason only
+      // Engine couldn't be re-evaluated (Neo4j down?); show snapshot reason only.
       document.getElementById('dp-gap').innerHTML =
         `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${esc(p.reason||'(engine unavailable)')}</div>`;
       return;
     }
-    // Distinguish cross-framework derivation from same-standard structural
-    // composition (e.g. Art.5 -> Art.5.1, Art.5.2 are paragraphs, not a
-    // different framework — the "derived from GDPR" suffix would mislead).
-    const selfStd    = d.standard_id || '';
-    const externalFw = (v.frameworks_derived_from || []).filter(x => x !== selfStd);
-    const fw         = externalFw.map(esc).join(', ');
-    const sat        = v.children.filter(c => c.satisfied).length;
-    const tot        = v.children.length;
-
-    let h = `<div style="font-size:11px;color:#3A382E;font-weight:600">
-              Composition · ${sat} of ${tot} satisfied${fw?` · derived from ${fw}`:''}
-            </div>`;
-
-    // Group derived children by source standard so we can render them as a
-    // single compact "Derived from X: ref ✓ · ref ✗ · …" line, mirroring the
-    // Stage-1 inference-chain summary. Leaves stay as their own expanded
-    // panels because they carry the missing-items list the reviewer needs.
-    const leaves  = v.children.filter(c => c.kind === 'leaf');
-    const derived = v.children.filter(c => c.kind === 'derived');
-    const grouped = {};
-    for (const c of derived) {
-      const std = c.from_standard || '—';
-      (grouped[std] = grouped[std] || []).push(c);
-    }
-
-    h += '<div style="margin-top:6px">';
-
-    // Render a sat/pending marker + title for one child (leaf or derived).
-    // Used by both sections below so the visual rhythm matches.
-    const renderRow = (label, sub, satisfied) => {
-      const mark = satisfied
-        ? '<span style="color:#2F8F4D;font-weight:600">✓</span>'
-        : '<span style="color:#B5651B;font-weight:600">✗</span>';
-      return `<li style="margin-top:3px">
-        <span style="display:inline-block;min-width:14px">${mark}</span>
-        <strong>${label}</strong>${sub?` — <span style="color:#3A382E">${sub}</span>`:''}
-      </li>`;
-    };
-
-    // Compact derived-from list, one section per source standard. Each ref
-    // is one line with its title inline (no packed-row form, no tooltip-only
-    // title — the reviewer shouldn't have to hover to read what a control is).
-    // Same-standard groups are structural composition (paragraphs/sub-articles
-    // within the same framework) and get a different header so the reviewer
-    // doesn't confuse them with cross-framework derivation.
-    for (const std of Object.keys(grouped)) {
-      let rows = '';
-      for (const c of grouped[std]) {
-        rows += renderRow(esc(c.from_control_ref || '?'), esc(c.title || ''), c.satisfied);
-      }
-      const isStructural = std === selfStd;
-      const header = isStructural
-        ? `<i class="ti ti-list-tree" style="vertical-align:middle"></i>
-           Composed of sub-articles`
-        : `<i class="ti ti-arrow-back-up" style="vertical-align:middle"></i>
-           Derived from <strong>${esc(std)}</strong>`;
-      h += `<div style="margin-top:6px;padding:8px 10px;background:#fff;border:1px dashed #D9D5C5;border-radius:5px;font-size:11px;line-height:1.5">
-        <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">${header}</div>
-        <ul style="margin:0;padding:0 0 0 4px;list-style:none">${rows}</ul>
-      </div>`;
-    }
-
-    // Direct GDPR evidence (leaves) shown in the same list style — one row per
-    // leaf, no missing-MUST-items sub-list. Keeps the panel summary-only so
-    // direct-evidence and ISO-derived cases look consistent.
-    if (leaves.length) {
-      let rows = '';
-      for (const c of leaves) {
-        const primary = esc(c.title || c.evidence_type || 'leaf');
-        rows += renderRow(primary, '', c.satisfied);
-      }
-      h += `<div style="margin-top:6px;padding:8px 10px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;font-size:11px;line-height:1.5">
-        <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">Direct evidence</div>
-        <ul style="margin:0;padding:0 0 0 4px;list-style:none">${rows}</ul>
-      </div>`;
-    }
-    h += '</div>';
-    document.getElementById('dp-gap').innerHTML = h;
-    // Also surface the humanized top-line reason in the meta footer for compactness
+    document.getElementById('dp-gap').innerHTML = renderVerdictTree(v, d.standard_id || '');
+    // Humanized top-line reason in the meta footer for compactness.
     const meta = `Proposed at: ${p.proposed_at ? new Date(p.proposed_at).toLocaleString() : '—'}` +
       (v.reason ? ` · ${esc(v.reason)}` : '');
     document.getElementById('dp-meta').innerHTML = meta;
