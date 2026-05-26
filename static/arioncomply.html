@@ -721,9 +721,14 @@ async function selectStage2(p, ev) {
         `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${esc(p.reason||'(engine unavailable)')}</div>`;
       return;
     }
-    const fw = (v.frameworks_derived_from || []).map(esc).join(', ');
-    const sat = v.children.filter(c => c.satisfied).length;
-    const tot = v.children.length;
+    // Distinguish cross-framework derivation from same-standard structural
+    // composition (e.g. Art.5 -> Art.5.1, Art.5.2 are paragraphs, not a
+    // different framework — the "derived from GDPR" suffix would mislead).
+    const selfStd    = d.standard_id || '';
+    const externalFw = (v.frameworks_derived_from || []).filter(x => x !== selfStd);
+    const fw         = externalFw.map(esc).join(', ');
+    const sat        = v.children.filter(c => c.satisfied).length;
+    const tot        = v.children.length;
 
     let h = `<div style="font-size:11px;color:#3A382E;font-weight:600">
               Composition · ${sat} of ${tot} satisfied${fw?` · derived from ${fw}`:''}
@@ -758,16 +763,22 @@ async function selectStage2(p, ev) {
     // Compact derived-from list, one section per source standard. Each ref
     // is one line with its title inline (no packed-row form, no tooltip-only
     // title — the reviewer shouldn't have to hover to read what a control is).
+    // Same-standard groups are structural composition (paragraphs/sub-articles
+    // within the same framework) and get a different header so the reviewer
+    // doesn't confuse them with cross-framework derivation.
     for (const std of Object.keys(grouped)) {
       let rows = '';
       for (const c of grouped[std]) {
         rows += renderRow(esc(c.from_control_ref || '?'), esc(c.title || ''), c.satisfied);
       }
+      const isStructural = std === selfStd;
+      const header = isStructural
+        ? `<i class="ti ti-list-tree" style="vertical-align:middle"></i>
+           Composed of sub-articles`
+        : `<i class="ti ti-arrow-back-up" style="vertical-align:middle"></i>
+           Derived from <strong>${esc(std)}</strong>`;
       h += `<div style="margin-top:6px;padding:8px 10px;background:#fff;border:1px dashed #D9D5C5;border-radius:5px;font-size:11px;line-height:1.5">
-        <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">
-          <i class="ti ti-arrow-back-up" style="vertical-align:middle"></i>
-          Derived from <strong>${esc(std)}</strong>
-        </div>
+        <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">${header}</div>
         <ul style="margin:0;padding:0 0 0 4px;list-style:none">${rows}</ul>
       </div>`;
     }
