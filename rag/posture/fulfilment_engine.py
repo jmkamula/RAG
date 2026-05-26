@@ -445,7 +445,16 @@ def _compose_posture(
     outcomes:           list[bool],
     had_derivation_NA:  bool = False,
 ) -> str:
-    """Compose child outcomes (True = Comply) into a parent posture."""
+    """Compose child outcomes (True = Comply) into a parent posture.
+
+    Three-tier output: Comply when the op is fully satisfied, OFI when
+    partially satisfied (some children True, threshold not met), NC when
+    zero children are satisfied. The reviewer approves or rejects the NC
+    proposal in Stage-2 just like an OFI proposal — the engine doesn't get
+    the last word on what's a formal non-conformity, but it does flag the
+    "nothing at all" case separately so the queue surfaces it for human
+    attention. The empty-outcome branches keep their existing meaning
+    (vacuous Comply / all-NA OFI) because they're not "0 of N tried"."""
     if not outcomes:
         # Distinguish two empty-outcome cases:
         # (a) All edges gated off by applies_when=False — defensible vacuous
@@ -460,13 +469,19 @@ def _compose_posture(
         if had_derivation_NA:
             return "OFI"
         return "Comply"
+    n_sat = sum(1 for o in outcomes if o)
     if op == "ALL":
-        return "Comply" if all(outcomes) else "OFI"
+        if all(outcomes):    return "Comply"
+        if n_sat == 0:       return "NC"
+        return "OFI"
     if op == "ANY":
-        return "Comply" if any(outcomes) else "OFI"
+        if any(outcomes):    return "Comply"
+        return "NC"
     if op == "AT_LEAST_N":
         threshold = n if (n is not None and n >= 0) else 1
-        return "Comply" if sum(1 for o in outcomes if o) >= threshold else "OFI"
+        if n_sat >= threshold: return "Comply"
+        if n_sat == 0:         return "NC"
+        return "OFI"
     raise ValueError(f"unknown op {op!r}")
 
 
