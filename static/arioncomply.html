@@ -640,7 +640,14 @@ function renderDashboard(d) {
       for (const c of g.controls) {
         const cls = _FINDING_CLASS[c.finding] || 'f-NotAssessed';
         const tip = `${c.control_ref} — ${c.finding}`;
-        const safe = JSON.stringify({...c, standard_id: fw.standard_id, display_name: fw.display_name}).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        // Escape JSON for an HTML single-quoted onclick attribute. Order
+        // matters: encode `"` first (becomes &quot;) then `'` (becomes
+        // &#39;). The browser HTML-decodes both back to `"` and `'` for
+        // JS parsing. Using \\' would break single-quoted attrs because
+        // the apostrophe closes the attribute early (HTML doesn't honor
+        // backslash escapes in attribute values).
+        const safe = JSON.stringify({...c, standard_id: fw.standard_id, display_name: fw.display_name})
+          .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
         html += `<div class="heat-cell ${cls}" title="${escapeHtml(tip)}" data-ref="${escapeHtml(c.control_ref)}" onclick='selectHeatCell(${safe}, event)'></div>`;
       }
       html += '</div></div>';
@@ -666,14 +673,6 @@ async function selectHeatCell(c, ev) {
   document.getElementById('dp-std').textContent = c.display_name || c.standard_id;
   document.getElementById('dp-finding').innerHTML = pill(c.finding);
   document.getElementById('dp-sys-wrap').style.display = 'none';
-  // Initial render uses the (possibly humanized) gap excerpt from the
-  // dashboard payload. We then try to fetch the engine verdict tree to
-  // upgrade the panel to the same rich derivation view shown on the
-  // Engine approval surface — same data, same renderer.
-  document.getElementById('dp-gap').innerHTML =
-    `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${escapeHtml(c.gap_excerpt || '(no gap or evidence text recorded)')}</div>
-     <div style="margin-top:10px;font-size:11px;color:#9C9A8E"><i class="ti ti-loader-2"></i> Loading derivation…</div>`;
-
   // Confirmation status + engine state in the meta footer.
   const bits = [];
   if (c.confirmation_status) bits.push(`Confirmation: ${c.confirmation_status}`);
@@ -688,10 +687,29 @@ async function selectHeatCell(c, ev) {
   document.querySelectorAll('.heat-cell').forEach(el => el.classList.remove('active'));
   if (ev && ev.currentTarget) ev.currentTarget.classList.add('active');
 
-  // Fetch the engine verdict so the dashboard detail panel matches the
-  // Engine approval detail panel for the same control. The endpoint
-  // returns a verdict for any control with a curated fulfilment spec,
-  // including already-approved ones.
+  // Rendering rule:
+  //   Comply / N/A / Not assessed → show gap_excerpt (which holds the
+  //     evidence narrative for Comply rows, per context_assembler relabel).
+  //     We deliberately skip the engine verdict tree here because the
+  //     engine's leaf evaluator often disagrees with document-confirmed
+  //     Comply (different matching surface) — rendering ✗ markers on a
+  //     Comply control is misleading and was flagged by the tenant.
+  //   NC / OFI → fetch the engine verdict tree and show derivation. This
+  //     is the same render used by the Engine approval surface (Stage-2)
+  //     so what the tenant saw during approval matches what they see now.
+  const wantsTree = c.finding === 'NC' || c.finding === 'OFI';
+  if (!wantsTree) {
+    document.getElementById('dp-gap').innerHTML =
+      `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${escapeHtml(c.gap_excerpt || '(no evidence narrative recorded)')}</div>`;
+    return;
+  }
+
+  // NC/OFI: initial render uses the humanized engine reason or gap excerpt,
+  // then we upgrade to the full tree once fetched.
+  document.getElementById('dp-gap').innerHTML =
+    `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${escapeHtml(c.gap_excerpt || '')}</div>
+     <div style="margin-top:10px;font-size:11px;color:#9C9A8E"><i class="ti ti-loader-2"></i> Loading derivation…</div>`;
+
   try {
     const d = await api(`/api/v1/stage2/queue/${encodeURIComponent(c.control_ref)}`);
     if (selected !== null && selected.control_ref === c.control_ref && d.verdict) {
@@ -822,7 +840,7 @@ function renderStage1(controls, total) {
 
   let html = '<div class="queue-list">';
   for (const c of controls) {
-    const safe = JSON.stringify(c).replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    const safe = JSON.stringify(c).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
     html += `
       <div class="qcard" data-ref="${c.control_ref}" onclick='selectStage1(${safe}, event)'>
         <div class="qcard-top">
@@ -854,7 +872,7 @@ function renderStage2(proposals, total) {
 
   let html = '<div class="queue-list">';
   for (const p of proposals) {
-    const safe = JSON.stringify(p).replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    const safe = JSON.stringify(p).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
     const proposed = p.proposed_finding;
     const live     = p.live_finding;
     html += `
