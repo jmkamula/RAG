@@ -428,7 +428,15 @@ class ContextAssembler:
         return "\n".join(lines) if lines else ""
 
     def _render_posture_summary(self, posture: dict) -> str:
-        """Tenant posture summary — includes gap descriptions for verifier."""
+        """Tenant posture summary — includes gap descriptions for verifier.
+
+        gap_description in posture_controls is overloaded: for OFI/NC rows
+        it describes the gap, for Comply rows it carries the evidence
+        narrative (e.g. "ICT readiness maintained through Azure/M365
+        redundancy"). Labelling that text "Gap:" for a Comply control
+        misleads the LLM into treating it as an OFI input, which is what
+        caused the dup-label bug observed 2026-05-26. Relabel based on
+        the finding."""
         if not posture:
             return ""
         lines = ["[COMPLIANCE POSTURE SUMMARY — these are factual assessment findings]"]
@@ -443,7 +451,8 @@ class ContextAssembler:
             icon  = icons.get(finding, "?")
             line  = f"  {icon} {finding:7s} {ref}"
             if gap:
-                line += f"\n    Gap: {gap}"
+                label = "Evidence" if finding == "Comply" else "Gap"
+                line += f"\n    {label}: {gap}"
             if evidence and finding == "Comply":
                 line += f"\n    Evidence: {evidence}"
             if action and finding in ("OFI", "NC"):

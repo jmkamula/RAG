@@ -712,6 +712,46 @@ EVAL_CASES = [
             "asserts on the applied finding, not the pending list."
         ),
     ),
+
+    EvalCase(
+        id=41,
+        query="is A.5.30 compliant?",
+        tags=["posture", "posture_discipline", "no_relabel"],
+        expected_refs=["A.5.30"],
+        # Posture-discipline regression: A.5.30 (ICT readiness for BC) is
+        # tagged Comply in posture_controls but its gap_description prose
+        # mentions ongoing-monitoring concerns. Pre-fix the LLM would
+        # re-categorize A.5.30 as OFI based on the prose, and sometimes
+        # list it under BOTH Comply and OFI sections in the same answer
+        # — a dup-label bug observed during 2026-05-26 chat testing.
+        #
+        # Post-fix system prompt rule: "The tag IS the verdict … each
+        # control appears in exactly one formal finding section …
+        # advisory commentary goes under a separate Recommendations
+        # section, never under OFI/NC headings."
+        #
+        # Single-control query so the test isn't sensitive to multi-
+        # control formatting; "Comply" must be present, OFI/NC labels
+        # must NOT attach to A.5.30 in any form.
+        must_contain=["A.5.30", "Comply"],
+        must_not_contain=[
+            "A.5.30 [OFI]",
+            "A.5.30 [NC]",
+            "A.5.30 is OFI",
+            "A.5.30 is NC",
+            "A.5.30 is a non-conformity",
+            "A.5.30 is an opportunity for improvement",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks the posture-tag-is-the-verdict rule and forbids "
+            "re-labelling Comply controls as OFI based on prose. Pairs "
+            "with the system-prompt POSTURE FINDING DISCIPLINE block. "
+            "Single-control probe — multi-control dup-label is harder "
+            "to assert via substring matching but flows from the same "
+            "rule."
+        ),
+    ),
 ]
 
 
