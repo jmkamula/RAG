@@ -690,17 +690,58 @@ async function selectHeatCell(c, ev) {
   // Rendering rule:
   //   Comply / N/A / Not assessed → show gap_excerpt (which holds the
   //     evidence narrative for Comply rows, per context_assembler relabel).
-  //     We deliberately skip the engine verdict tree here because the
-  //     engine's leaf evaluator often disagrees with document-confirmed
-  //     Comply (different matching surface) — rendering ✗ markers on a
-  //     Comply control is misleading and was flagged by the tenant.
+  //     When gap_excerpt is empty (older intake rows often have no
+  //     narrative), fall back to the approved document_findings that
+  //     backed the Comply rating. We deliberately skip the engine verdict
+  //     tree here because the engine's leaf evaluator often disagrees
+  //     with document-confirmed Comply (different matching surface) —
+  //     rendering ✗ markers on a Comply control is misleading and was
+  //     flagged by the tenant.
   //   NC / OFI → fetch the engine verdict tree and show derivation. This
   //     is the same render used by the Engine approval surface (Stage-2)
   //     so what the tenant saw during approval matches what they see now.
   const wantsTree = c.finding === 'NC' || c.finding === 'OFI';
   if (!wantsTree) {
+    if (c.gap_excerpt) {
+      document.getElementById('dp-gap').innerHTML =
+        `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${escapeHtml(c.gap_excerpt)}</div>`;
+      return;
+    }
+    // Empty narrative — try to pull the supporting document_findings so
+    // the user sees WHY this is Comply rather than a bare empty state.
     document.getElementById('dp-gap').innerHTML =
-      `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${escapeHtml(c.gap_excerpt || '(no evidence narrative recorded)')}</div>`;
+      `<div style="font-size:11px;color:#9C9A8E"><i class="ti ti-loader-2"></i> Loading evidence sources…</div>`;
+    try {
+      const ev = await api(`/api/v1/dashboard/control/${encodeURIComponent(c.control_ref)}/evidence`);
+      if (selected === null || selected.control_ref !== c.control_ref) return;
+      if (!ev.findings || !ev.findings.length) {
+        document.getElementById('dp-gap').innerHTML =
+          `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4;color:#9C9A8E">No evidence narrative or supporting document findings recorded for this control.</div>`;
+        return;
+      }
+      let h = `<div style="font-size:11px;color:#3A382E;font-weight:600">Evidence sources · ${ev.findings.length}</div>`;
+      h += '<div style="margin-top:6px">';
+      for (const f of ev.findings) {
+        const title = f.document_title || f.filename || '(unknown source)';
+        const status = f.status || '—';
+        const conf = f.confidence ? ` · ${escapeHtml(f.confidence)}` : '';
+        const sec = f.section_number ? ` · §${escapeHtml(f.section_number)}` : '';
+        h += `<div style="margin-top:6px;padding:8px 10px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;font-size:11px;line-height:1.5">
+          <div style="font-size:10px;color:#9C9A8E;margin-bottom:3px">
+            <i class="ti ti-file-text" style="vertical-align:middle"></i>
+            <strong>${escapeHtml(title)}</strong> · ${escapeHtml(status)}${conf}${sec}
+          </div>
+          <div style="color:#3A382E">${escapeHtml(f.excerpt || '(no excerpt)')}</div>
+        </div>`;
+      }
+      h += '</div>';
+      document.getElementById('dp-gap').innerHTML = h;
+    } catch (e) {
+      if (selected !== null && selected.control_ref === c.control_ref) {
+        document.getElementById('dp-gap').innerHTML =
+          `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4;color:#9C9A8E">Couldn’t load evidence sources: ${escapeHtml(e.message)}</div>`;
+      }
+    }
     return;
   }
 

@@ -2267,6 +2267,62 @@ async def dashboard_posture(
         pool.putconn(conn)
 
 
+@app.get("/api/v1/dashboard/control/{control_ref}/evidence", tags=["posture"])
+async def dashboard_control_evidence(
+    control_ref: str,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Approved document_findings for one control — the source evidence
+    that backs a Comply rating (or pre-decision excerpts for any other
+    finding). Lets the Dashboard detail panel answer "why is this
+    Comply?" when the posture_controls.gap_description column is empty
+    (a common state for older intake rows where no narrative was
+    written)."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT df.status, df.confidence,
+                       LEFT(COALESCE(df.excerpt,''), 280) AS excerpt,
+                       df.section_number, df.page_number,
+                       df.standard_id,
+                       cd.document_title, cd.filename, cd.external_ref,
+                       df.extracted_at::text
+                  FROM document_findings df
+                  LEFT JOIN client_documents cd ON cd.id = df.document_id
+                 WHERE df.tenant_id     = %s::uuid
+                   AND df.control_ref   = %s
+                   AND df.is_active     = TRUE
+                   AND df.review_status = 'approved'
+                 ORDER BY df.extracted_at DESC
+            """, [key_info.tenant_id, control_ref])
+            cols = [d[0] for d in cur.description]
+            findings = [dict(zip(cols, r)) for r in cur.fetchall()]
+
+        # Group by document to deduplicate. If multiple findings cite the
+        # same document, return one row per (document, status) pair with
+        # the first / best excerpt — the dashboard doesn't need every
+        # extraction attempt, just enough to answer "which docs back this?".
+        seen = {}
+        for f in findings:
+            key = (f.get("document_title") or f.get("filename") or "(unknown source)", f["status"])
+            if key not in seen:
+                seen[key] = f
+        unique = list(seen.values())
+
+        return {
+            "control_ref": control_ref,
+            "findings":    unique,
+            "total":       len(unique),
+            "trace_id":    request.state.trace_id,
+        }
+    finally:
+        pool.putconn(conn)
+
+
 @app.get("/api/v1/posture/{control_ref}", tags=["posture"])
 async def posture_control(
     control_ref: str,
