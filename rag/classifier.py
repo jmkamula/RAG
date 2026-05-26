@@ -178,8 +178,11 @@ Taxonomy options to present (pick 2-3 most relevant):
 {taxonomy_options}
 
 Guidelines:
-- Lead with any specific client fact that's directly relevant (document not uploaded,
-  open finding, etc.) — this shows the system knows their situation
+- Lead with any specific client fact that's directly relevant — this shows the
+  system knows their situation. When the context mentions both an uploaded
+  document and a registered-but-missing one for the same topic, acknowledge
+  BOTH (e.g. "Your X is uploaded, but Y is not yet uploaded") so the user
+  doesn't think their existing uploads are missing.
 - Frame each option as a concrete action the user might want to take
 - Each option should map to exactly one taxonomy type shown in [brackets]
 - Use plain business language — no ISO clause numbers in the question itself
@@ -1105,23 +1108,44 @@ class QueryClassifier:
     ) -> str:
         """
         Build a brief factual context string from what the system knows.
-        Looks at document_alerts and posture data on the tenant profile
-        to find facts relevant to the user's query.
+        Looks at document_alerts, uploaded_documents, and posture data on
+        the tenant profile to find facts relevant to the user's query.
+
+        Surfaces both *uploaded* and *registered-but-missing* documents so
+        the clarifier doesn't read like the user's uploads are missing —
+        e.g. a query about "business continuity" pulls in both the
+        uploaded Business Continuity Policy and the un-uploaded Business
+        Continuity Plan, instead of just the latter.
         """
         lines = []
+        query_lower = user_input.lower()
 
-        # Document alerts — check if query mentions any registered document names
+        # Helper: does any significant word (>4 chars) from `title` appear
+        # in the user's query? Reused for uploaded and registered docs so
+        # the matching heuristic stays symmetric.
+        def _title_matches(title: str) -> bool:
+            words = [w for w in (title or "").lower().split() if len(w) > 4]
+            return any(w in query_lower for w in words)
+
+        # Uploaded documents — positive polarity, listed first so the
+        # clarifier doesn't read as if everything is missing.
+        uploaded_docs = getattr(self.tenant, "uploaded_documents", None) or []
+        relevant_uploaded = [
+            d for d in uploaded_docs if _title_matches(d.get("document_title", ""))
+        ]
+        for doc in relevant_uploaded[:3]:
+            ref = doc.get("external_ref")
+            ref_part = f" ({ref})" if ref else ""
+            lines.append(
+                f"- {doc['document_title']}{ref_part} is uploaded"
+            )
+
+        # Document alerts — registered but not yet uploaded.
         doc_alerts = getattr(self.tenant, "document_alerts", None) or []
         if doc_alerts:
-            query_lower = user_input.lower()
-            relevant_docs = []
-            for alert in doc_alerts:
-                title = (alert.get("document_title") or "").lower()
-                ref   = (alert.get("external_ref") or "").lower()
-                # Check if any significant words from the document title appear in the query
-                title_words = [w for w in title.split() if len(w) > 4]
-                if any(w in query_lower for w in title_words):
-                    relevant_docs.append(alert)
+            relevant_docs = [
+                a for a in doc_alerts if _title_matches(a.get("document_title", ""))
+            ]
 
             if relevant_docs:
                 from rag.framework_refs import render_framework_refs as _render_framework_refs
@@ -1137,8 +1161,11 @@ class QueryClassifier:
                         f"but NOT yet uploaded (status: {alert_type.lower()}, "
                         f"linked to: {linked})"
                     )
-            elif doc_alerts:
-                # No specific match — give a summary
+            elif not relevant_uploaded:
+                # No specific match in either side — give a summary so the
+                # clarifier still has a hook. Only fire when we also didn't
+                # surface an uploaded match, else the user sees a mix of
+                # specific + generic which reads inconsistently.
                 critical = sum(1 for a in doc_alerts if a.get("alert_type") == "CRITICAL")
                 if critical:
                     lines.append(

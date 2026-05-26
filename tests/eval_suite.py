@@ -684,29 +684,32 @@ EVAL_CASES = [
 
     EvalCase(
         id=40,
-        query="what engine verdicts need review?",
-        tags=["posture", "hitl", "stage2", "engine_nc"],
-        expected_type="posture_check",
+        query="what is our posture on Art.5?",
+        tags=["posture", "engine", "engine_nc"],
+        expected_refs=["Art.5"],
         # Engine NC contract: _compose_posture emits NC when 0/N of an
         # applies/curated control's children are satisfied (was OFI for
-        # any non-Comply pre-change). The Art.5 family is the canonical
-        # 0/N case in the Arion tenant — it has no direct evidence and
-        # none of its sub-articles are satisfied yet. After the change,
-        # the Stage-2 review queue includes the 'NC' label.
+        # any non-Comply pre-change). The Arion tenant's GDPR Art.5 is
+        # the canonical 0/N case — none of its 2 paragraphs are satisfied
+        # — and the consultant approved the engine's NC proposal during
+        # initial UI rollout, so the live finding is now NC.
         #
-        # Pre-change: engine emitted OFI for 0/N; this assertion would
-        # have failed because no NC verdict ever appeared in the queue.
-        # Post-change: Art.5 + sub-articles propose NC.
+        # Pre-change (engine emitted OFI for any non-Comply): the live
+        # finding would have been OFI at best, never NC. This assertion
+        # would have failed because no NC verdict ever reached Art.5.
+        # Post-change: engine proposed NC, reviewer approved, live
+        # finding is NC and stable.
         must_contain=["NC", "Art.5"],
         must_not_contain=[
             "FulfilmentSpec", "REQUIRES_EVIDENCE",
             "I need more information", "could you clarify",
         ],
         notes=(
-            "Locks engine 0/N → NC behaviour (was 0/N → OFI). Read-only "
-            "Stage-2 list surface; idempotent across runs because the "
-            "Art.5 family stays 'proposed' until a reviewer approves or "
-            "rejects (no eval case approves it)."
+            "Locks engine 0/N → NC behaviour end-to-end (was 0/N → OFI). "
+            "Tests the live-finding path post engine approval — depends "
+            "on the seeded Arion tenant state where Art.5's NC proposal "
+            "is engine_confirmed. Resilient to queue churn because it "
+            "asserts on the applied finding, not the pending list."
         ),
     ),
 ]

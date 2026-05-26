@@ -31,7 +31,9 @@ User asked 2026-05-26: "why is it OFI if none is processed?" Decision: engine sh
 - Art.6: new OFI proposal (1/2 satisfied via A.5.34).
 - Art.16, Art.24, Art.25, Art.32: already-approved; unchanged at OFI because 1/N satisfied.
 
-**Eval coverage:** case 40 (`what engine verdicts need review?`, must_contain=["NC","Art.5"]). Read-only Stage-2 list surface; passes because Art.5 stays `proposed` indefinitely (no eval case approves it). Pre-change this would have failed — engine never emitted NC.
+**Eval coverage:** case 40 (`what is our posture on Art.5?`, must_contain=["NC","Art.5"]). Originally written against the Stage-2 list surface, but that was order-dependent: the consultant approved the Art.5 NC proposals via the UI during initial testing, so the queue drained. Rewrote on 2026-05-26 to assert the live posture after approval — the engine→approval→live-finding chain end-to-end, resilient to queue churn.
+
+**Known eval interaction (follow-up):** case #25 (`is GDPR Art.5 a non-conformity?`) has `must_not_contain=["Art.5 is a non-conformity"]` per the old Layer-2 anti-hallucination contract. With Art.5's live finding now legitimately NC (engine emit + reviewer approve), that assertion is obsolete. User flagged #25 for separate cleanup; the engine NC ship date is the trigger for that cleanup. Don't touch #25 inside engine-NC commits — handle as a deliberate contract-update review.
 
 **Open question for later:** the `had_derivation_NA` empty-outcomes case stays OFI (existing comment defends it: parent applies but every implementation route is N/A — curation incompleteness). If a user wants NC there too, revisit; but the semantics differ from "tried 2 things and 0 succeeded."
 
