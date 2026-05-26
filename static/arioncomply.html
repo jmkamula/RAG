@@ -74,6 +74,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .p-ofi{background:#FAEEDA;color:#854F0B}
 .p-comply{background:#EAF3DE;color:#3B6D11}
 .p-na{background:#f1efe8;color:#5F5E5A}
+
+/* Dashboard heatmap */
+.dash-wrap{padding:16px 20px;overflow-y:auto;height:100%}
+.dash-fw{background:#fff;border:1px solid #E8E5DA;border-radius:8px;padding:14px 16px;margin-bottom:14px}
+.dash-fw-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:12px}
+.dash-fw-title{font-size:14px;font-weight:600;color:#3A382E}
+.dash-fw-meta{font-size:11px;color:#9C9A8E}
+.dash-summary{display:flex;gap:14px;font-size:11px;color:#5F5E5A;margin-top:6px}
+.dash-summary strong{color:#3A382E;font-weight:600}
+.dash-bar{display:flex;height:6px;border-radius:3px;overflow:hidden;background:#EEECE2;margin-top:8px}
+.dash-bar-seg{height:100%}
+.dash-group{margin-top:12px}
+.dash-group-label{font-size:11px;color:#5F5E5A;font-weight:500;margin-bottom:5px;display:flex;justify-content:space-between}
+.dash-group-label span:last-child{color:#9C9A8E}
+.heat-grid{display:flex;flex-wrap:wrap;gap:3px}
+.heat-cell{width:13px;height:13px;border-radius:2px;cursor:pointer;border:1px solid transparent;transition:transform .08s}
+.heat-cell:hover{border-color:#3C3489;transform:scale(1.4)}
+.heat-cell.active{outline:2px solid #3C3489;outline-offset:1px}
+.heat-cell.f-NC{background:#D9534F}
+.heat-cell.f-OFI{background:#EF9F27}
+.heat-cell.f-Comply{background:#7FB36F}
+.heat-cell.f-NA{background:#C9C7BC}
+.heat-cell.f-NotAssessed{background:#EEECE2;border:1px solid #DCD9CB}
+.heat-legend{display:flex;gap:14px;align-items:center;font-size:11px;color:#5F5E5A;margin:4px 0 0}
+.heat-legend-swatch{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:middle;margin-right:4px}
+.dash-empty{padding:40px 20px;text-align:center;color:#9C9A8E;font-size:13px}
+.dash-actions{display:flex;gap:8px;margin-top:10px}
+.btn-ask{background:#3C3489;color:#fff;border:none;padding:7px 12px;border-radius:5px;font-size:12px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.btn-ask:hover{background:#2D2666}
+.btn-ask:disabled{background:#9C9A8E;cursor:not-allowed}
 .p-src{background:#f1efe8;color:#5F5E5A}
 .p-conf{background:#EAF3DE;color:#3B6D11}
 .qcard-gap{font-size:11px;color:#5F5E5A;margin-top:7px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -249,7 +279,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <!-- ── Sidebar ── -->
   <div class="sidebar">
     <div class="nav-section">Workspace</div>
-    <button class="nav-item active" id="nav-queue" onclick="setMode('queue')">
+    <button class="nav-item active" id="nav-dashboard" onclick="setMode('dashboard')">
+      <i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard
+    </button>
+    <button class="nav-item" id="nav-queue" onclick="setMode('queue')">
       <i class="ti ti-clipboard-check" aria-hidden="true"></i> Review queue
       <span class="nav-badge" id="nb-queue">—</span>
     </button>
@@ -274,8 +307,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <!-- ── Main panel ── -->
   <div class="main">
 
+    <!-- Dashboard toolbar -->
+    <div class="main-toolbar" id="toolbar-dashboard">
+      <div>
+        <div class="main-title">Compliance posture</div>
+        <div class="main-sub" id="dashboard-sub">Heatmap and per-framework summary across all standards in scope</div>
+      </div>
+      <button class="btn-sm btn-outline" onclick="loadDashboard()">
+        <i class="ti ti-refresh" aria-hidden="true"></i> Refresh
+      </button>
+    </div>
+
     <!-- Queue toolbar -->
-    <div class="main-toolbar" id="toolbar-queue">
+    <div class="main-toolbar" id="toolbar-queue" style="display:none">
       <div style="display:flex;align-items:center;gap:16px">
         <div>
           <div class="main-title" id="queue-title">Review queue</div>
@@ -310,8 +354,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
 
+    <!-- Dashboard body -->
+    <div class="main-body" id="body-dashboard" style="padding:0">
+      <div class="dash-wrap" id="dash-wrap">
+        <div class="dash-empty">
+          <i class="ti ti-plug-connected-x" aria-hidden="true"></i>
+          <p>Connect to load your compliance posture</p>
+        </div>
+      </div>
+    </div>
+
     <!-- Queue body -->
-    <div class="main-body" id="body-queue">
+    <div class="main-body" id="body-queue" style="display:none">
       <div class="empty"><i class="ti ti-plug-connected-x" aria-hidden="true"></i><p>Connect to load the review queue</p></div>
     </div>
 
@@ -366,7 +420,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="detail" id="detail-panel">
     <div class="detail-empty" id="detail-empty">
       <i class="ti ti-hand-click" aria-hidden="true"></i>
-      <p>Select a control from the queue to review and confirm</p>
+      <p>Select a control to see details</p>
     </div>
     <div id="detail-content" style="display:none;flex-direction:column;height:100%">
       <div class="detail-header">
@@ -441,7 +495,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
-let mode = 'queue';
+let mode = 'dashboard';
+let dashData = null;          // last-loaded dashboard payload
 let stage = 1;                 // 1 = evidence (Stage-1), 2 = engine (Stage-2)
 let s1Controls = [];           // last-loaded Stage-1 control list
 let s2Proposals = [];          // last-loaded Stage-2 proposal list
@@ -453,7 +508,11 @@ let uploads = {};
 function connect() {
   API_URL = document.getElementById('api-url').value.trim();
   API_KEY = document.getElementById('api-key').value.trim();
-  loadQueue();
+  // Load whichever mode is active. Dashboard is the default landing
+  // view; users can switch to Review queue / Chat / Documents from the
+  // sidebar.
+  if (mode === 'dashboard')   loadDashboard();
+  else if (mode === 'queue')  loadQueue();
 }
 
 async function api(path, opts={}) {
@@ -493,13 +552,182 @@ async function apiForm(path, formData) {
 // ── Mode switching ──
 function setMode(m) {
   mode = m;
-  ['queue','chat','docs'].forEach(x => {
+  ['dashboard','queue','chat','docs'].forEach(x => {
     document.getElementById('nav-'+x).classList.toggle('active', x===m);
     document.getElementById('toolbar-'+x).style.display = x===m ? '' : 'none';
     document.getElementById('body-'+x).style.display = x===m ? '' : 'none';
   });
   document.getElementById('queue-filters').style.display = m==='queue' ? '' : 'none';
-  if (m === 'queue') loadQueue();
+  // Close the detail panel when switching modes — its state is tied to
+  // the previous view (a queue card or a dashboard cell).
+  closeDetail();
+  if (m === 'queue')     loadQueue();
+  if (m === 'dashboard') loadDashboard();
+}
+
+// ── Dashboard ──
+async function loadDashboard() {
+  const wrap = document.getElementById('dash-wrap');
+  wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-loader-2"></i><p>Loading posture…</p></div>';
+  try {
+    const d = await api('/api/v1/dashboard/posture');
+    dashData = d;
+    renderDashboard(d);
+  } catch (e) {
+    wrap.innerHTML = `<div class="dash-empty"><i class="ti ti-alert-triangle"></i><p>Couldn’t load posture: ${e.message}</p></div>`;
+  }
+}
+
+const _FINDING_CLASS = {
+  'NC': 'f-NC', 'OFI': 'f-OFI', 'Comply': 'f-Comply',
+  'N/A': 'f-NA', 'Not assessed': 'f-NotAssessed'
+};
+
+function renderDashboard(d) {
+  const wrap = document.getElementById('dash-wrap');
+  if (!d.frameworks || !d.frameworks.length) {
+    wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-circle-check"></i><p>No frameworks in scope yet</p></div>';
+    return;
+  }
+
+  // Heatmap legend once at the top.
+  let html = `<div class="heat-legend" style="margin-bottom:14px">
+    <span><span class="heat-legend-swatch f-NC"></span>NC</span>
+    <span><span class="heat-legend-swatch f-OFI"></span>OFI</span>
+    <span><span class="heat-legend-swatch f-Comply"></span>Comply</span>
+    <span><span class="heat-legend-swatch f-NA"></span>N/A</span>
+    <span><span class="heat-legend-swatch f-NotAssessed"></span>Not assessed</span>
+  </div>`;
+
+  for (const fw of d.frameworks) {
+    const s = fw.summary;
+    const tot = s.total || 1;
+    const segs = ['NC','OFI','Comply','N/A','Not assessed'].map(k => {
+      const n = s[k] || 0;
+      if (!n) return '';
+      const pct = (n / tot * 100).toFixed(1);
+      const cls = _FINDING_CLASS[k] || 'f-NotAssessed';
+      return `<div class="dash-bar-seg ${cls}" style="width:${pct}%" title="${k}: ${n}"></div>`;
+    }).join('');
+
+    html += `<div class="dash-fw">
+      <div class="dash-fw-head">
+        <div>
+          <div class="dash-fw-title">${escapeHtml(fw.display_name)}</div>
+          <div class="dash-fw-meta">${s.total} controls in scope</div>
+        </div>
+      </div>
+      <div class="dash-summary">
+        <span><strong>${s.NC||0}</strong> NC</span>
+        <span><strong>${s.OFI||0}</strong> OFI</span>
+        <span><strong>${s.Comply||0}</strong> Comply</span>
+        <span><strong>${s['N/A']||0}</strong> N/A</span>
+        <span><strong>${s['Not assessed']||0}</strong> Not assessed</span>
+      </div>
+      <div class="dash-bar">${segs}</div>`;
+
+    for (const g of fw.groups) {
+      // Bucket-level counts for the group label.
+      const counts = {};
+      for (const c of g.controls) counts[c.finding] = (counts[c.finding]||0) + 1;
+      const sub = ['NC','OFI'].filter(k => counts[k]).map(k => `${counts[k]} ${k}`).join(' · ');
+      html += `<div class="dash-group">
+        <div class="dash-group-label">
+          <span>${escapeHtml(g.label)}</span>
+          <span>${g.controls.length} controls${sub ? ' · ' + sub : ''}</span>
+        </div>
+        <div class="heat-grid">`;
+      for (const c of g.controls) {
+        const cls = _FINDING_CLASS[c.finding] || 'f-NotAssessed';
+        const tip = `${c.control_ref} — ${c.finding}`;
+        const safe = JSON.stringify({...c, standard_id: fw.standard_id, display_name: fw.display_name}).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        html += `<div class="heat-cell ${cls}" title="${escapeHtml(tip)}" data-ref="${escapeHtml(c.control_ref)}" onclick='selectHeatCell(${safe}, event)'></div>`;
+      }
+      html += '</div></div>';
+    }
+    html += '</div>';
+  }
+
+  wrap.innerHTML = html;
+}
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+async function selectHeatCell(c, ev) {
+  selected = {kind: 'dash', ...c};
+  document.getElementById('detail-empty').style.display = 'none';
+  document.getElementById('detail-content').style.display = 'flex';
+
+  document.getElementById('dp-ref').textContent = c.control_ref;
+  document.getElementById('dp-std').textContent = c.display_name || c.standard_id;
+  document.getElementById('dp-finding').innerHTML = pill(c.finding);
+  document.getElementById('dp-sys-wrap').style.display = 'none';
+  document.getElementById('dp-gap').textContent = c.gap_excerpt || '(no gap or evidence text recorded)';
+
+  // Confirmation status + engine state in the meta footer.
+  const bits = [];
+  if (c.confirmation_status) bits.push(`Confirmation: ${c.confirmation_status}`);
+  if (c.engine_proposal_status && c.engine_proposal_status !== 'none') {
+    bits.push(`Engine: ${c.engine_proposal_status}${c.engine_proposed_finding?` (→ ${c.engine_proposed_finding})`:''}`);
+  }
+  document.getElementById('dp-meta').textContent = bits.join(' · ') || '—';
+
+  configureDashboardActions(c);
+
+  // Highlight the active cell.
+  document.querySelectorAll('.heat-cell').forEach(el => el.classList.remove('active'));
+  if (ev && ev.currentTarget) ev.currentTarget.classList.add('active');
+}
+
+function configureDashboardActions(c) {
+  // Replace the confirm/override action panel with a single "Ask the
+  // assistant" button when we're inspecting a dashboard cell. Re-uses
+  // the existing detail-panel chrome so it sits in the same place as
+  // the queue actions.
+  const tabs = document.querySelectorAll('.detail .tabs .tab');
+  const confirmBody  = document.getElementById('body-confirm');
+  const overrideBody = document.getElementById('body-override');
+  // Hide the queue-style tabs entirely for dashboard cells.
+  if (tabs.length) tabs.forEach(t => t.style.display = 'none');
+  if (overrideBody) overrideBody.style.display = 'none';
+  confirmBody.style.display = '';
+
+  // Replace the confirm body with an "Ask the assistant" button.
+  const isProblem = c.finding === 'NC' || c.finding === 'OFI';
+  const prompt = isProblem
+    ? `how do I remediate ${c.control_ref}?`
+    : `tell me more about our posture on ${c.control_ref}`;
+  confirmBody.innerHTML = `
+    <div class="form-group">
+      <label class="form-label">Ask the assistant</label>
+      <div style="font-size:11px;color:#9C9A8E;margin-bottom:8px">
+        Opens the chat with a prefilled question. You can edit it before sending.
+      </div>
+      <button class="btn-ask" onclick="askAboutControl('${escapeHtml(c.control_ref)}', ${isProblem})">
+        <i class="ti ti-message-circle"></i>
+        ${isProblem ? 'Get remediation advice' : 'Ask about this control'}
+      </button>
+    </div>`;
+}
+
+function askAboutControl(controlRef, isProblem) {
+  // Switch to chat tab and prefill the input. We don't auto-send so the
+  // user can shape the question (per user decision 2026-05-26).
+  setMode('chat');
+  const prompt = isProblem
+    ? `how do I remediate ${controlRef}?`
+    : `tell me more about our posture on ${controlRef}`;
+  const ta = document.getElementById('chat-input');
+  if (ta) {
+    ta.value = prompt;
+    ta.focus();
+    // Move caret to end so the user can append or edit cleanly.
+    ta.selectionStart = ta.selectionEnd = ta.value.length;
+  }
 }
 
 // ── Queue (Stage 1 / Stage 2 two-stage HITL) ──
@@ -813,6 +1041,18 @@ async function selectStage2(p, ev) {
 function configureActionPanel(kind) {
   // Reuse the existing confirm/override tab structure for the two-stage
   // approve/reject pair. Stage 1 and Stage 2 share the same UI shape.
+  // Restore the queue-style UI in case the dashboard cell handler hid it.
+  document.querySelectorAll('.detail .tabs .tab').forEach(t => t.style.display = '');
+  // Rebuild the confirm body — the dashboard handler replaces its
+  // innerHTML, so restore the queue's confirm controls before tweaking.
+  document.getElementById('body-confirm').innerHTML = `
+    <div class="form-group">
+      <label class="form-label">Reason (optional)</label>
+      <textarea class="form-textarea" id="confirm-reason" placeholder="Note for audit trail..."></textarea>
+    </div>
+    <button class="btn-confirm" id="btn-confirm" onclick="doConfirm()">
+      <i class="ti ti-check" aria-hidden="true"></i> Confirm finding
+    </button>`;
   document.getElementById('tab-confirm').textContent = kind==='s1' ? 'Approve evidence' : 'Approve verdict';
   document.getElementById('tab-override').textContent = 'Reject';
   document.getElementById('btn-confirm').innerHTML = '<i class="ti ti-check"></i> ' +
@@ -837,6 +1077,7 @@ function closeDetail() {
   document.getElementById('detail-empty').style.display = '';
   document.getElementById('detail-content').style.display = 'none';
   document.querySelectorAll('.qcard').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.heat-cell').forEach(el => el.classList.remove('active'));
 }
 
 function setTab(t) {

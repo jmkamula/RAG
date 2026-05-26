@@ -2099,6 +2099,163 @@ async def posture_summary(
         pool.putconn(conn)
 
 
+_ISO_THEME_PREFIX = (
+    ("A.5.", "Organisational (A.5)"),
+    ("A.6.", "People (A.6)"),
+    ("A.7.", "Physical (A.7)"),
+    ("A.8.", "Technological (A.8)"),
+)
+
+_STANDARD_DISPLAY = {
+    "ISO27001:2022": "ISO 27001:2022",
+    "ISO27701:2019": "ISO 27701:2019",
+    "GDPR:2016/679": "GDPR (EU 2016/679)",
+}
+
+
+def _iso_theme(control_ref: str) -> str:
+    """Bucket an ISO 27001 control_ref into its Annex A theme or body
+    clauses. Body clauses (no A. prefix) go to Management."""
+    for prefix, label in _ISO_THEME_PREFIX:
+        if control_ref.startswith(prefix):
+            return label
+    return "Management (4–10)"
+
+
+def _gdpr_theme(control_ref: str) -> str:
+    """Bucket a GDPR Art.* ref into a chapter group. Just two buckets
+    for v1: Principles (1–11) vs Controller-and-beyond (12+). Articles
+    we can't parse fall to 'Other'."""
+    try:
+        # Art.5.1.a → leading number after 'Art.'
+        head = control_ref.split(".")[1]
+        num = int("".join(c for c in head if c.isdigit()))
+    except (ValueError, IndexError):
+        return "Other GDPR articles"
+    if num <= 11:
+        return "Principles & lawfulness (Art.1–11)"
+    return "Controller, transfers & rights (Art.12+)"
+
+
+def _control_sort_key(control_ref: str) -> tuple:
+    """Natural sort: A.5.1 < A.5.2 < A.5.10, Art.5 < Art.5.1 < Art.5.1.a."""
+    parts = control_ref.replace("A.", "").replace("Art.", "").split(".")
+    out = []
+    for p in parts:
+        if p.isdigit():
+            out.append((0, int(p), ""))
+        else:
+            # Mixed e.g. "1a" — split numeric prefix from suffix
+            num = ""
+            i = 0
+            while i < len(p) and p[i].isdigit():
+                num += p[i]
+                i += 1
+            out.append((0, int(num) if num else 0, p[i:]))
+    return tuple(out)
+
+
+@app.get("/api/v1/dashboard/posture", tags=["posture"])
+async def dashboard_posture(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Tenant-scoped heatmap view: every framework in scope, grouped
+    by Annex A theme (ISO 27001) or chapter (GDPR), with per-control
+    finding and a short gap excerpt suitable for hover/detail rendering.
+
+    Tenant-agnostic — pulls from posture_controls + scope inference, no
+    Arion-specific assumptions. Frameworks not in tenant scope are
+    suppressed even if the DB has stray rows."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT standard_id, control_ref, finding,
+                       confirmation_status,
+                       LEFT(COALESCE(gap_description,''), 200) AS gap_excerpt,
+                       engine_proposal_status,
+                       engine_proposed_finding
+                  FROM posture_controls
+                 WHERE tenant_id = %s::uuid
+                   AND is_active = TRUE
+                 ORDER BY standard_id, control_ref
+            """, [key_info.tenant_id])
+            rows = cur.fetchall()
+
+        # Bucket controls by (standard, theme).
+        by_std: dict = {}
+        for std, ref, finding, conf, gap, eng_status, eng_finding in rows:
+            entry = by_std.setdefault(std, {"groups": {}, "summary": {
+                "NC": 0, "OFI": 0, "Comply": 0, "N/A": 0,
+                "Not assessed": 0, "total": 0,
+            }})
+            theme = _iso_theme(ref) if std.startswith("ISO27001") else (
+                _gdpr_theme(ref) if std.startswith("GDPR") else "All controls"
+            )
+            entry["groups"].setdefault(theme, []).append({
+                "control_ref":          ref,
+                "finding":              finding,
+                "confirmation_status":  conf,
+                "gap_excerpt":          gap or "",
+                "engine_proposal_status":   eng_status,
+                "engine_proposed_finding":  eng_finding,
+            })
+            entry["summary"][finding] = entry["summary"].get(finding, 0) + 1
+            entry["summary"]["total"] += 1
+
+        # Order groups: ISO themes in Annex order then Management;
+        # GDPR by chapter; others alphabetical.
+        _iso_order = [lbl for _, lbl in _ISO_THEME_PREFIX] + ["Management (4–10)"]
+        _gdpr_order = [
+            "Principles & lawfulness (Art.1–11)",
+            "Controller, transfers & rights (Art.12+)",
+            "Other GDPR articles",
+        ]
+
+        frameworks = []
+        for std, entry in by_std.items():
+            if std.startswith("ISO27001"):
+                ordered = _iso_order
+            elif std.startswith("GDPR"):
+                ordered = _gdpr_order
+            else:
+                ordered = sorted(entry["groups"].keys())
+            groups_out = []
+            for label in ordered:
+                ctrls = entry["groups"].get(label)
+                if not ctrls:
+                    continue
+                ctrls.sort(key=lambda c: _control_sort_key(c["control_ref"]))
+                groups_out.append({"label": label, "controls": ctrls})
+
+            frameworks.append({
+                "standard_id":  std,
+                "display_name": _STANDARD_DISPLAY.get(std, std),
+                "summary":      entry["summary"],
+                "groups":       groups_out,
+            })
+
+        # Stable display order: ISO 27001 first, then GDPR, then anything
+        # else alphabetically. Tenants that only have GDPR see GDPR first.
+        def _std_rank(s):
+            if s.startswith("ISO27001"): return 0
+            if s.startswith("ISO27701"): return 1
+            if s.startswith("GDPR"):     return 2
+            return 9
+        frameworks.sort(key=lambda f: (_std_rank(f["standard_id"]), f["standard_id"]))
+
+        return {
+            "tenant_id":  key_info.tenant_id,
+            "frameworks": frameworks,
+            "trace_id":   request.state.trace_id,
+        }
+    finally:
+        pool.putconn(conn)
+
+
 @app.get("/api/v1/posture/{control_ref}", tags=["posture"])
 async def posture_control(
     control_ref: str,
