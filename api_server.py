@@ -2177,7 +2177,9 @@ async def dashboard_posture(
                        confirmation_status,
                        LEFT(COALESCE(gap_description,''), 200) AS gap_excerpt,
                        engine_proposal_status,
-                       engine_proposed_finding
+                       engine_proposed_finding,
+                       engine_proposal_reason,
+                       LEFT(COALESCE(action_required,''), 200) AS action_excerpt
                   FROM posture_controls
                  WHERE tenant_id = %s::uuid
                    AND is_active = TRUE
@@ -2187,7 +2189,8 @@ async def dashboard_posture(
 
         # Bucket controls by (standard, theme).
         by_std: dict = {}
-        for std, ref, finding, conf, gap, eng_status, eng_finding in rows:
+        for (std, ref, finding, conf, gap, eng_status, eng_finding,
+             eng_reason, action) in rows:
             entry = by_std.setdefault(std, {"groups": {}, "summary": {
                 "NC": 0, "OFI": 0, "Comply": 0, "N/A": 0,
                 "Not assessed": 0, "total": 0,
@@ -2195,13 +2198,21 @@ async def dashboard_posture(
             theme = _iso_theme(ref) if std.startswith("ISO27001") else (
                 _gdpr_theme(ref) if std.startswith("GDPR") else "All controls"
             )
+            # gap_description is sparse for engine-derived (GDPR-via-xfw)
+            # rows; fall back to the humanized engine reason so the detail
+            # panel isn't empty. Comply rows with gap_description prose
+            # surface as evidence text (see context_assembler relabel for
+            # the chat side).
+            display_gap = gap or _humanize_reason(eng_reason or "")
             entry["groups"].setdefault(theme, []).append({
-                "control_ref":          ref,
-                "finding":              finding,
-                "confirmation_status":  conf,
-                "gap_excerpt":          gap or "",
+                "control_ref":              ref,
+                "finding":                  finding,
+                "confirmation_status":      conf,
+                "gap_excerpt":              display_gap,
+                "action_excerpt":           action or "",
                 "engine_proposal_status":   eng_status,
                 "engine_proposed_finding":  eng_finding,
+                "engine_proposal_reason":   _humanize_reason(eng_reason or ""),
             })
             entry["summary"][finding] = entry["summary"].get(finding, 0) + 1
             entry["summary"]["total"] += 1
