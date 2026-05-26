@@ -153,12 +153,19 @@ def parse_stage1_intent(query: str) -> Optional[Stage1Intent]:
 
 def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[dict]:
     """Return the pending findings for one control. Each row is
-    {finding_id, status, confidence, excerpt}."""
+    {finding_id, status, confidence, excerpt, inferred_from_control_ref,
+    inferred_from_standard_id, inference_source}.
+
+    The inference fields let the UI show the source control when a finding
+    was derived (e.g. a GDPR article inferred from an ISO control via xfw)
+    rather than directly extracted — see [[stage1-detail-show-inference-chain-idea]]."""
     with pg_conn.cursor() as cur:
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
         cur.execute(
             """
-            SELECT id::text, status, confidence, excerpt, extracted_at::text
+            SELECT id::text, status, confidence, excerpt, extracted_at::text,
+                   inferred_from_control_ref, inferred_from_standard_id,
+                   inference_source
               FROM document_findings
              WHERE tenant_id     = %s
                AND control_ref   = %s
@@ -170,11 +177,14 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
         )
         return [
             {
-                "finding_id":   r[0],
-                "status":       r[1],
-                "confidence":   r[2],
-                "excerpt":      r[3] or "",
-                "extracted_at": r[4],
+                "finding_id":                r[0],
+                "status":                    r[1],
+                "confidence":                r[2],
+                "excerpt":                   r[3] or "",
+                "extracted_at":              r[4],
+                "inferred_from_control_ref": r[5],
+                "inferred_from_standard_id": r[6],
+                "inference_source":          r[7],
             }
             for r in cur.fetchall()
         ]

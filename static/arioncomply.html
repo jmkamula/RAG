@@ -265,8 +265,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="filter-group" id="queue-filters">
       <div class="filter-label muted" style="padding:0 8px">Tip</div>
       <div style="padding:0 8px;font-size:11px;color:#9C9A8E;line-height:1.5">
-        Stage 1 confirms evidence extracted from your documents.
-        Stage 2 approves engine-derived posture verdicts.
+        Intake approval confirms evidence extracted from your documents.
+        Engine approval signs off on engine-derived posture verdicts.
       </div>
     </div>
   </div>
@@ -282,8 +282,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <div class="main-sub" id="queue-sub">—</div>
         </div>
         <div class="tabs" style="margin-left:8px">
-          <button class="tab active" id="stab-1" onclick="setStage(1)">Stage 1 · Evidence <span class="fcount" id="sc-1">—</span></button>
-          <button class="tab" id="stab-2" onclick="setStage(2)">Stage 2 · Engine <span class="fcount" id="sc-2">—</span></button>
+          <button class="tab active" id="stab-1" onclick="setStage(1)">Intake approval <span class="fcount" id="sc-1">—</span></button>
+          <button class="tab" id="stab-2" onclick="setStage(2)">Engine approval <span class="fcount" id="sc-2">—</span></button>
         </div>
       </div>
       <button class="btn-sm btn-outline" onclick="loadQueue()">
@@ -555,12 +555,12 @@ function statusPill(status) {
 
 function renderStage1(controls, total) {
   const body = document.getElementById('body-queue');
-  document.getElementById('queue-title').textContent = 'Stage 1 · Evidence review';
+  document.getElementById('queue-title').textContent = 'Intake approval';
   document.getElementById('queue-sub').textContent =
-    `${total} control${total!==1?'s':''} with pending document findings — confirm evidence to advance to Stage 2`;
+    `${total} control${total!==1?'s':''} with pending document findings — confirm evidence so the engine can propose a verdict`;
 
   if (!controls.length) {
-    body.innerHTML = '<div class="empty"><i class="ti ti-circle-check" aria-hidden="true"></i><p>Stage 1 queue is empty</p></div>';
+    body.innerHTML = '<div class="empty"><i class="ti ti-circle-check" aria-hidden="true"></i><p>Intake approval queue is empty</p></div>';
     return;
   }
 
@@ -587,12 +587,12 @@ function renderStage1(controls, total) {
 
 function renderStage2(proposals, total) {
   const body = document.getElementById('body-queue');
-  document.getElementById('queue-title').textContent = 'Stage 2 · Engine verdicts';
+  document.getElementById('queue-title').textContent = 'Engine approval';
   document.getElementById('queue-sub').textContent =
-    `${total} engine proposal${total!==1?'s':''} pending — approve to apply verdict to posture`;
+    `${total} engine proposal${total!==1?'s':''} pending — approve to apply the verdict to your posture`;
 
   if (!proposals.length) {
-    body.innerHTML = '<div class="empty"><i class="ti ti-circle-check" aria-hidden="true"></i><p>Stage 2 queue is empty</p></div>';
+    body.innerHTML = '<div class="empty"><i class="ti ti-circle-check" aria-hidden="true"></i><p>Engine approval queue is empty</p></div>';
     return;
   }
 
@@ -648,14 +648,38 @@ async function selectStage1(c, ev) {
       gap.innerHTML = '<span class="muted">(no pending findings)</span>';
       return;
     }
-    let h = '';
+    const esc = s => (s||'').replace(/</g,'&lt;');
+    // Gloss explains the two raw enum labels (status + confidence) so the
+    // user doesn't have to guess what "partial / medium" means.
+    let h = `<div style="font-size:10px;color:#9C9A8E;margin-bottom:6px;line-height:1.4">
+      <strong>Evidence</strong> = how well the document covers this control
+      (missing / partial / present). <strong>Confidence</strong> = the extractor's
+      certainty in that assessment (low / medium / high).
+    </div>`;
     for (const f of d.findings) {
+      // Inferred findings carry the source control (e.g. GDPR Art.10 derived
+      // from an ISO control via xfw). Surface it so the reviewer can trace
+      // why this finding exists — see [[stage1-detail-show-inference-chain-idea]].
+      let chain = '';
+      if (f.inferred_from_control_ref) {
+        const src = esc(f.inferred_from_standard_id || '');
+        const ref = esc(f.inferred_from_control_ref);
+        const via = f.inference_source && f.inference_source !== 'extracted'
+                    ? ` via ${esc(f.inference_source)}` : '';
+        chain = `<div style="margin-top:6px;padding:6px 8px;background:#fff;border:1px dashed #D9D5C5;border-radius:4px;font-size:10px;color:#3A382E">
+          <i class="ti ti-arrow-back-up" style="vertical-align:middle"></i>
+          Inferred from <strong>${src}${src?' · ':''}${ref}</strong>${via}
+        </div>`;
+      }
       h += `<div style="margin-bottom:10px;padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA">
-        <div style="display:flex;gap:6px;margin-bottom:4px">
+        <div style="display:flex;gap:6px;margin-bottom:4px;align-items:center">
+          <span style="font-size:10px;color:#9C9A8E">Evidence:</span>
           ${statusPill(f.status)}
-          <span style="font-size:10px;color:#9C9A8E">${f.confidence||'—'}</span>
+          <span style="font-size:10px;color:#9C9A8E;margin-left:6px">Confidence:</span>
+          <span class="pill p-src">${esc(f.confidence||'—')}</span>
         </div>
-        <div style="font-size:12px;color:#3A382E;line-height:1.4">${(f.excerpt||'(no excerpt)').replace(/</g,'&lt;')}</div>
+        <div style="font-size:12px;color:#3A382E;line-height:1.4">${esc(f.excerpt||'(no excerpt)')}</div>
+        ${chain}
       </div>`;
     }
     gap.innerHTML = h;
@@ -704,42 +728,63 @@ async function selectStage2(p, ev) {
     let h = `<div style="font-size:11px;color:#3A382E;font-weight:600">
               Composition · ${sat} of ${tot} satisfied${fw?` · derived from ${fw}`:''}
             </div>`;
+
+    // Group derived children by source standard so we can render them as a
+    // single compact "Derived from X: ref ✓ · ref ✗ · …" line, mirroring the
+    // Stage-1 inference-chain summary. Leaves stay as their own expanded
+    // panels because they carry the missing-items list the reviewer needs.
+    const leaves  = v.children.filter(c => c.kind === 'leaf');
+    const derived = v.children.filter(c => c.kind === 'derived');
+    const grouped = {};
+    for (const c of derived) {
+      const std = c.from_standard || '—';
+      (grouped[std] = grouped[std] || []).push(c);
+    }
+
     h += '<div style="margin-top:6px">';
-    for (const c of v.children) {
-      const label = c.satisfied
-        ? '<span class="pill p-comply">satisfied</span>'
-        : '<span class="pill p-ofi">pending</span>';
-      // Build the primary label + subtitle row
-      let primary, sub;
-      if (c.kind === 'leaf') {
-        // Prefer EvidenceRequirement.title, fall back to evidence_type (deduped if role==evt)
-        primary = c.title ? esc(c.title)
-                          : esc(c.evidence_type || 'leaf');
-        sub = c.role && c.role !== c.evidence_type ? `role: ${esc(c.role)}` : '';
-      } else {
-        // Derived control: "A.8.10 — Information deletion · OFI"
-        const ref = esc(c.from_control_ref);
-        const ttl = c.title ? ` — ${esc(c.title)}` : '';
-        primary = `<strong>${ref}</strong>${ttl}`;
-        sub = `${esc(c.from_standard)}${c.role?` · role: ${esc(c.role)}`:''} · posture: ${esc(c.from_posture)}`;
+
+    // Render a sat/pending marker + title for one child (leaf or derived).
+    // Used by both sections below so the visual rhythm matches.
+    const renderRow = (label, sub, satisfied) => {
+      const mark = satisfied
+        ? '<span style="color:#2F8F4D;font-weight:600">✓</span>'
+        : '<span style="color:#B5651B;font-weight:600">✗</span>';
+      return `<li style="margin-top:3px">
+        <span style="display:inline-block;min-width:14px">${mark}</span>
+        <strong>${label}</strong>${sub?` — <span style="color:#3A382E">${sub}</span>`:''}
+      </li>`;
+    };
+
+    // Compact derived-from list, one section per source standard. Each ref
+    // is one line with its title inline (no packed-row form, no tooltip-only
+    // title — the reviewer shouldn't have to hover to read what a control is).
+    for (const std of Object.keys(grouped)) {
+      let rows = '';
+      for (const c of grouped[std]) {
+        rows += renderRow(esc(c.from_control_ref || '?'), esc(c.title || ''), c.satisfied);
       }
-      h += `<div style="padding:8px 10px;margin-top:4px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;font-size:11px">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-          <span>${primary}</span>
-          ${label}
+      h += `<div style="margin-top:6px;padding:8px 10px;background:#fff;border:1px dashed #D9D5C5;border-radius:5px;font-size:11px;line-height:1.5">
+        <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">
+          <i class="ti ti-arrow-back-up" style="vertical-align:middle"></i>
+          Derived from <strong>${esc(std)}</strong>
         </div>
-        ${sub?`<div style="margin-top:3px;color:#9C9A8E;font-size:10px">${sub}</div>`:''}`;
-      // For pending leaves, show the missing MUST items
-      if (c.kind === 'leaf' && !c.satisfied && c.items_unrecognised && c.items_unrecognised.length) {
-        h += '<ul style="margin:6px 0 0;padding:0 0 0 16px;color:#854F0B;font-size:10px;line-height:1.5">';
-        for (const it of c.items_unrecognised) h += `<li>${esc(it)}</li>`;
-        h += '</ul>';
+        <ul style="margin:0;padding:0 0 0 4px;list-style:none">${rows}</ul>
+      </div>`;
+    }
+
+    // Direct GDPR evidence (leaves) shown in the same list style — one row per
+    // leaf, no missing-MUST-items sub-list. Keeps the panel summary-only so
+    // direct-evidence and ISO-derived cases look consistent.
+    if (leaves.length) {
+      let rows = '';
+      for (const c of leaves) {
+        const primary = esc(c.title || c.evidence_type || 'leaf');
+        rows += renderRow(primary, '', c.satisfied);
       }
-      // For pending derived deps with a humanized reason, show it
-      if (c.kind === 'derived' && !c.satisfied && c.reason) {
-        h += `<div style="margin-top:4px;color:#854F0B;font-size:10px">${esc(c.reason)}</div>`;
-      }
-      h += '</div>';
+      h += `<div style="margin-top:6px;padding:8px 10px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;font-size:11px;line-height:1.5">
+        <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">Direct evidence</div>
+        <ul style="margin:0;padding:0 0 0 4px;list-style:none">${rows}</ul>
+      </div>`;
     }
     h += '</div>';
     document.getElementById('dp-gap').innerHTML = h;
@@ -1078,7 +1123,7 @@ async function enrichDuplicateCard(card, detail) {
     addUploadSummary(card, cardId, d);
     const pending = (d.findings || []).filter(f => f.review_status === 'pending');
     if (pending.length) {
-      if (stateEl) stateEl.textContent = ` ${pending.length} finding${pending.length===1?'':'s'} still pending Stage-1 review:`;
+      if (stateEl) stateEl.textContent = ` ${pending.length} finding${pending.length===1?'':'s'} still pending intake approval:`;
       addStage1Queue(card, cardId, d);
     } else {
       if (stateEl) stateEl.textContent = ' All findings approved.';
@@ -1228,7 +1273,7 @@ function addStage1Queue(card, id, d) {
   div.innerHTML = `
     <div class="review-header" onclick="this.parentElement.classList.toggle('collapsed')">
       <i class="ti ti-chevron-down" aria-hidden="true"></i>
-      Stage-1 review queue (<span class="review-count">${pending.length}</span> pending)
+      Intake approval queue (<span class="review-count">${pending.length}</span> pending)
     </div>
     <div class="review-list">
       <div class="review-bulkbar">
