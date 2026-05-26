@@ -180,15 +180,10 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
 
         overrides = 0
         for cid, verdict in verdicts.items():
-            # Skip specs with no composition value over posture_controls.
-            # A verdict composes when it has multiple direct leaves OR derives
-            # from at least one other control (ControlRef edge). The original
-            # gate only checked leaves and missed every derives_from-based
-            # composition — e.g. GDPR Art.32 (1 leaf, 5 derived), Art.5
-            # (0 leaves, 2 derived).
-            if len(verdict.leaves) <= 1 and not verdict.derived_from:
-                continue
-            # Skip non-determinative postures
+            # Skip non-determinative postures; everything else (single-leaf
+            # included) is eligible for overlay per Path A — see
+            # _persist_engine_proposals for the rationale on removing the
+            # leaves<=1 gate.
             if verdict.posture in ("UNKNOWN", "deferred", "NotApplicable"):
                 continue
             row = posture.get(cid)
@@ -284,13 +279,15 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
 
     proposable: list[tuple[str, str, str]] = []  # (cid, posture, reason)
     for cid, verdict in verdicts.items():
-        # Mirror of the overlay gate above: persist a proposal when the
-        # verdict adds composition (multi-leaf or derives_from). Without
-        # the derived_from check, GDPR umbrella specs (Art.5, Art.24,
-        # Art.32, Art.25) silently dropped — they have ≤1 direct leaf but
-        # compose 2-6 dependencies.
-        if len(verdict.leaves) <= 1 and not verdict.derived_from:
-            continue
+        # Per [[stage1-contract-change-path-a-2026-05-25]] the engine owns
+        # posture proposals for every curated spec, regardless of leaf
+        # count. The old `len(leaves) <= 1` gate (rationale: "single-leaf
+        # state is already represented by posture_controls.finding") was
+        # valid when Stage-1 mutated posture; under Path A, Stage-1 only
+        # confirms evidence, and posture_controls.finding may legitimately
+        # differ from the engine's leaf-evaluator view. We now propose for
+        # every determinative verdict and let the `live_finding == posture`
+        # check below suppress no-op writes.
         if verdict.posture in ("UNKNOWN", "deferred", "NotApplicable"):
             continue
         proposable.append((cid, verdict.posture, verdict.reason or ""))
@@ -317,7 +314,9 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
 
                 cur.execute(
                     """
-                    SELECT engine_proposed_finding, engine_proposal_reason
+                    SELECT finding,
+                           engine_proposed_finding, engine_proposal_reason,
+                           engine_proposal_status
                       FROM posture_controls
                      WHERE tenant_id   = %s
                        AND standard_id = %s
@@ -334,7 +333,16 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
                     # writer (commit 2) creates rows on extraction, so this
                     # only fires for controls the tenant hasn't touched.
                     continue
-                cur_finding, cur_reason = cur_row
+                live_finding, cur_finding, cur_reason, cur_status = cur_row
+
+                # Skip no-op proposals: when the engine agrees with the
+                # tenant's live posture and there's no existing pending
+                # proposal to refresh, there's nothing for Stage-2 to
+                # review. Avoids flooding the queue with auto-Comply rows
+                # for the ~80 controls where engine + intake already align.
+                if live_finding == posture and cur_status in ("none", None):
+                    continue
+
                 if cur_finding == posture and (cur_reason or "") == reason:
                     # Idempotent — nothing to write.
                     continue
