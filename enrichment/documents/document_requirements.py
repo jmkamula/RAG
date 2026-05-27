@@ -37,8 +37,9 @@ class EvidenceRequirement:
                                    # profile_fact: required when ClientFact is True
                                    # the specific fact is encoded in ClientFacts/ObligationRule
                                    # not stored here — derived from obligation chain
-    trigger_event:    str | None   # event name when trigger_type == "operational"
-                                   # e.g. "personal_data_breach", "data_subject_access_request"
+                                   # operational: triggering event lives on the Event side
+                                   # as Event.requires_evidence; (:Event)-[:REQUIRES_EVIDENCE]
+                                   # ->(:RequirementNode) is the single source of truth.
     description:      str          # why this evidence is required
     freshness_days:   int | None   = None   # max age of latest matching artifact for the
                                             # leaf to count as fresh; None = no freshness
@@ -103,7 +104,6 @@ REQ_ISMS_SCOPE = EvidenceRequirement(
     evidence_type = "scope_statement",
     title= "ISMS Scope Statement",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Every ISO 27001 organisation must define and document the scope of its ISMS",
     must_contain  = [
         ChecklistItem("item:4.3:boundaries",        "Boundaries of the ISMS defined", "must", False, "Clause 4.3a"),
@@ -125,7 +125,6 @@ REQ_ISMS_POLICY = EvidenceRequirement(
     evidence_type = "policy",
     title= "Information Security Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Top management must establish an information security policy appropriate to the organisation",
     must_contain  = [
         ChecklistItem("item:5.2:purpose",        "Appropriate to the purpose of the organisation", "must", False, "Clause 5.2a"),
@@ -148,7 +147,6 @@ REQ_RISK_ASSESSMENT = EvidenceRequirement(
     evidence_type = "risk_assessment",
     title= "Information Security Risk Assessment",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Organisation must define and apply a risk assessment process",
     must_contain  = [
         ChecklistItem("item:6.1.2:criteria",         "Risk acceptance criteria defined", "must", False, "Clause 6.1.2a"),
@@ -173,7 +171,6 @@ REQ_RISK_TREATMENT = EvidenceRequirement(
     evidence_type = "risk_treatment_plan",
     title= "Risk Treatment Plan",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Organisation must select and implement risk treatment options",
     must_contain  = [
         ChecklistItem("item:6.1.3:options",      "Risk treatment options selected for each risk", "must", False, "Clause 6.1.3a"),
@@ -194,7 +191,6 @@ REQ_INTERNAL_AUDIT = EvidenceRequirement(
     evidence_type = "audit_programme",
     title= "Internal Audit Programme",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Organisation must conduct internal audits at planned intervals",
     must_contain  = [
         ChecklistItem("item:9.2:frequency",      "Audit frequency defined", "must", False, "Clause 9.2a"),
@@ -217,7 +213,6 @@ REQ_MANAGEMENT_REVIEW = EvidenceRequirement(
     evidence_type = "management_review_minutes",
     title= "Management Review Minutes",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Top management must review the ISMS at planned intervals",
     must_contain  = [
         ChecklistItem("item:9.3:audit_results",  "Internal audit results included", "must", False, "Clause 9.3.2a"),
@@ -243,7 +238,6 @@ REQ_PRIVACY_NOTICE_DIRECT = EvidenceRequirement(
     evidence_type = "privacy_notice",
     title= "Privacy Notice (Data Collected Directly)",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Controllers must provide privacy notice when collecting personal data directly",
     must_contain  = [
         ChecklistItem("item:Art.13:identity",        "Identity and contact details of controller", "must", True, "Art.13.1a"),
@@ -270,7 +264,6 @@ REQ_RECORDS_PROCESSING = EvidenceRequirement(
     evidence_type = "records_of_processing",
     title= "Records of Processing Activities (RoPA)",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Controllers must maintain records of all processing activities under Art.30",
     must_contain  = [
         ChecklistItem("item:Art.30:controller_name",  "Name and contact details of controller", "must", True, "Art.30.1a"),
@@ -297,7 +290,6 @@ REQ_DPA = EvidenceRequirement(
     evidence_type = "data_processing_agreement",
     title= "Data Processing Agreement (DPA)",
     trigger_type  = "profile_fact",
-    trigger_event = None,
     description   = "Mandatory written contract with every processor under Art.28.3",
     must_contain  = [
         ChecklistItem("item:Art.28:instructions",    "Process only on documented controller instructions", "must", True, "Art.28.3a"),
@@ -323,7 +315,6 @@ REQ_CLOUD_SERVICES_POLICY = EvidenceRequirement(
     evidence_type = "policy",
     title= "Information Security for Use of Cloud Services Policy",
     trigger_type  = "profile_fact",
-    trigger_event = None,
     description   = "A.5.23 requires a topic-specific policy for cloud service usage",
     must_contain  = [
         ChecklistItem("item:A.5.23:scope",           "Scope of cloud services covered", "must", False, "A.5.23a"),
@@ -348,7 +339,6 @@ REQ_ENCRYPTION_POLICY = EvidenceRequirement(
     evidence_type = "policy",
     title= "Use of Cryptography Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.24 requires a policy on effective use of cryptography",
     must_contain  = [
         ChecklistItem("item:A.8.24:algorithms",      "Approved cryptographic algorithms listed", "must", False, "A.8.24a"),
@@ -373,7 +363,6 @@ REQ_INCIDENT_RESPONSE = EvidenceRequirement(
     evidence_type = "procedure",
     title= "Information Security Incident Response Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.24 requires documented incident management processes",
     must_contain  = [
         ChecklistItem("item:A.5.24:roles",           "Roles and responsibilities defined", "must", False, "A.5.24a"),
@@ -398,7 +387,6 @@ REQ_DATA_MASKING = EvidenceRequirement(
     evidence_type = "procedure",
     title= "Data Masking Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.11 requires procedures for masking personal data in non-production environments",
     must_contain  = [
         ChecklistItem("item:A.8.11:scope",           "Scope — which systems/environments require masking", "must", False, "A.8.11a"),
@@ -413,25 +401,93 @@ REQ_DATA_MASKING = EvidenceRequirement(
     ],
 )
 
-REQ_ACCESS_RIGHTS = EvidenceRequirement(
+# ── Annex A.5.18 — Access rights — operational_process spine (4-leaf) ────────
+# Promoted 2026-05-26 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process →
+# procedure + register + review_record + revocation_record. The access control
+# policy is intentionally NOT a leaf here — A.5.15 owns it; this control
+# references it via a SHOULD item on the procedure.
+# Authority: ISO 27002:2022 § 5.18 implementation guidance, items a–k.
+
+REQ_A518_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.18:access_rights_procedure",
     control_ref   = "A.5.18",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
-    title= "Access Rights Management Procedure",
+    title         = "Access Rights Management Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
-    description   = "A.5.18 requires procedures for provisioning, review and revocation of access rights",
+    description   = "A.5.18 requires that access rights be provisioned, reviewed, modified and removed in accordance with the topic-specific policy on access control (A.5.15). The procedure documents the operational steps for grant, modification and revocation; the register, review and revocation records are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.18:provisioning",  "Access provisioning process", "must", False, "A.5.18a"),
-        ChecklistItem("item:A.5.18:review",        "Periodic access rights review — at least annually", "must", False, "A.5.18b"),
-        ChecklistItem("item:A.5.18:revocation",    "Revocation process on role change or departure", "must", False, "A.5.18c"),
-        ChecklistItem("item:A.5.18:privileged",    "Privileged access controls", "must", False, "A.5.18d"),
-        ChecklistItem("item:A.5.18:approval",      "Approval process for access requests", "must", False, "Governance"),
+        ChecklistItem("item:A.5.18:asset_owner_authorization", "Asset owner authorization required before access is granted",       "must", False, "27002:5.18a"),
+        ChecklistItem("item:A.5.18:least_privilege",           "Provisioning applies least privilege and segregation-of-duties checks (A.5.3 linkage)", "must", False, "27002:5.18b"),
+        ChecklistItem("item:A.5.18:policy_reference",          "References the topic-specific access control policy (A.5.15)",        "must", False, "27002:5.18c"),
+        ChecklistItem("item:A.5.18:modification_path",         "Path for modification of access on role or responsibility change",     "must", False, "27002:5.18g"),
+        ChecklistItem("item:A.5.18:privileged_route",          "Privileged access requests route through the A.8.2 privileged-access process", "must", False, "27002:5.18i / A.8.2"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.18:records",     "Records of access grants and reviews maintained", "should", False, "Audit trail"),
-        ChecklistItem("item:A.5.18:segregation", "Segregation of duties considered", "should", False, "A.5.3 linkage"),
+        ChecklistItem("item:A.5.18:temporary_access",          "Temporary access provisions for time-bound tasks or third parties",    "should", False, "27002:5.18e"),
+        ChecklistItem("item:A.5.18:approval_retention",        "Retention period for approval evidence stated",                        "should", False, "Accountability"),
+    ],
+)
+
+REQ_A518_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.18:access_rights_register",
+    control_ref   = "A.5.18",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Access Rights Register",
+    trigger_type  = "universal",
+    description   = "A.5.18 requires a central record of access rights. The register is the live source of truth for who holds what access, when it was granted, and by whose authority — feeding the periodic review and revocation-record leaves",
+    must_contain  = [
+        ChecklistItem("item:A.5.18:reg_subject_asset",   "Subject-to-asset rights mapping (who has access to what)",        "must", False, "27002:5.18f"),
+        ChecklistItem("item:A.5.18:reg_authoriser",      "Authoriser captured per grant",                                    "must", False, "27002:5.18a, k"),
+        ChecklistItem("item:A.5.18:reg_grant_date",      "Grant date captured per row",                                      "must", False, "27002:5.18k"),
+        ChecklistItem("item:A.5.18:reg_status",          "Status field per row (active / suspended / revoked)",              "must", False, "27002:5.18d, g"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.18:reg_idmgmt_link",     "Linkage to identity-management register (A.5.16)",                 "should", False, "Cross-control consistency"),
+        ChecklistItem("item:A.5.18:reg_privileged_flag", "Privileged-access rows flagged for A.8.2 oversight",               "should", False, "A.8.2 linkage"),
+    ],
+)
+
+REQ_A518_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.18:access_rights_review",
+    control_ref     = "A.5.18",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Access Rights Review",
+    trigger_type    = "universal",
+    description     = "A.5.18 requires periodic review of access rights. The review record captures the planned-interval review of all subject-asset pairs in the register, the reviewer's identity, the outcome per subject, and any resulting modifications or revocations",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.18:rev_date",        "Review date within the planned interval",                          "must", False, "27002:5.18h"),
+        ChecklistItem("item:A.5.18:rev_reviewer",    "Reviewer identity and role recorded",                              "must", False, "Accountability"),
+        ChecklistItem("item:A.5.18:rev_outcome",     "Outcome per reviewed subject (no change / amended / revoked)",     "must", False, "27002:5.18h"),
+        ChecklistItem("item:A.5.18:rev_actions",     "Action items closed where rights were amended or revoked",         "must", False, "27002:5.18h"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.18:rev_sampling",    "Sampling approach declared if not full coverage of the register",  "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.18:rev_next_date",   "Next planned review date stated",                                  "should", False, "Planning"),
+    ],
+)
+
+REQ_A518_REVOCATION = EvidenceRequirement(
+    id            = "req:A.5.18:access_revocation_record",
+    control_ref   = "A.5.18",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Access Revocation Records",
+    trigger_type  = "universal",
+    description   = "A.5.18 requires that access be removed on change of role, termination, or contract end. Revocation records evidence that those removals actually happened (not just were ordered) — one record per revocation event, traceable back to the register and to the HR off-boarding trigger",
+    must_contain  = [
+        ChecklistItem("item:A.5.18:rev_trigger",        "Revocation trigger captured (termination / role change / contract end / explicit revoke)", "must", False, "27002:5.18d, g"),
+        ChecklistItem("item:A.5.18:rev_date_recorded",  "Revocation date recorded",                                          "must", False, "27002:5.18k"),
+        ChecklistItem("item:A.5.18:rev_disabled_proof", "Evidence access was actually disabled (system log, attestation)",   "must", False, "27002:5.18d"),
+        ChecklistItem("item:A.5.18:rev_authoriser",     "Authoriser of the revocation",                                      "must", False, "27002:5.18d"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.18:rev_hr_link",        "Tied to HR off-boarding workflow (A.6.5 linkage)",                  "should", False, "A.6.5 linkage"),
+        ChecklistItem("item:A.5.18:rev_timeliness",     "Timeliness target stated (e.g., within 24h of termination effective date)", "should", False, "27002:5.18d — timeliness"),
     ],
 )
 
@@ -442,7 +498,6 @@ REQ_REMOTE_WORKING = EvidenceRequirement(
     evidence_type = "policy",
     title= "Remote Working Policy",
     trigger_type  = "profile_fact",
-    trigger_event = None,
     description   = "A.6.7 requires a policy covering information security for remote working",
     must_contain  = [
         ChecklistItem("item:A.6.7:equipment",      "Approved equipment for remote working", "must", False, "A.6.7a"),
@@ -465,7 +520,6 @@ REQ_SECURE_DEVELOPMENT = EvidenceRequirement(
     evidence_type = "policy",
     title= "Secure Development Lifecycle Policy",
     trigger_type  = "profile_fact",
-    trigger_event = None,
     description   = "A.8.25 requires rules for secure development when organisation develops software",
     must_contain  = [
         ChecklistItem("item:A.8.25:principles",    "Security principles for software design", "must", False, "A.8.25a"),
@@ -490,7 +544,6 @@ REQ_BREACH_NOTIFICATION = EvidenceRequirement(
     evidence_type = "breach_notification",
     title= "Personal Data Breach Notification to Supervisory Authority",
     trigger_type  = "operational",
-    trigger_event = "personal_data_breach",
     description   = "Art.33 requires notification to supervisory authority within 72 hours of becoming aware of a breach",
     must_contain  = [
         ChecklistItem("item:Art.33:nature",       "Nature of the breach including categories and approximate number of data subjects", "must", True, "Art.33.3a"),
@@ -511,7 +564,6 @@ REQ_DSAR_RESPONSE = EvidenceRequirement(
     evidence_type = "dsar_response",
     title= "Data Subject Access Request Response",
     trigger_type  = "operational",
-    trigger_event = "data_subject_access_request",
     description   = "Art.15 requires response to access requests within one month",
     must_contain  = [
         ChecklistItem("item:Art.15:confirmation",  "Confirmation that personal data is or is not processed", "must", True, "Art.15.1"),
@@ -545,7 +597,6 @@ REQ_A51_ISP_POLICY = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Information Security Policy (Annex A.5.1)",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.1 requires an information security policy that defines principles, scope, and roles, and references topic-specific policies",
     must_contain  = [
         ChecklistItem("item:A.5.1:scope",            "Scope of the policy defined (which assets, locations, personnel)", "must", False, "A.5.1 — defined"),
@@ -567,7 +618,6 @@ REQ_A51_APPROVAL = EvidenceRequirement(
     evidence_type = "approval",
     title         = "Top Management Approval of InfoSec Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.1 requires top management to approve the InfoSec policy. The approval can live inside the policy as a signed cover page, in a board minute, or as a separate signed cover letter — any form that names a top-management signatory and a date",
     must_contain  = [
         ChecklistItem("item:A.5.1:approval_signatory", "Signatory at top-management level (CEO, board chair, or delegated equivalent)", "must", False, "A.5.1 — approved by management"),
@@ -586,7 +636,6 @@ REQ_A51_COMMUNICATION = EvidenceRequirement(
     evidence_type = "communication_record",
     title         = "Information Security Policy Communication Record",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.1 requires the policy to be published and communicated to relevant personnel. Evidence must show active distribution (date, audience, channel), not mere availability on an intranet",
     must_contain  = [
         ChecklistItem("item:A.5.1:comm_date",         "Date of publication/communication", "must", False, "A.5.1 — communicated"),
@@ -606,7 +655,6 @@ REQ_A51_REVIEW = EvidenceRequirement(
     evidence_type = "review_record",
     title         = "Annual Information Security Policy Review Record",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.1 requires the policy to be reviewed at planned intervals (typically annually) and after significant changes. The review record captures who reviewed it, when, and the outcome (unchanged / amended / retired)",
     must_contain  = [
         ChecklistItem("item:A.5.1:review_date",       "Review date within the planned review interval (typically within 12 months of last review)", "must", False, "A.5.1 — reviewed at planned intervals"),
@@ -621,15 +669,23 @@ REQ_A51_REVIEW = EvidenceRequirement(
 
 
 # ── ISO 27001 Annex A.5 — Organizational Controls (Phase B bulk curation) ────
-# Style locked 2026-05-22 via A.5.26 worked example:
-#   - Single leaf per control where the obligation is a single document type
-#   - Cross-references to sibling controls go in SHOULD items, never MUST
-#   - freshness_days only when the standard text itself requires periodic
-#     review/update/maintenance ("kept up to date", "regularly reviewed",
-#     "planned intervals", "tested")
-#   - Item ids follow item:{control_ref}:{slug}; rationale strings are
-#     control-ref-keyed short phrases
-# A.5.1 (4-leaf) and A.5.18 / A.5.23 / A.5.24 already exist above and below.
+# Style v2 (2026-05-26) — supersedes the single-leaf rule locked 2026-05-22.
+# See [[curation-program-full-multi-leaf]].
+#   - MULTI-LEAF DEFAULT: every control gets a full FulfilmentSpec spine.
+#     Five spines defined: policy_program / operational_process /
+#     technical_control / gdpr_rights_article / gdpr_principle_article.
+#     Single-leaf only with explicit justification in the description.
+#   - Source of authority: ISO 27002:2022 implementation guidance for ISO;
+#     article text + EDPB guidelines for GDPR. The rationale field carries the
+#     citation (e.g. "27002:5.18a", "EDPB 4/2019 §3.2").
+#   - Cross-references to sibling controls go in SHOULD items, never MUST.
+#   - freshness_days per leaf type: review_record ~365; register and
+#     event-driven records (revocation_record, response_record) no freshness;
+#     configuration_baseline ~365 unless change-control rhythm is tighter.
+#   - Item ids follow item:{control_ref}:{slug}.
+# Calibration multi-leaf entries above: A.5.1 (policy_program) and A.5.18
+# (operational_process — promoted 2026-05-26). Pre-v2 single-leaf entries
+# below are flagged for re-curation when their spine pass comes through.
 
 REQ_A52_ROLES_RESPONSIBILITIES = EvidenceRequirement(
     id            = "req:A.5.2:roles_and_responsibilities",
@@ -638,7 +694,6 @@ REQ_A52_ROLES_RESPONSIBILITIES = EvidenceRequirement(
     evidence_type = "responsibility_matrix",
     title         = "Information Security Roles and Responsibilities",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.2 requires roles and responsibilities for information security to be defined and allocated. Evidence is a responsibility matrix (or equivalent section in the ISMS charter) that enumerates roles, assigns owners, and shows allocation across the organization",
     must_contain  = [
         ChecklistItem("item:A.5.2:roles_enumerated", "Information security roles enumerated (CISO, ISMS Manager, Asset Owners, Risk Owners, Incident Manager, DPO where applicable)", "must", False, "A.5.2 — defined"),
@@ -660,7 +715,6 @@ REQ_A53_SEGREGATION_OF_DUTIES = EvidenceRequirement(
     evidence_type = "segregation_matrix",
     title         = "Segregation of Duties Matrix",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.3 requires conflicting duties and conflicting areas of responsibility to be segregated. Evidence is a matrix or analysis that identifies conflict pairs and the mechanism preventing one person from holding both",
     must_contain  = [
         ChecklistItem("item:A.5.3:conflict_pairs",    "Conflicting duty pairs identified (e.g. requestor vs approver, developer vs production deployer)", "must", False, "A.5.3 — conflicting duties"),
@@ -681,7 +735,6 @@ REQ_A54_MANAGEMENT_RESPONSIBILITIES = EvidenceRequirement(
     evidence_type = "management_directive",
     title         = "Management Directive on Information Security Compliance",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.4 requires management to require all personnel to apply information security per the policy framework. Evidence is a management directive, mandate letter, or equivalent statement that personnel are bound by InfoSec policies and procedures",
     must_contain  = [
         ChecklistItem("item:A.5.4:mandate_statement", "Statement that personnel are required to apply InfoSec policies, topic-specific policies, and procedures", "must", False, "A.5.4 — require all personnel"),
@@ -703,7 +756,6 @@ REQ_A55_AUTHORITY_CONTACTS = EvidenceRequirement(
     evidence_type = "contact_register",
     title         = "Authority Contact Register",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.5 requires the organization to establish and maintain contact with relevant authorities. Evidence is a register of authority contacts (data protection authority, law enforcement, sectoral regulator) with current contact details and last-verified dates",
     freshness_days = 365,
     must_contain  = [
@@ -726,7 +778,6 @@ REQ_A56_SIG_CONTACTS = EvidenceRequirement(
     evidence_type = "contact_register",
     title         = "Special Interest Group and Professional Forum Register",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.6 requires contact with special interest groups (SIGs), security forums, and professional associations. Evidence is a register of memberships and engagements that demonstrate active connection to the security community",
     freshness_days = 365,
     must_contain  = [
@@ -748,7 +799,6 @@ REQ_A57_THREAT_INTELLIGENCE = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Threat Intelligence Programme Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.7 requires information about information security threats to be collected and analysed to produce threat intelligence. Evidence is a documented procedure covering sources, collection cadence, analysis approach, and intelligence products",
     must_contain  = [
         ChecklistItem("item:A.5.7:sources",          "Threat intelligence sources enumerated (open-source feeds, vendor feeds, ISACs, government advisories)", "must", False, "A.5.7 — collected"),
@@ -770,7 +820,6 @@ REQ_A58_PROJECT_MANAGEMENT_SECURITY = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Information Security in Project Management Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.8 requires information security to be integrated into project management. Evidence is a project management standard or methodology that names security gates, deliverables, and responsibilities through the project lifecycle",
     must_contain  = [
         ChecklistItem("item:A.5.8:initiation_gate",  "Security gate at project initiation (risk assessment, classification of information)", "must", False, "A.5.8 — integrated"),
@@ -792,7 +841,6 @@ REQ_A59_ASSET_INVENTORY = EvidenceRequirement(
     evidence_type = "asset_register",
     title         = "Inventory of Information and Associated Assets",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.9 requires an inventory of information and associated assets, including owners, to be developed and maintained. Evidence is an asset register that names assets, classifies them, and assigns owners",
     freshness_days = 90,
     must_contain  = [
@@ -815,7 +863,6 @@ REQ_A510_ACCEPTABLE_USE = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Acceptable Use Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.10 requires rules for acceptable use and procedures for handling information and associated assets. Evidence is an Acceptable Use Policy (AUP) covering both general principles and the handling rules per asset/information class",
     must_contain  = [
         ChecklistItem("item:A.5.10:scope",            "Scope of the policy (which assets, which users, which information classes)", "must", False, "A.5.10 — rules for acceptable use"),
@@ -837,7 +884,6 @@ REQ_A511_RETURN_OF_ASSETS = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Return of Assets Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.11 requires personnel to return all organizational assets upon change or termination. Evidence is a procedure (often part of HR offboarding) covering triggers, the return checklist, and verification",
     must_contain  = [
         ChecklistItem("item:A.5.11:triggers",         "Triggers enumerated (termination, role change, contract end, change of agreement)", "must", False, "A.5.11 — upon change or termination"),
@@ -859,7 +905,6 @@ REQ_A512_INFORMATION_CLASSIFICATION = EvidenceRequirement(
     evidence_type = "classification_scheme",
     title         = "Information Classification Scheme",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.12 requires information to be classified per the organization's security needs across confidentiality, integrity, availability, and interested-party requirements. Evidence is a classification scheme defining levels and handling implications",
     must_contain  = [
         ChecklistItem("item:A.5.12:levels_defined",  "Classification levels defined (e.g. Public / Internal / Confidential / Restricted)", "must", False, "A.5.12 — classified"),
@@ -881,7 +926,6 @@ REQ_A513_INFORMATION_LABELLING = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Information Labelling Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.13 requires procedures for information labelling aligned with the classification scheme. Evidence is a procedure covering how each classification level is marked on digital and physical assets",
     must_contain  = [
         ChecklistItem("item:A.5.13:visual_marks",     "Visual marking conventions per classification level (headers, watermarks, banners)", "must", False, "A.5.13 — labelling"),
@@ -903,7 +947,6 @@ REQ_A514_INFORMATION_TRANSFER = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Information Transfer Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.14 requires transfer rules, procedures, or agreements covering all transfer facilities within the organization and to/from other parties. Evidence is a policy covering electronic, physical, and verbal transfers with protections per classification",
     must_contain  = [
         ChecklistItem("item:A.5.14:electronic_transfer","Rules for electronic transfers (email, file transfer, cloud sharing) with encryption requirements per classification", "must", False, "A.5.14 — transfer facilities"),
@@ -926,7 +969,6 @@ REQ_A515_ACCESS_CONTROL_POLICY = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Access Control Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.15 requires rules controlling physical and logical access based on business and information security requirements. Evidence is an access control policy stating the principles and decision rules. The supporting procedure (rights provisioning) lives at A.5.18",
     must_contain  = [
         ChecklistItem("item:A.5.15:physical_rules",  "Physical access rules (premises, server rooms, restricted areas)", "must", False, "A.5.15 — physical access"),
@@ -949,7 +991,6 @@ REQ_A516_IDENTITY_MANAGEMENT = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Identity Lifecycle Management Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.16 requires the full lifecycle of identities to be managed. Evidence is a procedure covering creation, modification, suspension, and termination of identities, with timeliness and accountability stated",
     must_contain  = [
         ChecklistItem("item:A.5.16:creation",        "Identity creation steps (verification of person, naming convention, initial entitlements)", "must", False, "A.5.16 — lifecycle"),
@@ -972,7 +1013,6 @@ REQ_A517_AUTHENTICATION_INFORMATION = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Authentication Information Management Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.17 requires authentication information (passwords, tokens, keys) to be allocated and managed by a controlled process, with personnel advised on appropriate handling. Evidence is a procedure covering allocation, storage, and user guidance",
     must_contain  = [
         ChecklistItem("item:A.5.17:allocation",      "Initial allocation method for authentication information (in-person, secure channel, ephemeral link)", "must", False, "A.5.17 — allocation"),
@@ -995,7 +1035,6 @@ REQ_A519_SUPPLIER_RISK_PROCEDURE = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Supplier Information Security Risk Management Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.19 requires processes and procedures to manage information security risks arising from supplier products and services. Evidence is a supplier risk management procedure covering inventory, due diligence, risk classification, and ongoing monitoring",
     must_contain  = [
         ChecklistItem("item:A.5.19:inventory",        "Supplier inventory maintained (who they are, what they provide, criticality)", "must", False, "A.5.19 — manage"),
@@ -1017,7 +1056,6 @@ REQ_A520_SUPPLIER_AGREEMENT_TEMPLATE = EvidenceRequirement(
     evidence_type = "agreement_template",
     title         = "Supplier Agreement Security Requirements Template",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.20 requires information security requirements to be established and agreed with each supplier based on the relationship type. Evidence is a standard set of security clauses or a template attached to supplier agreements",
     must_contain  = [
         ChecklistItem("item:A.5.20:minimum_requirements","Minimum security requirements (controls baseline, certifications expected)", "must", False, "A.5.20 — security requirements established"),
@@ -1040,7 +1078,6 @@ REQ_A521_ICT_SUPPLY_CHAIN = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "ICT Supply Chain Information Security Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.21 requires processes and procedures to manage information security risks in the ICT products and services supply chain. Evidence is a procedure covering sourcing, integrity verification, sub-supplier visibility, and end-of-life",
     must_contain  = [
         ChecklistItem("item:A.5.21:sourcing_controls", "Sourcing controls (approved vendor list, banned-vendor list, country-of-origin considerations)", "must", False, "A.5.21 — manage risks"),
@@ -1062,7 +1099,6 @@ REQ_A522_SUPPLIER_REVIEW = EvidenceRequirement(
     evidence_type = "review_record",
     title         = "Supplier Information Security Review Records",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.22 requires regular monitoring, review, evaluation, and change management of supplier information security practices and service delivery. Evidence is a record (or set of records) of reviews completed per supplier",
     freshness_days = 365,
     must_contain  = [
@@ -1085,7 +1121,6 @@ REQ_A525_EVENT_TRIAGE = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Security Event Assessment and Triage Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.25 requires the organization to assess information security events and decide whether to categorise them as incidents. Evidence is a triage procedure covering detection sources, assessment criteria, decision authority, and handoff to incident response (A.5.26)",
     must_contain  = [
         ChecklistItem("item:A.5.25:detection_sources","Detection sources enumerated (monitoring, user reports, third parties)", "must", False, "A.5.25 — events"),
@@ -1118,7 +1153,6 @@ REQ_A526_INCIDENT_RESPONSE_PROCEDURE = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Incident Response Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.26 requires documented procedures for responding to information security incidents end-to-end. Evidence is a procedure document covering roles, containment, investigation, recovery, communication, and post-incident review",
     must_contain  = [
         ChecklistItem("item:A.5.26:roles",          "Roles and responsibilities for incident response defined (Incident Manager, security team, comms lead, legal)", "must", False, "A.5.26 — execution needs assigned owners"),
@@ -1143,7 +1177,6 @@ REQ_A527_LESSONS_LEARNED = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Lessons Learned from Information Security Incidents",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.27 requires knowledge from incidents to be used to strengthen and improve information security controls. Evidence is a lessons-learned procedure with capture, action assignment, and feedback into the broader control framework",
     must_contain  = [
         ChecklistItem("item:A.5.27:trigger",        "Post-incident review trigger (every incident above a threshold, or all incidents)", "must", False, "A.5.27 — knowledge gained from incidents"),
@@ -1165,7 +1198,6 @@ REQ_A528_EVIDENCE_HANDLING = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Evidence Identification, Collection, and Preservation Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.28 requires procedures for identification, collection, acquisition, and preservation of evidence related to information security events. Evidence is a procedure covering forensic handling end-to-end",
     must_contain  = [
         ChecklistItem("item:A.5.28:identification",  "Identification step (what counts as evidence — logs, images, physical media, witness statements)", "must", False, "A.5.28 — identification"),
@@ -1187,7 +1219,6 @@ REQ_A529_DISRUPTION_SECURITY = EvidenceRequirement(
     evidence_type = "plan",
     title         = "Information Security During Disruption Plan",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.29 requires planning to maintain information security at an appropriate level during disruption. Evidence is a plan (often a BCP security annex) covering which controls must keep working under disruption, fallback measures, and post-disruption restoration",
     must_contain  = [
         ChecklistItem("item:A.5.29:scenarios",       "Disruption scenarios considered (cyber attack, natural event, supplier failure)", "must", False, "A.5.29 — disruption"),
@@ -1209,7 +1240,6 @@ REQ_A530_ICT_CONTINUITY = EvidenceRequirement(
     evidence_type = "plan",
     title         = "ICT Readiness for Business Continuity Plan",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.30 requires ICT readiness to be planned, implemented, maintained, and tested per business continuity objectives. Evidence is an ICT continuity plan with recovery procedures, backup arrangements, and test records",
     freshness_days = 365,
     must_contain  = [
@@ -1232,7 +1262,6 @@ REQ_A531_LEGAL_REGULATORY_REGISTER = EvidenceRequirement(
     evidence_type = "register",
     title         = "Legal, Statutory, Regulatory and Contractual Requirements Register",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.31 requires applicable legal, statutory, regulatory, and contractual requirements relevant to information security to be identified, documented, and kept up to date. Evidence is a register that enumerates them and maps each to the organization's compliance approach",
     freshness_days = 180,
     must_contain  = [
@@ -1256,7 +1285,6 @@ REQ_A532_INTELLECTUAL_PROPERTY = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Intellectual Property Rights Protection Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.32 requires appropriate procedures to protect intellectual property rights. Evidence is a procedure covering both the organization's IPR and respect for third-party IPR",
     must_contain  = [
         ChecklistItem("item:A.5.32:scope_iprs",       "Scope of IPRs covered (software licences, trademarks, copyrights, patents, trade secrets)", "must", False, "A.5.32 — IPR"),
@@ -1278,7 +1306,6 @@ REQ_A533_RECORDS_PROTECTION = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Records Retention and Protection Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.33 requires records to be protected from loss, destruction, falsification, unauthorized access, and unauthorized release. Evidence is a records retention/protection policy that classifies records, sets retention, and specifies protection",
     must_contain  = [
         ChecklistItem("item:A.5.33:records_schedule", "Records inventory or schedule (which record classes the organization holds)", "must", False, "A.5.33 — records"),
@@ -1300,7 +1327,6 @@ REQ_A534_PII_PROTECTION = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Privacy and PII Protection Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.34 requires identification of and compliance with privacy and PII protection requirements per applicable law, regulation, and contract. Evidence is a privacy policy (or PIMS-aligned policy) that names the law(s), the PII handled, and the controls",
     must_contain  = [
         ChecklistItem("item:A.5.34:applicable_laws", "Applicable privacy laws identified (GDPR, regional equivalents)", "must", False, "A.5.34 — applicable laws and regulations"),
@@ -1324,7 +1350,6 @@ REQ_A535_INDEPENDENT_REVIEW = EvidenceRequirement(
     evidence_type = "audit_report",
     title         = "Independent Information Security Review Report",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.35 requires the organization's approach to information security to be reviewed independently at planned intervals (or on significant change). Evidence is an independent review report covering people, process, and technology",
     freshness_days = 365,
     must_contain  = [
@@ -1348,7 +1373,6 @@ REQ_A536_COMPLIANCE_REVIEW = EvidenceRequirement(
     evidence_type = "review_record",
     title         = "Compliance Review Records (Policies, Rules, Standards)",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.36 requires compliance with the organization's information security policy, topic-specific policies, rules, and standards to be regularly reviewed. Evidence is a record (or set of records) showing what was reviewed, how, and what was found",
     freshness_days = 365,
     must_contain  = [
@@ -1372,7 +1396,6 @@ REQ_A537_OPERATING_PROCEDURES = EvidenceRequirement(
     evidence_type = "register",
     title         = "Documented Operating Procedures Register",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.5.37 requires operating procedures for information processing facilities to be documented and made available to personnel who need them. Evidence is a register or catalogue of operating procedures with availability arrangements",
     must_contain  = [
         ChecklistItem("item:A.5.37:procedure_inventory","Inventory of operating procedures (which facilities/systems they cover)", "must", False, "A.5.37 — documented"),
@@ -1399,7 +1422,6 @@ REQ_A61_SCREENING = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Personnel Screening Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.6.1 requires background verification checks on candidates and ongoing checks proportional to role risk. Evidence is a screening procedure covering scope, timing, proportionality, and legal considerations",
     must_contain  = [
         ChecklistItem("item:A.6.1:check_types",      "Types of checks defined (identity, employment history, education, criminal record where lawful, financial where role-relevant)", "must", False, "A.6.1 — background verification checks"),
@@ -1422,7 +1444,6 @@ REQ_A62_EMPLOYMENT_TERMS = EvidenceRequirement(
     evidence_type = "agreement_template",
     title         = "Employment Contract Information Security Terms",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.6.2 requires employment contractual agreements to state both personnel's and the organization's information security responsibilities. Evidence is the standard contract template (or annex) carrying these clauses",
     must_contain  = [
         ChecklistItem("item:A.6.2:personnel_responsibilities","Personnel's information security responsibilities stated", "must", False, "A.6.2 — personnel's responsibilities"),
@@ -1444,7 +1465,6 @@ REQ_A63_SECURITY_AWARENESS = EvidenceRequirement(
     evidence_type = "training_programme",
     title         = "Information Security Awareness, Education and Training Programme",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.6.3 requires personnel and relevant interested parties to receive appropriate awareness, education, and training, with regular updates as policies and procedures change. Evidence is a training programme description plus delivery records",
     freshness_days = 365,
     must_contain  = [
@@ -1468,7 +1488,6 @@ REQ_A64_DISCIPLINARY_PROCESS = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Information Security Disciplinary Process",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.6.4 requires a formalized, communicated disciplinary process for personnel and interested parties who violate information security policy. Evidence is a documented procedure (typically owned jointly with HR)",
     must_contain  = [
         ChecklistItem("item:A.6.4:formalised",         "Formalised in writing with HR / legal review", "must", False, "A.6.4 — formalized"),
@@ -1491,7 +1510,6 @@ REQ_A65_POST_EMPLOYMENT = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Post-Employment / Role-Change Information Security Responsibilities",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.6.5 requires surviving information security responsibilities after termination or change of employment to be defined, enforced, and communicated. Evidence is a procedure (often part of offboarding) covering what obligations persist and for how long",
     must_contain  = [
         ChecklistItem("item:A.6.5:surviving_duties", "Surviving duties enumerated (confidentiality, IP protection, non-disparagement, non-poach where lawful)", "must", False, "A.6.5 — duties that remain valid"),
@@ -1513,7 +1531,6 @@ REQ_A66_NDA = EvidenceRequirement(
     evidence_type = "agreement_template",
     title         = "Confidentiality / Non-Disclosure Agreement Template",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.6.6 requires confidentiality or non-disclosure agreements appropriate to the organization's information protection needs, regularly reviewed, and signed by personnel and relevant interested parties. Evidence is the NDA template plus a signed-by tracking record",
     freshness_days = 365,
     must_contain  = [
@@ -1537,7 +1554,6 @@ REQ_A68_EVENT_REPORTING = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Information Security Event Reporting Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.6.8 requires the organization to provide a mechanism for personnel to report observed or suspected information security events through appropriate channels in a timely manner. Evidence is a documented reporting procedure",
     must_contain  = [
         ChecklistItem("item:A.6.8:channels",         "Multiple reporting channels offered (email, hotline, portal, manager, ticket system)", "must", False, "A.6.8 — appropriate channels"),
@@ -1564,7 +1580,6 @@ REQ_A71_PHYSICAL_PERIMETERS = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Physical Security Perimeters Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.1 requires security perimeters to be defined and used to protect areas containing information and associated assets. Evidence is a policy (often part of a Physical Security Policy) defining perimeter types and the areas they protect",
     must_contain  = [
         ChecklistItem("item:A.7.1:perimeter_inventory","Inventory of perimeters defined (which physical boundaries exist)", "must", False, "A.7.1 — security perimeters defined"),
@@ -1586,7 +1601,6 @@ REQ_A72_PHYSICAL_ENTRY = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Physical Entry Controls Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.2 requires secure areas to be protected by appropriate entry controls and access points. Evidence is a procedure covering authorisation, entry mechanisms, visitor handling, and review",
     must_contain  = [
         ChecklistItem("item:A.7.2:authorisation_list","Authorisation list per secure area (who is permitted, by role or name)", "must", False, "A.7.2 — entry controls"),
@@ -1609,7 +1623,6 @@ REQ_A73_OFFICES_ROOMS = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Securing Offices, Rooms and Facilities Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.3 requires physical security to be designed and implemented for offices, rooms, and facilities. Evidence is a procedure covering room classification, locking, signage, and key/card management",
     must_contain  = [
         ChecklistItem("item:A.7.3:room_classification","Classification of rooms (general, restricted, secure, high-security)", "must", False, "A.7.3 — designed and implemented"),
@@ -1631,7 +1644,6 @@ REQ_A74_PHYSICAL_MONITORING = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Physical Security Monitoring Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.4 requires premises to be continuously monitored for unauthorized physical access. Evidence is a procedure covering monitoring scope, detection systems, response, and retention",
     must_contain  = [
         ChecklistItem("item:A.7.4:monitoring_scope","Monitoring scope stated (premises perimeter, secure areas, equipment rooms)", "must", False, "A.7.4 — premises monitored"),
@@ -1653,7 +1665,6 @@ REQ_A75_ENVIRONMENTAL_THREATS = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Protection Against Physical and Environmental Threats Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.5 requires protection against physical and environmental threats (natural disasters, intentional acts, unintentional damage). Evidence is a procedure covering threat assessment, protection measures, detection, and response",
     must_contain  = [
         ChecklistItem("item:A.7.5:threat_assessment","Threat assessment per site (fire, flood, earthquake, civil unrest, power, vandalism)", "must", False, "A.7.5 — natural disasters, intentional or unintentional threats"),
@@ -1675,7 +1686,6 @@ REQ_A76_WORKING_IN_SECURE_AREAS = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Working in Secure Areas Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.6 requires security measures for working in secure areas to be designed and implemented. Evidence is a procedure stating the additional rules that apply inside secure areas",
     must_contain  = [
         ChecklistItem("item:A.7.6:secure_area_definition","Secure area definition (which areas are 'secure' per A.7.1 classification)", "must", False, "A.7.6 — secure areas"),
@@ -1696,7 +1706,6 @@ REQ_A77_CLEAR_DESK_SCREEN = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Clear Desk and Clear Screen Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.7 requires clear-desk rules for papers and removable media plus clear-screen rules for information processing facilities. Evidence is a policy stating both rules and enforcement",
     must_contain  = [
         ChecklistItem("item:A.7.7:clear_desk_rule",  "Clear-desk rule for papers and removable media when desk unattended", "must", False, "A.7.7 — clear desk rules for papers and removable storage media"),
@@ -1718,7 +1727,6 @@ REQ_A78_EQUIPMENT_SITING = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Equipment Siting and Protection Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.8 requires equipment to be sited securely and protected. Evidence is a procedure stating siting principles per equipment class and protection measures",
     must_contain  = [
         ChecklistItem("item:A.7.8:siting_principles","Siting principles (away from public view if processing classified, restricted access, environmental controls)", "must", False, "A.7.8 — sited securely"),
@@ -1739,7 +1747,6 @@ REQ_A79_OFF_PREMISES = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Security of Assets Off-Premises Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.9 requires off-site assets to be protected. Evidence is a policy covering scope, protection measures, theft/loss reporting, and registration",
     must_contain  = [
         ChecklistItem("item:A.7.9:scope",            "Scope (laptops, mobile devices, removable media, equipment taken off-premises)", "must", False, "A.7.9 — off-site assets"),
@@ -1762,7 +1769,6 @@ REQ_A710_STORAGE_MEDIA = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Storage Media Lifecycle Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.10 requires storage media to be managed through their lifecycle (acquisition, use, transportation, disposal) per the classification scheme and handling requirements. Evidence is a media lifecycle procedure",
     must_contain  = [
         ChecklistItem("item:A.7.10:acquisition",  "Acquisition controls (approved media types, sourcing controls)", "must", False, "A.7.10 — acquisition"),
@@ -1784,7 +1790,6 @@ REQ_A711_SUPPORTING_UTILITIES = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Supporting Utilities Continuity Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.11 requires information processing facilities to be protected from power failures and other supporting-utility disruptions. Evidence is a procedure covering critical utilities, redundancy, monitoring, and testing",
     must_contain  = [
         ChecklistItem("item:A.7.11:critical_utilities","Critical utilities identified (power, cooling, water, communications, gas where relevant)", "must", False, "A.7.11 — supporting utilities"),
@@ -1806,7 +1811,6 @@ REQ_A712_CABLING_SECURITY = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Cabling Security Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.12 requires cables carrying power, data, or supporting information services to be protected from interception, interference, or damage. Evidence is a procedure covering cable routing, separation, labelling, and inspection",
     must_contain  = [
         ChecklistItem("item:A.7.12:routing",          "Cable routing principles (conduits, protected paths, away from public areas)", "must", False, "A.7.12 — protected from damage"),
@@ -1828,7 +1832,6 @@ REQ_A713_EQUIPMENT_MAINTENANCE = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Equipment Maintenance Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.13 requires equipment to be maintained correctly to ensure availability, integrity, and confidentiality of information. Evidence is a procedure covering schedules, authorised providers, supervision, and post-maintenance verification",
     freshness_days = 365,
     must_contain  = [
@@ -1851,7 +1854,6 @@ REQ_A714_SECURE_DISPOSAL = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Secure Disposal and Re-Use of Equipment Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.7.14 requires equipment containing storage media to be verified for data and licensed-software removal before disposal or re-use. Evidence is a disposal procedure covering verification, certificates, chain of custody, and approved providers",
     must_contain  = [
         ChecklistItem("item:A.7.14:scope",            "Scope (all equipment containing any form of storage media)", "must", False, "A.7.14 — equipment containing storage media"),
@@ -1880,7 +1882,6 @@ REQ_A81_USER_ENDPOINTS = EvidenceRequirement(
     evidence_type = "policy",
     title         = "User Endpoint Devices Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.1 requires protection of information stored on, processed by, or accessible via user endpoint devices. Evidence is a policy (often the MDM / endpoint security policy) covering required protections per device class",
     must_contain  = [
         ChecklistItem("item:A.8.1:scope",         "Scope (corporate-owned, BYOD, contractor devices) defined", "must", False, "A.8.1 — user end point devices"),
@@ -1897,28 +1898,93 @@ REQ_A81_USER_ENDPOINTS = EvidenceRequirement(
     ],
 )
 
-REQ_A82_PRIVILEGED_ACCESS = EvidenceRequirement(
+# ── Annex A.8.2 — Privileged access rights — technical_control spine (4-leaf) ──
+# Promoted 2026-05-26 from single-leaf per [[curation-program-full-multi-leaf]].
+# Spine: technical_control → configuration_baseline + procedure +
+# monitoring_record + review_record (here as recertification, freshness 180
+# days because § 8.2 calls for more frequent review than regular access).
+# Authority: ISO 27002:2022 § 8.2 implementation guidance, items a–k.
+
+REQ_A82_BASELINE = EvidenceRequirement(
+    id            = "req:A.8.2:privileged_access_baseline",
+    control_ref   = "A.8.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "configuration_baseline",
+    title         = "Privileged Access Baseline",
+    trigger_type  = "universal",
+    description   = "A.8.2 requires identification of users needing privileged access per system and restriction of access to system-administration tools. The baseline defines the privileged role catalogue, the systems in scope, the strong-authentication configuration, and the PAM tooling boundaries — the configuration state against which the procedure operates",
+    must_contain  = [
+        ChecklistItem("item:A.8.2:bl_role_catalogue",       "Privileged role catalogue per system (which roles exist, what they grant)", "must", False, "27002:8.2a"),
+        ChecklistItem("item:A.8.2:bl_systems_in_scope",     "Systems and processes in scope for privileged access governance",          "must", False, "27002:8.2a, g"),
+        ChecklistItem("item:A.8.2:bl_strong_auth",          "Strong authentication required for all privileged access (MFA enforced)",  "must", False, "27002:8.2h"),
+        ChecklistItem("item:A.8.2:bl_admin_tools_restricted", "Access to system-administration tools restricted to privileged roles only", "must", False, "27002:8.2g"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.2:bl_pam_tool",             "PAM tooling configured (vaulting, session recording)",                     "should", False, "Modern baseline"),
+        ChecklistItem("item:A.8.2:bl_jit_capability",       "Just-in-time / time-bound elevation capability available",                 "should", False, "Reduces standing privilege"),
+    ],
+)
+
+REQ_A82_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.2:privileged_access_procedure",
     control_ref   = "A.8.2",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
-    title         = "Privileged Access Rights Management Procedure",
+    title         = "Privileged Access Management Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
-    description   = "A.8.2 requires the allocation and use of privileged access rights to be restricted and managed. Evidence is a procedure governing privileged account lifecycle, use, and oversight",
-    freshness_days = 365,
+    description   = "A.8.2 requires the allocation and use of privileged access rights to be restricted and managed on a need-to-use, event-by-event basis with formal authorisation. The procedure documents provisioning, use, expiry and deprovisioning of privileged access — the operational counterpart to the baseline",
     must_contain  = [
-        ChecklistItem("item:A.8.2:privileged_inventory","Inventory of privileged accounts (human and service) per system", "must", False, "A.8.2 — privileged access rights"),
-        ChecklistItem("item:A.8.2:least_privilege","Least-privilege allocation principle stated and enforced", "must", False, "A.8.2 — restricted"),
-        ChecklistItem("item:A.8.2:separate_accounts","Separate accounts for administrative actions (admin account distinct from daily-use)", "must", False, "A.8.2 — managed"),
-        ChecklistItem("item:A.8.2:mfa_mandatory","MFA mandatory for all privileged logins", "must", False, "A.8.2 — restricted"),
-        ChecklistItem("item:A.8.2:logging",       "Logging of privileged actions (links to A.8.15)", "must", False, "A.8.2 — managed"),
-        ChecklistItem("item:A.8.2:periodic_review","Periodic review of privileged account entitlements (typically quarterly)", "must", False, "A.8.2 — managed"),
-        ChecklistItem("item:A.8.2:break_glass",   "Break-glass account governance (sealed credentials, post-use review)", "must", False, "Emergency access without weak ongoing exposure"),
+        ChecklistItem("item:A.8.2:proc_need_to_use",       "Privileged access granted on need-to-use, event-by-event basis (less than or equal to the period needed)", "must", False, "27002:8.2b"),
+        ChecklistItem("item:A.8.2:proc_authorisation",     "Formal authorisation process before privileged access is granted or changed", "must", False, "27002:8.2c, i"),
+        ChecklistItem("item:A.8.2:proc_separate_accounts", "Separate accounts mandated for administrative actions (admin account distinct from daily-use)", "must", False, "27002:8.2f"),
+        ChecklistItem("item:A.8.2:proc_expiry",            "Expiry rules defined for privileged access rights",                          "must", False, "27002:8.2d"),
+        ChecklistItem("item:A.8.2:proc_accountability",    "Users acknowledge accountability for their privileged access (e.g. signed acceptable-use)", "must", False, "27002:8.2e"),
+        ChecklistItem("item:A.8.2:proc_break_glass",       "Break-glass account governance (sealed credentials, post-use review)",       "must", False, "Emergency access without weak ongoing exposure"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.2:pam_tooling",   "PAM tooling used (vaulting, session recording)", "should", False, "Modern baseline"),
-        ChecklistItem("item:A.8.2:jit_elevation", "Just-in-time / time-bound privilege elevation", "should", False, "Reduces standing privilege"),
+        ChecklistItem("item:A.8.2:proc_routine_separation","Procedure prohibits routine non-privileged tasks under a privileged account", "should", False, "27002:8.2f"),
+        ChecklistItem("item:A.8.2:proc_revocation_path",   "Revocation path on role change / termination (links to A.5.18 revocation records)", "should", False, "A.5.18 linkage"),
+    ],
+)
+
+REQ_A82_ACTIVITY_LOG = EvidenceRequirement(
+    id            = "req:A.8.2:privileged_activity_log",
+    control_ref   = "A.8.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "monitoring_record",
+    title         = "Privileged Activity Log",
+    trigger_type  = "universal",
+    description   = "A.8.2 requires audit logs of privileged actions. The activity log captures who performed which privileged action, when, on which system — the continuous evidence stream that the procedure was applied (and that anomalies surface for review)",
+    must_contain  = [
+        ChecklistItem("item:A.8.2:log_who",            "Identity of the privileged user captured per action",                "must", False, "27002:8.2j"),
+        ChecklistItem("item:A.8.2:log_what",           "Action performed captured (command / change / access)",             "must", False, "27002:8.2j"),
+        ChecklistItem("item:A.8.2:log_when",           "Timestamp captured per action",                                      "must", False, "27002:8.2j"),
+        ChecklistItem("item:A.8.2:log_retention",      "Log retention period defined and enforced",                          "must", False, "A.8.15 linkage"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.2:log_anomaly_alert",  "Anomaly alerting configured (unusual hours, unusual scope)",         "should", False, "Modern baseline"),
+        ChecklistItem("item:A.8.2:log_tamper_protect", "Log integrity protection (write-once / SIEM forwarding)",            "should", False, "Defensible evidence"),
+    ],
+)
+
+REQ_A82_RECERTIFICATION = EvidenceRequirement(
+    id              = "req:A.8.2:privileged_access_recertification",
+    control_ref     = "A.8.2",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Privileged Access Recertification",
+    trigger_type    = "universal",
+    description     = "A.8.2 calls for periodic review of privileged access — typically more frequent than the general access review at A.5.18 (this curation sets freshness at 180 days; tenants with high-risk processing may run quarterly). The recertification record evidences that each privileged grant was re-confirmed by the asset owner",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.8.2:rc_date",            "Recertification date within the planned interval (≤180 days since last)",  "must", False, "27002:8.2k"),
+        ChecklistItem("item:A.8.2:rc_reviewer",        "Reviewer identity (asset owner or delegated authority)",                    "must", False, "Accountability"),
+        ChecklistItem("item:A.8.2:rc_per_account",     "Per-privileged-account outcome (re-confirmed / amended / revoked)",         "must", False, "27002:8.2k"),
+        ChecklistItem("item:A.8.2:rc_actions",         "Revocation/modification actions completed for non-reconfirmed access",      "must", False, "27002:8.2k"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.2:rc_role_change_trigger", "Role-change events trigger ad-hoc recertification outside the interval", "should", False, "27002:8.2g"),
+        ChecklistItem("item:A.8.2:rc_next_date",           "Next planned recertification date stated",                              "should", False, "Planning"),
     ],
 )
 
@@ -1929,7 +1995,6 @@ REQ_A83_INFORMATION_ACCESS_RESTRICTION = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Information Access Restriction Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.3 requires access to information and associated assets to be restricted per the topic-specific access control policy (A.5.15). Evidence is a procedure implementing that policy across systems",
     must_contain  = [
         ChecklistItem("item:A.8.3:per_system_matrix","Access matrix per system / repository (who can do what)", "must", False, "A.8.3 — restricted"),
@@ -1951,7 +2016,6 @@ REQ_A84_SOURCE_CODE_ACCESS = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Source Code, Development Tools and Library Access Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.4 requires read and write access to source code, development tools, and software libraries to be appropriately managed. Evidence is a procedure covering repository access, code review, and dependency management",
     must_contain  = [
         ChecklistItem("item:A.8.4:repo_inventory", "Inventory of code repositories and their classification", "must", False, "A.8.4 — source code"),
@@ -1974,7 +2038,6 @@ REQ_A85_SECURE_AUTHENTICATION = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Secure Authentication Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.5 requires secure authentication technologies and procedures to be implemented based on the access control policy. Evidence is an authentication policy stating factor requirements per risk level",
     must_contain  = [
         ChecklistItem("item:A.8.5:factor_requirements","Authentication factor requirements per risk level / access tier", "must", False, "A.8.5 — based on information access restrictions"),
@@ -1997,7 +2060,6 @@ REQ_A86_CAPACITY_MANAGEMENT = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Capacity Management Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.6 requires resource use to be monitored and adjusted in line with current and expected capacity requirements. Evidence is a procedure covering monitored resources, thresholds, and forecasting",
     must_contain  = [
         ChecklistItem("item:A.8.6:monitored_resources","Resources monitored (CPU, memory, storage, network, database connections, licences)", "must", False, "A.8.6 — use of resources monitored"),
@@ -2019,7 +2081,6 @@ REQ_A87_MALWARE_PROTECTION = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Protection Against Malware Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.7 requires protection against malware to be implemented and supported by appropriate user awareness. Evidence is a procedure covering anti-malware deployment, update cadence, and integration with awareness",
     must_contain  = [
         ChecklistItem("item:A.8.7:tools_deployed",  "Anti-malware / EDR tools deployed across endpoints, servers, mail systems", "must", False, "A.8.7 — protection against malware implemented"),
@@ -2041,7 +2102,6 @@ REQ_A88_TECHNICAL_VULNERABILITIES = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Technical Vulnerability Management Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.8 requires information about technical vulnerabilities to be obtained, the organization's exposure evaluated, and appropriate measures taken. Evidence is a vulnerability management procedure covering intel sources, scanning, triage, and remediation SLAs",
     freshness_days = 90,
     must_contain  = [
@@ -2065,7 +2125,6 @@ REQ_A89_CONFIGURATION_MANAGEMENT = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Configuration Management Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.9 requires configurations (including security configurations) of hardware, software, services, and networks to be established, documented, implemented, monitored, and reviewed. Evidence is a configuration management procedure",
     freshness_days = 365,
     must_contain  = [
@@ -2088,7 +2147,6 @@ REQ_A810_INFORMATION_DELETION = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Information Deletion Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.10 requires information stored in systems, devices, or media to be deleted when no longer required. Evidence is a procedure linking retention triggers, deletion methods, and verification",
     must_contain  = [
         ChecklistItem("item:A.8.10:retention_trigger","Retention trigger (links to A.5.33 records protection)", "must", False, "A.8.10 — when no longer required"),
@@ -2110,7 +2168,6 @@ REQ_A812_DLP = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Data Leakage Prevention Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.12 requires DLP measures to be applied to systems, networks, and devices processing or transmitting sensitive information. Evidence is a procedure covering channels in scope, classification-driven rules, and alert handling",
     must_contain  = [
         ChecklistItem("item:A.8.12:scope",          "Scope of sensitive information categories covered (links to A.5.12 classification)", "must", False, "A.8.12 — sensitive information"),
@@ -2132,7 +2189,6 @@ REQ_A813_BACKUP = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Information Backup Policy and Restore Test Records",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.13 requires backup copies of information, software, and systems to be maintained and regularly tested per the backup policy. Evidence is a backup policy plus restore test records",
     freshness_days = 365,
     must_contain  = [
@@ -2157,7 +2213,6 @@ REQ_A814_REDUNDANCY = EvidenceRequirement(
     evidence_type = "plan",
     title         = "Redundancy of Information Processing Facilities Plan",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.14 requires information processing facilities to be implemented with redundancy sufficient to meet availability requirements. Evidence is a redundancy plan covering critical services, approach per service, and test records",
     freshness_days = 365,
     must_contain  = [
@@ -2179,7 +2234,6 @@ REQ_A815_LOGGING = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Logging Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.15 requires logs of activities, exceptions, faults, and other relevant events to be produced, stored, protected, and analysed. Evidence is a logging policy stating scope, content, retention, protection, and analysis",
     must_contain  = [
         ChecklistItem("item:A.8.15:scope",        "Scope (which systems, applications, network elements emit logs)", "must", False, "A.8.15 — logs produced"),
@@ -2203,7 +2257,6 @@ REQ_A816_MONITORING_ACTIVITIES = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Monitoring Activities Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.16 requires networks, systems, and applications to be monitored for anomalous behaviour and appropriate actions taken. Evidence is a monitoring procedure with detection methods, alert routing, and incident integration",
     must_contain  = [
         ChecklistItem("item:A.8.16:scope",         "Scope (networks, systems, applications, cloud services)", "must", False, "A.8.16 — networks, systems and applications"),
@@ -2225,7 +2278,6 @@ REQ_A817_CLOCK_SYNC = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Clock Synchronization Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.17 requires the clocks of information processing systems to be synchronized to approved time sources. Evidence is a procedure naming approved sources and the synchronisation arrangement",
     must_contain  = [
         ChecklistItem("item:A.8.17:approved_sources","Approved time sources named (stratum-1 NTP, GPS, vendor-provided)", "must", False, "A.8.17 — approved time sources"),
@@ -2246,7 +2298,6 @@ REQ_A818_PRIVILEGED_UTILITY_PROGRAMS = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Privileged Utility Programs Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.18 requires the use of utility programs capable of overriding system and application controls to be restricted and tightly controlled. Evidence is a procedure covering inventory, authorisation, JIT access, and logging",
     must_contain  = [
         ChecklistItem("item:A.8.18:inventory",     "Inventory of utility programs that can override controls (debuggers, sysinternals, low-level admin tools)", "must", False, "A.8.18 — utility programs that can override"),
@@ -2267,7 +2318,6 @@ REQ_A819_SOFTWARE_INSTALLATION = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Software Installation on Operational Systems Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.19 requires procedures and measures to securely manage software installation on operational systems. Evidence is a procedure covering approved-software list, approval workflow, integrity verification, and post-install verification",
     must_contain  = [
         ChecklistItem("item:A.8.19:approved_list", "Approved software list maintained", "must", False, "A.8.19 — securely manage"),
@@ -2289,7 +2339,6 @@ REQ_A820_NETWORKS_SECURITY = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Networks Security Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.20 requires networks and network devices to be secured, managed, and controlled to protect information in systems and applications. Evidence is a network security policy stating architecture principles, perimeters, monitoring, and change control",
     must_contain  = [
         ChecklistItem("item:A.8.20:scope",          "Scope (corporate LAN, WAN, wireless, cloud VPCs, partner connections)", "must", False, "A.8.20 — networks"),
@@ -2312,7 +2361,6 @@ REQ_A821_NETWORK_SERVICES = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Security of Network Services Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.21 requires security mechanisms, service levels, and service requirements of network services to be identified, implemented, and monitored. Evidence is a procedure covering the service catalogue, controls, and monitoring",
     must_contain  = [
         ChecklistItem("item:A.8.21:catalogue",   "Catalogue of network services in use (managed services, ISPs, CDNs, DNS providers)", "must", False, "A.8.21 — network services"),
@@ -2332,7 +2380,6 @@ REQ_A822_NETWORK_SEGREGATION = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Network Segregation Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.22 requires groups of information services, users, and information systems to be segregated in the organization's networks. Evidence is a segregation policy stating zones, inter-zone rules, and enforcement",
     must_contain  = [
         ChecklistItem("item:A.8.22:rationale",   "Rationale for segregation (sensitivity, function, trust level)", "must", False, "A.8.22 — segregated"),
@@ -2353,7 +2400,6 @@ REQ_A823_WEB_FILTERING = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Web Filtering Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.23 requires access to external websites to be managed to reduce exposure to malicious content. Evidence is a procedure covering filtering scope, blocked categories, override workflow, and monitoring",
     must_contain  = [
         ChecklistItem("item:A.8.23:scope",        "Filtering scope (corporate-managed devices, on-network traffic, BYOD where in scope)", "must", False, "A.8.23 — access to external websites"),
@@ -2374,7 +2420,6 @@ REQ_A826_APP_SECURITY_REQUIREMENTS = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Application Security Requirements Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.26 requires information security requirements to be identified, specified, and approved when developing or acquiring applications. Evidence is a procedure embedding security requirements in the SDLC and acquisition process",
     must_contain  = [
         ChecklistItem("item:A.8.26:requirements_step","Security requirements gathering step at project initiation (links to A.5.8)", "must", False, "A.8.26 — identified, specified"),
@@ -2396,7 +2441,6 @@ REQ_A827_ARCHITECTURE_PRINCIPLES = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Secure System Architecture and Engineering Principles",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.27 requires principles for engineering secure systems to be established, documented, maintained, and applied to development activities. Evidence is a policy enumerating principles and their application",
     freshness_days = 365,
     must_contain  = [
@@ -2418,7 +2462,6 @@ REQ_A828_SECURE_CODING = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Secure Coding Standards",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.28 requires secure coding principles to be applied to software development. Evidence is a secure coding standards policy stating language-specific guidance, common vulnerability prevention, and review requirements",
     must_contain  = [
         ChecklistItem("item:A.8.28:language_standards","Language-specific coding standards (e.g. Python, Java, JavaScript, Go)", "must", False, "A.8.28 — secure coding principles"),
@@ -2440,7 +2483,6 @@ REQ_A829_SECURITY_TESTING = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Security Testing in Development and Acceptance Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.29 requires security testing processes to be defined and implemented in the development lifecycle. Evidence is a procedure covering test types, lifecycle gates, acceptance criteria, and defect handling",
     must_contain  = [
         ChecklistItem("item:A.8.29:test_types",    "Test types covered (SAST, DAST, IAST, dependency scanning, manual / penetration testing)", "must", False, "A.8.29 — security testing processes"),
@@ -2462,7 +2504,6 @@ REQ_A830_OUTSOURCED_DEVELOPMENT = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Outsourced Development Governance Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.30 requires the organization to direct, monitor, and review activities related to outsourced system development. Evidence is a procedure covering security requirements in contracts, code controls, and oversight",
     must_contain  = [
         ChecklistItem("item:A.8.30:contractual_security","Security requirements in development contracts (links to A.5.20)", "must", False, "A.8.30 — direct"),
@@ -2484,7 +2525,6 @@ REQ_A831_ENVIRONMENT_SEPARATION = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Development, Test, and Production Environment Separation Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.31 requires development, testing, and production environments to be separated and secured. Evidence is a procedure stating how environments are separated, what data flows between them, and access controls",
     must_contain  = [
         ChecklistItem("item:A.8.31:distinct_environments","Distinct environments enumerated (dev, test, staging, production) with their purpose", "must", False, "A.8.31 — separated"),
@@ -2506,7 +2546,6 @@ REQ_A832_CHANGE_MANAGEMENT = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Change Management Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.32 requires changes to information processing facilities and information systems to be subject to change management procedures. Evidence is a documented change management procedure",
     must_contain  = [
         ChecklistItem("item:A.8.32:scope",         "Scope of changes covered (which kinds of changes require formal CM)", "must", False, "A.8.32 — changes subject to change management"),
@@ -2529,7 +2568,6 @@ REQ_A833_TEST_INFORMATION = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Test Information Management Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.33 requires test information to be selected, protected, and managed appropriately. Evidence is a procedure covering selection, masking, protection, and lifecycle of test data",
     must_contain  = [
         ChecklistItem("item:A.8.33:selection",     "Selection criteria (synthetic preferred; production-derived only when masked)", "must", False, "A.8.33 — appropriately selected"),
@@ -2552,7 +2590,6 @@ REQ_A834_AUDIT_TESTING_PROTECTION = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Protection of Information Systems During Audit Testing Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "A.8.34 requires audit tests and assurance activities involving operational systems to be planned and agreed between the tester and appropriate management. Evidence is a procedure covering pre-authorization, scope agreement, and impact management",
     must_contain  = [
         ChecklistItem("item:A.8.34:pre_authorisation","Pre-authorisation required before any audit testing on operational systems", "must", False, "A.8.34 — planned and agreed"),
@@ -2584,7 +2621,6 @@ REQ_C41_CONTEXT_ISSUES = EvidenceRequirement(
     evidence_type = "register",
     title         = "Internal and External Issues Register",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 4.1 requires the organization to determine external and internal issues relevant to its ISMS purpose and outcomes. Evidence is a documented register of issues, periodically refreshed",
     freshness_days = 365,
     must_contain  = [
@@ -2607,7 +2643,6 @@ REQ_C42_INTERESTED_PARTIES = EvidenceRequirement(
     evidence_type = "register",
     title         = "Interested Parties and Requirements Register",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 4.2 requires the organization to determine interested parties relevant to the ISMS and their requirements. Evidence is a register listing parties, their requirements, and which the ISMS will address",
     freshness_days = 365,
     must_contain  = [
@@ -2630,7 +2665,6 @@ REQ_C44_ISMS = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Information Security Management System Manual / Charter",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 4.4 requires the organization to establish, implement, maintain, and continually improve an ISMS including its processes and their interactions. Evidence is the ISMS manual / charter document describing the system as a whole",
     must_contain  = [
         ChecklistItem("item:4.4:scope_ref",         "Reference to ISMS scope statement (4.3)", "must", False, "Clause 4.4 — establish"),
@@ -2652,7 +2686,6 @@ REQ_C51_LEADERSHIP_COMMITMENT = EvidenceRequirement(
     evidence_type = "management_directive",
     title         = "Top Management Leadership and Commitment Statement",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 5.1 requires top management to demonstrate leadership and commitment. Evidence is a signed directive or letter from top management addressing all the demonstrations listed in clause 5.1 a-h",
     must_contain  = [
         ChecklistItem("item:5.1:policy_objectives_strategy","Policy and objectives compatible with strategic direction", "must", False, "Clause 5.1 a)"),
@@ -2677,7 +2710,6 @@ REQ_C53_ISMS_ROLES = EvidenceRequirement(
     evidence_type = "responsibility_matrix",
     title         = "ISMS Roles, Responsibilities and Authorities",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 5.3 requires top management to ensure ISMS-related responsibilities and authorities are assigned and communicated. Evidence is a responsibility matrix at the management-system level (distinct from A.5.2 operational roles)",
     must_contain  = [
         ChecklistItem("item:5.3:isms_conformance",  "Role assigned for ensuring the ISMS conforms to ISO 27001:2022", "must", False, "Clause 5.3 a)"),
@@ -2698,7 +2730,6 @@ REQ_C611_RISK_OPPORTUNITY_PLANNING = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "ISMS Risk and Opportunity Planning Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 6.1.1 requires the organization to consider issues (4.1) and requirements (4.2) and determine risks and opportunities. Evidence is a planning procedure linking inputs to actions",
     must_contain  = [
         ChecklistItem("item:6.1.1:issues_input",     "Issues from 4.1 considered as planning input", "must", False, "Clause 6.1.1 — issues referred to in 4.1"),
@@ -2721,7 +2752,6 @@ REQ_C62_SECURITY_OBJECTIVES = EvidenceRequirement(
     evidence_type = "register",
     title         = "Information Security Objectives Register",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 6.2 requires information security objectives to be established at relevant functions and levels. Evidence is a documented register of objectives, owners, measurement, and refresh cycle",
     freshness_days = 365,
     must_contain  = [
@@ -2746,7 +2776,6 @@ REQ_C63_PLANNING_OF_CHANGES = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Planning of Changes to the ISMS Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 6.3 requires changes to the ISMS to be carried out in a planned manner. Evidence is a procedure for managing ISMS-level changes (distinct from A.8.32 technical change management)",
     must_contain  = [
         ChecklistItem("item:6.3:change_identification","Identification trigger for ISMS-level changes (scope, policy, risk criteria, structural)", "must", False, "Clause 6.3 — determines the need for changes"),
@@ -2766,7 +2795,6 @@ REQ_C71_RESOURCES = EvidenceRequirement(
     evidence_type = "register",
     title         = "ISMS Resource Allocation Record",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 7.1 requires the organization to determine and provide resources needed for ISMS establishment, implementation, maintenance, and improvement. Evidence is a record showing financial, human, infrastructure, and technology resources committed",
     freshness_days = 365,
     must_contain  = [
@@ -2787,7 +2815,6 @@ REQ_C72_COMPETENCE = EvidenceRequirement(
     evidence_type = "register",
     title         = "ISMS Competence Record",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 7.2 requires the organization to determine necessary competence of persons whose work affects ISMS performance and ensure they are competent. Evidence is a competence record mapping role → required competence → actual competence",
     freshness_days = 365,
     must_contain  = [
@@ -2809,7 +2836,6 @@ REQ_C73_AWARENESS = EvidenceRequirement(
     evidence_type = "training_programme",
     title         = "ISMS Awareness Evidence",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 7.3 requires persons doing work under the organization's control to be aware of the InfoSec policy, their contribution to ISMS effectiveness, and consequences of nonconformity. Evidence is awareness material plus completion / acknowledgement records (distinct from A.6.3 operational awareness training)",
     must_contain  = [
         ChecklistItem("item:7.3:policy_awareness", "Awareness of the InfoSec policy", "must", False, "Clause 7.3 a)"),
@@ -2829,7 +2855,6 @@ REQ_C74_COMMUNICATION = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "ISMS Communication Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 7.4 requires the organization to determine the need for internal and external ISMS communications. Evidence is a procedure stating what, when, with whom, how, and by whom",
     must_contain  = [
         ChecklistItem("item:7.4:what",          "What is communicated (policy, objectives, performance, incidents, changes)", "must", False, "Clause 7.4 a)"),
@@ -2850,7 +2875,6 @@ REQ_C75_DOCUMENTED_INFORMATION = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Documented Information Control Policy",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 7.5 requires the ISMS to include documented information required by ISO 27001 and information determined by the organization to be necessary. Evidence is a document control policy covering creation, updating, control, retention, and accessibility",
     must_contain  = [
         ChecklistItem("item:7.5:iso_required_docs","ISO 27001:2022 required documented information enumerated", "must", False, "Clause 7.5 — documented information required by this document"),
@@ -2873,7 +2897,6 @@ REQ_C81_OPERATIONAL_PLANNING = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Operational Planning and Control Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 8.1 requires the organization to plan, implement, and control processes to meet requirements and implement Clause 6 actions. Evidence is an operational planning procedure",
     must_contain  = [
         ChecklistItem("item:8.1:criteria_established","Criteria established for ISMS-relevant processes", "must", False, "Clause 8.1 — establishing criteria"),
@@ -2894,7 +2917,6 @@ REQ_C82_OPERATIONAL_RISK_ASSESSMENT = EvidenceRequirement(
     evidence_type = "risk_assessment_record",
     title         = "Operational Risk Assessment Records",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 8.2 requires risk assessments to be performed at planned intervals or on significant change, using the criteria from 6.1.2. Evidence is a record (or set of records) of completed assessments with dates",
     freshness_days = 365,
     must_contain  = [
@@ -2916,7 +2938,6 @@ REQ_C83_OPERATIONAL_RISK_TREATMENT = EvidenceRequirement(
     evidence_type = "risk_treatment_record",
     title         = "Operational Risk Treatment Records",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 8.3 requires the organization to implement the risk treatment plan and retain documented information of the results. Evidence is the treatment plan execution record",
     freshness_days = 180,
     must_contain  = [
@@ -2937,7 +2958,6 @@ REQ_C91_MONITORING_MEASUREMENT = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "ISMS Monitoring, Measurement, Analysis and Evaluation Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 9.1 requires the organization to determine what is monitored and measured, by what methods, when, who, and how analysed. Evidence is a procedure plus the resulting measurement and analysis records",
     freshness_days = 365,
     must_contain  = [
@@ -2961,7 +2981,6 @@ REQ_C101_CONTINUAL_IMPROVEMENT = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Continual Improvement Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 10.1 requires the organization to continually improve the suitability, adequacy, and effectiveness of the ISMS. Evidence is a continual improvement procedure with triggers, targets, and tracking",
     must_contain  = [
         ChecklistItem("item:10.1:triggers",     "Improvement triggers (audit findings, nonconformities, opportunities, performance gaps, interested-party feedback)", "must", False, "Clause 10.1 — continually improve"),
@@ -2981,7 +3000,6 @@ REQ_C102_NONCONFORMITY_CA = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Nonconformity and Corrective Action Procedure",
     trigger_type  = "universal",
-    trigger_event = None,
     description   = "Clause 10.2 requires the organization to react to nonconformity, evaluate causes, implement corrective action, review effectiveness, and update the ISMS if needed. Evidence is a documented NC/CA procedure",
     must_contain  = [
         ChecklistItem("item:10.2:react",         "React to the nonconformity — control, correct, and deal with consequences", "must", False, "Clause 10.2 a)"),
@@ -3074,7 +3092,6 @@ SPEC_ART_32 = DerivedSpec(
             evidence_type = "test_log",
             title         = "Periodic resilience and restoration test record",
             trigger_type  = "universal",
-            trigger_event = None,
             description   = (
                 "Art.32.1.d requires a process for regularly testing, assessing "
                 "and evaluating the effectiveness of technical and organisational "
@@ -3211,7 +3228,6 @@ SPEC_ART_25 = DerivedSpec(
             evidence_type = "configuration_record",
             title         = "Privacy-default configuration record (Art.25.2)",
             trigger_type  = "universal",
-            trigger_event = None,
             description   = (
                 "Art.25.2 requires that, by default, only personal data which "
                 "are necessary for each specific purpose are processed. This is "
@@ -3598,7 +3614,6 @@ SPEC_ART_6 = DerivedSpec(
             evidence_type = "lawful_basis_register",
             title         = "Lawful basis register (Art.6)",
             trigger_type  = "universal",
-            trigger_event = None,
             description   = (
                 "Art.6 obliges the controller to be able to point to a "
                 "specific lawful basis per processing activity. A register "
@@ -3702,7 +3717,6 @@ SPEC_ART_16 = DerivedSpec(
             evidence_type = "rectification_procedure",
             title         = "Rectification procedure (Art.16)",
             trigger_type  = "universal",
-            trigger_event = None,
             description   = (
                 "Art.16 requires the controller to rectify inaccurate "
                 "personal data without undue delay and to complete "
@@ -3827,7 +3841,6 @@ SPEC_ART_17 = DerivedSpec(
             evidence_type = "erasure_procedure",
             title         = "Erasure procedure (Art.17)",
             trigger_type  = "universal",
-            trigger_event = None,
             description   = (
                 "Art.17 requires the controller to erase personal data "
                 "without undue delay on any of the six grounds, subject "
@@ -4189,7 +4202,12 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_ENCRYPTION_POLICY,
     REQ_INCIDENT_RESPONSE,
     REQ_DATA_MASKING,
-    REQ_ACCESS_RIGHTS,
+    # Universal — ISO 27001 Annex A.5.18 (four-leaf curation, 2026-05-26 —
+    # promoted from single-leaf REQ_ACCESS_RIGHTS per [[curation-program-full-multi-leaf]])
+    REQ_A518_PROCEDURE,
+    REQ_A518_REGISTER,
+    REQ_A518_REVIEW,
+    REQ_A518_REVOCATION,
 
     # Universal — ISO 27001 Annex A.5.1 (four-leaf curation, commit 3)
     REQ_A51_ISP_POLICY,
@@ -4198,8 +4216,9 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A51_REVIEW,
 
     # Universal — ISO 27001 Annex A.5 bulk curation (Phase B, 2026-05-22).
-    # Numerical order; A.5.18 / A.5.23 / A.5.24 already exist above as
-    # REQ_ACCESS_RIGHTS / REQ_CLOUD_SERVICES_POLICY / REQ_INCIDENT_RESPONSE.
+    # Numerical order; A.5.18 (above, now 4-leaf), A.5.23 / A.5.24 already exist
+    # above as REQ_CLOUD_SERVICES_POLICY / REQ_INCIDENT_RESPONSE (still 1-leaf,
+    # pending v2 promotion per [[curation-program-full-multi-leaf]]).
     REQ_A52_ROLES_RESPONSIBILITIES,
     REQ_A53_SEGREGATION_OF_DUTIES,
     REQ_A54_MANAGEMENT_RESPONSIBILITIES,
@@ -4266,7 +4285,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     # (Phase B, 2026-05-22). A.8.11 / A.8.24 / A.8.25 already exist further
     # up as REQ_DATA_MASKING / REQ_ENCRYPTION_POLICY / REQ_SECURE_DEVELOPMENT.
     REQ_A81_USER_ENDPOINTS,
-    REQ_A82_PRIVILEGED_ACCESS,
+    # A.8.2 — 4-leaf technical_control spine (drafted 2026-05-26, awaiting load)
+    REQ_A82_BASELINE,
+    REQ_A82_PROCEDURE,
+    REQ_A82_ACTIVITY_LOG,
+    REQ_A82_RECERTIFICATION,
     REQ_A83_INFORMATION_ACCESS_RESTRICTION,
     REQ_A84_SOURCE_CODE_ACCESS,
     REQ_A85_SECURE_AUTHENTICATION,

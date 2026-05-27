@@ -73,8 +73,7 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
             # ── MERGE EvidenceRequirement node ────────────────────────────
             if dry_run:
                 print(f"\n[DRY RUN] EvidenceRequirement: {req.id}")
-                event_tag = f" ({req.trigger_event})" if req.trigger_event else ""
-                print(f"  trigger: {req.trigger_type}{event_tag}")
+                print(f"  trigger: {req.trigger_type}")
                 fresh_tag = f"{req.freshness_days} days" if req.freshness_days else "no freshness req"
                 print(f"  freshness: {fresh_tag}")
                 print(f"  must_contain: {len(req.must_contain)} items")
@@ -87,10 +86,10 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                         r.evidence_type  = $evidence_type,
                         r.title          = $title,
                         r.trigger_type   = $trigger_type,
-                        r.trigger_event  = $trigger_event,
                         r.description    = $description,
                         r.freshness_days = $freshness_days,
                         r.updated_at     = datetime()
+                    REMOVE r.trigger_event
                     RETURN r.id
                 """,
                     id             = req.id,
@@ -99,7 +98,6 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                     evidence_type  = req.evidence_type,
                     title          = req.title,
                     trigger_type   = req.trigger_type,
-                    trigger_event  = req.trigger_event or "",
                     description    = req.description,
                     freshness_days = req.freshness_days,
                 ).consume()
@@ -284,10 +282,10 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                         r.evidence_type  = $evidence_type,
                         r.title          = $title,
                         r.trigger_type   = $trigger_type,
-                        r.trigger_event  = $trigger_event,
                         r.description    = $description,
                         r.freshness_days = $freshness_days,
                         r.updated_at     = datetime()
+                    REMOVE r.trigger_event
                 """,
                     id             = req.id,
                     control_ref    = req.control_ref,
@@ -295,7 +293,6 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                     evidence_type  = req.evidence_type,
                     title          = req.title,
                     trigger_type   = req.trigger_type,
-                    trigger_event  = req.trigger_event or "",
                     description    = req.description,
                     freshness_days = req.freshness_days,
                 ).consume()
