@@ -20,10 +20,12 @@ Active plan agreed 2026-05-22 to align posture per control with the two-stage HI
 - Split `enrichment/documents/document_requirements.py` (640 lines) into per-family files (`req_iso_annex5.py`, `req_iso_annex6.py`, `req_gdpr_chap2.py`, etc.) so each curation PR stays reviewable. Re-export via `ALL_EVIDENCE_REQUIREMENTS`.
 - Add curation-lint CI gate: no `RequirementNode` without an explicit `curated` / `explicit_empty` / `deferred_to_findings` decision.
 
-**Phase B — bulk curation content (the big one)**
-- LLM-draft `EvidenceRequirement` entries for the 410 uncurated controls (126 ISO − 14 curated = 112; 303 GDPR − 5 curated = 298). Source = `RequirementNode.obligation_text + business_description + cross_framework_summary`, all already in Neo4j.
-- Human curator reviews per family (one PR per family). HITL on our side mirrors HITL on the tenant side.
+**Phase B — bulk curation content (the big one)** — **scope expanded 2026-05-26, see [[curation-program-full-multi-leaf]]**
+- Target now: all 126 ISO 27001 controls + all 303 GDPR articles curated to **multi-leaf** depth (A.5.1 4-leaf shape). Was: 410 uncurated only; now also re-curates the 117 single-leaf "thin" specs that the 2026-05-22 single-leaf style produced.
+- Source of authority: ISO 27002:2022 for ISO; article text + EDPB guidelines for GDPR. Every leaf and MUST item traces back to a citation.
+- LLM-drafts, user reviews per control. ~5-10/day at solo review pace.
 - Loader is idempotent (MERGE-based) — safe to re-run after each merge.
+- Sequence: ratify 5-spine model + calibrate on 5 controls (A.5.18, A.8.2, Art.5, Art.15, A.5.2) before bulk drafting.
 
 **Phase C — polite gap surface (parallel with B)**
 - Extend `ControlVerdict` with `our_gaps` and `tenant_gaps`, splitting the existing `gap_list`.

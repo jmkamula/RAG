@@ -257,27 +257,107 @@ REQ_PRIVACY_NOTICE_DIRECT = EvidenceRequirement(
     ],
 )
 
+# ── GDPR Art.30 — Records of Processing — records_program spine (4-leaf) ─────
+# Promoted 2026-05-28 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. New sixth spine candidate
+# `records_program` (previously flagged as open question for records-only
+# controls): register + maintenance_procedure + upstream_inventory +
+# review_record. The register leaf id is preserved from the prior single-leaf
+# definition; the three siblings are new.
+# Authority: GDPR Art.30(1)(a-g) controller content, Art.30(2)(a-d) processor
+# content, Art.30(3) form, Art.30(4) availability to supervisory authority;
+# EDPB Position Paper on Art.30(5) derogations.
+
 REQ_RECORDS_PROCESSING = EvidenceRequirement(
     id            = "req:Art.30:records_of_processing",
     control_ref   = "Art.30",
     standard_id   = "GDPR:2016/679",
     evidence_type = "records_of_processing",
-    title= "Records of Processing Activities (RoPA)",
+    title         = "Records of Processing Activities (RoPA)",
     trigger_type  = "universal",
-    description   = "Controllers must maintain records of all processing activities under Art.30",
+    description   = "Art.30 requires controllers (and where applicable, processors) to maintain a record of processing activities. The register is the live source of truth for what is processed, why, for whom, where it goes, and how long it is kept. Maintenance, the upstream data flow inventory and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:Art.30:controller_name",  "Name and contact details of controller", "must", True, "Art.30.1a"),
-        ChecklistItem("item:Art.30:purposes",         "Purposes of the processing", "must", True, "Art.30.1b"),
-        ChecklistItem("item:Art.30:categories_ds",    "Categories of data subjects", "must", True, "Art.30.1c"),
-        ChecklistItem("item:Art.30:categories_data",  "Categories of personal data", "must", True, "Art.30.1c"),
-        ChecklistItem("item:Art.30:recipients",       "Categories of recipients", "must", True, "Art.30.1d"),
-        ChecklistItem("item:Art.30:transfers",        "Transfers to third countries with safeguards", "must", True, "Art.30.1e"),
-        ChecklistItem("item:Art.30:retention",        "Envisaged time limits for erasure", "must", True, "Art.30.1f"),
-        ChecklistItem("item:Art.30:security",         "General description of security measures", "must", True, "Art.30.1g"),
+        ChecklistItem("item:Art.30:controller_name",   "Name and contact details of controller (and DPO/representative where appointed)", "must", True, "Art.30.1.a"),
+        ChecklistItem("item:Art.30:purposes",          "Purposes of the processing stated per activity",                                   "must", True, "Art.30.1.b"),
+        ChecklistItem("item:Art.30:categories_ds",     "Categories of data subjects per activity",                                         "must", True, "Art.30.1.c"),
+        ChecklistItem("item:Art.30:categories_data",   "Categories of personal data per activity",                                         "must", True, "Art.30.1.c"),
+        ChecklistItem("item:Art.30:recipients",        "Categories of recipients per activity (including processors and third parties)",   "must", True, "Art.30.1.d"),
+        ChecklistItem("item:Art.30:transfers",         "Transfers to third countries or international organisations with safeguards identified", "must", True, "Art.30.1.e"),
+        ChecklistItem("item:Art.30:retention",         "Envisaged time limits for erasure per category",                                   "must", True, "Art.30.1.f"),
+        ChecklistItem("item:Art.30:security",          "General description of technical and organisational security measures",            "must", True, "Art.30.1.g"),
+        ChecklistItem("item:Art.30:processor_records", "If the org also acts as processor, processor-side records per Art.30.2.a-d are included or kept as a parallel register", "must", True, "Art.30.2"),
     ],
     should_contain= [
-        ChecklistItem("item:Art.30:maintained",   "Kept in written form (electronic acceptable)", "should", True, "Art.30.3"),
-        ChecklistItem("item:Art.30:processors",   "Processor details listed per activity", "should", True, "Completeness"),
+        ChecklistItem("item:Art.30:maintained",        "Kept in written form (electronic acceptable)",                                     "should", True, "Art.30.3"),
+        ChecklistItem("item:Art.30:availability",      "Available to the supervisory authority on request (export or read-only access path stated)", "should", True, "Art.30.4"),
+        ChecklistItem("item:Art.30:reg_versioning",    "Versioning or change-log per activity so historical state can be reconstructed",   "should", True, "Audit defensibility"),
+    ],
+)
+
+REQ_ART30_MAINTENANCE_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.30:ropa_maintenance_procedure",
+    control_ref   = "Art.30",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "RoPA Maintenance Procedure",
+    trigger_type  = "universal",
+    description   = "Art.30 implies an ongoing obligation — the register must reflect current reality. The maintenance procedure documents who keeps it current, what changes trigger an update, the path from trigger to register entry, and the link to other GDPR gates (Art.28 DPA on new processor, Art.35 DPIA on high-risk new purpose)",
+    must_contain  = [
+        ChecklistItem("item:Art.30:proc_maintainer",       "Named maintainer (DPO, privacy lead, or controller's designate) with documented responsibility for register accuracy", "must", True, "Accountability — Art.5.2"),
+        ChecklistItem("item:Art.30:proc_triggers",         "Update triggers enumerated (new system, new purpose, new processor, new third-country transfer, retention change, DPIA outcome)", "must", True, "Art.30.1 — must reflect current state"),
+        ChecklistItem("item:Art.30:proc_update_path",      "Path from trigger to register entry stated (who notifies, who reviews, who approves the entry)", "must", True, "Operational sufficiency"),
+        ChecklistItem("item:Art.30:proc_dpa_gate",         "Linkage to Art.28 DPA process — adding a new processor cannot complete without DPA and register update",            "must", True, "Art.28 / Art.30.1.d coherence"),
+        ChecklistItem("item:Art.30:proc_dpia_gate",        "Linkage to Art.35 DPIA — high-risk new processing requires DPIA before register entry is finalised",               "must", True, "Art.35 / Art.30 coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.30:proc_processor_side",   "Processor-side update path stated if org also acts as processor (Art.30.2 records)",                                "should", True, "Art.30.2"),
+        ChecklistItem("item:Art.30:proc_review_cadence",   "Cadence for ad-hoc review when no specific trigger fires (e.g. quarterly sweep)",                                   "should", True, "Preventive maintenance"),
+        ChecklistItem("item:Art.30:proc_escalation",       "Escalation path if maintainer is unavailable or a trigger is missed",                                               "should", True, "Continuity"),
+    ],
+)
+
+REQ_ART30_DATA_FLOW_INVENTORY = EvidenceRequirement(
+    id            = "req:Art.30:data_flow_inventory",
+    control_ref   = "Art.30",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "data_flow_inventory",
+    title         = "Personal Data Flow Inventory",
+    trigger_type  = "universal",
+    description   = "The upstream data picture that feeds RoPA accuracy. Where the register is activity-centric (one row per processing activity), the data flow inventory is data-centric — which systems hold personal data, how data moves between them, who receives it, and which transfers cross borders. EDPB guidance treats data mapping as the foundation for accurate Art.30 records",
+    must_contain  = [
+        ChecklistItem("item:Art.30:dfi_systems",         "Systems holding personal data enumerated (production systems, SaaS, backups, analytics, archives)",                 "must", True, "Art.30.1.c-d foundation"),
+        ChecklistItem("item:Art.30:dfi_flows",           "Data flows between systems documented (sources, destinations, integration mechanism)",                              "must", True, "Art.30.1.d foundation"),
+        ChecklistItem("item:Art.30:dfi_recipients",      "External recipients identified per flow (processors, joint controllers, third parties) — feeds Art.30.1.d",        "must", True, "Art.30.1.d"),
+        ChecklistItem("item:Art.30:dfi_transfers",       "Third-country transfers identified per flow with safeguards (SCCs, adequacy, BCRs) — feeds Art.30.1.e",             "must", True, "Art.30.1.e / Chapter V"),
+        ChecklistItem("item:Art.30:dfi_retention",       "Retention period per system or per data category — feeds Art.30.1.f",                                               "must", True, "Art.30.1.f"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.30:dfi_asset_link",      "Cross-link to the asset/system inventory (ISO 27001 A.5.9) so the two registers stay aligned",                       "should", True, "Cross-control coherence"),
+        ChecklistItem("item:Art.30:dfi_minimisation",    "Notes data minimisation review touchpoints (Art.5.1.c) — flows or fields flagged for reduction",                      "should", True, "Art.5.1.c linkage"),
+        ChecklistItem("item:Art.30:dfi_visual",          "Visual representation (data flow diagram) accompanies the tabular inventory",                                         "should", True, "Auditor/reviewer clarity"),
+    ],
+)
+
+REQ_ART30_ANNUAL_REVIEW = EvidenceRequirement(
+    id              = "req:Art.30:ropa_annual_review",
+    control_ref     = "Art.30",
+    standard_id     = "GDPR:2016/679",
+    evidence_type   = "review_record",
+    title           = "RoPA Annual Review Record",
+    trigger_type    = "universal",
+    description     = "Even with maintenance triggers in place, drift accumulates between RoPA and reality. An annual (or more frequent) review verifies each activity against current operations, propagates corrections back to the register, and produces auditable evidence that the register is not stale",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:Art.30:rev_date",            "Review date within the planned interval (typically within 12 months of last review)", "must", True, "Periodic accuracy"),
+        ChecklistItem("item:Art.30:rev_reviewer",        "Reviewer identity and role (DPO, privacy lead, or delegated equivalent)",              "must", True, "Accountability"),
+        ChecklistItem("item:Art.30:rev_outcome",         "Per-activity outcome (no change / amended / retired) recorded",                        "must", True, "Auditable result"),
+        ChecklistItem("item:Art.30:rev_register_update", "Changes propagated back to the live register with reference to this review",           "must", True, "Closes the loop"),
+        ChecklistItem("item:Art.30:rev_gaps",            "Gaps identified (missing activity, outdated retention, undocumented transfer) with remediation owner and target date", "must", True, "Defect tracking"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:Art.30:rev_ad_hoc_triggers", "Ad-hoc review triggers listed (re-org, M&A, new processing line, new processor onboarded)",                            "should", True, "Change-driven review"),
+        ChecklistItem("item:Art.30:rev_next_date",       "Next planned review date stated",                                                                                     "should", True, "Planning"),
+        ChecklistItem("item:Art.30:rev_dfi_alignment",   "Cross-check against the data flow inventory recorded — both should describe the same reality",                        "should", True, "Cross-leaf coherence"),
     ],
 )
 
@@ -557,27 +637,117 @@ REQ_BREACH_NOTIFICATION = EvidenceRequirement(
     ],
 )
 
+# ── GDPR Art.15 — Right of Access — gdpr_rights spine (4-leaf) ───────────────
+# Promoted 2026-05-28 from single-leaf (operational only) to multi-leaf per
+# [[curation-program-full-multi-leaf]]. The original `gdpr_rights_article`
+# spine of (procedure, response_record) is expanded to four — adding a
+# universal register and an annual process review around the operational
+# response leaf. Use this shape for Art.15-22 (right-class articles).
+#
+# The response leaf id is preserved from the prior single-leaf definition;
+# the three universal siblings are new. The response leaf is refreshed to
+# cover Art.15.1.g (source), Art.15.1.h (automated decision-making) and
+# Art.15.2 (transfer safeguards) — gaps in the prior content — and promotes
+# Art.15.3 "copy" to MUST since the article says "shall provide".
+# Authority: GDPR Art.15(1)(a-h), Art.15(2-4); Art.12(3) timing, Art.12(5)
+# manifestly-unfounded, Art.12(6) identity verification; EDPB Guidelines
+# 01/2022 on data subject rights — right of access.
+
 REQ_DSAR_RESPONSE = EvidenceRequirement(
     id            = "req:Art.15:dsar_response",
     control_ref   = "Art.15",
     standard_id   = "GDPR:2016/679",
     evidence_type = "dsar_response",
-    title= "Data Subject Access Request Response",
+    title         = "Data Subject Access Request Response",
     trigger_type  = "operational",
-    description   = "Art.15 requires response to access requests within one month",
+    description   = "Per-request evidence that a specific DSAR was answered in line with Art.15. Each response covers confirmation, the Art.15(1)(a-h) information set, third-country transfer safeguards under Art.15(2), the copy of personal data per Art.15(3), and was delivered within Art.12(3) timing",
     must_contain  = [
-        ChecklistItem("item:Art.15:confirmation",  "Confirmation that personal data is or is not processed", "must", True, "Art.15.1"),
-        ChecklistItem("item:Art.15:categories",    "Categories of personal data processed", "must", True, "Art.15.1b"),
-        ChecklistItem("item:Art.15:purposes",      "Purposes of processing", "must", True, "Art.15.1a"),
-        ChecklistItem("item:Art.15:recipients",    "Recipients or categories of recipients", "must", True, "Art.15.1c"),
-        ChecklistItem("item:Art.15:retention",     "Envisaged retention period", "must", True, "Art.15.1d"),
-        ChecklistItem("item:Art.15:rights",        "Rights to rectification, erasure, restriction, objection", "must", True, "Art.15.1e"),
-        ChecklistItem("item:Art.15:complaint",     "Right to lodge complaint with supervisory authority", "must", True, "Art.15.1f"),
-        ChecklistItem("item:Art.15:timing",        "Responded within one calendar month", "must", True, "Art.12.3"),
+        ChecklistItem("item:Art.15:confirmation",         "Confirmation that personal data is or is not processed",                                "must", True, "Art.15.1 opening"),
+        ChecklistItem("item:Art.15:purposes",             "Purposes of the processing",                                                            "must", True, "Art.15.1.a"),
+        ChecklistItem("item:Art.15:categories",           "Categories of personal data concerned",                                                 "must", True, "Art.15.1.b"),
+        ChecklistItem("item:Art.15:recipients",           "Recipients or categories of recipients (including any in third countries)",            "must", True, "Art.15.1.c"),
+        ChecklistItem("item:Art.15:retention",            "Envisaged storage period or criteria used to determine it",                             "must", True, "Art.15.1.d"),
+        ChecklistItem("item:Art.15:rights",               "Existence of rights to rectification, erasure, restriction and objection",              "must", True, "Art.15.1.e"),
+        ChecklistItem("item:Art.15:complaint",            "Right to lodge a complaint with a supervisory authority",                               "must", True, "Art.15.1.f"),
+        ChecklistItem("item:Art.15:source",               "Source of the personal data where not collected from the data subject (any available information)", "must", True, "Art.15.1.g"),
+        ChecklistItem("item:Art.15:automated_decision",   "Existence of automated decision-making / profiling, with meaningful information on logic and consequences where applicable", "must", True, "Art.15.1.h / Art.22"),
+        ChecklistItem("item:Art.15:transfer_safeguards",  "Where data is transferred to a third country or international organisation, the appropriate safeguards under Art.46",          "must", True, "Art.15.2"),
+        ChecklistItem("item:Art.15:copy",                 "Copy of the personal data undergoing processing provided to the data subject",          "must", True, "Art.15.3"),
+        ChecklistItem("item:Art.15:timing",               "Responded within one calendar month of receipt (extension flagged where applied)",      "must", True, "Art.12.3"),
     ],
     should_contain= [
-        ChecklistItem("item:Art.15:copy",      "Copy of personal data provided", "should", True, "Art.15.3"),
-        ChecklistItem("item:Art.15:format",    "Provided in electronic format if requested", "should", True, "Art.15.3"),
+        ChecklistItem("item:Art.15:format",               "Provided in a commonly used electronic format where the request was made electronically", "should", True, "Art.15.3"),
+        ChecklistItem("item:Art.15:identity_check",       "Identity verification step recorded (proportionate to sensitivity per Art.12.6)",        "should", True, "Art.12.6"),
+        ChecklistItem("item:Art.15:third_party_redaction","Where other people's rights would be affected, redaction or partial-response justification noted", "should", True, "Art.15.4"),
+    ],
+)
+
+REQ_ART15_HANDLING_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.15:dsar_handling_procedure",
+    control_ref   = "Art.15",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "DSAR Handling Procedure",
+    trigger_type  = "universal",
+    description   = "Art.15 read with Art.12 implies a documented operational process — the procedure prescribes how access requests are received, verified, fulfilled, timed and exception-handled, regardless of whether any DSAR has yet occurred. The actual responses are the per-event response leaf",
+    must_contain  = [
+        ChecklistItem("item:Art.15:proc_intake",          "Intake channels for DSARs enumerated (web form, email, post, in-person) and a single point of receipt named", "must", True, "Operational sufficiency"),
+        ChecklistItem("item:Art.15:proc_identity",        "Identity verification approach stated, proportionate to data sensitivity (reasonable doubts trigger, Art.12.6)", "must", True, "Art.12.6"),
+        ChecklistItem("item:Art.15:proc_fulfillment",     "Fulfillment steps — who searches which systems against the data flow inventory to assemble the response",       "must", True, "Art.15.1 / Art.30 linkage"),
+        ChecklistItem("item:Art.15:proc_timing",          "One-month timing clock from receipt, with the Art.12.3 two-month extension procedure (when justified, how notified)", "must", True, "Art.12.3"),
+        ChecklistItem("item:Art.15:proc_format",          "Default response format (electronic where request was electronic, structured layout for readability)",          "must", True, "Art.15.3"),
+        ChecklistItem("item:Art.15:proc_exceptions",      "Exception handling: manifestly unfounded/excessive requests (Art.12.5), and partial response where rights of others apply (Art.15.4)", "must", True, "Art.12.5 / Art.15.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.15:proc_inventory_link",  "Linkage to the data flow inventory (req:Art.30:data_flow_inventory) — fulfillment relies on knowing where personal data lives", "should", True, "Art.30 cross-control"),
+        ChecklistItem("item:Art.15:proc_training",        "Front-line staff trained on DSAR recognition and routing (so a request in the wrong channel still reaches the procedure)",     "should", True, "EDPB 01/2022 — operational realism"),
+        ChecklistItem("item:Art.15:proc_escalation",      "DPO or legal escalation path for unusual requests (mixed-rights, joint controllers, processor-held data)",                     "should", True, "Operational continuity"),
+    ],
+)
+
+REQ_ART15_REGISTER = EvidenceRequirement(
+    id            = "req:Art.15:dsar_register",
+    control_ref   = "Art.15",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "DSAR Register",
+    trigger_type  = "universal",
+    description   = "Living log of every access request received and its handling. Distinct from the per-event response leaf: the register is the universal record showing the population of requests, status, and timing compliance — auditor-facing evidence that the procedure operates in practice",
+    must_contain  = [
+        ChecklistItem("item:Art.15:reg_received_date",    "Request received date (the start of the Art.12.3 clock) per row",                       "must", True, "Art.12.3 timing"),
+        ChecklistItem("item:Art.15:reg_requester",        "Requester identity (verified) or pseudonymous reference where verification used a token",  "must", True, "Art.12.6"),
+        ChecklistItem("item:Art.15:reg_scope",            "Scope of the request as understood (full Art.15 / specific data set / repeat copy)",     "must", True, "Operational clarity"),
+        ChecklistItem("item:Art.15:reg_response_date",    "Date the response was issued",                                                             "must", True, "Art.12.3"),
+        ChecklistItem("item:Art.15:reg_timing_flag",      "Timing compliance flag (within 1 month / extended per Art.12.3 / late)",                  "must", True, "Art.12.3"),
+        ChecklistItem("item:Art.15:reg_outcome",          "Outcome per row (fulfilled / partial under Art.15.4 / refused under Art.12.5 with reason)", "must", True, "Art.12.5 / Art.15.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.15:reg_extension_reason", "Extension reason captured when Art.12.3 two-month extension was used",                    "should", True, "Art.12.3"),
+        ChecklistItem("item:Art.15:reg_response_link",    "Linkage to the per-request response artifact (req:Art.15:dsar_response instance)",         "should", True, "Cross-leaf traceability"),
+    ],
+)
+
+REQ_ART15_PROCESS_REVIEW = EvidenceRequirement(
+    id              = "req:Art.15:dsar_process_review",
+    control_ref     = "Art.15",
+    standard_id     = "GDPR:2016/679",
+    evidence_type   = "review_record",
+    title           = "Annual DSAR Process Review",
+    trigger_type    = "universal",
+    description     = "Periodic management review of DSAR handling effectiveness. Confirms the procedure produced timely, lawful responses across the year, identifies systemic defects (late responses, refusals, complaints to supervisory authority) and feeds corrective actions back into the procedure",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:Art.15:rev_date",             "Review date within the planned interval (typically within 12 months of last review)", "must", True, "Periodic accuracy"),
+        ChecklistItem("item:Art.15:rev_reviewer",         "Reviewer identity and role (DPO, privacy lead, or delegated equivalent)",              "must", True, "Accountability"),
+        ChecklistItem("item:Art.15:rev_volume",           "Volume metric — number of DSARs received in the review period",                        "must", True, "Effectiveness measurement"),
+        ChecklistItem("item:Art.15:rev_timing",           "Timing metric — percentage within one month, count of extensions used, count of late responses", "must", True, "Art.12.3 evidence"),
+        ChecklistItem("item:Art.15:rev_defects",          "Defects identified (late responses, refusals, supervisory-authority complaints) referenced", "must", True, "Defect tracking"),
+        ChecklistItem("item:Art.15:rev_corrective",       "Corrective actions to the procedure with owner and target date",                       "must", True, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:Art.15:rev_next_date",        "Next planned review date stated",                                                       "should", True, "Planning"),
+        ChecklistItem("item:Art.15:rev_training_impl",    "Training implications captured where defects trace to staff awareness",                 "should", True, "EDPB 01/2022 — operational realism"),
+        ChecklistItem("item:Art.15:rev_inventory_align",  "Cross-check that the data flow inventory remains aligned with what fulfillment actually queried", "should", True, "Art.30 cross-leaf coherence"),
     ],
 )
 
@@ -687,24 +857,95 @@ REQ_A51_REVIEW = EvidenceRequirement(
 # (operational_process — promoted 2026-05-26). Pre-v2 single-leaf entries
 # below are flagged for re-curation when their spine pass comes through.
 
-REQ_A52_ROLES_RESPONSIBILITIES = EvidenceRequirement(
+# ── Annex A.5.2 — Roles and responsibilities — policy_program spine (4-leaf) ─
+# Promoted 2026-05-27 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: policy_program adapted for a
+# governance wrapper — primary artefact is a responsibility_matrix (not a
+# policy document), surrounded by the same approval + communication_record +
+# review_record siblings as A.5.1. ISO 27001 Clause 5.3 makes management
+# responsibility AND communication explicit obligations of top management;
+# ISO 27002:2022 § 5.2 implementation guidance details the allocation content.
+# The matrix alone is not sufficient evidence — approval, communication and
+# review records are auditor-expected separately.
+
+REQ_A52_RESPONSIBILITY_MATRIX = EvidenceRequirement(
     id            = "req:A.5.2:roles_and_responsibilities",
     control_ref   = "A.5.2",
     standard_id   = "ISO27001:2022",
     evidence_type = "responsibility_matrix",
-    title         = "Information Security Roles and Responsibilities",
+    title         = "Information Security Roles and Responsibilities Matrix",
     trigger_type  = "universal",
-    description   = "A.5.2 requires roles and responsibilities for information security to be defined and allocated. Evidence is a responsibility matrix (or equivalent section in the ISMS charter) that enumerates roles, assigns owners, and shows allocation across the organization",
+    description   = "A.5.2 requires information security roles and responsibilities to be defined and allocated according to organization needs. Evidence is a responsibility matrix (or equivalent section in the ISMS charter) enumerating roles, allocating them to named individuals or positions, and stating reporting lines. Approval, communication and periodic review of this allocation are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.2:roles_enumerated", "Information security roles enumerated (CISO, ISMS Manager, Asset Owners, Risk Owners, Incident Manager, DPO where applicable)", "must", False, "A.5.2 — defined"),
-        ChecklistItem("item:A.5.2:responsibilities", "Responsibilities described per role (decision rights, oversight, execution)", "must", False, "A.5.2 — defined"),
-        ChecklistItem("item:A.5.2:allocation",       "Allocation to named individuals or positions, not just abstract role labels", "must", False, "A.5.2 — allocated according to organization needs"),
-        ChecklistItem("item:A.5.2:reporting_lines",  "Reporting and escalation lines stated (who each role reports to)", "must", False, "A.5.2 — organization needs"),
-        ChecklistItem("item:A.5.2:approval",         "Approved by management with date", "must", False, "A.5.2 — established"),
+        ChecklistItem("item:A.5.2:roles_enumerated",      "Information security roles enumerated (CISO, ISMS Manager, Asset Owners, Risk Owners, Incident Manager, DPO where applicable)", "must", False, "27002:5.2a"),
+        ChecklistItem("item:A.5.2:responsibilities",      "Responsibilities described per role (decision rights, oversight, execution)", "must", False, "27002:5.2b"),
+        ChecklistItem("item:A.5.2:allocation",            "Allocation to named individuals or positions, not just abstract role labels", "must", False, "27002:5.2d / Clause 5.3"),
+        ChecklistItem("item:A.5.2:reporting_lines",       "Reporting and escalation lines stated (who each role reports to)", "must", False, "27002:5.2f"),
+        ChecklistItem("item:A.5.2:asset_owner_resp",      "Accountability for protection and risk management of specific assets assigned", "must", False, "27002:5.2g"),
+        ChecklistItem("item:A.5.2:topic_alignment",       "Allocation covers ISMS operation, asset ownership, risk management, audits and security review topics", "must", False, "27002:5.2b"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.2:isp_link",         "Links back to the Information Security Policy (A.5.1)", "should", False, "Coherence with policy framework"),
-        ChecklistItem("item:A.5.2:segregation_note", "Notes conflicts to be resolved via segregation of duties (A.5.3)", "should", False, "Cross-control consistency"),
+        ChecklistItem("item:A.5.2:isp_link",              "Links back to the Information Security Policy (A.5.1)", "should", False, "Coherence with policy framework"),
+        ChecklistItem("item:A.5.2:segregation_note",      "Notes conflicts to be resolved via segregation of duties (A.5.3)", "should", False, "27002:5.2i / A.5.3"),
+        ChecklistItem("item:A.5.2:cloud_responsibilities","For cloud and external services, responsibilities split between the organization and the provider stated", "should", False, "27002:5.2k"),
+        ChecklistItem("item:A.5.2:competency_link",       "Notes competency/training requirements per role (cross-ref A.6.3)", "should", False, "27002:5.2j / A.6.3"),
+    ],
+)
+
+REQ_A52_APPROVAL = EvidenceRequirement(
+    id            = "req:A.5.2:management_approval",
+    control_ref   = "A.5.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "approval",
+    title         = "Top Management Approval of Roles and Responsibilities Allocation",
+    trigger_type  = "universal",
+    description   = "Clause 5.3 makes the assignment of information-security roles and authorities a top-management responsibility. The approval can live inside the responsibility matrix as a signed cover page, in a board minute, or as a separate signed delegation — any form that names a top-management signatory, a date, and the specific allocation being approved",
+    must_contain  = [
+        ChecklistItem("item:A.5.2:approval_signatory", "Signatory at top-management level (CEO, board chair, or delegated equivalent)", "must", False, "Clause 5.3"),
+        ChecklistItem("item:A.5.2:approval_date",      "Approval date recorded", "must", False, "Clause 5.3"),
+        ChecklistItem("item:A.5.2:approval_target",    "Reference to the specific version of the responsibility matrix being approved", "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.2:approval_authority", "Statement of the signatory's authority to approve (delegation chain if not CEO)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A52_COMMUNICATION = EvidenceRequirement(
+    id            = "req:A.5.2:communication_record",
+    control_ref   = "A.5.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "communication_record",
+    title         = "Roles and Responsibilities Communication Record",
+    trigger_type  = "universal",
+    description   = "Clause 5.3 requires roles, responsibilities and authorities to be communicated within the organization. Evidence must show active distribution (date, audience, channel), not mere availability of the matrix on an intranet — affected role-holders need to actually know what they own",
+    must_contain  = [
+        ChecklistItem("item:A.5.2:comm_date",          "Date of publication/communication", "must", False, "Clause 5.3"),
+        ChecklistItem("item:A.5.2:comm_audience",      "Audience reached (all staff or named role-holders)", "must", False, "Clause 5.3 — communicated within the organization"),
+        ChecklistItem("item:A.5.2:comm_channel",       "Channel used (intranet publication, email, training session, onboarding pack)", "must", False, "Clause 5.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.2:comm_role_briefing", "Role-specific briefing or acknowledgement from named role-holders (CISO, asset owners, etc.)", "should", False, "Effectiveness"),
+        ChecklistItem("item:A.5.2:comm_onboarding",    "Communication built into joiner onboarding so new role-holders are briefed on appointment", "should", False, "Sustained communication"),
+    ],
+)
+
+REQ_A52_REVIEW = EvidenceRequirement(
+    id            = "req:A.5.2:annual_review",
+    control_ref   = "A.5.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "review_record",
+    title         = "Annual Roles and Responsibilities Review Record",
+    trigger_type  = "universal",
+    description   = "ISO 27002:2022 § 5.2 implementation guidance treats role allocation as needing periodic review to keep up with organizational change. The review record captures who reviewed the matrix, when, and the outcome (unchanged / re-allocated / new role introduced)",
+    freshness_days= 365,
+    must_contain  = [
+        ChecklistItem("item:A.5.2:review_date",        "Review date within the planned review interval (typically within 12 months of last review)", "must", False, "27002:5.2 — periodic review"),
+        ChecklistItem("item:A.5.2:review_outcome",     "Outcome of the review (no change / amended to vN / role added or removed)", "must", False, "27002:5.2"),
+        ChecklistItem("item:A.5.2:review_reviewer",    "Reviewer identity and role", "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.2:review_triggers",    "List of significant-change triggers (reorg, new business line, key role departure) that should prompt an ad-hoc review", "should", False, "27002:5.2 — change-driven review"),
+        ChecklistItem("item:A.5.2:review_next_date",   "Next planned review date stated", "should", False, "Planning"),
     ],
 )
 
@@ -4215,11 +4456,16 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A51_COMMUNICATION,
     REQ_A51_REVIEW,
 
+    # Universal — ISO 27001 Annex A.5.2 (four-leaf curation, 2026-05-27)
+    REQ_A52_RESPONSIBILITY_MATRIX,
+    REQ_A52_APPROVAL,
+    REQ_A52_COMMUNICATION,
+    REQ_A52_REVIEW,
+
     # Universal — ISO 27001 Annex A.5 bulk curation (Phase B, 2026-05-22).
-    # Numerical order; A.5.18 (above, now 4-leaf), A.5.23 / A.5.24 already exist
-    # above as REQ_CLOUD_SERVICES_POLICY / REQ_INCIDENT_RESPONSE (still 1-leaf,
-    # pending v2 promotion per [[curation-program-full-multi-leaf]]).
-    REQ_A52_ROLES_RESPONSIBILITIES,
+    # Numerical order; A.5.2 / A.5.18 (above, now 4-leaf), A.5.23 / A.5.24
+    # already exist above as REQ_CLOUD_SERVICES_POLICY / REQ_INCIDENT_RESPONSE
+    # (still 1-leaf, pending v2 promotion per [[curation-program-full-multi-leaf]]).
     REQ_A53_SEGREGATION_OF_DUTIES,
     REQ_A54_MANAGEMENT_RESPONSIBILITIES,
     REQ_A55_AUTHORITY_CONTACTS,
@@ -4346,7 +4592,17 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
 
     # Universal — GDPR
     REQ_PRIVACY_NOTICE_DIRECT,
+    # GDPR Art.30 — 4-leaf records_program spine (2026-05-28 promotion)
     REQ_RECORDS_PROCESSING,
+    REQ_ART30_MAINTENANCE_PROCEDURE,
+    REQ_ART30_DATA_FLOW_INVENTORY,
+    REQ_ART30_ANNUAL_REVIEW,
+    # GDPR Art.15 — 4-leaf gdpr_rights spine (2026-05-28 promotion).
+    # The operational response leaf REQ_DSAR_RESPONSE stays in the Operational
+    # block below; these three universal siblings live here.
+    REQ_ART15_HANDLING_PROCEDURE,
+    REQ_ART15_REGISTER,
+    REQ_ART15_PROCESS_REVIEW,
 
     # Profile-fact triggered
     REQ_DPA,
