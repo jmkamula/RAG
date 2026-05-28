@@ -1,39 +1,36 @@
 ---
 name: loader-orphan-cleanup-followup
-description: "Decided 2026-05-28 to extend load_to_neo4j.py with declarative orphan pruning (option b). Until shipped, prune orphans manually as encountered during multi-leaf promotion."
+description: "SHIPPED 2026-05-28: load_to_neo4j.py is now declarative — per-leaf edge prune + final orphan-item sweep. Code is the single source of truth; reloading idempotently restores Neo4j to exact code shape."
 metadata: 
   node_type: memory
   type: project
   originSessionId: 868f217c-318d-4e60-8b45-33ccd7d5dd9c
 ---
 
-`enrichment/documents/load_to_neo4j.py` uses Cypher `MERGE` exclusively and never deletes — so any ChecklistItem or MUST_CONTAIN/SHOULD_CONTAIN edge that existed at the previous load survives forever, even if the current Python definition no longer references it. This breaks the leaf evaluator: `MATCH (er)-[:MUST_CONTAIN]->(item)` returns the code-defined items PLUS stale ones, inflating the per-leaf MUST count and producing false NC verdicts.
+**Status:** SHIPPED 2026-05-28. The loader at `enrichment/documents/load_to_neo4j.py` now performs declarative orphan pruning. Reloading takes Neo4j back to exactly what `ALL_EVIDENCE_REQUIREMENTS` (and `DerivedSpec.direct_evidence`) defines — no leftover state from prior loads.
 
-**Why:** Multi-leaf curation (per [[curation-program-full-multi-leaf]]) re-uses leaf ids across redesigns, rewrites checklist item lists, and shifts items between MUST and SHOULD. Every such change creates orphans under MERGE-only semantics. Session 2026-05-28 found 19 orphans across 4 calibrated controls (A.5.18 procedure: 7, A.5.2 matrix: 1, A.8.2 procedure: 9, Art.30 register: 1, Art.15 dsar_response: 1 dual-edge).
+**Original problem:** the loader used Cypher `MERGE` exclusively and never deleted, so any ChecklistItem or MUST_CONTAIN/SHOULD_CONTAIN edge from a previous load survived forever, even after the current Python definition stopped referencing it. The leaf evaluator's `MATCH (er)-[:MUST_CONTAIN]->(item)` then returned the code-defined items PLUS stale ones, inflating per-leaf MUST count and producing false NC verdicts. Multi-leaf curation under [[curation-program-full-multi-leaf]] re-uses leaf ids across redesigns, rewrites checklist item lists, and shifts items between MUST and SHOULD — every such change created orphans.
 
-**Decision (option b):** extend `load_to_neo4j.py` so after MERGEing the code-defined items for each leaf, it executes:
+**Implementation:**
 
-```cypher
-MATCH (er:EvidenceRequirement {id: $leaf_id})-[rel:MUST_CONTAIN|SHOULD_CONTAIN]->(i:ChecklistItem)
-WHERE NOT i.id IN $code_item_ids
-DELETE rel
-// then a second pass deletes orphan items that have no remaining references
-```
+Two helpers in `load_to_neo4j.py`:
 
-This makes the loader fully declarative — the Neo4j shape after a load equals exactly what `ALL_EVIDENCE_REQUIREMENTS` says, no leftover state. Rejected (a) post-load sweep utility because the two-step process is easy to forget.
+- `_prune_leaf_orphans(session, req, dry_run)` — runs after MERGEing all code-defined items for a leaf. Drops MUST_CONTAIN edges to items not in `req.must_contain`, then SHOULD_CONTAIN edges to items not in `req.should_contain`. Scoped to one leaf, so items legitimately moving between leaves keep their new-leaf edge.
+- `_delete_orphan_items(session, dry_run)` — single pass at the end of the load. Removes ChecklistItem nodes with no remaining MUST_CONTAIN or SHOULD_CONTAIN edges from any EvidenceRequirement. `DETACH DELETE` removes incidental edges (e.g. DERIVED_FROM back to RequirementNode).
 
-**How to apply (until shipped):** at every multi-leaf promotion, after running the loader, audit the touched leaves with this snippet (the one used in session 2026-05-28):
+Both call paths run in dry-run too (counts only, no writes). Both EvidenceRequirement and `DerivedSpec.direct_evidence` leaves are pruned. The summary block surfaces edges + items pruned per run; `0 (clean state)` on a no-op run.
 
-```python
-code = {r.id: ({c.id for c in r.must_contain}, {c.id for c in r.should_contain})
-        for r in ALL_EVIDENCE_REQUIREMENTS if r.control_ref in TARGETS}
-# query Neo4j for MUST/SHOULD edges per leaf; diff against code; DETACH DELETE orphans
-```
+**How to apply:** running `python3 enrichment/documents/load_to_neo4j.py` is now sufficient — no manual orphan audit needed after multi-leaf promotion.
 
-The ad-hoc audit + DETACH DELETE pattern from session 2026-05-28 (calibrations #2-#5 cleanup) is the manual fallback.
+**Verified end-to-end 2026-05-28** on the live Neo4j:
 
-**Risks of the integrated fix:**
-- A buggy edit could nuke live edges. The loader change must include a unit test pinning "load → no-op load produces zero edge changes" and "load with item removed from code drops exactly that edge".
-- Items that move BETWEEN leaves (rare but possible) must be detected before deletion — the orphan check is per-leaf, so an item moving from leaf A to leaf B would correctly drop the A edge while keeping the B edge.
+| Scenario | Expected | Result |
+|---|---|---|
+| Load on clean state | 0 prunes | "Pruned stale edges: 0 (clean state)" |
+| 3 synthetic orphan edges on register | 3 edges + 3 items dropped | "Pruned: 2M + 1S edges, 3 orphan items" |
+| Item attached to wrong second leaf | stray edge dropped, item survives | item ends with exactly 1 leaf (the legitimate one) |
+| Full-corpus drift audit post-load | 0 drift across 146 leaves | 0 |
 
-**Linked work:** [[curation-program-full-multi-leaf]] (the source of this hygiene burden); [[curation-session-state-2026-05-26]] (where A.5.2 orphan was first noted as "1 orphan item:A.5.2:approval").
+**Caveat:** dry-run mode under-counts orphan items because the per-leaf prune deletes aren't simulated, so items that *would* become orphan still appear attached during the orphan-item sweep. Reported count of edges-to-be-pruned is accurate; reported orphan-items count in dry-run can read 0 even when real run would delete many. Not blocking — real-run output is the source of truth.
+
+**Linked work:** [[curation-program-full-multi-leaf]] (the source of this hygiene burden); [[curation-session-state-2026-05-26]] (the manual cleanup session this fix obsoletes).

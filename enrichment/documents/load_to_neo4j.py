@@ -27,6 +27,77 @@ from enrichment.documents.document_requirements import (
 )
 
 
+def _prune_leaf_orphans(session, req: "EvidenceRequirement", dry_run: bool) -> tuple[int, int]:
+    """Drop MUST_CONTAIN / SHOULD_CONTAIN edges from this leaf to ChecklistItems
+    not present in the code-defined must / should lists. Makes the loader
+    declarative: post-load Neo4j edges for this leaf equal exactly what code says.
+
+    Returns (must_edges_dropped, should_edges_dropped). In dry_run mode,
+    counts what would be dropped but performs no writes.
+
+    See [[loader-orphan-cleanup-followup]] for the rationale — single→multi-leaf
+    promotion reuses leaf ids while rewriting item lists, and MERGE-only loads
+    leave stale edges behind that the leaf evaluator then counts against the
+    new spec. An item that legitimately moves between leaves keeps its new-leaf
+    edge because this prune is scoped to the current leaf only.
+    """
+    code_must_ids   = [ci.id for ci in req.must_contain]
+    code_should_ids = [ci.id for ci in req.should_contain]
+
+    if dry_run:
+        n_must = session.run("""
+            MATCH (er:EvidenceRequirement {id: $req_id})-[rel:MUST_CONTAIN]->(i:ChecklistItem)
+            WHERE NOT i.id IN $keep
+            RETURN count(rel) AS n
+        """, req_id=req.id, keep=code_must_ids).single()["n"]
+        n_should = session.run("""
+            MATCH (er:EvidenceRequirement {id: $req_id})-[rel:SHOULD_CONTAIN]->(i:ChecklistItem)
+            WHERE NOT i.id IN $keep
+            RETURN count(rel) AS n
+        """, req_id=req.id, keep=code_should_ids).single()["n"]
+        return n_must, n_should
+
+    must_summary = session.run("""
+        MATCH (er:EvidenceRequirement {id: $req_id})-[rel:MUST_CONTAIN]->(i:ChecklistItem)
+        WHERE NOT i.id IN $keep
+        DELETE rel
+    """, req_id=req.id, keep=code_must_ids).consume()
+    should_summary = session.run("""
+        MATCH (er:EvidenceRequirement {id: $req_id})-[rel:SHOULD_CONTAIN]->(i:ChecklistItem)
+        WHERE NOT i.id IN $keep
+        DELETE rel
+    """, req_id=req.id, keep=code_should_ids).consume()
+    return (
+        must_summary.counters.relationships_deleted,
+        should_summary.counters.relationships_deleted,
+    )
+
+
+def _delete_orphan_items(session, dry_run: bool) -> int:
+    """Delete ChecklistItem nodes that have no remaining MUST_CONTAIN or
+    SHOULD_CONTAIN edges from any EvidenceRequirement. Run once after every
+    leaf has been processed and pruned — at that point any item left without
+    edges is genuinely abandoned, not transiently mid-load.
+
+    DETACH DELETE removes any incidental edges (e.g. DERIVED_FROM →
+    RequirementNode) on the same node.
+
+    Returns the number of nodes deleted.
+    """
+    if dry_run:
+        return session.run("""
+            MATCH (i:ChecklistItem)
+            WHERE NOT EXISTS { MATCH (:EvidenceRequirement)-[:MUST_CONTAIN|SHOULD_CONTAIN]->(i) }
+            RETURN count(i) AS n
+        """).single()["n"]
+    summary = session.run("""
+        MATCH (i:ChecklistItem)
+        WHERE NOT EXISTS { MATCH (:EvidenceRequirement)-[:MUST_CONTAIN|SHOULD_CONTAIN]->(i) }
+        DETACH DELETE i
+    """).consume()
+    return summary.counters.nodes_deleted
+
+
 def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
     from neo4j import GraphDatabase
     driver = GraphDatabase.driver(uri, auth=(user, password))
@@ -51,6 +122,9 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
     total_specs = 0
     total_derived_specs = 0
     total_derives_from = 0
+    pruned_must_edges = 0
+    pruned_should_edges = 0
+    pruned_items = 0
     missing_controls = []
 
     with driver.session() as s:
@@ -187,10 +261,19 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
 
                     total_items += 1
 
+            # ── Prune stale edges from prior loads (declarative idempotency) ──
+            m_dropped, s_dropped = _prune_leaf_orphans(s, req, dry_run)
+            pruned_must_edges   += m_dropped
+            pruned_should_edges += s_dropped
+
             if not dry_run:
+                prune_tag = (
+                    f"  (pruned {m_dropped}M+{s_dropped}S stale edges)"
+                    if (m_dropped or s_dropped) else ""
+                )
                 print(f"  ✓ {req.control_ref:12s} {req.trigger_type:15s} "
                       f"{len(req.must_contain)}M + {len(req.should_contain)}S items  "
-                      f"{req.title}")
+                      f"{req.title}{prune_tag}")
 
         # ── Derived specs (cross-control derivation) ──────────────────────
         for ds in ALL_DERIVED_SPECS:
@@ -343,9 +426,17 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                     """, node_id=node_id, item_id=item.id).consume()
                     total_items += 1
 
+                # Prune stale edges on this direct-evidence leaf too
+                m_dropped, s_dropped = _prune_leaf_orphans(s, req, dry_run)
+                pruned_must_edges   += m_dropped
+                pruned_should_edges += s_dropped
+
             print(f"  ✓ {ds.control_ref:12s} {'derived':15s} "
                   f"{len(ds.derives_from)} deps + {len(ds.direct_evidence)} direct  "
                   f"{ds.title}")
+
+        # ── Final sweep: delete ChecklistItems with no remaining leaf edges ──
+        pruned_items = _delete_orphan_items(s, dry_run)
 
     driver.close()
 
@@ -353,6 +444,11 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
     print(f"\n{'─'*55}")
     if dry_run:
         print("[DRY RUN] No changes written to Neo4j")
+        if pruned_must_edges or pruned_should_edges or pruned_items:
+            print(f"[DRY RUN] Would prune: "
+                  f"{pruned_must_edges} MUST_CONTAIN + "
+                  f"{pruned_should_edges} SHOULD_CONTAIN edges, "
+                  f"{pruned_items} orphan ChecklistItems")
     else:
         print(f"✓ EvidenceRequirement nodes:    {total_reqs}")
         print(f"✓ FulfilmentSpec MERGE calls:   {total_specs}")
@@ -360,6 +456,12 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
         print(f"✓ REQUIRES_EVIDENCE rels:       {total_rels}")
         print(f"✓ DerivedSpec MERGE calls:      {total_derived_specs}")
         print(f"✓ DERIVES_FROM rels:            {total_derives_from}")
+        if pruned_must_edges or pruned_should_edges or pruned_items:
+            print(f"✓ Pruned stale edges:           "
+                  f"{pruned_must_edges} MUST + {pruned_should_edges} SHOULD")
+            print(f"✓ Pruned orphan items:          {pruned_items}")
+        else:
+            print(f"✓ Pruned stale edges:           0  (clean state)")
 
     if missing_controls:
         print(f"\n⚠ {len(missing_controls)} controls not found in Neo4j:")
