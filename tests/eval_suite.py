@@ -713,6 +713,100 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Multi-leaf calibrations #2-#5 (commit 13e44ad) ──────────────────────
+    # Each calibration promoted a control from single-leaf to a 4-leaf spine.
+    # The Stage-2 list_one short-circuit (parse_stage2_intent → list_one) is
+    # the surface that surfaces the engine_proposal_reason verbatim — the
+    # phrase "0/4 children satisfied" PROVES the multi-leaf evaluation:
+    # pre-promotion each control was single-leaf and the engine would have
+    # emitted "0/1 children satisfied". Post-promotion it's "0/4".
+    # LLM-free path (~30ms per case), template-rendered, deterministic.
+
+    EvalCase(
+        id=42,
+        query="pending engine verdict for A.8.2",
+        tags=["posture", "engine", "stage2", "multi_leaf", "calibration"],
+        expected_refs=["A.8.2"],
+        expected_type="posture_check",
+        must_contain=["A.8.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            # Pre-promotion the single-leaf spec would have produced this:
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.8.2 calibration #2 (technical_control 4-leaf spine: "
+            "configuration_baseline + procedure + monitoring_record + "
+            "recertification). Stage-2 list_one short-circuit exposes the "
+            "snapshotted reason — '0/4 children satisfied' is the multi-leaf "
+            "signature. Pre-promotion single-leaf would have read '0/1'."
+        ),
+    ),
+
+    EvalCase(
+        id=43,
+        query="pending engine verdict for A.5.2",
+        tags=["posture", "engine", "stage2", "multi_leaf", "calibration"],
+        expected_refs=["A.5.2"],
+        expected_type="posture_check",
+        must_contain=["A.5.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.2 calibration #3 (policy_program 4-leaf spine, "
+            "governance-wrapper variant — primary artifact is the "
+            "responsibility_matrix, not a policy doc; siblings are "
+            "approval + communication_record + review_record). Same "
+            "Stage-2 list_one surface; '0/4' is the multi-leaf signature."
+        ),
+    ),
+
+    EvalCase(
+        id=44,
+        query="pending engine verdict for Art.30",
+        tags=["posture", "engine", "stage2", "multi_leaf", "calibration", "gdpr"],
+        expected_refs=["Art.30"],
+        expected_type="posture_check",
+        must_contain=["Art.30", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks Art.30 calibration #4 (records_program 4-leaf spine — "
+            "the new sixth spine candidate from this batch: RoPA register + "
+            "maintenance procedure + data_flow_inventory + annual review). "
+            "Stage-2 list_one surface; '0/4' is the multi-leaf signature."
+        ),
+    ),
+
+    EvalCase(
+        id=45,
+        query="pending engine verdict for Art.15",
+        tags=["posture", "engine", "stage2", "multi_leaf", "calibration", "gdpr"],
+        expected_refs=["Art.15"],
+        expected_type="posture_check",
+        must_contain=["Art.15", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks Art.15 calibration #5 (gdpr_rights 4-leaf spine: DSAR "
+            "handling procedure + register + per-request response leaf "
+            "[operational] + annual process review). Stage-2 list_one "
+            "surface; '0/4' is the multi-leaf signature. Pre-promotion "
+            "the single dsar_response operational leaf would have been "
+            "the lone child."
+        ),
+    ),
+
     EvalCase(
         id=41,
         query="is A.5.30 compliant?",
