@@ -807,6 +807,122 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Phase B records_program family (commit pending 2026-05-29) ──────────
+    # First Phase B bulk batch: 5 ISO A.5 register-style controls promoted to
+    # the records_program 4-leaf spine in one pass. A.5.32 is the adapted
+    # variant (procedure leaf retained alongside the inventory). Same Stage-2
+    # list_one surface + '0/4' signature as cases 42-45.
+
+    EvalCase(
+        id=46,
+        query="pending engine verdict for A.5.5",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program"],
+        expected_refs=["A.5.5"],
+        expected_type="posture_check",
+        must_contain=["A.5.5", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.5 (Authority contacts) Phase B promotion to "
+            "records_program 4-leaf: authority_contact_register + "
+            "maintenance_procedure + applicable_authorities_scope + "
+            "periodic review. '0/4' is the multi-leaf signature; the "
+            "single-leaf predecessor would have read '0/1'."
+        ),
+    ),
+
+    EvalCase(
+        id=47,
+        query="pending engine verdict for A.5.6",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program"],
+        expected_refs=["A.5.6"],
+        expected_type="posture_check",
+        must_contain=["A.5.6", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.6 (Contact with special interest groups) Phase B "
+            "promotion to records_program 4-leaf: SIG register + "
+            "engagement_procedure + risk_topic_scope + periodic review."
+        ),
+    ),
+
+    EvalCase(
+        id=48,
+        query="pending engine verdict for A.5.9",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program"],
+        expected_refs=["A.5.9"],
+        expected_type="posture_check",
+        must_contain=["A.5.9", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.9 (Inventory of information and associated assets) "
+            "Phase B promotion to records_program 4-leaf with the stricter "
+            "freshness model: register + lifecycle_procedure + "
+            "discovery_upstream + reconciliation review. Both the register "
+            "and the review carry freshness=90 (asset drift is daily — "
+            "annual review would be insufficient). '0/4' is the multi-leaf "
+            "signature."
+        ),
+    ),
+
+    EvalCase(
+        id=49,
+        query="pending engine verdict for A.5.31",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program"],
+        expected_refs=["A.5.31"],
+        expected_type="posture_check",
+        must_contain=["A.5.31", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.31 (Legal, statutory, regulatory and contractual "
+            "requirements) Phase B promotion to records_program 4-leaf: "
+            "obligations_register + maintenance_procedure + "
+            "applicable_obligations_scope + periodic review with "
+            "freshness=180 (semi-annual cadence preserved from the "
+            "single-leaf predecessor's freshness signal)."
+        ),
+    ),
+
+    EvalCase(
+        id=50,
+        query="pending engine verdict for A.5.32",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "adapted"],
+        expected_refs=["A.5.32"],
+        expected_type="posture_check",
+        must_contain=["A.5.32", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.32 (Intellectual property rights) Phase B promotion "
+            "to records_program *adapted* 4-leaf — IPR has both procedural "
+            "and inventory aspects, so the procedure leaf (existing id) is "
+            "retained alongside the new licensed_software_ipr_inventory "
+            "register, the acquired_works_upstream intake, and a periodic "
+            "IPR audit. The licensed_inventory + renewal_tracking items "
+            "moved from the procedure leaf to the new inventory leaf; the "
+            "audit_cadence item moved to the new review leaf. '0/4' is the "
+            "multi-leaf signature."
+        ),
+    ),
+
     EvalCase(
         id=41,
         query="is A.5.30 compliant?",

@@ -343,7 +343,7 @@ REQ_ART30_ANNUAL_REVIEW = EvidenceRequirement(
     control_ref     = "Art.30",
     standard_id     = "GDPR:2016/679",
     evidence_type   = "review_record",
-    title           = "RoPA Annual Review Record",
+    title           = "RoPA Periodic Review Record",
     trigger_type    = "universal",
     description     = "Even with maintenance triggers in place, drift accumulates between RoPA and reality. An annual (or more frequent) review verifies each activity against current operations, propagates corrections back to the register, and produces auditable evidence that the register is not stale",
     freshness_days  = 365,
@@ -732,7 +732,7 @@ REQ_ART15_PROCESS_REVIEW = EvidenceRequirement(
     control_ref     = "Art.15",
     standard_id     = "GDPR:2016/679",
     evidence_type   = "review_record",
-    title           = "Annual DSAR Process Review",
+    title           = "Periodic DSAR Process Review",
     trigger_type    = "universal",
     description     = "Periodic management review of DSAR handling effectiveness. Confirms the procedure produced timely, lawful responses across the year, identifies systemic defects (late responses, refusals, complaints to supervisory authority) and feeds corrective actions back into the procedure",
     freshness_days  = 365,
@@ -823,7 +823,7 @@ REQ_A51_REVIEW = EvidenceRequirement(
     control_ref   = "A.5.1",
     standard_id   = "ISO27001:2022",
     evidence_type = "review_record",
-    title         = "Annual Information Security Policy Review Record",
+    title         = "Periodic Information Security Policy Review Record",
     trigger_type  = "universal",
     description   = "A.5.1 requires the policy to be reviewed at planned intervals (typically annually) and after significant changes. The review record captures who reviewed it, when, and the outcome (unchanged / amended / retired)",
     must_contain  = [
@@ -934,7 +934,7 @@ REQ_A52_REVIEW = EvidenceRequirement(
     control_ref   = "A.5.2",
     standard_id   = "ISO27001:2022",
     evidence_type = "review_record",
-    title         = "Annual Roles and Responsibilities Review Record",
+    title         = "Periodic Roles and Responsibilities Review Record",
     trigger_type  = "universal",
     description   = "ISO 27002:2022 § 5.2 implementation guidance treats role allocation as needing periodic review to keep up with organizational change. The review record captures who reviewed the matrix, when, and the outcome (unchanged / re-allocated / new role introduced)",
     freshness_days= 365,
@@ -990,46 +990,191 @@ REQ_A54_MANAGEMENT_RESPONSIBILITIES = EvidenceRequirement(
     ],
 )
 
-REQ_A55_AUTHORITY_CONTACTS = EvidenceRequirement(
+# ── Annex A.5.5 — Authority contacts — records_program spine (4-leaf) ─────────
+# Promoted 2026-05-29 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. records_program spine (ratified
+# 2026-05-28 via Art.30) adapted for an ISO register control: register +
+# maintenance procedure + applicable-authorities scope (the upstream that
+# drives the register's entries) + annual review. The register leaf id is
+# preserved from the prior single-leaf definition; the three siblings are new.
+# Authority: ISO 27002:2022 § 5.5 implementation guidance items a–c.
+
+REQ_A55_AUTHORITY_REGISTER = EvidenceRequirement(
     id            = "req:A.5.5:authority_contact_register",
     control_ref   = "A.5.5",
     standard_id   = "ISO27001:2022",
     evidence_type = "contact_register",
     title         = "Authority Contact Register",
     trigger_type  = "universal",
-    description   = "A.5.5 requires the organization to establish and maintain contact with relevant authorities. Evidence is a register of authority contacts (data protection authority, law enforcement, sectoral regulator) with current contact details and last-verified dates",
-    freshness_days = 365,
+    description   = "A.5.5 requires the organization to establish and maintain contact with relevant authorities. The register is the live source of truth for which authorities apply, who to reach, and on what trigger. Maintenance, the applicable-authorities scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.5:authorities_listed", "Relevant authorities listed (DPA, sectoral regulator, law enforcement, CERT/CSIRT)", "must", False, "A.5.5 — relevant authorities"),
-        ChecklistItem("item:A.5.5:contact_details",    "Current contact details per authority (name, role, phone, email)", "must", False, "A.5.5 — establish contact"),
-        ChecklistItem("item:A.5.5:escalation_criteria","Escalation criteria stating when each authority is engaged", "must", False, "A.5.5 — maintain contact"),
-        ChecklistItem("item:A.5.5:last_verified",      "Last-verified date per entry (proves the register is maintained)", "must", False, "A.5.5 — maintain"),
-        ChecklistItem("item:A.5.5:owner",              "Named owner responsible for maintenance", "must", False, "Accountability"),
+        ChecklistItem("item:A.5.5:authorities_listed", "Relevant authorities enumerated (DPA, sectoral regulator, law enforcement, CERT/CSIRT)",                  "must", False, "27002:5.5a"),
+        ChecklistItem("item:A.5.5:contact_details",    "Current contact details per authority (name/role, phone, email, address)",                                "must", False, "27002:5.5a — contact details"),
+        ChecklistItem("item:A.5.5:escalation_criteria","Engagement criteria per authority (incident classes, regulatory deadlines that require contact)",         "must", False, "27002:5.5b"),
+        ChecklistItem("item:A.5.5:last_verified",      "Last-verified date per entry (proves the entry is current)",                                              "must", False, "27002:5.5 — maintained"),
+        ChecklistItem("item:A.5.5:owner",              "Named owner responsible for the register",                                                                "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.5:backup_contacts",    "Backup or secondary contacts per authority", "should", False, "Continuity"),
-        ChecklistItem("item:A.5.5:notification_templates","References notification templates per authority type", "should", False, "Speed at time of incident"),
+        ChecklistItem("item:A.5.5:backup_contacts",       "Backup or secondary contacts per authority",                                                            "should", False, "Continuity at time of incident"),
+        ChecklistItem("item:A.5.5:notification_templates","Notification templates referenced per authority type",                                                  "should", False, "Speed at time of incident"),
+        ChecklistItem("item:A.5.5:jurisdiction_tag",      "Each authority tagged with the jurisdiction(s) that drove its inclusion (links back to the scope leaf)","should", False, "Cross-leaf coherence"),
     ],
 )
 
-REQ_A56_SIG_CONTACTS = EvidenceRequirement(
+REQ_A55_MAINTENANCE_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.5.5:authority_contact_maintenance_procedure",
+    control_ref   = "A.5.5",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "procedure",
+    title         = "Authority Contact Maintenance Procedure",
+    trigger_type  = "universal",
+    description   = "A.5.5 requires authority contact to be maintained, not just established once. The procedure documents who keeps the register current, what triggers an update, how new authorities enter the register when scope changes, and the activation path when an incident requires engagement",
+    must_contain  = [
+        ChecklistItem("item:A.5.5:proc_maintainer",          "Named maintainer of the register (compliance lead, security manager, or designate)",                            "must", False, "Accountability — 27002:5.5"),
+        ChecklistItem("item:A.5.5:proc_update_triggers",     "Update triggers enumerated (new jurisdiction, new service line, regulator reorganisation, contact-change alert)","must", False, "27002:5.5 — maintained"),
+        ChecklistItem("item:A.5.5:proc_intake_path",         "Intake path for adding a new authority (driven from the applicable-authorities scope leaf)",                    "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.5:proc_activation_path",     "Activation path — who contacts whom on which trigger (incident category, regulatory deadline)",                 "must", False, "27002:5.5b — when to contact"),
+        ChecklistItem("item:A.5.5:proc_verification_cadence","Re-verification cadence for contact details (annual at minimum)",                                                "must", False, "27002:5.5 — maintained"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.5:proc_drill",          "Periodic tabletop or drill of the activation path (proves the contact path works under pressure)", "should", False, "Effectiveness check"),
+        ChecklistItem("item:A.5.5:proc_template_link", "Links to notification templates kept beside the procedure",                                          "should", False, "Speed at time of incident"),
+        ChecklistItem("item:A.5.5:proc_change_log",    "Change-log requirement for any register edit so the audit trail is preserved",                       "should", False, "Auditability"),
+    ],
+)
+
+REQ_A55_APPLICABLE_AUTHORITIES_SCOPE = EvidenceRequirement(
+    id            = "req:A.5.5:applicable_authorities_scope",
+    control_ref   = "A.5.5",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Authorities Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the register. Documents which authorities are relevant today and on what basis — jurisdictions of operation, sectoral obligations, types of personal data processed, critical-service classifications. ISO 27002:2022 § 5.5 expects the organisation to know which authorities apply before claiming to maintain contact with them",
+    must_contain  = [
+        ChecklistItem("item:A.5.5:scope_jurisdictions",       "Jurisdictions covered (HQ, places of business, customer locations) — each maps to one or more authorities",        "must", False, "27002:5.5a — relevant"),
+        ChecklistItem("item:A.5.5:scope_sectoral",            "Sectoral obligations stated (finance, health, critical infrastructure, telecoms) driving sectoral regulators",     "must", False, "27002:5.5a — relevant authorities"),
+        ChecklistItem("item:A.5.5:scope_personal_data",       "Personal-data processing flag → drives DPA inclusion per jurisdiction",                                              "must", False, "GDPR Art.51 / 27002:5.5"),
+        ChecklistItem("item:A.5.5:scope_authority_categories","Authority categories mapped — supervisory (DPA), sectoral regulator, law enforcement, national CERT/CSIRT",          "must", False, "27002:5.5a"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.5:scope_legal_register_link", "Cross-link to the legal/regulatory register (A.5.31) — same drivers; the two should stay aligned",                  "should", False, "Cross-control coherence"),
+        ChecklistItem("item:A.5.5:scope_change_monitoring",   "Source for change monitoring (legal counsel, regulator alerts) that triggers re-scoping",                            "should", False, "Currency"),
+    ],
+)
+
+REQ_A55_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.5:authority_contact_review",
+    control_ref     = "A.5.5",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Authority Contact Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that the register is still accurate, the scope is still correct, and the maintenance procedure is being followed. ISO 27002:2022 § 5.5 expects contact to be maintained — drift between register and reality is the audit failure mode this leaf catches",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.5:rev_date",            "Review date within the planned interval (typically within 12 months of last review)",                   "must", False, "27002:5.5 — maintained"),
+        ChecklistItem("item:A.5.5:rev_reviewer",        "Reviewer identity and role recorded",                                                                    "must", False, "Accountability"),
+        ChecklistItem("item:A.5.5:rev_per_entry",       "Per-entry outcome (verified / amended / removed) and the verification method used",                     "must", False, "27002:5.5 — maintained"),
+        ChecklistItem("item:A.5.5:rev_scope_check",     "Cross-check against the applicable-authorities scope (any new jurisdiction or sector that should add an entry)", "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.5.5:rev_register_update", "Changes propagated back to the live register with reference to this review",                              "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.5:rev_ad_hoc_triggers","Ad-hoc review triggers listed (re-org, new geography, new sectoral obligation)", "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.5:rev_next_date",      "Next planned review date stated",                                                  "should", False, "Planning"),
+    ],
+)
+
+# ── Annex A.5.6 — SIG contacts — records_program spine (4-leaf) ───────────────
+# Promoted 2026-05-29 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. records_program spine: register of
+# memberships + engagement procedure + risk-topic scope (the upstream that
+# justifies which SIGs to join) + annual engagement review. The register leaf
+# id is preserved; three siblings are new.
+# Authority: ISO 27002:2022 § 5.6 implementation guidance — value-driven
+# engagement, not just paid memberships.
+
+REQ_A56_SIG_REGISTER = EvidenceRequirement(
     id            = "req:A.5.6:special_interest_group_register",
     control_ref   = "A.5.6",
     standard_id   = "ISO27001:2022",
     evidence_type = "contact_register",
     title         = "Special Interest Group and Professional Forum Register",
     trigger_type  = "universal",
-    description   = "A.5.6 requires contact with special interest groups (SIGs), security forums, and professional associations. Evidence is a register of memberships and engagements that demonstrate active connection to the security community",
-    freshness_days = 365,
+    description   = "A.5.6 requires contact with special interest groups (SIGs), security forums, and professional associations. The register lists current memberships and engagements with the basis for each. Engagement procedure, the risk-topic scope (which threats/skills drive the membership choices) and annual review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.6:sigs_listed",     "SIGs and forums listed (ISACs, ISC2/ISACA chapters, vendor groups, sector-specific)", "must", False, "A.5.6 — special interest groups"),
-        ChecklistItem("item:A.5.6:basis_of_contact","Basis of contact stated per entry (paid membership, subscription, attendance)", "must", False, "A.5.6 — establish contact"),
-        ChecklistItem("item:A.5.6:topics_shared",   "Topics or threat categories that drive each engagement", "must", False, "A.5.6 — maintain contact"),
-        ChecklistItem("item:A.5.6:last_engaged",    "Last-engaged date per entry (event attended, briefing received)", "must", False, "A.5.6 — maintain"),
+        ChecklistItem("item:A.5.6:sigs_listed",      "SIGs and forums enumerated (ISACs, ISC2/ISACA chapters, vendor security groups, sector-specific councils)", "must", False, "27002:5.6a"),
+        ChecklistItem("item:A.5.6:basis_of_contact", "Basis of contact per entry (paid membership, subscription, named-individual attendance, community access)", "must", False, "27002:5.6 — contact"),
+        ChecklistItem("item:A.5.6:topics_shared",    "Topics or threat categories that drive each engagement",                                                     "must", False, "27002:5.6b — keep current"),
+        ChecklistItem("item:A.5.6:last_engaged",     "Last-engaged date per entry (event attended, briefing received, working group meeting)",                     "must", False, "27002:5.6 — maintain"),
+        ChecklistItem("item:A.5.6:owner",            "Named owner responsible for the register",                                                                  "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.6:representative",  "Internal representative or point of contact per group", "should", False, "Accountability"),
-        ChecklistItem("item:A.5.6:renewal_dates",   "Subscription or membership renewal dates tracked", "should", False, "Continuity of access"),
+        ChecklistItem("item:A.5.6:representative",  "Internal representative or point of contact per group",                                                       "should", False, "Accountability"),
+        ChecklistItem("item:A.5.6:renewal_dates",   "Subscription or membership renewal dates tracked",                                                            "should", False, "Continuity of access"),
+        ChecklistItem("item:A.5.6:topic_tag",       "Each entry tagged with the risk topics that drove inclusion (links back to the scope leaf)",                  "should", False, "Cross-leaf coherence"),
+    ],
+)
+
+REQ_A56_ENGAGEMENT_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.5.6:sig_engagement_procedure",
+    control_ref   = "A.5.6",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "procedure",
+    title         = "SIG Engagement Procedure",
+    trigger_type  = "universal",
+    description   = "A.5.6 expects active engagement, not nominal membership. The procedure documents how SIGs are joined, how value is captured back into the organisation (intel sharing into threat-intelligence A.5.7, runbook updates, training inputs) and how dormant memberships are pruned",
+    must_contain  = [
+        ChecklistItem("item:A.5.6:proc_join_path",         "Path to join a new SIG (business case linked to risk-topic scope, approval, budget allocation)",        "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.6:proc_attendance",        "Attendance/participation expectations per membership (minimum events, working groups, briefings)",      "must", False, "27002:5.6 — maintain"),
+        ChecklistItem("item:A.5.6:proc_value_capture",     "Value-capture path — how intelligence/insights flow back (cross-link to A.5.7 threat-intel procedure)", "must", False, "27002:5.6b / A.5.7"),
+        ChecklistItem("item:A.5.6:proc_disengagement",     "Disengagement path for dormant or low-value memberships (avoid paying for unused subscriptions)",         "must", False, "27002:5.6 — appropriate"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.6:proc_confidentiality",   "Confidentiality expectations when sharing internal info to SIGs (TLP labelling, NDA awareness)",        "should", False, "Information leakage avoidance"),
+        ChecklistItem("item:A.5.6:proc_training_link",     "Link to training programme (A.6.3) for representatives who attend on behalf of the org",                "should", False, "Effectiveness"),
+    ],
+)
+
+REQ_A56_RISK_TOPIC_SCOPE = EvidenceRequirement(
+    id            = "req:A.5.6:risk_topic_scope",
+    control_ref   = "A.5.6",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "SIG Engagement Risk-Topic Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the register. Documents the threat categories, technology stack components, sectoral concerns and skill domains that justify each SIG membership. ISO 27002:2022 § 5.6 expects engagement to be relevant — random or legacy memberships fail the test",
+    must_contain  = [
+        ChecklistItem("item:A.5.6:scope_threat_categories", "Threat categories prioritised (ransomware, supply-chain, insider, sector-specific) that justify SIG choices", "must", False, "27002:5.6 — relevant"),
+        ChecklistItem("item:A.5.6:scope_tech_stack",        "Technology-stack components for which vendor/community SIGs are valuable (cloud, OS, network, OT/IoT)",      "must", False, "27002:5.6b"),
+        ChecklistItem("item:A.5.6:scope_sectoral",          "Sectoral concerns (finance ISAC, health ISAC, critical infra forum) driving sector-specific memberships",      "must", False, "27002:5.6 — relevant"),
+        ChecklistItem("item:A.5.6:scope_skill_domains",     "Professional development / skill domains (CISO peer groups, secure-coding communities) driving professional memberships","must", False, "27002:5.6"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.6:scope_threat_intel_link", "Cross-link to threat-intelligence procedure (A.5.7) — the two scopes should share drivers",                  "should", False, "Cross-control coherence"),
+        ChecklistItem("item:A.5.6:scope_change_trigger",    "Trigger for re-scoping (new tech adoption, new sector entry, emerging threat class)",                         "should", False, "Currency"),
+    ],
+)
+
+REQ_A56_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.6:sig_engagement_review",
+    control_ref     = "A.5.6",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic SIG Engagement Review",
+    trigger_type    = "universal",
+    description     = "Periodic check that memberships are still earning their place. Each entry is reviewed for value delivered, currency of contact, and continued relevance against the risk-topic scope. Dormant memberships are pruned; gaps where a new SIG should be joined are flagged",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.6:rev_date",            "Review date within the planned interval",                                                             "must", False, "27002:5.6 — maintain"),
+        ChecklistItem("item:A.5.6:rev_reviewer",        "Reviewer identity and role recorded",                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.5.6:rev_per_entry",       "Per-entry outcome (continue / disengage / upgrade) with value-delivered notes (intel received, contributions made)", "must", False, "27002:5.6 — appropriate"),
+        ChecklistItem("item:A.5.6:rev_scope_check",     "Cross-check against the risk-topic scope — any new threat or domain that should add a SIG",            "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.5.6:rev_register_update", "Changes propagated back to the register",                                                              "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.6:rev_ad_hoc_triggers","Ad-hoc review triggers listed (key representative departure, new threat class, budget cycle)",         "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.6:rev_next_date",      "Next planned review date stated",                                                                       "should", False, "Planning"),
     ],
 )
 
@@ -1075,25 +1220,104 @@ REQ_A58_PROJECT_MANAGEMENT_SECURITY = EvidenceRequirement(
     ],
 )
 
-REQ_A59_ASSET_INVENTORY = EvidenceRequirement(
+# ── Annex A.5.9 — Asset inventory — records_program spine (4-leaf) ────────────
+# Promoted 2026-05-29 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. records_program spine: the asset
+# register + lifecycle procedure + discovery/onboarding upstream + periodic
+# reconciliation review. The register leaf id is preserved; three siblings new.
+# Deviation from default freshness model: the register keeps freshness=90
+# (asset state drifts daily; the register itself must show evidence of active
+# maintenance), and the reconciliation review carries its own freshness=90
+# (quarterly reconciliation against discovery scans). This is stricter than
+# the records_program default — justified because asset inventory is the
+# foundation for half the Annex A controls and stale rows cascade into A.5.12
+# classification gaps, A.8.16 monitoring gaps, A.8.20 network mapping gaps.
+# Authority: ISO 27002:2022 § 5.9 implementation guidance.
+
+REQ_A59_ASSET_REGISTER = EvidenceRequirement(
     id            = "req:A.5.9:asset_inventory",
     control_ref   = "A.5.9",
     standard_id   = "ISO27001:2022",
     evidence_type = "asset_register",
     title         = "Inventory of Information and Associated Assets",
     trigger_type  = "universal",
-    description   = "A.5.9 requires an inventory of information and associated assets, including owners, to be developed and maintained. Evidence is an asset register that names assets, classifies them, and assigns owners",
+    description   = "A.5.9 requires an inventory of information and associated assets — including owners — developed and maintained. The register is the live record. Lifecycle procedure, the discovery/onboarding upstream and reconciliation review are sibling leaves",
     freshness_days = 90,
     must_contain  = [
-        ChecklistItem("item:A.5.9:asset_records",  "Asset records exist (information assets, software, hardware, services)", "must", False, "A.5.9 — inventory"),
-        ChecklistItem("item:A.5.9:owner_per_asset","Owner named per asset (individual or role accountable)", "must", False, "A.5.9 — including owners"),
-        ChecklistItem("item:A.5.9:classification", "Classification per asset (links to A.5.12 scheme)", "must", False, "A.5.9 — inventory"),
-        ChecklistItem("item:A.5.9:location",       "Location or system where the asset resides", "must", False, "A.5.9 — inventory"),
-        ChecklistItem("item:A.5.9:last_updated",   "Last-updated date per record (proves maintenance)", "must", False, "A.5.9 — maintained"),
+        ChecklistItem("item:A.5.9:asset_records",   "Asset records exist (information assets, software, hardware, services, cloud resources)",            "must", False, "27002:5.9a"),
+        ChecklistItem("item:A.5.9:owner_per_asset", "Owner named per asset (individual or role accountable for protection and risk decisions)",          "must", False, "27002:5.9d — including owners"),
+        ChecklistItem("item:A.5.9:classification",  "Classification per asset (links to the A.5.12 classification scheme)",                              "must", False, "27002:5.9c / A.5.12"),
+        ChecklistItem("item:A.5.9:location",        "Location or hosting system where the asset resides (data centre, cloud region, endpoint pool)",     "must", False, "27002:5.9b"),
+        ChecklistItem("item:A.5.9:last_updated",    "Last-updated date per record (proves the register is actively maintained, not snapshotted)",       "must", False, "27002:5.9 — maintained"),
+        ChecklistItem("item:A.5.9:asset_type",      "Asset type tag (information / software / hardware / service / facility) so type-specific controls can be applied", "must", False, "27002:5.9 — categorisation"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.9:lifecycle_status","Lifecycle status per asset (active, retired, in-procurement)", "should", False, "Operational completeness"),
-        ChecklistItem("item:A.5.9:dependencies",   "Dependency or relationship to other assets (supports A.8.x mapping)", "should", False, "Risk traceability"),
+        ChecklistItem("item:A.5.9:lifecycle_status","Lifecycle status per asset (active, retired, in-procurement, in-disposal)",                          "should", False, "Operational completeness"),
+        ChecklistItem("item:A.5.9:dependencies",    "Dependency or relationship to other assets (supports A.8.x topology and risk mapping)",              "should", False, "Risk traceability"),
+        ChecklistItem("item:A.5.9:dfi_link",        "Cross-link to GDPR Art.30 data flow inventory where the asset holds personal data",                  "should", False, "Cross-control coherence"),
+    ],
+)
+
+REQ_A59_LIFECYCLE_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.5.9:asset_lifecycle_procedure",
+    control_ref   = "A.5.9",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "procedure",
+    title         = "Asset Lifecycle Management Procedure",
+    trigger_type  = "universal",
+    description   = "A.5.9 requires the register to be maintained — the lifecycle procedure documents how assets enter, change and leave the register. Covers procurement intake, ownership transfer, classification at creation/change, retirement and disposal handoff (A.7.14 / A.8.10)",
+    must_contain  = [
+        ChecklistItem("item:A.5.9:proc_intake",        "Intake path — every new asset (procured, built, granted) is registered before going operational",                "must", False, "27002:5.9 — develop"),
+        ChecklistItem("item:A.5.9:proc_ownership",     "Ownership assignment rules (who can be an owner, transfer process on role change)",                              "must", False, "27002:5.9d / Clause 5.3"),
+        ChecklistItem("item:A.5.9:proc_classification","Classification at creation and on material change (cross-link to A.5.12)",                                       "must", False, "27002:5.9c / A.5.12"),
+        ChecklistItem("item:A.5.9:proc_retirement",    "Retirement and disposal handoff (status set to retired, disposal handled per A.7.14/A.8.10, register row archived)","must", False, "27002:5.9 / A.7.14 / A.8.10"),
+        ChecklistItem("item:A.5.9:proc_maintainer",    "Named maintainer of the register and escalation path when intake fails",                                          "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.9:proc_shadow_it",     "Shadow-IT handling — unregistered assets discovered in scans are blocked, registered, or removed",                "should", False, "Drift prevention"),
+        ChecklistItem("item:A.5.9:proc_cloud_provision","Cloud-provisioning hooks (IaC pipelines auto-register infra; manual creations require a register entry first)", "should", False, "Cloud completeness"),
+    ],
+)
+
+REQ_A59_DISCOVERY_UPSTREAM = EvidenceRequirement(
+    id            = "req:A.5.9:asset_discovery_upstream",
+    control_ref   = "A.5.9",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "discovery_record",
+    title         = "Asset Discovery and Onboarding Upstream",
+    trigger_type  = "universal",
+    description   = "The upstream that feeds the register. Where the lifecycle procedure covers intake of known new assets, the discovery upstream documents how the org finds assets it didn't already know about — network scans, cloud-tenant inventory APIs, procurement export, endpoint-management exports — and how those feeds reconcile into the register",
+    must_contain  = [
+        ChecklistItem("item:A.5.9:disc_sources",        "Discovery sources enumerated (network scan tool, CSPM tool, EDR/MDM inventory, procurement system, license database)", "must", False, "27002:5.9 — develop"),
+        ChecklistItem("item:A.5.9:disc_cadence",        "Discovery cadence per source (continuous / daily / weekly)",                                                          "must", False, "27002:5.9 — maintained"),
+        ChecklistItem("item:A.5.9:disc_reconciliation", "Reconciliation rule — discovered-but-not-in-register entries are flagged for owner assignment and classification",   "must", False, "Closes the discovery loop"),
+        ChecklistItem("item:A.5.9:disc_scope_coverage", "Coverage statement — what categories of assets each source covers and where gaps exist (e.g., personal devices, OT)", "must", False, "27002:5.9 — completeness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.9:disc_a812_link",      "Cross-link to A.8.12 (data leakage prevention) or A.8.20 (network mapping) where those scans double as discovery",  "should", False, "Cross-control coherence"),
+        ChecklistItem("item:A.5.9:disc_gap_remediation","Process for closing coverage gaps (procuring new tools, mandating registration in ungovernable zones)",              "should", False, "Continuous improvement"),
+    ],
+)
+
+REQ_A59_RECONCILIATION_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.9:asset_reconciliation_review",
+    control_ref     = "A.5.9",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Asset Inventory Reconciliation",
+    trigger_type    = "universal",
+    description     = "Periodic reconciliation of the register against discovery feeds. The cadence is quarterly (freshness=90) because asset drift is daily and the register's value collapses fast without reconciliation. Annual review is insufficient for this control. Outputs feed back into the register and into procurement / cloud-provisioning hooks",
+    freshness_days  = 90,
+    must_contain    = [
+        ChecklistItem("item:A.5.9:rev_date",            "Reconciliation date within the planned interval (typically within 90 days of last reconciliation)",                "must", False, "27002:5.9 — maintained"),
+        ChecklistItem("item:A.5.9:rev_reviewer",        "Reviewer identity and role recorded",                                                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.5.9:rev_per_source",      "Per-source delta — what each discovery source surfaced vs what the register held (additions, removals, mismatches)","must", False, "27002:5.9 — develop and maintain"),
+        ChecklistItem("item:A.5.9:rev_unassigned_owner","Treatment of unassigned-owner rows (owner assignment forced or row retired)",                                        "must", False, "27002:5.9d"),
+        ChecklistItem("item:A.5.9:rev_register_update", "Register updated as a result of the reconciliation with reference to this review",                                  "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.9:rev_classification_check","Classification sampling check — are A.5.12 classifications still appropriate for the asset's actual use",       "should", False, "A.5.12 / drift catch"),
+        ChecklistItem("item:A.5.9:rev_next_date",       "Next planned reconciliation date stated",                                                                            "should", False, "Planning"),
     ],
 )
 
@@ -1496,47 +1720,202 @@ REQ_A530_ICT_CONTINUITY = EvidenceRequirement(
     ],
 )
 
-REQ_A531_LEGAL_REGULATORY_REGISTER = EvidenceRequirement(
+# ── Annex A.5.31 — Legal / regulatory register — records_program spine (4-leaf) ─
+# Promoted 2026-05-29 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. records_program spine: the register
+# of applicable obligations + maintenance procedure + applicable-obligations
+# scope (jurisdictions + services + customers that drive which laws apply) +
+# semi-annual review (freshness=180 retained from the prior single-leaf
+# because regulatory change cadence is faster than annual). The register leaf
+# id is preserved; three siblings new.
+# Authority: ISO 27002:2022 § 5.31 implementation guidance. Cross-link to
+# A.5.5 (authority contacts) — same drivers, separate registers.
+
+REQ_A531_OBLIGATIONS_REGISTER = EvidenceRequirement(
     id            = "req:A.5.31:legal_regulatory_register",
     control_ref   = "A.5.31",
     standard_id   = "ISO27001:2022",
     evidence_type = "register",
     title         = "Legal, Statutory, Regulatory and Contractual Requirements Register",
     trigger_type  = "universal",
-    description   = "A.5.31 requires applicable legal, statutory, regulatory, and contractual requirements relevant to information security to be identified, documented, and kept up to date. Evidence is a register that enumerates them and maps each to the organization's compliance approach",
-    freshness_days = 180,
+    description   = "A.5.31 requires applicable legal, statutory, regulatory and contractual requirements relevant to information security to be identified, documented and kept up to date. The register enumerates them and maps each to the compliance approach. Maintenance procedure, applicable-obligations scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.31:laws_listed",       "Applicable laws and regulations listed (GDPR, sectoral, jurisdictional)", "must", False, "A.5.31 — identified"),
-        ChecklistItem("item:A.5.31:jurisdictions",     "Jurisdictions covered explicitly (HQ, places of operation, customer locations)", "must", False, "A.5.31 — relevant"),
-        ChecklistItem("item:A.5.31:contractual",       "Contractual obligations summarised (customer contracts, regulator agreements)", "must", False, "A.5.31 — contractual requirements"),
-        ChecklistItem("item:A.5.31:compliance_approach","Approach for compliance per item (how we meet it, controls referenced)", "must", False, "A.5.31 — approach to meet"),
-        ChecklistItem("item:A.5.31:owner_per_item",    "Owner named per requirement (who tracks change and compliance)", "must", False, "Accountability"),
-        ChecklistItem("item:A.5.31:last_verified",     "Last-verified or last-reviewed date per entry", "must", False, "A.5.31 — kept up to date"),
+        ChecklistItem("item:A.5.31:laws_listed",        "Applicable laws and regulations enumerated (GDPR, sectoral, jurisdictional, transfer regimes)",          "must", False, "27002:5.31a"),
+        ChecklistItem("item:A.5.31:jurisdictions",      "Jurisdictions covered explicitly per entry (HQ, places of operation, customer locations, data residency)","must", False, "27002:5.31a — relevant"),
+        ChecklistItem("item:A.5.31:contractual",        "Contractual obligations summarised (customer contracts, regulator agreements, sectoral codes)",          "must", False, "27002:5.31c"),
+        ChecklistItem("item:A.5.31:compliance_approach","Approach for compliance per item (how the obligation is met, which controls/policies/processes evidence it)","must", False, "27002:5.31b"),
+        ChecklistItem("item:A.5.31:owner_per_item",     "Owner named per requirement (who tracks change and compliance)",                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.5.31:last_verified",      "Last-verified or last-reviewed date per entry",                                                            "must", False, "27002:5.31 — kept up to date"),
+        ChecklistItem("item:A.5.31:obligation_type",    "Obligation type tag (statutory / regulatory / contractual / sectoral-code) to drive review cadence",       "must", False, "27002:5.31 — categorisation"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.31:evidence_links",    "Links to evidence of compliance per requirement", "should", False, "Audit traceability"),
-        ChecklistItem("item:A.5.31:change_monitoring", "Source for change monitoring (legal counsel, regulator alerts, industry feed)", "should", False, "Currency"),
+        ChecklistItem("item:A.5.31:evidence_links",    "Links to evidence of compliance per requirement (policies, audit reports, certifications)",                "should", False, "Audit traceability"),
+        ChecklistItem("item:A.5.31:change_monitoring", "Source for change monitoring per entry (legal counsel, regulator alerts, industry feed)",                  "should", False, "Currency"),
+        ChecklistItem("item:A.5.31:authority_link",    "Each entry tagged with the authority(ies) responsible — cross-link to A.5.5 authority register",            "should", False, "Cross-control coherence"),
     ],
 )
 
-REQ_A532_INTELLECTUAL_PROPERTY = EvidenceRequirement(
+REQ_A531_MAINTENANCE_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.5.31:obligations_register_maintenance_procedure",
+    control_ref   = "A.5.31",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "procedure",
+    title         = "Legal/Regulatory Register Maintenance Procedure",
+    trigger_type  = "universal",
+    description   = "A.5.31 expects the register to be 'kept up to date'. The procedure documents who keeps it current, what triggers an update (new regulation, regulator guidance, customer contract change, jurisdiction expansion), and the intake path from trigger to register entry",
+    must_contain  = [
+        ChecklistItem("item:A.5.31:proc_maintainer",       "Named maintainer (compliance lead, legal counsel, or designate) with documented responsibility for register accuracy", "must", False, "Accountability — 27002:5.31"),
+        ChecklistItem("item:A.5.31:proc_update_triggers",  "Update triggers enumerated (new law/regulation, regulator guidance, new customer contract, new jurisdiction, sectoral code change)", "must", False, "27002:5.31 — kept up to date"),
+        ChecklistItem("item:A.5.31:proc_intake_path",      "Intake path from trigger to register entry (who flags, who interprets, who classifies, who confirms compliance approach)", "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.31:proc_change_assessment","Impact-assessment step when an obligation changes — affected controls and policies identified, gap actions opened",       "must", False, "27002:5.31b — approach to meet"),
+        ChecklistItem("item:A.5.31:proc_authority_sync",   "Authority-contact sync — adding an obligation that introduces a new regulator triggers A.5.5 register update",            "must", False, "A.5.5 coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.31:proc_legal_review",     "Legal review step before a new entry is finalised (internal or external counsel approval)",                              "should", False, "Interpretation accuracy"),
+        ChecklistItem("item:A.5.31:proc_horizon_scan",     "Horizon-scanning cadence for upcoming obligations (proposed legislation, pending regulator decisions)",                   "should", False, "Forward-looking compliance"),
+    ],
+)
+
+REQ_A531_APPLICABLE_OBLIGATIONS_SCOPE = EvidenceRequirement(
+    id            = "req:A.5.31:applicable_obligations_scope",
+    control_ref   = "A.5.31",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Obligations Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the register. Documents the business activity surfaces — jurisdictions, services, customer types, data categories, sectoral classifications — that determine which obligations apply. ISO 27002:2022 § 5.31 expects organisations to know their applicability before listing obligations",
+    must_contain  = [
+        ChecklistItem("item:A.5.31:scope_jurisdictions",   "Jurisdictions covered (HQ, places of business, customer locations, data residency, transfer destinations)",            "must", False, "27002:5.31a"),
+        ChecklistItem("item:A.5.31:scope_services",        "Services offered (regulated activities — payments, health data processing, telco, AI systems under upcoming regimes)",  "must", False, "27002:5.31 — relevant"),
+        ChecklistItem("item:A.5.31:scope_customer_types",  "Customer types driving contractual obligations (regulated industries, government, B2C consumers)",                      "must", False, "27002:5.31c — contractual"),
+        ChecklistItem("item:A.5.31:scope_data_categories", "Personal/sensitive/regulated data categories processed (drives GDPR, HIPAA, sectoral data laws)",                        "must", False, "GDPR/sectoral linkage"),
+        ChecklistItem("item:A.5.31:scope_sectoral_class",  "Sectoral classification (NIS2 essential/important, DORA financial-entity, critical-infrastructure designation, etc.)",  "must", False, "27002:5.31 — applicability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.31:scope_authority_link",  "Cross-link to A.5.5 applicable-authorities scope — same drivers; shared updates",                                       "should", False, "Cross-control coherence"),
+        ChecklistItem("item:A.5.31:scope_change_drivers",  "Trigger list for re-scoping (new geography, new service line, M&A, change in customer mix)",                            "should", False, "Currency"),
+    ],
+)
+
+REQ_A531_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.31:obligations_register_review",
+    control_ref     = "A.5.31",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Legal/Regulatory Register Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that the register still reflects current obligations and that the compliance approach for each is still adequate. The cadence is semi-annual (freshness=180) because regulatory change is faster than annual; this matches the prior single-leaf freshness signal",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.5.31:rev_date",            "Review date within the planned interval (within 6 months of last review)",                                      "must", False, "27002:5.31 — kept up to date"),
+        ChecklistItem("item:A.5.31:rev_reviewer",        "Reviewer identity and role recorded (compliance lead with legal-counsel sign-off where material)",              "must", False, "Accountability"),
+        ChecklistItem("item:A.5.31:rev_per_entry",       "Per-entry outcome (verified / amended / retired / new added) with compliance-approach still-adequate confirmation","must", False, "27002:5.31b"),
+        ChecklistItem("item:A.5.31:rev_scope_check",     "Cross-check against the applicable-obligations scope — any new applicability that should add entries",          "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.5.31:rev_horizon",         "Forward-looking section — obligations entering force in the next 12-24 months that need preparation",            "must", False, "Forward-looking compliance"),
+        ChecklistItem("item:A.5.31:rev_register_update", "Changes propagated back to the live register with reference to this review",                                     "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.31:rev_ad_hoc_triggers", "Ad-hoc review triggers listed (major regulator action, court ruling, customer contract restructure)",          "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.31:rev_next_date",       "Next planned review date stated",                                                                                "should", False, "Planning"),
+    ],
+)
+
+# ── Annex A.5.32 — Intellectual property — records_program (adapted, 4-leaf) ──
+# Promoted 2026-05-29 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. records_program spine adapted — A.5.32
+# has both procedural and inventory aspects, so the procedure leaf stays
+# alongside the inventory leaf rather than the inventory being the sole
+# primary: protection procedure (existing leaf, refined to procedural items
+# only) + licensed-software & IPR inventory (the register, new) + acquired-
+# works upstream + annual IPR audit. The procedure leaf id is preserved;
+# three siblings new. Some items move from the procedure leaf into the new
+# inventory leaf (licensed_inventory, renewal_tracking) where they more
+# naturally belong.
+# Authority: ISO 27002:2022 § 5.32 implementation guidance.
+
+REQ_A532_PROTECTION_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.32:intellectual_property_procedure",
     control_ref   = "A.5.32",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Intellectual Property Rights Protection Procedure",
     trigger_type  = "universal",
-    description   = "A.5.32 requires appropriate procedures to protect intellectual property rights. Evidence is a procedure covering both the organization's IPR and respect for third-party IPR",
+    description   = "A.5.32 requires appropriate procedures to protect IPR — both the organisation's own and third parties'. The procedure documents usage controls, third-party respect mechanisms, employee-creation rules and the linkage to acquisition. The licensed/IPR inventory, the acquired-works upstream and the annual audit are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.32:scope_iprs",       "Scope of IPRs covered (software licences, trademarks, copyrights, patents, trade secrets)", "must", False, "A.5.32 — IPR"),
-        ChecklistItem("item:A.5.32:licensed_inventory","Inventory of licensed software with entitlements and expiry", "must", False, "A.5.32 — protect"),
-        ChecklistItem("item:A.5.32:usage_controls",   "Usage controls preventing unlicensed software installation", "must", False, "A.5.32 — appropriate procedures"),
-        ChecklistItem("item:A.5.32:third_party_respect","Third-party IPR respect (citation, attribution, royalty payment)", "must", False, "A.5.32 — protect intellectual property rights"),
-        ChecklistItem("item:A.5.32:employee_creations","Employee-creations statement (who owns work product, open-source contribution policy)", "must", False, "A.5.32 — protect"),
+        ChecklistItem("item:A.5.32:scope_iprs",         "Scope of IPRs covered (software licences, trademarks, copyrights, patents, trade secrets, AI model weights / training data where applicable)", "must", False, "27002:5.32 — IPR scope"),
+        ChecklistItem("item:A.5.32:usage_controls",     "Usage controls preventing unlicensed software installation (allow-listing, MDM/EDR enforcement, procurement gate)",                              "must", False, "27002:5.32 — appropriate procedures"),
+        ChecklistItem("item:A.5.32:third_party_respect","Third-party IPR respect (citation, attribution, royalty payment, open-source licence compliance)",                                                "must", False, "27002:5.32 — protect IPR"),
+        ChecklistItem("item:A.5.32:employee_creations", "Employee-creations rule (work-product ownership, open-source contribution policy, prior-IP carve-out)",                                            "must", False, "27002:5.32 — protect"),
+        ChecklistItem("item:A.5.32:incident_handling",  "Handling path for suspected IPR infringement (internal report, takedown, internal remediation, cease-and-desist response)",                       "must", False, "27002:5.32 — protect"),
+        ChecklistItem("item:A.5.32:owner",              "Named owner of the procedure (typically legal/IT lead jointly)",                                                                                  "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.32:audit_cadence",    "Audit cadence for software licence compliance", "should", False, "Drift prevention"),
-        ChecklistItem("item:A.5.32:renewal_tracking", "License renewal tracking process", "should", False, "Continuity of use"),
+        ChecklistItem("item:A.5.32:training_link",      "Cross-link to A.6.3 awareness — staff training on IPR (especially open-source and AI-tool usage)",                                                "should", False, "Effectiveness"),
+        ChecklistItem("item:A.5.32:bring_your_own",     "Bring-your-own-licence handling (personal licences brought into a business context, freelancer-supplied software)",                              "should", False, "Real-world coverage"),
+    ],
+)
+
+REQ_A532_LICENSED_INVENTORY = EvidenceRequirement(
+    id            = "req:A.5.32:licensed_software_ipr_inventory",
+    control_ref   = "A.5.32",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Licensed Software and IPR Inventory",
+    trigger_type  = "universal",
+    description   = "The register at the heart of IPR protection. Without an inventory of what's licensed, what's open-source, what's internally created, A.5.32 enforcement is theoretical. The inventory tracks entitlements, expiry, attribution obligations and ownership for each entry",
+    must_contain  = [
+        ChecklistItem("item:A.5.32:licensed_inventory",  "Inventory of licensed commercial software with entitlements (seats / cores / sites) and expiry per licence",                                     "must", False, "27002:5.32 — protect"),
+        ChecklistItem("item:A.5.32:opensource_inventory","Open-source components inventory with licence type per component (drives attribution and obligation handling — feeds SBOM)",                     "must", False, "27002:5.32 — third-party IPR"),
+        ChecklistItem("item:A.5.32:owned_ipr",           "Organisation-owned IPR entries (trademarks, patents, trade secrets, copyrighted works) with status and protection scope",                       "must", False, "27002:5.32 — own IPR"),
+        ChecklistItem("item:A.5.32:asset_link",          "Linkage to A.5.9 asset register — each licensed item is also an information asset; the two registers must not drift",                            "must", False, "A.5.9 coherence"),
+        ChecklistItem("item:A.5.32:owner_per_entry",     "Named owner per entry (procurement / legal / engineering lead) responsible for renewal and compliance",                                          "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.32:renewal_tracking",    "Renewal dates tracked with lead-time alerts (so expiring licences are renewed before lapse)",                                                    "should", False, "Continuity of use"),
+        ChecklistItem("item:A.5.32:sbom_link",           "Link to SBOM tooling output for open-source components (A.8.29 secure-development linkage)",                                                      "should", False, "Tool-driven currency"),
+    ],
+)
+
+REQ_A532_ACQUIRED_WORKS_UPSTREAM = EvidenceRequirement(
+    id            = "req:A.5.32:acquired_works_upstream",
+    control_ref   = "A.5.32",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "intake_process",
+    title         = "Acquired Works Intake Upstream",
+    trigger_type  = "universal",
+    description   = "The upstream that feeds the inventory. Where the procedure covers ongoing protection and the inventory holds the current state, the intake upstream documents how new IPR enters the org — software procurement, open-source dependency adoption, third-party content licensing, M&A IPR transfer — and how each route results in an inventory entry",
+    must_contain  = [
+        ChecklistItem("item:A.5.32:intake_procurement", "Procurement intake — every commercial software purchase routes through licence review and inventory registration before deployment",            "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.32:intake_opensource",  "Open-source adoption path — dependency additions pass a licence-compatibility gate; results recorded in the inventory",                          "must", False, "27002:5.32 — third-party"),
+        ChecklistItem("item:A.5.32:intake_content",     "Third-party content licensing (images, fonts, datasets, AI training data) — intake confirms permitted use and records terms",                    "must", False, "27002:5.32 — protect IPR"),
+        ChecklistItem("item:A.5.32:intake_ma",          "M&A or contractor-handover intake — IPR transferred in is inventoried and ownership re-confirmed",                                                "must", False, "27002:5.32 — completeness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.32:intake_block_path",  "Block path for non-compliant intake (e.g., GPL component in a closed-source product) — rejection and alternatives sourcing process",            "should", False, "Drift prevention"),
+        ChecklistItem("item:A.5.32:intake_a519_link",   "Cross-link to A.5.19 supplier risk — supplier-supplied IPR follows the supplier-onboarding flow",                                                 "should", False, "Cross-control coherence"),
+    ],
+)
+
+REQ_A532_AUDIT_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.32:ipr_audit_review",
+    control_ref     = "A.5.32",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic IPR and Licence Audit",
+    trigger_type    = "universal",
+    description     = "Periodic audit reconciling deployed software / used content against the inventory and licence entitlements. Catches drift the intake and procedure leaves miss — over-deployment of seat-limited licences, expired licences still in use, missing attribution, undeclared open-source components",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.32:audit_cadence",      "Audit date within the planned interval (typically annual; more frequent if a vendor audit risk is high)",                                        "must", False, "Drift prevention"),
+        ChecklistItem("item:A.5.32:audit_reviewer",     "Reviewer identity and role (procurement / legal / engineering)",                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.5.32:audit_entitlement",  "Entitlement check — deployed seats/cores vs licence allowance per commercial entry, exceptions remediated",                                      "must", False, "27002:5.32 — protect"),
+        ChecklistItem("item:A.5.32:audit_opensource",   "Open-source attribution and licence-obligation check (NOTICE files, source-availability where required)",                                          "must", False, "27002:5.32 — third-party IPR"),
+        ChecklistItem("item:A.5.32:audit_expiry",       "Expired/expiring licences flagged and renewal or removal completed",                                                                              "must", False, "Continuity / drift"),
+        ChecklistItem("item:A.5.32:audit_inventory_update","Inventory updated as a result of the audit with reference to this review",                                                                     "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.32:audit_dr_test",      "Disposal of unused licences considered (cost optimisation alongside compliance)",                                                                  "should", False, "Adjacent value"),
+        ChecklistItem("item:A.5.32:audit_next_date",    "Next planned audit date stated",                                                                                                                    "should", False, "Planning"),
     ],
 )
 
@@ -4463,16 +4842,30 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A52_REVIEW,
 
     # Universal — ISO 27001 Annex A.5 bulk curation (Phase B, 2026-05-22).
-    # Numerical order; A.5.2 / A.5.18 (above, now 4-leaf), A.5.23 / A.5.24
-    # already exist above as REQ_CLOUD_SERVICES_POLICY / REQ_INCIDENT_RESPONSE
-    # (still 1-leaf, pending v2 promotion per [[curation-program-full-multi-leaf]]).
+    # Numerical order. 4-leaf curations are interleaved in numeric order:
+    #   - A.5.2 / A.5.18 above (policy_program / operational_process)
+    #   - A.5.5 / A.5.6 / A.5.9 / A.5.31 / A.5.32 (records_program, 2026-05-29)
+    # A.5.23 / A.5.24 already exist above as REQ_CLOUD_SERVICES_POLICY /
+    # REQ_INCIDENT_RESPONSE (still 1-leaf, pending v2 promotion).
     REQ_A53_SEGREGATION_OF_DUTIES,
     REQ_A54_MANAGEMENT_RESPONSIBILITIES,
-    REQ_A55_AUTHORITY_CONTACTS,
-    REQ_A56_SIG_CONTACTS,
+    # A.5.5 — 4-leaf records_program (2026-05-29)
+    REQ_A55_AUTHORITY_REGISTER,
+    REQ_A55_MAINTENANCE_PROCEDURE,
+    REQ_A55_APPLICABLE_AUTHORITIES_SCOPE,
+    REQ_A55_REVIEW,
+    # A.5.6 — 4-leaf records_program (2026-05-29)
+    REQ_A56_SIG_REGISTER,
+    REQ_A56_ENGAGEMENT_PROCEDURE,
+    REQ_A56_RISK_TOPIC_SCOPE,
+    REQ_A56_REVIEW,
     REQ_A57_THREAT_INTELLIGENCE,
     REQ_A58_PROJECT_MANAGEMENT_SECURITY,
-    REQ_A59_ASSET_INVENTORY,
+    # A.5.9 — 4-leaf records_program (2026-05-29; register/review both freshness=90)
+    REQ_A59_ASSET_REGISTER,
+    REQ_A59_LIFECYCLE_PROCEDURE,
+    REQ_A59_DISCOVERY_UPSTREAM,
+    REQ_A59_RECONCILIATION_REVIEW,
     REQ_A510_ACCEPTABLE_USE,
     REQ_A511_RETURN_OF_ASSETS,
     REQ_A512_INFORMATION_CLASSIFICATION,
@@ -4491,8 +4884,16 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A528_EVIDENCE_HANDLING,
     REQ_A529_DISRUPTION_SECURITY,
     REQ_A530_ICT_CONTINUITY,
-    REQ_A531_LEGAL_REGULATORY_REGISTER,
-    REQ_A532_INTELLECTUAL_PROPERTY,
+    # A.5.31 — 4-leaf records_program (2026-05-29; review freshness=180)
+    REQ_A531_OBLIGATIONS_REGISTER,
+    REQ_A531_MAINTENANCE_PROCEDURE,
+    REQ_A531_APPLICABLE_OBLIGATIONS_SCOPE,
+    REQ_A531_REVIEW,
+    # A.5.32 — 4-leaf records_program adapted (2026-05-29; procedure leaf retained)
+    REQ_A532_PROTECTION_PROCEDURE,
+    REQ_A532_LICENSED_INVENTORY,
+    REQ_A532_ACQUIRED_WORKS_UPSTREAM,
+    REQ_A532_AUDIT_REVIEW,
     REQ_A533_RECORDS_PROTECTION,
     REQ_A534_PII_PROTECTION,
     REQ_A535_INDEPENDENT_REVIEW,
