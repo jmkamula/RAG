@@ -949,44 +949,181 @@ REQ_A52_REVIEW = EvidenceRequirement(
     ],
 )
 
-REQ_A53_SEGREGATION_OF_DUTIES = EvidenceRequirement(
+# ── Annex A.5.3 — Segregation of duties — policy_program 4-leaf ───────────────
+# Promoted 2026-05-29 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. policy_program spine adapted as
+# governance-wrapper: primary artefact is the segregation matrix (not a policy
+# document), surrounded by approval + communication_record + review_record
+# siblings. The matrix leaf id is preserved; the three siblings are new.
+# Authority: ISO 27001 Clause 5.3 makes role assignment a top-management
+# responsibility; ISO 27002:2022 § 5.3 implementation guidance details
+# conflict identification and compensating controls.
+
+REQ_A53_SEGREGATION_MATRIX = EvidenceRequirement(
     id            = "req:A.5.3:segregation_of_duties",
     control_ref   = "A.5.3",
     standard_id   = "ISO27001:2022",
     evidence_type = "segregation_matrix",
     title         = "Segregation of Duties Matrix",
     trigger_type  = "universal",
-    description   = "A.5.3 requires conflicting duties and conflicting areas of responsibility to be segregated. Evidence is a matrix or analysis that identifies conflict pairs and the mechanism preventing one person from holding both",
+    description   = "A.5.3 requires conflicting duties and conflicting areas of responsibility to be segregated. The matrix identifies conflict pairs and the mechanism preventing one person from holding both. Approval, communication and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.3:conflict_pairs",    "Conflicting duty pairs identified (e.g. requestor vs approver, developer vs production deployer)", "must", False, "A.5.3 — conflicting duties"),
-        ChecklistItem("item:A.5.3:separation_method", "Separation mechanism stated per pair (different people, different systems, four-eyes)", "must", False, "A.5.3 — segregated"),
-        ChecklistItem("item:A.5.3:compensating",      "Compensating controls where full separation is not feasible (small-team exceptions)", "must", False, "A.5.3 — risk-based"),
-        ChecklistItem("item:A.5.3:owner",             "Named owner of the matrix accountable for its maintenance", "must", False, "Accountability"),
+        ChecklistItem("item:A.5.3:conflict_pairs",    "Conflicting duty pairs identified (e.g. requestor vs approver, developer vs production deployer, vendor relationship vs payment authorisation)", "must", False, "27002:5.3a"),
+        ChecklistItem("item:A.5.3:separation_method", "Separation mechanism stated per pair (different people, different systems, four-eyes, time-bound role swaps)",                                  "must", False, "27002:5.3b"),
+        ChecklistItem("item:A.5.3:compensating",      "Compensating controls where full separation is not feasible (small-team exceptions, supervisory review, automated logging)",                    "must", False, "27002:5.3c — small organisations"),
+        ChecklistItem("item:A.5.3:coverage_scope",    "Scope of coverage stated (functional areas, systems, processes covered by the matrix)",                                                          "must", False, "27002:5.3"),
+        ChecklistItem("item:A.5.3:owner",             "Named owner of the matrix accountable for its maintenance",                                                                                      "must", False, "Accountability — Clause 5.3"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.3:coverage_scope",    "Scope of coverage stated (functional areas, systems, processes)", "should", False, "Audit clarity"),
-        ChecklistItem("item:A.5.3:exception_process", "Exception process for temporary or unavoidable conflicts", "should", False, "Real-world flexibility"),
+        ChecklistItem("item:A.5.3:exception_process", "Exception process for temporary or unavoidable conflicts (e.g. on-call coverage breaking normal separation)",                                    "should", False, "Real-world flexibility"),
+        ChecklistItem("item:A.5.3:a52_link",          "Cross-link to A.5.2 responsibility matrix — conflicts identified in A.5.2 inform A.5.3 separation decisions",                                    "should", False, "Cross-control coherence"),
     ],
 )
 
-REQ_A54_MANAGEMENT_RESPONSIBILITIES = EvidenceRequirement(
+REQ_A53_APPROVAL = EvidenceRequirement(
+    id            = "req:A.5.3:management_approval",
+    control_ref   = "A.5.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "approval",
+    title         = "Top Management Approval of Segregation Matrix",
+    trigger_type  = "universal",
+    description   = "Clause 5.3 makes assignment of conflicting-duty controls a top-management responsibility. The approval may be a signed cover page on the matrix, a board minute, or a delegated equivalent — any form that names a top-management signatory, a date, and the specific matrix version being approved",
+    must_contain  = [
+        ChecklistItem("item:A.5.3:approval_signatory", "Signatory at top-management level (CEO, board chair, or delegated equivalent)",       "must", False, "Clause 5.3"),
+        ChecklistItem("item:A.5.3:approval_date",      "Approval date recorded",                                                              "must", False, "Clause 5.3"),
+        ChecklistItem("item:A.5.3:approval_target",    "Reference to the specific version of the segregation matrix being approved",         "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.3:approval_authority", "Statement of the signatory's authority to approve (delegation chain if not CEO)",    "should", False, "Accountability"),
+    ],
+)
+
+REQ_A53_COMMUNICATION = EvidenceRequirement(
+    id            = "req:A.5.3:communication_record",
+    control_ref   = "A.5.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "communication_record",
+    title         = "Segregation Matrix Communication Record",
+    trigger_type  = "universal",
+    description   = "Affected role-holders must know their conflicts and the separation mechanisms that apply to them — an approved-but-unknown matrix doesn't prevent anything. Evidence must show active distribution (date, audience, channel), not just availability of the matrix on an intranet",
+    must_contain  = [
+        ChecklistItem("item:A.5.3:comm_date",         "Date of publication/communication",                                                   "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.3:comm_audience",     "Audience reached (affected role-holders or all relevant function leads)",             "must", False, "27002:5.3 — implemented"),
+        ChecklistItem("item:A.5.3:comm_channel",      "Channel used (intranet publication, role-holder briefing, manager cascade)",          "must", False, "Operational sufficiency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.3:comm_a64_link",     "Linkage into A.6.4 disciplinary process — non-compliance with separation has stated consequence", "should", False, "Enforcement"),
+        ChecklistItem("item:A.5.3:comm_onboarding",   "Communication built into onboarding for new role-holders in affected positions",      "should", False, "Sustained communication"),
+    ],
+)
+
+REQ_A53_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.3:periodic_review",
+    control_ref     = "A.5.3",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Segregation of Duties Review",
+    trigger_type    = "universal",
+    description     = "Org structure shifts (new roles, reorganisations, M&A) create new conflict pairs and obsolete old ones. The review captures who reviewed the matrix, when, and the outcome — and propagates corrections back to the matrix and compensating controls",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.3:review_date",       "Review date within the planned interval",                                             "must", False, "27002:5.3 — periodic review"),
+        ChecklistItem("item:A.5.3:review_reviewer",   "Reviewer identity and role (typically risk owner or compliance lead with input from function leads)", "must", False, "Accountability"),
+        ChecklistItem("item:A.5.3:review_outcome",    "Outcome per conflict pair (no change / amended / retired / new pair added)",          "must", False, "27002:5.3"),
+        ChecklistItem("item:A.5.3:review_actions",    "Actions captured where compensating controls failed in practice (operational incidents, audit findings)", "must", False, "27002:5.3c — risk-based"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.3:review_triggers",   "Ad-hoc triggers listed (reorg, M&A, new business line, key role departure) prompting unscheduled review", "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.3:review_next_date",  "Next planned review date stated",                                                     "should", False, "Planning"),
+    ],
+)
+
+# ── Annex A.5.4 — Management responsibilities — policy_program 4-leaf ─────────
+# Promoted 2026-05-29 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. policy_program spine: management
+# directive (the artefact requiring all personnel to apply InfoSec) +
+# approval + communication_record + periodic review. The directive leaf id is
+# preserved; three siblings are new.
+# Authority: ISO 27002:2022 § 5.4 implementation guidance items a–e; Clause
+# 5.1 leadership commitment overlays approval.
+
+REQ_A54_MANAGEMENT_DIRECTIVE = EvidenceRequirement(
     id            = "req:A.5.4:management_responsibilities",
     control_ref   = "A.5.4",
     standard_id   = "ISO27001:2022",
     evidence_type = "management_directive",
     title         = "Management Directive on Information Security Compliance",
     trigger_type  = "universal",
-    description   = "A.5.4 requires management to require all personnel to apply information security per the policy framework. Evidence is a management directive, mandate letter, or equivalent statement that personnel are bound by InfoSec policies and procedures",
+    description   = "A.5.4 requires management to require all personnel to apply information security per the policy framework. The directive itself is the artefact — a mandate letter, board statement, or equivalent that binds personnel to InfoSec policies. Approval, communication and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.4:mandate_statement", "Statement that personnel are required to apply InfoSec policies, topic-specific policies, and procedures", "must", False, "A.5.4 — require all personnel"),
-        ChecklistItem("item:A.5.4:scope_personnel",   "Applicability to all personnel (employees, contractors, third parties acting on behalf)", "must", False, "A.5.4 — all personnel"),
-        ChecklistItem("item:A.5.4:policy_references", "Names or references the in-scope policies and procedures", "must", False, "A.5.4 — in accordance with"),
-        ChecklistItem("item:A.5.4:enforcement",       "Statement of consequence for non-compliance (link to HR disciplinary process)", "must", False, "A.5.4 — require"),
-        ChecklistItem("item:A.5.4:management_signature","Signed by senior management with date", "must", False, "A.5.4 — management"),
+        ChecklistItem("item:A.5.4:mandate_statement", "Statement that personnel are required to apply InfoSec policies, topic-specific policies, and procedures", "must", False, "27002:5.4 — require"),
+        ChecklistItem("item:A.5.4:scope_personnel",   "Applicability to all personnel (employees, contractors, third parties acting on behalf of the organisation)", "must", False, "27002:5.4 — all personnel"),
+        ChecklistItem("item:A.5.4:policy_references", "Names or references the in-scope policies, topic-specific policies, and procedures",     "must", False, "27002:5.4 — in accordance with"),
+        ChecklistItem("item:A.5.4:competence_link",   "Link to competence and training requirement (A.7.2 / Clause 7.2) so personnel know how to comply", "must", False, "27002:5.4d"),
+        ChecklistItem("item:A.5.4:enforcement",       "Statement of consequence for non-compliance (link to HR disciplinary process — A.6.4)",  "must", False, "27002:5.4e"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.4:onboarding_step",   "Distribution at onboarding for new personnel referenced", "should", False, "New-joiner coverage"),
-        ChecklistItem("item:A.5.4:periodic_refresh",  "Periodic re-acknowledgement referenced (annual at minimum)", "should", False, "Ongoing reinforcement"),
+        ChecklistItem("item:A.5.4:risk_awareness",    "Expectation that personnel report identified risks and incidents (link to A.6.8)",       "should", False, "27002:5.4 — awareness"),
+        ChecklistItem("item:A.5.4:role_specifics",    "Role-specific responsibilities cross-referenced (A.5.2 responsibility matrix)",          "should", False, "Cross-control coherence"),
+    ],
+)
+
+REQ_A54_APPROVAL = EvidenceRequirement(
+    id            = "req:A.5.4:management_approval",
+    control_ref   = "A.5.4",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "approval",
+    title         = "Top Management Approval of the InfoSec Directive",
+    trigger_type  = "universal",
+    description   = "Clause 5.1 leadership commitment requires top management to demonstrate active sponsorship of the ISMS — the directive's authority derives from that sponsorship. The approval may be a signed cover page on the directive, a board minute, or a delegated equivalent that names a top-management signatory, a date, and the specific directive version being approved",
+    must_contain  = [
+        ChecklistItem("item:A.5.4:approval_signatory", "Signatory at top-management level (CEO, board chair, or delegated equivalent)",        "must", False, "Clause 5.1"),
+        ChecklistItem("item:A.5.4:approval_date",      "Approval date recorded",                                                               "must", False, "Clause 5.1"),
+        ChecklistItem("item:A.5.4:approval_target",    "Reference to the specific version of the management directive being approved",        "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.4:approval_authority", "Statement of the signatory's authority (delegation chain if not CEO)",                "should", False, "Accountability"),
+    ],
+)
+
+REQ_A54_COMMUNICATION = EvidenceRequirement(
+    id            = "req:A.5.4:communication_record",
+    control_ref   = "A.5.4",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "communication_record",
+    title         = "Management Directive Communication Record",
+    trigger_type  = "universal",
+    description   = "A directive that personnel haven't seen is not an applied directive. Evidence must show active distribution to all personnel and, critically, that new personnel are reached at onboarding — not just availability of the directive on an intranet",
+    must_contain  = [
+        ChecklistItem("item:A.5.4:comm_date",         "Date of publication/communication",                                                    "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.4:comm_audience",     "Audience reached (all personnel, including contractors and third parties in scope)",   "must", False, "27002:5.4 — all personnel"),
+        ChecklistItem("item:A.5.4:comm_channel",      "Channel used (all-hands briefing, intranet publication, manager cascade, training module)", "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.4:comm_onboarding",   "Distribution at onboarding for new personnel evidenced (induction pack, mandatory module)", "must", False, "27002:5.4 — new-joiner coverage"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.4:comm_acknowledgement","Personnel acknowledgement captured (signature, e-attestation, training completion)", "should", False, "Reinforces personal accountability"),
+        ChecklistItem("item:A.5.4:comm_refresh",      "Periodic re-acknowledgement referenced (annual at minimum)",                           "should", False, "Ongoing reinforcement"),
+    ],
+)
+
+REQ_A54_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.4:periodic_review",
+    control_ref     = "A.5.4",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Review of the Management Directive",
+    trigger_type    = "universal",
+    description     = "The directive must stay aligned with the policy framework it references — when policies are renamed, retired, or added the directive becomes stale. Review captures who reviewed, when, and whether the policy references and enforcement linkages still hold",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.4:review_date",       "Review date within the planned interval",                                              "must", False, "Periodic review"),
+        ChecklistItem("item:A.5.4:review_reviewer",   "Reviewer identity and role (typically CISO or compliance lead, validated by top management)", "must", False, "Accountability"),
+        ChecklistItem("item:A.5.4:review_outcome",    "Outcome captured (no change / amended / re-issued) and policy-reference drift checked", "must", False, "Periodic review"),
+        ChecklistItem("item:A.5.4:review_actions",    "Actions captured where the directive needed amendment (policy reorg, scope change, new personnel categories)", "must", False, "Continual improvement"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.4:review_triggers",   "Ad-hoc triggers listed (major policy reorg, M&A, regulatory change) prompting unscheduled review", "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.4:review_next_date",  "Next planned review date stated",                                                      "should", False, "Planning"),
     ],
 )
 
@@ -1321,24 +1458,94 @@ REQ_A59_RECONCILIATION_REVIEW = EvidenceRequirement(
     ],
 )
 
-REQ_A510_ACCEPTABLE_USE = EvidenceRequirement(
+# ── Annex A.5.10 — Acceptable use — policy_program 4-leaf ─────────────────────
+# Promoted 2026-05-29 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. policy_program spine: AUP + approval +
+# communication_record + periodic review. The policy leaf id is preserved; the
+# three siblings are new. Acceptable-use cases hinge on the user having seen
+# and acknowledged the rules, so the communication leaf is load-bearing.
+# Authority: ISO 27002:2022 § 5.10 implementation guidance.
+
+REQ_A510_POLICY = EvidenceRequirement(
     id            = "req:A.5.10:acceptable_use_policy",
     control_ref   = "A.5.10",
     standard_id   = "ISO27001:2022",
     evidence_type = "policy",
     title         = "Acceptable Use Policy",
     trigger_type  = "universal",
-    description   = "A.5.10 requires rules for acceptable use and procedures for handling information and associated assets. Evidence is an Acceptable Use Policy (AUP) covering both general principles and the handling rules per asset/information class",
+    description   = "A.5.10 requires rules for acceptable use and procedures for handling information and associated assets. The AUP covers both general principles and the handling rules per asset/information class. Approval, communication and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.10:scope",            "Scope of the policy (which assets, which users, which information classes)", "must", False, "A.5.10 — rules for acceptable use"),
-        ChecklistItem("item:A.5.10:acceptable_uses",  "Acceptable use rules stated (work purposes, identified personal-use boundaries)", "must", False, "A.5.10 — acceptable use"),
-        ChecklistItem("item:A.5.10:prohibited_uses",  "Prohibited use rules stated (unlawful, harmful, security-bypassing activities)", "must", False, "A.5.10 — rules"),
-        ChecklistItem("item:A.5.10:handling_procedures","Handling procedures per information class (storage, transmission, disposal)", "must", False, "A.5.10 — procedures for handling"),
-        ChecklistItem("item:A.5.10:enforcement",      "Enforcement and disciplinary consequences referenced", "must", False, "A.5.10 — implemented"),
+        ChecklistItem("item:A.5.10:scope",              "Scope of the policy (which assets, which users — employees / contractors / third parties — which information classes)", "must", False, "27002:5.10 — scope"),
+        ChecklistItem("item:A.5.10:acceptable_uses",    "Acceptable use rules stated (work purposes, identified personal-use boundaries, BYOD where applicable)",               "must", False, "27002:5.10a"),
+        ChecklistItem("item:A.5.10:prohibited_uses",    "Prohibited use rules stated (unlawful, harmful, security-bypassing activities, unauthorised software)",                "must", False, "27002:5.10b"),
+        ChecklistItem("item:A.5.10:handling_procedures","Handling procedures per information class (storage, transmission, retention, disposal) aligned with A.5.12",          "must", False, "27002:5.10 — handling"),
+        ChecklistItem("item:A.5.10:monitoring",         "Monitoring expectations stated transparently (what the org may inspect, under what conditions)",                       "must", False, "27002:5.10c — monitoring transparency"),
+        ChecklistItem("item:A.5.10:enforcement",        "Enforcement and disciplinary consequences referenced (link to A.6.4 disciplinary process)",                            "must", False, "27002:5.10 — implemented"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.10:byod",             "BYOD provisions where personal devices are used for work", "should", False, "Modern workforce"),
-        ChecklistItem("item:A.5.10:social_media",     "Social media usage and corporate-information disclosure rules", "should", False, "Reputational risk"),
+        ChecklistItem("item:A.5.10:byod",             "BYOD provisions where personal devices are used for work",                                                                "should", False, "Modern workforce"),
+        ChecklistItem("item:A.5.10:social_media",     "Social media usage and corporate-information disclosure rules",                                                          "should", False, "Reputational risk"),
+        ChecklistItem("item:A.5.10:remote_work",      "Remote and teleworking provisions where physical environment is outside the org's control",                              "should", False, "27002:5.10 — context"),
+    ],
+)
+
+REQ_A510_APPROVAL = EvidenceRequirement(
+    id            = "req:A.5.10:management_approval",
+    control_ref   = "A.5.10",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "approval",
+    title         = "Management Approval of the Acceptable Use Policy",
+    trigger_type  = "universal",
+    description   = "AUPs are enforceable only when management has explicitly approved them — the approval establishes the authority behind the disciplinary consequences. The approval names a signatory at the appropriate management level, a date, and the specific policy version",
+    must_contain  = [
+        ChecklistItem("item:A.5.10:approval_signatory", "Signatory at appropriate management level (typically CISO or HR director, with top-management endorsement)",   "must", False, "Clause 5.1 + 5.10"),
+        ChecklistItem("item:A.5.10:approval_date",      "Approval date recorded",                                                                                       "must", False, "Clause 5.1"),
+        ChecklistItem("item:A.5.10:approval_target",    "Reference to the specific version of the AUP being approved",                                                  "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.10:approval_authority", "Statement of the signatory's authority (delegation chain if not top-management)",                              "should", False, "Accountability"),
+    ],
+)
+
+REQ_A510_COMMUNICATION = EvidenceRequirement(
+    id            = "req:A.5.10:communication_record",
+    control_ref   = "A.5.10",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "communication_record",
+    title         = "Acceptable Use Policy Communication Record",
+    trigger_type  = "universal",
+    description   = "AUP enforcement requires the user to have been informed of the rules — courts and tribunals routinely hinge on this. Evidence must show active distribution and, ideally, individual acknowledgement (signature, click-through, training completion) — not just availability on an intranet",
+    must_contain  = [
+        ChecklistItem("item:A.5.10:comm_date",         "Date of publication/communication",                                                          "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.10:comm_audience",     "Audience reached (all in-scope users, including new joiners and contractors)",               "must", False, "27002:5.10 — all relevant personnel"),
+        ChecklistItem("item:A.5.10:comm_channel",      "Channel used (mandatory training module, intranet publication with notification, signature campaign)", "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.10:comm_acknowledgement","User-level acknowledgement captured (e-signature, training completion record, click-through)", "must", False, "Enforceability — burden of proof"),
+        ChecklistItem("item:A.5.10:comm_onboarding",   "Distribution at onboarding for new personnel evidenced (induction pack, mandatory module)",  "must", False, "27002:5.10 — new joiners"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.10:comm_refresh",      "Periodic re-acknowledgement (annual at minimum) referenced",                                 "should", False, "Sustained communication"),
+        ChecklistItem("item:A.5.10:comm_translations", "Translations or language considerations where the workforce is multilingual",                "should", False, "Accessibility"),
+    ],
+)
+
+REQ_A510_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.10:periodic_review",
+    control_ref     = "A.5.10",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Acceptable Use Policy Review",
+    trigger_type    = "universal",
+    description     = "AUPs decay fast — new technologies (AI tools, new collaboration platforms), new regulations (data residency), and new threat patterns (social engineering vectors) all require policy updates. Review captures who reviewed, when, and whether the rules still cover the actual use patterns",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.10:review_date",       "Review date within the planned interval",                                                  "must", False, "Periodic review"),
+        ChecklistItem("item:A.5.10:review_reviewer",   "Reviewer identity and role (typically CISO with HR and legal input)",                       "must", False, "Accountability"),
+        ChecklistItem("item:A.5.10:review_outcome",    "Outcome captured (no change / amended / re-issued) with rationale per amendment",          "must", False, "Periodic review"),
+        ChecklistItem("item:A.5.10:review_use_patterns","Use-pattern check — new technologies or behaviours that need explicit rules added",       "must", False, "Drift catch"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.10:review_triggers",   "Ad-hoc triggers listed (new technology rollout, incident lessons-learned, regulatory change)", "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.10:review_next_date",  "Next planned review date stated",                                                          "should", False, "Planning"),
     ],
 )
 
@@ -1363,24 +1570,95 @@ REQ_A511_RETURN_OF_ASSETS = EvidenceRequirement(
     ],
 )
 
-REQ_A512_INFORMATION_CLASSIFICATION = EvidenceRequirement(
+# ── Annex A.5.12 — Information classification — policy_program 4-leaf ─────────
+# Promoted 2026-05-29 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. policy_program spine: classification
+# scheme + approval + communication_record + periodic review. The scheme leaf
+# id is preserved; three siblings are new. Classification is the upstream of
+# A.5.13 (labelling) and A.5.10 (handling rules), so the communication leaf
+# must reach not just data owners but every person who creates information.
+# Authority: ISO 27002:2022 § 5.12 implementation guidance.
+
+REQ_A512_SCHEME = EvidenceRequirement(
     id            = "req:A.5.12:information_classification_scheme",
     control_ref   = "A.5.12",
     standard_id   = "ISO27001:2022",
     evidence_type = "classification_scheme",
     title         = "Information Classification Scheme",
     trigger_type  = "universal",
-    description   = "A.5.12 requires information to be classified per the organization's security needs across confidentiality, integrity, availability, and interested-party requirements. Evidence is a classification scheme defining levels and handling implications",
+    description   = "A.5.12 requires information to be classified per the organisation's security needs across confidentiality, integrity, availability, and interested-party requirements. The scheme defines levels and handling implications. Approval, communication and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.12:levels_defined",  "Classification levels defined (e.g. Public / Internal / Confidential / Restricted)", "must", False, "A.5.12 — classified"),
-        ChecklistItem("item:A.5.12:cia_dimensions",  "Each level addresses confidentiality, integrity, and availability dimensions", "must", False, "A.5.12 — based on C/I/A"),
-        ChecklistItem("item:A.5.12:level_definitions","Definition and indicative examples per level", "must", False, "A.5.12 — needs of the organization"),
-        ChecklistItem("item:A.5.12:handling_per_level","Handling implications per level (links to A.5.13 labelling, A.5.10 acceptable use)", "must", False, "A.5.12 — security needs"),
-        ChecklistItem("item:A.5.12:classification_authority","Decision authority for classifying information (owner-led by default)", "must", False, "A.5.12 — classified"),
+        ChecklistItem("item:A.5.12:levels_defined",     "Classification levels defined (e.g. Public / Internal / Confidential / Restricted)",                       "must", False, "27002:5.12 — classified"),
+        ChecklistItem("item:A.5.12:cia_dimensions",     "Each level addresses confidentiality, integrity, and availability dimensions",                            "must", False, "27002:5.12 — based on C/I/A"),
+        ChecklistItem("item:A.5.12:level_definitions",  "Definition and indicative examples per level",                                                            "must", False, "27002:5.12 — needs of the organisation"),
+        ChecklistItem("item:A.5.12:handling_per_level", "Handling implications per level (links to A.5.13 labelling, A.5.10 acceptable use, A.5.14 transfer)",     "must", False, "27002:5.12 — security needs"),
+        ChecklistItem("item:A.5.12:classification_authority","Decision authority for classifying information (owner-led by default)",                              "must", False, "27002:5.12 — classified"),
+        ChecklistItem("item:A.5.12:default_class",      "Default classification for unclassified information (typically 'Internal' as fail-safe)",                  "must", False, "27002:5.12 — pragmatic adoption"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.12:interested_parties","Considerations for interested-party requirements (regulator-imposed classifications)", "should", False, "Completeness"),
-        ChecklistItem("item:A.5.12:declassification","Declassification or reclassification process", "should", False, "Lifecycle"),
+        ChecklistItem("item:A.5.12:interested_parties", "Considerations for interested-party requirements (regulator-imposed classifications, contract-imposed)", "should", False, "Completeness"),
+        ChecklistItem("item:A.5.12:declassification",   "Declassification or reclassification process",                                                            "should", False, "Lifecycle"),
+        ChecklistItem("item:A.5.12:aggregation",        "Aggregation rule (combined low-class data items that, in aggregate, warrant higher class)",               "should", False, "Realistic threat model"),
+    ],
+)
+
+REQ_A512_APPROVAL = EvidenceRequirement(
+    id            = "req:A.5.12:management_approval",
+    control_ref   = "A.5.12",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "approval",
+    title         = "Management Approval of the Classification Scheme",
+    trigger_type  = "universal",
+    description   = "Classification determines handling, transfer, retention and disposal across most other A.5 / A.8 controls — disagreement on the scheme cascades into operational failure. Approval establishes the canonical scheme and the authority behind override decisions",
+    must_contain  = [
+        ChecklistItem("item:A.5.12:approval_signatory", "Signatory at appropriate management level (typically CISO or data-protection lead, with top-management endorsement)", "must", False, "Clause 5.1 + 5.12"),
+        ChecklistItem("item:A.5.12:approval_date",      "Approval date recorded",                                                                                              "must", False, "Clause 5.1"),
+        ChecklistItem("item:A.5.12:approval_target",    "Reference to the specific version of the classification scheme being approved",                                       "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.12:approval_authority", "Statement of the signatory's authority (delegation chain if not top-management)",                                     "should", False, "Accountability"),
+    ],
+)
+
+REQ_A512_COMMUNICATION = EvidenceRequirement(
+    id            = "req:A.5.12:communication_record",
+    control_ref   = "A.5.12",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "communication_record",
+    title         = "Classification Scheme Communication Record",
+    trigger_type  = "universal",
+    description   = "Every information creator (i.e. every employee) needs to know which level applies and how to classify their output — an unknown scheme produces unclassified information by default, which collapses A.5.13 and A.5.10 downstream. Evidence must show active distribution and ideally individual training completion",
+    must_contain  = [
+        ChecklistItem("item:A.5.12:comm_date",         "Date of publication/communication",                                                                                   "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.12:comm_audience",     "Audience reached (all information creators, owners, custodians — broader than just data owners)",                     "must", False, "27002:5.12 — all relevant personnel"),
+        ChecklistItem("item:A.5.12:comm_channel",      "Channel used (mandatory training module, classification guide, role-specific workshops)",                              "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.12:comm_training",     "Classification training completion captured at user level (proves users can apply the scheme)",                       "must", False, "Operational fitness"),
+        ChecklistItem("item:A.5.12:comm_onboarding",   "Distribution at onboarding for new personnel evidenced (induction pack, mandatory module)",                            "must", False, "27002:5.12 — new joiners"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.12:comm_refresh",      "Periodic refresher referenced (annual at minimum, especially after scheme amendments)",                                "should", False, "Sustained communication"),
+        ChecklistItem("item:A.5.12:comm_practical_aids","Practical aids referenced (decision tree, sensitivity-label automation, examples library)",                           "should", False, "Adoption"),
+    ],
+)
+
+REQ_A512_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.12:periodic_review",
+    control_ref     = "A.5.12",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Classification Scheme Review",
+    trigger_type    = "universal",
+    description     = "Classification schemes are the foundation of handling controls — a stale scheme produces stale handling. Review checks whether the levels still match the actual sensitivity gradient, whether new categories have emerged (e.g. AI training corpora), and whether downstream controls (A.5.13, A.5.10, A.5.14) still align",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.12:review_date",       "Review date within the planned interval",                                                                              "must", False, "Periodic review"),
+        ChecklistItem("item:A.5.12:review_reviewer",   "Reviewer identity and role (typically CISO with data-protection and business-line input)",                              "must", False, "Accountability"),
+        ChecklistItem("item:A.5.12:review_outcome",    "Outcome captured (no change / amended / re-issued) with rationale per amendment",                                       "must", False, "Periodic review"),
+        ChecklistItem("item:A.5.12:review_downstream", "Downstream-control alignment checked (A.5.13 labelling rules, A.5.10 handling rules, A.5.14 transfer still consistent)","must", False, "Cross-control coherence"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.12:review_triggers",   "Ad-hoc triggers listed (M&A, new regulator-imposed classes, new business line with novel sensitivities)",               "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.12:review_next_date",  "Next planned review date stated",                                                                                       "should", False, "Planning"),
     ],
 )
 
@@ -1427,25 +1705,97 @@ REQ_A514_INFORMATION_TRANSFER = EvidenceRequirement(
     ],
 )
 
-REQ_A515_ACCESS_CONTROL_POLICY = EvidenceRequirement(
+# ── Annex A.5.15 — Access control — policy_program 4-leaf ─────────────────────
+# Promoted 2026-05-29 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. policy_program spine: access control
+# policy + approval + communication_record + periodic review. The policy leaf
+# id is preserved; three siblings are new. The policy states the principles
+# (RBAC, least privilege, need-to-know); the provisioning *procedure* lives
+# at A.5.18 and is curated separately when A.5.18 promotes.
+# Authority: ISO 27002:2022 § 5.15 implementation guidance.
+
+REQ_A515_POLICY = EvidenceRequirement(
     id            = "req:A.5.15:access_control_policy",
     control_ref   = "A.5.15",
     standard_id   = "ISO27001:2022",
     evidence_type = "policy",
     title         = "Access Control Policy",
     trigger_type  = "universal",
-    description   = "A.5.15 requires rules controlling physical and logical access based on business and information security requirements. Evidence is an access control policy stating the principles and decision rules. The supporting procedure (rights provisioning) lives at A.5.18",
+    description   = "A.5.15 requires rules controlling physical and logical access based on business and information security requirements. The policy states the principles and decision rules; the provisioning procedure (lifecycle) lives at A.5.18. Approval, communication and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.15:physical_rules",  "Physical access rules (premises, server rooms, restricted areas)", "must", False, "A.5.15 — physical access"),
-        ChecklistItem("item:A.5.15:logical_rules",   "Logical access rules (systems, applications, network segments)", "must", False, "A.5.15 — logical access"),
-        ChecklistItem("item:A.5.15:rbac",            "Role-based access control as the default model", "must", False, "A.5.15 — based on business requirements"),
-        ChecklistItem("item:A.5.15:least_privilege", "Principle of least privilege stated", "must", False, "A.5.15 — security requirements"),
-        ChecklistItem("item:A.5.15:need_to_know",    "Principle of need-to-know stated", "must", False, "A.5.15 — security requirements"),
-        ChecklistItem("item:A.5.15:authorisation",   "Authorisation procedure for granting access (links to A.5.18)", "must", False, "A.5.15 — established"),
+        ChecklistItem("item:A.5.15:physical_rules",   "Physical access rules (premises, server rooms, restricted areas)",                                                "must", False, "27002:5.15 — physical access"),
+        ChecklistItem("item:A.5.15:logical_rules",    "Logical access rules (systems, applications, network segments)",                                                  "must", False, "27002:5.15 — logical access"),
+        ChecklistItem("item:A.5.15:rbac",             "Role-based access control as the default model with stated exceptions (attribute-based, individual grants)",      "must", False, "27002:5.15 — business requirements"),
+        ChecklistItem("item:A.5.15:least_privilege",  "Principle of least privilege stated",                                                                              "must", False, "27002:5.15 — security requirements"),
+        ChecklistItem("item:A.5.15:need_to_know",     "Principle of need-to-know stated",                                                                                 "must", False, "27002:5.15 — security requirements"),
+        ChecklistItem("item:A.5.15:authorisation",    "Authorisation rules — who can authorise access at which level (cross-link to A.5.18 procedure)",                  "must", False, "27002:5.15 — established"),
+        ChecklistItem("item:A.5.15:segregation_link", "Cross-link to A.5.3 segregation of duties — access decisions respect documented separation",                       "must", False, "Cross-control coherence"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.15:emergency_access","Emergency / break-glass access provisions", "should", False, "Operational continuity"),
-        ChecklistItem("item:A.5.15:periodic_review", "Periodic access review cadence stated (links to A.5.18 procedure)", "should", False, "Drift prevention"),
+        ChecklistItem("item:A.5.15:emergency_access", "Emergency / break-glass access provisions (with mandatory after-the-fact justification)",                          "should", False, "Operational continuity"),
+        ChecklistItem("item:A.5.15:third_party",      "Third-party / contractor access rules referenced (link to A.5.19 supplier relationships)",                          "should", False, "Coverage"),
+        ChecklistItem("item:A.5.15:review_cadence",   "Periodic access review cadence stated (typically quarterly for privileged, annual otherwise — link to A.5.18)",   "should", False, "Drift prevention"),
+    ],
+)
+
+REQ_A515_APPROVAL = EvidenceRequirement(
+    id            = "req:A.5.15:management_approval",
+    control_ref   = "A.5.15",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "approval",
+    title         = "Management Approval of the Access Control Policy",
+    trigger_type  = "universal",
+    description   = "Access decisions are the most-audited control area in ISMS audits — the approval makes the principles explicit and authoritative. Names a signatory at the appropriate management level, a date, and the specific policy version",
+    must_contain  = [
+        ChecklistItem("item:A.5.15:approval_signatory", "Signatory at appropriate management level (typically CISO with IT / business endorsement)",  "must", False, "Clause 5.1 + 5.15"),
+        ChecklistItem("item:A.5.15:approval_date",      "Approval date recorded",                                                                      "must", False, "Clause 5.1"),
+        ChecklistItem("item:A.5.15:approval_target",    "Reference to the specific version of the access control policy being approved",              "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.15:approval_authority", "Statement of the signatory's authority (delegation chain if not top-management)",            "should", False, "Accountability"),
+    ],
+)
+
+REQ_A515_COMMUNICATION = EvidenceRequirement(
+    id            = "req:A.5.15:communication_record",
+    control_ref   = "A.5.15",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "communication_record",
+    title         = "Access Control Policy Communication Record",
+    trigger_type  = "universal",
+    description   = "Access-granting decision-makers (managers, system owners, IT admins) and access-holders both need to know the rules. The policy's most common failure mode is mid-level managers granting access by default without checking the principles — communication must reach them specifically",
+    must_contain  = [
+        ChecklistItem("item:A.5.15:comm_date",         "Date of publication/communication",                                                                "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.15:comm_audience",     "Audience reached (decision-makers — managers, system owners, IT admins — plus all access-holders)", "must", False, "27002:5.15 — relevant parties"),
+        ChecklistItem("item:A.5.15:comm_channel",      "Channel used (manager briefing, IT admin training, intranet publication)",                          "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.15:comm_decision_makers","Decision-maker awareness specifically captured (manager training, system-owner briefing)",         "must", False, "Targeted communication"),
+        ChecklistItem("item:A.5.15:comm_onboarding",   "Onboarding coverage — new managers and admins receive the policy as part of role induction",        "must", False, "27002:5.15 — sustained"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.15:comm_refresh",      "Periodic refresher referenced (annual at minimum)",                                                "should", False, "Sustained communication"),
+        ChecklistItem("item:A.5.15:comm_a518_link",    "Tie-in with A.5.18 provisioning training — decision-makers know both the rules and the workflow",   "should", False, "Coherent rollout"),
+    ],
+)
+
+REQ_A515_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.15:periodic_review",
+    control_ref     = "A.5.15",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Access Control Policy Review",
+    trigger_type    = "universal",
+    description     = "Access control policies decay as the IT estate grows — new systems, new cloud services, new federated identity sources all stress the policy. Review checks whether the rules still cover the actual estate, whether least-privilege is still operationalised correctly, and whether downstream A.5.18 provisioning is aligned",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.15:review_date",       "Review date within the planned interval",                                                          "must", False, "Periodic review"),
+        ChecklistItem("item:A.5.15:review_reviewer",   "Reviewer identity and role (typically CISO with IT and identity-management input)",                "must", False, "Accountability"),
+        ChecklistItem("item:A.5.15:review_outcome",    "Outcome captured (no change / amended / re-issued) with rationale per amendment",                  "must", False, "Periodic review"),
+        ChecklistItem("item:A.5.15:review_estate",     "Estate-alignment check — new systems / cloud services added since last review reflected in policy", "must", False, "Drift catch"),
+        ChecklistItem("item:A.5.15:review_a518_link",  "A.5.18 provisioning procedure cross-checked for alignment with policy changes",                    "must", False, "Cross-control coherence"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.15:review_triggers",   "Ad-hoc triggers listed (M&A, new identity provider, major SaaS adoption, access-related incident)", "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.15:review_next_date",  "Next planned review date stated",                                                                  "should", False, "Planning"),
     ],
 )
 
@@ -4847,8 +5197,16 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     #   - A.5.5 / A.5.6 / A.5.9 / A.5.31 / A.5.32 (records_program, 2026-05-29)
     # A.5.23 / A.5.24 already exist above as REQ_CLOUD_SERVICES_POLICY /
     # REQ_INCIDENT_RESPONSE (still 1-leaf, pending v2 promotion).
-    REQ_A53_SEGREGATION_OF_DUTIES,
-    REQ_A54_MANAGEMENT_RESPONSIBILITIES,
+    # A.5.3 — 4-leaf policy_program (2026-05-29)
+    REQ_A53_SEGREGATION_MATRIX,
+    REQ_A53_APPROVAL,
+    REQ_A53_COMMUNICATION,
+    REQ_A53_REVIEW,
+    # A.5.4 — 4-leaf policy_program (2026-05-29)
+    REQ_A54_MANAGEMENT_DIRECTIVE,
+    REQ_A54_APPROVAL,
+    REQ_A54_COMMUNICATION,
+    REQ_A54_REVIEW,
     # A.5.5 — 4-leaf records_program (2026-05-29)
     REQ_A55_AUTHORITY_REGISTER,
     REQ_A55_MAINTENANCE_PROCEDURE,
@@ -4866,12 +5224,24 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A59_LIFECYCLE_PROCEDURE,
     REQ_A59_DISCOVERY_UPSTREAM,
     REQ_A59_RECONCILIATION_REVIEW,
-    REQ_A510_ACCEPTABLE_USE,
+    # A.5.10 — 4-leaf policy_program (2026-05-29)
+    REQ_A510_POLICY,
+    REQ_A510_APPROVAL,
+    REQ_A510_COMMUNICATION,
+    REQ_A510_REVIEW,
     REQ_A511_RETURN_OF_ASSETS,
-    REQ_A512_INFORMATION_CLASSIFICATION,
+    # A.5.12 — 4-leaf policy_program (2026-05-29)
+    REQ_A512_SCHEME,
+    REQ_A512_APPROVAL,
+    REQ_A512_COMMUNICATION,
+    REQ_A512_REVIEW,
     REQ_A513_INFORMATION_LABELLING,
     REQ_A514_INFORMATION_TRANSFER,
-    REQ_A515_ACCESS_CONTROL_POLICY,
+    # A.5.15 — 4-leaf policy_program (2026-05-29)
+    REQ_A515_POLICY,
+    REQ_A515_APPROVAL,
+    REQ_A515_COMMUNICATION,
+    REQ_A515_REVIEW,
     REQ_A516_IDENTITY_MANAGEMENT,
     REQ_A517_AUTHENTICATION_INFORMATION,
     REQ_A519_SUPPLIER_RISK_PROCEDURE,

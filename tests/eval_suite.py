@@ -923,6 +923,126 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Phase B policy_program family (commit pending 2026-05-29) ──────────
+    # Second Phase B bulk batch: 5 ISO A.5 policy/governance controls promoted
+    # to the policy_program 4-leaf spine (primary artefact + approval +
+    # communication_record + periodic review). A.5.3 uses a segregation_matrix
+    # primary leaf; A.5.4 uses a management_directive; A.5.10/A.5.12/A.5.15
+    # use the conventional policy/scheme artefact. A.5.15 already has the
+    # access control policy uploaded, so its engine signature is OFI at 1/4
+    # rather than NC at 0/4 — locks that distinction.
+
+    EvalCase(
+        id=51,
+        query="pending engine verdict for A.5.3",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program"],
+        expected_refs=["A.5.3"],
+        expected_type="posture_check",
+        must_contain=["A.5.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.3 (Segregation of duties) Phase B promotion to "
+            "policy_program 4-leaf with the matrix variant: segregation_matrix "
+            "+ approval + communication_record + periodic review. '0/4' is "
+            "the multi-leaf signature; the single-leaf predecessor would have "
+            "read '0/1'."
+        ),
+    ),
+
+    EvalCase(
+        id=52,
+        query="pending engine verdict for A.5.4",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program"],
+        expected_refs=["A.5.4"],
+        expected_type="posture_check",
+        must_contain=["A.5.4", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.4 (Management responsibilities) Phase B promotion to "
+            "policy_program 4-leaf with the directive variant: "
+            "management_directive + approval + communication_record + "
+            "periodic review."
+        ),
+    ),
+
+    EvalCase(
+        id=53,
+        query="pending engine verdict for A.5.10",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program"],
+        expected_refs=["A.5.10"],
+        expected_type="posture_check",
+        must_contain=["A.5.10", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.10 (Acceptable use) Phase B promotion to policy_program "
+            "4-leaf: acceptable_use_policy + approval + communication_record + "
+            "periodic review. AUPs are enforceability-sensitive — the "
+            "communication leaf carries an explicit user-acknowledgement item."
+        ),
+    ),
+
+    EvalCase(
+        id=54,
+        query="pending engine verdict for A.5.12",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program"],
+        expected_refs=["A.5.12"],
+        expected_type="posture_check",
+        must_contain=["A.5.12", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.12 (Information classification) Phase B promotion to "
+            "policy_program 4-leaf: classification_scheme + approval + "
+            "communication_record + periodic review. Classification feeds "
+            "A.5.13 / A.5.10 / A.5.14 downstream so the communication leaf "
+            "targets all information creators, not just data owners."
+        ),
+    ),
+
+    EvalCase(
+        id=55,
+        query="pending engine verdict for A.5.15",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "partial_evidence"],
+        expected_refs=["A.5.15"],
+        expected_type="posture_check",
+        # A.5.15 differs from the other 4 in this batch: the access control
+        # policy is already uploaded on Arion (legacy single-leaf evidence
+        # carried forward), so 1 of the 4 leaves is satisfied. Engine output
+        # is therefore 'OFI' at '1/4', not 'NC' at '0/4'. This locks the
+        # partial-evidence multi-leaf path — a useful complement to the
+        # 0/N-NC default the other Phase B cases exercise.
+        must_contain=["A.5.15", "engine proposes", "'OFI'", "1/4 children satisfied"],
+        must_not_contain=[
+            "0/4 children satisfied",
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.15 (Access control policy) Phase B promotion to "
+            "policy_program 4-leaf with the partial-evidence shape: the "
+            "policy leaf is satisfied (legacy upload) but approval, "
+            "communication and review leaves are not, so engine proposes "
+            "'OFI' at '1/4 children satisfied'. Companion to cases 46-50 "
+            "which all sit at 0/4."
+        ),
+    ),
+
     EvalCase(
         id=41,
         query="is A.5.30 compliant?",
