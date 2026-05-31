@@ -28,7 +28,7 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 60/67 PASS before any restart (67 cases; #24 + #25 known-stale;
+# Must be 60/68 PASS before any restart (68 cases; #24 + #25 known-stale;
 #   #3 + #21 also LLM-stochastic but ~85% PASS — not formally known-stale):
 #   #25 — "is Art.5 a non-conformity?" (anti-hallucination, since 2026-05-27)
 #   #24 — "what is our GDPR Art.32 status?" (~30-50% pass rate; LLM-stochastic
@@ -155,13 +155,14 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260531_*.csv (67 cases — 21 core + 18
+- Most recent: results/eval_20260531_*.csv (68 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
   5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
   1 Phase B op_process evidence-handling + 1 Phase B op_process project-security
-  + 1 Phase B op_process return-of-assets + 1 Phase B op_process labelling)
-- Score: 60/67 PASS, 0 WARN, 7 FAIL (some runs 61/67 or 62/67 due to #24
+  + 1 Phase B op_process return-of-assets + 1 Phase B op_process labelling +
+  1 Phase B policy_program information-transfer)
+- Score: 60/68 PASS, 0 WARN, 8 FAIL (some runs 61/68 or 62/68 due to #24
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -229,6 +230,11 @@ with d.session() as s:
   (review freshness inherited from A.5.12 parent scheme); new
   pii_overlay MUST pins ISO confidentiality × GDPR PII integration
   at spec level; cross-control links to A.5.12 scheme + A.7.10 media)
+- Case 68 locks in: Phase B policy_program information-transfer
+  (A.5.14; first policy_program batch since batch 2 — re-validates
+  spine consistency after 8 op_process batches; new legal_jurisdiction
+  MUST encodes GDPR Chap V Art.44-49 cross-border alignment at MUST
+  level — second ISO × GDPR integration MUST after pii_overlay)
 - Prior known-stale cases (#2, #3, #4, #24, #25, #28) restored to PASS on
   2026-05-25 via Path A: replayed status_before from posture_status_log to
   revert the 27 Stage-1-driven finding mutations, and stripped the offending
