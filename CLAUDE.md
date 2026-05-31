@@ -28,7 +28,7 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 60/70 PASS before any restart (70 cases; #24 + #25 known-stale;
+# Must be 60/71 PASS before any restart (71 cases; #24 + #25 known-stale;
 #   #3 + #21 also LLM-stochastic but ~85% PASS — not formally known-stale):
 #   #25 — "is Art.5 a non-conformity?" (anti-hallucination, since 2026-05-27)
 #   #24 — "what is our GDPR Art.32 status?" (~30-50% pass rate; LLM-stochastic
@@ -155,15 +155,15 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260531_*.csv (70 cases — 21 core + 18
+- Most recent: results/eval_20260531_*.csv (71 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
   5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
   1 Phase B op_process evidence-handling + 1 Phase B op_process project-security
   + 1 Phase B op_process return-of-assets + 1 Phase B op_process labelling +
   1 Phase B policy_program information-transfer + 1 Phase B op_process identity
-  + 1 Phase B op_process authentication-info)
-- Score: 60/70 PASS, 0 WARN, 10 FAIL (some runs 61/70 or 62/70 due to #24
+  + 1 Phase B op_process authentication-info + 1 Phase B op_process incident-planning)
+- Score: 60/71 PASS, 0 WARN, 11 FAIL (some runs 61/71 or 62/71 due to #24
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -250,6 +250,13 @@ with d.session() as s:
   gap; MFA SHOULD → MUST promotion (modern baseline, phishable auth
   no longer acceptable); review freshness 180d; cross-control links
   to A.5.16 identity, A.5.25/A.5.26 incident scope-expansion)
+- Case 71 locks in: Phase B operational_process incident-planning
+  (A.5.24; A.5.24 sits ABOVE the operational A.5.25-27/28 incident
+  family — strategic planning layer; per-exercise framework_exercise_
+  record lifecycle-end variant tracks READINESS DRILLS distinct from
+  real-incident records; third batch with GDPR-required MUSTs — new
+  rev_gdpr_72h_feasibility audits the 72h notification SLA empirically;
+  third consecutive SHOULD→MUST promotion (tested → exercise_cadence))
 - Prior known-stale cases (#2, #3, #4, #24, #25, #28) restored to PASS on
   2026-05-25 via Path A: replayed status_before from posture_status_log to
   revert the 27 Stage-1-driven finding mutations, and stripped the offending
