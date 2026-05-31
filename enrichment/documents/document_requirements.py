@@ -834,14 +834,32 @@ REQ_ART15_PROCESS_REVIEW = EvidenceRequirement(
     ],
 )
 
-# ── Annex A.5.1 — four-leaf curation (commit 3 — first full multi-leaf spec) ──
-# A.5.1 requires the InfoSec policy and topic-specific policies to be defined,
-# approved by management, published, communicated to relevant personnel, and
-# reviewed at planned intervals. The single existing REQ_ISMS_POLICY at clause
-# 5.2 only captures the policy artefact itself; A.5.1's auditor-expected
-# fulfilment is a stack of four distinct evidence pieces. Same policy PDF
-# can satisfy the policy leaf here AND the 5.2 leaf at the same time
-# (artefact ↔ leaf is many-to-many per the Tension 5 resolution).
+# ── Annex A.5.1 — Policies for information security — policy_program (4-leaf) ─
+# Originally curated as the FIRST multi-leaf spec in the codebase (legacy
+# Style v1). Aligned 2026-05-31 to the Phase B policy_program convention
+# (per [[curation-program-full-multi-leaf]]) — same shape as A.5.3/4/10/12/15
+# from batch 2: policy + approval + communication_record + review_record.
+#
+# Alignment-only changes (no MUST/SHOULD churn — engine signature preserved):
+#   - freshness_days = 365 added to the annual_review leaf (the original
+#     spec had no freshness, so the review leaf never went stale even after
+#     years; this matches the canonical policy_program convention)
+#   - citation rationale strings updated from legacy "A.5.1 — defined" /
+#     "A.5.1 — approved by management" form to the Phase B "27002:5.1 — …"
+#     form, consistent with batches 1-6
+#   - section header refreshed; original "commit 3 — first full multi-leaf
+#     spec" comment retained for archaeology in this block heading
+#
+# MUST/SHOULD ids and counts are preserved exactly. Engine signature on
+# tenant Arion stays OFI at 1/4 children satisfied (policy leaf 5/5;
+# approval + communication + review leaves 0/3 each). Cases 33/34/36/38
+# all locked to this verdict.
+#
+# Authority: ISO 27002:2022 § 5.1 — InfoSec policy defined, approved by
+# management, published, communicated to relevant personnel and interested
+# parties, reviewed at planned intervals or on significant change. Same
+# policy PDF can satisfy this leaf AND clause 5.2's REQ_ISMS_POLICY at the
+# same time (artefact ↔ leaf is many-to-many).
 
 REQ_A51_ISP_POLICY = EvidenceRequirement(
     id            = "req:A.5.1:isp_policy",
@@ -850,17 +868,17 @@ REQ_A51_ISP_POLICY = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Information Security Policy (Annex A.5.1)",
     trigger_type  = "universal",
-    description   = "A.5.1 requires an information security policy that defines principles, scope, and roles, and references topic-specific policies",
+    description   = "A.5.1 requires an information security policy that defines principles, scope, and roles, and references topic-specific policies. Approval, communication and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.1:scope",            "Scope of the policy defined (which assets, locations, personnel)", "must", False, "A.5.1 — defined"),
-        ChecklistItem("item:A.5.1:principles",       "Information security principles and objectives stated", "must", False, "A.5.1 — defined"),
-        ChecklistItem("item:A.5.1:roles",            "Roles and responsibilities for information security", "must", False, "A.5.1 — defined"),
-        ChecklistItem("item:A.5.1:legal_compliance", "Commitment to legal, regulatory and contractual compliance", "must", False, "A.5.1 — defined"),
-        ChecklistItem("item:A.5.1:topic_refs",       "References to topic-specific policies that flow from this one", "must", False, "A.5.1 — topic-specific policies"),
+        ChecklistItem("item:A.5.1:scope",            "Scope of the policy defined (which assets, locations, personnel)",                "must", False, "27002:5.1 — defined"),
+        ChecklistItem("item:A.5.1:principles",       "Information security principles and objectives stated",                            "must", False, "27002:5.1 — defined"),
+        ChecklistItem("item:A.5.1:roles",            "Roles and responsibilities for information security",                              "must", False, "27002:5.1 — defined"),
+        ChecklistItem("item:A.5.1:legal_compliance", "Commitment to legal, regulatory and contractual compliance",                       "must", False, "27002:5.1 — defined"),
+        ChecklistItem("item:A.5.1:topic_refs",       "References to topic-specific policies that flow from this one (e.g. A.5.10 AUP, A.5.12 classification, A.6.4 disciplinary)", "must", False, "27002:5.1 — topic-specific policies"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.1:version",          "Version number and effective date", "should", False, "Document control"),
-        ChecklistItem("item:A.5.1:owner",            "Policy owner named (typically CISO or equivalent)", "should", False, "Accountability"),
+        ChecklistItem("item:A.5.1:version",          "Version number and effective date",                                                "should", False, "Document control"),
+        ChecklistItem("item:A.5.1:owner",            "Policy owner named (typically CISO or equivalent)",                                "should", False, "Accountability"),
     ],
 )
 
@@ -873,12 +891,12 @@ REQ_A51_APPROVAL = EvidenceRequirement(
     trigger_type  = "universal",
     description   = "A.5.1 requires top management to approve the InfoSec policy. The approval can live inside the policy as a signed cover page, in a board minute, or as a separate signed cover letter — any form that names a top-management signatory and a date",
     must_contain  = [
-        ChecklistItem("item:A.5.1:approval_signatory", "Signatory at top-management level (CEO, board chair, or delegated equivalent)", "must", False, "A.5.1 — approved by management"),
-        ChecklistItem("item:A.5.1:approval_date",      "Approval date recorded", "must", False, "A.5.1 — approved"),
-        ChecklistItem("item:A.5.1:approval_target",    "Reference to the specific policy version being approved", "must", False, "A.5.1 — approved"),
+        ChecklistItem("item:A.5.1:approval_signatory", "Signatory at top-management level (CEO, board chair, or delegated equivalent)", "must", False, "27002:5.1 — approved by management"),
+        ChecklistItem("item:A.5.1:approval_date",      "Approval date recorded",                                                          "must", False, "27002:5.1 — approved"),
+        ChecklistItem("item:A.5.1:approval_target",    "Reference to the specific policy version being approved",                         "must", False, "27002:5.1 — approved"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.1:approval_authority", "Statement of the signatory's authority to approve (delegation chain if not CEO)", "should", False, "Accountability"),
+        ChecklistItem("item:A.5.1:approval_authority", "Statement of the signatory's authority to approve (delegation chain if not CEO)","should", False, "Accountability"),
     ],
 )
 
@@ -891,32 +909,33 @@ REQ_A51_COMMUNICATION = EvidenceRequirement(
     trigger_type  = "universal",
     description   = "A.5.1 requires the policy to be published and communicated to relevant personnel. Evidence must show active distribution (date, audience, channel), not mere availability on an intranet",
     must_contain  = [
-        ChecklistItem("item:A.5.1:comm_date",         "Date of publication/communication", "must", False, "A.5.1 — communicated"),
-        ChecklistItem("item:A.5.1:comm_audience",     "Audience reached (all staff, scoped subset, or named groups)", "must", False, "A.5.1 — communicated to relevant personnel"),
-        ChecklistItem("item:A.5.1:comm_channel",      "Channel used (intranet publication, email, training session, town hall)", "must", False, "A.5.1 — communicated"),
+        ChecklistItem("item:A.5.1:comm_date",         "Date of publication/communication",                                                "must", False, "27002:5.1 — communicated"),
+        ChecklistItem("item:A.5.1:comm_audience",     "Audience reached (all staff, scoped subset, or named groups)",                     "must", False, "27002:5.1 — communicated to relevant personnel"),
+        ChecklistItem("item:A.5.1:comm_channel",      "Channel used (intranet publication, email, training session, town hall)",         "must", False, "27002:5.1 — communicated"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.1:comm_acknowledgment", "Acknowledgment of receipt and understanding by personnel (e.g. signed register, e-learning completion)", "should", False, "A.5.1 — acknowledged"),
-        ChecklistItem("item:A.5.1:comm_interested",   "Communication to relevant interested parties (contractors, suppliers) where appropriate", "should", False, "A.5.1 — interested parties"),
+        ChecklistItem("item:A.5.1:comm_acknowledgment", "Acknowledgment of receipt and understanding by personnel (e.g. signed register, e-learning completion)", "should", False, "27002:5.1 — acknowledged"),
+        ChecklistItem("item:A.5.1:comm_interested",   "Communication to relevant interested parties (contractors, suppliers) where appropriate", "should", False, "27002:5.1 — interested parties"),
     ],
 )
 
 REQ_A51_REVIEW = EvidenceRequirement(
-    id            = "req:A.5.1:annual_review",
-    control_ref   = "A.5.1",
-    standard_id   = "ISO27001:2022",
-    evidence_type = "review_record",
-    title         = "Periodic Information Security Policy Review Record",
-    trigger_type  = "universal",
-    description   = "A.5.1 requires the policy to be reviewed at planned intervals (typically annually) and after significant changes. The review record captures who reviewed it, when, and the outcome (unchanged / amended / retired)",
-    must_contain  = [
-        ChecklistItem("item:A.5.1:review_date",       "Review date within the planned review interval (typically within 12 months of last review)", "must", False, "A.5.1 — reviewed at planned intervals"),
-        ChecklistItem("item:A.5.1:review_outcome",    "Outcome of the review (no change / amended to vN / retired)", "must", False, "A.5.1 — reviewed"),
-        ChecklistItem("item:A.5.1:review_reviewer",   "Reviewer identity and role", "must", False, "Accountability"),
+    id              = "req:A.5.1:annual_review",
+    control_ref     = "A.5.1",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Information Security Policy Review Record",
+    trigger_type    = "universal",
+    description     = "A.5.1 requires the policy to be reviewed at planned intervals (typically annually) and after significant changes. The review record captures who reviewed it, when, and the outcome (unchanged / amended / retired). Annual cadence (365d) — master InfoSec policy is stable; topic-specific policies they reference may move faster",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.1:review_date",       "Review date within the planned review interval (typically within 12 months of last review)", "must", False, "27002:5.1 — reviewed at planned intervals"),
+        ChecklistItem("item:A.5.1:review_outcome",    "Outcome of the review (no change / amended to vN / retired)",                       "must", False, "27002:5.1 — reviewed"),
+        ChecklistItem("item:A.5.1:review_reviewer",   "Reviewer identity and role",                                                         "must", False, "Accountability"),
     ],
-    should_contain= [
-        ChecklistItem("item:A.5.1:review_triggers",   "List of significant-change triggers that should prompt an ad-hoc review", "should", False, "A.5.1 — review on significant change"),
-        ChecklistItem("item:A.5.1:review_next_date",  "Next planned review date stated", "should", False, "Planning"),
+    should_contain  = [
+        ChecklistItem("item:A.5.1:review_triggers",   "List of significant-change triggers that should prompt an ad-hoc review",          "should", False, "27002:5.1 — review on significant change"),
+        ChecklistItem("item:A.5.1:review_next_date",  "Next planned review date stated",                                                    "should", False, "Planning"),
     ],
 )
 
