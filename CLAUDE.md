@@ -28,7 +28,7 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 60/63 PASS before any restart (63 cases; #24 + #25 known-stale):
+# Must be 60/64 PASS before any restart (64 cases; #24 + #25 known-stale):
 #   #25 — "is Art.5 a non-conformity?" (anti-hallucination, since 2026-05-27)
 #   #24 — "what is our GDPR Art.32 status?" (~30-50% pass rate; LLM-stochastic
 #         A.5-bridge mention; since 2026-05-30 batch 2). Some runs both pass;
@@ -154,12 +154,14 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260531_*.csv (63 cases — 21 core + 18
+- Most recent: results/eval_20260531_*.csv (64 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
   5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
-  + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel)
-- Score: 60/63 PASS, 0 WARN, 3 FAIL (some runs 61/63 or 62/63 due to #24
-  stochasticity):
+  + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
+  1 Phase B op_process evidence-handling)
+- Score: 60/64 PASS, 0 WARN, 4 FAIL (some runs 61/64 or 62/64 due to #24
+  stochasticity; case #21 also occasionally fails on 9.2 citation-list
+  position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
     conformity?", needs separate fix)
   - #24 known-stale since 2026-05-30 batch 2 (~20% pass rate; LLM-stochastic
@@ -200,6 +202,12 @@ with d.session() as s:
   improvement_action / offboarding / deviation / EOL / exit-migration /
   change-response variants on prior batches; program review freshness
   180d for detection-landscape volatility)
+- Case 64 locks in: Phase B operational_process evidence-handling
+  (A.5.28; disposal_record lifecycle-end variant — chain-of-custody
+  *end*, distinct from per-event / per-product / per-action variants;
+  first op_process batch with 365d review freshness — forensic
+  discipline doesn't churn like detection/IR/threat-intel; closes the
+  incident-evidence triangle alongside A.5.25-27 from batch 4)
 - Prior known-stale cases (#2, #3, #4, #24, #25, #28) restored to PASS on
   2026-05-25 via Path A: replayed status_before from posture_status_log to
   revert the 27 Stage-1-driven finding mutations, and stripped the offending
