@@ -3689,25 +3689,138 @@ REQ_A529_ACTIVATION_RECORD = EvidenceRequirement(
     ],
 )
 
-REQ_A530_ICT_CONTINUITY = EvidenceRequirement(
+# ── Annex A.5.30 — ICT readiness for business continuity — operational_process (4-leaf) ──
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process →
+# plan (primary) + register + review_record + revocation_record
+# (lifecycle-end). **NATURAL PAIR with A.5.29** ([[curation-phase-b-
+# batch-15-2026-05-31]]) — A.5.29 is the security annex to the BCP
+# (what security controls hold during disruption); A.5.30 is the
+# mechanical ICT recovery layer (what infrastructure comes back up,
+# in what order, to what RTO/RPO).
+#
+# Lifecycle-end variant: HYBRID recovery_record — covers BOTH real
+# recovery events AND scheduled tests (same hybrid pattern introduced
+# in A.5.29 batch 15). Position 18 in the catalogue. Type field
+# distinguishes real_recovery / scheduled_test / partial_drill.
+#
+# Review freshness 180d — same as A.5.29 (sister control). The ICT
+# landscape shifts continuously (new services, vendor changes, cloud-
+# pattern migrations); waiting a full year between meta-reviews lets
+# RTO/RPO commitments drift out of alignment with reality.
+#
+# **Freshness convention change**: legacy spec had freshness_days=365
+# on the plan leaf. Moved to the review_record leaf for consistency
+# with the rest of the op_process spine convention (A.5.7, A.5.8,
+# A.5.11, A.5.13, A.5.16, A.5.17, A.5.24, A.5.28, A.5.29 all have
+# freshness ONLY on the review). The plan itself doesn't expire; the
+# review cycle is what catches staleness. Behavioural impact on
+# existing tenants: nil (Arion's only A.5.30 evidence is a hand-
+# entered Comply finding; no uploaded plan evidence to be affected).
+#
+# Cross-control: register references A.5.9 asset register (assets
+# under recovery); recovery_record's act_disruption_link cross-
+# references A.5.29 activation_record (BCP-driven recovery events).
+# Heavy mutual-link wiring with A.5.29 — the two controls together
+# define the org's complete continuity stance.
+#
+# Authority: ISO 27002:2022 § 5.30 implementation guidance — planned,
+# implemented, maintained, and tested ICT readiness; BIA-derived
+# RTO/RPO targets; recovery procedures; backup + failover; test
+# records.
+
+REQ_A530_PLAN = EvidenceRequirement(
     id            = "req:A.5.30:ict_readiness_for_business_continuity",
     control_ref   = "A.5.30",
     standard_id   = "ISO27001:2022",
     evidence_type = "plan",
     title         = "ICT Readiness for Business Continuity Plan",
     trigger_type  = "universal",
-    description   = "A.5.30 requires ICT readiness to be planned, implemented, maintained, and tested per business continuity objectives. Evidence is an ICT continuity plan with recovery procedures, backup arrangements, and test records",
-    freshness_days = 365,
+    description   = "A.5.30 requires ICT readiness to be planned, implemented, maintained, and tested per business continuity objectives. The plan documents per-service RTO/RPO targets (BIA-derived), recovery procedures, backup arrangements, failover/redundancy provisions, and test cadence. The service register, periodic program review and per-recovery event record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.30:rto_rpo",         "Recovery Time and Recovery Point Objectives per ICT service (BIA-derived)", "must", False, "A.5.30 — business continuity objectives"),
-        ChecklistItem("item:A.5.30:recovery_procedures","Recovery procedures documented per ICT service", "must", False, "A.5.30 — ICT readiness"),
-        ChecklistItem("item:A.5.30:backup",          "Backup arrangements (frequency, retention, location separation, restore tested)", "must", False, "A.5.30 — implemented"),
-        ChecklistItem("item:A.5.30:failover",        "Failover or redundancy arrangements for critical services", "must", False, "A.5.30 — readiness"),
-        ChecklistItem("item:A.5.30:test_records",    "Test records (last test date, outcome, gaps identified, remediation status)", "must", False, "A.5.30 — tested"),
+        ChecklistItem("item:A.5.30:rto_rpo",             "Recovery Time and Recovery Point Objectives per ICT service (BIA-derived; RTO = how long can it be down; RPO = how much data loss is acceptable)",     "must", False, "27002:5.30 — business continuity objectives"),
+        ChecklistItem("item:A.5.30:recovery_procedures", "Recovery procedures documented per ICT service (step-by-step, runbook-style — not 'restart the system' aspirational text)",                              "must", False, "27002:5.30 — ICT readiness"),
+        ChecklistItem("item:A.5.30:backup",              "Backup arrangements (frequency aligned to RPO, retention, geographic separation, restore tested and verified)",                                          "must", False, "27002:5.30 — implemented"),
+        ChecklistItem("item:A.5.30:failover",            "Failover / redundancy arrangements for critical services (active-active / active-passive / cold-standby per service tier)",                              "must", False, "27002:5.30 — readiness"),
+        ChecklistItem("item:A.5.30:test_records",        "Test cadence and records (last test date per service, outcome, gaps identified, remediation status)",                                                    "must", False, "27002:5.30 — tested"),
+        ChecklistItem("item:A.5.30:bia_link",            "BIA-link explicit (RTO/RPO targets traceable to the Business Impact Assessment — not arbitrarily chosen numbers; cross-link to A.5.29 scenario register)", "must", False, "27002:5.30 — BIA derivation"),
+        ChecklistItem("item:A.5.30:bcp_alignment",       "Alignment with A.5.29 disruption-security plan stated explicitly (this is the ICT mechanical layer; A.5.29 is the security-annex layer; both must reconcile)", "must", False, "27002:5.30 + cross-link to [[A.5.29]]"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.30:scenario_coverage","Test scenarios cover both partial-failure and full-outage cases", "should", False, "Test realism"),
-        ChecklistItem("item:A.5.30:communication_tree","Communication tree for ICT outages (who is informed, escalation)", "should", False, "Coordination"),
+        ChecklistItem("item:A.5.30:scenario_coverage",   "Test scenarios cover BOTH partial-failure AND full-outage cases (most orgs only test partial — auditor-tested concern)",                                "should", False, "Test realism"),
+        ChecklistItem("item:A.5.30:communication_tree",  "Communication tree for ICT outages (who is informed, escalation thresholds, status-page update cadence)",                                                  "should", False, "Coordination"),
+        ChecklistItem("item:A.5.30:third_party_recovery","Third-party-dependent recovery noted (where recovery relies on supplier action — cross-link to A.5.22 supplier review)",                                   "should", False, "Cross-link to [[A.5.22]]"),
+    ],
+)
+
+REQ_A530_SERVICE_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.30:ict_service_register",
+    control_ref   = "A.5.30",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "ICT Service Continuity Register",
+    trigger_type  = "universal",
+    description   = "A.5.30 requires every in-scope ICT service to have a defined recovery posture — invisible services are the ones that don't come back when the org needs them. The register catalogues every in-scope ICT service: service id, criticality tier, RTO/RPO targets, dependencies, recovery owner, last-tested date. It is the operational record that proves the plan covers the org's ACTUAL service inventory, not just the easy-to-restore subset",
+    must_contain  = [
+        ChecklistItem("item:A.5.30:reg_service_id",      "Each in-scope ICT service captured with a unique identifier",                                                                                              "must", False, "27002:5.30 — visibility"),
+        ChecklistItem("item:A.5.30:reg_criticality",     "Criticality tier per row (tier_1_mission_critical / tier_2_business_critical / tier_3_supporting) — drives RTO/RPO selection",                            "must", False, "27002:5.30 — BIA tiering"),
+        ChecklistItem("item:A.5.30:reg_rto_rpo",         "RTO/RPO targets per row (specific numeric values, not 'best effort')",                                                                                     "must", False, "27002:5.30 — business continuity objectives"),
+        ChecklistItem("item:A.5.30:reg_dependencies",    "Service dependencies per row (upstream + downstream — recovery order matters; recover dependencies first)",                                                "must", False, "27002:5.30 — readiness coordination"),
+        ChecklistItem("item:A.5.30:reg_recovery_owner",  "Named recovery owner per row (technical lead accountable for the service's recovery, not just IT generally)",                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.5.30:reg_last_tested",     "Last-tested date per row (drives stale-test detection — services not tested in N months flag for refresh)",                                                "must", False, "27002:5.30 — preparation cadence"),
+        ChecklistItem("item:A.5.30:reg_asset_link",      "Asset-link per row (cross-link to A.5.9 asset register entries that constitute this service)",                                                              "must", False, "27002:5.30 + cross-link to [[A.5.9]]"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.30:reg_supplier_dep",    "Supplier dependency flag per row where recovery depends on supplier action (cross-link to A.5.21 / A.5.22)",                                              "should", False, "Cross-link to [[A.5.22]]"),
+        ChecklistItem("item:A.5.30:reg_data_residency",  "Data residency note per row where backup geographic separation has jurisdictional implications (cross-link to A.5.14 transfer policy)",                  "should", False, "Cross-link to [[A.5.14]]"),
+    ],
+)
+
+REQ_A530_PROGRAM_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.30:ict_program_review",
+    control_ref    = "A.5.30",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic ICT Readiness Program Review",
+    trigger_type   = "universal",
+    description    = "The ICT continuity plan creates value only if RTO/RPO commitments actually hold under test — services that fall out of compliance, dependencies that have shifted, backup restores that fail, test scenarios that have gone stale all signal the plan is drifting. The review captures the planned-interval check: RTO/RPO compliance audit, dependency-currency check, restore-success-rate analysis, scenario-coverage audit, and resulting plan adjustments. Cadence tightened to 180 days — ICT landscape shifts continuously",
+    freshness_days = 180,
+    must_contain   = [
+        ChecklistItem("item:A.5.30:rev_date",              "Review date within the planned 180-day interval",                                                                                                       "must", False, "27002:5.30 — periodic"),
+        ChecklistItem("item:A.5.30:rev_reviewer",          "Reviewer identity (CTO/IT-ops head + BCP-program owner + InfoSec lead jointly; CFO sign-off where critical-service RTO has financial impact)",        "must", False, "Accountability"),
+        ChecklistItem("item:A.5.30:rev_rto_compliance",    "RTO/RPO compliance audit (sample of services re-tested; gap to target per service; root cause per gap)",                                                "must", False, "27002:5.30 — objectives verification"),
+        ChecklistItem("item:A.5.30:rev_dependency_check",  "Dependency-currency check (sample of services where dependency map re-validated against current reality; shifts flagged for plan update)",              "must", False, "27002:5.30 — readiness coordination"),
+        ChecklistItem("item:A.5.30:rev_restore_success",   "Restore-success-rate analysis (last N restores attempted; success rate; failed restores investigated)",                                                  "must", False, "27002:5.30 — backup verification"),
+        ChecklistItem("item:A.5.30:rev_scenario_coverage", "Scenario-coverage audit (which scenarios from A.5.29 register actually tested via real recovery; which still untested; remediation plan per gap)",        "must", False, "27002:5.30 + cross-link to [[A.5.29]]"),
+        ChecklistItem("item:A.5.30:rev_actions",           "Action items captured (e.g. add new service, tighten RTO for service that consistently misses, retire stale scenario, refresh test schedule)",          "must", False, "27002:5.30 — plan adjustments"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.30:rev_cloud_posture",     "Cloud-provider posture noted (where ICT readiness depends on hyperscaler features — AZ failover, region replication; their SLA changes affect ours)", "should", False, "Cross-link to [[A.5.23]]"),
+        ChecklistItem("item:A.5.30:rev_next_date",         "Next planned review date stated (within 180d of this review)",                                                                                            "should", False, "Planning"),
+    ],
+)
+
+REQ_A530_RECOVERY_RECORD = EvidenceRequirement(
+    id            = "req:A.5.30:ict_recovery_record",
+    control_ref   = "A.5.30",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Recovery Event Record",
+    trigger_type  = "universal",
+    description   = "A.5.30 expects recovery to be EVIDENCED — not just promised. The recovery record evidences each event: recovery id, type (real_recovery / scheduled_test / partial_drill), services in scope, RTO/RPO targets, actual recovery time, success status, gaps surfaced, sign-off. HYBRID variant (like A.5.29) — covers BOTH real recovery events AND scheduled tests via type field. Real recoveries cross-reference A.5.29 activation_record (BCP-driven events) and A.5.26 incident_register (incident-driven recovery)",
+    must_contain  = [
+        ChecklistItem("item:A.5.30:rec_recovery_id",       "Recovery event identifier per record (unique, sequenced)",                                                                                              "must", False, "27002:5.30 — traceability"),
+        ChecklistItem("item:A.5.30:rec_type",              "Recovery type per record (real_recovery / scheduled_test / partial_drill / chaos_engineering_test)",                                                    "must", False, "27002:5.30 — coverage taxonomy"),
+        ChecklistItem("item:A.5.30:rec_services",          "Services in scope per record (links to service register entries)",                                                                                       "must", False, "27002:5.30 + cross-link to register"),
+        ChecklistItem("item:A.5.30:rec_rto_target",        "RTO target per record (what was committed)",                                                                                                              "must", False, "27002:5.30 — objectives"),
+        ChecklistItem("item:A.5.30:rec_actual_time",       "Actual recovery time per record (drives the RTO-met calculation; gap to target if missed)",                                                              "must", False, "27002:5.30 — objectives verification"),
+        ChecklistItem("item:A.5.30:rec_success_status",    "Success status per record (rto_met / rto_missed_with_reason / partial_recovery_acceptable / failed)",                                                    "must", False, "27002:5.30 — auditor-critical objective achievement proof"),
+        ChecklistItem("item:A.5.30:rec_gaps",              "Gaps surfaced per record (where recovery fell short; severity per gap)",                                                                                  "must", False, "27002:5.30 — improvement feedback"),
+        ChecklistItem("item:A.5.30:rec_signoff",           "Signoff per record (recovery owner + BCP-program owner; exec sponsor where critical-service real recovery)",                                              "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.30:rec_disruption_link",   "Cross-reference to A.5.29 plan_activation_record where this recovery was BCP-driven (closes loop)",                                                       "should", False, "Closing loop with [[A.5.29]]"),
+        ChecklistItem("item:A.5.30:rec_lessons_feed",      "Lessons feed per record to A.5.27 lessons register where recovery surfaced patterns worth retaining beyond this control",                                "should", False, "Closing loop with [[A.5.27]]"),
     ],
 )
 
@@ -6964,7 +7077,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A529_SCENARIO_REGISTER,
     REQ_A529_PROGRAM_REVIEW,
     REQ_A529_ACTIVATION_RECORD,
-    REQ_A530_ICT_CONTINUITY,
+    # A.5.30 — 4-leaf operational_process (2026-05-31; program review freshness=180)
+    REQ_A530_PLAN,
+    REQ_A530_SERVICE_REGISTER,
+    REQ_A530_PROGRAM_REVIEW,
+    REQ_A530_RECOVERY_RECORD,
     # A.5.31 — 4-leaf records_program (2026-05-29; review freshness=180)
     REQ_A531_OBLIGATIONS_REGISTER,
     REQ_A531_MAINTENANCE_PROCEDURE,

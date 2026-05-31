@@ -1533,6 +1533,49 @@ EVAL_CASES = [
     # enforced via authn_link (A.5.16) and identity_link (A.5.17) MUSTs.
     # MFA promoted SHOULD → MUST (modern baseline, no longer optional).
 
+    # ── Phase B operational_process ICT-readiness (commit 2026-05-31) ──
+    # Sixteenth Phase B bulk batch (single-control): A.5.30 promoted to
+    # operational_process 4-leaf — ict_continuity_plan + ict_service_
+    # register + ict_program_review (180d) + per-recovery HYBRID record.
+    # Natural pair-batch with A.5.29 from batch 15 — A.5.29 is the
+    # security annex to the BCP; A.5.30 is the mechanical ICT recovery
+    # layer. Both batches feature the HYBRID recovery/activation record
+    # pattern (real OR test via type field). Plan-leaf freshness
+    # convention cleaned up: removed freshness_days=365 from the legacy
+    # plan and put it on the review leaf only (consistent with all
+    # other op_process batches).
+
+    EvalCase(
+        id=73,
+        query="pending engine verdict for A.5.30",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "ict_readiness"],
+        expected_refs=["A.5.30"],
+        expected_type="posture_check",
+        must_contain=["A.5.30", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.30 (ICT readiness for business continuity) Phase B "
+            "promotion to operational_process 4-leaf: ict_continuity_plan "
+            "(plan-as-primary, natural pair with A.5.29 plan from batch 15) "
+            "+ ict_service_register + ict_program_review (freshness 180d) + "
+            "per-recovery HYBRID record covering BOTH real recovery events "
+            "AND scheduled tests via type field. Live posture flips from "
+            "Comply (hand-entered finding citing Azure + M365 redundancy + "
+            "quarterly tabletops) to engine-proposed NC at 0/4. Two new "
+            "MUSTs over legacy: bia_link (RTO/RPO must trace to the BIA, "
+            "not arbitrarily chosen) and bcp_alignment (this layer + A.5.29 "
+            "security-annex layer must reconcile). Freshness-convention "
+            "cleanup: removed freshness_days=365 from legacy plan leaf, "
+            "kept on review_record only (consistent with the rest of the "
+            "op_process spine — A.5.7/8/11/13/16/17/24/28/29 all have "
+            "freshness on review only)."
+        ),
+    ),
+
     # ── Phase B operational_process disruption-security (commit 2026-05-31) ──
     # Fifteenth Phase B bulk batch (single-control): A.5.29 promoted to
     # operational_process 4-leaf — continuity_security_plan (plan as
