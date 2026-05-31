@@ -1284,6 +1284,47 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Phase B operational_process evidence handling (commit 2026-05-31) ──
+    # Sixth Phase B bulk batch (single-control): A.5.28 promoted to
+    # operational_process 4-leaf — evidence_collection_procedure +
+    # evidence_custody_register + evidence_program_review (365d) +
+    # evidence_disposal_record. Closes the incident-evidence triangle
+    # alongside A.5.25-27 already shipped in batch 4. A.5.26's evidence-
+    # archive SHOULD now resolves to the A.5.28 custody register entry;
+    # the disposal_record proves chain-of-custody was maintained to
+    # legitimate end (external handover OR retention-driven destruction).
+    # Review freshness 365d — evidence-handling discipline is forensically
+    # stable (does NOT churn like threat-intel or detection landscape).
+
+    EvalCase(
+        id=64,
+        query="pending engine verdict for A.5.28",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "evidence_handling"],
+        expected_refs=["A.5.28"],
+        expected_type="posture_check",
+        must_contain=["A.5.28", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.28 (Collection of evidence) Phase B promotion to "
+            "operational_process 4-leaf: evidence_collection_procedure + "
+            "evidence_custody_register + evidence_program_review (freshness "
+            "365d) + evidence_disposal_record. Live posture flips from "
+            "Comply (hand-entered Audit Log / Incident Log finding) to "
+            "engine-proposed NC at 0/4. The disposal_record lifecycle-end "
+            "leaf is the *end* of the chain of custody — proves the program "
+            "actually closes the loop on every evidence package (external "
+            "handover with receipt OR retention-driven destruction with "
+            "witness + final hash). Review freshness 365d because evidence-"
+            "handling discipline is forensically stable (legal admissibility "
+            "rules, retention obligations and forensic methodology don't "
+            "churn the way threat-intel or detection landscape does)."
+        ),
+    ),
+
     EvalCase(
         id=41,
         query="is A.5.30 compliant?",

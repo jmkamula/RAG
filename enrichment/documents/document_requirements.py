@@ -2727,24 +2727,117 @@ REQ_A527_IMPROVEMENT_RECORD = EvidenceRequirement(
     ],
 )
 
-REQ_A528_EVIDENCE_HANDLING = EvidenceRequirement(
+# ── Annex A.5.28 — Collection of evidence — operational_process (4-leaf) ──────
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → procedure
+# + register + review_record + revocation_record (lifecycle-end). Closes the
+# incident-evidence triangle alongside A.5.25-27: A.5.26 closure_record's
+# evidence-archive SHOULD now resolves to a custody register entry; A.5.28's
+# disposal_record proves the chain-of-custody was maintained to legitimate end
+# (regulator/court handover OR retention-driven destruction).
+#
+# Review freshness 365d — unlike A.5.25/A.5.26/A.5.7, evidence handling is
+# forensic discipline that does NOT churn with the threat landscape: legal
+# admissibility rules, retention obligations and forensic methodology are
+# stable on a 12-month cadence. Annual review is appropriate.
+#
+# Authority: ISO 27002:2022 § 5.28 implementation guidance (identification,
+# collection, acquisition, preservation; chain of custody; integrity
+# verification; competent personnel; liaison with external authorities;
+# jurisdictional considerations; storage security).
+
+REQ_A528_EVIDENCE_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.28:evidence_collection_procedure",
     control_ref   = "A.5.28",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
-    title         = "Evidence Identification, Collection, and Preservation Procedure",
+    title         = "Evidence Identification, Collection, Acquisition, and Preservation Procedure",
     trigger_type  = "universal",
-    description   = "A.5.28 requires procedures for identification, collection, acquisition, and preservation of evidence related to information security events. Evidence is a procedure covering forensic handling end-to-end",
+    description   = "A.5.28 requires procedures for identification, collection, acquisition, and preservation of evidence related to information security events. The procedure documents the four lifecycle steps (identification → acquisition → preservation → handover/disposal), chain of custody enforcement, integrity verification, competent personnel requirements, and liaison paths with external authorities (law enforcement, regulators). The custody register, periodic program review and per-package disposal record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.28:identification",  "Identification step (what counts as evidence — logs, images, physical media, witness statements)", "must", False, "A.5.28 — identification"),
-        ChecklistItem("item:A.5.28:chain_of_custody","Chain of custody requirements (who handled what, when, where stored)", "must", False, "A.5.28 — preservation"),
-        ChecklistItem("item:A.5.28:acquisition",     "Acquisition method per evidence type (disk imaging, log export, memory capture)", "must", False, "A.5.28 — acquisition"),
-        ChecklistItem("item:A.5.28:preservation",    "Preservation method (read-only storage, hashes recorded, secure vault)", "must", False, "A.5.28 — preservation"),
-        ChecklistItem("item:A.5.28:retention",       "Retention period stated (often driven by legal and regulatory)", "must", False, "A.5.28 — preservation"),
+        ChecklistItem("item:A.5.28:identification",     "Identification step (what counts as evidence — logs, images, physical media, witness statements, network captures)",            "must", False, "27002:5.28 — identification"),
+        ChecklistItem("item:A.5.28:acquisition",        "Acquisition method per evidence type (disk imaging, log export, memory capture, photographic, statement)",                      "must", False, "27002:5.28 — acquisition"),
+        ChecklistItem("item:A.5.28:integrity",          "Integrity verification step (cryptographic hashes recorded at acquisition; verified at each custody handover)",                   "must", False, "27002:5.28 — preservation"),
+        ChecklistItem("item:A.5.28:chain_of_custody",   "Chain-of-custody enforcement (who, what, when, where stored, signature/handover record at every transfer)",                       "must", False, "27002:5.28 — preservation"),
+        ChecklistItem("item:A.5.28:preservation",       "Preservation method (read-only/write-blocked storage, secure vault, environmental controls)",                                     "must", False, "27002:5.28 — preservation"),
+        ChecklistItem("item:A.5.28:competence",         "Competent personnel requirements (who is authorised to collect/handle evidence; certification expectations)",                     "must", False, "27002:5.28 — internal procedures + competence"),
+        ChecklistItem("item:A.5.28:liaison",            "Liaison path with external authorities (law enforcement, regulators) — who initiates, what is required",                          "must", False, "27002:5.28 — external authorities"),
+        ChecklistItem("item:A.5.28:retention",          "Retention period stated, driven by legal/regulatory obligations and case status (open investigations override default schedule)", "must", False, "27002:5.28 — preservation lifecycle"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.28:legal_admissibility","Legal admissibility considerations (jurisdictional rules)", "should", False, "Evidence usable in court / regulatory"),
-        ChecklistItem("item:A.5.28:third_party_forensics","Third-party forensic engagement procedure if outsourced", "should", False, "Operational flexibility"),
+        ChecklistItem("item:A.5.28:legal_admissibility",   "Legal admissibility considerations (jurisdictional rules, multi-jurisdiction scenarios)",                                       "should", False, "Evidence usable in court / regulatory"),
+        ChecklistItem("item:A.5.28:third_party_forensics", "Third-party forensic engagement path (when to engage, sealed-container handover, return-to-custody on completion)",             "should", False, "Operational flexibility"),
+        ChecklistItem("item:A.5.28:incident_link",         "Cross-reference to A.5.26 incident-response procedure (evidence-collection step at containment)",                                "should", False, "Closing the loop with [[A.5.26]]"),
+    ],
+)
+
+REQ_A528_CUSTODY_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.28:evidence_custody_register",
+    control_ref   = "A.5.28",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Evidence Custody Register",
+    trigger_type  = "universal",
+    description   = "A.5.28 requires that the integrity and provenance of every evidence package be demonstrable on demand. The custody register catalogues every evidence package handled: id, source incident, evidence type, acquisition method, acquisition hash, current custodian, current location, retention end-date, status (active/handed-over/disposed). It is the operational record that proves chain of custody at audit time",
+    must_contain  = [
+        ChecklistItem("item:A.5.28:reg_package_id",      "Each evidence package captured with a unique identifier",                                                                       "must", False, "27002:5.28 — identification + traceability"),
+        ChecklistItem("item:A.5.28:reg_source_incident", "Source incident reference per row (links to A.5.26 incident register)",                                                          "must", False, "Closes loop with [[A.5.26]]"),
+        ChecklistItem("item:A.5.28:reg_evidence_type",   "Evidence type per row (log export / disk image / memory capture / physical media / statement / photograph)",                    "must", False, "27002:5.28 — categorisation"),
+        ChecklistItem("item:A.5.28:reg_acquisition_hash","Acquisition hash per row (cryptographic fingerprint recorded at point of collection)",                                          "must", False, "27002:5.28 — integrity"),
+        ChecklistItem("item:A.5.28:reg_custodian",       "Current custodian per row (named individual or sealed-storage location)",                                                       "must", False, "27002:5.28 — preservation"),
+        ChecklistItem("item:A.5.28:reg_location",        "Current location per row (vault id / cloud bucket reference / external-party receipt id)",                                      "must", False, "27002:5.28 — storage"),
+        ChecklistItem("item:A.5.28:reg_status",          "Status per row (active / handed-over / disposed) with date of last transition",                                                  "must", False, "Operational discipline"),
+        ChecklistItem("item:A.5.28:reg_retention_end",   "Retention end-date per row (drives the disposal_record trigger)",                                                                "must", False, "27002:5.28 — preservation lifecycle"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.28:reg_handover_log",    "Per-handover signature trail (immutable append-only — every transfer logs both releasing and receiving custodian)",            "should", False, "Forensic best practice"),
+        ChecklistItem("item:A.5.28:reg_jurisdiction",    "Jurisdiction tag per row where evidence may cross borders (drives admissibility considerations)",                                "should", False, "Multi-jurisdiction handling"),
+    ],
+)
+
+REQ_A528_PROGRAM_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.28:evidence_program_review",
+    control_ref    = "A.5.28",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Evidence-Handling Program Review",
+    trigger_type   = "universal",
+    description    = "The evidence-handling program creates value only if it actually holds up — chain-of-custody integrity must survive scrutiny by regulators and counsel. The review captures the planned-interval check: integrity-verification results, custody-incident analysis, competence/training status of authorised personnel, alignment with current legal-admissibility standards, and resulting program adjustments. Annual cadence — evidence-handling discipline is forensically stable",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.28:rev_date",            "Review date within the planned annual interval",                                                                                "must", False, "27002:5.28 — periodic"),
+        ChecklistItem("item:A.5.28:rev_reviewer",        "Reviewer identity (InfoSec lead + legal/compliance counsel jointly)",                                                           "must", False, "Accountability"),
+        ChecklistItem("item:A.5.28:rev_integrity_audit", "Integrity-verification audit (sample of register rows re-hashed; mismatches investigated)",                                     "must", False, "27002:5.28 — preservation integrity"),
+        ChecklistItem("item:A.5.28:rev_custody_incidents","Custody-incident analysis (any broken-seal events, missing-handover signatures, unauthorised access flagged for review)",      "must", False, "27002:5.28 — chain of custody"),
+        ChecklistItem("item:A.5.28:rev_competence",      "Competence/training status of authorised personnel reviewed (certifications current, new staff onboarded properly)",            "must", False, "27002:5.28 — competence"),
+        ChecklistItem("item:A.5.28:rev_legal_alignment", "Alignment-with-current-legal-standards check (jurisdictional updates, regulator guidance, case law shifts considered)",          "must", False, "27002:5.28 — admissibility"),
+        ChecklistItem("item:A.5.28:rev_actions",         "Action items captured for the program (e.g. retrain on new tooling, update jurisdiction tagging, refresh legal-counsel input)", "must", False, "27002:5.28 — program adjustments"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.28:rev_external_input",  "External benchmark or industry-practice input considered (peer review, forensic-community guidance)",                           "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.28:rev_next_date",       "Next planned review date stated",                                                                                                "should", False, "Planning"),
+    ],
+)
+
+REQ_A528_DISPOSAL_RECORD = EvidenceRequirement(
+    id            = "req:A.5.28:evidence_disposal_record",
+    control_ref   = "A.5.28",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Package Evidence Disposal / Handover Record",
+    trigger_type  = "universal",
+    description   = "A.5.28 requires that the chain of custody be demonstrable end-to-end — including the *end* of the chain. The disposal record evidences the legitimate closure of each evidence package: either external handover (to law enforcement, regulator, opposing counsel) with receipt OR retention-driven destruction with witness + method + final hash. One record per closed package, traceable back to the custody register and through to the source incident",
+    must_contain  = [
+        ChecklistItem("item:A.5.28:disp_package_ref",    "Package identifier per record (links to custody register)",                                                                    "must", False, "27002:5.28 — traceability"),
+        ChecklistItem("item:A.5.28:disp_closure_type",   "Closure type per record (external_handover / retention_destruction / case_closed_internal)",                                    "must", False, "27002:5.28 — preservation lifecycle"),
+        ChecklistItem("item:A.5.28:disp_authoriser",     "Authoriser per record (proportional to closure type — counsel sign-off required for external handover)",                       "must", False, "Accountability"),
+        ChecklistItem("item:A.5.28:disp_method",         "Closure method per record (sealed-handover with receipt OR secure-destruction method with witness)",                            "must", False, "27002:5.28 — secure handling"),
+        ChecklistItem("item:A.5.28:disp_final_hash",     "Final hash per record (handover destination hash matches register hash OR pre-destruction hash logged)",                         "must", False, "27002:5.28 — integrity at end"),
+        ChecklistItem("item:A.5.28:disp_closure_date",   "Closure date recorded",                                                                                                          "must", False, "Operational discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.28:disp_receipt",        "External handover receipt scanned/attached per record (where closure_type = external_handover)",                                 "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.28:disp_witness",        "Witness identity per destruction record (independent of authoriser where possible)",                                            "should", False, "Operational discipline"),
     ],
 )
 
@@ -6004,7 +6097,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A527_LESSONS_REGISTER,
     REQ_A527_LESSONS_REVIEW,
     REQ_A527_IMPROVEMENT_RECORD,
-    REQ_A528_EVIDENCE_HANDLING,
+    # A.5.28 — 4-leaf operational_process (2026-05-31; program review freshness=365)
+    REQ_A528_EVIDENCE_PROCEDURE,
+    REQ_A528_CUSTODY_REGISTER,
+    REQ_A528_PROGRAM_REVIEW,
+    REQ_A528_DISPOSAL_RECORD,
     REQ_A529_DISRUPTION_SECURITY,
     REQ_A530_ICT_CONTINUITY,
     # A.5.31 — 4-leaf records_program (2026-05-29; review freshness=180)
