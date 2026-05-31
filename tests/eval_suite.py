@@ -1479,6 +1479,50 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Phase B operational_process identity-management (commit 2026-05-31) ──
+    # Twelfth Phase B bulk batch (single-control): A.5.16 promoted to
+    # operational_process 4-leaf — identity_management_procedure +
+    # identity_register + identity_program_review (180d) +
+    # per-identity revocation_record. Review freshness 180d because
+    # identity drift is high-volume (matches A.5.25/A.5.26 detection-
+    # landscape volatility family). Cross-control links to A.5.11 leaver
+    # register (joiner/leaver cascade), A.5.17 authentication
+    # information (paired credential lifecycle), A.5.18 access rights
+    # review (attestation cadence). service_accounts MUST is the key
+    # promotion — was a SHOULD, now MUST because service-account hygiene
+    # is the weakest spot in most orgs' identity programs.
+
+    EvalCase(
+        id=69,
+        query="pending engine verdict for A.5.16",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "identity_management"],
+        expected_refs=["A.5.16"],
+        expected_type="posture_check",
+        must_contain=["A.5.16", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.16 (Identity management) Phase B promotion to "
+            "operational_process 4-leaf: identity_management_procedure + "
+            "identity_register + identity_program_review (freshness 180d) "
+            "+ per-identity revocation_record. Live posture flips from "
+            "Comply (empty gap_description hand-entered) to engine-proposed "
+            "NC at 0/4. The revocation_record lifecycle-end leaf is the "
+            "per-identity disable proof with an auditor-critical SLA-met "
+            "flag — proves not just THAT each identity was disabled but "
+            "that the disable timestamp was within the stated SLA "
+            "(e.g. 'X was disabled within 24h of last day'). Review "
+            "freshness 180d because identity drift is high-volume; matches "
+            "A.5.25/A.5.26 detection-landscape velocity family. "
+            "service_accounts MUST (was SHOULD pre-promotion) makes the "
+            "auditor-critical weakest-spot governance a first-class "
+            "requirement."
+        ),
+    ),
+
     EvalCase(
         id=41,
         query="is A.5.30 compliant?",

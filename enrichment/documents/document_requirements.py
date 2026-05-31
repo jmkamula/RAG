@@ -2372,25 +2372,129 @@ REQ_A515_REVIEW = EvidenceRequirement(
     ],
 )
 
-REQ_A516_IDENTITY_MANAGEMENT = EvidenceRequirement(
+# ── Annex A.5.16 — Identity management — operational_process (4-leaf) ─────────
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process →
+# procedure + register + review_record + revocation_record (lifecycle-end).
+# The lifecycle-end slot is realised as the per-identity revocation record
+# — proves each identity was actually disabled within the stated timeliness
+# contract (the famous "X was disabled within 24h of last day" promise
+# that auditors regularly test).
+#
+# Review freshness 180d — identity drift is high-volume. Joiners, leavers,
+# role changes, contractor onboarding/offboarding, service-account churn
+# all accumulate continuously. Waiting a full year between meta-reviews
+# leaves too much drift. Same volatility family as A.5.25/A.5.26 detection
+# landscape (180d) and A.5.21 ICT supply chain (180d).
+#
+# Cross-control: register integrates with HR for joiner/leaver triggers;
+# triggers from A.5.11 leaver register cascade to identity revocation_
+# record; identity attestation cycle ties to A.5.18 access rights review;
+# service-account governance promoted from SHOULD to MUST (it's the
+# weakest spot in most orgs' identity hygiene).
+#
+# Distinct from A.5.17 (authentication information) which covers
+# credentials and their lifecycle; A.5.16 is about the identity object
+# itself, A.5.17 is about how identities prove themselves.
+#
+# Authority: ISO 27002:2022 § 5.16 implementation guidance — full
+# identity lifecycle management (creation/modification/suspension/
+# termination); timeliness; accountability; unique identity per person;
+# service-account governance; periodic attestation.
+
+REQ_A516_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.16:identity_management_procedure",
     control_ref   = "A.5.16",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Identity Lifecycle Management Procedure",
     trigger_type  = "universal",
-    description   = "A.5.16 requires the full lifecycle of identities to be managed. Evidence is a procedure covering creation, modification, suspension, and termination of identities, with timeliness and accountability stated",
+    description   = "A.5.16 requires the full lifecycle of identities to be managed — creation, modification, suspension, termination — across human, contractor, service, shared and non-human account types. The procedure documents each lifecycle step, timeliness expectations, ownership chain (HR triggers, IT executes, manager approves), and the connection to authentication-information lifecycle in A.5.17. The identity register, periodic program review and per-identity revocation record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.16:creation",        "Identity creation steps (verification of person, naming convention, initial entitlements)", "must", False, "A.5.16 — lifecycle"),
-        ChecklistItem("item:A.5.16:modification",    "Modification steps for role changes (add/remove entitlements)", "must", False, "A.5.16 — lifecycle"),
-        ChecklistItem("item:A.5.16:suspension",      "Suspension steps for leave of absence or risk events", "must", False, "A.5.16 — lifecycle"),
-        ChecklistItem("item:A.5.16:termination",     "Termination steps with stated deactivation timeline (e.g. within 24h of last day)", "must", False, "A.5.16 — lifecycle"),
-        ChecklistItem("item:A.5.16:unique_identity", "Unique identity per person (no shared user accounts for individuals)", "must", False, "A.5.16 — managed"),
-        ChecklistItem("item:A.5.16:ownership",       "Ownership of each lifecycle phase (HR triggers, IT executes, manager approves)", "must", False, "Accountability"),
+        ChecklistItem("item:A.5.16:creation",          "Identity creation steps (verification of person, naming convention, initial entitlements — least-privilege at issuance)",         "must", False, "27002:5.16 — lifecycle creation"),
+        ChecklistItem("item:A.5.16:modification",      "Modification steps for role changes (add/remove entitlements; same-day or next-business-day SLA)",                                "must", False, "27002:5.16 — lifecycle modification"),
+        ChecklistItem("item:A.5.16:suspension",        "Suspension steps for leave of absence, risk events (under investigation), or extended inactivity (auto-suspend at N days idle)",  "must", False, "27002:5.16 — lifecycle suspension"),
+        ChecklistItem("item:A.5.16:termination",       "Termination steps with stated deactivation timeline (e.g. within 24h of last day; immediate on involuntary termination)",         "must", False, "27002:5.16 — lifecycle termination"),
+        ChecklistItem("item:A.5.16:unique_identity",   "Unique identity per person (no shared user accounts for individuals; named accountability)",                                       "must", False, "27002:5.16 — managed"),
+        ChecklistItem("item:A.5.16:ownership",         "Ownership of each lifecycle phase (HR triggers from leaver register; IT executes; manager approves; InfoSec oversight)",          "must", False, "Accountability + cross-link to [[A.5.11]]"),
+        ChecklistItem("item:A.5.16:service_accounts",  "Service / shared / non-human account governance (named human owner, expiry, scope, monitoring) — promoted from SHOULD because this is the weakest spot in most identity hygiene programs", "must", False, "27002:5.16 — managed (all identity types)"),
+        ChecklistItem("item:A.5.16:authn_link",        "Cross-reference to A.5.17 authentication-information lifecycle (credential issuance and revocation are paired with identity events)", "must", False, "27002:5.16 + cross-link to [[A.5.17]]"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.16:attestation",     "Periodic identity attestation cadence (e.g. annual recertification)", "should", False, "Drift prevention"),
-        ChecklistItem("item:A.5.16:service_accounts","Service / shared / non-human account governance", "should", False, "Coverage of edge cases"),
+        ChecklistItem("item:A.5.16:attestation",       "Periodic identity attestation cadence (e.g. annual recertification of each identity by its owner) referenced",                    "should", False, "Drift prevention + cross-link to [[A.5.18]]"),
+        ChecklistItem("item:A.5.16:contractor_path",   "Contractor-specific path documented (fixed expiry, automatic disable; no manual extension without re-approval)",                  "should", False, "High-risk workforce segment"),
+        ChecklistItem("item:A.5.16:emergency_disable", "Emergency-disable path (break-glass deactivation when standard SLA is too slow — e.g. immediate revocation on incident escalation)", "should", False, "Real-world coverage"),
+    ],
+)
+
+REQ_A516_IDENTITY_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.16:identity_register",
+    control_ref   = "A.5.16",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Identity Register",
+    trigger_type  = "universal",
+    description   = "A.5.16 requires every identity to be visible to the security function — invisible identities are the ones that go stale, get reused, or persist past their owner's departure. The register catalogues every active identity (human + service + shared + non-human): identity id, type, owner, status, created/modified/last-used timestamps. It is the operational record that proves identity hygiene is org-wide, not just on the systems IT remembered to onboard to the IAM platform",
+    must_contain  = [
+        ChecklistItem("item:A.5.16:reg_identity_id",     "Each active identity captured with a unique identifier (employee id, contractor id, service-account id, shared-account id)", "must", False, "27002:5.16 — visibility"),
+        ChecklistItem("item:A.5.16:reg_identity_type",   "Identity type per row (human_employee / human_contractor / service / shared / system_account) — drives policy variant applied", "must", False, "27002:5.16 — managed (all types)"),
+        ChecklistItem("item:A.5.16:reg_owner",          "Named owner per row (human owner accountable for THIS identity — even for service accounts, must be a human)",                "must", False, "Accountability"),
+        ChecklistItem("item:A.5.16:reg_status",         "Status per row (active / suspended / disabled / pending_termination) updated as lifecycle events fire",                       "must", False, "27002:5.16 — lifecycle tracking"),
+        ChecklistItem("item:A.5.16:reg_created_modified","Created and last-modified timestamps per row",                                                                                "must", False, "Audit trail"),
+        ChecklistItem("item:A.5.16:reg_last_used",      "Last-used timestamp per row (drives auto-suspend at N days idle; orphan detection)",                                          "must", False, "27002:5.16 — drift detection"),
+        ChecklistItem("item:A.5.16:reg_hr_link",        "HR-record link per row for human identities (joiner/leaver triggers cascade automatically — no manual sync)",                "must", False, "27002:5.16 + cross-link to [[A.5.11]]"),
+        ChecklistItem("item:A.5.16:reg_service_expiry", "Expiry date per row for service / shared / temporary identities (forces deliberate renewal rather than indefinite drift)",   "must", False, "27002:5.16 — managed (service-account discipline)"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.16:reg_attestation_due","Next attestation date per row (drives the periodic recertification cycle)",                                                  "should", False, "Drift prevention"),
+        ChecklistItem("item:A.5.16:reg_risk_tag",       "Risk tag per row where the identity has elevated privileges or sensitive scope (drives faster-cadence review)",              "should", False, "Risk-based attention"),
+    ],
+)
+
+REQ_A516_PROGRAM_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.16:identity_program_review",
+    control_ref    = "A.5.16",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Identity-Management Program Review",
+    trigger_type   = "universal",
+    description    = "The identity program creates value only if the lifecycle actually closes — orphan accounts, lingering contractor access, stale service credentials, missed termination SLAs all signal the program is leaking. The review captures the planned-interval check: orphan analysis, SLA-miss analysis, service-account hygiene audit, contractor expiry verification, and resulting program adjustments. Cadence tightened to 180 days — identity drift is high-volume",
+    freshness_days = 180,
+    must_contain   = [
+        ChecklistItem("item:A.5.16:rev_date",            "Review date within the planned 180-day interval",                                                                            "must", False, "27002:5.16 — periodic"),
+        ChecklistItem("item:A.5.16:rev_reviewer",        "Reviewer identity (IT identity-lead + HR partner + InfoSec lead jointly)",                                                    "must", False, "Accountability"),
+        ChecklistItem("item:A.5.16:rev_orphan_analysis", "Orphan analysis (identities without active HR record / business reason; remediation per orphan)",                            "must", False, "27002:5.16 — drift catch"),
+        ChecklistItem("item:A.5.16:rev_termination_sla", "Termination-SLA analysis (gap between leaver effective_date and identity_revocation date; outliers investigated)",          "must", False, "27002:5.16 — timeliness"),
+        ChecklistItem("item:A.5.16:rev_service_hygiene", "Service-account hygiene audit (sample of service accounts re-validated: owner still employed, scope still appropriate, expiry not lapsed)", "must", False, "27002:5.16 — service-account discipline"),
+        ChecklistItem("item:A.5.16:rev_contractor_expiry","Contractor-expiry verification (audit that expired contractor identities are actually disabled, not just flagged)",         "must", False, "27002:5.16 — fixed-expiry enforcement"),
+        ChecklistItem("item:A.5.16:rev_actions",         "Action items captured (e.g. tighten auto-suspend threshold, expand HR-cascade automation, retire shared accounts)",          "must", False, "27002:5.16 — program adjustments"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.16:rev_iam_tooling",     "IAM tooling check (vendor releases, new capabilities like just-in-time access; capability gaps to consider)",                "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.16:rev_next_date",       "Next planned review date stated (within 180d of this review)",                                                                "should", False, "Planning"),
+    ],
+)
+
+REQ_A516_REVOCATION_RECORD = EvidenceRequirement(
+    id            = "req:A.5.16:identity_revocation_record",
+    control_ref   = "A.5.16",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Identity Revocation Record",
+    trigger_type  = "universal",
+    description   = "A.5.16 expects every identity termination to be evidenced — not just procedurally promised. The revocation record evidences each disable/remove event: identity id, trigger type, effective date, actual revocation timestamp, SLA-met flag, dual signoff, residual-cleanup status (mailbox forwarding, file-share access transfer). One record per terminated identity, traceable back to the identity register and to the originating trigger (A.5.11 leaver register, contractor expiry, security event)",
+    must_contain  = [
+        ChecklistItem("item:A.5.16:rev_identity_ref",    "Identity identifier per record (links to identity register entry)",                                                          "must", False, "27002:5.16 — traceability"),
+        ChecklistItem("item:A.5.16:rev_trigger_type",    "Trigger type per record (termination / contract_end / suspension_to_disable / incident_revocation / orphan_cleanup)",        "must", False, "27002:5.16 — trigger taxonomy"),
+        ChecklistItem("item:A.5.16:rev_effective_date",  "Effective date per record (last working day OR contract expiry OR incident decision time)",                                   "must", False, "Timeliness anchor"),
+        ChecklistItem("item:A.5.16:rev_actual_timestamp","Actual revocation timestamp per record (drives SLA-met calculation)",                                                         "must", False, "27002:5.16 — timeliness verification"),
+        ChecklistItem("item:A.5.16:rev_sla_met",         "SLA-met flag per record (yes / no_with_reason — gap between effective and actual must be within stated SLA, or exception logged)", "must", False, "27002:5.16 — auditor-critical SLA proof"),
+        ChecklistItem("item:A.5.16:rev_dual_signoff",    "Dual signoff per record (IT identity-owner + HR or hiring manager — captures even when in-person handover impossible)",     "must", False, "Accountability"),
+        ChecklistItem("item:A.5.16:rev_residual_cleanup","Residual-cleanup status per record (mailbox forwarding configured, file-share access transferred or revoked, group memberships cleared)", "must", False, "27002:5.16 — full lifecycle closure"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.16:rev_post_disable_audit","Post-disable verification window noted (e.g. 30-day check that no stale access reappears via service-account chains)",     "should", False, "Continual assurance"),
+        ChecklistItem("item:A.5.16:rev_credential_link", "Cross-reference to A.5.17 credential-revocation record (paired event; both must complete to close the loop)",               "should", False, "Closing loop with [[A.5.17]]"),
     ],
 )
 
@@ -6479,7 +6583,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A515_APPROVAL,
     REQ_A515_COMMUNICATION,
     REQ_A515_REVIEW,
-    REQ_A516_IDENTITY_MANAGEMENT,
+    # A.5.16 — 4-leaf operational_process (2026-05-31; program review freshness=180)
+    REQ_A516_PROCEDURE,
+    REQ_A516_IDENTITY_REGISTER,
+    REQ_A516_PROGRAM_REVIEW,
+    REQ_A516_REVOCATION_RECORD,
     REQ_A517_AUTHENTICATION_INFORMATION,
     # A.5.19 — 4-leaf operational_process (2026-05-31)
     REQ_A519_SUPPLIER_RISK_PROCEDURE,
