@@ -1440,6 +1440,45 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Phase B policy_program information-transfer (commit 2026-05-31) ──
+    # Eleventh Phase B bulk batch (single-control): A.5.14 promoted to
+    # policy_program 4-leaf — information_transfer_policy + management_
+    # approval + communication_record + periodic_review (365d). Same shape
+    # as A.5.10/A.5.12/A.5.15 from batch 2. Cascade from A.5.12
+    # classification scheme via scheme_alignment MUST. Cross-link to A.5.20
+    # supplier agreements for the transfer-agreements SHOULD path. New
+    # legal_jurisdiction MUST explicitly aligns with GDPR Chap V (Art.44-49)
+    # international-transfer mechanisms — first batch where ISO + GDPR
+    # alignment is encoded directly in a MUST citation rationale.
+
+    EvalCase(
+        id=68,
+        query="pending engine verdict for A.5.14",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "information_transfer"],
+        expected_refs=["A.5.14"],
+        expected_type="posture_check",
+        must_contain=["A.5.14", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.14 (Information transfer) Phase B promotion to "
+            "policy_program 4-leaf: information_transfer_policy + "
+            "management_approval + communication_record + periodic_review "
+            "(freshness 365d). Live posture flips from Comply (hand-entered "
+            "finding citing Microsoft 365 + SSPA + GDPR coverage) to engine-"
+            "proposed NC at 0/4 — engine sees no per-leaf evidence on any "
+            "of the 4 siblings. First policy_program batch since batch 2 "
+            "(A.5.10/A.5.12/A.5.15) — re-validates the spine consistency. "
+            "New legal_jurisdiction MUST explicitly aligns with GDPR Chap V "
+            "(Art.44-49) international-transfer mechanisms — codifies the "
+            "ISO × GDPR alignment at the spec level, following pii_overlay "
+            "in batch 10."
+        ),
+    ),
+
     EvalCase(
         id=41,
         query="is A.5.30 compliant?",

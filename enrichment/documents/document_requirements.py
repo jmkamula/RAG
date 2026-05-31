@@ -2164,25 +2164,117 @@ REQ_A513_APPLICATION_RECORD = EvidenceRequirement(
     ],
 )
 
-REQ_A514_INFORMATION_TRANSFER = EvidenceRequirement(
+# ── Annex A.5.14 — Information transfer — policy_program (4-leaf) ─────────────
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: policy_program → policy +
+# approval + communication_record + review_record. Same shape as the
+# batch-2 policy_program family (A.5.10 AUP, A.5.12 classification,
+# A.5.15 access control). The policy leaf id is preserved; three siblings
+# are new.
+#
+# ISO 27002:2022 § 5.14 says the control may be satisfied by "rules,
+# procedures or agreements" — the org may pick the artefact form. Arion
+# satisfies via policy (per the existing single-leaf framing and live
+# finding). The transfer-agreements path (for frequent counterparties)
+# remains a SHOULD on the policy and cross-links to A.5.20 supplier
+# agreements where applicable.
+#
+# Review freshness 365d — same cadence as the rest of the policy_program
+# family. Information-transfer rules track classification scheme (A.5.12),
+# cross-border legal landscape, and new tech rollouts — none of these
+# move faster than annually.
+#
+# Cross-control: scheme_alignment cross-links to A.5.12; transfer-agreement
+# SHOULD cross-links to A.5.20; cross-border jurisdiction MUST aligns with
+# GDPR Art.44-49 international-transfer chapter.
+#
+# Authority: ISO 27002:2022 § 5.14 implementation guidance — rules for
+# all transfer facility types (electronic/physical/verbal); authorisation
+# requirements; classification-aware protections; jurisdictional + legal
+# considerations; transfer agreements with external parties.
+
+REQ_A514_POLICY = EvidenceRequirement(
     id            = "req:A.5.14:information_transfer_policy",
     control_ref   = "A.5.14",
     standard_id   = "ISO27001:2022",
     evidence_type = "policy",
     title         = "Information Transfer Policy",
     trigger_type  = "universal",
-    description   = "A.5.14 requires transfer rules, procedures, or agreements covering all transfer facilities within the organization and to/from other parties. Evidence is a policy covering electronic, physical, and verbal transfers with protections per classification",
+    description   = "A.5.14 requires rules, procedures or agreements covering all transfer facilities within the organisation and to/from external parties. The policy documents electronic/physical/verbal transfer rules, authorisation thresholds, classification-aware protections, jurisdictional considerations and approved-channel lists. Approval, communication and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.14:electronic_transfer","Rules for electronic transfers (email, file transfer, cloud sharing) with encryption requirements per classification", "must", False, "A.5.14 — transfer facilities"),
-        ChecklistItem("item:A.5.14:physical_media",   "Rules for physical media transfers (removable storage, paper documents, post/courier)", "must", False, "A.5.14 — all types of transfer facilities"),
-        ChecklistItem("item:A.5.14:verbal_visual",    "Rules for verbal and visual transfers (calls, screen-shares, in-person discussions in public)", "must", False, "A.5.14 — all types"),
-        ChecklistItem("item:A.5.14:internal_vs_external","Distinction between internal and external transfer requirements", "must", False, "A.5.14 — within the organization and between"),
-        ChecklistItem("item:A.5.14:authorisation",    "Authorisation requirements for transfers above defined classification levels", "must", False, "A.5.14 — rules"),
-        ChecklistItem("item:A.5.14:legal_jurisdiction","Legal and jurisdictional considerations (cross-border transfers, data sovereignty)", "must", False, "A.5.14 — between organization and other parties"),
+        ChecklistItem("item:A.5.14:electronic_transfer",  "Rules for electronic transfers (email, file transfer, cloud sharing, APIs) with encryption requirements per classification level",                  "must", False, "27002:5.14 — transfer facilities"),
+        ChecklistItem("item:A.5.14:physical_media",       "Rules for physical media transfers (removable storage, paper documents, post/courier — tamper-evident packaging where appropriate)",              "must", False, "27002:5.14 — all transfer facility types"),
+        ChecklistItem("item:A.5.14:verbal_visual",        "Rules for verbal and visual transfers (calls, screen-shares, in-person discussions in public spaces, conference talks where sensitive info may appear)", "must", False, "27002:5.14 — all transfer facility types"),
+        ChecklistItem("item:A.5.14:internal_vs_external", "Distinction between internal and external transfer requirements (within-org transfers may have lighter controls than out-bound to third parties)",      "must", False, "27002:5.14 — within the organisation and between"),
+        ChecklistItem("item:A.5.14:authorisation",        "Authorisation requirements for transfers above defined classification levels (who approves, for which level, for which counterparty)",                "must", False, "27002:5.14 — rules"),
+        ChecklistItem("item:A.5.14:legal_jurisdiction",   "Legal and jurisdictional considerations (cross-border transfers, data sovereignty, GDPR Art.44-49 international-transfer mechanisms)",                  "must", False, "27002:5.14 + GDPR Chap V"),
+        ChecklistItem("item:A.5.14:scheme_alignment",     "Alignment with the A.5.12 classification scheme stated explicitly (transfer protections per level — cascade from parent scheme)",                       "must", False, "27002:5.14 + cross-link to [[A.5.12]]"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.14:transfer_agreements","Standard transfer agreements with frequent counterparties", "should", False, "Efficiency"),
-        ChecklistItem("item:A.5.14:approved_channels","Approved channel list (e.g. encrypted email, sanctioned file-sharing)", "should", False, "User clarity"),
+        ChecklistItem("item:A.5.14:transfer_agreements",  "Standard transfer agreements with frequent counterparties referenced (cross-link to A.5.20 supplier agreements path where the counterparty is also a supplier)", "should", False, "Efficiency + cross-link to [[A.5.20]]"),
+        ChecklistItem("item:A.5.14:approved_channels",    "Approved channel list (e.g. encrypted email, sanctioned file-sharing platforms, MFT solutions) per classification level",                              "should", False, "User clarity"),
+        ChecklistItem("item:A.5.14:emergency_path",       "Emergency / out-of-band transfer path (when standard channels are unavailable — break-glass procedure with post-hoc authorisation)",                   "should", False, "Real-world coverage"),
+    ],
+)
+
+REQ_A514_APPROVAL = EvidenceRequirement(
+    id            = "req:A.5.14:management_approval",
+    control_ref   = "A.5.14",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "approval",
+    title         = "Management Approval of Information Transfer Policy",
+    trigger_type  = "universal",
+    description   = "Transfer-policy authority is needed when rules are enforced against users (refusing to send / requiring encryption) or against external counterparties (mandating agreements before disclosure). Management approval establishes the legitimate authority for the policy and the consequences of violation. Approval names a signatory at the appropriate management level, a date, and the specific policy version",
+    must_contain  = [
+        ChecklistItem("item:A.5.14:approval_signatory",  "Signatory at appropriate management level (typically CISO with executive endorsement; CIO co-sign where transfer mechanisms involve IT systems)", "must", False, "27002:5.14 + clause 5.1"),
+        ChecklistItem("item:A.5.14:approval_date",       "Approval date recorded",                                                                                                                          "must", False, "Clause 5.1"),
+        ChecklistItem("item:A.5.14:approval_target",     "Reference to the specific version of the transfer policy being approved",                                                                          "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.14:approval_authority",  "Statement of the signatory's authority (delegation chain if not top-management; legal department consultation noted if cross-border scope)",       "should", False, "Accountability + cross-border defence"),
+    ],
+)
+
+REQ_A514_COMMUNICATION = EvidenceRequirement(
+    id            = "req:A.5.14:communication_record",
+    control_ref   = "A.5.14",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "communication_record",
+    title         = "Information Transfer Policy Communication Record",
+    trigger_type  = "universal",
+    description   = "Transfer-policy enforcement requires every personnel who could initiate a transfer (which is essentially everyone) to have been informed of the rules — channel choices, encryption requirements, classification gates and external-party disclosure obligations only work if people know about them. Evidence must show active distribution and ideally individual acknowledgement (signature, click-through, training completion), not mere intranet availability",
+    must_contain  = [
+        ChecklistItem("item:A.5.14:comm_date",          "Date of publication/communication",                                                                                                                "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.14:comm_audience",      "Audience reached (all in-scope users, including new joiners; targeted refresh for users who handle sensitive transfers frequently)",              "must", False, "27002:5.14 — relevant personnel"),
+        ChecklistItem("item:A.5.14:comm_channel",       "Channel used (mandatory training module, intranet publication with notification, signature campaign)",                                              "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.14:comm_acknowledgement","User-level acknowledgement captured (e-signature, training completion record, click-through)",                                                     "must", False, "Enforceability — burden of proof"),
+        ChecklistItem("item:A.5.14:comm_onboarding",    "Distribution at onboarding for new personnel evidenced (induction pack, mandatory module covering transfer rules + approved channels)",            "must", False, "27002:5.14 — sustained communication"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.14:comm_refresh",       "Periodic re-acknowledgement (annual at minimum) referenced",                                                                                       "should", False, "Sustained communication"),
+        ChecklistItem("item:A.5.14:comm_scenario_examples","Scenario-based examples included in training (e.g. external auditor data request, supplier integration handover, regulator response)",           "should", False, "Practical effectiveness"),
+    ],
+)
+
+REQ_A514_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.14:periodic_review",
+    control_ref     = "A.5.14",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Information Transfer Policy Review",
+    trigger_type    = "universal",
+    description     = "Transfer policies decay as the technology landscape shifts (new collaboration platforms, new AI tools that exfiltrate by design), as the legal landscape shifts (cross-border data flow rulings, regulator guidance), and as the org's transfer mix shifts (new supplier integrations, new regulatory reporting). The review captures the periodic check: technology check, legal-landscape scan, transfer-mix audit, training-effectiveness sample, and resulting program adjustments",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.14:review_date",         "Review date within the planned interval",                                                                                                          "must", False, "Periodic review"),
+        ChecklistItem("item:A.5.14:review_reviewer",     "Reviewer identity and role (CISO + Data Protection Officer + Legal jointly where cross-border transfers are in scope)",                              "must", False, "Accountability"),
+        ChecklistItem("item:A.5.14:review_outcome",      "Outcome captured (no change / amended / re-issued) with rationale per amendment",                                                                   "must", False, "Periodic review"),
+        ChecklistItem("item:A.5.14:review_tech_check",   "Technology check — new transfer mechanisms in use (AI assistants, new collab platforms, new file-sharing tools) that need explicit rules added",   "must", False, "27002:5.14 — keep current"),
+        ChecklistItem("item:A.5.14:review_legal_scan",   "Legal-landscape scan (cross-border ruling updates, regulator guidance, sectoral rules that touch transfers — GDPR Chap V, sector schemes)",       "must", False, "27002:5.14 + GDPR Chap V"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.14:review_triggers",     "Ad-hoc triggers listed (new tooling rollout, regulator action against peer, incident lessons-learned involving a transfer breach)",                "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.14:review_next_date",    "Next planned review date stated",                                                                                                                  "should", False, "Planning"),
     ],
 )
 
@@ -6377,7 +6469,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A513_COVERAGE_REGISTER,
     REQ_A513_PROGRAM_REVIEW,
     REQ_A513_APPLICATION_RECORD,
-    REQ_A514_INFORMATION_TRANSFER,
+    # A.5.14 — 4-leaf policy_program (2026-05-31; review freshness=365)
+    REQ_A514_POLICY,
+    REQ_A514_APPROVAL,
+    REQ_A514_COMMUNICATION,
+    REQ_A514_REVIEW,
     # A.5.15 — 4-leaf policy_program (2026-05-29)
     REQ_A515_POLICY,
     REQ_A515_APPROVAL,
