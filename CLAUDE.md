@@ -28,7 +28,7 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 60/66 PASS before any restart (66 cases; #24 + #25 known-stale;
+# Must be 60/67 PASS before any restart (67 cases; #24 + #25 known-stale;
 #   #3 + #21 also LLM-stochastic but ~85% PASS — not formally known-stale):
 #   #25 — "is Art.5 a non-conformity?" (anti-hallucination, since 2026-05-27)
 #   #24 — "what is our GDPR Art.32 status?" (~30-50% pass rate; LLM-stochastic
@@ -155,13 +155,13 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260531_*.csv (66 cases — 21 core + 18
+- Most recent: results/eval_20260531_*.csv (67 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
   5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
   1 Phase B op_process evidence-handling + 1 Phase B op_process project-security
-  + 1 Phase B op_process return-of-assets)
-- Score: 60/66 PASS, 0 WARN, 6 FAIL (some runs 61/66 or 62/66 due to #24
+  + 1 Phase B op_process return-of-assets + 1 Phase B op_process labelling)
+- Score: 60/67 PASS, 0 WARN, 7 FAIL (some runs 61/67 or 62/67 due to #24
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -223,6 +223,12 @@ with d.session() as s:
   non-returns; new non_return_path MUST surfaces real-world friction;
   review freshness 365d (HR methodology stable); cross-control links
   to A.5.9 asset register + A.8.10 information deletion)
+- Case 67 locks in: Phase B operational_process labelling (A.5.13;
+  per-platform application_record lifecycle-end variant — proves
+  labelling extended to each new system; first cascade-cadence pattern
+  (review freshness inherited from A.5.12 parent scheme); new
+  pii_overlay MUST pins ISO confidentiality × GDPR PII integration
+  at spec level; cross-control links to A.5.12 scheme + A.7.10 media)
 - Prior known-stale cases (#2, #3, #4, #24, #25, #28) restored to PASS on
   2026-05-25 via Path A: replayed status_before from posture_status_log to
   revert the 27 Stage-1-driven finding mutations, and stripped the offending
