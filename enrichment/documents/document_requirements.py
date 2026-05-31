@@ -1398,24 +1398,111 @@ REQ_A56_REVIEW = EvidenceRequirement(
     ],
 )
 
-REQ_A57_THREAT_INTELLIGENCE = EvidenceRequirement(
+# ── Annex A.5.7 — Threat intelligence — operational_process (4-leaf) ──────────
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → procedure
+# + register + review_record + revocation_record (lifecycle-end). The
+# lifecycle-end slot is realised as the per-product intelligence record — the
+# actual deliverable (IOC list, threat briefing, advisory) that proves the
+# program is producing value tied to named consumers. Program review tightened
+# to 180d (same rationale as A.5.25 + A.5.26 — detection landscape volatility:
+# feed quality shifts, IOC libraries age within weeks, new TTPs emerge inside
+# the quarter). The procedure leaf id is preserved; three siblings are new.
+# Authority: ISO 27002:2022 § 5.7 implementation guidance (three layers —
+# strategic / tactical / operational; activities — sources, collection,
+# analysis, communication, sharing).
+
+REQ_A57_THREAT_INTELLIGENCE_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.7:threat_intelligence_procedure",
     control_ref   = "A.5.7",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Threat Intelligence Programme Procedure",
     trigger_type  = "universal",
-    description   = "A.5.7 requires information about information security threats to be collected and analysed to produce threat intelligence. Evidence is a documented procedure covering sources, collection cadence, analysis approach, and intelligence products",
+    description   = "A.5.7 requires information about information security threats to be collected and analysed to produce threat intelligence across strategic, tactical and operational layers. The procedure documents sources, collection cadence, analysis approach, the three intelligence layers, distribution to named consumers, and the feedback loop into risk and operational controls. The feed register, periodic program review and per-product intelligence records are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.7:sources",          "Threat intelligence sources enumerated (open-source feeds, vendor feeds, ISACs, government advisories)", "must", False, "A.5.7 — collected"),
-        ChecklistItem("item:A.5.7:collection_cadence","Collection cadence stated (continuous, daily, weekly)", "must", False, "A.5.7 — collected"),
-        ChecklistItem("item:A.5.7:analysis_approach","Analysis approach defined (correlation, prioritisation, relevance filtering)", "must", False, "A.5.7 — analysed"),
-        ChecklistItem("item:A.5.7:products",         "Intelligence products produced (IOC lists, threat briefings, advisories)", "must", False, "A.5.7 — produce threat intelligence"),
-        ChecklistItem("item:A.5.7:distribution",     "Distribution path to consumers (security ops, IT, risk owners)", "must", False, "A.5.7 — produce"),
+        ChecklistItem("item:A.5.7:sources",          "Threat intelligence sources enumerated (open-source feeds, vendor feeds, ISACs, government advisories, paid intel services)", "must", False, "27002:5.7 — sources establishment"),
+        ChecklistItem("item:A.5.7:layers",           "Three intelligence layers covered: strategic (sector/long-term), tactical (attacker methodologies/TTPs), operational (specific attack details/IOCs)", "must", False, "27002:5.7 — three layers"),
+        ChecklistItem("item:A.5.7:collection_cadence","Collection cadence stated per source (continuous, daily, weekly)", "must", False, "27002:5.7 — collection"),
+        ChecklistItem("item:A.5.7:analysis_approach","Analysis approach defined (relevance to org assets, integrity verification, completeness, correlation, prioritisation)", "must", False, "27002:5.7 — analysis"),
+        ChecklistItem("item:A.5.7:products",         "Intelligence products defined per layer (IOC lists, TTP signatures, threat briefings, sector advisories)", "must", False, "27002:5.7 — produce threat intelligence"),
+        ChecklistItem("item:A.5.7:distribution",     "Distribution path to named consumers (security ops, IT/network, risk owners, exec briefing)", "must", False, "27002:5.7 — communication"),
+        ChecklistItem("item:A.5.7:control_use",      "Use into technical controls (firewall blocklists, IDS rules, EDR indicators, vulnerability prioritisation)", "must", False, "27002:5.7 — informed defensive action"),
+        ChecklistItem("item:A.5.7:risk_feedback",    "Feedback loop into the risk register / risk assessment (intel that surfaces new exposures triggers reassessment)", "must", False, "27002:5.7 — informed risk treatment"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.7:risk_feedback",    "Feedback loop into the risk register / risk assessment", "should", False, "Closes the operational loop"),
-        ChecklistItem("item:A.5.7:product_retention","Retention period for intelligence products", "should", False, "Audit + lookback"),
+        ChecklistItem("item:A.5.7:sharing",          "Outbound intelligence sharing path (ISAC contributions, peer briefings)", "should", False, "27002:5.7 — sharing of analysed intel"),
+        ChecklistItem("item:A.5.7:exercise_input",   "Use into exercises / tabletop scenarios (intel informs realistic scenarios)", "should", False, "27002:5.7 — exercise planning"),
+        ChecklistItem("item:A.5.7:product_retention","Retention period for intelligence products stated (often shorter than other compliance records — IOC libraries age fast)", "should", False, "Audit + lookback proportional to relevance"),
+    ],
+)
+
+REQ_A57_FEED_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.7:threat_intel_feed_register",
+    control_ref   = "A.5.7",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Threat Intelligence Feed Register",
+    trigger_type  = "universal",
+    description   = "A.5.7 requires a curated set of sources, not an ad-hoc list. The feed register catalogues every active intelligence source with metadata that allows the program review to assess which feeds deliver value: source name, layer, owner inside the org, last received signal, cost, signal/noise rating. Decommissioned feeds are retained with end-date for traceability",
+    must_contain  = [
+        ChecklistItem("item:A.5.7:reg_source_id",      "Each active source captured with a unique identifier",                                                                  "must", False, "27002:5.7 — sources"),
+        ChecklistItem("item:A.5.7:reg_layer",          "Intelligence layer per row (strategic / tactical / operational)",                                                       "must", False, "27002:5.7 — three layers"),
+        ChecklistItem("item:A.5.7:reg_owner",          "Internal owner per row accountable for the source (renewal, escalation, value assessment)",                             "must", False, "Accountability"),
+        ChecklistItem("item:A.5.7:reg_last_received",  "Last-received timestamp per row (stale-feed detection)",                                                                "must", False, "27002:5.7 — collection cadence verified"),
+        ChecklistItem("item:A.5.7:reg_cost",           "Cost per row (paid feeds vs free) — required for value review",                                                          "must", False, "Program economics"),
+        ChecklistItem("item:A.5.7:reg_signal_rating",  "Signal/noise rating per row (high/medium/low) updated at each program review",                                          "must", False, "27002:5.7 — relevance"),
+        ChecklistItem("item:A.5.7:reg_internal_input", "Internal sources captured alongside external (e.g. A.5.6 SIG-membership outputs, internal IR observations)",            "must", False, "27002:5.7 — internal/external balance"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.7:reg_decommissioned", "Decommissioned sources retained with end-date and reason (audit trail)",                                                 "should", False, "Operational discipline"),
+        ChecklistItem("item:A.5.7:reg_contact",        "Contact per row (vendor support, ISAC liaison)",                                                                         "should", False, "Operational continuity"),
+    ],
+)
+
+REQ_A57_PROGRAM_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.7:threat_intel_program_review",
+    control_ref    = "A.5.7",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Threat Intelligence Program Review",
+    trigger_type   = "universal",
+    description    = "The threat intelligence program creates value only if it closes the loop into defensive action — feeds get retired when stale, consumer feedback drives product changes, and analysis effort tracks the threats relevant to the org. The review captures the planned-interval check: feed-value analysis, products delivered, consumer feedback, missed-event analysis, and resulting program adjustments. Cadence tightened to 180 days — detection landscape volatility outpaces annual cycles",
+    freshness_days = 180,
+    must_contain   = [
+        ChecklistItem("item:A.5.7:rev_date",              "Review date within the planned 180-day interval",                                                                    "must", False, "27002:5.7 — periodic"),
+        ChecklistItem("item:A.5.7:rev_reviewer",          "Reviewer identity (program owner + InfoSec lead jointly)",                                                            "must", False, "Accountability"),
+        ChecklistItem("item:A.5.7:rev_feed_value",        "Feed-value analysis per source (which feeds delivered actionable IOCs / advisories; which were dropped)",            "must", False, "27002:5.7 — sources curation"),
+        ChecklistItem("item:A.5.7:rev_products_delivered","Products delivered count and distribution evidenced (proves the program ran, not just the procedure existed)",      "must", False, "27002:5.7 — produce threat intelligence"),
+        ChecklistItem("item:A.5.7:rev_consumer_feedback", "Consumer feedback collected from named consumers (sec ops, A.5.21 supplier risk, A.5.25 detection, exec briefing)", "must", False, "27002:5.7 — communication effectiveness"),
+        ChecklistItem("item:A.5.7:rev_missed",            "Missed-event analysis (events surfaced by A.5.25 triage or A.5.27 lessons that intel didn't flag in advance)",       "must", False, "Closing the loop with [[A.5.25]] / [[A.5.27]]"),
+        ChecklistItem("item:A.5.7:rev_actions",           "Action items captured for the program (e.g. add new feed, retire stale source, tune analysis cadence)",              "must", False, "27002:5.7 — program adjustments"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.7:rev_landscape",         "External threat-landscape snapshot considered (industry reports, vendor briefings)",                                 "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.7:rev_next_date",         "Next planned review date stated (within 180d of this review)",                                                       "should", False, "Planning"),
+    ],
+)
+
+REQ_A57_INTEL_PRODUCT_RECORD = EvidenceRequirement(
+    id            = "req:A.5.7:intel_product_record",
+    control_ref   = "A.5.7",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Product Intelligence Records",
+    trigger_type  = "universal",
+    description   = "A.5.7 expects intelligence to actually reach consumers and inform defensive action — not just be produced and filed. The per-product record evidences each delivered artefact: product id, layer, source feeds aggregated, named consumer(s), distribution date, action taken downstream (firewall rule pushed / IDS signature added / risk register entry / exec briefing). One record per published product, traceable back to the feed register and forward to the consumer's control",
+    must_contain  = [
+        ChecklistItem("item:A.5.7:prod_id",            "Product identifier per record (unique, sequenced)",                                                                    "must", False, "27002:5.7 — produce threat intelligence"),
+        ChecklistItem("item:A.5.7:prod_layer",         "Intelligence layer per record (strategic / tactical / operational)",                                                   "must", False, "27002:5.7 — three layers"),
+        ChecklistItem("item:A.5.7:prod_sources",       "Source feeds aggregated per record (links to feed register entries)",                                                  "must", False, "27002:5.7 — sources traceability"),
+        ChecklistItem("item:A.5.7:prod_consumer",      "Named consumer(s) per record (sec ops, IT/network, risk owners, exec briefing)",                                       "must", False, "27002:5.7 — communication"),
+        ChecklistItem("item:A.5.7:prod_distribution",  "Distribution date and channel per record (email, ticket, briefing)",                                                   "must", False, "27002:5.7 — delivered"),
+        ChecklistItem("item:A.5.7:prod_action_taken",  "Action taken downstream per record (firewall rule / IDS signature / risk register entry / control update / no-op)",   "must", False, "27002:5.7 — informed defensive action"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.7:prod_effectiveness", "Effectiveness check planned or recorded (post-distribution validation that the product drove the intended action)",   "should", False, "Continual improvement"),
+        ChecklistItem("item:A.5.7:prod_retention_end", "Retention end-date noted (IOC libraries age fast — old products marked for archive/disposal)",                          "should", False, "Operational discipline"),
     ],
 )
 
@@ -5851,7 +5938,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A56_ENGAGEMENT_PROCEDURE,
     REQ_A56_RISK_TOPIC_SCOPE,
     REQ_A56_REVIEW,
-    REQ_A57_THREAT_INTELLIGENCE,
+    # A.5.7 — 4-leaf operational_process (2026-05-31; program review freshness=180)
+    REQ_A57_THREAT_INTELLIGENCE_PROCEDURE,
+    REQ_A57_FEED_REGISTER,
+    REQ_A57_PROGRAM_REVIEW,
+    REQ_A57_INTEL_PRODUCT_RECORD,
     REQ_A58_PROJECT_MANAGEMENT_SECURITY,
     # A.5.9 — 4-leaf records_program (2026-05-29; register/review both freshness=90)
     REQ_A59_ASSET_REGISTER,

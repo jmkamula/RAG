@@ -1247,6 +1247,43 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Phase B operational_process threat intelligence (commit 2026-05-31) ──
+    # Fifth Phase B bulk batch (single-control): A.5.7 promoted to
+    # operational_process 4-leaf — threat_intelligence_procedure +
+    # threat_intel_feed_register + threat_intel_program_review (180d) +
+    # intel_product_record. The lifecycle-end slot is the per-product
+    # intelligence record (each IOC list / advisory / briefing delivered to
+    # a named consumer). Review freshness 180d for the same detection-
+    # landscape rationale as A.5.25 + A.5.26. Cross-control: feed register
+    # captures internal sources from A.5.6 SIG outputs; program review
+    # checks consumer feedback from A.5.21 / A.5.25 / A.5.27.
+
+    EvalCase(
+        id=63,
+        query="pending engine verdict for A.5.7",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "threat_intel"],
+        expected_refs=["A.5.7"],
+        expected_type="posture_check",
+        must_contain=["A.5.7", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.7 (Threat intelligence) Phase B promotion to "
+            "operational_process 4-leaf: threat_intelligence_procedure + "
+            "threat_intel_feed_register + threat_intel_program_review "
+            "(freshness 180d) + intel_product_record. Live posture flips "
+            "from Comply (PIMS-tagged hand-entered finding) to engine-"
+            "proposed NC at 0/4 — engine sees no per-leaf evidence on any "
+            "of the 4 siblings. Review freshness 180d because threat "
+            "landscape volatility (feed quality shifts, IOC libraries age "
+            "within weeks, new TTPs emerge inside a quarter) outpaces "
+            "annual cadence — same rationale as A.5.25 + A.5.26 in batch 4."
+        ),
+    ),
+
     EvalCase(
         id=41,
         query="is A.5.30 compliant?",
