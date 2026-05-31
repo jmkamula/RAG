@@ -2332,6 +2332,18 @@ REQ_A522_CHANGE_RESPONSE = EvidenceRequirement(
     ],
 )
 
+# ── Annex A.5.25 — Assessment of and decision on InfoSec events
+#                   — operational_process (4-leaf) ──────────────────────────────
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → procedure
+# + register + review_record + revocation_record (lifecycle-end). The
+# lifecycle-end slot is realised as the per-event triage decision record —
+# each event closes as either an incident (handed off to A.5.26), a false
+# positive (closed with reason), or a filed-for-trend near-miss. The
+# procedure leaf id is preserved; three siblings are new.
+# Authority: ISO 27002:2022 § 5.25 implementation guidance, with cross-
+# references to § 5.24 (incident planning umbrella) and § 5.26 (response).
+
 REQ_A525_EVENT_TRIAGE = EvidenceRequirement(
     id            = "req:A.5.25:event_assessment_procedure",
     control_ref   = "A.5.25",
@@ -2339,30 +2351,100 @@ REQ_A525_EVENT_TRIAGE = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Security Event Assessment and Triage Procedure",
     trigger_type  = "universal",
-    description   = "A.5.25 requires the organization to assess information security events and decide whether to categorise them as incidents. Evidence is a triage procedure covering detection sources, assessment criteria, decision authority, and handoff to incident response (A.5.26)",
+    description   = "A.5.25 requires the organization to assess information security events and decide whether to categorise them as incidents. The procedure documents detection sources, assessment criteria, decision authority, classification scale and handoff to incident response (A.5.26). The event triage log, periodic triage-program review and per-event triage decision record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.25:detection_sources","Detection sources enumerated (monitoring, user reports, third parties)", "must", False, "A.5.25 — events"),
-        ChecklistItem("item:A.5.25:assessment_criteria","Assessment criteria (impact, scope, certainty) for classifying severity", "must", False, "A.5.25 — assess"),
-        ChecklistItem("item:A.5.25:decision_authority","Decision authority named (who decides event vs incident vs false positive)", "must", False, "A.5.25 — decide"),
-        ChecklistItem("item:A.5.25:classification_scale","Classification scale used (event, near-miss, incident with severity)", "must", False, "A.5.25 — categorized"),
-        ChecklistItem("item:A.5.25:triage_timeline", "Timeline for triage decision after detection", "must", False, "A.5.25 — assess and decide"),
-        ChecklistItem("item:A.5.25:handoff",         "Handoff to incident response process (A.5.26) when classified as incident", "must", False, "A.5.25 — incidents"),
+        ChecklistItem("item:A.5.25:detection_sources",   "Detection sources enumerated (monitoring, user reports, third parties)",                                                       "must", False, "27002:5.25 — events"),
+        ChecklistItem("item:A.5.25:assessment_criteria", "Assessment criteria (impact, scope, certainty) for classifying severity",                                                       "must", False, "27002:5.25 — categorising"),
+        ChecklistItem("item:A.5.25:decision_authority",  "Decision authority named (who decides event vs incident vs false positive)",                                                    "must", False, "27002:5.25 — decision"),
+        ChecklistItem("item:A.5.25:classification_scale","Classification scale used (event, near-miss, incident with severity)",                                                          "must", False, "27002:5.25 — agreed classification scheme"),
+        ChecklistItem("item:A.5.25:triage_timeline",     "Timeline for triage decision after detection",                                                                                  "must", False, "27002:5.25 — assess and decide"),
+        ChecklistItem("item:A.5.25:handoff",             "Handoff to incident response process (A.5.26) when classified as incident",                                                     "must", False, "27002:5.25 — incidents"),
+        ChecklistItem("item:A.5.25:correlation",         "Correlation / aggregation of events for trend identification (links to A.8.16 monitoring)",                                     "must", False, "27002:5.25 — correlation"),
+        ChecklistItem("item:A.5.25:competent_access",    "Competent personnel given access to event/incident/weakness records",                                                           "must", False, "27002:5.25 — competent personnel"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.25:severity_matrix", "Severity matrix with concrete examples", "should", False, "Consistency across triagers"),
-        ChecklistItem("item:A.5.25:automation",      "Automation or playbook references for common event types", "should", False, "Scalability"),
+        ChecklistItem("item:A.5.25:severity_matrix",     "Severity matrix with concrete examples",                                                                                        "should", False, "Consistency across triagers"),
+        ChecklistItem("item:A.5.25:automation",          "Automation or playbook references for common event types",                                                                      "should", False, "Scalability"),
+        ChecklistItem("item:A.5.25:legal_advisory",      "Considers who may need to be informed (legal, operational, comms) even at triage stage",                                        "should", False, "27002:5.25 — informing"),
     ],
 )
 
+REQ_A525_TRIAGE_LOG = EvidenceRequirement(
+    id            = "req:A.5.25:event_triage_log",
+    control_ref   = "A.5.25",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Security Event Triage Log",
+    trigger_type  = "universal",
+    description   = "A.5.25 expects records of events, incidents and weaknesses to be maintained and accessible to competent personnel. The triage log is the live source of truth — every triaged event, its classification, decision and owner — feeding the periodic review and the per-event triage-decision records",
+    must_contain  = [
+        ChecklistItem("item:A.5.25:log_event_id",        "Each event captured with a unique identifier and detection timestamp",                                                          "must", False, "27002:5.25 — records of events"),
+        ChecklistItem("item:A.5.25:log_source",          "Detection source per row (which monitoring system / user / third party reported it)",                                            "must", False, "27002:5.25 — events"),
+        ChecklistItem("item:A.5.25:log_classification",  "Classification per row (event / near-miss / incident / false positive) with severity",                                           "must", False, "27002:5.25 — categorised"),
+        ChecklistItem("item:A.5.25:log_decision",        "Triage decision per row (close as false positive / file as near-miss / escalate to A.5.26)",                                    "must", False, "27002:5.25 — decision"),
+        ChecklistItem("item:A.5.25:log_owner",           "Named triager per row (accountability)",                                                                                        "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.25:log_fp_tag",          "False-positive flag tracked separately (drives calibration in the program review)",                                             "should", False, "Calibration"),
+        ChecklistItem("item:A.5.25:log_trend_tag",       "Trend / correlation tag where related events should be grouped",                                                                "should", False, "27002:5.25 — correlation"),
+    ],
+)
 
-# ── ISO 27001 Annex A.5 — incident response (A.5.26 worked example) ──────────
-# A.5.26 says: "Information security incidents shall be responded to in
-# accordance with the documented procedures." Single-leaf: the procedure
-# document itself. Periodic-review concerns live at A.5.36 (compliance
-# review) — not duplicated here. Triage decision (event → incident) lives at
-# A.5.25; lessons-learned at A.5.27; evidence handling at A.5.28. We point
-# to those via SHOULD items rather than redundant MUST items, so a single
-# procedure document that covers them all satisfies the leaf cleanly.
+REQ_A525_PROGRAM_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.25:triage_program_review",
+    control_ref    = "A.5.25",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Event Triage Program Review",
+    trigger_type   = "universal",
+    description    = "The triage program drifts when detection sources change, attack patterns evolve, or false-positive volume creeps. The review captures who reviewed the program, when, and the resulting calibration of detection sources, assessment criteria and classification scale",
+    freshness_days = 180,
+    must_contain   = [
+        ChecklistItem("item:A.5.25:rev_date",            "Review date within the planned interval",                                                                                      "must", False, "27002:5.25 — periodic"),
+        ChecklistItem("item:A.5.25:rev_reviewer",        "Reviewer identity (SecOps lead + InfoSec lead jointly)",                                                                       "must", False, "Accountability"),
+        ChecklistItem("item:A.5.25:rev_fp_rate",         "False-positive rate analysed across the period",                                                                                "must", False, "Calibration"),
+        ChecklistItem("item:A.5.25:rev_missed",          "Missed-event analysis (events surfaced via lessons-learned that triage didn't catch)",                                          "must", False, "Closing the loop with A.5.27"),
+        ChecklistItem("item:A.5.25:rev_calibration",     "Calibration outcome (detection sources / criteria / scale adjusted with rationale)",                                            "must", False, "27002:5.25 — keep current"),
+        ChecklistItem("item:A.5.25:rev_actions",         "Action items captured (e.g. add monitoring source, adjust severity threshold)",                                                 "must", False, "27002:5.25"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.25:rev_threat_intel",    "External threat intelligence input considered (link to A.5.7)",                                                                "should", False, "Detection landscape volatility"),
+        ChecklistItem("item:A.5.25:rev_next_date",       "Next planned review date stated",                                                                                              "should", False, "Planning"),
+    ],
+)
+
+REQ_A525_DECISION_RECORD = EvidenceRequirement(
+    id            = "req:A.5.25:triage_decision_record",
+    control_ref   = "A.5.25",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Event Triage Decision Records",
+    trigger_type  = "universal",
+    description   = "Every triaged event must close — as a false positive, as a near-miss filed for trend tracking, or by escalation to incident response (A.5.26). The decision record evidences the actual closure: which event, what was decided, the rationale, the authority, and the handoff link where applicable",
+    must_contain  = [
+        ChecklistItem("item:A.5.25:dec_event_ref",       "Event identifier per record (links back to the triage log row)",                                                                "must", False, "27002:5.25 — documented decision"),
+        ChecklistItem("item:A.5.25:dec_outcome",         "Decision outcome captured (false positive / filed near-miss / escalated to incident)",                                          "must", False, "27002:5.25 — decision"),
+        ChecklistItem("item:A.5.25:dec_rationale",       "Rationale stated (criteria-based reasoning, not just a binary outcome)",                                                        "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.25:dec_authority",       "Triage decision authority per record (named role or person)",                                                                   "must", False, "27002:5.25 — decision authority"),
+        ChecklistItem("item:A.5.25:dec_handoff",         "Where escalated: handoff reference into A.5.26 incident register",                                                              "must", False, "27002:5.25 — incidents"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.25:dec_timeliness",      "Timeliness target met (decision within stated triage timeline)",                                                                "should", False, "Operational discipline"),
+        ChecklistItem("item:A.5.25:dec_retro_flag",      "Retroactive-review flag where a closed event was later reopened (drives missed-event analysis in the program review)",          "should", False, "Closes loop with [[A.5.27]]"),
+    ],
+)
+
+# ── Annex A.5.26 — Response to InfoSec incidents — operational_process (4-leaf) ──
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → procedure
+# + register + review_record + revocation_record (lifecycle-end). The
+# lifecycle-end slot is realised as the per-incident closure record — each
+# incident closes with documented root cause, recovery validation and handoff
+# to A.5.27 lessons-learned. The procedure leaf id is preserved; three
+# siblings are new.
+# Authority: ISO 27002:2022 § 5.26 implementation guidance items a–i, with
+# cross-references to § 5.24 (planning), § 5.25 (triage), § 5.27 (lessons),
+# § 5.28 (evidence handling).
 
 REQ_A526_INCIDENT_RESPONSE_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.26:incident_response_procedure",
@@ -2371,22 +2453,100 @@ REQ_A526_INCIDENT_RESPONSE_PROCEDURE = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Incident Response Procedure",
     trigger_type  = "universal",
-    description   = "A.5.26 requires documented procedures for responding to information security incidents end-to-end. Evidence is a procedure document covering roles, containment, investigation, recovery, communication, and post-incident review",
+    description   = "A.5.26 requires documented procedures for responding to information security incidents end-to-end. The procedure covers roles, containment, investigation, eradication and recovery, communication, evidence collection, action logging and closure. The incident register, periodic IR-program review and per-incident closure record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.26:roles",          "Roles and responsibilities for incident response defined (Incident Manager, security team, comms lead, legal)", "must", False, "A.5.26 — execution needs assigned owners"),
-        ChecklistItem("item:A.5.26:containment",    "Containment steps documented (immediate actions to limit damage)", "must", False, "A.5.26 — respond to incidents"),
-        ChecklistItem("item:A.5.26:investigation",  "Investigation steps defined (root cause analysis, timeline reconstruction)", "must", False, "A.5.26 — documented procedures"),
-        ChecklistItem("item:A.5.26:eradication",    "Eradication and recovery steps documented (restore secure state)", "must", False, "A.5.26 — respond to incidents"),
-        ChecklistItem("item:A.5.26:communication",  "Internal and external communication criteria specified (who is informed, when, by whom)", "must", False, "A.5.26 — documented procedures"),
-        ChecklistItem("item:A.5.26:post_review",    "Post-incident review step required after closure", "must", False, "A.5.26 — supports A.5.27 lessons-learned"),
+        ChecklistItem("item:A.5.26:roles",                "Roles and responsibilities for incident response defined (Incident Manager, security team, comms lead, legal)",               "must", False, "27002:5.26 — coordination"),
+        ChecklistItem("item:A.5.26:containment",          "Containment steps documented (immediate actions to limit damage)",                                                            "must", False, "27002:5.26a"),
+        ChecklistItem("item:A.5.26:investigation",        "Investigation steps defined (root cause analysis, timeline reconstruction)",                                                  "must", False, "27002:5.26h"),
+        ChecklistItem("item:A.5.26:eradication",          "Eradication and recovery steps documented (restore secure state)",                                                            "must", False, "27002:5.26e"),
+        ChecklistItem("item:A.5.26:communication",        "Internal and external communication criteria specified (who is informed, when, by whom)",                                     "must", False, "27002:5.26c,g"),
+        ChecklistItem("item:A.5.26:evidence_collection", "Evidence collection step embedded in response (links to A.5.28 evidence-handling procedure)",                                  "must", False, "27002:5.26b"),
+        ChecklistItem("item:A.5.26:action_logging",       "All response decisions and actions logged (for evidence preservation and post-incident review)",                              "must", False, "27002:5.26f"),
+        ChecklistItem("item:A.5.26:post_review",          "Post-incident review step required after closure (handoff to A.5.27 lessons-learned)",                                        "must", False, "27002:5.26 — closing + § 5.27"),
+        ChecklistItem("item:A.5.26:classification_link", "References incident classification used at triage (links to A.5.25)",                                                          "must", False, "27002:5.25 → 5.26 handoff"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.26:classification_ref", "References incident classification used at triage (links to A.5.25)", "should", False, "Triage gates the response path"),
-        ChecklistItem("item:A.5.26:evidence_ref",       "References evidence handling procedure (links to A.5.28)",            "should", False, "Forensic preservation"),
-        ChecklistItem("item:A.5.26:authority_contacts", "References authority/regulator contact list (links to A.5.5)",        "should", False, "Some incidents trigger external notification"),
-        ChecklistItem("item:A.5.26:exercise_freq",      "Tabletop or simulation frequency stated (annual or more often)",       "should", False, "Validates the procedure works under pressure"),
+        ChecklistItem("item:A.5.26:authority_contacts",   "References authority/regulator contact list (links to A.5.5)",                                                                "should", False, "Some incidents trigger external notification"),
+        ChecklistItem("item:A.5.26:exercise_freq",        "Tabletop or simulation frequency stated (semi-annual or more often)",                                                          "should", False, "Validates the procedure works under pressure"),
+        ChecklistItem("item:A.5.26:nominated_contact",    "Nominated incident-handling contact named (for internal + supplier-side reporting)",                                          "should", False, "27002:5.26 — coordination"),
     ],
 )
+
+REQ_A526_INCIDENT_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.26:incident_register",
+    control_ref   = "A.5.26",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Information Security Incident Register",
+    trigger_type  = "universal",
+    description   = "A.5.26 expects incidents to be tracked from detection through closure, with the trail of actions preserved. The incident register is the live master record — every incident, its severity, status, owner, and the key lifecycle dates (detection, containment, eradication, recovery, closure) — feeding the periodic IR-program review and the per-incident closure records",
+    must_contain  = [
+        ChecklistItem("item:A.5.26:reg_incident_id",     "Each incident captured with a unique identifier (links to A.5.25 triage decision)",                                            "must", False, "27002:5.26 — recording"),
+        ChecklistItem("item:A.5.26:reg_severity",        "Severity per row (per the classification scale used at triage)",                                                                "must", False, "27002:5.26 — coordination by severity"),
+        ChecklistItem("item:A.5.26:reg_status",          "Status per row (open / contained / eradicated / recovered / closed)",                                                          "must", False, "27002:5.26e"),
+        ChecklistItem("item:A.5.26:reg_owner",           "Named Incident Manager / owner per row",                                                                                       "must", False, "Accountability"),
+        ChecklistItem("item:A.5.26:reg_lifecycle_dates", "Lifecycle dates per row: detected / contained / eradicated / recovered / closed",                                              "must", False, "27002:5.26 — log of decisions"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.26:reg_impact_flag",     "Public-facing or regulator-relevant impact flag per row (drives notification path)",                                            "should", False, "External notification triggers"),
+        ChecklistItem("item:A.5.26:reg_evidence_link",   "Reference to evidence package per row (link to A.5.28 evidence store)",                                                        "should", False, "Forensic preservation"),
+    ],
+)
+
+REQ_A526_IR_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.26:ir_program_review",
+    control_ref    = "A.5.26",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Incident Response Program Review",
+    trigger_type   = "universal",
+    description    = "IR readiness erodes between exercises and between incidents. The review records the planned-interval check of the program: MTTC/MTTR trends, exercise outcomes, procedure currency against threat landscape, and the resulting calibration of roles, runbooks and contact lists",
+    freshness_days = 180,
+    must_contain   = [
+        ChecklistItem("item:A.5.26:rev_date",            "Review date within the planned interval",                                                                                      "must", False, "27002:5.26 — periodic"),
+        ChecklistItem("item:A.5.26:rev_reviewer",        "Reviewer identity (Incident Manager + InfoSec lead jointly)",                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.5.26:rev_metrics",         "MTTC / MTTR / containment-success metrics analysed across the period",                                                          "must", False, "27002:5.26 — improvement"),
+        ChecklistItem("item:A.5.26:rev_exercise",        "Tabletop / simulation outcomes reviewed (or scheduled-but-not-yet-run noted)",                                                  "must", False, "27002:5.26 — exercises"),
+        ChecklistItem("item:A.5.26:rev_procedure_currency","Procedure currency assessed against threat landscape + new control changes",                                                  "must", False, "27002:5.26 — keep current"),
+        ChecklistItem("item:A.5.26:rev_actions",         "Action items captured (e.g. revise containment runbook, refresh contact list, schedule exercise)",                              "must", False, "27002:5.26"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.26:rev_benchmark",       "External benchmarking input considered (industry IR-metrics references)",                                                       "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.26:rev_next_date",       "Next planned review date stated",                                                                                              "should", False, "Planning"),
+    ],
+)
+
+REQ_A526_CLOSURE_RECORD = EvidenceRequirement(
+    id            = "req:A.5.26:incident_closure_record",
+    control_ref   = "A.5.26",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Incident Closure Records",
+    trigger_type  = "universal",
+    description   = "A.5.26 requires incidents to close with documented outcomes that feed § 5.27 lessons-learned. The closure record evidences the actual close: which incident, the root cause, the containment effectiveness, the recovery validation, and the handoff to lessons-learned. One record per incident, traceable back to the incident register",
+    must_contain  = [
+        ChecklistItem("item:A.5.26:cls_incident_ref",    "Incident identifier per record (links to the incident register)",                                                              "must", False, "27002:5.26 — recording"),
+        ChecklistItem("item:A.5.26:cls_root_cause",      "Root cause captured (technical + organisational contributors)",                                                                "must", False, "27002:5.26h"),
+        ChecklistItem("item:A.5.26:cls_containment_eff", "Containment effectiveness assessed (did the actions taken actually limit damage)",                                              "must", False, "27002:5.26a"),
+        ChecklistItem("item:A.5.26:cls_recovery_valid",  "Recovery validation evidenced (system returned to secure state; verified, not just attempted)",                                  "must", False, "27002:5.26e"),
+        ChecklistItem("item:A.5.26:cls_lessons_handoff", "Handoff reference into A.5.27 lessons register",                                                                                "must", False, "27002:5.26 → 5.27"),
+        ChecklistItem("item:A.5.26:cls_authoriser",      "Closure authority per record (named role)",                                                                                    "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.26:cls_external_notif",  "External notifications made per record (regulators, customers, suppliers)",                                                    "should", False, "27002:5.26 — communication"),
+        ChecklistItem("item:A.5.26:cls_evidence_archive","Evidence package archived per record (link to A.5.28 evidence store)",                                                          "should", False, "Forensic preservation"),
+    ],
+)
+
+# ── Annex A.5.27 — Learning from InfoSec incidents — operational_process (4-leaf) ──
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → procedure
+# + register + review_record + revocation_record (lifecycle-end). The
+# lifecycle-end slot is realised as the per-lesson improvement-action record
+# — the actual control update / training change / procedure amendment that
+# closes the loop A.5.26 → A.5.27 → strengthened controls. The procedure
+# leaf id is preserved; three siblings are new.
+# Authority: ISO 27002:2022 § 5.27 implementation guidance items a–f.
 
 REQ_A527_LESSONS_LEARNED = EvidenceRequirement(
     id            = "req:A.5.27:lessons_learned_procedure",
@@ -2395,17 +2555,88 @@ REQ_A527_LESSONS_LEARNED = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Lessons Learned from Information Security Incidents",
     trigger_type  = "universal",
-    description   = "A.5.27 requires knowledge from incidents to be used to strengthen and improve information security controls. Evidence is a lessons-learned procedure with capture, action assignment, and feedback into the broader control framework",
+    description   = "A.5.27 requires knowledge from incidents to be used to strengthen and improve information security controls, update risk assessments, refresh incident plans, and update training. The procedure documents capture, action assignment, pattern analysis, root-cause typing and feedback into the broader control framework. The lessons register, periodic program review and per-lesson improvement-action record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.27:trigger",        "Post-incident review trigger (every incident above a threshold, or all incidents)", "must", False, "A.5.27 — knowledge gained from incidents"),
-        ChecklistItem("item:A.5.27:capture_format", "Lessons capture format (what worked, what didn't, root causes, control gaps)", "must", False, "A.5.27 — knowledge"),
-        ChecklistItem("item:A.5.27:actions",        "Action items assigned to owners with target dates", "must", False, "A.5.27 — strengthen and improve"),
-        ChecklistItem("item:A.5.27:tracking",       "Tracking actions to closure with status updates", "must", False, "A.5.27 — improve"),
-        ChecklistItem("item:A.5.27:feedback_loop",  "Feedback loop into risk register, control catalogue, and training programmes", "must", False, "A.5.27 — information security controls"),
+        ChecklistItem("item:A.5.27:trigger",             "Post-incident review trigger (every incident above a threshold, or all incidents)",                                            "must", False, "27002:5.27 — mechanism"),
+        ChecklistItem("item:A.5.27:capture_format",      "Lessons capture format (what worked, what didn't, root causes, control gaps)",                                                "must", False, "27002:5.27 — knowledge"),
+        ChecklistItem("item:A.5.27:actions",             "Action items assigned to owners with target dates",                                                                            "must", False, "27002:5.27a — strengthen controls"),
+        ChecklistItem("item:A.5.27:tracking",            "Tracking actions to closure with status updates",                                                                              "must", False, "27002:5.27a"),
+        ChecklistItem("item:A.5.27:feedback_loop",       "Feedback loop into risk register, control catalogue, and training programmes",                                                "must", False, "27002:5.27a,b,d"),
+        ChecklistItem("item:A.5.27:risk_register_update","Risk-assessment update step where lessons reveal previously-unrecognised exposures",                                            "must", False, "27002:5.27b"),
+        ChecklistItem("item:A.5.27:pattern_analysis",    "Recurring-pattern analysis (lessons compared across incidents to find systemic causes)",                                       "must", False, "27002:5.27e"),
+        ChecklistItem("item:A.5.27:root_cause_typing",   "Root-cause typing (e.g. multiple incidents traced to lack of patching, MFA gaps)",                                              "must", False, "27002:5.27f"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.27:kb_update",      "Knowledge base or runbook update step", "should", False, "Captured knowledge stays useful"),
-        ChecklistItem("item:A.5.27:training_refresh","Training refresh step where lessons reveal awareness gaps", "should", False, "People dimension"),
+        ChecklistItem("item:A.5.27:kb_update",           "Knowledge base or runbook update step",                                                                                        "should", False, "Captured knowledge stays useful"),
+        ChecklistItem("item:A.5.27:training_refresh",    "Training refresh step where lessons reveal awareness gaps",                                                                    "should", False, "27002:5.27d"),
+        ChecklistItem("item:A.5.27:ir_plan_update",      "Incident management plan / procedure update step where lessons reveal procedural gaps",                                        "should", False, "27002:5.27c"),
+    ],
+)
+
+REQ_A527_LESSONS_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.27:lessons_register",
+    control_ref   = "A.5.27",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Lessons Learned Register",
+    trigger_type  = "universal",
+    description   = "A.5.27 requires lessons to be captured and acted on — without a register the action items disappear into someone's mailbox. The register tracks per-lesson: the source incident, root-cause type, control or training affected, owner, status, action due date and closure date. It feeds the periodic program review and the per-lesson improvement-action records",
+    must_contain  = [
+        ChecklistItem("item:A.5.27:reg_lesson_id",       "Each lesson captured with a unique identifier",                                                                                 "must", False, "27002:5.27 — knowledge"),
+        ChecklistItem("item:A.5.27:reg_source_incident", "Source incident reference per row (links to A.5.26 incident register)",                                                        "must", False, "27002:5.27 — from incidents"),
+        ChecklistItem("item:A.5.27:reg_root_cause_type", "Root-cause type per row (drives recurring-pattern analysis)",                                                                  "must", False, "27002:5.27f"),
+        ChecklistItem("item:A.5.27:reg_target",          "Target per row (which control / training / procedure is affected)",                                                            "must", False, "27002:5.27a"),
+        ChecklistItem("item:A.5.27:reg_owner",           "Named owner accountable for the action per row",                                                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.5.27:reg_status",          "Status per row (open / in-progress / closed / accepted)",                                                                       "must", False, "27002:5.27a — tracking"),
+        ChecklistItem("item:A.5.27:reg_due_closed",      "Action due date + closure date per row",                                                                                       "must", False, "Operational discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.27:reg_pattern_link",    "Pattern link per row where the lesson is part of a recurring cluster",                                                          "should", False, "27002:5.27e"),
+        ChecklistItem("item:A.5.27:reg_risk_update_ref", "Risk register update reference per row where applicable",                                                                       "should", False, "27002:5.27b"),
+    ],
+)
+
+REQ_A527_LESSONS_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.27:lessons_program_review",
+    control_ref    = "A.5.27",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Lessons-Learned Program Review",
+    trigger_type   = "universal",
+    description    = "The lessons program creates value only if it closes the loop — actions actually get done, lessons reduce repeat incidents, and the patterns drive systemic improvements. The review captures the planned-interval check: action-closure rate, repeat-incident detection, training-impact evidence, feedback-loop effectiveness and resulting program adjustments",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.27:rev_date",            "Review date within the planned interval",                                                                                      "must", False, "27002:5.27 — periodic"),
+        ChecklistItem("item:A.5.27:rev_reviewer",        "Reviewer identity (program owner + InfoSec lead jointly)",                                                                     "must", False, "Accountability"),
+        ChecklistItem("item:A.5.27:rev_closure_rate",    "Action-closure rate analysed (open / aged / closed) against targets",                                                          "must", False, "27002:5.27a"),
+        ChecklistItem("item:A.5.27:rev_repeat",          "Repeat-incident analysis (lessons that should have prevented later incidents — did they?)",                                    "must", False, "27002:5.27a,e"),
+        ChecklistItem("item:A.5.27:rev_training_impact", "Training-impact evidence reviewed where lessons drove curriculum changes",                                                      "must", False, "27002:5.27d"),
+        ChecklistItem("item:A.5.27:rev_actions",         "Action items captured for the program (e.g. tighten root-cause typing, expand pattern scope)",                                  "must", False, "27002:5.27"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.27:rev_benchmark",       "External benchmark or industry-practice input considered",                                                                      "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.27:rev_next_date",       "Next planned review date stated",                                                                                              "should", False, "Planning"),
+    ],
+)
+
+REQ_A527_IMPROVEMENT_RECORD = EvidenceRequirement(
+    id            = "req:A.5.27:improvement_action_record",
+    control_ref   = "A.5.27",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Lesson Improvement Action Records",
+    trigger_type  = "universal",
+    description   = "A.5.27 expects lessons to actually strengthen and improve controls — not just be captured in a register. The improvement-action record evidences the actual loop-closure: which lesson, what was changed (control updated / training added / procedure amended / risk formally accepted), proof of the change, authoriser and closure date. One record per closed lesson, traceable back to the lessons register and through to the source incident",
+    must_contain  = [
+        ChecklistItem("item:A.5.27:imp_lesson_ref",      "Lesson identifier per record (links to lessons register)",                                                                     "must", False, "27002:5.27 — knowledge applied"),
+        ChecklistItem("item:A.5.27:imp_action_type",     "Action type captured (control updated / training added / procedure amended / risk accepted)",                                  "must", False, "27002:5.27a,c,d"),
+        ChecklistItem("item:A.5.27:imp_evidence",        "Evidence of change (control configuration diff, training-record entry, procedure-revision link, risk-register entry)",         "must", False, "27002:5.27a — actual improvement"),
+        ChecklistItem("item:A.5.27:imp_authoriser",      "Authoriser per record (proportional to scope of the change)",                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.5.27:imp_closure_date",    "Closure date recorded",                                                                                                         "must", False, "27002:5.27a — tracking"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.27:imp_effectiveness",   "Effectiveness check planned or done (post-update validation that the change actually addressed the root cause)",                "should", False, "Continual improvement"),
+        ChecklistItem("item:A.5.27:imp_regression",      "Regression-prevention check (where the change replaced a previous control, verify the prior failure mode no longer applies)",  "should", False, "Operational discipline"),
     ],
 )
 
@@ -5667,9 +5898,21 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A522_SCHEDULE_REGISTER,
     REQ_A522_PROGRAM_REVIEW,
     REQ_A522_CHANGE_RESPONSE,
+    # A.5.25 — 4-leaf operational_process (2026-05-31; review freshness=180)
     REQ_A525_EVENT_TRIAGE,
+    REQ_A525_TRIAGE_LOG,
+    REQ_A525_PROGRAM_REVIEW,
+    REQ_A525_DECISION_RECORD,
+    # A.5.26 — 4-leaf operational_process (2026-05-31; review freshness=180)
     REQ_A526_INCIDENT_RESPONSE_PROCEDURE,
+    REQ_A526_INCIDENT_REGISTER,
+    REQ_A526_IR_REVIEW,
+    REQ_A526_CLOSURE_RECORD,
+    # A.5.27 — 4-leaf operational_process (2026-05-31)
     REQ_A527_LESSONS_LEARNED,
+    REQ_A527_LESSONS_REGISTER,
+    REQ_A527_LESSONS_REVIEW,
+    REQ_A527_IMPROVEMENT_RECORD,
     REQ_A528_EVIDENCE_HANDLING,
     REQ_A529_DISRUPTION_SECURITY,
     REQ_A530_ICT_CONTINUITY,

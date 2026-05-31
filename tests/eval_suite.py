@@ -1180,6 +1180,73 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Phase B operational_process incident triage 3-pack (commit 2026-05-31) ──
+    # Fourth Phase B bulk batch: A.5.25 (event triage), A.5.26 (incident
+    # response), A.5.27 (lessons learned) promoted to operational_process
+    # 4-leaf. All three controls are clean procedure-shaped, so the spine
+    # applies without primary-leaf variant — only the lifecycle-end slot
+    # adapts per control: triage_decision_record / incident_closure_record /
+    # improvement_action_record. Cross-control linkages: A.5.25 closure
+    # (=incident) feeds A.5.26 register; A.5.26 closure feeds A.5.27 register.
+    #
+    # Eval coverage: cases 61 + 62 for A.5.25 + A.5.27 via the standard
+    # Stage-2 list_one surface. A.5.26 is NOT in the eval suite — its engine
+    # verdict ('NC' at '0/4 children satisfied') is verified via direct
+    # compute_engine_verdicts() invocation but does not surface through
+    # Stage-2 because the engine agrees with the tenant's live finding
+    # (both NC). posture_loader.py:343 intentionally suppresses no-op
+    # proposals to keep the Stage-2 queue clean. If the tenant ever flips
+    # A.5.26 to OFI/Comply, the engine proposal will reappear and a future
+    # eval case could cover it.
+
+    EvalCase(
+        id=61,
+        query="pending engine verdict for A.5.25",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "incident_family"],
+        expected_refs=["A.5.25"],
+        expected_type="posture_check",
+        must_contain=["A.5.25", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.25 (Event assessment + triage) Phase B promotion to "
+            "operational_process 4-leaf: event_assessment_procedure + "
+            "event_triage_log + triage_program_review (freshness 180d) + "
+            "triage_decision_record. Live posture flips from Comply to "
+            "engine-proposed NC at 0/4 — engine sees no evidence on any of "
+            "the 4 sibling leaves. Review freshness 180d because event "
+            "landscape volatility (new detection sources, attack pattern "
+            "shifts, false-positive calibration) outpaces annual cadence."
+        ),
+    ),
+
+    EvalCase(
+        id=62,
+        query="pending engine verdict for A.5.27",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "incident_family"],
+        expected_refs=["A.5.27"],
+        expected_type="posture_check",
+        must_contain=["A.5.27", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.27 (Learning from incidents) Phase B promotion to "
+            "operational_process 4-leaf: lessons_learned_procedure + "
+            "lessons_register + lessons_program_review + "
+            "improvement_action_record. Live posture flips from Comply to "
+            "engine-proposed NC at 0/4. The improvement_action_record "
+            "lifecycle-end leaf is the loop-closure evidence: per-lesson, "
+            "the actual control / training / procedure change that strengthens"
+            " the org (per ISO 27002 § 5.27a)."
+        ),
+    ),
+
     EvalCase(
         id=41,
         query="is A.5.30 compliant?",

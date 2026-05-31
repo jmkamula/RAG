@@ -28,11 +28,11 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 58/60 PASS before any restart. Two known-stale FAILs:
+# Must be 60/62 PASS before any restart (62 cases; #24 + #25 known-stale):
 #   #25 — "is Art.5 a non-conformity?" (anti-hallucination, since 2026-05-27)
-#   #24 — "what is our GDPR Art.32 status?" (~20% pass rate; LLM-stochastic
-#         A.5-bridge mention; since 2026-05-30 batch 2). The batch 2 commit
-#         message ("54/55") was inaccurate — actual was 53/55. Follow-up:
+#   #24 — "what is our GDPR Art.32 status?" (~30-50% pass rate; LLM-stochastic
+#         A.5-bridge mention; since 2026-05-30 batch 2). Some runs both pass;
+#         a 61/62 or 62/62 result is fine but isn't reproducible. Follow-up:
 #         see memory case_24_art32_bridge_followup.md.
 # Any non-#24/#25 regression blocks restart.
 # Whenever you add a user-facing feature/fix, append an EvalCase that would
@@ -100,7 +100,7 @@ The FIRST copy of each function is the correct/patched version.
 The graph uses the LAST definition — so duplicates shadow fixes.
 
 **Fix approach:** For each duplicate, keep the first definition, remove the second.
-After removing duplicates, always run eval (58/60 must pass; #24 + #25 known-stale) before restarting.
+After removing duplicates, always run eval (60/62 must pass; #24 + #25 known-stale) before restarting.
 
 ### 2. Clarification loop (depends on fix #1)
 Query: "what documents are missing?" triggers clarification instead of
@@ -154,10 +154,12 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260531_*.csv (60 cases — 21 core + 18
+- Most recent: results/eval_20260531_*.csv (62 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
-  5 Phase B records + 5 Phase B policy_program + 5 Phase B operational_process)
-- Score: 58/60 PASS, 0 WARN, 2 FAIL:
+  5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
+  + 2 Phase B op_process incident family)
+- Score: 60/62 PASS, 0 WARN, 2 FAIL (some runs 61/62 or 62/62 due to #24
+  stochasticity):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
     conformity?", needs separate fix)
   - #24 known-stale since 2026-05-30 batch 2 (~20% pass rate; LLM-stochastic
@@ -186,6 +188,12 @@ with d.session() as s:
   freshness=180; #59 is A.5.22 review-record-shaped variant; #60 is A.5.23
   partial-evidence OFI 1/4 + profile_fact triggering — second partial-evidence
   case in suite after #55)
+- Cases 61-62 lock in: Phase B operational_process incident family
+  (A.5.25/27; both review freshness for incident-hot controls and uniform-
+  procedure-primary shape). A.5.26 also promoted to 4-leaf but NOT eval-
+  covered — engine NC at 0/4 verified via direct compute_engine_verdicts()
+  but doesn't reach Stage-2 surface because engine agrees with live NC
+  (posture_loader.py:343 no-op suppression keeps Stage-2 queue clean)
 - Prior known-stale cases (#2, #3, #4, #24, #25, #28) restored to PASS on
   2026-05-25 via Path A: replayed status_before from posture_status_log to
   revert the 27 Stage-1-driven finding mutations, and stripped the offending
