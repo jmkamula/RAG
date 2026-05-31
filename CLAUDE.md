@@ -28,7 +28,7 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 60/72 PASS before any restart (72 cases; #24 + #25 known-stale;
+# Must be 60/73 PASS before any restart (73 cases; #24 + #25 known-stale;
 #   #3 + #21 also LLM-stochastic but ~85% PASS — not formally known-stale):
 #   #25 — "is Art.5 a non-conformity?" (anti-hallucination, since 2026-05-27)
 #   #24 — "what is our GDPR Art.32 status?" (~30-50% pass rate; LLM-stochastic
@@ -155,7 +155,7 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260531_*.csv (72 cases — 21 core + 18
+- Most recent: results/eval_20260531_*.csv (73 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
   5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
@@ -163,8 +163,8 @@ with d.session() as s:
   + 1 Phase B op_process return-of-assets + 1 Phase B op_process labelling +
   1 Phase B policy_program information-transfer + 1 Phase B op_process identity
   + 1 Phase B op_process authentication-info + 1 Phase B op_process incident-planning
-  + 1 Phase B op_process disruption-security)
-- Score: 60/72 PASS, 0 WARN, 12 FAIL (some runs 61/72 or 62/72 due to #24
+  + 1 Phase B op_process disruption-security + 1 Phase B op_process ICT-readiness)
+- Score: 60/73 PASS, 0 WARN, 13 FAIL (some runs 61/73 or 62/73 due to #24
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -267,6 +267,13 @@ with d.session() as s:
   links to A.5.7 threat intel, A.5.21 supplier, A.5.22 supplier review,
   A.5.24 IR framework, A.5.26 incident register, A.5.27 lessons,
   A.5.30 ICT readiness)
+- Case 73 locks in: Phase B operational_process ICT-readiness (A.5.30;
+  plan-as-primary, natural pair with A.5.29; second HYBRID lifecycle-
+  end variant — pattern validated as reusable for paired BCP controls;
+  new rec_success_status MUST is RTO-met auditor-critical proof
+  (analogous to A.5.16 SLA-met flag); new bia_link + bcp_alignment
+  MUSTs pin BIA traceability and pair-control coherence; freshness-
+  convention cleanup moved freshness_days from plan to review)
 - Prior known-stale cases (#2, #3, #4, #24, #25, #28) restored to PASS on
   2026-05-25 via Path A: replayed status_before from posture_status_log to
   revert the 27 Stage-1-driven finding mutations, and stripped the offending
