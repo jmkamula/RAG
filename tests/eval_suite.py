@@ -1295,6 +1295,10 @@ EVAL_CASES = [
     # legitimate end (external handover OR retention-driven destruction).
     # Review freshness 365d — evidence-handling discipline is forensically
     # stable (does NOT churn like threat-intel or detection landscape).
+    #
+    # Batch 7 (A.5.1 Style v1 → v2 alignment, commit 2026-05-31) was
+    # alignment-only with no new eval case — existing cases 33/34/36/38
+    # already lock A.5.1's OFI verdict.
 
     EvalCase(
         id=64,
@@ -1322,6 +1326,45 @@ EVAL_CASES = [
             "handling discipline is forensically stable (legal admissibility "
             "rules, retention obligations and forensic methodology don't "
             "churn the way threat-intel or detection landscape does)."
+        ),
+    ),
+
+    # ── Phase B operational_process project security (commit 2026-05-31) ──
+    # Eighth Phase B bulk batch (single-control): A.5.8 promoted to
+    # operational_process 4-leaf — project_management_security_integration
+    # procedure + project_security_register + project_security_program_review
+    # (365d) + project_security_closure_record. The lifecycle-end is per-
+    # project closure signoff (three-way: sponsor + InfoSec + operational
+    # owner). Cross-control linkages to A.8.25/A.8.26 SDLC + A.5.20 supplier
+    # agreements + A.5.23 cloud register + A.5.27 lessons capture.
+
+    EvalCase(
+        id=65,
+        query="pending engine verdict for A.5.8",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "project_security"],
+        expected_refs=["A.5.8"],
+        expected_type="posture_check",
+        must_contain=["A.5.8", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.8 (Information security in project management) Phase "
+            "B promotion to operational_process 4-leaf: "
+            "project_management_security_integration procedure + "
+            "project_security_register + project_security_program_review "
+            "(freshness 365d) + project_security_closure_record. Live "
+            "posture flips from Comply (hand-entered finding citing 'default "
+            "integration with ISMS Manager consultation') to engine-proposed "
+            "NC at 0/4 — engine sees no per-leaf evidence on any of the 4 "
+            "siblings. The closure_record lifecycle-end leaf is the three-way "
+            "signoff (sponsor + InfoSec + operational owner) that proves "
+            "each project actually closed out security accountability rather "
+            "than just dissolved the team. Review freshness 365d because "
+            "project-management methodologies are structurally stable, unlike "
+            "detection landscape (180d) or threat-intel feeds (180d)."
         ),
     ),
 

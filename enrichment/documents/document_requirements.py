@@ -1525,24 +1525,120 @@ REQ_A57_INTEL_PRODUCT_RECORD = EvidenceRequirement(
     ],
 )
 
-REQ_A58_PROJECT_MANAGEMENT_SECURITY = EvidenceRequirement(
+# ── Annex A.5.8 — Information security in project management — operational_process (4-leaf) ──
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → procedure
+# + register + review_record + revocation_record (lifecycle-end). The
+# lifecycle-end slot is realised as the per-project closure security signoff
+# — the gate evidence proving each project handed over to operations with
+# security accountability transferred and residual risks accepted. The
+# procedure leaf id is preserved; three siblings are new.
+#
+# Review freshness 365d — project management methodologies are stable.
+# Unlike detection/IR (180d) where the underlying landscape moves fast,
+# the gate framework + roles + deliverables here change only when the org
+# adopts a new PM methodology or learns a structural lesson. Annual cadence
+# with project owners + InfoSec + Legal jointly is right-sized.
+#
+# Cross-control: register references A.8.25/A.8.26 SDLC outputs where the
+# project involves software development; closure_record links to A.5.20
+# supplier agreements (project-driven contracts) and A.5.23 cloud register
+# (cloud-shaped projects) — encoded as MUST items inline.
+#
+# Authority: ISO 27002:2022 § 5.8 implementation guidance (integrate at
+# project initiation, throughout the lifecycle, on closure; risk assessment
+# + acceptance per project; defined responsibilities; clear deliverables).
+
+REQ_A58_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.8:project_management_security_integration",
     control_ref   = "A.5.8",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Information Security in Project Management Procedure",
     trigger_type  = "universal",
-    description   = "A.5.8 requires information security to be integrated into project management. Evidence is a project management standard or methodology that names security gates, deliverables, and responsibilities through the project lifecycle",
+    description   = "A.5.8 requires information security to be integrated into project management across the full lifecycle: initiation, requirements, design/build, pre-go-live assessment, closure handover. The procedure documents gates, deliverables, roles, tiering rules and acceptance criteria. The project register, periodic program review and per-project closure record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.8:initiation_gate",  "Security gate at project initiation (risk assessment, classification of information)", "must", False, "A.5.8 — integrated"),
-        ChecklistItem("item:A.5.8:requirements",     "Security requirements captured in project plan / requirements document", "must", False, "A.5.8 — integrated"),
-        ChecklistItem("item:A.5.8:assessment_pre_golive","Security assessment before go-live (penetration test, control verification)", "must", False, "A.5.8 — integrated"),
-        ChecklistItem("item:A.5.8:role",             "Information security role defined in the project governance (advisor, reviewer, gate-owner)", "must", False, "A.5.8 — integrated"),
-        ChecklistItem("item:A.5.8:closure_signoff",  "Project closure security sign-off step (handover to operations)", "must", False, "A.5.8 — integrated"),
+        ChecklistItem("item:A.5.8:initiation_gate",       "Security gate at project initiation (risk assessment, classification of information, scope of personal data if applicable)",  "must", False, "27002:5.8 — integrated at initiation"),
+        ChecklistItem("item:A.5.8:requirements",          "Security requirements captured in project plan / requirements document (functional + non-functional, including data protection)", "must", False, "27002:5.8 — integrated"),
+        ChecklistItem("item:A.5.8:assessment_pre_golive", "Security assessment before go-live (pen test, control verification, residual-risk acceptance)",                                  "must", False, "27002:5.8 — throughout lifecycle"),
+        ChecklistItem("item:A.5.8:role",                  "Information security role defined in the project governance (advisor / reviewer / gate-owner with veto authority where warranted)", "must", False, "27002:5.8 — defined responsibilities"),
+        ChecklistItem("item:A.5.8:closure_signoff",       "Project closure security sign-off step (handover to operations; outstanding-risk transfer documented)",                            "must", False, "27002:5.8 — closure"),
+        ChecklistItem("item:A.5.8:acceptance_criteria",   "Risk-acceptance criteria stated (when residual risk forces escalation; named approver per tier)",                                  "must", False, "27002:5.8 — risk acceptance per project"),
+        ChecklistItem("item:A.5.8:change_control",        "In-project change control step (scope/security-impact changes during build trigger re-assessment, not late-detection)",            "must", False, "27002:5.8 — throughout lifecycle"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.8:tiering",          "Project tiering (which projects need full vs lightweight security review)", "should", False, "Proportionality"),
-        ChecklistItem("item:A.5.8:templates",        "References standard project templates that include security sections", "should", False, "Consistency"),
+        ChecklistItem("item:A.5.8:tiering",               "Project tiering (which projects need full vs lightweight security review; criteria based on data sensitivity, regulatory scope, third-party exposure)", "should", False, "27002:5.8 — proportionality"),
+        ChecklistItem("item:A.5.8:templates",             "Standard project templates referenced (security sections in initiation pack, requirements template, closure checklist)",          "should", False, "Consistency"),
+        ChecklistItem("item:A.5.8:agile_integration",     "Adaptation for agile/iterative delivery (continuous security touchpoints rather than waterfall gates only)",                      "should", False, "Modern delivery practice"),
+    ],
+)
+
+REQ_A58_PROJECT_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.8:project_security_register",
+    control_ref   = "A.5.8",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Project Security Register",
+    trigger_type  = "universal",
+    description   = "A.5.8 requires every project to be visible to the security function — invisible projects are the ones that miss gates. The register catalogues every in-scope project: id, name, security tier, current stage, owner, InfoSec liaison, planned closure date, status. It is the operational record that proves the gate process is actually applied org-wide, not just on the projects InfoSec happens to hear about",
+    must_contain  = [
+        ChecklistItem("item:A.5.8:reg_project_id",        "Each in-scope project captured with a unique identifier",                                                                       "must", False, "27002:5.8 — visibility"),
+        ChecklistItem("item:A.5.8:reg_tier",              "Security tier per row (drives which gates apply — full / lightweight / waived-with-justification)",                            "must", False, "27002:5.8 — proportionality"),
+        ChecklistItem("item:A.5.8:reg_stage",             "Current stage per row (initiation / requirements / build / pre-go-live / live / closed) updated as gates are passed",          "must", False, "27002:5.8 — lifecycle tracking"),
+        ChecklistItem("item:A.5.8:reg_owner",             "Project owner per row (named individual accountable for delivery + security)",                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.5.8:reg_infosec_liaison",   "InfoSec liaison per row (named individual reviewing this project's security gates)",                                            "must", False, "27002:5.8 — defined responsibilities"),
+        ChecklistItem("item:A.5.8:reg_sdlc_link",         "SDLC link per row where project involves software development (cross-ref to A.8.25 / A.8.26 outputs)",                          "must", False, "27002:5.8 + cross-link to [[A.8.25]] / [[A.8.26]]"),
+        ChecklistItem("item:A.5.8:reg_planned_closure",   "Planned closure date per row (drives the closure-gate trigger)",                                                                 "must", False, "Operational discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.8:reg_supplier_link",     "Supplier-agreement link per row where project triggers new third-party contracts (cross-ref to A.5.20)",                       "should", False, "Closing loop with [[A.5.20]]"),
+        ChecklistItem("item:A.5.8:reg_cloud_link",        "Cloud-service link per row where project introduces a new cloud service (cross-ref to A.5.23 cloud register)",                  "should", False, "Closing loop with [[A.5.23]]"),
+    ],
+)
+
+REQ_A58_PROGRAM_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.8:project_security_program_review",
+    control_ref    = "A.5.8",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Project-Security Program Review",
+    trigger_type   = "universal",
+    description    = "The gate process creates value only if it's catching things — projects with skipped gates, late-detected security issues, and tiering-misclassifications all signal the program is leaking. The review captures the planned-interval check: gate-skip rate, late-detection analysis, tier-mix shifts, InfoSec capacity vs project demand, and resulting program adjustments. Annual cadence — methodology stability outweighs short-cycle drift",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.8:rev_date",              "Review date within the planned annual interval",                                                                                "must", False, "27002:5.8 — periodic"),
+        ChecklistItem("item:A.5.8:rev_reviewer",          "Reviewer identity (InfoSec lead + PMO/project office head jointly)",                                                            "must", False, "Accountability"),
+        ChecklistItem("item:A.5.8:rev_gate_skip",         "Gate-skip rate analysed (projects that bypassed gates; root cause and remediation per skip)",                                    "must", False, "27002:5.8 — assurance"),
+        ChecklistItem("item:A.5.8:rev_late_detection",    "Late-detection analysis (security issues surfaced at or after go-live that should have been caught earlier)",                    "must", False, "Program effectiveness"),
+        ChecklistItem("item:A.5.8:rev_tiering",           "Tiering audit (sample of projects re-tiered to validate the tier criteria are still calibrated to actual risk)",                "must", False, "27002:5.8 — proportionality calibration"),
+        ChecklistItem("item:A.5.8:rev_capacity",          "InfoSec capacity vs project pipeline reviewed (gates fail silently when reviewer capacity is exhausted)",                       "must", False, "27002:5.8 — sustainable defined responsibilities"),
+        ChecklistItem("item:A.5.8:rev_actions",           "Action items captured for the program (e.g. update templates, retrain PMs, tighten tiering criteria, add reviewer capacity)",   "must", False, "27002:5.8 — program adjustments"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.8:rev_methodology",       "Methodology check (does the gate model still fit the org's delivery mix — waterfall vs agile vs hybrid)",                       "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.8:rev_next_date",         "Next planned review date stated",                                                                                                "should", False, "Planning"),
+    ],
+)
+
+REQ_A58_CLOSURE_RECORD = EvidenceRequirement(
+    id            = "req:A.5.8:project_security_closure_record",
+    control_ref   = "A.5.8",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Project Security Closure Record",
+    trigger_type  = "universal",
+    description   = "A.5.8 expects each project to formally close out security — not just go-live and dissolve the team. The closure record evidences the handover gate: project id, gates passed, outstanding risks transferred to operations with named owner, security artefacts archived, and final signoff. One record per closed project, traceable back to the project register and through to operational ownership",
+    must_contain  = [
+        ChecklistItem("item:A.5.8:cls_project_ref",       "Project identifier per record (links to project register)",                                                                    "must", False, "27002:5.8 — traceability"),
+        ChecklistItem("item:A.5.8:cls_gates_passed",      "Gates-passed summary per record (which gates closed and when; gaps explicitly noted with risk acceptance)",                     "must", False, "27002:5.8 — lifecycle closure"),
+        ChecklistItem("item:A.5.8:cls_residual_risks",    "Residual-risk register transfer per record (outstanding risks named, accepted by named operational owner with date)",          "must", False, "27002:5.8 — risk acceptance + transfer"),
+        ChecklistItem("item:A.5.8:cls_artefacts_archived","Security artefacts archived per record (threat model, pen-test report, DPIA where applicable, exception register)",            "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.8:cls_signoff",           "Final signoff per record (project sponsor + InfoSec gate-owner + operational owner — three-way)",                              "must", False, "27002:5.8 — closure handover"),
+        ChecklistItem("item:A.5.8:cls_closure_date",      "Closure date recorded",                                                                                                          "must", False, "Operational discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.8:cls_supplier_handover", "Supplier-agreement handover per record where project introduced new third-party contracts (operational owner takes A.5.22 review duty)", "should", False, "Closing loop with [[A.5.22]]"),
+        ChecklistItem("item:A.5.8:cls_lessons_link",      "Lessons-learned link per record where project surfaced patterns worth feeding into A.5.27 lessons register",                    "should", False, "Closing loop with [[A.5.27]]"),
     ],
 )
 
@@ -6055,7 +6151,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A57_FEED_REGISTER,
     REQ_A57_PROGRAM_REVIEW,
     REQ_A57_INTEL_PRODUCT_RECORD,
-    REQ_A58_PROJECT_MANAGEMENT_SECURITY,
+    # A.5.8 — 4-leaf operational_process (2026-05-31; program review freshness=365)
+    REQ_A58_PROCEDURE,
+    REQ_A58_PROJECT_REGISTER,
+    REQ_A58_PROGRAM_REVIEW,
+    REQ_A58_CLOSURE_RECORD,
     # A.5.9 — 4-leaf records_program (2026-05-29; register/review both freshness=90)
     REQ_A59_ASSET_REGISTER,
     REQ_A59_LIFECYCLE_PROCEDURE,
