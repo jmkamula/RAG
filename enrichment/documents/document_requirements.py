@@ -2498,25 +2498,132 @@ REQ_A516_REVOCATION_RECORD = EvidenceRequirement(
     ],
 )
 
-REQ_A517_AUTHENTICATION_INFORMATION = EvidenceRequirement(
+# ── Annex A.5.17 — Authentication information — operational_process (4-leaf) ──
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process →
+# procedure + register + review_record + revocation_record (lifecycle-end).
+# Naturally PAIRED with A.5.16 identity management ([[curation-phase-b-
+# batch-12-2026-05-31]]) — A.5.16 governs the identity *object*, A.5.17
+# governs how each identity *proves* itself (credentials, factors,
+# tokens). Each identity event in A.5.16 typically has a paired credential
+# event in A.5.17.
+#
+# Review freshness 180d — credential hygiene churns continuously (rotation
+# cycles, breach disclosures triggering forced rotations, MFA enrolment
+# campaigns, factor-class additions/deprecations). Same volatility family
+# as A.5.16 (180d) and A.5.25/A.5.26 detection landscape.
+#
+# Lifecycle-end variant: credential_revocation_record — per-credential
+# disable/reissue proof. Pairs structurally with A.5.16's identity
+# revocation_record (position 14). This adds **position 15** to the
+# variant catalogue: per-credential lifecycle closure. Both records may
+# fire from the same trigger (e.g. employee termination → identity
+# revoked AND all their credentials revoked) but they are separate
+# records because credentials can have independent lifecycles
+# (credential rotation, lost-token reissue, factor downgrade) without
+# changing the identity itself.
+#
+# MFA promoted from SHOULD to MUST — same rationale as service_accounts
+# in A.5.16 (the previously-soft expectation is now first-class).
+#
+# Authority: ISO 27002:2022 § 5.17 implementation guidance — allocation
+# of authentication info; management (transmission, storage, complexity,
+# rotation); reset/recovery; personnel responsibilities (handling,
+# reporting compromise); multi-factor where appropriate.
+
+REQ_A517_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.17:authentication_information_procedure",
     control_ref   = "A.5.17",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Authentication Information Management Procedure",
     trigger_type  = "universal",
-    description   = "A.5.17 requires authentication information (passwords, tokens, keys) to be allocated and managed by a controlled process, with personnel advised on appropriate handling. Evidence is a procedure covering allocation, storage, and user guidance",
+    description   = "A.5.17 requires authentication information (passwords, tokens, keys, certificates, biometric data) to be allocated and managed by a controlled process, with personnel advised on appropriate handling. The procedure documents allocation, transmission, storage, complexity/rotation, reset/recovery, user advisory, MFA expectations and the connection to identity lifecycle in A.5.16. The credential register, periodic program review and per-credential revocation record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.17:allocation",      "Initial allocation method for authentication information (in-person, secure channel, ephemeral link)", "must", False, "A.5.17 — allocation"),
-        ChecklistItem("item:A.5.17:transmission",    "Transmission method requirements (out-of-band, encrypted, not over the same channel as the identity)", "must", False, "A.5.17 — management process"),
-        ChecklistItem("item:A.5.17:complexity",      "Password / credential complexity and rotation requirements", "must", False, "A.5.17 — management"),
-        ChecklistItem("item:A.5.17:storage",         "Storage requirements (hashed + salted, vaulted, never plaintext)", "must", False, "A.5.17 — management"),
-        ChecklistItem("item:A.5.17:reset",           "Reset / recovery process with identity verification", "must", False, "A.5.17 — management"),
-        ChecklistItem("item:A.5.17:user_advisory",   "Advisory guidance to personnel on protecting their authentication information", "must", False, "A.5.17 — advising personnel"),
+        ChecklistItem("item:A.5.17:allocation",        "Initial allocation method for authentication information per credential type (in-person, secure channel, ephemeral link, hardware-token enrolment)", "must", False, "27002:5.17 — allocation"),
+        ChecklistItem("item:A.5.17:transmission",      "Transmission method requirements (out-of-band, encrypted, never on the same channel as the identity itself; never via plain email)",                "must", False, "27002:5.17 — management process"),
+        ChecklistItem("item:A.5.17:complexity",        "Password / credential complexity and rotation requirements (length, character classes, history, max-age — risk-tiered per scope)",                     "must", False, "27002:5.17 — management"),
+        ChecklistItem("item:A.5.17:storage",           "Storage requirements (hashed + salted with modern algorithm — argon2/scrypt/bcrypt; vaulted in secrets manager; never plaintext anywhere)",            "must", False, "27002:5.17 — management"),
+        ChecklistItem("item:A.5.17:reset",             "Reset / recovery process with identity re-verification (out-of-band; no static security questions; rate-limited)",                                     "must", False, "27002:5.17 — management"),
+        ChecklistItem("item:A.5.17:user_advisory",     "Advisory guidance to personnel on protecting their authentication information (no sharing, no re-use, password-manager guidance, compromise reporting path)", "must", False, "27002:5.17 — advising personnel"),
+        ChecklistItem("item:A.5.17:mfa",               "Multi-factor authentication mandated for in-scope access (admin accounts, remote access, sensitive data access) — promoted from SHOULD because MFA is no longer optional baseline", "must", False, "27002:5.17 — modern baseline"),
+        ChecklistItem("item:A.5.17:identity_link",     "Cross-reference to A.5.16 identity lifecycle (credential issuance follows identity creation; credential revocation follows identity termination; pairing enforced not optional)", "must", False, "27002:5.17 + cross-link to [[A.5.16]]"),
+        ChecklistItem("item:A.5.17:compromise_response","Compromise-response path (when a credential is reported or detected compromised — forced rotation, identity-level investigation, scope expansion check)", "must", False, "27002:5.17 — handle compromise"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.17:mfa",             "Multi-factor authentication where required by access policy", "should", False, "Modern baseline"),
-        ChecklistItem("item:A.5.17:factor_classes",  "Authentication factor classes documented (knowledge, possession, inherence)", "should", False, "Risk-based mapping"),
+        ChecklistItem("item:A.5.17:factor_classes",    "Authentication factor classes documented (knowledge / possession / inherence) and which combinations satisfy MFA per access tier",                     "should", False, "Risk-based mapping"),
+        ChecklistItem("item:A.5.17:passwordless",      "Passwordless / phishing-resistant authentication noted where deployed (FIDO2, passkeys) — direction-of-travel statement",                              "should", False, "Modern direction"),
+        ChecklistItem("item:A.5.17:break_glass",       "Break-glass credentials documented separately (emergency-only accounts with sealed-envelope or vault-with-audit access)",                              "should", False, "Operational continuity"),
+    ],
+)
+
+REQ_A517_CREDENTIAL_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.17:credential_register",
+    control_ref   = "A.5.17",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Credential Register",
+    trigger_type  = "universal",
+    description   = "A.5.17 requires every credential type to be visible — secret-sprawl is the failure mode where ad-hoc credentials proliferate outside the central vault, escape rotation, and persist past their owner. The register catalogues every credential type deployed: type id, scope, vault location, rotation cadence, MFA factors required, owner. It is the operational record that proves credential governance covers ALL credentials in use, not just the ones IT remembered to onboard to the password manager",
+    must_contain  = [
+        ChecklistItem("item:A.5.17:reg_credential_type", "Each credential type captured with a unique identifier (user_password / admin_password / api_key / service_token / cert / mfa_factor / break_glass)", "must", False, "27002:5.17 — visibility"),
+        ChecklistItem("item:A.5.17:reg_scope",           "Scope per row (which systems/identities use this credential type)",                                                                                  "must", False, "27002:5.17 — managed"),
+        ChecklistItem("item:A.5.17:reg_vault",           "Storage vault per row (named secrets manager / KMS / cert store — never 'spreadsheet' or 'config file' for production credentials)",                "must", False, "27002:5.17 — storage"),
+        ChecklistItem("item:A.5.17:reg_rotation_cadence","Rotation cadence per row (manual N-days / automated / on-event-only with stated trigger types)",                                                     "must", False, "27002:5.17 — rotation"),
+        ChecklistItem("item:A.5.17:reg_mfa_required",    "MFA factor requirement per row where applicable (which factor classes; tied to access tier)",                                                       "must", False, "27002:5.17 — MFA mandate"),
+        ChecklistItem("item:A.5.17:reg_owner",           "Named owner per row (human owner accountable for this credential type — covers governance, escalation, retirement decisions)",                       "must", False, "Accountability"),
+        ChecklistItem("item:A.5.17:reg_identity_link",   "Identity-register linkage per row (which identity types use this credential type — closes the loop with A.5.16)",                                  "must", False, "27002:5.17 + cross-link to [[A.5.16]]"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.17:reg_last_rotated",    "Last-rotated timestamp per row where applicable (drives drift detection — stale-rotation alert)",                                                    "should", False, "Drift prevention"),
+        ChecklistItem("item:A.5.17:reg_phishing_resistant","Phishing-resistant flag per row where the credential is phishing-resistant (FIDO2, passkeys, hardware-token) vs phishable (SMS, password)",       "should", False, "Modern direction tracking"),
+    ],
+)
+
+REQ_A517_PROGRAM_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.17:authentication_program_review",
+    control_ref    = "A.5.17",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Authentication-Information Program Review",
+    trigger_type   = "universal",
+    description    = "The credential program creates value only if credentials actually rotate, MFA actually enrols, vault discipline actually holds and compromise responses actually fire. The review captures the planned-interval check: rotation-compliance audit, MFA enrolment coverage, vault-discipline audit (secrets outside the vault), compromise-response sample, and resulting program adjustments. Cadence tightened to 180 days — credential hygiene churns continuously",
+    freshness_days = 180,
+    must_contain   = [
+        ChecklistItem("item:A.5.17:rev_date",             "Review date within the planned 180-day interval",                                                                          "must", False, "27002:5.17 — periodic"),
+        ChecklistItem("item:A.5.17:rev_reviewer",         "Reviewer identity (IT identity-lead + InfoSec lead jointly; vault custodian where vault discipline is in scope)",          "must", False, "Accountability"),
+        ChecklistItem("item:A.5.17:rev_rotation_compliance","Rotation-compliance audit (sample of credentials past their rotation cadence; root cause per stale credential)",         "must", False, "27002:5.17 — rotation enforcement"),
+        ChecklistItem("item:A.5.17:rev_mfa_coverage",     "MFA enrolment coverage audit (% of in-scope identities with MFA enrolled; gap analysis per uncovered identity type)",      "must", False, "27002:5.17 — MFA mandate verification"),
+        ChecklistItem("item:A.5.17:rev_vault_discipline", "Vault-discipline audit (sample of production systems re-checked: are credentials in the vault, or in config files / spreadsheets / chat history?)", "must", False, "27002:5.17 — storage discipline"),
+        ChecklistItem("item:A.5.17:rev_compromise_sample","Compromise-response sample (recent compromise events re-examined: was rotation forced? was scope expansion checked?)",     "must", False, "27002:5.17 — compromise response"),
+        ChecklistItem("item:A.5.17:rev_actions",          "Action items captured (e.g. expand MFA to remaining identity types, automate rotation for service tokens, retire phishable factors)", "must", False, "27002:5.17 — program adjustments"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.17:rev_phishing_progression","Phishing-resistance progression review (delta in phishing-resistant credential ratio since last review; roadmap to higher coverage)", "should", False, "Modern direction tracking"),
+        ChecklistItem("item:A.5.17:rev_next_date",        "Next planned review date stated (within 180d of this review)",                                                              "should", False, "Planning"),
+    ],
+)
+
+REQ_A517_REVOCATION_RECORD = EvidenceRequirement(
+    id            = "req:A.5.17:credential_revocation_record",
+    control_ref   = "A.5.17",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Credential Revocation / Reissue Record",
+    trigger_type  = "universal",
+    description   = "A.5.17 expects every credential revocation to be evidenced — credentials issued and never retired are the basis of every credential-stuffing risk that materialises years later. The revocation record evidences each disable/reissue event: credential ref, trigger type, effective time, actual revocation timestamp, replacement issued (if applicable), residual-access-cleanup. One record per credential event, paired with the corresponding A.5.16 identity revocation record where the trigger is identity-level. Independent records fire for credential-only events (rotation, lost-token reissue, factor downgrade)",
+    must_contain  = [
+        ChecklistItem("item:A.5.17:rev_credential_ref",  "Credential identifier per record (links to credential register entry; specific instance, not just type)",                  "must", False, "27002:5.17 — traceability"),
+        ChecklistItem("item:A.5.17:rev_trigger_type",    "Trigger type per record (identity_termination / rotation_due / compromise_detected / lost_token / factor_change / decommission)", "must", False, "27002:5.17 — trigger taxonomy"),
+        ChecklistItem("item:A.5.17:rev_effective_time",  "Effective time per record (when the revocation needed to take effect — immediate for compromise, end-of-day for rotation)", "must", False, "Timeliness anchor"),
+        ChecklistItem("item:A.5.17:rev_actual_timestamp","Actual revocation timestamp per record (drives the SLA-met calculation analogous to A.5.16; compromise revocations have tighter SLA)", "must", False, "27002:5.17 — timeliness"),
+        ChecklistItem("item:A.5.17:rev_replacement",     "Replacement-issued status per record where applicable (rotation replaces credential; compromise may force forced re-enrolment, not just rotation)", "must", False, "27002:5.17 — continuity"),
+        ChecklistItem("item:A.5.17:rev_residual_check",  "Residual-access check per record (sessions invalidated, refresh tokens revoked, cached credentials purged — not just the credential record disabled)", "must", False, "27002:5.17 — full revocation"),
+        ChecklistItem("item:A.5.17:rev_identity_pair",   "Cross-reference to paired A.5.16 identity revocation record where this credential revocation was identity-triggered (closes the loop)", "must", False, "27002:5.17 + cross-link to [[A.5.16]]"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.17:rev_scope_expansion", "Scope-expansion check per compromise record (if a credential was compromised, what else might the actor have accessed? — surfaces lateral-movement concerns to A.5.25/A.5.26)", "should", False, "Closing loop with [[A.5.25]] / [[A.5.26]]"),
+        ChecklistItem("item:A.5.17:rev_post_revoke_audit","Post-revocation verification window noted (e.g. 7-day check that no stale auth attempts using the revoked credential succeed)",         "should", False, "Continual assurance"),
     ],
 )
 
@@ -6588,7 +6695,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A516_IDENTITY_REGISTER,
     REQ_A516_PROGRAM_REVIEW,
     REQ_A516_REVOCATION_RECORD,
-    REQ_A517_AUTHENTICATION_INFORMATION,
+    # A.5.17 — 4-leaf operational_process (2026-05-31; program review freshness=180)
+    REQ_A517_PROCEDURE,
+    REQ_A517_CREDENTIAL_REGISTER,
+    REQ_A517_PROGRAM_REVIEW,
+    REQ_A517_REVOCATION_RECORD,
     # A.5.19 — 4-leaf operational_process (2026-05-31)
     REQ_A519_SUPPLIER_RISK_PROCEDURE,
     REQ_A519_REGISTER,

@@ -1523,6 +1523,45 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Phase B operational_process authentication-info (commit 2026-05-31) ──
+    # Thirteenth Phase B bulk batch (single-control): A.5.17 promoted to
+    # operational_process 4-leaf — authentication_information_procedure +
+    # credential_register + authentication_program_review (180d) +
+    # per-credential revocation_record. Naturally PAIRED with A.5.16
+    # identity management (batch 12). Each identity event in A.5.16
+    # typically has a paired credential event in A.5.17 — pairing
+    # enforced via authn_link (A.5.16) and identity_link (A.5.17) MUSTs.
+    # MFA promoted SHOULD → MUST (modern baseline, no longer optional).
+
+    EvalCase(
+        id=70,
+        query="pending engine verdict for A.5.17",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "authentication"],
+        expected_refs=["A.5.17"],
+        expected_type="posture_check",
+        must_contain=["A.5.17", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.17 (Authentication information) Phase B promotion to "
+            "operational_process 4-leaf: authentication_information_procedure "
+            "+ credential_register + authentication_program_review "
+            "(freshness 180d) + per-credential revocation_record. Live "
+            "posture flips from Comply (empty gap_description) to engine-"
+            "proposed NC at 0/4. Naturally PAIRED with A.5.16 (batch 12) — "
+            "identity_link MUST on procedure encodes the pairing constraint. "
+            "The revocation_record's rev_identity_pair MUST closes the loop "
+            "between credential-revocation events and identity-revocation "
+            "events. MFA promoted SHOULD → MUST: phishable single-factor "
+            "auth is no longer acceptable baseline; the previously-soft "
+            "expectation is now first-class, paralleling service_accounts "
+            "promotion in batch 12."
+        ),
+    ),
+
     EvalCase(
         id=41,
         query="is A.5.30 compliant?",
