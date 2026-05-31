@@ -1404,6 +1404,42 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Phase B operational_process information-labelling (commit 2026-05-31) ──
+    # Tenth Phase B bulk batch (single-control): A.5.13 promoted to
+    # operational_process 4-leaf — information_labelling_procedure +
+    # labelling_coverage_register + labelling_program_review (365d) +
+    # per-platform labelling_application_record. Cascade pair with A.5.12
+    # classification (already 4-leaf policy_program from batch 2): the
+    # scheme lives in A.5.12, application of the scheme lives here.
+
+    EvalCase(
+        id=67,
+        query="pending engine verdict for A.5.13",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "labelling"],
+        expected_refs=["A.5.13"],
+        expected_type="posture_check",
+        must_contain=["A.5.13", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.13 (Labelling of information) Phase B promotion to "
+            "operational_process 4-leaf: information_labelling_procedure + "
+            "labelling_coverage_register + labelling_program_review "
+            "(freshness 365d) + per-platform labelling_application_record. "
+            "Live posture flips from Comply (hand-entered Purview-based "
+            "finding) to engine-proposed NC at 0/4. The application_record "
+            "lifecycle-end leaf is the per-platform enablement proof — "
+            "every system that came online had labelling extended to it, "
+            "not just the platforms IT remembered to configure first. "
+            "Review freshness 365d because labelling cascades from A.5.12 "
+            "classification (parent scheme; reviewing labelling out of "
+            "sync produces misaligned controls)."
+        ),
+    ),
+
     EvalCase(
         id=41,
         query="is A.5.30 compliant?",

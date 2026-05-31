@@ -2046,24 +2046,121 @@ REQ_A512_REVIEW = EvidenceRequirement(
     ],
 )
 
-REQ_A513_INFORMATION_LABELLING = EvidenceRequirement(
+# ── Annex A.5.13 — Labelling of information — operational_process (4-leaf) ────
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → procedure
+# + register + review_record + revocation_record (lifecycle-end). The
+# lifecycle-end slot is realised as the per-platform/system labelling
+# enablement record — proves labelling was actually extended to each new
+# system as the org's information estate grew, not just retained on the
+# legacy set. The procedure leaf id is preserved; three siblings are new.
+#
+# Review freshness 365d — labelling program reviews on the SAME cadence
+# as A.5.12 classification (the parent scheme). Labelling cascades from
+# classification; reviewing labelling out of sync with the scheme produces
+# misaligned controls. Same rationale family as A.5.8 / A.5.11 / A.5.28
+# (stable underlying methodology).
+#
+# Cross-control: register references A.5.12 classification levels (which
+# levels are deployed); procedure references A.7.10 storage media for the
+# physical-media marking rule path; automation overlaps with A.8.11 data
+# masking tooling stack. Encoded as MUST/SHOULD items inline.
+#
+# Authority: ISO 27002:2022 § 5.13 implementation guidance — procedures
+# covering digital and physical labelling; level-appropriate marking;
+# persistence across transformations; training; legacy-handling rules.
+
+REQ_A513_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.13:information_labelling_procedure",
     control_ref   = "A.5.13",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Information Labelling Procedure",
     trigger_type  = "universal",
-    description   = "A.5.13 requires procedures for information labelling aligned with the classification scheme. Evidence is a procedure covering how each classification level is marked on digital and physical assets",
+    description   = "A.5.13 requires procedures for information labelling aligned with the classification scheme defined in A.5.12. The procedure documents per-level marking conventions, automated tooling rules, persistence requirements, training links, and legacy-asset handling. The coverage register, periodic program review and per-platform application record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.13:visual_marks",     "Visual marking conventions per classification level (headers, watermarks, banners)", "must", False, "A.5.13 — labelling"),
-        ChecklistItem("item:A.5.13:metadata_tags",    "Digital metadata tags or sensitivity labels (e.g. Microsoft Purview / similar)", "must", False, "A.5.13 — labelling"),
-        ChecklistItem("item:A.5.13:physical_media",   "Physical media labelling rules (paper documents, removable storage)", "must", False, "A.5.13 — labelling"),
-        ChecklistItem("item:A.5.13:label_persistence","Label persistence on copying, export, or transformation", "must", False, "A.5.13 — implemented"),
-        ChecklistItem("item:A.5.13:training_ref",     "References training so personnel know how to apply labels", "must", False, "A.5.13 — implemented"),
+        ChecklistItem("item:A.5.13:visual_marks",      "Visual marking conventions per classification level (headers, watermarks, banners, footers)",                       "must", False, "27002:5.13 — labelling"),
+        ChecklistItem("item:A.5.13:metadata_tags",     "Digital metadata tags or sensitivity labels (e.g. Microsoft Purview / Google labels / equivalent) per level",        "must", False, "27002:5.13 — labelling"),
+        ChecklistItem("item:A.5.13:physical_media",    "Physical media labelling rules (paper documents, removable storage, archive boxes; cross-link to A.7.10)",          "must", False, "27002:5.13 + cross-link to [[A.7.10]]"),
+        ChecklistItem("item:A.5.13:label_persistence", "Label persistence on copying, export, transformation (PDF print, file format conversion, copy-paste into new container)", "must", False, "27002:5.13 — implemented"),
+        ChecklistItem("item:A.5.13:training_ref",      "References training so personnel know how to apply labels (cross-link to A.5.12 classification training)",          "must", False, "27002:5.13 — implemented"),
+        ChecklistItem("item:A.5.13:scheme_alignment",  "Alignment with the A.5.12 classification scheme stated explicitly (level names match; level count matches; semantics match)", "must", False, "27002:5.13 + cross-link to [[A.5.12]]"),
+        ChecklistItem("item:A.5.13:pii_overlay",       "PII / personal-data overlay rule where applicable (additional labelling beyond confidentiality level — e.g. 'Contains PII' footer for GDPR compliance)", "must", False, "27002:5.13 + GDPR alignment"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.13:legacy_handling",  "Handling of legacy unlabelled assets (default-classify rule)", "should", False, "Pragmatic adoption"),
-        ChecklistItem("item:A.5.13:automation",       "Automation / tooling references where labelling is auto-applied", "should", False, "Scalability"),
+        ChecklistItem("item:A.5.13:legacy_handling",   "Handling of legacy unlabelled assets (default-classify rule with retro-labelling timeline)",                          "should", False, "Pragmatic adoption"),
+        ChecklistItem("item:A.5.13:automation",        "Automation / tooling references where labelling is auto-applied (DLP, sensitivity-label policies)",                  "should", False, "Scalability"),
+        ChecklistItem("item:A.5.13:external_handling", "Handling of inbound third-party documents that arrive unlabelled (default-classify and add internal label)",         "should", False, "Real-world coverage"),
+    ],
+)
+
+REQ_A513_COVERAGE_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.13:labelling_coverage_register",
+    control_ref   = "A.5.13",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Labelling Coverage Register",
+    trigger_type  = "universal",
+    description   = "A.5.13 requires every information-storing platform to actually apply labels — the systems where labelling isn't enabled are the ones where classified info leaks out. The register catalogues every in-scope information platform: system id, scope, labelling-enabled flag, automation level (manual/assisted/automatic), coverage %, owner. It is the operational record that proves labelling is org-wide, not just on the platforms IT remembered to configure",
+    must_contain  = [
+        ChecklistItem("item:A.5.13:reg_system_id",     "Each in-scope information system captured with a unique identifier (file shares, M365 tenants, drive backends, ticketing systems, code repos with sensitive data)", "must", False, "27002:5.13 — visibility"),
+        ChecklistItem("item:A.5.13:reg_scope",         "Scope per row (which content classes this system stores — e.g. customer data, HR records, source code, financial)",      "must", False, "Coverage analysis"),
+        ChecklistItem("item:A.5.13:reg_enabled_flag",  "Labelling-enabled flag per row (yes / partial / no — with remediation date if not yes)",                                  "must", False, "27002:5.13 — applied"),
+        ChecklistItem("item:A.5.13:reg_automation",    "Automation level per row (manual / assisted / automatic; drives which gaps need user training vs config)",              "must", False, "27002:5.13 — implemented"),
+        ChecklistItem("item:A.5.13:reg_coverage_pct",  "Coverage percentage per row (% of items in this system that carry a label — sampled or auto-measured)",                "must", False, "Program effectiveness"),
+        ChecklistItem("item:A.5.13:reg_owner",         "System owner per row (named individual accountable for labelling on this platform)",                                     "must", False, "Accountability"),
+        ChecklistItem("item:A.5.13:reg_classification_levels", "Classification levels deployed per row (links to A.5.12 scheme — sometimes a system only uses a subset)",      "must", False, "27002:5.13 + cross-link to [[A.5.12]]"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.13:reg_dlp_policy",    "DLP policy link per row where applicable (sensitivity-label-driven DLP rules wired to the system)",                    "should", False, "Defence-in-depth"),
+        ChecklistItem("item:A.5.13:reg_external_ingress","External-ingress flag per row where docs arrive from outside (triggers the external_handling SHOULD path)",          "should", False, "Real-world coverage"),
+    ],
+)
+
+REQ_A513_PROGRAM_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.13:labelling_program_review",
+    control_ref    = "A.5.13",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Labelling Program Review",
+    trigger_type   = "universal",
+    description    = "The labelling program creates value only if labels actually stick across the estate — systems where coverage drops, transformations that strip labels, training gaps where users mis-apply, and new platforms that came online without labelling enabled all signal the program is leaking. The review captures the planned-interval check: coverage-trend analysis, drop-detection, scheme-alignment audit, training-effectiveness sample, and resulting program adjustments. Annual cadence — cascades from A.5.12 classification scheme review",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.13:rev_date",             "Review date within the planned annual interval",                                                                     "must", False, "27002:5.13 — periodic"),
+        ChecklistItem("item:A.5.13:rev_reviewer",         "Reviewer identity (InfoSec + Data Protection Officer where PII overlays apply jointly)",                            "must", False, "Accountability"),
+        ChecklistItem("item:A.5.13:rev_coverage_trend",   "Coverage-trend analysis (per-system coverage % delta since last review; investigate any drop)",                     "must", False, "Program effectiveness"),
+        ChecklistItem("item:A.5.13:rev_persistence_audit","Persistence audit (sample of transformed/exported items re-checked — does the label survive copy/export/conversion?)", "must", False, "27002:5.13 — persistence"),
+        ChecklistItem("item:A.5.13:rev_scheme_alignment", "Scheme-alignment audit (labels in active systems match A.5.12 levels; drift triggers re-mapping)",                    "must", False, "27002:5.13 + cross-link to [[A.5.12]]"),
+        ChecklistItem("item:A.5.13:rev_training_sample",  "Training-effectiveness sample (small sample of newly created items per level — labelled correctly?)",                "must", False, "27002:5.13 — implemented"),
+        ChecklistItem("item:A.5.13:rev_actions",          "Action items captured (e.g. extend labelling to platform X, tighten automation, refresh training module, address drop)", "must", False, "27002:5.13 — program adjustments"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.13:rev_tooling_landscape","Tooling-landscape check (vendor releases, new sensitivity-label features, capability gaps the program should consider)", "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.13:rev_next_date",        "Next planned review date stated",                                                                                    "should", False, "Planning"),
+    ],
+)
+
+REQ_A513_APPLICATION_RECORD = EvidenceRequirement(
+    id            = "req:A.5.13:labelling_application_record",
+    control_ref   = "A.5.13",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Platform Labelling Application Record",
+    trigger_type  = "universal",
+    description   = "A.5.13 expects labelling to be applied as the org's information estate grows — every new platform that stores information of any classification level should be brought into scope, not just the platforms IT happened to configure first. The application record evidences each enablement event: platform id, scope, enablement method, coverage verification, training rollout, owner. One record per platform/system onboarding (or major re-config), traceable back to the coverage register",
+    must_contain  = [
+        ChecklistItem("item:A.5.13:app_system_ref",    "Platform identifier per record (links to coverage register entry)",                                                   "must", False, "27002:5.13 — traceability"),
+        ChecklistItem("item:A.5.13:app_scope",         "Scope per record (which content classes the platform stores)",                                                         "must", False, "27002:5.13 — applied"),
+        ChecklistItem("item:A.5.13:app_method",        "Enablement method per record (sensitivity-label policy deployed / DLP rule wired / manual-tagging training given)",   "must", False, "27002:5.13 — implemented"),
+        ChecklistItem("item:A.5.13:app_coverage_check","Coverage verification per record (sample re-checked post-enablement; legacy items remediated)",                       "must", False, "Program assurance"),
+        ChecklistItem("item:A.5.13:app_training",      "Training rollout per record (users of this platform completed labelling refresher; new-joiner integration noted)",   "must", False, "27002:5.13 — implemented"),
+        ChecklistItem("item:A.5.13:app_owner",         "Owner per record (platform owner accepts ongoing accountability for labelling on this system)",                       "must", False, "Accountability"),
+        ChecklistItem("item:A.5.13:app_enablement_date","Enablement date recorded",                                                                                             "must", False, "Operational discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.13:app_dlp_wired",     "DLP-rule-wired flag per record where the platform supports DLP enforcement of labels",                                 "should", False, "Defence-in-depth"),
+        ChecklistItem("item:A.5.13:app_legacy_done",   "Legacy-asset remediation completion noted per record (pre-existing items retro-labelled within the timeline)",         "should", False, "Pragmatic adoption"),
     ],
 )
 
@@ -6275,7 +6372,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A512_APPROVAL,
     REQ_A512_COMMUNICATION,
     REQ_A512_REVIEW,
-    REQ_A513_INFORMATION_LABELLING,
+    # A.5.13 — 4-leaf operational_process (2026-05-31; program review freshness=365)
+    REQ_A513_PROCEDURE,
+    REQ_A513_COVERAGE_REGISTER,
+    REQ_A513_PROGRAM_REVIEW,
+    REQ_A513_APPLICATION_RECORD,
     REQ_A514_INFORMATION_TRANSFER,
     # A.5.15 — 4-leaf policy_program (2026-05-29)
     REQ_A515_POLICY,
