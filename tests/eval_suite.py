@@ -1533,6 +1533,53 @@ EVAL_CASES = [
     # enforced via authn_link (A.5.16) and identity_link (A.5.17) MUSTs.
     # MFA promoted SHOULD → MUST (modern baseline, no longer optional).
 
+    # ── Phase B operational_process incident-planning (commit 2026-05-31) ──
+    # Fourteenth Phase B bulk batch (single-control): A.5.24 promoted to
+    # operational_process 4-leaf — incident_management_framework + IR_team_
+    # register + framework_program_review (180d) + per-exercise activation
+    # record. A.5.24 sits ABOVE the operational A.5.25-27 incident family
+    # (batch 4) and A.5.28 evidence handling (batch 6). The exercise_record
+    # lifecycle-end is distinct from A.5.26's incident_closure_record —
+    # this tracks READINESS DRILLS, not real incidents. Third batch with
+    # GDPR-required MUSTs (after batches 10+11). `tested` SHOULD promoted
+    # to exercise_cadence MUST + lifecycle-end exercise_record (same SHOULD-
+    # promotion pattern as batches 12+13).
+
+    EvalCase(
+        id=71,
+        query="pending engine verdict for A.5.24",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "incident_planning"],
+        expected_refs=["A.5.24"],
+        expected_type="posture_check",
+        must_contain=["A.5.24", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.24 (Information security incident management planning) "
+            "Phase B promotion to operational_process 4-leaf: "
+            "incident_management_framework + incident_response_team_register "
+            "+ framework_program_review (freshness 180d) + per-exercise "
+            "framework_exercise_record. Live posture flips from Comply "
+            "(hand-entered finding citing GDPR 72hr notification + breach "
+            "notification processes) to engine-proposed NC at 0/4. The "
+            "framework sits ABOVE the operational A.5.25-27 incident "
+            "family (batch 4) and A.5.28 evidence handling (batch 6) — "
+            "A.5.24 is the strategic planning layer that defines roles, "
+            "authorities, communication paths, exercise cadence. The "
+            "exercise_record lifecycle-end is distinct from A.5.26's "
+            "real-incident closure record — A.5.24 tracks READINESS "
+            "DRILLS, not real incidents. Review freshness 180d because "
+            "IR readiness erodes between exercises. Third batch with GDPR-"
+            "required MUSTs (after pii_overlay in batch 10 and "
+            "legal_jurisdiction in batch 11) — preserves the personal_data "
+            "and notification MUSTs as gdpr_required=True, adds "
+            "rev_gdpr_72h_feasibility as new GDPR-required review MUST."
+        ),
+    ),
+
     EvalCase(
         id=70,
         query="pending engine verdict for A.5.17",

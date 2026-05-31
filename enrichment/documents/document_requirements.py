@@ -519,27 +519,133 @@ REQ_ENCRYPTION_POLICY = EvidenceRequirement(
     ],
 )
 
-REQ_INCIDENT_RESPONSE = EvidenceRequirement(
+# ── Annex A.5.24 — Information security incident management planning ────────
+# operational_process (4-leaf). Promoted 2026-05-31 from single-leaf to multi-
+# leaf per [[curation-program-full-multi-leaf]]. Spine: operational_process →
+# procedure + register + review_record + revocation_record (lifecycle-end).
+#
+# A.5.24 sits ABOVE the operational A.5.25-27 incident family
+# ([[curation-phase-b-batch-4-2026-05-31]]) and A.5.28 evidence handling
+# ([[curation-phase-b-batch-6-2026-05-31]]). A.5.24 is the strategic
+# planning framework — the document that defines roles, authorities,
+# communication paths, exercise cadence. A.5.25-27/28 operationalise it.
+#
+# Lifecycle-end variant: framework_exercise_record — per-tabletop/drill
+# activation proof. Distinct from A.5.26's per-incident_closure_record:
+# A.5.26 tracks REAL incidents, A.5.24 tracks READINESS EXERCISES.
+# Position 16 in the catalogue.
+#
+# Review freshness 180d — IR readiness erodes between exercises and
+# incidents. Same volatility family as A.5.25/A.5.26 (180d, batch 4),
+# A.5.16/A.5.17 identity+credentials (180d, batches 12+13).
+#
+# `tested` SHOULD promoted to MUST → split across procedure (exercise
+# cadence MUST) + dedicated lifecycle-end exercise_record leaf. Same
+# SHOULD-promotion pattern observed in batches 12 (service_accounts) +
+# 13 (mfa). The pattern: previously-soft expectations elevated when
+# they're load-bearing for the control's effectiveness claim.
+#
+# Cross-control: per_data_breach personal-data MUST + notification MUST
+# preserved as GDPR-required (gdpr_required=True flag). Extends the
+# ISO × GDPR integration line from pii_overlay (batch 10) +
+# legal_jurisdiction (batch 11) — third batch with GDPR-required MUSTs.
+#
+# Authority: ISO 27002:2022 § 5.24 a-g implementation guidance — roles,
+# detection, assessment, response, evidence, lessons, communications.
+
+REQ_A524_FRAMEWORK = EvidenceRequirement(
     id            = "req:A.5.24:incident_response_procedure",
     control_ref   = "A.5.24",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
-    title= "Information Security Incident Response Procedure",
+    title         = "Information Security Incident Management Planning Framework",
     trigger_type  = "universal",
-    description   = "A.5.24 requires documented incident management processes",
+    description   = "A.5.24 requires the org to plan and prepare for incidents — not just react when they happen. The framework documents roles, authorities, detection-and-reporting paths, classification criteria, escalation thresholds, communication paths (internal + external + regulator), evidence-handling integration (A.5.28), lessons-learned integration (A.5.27), and exercise/test cadence. The IR team register, periodic program review and per-exercise activation record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.24:roles",           "Roles and responsibilities defined", "must", False, "A.5.24a"),
-        ChecklistItem("item:A.5.24:detection",       "Detection and reporting process", "must", False, "A.5.24b"),
-        ChecklistItem("item:A.5.24:assessment",      "Incident assessment and classification criteria", "must", False, "A.5.24c"),
-        ChecklistItem("item:A.5.24:response",        "Response and escalation procedures", "must", False, "A.5.24d"),
-        ChecklistItem("item:A.5.24:personal_data",   "Step to determine if personal data breach occurred", "must", True, "GDPR Art.33 alignment — 72hr notification"),
-        ChecklistItem("item:A.5.24:notification",    "Notification process for personal data breaches", "must", True, "GDPR Art.33/34 alignment"),
-        ChecklistItem("item:A.5.24:evidence",        "Evidence collection and preservation", "must", False, "A.5.24e"),
+        ChecklistItem("item:A.5.24:roles",            "Roles and responsibilities defined (IR lead, deputies, comms lead, legal liaison, exec sponsor; named individuals or stable roles, not 'TBD')", "must", False, "27002:5.24a"),
+        ChecklistItem("item:A.5.24:detection",        "Detection and reporting process (where reports come from — A.5.25 triage, monitoring/SOC, user reports, supplier notifications, A.5.7 threat intel)", "must", False, "27002:5.24b + cross-link to [[A.5.25]]"),
+        ChecklistItem("item:A.5.24:assessment",       "Incident assessment and classification criteria (severity tiers; what triggers each tier; alignment with A.5.25 triage decision criteria)",         "must", False, "27002:5.24c + cross-link to [[A.5.25]]"),
+        ChecklistItem("item:A.5.24:response",         "Response and escalation procedures (decision authority per severity tier; out-of-hours handling; cross-team coordination)",                         "must", False, "27002:5.24d"),
+        ChecklistItem("item:A.5.24:personal_data",    "Step to determine if personal data breach occurred (DPIA-aware classification, controller/processor analysis)",                                     "must", True, "GDPR Art.33 alignment — 72hr notification trigger"),
+        ChecklistItem("item:A.5.24:notification",     "Notification process for personal data breaches (supervisory authority < 72h; data subjects when high-risk; notification content per Art.33(3))",   "must", True, "GDPR Art.33/34 alignment"),
+        ChecklistItem("item:A.5.24:evidence",         "Evidence collection and preservation requirements (cross-link to A.5.28 evidence-handling procedure; chain-of-custody mandatory from initiation)", "must", False, "27002:5.24e + cross-link to [[A.5.28]]"),
+        ChecklistItem("item:A.5.24:exercise_cadence", "Exercise / test cadence stated explicitly (annual minimum, more frequent for high-risk org; promoted from SHOULD because untested plans degrade)",  "must", False, "27002:5.24 — preparation"),
+        ChecklistItem("item:A.5.24:communications",   "External communication paths (regulator, legal, PR, law enforcement) with thresholds and named owners",                                              "must", False, "27002:5.24 — communication"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.24:lessons",     "Lessons learned process", "should", False, "A.5.27 linkage"),
-        ChecklistItem("item:A.5.24:contacts",    "External contact list (regulator, legal, PR)", "should", False, "Response effectiveness"),
-        ChecklistItem("item:A.5.24:tested",      "Testing frequency and date of last test", "should", False, "Effectiveness"),
+        ChecklistItem("item:A.5.24:lessons",          "Lessons learned process (cross-link to A.5.27 lessons register; how lessons feed back into framework revisions)",                                    "should", False, "Closing loop with [[A.5.27]]"),
+        ChecklistItem("item:A.5.24:contacts",         "External contact list maintained (regulator, legal counsel, PR firm, forensic specialists, CSP support) with rotation review",                       "should", False, "Response effectiveness"),
+        ChecklistItem("item:A.5.24:supplier_path",    "Supplier-driven incident path documented (A.5.21 supplier-side incidents trigger our framework even when we're not directly hit)",                  "should", False, "Cross-link to [[A.5.21]]"),
+    ],
+)
+
+REQ_A524_IR_TEAM_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.24:incident_response_team_register",
+    control_ref   = "A.5.24",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Incident Response Team Register",
+    trigger_type  = "universal",
+    description   = "A.5.24 requires the responders to be ready before the incident — half a team during a real incident is the failure mode. The register catalogues every named responder: name (or stable role), tier, on-call status, contact info (multiple channels), training currency, backup. It is the operational record that proves the team is staffed-and-trained, not just nominated on the org chart",
+    must_contain  = [
+        ChecklistItem("item:A.5.24:reg_member_id",        "Each IR team member captured with a unique identifier (employee or contractor id)",                                                          "must", False, "27002:5.24 — preparation"),
+        ChecklistItem("item:A.5.24:reg_role",             "Role per row (ir_lead / deputy / comms / legal / forensic_specialist / technical_lead) — explicitly mapped to framework role taxonomy",        "must", False, "27002:5.24a"),
+        ChecklistItem("item:A.5.24:reg_tier",             "Tier per row (primary / backup / escalation_only) — drives the activation order",                                                              "must", False, "27002:5.24 — preparation"),
+        ChecklistItem("item:A.5.24:reg_contact",          "Contact info per row across multiple channels (phone + secondary phone + email + out-of-band channel for if corp comms are compromised)",     "must", False, "27002:5.24 — communication"),
+        ChecklistItem("item:A.5.24:reg_oncall",           "On-call status per row (when in active rotation; how long; when next handover)",                                                                "must", False, "27002:5.24 — readiness"),
+        ChecklistItem("item:A.5.24:reg_training_current", "Training-currency per row (last training date, training type; flagged when stale)",                                                              "must", False, "27002:5.24 — preparation"),
+        ChecklistItem("item:A.5.24:reg_backup_named",     "Backup named per row (no single-person roles; rotation continuity guaranteed)",                                                                  "must", False, "27002:5.24 — preparation"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.24:reg_external_partner", "External-partner contacts captured alongside internal members (regulator points-of-contact, retained forensic firm contact)",                  "should", False, "Response continuity"),
+        ChecklistItem("item:A.5.24:reg_dpia_competence",  "DPIA / data-protection competence flag per row (drives who handles the GDPR Art.33 path when personal data is in scope)",                       "should", False, "GDPR Art.33 readiness"),
+    ],
+)
+
+REQ_A524_PROGRAM_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.24:framework_program_review",
+    control_ref    = "A.5.24",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Incident Management Framework Review",
+    trigger_type   = "universal",
+    description    = "The framework creates value only if it actually runs when incidents hit — exercise results that surface gaps, team coverage gaps, framework-vs-actual-response divergence, GDPR-72h-feasibility check all signal the framework is or isn't ready. The review captures the planned-interval check: exercise-result analysis, team-readiness audit, real-incident-vs-framework divergence analysis, GDPR-readiness verification, and resulting framework adjustments. Cadence tightened to 180 days — IR readiness erodes between exercises",
+    freshness_days = 180,
+    must_contain   = [
+        ChecklistItem("item:A.5.24:rev_date",              "Review date within the planned 180-day interval",                                                                                            "must", False, "27002:5.24 — periodic"),
+        ChecklistItem("item:A.5.24:rev_reviewer",          "Reviewer identity (CISO + IR lead + Data Protection Officer where personal data scope; Legal where regulator notification scope)",          "must", False, "Accountability"),
+        ChecklistItem("item:A.5.24:rev_exercise_results",  "Exercise-result analysis (last N exercises reviewed; gaps surfaced; remediation per gap; ratio-of-exercises-completed vs planned)",         "must", False, "27002:5.24 — preparation effectiveness"),
+        ChecklistItem("item:A.5.24:rev_team_readiness",    "Team-readiness audit (training currency across responders; coverage gaps where a tier is under-staffed; backup-named compliance)",          "must", False, "27002:5.24 — preparation"),
+        ChecklistItem("item:A.5.24:rev_real_divergence",   "Real-incident vs framework divergence (where actual responses deviated from framework — was the framework too prescriptive, missing a path, or just unused?)", "must", False, "Framework effectiveness"),
+        ChecklistItem("item:A.5.24:rev_gdpr_72h_feasibility","GDPR 72-hour feasibility check (when did the last personal-data incident notify? what was the gap to 72h? is the path actually under 72h?)", "must", True, "GDPR Art.33 — 72hr feasibility verification"),
+        ChecklistItem("item:A.5.24:rev_actions",           "Action items captured (e.g. add new role, refresh communications playbook, expand exercise scope, tighten 72h path)",                       "must", False, "27002:5.24 — framework adjustments"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.24:rev_peer_practice",     "Peer/industry practice scan (notable incidents in the sector; how peers responded; lessons applicable)",                                     "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.24:rev_next_date",         "Next planned review date stated (within 180d of this review)",                                                                                "should", False, "Planning"),
+    ],
+)
+
+REQ_A524_EXERCISE_RECORD = EvidenceRequirement(
+    id            = "req:A.5.24:framework_exercise_record",
+    control_ref   = "A.5.24",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Exercise Framework Activation Record",
+    trigger_type  = "universal",
+    description   = "A.5.24 expects the framework to be exercised, not just written. The exercise record evidences each tabletop, simulation, live drill, or regulator-led exercise: exercise id, type, scenario, participants (link to IR team register), gaps identified, remediation actions, sign-off. One record per exercise, distinct from A.5.26's incident_closure_record (which tracks REAL incidents). This is per-DRILL evidence — the readiness proof",
+    must_contain  = [
+        ChecklistItem("item:A.5.24:ex_exercise_id",       "Exercise identifier per record (unique, sequenced)",                                                                                          "must", False, "27002:5.24 — traceability"),
+        ChecklistItem("item:A.5.24:ex_type",              "Exercise type per record (tabletop / live_simulation / red_team_drill / regulator_led / partial_segment)",                                     "must", False, "27002:5.24 — preparation taxonomy"),
+        ChecklistItem("item:A.5.24:ex_scenario",          "Scenario per record (what was simulated; severity; in-scope assets; threat-actor archetype)",                                                  "must", False, "27002:5.24 — preparation depth"),
+        ChecklistItem("item:A.5.24:ex_participants",      "Participant list per record (links to IR team register entries; observers noted separately)",                                                  "must", False, "27002:5.24 + cross-link to register"),
+        ChecklistItem("item:A.5.24:ex_gaps",              "Gaps identified per record (where the framework or team fell short; severity per gap)",                                                        "must", False, "27002:5.24 — preparation feedback"),
+        ChecklistItem("item:A.5.24:ex_remediation",       "Remediation actions captured per record (each gap → action item with owner + due date; feeds the program review)",                            "must", False, "27002:5.24 — continuous improvement"),
+        ChecklistItem("item:A.5.24:ex_signoff",           "Signoff per record (exercise lead + IR team lead + exec sponsor where high-tier exercise)",                                                   "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.24:ex_external_observer", "External observer noted per record where an independent party (auditor, peer org, regulator) attended (raises defensibility)",                "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.24:ex_lessons_feed",      "Lessons feed per record to A.5.27 lessons register where the exercise surfaced patterns worth retaining beyond this control",                  "should", False, "Closing loop with [[A.5.27]]"),
     ],
 )
 
@@ -6598,7 +6704,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_INTERNAL_AUDIT,
     REQ_MANAGEMENT_REVIEW,
     REQ_ENCRYPTION_POLICY,
-    REQ_INCIDENT_RESPONSE,
+    # A.5.24 — 4-leaf operational_process (2026-05-31; program review freshness=180)
+    REQ_A524_FRAMEWORK,
+    REQ_A524_IR_TEAM_REGISTER,
+    REQ_A524_PROGRAM_REVIEW,
+    REQ_A524_EXERCISE_RECORD,
     REQ_DATA_MASKING,
     # Universal — ISO 27001 Annex A.5.18 (four-leaf curation, 2026-05-26 —
     # promoted from single-leaf REQ_ACCESS_RIGHTS per [[curation-program-full-multi-leaf]])
@@ -6623,8 +6733,10 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     # Numerical order. 4-leaf curations are interleaved in numeric order:
     #   - A.5.2 / A.5.18 above (policy_program / operational_process)
     #   - A.5.5 / A.5.6 / A.5.9 / A.5.31 / A.5.32 (records_program, 2026-05-29)
-    # A.5.23 / A.5.24 already exist above as REQ_CLOUD_SERVICES_POLICY /
-    # REQ_INCIDENT_RESPONSE (still 1-leaf, pending v2 promotion).
+    # A.5.23 already exists above as REQ_CLOUD_SERVICES_POLICY (4-leaf,
+    # supplier+cloud batch 3). A.5.24 promoted to 4-leaf in batch 14 above
+    # (REQ_A524_FRAMEWORK / REQ_A524_IR_TEAM_REGISTER / REQ_A524_PROGRAM_REVIEW
+    # / REQ_A524_EXERCISE_RECORD).
     # A.5.3 — 4-leaf policy_program (2026-05-29)
     REQ_A53_SEGREGATION_MATRIX,
     REQ_A53_APPROVAL,
