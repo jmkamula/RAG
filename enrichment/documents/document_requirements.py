@@ -3561,24 +3561,131 @@ REQ_A528_DISPOSAL_RECORD = EvidenceRequirement(
     ],
 )
 
-REQ_A529_DISRUPTION_SECURITY = EvidenceRequirement(
+# ── Annex A.5.29 — Information security during disruption — operational_process (4-leaf) ──
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process →
+# plan (primary) + register + review_record + revocation_record
+# (lifecycle-end). A.5.29's primary artefact is the continuity-security
+# plan (the security annex to the BCP) — like A.5.14 used policy as
+# primary, A.5.29 uses plan. The spine accommodates non-procedure primary
+# leaves.
+#
+# Lifecycle-end variant: plan_activation_record — per-activation proof
+# covering BOTH real disruptions AND scheduled tests (type field
+# distinguishes). Position 17 in the catalogue. Distinct from A.5.24's
+# exercise_record which only tracks DRILLS (never real incidents) —
+# A.5.29's plan can fire either way; the activation_record handles both.
+#
+# Review freshness 180d — disruption landscape shifts (new cyber threats,
+# new supplier dependencies, new infrastructure). Same volatility family
+# as A.5.24 IR planning (180d, batch 14), A.5.25/A.5.26 incident family
+# (180d, batch 4).
+#
+# Cross-control: scenarios MUST cross-links to A.5.7 threat-intel
+# (cyber-attack scenarios); communication MUST cross-links to A.5.24
+# IR framework (overlap when disruption is incident-driven); restoration
+# MUST cross-links to A.5.30 ICT readiness (mechanical recovery path).
+# bcp_integration SHOULD preserved (broader BCP framework outside
+# scope).
+#
+# Authority: ISO 27002:2022 § 5.29 implementation guidance — maintain
+# info security at an APPROPRIATE LEVEL (graceful degradation, not
+# all-or-nothing); fallback/compensating measures; communication paths;
+# restoration after disruption ends; test schedule.
+
+REQ_A529_PLAN = EvidenceRequirement(
     id            = "req:A.5.29:information_security_during_disruption",
     control_ref   = "A.5.29",
     standard_id   = "ISO27001:2022",
     evidence_type = "plan",
     title         = "Information Security During Disruption Plan",
     trigger_type  = "universal",
-    description   = "A.5.29 requires planning to maintain information security at an appropriate level during disruption. Evidence is a plan (often a BCP security annex) covering which controls must keep working under disruption, fallback measures, and post-disruption restoration",
+    description   = "A.5.29 requires planning to maintain information security at an APPROPRIATE LEVEL during disruption — graceful degradation, not all-or-nothing. The plan documents disruption scenarios, controls that must keep operating, fallback / compensating measures, communication paths, and restoration steps. The scenario register, periodic program review and per-activation record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.29:scenarios",       "Disruption scenarios considered (cyber attack, natural event, supplier failure)", "must", False, "A.5.29 — disruption"),
-        ChecklistItem("item:A.5.29:must_continue",   "Security controls that must continue operating during disruption", "must", False, "A.5.29 — maintain information security"),
-        ChecklistItem("item:A.5.29:fallback",        "Fallback or compensating security measures when primary controls fail", "must", False, "A.5.29 — appropriate level"),
-        ChecklistItem("item:A.5.29:communication",   "Communication during disruption (internal, external, regulators)", "must", False, "A.5.29 — plan"),
-        ChecklistItem("item:A.5.29:restoration",     "Restoration of normal security controls after disruption ends", "must", False, "A.5.29 — maintain"),
+        ChecklistItem("item:A.5.29:scenarios",           "Disruption scenarios considered (cyber attack [link to A.5.7 threat intel], natural event, supplier failure [link to A.5.21], regulatory action, key-personnel loss)", "must", False, "27002:5.29 — scenario coverage"),
+        ChecklistItem("item:A.5.29:must_continue",       "Security controls that must continue operating during disruption (named explicitly — encryption, access control, audit logging at minimum)",                          "must", False, "27002:5.29 — maintain information security"),
+        ChecklistItem("item:A.5.29:degradation_levels",  "Acceptable degradation levels stated (which controls can drop to compensating, which must hold at full — risk-tiered)",                                                 "must", False, "27002:5.29 — appropriate level (graceful degradation)"),
+        ChecklistItem("item:A.5.29:fallback",            "Fallback / compensating security measures when primary controls fail (per-control: what replaces it, what residual risk it accepts)",                                  "must", False, "27002:5.29 — appropriate level"),
+        ChecklistItem("item:A.5.29:communication",       "Communication during disruption (internal personnel, external customers, regulators, suppliers; out-of-band channels when corp comms compromised)",                    "must", False, "27002:5.29 — plan + cross-link to [[A.5.24]]"),
+        ChecklistItem("item:A.5.29:restoration",         "Restoration of normal security controls after disruption ends (sequenced, verified — re-encryption, audit-log replay, access-control reactivation)",                  "must", False, "27002:5.29 — maintain + cross-link to [[A.5.30]]"),
+        ChecklistItem("item:A.5.29:activation_authority","Activation authority defined (who declares the plan active; who declares it stood down; criteria for each)",                                                            "must", False, "27002:5.29 — preparation discipline"),
+        ChecklistItem("item:A.5.29:test_schedule",       "Test schedule for the plan (cadence stated; promoted from SHOULD because untested continuity plans fail when actually needed)",                                        "must", False, "27002:5.29 — preparation effectiveness"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.29:bcp_integration", "Integration with the broader Business Continuity Plan", "should", False, "Coherence with BCP framework"),
-        ChecklistItem("item:A.5.29:test_schedule",   "Test schedule for the disruption plan", "should", False, "Plans must be exercised"),
+        ChecklistItem("item:A.5.29:bcp_integration",     "Integration with the broader Business Continuity Plan (this is the security ANNEX to the BCP — BCP itself is out of scope)",                                          "should", False, "Coherence with BCP framework"),
+        ChecklistItem("item:A.5.29:residual_risk",       "Residual-risk register for disruption scenarios where degradation creates accepted exposure (named risk owner per scenario)",                                          "should", False, "Risk discipline"),
+        ChecklistItem("item:A.5.29:third_party",         "Third-party-dependent controls flagged (where the plan relies on supplier action — cross-link to A.5.22 review)",                                                       "should", False, "Cross-link to [[A.5.22]]"),
+    ],
+)
+
+REQ_A529_SCENARIO_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.29:disruption_scenario_register",
+    control_ref   = "A.5.29",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Disruption Scenario Register",
+    trigger_type  = "universal",
+    description   = "A.5.29 requires the plan to cover all relevant scenarios — invisible scenarios are the ones that hit unprepared. The register catalogues every in-scope disruption scenario: scenario id, type, severity tier, in-scope controls, fallback path, last-test date, owner. It is the operational record that proves the plan actually covers the org's risk landscape, not just the easy scenarios",
+    must_contain  = [
+        ChecklistItem("item:A.5.29:reg_scenario_id",    "Each in-scope scenario captured with a unique identifier",                                                                                                  "must", False, "27002:5.29 — scenario coverage"),
+        ChecklistItem("item:A.5.29:reg_type",           "Scenario type per row (cyber_attack / natural_event / supplier_failure / regulatory_action / personnel_loss / infrastructure_failure)",                     "must", False, "27002:5.29 — scenario taxonomy"),
+        ChecklistItem("item:A.5.29:reg_severity",       "Severity tier per row (tier_1_full_disruption / tier_2_partial / tier_3_localised) — drives the activation path",                                          "must", False, "27002:5.29 — tier-based response"),
+        ChecklistItem("item:A.5.29:reg_in_scope_ctrls", "In-scope controls per row (which security controls this scenario specifically impacts; cross-link to A.5.9 asset register for assets at risk)",            "must", False, "27002:5.29 — scope analysis + cross-link to [[A.5.9]]"),
+        ChecklistItem("item:A.5.29:reg_fallback",       "Fallback path per row (which compensating measure activates; what residual risk it accepts)",                                                              "must", False, "27002:5.29 — appropriate level"),
+        ChecklistItem("item:A.5.29:reg_last_tested",    "Last-tested date per row (drives stale-scenario detection — scenarios not exercised in N months flag for refresh)",                                        "must", False, "27002:5.29 — preparation cadence"),
+        ChecklistItem("item:A.5.29:reg_owner",          "Named owner per row (accountable for keeping this scenario's plan section current)",                                                                       "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.29:reg_recovery_target","Recovery target per row where applicable (RTO/RPO for ICT scenarios — cross-link to A.5.30)",                                                              "should", False, "Cross-link to [[A.5.30]]"),
+        ChecklistItem("item:A.5.29:reg_supplier_dep",   "Supplier dependency flag per row where the fallback relies on a specific supplier",                                                                         "should", False, "Cross-link to [[A.5.22]]"),
+    ],
+)
+
+REQ_A529_PROGRAM_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.29:continuity_program_review",
+    control_ref    = "A.5.29",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Continuity-Security Program Review",
+    trigger_type   = "universal",
+    description    = "The continuity plan creates value only when actually exercised — scenarios that go stale, fallbacks that wouldn't actually work, communication paths that have changed all signal the plan is drifting. The review captures the planned-interval check: scenario-currency audit, test-result analysis, fallback-validity check, real-disruption divergence analysis, and resulting plan adjustments. Cadence tightened to 180 days — disruption landscape shifts",
+    freshness_days = 180,
+    must_contain   = [
+        ChecklistItem("item:A.5.29:rev_date",              "Review date within the planned 180-day interval",                                                                                                       "must", False, "27002:5.29 — periodic"),
+        ChecklistItem("item:A.5.29:rev_reviewer",          "Reviewer identity (CISO + BCP-program owner + Legal where regulatory comms scope; supplier-management lead where supplier-dep scenarios in scope)",     "must", False, "Accountability"),
+        ChecklistItem("item:A.5.29:rev_scenario_currency", "Scenario-currency audit (each scenario in the register re-validated: still plausible? still relevant? new scenarios that should be added?)",            "must", False, "27002:5.29 — scenario freshness"),
+        ChecklistItem("item:A.5.29:rev_test_results",      "Test-result analysis (last N tests reviewed; gaps surfaced; remediation per gap; ratio of scenarios tested vs total)",                                  "must", False, "27002:5.29 — preparation effectiveness"),
+        ChecklistItem("item:A.5.29:rev_fallback_validity", "Fallback-validity check (sample of fallbacks re-validated: would they actually work? are dependencies still in place? are owners still in role?)",       "must", False, "27002:5.29 — appropriate level verification"),
+        ChecklistItem("item:A.5.29:rev_real_divergence",   "Real-disruption divergence analysis (where actual disruptions diverged from the plan — what was missing? what assumed? what proved unnecessary?)",      "must", False, "Plan effectiveness"),
+        ChecklistItem("item:A.5.29:rev_actions",           "Action items captured (e.g. add scenario, retire stale fallback, refresh communication paths, expand test scope)",                                       "must", False, "27002:5.29 — plan adjustments"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.29:rev_industry_practice", "Industry-practice scan (notable disruptions in the sector; how peers handled; lessons applicable to our plan)",                                          "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.29:rev_next_date",         "Next planned review date stated (within 180d of this review)",                                                                                            "should", False, "Planning"),
+    ],
+)
+
+REQ_A529_ACTIVATION_RECORD = EvidenceRequirement(
+    id            = "req:A.5.29:plan_activation_record",
+    control_ref   = "A.5.29",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Activation Plan Record",
+    trigger_type  = "universal",
+    description   = "A.5.29 expects the plan to be ACTIVATED — not just written. The activation record evidences each invocation: activation id, type (real_disruption / scheduled_test / partial_drill), scenario triggered, scope of degradation, duration, gaps surfaced, restoration status, sign-off. One record per activation, covering BOTH real disruptions AND scheduled tests (type field distinguishes). Real activations cross-reference A.5.26 incident_register where the disruption was incident-driven",
+    must_contain  = [
+        ChecklistItem("item:A.5.29:act_activation_id",   "Activation identifier per record (unique, sequenced)",                                                                                                       "must", False, "27002:5.29 — traceability"),
+        ChecklistItem("item:A.5.29:act_type",            "Activation type per record (real_disruption / scheduled_test / partial_drill / regulator_led_exercise)",                                                     "must", False, "27002:5.29 — coverage taxonomy"),
+        ChecklistItem("item:A.5.29:act_scenario_ref",    "Triggered scenario reference per record (links to scenario register entry)",                                                                                  "must", False, "27002:5.29 + cross-link to register"),
+        ChecklistItem("item:A.5.29:act_scope",           "Scope of degradation per record (which controls dropped to fallback; which held at full; expected vs actual)",                                                "must", False, "27002:5.29 — appropriate level verification"),
+        ChecklistItem("item:A.5.29:act_duration",        "Duration per record (start time, end time, restoration time)",                                                                                                "must", False, "27002:5.29 — timeline"),
+        ChecklistItem("item:A.5.29:act_gaps",            "Gaps surfaced per record (where the plan or controls fell short; severity per gap)",                                                                          "must", False, "27002:5.29 — improvement feedback"),
+        ChecklistItem("item:A.5.29:act_restoration",     "Restoration status per record (all controls back to normal; outstanding remediation items tracked)",                                                          "must", False, "27002:5.29 — maintain after disruption ends"),
+        ChecklistItem("item:A.5.29:act_signoff",         "Signoff per record (activation-authority + CISO; exec sponsor where tier-1 disruption)",                                                                      "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.29:act_incident_link",   "Cross-reference to A.5.26 incident register where the activation was incident-driven (real disruptions tied to incidents)",                                  "should", False, "Closing loop with [[A.5.26]]"),
+        ChecklistItem("item:A.5.29:act_lessons_feed",    "Lessons feed per record to A.5.27 lessons register where the activation surfaced patterns worth retaining beyond this control",                              "should", False, "Closing loop with [[A.5.27]]"),
     ],
 )
 
@@ -6852,7 +6959,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A528_CUSTODY_REGISTER,
     REQ_A528_PROGRAM_REVIEW,
     REQ_A528_DISPOSAL_RECORD,
-    REQ_A529_DISRUPTION_SECURITY,
+    # A.5.29 — 4-leaf operational_process (2026-05-31; program review freshness=180)
+    REQ_A529_PLAN,
+    REQ_A529_SCENARIO_REGISTER,
+    REQ_A529_PROGRAM_REVIEW,
+    REQ_A529_ACTIVATION_RECORD,
     REQ_A530_ICT_CONTINUITY,
     # A.5.31 — 4-leaf records_program (2026-05-29; review freshness=180)
     REQ_A531_OBLIGATIONS_REGISTER,

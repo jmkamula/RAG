@@ -1533,6 +1533,47 @@ EVAL_CASES = [
     # enforced via authn_link (A.5.16) and identity_link (A.5.17) MUSTs.
     # MFA promoted SHOULD → MUST (modern baseline, no longer optional).
 
+    # ── Phase B operational_process disruption-security (commit 2026-05-31) ──
+    # Fifteenth Phase B bulk batch (single-control): A.5.29 promoted to
+    # operational_process 4-leaf — continuity_security_plan (plan as
+    # primary, like A.5.14 used policy) + disruption_scenario_register +
+    # continuity_program_review (180d) + per-activation plan record.
+    # The activation_record covers BOTH real disruptions AND scheduled
+    # tests — distinct from A.5.24's exercise_record (drills only).
+    # Fourth consecutive SHOULD-promotion (test_schedule → MUST).
+
+    EvalCase(
+        id=72,
+        query="pending engine verdict for A.5.29",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "disruption_security"],
+        expected_refs=["A.5.29"],
+        expected_type="posture_check",
+        must_contain=["A.5.29", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.29 (Information security during disruption) Phase B "
+            "promotion to operational_process 4-leaf: continuity_security_plan "
+            "(plan-as-primary variant) + disruption_scenario_register + "
+            "continuity_program_review (freshness 180d) + per-activation "
+            "plan_activation_record. Live posture flips from Comply (hand-"
+            "entered finding citing BCP + GDPR/privacy compliance during "
+            "recovery) to engine-proposed NC at 0/4. The activation_record "
+            "lifecycle-end leaf is a HYBRID variant — covers BOTH real "
+            "disruptions AND scheduled tests, with a type field "
+            "distinguishing them. Distinct from A.5.24's exercise_record "
+            "(drills ONLY) and A.5.26's incident_closure_record (real "
+            "incidents ONLY) — A.5.29's plan can fire either way. New "
+            "degradation_levels MUST encodes 'appropriate level' = "
+            "graceful degradation explicitly (one of A.5.29's most-tested "
+            "auditor concerns). test_schedule promoted SHOULD → MUST "
+            "(fourth consecutive SHOULD-promotion across batches 12-15)."
+        ),
+    ),
+
     # ── Phase B operational_process incident-planning (commit 2026-05-31) ──
     # Fourteenth Phase B bulk batch (single-control): A.5.24 promoted to
     # operational_process 4-leaf — incident_management_framework + IR_team_
