@@ -1043,6 +1043,143 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Phase B operational_process supplier+cloud 5-pack (commit 2026-05-31) ──
+    # Third Phase B bulk batch: A.5.19, A.5.20, A.5.21, A.5.22, A.5.23 all
+    # promoted to the operational_process 4-leaf spine. The four supplier
+    # controls (A.5.19-22) form the supplier lifecycle (select → agree →
+    # operate → review/exit); A.5.23 extends the same shape to cloud services.
+    # Per-control primary-leaf variants:
+    #   A.5.19  procedure       + supplier_register     + portfolio_review     + offboarding
+    #   A.5.20  agreement_tpl   + coverage_register     + template_review      + deviations
+    #   A.5.21  procedure       + ict_component_register + supply_chain_review + eol_replacement
+    #   A.5.22  review_record   + schedule_register     + program_meta_review  + change_response_log
+    #   A.5.23  policy          + cloud_service_register + cloud_posture_review + exit_migration
+    # A.5.23 is profile_fact-triggered (only fires for cloud-using tenants) AND
+    # already had its policy leaf uploaded on Arion, so engine sits at OFI 1/4
+    # — same partial-evidence path locked by case 55 for A.5.15.
+
+    EvalCase(
+        id=56,
+        query="pending engine verdict for A.5.19",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process"],
+        expected_refs=["A.5.19"],
+        expected_type="posture_check",
+        must_contain=["A.5.19", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.19 (InfoSec in supplier relationships) Phase B "
+            "promotion to operational_process 4-leaf: supplier_risk_procedure "
+            "+ supplier_register + portfolio_review + offboarding_record. "
+            "Procedure leaf id preserved from single-leaf predecessor. '0/4' "
+            "is the multi-leaf signature; pre-promotion would have read '0/1'."
+        ),
+    ),
+
+    EvalCase(
+        id=57,
+        query="pending engine verdict for A.5.20",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process"],
+        expected_refs=["A.5.20"],
+        expected_type="posture_check",
+        must_contain=["A.5.20", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.20 (Security in supplier agreements) Phase B promotion "
+            "to operational_process 4-leaf with the agreement-template "
+            "variant: agreement_template + coverage_register + template_review "
+            "+ deviation_register. Lifecycle-end slot is realised as the "
+            "deviation register — each softened or omitted clause is the "
+            "supplier 'exiting' the standard template path."
+        ),
+    ),
+
+    EvalCase(
+        id=58,
+        query="pending engine verdict for A.5.21",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process"],
+        expected_refs=["A.5.21"],
+        expected_type="posture_check",
+        must_contain=["A.5.21", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.21 (ICT supply chain) Phase B promotion to "
+            "operational_process 4-leaf: ict_supply_chain_procedure + "
+            "ict_component_register + supply_chain_review (freshness 180d) + "
+            "eol_replacement_record. Review freshness tightened from default "
+            "365d to 180d because ICT supply chain volatility (M&A, EOL "
+            "pipelines, vuln disclosures) outpaces an annual cadence."
+        ),
+    ),
+
+    EvalCase(
+        id=59,
+        query="pending engine verdict for A.5.22",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process"],
+        expected_refs=["A.5.22"],
+        expected_type="posture_check",
+        must_contain=["A.5.22", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.22 (Monitoring + change mgmt of supplier services) "
+            "Phase B promotion to operational_process 4-leaf with the "
+            "review-record-shaped variant: supplier_review_record + "
+            "review_schedule_register + program_meta_review + "
+            "change_response_log. Lifecycle-end slot is the change-response "
+            "log — each supplier-side change (network/tech/location/sub-"
+            "contractor/re-tendering) is the lifecycle event requiring "
+            "documented response."
+        ),
+    ),
+
+    EvalCase(
+        id=60,
+        query="pending engine verdict for A.5.23",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "partial_evidence", "profile_fact"],
+        expected_refs=["A.5.23"],
+        expected_type="posture_check",
+        # A.5.23 differs from the other 4 in this batch: the cloud services
+        # policy leaf is already uploaded on Arion (legacy single-leaf
+        # evidence carried forward), so 1 of the 4 leaves is satisfied.
+        # Engine output is therefore 'OFI' at '1/4', not 'NC' at '0/4'.
+        # This re-exercises the partial-evidence multi-leaf path that case
+        # 55 first introduced for A.5.15. A.5.23 is also profile_fact-
+        # triggered (only fires for cloud-using tenants), so this case
+        # additionally locks the profile_fact + partial-evidence combination.
+        must_contain=["A.5.23", "engine proposes", "'OFI'", "1/4 children satisfied"],
+        must_not_contain=[
+            "0/4 children satisfied",
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.23 (InfoSec for use of cloud services) Phase B "
+            "promotion to operational_process 4-leaf adapted: "
+            "cloud_services_policy + cloud_service_register + "
+            "cloud_posture_review + exit_migration_record. Partial-evidence "
+            "shape (engine OFI 1/4, not NC 0/4) because the policy leaf was "
+            "already satisfied via legacy upload. Companion to case 55 — "
+            "second partial-evidence case in the suite, and the first one "
+            "that combines partial evidence with profile_fact triggering."
+        ),
+    ),
+
     EvalCase(
         id=41,
         query="is A.5.30 compliant?",

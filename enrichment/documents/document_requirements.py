@@ -388,27 +388,110 @@ REQ_DPA = EvidenceRequirement(
     ],
 )
 
+# ── Annex A.5.23 — InfoSec for use of cloud services — operational_process (4-leaf) ──
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → policy
+# (primary) + register + review_record + revocation_record. trigger_type
+# remains profile_fact — A.5.23 only fires for cloud-using tenants. The
+# lifecycle-end slot is realised as exit-migration records — each cloud
+# service exit is the supplier-equivalent of revocation. The policy leaf id is
+# preserved; three siblings are new.
+# Authority: ISO 27002:2022 § 5.23 implementation guidance.
+
 REQ_CLOUD_SERVICES_POLICY = EvidenceRequirement(
     id            = "req:A.5.23:cloud_services_policy",
     control_ref   = "A.5.23",
     standard_id   = "ISO27001:2022",
     evidence_type = "policy",
-    title= "Information Security for Use of Cloud Services Policy",
+    title         = "Information Security for Use of Cloud Services Policy",
     trigger_type  = "profile_fact",
-    description   = "A.5.23 requires a topic-specific policy for cloud service usage",
+    description   = "A.5.23 requires a topic-specific policy on use of cloud services covering scope, risk management, selection, shared-responsibility split, incident handling and exit. The cloud service register, periodic posture review and exit-migration records are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.23:scope",           "Scope of cloud services covered", "must", False, "A.5.23a"),
-        ChecklistItem("item:A.5.23:risk_management", "How information security risks will be managed", "must", False, "A.5.23b"),
-        ChecklistItem("item:A.5.23:selection",       "Cloud service selection criteria", "must", False, "A.5.23c"),
-        ChecklistItem("item:A.5.23:responsibilities","Roles and responsibilities (provider vs customer)", "must", False, "A.5.23d"),
-        ChecklistItem("item:A.5.23:controls",        "Which controls managed by provider vs organisation", "must", False, "A.5.23e"),
-        ChecklistItem("item:A.5.23:incidents",       "Procedures for handling cloud-related security incidents", "must", False, "A.5.23h"),
-        ChecklistItem("item:A.5.23:exit",            "Exit strategy and data return/deletion on termination", "must", False, "A.5.23j"),
-        ChecklistItem("item:A.5.23:personal_data",   "How personal data in cloud storage is protected", "must", True, "GDPR Art.32 alignment"),
+        ChecklistItem("item:A.5.23:scope",                 "Scope of cloud services covered (IaaS / PaaS / SaaS, public / private / hybrid)",                                              "must", False, "27002:5.23a"),
+        ChecklistItem("item:A.5.23:risk_management",       "How information security risks in cloud use will be managed (assessment + treatment approach)",                                "must", False, "27002:5.23b"),
+        ChecklistItem("item:A.5.23:selection",             "Cloud service selection criteria",                                                                                              "must", False, "27002:5.23b"),
+        ChecklistItem("item:A.5.23:responsibilities",      "Roles and responsibilities for cloud service use and management (internal)",                                                    "must", False, "27002:5.23c"),
+        ChecklistItem("item:A.5.23:shared_responsibility", "Shared-responsibility model: which controls are CSP-managed vs customer-managed",                                               "must", False, "27002:5.23d"),
+        ChecklistItem("item:A.5.23:controls_method",       "How CSP-side controls will be obtained, evaluated and used (attestation review, API checks, configuration discovery)",         "must", False, "27002:5.23e"),
+        ChecklistItem("item:A.5.23:incidents",             "Procedures for handling cloud-related security incidents (link to A.5.24-27, support obligations from CSP)",                   "must", False, "27002:5.23f"),
+        ChecklistItem("item:A.5.23:personal_data",         "How personal data in cloud storage is protected (encryption, location/sovereignty, sub-processor controls)",                   "must", True,  "GDPR Art.32 alignment"),
+        ChecklistItem("item:A.5.23:industry_standards",    "Cloud agreements based on accepted industry standards for architecture and infrastructure",                                    "must", False, "27002:5.23 — agreements"),
+        ChecklistItem("item:A.5.23:geographic_location",   "Geographic-location requirements for sensitive data in transit and at rest",                                                   "must", False, "27002:5.23 — geo controls"),
+        ChecklistItem("item:A.5.23:forensic_support",      "Forensic / digital-evidence support expectations from the CSP",                                                                 "must", False, "27002:5.23 — forensics"),
+        ChecklistItem("item:A.5.23:sub_processing",        "Sub-processing terms for cloud (CSP's own sub-processors, notification, approval)",                                             "must", False, "27002:5.23 — sub-processing"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.23:monitoring",  "Monitoring and review approach", "should", False, "A.5.23i"),
-        ChecklistItem("item:A.5.23:approved",    "Approved cloud service providers list", "should", False, "Governance"),
+        ChecklistItem("item:A.5.23:malware_protection",    "Malware monitoring/protection expectations stated for the cloud environment",                                                  "should", False, "27002:5.23 — malware"),
+        ChecklistItem("item:A.5.23:backup_handover",       "CSP backup of data + config and handover obligations on termination",                                                          "should", False, "27002:5.23 — backup"),
+    ],
+)
+
+REQ_CLOUD_SERVICE_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.23:cloud_service_register",
+    control_ref   = "A.5.23",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Cloud Service Register",
+    trigger_type  = "profile_fact",
+    description   = "A.5.23 expects the org to know which cloud services are in use, where they store and process data, what classification of data they hold, what the shared-responsibility split looks like in practice, and what the agreement says. The register is the live source of truth — feeding the periodic posture review and exit-migration leaves",
+    must_contain  = [
+        ChecklistItem("item:A.5.23:reg_service",         "Each cloud service identified per row (provider, service name, deployment model)",                                              "must", False, "27002:5.23a — scope"),
+        ChecklistItem("item:A.5.23:reg_classification",  "Data classification per service (which org-classification levels are processed)",                                                "must", False, "27002:5.23 — sensitive info"),
+        ChecklistItem("item:A.5.23:reg_geo",             "Geographic location of data per service (region, sub-region)",                                                                   "must", False, "27002:5.23 — geo"),
+        ChecklistItem("item:A.5.23:reg_responsibility",  "Shared-responsibility split recorded per service (what is CSP-managed, what is org-managed)",                                    "must", False, "27002:5.23d"),
+        ChecklistItem("item:A.5.23:reg_owner",           "Named internal owner accountable per service (typically platform / SRE / business owner)",                                       "must", False, "Accountability"),
+        ChecklistItem("item:A.5.23:reg_agreement",       "Reference to the agreement / contract in force per service (link to A.5.20 coverage register)",                                  "must", False, "Cross-control consistency"),
+        ChecklistItem("item:A.5.23:reg_exit_readiness",  "Exit-plan readiness flag per service (Yes / No / Stale)",                                                                        "must", False, "27002:5.23 — exit"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.23:reg_subprocessors",   "Disclosed sub-processors per service tracked",                                                                                   "should", False, "27002:5.23 — sub-processing"),
+        ChecklistItem("item:A.5.23:reg_attestation",     "Most recent CSP attestation / certification reference per service (with date)",                                                  "should", False, "27002:5.23 — CSP assurance"),
+        ChecklistItem("item:A.5.23:reg_dependency_map",  "Business-process dependency map (which processes depend on which service)",                                                      "should", False, "Continuity awareness"),
+    ],
+)
+
+REQ_CLOUD_POSTURE_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.23:cloud_posture_review",
+    control_ref    = "A.5.23",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Cloud Service Posture Review",
+    trigger_type   = "profile_fact",
+    description    = "A.5.23 expects ongoing monitoring, review and evaluation of cloud service use. The posture review captures the planned-interval check: refreshed CSP attestations, configuration-drift assessment against the shared-responsibility split, geographic-location compliance check, incident review, and resulting action items",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.23:rev_date",            "Review date within the planned interval",                                                                                       "must", False, "27002:5.23g — monitoring"),
+        ChecklistItem("item:A.5.23:rev_reviewer",        "Reviewer identity (typically platform lead + InfoSec lead jointly)",                                                            "must", False, "Accountability"),
+        ChecklistItem("item:A.5.23:rev_attestation",     "CSP attestation refresh checked per service (current vs stale)",                                                                "must", False, "27002:5.23 — CSP assurance"),
+        ChecklistItem("item:A.5.23:rev_config_drift",    "Configuration-drift assessment against the shared-responsibility split (what the org owns is configured correctly)",            "must", False, "27002:5.23d,g"),
+        ChecklistItem("item:A.5.23:rev_geo_compliance",  "Geographic-location compliance check (data has not silently drifted to non-approved regions)",                                  "must", False, "27002:5.23 — geo"),
+        ChecklistItem("item:A.5.23:rev_incidents",       "Cloud-incidents in the period reviewed (own + CSP-disclosed)",                                                                  "must", False, "27002:5.23f"),
+        ChecklistItem("item:A.5.23:rev_actions",         "Action items captured per service",                                                                                             "must", False, "27002:5.23g"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.23:rev_threat_intel",    "External threat-intel input considered (link to A.5.7)",                                                                        "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.23:rev_next_date",       "Next planned review date stated",                                                                                                "should", False, "Planning"),
+    ],
+)
+
+REQ_CLOUD_EXIT_MIGRATION = EvidenceRequirement(
+    id            = "req:A.5.23:exit_migration_record",
+    control_ref   = "A.5.23",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Cloud Service Exit / Migration Records",
+    trigger_type  = "profile_fact",
+    description   = "A.5.23 requires exit strategies for cloud services and the CSP must support transition + data handover on termination. The exit-migration record evidences the actual execution: trigger captured, migration plan executed, data export and deletion confirmed, transition completed, with authoriser",
+    must_contain  = [
+        ChecklistItem("item:A.5.23:exit_trigger",        "Exit trigger captured (termination / replacement / CSP failure / business change)",                                              "must", False, "27002:5.23h"),
+        ChecklistItem("item:A.5.23:exit_migration_plan", "Migration plan executed (data export, dependency-rewiring, replacement service stood up)",                                       "must", False, "27002:5.23h — transition"),
+        ChecklistItem("item:A.5.23:exit_data_deletion",  "Data deletion confirmation from the CSP (attestation, log, or audit-trail evidence)",                                            "must", False, "27002:5.23 — handover"),
+        ChecklistItem("item:A.5.23:exit_handover",       "Handover of configuration + data evidence (backup downloaded, config preserved)",                                                "must", False, "27002:5.23 — backup/handover"),
+        ChecklistItem("item:A.5.23:exit_authoriser",     "Authoriser of the exit (or of the delay + risk acceptance)",                                                                     "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.23:exit_drill",          "Rolling exit-readiness drill (test exits without actually exiting, for critical services)",                                      "should", False, "Continuity preparedness"),
+        ChecklistItem("item:A.5.23:exit_plan_freshness", "Per-service exit plan freshness target (re-test on agreement renewal or major service change)",                                  "should", False, "Drift control"),
     ],
 )
 
@@ -1843,6 +1926,14 @@ REQ_A517_AUTHENTICATION_INFORMATION = EvidenceRequirement(
     ],
 )
 
+# ── Annex A.5.19 — InfoSec in supplier relationships — operational_process (4-leaf) ──
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → procedure
+# + register + review_record + revocation_record. "Revocation" is realised
+# here as supplier-offboarding records (data return, access removal, transition
+# completion). The procedure leaf id is preserved; three siblings are new.
+# Authority: ISO 27002:2022 § 5.19 implementation guidance items a–n.
+
 REQ_A519_SUPPLIER_RISK_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.19:supplier_risk_procedure",
     control_ref   = "A.5.19",
@@ -1850,19 +1941,97 @@ REQ_A519_SUPPLIER_RISK_PROCEDURE = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Supplier Information Security Risk Management Procedure",
     trigger_type  = "universal",
-    description   = "A.5.19 requires processes and procedures to manage information security risks arising from supplier products and services. Evidence is a supplier risk management procedure covering inventory, due diligence, risk classification, and ongoing monitoring",
+    description   = "A.5.19 requires processes and procedures to manage information security risks arising from supplier relationships. The procedure documents how supplier types are identified, how selection happens, how due diligence is conducted, how monitoring is run, and how requirements get into the agreement (A.5.20). The supplier register, periodic review and offboarding records are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.19:inventory",        "Supplier inventory maintained (who they are, what they provide, criticality)", "must", False, "A.5.19 — manage"),
-        ChecklistItem("item:A.5.19:risk_classification","Risk classification approach per supplier (tier or category)", "must", False, "A.5.19 — risks associated"),
-        ChecklistItem("item:A.5.19:due_diligence",    "Due diligence steps before engagement (questionnaire, attestation review, audit)", "must", False, "A.5.19 — manage"),
-        ChecklistItem("item:A.5.19:ongoing_monitoring","Ongoing monitoring approach (periodic reassessment, event-triggered review)", "must", False, "A.5.19 — manage"),
-        ChecklistItem("item:A.5.19:exit_planning",    "Exit considerations (data return/destruction, transition planning)", "must", False, "A.5.19 — manage"),
+        ChecklistItem("item:A.5.19:supplier_types",       "Supplier types identified and documented (ICT services, ICT infrastructure components, logistics, utilities, financial, etc.)", "must", False, "27002:5.19a"),
+        ChecklistItem("item:A.5.19:selection_criteria",   "Selection and evaluation criteria based on sensitivity of information and services (risk analysis, references, attestations)",  "must", False, "27002:5.19b,c"),
+        ChecklistItem("item:A.5.19:risk_rules",           "InfoSec rules per supplier type / access type with minimum requirements",                                                       "must", False, "27002:5.19d,g,h"),
+        ChecklistItem("item:A.5.19:due_diligence",        "Due diligence steps before engagement (questionnaire, attestation review, audit)",                                              "must", False, "27002:5.19c"),
+        ChecklistItem("item:A.5.19:ongoing_monitoring",   "Ongoing monitoring approach (periodic reassessment, event-triggered review, third-party reports)",                              "must", False, "27002:5.19e,i"),
+        ChecklistItem("item:A.5.19:agreement_handoff",    "Conditions under which security requirements get into the supplier agreement (handoff to A.5.20)",                              "must", False, "27002:5.19l"),
+        ChecklistItem("item:A.5.19:training_personnel",   "Training of own personnel on appropriate engagement and information exchange with suppliers",                                   "must", False, "27002:5.19k"),
+        ChecklistItem("item:A.5.19:incident_joint_mgmt",  "Incident and contingency handling jointly with the supplier",                                                                   "must", False, "27002:5.19n"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.19:tiering_model",    "Tiering model with concrete criteria (data sensitivity, dependency, financial exposure)", "should", False, "Proportionality"),
-        ChecklistItem("item:A.5.19:questionnaire_ref","Reference to standard supplier security questionnaire", "should", False, "Consistency"),
+        ChecklistItem("item:A.5.19:tiering_model",        "Tiering model with concrete criteria (data sensitivity, dependency, financial exposure)",                                       "should", False, "27002:5.19b — risk-proportionate"),
+        ChecklistItem("item:A.5.19:questionnaire_ref",    "Reference to standard supplier security questionnaire",                                                                         "should", False, "Consistency"),
+        ChecklistItem("item:A.5.19:resilience_plan",      "Backup or alternative supplier processes / treatment of supplier disruption",                                                   "should", False, "27002:5.19j"),
     ],
 )
+
+REQ_A519_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.19:supplier_register",
+    control_ref   = "A.5.19",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Supplier Register",
+    trigger_type  = "universal",
+    description   = "A.5.19 requires the org to know who its suppliers are, what they provide, the nature of access they hold, and their risk classification. The register is the live source of truth — feeding the periodic review and offboarding leaves",
+    must_contain  = [
+        ChecklistItem("item:A.5.19:reg_inventory",        "Each supplier captured: identity, products/services, criticality",                                                              "must", False, "27002:5.19a — types"),
+        ChecklistItem("item:A.5.19:reg_supplier_type",    "Supplier type per row (ICT service / ICT infra component / logistics / utilities / etc.)",                                      "must", False, "27002:5.19a"),
+        ChecklistItem("item:A.5.19:reg_access_type",      "Access type per row (logical / physical / network / application / app-to-app)",                                                 "must", False, "27002:5.19g"),
+        ChecklistItem("item:A.5.19:reg_classification",   "Risk classification (tier or category) per row",                                                                                 "must", False, "27002:5.19b,d"),
+        ChecklistItem("item:A.5.19:reg_owner",            "Named internal owner accountable per supplier (relationship owner + InfoSec contact)",                                          "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.19:reg_critical_flag",    "Critical-supplier flag (drives audit + continuity scrutiny — link to A.5.29 / A.5.30)",                                          "should", False, "27002:5.19j"),
+        ChecklistItem("item:A.5.19:reg_subsupplier",      "Disclosed sub-suppliers / fourth parties tracked per row",                                                                       "should", False, "Supply-chain depth"),
+    ],
+)
+
+REQ_A519_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.19:portfolio_review",
+    control_ref    = "A.5.19",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Supplier Portfolio Review",
+    trigger_type   = "universal",
+    description    = "A.5.19 expects periodic review of the supplier portfolio — to refresh risk classifications, re-test selection criteria, and confirm that monitoring and training arrangements still fit the supplier mix",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.19:rev_date",             "Review date within the planned interval",                                                                                       "must", False, "27002:5.19e — periodic"),
+        ChecklistItem("item:A.5.19:rev_reviewer",         "Reviewer identity and role (typically procurement + InfoSec lead)",                                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.5.19:rev_outcome",          "Outcome per supplier or per tier (no change / re-tiered / added / removed)",                                                     "must", False, "27002:5.19e"),
+        ChecklistItem("item:A.5.19:rev_actions",          "Action items captured where monitoring or training arrangements need adjustment",                                                "must", False, "27002:5.19i,k"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.19:rev_triggers",         "Ad-hoc triggers (M&A, market events, new business line, supplier incident) prompting unscheduled review",                        "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.19:rev_next_date",        "Next planned review date stated",                                                                                                "should", False, "Planning"),
+    ],
+)
+
+REQ_A519_OFFBOARDING = EvidenceRequirement(
+    id            = "req:A.5.19:offboarding_record",
+    control_ref   = "A.5.19",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Supplier Offboarding Records",
+    trigger_type  = "universal",
+    description   = "A.5.19 requires that transitions at the end of a supplier relationship are managed — anything that needs to move (information, processing facilities, access) does move. Offboarding records evidence that those transitions actually happened: data returned/destroyed, access removed, lessons captured. One record per offboarding event, traceable back to the supplier register",
+    must_contain  = [
+        ChecklistItem("item:A.5.19:off_trigger",          "Offboarding trigger captured (termination / non-renewal / supplier failure / re-tendering)",                                     "must", False, "27002:5.19m"),
+        ChecklistItem("item:A.5.19:off_data_return",      "Data return or destruction evidence (with attestation from supplier where applicable)",                                          "must", False, "27002:5.19m"),
+        ChecklistItem("item:A.5.19:off_access_removal",   "Logical and physical access removal evidence (link to A.5.18 / A.7.2)",                                                          "must", False, "27002:5.19m"),
+        ChecklistItem("item:A.5.19:off_transition",       "Transition completion evidence (operational handover, replacement supplier engaged where applicable)",                          "must", False, "27002:5.19m"),
+        ChecklistItem("item:A.5.19:off_authoriser",       "Authoriser of the offboarding decision",                                                                                         "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.19:off_timeliness",       "Timeliness target stated (e.g., access removed within 5 business days of contract end)",                                        "should", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.19:off_lessons",          "Lessons-learned link feeding back into the procedure or selection criteria",                                                    "should", False, "Continual improvement"),
+    ],
+)
+
+# ── Annex A.5.20 — Security in supplier agreements — operational_process (4-leaf) ──
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → primary
+# artefact + register + review_record + revocation_record, adapted for an
+# agreement-template control: the template *is* the primary artefact, the
+# coverage register tracks which supplier got which template version, and the
+# deviation register fills the lifecycle-end slot — every softened or omitted
+# clause is the supplier "exiting" the standard template path. The template
+# leaf id is preserved; three siblings are new.
+# Authority: ISO 27002:2022 § 5.20 implementation guidance items a–r.
 
 REQ_A520_SUPPLIER_AGREEMENT_TEMPLATE = EvidenceRequirement(
     id            = "req:A.5.20:supplier_agreement_security_template",
@@ -1871,20 +2040,102 @@ REQ_A520_SUPPLIER_AGREEMENT_TEMPLATE = EvidenceRequirement(
     evidence_type = "agreement_template",
     title         = "Supplier Agreement Security Requirements Template",
     trigger_type  = "universal",
-    description   = "A.5.20 requires information security requirements to be established and agreed with each supplier based on the relationship type. Evidence is a standard set of security clauses or a template attached to supplier agreements",
+    description   = "A.5.20 requires information security requirements to be established and agreed with each supplier based on the relationship type. The template is the standard clause set attached to supplier agreements; the coverage register, periodic template review and deviation register are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.20:minimum_requirements","Minimum security requirements (controls baseline, certifications expected)", "must", False, "A.5.20 — security requirements established"),
-        ChecklistItem("item:A.5.20:data_handling",     "Data handling requirements (encryption at rest and in transit, location/sovereignty)", "must", False, "A.5.20 — relevant security requirements"),
-        ChecklistItem("item:A.5.20:incident_notification","Incident notification clause with timeline (e.g. within 24h of detection)", "must", False, "A.5.20 — agreed"),
-        ChecklistItem("item:A.5.20:audit_rights",      "Audit rights (right to audit, accept attestations like ISO 27001 / SOC 2 in lieu)", "must", False, "A.5.20 — agreed"),
-        ChecklistItem("item:A.5.20:subprocessor_limits","Sub-processor / fourth-party restrictions and approval process", "must", False, "A.5.20 — supplier relationship type"),
-        ChecklistItem("item:A.5.20:termination_return","Termination + data return/destruction clauses", "must", False, "A.5.20 — agreed"),
+        ChecklistItem("item:A.5.20:minimum_requirements", "Minimum security requirements (controls baseline, certifications expected)",                                                    "must", False, "27002:5.20a,g"),
+        ChecklistItem("item:A.5.20:classification_map",   "Information classification mapping (org scheme → supplier scheme where they differ)",                                            "must", False, "27002:5.20b"),
+        ChecklistItem("item:A.5.20:legal_compliance",     "Legal, statutory, regulatory, contractual obligations (data protection, IP, copyright)",                                        "must", False, "27002:5.20c,p"),
+        ChecklistItem("item:A.5.20:data_handling",        "Data handling requirements (encryption at rest and in transit, location/sovereignty)",                                          "must", False, "27002:5.20a — security requirements"),
+        ChecklistItem("item:A.5.20:acceptable_use",       "Acceptable + unacceptable use rules stated",                                                                                    "must", False, "27002:5.20e"),
+        ChecklistItem("item:A.5.20:authorized_personnel", "Named or role-defined authorized personnel + conditions for access",                                                            "must", False, "27002:5.20f"),
+        ChecklistItem("item:A.5.20:incident_notification","Incident notification clause with timeline (e.g. within 24h of detection) + collaboration during remediation",                  "must", False, "27002:5.20h"),
+        ChecklistItem("item:A.5.20:training_awareness",   "Training and awareness requirements specific to information and access",                                                        "must", False, "27002:5.20i"),
+        ChecklistItem("item:A.5.20:subprocessor_limits",  "Sub-processor / fourth-party restrictions, approval process and propagation of requirements",                                   "must", False, "27002:5.20j"),
+        ChecklistItem("item:A.5.20:incident_contacts",    "Security incident contacts named on each side",                                                                                 "must", False, "27002:5.20k"),
+        ChecklistItem("item:A.5.20:screening",            "Screening / vetting requirements for supplier personnel (where applicable)",                                                    "must", False, "27002:5.20l"),
+        ChecklistItem("item:A.5.20:audit_rights",         "Audit rights (right to audit; accept attestations like ISO 27001 / SOC 2 in lieu)",                                             "must", False, "27002:5.20m,o"),
+        ChecklistItem("item:A.5.20:defect_resolution",    "Defect resolution and conflict resolution processes",                                                                          "must", False, "27002:5.20n"),
+        ChecklistItem("item:A.5.20:termination_return",   "Termination obligations: data return/destruction, transition arrangements, handover of records",                                "must", False, "27002:5.20q,r"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.20:security_sla",      "Security-specific SLAs (e.g. patching cadence, MFA requirements)", "should", False, "Measurable accountability"),
-        ChecklistItem("item:A.5.20:tier_variants",     "Variant clause sets per supplier tier", "should", False, "Proportionality"),
+        ChecklistItem("item:A.5.20:security_sla",         "Security-specific SLAs (e.g. patching cadence, MFA requirements, vulnerability remediation timelines)",                          "should", False, "Measurable accountability"),
+        ChecklistItem("item:A.5.20:tier_variants",        "Variant clause sets per supplier tier",                                                                                          "should", False, "Proportionality"),
     ],
 )
+
+REQ_A520_COVERAGE_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.20:coverage_register",
+    control_ref   = "A.5.20",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Supplier Agreement Coverage Register",
+    trigger_type  = "universal",
+    description   = "An approved template alone does not protect the org — each supplier agreement must actually carry the relevant clauses. The coverage register tracks, per supplier, the template version applied, the date the agreement was signed, the agreement term, and the supplier tier — so it is auditable that the agreed clauses are in force",
+    must_contain  = [
+        ChecklistItem("item:A.5.20:cov_template_version", "Template version applied per supplier",                                                                                        "must", False, "27002:5.20 — agreed"),
+        ChecklistItem("item:A.5.20:cov_signed_date",      "Signed-date of the active agreement per supplier",                                                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.5.20:cov_term",             "Agreement term and renewal/expiry date per row",                                                                                "must", False, "Lifecycle"),
+        ChecklistItem("item:A.5.20:cov_tier",             "Supplier tier per row (drives which clause variant is required)",                                                               "must", False, "Proportionality"),
+        ChecklistItem("item:A.5.20:cov_owner",            "Named owner accountable for the agreement (typically procurement or legal partner)",                                            "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.20:cov_subprocessors",    "Approved sub-processors per supplier tracked (link to A.5.19 supplier register)",                                               "should", False, "27002:5.20j"),
+        ChecklistItem("item:A.5.20:cov_jurisdiction",     "Governing jurisdiction per agreement",                                                                                          "should", False, "27002:5.20c,p"),
+    ],
+)
+
+REQ_A520_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.20:template_review",
+    control_ref    = "A.5.20",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Supplier Agreement Template Review",
+    trigger_type   = "universal",
+    description    = "The supplier agreement template ages: regulations change, threat landscape shifts, internal control baselines evolve. The periodic review captures who reviewed it, when, what changed, and the re-papering plan for existing supplier agreements that need to catch up",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.20:rev_date",             "Review date within the planned interval",                                                                                       "must", False, "27002:5.20 — periodic"),
+        ChecklistItem("item:A.5.20:rev_reviewer",         "Reviewer identity (legal + InfoSec lead jointly)",                                                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.5.20:rev_regulatory",       "Regulatory changes considered (data protection, sector-specific obligations)",                                                  "must", False, "27002:5.20c,p"),
+        ChecklistItem("item:A.5.20:rev_threat_landscape", "Threat-landscape changes considered (e.g. emergent incident-notification expectations)",                                        "must", False, "27002:5.20 — keep current"),
+        ChecklistItem("item:A.5.20:rev_outcome",          "Outcome (no change / amended; version increment if amended)",                                                                   "must", False, "27002:5.20"),
+        ChecklistItem("item:A.5.20:rev_repapering",       "Re-papering plan for existing supplier agreements that need to catch up to a new template version",                              "must", False, "Operational sufficiency"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.20:rev_external_input",   "External counsel or industry-benchmark input considered",                                                                       "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.20:rev_next_date",        "Next planned review date stated",                                                                                                "should", False, "Planning"),
+    ],
+)
+
+REQ_A520_DEVIATIONS = EvidenceRequirement(
+    id            = "req:A.5.20:deviation_register",
+    control_ref   = "A.5.20",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Supplier Agreement Deviation Register",
+    trigger_type  = "universal",
+    description   = "Where a supplier successfully negotiates softer terms than the template (or omits a clause entirely), the org needs an auditable record: which clause, which supplier, the reason, the compensating control, the approver. This is the lifecycle-end slot of operational_process applied to agreements: each deviation is the supplier 'exiting' the standard template path",
+    must_contain  = [
+        ChecklistItem("item:A.5.20:dev_clause",           "Clause deviated from per row (identified by template section)",                                                                 "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.20:dev_supplier",         "Supplier identifier per row (link to A.5.19 supplier register)",                                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.5.20:dev_reason",           "Reason for the deviation captured (commercial necessity, market constraint, supplier capability)",                              "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.20:dev_compensating",     "Compensating control stated (monitoring, contractual remedy, alternative requirement)",                                         "must", False, "Risk-based"),
+        ChecklistItem("item:A.5.20:dev_approver",         "Approver of the deviation, at level proportional to residual risk",                                                              "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.20:dev_expiry",           "Expiry / re-papering target date for each deviation (so deviations age out rather than persist indefinitely)",                  "should", False, "Drift control"),
+        ChecklistItem("item:A.5.20:dev_reassessment",     "Trigger for reassessment when supplier or risk circumstances change",                                                            "should", False, "Change-driven"),
+    ],
+)
+
+# ── Annex A.5.21 — InfoSec in the ICT supply chain — operational_process (4-leaf) ──
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → procedure
+# + register + review_record + revocation_record. The lifecycle-end slot is
+# realised as EOL replacement records — each ICT component reaching end-of-life
+# is the supply-chain equivalent of revocation. The procedure leaf id is
+# preserved; three siblings are new.
+# Authority: ISO 27002:2022 § 5.21 implementation guidance items a–i.
 
 REQ_A521_ICT_SUPPLY_CHAIN = EvidenceRequirement(
     id            = "req:A.5.21:ict_supply_chain_procedure",
@@ -1893,39 +2144,191 @@ REQ_A521_ICT_SUPPLY_CHAIN = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "ICT Supply Chain Information Security Procedure",
     trigger_type  = "universal",
-    description   = "A.5.21 requires processes and procedures to manage information security risks in the ICT products and services supply chain. Evidence is a procedure covering sourcing, integrity verification, sub-supplier visibility, and end-of-life",
+    description   = "A.5.21 requires processes to manage information security risks in the ICT products and services supply chain. The procedure covers sourcing, integrity verification, sub-supplier visibility, requirements propagation and identification of critical components. The component register, periodic review and EOL-replacement records are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.21:sourcing_controls", "Sourcing controls (approved vendor list, banned-vendor list, country-of-origin considerations)", "must", False, "A.5.21 — manage risks"),
-        ChecklistItem("item:A.5.21:integrity_verification","Component integrity verification (signed firmware, signed packages, hash verification)", "must", False, "A.5.21 — ICT products"),
-        ChecklistItem("item:A.5.21:subsupplier_visibility","Sub-supplier visibility expectations (disclosure of components, fourth-party listing)", "must", False, "A.5.21 — supply chain"),
-        ChecklistItem("item:A.5.21:patching_expectations","Support and patching expectations stated for each ICT product/service", "must", False, "A.5.21 — manage risks"),
-        ChecklistItem("item:A.5.21:end_of_life",       "End-of-life planning (replacement before vendor support ends)", "must", False, "A.5.21 — manage"),
+        ChecklistItem("item:A.5.21:sourcing_controls",        "Sourcing controls (approved vendor list, banned-vendor list, country-of-origin considerations)",                            "must", False, "27002:5.21a"),
+        ChecklistItem("item:A.5.21:requirements_propagation", "ICT service / product suppliers required to propagate requirements through their sub-contractors / component suppliers",   "must", False, "27002:5.21b,c"),
+        ChecklistItem("item:A.5.21:monitoring_validation",    "Monitoring and validation methods for conformance to stated security requirements",                                          "must", False, "27002:5.21d"),
+        ChecklistItem("item:A.5.21:critical_components",      "Identification of critical components needing special scrutiny (especially when outsourced)",                                "must", False, "27002:5.21e"),
+        ChecklistItem("item:A.5.21:traceability",             "Traceability of critical components through the supply chain (end-to-end provenance)",                                       "must", False, "27002:5.21f"),
+        ChecklistItem("item:A.5.21:integrity_verification",   "Component integrity verification on delivery (signed firmware, signed packages, hash verification)",                         "must", False, "27002:5.21g"),
+        ChecklistItem("item:A.5.21:subsupplier_visibility",   "Sub-supplier visibility expectations (disclosure of components, fourth-party listing)",                                      "must", False, "27002:5.21b,c"),
+        ChecklistItem("item:A.5.21:patching_expectations",    "Support and patching expectations stated for each ICT product/service",                                                      "must", False, "27002:5.21i"),
+        ChecklistItem("item:A.5.21:incident_sharing",         "Rules for sharing information about supply chain issues or compromises with suppliers and within own group",                "must", False, "27002:5.21h"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.21:sbom",              "SBOM expectations for software components", "should", False, "Modern supply chain hygiene"),
-        ChecklistItem("item:A.5.21:secure_development","Secure development practice expectations for software vendors", "should", False, "Vendor maturity bar"),
+        ChecklistItem("item:A.5.21:secure_development",       "Secure development practice expectations for software vendors",                                                              "should", False, "Vendor maturity bar"),
+        ChecklistItem("item:A.5.21:sbom_expectation",         "SBOM expectations for software components and infrastructure",                                                              "should", False, "Modern supply-chain hygiene"),
     ],
 )
 
-REQ_A522_SUPPLIER_REVIEW = EvidenceRequirement(
-    id            = "req:A.5.22:supplier_review_record",
-    control_ref   = "A.5.22",
+REQ_A521_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.21:ict_component_register",
+    control_ref   = "A.5.21",
     standard_id   = "ISO27001:2022",
-    evidence_type = "review_record",
-    title         = "Supplier Information Security Review Records",
+    evidence_type = "register",
+    title         = "ICT Component / Vendor Register",
     trigger_type  = "universal",
-    description   = "A.5.22 requires regular monitoring, review, evaluation, and change management of supplier information security practices and service delivery. Evidence is a record (or set of records) of reviews completed per supplier",
-    freshness_days = 365,
+    description   = "A.5.21 requires the org to know which ICT components are in use, who supplies them, which are critical, when they reach end-of-life, and what sub-suppliers stand behind them. The register is the live source of truth — feeding the periodic review and EOL-replacement leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.22:review_schedule",  "Review schedule per supplier (cadence proportional to tier)", "must", False, "A.5.22 — regularly"),
-        ChecklistItem("item:A.5.22:scope",            "Scope of review (security practices, service delivery, changes since last review)", "must", False, "A.5.22 — monitor, review, evaluate"),
-        ChecklistItem("item:A.5.22:findings",         "Findings recorded per review with severity", "must", False, "A.5.22 — review"),
-        ChecklistItem("item:A.5.22:change_management","Change management trigger when supplier changes scope, location, or sub-processors", "must", False, "A.5.22 — manage change"),
-        ChecklistItem("item:A.5.22:escalation",       "Escalation criteria for findings (when does a finding terminate the relationship)", "must", False, "A.5.22 — manage"),
+        ChecklistItem("item:A.5.21:reg_component",        "Component / service identified per row (vendor, product, version)",                                                              "must", False, "27002:5.21e — track"),
+        ChecklistItem("item:A.5.21:reg_critical_flag",    "Critical-component flag per row (drives 27002:5.21e scrutiny)",                                                                  "must", False, "27002:5.21e"),
+        ChecklistItem("item:A.5.21:reg_eol_date",         "End-of-support / end-of-life date per row",                                                                                      "must", False, "27002:5.21i"),
+        ChecklistItem("item:A.5.21:reg_subsupplier",      "Disclosed sub-suppliers / fourth parties per row",                                                                               "must", False, "27002:5.21b,c"),
+        ChecklistItem("item:A.5.21:reg_owner",            "Named internal owner per component (typically architecture or platform team)",                                                   "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.22:metrics",          "KPIs / metrics tracked per supplier (incidents, SLA breaches)", "should", False, "Measurable monitoring"),
-        ChecklistItem("item:A.5.22:attestations_accepted","Third-party attestations accepted in lieu of direct audit", "should", False, "Efficiency"),
+        ChecklistItem("item:A.5.21:reg_sbom_ref",         "SBOM hash / version reference per software component",                                                                           "should", False, "Modern supply-chain hygiene"),
+        ChecklistItem("item:A.5.21:reg_vendor_check",     "Approved-vendor / banned-vendor list check stamp per row",                                                                       "should", False, "27002:5.21a"),
+    ],
+)
+
+REQ_A521_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.21:supply_chain_review",
+    control_ref    = "A.5.21",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic ICT Supply Chain Review",
+    trigger_type   = "universal",
+    description    = "ICT supply chains are volatile — vendor M&A, EOL pipelines, new vulnerability disclosures and sub-supplier shifts can move risk significantly inside a year. The review record captures the planned-interval review of the component register, the vendor-maturity assessment, the EOL pipeline and the resulting action items",
+    freshness_days = 180,
+    must_contain   = [
+        ChecklistItem("item:A.5.21:rev_date",             "Review date within the planned interval",                                                                                       "must", False, "27002:5.21 — periodic"),
+        ChecklistItem("item:A.5.21:rev_reviewer",         "Reviewer identity (typically architecture lead + InfoSec lead)",                                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.5.21:rev_eol_pipeline",     "EOL pipeline review (which components reach EOL in the next planning horizon, replacement status)",                              "must", False, "27002:5.21i"),
+        ChecklistItem("item:A.5.21:rev_maturity",         "Vendor maturity review (recent attestations, incidents, sub-supplier disclosures)",                                              "must", False, "27002:5.21d"),
+        ChecklistItem("item:A.5.21:rev_actions",          "Action items captured per critical component (e.g. tighten monitoring, push for upgrade, replan replacement)",                  "must", False, "27002:5.21d,i"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.21:rev_threat_intel",     "External threat intelligence input considered (link to A.5.7)",                                                                  "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.21:rev_next_date",        "Next planned review date stated",                                                                                                "should", False, "Planning"),
+    ],
+)
+
+REQ_A521_EOL_REPLACEMENT = EvidenceRequirement(
+    id            = "req:A.5.21:eol_replacement_record",
+    control_ref   = "A.5.21",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "ICT Component End-of-Life Replacement Records",
+    trigger_type  = "universal",
+    description   = "A.5.21 requires components to be replaced before they reach end-of-life or end-of-support, or compensated for with stated controls if that is unavoidable. The replacement record evidences the actual execution: replacement selected (with sourcing controls re-applied), the cutover date, and post-replacement verification — or, where replacement was delayed, the compensating controls and risk acceptance",
+    must_contain  = [
+        ChecklistItem("item:A.5.21:eol_trigger",          "EOL trigger per record (vendor announcement / contract end / vulnerability-driven decommission)",                               "must", False, "27002:5.21i"),
+        ChecklistItem("item:A.5.21:eol_replacement",      "Replacement component selected and sourcing controls re-applied",                                                              "must", False, "27002:5.21a,i"),
+        ChecklistItem("item:A.5.21:eol_cutover",          "Cutover date executed (or compensating controls + risk acceptance where replacement was delayed)",                             "must", False, "27002:5.21i"),
+        ChecklistItem("item:A.5.21:eol_verification",     "Post-replacement verification (integrity-verification, functional acceptance)",                                                "must", False, "27002:5.21g — assurance"),
+        ChecklistItem("item:A.5.21:eol_authoriser",       "Authoriser of the replacement (or of the delay + risk acceptance)",                                                             "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.21:eol_forecast",         "Rolling 12-month EOL forecast linked back to the component register",                                                           "should", False, "Planning"),
+        ChecklistItem("item:A.5.21:eol_lessons",          "Lessons-learned from the replacement feeding back to the procedure (e.g. sourcing-control gaps)",                              "should", False, "Continual improvement"),
+    ],
+)
+
+# ── Annex A.5.22 — Monitoring, review and change management of supplier services
+#                   — operational_process (4-leaf) ─────────────────────────────
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → primary
+# artefact + register + review_record + revocation_record, adapted for a
+# review-record-shaped control: the per-supplier review record is the primary
+# artefact, the schedule register tracks the calendar of upcoming reviews, the
+# program meta-review evaluates the review program itself, and the change-
+# response log fills the lifecycle-end slot — each supplier-side change
+# (network/tech/location/sub-contractor/re-tendering) is the lifecycle event
+# requiring documented response. The review-record leaf id is preserved; three
+# siblings are new.
+# Authority: ISO 27002:2022 § 5.22 implementation guidance items a–k.
+
+REQ_A522_SUPPLIER_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.22:supplier_review_record",
+    control_ref    = "A.5.22",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Supplier Information Security Review Records",
+    trigger_type   = "universal",
+    description    = "A.5.22 requires regular monitoring, review and evaluation of supplier information security practices and service delivery. Each review record evidences the activity for one supplier in one period: performance monitored, reports reviewed, audit conducted, incidents and audit-trails examined, corrective actions tracked. The schedule register, program meta-review and change-response log are sibling leaves",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.22:rev_scope",            "Scope of review (security practices, service delivery, changes since last review)",                                            "must", False, "27002:5.22a,b"),
+        ChecklistItem("item:A.5.22:rev_performance",      "Service performance monitored against agreement (SLAs, incidents, breaches)",                                                  "must", False, "27002:5.22a"),
+        ChecklistItem("item:A.5.22:rev_reports",          "Supplier-provided service reports reviewed + progress meetings held",                                                          "must", False, "27002:5.22b"),
+        ChecklistItem("item:A.5.22:rev_audit",            "Audit conducted (own audit or independent attestation accepted) with follow-up on issues",                                     "must", False, "27002:5.22c"),
+        ChecklistItem("item:A.5.22:rev_incidents",        "Information exchanged about InfoSec incidents; joint review documented",                                                      "must", False, "27002:5.22d"),
+        ChecklistItem("item:A.5.22:rev_audit_trails",     "Supplier audit trails / event records reviewed (operational problems, failures, disruption)",                                 "must", False, "27002:5.22e"),
+        ChecklistItem("item:A.5.22:rev_problems",         "Identified problems / incidents managed through to resolution",                                                                "must", False, "27002:5.22f"),
+        ChecklistItem("item:A.5.22:rev_subsupplier",      "Supplier's own supplier relationships reviewed (sub-supplier / fourth-party oversight)",                                       "must", False, "27002:5.22g"),
+        ChecklistItem("item:A.5.22:rev_continuity",       "Supplier continuity capability verified (link to A.5.29 / A.5.30)",                                                            "must", False, "27002:5.22h"),
+        ChecklistItem("item:A.5.22:rev_compliance",       "Supplier's compliance-review / enforcement responsibilities confirmed",                                                        "must", False, "27002:5.22i"),
+        ChecklistItem("item:A.5.22:rev_corrective",       "Corrective actions raised for deficiencies, tracked to closure",                                                                "must", False, "27002:5.22j"),
+        ChecklistItem("item:A.5.22:rev_findings",         "Findings recorded per review with severity",                                                                                    "must", False, "27002:5.22 — record"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.22:metrics",              "KPIs / metrics tracked per supplier (incidents, SLA breaches, time-to-remediate)",                                              "should", False, "Measurable monitoring"),
+        ChecklistItem("item:A.5.22:attestations_accepted","Third-party attestations accepted in lieu of direct audit (with criteria)",                                                     "should", False, "Efficiency"),
+    ],
+)
+
+REQ_A522_SCHEDULE_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.22:review_schedule_register",
+    control_ref   = "A.5.22",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Supplier Review Schedule Register",
+    trigger_type  = "universal",
+    description   = "A.5.22 expects the review activity to be regular — without a schedule, 'regular' becomes 'whenever someone remembers'. The schedule register is the calendar: per supplier, the planned cadence (proportional to tier), the last review date, the next review date, and the owner",
+    must_contain  = [
+        ChecklistItem("item:A.5.22:sch_cadence",          "Cadence per supplier (proportional to tier — high-tier monthly, low-tier annually, etc.)",                                     "must", False, "27002:5.22 — regularly"),
+        ChecklistItem("item:A.5.22:sch_last_review",      "Last review date per row",                                                                                                      "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.22:sch_next_review",      "Next review date per row",                                                                                                      "must", False, "Planning"),
+        ChecklistItem("item:A.5.22:sch_owner",            "Named owner accountable for executing the review per row",                                                                      "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.22:sch_delta",            "Scheduled-vs-completed delta tracked (so missed reviews surface)",                                                              "should", False, "Operational discipline"),
+        ChecklistItem("item:A.5.22:sch_tier_link",        "Linkage to A.5.19 supplier register tier (drives cadence)",                                                                     "should", False, "Cross-control consistency"),
+    ],
+)
+
+REQ_A522_PROGRAM_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.22:program_meta_review",
+    control_ref    = "A.5.22",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Supplier Review Program Meta-Review",
+    trigger_type   = "universal",
+    description    = "The review program itself needs review — are we covering enough of the portfolio, is the cadence right, are findings being closed, is the program returning value? The meta-review evidences the periodic self-assessment of the program and the resulting adjustments",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.22:pgm_date",             "Meta-review date within the planned interval",                                                                                  "must", False, "27002:5.22 — periodic"),
+        ChecklistItem("item:A.5.22:pgm_reviewer",         "Reviewer identity (program owner + InfoSec lead jointly)",                                                                      "must", False, "Accountability"),
+        ChecklistItem("item:A.5.22:pgm_coverage",         "Coverage rate (fraction of supplier portfolio reviewed in period, by tier)",                                                    "must", False, "Operational discipline"),
+        ChecklistItem("item:A.5.22:pgm_closure",          "Findings-closure rate (open / aged / closed) across the portfolio",                                                              "must", False, "Operational discipline"),
+        ChecklistItem("item:A.5.22:pgm_outcome",          "Cadence-adjustment decisions or scope-adjustment decisions (tighten / loosen / re-tier)",                                       "must", False, "27002:5.22a,j"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.22:pgm_benchmark",        "External benchmarking or industry-practice input considered",                                                                   "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.22:pgm_next_date",        "Next planned meta-review date stated",                                                                                          "should", False, "Planning"),
+    ],
+)
+
+REQ_A522_CHANGE_RESPONSE = EvidenceRequirement(
+    id            = "req:A.5.22:change_response_log",
+    control_ref   = "A.5.22",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Supplier Service Change Response Log",
+    trigger_type  = "universal",
+    description   = "A.5.22 requires the org to manage changes in supplier service delivery — network/tech changes, new dev tools, location changes, change of sub-contractors, re-tendering. Each change is evidenced by a log entry: change type captured, impact assessed, treatment decided, with escalation to termination where findings warrant",
+    must_contain  = [
+        ChecklistItem("item:A.5.22:chg_type",             "Change type captured (network / technology / dev tools / location / sub-contractor / re-tendering)",                            "must", False, "27002:5.22k"),
+        ChecklistItem("item:A.5.22:chg_impact",           "Impact assessment on InfoSec arrangements (which controls affected, which threats opened or closed)",                          "must", False, "27002:5.22k"),
+        ChecklistItem("item:A.5.22:chg_treatment",        "Treatment decided (accept / mitigate / re-paper agreement / terminate relationship)",                                          "must", False, "27002:5.22k"),
+        ChecklistItem("item:A.5.22:chg_escalation",       "Escalation criteria for findings — when a finding terminates the relationship",                                                "must", False, "27002:5.22j,k"),
+        ChecklistItem("item:A.5.22:chg_authoriser",       "Authoriser of the treatment decision (proportional to residual risk)",                                                          "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.22:chg_regulatory",       "Regulatory-notification check (where the change triggers a regulator-notify obligation)",                                       "should", False, "27002:5.22 — compliance"),
+        ChecklistItem("item:A.5.22:chg_lessons",          "Lessons-learned feeding back to the procedure or template (link to A.5.19 / A.5.20)",                                          "should", False, "Continual improvement"),
     ],
 )
 
@@ -5244,10 +5647,26 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A515_REVIEW,
     REQ_A516_IDENTITY_MANAGEMENT,
     REQ_A517_AUTHENTICATION_INFORMATION,
+    # A.5.19 — 4-leaf operational_process (2026-05-31)
     REQ_A519_SUPPLIER_RISK_PROCEDURE,
+    REQ_A519_REGISTER,
+    REQ_A519_REVIEW,
+    REQ_A519_OFFBOARDING,
+    # A.5.20 — 4-leaf operational_process adapted (template + coverage + review + deviations)
     REQ_A520_SUPPLIER_AGREEMENT_TEMPLATE,
+    REQ_A520_COVERAGE_REGISTER,
+    REQ_A520_REVIEW,
+    REQ_A520_DEVIATIONS,
+    # A.5.21 — 4-leaf operational_process (2026-05-31; review freshness=180)
     REQ_A521_ICT_SUPPLY_CHAIN,
+    REQ_A521_REGISTER,
+    REQ_A521_REVIEW,
+    REQ_A521_EOL_REPLACEMENT,
+    # A.5.22 — 4-leaf operational_process adapted (review_record + schedule + meta_review + change_response)
     REQ_A522_SUPPLIER_REVIEW,
+    REQ_A522_SCHEDULE_REGISTER,
+    REQ_A522_PROGRAM_REVIEW,
+    REQ_A522_CHANGE_RESPONSE,
     REQ_A525_EVENT_TRIAGE,
     REQ_A526_INCIDENT_RESPONSE_PROCEDURE,
     REQ_A527_LESSONS_LEARNED,
@@ -5377,7 +5796,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
 
     # Profile-fact triggered
     REQ_DPA,
+    # A.5.23 — 4-leaf operational_process adapted (policy + register + posture_review + exit_migration)
     REQ_CLOUD_SERVICES_POLICY,
+    REQ_CLOUD_SERVICE_REGISTER,
+    REQ_CLOUD_POSTURE_REVIEW,
+    REQ_CLOUD_EXIT_MIGRATION,
     REQ_REMOTE_WORKING,
     REQ_SECURE_DEVELOPMENT,
 

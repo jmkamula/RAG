@@ -28,9 +28,13 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 44/45 PASS before any restart (case #25 is the one known-failing case
-# carried since 2026-05-27 — anti-hallucination on "is Art.5 a non-conformity?"
-# Any other regression blocks restart.
+# Must be 58/60 PASS before any restart. Two known-stale FAILs:
+#   #25 — "is Art.5 a non-conformity?" (anti-hallucination, since 2026-05-27)
+#   #24 — "what is our GDPR Art.32 status?" (~20% pass rate; LLM-stochastic
+#         A.5-bridge mention; since 2026-05-30 batch 2). The batch 2 commit
+#         message ("54/55") was inaccurate — actual was 53/55. Follow-up:
+#         see memory case_24_art32_bridge_followup.md.
+# Any non-#24/#25 regression blocks restart.
 # Whenever you add a user-facing feature/fix, append an EvalCase that would
 # have failed pre-change and passes post-change — see the feedback-memory rule.
 ```
@@ -96,7 +100,7 @@ The FIRST copy of each function is the correct/patched version.
 The graph uses the LAST definition — so duplicates shadow fixes.
 
 **Fix approach:** For each duplicate, keep the first definition, remove the second.
-After removing duplicates, always run eval (44/45 must pass; #25 known-stale) before restarting.
+After removing duplicates, always run eval (58/60 must pass; #24 + #25 known-stale) before restarting.
 
 ### 2. Clarification loop (depends on fix #1)
 Query: "what documents are missing?" triggers clarification instead of
@@ -150,10 +154,16 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260528_*_with_calib.csv (45 cases — 21 core + 18
-  feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf)
-- Score: 44/45 PASS, 0 WARN, 1 FAIL (case #25 known-stale since 2026-05-27 —
-  anti-hallucination on "is Art.5 a non-conformity?", needs separate fix)
+- Most recent: results/eval_20260531_*.csv (60 cases — 21 core + 18
+  feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
+  5 Phase B records + 5 Phase B policy_program + 5 Phase B operational_process)
+- Score: 58/60 PASS, 0 WARN, 2 FAIL:
+  - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
+    conformity?", needs separate fix)
+  - #24 known-stale since 2026-05-30 batch 2 (~20% pass rate; LLM-stochastic
+    on whether Art.32 answer surfaces the A.5-bridge control; was reported as
+    PASS in batch 2 commit msg but CSV evidence shows it had already started
+    failing — see memory case_24_art32_bridge_followup.md)
 - Never deploy with a regression below the current case count
 - Cases 22-26 lock in: cited refs in POSTURE_STATUS / STANDARD_KNOWLEDGE,
   xfw posture inheritance, Layer-2 anti-hallucination, uploaded-doc short-circuit
@@ -166,11 +176,22 @@ with d.session() as s:
 - Cases 42-45 lock in: multi-leaf calibrations #2-#5 (A.8.2, A.5.2, Art.30, Art.15)
   via Stage-2 list_one surface — "0/4 children satisfied" reason text PROVES
   the 4-leaf shape end-to-end. Pre-promotion would have been "0/1".
+- Cases 46-50 lock in: Phase B records_program 5-pack (A.5.5/6/9/31/32; #48 is
+  A.5.9 register/review both freshness=90; #50 is A.5.32 procedure-variant)
+- Cases 51-55 lock in: Phase B policy_program 5-pack (A.5.3/4/10/12/15; #51-52
+  are matrix + directive primary-leaf variants; #55 is A.5.15 partial-evidence
+  OFI 1/4 path — companion to 0/4 default in 46-54)
+- Cases 56-60 lock in: Phase B operational_process supplier+cloud 5-pack
+  (A.5.19/20/21/22/23; #57 is A.5.20 template variant; #58 is A.5.21 review
+  freshness=180; #59 is A.5.22 review-record-shaped variant; #60 is A.5.23
+  partial-evidence OFI 1/4 + profile_fact triggering — second partial-evidence
+  case in suite after #55)
 - Prior known-stale cases (#2, #3, #4, #24, #25, #28) restored to PASS on
   2026-05-25 via Path A: replayed status_before from posture_status_log to
   revert the 27 Stage-1-driven finding mutations, and stripped the offending
   UPDATE from stage1_review_chat.py (commit d6329c4). Stage-1 now only
-  confirms evidence; engine + Stage-2 own posture.
+  confirms evidence; engine + Stage-2 own posture. #24 regressed again
+  2026-05-30 (separate cause from the Stage-1 fix; xfw context injection).
 - TODO: add case for incident obligations once the chat surface (commit 40ad607)
   exposes a non-clarification answer path
 - TODO: add case for SPEC_ART_25 (GDPR Art.25 DPbD DerivedSpec, 6 deps + 1 direct
