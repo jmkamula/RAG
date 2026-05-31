@@ -1834,24 +1834,123 @@ REQ_A510_REVIEW = EvidenceRequirement(
     ],
 )
 
-REQ_A511_RETURN_OF_ASSETS = EvidenceRequirement(
+# ── Annex A.5.11 — Return of assets — operational_process (4-leaf) ────────────
+# Promoted 2026-05-31 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Spine: operational_process → procedure
+# + register + review_record + revocation_record (lifecycle-end). The
+# lifecycle-end slot is realised as the per-leaver completion signoff —
+# the verified return record (or documented non-return + risk acceptance)
+# that closes each individual offboarding event. The procedure leaf id is
+# preserved; three siblings are new.
+#
+# Review freshness 365d — HR offboarding methodology is stable. Unlike
+# detection/IR (180d) where landscape moves fast, the asset-return process
+# changes only when the org's workforce model shifts (e.g. fully-remote
+# adoption, contractor-heavy shift, BYOD policy change). Annual cadence
+# with HR + IT + InfoSec jointly is right-sized. Same rationale family as
+# A.5.8 project security, A.5.28 evidence handling.
+#
+# Cross-control: register references A.5.9 asset register (which assets
+# the person had); data-handling MUST cross-links to A.8.10 information
+# deletion; the broader offboarding sequence touches A.6.5 (post-
+# termination responsibilities) — encoded inline as MUST/SHOULD items.
+#
+# Authority: ISO 27002:2022 § 5.11 implementation guidance — return upon
+# termination of employment / change of role / end of contract; cover
+# physical + logical assets; documentation; data preservation prior to
+# return; risk-based handling of unreturned items.
+
+REQ_A511_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.11:return_of_assets_procedure",
     control_ref   = "A.5.11",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Return of Assets Procedure",
     trigger_type  = "universal",
-    description   = "A.5.11 requires personnel to return all organizational assets upon change or termination. Evidence is a procedure (often part of HR offboarding) covering triggers, the return checklist, and verification",
+    description   = "A.5.11 requires personnel to return all organisational assets upon change or termination. The procedure documents the trigger events, asset checklist (physical + logical), verification step, data preservation and wipe, role accountability and exception handling. The leaver register, periodic program review and per-leaver return record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.11:triggers",         "Triggers enumerated (termination, role change, contract end, change of agreement)", "must", False, "A.5.11 — upon change or termination"),
-        ChecklistItem("item:A.5.11:asset_checklist",  "Checklist of asset types to be returned (laptops, mobile devices, badges, tokens, documents)", "must", False, "A.5.11 — all the organization's assets"),
-        ChecklistItem("item:A.5.11:verification",     "Verification step signed by both the returning party and the receiving role (IT/manager)", "must", False, "A.5.11 — return"),
-        ChecklistItem("item:A.5.11:data_handling",    "Data wipe / data return step for assets carrying organizational information", "must", False, "A.5.11 — organization's assets"),
-        ChecklistItem("item:A.5.11:owner",            "Owner of the procedure (typically HR + IT joint)", "must", False, "Accountability"),
+        ChecklistItem("item:A.5.11:triggers",          "Triggers enumerated (termination, role change, contract end, change of agreement, end of secondment)",     "must", False, "27002:5.11 — upon change or termination"),
+        ChecklistItem("item:A.5.11:asset_checklist",   "Checklist of asset types to be returned — physical (laptops, mobile devices, badges, tokens) and logical (corp credentials, data on personal devices)", "must", False, "27002:5.11 — all organizational assets"),
+        ChecklistItem("item:A.5.11:verification",      "Verification step signed by both the returning party and the receiving role (IT/manager) with itemised confirmation", "must", False, "27002:5.11 — return"),
+        ChecklistItem("item:A.5.11:data_preservation", "Data preservation step BEFORE wipe (org information on the asset must be captured / migrated, not just deleted)", "must", False, "27002:5.11 — preservation of organisational information"),
+        ChecklistItem("item:A.5.11:data_handling",     "Data wipe / sanitisation step for assets carrying organisational information (cross-link to A.8.10 deletion)",     "must", False, "27002:5.11 — data handling + cross-link to [[A.8.10]]"),
+        ChecklistItem("item:A.5.11:owner",             "Owner of the procedure (typically HR + IT joint with InfoSec sign-off authority)",                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.5.11:non_return_path",   "Non-return path defined (when assets cannot be physically returned — remote staff, lost device, contractor dispute — alternative attestation + risk acceptance)", "must", False, "27002:5.11 — risk-based handling of unreturned items"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.11:timeline",         "Timeline stated (e.g. assets returned by last working day)", "should", False, "Timeliness"),
-        ChecklistItem("item:A.5.11:exception_process","Exception process for outstanding assets (working from home, contractor delays)", "should", False, "Real-world friction"),
+        ChecklistItem("item:A.5.11:timeline",          "Timeline stated (e.g. assets returned by last working day; data return ahead of access revocation)",                "should", False, "Timeliness"),
+        ChecklistItem("item:A.5.11:exception_process", "Exception process for outstanding assets (work-from-home, contractor delays, lost-in-transit)",                     "should", False, "Real-world friction"),
+        ChecklistItem("item:A.5.11:contractor_variant","Contractor variant documented where standard employee path doesn't apply (third-party offboarding, project closure)", "should", False, "Workforce-model coverage"),
+    ],
+)
+
+REQ_A511_LEAVER_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.11:leaver_return_register",
+    control_ref   = "A.5.11",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Leaver Asset Return Register",
+    trigger_type  = "universal",
+    description   = "A.5.11 requires every triggered return event to be tracked — invisible leavers are the ones who walk out with assets. The register catalogues every in-flight return: leaver id, trigger type, departure/effective date, asset list (linked to A.5.9 asset register), current status, owner. It is the operational record that proves the return process is actually applied every time, not just on the leavers HR happens to remember to log",
+    must_contain  = [
+        ChecklistItem("item:A.5.11:reg_leaver_id",     "Each leaver/role-changer captured with a unique identifier (employee or contractor id; do not store sensitive PII beyond what HR retains)", "must", False, "27002:5.11 — visibility"),
+        ChecklistItem("item:A.5.11:reg_trigger_type",  "Trigger type per row (termination / role_change / contract_end / secondment_end / agreement_change)",                "must", False, "27002:5.11 — trigger taxonomy"),
+        ChecklistItem("item:A.5.11:reg_effective_date","Effective date per row (last working day or role-change date — drives return-deadline calculations)",                 "must", False, "Timeline anchor"),
+        ChecklistItem("item:A.5.11:reg_asset_list",    "Per-leaver asset list (link to A.5.9 asset register entries assigned to this person)",                                 "must", False, "27002:5.11 + cross-link to [[A.5.9]]"),
+        ChecklistItem("item:A.5.11:reg_status",        "Status per row (pending / in_progress / complete / exception / written_off) updated as items are returned",          "must", False, "Operational discipline"),
+        ChecklistItem("item:A.5.11:reg_owner",         "Return owner per row (typically the leaver's line manager + IT custody handler)",                                     "must", False, "Accountability"),
+        ChecklistItem("item:A.5.11:reg_access_revoke", "Access-revocation timestamp per row (when corp accounts/SSO/credentials were disabled — should align with effective date)", "must", False, "27002:5.11 — logical asset handling"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.11:reg_data_preserved","Data-preserved flag per row (org information migrated/captured before wipe)",                                          "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.11:reg_byod_flag",     "BYOD flag per row where leaver used personal device (drives different wipe path — selective MDM removal vs full wipe)", "should", False, "Workforce-model coverage"),
+    ],
+)
+
+REQ_A511_PROGRAM_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.11:return_program_review",
+    control_ref    = "A.5.11",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Asset-Return Program Review",
+    trigger_type   = "universal",
+    description    = "The return process creates value only if it actually closes — unreturned-asset rates, delayed-access-revocation incidents, BYOD-wipe failures all signal the program is leaking. The review captures the planned-interval check: unreturned rate, access-revocation latency, exception/write-off analysis, workforce-model coverage, and resulting program adjustments. Annual cadence — HR methodology stability",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.11:rev_date",            "Review date within the planned annual interval",                                                                    "must", False, "27002:5.11 — periodic"),
+        ChecklistItem("item:A.5.11:rev_reviewer",        "Reviewer identity (HR head + IT head + InfoSec lead jointly)",                                                       "must", False, "Accountability"),
+        ChecklistItem("item:A.5.11:rev_unreturned_rate", "Unreturned-asset rate analysed (count of leavers with status=exception or written_off; root cause per cluster)",      "must", False, "Program effectiveness"),
+        ChecklistItem("item:A.5.11:rev_revoke_latency",  "Access-revocation latency analysed (gap between effective_date and access_revoke_timestamp; investigate outliers)", "must", False, "27002:5.11 — timeliness of logical handling"),
+        ChecklistItem("item:A.5.11:rev_byod_health",     "BYOD-wipe health check (sample of recent BYOD leavers re-verified for selective-wipe success or org-data presence)", "must", False, "Workforce-model coverage"),
+        ChecklistItem("item:A.5.11:rev_writeoff_audit",  "Write-off audit (any leaver row written off — was risk acceptance appropriately authorised? what value was lost?)",  "must", False, "Risk discipline"),
+        ChecklistItem("item:A.5.11:rev_actions",         "Action items captured (e.g. tighten access-revoke automation, expand asset checklist, retrain managers)",            "must", False, "27002:5.11 — program adjustments"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.11:rev_workforce_shift", "Workforce-model shift considered (e.g. step-change in remote-work proportion or contractor mix that changes risk surface)", "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.11:rev_next_date",       "Next planned review date stated",                                                                                    "should", False, "Planning"),
+    ],
+)
+
+REQ_A511_RETURN_RECORD = EvidenceRequirement(
+    id            = "req:A.5.11:per_leaver_return_record",
+    control_ref   = "A.5.11",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Leaver Asset Return Record",
+    trigger_type  = "universal",
+    description   = "A.5.11 expects each leaver/role-changer to have a closed-out return event — either confirmed return with verification OR documented non-return with risk-accepted write-off. The per-leaver record evidences the actual closure: leaver id, items returned (with itemised verification), items not returned (with reason + write-off authoriser), access-revocation confirmation, dual signoff, closure date. One record per leaver row, traceable back to the register",
+    must_contain  = [
+        ChecklistItem("item:A.5.11:rec_leaver_ref",      "Leaver identifier per record (links to leaver register)",                                                            "must", False, "27002:5.11 — traceability"),
+        ChecklistItem("item:A.5.11:rec_items_returned",  "Itemised list of returned items per record (matched against the leaver's asset list from A.5.9)",                    "must", False, "27002:5.11 — return verification"),
+        ChecklistItem("item:A.5.11:rec_items_unreturned","Itemised list of NOT-returned items per record (with reason: lost / damaged / kept-by-agreement / dispute)",        "must", False, "27002:5.11 — risk-based handling"),
+        ChecklistItem("item:A.5.11:rec_writeoff_auth",   "Write-off authoriser per record where applicable (proportional to asset value; InfoSec sign-off for data-bearing devices)", "must", False, "Risk discipline"),
+        ChecklistItem("item:A.5.11:rec_access_confirmed","Access-revocation confirmed per record (corp accounts disabled, SSO removed, credentials rotated)",                  "must", False, "27002:5.11 — logical asset handling"),
+        ChecklistItem("item:A.5.11:rec_dual_signoff",    "Dual signoff per record (returning party + receiving role) — captured even when in-person handover isn't possible (remote attestation)", "must", False, "27002:5.11 — verification"),
+        ChecklistItem("item:A.5.11:rec_closure_date",    "Closure date recorded",                                                                                                "must", False, "Operational discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.11:rec_data_attestation","Data-deletion attestation per record where leaver-personal-device held org data (BYOD scenarios — selective-MDM removal proof or screenshot evidence)", "should", False, "BYOD coverage"),
+        ChecklistItem("item:A.5.11:rec_post_close_review","Post-closure verification window noted (e.g. 30-day check that no stale access reappears)",                          "should", False, "Continual assurance"),
     ],
 )
 
@@ -6166,7 +6265,11 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A510_APPROVAL,
     REQ_A510_COMMUNICATION,
     REQ_A510_REVIEW,
-    REQ_A511_RETURN_OF_ASSETS,
+    # A.5.11 — 4-leaf operational_process (2026-05-31; program review freshness=365)
+    REQ_A511_PROCEDURE,
+    REQ_A511_LEAVER_REGISTER,
+    REQ_A511_PROGRAM_REVIEW,
+    REQ_A511_RETURN_RECORD,
     # A.5.12 — 4-leaf policy_program (2026-05-29)
     REQ_A512_SCHEME,
     REQ_A512_APPROVAL,

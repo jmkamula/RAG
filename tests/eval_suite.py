@@ -1368,6 +1368,42 @@ EVAL_CASES = [
         ),
     ),
 
+    # ── Phase B operational_process return-of-assets (commit 2026-05-31) ──
+    # Ninth Phase B bulk batch (single-control): A.5.11 promoted to
+    # operational_process 4-leaf — return_of_assets_procedure +
+    # leaver_return_register + return_program_review (365d) + per-leaver
+    # return_record. Cross-control linkages to A.5.9 asset register
+    # (which assets the leaver had) + A.8.10 information deletion (data
+    # wipe path). Review freshness 365d (HR methodology stable).
+
+    EvalCase(
+        id=66,
+        query="pending engine verdict for A.5.11",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "return_of_assets"],
+        expected_refs=["A.5.11"],
+        expected_type="posture_check",
+        must_contain=["A.5.11", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.11 (Return of assets) Phase B promotion to "
+            "operational_process 4-leaf: return_of_assets_procedure + "
+            "leaver_return_register + return_program_review (freshness 365d) "
+            "+ per-leaver return_record. Live posture flips from Comply "
+            "(hand-entered BYOD-justified finding) to engine-proposed NC at "
+            "0/4. The return_record lifecycle-end leaf is the per-leaver "
+            "closure event with dual signoff (returning party + receiving "
+            "role) — captures BOTH confirmed returns AND documented non-"
+            "returns with risk-accepted write-off, so the leaver is closed "
+            "out either way. Review freshness 365d because HR offboarding "
+            "methodology is stable (changes only when workforce model "
+            "shifts — remote-vs-onsite, contractor mix, BYOD policy)."
+        ),
+    ),
+
     EvalCase(
         id=41,
         query="is A.5.30 compliant?",
