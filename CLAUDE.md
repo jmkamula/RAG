@@ -28,7 +28,8 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 60/64 PASS before any restart (64 cases; #24 + #25 known-stale):
+# Must be 60/65 PASS before any restart (65 cases; #24 + #25 known-stale;
+#   #3 + #21 also LLM-stochastic but ~85% PASS — not formally known-stale):
 #   #25 — "is Art.5 a non-conformity?" (anti-hallucination, since 2026-05-27)
 #   #24 — "what is our GDPR Art.32 status?" (~30-50% pass rate; LLM-stochastic
 #         A.5-bridge mention; since 2026-05-30 batch 2). Some runs both pass;
@@ -154,13 +155,13 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260531_*.csv (64 cases — 21 core + 18
+- Most recent: results/eval_20260531_*.csv (65 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
   5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
-  1 Phase B op_process evidence-handling)
-- Score: 60/64 PASS, 0 WARN, 4 FAIL (some runs 61/64 or 62/64 due to #24
-  stochasticity; case #21 also occasionally fails on 9.2 citation-list
+  1 Phase B op_process evidence-handling + 1 Phase B op_process project-security)
+- Score: 60/65 PASS, 0 WARN, 5 FAIL (some runs 61/65 or 62/65 due to #24
+  stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
     conformity?", needs separate fix)
@@ -208,6 +209,13 @@ with d.session() as s:
   first op_process batch with 365d review freshness — forensic
   discipline doesn't churn like detection/IR/threat-intel; closes the
   incident-evidence triangle alongside A.5.25-27 from batch 4)
+- Case 65 locks in: Phase B operational_process project-security
+  (A.5.8; closure_record lifecycle-end variant — first OWNERSHIP-
+  transferring variant: per-project three-way signoff (sponsor +
+  InfoSec + operational owner) with residual-risk register transfer;
+  review freshness 365d (stable PM methodology); cross-control links
+  to A.8.25/A.8.26 SDLC + A.5.20 supplier + A.5.23 cloud + A.5.27
+  lessons)
 - Prior known-stale cases (#2, #3, #4, #24, #25, #28) restored to PASS on
   2026-05-25 via Path A: replayed status_before from posture_status_log to
   revert the 27 Stage-1-driven finding mutations, and stripped the offending
