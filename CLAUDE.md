@@ -155,7 +155,7 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260601_0951_b21.csv (85 cases — 21 core + 18
+- Most recent: results/eval_20260601_1218_b22.csv (99 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
   5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
@@ -167,9 +167,10 @@ with d.session() as s:
   + 1 Phase B records_program records-protection
   + 1 Phase B records_program PII-protection
   + 3 Phase B A.5.3x close-out 3-pack records_program
-  + 7 Phase B A.6 People Controls 7-pack)
-- Score: 83/85 PASS, 0 WARN, 2 FAIL on 2026-06-01 (#3 stochastic + #25 known-stale).
-  Clean-run upper bound 84/85. Some runs may dip to 71/85 or 72/85 due to #24
+  + 7 Phase B A.6 People Controls 7-pack
+  + 14 Phase B A.7 Physical Controls 14-pack)
+- Score: 97/99 PASS, 0 WARN, 2 FAIL on 2026-06-01 (#24 + #25 known-stale).
+  Clean-run upper bound is 97/99. Some runs may dip due to #3/#21 stochasticity
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -292,6 +293,19 @@ with d.session() as s:
   proc_pii_overlay SHOULD encodes the ISO × GDPR Art.5.1.e
   integration at spec level — third ISO × GDPR integration leaf
   after pii_overlay on A.5.13 + legal_jurisdiction on A.5.14)
+- Cases 86-99 lock in: Phase B A.7 Physical Controls 14-pack (batch 22,
+  2026-06-01; LARGEST batch yet — 14 controls × 4 leaves = 56 evidence
+  requirements; closes the A.7 block). Spine mix: 11×op_process +
+  3×policy_program (A.7.1/A.7.7/A.7.9). A.7.14 uses op_process with
+  disposal_record lifecycle-end (parallel to A.5.28 evidence-disposal
+  pattern). Live postures: 8×N/A (Arion cloud-only) + 4×Comply +
+  2×missing-rows; all 14 engine NC 0/4 surface in Stage-2 (engine NC
+  differs from live N/A AND live Comply — no agreement suppression).
+  No DerivedSpec refs to A.7.x items so item-id preservation trivial.
+  Cross-control links: A.7.4 → A.5.26 incident SIEM; A.7.5/A.7.11 →
+  A.5.29/A.5.30 BCP; A.7.10 → A.7.14 disposal; A.7.14 → A.5.9 retired
+  assets. Compact-style elaboration (5-7 MUSTs per leaf, 1-2 SHOULDs)
+  reflects bulk-batch pragmatism vs single-control depth
 - Cases 79-85 lock in: Phase B A.6 People Controls 7-pack (batch 21,
   2026-06-01; LARGEST MULTI-CONTROL BATCH YET — 7 controls × 4 leaves
   = 28 new evidence requirements; closes A.6 block, A.6.7 was already

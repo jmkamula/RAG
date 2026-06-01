@@ -5308,6 +5308,7 @@ REQ_A68_PROGRAM_REVIEW = EvidenceRequirement(
 # ── ISO 27001 Annex A.7 — Physical Controls (Phase B bulk curation, 2026-05-22)
 # All 14 A.7 controls were uncurated prior to this batch.
 
+# ── A.7.1 Physical perimeters — policy_program 4-leaf (batch 22 2026-06-01) ──
 REQ_A71_PHYSICAL_PERIMETERS = EvidenceRequirement(
     id            = "req:A.7.1:physical_security_perimeters",
     control_ref   = "A.7.1",
@@ -5315,292 +5316,1155 @@ REQ_A71_PHYSICAL_PERIMETERS = EvidenceRequirement(
     evidence_type = "policy",
     title         = "Physical Security Perimeters Policy",
     trigger_type  = "universal",
-    description   = "A.7.1 requires security perimeters to be defined and used to protect areas containing information and associated assets. Evidence is a policy (often part of a Physical Security Policy) defining perimeter types and the areas they protect",
+    description   = "A.7.1 requires security perimeters to be defined and used to protect areas containing information and associated assets. The policy defines perimeter types, area classification, barrier types, access points. The perimeter register, applicable-sites scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.1:perimeter_inventory","Inventory of perimeters defined (which physical boundaries exist)", "must", False, "A.7.1 — security perimeters defined"),
-        ChecklistItem("item:A.7.1:area_classification","Classification of areas inside each perimeter (general office, secure area, server room, restricted)", "must", False, "A.7.1 — protect areas"),
-        ChecklistItem("item:A.7.1:barrier_types",      "Barrier types per perimeter class (walls, fences, locked doors, mantraps)", "must", False, "A.7.1 — used to protect"),
-        ChecklistItem("item:A.7.1:access_points",      "Access points designated per perimeter (which doors are entry/exit, which are emergency-only)", "must", False, "A.7.1 — defined"),
-        ChecklistItem("item:A.7.1:owner",              "Owner named for physical security at each site", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.1:perimeter_inventory","Inventory of perimeters defined (which physical boundaries exist per site)",                                                              "must", False, "27002:7.1 — security perimeters defined"),
+        ChecklistItem("item:A.7.1:area_classification","Classification of areas inside each perimeter (general office, secure area, server room, restricted)",                                    "must", False, "27002:7.1 — protect areas"),
+        ChecklistItem("item:A.7.1:barrier_types",      "Barrier types per perimeter class (walls, fences, locked doors, mantraps, anti-ramming where critical)",                                    "must", False, "27002:7.1 — used to protect"),
+        ChecklistItem("item:A.7.1:access_points",      "Access points designated per perimeter (which doors are entry/exit, which are emergency-only)",                                            "must", False, "27002:7.1 — defined"),
+        ChecklistItem("item:A.7.1:owner",              "Owner named for physical security at each site (Facilities lead with InfoSec partner)",                                                    "must", False, "Accountability"),
+        ChecklistItem("item:A.7.1:logical_integration","Integration with logical access (which logical privileges require entry to which perimeter — cross-link to A.5.18 access rights)",        "must", False, "Cross-domain consistency"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.1:drawings",           "Floor plans or perimeter drawings referenced", "should", False, "Audit clarity"),
-        ChecklistItem("item:A.7.1:logical_integration","Integration with logical access decisions (which logical privileges require entry to which perimeter)", "should", False, "Cross-domain consistency"),
+        ChecklistItem("item:A.7.1:drawings",           "Floor plans or perimeter drawings referenced",                                                                                              "should", False, "Audit clarity"),
+        ChecklistItem("item:A.7.1:shared_building",    "Shared-building considerations (other tenants, common corridors, lobby access)",                                                            "should", False, "Common real-world setup"),
     ],
 )
 
-REQ_A72_PHYSICAL_ENTRY = EvidenceRequirement(
+REQ_A71_PERIMETER_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.1:perimeter_register",
+    control_ref   = "A.7.1",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Per-Site Perimeter Register",
+    trigger_type  = "universal",
+    description   = "The catalogue of perimeters across all sites — site identifier, perimeter id, area classification, barrier inventory, access-point list, owner. Drives 'show me every site has a defined perimeter' completeness check",
+    must_contain  = [
+        ChecklistItem("item:A.7.1:reg_site_id",        "Site identifier per perimeter row (HQ, regional offices, data centres, co-locations)",                                                      "must", False, "27002:7.1 — defined"),
+        ChecklistItem("item:A.7.1:reg_perimeter_id",   "Perimeter identifier per row (a site may have multiple perimeters — outer + inner + secure-room)",                                          "must", False, "27002:7.1 — security perimeters"),
+        ChecklistItem("item:A.7.1:reg_classification", "Area classification per row (matches policy's classification scheme)",                                                                      "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.7.1:reg_barriers",       "Barriers in place per row (specific barrier inventory — what walls, what doors, what mechanisms)",                                          "must", False, "27002:7.1 — used to protect"),
+        ChecklistItem("item:A.7.1:reg_last_assessed",  "Last assessment date per row (drives staleness detection)",                                                                                  "must", False, "27002:7.1 — maintained"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.1:reg_remediation",    "Remediation log per row where barriers fall short of classification requirements",                                                          "should", False, "Operational discipline"),
+    ],
+)
+
+REQ_A71_APPLICABLE_SITES_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.1:applicable_sites_scope",
+    control_ref   = "A.7.1",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Sites Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the register. Documents the sites in scope, the operational/regulatory drivers for physical security per site type, and the exclusions (cloud-only deployments, home offices handled via A.6.7 + A.7.9)",
+    must_contain  = [
+        ChecklistItem("item:A.7.1:scope_sites",        "Sites enumerated (HQ, regional offices, owned data centres, co-located rack space, lab facilities)",                                        "must", False, "27002:7.1 — relevant"),
+        ChecklistItem("item:A.7.1:scope_exclusions",   "Exclusions stated explicitly (home offices → A.6.7 remote-working / A.7.9 off-premises; pure-cloud workloads with no physical footprint)",  "must", False, "27002:7.1 — applicability"),
+        ChecklistItem("item:A.7.1:scope_drivers",      "Sectoral/regulatory drivers per site type (data-centre PCI requirements, healthcare HIPAA, finance regulator inspection rights)",            "must", False, "27002:7.1 — applicable laws"),
+        ChecklistItem("item:A.7.1:scope_classification","Per-site information-classification footprint (drives which areas need which protection class — cross-link to A.5.12)",                    "must", False, "Cross-control coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.1:scope_change_drivers","Trigger list for re-scoping (new site, sub-letting, M&A, sectoral re-classification)",                                                      "should", False, "Currency"),
+    ],
+)
+
+REQ_A71_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.1:perimeter_program_review",
+    control_ref     = "A.7.1",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Perimeter Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that perimeters still match the classification needs, the register reflects reality, and any site changes have been incorporated. Annual cadence (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.1:rev_date",          "Review date within the planned interval",                                                                                                    "must", False, "27002:7.1 — periodic"),
+        ChecklistItem("item:A.7.1:rev_reviewer",      "Reviewer identity (Facilities lead + InfoSec lead jointly)",                                                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.7.1:rev_walkthrough",   "Physical walkthrough conducted per site (sample-based for multi-site orgs) — barriers verified present and functional",                  "must", False, "27002:7.1 — verified"),
+        ChecklistItem("item:A.7.1:rev_scope_check",   "Cross-check against the applicable-sites scope — any new site or sub-let that should add a register entry",                                "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.7.1:rev_register_update","Changes propagated to the live register",                                                                                                    "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.1:rev_next_date",     "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.2 Physical entry — op_process 4-leaf (batch 22 2026-06-01) ────────────
+
+REQ_A72_PHYSICAL_ENTRY_PROCEDURE = EvidenceRequirement(
     id            = "req:A.7.2:physical_entry_procedure",
     control_ref   = "A.7.2",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Physical Entry Controls Procedure",
     trigger_type  = "universal",
-    description   = "A.7.2 requires secure areas to be protected by appropriate entry controls and access points. Evidence is a procedure covering authorisation, entry mechanisms, visitor handling, and review",
+    description   = "A.7.2 requires secure areas to be protected by appropriate entry controls and access points. The procedure documents authorisation, entry mechanisms, visitor handling, deliveries, emergency egress, and periodic review. The entry register, applicable-areas scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.2:authorisation_list","Authorisation list per secure area (who is permitted, by role or name)", "must", False, "A.7.2 — entry controls"),
-        ChecklistItem("item:A.7.2:entry_mechanism", "Entry mechanism stated per area (badge, biometric, mechanical key)", "must", False, "A.7.2 — appropriate entry controls"),
-        ChecklistItem("item:A.7.2:visitor_process", "Visitor handling (escort requirement, sign-in log, temporary badge, host accountability)", "must", False, "A.7.2 — access points"),
-        ChecklistItem("item:A.7.2:deliveries",      "Delivery / loading area handling (drop zones, no direct access to secure areas)", "must", False, "A.7.2 — appropriate entry controls"),
-        ChecklistItem("item:A.7.2:emergency_egress","Emergency egress provisions (panic bars, post-incident accountability)", "must", False, "Life safety"),
-        ChecklistItem("item:A.7.2:periodic_review", "Periodic access list review (links to A.5.18)", "must", False, "Drift prevention"),
+        ChecklistItem("item:A.7.2:authorisation_list","Authorisation list per secure area (who is permitted, by role or name; cross-link to A.5.18)",                                              "must", False, "27002:7.2 — entry controls"),
+        ChecklistItem("item:A.7.2:entry_mechanism",   "Entry mechanism stated per area (badge, biometric, mechanical key, mantrap)",                                                                "must", False, "27002:7.2 — appropriate"),
+        ChecklistItem("item:A.7.2:visitor_process",   "Visitor handling (escort requirement, sign-in log, temporary badge, host accountability)",                                                  "must", False, "27002:7.2 — access points"),
+        ChecklistItem("item:A.7.2:deliveries",        "Delivery / loading area handling (drop zones, no direct access to secure areas)",                                                            "must", False, "27002:7.2 — appropriate"),
+        ChecklistItem("item:A.7.2:emergency_egress",  "Emergency egress provisions (panic bars, post-incident accountability)",                                                                      "must", False, "Life safety"),
+        ChecklistItem("item:A.7.2:periodic_review",   "Periodic access-list review trigger (links to A.5.18 access reviews)",                                                                        "must", False, "Drift prevention"),
+        ChecklistItem("item:A.7.2:tailgating",        "Anti-tailgating measures (mantraps, awareness, observed entry, badge-back-in enforcement)",                                                  "must", False, "Common attack vector"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.2:tailgating",      "Anti-tailgating measures (mantraps, awareness, observed entry)", "should", False, "Common attack vector"),
-        ChecklistItem("item:A.7.2:exception",       "Exception handling process for one-off access needs", "should", False, "Operational flexibility"),
+        ChecklistItem("item:A.7.2:exception",         "Exception handling process for one-off access needs",                                                                                          "should", False, "Operational flexibility"),
+        ChecklistItem("item:A.7.2:owner",             "Named owner of the procedure (Facilities lead with InfoSec partner)",                                                                          "should", False, "Accountability"),
     ],
 )
 
-REQ_A73_OFFICES_ROOMS = EvidenceRequirement(
+REQ_A72_ENTRY_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.2:entry_event_register",
+    control_ref   = "A.7.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Physical Entry Event Register",
+    trigger_type  = "universal",
+    description   = "The catalogue of entry events into secure areas — badge-swipes, visitor sign-ins, exceptions invoked. Drives 'show me who entered the server room on date X' audit",
+    must_contain  = [
+        ChecklistItem("item:A.7.2:reg_event_id",      "Per-event unique identifier",                                                                                                                  "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.7.2:reg_subject",       "Per-event subject identifier (employee or visitor; for visitors, host also recorded)",                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.7.2:reg_area",          "Per-event area entered (from the perimeter register A.7.1)",                                                                                    "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.2:reg_timestamp",     "Per-event timestamp (entry; exit timestamp where mantrap enforces it)",                                                                          "must", False, "27002:7.2 — controls"),
+        ChecklistItem("item:A.7.2:reg_method",        "Per-event entry method (badge / biometric / mechanical / visitor-escort / exception-override)",                                                "must", False, "Operational discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2:reg_anomaly_flag",  "Anomaly flag per event (out-of-hours, unusual area for this subject, override-without-justification)",                                          "should", False, "Detection"),
+    ],
+)
+
+REQ_A72_APPLICABLE_AREAS_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.2:applicable_areas_scope",
+    control_ref   = "A.7.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Secure Areas Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the procedure. Documents which areas require physical entry controls and what classification tier each falls under",
+    must_contain  = [
+        ChecklistItem("item:A.7.2:scope_areas",       "Secure areas enumerated per site (drawn from A.7.1 register)",                                                                                  "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.2:scope_tier_controls","Per-tier entry controls mapping (which areas need badge-only vs MFA vs escort)",                                                              "must", False, "27002:7.2 — proportional"),
+        ChecklistItem("item:A.7.2:scope_visitor_areas","Visitor-accessible areas defined (vs strictly-staff areas)",                                                                                    "must", False, "27002:7.2 — controls"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2:scope_change_drivers","Trigger list for re-scoping (new secure area, area classification change, sub-letting)",                                                      "should", False, "Currency"),
+    ],
+)
+
+REQ_A72_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.2:entry_program_review",
+    control_ref     = "A.7.2",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Entry Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that entry controls match area classifications, the register is being maintained, and anomalies are being investigated (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.2:rev_date",          "Review date within the planned interval",                                                                                                      "must", False, "27002:7.2 — periodic"),
+        ChecklistItem("item:A.7.2:rev_reviewer",      "Reviewer identity (Facilities + InfoSec)",                                                                                                      "must", False, "Accountability"),
+        ChecklistItem("item:A.7.2:rev_access_lists",  "Per-area access-list review outcome (active / amended / revoked) — cross-link to A.5.18 access review",                                        "must", False, "27002:7.2 — review"),
+        ChecklistItem("item:A.7.2:rev_anomalies",     "Anomaly review (flagged events from the register triaged)",                                                                                    "must", False, "Detection"),
+        ChecklistItem("item:A.7.2:rev_register_update","Changes propagated to the procedure / authorisation lists",                                                                                  "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.2:rev_next_date",     "Next planned review date stated",                                                                                                              "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.3 Securing offices/rooms — op_process 4-leaf (batch 22 2026-06-01) ────
+REQ_A73_OFFICES_ROOMS_PROCEDURE = EvidenceRequirement(
     id            = "req:A.7.3:offices_rooms_facilities_procedure",
     control_ref   = "A.7.3",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Securing Offices, Rooms and Facilities Procedure",
     trigger_type  = "universal",
-    description   = "A.7.3 requires physical security to be designed and implemented for offices, rooms, and facilities. Evidence is a procedure covering room classification, locking, signage, and key/card management",
+    description   = "A.7.3 requires physical security to be designed and implemented for offices, rooms, and facilities. The procedure documents room classification, locking, signage, key/card management, and occupancy. The room register, applicable-rooms scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.3:room_classification","Classification of rooms (general, restricted, secure, high-security)", "must", False, "A.7.3 — designed and implemented"),
-        ChecklistItem("item:A.7.3:locking_standards","Locking standards per classification (mechanical, electronic, audit logging)", "must", False, "A.7.3 — physical security"),
-        ChecklistItem("item:A.7.3:signage",         "Signage and visibility minimisation (no advertising of sensitive areas)", "must", False, "A.7.3 — designed"),
-        ChecklistItem("item:A.7.3:key_management",  "Key/card lifecycle management (issue, return, lost-card revocation)", "must", False, "A.7.3 — implemented"),
-        ChecklistItem("item:A.7.3:occupancy_controls","Occupancy controls (max people in secure rooms, lone-worker rules)", "must", False, "A.7.3 — designed"),
+        ChecklistItem("item:A.7.3:room_classification","Classification of rooms (general, restricted, secure, high-security)",                                                                        "must", False, "27002:7.3 — designed and implemented"),
+        ChecklistItem("item:A.7.3:locking_standards", "Locking standards per classification (mechanical, electronic with audit logging, biometric for high-security)",                                "must", False, "27002:7.3 — physical security"),
+        ChecklistItem("item:A.7.3:signage",           "Signage and visibility minimisation (no advertising of sensitive areas; minimum signage on doors)",                                            "must", False, "27002:7.3 — designed"),
+        ChecklistItem("item:A.7.3:key_management",    "Key/card lifecycle management (issue, return, lost-card revocation; cross-link to A.5.18)",                                                    "must", False, "27002:7.3 — implemented"),
+        ChecklistItem("item:A.7.3:occupancy_controls","Occupancy controls (max people in secure rooms, lone-worker rules where required)",                                                            "must", False, "27002:7.3 — designed"),
+        ChecklistItem("item:A.7.3:fit_out",           "Fit-out / construction security requirements (walls to slab, no gaps above ceiling, sound insulation where speech-confidential)",            "must", False, "Often overlooked"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.3:shared_building", "Considerations for shared buildings (other tenants, common corridors)", "should", False, "Common real-world setup"),
-        ChecklistItem("item:A.7.3:fit_out",         "Fit-out / construction security requirements (walls to slab, no gaps above ceiling)", "should", False, "Often overlooked"),
+        ChecklistItem("item:A.7.3:shared_building",   "Shared-building considerations (other tenants, common corridors, cleaning-staff access)",                                                      "should", False, "Common setup"),
     ],
 )
 
-REQ_A74_PHYSICAL_MONITORING = EvidenceRequirement(
+REQ_A73_ROOM_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.3:room_register",
+    control_ref   = "A.7.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Room Register",
+    trigger_type  = "universal",
+    description   = "The catalogue of rooms across all sites with classification, locking standard, occupancy controls, owner. Drives 'show me every room is classified and protected per its tier' audit",
+    must_contain  = [
+        ChecklistItem("item:A.7.3:reg_room_id",       "Per-room unique identifier",                                                                                                                    "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.7.3:reg_classification","Per-room classification (matches procedure's classification scheme)",                                                                            "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.7.3:reg_locking",       "Per-room locking standard in place (matches required standard per classification)",                                                              "must", False, "27002:7.3 — physical security"),
+        ChecklistItem("item:A.7.3:reg_owner",         "Per-room owner (department or named individual responsible)",                                                                                    "must", False, "Accountability"),
+        ChecklistItem("item:A.7.3:reg_last_assessed", "Per-room last assessment date",                                                                                                                  "must", False, "27002:7.3 — current"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3:reg_remediation",   "Remediation log per row where locking falls short of required standard",                                                                          "should", False, "Operational discipline"),
+    ],
+)
+
+REQ_A73_APPLICABLE_ROOMS_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.3:applicable_rooms_scope",
+    control_ref   = "A.7.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Rooms Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the register. Documents which rooms across all sites are in scope and what drives the classification of each",
+    must_contain  = [
+        ChecklistItem("item:A.7.3:scope_rooms_inventory","Inventory of rooms across all sites in scope (from facilities inventory)",                                                                  "must", False, "27002:7.3 — facilities"),
+        ChecklistItem("item:A.7.3:scope_classification_drivers","Drivers for room classification (information class stored/processed, equipment held, personnel access level required)",            "must", False, "27002:7.3 — designed"),
+        ChecklistItem("item:A.7.3:scope_exclusions",  "Exclusions stated (common areas, lobbies, parking — not in 'rooms' scope but covered by A.7.1 perimeter)",                                    "must", False, "27002:7.3 — applicability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3:scope_change_drivers","Trigger list for re-scoping (renovation, repurposing, new tenant fit-out)",                                                                  "should", False, "Currency"),
+    ],
+)
+
+REQ_A73_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.3:rooms_program_review",
+    control_ref     = "A.7.3",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Rooms Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification of room classifications, locking standards in place, and currency of the register (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.3:rev_date",          "Review date within the planned interval",                                                                                                      "must", False, "27002:7.3 — periodic"),
+        ChecklistItem("item:A.7.3:rev_reviewer",      "Reviewer identity (Facilities + InfoSec)",                                                                                                      "must", False, "Accountability"),
+        ChecklistItem("item:A.7.3:rev_walkthrough",   "Physical walkthrough conducted (sample-based) — locking standards verified, signage compliant",                                                "must", False, "27002:7.3 — verified"),
+        ChecklistItem("item:A.7.3:rev_register_check","Per-room outcome (verified / amended / retired / new added)",                                                                                  "must", False, "27002:7.3 — current"),
+        ChecklistItem("item:A.7.3:rev_register_update","Changes propagated to the live register",                                                                                                      "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.3:rev_next_date",     "Next planned review date stated",                                                                                                              "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.4 Physical monitoring — op_process 4-leaf (batch 22 2026-06-01) ──────
+REQ_A74_PHYSICAL_MONITORING_PROCEDURE = EvidenceRequirement(
     id            = "req:A.7.4:physical_security_monitoring",
     control_ref   = "A.7.4",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Physical Security Monitoring Procedure",
     trigger_type  = "universal",
-    description   = "A.7.4 requires premises to be continuously monitored for unauthorized physical access. Evidence is a procedure covering monitoring scope, detection systems, response, and retention",
+    description   = "A.7.4 requires premises to be continuously monitored for unauthorized physical access. The procedure documents monitoring scope, detection systems, continuous-monitoring approach, alert response, and retention. The monitoring event register, applicable-monitoring scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.4:monitoring_scope","Monitoring scope stated (premises perimeter, secure areas, equipment rooms)", "must", False, "A.7.4 — premises monitored"),
-        ChecklistItem("item:A.7.4:detection_systems","Detection systems listed (CCTV, intrusion detection, access control logs, alarms)", "must", False, "A.7.4 — monitored for unauthorized access"),
-        ChecklistItem("item:A.7.4:continuous_24x7","24/7 / continuous monitoring approach (manned, automated, hybrid)", "must", False, "A.7.4 — continuously monitored"),
-        ChecklistItem("item:A.7.4:alert_response","Alert response procedure (who is notified, escalation, on-site response)", "must", False, "A.7.4 — monitored"),
-        ChecklistItem("item:A.7.4:retention",      "Retention of footage and access logs (period, secure storage)", "must", False, "A.7.4 — monitored"),
+        ChecklistItem("item:A.7.4:monitoring_scope",  "Monitoring scope stated (premises perimeter, secure areas, equipment rooms, entry/exit points)",                                                "must", False, "27002:7.4 — premises monitored"),
+        ChecklistItem("item:A.7.4:detection_systems", "Detection systems listed (CCTV, intrusion detection, access control logs, alarms, motion sensors)",                                            "must", False, "27002:7.4 — unauthorized access"),
+        ChecklistItem("item:A.7.4:continuous_24x7",   "24/7 / continuous monitoring approach (manned SOC, automated with SOC review, hybrid)",                                                          "must", False, "27002:7.4 — continuously monitored"),
+        ChecklistItem("item:A.7.4:alert_response",    "Alert response procedure (who is notified, escalation, on-site response timing)",                                                              "must", False, "27002:7.4 — monitored"),
+        ChecklistItem("item:A.7.4:retention",         "Retention of footage and access logs (period per regulatory requirement, secure storage)",                                                      "must", False, "27002:7.4 — retention"),
+        ChecklistItem("item:A.7.4:siem_integration",  "Integration with SIEM / A.5.26 incident response (physical events route to the same triage)",                                                  "must", False, "Cross-control coherence"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.4:siem_integration","Integration with SIEM / incident response (A.5.26)", "should", False, "Cross-control consistency"),
-        ChecklistItem("item:A.7.4:privacy_balance","Privacy considerations for monitoring of personnel (data protection compliance)", "should", False, "Legal balance"),
+        ChecklistItem("item:A.7.4:privacy_balance",   "Privacy considerations for monitoring of personnel (GDPR / employment law compliance)",                                                          "should", False, "Legal balance"),
     ],
 )
 
-REQ_A75_ENVIRONMENTAL_THREATS = EvidenceRequirement(
+REQ_A74_EVENT_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.4:monitoring_event_register",
+    control_ref   = "A.7.4",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Monitoring Event Register",
+    trigger_type  = "universal",
+    description   = "The catalogue of detection events worth investigating — anomalous access attempts, alarms triggered, CCTV-detected behaviour requiring review. Subset of raw detection signal (after first-pass filtering)",
+    must_contain  = [
+        ChecklistItem("item:A.7.4:reg_event_id",      "Per-event unique identifier",                                                                                                                    "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.7.4:reg_source",        "Per-event source (CCTV / IDS / access-control / alarm)",                                                                                          "must", False, "27002:7.4 — detection"),
+        ChecklistItem("item:A.7.4:reg_timestamp",     "Per-event timestamp",                                                                                                                              "must", False, "Operational discipline"),
+        ChecklistItem("item:A.7.4:reg_classification","Per-event classification (true-positive / false-positive / requires-investigation)",                                                              "must", False, "27002:7.4 — alert response"),
+        ChecklistItem("item:A.7.4:reg_outcome",       "Per-event outcome (closed-no-action / handed-to-A.5.26-incident / lessons-captured)",                                                              "must", False, "Closes the loop"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4:reg_evidence_link", "Per-event evidence-package link (CCTV clip reference, log excerpt — for cases handed to A.5.28 evidence handling)",                              "should", False, "Cross-control coherence"),
+    ],
+)
+
+REQ_A74_MONITORING_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.4:monitoring_scope",
+    control_ref   = "A.7.4",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Monitoring Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the procedure. Documents which sites and which areas within sites are monitored, by which mechanisms, and the rationale per area",
+    must_contain  = [
+        ChecklistItem("item:A.7.4:scope_sites_covered","Sites covered by monitoring (drawn from A.7.1 applicable-sites scope)",                                                                          "must", False, "27002:7.4 — premises"),
+        ChecklistItem("item:A.7.4:scope_area_mapping","Per-site area-to-mechanism mapping (which CCTV cameras cover which areas, which IDS sensors per zone)",                                            "must", False, "27002:7.4 — monitored"),
+        ChecklistItem("item:A.7.4:scope_blind_spots", "Known blind spots identified with compensating controls (e.g. patrol coverage where CCTV impractical)",                                            "must", False, "Honest scoping"),
+        ChecklistItem("item:A.7.4:scope_legal_constraints","Legal constraints on monitoring (changing-area exclusions, employee-privacy minima per jurisdiction)",                                        "must", False, "27002:7.4 — applicable laws"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4:scope_change_drivers","Trigger list for re-scoping (new site, new building wing, employee-privacy regulator action)",                                                  "should", False, "Currency"),
+    ],
+)
+
+REQ_A74_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.4:monitoring_program_review",
+    control_ref     = "A.7.4",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Monitoring Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that monitoring is effective (alarms responded to within SLA, anomalies investigated, footage retained correctly). Annual cadence (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.4:rev_date",          "Review date within the planned interval",                                                                                                        "must", False, "27002:7.4 — periodic"),
+        ChecklistItem("item:A.7.4:rev_reviewer",      "Reviewer identity (Facilities + SOC + InfoSec)",                                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.7.4:rev_response_sla",  "Response-SLA analysis (alarm-to-on-site arrival times measured against SLA)",                                                                    "must", False, "27002:7.4 — alert response"),
+        ChecklistItem("item:A.7.4:rev_coverage_check","Coverage check — blind spots remediated? new areas brought into monitoring scope?",                                                              "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.7.4:rev_register_update","Changes propagated to the procedure / scope",                                                                                                    "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.4:rev_next_date",     "Next planned review date stated",                                                                                                                "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.5 Environmental threats — op_process 4-leaf (batch 22 2026-06-01) ────
+REQ_A75_ENVIRONMENTAL_THREATS_PROCEDURE = EvidenceRequirement(
     id            = "req:A.7.5:environmental_threats_procedure",
     control_ref   = "A.7.5",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Protection Against Physical and Environmental Threats Procedure",
     trigger_type  = "universal",
-    description   = "A.7.5 requires protection against physical and environmental threats (natural disasters, intentional acts, unintentional damage). Evidence is a procedure covering threat assessment, protection measures, detection, and response",
+    description   = "A.7.5 requires protection against physical and environmental threats. The procedure documents threat assessment, protection measures per threat, detection systems, response, and recovery. The threat register, applicable-sites scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.5:threat_assessment","Threat assessment per site (fire, flood, earthquake, civil unrest, power, vandalism)", "must", False, "A.7.5 — natural disasters, intentional or unintentional threats"),
-        ChecklistItem("item:A.7.5:protection_per_threat","Protection measures stated per identified threat", "must", False, "A.7.5 — designed and implemented"),
-        ChecklistItem("item:A.7.5:detection",     "Detection systems (smoke, heat, water leak, temperature, motion)", "must", False, "A.7.5 — protection"),
-        ChecklistItem("item:A.7.5:response",      "Response procedures per threat type (evacuation, suppression, shutdown)", "must", False, "A.7.5 — implemented"),
-        ChecklistItem("item:A.7.5:recovery",      "Recovery from environmental incidents (cleanup, salvage, post-incident assessment)", "must", False, "A.7.5 — protection"),
+        ChecklistItem("item:A.7.5:threat_assessment","Threat assessment per site (fire, flood, earthquake, civil unrest, power, vandalism, climate-related risk)",                                  "must", False, "27002:7.5 — natural disasters + intentional + unintentional"),
+        ChecklistItem("item:A.7.5:protection_per_threat","Protection measures stated per identified threat (passive — building design; active — detection + response)",                              "must", False, "27002:7.5 — designed and implemented"),
+        ChecklistItem("item:A.7.5:detection",         "Detection systems (smoke, heat, water leak, temperature, motion, glass-break, seismic where relevant)",                                          "must", False, "27002:7.5 — protection"),
+        ChecklistItem("item:A.7.5:response",          "Response procedures per threat type (evacuation, suppression, shutdown, BCP activation cross-link A.5.29/A.5.30)",                              "must", False, "27002:7.5 — implemented"),
+        ChecklistItem("item:A.7.5:recovery",          "Recovery from environmental incidents (cleanup, salvage, post-incident assessment, lessons → A.5.27)",                                          "must", False, "27002:7.5 — protection"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.5:location_risk", "Location-specific risk profile referenced (seismic zone, floodplain, climate)", "should", False, "Proportionality"),
-        ChecklistItem("item:A.7.5:insurance",     "Insurance considerations and coverage referenced", "should", False, "Residual risk handling"),
+        ChecklistItem("item:A.7.5:insurance",         "Insurance considerations and coverage referenced",                                                                                                "should", False, "Residual risk handling"),
+        ChecklistItem("item:A.7.5:climate_risk",      "Climate-related risk evolution noted (sea-level, heatwave intensity affecting cooling, wildfire) — periodic re-assessment trigger",            "should", False, "Forward-looking"),
     ],
 )
 
-REQ_A76_WORKING_IN_SECURE_AREAS = EvidenceRequirement(
+REQ_A75_THREAT_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.5:threat_register",
+    control_ref   = "A.7.5",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Per-Site Threat Register",
+    trigger_type  = "universal",
+    description   = "The catalogue of identified physical/environmental threats per site with protection measures, last assessment date, residual risk",
+    must_contain  = [
+        ChecklistItem("item:A.7.5:reg_site_threat",   "Per-row site + threat pair (one row per applicable threat per site)",                                                                            "must", False, "27002:7.5 — assessment"),
+        ChecklistItem("item:A.7.5:reg_likelihood",    "Per-row likelihood rating (informed by geography / historical events / climate projections)",                                                    "must", False, "27002:7.5 — assessment"),
+        ChecklistItem("item:A.7.5:reg_impact",        "Per-row impact rating (worst-case + most-likely scenarios)",                                                                                      "must", False, "27002:7.5 — assessment"),
+        ChecklistItem("item:A.7.5:reg_protection_in_place","Per-row protection measures actually deployed (matches procedure's per-threat list)",                                                        "must", False, "27002:7.5 — implemented"),
+        ChecklistItem("item:A.7.5:reg_residual_risk", "Per-row residual risk after controls (accepted / requires-treatment)",                                                                            "must", False, "Risk discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5:reg_last_event",    "Per-row last actual event of this threat type (drives re-assessment cadence)",                                                                  "should", False, "Empirical input"),
+    ],
+)
+
+REQ_A75_APPLICABLE_SITES_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.5:applicable_sites_scope",
+    control_ref   = "A.7.5",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Sites and Threat Catalogue Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the register. Documents which sites are in scope and the threat catalogue considered per site type",
+    must_contain  = [
+        ChecklistItem("item:A.7.5:scope_sites",       "Sites in scope (drawn from A.7.1 applicable-sites scope)",                                                                                        "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.5:scope_threat_catalogue","Threat catalogue considered (natural disasters per geography, intentional acts per threat-intel landscape, unintentional per ops history)",  "must", False, "27002:7.5 — threats"),
+        ChecklistItem("item:A.7.5:scope_geography",   "Geographic risk overlay (seismic zone, floodplain, climate band, civil-stability index per site location)",                                        "must", False, "Site-specific applicability"),
+        ChecklistItem("item:A.7.5:scope_sectoral_drivers","Sectoral drivers (data-centre industry standards, healthcare facility codes)",                                                                "must", False, "27002:7.5 — applicability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5:scope_change_drivers","Trigger list for re-scoping (climate event reclassification, new geography, sectoral standard update)",                                          "should", False, "Currency"),
+    ],
+)
+
+REQ_A75_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.5:environmental_program_review",
+    control_ref     = "A.7.5",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Environmental Protection Program Review",
+    trigger_type    = "universal",
+    description     = "Annual review of threat assessments, protection currency, detection-system health, exercise outcomes. Freshness=365",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.5:rev_date",          "Review date within the planned interval",                                                                                                        "must", False, "27002:7.5 — periodic"),
+        ChecklistItem("item:A.7.5:rev_reviewer",      "Reviewer identity (Facilities + InfoSec + BCP lead)",                                                                                            "must", False, "Accountability"),
+        ChecklistItem("item:A.7.5:rev_threat_currency","Threat-currency check — has the threat landscape shifted (new climate data, regional risk changes)?",                                          "must", False, "27002:7.5 — current"),
+        ChecklistItem("item:A.7.5:rev_detection_test","Detection-system test outcomes (smoke detectors, water-leak sensors functionally tested in the period)",                                          "must", False, "27002:7.5 — protection"),
+        ChecklistItem("item:A.7.5:rev_register_update","Changes propagated to the threat register and procedure",                                                                                        "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.5:rev_next_date",     "Next planned review date stated",                                                                                                                "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.6 Working in secure areas — op_process 4-leaf (batch 22 2026-06-01) ──
+REQ_A76_WORKING_IN_SECURE_AREAS_PROCEDURE = EvidenceRequirement(
     id            = "req:A.7.6:working_in_secure_areas_procedure",
     control_ref   = "A.7.6",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Working in Secure Areas Procedure",
     trigger_type  = "universal",
-    description   = "A.7.6 requires security measures for working in secure areas to be designed and implemented. Evidence is a procedure stating the additional rules that apply inside secure areas",
+    description   = "A.7.6 requires security measures for working in secure areas. The procedure documents secure-area definition, device restrictions, escort requirements, clean entry/exit. The work session register, applicable-areas scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.6:secure_area_definition","Secure area definition (which areas are 'secure' per A.7.1 classification)", "must", False, "A.7.6 — secure areas"),
-        ChecklistItem("item:A.7.6:device_restrictions","Restrictions on personal devices, recording, photography", "must", False, "A.7.6 — security measures"),
-        ChecklistItem("item:A.7.6:escort_third_parties","Escort requirements when third parties present", "must", False, "A.7.6 — security measures"),
-        ChecklistItem("item:A.7.6:clean_entry_exit","Clean entry/exit (search procedure if classification warrants, sign-out of materials)", "must", False, "A.7.6 — designed and implemented"),
+        ChecklistItem("item:A.7.6:secure_area_definition","Secure area definition (which areas are 'secure' per A.7.1 classification)",                                                              "must", False, "27002:7.6 — secure areas"),
+        ChecklistItem("item:A.7.6:device_restrictions","Restrictions on personal devices, recording, photography",                                                                                    "must", False, "27002:7.6 — security measures"),
+        ChecklistItem("item:A.7.6:escort_third_parties","Escort requirements when third parties present",                                                                                              "must", False, "27002:7.6 — security measures"),
+        ChecklistItem("item:A.7.6:clean_entry_exit", "Clean entry/exit (search procedure if classification warrants, sign-out of materials)",                                                          "must", False, "27002:7.6 — designed and implemented"),
+        ChecklistItem("item:A.7.6:vacant_rules",     "Vacant-area rules (lock-out, alarm activation, last-person-out checklist)",                                                                      "must", False, "Off-hours risk"),
+        ChecklistItem("item:A.7.6:work_permits",     "Work-permit system for non-routine activities (maintenance, cleaning, visitors with extended access)",                                            "must", False, "Operational control"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.6:vacant_rules", "Vacant-area rules (lock-out, alarm activation)", "should", False, "Off-hours risk"),
-        ChecklistItem("item:A.7.6:work_permits","Work-permit system for non-routine activities in secure areas", "should", False, "Operational control"),
+        ChecklistItem("item:A.7.6:awareness_briefing","Pre-entry awareness briefing for first-time entrants",                                                                                          "should", False, "Effectiveness"),
     ],
 )
 
-REQ_A77_CLEAR_DESK_SCREEN = EvidenceRequirement(
+REQ_A76_WORK_SESSION_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.6:work_session_register",
+    control_ref   = "A.7.6",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Secure Area Work Session Register",
+    trigger_type  = "universal",
+    description   = "The catalogue of non-routine work sessions in secure areas (maintenance visits, audits, deep-cleans, third-party visits). Each entry: session id, area, purpose, personnel, supervision",
+    must_contain  = [
+        ChecklistItem("item:A.7.6:reg_session_id",    "Per-session unique identifier",                                                                                                                  "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.7.6:reg_area",          "Per-session secure area",                                                                                                                          "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.6:reg_purpose",       "Per-session purpose (maintenance / audit / deep-clean / visitor / emergency)",                                                                  "must", False, "27002:7.6 — authorised"),
+        ChecklistItem("item:A.7.6:reg_personnel",     "Per-session personnel (including third parties, escorts, supervisors)",                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.7.6:reg_timestamps",    "Per-session entry/exit timestamps",                                                                                                                "must", False, "Operational discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.6:reg_work_permit",   "Per-session work-permit reference where the permit system applies",                                                                              "should", False, "Cross-leaf coherence"),
+    ],
+)
+
+REQ_A76_APPLICABLE_AREAS_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.6:applicable_areas_scope",
+    control_ref   = "A.7.6",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Secure Areas Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which areas are 'secure' for A.7.6 purposes (drawn from A.7.1 classification), and what additional rules apply per tier",
+    must_contain  = [
+        ChecklistItem("item:A.7.6:scope_areas",       "Secure areas in scope (drawn from A.7.1 register)",                                                                                                "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.6:scope_tier_rules",  "Per-tier rule variations (server-room rules vs document-vault rules vs lab rules)",                                                                "must", False, "27002:7.6 — proportional"),
+        ChecklistItem("item:A.7.6:scope_third_party_categories","Third-party categories addressed (cleaning, maintenance contractors, regulators on-site, customers)",                                  "must", False, "27002:7.6 — interested parties"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.6:scope_change_drivers","Trigger list for re-scoping (new secure area, new third-party access pattern)",                                                                  "should", False, "Currency"),
+    ],
+)
+
+REQ_A76_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.6:secure_work_program_review",
+    control_ref     = "A.7.6",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Secure Work Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that secure-area rules are being followed, session register has no gaps, and incidents (escort failure, device intrusion) are captured. Freshness=365",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.6:rev_date",          "Review date within the planned interval",                                                                                                        "must", False, "27002:7.6 — periodic"),
+        ChecklistItem("item:A.7.6:rev_reviewer",      "Reviewer identity (Facilities + InfoSec)",                                                                                                        "must", False, "Accountability"),
+        ChecklistItem("item:A.7.6:rev_compliance_check","Compliance sampling — sessions verified against permit/escort/device-restriction rules",                                                        "must", False, "27002:7.6 — effectiveness"),
+        ChecklistItem("item:A.7.6:rev_incidents",     "Incidents review (escort failures, device-intrusion events) — closure status",                                                                  "must", False, "Continual improvement"),
+        ChecklistItem("item:A.7.6:rev_register_update","Changes propagated to the procedure",                                                                                                            "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.6:rev_next_date",     "Next planned review date stated",                                                                                                                "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.7 Clear desk / clear screen — policy_program 4-leaf (batch 22) ───────
+REQ_A77_CLEAR_DESK_SCREEN_POLICY = EvidenceRequirement(
     id            = "req:A.7.7:clear_desk_clear_screen_policy",
     control_ref   = "A.7.7",
     standard_id   = "ISO27001:2022",
     evidence_type = "policy",
     title         = "Clear Desk and Clear Screen Policy",
     trigger_type  = "universal",
-    description   = "A.7.7 requires clear-desk rules for papers and removable media plus clear-screen rules for information processing facilities. Evidence is a policy stating both rules and enforcement",
+    description   = "A.7.7 requires clear-desk rules for papers/removable media plus clear-screen rules for information processing facilities. The policy states both rules and enforcement. The audit register, applicable-locations scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.7:clear_desk_rule",  "Clear-desk rule for papers and removable media when desk unattended", "must", False, "A.7.7 — clear desk rules for papers and removable storage media"),
-        ChecklistItem("item:A.7.7:clear_screen_rule","Clear-screen rule (screen lock on leaving, automatic lockout after N minutes)", "must", False, "A.7.7 — clear screen rules"),
-        ChecklistItem("item:A.7.7:removable_media",  "Removable media handling rules (locked away when unattended)", "must", False, "A.7.7 — removable storage media"),
-        ChecklistItem("item:A.7.7:locked_storage",   "Locked storage requirements per classification level (links to A.5.12)", "must", False, "A.7.7 — appropriately enforced"),
-        ChecklistItem("item:A.7.7:enforcement",      "Enforcement approach (spot checks, awareness, sanctions)", "must", False, "A.7.7 — appropriately enforced"),
+        ChecklistItem("item:A.7.7:clear_desk_rule",   "Clear-desk rule for papers and removable media when desk unattended",                                                                            "must", False, "27002:7.7 — clear desk rules"),
+        ChecklistItem("item:A.7.7:clear_screen_rule", "Clear-screen rule (screen lock on leaving, automatic lockout after N minutes)",                                                                  "must", False, "27002:7.7 — clear screen rules"),
+        ChecklistItem("item:A.7.7:removable_media",   "Removable media handling rules (locked away when unattended)",                                                                                    "must", False, "27002:7.7 — removable storage media"),
+        ChecklistItem("item:A.7.7:locked_storage",    "Locked storage requirements per classification level (links to A.5.12)",                                                                          "must", False, "27002:7.7 — appropriately enforced"),
+        ChecklistItem("item:A.7.7:enforcement",       "Enforcement approach (spot checks, awareness, sanctions)",                                                                                        "must", False, "27002:7.7 — appropriately enforced"),
+        ChecklistItem("item:A.7.7:meeting_rooms",     "Specific rules for meeting rooms and shared spaces (whiteboard wipe, printout collection)",                                                      "must", False, "Common gap"),
+        ChecklistItem("item:A.7.7:printer_rules",     "Printer / multifunction device rules (pull-print, collect immediately, fax-line policy)",                                                        "must", False, "Often-leaked artefacts"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.7:meeting_rooms",    "Specific rules for meeting rooms and shared spaces", "should", False, "Common gap"),
-        ChecklistItem("item:A.7.7:printer_rules",    "Printer / multifunction device rules (pull-print, collect immediately)", "should", False, "Often-leaked artefacts"),
+        ChecklistItem("item:A.7.7:home_office_overlay","Home-office overlay (clear-desk rules adapted for remote workers — cross-link to A.6.7)",                                                        "should", False, "Hybrid work realism"),
     ],
 )
 
-REQ_A78_EQUIPMENT_SITING = EvidenceRequirement(
+REQ_A77_AUDIT_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.7:cd_cs_audit_register",
+    control_ref   = "A.7.7",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Clear Desk / Clear Screen Audit Register",
+    trigger_type  = "universal",
+    description   = "The catalogue of spot-check audits with findings. Each audit row: date, scope, findings, sanctions applied",
+    must_contain  = [
+        ChecklistItem("item:A.7.7:reg_audit_id",      "Per-audit unique identifier",                                                                                                                    "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.7.7:reg_date",          "Per-audit date",                                                                                                                                  "must", False, "Operational discipline"),
+        ChecklistItem("item:A.7.7:reg_scope",         "Per-audit scope (which floors / areas covered)",                                                                                                  "must", False, "27002:7.7 — appropriately enforced"),
+        ChecklistItem("item:A.7.7:reg_findings",      "Per-audit findings (count of violations, types observed)",                                                                                        "must", False, "Operational discipline"),
+        ChecklistItem("item:A.7.7:reg_remediation",   "Per-audit remediation log (awareness email sent, repeat-violator escalation)",                                                                  "must", False, "Closes the loop"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.7:reg_trend",         "Per-audit trend analysis (vs previous audit — improvement / worsening / steady)",                                                                "should", False, "Continual improvement"),
+    ],
+)
+
+REQ_A77_APPLICABLE_LOCATIONS_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.7:applicable_locations_scope",
+    control_ref   = "A.7.7",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Locations Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which locations are covered by clear-desk/clear-screen rules (offices, meeting rooms, lab benches, home offices, shared coworking spaces)",
+    must_contain  = [
+        ChecklistItem("item:A.7.7:scope_locations",   "Locations enumerated (offices, meeting rooms, lab benches, home offices, coworking spaces, customer-site visits)",                              "must", False, "27002:7.7 — relevant"),
+        ChecklistItem("item:A.7.7:scope_classification_overlay","Per-location overlay against information-classification handled (Class III docs require locked storage, etc.)",                        "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.7:scope_screen_lock_baseline","Screen-lock baseline per location (auto-lock after N minutes — varies by location risk)",                                                "must", False, "27002:7.7 — clear screen"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.7:scope_change_drivers","Trigger list for re-scoping (new location, new work-pattern — return to office, hot-desking)",                                                  "should", False, "Currency"),
+    ],
+)
+
+REQ_A77_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.7:cd_cs_program_review",
+    control_ref     = "A.7.7",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Clear Desk / Clear Screen Program Review",
+    trigger_type    = "universal",
+    description     = "Annual review of policy currency, audit findings trend, enforcement consistency. Freshness=365",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.7:rev_date",          "Review date within the planned interval",                                                                                                        "must", False, "27002:7.7 — periodic"),
+        ChecklistItem("item:A.7.7:rev_reviewer",      "Reviewer identity (Facilities + InfoSec + HR partner)",                                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.7.7:rev_audit_trend",   "Audit-finding trend (improving / worsening — drives policy/awareness adjustments)",                                                              "must", False, "Continual improvement"),
+        ChecklistItem("item:A.7.7:rev_policy_drift",  "Policy currency check (referenced policies — A.5.12 classification, A.6.7 remote-work — still aligned)",                                          "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.7:rev_register_update","Changes propagated to the policy",                                                                                                                "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.7:rev_next_date",     "Next planned review date stated",                                                                                                                "should", False, "Planning"),
+    ],
+)
+
+# ── A.7.8 Equipment siting — op_process 4-leaf (batch 22 2026-06-01) ─────────
+REQ_A78_EQUIPMENT_SITING_PROCEDURE = EvidenceRequirement(
     id            = "req:A.7.8:equipment_siting_procedure",
     control_ref   = "A.7.8",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Equipment Siting and Protection Procedure",
     trigger_type  = "universal",
-    description   = "A.7.8 requires equipment to be sited securely and protected. Evidence is a procedure stating siting principles per equipment class and protection measures",
+    description   = "A.7.8 requires equipment to be sited securely and protected. The procedure documents siting principles, tamper-resistance, cable management, visibility minimisation. The equipment register, applicable-equipment scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.8:siting_principles","Siting principles (away from public view if processing classified, restricted access, environmental controls)", "must", False, "A.7.8 — sited securely"),
-        ChecklistItem("item:A.7.8:tamper_resistance","Tamper-resistance / detection measures for sensitive equipment", "must", False, "A.7.8 — protected"),
-        ChecklistItem("item:A.7.8:cable_management","Cable management to prevent accidental damage or interception (links to A.7.12)", "must", False, "A.7.8 — protected"),
-        ChecklistItem("item:A.7.8:visibility",      "Visibility minimisation (screens not facing windows, no labels indicating contents)", "must", False, "A.7.8 — sited securely"),
+        ChecklistItem("item:A.7.8:siting_principles","Siting principles (away from public view, environmental controls, restricted access proportional to equipment class)",                          "must", False, "27002:7.8 — sited securely"),
+        ChecklistItem("item:A.7.8:tamper_resistance","Tamper-resistance / detection measures for sensitive equipment (HSMs, network gear, recording devices)",                                          "must", False, "27002:7.8 — protected"),
+        ChecklistItem("item:A.7.8:cable_management","Cable management to prevent damage or interception (cross-link to A.7.12 cabling security)",                                                      "must", False, "27002:7.8 — protected"),
+        ChecklistItem("item:A.7.8:visibility",       "Visibility minimisation (screens not facing windows, no labels indicating contents, no public-facing maker/model info)",                          "must", False, "27002:7.8 — sited securely"),
+        ChecklistItem("item:A.7.8:eating_drinking",  "Rules on food/drink near equipment (incidental-damage prevention)",                                                                                "must", False, "Common cause of damage"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.8:hsm_specifics",   "Specific guidance for high-value equipment (HSMs, server racks, key safes)", "should", False, "Proportionality"),
-        ChecklistItem("item:A.7.8:eating_drinking", "Rules on food/drink near equipment", "should", False, "Common cause of incidental damage"),
+        ChecklistItem("item:A.7.8:hsm_specifics",    "Specific guidance for high-value equipment (HSMs, server racks, key safes — extra siting + tamper-detection requirements)",                      "should", False, "Proportionality"),
     ],
 )
 
-REQ_A79_OFF_PREMISES = EvidenceRequirement(
+REQ_A78_EQUIPMENT_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.8:siting_register",
+    control_ref   = "A.7.8",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Equipment Siting Register",
+    trigger_type  = "universal",
+    description   = "The catalogue of in-scope equipment with location, class, protection measures applied, owner",
+    must_contain  = [
+        ChecklistItem("item:A.7.8:reg_equipment_id", "Per-row equipment identifier (cross-link to A.5.9 asset register)",                                                                              "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.8:reg_location",     "Per-row location (site + room per A.7.3 register)",                                                                                              "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.7.8:reg_class",        "Per-row equipment class (drives required protection level)",                                                                                      "must", False, "27002:7.8 — proportional"),
+        ChecklistItem("item:A.7.8:reg_protection",   "Per-row protection measures in place (matches procedure's per-class requirements)",                                                              "must", False, "27002:7.8 — implemented"),
+        ChecklistItem("item:A.7.8:reg_owner",        "Per-row owner",                                                                                                                                    "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.8:reg_remediation",  "Per-row remediation log where protection falls short of required",                                                                                "should", False, "Operational discipline"),
+    ],
+)
+
+REQ_A78_APPLICABLE_EQUIPMENT_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.8:applicable_equipment_scope",
+    control_ref   = "A.7.8",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Equipment Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which equipment classes are in scope and what drives the protection level per class",
+    must_contain  = [
+        ChecklistItem("item:A.7.8:scope_classes",    "Equipment classes (workstations, server-room equipment, network kit, HSMs, recording devices, printers/MFDs)",                                  "must", False, "27002:7.8 — equipment"),
+        ChecklistItem("item:A.7.8:scope_protection_tiers","Protection tier per class (basic / standard / high / critical)",                                                                              "must", False, "27002:7.8 — proportional"),
+        ChecklistItem("item:A.7.8:scope_exclusions", "Exclusions stated (off-premises equipment → A.7.9; ephemeral cloud — no physical footprint)",                                                    "must", False, "27002:7.8 — applicability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.8:scope_change_drivers","Trigger list for re-scoping (new equipment class, hardware refresh, M&A)",                                                                    "should", False, "Currency"),
+    ],
+)
+
+REQ_A78_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.8:siting_program_review",
+    control_ref     = "A.7.8",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Equipment Siting Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that equipment is sited per its class requirements and the register is current. Freshness=365",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.8:rev_date",         "Review date within the planned interval",                                                                                                        "must", False, "27002:7.8 — periodic"),
+        ChecklistItem("item:A.7.8:rev_reviewer",     "Reviewer identity (Facilities + InfoSec)",                                                                                                        "must", False, "Accountability"),
+        ChecklistItem("item:A.7.8:rev_walkthrough",  "Physical walkthrough (sample-based) — siting verified, tamper-evidence intact",                                                                  "must", False, "27002:7.8 — implemented"),
+        ChecklistItem("item:A.7.8:rev_register_check","Per-equipment outcome (verified / amended / remediated)",                                                                                        "must", False, "27002:7.8 — current"),
+        ChecklistItem("item:A.7.8:rev_register_update","Changes propagated to the live register",                                                                                                        "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.8:rev_next_date",    "Next planned review date stated",                                                                                                                "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.9 Off-premises assets — policy_program 4-leaf (batch 22 2026-06-01) ──
+REQ_A79_OFF_PREMISES_POLICY = EvidenceRequirement(
     id            = "req:A.7.9:off_premises_assets_policy",
     control_ref   = "A.7.9",
     standard_id   = "ISO27001:2022",
     evidence_type = "policy",
     title         = "Security of Assets Off-Premises Policy",
     trigger_type  = "universal",
-    description   = "A.7.9 requires off-site assets to be protected. Evidence is a policy covering scope, protection measures, theft/loss reporting, and registration",
+    description   = "A.7.9 requires off-site assets to be protected. The policy documents scope, encryption, theft/loss reporting, travel restrictions, registration, return. The off-premises asset register, applicable-classes scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.9:scope",            "Scope (laptops, mobile devices, removable media, equipment taken off-premises)", "must", False, "A.7.9 — off-site assets"),
-        ChecklistItem("item:A.7.9:encryption",       "Encryption requirements for off-premises information storage", "must", False, "A.7.9 — protected"),
-        ChecklistItem("item:A.7.9:theft_loss_report","Theft/loss reporting requirement with timeline (links to A.6.8)", "must", False, "A.7.9 — protected"),
-        ChecklistItem("item:A.7.9:travel_restrictions","Travel restrictions or extra precautions for high-risk jurisdictions", "must", False, "A.7.9 — protected"),
-        ChecklistItem("item:A.7.9:registration",     "Registration / sign-out of equipment before removal from premises", "must", False, "A.7.9 — off-site assets"),
-        ChecklistItem("item:A.7.9:return_procedures","Return procedures and post-return inspection", "must", False, "A.7.9 — protected"),
+        ChecklistItem("item:A.7.9:scope",            "Scope (laptops, mobile devices, removable media, equipment taken off-premises)",                                                                "must", False, "27002:7.9 — off-site assets"),
+        ChecklistItem("item:A.7.9:encryption",       "Encryption requirements for off-premises information storage",                                                                                    "must", False, "27002:7.9 — protected"),
+        ChecklistItem("item:A.7.9:theft_loss_report","Theft/loss reporting requirement with timeline (cross-link to A.6.8 event reporting)",                                                            "must", False, "27002:7.9 — protected"),
+        ChecklistItem("item:A.7.9:travel_restrictions","Travel restrictions or extra precautions for high-risk jurisdictions (border-crossing data minimisation)",                                      "must", False, "27002:7.9 — protected"),
+        ChecklistItem("item:A.7.9:registration",     "Registration / sign-out of equipment before removal from premises",                                                                              "must", False, "27002:7.9 — off-site assets"),
+        ChecklistItem("item:A.7.9:return_procedures","Return procedures and post-return inspection (tamper-check, integrity verification)",                                                            "must", False, "27002:7.9 — protected"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.9:home_office_link", "Reference to remote working policy (A.6.7) where home is the off-premises location", "should", False, "Cross-control consistency"),
-        ChecklistItem("item:A.7.9:conference_travel","Specific guidance for conferences and customer-site visits", "should", False, "Common operational case"),
+        ChecklistItem("item:A.7.9:home_office_link", "Reference to remote working policy (A.6.7) where home is the off-premises location",                                                              "should", False, "Cross-control consistency"),
+        ChecklistItem("item:A.7.9:conference_travel","Specific guidance for conferences and customer-site visits (loaner devices, data minimisation)",                                                  "should", False, "Common operational case"),
     ],
 )
 
-REQ_A710_STORAGE_MEDIA = EvidenceRequirement(
+REQ_A79_OFF_PREMISES_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.9:off_premises_register",
+    control_ref   = "A.7.9",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Off-Premises Asset Register",
+    trigger_type  = "universal",
+    description   = "The catalogue of assets currently off-premises — laptops issued, equipment taken to events, media in transit. Drives 'where is asset X right now' query and loss-detection",
+    must_contain  = [
+        ChecklistItem("item:A.7.9:reg_asset_id",     "Per-row asset identifier (cross-link to A.5.9 asset register)",                                                                                  "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.9:reg_holder",       "Per-row current holder (named individual)",                                                                                                        "must", False, "Accountability"),
+        ChecklistItem("item:A.7.9:reg_off_since",    "Per-row off-premises date (drives stale-loaner detection)",                                                                                        "must", False, "Operational discipline"),
+        ChecklistItem("item:A.7.9:reg_expected_return","Per-row expected return date where applicable",                                                                                                  "must", False, "27002:7.9 — registration"),
+        ChecklistItem("item:A.7.9:reg_status",       "Per-row status (active-off-premises / returned / lost / stolen / written-off)",                                                                  "must", False, "Lifecycle"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.9:reg_purpose",      "Per-row purpose (daily-loaner / conference / customer-visit / permanent-issue)",                                                                  "should", False, "Risk profile"),
+    ],
+)
+
+REQ_A79_APPLICABLE_CLASSES_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.9:applicable_classes_scope",
+    control_ref   = "A.7.9",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Asset Classes and Destinations Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which asset classes are in scope and what destinations / scenarios drive special handling",
+    must_contain  = [
+        ChecklistItem("item:A.7.9:scope_asset_classes","Asset classes covered (laptops, phones, tablets, removable media, recording equipment, key safes in transit)",                                  "must", False, "27002:7.9 — relevant assets"),
+        ChecklistItem("item:A.7.9:scope_destinations","Destinations / scenarios (home / customer site / conferences / travel — each has risk profile)",                                                "must", False, "27002:7.9 — protected"),
+        ChecklistItem("item:A.7.9:scope_high_risk_jurisdictions","High-risk-jurisdiction list (extra precautions — loaner-only, data minimisation)",                                                    "must", False, "27002:7.9 — protected"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.9:scope_change_drivers","Trigger list for re-scoping (new asset class, new travel-risk geography)",                                                                      "should", False, "Currency"),
+    ],
+)
+
+REQ_A79_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.9:off_premises_program_review",
+    control_ref     = "A.7.9",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Off-Premises Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that the register is current, theft/loss incidents handled, travel-restriction list still applies. Freshness=365",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.9:rev_date",         "Review date within the planned interval",                                                                                                        "must", False, "27002:7.9 — periodic"),
+        ChecklistItem("item:A.7.9:rev_reviewer",     "Reviewer identity (Facilities + InfoSec + IT lead)",                                                                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.7.9:rev_register_check","Stale-loaner check — assets off-premises for unexpectedly long without status update",                                                          "must", False, "Operational discipline"),
+        ChecklistItem("item:A.7.9:rev_incident_review","Theft/loss incidents in period — handled per policy, lessons captured",                                                                        "must", False, "27002:7.9 — protected"),
+        ChecklistItem("item:A.7.9:rev_register_update","Changes propagated to the policy / scope",                                                                                                      "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.9:rev_next_date",    "Next planned review date stated",                                                                                                                "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.10 Storage media — op_process 4-leaf (batch 22 2026-06-01) ───────────
+REQ_A710_STORAGE_MEDIA_PROCEDURE = EvidenceRequirement(
     id            = "req:A.7.10:storage_media_procedure",
     control_ref   = "A.7.10",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Storage Media Lifecycle Procedure",
     trigger_type  = "universal",
-    description   = "A.7.10 requires storage media to be managed through their lifecycle (acquisition, use, transportation, disposal) per the classification scheme and handling requirements. Evidence is a media lifecycle procedure",
+    description   = "A.7.10 requires storage media to be managed through their lifecycle (acquisition, use, transportation, disposal). The procedure documents acquisition controls, use controls, transport rules, disposal handoff, inventory. The media register, applicable-classes scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.10:acquisition",  "Acquisition controls (approved media types, sourcing controls)", "must", False, "A.7.10 — acquisition"),
-        ChecklistItem("item:A.7.10:use_controls", "Use controls (encryption, classification labels per A.5.13, allowed-use rules)", "must", False, "A.7.10 — use"),
-        ChecklistItem("item:A.7.10:transport",    "Transport rules (encryption in transit, courier requirements, chain of custody)", "must", False, "A.7.10 — transportation"),
-        ChecklistItem("item:A.7.10:disposal",     "Disposal controls (links to A.7.14 secure disposal procedure)", "must", False, "A.7.10 — disposal"),
-        ChecklistItem("item:A.7.10:inventory",    "Inventory of removable media issued (who holds what)", "must", False, "A.7.10 — life cycle"),
+        ChecklistItem("item:A.7.10:acquisition", "Acquisition controls (approved media types, sourcing controls)",                                                                                      "must", False, "27002:7.10 — acquisition"),
+        ChecklistItem("item:A.7.10:use_controls","Use controls (encryption, classification labels per A.5.13, allowed-use rules)",                                                                      "must", False, "27002:7.10 — use"),
+        ChecklistItem("item:A.7.10:transport",   "Transport rules (encryption in transit, courier requirements, chain of custody)",                                                                    "must", False, "27002:7.10 — transportation"),
+        ChecklistItem("item:A.7.10:disposal",    "Disposal controls (handoff to A.7.14 secure disposal procedure with chain-of-custody preserved)",                                                    "must", False, "27002:7.10 — disposal"),
+        ChecklistItem("item:A.7.10:inventory",   "Inventory of removable media issued (who holds what)",                                                                                                "must", False, "27002:7.10 — life cycle"),
+        ChecklistItem("item:A.7.10:individual_tracking","Individual media tracking via serial or asset tag",                                                                                          "must", False, "Loss detection"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.10:individual_tracking","Individual media tracking via serial or asset tag", "should", False, "Loss detection"),
-        ChecklistItem("item:A.7.10:legacy_exception", "Exception process for legacy media that cannot meet current controls", "should", False, "Pragmatic transition"),
+        ChecklistItem("item:A.7.10:legacy_exception","Exception process for legacy media that cannot meet current controls",                                                                            "should", False, "Pragmatic transition"),
     ],
 )
 
-REQ_A711_SUPPORTING_UTILITIES = EvidenceRequirement(
+REQ_A710_MEDIA_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.10:media_register",
+    control_ref   = "A.7.10",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Storage Media Register",
+    trigger_type  = "universal",
+    description   = "The catalogue of issued storage media — id, classification, current holder, lifecycle stage. Drives 'where is media X' query and stale-issue detection",
+    must_contain  = [
+        ChecklistItem("item:A.7.10:reg_media_id",    "Per-row media identifier (serial/asset tag)",                                                                                                    "must", False, "Lifecycle tracking"),
+        ChecklistItem("item:A.7.10:reg_class",       "Per-row classification (drives encryption + handling requirements)",                                                                              "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.10:reg_holder",      "Per-row current holder",                                                                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.7.10:reg_lifecycle_stage","Per-row lifecycle stage (in-use / in-transit / awaiting-disposal / disposed)",                                                                "must", False, "27002:7.10 — life cycle"),
+        ChecklistItem("item:A.7.10:reg_issued_date", "Per-row issue date",                                                                                                                              "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.10:reg_last_seen",   "Per-row last-seen timestamp (drives stale-issue detection)",                                                                                      "should", False, "Loss detection"),
+    ],
+)
+
+REQ_A710_APPLICABLE_MEDIA_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.10:applicable_media_scope",
+    control_ref   = "A.7.10",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Media Classes Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which media classes are in scope, applicable use cases, exclusions",
+    must_contain  = [
+        ChecklistItem("item:A.7.10:scope_media_classes","Media classes (USB drives, external HDDs, optical disks, tape, paper-with-PII, mobile devices with data)",                                    "must", False, "27002:7.10 — relevant media"),
+        ChecklistItem("item:A.7.10:scope_use_cases", "Use cases enumerated (backup transport, courier-of-data, demo loaners, archive)",                                                                "must", False, "27002:7.10 — use"),
+        ChecklistItem("item:A.7.10:scope_exclusions","Exclusions (cloud storage handled by A.8.10 information deletion; in-band system storage)",                                                      "must", False, "27002:7.10 — applicability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.10:scope_change_drivers","Trigger list for re-scoping (new media format, deprecation of media class)",                                                                  "should", False, "Currency"),
+    ],
+)
+
+REQ_A710_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.10:media_program_review",
+    control_ref     = "A.7.10",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Storage Media Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification of register currency, lifecycle compliance, lost-media incidents. Freshness=365",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.10:rev_date",        "Review date within the planned interval",                                                                                                        "must", False, "27002:7.10 — periodic"),
+        ChecklistItem("item:A.7.10:rev_reviewer",    "Reviewer identity (IT + InfoSec)",                                                                                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.7.10:rev_inventory_audit","Inventory audit — sample-based confirmation of media at stated location",                                                                    "must", False, "Loss detection"),
+        ChecklistItem("item:A.7.10:rev_lost_count",  "Lost-media count for period (every loss has an incident link)",                                                                                  "must", False, "27002:7.10 — protected"),
+        ChecklistItem("item:A.7.10:rev_register_update","Changes propagated to the register / procedure",                                                                                              "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.10:rev_next_date",   "Next planned review date stated",                                                                                                                "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.11 Supporting utilities — op_process 4-leaf (batch 22 2026-06-01) ────
+REQ_A711_SUPPORTING_UTILITIES_PROCEDURE = EvidenceRequirement(
     id            = "req:A.7.11:supporting_utilities_procedure",
     control_ref   = "A.7.11",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Supporting Utilities Continuity Procedure",
     trigger_type  = "universal",
-    description   = "A.7.11 requires information processing facilities to be protected from power failures and other supporting-utility disruptions. Evidence is a procedure covering critical utilities, redundancy, monitoring, and testing",
+    description   = "A.7.11 requires information processing facilities to be protected from power failures and other supporting-utility disruptions. The procedure documents critical utilities, redundancy, monitoring, maintenance, testing. The utility register, applicable-sites scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.11:critical_utilities","Critical utilities identified (power, cooling, water, communications, gas where relevant)", "must", False, "A.7.11 — supporting utilities"),
-        ChecklistItem("item:A.7.11:redundancy",       "Redundancy / backup arrangements per utility (UPS, generator, dual-feed, redundant cooling)", "must", False, "A.7.11 — protected from power failures and other disruptions"),
-        ChecklistItem("item:A.7.11:monitoring",       "Monitoring with alerting for utility status", "must", False, "A.7.11 — protected"),
-        ChecklistItem("item:A.7.11:maintenance",      "Maintenance contracts with provider SLAs", "must", False, "A.7.11 — protected"),
-        ChecklistItem("item:A.7.11:testing",          "Periodic testing arrangements (UPS run-time tests, generator tests)", "must", False, "Continuity validation"),
+        ChecklistItem("item:A.7.11:critical_utilities","Critical utilities identified (power, cooling, water, communications, gas where relevant)",                                                    "must", False, "27002:7.11 — supporting utilities"),
+        ChecklistItem("item:A.7.11:redundancy",       "Redundancy / backup arrangements per utility (UPS, generator, dual-feed, redundant cooling, dual ISP)",                                          "must", False, "27002:7.11 — protected"),
+        ChecklistItem("item:A.7.11:monitoring",       "Monitoring with alerting for utility status (BMS / power quality / temperature)",                                                                "must", False, "27002:7.11 — protected"),
+        ChecklistItem("item:A.7.11:maintenance",      "Maintenance contracts with provider SLAs (UPS battery replacement, generator service)",                                                          "must", False, "27002:7.11 — protected"),
+        ChecklistItem("item:A.7.11:testing",          "Periodic testing arrangements (UPS run-time tests, generator load tests, ATS transfer tests)",                                                  "must", False, "Continuity validation"),
+        ChecklistItem("item:A.7.11:bcp_integration",  "BCP integration (utility-failure scenarios feed A.5.29/A.5.30 BCP plans)",                                                                      "must", False, "Cross-control coherence"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.11:alternate_site",   "Alternate-site considerations where redundancy unachievable on-site", "should", False, "Higher-resilience option"),
-        ChecklistItem("item:A.7.11:vendor_sla_review","Periodic vendor SLA review for utility providers", "should", False, "Drift prevention"),
+        ChecklistItem("item:A.7.11:alternate_site",   "Alternate-site considerations where redundancy unachievable on-site",                                                                            "should", False, "Higher-resilience option"),
     ],
 )
 
-REQ_A712_CABLING_SECURITY = EvidenceRequirement(
+REQ_A711_UTILITY_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.11:utility_register",
+    control_ref   = "A.7.11",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Per-Site Utility Register",
+    trigger_type  = "universal",
+    description   = "The catalogue of critical utilities per site — feed type, redundancy in place, last test, provider, owner",
+    must_contain  = [
+        ChecklistItem("item:A.7.11:reg_site_utility","Per-row site + utility pair",                                                                                                                    "must", False, "27002:7.11 — supporting utilities"),
+        ChecklistItem("item:A.7.11:reg_redundancy_in_place","Per-row redundancy in place (matches the policy's required redundancy)",                                                                  "must", False, "27002:7.11 — protected"),
+        ChecklistItem("item:A.7.11:reg_provider",    "Per-row provider with SLA reference",                                                                                                            "must", False, "27002:7.11 — maintenance"),
+        ChecklistItem("item:A.7.11:reg_last_test",   "Per-row last test date and outcome",                                                                                                              "must", False, "Continuity validation"),
+        ChecklistItem("item:A.7.11:reg_next_test",   "Per-row next-test date scheduled",                                                                                                                "must", False, "Planning"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.11:reg_runtime",     "Per-row autonomous-runtime stat (UPS minutes, generator fuel days)",                                                                              "should", False, "Realism check"),
+    ],
+)
+
+REQ_A711_APPLICABLE_SITES_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.11:applicable_sites_scope",
+    control_ref   = "A.7.11",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Sites for Utility Continuity Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which sites are in scope and what drives the continuity requirements per site",
+    must_contain  = [
+        ChecklistItem("item:A.7.11:scope_sites",     "Sites in scope (drawn from A.7.1 register — typically data centres + key office sites)",                                                          "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.11:scope_criticality","Per-site criticality tier (drives redundancy depth)",                                                                                            "must", False, "27002:7.11 — proportional"),
+        ChecklistItem("item:A.7.11:scope_exclusions","Exclusions (cloud workloads → cloud provider handles utilities; co-located rack space → provider responsibility)",                              "must", False, "27002:7.11 — applicability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.11:scope_change_drivers","Trigger list for re-scoping (new site, criticality re-tier, BCP scope change)",                                                                "should", False, "Currency"),
+    ],
+)
+
+REQ_A711_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.11:utilities_program_review",
+    control_ref     = "A.7.11",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Utilities Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification of test outcomes, redundancy currency, vendor-SLA performance. Freshness=365",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.11:rev_date",        "Review date within the planned interval",                                                                                                        "must", False, "27002:7.11 — periodic"),
+        ChecklistItem("item:A.7.11:rev_reviewer",    "Reviewer identity (Facilities + InfoSec + BCP lead)",                                                                                            "must", False, "Accountability"),
+        ChecklistItem("item:A.7.11:rev_test_outcomes","Per-utility test outcomes review (UPS/generator tests in period — pass/fail/remediation)",                                                      "must", False, "Continuity validation"),
+        ChecklistItem("item:A.7.11:rev_vendor_sla",  "Vendor-SLA review (response times against SLA, breach incidents)",                                                                              "must", False, "27002:7.11 — maintenance"),
+        ChecklistItem("item:A.7.11:rev_register_update","Changes propagated to the register / procedure",                                                                                              "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.11:rev_next_date",   "Next planned review date stated",                                                                                                                "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.12 Cabling security — op_process 4-leaf (batch 22 2026-06-01) ────────
+REQ_A712_CABLING_SECURITY_PROCEDURE = EvidenceRequirement(
     id            = "req:A.7.12:cabling_security_procedure",
     control_ref   = "A.7.12",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Cabling Security Procedure",
     trigger_type  = "universal",
-    description   = "A.7.12 requires cables carrying power, data, or supporting information services to be protected from interception, interference, or damage. Evidence is a procedure covering cable routing, separation, labelling, and inspection",
+    description   = "A.7.12 requires cables carrying power, data, or supporting services to be protected from interception, interference, or damage. The procedure documents routing, separation, labelling, tamper-evidence, patch-panel security. The cabling register, applicable-runs scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.12:routing",          "Cable routing principles (conduits, protected paths, away from public areas)", "must", False, "A.7.12 — protected from damage"),
-        ChecklistItem("item:A.7.12:separation",       "Separation of power and data cables to reduce interference", "must", False, "A.7.12 — interference"),
-        ChecklistItem("item:A.7.12:labelling",        "Cable and patch-panel labelling for traceability", "must", False, "A.7.12 — protected"),
-        ChecklistItem("item:A.7.12:tamper_evidence",  "Tamper-evident protection where sensitive data is carried (locked cabinets, sealed runs)", "must", False, "A.7.12 — interception"),
-        ChecklistItem("item:A.7.12:patch_panel_security","Patch panel / IDF / MDF physical security", "must", False, "A.7.12 — protected"),
+        ChecklistItem("item:A.7.12:routing",          "Cable routing principles (conduits, protected paths, away from public areas)",                                                                  "must", False, "27002:7.12 — protected from damage"),
+        ChecklistItem("item:A.7.12:separation",       "Separation of power and data cables to reduce interference",                                                                                      "must", False, "27002:7.12 — interference"),
+        ChecklistItem("item:A.7.12:labelling",        "Cable and patch-panel labelling for traceability",                                                                                                "must", False, "27002:7.12 — protected"),
+        ChecklistItem("item:A.7.12:tamper_evidence",  "Tamper-evident protection where sensitive data is carried (locked cabinets, sealed runs)",                                                      "must", False, "27002:7.12 — interception"),
+        ChecklistItem("item:A.7.12:patch_panel_security","Patch panel / IDF / MDF physical security (locked rooms, access logged)",                                                                    "must", False, "27002:7.12 — protected"),
+        ChecklistItem("item:A.7.12:encrypted_backbone","Encrypted backbone or MACsec on segments crossing low-trust zones",                                                                            "must", False, "Defense in depth"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.12:encrypted_backbone","Encrypted backbone or MACsec on segments crossing low-trust zones", "should", False, "Defense in depth"),
-        ChecklistItem("item:A.7.12:periodic_inspection","Periodic physical inspection schedule", "should", False, "Drift prevention"),
+        ChecklistItem("item:A.7.12:periodic_inspection","Periodic physical inspection schedule (drift prevention)",                                                                                    "should", False, "Drift prevention"),
     ],
 )
 
-REQ_A713_EQUIPMENT_MAINTENANCE = EvidenceRequirement(
-    id            = "req:A.7.13:equipment_maintenance_procedure",
+REQ_A712_CABLING_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.12:cabling_register",
+    control_ref   = "A.7.12",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Cabling Run Register",
+    trigger_type  = "universal",
+    description   = "The catalogue of cabling runs (or aggregations) — site, run id, carried traffic class, routing class, last inspection",
+    must_contain  = [
+        ChecklistItem("item:A.7.12:reg_run_id",       "Per-row run identifier",                                                                                                                          "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.7.12:reg_site",         "Per-row site",                                                                                                                                    "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.7.12:reg_traffic_class","Per-row carried traffic class (drives encryption + tamper-evidence requirements)",                                                                "must", False, "27002:7.12 — proportional"),
+        ChecklistItem("item:A.7.12:reg_routing",      "Per-row routing description (conduit / overhead-tray / under-floor / via-shared-corridor)",                                                      "must", False, "27002:7.12 — protected"),
+        ChecklistItem("item:A.7.12:reg_last_inspected","Per-row last-inspected date",                                                                                                                    "must", False, "Drift prevention"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.12:reg_remediation",  "Per-row remediation log where protection falls short",                                                                                            "should", False, "Operational discipline"),
+    ],
+)
+
+REQ_A712_APPLICABLE_RUNS_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.12:applicable_runs_scope",
+    control_ref   = "A.7.12",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Cabling Runs Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which cabling runs are in scope, what drives protection levels, exclusions",
+    must_contain  = [
+        ChecklistItem("item:A.7.12:scope_sites",     "Sites in scope (drawn from A.7.1)",                                                                                                                "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.12:scope_run_classes","Run classes (LAN backbone, intra-rack, perimeter, external/landlord-controlled)",                                                                "must", False, "27002:7.12 — protected"),
+        ChecklistItem("item:A.7.12:scope_exclusions","Exclusions (carrier-provided fibre — provider responsibility for protection)",                                                                    "must", False, "27002:7.12 — applicability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.12:scope_change_drivers","Trigger list for re-scoping (network refresh, new site)",                                                                                      "should", False, "Currency"),
+    ],
+)
+
+REQ_A712_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.12:cabling_program_review",
+    control_ref     = "A.7.12",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Cabling Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification of inspection completeness, register currency, remediation closure. Freshness=365",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.12:rev_date",        "Review date within the planned interval",                                                                                                        "must", False, "27002:7.12 — periodic"),
+        ChecklistItem("item:A.7.12:rev_reviewer",    "Reviewer identity (Facilities + Network lead + InfoSec)",                                                                                        "must", False, "Accountability"),
+        ChecklistItem("item:A.7.12:rev_inspection_coverage","Per-run inspection coverage in period (all runs inspected per planned cadence)",                                                          "must", False, "Drift prevention"),
+        ChecklistItem("item:A.7.12:rev_remediation_closure","Remediation closure rate from prior period",                                                                                              "must", False, "Operational discipline"),
+        ChecklistItem("item:A.7.12:rev_register_update","Changes propagated to the register / procedure",                                                                                              "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.12:rev_next_date",   "Next planned review date stated",                                                                                                                "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.13 Equipment maintenance — op_process 4-leaf (batch 22 2026-06-01) ───
+REQ_A713_EQUIPMENT_MAINTENANCE_PROCEDURE = EvidenceRequirement(
+    id             = "req:A.7.13:equipment_maintenance_procedure",
+    control_ref    = "A.7.13",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "procedure",
+    title          = "Equipment Maintenance Procedure",
+    trigger_type   = "universal",
+    description    = "A.7.13 requires equipment to be maintained correctly to ensure availability, integrity, and confidentiality. The procedure documents schedules, authorised providers, supervision, offsite-maintenance controls, post-verification. The maintenance event register, applicable-equipment scope and periodic review are sibling leaves",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.7.13:schedule",         "Maintenance schedule per equipment class with intervals",                                                                                          "must", False, "27002:7.13 — maintained correctly"),
+        ChecklistItem("item:A.7.13:authorised_providers","Authorised maintenance providers list with security expectations",                                                                            "must", False, "27002:7.13 — maintained"),
+        ChecklistItem("item:A.7.13:supervision",      "Supervision requirements when maintenance involves access to sensitive information",                                                              "must", False, "27002:7.13 — confidentiality"),
+        ChecklistItem("item:A.7.13:offsite_maintenance","Asset-removal controls when equipment goes offsite (data removal, escrow, return verification)",                                                "must", False, "27002:7.13 — integrity, confidentiality"),
+        ChecklistItem("item:A.7.13:post_verification","Post-maintenance verification (functional test, integrity check)",                                                                                "must", False, "27002:7.13 — availability, integrity"),
+        ChecklistItem("item:A.7.13:provider_criteria","Provider selection criteria documented (security competence, background screening, NDA)",                                                          "must", False, "Supply chain hygiene"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.7.13:predictive_maint", "Predictive maintenance based on monitoring data",                                                                                                  "should", False, "Modern practice"),
+    ],
+)
+
+REQ_A713_MAINTENANCE_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.13:maintenance_event_register",
     control_ref   = "A.7.13",
     standard_id   = "ISO27001:2022",
-    evidence_type = "procedure",
-    title         = "Equipment Maintenance Procedure",
+    evidence_type = "register",
+    title         = "Maintenance Event Register",
     trigger_type  = "universal",
-    description   = "A.7.13 requires equipment to be maintained correctly to ensure availability, integrity, and confidentiality of information. Evidence is a procedure covering schedules, authorised providers, supervision, and post-maintenance verification",
-    freshness_days = 365,
+    description   = "The catalogue of maintenance events — equipment id, date, provider, supervision, outcome, post-verification",
     must_contain  = [
-        ChecklistItem("item:A.7.13:schedule",        "Maintenance schedule per equipment class with intervals", "must", False, "A.7.13 — maintained correctly"),
-        ChecklistItem("item:A.7.13:authorised_providers","Authorised maintenance providers list with security expectations", "must", False, "A.7.13 — maintained"),
-        ChecklistItem("item:A.7.13:supervision",     "Supervision requirements when maintenance involves access to sensitive information", "must", False, "A.7.13 — confidentiality of information"),
-        ChecklistItem("item:A.7.13:offsite_maintenance","Asset-removal controls when equipment goes offsite for maintenance (data removal, escrow, return verification)", "must", False, "A.7.13 — integrity, confidentiality"),
-        ChecklistItem("item:A.7.13:post_verification","Post-maintenance verification (functional test, integrity check)", "must", False, "A.7.13 — availability, integrity"),
+        ChecklistItem("item:A.7.13:reg_event_id",     "Per-event unique identifier",                                                                                                                    "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.7.13:reg_equipment",    "Per-event equipment (cross-link to A.5.9 asset register)",                                                                                      "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.13:reg_date",         "Per-event date",                                                                                                                                  "must", False, "Operational discipline"),
+        ChecklistItem("item:A.7.13:reg_provider",     "Per-event provider (from authorised list)",                                                                                                      "must", False, "27002:7.13 — authorised"),
+        ChecklistItem("item:A.7.13:reg_supervision_outcome","Per-event supervision outcome (in-house supervised / unsupervised-with-justification / pre-cleared provider)",                              "must", False, "27002:7.13 — confidentiality"),
+        ChecklistItem("item:A.7.13:reg_post_verify",  "Per-event post-verification result (passed / failed-with-action)",                                                                                "must", False, "27002:7.13 — integrity"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.13:predictive_maint","Predictive maintenance based on monitoring data", "should", False, "Modern practice"),
-        ChecklistItem("item:A.7.13:provider_criteria","Provider selection criteria documented", "should", False, "Supply chain hygiene"),
+        ChecklistItem("item:A.7.13:reg_offsite_chain","Per-event offsite-maintenance chain-of-custody where applicable",                                                                                "should", False, "Cross-leaf coherence"),
     ],
 )
 
-REQ_A714_SECURE_DISPOSAL = EvidenceRequirement(
+REQ_A713_APPLICABLE_EQUIPMENT_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.13:applicable_equipment_scope",
+    control_ref   = "A.7.13",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Equipment Maintenance Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which equipment classes require what maintenance cadence and what supervision level",
+    must_contain  = [
+        ChecklistItem("item:A.7.13:scope_classes",   "Equipment classes (drawn from A.7.8 + A.5.9 — servers, network gear, UPS/generator, HVAC, recording devices)",                                  "must", False, "27002:7.13 — equipment"),
+        ChecklistItem("item:A.7.13:scope_cadence_per_class","Cadence per class (vendor-recommended + risk-adjusted)",                                                                                  "must", False, "27002:7.13 — maintained correctly"),
+        ChecklistItem("item:A.7.13:scope_supervision_threshold","Supervision threshold (which equipment classes require in-house supervision during maintenance — typically anything carrying classified data)","must", False, "27002:7.13 — confidentiality"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.13:scope_change_drivers","Trigger list for re-scoping (new equipment class, refreshed hardware)",                                                                      "should", False, "Currency"),
+    ],
+)
+
+REQ_A713_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.13:maintenance_program_review",
+    control_ref     = "A.7.13",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Maintenance Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification of cadence compliance, provider performance, post-verification effectiveness. Freshness=365",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.13:rev_date",        "Review date within the planned interval",                                                                                                        "must", False, "27002:7.13 — periodic"),
+        ChecklistItem("item:A.7.13:rev_reviewer",    "Reviewer identity (Facilities + IT + InfoSec)",                                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.7.13:rev_cadence_compliance","Cadence compliance per equipment class (% of due-maintenance actually completed in period)",                                                  "must", False, "27002:7.13 — maintained"),
+        ChecklistItem("item:A.7.13:rev_provider_performance","Provider performance review (SLA met / breaches / incident link)",                                                                        "must", False, "Supply chain hygiene"),
+        ChecklistItem("item:A.7.13:rev_register_update","Changes propagated to the procedure / scope",                                                                                                  "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.13:rev_next_date",   "Next planned review date stated",                                                                                                                "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.14 Secure disposal — op_process 4-leaf with disposal-record lifecycle-end
+#     (batch 22 2026-06-01). Parallel to A.5.28 evidence-disposal pattern. ────
+REQ_A714_SECURE_DISPOSAL_PROCEDURE = EvidenceRequirement(
     id            = "req:A.7.14:secure_disposal_procedure",
     control_ref   = "A.7.14",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Secure Disposal and Re-Use of Equipment Procedure",
     trigger_type  = "universal",
-    description   = "A.7.14 requires equipment containing storage media to be verified for data and licensed-software removal before disposal or re-use. Evidence is a disposal procedure covering verification, certificates, chain of custody, and approved providers",
+    description   = "A.7.14 requires equipment containing storage media to be verified for data and licensed-software removal before disposal or re-use. The procedure documents verification methods, certificates, chain of custody, approved providers, destruction method per class. The disposal scope + disposal-record register (lifecycle-end) + periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.7.14:scope",            "Scope (all equipment containing any form of storage media)", "must", False, "A.7.14 — equipment containing storage media"),
-        ChecklistItem("item:A.7.14:verification",     "Verification of data removal (overwrite, degauss, physical destruction) per classification", "must", False, "A.7.14 — sensitive data has been removed or securely overwritten"),
-        ChecklistItem("item:A.7.14:software_removal", "Licensed software removal step before disposal or re-use", "must", False, "A.7.14 — licensed software has been removed"),
-        ChecklistItem("item:A.7.14:certificate",      "Certificate of destruction obtained where applicable", "must", False, "Auditability"),
-        ChecklistItem("item:A.7.14:chain_of_custody", "Chain of custody from collection to disposal", "must", False, "A.7.14 — securely"),
-        ChecklistItem("item:A.7.14:approved_providers","Approved disposal providers list with security expectations", "must", False, "A.7.14 — securely"),
+        ChecklistItem("item:A.7.14:scope",             "Scope (all equipment containing any form of storage media — laptops, servers, phones, printers/MFDs with storage, network gear)",            "must", False, "27002:7.14 — equipment containing storage media"),
+        ChecklistItem("item:A.7.14:verification",      "Verification of data removal method per classification (overwrite, degauss, physical destruction)",                                            "must", False, "27002:7.14 — securely overwritten"),
+        ChecklistItem("item:A.7.14:software_removal",  "Licensed software removal step before disposal or re-use",                                                                                      "must", False, "27002:7.14 — licensed software removed"),
+        ChecklistItem("item:A.7.14:certificate",       "Certificate of destruction obtained where applicable",                                                                                          "must", False, "Auditability"),
+        ChecklistItem("item:A.7.14:chain_of_custody",  "Chain of custody from collection to disposal",                                                                                                  "must", False, "27002:7.14 — securely"),
+        ChecklistItem("item:A.7.14:approved_providers","Approved disposal providers list with security expectations",                                                                                  "must", False, "27002:7.14 — securely"),
+        ChecklistItem("item:A.7.14:destruction_method","Destruction method matched to data classification (shred/melt/degauss for highest)",                                                            "must", False, "Proportionality"),
     ],
     should_contain= [
-        ChecklistItem("item:A.7.14:destruction_method","Destruction method matched to data classification (shred/melt/degauss for highest)", "should", False, "Proportionality"),
-        ChecklistItem("item:A.7.14:internal_vs_external","Decision criteria for in-house vs external disposal", "should", False, "Operational pragmatism"),
+        ChecklistItem("item:A.7.14:internal_vs_external","Decision criteria for in-house vs external disposal",                                                                                          "should", False, "Operational pragmatism"),
+    ],
+)
+
+REQ_A714_DISPOSAL_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.14:disposal_scope",
+    control_ref   = "A.7.14",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Equipment Disposal Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — equipment classes in scope, disposal triggers, exclusions",
+    must_contain  = [
+        ChecklistItem("item:A.7.14:scope_classes",   "Equipment classes in scope (anything with storage — explicit list)",                                                                              "must", False, "27002:7.14 — equipment containing storage media"),
+        ChecklistItem("item:A.7.14:scope_triggers",  "Disposal triggers (end-of-life, replacement, return-from-lease, sale, donation, scrap)",                                                          "must", False, "27002:7.14 — disposal or re-use"),
+        ChecklistItem("item:A.7.14:scope_destinations","Destination scenarios (recycler / charity donation / re-sale / internal re-use / certified destruction)",                                      "must", False, "27002:7.14 — appropriate handling"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.14:scope_change_drivers","Trigger list for re-scoping (new equipment class entering EOL, regulatory change on disposal)",                                                "should", False, "Currency"),
+    ],
+)
+
+REQ_A714_DISPOSAL_RECORD = EvidenceRequirement(
+    id            = "req:A.7.14:disposal_record",
+    control_ref   = "A.7.14",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Per-Equipment Disposal Record",
+    trigger_type  = "universal",
+    description   = "Lifecycle-end variant — one record per piece of equipment disposed of. Proves the chain-of-custody from collection through to destruction-or-handover. Parallel to A.5.28 evidence-disposal pattern",
+    must_contain  = [
+        ChecklistItem("item:A.7.14:disp_equipment_id","Per-record equipment identifier (cross-link to A.5.9 asset register, retired entry)",                                                            "must", False, "27002:7.14 — traceability"),
+        ChecklistItem("item:A.7.14:disp_trigger",    "Per-record disposal trigger",                                                                                                                    "must", False, "27002:7.14 — disposal"),
+        ChecklistItem("item:A.7.14:disp_method",     "Per-record method actually used (overwrite tool + verification, degauss, physical destruction with witness)",                                    "must", False, "27002:7.14 — secure removal"),
+        ChecklistItem("item:A.7.14:disp_authoriser", "Per-record authoriser",                                                                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.7.14:disp_destination","Per-record destination (which approved provider OR internal-witness destruction)",                                                                "must", False, "27002:7.14 — securely"),
+        ChecklistItem("item:A.7.14:disp_certificate","Per-record certificate of destruction (where externally destroyed) or witness signature (where internally destroyed)",                              "must", False, "Auditability"),
+        ChecklistItem("item:A.7.14:disp_software_step","Per-record software-removal step evidence (license-key handoff or wipe)",                                                                        "must", False, "27002:7.14 — licensed software"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.14:disp_re_use_status","Per-record re-use status where the equipment goes to internal re-use (new owner + re-provisioned configuration link)",                          "should", False, "Re-use case"),
+    ],
+)
+
+REQ_A714_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.7.14:disposal_program_review",
+    control_ref     = "A.7.14",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Disposal Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification of disposal-record completeness, certificate retention, provider performance. Freshness=365",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.7.14:rev_date",        "Review date within the planned interval",                                                                                                        "must", False, "27002:7.14 — periodic"),
+        ChecklistItem("item:A.7.14:rev_reviewer",    "Reviewer identity (IT + InfoSec + Legal where regulatory disposal applies)",                                                                      "must", False, "Accountability"),
+        ChecklistItem("item:A.7.14:rev_completeness","Completeness check — every retired asset (from A.5.9) has a matching disposal_record",                                                            "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.7.14:rev_certificate_audit","Certificate audit (sample-based verification that retained certificates match register entries)",                                            "must", False, "Auditability"),
+        ChecklistItem("item:A.7.14:rev_register_update","Changes propagated to the procedure / scope",                                                                                                  "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.7.14:rev_next_date",   "Next planned review date stated",                                                                                                                "should", False, "Planning"),
     ],
 )
 
@@ -8176,20 +9040,77 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
 
     # Universal — ISO 27001 Annex A.7 Physical Controls bulk curation
     # (Phase B, 2026-05-22). All 14 A.7 controls were uncurated prior.
+    # A.7 Physical Controls 14-pack — 4-leaf promotions (batch 22, 2026-06-01)
+    # A.7.1 — policy_program
     REQ_A71_PHYSICAL_PERIMETERS,
-    REQ_A72_PHYSICAL_ENTRY,
-    REQ_A73_OFFICES_ROOMS,
-    REQ_A74_PHYSICAL_MONITORING,
-    REQ_A75_ENVIRONMENTAL_THREATS,
-    REQ_A76_WORKING_IN_SECURE_AREAS,
-    REQ_A77_CLEAR_DESK_SCREEN,
-    REQ_A78_EQUIPMENT_SITING,
-    REQ_A79_OFF_PREMISES,
-    REQ_A710_STORAGE_MEDIA,
-    REQ_A711_SUPPORTING_UTILITIES,
-    REQ_A712_CABLING_SECURITY,
-    REQ_A713_EQUIPMENT_MAINTENANCE,
-    REQ_A714_SECURE_DISPOSAL,
+    REQ_A71_PERIMETER_REGISTER,
+    REQ_A71_APPLICABLE_SITES_SCOPE,
+    REQ_A71_PROGRAM_REVIEW,
+    # A.7.2 — op_process
+    REQ_A72_PHYSICAL_ENTRY_PROCEDURE,
+    REQ_A72_ENTRY_REGISTER,
+    REQ_A72_APPLICABLE_AREAS_SCOPE,
+    REQ_A72_PROGRAM_REVIEW,
+    # A.7.3 — op_process
+    REQ_A73_OFFICES_ROOMS_PROCEDURE,
+    REQ_A73_ROOM_REGISTER,
+    REQ_A73_APPLICABLE_ROOMS_SCOPE,
+    REQ_A73_PROGRAM_REVIEW,
+    # A.7.4 — op_process
+    REQ_A74_PHYSICAL_MONITORING_PROCEDURE,
+    REQ_A74_EVENT_REGISTER,
+    REQ_A74_MONITORING_SCOPE,
+    REQ_A74_PROGRAM_REVIEW,
+    # A.7.5 — op_process
+    REQ_A75_ENVIRONMENTAL_THREATS_PROCEDURE,
+    REQ_A75_THREAT_REGISTER,
+    REQ_A75_APPLICABLE_SITES_SCOPE,
+    REQ_A75_PROGRAM_REVIEW,
+    # A.7.6 — op_process
+    REQ_A76_WORKING_IN_SECURE_AREAS_PROCEDURE,
+    REQ_A76_WORK_SESSION_REGISTER,
+    REQ_A76_APPLICABLE_AREAS_SCOPE,
+    REQ_A76_PROGRAM_REVIEW,
+    # A.7.7 — policy_program
+    REQ_A77_CLEAR_DESK_SCREEN_POLICY,
+    REQ_A77_AUDIT_REGISTER,
+    REQ_A77_APPLICABLE_LOCATIONS_SCOPE,
+    REQ_A77_PROGRAM_REVIEW,
+    # A.7.8 — op_process
+    REQ_A78_EQUIPMENT_SITING_PROCEDURE,
+    REQ_A78_EQUIPMENT_REGISTER,
+    REQ_A78_APPLICABLE_EQUIPMENT_SCOPE,
+    REQ_A78_PROGRAM_REVIEW,
+    # A.7.9 — policy_program
+    REQ_A79_OFF_PREMISES_POLICY,
+    REQ_A79_OFF_PREMISES_REGISTER,
+    REQ_A79_APPLICABLE_CLASSES_SCOPE,
+    REQ_A79_PROGRAM_REVIEW,
+    # A.7.10 — op_process
+    REQ_A710_STORAGE_MEDIA_PROCEDURE,
+    REQ_A710_MEDIA_REGISTER,
+    REQ_A710_APPLICABLE_MEDIA_SCOPE,
+    REQ_A710_PROGRAM_REVIEW,
+    # A.7.11 — op_process
+    REQ_A711_SUPPORTING_UTILITIES_PROCEDURE,
+    REQ_A711_UTILITY_REGISTER,
+    REQ_A711_APPLICABLE_SITES_SCOPE,
+    REQ_A711_PROGRAM_REVIEW,
+    # A.7.12 — op_process
+    REQ_A712_CABLING_SECURITY_PROCEDURE,
+    REQ_A712_CABLING_REGISTER,
+    REQ_A712_APPLICABLE_RUNS_SCOPE,
+    REQ_A712_PROGRAM_REVIEW,
+    # A.7.13 — op_process
+    REQ_A713_EQUIPMENT_MAINTENANCE_PROCEDURE,
+    REQ_A713_MAINTENANCE_REGISTER,
+    REQ_A713_APPLICABLE_EQUIPMENT_SCOPE,
+    REQ_A713_PROGRAM_REVIEW,
+    # A.7.14 — op_process with disposal_record lifecycle-end
+    REQ_A714_SECURE_DISPOSAL_PROCEDURE,
+    REQ_A714_DISPOSAL_SCOPE,
+    REQ_A714_DISPOSAL_RECORD,
+    REQ_A714_PROGRAM_REVIEW,
 
     # Universal — ISO 27001 Annex A.8 Technological Controls bulk curation
     # (Phase B, 2026-05-22). A.8.11 / A.8.24 / A.8.25 already exist further

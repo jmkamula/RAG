@@ -1533,6 +1533,175 @@ EVAL_CASES = [
     # enforced via authn_link (A.5.16) and identity_link (A.5.17) MUSTs.
     # MFA promoted SHOULD → MUST (modern baseline, no longer optional).
 
+    # ── Phase B A.7 Physical Controls 14-pack (commit 2026-06-01) ──
+    # Twenty-second Phase B bulk batch (FOURTEEN controls): all of A.7.1 through
+    # A.7.14 promoted to 4-leaf — LARGEST batch yet (previous: A.6 7-pack). 56
+    # new evidence requirements. Closes the A.7 Physical Controls block.
+    #
+    # Spine mix: 11×op_process + 3×policy_program (A.7.1 perimeter, A.7.7 clear
+    # desk, A.7.9 off-premises). A.7.14 uses op_process with disposal_record
+    # lifecycle-end (parallel to A.5.28 evidence-disposal pattern).
+    #
+    # Live postures: 8 of 14 N/A (Arion is cloud-only, no physical premises
+    # beyond office). 4 Comply (A.7.7, A.7.10, A.7.13, A.7.14). 2 missing rows
+    # (A.7.9 + A.7.12). All 14 engine verdicts: NC 0/4. All 14 surface in
+    # Stage-2 (engine NC differs from live N/A AND from live Comply — no
+    # agreement suppression). No DerivedSpec refs to A.7.x items — clean.
+
+    EvalCase(
+        id=99,
+        query="pending engine verdict for A.7.1",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "physical_perimeters"],
+        expected_refs=["A.7.1"], expected_type="posture_check",
+        must_contain=["A.7.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.1 (Physical perimeters) — policy_program 4-leaf: physical_security_perimeters policy + perimeter_register + applicable_sites_scope + program_review (365d). Live N/A → engine NC 0/4. FIRST control of A.7 14-pack (batch 22).",
+    ),
+
+    EvalCase(
+        id=98,
+        query="pending engine verdict for A.7.2",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "physical_entry"],
+        expected_refs=["A.7.2"], expected_type="posture_check",
+        must_contain=["A.7.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.2 (Physical entry) — op_process 4-leaf: physical_entry_procedure + entry_event_register + applicable_areas_scope + program_review (365d). Live N/A → engine NC 0/4.",
+    ),
+
+    EvalCase(
+        id=97,
+        query="pending engine verdict for A.7.3",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "offices_rooms"],
+        expected_refs=["A.7.3"], expected_type="posture_check",
+        must_contain=["A.7.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.3 (Offices/rooms/facilities) — op_process 4-leaf: offices_rooms_facilities_procedure + room_register + applicable_rooms_scope + program_review (365d). Live N/A → engine NC 0/4.",
+    ),
+
+    EvalCase(
+        id=96,
+        query="pending engine verdict for A.7.4",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "physical_monitoring"],
+        expected_refs=["A.7.4"], expected_type="posture_check",
+        must_contain=["A.7.4", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.4 (Physical security monitoring) — op_process 4-leaf: physical_security_monitoring + monitoring_event_register + monitoring_scope + program_review (365d). SIEM integration MUST cross-links to A.5.26 incident response. Live N/A → engine NC 0/4.",
+    ),
+
+    EvalCase(
+        id=95,
+        query="pending engine verdict for A.7.5",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "environmental_threats"],
+        expected_refs=["A.7.5"], expected_type="posture_check",
+        must_contain=["A.7.5", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.5 (Environmental threats) — op_process 4-leaf: environmental_threats_procedure + threat_register + applicable_sites_scope + program_review (365d). BCP integration MUST cross-links to A.5.29/A.5.30. Live N/A → engine NC 0/4.",
+    ),
+
+    EvalCase(
+        id=94,
+        query="pending engine verdict for A.7.6",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "secure_areas"],
+        expected_refs=["A.7.6"], expected_type="posture_check",
+        must_contain=["A.7.6", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.6 (Working in secure areas) — op_process 4-leaf: working_in_secure_areas_procedure + work_session_register + applicable_areas_scope + program_review (365d). Live N/A → engine NC 0/4.",
+    ),
+
+    EvalCase(
+        id=93,
+        query="pending engine verdict for A.7.7",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "clear_desk_screen"],
+        expected_refs=["A.7.7"], expected_type="posture_check",
+        must_contain=["A.7.7", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.7 (Clear desk / clear screen) — policy_program 4-leaf: clear_desk_clear_screen_policy + cd_cs_audit_register + applicable_locations_scope + program_review (365d). Live Comply → engine NC 0/4 (no partial-evidence — A.7 controls have no rich Arion uploads beyond hand-entered findings).",
+    ),
+
+    EvalCase(
+        id=92,
+        query="pending engine verdict for A.7.8",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "equipment_siting"],
+        expected_refs=["A.7.8"], expected_type="posture_check",
+        must_contain=["A.7.8", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.8 (Equipment siting) — op_process 4-leaf: equipment_siting_procedure + siting_register + applicable_equipment_scope + program_review (365d). Live N/A → engine NC 0/4.",
+    ),
+
+    EvalCase(
+        id=91,
+        query="pending engine verdict for A.7.9",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "off_premises"],
+        expected_refs=["A.7.9"], expected_type="posture_check",
+        must_contain=["A.7.9", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.9 (Off-premises assets) — policy_program 4-leaf: off_premises_assets_policy + off_premises_register + applicable_classes_scope + program_review (365d). Cross-link to A.6.7 remote-working. No posture row pre-batch → engine NC 0/4.",
+    ),
+
+    EvalCase(
+        id=90,
+        query="pending engine verdict for A.7.10",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "storage_media"],
+        expected_refs=["A.7.10"], expected_type="posture_check",
+        must_contain=["A.7.10", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.10 (Storage media lifecycle) — op_process 4-leaf: storage_media_procedure + media_register + applicable_media_scope + program_review (365d). Live Comply → engine NC 0/4.",
+    ),
+
+    EvalCase(
+        id=89,
+        query="pending engine verdict for A.7.11",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "supporting_utilities"],
+        expected_refs=["A.7.11"], expected_type="posture_check",
+        must_contain=["A.7.11", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.11 (Supporting utilities) — op_process 4-leaf: supporting_utilities_procedure + utility_register + applicable_sites_scope + program_review (365d). BCP integration MUST cross-links to A.5.29/A.5.30. Live N/A → engine NC 0/4.",
+    ),
+
+    EvalCase(
+        id=88,
+        query="pending engine verdict for A.7.12",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "cabling_security"],
+        expected_refs=["A.7.12"], expected_type="posture_check",
+        must_contain=["A.7.12", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.12 (Cabling security) — op_process 4-leaf: cabling_security_procedure + cabling_register + applicable_runs_scope + program_review (365d). No posture row pre-batch → engine NC 0/4.",
+    ),
+
+    EvalCase(
+        id=87,
+        query="pending engine verdict for A.7.13",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "equipment_maintenance"],
+        expected_refs=["A.7.13"], expected_type="posture_check",
+        must_contain=["A.7.13", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.13 (Equipment maintenance) — op_process 4-leaf: equipment_maintenance_procedure (freshness 365d) + maintenance_event_register + applicable_equipment_scope + program_review (365d). Live Comply → engine NC 0/4.",
+    ),
+
+    EvalCase(
+        id=86,
+        query="pending engine verdict for A.7.14",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "secure_disposal", "lifecycle_end"],
+        expected_refs=["A.7.14"], expected_type="posture_check",
+        must_contain=["A.7.14", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.7.14 (Secure disposal) — op_process 4-leaf with disposal_record lifecycle-end: secure_disposal_procedure + disposal_scope + disposal_record (per-equipment) + program_review (365d). Parallel to A.5.28 evidence-disposal pattern. Live Comply → engine NC 0/4.",
+    ),
+
     # ── Phase B A.6 People Controls 7-pack (commit 2026-06-01) ──
     # Twenty-first Phase B bulk batch (seven controls): A.6.1 + A.6.2 + A.6.3
     # + A.6.4 + A.6.5 + A.6.6 + A.6.8 all promoted to 4-leaf. LARGEST MULTI-
