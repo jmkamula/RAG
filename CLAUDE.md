@@ -155,7 +155,7 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260601_0907_b20.csv (78 cases — 21 core + 18
+- Most recent: results/eval_20260601_0951_b21.csv (85 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
   5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
@@ -166,9 +166,10 @@ with d.session() as s:
   + 1 Phase B op_process disruption-security + 1 Phase B op_process ICT-readiness
   + 1 Phase B records_program records-protection
   + 1 Phase B records_program PII-protection
-  + 3 Phase B A.5.3x close-out 3-pack records_program)
-- Score: 77/78 PASS, 0 WARN, 1 FAIL on 2026-06-01 (clean upper bound; only #25 known-stale).
-  Some runs may dip to 65/78 or 66/78 due to #24
+  + 3 Phase B A.5.3x close-out 3-pack records_program
+  + 7 Phase B A.6 People Controls 7-pack)
+- Score: 83/85 PASS, 0 WARN, 2 FAIL on 2026-06-01 (#3 stochastic + #25 known-stale).
+  Clean-run upper bound 84/85. Some runs may dip to 71/85 or 72/85 due to #24
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -291,6 +292,18 @@ with d.session() as s:
   proc_pii_overlay SHOULD encodes the ISO × GDPR Art.5.1.e
   integration at spec level — third ISO × GDPR integration leaf
   after pii_overlay on A.5.13 + legal_jurisdiction on A.5.14)
+- Cases 79-85 lock in: Phase B A.6 People Controls 7-pack (batch 21,
+  2026-06-01; LARGEST MULTI-CONTROL BATCH YET — 7 controls × 4 leaves
+  = 28 new evidence requirements; closes A.6 block, A.6.7 was already
+  curated). Spine mix: A.6.1/3/4/5/8 = op_process (procedure-as-
+  primary); A.6.2/6 = records_program (template-as-primary). All 7
+  engine verdicts NC 0/4; live postures 6×Comply + 1×OFI (A.6.4) all
+  flip to engine-proposed NC in Stage-2. No DerivedSpec refs to A.6.x
+  items so item-id preservation trivial. Cross-control links: A.6.5
+  is the contractual layer above operational A.5.11/A.5.16/A.5.17/
+  A.5.18 offboarding; A.6.8 → A.5.25 triage handoff; A.6.2 + A.6.6
+  together form personnel info-security contract package; A.6.4
+  cross-links to A.5.36 nonconformity register
 - A.5.18 Style v2 alignment (2026-06-01, batch 20 — closes A.5 arc):
   NOT a promotion (A.5.18 was already 4-leaf op_process from 2026-05-26,
   predates Phase B numbered batches). Brings A.5.18 up to A.5.16/A.5.17

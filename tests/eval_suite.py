@@ -1533,6 +1533,188 @@ EVAL_CASES = [
     # enforced via authn_link (A.5.16) and identity_link (A.5.17) MUSTs.
     # MFA promoted SHOULD → MUST (modern baseline, no longer optional).
 
+    # ── Phase B A.6 People Controls 7-pack (commit 2026-06-01) ──
+    # Twenty-first Phase B bulk batch (seven controls): A.6.1 + A.6.2 + A.6.3
+    # + A.6.4 + A.6.5 + A.6.6 + A.6.8 all promoted to 4-leaf. LARGEST MULTI-
+    # CONTROL BATCH YET (previous record: batch 3 with 5 controls). Closes
+    # the A.6 People Controls block — A.6.7 was already curated as
+    # REQ_REMOTE_WORKING (profile_fact triggered).
+    #
+    # Spine mix:
+    #   A.6.1  op_process — screening_procedure + record_register + roles_scope + program_review
+    #   A.6.2  records_program template-as-primary — terms_template + signed_register + workers_scope + template_review
+    #   A.6.3  op_process programme-as-primary — awareness_programme + completion_register + audience_scope + programme_review
+    #   A.6.4  op_process — disciplinary_process + case_register + jurisdictions_scope + process_review
+    #   A.6.5  op_process — post_employment_procedure + leaver_briefing_register + obligations_scope + program_review
+    #   A.6.6  records_program template-as-primary — nda_template + signature_register + parties_scope + template_review
+    #   A.6.8  op_process — event_reporting_procedure + report_register + audience_scope + program_review
+    #
+    # All 7 engine verdicts: NC 0/4 children satisfied. Live postures: A.6.4
+    # = OFI; rest = Comply (with various hand-entered findings). All 7 flip
+    # to engine-proposed NC in Stage-2 (no engine-agreement suppression).
+    # No DerivedSpec references to A.6.x items — clean item-id preservation.
+
+    EvalCase(
+        id=85,
+        query="pending engine verdict for A.6.8",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "event_reporting"],
+        expected_refs=["A.6.8"],
+        expected_type="posture_check",
+        must_contain=["A.6.8", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes=(
+            "Locks A.6.8 (Event reporting) Phase B promotion to op_process "
+            "4-leaf: event_reporting_procedure (preserves prior single-leaf "
+            "id) + event_report_register (per-event submission tracker) + "
+            "reporting_audience_scope (who can report) + reporting_"
+            "program_review (freshness 365d). Live posture flips from "
+            "Comply (hand-entered 'simple and accessible reporting "
+            "process via email, Teams, and phone...') to engine-proposed "
+            "NC at 0/4. Cross-control: handoff to A.5.25 triage on every "
+            "report (closes the reporting → triage → incident pipeline)."
+        ),
+    ),
+
+    EvalCase(
+        id=84,
+        query="pending engine verdict for A.6.6",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "nda"],
+        expected_refs=["A.6.6"],
+        expected_type="posture_check",
+        must_contain=["A.6.6", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes=(
+            "Locks A.6.6 (NDA) Phase B promotion to records_program 4-leaf "
+            "template-as-primary variant (like A.6.2): nda_template "
+            "(preserves prior single-leaf id, freshness 365d) + "
+            "nda_signature_register (per-signatory tracking) + "
+            "applicable_parties_scope (which parties need NDA before "
+            "access) + nda_template_review (annual review of template "
+            "vs current classification scheme + jurisdictional "
+            "enforceability). Live posture flips Comply → engine NC 0/4."
+        ),
+    ),
+
+    EvalCase(
+        id=83,
+        query="pending engine verdict for A.6.5",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "post_employment"],
+        expected_refs=["A.6.5"],
+        expected_type="posture_check",
+        must_contain=["A.6.5", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes=(
+            "Locks A.6.5 (Post-employment) Phase B promotion to op_process "
+            "4-leaf: post_employment_responsibilities (preserves prior "
+            "single-leaf id; contractual/HR layer) + leaver_briefing_"
+            "register (per-leaver exit-briefing record with signed "
+            "acknowledgment of surviving obligations) + surviving_"
+            "obligations_scope (which obligations apply to which roles "
+            "per jurisdictional enforceability caps) + post_employment_"
+            "program_review (freshness 365d). Cross-control: A.6.5 is the "
+            "contractual layer above the operational A.5.11 (return of "
+            "assets) + A.5.16 (identity revocation) + A.5.17 (credential "
+            "revocation) + A.5.18 (access revocation). Live posture "
+            "flips Comply → engine NC 0/4."
+        ),
+    ),
+
+    EvalCase(
+        id=82,
+        query="pending engine verdict for A.6.4",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "disciplinary"],
+        expected_refs=["A.6.4"],
+        expected_type="posture_check",
+        must_contain=["A.6.4", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes=(
+            "Locks A.6.4 (Disciplinary process) Phase B promotion to "
+            "op_process 4-leaf: disciplinary_process (preserves prior "
+            "single-leaf id) + disciplinary_case_register (per-case "
+            "tracker with investigation outcome + action taken) + "
+            "applicable_jurisdictions_scope (employment-law variants "
+            "drive process step variations — at-will US vs just-cause EU "
+            "vs notice-period UK) + disciplinary_process_review "
+            "(freshness 365d; consistency analysis flags discriminatory "
+            "patterns). Live posture flips OFI → engine NC 0/4. (Only "
+            "A.6.x control with live OFI vs other 6 Comply — but engine "
+            "still surfaces NC because OFI != NC.)"
+        ),
+    ),
+
+    EvalCase(
+        id=81,
+        query="pending engine verdict for A.6.3",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "awareness"],
+        expected_refs=["A.6.3"],
+        expected_type="posture_check",
+        must_contain=["A.6.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes=(
+            "Locks A.6.3 (Security awareness) Phase B promotion to "
+            "op_process 4-leaf programme-as-primary variant: security_"
+            "awareness_programme (preserves prior single-leaf id, "
+            "freshness 365d) + training_completion_register (per-person "
+            "training record with score + next-due) + audience_curriculum_"
+            "scope (role-to-module matrix) + awareness_programme_review "
+            "(freshness 365d; effectiveness analysis with phishing-"
+            "simulation + reporting-rate trend). Live posture flips "
+            "Comply → engine NC 0/4."
+        ),
+    ),
+
+    EvalCase(
+        id=80,
+        query="pending engine verdict for A.6.2",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "employment_terms"],
+        expected_refs=["A.6.2"],
+        expected_type="posture_check",
+        must_contain=["A.6.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes=(
+            "Locks A.6.2 (Employment terms) Phase B promotion to "
+            "records_program 4-leaf template-as-primary variant: "
+            "employment_terms_template (preserves prior single-leaf id; "
+            "the standard contract clause set) + signed_terms_register "
+            "(per-employee signed-version tracker with current-version "
+            "check flag) + applicable_workers_scope (which categories "
+            "use which template variant) + terms_template_review "
+            "(freshness 365d; policy-drift + legal-drift checks). Live "
+            "posture flips Comply → engine NC 0/4. Cross-control: "
+            "A.6.2 + A.6.6 NDA together form the personnel info-"
+            "security contract package."
+        ),
+    ),
+
+    EvalCase(
+        id=79,
+        query="pending engine verdict for A.6.1",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "screening"],
+        expected_refs=["A.6.1"],
+        expected_type="posture_check",
+        must_contain=["A.6.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes=(
+            "Locks A.6.1 (Screening) Phase B promotion to op_process "
+            "4-leaf: screening_procedure (preserves prior single-leaf "
+            "id) + screening_record_register (per-candidate screening "
+            "event tracker with outcome + decision-date proving "
+            "screening completed BEFORE access granted per A.5.18) + "
+            "applicable_roles_scope (role-tier → check-matrix; "
+            "jurisdictional limits where some checks unavailable) + "
+            "screening_program_review (freshness 365d). Live posture "
+            "flips Comply → engine NC 0/4. FIRST control of the "
+            "A.6 People Controls 7-pack (batch 21)."
+        ),
+    ),
+
     # ── Phase B A.5.3x close-out 3-pack (commit 2026-06-01) ──
     # Nineteenth Phase B bulk batch (three-control): A.5.35 + A.5.36 + A.5.37
     # promoted to 4-leaf — closes the A.5.3x review/procedure block. First

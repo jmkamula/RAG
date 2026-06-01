@@ -4630,71 +4630,300 @@ REQ_A537_PROGRAM_REVIEW = EvidenceRequirement(
 # A.6.7 (Remote Working Policy) already exists as REQ_REMOTE_WORKING further
 # up in the file. The 7 entries below cover the rest of Annex A.6.
 
-REQ_A61_SCREENING = EvidenceRequirement(
+# ── Annex A.6.1 — Screening — op_process spine (4-leaf) ───────────────────────
+# Promoted 2026-06-01 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. Phase B batch 21 — A.6 People Controls
+# 7-pack. Spine: operational_process → procedure + register + scope + review.
+# All 6 original MUST ids preserved. Cross-control: A.5.18 access rights
+# linkage (rescreen-triggers when access escalates); A.5.31 legal register
+# (jurisdiction-dependent check legality); A.6.5 post-employment (HR
+# offboarding integration).
+# Authority: ISO 27002:2022 § 6.1 implementation guidance items a-c.
+
+REQ_A61_SCREENING_PROCEDURE = EvidenceRequirement(
     id            = "req:A.6.1:screening_procedure",
     control_ref   = "A.6.1",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Personnel Screening Procedure",
     trigger_type  = "universal",
-    description   = "A.6.1 requires background verification checks on candidates and ongoing checks proportional to role risk. Evidence is a screening procedure covering scope, timing, proportionality, and legal considerations",
+    description   = "A.6.1 requires background verification checks on candidates and ongoing checks proportional to role risk. The procedure documents the check types, timing, proportionality, legal considerations, decision authority, retention rules, and re-screening triggers. The screening record register, applicable-roles scope and periodic program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.6.1:check_types",      "Types of checks defined (identity, employment history, education, criminal record where lawful, financial where role-relevant)", "must", False, "A.6.1 — background verification checks"),
-        ChecklistItem("item:A.6.1:timing",           "Timing — pre-joining checks plus ongoing checks where applicable", "must", False, "A.6.1 — prior to joining the organization and on an ongoing basis"),
-        ChecklistItem("item:A.6.1:proportionality", "Proportionality stated by role, information classification accessed, and perceived risk", "must", False, "A.6.1 — proportional to business requirements, classification of information, perceived risks"),
-        ChecklistItem("item:A.6.1:legal_consideration","Legal, regulatory, and ethical constraints applied per jurisdiction", "must", False, "A.6.1 — applicable laws, regulations and ethics"),
-        ChecklistItem("item:A.6.1:decision_authority","Decision authority named (who accepts or rejects screening outcomes)", "must", False, "Accountability"),
-        ChecklistItem("item:A.6.1:retention",        "Retention rules for screening results (often short retention for negative results)", "must", False, "A.6.1 — applicable laws"),
+        ChecklistItem("item:A.6.1:check_types",       "Types of checks defined (identity, employment history, education, criminal record where lawful, financial where role-relevant, sanctions/PEP for finance-sector roles)",                                "must", False, "27002:6.1a — background verification checks"),
+        ChecklistItem("item:A.6.1:timing",            "Timing — pre-joining checks plus ongoing checks where applicable (recurring re-check cadence for high-trust roles)",                                                                                  "must", False, "27002:6.1a — prior to joining + ongoing"),
+        ChecklistItem("item:A.6.1:proportionality",   "Proportionality stated by role, information classification accessed, and perceived risk (junior office role vs admin vs CISO — different check depth)",                                                "must", False, "27002:6.1a — proportional"),
+        ChecklistItem("item:A.6.1:legal_consideration","Legal, regulatory, and ethical constraints applied per jurisdiction (some checks unlawful or restricted in EU/UK; consent + transparency obligations under GDPR)",                                  "must", False, "27002:6.1 — applicable laws, regulations and ethics"),
+        ChecklistItem("item:A.6.1:decision_authority","Decision authority named (who accepts or rejects screening outcomes — typically Hiring Manager + HR + InfoSec for sensitive roles)",                                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.6.1:retention",         "Retention rules for screening results (often short retention for negative results to comply with GDPR; longer where law mandates — financial roles)",                                                  "must", False, "27002:6.1 — applicable laws"),
+        ChecklistItem("item:A.6.1:owner",             "Named owner of the screening procedure (HR + InfoSec jointly; HR runs operationally, InfoSec sets risk-tier criteria)",                                                                                "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.6.1:rescreen_triggers","Re-screening triggers (significant role change, escalated access)", "should", False, "Ongoing relevance"),
-        ChecklistItem("item:A.6.1:third_party_use", "Third-party screening provider contracts and oversight", "should", False, "Common pattern"),
+        ChecklistItem("item:A.6.1:rescreen_triggers", "Re-screening triggers (significant role change, escalated access from A.5.18, security incident involving the individual)",                                                                            "should", False, "Ongoing relevance"),
+        ChecklistItem("item:A.6.1:third_party_use",   "Third-party screening provider contracts and oversight (where used — supplier-management linkage to A.5.19)",                                                                                          "should", False, "Common pattern"),
     ],
 )
 
-REQ_A62_EMPLOYMENT_TERMS = EvidenceRequirement(
+REQ_A61_SCREENING_REGISTER = EvidenceRequirement(
+    id            = "req:A.6.1:screening_record_register",
+    control_ref   = "A.6.1",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Per-Candidate Screening Record Register",
+    trigger_type  = "universal",
+    description   = "The operational catalogue of screening events. Every candidate / new hire / re-screened employee has a row: candidate identifier, role tier, checks performed, outcome, decision authority, decision date. Drives the audit-defensibility 'show me you screened this person before they got access' question",
+    must_contain  = [
+        ChecklistItem("item:A.6.1:reg_candidate_id",   "Per-record candidate identifier (links to identity register A.5.16 once hired; anonymised pre-hire to comply with data minimisation)",                                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.6.1:reg_role_tier",      "Role tier per record (drives the proportional check-depth applied; junior / standard / sensitive / privileged)",                                                                                       "must", False, "27002:6.1a — proportional"),
+        ChecklistItem("item:A.6.1:reg_checks_performed","Checks performed per record (identity / employment-history / education / criminal / financial / sanctions — actual checks run, not just planned)",                                                  "must", False, "27002:6.1a — verification"),
+        ChecklistItem("item:A.6.1:reg_outcome",        "Outcome per record (cleared / cleared-with-conditions / blocked / superseded by waiver)",                                                                                                              "must", False, "27002:6.1 — decision"),
+        ChecklistItem("item:A.6.1:reg_decision_date",  "Decision date per record (proves the screening completed BEFORE access was granted per A.5.18)",                                                                                                       "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.6.1:reg_authoriser",     "Authoriser per record (named individual making the accept/reject decision)",                                                                                                                          "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.1:reg_rescreen_date",  "Last rescreen date per record (for roles with ongoing-check obligations)",                                                                                                                            "should", False, "Operational discipline"),
+        ChecklistItem("item:A.6.1:reg_provider_ref",   "Third-party provider reference per record where used",                                                                                                                                                  "should", False, "Traceability"),
+    ],
+)
+
+REQ_A61_APPLICABLE_ROLES_SCOPE = EvidenceRequirement(
+    id            = "req:A.6.1:applicable_roles_scope",
+    control_ref   = "A.6.1",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Roles and Check-Depth Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the procedure. Documents which role tiers exist, which checks each tier requires, and the legal/regulatory drivers for sectoral check requirements (financial-services PEP + sanctions, healthcare credentialing, government clearance levels)",
+    must_contain  = [
+        ChecklistItem("item:A.6.1:scope_role_tiers",      "Role tiers defined (junior office, standard, sensitive [access to special-category PII or financial systems], privileged [admin / production access], executive)",                                "must", False, "27002:6.1a — proportional"),
+        ChecklistItem("item:A.6.1:scope_check_matrix",    "Check matrix — which check types apply to which role tier (matrix is the spec; rows show consistency)",                                                                                            "must", False, "27002:6.1 — proportional checks"),
+        ChecklistItem("item:A.6.1:scope_jurisdictions",   "Jurisdictions covered (where checks happen — local legal constraints apply; some checks unavailable in some jurisdictions)",                                                                       "must", False, "27002:6.1 — applicable laws per jurisdiction"),
+        ChecklistItem("item:A.6.1:scope_sectoral_drivers","Sectoral drivers stated (PCI for payment-card roles, HIPAA for healthcare, financial-services PEP/sanctions, government clearance)",                                                              "must", False, "27002:6.1 — applicable laws / sectoral"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.1:scope_a531_link",       "Cross-link to A.5.31 legal/regulatory register — jurisdictional and sectoral check requirements should be sourced from the single legal-obligations register",                                    "should", False, "Cross-control coherence"),
+        ChecklistItem("item:A.6.1:scope_change_drivers",  "Trigger list for re-scoping (new geography, new sector entry, new regulator action affecting screening)",                                                                                          "should", False, "Currency"),
+    ],
+)
+
+REQ_A61_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.6.1:screening_program_review",
+    control_ref     = "A.6.1",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Screening Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that screening is happening at the right depth for each role tier, that legal/sectoral driver shifts have been incorporated, that re-screening cadence is being met, and that the register has no gaps. Annual cadence (freshness=365) matches the HR-program-review doctrine",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.6.1:rev_date",          "Review date within the planned interval",                                                                                                                                            "must", False, "27002:6.1 — periodic"),
+        ChecklistItem("item:A.6.1:rev_reviewer",      "Reviewer identity and role recorded (HR lead + InfoSec lead jointly; legal-counsel sign-off where jurisdictional shifts material)",                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.6.1:rev_register_check","Per-tier outcome (did every new hire in this tier get the right checks? gaps flagged and remediated)",                                                                              "must", False, "27002:6.1 — completeness"),
+        ChecklistItem("item:A.6.1:rev_scope_check",   "Cross-check against the applicable-roles scope — any new role tier, new jurisdiction, new sectoral driver?",                                                                        "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.6.1:rev_rescreen_status","Rescreen status — for roles with ongoing-check obligations, what fraction completed on cadence vs aged-overdue",                                                                  "must", False, "Operational discipline"),
+        ChecklistItem("item:A.6.1:rev_register_update","Changes propagated back to the procedure / scope with reference to this review",                                                                                                  "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.6.1:rev_ad_hoc_triggers","Ad-hoc review triggers listed (regulator enforcement action in sector, security incident involving inadequately-screened personnel)",                                            "should", False, "Change-driven review"),
+        ChecklistItem("item:A.6.1:rev_next_date",     "Next planned review date stated",                                                                                                                                                  "should", False, "Planning"),
+    ],
+)
+
+
+# ── Annex A.6.2 — Employment terms — records_program spine (4-leaf) ──────────
+# Phase B batch 21 — template-as-primary records_program variant (same shape
+# as A.5.32 IPR or A.5.20 supplier agreement template). All 5 original MUST
+# ids preserved.
+# Authority: ISO 27002:2022 § 6.2 implementation guidance.
+
+REQ_A62_EMPLOYMENT_TERMS_TEMPLATE = EvidenceRequirement(
     id            = "req:A.6.2:employment_terms_template",
     control_ref   = "A.6.2",
     standard_id   = "ISO27001:2022",
     evidence_type = "agreement_template",
-    title         = "Employment Contract Information Security Terms",
+    title         = "Employment Contract Information Security Terms (Template)",
     trigger_type  = "universal",
-    description   = "A.6.2 requires employment contractual agreements to state both personnel's and the organization's information security responsibilities. Evidence is the standard contract template (or annex) carrying these clauses",
+    description   = "A.6.2 requires employment contractual agreements to state both personnel's and the organisation's information security responsibilities. The template carries the standard clauses (personnel duties, org duties, policy references, duration, signature requirement). The signed-terms register, applicable-workers scope and periodic template review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.6.2:personnel_responsibilities","Personnel's information security responsibilities stated", "must", False, "A.6.2 — personnel's responsibilities"),
-        ChecklistItem("item:A.6.2:organization_responsibilities","Organization's information security responsibilities stated (training, tools, protection of personal data)", "must", False, "A.6.2 — organization's responsibilities"),
-        ChecklistItem("item:A.6.2:policy_reference",         "Reference to InfoSec policy and topic-specific policies binding the personnel (A.5.1, A.5.10)", "must", False, "A.6.2 — for information security"),
-        ChecklistItem("item:A.6.2:duration",                 "Duration of obligations stated (during employment and any surviving obligations — links to A.6.5)", "must", False, "Audit clarity"),
-        ChecklistItem("item:A.6.2:signature",                "Signature requirement before employment commences", "must", False, "A.6.2 — contractual agreements"),
+        ChecklistItem("item:A.6.2:personnel_responsibilities","Personnel's information security responsibilities stated (confidentiality, acceptable use, access discipline, incident reporting obligation)",                            "must", False, "27002:6.2 — personnel's responsibilities"),
+        ChecklistItem("item:A.6.2:organization_responsibilities","Organization's information security responsibilities stated (training provision, tools, protection of personal data, fair-treatment of reported events)",            "must", False, "27002:6.2 — organization's responsibilities"),
+        ChecklistItem("item:A.6.2:policy_reference",          "Reference to InfoSec policy and topic-specific policies binding the personnel (A.5.1 master policy, A.5.10 acceptable use, A.5.15 access control)",                          "must", False, "27002:6.2 — for information security"),
+        ChecklistItem("item:A.6.2:duration",                  "Duration of obligations stated (during employment AND surviving obligations cross-link to A.6.5 post-employment)",                                                            "must", False, "27002:6.2 + A.6.5"),
+        ChecklistItem("item:A.6.2:signature",                 "Signature requirement before employment commences (no access granted without signed terms)",                                                                                   "must", False, "27002:6.2 — contractual agreements"),
+        ChecklistItem("item:A.6.2:owner",                     "Named owner of the template (HR with InfoSec + Legal joint sign-off on the clauses)",                                                                                            "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.6.2:aup_link",                 "Links to Acceptable Use Policy (A.5.10) by reference", "should", False, "Cross-control consistency"),
-        ChecklistItem("item:A.6.2:disciplinary_link",        "Links to disciplinary process (A.6.4) by reference", "should", False, "Enforcement clarity"),
+        ChecklistItem("item:A.6.2:aup_link",                  "Links to Acceptable Use Policy (A.5.10) by reference (so AUP updates don't require contract amendment)",                                                                       "should", False, "Cross-control consistency"),
+        ChecklistItem("item:A.6.2:disciplinary_link",         "Links to disciplinary process (A.6.4) by reference",                                                                                                                              "should", False, "Enforcement clarity"),
+        ChecklistItem("item:A.6.2:nda_link",                  "Cross-link to A.6.6 NDA template (employment terms + NDA together form the personnel info-security contract package)",                                                          "should", False, "Cross-control coherence"),
     ],
 )
 
-REQ_A63_SECURITY_AWARENESS = EvidenceRequirement(
-    id            = "req:A.6.3:security_awareness_programme",
-    control_ref   = "A.6.3",
+REQ_A62_SIGNED_TERMS_REGISTER = EvidenceRequirement(
+    id            = "req:A.6.2:signed_terms_register",
+    control_ref   = "A.6.2",
     standard_id   = "ISO27001:2022",
-    evidence_type = "training_programme",
-    title         = "Information Security Awareness, Education and Training Programme",
+    evidence_type = "register",
+    title         = "Signed Employment Terms Register",
     trigger_type  = "universal",
-    description   = "A.6.3 requires personnel and relevant interested parties to receive appropriate awareness, education, and training, with regular updates as policies and procedures change. Evidence is a training programme description plus delivery records",
-    freshness_days = 365,
+    description   = "The operational catalogue of who has signed which version of the employment terms. Each row: personnel identifier, template version signed, signature date, current-version check. Drives the 'every active employee has current terms' completeness check",
     must_contain  = [
-        ChecklistItem("item:A.6.3:scope_audience",     "Scope and audience defined (all personnel + relevant interested parties such as contractors)", "must", False, "A.6.3 — personnel of the organization and relevant interested parties"),
-        ChecklistItem("item:A.6.3:curriculum",         "Curriculum aligned to job functions (general awareness for all, deeper modules per role)", "must", False, "A.6.3 — as relevant for their job function"),
-        ChecklistItem("item:A.6.3:onboarding",         "Initial training on onboarding before access to information assets", "must", False, "A.6.3 — appropriate education and training"),
-        ChecklistItem("item:A.6.3:refresh_cadence",    "Refresh cadence (typically annual) plus update on significant policy changes", "must", False, "A.6.3 — regular updates"),
-        ChecklistItem("item:A.6.3:awareness_mechanisms","Awareness mechanisms beyond formal training (newsletters, phishing simulations, posters)", "must", False, "A.6.3 — awareness"),
-        ChecklistItem("item:A.6.3:training_records",   "Training records (who completed what, when) for audit", "must", False, "Auditability"),
+        ChecklistItem("item:A.6.2:reg_personnel_id",      "Per-row personnel identifier (links to identity register A.5.16)",                                                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.6.2:reg_template_version",  "Template version signed per row (drives currency check — old-version signers may need recontract on material changes)",                                                              "must", False, "27002:6.2 — current"),
+        ChecklistItem("item:A.6.2:reg_signature_date",    "Signature date per row (proves signing happened BEFORE access granted per A.5.18)",                                                                                                  "must", False, "27002:6.2 — before access"),
+        ChecklistItem("item:A.6.2:reg_signature_method",  "Signature method per row (wet signature scanned / e-signature platform reference; ensures non-repudiation)",                                                                          "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.6.2:reg_current_version_check","Current-version check flag per row (yes / no-with-rationale-for-grandfathering) — surfaces personnel on outdated terms",                                                          "must", False, "27002:6.2 — currency"),
     ],
     should_contain= [
-        ChecklistItem("item:A.6.3:role_specific_deep","Role-specific deep dives (developers, admins, finance, HR)", "should", False, "Proportionality"),
-        ChecklistItem("item:A.6.3:effectiveness_metrics","Effectiveness measurement (quiz pass rates, phishing simulation click rates trend)", "should", False, "Continuous improvement"),
+        ChecklistItem("item:A.6.2:reg_amendment_history", "Amendment history per row where contracts were amended mid-employment (drives change tracking)",                                                                                    "should", False, "Operational discipline"),
+        ChecklistItem("item:A.6.2:reg_worker_category",   "Worker category per row (employee / contractor / intern — different categories may use different templates)",                                                                        "should", False, "Cross-leaf coherence"),
     ],
 )
+
+REQ_A62_APPLICABLE_WORKERS_SCOPE = EvidenceRequirement(
+    id            = "req:A.6.2:applicable_workers_scope",
+    control_ref   = "A.6.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Worker Categories Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives which template variants exist. Documents the worker categories the org engages (employees, contractors, interns, secondees, agency workers) and which template each uses",
+    must_contain  = [
+        ChecklistItem("item:A.6.2:scope_worker_categories","Worker categories enumerated (employees, fixed-term, contractors, interns, secondees from suppliers, agency workers)",                                                          "must", False, "27002:6.2 — relevant workers"),
+        ChecklistItem("item:A.6.2:scope_template_mapping","Template-to-category mapping (which categories use the master template; which use a variant — contractor-lite NDA-only path is common)",                                          "must", False, "27002:6.2 — applicability"),
+        ChecklistItem("item:A.6.2:scope_jurisdictions",   "Jurisdictions covered (employment-law variations per country drive local-language and clause variants)",                                                                            "must", False, "27002:6.2 — applicable laws"),
+        ChecklistItem("item:A.6.2:scope_supplier_overlap","Supplier-worker overlap noted (contractors brought in via suppliers may sign supplier-NDA + org-NDA both — cross-link to A.5.20 supplier agreement)",                                "must", False, "Cross-control coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.2:scope_change_drivers",  "Trigger list for re-scoping (new worker category — gig workers, M&A bringing new categories, new geography with distinct employment law)",                                          "should", False, "Currency"),
+    ],
+)
+
+REQ_A62_TEMPLATE_REVIEW = EvidenceRequirement(
+    id              = "req:A.6.2:terms_template_review",
+    control_ref     = "A.6.2",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Employment Terms Template Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that the template still reflects current InfoSec policy (referenced policies haven't drifted), current employment law (jurisdictional shifts), and that all signers are on a current-enough version. Annual cadence (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.6.2:rev_date",            "Review date within the planned interval",                                                                                                                                            "must", False, "27002:6.2 — periodic"),
+        ChecklistItem("item:A.6.2:rev_reviewer",        "Reviewer identity (HR + InfoSec + Legal jointly)",                                                                                                                                    "must", False, "Accountability"),
+        ChecklistItem("item:A.6.2:rev_policy_drift",    "Referenced-policy drift check — has A.5.1/A.5.10/A.5.15 changed in ways that require template amendment?",                                                                            "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.6.2:rev_legal_drift",     "Employment-law drift check per jurisdiction (legal counsel input)",                                                                                                                    "must", False, "27002:6.2 — applicable laws"),
+        ChecklistItem("item:A.6.2:rev_signer_currency", "Signer-currency analysis — what fraction of active workers on the current template? plan for recontracting the gap",                                                                  "must", False, "27002:6.2 — current"),
+        ChecklistItem("item:A.6.2:rev_register_update", "Changes propagated to the live template and to the signer-recontracting plan",                                                                                                        "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.6.2:rev_ad_hoc_triggers", "Ad-hoc review triggers (major policy change, employment-law reform, regulator action affecting employment InfoSec terms)",                                                            "should", False, "Change-driven review"),
+        ChecklistItem("item:A.6.2:rev_next_date",       "Next planned review date stated",                                                                                                                                                      "should", False, "Planning"),
+    ],
+)
+
+
+# ── Annex A.6.3 — Security awareness, education and training — op_process
+#                  spine (4-leaf) ─────────────────────────────────────────────
+# Phase B batch 21 — programme-as-primary op_process variant. All 6 original
+# MUST ids preserved. Per-cycle freshness=365 preserved on the primary leaf.
+# Authority: ISO 27002:2022 § 6.3 implementation guidance.
+
+REQ_A63_AWARENESS_PROGRAMME = EvidenceRequirement(
+    id             = "req:A.6.3:security_awareness_programme",
+    control_ref    = "A.6.3",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "training_programme",
+    title          = "Information Security Awareness, Education and Training Programme",
+    trigger_type   = "universal",
+    description    = "A.6.3 requires personnel and relevant interested parties to receive appropriate awareness, education, and training, with regular updates as policies and procedures change. The programme document describes the audience, curriculum per role, onboarding training, refresh cadence, awareness mechanisms, and training records. The completion register, audience-curriculum scope and periodic programme review are sibling leaves",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.6.3:scope_audience",     "Scope and audience defined (all personnel + relevant interested parties such as contractors, third parties with access)",                                                              "must", False, "27002:6.3 — personnel + relevant interested parties"),
+        ChecklistItem("item:A.6.3:curriculum",         "Curriculum aligned to job functions (general awareness for all, deeper modules per role — developers, admins, finance, HR, executives)",                                              "must", False, "27002:6.3 — as relevant for their job function"),
+        ChecklistItem("item:A.6.3:onboarding",         "Initial training on onboarding BEFORE access to information assets (gates A.5.18 access grant)",                                                                                       "must", False, "27002:6.3 — appropriate education and training"),
+        ChecklistItem("item:A.6.3:refresh_cadence",    "Refresh cadence (typically annual) plus update on significant policy changes",                                                                                                          "must", False, "27002:6.3 — regular updates"),
+        ChecklistItem("item:A.6.3:awareness_mechanisms","Awareness mechanisms beyond formal training (newsletters, phishing simulations, posters, lunch-and-learns, all-hands updates)",                                                       "must", False, "27002:6.3 — awareness"),
+        ChecklistItem("item:A.6.3:training_records",   "Training records maintained (who completed what, when) for audit and the completion register leaf",                                                                                    "must", False, "Auditability"),
+        ChecklistItem("item:A.6.3:owner",              "Named owner of the programme (typically Security Awareness Lead within InfoSec; HR partner for delivery logistics)",                                                                  "must", False, "Accountability"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.6.3:role_specific_deep", "Role-specific deep dives (developers — secure coding from A.8.25; admins — privileged-access discipline from A.8.2; finance — fraud awareness; HR — DSAR handling)",                "should", False, "Proportionality"),
+        ChecklistItem("item:A.6.3:effectiveness_metrics","Effectiveness measurement (quiz pass rates, phishing simulation click rates trend, reporting-rate trend from A.6.8)",                                                                "should", False, "Continuous improvement"),
+        ChecklistItem("item:A.6.3:budget",             "Programme budget / resource allocation (signals management commitment — under-resourced awareness is a frequent audit finding)",                                                       "should", False, "Operational realism"),
+    ],
+)
+
+REQ_A63_COMPLETION_REGISTER = EvidenceRequirement(
+    id            = "req:A.6.3:training_completion_register",
+    control_ref   = "A.6.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Training Completion Register",
+    trigger_type  = "universal",
+    description   = "The operational catalogue of who has completed which training, when. Each row: personnel identifier, training module, completion date, quiz score (where applicable), next-due date. Drives the audit-defensibility 'show me every active employee completed mandatory training this year' query",
+    must_contain  = [
+        ChecklistItem("item:A.6.3:reg_personnel_id",     "Per-row personnel identifier (links to identity register A.5.16)",                                                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.6.3:reg_module_id",        "Per-row training module identifier (links to the curriculum catalogue)",                                                                                                              "must", False, "27002:6.3 — curriculum"),
+        ChecklistItem("item:A.6.3:reg_completion_date",  "Per-row completion date",                                                                                                                                                              "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.6.3:reg_next_due",         "Per-row next-due date (drives reminder/escalation workflow)",                                                                                                                          "must", False, "27002:6.3 — regular updates"),
+        ChecklistItem("item:A.6.3:reg_status",           "Per-row status (current / overdue / waived-with-reason / N/A — for role change exemptions)",                                                                                          "must", False, "Operational discipline"),
+        ChecklistItem("item:A.6.3:reg_score",            "Per-row score where the module includes assessment (drives effectiveness metrics)",                                                                                                    "must", False, "27002:6.3 — effectiveness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.3:reg_phishing_sim_log", "Per-row phishing simulation participation log (separate from formal training — drives awareness metrics)",                                                                            "should", False, "Continuous improvement"),
+        ChecklistItem("item:A.6.3:reg_overdue_alerts",   "Overdue-status alerting (notification to line manager when training crosses next-due date)",                                                                                          "should", False, "Operational discipline"),
+    ],
+)
+
+REQ_A63_AUDIENCE_CURRICULUM_SCOPE = EvidenceRequirement(
+    id            = "req:A.6.3:audience_curriculum_scope",
+    control_ref   = "A.6.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Audience and Curriculum Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the programme. Documents the role-to-curriculum mapping: which audience segments need which training modules. Drives both the curriculum catalogue and the completion-register expected-modules computation",
+    must_contain  = [
+        ChecklistItem("item:A.6.3:scope_audience_segments","Audience segments enumerated (all-staff baseline, role-specific tiers — developers, admins, finance, HR, executives, contractors, board)",                                       "must", False, "27002:6.3 — relevant audiences"),
+        ChecklistItem("item:A.6.3:scope_module_catalogue", "Module catalogue stated (every training module the org delivers — baseline awareness, role-specific deep dives, special topics — DPbD, secure coding, fraud, PII handling)",      "must", False, "27002:6.3 — curriculum"),
+        ChecklistItem("item:A.6.3:scope_role_module_matrix","Role-to-module matrix (which audience segment receives which modules — drives the completion-register expected-set)",                                                            "must", False, "27002:6.3 — relevant for job function"),
+        ChecklistItem("item:A.6.3:scope_special_topics",   "Special-topic modules tied to specific compliance regimes (GDPR for PII handlers, PCI for payment-card handlers, HIPAA for healthcare)",                                          "must", False, "27002:6.3 + sectoral"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.3:scope_third_party_audiences","Third-party audience handling (where contractors/visitors with access need awareness — typically a lighter onboarding briefing rather than full curriculum)",                "should", False, "27002:6.3 — interested parties"),
+        ChecklistItem("item:A.6.3:scope_change_drivers",       "Trigger list for re-scoping (new role/function, new compliance regime, new technology adoption requiring training)",                                                          "should", False, "Currency"),
+    ],
+)
+
+REQ_A63_PROGRAMME_REVIEW = EvidenceRequirement(
+    id              = "req:A.6.3:awareness_programme_review",
+    control_ref     = "A.6.3",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Awareness Programme Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that the curriculum still matches current policies, the completion register has no gaps, effectiveness metrics are trending right, and awareness mechanisms are being executed. Annual cadence (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.6.3:rev_date",             "Review date within the planned interval",                                                                                                                                            "must", False, "27002:6.3 — periodic"),
+        ChecklistItem("item:A.6.3:rev_reviewer",         "Reviewer identity (Security Awareness Lead + InfoSec lead jointly)",                                                                                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.6.3:rev_completion_rate",  "Completion rate analysis (overall % current; per-audience-segment % current; aged-overdue list)",                                                                                    "must", False, "27002:6.3 — completeness"),
+        ChecklistItem("item:A.6.3:rev_effectiveness",    "Effectiveness analysis (quiz pass-rate trend, phishing-simulation click-rate trend, reporting-rate trend per A.6.8)",                                                                "must", False, "27002:6.3 — effectiveness"),
+        ChecklistItem("item:A.6.3:rev_curriculum_check", "Curriculum currency check (referenced policies still align with the training content; new topics added per scope changes)",                                                          "must", False, "27002:6.3 — current"),
+        ChecklistItem("item:A.6.3:rev_register_update",  "Changes propagated to the curriculum / register / scope with reference to this review",                                                                                              "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.6.3:rev_ad_hoc_triggers",  "Ad-hoc review triggers (major incident exposing awareness gap, new compliance regime, major tech adoption)",                                                                        "should", False, "Change-driven review"),
+        ChecklistItem("item:A.6.3:rev_next_date",        "Next planned review date stated",                                                                                                                                                    "should", False, "Planning"),
+    ],
+)
+
+
+# ── Annex A.6.4 — Disciplinary process — op_process spine (4-leaf) ───────────
+# Phase B batch 21 — procedure-as-primary op_process. All 6 original MUST ids
+# preserved. Cross-control: A.5.36 compliance nonconformity register
+# (disciplinary cases are a particular type of NC closure).
+# Authority: ISO 27002:2022 § 6.4 implementation guidance.
 
 REQ_A64_DISCIPLINARY_PROCESS = EvidenceRequirement(
     id            = "req:A.6.4:disciplinary_process",
@@ -4703,84 +4932,375 @@ REQ_A64_DISCIPLINARY_PROCESS = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Information Security Disciplinary Process",
     trigger_type  = "universal",
-    description   = "A.6.4 requires a formalized, communicated disciplinary process for personnel and interested parties who violate information security policy. Evidence is a documented procedure (typically owned jointly with HR)",
+    description   = "A.6.4 requires a formalised, communicated disciplinary process for personnel and interested parties who violate information security policy. The procedure documents how violations are surfaced, investigated, decided, communicated, and recorded — typically owned jointly with HR. The case register, applicable-jurisdictions scope and periodic process review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.6.4:formalised",         "Formalised in writing with HR / legal review", "must", False, "A.6.4 — formalized"),
-        ChecklistItem("item:A.6.4:violation_scope",    "Scope of violations covered (policy breach, negligence, deliberate misuse)", "must", False, "A.6.4 — information security policy violation"),
-        ChecklistItem("item:A.6.4:investigation_step","Investigation step before action, with right of explanation", "must", False, "Procedural fairness"),
-        ChecklistItem("item:A.6.4:decision_authority","Decision authority named (HR + line management + legal as appropriate)", "must", False, "Accountability"),
-        ChecklistItem("item:A.6.4:action_range",      "Range of actions defined (verbal warning, written warning, suspension, termination, legal referral)", "must", False, "A.6.4 — take actions"),
-        ChecklistItem("item:A.6.4:communicated",      "Communicated to personnel and interested parties (in employment contract, code of conduct, intranet)", "must", False, "A.6.4 — communicated"),
+        ChecklistItem("item:A.6.4:formalised",          "Formalised in writing with HR + Legal review (drives consistent application; ad-hoc disciplinary action is a fairness / employment-tribunal risk)",                              "must", False, "27002:6.4 — formalised"),
+        ChecklistItem("item:A.6.4:violation_scope",     "Scope of violations covered (policy breach, negligence, deliberate misuse, repeated non-compliance with awareness training, deliberate circumvention of security controls)",      "must", False, "27002:6.4 — information security policy violation"),
+        ChecklistItem("item:A.6.4:investigation_step",  "Investigation step before action, with right of explanation (procedural fairness — drives employment-tribunal defensibility)",                                                    "must", False, "Procedural fairness"),
+        ChecklistItem("item:A.6.4:decision_authority",  "Decision authority named (HR + line management + Legal as appropriate; escalation to executive for senior personnel)",                                                            "must", False, "Accountability"),
+        ChecklistItem("item:A.6.4:action_range",        "Range of actions defined (verbal warning, written warning, suspension, termination, legal referral, regulator notification where mandatory)",                                    "must", False, "27002:6.4 — take actions"),
+        ChecklistItem("item:A.6.4:communicated",        "Communicated to personnel and interested parties (in employment contract, code of conduct, intranet, awareness training)",                                                        "must", False, "27002:6.4 — communicated"),
+        ChecklistItem("item:A.6.4:owner",               "Named owner of the procedure (HR with InfoSec partner)",                                                                                                                            "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.6.4:contributory_factors","Consideration of contributory factors (intent, recurrence, impact)", "should", False, "Proportionality"),
-        ChecklistItem("item:A.6.4:appeals",            "Appeals or review process", "should", False, "Fair process"),
+        ChecklistItem("item:A.6.4:contributory_factors","Consideration of contributory factors (intent, recurrence, impact, awareness training status — was the person trained on what they breached?)",                                  "should", False, "Proportionality"),
+        ChecklistItem("item:A.6.4:appeals",             "Appeals or review process",                                                                                                                                                          "should", False, "Fair process"),
+        ChecklistItem("item:A.6.4:a536_link",           "Cross-link to A.5.36 compliance nonconformity register — disciplinary cases are a particular type of compliance NC and should be tracked in concert",                              "should", False, "Cross-control coherence"),
     ],
 )
 
-REQ_A65_POST_EMPLOYMENT = EvidenceRequirement(
+REQ_A64_CASE_REGISTER = EvidenceRequirement(
+    id            = "req:A.6.4:disciplinary_case_register",
+    control_ref   = "A.6.4",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Disciplinary Case Register",
+    trigger_type  = "universal",
+    description   = "The operational catalogue of disciplinary cases (anonymised at the audit-trail layer to comply with privacy requirements). Each case: violation type, investigation outcome, action taken, decision authority, closure date. Drives the 'show me how the disciplinary process actually operates' audit question",
+    must_contain  = [
+        ChecklistItem("item:A.6.4:reg_case_id",          "Per-case unique identifier (anonymised externally; internal traceability to personnel record preserved)",                                                                            "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.6.4:reg_violation_type",   "Per-case violation type (matches the procedure's violation_scope categories)",                                                                                                        "must", False, "27002:6.4 — categorisation"),
+        ChecklistItem("item:A.6.4:reg_investigation_outcome","Per-case investigation outcome (substantiated / not-substantiated / partially-substantiated)",                                                                                  "must", False, "27002:6.4 — investigation"),
+        ChecklistItem("item:A.6.4:reg_action_taken",     "Per-case action taken (matches the action_range categories; 'no action' is a valid outcome where investigation didn't substantiate)",                                              "must", False, "27002:6.4 — actions"),
+        ChecklistItem("item:A.6.4:reg_decision_authority","Per-case decision authority (named role)",                                                                                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.6.4:reg_closure_date",     "Per-case closure date",                                                                                                                                                                "must", False, "Operational discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.4:reg_appeals_log",      "Per-case appeals log (where appeal was lodged; status tracked)",                                                                                                                    "should", False, "Fair process"),
+        ChecklistItem("item:A.6.4:reg_lessons_feed",     "Per-case lessons feed (where the violation surfaced a control gap, feeds back to relevant control owner / awareness curriculum)",                                                  "should", False, "Continual improvement"),
+    ],
+)
+
+REQ_A64_APPLICABLE_JURISDICTIONS_SCOPE = EvidenceRequirement(
+    id            = "req:A.6.4:applicable_jurisdictions_scope",
+    control_ref   = "A.6.4",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Jurisdictions and Worker Categories Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives procedure variants. Documents which jurisdictions the procedure operates in (employment-law variations affect what's permissible — required-notice periods, just-cause requirements, statutory remediation steps) and how it extends to non-employee workers (contractors get different process leverage)",
+    must_contain  = [
+        ChecklistItem("item:A.6.4:scope_jurisdictions",    "Jurisdictions covered (employment-law variants — at-will US states vs just-cause EU vs notice-period UK — drive process step variations)",                                          "must", False, "27002:6.4 — applicable laws"),
+        ChecklistItem("item:A.6.4:scope_worker_categories","Worker categories addressed (employees → full process; contractors → contract-based termination; secondees → escalation to home employer)",                                    "must", False, "27002:6.4 — interested parties"),
+        ChecklistItem("item:A.6.4:scope_regulator_notify", "Regulator-notification triggers per jurisdiction (financial-services FSA notification for serious misconduct, healthcare professional body notification)",                          "must", False, "27002:6.4 — sectoral"),
+        ChecklistItem("item:A.6.4:scope_legal_review",     "Legal review path stated (when local employment counsel must be engaged before action — typically all dismissal cases + suspension cases over X days)",                            "must", False, "27002:6.4 — applicable laws"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.4:scope_change_drivers",   "Trigger list for re-scoping (new geography, new sectoral regulator, major employment-law reform)",                                                                                "should", False, "Currency"),
+    ],
+)
+
+REQ_A64_PROCESS_REVIEW = EvidenceRequirement(
+    id              = "req:A.6.4:disciplinary_process_review",
+    control_ref     = "A.6.4",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Disciplinary Process Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that the process still aligns with current employment law per jurisdiction, that case outcomes show consistent application (not discriminatory), and that lessons from cases feed back to relevant controls. Annual cadence (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.6.4:rev_date",            "Review date within the planned interval",                                                                                                                                            "must", False, "27002:6.4 — periodic"),
+        ChecklistItem("item:A.6.4:rev_reviewer",        "Reviewer identity (HR lead + InfoSec lead + Legal counsel)",                                                                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.6.4:rev_consistency",     "Consistency analysis — case outcomes reviewed for consistent application across cases / demographics (avoids discriminatory enforcement patterns)",                                  "must", False, "Procedural fairness"),
+        ChecklistItem("item:A.6.4:rev_legal_drift",     "Employment-law drift check per jurisdiction (legal counsel input)",                                                                                                                    "must", False, "27002:6.4 — applicable laws"),
+        ChecklistItem("item:A.6.4:rev_lessons_propagated","Lessons-propagation check — did case-driven lessons feed back to awareness curriculum (A.6.3), control updates, or policy amendments?",                                              "must", False, "Continual improvement"),
+        ChecklistItem("item:A.6.4:rev_register_update", "Changes propagated to the procedure with reference to this review",                                                                                                                  "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.6.4:rev_ad_hoc_triggers", "Ad-hoc review triggers (employment tribunal ruling affecting the process, regulator enforcement action, major incident with personnel involvement)",                                "should", False, "Change-driven review"),
+        ChecklistItem("item:A.6.4:rev_next_date",       "Next planned review date stated",                                                                                                                                                    "should", False, "Planning"),
+    ],
+)
+
+
+# ── Annex A.6.5 — Post-employment — op_process spine (4-leaf) ────────────────
+# Phase B batch 21 — procedure-as-primary op_process. All 5 original MUST ids
+# preserved. Cross-control: A.5.11 return of assets, A.5.16 identity
+# revocation, A.5.17 credential revocation, A.5.18 access revocation. The
+# leaver_briefing_register is the A.6.5-specific lifecycle artefact (not
+# duplicated with A.5.11 which tracks asset return events).
+# Authority: ISO 27002:2022 § 6.5 implementation guidance.
+
+REQ_A65_POST_EMPLOYMENT_PROCEDURE = EvidenceRequirement(
     id            = "req:A.6.5:post_employment_responsibilities",
     control_ref   = "A.6.5",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Post-Employment / Role-Change Information Security Responsibilities",
     trigger_type  = "universal",
-    description   = "A.6.5 requires surviving information security responsibilities after termination or change of employment to be defined, enforced, and communicated. Evidence is a procedure (often part of offboarding) covering what obligations persist and for how long",
+    description   = "A.6.5 requires surviving information security responsibilities after termination or change of employment to be defined, enforced, and communicated. The procedure documents what obligations persist, for how long, how leavers are briefed, how enforcement happens, and how role-change scenarios are handled. The leaver-briefing register, surviving-obligations scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.6.5:surviving_duties", "Surviving duties enumerated (confidentiality, IP protection, non-disparagement, non-poach where lawful)", "must", False, "A.6.5 — duties that remain valid"),
-        ChecklistItem("item:A.6.5:duration",         "Duration of each obligation (often indefinite for confidentiality, time-limited for others)", "must", False, "A.6.5 — remain valid after termination"),
-        ChecklistItem("item:A.6.5:communication",    "Communication mechanism to leavers (exit briefing, reminder letter, signed acknowledgment)", "must", False, "A.6.5 — communicated"),
-        ChecklistItem("item:A.6.5:enforcement",      "Enforcement approach (legal action, breach of contract, regulatory referral)", "must", False, "A.6.5 — enforced"),
-        ChecklistItem("item:A.6.5:role_change_scope","Coverage of role change within the organization, not just termination", "must", False, "A.6.5 — termination or change of employment"),
+        ChecklistItem("item:A.6.5:surviving_duties",   "Surviving duties enumerated (confidentiality — typically indefinite; IP protection; non-disparagement; non-poach where lawful; non-compete where lawful)",                            "must", False, "27002:6.5 — duties that remain valid"),
+        ChecklistItem("item:A.6.5:duration",            "Duration of each obligation (indefinite for confidentiality; time-limited for non-compete; per-jurisdiction limits where law caps duration)",                                       "must", False, "27002:6.5 — remain valid after termination"),
+        ChecklistItem("item:A.6.5:communication",       "Communication mechanism to leavers (exit briefing with signed acknowledgment; reminder letter; intranet reference) — drives the leaver-briefing register",                          "must", False, "27002:6.5 — communicated"),
+        ChecklistItem("item:A.6.5:enforcement",         "Enforcement approach (legal action for breach, breach of contract claims, regulatory referral where misconduct + sectoral notification obligations apply)",                          "must", False, "27002:6.5 — enforced"),
+        ChecklistItem("item:A.6.5:role_change_scope",   "Coverage of role change within the organisation, not just termination (joiner-mover-leaver — mover is the typically-missed leg)",                                                  "must", False, "27002:6.5 — termination or change of employment"),
+        ChecklistItem("item:A.6.5:offboarding_integration","Integration with operational offboarding (A.5.11 asset return, A.5.16 identity revocation, A.5.17 credential revocation, A.5.18 access revocation — A.6.5 is the contractual/HR layer; those are the operational layers)", "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.6.5:owner",               "Named owner of the procedure (HR with InfoSec + Legal partners)",                                                                                                                    "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.6.5:exit_interview_checklist","Exit interview / role-change checklist with info-security touchpoints", "should", False, "Operational handle"),
-        ChecklistItem("item:A.6.5:contractor_parallel","Equivalent process for contractors and interested parties", "should", False, "Comprehensive coverage"),
+        ChecklistItem("item:A.6.5:exit_interview_checklist","Exit interview / role-change checklist with info-security touchpoints",                                                                                                          "should", False, "Operational handle"),
+        ChecklistItem("item:A.6.5:contractor_parallel", "Equivalent process for contractors and interested parties (offboarding clause in supplier agreement A.5.20)",                                                                       "should", False, "Comprehensive coverage"),
+        ChecklistItem("item:A.6.5:nda_continuation",    "NDA continuation note — most NDAs survive employment per A.6.6 templates; the exit briefing reinforces this",                                                                        "should", False, "Cross-control coherence"),
     ],
 )
 
-REQ_A66_NDA = EvidenceRequirement(
-    id            = "req:A.6.6:nda_template",
+REQ_A65_LEAVER_BRIEFING_REGISTER = EvidenceRequirement(
+    id            = "req:A.6.5:leaver_briefing_register",
+    control_ref   = "A.6.5",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Leaver Briefing Register",
+    trigger_type  = "universal",
+    description   = "The operational catalogue of exit briefings and role-change briefings. Each event: leaver identifier, trigger (termination / contract end / role change), briefing date, briefer, signed acknowledgment of surviving obligations. Drives 'show me every leaver acknowledged their post-employment obligations' audit",
+    must_contain  = [
+        ChecklistItem("item:A.6.5:reg_leaver_id",        "Per-row leaver identifier (links to identity register A.5.16; cross-link to A.5.11 return-of-assets record + A.5.16 identity revocation)",                                          "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.6.5:reg_trigger",          "Per-row trigger (termination / contract end / role change within org / retirement)",                                                                                                  "must", False, "27002:6.5 — termination or change"),
+        ChecklistItem("item:A.6.5:reg_briefing_date",    "Per-row briefing date (typically last working day or shortly after; for role change, at point of role transition)",                                                                  "must", False, "27002:6.5 — communicated"),
+        ChecklistItem("item:A.6.5:reg_briefer",          "Per-row briefer identity (HR partner; line manager joins for role-change cases)",                                                                                                    "must", False, "Accountability"),
+        ChecklistItem("item:A.6.5:reg_acknowledgment",   "Per-row signed acknowledgment evidence (digital signature / signed PDF / recorded receipt of intranet artefact)",                                                                    "must", False, "27002:6.5 — communicated"),
+        ChecklistItem("item:A.6.5:reg_obligations_covered","Per-row covered obligations list (confidentiality + IP + non-poach + non-compete where applicable per jurisdiction)",                                                              "must", False, "27002:6.5 — duties that remain"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.5:reg_post_briefing_check","Per-row post-briefing check (30/90/180-day check that no breach has occurred — proportional to role seniority)",                                                                  "should", False, "Continual assurance"),
+        ChecklistItem("item:A.6.5:reg_a5_11_link",       "Per-row cross-link to A.5.11 return-of-assets register (same leaver event)",                                                                                                          "should", False, "Cross-control coherence"),
+    ],
+)
+
+REQ_A65_SURVIVING_OBLIGATIONS_SCOPE = EvidenceRequirement(
+    id            = "req:A.6.5:surviving_obligations_scope",
+    control_ref   = "A.6.5",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Surviving Obligations Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives which obligations apply to which roles. Documents the obligation catalogue, the role-to-obligation mapping (executive vs senior vs standard get different post-employment terms), and the jurisdictional caps (where law limits enforceability of e.g. non-compete)",
+    must_contain  = [
+        ChecklistItem("item:A.6.5:scope_obligation_catalogue","Obligation catalogue enumerated (confidentiality / IP / non-disparagement / non-poach / non-compete / cooperation-with-investigations)",                                       "must", False, "27002:6.5 — duties enumerated"),
+        ChecklistItem("item:A.6.5:scope_role_mapping",       "Role-to-obligation mapping (executive level may have extended non-compete; standard staff only confidentiality + IP; sales/CSM commonly have non-poach + non-solicit)",         "must", False, "27002:6.5 — proportional"),
+        ChecklistItem("item:A.6.5:scope_jurisdictional_limits","Jurisdictional limits on enforceability (US California voids non-compete; EU restricts duration; UK courts test reasonableness)",                                              "must", False, "27002:6.5 — applicable laws"),
+        ChecklistItem("item:A.6.5:scope_worker_categories",  "Worker categories addressed (employees vs contractors vs interns — different obligation scope)",                                                                                "must", False, "27002:6.5 — interested parties"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.5:scope_change_drivers",     "Trigger list for re-scoping (new geography with distinct employment law, major employment-law reform, sectoral regulator action)",                                              "should", False, "Currency"),
+    ],
+)
+
+REQ_A65_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.6.5:post_employment_program_review",
+    control_ref     = "A.6.5",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Post-Employment Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that every leaver in the period was briefed, that the obligation scope still matches current law, and that any breach incidents have been handled per the enforcement approach. Annual cadence (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.6.5:rev_date",                "Review date within the planned interval",                                                                                                                                          "must", False, "27002:6.5 — periodic"),
+        ChecklistItem("item:A.6.5:rev_reviewer",            "Reviewer identity (HR lead + InfoSec lead + Legal counsel)",                                                                                                                      "must", False, "Accountability"),
+        ChecklistItem("item:A.6.5:rev_briefing_coverage",   "Briefing coverage check — every leaver in the period received and acknowledged a briefing (the register's completeness gate)",                                                  "must", False, "27002:6.5 — completeness"),
+        ChecklistItem("item:A.6.5:rev_legal_drift",         "Employment-law drift check per jurisdiction (legal counsel input on enforceability changes)",                                                                                    "must", False, "27002:6.5 — applicable laws"),
+        ChecklistItem("item:A.6.5:rev_breach_history",      "Breach history review — any post-employment breaches occurred? handled per enforcement approach? lessons captured?",                                                              "must", False, "27002:6.5 — enforced"),
+        ChecklistItem("item:A.6.5:rev_register_update",     "Changes propagated to the procedure / scope with reference to this review",                                                                                                      "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.6.5:rev_ad_hoc_triggers",     "Ad-hoc review triggers (high-profile leaver, regulator action affecting post-employment terms, employment-tribunal ruling)",                                                    "should", False, "Change-driven review"),
+        ChecklistItem("item:A.6.5:rev_next_date",           "Next planned review date stated",                                                                                                                                                "should", False, "Planning"),
+    ],
+)
+
+
+# ── Annex A.6.6 — NDA — records_program spine (4-leaf) ───────────────────────
+# Phase B batch 21 — template-as-primary records_program variant (like A.6.2
+# employment terms). All 6 original MUST ids preserved. Per-template
+# freshness=365 preserved.
+# Authority: ISO 27002:2022 § 6.6 implementation guidance.
+
+REQ_A66_NDA_TEMPLATE = EvidenceRequirement(
+    id             = "req:A.6.6:nda_template",
+    control_ref    = "A.6.6",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "agreement_template",
+    title          = "Confidentiality / Non-Disclosure Agreement Template",
+    trigger_type   = "universal",
+    description    = "A.6.6 requires confidentiality or non-disclosure agreements appropriate to the organisation's information protection needs, regularly reviewed, and signed by personnel and relevant interested parties. The template carries the clauses (parties, info classes, duration, return/destruction, signature, last-reviewed date). The signature register, applicable-parties scope and periodic review are sibling leaves",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.6.6:parties_covered",      "Parties covered (employees, contractors, suppliers, visitors with access to sensitive info, M&A counterparties)",                                                                "must", False, "27002:6.6 — personnel + interested parties"),
+        ChecklistItem("item:A.6.6:info_classes",         "Information classes protected (cross-link to A.5.12 classification — confidential / restricted / trade-secret tiers; PII overlay where applicable)",                              "must", False, "27002:6.6 — protection of information"),
+        ChecklistItem("item:A.6.6:duration",             "Duration of confidentiality obligation (indefinite for trade secrets; time-limited for non-trade-secret confidential info — typically 3-5 years post-termination)",            "must", False, "27002:6.6 — needs for protection"),
+        ChecklistItem("item:A.6.6:return_destruction",   "Return or destruction obligation at end of relationship (with certified-destruction option for paper, secure-deletion for digital — links to A.8.10)",                          "must", False, "27002:6.6 — protection"),
+        ChecklistItem("item:A.6.6:signature_requirement","Signature requirement enforced before access granted (no access without signed NDA — gates A.5.18 access grant for non-employees)",                                              "must", False, "27002:6.6 — signed"),
+        ChecklistItem("item:A.6.6:last_reviewed",        "Last-reviewed date on the template (review evidence — drives the freshness check)",                                                                                              "must", False, "27002:6.6 — regularly reviewed"),
+        ChecklistItem("item:A.6.6:owner",                "Named owner of the template (Legal counsel with InfoSec partner)",                                                                                                                "must", False, "Accountability"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.6.6:jurisdiction_remedies","Jurisdiction and remedies clauses (governing law, injunctive relief, liquidated damages where lawful)",                                                                          "should", False, "Enforceability"),
+        ChecklistItem("item:A.6.6:variant_tiers",        "Tiered NDA variants (employee NDA — lighter; contractor — full; supplier — bilateral; M&A counterparty — heavy with extended duration)",                                            "should", False, "Proportionality"),
+        ChecklistItem("item:A.6.6:a6_2_link",            "Cross-link to A.6.2 employment terms — for employees the NDA and employment terms together form the personnel info-security contract package",                                  "should", False, "Cross-control coherence"),
+    ],
+)
+
+REQ_A66_SIGNATURE_REGISTER = EvidenceRequirement(
+    id            = "req:A.6.6:nda_signature_register",
     control_ref   = "A.6.6",
     standard_id   = "ISO27001:2022",
-    evidence_type = "agreement_template",
-    title         = "Confidentiality / Non-Disclosure Agreement Template",
+    evidence_type = "register",
+    title         = "NDA Signature Register",
     trigger_type  = "universal",
-    description   = "A.6.6 requires confidentiality or non-disclosure agreements appropriate to the organization's information protection needs, regularly reviewed, and signed by personnel and relevant interested parties. Evidence is the NDA template plus a signed-by tracking record",
-    freshness_days = 365,
+    description   = "The operational catalogue of NDA signings. Each row: signatory identifier, NDA variant signed, template version, signature date. Drives the 'every party with access has signed a current NDA' completeness check; the audit-defensibility gate for A.5.18 access grants to non-employees",
     must_contain  = [
-        ChecklistItem("item:A.6.6:parties_covered",  "Parties covered (employees, contractors, suppliers, visitors with access to sensitive info)", "must", False, "A.6.6 — personnel and other relevant interested parties"),
-        ChecklistItem("item:A.6.6:info_classes",     "Information classes protected (links to A.5.12 classification)", "must", False, "A.6.6 — protection of information"),
-        ChecklistItem("item:A.6.6:duration",         "Duration of confidentiality obligation (typically post-termination indefinite for trade secrets)", "must", False, "A.6.6 — needs for protection"),
-        ChecklistItem("item:A.6.6:return_destruction","Return or destruction obligation at end of relationship", "must", False, "A.6.6 — protection"),
-        ChecklistItem("item:A.6.6:signature_requirement","Signature requirement enforced before access granted", "must", False, "A.6.6 — signed"),
-        ChecklistItem("item:A.6.6:last_reviewed",    "Last-reviewed date on the template (review evidence)", "must", False, "A.6.6 — regularly reviewed"),
+        ChecklistItem("item:A.6.6:reg_signatory_id",     "Per-row signatory identifier (links to identity register A.5.16 for employees; supplier register A.5.19 for contractors; visitor-log for visitors)",                              "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.6.6:reg_variant",          "Per-row NDA variant (employee / contractor / supplier-bilateral / M&A / visitor — matches the template variant_tiers SHOULD)",                                                  "must", False, "27002:6.6 — proportional"),
+        ChecklistItem("item:A.6.6:reg_template_version", "Per-row template version (drives currency check — old-version signers may need re-signing on material template changes)",                                                          "must", False, "27002:6.6 — current"),
+        ChecklistItem("item:A.6.6:reg_signature_date",   "Per-row signature date (proves signing happened BEFORE access granted per A.5.18)",                                                                                              "must", False, "27002:6.6 — before access"),
+        ChecklistItem("item:A.6.6:reg_signature_method", "Per-row signature method (wet / e-signature platform reference — ensures non-repudiation)",                                                                                        "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.6.6:reg_expiry_or_active", "Per-row status (active / expired-with-surviving-obligations / superseded-by-new-version)",                                                                                          "must", False, "Operational discipline"),
     ],
     should_contain= [
-        ChecklistItem("item:A.6.6:jurisdiction_remedies","Jurisdiction and remedies clauses", "should", False, "Enforceability"),
-        ChecklistItem("item:A.6.6:variant_tiers",    "Tiered NDA variants (employee, contractor, supplier, M&A counterparty)", "should", False, "Proportionality"),
+        ChecklistItem("item:A.6.6:reg_termination_link", "Per-row cross-link to the offboarding event where applicable (A.6.5 leaver briefing reinforces surviving NDA obligations)",                                                        "should", False, "Cross-control coherence"),
+        ChecklistItem("item:A.6.6:reg_breach_log",       "Per-row breach log (any suspected breach of NDA terms recorded with investigation outcome and enforcement decision)",                                                              "should", False, "Continual assurance"),
     ],
 )
 
-REQ_A68_EVENT_REPORTING = EvidenceRequirement(
+REQ_A66_APPLICABLE_PARTIES_SCOPE = EvidenceRequirement(
+    id            = "req:A.6.6:applicable_parties_scope",
+    control_ref   = "A.6.6",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Parties Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives which template variants exist and which parties require NDA before access. Documents the party categories, the info-class threshold that triggers NDA requirement (some orgs require NDA for all visitors; others only for those touching confidential info)",
+    must_contain  = [
+        ChecklistItem("item:A.6.6:scope_party_categories", "Party categories enumerated (employees, contractors, suppliers, visitors, M&A counterparties, partners with joint-development)",                                                "must", False, "27002:6.6 — interested parties"),
+        ChecklistItem("item:A.6.6:scope_trigger_threshold","Trigger threshold per category (which info-class triggers NDA — typically access to confidential class and above; some orgs all-access)",                                      "must", False, "27002:6.6 — needs for protection"),
+        ChecklistItem("item:A.6.6:scope_variant_mapping",  "Party-to-variant mapping (employees → light employee NDA; contractors → contractor NDA; suppliers → bilateral; M&A → heavy)",                                                  "must", False, "27002:6.6 — proportional"),
+        ChecklistItem("item:A.6.6:scope_jurisdictions",    "Jurisdictions covered (where signatories sign / where info is protected — drives governing-law clause and enforceability)",                                                    "must", False, "27002:6.6 — applicable laws"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.6:scope_change_drivers",   "Trigger list for re-scoping (new party category — e.g. open-source-contributor NDA, gig workers, new geography)",                                                                "should", False, "Currency"),
+    ],
+)
+
+REQ_A66_TEMPLATE_REVIEW = EvidenceRequirement(
+    id              = "req:A.6.6:nda_template_review",
+    control_ref     = "A.6.6",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic NDA Template Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that the template still reflects current information classification (A.5.12), current jurisdictional enforceability (Schrems-style impacts on cross-border NDAs), and that all active signers are on a current-enough version. Annual cadence (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.6.6:rev_date",              "Review date within the planned interval",                                                                                                                                          "must", False, "27002:6.6 — regularly reviewed"),
+        ChecklistItem("item:A.6.6:rev_reviewer",          "Reviewer identity (Legal counsel + InfoSec lead jointly)",                                                                                                                        "must", False, "Accountability"),
+        ChecklistItem("item:A.6.6:rev_classification_drift","Information-classification drift check — has A.5.12 classification scheme changed in ways affecting NDA info_classes?",                                                          "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.6.6:rev_enforceability",    "Enforceability check per jurisdiction (legal counsel input — case-law shifts, Schrems-style impacts on cross-border data flows in NDA scope)",                                  "must", False, "27002:6.6 — applicable laws"),
+        ChecklistItem("item:A.6.6:rev_signer_currency",   "Signer-currency analysis (% on current template version; plan for re-signing the gap where material clauses changed)",                                                              "must", False, "27002:6.6 — current"),
+        ChecklistItem("item:A.6.6:rev_register_update",   "Changes propagated to the live template and to the signer-re-signing plan",                                                                                                        "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.6.6:rev_ad_hoc_triggers",   "Ad-hoc review triggers (material classification change, case-law shift, M&A bringing new counterparty types)",                                                                    "should", False, "Change-driven review"),
+        ChecklistItem("item:A.6.6:rev_next_date",         "Next planned review date stated",                                                                                                                                                  "should", False, "Planning"),
+    ],
+)
+
+
+# ── Annex A.6.8 — Event reporting — op_process spine (4-leaf) ────────────────
+# Phase B batch 21 — procedure-as-primary op_process. All 6 original MUST ids
+# preserved. Cross-control: A.5.25 incident triage (the receiving end of every
+# A.6.8 report); A.5.26 incident management (where substantiated events
+# escalate); A.6.3 awareness (drives channel discoverability).
+# Authority: ISO 27002:2022 § 6.8 implementation guidance.
+
+REQ_A68_EVENT_REPORTING_PROCEDURE = EvidenceRequirement(
     id            = "req:A.6.8:event_reporting_procedure",
     control_ref   = "A.6.8",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Information Security Event Reporting Procedure",
     trigger_type  = "universal",
-    description   = "A.6.8 requires the organization to provide a mechanism for personnel to report observed or suspected information security events through appropriate channels in a timely manner. Evidence is a documented reporting procedure",
+    description   = "A.6.8 requires the organisation to provide a mechanism for personnel to report observed or suspected information security events through appropriate channels in a timely manner. The procedure documents the channels, what to report, timeliness expectation, no-blame culture, and handoff to triage. The event report register, reporting-audience scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.6.8:channels",         "Multiple reporting channels offered (email, hotline, portal, manager, ticket system)", "must", False, "A.6.8 — appropriate channels"),
-        ChecklistItem("item:A.6.8:audience",         "Procedure addresses all personnel (employees, contractors, third parties)", "must", False, "A.6.8 — mechanism for personnel"),
-        ChecklistItem("item:A.6.8:what_to_report",   "What to report — observed events, suspected events, near-misses (no judgement required at reporting stage)", "must", False, "A.6.8 — observed or suspected"),
-        ChecklistItem("item:A.6.8:timeliness",       "Timeliness expectation (e.g. as soon as practicable, within N hours of awareness)", "must", False, "A.6.8 — timely manner"),
-        ChecklistItem("item:A.6.8:no_blame",         "No-blame / non-retaliation statement encourages honest reporting", "must", False, "Reporting culture"),
-        ChecklistItem("item:A.6.8:handoff_to_triage","Handoff to triage process (A.5.25) on receipt", "must", False, "Closes the loop"),
+        ChecklistItem("item:A.6.8:channels",          "Multiple reporting channels offered (email, hotline, portal, manager, ticket system) — drives discoverability and accessibility under various conditions including when normal tooling is unavailable", "must", False, "27002:6.8 — appropriate channels"),
+        ChecklistItem("item:A.6.8:audience",          "Procedure addresses all personnel (employees, contractors, third parties with access)",                                                                                                "must", False, "27002:6.8 — mechanism for personnel"),
+        ChecklistItem("item:A.6.8:what_to_report",    "What to report — observed events, suspected events, near-misses (no judgement required at reporting stage; over-reporting is preferred to under-reporting)",                            "must", False, "27002:6.8 — observed or suspected"),
+        ChecklistItem("item:A.6.8:timeliness",        "Timeliness expectation (e.g. as soon as practicable, within N hours of awareness; tighter for active-attack indicators)",                                                              "must", False, "27002:6.8 — timely manner"),
+        ChecklistItem("item:A.6.8:no_blame",          "No-blame / non-retaliation statement encourages honest reporting (drives reporting culture; under-reporting is the #1 risk for incident programs)",                                    "must", False, "Reporting culture"),
+        ChecklistItem("item:A.6.8:handoff_to_triage", "Handoff to triage process (A.5.25 assessment-and-decision) on receipt — drives traceability from report through to closure",                                                            "must", False, "Closes the loop with A.5.25"),
+        ChecklistItem("item:A.6.8:owner",             "Named owner of the procedure (typically InfoSec on-call with HR + Legal partners for sensitive cases)",                                                                                "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.6.8:anonymity_option", "Anonymous reporting option for sensitive cases", "should", False, "Maximises reporting"),
-        ChecklistItem("item:A.6.8:awareness_promotion","Periodic awareness reminders about the channel (links to A.6.3 training programme)", "should", False, "Channel discoverability"),
+        ChecklistItem("item:A.6.8:anonymity_option",  "Anonymous reporting option for sensitive cases (drives reporting of insider-threat suspicions and whistleblower-territory cases)",                                                    "should", False, "Maximises reporting"),
+        ChecklistItem("item:A.6.8:awareness_promotion","Periodic awareness reminders about the channel (links to A.6.3 training programme; channel discoverability decays without reminder)",                                                "should", False, "Channel discoverability"),
+        ChecklistItem("item:A.6.8:acknowledgment",    "Acknowledgment-to-reporter expectation stated (closes the feedback loop — reporters who never hear back stop reporting)",                                                              "should", False, "Reporting culture"),
+    ],
+)
+
+REQ_A68_REPORT_REGISTER = EvidenceRequirement(
+    id            = "req:A.6.8:event_report_register",
+    control_ref   = "A.6.8",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Event Report Register",
+    trigger_type  = "universal",
+    description   = "The operational catalogue of every event report received. Each row: report identifier, channel used, reporter identity (or 'anonymous'), report timestamp, content summary, triage outcome (link to A.5.25 triage record), closure. Drives the 'show me the reporting program is actually used and acted on' audit",
+    must_contain  = [
+        ChecklistItem("item:A.6.8:reg_report_id",        "Per-row report identifier (links to A.5.25 triage record where the report was triaged)",                                                                                              "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.6.8:reg_channel",          "Per-row channel used (drives channel-mix analysis — are some channels under-used?)",                                                                                                  "must", False, "27002:6.8 — channels effectiveness"),
+        ChecklistItem("item:A.6.8:reg_reporter",        "Per-row reporter identity or 'anonymous' (anonymous reports are first-class; non-attribution is the point of the option)",                                                            "must", False, "27002:6.8 — mechanism"),
+        ChecklistItem("item:A.6.8:reg_report_timestamp","Per-row report timestamp (drives timeliness analysis — gap between event time and report time)",                                                                                      "must", False, "27002:6.8 — timely"),
+        ChecklistItem("item:A.6.8:reg_summary",         "Per-row content summary (one-line headline + classification — observed / suspected / near-miss)",                                                                                      "must", False, "Operational discipline"),
+        ChecklistItem("item:A.6.8:reg_triage_outcome",  "Per-row triage outcome (incident-confirmed → A.5.26 register; false-positive-closed; near-miss-filed-for-trend; pending-investigation)",                                                "must", False, "27002:6.8 + A.5.25"),
+        ChecklistItem("item:A.6.8:reg_closure_date",    "Per-row closure date (every report reaches a closed state, no open-forever)",                                                                                                          "must", False, "Closes the loop"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.8:reg_ack_sent",        "Per-row acknowledgment-sent-to-reporter flag (where reporter known + non-anonymous)",                                                                                                  "should", False, "Reporting culture"),
+        ChecklistItem("item:A.6.8:reg_lessons_feed",    "Per-row lessons-feed flag where the report surfaced a control gap (feeds back to A.6.3 awareness curriculum or relevant control owner)",                                              "should", False, "Continual improvement"),
+    ],
+)
+
+REQ_A68_REPORTING_AUDIENCE_SCOPE = EvidenceRequirement(
+    id            = "req:A.6.8:reporting_audience_scope",
+    control_ref   = "A.6.8",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Reporting Audience Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the procedure's audience and the awareness-promotion focus. Documents who CAN report (every person with access — including non-employees), who SHOULD know about the channel, and how the channel surfaces to each segment",
+    must_contain  = [
+        ChecklistItem("item:A.6.8:scope_audience_segments","Audience segments enumerated (employees, contractors, suppliers' staff with access, visitors, customers in some sectors — anyone who might observe an event)",                  "must", False, "27002:6.8 — relevant audiences"),
+        ChecklistItem("item:A.6.8:scope_channel_surfacing","Channel-surfacing per segment (employees see it in onboarding training + intranet; contractors see it at onboarding briefing; visitors see it in lobby; customers in T&Cs)",  "must", False, "27002:6.8 — accessibility"),
+        ChecklistItem("item:A.6.8:scope_sensitive_paths",  "Sensitive-case escalation paths stated (insider-threat suspicion → InfoSec-only intake bypassing line management; whistleblower-territory → independent intake)",              "must", False, "27002:6.8 — appropriate channels"),
+        ChecklistItem("item:A.6.8:scope_jurisdictions",    "Jurisdictions covered (whistleblower-protection law variations — EU Whistleblower Directive, US Sarbanes-Oxley, sectoral protections)",                                          "must", False, "27002:6.8 — applicable laws"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.8:scope_change_drivers",   "Trigger list for re-scoping (new audience segment — e.g. open-source contributors, gig workers, new sectoral whistleblower regulation)",                                          "should", False, "Currency"),
+    ],
+)
+
+REQ_A68_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.6.8:reporting_program_review",
+    control_ref     = "A.6.8",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Reporting Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that reports are coming in (under-reporting is the major risk), that triage handoff is working (no reports lost between A.6.8 intake and A.5.25 triage), that reporters are getting acknowledgment, and that the audience-channel surfacing is current. Annual cadence (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.6.8:rev_date",            "Review date within the planned interval",                                                                                                                                            "must", False, "27002:6.8 — periodic"),
+        ChecklistItem("item:A.6.8:rev_reviewer",        "Reviewer identity (InfoSec lead + HR partner; Legal for whistleblower-territory cases)",                                                                                            "must", False, "Accountability"),
+        ChecklistItem("item:A.6.8:rev_volume_trend",    "Volume trend analysis (report rate per segment — sudden drops may indicate under-reporting; sudden spikes may indicate a campaign or a known issue surfacing)",                      "must", False, "Reporting culture health"),
+        ChecklistItem("item:A.6.8:rev_channel_mix",     "Channel-mix analysis (which channels are being used; under-used channels may need awareness promotion or retirement)",                                                                "must", False, "27002:6.8 — channels effectiveness"),
+        ChecklistItem("item:A.6.8:rev_triage_handoff",  "Triage handoff check — every report reached A.5.25 triage; no reports lost in the handoff; cycle time from report to triage measured",                                              "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.6.8:rev_acknowledgment_rate","Acknowledgment rate to reporters (where reporter known) — drives reporter satisfaction and ongoing willingness to report",                                                        "must", False, "Reporting culture"),
+        ChecklistItem("item:A.6.8:rev_register_update", "Changes propagated to the procedure / scope with reference to this review",                                                                                                          "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.6.8:rev_ad_hoc_triggers", "Ad-hoc review triggers (major incident exposing under-reporting, regulator enforcement on whistleblower regime, channel outage)",                                                  "should", False, "Change-driven review"),
+        ChecklistItem("item:A.6.8:rev_next_date",       "Next planned review date stated",                                                                                                                                                    "should", False, "Planning"),
     ],
 )
 
@@ -7618,13 +8138,41 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     # Universal — ISO 27001 Annex A.6 People Controls bulk curation (Phase B,
     # 2026-05-22). A.6.7 (Remote Working Policy) already exists as
     # REQ_REMOTE_WORKING further up in the file.
-    REQ_A61_SCREENING,
-    REQ_A62_EMPLOYMENT_TERMS,
-    REQ_A63_SECURITY_AWARENESS,
+    # A.6.1 — 4-leaf op_process (2026-06-01 batch 21 — A.6 7-pack)
+    REQ_A61_SCREENING_PROCEDURE,
+    REQ_A61_SCREENING_REGISTER,
+    REQ_A61_APPLICABLE_ROLES_SCOPE,
+    REQ_A61_PROGRAM_REVIEW,
+    # A.6.2 — 4-leaf records_program template-as-primary (2026-06-01 batch 21)
+    REQ_A62_EMPLOYMENT_TERMS_TEMPLATE,
+    REQ_A62_SIGNED_TERMS_REGISTER,
+    REQ_A62_APPLICABLE_WORKERS_SCOPE,
+    REQ_A62_TEMPLATE_REVIEW,
+    # A.6.3 — 4-leaf op_process programme-as-primary (2026-06-01 batch 21)
+    REQ_A63_AWARENESS_PROGRAMME,
+    REQ_A63_COMPLETION_REGISTER,
+    REQ_A63_AUDIENCE_CURRICULUM_SCOPE,
+    REQ_A63_PROGRAMME_REVIEW,
+    # A.6.4 — 4-leaf op_process (2026-06-01 batch 21)
     REQ_A64_DISCIPLINARY_PROCESS,
-    REQ_A65_POST_EMPLOYMENT,
-    REQ_A66_NDA,
-    REQ_A68_EVENT_REPORTING,
+    REQ_A64_CASE_REGISTER,
+    REQ_A64_APPLICABLE_JURISDICTIONS_SCOPE,
+    REQ_A64_PROCESS_REVIEW,
+    # A.6.5 — 4-leaf op_process (2026-06-01 batch 21)
+    REQ_A65_POST_EMPLOYMENT_PROCEDURE,
+    REQ_A65_LEAVER_BRIEFING_REGISTER,
+    REQ_A65_SURVIVING_OBLIGATIONS_SCOPE,
+    REQ_A65_PROGRAM_REVIEW,
+    # A.6.6 — 4-leaf records_program template-as-primary (2026-06-01 batch 21)
+    REQ_A66_NDA_TEMPLATE,
+    REQ_A66_SIGNATURE_REGISTER,
+    REQ_A66_APPLICABLE_PARTIES_SCOPE,
+    REQ_A66_TEMPLATE_REVIEW,
+    # A.6.8 — 4-leaf op_process (2026-06-01 batch 21)
+    REQ_A68_EVENT_REPORTING_PROCEDURE,
+    REQ_A68_REPORT_REGISTER,
+    REQ_A68_REPORTING_AUDIENCE_SCOPE,
+    REQ_A68_PROGRAM_REVIEW,
 
     # Universal — ISO 27001 Annex A.7 Physical Controls bulk curation
     # (Phase B, 2026-05-22). All 14 A.7 controls were uncurated prior.
