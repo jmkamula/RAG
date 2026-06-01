@@ -495,29 +495,11 @@ REQ_CLOUD_EXIT_MIGRATION = EvidenceRequirement(
     ],
 )
 
-REQ_ENCRYPTION_POLICY = EvidenceRequirement(
-    id            = "req:A.8.24:encryption_policy",
-    control_ref   = "A.8.24",
-    standard_id   = "ISO27001:2022",
-    evidence_type = "policy",
-    title= "Use of Cryptography Policy",
-    trigger_type  = "universal",
-    description   = "A.8.24 requires a policy on effective use of cryptography",
-    must_contain  = [
-        ChecklistItem("item:A.8.24:algorithms",      "Approved cryptographic algorithms listed", "must", False, "A.8.24a"),
-        ChecklistItem("item:A.8.24:key_mgmt",        "Key management procedures defined", "must", False, "A.8.24b"),
-        ChecklistItem("item:A.8.24:at_rest",         "Encryption requirements for data at rest", "must", False, "A.8.24c"),
-        ChecklistItem("item:A.8.24:in_transit",      "Encryption requirements for data in transit", "must", False, "A.8.24c"),
-        ChecklistItem("item:A.8.24:roles",           "Roles and responsibilities for cryptography", "must", False, "A.8.24e"),
-        ChecklistItem("item:A.8.24:personal_data",   "Personal data explicitly scoped for encryption", "must", True, "GDPR Art.32.1a alignment"),
-        ChecklistItem("item:A.8.24:pii_keys",        "Key management for PII encryption keys", "must", True, "GDPR Art.32.1a alignment"),
-    ],
-    should_contain= [
-        ChecklistItem("item:A.8.24:key_strength",  "Key length and strength requirements", "should", False, "A.8.24f"),
-        ChecklistItem("item:A.8.24:exceptions",    "Exceptions process defined", "should", False, "Governance"),
-        ChecklistItem("item:A.8.24:review",        "Review frequency stated", "should", False, "Document control"),
-    ],
-)
+# REQ_ENCRYPTION_POLICY (A.8.24) — promoted to 4-leaf policy_program in Phase B
+# batch 23 (2026-06-01). See the consolidated A.8 block further down for
+# REQ_A824_POLICY / REQ_A824_KEY_REGISTER / REQ_A824_APPLICABLE_SCOPE /
+# REQ_A824_PROGRAM_REVIEW. Item-ids preserved: personal_data, pii_keys,
+# at_rest, in_transit (referenced by SPEC_ART_32).
 
 # ── Annex A.5.24 — Information security incident management planning ────────
 # operational_process (4-leaf). Promoted 2026-05-31 from single-leaf to multi-
@@ -649,26 +631,11 @@ REQ_A524_EXERCISE_RECORD = EvidenceRequirement(
     ],
 )
 
-REQ_DATA_MASKING = EvidenceRequirement(
-    id            = "req:A.8.11:data_masking_procedure",
-    control_ref   = "A.8.11",
-    standard_id   = "ISO27001:2022",
-    evidence_type = "procedure",
-    title= "Data Masking Procedure",
-    trigger_type  = "universal",
-    description   = "A.8.11 requires procedures for masking personal data in non-production environments",
-    must_contain  = [
-        ChecklistItem("item:A.8.11:scope",           "Scope — which systems/environments require masking", "must", False, "A.8.11a"),
-        ChecklistItem("item:A.8.11:techniques",      "Masking techniques to be used (static/dynamic)", "must", False, "A.8.11b"),
-        ChecklistItem("item:A.8.11:personal_data",   "Personal data explicitly covered including PII categories", "must", True, "GDPR alignment"),
-        ChecklistItem("item:A.8.11:non_production",  "Non-production environments explicitly covered", "must", True, "Primary use case"),
-        ChecklistItem("item:A.8.11:roles",           "Roles responsible for implementing masking", "must", False, "Accountability"),
-    ],
-    should_contain= [
-        ChecklistItem("item:A.8.11:testing",     "Verification that masking is effective", "should", False, "Quality assurance"),
-        ChecklistItem("item:A.8.11:exceptions",  "Exception process for unmasked data", "should", False, "Governance"),
-    ],
-)
+# REQ_DATA_MASKING (A.8.11) — promoted to 4-leaf operational_process in Phase B
+# batch 23 (2026-06-01). See the consolidated A.8 block further down for
+# REQ_A811_PROCEDURE / REQ_A811_REGISTER / REQ_A811_APPLICABLE_SCOPE /
+# REQ_A811_PROGRAM_REVIEW. Item-ids preserved: scope, techniques, personal_data
+# (referenced by SPEC_ART_25).
 
 # ── Annex A.5.18 — Access rights — operational_process spine (4-leaf) ────────
 # Originally promoted 2026-05-26 — A.5.18 was the FIRST control promoted to
@@ -823,27 +790,11 @@ REQ_REMOTE_WORKING = EvidenceRequirement(
     ],
 )
 
-REQ_SECURE_DEVELOPMENT = EvidenceRequirement(
-    id            = "req:A.8.25:secure_development_policy",
-    control_ref   = "A.8.25",
-    standard_id   = "ISO27001:2022",
-    evidence_type = "policy",
-    title= "Secure Development Lifecycle Policy",
-    trigger_type  = "profile_fact",
-    description   = "A.8.25 requires rules for secure development when organisation develops software",
-    must_contain  = [
-        ChecklistItem("item:A.8.25:principles",    "Security principles for software design", "must", False, "A.8.25a"),
-        ChecklistItem("item:A.8.25:environments",  "Security of development environments", "must", False, "A.8.25b"),
-        ChecklistItem("item:A.8.25:versioning",    "Version control requirements", "must", False, "A.8.25c"),
-        ChecklistItem("item:A.8.25:security_req",  "Security requirements in development process", "must", False, "A.8.26 linkage"),
-        ChecklistItem("item:A.8.25:testing",       "Security testing requirements", "must", False, "A.8.29 linkage"),
-        ChecklistItem("item:A.8.25:personal_data", "Handling of personal data in development/test", "must", True, "GDPR — no real data in dev"),
-    ],
-    should_contain= [
-        ChecklistItem("item:A.8.25:training",  "Secure coding training requirements", "should", False, "A.8.28 linkage"),
-        ChecklistItem("item:A.8.25:review",    "Code review requirements", "should", False, "Quality assurance"),
-    ],
-)
+# REQ_SECURE_DEVELOPMENT (A.8.25) — promoted to 4-leaf policy_program in Phase B
+# batch 23 (2026-06-01). See the consolidated A.8 block further down for
+# REQ_A825_POLICY / REQ_A825_REGISTER / REQ_A825_APPLICABLE_SCOPE /
+# REQ_A825_PROGRAM_REVIEW. No item-ids referenced by SPECs (preservation
+# trivial). trigger_type=profile_fact preserved on new policy leaf.
 
 # ── Operational documents ─────────────────────────────────────────────────────
 
@@ -6469,11 +6420,35 @@ REQ_A714_PROGRAM_REVIEW = EvidenceRequirement(
 )
 
 
-# ── ISO 27001 Annex A.8 — Technological Controls (Phase B, 2026-05-22) ───────
-# A.8.11 / A.8.24 / A.8.25 already exist further up in the file as
-# REQ_DATA_MASKING / REQ_ENCRYPTION_POLICY / REQ_SECURE_DEVELOPMENT.
-# The 31 entries below cover the rest of Annex A.8.
+# ── ISO 27001 Annex A.8 — Technological Controls ──────────────────────────────
+# Originally drafted 2026-05-22 as single-leaf placeholders (Phase B initial
+# draft). Promoted 2026-06-01 to full 4-leaf depth as Phase B batch 23 — the
+# LARGEST batch yet, closing the A.8 block (33 controls × 4 leaves = 132
+# evidence requirements). See [[curation-phase-b-batch-23-2026-06-01]] for the
+# full narrative: spine assignments, item-id preservation
+# (A.8.10:scope_systems; A.8.11:scope/techniques/personal_data via SPEC_ART_25;
+# A.8.24:personal_data/pii_keys/at_rest/in_transit via SPEC_ART_32), live-
+# posture mix, and engine-NC surfacing behaviour.
+#
+# A.8.2 was already promoted 2026-05-26 (calibration era — predates Phase B
+# numbered batches). Style v2 aligned in this batch (freshness conventions +
+# auditor-critical MUSTs).
+#
+# Spine mix across the 33 controls:
+#   policy_program      — A.8.1 / A.8.18 / A.8.20 / A.8.23 / A.8.24 / A.8.25 /
+#                         A.8.27 / A.8.34
+#   operational_process — A.8.2 (alignment) / A.8.3 / A.8.7 / A.8.8 / A.8.9 /
+#                         A.8.10 / A.8.11 / A.8.13 / A.8.15 / A.8.16 / A.8.17 /
+#                         A.8.19 / A.8.21 / A.8.22 / A.8.26 / A.8.28 / A.8.29 /
+#                         A.8.30 / A.8.31 / A.8.32 / A.8.33
+#   technical_control   — A.8.4 / A.8.5 / A.8.6 / A.8.12 / A.8.14
+#
+# Compact-style elaboration (5-7 MUSTs per leaf, 1-2 SHOULDs) — matches the
+# A.7 batch 22 14-pack pragmatism. Review freshness defaults to 365d except
+# high-volume / high-risk domains (A.8.2 / A.8.7 / A.8.8 / A.8.15 / A.8.16
+# at 180d; A.8.34 at 365d as audit policy is stable).
 
+# ── A.8.1 User endpoint devices — policy_program 4-leaf (batch 23 2026-06-01) ─
 REQ_A81_USER_ENDPOINTS = EvidenceRequirement(
     id            = "req:A.8.1:user_endpoint_devices_policy",
     control_ref   = "A.8.1",
@@ -6481,28 +6456,94 @@ REQ_A81_USER_ENDPOINTS = EvidenceRequirement(
     evidence_type = "policy",
     title         = "User Endpoint Devices Policy",
     trigger_type  = "universal",
-    description   = "A.8.1 requires protection of information stored on, processed by, or accessible via user endpoint devices. Evidence is a policy (often the MDM / endpoint security policy) covering required protections per device class",
+    description   = "A.8.1 requires protection of information stored on, processed by, or accessible via user endpoint devices. The policy defines device classes in scope, baseline protections per class, and the authorisation model for endpoint enrolment. The endpoint register, applicable-classes scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.1:scope",         "Scope (corporate-owned, BYOD, contractor devices) defined", "must", False, "A.8.1 — user end point devices"),
-        ChecklistItem("item:A.8.1:encryption",    "Full-disk or storage encryption required", "must", False, "A.8.1 — protected"),
-        ChecklistItem("item:A.8.1:malware",       "Anti-malware / EDR required and maintained current (links to A.8.7)", "must", False, "A.8.1 — protected"),
-        ChecklistItem("item:A.8.1:patch_level",   "Patch level / OS-version requirements stated", "must", False, "A.8.1 — protected"),
-        ChecklistItem("item:A.8.1:authentication","Authentication and screen-lock requirements (links to A.7.7)", "must", False, "A.8.1 — accessible via end point devices"),
-        ChecklistItem("item:A.8.1:remote_wipe",   "Remote wipe / lock capability for lost or stolen devices", "must", False, "A.8.1 — protected"),
-        ChecklistItem("item:A.8.1:mdm_enrollment","MDM enrolment required before access to corporate information", "must", False, "A.8.1 — protected"),
+        ChecklistItem("item:A.8.1:scope",             "Scope — device classes in scope (corporate-owned, BYOD, contractor)",                                                                       "must", False, "27002:8.1 — user end point devices"),
+        ChecklistItem("item:A.8.1:encryption",        "Full-disk or storage encryption required",                                                                                                    "must", False, "27002:8.1 — protected"),
+        ChecklistItem("item:A.8.1:malware",           "Anti-malware / EDR required and current (cross-link to A.8.7)",                                                                              "must", False, "27002:8.1 — protected"),
+        ChecklistItem("item:A.8.1:patch_level",       "Patch level / OS-version requirements stated (cross-link to A.8.8)",                                                                          "must", False, "27002:8.1 — protected"),
+        ChecklistItem("item:A.8.1:authentication",    "Authentication and screen-lock requirements (cross-link to A.5.17 / A.7.7)",                                                                "must", False, "27002:8.1 — accessible via end point devices"),
+        ChecklistItem("item:A.8.1:remote_wipe",       "Remote wipe / lock capability for lost or stolen devices",                                                                                    "must", False, "27002:8.1 — protected"),
+        ChecklistItem("item:A.8.1:mdm_enrollment",    "MDM enrolment required before access to corporate information",                                                                              "must", False, "Modern baseline"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.1:jailbreak_detection","Jailbreak / root detection where mobile", "should", False, "Compromise signal"),
-        ChecklistItem("item:A.8.1:app_controls",  "Application allowlisting / blocklisting on managed endpoints", "should", False, "Reduces attack surface"),
+        ChecklistItem("item:A.8.1:jailbreak_detection","Jailbreak / root detection where mobile",                                                                                                    "should", False, "Compromise signal"),
+        ChecklistItem("item:A.8.1:app_controls",      "Application allowlisting / blocklisting on managed endpoints",                                                                              "should", False, "Reduces attack surface"),
+    ],
+)
+
+REQ_A81_ENDPOINT_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.1:endpoint_register",
+    control_ref   = "A.8.1",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Endpoint Inventory Register",
+    trigger_type  = "universal",
+    description   = "Catalogue of endpoints in scope of the policy — device id, class, owner, enrolment status, compliance state. Drives 'show me every issued device is enrolled and compliant' audit",
+    must_contain  = [
+        ChecklistItem("item:A.8.1:reg_device_id",     "Per-device unique identifier (serial, asset tag, MDM-issued id)",                                                                            "must", False, "Identification"),
+        ChecklistItem("item:A.8.1:reg_class",         "Per-device class (corporate / BYOD / contractor)",                                                                                            "must", False, "Drives policy applicability"),
+        ChecklistItem("item:A.8.1:reg_owner",         "Per-device named owner (user) and asset owner (IT)",                                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.1:reg_enrolment",     "Enrolment status (MDM-enrolled / not-required / pending) per row",                                                                            "must", False, "Drift detection"),
+        ChecklistItem("item:A.8.1:reg_compliance",    "Compliance state per row (encryption on / patch current / EDR active)",                                                                      "must", False, "Continuous evidence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.1:reg_last_seen",     "Last check-in timestamp per row (drives stale-device detection)",                                                                            "should", False, "Operational discipline"),
+    ],
+)
+
+REQ_A81_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.1:applicable_endpoint_scope",
+    control_ref   = "A.8.1",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Endpoint Scope",
+    trigger_type  = "universal",
+    description   = "Upstream that drives the policy and register. Documents which endpoint classes apply, exclusions (kiosks → A.8.18; servers → A.8.9), and the BYOD authorisation model",
+    must_contain  = [
+        ChecklistItem("item:A.8.1:scope_classes",     "Endpoint classes enumerated (laptop / desktop / mobile / tablet / contractor-owned)",                                                        "must", False, "27002:8.1 — applicable"),
+        ChecklistItem("item:A.8.1:scope_exclusions",  "Exclusions stated explicitly (kiosks via A.8.18, servers via A.8.9, lab/test rigs via A.8.31)",                                              "must", False, "Boundary clarity"),
+        ChecklistItem("item:A.8.1:scope_byod_model",  "BYOD authorisation model (allowed / not-allowed / conditional with container)",                                                              "must", False, "Common ambiguity point"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.1:scope_change_drivers","Trigger list for re-scoping (new device class, new vendor, regulatory inspection rights)",                                                  "should", False, "Currency"),
+    ],
+)
+
+REQ_A81_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.1:endpoint_program_review",
+    control_ref     = "A.8.1",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Endpoint Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that endpoint protections still match the policy, the register reflects reality, and any new device classes have been incorporated (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.1:rev_date",          "Review date within the planned interval",                                                                                                    "must", False, "27002:8.1 — periodic"),
+        ChecklistItem("item:A.8.1:rev_reviewer",      "Reviewer identity (IT lead + InfoSec lead jointly)",                                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.1:rev_compliance_sample","Sample-based compliance verification across the register (encryption / patching / EDR coverage)",                                          "must", False, "Continuous evidence"),
+        ChecklistItem("item:A.8.1:rev_scope_check",   "Cross-check against the applicable scope — any new class or vendor missing",                                                                  "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.8.1:rev_register_update","Changes propagated to the policy / register",                                                                                                  "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.1:rev_next_date",     "Next planned review date stated",                                                                                                            "should", False, "Planning"),
     ],
 )
 
 # ── Annex A.8.2 — Privileged access rights — technical_control spine (4-leaf) ──
-# Promoted 2026-05-26 from single-leaf per [[curation-program-full-multi-leaf]].
+# Originally promoted 2026-05-26 from single-leaf (calibration era — predates
+# Phase B numbered batches). Style v2 aligned in batch 23 (2026-06-01):
+#   - bl_pam_tool SHOULD → MUST (PAM is modern baseline for serious privileged-access)
+#   - bl_jit_capability SHOULD → MUST (just-in-time elevation modern baseline)
+#   - log_anomaly_alert SHOULD → MUST (passive logging without alerting fails detect-and-respond intent)
+#   - log_tamper_protect SHOULD → MUST (defensibility requires integrity protection)
+#   - rc_sla_met new MUST (revocation-within-SLA auditor proof, parallel to A.5.16 rev_sla_met)
+#   - rc_a518_pairing new MUST (cross-link to A.5.18 general access review — closes "privileged subset orphaned" gap)
 # Spine: technical_control → configuration_baseline + procedure +
 # monitoring_record + review_record (here as recertification, freshness 180
 # days because § 8.2 calls for more frequent review than regular access).
-# Authority: ISO 27002:2022 § 8.2 implementation guidance, items a–k.
+# All 12 existing item-ids preserved. Authority: ISO 27002:2022 § 8.2 a–k.
 
 REQ_A82_BASELINE = EvidenceRequirement(
     id            = "req:A.8.2:privileged_access_baseline",
@@ -6517,10 +6558,11 @@ REQ_A82_BASELINE = EvidenceRequirement(
         ChecklistItem("item:A.8.2:bl_systems_in_scope",     "Systems and processes in scope for privileged access governance",          "must", False, "27002:8.2a, g"),
         ChecklistItem("item:A.8.2:bl_strong_auth",          "Strong authentication required for all privileged access (MFA enforced)",  "must", False, "27002:8.2h"),
         ChecklistItem("item:A.8.2:bl_admin_tools_restricted", "Access to system-administration tools restricted to privileged roles only", "must", False, "27002:8.2g"),
+        ChecklistItem("item:A.8.2:bl_pam_tool",             "PAM tooling configured (vaulting, session recording, command brokering)", "must", False, "Modern baseline (Style v2 promotion)"),
+        ChecklistItem("item:A.8.2:bl_jit_capability",       "Just-in-time / time-bound elevation capability available — eliminates standing privilege", "must", False, "27002:8.2b modern interpretation (Style v2 promotion)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.2:bl_pam_tool",             "PAM tooling configured (vaulting, session recording)",                     "should", False, "Modern baseline"),
-        ChecklistItem("item:A.8.2:bl_jit_capability",       "Just-in-time / time-bound elevation capability available",                 "should", False, "Reduces standing privilege"),
+        ChecklistItem("item:A.8.2:bl_session_recording",    "Session recording active for high-risk privileged actions",                  "should", False, "Forensic readiness"),
     ],
 )
 
@@ -6559,10 +6601,11 @@ REQ_A82_ACTIVITY_LOG = EvidenceRequirement(
         ChecklistItem("item:A.8.2:log_what",           "Action performed captured (command / change / access)",             "must", False, "27002:8.2j"),
         ChecklistItem("item:A.8.2:log_when",           "Timestamp captured per action",                                      "must", False, "27002:8.2j"),
         ChecklistItem("item:A.8.2:log_retention",      "Log retention period defined and enforced",                          "must", False, "A.8.15 linkage"),
+        ChecklistItem("item:A.8.2:log_anomaly_alert",  "Anomaly alerting configured (unusual hours, unusual scope, unusual command)", "must", False, "Modern baseline — passive logging without alerting fails detect-respond intent (Style v2 promotion)"),
+        ChecklistItem("item:A.8.2:log_tamper_protect", "Log integrity protection (write-once / SIEM forwarding off-host)",   "must", False, "Defensible evidence (Style v2 promotion)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.2:log_anomaly_alert",  "Anomaly alerting configured (unusual hours, unusual scope)",         "should", False, "Modern baseline"),
-        ChecklistItem("item:A.8.2:log_tamper_protect", "Log integrity protection (write-once / SIEM forwarding)",            "should", False, "Defensible evidence"),
+        ChecklistItem("item:A.8.2:log_siem_correlation","SIEM correlation rules tuned for privileged-access misuse patterns","should", False, "Detection maturity"),
     ],
 )
 
@@ -6580,13 +6623,16 @@ REQ_A82_RECERTIFICATION = EvidenceRequirement(
         ChecklistItem("item:A.8.2:rc_reviewer",        "Reviewer identity (asset owner or delegated authority)",                    "must", False, "Accountability"),
         ChecklistItem("item:A.8.2:rc_per_account",     "Per-privileged-account outcome (re-confirmed / amended / revoked)",         "must", False, "27002:8.2k"),
         ChecklistItem("item:A.8.2:rc_actions",         "Revocation/modification actions completed for non-reconfirmed access",      "must", False, "27002:8.2k"),
+        ChecklistItem("item:A.8.2:rc_sla_met",         "Revocation-actions-within-SLA flag per row (auditor-critical timeliness proof, parallel to A.5.16 rev_sla_met)", "must", False, "27002:8.2k modern interpretation (Style v2)"),
+        ChecklistItem("item:A.8.2:rc_a518_pairing",    "Cross-link to A.5.18 general access review — every privileged subject also appears under their general access row (no orphan privileged paths)", "must", False, "Cross-control coherence (Style v2)"),
+        ChecklistItem("item:A.8.2:rc_role_change_trigger", "Role-change events trigger ad-hoc recertification outside the interval", "must", False, "27002:8.2g (Style v2 promotion)"),
     ],
     should_contain  = [
-        ChecklistItem("item:A.8.2:rc_role_change_trigger", "Role-change events trigger ad-hoc recertification outside the interval", "should", False, "27002:8.2g"),
         ChecklistItem("item:A.8.2:rc_next_date",           "Next planned recertification date stated",                              "should", False, "Planning"),
     ],
 )
 
+# ── A.8.3 Information access restriction — op_process 4-leaf (batch 23) ──────
 REQ_A83_INFORMATION_ACCESS_RESTRICTION = EvidenceRequirement(
     id            = "req:A.8.3:information_access_restriction_procedure",
     control_ref   = "A.8.3",
@@ -6594,614 +6640,2658 @@ REQ_A83_INFORMATION_ACCESS_RESTRICTION = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Information Access Restriction Procedure",
     trigger_type  = "universal",
-    description   = "A.8.3 requires access to information and associated assets to be restricted per the topic-specific access control policy (A.5.15). Evidence is a procedure implementing that policy across systems",
+    description   = "A.8.3 requires access to information and associated assets to be restricted per the topic-specific access control policy (A.5.15). The procedure documents enforcement mechanism, authorisation workflow, and recertification cadence. The access matrix register, applicable-scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.3:per_system_matrix","Access matrix per system / repository (who can do what)", "must", False, "A.8.3 — restricted"),
-        ChecklistItem("item:A.8.3:enforcement",  "Enforcement mechanism stated (ACLs, RBAC, ABAC, identity provider)", "must", False, "A.8.3 — restricted"),
-        ChecklistItem("item:A.8.3:policy_link",  "Link to access control policy (A.5.15) and identity management (A.5.16)", "must", False, "A.8.3 — accordance with topic-specific policy"),
-        ChecklistItem("item:A.8.3:authorisation","Authorisation workflow for granting and revoking access", "must", False, "A.8.3 — restricted"),
-        ChecklistItem("item:A.8.3:recertification","Periodic recertification cadence (links to A.5.18)", "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.3:enforcement",       "Enforcement mechanism per system (ACL / RBAC / ABAC / IdP claims)",                                                                            "must", False, "27002:8.3 — restricted"),
+        ChecklistItem("item:A.8.3:policy_link",       "Cross-link to A.5.15 access control policy + A.5.16 identity management",                                                                      "must", False, "27002:8.3 — accordance with topic-specific policy"),
+        ChecklistItem("item:A.8.3:authorisation",     "Authorisation workflow for granting / changing / revoking access",                                                                              "must", False, "27002:8.3 — restricted"),
+        ChecklistItem("item:A.8.3:recertification",   "Periodic recertification cadence per system (cross-link to A.5.18)",                                                                            "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.3:classification_driven","Classification-driven restriction (sensitive info → stronger enforcement)",                                                                  "must", False, "27002:8.3 — appropriate"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.3:classification_driven","Classification-driven restriction (sensitive info → stronger controls)", "should", False, "Proportionality"),
-        ChecklistItem("item:A.8.3:cloud_extensions","Cloud-specific extensions (SaaS app permissions, IAM)", "should", False, "Modern environment"),
+        ChecklistItem("item:A.8.3:cloud_extensions",  "Cloud / SaaS app permissions covered (IAM, SCIM provisioning)",                                                                                "should", False, "Modern environment"),
     ],
 )
 
-REQ_A84_SOURCE_CODE_ACCESS = EvidenceRequirement(
+REQ_A83_ACCESS_MATRIX_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.3:access_matrix_register",
+    control_ref   = "A.8.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Per-System Access Matrix Register",
+    trigger_type  = "universal",
+    description   = "Catalogue of access matrices across systems — who can do what, per repository / dataset / application. Drives the recertification workflow",
+    must_contain  = [
+        ChecklistItem("item:A.8.3:per_system_matrix", "Access matrix per system / repository row (who, what permissions, on what resource)",                                                          "must", False, "27002:8.3 — restricted"),
+        ChecklistItem("item:A.8.3:reg_system_id",     "Per-row system identifier (from asset register A.5.9)",                                                                                        "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.3:reg_owner",         "Per-row matrix owner (system owner accountable for accuracy)",                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.8.3:reg_last_recert",   "Per-row last recertification date (drives staleness detection)",                                                                                "must", False, "Drift detection"),
+        ChecklistItem("item:A.8.3:reg_classification","Per-row classification tier (drives enforcement strictness)",                                                                                  "must", False, "Cross-leaf coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.3:reg_exception_log", "Exception log for temporary elevated access per row",                                                                                          "should", False, "Operational discipline"),
+    ],
+)
+
+REQ_A83_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.3:applicable_systems_scope",
+    control_ref   = "A.8.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Systems Scope",
+    trigger_type  = "universal",
+    description   = "Upstream that drives the register and procedure. Documents which systems fall under A.8.3 governance and how classification tiers map to enforcement strictness",
+    must_contain  = [
+        ChecklistItem("item:A.8.3:scope_systems",     "Systems enumerated (drawn from A.5.9 asset register, filtered to access-relevant assets)",                                                      "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.3:scope_tier_map",    "Classification tier → enforcement strictness mapping (public / internal / confidential / restricted → ACL vs RBAC vs MFA-gated)",              "must", False, "27002:8.3 — appropriate"),
+        ChecklistItem("item:A.8.3:scope_exclusions",  "Exclusions stated (vendor-managed systems delegated via A.5.19; public-content systems with no restriction)",                                  "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.3:scope_change_drivers","Trigger list for re-scoping (new system, classification re-tier, regulatory inspection)",                                                    "should", False, "Currency"),
+    ],
+)
+
+REQ_A83_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.3:access_restriction_program_review",
+    control_ref     = "A.8.3",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Access Restriction Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that enforcement still matches the policy, the matrix register reflects reality, and recertification cadence is being met (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.3:rev_date",          "Review date within the planned interval",                                                                                                    "must", False, "27002:8.3 — periodic"),
+        ChecklistItem("item:A.8.3:rev_reviewer",      "Reviewer identity (IT lead + InfoSec lead jointly)",                                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.3:rev_coverage_check","Coverage check — every in-scope system has an up-to-date matrix in the register",                                                              "must", False, "27002:8.3 — restricted"),
+        ChecklistItem("item:A.8.3:rev_recert_compliance","Recertification compliance check — every matrix recertified within cadence",                                                                "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.3:rev_register_update","Findings propagated to the matrix register / procedure",                                                                                      "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.3:rev_next_date",     "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.4 Source code, dev tools, libraries — technical_control 4-leaf (batch 23) ─
+REQ_A84_BASELINE = EvidenceRequirement(
+    id            = "req:A.8.4:source_code_access_baseline",
+    control_ref   = "A.8.4",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "configuration_baseline",
+    title         = "Source Code Access Baseline",
+    trigger_type  = "profile_fact",
+    description   = "A.8.4 baseline — repository configuration state. Defines the RBAC model, branch protection, secrets scanning, dependency rules. profile_fact trigger because A.8.4 only applies where the organisation develops software. The procedure, monitoring log and review are sibling leaves",
+    must_contain  = [
+        ChecklistItem("item:A.8.4:bl_rbac",           "RBAC configured per repository (read / write / admin) at the platform level",                                                                "must", False, "27002:8.4 — read and write access"),
+        ChecklistItem("item:A.8.4:bl_branch_protection","Branch protection enabled on protected branches (review required, status checks required)",                                                "must", False, "27002:8.4 — appropriately managed"),
+        ChecklistItem("item:A.8.4:bl_secrets_scanning","Secrets scanning active on commit + push (pre-commit hook or platform scanner)",                                                            "must", False, "27002:8.4 — appropriately managed"),
+        ChecklistItem("item:A.8.4:bl_dependency_scanning","Dependency vulnerability scanning active per repository (SCA tool integrated)",                                                          "must", False, "27002:8.4 — software libraries"),
+        ChecklistItem("item:A.8.4:bl_ci_isolation",   "CI/CD systems access restricted to authorised roles (cross-link to A.8.31 environment separation)",                                          "must", False, "27002:8.4 — development tools"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.4:bl_signed_commits", "Commit signing enforced for protected branches",                                                                                              "should", False, "Supply chain hygiene"),
+    ],
+)
+
+REQ_A84_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.4:source_code_access_procedure",
     control_ref   = "A.8.4",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
-    title         = "Source Code, Development Tools and Library Access Procedure",
-    trigger_type  = "universal",
-    description   = "A.8.4 requires read and write access to source code, development tools, and software libraries to be appropriately managed. Evidence is a procedure covering repository access, code review, and dependency management",
+    title         = "Source Code Access Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Operational counterpart to the baseline. Documents repo provisioning, dependency allowlist management, offboarding, exception handling",
     must_contain  = [
-        ChecklistItem("item:A.8.4:repo_inventory", "Inventory of code repositories and their classification", "must", False, "A.8.4 — source code"),
-        ChecklistItem("item:A.8.4:rbac",           "Role-based access (read, write, admin) per repository", "must", False, "A.8.4 — read and write access"),
-        ChecklistItem("item:A.8.4:branch_protection","Branch protection / code review requirements before merge to protected branches", "must", False, "A.8.4 — appropriately managed"),
-        ChecklistItem("item:A.8.4:secrets_rules",  "Rules preventing secrets in source code (scanning, vaulting)", "must", False, "A.8.4 — appropriately managed"),
-        ChecklistItem("item:A.8.4:dependency_mgmt","Third-party library and dependency management (allowlists, version pinning, vulnerability scanning)", "must", False, "A.8.4 — software libraries"),
-        ChecklistItem("item:A.8.4:tools_access",   "Access to development tools and CI/CD systems restricted", "must", False, "A.8.4 — development tools"),
+        ChecklistItem("item:A.8.4:proc_repo_provisioning","Repository provisioning procedure (creator authority, default branch-protection, classification)",                                        "must", False, "27002:8.4 — appropriately managed"),
+        ChecklistItem("item:A.8.4:proc_dependency_allowlist","Dependency allowlist process (new library → security review → approval)",                                                            "must", False, "27002:8.4 — software libraries"),
+        ChecklistItem("item:A.8.4:proc_offboarding",  "Repository access offboarding aligned with A.5.16 identity termination",                                                                      "must", False, "Common gap"),
+        ChecklistItem("item:A.8.4:proc_exception",    "Exception process for one-off elevated access (emergency hotfix authority)",                                                                "must", False, "Operational flexibility"),
+        ChecklistItem("item:A.8.4:proc_secrets_rotation","Secrets-rotation procedure where exposed (response within hours, not days)",                                                              "must", False, "Modern baseline"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.4:signed_commits", "Signed commits / provenance tracking", "should", False, "Supply chain hygiene"),
-        ChecklistItem("item:A.8.4:offboarding",    "Repository access offboarding aligned with A.5.16 identity termination", "should", False, "Common gap"),
+        ChecklistItem("item:A.8.4:proc_owner",        "Named procedure owner (Engineering lead with InfoSec partner)",                                                                              "should", False, "Accountability"),
     ],
 )
 
-REQ_A85_SECURE_AUTHENTICATION = EvidenceRequirement(
-    id            = "req:A.8.5:secure_authentication_policy",
+REQ_A84_MONITORING_LOG = EvidenceRequirement(
+    id            = "req:A.8.4:source_code_monitoring_log",
+    control_ref   = "A.8.4",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "monitoring_record",
+    title         = "Source Code Access Monitoring Log",
+    trigger_type  = "profile_fact",
+    description   = "Continuous evidence stream — repository access events, branch-protection bypass attempts, secrets-scanner hits, dependency-scanner findings",
+    must_contain  = [
+        ChecklistItem("item:A.8.4:log_repo_events",   "Repository access events captured (clone / push / admin actions)",                                                                            "must", False, "27002:8.4 — appropriately managed"),
+        ChecklistItem("item:A.8.4:log_secrets_hits",  "Secrets-scanner findings logged with disposition (false-positive / true-positive remediated)",                                                "must", False, "27002:8.4 — appropriately managed"),
+        ChecklistItem("item:A.8.4:log_dep_findings",  "Dependency-scanner findings logged with remediation SLA",                                                                                    "must", False, "27002:8.4 — software libraries"),
+        ChecklistItem("item:A.8.4:log_bypass_attempts","Branch-protection bypass attempts captured (admin override events)",                                                                          "must", False, "Anomaly signal"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.4:log_siem_forward",  "Events forwarded to SIEM (cross-link to A.8.16)",                                                                                            "should", False, "Detection maturity"),
+    ],
+)
+
+REQ_A84_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.4:source_code_review",
+    control_ref     = "A.8.4",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Source Code Access Review",
+    trigger_type    = "profile_fact",
+    description     = "Periodic verification that repository access is current, dependency allowlist is current, and the monitoring log shows expected hygiene (freshness=180; dev landscape changes fast)",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.8.4:rev_date",          "Review date within the planned interval (≤180 days)",                                                                                        "must", False, "27002:8.4 — periodic"),
+        ChecklistItem("item:A.8.4:rev_reviewer",      "Reviewer identity (Engineering + InfoSec)",                                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.8.4:rev_access_sample", "Sample-based repo access verification (per-repo admin and write list re-confirmed)",                                                          "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.4:rev_dep_currency", "Dependency-allowlist currency check (no abandoned libraries; vulnerable versions retired)",                                                  "must", False, "Supply chain hygiene"),
+        ChecklistItem("item:A.8.4:rev_findings_closed","Outstanding scanner findings reviewed (closed / accepted / extended)",                                                                      "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.4:rev_next_date",     "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.5 Secure authentication — technical_control 4-leaf (batch 23) ────────
+REQ_A85_BASELINE = EvidenceRequirement(
+    id            = "req:A.8.5:secure_authentication_baseline",
     control_ref   = "A.8.5",
     standard_id   = "ISO27001:2022",
-    evidence_type = "policy",
-    title         = "Secure Authentication Policy",
+    evidence_type = "configuration_baseline",
+    title         = "Secure Authentication Baseline",
     trigger_type  = "universal",
-    description   = "A.8.5 requires secure authentication technologies and procedures to be implemented based on the access control policy. Evidence is an authentication policy stating factor requirements per risk level",
+    description   = "A.8.5 baseline — the authentication configuration state. Factor requirements per access tier, MFA enforcement, session management, lockout thresholds. The procedure, auth log and review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.5:factor_requirements","Authentication factor requirements per risk level / access tier", "must", False, "A.8.5 — based on information access restrictions"),
-        ChecklistItem("item:A.8.5:password_policy","Password policy (length, complexity, expiry where applicable, breach-list checking)", "must", False, "A.8.5 — secure authentication"),
-        ChecklistItem("item:A.8.5:mfa_scope",      "MFA scope (where required by access policy and risk)", "must", False, "A.8.5 — secure authentication"),
-        ChecklistItem("item:A.8.5:secure_transmission","Secure transmission requirements (TLS, no plaintext credentials)", "must", False, "A.8.5 — secure authentication"),
-        ChecklistItem("item:A.8.5:session_management","Session management (timeout, re-authentication for sensitive actions)", "must", False, "A.8.5 — implemented"),
-        ChecklistItem("item:A.8.5:lockout",        "Lockout / throttling for failed authentication attempts", "must", False, "A.8.5 — secure"),
+        ChecklistItem("item:A.8.5:bl_factor_requirements","Authentication factor requirements per risk tier (single / MFA / step-up)",                                                              "must", False, "27002:8.5 — based on information access restrictions"),
+        ChecklistItem("item:A.8.5:bl_mfa_scope",      "MFA scope — universal for privileged + remote + cross-tenant; risk-based elsewhere (modern baseline; phishing-resistant MFA preferred)",     "must", False, "27002:8.5 — secure authentication"),
+        ChecklistItem("item:A.8.5:bl_password_standard","Password standard configured (length, breach-list checking, no rotation unless compromise — NIST 800-63B alignment)",                      "must", False, "27002:8.5 — secure authentication"),
+        ChecklistItem("item:A.8.5:bl_session_mgmt",   "Session management (timeout, re-authentication for sensitive actions, concurrent-session limits)",                                          "must", False, "27002:8.5 — implemented"),
+        ChecklistItem("item:A.8.5:bl_lockout",        "Lockout / throttling configured for failed attempts",                                                                                        "must", False, "27002:8.5 — secure"),
+        ChecklistItem("item:A.8.5:bl_secure_transmission","Secure transmission enforced (TLS only, no plaintext credentials anywhere — including legacy protocols)",                              "must", False, "27002:8.5 — secure authentication"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.5:passwordless",   "Direction toward passwordless / phishing-resistant authentication", "should", False, "Modern best practice"),
-        ChecklistItem("item:A.8.5:adaptive",       "Adaptive / risk-based authentication where deployed", "should", False, "Modern best practice"),
+        ChecklistItem("item:A.8.5:bl_passwordless",   "Passwordless / phishing-resistant authentication available for privileged users",                                                            "should", False, "Modern direction"),
     ],
 )
 
-REQ_A86_CAPACITY_MANAGEMENT = EvidenceRequirement(
-    id            = "req:A.8.6:capacity_management_procedure",
+REQ_A85_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.8.5:secure_authentication_procedure",
+    control_ref   = "A.8.5",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "procedure",
+    title         = "Authentication Provisioning Procedure",
+    trigger_type  = "universal",
+    description   = "Operational counterpart — credential issuance, factor enrolment, recovery flow, exception handling. Cross-link to A.5.17 authentication info lifecycle",
+    must_contain  = [
+        ChecklistItem("item:A.8.5:proc_enrolment",    "Factor enrolment procedure (initial MFA setup, with identity-proofing strength matched to tier)",                                            "must", False, "27002:8.5 — implemented"),
+        ChecklistItem("item:A.8.5:proc_recovery",     "Account recovery flow with identity-proofing (NOT password reset via email-only)",                                                            "must", False, "Common attack vector"),
+        ChecklistItem("item:A.8.5:proc_a517_linkage", "Cross-link to A.5.17 authentication info procedure (credential rotation, revocation)",                                                        "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.5:proc_exception",    "Exception process for lost-MFA / new-device scenarios with identity-proofing fallback",                                                      "must", False, "Operational reality"),
+        ChecklistItem("item:A.8.5:proc_legacy_handling","Legacy protocol handling (rejection by default; documented exception with compensating controls)",                                          "must", False, "Common vulnerability path"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.5:proc_user_education","User education on phishing-resistant authentication usage",                                                                                  "should", False, "Detection support"),
+    ],
+)
+
+REQ_A85_AUTH_LOG = EvidenceRequirement(
+    id            = "req:A.8.5:authentication_log",
+    control_ref   = "A.8.5",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "monitoring_record",
+    title         = "Authentication Activity Log",
+    trigger_type  = "universal",
+    description   = "Continuous evidence stream — auth events, failure patterns, suspicious-login signals, MFA bypass attempts. Feeds detection (A.8.16) and incident triage (A.5.25)",
+    must_contain  = [
+        ChecklistItem("item:A.8.5:log_auth_events",   "All authentication events captured (success / failure / MFA challenge / step-up)",                                                          "must", False, "27002:8.5 — implemented"),
+        ChecklistItem("item:A.8.5:log_failure_clusters","Failure-cluster detection (brute force, password spraying)",                                                                              "must", False, "Modern baseline"),
+        ChecklistItem("item:A.8.5:log_impossible_travel","Impossible-travel / geo-anomaly detection where applicable",                                                                              "must", False, "Modern baseline"),
+        ChecklistItem("item:A.8.5:log_mfa_anomalies", "MFA-prompt fatigue / push-bombing detection",                                                                                                "must", False, "27002:8.5 — secure (modern attack vector)"),
+        ChecklistItem("item:A.8.5:log_retention",     "Retention period defined and enforced (cross-link to A.8.15)",                                                                                "must", False, "A.8.15 linkage"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.5:log_siem_forward",  "Events forwarded to SIEM with correlation to identity events (A.5.16)",                                                                      "should", False, "Detection maturity"),
+    ],
+)
+
+REQ_A85_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.5:authentication_program_review",
+    control_ref     = "A.8.5",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Authentication Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that authentication baseline still matches threat landscape, exception inventory is current, and the log shows expected hygiene (freshness=180; auth attack patterns evolve fast)",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.8.5:rev_date",          "Review date within the planned interval (≤180 days)",                                                                                        "must", False, "27002:8.5 — periodic"),
+        ChecklistItem("item:A.8.5:rev_reviewer",      "Reviewer identity (IAM lead + InfoSec lead jointly)",                                                                                        "must", False, "Accountability"),
+        ChecklistItem("item:A.8.5:rev_threat_landscape","Threat-landscape review (new attack patterns since last review — feed from threat intel A.5.7)",                                          "must", False, "27002:8.5 — secure (currency)"),
+        ChecklistItem("item:A.8.5:rev_exception_inventory","Exception inventory re-confirmed / retired",                                                                                              "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.5:rev_anomaly_outcomes","Anomaly-detection outcomes reviewed (true-positive rate, missed-detection postmortems)",                                                  "must", False, "Detection effectiveness"),
+        ChecklistItem("item:A.8.5:rev_baseline_update","Baseline / procedure updates published from findings",                                                                                      "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.5:rev_next_date",     "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+# ── A.8.6 Capacity management — technical_control 4-leaf (batch 23) ──────────
+REQ_A86_BASELINE = EvidenceRequirement(
+    id            = "req:A.8.6:capacity_baseline",
+    control_ref   = "A.8.6",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "configuration_baseline",
+    title         = "Capacity Monitoring Baseline",
+    trigger_type  = "universal",
+    description   = "A.8.6 baseline — what resources are monitored, what the current and expected demand is, what alert thresholds apply. The procedure, monitoring log and review are sibling leaves",
+    must_contain  = [
+        ChecklistItem("item:A.8.6:bl_monitored_resources","Resources monitored (CPU / memory / storage / network / DB connections / licences)",                                                          "must", False, "27002:8.6 — use of resources monitored"),
+        ChecklistItem("item:A.8.6:bl_current_vs_expected","Current vs expected capacity baseline documented per resource",                                                                            "must", False, "27002:8.6 — current and expected capacity"),
+        ChecklistItem("item:A.8.6:bl_thresholds",     "Alert thresholds defined (warning / critical) per resource class",                                                                              "must", False, "27002:8.6 — adjusted in line"),
+        ChecklistItem("item:A.8.6:bl_forecasting",    "Forecasting approach documented (historical trend / business-driven / leading-indicator)",                                                      "must", False, "27002:8.6 — expected capacity"),
+        ChecklistItem("item:A.8.6:bl_automation",     "Auto-scaling automation configured for elastic workloads (modern baseline)",                                                                    "must", False, "Modern cloud-native baseline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.6:bl_dr_integration", "Capacity baseline integrated with A.5.30 ICT readiness (DR target sizing)",                                                                    "should", False, "Resilience"),
+    ],
+)
+
+REQ_A86_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.8.6:capacity_procedure",
     control_ref   = "A.8.6",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Capacity Management Procedure",
     trigger_type  = "universal",
-    description   = "A.8.6 requires resource use to be monitored and adjusted in line with current and expected capacity requirements. Evidence is a procedure covering monitored resources, thresholds, and forecasting",
+    description   = "Operational counterpart — how thresholds trigger action, escalation paths, change controls for capacity expansion",
     must_contain  = [
-        ChecklistItem("item:A.8.6:monitored_resources","Resources monitored (CPU, memory, storage, network, database connections, licences)", "must", False, "A.8.6 — use of resources monitored"),
-        ChecklistItem("item:A.8.6:current_vs_expected","Current vs expected capacity requirements documented", "must", False, "A.8.6 — current and expected capacity"),
-        ChecklistItem("item:A.8.6:thresholds",      "Alert thresholds for action (warning, critical)", "must", False, "A.8.6 — adjusted in line"),
-        ChecklistItem("item:A.8.6:forecasting",     "Forecasting approach for growth (historical trend, business-driven)", "must", False, "A.8.6 — expected capacity"),
-        ChecklistItem("item:A.8.6:escalation",      "Escalation when thresholds breached (procurement, scale-out)", "must", False, "A.8.6 — adjusted"),
+        ChecklistItem("item:A.8.6:proc_escalation",   "Escalation paths when thresholds breached (engineering → procurement → executive)",                                                            "must", False, "27002:8.6 — adjusted"),
+        ChecklistItem("item:A.8.6:proc_change_link",  "Cross-link to A.8.32 change management for capacity expansion deployments",                                                                    "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.6:proc_forecast_cadence","Forecast review cadence (quarterly minimum; monthly for elastic / cost-sensitive workloads)",                                              "must", False, "27002:8.6 — expected capacity"),
+        ChecklistItem("item:A.8.6:proc_demand_intake","Demand intake from business stakeholders (new product launches, M&A, seasonal events)",                                                        "must", False, "27002:8.6 — expected capacity"),
+        ChecklistItem("item:A.8.6:proc_owner",        "Named procedure owner (Infrastructure lead with Finance partner for cost-tied capacity)",                                                      "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.6:automation",      "Auto-scaling automation where deployed", "should", False, "Modern cloud-native baseline"),
-        ChecklistItem("item:A.8.6:dr_integration",  "Integration with continuity planning (A.5.30 ICT readiness)", "should", False, "Capacity is part of resilience"),
+        ChecklistItem("item:A.8.6:proc_runbook",      "Threshold-breach runbook for common scenarios",                                                                                                "should", False, "Operational maturity"),
     ],
 )
 
-REQ_A87_MALWARE_PROTECTION = EvidenceRequirement(
+REQ_A86_MONITORING_LOG = EvidenceRequirement(
+    id            = "req:A.8.6:capacity_monitoring_log",
+    control_ref   = "A.8.6",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "monitoring_record",
+    title         = "Capacity Monitoring Log",
+    trigger_type  = "universal",
+    description   = "Continuous evidence stream — resource utilisation samples, threshold breaches, adjustments made. The defence that the baseline was actually in use",
+    must_contain  = [
+        ChecklistItem("item:A.8.6:log_samples",       "Resource utilisation samples captured per resource (sub-minute for production)",                                                              "must", False, "27002:8.6 — monitored"),
+        ChecklistItem("item:A.8.6:log_breaches",      "Threshold-breach events logged with timestamp, magnitude, duration",                                                                          "must", False, "27002:8.6 — monitored"),
+        ChecklistItem("item:A.8.6:log_actions",       "Actions taken in response to breach captured (auto-scale event / manual scale / accepted)",                                                    "must", False, "27002:8.6 — adjusted"),
+        ChecklistItem("item:A.8.6:log_retention",     "Log retention period defined and enforced (cross-link to A.8.15)",                                                                            "must", False, "A.8.15 linkage"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.6:log_trending",      "Trending views for capacity planning (weekly / monthly / yearly aggregates)",                                                                "should", False, "Forecasting input"),
+    ],
+)
+
+REQ_A86_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.6:capacity_program_review",
+    control_ref     = "A.8.6",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Capacity Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that the capacity baseline still matches demand, forecasts are accurate, and the log shows expected hygiene (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.6:rev_date",          "Review date within the planned interval",                                                                                                    "must", False, "27002:8.6 — periodic"),
+        ChecklistItem("item:A.8.6:rev_reviewer",      "Reviewer identity (Infrastructure + Finance + Engineering leadership)",                                                                      "must", False, "Accountability"),
+        ChecklistItem("item:A.8.6:rev_forecast_accuracy","Forecast-vs-actual accuracy check across the review window",                                                                                "must", False, "27002:8.6 — expected"),
+        ChecklistItem("item:A.8.6:rev_breach_patterns","Breach-pattern review (recurring breaches → baseline re-calibration)",                                                                      "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.6:rev_baseline_update","Baseline / threshold updates published from findings",                                                                                      "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.6:rev_next_date",     "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.7 Protection against malware — op_process 4-leaf (batch 23) ──────────
+REQ_A87_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.7:malware_protection_procedure",
     control_ref   = "A.8.7",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Protection Against Malware Procedure",
     trigger_type  = "universal",
-    description   = "A.8.7 requires protection against malware to be implemented and supported by appropriate user awareness. Evidence is a procedure covering anti-malware deployment, update cadence, and integration with awareness",
+    description   = "A.8.7 requires malware protection implemented + supported by user awareness. Procedure documents the tool stack, deployment, detection-handling, awareness integration. Register, scope, review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.7:tools_deployed",  "Anti-malware / EDR tools deployed across endpoints, servers, mail systems", "must", False, "A.8.7 — protection against malware implemented"),
-        ChecklistItem("item:A.8.7:update_cadence",  "Signature / threat-intelligence update cadence (continuous or hourly preferred)", "must", False, "A.8.7 — implemented"),
-        ChecklistItem("item:A.8.7:scope",           "Scope (endpoints, file servers, email gateways, web traffic)", "must", False, "A.8.7 — implemented"),
-        ChecklistItem("item:A.8.7:detection_handling","Detection handling (quarantine, incident creation, link to A.5.26)", "must", False, "A.8.7 — implemented"),
-        ChecklistItem("item:A.8.7:user_awareness",  "User awareness component (links to A.6.3 training programme)", "must", False, "A.8.7 — supported by appropriate user awareness"),
+        ChecklistItem("item:A.8.7:tools_deployed",    "Anti-malware / EDR tools deployed (endpoints / servers / mail gateways / web traffic / cloud workloads)",                                      "must", False, "27002:8.7 — protection against malware implemented"),
+        ChecklistItem("item:A.8.7:update_cadence",    "Signature / threat-intelligence update cadence (continuous or hourly preferred)",                                                              "must", False, "27002:8.7 — implemented"),
+        ChecklistItem("item:A.8.7:scope",             "Scope coverage stated (every asset class with executable code path)",                                                                          "must", False, "27002:8.7 — implemented"),
+        ChecklistItem("item:A.8.7:detection_handling","Detection handling (quarantine / incident creation / cross-link to A.5.25 triage + A.5.26 register)",                                          "must", False, "27002:8.7 — implemented"),
+        ChecklistItem("item:A.8.7:user_awareness",    "User awareness component (cross-link to A.6.3 training)",                                                                                      "must", False, "27002:8.7 — supported by appropriate user awareness"),
+        ChecklistItem("item:A.8.7:behavioral_detection","Behavioural / heuristic detection enabled (modern baseline — signature-only insufficient)",                                                "must", False, "Modern threat landscape"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.7:behavioral_detection","Behavioral / heuristic detection beyond signature", "should", False, "Modern threat landscape"),
-        ChecklistItem("item:A.8.7:sandboxing",      "Sandboxing of suspicious attachments / executables", "should", False, "Defense in depth"),
+        ChecklistItem("item:A.8.7:sandboxing",        "Sandboxing of suspicious attachments / executables",                                                                                          "should", False, "Defence in depth"),
     ],
 )
 
-REQ_A88_TECHNICAL_VULNERABILITIES = EvidenceRequirement(
+REQ_A87_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.7:malware_coverage_register",
+    control_ref   = "A.8.7",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Malware Protection Coverage Register",
+    trigger_type  = "universal",
+    description   = "Per-asset coverage status — which assets have which agent installed, current signature version, last-scan timestamp, detected-event count",
+    must_contain  = [
+        ChecklistItem("item:A.8.7:reg_asset_id",      "Per-asset identifier (from A.5.9 asset register)",                                                                                            "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.7:reg_agent_status",  "Per-asset agent status (installed / running / signature version current)",                                                                      "must", False, "27002:8.7 — implemented"),
+        ChecklistItem("item:A.8.7:reg_last_scan",     "Per-asset last successful scan timestamp",                                                                                                    "must", False, "Drift detection"),
+        ChecklistItem("item:A.8.7:reg_detections",    "Per-asset detection event count + open dispositions",                                                                                          "must", False, "Continuous evidence"),
+        ChecklistItem("item:A.8.7:reg_exclusions",    "Per-asset exclusion rationale where agent not installable (e.g. embedded / OT)",                                                              "must", False, "Real-world coverage gaps"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.7:reg_dashboard",     "Aggregate dashboard linked (coverage %, current-signature %, recent-detection rate)",                                                          "should", False, "Operational visibility"),
+    ],
+)
+
+REQ_A87_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.7:applicable_malware_scope",
+    control_ref   = "A.8.7",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Asset Scope for Malware Protection",
+    trigger_type  = "universal",
+    description   = "Upstream that drives the register. Documents which asset classes are in scope, what 'malware protection' means for non-traditional classes (containers / serverless / mobile), and exclusion rationale",
+    must_contain  = [
+        ChecklistItem("item:A.8.7:scope_classes",     "Asset classes enumerated (endpoint / server / container / serverless / mobile / OT / cloud-native services)",                                "must", False, "27002:8.7 — implemented"),
+        ChecklistItem("item:A.8.7:scope_class_means", "Per-class definition of 'protection' (signature agent vs runtime-protection vs image-scan vs upstream-gateway)",                              "must", False, "27002:8.7 — implemented"),
+        ChecklistItem("item:A.8.7:scope_exclusions",  "Documented exclusions with compensating controls (embedded systems / vendor-managed cloud workloads)",                                        "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.7:scope_change_drivers","Trigger list for re-scoping (new asset class, new platform, new threat tactic)",                                                            "should", False, "Currency"),
+    ],
+)
+
+REQ_A87_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.7:malware_program_review",
+    control_ref     = "A.8.7",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Malware Protection Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that coverage is current, exclusions still justified, detection patterns reviewed against threat intel (freshness=180; malware landscape evolves fast)",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.8.7:rev_date",          "Review date within the planned interval (≤180 days)",                                                                                        "must", False, "27002:8.7 — periodic"),
+        ChecklistItem("item:A.8.7:rev_reviewer",      "Reviewer identity (Endpoint/Server Engineering + InfoSec)",                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.8.7:rev_coverage",      "Coverage check across the register (% assets with current agent / signature)",                                                                "must", False, "27002:8.7 — implemented"),
+        ChecklistItem("item:A.8.7:rev_threat_intel",  "Threat-intel review (cross-link to A.5.7 — new tactics → tool/rule updates)",                                                                  "must", False, "27002:8.7 — currency"),
+        ChecklistItem("item:A.8.7:rev_exclusions",    "Exclusion inventory re-confirmed / retired",                                                                                                  "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.7:rev_register_update","Findings propagated to register / procedure / awareness content",                                                                            "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.7:rev_next_date",     "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.8 Technical vulnerabilities — op_process 4-leaf (batch 23) ───────────
+REQ_A88_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.8:vulnerability_management_procedure",
     control_ref   = "A.8.8",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Technical Vulnerability Management Procedure",
     trigger_type  = "universal",
-    description   = "A.8.8 requires information about technical vulnerabilities to be obtained, the organization's exposure evaluated, and appropriate measures taken. Evidence is a vulnerability management procedure covering intel sources, scanning, triage, and remediation SLAs",
-    freshness_days = 90,
+    description   = "A.8.8 requires intel-gathering, exposure-evaluation, appropriate measures. Procedure documents intel sources, scanning cadence, triage rubric, remediation SLAs, exception path. Backlog register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.8:intel_sources",   "Intelligence sources (vendor advisories, CVE feeds, ISACs)", "must", False, "A.8.8 — information about vulnerabilities obtained"),
-        ChecklistItem("item:A.8.8:asset_coverage",  "Asset coverage stated (links to A.5.9 asset inventory)", "must", False, "A.8.8 — exposure evaluated"),
-        ChecklistItem("item:A.8.8:scanning_cadence","Vulnerability scanning cadence per asset class", "must", False, "A.8.8 — exposure evaluated"),
-        ChecklistItem("item:A.8.8:triage",          "Triage approach (CVSS, exploitability, asset criticality)", "must", False, "A.8.8 — evaluated"),
-        ChecklistItem("item:A.8.8:remediation_sla", "Remediation SLA per severity (critical, high, medium, low)", "must", False, "A.8.8 — appropriate measures taken"),
-        ChecklistItem("item:A.8.8:exceptions",      "Exception register for accepted vulnerabilities with expiry", "must", False, "A.8.8 — appropriate measures"),
+        ChecklistItem("item:A.8.8:intel_sources",     "Intelligence sources enumerated (vendor advisories / CVE feeds / ISACs / cross-link to A.5.7 threat intel)",                                  "must", False, "27002:8.8 — information about vulnerabilities obtained"),
+        ChecklistItem("item:A.8.8:scanning_cadence",  "Vulnerability scanning cadence per asset class (continuous for high-criticality, weekly minimum)",                                            "must", False, "27002:8.8 — exposure evaluated"),
+        ChecklistItem("item:A.8.8:triage_rubric",     "Triage rubric (CVSS + exploitability + asset criticality + reachability)",                                                                    "must", False, "27002:8.8 — evaluated"),
+        ChecklistItem("item:A.8.8:remediation_sla",   "Remediation SLA per severity (critical=72h / high=14d / medium=30d / low=90d typical)",                                                        "must", False, "27002:8.8 — appropriate measures taken"),
+        ChecklistItem("item:A.8.8:exception_path",    "Exception path for accepted-risk vulnerabilities (compensating controls + expiry + owner)",                                                  "must", False, "27002:8.8 — appropriate measures"),
+        ChecklistItem("item:A.8.8:zero_day_handling", "Zero-day handling procedure (mitigation while patch unavailable; cross-link to A.5.7)",                                                        "must", False, "When patches aren't available"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.8:patch_prioritisation","Patch prioritisation factoring exploitability + business impact", "should", False, "Pragmatic vs CVSS-only"),
-        ChecklistItem("item:A.8.8:zero_day_handling","Zero-day handling procedure (compensating controls, monitoring)", "should", False, "When patches aren't available"),
+        ChecklistItem("item:A.8.8:patch_prioritisation","Patch prioritisation factoring exploitability + business impact (KEV catalogue if used)",                                                  "should", False, "Pragmatic vs CVSS-only"),
     ],
 )
 
-REQ_A89_CONFIGURATION_MANAGEMENT = EvidenceRequirement(
+REQ_A88_BACKLOG_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.8:vulnerability_backlog_register",
+    control_ref   = "A.8.8",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Vulnerability Backlog Register",
+    trigger_type  = "universal",
+    description   = "Per-finding tracking — CVE / finding id, affected asset, severity, remediation SLA, status. Drives 'show me all critical vulnerabilities and how long they've been open'",
+    must_contain  = [
+        ChecklistItem("item:A.8.8:reg_finding_id",    "Per-finding unique identifier (CVE / vendor advisory / scanner finding ref)",                                                                "must", False, "Auditability"),
+        ChecklistItem("item:A.8.8:reg_asset",         "Per-finding affected asset (from A.5.9 register)",                                                                                            "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.8:reg_severity",      "Per-finding triaged severity (from procedure rubric, not raw CVSS)",                                                                          "must", False, "27002:8.8 — evaluated"),
+        ChecklistItem("item:A.8.8:reg_sla_due",       "Per-finding SLA due date (derived from severity + first-seen date)",                                                                          "must", False, "Drives action"),
+        ChecklistItem("item:A.8.8:reg_status",        "Per-finding status (open / mitigated / patched / accepted-with-expiry)",                                                                      "must", False, "Continuous evidence"),
+        ChecklistItem("item:A.8.8:reg_sla_breaches",  "SLA-breach flag per row + escalation evidence where breached",                                                                                "must", False, "Auditor-critical defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.8:reg_dashboard",     "Aggregate dashboard linked (open-critical count, MTTR, SLA-attainment %)",                                                                  "should", False, "Operational visibility"),
+    ],
+)
+
+REQ_A88_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.8:applicable_vuln_scope",
+    control_ref   = "A.8.8",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Asset Scope for Vulnerability Management",
+    trigger_type  = "universal",
+    description   = "Upstream — which asset classes get which scanning approach. Network scan vs agent scan vs SCA vs container image scan vs cloud config scan. Cross-link to A.5.9 register",
+    must_contain  = [
+        ChecklistItem("item:A.8.8:scope_asset_classes","Asset classes enumerated with scanning approach per class",                                                                                  "must", False, "27002:8.8 — exposure evaluated"),
+        ChecklistItem("item:A.8.8:scope_coverage_pct","Target coverage percentage per class (with rationale for gaps)",                                                                              "must", False, "27002:8.8 — exposure"),
+        ChecklistItem("item:A.8.8:scope_exclusions",  "Exclusion rationale (vendor-managed assets covered via supplier obligations A.5.20)",                                                          "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.8:scope_change_drivers","Trigger list for re-scoping (new asset class, new scan tooling, new regulator requirement)",                                                "should", False, "Currency"),
+    ],
+)
+
+REQ_A88_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.8:vulnerability_program_review",
+    control_ref     = "A.8.8",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Vulnerability Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification — SLA-attainment trending, exception inventory current, scanning coverage current (freshness=180; vulnerability landscape evolves fast)",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.8.8:rev_date",          "Review date within the planned interval (≤180 days)",                                                                                        "must", False, "27002:8.8 — periodic"),
+        ChecklistItem("item:A.8.8:rev_reviewer",      "Reviewer identity (Vulnerability Management lead + InfoSec lead)",                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.8:rev_sla_attainment","SLA-attainment trending review per severity",                                                                                                  "must", False, "27002:8.8 — appropriate measures"),
+        ChecklistItem("item:A.8.8:rev_exception_inventory","Exception inventory re-confirmed / retired (no stale infinite-expiry exceptions)",                                                        "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.8:rev_coverage",      "Scanning coverage check vs applicable scope (new asset classes covered)",                                                                      "must", False, "27002:8.8 — exposure"),
+        ChecklistItem("item:A.8.8:rev_findings_to_program","Findings propagated to procedure / scope / awareness updates",                                                                            "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.8:rev_next_date",     "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.9 Configuration management — op_process 4-leaf (batch 23) ────────────
+REQ_A89_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.9:configuration_management_procedure",
     control_ref   = "A.8.9",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Configuration Management Procedure",
     trigger_type  = "universal",
-    description   = "A.8.9 requires configurations (including security configurations) of hardware, software, services, and networks to be established, documented, implemented, monitored, and reviewed. Evidence is a configuration management procedure",
-    freshness_days = 365,
+    description   = "A.8.9 requires configurations established, documented, implemented, monitored, reviewed. Procedure documents baseline ownership, deployment, drift detection, approval flow. Baseline register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.9:baseline_configs","Baseline configurations documented per asset class", "must", False, "A.8.9 — established and documented"),
-        ChecklistItem("item:A.8.9:hardening_standards","Hardening standards referenced (CIS, vendor guides, internal baselines)", "must", False, "A.8.9 — security configurations"),
-        ChecklistItem("item:A.8.9:deployment",      "Deployment process applying baseline configurations consistently", "must", False, "A.8.9 — implemented"),
-        ChecklistItem("item:A.8.9:drift_detection", "Drift detection from baseline (monitoring)", "must", False, "A.8.9 — monitored"),
-        ChecklistItem("item:A.8.9:periodic_review", "Periodic review of baselines (technology updates, threat changes)", "must", False, "A.8.9 — reviewed"),
+        ChecklistItem("item:A.8.9:proc_baseline_authority","Baseline authority defined per asset class (who owns each baseline)",                                                                    "must", False, "27002:8.9 — established"),
+        ChecklistItem("item:A.8.9:proc_hardening_standards","Hardening standards referenced (CIS / vendor / internal) per asset class",                                                              "must", False, "27002:8.9 — security configurations"),
+        ChecklistItem("item:A.8.9:proc_deployment",   "Deployment process enforcing baseline (IaC / image / config-mgmt tool)",                                                                      "must", False, "27002:8.9 — implemented"),
+        ChecklistItem("item:A.8.9:proc_drift_detection","Drift detection from baseline (continuous; alerts when out of compliance)",                                                                "must", False, "27002:8.9 — monitored"),
+        ChecklistItem("item:A.8.9:proc_change_link",  "Cross-link to A.8.32 change management for baseline updates",                                                                                "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.9:proc_approved_deviations","Approved-deviation register for assets unable to meet baseline (compensating controls + expiry)",                                      "must", False, "27002:8.9 — appropriate"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.9:iac_pipelines",   "Infrastructure-as-code pipelines for repeatable deployment", "should", False, "Modern practice"),
-        ChecklistItem("item:A.8.9:approved_deviations","Approved-deviation register for systems unable to meet baseline", "should", False, "Reality of mixed estates"),
+        ChecklistItem("item:A.8.9:proc_iac_pipelines","Infrastructure-as-code pipelines for repeatable deployment",                                                                                  "should", False, "Modern practice"),
     ],
 )
 
-REQ_A810_INFORMATION_DELETION = EvidenceRequirement(
+REQ_A89_BASELINE_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.9:configuration_baseline_register",
+    control_ref   = "A.8.9",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Configuration Baseline Register",
+    trigger_type  = "universal",
+    description   = "Catalogue of baselines — per asset class which baseline version is current, last review date, drift-finding count",
+    must_contain  = [
+        ChecklistItem("item:A.8.9:reg_asset_class",   "Per-baseline asset class (Linux server / Windows endpoint / K8s cluster / cloud account / network device)",                                  "must", False, "Identification"),
+        ChecklistItem("item:A.8.9:reg_version",       "Per-baseline current version (semver or date-stamped)",                                                                                      "must", False, "Drift detection"),
+        ChecklistItem("item:A.8.9:reg_owner",         "Per-baseline named owner (technology lead with InfoSec partner)",                                                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.8.9:reg_last_reviewed", "Per-baseline last review date",                                                                                                              "must", False, "Drift detection"),
+        ChecklistItem("item:A.8.9:reg_drift_count",   "Per-baseline outstanding drift finding count + open SLA breaches",                                                                          "must", False, "Continuous evidence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.9:reg_external_ref",  "External reference (CIS / vendor / NIST) per baseline where applicable",                                                                      "should", False, "Defensibility"),
+    ],
+)
+
+REQ_A89_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.9:applicable_config_scope",
+    control_ref   = "A.8.9",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Asset Scope for Configuration Management",
+    trigger_type  = "universal",
+    description   = "Upstream — which asset classes have baselines, which are vendor-managed (delegated to supplier per A.5.19), which are exception-managed",
+    must_contain  = [
+        ChecklistItem("item:A.8.9:scope_classes",     "Asset classes enumerated with baseline approach per class",                                                                                  "must", False, "27002:8.9 — established"),
+        ChecklistItem("item:A.8.9:scope_vendor_managed","Vendor-managed asset classes delegated to A.5.19 supplier obligations",                                                                    "must", False, "Boundary clarity"),
+        ChecklistItem("item:A.8.9:scope_exclusions",  "Exclusion rationale + compensating controls per excluded class",                                                                              "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.9:scope_change_drivers","Trigger list for re-scoping (new asset class, new vendor, new platform)",                                                                  "should", False, "Currency"),
+    ],
+)
+
+REQ_A89_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.9:configuration_program_review",
+    control_ref     = "A.8.9",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Configuration Program Review",
+    trigger_type    = "universal",
+    description     = "Annual review — baseline currency vs vendor/threat updates, deviation inventory, drift-detection effectiveness (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.9:rev_date",          "Review date within the planned interval",                                                                                                    "must", False, "27002:8.9 — reviewed"),
+        ChecklistItem("item:A.8.9:rev_reviewer",      "Reviewer identity (Infrastructure leads + InfoSec)",                                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.9:rev_baseline_currency","Baseline-vs-vendor-current check (CIS / vendor / NIST version drift)",                                                                  "must", False, "27002:8.9 — reviewed"),
+        ChecklistItem("item:A.8.9:rev_deviation_inventory","Deviation inventory re-confirmed / retired",                                                                                              "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.9:rev_drift_effectiveness","Drift-detection effectiveness review (catch rate, MTTR)",                                                                              "must", False, "Detection effectiveness"),
+        ChecklistItem("item:A.8.9:rev_baselines_update","Updated baselines published from findings",                                                                                                "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.9:rev_next_date",     "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+# ── A.8.10 Information deletion — op_process 4-leaf (batch 23) ───────────────
+# Item-id A.8.10:scope_systems referenced by SPEC_ART_25 comment (storage limitation)
+REQ_A810_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.10:information_deletion_procedure",
     control_ref   = "A.8.10",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Information Deletion Procedure",
     trigger_type  = "universal",
-    description   = "A.8.10 requires information stored in systems, devices, or media to be deleted when no longer required. Evidence is a procedure linking retention triggers, deletion methods, and verification",
+    description   = "A.8.10 requires information deleted when no longer required. Procedure documents retention triggers, deletion methods per media class, verification approach. Per-deletion register (lifecycle-end), applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.10:retention_trigger","Retention trigger (links to A.5.33 records protection)", "must", False, "A.8.10 — when no longer required"),
-        ChecklistItem("item:A.8.10:deletion_methods","Deletion methods per media / system type (logical delete, overwrite, crypto-erase)", "must", False, "A.8.10 — deleted"),
-        ChecklistItem("item:A.8.10:verification",   "Verification of deletion (audit log entry, sample re-read)", "must", False, "A.8.10 — deleted"),
-        ChecklistItem("item:A.8.10:records",        "Records of deletion (what, when, by whom)", "must", False, "Auditability"),
-        ChecklistItem("item:A.8.10:scope_systems",  "Scope covers backups and replicas, not only primary systems", "must", False, "A.8.10 — any other storage media"),
+        ChecklistItem("item:A.8.10:retention_trigger","Retention trigger source (cross-link to A.5.33 records protection retention schedule)",                                                          "must", False, "27002:8.10 — when no longer required"),
+        ChecklistItem("item:A.8.10:deletion_methods","Deletion methods per media class (logical delete / overwrite / crypto-erase / physical destruction)",                                          "must", False, "27002:8.10 — deleted"),
+        ChecklistItem("item:A.8.10:verification",     "Verification of deletion (audit log entry / sample re-read / certificate of destruction for hardware)",                                        "must", False, "27002:8.10 — deleted"),
+        ChecklistItem("item:A.8.10:scope_systems",    "Scope covers backups + replicas + caches + audit copies (NOT only primary systems — common GDPR pitfall)",                                    "must", False, "27002:8.10 — any other storage media + SPEC_ART_25 storage-limitation reference"),
+        ChecklistItem("item:A.8.10:legal_hold",       "Legal-hold integration overriding deletion (with documented hold rationale and termination criteria)",                                          "must", False, "Litigation readiness"),
+        ChecklistItem("item:A.8.10:gdpr_erasure_path","GDPR Art.17 erasure path (DSAR-triggered deletion) cross-link to A.5.34 PII protection",                                                        "must", False, "GDPR Art.17 integration"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.10:automated_retention","Automated retention enforcement where supported", "should", False, "Scale"),
-        ChecklistItem("item:A.8.10:legal_hold",     "Legal-hold integration overriding deletion", "should", False, "Litigation readiness"),
+        ChecklistItem("item:A.8.10:automated_retention","Automated retention enforcement where supported (TTL / lifecycle-policy / scheduled job)",                                                  "should", False, "Scale"),
     ],
 )
 
-REQ_A812_DLP = EvidenceRequirement(
-    id            = "req:A.8.12:data_leakage_prevention_procedure",
+REQ_A810_DISPOSAL_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.10:deletion_register",
+    control_ref   = "A.8.10",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Per-Deletion Disposal Register",
+    trigger_type  = "universal",
+    description   = "Per-deletion lifecycle-end record — what was deleted, when, by what method, with verification artefact. Parallels A.5.28 evidence handling disposal pattern and A.7.14 secure disposal",
+    must_contain  = [
+        ChecklistItem("item:A.8.10:reg_event_id",     "Per-deletion unique identifier",                                                                                                              "must", False, "Auditability"),
+        ChecklistItem("item:A.8.10:reg_target",       "Per-deletion target identifier (dataset / record class / asset / media id)",                                                                  "must", False, "27002:8.10 — deleted"),
+        ChecklistItem("item:A.8.10:reg_trigger",      "Per-deletion trigger (retention expiry / DSAR / asset retirement / legal-hold release / explicit instruction)",                              "must", False, "27002:8.10 — when no longer required"),
+        ChecklistItem("item:A.8.10:reg_method",       "Per-deletion method used (matches procedure's method table for the media class)",                                                              "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.8.10:reg_verification", "Per-deletion verification artefact reference (log id / certificate / signed attestation)",                                                    "must", False, "27002:8.10 — deleted"),
+        ChecklistItem("item:A.8.10:reg_backup_sweep", "Per-deletion backup-sweep confirmation (or rationale if deferred to next backup-cycle deletion)",                                              "must", False, "Common GDPR audit failure point"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.10:reg_actor",        "Per-deletion actor (person or automated job identifier)",                                                                                    "should", False, "Accountability"),
+    ],
+)
+
+REQ_A810_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.10:applicable_deletion_scope",
+    control_ref   = "A.8.10",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Deletion Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — what information classes have what retention triggers (drawn from A.5.33 records retention schedule), which media classes need which deletion method",
+    must_contain  = [
+        ChecklistItem("item:A.8.10:scope_classes",    "Information classes enumerated with retention trigger source per class (cross-link to A.5.33)",                                              "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.10:scope_media_methods","Media classes enumerated with required deletion method per class",                                                                          "must", False, "27002:8.10 — appropriate"),
+        ChecklistItem("item:A.8.10:scope_vendor_managed","Vendor-managed data delegated to A.5.19/A.5.20 supplier obligations (contractual deletion-on-termination)",                                "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.10:scope_change_drivers","Trigger list for re-scoping (new system, new data class, new regulator requirement)",                                                      "should", False, "Currency"),
+    ],
+)
+
+REQ_A810_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.10:deletion_program_review",
+    control_ref     = "A.8.10",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Deletion Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification — retention-triggered deletions completed within window, backup sweeps current, legal holds reviewed, GDPR erasure SLAs met (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.10:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.10 — periodic"),
+        ChecklistItem("item:A.8.10:rev_reviewer",     "Reviewer identity (Data Protection + Infrastructure + Legal jointly)",                                                                      "must", False, "Accountability"),
+        ChecklistItem("item:A.8.10:rev_trigger_attainment","Retention-trigger attainment check (deletions completed within configured window)",                                                    "must", False, "27002:8.10 — when no longer required"),
+        ChecklistItem("item:A.8.10:rev_backup_completeness","Backup-sweep completeness sample (no orphan copies surviving)",                                                                        "must", False, "Auditor-critical GDPR-defensibility"),
+        ChecklistItem("item:A.8.10:rev_legal_hold_inventory","Legal-hold inventory re-confirmed / retired",                                                                                          "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.10:rev_register_update","Findings propagated to procedure / scope",                                                                                                "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.10:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.11 Data masking — op_process 4-leaf (batch 23, tombstone consolidation) ─
+# Item-ids preserved (referenced by SPEC_ART_25): scope, techniques, personal_data
+REQ_A811_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.8.11:data_masking_procedure",
+    control_ref   = "A.8.11",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "procedure",
+    title         = "Data Masking Procedure",
+    trigger_type  = "universal",
+    description   = "A.8.11 requires masking procedures for personal data in non-production environments. Procedure documents masking techniques, scope, roles. Per-application masking register, applicable scope, program review are sibling leaves",
+    must_contain  = [
+        ChecklistItem("item:A.8.11:scope",            "Scope — which systems/environments require masking (cross-link to A.5.12 classification + A.8.31 environment separation)",                  "must", False, "27002:8.11 — appropriate use / SPEC_ART_25 reference"),
+        ChecklistItem("item:A.8.11:techniques",       "Masking techniques approved (static / dynamic / tokenisation / pseudonymisation / synthetic data)",                                          "must", False, "27002:8.11 — applicable techniques / SPEC_ART_25 reference"),
+        ChecklistItem("item:A.8.11:personal_data",    "Personal data explicitly in scope including PII / sensitive PII categories",                                                                "must", True,  "27002:8.11 / GDPR Art.32 / SPEC_ART_25 reference"),
+        ChecklistItem("item:A.8.11:non_production",   "Non-production environments explicitly covered (dev / test / staging / training / demo)",                                                  "must", True,  "Primary use case"),
+        ChecklistItem("item:A.8.11:roles",            "Roles responsible (Engineering owners applying masking; DPO oversight for PII)",                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.11:reversibility_rules","Reversibility rules — when re-identification is permitted (none in non-prod by default; documented exceptions)",                          "must", False, "Common attack vector"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.11:testing",          "Verification that masking is effective (sampling for re-identification residual risk)",                                                      "should", False, "Quality assurance"),
+        ChecklistItem("item:A.8.11:exceptions",       "Exception process for unmasked data (e.g. live-production debugging) with time-limited authorisation",                                      "should", False, "Governance"),
+    ],
+)
+
+REQ_A811_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.11:masking_register",
+    control_ref   = "A.8.11",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Per-Dataset Masking Register",
+    trigger_type  = "universal",
+    description   = "Per-dataset application of masking — which production datasets feed which non-production environments via what technique, when last refreshed",
+    must_contain  = [
+        ChecklistItem("item:A.8.11:reg_dataset",      "Per-row source dataset identifier (from A.5.9 + A.5.34 PII inventory)",                                                                      "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.11:reg_target_env",   "Per-row target non-production environment",                                                                                                  "must", False, "Identification"),
+        ChecklistItem("item:A.8.11:reg_technique",    "Per-row masking technique applied (from procedure's approved-techniques list)",                                                              "must", False, "27002:8.11 — applicable techniques"),
+        ChecklistItem("item:A.8.11:reg_pii_classes",  "Per-row PII classes present (drives technique selection — strong pseudonymisation for special-category PII)",                              "must", False, "GDPR Art.32 alignment"),
+        ChecklistItem("item:A.8.11:reg_last_refreshed","Per-row last refresh timestamp (drives stale-mask detection)",                                                                              "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.11:reg_verification_sample","Per-row verification-sample link (re-identification residual-risk sample retained)",                                                    "should", False, "Audit defensibility"),
+    ],
+)
+
+REQ_A811_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.11:applicable_masking_scope",
+    control_ref   = "A.8.11",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Masking Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — which datasets need masking when entering non-production. Drawn from A.5.34 PII inventory + A.5.12 classification. Documents exclusion rationale (e.g. synthetic-only test data)",
+    must_contain  = [
+        ChecklistItem("item:A.8.11:scope_datasets",   "Datasets enumerated with masking obligation per dataset (drawn from A.5.34 PII inventory)",                                                  "must", False, "27002:8.11 — appropriate use"),
+        ChecklistItem("item:A.8.11:scope_environments","Non-production environment classes enumerated (dev / test / staging / training / demo / sandbox)",                                          "must", False, "27002:8.11 — applicable"),
+        ChecklistItem("item:A.8.11:scope_exclusions", "Exclusion rationale where masking not required (synthetic-only test data; production-only systems with no non-prod)",                        "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.11:scope_change_drivers","Trigger list for re-scoping (new dataset, new non-prod environment, new PII class)",                                                      "should", False, "Currency"),
+    ],
+)
+
+REQ_A811_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.11:masking_program_review",
+    control_ref     = "A.8.11",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Masking Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification — masking effectiveness (re-identification residual-risk samples), register currency, exception inventory reviewed (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.11:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.11 — periodic"),
+        ChecklistItem("item:A.8.11:rev_reviewer",     "Reviewer identity (DPO + Data Engineering + InfoSec)",                                                                                      "must", False, "Accountability"),
+        ChecklistItem("item:A.8.11:rev_effectiveness","Re-identification residual-risk sampling outcome (acceptable or technique upgrade required)",                                                "must", False, "27002:8.11 — effective"),
+        ChecklistItem("item:A.8.11:rev_register_currency","Register currency check (refresh timestamps within tolerance)",                                                                          "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.11:rev_exception_inventory","Exception inventory re-confirmed / retired",                                                                                            "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.11:rev_procedure_update","Findings propagated to procedure / approved-techniques list",                                                                            "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.11:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.12 Data leakage prevention — technical_control 4-leaf (batch 23) ─────
+REQ_A812_BASELINE = EvidenceRequirement(
+    id            = "req:A.8.12:dlp_baseline",
+    control_ref   = "A.8.12",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "configuration_baseline",
+    title         = "DLP Baseline",
+    trigger_type  = "universal",
+    description   = "A.8.12 baseline — DLP tool stack, channel coverage, classification-driven ruleset, alert-routing. Procedure, alert log and review are sibling leaves",
+    must_contain  = [
+        ChecklistItem("item:A.8.12:bl_channels",      "Channels with DLP controls active (email / web / endpoint / cloud-storage / IM / removable-media / printing)",                              "must", False, "27002:8.12 — systems, networks and any other devices"),
+        ChecklistItem("item:A.8.12:bl_classification_ruleset","Classification-driven ruleset configured (cross-link to A.5.12 — stronger rules for higher classifications)",                        "must", False, "27002:8.12 — sensitive information"),
+        ChecklistItem("item:A.8.12:bl_sensitive_categories","Sensitive categories defined (PII / payment / health / IP / source-code) with detection patterns per category",                      "must", False, "27002:8.12 — sensitive information"),
+        ChecklistItem("item:A.8.12:bl_alert_routing", "Alert routing configured (severity tiering, ticketing destination, incident-team escalation)",                                              "must", False, "27002:8.12 — measures applied"),
+        ChecklistItem("item:A.8.12:bl_block_vs_alert","Block-vs-alert mode per channel per category documented (block default for highest-classification leaks)",                                "must", False, "27002:8.12 — measures"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.12:bl_cloud_native_coverage","Cloud-native DLP (CASB / cloud storage scanning / SaaS connectors) where applicable",                                                "should", False, "Modern environment"),
+    ],
+)
+
+REQ_A812_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.8.12:dlp_procedure",
     control_ref   = "A.8.12",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
-    title         = "Data Leakage Prevention Procedure",
+    title         = "DLP Operations Procedure",
     trigger_type  = "universal",
-    description   = "A.8.12 requires DLP measures to be applied to systems, networks, and devices processing or transmitting sensitive information. Evidence is a procedure covering channels in scope, classification-driven rules, and alert handling",
+    description   = "Operational counterpart — alert triage, false-positive tuning, exception handling, user-education feedback loop",
     must_contain  = [
-        ChecklistItem("item:A.8.12:scope",          "Scope of sensitive information categories covered (links to A.5.12 classification)", "must", False, "A.8.12 — sensitive information"),
-        ChecklistItem("item:A.8.12:channels",       "DLP controls per channel (email, web, endpoint, cloud, removable media)", "must", False, "A.8.12 — systems, networks and any other devices"),
-        ChecklistItem("item:A.8.12:classification_driven","Classification-driven enforcement (different rules per classification level)", "must", False, "A.8.12 — sensitive information"),
-        ChecklistItem("item:A.8.12:alert_handling", "Alert handling (triage, investigation, link to A.5.26)", "must", False, "A.8.12 — measures applied"),
-        ChecklistItem("item:A.8.12:incident_link",  "Incident response integration when leakage confirmed", "must", False, "A.8.12 — measures"),
+        ChecklistItem("item:A.8.12:proc_triage",      "Alert triage flow (severity → first-responder → outcome)",                                                                                  "must", False, "27002:8.12 — measures applied"),
+        ChecklistItem("item:A.8.12:proc_tuning",      "False-positive tuning process (suppression with justification, periodic re-evaluation)",                                                  "must", False, "Operational sustainability"),
+        ChecklistItem("item:A.8.12:proc_incident_link","Incident-response integration when leakage confirmed (cross-link to A.5.25 triage + A.5.26 register)",                                    "must", False, "27002:8.12 — measures"),
+        ChecklistItem("item:A.8.12:proc_user_education","User-education feedback loop on what triggers DLP (cross-link to A.6.3)",                                                                "must", False, "Reduces friction"),
+        ChecklistItem("item:A.8.12:proc_exception",   "Exception process for time-limited business-justified bypass with InfoSec approval",                                                      "must", False, "27002:8.12 — appropriate"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.12:user_education", "User education on what triggers DLP (links to A.6.3)", "should", False, "Reduces friction + false positives"),
-        ChecklistItem("item:A.8.12:tuning",         "False-positive tuning process", "should", False, "Operational sustainability"),
+        ChecklistItem("item:A.8.12:proc_owner",       "Named procedure owner (DLP lead with Data Protection partner)",                                                                            "should", False, "Accountability"),
     ],
 )
 
-REQ_A813_BACKUP = EvidenceRequirement(
-    id            = "req:A.8.13:backup_policy",
+REQ_A812_ALERT_LOG = EvidenceRequirement(
+    id            = "req:A.8.12:dlp_alert_log",
+    control_ref   = "A.8.12",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "monitoring_record",
+    title         = "DLP Alert Log",
+    trigger_type  = "universal",
+    description   = "Continuous evidence stream — alerts triggered, dispositions, true/false-positive trending. Proves the baseline is in active use",
+    must_contain  = [
+        ChecklistItem("item:A.8.12:log_alerts",       "All DLP alerts captured (channel / rule / classification / user / outcome)",                                                                "must", False, "27002:8.12 — measures applied"),
+        ChecklistItem("item:A.8.12:log_dispositions", "Per-alert disposition (false-positive / true-positive remediated / accepted-with-justification / escalated to incident)",                  "must", False, "Continuous evidence"),
+        ChecklistItem("item:A.8.12:log_classification_breakdown","Alert volume broken down by classification (reveals tuning gaps)",                                                              "must", False, "Operational visibility"),
+        ChecklistItem("item:A.8.12:log_retention",    "Log retention defined and enforced (cross-link to A.8.15)",                                                                                "must", False, "A.8.15 linkage"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.12:log_siem_forward", "Alerts forwarded to SIEM (cross-link to A.8.16)",                                                                                          "should", False, "Detection maturity"),
+    ],
+)
+
+REQ_A812_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.12:dlp_program_review",
+    control_ref     = "A.8.12",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic DLP Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification — ruleset currency, channel coverage gaps, true/false-positive trending, exception inventory (freshness=180; data-loss attack patterns evolve fast)",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.8.12:rev_date",         "Review date within the planned interval (≤180 days)",                                                                                      "must", False, "27002:8.12 — periodic"),
+        ChecklistItem("item:A.8.12:rev_reviewer",     "Reviewer identity (DLP lead + Data Protection + InfoSec)",                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.8.12:rev_coverage_gaps","Channel-coverage gap check (new channel / new platform missing)",                                                                          "must", False, "27002:8.12 — measures"),
+        ChecklistItem("item:A.8.12:rev_tp_rate",      "True-positive rate trending (detection effectiveness)",                                                                                    "must", False, "Detection effectiveness"),
+        ChecklistItem("item:A.8.12:rev_exception_inventory","Exception inventory re-confirmed / retired",                                                                                          "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.12:rev_baseline_update","Baseline / ruleset / procedure updates published from findings",                                                                          "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.12:rev_next_date",    "Next planned review date stated",                                                                                                          "should", False, "Planning"),
+    ],
+)
+
+# ── A.8.13 Information backup — op_process 4-leaf (batch 23) ─────────────────
+# Naturally paired with A.5.30 ICT readiness — backup-test record + restoration discipline
+REQ_A813_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.8.13:backup_procedure",
     control_ref   = "A.8.13",
     standard_id   = "ISO27001:2022",
-    evidence_type = "policy",
-    title         = "Information Backup Policy and Restore Test Records",
+    evidence_type = "procedure",
+    title         = "Information Backup Procedure",
     trigger_type  = "universal",
-    description   = "A.8.13 requires backup copies of information, software, and systems to be maintained and regularly tested per the backup policy. Evidence is a backup policy plus restore test records",
-    freshness_days = 365,
+    description   = "A.8.13 requires backups maintained and regularly tested. Procedure documents scope, frequency, retention, storage separation, encryption. Per-restore-test register (lifecycle-end), applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.13:scope",        "Scope (which information, software, systems are backed up)", "must", False, "A.8.13 — backup copies"),
-        ChecklistItem("item:A.8.13:frequency",    "Frequency per asset class (continuous, daily, weekly)", "must", False, "A.8.13 — maintained"),
-        ChecklistItem("item:A.8.13:retention",    "Retention period per asset class", "must", False, "A.8.13 — maintained"),
-        ChecklistItem("item:A.8.13:storage",      "Storage location and separation (offsite or air-gapped copy)", "must", False, "A.8.13 — maintained"),
-        ChecklistItem("item:A.8.13:encryption",   "Encryption of backups (at rest, in transit)", "must", False, "A.8.13 — maintained"),
-        ChecklistItem("item:A.8.13:restore_test", "Restore testing cadence stated", "must", False, "A.8.13 — regularly tested"),
-        ChecklistItem("item:A.8.13:last_restore","Last restore test date and outcome recorded", "must", False, "A.8.13 — regularly tested"),
+        ChecklistItem("item:A.8.13:scope",            "Scope — which information, software, systems are backed up (with frequency tier per class)",                                                "must", False, "27002:8.13 — backup copies"),
+        ChecklistItem("item:A.8.13:frequency",        "Frequency per asset class (continuous / hourly / daily / weekly aligned to RPO)",                                                              "must", False, "27002:8.13 — maintained"),
+        ChecklistItem("item:A.8.13:retention",        "Retention period per asset class (drives storage cost + recovery range)",                                                                    "must", False, "27002:8.13 — maintained"),
+        ChecklistItem("item:A.8.13:storage_separation","Storage separation (offsite OR air-gapped OR immutable-storage) — 3-2-1 rule applied",                                                        "must", False, "27002:8.13 — maintained (modern ransomware threat)"),
+        ChecklistItem("item:A.8.13:encryption",       "Encryption of backups at rest + in transit (cross-link to A.8.24)",                                                                          "must", False, "27002:8.13 — maintained"),
+        ChecklistItem("item:A.8.13:restore_test_cadence","Restore-test cadence stated per asset class (annual minimum; quarterly for tier-1)",                                                      "must", False, "27002:8.13 — regularly tested"),
+        ChecklistItem("item:A.8.13:rpo_alignment",    "RPO alignment with A.5.30 ICT readiness (each system's BIA RPO ≤ backup frequency)",                                                          "must", False, "Continuity coherence"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.13:three_two_one","3-2-1 backup rule (3 copies, 2 media, 1 offsite) or equivalent", "should", False, "Established baseline"),
-        ChecklistItem("item:A.8.13:rpo_alignment","Recovery point objective alignment (links to A.5.30)", "should", False, "Continuity coherence"),
+        ChecklistItem("item:A.8.13:owner",            "Named procedure owner (Backup Operations lead with Infrastructure partner)",                                                                  "should", False, "Accountability"),
     ],
 )
 
-REQ_A814_REDUNDANCY = EvidenceRequirement(
-    id            = "req:A.8.14:redundancy_plan",
+REQ_A813_RESTORE_TEST_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.13:restore_test_register",
+    control_ref   = "A.8.13",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Restore Test Register",
+    trigger_type  = "universal",
+    description   = "Per-restore-test lifecycle-end record — what was restored, when, integrity-verified, target met. Parallels A.5.30 ICT readiness recovery-test pattern",
+    must_contain  = [
+        ChecklistItem("item:A.8.13:reg_test_id",      "Per-test unique identifier",                                                                                                                "must", False, "Auditability"),
+        ChecklistItem("item:A.8.13:reg_target",       "Per-test backup target tested (system / dataset / configuration)",                                                                            "must", False, "27002:8.13 — regularly tested"),
+        ChecklistItem("item:A.8.13:reg_date",         "Per-test date",                                                                                                                              "must", False, "Currency"),
+        ChecklistItem("item:A.8.13:reg_outcome",      "Per-test outcome (success / partial / failure)",                                                                                            "must", False, "27002:8.13 — tested"),
+        ChecklistItem("item:A.8.13:reg_integrity_check","Per-test integrity-verification artefact (checksum / hash / functional test of restored data)",                                            "must", False, "Defensibility"),
+        ChecklistItem("item:A.8.13:reg_rpo_met",      "Per-test RPO-met flag (data-recoverable-to-RPO confirmed; auditor-critical proof parallels A.5.30 rec_success_status)",                    "must", False, "27002:8.13 — sufficient"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.13:reg_findings",     "Per-test findings + corrective actions where target missed",                                                                                "should", False, "Closes the loop"),
+    ],
+)
+
+REQ_A813_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.13:applicable_backup_scope",
+    control_ref   = "A.8.13",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Backup Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — which systems / datasets are in scope with what RPO tier. Drawn from A.5.30 BIA. Documents what's vendor-managed (delegated to A.5.19/A.5.21 supplier)",
+    must_contain  = [
+        ChecklistItem("item:A.8.13:scope_systems",    "Systems / datasets enumerated with RPO tier per row (drawn from A.5.30 BIA)",                                                                "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.13:scope_vendor_managed","Vendor-managed backups delegated to A.5.19/A.5.21 supplier obligations",                                                                  "must", False, "Boundary clarity"),
+        ChecklistItem("item:A.8.13:scope_exclusions", "Exclusion rationale where backup not required (ephemeral / reconstructable / public)",                                                      "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.13:scope_change_drivers","Trigger list for re-scoping (new system, RPO change, new vendor)",                                                                        "should", False, "Currency"),
+    ],
+)
+
+REQ_A813_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.13:backup_program_review",
+    control_ref     = "A.8.13",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Backup Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification — restore-test attainment per RPO tier, scope completeness, encryption + immutability posture (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.13:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.13 — periodic"),
+        ChecklistItem("item:A.8.13:rev_reviewer",     "Reviewer identity (Backup Operations + Infrastructure + InfoSec)",                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.13:rev_test_attainment","Restore-test attainment per tier (cadence met, RPO met)",                                                                                  "must", False, "27002:8.13 — regularly tested"),
+        ChecklistItem("item:A.8.13:rev_scope_completeness","Scope-completeness check (new in-scope system covered)",                                                                                "must", False, "27002:8.13 — maintained"),
+        ChecklistItem("item:A.8.13:rev_threat_posture","Threat-posture review (ransomware-resilience: immutability / air-gap / 3-2-1 still adequate)",                                            "must", False, "Modern resilience"),
+        ChecklistItem("item:A.8.13:rev_procedure_update","Findings propagated to procedure / scope",                                                                                                "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.13:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.14 Redundancy of information processing facilities — technical_control 4-leaf (batch 23) ─
+REQ_A814_BASELINE = EvidenceRequirement(
+    id            = "req:A.8.14:redundancy_baseline",
     control_ref   = "A.8.14",
     standard_id   = "ISO27001:2022",
-    evidence_type = "plan",
-    title         = "Redundancy of Information Processing Facilities Plan",
+    evidence_type = "configuration_baseline",
+    title         = "Redundancy Baseline",
     trigger_type  = "universal",
-    description   = "A.8.14 requires information processing facilities to be implemented with redundancy sufficient to meet availability requirements. Evidence is a redundancy plan covering critical services, approach per service, and test records",
-    freshness_days = 365,
+    description   = "A.8.14 baseline — critical services identified, availability requirements per service, redundancy approach per service. Procedure (failover), failover-test register, review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.14:critical_services","Critical service identification with availability requirements", "must", False, "A.8.14 — availability requirements"),
-        ChecklistItem("item:A.8.14:redundancy_approach","Redundancy approach per service (active-active, active-passive, cold standby)", "must", False, "A.8.14 — redundancy sufficient"),
-        ChecklistItem("item:A.8.14:failover_testing","Failover testing cadence and last test outcome", "must", False, "A.8.14 — sufficient to meet"),
-        ChecklistItem("item:A.8.14:monitoring",   "Monitoring of redundant components (so failures are detected before failover needed)", "must", False, "A.8.14 — implemented"),
+        ChecklistItem("item:A.8.14:bl_critical_services","Critical services enumerated with availability requirement per service (drawn from A.5.30 BIA)",                                          "must", False, "27002:8.14 — availability requirements"),
+        ChecklistItem("item:A.8.14:bl_redundancy_approach","Redundancy approach per service (active-active / active-passive / cold-standby / multi-region)",                                        "must", False, "27002:8.14 — redundancy sufficient"),
+        ChecklistItem("item:A.8.14:bl_monitoring",    "Monitoring of redundant components — failures detected before failover need (no silent single-point loss)",                                "must", False, "27002:8.14 — implemented"),
+        ChecklistItem("item:A.8.14:bl_cross_az",      "Cross-AZ / cross-region distribution for cloud-hosted services (modern baseline; single-AZ insufficient)",                                  "must", False, "Modern hosting reality"),
+        ChecklistItem("item:A.8.14:bl_sla_implications","SLA implications documented (what tenants are promised — honest about redundant vs single-instance)",                                    "must", False, "Honest commitment"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.14:cross_az",     "Cross-AZ / cross-region considerations for cloud-hosted facilities", "should", False, "Modern hosting reality"),
-        ChecklistItem("item:A.8.14:sla_implications","SLA implications for redundant vs single-instance services", "should", False, "Honest commitment"),
+        ChecklistItem("item:A.8.14:bl_chaos_engineering","Chaos-engineering / fault-injection practice for high-criticality services",                                                            "should", False, "Modern resilience"),
     ],
 )
 
-REQ_A815_LOGGING = EvidenceRequirement(
-    id            = "req:A.8.15:logging_policy",
+REQ_A814_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.8.14:failover_procedure",
+    control_ref   = "A.8.14",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "procedure",
+    title         = "Failover Procedure",
+    trigger_type  = "universal",
+    description   = "Operational counterpart — how failover is invoked, who has authority, failback path, cross-control wiring to A.5.30 ICT readiness",
+    must_contain  = [
+        ChecklistItem("item:A.8.14:proc_failover_authority","Failover invocation authority per service (automated vs manual; on-call authority)",                                                    "must", False, "27002:8.14 — sufficient"),
+        ChecklistItem("item:A.8.14:proc_runbook",     "Per-service failover runbook (steps, validation checks, success criteria)",                                                                "must", False, "Operational maturity"),
+        ChecklistItem("item:A.8.14:proc_failback",    "Failback procedure — return to primary after recovery (often more risky than failover)",                                                  "must", False, "Often overlooked"),
+        ChecklistItem("item:A.8.14:proc_a530_link",   "Cross-link to A.5.30 ICT readiness — coordinated with broader recovery plan",                                                              "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.14:proc_communications","Stakeholder communications during failover (status page, customer notifications)",                                                        "must", False, "Operational discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.14:proc_owner",       "Named procedure owner (Site Reliability lead with Infrastructure partner)",                                                                  "should", False, "Accountability"),
+    ],
+)
+
+REQ_A814_TEST_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.14:failover_test_register",
+    control_ref   = "A.8.14",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "monitoring_record",
+    title         = "Failover Test Register",
+    trigger_type  = "universal",
+    description   = "Per-test record — drilled failover events, real failover events, outcomes. Proves the baseline + procedure work in practice",
+    must_contain  = [
+        ChecklistItem("item:A.8.14:reg_test_id",      "Per-test unique identifier",                                                                                                                "must", False, "Auditability"),
+        ChecklistItem("item:A.8.14:reg_service",      "Per-test service tested",                                                                                                                  "must", False, "27002:8.14 — sufficient to meet"),
+        ChecklistItem("item:A.8.14:reg_type",         "Per-test type (planned drill / unplanned real / fault-injection)",                                                                          "must", False, "Distinguishing operational vs test signal"),
+        ChecklistItem("item:A.8.14:reg_date",         "Per-test date",                                                                                                                            "must", False, "Currency"),
+        ChecklistItem("item:A.8.14:reg_outcome",      "Per-test outcome (success / partial / failure) + actual recovery time vs target",                                                          "must", False, "27002:8.14 — sufficient"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.14:reg_findings",     "Per-test findings + corrective actions where target missed",                                                                                "should", False, "Closes the loop"),
+    ],
+)
+
+REQ_A814_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.14:redundancy_program_review",
+    control_ref     = "A.8.14",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Redundancy Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification — critical-service list current, redundancy approach matches availability target, test attainment per service (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.14:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.14 — periodic"),
+        ChecklistItem("item:A.8.14:rev_reviewer",     "Reviewer identity (Site Reliability + Infrastructure + business-service owners)",                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.14:rev_service_list", "Critical-service list re-confirmed (new service in scope; retired service removed)",                                                        "must", False, "27002:8.14 — availability"),
+        ChecklistItem("item:A.8.14:rev_test_attainment","Failover-test attainment per service (cadence met; targets met)",                                                                          "must", False, "27002:8.14 — sufficient"),
+        ChecklistItem("item:A.8.14:rev_bia_alignment","Cross-check with A.5.30 BIA (any availability-tier change → redundancy approach re-evaluation)",                                            "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.14:rev_baseline_update","Baseline / runbook updates published from findings",                                                                                      "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.14:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+# ── A.8.15 Logging — op_process 4-leaf (batch 23) ────────────────────────────
+REQ_A815_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.8.15:logging_procedure",
     control_ref   = "A.8.15",
     standard_id   = "ISO27001:2022",
-    evidence_type = "policy",
-    title         = "Logging Policy",
+    evidence_type = "procedure",
+    title         = "Logging Procedure",
     trigger_type  = "universal",
-    description   = "A.8.15 requires logs of activities, exceptions, faults, and other relevant events to be produced, stored, protected, and analysed. Evidence is a logging policy stating scope, content, retention, protection, and analysis",
+    description   = "A.8.15 requires logs produced, stored, protected, analysed. Procedure documents content standards, retention, protection, central collection, analysis integration. Per-source register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.15:scope",        "Scope (which systems, applications, network elements emit logs)", "must", False, "A.8.15 — logs produced"),
-        ChecklistItem("item:A.8.15:content",      "Required log content (who, what, when, where, success/failure)", "must", False, "A.8.15 — record activities, exceptions, faults"),
-        ChecklistItem("item:A.8.15:retention",    "Retention period per log class", "must", False, "A.8.15 — stored"),
-        ChecklistItem("item:A.8.15:protection",   "Protection from tampering (append-only, hashing, separation of duties)", "must", False, "A.8.15 — protected"),
-        ChecklistItem("item:A.8.15:central_collection","Centralised collection (SIEM or log aggregator)", "must", False, "A.8.15 — analysed"),
-        ChecklistItem("item:A.8.15:analysis",     "Analysis approach (manual review, correlation, alerting) (links to A.8.16)", "must", False, "A.8.15 — analysed"),
-        ChecklistItem("item:A.8.15:time_sync",    "Time synchronisation requirement (links to A.8.17) so logs correlate", "must", False, "A.8.15 — relevant events"),
+        ChecklistItem("item:A.8.15:content_standard","Required log content per source class (who / what / when / where / outcome / target)",                                                          "must", False, "27002:8.15 — record activities, exceptions, faults"),
+        ChecklistItem("item:A.8.15:retention",        "Retention period per log class (regulatory + business + investigation horizon — typically 90d hot, 1y cold)",                                "must", False, "27002:8.15 — stored"),
+        ChecklistItem("item:A.8.15:protection",       "Protection from tampering (append-only / write-once / hashed / off-host SIEM)",                                                              "must", False, "27002:8.15 — protected"),
+        ChecklistItem("item:A.8.15:central_collection","Centralised collection (SIEM or log aggregator) — no source-only retention for security-relevant logs",                                      "must", False, "27002:8.15 — analysed"),
+        ChecklistItem("item:A.8.15:analysis_link",    "Analysis integration (cross-link to A.8.16 monitoring — passive logging insufficient)",                                                      "must", False, "27002:8.15 — analysed"),
+        ChecklistItem("item:A.8.15:time_sync_link",   "Time-sync dependency (cross-link to A.8.17 — logs only correlate when clocks aligned)",                                                      "must", False, "27002:8.15 — relevant events"),
+        ChecklistItem("item:A.8.15:log_integrity",    "Log-integrity verification (hash chain or signing) — forensic defensibility",                                                                "must", False, "Forensic-grade (Style v2 promotion)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.15:log_integrity","Log integrity verification (hashing, signing)", "should", False, "Forensic-grade"),
-        ChecklistItem("item:A.8.15:legal_hold",   "Legal-hold integration overriding retention", "should", False, "Litigation readiness"),
+        ChecklistItem("item:A.8.15:legal_hold",       "Legal-hold integration overriding retention",                                                                                                "should", False, "Litigation readiness"),
     ],
 )
 
-REQ_A816_MONITORING_ACTIVITIES = EvidenceRequirement(
+REQ_A815_SOURCE_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.15:log_source_register",
+    control_ref   = "A.8.15",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Log Source Register",
+    trigger_type  = "universal",
+    description   = "Per-source register — what's emitting logs, where they land, what retention applies, last-event timestamp (drives 'silent source' detection)",
+    must_contain  = [
+        ChecklistItem("item:A.8.15:reg_source_id",    "Per-source identifier (system / app / network device)",                                                                                      "must", False, "Identification"),
+        ChecklistItem("item:A.8.15:reg_log_class",    "Per-source log class (auth / access / change / fault / business-event / privacy-relevant)",                                                  "must", False, "27002:8.15 — record"),
+        ChecklistItem("item:A.8.15:reg_destination",  "Per-source collection destination (SIEM index / cold-archive bucket / regulator-required path)",                                              "must", False, "27002:8.15 — stored"),
+        ChecklistItem("item:A.8.15:reg_retention_tier","Per-source retention tier applied",                                                                                                          "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.8.15:reg_last_event",   "Per-source last-event timestamp (drives silent-source detection — common detection gap)",                                                    "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.15:reg_owner",        "Per-source named owner (system / app owner)",                                                                                                "should", False, "Accountability"),
+    ],
+)
+
+REQ_A815_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.15:applicable_logging_scope",
+    control_ref   = "A.8.15",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Logging Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — which systems must emit which log classes, what regulatory drivers apply per class (GDPR Art.30 audit trail / sector-specific requirements)",
+    must_contain  = [
+        ChecklistItem("item:A.8.15:scope_systems",    "Systems in scope enumerated (drawn from A.5.9 asset register)",                                                                              "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.15:scope_log_classes","Log classes required per system class (auth / access / change / fault)",                                                                    "must", False, "27002:8.15 — record activities"),
+        ChecklistItem("item:A.8.15:scope_regulatory_drivers","Per-class regulatory drivers (PCI / HIPAA / GDPR Art.30 / DORA / sector audit)",                                                      "must", False, "Defensibility"),
+        ChecklistItem("item:A.8.15:scope_exclusions", "Exclusion rationale + compensating controls per excluded class",                                                                              "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.15:scope_change_drivers","Trigger list for re-scoping (new system, new regulator, new attack pattern)",                                                              "should", False, "Currency"),
+    ],
+)
+
+REQ_A815_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.15:logging_program_review",
+    control_ref     = "A.8.15",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Logging Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification — source-register currency, silent-source detection, retention compliance, integrity-verification spot-checks (freshness=180; threat landscape volatile)",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.8.15:rev_date",         "Review date within the planned interval (≤180 days)",                                                                                        "must", False, "27002:8.15 — periodic"),
+        ChecklistItem("item:A.8.15:rev_reviewer",     "Reviewer identity (Security Operations + Infrastructure)",                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.8.15:rev_silent_sources","Silent-source detection — sources missing recent events triaged",                                                                          "must", False, "Detection gap closure"),
+        ChecklistItem("item:A.8.15:rev_retention_compliance","Retention compliance check (no premature deletion; no over-retention of personal data)",                                              "must", False, "27002:8.15 — stored"),
+        ChecklistItem("item:A.8.15:rev_integrity_check","Integrity-verification spot-check (hash chain or signature validates against retained logs)",                                              "must", False, "Forensic defensibility"),
+        ChecklistItem("item:A.8.15:rev_findings_update","Findings propagated to procedure / source register / scope",                                                                                "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.15:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.16 Monitoring activities — op_process 4-leaf (batch 23) ──────────────
+REQ_A816_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.16:monitoring_activities_procedure",
     control_ref   = "A.8.16",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Monitoring Activities Procedure",
     trigger_type  = "universal",
-    description   = "A.8.16 requires networks, systems, and applications to be monitored for anomalous behaviour and appropriate actions taken. Evidence is a monitoring procedure with detection methods, alert routing, and incident integration",
+    description   = "A.8.16 requires monitoring for anomalous behaviour with appropriate actions taken. Procedure documents detection methods, alert routing, triage criteria, incident handoff. Per-detection register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.16:scope",         "Scope (networks, systems, applications, cloud services)", "must", False, "A.8.16 — networks, systems and applications"),
-        ChecklistItem("item:A.8.16:detection_methods","Detection methods (signature, anomaly, threat intel, behavioural)", "must", False, "A.8.16 — anomalous behaviour"),
-        ChecklistItem("item:A.8.16:alert_routing", "Alert routing to security operations / on-call", "must", False, "A.8.16 — appropriate actions taken"),
-        ChecklistItem("item:A.8.16:triage_criteria","Triage criteria for separating events from incidents (links to A.5.25)", "must", False, "A.8.16 — evaluate potential incidents"),
-        ChecklistItem("item:A.8.16:incident_link", "Incident response handoff (A.5.26) when triage confirms incident", "must", False, "A.8.16 — potential incidents"),
+        ChecklistItem("item:A.8.16:detection_methods","Detection methods (signature / anomaly / threat-intel / behavioural / UEBA / hunting)",                                                      "must", False, "27002:8.16 — anomalous behaviour"),
+        ChecklistItem("item:A.8.16:alert_routing",    "Alert routing to Security Operations / on-call (severity-tiered)",                                                                            "must", False, "27002:8.16 — appropriate actions taken"),
+        ChecklistItem("item:A.8.16:triage_criteria",  "Triage criteria for separating events from incidents (cross-link to A.5.25)",                                                                "must", False, "27002:8.16 — evaluate potential incidents"),
+        ChecklistItem("item:A.8.16:incident_handoff", "Incident-response handoff (cross-link to A.5.26 register) when triage confirms incident",                                                    "must", False, "27002:8.16 — potential incidents"),
+        ChecklistItem("item:A.8.16:siem_use_cases",   "SIEM use-case catalogue with coverage map (each use case mapped to detection method + asset class)",                                          "must", False, "Measurable monitoring (Style v2 promotion)"),
+        ChecklistItem("item:A.8.16:threat_hunting",   "Threat-hunting cadence for proactive detection (quarterly minimum for tier-1 assets)",                                                      "must", False, "Modern maturity (Style v2 promotion)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.16:siem_use_cases","SIEM use case catalogue with coverage map", "should", False, "Measurable monitoring"),
-        ChecklistItem("item:A.8.16:threat_hunting","Threat-hunting cadence for proactive detection", "should", False, "Modern maturity bar"),
+        ChecklistItem("item:A.8.16:owner",            "Named procedure owner (Security Operations lead)",                                                                                            "should", False, "Accountability"),
     ],
 )
 
-REQ_A817_CLOCK_SYNC = EvidenceRequirement(
+REQ_A816_DETECTION_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.16:detection_register",
+    control_ref   = "A.8.16",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Detection Use-Case Register",
+    trigger_type  = "universal",
+    description   = "Catalogue of active detections — rule / use-case id, asset coverage, last-tuning date, true-positive rate, status",
+    must_contain  = [
+        ChecklistItem("item:A.8.16:reg_use_case_id",  "Per-detection use-case identifier (rule id / hunt id / playbook id)",                                                                        "must", False, "Identification"),
+        ChecklistItem("item:A.8.16:reg_coverage",     "Per-detection asset coverage (which asset classes / sources feed it)",                                                                        "must", False, "27002:8.16 — networks, systems, applications"),
+        ChecklistItem("item:A.8.16:reg_threat_mapping","Per-detection threat mapping (MITRE ATT&CK technique or equivalent)",                                                                      "must", False, "Coverage visibility"),
+        ChecklistItem("item:A.8.16:reg_tp_rate",      "Per-detection true-positive rate (rolling window)",                                                                                          "must", False, "Detection effectiveness"),
+        ChecklistItem("item:A.8.16:reg_last_tuned",   "Per-detection last-tuning date",                                                                                                            "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.16:reg_owner",        "Per-detection named owner (detection engineer)",                                                                                              "should", False, "Accountability"),
+    ],
+)
+
+REQ_A816_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.16:applicable_monitoring_scope",
+    control_ref   = "A.8.16",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Monitoring Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — which asset classes are in scope, what coverage is expected (full / sampled / boundary-only), which are vendor-managed (delegated A.5.19/A.5.21)",
+    must_contain  = [
+        ChecklistItem("item:A.8.16:scope_classes",    "Asset classes enumerated with monitoring coverage expectation per class",                                                                    "must", False, "27002:8.16 — networks, systems, applications"),
+        ChecklistItem("item:A.8.16:scope_vendor_managed","Vendor-managed monitoring delegated to A.5.19/A.5.21 supplier obligations with evidence of effectiveness",                                "must", False, "Boundary clarity"),
+        ChecklistItem("item:A.8.16:scope_exclusions", "Exclusion rationale + compensating controls",                                                                                                "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.16:scope_change_drivers","Trigger list for re-scoping (new asset class, new attack-vector category, regulator inspection)",                                          "should", False, "Currency"),
+    ],
+)
+
+REQ_A816_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.16:monitoring_program_review",
+    control_ref     = "A.8.16",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Monitoring Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification — detection coverage gaps, true-positive rate trending, missed-detection postmortems, threat-intel feeding (freshness=180; threat landscape volatile)",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.8.16:rev_date",         "Review date within the planned interval (≤180 days)",                                                                                        "must", False, "27002:8.16 — periodic"),
+        ChecklistItem("item:A.8.16:rev_reviewer",     "Reviewer identity (Security Operations lead + InfoSec lead)",                                                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.8.16:rev_coverage",     "Coverage check against threat-mapping (any uncovered MITRE technique surfaced)",                                                              "must", False, "27002:8.16 — coverage"),
+        ChecklistItem("item:A.8.16:rev_tp_trending",  "True-positive rate trending review per detection",                                                                                            "must", False, "Detection effectiveness"),
+        ChecklistItem("item:A.8.16:rev_missed_postmortems","Missed-detection postmortems reviewed (incidents that bypassed monitoring)",                                                            "must", False, "Detection improvement"),
+        ChecklistItem("item:A.8.16:rev_threat_intel_feed","Threat-intel feeding effectiveness (cross-link to A.5.7 — new tactics translated to detections)",                                        "must", False, "Currency"),
+        ChecklistItem("item:A.8.16:rev_register_update","Findings propagated to register / procedure / scope",                                                                                      "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.16:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.17 Clock synchronisation — op_process 4-leaf (batch 23) ──────────────
+REQ_A817_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.17:clock_synchronization_procedure",
     control_ref   = "A.8.17",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Clock Synchronization Procedure",
     trigger_type  = "universal",
-    description   = "A.8.17 requires the clocks of information processing systems to be synchronized to approved time sources. Evidence is a procedure naming approved sources and the synchronisation arrangement",
+    description   = "A.8.17 requires clocks synchronised to approved sources. Procedure names sources, protocol, scope, monitoring. Per-system sync register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.17:approved_sources","Approved time sources named (stratum-1 NTP, GPS, vendor-provided)", "must", False, "A.8.17 — approved time sources"),
-        ChecklistItem("item:A.8.17:protocol",       "Synchronisation protocol (NTP, PTP) and security where supported (NTS, authenticated NTP)", "must", False, "A.8.17 — synchronized"),
-        ChecklistItem("item:A.8.17:scope",          "Scope (servers, network devices, endpoints, containers)", "must", False, "A.8.17 — information processing systems"),
-        ChecklistItem("item:A.8.17:monitoring",     "Monitoring of sync status (alert on drift, source loss)", "must", False, "A.8.17 — synchronized"),
+        ChecklistItem("item:A.8.17:approved_sources","Approved time sources named (stratum-1 NTP / GPS / vendor-cloud time service)",                                                                "must", False, "27002:8.17 — approved time sources"),
+        ChecklistItem("item:A.8.17:protocol",         "Synchronisation protocol (NTP / PTP) with security where supported (NTS / authenticated NTP)",                                                "must", False, "27002:8.17 — synchronized"),
+        ChecklistItem("item:A.8.17:scope",            "Scope (servers / network devices / endpoints / containers / cloud services / OT)",                                                          "must", False, "27002:8.17 — information processing systems"),
+        ChecklistItem("item:A.8.17:monitoring",       "Sync-status monitoring (drift threshold + alert on source loss + alert on stratum increase)",                                                "must", False, "27002:8.17 — synchronized"),
+        ChecklistItem("item:A.8.17:stratum_hierarchy","Stratum hierarchy documented (internal stratum-2 distribution from external stratum-1)",                                                    "must", False, "Topology clarity"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.17:stratum_hierarchy","Stratum hierarchy documented (internal vs external sources)", "should", False, "Topology clarity"),
-        ChecklistItem("item:A.8.17:source_security","Security of the NTP feed itself (authenticated, signed)", "should", False, "Defense in depth"),
+        ChecklistItem("item:A.8.17:source_security",  "NTP-feed security (authenticated / signed) for high-criticality logging contexts",                                                          "should", False, "Defence in depth"),
     ],
 )
 
-REQ_A818_PRIVILEGED_UTILITY_PROGRAMS = EvidenceRequirement(
-    id            = "req:A.8.18:privileged_utility_programs_procedure",
+REQ_A817_SYNC_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.17:sync_register",
+    control_ref   = "A.8.17",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Clock Sync Status Register",
+    trigger_type  = "universal",
+    description   = "Per-system sync status — system id, current sync source, current drift, last successful sync timestamp",
+    must_contain  = [
+        ChecklistItem("item:A.8.17:reg_system_id",    "Per-row system identifier",                                                                                                                  "must", False, "Identification"),
+        ChecklistItem("item:A.8.17:reg_source",       "Per-row current sync source",                                                                                                                "must", False, "27002:8.17 — synchronized"),
+        ChecklistItem("item:A.8.17:reg_drift",        "Per-row current drift measurement",                                                                                                          "must", False, "Drift detection"),
+        ChecklistItem("item:A.8.17:reg_last_sync",    "Per-row last successful sync timestamp",                                                                                                    "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.17:reg_alerts",       "Per-row outstanding alerts (drift exceeded / source lost)",                                                                                "should", False, "Operational visibility"),
+    ],
+)
+
+REQ_A817_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.17:applicable_sync_scope",
+    control_ref   = "A.8.17",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Sync Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — which system classes need sync, what drift tolerance per class (sub-second for forensics-critical; seconds acceptable elsewhere)",
+    must_contain  = [
+        ChecklistItem("item:A.8.17:scope_classes",    "System classes enumerated with drift tolerance per class",                                                                                  "must", False, "27002:8.17 — appropriate"),
+        ChecklistItem("item:A.8.17:scope_exclusions", "Exclusion rationale (network-isolated systems with documented offline-clock procedure)",                                                    "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.17:scope_change_drivers","Trigger list for re-scoping (new system class, new regulator drift requirement)",                                                          "should", False, "Currency"),
+    ],
+)
+
+REQ_A817_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.17:sync_program_review",
+    control_ref     = "A.8.17",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Clock Sync Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification — drift compliance per class, source-availability, scope completeness (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.17:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.17 — periodic"),
+        ChecklistItem("item:A.8.17:rev_reviewer",     "Reviewer identity (Infrastructure lead + Security Operations)",                                                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.8.17:rev_drift_compliance","Drift compliance per class (samples within tolerance)",                                                                                  "must", False, "27002:8.17 — synchronized"),
+        ChecklistItem("item:A.8.17:rev_scope_completeness","Scope-completeness check (new system class covered)",                                                                                  "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.17:rev_findings_update","Findings propagated to procedure / scope",                                                                                                "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.17:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+# ── A.8.18 Privileged utility programs — policy_program 4-leaf (batch 23) ────
+REQ_A818_POLICY = EvidenceRequirement(
+    id            = "req:A.8.18:privileged_utility_programs_policy",
     control_ref   = "A.8.18",
     standard_id   = "ISO27001:2022",
-    evidence_type = "procedure",
-    title         = "Privileged Utility Programs Procedure",
+    evidence_type = "policy",
+    title         = "Privileged Utility Programs Policy",
     trigger_type  = "universal",
-    description   = "A.8.18 requires the use of utility programs capable of overriding system and application controls to be restricted and tightly controlled. Evidence is a procedure covering inventory, authorisation, JIT access, and logging",
+    description   = "A.8.18 requires utility programs capable of overriding system/application controls to be restricted and tightly controlled. Policy defines what counts, authorisation model, removal-where-unneeded principle. Per-utility register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.18:inventory",     "Inventory of utility programs that can override controls (debuggers, sysinternals, low-level admin tools)", "must", False, "A.8.18 — utility programs that can override"),
-        ChecklistItem("item:A.8.18:authorisation", "Authorisation required for use of each utility program", "must", False, "A.8.18 — restricted"),
-        ChecklistItem("item:A.8.18:jit_access",    "Just-in-time access where possible", "must", False, "A.8.18 — tightly controlled"),
-        ChecklistItem("item:A.8.18:logging",       "Logging of all uses (links to A.8.15)", "must", False, "A.8.18 — tightly controlled"),
-        ChecklistItem("item:A.8.18:periodic_review","Periodic review of who has access and whether still needed", "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.18:authorisation_model","Authorisation model — who can approve use per utility class (InfoSec + system owner)",                                                      "must", False, "27002:8.18 — restricted"),
+        ChecklistItem("item:A.8.18:jit_principle",    "JIT-access principle — utilities not standing-installed where avoidable; cross-link to A.8.2 PAM",                                            "must", False, "27002:8.18 — tightly controlled"),
+        ChecklistItem("item:A.8.18:removal_principle","Removal-where-unneeded principle — utility programs removed from systems where not required",                                                "must", False, "Attack-surface reduction (Style v2 promotion)"),
+        ChecklistItem("item:A.8.18:logging_principle","Logging requirement — every utility-program invocation captured (cross-link to A.8.15)",                                                      "must", False, "27002:8.18 — tightly controlled"),
+        ChecklistItem("item:A.8.18:authority",        "Named policy authority (InfoSec lead with Infrastructure lead)",                                                                              "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.18:removal_where_unnecessary","Removal of utility programs from systems where not needed", "should", False, "Attack-surface reduction"),
+        ChecklistItem("item:A.8.18:vendor_utilities", "Vendor-provided utility programs treated under the same rules (no vendor-default-allow)",                                                    "should", False, "Common gap"),
     ],
 )
 
-REQ_A819_SOFTWARE_INSTALLATION = EvidenceRequirement(
+REQ_A818_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.18:utility_register",
+    control_ref   = "A.8.18",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Privileged Utility Programs Register",
+    trigger_type  = "universal",
+    description   = "Per-utility inventory — utility id, capability, current location, authorised users, last-use",
+    must_contain  = [
+        ChecklistItem("item:A.8.18:reg_utility_id",   "Per-row utility identifier (name + version)",                                                                                                "must", False, "Identification"),
+        ChecklistItem("item:A.8.18:reg_capability",   "Per-row capability description (what controls it can override)",                                                                              "must", False, "27002:8.18 — utility programs that can override"),
+        ChecklistItem("item:A.8.18:reg_location",     "Per-row current location (systems where installed) — drives removal-where-unneeded principle",                                              "must", False, "27002:8.18 — restricted"),
+        ChecklistItem("item:A.8.18:reg_authorised",   "Per-row authorised user list (with approval lineage)",                                                                                      "must", False, "27002:8.18 — restricted"),
+        ChecklistItem("item:A.8.18:reg_last_use",     "Per-row last-use timestamp (drives 'still needed' review)",                                                                                  "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.18:reg_jit_vault",    "Per-row JIT-vault availability flag (where applicable, indicates non-standing-install path)",                                                "should", False, "Modern maturity"),
+    ],
+)
+
+REQ_A818_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.18:applicable_utility_scope",
+    control_ref   = "A.8.18",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Utility Programs Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — what counts as a privileged utility program in this org (debuggers / sysinternals / disk-rescue tools / SQL-direct-access / vendor diagnostic tools)",
+    must_contain  = [
+        ChecklistItem("item:A.8.18:scope_classes",    "Utility classes enumerated (debuggers / sysinternals / disk tools / DB direct-access / vendor diagnostic / penetration-testing)",          "must", False, "27002:8.18 — utility programs"),
+        ChecklistItem("item:A.8.18:scope_inclusion_test","Inclusion test (any program with 'can override control' capability is in scope, regardless of source)",                                  "must", False, "Boundary clarity"),
+        ChecklistItem("item:A.8.18:scope_exclusions", "Exclusion rationale (admin tools already governed under A.8.2 PAM)",                                                                        "must", False, "Cross-control coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.18:scope_change_drivers","Trigger list for re-scoping (new utility class, new vendor diagnostic, new investigation tool)",                                          "should", False, "Currency"),
+    ],
+)
+
+REQ_A818_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.18:utility_program_review",
+    control_ref     = "A.8.18",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Privileged Utility Programs Review",
+    trigger_type    = "universal",
+    description     = "Annual verification — register currency, authorised-user list current, removal-where-unneeded sweep, JIT-coverage trending (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.18:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.18 — periodic"),
+        ChecklistItem("item:A.8.18:rev_reviewer",     "Reviewer identity (InfoSec + Infrastructure)",                                                                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.8.18:rev_user_list",    "Authorised-user list re-confirmed per utility",                                                                                            "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.18:rev_removal_sweep","Removal-where-unneeded sweep (utilities found in unauthorised locations)",                                                                  "must", False, "Attack-surface reduction"),
+        ChecklistItem("item:A.8.18:rev_findings_update","Findings propagated to register / scope",                                                                                                "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.18:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.19 Software installation on operational systems — op_process 4-leaf (batch 23) ─
+REQ_A819_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.19:software_installation_procedure",
     control_ref   = "A.8.19",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Software Installation on Operational Systems Procedure",
     trigger_type  = "universal",
-    description   = "A.8.19 requires procedures and measures to securely manage software installation on operational systems. Evidence is a procedure covering approved-software list, approval workflow, integrity verification, and post-install verification",
+    description   = "A.8.19 requires procedures + measures to securely manage software installation. Procedure documents approved-software list, approval workflow, integrity verification, post-install verification, role-restriction. Per-installation register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.19:approved_list", "Approved software list maintained", "must", False, "A.8.19 — securely manage"),
-        ChecklistItem("item:A.8.19:approval_workflow","Approval workflow for new software (security review, licence check, integration test)", "must", False, "A.8.19 — securely manage"),
-        ChecklistItem("item:A.8.19:integrity",     "Integrity / signing verification before installation", "must", False, "A.8.19 — securely"),
-        ChecklistItem("item:A.8.19:privileged_role","Installation by privileged role only", "must", False, "A.8.19 — securely manage"),
-        ChecklistItem("item:A.8.19:post_install",  "Post-install verification (functional test, vulnerability scan)", "must", False, "A.8.19 — securely manage"),
+        ChecklistItem("item:A.8.19:approved_list",    "Approved software list maintained (positive list — only approved software permitted)",                                                      "must", False, "27002:8.19 — securely manage"),
+        ChecklistItem("item:A.8.19:approval_workflow","Approval workflow for new software (security review + licence check + integration test)",                                                  "must", False, "27002:8.19 — securely manage"),
+        ChecklistItem("item:A.8.19:integrity",        "Integrity / signature verification before installation (no unsigned packages on production)",                                              "must", False, "27002:8.19 — securely"),
+        ChecklistItem("item:A.8.19:privileged_role",  "Installation by privileged role only (cross-link to A.8.2 — uses privileged-access procedure)",                                            "must", False, "27002:8.19 — securely manage"),
+        ChecklistItem("item:A.8.19:post_install",     "Post-install verification (functional test + vulnerability scan + baseline-drift check)",                                                  "must", False, "27002:8.19 — securely manage"),
+        ChecklistItem("item:A.8.19:allowlisting",     "Allowlisting on operational systems where supported (modern baseline)",                                                                    "must", False, "27002:8.19 — measures (Style v2 promotion)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.19:inventory_tooling","Software inventory tooling for ongoing visibility", "should", False, "Drift detection"),
-        ChecklistItem("item:A.8.19:allowlisting",  "Allowlisting on operational systems where supported", "should", False, "Strong baseline"),
+        ChecklistItem("item:A.8.19:inventory_tooling","Software-inventory tooling for ongoing visibility",                                                                                          "should", False, "Drift detection"),
     ],
 )
 
-REQ_A820_NETWORKS_SECURITY = EvidenceRequirement(
+REQ_A819_INSTALL_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.19:installation_register",
+    control_ref   = "A.8.19",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Software Installation Register",
+    trigger_type  = "universal",
+    description   = "Per-installation record — what was installed, when, where, by whom, verification artefact",
+    must_contain  = [
+        ChecklistItem("item:A.8.19:reg_install_id",   "Per-install unique identifier",                                                                                                              "must", False, "Auditability"),
+        ChecklistItem("item:A.8.19:reg_software",     "Per-install software name + version + source (from approved list)",                                                                          "must", False, "27002:8.19 — securely manage"),
+        ChecklistItem("item:A.8.19:reg_target",       "Per-install target system",                                                                                                                "must", False, "27002:8.19 — operational systems"),
+        ChecklistItem("item:A.8.19:reg_actor",        "Per-install authorised actor (privileged role assignment)",                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.8.19:reg_verification", "Per-install verification artefacts (signature check / functional test / vuln-scan result)",                                                  "must", False, "27002:8.19 — securely"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.19:reg_change_link",  "Per-install cross-link to A.8.32 change record where applicable",                                                                            "should", False, "Cross-control coherence"),
+    ],
+)
+
+REQ_A819_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.19:applicable_install_scope",
+    control_ref   = "A.8.19",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Installation Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — what counts as 'operational system' for A.8.19 scope. Production vs dev vs test handling (dev/test typically governed differently)",
+    must_contain  = [
+        ChecklistItem("item:A.8.19:scope_systems",    "Operational systems enumerated (production + customer-facing + business-critical)",                                                          "must", False, "27002:8.19 — operational systems"),
+        ChecklistItem("item:A.8.19:scope_env_separation","Cross-link to A.8.31 environment separation — non-prod governed under separate looser rules",                                            "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.19:scope_exclusions", "Exclusion rationale (containerised auto-deployed systems with allowlist enforced at image-build time)",                                      "must", False, "Modern reality"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.19:scope_change_drivers","Trigger list for re-scoping (new system class, new deployment pattern)",                                                                  "should", False, "Currency"),
+    ],
+)
+
+REQ_A819_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.19:installation_program_review",
+    control_ref     = "A.8.19",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Installation Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification — approved-list currency, allowlist enforcement effectiveness, unauthorised-install detection trending (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.19:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.19 — periodic"),
+        ChecklistItem("item:A.8.19:rev_reviewer",     "Reviewer identity (Infrastructure + InfoSec)",                                                                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.8.19:rev_approved_list_currency","Approved-list currency check (no abandoned tools; vulnerable versions retired)",                                                  "must", False, "27002:8.19 — securely manage"),
+        ChecklistItem("item:A.8.19:rev_allowlist_effectiveness","Allowlist-enforcement effectiveness review (unauthorised-install attempt rate)",                                                  "must", False, "Detection effectiveness"),
+        ChecklistItem("item:A.8.19:rev_findings_update","Findings propagated to procedure / approved list",                                                                                        "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.19:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+# ── A.8.20 Networks security — policy_program 4-leaf (batch 23) ──────────────
+REQ_A820_POLICY = EvidenceRequirement(
     id            = "req:A.8.20:networks_security_policy",
     control_ref   = "A.8.20",
     standard_id   = "ISO27001:2022",
     evidence_type = "policy",
     title         = "Networks Security Policy",
     trigger_type  = "universal",
-    description   = "A.8.20 requires networks and network devices to be secured, managed, and controlled to protect information in systems and applications. Evidence is a network security policy stating architecture principles, perimeters, monitoring, and change control",
+    description   = "A.8.20 requires networks + devices secured, managed, controlled. Policy states architecture principles, zone model, monitoring requirement, change-control linkage. Per-network register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.20:scope",          "Scope (corporate LAN, WAN, wireless, cloud VPCs, partner connections)", "must", False, "A.8.20 — networks"),
-        ChecklistItem("item:A.8.20:architecture",   "Security architecture principles (defense-in-depth, segmentation, fail-safe)", "must", False, "A.8.20 — secured, managed and controlled"),
-        ChecklistItem("item:A.8.20:zones",          "Perimeter and zone definitions (links to A.8.22 segregation)", "must", False, "A.8.20 — controlled"),
-        ChecklistItem("item:A.8.20:monitoring",     "Monitoring of network activity (links to A.8.16)", "must", False, "A.8.20 — controlled"),
-        ChecklistItem("item:A.8.20:change_control", "Change control for network devices (links to A.8.32)", "must", False, "A.8.20 — managed"),
-        ChecklistItem("item:A.8.20:periodic_review","Periodic architecture review", "must", False, "A.8.20 — managed"),
+        ChecklistItem("item:A.8.20:architecture",     "Security architecture principles (defence-in-depth / segmentation / fail-safe / zero-trust direction)",                                      "must", False, "27002:8.20 — secured, managed and controlled"),
+        ChecklistItem("item:A.8.20:zones",            "Perimeter + zone definitions (cross-link to A.8.22 segregation)",                                                                            "must", False, "27002:8.20 — controlled"),
+        ChecklistItem("item:A.8.20:monitoring_req",   "Monitoring requirement (cross-link to A.8.16)",                                                                                              "must", False, "27002:8.20 — controlled"),
+        ChecklistItem("item:A.8.20:change_control",   "Change control for network devices (cross-link to A.8.32)",                                                                                "must", False, "27002:8.20 — managed"),
+        ChecklistItem("item:A.8.20:zero_trust",       "Zero-trust direction encoded — no implicit trust at network layer; identity-verified per request (modern baseline)",                        "must", False, "Modern best practice (Style v2 promotion)"),
+        ChecklistItem("item:A.8.20:authority",        "Named policy authority (Network Engineering lead with InfoSec lead)",                                                                        "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.20:zero_trust",     "Direction toward zero-trust principles", "should", False, "Modern best practice"),
-        ChecklistItem("item:A.8.20:network_as_code","Network configuration as code", "should", False, "Repeatability"),
+        ChecklistItem("item:A.8.20:network_as_code",  "Network-as-code direction (repeatable deployments)",                                                                                          "should", False, "Modern practice"),
     ],
 )
 
-REQ_A821_NETWORK_SERVICES = EvidenceRequirement(
+REQ_A820_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.20:network_register",
+    control_ref   = "A.8.20",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Network Inventory Register",
+    trigger_type  = "universal",
+    description   = "Per-network inventory — segment id, classification, perimeter type, owner. Drives 'every segment has a documented zone + perimeter' audit",
+    must_contain  = [
+        ChecklistItem("item:A.8.20:reg_segment_id",   "Per-row segment / VPC / VLAN identifier",                                                                                                    "must", False, "Identification"),
+        ChecklistItem("item:A.8.20:reg_classification","Per-row classification tier (from A.5.12)",                                                                                                "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.20:reg_zone",         "Per-row zone assignment (matches A.8.22 zone model)",                                                                                        "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.8.20:reg_perimeter",    "Per-row perimeter type (boundary firewall / service mesh / IAP / vendor-managed)",                                                          "must", False, "27002:8.20 — perimeter"),
+        ChecklistItem("item:A.8.20:reg_owner",        "Per-row named owner (network engineer accountable)",                                                                                          "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.20:reg_last_audited", "Per-row last-audited timestamp (drives drift detection)",                                                                                  "should", False, "Drift detection"),
+    ],
+)
+
+REQ_A820_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.20:applicable_network_scope",
+    control_ref   = "A.8.20",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Network Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — which networks are in scope (corporate LAN / WAN / wireless / cloud VPC / partner connection / OT). Exclusions (e.g. cloud-managed networks delegated to A.5.19/A.5.21)",
+    must_contain  = [
+        ChecklistItem("item:A.8.20:scope_classes",    "Network classes enumerated (corporate LAN / WAN / wireless / cloud VPC / partner connect / OT)",                                            "must", False, "27002:8.20 — networks"),
+        ChecklistItem("item:A.8.20:scope_vendor_managed","Vendor-managed networks delegated to A.5.19/A.5.21 supplier obligations",                                                                "must", False, "Boundary clarity"),
+        ChecklistItem("item:A.8.20:scope_exclusions", "Exclusion rationale + compensating controls per excluded class",                                                                            "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.20:scope_change_drivers","Trigger list for re-scoping (new cloud region, new partner, new OT environment)",                                                        "should", False, "Currency"),
+    ],
+)
+
+REQ_A820_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.20:network_program_review",
+    control_ref     = "A.8.20",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Network Program Review",
+    trigger_type    = "universal",
+    description     = "Annual architecture review — zone model still appropriate, register reflects reality, monitoring covers all in-scope segments (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.20:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.20 — periodic"),
+        ChecklistItem("item:A.8.20:rev_reviewer",     "Reviewer identity (Network Engineering + InfoSec)",                                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.20:rev_architecture", "Architecture review — zone model still matches threat landscape + business reality",                                                        "must", False, "27002:8.20 — managed"),
+        ChecklistItem("item:A.8.20:rev_register_completeness","Register-completeness check (every new segment registered)",                                                                          "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.20:rev_findings_update","Findings propagated to policy / register / scope",                                                                                          "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.20:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.21 Security of network services — op_process 4-leaf (batch 23) ───────
+REQ_A821_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.21:network_services_security_procedure",
     control_ref   = "A.8.21",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Security of Network Services Procedure",
     trigger_type  = "universal",
-    description   = "A.8.21 requires security mechanisms, service levels, and service requirements of network services to be identified, implemented, and monitored. Evidence is a procedure covering the service catalogue, controls, and monitoring",
+    description   = "A.8.21 requires security mechanisms, service levels, requirements identified, implemented, monitored. Procedure documents the assessment approach, security-mechanism standards, SLA monitoring. Per-service register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.21:catalogue",   "Catalogue of network services in use (managed services, ISPs, CDNs, DNS providers)", "must", False, "A.8.21 — network services"),
-        ChecklistItem("item:A.8.21:security_mechanisms","Security mechanisms required per service (encryption, authentication, integrity)", "must", False, "A.8.21 — security mechanisms"),
-        ChecklistItem("item:A.8.21:service_levels","Service-level requirements stated (availability, latency, support response)", "must", False, "A.8.21 — service levels"),
-        ChecklistItem("item:A.8.21:monitoring",  "Monitoring of service delivery against requirements", "must", False, "A.8.21 — monitored"),
+        ChecklistItem("item:A.8.21:security_mechanisms","Security-mechanism standards per service class (encryption / authentication / integrity / availability) with minimum baselines",          "must", False, "27002:8.21 — security mechanisms"),
+        ChecklistItem("item:A.8.21:sla_baseline",     "SLA baseline expectations per service class (availability / latency / support response)",                                                  "must", False, "27002:8.21 — service levels"),
+        ChecklistItem("item:A.8.21:monitoring_approach","Service-delivery monitoring approach (synthetic checks / passive instrumentation / vendor-reported)",                                    "must", False, "27002:8.21 — monitored"),
+        ChecklistItem("item:A.8.21:vendor_governance","Vendor-managed services governance (cross-link to A.5.19 + A.5.20 + A.5.22 supplier review)",                                                "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.21:incident_path",    "Incident path when service degraded / breached (cross-link to A.5.25/A.5.26)",                                                              "must", False, "Operational discipline"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.21:vendor_governance","Vendor-managed network services governance (links to A.5.19, A.5.20)", "should", False, "Supplier-side oversight"),
+        ChecklistItem("item:A.8.21:owner",            "Named procedure owner (Network Engineering lead with Supplier Management partner)",                                                          "should", False, "Accountability"),
     ],
 )
 
-REQ_A822_NETWORK_SEGREGATION = EvidenceRequirement(
-    id            = "req:A.8.22:network_segregation_policy",
+REQ_A821_SERVICE_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.21:service_register",
+    control_ref   = "A.8.21",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Network Services Register",
+    trigger_type  = "universal",
+    description   = "Per-service catalogue — service id, provider, security mechanisms in use, SLA performance, last-review date",
+    must_contain  = [
+        ChecklistItem("item:A.8.21:reg_service_id",   "Per-row service identifier (ISP / CDN / DNS / SD-WAN / managed-firewall)",                                                                  "must", False, "Identification"),
+        ChecklistItem("item:A.8.21:reg_provider",     "Per-row provider + contract reference (cross-link to A.5.19/A.5.20 supplier register)",                                                    "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.21:reg_mechanisms",   "Per-row security mechanisms in use (matches procedure's baseline for the class)",                                                            "must", False, "27002:8.21 — security mechanisms"),
+        ChecklistItem("item:A.8.21:reg_sla_performance","Per-row SLA performance vs baseline",                                                                                                      "must", False, "27002:8.21 — monitored"),
+        ChecklistItem("item:A.8.21:reg_last_reviewed","Per-row last-review timestamp",                                                                                                              "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.21:reg_owner",        "Per-row owner (relationship manager + technical owner)",                                                                                    "should", False, "Accountability"),
+    ],
+)
+
+REQ_A821_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.21:applicable_service_scope",
+    control_ref   = "A.8.21",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Network Services Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — what counts as 'network service' for A.8.21. ISP / CDN / DNS / SD-WAN / cloud connectivity / managed-firewall / VPN-as-service all in scope",
+    must_contain  = [
+        ChecklistItem("item:A.8.21:scope_classes",    "Service classes enumerated with assessment depth per class",                                                                                "must", False, "27002:8.21 — network services"),
+        ChecklistItem("item:A.8.21:scope_criticality","Per-class criticality tier (drives monitoring intensity + SLA tolerance)",                                                                  "must", False, "Proportionality"),
+        ChecklistItem("item:A.8.21:scope_exclusions", "Exclusion rationale (in-house operated services governed under A.8.20)",                                                                    "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.21:scope_change_drivers","Trigger list for re-scoping (new service class, new provider, criticality change)",                                                      "should", False, "Currency"),
+    ],
+)
+
+REQ_A821_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.21:service_program_review",
+    control_ref     = "A.8.21",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Network Services Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification — SLA attainment trending, security-mechanism currency, provider obligations re-confirmed (freshness=180; service delivery dynamic + supplier landscape evolves)",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.8.21:rev_date",         "Review date within the planned interval (≤180 days)",                                                                                        "must", False, "27002:8.21 — periodic"),
+        ChecklistItem("item:A.8.21:rev_reviewer",     "Reviewer identity (Network Engineering + Supplier Management)",                                                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.8.21:rev_sla_attainment","SLA-attainment trending per service",                                                                                                      "must", False, "27002:8.21 — monitored"),
+        ChecklistItem("item:A.8.21:rev_mechanisms_currency","Security-mechanism currency check (TLS versions / crypto algorithms / authentication strength still acceptable)",                      "must", False, "27002:8.21 — security mechanisms"),
+        ChecklistItem("item:A.8.21:rev_a522_link",    "Cross-link to A.5.22 supplier review outcomes for in-scope vendor services",                                                                "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.21:rev_findings_update","Findings propagated to procedure / register / scope",                                                                                      "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.21:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.22 Segregation of networks — op_process 4-leaf (batch 23) ────────────
+REQ_A822_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.8.22:network_segregation_procedure",
     control_ref   = "A.8.22",
     standard_id   = "ISO27001:2022",
-    evidence_type = "policy",
-    title         = "Network Segregation Policy",
+    evidence_type = "procedure",
+    title         = "Network Segregation Procedure",
     trigger_type  = "universal",
-    description   = "A.8.22 requires groups of information services, users, and information systems to be segregated in the organization's networks. Evidence is a segregation policy stating zones, inter-zone rules, and enforcement",
+    description   = "A.8.22 requires groups of services / users / systems segregated. Procedure documents zone model, inter-zone flow rules, enforcement, exception path. Per-zone register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.22:rationale",   "Rationale for segregation (sensitivity, function, trust level)", "must", False, "A.8.22 — segregated"),
-        ChecklistItem("item:A.8.22:zone_model",  "Zone model (e.g. DMZ, internal, restricted, OT, dev/test/prod)", "must", False, "A.8.22 — groups segregated"),
-        ChecklistItem("item:A.8.22:flow_rules",  "Inter-zone flow rules (default deny, explicit allowlist)", "must", False, "A.8.22 — segregated"),
-        ChecklistItem("item:A.8.22:enforcement", "Enforcement points (firewall, ACL, security group, identity-aware proxy)", "must", False, "A.8.22 — segregated"),
-        ChecklistItem("item:A.8.22:exception",   "Exception process for cross-zone access needs", "must", False, "Operational reality"),
+        ChecklistItem("item:A.8.22:rationale",        "Rationale for segregation (sensitivity / function / trust level / regulatory)",                                                            "must", False, "27002:8.22 — segregated"),
+        ChecklistItem("item:A.8.22:zone_model",       "Zone model documented (DMZ / internal / restricted / OT / dev/test/prod / per-tenant where multi-tenant)",                                  "must", False, "27002:8.22 — groups segregated"),
+        ChecklistItem("item:A.8.22:flow_rules",       "Inter-zone flow rules — default-deny with explicit allowlist; bidirectionally documented",                                                  "must", False, "27002:8.22 — segregated"),
+        ChecklistItem("item:A.8.22:enforcement",      "Enforcement points (firewall / ACL / security group / identity-aware proxy / service-mesh policy)",                                          "must", False, "27002:8.22 — segregated"),
+        ChecklistItem("item:A.8.22:exception_path",   "Exception process for cross-zone access (time-bound + InfoSec-approved + logged)",                                                          "must", False, "Operational reality"),
+        ChecklistItem("item:A.8.22:micro_segmentation","Micro-segmentation direction for east-west traffic (modern baseline for high-criticality)",                                                "must", False, "Modern direction (Style v2 promotion)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.22:micro_segmentation","Micro-segmentation considerations (east-west traffic control)", "should", False, "Modern direction"),
+        ChecklistItem("item:A.8.22:owner",            "Named procedure owner (Network Engineering lead with InfoSec partner)",                                                                      "should", False, "Accountability"),
     ],
 )
 
-REQ_A823_WEB_FILTERING = EvidenceRequirement(
-    id            = "req:A.8.23:web_filtering_procedure",
+REQ_A822_ZONE_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.22:zone_register",
+    control_ref   = "A.8.22",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Network Zone Register",
+    trigger_type  = "universal",
+    description   = "Per-zone catalogue — zone id, classification, contained systems, enforcement boundary, owner",
+    must_contain  = [
+        ChecklistItem("item:A.8.22:reg_zone_id",      "Per-zone unique identifier",                                                                                                                "must", False, "Identification"),
+        ChecklistItem("item:A.8.22:reg_classification","Per-zone classification tier",                                                                                                              "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.22:reg_contained_systems","Per-zone contained-systems list (drawn from A.5.9)",                                                                                  "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.8.22:reg_enforcement",  "Per-zone enforcement-boundary description (specific firewall / ACL / policy)",                                                              "must", False, "27002:8.22 — segregated"),
+        ChecklistItem("item:A.8.22:reg_exceptions",   "Per-zone exception inventory (cross-zone allowances with expiry)",                                                                          "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.22:reg_owner",        "Per-zone named owner",                                                                                                                      "should", False, "Accountability"),
+    ],
+)
+
+REQ_A822_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.22:applicable_segregation_scope",
+    control_ref   = "A.8.22",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Segregation Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — which network domains are in scope. Cloud VPCs typically yes. Vendor-managed pass-through ISPs typically delegated. OT typically tighter rules. Multi-tenant systems require per-tenant zones",
+    must_contain  = [
+        ChecklistItem("item:A.8.22:scope_domains",    "Network domains in scope (corporate / cloud / OT / multi-tenant SaaS) with segregation expectation per domain",                            "must", False, "27002:8.22 — appropriate"),
+        ChecklistItem("item:A.8.22:scope_multi_tenant","Per-tenant segregation requirements where multi-tenant (data + control + log isolation)",                                                "must", False, "27002:8.22 — appropriate"),
+        ChecklistItem("item:A.8.22:scope_exclusions", "Exclusion rationale + compensating controls per excluded domain",                                                                          "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.22:scope_change_drivers","Trigger list for re-scoping (new tenant, new cloud region, new regulator)",                                                              "should", False, "Currency"),
+    ],
+)
+
+REQ_A822_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.22:segregation_program_review",
+    control_ref     = "A.8.22",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Network Segregation Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification — zone-register completeness, exception inventory current, flow-rules still appropriate, enforcement coverage verified (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.22:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.22 — periodic"),
+        ChecklistItem("item:A.8.22:rev_reviewer",     "Reviewer identity (Network Engineering + InfoSec + Application Engineering leads)",                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.22:rev_register_completeness","Register-completeness check (new zones registered)",                                                                                "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.22:rev_exception_inventory","Exception inventory re-confirmed / retired",                                                                                            "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.22:rev_enforcement_coverage","Sample-based enforcement-coverage verification (configured rules match register)",                                                  "must", False, "27002:8.22 — segregated"),
+        ChecklistItem("item:A.8.22:rev_findings_update","Findings propagated to procedure / register",                                                                                              "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.22:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.23 Web filtering — policy_program 4-leaf (batch 23) ──────────────────
+REQ_A823_POLICY = EvidenceRequirement(
+    id            = "req:A.8.23:web_filtering_policy",
     control_ref   = "A.8.23",
     standard_id   = "ISO27001:2022",
-    evidence_type = "procedure",
-    title         = "Web Filtering Procedure",
+    evidence_type = "policy",
+    title         = "Web Filtering Policy",
     trigger_type  = "universal",
-    description   = "A.8.23 requires access to external websites to be managed to reduce exposure to malicious content. Evidence is a procedure covering filtering scope, blocked categories, override workflow, and monitoring",
+    description   = "A.8.23 requires access to external websites managed to reduce exposure to malicious content. Policy states filtering scope, blocked categories, override workflow, monitoring expectation. Per-event register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.23:scope",        "Filtering scope (corporate-managed devices, on-network traffic, BYOD where in scope)", "must", False, "A.8.23 — access to external websites"),
-        ChecklistItem("item:A.8.23:categories",   "Category-based blocking (malware, phishing, illegal content, anonymisers)", "must", False, "A.8.23 — reduce exposure to malicious content"),
-        ChecklistItem("item:A.8.23:override",     "Block-page UX with override / business-justification workflow", "must", False, "A.8.23 — managed"),
-        ChecklistItem("item:A.8.23:monitoring",   "Monitoring of attempted access to blocked sites (link to A.8.16)", "must", False, "A.8.23 — managed"),
+        ChecklistItem("item:A.8.23:categories",       "Category-based blocking minimum set (malware / phishing / illegal content / anonymisers / known-malicious)",                                "must", False, "27002:8.23 — reduce exposure to malicious content"),
+        ChecklistItem("item:A.8.23:override_workflow","Override / business-justification workflow (block-page UX with audit trail)",                                                              "must", False, "27002:8.23 — managed"),
+        ChecklistItem("item:A.8.23:monitoring_req",   "Monitoring requirement for attempted access to blocked sites (cross-link to A.8.16)",                                                      "must", False, "27002:8.23 — managed"),
+        ChecklistItem("item:A.8.23:tls_inspection",   "TLS-inspection stance documented (where applied / where bypassed for privacy / legal-categorisation excluded)",                            "must", False, "Operational trade-off"),
+        ChecklistItem("item:A.8.23:authority",        "Named policy authority (InfoSec lead with Legal/HR partner for category boundaries)",                                                      "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.23:tls_inspection","TLS inspection considerations (privacy balance, exclusions)", "should", False, "Operational trade-off"),
-        ChecklistItem("item:A.8.23:byod_scope",   "BYOD coverage strategy (proxy enforcement, off-network behaviour)", "should", False, "Realistic scope"),
+        ChecklistItem("item:A.8.23:byod_strategy",    "BYOD coverage strategy (proxy enforcement / off-network behaviour)",                                                                        "should", False, "Realistic scope"),
     ],
 )
 
-REQ_A826_APP_SECURITY_REQUIREMENTS = EvidenceRequirement(
+REQ_A823_EVENT_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.23:filtering_event_register",
+    control_ref   = "A.8.23",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Web Filtering Event Register",
+    trigger_type  = "universal",
+    description   = "Aggregate event view — blocked-access trending, override events, malware-category hits. Drives 'does the filter actually work' visibility",
+    must_contain  = [
+        ChecklistItem("item:A.8.23:reg_volume",       "Aggregate blocked-event volume per category (rolling window)",                                                                              "must", False, "27002:8.23 — managed"),
+        ChecklistItem("item:A.8.23:reg_top_blockers", "Top-blocked-sites view (signal for category-tuning opportunity)",                                                                          "must", False, "Operational visibility"),
+        ChecklistItem("item:A.8.23:reg_overrides",    "Override events captured (user / site / justification / approval)",                                                                        "must", False, "Auditability"),
+        ChecklistItem("item:A.8.23:reg_malware_hits", "Malware-category hits (signal for incident handoff)",                                                                                      "must", False, "27002:8.23 — malicious content"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.23:reg_dashboard",    "Dashboard linked (coverage % / block rate / override volume)",                                                                              "should", False, "Operational visibility"),
+    ],
+)
+
+REQ_A823_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.23:applicable_filtering_scope",
+    control_ref   = "A.8.23",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Web Filtering Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — which devices + traffic paths are in scope. Corporate-managed devices typically yes. On-network traffic yes. BYOD case-by-case. Off-network corporate-managed via remote-proxy",
+    must_contain  = [
+        ChecklistItem("item:A.8.23:scope_devices",    "Device classes in scope (corporate-managed / contractor / BYOD with approval)",                                                            "must", False, "27002:8.23 — access to external websites"),
+        ChecklistItem("item:A.8.23:scope_paths",      "Traffic paths covered (on-network / VPN / remote-proxy / split-tunnel exclusions)",                                                        "must", False, "Realistic coverage"),
+        ChecklistItem("item:A.8.23:scope_exclusions", "Exclusion rationale (e.g. air-gapped systems with no internet access)",                                                                    "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.23:scope_change_drivers","Trigger list for re-scoping (new device class, new remote-access pattern)",                                                              "should", False, "Currency"),
+    ],
+)
+
+REQ_A823_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.23:filtering_program_review",
+    control_ref     = "A.8.23",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Web Filtering Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification — category-list currency, override-volume trending, malware-hit follow-through, coverage gaps (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.23:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.23 — periodic"),
+        ChecklistItem("item:A.8.23:rev_reviewer",     "Reviewer identity (Security Operations + Legal/HR for category boundaries)",                                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.8.23:rev_category_currency","Category-list currency check (new malicious-content categories added; obsolete categories retired)",                                  "must", False, "27002:8.23 — managed"),
+        ChecklistItem("item:A.8.23:rev_override_trending","Override-volume trending (spikes may indicate category over-blocking or coverage gap)",                                                "must", False, "Operational signal"),
+        ChecklistItem("item:A.8.23:rev_findings_update","Findings propagated to policy / scope",                                                                                                  "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.23:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.24 Use of cryptography — policy_program 4-leaf (batch 23, tombstone consolidation) ─
+# Item-ids preserved (referenced by SPEC_ART_32): personal_data, pii_keys, at_rest, in_transit
+REQ_A824_POLICY = EvidenceRequirement(
+    id            = "req:A.8.24:cryptography_policy",
+    control_ref   = "A.8.24",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "policy",
+    title         = "Use of Cryptography Policy",
+    trigger_type  = "universal",
+    description   = "A.8.24 requires a policy on effective use of cryptography. Policy states approved algorithms, key-management approach, at-rest + in-transit requirements, roles. Per-key register, applicable scope, program review are sibling leaves",
+    must_contain  = [
+        ChecklistItem("item:A.8.24:algorithms",       "Approved cryptographic algorithms with minimum strengths (per regulator/NIST/CNSA-compliant tables)",                                        "must", False, "27002:8.24a"),
+        ChecklistItem("item:A.8.24:key_mgmt",         "Key-management principles defined (generation / storage / rotation / revocation / archival / destruction)",                                  "must", False, "27002:8.24b"),
+        ChecklistItem("item:A.8.24:at_rest",          "Encryption requirements for data at rest per classification tier",                                                                          "must", False, "27002:8.24c / SPEC_ART_32 reference"),
+        ChecklistItem("item:A.8.24:in_transit",       "Encryption requirements for data in transit per classification tier",                                                                      "must", False, "27002:8.24c / SPEC_ART_32 reference"),
+        ChecklistItem("item:A.8.24:roles",            "Roles + responsibilities for cryptography (key custodian / approver / operator)",                                                            "must", False, "27002:8.24e"),
+        ChecklistItem("item:A.8.24:personal_data",    "Personal data explicitly scoped for encryption (GDPR Art.32.1a integration)",                                                                "must", True,  "27002:8.24 / GDPR Art.32 / SPEC_ART_32 reference"),
+        ChecklistItem("item:A.8.24:pii_keys",         "Key management for PII encryption keys (separation of duties / DPIA-required where applicable)",                                            "must", True,  "GDPR Art.32 / SPEC_ART_32 reference"),
+        ChecklistItem("item:A.8.24:key_strength",     "Key length / strength requirements stated (Style v2 promotion — was SHOULD)",                                                                "must", False, "27002:8.24f"),
+        ChecklistItem("item:A.8.24:authority",        "Named policy authority (InfoSec lead with Cryptography subject-matter expert)",                                                              "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.24:exceptions",       "Exceptions process for legacy algorithms with compensating-control + retirement plan",                                                      "should", False, "Governance"),
+        ChecklistItem("item:A.8.24:pq_direction",     "Post-quantum cryptography direction (NIST PQC track — modern forward-looking baseline)",                                                  "should", False, "Modern threat landscape"),
+    ],
+)
+
+REQ_A824_KEY_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.24:key_register",
+    control_ref   = "A.8.24",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Cryptographic Key Register",
+    trigger_type  = "universal",
+    description   = "Per-key catalogue — key id, purpose, algorithm + strength, custodian, lifecycle dates. Drives 'every active key complies with current approved-algorithms table' audit",
+    must_contain  = [
+        ChecklistItem("item:A.8.24:reg_key_id",       "Per-row unique key identifier",                                                                                                            "must", False, "Identification"),
+        ChecklistItem("item:A.8.24:reg_purpose",      "Per-row purpose (encryption-at-rest / TLS / signing / KEK / DEK / token-signing)",                                                          "must", False, "27002:8.24 — effective use"),
+        ChecklistItem("item:A.8.24:reg_algorithm",    "Per-row algorithm + strength (must match policy's approved-algorithms table)",                                                              "must", False, "27002:8.24a"),
+        ChecklistItem("item:A.8.24:reg_custodian",    "Per-row custodian (HSM / KMS / split-knowledge custodians)",                                                                                "must", False, "27002:8.24b"),
+        ChecklistItem("item:A.8.24:reg_lifecycle_dates","Per-row lifecycle dates (generated / activated / next-rotation / retirement)",                                                              "must", False, "27002:8.24b"),
+        ChecklistItem("item:A.8.24:reg_pii_flag",     "Per-row PII-key flag (drives stricter custody / GDPR Art.32 traceability)",                                                                "must", True,  "GDPR Art.32"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.24:reg_rotation_status","Per-row rotation-status flag (overdue / within-window / not-due)",                                                                          "should", False, "Drift detection"),
+    ],
+)
+
+REQ_A824_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.24:applicable_crypto_scope",
+    control_ref   = "A.8.24",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Cryptography Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — which data classes require encryption (drawn from A.5.12 + A.5.34 PII inventory). Vendor-managed encryption (cloud-provider-managed keys) delegated to A.5.19/A.5.21",
+    must_contain  = [
+        ChecklistItem("item:A.8.24:scope_data_classes","Data classes enumerated with encryption obligation per class (drawn from A.5.12 classification + A.5.34 PII)",                              "must", False, "27002:8.24 — sensitive information"),
+        ChecklistItem("item:A.8.24:scope_vendor_managed","Vendor-managed key handling boundaries (BYOK / HYOK / vendor-only options with risk acceptance)",                                          "must", False, "Boundary clarity"),
+        ChecklistItem("item:A.8.24:scope_exclusions", "Exclusion rationale + compensating controls (e.g. public-classification data)",                                                              "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.24:scope_change_drivers","Trigger list for re-scoping (new data class, algorithm deprecation, PQC transition trigger)",                                              "should", False, "Currency"),
+    ],
+)
+
+REQ_A824_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.24:crypto_program_review",
+    control_ref     = "A.8.24",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Cryptography Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification — approved-algorithms table still current vs NIST/regulator advisories, key-rotation compliance, PII-key audit, exception inventory (freshness=180; cryptographic landscape evolves; PQC transition window)",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.8.24:rev_date",         "Review date within the planned interval (≤180 days)",                                                                                        "must", False, "27002:8.24 — periodic"),
+        ChecklistItem("item:A.8.24:rev_reviewer",     "Reviewer identity (Cryptography SME + InfoSec + Data Protection)",                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.24:rev_algorithm_currency","Algorithm-table currency check vs NIST / national-regulator advisories (deprecated algorithms retired)",                                "must", False, "27002:8.24f"),
+        ChecklistItem("item:A.8.24:rev_rotation_compliance","Key-rotation compliance per key class (no overdue active keys without exception)",                                                    "must", False, "27002:8.24b"),
+        ChecklistItem("item:A.8.24:rev_pii_audit",    "PII-key audit (custodianship + DPIA alignment + cross-border transfer Art.5.1.f impact)",                                                  "must", True,  "GDPR Art.32 / GDPR Art.5.1.f"),
+        ChecklistItem("item:A.8.24:rev_exception_inventory","Exception inventory re-confirmed / retired",                                                                                            "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.24:rev_findings_update","Findings propagated to policy / scope / register",                                                                                          "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.24:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.25 Secure development lifecycle — policy_program 4-leaf (batch 23, tombstone consolidation) ─
+# trigger_type=profile_fact preserved (A.8.25 only applies when org develops software)
+REQ_A825_POLICY = EvidenceRequirement(
+    id            = "req:A.8.25:secure_development_policy",
+    control_ref   = "A.8.25",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "policy",
+    title         = "Secure Development Lifecycle Policy",
+    trigger_type  = "profile_fact",
+    description   = "A.8.25 requires rules for secure development. Policy states SDLC principles, environment requirements, version control, security-requirement integration, testing integration, personal-data handling. Per-project register, applicable scope, program review are sibling leaves",
+    must_contain  = [
+        ChecklistItem("item:A.8.25:principles",       "Security principles for software design (cross-link to A.8.27 architecture principles)",                                                    "must", False, "27002:8.25a"),
+        ChecklistItem("item:A.8.25:environments",     "Security of development environments (cross-link to A.8.31 environment separation)",                                                        "must", False, "27002:8.25b"),
+        ChecklistItem("item:A.8.25:versioning",       "Version-control requirements (cross-link to A.8.4 source code access)",                                                                      "must", False, "27002:8.25c"),
+        ChecklistItem("item:A.8.25:security_req",     "Security requirements integration (cross-link to A.8.26 — security requirements at design phase)",                                          "must", False, "A.8.26 linkage"),
+        ChecklistItem("item:A.8.25:testing",          "Security testing integration (cross-link to A.8.29 — testing in lifecycle)",                                                                "must", False, "A.8.29 linkage"),
+        ChecklistItem("item:A.8.25:personal_data",    "Handling of personal data in development / test environments (cross-link to A.8.11 masking — no real PII in non-production)",                "must", True,  "27002:8.25 / GDPR Art.32"),
+        ChecklistItem("item:A.8.25:owner",            "Named policy authority (Engineering lead with InfoSec partner)",                                                                              "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.25:training",         "Secure-coding training requirements (cross-link to A.8.28 + A.6.3)",                                                                        "should", False, "A.8.28 linkage"),
+        ChecklistItem("item:A.8.25:code_review",      "Code-review requirements (cross-link to A.8.4 branch protection)",                                                                          "should", False, "Quality assurance"),
+    ],
+)
+
+REQ_A825_PROJECT_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.25:project_register",
+    control_ref   = "A.8.25",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Development Project Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-project SDLC compliance — project id, lifecycle stage, security-checkpoint status, owner",
+    must_contain  = [
+        ChecklistItem("item:A.8.25:reg_project_id",   "Per-project unique identifier (cross-link to A.5.8 project register)",                                                                      "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.25:reg_lifecycle_stage","Per-project current lifecycle stage (initiation / design / build / test / release / operate)",                                              "must", False, "27002:8.25 — secure development"),
+        ChecklistItem("item:A.8.25:reg_checkpoint_status","Per-project security-checkpoint status (which gates passed)",                                                                            "must", False, "27002:8.25 — applied"),
+        ChecklistItem("item:A.8.25:reg_owner",        "Per-project named owner (technical lead with security partner)",                                                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.8.25:reg_data_classification","Per-project data classification footprint (drives PII-handling rules)",                                                                "must", True,  "GDPR alignment"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.25:reg_exception_log","Per-project exception log (waived gates with rationale + compensating controls)",                                                          "should", False, "Defensibility"),
+    ],
+)
+
+REQ_A825_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.25:applicable_sdlc_scope",
+    control_ref   = "A.8.25",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable SDLC Scope",
+    trigger_type  = "profile_fact",
+    description   = "Upstream — what counts as in-scope development. In-house product development yes. Major internal tooling typically yes. Quick scripts / one-off automation typically not. Outsourced via A.8.30",
+    must_contain  = [
+        ChecklistItem("item:A.8.25:scope_classes",    "Development classes in scope (in-house product / major internal tooling / API-as-product / customer-facing add-ons)",                      "must", False, "27002:8.25 — appropriate"),
+        ChecklistItem("item:A.8.25:scope_exclusions", "Exclusion rationale (quick scripts / throwaway automation / outsourced governed via A.8.30)",                                              "must", False, "Boundary clarity"),
+        ChecklistItem("item:A.8.25:scope_proportionality","Proportionality rules per project class (lightweight gates for low-risk; full SDLC for customer-facing PII-touching)",                  "must", False, "27002:8.25 — proportionate"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.25:scope_change_drivers","Trigger list for re-scoping (new product line, new development paradigm — e.g. AI/ML)",                                                  "should", False, "Currency"),
+    ],
+)
+
+REQ_A825_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.25:sdlc_program_review",
+    control_ref     = "A.8.25",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic SDLC Program Review",
+    trigger_type    = "profile_fact",
+    description     = "Periodic verification — gate-attainment per project class, exception-inventory current, lifecycle effectiveness (freshness=180; dev practices evolve)",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.8.25:rev_date",         "Review date within the planned interval (≤180 days)",                                                                                        "must", False, "27002:8.25 — periodic"),
+        ChecklistItem("item:A.8.25:rev_reviewer",     "Reviewer identity (Engineering leads + InfoSec)",                                                                                            "must", False, "Accountability"),
+        ChecklistItem("item:A.8.25:rev_gate_attainment","Gate-attainment trending per project class",                                                                                                "must", False, "27002:8.25 — applied"),
+        ChecklistItem("item:A.8.25:rev_exception_inventory","Exception inventory re-confirmed / retired",                                                                                            "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.25:rev_lifecycle_effectiveness","Lifecycle-effectiveness review (incidents that traced to SDLC gaps)",                                                                "must", False, "Closes the loop"),
+        ChecklistItem("item:A.8.25:rev_findings_update","Findings propagated to policy / scope",                                                                                                  "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.25:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.26 Application security requirements — op_process 4-leaf (batch 23) ──
+REQ_A826_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.26:application_security_requirements_procedure",
     control_ref   = "A.8.26",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Application Security Requirements Procedure",
-    trigger_type  = "universal",
-    description   = "A.8.26 requires information security requirements to be identified, specified, and approved when developing or acquiring applications. Evidence is a procedure embedding security requirements in the SDLC and acquisition process",
+    trigger_type  = "profile_fact",
+    description   = "A.8.26 requires security requirements identified, specified, approved during development/acquisition. Procedure documents intake step, requirement categories, approval, traceability. Per-application register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.26:requirements_step","Security requirements gathering step at project initiation (links to A.5.8)", "must", False, "A.8.26 — identified, specified"),
-        ChecklistItem("item:A.8.26:requirement_types","Categories of requirements (auth, data protection, logging, error handling, integrations)", "must", False, "A.8.26 — information security requirements"),
-        ChecklistItem("item:A.8.26:approval",      "Approval authority for requirements before development / procurement proceeds", "must", False, "A.8.26 — approved"),
-        ChecklistItem("item:A.8.26:traceability",  "Traceability from requirements into design, code, and test cases", "must", False, "A.8.26 — specified"),
-        ChecklistItem("item:A.8.26:exception",     "Exception process for requirements that cannot be met", "must", False, "Pragmatic adoption"),
+        ChecklistItem("item:A.8.26:requirements_step","Security-requirements gathering step at project initiation (cross-link to A.5.8 project + A.8.25 SDLC)",                                    "must", False, "27002:8.26 — identified, specified"),
+        ChecklistItem("item:A.8.26:requirement_types","Requirement categories (authn / authz / data-protection / logging / error-handling / integrations / privacy)",                              "must", False, "27002:8.26 — information security requirements"),
+        ChecklistItem("item:A.8.26:approval",         "Approval authority for requirements before development / procurement proceeds (InfoSec + business sponsor)",                                "must", False, "27002:8.26 — approved"),
+        ChecklistItem("item:A.8.26:traceability",     "Traceability from requirements into design / code / test cases (auditor-defensible chain)",                                              "must", False, "27002:8.26 — specified"),
+        ChecklistItem("item:A.8.26:threat_modeling",  "Threat modelling at design phase (modern baseline — STRIDE / LINDDUN / kill-chain analysis as appropriate)",                              "must", False, "Modern baseline (Style v2 promotion)"),
+        ChecklistItem("item:A.8.26:exception",        "Exception process for requirements that cannot be met (compensating-control + expiry)",                                                  "must", False, "Pragmatic adoption"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.26:threat_modeling","Threat modeling reference at design phase", "should", False, "Proactive control identification"),
-        ChecklistItem("item:A.8.26:security_stories","Security stories integrated into agile backlog", "should", False, "Modern delivery"),
+        ChecklistItem("item:A.8.26:security_stories", "Security stories integrated into agile backlog (modern delivery alignment)",                                                                "should", False, "Modern delivery"),
     ],
 )
 
-REQ_A827_ARCHITECTURE_PRINCIPLES = EvidenceRequirement(
+REQ_A826_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.26:application_register",
+    control_ref   = "A.8.26",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Application Security Requirements Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-application catalogue — application id, requirements set applied, approval lineage, traceability status",
+    must_contain  = [
+        ChecklistItem("item:A.8.26:reg_app_id",       "Per-row application identifier",                                                                                                            "must", False, "Identification"),
+        ChecklistItem("item:A.8.26:reg_requirements_set","Per-row requirements set applied (which categories from the procedure)",                                                                "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.8.26:reg_approval",     "Per-row approval lineage (who approved + when)",                                                                                            "must", False, "Accountability"),
+        ChecklistItem("item:A.8.26:reg_traceability_status","Per-row traceability status (requirements-to-test-cases coverage %)",                                                              "must", False, "27002:8.26 — specified"),
+        ChecklistItem("item:A.8.26:reg_classification","Per-row data-classification footprint",                                                                                                  "must", False, "Cross-control coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.26:reg_threat_model_ref","Per-row threat-model reference (link to artefact)",                                                                                      "should", False, "Defensibility"),
+    ],
+)
+
+REQ_A826_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.26:applicable_appsec_scope",
+    control_ref   = "A.8.26",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Application Security Requirements Scope",
+    trigger_type  = "profile_fact",
+    description   = "Upstream — which applications get full-depth requirements process. Customer-facing typically yes. Internal admin tools proportional. COTS acquired via A.8.30 outsourced governance",
+    must_contain  = [
+        ChecklistItem("item:A.8.26:scope_classes",    "Application classes enumerated with depth-of-process per class",                                                                            "must", False, "27002:8.26 — appropriate"),
+        ChecklistItem("item:A.8.26:scope_acquired",   "Acquired-applications path (security-requirement check during procurement; cross-link to A.5.19/A.5.20)",                                  "must", False, "27002:8.26 — acquiring applications"),
+        ChecklistItem("item:A.8.26:scope_exclusions", "Exclusion rationale (low-risk internal scripts / experimental prototypes pre-production)",                                                "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.26:scope_change_drivers","Trigger list for re-scoping (new product class, new acquisition pattern, new regulatory regime)",                                          "should", False, "Currency"),
+    ],
+)
+
+REQ_A826_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.26:appsec_program_review",
+    control_ref     = "A.8.26",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Application Security Requirements Review",
+    trigger_type    = "profile_fact",
+    description     = "Annual verification — requirements catalogue currency vs threat landscape, traceability sample, exception inventory (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.26:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.26 — periodic"),
+        ChecklistItem("item:A.8.26:rev_reviewer",     "Reviewer identity (Engineering + InfoSec + Product)",                                                                                        "must", False, "Accountability"),
+        ChecklistItem("item:A.8.26:rev_catalogue_currency","Requirements-catalogue currency check (new threat patterns → requirement-category updates)",                                            "must", False, "27002:8.26 — information security requirements"),
+        ChecklistItem("item:A.8.26:rev_traceability_sample","Sample-based traceability verification (requirements → test cases mapping intact)",                                                  "must", False, "27002:8.26 — specified"),
+        ChecklistItem("item:A.8.26:rev_exception_inventory","Exception inventory re-confirmed / retired",                                                                                            "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.26:rev_findings_update","Findings propagated to procedure / scope",                                                                                                "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.26:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.27 Secure architecture/engineering principles — policy_program 4-leaf (batch 23) ─
+REQ_A827_POLICY = EvidenceRequirement(
     id            = "req:A.8.27:secure_architecture_principles_policy",
     control_ref   = "A.8.27",
     standard_id   = "ISO27001:2022",
     evidence_type = "policy",
-    title         = "Secure System Architecture and Engineering Principles",
-    trigger_type  = "universal",
-    description   = "A.8.27 requires principles for engineering secure systems to be established, documented, maintained, and applied to development activities. Evidence is a policy enumerating principles and their application",
-    freshness_days = 365,
+    title         = "Secure System Architecture and Engineering Principles Policy",
+    trigger_type  = "profile_fact",
+    description   = "A.8.27 requires principles established, documented, maintained, applied. Policy enumerates principles + application context + maintenance approach. Reference-architecture register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.27:principles",   "Principles enumerated (defense in depth, least privilege, fail-safe defaults, separation of concerns, complete mediation)", "must", False, "A.8.27 — principles established"),
-        ChecklistItem("item:A.8.27:application",  "Application to information system development activities defined", "must", False, "A.8.27 — applied to development activities"),
-        ChecklistItem("item:A.8.27:documented",   "Principles documented in accessible form for engineers", "must", False, "A.8.27 — documented"),
-        ChecklistItem("item:A.8.27:maintenance",  "Maintenance cadence stated (review as technologies and threats evolve)", "must", False, "A.8.27 — maintained"),
+        ChecklistItem("item:A.8.27:principles",       "Principles enumerated (defence-in-depth / least-privilege / fail-safe-defaults / separation-of-concerns / complete-mediation / zero-trust direction)", "must", False, "27002:8.27 — principles established"),
+        ChecklistItem("item:A.8.27:application",      "Application to development activities defined (per principle, what it means in design / code / deployment)",                              "must", False, "27002:8.27 — applied to development activities"),
+        ChecklistItem("item:A.8.27:documented",       "Principles documented in accessible form for engineers (wiki / handbook / training material)",                                            "must", False, "27002:8.27 — documented"),
+        ChecklistItem("item:A.8.27:maintenance",      "Maintenance cadence + responsibility (review as technologies / threats / regulations evolve)",                                            "must", False, "27002:8.27 — maintained"),
+        ChecklistItem("item:A.8.27:tm_integration",   "Threat-modelling methodology integration (cross-link to A.8.26 + design-phase practice)",                                                  "must", False, "Closes design loop (Style v2 promotion)"),
+        ChecklistItem("item:A.8.27:authority",        "Named policy authority (Chief Architect / Security Architect with InfoSec lead)",                                                          "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.27:reference_arch","Reference architecture patterns embedding the principles", "should", False, "Concrete guidance"),
-        ChecklistItem("item:A.8.27:tm_integration","Threat modelling methodology integration", "should", False, "Closes design loop"),
+        ChecklistItem("item:A.8.27:reference_arch",   "Reference architecture patterns embedding the principles (concrete blueprints)",                                                          "should", False, "Concrete guidance"),
     ],
 )
 
-REQ_A828_SECURE_CODING = EvidenceRequirement(
-    id            = "req:A.8.28:secure_coding_policy",
+REQ_A827_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.27:architecture_register",
+    control_ref   = "A.8.27",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Reference Architecture Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-pattern catalogue — pattern id, applicable context, security principles embedded, last-review date",
+    must_contain  = [
+        ChecklistItem("item:A.8.27:reg_pattern_id",   "Per-pattern unique identifier",                                                                                                            "must", False, "Identification"),
+        ChecklistItem("item:A.8.27:reg_context",      "Per-pattern applicable context (when to use this pattern)",                                                                                "must", False, "27002:8.27 — applied"),
+        ChecklistItem("item:A.8.27:reg_principles_embedded","Per-pattern principles embedded (mapping back to policy's principle set)",                                                          "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.8.27:reg_owner",        "Per-pattern named owner",                                                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.8.27:reg_last_reviewed","Per-pattern last-review date",                                                                                                            "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.27:reg_usage_count",  "Per-pattern usage-count (how many projects adopted it — drives 'is this pattern actually used' signal)",                                  "should", False, "Operational visibility"),
+    ],
+)
+
+REQ_A827_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.27:applicable_architecture_scope",
+    control_ref   = "A.8.27",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Architecture Principles Scope",
+    trigger_type  = "profile_fact",
+    description   = "Upstream — which engineering domains apply the principles. In-house development typically all yes. Off-the-shelf integration proportional",
+    must_contain  = [
+        ChecklistItem("item:A.8.27:scope_domains",    "Engineering domains enumerated (product / platform / infrastructure / integration / data)",                                                "must", False, "27002:8.27 — applied"),
+        ChecklistItem("item:A.8.27:scope_application","Application depth per domain (full-application for in-house; integration-pattern-only for COTS)",                                          "must", False, "Proportionality"),
+        ChecklistItem("item:A.8.27:scope_exclusions", "Exclusion rationale (e.g. third-party-managed black-box services)",                                                                          "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.27:scope_change_drivers","Trigger list for re-scoping (new engineering paradigm, new threat class)",                                                              "should", False, "Currency"),
+    ],
+)
+
+REQ_A827_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.27:architecture_program_review",
+    control_ref     = "A.8.27",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Architecture Principles Review",
+    trigger_type    = "profile_fact",
+    description     = "Annual verification — principle-set still appropriate, reference-architecture currency, adoption signals (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.27:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.27 — periodic"),
+        ChecklistItem("item:A.8.27:rev_reviewer",     "Reviewer identity (Chief Architect + Security Architect + InfoSec)",                                                                        "must", False, "Accountability"),
+        ChecklistItem("item:A.8.27:rev_principle_set","Principle-set review (new threats → new principles; obsolete principles retired)",                                                          "must", False, "27002:8.27 — maintained"),
+        ChecklistItem("item:A.8.27:rev_pattern_currency","Reference-pattern currency check (no abandoned patterns; new technology patterns added)",                                                "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.27:rev_findings_update","Findings propagated to policy / register",                                                                                                "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.27:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.28 Secure coding — op_process 4-leaf (batch 23) ──────────────────────
+REQ_A828_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.8.28:secure_coding_procedure",
     control_ref   = "A.8.28",
     standard_id   = "ISO27001:2022",
-    evidence_type = "policy",
-    title         = "Secure Coding Standards",
-    trigger_type  = "universal",
-    description   = "A.8.28 requires secure coding principles to be applied to software development. Evidence is a secure coding standards policy stating language-specific guidance, common vulnerability prevention, and review requirements",
+    evidence_type = "procedure",
+    title         = "Secure Coding Procedure",
+    trigger_type  = "profile_fact",
+    description   = "A.8.28 requires secure-coding principles applied. Procedure documents language-specific standards, common-vulnerability prevention, code-review gates, automated analysis, secrets management. Per-finding register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.28:language_standards","Language-specific coding standards (e.g. Python, Java, JavaScript, Go)", "must", False, "A.8.28 — secure coding principles"),
-        ChecklistItem("item:A.8.28:vulnerability_prevention","Common vulnerability prevention guidance (OWASP Top 10, CWE Top 25)", "must", False, "A.8.28 — secure coding"),
-        ChecklistItem("item:A.8.28:code_review",  "Code review requirement before merge for production code", "must", False, "A.8.28 — applied"),
-        ChecklistItem("item:A.8.28:sast",         "Automated static analysis (SAST) in CI pipeline", "must", False, "A.8.28 — applied"),
-        ChecklistItem("item:A.8.28:secrets_in_code","Secrets management — no secrets in code, vaulting required", "must", False, "A.8.28 — secure coding"),
+        ChecklistItem("item:A.8.28:language_standards","Language-specific coding standards published (Python / Java / JavaScript / Go / C/C++ / Rust as applicable)",                            "must", False, "27002:8.28 — secure coding principles"),
+        ChecklistItem("item:A.8.28:vulnerability_prevention","Common-vulnerability prevention guidance (OWASP Top 10 / CWE Top 25 mapped to language patterns)",                                  "must", False, "27002:8.28 — secure coding"),
+        ChecklistItem("item:A.8.28:code_review",      "Code-review requirement before merge for production code (cross-link to A.8.4 branch protection)",                                        "must", False, "27002:8.28 — applied"),
+        ChecklistItem("item:A.8.28:sast",             "Automated static analysis (SAST) in CI pipeline (blocking severity threshold)",                                                            "must", False, "27002:8.28 — applied"),
+        ChecklistItem("item:A.8.28:secrets_in_code",  "Secrets management — no secrets in code; vaulting + pre-commit scanning required",                                                        "must", False, "27002:8.28 — secure coding"),
+        ChecklistItem("item:A.8.28:dependency_scanning","SCA / dependency scanning enabled (modern baseline — supply-chain attack vector)",                                                      "must", False, "Supply-chain hygiene (Style v2 promotion)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.28:dependency_scanning","Dependency / SCA scanning enabled", "should", False, "Supply chain hygiene"),
-        ChecklistItem("item:A.8.28:training",     "Secure coding training for developers (links to A.6.3)", "should", False, "People dimension"),
+        ChecklistItem("item:A.8.28:training",         "Secure-coding training for developers (cross-link to A.6.3)",                                                                              "should", False, "People dimension"),
     ],
 )
 
-REQ_A829_SECURITY_TESTING = EvidenceRequirement(
+REQ_A828_FINDING_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.28:finding_register",
+    control_ref   = "A.8.28",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Secure Coding Finding Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-finding tracking — SAST / SCA / review findings, severity, remediation SLA",
+    must_contain  = [
+        ChecklistItem("item:A.8.28:reg_finding_id",   "Per-finding unique identifier",                                                                                                            "must", False, "Auditability"),
+        ChecklistItem("item:A.8.28:reg_source",       "Per-finding source (SAST / SCA / manual review / external researcher)",                                                                  "must", False, "Identification"),
+        ChecklistItem("item:A.8.28:reg_severity",     "Per-finding severity",                                                                                                                      "must", False, "27002:8.28 — applied"),
+        ChecklistItem("item:A.8.28:reg_sla_due",      "Per-finding SLA due date (matches A.8.8 vulnerability rubric for runtime-exploitable; relaxed for dev-time-only)",                          "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.28:reg_status",       "Per-finding status (open / fixed / accepted-with-expiry)",                                                                                "must", False, "Continuous evidence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.28:reg_pattern_signal","Per-finding pattern flag (repeating patterns flagged for training feedback)",                                                              "should", False, "Continuous improvement"),
+    ],
+)
+
+REQ_A828_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.28:applicable_coding_scope",
+    control_ref   = "A.8.28",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Secure Coding Scope",
+    trigger_type  = "profile_fact",
+    description   = "Upstream — which code repositories in scope, which languages, what tooling per language",
+    must_contain  = [
+        ChecklistItem("item:A.8.28:scope_repos",      "Repositories in scope (drawn from A.8.4 repo inventory)",                                                                                  "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.28:scope_languages",  "Languages in use with tooling stack per language (SAST tool / linter / formatter)",                                                        "must", False, "27002:8.28 — appropriate"),
+        ChecklistItem("item:A.8.28:scope_exclusions", "Exclusion rationale (vendor-shipped code / generated code with documented review path)",                                                  "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.28:scope_change_drivers","Trigger list for re-scoping (new language, new framework, new vulnerability class)",                                                    "should", False, "Currency"),
+    ],
+)
+
+REQ_A828_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.28:coding_program_review",
+    control_ref     = "A.8.28",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Secure Coding Program Review",
+    trigger_type    = "profile_fact",
+    description     = "Annual verification — finding-pattern trending, tooling currency, language-standard updates (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.28:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.28 — periodic"),
+        ChecklistItem("item:A.8.28:rev_reviewer",     "Reviewer identity (Engineering leads + Security Champions)",                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.8.28:rev_finding_patterns","Finding-pattern trending (recurring patterns → training / tooling action)",                                                                "must", False, "Continuous improvement"),
+        ChecklistItem("item:A.8.28:rev_tooling_currency","Tooling-stack currency (SAST / SCA rules current; new tooling adopted)",                                                                "must", False, "27002:8.28 — applied"),
+        ChecklistItem("item:A.8.28:rev_findings_update","Findings propagated to language standards / training",                                                                                  "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.28:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.29 Security testing in development/acceptance — op_process 4-leaf (batch 23) ─
+REQ_A829_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.29:security_testing_procedure",
     control_ref   = "A.8.29",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Security Testing in Development and Acceptance Procedure",
-    trigger_type  = "universal",
-    description   = "A.8.29 requires security testing processes to be defined and implemented in the development lifecycle. Evidence is a procedure covering test types, lifecycle gates, acceptance criteria, and defect handling",
+    trigger_type  = "profile_fact",
+    description   = "A.8.29 requires security-testing processes defined + implemented. Procedure documents test types, lifecycle gates, acceptance criteria, defect handling, pen-test cadence. Per-test register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.29:test_types",    "Test types covered (SAST, DAST, IAST, dependency scanning, manual / penetration testing)", "must", False, "A.8.29 — security testing processes"),
-        ChecklistItem("item:A.8.29:lifecycle_gates","Test gates in lifecycle (per-commit, pre-merge, pre-release, post-deployment)", "must", False, "A.8.29 — development life cycle"),
-        ChecklistItem("item:A.8.29:acceptance",    "Acceptance criteria (severity thresholds that block release)", "must", False, "A.8.29 — acceptance"),
-        ChecklistItem("item:A.8.29:defect_handling","Defect handling (creation, triage, fix, retest)", "must", False, "A.8.29 — implemented"),
-        ChecklistItem("item:A.8.29:retesting",     "Retesting after remediation step", "must", False, "A.8.29 — implemented"),
+        ChecklistItem("item:A.8.29:test_types",       "Test types (SAST / DAST / IAST / SCA / fuzzing / manual review / penetration testing) with applicability rules",                            "must", False, "27002:8.29 — security testing processes"),
+        ChecklistItem("item:A.8.29:lifecycle_gates",  "Test gates in lifecycle (per-commit / pre-merge / pre-release / post-deployment)",                                                          "must", False, "27002:8.29 — development life cycle"),
+        ChecklistItem("item:A.8.29:acceptance",       "Acceptance criteria (severity thresholds that block release; documented exception authority)",                                            "must", False, "27002:8.29 — acceptance"),
+        ChecklistItem("item:A.8.29:defect_handling",  "Defect handling (creation / triage / fix / retest cycle with closure criteria)",                                                            "must", False, "27002:8.29 — implemented"),
+        ChecklistItem("item:A.8.29:retesting",        "Retesting requirement after remediation (no fix-without-retest)",                                                                            "must", False, "27002:8.29 — implemented"),
+        ChecklistItem("item:A.8.29:pen_test_cadence", "Third-party penetration-testing cadence (annual + on significant change for customer-facing PII-touching apps; modern baseline)",        "must", False, "Independent assurance (Style v2 promotion)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.29:pen_test_cadence","Third-party penetration testing cadence (typically annual + on significant change)", "should", False, "Independent assurance"),
-        ChecklistItem("item:A.8.29:bug_bounty",    "Bug bounty / responsible disclosure programme", "should", False, "Continuous external testing"),
+        ChecklistItem("item:A.8.29:bug_bounty",       "Bug-bounty / responsible-disclosure programme",                                                                                              "should", False, "Continuous external testing"),
     ],
 )
 
-REQ_A830_OUTSOURCED_DEVELOPMENT = EvidenceRequirement(
+REQ_A829_TEST_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.29:test_register",
+    control_ref   = "A.8.29",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Security Test Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-test record — test id, application, type, gate, outcome, findings count",
+    must_contain  = [
+        ChecklistItem("item:A.8.29:reg_test_id",      "Per-test unique identifier",                                                                                                                "must", False, "Auditability"),
+        ChecklistItem("item:A.8.29:reg_app",          "Per-test application (cross-link to A.8.26 application register)",                                                                          "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.29:reg_type",         "Per-test type (matches procedure's test-types list)",                                                                                      "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.8.29:reg_gate",         "Per-test lifecycle gate (where in lifecycle this test ran)",                                                                                "must", False, "27002:8.29 — development life cycle"),
+        ChecklistItem("item:A.8.29:reg_outcome",      "Per-test outcome (pass / fail / waived-with-exception) + findings-count",                                                                  "must", False, "27002:8.29 — acceptance"),
+        ChecklistItem("item:A.8.29:reg_artefact_ref", "Per-test artefact reference (report / scan output / pen-test deliverable retained)",                                                        "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.29:reg_external",     "Per-test external/internal flag (independent vs internal)",                                                                                "should", False, "Assurance visibility"),
+    ],
+)
+
+REQ_A829_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.29:applicable_test_scope",
+    control_ref   = "A.8.29",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Security Testing Scope",
+    trigger_type  = "profile_fact",
+    description   = "Upstream — which applications / classes get which test types at which gates. Customer-facing PII-touching = full stack. Internal admin proportional",
+    must_contain  = [
+        ChecklistItem("item:A.8.29:scope_app_classes","Application classes enumerated with test-type matrix per class",                                                                            "must", False, "27002:8.29 — appropriate"),
+        ChecklistItem("item:A.8.29:scope_pen_test_classes","Pen-test scope (which application classes require annual third-party testing)",                                                        "must", False, "Independent assurance"),
+        ChecklistItem("item:A.8.29:scope_exclusions", "Exclusion rationale (e.g. throwaway prototypes; internal-tooling micro-services with low blast radius)",                                  "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.29:scope_change_drivers","Trigger list for re-scoping (new app class, new test technique, new regulator)",                                                          "should", False, "Currency"),
+    ],
+)
+
+REQ_A829_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.29:test_program_review",
+    control_ref     = "A.8.29",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Security Testing Program Review",
+    trigger_type    = "profile_fact",
+    description     = "Periodic verification — test-coverage gaps, finding-pattern trending, pen-test outcomes feeding back (freshness=180; testing landscape evolves with threats)",
+    freshness_days  = 180,
+    must_contain    = [
+        ChecklistItem("item:A.8.29:rev_date",         "Review date within the planned interval (≤180 days)",                                                                                        "must", False, "27002:8.29 — periodic"),
+        ChecklistItem("item:A.8.29:rev_reviewer",     "Reviewer identity (Security Engineering + Engineering leads)",                                                                                "must", False, "Accountability"),
+        ChecklistItem("item:A.8.29:rev_coverage_gaps","Test-coverage gap check vs applicable scope",                                                                                                "must", False, "27002:8.29 — coverage"),
+        ChecklistItem("item:A.8.29:rev_pattern_trending","Finding-pattern trending (recurring patterns → SDLC / training / tooling action)",                                                        "must", False, "Continuous improvement"),
+        ChecklistItem("item:A.8.29:rev_pen_test_feedback","Pen-test outcomes feeding back into procedure / scope / training",                                                                      "must", False, "Closes the loop"),
+        ChecklistItem("item:A.8.29:rev_findings_update","Findings propagated to procedure / scope / tooling",                                                                                      "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.29:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.30 Outsourced development governance — op_process 4-leaf (batch 23) ──
+REQ_A830_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.30:outsourced_development_procedure",
     control_ref   = "A.8.30",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Outsourced Development Governance Procedure",
-    trigger_type  = "universal",
-    description   = "A.8.30 requires the organization to direct, monitor, and review activities related to outsourced system development. Evidence is a procedure covering security requirements in contracts, code controls, and oversight",
+    trigger_type  = "profile_fact",
+    description   = "A.8.30 requires direction, monitoring, review of outsourced development. Procedure documents contractual-security, code controls, delivered-code testing, incident-notification, oversight rhythm. Per-engagement register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.30:contractual_security","Security requirements in development contracts (links to A.5.20)", "must", False, "A.8.30 — direct"),
-        ChecklistItem("item:A.8.30:code_ownership","Code ownership, escrow, and intellectual property terms", "must", False, "A.8.30 — direct"),
-        ChecklistItem("item:A.8.30:delivered_code_testing","Security testing of delivered code (links to A.8.29)", "must", False, "A.8.30 — review"),
-        ChecklistItem("item:A.8.30:source_code_controls","Source code access controls for the outsourcing vendor (links to A.8.4)", "must", False, "A.8.30 — direct"),
-        ChecklistItem("item:A.8.30:incident_notification","Incident notification obligation in contract (vendor must notify within agreed window)", "must", False, "A.8.30 — monitor"),
+        ChecklistItem("item:A.8.30:contractual_security","Security requirements in development contracts (cross-link to A.5.20 supplier contracts)",                                              "must", False, "27002:8.30 — direct"),
+        ChecklistItem("item:A.8.30:code_ownership",   "Code ownership / escrow / IP terms in contract",                                                                                            "must", False, "27002:8.30 — direct"),
+        ChecklistItem("item:A.8.30:delivered_code_testing","Security testing of delivered code (cross-link to A.8.29; vendor cannot be sole tester)",                                              "must", False, "27002:8.30 — review"),
+        ChecklistItem("item:A.8.30:source_code_controls","Source-code access controls for vendor (cross-link to A.8.4; vendor-account governance)",                                                "must", False, "27002:8.30 — direct"),
+        ChecklistItem("item:A.8.30:incident_notification","Incident-notification obligation in contract (vendor must notify within agreed window; cross-link to A.5.25/A.5.26)",                "must", False, "27002:8.30 — monitor"),
+        ChecklistItem("item:A.8.30:maturity_assessment","Vendor security-maturity assessment before engagement (cross-link to A.5.19 supplier risk)",                                              "must", False, "Risk-based vendor selection (Style v2 promotion)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.30:maturity_assessment","Vendor security maturity assessment before engagement (links to A.5.19)", "should", False, "Risk-based vendor selection"),
-        ChecklistItem("item:A.8.30:review_meetings","Regular review meetings during engagement", "should", False, "Active monitoring"),
+        ChecklistItem("item:A.8.30:review_meetings",  "Regular review-meeting cadence during engagement (cross-link to A.5.22)",                                                                  "should", False, "Active monitoring"),
     ],
 )
 
-REQ_A831_ENVIRONMENT_SEPARATION = EvidenceRequirement(
+REQ_A830_ENGAGEMENT_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.30:engagement_register",
+    control_ref   = "A.8.30",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Outsourced Development Engagement Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-engagement catalogue — vendor id, scope, contract reference, maturity-assessment outcome, delivered-code-test status",
+    must_contain  = [
+        ChecklistItem("item:A.8.30:reg_engagement_id","Per-engagement unique identifier",                                                                                                          "must", False, "Identification"),
+        ChecklistItem("item:A.8.30:reg_vendor",       "Per-engagement vendor (cross-link to A.5.19 supplier register)",                                                                            "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.30:reg_scope",        "Per-engagement scope description (what's being developed; data classes touched)",                                                          "must", False, "27002:8.30 — direct"),
+        ChecklistItem("item:A.8.30:reg_contract_ref", "Per-engagement contract reference (cross-link to A.5.20)",                                                                                  "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.30:reg_maturity_outcome","Per-engagement maturity-assessment outcome",                                                                                            "must", False, "Risk-based vendor selection"),
+        ChecklistItem("item:A.8.30:reg_delivered_test_status","Per-engagement delivered-code-test status (latest review outcome)",                                                                "must", False, "27002:8.30 — review"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.30:reg_owner",        "Per-engagement named owner (Engineering sponsor + Procurement partner)",                                                                    "should", False, "Accountability"),
+    ],
+)
+
+REQ_A830_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.30:applicable_outsourced_scope",
+    control_ref   = "A.8.30",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Outsourced Development Scope",
+    trigger_type  = "profile_fact",
+    description   = "Upstream — what counts as 'outsourced development'. Custom-development contractor yes. Staff augmentation typically governed under A.6.5 + A.5.20. Pre-existing COTS via A.5.19/A.5.20",
+    must_contain  = [
+        ChecklistItem("item:A.8.30:scope_engagement_types","Engagement types in scope (turn-key contract / dedicated team / co-development / pen-test-as-development)",                            "must", False, "27002:8.30 — outsourced"),
+        ChecklistItem("item:A.8.30:scope_boundary_a65",   "Boundary with A.6.5 (staff augmentation governed there) + A.5.20 (general supplier security contract terms)",                          "must", False, "Cross-control boundary"),
+        ChecklistItem("item:A.8.30:scope_exclusions", "Exclusion rationale (e.g. open-source contributions accepted via A.8.4 repo governance)",                                                  "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.30:scope_change_drivers","Trigger list for re-scoping (new engagement type, new vendor model)",                                                                    "should", False, "Currency"),
+    ],
+)
+
+REQ_A830_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.30:outsourced_program_review",
+    control_ref     = "A.8.30",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Outsourced Development Program Review",
+    trigger_type    = "profile_fact",
+    description     = "Annual verification — engagement-register currency, delivered-code-test coverage, vendor incident patterns (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.30:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.30 — periodic"),
+        ChecklistItem("item:A.8.30:rev_reviewer",     "Reviewer identity (Engineering + Supplier Management + InfoSec)",                                                                            "must", False, "Accountability"),
+        ChecklistItem("item:A.8.30:rev_register_currency","Engagement-register currency check",                                                                                                      "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.30:rev_test_coverage","Delivered-code-test coverage per engagement (was every release tested before merge to production)",                                        "must", False, "27002:8.30 — review"),
+        ChecklistItem("item:A.8.30:rev_vendor_incidents","Vendor incident-pattern review (cross-link to A.5.22 supplier review)",                                                                  "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.30:rev_findings_update","Findings propagated to procedure / contract terms",                                                                                      "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.30:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.31 Dev/test/prod environment separation — op_process 4-leaf (batch 23) ─
+REQ_A831_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.31:environment_separation_procedure",
     control_ref   = "A.8.31",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
-    title         = "Development, Test, and Production Environment Separation Procedure",
-    trigger_type  = "universal",
-    description   = "A.8.31 requires development, testing, and production environments to be separated and secured. Evidence is a procedure stating how environments are separated, what data flows between them, and access controls",
+    title         = "Development, Test, Production Environment Separation Procedure",
+    trigger_type  = "profile_fact",
+    description   = "A.8.31 requires environments separated + secured. Procedure documents distinct environments, network/identity separation, data-handling rules, promotion process, per-env access. Per-environment register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.31:distinct_environments","Distinct environments enumerated (dev, test, staging, production) with their purpose", "must", False, "A.8.31 — separated"),
-        ChecklistItem("item:A.8.31:network_separation","Network and identity separation between environments", "must", False, "A.8.31 — separated"),
-        ChecklistItem("item:A.8.31:data_handling","Data handling rules between environments (no raw production data in dev; links to A.8.33)", "must", False, "A.8.31 — secured"),
-        ChecklistItem("item:A.8.31:promotion_process","Promotion / deployment process between environments (links to A.8.32 change management)", "must", False, "A.8.31 — secured"),
-        ChecklistItem("item:A.8.31:per_env_access","Access controls per environment (dev access ≠ prod access)", "must", False, "A.8.31 — secured"),
+        ChecklistItem("item:A.8.31:distinct_environments","Distinct environments enumerated (dev / test / staging / production) with purpose per environment",                                    "must", False, "27002:8.31 — separated"),
+        ChecklistItem("item:A.8.31:network_separation","Network + identity separation between environments (cross-link to A.8.22 network segregation)",                                          "must", False, "27002:8.31 — separated"),
+        ChecklistItem("item:A.8.31:data_handling",    "Data-handling rules between environments — NO raw production data in lower environments (cross-link to A.8.11 masking + A.8.33 test info)", "must", False, "27002:8.31 — secured"),
+        ChecklistItem("item:A.8.31:promotion_process","Promotion / deployment process between environments (cross-link to A.8.32 change management)",                                            "must", False, "27002:8.31 — secured"),
+        ChecklistItem("item:A.8.31:per_env_access",   "Access controls per environment (dev access ≠ prod access; production-access is privileged-access per A.8.2)",                              "must", False, "27002:8.31 — secured"),
+        ChecklistItem("item:A.8.31:iac",              "Infrastructure-as-code for environment reproducibility (modern baseline)",                                                                "must", False, "Consistency (Style v2 promotion)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.31:ephemeral",   "Ephemeral environments where supported", "should", False, "Modern practice"),
-        ChecklistItem("item:A.8.31:iac",         "Infrastructure-as-code for environment reproducibility", "should", False, "Consistency"),
+        ChecklistItem("item:A.8.31:ephemeral",        "Ephemeral environments where supported (e.g. per-PR preview environments)",                                                                  "should", False, "Modern practice"),
     ],
 )
 
-REQ_A832_CHANGE_MANAGEMENT = EvidenceRequirement(
+REQ_A831_ENV_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.31:environment_register",
+    control_ref   = "A.8.31",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Environment Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-environment catalogue — env id, purpose, data classes permitted, owner, access list reference",
+    must_contain  = [
+        ChecklistItem("item:A.8.31:reg_env_id",       "Per-row environment unique identifier",                                                                                                      "must", False, "Identification"),
+        ChecklistItem("item:A.8.31:reg_purpose",      "Per-row purpose (dev / test / staging / production / sandbox / training)",                                                                  "must", False, "27002:8.31 — separated"),
+        ChecklistItem("item:A.8.31:reg_data_allowed", "Per-row data classes permitted (drives masking obligations from A.8.11)",                                                                  "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.31:reg_owner",        "Per-row named owner (technology lead with InfoSec partner for production)",                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.8.31:reg_access_ref",   "Per-row access-list reference (cross-link to A.8.3 access matrix)",                                                                          "must", False, "Cross-control coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.31:reg_last_audited", "Per-row last-audited timestamp",                                                                                                            "should", False, "Drift detection"),
+    ],
+)
+
+REQ_A831_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.31:applicable_environment_scope",
+    control_ref   = "A.8.31",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Environment Separation Scope",
+    trigger_type  = "profile_fact",
+    description   = "Upstream — which platform domains have separated environments. SDLC platform yes. Internal-tools dev/prod proportional. Vendor SaaS sandboxes governed via A.5.19/A.5.21",
+    must_contain  = [
+        ChecklistItem("item:A.8.31:scope_platforms",  "Platforms in scope with environment-tiering rules per platform",                                                                            "must", False, "27002:8.31 — appropriate"),
+        ChecklistItem("item:A.8.31:scope_exclusions", "Exclusion rationale (e.g. SaaS-only platforms with vendor-managed environments)",                                                          "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.31:scope_change_drivers","Trigger list for re-scoping (new platform, new environment class)",                                                                      "should", False, "Currency"),
+    ],
+)
+
+REQ_A831_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.31:environment_program_review",
+    control_ref     = "A.8.31",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Environment Separation Program Review",
+    trigger_type    = "profile_fact",
+    description     = "Annual verification — environment-register currency, no-production-data-in-non-prod sample check, per-env access review (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.31:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.31 — periodic"),
+        ChecklistItem("item:A.8.31:rev_reviewer",     "Reviewer identity (Infrastructure + InfoSec + Engineering leads)",                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.31:rev_register_currency","Environment-register currency check",                                                                                                      "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.31:rev_no_prod_data_sample","Sample-based check — no raw production data found in lower environments (auditor-critical for GDPR)",                                "must", False, "27002:8.31 — secured + GDPR alignment"),
+        ChecklistItem("item:A.8.31:rev_per_env_access","Per-env access review (cross-link to A.8.3 + A.5.18 outcomes)",                                                                            "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.31:rev_findings_update","Findings propagated to procedure / register",                                                                                              "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.31:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+# ── A.8.32 Change management — op_process 4-leaf (batch 23) ──────────────────
+REQ_A832_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.32:change_management_procedure",
     control_ref   = "A.8.32",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Change Management Procedure",
     trigger_type  = "universal",
-    description   = "A.8.32 requires changes to information processing facilities and information systems to be subject to change management procedures. Evidence is a documented change management procedure",
+    description   = "A.8.32 requires changes to information processing facilities + systems subject to CM procedures. Procedure documents scope, approval workflow, risk-assessment-per-change, rollback, emergency-change path, post-implementation review. Per-change register (lifecycle-end), applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.32:scope",         "Scope of changes covered (which kinds of changes require formal CM)", "must", False, "A.8.32 — changes subject to change management"),
-        ChecklistItem("item:A.8.32:approval",      "Change approval workflow (CAB or equivalent)", "must", False, "A.8.32 — change management procedures"),
-        ChecklistItem("item:A.8.32:risk_assessment","Risk assessment per change", "must", False, "A.8.32 — change management"),
-        ChecklistItem("item:A.8.32:rollback",      "Rollback plan required per change", "must", False, "A.8.32 — change management"),
-        ChecklistItem("item:A.8.32:emergency",     "Emergency change provisions with post-hoc review", "must", False, "Operational reality"),
-        ChecklistItem("item:A.8.32:pir",           "Post-implementation review for significant changes", "must", False, "Learning loop"),
+        ChecklistItem("item:A.8.32:scope",            "Scope — which change classes require formal CM (production / customer-facing / security-relevant / cross-system)",                          "must", False, "27002:8.32 — changes subject to change management"),
+        ChecklistItem("item:A.8.32:approval",         "Change approval workflow (CAB / lightweight async approval / automated approval per risk tier)",                                            "must", False, "27002:8.32 — change management procedures"),
+        ChecklistItem("item:A.8.32:risk_assessment", "Per-change risk assessment (impact / blast radius / rollback complexity)",                                                                    "must", False, "27002:8.32 — change management"),
+        ChecklistItem("item:A.8.32:rollback",         "Rollback plan required per change (no-rollback changes treated as exceptions)",                                                            "must", False, "27002:8.32 — change management"),
+        ChecklistItem("item:A.8.32:emergency",        "Emergency-change provisions with mandatory post-hoc review (no untracked emergencies)",                                                    "must", False, "Operational reality"),
+        ChecklistItem("item:A.8.32:pir",              "Post-implementation review for significant changes (learning loop into procedure)",                                                          "must", False, "Continuous improvement"),
+        ChecklistItem("item:A.8.32:ci_integration",   "CI/CD pipeline integration for low-risk automated changes (modern baseline; CAB-everything bottleneck not acceptable)",                      "must", False, "Modern velocity (Style v2 promotion)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.32:change_windows","Defined change windows for non-emergency changes", "should", False, "Predictability"),
-        ChecklistItem("item:A.8.32:ci_integration","CI/CD pipeline integration for low-risk automated changes", "should", False, "Modern velocity"),
+        ChecklistItem("item:A.8.32:change_windows",   "Defined change windows for non-emergency changes",                                                                                            "should", False, "Predictability"),
     ],
 )
 
-REQ_A833_TEST_INFORMATION = EvidenceRequirement(
+REQ_A832_CHANGE_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.32:change_register",
+    control_ref   = "A.8.32",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Change Register",
+    trigger_type  = "universal",
+    description   = "Per-change record — change id, target, risk tier, approval lineage, outcome, rollback-invoked flag. The continuous evidence stream",
+    must_contain  = [
+        ChecklistItem("item:A.8.32:reg_change_id",    "Per-change unique identifier",                                                                                                                "must", False, "Auditability"),
+        ChecklistItem("item:A.8.32:reg_target",       "Per-change target (system / config / data; cross-link to A.5.9 asset register)",                                                              "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.32:reg_risk_tier",    "Per-change risk tier (drives approval path applied)",                                                                                        "must", False, "27002:8.32 — change management"),
+        ChecklistItem("item:A.8.32:reg_approval_lineage","Per-change approval lineage (approver(s) + timestamp)",                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.8.32:reg_outcome",      "Per-change outcome (success / partial / rolled-back / failed)",                                                                              "must", False, "Continuous evidence"),
+        ChecklistItem("item:A.8.32:reg_emergency_flag","Per-change emergency flag + post-hoc-review reference where emergency",                                                                    "must", False, "Operational reality"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.32:reg_actor",        "Per-change actor (person or automated job)",                                                                                                "should", False, "Accountability"),
+    ],
+)
+
+REQ_A832_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.32:applicable_change_scope",
+    control_ref   = "A.8.32",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Change Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — what counts as a change requiring CM, what gets exempt (read-only operations / break-glass usage already covered elsewhere)",
+    must_contain  = [
+        ChecklistItem("item:A.8.32:scope_change_classes","Change classes enumerated with CM path per class (standard / normal / emergency / pre-approved)",                                          "must", False, "27002:8.32 — appropriate"),
+        ChecklistItem("item:A.8.32:scope_exemptions", "Exemption rationale (read-only operations; A.8.2 break-glass usage governed there; A.8.19 software-install governed there)",                "must", False, "Boundary clarity"),
+        ChecklistItem("item:A.8.32:scope_systems",    "In-scope systems (cross-link to A.5.9 asset register)",                                                                                    "must", False, "Cross-control coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.32:scope_change_drivers","Trigger list for re-scoping (new system class, new automation pattern)",                                                                    "should", False, "Currency"),
+    ],
+)
+
+REQ_A832_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.32:change_program_review",
+    control_ref     = "A.8.32",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Change Management Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification — register completeness, emergency-change ratio, rollback-attainment, change-induced-incident trending (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.32:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.32 — periodic"),
+        ChecklistItem("item:A.8.32:rev_reviewer",     "Reviewer identity (Change Management lead + Engineering + InfoSec)",                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.8.32:rev_register_completeness","Register-completeness sample (sample of production changes traced to register)",                                                      "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.32:rev_emergency_ratio","Emergency-change ratio (high ratio signals process bypass)",                                                                                "must", False, "Operational signal"),
+        ChecklistItem("item:A.8.32:rev_change_incidents","Change-induced incident trending (cross-link to A.5.26 register — change as incident root cause)",                                          "must", False, "Continuous improvement"),
+        ChecklistItem("item:A.8.32:rev_findings_update","Findings propagated to procedure / scope",                                                                                                "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.32:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.33 Test information — op_process 4-leaf (batch 23) ───────────────────
+REQ_A833_PROCEDURE = EvidenceRequirement(
     id            = "req:A.8.33:test_information_procedure",
     control_ref   = "A.8.33",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Test Information Management Procedure",
-    trigger_type  = "universal",
-    description   = "A.8.33 requires test information to be selected, protected, and managed appropriately. Evidence is a procedure covering selection, masking, protection, and lifecycle of test data",
+    trigger_type  = "profile_fact",
+    description   = "A.8.33 requires test information selected, protected, managed. Procedure documents selection criteria, masking requirements, protection equivalence, access controls, lifecycle, PII constraint. Per-dataset register, applicable scope, program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.8.33:selection",     "Selection criteria (synthetic preferred; production-derived only when masked)", "must", False, "A.8.33 — appropriately selected"),
-        ChecklistItem("item:A.8.33:masking",       "Masking requirements when production-derived data must be used", "must", False, "A.8.33 — protected"),
-        ChecklistItem("item:A.8.33:protection",    "Protection equivalent to production where the data warrants it", "must", False, "A.8.33 — protected"),
-        ChecklistItem("item:A.8.33:access_controls","Access controls on test data (not all developers see everything)", "must", False, "A.8.33 — managed"),
-        ChecklistItem("item:A.8.33:lifecycle",     "Lifecycle (provisioning, refresh, deletion at end of need)", "must", False, "A.8.33 — managed"),
-        ChecklistItem("item:A.8.33:pii_constraint","No live PII in lower environments unless masked / pseudonymised", "must", False, "A.8.33 — protected"),
+        ChecklistItem("item:A.8.33:selection",        "Selection criteria — synthetic preferred; production-derived only with masking (cross-link to A.8.11)",                                      "must", False, "27002:8.33 — appropriately selected"),
+        ChecklistItem("item:A.8.33:masking",          "Masking requirements when production-derived data is used (cross-link to A.8.11 procedure)",                                                "must", False, "27002:8.33 — protected"),
+        ChecklistItem("item:A.8.33:protection",       "Protection equivalent to production where data warrants it (encryption / access logging / retention)",                                    "must", False, "27002:8.33 — protected"),
+        ChecklistItem("item:A.8.33:access_controls",  "Access controls on test data (not every developer sees all test data; cross-link to A.8.3)",                                                "must", False, "27002:8.33 — managed"),
+        ChecklistItem("item:A.8.33:lifecycle",        "Lifecycle (provisioning + refresh cadence + deletion at end of need; cross-link to A.8.10)",                                              "must", False, "27002:8.33 — managed"),
+        ChecklistItem("item:A.8.33:pii_constraint",   "No live PII in lower environments unless masked / pseudonymised (cross-link to A.8.11 + GDPR alignment)",                                    "must", True,  "27002:8.33 / GDPR Art.32"),
+        ChecklistItem("item:A.8.33:dpia_consideration","DPIA / privacy considerations when PII-derived (cross-link to A.5.34 PII protection)",                                                    "must", True,  "Privacy compliance (Style v2 promotion)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.33:synthetic_tooling","Synthetic data generation tooling preferred over masking", "should", False, "Reduces residual risk"),
-        ChecklistItem("item:A.8.33:dpia_consideration","DPIA / privacy considerations when PII involved", "should", False, "Privacy compliance"),
+        ChecklistItem("item:A.8.33:synthetic_tooling","Synthetic-data-generation tooling preferred over masking where feasible (reduces residual risk)",                                            "should", False, "Modern direction"),
     ],
 )
 
-REQ_A834_AUDIT_TESTING_PROTECTION = EvidenceRequirement(
-    id            = "req:A.8.34:audit_testing_protection_procedure",
-    control_ref   = "A.8.34",
+REQ_A833_DATASET_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.33:test_dataset_register",
+    control_ref   = "A.8.33",
     standard_id   = "ISO27001:2022",
-    evidence_type = "procedure",
-    title         = "Protection of Information Systems During Audit Testing Procedure",
-    trigger_type  = "universal",
-    description   = "A.8.34 requires audit tests and assurance activities involving operational systems to be planned and agreed between the tester and appropriate management. Evidence is a procedure covering pre-authorization, scope agreement, and impact management",
+    evidence_type = "register",
+    title         = "Test Dataset Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-dataset catalogue — dataset id, source, current treatment (synthetic / masked / live-PII-banned), location, last-refresh, retention status",
     must_contain  = [
-        ChecklistItem("item:A.8.34:pre_authorisation","Pre-authorisation required before any audit testing on operational systems", "must", False, "A.8.34 — planned and agreed"),
-        ChecklistItem("item:A.8.34:scope_agreement","Written scope agreement (what is in scope, what is out)", "must", False, "A.8.34 — agreed"),
-        ChecklistItem("item:A.8.34:time_windows", "Time windows agreed (avoid peak business hours, change-freeze periods)", "must", False, "A.8.34 — planned"),
-        ChecklistItem("item:A.8.34:rollback",     "Rollback procedure stated for any change introduced during testing", "must", False, "A.8.34 — protection of information systems"),
-        ChecklistItem("item:A.8.34:evidence",     "Evidence preservation (logs, results) maintained per legal/regulatory requirements", "must", False, "A.8.34 — assessment of operational systems"),
-        ChecklistItem("item:A.8.34:stakeholder_notification","Stakeholder notification (affected teams, on-call, customer if material)", "must", False, "A.8.34 — agreed between the tester and management"),
-        ChecklistItem("item:A.8.34:performance_impact","Performance impact considered and limited", "must", False, "A.8.34 — protection"),
+        ChecklistItem("item:A.8.33:reg_dataset_id",   "Per-row dataset identifier",                                                                                                                "must", False, "Identification"),
+        ChecklistItem("item:A.8.33:reg_source",       "Per-row source (synthetic-generator / production-snapshot / vendor-provided / contributed-by-user)",                                          "must", False, "27002:8.33 — selected"),
+        ChecklistItem("item:A.8.33:reg_treatment",    "Per-row treatment applied (synthetic / static-masked / dynamic-masked / pseudonymised)",                                                  "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.8.33:reg_location",     "Per-row storage location + access-control reference",                                                                                        "must", False, "27002:8.33 — managed"),
+        ChecklistItem("item:A.8.33:reg_last_refresh", "Per-row last refresh timestamp (drives stale-test-data detection)",                                                                          "must", False, "Drift detection"),
+        ChecklistItem("item:A.8.33:reg_retention_status","Per-row retention status (active / scheduled-for-deletion / archived)",                                                                    "must", False, "27002:8.33 — managed"),
     ],
     should_contain= [
-        ChecklistItem("item:A.8.34:dedicated_accounts","Dedicated test accounts used (rather than reuse of real users)", "should", False, "Attribution clarity"),
-        ChecklistItem("item:A.8.34:meta_audit",   "Audit-of-the-audit logs (record of testing activities)", "should", False, "Accountability of testers"),
+        ChecklistItem("item:A.8.33:reg_owner",        "Per-row named owner",                                                                                                                      "should", False, "Accountability"),
+    ],
+)
+
+REQ_A833_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.33:applicable_test_data_scope",
+    control_ref   = "A.8.33",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Test Information Scope",
+    trigger_type  = "profile_fact",
+    description   = "Upstream — what counts as test information in this org. Includes synthetic / sampled / production-derived. Excludes pure-config (no data values); test fixtures committed to repos go under A.8.4",
+    must_contain  = [
+        ChecklistItem("item:A.8.33:scope_classes",    "Test-information classes in scope (synthetic-generated / production-derived / vendor-provided / user-contributed)",                          "must", False, "27002:8.33 — appropriate"),
+        ChecklistItem("item:A.8.33:scope_a811_link",  "Cross-link to A.8.11 masking — A.8.33 governs WHAT is selected, A.8.11 governs HOW it's transformed",                                      "must", False, "Cross-control boundary"),
+        ChecklistItem("item:A.8.33:scope_exclusions", "Exclusion rationale (test fixtures in code governed via A.8.4; one-off load-test data with no real source)",                                "must", False, "Boundary clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.33:scope_change_drivers","Trigger list for re-scoping (new data class, new test pattern — e.g. AI-training data)",                                                  "should", False, "Currency"),
+    ],
+)
+
+REQ_A833_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.33:test_data_program_review",
+    control_ref     = "A.8.33",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Test Information Program Review",
+    trigger_type    = "profile_fact",
+    description     = "Annual verification — register currency, no-live-PII spot-check, retention compliance, masking effectiveness (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.33:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.33 — periodic"),
+        ChecklistItem("item:A.8.33:rev_reviewer",     "Reviewer identity (Data Engineering + DPO + InfoSec)",                                                                                      "must", False, "Accountability"),
+        ChecklistItem("item:A.8.33:rev_register_currency","Register-currency check (active datasets all registered; retired datasets archived/deleted)",                                              "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.33:rev_no_live_pii_check","No-live-PII spot-check in non-production environments (auditor-critical for GDPR)",                                                      "must", True,  "GDPR alignment"),
+        ChecklistItem("item:A.8.33:rev_retention_compliance","Retention compliance (no datasets surviving past end-of-need)",                                                                        "must", False, "27002:8.33 — managed"),
+        ChecklistItem("item:A.8.33:rev_findings_update","Findings propagated to procedure / scope",                                                                                                "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.33:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.8.34 Protection during audit testing — policy_program 4-leaf (batch 23) ─
+REQ_A834_POLICY = EvidenceRequirement(
+    id            = "req:A.8.34:audit_testing_protection_policy",
+    control_ref   = "A.8.34",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "policy",
+    title         = "Protection of Information Systems During Audit Testing Policy",
+    trigger_type  = "universal",
+    description   = "A.8.34 requires audit/assurance activities on operational systems planned + agreed. Policy states pre-authorisation, scope-agreement requirements, time-window discipline, rollback requirement, evidence preservation, stakeholder notification. Per-engagement register, applicable scope, program review are sibling leaves",
+    must_contain  = [
+        ChecklistItem("item:A.8.34:pre_authorisation","Pre-authorisation required before any audit testing on operational systems",                                                                "must", False, "27002:8.34 — planned and agreed"),
+        ChecklistItem("item:A.8.34:scope_agreement",  "Written scope-agreement required (what's in / what's out / what tests / what data)",                                                          "must", False, "27002:8.34 — agreed"),
+        ChecklistItem("item:A.8.34:time_windows",     "Time-window discipline (avoid peak business hours / change-freezes / customer events)",                                                      "must", False, "27002:8.34 — planned"),
+        ChecklistItem("item:A.8.34:rollback",         "Rollback procedure stated for any change introduced during testing",                                                                          "must", False, "27002:8.34 — protection of information systems"),
+        ChecklistItem("item:A.8.34:evidence_preservation","Evidence-preservation requirement (logs / results retained per legal-regulatory chain-of-custody)",                                      "must", False, "27002:8.34 — assessment of operational systems"),
+        ChecklistItem("item:A.8.34:stakeholder_notification","Stakeholder-notification requirement (affected teams / on-call / customer where material)",                                          "must", False, "27002:8.34 — agreed between the tester and management"),
+        ChecklistItem("item:A.8.34:performance_impact","Performance-impact consideration + limit",                                                                                                  "must", False, "27002:8.34 — protection"),
+        ChecklistItem("item:A.8.34:dedicated_accounts","Dedicated test accounts used — no re-use of real user identities (attribution clarity; Style v2 promotion)",                              "must", False, "Attribution clarity"),
+        ChecklistItem("item:A.8.34:authority",        "Named policy authority (InfoSec lead with Internal Audit partner)",                                                                          "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.34:meta_audit",       "Audit-of-the-audit logs (record of testing activities for accountability of testers themselves)",                                            "should", False, "Accountability of testers"),
+    ],
+)
+
+REQ_A834_ENGAGEMENT_REGISTER = EvidenceRequirement(
+    id            = "req:A.8.34:audit_engagement_register",
+    control_ref   = "A.8.34",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Audit Testing Engagement Register",
+    trigger_type  = "universal",
+    description   = "Per-engagement catalogue — engagement id, tester, scope, dates, outcome, evidence-artefact location",
+    must_contain  = [
+        ChecklistItem("item:A.8.34:reg_engagement_id","Per-engagement unique identifier",                                                                                                          "must", False, "Identification"),
+        ChecklistItem("item:A.8.34:reg_tester",       "Per-engagement tester identity (internal team / external firm)",                                                                            "must", False, "Accountability"),
+        ChecklistItem("item:A.8.34:reg_scope",        "Per-engagement scope description (systems / data / techniques agreed)",                                                                    "must", False, "27002:8.34 — agreed"),
+        ChecklistItem("item:A.8.34:reg_dates",        "Per-engagement start / end / time-windows",                                                                                                  "must", False, "27002:8.34 — planned"),
+        ChecklistItem("item:A.8.34:reg_outcome",      "Per-engagement outcome + findings count",                                                                                                  "must", False, "Continuous evidence"),
+        ChecklistItem("item:A.8.34:reg_evidence_loc", "Per-engagement evidence-artefact location reference",                                                                                        "must", False, "27002:8.34 — assessment"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.34:reg_rollback_invoked","Per-engagement rollback-invoked flag where applicable",                                                                                  "should", False, "Operational defensibility"),
+    ],
+)
+
+REQ_A834_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.8.34:applicable_audit_testing_scope",
+    control_ref   = "A.8.34",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Audit Testing Scope",
+    trigger_type  = "universal",
+    description   = "Upstream — what counts as audit testing on operational systems. Internal audit yes. External pen-test yes. Regulator inspection yes. Routine application testing under A.8.29",
+    must_contain  = [
+        ChecklistItem("item:A.8.34:scope_engagement_types","Engagement types in scope (internal audit / third-party pen-test / regulator inspection / customer security assessment)",              "must", False, "27002:8.34 — appropriate"),
+        ChecklistItem("item:A.8.34:scope_systems",    "Operational systems in scope (drawn from A.5.9 asset register)",                                                                            "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.8.34:scope_exclusions", "Exclusion rationale (routine application testing via A.8.29; non-operational test-bed work)",                                              "must", False, "Cross-control boundary"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.8.34:scope_change_drivers","Trigger list for re-scoping (new engagement type, new regulator audit power)",                                                            "should", False, "Currency"),
+    ],
+)
+
+REQ_A834_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.8.34:audit_testing_program_review",
+    control_ref     = "A.8.34",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Audit Testing Protection Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification — register completeness, rollback-discipline compliance, evidence-preservation hygiene (freshness=365; audit-policy stable as documented in batch header)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.8.34:rev_date",         "Review date within the planned interval",                                                                                                    "must", False, "27002:8.34 — periodic"),
+        ChecklistItem("item:A.8.34:rev_reviewer",     "Reviewer identity (InfoSec lead + Internal Audit lead)",                                                                                    "must", False, "Accountability"),
+        ChecklistItem("item:A.8.34:rev_register_completeness","Register-completeness check (every recent audit engagement in register)",                                                              "must", False, "Drift prevention"),
+        ChecklistItem("item:A.8.34:rev_rollback_compliance","Rollback-discipline compliance (no untracked changes introduced during testing)",                                                    "must", False, "27002:8.34 — protection"),
+        ChecklistItem("item:A.8.34:rev_evidence_hygiene","Evidence-preservation hygiene check (artefacts retained per chain-of-custody)",                                                          "must", False, "Defensibility"),
+        ChecklistItem("item:A.8.34:rev_findings_update","Findings propagated to policy / scope",                                                                                                  "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.8.34:rev_next_date",    "Next planned review date stated",                                                                                                            "should", False, "Planning"),
     ],
 )
 
@@ -8798,13 +10888,13 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_RISK_TREATMENT,
     REQ_INTERNAL_AUDIT,
     REQ_MANAGEMENT_REVIEW,
-    REQ_ENCRYPTION_POLICY,
+    # REQ_ENCRYPTION_POLICY (A.8.24) promoted to 4-leaf in batch 23 — see A.8 block below
     # A.5.24 — 4-leaf operational_process (2026-05-31; program review freshness=180)
     REQ_A524_FRAMEWORK,
     REQ_A524_IR_TEAM_REGISTER,
     REQ_A524_PROGRAM_REVIEW,
     REQ_A524_EXERCISE_RECORD,
-    REQ_DATA_MASKING,
+    # REQ_DATA_MASKING (A.8.11) promoted to 4-leaf in batch 23 — see A.8 block below
     # Universal — ISO 27001 Annex A.5.18 (four-leaf curation, 2026-05-26 —
     # promoted from single-leaf REQ_ACCESS_RIGHTS per [[curation-program-full-multi-leaf]])
     REQ_A518_PROCEDURE,
@@ -9112,44 +11202,181 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A714_DISPOSAL_RECORD,
     REQ_A714_PROGRAM_REVIEW,
 
-    # Universal — ISO 27001 Annex A.8 Technological Controls bulk curation
-    # (Phase B, 2026-05-22). A.8.11 / A.8.24 / A.8.25 already exist further
-    # up as REQ_DATA_MASKING / REQ_ENCRYPTION_POLICY / REQ_SECURE_DEVELOPMENT.
+    # Universal — ISO 27001 Annex A.8 Technological Controls (Phase B batch 23,
+    # 2026-06-01 — full 33-control promotion to 4-leaf depth; 132 entries).
+    # A.8.2 was already 4-leaf from 2026-05-26 (calibration era); Style v2
+    # aligned in this batch. A.8.11/A.8.24/A.8.25 consolidated from upstream
+    # tombstone stubs. See [[curation-phase-b-batch-23-2026-06-01]].
+    # A.8.1 — policy_program (4-leaf)
     REQ_A81_USER_ENDPOINTS,
-    # A.8.2 — 4-leaf technical_control spine (drafted 2026-05-26, awaiting load)
+    REQ_A81_ENDPOINT_REGISTER,
+    REQ_A81_APPLICABLE_SCOPE,
+    REQ_A81_PROGRAM_REVIEW,
+    # A.8.2 — technical_control (4-leaf; Style v2 aligned in batch 23)
     REQ_A82_BASELINE,
     REQ_A82_PROCEDURE,
     REQ_A82_ACTIVITY_LOG,
     REQ_A82_RECERTIFICATION,
+    # A.8.3 — op_process (4-leaf)
     REQ_A83_INFORMATION_ACCESS_RESTRICTION,
-    REQ_A84_SOURCE_CODE_ACCESS,
-    REQ_A85_SECURE_AUTHENTICATION,
-    REQ_A86_CAPACITY_MANAGEMENT,
-    REQ_A87_MALWARE_PROTECTION,
-    REQ_A88_TECHNICAL_VULNERABILITIES,
-    REQ_A89_CONFIGURATION_MANAGEMENT,
-    REQ_A810_INFORMATION_DELETION,
-    REQ_A812_DLP,
-    REQ_A813_BACKUP,
-    REQ_A814_REDUNDANCY,
-    REQ_A815_LOGGING,
-    REQ_A816_MONITORING_ACTIVITIES,
-    REQ_A817_CLOCK_SYNC,
-    REQ_A818_PRIVILEGED_UTILITY_PROGRAMS,
-    REQ_A819_SOFTWARE_INSTALLATION,
-    REQ_A820_NETWORKS_SECURITY,
-    REQ_A821_NETWORK_SERVICES,
-    REQ_A822_NETWORK_SEGREGATION,
-    REQ_A823_WEB_FILTERING,
-    REQ_A826_APP_SECURITY_REQUIREMENTS,
-    REQ_A827_ARCHITECTURE_PRINCIPLES,
-    REQ_A828_SECURE_CODING,
-    REQ_A829_SECURITY_TESTING,
-    REQ_A830_OUTSOURCED_DEVELOPMENT,
-    REQ_A831_ENVIRONMENT_SEPARATION,
-    REQ_A832_CHANGE_MANAGEMENT,
-    REQ_A833_TEST_INFORMATION,
-    REQ_A834_AUDIT_TESTING_PROTECTION,
+    REQ_A83_ACCESS_MATRIX_REGISTER,
+    REQ_A83_APPLICABLE_SCOPE,
+    REQ_A83_PROGRAM_REVIEW,
+    # A.8.4 — technical_control (4-leaf; profile_fact trigger)
+    REQ_A84_BASELINE,
+    REQ_A84_PROCEDURE,
+    REQ_A84_MONITORING_LOG,
+    REQ_A84_REVIEW,
+    # A.8.5 — technical_control (4-leaf)
+    REQ_A85_BASELINE,
+    REQ_A85_PROCEDURE,
+    REQ_A85_AUTH_LOG,
+    REQ_A85_REVIEW,
+    # A.8.6 — technical_control (4-leaf)
+    REQ_A86_BASELINE,
+    REQ_A86_PROCEDURE,
+    REQ_A86_MONITORING_LOG,
+    REQ_A86_REVIEW,
+    # A.8.7 — op_process (4-leaf; review freshness=180)
+    REQ_A87_PROCEDURE,
+    REQ_A87_REGISTER,
+    REQ_A87_APPLICABLE_SCOPE,
+    REQ_A87_REVIEW,
+    # A.8.8 — op_process (4-leaf; review freshness=180)
+    REQ_A88_PROCEDURE,
+    REQ_A88_BACKLOG_REGISTER,
+    REQ_A88_APPLICABLE_SCOPE,
+    REQ_A88_REVIEW,
+    # A.8.9 — op_process (4-leaf)
+    REQ_A89_PROCEDURE,
+    REQ_A89_BASELINE_REGISTER,
+    REQ_A89_APPLICABLE_SCOPE,
+    REQ_A89_REVIEW,
+    # A.8.10 — op_process (4-leaf; disposal_record lifecycle-end)
+    REQ_A810_PROCEDURE,
+    REQ_A810_DISPOSAL_REGISTER,
+    REQ_A810_APPLICABLE_SCOPE,
+    REQ_A810_REVIEW,
+    # A.8.11 — op_process (4-leaf; tombstone consolidation; items preserved for SPEC_ART_25)
+    REQ_A811_PROCEDURE,
+    REQ_A811_REGISTER,
+    REQ_A811_APPLICABLE_SCOPE,
+    REQ_A811_REVIEW,
+    # A.8.12 — technical_control (4-leaf; review freshness=180)
+    REQ_A812_BASELINE,
+    REQ_A812_PROCEDURE,
+    REQ_A812_ALERT_LOG,
+    REQ_A812_REVIEW,
+    # A.8.13 — op_process (4-leaf; restore_test_record lifecycle-end)
+    REQ_A813_PROCEDURE,
+    REQ_A813_RESTORE_TEST_REGISTER,
+    REQ_A813_APPLICABLE_SCOPE,
+    REQ_A813_REVIEW,
+    # A.8.14 — technical_control (4-leaf)
+    REQ_A814_BASELINE,
+    REQ_A814_PROCEDURE,
+    REQ_A814_TEST_REGISTER,
+    REQ_A814_REVIEW,
+    # A.8.15 — op_process (4-leaf; review freshness=180)
+    REQ_A815_PROCEDURE,
+    REQ_A815_SOURCE_REGISTER,
+    REQ_A815_APPLICABLE_SCOPE,
+    REQ_A815_REVIEW,
+    # A.8.16 — op_process (4-leaf; review freshness=180)
+    REQ_A816_PROCEDURE,
+    REQ_A816_DETECTION_REGISTER,
+    REQ_A816_APPLICABLE_SCOPE,
+    REQ_A816_REVIEW,
+    # A.8.17 — op_process (4-leaf)
+    REQ_A817_PROCEDURE,
+    REQ_A817_SYNC_REGISTER,
+    REQ_A817_APPLICABLE_SCOPE,
+    REQ_A817_REVIEW,
+    # A.8.18 — policy_program (4-leaf)
+    REQ_A818_POLICY,
+    REQ_A818_REGISTER,
+    REQ_A818_APPLICABLE_SCOPE,
+    REQ_A818_REVIEW,
+    # A.8.19 — op_process (4-leaf)
+    REQ_A819_PROCEDURE,
+    REQ_A819_INSTALL_REGISTER,
+    REQ_A819_APPLICABLE_SCOPE,
+    REQ_A819_REVIEW,
+    # A.8.20 — policy_program (4-leaf)
+    REQ_A820_POLICY,
+    REQ_A820_REGISTER,
+    REQ_A820_APPLICABLE_SCOPE,
+    REQ_A820_REVIEW,
+    # A.8.21 — op_process (4-leaf; review freshness=180)
+    REQ_A821_PROCEDURE,
+    REQ_A821_SERVICE_REGISTER,
+    REQ_A821_APPLICABLE_SCOPE,
+    REQ_A821_REVIEW,
+    # A.8.22 — op_process (4-leaf)
+    REQ_A822_PROCEDURE,
+    REQ_A822_ZONE_REGISTER,
+    REQ_A822_APPLICABLE_SCOPE,
+    REQ_A822_REVIEW,
+    # A.8.23 — policy_program (4-leaf)
+    REQ_A823_POLICY,
+    REQ_A823_EVENT_REGISTER,
+    REQ_A823_APPLICABLE_SCOPE,
+    REQ_A823_REVIEW,
+    # A.8.24 — policy_program (4-leaf; tombstone consolidation; items preserved for SPEC_ART_32)
+    REQ_A824_POLICY,
+    REQ_A824_KEY_REGISTER,
+    REQ_A824_APPLICABLE_SCOPE,
+    REQ_A824_PROGRAM_REVIEW,
+    # A.8.25 — policy_program (4-leaf; tombstone consolidation; profile_fact trigger)
+    REQ_A825_POLICY,
+    REQ_A825_PROJECT_REGISTER,
+    REQ_A825_APPLICABLE_SCOPE,
+    REQ_A825_REVIEW,
+    # A.8.26 — op_process (4-leaf; profile_fact trigger)
+    REQ_A826_PROCEDURE,
+    REQ_A826_REGISTER,
+    REQ_A826_APPLICABLE_SCOPE,
+    REQ_A826_REVIEW,
+    # A.8.27 — policy_program (4-leaf; profile_fact trigger)
+    REQ_A827_POLICY,
+    REQ_A827_REGISTER,
+    REQ_A827_APPLICABLE_SCOPE,
+    REQ_A827_REVIEW,
+    # A.8.28 — op_process (4-leaf; profile_fact trigger)
+    REQ_A828_PROCEDURE,
+    REQ_A828_FINDING_REGISTER,
+    REQ_A828_APPLICABLE_SCOPE,
+    REQ_A828_REVIEW,
+    # A.8.29 — op_process (4-leaf; profile_fact trigger; review freshness=180)
+    REQ_A829_PROCEDURE,
+    REQ_A829_TEST_REGISTER,
+    REQ_A829_APPLICABLE_SCOPE,
+    REQ_A829_REVIEW,
+    # A.8.30 — op_process (4-leaf; profile_fact trigger)
+    REQ_A830_PROCEDURE,
+    REQ_A830_ENGAGEMENT_REGISTER,
+    REQ_A830_APPLICABLE_SCOPE,
+    REQ_A830_REVIEW,
+    # A.8.31 — op_process (4-leaf; profile_fact trigger)
+    REQ_A831_PROCEDURE,
+    REQ_A831_ENV_REGISTER,
+    REQ_A831_APPLICABLE_SCOPE,
+    REQ_A831_REVIEW,
+    # A.8.32 — op_process (4-leaf; change_record lifecycle-end)
+    REQ_A832_PROCEDURE,
+    REQ_A832_CHANGE_REGISTER,
+    REQ_A832_APPLICABLE_SCOPE,
+    REQ_A832_REVIEW,
+    # A.8.33 — op_process (4-leaf; profile_fact trigger)
+    REQ_A833_PROCEDURE,
+    REQ_A833_DATASET_REGISTER,
+    REQ_A833_APPLICABLE_SCOPE,
+    REQ_A833_REVIEW,
+    # A.8.34 — policy_program (4-leaf)
+    REQ_A834_POLICY,
+    REQ_A834_ENGAGEMENT_REGISTER,
+    REQ_A834_APPLICABLE_SCOPE,
+    REQ_A834_PROGRAM_REVIEW,
 
     # Universal — ISO 27001 Clauses 4-10 bulk curation (Phase B, 2026-05-22).
     # 4.3, 5.2, 6.1.2, 6.1.3, 9.2, 9.3 already exist above as the management-
@@ -9197,7 +11424,7 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_CLOUD_POSTURE_REVIEW,
     REQ_CLOUD_EXIT_MIGRATION,
     REQ_REMOTE_WORKING,
-    REQ_SECURE_DEVELOPMENT,
+    # REQ_SECURE_DEVELOPMENT (A.8.25) promoted to 4-leaf in batch 23 — see A.8 block above
 
     # Operational
     REQ_BREACH_NOTIFICATION,

@@ -155,9 +155,9 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260601_1218_b22.csv (99 cases — 21 core + 18
-  feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
-  5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
+- Most recent: results/eval_20260601_1430_b23_with_cases.csv (132 cases — 21 core
+  + 18 feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf
+  + 5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
   1 Phase B op_process evidence-handling + 1 Phase B op_process project-security
   + 1 Phase B op_process return-of-assets + 1 Phase B op_process labelling +
@@ -168,9 +168,10 @@ with d.session() as s:
   + 1 Phase B records_program PII-protection
   + 3 Phase B A.5.3x close-out 3-pack records_program
   + 7 Phase B A.6 People Controls 7-pack
-  + 14 Phase B A.7 Physical Controls 14-pack)
-- Score: 97/99 PASS, 0 WARN, 2 FAIL on 2026-06-01 (#24 + #25 known-stale).
-  Clean-run upper bound is 97/99. Some runs may dip due to #3/#21 stochasticity
+  + 14 Phase B A.7 Physical Controls 14-pack
+  + 33 Phase B A.8 Technological Controls 33-pack)
+- Score: 130/132 PASS, 0 WARN, 2 FAIL on 2026-06-01 (#24 + #25 known-stale).
+  Clean-run upper bound is 130/132. Some runs may dip due to #3/#21 stochasticity
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-

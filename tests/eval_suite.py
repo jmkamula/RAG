@@ -1533,6 +1533,397 @@ EVAL_CASES = [
     # enforced via authn_link (A.5.16) and identity_link (A.5.17) MUSTs.
     # MFA promoted SHOULD → MUST (modern baseline, no longer optional).
 
+    # ── Phase B A.8 Technological Controls 33-pack (commit 2026-06-01) ──
+    # Twenty-third Phase B bulk batch (THIRTY-THREE controls): all of A.8.1 +
+    # A.8.3 through A.8.34 promoted to 4-leaf — LARGEST batch yet by 2.4×
+    # (previous: A.7 14-pack). 132 new evidence requirements. A.8.2 was
+    # already 4-leaf from 2026-05-26 calibration; Style v2 aligned in this
+    # batch (locked by existing case #42; no new case here). Closes A.8 block.
+    #
+    # Spine mix: 8×policy_program (A.8.1/18/20/23/24/25/27/34) +
+    # 20×op_process (A.8.3/7/8/9/10/11/13/15/16/17/19/21/22/26/28/29/30/31/32/33) +
+    # 5×technical_control (A.8.4/5/6/12/14). A.8.10 + A.8.13 + A.8.32 carry
+    # lifecycle-end record variants (disposal / restore-test / change record).
+    #
+    # Tombstone consolidation: A.8.11/A.8.24/A.8.25 were single-leaf entries
+    # at upstream locations in document_requirements.py; tombstoned to stub
+    # comments and rebuilt in the consolidated A.8 block. Item-id preservation
+    # (referenced by SPECs): SPEC_ART_32 → A.8.24 (personal_data, pii_keys,
+    # at_rest, in_transit); SPEC_ART_25 → A.8.11 (scope, techniques,
+    # personal_data); SPEC_ART_25 comment → A.8.10 (scope_systems).
+    #
+    # Live postures across the 33 promotions: predominantly Comply (~28),
+    # with A.8.25 N/A (Arion does not develop external-facing software, A.8.25
+    # is profile_fact triggered, currently N/A) and a handful of OFI (A.8.1
+    # endpoints, A.8.19 software install). All 33 engine verdicts: NC 0/4
+    # (or 0/5 for A.8.24/34 if loader didn't prune orphan EvidenceRequirement
+    # nodes — see [[loader-er-orphan-cleanup-followup]] for the cleanup
+    # performed in this batch). All surface in Stage-2 (engine NC ≠ live
+    # Comply AND ≠ live OFI AND ≠ live N/A — only NC==NC suppresses).
+
+    EvalCase(
+        id=132,
+        query="pending engine verdict for A.8.1",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "endpoints"],
+        expected_refs=["A.8.1"], expected_type="posture_check",
+        must_contain=["A.8.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.1 (User endpoint devices) — policy_program 4-leaf: policy + endpoint_register + applicable_endpoint_scope + program_review (365d). FIRST control of A.8 33-pack (batch 23).",
+    ),
+
+    EvalCase(
+        id=131,
+        query="pending engine verdict for A.8.3",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "access_restriction"],
+        expected_refs=["A.8.3"], expected_type="posture_check",
+        must_contain=["A.8.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.3 (Information access restriction) — op_process 4-leaf: procedure + access_matrix_register + applicable_systems_scope + program_review (365d).",
+    ),
+
+    EvalCase(
+        id=130,
+        query="pending engine verdict for A.8.4",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "technical_control", "source_code", "profile_fact"],
+        expected_refs=["A.8.4"], expected_type="posture_check",
+        must_contain=["A.8.4", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.4 (Source code access) — technical_control 4-leaf: baseline + procedure + monitoring_log + review (180d). profile_fact trigger (org develops software).",
+    ),
+
+    EvalCase(
+        id=129,
+        query="pending engine verdict for A.8.5",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "technical_control", "secure_auth"],
+        expected_refs=["A.8.5"], expected_type="posture_check",
+        must_contain=["A.8.5", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.5 (Secure authentication) — technical_control 4-leaf: baseline + procedure + auth_log + review (180d). MFA universal/privileged + impossible-travel detection promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=128,
+        query="pending engine verdict for A.8.6",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "technical_control", "capacity"],
+        expected_refs=["A.8.6"], expected_type="posture_check",
+        must_contain=["A.8.6", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.6 (Capacity management) — technical_control 4-leaf: baseline + procedure + monitoring_log + review (365d). Auto-scaling promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=127,
+        query="pending engine verdict for A.8.7",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "malware"],
+        expected_refs=["A.8.7"], expected_type="posture_check",
+        must_contain=["A.8.7", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.7 (Malware protection) — op_process 4-leaf: procedure + coverage_register + applicable_scope + review (180d). Behavioural detection promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=126,
+        query="pending engine verdict for A.8.8",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "vuln_mgmt"],
+        expected_refs=["A.8.8"], expected_type="posture_check",
+        must_contain=["A.8.8", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.8 (Technical vulnerabilities) — op_process 4-leaf: procedure + vulnerability_backlog_register + applicable_scope + review (180d). SLA-breach flag is auditor-critical.",
+    ),
+
+    EvalCase(
+        id=125,
+        query="pending engine verdict for A.8.9",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "config_mgmt"],
+        expected_refs=["A.8.9"], expected_type="posture_check",
+        must_contain=["A.8.9", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.9 (Configuration management) — op_process 4-leaf: procedure + baseline_register + applicable_scope + review (365d).",
+    ),
+
+    EvalCase(
+        id=124,
+        query="pending engine verdict for A.8.10",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "data_deletion", "lifecycle_end"],
+        expected_refs=["A.8.10"], expected_type="posture_check",
+        must_contain=["A.8.10", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.10 (Information deletion) — op_process 4-leaf with disposal_record lifecycle-end: procedure + disposal_register + applicable_scope + review (365d). item:A.8.10:scope_systems referenced by SPEC_ART_25 comment — preserved.",
+    ),
+
+    EvalCase(
+        id=123,
+        query="pending engine verdict for A.8.11",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "data_masking", "tombstone_consolidation"],
+        expected_refs=["A.8.11"], expected_type="posture_check",
+        must_contain=["A.8.11", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.11 (Data masking) — op_process 4-leaf, tombstone consolidation from upstream REQ_DATA_MASKING: procedure + masking_register + applicable_scope + review (365d). Items preserved for SPEC_ART_25: scope, techniques, personal_data.",
+    ),
+
+    EvalCase(
+        id=122,
+        query="pending engine verdict for A.8.12",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "technical_control", "dlp"],
+        expected_refs=["A.8.12"], expected_type="posture_check",
+        must_contain=["A.8.12", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.12 (DLP) — technical_control 4-leaf: baseline + procedure + alert_log + review (180d).",
+    ),
+
+    EvalCase(
+        id=121,
+        query="pending engine verdict for A.8.13",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "backup", "lifecycle_end"],
+        expected_refs=["A.8.13"], expected_type="posture_check",
+        must_contain=["A.8.13", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.13 (Information backup) — op_process 4-leaf with restore_test_record lifecycle-end: procedure + restore_test_register + applicable_scope + review (365d). RPO-met flag auditor-critical (parallels A.5.30).",
+    ),
+
+    EvalCase(
+        id=120,
+        query="pending engine verdict for A.8.14",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "technical_control", "redundancy"],
+        expected_refs=["A.8.14"], expected_type="posture_check",
+        must_contain=["A.8.14", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.14 (Redundancy of IPF) — technical_control 4-leaf: baseline + procedure + failover_test_register + review (365d). Cross-AZ/region promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=119,
+        query="pending engine verdict for A.8.15",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "logging"],
+        expected_refs=["A.8.15"], expected_type="posture_check",
+        must_contain=["A.8.15", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.15 (Logging) — op_process 4-leaf: procedure + source_register + applicable_scope + review (180d). Log-integrity verification promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=118,
+        query="pending engine verdict for A.8.16",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "monitoring"],
+        expected_refs=["A.8.16"], expected_type="posture_check",
+        must_contain=["A.8.16", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.16 (Monitoring activities) — op_process 4-leaf: procedure + detection_register + applicable_scope + review (180d). SIEM use cases + threat-hunting promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=117,
+        query="pending engine verdict for A.8.17",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "clock_sync"],
+        expected_refs=["A.8.17"], expected_type="posture_check",
+        must_contain=["A.8.17", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.17 (Clock synchronisation) — op_process 4-leaf: procedure + sync_register + applicable_scope + review (365d).",
+    ),
+
+    EvalCase(
+        id=116,
+        query="pending engine verdict for A.8.18",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "privileged_utility"],
+        expected_refs=["A.8.18"], expected_type="posture_check",
+        must_contain=["A.8.18", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.18 (Privileged utility programs) — policy_program 4-leaf: policy + utility_register + applicable_scope + review (365d). Removal-where-unneeded promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=115,
+        query="pending engine verdict for A.8.19",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "software_install"],
+        expected_refs=["A.8.19"], expected_type="posture_check",
+        must_contain=["A.8.19", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.19 (Software installation on operational systems) — op_process 4-leaf: procedure + installation_register + applicable_scope + review (365d). Allowlisting promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=114,
+        query="pending engine verdict for A.8.20",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "networks"],
+        expected_refs=["A.8.20"], expected_type="posture_check",
+        must_contain=["A.8.20", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.20 (Networks security) — policy_program 4-leaf: policy + network_register + applicable_scope + review (365d). Zero-trust direction promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=113,
+        query="pending engine verdict for A.8.21",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "network_services"],
+        expected_refs=["A.8.21"], expected_type="posture_check",
+        must_contain=["A.8.21", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.21 (Security of network services) — op_process 4-leaf: procedure + service_register + applicable_scope + review (180d). A.5.22 supplier review linkage.",
+    ),
+
+    EvalCase(
+        id=112,
+        query="pending engine verdict for A.8.22",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "network_segregation"],
+        expected_refs=["A.8.22"], expected_type="posture_check",
+        must_contain=["A.8.22", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.22 (Network segregation) — op_process 4-leaf: procedure + zone_register + applicable_scope + review (365d). Micro-segmentation direction promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=111,
+        query="pending engine verdict for A.8.23",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "web_filtering"],
+        expected_refs=["A.8.23"], expected_type="posture_check",
+        must_contain=["A.8.23", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.23 (Web filtering) — policy_program 4-leaf: policy + filtering_event_register + applicable_scope + review (365d).",
+    ),
+
+    EvalCase(
+        id=110,
+        query="pending engine verdict for A.8.24",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "cryptography", "tombstone_consolidation", "spec_art_32"],
+        expected_refs=["A.8.24"], expected_type="posture_check",
+        must_contain=["A.8.24", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.24 (Use of cryptography) — policy_program 4-leaf, tombstone consolidation from upstream REQ_ENCRYPTION_POLICY: policy + key_register + applicable_scope + program_review (180d). Items preserved for SPEC_ART_32: personal_data, pii_keys, at_rest, in_transit. Key-strength + PQ direction noted.",
+    ),
+
+    EvalCase(
+        id=109,
+        query="pending engine verdict for A.8.25",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "secure_development", "tombstone_consolidation", "profile_fact"],
+        expected_refs=["A.8.25"], expected_type="posture_check",
+        must_contain=["A.8.25", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.25 (Secure development lifecycle) — policy_program 4-leaf, tombstone consolidation from upstream REQ_SECURE_DEVELOPMENT: policy + project_register + applicable_scope + review (180d). profile_fact trigger preserved (A.8.25 only applies when org develops software).",
+    ),
+
+    EvalCase(
+        id=108,
+        query="pending engine verdict for A.8.26",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "app_sec_req", "profile_fact"],
+        expected_refs=["A.8.26"], expected_type="posture_check",
+        must_contain=["A.8.26", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.26 (Application security requirements) — op_process 4-leaf: procedure + application_register + applicable_scope + review (365d). Threat-modelling promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=107,
+        query="pending engine verdict for A.8.27",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "arch_principles", "profile_fact"],
+        expected_refs=["A.8.27"], expected_type="posture_check",
+        must_contain=["A.8.27", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.27 (Secure architecture/engineering principles) — policy_program 4-leaf: policy + architecture_register + applicable_scope + review (365d). Threat-modelling integration promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=106,
+        query="pending engine verdict for A.8.28",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "secure_coding", "profile_fact"],
+        expected_refs=["A.8.28"], expected_type="posture_check",
+        must_contain=["A.8.28", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.28 (Secure coding) — op_process 4-leaf: procedure + finding_register + applicable_scope + review (365d). SCA/dependency scanning promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=105,
+        query="pending engine verdict for A.8.29",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "sec_testing", "profile_fact"],
+        expected_refs=["A.8.29"], expected_type="posture_check",
+        must_contain=["A.8.29", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.29 (Security testing in dev/acceptance) — op_process 4-leaf: procedure + test_register + applicable_scope + review (180d). Pen-test cadence promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=104,
+        query="pending engine verdict for A.8.30",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "outsourced_dev", "profile_fact"],
+        expected_refs=["A.8.30"], expected_type="posture_check",
+        must_contain=["A.8.30", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.30 (Outsourced development) — op_process 4-leaf: procedure + engagement_register + applicable_scope + review (365d). Maturity assessment promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=103,
+        query="pending engine verdict for A.8.31",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "env_separation", "profile_fact"],
+        expected_refs=["A.8.31"], expected_type="posture_check",
+        must_contain=["A.8.31", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.31 (Dev/test/prod environment separation) — op_process 4-leaf: procedure + environment_register + applicable_scope + review (365d). IaC promoted to MUST. No-prod-data spot-check in review.",
+    ),
+
+    EvalCase(
+        id=102,
+        query="pending engine verdict for A.8.32",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "change_mgmt", "lifecycle_end"],
+        expected_refs=["A.8.32"], expected_type="posture_check",
+        must_contain=["A.8.32", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.32 (Change management) — op_process 4-leaf with change_record lifecycle-end: procedure + change_register + applicable_scope + review (365d). CI/CD integration promoted to MUST.",
+    ),
+
+    EvalCase(
+        id=101,
+        query="pending engine verdict for A.8.33",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "test_info", "profile_fact"],
+        expected_refs=["A.8.33"], expected_type="posture_check",
+        must_contain=["A.8.33", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.33 (Test information) — op_process 4-leaf: procedure + test_dataset_register + applicable_scope + review (365d). DPIA-consideration MUST flagged personal_data.",
+    ),
+
+    EvalCase(
+        id=100,
+        query="pending engine verdict for A.8.34",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "audit_testing"],
+        expected_refs=["A.8.34"], expected_type="posture_check",
+        must_contain=["A.8.34", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks A.8.34 (Audit testing protection) — policy_program 4-leaf: policy + audit_engagement_register + applicable_scope + program_review (365d). Dedicated test accounts promoted to MUST. LAST control of A.8 33-pack (batch 23).",
+    ),
+
     # ── Phase B A.7 Physical Controls 14-pack (commit 2026-06-01) ──
     # Twenty-second Phase B bulk batch (FOURTEEN controls): all of A.7.1 through
     # A.7.14 promoted to 4-leaf — LARGEST batch yet (previous: A.6 7-pack). 56
