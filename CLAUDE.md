@@ -155,7 +155,7 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260601_0616_b17.csv (74 cases — 21 core + 18
+- Most recent: results/eval_20260601_0728_b18.csv (75 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
   5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
@@ -164,9 +164,10 @@ with d.session() as s:
   1 Phase B policy_program information-transfer + 1 Phase B op_process identity
   + 1 Phase B op_process authentication-info + 1 Phase B op_process incident-planning
   + 1 Phase B op_process disruption-security + 1 Phase B op_process ICT-readiness
-  + 1 Phase B records_program records-protection)
-- Score: 73/74 PASS, 0 WARN, 1 FAIL on 2026-06-01 (clean run; only #25 known-stale).
-  Some runs may dip to 61/74 or 62/74 due to #24
+  + 1 Phase B records_program records-protection
+  + 1 Phase B records_program PII-protection)
+- Score: 72/75 PASS, 0 WARN, 3 FAIL on 2026-06-01 (#3 stochastic + #24/#25 known-stale).
+  Clean-run upper bound is 74/75. Some runs may dip to 62/75 or 63/75 due to #24
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -289,6 +290,21 @@ with d.session() as s:
   proc_pii_overlay SHOULD encodes the ISO × GDPR Art.5.1.e
   integration at spec level — third ISO × GDPR integration leaf
   after pii_overlay on A.5.13 + legal_jurisdiction on A.5.14)
+- Case 75 locks in: Phase B records_program PII-protection (A.5.34;
+  natural pair with A.5.33 — A.5.33 protects records, A.5.34 protects
+  the PII subset; PARTIAL-EVIDENCE shape — third such case after #55
+  (A.5.15) + #60 (A.5.23), engine sits at OFI 1/4 because Arion's
+  legacy privacy-policy upload satisfies the policy leaf via
+  semantic matching but the three new leaves carry no evidence yet;
+  ITEM-ID PRESERVATION TWO-WAY — SPEC_ART_24 (controller responsibility)
+  references 5 A.5.34 items, SPEC_ART_25 (DPbD) references 4; combined
+  set of 7 unique items (overlap on :applicable_laws +
+  :security_controls_ref) ALL preserved; new transfer_restrictions
+  MUST encodes GDPR Chap V at MUST level — fourth ISO × GDPR
+  integration MUST after A.5.13 pii_overlay, A.5.14
+  legal_jurisdiction, A.5.33 proc_pii_overlay; new owner MUST + 4th
+  SHOULD pims_alignment encode the ISO/IEC 27701 PIMS extension
+  where in scope)
 - Prior known-stale cases (#2, #3, #4, #24, #25, #28) restored to PASS on
   2026-05-25 via Path A: replayed status_before from posture_status_log to
   revert the 27 Stage-1-driven finding mutations, and stripped the offending

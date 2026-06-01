@@ -4139,26 +4139,132 @@ REQ_A533_REVIEW = EvidenceRequirement(
     ],
 )
 
-REQ_A534_PII_PROTECTION = EvidenceRequirement(
+# ── Annex A.5.34 — PII protection — records_program spine (4-leaf) ────────────
+# Promoted 2026-06-01 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. records_program spine — natural pair
+# with A.5.33 ([[curation-phase-b-batch-17-2026-06-01]]). A.5.33 protects the
+# *records* (any record class — HR, finance, audit logs); A.5.34 protects
+# the *PII subset* of those records with privacy-law overlays. Shape:
+# policy/procedure (the privacy/PIMS policy with principles, controls, DSAR
+# rights, breach handling) + register (the PII processing inventory — what
+# PII categories, where, lawful basis per processing, retention, owner) +
+# scope (the upstream — applicable privacy laws, jurisdictions, data subject
+# categories, regulated activities) + annual review (freshness=365 — privacy
+# program review is the doctrine cadence; matches A.5.33's records-family
+# default and A.5.35/A.5.36's existing annual cadence).
+#
+# Item-id preservation: TWO DerivedSpecs reference A.5.34 items by id —
+#   1. SPEC_ART_25 (Data protection by design/default) uses:
+#      :applicable_laws, :pii_inventory, :retention_minimisation,
+#      :security_controls_ref
+#   2. SPEC_ART_24 (Responsibility of the controller) uses:
+#      :applicable_laws, :lawful_basis, :data_subject_rights,
+#      :security_controls_ref, :breach_handling
+# Combined: ALL 7 MUST item ids from the prior single-leaf must stay present
+# (overlap on :applicable_laws + :security_controls_ref). After promotion:
+# six MUSTs stay on the policy leaf (applicable_laws, lawful_basis,
+# data_subject_rights, retention_minimisation, security_controls_ref,
+# breach_handling — the policy IS where these concepts live); :pii_inventory
+# relocates to the register leaf (its natural home — it's the catalog of
+# processing activities, not a policy clause).
+# Authority: ISO 27002:2022 § 5.34 implementation guidance. Cross-link to
+# GDPR Art.5/24/25/30/32/33/34, ISO/IEC 27701 PIMS, EDPB Guidelines.
+
+REQ_A534_PRIVACY_PII_POLICY = EvidenceRequirement(
     id            = "req:A.5.34:privacy_and_pii_protection_policy",
     control_ref   = "A.5.34",
     standard_id   = "ISO27001:2022",
     evidence_type = "policy",
     title         = "Privacy and PII Protection Policy",
     trigger_type  = "universal",
-    description   = "A.5.34 requires identification of and compliance with privacy and PII protection requirements per applicable law, regulation, and contract. Evidence is a privacy policy (or PIMS-aligned policy) that names the law(s), the PII handled, and the controls",
+    description   = "A.5.34 requires identification of and compliance with privacy and PII protection requirements per applicable law, regulation, and contract. The policy (PIMS-aligned where ISO/IEC 27701 is in scope) names the applicable privacy laws, states the lawful basis discipline, enables data subject rights, sets retention/minimisation, links to the operational security controls applied to PII, and documents breach handling. The PII processing register, privacy applicability scope and periodic program review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.34:applicable_laws", "Applicable privacy laws identified (GDPR, regional equivalents)", "must", False, "A.5.34 — applicable laws and regulations"),
-        ChecklistItem("item:A.5.34:pii_inventory",   "PII categories or inventory referenced (links to GDPR Art.30 records)", "must", False, "A.5.34 — protection of PII"),
-        ChecklistItem("item:A.5.34:lawful_basis",    "Lawful basis identified per processing activity (where law requires)", "must", False, "A.5.34 — applicable laws"),
-        ChecklistItem("item:A.5.34:data_subject_rights","Data subject rights enabled (access, rectification, erasure, portability where applicable)", "must", False, "A.5.34 — preservation of privacy"),
-        ChecklistItem("item:A.5.34:retention_minimisation","Retention and data minimisation requirements", "must", False, "A.5.34 — preservation of privacy"),
-        ChecklistItem("item:A.5.34:security_controls_ref","References security controls applied to PII (links to A.8.x)", "must", False, "A.5.34 — protection of PII"),
-        ChecklistItem("item:A.5.34:breach_handling", "Breach handling reference (links to A.5.26 + GDPR Art.33)", "must", False, "A.5.34 — applicable laws"),
+        ChecklistItem("item:A.5.34:applicable_laws",      "Applicable privacy laws identified (GDPR, UK GDPR, regional equivalents, sectoral privacy laws — HIPAA, LGPD, PIPEDA, CCPA, etc.) — each named, not just 'privacy laws'",                                                          "must", False, "27002:5.34 — applicable laws and regulations"),
+        ChecklistItem("item:A.5.34:lawful_basis",         "Lawful basis discipline (lawful basis identified per processing activity — consent, contract, legal obligation, vital interests, public task, legitimate interests; where law requires)",                                          "must", False, "27002:5.34 — applicable laws / GDPR Art.6"),
+        ChecklistItem("item:A.5.34:data_subject_rights",  "Data subject rights enabled (access, rectification, erasure, portability, restriction, objection where applicable; intake path + response SLAs documented — cross-link to GDPR Art.12-22 and DSAR procedure)",                   "must", False, "27002:5.34 — preservation of privacy"),
+        ChecklistItem("item:A.5.34:retention_minimisation","Retention and data minimisation requirements (collect only what's necessary; retain only as long as needed; cross-link to A.5.33 records schedule and GDPR Art.5.1.c/e)",                                                        "must", False, "27002:5.34 — preservation of privacy / GDPR Art.5.1.c+e"),
+        ChecklistItem("item:A.5.34:security_controls_ref","References security controls applied to PII (links to A.8.x technical controls — encryption A.8.24, access control A.5.15/A.8.3, logging A.8.15/A.8.16, pseudonymisation A.8.11; satisfies GDPR Art.32 integration with Art.5.1.f)","must", False, "27002:5.34 — protection of PII / GDPR Art.32"),
+        ChecklistItem("item:A.5.34:breach_handling",      "Breach handling reference (cross-link to A.5.24/A.5.26 incident family + GDPR Art.33 supervisory-authority notification within 72h + GDPR Art.34 data-subject notification where high risk)",                                      "must", False, "27002:5.34 — applicable laws / GDPR Art.33-34"),
+        ChecklistItem("item:A.5.34:transfer_restrictions","Cross-border transfer discipline (which transfers happen, on what legal basis — SCCs / adequacy / BCRs / derogations; cross-link to A.5.14 transfer policy + GDPR Art.44-49)",                                                    "must", False, "27002:5.34 — preservation of privacy / GDPR Chap V"),
+        ChecklistItem("item:A.5.34:owner",                "Named owner of the privacy program (DPO where law requires; Privacy Officer or InfoSec lead where DPO is not mandatory; named individual, not a generic 'Privacy Team')",                                                        "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.34:dpia_process",    "PIA / DPIA process reference for high-risk processing", "should", False, "Pre-emptive risk handling"),
-        ChecklistItem("item:A.5.34:dpo_role",        "DPO or Privacy Officer role named", "should", False, "Accountability"),
+        ChecklistItem("item:A.5.34:dpia_process",      "PIA / DPIA process reference for high-risk processing (cross-link to GDPR Art.35 + EDPB Guidelines on DPIA — when to trigger, who reviews, supervisory-authority consultation path)",                                                "should", False, "Pre-emptive risk handling"),
+        ChecklistItem("item:A.5.34:dpo_role",          "DPO designation note (mandatory under GDPR Art.37 for public authorities, large-scale special-category processing, large-scale systematic monitoring; voluntary otherwise — captured here regardless of mandate)",                  "should", False, "Accountability"),
+        ChecklistItem("item:A.5.34:training_link",     "Cross-link to A.6.3 awareness — privacy/PII training for staff who process personal data (consent capture, DSAR handling, breach reporting)",                                                                                       "should", False, "Effectiveness"),
+        ChecklistItem("item:A.5.34:pims_alignment",    "ISO/IEC 27701 (PIMS) alignment note where applicable — extends the ISMS into a Privacy Information Management System; references the 27701 PII-controller / PII-processor controls applied",                                          "should", False, "27701 integration where in scope"),
+    ],
+)
+
+REQ_A534_PII_PROCESSING_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.34:pii_processing_register",
+    control_ref   = "A.5.34",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "PII Processing Register",
+    trigger_type  = "universal",
+    description   = "The operational catalog of every processing activity involving PII — what categories, whose, on what legal basis, retained how long, owned by whom, protected how, transferred where. Often shared with (or extended from) the GDPR Art.30 Records of Processing (RoPA) — same operational artefact serves both ISO A.5.34 and GDPR Art.30. Without this register, the privacy policy is theoretical; with it, A.5.34 / Art.30 / Art.25 / Art.5 can all be evidenced from a single source",
+    must_contain  = [
+        ChecklistItem("item:A.5.34:pii_inventory",         "PII categories enumerated per processing activity (basic identifiers, contact data, financial, health, biometric, special-category — GDPR Art.9 / sectoral equivalents); links to GDPR Art.30 RoPA",                                  "must", False, "27002:5.34 — protection of PII / GDPR Art.30.1.c"),
+        ChecklistItem("item:A.5.34:reg_data_subjects",     "Data subject categories per processing activity (customers, employees, prospects, minors, vulnerable groups — drives extra-safeguard decisions)",                                                                                    "must", False, "27002:5.34 — relevant / GDPR Art.30.1.c"),
+        ChecklistItem("item:A.5.34:reg_purposes",          "Processing purposes stated per activity (specific, explicit, legitimate — not 'business operations'; cross-link to GDPR Art.5.1.b purpose limitation)",                                                                              "must", False, "GDPR Art.30.1.b + Art.5.1.b"),
+        ChecklistItem("item:A.5.34:reg_lawful_basis",      "Lawful basis recorded per activity (matches the policy's discipline — consent / contract / legal obligation / vital interests / public task / legitimate interests, with special-category Art.9 basis where applicable)",            "must", False, "GDPR Art.6 + Art.9"),
+        ChecklistItem("item:A.5.34:reg_retention",         "Retention period per activity (concrete duration with start/end triggers; cross-link to A.5.33 records schedule — no arbitrary numbers)",                                                                                            "must", False, "GDPR Art.30.1.f + A.5.33 coherence"),
+        ChecklistItem("item:A.5.34:reg_owner_per_activity","Owner per processing activity (named role responsible for the activity — HR for employee processing, Sales for prospect processing, etc.)",                                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.5.34:reg_controls_applied", "Security controls applied per activity (encryption at rest/in transit, access control class, pseudonymisation where used — cross-link to A.8.x and GDPR Art.32)",                                                                    "must", False, "GDPR Art.30.1.g + Art.32"),
+        ChecklistItem("item:A.5.34:reg_transfers",        "Cross-border transfers per activity (destination jurisdictions + legal mechanism — SCCs / adequacy / BCRs / derogations; explicit 'none' where applicable)",                                                                          "must", False, "GDPR Art.30.1.e + Chap V"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.34:reg_ropa_link",          "Direct link to GDPR Art.30 RoPA register where the two are kept as one artefact — saves duplication, prevents drift",                                                                                                                "should", False, "Cross-control coherence"),
+        ChecklistItem("item:A.5.34:reg_dpia_status",        "DPIA status per activity (required / completed / not required with rationale) — drives high-risk processing reviews",                                                                                                                "should", False, "GDPR Art.35"),
+        ChecklistItem("item:A.5.34:reg_last_verified",      "Last-verified date per activity (proves the entry is current; missing dates surface stale activities at review)",                                                                                                                     "should", False, "27002:5.34 — maintained"),
+    ],
+)
+
+REQ_A534_PRIVACY_APPLICABILITY_SCOPE = EvidenceRequirement(
+    id            = "req:A.5.34:privacy_applicability_scope",
+    control_ref   = "A.5.34",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Privacy Applicability Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the policy and the register. Documents the privacy laws applicable to the organisation, the jurisdictions where data subjects live and where processing happens, the data subject categories the org touches, and the regulated activities that pull in sectoral privacy regimes. ISO 27002:2022 § 5.34 expects organisations to know which privacy regimes apply before claiming compliance — drift between scope and register is the audit failure mode this leaf catches",
+    must_contain  = [
+        ChecklistItem("item:A.5.34:scope_privacy_laws",      "Applicable privacy laws enumerated per jurisdiction (GDPR for EU/EEA, UK GDPR for UK, CCPA for California residents, LGPD for Brazil, PIPEDA for Canada, sectoral laws — HIPAA, GLBA, FERPA where relevant)",                       "must", False, "27002:5.34 — applicable laws + relevance"),
+        ChecklistItem("item:A.5.34:scope_jurisdictions",     "Jurisdictions covered (HQ + places of business + data subject residency + processing locations + transfer destinations — each may impose distinct privacy obligations)",                                                            "must", False, "27002:5.34 — relevance"),
+        ChecklistItem("item:A.5.34:scope_data_subjects",     "Data subject categories the organisation touches (customers, employees, prospects, suppliers' staff, minors, healthcare patients, financial-services clients — drives extra-safeguard rules)",                                       "must", False, "27002:5.34 — protection of PII"),
+        ChecklistItem("item:A.5.34:scope_regulated_activities","Regulated activities pulling in sectoral privacy regimes (healthcare → HIPAA, financial → GLBA/PSD2/DORA-privacy overlap, telco → ePrivacy, public sector → FERPA/government-records laws, advertising/profiling → ePrivacy)",      "must", False, "27002:5.34 — applicable laws"),
+        ChecklistItem("item:A.5.34:scope_controller_role",   "Controller vs Processor vs Joint Controller status per processing context (drives different obligation sets — Art.24-31 for controllers, Art.28 for processors, Art.26 for joint controllers)",                                       "must", False, "GDPR Art.24-28"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.34:scope_obligations_link",  "Cross-link to A.5.31 applicable-obligations scope — privacy laws are a subset; the two should share drivers and stay aligned",                                                                                                       "should", False, "Cross-control coherence"),
+        ChecklistItem("item:A.5.34:scope_change_drivers",    "Trigger list for re-scoping (new geography, new service line entering a regulated sector, M&A bringing new data subject categories, new transfer destinations)",                                                                     "should", False, "Currency"),
+    ],
+)
+
+REQ_A534_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.34:privacy_program_review",
+    control_ref     = "A.5.34",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Privacy and PII Protection Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that the policy still matches applicable law, the register reflects current processing reality, DSARs are being responded to within SLA, breaches were handled per Art.33/34, transfers still have valid legal mechanisms, and DPIAs are completed where required. ISO 27002:2022 § 5.34 + GDPR's accountability principle (Art.5.2 + Art.24) expect the privacy program to be MAINTAINED — drift between policy and reality is the audit failure mode this leaf catches. Annual cadence (freshness=365) matches A.5.35 independent review + A.5.36 compliance review + A.5.33 records-family default",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.34:rev_date",               "Review date within the planned interval (typically within 12 months of last review)",                                                                                                                                                "must", False, "27002:5.34 — maintained / GDPR Art.5.2"),
+        ChecklistItem("item:A.5.34:rev_reviewer",           "Reviewer identity and role recorded (DPO or Privacy Officer + InfoSec lead jointly; legal-counsel sign-off where law has shifted materially)",                                                                                       "must", False, "Accountability"),
+        ChecklistItem("item:A.5.34:rev_register_check",     "Per-activity outcome (verified / amended / retired / new added) with lawful-basis-still-valid and retention-still-adequate confirmation",                                                                                            "must", False, "27002:5.34 — kept current"),
+        ChecklistItem("item:A.5.34:rev_scope_check",        "Cross-check against the privacy applicability scope — any new jurisdiction, regulated activity, data subject category that should add register entries",                                                                              "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.5.34:rev_dsar_metrics",       "DSAR metrics review (volumes, response times against SLA, refusal/extension rates, complaints to supervisory authority) — operational privacy health",                                                                                 "must", False, "GDPR Art.12.3 + Art.15-22 compliance"),
+        ChecklistItem("item:A.5.34:rev_breach_history",     "Breach history for the period (every personal-data breach in scope confirmed handled per Art.33 72h notification + Art.34 data-subject notification where required; lessons fed into A.5.27)",                                       "must", False, "GDPR Art.33-34"),
+        ChecklistItem("item:A.5.34:rev_transfer_validity",  "Transfer-mechanism validity check (SCCs current edition, adequacy decisions still standing — e.g. Schrems shifts, BCRs unchanged) — flag stale mechanisms for remediation",                                                            "must", False, "GDPR Chap V"),
+        ChecklistItem("item:A.5.34:rev_dpia_review",        "DPIA completion status reviewed (any high-risk processing without a completed DPIA flagged; DPIAs older than 24 months refreshed where processing material to lifecycle changed)",                                                    "must", False, "GDPR Art.35"),
+        ChecklistItem("item:A.5.34:rev_register_update",    "Changes propagated back to the live register with reference to this review",                                                                                                                                                          "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.34:rev_ad_hoc_triggers", "Ad-hoc review triggers listed (Schrems-style adequacy shift, new regulator enforcement action in scope sector, M&A, large-scale breach in industry)",                                                                                  "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.34:rev_next_date",       "Next planned review date stated",                                                                                                                                                                                                       "should", False, "Planning"),
     ],
 )
 
@@ -7193,7 +7299,13 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A533_RECORDS_SCHEDULE_REGISTER,
     REQ_A533_RECORDS_CATEGORIES_SCOPE,
     REQ_A533_REVIEW,
-    REQ_A534_PII_PROTECTION,
+    # A.5.34 — 4-leaf records_program (2026-06-01; natural pair with A.5.33;
+    # ALL 7 prior MUST item-ids preserved for SPEC_ART_24 + SPEC_ART_25
+    # derivations; review freshness=365)
+    REQ_A534_PRIVACY_PII_POLICY,
+    REQ_A534_PII_PROCESSING_REGISTER,
+    REQ_A534_PRIVACY_APPLICABILITY_SCOPE,
+    REQ_A534_PROGRAM_REVIEW,
     REQ_A535_INDEPENDENT_REVIEW,
     REQ_A536_COMPLIANCE_REVIEW,
     REQ_A537_OPERATING_PROCEDURES,

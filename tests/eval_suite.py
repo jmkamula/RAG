@@ -1533,6 +1533,77 @@ EVAL_CASES = [
     # enforced via authn_link (A.5.16) and identity_link (A.5.17) MUSTs.
     # MFA promoted SHOULD → MUST (modern baseline, no longer optional).
 
+    # ── Phase B records_program PII-protection (commit 2026-06-01) ──
+    # Eighteenth Phase B bulk batch (single-control): A.5.34 promoted to
+    # records_program 4-leaf — privacy_and_pii_protection_policy (the
+    # PIMS-aligned umbrella policy, preserves the prior single-leaf id) +
+    # pii_processing_register (per-activity PII catalog, often shared with
+    # GDPR Art.30 RoPA) + privacy_applicability_scope (which privacy laws
+    # apply, jurisdictions, data subject categories, controller/processor
+    # status) + privacy_program_review (365d). Natural pair with A.5.33
+    # (batch 17) — A.5.33 protects the records, A.5.34 protects the PII
+    # subset of those records with privacy-law overlays. Engine sits at
+    # OFI 1/4 — Arion's existing privacy policy upload satisfies the
+    # policy leaf via the matcher's semantic recognition; the three new
+    # leaves (register + scope + review) carry no evidence yet. PARTIAL-
+    # EVIDENCE shape — third such case after A.5.15 (#55) and A.5.23 (#60).
+    # Item-id preservation TWO-WAY: SPEC_ART_24 + SPEC_ART_25 reference 7
+    # A.5.34 items by id; all 7 preserved (six stay on the policy leaf
+    # where the concepts live, :pii_inventory relocates to the register
+    # leaf — its natural home as the operational catalog).
+
+    EvalCase(
+        id=75,
+        query="pending engine verdict for A.5.34",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "pii_protection", "partial_evidence"],
+        expected_refs=["A.5.34"],
+        expected_type="posture_check",
+        # Like cases 55 (A.5.15) and 60 (A.5.23), A.5.34 sits at OFI 1/4 —
+        # the policy leaf is satisfied via legacy upload, the three new
+        # leaves are unsatisfied. The 1/4 reason text PROVES the 4-leaf
+        # promotion AND the partial-evidence path.
+        must_contain=["A.5.34", "engine proposes", "'OFI'", "1/4 children satisfied"],
+        must_not_contain=[
+            "0/4 children satisfied",
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.34 (Privacy and PII protection) Phase B promotion to "
+            "records_program 4-leaf: privacy_and_pii_protection_policy "
+            "(preserves the prior single-leaf id; carries 6 of the 7 "
+            "preserved item-ids — applicable_laws, lawful_basis, "
+            "data_subject_rights, retention_minimisation, "
+            "security_controls_ref, breach_handling) + "
+            "pii_processing_register (carries the seventh preserved id, "
+            ":pii_inventory; per-activity PII catalog, often shared with "
+            "GDPR Art.30 RoPA — same operational artefact serves both) + "
+            "privacy_applicability_scope (the upstream — applicable "
+            "privacy laws, jurisdictions, data subject categories, "
+            "regulated activities, controller/processor status) + "
+            "privacy_program_review (freshness 365d, matches A.5.33 "
+            "records-family default + A.5.35/A.5.36 annual review "
+            "cadence). PARTIAL-EVIDENCE shape: Arion's existing privacy "
+            "policy upload satisfies the policy leaf via semantic "
+            "matching, the three new leaves are unsatisfied → engine "
+            "proposes OFI at 1/4. Third partial-evidence case after "
+            "A.5.15 (#55, policy_program) and A.5.23 (#60, "
+            "operational_process). Natural pair with A.5.33 (batch 17). "
+            "Item-id preservation TWO-WAY critical — SPEC_ART_25 "
+            "(Art.25 DPbD) references 4 A.5.34 items by id, SPEC_ART_24 "
+            "(Art.24 controller responsibility) references 5; combined "
+            "set of 7 (overlap on :applicable_laws + "
+            ":security_controls_ref) all preserved across the promotion. "
+            "Fourth ISO × GDPR integration MUST family — new "
+            "transfer_restrictions MUST encodes GDPR Chap V at MUST "
+            "level (joins A.5.14 legal_jurisdiction, A.5.33 PII overlay, "
+            "A.5.13 pii_overlay). Two new MUSTs (transfer_restrictions, "
+            "owner) plus :pims_alignment SHOULD encode the ISO/IEC "
+            "27701 PIMS extension where in scope."
+        ),
+    ),
+
     # ── Phase B records_program records-protection (commit 2026-06-01) ──
     # Seventeenth Phase B bulk batch (single-control): A.5.33 promoted to
     # records_program 4-leaf — records_protection_policy (procedure) +
