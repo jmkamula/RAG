@@ -98,6 +98,36 @@ def _delete_orphan_items(session, dry_run: bool) -> int:
     return summary.counters.nodes_deleted
 
 
+def _delete_orphan_ers(session, valid_ids: set, dry_run: bool) -> int:
+    """Delete EvidenceRequirement nodes whose id is not in the current
+    loader's valid set. Surfaces when a leaf's id field is renamed during
+    a promotion (e.g. single-leaf REQ_X.id 'req:A.8.24:encryption_policy'
+    → multi-leaf REQ_X824_POLICY.id 'req:A.8.24:cryptography_policy').
+
+    The valid set must include BOTH ALL_EVIDENCE_REQUIREMENTS ids AND each
+    DerivedSpec's direct_evidence ids — the loader writes both to Neo4j,
+    so both must be honoured here.
+
+    Run BEFORE _delete_orphan_items so newly-orphaned ChecklistItems
+    (whose only parent ER was the orphan being deleted) get swept up by
+    the next pass.
+
+    Returns the number of EvidenceRequirement nodes deleted.
+    """
+    if dry_run:
+        return session.run("""
+            MATCH (r:EvidenceRequirement)
+            WHERE NOT r.id IN $valid_ids
+            RETURN count(r) AS n
+        """, valid_ids=list(valid_ids)).single()["n"]
+    summary = session.run("""
+        MATCH (r:EvidenceRequirement)
+        WHERE NOT r.id IN $valid_ids
+        DETACH DELETE r
+    """, valid_ids=list(valid_ids)).consume()
+    return summary.counters.nodes_deleted
+
+
 def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
     from neo4j import GraphDatabase
     driver = GraphDatabase.driver(uri, auth=(user, password))
@@ -435,7 +465,12 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                   f"{len(ds.derives_from)} deps + {len(ds.direct_evidence)} direct  "
                   f"{ds.title}")
 
-        # ── Final sweep: delete ChecklistItems with no remaining leaf edges ──
+        # ── Final sweep: delete orphan EvidenceRequirements first, then items ──
+        # ER orphans surface when leaf ids are renamed during promotions.
+        # See [[loader-er-orphan-cleanup-followup]] for the design rationale.
+        valid_ev_ids = {r.id for r in ALL_EVIDENCE_REQUIREMENTS} \
+                     | {req.id for ds in ALL_DERIVED_SPECS for req in ds.direct_evidence}
+        pruned_ers   = _delete_orphan_ers(s, valid_ev_ids, dry_run)
         pruned_items = _delete_orphan_items(s, dry_run)
 
     driver.close()
@@ -444,10 +479,11 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
     print(f"\n{'─'*55}")
     if dry_run:
         print("[DRY RUN] No changes written to Neo4j")
-        if pruned_must_edges or pruned_should_edges or pruned_items:
+        if pruned_must_edges or pruned_should_edges or pruned_items or pruned_ers:
             print(f"[DRY RUN] Would prune: "
                   f"{pruned_must_edges} MUST_CONTAIN + "
                   f"{pruned_should_edges} SHOULD_CONTAIN edges, "
+                  f"{pruned_ers} orphan EvidenceRequirements, "
                   f"{pruned_items} orphan ChecklistItems")
     else:
         print(f"✓ EvidenceRequirement nodes:    {total_reqs}")
@@ -456,9 +492,10 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
         print(f"✓ REQUIRES_EVIDENCE rels:       {total_rels}")
         print(f"✓ DerivedSpec MERGE calls:      {total_derived_specs}")
         print(f"✓ DERIVES_FROM rels:            {total_derives_from}")
-        if pruned_must_edges or pruned_should_edges or pruned_items:
+        if pruned_must_edges or pruned_should_edges or pruned_items or pruned_ers:
             print(f"✓ Pruned stale edges:           "
                   f"{pruned_must_edges} MUST + {pruned_should_edges} SHOULD")
+            print(f"✓ Pruned orphan ERs:            {pruned_ers}")
             print(f"✓ Pruned orphan items:          {pruned_items}")
         else:
             print(f"✓ Pruned stale edges:           0  (clean state)")
