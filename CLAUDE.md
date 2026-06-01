@@ -155,7 +155,7 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260601_0728_b18.csv (75 cases — 21 core + 18
+- Most recent: results/eval_20260601_0829_b19.csv (78 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
   5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
@@ -165,9 +165,10 @@ with d.session() as s:
   + 1 Phase B op_process authentication-info + 1 Phase B op_process incident-planning
   + 1 Phase B op_process disruption-security + 1 Phase B op_process ICT-readiness
   + 1 Phase B records_program records-protection
-  + 1 Phase B records_program PII-protection)
-- Score: 72/75 PASS, 0 WARN, 3 FAIL on 2026-06-01 (#3 stochastic + #24/#25 known-stale).
-  Clean-run upper bound is 74/75. Some runs may dip to 62/75 or 63/75 due to #24
+  + 1 Phase B records_program PII-protection
+  + 3 Phase B A.5.3x close-out 3-pack records_program)
+- Score: 76/78 PASS, 0 WARN, 2 FAIL on 2026-06-01 (#21 stochastic + #25 known-stale).
+  Clean-run upper bound is 77/78. Some runs may dip to 65/78 or 66/78 due to #24
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -290,6 +291,28 @@ with d.session() as s:
   proc_pii_overlay SHOULD encodes the ISO × GDPR Art.5.1.e
   integration at spec level — third ISO × GDPR integration leaf
   after pii_overlay on A.5.13 + legal_jurisdiction on A.5.14)
+- Cases 76-78 lock in: Phase B A.5.3x close-out 3-pack records_program
+  (A.5.35/A.5.36/A.5.37; FIRST MULTI-CONTROL BATCH SINCE BATCH 4 —
+  pattern locked in, batches can bundle conceptually-related controls;
+  closes the A.5.3x review/procedure block and the full A.5
+  organisational controls arc that started with case #46 batch 1.
+  A.5.35 = review-record-as-primary variant same shape as A.5.22
+  supplier review (independent_review_report + schedule_register +
+  program_meta_review + finding_response_register lifecycle-end);
+  A.5.36 = batch-mate of A.5.35 (compliance_review_record + schedule
+  + program_meta_review + nonconformity_register lifecycle-end —
+  reviews COMPLIANCE WITH policies vs A.5.35's review of the FUNCTION);
+  A.5.37 = register-as-primary variant same shape as A.5.9 asset
+  register (operating_procedures_register + maintenance_procedure +
+  applicable_facilities_scope + program_review). Per-record
+  freshness=365 on A.5.35/A.5.36 primary leaves. New
+  significant_change_check MUST on A.5.35 enforces 27002 §5.35's
+  "or on significant change" explicit consideration. New
+  pgm_method_review MUST on A.5.36 audits "rubber-stamping" failure
+  mode. New rev_accuracy_sample MUST on A.5.37 prevents "documented
+  but wrong" drift. Cross-control links: A.5.35 ↔ A.5.36 finding
+  registers can share infrastructure; A.5.37 → A.5.9 asset register;
+  A.5.37 → A.5.24/26/29/30 incident + DR procedures)
 - Case 75 locks in: Phase B records_program PII-protection (A.5.34;
   natural pair with A.5.33 — A.5.33 protects records, A.5.34 protects
   the PII subset; PARTIAL-EVIDENCE shape — third such case after #55

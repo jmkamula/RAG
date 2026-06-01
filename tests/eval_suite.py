@@ -1533,6 +1533,138 @@ EVAL_CASES = [
     # enforced via authn_link (A.5.16) and identity_link (A.5.17) MUSTs.
     # MFA promoted SHOULD → MUST (modern baseline, no longer optional).
 
+    # ── Phase B A.5.3x close-out 3-pack (commit 2026-06-01) ──
+    # Nineteenth Phase B bulk batch (three-control): A.5.35 + A.5.36 + A.5.37
+    # promoted to 4-leaf — closes the A.5.3x review/procedure block. First
+    # multi-control batch since batch 4 (incident triage 3-pack) — pattern
+    # is locked in, batches can bundle conceptually-related controls.
+    # All three are records_program spine variants:
+    #   A.5.35  review-record-as-primary (same shape as A.5.22): independent_
+    #           review_report + review_schedule_register + program_meta_review
+    #           + finding_response_register
+    #   A.5.36  review-record-as-primary (batch-mate of A.5.35): compliance_
+    #           review_record + compliance_review_schedule + compliance_
+    #           program_meta_review + nonconformity_register
+    #   A.5.37  register-as-primary (same shape as A.5.9 asset register):
+    #           operating_procedures_register + procedures_maintenance_
+    #           procedure + applicable_facilities_scope + procedures_
+    #           program_review
+    # Per-record freshness=365 on A.5.35 + A.5.36 primary leaves (each report/
+    # record has its own currency); A.5.37 has freshness on the review leaf
+    # only (the register is operational, not annual). Cross-control links
+    # locked: A.5.35 ↔ A.5.36 finding registers share infrastructure
+    # (fr_cross_review_link SHOULDs on both); A.5.37 → A.5.9 asset register
+    # via scope_asset_link MUST; A.5.37 cross-links to A.5.24/A.5.26/A.5.29/
+    # A.5.30 incident + DR procedures via related_controls_link SHOULD.
+
+    EvalCase(
+        id=78,
+        query="pending engine verdict for A.5.37",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "operating_procedures"],
+        expected_refs=["A.5.37"],
+        expected_type="posture_check",
+        must_contain=["A.5.37", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.37 (Documented operating procedures) Phase B "
+            "promotion to records_program 4-leaf register-as-primary "
+            "variant — same shape as A.5.9 asset register from batch 1. "
+            "Leaves: operating_procedures_register (preserves prior "
+            "single-leaf id) + procedures_maintenance_procedure (how "
+            "procedures are created/reviewed/updated/retired) + "
+            "applicable_facilities_scope (which facilities/systems need "
+            "a procedure — drives 'every facility represented' check) "
+            "+ procedures_program_review (freshness=365d). Live posture "
+            "flips from Comply (hand-entered finding 'Policies and "
+            "process documents including privacy procedures are "
+            "available and ac...') to engine-proposed NC at 0/4 — the "
+            "narrative claim doesn't satisfy the four-leaf register/"
+            "procedure/scope/review shape. New audience_per_procedure "
+            "MUST encodes 'personnel who need them' explicitly. New "
+            "emergency_flag SHOULD highlights procedures where stale = "
+            "catastrophic (DR, IR). New rev_accuracy_sample MUST is "
+            "the bite that prevents 'documented but wrong' drift — "
+            "reviewer must actually walk through a sample procedure "
+            "end-to-end. Closes the A.5.3x review/procedure block — "
+            "A.5.37 is the final A.5 organisational control, ending "
+            "the Phase B A.5 arc that started with case #46 batch 1."
+        ),
+    ),
+
+    EvalCase(
+        id=77,
+        query="pending engine verdict for A.5.36",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "compliance_review"],
+        expected_refs=["A.5.36"],
+        expected_type="posture_check",
+        must_contain=["A.5.36", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.36 (Compliance review records) Phase B promotion "
+            "to records_program 4-leaf review-record-as-primary variant — "
+            "batch-mate of A.5.35 (same shape, different scope: A.5.35 "
+            "reviews the InfoSec FUNCTION independently; A.5.36 reviews "
+            "COMPLIANCE WITH policies/rules/standards). Leaves: "
+            "compliance_review_record (preserves prior single-leaf id; "
+            "per-cycle review record with freshness=365) + compliance_"
+            "review_schedule (full catalogue with cadence per item) + "
+            "compliance_program_meta_review (annual self-check; new "
+            "pgm_method_review MUST — are reviews surfacing real NCs "
+            "or rubber-stamping?) + nonconformity_register (per-NC "
+            "lifecycle with root cause for systemic improvement). Live "
+            "posture flips from Comply (empty gap_description hand-"
+            "entered) to engine-proposed NC at 0/4. Cross-control link "
+            "A.5.36 ↔ A.5.35 — finding registers can be one artefact "
+            "(nc_cross_review_link SHOULD + fr_cross_review_link "
+            "SHOULD on A.5.35 — symmetric)."
+        ),
+    ),
+
+    EvalCase(
+        id=76,
+        query="pending engine verdict for A.5.35",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "independent_review"],
+        expected_refs=["A.5.35"],
+        expected_type="posture_check",
+        must_contain=["A.5.35", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.35 (Independent review of information security) "
+            "Phase B promotion to records_program 4-leaf review-record-"
+            "as-primary variant — SAME SHAPE as A.5.22 supplier review "
+            "(commit 2026-05-31, batch 3). Leaves: independent_review_"
+            "report (preserves prior single-leaf id; per-report record "
+            "with freshness=365) + review_schedule_register (the "
+            "calendar of upcoming reviews with cadence + reviewer "
+            "selection + scope areas) + review_program_meta_review "
+            "(annual self-check; new pgm_independence_check MUST audits "
+            "that reviewers ACTUALLY met independence criteria — "
+            "rubber-stamping fail mode) + finding_response_register "
+            "(per-finding lifecycle with closure evidence; lifecycle-"
+            "end slot). Live posture flips from Comply (hand-entered "
+            "finding 'Independent review program implemented through "
+            "annual external audits and intern...') to engine-proposed "
+            "NC at 0/4 — narrative claim doesn't satisfy the four-leaf "
+            "shape. New significant_change_check MUST enforces 27002 "
+            "§5.35's 'or on significant change' explicit consideration. "
+            "First control with a finding_response_register lifecycle-"
+            "end variant (analogous to A.5.22's change_response_log + "
+            "A.5.25's triage_decision + A.5.28's disposal_record)."
+        ),
+    ),
+
     # ── Phase B records_program PII-protection (commit 2026-06-01) ──
     # Eighteenth Phase B bulk batch (single-control): A.5.34 promoted to
     # records_program 4-leaf — privacy_and_pii_protection_policy (the

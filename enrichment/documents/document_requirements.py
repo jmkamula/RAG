@@ -4268,70 +4268,319 @@ REQ_A534_PROGRAM_REVIEW = EvidenceRequirement(
     ],
 )
 
-REQ_A535_INDEPENDENT_REVIEW = EvidenceRequirement(
-    id            = "req:A.5.35:independent_review_report",
+# ── Annex A.5.35 — Independent review of InfoSec — records_program spine
+#                   review-record-as-primary (4-leaf) ─────────────────────────
+# Promoted 2026-06-01 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. records_program spine adapted as
+# review-record-as-primary variant — same shape as A.5.22 supplier review
+# ([[curation-phase-b-batch-3-2026-05-31]]). Shape: review_record (the
+# independent review report) + schedule_register (the calendar of planned
+# reviews) + program_meta_review (annual self-check of the review program)
+# + finding_response_register (per-finding lifecycle from raised → response
+# → closed). Per-report freshness=365 preserved on the primary leaf.
+# Authority: ISO 27002:2022 § 5.35 — reviewed independently at planned
+# intervals or on significant change; covers people, processes, technology.
+
+REQ_A535_INDEPENDENT_REVIEW_REPORT = EvidenceRequirement(
+    id             = "req:A.5.35:independent_review_report",
+    control_ref    = "A.5.35",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "audit_report",
+    title          = "Independent Information Security Review Report",
+    trigger_type   = "universal",
+    description    = "A.5.35 requires the organisation's approach to information security to be reviewed independently at planned intervals (or on significant change). Each review report evidences the activity for one review cycle: reviewer independence demonstrated, scope covering people/processes/technology, findings recorded with severity, recommendations stated, management response documented. The review schedule register, program meta-review and finding-response register are sibling leaves",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.35:independence",          "Independence of the reviewer demonstrated (separate function, external auditor, or rotating internal reviewer with no operational ownership of the reviewed areas)",                              "must", False, "27002:5.35 — reviewed independently"),
+        ChecklistItem("item:A.5.35:scope",                 "Scope covers people, processes, and technologies (not just one dimension — auditor-defensible reviews must touch all three)",                                                                  "must", False, "27002:5.35 — including people, processes and technologies"),
+        ChecklistItem("item:A.5.35:review_date",           "Review date and period covered (start/end of the review activity + observation window)",                                                                                                          "must", False, "27002:5.35 — planned intervals"),
+        ChecklistItem("item:A.5.35:findings",              "Findings listed with severity (concrete, evidenced, traceable to the underlying observation — not just generic recommendations)",                                                                "must", False, "27002:5.35 — review"),
+        ChecklistItem("item:A.5.35:recommendations",       "Recommendations stated (with priority and owner suggestion — actionable, not abstract)",                                                                                                          "must", False, "27002:5.35 — review"),
+        ChecklistItem("item:A.5.35:management_response",   "Management response to findings (accept / remediate / transfer / risk-accept with rationale); response is documented IN the report, not deferred",                                                "must", False, "Closes the loop"),
+        ChecklistItem("item:A.5.35:significant_change_check","Significant-change trigger check stated (whether this review was triggered by planned cadence OR by a significant change — M&A, major architectural shift, regulatory upheaval, major breach)","must", False, "27002:5.35 — planned intervals or on significant change"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.35:reviewer_credentials",  "External auditor accreditation or internal reviewer qualifications stated (CISA, ISO 27001 LA/LI, sector-specific credentials)",                                                                "should", False, "Reviewer credibility"),
+        ChecklistItem("item:A.5.35:prior_review_compare",  "Comparison or movement from prior review's findings (open / closed / aged) — proves the program returns value across cycles",                                                                    "should", False, "Progress tracking"),
+        ChecklistItem("item:A.5.35:executive_summary",     "Executive summary section addressed to leadership (audit-defensible communication of overall posture, not just the detailed findings list)",                                                     "should", False, "Stakeholder communication"),
+    ],
+)
+
+REQ_A535_REVIEW_SCHEDULE_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.35:review_schedule_register",
     control_ref   = "A.5.35",
     standard_id   = "ISO27001:2022",
-    evidence_type = "audit_report",
-    title         = "Independent Information Security Review Report",
+    evidence_type = "register",
+    title         = "Independent Review Schedule Register",
     trigger_type  = "universal",
-    description   = "A.5.35 requires the organization's approach to information security to be reviewed independently at planned intervals (or on significant change). Evidence is an independent review report covering people, process, and technology",
-    freshness_days = 365,
+    description   = "A.5.35 expects reviews at planned intervals — without a schedule, 'planned' becomes 'when leadership asks for it'. The schedule register is the calendar of upcoming independent reviews: which scope areas, what cadence, which reviewer or selection mechanism, last review date, next review date",
     must_contain  = [
-        ChecklistItem("item:A.5.35:independence",    "Independence of the reviewer demonstrated (separate function, external auditor, or rotating internal reviewer)", "must", False, "A.5.35 — reviewed independently"),
-        ChecklistItem("item:A.5.35:scope",           "Scope covers people, processes, and technologies", "must", False, "A.5.35 — including people, processes and technologies"),
-        ChecklistItem("item:A.5.35:review_date",     "Review date and period covered", "must", False, "A.5.35 — planned intervals"),
-        ChecklistItem("item:A.5.35:findings",        "Findings listed with severity", "must", False, "A.5.35 — review"),
-        ChecklistItem("item:A.5.35:recommendations", "Recommendations stated", "must", False, "A.5.35 — review"),
-        ChecklistItem("item:A.5.35:management_response","Management response to findings (accept, remediate, transfer)", "must", False, "Closes the loop"),
+        ChecklistItem("item:A.5.35:sch_cadence",           "Planned cadence stated (annual is the doctrine baseline; risk-tier or scope-area may drive tighter cadences for hot domains)",                                       "must", False, "27002:5.35 — planned intervals"),
+        ChecklistItem("item:A.5.35:sch_scope_areas",       "Scope areas planned (the ISMS may be reviewed end-to-end annually OR sliced across cycles — both acceptable; the slicing is documented)",                              "must", False, "27002:5.35 — including people, processes and technologies"),
+        ChecklistItem("item:A.5.35:sch_reviewer_selection","Reviewer selection mechanism (external rotation, internal independence criteria, audit-firm framework agreement) — drives the independence guarantee",                 "must", False, "27002:5.35 — reviewed independently"),
+        ChecklistItem("item:A.5.35:sch_last_review",       "Last review date recorded (proves the schedule is anchored in reality, not aspirational)",                                                                              "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.35:sch_next_review",       "Next review date stated (per scope area where sliced)",                                                                                                                "must", False, "Planning"),
+        ChecklistItem("item:A.5.35:sch_owner",             "Named owner accountable for executing the schedule (typically CISO / InfoSec lead with management sponsor)",                                                            "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.35:reviewer_credentials","External auditor accreditation or internal reviewer qualifications", "should", False, "Reviewer credibility"),
-        ChecklistItem("item:A.5.35:prior_review_compare","Comparison or movement from prior review's findings", "should", False, "Progress tracking"),
+        ChecklistItem("item:A.5.35:sch_change_triggers",   "Ad-hoc change triggers documented (M&A, major architectural shift, regulatory upheaval, major breach) — fires reviews outside the planned cadence",                  "should", False, "27002:5.35 — on significant change"),
+        ChecklistItem("item:A.5.35:sch_delta",             "Scheduled-vs-completed delta tracked (so missed reviews surface)",                                                                                                    "should", False, "Operational discipline"),
     ],
 )
 
-REQ_A536_COMPLIANCE_REVIEW = EvidenceRequirement(
-    id            = "req:A.5.36:compliance_review_record",
+REQ_A535_PROGRAM_META_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.35:review_program_meta_review",
+    control_ref    = "A.5.35",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Independent Review Program Meta-Review",
+    trigger_type   = "universal",
+    description    = "The review program itself needs review — are we picking reviewers that stay genuinely independent, is the cadence right, are findings closing, do reviews surface real issues or have they become rubber-stamps? The meta-review evidences periodic self-assessment of the review program and resulting adjustments",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.35:pgm_date",              "Meta-review date within the planned interval",                                                                                                                       "must", False, "27002:5.35 — periodic"),
+        ChecklistItem("item:A.5.35:pgm_reviewer",          "Reviewer identity (program owner + InfoSec lead jointly + audit committee chair where applicable)",                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.5.35:pgm_independence_check","Independence-discipline check — did the actual reviewers meet the criteria? rotation worked? any reviewer reviewing their own area?",                                "must", False, "27002:5.35 — reviewed independently"),
+        ChecklistItem("item:A.5.35:pgm_coverage",          "Coverage check — did the schedule actually run? all planned scope areas reviewed?",                                                                                  "must", False, "27002:5.35 — planned intervals"),
+        ChecklistItem("item:A.5.35:pgm_closure",           "Findings-closure rate across the program (open / aged / closed)",                                                                                                    "must", False, "Operational discipline"),
+        ChecklistItem("item:A.5.35:pgm_outcome",           "Cadence-adjustment or scope-adjustment decisions (tighten / loosen / re-tier / change reviewer pool)",                                                                "must", False, "27002:5.35 — adjustments"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.35:pgm_benchmark",         "External benchmarking or industry-practice input considered",                                                                                                        "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.35:pgm_next_date",         "Next planned meta-review date stated",                                                                                                                                "should", False, "Planning"),
+    ],
+)
+
+REQ_A535_FINDING_RESPONSE_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.35:finding_response_register",
+    control_ref   = "A.5.35",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Independent Review Finding Response Register",
+    trigger_type  = "universal",
+    description   = "A.5.35 requires management response to findings — but the response promise is theoretical without a per-finding lifecycle tracker. The register catalogues every finding from every independent review: severity, owner, agreed treatment, target date, closure status. This is the audit-defensibility artefact: 'show me what you did with the findings from the 2024 review' has a one-table answer",
+    must_contain  = [
+        ChecklistItem("item:A.5.35:fr_finding_id",         "Per-finding unique identifier traceable back to the source review report",                                                                                          "must", False, "27002:5.35 — review"),
+        ChecklistItem("item:A.5.35:fr_severity",           "Severity recorded per finding (matches the report's severity classification)",                                                                                        "must", False, "27002:5.35 — review"),
+        ChecklistItem("item:A.5.35:fr_owner",              "Named owner per finding (named individual, not generic team) with target closure date",                                                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.5.35:fr_treatment",          "Agreed treatment per finding (accept / remediate / transfer with rationale; mirrors the management response committed in the report)",                                "must", False, "Closes the loop"),
+        ChecklistItem("item:A.5.35:fr_status",             "Current status per finding (open / in-progress / closed / aged-overdue) with last-updated date",                                                                     "must", False, "Operational discipline"),
+        ChecklistItem("item:A.5.35:fr_closure_evidence",   "Closure evidence reference per closed finding (link to the artefact that proves the finding was addressed — control change, policy update, training delivered)",      "must", False, "Audit defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.35:fr_aging_alerts",       "Aged-overdue alerting (notification when target date passes without closure)",                                                                                       "should", False, "Operational discipline"),
+        ChecklistItem("item:A.5.35:fr_cross_review_link",  "Cross-link to A.5.36 compliance-review nonconformity register where the two are kept as one artefact (common in mature programs)",                                  "should", False, "Cross-control coherence"),
+    ],
+)
+
+
+# ── Annex A.5.36 — Compliance review records — records_program spine
+#                   review-record-as-primary (4-leaf) ─────────────────────────
+# Promoted 2026-06-01 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. records_program spine adapted as
+# review-record-as-primary variant — SAME SHAPE as A.5.35 ([[curation-phase-
+# b-batch-19-2026-06-01]]) batch-mate. A.5.35 reviews the InfoSec FUNCTION
+# (people/process/tech) independently; A.5.36 reviews COMPLIANCE WITH the
+# org's policies/rules/standards (different scope, same operational shape).
+# Pairing: the two reviews often share infrastructure (reviewer pool, finding
+# register), encoded via the `fr_cross_review_link` SHOULD on both registers.
+# Per-record freshness=365 preserved on the primary leaf.
+# Authority: ISO 27002:2022 § 5.36 — InfoSec policy + topic-specific policies
+# + rules + standards reviewed regularly.
+
+REQ_A536_COMPLIANCE_REVIEW_RECORD = EvidenceRequirement(
+    id             = "req:A.5.36:compliance_review_record",
+    control_ref    = "A.5.36",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Compliance Review Records (Policies, Rules, Standards)",
+    trigger_type   = "universal",
+    description    = "A.5.36 requires regular review of compliance with the InfoSec policy, topic-specific policies, rules and standards. Each review record evidences the activity for one cycle: schedule honoured, scope covered, method used, findings recorded, corrective actions opened. The schedule register, program meta-review and nonconformity register are sibling leaves",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.36:schedule",              "Schedule honoured for this cycle (each planned policy/rule/standard actually reviewed in the period; gaps flagged for next cycle)",                                "must", False, "27002:5.36 — regularly reviewed"),
+        ChecklistItem("item:A.5.36:scope",                 "Scope of this cycle (which policies / rules / standards were reviewed — typically a slice of the full catalogue if rotated across cycles)",                          "must", False, "27002:5.36 — InfoSec policy + topic-specific policies + rules + standards"),
+        ChecklistItem("item:A.5.36:method",                "Method used per item (control sampling, formal audit, automated check, attestation, walkthrough); rationale for method choice given the item type",                  "must", False, "27002:5.36 — reviewed"),
+        ChecklistItem("item:A.5.36:findings",              "Findings recorded per review with severity (compliance vs. nonconformity vs. opportunity-for-improvement; concrete, evidenced)",                                      "must", False, "27002:5.36 — review"),
+        ChecklistItem("item:A.5.36:corrective_actions",    "Corrective actions opened per nonconformity finding (with owner, target date) — feeds the nonconformity register",                                                  "must", False, "Closes the loop"),
+        ChecklistItem("item:A.5.36:owner",                 "Named owner of this review cycle (the person who ran it — typically compliance lead or designate)",                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.5.36:review_date",           "Review date and period covered (start/end of the review activity)",                                                                                                  "must", False, "27002:5.36 — regularly"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.36:continuous_compliance", "Continuous-compliance monitoring tooling output considered (where used — config drift, control health checks, CSPM signal)",                                          "should", False, "Scale and timeliness"),
+        ChecklistItem("item:A.5.36:method_evidence",       "Method evidence retained (sample selection notes, attestation responses, audit working papers) for audit defensibility",                                                "should", False, "Audit defensibility"),
+    ],
+)
+
+REQ_A536_REVIEW_SCHEDULE = EvidenceRequirement(
+    id            = "req:A.5.36:compliance_review_schedule",
     control_ref   = "A.5.36",
     standard_id   = "ISO27001:2022",
-    evidence_type = "review_record",
-    title         = "Compliance Review Records (Policies, Rules, Standards)",
+    evidence_type = "register",
+    title         = "Compliance Review Schedule",
     trigger_type  = "universal",
-    description   = "A.5.36 requires compliance with the organization's information security policy, topic-specific policies, rules, and standards to be regularly reviewed. Evidence is a record (or set of records) showing what was reviewed, how, and what was found",
-    freshness_days = 365,
+    description   = "A.5.36 expects regular review — without a schedule, 'regular' becomes 'when something goes wrong'. The schedule register is the calendar: every in-scope policy/rule/standard, the planned cadence per item (proportional to risk and change rate), the last review date and the next review date",
     must_contain  = [
-        ChecklistItem("item:A.5.36:schedule",        "Review schedule covering all in-scope policies, rules, and standards", "must", False, "A.5.36 — regularly reviewed"),
-        ChecklistItem("item:A.5.36:scope",           "Scope (which policies / rules / standards reviewed in each cycle)", "must", False, "A.5.36 — information security policy, topic-specific policies, rules and standards"),
-        ChecklistItem("item:A.5.36:method",          "Method used (control sampling, formal audit, automated check, attestation)", "must", False, "A.5.36 — reviewed"),
-        ChecklistItem("item:A.5.36:findings",        "Findings recorded per review with severity", "must", False, "A.5.36 — review"),
-        ChecklistItem("item:A.5.36:corrective_actions","Corrective actions tracked to closure", "must", False, "Closes the loop"),
-        ChecklistItem("item:A.5.36:owner",           "Named owner of the compliance review function", "must", False, "Accountability"),
+        ChecklistItem("item:A.5.36:sch_full_catalogue",    "Full catalogue of in-scope items enumerated (InfoSec policy + every topic-specific policy + rules + applicable standards — completeness is the integrity check)",   "must", False, "27002:5.36 — InfoSec policy + topic-specific policies + rules + standards"),
+        ChecklistItem("item:A.5.36:sch_cadence",           "Cadence per item (annual baseline; tighter for high-risk or fast-changing items — e.g. acceptable use, access control)",                                            "must", False, "27002:5.36 — regularly"),
+        ChecklistItem("item:A.5.36:sch_method_planned",    "Planned method per item (which items use sampling vs audit vs automated check)",                                                                                    "must", False, "27002:5.36 — reviewed"),
+        ChecklistItem("item:A.5.36:sch_last_review",       "Last review date per item",                                                                                                                                          "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.36:sch_next_review",       "Next review date per item",                                                                                                                                          "must", False, "Planning"),
+        ChecklistItem("item:A.5.36:sch_owner",             "Named owner per item (reviewer accountable for the next cycle)",                                                                                                      "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.36:continuous_compliance","Continuous-compliance monitoring tooling where used", "should", False, "Scale and timeliness"),
-        ChecklistItem("item:A.5.36:exception_register","Exception register for accepted non-conformities with expiry", "should", False, "Realistic operations"),
+        ChecklistItem("item:A.5.36:sch_change_triggers",   "Ad-hoc change triggers documented (policy edit, regulator action, incident affecting a policy area) — fires reviews outside the planned cadence",                  "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.36:sch_delta",             "Scheduled-vs-completed delta tracked (so missed reviews surface)",                                                                                                  "should", False, "Operational discipline"),
     ],
 )
 
-REQ_A537_OPERATING_PROCEDURES = EvidenceRequirement(
+REQ_A536_PROGRAM_META_REVIEW = EvidenceRequirement(
+    id             = "req:A.5.36:compliance_program_meta_review",
+    control_ref    = "A.5.36",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "review_record",
+    title          = "Periodic Compliance Review Program Meta-Review",
+    trigger_type   = "universal",
+    description    = "The compliance review program itself needs review — is the catalogue current, is the method choice right, are findings being closed, are continuous-compliance signals being used effectively? The meta-review evidences periodic self-assessment and the resulting adjustments",
+    freshness_days = 365,
+    must_contain   = [
+        ChecklistItem("item:A.5.36:pgm_date",              "Meta-review date within the planned interval",                                                                                                                       "must", False, "27002:5.36 — periodic"),
+        ChecklistItem("item:A.5.36:pgm_reviewer",          "Reviewer identity (compliance program owner + InfoSec lead jointly)",                                                                                               "must", False, "Accountability"),
+        ChecklistItem("item:A.5.36:pgm_catalogue_check",   "Catalogue currency check — did new policies / rules / standards land without entering the schedule? are retired items still scheduled?",                            "must", False, "27002:5.36 — InfoSec policy + topic-specific policies + rules + standards"),
+        ChecklistItem("item:A.5.36:pgm_coverage",          "Coverage check — did the schedule actually run? what fraction of catalogue reviewed in period?",                                                                    "must", False, "27002:5.36 — regularly"),
+        ChecklistItem("item:A.5.36:pgm_closure",           "Findings-closure rate across the program (open / aged / closed)",                                                                                                    "must", False, "Operational discipline"),
+        ChecklistItem("item:A.5.36:pgm_method_review",     "Method effectiveness review — are the chosen methods surfacing real nonconformities, or is the program rubber-stamping?",                                            "must", False, "27002:5.36 — adjustments"),
+        ChecklistItem("item:A.5.36:pgm_outcome",           "Cadence-adjustment or method-adjustment decisions (tighten / loosen / change method per item type)",                                                                  "must", False, "27002:5.36 — adjustments"),
+    ],
+    should_contain = [
+        ChecklistItem("item:A.5.36:pgm_a535_alignment",    "Alignment check with A.5.35 independent review program (shared reviewer pool? shared finding register? leverage opportunities)",                                  "should", False, "Cross-control coherence"),
+        ChecklistItem("item:A.5.36:pgm_next_date",         "Next planned meta-review date stated",                                                                                                                              "should", False, "Planning"),
+    ],
+)
+
+REQ_A536_NONCONFORMITY_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.36:nonconformity_register",
+    control_ref   = "A.5.36",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "revocation_record",
+    title         = "Compliance Nonconformity Register",
+    trigger_type  = "universal",
+    description   = "A.5.36 requires corrective actions tracked to closure — but the corrective-action promise is theoretical without a per-NC lifecycle tracker. The nonconformity register catalogues every NC raised: severity, owner, agreed corrective action, target date, closure status, root cause. This is the audit-defensibility artefact paired with the review records",
+    must_contain  = [
+        ChecklistItem("item:A.5.36:nc_id",                 "Per-NC unique identifier traceable back to the source review record",                                                                                              "must", False, "27002:5.36 — review"),
+        ChecklistItem("item:A.5.36:nc_severity",           "Severity recorded per NC (matches the review record's severity classification)",                                                                                    "must", False, "27002:5.36 — review"),
+        ChecklistItem("item:A.5.36:nc_owner",              "Named owner per NC (named individual, not generic team) with target closure date",                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.5.36:nc_corrective_action",  "Corrective action stated per NC (the specific change committed — policy update, control implementation, training delivery)",                                        "must", False, "Closes the loop"),
+        ChecklistItem("item:A.5.36:nc_status",             "Current status per NC (open / in-progress / closed / aged-overdue / risk-accepted-with-exception) with last-updated date",                                          "must", False, "Operational discipline"),
+        ChecklistItem("item:A.5.36:nc_closure_evidence",   "Closure evidence reference per closed NC (link to the artefact that proves the NC was addressed)",                                                                  "must", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.36:nc_root_cause",         "Root cause noted per NC where determined (drives systemic improvements vs point fixes)",                                                                            "must", False, "Continual improvement"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.36:nc_exception_register", "Exception register integration — risk-accepted NCs with expiry date (so 'we accept this' doesn't drift into 'we forgot this')",                                    "should", False, "Realistic operations"),
+        ChecklistItem("item:A.5.36:nc_aging_alerts",       "Aged-overdue alerting (notification when target date passes without closure)",                                                                                       "should", False, "Operational discipline"),
+        ChecklistItem("item:A.5.36:nc_cross_review_link",  "Cross-link to A.5.35 independent-review finding register where the two are kept as one artefact",                                                                    "should", False, "Cross-control coherence"),
+    ],
+)
+
+
+# ── Annex A.5.37 — Documented operating procedures — records_program spine
+#                   register-as-primary (4-leaf) ──────────────────────────────
+# Promoted 2026-06-01 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. records_program spine — same shape as
+# A.5.9 asset_register ([[curation-phase-b-batch-1-2026-05-29]]). Shape:
+# register (the procedures catalogue) + maintenance_procedure (how procedures
+# are created/reviewed/updated) + scope (which facilities/systems need a
+# procedure) + program_review (annual review of the catalogue). Register leaf
+# id is preserved.
+# Authority: ISO 27002:2022 § 5.37 — operating procedures documented and
+# made available to personnel who need them. Closes the A.5.3x block —
+# A.5.37 is the final A.5 organisational control.
+
+REQ_A537_OPERATING_PROCEDURES_REGISTER = EvidenceRequirement(
     id            = "req:A.5.37:operating_procedures_register",
     control_ref   = "A.5.37",
     standard_id   = "ISO27001:2022",
     evidence_type = "register",
     title         = "Documented Operating Procedures Register",
     trigger_type  = "universal",
-    description   = "A.5.37 requires operating procedures for information processing facilities to be documented and made available to personnel who need them. Evidence is a register or catalogue of operating procedures with availability arrangements",
+    description   = "A.5.37 requires operating procedures for information processing facilities to be documented and made available to personnel who need them. The register is the live catalogue: every procedure listed with the facility/system it covers, the owner, version, last-updated and review-due dates, and the availability mechanism. Maintenance procedure, applicable-facilities scope and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.37:procedure_inventory","Inventory of operating procedures (which facilities/systems they cover)", "must", False, "A.5.37 — documented"),
-        ChecklistItem("item:A.5.37:scope_coverage",     "Scope coverage stated (every information processing facility represented)", "must", False, "A.5.37 — information processing facilities"),
-        ChecklistItem("item:A.5.37:availability",       "Availability mechanism stated (where personnel find them — intranet location, runbook system)", "must", False, "A.5.37 — made available to personnel"),
-        ChecklistItem("item:A.5.37:owner_per_procedure","Ownership per procedure (who keeps it current)", "must", False, "A.5.37 — documented"),
-        ChecklistItem("item:A.5.37:version_control",    "Version control with last-updated and review-due dates", "must", False, "A.5.37 — documented"),
+        ChecklistItem("item:A.5.37:procedure_inventory",   "Inventory of operating procedures (which facilities/systems they cover — backup, restore, patching, on-call response, change deployment, monitoring response, capacity, log-handling, etc.)",     "must", False, "27002:5.37 — documented"),
+        ChecklistItem("item:A.5.37:scope_coverage",        "Scope coverage stated (every information processing facility represented — gaps surface where a facility exists without a documented procedure)",                                                "must", False, "27002:5.37 — information processing facilities"),
+        ChecklistItem("item:A.5.37:availability",          "Availability mechanism stated per procedure (where personnel find them — intranet location, runbook system, wiki path with permissions, code-of-conduct package)",                              "must", False, "27002:5.37 — made available to personnel"),
+        ChecklistItem("item:A.5.37:owner_per_procedure",   "Ownership per procedure (named role or individual responsible for currency — the operator who runs the procedure, not 'IT')",                                                                      "must", False, "27002:5.37 — documented"),
+        ChecklistItem("item:A.5.37:version_control",       "Version control per procedure with last-updated date and review-due date (drives the review leaf)",                                                                                                "must", False, "27002:5.37 — documented"),
+        ChecklistItem("item:A.5.37:audience_per_procedure","Intended audience per procedure (which personnel 'need' the procedure — drives access permissions and training links)",                                                                            "must", False, "27002:5.37 — personnel who need them"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.37:update_triggers",    "Update triggers (system change, control change, finding-driven update)", "should", False, "Currency over time"),
-        ChecklistItem("item:A.5.37:template",           "Template adherence for procedures (consistent shape across the catalogue)", "should", False, "Reviewability"),
+        ChecklistItem("item:A.5.37:template_adherence",    "Template adherence flag per procedure (consistent shape across the catalogue — purpose / scope / prerequisites / steps / verification / rollback)",                                                "should", False, "Reviewability"),
+        ChecklistItem("item:A.5.37:emergency_flag",        "Emergency-use flag per procedure (procedures needed under pressure — DR, incident response — get higher visibility and tighter currency)",                                                       "should", False, "Operational realism"),
+        ChecklistItem("item:A.5.37:related_controls_link", "Cross-link to related controls per procedure (A.5.24/A.5.26 incident, A.5.29 disruption, A.5.30 ICT recovery, A.8.x technical controls)",                                                          "should", False, "Cross-control coherence"),
+    ],
+)
+
+REQ_A537_MAINTENANCE_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.5.37:procedures_maintenance_procedure",
+    control_ref   = "A.5.37",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "procedure",
+    title         = "Operating Procedures Maintenance Procedure",
+    trigger_type  = "universal",
+    description   = "A.5.37 expects procedures to be documented AND kept available — both require maintenance. The procedure documents who keeps the register and procedures current, what triggers an update (system change, control change, finding-driven update, exercise outcome), and the lifecycle from draft → review → publish → retire",
+    must_contain  = [
+        ChecklistItem("item:A.5.37:proc_maintainer",       "Named maintainer of the register (typically operations lead with InfoSec partner) accountable for catalogue currency",                                                                          "must", False, "Accountability"),
+        ChecklistItem("item:A.5.37:proc_update_triggers",  "Update triggers enumerated (system change A.8.32 → procedure update, control change, finding from A.5.35/A.5.36 review, exercise outcome from A.5.24/A.5.29, operator-reported error)",            "must", False, "27002:5.37 — documented + current"),
+        ChecklistItem("item:A.5.37:proc_review_path",      "Review path before publication (peer review by other operators, InfoSec sign-off for procedures touching security controls)",                                                                    "must", False, "Operational sufficiency"),
+        ChecklistItem("item:A.5.37:proc_retire_path",      "Retirement path for obsolete procedures (system decommissioned, procedure superseded) — retired procedures are archived, not deleted",                                                            "must", False, "Auditability"),
+        ChecklistItem("item:A.5.37:proc_template",         "Template definition stated (purpose / scope / prerequisites / steps / verification / rollback / contacts) — drives consistent shape",                                                              "must", False, "Reviewability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.37:proc_runbook_drill",    "Runbook-drill cadence — periodic exercise of selected procedures (especially emergency-use ones) so they're verified actionable under pressure",                                                  "should", False, "Effectiveness check"),
+        ChecklistItem("item:A.5.37:proc_change_log",       "Change-log requirement for procedure edits (so the audit trail is preserved across versions)",                                                                                                    "should", False, "Auditability"),
+    ],
+)
+
+REQ_A537_APPLICABLE_FACILITIES_SCOPE = EvidenceRequirement(
+    id            = "req:A.5.37:applicable_facilities_scope",
+    control_ref   = "A.5.37",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Information Processing Facilities Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the register. Documents the information processing facilities the organisation operates — what counts as a 'facility' (production systems, staging where production data is touched, key SaaS environments, on-prem infrastructure). ISO 27002:2022 § 5.37 expects every facility to have a documented procedure — drift between scope and register is the audit failure mode this leaf catches",
+    must_contain  = [
+        ChecklistItem("item:A.5.37:scope_systems",         "Systems in scope enumerated (production applications, databases, key infrastructure components — drives 'which facilities need a procedure')",                                                  "must", False, "27002:5.37 — information processing facilities"),
+        ChecklistItem("item:A.5.37:scope_saas",            "Key SaaS environments where the org operates the configuration (M365, Salesforce, ServiceNow, etc.) — even SaaS-hosted facilities need operating procedures for the org-side operator",          "must", False, "27002:5.37 — relevant"),
+        ChecklistItem("item:A.5.37:scope_facility_classes","Facility classes / categories (compute, storage, network, security tooling, identity, observability) — drives template variations and operator personas",                                       "must", False, "27002:5.37 — facilities"),
+        ChecklistItem("item:A.5.37:scope_asset_link",      "Cross-link to A.5.9 asset register — every information asset that is a facility should map to one or more procedures",                                                                            "must", False, "A.5.9 coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.37:scope_change_drivers",  "Trigger list for re-scoping (new system entering production, SaaS adoption, M&A bringing new facilities, decommission)",                                                                          "should", False, "Currency"),
+        ChecklistItem("item:A.5.37:scope_emergency_set",   "Emergency-use subset identified (which facilities need procedures available even when normal tooling is down — DR scenarios)",                                                                    "should", False, "Operational realism"),
+    ],
+)
+
+REQ_A537_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.37:procedures_program_review",
+    control_ref     = "A.5.37",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Operating Procedures Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that the register reflects the facility scope, procedures are still accurate (not just 'documented' but matching reality), availability mechanisms still work (operators can actually find them), and the maintenance procedure is being followed. Annual cadence (freshness=365) matches the records-family default — operational procedure methodology is stable, individual procedures get updated continuously via maintenance",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.37:rev_date",              "Review date within the planned interval (typically within 12 months of last review)",                                                                                                              "must", False, "27002:5.37 — documented + current"),
+        ChecklistItem("item:A.5.37:rev_reviewer",          "Reviewer identity and role recorded (operations lead + InfoSec lead jointly)",                                                                                                                    "must", False, "Accountability"),
+        ChecklistItem("item:A.5.37:rev_register_check",    "Per-procedure outcome (verified / amended / retired / new added) with availability-mechanism-still-works confirmation",                                                                            "must", False, "27002:5.37 — documented + available"),
+        ChecklistItem("item:A.5.37:rev_scope_check",       "Cross-check against the applicable-facilities scope — any new system / SaaS environment / facility class that should add procedures",                                                                "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.5.37:rev_accuracy_sample",   "Accuracy sampling — operator walked through a sample procedure end-to-end? procedure matches current system reality (UI screenshots current, commands work, dependencies still valid)",            "must", False, "27002:5.37 — operations"),
+        ChecklistItem("item:A.5.37:rev_emergency_review",  "Emergency-use procedure review — confirmed available and accurate for DR/incident scenarios (these are the procedures where stale = catastrophic)",                                                "must", False, "Operational realism"),
+        ChecklistItem("item:A.5.37:rev_register_update",   "Changes propagated back to the live register with reference to this review",                                                                                                                       "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.37:rev_ad_hoc_triggers", "Ad-hoc review triggers listed (major incident exposing procedure gap, M&A, major system migration)",                                                                                                "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.37:rev_next_date",       "Next planned review date stated",                                                                                                                                                                    "should", False, "Planning"),
     ],
 )
 
@@ -7306,9 +7555,24 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A534_PII_PROCESSING_REGISTER,
     REQ_A534_PRIVACY_APPLICABILITY_SCOPE,
     REQ_A534_PROGRAM_REVIEW,
-    REQ_A535_INDEPENDENT_REVIEW,
-    REQ_A536_COMPLIANCE_REVIEW,
-    REQ_A537_OPERATING_PROCEDURES,
+    # A.5.35 — 4-leaf records_program review-record-as-primary (2026-06-01;
+    # same shape as A.5.22 supplier review; primary leaf freshness=365)
+    REQ_A535_INDEPENDENT_REVIEW_REPORT,
+    REQ_A535_REVIEW_SCHEDULE_REGISTER,
+    REQ_A535_PROGRAM_META_REVIEW,
+    REQ_A535_FINDING_RESPONSE_REGISTER,
+    # A.5.36 — 4-leaf records_program review-record-as-primary (2026-06-01;
+    # batch-mate of A.5.35; primary leaf freshness=365)
+    REQ_A536_COMPLIANCE_REVIEW_RECORD,
+    REQ_A536_REVIEW_SCHEDULE,
+    REQ_A536_PROGRAM_META_REVIEW,
+    REQ_A536_NONCONFORMITY_REGISTER,
+    # A.5.37 — 4-leaf records_program register-as-primary (2026-06-01;
+    # same shape as A.5.9 asset register; review freshness=365)
+    REQ_A537_OPERATING_PROCEDURES_REGISTER,
+    REQ_A537_MAINTENANCE_PROCEDURE,
+    REQ_A537_APPLICABLE_FACILITIES_SCOPE,
+    REQ_A537_PROGRAM_REVIEW,
 
     # Universal — ISO 27001 Annex A.6 People Controls bulk curation (Phase B,
     # 2026-05-22). A.6.7 (Remote Working Policy) already exists as
