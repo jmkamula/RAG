@@ -155,7 +155,7 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260601_0829_b19.csv (78 cases — 21 core + 18
+- Most recent: results/eval_20260601_0907_b20.csv (78 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
   5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
@@ -167,8 +167,8 @@ with d.session() as s:
   + 1 Phase B records_program records-protection
   + 1 Phase B records_program PII-protection
   + 3 Phase B A.5.3x close-out 3-pack records_program)
-- Score: 76/78 PASS, 0 WARN, 2 FAIL on 2026-06-01 (#21 stochastic + #25 known-stale).
-  Clean-run upper bound is 77/78. Some runs may dip to 65/78 or 66/78 due to #24
+- Score: 77/78 PASS, 0 WARN, 1 FAIL on 2026-06-01 (clean upper bound; only #25 known-stale).
+  Some runs may dip to 65/78 or 66/78 due to #24
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -291,6 +291,19 @@ with d.session() as s:
   proc_pii_overlay SHOULD encodes the ISO × GDPR Art.5.1.e
   integration at spec level — third ISO × GDPR integration leaf
   after pii_overlay on A.5.13 + legal_jurisdiction on A.5.14)
+- A.5.18 Style v2 alignment (2026-06-01, batch 20 — closes A.5 arc):
+  NOT a promotion (A.5.18 was already 4-leaf op_process from 2026-05-26,
+  predates Phase B numbered batches). Brings A.5.18 up to A.5.16/A.5.17
+  identity-family modern conventions: review freshness 365→180d, new
+  rev_sla_met MUST (auditor-critical "24h of role-change" proof), new
+  rev_identity_pair MUST (bidirectional A.5.16↔A.5.18 lifecycle pairing),
+  new rev_residual_cleanup MUST (mailbox/file-share/group cleanup),
+  reg_idmgmt_link promoted SHOULD→MUST, 6 new MUSTs total + 3 new
+  SHOULDs, elaborate descriptions. All 17 existing item-ids preserved.
+  No new eval case — engine NC == live NC → Stage-2 suppression
+  (A.5.26 precedent). Cases #1 + #2 still PASS (live posture unchanged).
+  A.5 Organisational Controls arc now FULLY ALIGNED — every A.5 control
+  multi-leaf at modern Style v2 conventions
 - Cases 76-78 lock in: Phase B A.5.3x close-out 3-pack records_program
   (A.5.35/A.5.36/A.5.37; FIRST MULTI-CONTROL BATCH SINCE BATCH 4 —
   pattern locked in, batches can bundle conceptually-related controls;

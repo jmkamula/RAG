@@ -671,12 +671,35 @@ REQ_DATA_MASKING = EvidenceRequirement(
 )
 
 # ── Annex A.5.18 — Access rights — operational_process spine (4-leaf) ────────
-# Promoted 2026-05-26 from single-leaf to multi-leaf per
-# [[curation-program-full-multi-leaf]]. Spine: operational_process →
-# procedure + register + review_record + revocation_record. The access control
-# policy is intentionally NOT a leaf here — A.5.15 owns it; this control
-# references it via a SHOULD item on the procedure.
-# Authority: ISO 27002:2022 § 5.18 implementation guidance, items a–k.
+# Originally promoted 2026-05-26 — A.5.18 was the FIRST control promoted to
+# multi-leaf under [[curation-program-full-multi-leaf]] (the OG NC from
+# case #1, the gap that started the whole curation arc).
+#
+# Style v2 alignment 2026-06-01 — Phase B batch 20, analogous to batch 7's
+# A.5.1 alignment. NOT a promotion (A.5.18 was already 4-leaf), but brings
+# A.5.18 up to A.5.16/A.5.17 identity-family modern conventions:
+#   - Review freshness 365 → 180d (access drift is high-volume, matches the
+#     A.5.16 / A.5.17 / A.5.25 / A.5.26 volatility family)
+#   - rev_identity_pair MUST on revocation_record — bidirectional pairing
+#     with A.5.16 identity revocation_record (closes "access revoked but
+#     identity still active" gap, symmetric to A.5.17's identity pairing)
+#   - rev_sla_met MUST on revocation_record — auditor-critical SLA proof
+#     analogous to A.5.16's rev_sla_met (the "within 24h of role-change"
+#     timeliness flag)
+#   - rev_residual_cleanup MUST on revocation_record — analogous to A.5.16
+#     (mailbox forwarding, file-share access transfer, group memberships)
+#   - rev_orphan_check MUST on review — catches orphan access rights
+#     (identities revoked but access not) — paired with A.5.16 review
+#   - reg_idmgmt_link SHOULD → MUST — explicit linkage to A.5.16 identity
+#     register, matching the identity-family bidirectional pairing pattern
+#   - More elaborate descriptions matching modern Phase B style
+# All 17 existing item-ids preserved; 6 new MUSTs + 3 new SHOULDs added.
+# Closes the A.5 Organisational Controls arc — A.5.18 is the OG case #1
+# control and the last A.5 control on the alignment list.
+# Authority: ISO 27002:2022 § 5.18 implementation guidance items a-k.
+# Cross-link to A.5.15 access control policy, A.5.16 identity management,
+# A.5.17 authentication information, A.5.3 segregation of duties, A.6.5
+# post-employment, A.8.2 privileged access rights.
 
 REQ_A518_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.18:access_rights_procedure",
@@ -685,17 +708,21 @@ REQ_A518_PROCEDURE = EvidenceRequirement(
     evidence_type = "procedure",
     title         = "Access Rights Management Procedure",
     trigger_type  = "universal",
-    description   = "A.5.18 requires that access rights be provisioned, reviewed, modified and removed in accordance with the topic-specific policy on access control (A.5.15). The procedure documents the operational steps for grant, modification and revocation; the register, review and revocation records are sibling leaves",
+    description   = "A.5.18 requires that access rights be provisioned, reviewed, modified and removed in accordance with the topic-specific policy on access control (A.5.15). The procedure documents the operational steps for grant, modification and revocation, the SLA targets for each operation, the handling of service accounts, and the linkage to identity management. The access rights register, periodic review and revocation record are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.18:asset_owner_authorization", "Asset owner authorization required before access is granted",       "must", False, "27002:5.18a"),
-        ChecklistItem("item:A.5.18:least_privilege",           "Provisioning applies least privilege and segregation-of-duties checks (A.5.3 linkage)", "must", False, "27002:5.18b"),
-        ChecklistItem("item:A.5.18:policy_reference",          "References the topic-specific access control policy (A.5.15)",        "must", False, "27002:5.18c"),
-        ChecklistItem("item:A.5.18:modification_path",         "Path for modification of access on role or responsibility change",     "must", False, "27002:5.18g"),
-        ChecklistItem("item:A.5.18:privileged_route",          "Privileged access requests route through the A.8.2 privileged-access process", "must", False, "27002:5.18i / A.8.2"),
+        ChecklistItem("item:A.5.18:asset_owner_authorization", "Asset owner authorization required before access is granted (named authoriser per asset class, not generic 'IT manager')",                                                          "must", False, "27002:5.18a"),
+        ChecklistItem("item:A.5.18:least_privilege",           "Provisioning applies least privilege and segregation-of-duties checks (cross-link to A.5.3 segregation of duties — flagged combinations are blocked or compensated)",            "must", False, "27002:5.18b / A.5.3"),
+        ChecklistItem("item:A.5.18:policy_reference",          "References the topic-specific access control policy (A.5.15) — drives consistency between policy and operational practice",                                                       "must", False, "27002:5.18c / A.5.15"),
+        ChecklistItem("item:A.5.18:modification_path",         "Path for modification of access on role or responsibility change (joiner-mover-leaver flows; mover is the typically-missed leg)",                                                  "must", False, "27002:5.18g"),
+        ChecklistItem("item:A.5.18:privileged_route",          "Privileged access requests route through the A.8.2 privileged-access process (separate intake, separate approval, separate logging)",                                            "must", False, "27002:5.18i / A.8.2"),
+        ChecklistItem("item:A.5.18:sla_targets",               "SLA targets stated per operation (grant within X days, modification within Y days, revocation within Z hours of trigger — drives the rev_sla_met flag on revocation_record)",      "must", False, "27002:5.18d/g — timeliness"),
+        ChecklistItem("item:A.5.18:service_account_handling",  "Service account / non-human identity handling stated (provisioning, owner attribution, periodic re-attestation — service accounts are the weakest spot in most access programs)", "must", False, "27002:5.18 — all identity classes"),
+        ChecklistItem("item:A.5.18:identity_link",             "Explicit linkage to A.5.16 identity management (every access right attaches to a registered identity; no orphan access)",                                                          "must", False, "A.5.16 coherence"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.18:temporary_access",          "Temporary access provisions for time-bound tasks or third parties",    "should", False, "27002:5.18e"),
-        ChecklistItem("item:A.5.18:approval_retention",        "Retention period for approval evidence stated",                        "should", False, "Accountability"),
+        ChecklistItem("item:A.5.18:temporary_access",          "Temporary access provisions for time-bound tasks or third parties (expiry date mandatory; automated revocation at expiry)",                                                       "should", False, "27002:5.18e"),
+        ChecklistItem("item:A.5.18:approval_retention",        "Retention period for approval evidence stated (drives the audit trail for who-approved-what-when)",                                                                                "should", False, "Accountability"),
+        ChecklistItem("item:A.5.18:emergency_access",          "Emergency-access ('break-glass') procedure stated separately (pre-approved accounts with mandatory post-use justification + audit)",                                              "should", False, "Operational realism"),
     ],
 )
 
@@ -706,16 +733,20 @@ REQ_A518_REGISTER = EvidenceRequirement(
     evidence_type = "register",
     title         = "Access Rights Register",
     trigger_type  = "universal",
-    description   = "A.5.18 requires a central record of access rights. The register is the live source of truth for who holds what access, when it was granted, and by whose authority — feeding the periodic review and revocation-record leaves",
+    description   = "A.5.18 requires a central record of access rights — without a register, 'who has access to what' devolves to system-by-system queries that drift apart. The register is the live source of truth: every subject-to-asset right mapped, every grant authorised + dated + statused. It feeds the periodic review (which surveys it) and the revocation record (which closes rows out)",
     must_contain  = [
-        ChecklistItem("item:A.5.18:reg_subject_asset",   "Subject-to-asset rights mapping (who has access to what)",        "must", False, "27002:5.18f"),
-        ChecklistItem("item:A.5.18:reg_authoriser",      "Authoriser captured per grant",                                    "must", False, "27002:5.18a, k"),
-        ChecklistItem("item:A.5.18:reg_grant_date",      "Grant date captured per row",                                      "must", False, "27002:5.18k"),
-        ChecklistItem("item:A.5.18:reg_status",          "Status field per row (active / suspended / revoked)",              "must", False, "27002:5.18d, g"),
+        ChecklistItem("item:A.5.18:reg_subject_asset",   "Subject-to-asset rights mapping (who has access to what — drives review and the orphan-access check)",                                                                            "must", False, "27002:5.18f"),
+        ChecklistItem("item:A.5.18:reg_authoriser",      "Authoriser captured per grant (named individual, not generic role; drives accountability)",                                                                                       "must", False, "27002:5.18a, k"),
+        ChecklistItem("item:A.5.18:reg_grant_date",      "Grant date captured per row (proves the grant happened in the right order — authorisation → grant, not reverse)",                                                                  "must", False, "27002:5.18k"),
+        ChecklistItem("item:A.5.18:reg_status",          "Status field per row (active / suspended / revoked) — drives the review's orphan check and the revocation_record lifecycle close-out",                                              "must", False, "27002:5.18d, g"),
+        ChecklistItem("item:A.5.18:reg_idmgmt_link",     "Linkage to A.5.16 identity-management register per row — every access right attaches to a registered identity (no orphan rights pointing to disabled or deleted identities)",       "must", False, "A.5.16 coherence — was SHOULD, promoted to MUST"),
+        ChecklistItem("item:A.5.18:reg_last_verified",   "Last-verified date per row (when this access was last confirmed still needed — drives staleness detection between formal reviews)",                                                "must", False, "27002:5.18h — kept current"),
+        ChecklistItem("item:A.5.18:reg_review_due",      "Next review-due date per row (drives the schedule for the periodic review leaf)",                                                                                                  "must", False, "27002:5.18h — planned intervals"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.18:reg_idmgmt_link",     "Linkage to identity-management register (A.5.16)",                 "should", False, "Cross-control consistency"),
-        ChecklistItem("item:A.5.18:reg_privileged_flag", "Privileged-access rows flagged for A.8.2 oversight",               "should", False, "A.8.2 linkage"),
+        ChecklistItem("item:A.5.18:reg_privileged_flag", "Privileged-access rows flagged for A.8.2 oversight (drives separate-tier review and tighter cadence for privileged subset)",                                                        "should", False, "A.8.2 linkage"),
+        ChecklistItem("item:A.5.18:reg_temporary_flag",  "Temporary-access rows flagged with expiry date (drives automated cleanup; complements the procedure's temporary_access SHOULD)",                                                     "should", False, "Operational discipline"),
+        ChecklistItem("item:A.5.18:reg_business_justification","Business justification stated per grant (why this access is needed — informs review decisions later)",                                                                          "should", False, "Audit defensibility"),
     ],
 )
 
@@ -726,17 +757,22 @@ REQ_A518_REVIEW = EvidenceRequirement(
     evidence_type   = "review_record",
     title           = "Periodic Access Rights Review",
     trigger_type    = "universal",
-    description     = "A.5.18 requires periodic review of access rights. The review record captures the planned-interval review of all subject-asset pairs in the register, the reviewer's identity, the outcome per subject, and any resulting modifications or revocations",
-    freshness_days  = 365,
+    description     = "A.5.18 requires periodic review of access rights. Each review record captures the planned-interval review of subject-asset pairs in the register, the reviewer's identity, the outcome per subject, the orphan-access check, and any resulting modifications or revocations. Review freshness tightened to 180d for Style v2 alignment — access drift is high-volume, matches A.5.16 / A.5.17 / A.5.25 / A.5.26 volatility family",
+    freshness_days  = 180,
     must_contain    = [
-        ChecklistItem("item:A.5.18:rev_date",        "Review date within the planned interval",                          "must", False, "27002:5.18h"),
-        ChecklistItem("item:A.5.18:rev_reviewer",    "Reviewer identity and role recorded",                              "must", False, "Accountability"),
-        ChecklistItem("item:A.5.18:rev_outcome",     "Outcome per reviewed subject (no change / amended / revoked)",     "must", False, "27002:5.18h"),
-        ChecklistItem("item:A.5.18:rev_actions",     "Action items closed where rights were amended or revoked",         "must", False, "27002:5.18h"),
+        ChecklistItem("item:A.5.18:rev_date",            "Review date within the planned interval (typically within 6 months of last review under the 180d cadence)",                                                                          "must", False, "27002:5.18h — periodic"),
+        ChecklistItem("item:A.5.18:rev_reviewer",        "Reviewer identity and role recorded (asset owner + InfoSec lead jointly; reviewer must not be the same person who authorised the access)",                                            "must", False, "Accountability + independence"),
+        ChecklistItem("item:A.5.18:rev_outcome",         "Outcome per reviewed subject (no change / amended / revoked) with rationale where amended or revoked",                                                                                "must", False, "27002:5.18h"),
+        ChecklistItem("item:A.5.18:rev_actions",         "Action items closed where rights were amended or revoked (each modification or revocation traceable to a register row update + revocation_record where applicable)",                  "must", False, "27002:5.18h"),
+        ChecklistItem("item:A.5.18:rev_coverage",        "Coverage stated — full register reviewed OR risk-tiered sampling with documented selection method; gaps flagged for next cycle",                                                       "must", False, "27002:5.18h — completeness"),
+        ChecklistItem("item:A.5.18:rev_orphan_check",    "Orphan-access check — every register row reconciled against A.5.16 identity register; any rights attaching to disabled/deleted identities surfaced and revoked",                       "must", False, "A.5.16 coherence — orphan-prevention"),
+        ChecklistItem("item:A.5.18:rev_privileged_check","Privileged-access subset reviewed with extra scrutiny (cross-link to A.8.2 privileged-access oversight; tighter cadence may apply for this slice)",                                  "must", False, "A.8.2 linkage"),
+        ChecklistItem("item:A.5.18:rev_identity_pair",   "Identity-family pair check — A.5.16 identity register reviewed in parallel (or same cycle); pair-confirmation that no identity has stale access AND no access points to stale identity","must", False, "A.5.16 + A.5.17 family coherence"),
     ],
     should_contain  = [
-        ChecklistItem("item:A.5.18:rev_sampling",    "Sampling approach declared if not full coverage of the register",  "should", False, "Audit defensibility"),
-        ChecklistItem("item:A.5.18:rev_next_date",   "Next planned review date stated",                                  "should", False, "Planning"),
+        ChecklistItem("item:A.5.18:rev_sampling",        "Sampling approach declared if not full coverage of the register (selection method documented — risk-stratified, random, role-targeted)",                                            "should", False, "Audit defensibility"),
+        ChecklistItem("item:A.5.18:rev_next_date",       "Next planned review date stated",                                                                                                                                                    "should", False, "Planning"),
+        ChecklistItem("item:A.5.18:rev_ad_hoc_triggers", "Ad-hoc review triggers listed (org restructure, M&A, major access policy change, security incident affecting access controls)",                                                       "should", False, "Change-driven review"),
     ],
 )
 
@@ -747,16 +783,21 @@ REQ_A518_REVOCATION = EvidenceRequirement(
     evidence_type = "revocation_record",
     title         = "Access Revocation Records",
     trigger_type  = "universal",
-    description   = "A.5.18 requires that access be removed on change of role, termination, or contract end. Revocation records evidence that those removals actually happened (not just were ordered) — one record per revocation event, traceable back to the register and to the HR off-boarding trigger",
+    description   = "A.5.18 requires that access be removed on change of role, termination, or contract end. Revocation records evidence that those removals actually happened (not just were ordered) — one record per revocation event, traceable back to the register and to the originating trigger. SLA-met flag is auditor-critical — proves not just THAT access was revoked but that the revocation timestamp was within the stated SLA (the famous 'within 24h of role-change' timeliness promise). Identity-pair check enforces bidirectional A.5.16 ↔ A.5.18 lifecycle pairing — closes 'identity disabled but access lingers' gap",
     must_contain  = [
-        ChecklistItem("item:A.5.18:rev_trigger",        "Revocation trigger captured (termination / role change / contract end / explicit revoke)", "must", False, "27002:5.18d, g"),
-        ChecklistItem("item:A.5.18:rev_date_recorded",  "Revocation date recorded",                                          "must", False, "27002:5.18k"),
-        ChecklistItem("item:A.5.18:rev_disabled_proof", "Evidence access was actually disabled (system log, attestation)",   "must", False, "27002:5.18d"),
-        ChecklistItem("item:A.5.18:rev_authoriser",     "Authoriser of the revocation",                                      "must", False, "27002:5.18d"),
+        ChecklistItem("item:A.5.18:rev_trigger",            "Revocation trigger captured (termination / role change / contract end / explicit revoke / incident-driven / temporary-expiry / orphan-cleanup)",                                       "must", False, "27002:5.18d, g — trigger taxonomy"),
+        ChecklistItem("item:A.5.18:rev_date_recorded",      "Effective date per record (last working day OR contract expiry OR role-change effective date OR explicit revocation decision time)",                                                  "must", False, "Timeliness anchor"),
+        ChecklistItem("item:A.5.18:rev_disabled_proof",     "Evidence access was actually disabled (system log entry, RBAC change attestation, confirmation from each affected system) — not just 'we asked'",                                       "must", False, "27002:5.18d — actually removed"),
+        ChecklistItem("item:A.5.18:rev_authoriser",         "Authoriser of the revocation (named individual; for terminations the dual-signoff pattern of IT + HR/manager applies)",                                                              "must", False, "27002:5.18d"),
+        ChecklistItem("item:A.5.18:rev_sla_met",            "SLA-met flag per record (yes / no_with_reason) — gap between effective and actual revocation timestamp must be within the procedure's stated SLA, or exception logged; auditor-critical proof of 'within 24h of role change' timeliness", "must", False, "27002:5.18d — auditor-critical SLA proof (matches A.5.16:rev_sla_met)"),
+        ChecklistItem("item:A.5.18:rev_identity_pair",      "Identity-pair check per record — confirms A.5.16 identity revocation_record exists for the same identity (where the trigger is termination/contract-end) OR identity remains active (where trigger is role-change/explicit-revoke); closes the bidirectional lifecycle loop", "must", False, "A.5.16 + A.5.17 family coherence"),
+        ChecklistItem("item:A.5.18:rev_residual_cleanup",   "Residual cleanup status per record (shared mailbox memberships removed or transferred, file-share access reassigned, distribution-list memberships cleared, OAuth tokens revoked, API keys rotated) — full lifecycle closure, not just primary RBAC revocation",                  "must", False, "27002:5.18 — full lifecycle closure"),
+        ChecklistItem("item:A.5.18:rev_completeness",       "Completeness check per record — all access rights for the subject (from the register) accounted for (each row statused 'revoked' with its own evidence), not just the primary identity rights",                                                                                  "must", False, "27002:5.18 — completeness"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.18:rev_hr_link",        "Tied to HR off-boarding workflow (A.6.5 linkage)",                  "should", False, "A.6.5 linkage"),
-        ChecklistItem("item:A.5.18:rev_timeliness",     "Timeliness target stated (e.g., within 24h of termination effective date)", "should", False, "27002:5.18d — timeliness"),
+        ChecklistItem("item:A.5.18:rev_hr_link",            "Tied to HR off-boarding workflow (A.6.5 linkage) — termination trigger fires from HR system, not from manual IT request",                                                            "should", False, "A.6.5 linkage"),
+        ChecklistItem("item:A.5.18:rev_timeliness",         "Timeliness target stated explicitly per trigger type (24h for termination, 5 days for role-change, immediate for incident-driven)",                                                  "should", False, "27002:5.18d — timeliness per trigger"),
+        ChecklistItem("item:A.5.18:rev_post_disable_audit", "Post-disable verification window noted (30-day check that no stale access reappears via service-account chains or forgotten group memberships)",                                     "should", False, "Continual assurance"),
     ],
 )
 
