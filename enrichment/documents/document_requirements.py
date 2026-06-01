@@ -4023,24 +4023,119 @@ REQ_A532_AUDIT_REVIEW = EvidenceRequirement(
     ],
 )
 
-REQ_A533_RECORDS_PROTECTION = EvidenceRequirement(
+# ── Annex A.5.33 — Protection of records — records_program spine (4-leaf) ─────
+# Promoted 2026-06-01 from single-leaf to multi-leaf per
+# [[curation-program-full-multi-leaf]]. records_program spine — pairs naturally
+# with the A.5.5/A.5.6/A.5.9/A.5.31/A.5.32 records-family from batch 1
+# ([[curation-phase-b-batch-1-2026-05-29]]). Shape: procedure (the policy
+# that classifies records, sets protection-by-class, and defines disposal) +
+# register (the records schedule listing every record class with retention,
+# driver, owner, protection class, last-verified) + scope (the upstream that
+# determines what counts as a "record" — record categories, legal/regulatory
+# drivers, business activities) + annual review (freshness=365 — records
+# management methodology is stable, like A.5.5/A.5.6/A.5.31's annual cadence
+# for stable-doctrine records-family controls; A.5.31 is the exception at
+# 180d only because regulatory change cadence drives it).
+#
+# Item-id preservation: SPEC_ART_5_1_E (GDPR Art.5.1.e storage limitation
+# derivation) references four A.5.33 items by id —
+# item:A.5.33:records_schedule, :retention_periods, :retention_drivers,
+# :disposal. All four MUST stay present after promotion; first three
+# relocate to the register leaf (their natural home), :disposal stays in
+# the procedure leaf (it's a procedure step, not a register row).
+# Authority: ISO 27002:2022 § 5.33 implementation guidance — classification,
+# protection requirements per class, retention with legal drivers, disposal,
+# legal hold. Cross-link to A.5.34 (PII protection), A.5.12 (classification
+# scheme), A.8.10 (information deletion).
+
+REQ_A533_RECORDS_PROTECTION_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.33:records_protection_policy",
     control_ref   = "A.5.33",
     standard_id   = "ISO27001:2022",
     evidence_type = "policy",
     title         = "Records Retention and Protection Policy",
     trigger_type  = "universal",
-    description   = "A.5.33 requires records to be protected from loss, destruction, falsification, unauthorized access, and unauthorized release. Evidence is a records retention/protection policy that classifies records, sets retention, and specifies protection",
+    description   = "A.5.33 requires records to be protected from loss, destruction, falsification, unauthorized access, and unauthorized release. The policy/procedure documents how records are classified, what protection is applied per class, how disposal is carried out at end of retention, and how legal-hold overrides operate. The records schedule (per-class register), records-categories scope (upstream that determines what counts as a 'record') and periodic review are sibling leaves",
     must_contain  = [
-        ChecklistItem("item:A.5.33:records_schedule", "Records inventory or schedule (which record classes the organization holds)", "must", False, "A.5.33 — records"),
-        ChecklistItem("item:A.5.33:retention_periods","Retention period per record class (driven by legal, regulatory, business need)", "must", False, "A.5.33 — protected"),
-        ChecklistItem("item:A.5.33:protection_requirements","Protection requirements (access control, encryption at rest, immutability where needed)", "must", False, "A.5.33 — protect from loss, destruction, falsification, unauthorized access and release"),
-        ChecklistItem("item:A.5.33:retention_drivers","Legal/regulatory drivers per retention period stated", "must", False, "A.5.33 — protected"),
-        ChecklistItem("item:A.5.33:disposal",         "Disposal procedure at end of retention (secure destruction, certificate of destruction)", "must", False, "A.5.33 — protected"),
+        ChecklistItem("item:A.5.33:protection_requirements","Protection requirements per record class (access control, encryption at rest, immutability where needed, integrity verification — protects against loss, destruction, falsification, unauthorized access and release)", "must", False, "27002:5.33 — protect from loss, destruction, falsification, unauthorized access and release"),
+        ChecklistItem("item:A.5.33:classification_scheme", "Records classification scheme stated (record classes and the protection class assigned to each — cross-link to A.5.12 classification of information)", "must", False, "27002:5.33 — classification"),
+        ChecklistItem("item:A.5.33:disposal",         "Disposal procedure at end of retention (secure destruction method per media type, certificate of destruction, witness for high-sensitivity classes — cross-link to A.8.10 information deletion)", "must", False, "27002:5.33 — secure disposal"),
+        ChecklistItem("item:A.5.33:format_guidance",  "Format-specific protection guidance (paper vs digital vs hybrid records; storage media handled — cloud objects, immutable WORM stores, optical media, physical archives)", "must", False, "27002:5.33 — storage media"),
+        ChecklistItem("item:A.5.33:legal_hold",       "Legal-hold provisions overriding normal retention (litigation hold, regulatory investigation hold, who can invoke, how it's released)", "must", False, "27002:5.33 — litigation readiness"),
+        ChecklistItem("item:A.5.33:owner",            "Named owner of the procedure (typically records manager / legal counsel / InfoSec lead jointly)", "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.33:format_guidance",  "Format-specific guidance (paper vs digital records)", "should", False, "Practical implementation"),
-        ChecklistItem("item:A.5.33:legal_hold",       "Legal hold provisions overriding normal retention", "should", False, "Litigation readiness"),
+        ChecklistItem("item:A.5.33:proc_pii_overlay",     "PII overlay — records containing PII inherit additional GDPR Art.5.1.e storage-limitation constraints (cross-link to A.5.34 + Art.5.1.e)", "should", False, "ISO × GDPR integration"),
+        ChecklistItem("item:A.5.33:proc_asset_link",      "Cross-link to A.5.9 asset register — records are information assets; protection class must reconcile",                                       "should", False, "Cross-control coherence"),
+        ChecklistItem("item:A.5.33:proc_change_log",      "Change-log requirement for policy edits (audit trail for retention-period or protection changes)",                                          "should", False, "Auditability"),
+    ],
+)
+
+REQ_A533_RECORDS_SCHEDULE_REGISTER = EvidenceRequirement(
+    id            = "req:A.5.33:records_schedule_register",
+    control_ref   = "A.5.33",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Records Schedule (Per-Class Retention and Protection Register)",
+    trigger_type  = "universal",
+    description   = "The operational register at the heart of A.5.33. Without a records schedule listing every record class with retention, driver, owner and protection assignment, the policy is theoretical. The schedule is queried at audit time to demonstrate that the organisation knows what records it holds, why it holds them, and for how long",
+    must_contain  = [
+        ChecklistItem("item:A.5.33:records_schedule",  "Records inventory or schedule listing every record class the organisation holds (HR records, financial records, customer records, contract records, security/audit logs, processing-activity records, system records, training records, incident records, etc.)", "must", False, "27002:5.33 — records"),
+        ChecklistItem("item:A.5.33:retention_periods", "Retention period per record class (concrete duration — years/months, with start-trigger and end-trigger defined)",                                                                                                                                                            "must", False, "27002:5.33 — retention"),
+        ChecklistItem("item:A.5.33:retention_drivers", "Legal/regulatory driver per retention period stated (statute, regulator guidance, contractual obligation, business need — never an arbitrary number)",                                                                                                                       "must", False, "27002:5.33 — legal driver"),
+        ChecklistItem("item:A.5.33:reg_protection_class","Protection class per record class (which classification + protection profile from the procedure applies) — drives the access-control / encryption / immutability decision",                                                                                              "must", False, "27002:5.33 — protection per class"),
+        ChecklistItem("item:A.5.33:reg_owner_per_class","Owner per record class (named role responsible for the class — HR for personnel records, Finance for financial records, etc.)",                                                                                                                                            "must", False, "Accountability"),
+        ChecklistItem("item:A.5.33:reg_last_verified", "Last-verified date per class (proves the entry is current; missing dates surface stale classes at review)",                                                                                                                                                                  "must", False, "27002:5.33 — kept current"),
+        ChecklistItem("item:A.5.33:reg_storage_location","Storage location per class (system / repository / physical archive — needed at disposal and at legal-hold invocation)",                                                                                                                                                   "must", False, "27002:5.33 — storage media"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.33:reg_pii_flag",      "PII flag per class (drives GDPR Art.5.1.e storage-limitation overlay — cross-link to the procedure's PII overlay)",                                                                                                                                                          "should", False, "ISO × GDPR integration"),
+        ChecklistItem("item:A.5.33:reg_legal_hold_flag","Active legal-hold flag per class (rows currently under hold are visible at-a-glance)",                                                                                                                                                                                       "should", False, "Litigation readiness"),
+        ChecklistItem("item:A.5.33:reg_volume",         "Approximate volume per class (drives prioritisation when storage costs or e-discovery demand it)",                                                                                                                                                                          "should", False, "Operational realism"),
+    ],
+)
+
+REQ_A533_RECORDS_CATEGORIES_SCOPE = EvidenceRequirement(
+    id            = "req:A.5.33:records_categories_scope",
+    control_ref   = "A.5.33",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Records Categories Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that drives the schedule. Documents the business activities, legal/regulatory drivers, and data categories that determine what counts as a 'record' for the organisation. ISO 27002:2022 § 5.33 expects organisations to know which records they need to keep before claiming to protect them. Drift between the scope and the schedule is the audit failure mode this leaf catches — it surfaces missing classes (e.g., 'we started processing health data; where are the HIPAA records?')",
+    must_contain  = [
+        ChecklistItem("item:A.5.33:scope_business_activities","Business activities considered (HR/employment, finance/tax, sales/customer, operations/security, regulated activities — each may generate distinct record classes)",                          "must", False, "27002:5.33 — applicability"),
+        ChecklistItem("item:A.5.33:scope_legal_drivers",      "Legal/regulatory drivers enumerated (statutes mandating record-keeping: corporate law, tax law, employment law, sectoral regulations, GDPR Art.30, AML, etc.) — cross-link to A.5.31 register","must", False, "27002:5.33 — legal driver"),
+        ChecklistItem("item:A.5.33:scope_data_categories",    "Personal/sensitive/regulated data categories handled (drives PII overlay and special-category retention)",                                                                                     "must", False, "GDPR/sectoral linkage"),
+        ChecklistItem("item:A.5.33:scope_jurisdictions",      "Jurisdictions covered (each may impose different minimum-retention or right-to-erasure constraints — HQ, places of business, data-residency destinations)",                                    "must", False, "27002:5.33 — relevant"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.5.33:scope_obligations_link", "Cross-link to A.5.31 applicable-obligations scope — same drivers, separate registers; the two should stay aligned",                          "should", False, "Cross-control coherence"),
+        ChecklistItem("item:A.5.33:scope_change_drivers",   "Trigger list for re-scoping (new geography, new service line, M&A, new regulated activity — adding scope must trigger a schedule update)",   "should", False, "Currency"),
+    ],
+)
+
+REQ_A533_REVIEW = EvidenceRequirement(
+    id              = "req:A.5.33:records_program_review",
+    control_ref     = "A.5.33",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Records Protection Program Review",
+    trigger_type    = "universal",
+    description     = "Periodic verification that the schedule reflects the scope, the procedure still matches the protection requirements per class, and disposal/legal-hold discipline is being followed. ISO 27002:2022 § 5.33 expects records protection to be maintained — drift between schedule and reality (new classes emerging, retention periods overrun, disposals not happening) is the audit failure mode this leaf catches. Annual cadence (freshness=365) matches the stable doctrine of records-management methodology",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.5.33:rev_date",              "Review date within the planned interval (typically within 12 months of last review)",                                                                                                                            "must", False, "27002:5.33 — maintained"),
+        ChecklistItem("item:A.5.33:rev_reviewer",          "Reviewer identity and role recorded (records manager / compliance lead with legal-counsel sign-off where material)",                                                                                              "must", False, "Accountability"),
+        ChecklistItem("item:A.5.33:rev_schedule_check",    "Per-class outcome (verified / amended / retired / new added) with retention-still-adequate and protection-class-still-adequate confirmation",                                                                     "must", False, "27002:5.33 — kept current"),
+        ChecklistItem("item:A.5.33:rev_scope_check",       "Cross-check against the records-categories scope — any new business activity / legal driver / data category that should add classes",                                                                              "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:A.5.33:rev_disposal_audit",    "Disposal audit — sample of classes past retention end-date confirmed disposed (certificate of destruction present) or held under documented legal hold; overruns flagged for remediation",                        "must", False, "27002:5.33 — disposal discipline"),
+        ChecklistItem("item:A.5.33:rev_legal_hold_status", "Active legal-hold status reviewed (which classes/rows currently held, by whom, on what basis, expected release trigger) — stale unreleased holds remediated",                                                      "must", False, "27002:5.33 — litigation readiness"),
+        ChecklistItem("item:A.5.33:rev_register_update",   "Changes propagated back to the live schedule with reference to this review",                                                                                                                                       "must", False, "Closes the loop"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.5.33:rev_ad_hoc_triggers", "Ad-hoc review triggers listed (new regulator action, new sector entry, M&A, legal-hold invocation pattern shift)", "should", False, "Change-driven review"),
+        ChecklistItem("item:A.5.33:rev_next_date",       "Next planned review date stated",                                                                                  "should", False, "Planning"),
     ],
 )
 
@@ -7092,7 +7187,12 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_A532_LICENSED_INVENTORY,
     REQ_A532_ACQUIRED_WORKS_UPSTREAM,
     REQ_A532_AUDIT_REVIEW,
-    REQ_A533_RECORDS_PROTECTION,
+    # A.5.33 — 4-leaf records_program (2026-06-01; pairs with batch 1
+    # records-family A.5.5/6/9/31/32; review freshness=365)
+    REQ_A533_RECORDS_PROTECTION_PROCEDURE,
+    REQ_A533_RECORDS_SCHEDULE_REGISTER,
+    REQ_A533_RECORDS_CATEGORIES_SCOPE,
+    REQ_A533_REVIEW,
     REQ_A534_PII_PROTECTION,
     REQ_A535_INDEPENDENT_REVIEW,
     REQ_A536_COMPLIANCE_REVIEW,

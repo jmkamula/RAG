@@ -1533,6 +1533,65 @@ EVAL_CASES = [
     # enforced via authn_link (A.5.16) and identity_link (A.5.17) MUSTs.
     # MFA promoted SHOULD → MUST (modern baseline, no longer optional).
 
+    # ── Phase B records_program records-protection (commit 2026-06-01) ──
+    # Seventeenth Phase B bulk batch (single-control): A.5.33 promoted to
+    # records_program 4-leaf — records_protection_policy (procedure) +
+    # records_schedule_register + records_categories_scope + records_
+    # program_review (365d). Pairs naturally with the batch 1 records-
+    # family A.5.5/A.5.6/A.5.9/A.5.31/A.5.32 — first records_program
+    # promotion since batch 1 (2026-05-29). Spine return after 11 op_
+    # process batches (batches 3-6, 8-10, 12, 13, 15, 16) + 2 policy_
+    # program batches (2, 11) — re-validates records_program spine
+    # consistency. Annual review cadence (365d) matches the stable-
+    # doctrine records-family controls A.5.5/A.5.6 (A.5.31 is the
+    # exception at 180d, driven by regulatory change cadence). Item-id
+    # preservation critical — SPEC_ART_5_1_E (GDPR Art.5.1.e storage
+    # limitation derivation) references four A.5.33 items by id; all
+    # four preserved (records_schedule + retention_periods +
+    # retention_drivers relocate to register leaf, disposal stays on
+    # procedure leaf).
+
+    EvalCase(
+        id=74,
+        query="pending engine verdict for A.5.33",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "records_protection"],
+        expected_refs=["A.5.33"],
+        expected_type="posture_check",
+        must_contain=["A.5.33", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=[
+            "0/1 children satisfied",
+            "no curated multi-leaf",
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks A.5.33 (Protection of records) Phase B promotion to "
+            "records_program 4-leaf: records_protection_policy "
+            "(procedure leaf — preserves the prior single-leaf id) + "
+            "records_schedule_register (per-class retention/protection "
+            "register) + records_categories_scope (upstream — business "
+            "activities, legal drivers, data categories that determine "
+            "what counts as a 'record') + records_program_review "
+            "(freshness 365d). Live posture flips from Comply (hand-"
+            "entered finding citing 'MSFT Azure, 365 and RBAC "
+            "implementation with document access controls and labeling') "
+            "to engine-proposed NC at 0/4. First records_program "
+            "promotion since batch 1 (2026-05-29) — re-validates spine "
+            "consistency after 11 op_process + 2 policy_program "
+            "batches in between. Annual review cadence (365d) matches "
+            "the stable-doctrine records-family controls A.5.5/A.5.6 "
+            "(A.5.31 is the exception at 180d, regulatory-change-driven). "
+            "Item-id preservation critical — SPEC_ART_5_1_E (GDPR "
+            "Art.5.1.e storage limitation) references four A.5.33 items "
+            "by id; all four preserved across the promotion "
+            "(records_schedule + retention_periods + retention_drivers "
+            "relocated to the register leaf, disposal stayed on the "
+            "procedure leaf). New proc_pii_overlay SHOULD encodes the "
+            "ISO × GDPR Art.5.1.e integration at spec level (third "
+            "ISO × GDPR integration leaf after pii_overlay on A.5.13 "
+            "and legal_jurisdiction on A.5.14)."
+        ),
+    ),
+
     # ── Phase B operational_process ICT-readiness (commit 2026-05-31) ──
     # Sixteenth Phase B bulk batch (single-control): A.5.30 promoted to
     # operational_process 4-leaf — ict_continuity_plan + ict_service_

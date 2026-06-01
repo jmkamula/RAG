@@ -28,7 +28,7 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 60/73 PASS before any restart (73 cases; #24 + #25 known-stale;
+# Must be 61/74 PASS before any restart (74 cases; #24 + #25 known-stale;
 #   #3 + #21 also LLM-stochastic but ~85% PASS — not formally known-stale):
 #   #25 — "is Art.5 a non-conformity?" (anti-hallucination, since 2026-05-27)
 #   #24 — "what is our GDPR Art.32 status?" (~30-50% pass rate; LLM-stochastic
@@ -155,7 +155,7 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260531_*.csv (73 cases — 21 core + 18
+- Most recent: results/eval_20260601_0616_b17.csv (74 cases — 21 core + 18
   feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf +
   5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
@@ -163,8 +163,10 @@ with d.session() as s:
   + 1 Phase B op_process return-of-assets + 1 Phase B op_process labelling +
   1 Phase B policy_program information-transfer + 1 Phase B op_process identity
   + 1 Phase B op_process authentication-info + 1 Phase B op_process incident-planning
-  + 1 Phase B op_process disruption-security + 1 Phase B op_process ICT-readiness)
-- Score: 60/73 PASS, 0 WARN, 13 FAIL (some runs 61/73 or 62/73 due to #24
+  + 1 Phase B op_process disruption-security + 1 Phase B op_process ICT-readiness
+  + 1 Phase B records_program records-protection)
+- Score: 73/74 PASS, 0 WARN, 1 FAIL on 2026-06-01 (clean run; only #25 known-stale).
+  Some runs may dip to 61/74 or 62/74 due to #24
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -274,6 +276,19 @@ with d.session() as s:
   (analogous to A.5.16 SLA-met flag); new bia_link + bcp_alignment
   MUSTs pin BIA traceability and pair-control coherence; freshness-
   convention cleanup moved freshness_days from plan to review)
+- Case 74 locks in: Phase B records_program records-protection (A.5.33;
+  first records_program promotion since batch 1 — re-validates spine
+  consistency after 11 op_process + 2 policy_program batches in
+  between; pairs naturally with the batch 1 records-family A.5.5/6/9/
+  31/32; procedure leaf preserves the prior single-leaf id; annual
+  review cadence 365d matches the stable-doctrine records-family
+  controls A.5.5/A.5.6 (A.5.31 is the regulatory-change-driven 180d
+  exception); ITEM-ID PRESERVATION critical — SPEC_ART_5_1_E (GDPR
+  Art.5.1.e storage limitation derivation) references four A.5.33
+  items by id, all four preserved across the promotion; new
+  proc_pii_overlay SHOULD encodes the ISO × GDPR Art.5.1.e
+  integration at spec level — third ISO × GDPR integration leaf
+  after pii_overlay on A.5.13 + legal_jurisdiction on A.5.14)
 - Prior known-stale cases (#2, #3, #4, #24, #25, #28) restored to PASS on
   2026-05-25 via Path A: replayed status_before from posture_status_log to
   revert the 27 Stage-1-driven finding mutations, and stripped the offending
