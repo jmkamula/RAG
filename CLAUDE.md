@@ -176,9 +176,10 @@ with d.session() as s:
   + 5 Phase B GDPR Chapter II Principles 5-pack — FIRST GDPR BATCH
   + 11 Phase B GDPR Chapter III Rights 11-pack — largest GDPR batch
   + 11 Phase B GDPR Chapter IV core 11-pack — Art.24/25/26/27/28/29/31/32/33/34/35
-  + 8 Phase B GDPR Ch IV DPO+codes+cert 8-pack — closes Ch IV)
-- Score: 190/192 PASS target on 2026-06-02 (#24 + #25 known-stale).
-  Clean-run upper bound is 190/192. Some runs may dip due to #3/#21 stochasticity
+  + 8 Phase B GDPR Ch IV DPO+codes+cert 8-pack — closes Ch IV
+  + 6 Phase B GDPR Ch V Transfers 6-pack — closes Ch V + entire curation arc)
+- Score: 196/198 PASS target on 2026-06-02 (#24 + #25 known-stale).
+  Clean-run upper bound is 196/198. Some runs may dip due to #3/#21 stochasticity
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -376,6 +377,17 @@ with d.session() as s:
   legal_jurisdiction, A.5.33 proc_pii_overlay; new owner MUST + 4th
   SHOULD pims_alignment encode the ISO/IEC 27701 PIMS extension
   where in scope)
+- Cases 193-198 lock in: Phase B GDPR Ch V Transfers 6-pack (batch 30,
+  2026-06-02; FINAL BATCH OF THE CURATION ARC). All op_process 4-leaf.
+  Art.44 transfer principle universal; Art.45 adequacy profile_fact;
+  Art.46 SCCs/safeguards profile_fact; Art.47 BCRs profile_fact;
+  Art.48 foreign authority universal; Art.49 derogations profile_fact.
+  Transfer mechanism hierarchy + Schrems II TIA + EDPB 01/2020
+  supplementary measures + EDPB 2/2018 derogation strict-construction
+  all encoded in MUSTs. Arion posture: 4 OFI (Art.44/45/46/48 — uses
+  US-hosted cloud informal mechanisms) + 2 N/A (Art.47/49 no BCRs no
+  derogations). **PHASE B CURATION ARC COMPLETE** — ISO 27001 + GDPR
+  fully multi-leaf at Style v2
 - Cases 185-192 lock in: Phase B GDPR Ch IV DPO + codes + certification
   8-pack (batch 29b, 2026-06-02). All 8 op_process profile_fact 4-leaf.
   Art.36 prior consultation; Art.37/38/39 DPO cluster (designation +

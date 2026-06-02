@@ -3161,6 +3161,534 @@ REQ_ART43_PROGRAM_REVIEW = EvidenceRequirement(
 )
 
 
+# ──────────────────────────────────────────────────────────────────────────────
+# GDPR Chapter V — Transfers of personal data to third countries or
+# international organisations (Art.44-49). Batch 30 (2026-06-02) — FINAL
+# batch of the curation arc. 6 op_process 4-leaf specs covering the
+# transfer framework end-to-end.
+# ──────────────────────────────────────────────────────────────────────────────
+
+
+# ── Art.44 General principle for transfers — op_process 4-leaf, universal ─────
+# Any transfer outside EU/EEA triggers the Chapter V framework. Universal:
+# binds every controller/processor making such transfers.
+
+REQ_ART44_TRANSFER_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.44:transfer_principle_procedure",
+    control_ref   = "Art.44",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Transfer Principle Procedure",
+    trigger_type  = "universal",
+    description   = "Art.44 establishes that any transfer of personal data to a third country / international organisation requires compliance with Chapter V conditions, applied also to onward transfers. The procedure governs how transfers are identified, classified by mechanism (Art.45/46/47/49), and tracked",
+    must_contain  = [
+        ChecklistItem("item:Art.44:transfer_identification","Transfer-identification mechanism — any flow of personal data outside EU/EEA flagged at intake (vendor onboarding, integration design, support routing)", "must", True, "Art.44 — apply chapter conditions"),
+        ChecklistItem("item:Art.44:mechanism_selection","Mechanism-selection decision tree (Art.45 adequacy first / Art.46 safeguards / Art.47 BCRs / Art.49 derogation last resort)", "must", True, "Art.44-49 hierarchy"),
+        ChecklistItem("item:Art.44:onward_transfer","Onward-transfer handling (Art.44 second sentence — subsequent transfers from third country to another third country also subject to chapter)", "must", True, "Art.44 — onward transfers"),
+        ChecklistItem("item:Art.44:level_of_protection","Level-of-protection assessment — overall protection of data subjects per Art.44 final clause (not undermined by transfer)", "must", True, "Art.44 — not undermined"),
+        ChecklistItem("item:Art.44:owner",          "Named owner (DPO + legal counsel)", "must", True, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.44:schrems_ii_overlay","Schrems II + Transfer Impact Assessment (TIA) overlay — supplementary measures consideration where third-country law affects protection level", "should", True, "EDPB Recommendations 01/2020 on supplementary measures"),
+    ],
+)
+
+REQ_ART44_TRANSFER_REGISTER = EvidenceRequirement(
+    id            = "req:Art.44:transfer_register",
+    control_ref   = "Art.44",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "International Transfer Register",
+    trigger_type  = "universal",
+    description   = "Per-transfer record cataloguing every flow of personal data outside EU/EEA — destination, mechanism, last-assessed date. Drives 'show me every transfer with its safeguard' audit. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.44:reg_transfer_id","Per-row unique transfer identifier", "must", True, "Audit"),
+        ChecklistItem("item:Art.44:reg_data_categories","Per-row data categories (cross-link to Art.30 RoPA)", "must", True, "Cross-article coherence"),
+        ChecklistItem("item:Art.44:reg_destination","Per-row destination country + recipient entity", "must", True, "Art.44 — third country"),
+        ChecklistItem("item:Art.44:reg_mechanism","Per-row Art.45/46/47/49 mechanism cited", "must", True, "Art.44-49 framework"),
+        ChecklistItem("item:Art.44:reg_assessed_date","Per-row last-assessed date (drives staleness)", "must", True, "Currency"),
+        ChecklistItem("item:Art.44:reg_owner",       "Per-row owner", "must", True, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.44:reg_tia_link","Per-row link to Transfer Impact Assessment where Schrems II analysis applies", "should", True, "Schrems II"),
+    ],
+)
+
+REQ_ART44_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.44:applicable_scope",
+    control_ref   = "Art.44",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Transfer Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — what counts as a 'transfer' (EDPB Guidelines 05/2021 three cumulative criteria: controller/processor / personal data made available / to a recipient in a third country), boundary with intra-group / EU/EEA flows",
+    must_contain  = [
+        ChecklistItem("item:Art.44:scope_transfer_definition","Operational definition of 'transfer' per EDPB 05/2021 three cumulative criteria", "must", True, "EDPB 05/2021"),
+        ChecklistItem("item:Art.44:scope_eu_eea","EU/EEA boundary — which destinations are within / outside the GDPR territorial scope", "must", True, "Art.3 + Chapter V applicability"),
+        ChecklistItem("item:Art.44:scope_excluded_flows","Excluded flows (purely-internal within EU/EEA; transit-only; non-personal data)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.44:scope_change_drivers","Trigger list (new vendor in third country, vendor migration, new business region)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART44_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.44:transfer_program_review",
+    control_ref   = "Art.44",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Transfer Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification — every active transfer has a current Art.45/46/47/49 mechanism, register reflects current vendor landscape, Schrems II-style TIA considerations applied (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.44:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.44:rev_reviewer","Reviewer identity (DPO + legal counsel + procurement)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.44:rev_register_currency","Register currency — every flagged transfer in last-assessment freshness window", "must", True, "Cross-leaf coherence"),
+        ChecklistItem("item:Art.44:rev_mechanism_validity","Mechanism-validity sample — Art.45 adequacy decisions, Art.46 SCCs, Art.47 BCRs all current versions / approvals", "must", True, "Art.44-49"),
+        ChecklistItem("item:Art.44:rev_silent_transfer_sweep","Silent-transfer sweep — verify no new vendor or service-shape change created an unflagged transfer", "must", True, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.44:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.45 Adequacy decision — op_process 4-leaf, profile_fact (batch 30) ─────
+# profile_fact: applies when org transfers to countries covered by an EU
+# Commission adequacy decision (Japan, UK, Andorra, Argentina, Canada
+# commercial, Faroe, Guernsey, Isle of Man, Israel, Jersey, NZ, Switzerland,
+# Uruguay, US-DPF participants).
+
+REQ_ART45_ADEQUACY_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.45:adequacy_procedure",
+    control_ref   = "Art.45",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Adequacy Reliance Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.45 permits transfers to third countries / international organisations covered by an EU Commission adequacy decision. The procedure governs how adequacy is verified per transfer, including sub-decision conditions (e.g. US Data Privacy Framework requires recipient self-certification status)",
+    must_contain  = [
+        ChecklistItem("item:Art.45:adequacy_decision_check","Adequacy-decision check — Art.45.3 Commission decision verified against current EU register", "must", True, "Art.45.3"),
+        ChecklistItem("item:Art.45:partial_adequacy","Partial / sector / territory-specific adequacy handled (e.g. US-DPF applies only to certified entities, not US-wide)", "must", True, "Art.45.3 — specified territory or sector"),
+        ChecklistItem("item:Art.45:recipient_eligibility","Recipient eligibility check (e.g. US-DPF requires recipient on active list with current self-certification)", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.45:repeal_monitoring","Repeal monitoring — Schrems-style invalidations (Schrems I/II) and Commission Art.45.5 amend/repeal/suspend actions tracked", "must", True, "Art.45.5"),
+        ChecklistItem("item:Art.45:owner",          "Named owner (DPO + legal counsel)", "must", True, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.45:periodic_review","Periodic Art.45.4 review awareness — Commission reviews adequacy at least every 4 years", "should", True, "Art.45.4"),
+    ],
+)
+
+REQ_ART45_ADEQUACY_REGISTER = EvidenceRequirement(
+    id            = "req:Art.45:adequacy_register",
+    control_ref   = "Art.45",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Adequacy Reliance Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-transfer record proving adequacy reliance is current and recipient is eligible. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.45:reg_transfer_id","Per-row transfer id (Art.44 register cross-ref)", "must", True, "Cross-leaf"),
+        ChecklistItem("item:Art.45:reg_adequacy_decision","Per-row adequacy decision cited (Commission decision reference + effective date)", "must", True, "Art.45.3"),
+        ChecklistItem("item:Art.45:reg_recipient_eligible","Per-row recipient-eligibility status (e.g. US-DPF active certification verified)", "must", True, "Art.45.3 partial"),
+        ChecklistItem("item:Art.45:reg_last_verified","Per-row last-verified date", "must", True, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.45:reg_invalidation_watch","Per-row invalidation-watch flag (active CJEU challenges / Commission review status)", "should", True, "Schrems-style risk"),
+    ],
+)
+
+REQ_ART45_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.45:applicable_scope",
+    control_ref   = "Art.45",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Adequacy Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which destinations covered by Art.45.3 decisions the org actually relies on + recipient-eligibility verification approach",
+    must_contain  = [
+        ChecklistItem("item:Art.45:scope_destinations","Adequate destinations in use (e.g. UK, Japan, US-DPF certified)", "must", True, "Art.45.3"),
+        ChecklistItem("item:Art.45:scope_eligibility_proof","Eligibility-proof method per destination (Commission register / DPF list / etc.)", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.45:scope_excluded","Destinations specifically NOT relying on adequacy (fall to Art.46/49)", "must", True, "Defensible bounding"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.45:scope_change_drivers","Trigger list (new adequacy decision, repeal, vendor change of certification)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART45_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.45:adequacy_program_review",
+    control_ref   = "Art.45",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Adequacy Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — adequacy decisions still in force, recipient eligibility re-checked, invalidation watch maintained (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.45:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.45:rev_reviewer","Reviewer identity (DPO + legal counsel)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.45:rev_decision_currency","Decision currency — every cited adequacy decision still in force (not repealed, suspended, or invalidated)", "must", True, "Art.45.5"),
+        ChecklistItem("item:Art.45:rev_recipient_recheck","Recipient-eligibility recheck — certifications still active (US-DPF, etc.)", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.45:rev_fallback_readiness","Fallback readiness — if a decision were invalidated, Art.46 fallback (e.g. SCCs) pre-staged with affected vendors", "must", True, "Operational resilience"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.45:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.46 Appropriate safeguards (SCCs, BCRs, codes, cert, ad-hoc) ───────────
+# op_process 4-leaf, profile_fact (batch 30). Most common transfer mechanism.
+# Applies when org transfers to non-adequate destinations.
+
+REQ_ART46_SAFEGUARDS_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.46:appropriate_safeguards_procedure",
+    control_ref   = "Art.46",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Appropriate Safeguards Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.46 permits transfers without adequacy when the controller/processor has provided appropriate safeguards AND enforceable data subject rights and effective legal remedies are available. The procedure governs safeguard selection (SCCs / BCRs / codes / certification / ad-hoc clauses) + Schrems II TIA + supplementary measures",
+    must_contain  = [
+        ChecklistItem("item:Art.46:safeguard_selection","Safeguard-selection decision tree (Art.46.2 a-f or Art.46.3 a-b after authorisation)", "must", True, "Art.46.2-3"),
+        ChecklistItem("item:Art.46:sccs_handling","SCCs handling — current 2021/914 EU SCCs version (modules 1-4) used + correct module per relationship", "must", True, "Art.46.2.c-d + Commission Decision 2021/914"),
+        ChecklistItem("item:Art.46:tia",            "Transfer Impact Assessment (TIA) per Schrems II — third-country law evaluated for fundamental rights compatibility", "must", True, "Schrems II — case C-311/18"),
+        ChecklistItem("item:Art.46:supplementary_measures","Supplementary measures applied where TIA reveals gaps (technical: encryption-with-keys-only-in-EU / pseudonymisation; organisational: legal challenge commitments; contractual: notification of access requests)", "must", True, "EDPB Recommendations 01/2020"),
+        ChecklistItem("item:Art.46:enforceable_rights","Enforceable data subject rights and effective legal remedies verification", "must", True, "Art.46.1"),
+        ChecklistItem("item:Art.46:owner",          "Named owner (DPO + legal counsel + procurement)", "must", True, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.46:authorisation","Art.46.3 SA authorisation tracking where ad-hoc clauses used", "should", True, "Art.46.3"),
+    ],
+)
+
+REQ_ART46_SAFEGUARDS_REGISTER = EvidenceRequirement(
+    id            = "req:Art.46:safeguards_register",
+    control_ref   = "Art.46",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Safeguards Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-transfer record proving Art.46 safeguard is in place with TIA + supplementary measures where applicable. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.46:reg_transfer_id","Per-row transfer id (Art.44 register cross-ref)", "must", True, "Cross-leaf"),
+        ChecklistItem("item:Art.46:reg_safeguard","Per-row safeguard type (Art.46.2 a-f / Art.46.3 a-b)", "must", True, "Art.46.2-3"),
+        ChecklistItem("item:Art.46:reg_sccs_module","Per-row SCC module where applicable (1: C2C / 2: C2P / 3: P2P / 4: P2C)", "must", True, "Commission Decision 2021/914"),
+        ChecklistItem("item:Art.46:reg_tia_outcome","Per-row TIA outcome (acceptable / acceptable-with-supplementary-measures / not-acceptable)", "must", True, "Schrems II"),
+        ChecklistItem("item:Art.46:reg_supplementary_measures","Per-row supplementary measures applied (where TIA required)", "must", True, "EDPB 01/2020"),
+        ChecklistItem("item:Art.46:reg_signed_date","Per-row safeguard signed / countersigned date", "must", True, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.46:reg_authorisation","Per-row SA authorisation reference (Art.46.3)", "should", True, "Art.46.3"),
+    ],
+)
+
+REQ_ART46_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.46:applicable_scope",
+    control_ref   = "Art.46",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Safeguards Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — non-adequate transfers in scope, safeguard mechanism mix in use, TIA methodology",
+    must_contain  = [
+        ChecklistItem("item:Art.46:scope_non_adequate_transfers","Non-adequate transfers enumerated (cross-link to Art.44 register filtered by mechanism=Art.46)", "must", True, "Coverage"),
+        ChecklistItem("item:Art.46:scope_mechanism_mix","Mechanism mix in use (SCCs predominantly / some BCRs / any ad-hoc clauses)", "must", True, "Art.46.2-3"),
+        ChecklistItem("item:Art.46:scope_tia_methodology","TIA methodology (EDPB six-step / template-based / ad-hoc per transfer)", "must", True, "Schrems II"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.46:scope_change_drivers","Trigger list (new vendor in non-adequate country, Schrems-style ruling, SCCs version change)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART46_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.46:safeguards_program_review",
+    control_ref   = "Art.46",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Safeguards Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — SCCs on current version, TIAs current, supplementary measures effective, vendor compliance attested (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.46:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.46:rev_reviewer","Reviewer identity (DPO + legal counsel)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.46:rev_sccs_version","SCCs version audit — any old-version SCCs identified for migration", "must", True, "Commission Decision 2021/914"),
+        ChecklistItem("item:Art.46:rev_tia_currency","TIA currency — TIAs refreshed where third-country law has changed materially", "must", True, "Schrems II — ongoing duty"),
+        ChecklistItem("item:Art.46:rev_supplementary_audit","Supplementary measures audit — applied measures (encryption keys, pseudonymisation, etc.) actually in place at vendor", "must", True, "EDPB 01/2020"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.46:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.47 Binding Corporate Rules — op_process 4-leaf, profile_fact ──────────
+# (batch 30). profile_fact: applies when org has approved BCRs. Used by
+# large multi-national groups for intra-group transfers.
+
+REQ_ART47_BCR_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.47:bcr_procedure",
+    control_ref   = "Art.47",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Binding Corporate Rules Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.47 governs BCRs as a transfer safeguard for intra-group transfers. Requires lead SA approval per Art.47.1 + content per Art.47.2 a-n",
+    must_contain  = [
+        ChecklistItem("item:Art.47:approval","Lead SA approval evidence per Art.47.1 with consistency mechanism", "must", True, "Art.47.1 + Art.63"),
+        ChecklistItem("item:Art.47:legally_binding","Legally binding intra-group instrument referenced (BCR-C for controllers / BCR-P for processors)", "must", True, "Art.47.1.a"),
+        ChecklistItem("item:Art.47:enforceable_rights","Enforceable data subject rights expressly conferred (Art.47.1.b)", "must", True, "Art.47.1.b"),
+        ChecklistItem("item:Art.47:content_check","Art.47.2 a-n content checklist mapped to BCR sections", "must", True, "Art.47.2"),
+        ChecklistItem("item:Art.47:liability","Liability allocation per Art.47.2.f-h", "must", True, "Art.47.2.f-h"),
+        ChecklistItem("item:Art.47:complaints_handling","Complaints handling per Art.47.2.i (data subjects + SAs)", "must", True, "Art.47.2.i"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.47:training","Periodic training on BCR provisions for group personnel handling transferred data", "should", True, "Art.47.2.k"),
+    ],
+)
+
+REQ_ART47_BCR_REGISTER = EvidenceRequirement(
+    id            = "req:Art.47:bcr_register",
+    control_ref   = "Art.47",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "BCR Coverage Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-entity record of which group entities are bound by the BCRs + which transfers rely on them. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.47:reg_entity_id","Per-row group entity bound by BCRs", "must", True, "Audit"),
+        ChecklistItem("item:Art.47:reg_jurisdiction","Per-row jurisdiction of entity", "must", True, "Defining the relationship"),
+        ChecklistItem("item:Art.47:reg_bcr_role","Per-row BCR role (BCR-C controller / BCR-P processor)", "must", True, "Art.47.1"),
+        ChecklistItem("item:Art.47:reg_transfers","Per-row transfers covered (link to Art.44 register)", "must", True, "Cross-leaf"),
+        ChecklistItem("item:Art.47:reg_signed_date","Per-row binding-commitment signed date", "must", True, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.47:reg_complaint_route","Per-row complaint-routing target (group privacy team contact)", "should", True, "Art.47.2.i"),
+    ],
+)
+
+REQ_ART47_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.47:applicable_scope",
+    control_ref   = "Art.47",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable BCR Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which intra-group flows are covered by BCRs, which entities are bound, third-country expansion handling",
+    must_contain  = [
+        ChecklistItem("item:Art.47:scope_intra_group_flows","Intra-group flows covered (controller-to-controller / controller-to-processor)", "must", True, "Art.47 — group of enterprises"),
+        ChecklistItem("item:Art.47:scope_entities","Bound entities enumerated (jurisdictions + roles)", "must", True, "Art.47.1.a"),
+        ChecklistItem("item:Art.47:scope_extension","New-entity onboarding rule — how a newly-acquired or newly-spun-up entity joins the BCRs (or moves to alternative safeguard)", "must", True, "Lifecycle"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.47:scope_change_drivers","Trigger list (M&A, divestment, regulatory change)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART47_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.47:bcr_program_review",
+    control_ref   = "Art.47",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "BCR Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every bound entity still in compliance, complaints handled per Art.47.2.i, training delivered, lead SA notified of material changes (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.47:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.47:rev_reviewer","Reviewer identity (DPO + group privacy lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.47:rev_compliance_audit","Compliance audit — bound entities adhering to BCR provisions (sampled audit results)", "must", True, "Art.47.2.j"),
+        ChecklistItem("item:Art.47:rev_complaints_handled","Complaints-handling audit — Art.47.2.i path functioning + SAs receiving cooperation", "must", True, "Art.47.2.i"),
+        ChecklistItem("item:Art.47:rev_change_notification","Material-change notification — significant changes notified to lead SA per Art.63 consistency", "must", True, "Art.47.2.k"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.47:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.48 Transfers/disclosures not authorised by Union law — op_process ────
+# 4-leaf, universal (binds all in principle). Triggered by foreign-authority
+# disclosure requests; most orgs need a procedure even if never invoked.
+
+REQ_ART48_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.48:foreign_authority_procedure",
+    control_ref   = "Art.48",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Foreign Authority Disclosure Procedure",
+    trigger_type  = "universal",
+    description   = "Art.48 provides that any judgment or administrative decision of a third-country authority requiring disclosure of personal data may only be recognised if based on an international agreement (e.g. MLAT). The procedure governs how foreign-authority requests are received, evaluated, and responded to",
+    must_contain  = [
+        ChecklistItem("item:Art.48:intake",         "Foreign-authority request intake channel (DPO + legal + executive sponsor)", "must", True, "Art.48"),
+        ChecklistItem("item:Art.48:agreement_check","International agreement check — request based on MLAT / treaty / EU+third-country agreement", "must", True, "Art.48 — based on international agreement"),
+        ChecklistItem("item:Art.48:art49_overlay","Art.49 derogation overlay — even with no international agreement, transfer may be lawful under Art.49.1 (e.g. legal claims defence)", "must", True, "Art.48 + Art.49 interplay"),
+        ChecklistItem("item:Art.48:refusal_path",   "Refusal path documented — when Art.48 conditions not met + Art.49 not applicable, request refused", "must", True, "Art.48 — only recognised if"),
+        ChecklistItem("item:Art.48:subject_notification","Subject notification consideration — where lawful, notify affected subjects of disclosure", "must", True, "Best practice"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.48:transparency_report","Transparency report contribution — aggregate disclosure statistics published periodically", "should", True, "Trust + market practice"),
+    ],
+)
+
+REQ_ART48_REQUEST_REGISTER = EvidenceRequirement(
+    id            = "req:Art.48:foreign_request_register",
+    control_ref   = "Art.48",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Foreign Authority Request Register",
+    trigger_type  = "universal",
+    description   = "Per-request record (most orgs will have empty register — that's a defensible outcome). Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.48:reg_request_id","Per-row request id (or 'no requests this period' affirmative statement)", "must", True, "Audit"),
+        ChecklistItem("item:Art.48:reg_authority","Per-row requesting authority + jurisdiction", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.48:reg_legal_basis_check","Per-row legal-basis check outcome (international agreement / Art.49 derogation / refused)", "must", True, "Art.48"),
+        ChecklistItem("item:Art.48:reg_decision",   "Per-row decision (disclosed / partially-disclosed / refused)", "must", True, "Audit clarity"),
+        ChecklistItem("item:Art.48:reg_date",       "Per-row decision date", "must", True, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.48:reg_legal_review","Per-row legal counsel review evidence", "should", True, "Defensibility"),
+    ],
+)
+
+REQ_ART48_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.48:applicable_scope",
+    control_ref   = "Art.48",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Foreign Authority Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which third-country authorities might request disclosure, which international agreements (MLATs, GDPR-adequacy) are applicable",
+    must_contain  = [
+        ChecklistItem("item:Art.48:scope_authority_types","Foreign authority types in scope (law enforcement / national security / tax / regulatory)", "must", True, "Art.48"),
+        ChecklistItem("item:Art.48:scope_agreements","International agreements catalogued (US-EU MLAT, sector-specific agreements)", "must", True, "Art.48 — based on agreement"),
+        ChecklistItem("item:Art.48:scope_excluded","Excluded request types (subpoenas without agreement basis — refused absent Art.49 derogation)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.48:scope_change_drivers","Trigger list (new MLAT entered into force, new jurisdiction)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART48_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.48:foreign_authority_program_review",
+    control_ref   = "Art.48",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Foreign Authority Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification — procedure tested via tabletop where no real requests occurred, agreements catalogue current, any actual disclosures defensible (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.48:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.48:rev_reviewer","Reviewer identity (DPO + legal counsel + executive sponsor)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.48:rev_register_currency","Register currency — every actual request handled per procedure", "must", True, "Cross-leaf"),
+        ChecklistItem("item:Art.48:rev_tabletop","Tabletop exercise — procedure tested at least annually against a hypothetical foreign authority request (mirrors A.5.24 IR exercises)", "must", True, "Effectiveness"),
+        ChecklistItem("item:Art.48:rev_agreements_currency","Agreements currency — international agreements catalogue refreshed", "must", True, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.48:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.49 Derogations for specific situations — op_process 4-leaf ────────────
+# profile_fact (batch 30). Last-resort transfer mechanism. Applies when org
+# invokes one of the Art.49.1 a-g derogations.
+
+REQ_ART49_DEROGATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.49:derogations_procedure",
+    control_ref   = "Art.49",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Derogations Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.49 provides specific narrowly-construed derogations from the Art.45/46 rule when no adequacy decision and no appropriate safeguards apply. The procedure governs derogation selection + EDPB-strict-construction discipline + non-repetitive-non-massive constraint",
+    must_contain  = [
+        ChecklistItem("item:Art.49:derogation_catalog","Art.49.1 a-g derogation catalog (explicit consent / contract necessity / public interest / legal claims / vital interests / public register / compelling legitimate interests last-resort)", "must", True, "Art.49.1"),
+        ChecklistItem("item:Art.49:strict_construction","Strict-construction discipline — EDPB Guidelines 2/2018 require narrow interpretation; derogations are exceptional", "must", True, "EDPB 2/2018"),
+        ChecklistItem("item:Art.49:non_repetitive","Non-repetitive transfer constraint for Art.49.1 second-paragraph compelling-legitimate-interests route", "must", True, "Art.49.1 second paragraph"),
+        ChecklistItem("item:Art.49:sa_notification","SA notification for Art.49.1 second-paragraph last-resort derogation", "must", True, "Art.49.1 second paragraph"),
+        ChecklistItem("item:Art.49:subject_information","Subject information — for compelling-legitimate-interests, transfer + grounds informed to subject", "must", True, "Art.49.1 second paragraph"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.49:fallback_evaluation","Documented attempt at Art.46 safeguards before resorting to Art.49 (per EDPB 2/2018)", "should", True, "Defensibility"),
+    ],
+)
+
+REQ_ART49_INVOCATION_REGISTER = EvidenceRequirement(
+    id            = "req:Art.49:invocation_register",
+    control_ref   = "Art.49",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Derogation Invocation Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-invocation record. Annual refresh (freshness=365). Most orgs should have a sparse register — frequent derogation invocations signal Art.46 should be used instead",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.49:reg_invocation_id","Per-row invocation id", "must", True, "Audit"),
+        ChecklistItem("item:Art.49:reg_derogation","Per-row Art.49.1 derogation cited (a-g + second-paragraph)", "must", True, "Art.49.1"),
+        ChecklistItem("item:Art.49:reg_destination","Per-row destination + recipient", "must", True, "Cross-leaf with Art.44"),
+        ChecklistItem("item:Art.49:reg_subject_count","Per-row data subject count (frequency / volume — non-repetitive test)", "must", True, "Art.49.1 second paragraph"),
+        ChecklistItem("item:Art.49:reg_documentation","Per-row supporting documentation (consent capture / contract / claim doc / public-interest determination)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.49:reg_sa_notification_date","Per-row SA notification date where Art.49.1 second-paragraph used", "should", True, "Art.49.1 second paragraph"),
+    ],
+)
+
+REQ_ART49_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.49:applicable_scope",
+    control_ref   = "Art.49",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Derogations Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which Art.49.1 derogations the org actually relies on, with strict-construction analysis",
+    must_contain  = [
+        ChecklistItem("item:Art.49:scope_derogations_used","Derogations actually relied on enumerated (most orgs: a explicit consent + b contract; some: e legal claims)", "must", True, "Art.49.1"),
+        ChecklistItem("item:Art.49:scope_excluded","Derogations explicitly NOT relied on (rationale)", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.49:scope_repetitive_test","Operational interpretation of 'non-repetitive' for last-resort derogation", "must", True, "Art.49.1 second paragraph"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.49:scope_change_drivers","Trigger list (new business case requiring derogation, regulatory change)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART49_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.49:derogations_program_review",
+    control_ref   = "Art.49",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Derogations Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — invocations defensible against strict construction, frequent-invocation patterns flagged for Art.46 migration (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.49:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.49:rev_reviewer","Reviewer identity (DPO + legal counsel)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.49:rev_strict_construction_audit","Strict-construction audit — sampled invocations reviewed against EDPB 2/2018 narrow interpretation", "must", True, "EDPB 2/2018"),
+        ChecklistItem("item:Art.49:rev_pattern_detection","Pattern detection — recurring derogation use for same recipient/purpose flagged for Art.46 migration", "must", True, "Art.49 — exceptional use"),
+        ChecklistItem("item:Art.49:rev_sa_notifications","SA notifications audit — Art.49.1 second-paragraph notifications dispatched as required", "must", True, "Art.49.1 second paragraph"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.49:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# End GDPR Chapter V Transfers — closes the curation arc.
+# ──────────────────────────────────────────────────────────────────────────────
+
+
 # ── Annex A.5.23 — InfoSec for use of cloud services — operational_process (4-leaf) ──
 # Promoted 2026-05-31 from single-leaf to multi-leaf per
 # [[curation-program-full-multi-leaf]]. Spine: operational_process → policy
@@ -16202,6 +16730,34 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_ART43_APPLICABLE_SCOPE,
     REQ_ART43_PROGRAM_REVIEW,
     # ── End batch 29b — GDPR Ch IV FULLY CLOSED ──────────────────────────────
+    # ── Batch 30 (2026-06-02) — GDPR Ch V Transfers 6-pack — FINAL BATCH ─────
+    # Art.44 general principle + Art.45 adequacy + Art.46 safeguards/SCCs +
+    # Art.47 BCRs + Art.48 foreign authority + Art.49 derogations.
+    REQ_ART44_TRANSFER_PROCEDURE,
+    REQ_ART44_TRANSFER_REGISTER,
+    REQ_ART44_APPLICABLE_SCOPE,
+    REQ_ART44_PROGRAM_REVIEW,
+    REQ_ART45_ADEQUACY_PROCEDURE,
+    REQ_ART45_ADEQUACY_REGISTER,
+    REQ_ART45_APPLICABLE_SCOPE,
+    REQ_ART45_PROGRAM_REVIEW,
+    REQ_ART46_SAFEGUARDS_PROCEDURE,
+    REQ_ART46_SAFEGUARDS_REGISTER,
+    REQ_ART46_APPLICABLE_SCOPE,
+    REQ_ART46_PROGRAM_REVIEW,
+    REQ_ART47_BCR_PROCEDURE,
+    REQ_ART47_BCR_REGISTER,
+    REQ_ART47_APPLICABLE_SCOPE,
+    REQ_ART47_PROGRAM_REVIEW,
+    REQ_ART48_PROCEDURE,
+    REQ_ART48_REQUEST_REGISTER,
+    REQ_ART48_APPLICABLE_SCOPE,
+    REQ_ART48_PROGRAM_REVIEW,
+    REQ_ART49_DEROGATION_PROCEDURE,
+    REQ_ART49_INVOCATION_REGISTER,
+    REQ_ART49_APPLICABLE_SCOPE,
+    REQ_ART49_PROGRAM_REVIEW,
+    # ── End batch 30 — GDPR FULLY CLOSED — CURATION ARC COMPLETE ─────────────
     # ── Batch 27 — GDPR Chapter II profile_fact specs ────────────────────────
     # Art.8 — op_process 4-leaf (profile_fact: org offers info-society services to minors)
     REQ_ART8_CHILD_CONSENT_PROCEDURE,

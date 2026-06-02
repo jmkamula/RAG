@@ -65,6 +65,80 @@ class EvalResult:
 
 EVAL_CASES = [
 
+    # ── Phase B batch 30 (2026-06-02) — GDPR Ch V Transfers 6-pack — FINAL BATCH ──
+    # Art.44 general principle + Art.45 adequacy + Art.46 safeguards/SCCs
+    # + Art.47 BCRs + Art.48 foreign authority + Art.49 derogations.
+    # All op_process 4-leaf. Art.44/Art.48 universal; Art.45/46/47/49
+    # profile_fact. Closes GDPR Chapter V — and the Phase B curation arc.
+    # Arion posture: Art.44/45/46/48 OFI (transfers happen, mechanisms
+    # informal); Art.47/49 N/A (no BCRs, no derogations).
+
+    EvalCase(
+        id=198,
+        query="pending engine verdict for Art.44",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "transfers"],
+        expected_refs=["Art.44"], expected_type="posture_check",
+        must_contain=["Art.44", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.44 (Transfer general principle) — op_process 4-leaf, universal (NEW). transfer_procedure + transfer_register + applicable_scope + program_review. Schrems II Transfer Impact Assessment + EDPB 05/2021 three-criteria transfer definition encoded.",
+    ),
+
+    EvalCase(
+        id=197,
+        query="pending engine verdict for Art.45",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "adequacy", "profile_fact"],
+        expected_refs=["Art.45"], expected_type="posture_check",
+        must_contain=["Art.45", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.45 (Adequacy decision) — op_process 4-leaf, profile_fact (NEW). Adequacy-decision check + partial-adequacy (US-DPF) recipient eligibility + Schrems-invalidation monitoring + Art.46 fallback readiness.",
+    ),
+
+    EvalCase(
+        id=196,
+        query="pending engine verdict for Art.46",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "sccs", "safeguards", "profile_fact"],
+        expected_refs=["Art.46"], expected_type="posture_check",
+        must_contain=["Art.46", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.46 (Appropriate safeguards) — op_process 4-leaf, profile_fact (NEW). 2021/914 SCCs modules + TIA + supplementary measures (EDPB 01/2020) + enforceable rights verification.",
+    ),
+
+    EvalCase(
+        id=195,
+        query="pending engine verdict for Art.47",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "bcrs", "profile_fact"],
+        expected_refs=["Art.47"], expected_type="posture_check",
+        must_contain=["Art.47", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.47 (BCRs) — op_process 4-leaf, profile_fact (NEW). Lead SA approval + Art.47.2 a-n content + Art.47.2.i complaint handling. Arion N/A (not a multi-national group with BCRs).",
+    ),
+
+    EvalCase(
+        id=194,
+        query="pending engine verdict for Art.48",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "foreign_authority"],
+        expected_refs=["Art.48"], expected_type="posture_check",
+        must_contain=["Art.48", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.48 (Foreign authority disclosures) — op_process 4-leaf, universal (NEW). International agreement check + Art.49 derogation overlay + documented refusal path + tabletop testing in review.",
+    ),
+
+    EvalCase(
+        id=193,
+        query="pending engine verdict for Art.49",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "derogations", "profile_fact"],
+        expected_refs=["Art.49"], expected_type="posture_check",
+        must_contain=["Art.49", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.49 (Derogations) — op_process 4-leaf, profile_fact (NEW). Art.49.1 a-g catalog + EDPB 2/2018 strict construction + non-repetitive constraint + SA notification. FINAL eval case of the Phase B curation arc — closes GDPR Chapter V.",
+    ),
+
     # ── Phase B batch 29b (2026-06-02) — GDPR Ch IV DPO + codes + cert 8-pack ──
     # Art.36 prior consultation + Art.37/38/39 DPO cluster + Art.40/41 codes
     # + Art.42/43 certification. All 8 op_process profile_fact 4-leaf.
