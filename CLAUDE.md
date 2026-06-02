@@ -175,9 +175,10 @@ with d.session() as s:
   + 8 Phase B ISMS chapters 8+9+10 close-out 8-pack — ISO 27001 fully closed
   + 5 Phase B GDPR Chapter II Principles 5-pack — FIRST GDPR BATCH
   + 11 Phase B GDPR Chapter III Rights 11-pack — largest GDPR batch
-  + 11 Phase B GDPR Chapter IV core 11-pack — Art.24/25/26/27/28/29/31/32/33/34/35)
-- Score: 182/184 PASS target on 2026-06-02 (#24 + #25 known-stale).
-  Clean-run upper bound is 182/184. Some runs may dip due to #3/#21 stochasticity
+  + 11 Phase B GDPR Chapter IV core 11-pack — Art.24/25/26/27/28/29/31/32/33/34/35
+  + 8 Phase B GDPR Ch IV DPO+codes+cert 8-pack — closes Ch IV)
+- Score: 190/192 PASS target on 2026-06-02 (#24 + #25 known-stale).
+  Clean-run upper bound is 190/192. Some runs may dip due to #3/#21 stochasticity
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -375,6 +376,15 @@ with d.session() as s:
   legal_jurisdiction, A.5.33 proc_pii_overlay; new owner MUST + 4th
   SHOULD pims_alignment encode the ISO/IEC 27701 PIMS extension
   where in scope)
+- Cases 185-192 lock in: Phase B GDPR Ch IV DPO + codes + certification
+  8-pack (batch 29b, 2026-06-02). All 8 op_process profile_fact 4-leaf.
+  Art.36 prior consultation; Art.37/38/39 DPO cluster (designation +
+  position + tasks); Art.40/41 codes of conduct (adherence + monitoring
+  body); Art.42/43 certification (scheme + cert body). Most uniform
+  spine batch — every spec same shape, no promotions/expansions.
+  Arion posture: 6 N/A + 3 OFI (CISO informal DPO without formal Art.37
+  designation despite likely Art.37.1.b applicability). GDPR Ch IV
+  FULLY CLOSED (19 articles across 29a + 29b)
 - Cases 174-184 lock in: Phase B GDPR Chapter IV core 11-pack (batch 29a,
   2026-06-02). 3 DerivedSpec expansions (Art.24 0→4 direct = 10 children;
   Art.25 1→4 = 10; Art.32 1→4 = 9) + 2 promotions (Art.28 DPA + Art.33

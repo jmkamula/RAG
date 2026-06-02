@@ -65,6 +65,101 @@ class EvalResult:
 
 EVAL_CASES = [
 
+    # ── Phase B batch 29b (2026-06-02) — GDPR Ch IV DPO + codes + cert 8-pack ──
+    # Art.36 prior consultation + Art.37/38/39 DPO cluster + Art.40/41 codes
+    # + Art.42/43 certification. All 8 op_process profile_fact 4-leaf.
+    # All N/A or OFI on Arion (no joint controllers, EU-established, CISO
+    # acts informally as DPO, no codes/cert). Engine NC surfaces in Stage-2.
+    # CLOSES GDPR Ch IV.
+
+    EvalCase(
+        id=192,
+        query="pending engine verdict for Art.36",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "prior_consultation", "profile_fact"],
+        expected_refs=["Art.36"], expected_type="posture_check",
+        must_contain=["Art.36", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.36 (Prior consultation) — op_process 4-leaf, profile_fact (NEW): consultation_procedure + register + applicable_scope + program_review. 8-week SA waiting period enforced in procedure MUST.",
+    ),
+
+    EvalCase(
+        id=191,
+        query="pending engine verdict for Art.37",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "dpo", "profile_fact"],
+        expected_refs=["Art.37"], expected_type="posture_check",
+        must_contain=["Art.37", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.37 (DPO designation) — op_process 4-leaf, profile_fact (NEW). Applicability assessment per Art.37.1 a-c criteria + Art.37.4 voluntary route + Art.37.5 qualifications + Art.37.7 publication.",
+    ),
+
+    EvalCase(
+        id=190,
+        query="pending engine verdict for Art.38",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "dpo_position", "profile_fact"],
+        expected_refs=["Art.38"], expected_type="posture_check",
+        must_contain=["Art.38", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.38 (DPO position) — op_process 4-leaf, profile_fact (NEW). Position guarantees: involvement, resources, independence (reporting to top management), no COI, subject contact point. Paired with Art.37/39.",
+    ),
+
+    EvalCase(
+        id=189,
+        query="pending engine verdict for Art.39",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "dpo_tasks", "profile_fact"],
+        expected_refs=["Art.39"], expected_type="posture_check",
+        must_contain=["Art.39", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.39 (DPO tasks) — op_process 4-leaf, profile_fact (NEW). Art.39.1 a-e tasks + Art.39.2 risk-based approach. DPO activity register documents per-period proof of execution.",
+    ),
+
+    EvalCase(
+        id=188,
+        query="pending engine verdict for Art.40",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "codes_of_conduct", "profile_fact"],
+        expected_refs=["Art.40"], expected_type="posture_check",
+        must_contain=["Art.40", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.40 (Codes of conduct adherence) — op_process 4-leaf, profile_fact (NEW). Adherence procedure + register + applicable scope + program review. Arion live N/A (not adhering to any code).",
+    ),
+
+    EvalCase(
+        id=187,
+        query="pending engine verdict for Art.41",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "code_monitoring", "profile_fact"],
+        expected_refs=["Art.41"], expected_type="posture_check",
+        must_contain=["Art.41", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.41 (Monitoring of approved codes) — op_process 4-leaf, profile_fact (NEW). Applies when org IS an accredited monitoring body. Very rare — Arion live N/A.",
+    ),
+
+    EvalCase(
+        id=186,
+        query="pending engine verdict for Art.42",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "certification", "profile_fact"],
+        expected_refs=["Art.42"], expected_type="posture_check",
+        must_contain=["Art.42", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.42 (GDPR certification) — op_process 4-leaf, profile_fact (NEW). Voluntary scheme adherence (Europrivacy + sectoral). Max 3-year validity (Art.42.7) enforced. Arion live N/A (no GDPR-specific cert).",
+    ),
+
+    EvalCase(
+        id=185,
+        query="pending engine verdict for Art.43",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "cert_body", "profile_fact"],
+        expected_refs=["Art.43"], expected_type="posture_check",
+        must_contain=["Art.43", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.43 (Certification bodies) — op_process 4-leaf, profile_fact (NEW). Applies when org IS an accredited cert body. Extremely rare. CLOSES GDPR Ch IV.",
+    ),
+
     # ── Phase B batch 29a (2026-06-02) — GDPR Ch IV Controller/Processor 11-pack ──
     # 3 DerivedSpec expansions (Art.24 6+0→6+4=10; Art.25 6+1→6+4=10; Art.32
     # 5+1→5+4=9). 2 promotions (Art.28 + Art.33 → 4-leaf). 6 new specs

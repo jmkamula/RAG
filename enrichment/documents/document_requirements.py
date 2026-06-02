@@ -2479,6 +2479,688 @@ REQ_ART35_PROGRAM_REVIEW = EvidenceRequirement(
 )
 
 
+# ── Art.36 Prior consultation — op_process 4-leaf, profile_fact (batch 29b) ───
+# profile_fact: applies when an Art.35 DPIA reveals residual high risk
+# absent mitigations. Triggered by Art.35 outcome (low-frequency).
+
+REQ_ART36_CONSULTATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.36:prior_consultation_procedure",
+    control_ref   = "Art.36",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Art.36 Prior Consultation Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.36 requires the controller to consult the SA before processing where a DPIA indicates residual high risk despite mitigations. The procedure governs trigger detection, SA engagement, and the 8-week waiting period",
+    must_contain  = [
+        ChecklistItem("item:Art.36:trigger_detection","Trigger detection — Art.35 DPIA flagging residual high risk despite mitigations", "must", True, "Art.36.1"),
+        ChecklistItem("item:Art.36:submission_content","Submission content per Art.36.3 (respective responsibilities + processing purposes/means + measures and safeguards + DPO contact + DPIA + other relevant info)", "must", True, "Art.36.3"),
+        ChecklistItem("item:Art.36:waiting_period","8-week waiting period (extendable +6 weeks) before processing begins (Art.36.2)", "must", True, "Art.36.2"),
+        ChecklistItem("item:Art.36:sa_advice_handling","SA written advice handling — incorporated or formally rejected with rationale", "must", True, "Art.36.2"),
+        ChecklistItem("item:Art.36:owner",          "Named owner (DPO + legal counsel)", "must", True, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.36:legislation_link","Link to Art.36.5 — MS law may require prior consultation in additional cases", "should", True, "Art.36.5"),
+    ],
+)
+
+REQ_ART36_CONSULTATION_REGISTER = EvidenceRequirement(
+    id            = "req:Art.36:consultation_register",
+    control_ref   = "Art.36",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Prior Consultation Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-consultation record. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.36:reg_consultation_id","Per-row consultation id", "must", True, "Audit"),
+        ChecklistItem("item:Art.36:reg_dpia_xref","Per-row DPIA cross-reference (Art.35 register entry)", "must", True, "Cross-article"),
+        ChecklistItem("item:Art.36:reg_submission_date","Per-row submission date to SA", "must", True, "Currency"),
+        ChecklistItem("item:Art.36:reg_sa","Per-row supervisory authority engaged", "must", True, "Art.55-56"),
+        ChecklistItem("item:Art.36:reg_outcome","Per-row outcome (approved / approved-with-conditions / advised-against)", "must", True, "Art.36.2"),
+        ChecklistItem("item:Art.36:reg_decision_to_proceed","Per-row controller decision after SA advice (proceed / modify / abandon)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.36:reg_response_date","Per-row SA response date", "should", True, "Audit clarity"),
+    ],
+)
+
+REQ_ART36_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.36:applicable_scope",
+    control_ref   = "Art.36",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Art.36 Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — when prior consultation IS required (Art.36.1 residual high risk; Art.36.5 MS law additional cases)",
+    must_contain  = [
+        ChecklistItem("item:Art.36:scope_residual_high_risk","Operational interpretation of 'residual high risk' (post-mitigation high likelihood × severity)", "must", True, "Art.36.1"),
+        ChecklistItem("item:Art.36:scope_ms_law","MS law Art.36.5 additional consultation triggers identified per applicable jurisdiction", "must", True, "Art.36.5"),
+        ChecklistItem("item:Art.36:scope_excluded","Out-of-scope processing (residual low/medium risk; DPIA-mitigated to acceptable level)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.36:scope_change_drivers","Trigger list (new high-risk processing line, regulator guidance update)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART36_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.36:consultation_program_review",
+    control_ref   = "Art.36",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Art.36 Prior Consultation Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every residual-high-risk DPIA escalated to SA, advice acted on, waiting periods respected (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.36:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.36:rev_reviewer","Reviewer identity (DPO + legal)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.36:rev_escalation_audit","Escalation audit — every Art.35 DPIA flagging residual high risk has a corresponding Art.36 consultation row", "must", True, "Cross-article"),
+        ChecklistItem("item:Art.36:rev_waiting_compliance","Waiting-period compliance — no processing started before SA waiting period elapsed", "must", True, "Art.36.2"),
+        ChecklistItem("item:Art.36:rev_advice_handling","Advice handling sample — SA written advice incorporated or formally rejected with rationale recorded", "must", True, "Art.36.2"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.36:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.37 DPO designation — op_process 4-leaf, profile_fact (batch 29b) ──────
+# profile_fact: applies when Art.37.1 a-c criteria met (public authority OR
+# core systematic monitoring large-scale OR core large-scale special category).
+# Many orgs choose to designate voluntarily even when not mandatory.
+
+REQ_ART37_DESIGNATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.37:dpo_designation_procedure",
+    control_ref   = "Art.37",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "DPO Designation Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.37 governs whether a DPO must be designated (Art.37.1 a-c) and the qualifications + publication requirements. Paired with Art.38 (position) + Art.39 (tasks)",
+    must_contain  = [
+        ChecklistItem("item:Art.37:applicability_assessment","Applicability assessment per Art.37.1 a-c criteria (public authority / core systematic monitoring / core large-scale special category)", "must", True, "Art.37.1"),
+        ChecklistItem("item:Art.37:voluntary_decision","Voluntary designation decision recorded where not mandatory but chosen", "must", True, "Art.37.4 — voluntary route"),
+        ChecklistItem("item:Art.37:qualifications","DPO qualifications stated (Art.37.5 — expert knowledge of data protection law and practices, ability to fulfil tasks)", "must", True, "Art.37.5"),
+        ChecklistItem("item:Art.37:publication","DPO contact published (privacy notice + SA communication per Art.37.7)", "must", True, "Art.37.7"),
+        ChecklistItem("item:Art.37:internal_vs_external","Internal-vs-external decision (Art.37.6 — staff member OR fulfil tasks under service contract)", "must", True, "Art.37.6"),
+        ChecklistItem("item:Art.37:owner",          "Named owner (executive sponsor)", "must", True, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.37:group_designation","Group-level designation rule (Art.37.2 single DPO for an undertaking group)", "should", True, "Art.37.2"),
+    ],
+)
+
+REQ_ART37_DESIGNATION_RECORD = EvidenceRequirement(
+    id            = "req:Art.37:designation_record",
+    control_ref   = "Art.37",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "DPO Designation Record",
+    trigger_type  = "profile_fact",
+    description   = "Per-DPO designation record (most orgs have 1; group designations may have more). Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.37:reg_dpo_identity","DPO identity per row", "must", True, "Authenticity"),
+        ChecklistItem("item:Art.37:reg_qualifications_evidence","Per-row qualifications evidence (CV / certifications / professional experience)", "must", True, "Art.37.5"),
+        ChecklistItem("item:Art.37:reg_designation_date","Per-row designation date", "must", True, "Currency"),
+        ChecklistItem("item:Art.37:reg_employment_type","Per-row employment type (internal staff / external service contract)", "must", True, "Art.37.6"),
+        ChecklistItem("item:Art.37:reg_publication_evidence","Per-row publication evidence (privacy notice URL + SA notification confirmation)", "must", True, "Art.37.7"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.37:reg_contract_link","Per-row link to employment / service contract document", "should", True, "Audit defensibility"),
+    ],
+)
+
+REQ_ART37_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.37:applicable_scope",
+    control_ref   = "Art.37",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable DPO Designation Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — Art.37.1 criteria operationalisation, MS law mandatory designation (Art.37.4 second sentence), voluntary route",
+    must_contain  = [
+        ChecklistItem("item:Art.37:scope_criteria_test","Art.37.1 criteria test operationalised (a public authority / b core activities = systematic monitoring large-scale / c core activities = large-scale special category)", "must", True, "Art.37.1"),
+        ChecklistItem("item:Art.37:scope_ms_law_overlay","MS law overlay — Art.37.4 second sentence (MS may require designation in additional cases)", "must", True, "Art.37.4"),
+        ChecklistItem("item:Art.37:scope_voluntary_assessment","Voluntary-designation assessment — even when not mandatory, did the org choose to designate (rationale recorded)", "must", True, "Art.37.4 — voluntary"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.37:scope_change_drivers","Trigger list (org-scale change, processing-shift, new MS entry)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART37_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.37:dpo_designation_program_review",
+    control_ref   = "Art.37",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "DPO Designation Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — DPO designation still appropriate (org may have grown into Art.37.1 criteria), qualifications still hold, publication current (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.37:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.37:rev_reviewer","Reviewer identity (executive sponsor + legal counsel)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.37:rev_criteria_recheck","Criteria recheck — Art.37.1 applicability re-assessed against current processing scope", "must", True, "Art.37.1"),
+        ChecklistItem("item:Art.37:rev_qualifications_currency","Qualifications currency — DPO continuing-education or certification renewal evidence", "must", True, "Art.37.5"),
+        ChecklistItem("item:Art.37:rev_publication_current","Publication currency — privacy notice + SA registration still reflect current DPO contact", "must", True, "Art.37.7"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.37:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.38 DPO position — op_process 4-leaf, profile_fact (batch 29b) ─────────
+# Paired with Art.37 (designation) + Art.39 (tasks). Profile_fact mirrors
+# Art.37 trigger.
+
+REQ_ART38_POSITION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.38:dpo_position_procedure",
+    control_ref   = "Art.38",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "DPO Position Safeguards Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.38 establishes the DPO's position guarantees: involvement in all data-protection issues, resources, independence, no conflict of interest. The procedure documents how these guarantees are operationally enforced",
+    must_contain  = [
+        ChecklistItem("item:Art.38:involvement","DPO involvement in 'all issues which relate to the protection of personal data' (Art.38.1) — invitation rights + escalation paths", "must", True, "Art.38.1"),
+        ChecklistItem("item:Art.38:resources","Resources provided to DPO (budget + staff support + system access + training time per Art.38.2)", "must", True, "Art.38.2"),
+        ChecklistItem("item:Art.38:reporting_line","DPO reporting line — directly to highest management level (Art.38.3)", "must", True, "Art.38.3"),
+        ChecklistItem("item:Art.38:independence","Independence protection — DPO not instructed on tasks (Art.38.3) + not dismissed/penalised for performance of tasks (Art.38.3)", "must", True, "Art.38.3"),
+        ChecklistItem("item:Art.38:conflict_of_interest","No conflict of interest with other tasks/duties (Art.38.6) — e.g. DPO not also the CISO if those roles set the rules being audited", "must", True, "Art.38.6"),
+        ChecklistItem("item:Art.38:subject_contact","Data subjects' contact point — DPO accessible (Art.38.4)", "must", True, "Art.38.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.38:secrecy","Confidentiality / secrecy obligations of DPO documented (Art.38.5)", "should", True, "Art.38.5"),
+    ],
+)
+
+REQ_ART38_POSITION_EVIDENCE_REGISTER = EvidenceRequirement(
+    id            = "req:Art.38:position_evidence_register",
+    control_ref   = "Art.38",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "DPO Position Evidence Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-period record of position-guarantee evidence (board attendance, budget approval, independence demonstrations). Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.38:reg_period","Per-row reporting period (typically quarterly)", "must", True, "Cadence"),
+        ChecklistItem("item:Art.38:reg_board_attendance","Per-row board / management forum attendance evidence", "must", True, "Art.38.3 — reporting line"),
+        ChecklistItem("item:Art.38:reg_budget_approval","Per-row budget approval / spend evidence (Art.38.2 resources)", "must", True, "Art.38.2"),
+        ChecklistItem("item:Art.38:reg_independence_signal","Per-row independence signals (no overruled DPO opinion; if overruled, formal record + escalation)", "must", True, "Art.38.3"),
+        ChecklistItem("item:Art.38:reg_coi_attestation","Per-row conflict-of-interest re-attestation (Art.38.6)", "must", True, "Art.38.6"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.38:reg_training","Per-row training / development hours (sustains expertise per Art.37.5)", "should", True, "Cross-article"),
+    ],
+)
+
+REQ_ART38_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.38:applicable_scope",
+    control_ref   = "Art.38",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Art.38 Position Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which forums DPO attends, what budget envelope applies, the org's COI matrix",
+    must_contain  = [
+        ChecklistItem("item:Art.38:scope_forums","Forums DPO is invited to (board, exec committee, change-management, incident response, vendor onboarding)", "must", True, "Art.38.1"),
+        ChecklistItem("item:Art.38:scope_resource_envelope","Resource envelope (budget category + escalation threshold for additional spend)", "must", True, "Art.38.2"),
+        ChecklistItem("item:Art.38:scope_coi_matrix","COI matrix — which other roles DPO cannot also hold (CISO / security architect / product owner of PII flows / etc.)", "must", True, "Art.38.6"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.38:scope_change_drivers","Trigger list (org restructure, DPO transition, new business line)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART38_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.38:position_program_review",
+    control_ref   = "Art.38",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "DPO Position Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — DPO position guarantees actually upheld (involvement, resources, independence, no COI) (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.38:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.38:rev_reviewer","Reviewer identity (executive sponsor + non-executive director / external counsel if available)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.38:rev_involvement_audit","Involvement audit — DPO invited to all in-scope forums; not bypassed on data-protection decisions", "must", True, "Art.38.1"),
+        ChecklistItem("item:Art.38:rev_independence_audit","Independence audit — no recorded instructions on tasks; no dismissal pressure", "must", True, "Art.38.3"),
+        ChecklistItem("item:Art.38:rev_coi_recheck","COI recheck — DPO role assignments still free of conflicts", "must", True, "Art.38.6"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.38:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.39 DPO tasks — op_process 4-leaf, profile_fact (batch 29b) ────────────
+# Paired with Art.37/38. Profile_fact mirrors Art.37 trigger.
+
+REQ_ART39_TASKS_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.39:dpo_tasks_procedure",
+    control_ref   = "Art.39",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "DPO Tasks Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.39 enumerates the DPO's tasks (Art.39.1 a-e + Art.39.2 risk-based approach). The procedure documents how each task is operationalised in practice",
+    must_contain  = [
+        ChecklistItem("item:Art.39:inform_advise","Inform + advise the controller/processor + employees who carry out processing (Art.39.1.a)", "must", True, "Art.39.1.a"),
+        ChecklistItem("item:Art.39:monitor_compliance","Monitor compliance with GDPR + MS data protection provisions + internal policies (Art.39.1.b)", "must", True, "Art.39.1.b"),
+        ChecklistItem("item:Art.39:dpia_advice","Provide DPIA advice + monitor performance per Art.39.1.c (links to Art.35)", "must", True, "Art.39.1.c"),
+        ChecklistItem("item:Art.39:sa_cooperation","Cooperate with SA — point of contact for prior consultation (Art.39.1.d-e)", "must", True, "Art.39.1.d-e"),
+        ChecklistItem("item:Art.39:risk_based","Risk-based approach (Art.39.2 — having due regard to the risk associated with processing)", "must", True, "Art.39.2"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.39:awareness_program","Awareness programme contribution (Art.39.1.b 'awareness-raising and training')", "should", True, "Art.39.1.b"),
+    ],
+)
+
+REQ_ART39_ACTIVITY_REGISTER = EvidenceRequirement(
+    id            = "req:Art.39:dpo_activity_register",
+    control_ref   = "Art.39",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "DPO Activity Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-period activity log proving DPO is performing the Art.39 tasks. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.39:reg_period","Per-row reporting period", "must", True, "Cadence"),
+        ChecklistItem("item:Art.39:reg_advice_log","Per-row advice given log (informal queries + formal opinions)", "must", True, "Art.39.1.a"),
+        ChecklistItem("item:Art.39:reg_monitoring_activities","Per-row monitoring activities (audits, sample reviews, compliance checks)", "must", True, "Art.39.1.b"),
+        ChecklistItem("item:Art.39:reg_dpia_engagements","Per-row DPIA engagements (which DPIAs DPO advised on)", "must", True, "Art.39.1.c"),
+        ChecklistItem("item:Art.39:reg_sa_interactions","Per-row SA interactions (consultations, inquiries handled)", "must", True, "Art.39.1.d-e"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.39:reg_training_delivered","Per-row training / awareness sessions delivered", "should", True, "Art.39.1.b"),
+    ],
+)
+
+REQ_ART39_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.39:applicable_scope",
+    control_ref   = "Art.39",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Art.39 Tasks Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which tasks the DPO is formally responsible for + how the risk-based approach is operationalised (where DPO concentrates attention)",
+    must_contain  = [
+        ChecklistItem("item:Art.39:scope_tasks_assigned","Tasks formally assigned to DPO (mapping to Art.39.1 a-e)", "must", True, "Art.39.1"),
+        ChecklistItem("item:Art.39:scope_risk_prioritisation","Risk-based prioritisation criteria (per Art.39.2 due regard to risk)", "must", True, "Art.39.2"),
+        ChecklistItem("item:Art.39:scope_additional_tasks","Additional tasks beyond Art.39.1 (if any) consistent with Art.38.6 no-conflict-of-interest rule", "must", True, "Art.38.6 boundary"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.39:scope_change_drivers","Trigger list (regulatory change, processing-shift, DPO transition)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART39_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.39:dpo_tasks_program_review",
+    control_ref   = "Art.39",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "DPO Tasks Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — DPO actually performing each Art.39.1 task, risk-based priorities being honoured, awareness contribution effective (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.39:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.39:rev_reviewer","Reviewer identity (executive sponsor)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.39:rev_task_coverage","Task coverage audit — every Art.39.1 task has corresponding activity-register entries", "must", True, "Art.39.1"),
+        ChecklistItem("item:Art.39:rev_risk_prioritisation_check","Risk prioritisation check — DPO attention skewed toward higher-risk processing", "must", True, "Art.39.2"),
+        ChecklistItem("item:Art.39:rev_quality_signals","Quality signals — incident-trend reduction, DPIA-handling improvement, SA-interaction outcomes", "must", True, "Effectiveness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.39:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.40 Codes of conduct — op_process 4-leaf, profile_fact (batch 29b) ─────
+# profile_fact: applies when org adheres to an approved code of conduct.
+# N/A for most tenants.
+
+REQ_ART40_ADHERENCE_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.40:code_adherence_procedure",
+    control_ref   = "Art.40",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Code of Conduct Adherence Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.40 encourages associations to draw up codes; controllers/processors choose to adhere (Art.40.3). The procedure governs adherence selection, compliance demonstration, and monitoring body interaction",
+    must_contain  = [
+        ChecklistItem("item:Art.40:code_selection","Code selection rationale — which approved Art.40 code is adhered to and why (sector relevance / customer requirement)", "must", True, "Art.40.3"),
+        ChecklistItem("item:Art.40:adherence_decision","Adherence decision recorded — formal commitment to code mechanism", "must", True, "Art.40.3"),
+        ChecklistItem("item:Art.40:compliance_demonstration","Compliance demonstration approach (code-specific evidence requirements)", "must", True, "Art.40.4"),
+        ChecklistItem("item:Art.40:monitoring_body_interaction","Monitoring body interaction (Art.41 — accredited monitoring body for the code)", "must", True, "Art.40.4 + Art.41"),
+        ChecklistItem("item:Art.40:non_eu_overlay","Non-EU controller/processor overlay (Art.40.3 — codes may provide GDPR-equivalent safeguards)", "must", True, "Art.40.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.40:exit_provisions","Exit provisions — how withdrawal from the code is handled", "should", True, "Operational hygiene"),
+    ],
+)
+
+REQ_ART40_ADHERENCE_REGISTER = EvidenceRequirement(
+    id            = "req:Art.40:adherence_register",
+    control_ref   = "Art.40",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Code Adherence Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-code register listing adhered codes + status. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.40:reg_code_id","Per-row code identifier (name + association + approval reference)", "must", True, "Audit"),
+        ChecklistItem("item:Art.40:reg_adherence_date","Per-row adherence date", "must", True, "Currency"),
+        ChecklistItem("item:Art.40:reg_scope","Per-row scope of adherence (which processing activities)", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.40:reg_monitoring_body","Per-row monitoring body engaged (Art.41)", "must", True, "Art.41"),
+        ChecklistItem("item:Art.40:reg_status","Per-row status (active / suspended / withdrawn-on-date)", "must", True, "Lifecycle"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.40:reg_last_assessment","Per-row last monitoring assessment date", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART40_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.40:applicable_scope",
+    control_ref   = "Art.40",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Code Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which approved codes (Art.40.5 EDPB register) are applicable to the org's sector/processing",
+    must_contain  = [
+        ChecklistItem("item:Art.40:scope_sector_codes","Sector codes available (cloud, healthcare, advertising, etc.)", "must", True, "Art.40.2"),
+        ChecklistItem("item:Art.40:scope_chosen_codes","Codes chosen for adherence with rationale", "must", True, "Adherence basis"),
+        ChecklistItem("item:Art.40:scope_excluded","Codes considered but not adhered to (rationale)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.40:scope_change_drivers","Trigger list (new code approved in sector, customer requirement)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART40_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.40:code_program_review",
+    control_ref   = "Art.40",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Code Adherence Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — adherences still active, monitoring body engagements current, code-specific obligations honoured (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.40:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.40:rev_reviewer","Reviewer identity (DPO + sector compliance lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.40:rev_adherence_currency","Adherence currency — every active adherence has current monitoring body sign-off", "must", True, "Art.40.4"),
+        ChecklistItem("item:Art.40:rev_monitoring_body_status","Monitoring body status — body still accredited (Art.41) and engaged", "must", True, "Art.41"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.40:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.41 Monitoring of approved codes — op_process 4-leaf, profile_fact ─────
+# (batch 29b). Profile_fact: applies when org IS the accredited monitoring
+# body for an approved code. Very rare — usually N/A.
+
+REQ_ART41_MONITORING_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.41:code_monitoring_procedure",
+    control_ref   = "Art.41",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Code Monitoring Body Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.41 governs the accredited body that monitors a code of conduct's compliance. Applies when the org IS the monitoring body. Very rare for typical controllers/processors",
+    must_contain  = [
+        ChecklistItem("item:Art.41:accreditation_evidence","Accreditation by competent SA (Art.41.1)", "must", True, "Art.41.1"),
+        ChecklistItem("item:Art.41:independence","Independence from adherents demonstrated (Art.41.2.a)", "must", True, "Art.41.2.a"),
+        ChecklistItem("item:Art.41:expertise","Expertise in code's subject matter (Art.41.2.b)", "must", True, "Art.41.2.b"),
+        ChecklistItem("item:Art.41:procedures","Procedures for assessing eligibility + monitoring + complaint handling (Art.41.2.c-d)", "must", True, "Art.41.2.c-d"),
+        ChecklistItem("item:Art.41:coi_management","COI management (Art.41.2.e)", "must", True, "Art.41.2.e"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.41:transparent_procedures","Procedures published / transparent", "should", True, "Best practice"),
+    ],
+)
+
+REQ_ART41_MONITORING_RECORD = EvidenceRequirement(
+    id            = "req:Art.41:monitoring_record",
+    control_ref   = "Art.41",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Code Monitoring Activity Record",
+    trigger_type  = "profile_fact",
+    description   = "Per-monitoring activity record — assessments, complaint handlings, infringement actions (Art.41.4). Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.41:reg_adherent","Per-row adherent monitored", "must", True, "Audit"),
+        ChecklistItem("item:Art.41:reg_activity_type","Per-row activity (eligibility check / periodic monitoring / complaint / infringement action)", "must", True, "Art.41.2-4"),
+        ChecklistItem("item:Art.41:reg_outcome","Per-row outcome (compliant / non-compliant — corrective / suspension / exclusion per Art.41.4)", "must", True, "Art.41.4"),
+        ChecklistItem("item:Art.41:reg_sa_notification","Per-row SA notification where Art.41.4 actions taken", "must", True, "Art.41.4"),
+        ChecklistItem("item:Art.41:reg_date","Per-row activity date", "must", True, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.41:reg_appeal","Per-row appeal handling where adherent contests the outcome", "should", True, "Procedural fairness"),
+    ],
+)
+
+REQ_ART41_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.41:applicable_scope",
+    control_ref   = "Art.41",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Art.41 Monitoring Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which codes the org monitors, accreditation jurisdiction(s)",
+    must_contain  = [
+        ChecklistItem("item:Art.41:scope_codes_monitored","Codes monitored enumerated", "must", True, "Art.41.1"),
+        ChecklistItem("item:Art.41:scope_accreditation","Accreditation source (SA + scope of accreditation)", "must", True, "Art.41.1"),
+        ChecklistItem("item:Art.41:scope_jurisdictions","Jurisdictions covered", "must", True, "Defining the relationship"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.41:scope_change_drivers","Trigger list (new code, jurisdiction expansion)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART41_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.41:monitoring_program_review",
+    control_ref   = "Art.41",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Code Monitoring Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — accreditation current, monitoring activities on cadence, infringement actions defensible (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.41:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.41:rev_reviewer","Reviewer identity (executive sponsor + independent counsel)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.41:rev_accreditation_currency","Accreditation currency — SA accreditation still in force", "must", True, "Art.41.1"),
+        ChecklistItem("item:Art.41:rev_monitoring_cadence","Monitoring cadence audit — every adherent assessed per procedure", "must", True, "Art.41.2"),
+        ChecklistItem("item:Art.41:rev_action_quality","Action quality — corrective / suspension / exclusion decisions defensible vs procedure", "must", True, "Art.41.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.41:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.42 Certification — op_process 4-leaf, profile_fact (batch 29b) ────────
+# profile_fact: applies when org seeks or holds GDPR certification (e.g.
+# Europrivacy or sector-specific). Distinct from ISO 27001 cert. N/A for many.
+
+REQ_ART42_CERTIFICATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.42:certification_procedure",
+    control_ref   = "Art.42",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "GDPR Certification Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.42 governs how a controller/processor obtains and maintains GDPR certification per approved certification mechanisms (Art.42.5). Certification provides demonstrability + may serve transfer safeguards (Art.46.2.f)",
+    must_contain  = [
+        ChecklistItem("item:Art.42:scheme_selection","Certification scheme selection — which Art.42.5 approved scheme + which Art.43 accredited body", "must", True, "Art.42.5"),
+        ChecklistItem("item:Art.42:processing_scope","Processing operations within certification scope clearly defined", "must", True, "Art.42.7"),
+        ChecklistItem("item:Art.42:evidence_assembly","Evidence assembly per scheme's criteria (audit-ready)", "must", True, "Art.42.6"),
+        ChecklistItem("item:Art.42:body_engagement","Certification body engagement (assessment + decision)", "must", True, "Art.42.5"),
+        ChecklistItem("item:Art.42:renewal","Renewal cadence — certification limited to max 3 years (Art.42.7)", "must", True, "Art.42.7"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.42:transfer_use","Use for international transfers (Art.46.2.f) where applicable", "should", True, "Art.46.2.f"),
+    ],
+)
+
+REQ_ART42_CERTIFICATION_REGISTER = EvidenceRequirement(
+    id            = "req:Art.42:certification_register",
+    control_ref   = "Art.42",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Certification Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-certification record (active + past). Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.42:reg_certification_id","Per-row certification identifier", "must", True, "Audit"),
+        ChecklistItem("item:Art.42:reg_scheme","Per-row scheme + Art.43 body", "must", True, "Art.42.5"),
+        ChecklistItem("item:Art.42:reg_scope","Per-row processing scope covered", "must", True, "Art.42.7"),
+        ChecklistItem("item:Art.42:reg_valid_until","Per-row validity end date (max 3 years from issue)", "must", True, "Art.42.7"),
+        ChecklistItem("item:Art.42:reg_status","Per-row status (active / under renewal / withdrawn)", "must", True, "Lifecycle"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.42:reg_surveillance_dates","Per-row surveillance audit dates", "should", True, "Cadence"),
+    ],
+)
+
+REQ_ART42_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.42:applicable_scope",
+    control_ref   = "Art.42",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Certification Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which schemes are relevant (Art.42.5 register), which processing activities are in certification scope, business case (Art.42.1 voluntary)",
+    must_contain  = [
+        ChecklistItem("item:Art.42:scope_schemes_available","Available approved schemes enumerated", "must", True, "Art.42.5"),
+        ChecklistItem("item:Art.42:scope_target_processing","Target processing activities for certification", "must", True, "Art.42.7"),
+        ChecklistItem("item:Art.42:scope_business_case","Business case (customer requirement / Art.46.2.f transfer safeguard / market differentiation)", "must", True, "Art.42.1 — voluntary"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.42:scope_change_drivers","Trigger list (new approved scheme, sectoral pressure)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART42_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.42:certification_program_review",
+    control_ref   = "Art.42",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Certification Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — certifications current, surveillance audits passing, renewal on track (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.42:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.42:rev_reviewer","Reviewer identity (DPO + executive sponsor)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.42:rev_validity_audit","Validity audit — every active certification still in validity period; renewal in flight where approaching expiry", "must", True, "Art.42.7"),
+        ChecklistItem("item:Art.42:rev_surveillance_status","Surveillance status — most-recent surveillance audit outcome reviewed", "must", True, "Lifecycle"),
+        ChecklistItem("item:Art.42:rev_business_case_recheck","Business case recheck — certification still providing value (transfer enablement / customer requirement / market position)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.42:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.43 Certification bodies — op_process 4-leaf, profile_fact (batch 29b) ──
+# profile_fact: applies when org IS an accredited certification body.
+# Extremely rare — almost always N/A.
+
+REQ_ART43_BODY_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.43:certification_body_procedure",
+    control_ref   = "Art.43",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Certification Body Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.43 governs the accredited body that issues GDPR certifications. Applies when the org IS the certification body. Extremely rare for typical controllers/processors",
+    must_contain  = [
+        ChecklistItem("item:Art.43:accreditation","Accreditation per Art.43.1 (by SA OR by national accreditation body per ISO 17065)", "must", True, "Art.43.1"),
+        ChecklistItem("item:Art.43:independence","Independence + expertise demonstrated (Art.43.2.a-b)", "must", True, "Art.43.2.a-b"),
+        ChecklistItem("item:Art.43:procedures","Procedures for issue + renewal + withdrawal + complaint handling (Art.43.2.c-d)", "must", True, "Art.43.2.c-d"),
+        ChecklistItem("item:Art.43:coi","COI management (Art.43.2.e)", "must", True, "Art.43.2.e"),
+        ChecklistItem("item:Art.43:public_criteria","Public certification criteria approved by SA / EDPB (Art.43.5)", "must", True, "Art.43.5"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.43:fee_transparency","Fee transparency", "should", True, "Trust"),
+    ],
+)
+
+REQ_ART43_ISSUANCE_RECORD = EvidenceRequirement(
+    id            = "req:Art.43:certification_issuance_record",
+    control_ref   = "Art.43",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Certification Issuance Record",
+    trigger_type  = "profile_fact",
+    description   = "Per-certificate issuance record. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.43:reg_recipient","Per-row certificate recipient", "must", True, "Audit"),
+        ChecklistItem("item:Art.43:reg_assessment","Per-row assessment outcome with assessor identity", "must", True, "Art.43.2.c"),
+        ChecklistItem("item:Art.43:reg_decision_date","Per-row decision date + decision (issue / renew / withdraw / refuse)", "must", True, "Currency"),
+        ChecklistItem("item:Art.43:reg_grounds","Per-row decision grounds (criteria-mapped)", "must", True, "Art.43.5"),
+        ChecklistItem("item:Art.43:reg_validity","Per-row validity period (max 3 years per Art.42.7)", "must", True, "Art.42.7"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.43:reg_complaint","Per-row complaint handling where contested", "should", True, "Art.43.2.d"),
+    ],
+)
+
+REQ_ART43_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.43:applicable_scope",
+    control_ref   = "Art.43",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Cert Body Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which schemes the body issues against, accredited jurisdictions",
+    must_contain  = [
+        ChecklistItem("item:Art.43:scope_schemes_issued","Schemes the body issues against", "must", True, "Art.42.5 + Art.43.5"),
+        ChecklistItem("item:Art.43:scope_accreditation","Accreditation scope + source (SA / NAB)", "must", True, "Art.43.1"),
+        ChecklistItem("item:Art.43:scope_jurisdictions","Jurisdictions covered", "must", True, "Defining the relationship"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.43:scope_change_drivers","Trigger list (new approved scheme, jurisdiction expansion)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART43_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.43:cert_body_program_review",
+    control_ref   = "Art.43",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Cert Body Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — accreditation current, issuances criteria-aligned, complaints handled (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.43:rev_date","Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.43:rev_reviewer","Reviewer identity (executive sponsor + independent counsel)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.43:rev_accreditation_currency","Accreditation currency — SA / NAB accreditation still in force", "must", True, "Art.43.1"),
+        ChecklistItem("item:Art.43:rev_issuance_audit","Issuance audit — sampled decisions reviewed against published criteria (Art.43.5)", "must", True, "Art.43.5"),
+        ChecklistItem("item:Art.43:rev_complaint_handling","Complaint handling audit — complaints processed within fair procedural standards", "must", True, "Art.43.2.d"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.43:rev_next_date","Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
 # ── Annex A.5.23 — InfoSec for use of cloud services — operational_process (4-leaf) ──
 # Promoted 2026-05-31 from single-leaf to multi-leaf per
 # [[curation-program-full-multi-leaf]]. Spine: operational_process → policy
@@ -15484,6 +16166,42 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     # Note: Art.24 + Art.25 + Art.32 DerivedSpec expansions (direct_evidence
     # 1→4 or 0→4) added inline within SPEC_ART_*. Not listed here.
     # ── End batch 29a ────────────────────────────────────────────────────────
+    # ── Batch 29b (2026-06-02) — GDPR Ch IV DPO + codes + cert 8-pack ────────
+    # All 8 profile_fact triggered. Art.36 prior consultation; Art.37/38/39
+    # DPO cluster; Art.40/41 codes; Art.42/43 certification.
+    REQ_ART36_CONSULTATION_PROCEDURE,
+    REQ_ART36_CONSULTATION_REGISTER,
+    REQ_ART36_APPLICABLE_SCOPE,
+    REQ_ART36_PROGRAM_REVIEW,
+    REQ_ART37_DESIGNATION_PROCEDURE,
+    REQ_ART37_DESIGNATION_RECORD,
+    REQ_ART37_APPLICABLE_SCOPE,
+    REQ_ART37_PROGRAM_REVIEW,
+    REQ_ART38_POSITION_PROCEDURE,
+    REQ_ART38_POSITION_EVIDENCE_REGISTER,
+    REQ_ART38_APPLICABLE_SCOPE,
+    REQ_ART38_PROGRAM_REVIEW,
+    REQ_ART39_TASKS_PROCEDURE,
+    REQ_ART39_ACTIVITY_REGISTER,
+    REQ_ART39_APPLICABLE_SCOPE,
+    REQ_ART39_PROGRAM_REVIEW,
+    REQ_ART40_ADHERENCE_PROCEDURE,
+    REQ_ART40_ADHERENCE_REGISTER,
+    REQ_ART40_APPLICABLE_SCOPE,
+    REQ_ART40_PROGRAM_REVIEW,
+    REQ_ART41_MONITORING_PROCEDURE,
+    REQ_ART41_MONITORING_RECORD,
+    REQ_ART41_APPLICABLE_SCOPE,
+    REQ_ART41_PROGRAM_REVIEW,
+    REQ_ART42_CERTIFICATION_PROCEDURE,
+    REQ_ART42_CERTIFICATION_REGISTER,
+    REQ_ART42_APPLICABLE_SCOPE,
+    REQ_ART42_PROGRAM_REVIEW,
+    REQ_ART43_BODY_PROCEDURE,
+    REQ_ART43_ISSUANCE_RECORD,
+    REQ_ART43_APPLICABLE_SCOPE,
+    REQ_ART43_PROGRAM_REVIEW,
+    # ── End batch 29b — GDPR Ch IV FULLY CLOSED ──────────────────────────────
     # ── Batch 27 — GDPR Chapter II profile_fact specs ────────────────────────
     # Art.8 — op_process 4-leaf (profile_fact: org offers info-society services to minors)
     REQ_ART8_CHILD_CONSENT_PROCEDURE,
