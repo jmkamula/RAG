@@ -172,9 +172,10 @@ with d.session() as s:
   + 33 Phase B A.8 Technological Controls 33-pack
   + 7 Phase B ISMS chapters 4+5 close-out 7-pack
   + 10 Phase B ISMS chapters 6+7 close-out 10-pack
-  + 8 Phase B ISMS chapters 8+9+10 close-out 8-pack — ISO 27001 fully closed)
-- Score: 155/157 PASS target on 2026-06-02 (#24 + #25 known-stale).
-  Clean-run upper bound is 155/157. Some runs may dip due to #3/#21 stochasticity
+  + 8 Phase B ISMS chapters 8+9+10 close-out 8-pack — ISO 27001 fully closed
+  + 5 Phase B GDPR Chapter II Principles 5-pack — FIRST GDPR BATCH)
+- Score: 160/162 PASS target on 2026-06-02 (#24 + #25 known-stale).
+  Clean-run upper bound is 160/162. Some runs may dip due to #3/#21 stochasticity
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -372,6 +373,21 @@ with d.session() as s:
   legal_jurisdiction, A.5.33 proc_pii_overlay; new owner MUST + 4th
   SHOULD pims_alignment encode the ISO/IEC 27701 PIMS extension
   where in scope)
+- Cases 158-162 lock in: Phase B GDPR Chapter II Principles 5-pack
+  (batch 27, 2026-06-02; FIRST GDPR BATCH after ISO 27001 fully closed).
+  Art.6 (Lawfulness) — DerivedSpec expanded from 1 direct_evidence to
+  4 = 6 children total (2 ISO deps + 4 direct). Art.7 (Consent) new
+  op_process 4-leaf universal. Art.8/9/10 (Children / Special category /
+  Criminal convictions) new op_process 4-leaf profile_fact. **TWO
+  STRUCTURAL PATTERNS established for GDPR**: (1) DerivedSpec
+  expansion — add direct_evidence inline to SPEC_*.direct_evidence,
+  NOT to ALL_EVIDENCE_REQUIREMENTS; engine reports "0/N children
+  satisfied" where N = deps + direct. (2) profile_fact + live N/A —
+  when tenant narrative excludes the profile fact (e.g. B2B no
+  minors), live posture set to N/A; engine still proposes NC because
+  spec is empty; surfaces in Stage-2 as a 'did-you-really-mean-N/A?'
+  checkpoint (engine-agreement specifically NC==NC, so N/A surfaces).
+  Posture seed: Art.6 + Art.7 OFI, Art.8/9/10 N/A
 - Cases 150-157 lock in: Phase B ISMS chapters 8+9+10 close-out 8-pack
   (batch 26, 2026-06-02; 8 controls × 4 leaves = 24 new evidence requirements;
   closes ISMS chapters 8 + 9 + 10 — FINAL ISO 27001 BATCH). Most uniform

@@ -768,6 +768,359 @@ REQ_ART30_ANNUAL_REVIEW = EvidenceRequirement(
     ],
 )
 
+# ── Art.7 Conditions for consent — op_process 4-leaf (batch 27 2026-06-02) ───
+# New spec. Universal — every controller relying on consent (Art.6.1.a) for ANY
+# activity needs this. Procedure-as-primary spine. Consent register is the
+# auditor-facing artefact (per-subject consent capture + withdrawal).
+
+REQ_ART7_CONSENT_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.7:consent_management_procedure",
+    control_ref   = "Art.7",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Consent Management Procedure",
+    trigger_type  = "universal",
+    description   = "Art.7 requires the controller to demonstrate consent was given, in a clearly distinguishable form, with the right to withdraw being as easy as giving. The procedure is the canonical artefact — capture mechanism, withdrawal mechanism, evidence retention. Sibling leaves: consent register, applicable activities scope, program review",
+    must_contain  = [
+        ChecklistItem("item:Art.7:capture_mechanism",   "Capture mechanism documented (granular, freely given, unambiguous affirmative action — no pre-ticked boxes)", "must", True, "Art.7.1 + Art.4(11)"),
+        ChecklistItem("item:Art.7:distinguishable",     "Consent request distinguishable from other matters (separate, clear-language statement)", "must", True, "Art.7.2"),
+        ChecklistItem("item:Art.7:withdrawal_mechanism","Withdrawal mechanism documented — must be 'as easy as' giving consent", "must", True, "Art.7.3"),
+        ChecklistItem("item:Art.7:demonstrability",     "Demonstrability — capture record retained (timestamp, mechanism, scope) per consent event", "must", True, "Art.7.1 — demonstrate"),
+        ChecklistItem("item:Art.7:no_conditionality",   "No conditionality of service on non-essential consent (consent must be 'freely given')", "must", True, "Art.7.4"),
+        ChecklistItem("item:Art.7:owner",               "Named owner of the procedure (DPO or Privacy Lead)", "must", True, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.7:child_overlay",       "Reference to Art.8 child overlay where service is information-society and may attract minors", "should", True, "Cross-article coherence"),
+    ],
+)
+
+REQ_ART7_CONSENT_REGISTER = EvidenceRequirement(
+    id            = "req:Art.7:consent_register",
+    control_ref   = "Art.7",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Consent Register",
+    trigger_type  = "universal",
+    description   = "Per-consent record proving capture for any subject whose data is processed under Art.6.1.a consent. Annual refresh (freshness=365). Auditor's go-to artefact when challenging the lawful basis for a consent-based activity",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.7:reg_subject_id",      "Subject identifier per row (pseudonymous or direct identifier)", "must", True, "Demonstrability"),
+        ChecklistItem("item:Art.7:reg_scope",           "Per-row scope of consent (which activity / purpose)", "must", True, "Art.7.1 — granular"),
+        ChecklistItem("item:Art.7:reg_timestamp",       "Per-row capture timestamp", "must", True, "Currency"),
+        ChecklistItem("item:Art.7:reg_mechanism",       "Per-row capture mechanism (checkbox UI version, sign-up event id, etc.)", "must", True, "Auditability"),
+        ChecklistItem("item:Art.7:reg_withdrawal_status","Per-row withdrawal status (current / withdrawn-on-date)", "must", True, "Art.7.3"),
+        ChecklistItem("item:Art.7:reg_basis_link",      "Per-row link to Art.6 lawful basis register entry (Art.6.1.a row)", "must", True, "Cross-article coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.7:reg_consent_version", "Per-row consent-text version captured at time of capture (proves what they agreed to)", "should", True, "Audit defensibility"),
+    ],
+)
+
+REQ_ART7_APPLICABLE_ACTIVITIES_SCOPE = EvidenceRequirement(
+    id            = "req:Art.7:applicable_activities_scope",
+    control_ref   = "Art.7",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Consent Activities Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that bounds the register — which processing activities rely on consent (per Art.6.1.a) vs other lawful bases. Without this, consent gets over-applied (worst case: 'consent default') or under-applied (worst case: covert reliance)",
+    must_contain  = [
+        ChecklistItem("item:Art.7:scope_consent_activities","Activities using consent as the lawful basis enumerated (drawn from the Art.6 lawful basis register)", "must", True, "Art.6.1.a"),
+        ChecklistItem("item:Art.7:scope_overlap_rules",    "Rules for when consent overlaps with another basis (Art.7 still applies if consent is the chosen basis even when another basis would also work)", "must", True, "Defensible bounding"),
+        ChecklistItem("item:Art.7:scope_special_overlay",  "Special-category overlay rule — Art.9.2.a explicit consent has stricter capture requirements than Art.6.1.a", "must", True, "Art.9.2.a"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.7:scope_change_drivers",   "Trigger list for re-scoping (new feature requiring consent, basis change for an existing activity)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART7_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.7:consent_program_review",
+    control_ref   = "Art.7",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Consent Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification that the capture mechanism still meets Art.7 standards, the register is being populated, withdrawal requests are being honoured promptly (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.7:rev_date",            "Review date within the planned interval", "must", True, "Art.5.2 — periodic accountability"),
+        ChecklistItem("item:Art.7:rev_reviewer",        "Reviewer identity (DPO or Privacy Lead + product lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.7:rev_mechanism_audit", "Mechanism audit — capture UI still distinguishable, freely-given, no pre-ticked options", "must", True, "Art.7.1-2 — drift detection"),
+        ChecklistItem("item:Art.7:rev_withdrawal_sla",  "Withdrawal SLA check — withdrawal requests processed within the published timeline", "must", True, "Art.7.3"),
+        ChecklistItem("item:Art.7:rev_register_currency","Register currency check — consent events for all in-scope activities are landing in the register", "must", True, "Cross-leaf coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.7:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.8 Child consent — op_process 4-leaf, profile_fact (batch 27) ──────────
+# Profile_fact triggered — applies when the organisation offers information-
+# society services directly to children OR processes children's data. For most
+# B2B / professional-service tenants this resolves to N/A.
+
+REQ_ART8_CHILD_CONSENT_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.8:child_consent_procedure",
+    control_ref   = "Art.8",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Child Consent and Age-Verification Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.8 requires that when offering information-society services directly to a child, consent is only lawful if the child is at least 16 (or as low as 13 per Member State law) OR parental consent is obtained. The procedure is the canonical artefact. Sibling leaves: child consent register, applicable services scope, program review",
+    must_contain  = [
+        ChecklistItem("item:Art.8:proc_age_threshold",  "Age threshold stated per applicable Member State (16 default; some MS lower it to 13/14/15)", "must", True, "Art.8.1"),
+        ChecklistItem("item:Art.8:proc_age_verification","Age-verification mechanism (self-declaration with reasonable-effort cross-check; not relying on self-declaration alone in higher-risk cases)", "must", True, "Art.8.2 — reasonable efforts"),
+        ChecklistItem("item:Art.8:proc_parental_route", "Parental-consent capture route (when subject is under threshold) — verifiable parental authority", "must", True, "Art.8.1"),
+        ChecklistItem("item:Art.8:proc_information",    "Information presentation adapted for children (plain language where minors will read it)", "must", True, "Art.12.1 — concise + accessible + clear"),
+        ChecklistItem("item:Art.8:proc_owner",          "Named owner of the procedure", "must", True, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.8:proc_age_dispute",    "Dispute-handling pathway when claimed age differs from verified evidence", "should", True, "Operational discipline"),
+    ],
+)
+
+REQ_ART8_CHILD_CONSENT_REGISTER = EvidenceRequirement(
+    id            = "req:Art.8:child_consent_register",
+    control_ref   = "Art.8",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Child Consent Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-minor consent record proving the parental-authority path was followed. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.8:reg_subject_id",      "Minor's pseudonymous identifier per row", "must", True, "Demonstrability"),
+        ChecklistItem("item:Art.8:reg_claimed_age",     "Per-row claimed age at registration", "must", True, "Decision trail"),
+        ChecklistItem("item:Art.8:reg_route",           "Per-row consent route (child if age threshold met / parental if below threshold)", "must", True, "Art.8.1"),
+        ChecklistItem("item:Art.8:reg_parental_evidence","Per-row parental-authority evidence (where parental route used)", "must", True, "Art.8.2 — verify"),
+        ChecklistItem("item:Art.8:reg_timestamp",       "Per-row capture timestamp", "must", True, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.8:reg_re_verification", "Re-verification trigger when minor crosses the age threshold (consent transitions from parental to direct)", "should", True, "Lifecycle"),
+    ],
+)
+
+REQ_ART8_APPLICABLE_SERVICES_SCOPE = EvidenceRequirement(
+    id            = "req:Art.8:applicable_services_scope",
+    control_ref   = "Art.8",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Information-Society Services Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which services count as 'offered directly to a child' under Art.8. Critical for B2B / professional-service tenants who may incidentally process minors' data but don't 'offer to' them directly (e.g. a parent purchases on a family-account UI)",
+    must_contain  = [
+        ChecklistItem("item:Art.8:scope_in_scope_services","Services in scope enumerated (those advertised to / used by minors directly)", "must", True, "Art.8.1 — offered directly"),
+        ChecklistItem("item:Art.8:scope_incidental_processing","Incidental-minor-data scenarios stated (and why they don't trigger Art.8 — e.g. parent account holder)", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.8:scope_member_state_thresholds","Member State age threshold variations (where org operates in multiple Member States)", "must", True, "Art.8.1 — Member State law"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.8:scope_change_drivers","Trigger list for re-scoping (new product line touching minors, new Member State entry)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART8_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.8:child_consent_program_review",
+    control_ref   = "Art.8",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Child Consent Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification that age-verification and parental-consent flows are functioning, the register is current, no in-scope service is operating without the procedure (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.8:rev_date",            "Review date within the planned interval", "must", True, "Periodic accountability"),
+        ChecklistItem("item:Art.8:rev_reviewer",        "Reviewer identity (DPO + product lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.8:rev_verification_quality","Age-verification sample audit — claimed-age values look plausible vs other signals", "must", True, "Art.8.2 — reasonable efforts"),
+        ChecklistItem("item:Art.8:rev_register_coverage","Register coverage — every in-scope service has consent rows flowing in", "must", True, "Cross-leaf coherence"),
+        ChecklistItem("item:Art.8:rev_threshold_currency","Member State threshold currency — any MS that has changed its age threshold reflected", "must", True, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.8:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.9 Special categories — op_process 4-leaf, profile_fact (batch 27) ─────
+# Profile_fact triggered — applies when the organisation processes any of the
+# Art.9.1 special categories (racial/ethnic origin, political opinions, religion,
+# trade-union membership, genetic, biometric for ID, health, sex life, sexual
+# orientation). For most B2B tenants this resolves to N/A; for healthcare /
+# HR-heavy organisations it is unavoidable.
+
+REQ_ART9_AUTHORISATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.9:special_category_authorisation_procedure",
+    control_ref   = "Art.9",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Special Category Processing Authorisation Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.9 prohibits special-category processing UNLESS one of the Art.9.2 conditions applies. The procedure is the canonical artefact — how a proposed special-category activity is reviewed, what Art.9.2 condition is documented, who approves. Sibling leaves: processing register, applicable categories scope, program review",
+    must_contain  = [
+        ChecklistItem("item:Art.9:proc_proposal_intake","Intake process for new special-category processing proposals (no quiet onboarding)", "must", True, "Art.9.1 — prohibition default"),
+        ChecklistItem("item:Art.9:proc_condition_selection","Art.9.2 condition selection (a-j) with rationale per activity", "must", True, "Art.9.2 — lifting the prohibition"),
+        ChecklistItem("item:Art.9:proc_explicit_consent","For Art.9.2.a explicit-consent route — additional capture requirements beyond Art.7 baseline (e.g. specific to each category)", "must", True, "Art.9.2.a"),
+        ChecklistItem("item:Art.9:proc_safeguards",     "Safeguards required by the chosen Art.9.2 condition (e.g. health-secrecy obligation for Art.9.2.h)", "must", True, "Art.9.3 — safeguards"),
+        ChecklistItem("item:Art.9:proc_approval_authority","Approval authority for special-category processing (DPO + executive sponsor + applicable function head)", "must", True, "Risk-proportionate authority"),
+        ChecklistItem("item:Art.9:proc_owner",          "Named owner of the procedure (DPO)", "must", True, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.9:proc_dpia_link",      "Link to Art.35 DPIA — special-category processing usually triggers DPIA", "should", True, "Art.35.3.b"),
+    ],
+)
+
+REQ_ART9_PROCESSING_REGISTER = EvidenceRequirement(
+    id            = "req:Art.9:special_category_processing_register",
+    control_ref   = "Art.9",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Special Category Processing Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-activity register for every special-category processing operation — which Art.9.1 category, which Art.9.2 condition, what safeguards, what RoPA reference. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.9:reg_activity_id",     "Activity identifier per row (links to Art.30 RoPA)", "must", True, "Audit defensibility"),
+        ChecklistItem("item:Art.9:reg_category",        "Art.9.1 category per row (which special category)", "must", True, "Art.9.1"),
+        ChecklistItem("item:Art.9:reg_condition",       "Art.9.2 condition per row (a-j) with citation", "must", True, "Art.9.2"),
+        ChecklistItem("item:Art.9:reg_safeguards",      "Safeguards in place per row (Art.9.3 secrecy where applicable; technical + organisational measures)", "must", True, "Art.9.3"),
+        ChecklistItem("item:Art.9:reg_approval",        "Per-row approval signature + date", "must", True, "Accountability"),
+        ChecklistItem("item:Art.9:reg_ropa_xref",       "Per-row cross-reference to Art.30 RoPA entry", "must", True, "Cross-article coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.9:reg_member_state",    "Per-row Member State law overlay where Art.9.4 derogations apply", "should", True, "Art.9.4"),
+    ],
+)
+
+REQ_ART9_APPLICABLE_CATEGORIES_SCOPE = EvidenceRequirement(
+    id            = "req:Art.9:applicable_categories_scope",
+    control_ref   = "Art.9",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Special Categories Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which Art.9.1 categories the org actually processes, which Art.9.2 conditions are in use, what's out of scope. Categorical clarity prevents 'we don't process special category data' assertions that are technically false (e.g. CVs revealing trade-union membership)",
+    must_contain  = [
+        ChecklistItem("item:Art.9:scope_categories_in_use","Art.9.1 categories actually processed enumerated", "must", True, "Art.9.1"),
+        ChecklistItem("item:Art.9:scope_conditions_in_use","Art.9.2 conditions in use across activities (a-j)", "must", True, "Art.9.2"),
+        ChecklistItem("item:Art.9:scope_exclusions",       "Categories explicitly NOT processed (with rationale — important for audit clarity)", "must", True, "Defensible bounding"),
+        ChecklistItem("item:Art.9:scope_member_state_overlay","Member State derogations applied (Art.9.4 — Member States may maintain further conditions for genetic / biometric / health data)", "must", True, "Art.9.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.9:scope_change_drivers","Trigger list for re-scoping (HR system change capturing new category, new healthcare line)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART9_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.9:special_category_program_review",
+    control_ref   = "Art.9",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Special Category Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification that every Art.9 processing activity has a current Art.9.2 condition justification, safeguards are in place, no quiet onboarding happened (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.9:rev_date",            "Review date within the planned interval", "must", True, "Periodic accountability"),
+        ChecklistItem("item:Art.9:rev_reviewer",        "Reviewer identity (DPO + executive sponsor)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.9:rev_register_currency","Register currency check — every active activity has its Art.9.2 condition still appropriate", "must", True, "Cross-leaf coherence"),
+        ChecklistItem("item:Art.9:rev_safeguards_audit","Safeguards audit — Art.9.3 secrecy obligations being enforced (where Art.9.2.h-i applies)", "must", True, "Art.9.3"),
+        ChecklistItem("item:Art.9:rev_silent_onboarding","Silent-onboarding sweep — verify no new special-category data ingested without the procedure being invoked", "must", True, "Art.9.1 — prohibition default"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.9:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.10 Criminal convictions — op_process 4-leaf, profile_fact (batch 27) ──
+# Profile_fact triggered — applies only when the organisation processes
+# personal data relating to criminal convictions and offences. Even rarer
+# than Art.9 — usually limited to background-screening, fraud-prevention,
+# regulated-industry compliance. Member State law is the gating layer (Art.10
+# requires either official authority OR specific Member State authorisation).
+
+REQ_ART10_AUTHORISATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.10:criminal_data_authorisation_procedure",
+    control_ref   = "Art.10",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Criminal Convictions Data Authorisation Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.10 permits processing of criminal convictions / offences data ONLY under control of official authority OR when Member State law specifically authorises it with appropriate safeguards. The procedure is the canonical artefact. Sibling leaves: processing register, applicable legal-basis scope, program review",
+    must_contain  = [
+        ChecklistItem("item:Art.10:proc_legal_basis_check","Legal-basis verification step — official-authority OR Member State authorisation cited per activity", "must", True, "Art.10"),
+        ChecklistItem("item:Art.10:proc_member_state_law","Member State law identified per applicable jurisdiction (where MS authorisation is the route)", "must", True, "Art.10"),
+        ChecklistItem("item:Art.10:proc_safeguards",       "Safeguards required by Art.10 (specific to the Member State authorisation — typically retention limits + access restrictions)", "must", True, "Art.10 — appropriate safeguards"),
+        ChecklistItem("item:Art.10:proc_comprehensive_register","Restriction — comprehensive register of criminal convictions only under official authority (e.g. police, public prosecution); other controllers process only specific cases", "must", True, "Art.10 — comprehensive register limit"),
+        ChecklistItem("item:Art.10:proc_approval",        "Approval authority for any criminal-data activity (DPO + executive sponsor + legal counsel)", "must", True, "Risk-proportionate authority"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.10:proc_dpia_link",       "Link to Art.35 DPIA — Art.10 processing nearly always triggers DPIA", "should", True, "Art.35.3.b"),
+    ],
+)
+
+REQ_ART10_PROCESSING_REGISTER = EvidenceRequirement(
+    id            = "req:Art.10:criminal_data_processing_register",
+    control_ref   = "Art.10",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Criminal Data Processing Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-activity register for every Art.10 processing operation — which Member State law applies, what safeguards, what retention. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.10:reg_activity_id",    "Activity identifier per row (links to Art.30 RoPA)", "must", True, "Audit defensibility"),
+        ChecklistItem("item:Art.10:reg_legal_basis",    "Per-row legal basis (official authority OR specific Member State law citation)", "must", True, "Art.10"),
+        ChecklistItem("item:Art.10:reg_purpose",        "Per-row purpose (must be narrow — pre-employment screening, sanctions check, regulatory KYC, fraud investigation)", "must", True, "Art.10 — appropriate safeguards"),
+        ChecklistItem("item:Art.10:reg_safeguards",     "Per-row safeguards (retention limit, access restrictions, separate-system storage)", "must", True, "Art.10"),
+        ChecklistItem("item:Art.10:reg_approval",       "Per-row approval signature + date", "must", True, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.10:reg_ropa_xref",      "Per-row cross-reference to Art.30 RoPA entry", "should", True, "Cross-article coherence"),
+    ],
+)
+
+REQ_ART10_APPLICABLE_LEGAL_BASIS_SCOPE = EvidenceRequirement(
+    id            = "req:Art.10:applicable_legal_basis_scope",
+    control_ref   = "Art.10",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Legal Basis Scope (Member State Law)",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — Member State law citations authorising the org's criminal-data processing. Documents which laws have been mapped, what safeguards each law mandates, where the org is the 'official authority' vs operating under specific authorisation",
+    must_contain  = [
+        ChecklistItem("item:Art.10:scope_ms_law_register","Member State law register — every applicable MS law cited with title, article, scope", "must", True, "Art.10"),
+        ChecklistItem("item:Art.10:scope_authority_vs_authorised","Official-authority vs specific-authorisation split — which activities fall in each", "must", True, "Art.10"),
+        ChecklistItem("item:Art.10:scope_exclusions",   "Out-of-scope activities (e.g. journalistic / non-EU jurisdictions)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.10:scope_change_drivers","Trigger list for re-scoping (new MS entry, new business line attracting Art.10 data)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART10_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.10:criminal_data_program_review",
+    control_ref   = "Art.10",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Criminal Data Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification that every Art.10 activity still has a current Member State law basis, safeguards remain in force, retention limits are being honoured (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.10:rev_date",           "Review date within the planned interval", "must", True, "Periodic accountability"),
+        ChecklistItem("item:Art.10:rev_reviewer",       "Reviewer identity (DPO + legal counsel)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.10:rev_law_currency",   "Member State law currency — every cited law still in force; any new MS authorisations swept in", "must", True, "Currency"),
+        ChecklistItem("item:Art.10:rev_retention_audit","Retention audit — past-retention-limit records purged", "must", True, "Art.10 — appropriate safeguards"),
+        ChecklistItem("item:Art.10:rev_access_audit",   "Access audit — restricted-access requirements being enforced (no broad access to criminal-data stores)", "must", True, "Art.10"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.10:rev_next_date",      "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
 # ── Profile-fact — cloud/processors ───────────────────────────────────────────
 
 REQ_DPA = EvidenceRequirement(
@@ -11935,22 +12288,27 @@ SPEC_ART_6 = DerivedSpec(
             ],
         ),
     ],
+    # 4-leaf direct evidence (batch 27 2026-06-02): the Art.6-specific
+    # auditor-facing artefacts. ISO deps above cover the policy + register
+    # layer; these four cover the Art.6.1 enforcement layer end-to-end.
+    # Primary leaf id preserved (req:Art.6:lawful_basis_register + all
+    # item:Art.6:* ids unchanged).
     direct_evidence = [
         EvidenceRequirement(
             id            = "req:Art.6:lawful_basis_register",
             control_ref   = "Art.6",
             standard_id   = "GDPR:2016/679",
             evidence_type = "lawful_basis_register",
-            title         = "Lawful basis register (Art.6)",
+            title         = "Lawful Basis Register (Art.6)",
             trigger_type  = "universal",
             description   = (
                 "Art.6 obliges the controller to be able to point to a "
-                "specific lawful basis per processing activity. A register "
+                "specific lawful basis per processing activity. The register "
                 "(or RoPA extension) listing each activity with the chosen "
-                "basis, its justification, and — for consent or legitimate "
-                "interests — the supporting record (consent capture or "
-                "LIA) is the auditor-facing artifact. ISO does not require "
-                "this as a discrete artifact; Art.6 does."
+                "basis, justification, and supporting records is the "
+                "canonical Art.6 artefact. Sibling direct-evidence leaves: "
+                "determination procedure, applicable activities scope, "
+                "program review"
             ),
             freshness_days = 365,
             must_contain   = [
@@ -11979,6 +12337,11 @@ SPEC_ART_6 = DerivedSpec(
                     "For legitimate-interests activities, link to LIA (necessity + balance test)",
                     "must", True, "Art.6.1.f — overriding interests test",
                 ),
+                ChecklistItem(
+                    "item:Art.6:owner",
+                    "Named owner of the register (typically DPO or Privacy Lead)",
+                    "must", True, "Accountability",
+                ),
             ],
             should_contain = [
                 ChecklistItem(
@@ -11990,6 +12353,136 @@ SPEC_ART_6 = DerivedSpec(
                     "item:Art.6:basis_change_log",
                     "Log of lawful basis changes per activity (drives Art.13 notice amendments)",
                     "should", True, "Art.5.2 + Art.13 alignment",
+                ),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.6:lawful_basis_determination_procedure",
+            control_ref   = "Art.6",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "procedure",
+            title         = "Lawful Basis Determination Procedure",
+            trigger_type  = "universal",
+            description   = (
+                "The procedure governing how a lawful basis is chosen per "
+                "processing activity — who decides, what inputs are weighed, "
+                "how the choice is documented. Without an explicit procedure, "
+                "basis selection drifts (e.g. defaulting to consent when "
+                "legitimate interests is more appropriate, or vice versa)"
+            ),
+            must_contain   = [
+                ChecklistItem(
+                    "item:Art.6:proc_decision_inputs",
+                    "Decision inputs documented (activity purpose, data minimisation alternatives, subject expectations)",
+                    "must", True, "Art.6.1 — basis selection is purposeful",
+                ),
+                ChecklistItem(
+                    "item:Art.6:proc_basis_catalog",
+                    "Catalog of the 6 Art.6.1 bases with practical examples to guide selection",
+                    "must", True, "Art.6.1.a-f",
+                ),
+                ChecklistItem(
+                    "item:Art.6:proc_decision_authority",
+                    "Decision authority stated (DPO / Privacy Lead approves; product owner proposes)",
+                    "must", True, "Authority",
+                ),
+                ChecklistItem(
+                    "item:Art.6:proc_change_trigger",
+                    "Trigger list for re-evaluating the basis (purpose change, audience change, regulator guidance update)",
+                    "must", True, "Currency by design",
+                ),
+            ],
+            should_contain = [
+                ChecklistItem(
+                    "item:Art.6:proc_lia_template",
+                    "Legitimate Interests Assessment (LIA) template referenced for Art.6.1.f activities",
+                    "should", True, "Operational shortcut",
+                ),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.6:applicable_activities_scope",
+            control_ref   = "Art.6",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "scope_note",
+            title         = "Applicable Processing Activities Scope",
+            trigger_type  = "universal",
+            description   = (
+                "The upstream that bounds the register — which processing "
+                "activities are within Art.6 scope (any processing of personal "
+                "data), the relationship to Art.30 RoPA (Art.30 catalogs, "
+                "Art.6 assigns the basis per item), Member State law overlays"
+            ),
+            must_contain   = [
+                ChecklistItem(
+                    "item:Art.6:scope_ropa_link",
+                    "Link to Art.30 RoPA — every RoPA entry must have a corresponding Art.6 basis assignment",
+                    "must", True, "Art.6.1 + Art.30.1.b — cross-reference",
+                ),
+                ChecklistItem(
+                    "item:Art.6:scope_special_overlay",
+                    "Special category overlay rule — Art.6 basis is in addition to (not instead of) Art.9 condition where Art.9 applies",
+                    "must", True, "Art.9.2 — additional gate",
+                ),
+                ChecklistItem(
+                    "item:Art.6:scope_member_state",
+                    "Member State law overlay (Art.6.2/Art.6.3 derogations and Member State specifications)",
+                    "must", True, "Art.6.2-3",
+                ),
+            ],
+            should_contain = [
+                ChecklistItem(
+                    "item:Art.6:scope_change_drivers",
+                    "Trigger list for re-scoping (new activity launch, new Member State, regulator guidance)",
+                    "should", True, "Currency",
+                ),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.6:lawful_basis_program_review",
+            control_ref   = "Art.6",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "review_record",
+            title         = "Lawful Basis Program Review",
+            trigger_type  = "universal",
+            description   = (
+                "Annual verification that every processing activity has a "
+                "current basis, the procedure is being followed, regulator "
+                "guidance updates have been swept in (freshness=365)"
+            ),
+            freshness_days = 365,
+            must_contain   = [
+                ChecklistItem(
+                    "item:Art.6:rev_date",
+                    "Review date within the planned interval",
+                    "must", True, "Art.5.2 — periodic accountability",
+                ),
+                ChecklistItem(
+                    "item:Art.6:rev_reviewer",
+                    "Reviewer identity (DPO or Privacy Lead)",
+                    "must", True, "Accountability",
+                ),
+                ChecklistItem(
+                    "item:Art.6:rev_register_currency",
+                    "Register currency check — every Art.30 RoPA activity has a current Art.6 basis assignment",
+                    "must", True, "Cross-clause coherence",
+                ),
+                ChecklistItem(
+                    "item:Art.6:rev_basis_appropriateness",
+                    "Basis-appropriateness sample — high-volume / high-sensitivity activities re-evaluated for whether the chosen basis still fits",
+                    "must", True, "Art.5.2 — accountability",
+                ),
+                ChecklistItem(
+                    "item:Art.6:rev_regulator_guidance",
+                    "Regulator-guidance sweep — EDPB / supervisory authority guidance updates considered for impact",
+                    "must", True, "Currency",
+                ),
+            ],
+            should_contain = [
+                ChecklistItem(
+                    "item:Art.6:rev_next_date",
+                    "Next planned review date stated",
+                    "should", True, "Planning",
                 ),
             ],
         ),
@@ -13166,9 +13659,36 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_ART15_HANDLING_PROCEDURE,
     REQ_ART15_REGISTER,
     REQ_ART15_PROCESS_REVIEW,
+    # ── Batch 27 (2026-06-02) — GDPR Chapter II Principles 5-pack ────────────
+    # Art.6 stays a DerivedSpec — 4 new direct-evidence leaves added inline
+    # in SPEC_ART_6 (already registered via ALL_DERIVED_SPECS); not listed
+    # here because direct_evidence on a DerivedSpec is registered through
+    # SPEC_ART_6 not ALL_EVIDENCE_REQUIREMENTS.
+    # Art.7 — op_process 4-leaf (universal)
+    REQ_ART7_CONSENT_PROCEDURE,
+    REQ_ART7_CONSENT_REGISTER,
+    REQ_ART7_APPLICABLE_ACTIVITIES_SCOPE,
+    REQ_ART7_PROGRAM_REVIEW,
 
     # Profile-fact triggered
     REQ_DPA,
+    # ── Batch 27 — GDPR Chapter II profile_fact specs ────────────────────────
+    # Art.8 — op_process 4-leaf (profile_fact: org offers info-society services to minors)
+    REQ_ART8_CHILD_CONSENT_PROCEDURE,
+    REQ_ART8_CHILD_CONSENT_REGISTER,
+    REQ_ART8_APPLICABLE_SERVICES_SCOPE,
+    REQ_ART8_PROGRAM_REVIEW,
+    # Art.9 — op_process 4-leaf (profile_fact: org processes special-category data)
+    REQ_ART9_AUTHORISATION_PROCEDURE,
+    REQ_ART9_PROCESSING_REGISTER,
+    REQ_ART9_APPLICABLE_CATEGORIES_SCOPE,
+    REQ_ART9_PROGRAM_REVIEW,
+    # Art.10 — op_process 4-leaf (profile_fact: org processes criminal-convictions data)
+    REQ_ART10_AUTHORISATION_PROCEDURE,
+    REQ_ART10_PROCESSING_REGISTER,
+    REQ_ART10_APPLICABLE_LEGAL_BASIS_SCOPE,
+    REQ_ART10_PROGRAM_REVIEW,
+    # ── End batch 27 ─────────────────────────────────────────────────────────
     # A.5.23 — 4-leaf operational_process adapted (policy + register + posture_review + exit_migration)
     REQ_CLOUD_SERVICES_POLICY,
     REQ_CLOUD_SERVICE_REGISTER,

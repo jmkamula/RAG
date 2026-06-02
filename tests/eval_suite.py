@@ -65,6 +65,78 @@ class EvalResult:
 
 EVAL_CASES = [
 
+    # ── Phase B batch 27 (2026-06-02) — GDPR Chapter II Principles 5-pack ──
+    # FIRST GDPR BATCH after ISO 27001 fully closed. Chapter II covers
+    # principles + lawfulness: Art.6 (already DerivedSpec, expanded direct
+    # evidence 1→4), Art.7 (consent), Art.8 (children), Art.9 (special
+    # category), Art.10 (criminal convictions). Art.8/9/10 are profile_fact
+    # triggered (only apply when org processes those categories).
+    # Spine mix: 5×op_process (procedure-as-primary for Art.7-10, expanded
+    # direct evidence on the existing DerivedSpec for Art.6).
+    # Posture seed: Art.6/Art.7 set OFI on Arion (some flows exist
+    # informally); Art.8/9/10 set N/A (Arion B2B, no minors / no special
+    # category / no criminal data). Engine NC surfaces for all 5 (engine
+    # NC ≠ live OFI / N/A).
+    # Art.6 is a DerivedSpec with 2 ISO deps + 4 direct evidence =
+    # 6 children total. Engine reports "0/6 children satisfied" — first
+    # eval case probing a DerivedSpec at 4-leaf direct evidence depth.
+
+    EvalCase(
+        id=162,
+        query="pending engine verdict for Art.6",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "lawful_basis"],
+        expected_refs=["Art.6"], expected_type="posture_check",
+        must_contain=["Art.6", "engine proposes", "'NC'", "0/6 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "0/3 children satisfied",
+                          "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.6 (Lawfulness) — DerivedSpec with 2 ISO deps (A.5.34 + A.5.31) + 4 direct evidence (lawful_basis_register primary id preserved + determination_procedure + applicable_activities_scope + program_review (365d)). FIRST eval case probing DerivedSpec at 4-leaf direct-evidence depth — 0/6 children proves both ISO derivation links AND new direct-evidence leaves end-to-end. Primary-leaf id preserved: req:Art.6:lawful_basis_register.",
+    ),
+
+    EvalCase(
+        id=161,
+        query="pending engine verdict for Art.7",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "consent"],
+        expected_refs=["Art.7"], expected_type="posture_check",
+        must_contain=["Art.7", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.7 (Consent conditions) — op_process 4-leaf (NEW spec — first universally-triggered GDPR EvidenceRequirement-based 4-leaf): consent_procedure + consent_register + applicable_activities_scope + program_review (365d). Universal trigger (any controller relying on consent for any activity).",
+    ),
+
+    EvalCase(
+        id=160,
+        query="pending engine verdict for Art.8",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "child_consent", "profile_fact"],
+        expected_refs=["Art.8"], expected_type="posture_check",
+        must_contain=["Art.8", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.8 (Child consent) — op_process 4-leaf, profile_fact (org offers info-society services to minors): child_consent_procedure + child_consent_register + applicable_services_scope + program_review (365d). Live posture N/A (Arion B2B, no minors); engine NC ≠ live N/A → surfaces (engine-agreement specifically NC==NC).",
+    ),
+
+    EvalCase(
+        id=159,
+        query="pending engine verdict for Art.9",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "special_category", "profile_fact"],
+        expected_refs=["Art.9"], expected_type="posture_check",
+        must_contain=["Art.9", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.9 (Special category) — op_process 4-leaf, profile_fact (org processes Art.9.1 categories): authorisation_procedure + processing_register + applicable_categories_scope + program_review (365d). Each row in register cites which Art.9.2 condition (a-j) applies.",
+    ),
+
+    EvalCase(
+        id=158,
+        query="pending engine verdict for Art.10",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "criminal_data", "profile_fact"],
+        expected_refs=["Art.10"], expected_type="posture_check",
+        must_contain=["Art.10", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.10 (Criminal convictions) — op_process 4-leaf, profile_fact (org processes criminal-convictions data): authorisation_procedure + processing_register + applicable_legal_basis_scope + program_review (365d). Member State law citation required per activity (Art.10 only permits processing under official authority OR specific MS authorisation).",
+    ),
+
     # ── Phase B batch 26 (2026-06-02) — chapters 8 + 9 + 10 close-out 8-pack ──
     # FINAL ISO 27001 BATCH. ISMS Operation (chapter 8) + Performance Evaluation
     # (chapter 9) + Improvement (chapter 10). Spine: all 8×op_process — most
