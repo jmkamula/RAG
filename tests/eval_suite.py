@@ -65,6 +65,142 @@ class EvalResult:
 
 EVAL_CASES = [
 
+    # ── Phase B batch 28 (2026-06-02) — GDPR Chapter III Data Subject Rights 11-pack ──
+    # Art.12 + Art.13 promote + Art.14 + Art.16 expand DerivedSpec + Art.17
+    # expand DerivedSpec + Art.18 + Art.19 + Art.20 + Art.21 + Art.22 + Art.23.
+    # Art.15 already 4-leaf from earlier calibration (skipped). Largest GDPR
+    # batch yet. Spine mix: 2×policy_program (Art.13/14 privacy notices) +
+    # 7×op_process (Art.12/18/19/20/21/22/23) + 2×DerivedSpec expansion
+    # (Art.16/17 rectification/erasure).
+    # Children counts in engine view:
+    #   - Art.12/13/14/18/19/20/21/22/23: 0/4 (standard 4-leaf)
+    #   - Art.16: 0/5 (1 ISO dep A.5.34 + 4 direct)
+    #   - Art.17: 0/6 (2 ISO deps A.5.34+A.8.10 + 4 direct)
+    # Live posture seed: Art.12/13/14/16/17/18/19/20/21 OFI; Art.22/23 N/A.
+
+    EvalCase(
+        id=173,
+        query="pending engine verdict for Art.12",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "transparency"],
+        expected_refs=["Art.12"], expected_type="posture_check",
+        must_contain=["Art.12", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.12 (Transparency) — op_process 4-leaf: transparency_procedure + rights_request_register + applicable_channels_scope + program_review (365d). Umbrella above Art.13-22 — encodes Art.12.3 one-month SLA and Art.12.5 refusal grounds at MUST level.",
+    ),
+
+    EvalCase(
+        id=172,
+        query="pending engine verdict for Art.13",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "policy_program", "privacy_notice"],
+        expected_refs=["Art.13"], expected_type="posture_check",
+        must_contain=["Art.13", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.13 (Privacy notice — direct collection) — policy_program 4-leaf (PROMOTED from single-leaf): privacy_notice (primary, id preserved) + publication_record + applicable_collection_points_scope + program_review (365d). Primary-leaf id preserved: req:Art.13:privacy_notice + all item:Art.13:* ids unchanged.",
+    ),
+
+    EvalCase(
+        id=171,
+        query="pending engine verdict for Art.14",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "policy_program", "privacy_notice_indirect"],
+        expected_refs=["Art.14"], expected_type="posture_check",
+        must_contain=["Art.14", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.14 (Privacy notice — indirect collection) — policy_program 4-leaf (NEW): notice + source_register + applicable_sources_scope + program_review (365d). Mirrors Art.13 with Art.14-specific additions (Art.14.1d categories, Art.14.2f source disclosure, Art.14.3 deadline, Art.14.5 exceptions).",
+    ),
+
+    EvalCase(
+        id=170,
+        query="pending engine verdict for Art.16",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "rectification"],
+        expected_refs=["Art.16"], expected_type="posture_check",
+        must_contain=["Art.16", "engine proposes", "'NC'", "0/5 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "0/2 children satisfied",
+                          "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.16 (Rectification) — DerivedSpec with 1 ISO dep (A.5.34) + 4 direct evidence (rectification_procedure primary id preserved + rectification_register + applicable_systems_scope + program_review). EXPANSION pattern same as Art.6 in batch 27. Primary-leaf id preserved: req:Art.16:rectification_procedure.",
+    ),
+
+    EvalCase(
+        id=169,
+        query="pending engine verdict for Art.17",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "erasure"],
+        expected_refs=["Art.17"], expected_type="posture_check",
+        must_contain=["Art.17", "engine proposes", "'NC'", "0/6 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "0/3 children satisfied",
+                          "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.17 (Erasure) — DerivedSpec with 2 ISO deps (A.5.34 + A.8.10) + 4 direct evidence (erasure_procedure primary id preserved + erasure_register + applicable_systems_scope + program_review). Same expansion pattern. Primary-leaf id preserved: req:Art.17:erasure_procedure.",
+    ),
+
+    EvalCase(
+        id=168,
+        query="pending engine verdict for Art.18",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "restriction"],
+        expected_refs=["Art.18"], expected_type="posture_check",
+        must_contain=["Art.18", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.18 (Restriction) — op_process 4-leaf (NEW): restriction_procedure + restriction_register + applicable_grounds_scope + program_review (365d). Art.18.1 four grounds (a-d) catalogued in scope leaf; Art.18.2 'storage-only' exceptions enforced in MUST.",
+    ),
+
+    EvalCase(
+        id=167,
+        query="pending engine verdict for Art.19",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "notification"],
+        expected_refs=["Art.19"], expected_type="posture_check",
+        must_contain=["Art.19", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.19 (Recipient notification) — op_process 4-leaf (NEW): notification_procedure + notification_register + applicable_recipient_scope + program_review (365d). Triggered by Art.16/17/18 events; impossibility/disproportionality exception explicitly captured.",
+    ),
+
+    EvalCase(
+        id=166,
+        query="pending engine verdict for Art.20",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "portability"],
+        expected_refs=["Art.20"], expected_type="posture_check",
+        must_contain=["Art.20", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.20 (Portability) — op_process 4-leaf (NEW): portability_procedure + portability_register + applicable_data_scope + program_review (365d). Applicability check (consent/contract basis AND automated) MUST; EDPB WP242 'provided by' interpretation in scope leaf.",
+    ),
+
+    EvalCase(
+        id=165,
+        query="pending engine verdict for Art.21",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "objection"],
+        expected_refs=["Art.21"], expected_type="posture_check",
+        must_contain=["Art.21", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.21 (Objection) — op_process 4-leaf (NEW): objection_procedure + objection_register + applicable_basis_scope + program_review (365d). Splits direct-marketing absolute (Art.21.2-3) vs legitimate-interests balancing (Art.21.1); Art.21.4 explicit-notice MUST enforced.",
+    ),
+
+    EvalCase(
+        id=164,
+        query="pending engine verdict for Art.22",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "automated_decisions", "profile_fact"],
+        expected_refs=["Art.22"], expected_type="posture_check",
+        must_contain=["Art.22", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.22 (Automated decisions) — op_process 4-leaf, profile_fact (NEW). Art.22.3 three safeguards (human intervention, contest, expression of view) all MUSTs. Art.22.4 special-category overlay enforced. Arion live N/A (no solely-automated significant decisions); engine NC surfaces in Stage-2.",
+    ),
+
+    EvalCase(
+        id=163,
+        query="pending engine verdict for Art.23",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "ms_restrictions", "profile_fact"],
+        expected_refs=["Art.23"], expected_type="posture_check",
+        must_contain=["Art.23", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.23 (Member State restrictions) — op_process 4-leaf, profile_fact (NEW). Art.23.1 a-j purposes catalogued; Art.23.2 a-h safeguards enforced. Closes Chapter III. Arion live N/A (not subject to MS rights-restricting law).",
+    ),
+
     # ── Phase B batch 27 (2026-06-02) — GDPR Chapter II Principles 5-pack ──
     # FIRST GDPR BATCH after ISO 27001 fully closed. Chapter II covers
     # principles + lawfulness: Art.6 (already DerivedSpec, expanded direct

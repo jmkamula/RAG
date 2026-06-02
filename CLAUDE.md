@@ -173,9 +173,10 @@ with d.session() as s:
   + 7 Phase B ISMS chapters 4+5 close-out 7-pack
   + 10 Phase B ISMS chapters 6+7 close-out 10-pack
   + 8 Phase B ISMS chapters 8+9+10 close-out 8-pack — ISO 27001 fully closed
-  + 5 Phase B GDPR Chapter II Principles 5-pack — FIRST GDPR BATCH)
-- Score: 160/162 PASS target on 2026-06-02 (#24 + #25 known-stale).
-  Clean-run upper bound is 160/162. Some runs may dip due to #3/#21 stochasticity
+  + 5 Phase B GDPR Chapter II Principles 5-pack — FIRST GDPR BATCH
+  + 11 Phase B GDPR Chapter III Rights 11-pack — largest GDPR batch)
+- Score: 171/173 PASS target on 2026-06-02 (#24 + #25 known-stale).
+  Clean-run upper bound is 171/173. Some runs may dip due to #3/#21 stochasticity
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -373,6 +374,17 @@ with d.session() as s:
   legal_jurisdiction, A.5.33 proc_pii_overlay; new owner MUST + 4th
   SHOULD pims_alignment encode the ISO/IEC 27701 PIMS extension
   where in scope)
+- Cases 163-173 lock in: Phase B GDPR Chapter III Data Subject Rights
+  11-pack (batch 28, 2026-06-02; LARGEST GDPR batch). Art.12 + Art.13
+  promote + Art.14 + Art.16 expand + Art.17 expand + Art.18 + Art.19 +
+  Art.20 + Art.21 + Art.22 + Art.23. Three structural patterns in one
+  batch: EvidenceRequirement promotion (Art.13), DerivedSpec expansion
+  (Art.16 1+4=5 children; Art.17 2+4=6 children), new 4-leaf specs
+  (Art.12/14/18/19/20/21/22/23). Spine: 2×policy_program + 7×op_process +
+  2×DerivedSpec expansion. Primary-leaf ids preserved: req:Art.13:
+  privacy_notice + req:Art.16:rectification_procedure + req:Art.17:
+  erasure_procedure. profile_fact+N/A applied to Art.22+Art.23.
+  GDPR Ch III FULLY CLOSED (12/12 inc. Art.15)
 - Cases 158-162 lock in: Phase B GDPR Chapter II Principles 5-pack
   (batch 27, 2026-06-02; FIRST GDPR BATCH after ISO 27001 fully closed).
   Art.6 (Lawfulness) — DerivedSpec expanded from 1 direct_evidence to

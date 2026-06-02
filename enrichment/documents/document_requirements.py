@@ -638,31 +638,780 @@ REQ_C93_PROGRAM_REVIEW = EvidenceRequirement(
 
 # ── Universal — GDPR ──────────────────────────────────────────────────────────
 
+# ── Art.13 Privacy notice (data from subject) — policy_program 4-leaf ─────────
+# (batch 28 2026-06-02). Promoted from single-leaf REQ_PRIVACY_NOTICE_DIRECT.
+# Primary-leaf id preserved (req:Art.13:privacy_notice + all item:Art.13:* ids).
+
 REQ_PRIVACY_NOTICE_DIRECT = EvidenceRequirement(
     id            = "req:Art.13:privacy_notice",
     control_ref   = "Art.13",
     standard_id   = "GDPR:2016/679",
     evidence_type = "privacy_notice",
-    title= "Privacy Notice (Data Collected Directly)",
+    title         = "Privacy Notice (Data Collected Directly)",
     trigger_type  = "universal",
-    description   = "Controllers must provide privacy notice when collecting personal data directly",
+    description   = "Art.13 requires controllers to provide a privacy notice when collecting personal data directly from the subject. The notice is the canonical artefact. Sibling leaves: publication record, applicable collection points scope, program review",
     must_contain  = [
-        ChecklistItem("item:Art.13:identity",        "Identity and contact details of controller", "must", True, "Art.13.1a"),
-        ChecklistItem("item:Art.13:dpo",             "DPO contact details if applicable", "must", True, "Art.13.1b"),
-        ChecklistItem("item:Art.13:purposes",        "Purposes and legal basis for processing", "must", True, "Art.13.1c"),
-        ChecklistItem("item:Art.13:legitimate",      "Legitimate interests if relied upon", "must", True, "Art.13.1d"),
-        ChecklistItem("item:Art.13:recipients",      "Recipients or categories of recipients", "must", True, "Art.13.1e"),
-        ChecklistItem("item:Art.13:retention",       "Retention period or criteria for determining it", "must", True, "Art.13.2a"),
-        ChecklistItem("item:Art.13:rights",          "Data subject rights (access, rectification, erasure etc.)", "must", True, "Art.13.2b"),
-        ChecklistItem("item:Art.13:withdrawal",      "Right to withdraw consent where applicable", "must", True, "Art.13.2c"),
-        ChecklistItem("item:Art.13:complaint",       "Right to lodge complaint with supervisory authority", "must", True, "Art.13.2d"),
-        ChecklistItem("item:Art.13:transfers",       "International transfers and safeguards if applicable", "must", True, "Art.13.1f"),
+        ChecklistItem("item:Art.13:identity",       "Identity and contact details of controller", "must", True, "Art.13.1a"),
+        ChecklistItem("item:Art.13:dpo",            "DPO contact details if applicable", "must", True, "Art.13.1b"),
+        ChecklistItem("item:Art.13:purposes",       "Purposes and legal basis for processing", "must", True, "Art.13.1c"),
+        ChecklistItem("item:Art.13:legitimate",     "Legitimate interests if relied upon", "must", True, "Art.13.1d"),
+        ChecklistItem("item:Art.13:recipients",     "Recipients or categories of recipients", "must", True, "Art.13.1e"),
+        ChecklistItem("item:Art.13:retention",      "Retention period or criteria for determining it", "must", True, "Art.13.2a"),
+        ChecklistItem("item:Art.13:rights",         "Data subject rights (access, rectification, erasure etc.)", "must", True, "Art.13.2b"),
+        ChecklistItem("item:Art.13:withdrawal",     "Right to withdraw consent where applicable", "must", True, "Art.13.2c"),
+        ChecklistItem("item:Art.13:complaint",      "Right to lodge complaint with supervisory authority", "must", True, "Art.13.2d"),
+        ChecklistItem("item:Art.13:transfers",      "International transfers and safeguards if applicable", "must", True, "Art.13.1f"),
     ],
     should_contain= [
         ChecklistItem("item:Art.13:plain_language", "Written in plain, clear language", "should", True, "Art.12 readability requirement"),
         ChecklistItem("item:Art.13:layered",        "Layered or concise format used", "should", True, "Best practice"),
     ],
 )
+
+REQ_ART13_PUBLICATION_RECORD = EvidenceRequirement(
+    id            = "req:Art.13:publication_record",
+    control_ref   = "Art.13",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "publication_record",
+    title         = "Privacy Notice Publication Record",
+    trigger_type  = "universal",
+    description   = "Per-version publication evidence — version number, publication URL / location, effective date, approval. Proves the notice is actually accessible to subjects, not just drafted",
+    must_contain  = [
+        ChecklistItem("item:Art.13:rec_version",        "Version identifier per row (when notice content changes)", "must", True, "Audit trail"),
+        ChecklistItem("item:Art.13:rec_publication_url","Per-row publication location (URL, app screen, signup flow)", "must", True, "Art.13.1 — provided at time of collection"),
+        ChecklistItem("item:Art.13:rec_effective_date", "Per-row effective date stated", "must", True, "Currency"),
+        ChecklistItem("item:Art.13:rec_approval",       "Per-row approval (DPO / Privacy Lead sign-off)", "must", True, "Authority"),
+        ChecklistItem("item:Art.13:rec_prior_archive",  "Prior versions retained for audit (proves what subjects saw at the time of collection)", "must", True, "Art.5.2 accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.13:rec_change_summary", "Per-row change-summary annotation (what changed vs prior version)", "should", True, "Audit clarity"),
+    ],
+)
+
+REQ_ART13_APPLICABLE_COLLECTION_POINTS_SCOPE = EvidenceRequirement(
+    id            = "req:Art.13:applicable_collection_points_scope",
+    control_ref   = "Art.13",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Collection Points Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — every collection point where personal data is taken directly from the subject (web forms, sign-up flows, in-app prompts, in-person, phone, email). Each needs the notice presented at the moment of collection",
+    must_contain  = [
+        ChecklistItem("item:Art.13:scope_collection_points","Collection points enumerated (web forms, sign-up, in-app, phone, in-person, paper)", "must", True, "Art.13.1 — at the time of collection"),
+        ChecklistItem("item:Art.13:scope_presentation",   "Presentation method per point (link, modal, layered display, paper hand-out)", "must", True, "Art.12.1 — accessible"),
+        ChecklistItem("item:Art.13:scope_exclusions",     "Out-of-scope situations (data from third parties → Art.14 scope; non-personal data)", "must", True, "Defensible bounding"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.13:scope_change_drivers","Trigger list for re-scoping (new collection channel, new product surface)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART13_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.13:privacy_notice_program_review",
+    control_ref   = "Art.13",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Privacy Notice Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification that the notice content is current with actual processing, the publication record reflects all deployed versions, every collection point still presents the notice (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.13:rev_date",          "Review date within the planned interval", "must", True, "Art.5.2 — periodic"),
+        ChecklistItem("item:Art.13:rev_reviewer",      "Reviewer identity (DPO or Privacy Lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.13:rev_content_currency","Content currency check — notice reflects current Art.30 RoPA + Art.6 basis register", "must", True, "Cross-article coherence"),
+        ChecklistItem("item:Art.13:rev_collection_coverage","Coverage check — every in-scope collection point still presents the current notice", "must", True, "Drift detection"),
+        ChecklistItem("item:Art.13:rev_publication_archive","Publication archive check — prior versions retained for audit defensibility", "must", True, "Art.5.2"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.13:rev_next_date",     "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.14 Privacy notice (data NOT from subject) — policy_program 4-leaf ─────
+# (batch 28 2026-06-02). New spec. Universal trigger — most orgs do at least
+# some indirect collection (data brokers, public sources, analytics enrichment).
+
+REQ_ART14_NOTICE = EvidenceRequirement(
+    id            = "req:Art.14:privacy_notice",
+    control_ref   = "Art.14",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "privacy_notice",
+    title         = "Privacy Notice (Data Not Collected From Subject)",
+    trigger_type  = "universal",
+    description   = "Art.14 requires controllers to provide privacy information when personal data is obtained from sources other than the data subject. Content mirrors Art.13 plus the source-disclosure requirement (Art.14.2.f). Sibling leaves: source register, applicable sources scope, program review",
+    must_contain  = [
+        ChecklistItem("item:Art.14:identity",       "Identity and contact details of controller", "must", True, "Art.14.1a"),
+        ChecklistItem("item:Art.14:dpo",            "DPO contact details if applicable", "must", True, "Art.14.1b"),
+        ChecklistItem("item:Art.14:purposes",       "Purposes and legal basis for processing", "must", True, "Art.14.1c"),
+        ChecklistItem("item:Art.14:categories",     "Categories of personal data obtained (NOT in Art.13 since subject knows; required in Art.14)", "must", True, "Art.14.1d"),
+        ChecklistItem("item:Art.14:recipients",     "Recipients or categories of recipients", "must", True, "Art.14.1e"),
+        ChecklistItem("item:Art.14:transfers",      "International transfers and safeguards if applicable", "must", True, "Art.14.1f"),
+        ChecklistItem("item:Art.14:retention",      "Retention period or criteria", "must", True, "Art.14.2a"),
+        ChecklistItem("item:Art.14:rights",         "Data subject rights enumerated", "must", True, "Art.14.2c"),
+        ChecklistItem("item:Art.14:source",         "Source from which the personal data originate (Art.14-specific — distinguishing feature vs Art.13)", "must", True, "Art.14.2f"),
+        ChecklistItem("item:Art.14:notice_deadline","Notice provided within reasonable period (max 1 month from obtaining; or first communication; or first disclosure)", "must", True, "Art.14.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.14:plain_language", "Written in plain, clear language", "should", True, "Art.12 readability requirement"),
+    ],
+)
+
+REQ_ART14_SOURCE_REGISTER = EvidenceRequirement(
+    id            = "req:Art.14:source_register",
+    control_ref   = "Art.14",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Art.14 Source Register",
+    trigger_type  = "universal",
+    description   = "Per-source record — every third-party source from which personal data is obtained, with notice-delivery evidence. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.14:reg_source_id",     "Source identifier per row (data broker name, public source URL, affiliate)", "must", True, "Audit defensibility"),
+        ChecklistItem("item:Art.14:reg_category",      "Categories obtained per row (matches Art.14.1d notice item)", "must", True, "Coverage"),
+        ChecklistItem("item:Art.14:reg_lawful_basis",  "Lawful basis per row (Art.6 entry id)", "must", True, "Cross-article coherence"),
+        ChecklistItem("item:Art.14:reg_notice_method", "Notice delivery method per row (email, in-app on first communication, etc.)", "must", True, "Art.14.3"),
+        ChecklistItem("item:Art.14:reg_notice_deadline","Notice deadline met per row (within 1 month / first communication / first disclosure)", "must", True, "Art.14.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.14:reg_exception",     "Per-row Art.14.5 exception cited where notice is not provided (proportionate-impossibility / disclosure-by-law / confidentiality)", "should", True, "Art.14.5"),
+    ],
+)
+
+REQ_ART14_APPLICABLE_SOURCES_SCOPE = EvidenceRequirement(
+    id            = "req:Art.14:applicable_sources_scope",
+    control_ref   = "Art.14",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Third-Party Sources Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which third-party data sources the org consumes. Documents what counts as 'not from the subject' (public records, affiliates, brokers, analytics enrichment) and where notice can be delayed under Art.14.5 exceptions",
+    must_contain  = [
+        ChecklistItem("item:Art.14:scope_source_types","Source types enumerated (data brokers, public records, affiliates, enrichment vendors, customer lists)", "must", True, "Coverage proof"),
+        ChecklistItem("item:Art.14:scope_exception_cases","Art.14.5 exceptions explicitly mapped (proportionate-impossibility / legal-disclosure-restriction / confidentiality obligation)", "must", True, "Art.14.5"),
+        ChecklistItem("item:Art.14:scope_exclusions",  "Out-of-scope sources (e.g. publicly-aggregated stats with no personal data)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.14:scope_change_drivers","Trigger list for re-scoping (new vendor onboarded, new enrichment line, M&A)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART14_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.14:privacy_notice_program_review",
+    control_ref   = "Art.14",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Art.14 Privacy Notice Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification that every third-party source is captured, notice was delivered per Art.14.3 deadlines, Art.14.5 exception claims still hold (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.14:rev_date",          "Review date within the planned interval", "must", True, "Periodic accountability"),
+        ChecklistItem("item:Art.14:rev_reviewer",      "Reviewer identity (DPO + procurement / data-acquisition lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.14:rev_register_currency","Register currency check — every active third-party source has a current row", "must", True, "Cross-leaf coherence"),
+        ChecklistItem("item:Art.14:rev_deadline_compliance","Deadline compliance audit — notice deadlines met per Art.14.3", "must", True, "Art.14.3"),
+        ChecklistItem("item:Art.14:rev_exception_reassessment","Art.14.5 exception re-assessment — exceptions claimed still hold (proportionate-impossibility may change)", "must", True, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.14:rev_next_date",     "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+# ── Art.12 Transparency / rights modalities — op_process 4-leaf (batch 28) ────
+# Art.12 governs the modalities for exercising data subject rights — the
+# umbrella above Art.13-22. Procedure-as-primary spine. Tracks the rights-
+# request portal + per-request register + applicable channels + program review.
+
+REQ_ART12_TRANSPARENCY_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.12:transparency_procedure",
+    control_ref   = "Art.12",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Transparency and Rights Modalities Procedure",
+    trigger_type  = "universal",
+    description   = "Art.12 requires controllers to facilitate the exercise of subject rights — concise + transparent + intelligible + accessible communication, free of charge, with one-month response. The procedure governs HOW rights are exercised across all of Art.13-22. Sibling leaves: rights request register, applicable channels scope, program review",
+    must_contain  = [
+        ChecklistItem("item:Art.12:concise_transparent","Communication concise + transparent + intelligible + easily accessible + plain language", "must", True, "Art.12.1"),
+        ChecklistItem("item:Art.12:facilitate",         "Mechanism to facilitate exercise of rights (rights portal, dedicated email, in-app flow)", "must", True, "Art.12.2"),
+        ChecklistItem("item:Art.12:response_deadline",  "One-month response deadline (extendable by two months for complex requests with notification)", "must", True, "Art.12.3"),
+        ChecklistItem("item:Art.12:refusal_grounds",    "Refusal grounds for manifestly unfounded / excessive requests (with proportionate fee OR refusal)", "must", True, "Art.12.5"),
+        ChecklistItem("item:Art.12:identity_verification","Identity verification protocol (proportionate, not over-collecting)", "must", True, "Art.12.6"),
+        ChecklistItem("item:Art.12:free_of_charge",     "Free-of-charge default (fee only for manifestly unfounded / excessive)", "must", True, "Art.12.5"),
+        ChecklistItem("item:Art.12:owner",              "Named owner (DPO or Privacy Lead)", "must", True, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.12:standardized_icons","Standardised icons used where helpful (Art.12.7)", "should", True, "Art.12.7"),
+    ],
+)
+
+REQ_ART12_REQUEST_REGISTER = EvidenceRequirement(
+    id            = "req:Art.12:rights_request_register",
+    control_ref   = "Art.12",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Rights Request Register",
+    trigger_type  = "universal",
+    description   = "Per-request record covering EVERY data subject right exercise (Art.15-22). Centralised log — drives Art.12.3 SLA tracking. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.12:reg_request_id",     "Unique request identifier per row", "must", True, "Audit defensibility"),
+        ChecklistItem("item:Art.12:reg_right_type",     "Per-row right type (Art.15 access / Art.16 rectification / Art.17 erasure / Art.18 restriction / Art.20 portability / Art.21 objection / Art.22 automated)", "must", True, "Cross-article coherence"),
+        ChecklistItem("item:Art.12:reg_request_date",   "Per-row request received date", "must", True, "SLA tracking"),
+        ChecklistItem("item:Art.12:reg_response_date",  "Per-row response sent date (or extension notice date)", "must", True, "Art.12.3 SLA"),
+        ChecklistItem("item:Art.12:reg_outcome",        "Per-row outcome (fulfilled / partial / refused with grounds / extended)", "must", True, "Audit clarity"),
+        ChecklistItem("item:Art.12:reg_sla_met",        "Per-row SLA-met flag (one month or notified extension)", "must", True, "Art.12.3 — timeliness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.12:reg_identity_method","Per-row identity verification method used", "should", True, "Art.12.6 audit"),
+    ],
+)
+
+REQ_ART12_APPLICABLE_CHANNELS_SCOPE = EvidenceRequirement(
+    id            = "req:Art.12:applicable_channels_scope",
+    control_ref   = "Art.12",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Rights Channels Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which channels accept rights requests (rights portal, email, postal, in-person), how they route into the procedure",
+    must_contain  = [
+        ChecklistItem("item:Art.12:scope_channels",     "Channels enumerated (rights portal, dedicated email, postal address, in-product flow, phone)", "must", True, "Art.12.2 — facilitate"),
+        ChecklistItem("item:Art.12:scope_routing",      "Routing rules — how each channel reaches the rights-handling team", "must", True, "Operational coherence"),
+        ChecklistItem("item:Art.12:scope_accessibility","Accessibility provisions (disability, language)", "must", True, "Art.12.1 — accessible"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.12:scope_change_drivers","Trigger list for re-scoping (new channel, new product surface, accessibility update)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART12_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.12:transparency_program_review",
+    control_ref   = "Art.12",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Transparency Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification that SLAs are being met, the register reflects all requests, refusal grounds are being applied consistently (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.12:rev_date",           "Review date within the planned interval", "must", True, "Periodic accountability"),
+        ChecklistItem("item:Art.12:rev_reviewer",       "Reviewer identity (DPO + ops lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.12:rev_sla_compliance", "SLA compliance check — one-month response rate against in-scope requests", "must", True, "Art.12.3"),
+        ChecklistItem("item:Art.12:rev_refusal_audit",  "Refusal-grounds audit — refused requests sampled for legitimate Art.12.5 grounds", "must", True, "Art.12.5 — defensibility"),
+        ChecklistItem("item:Art.12:rev_channel_coverage","Channel coverage check — every in-scope channel is reaching the procedure (no orphan requests)", "must", True, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.12:rev_next_date",      "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.18 Right to restriction — op_process 4-leaf (batch 28) ────────────────
+
+REQ_ART18_RESTRICTION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.18:restriction_procedure",
+    control_ref   = "Art.18",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Restriction of Processing Procedure",
+    trigger_type  = "universal",
+    description   = "Art.18 gives subjects the right to restrict processing in 4 specific grounds (accuracy contested, unlawful but no erasure, no longer needed but subject needs for claims, objection pending). Procedure as primary; restriction register, applicable grounds scope, program review are siblings",
+    must_contain  = [
+        ChecklistItem("item:Art.18:intake_channel",      "Intake channel via Art.12 procedure (rights portal)", "must", True, "Art.12.2"),
+        ChecklistItem("item:Art.18:grounds_assessment",  "Assessment of which Art.18.1 ground applies (a-d) recorded per request", "must", True, "Art.18.1"),
+        ChecklistItem("item:Art.18:restriction_mechanism","Technical restriction mechanism (flag in data store / move to restricted partition / temporary access lock)", "must", True, "Art.18.2 — only store, lawful claims, public interest"),
+        ChecklistItem("item:Art.18:lift_communication",  "Pre-lift communication to subject before restriction is lifted (Art.18.3)", "must", True, "Art.18.3"),
+        ChecklistItem("item:Art.18:recipient_notification","Notification to recipients per Art.19", "must", True, "Art.19"),
+        ChecklistItem("item:Art.18:response_deadline",   "One-month response deadline", "must", True, "Art.12.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.18:storage_only_audit",  "Audit trail proving restricted records are stored-only (no further processing other than the Art.18.2 exceptions)", "should", True, "Art.18.2"),
+    ],
+)
+
+REQ_ART18_RESTRICTION_REGISTER = EvidenceRequirement(
+    id            = "req:Art.18:restriction_register",
+    control_ref   = "Art.18",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Restriction Register",
+    trigger_type  = "universal",
+    description   = "Per-restriction record proving active restrictions are in place with documented grounds. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.18:reg_subject_id",      "Subject identifier per row", "must", True, "Audit"),
+        ChecklistItem("item:Art.18:reg_ground",          "Per-row Art.18.1 ground (a-d) cited", "must", True, "Art.18.1"),
+        ChecklistItem("item:Art.18:reg_scope",           "Per-row scope (which data, which systems are restricted)", "must", True, "Implementation"),
+        ChecklistItem("item:Art.18:reg_start_date",      "Per-row restriction start date", "must", True, "Currency"),
+        ChecklistItem("item:Art.18:reg_lift_status",     "Per-row lift status (active / lifted-on-date with reason)", "must", True, "Art.18.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.18:reg_art19_xref",      "Per-row Art.19 notification reference", "should", True, "Cross-article coherence"),
+    ],
+)
+
+REQ_ART18_APPLICABLE_GROUNDS_SCOPE = EvidenceRequirement(
+    id            = "req:Art.18:applicable_grounds_scope",
+    control_ref   = "Art.18",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Restriction Grounds Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — operational interpretation of the four Art.18.1 grounds, what the restriction looks like per data class, exception handling per Art.18.2",
+    must_contain  = [
+        ChecklistItem("item:Art.18:scope_grounds_catalog","Art.18.1 grounds catalog (a-d) with practical examples", "must", True, "Art.18.1"),
+        ChecklistItem("item:Art.18:scope_data_classes",  "Data classes covered (each with implementation pattern — flag / partition / lock)", "must", True, "Implementation"),
+        ChecklistItem("item:Art.18:scope_art18_2_exceptions","Art.18.2 exceptions enumerated (subject consent / legal claims / protection of rights / important public interest)", "must", True, "Art.18.2"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.18:scope_change_drivers","Trigger list for re-scoping (new data class, new system surfacing)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART18_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.18:restriction_program_review",
+    control_ref   = "Art.18",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Restriction Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification — restrictions still active are valid, Art.18.2 exceptions enforced, Art.19 notifications fired (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.18:rev_date",            "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.18:rev_reviewer",        "Reviewer identity (DPO + ops lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.18:rev_active_restrictions","Active-restrictions check — every active row still has a valid Art.18.1 ground", "must", True, "Cross-leaf coherence"),
+        ChecklistItem("item:Art.18:rev_exception_compliance","Exception compliance — restricted records only used per Art.18.2 exceptions", "must", True, "Art.18.2"),
+        ChecklistItem("item:Art.18:rev_art19_compliance","Art.19 notification compliance — recipient notifications fired for new/lifted restrictions", "must", True, "Art.19"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.18:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.19 Notification obligation — op_process 4-leaf (batch 28) ─────────────
+
+REQ_ART19_NOTIFICATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.19:notification_procedure",
+    control_ref   = "Art.19",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Art.19 Recipient Notification Procedure",
+    trigger_type  = "universal",
+    description   = "Art.19 obliges the controller to notify recipients of rectification / erasure / restriction of personal data, unless impossible or disproportionate. The procedure governs how recipient lists are maintained and notifications fired",
+    must_contain  = [
+        ChecklistItem("item:Art.19:trigger_events",      "Trigger events stated (Art.16 rectification / Art.17 erasure / Art.18 restriction)", "must", True, "Art.19"),
+        ChecklistItem("item:Art.19:recipient_inventory", "Recipient inventory mechanism (links to Art.30 RoPA recipients column)", "must", True, "Art.19 — recipients"),
+        ChecklistItem("item:Art.19:notification_method", "Notification delivery method (email, API call, monthly digest)", "must", True, "Operational"),
+        ChecklistItem("item:Art.19:impossibility_grounds","Impossibility / disproportionate-effort assessment criteria documented", "must", True, "Art.19 — exception clause"),
+        ChecklistItem("item:Art.19:subject_information", "Subject is informed about the recipients on request (Art.19 second sentence)", "must", True, "Art.19"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.19:owner",               "Named owner (DPO or Privacy Lead)", "should", True, "Accountability"),
+    ],
+)
+
+REQ_ART19_NOTIFICATION_REGISTER = EvidenceRequirement(
+    id            = "req:Art.19:notification_register",
+    control_ref   = "Art.19",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Recipient Notification Register",
+    trigger_type  = "universal",
+    description   = "Per-notification record proving Art.19 obligations were met for each Art.16/17/18 event. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.19:reg_event_id",        "Per-row source event id (Art.12 register reference)", "must", True, "Cross-leaf"),
+        ChecklistItem("item:Art.19:reg_recipient_list",  "Per-row recipients notified list", "must", True, "Art.19 — recipients"),
+        ChecklistItem("item:Art.19:reg_notification_date","Per-row notification date", "must", True, "Currency"),
+        ChecklistItem("item:Art.19:reg_omission_grounds","Per-row omitted recipients with impossibility/disproportionality grounds where applicable", "must", True, "Art.19 — exception"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.19:reg_ack_received",    "Per-row recipient acknowledgement where available", "should", True, "Closure"),
+    ],
+)
+
+REQ_ART19_APPLICABLE_RECIPIENT_SCOPE = EvidenceRequirement(
+    id            = "req:Art.19:applicable_recipient_scope",
+    control_ref   = "Art.19",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Recipients Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which recipient classes are in scope for Art.19 notification (processors, joint controllers, downstream controllers, public disclosure under Art.17.2)",
+    must_contain  = [
+        ChecklistItem("item:Art.19:scope_recipient_classes","Recipient classes enumerated (processors, joint controllers, third-country recipients, public)", "must", True, "Art.19"),
+        ChecklistItem("item:Art.19:scope_excluded_recipients","Excluded recipient categories with rationale (e.g. recipients who only received aggregate data)", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.19:scope_art17_2_overlay","Art.17.2 public-disclosure overlay (when erased data was made public, additional notification + take-down efforts required)", "must", True, "Art.17.2"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.19:scope_change_drivers","Trigger list (new processor onboarded, new joint controller relationship)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART19_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.19:notification_program_review",
+    control_ref   = "Art.19",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Art.19 Notification Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification that every Art.16/17/18 event had a corresponding Art.19 notification record (or documented exception) (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.19:rev_date",            "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.19:rev_reviewer",        "Reviewer identity (DPO)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.19:rev_event_coverage",  "Event coverage check — every Art.16/17/18 event has a register row OR documented exception", "must", True, "Cross-leaf"),
+        ChecklistItem("item:Art.19:rev_exception_validity","Exception validity sample — claimed impossibility/disproportionality grounds still hold", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.19:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.20 Right to data portability — op_process 4-leaf (batch 28) ───────────
+
+REQ_ART20_PORTABILITY_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.20:portability_procedure",
+    control_ref   = "Art.20",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Data Portability Procedure",
+    trigger_type  = "universal",
+    description   = "Art.20 gives subjects the right to receive their personal data in a structured, commonly used, machine-readable format AND to transmit it to another controller. Applies when processing is based on consent (Art.6.1.a) or contract (Art.6.1.b) AND is carried out by automated means",
+    must_contain  = [
+        ChecklistItem("item:Art.20:intake_channel",      "Intake channel via Art.12 procedure", "must", True, "Art.12.2"),
+        ChecklistItem("item:Art.20:applicability_check", "Applicability assessment per request (basis = consent/contract AND automated processing)", "must", True, "Art.20.1"),
+        ChecklistItem("item:Art.20:export_format",       "Export format documented (JSON / CSV / XML — machine-readable, structured, commonly used)", "must", True, "Art.20.1 — format"),
+        ChecklistItem("item:Art.20:direct_transmission", "Direct controller-to-controller transmission supported where technically feasible (Art.20.2)", "must", True, "Art.20.2"),
+        ChecklistItem("item:Art.20:scope_boundary",      "Scope boundary — only data 'provided by' the subject (excludes derived data and observed data per EDPB guidance)", "must", True, "Art.20.1 — provided"),
+        ChecklistItem("item:Art.20:third_party_rights",  "Third-party rights protection (Art.20.4 — must not adversely affect others)", "must", True, "Art.20.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.20:identity_verification","Identity verification step (Art.12.6)", "should", True, "Art.12.6"),
+    ],
+)
+
+REQ_ART20_PORTABILITY_REGISTER = EvidenceRequirement(
+    id            = "req:Art.20:portability_register",
+    control_ref   = "Art.20",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Portability Request Register",
+    trigger_type  = "universal",
+    description   = "Per-request record of Art.20 fulfilments. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.20:reg_request_id",      "Per-row request id (Art.12 register cross-reference)", "must", True, "Cross-leaf"),
+        ChecklistItem("item:Art.20:reg_applicability_decision","Per-row applicability decision (in-scope / out-of-scope with grounds)", "must", True, "Art.20.1"),
+        ChecklistItem("item:Art.20:reg_format_delivered","Per-row delivered format", "must", True, "Art.20.1"),
+        ChecklistItem("item:Art.20:reg_destination",     "Per-row destination (export to subject / direct controller transmission)", "must", True, "Art.20.2"),
+        ChecklistItem("item:Art.20:reg_delivery_date",   "Per-row delivery date (within Art.12.3 SLA)", "must", True, "Art.12.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.20:reg_data_volume",     "Per-row data volume metric (records / bytes)", "should", True, "Operational"),
+    ],
+)
+
+REQ_ART20_APPLICABLE_DATA_SCOPE = EvidenceRequirement(
+    id            = "req:Art.20:applicable_data_scope",
+    control_ref   = "Art.20",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Portable Data Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which Art.30 RoPA activities fall in Art.20 scope (basis consent or contract AND automated). Defines what 'provided by' the subject means operationally",
+    must_contain  = [
+        ChecklistItem("item:Art.20:scope_in_scope_activities","Art.30 RoPA activities in scope (basis consent / contract AND automated)", "must", True, "Art.20.1"),
+        ChecklistItem("item:Art.20:scope_data_categorisation","Categorisation rules — what counts as 'provided by' the subject vs derived/observed (EDPB Guidelines WP242 reference)", "must", True, "Art.20.1 — provided by"),
+        ChecklistItem("item:Art.20:scope_exclusions",    "Out-of-scope activities (basis legal obligation / vital interests / public task / legitimate interests; manual processing)", "must", True, "Art.20.1"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.20:scope_change_drivers","Trigger list (new contract-based activity, new automated processing line)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART20_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.20:portability_program_review",
+    control_ref   = "Art.20",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Portability Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification — applicability decisions consistent, export formats still industry-current, direct-transmission supported where feasible (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.20:rev_date",            "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.20:rev_reviewer",        "Reviewer identity (DPO + product lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.20:rev_applicability_consistency","Applicability consistency audit — like requests handled like ways across the year", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.20:rev_format_currency", "Export format currency — chosen format still commonly used industry-wide", "must", True, "Art.20.1"),
+        ChecklistItem("item:Art.20:rev_sla_compliance",  "SLA compliance against Art.12.3 (one month)", "must", True, "Art.12.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.20:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.21 Right to object — op_process 4-leaf (batch 28) ─────────────────────
+
+REQ_ART21_OBJECTION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.21:objection_procedure",
+    control_ref   = "Art.21",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Right to Object Procedure",
+    trigger_type  = "universal",
+    description   = "Art.21 gives subjects the right to object to processing based on legitimate interests / public task (Art.21.1) AND an absolute right to object to direct marketing (Art.21.2). Distinct workflows for absolute (direct marketing) vs balancing (legitimate interests)",
+    must_contain  = [
+        ChecklistItem("item:Art.21:intake_channel",      "Intake channel via Art.12 procedure", "must", True, "Art.12.2"),
+        ChecklistItem("item:Art.21:direct_marketing_absolute","Direct marketing objection — absolute right, immediate cessation (Art.21.3)", "must", True, "Art.21.2-3"),
+        ChecklistItem("item:Art.21:legitimate_interests_balance","Legitimate-interests objection — balancing test (compelling legitimate grounds OR establishment of legal claims)", "must", True, "Art.21.1"),
+        ChecklistItem("item:Art.21:explicit_notice",     "Right is explicitly drawn to subject's attention at first communication (Art.21.4)", "must", True, "Art.21.4 — explicit notice"),
+        ChecklistItem("item:Art.21:response_deadline",   "One-month response deadline", "must", True, "Art.12.3"),
+        ChecklistItem("item:Art.21:scientific_research", "Scientific-research / statistical-purposes overlay (Art.21.6 — public-interest task derogation)", "must", True, "Art.21.6"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.21:profiling_handling",  "Profiling objection handled explicitly (Art.21.1 covers profiling)", "should", True, "Art.21.1"),
+    ],
+)
+
+REQ_ART21_OBJECTION_REGISTER = EvidenceRequirement(
+    id            = "req:Art.21:objection_register",
+    control_ref   = "Art.21",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Objection Register",
+    trigger_type  = "universal",
+    description   = "Per-objection record. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.21:reg_request_id",      "Per-row request id (Art.12 cross-ref)", "must", True, "Cross-leaf"),
+        ChecklistItem("item:Art.21:reg_objection_type",  "Per-row objection type (direct marketing absolute / legitimate interests balancing / scientific research)", "must", True, "Art.21.1-6"),
+        ChecklistItem("item:Art.21:reg_outcome",         "Per-row outcome (processing ceased / continued with compelling grounds / partial)", "must", True, "Art.21.1"),
+        ChecklistItem("item:Art.21:reg_grounds",         "Per-row grounds for continuing (for legitimate-interests objections continued)", "must", True, "Art.21.1 — defensibility"),
+        ChecklistItem("item:Art.21:reg_response_date",   "Per-row response date (Art.12.3 SLA tracking)", "must", True, "Art.12.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.21:reg_suppression_list","Per-row addition to suppression list (direct marketing)", "should", True, "Art.21.3 operational"),
+    ],
+)
+
+REQ_ART21_APPLICABLE_BASIS_SCOPE = EvidenceRequirement(
+    id            = "req:Art.21:applicable_basis_scope",
+    control_ref   = "Art.21",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Processing Basis Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which Art.6 activities are subject to Art.21 objection right (Art.6.1.e public task + Art.6.1.f legitimate interests + direct-marketing activities under any basis)",
+    must_contain  = [
+        ChecklistItem("item:Art.21:scope_legitimate_interests","Legitimate-interests activities enumerated (links to Art.6 register Art.6.1.f rows)", "must", True, "Art.21.1"),
+        ChecklistItem("item:Art.21:scope_public_task",   "Public-task activities enumerated where applicable (Art.6.1.e)", "must", True, "Art.21.1"),
+        ChecklistItem("item:Art.21:scope_direct_marketing","Direct-marketing activities enumerated (any basis — Art.21.2 right is absolute)", "must", True, "Art.21.2"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.21:scope_change_drivers","Trigger list (new legitimate-interests activity, new marketing channel)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART21_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.21:objection_program_review",
+    control_ref   = "Art.21",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Objection Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification — direct-marketing objections honoured immediately, legitimate-interests balancing tests defensible, explicit-notice MUST being delivered at first communication (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.21:rev_date",            "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.21:rev_reviewer",        "Reviewer identity (DPO + marketing/product lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.21:rev_direct_marketing_sla","Direct-marketing immediate-cessation SLA met across all objections", "must", True, "Art.21.3"),
+        ChecklistItem("item:Art.21:rev_balancing_quality","Balancing-test quality sample — continued-processing decisions have compelling-grounds documentation", "must", True, "Art.21.1"),
+        ChecklistItem("item:Art.21:rev_explicit_notice_audit","Explicit-notice audit — Art.21 right is drawn to attention at first communication across surfaces", "must", True, "Art.21.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.21:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.22 Automated decision-making — op_process 4-leaf, profile_fact ────────
+# (batch 28). profile_fact: applies when org engages in automated decision-
+# making (including profiling) producing legal effects or similarly
+# significantly affecting the subject.
+
+REQ_ART22_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.22:automated_decision_procedure",
+    control_ref   = "Art.22",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Automated Decision-Making Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.22 gives subjects the right NOT to be subject to solely-automated decisions producing legal effects or similarly significant effects. The procedure governs intake of objections, the safeguards Art.22.3 requires (human intervention, expression of view, contest decision)",
+    must_contain  = [
+        ChecklistItem("item:Art.22:intake_channel",      "Intake channel via Art.12 procedure", "must", True, "Art.12.2"),
+        ChecklistItem("item:Art.22:art22_2_grounds",     "Art.22.2 grounds catalog — when automated decisions ARE permitted (contract necessity / Member State law / explicit consent)", "must", True, "Art.22.2"),
+        ChecklistItem("item:Art.22:human_intervention", "Human intervention pathway (subject can request a human decision)", "must", True, "Art.22.3 — human intervention"),
+        ChecklistItem("item:Art.22:contest_mechanism",   "Contest-decision mechanism (subject can contest the automated decision)", "must", True, "Art.22.3 — contest"),
+        ChecklistItem("item:Art.22:expression_of_view",  "Expression-of-view mechanism (subject can communicate context the model didn't see)", "must", True, "Art.22.3 — express point of view"),
+        ChecklistItem("item:Art.22:special_category_overlay","Special-category overlay — Art.22.4 prohibits automated decisions on Art.9 data except Art.9.2.a explicit consent / Art.9.2.g substantial public interest with safeguards", "must", True, "Art.22.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.22:logic_disclosure",    "Meaningful information about the logic involved disclosed (Art.13.2.f / 14.2.g / 15.1.h linkage)", "should", True, "Art.13.2.f"),
+    ],
+)
+
+REQ_ART22_REGISTER = EvidenceRequirement(
+    id            = "req:Art.22:automated_decision_register",
+    control_ref   = "Art.22",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Automated Decision-Making Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-decision-system record (NOT per individual decision) for every solely-automated decision system in scope. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.22:reg_system_id",       "System / model identifier per row", "must", True, "Audit defensibility"),
+        ChecklistItem("item:Art.22:reg_decisions_made", "Decision categories made (loan approval, employment screening, pricing, etc.)", "must", True, "Defining scope"),
+        ChecklistItem("item:Art.22:reg_art22_2_basis",   "Art.22.2 basis cited per row (contract / MS law / explicit consent)", "must", True, "Art.22.2"),
+        ChecklistItem("item:Art.22:reg_safeguards",      "Per-row Art.22.3 safeguards in place (human intervention queue, contest UI, model explanation)", "must", True, "Art.22.3"),
+        ChecklistItem("item:Art.22:reg_dpia_link",       "Per-row DPIA reference (Art.35 nearly always triggered for Art.22)", "must", True, "Art.35.3.a"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.22:reg_objection_count","Per-row objection count (Art.22-related rights requests this period)", "should", True, "Operational visibility"),
+    ],
+)
+
+REQ_ART22_APPLICABLE_DECISIONS_SCOPE = EvidenceRequirement(
+    id            = "req:Art.22:applicable_decisions_scope",
+    control_ref   = "Art.22",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Automated Decisions Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which automated processes count as 'solely automated' + 'legal effects or similarly significant'. Crucial: routine fraud-detection that flags-for-human-review is OUT of scope; loan-approval decided-by-algorithm is IN scope",
+    must_contain  = [
+        ChecklistItem("item:Art.22:scope_solely_automated","Operational test for 'solely automated' (no meaningful human involvement)", "must", True, "Art.22.1 — solely automated"),
+        ChecklistItem("item:Art.22:scope_significant_effects","Test for legal or similarly significant effects (financial, employment, insurance, eligibility)", "must", True, "Art.22.1 — significantly affects"),
+        ChecklistItem("item:Art.22:scope_in_scope_systems","In-scope systems enumerated", "must", True, "Coverage"),
+        ChecklistItem("item:Art.22:scope_exclusions",    "Out-of-scope automated processes (with rationale — e.g. flag-for-review, recommender-no-significant-effect)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.22:scope_change_drivers","Trigger list (new ML model deployed, system promotion from review to decision)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART22_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.22:automated_decision_program_review",
+    control_ref   = "Art.22",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Automated Decision-Making Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every in-scope system has a current Art.22.2 basis, safeguards functioning, DPIAs current, objections handled (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.22:rev_date",            "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.22:rev_reviewer",        "Reviewer identity (DPO + ML/product lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.22:rev_basis_currency", "Basis currency check — every in-scope system still has valid Art.22.2 basis", "must", True, "Art.22.2"),
+        ChecklistItem("item:Art.22:rev_safeguards_health","Safeguards health — human intervention queue actually used, contest mechanism functioning", "must", True, "Art.22.3"),
+        ChecklistItem("item:Art.22:rev_silent_promotion","Silent-promotion sweep — verify no flag-for-review system has been quietly promoted to solely-automated without procedure update", "must", True, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.22:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.23 Member State restrictions — op_process 4-leaf, profile_fact ────────
+# (batch 28). profile_fact: applies only when Member State law specifically
+# restricts the scope of Art.12-22 rights (e.g. national security / defence
+# / public security / criminal law / public interest derogations).
+
+REQ_ART23_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.23:restrictions_procedure",
+    control_ref   = "Art.23",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Member State Restrictions Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.23 permits Member State law to restrict the scope of Art.12-22 obligations + Art.34 communication when the restriction respects essence of rights AND is necessary + proportionate in a democratic society for one of the Art.23.1 a-j purposes",
+    must_contain  = [
+        ChecklistItem("item:Art.23:law_identification",  "Member State law identification per applicable jurisdiction", "must", True, "Art.23.1"),
+        ChecklistItem("item:Art.23:purpose_mapping",     "Per-law mapping to Art.23.1 purpose (a-j: national security, defence, public security, criminal law, public interest objectives, regulatory function, monitoring/inspection/regulatory, judicial proceedings, breach of professional ethics, data subject protection)", "must", True, "Art.23.1.a-j"),
+        ChecklistItem("item:Art.23:proportionality_check","Necessity-and-proportionality check per Art.23.1 (essence of fundamental rights respected)", "must", True, "Art.23.1 — necessary + proportionate"),
+        ChecklistItem("item:Art.23:safeguards_per_law",  "Safeguards required by Art.23.2 per applicable law (purposes / categories / scope / safeguards / specification of controller / retention / risks / right to information)", "must", True, "Art.23.2"),
+        ChecklistItem("item:Art.23:application_records", "Per-application record retained (when restriction is invoked, by whom, against which subject right)", "must", True, "Art.5.2 — accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.23:owner",               "Named owner (DPO + legal counsel)", "should", True, "Accountability"),
+    ],
+)
+
+REQ_ART23_RESTRICTION_REGISTER = EvidenceRequirement(
+    id            = "req:Art.23:restriction_register",
+    control_ref   = "Art.23",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Art.23 Restriction Application Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-invocation record — every time an Art.23 restriction is applied to deny / limit a subject right. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.23:reg_invocation_id",   "Unique invocation identifier per row", "must", True, "Audit"),
+        ChecklistItem("item:Art.23:reg_law_citation",    "Per-row Member State law cited (article + section)", "must", True, "Art.23.1"),
+        ChecklistItem("item:Art.23:reg_right_restricted","Per-row right restricted (Art.12-22 + Art.34)", "must", True, "Art.23.1"),
+        ChecklistItem("item:Art.23:reg_purpose",         "Per-row Art.23.1 a-j purpose", "must", True, "Art.23.1"),
+        ChecklistItem("item:Art.23:reg_subject_notice",  "Per-row subject notice (where required by Art.23.2.h)", "must", True, "Art.23.2.h"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.23:reg_legal_review",    "Per-row legal counsel sign-off", "should", True, "Defensibility"),
+    ],
+)
+
+REQ_ART23_APPLICABLE_LAW_SCOPE = EvidenceRequirement(
+    id            = "req:Art.23:applicable_law_scope",
+    control_ref   = "Art.23",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Member State Restrictions Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which Member State laws actually restrict Art.12-22/34 rights for the org's processing. Most orgs face none; regulated industries face several",
+    must_contain  = [
+        ChecklistItem("item:Art.23:scope_ms_law_register","Member State law register — every applicable law cited with title, article, scope", "must", True, "Art.23.1"),
+        ChecklistItem("item:Art.23:scope_purpose_distribution","Per-law Art.23.1 purpose (a-j)", "must", True, "Art.23.1"),
+        ChecklistItem("item:Art.23:scope_exclusions",    "Out-of-scope MS laws (those that don't restrict GDPR rights — e.g. those that GRANT rights)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.23:scope_change_drivers","Trigger list (new MS entry, new sectoral regulation enacted)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART23_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.23:restrictions_program_review",
+    control_ref   = "Art.23",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Art.23 Restrictions Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every cited MS law still in force, invocations defensible, Art.23.2 safeguards being honoured (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.23:rev_date",            "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.23:rev_reviewer",        "Reviewer identity (DPO + legal counsel)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.23:rev_law_currency",    "Law currency — every cited MS law still in force; any new restricting law surfaced", "must", True, "Currency"),
+        ChecklistItem("item:Art.23:rev_invocation_audit","Invocation audit — sampled register rows reviewed for proportionality and Art.23.2 safeguard compliance", "must", True, "Art.23.2"),
+        ChecklistItem("item:Art.23:rev_subject_notice_compliance","Subject-notice compliance — where Art.23.2.h applies, notice was delivered", "must", True, "Art.23.2.h"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.23:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
 
 # ── GDPR Art.30 — Records of Processing — records_program spine (4-leaf) ─────
 # Promoted 2026-05-28 from single-leaf to multi-leaf per
@@ -12596,6 +13345,66 @@ SPEC_ART_16 = DerivedSpec(
                 ),
             ],
         ),
+        # ── batch 28 (2026-06-02) — 3 new direct_evidence leaves added ───────
+        # Mirrors Art.6 expansion pattern: primary procedure stays, sibling
+        # register + applicable scope + program review added.
+        EvidenceRequirement(
+            id            = "req:Art.16:rectification_register",
+            control_ref   = "Art.16",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "register",
+            title         = "Rectification Request Register",
+            trigger_type  = "universal",
+            description   = "Per-request record proving every Art.16 request was handled per procedure. Annual refresh (freshness=365)",
+            freshness_days = 365,
+            must_contain   = [
+                ChecklistItem("item:Art.16:reg_request_id",     "Per-row request id (Art.12 cross-ref)", "must", True, "Cross-leaf"),
+                ChecklistItem("item:Art.16:reg_subject_id",     "Per-row subject identifier (pseudonymous)", "must", True, "Audit"),
+                ChecklistItem("item:Art.16:reg_systems_touched","Per-row systems where rectification was applied", "must", True, "Art.16 — across all instances"),
+                ChecklistItem("item:Art.16:reg_response_date",  "Per-row response date (Art.12.3 SLA)", "must", True, "Art.12.3"),
+                ChecklistItem("item:Art.16:reg_art19_xref",     "Per-row Art.19 notification reference", "must", True, "Art.19"),
+            ],
+            should_contain = [
+                ChecklistItem("item:Art.16:reg_correction_summary","Per-row summary of correction made", "should", True, "Audit clarity"),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.16:applicable_systems_scope",
+            control_ref   = "Art.16",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "scope_note",
+            title         = "Applicable Systems Scope for Rectification",
+            trigger_type  = "universal",
+            description   = "The upstream — every system holding rectifiable personal data that needs to be touched on a rectification request",
+            must_contain   = [
+                ChecklistItem("item:Art.16:scope_systems",      "Systems enumerated (PII inventory cross-reference — A.5.34:pii_inventory + Art.30 RoPA)", "must", True, "Coverage proof"),
+                ChecklistItem("item:Art.16:scope_replicas",     "Replica + backup handling rules — when rectification reaches them, when supplementary statement substitutes", "must", True, "Art.16 — all instances"),
+                ChecklistItem("item:Art.16:scope_third_parties","Third-party processor handling — where requests propagate via Art.28 DPA flow", "must", True, "Cross-article coherence"),
+            ],
+            should_contain = [
+                ChecklistItem("item:Art.16:scope_change_drivers","Trigger list (new system holding PII, new processor onboarded)", "should", True, "Currency"),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.16:program_review",
+            control_ref   = "Art.16",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "review_record",
+            title         = "Art.16 Rectification Program Review",
+            trigger_type  = "universal",
+            description   = "Annual verification — SLAs met, systems coverage complete, Art.19 notifications fired (freshness=365)",
+            freshness_days = 365,
+            must_contain   = [
+                ChecklistItem("item:Art.16:rev_date",            "Review date within the planned interval", "must", True, "Periodic"),
+                ChecklistItem("item:Art.16:rev_reviewer",        "Reviewer identity (DPO)", "must", True, "Accountability"),
+                ChecklistItem("item:Art.16:rev_sla_compliance",  "SLA compliance (Art.12.3 one-month)", "must", True, "Art.12.3"),
+                ChecklistItem("item:Art.16:rev_systems_completeness","Systems-completeness check — sampled requests reached every system in scope", "must", True, "Art.16 — all instances"),
+                ChecklistItem("item:Art.16:rev_art19_audit",     "Art.19 audit — recipient notifications fired (or exceptions documented)", "must", True, "Art.19"),
+            ],
+            should_contain = [
+                ChecklistItem("item:Art.16:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+            ],
+        ),
     ],
 )
 
@@ -12731,6 +13540,66 @@ SPEC_ART_17 = DerivedSpec(
                     "Legal-hold check before erasure (links to A.8.10:legal_hold)",
                     "should", True, "Art.17.3 — legal obligation / claims exception",
                 ),
+            ],
+        ),
+        # ── batch 28 (2026-06-02) — 3 new direct_evidence leaves added ───────
+        EvidenceRequirement(
+            id            = "req:Art.17:erasure_register",
+            control_ref   = "Art.17",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "register",
+            title         = "Erasure Request Register",
+            trigger_type  = "universal",
+            description   = "Per-request record proving Art.17 lifecycle (grounds → exception assessment → erasure → notification). Annual refresh (freshness=365)",
+            freshness_days = 365,
+            must_contain   = [
+                ChecklistItem("item:Art.17:reg_request_id",     "Per-row request id (Art.12 cross-ref)", "must", True, "Cross-leaf"),
+                ChecklistItem("item:Art.17:reg_grounds",        "Per-row Art.17.1 ground (a-f) recorded", "must", True, "Art.17.1"),
+                ChecklistItem("item:Art.17:reg_exceptions",     "Per-row Art.17.3 exception assessment (none / cited exception)", "must", True, "Art.17.3"),
+                ChecklistItem("item:Art.17:reg_systems_erased", "Per-row systems where erasure was applied (including backups + replicas)", "must", True, "Art.17.1 — all instances"),
+                ChecklistItem("item:Art.17:reg_response_date",  "Per-row response date (Art.12.3 SLA)", "must", True, "Art.12.3"),
+                ChecklistItem("item:Art.17:reg_art19_xref",     "Per-row Art.19 notification reference", "must", True, "Art.19"),
+            ],
+            should_contain = [
+                ChecklistItem("item:Art.17:reg_art17_2_action", "Per-row Art.17.2 public-disclosure action where applicable", "should", True, "Art.17.2"),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.17:applicable_systems_scope",
+            control_ref   = "Art.17",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "scope_note",
+            title         = "Applicable Systems Scope for Erasure",
+            trigger_type  = "universal",
+            description   = "The upstream — every system holding erasable personal data including backups + replicas + third-party processors (per Art.17 'all instances' + Art.28 flow-through)",
+            must_contain   = [
+                ChecklistItem("item:Art.17:scope_systems",       "Systems enumerated (cross-ref to A.5.34:pii_inventory + A.8.10:scope_systems + Art.30 RoPA)", "must", True, "Coverage"),
+                ChecklistItem("item:Art.17:scope_backup_rules",  "Backup + replica erasure rules (synchronous-on-restore vs delete-cycle vs immutable-record handling)", "must", True, "Art.17.1 — all instances"),
+                ChecklistItem("item:Art.17:scope_third_parties", "Third-party processor handling via Art.28 DPA flow-through", "must", True, "Cross-article coherence"),
+                ChecklistItem("item:Art.17:scope_public_data",   "Public-data overlay — when org has made data public, Art.17.2 reasonable-measures scope applies", "must", True, "Art.17.2"),
+            ],
+            should_contain = [
+                ChecklistItem("item:Art.17:scope_change_drivers","Trigger list (new PII store, new processor, public-data disclosure)", "should", True, "Currency"),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.17:program_review",
+            control_ref   = "Art.17",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "review_record",
+            title         = "Art.17 Erasure Program Review",
+            trigger_type  = "universal",
+            description   = "Annual verification — SLAs met, backup erasure handled, Art.17.3 exception claims defensible, Art.17.2 public-disclosure actions taken where applicable (freshness=365)",
+            freshness_days = 365,
+            must_contain   = [
+                ChecklistItem("item:Art.17:rev_date",            "Review date within the planned interval", "must", True, "Periodic"),
+                ChecklistItem("item:Art.17:rev_reviewer",        "Reviewer identity (DPO + ops lead)", "must", True, "Accountability"),
+                ChecklistItem("item:Art.17:rev_sla_compliance",  "SLA compliance (Art.12.3 one-month)", "must", True, "Art.12.3"),
+                ChecklistItem("item:Art.17:rev_backup_handling", "Backup-handling sample — backups actually purged on cycle, immutable records correctly flagged-not-erased", "must", True, "Art.17.1"),
+                ChecklistItem("item:Art.17:rev_exception_defensibility","Art.17.3 exception sample — refused requests have defensible exception grounds", "must", True, "Art.17.3"),
+            ],
+            should_contain = [
+                ChecklistItem("item:Art.17:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
             ],
         ),
     ],
@@ -13648,6 +14517,54 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
 
     # Universal — GDPR
     REQ_PRIVACY_NOTICE_DIRECT,
+    # ── Batch 28 (2026-06-02) — Art.13 promotion 3 new siblings ──────────────
+    REQ_ART13_PUBLICATION_RECORD,
+    REQ_ART13_APPLICABLE_COLLECTION_POINTS_SCOPE,
+    REQ_ART13_PROGRAM_REVIEW,
+    # ── Batch 28 — Art.14 new 4-leaf policy_program ──────────────────────────
+    REQ_ART14_NOTICE,
+    REQ_ART14_SOURCE_REGISTER,
+    REQ_ART14_APPLICABLE_SOURCES_SCOPE,
+    REQ_ART14_PROGRAM_REVIEW,
+    # ── Batch 28 — Art.12 new 4-leaf op_process (transparency umbrella) ──────
+    REQ_ART12_TRANSPARENCY_PROCEDURE,
+    REQ_ART12_REQUEST_REGISTER,
+    REQ_ART12_APPLICABLE_CHANNELS_SCOPE,
+    REQ_ART12_PROGRAM_REVIEW,
+    # ── Batch 28 — Art.18 new 4-leaf op_process ──────────────────────────────
+    REQ_ART18_RESTRICTION_PROCEDURE,
+    REQ_ART18_RESTRICTION_REGISTER,
+    REQ_ART18_APPLICABLE_GROUNDS_SCOPE,
+    REQ_ART18_PROGRAM_REVIEW,
+    # ── Batch 28 — Art.19 new 4-leaf op_process ──────────────────────────────
+    REQ_ART19_NOTIFICATION_PROCEDURE,
+    REQ_ART19_NOTIFICATION_REGISTER,
+    REQ_ART19_APPLICABLE_RECIPIENT_SCOPE,
+    REQ_ART19_PROGRAM_REVIEW,
+    # ── Batch 28 — Art.20 new 4-leaf op_process ──────────────────────────────
+    REQ_ART20_PORTABILITY_PROCEDURE,
+    REQ_ART20_PORTABILITY_REGISTER,
+    REQ_ART20_APPLICABLE_DATA_SCOPE,
+    REQ_ART20_PROGRAM_REVIEW,
+    # ── Batch 28 — Art.21 new 4-leaf op_process ──────────────────────────────
+    REQ_ART21_OBJECTION_PROCEDURE,
+    REQ_ART21_OBJECTION_REGISTER,
+    REQ_ART21_APPLICABLE_BASIS_SCOPE,
+    REQ_ART21_PROGRAM_REVIEW,
+    # ── Batch 28 — Art.22 new 4-leaf op_process (profile_fact) ───────────────
+    REQ_ART22_PROCEDURE,
+    REQ_ART22_REGISTER,
+    REQ_ART22_APPLICABLE_DECISIONS_SCOPE,
+    REQ_ART22_PROGRAM_REVIEW,
+    # ── Batch 28 — Art.23 new 4-leaf op_process (profile_fact) ───────────────
+    REQ_ART23_PROCEDURE,
+    REQ_ART23_RESTRICTION_REGISTER,
+    REQ_ART23_APPLICABLE_LAW_SCOPE,
+    REQ_ART23_PROGRAM_REVIEW,
+    # Note: Art.16 + Art.17 direct_evidence (3 new leaves each) added inline
+    # in SPEC_ART_16 and SPEC_ART_17 — NOT registered here (DerivedSpec
+    # direct_evidence flows through ALL_DERIVED_SPECS).
+    # ── End batch 28 ─────────────────────────────────────────────────────────
     # GDPR Art.30 — 4-leaf records_program spine (2026-05-28 promotion)
     REQ_RECORDS_PROCESSING,
     REQ_ART30_MAINTENANCE_PROCEDURE,
