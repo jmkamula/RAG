@@ -174,9 +174,10 @@ with d.session() as s:
   + 10 Phase B ISMS chapters 6+7 close-out 10-pack
   + 8 Phase B ISMS chapters 8+9+10 close-out 8-pack — ISO 27001 fully closed
   + 5 Phase B GDPR Chapter II Principles 5-pack — FIRST GDPR BATCH
-  + 11 Phase B GDPR Chapter III Rights 11-pack — largest GDPR batch)
-- Score: 171/173 PASS target on 2026-06-02 (#24 + #25 known-stale).
-  Clean-run upper bound is 171/173. Some runs may dip due to #3/#21 stochasticity
+  + 11 Phase B GDPR Chapter III Rights 11-pack — largest GDPR batch
+  + 11 Phase B GDPR Chapter IV core 11-pack — Art.24/25/26/27/28/29/31/32/33/34/35)
+- Score: 182/184 PASS target on 2026-06-02 (#24 + #25 known-stale).
+  Clean-run upper bound is 182/184. Some runs may dip due to #3/#21 stochasticity
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -374,6 +375,15 @@ with d.session() as s:
   legal_jurisdiction, A.5.33 proc_pii_overlay; new owner MUST + 4th
   SHOULD pims_alignment encode the ISO/IEC 27701 PIMS extension
   where in scope)
+- Cases 174-184 lock in: Phase B GDPR Chapter IV core 11-pack (batch 29a,
+  2026-06-02). 3 DerivedSpec expansions (Art.24 0→4 direct = 10 children;
+  Art.25 1→4 = 10; Art.32 1→4 = 9) + 2 promotions (Art.28 DPA + Art.33
+  breach-to-SA both → 4-leaf, primary ids preserved) + 6 new specs
+  (Art.26/27/29/31/34/35). Spine: 1×policy_program + 7×op_process +
+  3×DerivedSpec expansion. **Art.24 is FIRST DerivedSpec to go from 0 to
+  4 direct_evidence in one batch** — 10-child verdict (largest verdict
+  surface). Art.26+Art.27 N/A on Arion (no joint controllers, EU
+  established). GDPR Ch IV core CLOSED; Art.36-43 deferred to batch 29b
 - Cases 163-173 lock in: Phase B GDPR Chapter III Data Subject Rights
   11-pack (batch 28, 2026-06-02; LARGEST GDPR batch). Art.12 + Art.13
   promote + Art.14 + Art.16 expand + Art.17 expand + Art.18 + Art.19 +

@@ -1872,14 +1872,18 @@ REQ_ART10_PROGRAM_REVIEW = EvidenceRequirement(
 
 # ── Profile-fact — cloud/processors ───────────────────────────────────────────
 
+# ── Art.28 Processor (DPA) — policy_program 4-leaf (batch 29a 2026-06-02) ─────
+# Promoted from single-leaf. Primary leaf id preserved
+# (req:Art.28:data_processing_agreement + all item:Art.28:* ids).
+
 REQ_DPA = EvidenceRequirement(
     id            = "req:Art.28:data_processing_agreement",
     control_ref   = "Art.28",
     standard_id   = "GDPR:2016/679",
     evidence_type = "data_processing_agreement",
-    title= "Data Processing Agreement (DPA)",
+    title         = "Data Processing Agreement (DPA)",
     trigger_type  = "profile_fact",
-    description   = "Mandatory written contract with every processor under Art.28.3",
+    description   = "Art.28.3 mandates a written contract with every processor covering 8 specific points. The DPA is the canonical artefact. Sibling leaves: per-processor DPA register, applicable processors scope, program review",
     must_contain  = [
         ChecklistItem("item:Art.28:instructions",    "Process only on documented controller instructions", "must", True, "Art.28.3a"),
         ChecklistItem("item:Art.28:confidentiality", "Confidentiality obligations on processor staff", "must", True, "Art.28.3b"),
@@ -1891,11 +1895,589 @@ REQ_DPA = EvidenceRequirement(
         ChecklistItem("item:Art.28:audit",           "Audit rights and information to demonstrate compliance", "must", True, "Art.28.3h"),
     ],
     should_contain= [
-        ChecklistItem("item:Art.28:breach_notif", "Breach notification timeline to controller", "should", True, "Best practice"),
-        ChecklistItem("item:Art.28:transfers",    "Data transfer mechanisms if applicable", "should", True, "Chapter V"),
-        ChecklistItem("item:Art.28:governing",    "Governing law and jurisdiction", "should", False, "Contract completeness"),
+        ChecklistItem("item:Art.28:breach_notif",    "Breach notification timeline to controller", "should", True, "Best practice"),
+        ChecklistItem("item:Art.28:transfers",       "Data transfer mechanisms if applicable", "should", True, "Chapter V"),
+        ChecklistItem("item:Art.28:governing",       "Governing law and jurisdiction", "should", False, "Contract completeness"),
     ],
 )
+
+REQ_ART28_PROCESSOR_REGISTER = EvidenceRequirement(
+    id            = "req:Art.28:processor_register",
+    control_ref   = "Art.28",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Per-Processor DPA Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-processor record proving every active processor has a signed DPA in force. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.28:reg_processor_id",   "Processor identifier per row (entity name, jurisdiction)", "must", True, "Audit defensibility"),
+        ChecklistItem("item:Art.28:reg_data_categories","Per-row data categories processed (cross-link to Art.30 RoPA)", "must", True, "Cross-article coherence"),
+        ChecklistItem("item:Art.28:reg_dpa_version",    "Per-row DPA version + execution date", "must", True, "Currency"),
+        ChecklistItem("item:Art.28:reg_subprocessors",  "Per-row authorised sub-processor list (or 'none')", "must", True, "Art.28.2"),
+        ChecklistItem("item:Art.28:reg_security_check", "Per-row Art.32-equivalent security assurance source (certification / audit report / questionnaire)", "must", True, "Art.28.3c"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.28:reg_transfer_mechanism","Per-row Chap V transfer mechanism where applicable", "should", True, "Cross-chapter coherence"),
+    ],
+)
+
+REQ_ART28_APPLICABLE_PROCESSORS_SCOPE = EvidenceRequirement(
+    id            = "req:Art.28:applicable_processors_scope",
+    control_ref   = "Art.28",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Processors Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — what counts as a 'processor' (vs joint controller per Art.26, vs intra-group transfer). Operational definition + the controller-vs-processor decision tree",
+    must_contain  = [
+        ChecklistItem("item:Art.28:scope_processor_types","Processor types in scope (cloud / SaaS providers, payroll, marketing platforms, analytics, support ticketing, etc.)", "must", True, "Coverage"),
+        ChecklistItem("item:Art.28:scope_controller_vs_processor","Controller-vs-processor decision criteria (means & purpose test per EDPB guidelines)", "must", True, "Art.4(7-8) boundary"),
+        ChecklistItem("item:Art.28:scope_exclusions",   "Out-of-scope vendors (those processing only their own data, intra-group with no GDPR transfer)", "must", True, "Defensible bounding"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.28:scope_change_drivers","Trigger list (new vendor onboarded, vendor service-shape change)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART28_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.28:processor_program_review",
+    control_ref   = "Art.28",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Processor Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification that every active processor has a current DPA, sub-processor authorisations are tracked, Art.32 assurance sources are still valid (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.28:rev_date",           "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.28:rev_reviewer",       "Reviewer identity (DPO + procurement / vendor management lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.28:rev_dpa_currency",   "DPA currency check — every active processor has a current DPA (no expired or pre-onboarding processors active)", "must", True, "Art.28.3 — written contract"),
+        ChecklistItem("item:Art.28:rev_subprocessor_audit","Sub-processor audit — every active sub-processor authorised; unauthorised additions flagged", "must", True, "Art.28.2"),
+        ChecklistItem("item:Art.28:rev_security_currency","Security assurance currency — Art.32-equivalent evidence (cert, audit) refreshed within validity period", "must", True, "Art.28.3c"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.28:rev_next_date",      "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+# ── Art.26 Joint controllers — op_process 4-leaf, profile_fact (batch 29a) ────
+# profile_fact: applies when the org IS a joint controller for any processing
+# activity. The Art.26 arrangement is the contractual artefact distinguishing
+# joint-controllership from independent-controller-+-processor relationships.
+
+REQ_ART26_ARRANGEMENT = EvidenceRequirement(
+    id            = "req:Art.26:joint_controller_arrangement",
+    control_ref   = "Art.26",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "arrangement",
+    title         = "Joint Controller Arrangement",
+    trigger_type  = "profile_fact",
+    description   = "Art.26 requires joint controllers to determine in a transparent manner their respective responsibilities. The arrangement is the canonical contractual artefact — distinguishes joint controllers from independent controllers (Art.4(7)) or controller-processor relationships (Art.28)",
+    must_contain  = [
+        ChecklistItem("item:Art.26:respective_responsibilities","Respective responsibilities for compliance allocated (Art.13/14 information, Art.15-22 rights, Art.32 security, Art.33-34 breach)", "must", True, "Art.26.1"),
+        ChecklistItem("item:Art.26:relationship_essence",       "Essence of the arrangement made available to data subjects (in privacy notice or similar)", "must", True, "Art.26.2"),
+        ChecklistItem("item:Art.26:contact_point",              "Contact point for data subjects identified", "must", True, "Art.26.1"),
+        ChecklistItem("item:Art.26:data_subject_against_either","Statement that subject may exercise rights against either controller (Art.26.3)", "must", True, "Art.26.3"),
+        ChecklistItem("item:Art.26:signature",                  "Signed by both joint controllers with date", "must", True, "Authenticity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.26:dispute_resolution",         "Dispute-resolution mechanism between joint controllers", "should", True, "Operational discipline"),
+    ],
+)
+
+REQ_ART26_REGISTER = EvidenceRequirement(
+    id            = "req:Art.26:joint_controller_register",
+    control_ref   = "Art.26",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Joint Controller Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-relationship record for every active joint-controller arrangement. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.26:reg_counterparty",   "Per-row joint-controller counterparty", "must", True, "Audit"),
+        ChecklistItem("item:Art.26:reg_activity",       "Per-row processing activity (Art.30 RoPA reference)", "must", True, "Cross-article"),
+        ChecklistItem("item:Art.26:reg_responsibilities","Per-row responsibility split summary", "must", True, "Art.26.1"),
+        ChecklistItem("item:Art.26:reg_essence_published","Per-row essence-of-arrangement published location (privacy notice URL)", "must", True, "Art.26.2"),
+        ChecklistItem("item:Art.26:reg_signed_date",    "Per-row arrangement signature date", "must", True, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.26:reg_review_date",    "Per-row next-review date", "should", True, "Planning"),
+    ],
+)
+
+REQ_ART26_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.26:applicable_scope",
+    control_ref   = "Art.26",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Joint Controllership Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which relationships qualify as joint controllership (vs independent controllers vs controller-processor). EDPB Guidelines 7/2020 test applied",
+    must_contain  = [
+        ChecklistItem("item:Art.26:scope_joint_relationships","Relationships qualifying as joint controllership enumerated", "must", True, "Art.4(7) + Art.26"),
+        ChecklistItem("item:Art.26:scope_test_criteria","Test criteria for joint controllership (joint decision on means + purposes) per EDPB 7/2020", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.26:scope_excluded",     "Excluded relationships (independent-controllers / controller-processor / no joint decision)", "must", True, "Defensible bounding"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.26:scope_change_drivers","Trigger list (new partnership, M&A, service-shape change)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART26_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.26:joint_controller_program_review",
+    control_ref   = "Art.26",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Joint Controller Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every active joint-controller relationship has current arrangement, essence is published, contact point still functioning (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.26:rev_date",           "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.26:rev_reviewer",       "Reviewer identity (DPO + legal counsel)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.26:rev_currency",       "Arrangement currency — every active relationship has current signed arrangement", "must", True, "Art.26.1"),
+        ChecklistItem("item:Art.26:rev_essence_published","Essence-published audit — privacy notice / equivalent surface reflects each arrangement", "must", True, "Art.26.2"),
+        ChecklistItem("item:Art.26:rev_contact_point",  "Contact-point health check — point still reachable, requests being routed correctly", "must", True, "Art.26.1"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.26:rev_next_date",      "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.27 Representative for non-EU controllers/processors — op_process ──────
+# (batch 29a, profile_fact: applies when controller/processor not established
+# in EU but targeting EU subjects under Art.3.2). Most EU-established orgs → N/A.
+
+REQ_ART27_DESIGNATION = EvidenceRequirement(
+    id            = "req:Art.27:representative_designation",
+    control_ref   = "Art.27",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "designation_document",
+    title         = "Representative Designation",
+    trigger_type  = "profile_fact",
+    description   = "Art.27 requires non-EU controllers/processors targeting EU data subjects under Art.3.2 to designate a representative in the EU in writing. The designation document is the canonical artefact",
+    must_contain  = [
+        ChecklistItem("item:Art.27:representative_identity","Identity and contact details of designated representative (EU establishment)", "must", True, "Art.27.1 + Art.27.4"),
+        ChecklistItem("item:Art.27:member_state",           "Member State where representative is established (one of the MS where subjects targeted)", "must", True, "Art.27.3"),
+        ChecklistItem("item:Art.27:mandate_scope",          "Mandate covering Art.27.4 functions (point of contact for SA + subjects)", "must", True, "Art.27.4"),
+        ChecklistItem("item:Art.27:liability",              "Representative without prejudice to controller/processor liability (Art.27.5 acknowledged)", "must", True, "Art.27.5"),
+        ChecklistItem("item:Art.27:designation_in_writing", "Designation in writing with date and signature", "must", True, "Art.27.1 — in writing"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.27:publicly_listed",        "Representative contact published in privacy notice (Art.13.1.a / Art.14.1.a integration)", "should", True, "Cross-article coherence"),
+    ],
+)
+
+REQ_ART27_OPERATIONS_RECORD = EvidenceRequirement(
+    id            = "req:Art.27:representative_operations_record",
+    control_ref   = "Art.27",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Representative Operations Record",
+    trigger_type  = "profile_fact",
+    description   = "Per-interaction record of how the representative actually operates — handled queries from SAs and subjects, escalated to non-EU principal. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.27:reg_interaction_id", "Per-row interaction id", "must", True, "Audit"),
+        ChecklistItem("item:Art.27:reg_originator",     "Per-row originator (data subject / SA / other)", "must", True, "Art.27.4"),
+        ChecklistItem("item:Art.27:reg_topic",          "Per-row topic (rights request routing, SA inquiry, breach communication)", "must", True, "Art.27.4"),
+        ChecklistItem("item:Art.27:reg_escalation",     "Per-row escalation to non-EU principal documented", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.27:reg_resolution_date","Per-row resolution date", "must", True, "SLA tracking"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.27:reg_sla_met",        "Per-row SLA-met flag (response within Art.12.3 cascade)", "should", True, "Art.12 cross-link"),
+    ],
+)
+
+REQ_ART27_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.27:applicable_scope",
+    control_ref   = "Art.27",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Art.27 Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — whether the controller/processor is in scope for Art.27 (not established in EU AND processing falls under Art.3.2) and any Art.27.2 exceptions (occasional + no large-scale special-category + low risk + public authority)",
+    must_contain  = [
+        ChecklistItem("item:Art.27:scope_establishment",    "Establishment analysis — where the controller/processor is established + why Art.3.2 applies (offering goods/services OR monitoring behaviour in Union)", "must", True, "Art.3.2"),
+        ChecklistItem("item:Art.27:scope_member_state_target","MS targeted (Art.27.3 — representative MUST be in one of these)", "must", True, "Art.27.3"),
+        ChecklistItem("item:Art.27:scope_art27_2_exception","Art.27.2 exception assessment (occasional processing + no special-category-large-scale + low risk → no representative needed). Decision recorded", "must", True, "Art.27.2"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.27:scope_change_drivers",   "Trigger list (EU market entry/exit, processing-pattern change)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART27_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.27:representative_program_review",
+    control_ref   = "Art.27",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Representative Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — designation current, representative responsive, Art.27.2 exception assessment still valid (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.27:rev_date",           "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.27:rev_reviewer",       "Reviewer identity (DPO + legal counsel)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.27:rev_designation_currency","Designation currency — representative still operating, mandate still valid", "must", True, "Art.27.1"),
+        ChecklistItem("item:Art.27:rev_operations_sample","Operations sample — interactions handled within SLAs, no failed escalations", "must", True, "Effectiveness"),
+        ChecklistItem("item:Art.27:rev_exception_recheck","Art.27.2 exception re-check where claimed — processing-pattern shift may invalidate the exception", "must", True, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.27:rev_next_date",      "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.29 Processing under controller authority — op_process 4-leaf ──────────
+# (batch 29a, profile_fact: org IS a processor OR has personnel processing
+# under controller authority — applies broadly to anyone with subordinate
+# personnel handling personal data on instructions).
+
+REQ_ART29_INSTRUCTIONS_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.29:processing_under_authority_procedure",
+    control_ref   = "Art.29",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Processing Under Authority Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.29 binds processor + person acting under processor's authority + person acting under controller's authority to process personal data ONLY on documented instructions from the controller (unless required by Union/Member State law). The procedure governs how instructions are received, recorded, and enforced internally",
+    must_contain  = [
+        ChecklistItem("item:Art.29:instructions_source","Instructions source documented (DPA terms + change orders / customer support tickets / contract amendments)", "must", True, "Art.29 — documented instructions"),
+        ChecklistItem("item:Art.29:internal_propagation","Internal propagation — how instructions reach engineering / support / ops who actually touch data", "must", True, "Art.29 — under authority"),
+        ChecklistItem("item:Art.29:authority_chain",    "Authority chain — every person touching personal data covered by an authorisation traceable to the controller's instruction", "must", True, "Art.29 — under authority"),
+        ChecklistItem("item:Art.29:exception_handling", "Exception handling — Union/MS law overrides (Art.29 second clause) recorded when invoked", "must", True, "Art.29 exception"),
+        ChecklistItem("item:Art.29:training_link",      "Link to A.6.3 / A.7.3 awareness training for personnel under authority", "must", True, "Cross-control"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.29:proc_owner",         "Named owner (DPO + ops lead)", "should", True, "Accountability"),
+    ],
+)
+
+REQ_ART29_AUTHORISATION_REGISTER = EvidenceRequirement(
+    id            = "req:Art.29:personnel_authorisation_register",
+    control_ref   = "Art.29",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Personnel Authorisation Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-person authorisation — every person acting under controller authority on personal data, with scope and source of authority. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.29:reg_person_id",      "Per-row person identifier (employee / contractor reference)", "must", True, "Audit"),
+        ChecklistItem("item:Art.29:reg_authority_source","Per-row source of authority (which DPA + which controller instructions)", "must", True, "Art.29"),
+        ChecklistItem("item:Art.29:reg_scope",          "Per-row scope of processing the person is authorised to perform", "must", True, "Art.29 — only on documented instructions"),
+        ChecklistItem("item:Art.29:reg_status",         "Per-row status (active / suspended / revoked-on-date)", "must", True, "Lifecycle"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.29:reg_training_xref",  "Per-row training completion cross-reference (A.6.3 / 7.3 records)", "should", True, "Cross-control"),
+    ],
+)
+
+REQ_ART29_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.29:applicable_scope",
+    control_ref   = "Art.29",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Art.29 Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which personnel categories act under controller/processor authority (employees + contractors + embedded vendor staff), distinct from sub-processors (Art.28 territory)",
+    must_contain  = [
+        ChecklistItem("item:Art.29:scope_personnel_categories","Personnel categories in scope (employees + contractors + embedded third-party staff)", "must", True, "Art.29 — persons under authority"),
+        ChecklistItem("item:Art.29:scope_processor_role",     "Org-role classification — does the org act as processor for any customer (Art.29 binds the org's own staff in that capacity)?", "must", True, "Art.29 — processor + persons"),
+        ChecklistItem("item:Art.29:scope_subprocessor_boundary","Sub-processor boundary — sub-processors are Art.28 territory not Art.29", "must", True, "Cross-article coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.29:scope_change_drivers","Trigger list (new role processing PII, contractor onboarding)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART29_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.29:processing_under_authority_program_review",
+    control_ref   = "Art.29",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Processing Under Authority Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every person touching personal data has a current authorisation row, training is current, processing stays within documented instructions (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.29:rev_date",           "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.29:rev_reviewer",       "Reviewer identity (DPO + HR + ops lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.29:rev_authorisation_completeness","Authorisation completeness — every person with access has a register row", "must", True, "Art.29 — under authority"),
+        ChecklistItem("item:Art.29:rev_training_currency","Training currency — A.6.3 / 7.3 training current for every authorised person", "must", True, "Cross-control"),
+        ChecklistItem("item:Art.29:rev_instruction_drift","Instruction-drift sweep — sample processing activities to verify they stay within documented controller instructions", "must", True, "Art.29 — only on documented instructions"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.29:rev_next_date",      "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.31 Cooperation with supervisory authority — op_process 4-leaf ─────────
+# (batch 29a, universal — all controllers/processors must cooperate).
+
+REQ_ART31_COOPERATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.31:cooperation_procedure",
+    control_ref   = "Art.31",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Supervisory Authority Cooperation Procedure",
+    trigger_type  = "universal",
+    description   = "Art.31 requires controllers and processors to cooperate with the supervisory authority. The procedure governs how SA inquiries arrive, get routed, drafted, approved, and responded to — including production of evidence to demonstrate compliance",
+    must_contain  = [
+        ChecklistItem("item:Art.31:intake_channel",     "SA intake channel (dedicated mailbox + DPO direct + legal counsel)", "must", True, "Art.31"),
+        ChecklistItem("item:Art.31:internal_routing",   "Internal routing — DPO + legal + relevant subject-matter expert", "must", True, "Operational coherence"),
+        ChecklistItem("item:Art.31:evidence_production","Evidence production process — pulling demonstrability artefacts (RoPA, SoA-equivalent compliance register, DPIA records, breach register)", "must", True, "Art.31 — demonstrate compliance"),
+        ChecklistItem("item:Art.31:response_review",    "Response review + sign-off (DPO + legal counsel before dispatch)", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.31:deadline_tracking",  "Deadline tracking — SA-stated deadlines met or extensions formally negotiated", "must", True, "Art.31"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.31:proc_owner",         "Named owner (DPO + legal counsel)", "should", True, "Accountability"),
+    ],
+)
+
+REQ_ART31_INTERACTION_REGISTER = EvidenceRequirement(
+    id            = "req:Art.31:interaction_register",
+    control_ref   = "Art.31",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "SA Interaction Register",
+    trigger_type  = "universal",
+    description   = "Per-interaction record of all SA engagements (inquiry / investigation / audit / consultation). Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.31:reg_interaction_id", "Per-row interaction id", "must", True, "Audit"),
+        ChecklistItem("item:Art.31:reg_sa",             "Per-row supervisory authority identifier (which MS + which SA)", "must", True, "Defining the relationship"),
+        ChecklistItem("item:Art.31:reg_topic",          "Per-row topic (inquiry / complaint investigation / on-site audit / Art.36 consultation)", "must", True, "Art.31 + Art.36"),
+        ChecklistItem("item:Art.31:reg_received_date",  "Per-row received date", "must", True, "Currency"),
+        ChecklistItem("item:Art.31:reg_response_date",  "Per-row response date or status (open / in-progress / closed)", "must", True, "SLA tracking"),
+        ChecklistItem("item:Art.31:reg_outcome",        "Per-row outcome (no-action / corrective measures / fine / ongoing)", "must", True, "Audit clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.31:reg_lessons",        "Per-row lessons / actions feeding into 10.1 continual improvement", "should", True, "Cross-clause"),
+    ],
+)
+
+REQ_ART31_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.31:applicable_scope",
+    control_ref   = "Art.31",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable SA Cooperation Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — which SAs the org is subject to (lead + concerned per Art.55-56), what cooperation entails (inquiries + on-site access per Art.58.1)",
+    must_contain  = [
+        ChecklistItem("item:Art.31:scope_lead_sa",      "Lead supervisory authority identified", "must", True, "Art.56"),
+        ChecklistItem("item:Art.31:scope_concerned_sas","Concerned SAs enumerated (MS where subjects affected)", "must", True, "Art.4(22)"),
+        ChecklistItem("item:Art.31:scope_powers",       "Art.58 SA powers acknowledged — info access (Art.58.1.a-f), corrective (Art.58.2), authorisation (Art.58.3)", "must", True, "Art.58"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.31:scope_change_drivers","Trigger list (new MS jurisdiction, main-establishment change)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART31_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.31:cooperation_program_review",
+    control_ref   = "Art.31",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "SA Cooperation Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification — SA inquiries handled per procedure, deadlines met, lessons flowing into improvement programme (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.31:rev_date",           "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.31:rev_reviewer",       "Reviewer identity (DPO + legal counsel)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.31:rev_inquiry_handling","Inquiry handling audit — every SA interaction this year handled per procedure with deadlines met", "must", True, "Art.31"),
+        ChecklistItem("item:Art.31:rev_outcome_actions","Outcome-action follow-through — any corrective measures imposed by SA reached implementation", "must", True, "Art.58.2 enforcement"),
+        ChecklistItem("item:Art.31:rev_readiness",      "Readiness check — demonstrability artefacts (RoPA, compliance register) producible on short notice", "must", True, "Art.31 — cooperation includes evidence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.31:rev_next_date",      "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.34 Breach communication to data subject — op_process 4-leaf ───────────
+# (batch 29a, universal — companion to Art.33; Art.33→SA, Art.34→subjects).
+
+REQ_ART34_COMMUNICATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.34:subject_communication_procedure",
+    control_ref   = "Art.34",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Art.34 Subject Communication Procedure",
+    trigger_type  = "universal",
+    description   = "Art.34 requires the controller to communicate the breach to affected data subjects 'without undue delay' when the breach is likely to result in a high risk to their rights and freedoms (with Art.34.3 exceptions). Companion to Art.33 procedure but with different threshold + audience + exceptions",
+    must_contain  = [
+        ChecklistItem("item:Art.34:high_risk_gate",     "High-risk gate — when subject communication IS required (likely to result in high risk to rights and freedoms)", "must", True, "Art.34.1"),
+        ChecklistItem("item:Art.34:exception_assessment","Art.34.3 exception assessment (a-c: appropriate protection like encryption / measures eliminating high risk / disproportionate effort)", "must", True, "Art.34.3"),
+        ChecklistItem("item:Art.34:content",            "Communication content per Art.34.2 — clear plain language describing nature + DPO contact + likely consequences + measures taken", "must", True, "Art.34.2"),
+        ChecklistItem("item:Art.34:without_undue_delay","Timing — 'without undue delay' interpretation (decision matrix per breach severity)", "must", True, "Art.34.1"),
+        ChecklistItem("item:Art.34:public_communication","Public communication route — when individual communication is disproportionate, public communication equally effective (Art.34.3.c)", "must", True, "Art.34.3.c"),
+        ChecklistItem("item:Art.34:sa_consultation",    "SA consultation pathway — SA may require communication even when controller assesses exception applies (Art.34.4)", "must", True, "Art.34.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.34:proc_owner",         "Named owner (DPO + legal counsel)", "should", True, "Accountability"),
+    ],
+)
+
+REQ_ART34_COMMUNICATION_RECORD = EvidenceRequirement(
+    id            = "req:Art.34:subject_communication_record",
+    control_ref   = "Art.34",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Subject Communication Record",
+    trigger_type  = "universal",
+    description   = "Per-breach communication record — proves Art.34 communication was made (or documented exception applied). Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.34:reg_breach_id",      "Per-row breach id (Art.33 register cross-reference)", "must", True, "Cross-article"),
+        ChecklistItem("item:Art.34:reg_high_risk_decision","Per-row high-risk decision (high risk → communicate / no high risk → no communication, with rationale)", "must", True, "Art.34.1"),
+        ChecklistItem("item:Art.34:reg_exception_cited","Per-row Art.34.3 exception cited (if claimed)", "must", True, "Art.34.3"),
+        ChecklistItem("item:Art.34:reg_communication_method","Per-row communication method (email + in-app / public notice / mixed)", "must", True, "Art.34.2"),
+        ChecklistItem("item:Art.34:reg_communication_date","Per-row communication date", "must", True, "Currency"),
+        ChecklistItem("item:Art.34:reg_subjects_reached","Per-row subjects-reached count (or 'unable to calculate, public communication used')", "must", True, "Effectiveness signal"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.34:reg_sa_concurrence", "Per-row SA concurrence where SA consulted (Art.34.4)", "should", True, "Art.34.4"),
+    ],
+)
+
+REQ_ART34_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.34:applicable_scope",
+    control_ref   = "Art.34",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Art.34 Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — operational interpretation of 'high risk to rights and freedoms', boundary with Art.33 (lower threshold + different audience), Art.34.3 exception criteria documented",
+    must_contain  = [
+        ChecklistItem("item:Art.34:scope_high_risk_test","High-risk test operational criteria (likelihood × severity × number affected × category sensitivity)", "must", True, "Art.34.1"),
+        ChecklistItem("item:Art.34:scope_exception_criteria","Art.34.3 exception criteria operationalised (encryption deemed appropriate / risk-mitigation measures / disproportionate effort definition)", "must", True, "Art.34.3"),
+        ChecklistItem("item:Art.34:scope_art33_boundary","Boundary with Art.33 — Art.33 fires lower (any breach of personal data not 'unlikely to result in risk'); Art.34 fires higher (high risk only)", "must", True, "Art.33-34 boundary"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.34:scope_change_drivers","Trigger list (new high-impact processing line, threat-landscape shift)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART34_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.34:subject_communication_program_review",
+    control_ref   = "Art.34",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Art.34 Subject Communication Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification — high-risk decisions defensible, exceptions applied appropriately, communication content meets Art.34.2 (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.34:rev_date",           "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.34:rev_reviewer",       "Reviewer identity (DPO + legal + incident-response lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.34:rev_decision_defensibility","High-risk decision defensibility — sampled decisions reviewed against criteria", "must", True, "Art.34.1"),
+        ChecklistItem("item:Art.34:rev_exception_audit","Exception-claim audit — Art.34.3 exception claims reviewed for legitimacy (especially encryption-deemed-appropriate where keys may also have been compromised)", "must", True, "Art.34.3"),
+        ChecklistItem("item:Art.34:rev_content_quality","Content-quality audit — communications used plain language, included DPO contact, described concrete measures", "must", True, "Art.34.2"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.34:rev_next_date",      "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
+# ── Art.35 DPIA — op_process 4-leaf, profile_fact (batch 29a) ─────────────────
+# profile_fact: applies when processing is 'likely to result in a high risk
+# to rights and freedoms' per Art.35.1. Profile-fact rather than universal
+# because not every processor / controller has DPIA-qualifying activities;
+# however, virtually every org has SOME activity that qualifies.
+
+REQ_ART35_DPIA_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.35:dpia_procedure",
+    control_ref   = "Art.35",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Data Protection Impact Assessment Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Art.35 requires controllers to carry out a DPIA before processing 'likely to result in a high risk' (including Art.35.3 mandatory cases). The procedure governs DPIA triggers + drafting + DPO advice + Art.36 prior consultation pathway",
+    must_contain  = [
+        ChecklistItem("item:Art.35:trigger_criteria",   "Trigger criteria — Art.35.3 mandatory cases (systematic monitoring / special-category large-scale / public-area large-scale monitoring) PLUS SA-published list + sectoral guidance", "must", True, "Art.35.1 + Art.35.3-4"),
+        ChecklistItem("item:Art.35:dpo_advice",         "DPO advice mandatory (Art.35.2) — DPO consulted during DPIA, advice recorded", "must", True, "Art.35.2"),
+        ChecklistItem("item:Art.35:content_minimum",    "Minimum content per Art.35.7 (systematic description + necessity/proportionality + risks + measures to address)", "must", True, "Art.35.7"),
+        ChecklistItem("item:Art.35:subject_consultation","Subject consultation considered (Art.35.9) — where appropriate, views of subjects/representatives sought", "must", True, "Art.35.9"),
+        ChecklistItem("item:Art.35:art36_escalation",   "Art.36 prior-consultation escalation — when residual high risk remains, escalate to SA", "must", True, "Art.36.1"),
+        ChecklistItem("item:Art.35:review_trigger",     "Review trigger — DPIA reviewed when processing risk changes (Art.35.11)", "must", True, "Art.35.11"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.35:proc_owner",         "Named owner (DPO)", "should", True, "Accountability"),
+    ],
+)
+
+REQ_ART35_DPIA_REGISTER = EvidenceRequirement(
+    id            = "req:Art.35:dpia_register",
+    control_ref   = "Art.35",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "DPIA Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-DPIA record — every conducted DPIA with outcome (proceed / mitigate / Art.36 consult / abandon). Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.35:reg_dpia_id",        "Per-row DPIA identifier", "must", True, "Audit"),
+        ChecklistItem("item:Art.35:reg_processing_activity","Per-row processing activity (Art.30 RoPA cross-reference)", "must", True, "Cross-article"),
+        ChecklistItem("item:Art.35:reg_trigger",        "Per-row trigger (Art.35.3.a-c / SA list / sectoral / risk-based)", "must", True, "Art.35.1+3-4"),
+        ChecklistItem("item:Art.35:reg_dpo_advice_date","Per-row DPO advice date + summary", "must", True, "Art.35.2"),
+        ChecklistItem("item:Art.35:reg_outcome",        "Per-row outcome (proceed / mitigate-then-proceed / Art.36 consult / abandon)", "must", True, "Audit clarity"),
+        ChecklistItem("item:Art.35:reg_residual_risk",  "Per-row residual-risk level after mitigations", "must", True, "Art.36 trigger"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.35:reg_review_date",    "Per-row next review date", "should", True, "Art.35.11"),
+    ],
+)
+
+REQ_ART35_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.35:applicable_scope",
+    control_ref   = "Art.35",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable DPIA Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which processing activities require DPIA: Art.35.3 mandatory categories + SA-published Art.35.4 list + sectoral guidance + the org's internal 'likely high risk' criteria",
+    must_contain  = [
+        ChecklistItem("item:Art.35:scope_mandatory",    "Art.35.3 mandatory categories (a-c) operationalised — systematic evaluation / large-scale special category / large-scale systematic public monitoring", "must", True, "Art.35.3"),
+        ChecklistItem("item:Art.35:scope_sa_list",      "Lead SA Art.35.4 published list integrated", "must", True, "Art.35.4"),
+        ChecklistItem("item:Art.35:scope_org_criteria", "Org's own 'likely high risk' criteria (typically EDPB Guidelines 248 nine-criteria approach: scoring with ≥2 of 9 = DPIA required)", "must", True, "Art.35.1"),
+        ChecklistItem("item:Art.35:scope_white_list",   "Art.35.5 SA white-list activities (NOT requiring DPIA) considered", "must", True, "Art.35.5"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.35:scope_change_drivers","Trigger list (new product/feature launch, processing-pattern shift, SA list update)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART35_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.35:dpia_program_review",
+    control_ref   = "Art.35",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "DPIA Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every in-scope activity has a current DPIA, DPO advice was sought, Art.36 consultations escalated where residual risk warranted (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.35:rev_date",           "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.35:rev_reviewer",       "Reviewer identity (DPO + executive sponsor + lead privacy engineer)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.35:rev_coverage",       "Coverage check — every in-scope activity has a current DPIA OR documented Art.35.5 white-list justification", "must", True, "Art.35.1"),
+        ChecklistItem("item:Art.35:rev_advice_quality", "DPO-advice quality sample — advice substantive, not rubber-stamp", "must", True, "Art.35.2"),
+        ChecklistItem("item:Art.35:rev_art36_audit",    "Art.36 escalation audit — residual-high-risk DPIAs escalated to SA where required", "must", True, "Art.36"),
+        ChecklistItem("item:Art.35:rev_review_cadence", "Review-cadence audit — DPIAs refreshed per Art.35.11 when processing changed", "must", True, "Art.35.11"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.35:rev_next_date",      "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
 
 # ── Annex A.5.23 — InfoSec for use of cloud services — operational_process (4-leaf) ──
 # Promoted 2026-05-31 from single-leaf to multi-leaf per
@@ -2307,14 +2889,21 @@ REQ_REMOTE_WORKING = EvidenceRequirement(
 
 # ── Operational documents ─────────────────────────────────────────────────────
 
+# ── Art.33 Breach notification (controller→authority) — op_process 4-leaf ─────
+# (batch 29a 2026-06-02). Promoted from single-leaf. Primary leaf id preserved
+# (req:Art.33:breach_notification + all item:Art.33:* ids). Distinct from
+# Art.34 (controller→data subjects, batch 29a). trigger_type stays operational
+# on the primary leaf since the notification fires per-breach; sibling
+# program-review leaves are universal.
+
 REQ_BREACH_NOTIFICATION = EvidenceRequirement(
     id            = "req:Art.33:breach_notification",
     control_ref   = "Art.33",
     standard_id   = "GDPR:2016/679",
     evidence_type = "breach_notification",
-    title= "Personal Data Breach Notification to Supervisory Authority",
+    title         = "Personal Data Breach Notification to Supervisory Authority",
     trigger_type  = "operational",
-    description   = "Art.33 requires notification to supervisory authority within 72 hours of becoming aware of a breach",
+    description   = "Art.33 requires notification to supervisory authority within 72 hours of becoming aware of a breach. Per-breach notification record is the canonical artefact. Sibling leaves: notification procedure (the how), applicable triggers scope, program review",
     must_contain  = [
         ChecklistItem("item:Art.33:nature",       "Nature of the breach including categories and approximate number of data subjects", "must", True, "Art.33.3a"),
         ChecklistItem("item:Art.33:dpo_contact",  "Contact details of DPO or other contact point", "must", True, "Art.33.3b"),
@@ -2323,7 +2912,69 @@ REQ_BREACH_NOTIFICATION = EvidenceRequirement(
         ChecklistItem("item:Art.33:timing",       "Notified within 72 hours of becoming aware", "must", True, "Art.33.1"),
     ],
     should_contain= [
-        ChecklistItem("item:Art.33:phased",   "If phased, reasons for delay and information provided in phases", "should", True, "Art.33.4"),
+        ChecklistItem("item:Art.33:phased",       "If phased, reasons for delay and information provided in phases", "should", True, "Art.33.4"),
+    ],
+)
+
+REQ_ART33_NOTIFICATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.33:notification_procedure",
+    control_ref   = "Art.33",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Art.33 Breach Notification Procedure",
+    trigger_type  = "universal",
+    description   = "The procedure governing how Art.33 notifications get drafted, approved, and dispatched within 72 hours. The notification record is the per-event output; this is the operating discipline that makes 72h achievable",
+    must_contain  = [
+        ChecklistItem("item:Art.33:proc_awareness_definition","Definition of 'awareness' (when the 72h clock starts) — typically when the controller has reasonable degree of certainty that a security event has occurred and resulted in a personal data breach (EDPB Guidelines 9/2022 reference)", "must", True, "Art.33.1 — awareness gate"),
+        ChecklistItem("item:Art.33:proc_severity_gate", "Severity gate — when notification is NOT required (Art.33.1 unlikely-to-result-in-risk exception). Decision criteria documented", "must", True, "Art.33.1 — risk exception"),
+        ChecklistItem("item:Art.33:proc_intake",        "Internal intake — how an operational security event reaches the breach-notification team (links to A.5.25/A.5.26 incident triage)", "must", True, "Cross-control coherence"),
+        ChecklistItem("item:Art.33:proc_drafting",      "Drafting workflow — required-fields template per Art.33.3, DPO/legal sign-off, contact-point", "must", True, "Art.33.3"),
+        ChecklistItem("item:Art.33:proc_dispatch",      "Dispatch path to lead supervisory authority (Art.56 + Art.55 — which SA, which channel, with confirmation of receipt)", "must", True, "Art.33.1"),
+        ChecklistItem("item:Art.33:proc_delay_handling","Delay handling — if past 72h, reason explanation in notification (Art.33.1 last sentence)", "must", True, "Art.33.1 — delay reason"),
+        ChecklistItem("item:Art.33:proc_processor_inbound","Processor inbound — handling Art.33.2 notifications from sub-processors / processors WE rely on", "must", True, "Art.33.2"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.33:proc_owner",         "Named owner of the procedure (DPO + legal counsel)", "should", True, "Accountability"),
+    ],
+)
+
+REQ_ART33_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:Art.33:applicable_scope",
+    control_ref   = "Art.33",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Art.33 Triggers Scope",
+    trigger_type  = "universal",
+    description   = "The upstream — what security events constitute a 'personal data breach' under Art.4(12), boundary with Art.34 (subject notification), lead supervisory authority identification",
+    must_contain  = [
+        ChecklistItem("item:Art.33:scope_breach_definition","Operational definition of 'personal data breach' per Art.4(12) — breach of security leading to accidental/unlawful destruction/loss/alteration/unauthorised disclosure/access", "must", True, "Art.4(12)"),
+        ChecklistItem("item:Art.33:scope_lead_sa",      "Lead supervisory authority identified per main-establishment rules (Art.56)", "must", True, "Art.55 + Art.56"),
+        ChecklistItem("item:Art.33:scope_high_risk_overlay","High-risk overlay (when Art.34 subject notification ALSO triggers — boundary to Art.34 leaf)", "must", True, "Art.34.1 — high risk"),
+        ChecklistItem("item:Art.33:scope_excluded_events","Excluded events (security events NOT involving personal data; minor near-misses)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.33:scope_change_drivers","Trigger list (new SA jurisdiction added, scope change affecting main establishment)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART33_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.33:breach_program_review",
+    control_ref   = "Art.33",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Breach Notification Program Review",
+    trigger_type  = "universal",
+    description   = "Annual verification that the 72h SLA is being met, severity-gate decisions are defensible, exercises are validating the procedure (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.33:rev_date",           "Review date within the planned interval", "must", True, "Periodic"),
+        ChecklistItem("item:Art.33:rev_reviewer",       "Reviewer identity (DPO + legal + incident-response lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.33:rev_72h_compliance", "72h-compliance audit — every required notification met the SLA (or had documented Art.33.1 delay reason)", "must", True, "Art.33.1"),
+        ChecklistItem("item:Art.33:rev_severity_audit", "Severity-gate audit — sampled 'no-notify' decisions reviewed for defensibility against Art.33.1 risk threshold", "must", True, "Art.33.1 — risk exception"),
+        ChecklistItem("item:Art.33:rev_exercise_link",  "A.5.24 exercise integration — Art.33 procedure exercised within the year (table-top or live)", "must", True, "Cross-control coherence"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.33:rev_next_date",      "Next planned review date stated", "should", True, "Planning"),
     ],
 )
 
@@ -12554,6 +13205,64 @@ SPEC_ART_32 = DerivedSpec(
                 ),
             ],
         ),
+        # ── batch 29a (2026-06-02) — 3 new direct_evidence leaves added ──────
+        EvidenceRequirement(
+            id            = "req:Art.32:risk_appropriate_measures_register",
+            control_ref   = "Art.32",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "register",
+            title         = "Risk-Appropriate Measures Register (Art.32.1)",
+            trigger_type  = "universal",
+            description   = "Per-processing register documenting why the implemented T&O measures are 'appropriate' given the risk. Art.32.1 mandates risk-proportionate measures — without an explicit register, the proportionality argument is implicit and weak. Annual refresh (freshness=365)",
+            freshness_days = 365,
+            must_contain   = [
+                ChecklistItem("item:Art.32:reg_activity_id",     "Per-row processing activity (Art.30 RoPA cross-reference)", "must", True, "Cross-article coherence"),
+                ChecklistItem("item:Art.32:reg_risk_assessment", "Per-row risk-to-rights-and-freedoms assessment (likelihood + severity)", "must", True, "Art.32.2 — risks for rights"),
+                ChecklistItem("item:Art.32:reg_measures",        "Per-row T&O measures applied (pseudonymisation / encryption / CIA / resilience / restoration)", "must", True, "Art.32.1.a-d"),
+                ChecklistItem("item:Art.32:reg_appropriateness", "Per-row appropriateness justification (state of art / cost / nature of processing weighted against risk)", "must", True, "Art.32.1 — appropriate to risk"),
+                ChecklistItem("item:Art.32:reg_owner",           "Per-row owner", "must", True, "Accountability"),
+            ],
+            should_contain = [
+                ChecklistItem("item:Art.32:reg_iso_mapping",     "Per-row mapping to implementing ISO 27001 controls", "should", True, "Cross-standard traceability"),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.32:applicable_scope_note",
+            control_ref   = "Art.32",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "scope_note",
+            title         = "Applicable Art.32 Scope",
+            trigger_type  = "universal",
+            description   = "The upstream — which processing activities are within Art.32 scope (any processing of personal data), Art.32.2 risk factors (accidental/unlawful events the measures must protect against), Art.32.4 persons-acting-under-authority compliance",
+            must_contain   = [
+                ChecklistItem("item:Art.32:scope_processing_activities","Processing activities in scope (cross-link to Art.30 RoPA)", "must", True, "Art.32.1 — processing"),
+                ChecklistItem("item:Art.32:scope_risk_factors",        "Art.32.2 risk factors enumerated (accidental or unlawful destruction / loss / alteration / unauthorised disclosure or access)", "must", True, "Art.32.2"),
+                ChecklistItem("item:Art.32:scope_authority_compliance","Art.32.4 — persons acting under authority (employees, contractors, processors) bound by instructions or law", "must", True, "Art.32.4"),
+            ],
+            should_contain = [
+                ChecklistItem("item:Art.32:scope_change_drivers","Trigger list (new processing activity, new threat landscape signal)", "should", True, "Currency"),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.32:program_review",
+            control_ref   = "Art.32",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "review_record",
+            title         = "Art.32 Security Program Review",
+            trigger_type  = "universal",
+            description   = "Annual verification — measures still risk-appropriate, resilience test executed, register reflects all current activities (freshness=365)",
+            freshness_days = 365,
+            must_contain   = [
+                ChecklistItem("item:Art.32:rev_date",            "Review date within the planned interval", "must", True, "Periodic"),
+                ChecklistItem("item:Art.32:rev_reviewer",        "Reviewer identity (DPO + CISO + Risk lead)", "must", True, "Accountability"),
+                ChecklistItem("item:Art.32:rev_appropriateness", "Appropriateness re-assessment — measures still proportionate given current threat landscape and tech state-of-art", "must", True, "Art.32.1 — state of the art"),
+                ChecklistItem("item:Art.32:rev_register_currency","Register currency — every Art.30 RoPA activity covered with current measures", "must", True, "Cross-leaf coherence"),
+                ChecklistItem("item:Art.32:rev_iso_alignment",   "ISO 27001 alignment — implementing controls (A.5.24/A.8.x) still in force; any reductions challenged for Art.32 impact", "must", True, "Cross-standard"),
+            ],
+            should_contain = [
+                ChecklistItem("item:Art.32:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+            ],
+        ),
     ],
 )
 
@@ -12709,6 +13418,63 @@ SPEC_ART_25 = DerivedSpec(
                 ),
             ],
         ),
+        # ── batch 29a (2026-06-02) — 3 new direct_evidence leaves added ──────
+        EvidenceRequirement(
+            id            = "req:Art.25:dpbd_procedure",
+            control_ref   = "Art.25",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "procedure",
+            title         = "Data Protection by Design Procedure",
+            trigger_type  = "universal",
+            description   = "Art.25.1 requires the controller to implement T&O measures at the time of determining means of processing AND at the time of processing itself. The procedure governs HOW DPbD reviews are integrated into product/system design — design-stage privacy review checkpoints, decision authority, output (defaults + measures register)",
+            must_contain   = [
+                ChecklistItem("item:Art.25:proc_checkpoint",     "Design-stage checkpoint stated (when DPbD review happens in the product / system development lifecycle)", "must", True, "Art.25.1 — at the time of determining means"),
+                ChecklistItem("item:Art.25:proc_inputs",         "Inputs to DPbD review (purpose, data minimisation alternatives, special-category overlay, retention rules)", "must", True, "Art.25.1 — taking into account"),
+                ChecklistItem("item:Art.25:proc_authority",      "Decision authority for DPbD outcomes (DPO + product lead + engineering lead)", "must", True, "Defensibility"),
+                ChecklistItem("item:Art.25:proc_dpia_integration","Integration with Art.35 DPIA — when DPbD review escalates to DPIA", "must", True, "Art.35.3.b cross-reference"),
+                ChecklistItem("item:Art.25:proc_record",         "Per-review record retained (which design, which decisions, which measures)", "must", True, "Art.25.1 — accountability"),
+            ],
+            should_contain = [
+                ChecklistItem("item:Art.25:proc_certification",  "Approved-certification reliance (Art.25.3) where the org uses a certification mechanism", "should", True, "Art.25.3"),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.25:applicable_design_scope",
+            control_ref   = "Art.25",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "scope_note",
+            title         = "Applicable DPbD Scope",
+            trigger_type  = "universal",
+            description   = "The upstream — which design activities are in Art.25 scope (new product/system/feature design + significant change to existing). Defines the 'at the time of determining means' moment operationally",
+            must_contain   = [
+                ChecklistItem("item:Art.25:scope_design_activities","Design activities in scope (new product, new feature, significant change, new processor onboarding)", "must", True, "Art.25.1 — determining means"),
+                ChecklistItem("item:Art.25:scope_significant_change","Definition of 'significant change' triggering re-design review", "must", True, "Art.25.1 — at the time of processing"),
+                ChecklistItem("item:Art.25:scope_exclusions",     "Out-of-scope changes (bug fixes, performance tuning, internal refactoring without processing change)", "must", True, "Defensible bounding"),
+            ],
+            should_contain = [
+                ChecklistItem("item:Art.25:scope_change_drivers", "Trigger list (new product line, new processor type, regulatory guidance change)", "should", True, "Currency"),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.25:program_review",
+            control_ref   = "Art.25",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "review_record",
+            title         = "DPbD Program Review",
+            trigger_type  = "universal",
+            description   = "Annual verification — DPbD reviews happened for every in-scope design, defaults register is current, certification reliance still valid (freshness=365)",
+            freshness_days = 365,
+            must_contain   = [
+                ChecklistItem("item:Art.25:rev_date",            "Review date within the planned interval", "must", True, "Periodic"),
+                ChecklistItem("item:Art.25:rev_reviewer",        "Reviewer identity (DPO + product + engineering)", "must", True, "Accountability"),
+                ChecklistItem("item:Art.25:rev_coverage",        "Design-coverage check — every in-scope design activity had a DPbD review", "must", True, "Art.25.1"),
+                ChecklistItem("item:Art.25:rev_defaults_currency","Defaults register currency check (cross-leaf — defaults still match deployed system state)", "must", True, "Art.25.2"),
+                ChecklistItem("item:Art.25:rev_certification_validity","If Art.25.3 certification used — certification still in validity period", "must", True, "Art.25.3"),
+            ],
+            should_contain = [
+                ChecklistItem("item:Art.25:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+            ],
+        ),
     ],
 )
 
@@ -12844,6 +13610,94 @@ SPEC_ART_24 = DerivedSpec(
             # ABLE TO DEMONSTRATE that processing complies. A.5.36's
             # compliance-review records (schedule, scope, findings,
             # corrective actions, named owner) ARE that demonstration.
+        ),
+    ],
+    # ── batch 29a (2026-06-02) — 4 direct_evidence leaves added ──────────────
+    # Art.24 had 0 direct evidence pre-batch (pure derivation). The accountability
+    # frame benefits from explicit GDPR-specific artefacts that ISO 27001 doesn't
+    # require: a privacy programme charter, a GDPR-specific compliance register,
+    # the controller-vs-processor decision record, and a program review.
+    direct_evidence = [
+        EvidenceRequirement(
+            id            = "req:Art.24:privacy_programme_charter",
+            control_ref   = "Art.24",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "charter",
+            title         = "Privacy Programme Charter",
+            trigger_type  = "universal",
+            description   = "The accountability anchor document — Art.24's 'data protection policies' (Art.24.2) operationalised as a privacy programme charter that names the programme owner, scope, governance forum cadence, and explicit Art.24 demonstrability statement. ISO 27001 doesn't require this as a discrete artifact; Art.24 does",
+            must_contain  = [
+                ChecklistItem("item:Art.24:charter_purpose",     "Statement of GDPR compliance objective + accountability commitment", "must", True, "Art.24.1 — ensure + demonstrate"),
+                ChecklistItem("item:Art.24:charter_scope",       "Scope of the privacy programme (which legal entities, processing activities, geographies)", "must", True, "Art.24.1"),
+                ChecklistItem("item:Art.24:charter_governance",  "Governance forum cadence (privacy steering committee, frequency, attendees)", "must", True, "Art.24.1 — implementing measures"),
+                ChecklistItem("item:Art.24:charter_owner",       "Named programme owner (typically DPO or Chief Privacy Officer)", "must", True, "Accountability"),
+                ChecklistItem("item:Art.24:charter_approval",    "Approved by top management with date", "must", True, "Art.24.2 — adopted policies"),
+                ChecklistItem("item:Art.24:charter_review_cadence","Review cadence stated (annual minimum)", "must", True, "Art.24.1 — reviewed and updated"),
+            ],
+            should_contain= [
+                ChecklistItem("item:Art.24:charter_iso_alignment","Reference to ISO 27001 ISMS as the implementing framework", "should", True, "Cross-standard"),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.24:gdpr_compliance_register",
+            control_ref   = "Art.24",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "register",
+            title         = "GDPR Compliance Register",
+            trigger_type  = "universal",
+            description   = "Per-obligation register tracking the org's posture against every GDPR article in scope. Annual refresh (freshness=365). Distinct from the Art.30 RoPA (activities) and the lawful-basis register (Art.6 per-activity): this is the meta-tracker of compliance posture per article",
+            freshness_days = 365,
+            must_contain  = [
+                ChecklistItem("item:Art.24:reg_article_id",      "Per-row GDPR article identifier", "must", True, "Coverage"),
+                ChecklistItem("item:Art.24:reg_applicability",   "Per-row applicability assessment (in scope / N/A with reason)", "must", True, "Defensibility"),
+                ChecklistItem("item:Art.24:reg_implementing_artefact","Per-row link to the implementing artefact (procedure / policy / register / DPA / certification)", "must", True, "Demonstrability"),
+                ChecklistItem("item:Art.24:reg_status",          "Per-row implementation status (implemented / partial / planned / N/A)", "must", True, "Status visibility"),
+                ChecklistItem("item:Art.24:reg_owner",           "Per-row owner", "must", True, "Accountability"),
+                ChecklistItem("item:Art.24:reg_last_assessed",   "Per-row last-assessed date (drives staleness)", "must", True, "Currency"),
+            ],
+            should_contain= [
+                ChecklistItem("item:Art.24:reg_residual_risk",   "Per-row residual risk where status is partial", "should", True, "Risk visibility"),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.24:controller_processor_decision_record",
+            control_ref   = "Art.24",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "decision_record",
+            title         = "Controller / Processor Role Decision Record",
+            trigger_type  = "universal",
+            description   = "Per-relationship record documenting whether the org acts as controller, processor, joint controller, or third-party recipient for each processing activity. Art.24's accountability scope is shaped by this role assignment — without explicit documentation, role disputes during audits become unwinnable",
+            must_contain  = [
+                ChecklistItem("item:Art.24:role_activity_id",    "Per-row processing activity (Art.30 RoPA reference)", "must", True, "Cross-article"),
+                ChecklistItem("item:Art.24:role_counterparty",   "Per-row counterparty (customer / vendor / partner)", "must", True, "Defining the relationship"),
+                ChecklistItem("item:Art.24:role_chosen",         "Per-row role chosen (controller / processor / joint controller / third party)", "must", True, "Art.4(7-8) + Art.26"),
+                ChecklistItem("item:Art.24:role_basis",          "Per-row decision basis (who determines means and purposes — EDPB Guidelines 7/2020 test)", "must", True, "Defensibility"),
+                ChecklistItem("item:Art.24:role_contract_link",  "Per-row contract link (DPA Art.28 / Art.26 arrangement / Art.46 transfer mechanism)", "must", True, "Cross-article"),
+            ],
+            should_contain= [
+                ChecklistItem("item:Art.24:role_review_trigger", "Per-row review trigger (counterparty service-shape change, M&A)", "should", True, "Currency"),
+            ],
+        ),
+        EvidenceRequirement(
+            id            = "req:Art.24:accountability_program_review",
+            control_ref   = "Art.24",
+            standard_id   = "GDPR:2016/679",
+            evidence_type = "review_record",
+            title         = "Accountability Program Review",
+            trigger_type  = "universal",
+            description   = "Annual verification of the accountability frame — charter current, compliance register reflects all in-scope articles, role decisions still hold, ISO 27001 derivations still aligned (freshness=365)",
+            freshness_days = 365,
+            must_contain  = [
+                ChecklistItem("item:Art.24:rev_date",            "Review date within the planned interval", "must", True, "Periodic"),
+                ChecklistItem("item:Art.24:rev_reviewer",        "Reviewer identity (DPO + executive sponsor)", "must", True, "Accountability"),
+                ChecklistItem("item:Art.24:rev_charter_currency","Charter currency check — scope + governance still reflect organisational reality", "must", True, "Art.24.1 — reviewed"),
+                ChecklistItem("item:Art.24:rev_register_completeness","Compliance register completeness — every applicable GDPR article has a row with current status", "must", True, "Demonstrability"),
+                ChecklistItem("item:Art.24:rev_role_currency",   "Role decisions current — no counterparty service-shape change unreflected in role decisions", "must", True, "Art.4(7-8) drift"),
+                ChecklistItem("item:Art.24:rev_iso_alignment",   "ISO 27001 alignment — derived dependencies (5.1/5.3/9.3/A.5.1/A.5.34/A.5.36) still in compliant state", "must", True, "Cross-standard"),
+            ],
+            should_contain= [
+                ChecklistItem("item:Art.24:rev_next_date",       "Next planned review date stated", "should", True, "Planning"),
+            ],
         ),
     ],
 )
@@ -14589,6 +15443,47 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
 
     # Profile-fact triggered
     REQ_DPA,
+    # ── Batch 29a (2026-06-02) — Art.28 promotion 3 new siblings ─────────────
+    REQ_ART28_PROCESSOR_REGISTER,
+    REQ_ART28_APPLICABLE_PROCESSORS_SCOPE,
+    REQ_ART28_PROGRAM_REVIEW,
+    # ── Batch 29a — Art.26 joint controllers profile_fact ────────────────────
+    REQ_ART26_ARRANGEMENT,
+    REQ_ART26_REGISTER,
+    REQ_ART26_APPLICABLE_SCOPE,
+    REQ_ART26_PROGRAM_REVIEW,
+    # ── Batch 29a — Art.27 representative profile_fact ───────────────────────
+    REQ_ART27_DESIGNATION,
+    REQ_ART27_OPERATIONS_RECORD,
+    REQ_ART27_APPLICABLE_SCOPE,
+    REQ_ART27_PROGRAM_REVIEW,
+    # ── Batch 29a — Art.29 processing under authority profile_fact ───────────
+    REQ_ART29_INSTRUCTIONS_PROCEDURE,
+    REQ_ART29_AUTHORISATION_REGISTER,
+    REQ_ART29_APPLICABLE_SCOPE,
+    REQ_ART29_PROGRAM_REVIEW,
+    # ── Batch 29a — Art.31 SA cooperation universal ──────────────────────────
+    REQ_ART31_COOPERATION_PROCEDURE,
+    REQ_ART31_INTERACTION_REGISTER,
+    REQ_ART31_APPLICABLE_SCOPE,
+    REQ_ART31_PROGRAM_REVIEW,
+    # ── Batch 29a — Art.33 promotion 3 new siblings ──────────────────────────
+    REQ_ART33_NOTIFICATION_PROCEDURE,
+    REQ_ART33_APPLICABLE_SCOPE,
+    REQ_ART33_PROGRAM_REVIEW,
+    # ── Batch 29a — Art.34 subject communication universal ───────────────────
+    REQ_ART34_COMMUNICATION_PROCEDURE,
+    REQ_ART34_COMMUNICATION_RECORD,
+    REQ_ART34_APPLICABLE_SCOPE,
+    REQ_ART34_PROGRAM_REVIEW,
+    # ── Batch 29a — Art.35 DPIA profile_fact ─────────────────────────────────
+    REQ_ART35_DPIA_PROCEDURE,
+    REQ_ART35_DPIA_REGISTER,
+    REQ_ART35_APPLICABLE_SCOPE,
+    REQ_ART35_PROGRAM_REVIEW,
+    # Note: Art.24 + Art.25 + Art.32 DerivedSpec expansions (direct_evidence
+    # 1→4 or 0→4) added inline within SPEC_ART_*. Not listed here.
+    # ── End batch 29a ────────────────────────────────────────────────────────
     # ── Batch 27 — GDPR Chapter II profile_fact specs ────────────────────────
     # Art.8 — op_process 4-leaf (profile_fact: org offers info-society services to minors)
     REQ_ART8_CHILD_CONSENT_PROCEDURE,

@@ -65,6 +65,135 @@ class EvalResult:
 
 EVAL_CASES = [
 
+    # ── Phase B batch 29a (2026-06-02) — GDPR Ch IV Controller/Processor 11-pack ──
+    # 3 DerivedSpec expansions (Art.24 6+0→6+4=10; Art.25 6+1→6+4=10; Art.32
+    # 5+1→5+4=9). 2 promotions (Art.28 + Art.33 → 4-leaf). 6 new specs
+    # (Art.26/27/29/31/34/35). Spine: 1×policy_program (Art.28) +
+    # 7×op_process (Art.26/27/29/31/33/34/35) + 3×DerivedSpec expansion
+    # (Art.24/25/32). Posture seed: 9 OFI + Art.26/27 N/A (no joint controllers,
+    # EU established).
+
+    EvalCase(
+        id=184,
+        query="pending engine verdict for Art.24",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "accountability"],
+        expected_refs=["Art.24"], expected_type="posture_check",
+        must_contain=["Art.24", "engine proposes", "'NC'", "0/10 children satisfied"],
+        must_not_contain=["0/6 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.24 (Accountability) — DerivedSpec with 6 ISO deps (5.1, 5.3, 9.3, A.5.1, A.5.34, A.5.36) + 4 NEW direct evidence (privacy_programme_charter + gdpr_compliance_register + controller_processor_decision_record + accountability_program_review). 10 children total. FIRST DerivedSpec to go from 0 direct_evidence to 4 in one batch. Hits a 10-child verdict (largest verdict surface).",
+    ),
+
+    EvalCase(
+        id=183,
+        query="pending engine verdict for Art.25",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "dpbd"],
+        expected_refs=["Art.25"], expected_type="posture_check",
+        must_contain=["Art.25", "engine proposes", "'NC'", "0/10 children satisfied"],
+        must_not_contain=["0/7 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.25 (DPbD) — DerivedSpec with 6 ISO deps + 4 direct (default_settings_record primary id preserved + dpbd_procedure + applicable_design_scope + program_review). 10 children. Mirror of Art.24 expansion pattern.",
+    ),
+
+    EvalCase(
+        id=182,
+        query="pending engine verdict for Art.26",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "joint_controller", "profile_fact"],
+        expected_refs=["Art.26"], expected_type="posture_check",
+        must_contain=["Art.26", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.26 (Joint controllers) — op_process 4-leaf, profile_fact (NEW). Arrangement + register + applicable scope + program review. Arion live N/A (no joint controllerships); engine NC ≠ live N/A → surfaces.",
+    ),
+
+    EvalCase(
+        id=181,
+        query="pending engine verdict for Art.27",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "representative", "profile_fact"],
+        expected_refs=["Art.27"], expected_type="posture_check",
+        must_contain=["Art.27", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.27 (Representative) — op_process 4-leaf, profile_fact (NEW). Designation + operations record + applicable scope (Art.27.2 exception assessment in MUST) + program review. Arion live N/A (EU established).",
+    ),
+
+    EvalCase(
+        id=180,
+        query="pending engine verdict for Art.28",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "policy_program", "dpa", "profile_fact"],
+        expected_refs=["Art.28"], expected_type="posture_check",
+        must_contain=["Art.28", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.28 (DPA) — policy_program 4-leaf, profile_fact (PROMOTED): DPA (primary, id preserved) + processor_register + applicable_processors_scope + program_review (365d). Primary-leaf id preserved: req:Art.28:data_processing_agreement + all item:Art.28:* ids unchanged.",
+    ),
+
+    EvalCase(
+        id=179,
+        query="pending engine verdict for Art.29",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "processor_authority", "profile_fact"],
+        expected_refs=["Art.29"], expected_type="posture_check",
+        must_contain=["Art.29", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.29 (Processing under authority) — op_process 4-leaf, profile_fact (NEW). Instructions procedure + personnel authorisation register + applicable scope + program review. Cross-links to A.6.3 / 7.3 training.",
+    ),
+
+    EvalCase(
+        id=178,
+        query="pending engine verdict for Art.31",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "sa_cooperation"],
+        expected_refs=["Art.31"], expected_type="posture_check",
+        must_contain=["Art.31", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.31 (SA cooperation) — op_process 4-leaf (NEW): cooperation_procedure + interaction_register + applicable_scope (lead SA per Art.56) + program_review. Universal trigger.",
+    ),
+
+    EvalCase(
+        id=177,
+        query="pending engine verdict for Art.32",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "security"],
+        expected_refs=["Art.32"], expected_type="posture_check",
+        must_contain=["Art.32", "engine proposes", "'NC'", "0/9 children satisfied"],
+        must_not_contain=["0/6 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.32 (Security) — DerivedSpec with 5 ISO deps + 4 direct (resilience_test_record primary id preserved + risk_appropriate_measures_register + applicable_scope_note + program_review). 9 children. Mirror Art.24/25 expansion. Note: case #24 still tests this article via a different query format and is known-stale.",
+    ),
+
+    EvalCase(
+        id=176,
+        query="pending engine verdict for Art.33",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "breach_notification"],
+        expected_refs=["Art.33"], expected_type="posture_check",
+        must_contain=["Art.33", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.33 (Breach to authority) — op_process 4-leaf (PROMOTED): notification (primary, id preserved; operational trigger) + procedure + applicable_scope + program_review. Primary-leaf id preserved: req:Art.33:breach_notification + all item:Art.33:* ids. 72h SLA enforced in procedure MUSTs; A.5.24 exercise integration in review MUST.",
+    ),
+
+    EvalCase(
+        id=175,
+        query="pending engine verdict for Art.34",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "subject_breach_communication"],
+        expected_refs=["Art.34"], expected_type="posture_check",
+        must_contain=["Art.34", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.34 (Breach to subject) — op_process 4-leaf (NEW): communication_procedure + communication_record + applicable_scope (high-risk test) + program_review. Companion to Art.33; Art.34.3 exceptions (encryption-deemed-appropriate / measures-eliminating-risk / disproportionate-effort) audited in review.",
+    ),
+
+    EvalCase(
+        id=174,
+        query="pending engine verdict for Art.35",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "dpia", "profile_fact"],
+        expected_refs=["Art.35"], expected_type="posture_check",
+        must_contain=["Art.35", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks Art.35 (DPIA) — op_process 4-leaf, profile_fact (NEW): dpia_procedure + dpia_register + applicable_scope (Art.35.3 mandatory + SA list + EDPB 9-criteria) + program_review. Art.36 escalation pathway in MUST. Critical for tenants with new product launches.",
+    ),
+
     # ── Phase B batch 28 (2026-06-02) — GDPR Chapter III Data Subject Rights 11-pack ──
     # Art.12 + Art.13 promote + Art.14 + Art.16 expand DerivedSpec + Art.17
     # expand DerivedSpec + Art.18 + Art.19 + Art.20 + Art.21 + Art.22 + Art.23.
