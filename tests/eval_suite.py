@@ -65,6 +65,125 @@ class EvalResult:
 
 EVAL_CASES = [
 
+    # ── Phase B batch 25 (2026-06-02) — chapters 6 + 7 close-out 10-pack ──
+    # ISMS planning (chapter 6) + support (chapter 7). Spine mix: 6×op_process
+    # (6.1.1/6.1.2/6.1.3/6.3/7.3/7.4) + 3×records_program (6.2/7.1/7.2) +
+    # 1×policy_program (7.5). Primary-leaf ids preserved for the top-of-file
+    # anchor REQs (req:6.1.2:risk_assessment, req:6.1.3:risk_treatment_plan).
+    # New SoA leaf as distinct second sibling of 6.1.3 (mandatory under
+    # 6.1.3 c-d). Posture-seed step: 10 rows inserted with finding='OFI'
+    # matching Arion's pre-ISMS narrative; engine NC 0/4 surfaces for all 10.
+
+    EvalCase(
+        id=149,
+        query="pending engine verdict for 6.1.1",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "isms_planning"],
+        expected_refs=["6.1.1"], expected_type="posture_check",
+        must_contain=["6.1.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 6.1.1 (Risk + opportunity planning) — op_process 4-leaf: planning_procedure + action_register + applicable_inputs_scope + program_review (365d). FIRST clause of batch 25. Umbrella above 6.1.2/6.1.3.",
+    ),
+
+    EvalCase(
+        id=148,
+        query="pending engine verdict for 6.1.2",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "risk_assessment"],
+        expected_refs=["6.1.2"], expected_type="posture_check",
+        must_contain=["6.1.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 6.1.2 (Risk assessment) — op_process 4-leaf: risk_assessment (primary, id preserved) + risk_register + methodology_scope + program_review (365d). Primary-leaf id preserved: req:6.1.2:risk_assessment.",
+    ),
+
+    EvalCase(
+        id=147,
+        query="pending engine verdict for 6.1.3",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "risk_treatment", "soa"],
+        expected_refs=["6.1.3"], expected_type="posture_check",
+        must_contain=["6.1.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 6.1.3 (Risk treatment) — op_process 4-leaf: risk_treatment_plan (primary, id preserved) + statement_of_applicability (NEW distinct leaf) + methodology_scope + program_review (365d). SoA as a sibling leaf (not should_contain) — mandatory under 6.1.3 c-d, the first doc an auditor opens.",
+    ),
+
+    EvalCase(
+        id=146,
+        query="pending engine verdict for 6.2",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "objectives"],
+        expected_refs=["6.2"], expected_type="posture_check",
+        must_contain=["6.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 6.2 (Security objectives) — records_program 4-leaf: objectives_register + setting_procedure + applicable_functions_scope + program_review (365d).",
+    ),
+
+    EvalCase(
+        id=145,
+        query="pending engine verdict for 6.3",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "isms_change"],
+        expected_refs=["6.3"], expected_type="posture_check",
+        must_contain=["6.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 6.3 (Planning of changes) — op_process 4-leaf: change_procedure + change_register + applicable_change_types_scope + program_review (365d). Distinct from A.8.32 technical change mgmt — boundary baked into scope leaf and review.",
+    ),
+
+    EvalCase(
+        id=144,
+        query="pending engine verdict for 7.1",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "resources"],
+        expected_refs=["7.1"], expected_type="posture_check",
+        must_contain=["7.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 7.1 (Resources) — records_program 4-leaf: resources_record + determination_procedure + applicable_categories_scope + program_review (365d).",
+    ),
+
+    EvalCase(
+        id=143,
+        query="pending engine verdict for 7.2",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "competence"],
+        expected_refs=["7.2"], expected_type="posture_check",
+        must_contain=["7.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 7.2 (Competence) — records_program 4-leaf: competence_record + determination_procedure + applicable_roles_scope + program_review (365d).",
+    ),
+
+    EvalCase(
+        id=142,
+        query="pending engine verdict for 7.3",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "awareness"],
+        expected_refs=["7.3"], expected_type="posture_check",
+        must_contain=["7.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 7.3 (Awareness) — op_process 4-leaf: awareness_programme + completion_register + applicable_audience_scope + program_review (365d). ISMS-specific awareness distinct from A.6.3 operational security training.",
+    ),
+
+    EvalCase(
+        id=141,
+        query="pending engine verdict for 7.4",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "communication"],
+        expected_refs=["7.4"], expected_type="posture_check",
+        must_contain=["7.4", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 7.4 (Communication) — op_process 4-leaf: communication_procedure + event_register + applicable_communication_scope + program_review (365d). Mandated-vs-voluntary split + SLA tracking baked into review.",
+    ),
+
+    EvalCase(
+        id=140,
+        query="pending engine verdict for 7.5",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "doc_control"],
+        expected_refs=["7.5"], expected_type="posture_check",
+        must_contain=["7.5", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 7.5 (Documented information) — policy_program 4-leaf: doc_control_policy + document_register + applicable_document_classes_scope + program_review (365d). Stale-document sweep baked into the review — single most common audit drift signal.",
+    ),
+
     # ── Phase B batch 24 (2026-06-02) — chapters 4 + 5 close-out 7-pack ────
     # First ISMS management-system clauses promoted to 4-leaf. Spine mix:
     # 2×records_program (4.1/4.2 register-as-primary) + 5×policy_program

@@ -155,7 +155,7 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260602_b24.csv (139 cases — 21 core
+- Most recent: results/eval_20260602_b25.csv (149 cases — 21 core
   + 18 feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf
   + 5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
@@ -170,9 +170,10 @@ with d.session() as s:
   + 7 Phase B A.6 People Controls 7-pack
   + 14 Phase B A.7 Physical Controls 14-pack
   + 33 Phase B A.8 Technological Controls 33-pack
-  + 7 Phase B ISMS chapters 4+5 close-out 7-pack)
-- Score: 137/139 PASS target on 2026-06-02 (#24 + #25 known-stale).
-  Clean-run upper bound is 137/139. Some runs may dip due to #3/#21 stochasticity
+  + 7 Phase B ISMS chapters 4+5 close-out 7-pack
+  + 10 Phase B ISMS chapters 6+7 close-out 10-pack)
+- Score: 147/149 PASS target on 2026-06-02 (#24 + #25 known-stale).
+  Clean-run upper bound is 147/149. Some runs may dip due to #3/#21 stochasticity
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -370,6 +371,19 @@ with d.session() as s:
   legal_jurisdiction, A.5.33 proc_pii_overlay; new owner MUST + 4th
   SHOULD pims_alignment encode the ISO/IEC 27701 PIMS extension
   where in scope)
+- Cases 140-149 lock in: Phase B ISMS chapters 6+7 close-out 10-pack
+  (batch 25, 2026-06-02; 10 controls × 4 leaves = 30 new evidence
+  requirements; closes ISMS chapters 6 + 7). Most diverse single-batch
+  spine mix to date: 6×op_process (6.1.1/6.1.2/6.1.3/6.3/7.3/7.4) +
+  3×records_program (6.2/7.1/7.2) + 1×policy_program (7.5). Primary-leaf
+  ids preserved: req:6.1.2:risk_assessment + req:6.1.3:risk_treatment_plan
+  (anchor REQs from 2026-05-22). NEW SoA leaf — Statement of
+  Applicability promoted from a should_contain item to its own distinct
+  sibling leaf on 6.1.3 with 7 MUSTs (mandatory under 6.1.3 c-d). Pattern
+  established: any clause-mandated specific-named artefact distinct from
+  the primary deserves its own leaf, not a should_contain item. 10
+  posture rows seeded with finding='OFI' matching Arion's pre-ISMS
+  narrative
 - Cases 133-139 lock in: Phase B ISMS chapters 4+5 close-out 7-pack
   (batch 24, 2026-06-02; 7 controls × 4 leaves = 28 new evidence
   requirements; closes ISMS chapters 4 + 5). FIRST management-system

@@ -271,14 +271,21 @@ REQ_C52_PROGRAM_REVIEW = EvidenceRequirement(
     ],
 )
 
+# ── 6.1.2 Risk assessment — op_process 4-leaf (batch 25 2026-06-02) ───────────
+# Procedure-as-primary spine. The risk assessment procedure is the canonical
+# artefact (per clause 6.1.2 "define and apply"); the risk register is the
+# live output, the methodology scope documents criteria, and program review
+# closes the loop. Primary-leaf id preserved (req:6.1.2:risk_assessment + all
+# item:6.1.2:* ids unchanged).
+
 REQ_RISK_ASSESSMENT = EvidenceRequirement(
     id            = "req:6.1.2:risk_assessment",
     control_ref   = "6.1.2",
     standard_id   = "ISO27001:2022",
     evidence_type = "risk_assessment",
-    title= "Information Security Risk Assessment",
+    title         = "Information Security Risk Assessment Procedure",
     trigger_type  = "universal",
-    description   = "Organisation must define and apply a risk assessment process",
+    description   = "Clause 6.1.2 requires the organisation to define and apply a risk assessment process. The procedure is the canonical artefact specifying criteria, identification, analysis and evaluation rules. Sibling leaves: risk register (live output), methodology scope, program review",
     must_contain  = [
         ChecklistItem("item:6.1.2:criteria",         "Risk acceptance criteria defined", "must", False, "Clause 6.1.2a"),
         ChecklistItem("item:6.1.2:consistency",      "Consistent and comparable results produced", "must", False, "Clause 6.1.2b"),
@@ -290,28 +297,160 @@ REQ_RISK_ASSESSMENT = EvidenceRequirement(
         ChecklistItem("item:6.1.2:personal_data",    "Personal data processing risks explicitly addressed", "must", True, "GDPR Art.32 alignment"),
     ],
     should_contain= [
-        ChecklistItem("item:6.1.2:methodology",  "Methodology documented", "should", False, "Repeatability"),
-        ChecklistItem("item:6.1.2:date",         "Assessment date and next review date", "should", False, "Document control"),
+        ChecklistItem("item:6.1.2:methodology",      "Methodology documented (ISO 31000, NIST SP 800-30, or equivalent)", "should", False, "Repeatability"),
+        ChecklistItem("item:6.1.2:date",             "Assessment date and next review date", "should", False, "Document control"),
     ],
 )
+
+REQ_C612_RISK_REGISTER = EvidenceRequirement(
+    id            = "req:6.1.2:risk_register",
+    control_ref   = "6.1.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Information Security Risk Register",
+    trigger_type  = "universal",
+    description   = "The live output of the assessment procedure — every identified risk with owner, scoring, treatment status. Distinct from the procedure: the procedure is the methodology, the register is the data. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:6.1.2:reg_risk_id",      "Unique risk identifier per row", "must", False, "Audit defensibility"),
+        ChecklistItem("item:6.1.2:reg_description",  "Risk description per row (asset, threat, vulnerability)", "must", False, "Clause 6.1.2c — identified"),
+        ChecklistItem("item:6.1.2:reg_owner",        "Risk owner per row", "must", False, "Clause 6.1.2c"),
+        ChecklistItem("item:6.1.2:reg_scoring",      "Likelihood + consequence scores per row applied per the procedure's criteria", "must", False, "Clause 6.1.2d-e"),
+        ChecklistItem("item:6.1.2:reg_treatment_status","Treatment status per row (accept / mitigate / transfer / avoid; link to 6.1.3 plan)", "must", False, "Cross-clause coherence"),
+        ChecklistItem("item:6.1.2:reg_last_assessed","Last assessment date per row (drives staleness)", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:6.1.2:reg_4_1_link",     "Link from each risk back to the issues register (4.1) entry that surfaced it where applicable", "should", False, "Traceability"),
+    ],
+)
+
+REQ_C612_METHODOLOGY_SCOPE = EvidenceRequirement(
+    id            = "req:6.1.2:risk_methodology_scope",
+    control_ref   = "6.1.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Risk Assessment Methodology Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that bounds the procedure — what scoring scale (3×3 / 5×5 / quantitative), what acceptance bands, which asset/process categories are in scope, exclusions",
+    must_contain  = [
+        ChecklistItem("item:6.1.2:scope_scoring_scale","Scoring scale stated (e.g. 5×5 qualitative, ALE quantitative)", "must", False, "Clause 6.1.2a — acceptance criteria"),
+        ChecklistItem("item:6.1.2:scope_acceptance_bands","Acceptance bands stated (low/medium/high → accept/treat thresholds)", "must", False, "Clause 6.1.2a"),
+        ChecklistItem("item:6.1.2:scope_asset_classes","Asset/process classes in scope enumerated (data, systems, people, suppliers, premises)", "must", False, "Coverage proof"),
+        ChecklistItem("item:6.1.2:scope_exclusions","Exclusions stated explicitly with rationale", "must", False, "Defensible bounding"),
+    ],
+    should_contain= [
+        ChecklistItem("item:6.1.2:scope_calibration","Calibration notes (when scoring was last validated against actual incidents)", "should", False, "Validity"),
+    ],
+)
+
+REQ_C612_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:6.1.2:risk_assessment_program_review",
+    control_ref     = "6.1.2",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Risk Assessment Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that the procedure is being followed, the register is current, and the methodology still fits (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:6.1.2:rev_date",         "Review date within the planned interval", "must", False, "Clause 6.1.2 — periodic"),
+        ChecklistItem("item:6.1.2:rev_reviewer",     "Reviewer identity (Risk Manager + ISMS Manager)", "must", False, "Accountability"),
+        ChecklistItem("item:6.1.2:rev_register_currency","Register currency check — every row reviewed for continued relevance", "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:6.1.2:rev_methodology_fit","Methodology fit check — scoring scale still discriminating, acceptance bands still calibrated", "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:6.1.2:rev_significant_change","Significant-change trigger sweep — 8.2 ad-hoc assessments captured", "must", False, "Cross-clause coherence"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:6.1.2:rev_next_date",    "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+# ── 6.1.3 Risk treatment — op_process 4-leaf (batch 25 2026-06-02) ────────────
+# Treatment-plan-as-primary spine with Statement of Applicability as a distinct
+# second leaf (both are mandatory under 6.1.3 c-e). Primary-leaf id preserved
+# (req:6.1.3:risk_treatment_plan + item:6.1.3:* ids unchanged). The SoA is
+# THE document an auditor opens first on day one of an ISO 27001 audit — it
+# deserves its own leaf, not a should_contain item.
 
 REQ_RISK_TREATMENT = EvidenceRequirement(
     id            = "req:6.1.3:risk_treatment_plan",
     control_ref   = "6.1.3",
     standard_id   = "ISO27001:2022",
     evidence_type = "risk_treatment_plan",
-    title= "Risk Treatment Plan",
+    title         = "Risk Treatment Plan",
     trigger_type  = "universal",
-    description   = "Organisation must select and implement risk treatment options",
+    description   = "Clause 6.1.3 requires the organisation to formulate a risk treatment plan implementing the selected options. The plan is the canonical artefact. Sibling leaves: Statement of Applicability (companion mandatory artefact under 6.1.3 c-d), treatment methodology scope, program review",
     must_contain  = [
         ChecklistItem("item:6.1.3:options",      "Risk treatment options selected for each risk", "must", False, "Clause 6.1.3a"),
-        ChecklistItem("item:6.1.3:controls",     "Controls determined", "must", False, "Clause 6.1.3b"),
-        ChecklistItem("item:6.1.3:soa_ref",      "Reference to Statement of Applicability", "must", False, "Clause 6.1.3c"),
-        ChecklistItem("item:6.1.3:residual",     "Residual risk identified", "must", False, "Clause 6.1.3e"),
-        ChecklistItem("item:6.1.3:owners",       "Risk treatment owners identified", "must", False, "Accountability"),
+        ChecklistItem("item:6.1.3:controls",     "Controls determined to implement the chosen options", "must", False, "Clause 6.1.3b"),
+        ChecklistItem("item:6.1.3:soa_ref",      "Reference to the live Statement of Applicability (the SoA leaf)", "must", False, "Clause 6.1.3c-d"),
+        ChecklistItem("item:6.1.3:residual",     "Residual risk identified per treated risk", "must", False, "Clause 6.1.3e"),
+        ChecklistItem("item:6.1.3:owners",       "Risk treatment owners identified per treated risk", "must", False, "Accountability"),
+        ChecklistItem("item:6.1.3:approval",     "Risk owners' approval of the plan AND acceptance of residual risks recorded", "must", False, "Clause 6.1.3f"),
     ],
     should_contain= [
-        ChecklistItem("item:6.1.3:timeline", "Target completion dates", "should", False, "Implementation tracking"),
+        ChecklistItem("item:6.1.3:timeline",     "Target completion dates per treatment item", "should", False, "Implementation tracking"),
+    ],
+)
+
+REQ_C613_SOA = EvidenceRequirement(
+    id            = "req:6.1.3:statement_of_applicability",
+    control_ref   = "6.1.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "statement_of_applicability",
+    title         = "Statement of Applicability",
+    trigger_type  = "universal",
+    description   = "Mandatory under clause 6.1.3 c-d. The SoA enumerates every Annex A control with a justification for inclusion or exclusion. THE first document an external auditor opens — its quality signals the maturity of the entire ISMS. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:6.1.3:soa_all_annex_a","All 93 Annex A controls enumerated (no omissions)", "must", False, "Clause 6.1.3d"),
+        ChecklistItem("item:6.1.3:soa_inclusion_status","Inclusion status per control (Applicable / Not Applicable)", "must", False, "Clause 6.1.3d"),
+        ChecklistItem("item:6.1.3:soa_justification","Justification per control (why included / why excluded)", "must", False, "Clause 6.1.3d"),
+        ChecklistItem("item:6.1.3:soa_implementation_status","Implementation status per included control (Implemented / Partially / Planned)", "must", False, "Clause 6.1.3d"),
+        ChecklistItem("item:6.1.3:soa_reference","Reference to the implementing policy/procedure per included control", "must", False, "Audit defensibility"),
+        ChecklistItem("item:6.1.3:soa_owner",     "Named owner of the SoA (typically ISMS Manager)", "must", False, "Accountability"),
+        ChecklistItem("item:6.1.3:soa_version",   "Version number and approval date stated", "must", False, "Document control"),
+    ],
+    should_contain= [
+        ChecklistItem("item:6.1.3:soa_external_controls","External / additional controls beyond Annex A listed where used (sectoral, contractual)", "should", False, "Completeness"),
+    ],
+)
+
+REQ_C613_METHODOLOGY_SCOPE = EvidenceRequirement(
+    id            = "req:6.1.3:treatment_methodology_scope",
+    control_ref   = "6.1.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Risk Treatment Methodology Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that bounds the treatment plan — what options are available (4 standard: modify/share/avoid/retain), residual-acceptance authority, treatment cost-vs-benefit threshold rules",
+    must_contain  = [
+        ChecklistItem("item:6.1.3:scope_options_catalog","Treatment options catalog (modify / share / avoid / retain — ISO 31000 4-option model)", "must", False, "Clause 6.1.3a"),
+        ChecklistItem("item:6.1.3:scope_acceptance_authority","Residual-risk acceptance authority per band (who can sign off on residual high vs medium vs low)", "must", False, "Clause 6.1.3f"),
+        ChecklistItem("item:6.1.3:scope_cost_benefit","Cost-benefit rules for treatment selection (when to mitigate vs accept)", "must", False, "Defensible selection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:6.1.3:scope_change_drivers","Trigger list for re-evaluating treatment (new risk, new control, regulator change)", "should", False, "Currency"),
+    ],
+)
+
+REQ_C613_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:6.1.3:risk_treatment_program_review",
+    control_ref     = "6.1.3",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Risk Treatment Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that the plan is being executed, the SoA is current, residual risks remain accepted (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:6.1.3:rev_date",         "Review date within the planned interval", "must", False, "Clause 6.1.3 — periodic"),
+        ChecklistItem("item:6.1.3:rev_reviewer",     "Reviewer identity (Risk Manager + ISMS Manager + risk owners as needed)", "must", False, "Accountability"),
+        ChecklistItem("item:6.1.3:rev_plan_progress","Plan progress check — every treatment item status updated", "must", False, "8.3 link"),
+        ChecklistItem("item:6.1.3:rev_soa_currency","SoA currency check — still matches treatment plan + Annex A version", "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:6.1.3:rev_residual_reaffirm","Residual risks re-affirmed by owners (or re-treatment triggered)", "must", False, "Clause 6.1.3f"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:6.1.3:rev_next_date",    "Next planned review date stated", "should", False, "Planning"),
     ],
 )
 
@@ -9864,14 +10003,19 @@ REQ_C53_PROGRAM_REVIEW = EvidenceRequirement(
     ],
 )
 
-REQ_C611_RISK_OPPORTUNITY_PLANNING = EvidenceRequirement(
+# ── 6.1.1 Risk + opportunity planning — op_process 4-leaf (batch 25 2026-06-02) ─
+# Procedure-as-primary spine. Sits above 6.1.2 / 6.1.3 — the umbrella that
+# combines context (4.1/4.2) into planned ISMS actions. Promoted from
+# single-leaf REQ_C611_RISK_OPPORTUNITY_PLANNING.
+
+REQ_C611_PLANNING_PROCEDURE = EvidenceRequirement(
     id            = "req:6.1.1:risk_opportunity_planning",
     control_ref   = "6.1.1",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "ISMS Risk and Opportunity Planning Procedure",
     trigger_type  = "universal",
-    description   = "Clause 6.1.1 requires the organization to consider issues (4.1) and requirements (4.2) and determine risks and opportunities. Evidence is a planning procedure linking inputs to actions",
+    description   = "Clause 6.1.1 requires the organisation to consider 4.1 issues + 4.2 requirements and determine risks and opportunities. The procedure is the canonical artefact linking inputs to actions. Sibling leaves: action register, applicable inputs scope, program review",
     must_contain  = [
         ChecklistItem("item:6.1.1:issues_input",     "Issues from 4.1 considered as planning input", "must", False, "Clause 6.1.1 — issues referred to in 4.1"),
         ChecklistItem("item:6.1.1:requirements_input","Requirements from 4.2 considered as planning input", "must", False, "Clause 6.1.1 — requirements referred to in 4.2"),
@@ -9886,148 +10030,657 @@ REQ_C611_RISK_OPPORTUNITY_PLANNING = EvidenceRequirement(
     ],
 )
 
-REQ_C62_SECURITY_OBJECTIVES = EvidenceRequirement(
+REQ_C611_ACTION_REGISTER = EvidenceRequirement(
+    id            = "req:6.1.1:planned_action_register",
+    control_ref   = "6.1.1",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "ISMS Planned Action Register",
+    trigger_type  = "universal",
+    description   = "The live output of the planning procedure — every action targeting a risk or opportunity with owner, due date, integration target. Distinct from the risk register (6.1.2) and the SoA (6.1.3): this tracks ISMS-level planning actions, not control implementations",
+    must_contain  = [
+        ChecklistItem("item:6.1.1:reg_action_id",    "Unique action identifier per row", "must", False, "Audit defensibility"),
+        ChecklistItem("item:6.1.1:reg_driver",       "Per-row driver (4.1 issue id, 4.2 party requirement id, risk id, opportunity id)", "must", False, "Cross-clause traceability"),
+        ChecklistItem("item:6.1.1:reg_type",         "Per-row type (risk-addressing / opportunity-enhancing)", "must", False, "Clause 6.1.1 — risks AND opportunities"),
+        ChecklistItem("item:6.1.1:reg_owner",        "Owner per row", "must", False, "Accountability"),
+        ChecklistItem("item:6.1.1:reg_integration_target","Integration target per row (which ISMS process consumes this action)", "must", False, "Clause 6.1.1 — integrated into ISMS processes"),
+        ChecklistItem("item:6.1.1:reg_status",       "Status per row (planned / in-progress / complete / deferred)", "must", False, "Tracking"),
+    ],
+    should_contain= [
+        ChecklistItem("item:6.1.1:reg_effectiveness","Per-row effectiveness evaluation captured on completion", "should", False, "Clause 6.1.1 — evaluate effectiveness"),
+    ],
+)
+
+REQ_C611_APPLICABLE_INPUTS_SCOPE = EvidenceRequirement(
+    id            = "req:6.1.1:applicable_inputs_scope",
+    control_ref   = "6.1.1",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Planning Inputs Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that bounds the procedure — which 4.1 issue categories and 4.2 party categories feed planning, what cadence inputs are refreshed at, what 'significant change' triggers ad-hoc replanning",
+    must_contain  = [
+        ChecklistItem("item:6.1.1:scope_4_1_categories","4.1 issue categories enumerated as planning inputs", "must", False, "Clause 6.1.1 — 4.1"),
+        ChecklistItem("item:6.1.1:scope_4_2_categories","4.2 party categories enumerated as planning inputs", "must", False, "Clause 6.1.1 — 4.2"),
+        ChecklistItem("item:6.1.1:scope_refresh_cadence","Refresh cadence stated (annual planning cycle + significant-change trigger)", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:6.1.1:scope_change_drivers","Trigger list for ad-hoc replanning (major incident, M&A, regulator change)", "should", False, "Operational flexibility"),
+    ],
+)
+
+REQ_C611_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:6.1.1:planning_program_review",
+    control_ref     = "6.1.1",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Planning Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that planning inputs are being consumed, the action register is current, effectiveness is being evaluated (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:6.1.1:rev_date",         "Review date within the planned interval", "must", False, "Clause 6.1.1 — periodic"),
+        ChecklistItem("item:6.1.1:rev_reviewer",     "Reviewer identity (ISMS Manager + executive sponsor)", "must", False, "Accountability"),
+        ChecklistItem("item:6.1.1:rev_inputs_currency","Inputs currency check — 4.1 + 4.2 reviewed before this planning cycle", "must", False, "Cross-clause coherence"),
+        ChecklistItem("item:6.1.1:rev_register_currency","Action register currency check — every row reviewed for status + relevance", "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:6.1.1:rev_effectiveness","Effectiveness summary across completed actions", "must", False, "Clause 6.1.1 — evaluate effectiveness"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:6.1.1:rev_next_date",    "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+# ── 6.2 Security objectives — records_program 4-leaf (batch 25 2026-06-02) ────
+# Register-as-primary spine. Promoted from single-leaf REQ_C62_SECURITY_OBJECTIVES.
+
+REQ_C62_OBJECTIVES_REGISTER = EvidenceRequirement(
     id            = "req:6.2:security_objectives_register",
     control_ref   = "6.2",
     standard_id   = "ISO27001:2022",
     evidence_type = "register",
     title         = "Information Security Objectives Register",
     trigger_type  = "universal",
-    description   = "Clause 6.2 requires information security objectives to be established at relevant functions and levels. Evidence is a documented register of objectives, owners, measurement, and refresh cycle",
+    description   = "Clause 6.2 requires information security objectives to be established at relevant functions and levels. The register is the canonical artefact — every objective with owner, KPI, target date, progress. Sibling leaves: objective-setting methodology, applicable functions scope, program review. Annual refresh (freshness=365)",
     freshness_days = 365,
     must_contain  = [
         ChecklistItem("item:6.2:objectives_stated", "Objectives stated at relevant functions and levels", "must", False, "Clause 6.2 — established at relevant functions and levels"),
-        ChecklistItem("item:6.2:consistent_with_policy","Consistency with the InfoSec policy (5.2)", "must", False, "Clause 6.2 a)"),
-        ChecklistItem("item:6.2:measurable",        "Measurable where practicable (KPI defined)", "must", False, "Clause 6.2 b)"),
-        ChecklistItem("item:6.2:requirements_considered","Applicable information security requirements considered, plus results of risk assessment / treatment", "must", False, "Clause 6.2 c)"),
-        ChecklistItem("item:6.2:communicated",      "Objectives communicated to relevant personnel", "must", False, "Clause 6.2 d)"),
-        ChecklistItem("item:6.2:updated",           "Updated as appropriate (review trigger stated)", "must", False, "Clause 6.2 e)"),
-        ChecklistItem("item:6.2:planning",          "Planning to achieve objectives (what, resources, who, when, evaluation)", "must", False, "Clause 6.2 planning"),
+        ChecklistItem("item:6.2:consistent_with_policy","Per-objective consistency with the InfoSec policy (5.2) flagged", "must", False, "Clause 6.2 a)"),
+        ChecklistItem("item:6.2:measurable",        "Per-objective KPI defined where practicable", "must", False, "Clause 6.2 b)"),
+        ChecklistItem("item:6.2:owner",             "Per-objective owner identified", "must", False, "Accountability"),
+        ChecklistItem("item:6.2:target_date",       "Per-objective target date stated", "must", False, "Concrete commitment"),
+        ChecklistItem("item:6.2:progress_status",   "Per-objective progress status (on-track / at-risk / off-track / met)", "must", False, "Tracking"),
     ],
     should_contain= [
-        ChecklistItem("item:6.2:target_dates",      "Target dates per objective", "should", False, "Concrete commitment"),
         ChecklistItem("item:6.2:kpi_dashboard",     "KPI dashboard linked", "should", False, "Visibility"),
     ],
 )
 
-REQ_C63_PLANNING_OF_CHANGES = EvidenceRequirement(
+REQ_C62_SETTING_PROCEDURE = EvidenceRequirement(
+    id            = "req:6.2:objective_setting_procedure",
+    control_ref   = "6.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "procedure",
+    title         = "Security Objective-Setting Procedure",
+    trigger_type  = "universal",
+    description   = "The methodology behind the register — how objectives are derived from policy + risk assessment + party requirements, who approves, what planning produces (resources, who, when, evaluation per clause 6.2 planning)",
+    must_contain  = [
+        ChecklistItem("item:6.2:proc_inputs",       "Inputs to objective-setting (5.2 policy, 6.1.2 risk results, 4.2 party requirements)", "must", False, "Clause 6.2 c)"),
+        ChecklistItem("item:6.2:proc_planning",     "Planning per objective produces what/resources/who/when/evaluation", "must", False, "Clause 6.2 planning"),
+        ChecklistItem("item:6.2:proc_approval",     "Approval authority per objective (top management for org-level, function head for function-level)", "must", False, "Authority"),
+        ChecklistItem("item:6.2:proc_communicated", "Communication step (link to 7.4) — objectives flow to relevant personnel", "must", False, "Clause 6.2 d)"),
+        ChecklistItem("item:6.2:proc_update_trigger","Update trigger stated (policy change, risk-result change, party requirement change)", "must", False, "Clause 6.2 e)"),
+    ],
+    should_contain= [
+        ChecklistItem("item:6.2:proc_template",     "Objective template (SMART or equivalent)", "should", False, "Repeatable shape"),
+    ],
+)
+
+REQ_C62_APPLICABLE_FUNCTIONS_SCOPE = EvidenceRequirement(
+    id            = "req:6.2:applicable_functions_scope",
+    control_ref   = "6.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Functions and Levels Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that bounds the register — which functions and which levels are required to carry objectives (per clause 6.2 'at relevant functions and levels'); any explicit exclusions",
+    must_contain  = [
+        ChecklistItem("item:6.2:scope_functions",   "Functions in scope enumerated (engineering, ops, sales, legal, HR, finance as relevant)", "must", False, "Clause 6.2 — relevant functions"),
+        ChecklistItem("item:6.2:scope_levels",      "Levels in scope enumerated (org / business unit / function / team)", "must", False, "Clause 6.2 — relevant levels"),
+        ChecklistItem("item:6.2:scope_exclusions",  "Exclusions stated explicitly with rationale", "must", False, "Defensible bounding"),
+    ],
+    should_contain= [
+        ChecklistItem("item:6.2:scope_cascade",     "Cascade rules (how org objectives cascade into BU/function objectives)", "should", False, "Coherence"),
+    ],
+)
+
+REQ_C62_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:6.2:objectives_program_review",
+    control_ref     = "6.2",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Objectives Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that objectives reflect current policy + risk reality, owners are tracking, KPIs are reporting (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:6.2:rev_date",          "Review date within the planned interval", "must", False, "Clause 6.2 — periodic"),
+        ChecklistItem("item:6.2:rev_reviewer",      "Reviewer identity (ISMS Manager + function heads)", "must", False, "Accountability"),
+        ChecklistItem("item:6.2:rev_currency",      "Register currency check — every objective reviewed (refreshed / closed / re-targeted)", "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:6.2:rev_alignment",     "Alignment check — objectives still consistent with current 5.2 policy + 6.1.2 risk results", "must", False, "Clause 6.2 a) + c)"),
+        ChecklistItem("item:6.2:rev_kpi_health",    "KPI health check — measurements actually flowing for measurable objectives", "must", False, "Clause 6.2 b)"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:6.2:rev_next_date",     "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+# ── 6.3 Planning of changes — op_process 4-leaf (batch 25 2026-06-02) ─────────
+# Procedure-as-primary spine. ISMS-level changes (scope, policy, risk criteria,
+# structural) — distinct from A.8.32 technical change management. Promoted from
+# single-leaf REQ_C63_PLANNING_OF_CHANGES.
+
+REQ_C63_CHANGE_PROCEDURE = EvidenceRequirement(
     id            = "req:6.3:isms_change_planning",
     control_ref   = "6.3",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "Planning of Changes to the ISMS Procedure",
     trigger_type  = "universal",
-    description   = "Clause 6.3 requires changes to the ISMS to be carried out in a planned manner. Evidence is a procedure for managing ISMS-level changes (distinct from A.8.32 technical change management)",
+    description   = "Clause 6.3 requires changes to the ISMS to be carried out in a planned manner. The procedure is the canonical artefact — distinct from A.8.32 technical change management. Sibling leaves: change register, applicable change-type scope, program review",
     must_contain  = [
         ChecklistItem("item:6.3:change_identification","Identification trigger for ISMS-level changes (scope, policy, risk criteria, structural)", "must", False, "Clause 6.3 — determines the need for changes"),
         ChecklistItem("item:6.3:planning_required", "Planning required before significant changes (purpose, consequences, integrity considerations)", "must", False, "Clause 6.3 — planned manner"),
         ChecklistItem("item:6.3:impact_consideration","Consideration of impact on ISMS effectiveness", "must", False, "Clause 6.3 — planned manner"),
         ChecklistItem("item:6.3:approval",          "Approval authority before implementation", "must", False, "Clause 6.3 — planned"),
+        ChecklistItem("item:6.3:comms",             "Communication of the change to affected stakeholders (link to 7.4)", "must", False, "Operational discipline"),
     ],
     should_contain= [
         ChecklistItem("item:6.3:a832_link",         "Link to A.8.32 for technical change management of the underlying ICT", "should", False, "Cross-control coherence"),
     ],
 )
 
-REQ_C71_RESOURCES = EvidenceRequirement(
+REQ_C63_CHANGE_REGISTER = EvidenceRequirement(
+    id            = "req:6.3:isms_change_register",
+    control_ref   = "6.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "ISMS Change Register",
+    trigger_type  = "universal",
+    description   = "Per-change record capturing every ISMS-level change — the integration point between 4.3 scope changes, 4.4 manual changes, 5.3 roles changes (whose own change records flow up here). Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:6.3:reg_change_id",     "Unique change identifier per row", "must", False, "Audit defensibility"),
+        ChecklistItem("item:6.3:reg_change_type",   "Per-row change type (scope / policy / manual / roles / risk-criteria / structural)", "must", False, "Clause 6.3 — determines the need"),
+        ChecklistItem("item:6.3:reg_trigger",       "Per-row trigger stated (audit finding, regulator change, org restructure, etc.)", "must", False, "Defensibility"),
+        ChecklistItem("item:6.3:reg_approval",      "Per-row approval signature + date", "must", False, "Clause 6.3 — planned"),
+        ChecklistItem("item:6.3:reg_impact_summary","Per-row impact summary recorded", "must", False, "Clause 6.3 — consequences"),
+        ChecklistItem("item:6.3:reg_status",        "Per-row status (proposed / approved / implemented / withdrawn)", "must", False, "Tracking"),
+    ],
+    should_contain= [
+        ChecklistItem("item:6.3:reg_source_xref",   "Per-row cross-reference to the source change record (4.3 / 4.4 / 5.3 etc.) where applicable", "should", False, "Cross-leaf coherence"),
+    ],
+)
+
+REQ_C63_APPLICABLE_CHANGE_TYPES_SCOPE = EvidenceRequirement(
+    id            = "req:6.3:applicable_change_types_scope",
+    control_ref   = "6.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable ISMS Change Types Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that bounds the procedure — which kinds of changes are 'ISMS-level' (clause 6.3 scope) vs operational (A.8.32 scope). Boundary clarification prevents both gaps and overlaps",
+    must_contain  = [
+        ChecklistItem("item:6.3:scope_in_scope_types","ISMS-level change types enumerated (scope, policy, manual, risk criteria, organisational, structural)", "must", False, "Clause 6.3 — ISMS"),
+        ChecklistItem("item:6.3:scope_a832_boundary","Boundary with A.8.32 (technical ICT changes route to A.8.32; ISMS process changes route here)", "must", False, "Cross-control coherence"),
+        ChecklistItem("item:6.3:scope_thresholds",  "Threshold rules (when a change is 'significant' enough to need 6.3 planning)", "must", False, "Defensible bounding"),
+    ],
+    should_contain= [
+        ChecklistItem("item:6.3:scope_grey_areas",  "Grey-area decisions captured (e.g. major tooling change with process implications)", "should", False, "Operational clarity"),
+    ],
+)
+
+REQ_C63_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:6.3:change_program_review",
+    control_ref     = "6.3",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "ISMS Change Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that change identification triggers are firing, the register reflects all actual changes, the A.8.32 boundary holds (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:6.3:rev_date",          "Review date within the planned interval", "must", False, "Clause 6.3 — periodic"),
+        ChecklistItem("item:6.3:rev_reviewer",      "Reviewer identity (ISMS Manager + change-management lead)", "must", False, "Accountability"),
+        ChecklistItem("item:6.3:rev_register_currency","Register currency check — every approved change reached implementation OR was withdrawn", "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:6.3:rev_silent_changes","Silent-change sweep — verify no scope / policy / roles changes happened without a register entry", "must", False, "Drift detection"),
+        ChecklistItem("item:6.3:rev_boundary_check","A.8.32 boundary check — no technical changes mis-routed to 6.3, no ISMS changes mis-routed to A.8.32", "must", False, "Cross-control coherence"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:6.3:rev_next_date",     "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+# ── 7.1 Resources — records_program 4-leaf (batch 25 2026-06-02) ──────────────
+# Resources-record-as-primary spine. Promoted from single-leaf REQ_C71_RESOURCES.
+
+REQ_C71_RESOURCES_RECORD = EvidenceRequirement(
     id            = "req:7.1:isms_resources_record",
     control_ref   = "7.1",
     standard_id   = "ISO27001:2022",
     evidence_type = "register",
     title         = "ISMS Resource Allocation Record",
     trigger_type  = "universal",
-    description   = "Clause 7.1 requires the organization to determine and provide resources needed for ISMS establishment, implementation, maintenance, and improvement. Evidence is a record showing financial, human, infrastructure, and technology resources committed",
+    description   = "Clause 7.1 requires the organisation to determine and provide resources needed for ISMS establishment, implementation, maintenance, and improvement. The record is the canonical artefact — financial, human, infrastructure, technology resources committed. Sibling leaves: determination procedure, applicable resource categories scope, program review. Annual refresh (freshness=365)",
     freshness_days = 365,
     must_contain  = [
-        ChecklistItem("item:7.1:financial",    "Financial resources allocated (budget for ISMS activities)", "must", False, "Clause 7.1 — resources needed"),
-        ChecklistItem("item:7.1:human",        "Human resources assigned (headcount, roles, time allocation)", "must", False, "Clause 7.1 — resources"),
-        ChecklistItem("item:7.1:infrastructure","Infrastructure provided (premises, equipment, transport)", "must", False, "Clause 7.1 — resources"),
-        ChecklistItem("item:7.1:technology",   "Technology platforms supporting the ISMS (GRC tool, document repo, training platform)", "must", False, "Clause 7.1 — resources"),
+        ChecklistItem("item:7.1:financial",         "Financial resources allocated (budget for ISMS activities)", "must", False, "Clause 7.1 — resources needed"),
+        ChecklistItem("item:7.1:human",             "Human resources assigned (headcount, roles, time allocation)", "must", False, "Clause 7.1 — resources"),
+        ChecklistItem("item:7.1:infrastructure",    "Infrastructure provided (premises, equipment, transport)", "must", False, "Clause 7.1 — resources"),
+        ChecklistItem("item:7.1:technology",        "Technology platforms supporting the ISMS (GRC tool, document repo, training platform)", "must", False, "Clause 7.1 — resources"),
+        ChecklistItem("item:7.1:owner",             "Named owner of the resources record (typically ISMS Manager with finance partner)", "must", False, "Accountability"),
+        ChecklistItem("item:7.1:approved_by",       "Approving authority recorded (top management for budget allocations)", "must", False, "Clause 7.1 — provide"),
     ],
     should_contain= [
-        ChecklistItem("item:7.1:budget_link",  "Reference to organization budget where ISMS spend appears", "should", False, "Visibility"),
+        ChecklistItem("item:7.1:budget_link",       "Reference to organisation budget where ISMS spend appears", "should", False, "Visibility"),
     ],
 )
 
-REQ_C72_COMPETENCE = EvidenceRequirement(
+REQ_C71_DETERMINATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:7.1:resource_determination_procedure",
+    control_ref   = "7.1",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "procedure",
+    title         = "ISMS Resource Determination Procedure",
+    trigger_type  = "universal",
+    description   = "The methodology behind the resources record — how needs are estimated, what inputs drive sizing (risk treatment plan scale, objectives, training demand), who approves",
+    must_contain  = [
+        ChecklistItem("item:7.1:proc_inputs",       "Inputs to resource determination (6.1.3 treatment plan, 6.2 objectives, 7.2/7.3 competence/awareness demand, audit plan)", "must", False, "Clause 7.1 — determine"),
+        ChecklistItem("item:7.1:proc_estimation",   "Estimation method per resource type (FTE-from-hours, budget-from-vendor-quotes, etc.)", "must", False, "Defensibility"),
+        ChecklistItem("item:7.1:proc_approval",     "Approval pathway (function head → ISMS Manager → top management)", "must", False, "Clause 7.1 — provide"),
+        ChecklistItem("item:7.1:proc_refresh",      "Refresh cadence stated (annual planning cycle + significant-change trigger)", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:7.1:proc_benchmark",    "Industry benchmark references where used (ISACA, ENISA staffing norms)", "should", False, "Defensible sizing"),
+    ],
+)
+
+REQ_C71_APPLICABLE_CATEGORIES_SCOPE = EvidenceRequirement(
+    id            = "req:7.1:applicable_resource_categories_scope",
+    control_ref   = "7.1",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Resource Categories Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that bounds the record — which resource categories are tracked, which are out of scope (e.g. counted in the wider IT budget, not the ISMS-specific record)",
+    must_contain  = [
+        ChecklistItem("item:7.1:scope_categories",  "Resource categories in scope (financial, human, infrastructure, technology, knowledge/IP)", "must", False, "Clause 7.1 — resources needed"),
+        ChecklistItem("item:7.1:scope_isms_vs_business","Boundary between ISMS-dedicated resources and shared-business resources allocated to ISMS", "must", False, "Defensible bounding"),
+        ChecklistItem("item:7.1:scope_exclusions",  "Exclusions stated explicitly with rationale", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:7.1:scope_change_drivers","Trigger list for re-scoping (new ISMS initiative, certification scope expansion, M&A)", "should", False, "Currency"),
+    ],
+)
+
+REQ_C71_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:7.1:resources_program_review",
+    control_ref     = "7.1",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Resources Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that resources are commensurate with current ISMS needs, that determined needs were actually provided, that gaps surfaced are being closed (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:7.1:rev_date",          "Review date within the planned interval", "must", False, "Clause 7.1 — periodic"),
+        ChecklistItem("item:7.1:rev_reviewer",      "Reviewer identity (ISMS Manager + finance partner + top management)", "must", False, "Accountability"),
+        ChecklistItem("item:7.1:rev_adequacy",      "Adequacy check — resources actually provided match the determined need per category", "must", False, "Clause 7.1 — provide"),
+        ChecklistItem("item:7.1:rev_gap_response", "Gap response — any under-resourcing surfaced with remediation plan", "must", False, "Effectiveness"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:7.1:rev_next_date",     "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+# ── 7.2 Competence — records_program 4-leaf (batch 25 2026-06-02) ─────────────
+# Competence-record-as-primary spine. Promoted from single-leaf REQ_C72_COMPETENCE.
+
+REQ_C72_COMPETENCE_RECORD = EvidenceRequirement(
     id            = "req:7.2:competence_record",
     control_ref   = "7.2",
     standard_id   = "ISO27001:2022",
     evidence_type = "register",
     title         = "ISMS Competence Record",
     trigger_type  = "universal",
-    description   = "Clause 7.2 requires the organization to determine necessary competence of persons whose work affects ISMS performance and ensure they are competent. Evidence is a competence record mapping role → required competence → actual competence",
+    description   = "Clause 7.2 requires the organisation to determine necessary competence of persons whose work affects ISMS performance and ensure they are competent. The record is the canonical artefact mapping role → required competence → actual competence → gap actions. Sibling leaves: determination procedure, applicable roles scope, program review. Annual refresh (freshness=365)",
     freshness_days = 365,
     must_contain  = [
         ChecklistItem("item:7.2:required_competence","Required competence defined per role affecting ISMS performance", "must", False, "Clause 7.2 a)"),
         ChecklistItem("item:7.2:basis_of_competence","Basis of competence (education, training, experience) recorded per person", "must", False, "Clause 7.2 b)"),
-        ChecklistItem("item:7.2:gap_actions",      "Actions taken to close competence gaps (training, hiring, mentoring) where applicable", "must", False, "Clause 7.2 c)"),
-        ChecklistItem("item:7.2:effectiveness",    "Evaluation that competence actions were effective", "must", False, "Clause 7.2 c)"),
-        ChecklistItem("item:7.2:documented",       "Documented information retained as evidence of competence", "must", False, "Clause 7.2 d)"),
+        ChecklistItem("item:7.2:gap_actions",       "Actions taken to close competence gaps (training, hiring, mentoring) where applicable", "must", False, "Clause 7.2 c)"),
+        ChecklistItem("item:7.2:effectiveness",     "Evaluation that competence actions were effective", "must", False, "Clause 7.2 c)"),
+        ChecklistItem("item:7.2:documented",        "Documented information retained as evidence of competence", "must", False, "Clause 7.2 d)"),
+        ChecklistItem("item:7.2:owner",             "Named owner of the record (HR partner with ISMS Manager)", "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:7.2:training_matrix",  "Training matrix per role", "should", False, "Operational view"),
+        ChecklistItem("item:7.2:training_matrix",   "Training matrix per role (current + required)", "should", False, "Operational view"),
     ],
 )
 
-REQ_C73_AWARENESS = EvidenceRequirement(
+REQ_C72_DETERMINATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:7.2:competence_determination_procedure",
+    control_ref   = "7.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "procedure",
+    title         = "Competence Determination Procedure",
+    trigger_type  = "universal",
+    description   = "The methodology behind the competence record — how 'required competence' is defined per role, how individuals are assessed, what evidence counts (certifications, degree, experience years, demonstrated skill)",
+    must_contain  = [
+        ChecklistItem("item:7.2:proc_role_mapping", "Method for mapping ISMS-affecting roles to required competence (skills matrix or equivalent)", "must", False, "Clause 7.2 a)"),
+        ChecklistItem("item:7.2:proc_evidence_types","Evidence types accepted (formal certification, on-job demonstration, attested experience)", "must", False, "Clause 7.2 b)"),
+        ChecklistItem("item:7.2:proc_assessment",   "Assessment cadence (annual review, on role change, on certification expiry)", "must", False, "Currency"),
+        ChecklistItem("item:7.2:proc_gap_handling", "Gap-handling pathway (training plan → hiring → mentoring → role re-allocation)", "must", False, "Clause 7.2 c)"),
+    ],
+    should_contain= [
+        ChecklistItem("item:7.2:proc_external_personnel","Coverage of contractors / third-party personnel where their work affects ISMS performance", "should", False, "Clause 7.2 — persons under the org's control"),
+    ],
+)
+
+REQ_C72_APPLICABLE_ROLES_SCOPE = EvidenceRequirement(
+    id            = "req:7.2:applicable_roles_scope",
+    control_ref   = "7.2",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable ISMS-Affecting Roles Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that bounds the record — which roles actually affect ISMS performance (per clause 7.2 'whose work affects'). Not every role in the org — but more than just InfoSec staff",
+    must_contain  = [
+        ChecklistItem("item:7.2:scope_isms_roles",  "ISMS-team roles enumerated (CISO, ISMS Manager, InfoSec analyst, auditor)", "must", False, "Clause 7.2 — affect ISMS performance"),
+        ChecklistItem("item:7.2:scope_supporting_roles","Supporting roles enumerated (engineering with InfoSec responsibilities, HR with onboarding, IT ops with access provisioning)", "must", False, "Coverage"),
+        ChecklistItem("item:7.2:scope_exclusions",  "Out-of-scope roles stated explicitly (purely-administrative roles with no ISMS touchpoint)", "must", False, "Defensible bounding"),
+    ],
+    should_contain= [
+        ChecklistItem("item:7.2:scope_contractors", "Contractor coverage rules where contractors fill ISMS-affecting roles", "should", False, "Common scope edge"),
+    ],
+)
+
+REQ_C72_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:7.2:competence_program_review",
+    control_ref     = "7.2",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Competence Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that the record is current per role, every gap has a closure path, effectiveness is being evaluated for completed actions (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:7.2:rev_date",          "Review date within the planned interval", "must", False, "Clause 7.2 — periodic"),
+        ChecklistItem("item:7.2:rev_reviewer",      "Reviewer identity (HR partner + ISMS Manager + relevant function heads)", "must", False, "Accountability"),
+        ChecklistItem("item:7.2:rev_currency",      "Record currency check — turnover, role changes, new hires reflected", "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:7.2:rev_gap_closure",   "Gap-closure progress check — open gaps either closed or on a remediation plan", "must", False, "Effectiveness"),
+        ChecklistItem("item:7.2:rev_effectiveness", "Effectiveness sample — completed actions actually changed observed competence", "must", False, "Clause 7.2 c)"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:7.2:rev_next_date",     "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+# ── 7.3 Awareness — op_process 4-leaf (batch 25 2026-06-02) ───────────────────
+# Programme-as-primary spine. ISMS-specific awareness (policy, contribution,
+# consequences) — distinct from A.6.3 operational security training. Promoted
+# from single-leaf REQ_C73_AWARENESS.
+
+REQ_C73_AWARENESS_PROGRAMME = EvidenceRequirement(
     id            = "req:7.3:isms_awareness_evidence",
     control_ref   = "7.3",
     standard_id   = "ISO27001:2022",
     evidence_type = "training_programme",
-    title         = "ISMS Awareness Evidence",
+    title         = "ISMS Awareness Programme",
     trigger_type  = "universal",
-    description   = "Clause 7.3 requires persons doing work under the organization's control to be aware of the InfoSec policy, their contribution to ISMS effectiveness, and consequences of nonconformity. Evidence is awareness material plus completion / acknowledgement records (distinct from A.6.3 operational awareness training)",
+    description   = "Clause 7.3 requires persons doing work under the organisation's control to be aware of the InfoSec policy, their contribution to ISMS effectiveness, and consequences of nonconformity. The programme is the canonical artefact — content + delivery method + cadence. Sibling leaves: completion register, applicable audience scope, program review",
     must_contain  = [
-        ChecklistItem("item:7.3:policy_awareness", "Awareness of the InfoSec policy", "must", False, "Clause 7.3 a)"),
-        ChecklistItem("item:7.3:contribution",     "Awareness of contribution to ISMS effectiveness (including benefits of improved performance)", "must", False, "Clause 7.3 b)"),
-        ChecklistItem("item:7.3:nonconformity_consequences","Awareness of consequences of not conforming to ISMS requirements", "must", False, "Clause 7.3 c)"),
-        ChecklistItem("item:7.3:completion_records","Records of completion / acknowledgement per person", "must", False, "Evidence preservation"),
+        ChecklistItem("item:7.3:policy_awareness", "Content covers awareness of the InfoSec policy", "must", False, "Clause 7.3 a)"),
+        ChecklistItem("item:7.3:contribution",     "Content covers contribution to ISMS effectiveness (incl. benefits of improved performance)", "must", False, "Clause 7.3 b)"),
+        ChecklistItem("item:7.3:nonconformity_consequences","Content covers consequences of not conforming to ISMS requirements", "must", False, "Clause 7.3 c)"),
+        ChecklistItem("item:7.3:delivery_method",  "Delivery method stated (LMS module, induction session, periodic refresher)", "must", False, "Operational discipline"),
+        ChecklistItem("item:7.3:cadence",          "Delivery cadence stated (onboarding + annual refresher, with refresh on policy update)", "must", False, "Currency"),
+        ChecklistItem("item:7.3:owner",            "Named owner of the programme", "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:7.3:a63_link",         "Integration with A.6.3 operational awareness training programme", "should", False, "Cross-control coherence"),
+        ChecklistItem("item:7.3:a63_link",         "Integration with A.6.3 operational awareness training programme (where merged delivery is used)", "should", False, "Cross-control coherence"),
     ],
 )
 
-REQ_C74_COMMUNICATION = EvidenceRequirement(
+REQ_C73_COMPLETION_REGISTER = EvidenceRequirement(
+    id            = "req:7.3:awareness_completion_register",
+    control_ref   = "7.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "ISMS Awareness Completion Register",
+    trigger_type  = "universal",
+    description   = "Per-person completion record — who completed which module, on what date, with what acknowledgement. The proof that awareness was actually delivered, not just designed. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:7.3:reg_subject_id",   "Subject identifier per row (employee or contractor)", "must", False, "Accountability"),
+        ChecklistItem("item:7.3:reg_module",       "Module identifier per row (policy module, contribution module, consequences module)", "must", False, "Coverage"),
+        ChecklistItem("item:7.3:reg_completion_date","Completion date per row", "must", False, "Currency"),
+        ChecklistItem("item:7.3:reg_acknowledgement","Acknowledgement per row (signed receipt, LMS attestation, quiz pass)", "must", False, "Evidence preservation"),
+        ChecklistItem("item:7.3:reg_expiry",       "Expiry / next-due date per row (drives refresher trigger)", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:7.3:reg_assessment_score","Per-row assessment score where the module included a knowledge check", "should", False, "Effectiveness signal"),
+    ],
+)
+
+REQ_C73_APPLICABLE_AUDIENCE_SCOPE = EvidenceRequirement(
+    id            = "req:7.3:applicable_audience_scope",
+    control_ref   = "7.3",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Awareness Audience Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that bounds the programme — who is 'persons doing work under the organisation's control' (per clause 7.3). Includes employees, often contractors, sometimes embedded suppliers",
+    must_contain  = [
+        ChecklistItem("item:7.3:scope_employees",  "Employee coverage stated (all employees, all locations)", "must", False, "Clause 7.3 — persons doing work"),
+        ChecklistItem("item:7.3:scope_contractors","Contractor coverage stated (which contractor classes are in scope; cross-link to A.5.19 supplier)", "must", False, "Clause 7.3 — under the org's control"),
+        ChecklistItem("item:7.3:scope_external",   "External-party coverage stated (auditors, embedded vendor staff, visiting researchers as relevant)", "must", False, "Common scope edge"),
+    ],
+    should_contain= [
+        ChecklistItem("item:7.3:scope_exclusions", "Exclusions stated explicitly with rationale", "should", False, "Defensibility"),
+    ],
+)
+
+REQ_C73_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:7.3:awareness_program_review",
+    control_ref     = "7.3",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Awareness Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that the programme content reflects current policy, the audience is fully covered, completion rates are healthy, refresher cadence is being met (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:7.3:rev_date",         "Review date within the planned interval", "must", False, "Clause 7.3 — periodic"),
+        ChecklistItem("item:7.3:rev_reviewer",     "Reviewer identity (HR partner + ISMS Manager)", "must", False, "Accountability"),
+        ChecklistItem("item:7.3:rev_content_currency","Content currency check — material still reflects current 5.2 policy", "must", False, "Cross-clause coherence"),
+        ChecklistItem("item:7.3:rev_coverage",     "Coverage check — register completion rate against the in-scope audience", "must", False, "Effectiveness"),
+        ChecklistItem("item:7.3:rev_refresher",    "Refresher cadence check — annual refreshers actually delivered", "must", False, "Currency"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:7.3:rev_next_date",    "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+# ── 7.4 Communication — op_process 4-leaf (batch 25 2026-06-02) ───────────────
+# Procedure-as-primary spine. Promoted from single-leaf REQ_C74_COMMUNICATION.
+
+REQ_C74_COMMUNICATION_PROCEDURE = EvidenceRequirement(
     id            = "req:7.4:isms_communication_procedure",
     control_ref   = "7.4",
     standard_id   = "ISO27001:2022",
     evidence_type = "procedure",
     title         = "ISMS Communication Procedure",
     trigger_type  = "universal",
-    description   = "Clause 7.4 requires the organization to determine the need for internal and external ISMS communications. Evidence is a procedure stating what, when, with whom, how, and by whom",
+    description   = "Clause 7.4 requires the organisation to determine the need for internal and external ISMS communications. The procedure is the canonical artefact stating what, when, with whom, how, and by whom. Sibling leaves: communication event register, applicable communication scope, program review",
     must_contain  = [
-        ChecklistItem("item:7.4:what",          "What is communicated (policy, objectives, performance, incidents, changes)", "must", False, "Clause 7.4 a)"),
-        ChecklistItem("item:7.4:when",          "When communication occurs (planned cadences and event triggers)", "must", False, "Clause 7.4 b)"),
-        ChecklistItem("item:7.4:with_whom",     "With whom (internal audiences and external interested parties)", "must", False, "Clause 7.4 c)"),
-        ChecklistItem("item:7.4:how",           "How (channels, formats, escalation paths)", "must", False, "Clause 7.4 d)"),
-        ChecklistItem("item:7.4:responsibility","Who is responsible for each communication", "must", False, "Accountability"),
+        ChecklistItem("item:7.4:what",              "What is communicated (policy, objectives, performance, incidents, changes)", "must", False, "Clause 7.4 a)"),
+        ChecklistItem("item:7.4:when",              "When communication occurs (planned cadences and event triggers)", "must", False, "Clause 7.4 b)"),
+        ChecklistItem("item:7.4:with_whom",         "With whom (internal audiences and external interested parties)", "must", False, "Clause 7.4 c)"),
+        ChecklistItem("item:7.4:how",               "How (channels, formats, escalation paths)", "must", False, "Clause 7.4 d)"),
+        ChecklistItem("item:7.4:responsibility",    "Who is responsible for each communication", "must", False, "Accountability"),
     ],
     should_contain= [
-        ChecklistItem("item:7.4:plan",          "Communication plan document referenced", "should", False, "Concrete artefact"),
+        ChecklistItem("item:7.4:plan",              "Communication plan document referenced", "should", False, "Concrete artefact"),
     ],
 )
 
-REQ_C75_DOCUMENTED_INFORMATION = EvidenceRequirement(
+REQ_C74_EVENT_REGISTER = EvidenceRequirement(
+    id            = "req:7.4:communication_event_register",
+    control_ref   = "7.4",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "ISMS Communication Event Register",
+    trigger_type  = "universal",
+    description   = "Per-communication record — what was communicated, when, to whom, via what channel, with what acknowledgement. The proof communications actually happened, not just planned. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:7.4:reg_event_id",      "Unique event identifier per row", "must", False, "Audit defensibility"),
+        ChecklistItem("item:7.4:reg_topic",         "Per-row topic (matches procedure 'what' catalog)", "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:7.4:reg_audience",      "Per-row audience (which internal group / external party)", "must", False, "Clause 7.4 c)"),
+        ChecklistItem("item:7.4:reg_channel",       "Per-row channel used", "must", False, "Clause 7.4 d)"),
+        ChecklistItem("item:7.4:reg_date",          "Per-row date / time of communication", "must", False, "Currency"),
+        ChecklistItem("item:7.4:reg_sender",        "Per-row sender / responsible person", "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:7.4:reg_ack",           "Per-row acknowledgement evidence where required (read-receipt, attendance log, signed receipt)", "should", False, "Closure proof"),
+    ],
+)
+
+REQ_C74_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:7.4:applicable_communication_scope",
+    control_ref   = "7.4",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable Communication Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that bounds the procedure — which topic classes are in scope, which audiences (4.2 parties subset), what's regulator-mandated vs voluntary",
+    must_contain  = [
+        ChecklistItem("item:7.4:scope_topics",      "Topic classes in scope (policy comms, objective comms, performance reporting, incident comms, change comms, breach notification)", "must", False, "Clause 7.4 a)"),
+        ChecklistItem("item:7.4:scope_audiences",   "Audience classes in scope (internal — board / executives / employees / contractors; external — regulators / customers / suppliers / public)", "must", False, "Clause 7.4 c)"),
+        ChecklistItem("item:7.4:scope_mandated_voluntary","Mandated vs voluntary split (regulatory deadlines vs internal preference)", "must", False, "Risk and priority clarity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:7.4:scope_change_drivers","Trigger list for re-scoping (new regulator, new party, new topic class)", "should", False, "Currency"),
+    ],
+)
+
+REQ_C74_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:7.4:communication_program_review",
+    control_ref     = "7.4",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Communication Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that planned communications happened on cadence, the register is complete, regulator-mandated comms met their deadlines (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:7.4:rev_date",          "Review date within the planned interval", "must", False, "Clause 7.4 — periodic"),
+        ChecklistItem("item:7.4:rev_reviewer",      "Reviewer identity (ISMS Manager + comms lead)", "must", False, "Accountability"),
+        ChecklistItem("item:7.4:rev_cadence_check", "Cadence check — planned communications actually delivered on time", "must", False, "Effectiveness"),
+        ChecklistItem("item:7.4:rev_mandated_deadlines","Mandated deadlines check — every regulator-mandated comm met its SLA", "must", False, "Compliance currency"),
+        ChecklistItem("item:7.4:rev_audience_coverage","Audience coverage check — every in-scope audience reached for required topics", "must", False, "Cross-leaf coherence"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:7.4:rev_next_date",     "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+# ── 7.5 Documented information — policy_program 4-leaf (batch 25 2026-06-02) ──
+# Policy-as-primary spine. Document control is foundational — the policy covers
+# creation / update / control / retention. The document register is the live
+# inventory. Promoted from single-leaf REQ_C75_DOCUMENTED_INFORMATION.
+
+REQ_C75_DOC_CONTROL_POLICY = EvidenceRequirement(
     id            = "req:7.5:document_control_policy",
     control_ref   = "7.5",
     standard_id   = "ISO27001:2022",
     evidence_type = "policy",
     title         = "Documented Information Control Policy",
     trigger_type  = "universal",
-    description   = "Clause 7.5 requires the ISMS to include documented information required by ISO 27001 and information determined by the organization to be necessary. Evidence is a document control policy covering creation, updating, control, retention, and accessibility",
+    description   = "Clause 7.5 requires the ISMS to include documented information required by ISO 27001 and information determined necessary. The policy is the canonical artefact covering creation, updating, control, retention, accessibility. Sibling leaves: document register, applicable document classes scope, program review",
     must_contain  = [
-        ChecklistItem("item:7.5:iso_required_docs","ISO 27001:2022 required documented information enumerated", "must", False, "Clause 7.5 — documented information required by this document"),
-        ChecklistItem("item:7.5:org_defined",     "Organization-determined necessary documented information identified", "must", False, "Clause 7.5 — necessary for the effectiveness"),
-        ChecklistItem("item:7.5:creation_update", "Creation and update process (identification, format, review, approval)", "must", False, "Clause 7.5.2 — creating and updating"),
-        ChecklistItem("item:7.5:control",         "Control of documented information (distribution, access, retrieval, retention, disposition)", "must", False, "Clause 7.5.3 — control of documented information"),
-        ChecklistItem("item:7.5:legibility",      "Protection from loss of legibility, loss of integrity, unauthorised use", "must", False, "Clause 7.5.3 — protected"),
-        ChecklistItem("item:7.5:external_docs",   "Control of documented information of external origin determined necessary", "must", False, "Clause 7.5.3 — control external origin"),
+        ChecklistItem("item:7.5:iso_required_docs", "ISO 27001:2022 required documented information enumerated", "must", False, "Clause 7.5 — documented information required by this document"),
+        ChecklistItem("item:7.5:org_defined",       "Organisation-determined necessary documented information identified", "must", False, "Clause 7.5 — necessary for the effectiveness"),
+        ChecklistItem("item:7.5:creation_update",   "Creation and update process (identification, format, review, approval)", "must", False, "Clause 7.5.2 — creating and updating"),
+        ChecklistItem("item:7.5:control",           "Control of documented information (distribution, access, retrieval, retention, disposition)", "must", False, "Clause 7.5.3 — control of documented information"),
+        ChecklistItem("item:7.5:legibility",        "Protection from loss of legibility, loss of integrity, unauthorised use", "must", False, "Clause 7.5.3 — protected"),
+        ChecklistItem("item:7.5:external_docs",    "Control of documented information of external origin determined necessary", "must", False, "Clause 7.5.3 — control external origin"),
     ],
     should_contain= [
-        ChecklistItem("item:7.5:format_standards","Format standards for ISMS documents (templates, naming)", "should", False, "Consistency"),
-        ChecklistItem("item:7.5:accessibility",   "Accessibility provisions for personnel needing documents", "should", False, "Usability"),
+        ChecklistItem("item:7.5:format_standards",  "Format standards for ISMS documents (templates, naming)", "should", False, "Consistency"),
+        ChecklistItem("item:7.5:accessibility",     "Accessibility provisions for personnel needing documents", "should", False, "Usability"),
+    ],
+)
+
+REQ_C75_DOCUMENT_REGISTER = EvidenceRequirement(
+    id            = "req:7.5:isms_document_register",
+    control_ref   = "7.5",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "ISMS Document Register",
+    trigger_type  = "universal",
+    description   = "Per-document record — every controlled ISMS document with owner, version, approval date, next review date. The live inventory that proves the policy is being applied. Annual refresh (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:7.5:reg_doc_id",        "Unique document identifier per row", "must", False, "Audit defensibility"),
+        ChecklistItem("item:7.5:reg_title",         "Document title per row", "must", False, "Discoverability"),
+        ChecklistItem("item:7.5:reg_owner",         "Document owner per row", "must", False, "Accountability"),
+        ChecklistItem("item:7.5:reg_version",       "Current version per row", "must", False, "Clause 7.5.3 — control"),
+        ChecklistItem("item:7.5:reg_approval_date", "Last approval date per row", "must", False, "Currency"),
+        ChecklistItem("item:7.5:reg_next_review",   "Next review date per row (drives staleness alerts)", "must", False, "Currency"),
+        ChecklistItem("item:7.5:reg_classification","Information classification per row (cross-link to A.5.12)", "must", False, "Clause 7.5.3 — protected"),
+    ],
+    should_contain= [
+        ChecklistItem("item:7.5:reg_retention",     "Retention period per row (cross-link to A.5.33 / A.5.34)", "should", False, "Clause 7.5.3 — retention"),
+    ],
+)
+
+REQ_C75_APPLICABLE_CLASSES_SCOPE = EvidenceRequirement(
+    id            = "req:7.5:applicable_document_classes_scope",
+    control_ref   = "7.5",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "scope_note",
+    title         = "Applicable ISMS Document Classes Scope",
+    trigger_type  = "universal",
+    description   = "The upstream that bounds the register — which document classes are 'ISMS documented information' (ISO-required, org-determined-necessary) vs incidental",
+    must_contain  = [
+        ChecklistItem("item:7.5:scope_iso_required","ISO 27001:2022-required document classes enumerated (scope statement, policy, SoA, risk register, audit programme, etc.)", "must", False, "Clause 7.5 — required by this document"),
+        ChecklistItem("item:7.5:scope_org_determined","Organisation-determined classes enumerated (procedures, standards, work instructions)", "must", False, "Clause 7.5 — necessary for the effectiveness"),
+        ChecklistItem("item:7.5:scope_external",    "External-origin classes in scope (regulator guidance, supplier policies referenced, framework docs)", "must", False, "Clause 7.5.3 — external origin"),
+    ],
+    should_contain= [
+        ChecklistItem("item:7.5:scope_exclusions",  "Exclusions stated explicitly (e.g. operational logs not classified as documented information)", "should", False, "Defensible bounding"),
+    ],
+)
+
+REQ_C75_PROGRAM_REVIEW = EvidenceRequirement(
+    id              = "req:7.5:document_control_program_review",
+    control_ref     = "7.5",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Document Control Program Review",
+    trigger_type    = "universal",
+    description     = "Annual verification that the policy is being applied, the register is current, stale documents are surfaced and refreshed (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:7.5:rev_date",          "Review date within the planned interval", "must", False, "Clause 7.5 — periodic"),
+        ChecklistItem("item:7.5:rev_reviewer",      "Reviewer identity (ISMS Manager + document-control lead)", "must", False, "Accountability"),
+        ChecklistItem("item:7.5:rev_currency",      "Register currency check — every row reviewed; next-review dates met or rescheduled", "must", False, "Cross-leaf coherence"),
+        ChecklistItem("item:7.5:rev_stale_sweep",   "Stale-document sweep — overdue review dates surfaced; refresh or retire decisions made", "must", False, "Drift detection"),
+        ChecklistItem("item:7.5:rev_coverage",      "Coverage check — every in-scope document class has at least one register entry", "must", False, "Cross-leaf coherence"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:7.5:rev_next_date",     "Next planned review date stated", "should", False, "Planning"),
     ],
 )
 
@@ -11872,14 +12525,57 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_C53_ROLES_CHANGE_RECORD,
     REQ_C53_PROGRAM_REVIEW,
     # ── End batch 24 ─────────────────────────────────────────────────────────
-    REQ_C611_RISK_OPPORTUNITY_PLANNING,
-    REQ_C62_SECURITY_OBJECTIVES,
-    REQ_C63_PLANNING_OF_CHANGES,
-    REQ_C71_RESOURCES,
-    REQ_C72_COMPETENCE,
-    REQ_C73_AWARENESS,
-    REQ_C74_COMMUNICATION,
-    REQ_C75_DOCUMENTED_INFORMATION,
+    # ── Batch 25 (2026-06-02) — chapters 6 + 7 close-out 10-pack ─────────────
+    # 6.1.1 op_process 4-leaf
+    REQ_C611_PLANNING_PROCEDURE,
+    REQ_C611_ACTION_REGISTER,
+    REQ_C611_APPLICABLE_INPUTS_SCOPE,
+    REQ_C611_PROGRAM_REVIEW,
+    # 6.1.2 op_process 4-leaf — primary REQ_RISK_ASSESSMENT listed at top of file
+    REQ_C612_RISK_REGISTER,
+    REQ_C612_METHODOLOGY_SCOPE,
+    REQ_C612_PROGRAM_REVIEW,
+    # 6.1.3 op_process 4-leaf — primary REQ_RISK_TREATMENT listed at top of file
+    # (SoA is a distinct sibling leaf, not a should_contain item)
+    REQ_C613_SOA,
+    REQ_C613_METHODOLOGY_SCOPE,
+    REQ_C613_PROGRAM_REVIEW,
+    # 6.2 records_program 4-leaf
+    REQ_C62_OBJECTIVES_REGISTER,
+    REQ_C62_SETTING_PROCEDURE,
+    REQ_C62_APPLICABLE_FUNCTIONS_SCOPE,
+    REQ_C62_PROGRAM_REVIEW,
+    # 6.3 op_process 4-leaf
+    REQ_C63_CHANGE_PROCEDURE,
+    REQ_C63_CHANGE_REGISTER,
+    REQ_C63_APPLICABLE_CHANGE_TYPES_SCOPE,
+    REQ_C63_PROGRAM_REVIEW,
+    # 7.1 records_program 4-leaf
+    REQ_C71_RESOURCES_RECORD,
+    REQ_C71_DETERMINATION_PROCEDURE,
+    REQ_C71_APPLICABLE_CATEGORIES_SCOPE,
+    REQ_C71_PROGRAM_REVIEW,
+    # 7.2 records_program 4-leaf
+    REQ_C72_COMPETENCE_RECORD,
+    REQ_C72_DETERMINATION_PROCEDURE,
+    REQ_C72_APPLICABLE_ROLES_SCOPE,
+    REQ_C72_PROGRAM_REVIEW,
+    # 7.3 op_process 4-leaf
+    REQ_C73_AWARENESS_PROGRAMME,
+    REQ_C73_COMPLETION_REGISTER,
+    REQ_C73_APPLICABLE_AUDIENCE_SCOPE,
+    REQ_C73_PROGRAM_REVIEW,
+    # 7.4 op_process 4-leaf
+    REQ_C74_COMMUNICATION_PROCEDURE,
+    REQ_C74_EVENT_REGISTER,
+    REQ_C74_APPLICABLE_SCOPE,
+    REQ_C74_PROGRAM_REVIEW,
+    # 7.5 policy_program 4-leaf
+    REQ_C75_DOC_CONTROL_POLICY,
+    REQ_C75_DOCUMENT_REGISTER,
+    REQ_C75_APPLICABLE_CLASSES_SCOPE,
+    REQ_C75_PROGRAM_REVIEW,
+    # ── End batch 25 ─────────────────────────────────────────────────────────
     REQ_C81_OPERATIONAL_PLANNING,
     REQ_C82_OPERATIONAL_RISK_ASSESSMENT,
     REQ_C83_OPERATIONAL_RISK_TREATMENT,
