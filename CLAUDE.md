@@ -155,7 +155,7 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260601_1430_b23_with_cases.csv (132 cases — 21 core
+- Most recent: results/eval_20260602_b24.csv (139 cases — 21 core
   + 18 feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf
   + 5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
@@ -169,9 +169,10 @@ with d.session() as s:
   + 3 Phase B A.5.3x close-out 3-pack records_program
   + 7 Phase B A.6 People Controls 7-pack
   + 14 Phase B A.7 Physical Controls 14-pack
-  + 33 Phase B A.8 Technological Controls 33-pack)
-- Score: 130/132 PASS, 0 WARN, 2 FAIL on 2026-06-01 (#24 + #25 known-stale).
-  Clean-run upper bound is 130/132. Some runs may dip due to #3/#21 stochasticity
+  + 33 Phase B A.8 Technological Controls 33-pack
+  + 7 Phase B ISMS chapters 4+5 close-out 7-pack)
+- Score: 137/139 PASS target on 2026-06-02 (#24 + #25 known-stale).
+  Clean-run upper bound is 137/139. Some runs may dip due to #3/#21 stochasticity
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -369,6 +370,23 @@ with d.session() as s:
   legal_jurisdiction, A.5.33 proc_pii_overlay; new owner MUST + 4th
   SHOULD pims_alignment encode the ISO/IEC 27701 PIMS extension
   where in scope)
+- Cases 133-139 lock in: Phase B ISMS chapters 4+5 close-out 7-pack
+  (batch 24, 2026-06-02; 7 controls × 4 leaves = 28 new evidence
+  requirements; closes ISMS chapters 4 + 5). FIRST management-system
+  clauses (vs Annex A controls) promoted to 4-leaf. Spine mix:
+  2×records_program (4.1+4.2 register-as-primary) + 5×policy_program
+  (4.3/4.4/5.1/5.2/5.3 with scope/manual/directive/policy/matrix as
+  primary). Primary-leaf ids preserved: req:4.3:isms_scope +
+  req:5.2:information_security_policy + all item:4.3:* / item:5.2:* ids
+  (anchor REQs since 2026-05-22). NEW PREREQUISITE STEP for ISMS clauses:
+  workbook_importer doesn't cover clauses 4-10, so posture_controls rows
+  must be SEEDED before engine surface can fire (rows for 4.1-4.4 missing
+  entirely on Arion; 5.1-5.3 existed but inactive). Seeded with
+  finding='OFI' matching Arion's pre-ISMS narrative (verbal commitment,
+  informal scope notes, privacy policy in place, CISO appointed; no
+  formal ISMS artefacts). Engine NC 0/4 surfaces in Stage-2 for all 7
+  (engine NC ≠ live OFI). Same posture-seed step needed for batches 25 +
+  26 (18 more ISMS clauses across chapters 6-10)
 - Prior known-stale cases (#2, #3, #4, #24, #25, #28) restored to PASS on
   2026-05-25 via Path A: replayed status_before from posture_status_log to
   revert the 27 Stage-1-driven finding mutations, and stripped the offending

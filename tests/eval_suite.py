@@ -65,6 +65,91 @@ class EvalResult:
 
 EVAL_CASES = [
 
+    # ── Phase B batch 24 (2026-06-02) — chapters 4 + 5 close-out 7-pack ────
+    # First ISMS management-system clauses promoted to 4-leaf. Spine mix:
+    # 2×records_program (4.1/4.2 register-as-primary) + 5×policy_program
+    # (4.3/4.4/5.1/5.2/5.3 — scope/manual/directive/policy/matrix as primary).
+    # Required posture seed: workbook didn't import rows for 4.1-4.4; rows for
+    # 5.1-5.3 existed but inactive. Live posture set to OFI on all 7 (matches
+    # Arion's pre-ISMS narrative). Engine NC 0/4 surfaces for all 7 in Stage-2.
+
+    EvalCase(
+        id=139,
+        query="pending engine verdict for 4.1",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "isms_context"],
+        expected_refs=["4.1"], expected_type="posture_check",
+        must_contain=["4.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 4.1 (Understanding context) — records_program 4-leaf: issues_register + identification_framework + applicable_domains_scope + program_review (365d). First ISMS clause of batch 24 (chapters 4+5 close-out 7-pack).",
+    ),
+
+    EvalCase(
+        id=138,
+        query="pending engine verdict for 4.2",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "isms_parties"],
+        expected_refs=["4.2"], expected_type="posture_check",
+        must_contain=["4.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 4.2 (Interested parties) — records_program 4-leaf: parties_register + identification_framework + applicable_domains_scope + program_review (365d). Parallel structure to 4.1.",
+    ),
+
+    EvalCase(
+        id=137,
+        query="pending engine verdict for 4.3",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "isms_scope"],
+        expected_refs=["4.3"], expected_type="posture_check",
+        must_contain=["4.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 4.3 (ISMS scope) — policy_program 4-leaf: isms_scope (primary, id preserved) + scope_methodology + scope_change_record + scope_program_review (365d). Primary-leaf id preserved: req:4.3:isms_scope.",
+    ),
+
+    EvalCase(
+        id=136,
+        query="pending engine verdict for 4.4",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "isms_manual"],
+        expected_refs=["4.4"], expected_type="posture_check",
+        must_contain=["4.4", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 4.4 (ISMS itself) — policy_program 4-leaf: isms_manual + process_map + manual_change_record + program_review (365d). Process map is a distinct second leaf (not just a should_contain item).",
+    ),
+
+    EvalCase(
+        id=135,
+        query="pending engine verdict for 5.1",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "leadership"],
+        expected_refs=["5.1"], expected_type="posture_check",
+        must_contain=["5.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 5.1 (Leadership commitment) — policy_program 4-leaf: leadership_directive + engagement_framework + reaffirmation_record + program_review (365d). Reaffirmation_record is the lifecycle-end variant — covers turnover and currency.",
+    ),
+
+    EvalCase(
+        id=134,
+        query="pending engine verdict for 5.2",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "isp"],
+        expected_refs=["5.2"], expected_type="posture_check",
+        must_contain=["5.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 5.2 (InfoSec policy) — policy_program 4-leaf: information_security_policy (primary, id preserved) + approval_record + communication_evidence + program_review (365d). Primary-leaf id preserved: req:5.2:information_security_policy. Communication evidence is a distinct leaf (not a should_contain item) — 'approved but not communicated' is a common audit finding.",
+    ),
+
+    EvalCase(
+        id=133,
+        query="pending engine verdict for 5.3",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "isms_roles"],
+        expected_refs=["5.3"], expected_type="posture_check",
+        must_contain=["5.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 5.3 (ISMS roles & authorities) — policy_program 4-leaf: roles_matrix + raci_framework + roles_change_record + program_review (365d). A.5.2 cross-check baked into the matrix and the review (5.3 = management-system roles; A.5.2 = operational roles).",
+    ),
+
     EvalCase(
         id=1, query="what are our access rights gaps?",
         tags=["gap", "core", "nc"],
