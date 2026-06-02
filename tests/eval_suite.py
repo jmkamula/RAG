@@ -65,6 +65,105 @@ class EvalResult:
 
 EVAL_CASES = [
 
+    # ── Phase B batch 26 (2026-06-02) — chapters 8 + 9 + 10 close-out 8-pack ──
+    # FINAL ISO 27001 BATCH. ISMS Operation (chapter 8) + Performance Evaluation
+    # (chapter 9) + Improvement (chapter 10). Spine: all 8×op_process — most
+    # uniform single-batch spine. Primary-leaf ids preserved for 9.2 + 9.3
+    # anchor REQs (req:9.2:internal_audit_programme, req:9.3:management_review).
+    # 8.3 freshness=180 (operational tempo); 9.1 measurement record freshness=90
+    # (quarterly tempo) — both faster than the standard 365d on review leaves.
+    # Posture-seed step: 7 rows inserted (9.2 already had an active OFI row);
+    # all 8 engine NC 0/4 surface in Stage-2.
+    # ISO 27001 ISMS clauses now fully closed (25/25 leaf-level multi-leaf).
+
+    EvalCase(
+        id=157,
+        query="pending engine verdict for 8.1",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "operational_planning"],
+        expected_refs=["8.1"], expected_type="posture_check",
+        must_contain=["8.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 8.1 (Operational planning) — op_process 4-leaf: planning_procedure + execution_register + applicable_processes_scope + program_review (365d). FIRST clause of batch 26 — closes ISO 27001 batch.",
+    ),
+
+    EvalCase(
+        id=156,
+        query="pending engine verdict for 8.2",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "operational_risk_assessment"],
+        expected_refs=["8.2"], expected_type="posture_check",
+        must_contain=["8.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 8.2 (Operational risk assessment) — op_process 4-leaf: assessment_record + trigger_procedure + applicable_scope + program_review (365d). Cadence + significant-change-trigger split is the operational distinction from 6.1.2.",
+    ),
+
+    EvalCase(
+        id=155,
+        query="pending engine verdict for 8.3",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "operational_treatment"],
+        expected_refs=["8.3"], expected_type="posture_check",
+        must_contain=["8.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 8.3 (Operational treatment) — op_process 4-leaf: treatment_record + execution_procedure + applicable_plan_scope + program_review (freshness=180 — operational tempo). Faster cadence than typical 365d review reflects the day-to-day nature of treatment execution.",
+    ),
+
+    EvalCase(
+        id=154,
+        query="pending engine verdict for 9.1",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "monitoring"],
+        expected_refs=["9.1"], expected_type="posture_check",
+        must_contain=["9.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 9.1 (Monitoring + measurement) — op_process 4-leaf: monitoring_procedure + measurement_record (freshness=90 — quarterly tempo) + applicable_scope + program_review (365d). FIRST clause with freshness=90 in the ISMS batch — measurement signals decay fastest.",
+    ),
+
+    EvalCase(
+        id=153,
+        query="pending engine verdict for 9.2",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "internal_audit"],
+        expected_refs=["9.2"], expected_type="posture_check",
+        must_contain=["9.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 9.2 (Internal audit) — op_process 4-leaf: internal_audit_programme (primary, id preserved) + audit_execution_record + coverage_scope + program_review (365d). Primary-leaf id preserved: req:9.2:internal_audit_programme. Cycle-coverage scope leaf is new — surveillance auditors specifically look for it.",
+    ),
+
+    EvalCase(
+        id=152,
+        query="pending engine verdict for 9.3",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "management_review"],
+        expected_refs=["9.3"], expected_type="posture_check",
+        must_contain=["9.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 9.3 (Management review) — op_process 4-leaf: management_review_minutes (primary, id preserved; freshness=365 — annual minimum) + review_procedure + applicable_inputs_outputs_scope + program_review (365d). Primary-leaf id preserved: req:9.3:management_review. Inputs/outputs scope encodes 9.3.2 a-g MUST inputs at scope level.",
+    ),
+
+    EvalCase(
+        id=151,
+        query="pending engine verdict for 10.1",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "continual_improvement"],
+        expected_refs=["10.1"], expected_type="posture_check",
+        must_contain=["10.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 10.1 (Continual improvement) — op_process 4-leaf: improvement_procedure + action_register + applicable_triggers_scope + program_review (365d). 10.1/10.2 boundary explicit in scope leaf — observations route here, NCs route to 10.2.",
+    ),
+
+    EvalCase(
+        id=150,
+        query="pending engine verdict for 10.2",
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "nc_ca"],
+        expected_refs=["10.2"], expected_type="posture_check",
+        must_contain=["10.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
+                          "I need more information", "could you clarify"],
+        notes="Locks clause 10.2 (NC + corrective action) — op_process 4-leaf: nc_ca_procedure + nc_register + applicable_nc_sources_scope + program_review (365d). FINAL clause of ISO 27001 — completes the ISMS clauses arc started by case #149 (clause 6.1.1) in batch 25. Root-cause-quality + recurrence checks baked into program review.",
+    ),
+
     # ── Phase B batch 25 (2026-06-02) — chapters 6 + 7 close-out 10-pack ──
     # ISMS planning (chapter 6) + support (chapter 7). Spine mix: 6×op_process
     # (6.1.1/6.1.2/6.1.3/6.3/7.3/7.4) + 3×records_program (6.2/7.1/7.2) +

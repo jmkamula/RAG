@@ -155,7 +155,7 @@ with d.session() as s:
 ```
 
 ## Eval Baseline
-- Most recent: results/eval_20260602_b25.csv (149 cases — 21 core
+- Most recent: results/eval_20260602_b26.csv (157 cases — 21 core
   + 18 feature-locked + 2 engine-NC/posture-discipline + 4 calibration multi-leaf
   + 5 Phase B records + 5 Phase B policy_program + 5 Phase B op_process supplier
   + 2 Phase B op_process incident family + 1 Phase B op_process threat-intel +
@@ -171,9 +171,10 @@ with d.session() as s:
   + 14 Phase B A.7 Physical Controls 14-pack
   + 33 Phase B A.8 Technological Controls 33-pack
   + 7 Phase B ISMS chapters 4+5 close-out 7-pack
-  + 10 Phase B ISMS chapters 6+7 close-out 10-pack)
-- Score: 147/149 PASS target on 2026-06-02 (#24 + #25 known-stale).
-  Clean-run upper bound is 147/149. Some runs may dip due to #3/#21 stochasticity
+  + 10 Phase B ISMS chapters 6+7 close-out 10-pack
+  + 8 Phase B ISMS chapters 8+9+10 close-out 8-pack — ISO 27001 fully closed)
+- Score: 155/157 PASS target on 2026-06-02 (#24 + #25 known-stale).
+  Clean-run upper bound is 155/157. Some runs may dip due to #3/#21 stochasticity
   stochasticity; cases #3 + #21 also occasionally fail on LLM citation-list
   position — re-runs pass, not known-stale):
   - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
@@ -371,6 +372,17 @@ with d.session() as s:
   legal_jurisdiction, A.5.33 proc_pii_overlay; new owner MUST + 4th
   SHOULD pims_alignment encode the ISO/IEC 27701 PIMS extension
   where in scope)
+- Cases 150-157 lock in: Phase B ISMS chapters 8+9+10 close-out 8-pack
+  (batch 26, 2026-06-02; 8 controls × 4 leaves = 24 new evidence requirements;
+  closes ISMS chapters 8 + 9 + 10 — FINAL ISO 27001 BATCH). Most uniform
+  single-batch spine — all 8×op_process. Primary-leaf ids preserved:
+  req:9.2:internal_audit_programme + req:9.3:management_review. NEW
+  freshness conventions: 8.3 review=180d (operational tempo); 9.1
+  measurement_record=90d FIRST freshness=90 in ISMS clauses (faster-data /
+  slower-meta pattern). LOAD-BEARING REGEX BUG FIX in stage1/stage2/
+  acknowledge_chat — control-ref pattern `\d\.\d+` failed on 10.1/10.2;
+  changed to `\d+\.\d+`. **ISO 27001 FULLY CLOSED** — Annex A 93/93 +
+  ISMS clauses 25/25 = 118 multi-leaf. Next: GDPR
 - Cases 140-149 lock in: Phase B ISMS chapters 6+7 close-out 10-pack
   (batch 25, 2026-06-02; 10 controls × 4 leaves = 30 new evidence
   requirements; closes ISMS chapters 6 + 7). Most diverse single-batch

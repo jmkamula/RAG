@@ -68,7 +68,7 @@ _CONTROL_RE = re.compile(
     r"\b("
     r"A\.\d+(?:\.\d+)*"
     r"|Art\.\d+(?:\.\d+[a-z]?)*"
-    r"|\d\.\d+(?:\.\d+)?"
+    r"|\d+\.\d+(?:\.\d+)?"   # ISMS clauses 4.1 … 10.2 — \d+ so '10.x' matches
     r")\b",
 )
 # Optional rationale on rejection.
