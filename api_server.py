@@ -45,7 +45,7 @@ from fastapi import (
     status,
 )
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -2368,6 +2368,132 @@ async def posture_control(
         }
     finally:
         pool.putconn(conn)
+
+
+# =============================================================================
+# ADMIN — GRAPH EXPLORER (internal debug, /graph page)
+# =============================================================================
+
+class CypherRequest(BaseModel):
+    cypher: str
+    params: Optional[dict] = None
+    limit:  Optional[int]  = 500
+
+
+_WRITE_KEYWORDS = (
+    " CREATE ", " MERGE ", " DELETE ", " SET ", " REMOVE ",
+    " DROP ", " DETACH ", " LOAD CSV", " CALL APOC.PERIODIC",
+)
+
+
+def _is_write_cypher(cypher: str) -> bool:
+    upper = " " + cypher.upper().replace("\n", " ") + " "
+    return any(kw in upper for kw in _WRITE_KEYWORDS)
+
+
+@app.post("/api/v1/admin/cypher", tags=["admin"])
+async def admin_cypher(
+    body:     CypherRequest,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """
+    Read-only Cypher passthrough for the /graph debug explorer.
+    Returns {nodes, edges, rows} — graph elements are deduped, rows
+    preserves the per-record shape for tabular results.
+    """
+    expander = getattr(request.app.state, "expander", None)
+    if not expander:
+        raise HTTPException(503, "Neo4j not available")
+
+    cypher = body.cypher.strip()
+    if not cypher:
+        raise HTTPException(400, "Empty cypher")
+    if _is_write_cypher(cypher):
+        raise HTTPException(400, "Read-only endpoint — write keywords detected")
+
+    try:
+        from neo4j.graph import Node, Relationship, Path
+    except ImportError:
+        raise HTTPException(500, "neo4j driver not available")
+
+    driver       = expander._get_driver()
+    nodes_by_id: dict = {}
+    edges_by_id: dict = {}
+    rows:        list = []
+    limit             = max(1, min(int(body.limit or 500), 2000))
+
+    def _capture_node(n):
+        if n is None:
+            return
+        nodes_by_id[n.element_id] = {
+            "id":     n.element_id,
+            "labels": list(n.labels),
+            "props":  dict(n),
+        }
+
+    def _capture_edge(r):
+        if r is None:
+            return
+        _capture_node(r.start_node)
+        _capture_node(r.end_node)
+        edges_by_id[r.element_id] = {
+            "id":     r.element_id,
+            "source": r.start_node.element_id if r.start_node else None,
+            "target": r.end_node.element_id   if r.end_node   else None,
+            "type":   r.type,
+            "props":  dict(r),
+        }
+
+    def _serialize(val):
+        if isinstance(val, Node):
+            _capture_node(val)
+            return {"_kind": "node", "id": val.element_id}
+        if isinstance(val, Relationship):
+            _capture_edge(val)
+            return {"_kind": "edge", "id": val.element_id}
+        if isinstance(val, Path):
+            for n in val.nodes:
+                _capture_node(n)
+            for r in val.relationships:
+                _capture_edge(r)
+            return {"_kind": "path", "length": len(val)}
+        if isinstance(val, list):
+            return [_serialize(v) for v in val]
+        if isinstance(val, dict):
+            return {k: _serialize(v) for k, v in val.items()}
+        if hasattr(val, "isoformat"):
+            try:
+                return val.isoformat()
+            except Exception:
+                pass
+        return val
+
+    try:
+        with driver.session() as session:
+            result = session.run(cypher, body.params or {})
+            for i, record in enumerate(result):
+                if i >= limit:
+                    break
+                rows.append({k: _serialize(v) for k, v in record.items()})
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(400, f"Cypher error: {e}")
+
+    return {
+        "nodes":     list(nodes_by_id.values()),
+        "edges":     list(edges_by_id.values()),
+        "rows":      rows,
+        "row_count": len(rows),
+        "trace_id":  request.state.trace_id,
+    }
+
+
+@app.get("/graph", include_in_schema=False)
+async def graph_page():
+    """Serve the /graph debug explorer page."""
+    return FileResponse(_static / "graph.html")
 
 
 # =============================================================================

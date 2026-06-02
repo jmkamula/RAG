@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArionComply — Graph Explorer (internal)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dagre@0.8.5/dist/dagre.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f7f4;color:#1a1a18;font-size:13px;line-height:1.5;height:100vh;overflow:hidden}
+
+/* Topbar — matches arioncomply.html */
+.topbar{background:#fff;border-bottom:1px solid #e5e4df;padding:0 20px;height:50px;display:flex;align-items:center;justify-content:space-between;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:14px}
+.logo{font-size:15px;font-weight:600;letter-spacing:-0.3px}
+.logo span{color:#534AB7}
+.crumb{font-size:12px;color:#888780}
+.crumb i{font-size:11px;margin:0 6px}
+.crumb b{color:#3C3489;font-weight:600}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#ccc}
+.status-dot.ok{background:#1D9E75}
+.status-dot.err{background:#E24B4A}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.topbar-input{font-size:12px;padding:5px 10px;border:1px solid #e5e4df;border-radius:6px;background:#f8f7f4;color:#1a1a18;width:200px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.topbar-input:focus{outline:none;border-color:#534AB7;background:#fff}
+
+/* Layout */
+.app{display:grid;grid-template-columns:300px 1fr 340px;height:calc(100vh - 50px)}
+
+/* Left panel — queries */
+.qpanel{background:#fff;border-right:1px solid #e5e4df;display:flex;flex-direction:column;overflow:hidden}
+.qsection{padding:10px 12px 8px;font-size:10px;font-weight:600;color:#B4B2A9;text-transform:uppercase;letter-spacing:0.6px;border-bottom:1px solid #f1efe8}
+.qpresets{padding:8px 10px;display:flex;flex-direction:column;gap:6px}
+.qpreset{display:block;width:100%;text-align:left;padding:8px 10px;background:#f8f7f4;border:1px solid #e5e4df;border-radius:6px;cursor:pointer;font-size:12px;color:#1a1a18;line-height:1.35}
+.qpreset:hover{border-color:#AFA9EC;background:#fff}
+.qpreset b{display:block;color:#3C3489;font-size:11px;font-weight:600;margin-bottom:2px}
+.qpreset i{font-size:11px;color:#888780;font-style:normal}
+
+.qinputs{padding:6px 10px;display:flex;flex-direction:column;gap:6px}
+.qinput-row{display:flex;align-items:center;gap:6px}
+.qinput-label{font-size:11px;color:#5F5E5A;flex:0 0 64px}
+.qinput{flex:1;font-size:12px;padding:5px 8px;border:1px solid #e5e4df;border-radius:5px;background:#fff;font-family:ui-monospace,Menlo,Consolas,monospace}
+.qinput:focus{outline:none;border-color:#534AB7}
+
+.qcypher-wrap{flex:1;display:flex;flex-direction:column;padding:6px 10px 10px;min-height:0}
+.qcypher{flex:1;width:100%;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;padding:8px;border:1px solid #e5e4df;border-radius:6px;background:#fafaf7;resize:none;line-height:1.5;color:#1a1a18}
+.qcypher:focus{outline:none;border-color:#534AB7;background:#fff}
+.qbar{display:flex;gap:6px;margin-top:8px}
+.btn{font-size:12px;padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:500;border:none}
+.btn-primary{background:#534AB7;color:#fff}
+.btn-primary:hover{background:#3C3489}
+.btn-outline{background:#fff;color:#444441;border:1px solid #e5e4df}
+.btn-outline:hover{background:#f8f7f4}
+
+/* Canvas */
+.canvas-wrap{position:relative;background:#fafaf7;overflow:hidden}
+#cy{position:absolute;inset:0}
+.canvas-status{position:absolute;left:14px;top:14px;background:rgba(255,255,255,0.92);border:1px solid #e5e4df;border-radius:6px;padding:6px 12px;font-size:11.5px;color:#5F5E5A;z-index:10;backdrop-filter:blur(4px)}
+.canvas-status b{color:#1a1a18;font-weight:600}
+.canvas-status .err{color:#A32D2D}
+.canvas-toolbar{position:absolute;right:14px;top:14px;background:#fff;border:1px solid #e5e4df;border-radius:6px;padding:4px;z-index:10;display:flex;gap:2px}
+.toolbtn{background:none;border:none;font-size:14px;padding:5px 7px;border-radius:4px;cursor:pointer;color:#5F5E5A}
+.toolbtn:hover{background:#f8f7f4;color:#1a1a18}
+.toolbtn.active{background:#EEEDFE;color:#3C3489}
+
+.legend{position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,0.95);border:1px solid #e5e4df;border-radius:6px;padding:8px 12px;z-index:10;font-size:11px;backdrop-filter:blur(4px);max-width:360px}
+.legend-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.legend-row + .legend-row{margin-top:5px}
+.legend-swatch{display:inline-flex;align-items:center;gap:5px;color:#5F5E5A}
+.legend-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+/* Right panel — details */
+.dpanel{background:#fff;border-left:1px solid #e5e4df;overflow-y:auto;display:flex;flex-direction:column}
+.dempty{padding:30px 16px;text-align:center;color:#9C9A8E;font-size:12px}
+.dempty i{font-size:32px;color:#cdcbc2;display:block;margin-bottom:8px}
+.dhead{padding:14px 16px 10px;border-bottom:1px solid #f1efe8}
+.dlabels{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.dlabel{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;letter-spacing:0.2px}
+.dtitle{font-size:14px;font-weight:600;color:#1a1a18;line-height:1.3;word-break:break-word}
+.dsub{font-size:11px;color:#888780;margin-top:3px;font-family:ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
+.dbtn-row{display:flex;gap:6px;margin-top:8px}
+.dbtn{font-size:11px;padding:4px 10px;background:#f8f7f4;border:1px solid #e5e4df;border-radius:5px;cursor:pointer;color:#1a1a18}
+.dbtn:hover{border-color:#AFA9EC;background:#fff}
+.dprops{padding:10px 16px}
+.dprop{margin-bottom:8px;font-size:12px;line-height:1.4}
+.dprop-k{font-size:10px;color:#888780;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;margin-bottom:2px}
+.dprop-v{color:#1a1a18;word-break:break-word;white-space:pre-wrap;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;background:#fafaf7;padding:5px 8px;border-radius:4px;border:1px solid #f1efe8}
+.dprop-v.long{max-height:140px;overflow-y:auto}
+
+/* Label colour swatches */
+.lbl-RequirementNode{background:#EEEDFE;color:#3C3489}
+.lbl-EvidenceRequirement{background:#FAEEDA;color:#854F0B}
+.lbl-FulfilmentSpec{background:#EAF3DE;color:#3B6D11}
+.lbl-ChecklistItem{background:#FCEBEB;color:#A32D2D}
+.lbl-ClientFact{background:#E6F0FA;color:#1F4F82}
+.lbl-ObligationRule{background:#F5E8FF;color:#5E2F8A}
+.lbl-Event{background:#FFF1E8;color:#9A4A0F}
+.lbl-other{background:#f1efe8;color:#5F5E5A}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo">Arion<span>Comply</span></div>
+    <div class="crumb"><b>Graph Explorer</b><i class="ti ti-chevron-right"></i>internal debug</div>
+    <span class="status-dot" id="hstatus"></span>
+  </div>
+  <div class="topbar-right">
+    <input id="apikey" class="topbar-input" placeholder="X-API-Key" autocomplete="off">
+    <a href="/ui/arioncomply.html" class="btn btn-outline" style="text-decoration:none">← App</a>
+  </div>
+</div>
+
+<div class="app">
+  <!-- LEFT: query panel -->
+  <aside class="qpanel">
+    <div class="qsection">Quick queries</div>
+    <div class="qinputs">
+      <div class="qinput-row">
+        <span class="qinput-label">Control ref</span>
+        <input id="ref" class="qinput" placeholder="A.5.1" value="A.5.1">
+      </div>
+      <div class="qinput-row">
+        <span class="qinput-label">Standard</span>
+        <input id="std" class="qinput" placeholder="ISO27001:2022" value="ISO27001:2022">
+      </div>
+    </div>
+    <div class="qpresets">
+      <button class="qpreset" data-preset="leaves">
+        <b>Control + leaves + items</b>
+        <i>RequirementNode → EvidenceRequirement → ChecklistItem (3 hops)</i>
+      </button>
+      <button class="qpreset" data-preset="xfw">
+        <b>Cross-framework edges</b>
+        <i>IMPLEMENTS / SUPPORTS / REQUIRES_CONTROL neighbourhood</i>
+      </button>
+      <button class="qpreset" data-preset="spec">
+        <b>Fulfilment spec tree</b>
+        <i>SATISFIED_BY + DERIVED_FROM (engine view)</i>
+      </button>
+      <button class="qpreset" data-preset="orphans">
+        <b>Orphan EvidenceRequirements</b>
+        <i>EvidenceRequirement with no REQUIRES_EVIDENCE in</i>
+      </button>
+      <button class="qpreset" data-preset="standards">
+        <b>RequirementNode counts by standard</b>
+        <i>Tabular — no graph</i>
+      </button>
+    </div>
+    <div class="qsection" style="border-top:1px solid #f1efe8">Free Cypher</div>
+    <div class="qcypher-wrap">
+      <textarea id="cypher" class="qcypher" spellcheck="false">MATCH (r:RequirementNode {ref: $ref})-[s:SATISFIED_BY]->(f:FulfilmentSpec)-[req:REQUIRES_EVIDENCE]->(e:EvidenceRequirement)
+OPTIONAL MATCH (e)-[c:MUST_CONTAIN|SHOULD_CONTAIN]->(i:ChecklistItem)
+RETURN r, s, f, req, e, c, i
+LIMIT 500</textarea>
+      <div class="qbar">
+        <button id="run" class="btn btn-primary"><i class="ti ti-player-play"></i> Run</button>
+        <button id="fit" class="btn btn-outline">Fit</button>
+        <button id="clear" class="btn btn-outline">Clear</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CENTER: graph -->
+  <div class="canvas-wrap">
+    <div id="cy"></div>
+    <div class="canvas-status" id="status">Ready · paste an API key, then Run a query</div>
+    <div class="canvas-toolbar">
+      <button class="toolbtn" id="layout-dagre" title="Hierarchical layout">⇣</button>
+      <button class="toolbtn active" id="layout-cose" title="Force-directed layout">✦</button>
+      <button class="toolbtn" id="layout-circle" title="Circle layout">◯</button>
+    </div>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <!-- RIGHT: details -->
+  <aside class="dpanel" id="dpanel">
+    <div class="dempty">
+      <i class="ti ti-pointer"></i>
+      Click a node or edge<br>to see its properties
+    </div>
+  </aside>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+
+// ── API key (persist in localStorage) ──────────────────────────────────────
+const apiInput = $('#apikey');
+apiInput.value = localStorage.getItem('arion_api_key') || 'arion_dev_key_2026';
+apiInput.addEventListener('change', () => localStorage.setItem('arion_api_key', apiInput.value));
+
+// ── Health check ────────────────────────────────────────────────────────────
+fetch('/health').then(r=>r.json()).then(j => {
+  $('#hstatus').className = 'status-dot ' + (j.status === 'ok' ? 'ok' : 'err');
+  $('#hstatus').title = JSON.stringify(j.checks);
+}).catch(()=>{ $('#hstatus').className = 'status-dot err'; });
+
+// ── Label colours (matched to CSS chips above + Cytoscape) ─────────────────
+const LABEL_COLORS = {
+  RequirementNode:     '#7F77DD',
+  EvidenceRequirement: '#EF9F27',
+  FulfilmentSpec:      '#7FB36F',
+  ChecklistItem:       '#E07670',
+  ClientFact:          '#5A8BC2',
+  ObligationRule:      '#9764C0',
+  Event:               '#D38050',
+  ClassificationDimension: '#888780',
+  ClassificationValue: '#aaa8a0',
+};
+const colorFor = labels => LABEL_COLORS[labels[0]] || '#9C9A8E';
+
+const EDGE_COLORS = {
+  REQUIRES_EVIDENCE: '#7F77DD',
+  MUST_CONTAIN:      '#E24B4A',
+  SHOULD_CONTAIN:    '#EF9F27',
+  DERIVED_FROM:      '#bdbab1',
+  SATISFIED_BY:      '#1D9E75',
+  IMPLEMENTS:        '#534AB7',
+  SUPPORTS:          '#7F77DD',
+  REQUIRES_CONTROL:  '#3C3489',
+  DERIVES_FROM:      '#bdbab1',
+};
+const edgeColor = t => EDGE_COLORS[t] || '#bdbab1';
+
+// ── Cytoscape ──────────────────────────────────────────────────────────────
+const cy = cytoscape({
+  container: $('#cy'),
+  wheelSensitivity: 0.2,
+  style: [
+    { selector: 'node', style: {
+        'background-color': 'data(color)',
+        'label':            'data(label)',
+        'color':            '#1a1a18',
+        'font-size':        '10px',
+        'text-valign':      'bottom',
+        'text-margin-y':    4,
+        'text-wrap':        'ellipsis',
+        'text-max-width':   '140px',
+        'width':            28,
+        'height':           28,
+        'border-width':     1,
+        'border-color':     '#fff',
+      }
+    },
+    { selector: 'node:selected', style: {
+        'border-width': 3,
+        'border-color': '#3C3489',
+      }
+    },
+    { selector: 'edge', style: {
+        'curve-style':       'bezier',
+        'line-color':        'data(color)',
+        'target-arrow-color':'data(color)',
+        'target-arrow-shape':'triangle',
+        'width':             1.4,
+        'opacity':           0.75,
+        'label':             'data(label)',
+        'font-size':         '9px',
+        'color':             '#888780',
+        'text-rotation':     'autorotate',
+        'text-background-color': '#fafaf7',
+        'text-background-opacity': 0.8,
+        'text-background-padding': '2px',
+      }
+    },
+    { selector: 'edge:selected', style: {
+        'line-color': '#3C3489',
+        'target-arrow-color': '#3C3489',
+        'width': 2.5,
+        'opacity': 1,
+      }
+    }
+  ],
+});
+
+let currentLayout = 'cose';
+function runLayout() {
+  const opts = {
+    cose:   { name: 'cose', animate: false, idealEdgeLength: 80, nodeOverlap: 12, gravity: 80, randomize: false },
+    dagre:  { name: 'dagre', rankDir: 'LR', spacingFactor: 0.9 },
+    circle: { name: 'circle', radius: 220 },
+  }[currentLayout];
+  cy.layout(opts).run();
+}
+
+['cose','dagre','circle'].forEach(k => {
+  $('#layout-'+k).addEventListener('click', () => {
+    currentLayout = k;
+    document.querySelectorAll('.toolbtn').forEach(b=>b.classList.remove('active'));
+    $('#layout-'+k).classList.add('active');
+    runLayout();
+  });
+});
+
+// ── Node click → details panel ─────────────────────────────────────────────
+cy.on('tap', 'node', e => renderDetails('node', e.target.data('raw')));
+cy.on('tap', 'edge', e => renderDetails('edge', e.target.data('raw')));
+cy.on('tap', e => { if (e.target === cy) renderEmpty(); });
+
+cy.on('dblclick', 'node', async e => {
+  const raw = e.target.data('raw');
+  if (!raw || !raw.id) return;
+  setStatus(`Expanding neighbours of ${raw.props?.id || raw.id}…`);
+  await runCypher(
+    `MATCH (n)-[r]-(m) WHERE elementId(n) = $nid RETURN n, r, m LIMIT 300`,
+    { nid: raw.id },
+    /*append=*/true
+  );
+});
+
+function renderEmpty() {
+  $('#dpanel').innerHTML = `<div class="dempty"><i class="ti ti-pointer"></i>Click a node or edge<br>to see its properties</div>`;
+}
+
+function renderDetails(kind, raw) {
+  if (!raw) { renderEmpty(); return; }
+  const labels = raw.labels || (raw.type ? [raw.type] : []);
+  const chips  = labels.map(l => {
+    const cls = ['RequirementNode','EvidenceRequirement','FulfilmentSpec','ChecklistItem','ClientFact','ObligationRule','Event'].includes(l) ? l : 'other';
+    return `<span class="dlabel lbl-${cls}">${escape(l)}</span>`;
+  }).join('');
+  const props = raw.props || {};
+  const title = kind === 'node'
+    ? (props.title || props.ref || props.id || labels[0] || 'Node')
+    : `${raw.type || 'Edge'}`;
+  const propRows = Object.entries(props).map(([k,v]) => {
+    let str = (typeof v === 'object') ? JSON.stringify(v, null, 2) : String(v);
+    const long = str.length > 120;
+    return `<div class="dprop"><div class="dprop-k">${escape(k)}</div><div class="dprop-v ${long?'long':''}">${escape(str)}</div></div>`;
+  }).join('');
+
+  let extraBtns = '';
+  if (kind === 'node') {
+    extraBtns = `
+      <div class="dbtn-row">
+        <button class="dbtn" onclick="expandNode('${raw.id}')">Expand neighbours</button>
+        <button class="dbtn" onclick="copyId('${raw.id}')">Copy id</button>
+      </div>`;
+  }
+
+  $('#dpanel').innerHTML = `
+    <div class="dhead">
+      <div class="dlabels">${chips}</div>
+      <div class="dtitle">${escape(title)}</div>
+      <div class="dsub">${escape(raw.id || '')}</div>
+      ${extraBtns}
+    </div>
+    <div class="dprops">${propRows || '<div class="dempty" style="padding:14px 0">(no properties)</div>'}</div>
+  `;
+}
+
+window.expandNode = async (id) => {
+  await runCypher(
+    `MATCH (n)-[r]-(m) WHERE elementId(n) = $nid RETURN n, r, m LIMIT 300`,
+    { nid: id },
+    true
+  );
+};
+window.copyId = (id) => navigator.clipboard.writeText(id).then(()=>setStatus(`Copied: ${id}`));
+
+function escape(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function setStatus(msg, isErr) {
+  $('#status').innerHTML = isErr ? `<span class="err">${escape(msg)}</span>` : msg;
+}
+
+// ── Run Cypher ─────────────────────────────────────────────────────────────
+async function runCypher(cypher, params, append=false) {
+  setStatus('Running query…');
+  try {
+    const r = await fetch('/api/v1/admin/cypher', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key':    apiInput.value,
+      },
+      body: JSON.stringify({ cypher, params: params || {} }),
+    });
+    const data = await r.json();
+    if (!r.ok) {
+      setStatus(data.detail || `HTTP ${r.status}`, true);
+      return;
+    }
+    renderGraph(data, append);
+  } catch (e) {
+    setStatus(String(e), true);
+  }
+}
+
+function renderGraph(data, append) {
+  if (!append) cy.elements().remove();
+
+  // dedupe against current graph
+  const existingNodes = new Set(cy.nodes().map(n => n.id()));
+  const existingEdges = new Set(cy.edges().map(e => e.id()));
+
+  const nodes = (data.nodes || []).filter(n => !existingNodes.has(n.id)).map(n => ({
+    group: 'nodes',
+    data:  {
+      id:    n.id,
+      label: nodeLabel(n),
+      color: colorFor(n.labels || []),
+      raw:   n,
+    }
+  }));
+  const edges = (data.edges || []).filter(e => !existingEdges.has(e.id)).map(e => ({
+    group: 'edges',
+    data: {
+      id:     e.id,
+      source: e.source,
+      target: e.target,
+      label:  e.type,
+      color:  edgeColor(e.type),
+      raw:    e,
+    }
+  }));
+
+  cy.add(nodes);
+  cy.add(edges);
+  runLayout();
+  renderLegend();
+
+  const nN = data.nodes?.length || 0;
+  const nE = data.edges?.length || 0;
+  const nR = data.row_count || 0;
+  if (nN === 0 && nE === 0) {
+    setStatus(`<b>${nR}</b> row${nR===1?'':'s'} returned — no graph elements. See console.`);
+    console.table(data.rows);
+  } else {
+    setStatus(`<b>${nN}</b> nodes · <b>${nE}</b> edges · <b>${nR}</b> rows${append?' (appended)':''}`);
+  }
+}
+
+function nodeLabel(n) {
+  const p = n.props || {};
+  return p.ref || p.title || p.id || (n.labels && n.labels[0]) || '?';
+}
+
+function renderLegend() {
+  const labels = new Set();
+  const edgeTypes = new Set();
+  cy.nodes().forEach(n => (n.data('raw')?.labels || []).forEach(l => labels.add(l)));
+  cy.edges().forEach(e => { const t = e.data('raw')?.type; if (t) edgeTypes.add(t); });
+
+  const nodeRow = [...labels].map(l =>
+    `<span class="legend-swatch"><span class="legend-dot" style="background:${colorFor([l])}"></span>${l}</span>`
+  ).join('');
+  const edgeRow = [...edgeTypes].map(t =>
+    `<span class="legend-swatch"><span class="legend-dot" style="background:${edgeColor(t)}"></span>${t}</span>`
+  ).join('');
+
+  $('#legend').innerHTML = (nodeRow ? `<div class="legend-row">${nodeRow}</div>` : '') +
+                          (edgeRow ? `<div class="legend-row">${edgeRow}</div>` : '');
+  if (!nodeRow && !edgeRow) $('#legend').innerHTML = '';
+}
+
+// ── Presets ────────────────────────────────────────────────────────────────
+const PRESETS = {
+  leaves: () => ({
+    cypher: `MATCH (r:RequirementNode {ref: $ref})-[s:SATISFIED_BY]->(f:FulfilmentSpec)-[req:REQUIRES_EVIDENCE]->(e:EvidenceRequirement)
+OPTIONAL MATCH (e)-[c:MUST_CONTAIN|SHOULD_CONTAIN]->(i:ChecklistItem)
+RETURN r, s, f, req, e, c, i
+LIMIT 500`,
+    params: { ref: $('#ref').value.trim() }
+  }),
+  xfw: () => ({
+    cypher: `MATCH (r:RequirementNode {ref: $ref, standard_id: $std})
+OPTIONAL MATCH (r)-[x:IMPLEMENTS|SUPPORTS|REQUIRES_CONTROL]-(o:RequirementNode)
+RETURN r, x, o
+LIMIT 200`,
+    params: { ref: $('#ref').value.trim(), std: $('#std').value.trim() }
+  }),
+  spec: () => ({
+    cypher: `MATCH (r:RequirementNode {ref: $ref})-[s:SATISFIED_BY]->(f:FulfilmentSpec)
+OPTIONAL MATCH (f)-[d:DERIVED_FROM|DERIVES_FROM]-(other)
+RETURN r, s, f, d, other
+LIMIT 200`,
+    params: { ref: $('#ref').value.trim() }
+  }),
+  orphans: () => ({
+    cypher: `MATCH (e:EvidenceRequirement)
+WHERE NOT ( (:FulfilmentSpec)-[:REQUIRES_EVIDENCE]->(e) )
+RETURN e
+LIMIT 200`,
+    params: {}
+  }),
+  standards: () => ({
+    cypher: `MATCH (n:RequirementNode)
+RETURN n.standard_id AS standard, count(*) AS controls
+ORDER BY controls DESC`,
+    params: {}
+  }),
+};
+
+document.querySelectorAll('.qpreset').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const preset = PRESETS[btn.dataset.preset]();
+    $('#cypher').value = preset.cypher;
+    runCypher(preset.cypher, preset.params, false);
+  });
+});
+
+// ── Run / Fit / Clear ──────────────────────────────────────────────────────
+$('#run').addEventListener('click', () => {
+  const params = {
+    ref: $('#ref').value.trim(),
+    std: $('#std').value.trim(),
+  };
+  runCypher($('#cypher').value, params, false);
+});
+$('#fit').addEventListener('click', () => cy.fit(null, 30));
+$('#clear').addEventListener('click', () => { cy.elements().remove(); renderLegend(); setStatus('Ready'); });
+
+// ── Auto-run on load ───────────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  runCypher(PRESETS.leaves().cypher, PRESETS.leaves().params, false);
+});
+</script>
+</body>
+</html>
