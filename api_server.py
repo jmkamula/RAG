@@ -2173,17 +2173,23 @@ async def dashboard_posture(
         set_session(conn, key_info.tenant_id)
         with conn.cursor() as cur:
             cur.execute("""
-                SELECT standard_id, control_ref, finding,
-                       confirmation_status,
-                       LEFT(COALESCE(gap_description,''), 200) AS gap_excerpt,
-                       engine_proposal_status,
-                       engine_proposed_finding,
-                       engine_proposal_reason,
-                       LEFT(COALESCE(action_required,''), 200) AS action_excerpt
-                  FROM posture_controls
-                 WHERE tenant_id = %s::uuid
-                   AND is_active = TRUE
-                 ORDER BY standard_id, control_ref
+                SELECT pc.standard_id, pc.control_ref, pc.finding,
+                       pc.confirmation_status,
+                       LEFT(COALESCE(pc.gap_description,''), 200) AS gap_excerpt,
+                       pc.engine_proposal_status,
+                       pa.finding                        AS engine_proposed_finding,
+                       pa.gap_description                AS engine_proposal_reason,
+                       LEFT(COALESCE(pc.action_required,''), 200) AS action_excerpt
+                  FROM posture_controls pc
+                  LEFT JOIN posture_assertions pa
+                    ON pa.tenant_id   = pc.tenant_id
+                   AND pa.control_ref = pc.control_ref
+                   AND pa.standard_id = pc.standard_id
+                   AND pa.source      = 'engine'
+                   AND pa.status      = 'pending'
+                 WHERE pc.tenant_id = %s::uuid
+                   AND pc.is_active = TRUE
+                 ORDER BY pc.standard_id, pc.control_ref
             """, [key_info.tenant_id])
             rows = cur.fetchall()
 

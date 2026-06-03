@@ -253,41 +253,44 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
 
 
 def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
-    """Write engine verdicts to posture_controls.engine_proposed_* as Stage-2
-    proposals (HITL rollout commit 4). Returns the number of rows written.
+    """Write engine verdicts as Stage-2 proposals. Returns rows written.
 
-    Scope mirrors the in-memory overlay below: only multi-leaf curated specs
-    with determinative postures (NC/OFI/Comply/N/A) are persisted. Single-leaf
-    specs are skipped — posture_controls.finding already represents their
-    state — and indeterminate verdicts (UNKNOWN/deferred/NotApplicable)
-    likewise don't produce a proposal.
+    Phase 1b of the actor-model rework: the verdict itself (finding + reason)
+    is written to `posture_assertions` via set_assertion(source='engine',
+    status='pending', ...). The lifecycle marker (engine_proposal_status =
+    'proposed', engine_proposed_at = NOW()) is still bumped on posture_controls
+    because the Stage-2 approve/reject flow toggles that column to track
+    decided state; the assertion supersession model handles only the verdict,
+    not the lifecycle. Reverse-sync trigger does not fire on engine_proposal_
+    status/at changes — it only watches finding/source/gap_description/
+    confidence — so no trigger loop.
 
-    Idempotent: a row is only re-proposed when (engine_proposed_finding,
-    engine_proposal_reason) changes vs. the last persisted value. This keeps
-    the load path free of write churn while implementing decision 4 of
-    [[hitl-two-stage-approval-design]] — "any engine-input change retriggers
-    a fresh proposal cycle". A reset back to 'proposed' invalidates any prior
-    'approved' on a different verdict, which is exactly the intent.
+    Scope: only determinative postures (NC/OFI/Comply/N/A) are proposed;
+    indeterminate verdicts (UNKNOWN/deferred/NotApplicable) are skipped.
 
-    Snapshots the reason at write time (decision 5): never recomputed on read.
+    Idempotency:
+      * If no pending PA assertion exists AND engine agrees with live posture
+        AND no prior lifecycle decision is in flight, skip. See memory
+        [[engine_agreement_suppression]] — this is acknowledged product debt
+        the user wants fixed upstream; we preserve today's surface behaviour.
+      * If a pending PA assertion already matches (finding + gap_description),
+        skip — supersession with no semantic change is pure churn.
+      * Otherwise write a new pending PA row (superseding any prior) and bump
+        the PC lifecycle marker back to 'proposed'. This realises decision 4
+        of [[hitl-two-stage-approval-design]] — "any engine-input change
+        retriggers a fresh proposal cycle" — even when the lifecycle had
+        previously moved on to approved/rejected.
 
-    Writes commit at the end. Any exception rolls back and the caller falls
-    back to the in-memory overlay alone — the persistence is best-effort.
+    Writes commit at the end. On exception, rolls back and re-raises; caller
+    treats persistence as best-effort.
     """
     if not verdicts:
         return 0
 
+    from rag.posture.assertions import set_assertion, get_pending_proposal
+
     proposable: list[tuple[str, str, str]] = []  # (cid, posture, reason)
     for cid, verdict in verdicts.items():
-        # Per [[stage1-contract-change-path-a-2026-05-25]] the engine owns
-        # posture proposals for every curated spec, regardless of leaf
-        # count. The old `len(leaves) <= 1` gate (rationale: "single-leaf
-        # state is already represented by posture_controls.finding") was
-        # valid when Stage-1 mutated posture; under Path A, Stage-1 only
-        # confirms evidence, and posture_controls.finding may legitimately
-        # differ from the engine's leaf-evaluator view. We now propose for
-        # every determinative verdict and let the `live_finding == posture`
-        # check below suppress no-op writes.
         if verdict.posture in ("UNKNOWN", "deferred", "NotApplicable"):
             continue
         proposable.append((cid, verdict.posture, verdict.reason or ""))
@@ -302,21 +305,16 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
             )
             written = 0
             for cid, posture, reason in proposable:
-                # cid is the node_id form "STD:control_ref" — engine_runner
-                # produces these via spec_builder. Parse out the components
-                # used by posture_controls.
                 if ":" in cid:
-                    *_, control_ref = cid.split(":")
                     standard_id_full = cid.rsplit(":", 1)[0]
+                    control_ref      = cid.rsplit(":", 1)[1]
                 else:
-                    # Defensive fallback: skip unparseable ids.
                     continue
 
                 cur.execute(
                     """
-                    SELECT finding,
-                           engine_proposed_finding, engine_proposal_reason,
-                           engine_proposal_status
+                    SELECT finding, engine_proposal_status,
+                           engine_proposed_finding, engine_proposal_reason
                       FROM posture_controls
                      WHERE tenant_id   = %s
                        AND standard_id = %s
@@ -328,40 +326,62 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
                 )
                 cur_row = cur.fetchone()
                 if cur_row is None:
-                    # No posture_controls row for this engine verdict yet —
-                    # mirrors the overlay's "don't manufacture" rule. The
-                    # writer (commit 2) creates rows on extraction, so this
-                    # only fires for controls the tenant hasn't touched.
                     continue
-                live_finding, cur_finding, cur_reason, cur_status = cur_row
+                live_finding, cur_status, legacy_finding, legacy_reason = cur_row
 
-                # Skip no-op proposals: when the engine agrees with the
-                # tenant's live posture and there's no existing pending
-                # proposal to refresh, there's nothing for Stage-2 to
-                # review. Avoids flooding the queue with auto-Comply rows
-                # for the ~80 controls where engine + intake already align.
-                if live_finding == posture and cur_status in ("none", None):
-                    continue
+                pending = get_pending_proposal(
+                    cur,
+                    tenant_id   = tenant_id,
+                    control_ref = control_ref,
+                    standard_id = standard_id_full,
+                    source      = "engine",
+                )
 
-                if cur_finding == posture and (cur_reason or "") == reason:
-                    # Idempotent — nothing to write.
-                    continue
+                # Resolve the prior-proposal snapshot. PA pending is the new
+                # canonical source; PC.engine_proposed_* is a legacy bridge
+                # for controls whose lifecycle was already approved/rejected
+                # at Phase 1a backfill time (the backfill captured only the
+                # 'proposed' subset, so terminal-lifecycle rows have no PA
+                # artifact). Phase 1c will drop the fallback once those
+                # columns retire.
+                if pending is not None:
+                    prior_finding = pending["finding"]
+                    prior_reason  = pending["gap_description"] or ""
+                else:
+                    prior_finding = legacy_finding
+                    prior_reason  = legacy_reason or ""
 
+                if prior_finding is not None:
+                    if prior_finding == posture and prior_reason == reason:
+                        continue
+                else:
+                    if live_finding == posture and cur_status in ("none", None):
+                        continue
+
+                set_assertion(
+                    cur,
+                    tenant_id       = tenant_id,
+                    control_ref     = control_ref,
+                    standard_id     = standard_id_full,
+                    source          = "engine",
+                    status          = "pending",
+                    finding         = posture,
+                    gap_description = reason,
+                    set_by          = "engine",
+                )
                 cur.execute(
                     """
                     UPDATE posture_controls
-                       SET engine_proposed_finding = %s,
-                           engine_proposed_at      = NOW(),
-                           engine_proposal_status  = 'proposed',
-                           engine_proposal_reason  = %s
+                       SET engine_proposal_status = 'proposed',
+                           engine_proposed_at     = NOW()
                      WHERE tenant_id   = %s
                        AND standard_id = %s
                        AND control_ref = %s
                        AND is_active   = TRUE
                     """,
-                    (posture, reason, tenant_id, standard_id_full, control_ref),
+                    (tenant_id, standard_id_full, control_ref),
                 )
-                written += cur.rowcount
+                written += 1
         pg_conn.commit()
         return written
     except Exception:

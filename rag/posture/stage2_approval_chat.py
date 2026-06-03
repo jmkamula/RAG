@@ -134,21 +134,34 @@ def parse_stage2_intent(query: str) -> Optional[Stage2Intent]:
 # ── Read paths ────────────────────────────────────────────────────────────────
 
 def list_pending_proposals(pg_conn, tenant_id: str) -> list[dict]:
-    """Return all rows with engine_proposal_status='proposed', sorted by
-    standard_id, control_ref. Each row carries the proposed finding, the
-    live finding it would overwrite, and the snapshotted reason."""
+    """Return all controls with a pending engine assertion + lifecycle still
+    'proposed', sorted by standard_id, control_ref. Each row carries the
+    proposed finding, the live finding it would overwrite, and the snapshotted
+    reason.
+
+    Phase 1b: verdict (finding + reason + proposed_at) sourced from
+    posture_assertions; lifecycle filter (engine_proposal_status='proposed')
+    still on posture_controls. The JOIN naturally excludes lingering pending
+    PA rows whose lifecycle moved on to approved/rejected (Phase 1c will
+    supersede those on decision)."""
     with pg_conn.cursor() as cur:
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
         cur.execute(
             """
-            SELECT standard_id, control_ref, finding,
-                   engine_proposed_finding, engine_proposed_at::text,
-                   engine_proposal_reason
-              FROM posture_controls
-             WHERE tenant_id              = %s
-               AND engine_proposal_status = 'proposed'
-               AND is_active              = TRUE
-             ORDER BY standard_id, control_ref
+            SELECT pc.standard_id, pc.control_ref, pc.finding,
+                   pa.finding, pa.set_at::text,
+                   pa.gap_description
+              FROM posture_assertions pa
+              JOIN posture_controls pc
+                ON pa.tenant_id   = pc.tenant_id
+               AND pa.control_ref = pc.control_ref
+               AND pa.standard_id = pc.standard_id
+             WHERE pa.tenant_id              = %s
+               AND pa.source                 = 'engine'
+               AND pa.status                 = 'pending'
+               AND pc.is_active              = TRUE
+               AND pc.engine_proposal_status = 'proposed'
+             ORDER BY pc.standard_id, pc.control_ref
             """,
             (tenant_id,),
         )
@@ -169,18 +182,33 @@ def get_proposal_for_control(
     pg_conn, tenant_id: str, control_ref: str,
 ) -> Optional[dict]:
     """Read the engine proposal state for one control. Returns None if no
-    posture_controls row exists for the (tenant, control_ref)."""
+    posture_controls row exists for the (tenant, control_ref).
+
+    Phase 1b: LEFT JOINs the pending engine assertion. For 'proposed' status,
+    PA pending is the source of finding/reason/proposed_at. For 'approved' or
+    'rejected', PA pending was superseded on decision (or never existed for
+    pre-Phase-1a decisions) — we fall back to PC.engine_proposed_*. The
+    'rejected' branch prefers PC.engine_proposal_reason since the reject flow
+    appends the rationale there."""
     with pg_conn.cursor() as cur:
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
         cur.execute(
             """
-            SELECT id::text, standard_id, finding,
-                   engine_proposed_finding, engine_proposal_status,
-                   engine_proposed_at::text, engine_proposal_reason
-              FROM posture_controls
-             WHERE tenant_id   = %s
-               AND control_ref = %s
-               AND is_active   = TRUE
+            SELECT pc.id::text, pc.standard_id, pc.finding,
+                   pa.finding,           pc.engine_proposed_finding,
+                   pc.engine_proposal_status,
+                   pa.set_at::text,      pc.engine_proposed_at::text,
+                   pa.gap_description,   pc.engine_proposal_reason
+              FROM posture_controls pc
+              LEFT JOIN posture_assertions pa
+                ON pa.tenant_id   = pc.tenant_id
+               AND pa.control_ref = pc.control_ref
+               AND pa.standard_id = pc.standard_id
+               AND pa.source      = 'engine'
+               AND pa.status      = 'pending'
+             WHERE pc.tenant_id   = %s
+               AND pc.control_ref = %s
+               AND pc.is_active   = TRUE
              LIMIT 1
             """,
             (tenant_id, control_ref),
@@ -188,14 +216,25 @@ def get_proposal_for_control(
         row = cur.fetchone()
         if row is None:
             return None
+        (posture_id, standard_id, live_finding,
+         pa_finding, pc_legacy_finding,
+         status,
+         pa_set_at, pc_legacy_at,
+         pa_reason, pc_legacy_reason) = row
+        proposed_finding = pa_finding or pc_legacy_finding
+        proposed_at      = pa_set_at  or pc_legacy_at
+        if status == "rejected":
+            reason = pc_legacy_reason or pa_reason or ""
+        else:
+            reason = pa_reason or pc_legacy_reason or ""
         return {
-            "posture_id":       row[0],
-            "standard_id":      row[1],
-            "live_finding":     row[2],
-            "proposed_finding": row[3],
-            "status":           row[4],
-            "proposed_at":      row[5],
-            "reason":           row[6] or "",
+            "posture_id":       posture_id,
+            "standard_id":      standard_id,
+            "live_finding":     live_finding,
+            "proposed_finding": proposed_finding,
+            "status":           status,
+            "proposed_at":      proposed_at,
+            "reason":           reason,
         }
 
 
@@ -235,13 +274,19 @@ def approve_engine_proposal(
 
             cur.execute(
                 """
-                SELECT id, standard_id, finding,
-                       engine_proposed_finding, engine_proposal_status,
-                       engine_proposal_reason
-                  FROM posture_controls
-                 WHERE tenant_id   = %s
-                   AND control_ref = %s
-                   AND is_active   = TRUE
+                SELECT pc.id, pc.standard_id, pc.finding,
+                       pa.finding, pc.engine_proposal_status,
+                       pa.gap_description
+                  FROM posture_controls pc
+                  LEFT JOIN posture_assertions pa
+                    ON pa.tenant_id   = pc.tenant_id
+                   AND pa.control_ref = pc.control_ref
+                   AND pa.standard_id = pc.standard_id
+                   AND pa.source      = 'engine'
+                   AND pa.status      = 'pending'
+                 WHERE pc.tenant_id   = %s
+                   AND pc.control_ref = %s
+                   AND pc.is_active   = TRUE
                  LIMIT 1
                 """,
                 (tenant_id, control_ref),
@@ -346,12 +391,19 @@ def reject_engine_proposal(
 
             cur.execute(
                 """
-                SELECT id, standard_id, engine_proposed_finding,
-                       engine_proposal_status, engine_proposal_reason
-                  FROM posture_controls
-                 WHERE tenant_id   = %s
-                   AND control_ref = %s
-                   AND is_active   = TRUE
+                SELECT pc.id, pc.standard_id,
+                       pa.finding, pc.engine_proposal_status,
+                       pa.gap_description
+                  FROM posture_controls pc
+                  LEFT JOIN posture_assertions pa
+                    ON pa.tenant_id   = pc.tenant_id
+                   AND pa.control_ref = pc.control_ref
+                   AND pa.standard_id = pc.standard_id
+                   AND pa.source      = 'engine'
+                   AND pa.status      = 'pending'
+                 WHERE pc.tenant_id   = %s
+                   AND pc.control_ref = %s
+                   AND pc.is_active   = TRUE
                  LIMIT 1
                 """,
                 (tenant_id, control_ref),
@@ -367,6 +419,11 @@ def reject_engine_proposal(
                     "standard_id": standard_id,
                 }
 
+            # Keep appending the rejection rationale to posture_controls.engine_
+            # proposal_reason so 'rejected'-state reads in get_proposal_for_control
+            # still surface it. The engine's verdict reason now lives in the
+            # pending PA row's gap_description — read here as prior_reason and
+            # used as the prefix so the audit trail stays single-string.
             new_reason = (
                 f"{prior_reason} | rejected: {rationale[:300]}"
                 if prior_reason
