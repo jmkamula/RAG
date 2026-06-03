@@ -255,31 +255,25 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
 def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
     """Write engine verdicts as Stage-2 proposals. Returns rows written.
 
-    Phase 1b of the actor-model rework: the verdict itself (finding + reason)
-    is written to `posture_assertions` via set_assertion(source='engine',
-    status='pending', ...). The lifecycle marker (engine_proposal_status =
-    'proposed', engine_proposed_at = NOW()) is still bumped on posture_controls
-    because the Stage-2 approve/reject flow toggles that column to track
-    decided state; the assertion supersession model handles only the verdict,
-    not the lifecycle. Reverse-sync trigger does not fire on engine_proposal_
-    status/at changes — it only watches finding/source/gap_description/
-    confidence — so no trigger loop.
+    Phase 1c: the verdict (finding + reason) is written to `posture_assertions`
+    via set_assertion(source='engine', status='pending', ...). The lifecycle
+    marker (engine_proposal_status='proposed', engine_proposed_at=NOW()) is
+    bumped on posture_controls because the Stage-2 approve/reject flow toggles
+    that column to track decided state; the assertion supersession model owns
+    only the verdict, not the lifecycle. Reverse-sync trigger does not fire on
+    engine_proposal_status/at changes — it only watches finding/source/
+    gap_description/confidence — so no trigger loop.
 
     Scope: only determinative postures (NC/OFI/Comply/N/A) are proposed;
     indeterminate verdicts (UNKNOWN/deferred/NotApplicable) are skipped.
 
-    Idempotency:
-      * If no pending PA assertion exists AND engine agrees with live posture
-        AND no prior lifecycle decision is in flight, skip. See memory
-        [[engine_agreement_suppression]] — this is acknowledged product debt
-        the user wants fixed upstream; we preserve today's surface behaviour.
-      * If a pending PA assertion already matches (finding + gap_description),
-        skip — supersession with no semantic change is pure churn.
-      * Otherwise write a new pending PA row (superseding any prior) and bump
-        the PC lifecycle marker back to 'proposed'. This realises decision 4
-        of [[hitl-two-stage-approval-design]] — "any engine-input change
-        retriggers a fresh proposal cycle" — even when the lifecycle had
-        previously moved on to approved/rejected.
+    Idempotency: the skip-no-op check compares the proposed (finding, reason)
+    against the LATEST engine PA row for the control (any status). If they
+    match exactly, the proposal is treated as a no-op and skipped — pending
+    rows skip churn; approved/rejected rows skip the re-propose. The
+    [[engine_agreement_suppression]] product debt is preserved as before:
+    when there's no engine PA history at all AND the engine agrees with the
+    live finding AND lifecycle is 'none', skip.
 
     Writes commit at the end. On exception, rolls back and re-raises; caller
     treats persistence as best-effort.
@@ -287,7 +281,7 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
     if not verdicts:
         return 0
 
-    from rag.posture.assertions import set_assertion, get_pending_proposal
+    from rag.posture.assertions import set_assertion, get_latest_engine_assertion
 
     proposable: list[tuple[str, str, str]] = []  # (cid, posture, reason)
     for cid, verdict in verdicts.items():
@@ -313,8 +307,7 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
 
                 cur.execute(
                     """
-                    SELECT finding, engine_proposal_status,
-                           engine_proposed_finding, engine_proposal_reason
+                    SELECT finding, engine_proposal_status
                       FROM posture_controls
                      WHERE tenant_id   = %s
                        AND standard_id = %s
@@ -327,34 +320,30 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
                 cur_row = cur.fetchone()
                 if cur_row is None:
                     continue
-                live_finding, cur_status, legacy_finding, legacy_reason = cur_row
+                live_finding, cur_status = cur_row
 
-                pending = get_pending_proposal(
+                # PA history is the sole source of prior-proposal truth.
+                # Latest engine-authored assertion (any status) determines
+                # whether this verdict is a no-op repeat. Trigger- and
+                # backfill-written rows are excluded because their
+                # gap_description is sourced from posture_controls.
+                # gap_description (the LIVE narrative) rather than the
+                # engine's verdict reason — same finding but different text
+                # would look like a fresh proposal and cause an approved
+                # control to flip back to 'proposed' on every restart.
+                latest = get_latest_engine_assertion(
                     cur,
-                    tenant_id   = tenant_id,
-                    control_ref = control_ref,
-                    standard_id = standard_id_full,
-                    source      = "engine",
+                    tenant_id            = tenant_id,
+                    control_ref          = control_ref,
+                    standard_id          = standard_id_full,
+                    engine_authored_only = True,
                 )
-
-                # Resolve the prior-proposal snapshot. PA pending is the new
-                # canonical source; PC.engine_proposed_* is a legacy bridge
-                # for controls whose lifecycle was already approved/rejected
-                # at Phase 1a backfill time (the backfill captured only the
-                # 'proposed' subset, so terminal-lifecycle rows have no PA
-                # artifact). Phase 1c will drop the fallback once those
-                # columns retire.
-                if pending is not None:
-                    prior_finding = pending["finding"]
-                    prior_reason  = pending["gap_description"] or ""
-                else:
-                    prior_finding = legacy_finding
-                    prior_reason  = legacy_reason or ""
-
-                if prior_finding is not None:
-                    if prior_finding == posture and prior_reason == reason:
+                if latest is not None:
+                    if latest["finding"] == posture and (latest["gap_description"] or "") == reason:
                         continue
                 else:
+                    # No engine PA history yet. Skip when engine agrees with
+                    # live AND lifecycle is fresh — [[engine_agreement_suppression]].
                     if live_finding == posture and cur_status in ("none", None):
                         continue
 

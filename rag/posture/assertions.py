@@ -210,3 +210,122 @@ def get_pending_proposal(
         "set_at":          row[5],
         "metadata":        row[6],
     }
+
+
+def get_latest_engine_assertion(
+    cur,
+    *,
+    tenant_id:           str,
+    control_ref:         str,
+    standard_id:         str,
+    engine_authored_only: bool = False,
+) -> Optional[dict]:
+    """Return the latest engine assertion for a control, regardless of status.
+
+    Used by readers/writers that need the most recent engine verdict to skip
+    no-op proposals or surface the historical verdict for approved/rejected
+    controls. Ordering: status='pending' (newest proposal) wins over 'active'
+    (live engine finding) wins over 'superseded' (history), with set_at as
+    tiebreaker.
+
+    engine_authored_only filters to assertions whose gap_description is the
+    engine's own verdict text — i.e. excludes rows whose gap_description was
+    snapshotted from PC.gap_description rather than written by the engine:
+      * set_by LIKE 'trigger:%' — reverse-sync trigger on posture_controls
+        snapshots PC.gap_description at the moment PC.finding changes (e.g.
+        Stage-2 approve sets PC.finding but PC.gap_description still carries
+        the prior-source narrative), which doesn't match the engine's reason.
+      * set_by LIKE 'backfill:%' — schema_v29 backfill also captured
+        PC.gap_description into PA, conflating live narrative with engine
+        text (the prior bridge column engine_proposal_reason wasn't
+        available at backfill time).
+    The writer in posture_loader._persist_engine_proposals uses this filter
+    for its no-op check so an old wrong-text 'active' backfill row doesn't
+    outrank the correct superseded engine row in ordering.
+    """
+    where_extra = (
+        " AND set_by NOT LIKE 'trigger:%%' AND set_by NOT LIKE 'backfill:%%'"
+        if engine_authored_only else ""
+    )
+    cur.execute(
+        f"""
+        SELECT id, finding, gap_description, confidence,
+               set_by, set_at, metadata, status
+          FROM posture_assertions
+         WHERE tenant_id   = %s
+           AND control_ref = %s
+           AND standard_id = %s
+           AND source      = 'engine'
+           {where_extra}
+         ORDER BY (status = 'pending')  DESC,
+                  (status = 'active')   DESC,
+                  set_at                DESC
+         LIMIT 1
+        """,
+        (tenant_id, control_ref, standard_id),
+    )
+    row = cur.fetchone()
+    if row is None:
+        return None
+    return {
+        "id":              row[0],
+        "finding":         row[1],
+        "gap_description": row[2],
+        "confidence":      row[3],
+        "set_by":          row[4],
+        "set_at":          row[5],
+        "metadata":        row[6],
+        "status":          row[7],
+    }
+
+
+def supersede_pending_proposal(
+    cur,
+    *,
+    tenant_id:   str,
+    control_ref: str,
+    standard_id: str,
+    source:      str = "engine",
+    decided_by:  str,
+    decision:    str,
+    rationale:   Optional[str] = None,
+) -> Optional[int]:
+    """Supersede the pending proposal row on Stage-2 approve/reject.
+
+    Caller is responsible for the (tenant_id, control_ref, standard_id)
+    triple actually having a pending row — this function is a no-op when no
+    pending row exists, returning None. On success returns the superseded
+    row's id.
+
+    The pending row is NOT replaced by a new row here. For approve, the
+    posture_controls.finding UPDATE in the same transaction fires the
+    reverse-sync trigger which inserts the new active engine PA row; for
+    reject, the live finding doesn't change and no new engine PA row is
+    written — the history is just the pending → superseded transition with
+    the rationale stamped on metadata.
+
+    decision: 'approved' | 'rejected' (free-text — stored in metadata.decision)
+    """
+    cur.execute(
+        """
+        UPDATE posture_assertions
+           SET status        = 'superseded',
+               superseded_at = NOW(),
+               metadata      = COALESCE(metadata, '{}'::jsonb)
+                            || jsonb_build_object(
+                                   'decision',          %s,
+                                   'decided_by',        %s,
+                                   'decided_at',        to_jsonb(NOW()),
+                                   'rejection_rationale', %s
+                               )
+         WHERE tenant_id   = %s
+           AND control_ref = %s
+           AND standard_id = %s
+           AND source      = %s
+           AND status      = 'pending'
+         RETURNING id
+        """,
+        (decision, decided_by, rationale, tenant_id, control_ref, standard_id, source),
+    )
+    row = cur.fetchone()
+    return row[0] if row else None

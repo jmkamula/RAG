@@ -8,11 +8,12 @@ Recognises queries like:
   "what engine verdicts need review?"
 
 Implements the second HITL gate from [[hitl-two-stage-approval-design]]:
-the fulfilment engine writes verdicts to posture_controls.engine_proposed_*
-(commit 4); this surface promotes a proposed verdict to live finding once
-the user approves. Approval flips posture_controls.finding to
-engine_proposed_finding, sets confirmation_status='engine_confirmed', and
-logs the transition with change_kind='engine'.
+the fulfilment engine writes verdicts as pending posture_assertions
+(source='engine', status='pending'); this surface promotes a proposed
+verdict to live finding once the user approves. Approval flips
+posture_controls.finding to the proposed value, sets confirmation_status
+='engine_confirmed', supersedes the pending engine PA row, and logs the
+transition with change_kind='engine'.
 
 Per [[human_in_the_loop_positioning]]: the platform proposes, the client
 decides. Rejection preserves the audit trail (status='rejected'); the live
@@ -141,9 +142,10 @@ def list_pending_proposals(pg_conn, tenant_id: str) -> list[dict]:
 
     Phase 1b: verdict (finding + reason + proposed_at) sourced from
     posture_assertions; lifecycle filter (engine_proposal_status='proposed')
-    still on posture_controls. The JOIN naturally excludes lingering pending
-    PA rows whose lifecycle moved on to approved/rejected (Phase 1c will
-    supersede those on decision)."""
+    still on posture_controls. Phase 1c made approve/reject explicitly
+    supersede the pending PA row, so the JOIN no longer relies on lifecycle
+    drift to filter out completed proposals — but the pc.engine_proposal_
+    status check stays as a belt-and-suspenders guard."""
     with pg_conn.cursor() as cur:
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
         cur.execute(
@@ -184,28 +186,36 @@ def get_proposal_for_control(
     """Read the engine proposal state for one control. Returns None if no
     posture_controls row exists for the (tenant, control_ref).
 
-    Phase 1b: LEFT JOINs the pending engine assertion. For 'proposed' status,
-    PA pending is the source of finding/reason/proposed_at. For 'approved' or
-    'rejected', PA pending was superseded on decision (or never existed for
-    pre-Phase-1a decisions) — we fall back to PC.engine_proposed_*. The
-    'rejected' branch prefers PC.engine_proposal_reason since the reject flow
-    appends the rationale there."""
+    Phase 1c: posture_assertions is now the sole source of truth for the
+    engine verdict. A correlated subquery picks the latest engine PA row
+    regardless of status — pending wins over active wins over superseded —
+    so the function works for 'proposed' (pending row), 'approved' (active
+    row created by the reverse-sync trigger on the approve UPDATE), and
+    'rejected' (superseded row whose metadata holds the rationale).
+    """
     with pg_conn.cursor() as cur:
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
         cur.execute(
             """
             SELECT pc.id::text, pc.standard_id, pc.finding,
-                   pa.finding,           pc.engine_proposed_finding,
                    pc.engine_proposal_status,
-                   pa.set_at::text,      pc.engine_proposed_at::text,
-                   pa.gap_description,   pc.engine_proposal_reason
+                   pa.finding,
+                   pa.set_at::text,
+                   pa.gap_description,
+                   pa.metadata
               FROM posture_controls pc
-              LEFT JOIN posture_assertions pa
-                ON pa.tenant_id   = pc.tenant_id
-               AND pa.control_ref = pc.control_ref
-               AND pa.standard_id = pc.standard_id
-               AND pa.source      = 'engine'
-               AND pa.status      = 'pending'
+              LEFT JOIN LATERAL (
+                  SELECT finding, set_at, gap_description, metadata
+                    FROM posture_assertions
+                   WHERE tenant_id   = pc.tenant_id
+                     AND control_ref = pc.control_ref
+                     AND standard_id = pc.standard_id
+                     AND source      = 'engine'
+                   ORDER BY (status = 'pending')  DESC,
+                            (status = 'active')   DESC,
+                            set_at                DESC
+                   LIMIT 1
+              ) pa ON TRUE
              WHERE pc.tenant_id   = %s
                AND pc.control_ref = %s
                AND pc.is_active   = TRUE
@@ -217,16 +227,18 @@ def get_proposal_for_control(
         if row is None:
             return None
         (posture_id, standard_id, live_finding,
-         pa_finding, pc_legacy_finding,
          status,
-         pa_set_at, pc_legacy_at,
-         pa_reason, pc_legacy_reason) = row
-        proposed_finding = pa_finding or pc_legacy_finding
-        proposed_at      = pa_set_at  or pc_legacy_at
-        if status == "rejected":
-            reason = pc_legacy_reason or pa_reason or ""
-        else:
-            reason = pa_reason or pc_legacy_reason or ""
+         proposed_finding, proposed_at, reason, metadata) = row
+        # On rejected lifecycle the historical pending row carries the
+        # rationale in metadata; surface it inline for display continuity
+        # with the pre-1c behaviour where it was appended to the reason text.
+        if status == "rejected" and metadata:
+            rationale = (metadata or {}).get("rejection_rationale")
+            if rationale:
+                reason = (
+                    f"{reason} | rejected: {rationale[:300]}"
+                    if reason else f"rejected: {rationale[:300]}"
+                )
         return {
             "posture_id":       posture_id,
             "standard_id":      standard_id,
@@ -234,7 +246,7 @@ def get_proposal_for_control(
             "proposed_finding": proposed_finding,
             "status":           status,
             "proposed_at":      proposed_at,
-            "reason":           reason,
+            "reason":           reason or "",
         }
 
 
@@ -249,10 +261,11 @@ def approve_engine_proposal(
     """Promote the engine proposal to live finding for one control.
 
     Effects (single transaction):
-      - posture_controls.finding              ← engine_proposed_finding
+      - posture_controls.finding              ← pending PA finding
       - posture_controls.engine_proposal_status='approved'
       - posture_controls.engine_approved_by / engine_approved_at
       - posture_controls.confirmation_status  ='engine_confirmed'
+      - pending engine PA row → status='superseded' with decision metadata
       - posture_status_log row with change_kind='engine'
 
     Returns:
@@ -325,6 +338,25 @@ def approve_engine_proposal(
                 (proposed_finding, _uuid_or_null(reviewed_by), posture_id),
             )
 
+            # Phase 1c: explicitly supersede the pending engine PA row. The
+            # PC.finding UPDATE above fires the reverse-sync trigger which
+            # supersedes the prior ACTIVE engine PA row (if any) and inserts
+            # a new active row with the approved verdict — but the trigger
+            # never touches pending rows. Leaving the pending row dangling
+            # would cause the next engine sweep to see "no diff" (its skip-
+            # no-op check compares against the pending row) and silently no-
+            # op, hiding any later engine re-evaluation.
+            from rag.posture.assertions import supersede_pending_proposal
+            supersede_pending_proposal(
+                cur,
+                tenant_id   = tenant_id,
+                control_ref = control_ref,
+                standard_id = standard_id,
+                source      = "engine",
+                decided_by  = reviewed_by or "chat_user",
+                decision    = "approved",
+            )
+
             cur.execute(
                 """
                 INSERT INTO posture_status_log (
@@ -375,8 +407,11 @@ def reject_engine_proposal(
     and stamps engine_approved_by / engine_approved_at (the field doubles as
     "decided by / at" — fkey + index already exist). The live finding is
     NOT touched: rejection preserves the audit trail without applying the
-    engine verdict. The rationale text appends to engine_proposal_reason so
-    the snapshot stays useful for review.
+    engine verdict.
+
+    Phase 1c: the rationale is stamped on the pending PA row's metadata
+    (decision='rejected', rejection_rationale=...) as it transitions to
+    'superseded'. PC.engine_proposal_reason was dropped in schema_v30.
 
     Returns:
       {'ok': True,  'control_ref': X, 'proposed_finding': F}
@@ -392,8 +427,7 @@ def reject_engine_proposal(
             cur.execute(
                 """
                 SELECT pc.id, pc.standard_id,
-                       pa.finding, pc.engine_proposal_status,
-                       pa.gap_description
+                       pa.finding, pc.engine_proposal_status
                   FROM posture_controls pc
                   LEFT JOIN posture_assertions pa
                     ON pa.tenant_id   = pc.tenant_id
@@ -411,7 +445,7 @@ def reject_engine_proposal(
             row = cur.fetchone()
             if row is None:
                 return {"ok": False, "reason": "no_proposal"}
-            posture_id, standard_id, proposed_finding, status, prior_reason = row
+            posture_id, standard_id, proposed_finding, status = row
             if not proposed_finding or status != "proposed":
                 return {
                     "ok": False, "reason": "no_proposal",
@@ -419,26 +453,27 @@ def reject_engine_proposal(
                     "standard_id": standard_id,
                 }
 
-            # Keep appending the rejection rationale to posture_controls.engine_
-            # proposal_reason so 'rejected'-state reads in get_proposal_for_control
-            # still surface it. The engine's verdict reason now lives in the
-            # pending PA row's gap_description — read here as prior_reason and
-            # used as the prefix so the audit trail stays single-string.
-            new_reason = (
-                f"{prior_reason} | rejected: {rationale[:300]}"
-                if prior_reason
-                else f"rejected: {rationale[:300]}"
-            )
             cur.execute(
                 """
                 UPDATE posture_controls
                    SET engine_proposal_status = 'rejected',
                        engine_approved_by     = %s::uuid,
-                       engine_approved_at     = NOW(),
-                       engine_proposal_reason = %s
+                       engine_approved_at     = NOW()
                  WHERE id = %s
                 """,
-                (_uuid_or_null(reviewed_by), new_reason, posture_id),
+                (_uuid_or_null(reviewed_by), posture_id),
+            )
+
+            from rag.posture.assertions import supersede_pending_proposal
+            supersede_pending_proposal(
+                cur,
+                tenant_id   = tenant_id,
+                control_ref = control_ref,
+                standard_id = standard_id,
+                source      = "engine",
+                decided_by  = reviewed_by or "chat_user",
+                decision    = "rejected",
+                rationale   = rationale[:300],
             )
 
         pg_conn.commit()
