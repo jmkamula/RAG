@@ -4203,6 +4203,14 @@ REQ_ART33_PROGRAM_REVIEW = EvidenceRequirement(
 # Authority: GDPR Art.15(1)(a-h), Art.15(2-4); Art.12(3) timing, Art.12(5)
 # manifestly-unfounded, Art.12(6) identity verification; EDPB Guidelines
 # 01/2022 on data subject rights — right of access.
+#
+# Phase C batch 1 (2026-06-02) Style v2 alignment — see
+# [[curation-program-full-multi-leaf]] retrospective §"Deferred / Phase C".
+# Brings Art.15 to A.5.16-family modern conventions: register fast-data
+# freshness (180d, high-volume DSAR), structured SLA-met flag on response
+# leaf, bidirectional Art.15↔Art.30 RoPA pair MUSTs on procedure + review.
+# 4 new MUSTs + 2 SHOULD→MUST promotions (identity_check, proc_inventory_link).
+# All 31 existing item-ids preserved.
 
 REQ_DSAR_RESPONSE = EvidenceRequirement(
     id            = "req:Art.15:dsar_response",
@@ -4224,11 +4232,13 @@ REQ_DSAR_RESPONSE = EvidenceRequirement(
         ChecklistItem("item:Art.15:automated_decision",   "Existence of automated decision-making / profiling, with meaningful information on logic and consequences where applicable", "must", True, "Art.15.1.h / Art.22"),
         ChecklistItem("item:Art.15:transfer_safeguards",  "Where data is transferred to a third country or international organisation, the appropriate safeguards under Art.46",          "must", True, "Art.15.2"),
         ChecklistItem("item:Art.15:copy",                 "Copy of the personal data undergoing processing provided to the data subject",          "must", True, "Art.15.3"),
-        ChecklistItem("item:Art.15:timing",               "Responded within one calendar month of receipt (extension flagged where applied)",      "must", True, "Art.12.3"),
+        ChecklistItem("item:Art.15:timing",               "Responded within one calendar month of receipt OR Art.12.3 two-month extension formally applied with notification",      "must", True, "Art.12.3"),
+        # ── Phase C batch 1 (2026-06-02) — Style v2 alignment ─────────────────
+        ChecklistItem("item:Art.15:sla_met",              "Structured SLA-met flag per response — boolean against the Art.12.3 1-month clock (or extended clock where Art.12.3 extension was formally invoked); analogous to A.5.16:rev_sla_met",  "must", True, "Auditor-critical SLA proof — drives the rev_timing aggregation on the review leaf"),
+        ChecklistItem("item:Art.15:identity_check",       "Identity verification step recorded (proportionate to sensitivity per Art.12.6) — modern baseline treats Art.12.6 as MUST not SHOULD when reasonable doubt is the default posture for unauthenticated channels", "must", True, "Art.12.6 (promoted SHOULD→MUST Phase C batch 1)"),
     ],
     should_contain= [
         ChecklistItem("item:Art.15:format",               "Provided in a commonly used electronic format where the request was made electronically", "should", True, "Art.15.3"),
-        ChecklistItem("item:Art.15:identity_check",       "Identity verification step recorded (proportionate to sensitivity per Art.12.6)",        "should", True, "Art.12.6"),
         ChecklistItem("item:Art.15:third_party_redaction","Where other people's rights would be affected, redaction or partial-response justification noted", "should", True, "Art.15.4"),
     ],
 )
@@ -4248,23 +4258,26 @@ REQ_ART15_HANDLING_PROCEDURE = EvidenceRequirement(
         ChecklistItem("item:Art.15:proc_timing",          "One-month timing clock from receipt, with the Art.12.3 two-month extension procedure (when justified, how notified)", "must", True, "Art.12.3"),
         ChecklistItem("item:Art.15:proc_format",          "Default response format (electronic where request was electronic, structured layout for readability)",          "must", True, "Art.15.3"),
         ChecklistItem("item:Art.15:proc_exceptions",      "Exception handling: manifestly unfounded/excessive requests (Art.12.5), and partial response where rights of others apply (Art.15.4)", "must", True, "Art.12.5 / Art.15.4"),
+        # ── Phase C batch 1 (2026-06-02) — Style v2 alignment ─────────────────
+        ChecklistItem("item:Art.15:proc_inventory_link",  "Linkage to the data flow inventory (req:Art.30:data_flow_inventory) — fulfillment cannot operate without knowing where personal data lives; the procedure must name the inventory as the authoritative source",                                                  "must", True, "Art.30 cross-control (promoted SHOULD→MUST Phase C batch 1 — load-bearing for fulfilment)"),
+        ChecklistItem("item:Art.15:proc_identity_pair_30","Bidirectional Art.15 ↔ Art.30 pair MUST — every system listed in the data flow inventory is reachable by DSAR fulfilment, and every system reached by fulfilment is captured in the inventory (closes the silent 'fulfilment queries somewhere RoPA doesn't list' gap)", "must", True, "Art.30 cross-control coherence — analogous to A.5.16/A.5.17 rev_identity_pair MUSTs"),
     ],
     should_contain= [
-        ChecklistItem("item:Art.15:proc_inventory_link",  "Linkage to the data flow inventory (req:Art.30:data_flow_inventory) — fulfillment relies on knowing where personal data lives", "should", True, "Art.30 cross-control"),
         ChecklistItem("item:Art.15:proc_training",        "Front-line staff trained on DSAR recognition and routing (so a request in the wrong channel still reaches the procedure)",     "should", True, "EDPB 01/2022 — operational realism"),
         ChecklistItem("item:Art.15:proc_escalation",      "DPO or legal escalation path for unusual requests (mixed-rights, joint controllers, processor-held data)",                     "should", True, "Operational continuity"),
     ],
 )
 
 REQ_ART15_REGISTER = EvidenceRequirement(
-    id            = "req:Art.15:dsar_register",
-    control_ref   = "Art.15",
-    standard_id   = "GDPR:2016/679",
-    evidence_type = "register",
-    title         = "DSAR Register",
-    trigger_type  = "universal",
-    description   = "Living log of every access request received and its handling. Distinct from the per-event response leaf: the register is the universal record showing the population of requests, status, and timing compliance — auditor-facing evidence that the procedure operates in practice",
-    must_contain  = [
+    id             = "req:Art.15:dsar_register",
+    control_ref    = "Art.15",
+    standard_id    = "GDPR:2016/679",
+    evidence_type  = "register",
+    title          = "DSAR Register",
+    trigger_type   = "universal",
+    description    = "Living log of every access request received and its handling. Distinct from the per-event response leaf: the register is the universal record showing the population of requests, status, and timing compliance — auditor-facing evidence that the procedure operates in practice. Style v2 freshness 180d — high-volume DSAR data, slower than incident-register fast-data (90d) but faster than annual review",
+    freshness_days = 180,
+    must_contain   = [
         ChecklistItem("item:Art.15:reg_received_date",    "Request received date (the start of the Art.12.3 clock) per row",                       "must", True, "Art.12.3 timing"),
         ChecklistItem("item:Art.15:reg_requester",        "Requester identity (verified) or pseudonymous reference where verification used a token",  "must", True, "Art.12.6"),
         ChecklistItem("item:Art.15:reg_scope",            "Scope of the request as understood (full Art.15 / specific data set / repeat copy)",     "must", True, "Operational clarity"),
@@ -4294,11 +4307,13 @@ REQ_ART15_PROCESS_REVIEW = EvidenceRequirement(
         ChecklistItem("item:Art.15:rev_timing",           "Timing metric — percentage within one month, count of extensions used, count of late responses", "must", True, "Art.12.3 evidence"),
         ChecklistItem("item:Art.15:rev_defects",          "Defects identified (late responses, refusals, supervisory-authority complaints) referenced", "must", True, "Defect tracking"),
         ChecklistItem("item:Art.15:rev_corrective",       "Corrective actions to the procedure with owner and target date",                       "must", True, "Closes the loop"),
+        # ── Phase C batch 1 (2026-06-02) — Style v2 alignment ─────────────────
+        ChecklistItem("item:Art.15:rev_identity_pair_30", "Bidirectional Art.15 ↔ Art.30 RoPA pair check — every system the review period's DSARs actually queried is captured in the data flow inventory; every system the inventory lists was reachable when DSARs landed on it (closes the silent inventory-drift gap)",  "must", True, "Art.30 cross-leaf coherence — drops rev_inventory_align SHOULD into MUST shape"),
     ],
     should_contain  = [
         ChecklistItem("item:Art.15:rev_next_date",        "Next planned review date stated",                                                       "should", True, "Planning"),
         ChecklistItem("item:Art.15:rev_training_impl",    "Training implications captured where defects trace to staff awareness",                 "should", True, "EDPB 01/2022 — operational realism"),
-        ChecklistItem("item:Art.15:rev_inventory_align",  "Cross-check that the data flow inventory remains aligned with what fulfillment actually queried", "should", True, "Art.30 cross-leaf coherence"),
+        ChecklistItem("item:Art.15:rev_inventory_align",  "Soft cross-check supplementary to rev_identity_pair_30 — narrative observations on inventory drift between formal pair checks",                                                                                "should", True, "Art.30 cross-leaf coherence (the rev_identity_pair_30 MUST carries the formal check)"),
     ],
 )
 
@@ -6614,6 +6629,15 @@ REQ_A525_DECISION_RECORD = EvidenceRequirement(
 # Authority: ISO 27002:2022 § 5.26 implementation guidance items a–i, with
 # cross-references to § 5.24 (planning), § 5.25 (triage), § 5.27 (lessons),
 # § 5.28 (evidence handling).
+#
+# Phase C batch 1 (2026-06-02) Style v2 alignment — see
+# [[curation-program-full-multi-leaf]] retrospective §"Deferred / Phase C".
+# Brings A.5.26 to A.5.24/A.5.16-style modern conventions: register fast-data
+# freshness (90d), explicit severity-tier matrix + Art.33 72h trigger on
+# procedure, structured SLA-met + GDPR-triggered flags on closure record,
+# Art.33 72h-feasibility audit + bidirectional A.5.25↔A.5.26 pair check on
+# review. 7 new MUSTs + 1 SHOULD→MUST promotion (authority_contacts).
+# All 22 existing item-ids preserved.
 
 REQ_A526_INCIDENT_RESPONSE_PROCEDURE = EvidenceRequirement(
     id            = "req:A.5.26:incident_response_procedure",
@@ -6633,23 +6657,27 @@ REQ_A526_INCIDENT_RESPONSE_PROCEDURE = EvidenceRequirement(
         ChecklistItem("item:A.5.26:action_logging",       "All response decisions and actions logged (for evidence preservation and post-incident review)",                              "must", False, "27002:5.26f"),
         ChecklistItem("item:A.5.26:post_review",          "Post-incident review step required after closure (handoff to A.5.27 lessons-learned)",                                        "must", False, "27002:5.26 — closing + § 5.27"),
         ChecklistItem("item:A.5.26:classification_link", "References incident classification used at triage (links to A.5.25)",                                                          "must", False, "27002:5.25 → 5.26 handoff"),
+        # ── Phase C batch 1 (2026-06-02) — Style v2 alignment ─────────────────
+        ChecklistItem("item:A.5.26:severity_tier_matrix", "Severity-tier matrix defined explicitly (P1/P2/P3 or equivalent, with criteria for each tier and the response cadence each triggers)", "must", False, "27002:5.26 — coordination by severity (was implicit on register; promoted to procedure-level definition)"),
+        ChecklistItem("item:A.5.26:gdpr_72h_trigger_check","Where the incident touches personal data, Art.33 72h notification trigger fires and the breach-notification path activates (links to req:Art.33:breach_notification)", "must", True, "GDPR Art.33.1 / cross-control integration with breach notification"),
+        ChecklistItem("item:A.5.26:authority_contacts",   "Authority/regulator contact list referenced (links to A.5.5) — load-bearing for breach-notification path",                    "must", False, "27002:5.26 — external notification (promoted SHOULD→MUST Phase C batch 1)"),
     ],
     should_contain= [
-        ChecklistItem("item:A.5.26:authority_contacts",   "References authority/regulator contact list (links to A.5.5)",                                                                "should", False, "Some incidents trigger external notification"),
-        ChecklistItem("item:A.5.26:exercise_freq",        "Tabletop or simulation frequency stated (semi-annual or more often)",                                                          "should", False, "Validates the procedure works under pressure"),
+        ChecklistItem("item:A.5.26:exercise_freq",        "Tabletop or simulation frequency stated (semi-annual or more often); A.5.24 is the formal home for the exercise programme",  "should", False, "Validates the procedure works under pressure; cross-link to A.5.24"),
         ChecklistItem("item:A.5.26:nominated_contact",    "Nominated incident-handling contact named (for internal + supplier-side reporting)",                                          "should", False, "27002:5.26 — coordination"),
     ],
 )
 
 REQ_A526_INCIDENT_REGISTER = EvidenceRequirement(
-    id            = "req:A.5.26:incident_register",
-    control_ref   = "A.5.26",
-    standard_id   = "ISO27001:2022",
-    evidence_type = "register",
-    title         = "Information Security Incident Register",
-    trigger_type  = "universal",
-    description   = "A.5.26 expects incidents to be tracked from detection through closure, with the trail of actions preserved. The incident register is the live master record — every incident, its severity, status, owner, and the key lifecycle dates (detection, containment, eradication, recovery, closure) — feeding the periodic IR-program review and the per-incident closure records",
-    must_contain  = [
+    id             = "req:A.5.26:incident_register",
+    control_ref    = "A.5.26",
+    standard_id    = "ISO27001:2022",
+    evidence_type  = "register",
+    title          = "Information Security Incident Register",
+    trigger_type   = "universal",
+    description    = "A.5.26 expects incidents to be tracked from detection through closure, with the trail of actions preserved. The incident register is the live master record — every incident, its severity, status, owner, and the key lifecycle dates (detection, containment, eradication, recovery, closure) — feeding the periodic IR-program review and the per-incident closure records. Fast-data freshness (90d) per Style v2 — an incident register that's a year stale is not a register",
+    freshness_days = 90,
+    must_contain   = [
         ChecklistItem("item:A.5.26:reg_incident_id",     "Each incident captured with a unique identifier (links to A.5.25 triage decision)",                                            "must", False, "27002:5.26 — recording"),
         ChecklistItem("item:A.5.26:reg_severity",        "Severity per row (per the classification scale used at triage)",                                                                "must", False, "27002:5.26 — coordination by severity"),
         ChecklistItem("item:A.5.26:reg_status",          "Status per row (open / contained / eradicated / recovered / closed)",                                                          "must", False, "27002:5.26e"),
@@ -6678,6 +6706,9 @@ REQ_A526_IR_REVIEW = EvidenceRequirement(
         ChecklistItem("item:A.5.26:rev_exercise",        "Tabletop / simulation outcomes reviewed (or scheduled-but-not-yet-run noted)",                                                  "must", False, "27002:5.26 — exercises"),
         ChecklistItem("item:A.5.26:rev_procedure_currency","Procedure currency assessed against threat landscape + new control changes",                                                  "must", False, "27002:5.26 — keep current"),
         ChecklistItem("item:A.5.26:rev_actions",         "Action items captured (e.g. revise containment runbook, refresh contact list, schedule exercise)",                              "must", False, "27002:5.26"),
+        # ── Phase C batch 1 (2026-06-02) — Style v2 alignment ─────────────────
+        ChecklistItem("item:A.5.26:rev_72h_feasibility", "Art.33 72h feasibility audited empirically across the period — count of personal-data incidents, count notified within 72h, root cause of any late notifications (parity with A.5.24:rev_gdpr_72h_feasibility)",  "must", True, "GDPR Art.33.1 — A.5.24 is planning, A.5.26 is the real-incident proof"),
+        ChecklistItem("item:A.5.26:rev_identity_pair_25","Bidirectional A.5.25 ↔ A.5.26 lifecycle pair check — every register row traces back to an A.5.25 triage decision (no orphan incidents) and every escalated triage decision opened an incident (no lost escalations)", "must", False, "Closes the silent A.5.25→A.5.26 handoff gap that 0/1-day reviews can't catch"),
     ],
     should_contain = [
         ChecklistItem("item:A.5.26:rev_benchmark",       "External benchmarking input considered (industry IR-metrics references)",                                                       "should", False, "Audit defensibility"),
@@ -6700,6 +6731,9 @@ REQ_A526_CLOSURE_RECORD = EvidenceRequirement(
         ChecklistItem("item:A.5.26:cls_recovery_valid",  "Recovery validation evidenced (system returned to secure state; verified, not just attempted)",                                  "must", False, "27002:5.26e"),
         ChecklistItem("item:A.5.26:cls_lessons_handoff", "Handoff reference into A.5.27 lessons register",                                                                                "must", False, "27002:5.26 → 5.27"),
         ChecklistItem("item:A.5.26:cls_authoriser",      "Closure authority per record (named role)",                                                                                    "must", False, "Accountability"),
+        # ── Phase C batch 1 (2026-06-02) — Style v2 alignment ─────────────────
+        ChecklistItem("item:A.5.26:cls_sla_met",         "MTTC / MTTR / containment-SLA-met flag per record — structured boolean against the targets stated in the procedure or service catalogue; analogous to A.5.16:rev_sla_met",      "must", False, "Auditor-critical timeliness proof — drives the rev_metrics analysis on the review leaf"),
+        ChecklistItem("item:A.5.26:cls_gdpr_triggered",  "GDPR Art.33 breach-notification trigger flag per record (yes/no with notification reference where yes) — proves the personal-data integration with A.5.26 fires reliably",      "must", True,  "GDPR Art.33.1 / Art.33.5 — pairs with procedure-level gdpr_72h_trigger_check"),
     ],
     should_contain= [
         ChecklistItem("item:A.5.26:cls_external_notif",  "External notifications made per record (regulators, customers, suppliers)",                                                    "should", False, "27002:5.26 — communication"),

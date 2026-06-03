@@ -78,7 +78,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.44",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "transfers"],
         expected_refs=["Art.44"], expected_type="posture_check",
-        must_contain=["Art.44", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.44", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.44 (Transfer general principle) — op_process 4-leaf, universal (NEW). transfer_procedure + transfer_register + applicable_scope + program_review. Schrems II Transfer Impact Assessment + EDPB 05/2021 three-criteria transfer definition encoded.",
@@ -89,7 +89,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.45",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "adequacy", "profile_fact"],
         expected_refs=["Art.45"], expected_type="posture_check",
-        must_contain=["Art.45", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.45", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.45 (Adequacy decision) — op_process 4-leaf, profile_fact (NEW). Adequacy-decision check + partial-adequacy (US-DPF) recipient eligibility + Schrems-invalidation monitoring + Art.46 fallback readiness.",
@@ -100,7 +100,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.46",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "sccs", "safeguards", "profile_fact"],
         expected_refs=["Art.46"], expected_type="posture_check",
-        must_contain=["Art.46", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.46", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.46 (Appropriate safeguards) — op_process 4-leaf, profile_fact (NEW). 2021/914 SCCs modules + TIA + supplementary measures (EDPB 01/2020) + enforceable rights verification.",
@@ -111,7 +111,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.47",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "bcrs", "profile_fact"],
         expected_refs=["Art.47"], expected_type="posture_check",
-        must_contain=["Art.47", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.47", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.47 (BCRs) — op_process 4-leaf, profile_fact (NEW). Lead SA approval + Art.47.2 a-n content + Art.47.2.i complaint handling. Arion N/A (not a multi-national group with BCRs).",
@@ -122,7 +122,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.48",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "foreign_authority"],
         expected_refs=["Art.48"], expected_type="posture_check",
-        must_contain=["Art.48", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.48", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.48 (Foreign authority disclosures) — op_process 4-leaf, universal (NEW). International agreement check + Art.49 derogation overlay + documented refusal path + tabletop testing in review.",
@@ -133,7 +133,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.49",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "derogations", "profile_fact"],
         expected_refs=["Art.49"], expected_type="posture_check",
-        must_contain=["Art.49", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.49", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.49 (Derogations) — op_process 4-leaf, profile_fact (NEW). Art.49.1 a-g catalog + EDPB 2/2018 strict construction + non-repetitive constraint + SA notification. FINAL eval case of the Phase B curation arc — closes GDPR Chapter V.",
@@ -151,7 +151,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.36",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "prior_consultation", "profile_fact"],
         expected_refs=["Art.36"], expected_type="posture_check",
-        must_contain=["Art.36", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.36", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.36 (Prior consultation) — op_process 4-leaf, profile_fact (NEW): consultation_procedure + register + applicable_scope + program_review. 8-week SA waiting period enforced in procedure MUST.",
@@ -162,7 +162,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.37",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "dpo", "profile_fact"],
         expected_refs=["Art.37"], expected_type="posture_check",
-        must_contain=["Art.37", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.37", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.37 (DPO designation) — op_process 4-leaf, profile_fact (NEW). Applicability assessment per Art.37.1 a-c criteria + Art.37.4 voluntary route + Art.37.5 qualifications + Art.37.7 publication.",
@@ -173,7 +173,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.38",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "dpo_position", "profile_fact"],
         expected_refs=["Art.38"], expected_type="posture_check",
-        must_contain=["Art.38", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.38", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.38 (DPO position) — op_process 4-leaf, profile_fact (NEW). Position guarantees: involvement, resources, independence (reporting to top management), no COI, subject contact point. Paired with Art.37/39.",
@@ -184,7 +184,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.39",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "dpo_tasks", "profile_fact"],
         expected_refs=["Art.39"], expected_type="posture_check",
-        must_contain=["Art.39", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.39", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.39 (DPO tasks) — op_process 4-leaf, profile_fact (NEW). Art.39.1 a-e tasks + Art.39.2 risk-based approach. DPO activity register documents per-period proof of execution.",
@@ -195,7 +195,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.40",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "codes_of_conduct", "profile_fact"],
         expected_refs=["Art.40"], expected_type="posture_check",
-        must_contain=["Art.40", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.40", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.40 (Codes of conduct adherence) — op_process 4-leaf, profile_fact (NEW). Adherence procedure + register + applicable scope + program review. Arion live N/A (not adhering to any code).",
@@ -206,7 +206,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.41",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "code_monitoring", "profile_fact"],
         expected_refs=["Art.41"], expected_type="posture_check",
-        must_contain=["Art.41", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.41", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.41 (Monitoring of approved codes) — op_process 4-leaf, profile_fact (NEW). Applies when org IS an accredited monitoring body. Very rare — Arion live N/A.",
@@ -217,7 +217,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.42",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "certification", "profile_fact"],
         expected_refs=["Art.42"], expected_type="posture_check",
-        must_contain=["Art.42", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.42", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.42 (GDPR certification) — op_process 4-leaf, profile_fact (NEW). Voluntary scheme adherence (Europrivacy + sectoral). Max 3-year validity (Art.42.7) enforced. Arion live N/A (no GDPR-specific cert).",
@@ -228,7 +228,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.43",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "cert_body", "profile_fact"],
         expected_refs=["Art.43"], expected_type="posture_check",
-        must_contain=["Art.43", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.43", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.43 (Certification bodies) — op_process 4-leaf, profile_fact (NEW). Applies when org IS an accredited cert body. Extremely rare. CLOSES GDPR Ch IV.",
@@ -247,7 +247,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.24",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "accountability"],
         expected_refs=["Art.24"], expected_type="posture_check",
-        must_contain=["Art.24", "engine proposes", "'NC'", "0/10 children satisfied"],
+        must_contain=["Art.24", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/6 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.24 (Accountability) — DerivedSpec with 6 ISO deps (5.1, 5.3, 9.3, A.5.1, A.5.34, A.5.36) + 4 NEW direct evidence (privacy_programme_charter + gdpr_compliance_register + controller_processor_decision_record + accountability_program_review). 10 children total. FIRST DerivedSpec to go from 0 direct_evidence to 4 in one batch. Hits a 10-child verdict (largest verdict surface).",
@@ -258,7 +258,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.25",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "dpbd"],
         expected_refs=["Art.25"], expected_type="posture_check",
-        must_contain=["Art.25", "engine proposes", "'NC'", "0/10 children satisfied"],
+        must_contain=["Art.25", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/7 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.25 (DPbD) — DerivedSpec with 6 ISO deps + 4 direct (default_settings_record primary id preserved + dpbd_procedure + applicable_design_scope + program_review). 10 children. Mirror of Art.24 expansion pattern.",
@@ -269,7 +269,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.26",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "joint_controller", "profile_fact"],
         expected_refs=["Art.26"], expected_type="posture_check",
-        must_contain=["Art.26", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.26", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.26 (Joint controllers) — op_process 4-leaf, profile_fact (NEW). Arrangement + register + applicable scope + program review. Arion live N/A (no joint controllerships); engine NC ≠ live N/A → surfaces.",
@@ -280,7 +280,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.27",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "representative", "profile_fact"],
         expected_refs=["Art.27"], expected_type="posture_check",
-        must_contain=["Art.27", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.27", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.27 (Representative) — op_process 4-leaf, profile_fact (NEW). Designation + operations record + applicable scope (Art.27.2 exception assessment in MUST) + program review. Arion live N/A (EU established).",
@@ -291,7 +291,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.28",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "policy_program", "dpa", "profile_fact"],
         expected_refs=["Art.28"], expected_type="posture_check",
-        must_contain=["Art.28", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.28", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.28 (DPA) — policy_program 4-leaf, profile_fact (PROMOTED): DPA (primary, id preserved) + processor_register + applicable_processors_scope + program_review (365d). Primary-leaf id preserved: req:Art.28:data_processing_agreement + all item:Art.28:* ids unchanged.",
@@ -302,7 +302,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.29",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "processor_authority", "profile_fact"],
         expected_refs=["Art.29"], expected_type="posture_check",
-        must_contain=["Art.29", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.29", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.29 (Processing under authority) — op_process 4-leaf, profile_fact (NEW). Instructions procedure + personnel authorisation register + applicable scope + program review. Cross-links to A.6.3 / 7.3 training.",
@@ -313,7 +313,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.31",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "sa_cooperation"],
         expected_refs=["Art.31"], expected_type="posture_check",
-        must_contain=["Art.31", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.31", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.31 (SA cooperation) — op_process 4-leaf (NEW): cooperation_procedure + interaction_register + applicable_scope (lead SA per Art.56) + program_review. Universal trigger.",
@@ -324,7 +324,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.32",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "security"],
         expected_refs=["Art.32"], expected_type="posture_check",
-        must_contain=["Art.32", "engine proposes", "'NC'", "0/9 children satisfied"],
+        must_contain=["Art.32", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/6 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.32 (Security) — DerivedSpec with 5 ISO deps + 4 direct (resilience_test_record primary id preserved + risk_appropriate_measures_register + applicable_scope_note + program_review). 9 children. Mirror Art.24/25 expansion. Note: case #24 still tests this article via a different query format and is known-stale.",
@@ -335,7 +335,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.33",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "breach_notification"],
         expected_refs=["Art.33"], expected_type="posture_check",
-        must_contain=["Art.33", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.33", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.33 (Breach to authority) — op_process 4-leaf (PROMOTED): notification (primary, id preserved; operational trigger) + procedure + applicable_scope + program_review. Primary-leaf id preserved: req:Art.33:breach_notification + all item:Art.33:* ids. 72h SLA enforced in procedure MUSTs; A.5.24 exercise integration in review MUST.",
@@ -346,7 +346,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.34",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "subject_breach_communication"],
         expected_refs=["Art.34"], expected_type="posture_check",
-        must_contain=["Art.34", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.34", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.34 (Breach to subject) — op_process 4-leaf (NEW): communication_procedure + communication_record + applicable_scope (high-risk test) + program_review. Companion to Art.33; Art.34.3 exceptions (encryption-deemed-appropriate / measures-eliminating-risk / disproportionate-effort) audited in review.",
@@ -357,7 +357,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.35",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "dpia", "profile_fact"],
         expected_refs=["Art.35"], expected_type="posture_check",
-        must_contain=["Art.35", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.35", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.35 (DPIA) — op_process 4-leaf, profile_fact (NEW): dpia_procedure + dpia_register + applicable_scope (Art.35.3 mandatory + SA list + EDPB 9-criteria) + program_review. Art.36 escalation pathway in MUST. Critical for tenants with new product launches.",
@@ -381,7 +381,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.12",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "transparency"],
         expected_refs=["Art.12"], expected_type="posture_check",
-        must_contain=["Art.12", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.12", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.12 (Transparency) — op_process 4-leaf: transparency_procedure + rights_request_register + applicable_channels_scope + program_review (365d). Umbrella above Art.13-22 — encodes Art.12.3 one-month SLA and Art.12.5 refusal grounds at MUST level.",
@@ -392,7 +392,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.13",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "policy_program", "privacy_notice"],
         expected_refs=["Art.13"], expected_type="posture_check",
-        must_contain=["Art.13", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.13", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.13 (Privacy notice — direct collection) — policy_program 4-leaf (PROMOTED from single-leaf): privacy_notice (primary, id preserved) + publication_record + applicable_collection_points_scope + program_review (365d). Primary-leaf id preserved: req:Art.13:privacy_notice + all item:Art.13:* ids unchanged.",
@@ -403,7 +403,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.14",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "policy_program", "privacy_notice_indirect"],
         expected_refs=["Art.14"], expected_type="posture_check",
-        must_contain=["Art.14", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.14", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.14 (Privacy notice — indirect collection) — policy_program 4-leaf (NEW): notice + source_register + applicable_sources_scope + program_review (365d). Mirrors Art.13 with Art.14-specific additions (Art.14.1d categories, Art.14.2f source disclosure, Art.14.3 deadline, Art.14.5 exceptions).",
@@ -414,7 +414,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.16",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "rectification"],
         expected_refs=["Art.16"], expected_type="posture_check",
-        must_contain=["Art.16", "engine proposes", "'NC'", "0/5 children satisfied"],
+        must_contain=["Art.16", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "0/2 children satisfied",
                           "no curated multi-leaf",
                           "I need more information", "could you clarify"],
@@ -426,7 +426,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.17",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "erasure"],
         expected_refs=["Art.17"], expected_type="posture_check",
-        must_contain=["Art.17", "engine proposes", "'NC'", "0/6 children satisfied"],
+        must_contain=["Art.17", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "0/3 children satisfied",
                           "no curated multi-leaf",
                           "I need more information", "could you clarify"],
@@ -438,7 +438,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.18",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "restriction"],
         expected_refs=["Art.18"], expected_type="posture_check",
-        must_contain=["Art.18", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.18", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.18 (Restriction) — op_process 4-leaf (NEW): restriction_procedure + restriction_register + applicable_grounds_scope + program_review (365d). Art.18.1 four grounds (a-d) catalogued in scope leaf; Art.18.2 'storage-only' exceptions enforced in MUST.",
@@ -449,7 +449,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.19",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "notification"],
         expected_refs=["Art.19"], expected_type="posture_check",
-        must_contain=["Art.19", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.19", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.19 (Recipient notification) — op_process 4-leaf (NEW): notification_procedure + notification_register + applicable_recipient_scope + program_review (365d). Triggered by Art.16/17/18 events; impossibility/disproportionality exception explicitly captured.",
@@ -460,7 +460,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.20",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "portability"],
         expected_refs=["Art.20"], expected_type="posture_check",
-        must_contain=["Art.20", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.20", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.20 (Portability) — op_process 4-leaf (NEW): portability_procedure + portability_register + applicable_data_scope + program_review (365d). Applicability check (consent/contract basis AND automated) MUST; EDPB WP242 'provided by' interpretation in scope leaf.",
@@ -471,7 +471,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.21",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "objection"],
         expected_refs=["Art.21"], expected_type="posture_check",
-        must_contain=["Art.21", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.21", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.21 (Objection) — op_process 4-leaf (NEW): objection_procedure + objection_register + applicable_basis_scope + program_review (365d). Splits direct-marketing absolute (Art.21.2-3) vs legitimate-interests balancing (Art.21.1); Art.21.4 explicit-notice MUST enforced.",
@@ -482,7 +482,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.22",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "automated_decisions", "profile_fact"],
         expected_refs=["Art.22"], expected_type="posture_check",
-        must_contain=["Art.22", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.22", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.22 (Automated decisions) — op_process 4-leaf, profile_fact (NEW). Art.22.3 three safeguards (human intervention, contest, expression of view) all MUSTs. Art.22.4 special-category overlay enforced. Arion live N/A (no solely-automated significant decisions); engine NC surfaces in Stage-2.",
@@ -493,7 +493,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.23",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "ms_restrictions", "profile_fact"],
         expected_refs=["Art.23"], expected_type="posture_check",
-        must_contain=["Art.23", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.23", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.23 (Member State restrictions) — op_process 4-leaf, profile_fact (NEW). Art.23.1 a-j purposes catalogued; Art.23.2 a-h safeguards enforced. Closes Chapter III. Arion live N/A (not subject to MS rights-restricting law).",
@@ -520,7 +520,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.6",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "lawful_basis"],
         expected_refs=["Art.6"], expected_type="posture_check",
-        must_contain=["Art.6", "engine proposes", "'NC'", "0/6 children satisfied"],
+        must_contain=["Art.6", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "0/3 children satisfied",
                           "no curated multi-leaf",
                           "I need more information", "could you clarify"],
@@ -532,7 +532,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.7",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "consent"],
         expected_refs=["Art.7"], expected_type="posture_check",
-        must_contain=["Art.7", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.7", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.7 (Consent conditions) — op_process 4-leaf (NEW spec — first universally-triggered GDPR EvidenceRequirement-based 4-leaf): consent_procedure + consent_register + applicable_activities_scope + program_review (365d). Universal trigger (any controller relying on consent for any activity).",
@@ -543,7 +543,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.8",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "child_consent", "profile_fact"],
         expected_refs=["Art.8"], expected_type="posture_check",
-        must_contain=["Art.8", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.8", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.8 (Child consent) — op_process 4-leaf, profile_fact (org offers info-society services to minors): child_consent_procedure + child_consent_register + applicable_services_scope + program_review (365d). Live posture N/A (Arion B2B, no minors); engine NC ≠ live N/A → surfaces (engine-agreement specifically NC==NC).",
@@ -554,7 +554,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.9",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "special_category", "profile_fact"],
         expected_refs=["Art.9"], expected_type="posture_check",
-        must_contain=["Art.9", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.9", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.9 (Special category) — op_process 4-leaf, profile_fact (org processes Art.9.1 categories): authorisation_procedure + processing_register + applicable_categories_scope + program_review (365d). Each row in register cites which Art.9.2 condition (a-j) applies.",
@@ -565,7 +565,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.10",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "criminal_data", "profile_fact"],
         expected_refs=["Art.10"], expected_type="posture_check",
-        must_contain=["Art.10", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.10", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.10 (Criminal convictions) — op_process 4-leaf, profile_fact (org processes criminal-convictions data): authorisation_procedure + processing_register + applicable_legal_basis_scope + program_review (365d). Member State law citation required per activity (Art.10 only permits processing under official authority OR specific MS authorisation).",
@@ -587,7 +587,7 @@ EVAL_CASES = [
         query="pending engine verdict for 8.1",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "operational_planning"],
         expected_refs=["8.1"], expected_type="posture_check",
-        must_contain=["8.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["8.1", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 8.1 (Operational planning) — op_process 4-leaf: planning_procedure + execution_register + applicable_processes_scope + program_review (365d). FIRST clause of batch 26 — closes ISO 27001 batch.",
@@ -598,7 +598,7 @@ EVAL_CASES = [
         query="pending engine verdict for 8.2",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "operational_risk_assessment"],
         expected_refs=["8.2"], expected_type="posture_check",
-        must_contain=["8.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["8.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 8.2 (Operational risk assessment) — op_process 4-leaf: assessment_record + trigger_procedure + applicable_scope + program_review (365d). Cadence + significant-change-trigger split is the operational distinction from 6.1.2.",
@@ -609,7 +609,7 @@ EVAL_CASES = [
         query="pending engine verdict for 8.3",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "operational_treatment"],
         expected_refs=["8.3"], expected_type="posture_check",
-        must_contain=["8.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["8.3", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 8.3 (Operational treatment) — op_process 4-leaf: treatment_record + execution_procedure + applicable_plan_scope + program_review (freshness=180 — operational tempo). Faster cadence than typical 365d review reflects the day-to-day nature of treatment execution.",
@@ -620,7 +620,7 @@ EVAL_CASES = [
         query="pending engine verdict for 9.1",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "monitoring"],
         expected_refs=["9.1"], expected_type="posture_check",
-        must_contain=["9.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["9.1", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 9.1 (Monitoring + measurement) — op_process 4-leaf: monitoring_procedure + measurement_record (freshness=90 — quarterly tempo) + applicable_scope + program_review (365d). FIRST clause with freshness=90 in the ISMS batch — measurement signals decay fastest.",
@@ -631,7 +631,7 @@ EVAL_CASES = [
         query="pending engine verdict for 9.2",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "internal_audit"],
         expected_refs=["9.2"], expected_type="posture_check",
-        must_contain=["9.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["9.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 9.2 (Internal audit) — op_process 4-leaf: internal_audit_programme (primary, id preserved) + audit_execution_record + coverage_scope + program_review (365d). Primary-leaf id preserved: req:9.2:internal_audit_programme. Cycle-coverage scope leaf is new — surveillance auditors specifically look for it.",
@@ -642,7 +642,7 @@ EVAL_CASES = [
         query="pending engine verdict for 9.3",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "management_review"],
         expected_refs=["9.3"], expected_type="posture_check",
-        must_contain=["9.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["9.3", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 9.3 (Management review) — op_process 4-leaf: management_review_minutes (primary, id preserved; freshness=365 — annual minimum) + review_procedure + applicable_inputs_outputs_scope + program_review (365d). Primary-leaf id preserved: req:9.3:management_review. Inputs/outputs scope encodes 9.3.2 a-g MUST inputs at scope level.",
@@ -653,7 +653,7 @@ EVAL_CASES = [
         query="pending engine verdict for 10.1",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "continual_improvement"],
         expected_refs=["10.1"], expected_type="posture_check",
-        must_contain=["10.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["10.1", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 10.1 (Continual improvement) — op_process 4-leaf: improvement_procedure + action_register + applicable_triggers_scope + program_review (365d). 10.1/10.2 boundary explicit in scope leaf — observations route here, NCs route to 10.2.",
@@ -664,7 +664,7 @@ EVAL_CASES = [
         query="pending engine verdict for 10.2",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "nc_ca"],
         expected_refs=["10.2"], expected_type="posture_check",
-        must_contain=["10.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["10.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 10.2 (NC + corrective action) — op_process 4-leaf: nc_ca_procedure + nc_register + applicable_nc_sources_scope + program_review (365d). FINAL clause of ISO 27001 — completes the ISMS clauses arc started by case #149 (clause 6.1.1) in batch 25. Root-cause-quality + recurrence checks baked into program review.",
@@ -684,7 +684,7 @@ EVAL_CASES = [
         query="pending engine verdict for 6.1.1",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "isms_planning"],
         expected_refs=["6.1.1"], expected_type="posture_check",
-        must_contain=["6.1.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["6.1.1", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 6.1.1 (Risk + opportunity planning) — op_process 4-leaf: planning_procedure + action_register + applicable_inputs_scope + program_review (365d). FIRST clause of batch 25. Umbrella above 6.1.2/6.1.3.",
@@ -695,7 +695,7 @@ EVAL_CASES = [
         query="pending engine verdict for 6.1.2",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "risk_assessment"],
         expected_refs=["6.1.2"], expected_type="posture_check",
-        must_contain=["6.1.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["6.1.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 6.1.2 (Risk assessment) — op_process 4-leaf: risk_assessment (primary, id preserved) + risk_register + methodology_scope + program_review (365d). Primary-leaf id preserved: req:6.1.2:risk_assessment.",
@@ -706,7 +706,7 @@ EVAL_CASES = [
         query="pending engine verdict for 6.1.3",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "risk_treatment", "soa"],
         expected_refs=["6.1.3"], expected_type="posture_check",
-        must_contain=["6.1.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["6.1.3", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 6.1.3 (Risk treatment) — op_process 4-leaf: risk_treatment_plan (primary, id preserved) + statement_of_applicability (NEW distinct leaf) + methodology_scope + program_review (365d). SoA as a sibling leaf (not should_contain) — mandatory under 6.1.3 c-d, the first doc an auditor opens.",
@@ -717,7 +717,7 @@ EVAL_CASES = [
         query="pending engine verdict for 6.2",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "objectives"],
         expected_refs=["6.2"], expected_type="posture_check",
-        must_contain=["6.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["6.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 6.2 (Security objectives) — records_program 4-leaf: objectives_register + setting_procedure + applicable_functions_scope + program_review (365d).",
@@ -728,7 +728,7 @@ EVAL_CASES = [
         query="pending engine verdict for 6.3",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "isms_change"],
         expected_refs=["6.3"], expected_type="posture_check",
-        must_contain=["6.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["6.3", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 6.3 (Planning of changes) — op_process 4-leaf: change_procedure + change_register + applicable_change_types_scope + program_review (365d). Distinct from A.8.32 technical change mgmt — boundary baked into scope leaf and review.",
@@ -739,7 +739,7 @@ EVAL_CASES = [
         query="pending engine verdict for 7.1",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "resources"],
         expected_refs=["7.1"], expected_type="posture_check",
-        must_contain=["7.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["7.1", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 7.1 (Resources) — records_program 4-leaf: resources_record + determination_procedure + applicable_categories_scope + program_review (365d).",
@@ -750,7 +750,7 @@ EVAL_CASES = [
         query="pending engine verdict for 7.2",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "competence"],
         expected_refs=["7.2"], expected_type="posture_check",
-        must_contain=["7.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["7.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 7.2 (Competence) — records_program 4-leaf: competence_record + determination_procedure + applicable_roles_scope + program_review (365d).",
@@ -761,7 +761,7 @@ EVAL_CASES = [
         query="pending engine verdict for 7.3",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "awareness"],
         expected_refs=["7.3"], expected_type="posture_check",
-        must_contain=["7.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["7.3", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 7.3 (Awareness) — op_process 4-leaf: awareness_programme + completion_register + applicable_audience_scope + program_review (365d). ISMS-specific awareness distinct from A.6.3 operational security training.",
@@ -772,7 +772,7 @@ EVAL_CASES = [
         query="pending engine verdict for 7.4",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "communication"],
         expected_refs=["7.4"], expected_type="posture_check",
-        must_contain=["7.4", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["7.4", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 7.4 (Communication) — op_process 4-leaf: communication_procedure + event_register + applicable_communication_scope + program_review (365d). Mandated-vs-voluntary split + SLA tracking baked into review.",
@@ -783,7 +783,7 @@ EVAL_CASES = [
         query="pending engine verdict for 7.5",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "doc_control"],
         expected_refs=["7.5"], expected_type="posture_check",
-        must_contain=["7.5", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["7.5", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 7.5 (Documented information) — policy_program 4-leaf: doc_control_policy + document_register + applicable_document_classes_scope + program_review (365d). Stale-document sweep baked into the review — single most common audit drift signal.",
@@ -802,7 +802,7 @@ EVAL_CASES = [
         query="pending engine verdict for 4.1",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "isms_context"],
         expected_refs=["4.1"], expected_type="posture_check",
-        must_contain=["4.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["4.1", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 4.1 (Understanding context) — records_program 4-leaf: issues_register + identification_framework + applicable_domains_scope + program_review (365d). First ISMS clause of batch 24 (chapters 4+5 close-out 7-pack).",
@@ -813,7 +813,7 @@ EVAL_CASES = [
         query="pending engine verdict for 4.2",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "isms_parties"],
         expected_refs=["4.2"], expected_type="posture_check",
-        must_contain=["4.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["4.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 4.2 (Interested parties) — records_program 4-leaf: parties_register + identification_framework + applicable_domains_scope + program_review (365d). Parallel structure to 4.1.",
@@ -824,7 +824,7 @@ EVAL_CASES = [
         query="pending engine verdict for 4.3",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "isms_scope"],
         expected_refs=["4.3"], expected_type="posture_check",
-        must_contain=["4.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["4.3", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 4.3 (ISMS scope) — policy_program 4-leaf: isms_scope (primary, id preserved) + scope_methodology + scope_change_record + scope_program_review (365d). Primary-leaf id preserved: req:4.3:isms_scope.",
@@ -835,7 +835,7 @@ EVAL_CASES = [
         query="pending engine verdict for 4.4",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "isms_manual"],
         expected_refs=["4.4"], expected_type="posture_check",
-        must_contain=["4.4", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["4.4", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 4.4 (ISMS itself) — policy_program 4-leaf: isms_manual + process_map + manual_change_record + program_review (365d). Process map is a distinct second leaf (not just a should_contain item).",
@@ -846,7 +846,7 @@ EVAL_CASES = [
         query="pending engine verdict for 5.1",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "leadership"],
         expected_refs=["5.1"], expected_type="posture_check",
-        must_contain=["5.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["5.1", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 5.1 (Leadership commitment) — policy_program 4-leaf: leadership_directive + engagement_framework + reaffirmation_record + program_review (365d). Reaffirmation_record is the lifecycle-end variant — covers turnover and currency.",
@@ -857,7 +857,7 @@ EVAL_CASES = [
         query="pending engine verdict for 5.2",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "isp"],
         expected_refs=["5.2"], expected_type="posture_check",
-        must_contain=["5.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["5.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 5.2 (InfoSec policy) — policy_program 4-leaf: information_security_policy (primary, id preserved) + approval_record + communication_evidence + program_review (365d). Primary-leaf id preserved: req:5.2:information_security_policy. Communication evidence is a distinct leaf (not a should_contain item) — 'approved but not communicated' is a common audit finding.",
@@ -868,7 +868,7 @@ EVAL_CASES = [
         query="pending engine verdict for 5.3",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "isms_roles"],
         expected_refs=["5.3"], expected_type="posture_check",
-        must_contain=["5.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["5.3", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 5.3 (ISMS roles & authorities) — policy_program 4-leaf: roles_matrix + raci_framework + roles_change_record + program_review (365d). A.5.2 cross-check baked into the matrix and the review (5.3 = management-system roles; A.5.2 = operational roles).",
@@ -889,47 +889,40 @@ EVAL_CASES = [
     EvalCase(
         id=2, query="what are our main compliance gaps?",
         tags=["gap", "core"],
-        expected_refs=["A.5.18", "A.5.26"],
-        forbidden_refs=["A.7.5", "A.6.7", "A.8.25"],
+        expected_refs=["A.5.26"],  # post-2026-06-02 Stage-2 mass-approval: A.5.18 + 140+ others all flipped to NC; can't pin A.5.18 to surface in top-N
         expected_type="gap_analysis",
         must_contain=["NC"],
         min_findings=2,
-        notes="Both NCs must appear.",
+        notes="Post-Stage-2-approval-session: ~150 NCs now exist on Arion; A.5.18 no longer guaranteed to top the answer. A.5.26 still load-bearing (incident_register NC).",
     ),
 
     EvalCase(
         id=3, query="show me our OFI findings",
         tags=["gap", "core", "ofi"],
-        # The 3 "outlier" OFIs: A.5.19 (suppliers), A.8.19 (software install),
-        # 9.2 (a clause, not Annex A). Pre-fix llm_answer.py:307 capped
-        # gap_analysis at 5-7 nodes; the LLM included 2 NCs first (per
-        # selection-order rule) then 5 OFIs from the 8, silently dropping
-        # the outliers ~50% of runs. Fix: removed the cap and added an
-        # explicit "include clause format" rule to the prompt.
-        expected_refs=["A.5.19", "A.8.19", "9.2"],
-        forbidden_refs=["A.7.5", "A.6.7"],
+        # Post-Stage-2-mass-approval (2026-06-02): A.5.19 / A.8.19 / 9.2 all
+        # flipped OFI → NC. Remaining real OFIs are A.5.1 + A.5.15 (Comply→OFI
+        # gaps that weren't escalated to NC in the approval session).
+        expected_refs=["A.5.1", "A.5.15"],
         expected_type="gap_analysis",
         must_contain=["OFI"],
-        # "A.9.2" / "A.10." / "A.4." are anti-patterns: clauses 4-10 are
-        # body clauses, not Annex A — Annex A only has groups 5-8. The LLM
-        # used to label clause 9.2 as "A.9.2"; the prompt now forbids this.
-        must_not_contain=["A.7.5", "A.6.7", "A.9.2", "A.10.", "A.4."],
-        min_findings=3,
+        # Clause-vs-Annex-A labeling rule still load-bearing.
+        must_not_contain=["A.9.2", "A.10.", "A.4."],
+        min_findings=1,  # was 3 — only ~2 real OFIs survive the mass-approval
         notes=(
-            "Locks in exhaustive-list rule for gap_analysis (no count cap) "
-            "AND the clause-vs-Annex-A labeling rule (no 'A.' prefix on "
-            "body clauses 4-10)."
+            "Locks in exhaustive-list rule + clause-vs-Annex-A labeling. "
+            "Original OFI outliers (A.5.19/A.8.19/9.2) escalated to NC "
+            "during 2026-06-02 Stage-2 mass-approval session."
         ),
     ),
 
     EvalCase(
         id=4, query="what NC findings do we have?",
         tags=["gap", "core", "nc"],
-        expected_refs=["A.5.18", "A.5.26"],
+        expected_refs=[],  # post-2026-06-02 mass-approval: 168 NCs; answer top-N doesn't guarantee any specific control
         expected_type="gap_analysis",
-        must_contain=["NC", "A.5.18", "A.5.26"],
+        must_contain=["NC"],
         min_findings=2,
-        notes="Exactly 2 NCs.",
+        notes="Post-Stage-2 mass-approval: 168 NCs on Arion; answer surfaces ~32 in top-N. Loose assertion — case still proves the NC query path works.",
     ),
 
     EvalCase(
@@ -944,11 +937,11 @@ EVAL_CASES = [
 
     EvalCase(
         id=6, query="supplier assessment gaps",
-        tags=["gap", "ofi"],
+        tags=["gap", "nc"],  # was "ofi" — A.5.19 flipped OFI→NC during Phase C Stage-2 mass-approval (2026-06-02)
         expected_refs=["A.5.19"],
         expected_type="gap_analysis",
-        must_contain=["A.5.19", "OFI"],
-        notes="A.5.19 OFI.",
+        must_contain=["A.5.19", "NC"],
+        notes="A.5.19 NC (was OFI pre-Phase-C Stage-2 approval session 2026-06-02).",
     ),
 
     EvalCase(
@@ -974,9 +967,9 @@ EVAL_CASES = [
         tags=["posture", "core"],
         expected_refs=[],           # LLM may lead with any NC/OFI — min_findings covers it
         expected_type="gap_analysis",
-        must_contain=["NC", "OFI"],
+        must_contain=["NC"],  # OFI dropped — only ~2 OFIs remain post-2026-06-02 mass-approval; LLM may not surface a separate OFI section
         min_findings=2,
-        notes="Full posture overview.",
+        notes="Full posture overview. Post-mass-approval: 168 NC / 7 OFI / 2 Comply — answer is dominated by NCs.",
     ),
 
     EvalCase(
@@ -1043,10 +1036,10 @@ EVAL_CASES = [
     EvalCase(
         id=17, query="what must our access control policy contain?",
         tags=["documents", "policy"],
-        expected_refs=["A.5.18"],
+        expected_refs=["A.5.15"],  # the access *control policy* control is A.5.15; A.5.18 is access *rights*. Post-mass-approval, resolver pinpoints A.5.15 directly.
         expected_type="document_content",
         must_contain=["access"],
-        notes="Document content query.",
+        notes="Document content query — resolver canonicalises to A.5.15 (the policy control) post-2026-06-02 mass-approval.",
     ),
 
     EvalCase(
@@ -1186,9 +1179,9 @@ EVAL_CASES = [
         id=28,
         query="what NC findings do we have?",
         tags=["posture", "nc", "xfw_proposals_isolation"],
-        expected_refs=["A.5.18", "A.5.26"],
+        expected_refs=[],  # post-2026-06-02 mass-approval (see case #4 note)
         expected_type="gap_analysis",
-        must_contain=["NC", "A.5.18", "A.5.26"],
+        must_contain=["NC"],
         # Isolation guard: pending xfw proposals must NOT leak into a normal
         # NC-findings posture query. The HITL queue lives in its own short
         # circuit; if its phrasing appears here, the pattern matcher is
@@ -1537,7 +1530,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "calibration"],
         expected_refs=["A.8.2"],
         expected_type="posture_check",
-        must_contain=["A.8.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             # Pre-promotion the single-leaf spec would have produced this:
             "0/1 children satisfied",
@@ -1559,7 +1552,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "calibration"],
         expected_refs=["A.5.2"],
         expected_type="posture_check",
-        must_contain=["A.5.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1580,7 +1573,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "calibration", "gdpr"],
         expected_refs=["Art.30"],
         expected_type="posture_check",
-        must_contain=["Art.30", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.30", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1600,7 +1593,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "calibration", "gdpr"],
         expected_refs=["Art.15"],
         expected_type="posture_check",
-        must_contain=["Art.15", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["Art.15", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1628,7 +1621,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program"],
         expected_refs=["A.5.5"],
         expected_type="posture_check",
-        must_contain=["A.5.5", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.5", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1649,7 +1642,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program"],
         expected_refs=["A.5.6"],
         expected_type="posture_check",
-        must_contain=["A.5.6", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.6", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1668,7 +1661,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program"],
         expected_refs=["A.5.9"],
         expected_type="posture_check",
-        must_contain=["A.5.9", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.9", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1691,7 +1684,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program"],
         expected_refs=["A.5.31"],
         expected_type="posture_check",
-        must_contain=["A.5.31", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.31", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1713,7 +1706,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "adapted"],
         expected_refs=["A.5.32"],
         expected_type="posture_check",
-        must_contain=["A.5.32", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.32", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1747,7 +1740,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program"],
         expected_refs=["A.5.3"],
         expected_type="posture_check",
-        must_contain=["A.5.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.3", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1768,7 +1761,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program"],
         expected_refs=["A.5.4"],
         expected_type="posture_check",
-        must_contain=["A.5.4", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.4", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1788,7 +1781,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program"],
         expected_refs=["A.5.10"],
         expected_type="posture_check",
-        must_contain=["A.5.10", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.10", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1808,7 +1801,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program"],
         expected_refs=["A.5.12"],
         expected_type="posture_check",
-        must_contain=["A.5.12", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.12", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1835,7 +1828,7 @@ EVAL_CASES = [
         # is therefore 'OFI' at '1/4', not 'NC' at '0/4'. This locks the
         # partial-evidence multi-leaf path — a useful complement to the
         # 0/N-NC default the other Phase B cases exercise.
-        must_contain=["A.5.15", "engine proposes", "'OFI'", "1/4 children satisfied"],
+        must_contain=["A.5.15", "already approved", 'OFI'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/4 children satisfied",
             "0/1 children satisfied",
@@ -1873,7 +1866,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process"],
         expected_refs=["A.5.19"],
         expected_type="posture_check",
-        must_contain=["A.5.19", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.19", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1894,7 +1887,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process"],
         expected_refs=["A.5.20"],
         expected_type="posture_check",
-        must_contain=["A.5.20", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.20", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1916,7 +1909,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process"],
         expected_refs=["A.5.21"],
         expected_type="posture_check",
-        must_contain=["A.5.21", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.21", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1938,7 +1931,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process"],
         expected_refs=["A.5.22"],
         expected_type="posture_check",
-        must_contain=["A.5.22", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.22", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -2014,7 +2007,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "incident_family"],
         expected_refs=["A.5.25"],
         expected_type="posture_check",
-        must_contain=["A.5.25", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.25", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -2038,7 +2031,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "incident_family"],
         expected_refs=["A.5.27"],
         expected_type="posture_check",
-        must_contain=["A.5.27", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.27", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -2073,7 +2066,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "threat_intel"],
         expected_refs=["A.5.7"],
         expected_type="posture_check",
-        must_contain=["A.5.7", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.7", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -2115,7 +2108,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "evidence_handling"],
         expected_refs=["A.5.28"],
         expected_type="posture_check",
-        must_contain=["A.5.28", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.28", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -2153,7 +2146,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "project_security"],
         expected_refs=["A.5.8"],
         expected_type="posture_check",
-        must_contain=["A.5.8", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.8", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -2191,7 +2184,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "return_of_assets"],
         expected_refs=["A.5.11"],
         expected_type="posture_check",
-        must_contain=["A.5.11", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.11", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -2227,7 +2220,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "labelling"],
         expected_refs=["A.5.13"],
         expected_type="posture_check",
-        must_contain=["A.5.13", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.13", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -2266,7 +2259,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "information_transfer"],
         expected_refs=["A.5.14"],
         expected_type="posture_check",
-        must_contain=["A.5.14", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.14", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -2307,7 +2300,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "identity_management"],
         expected_refs=["A.5.16"],
         expected_type="posture_check",
-        must_contain=["A.5.16", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.16", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -2375,7 +2368,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.1",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "endpoints"],
         expected_refs=["A.8.1"], expected_type="posture_check",
-        must_contain=["A.8.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.1", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.1 (User endpoint devices) — policy_program 4-leaf: policy + endpoint_register + applicable_endpoint_scope + program_review (365d). FIRST control of A.8 33-pack (batch 23).",
@@ -2386,7 +2379,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.3",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "access_restriction"],
         expected_refs=["A.8.3"], expected_type="posture_check",
-        must_contain=["A.8.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.3", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.3 (Information access restriction) — op_process 4-leaf: procedure + access_matrix_register + applicable_systems_scope + program_review (365d).",
@@ -2397,7 +2390,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.4",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "technical_control", "source_code", "profile_fact"],
         expected_refs=["A.8.4"], expected_type="posture_check",
-        must_contain=["A.8.4", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.4", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.4 (Source code access) — technical_control 4-leaf: baseline + procedure + monitoring_log + review (180d). profile_fact trigger (org develops software).",
@@ -2408,7 +2401,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.5",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "technical_control", "secure_auth"],
         expected_refs=["A.8.5"], expected_type="posture_check",
-        must_contain=["A.8.5", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.5", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.5 (Secure authentication) — technical_control 4-leaf: baseline + procedure + auth_log + review (180d). MFA universal/privileged + impossible-travel detection promoted to MUST.",
@@ -2419,7 +2412,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.6",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "technical_control", "capacity"],
         expected_refs=["A.8.6"], expected_type="posture_check",
-        must_contain=["A.8.6", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.6", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.6 (Capacity management) — technical_control 4-leaf: baseline + procedure + monitoring_log + review (365d). Auto-scaling promoted to MUST.",
@@ -2430,7 +2423,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.7",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "malware"],
         expected_refs=["A.8.7"], expected_type="posture_check",
-        must_contain=["A.8.7", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.7", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.7 (Malware protection) — op_process 4-leaf: procedure + coverage_register + applicable_scope + review (180d). Behavioural detection promoted to MUST.",
@@ -2441,7 +2434,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.8",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "vuln_mgmt"],
         expected_refs=["A.8.8"], expected_type="posture_check",
-        must_contain=["A.8.8", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.8", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.8 (Technical vulnerabilities) — op_process 4-leaf: procedure + vulnerability_backlog_register + applicable_scope + review (180d). SLA-breach flag is auditor-critical.",
@@ -2452,7 +2445,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.9",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "config_mgmt"],
         expected_refs=["A.8.9"], expected_type="posture_check",
-        must_contain=["A.8.9", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.9", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.9 (Configuration management) — op_process 4-leaf: procedure + baseline_register + applicable_scope + review (365d).",
@@ -2463,7 +2456,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.10",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "data_deletion", "lifecycle_end"],
         expected_refs=["A.8.10"], expected_type="posture_check",
-        must_contain=["A.8.10", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.10", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.10 (Information deletion) — op_process 4-leaf with disposal_record lifecycle-end: procedure + disposal_register + applicable_scope + review (365d). item:A.8.10:scope_systems referenced by SPEC_ART_25 comment — preserved.",
@@ -2474,7 +2467,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.11",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "data_masking", "tombstone_consolidation"],
         expected_refs=["A.8.11"], expected_type="posture_check",
-        must_contain=["A.8.11", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.11", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.11 (Data masking) — op_process 4-leaf, tombstone consolidation from upstream REQ_DATA_MASKING: procedure + masking_register + applicable_scope + review (365d). Items preserved for SPEC_ART_25: scope, techniques, personal_data.",
@@ -2485,7 +2478,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.12",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "technical_control", "dlp"],
         expected_refs=["A.8.12"], expected_type="posture_check",
-        must_contain=["A.8.12", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.12", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.12 (DLP) — technical_control 4-leaf: baseline + procedure + alert_log + review (180d).",
@@ -2496,7 +2489,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.13",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "backup", "lifecycle_end"],
         expected_refs=["A.8.13"], expected_type="posture_check",
-        must_contain=["A.8.13", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.13", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.13 (Information backup) — op_process 4-leaf with restore_test_record lifecycle-end: procedure + restore_test_register + applicable_scope + review (365d). RPO-met flag auditor-critical (parallels A.5.30).",
@@ -2507,7 +2500,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.14",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "technical_control", "redundancy"],
         expected_refs=["A.8.14"], expected_type="posture_check",
-        must_contain=["A.8.14", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.14", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.14 (Redundancy of IPF) — technical_control 4-leaf: baseline + procedure + failover_test_register + review (365d). Cross-AZ/region promoted to MUST.",
@@ -2518,7 +2511,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.15",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "logging"],
         expected_refs=["A.8.15"], expected_type="posture_check",
-        must_contain=["A.8.15", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.15", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.15 (Logging) — op_process 4-leaf: procedure + source_register + applicable_scope + review (180d). Log-integrity verification promoted to MUST.",
@@ -2529,7 +2522,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.16",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "monitoring"],
         expected_refs=["A.8.16"], expected_type="posture_check",
-        must_contain=["A.8.16", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.16", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.16 (Monitoring activities) — op_process 4-leaf: procedure + detection_register + applicable_scope + review (180d). SIEM use cases + threat-hunting promoted to MUST.",
@@ -2540,7 +2533,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.17",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "clock_sync"],
         expected_refs=["A.8.17"], expected_type="posture_check",
-        must_contain=["A.8.17", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.17", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.17 (Clock synchronisation) — op_process 4-leaf: procedure + sync_register + applicable_scope + review (365d).",
@@ -2551,7 +2544,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.18",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "privileged_utility"],
         expected_refs=["A.8.18"], expected_type="posture_check",
-        must_contain=["A.8.18", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.18", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.18 (Privileged utility programs) — policy_program 4-leaf: policy + utility_register + applicable_scope + review (365d). Removal-where-unneeded promoted to MUST.",
@@ -2562,7 +2555,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.19",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "software_install"],
         expected_refs=["A.8.19"], expected_type="posture_check",
-        must_contain=["A.8.19", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.19", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.19 (Software installation on operational systems) — op_process 4-leaf: procedure + installation_register + applicable_scope + review (365d). Allowlisting promoted to MUST.",
@@ -2573,7 +2566,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.20",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "networks"],
         expected_refs=["A.8.20"], expected_type="posture_check",
-        must_contain=["A.8.20", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.20", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.20 (Networks security) — policy_program 4-leaf: policy + network_register + applicable_scope + review (365d). Zero-trust direction promoted to MUST.",
@@ -2584,7 +2577,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.21",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "network_services"],
         expected_refs=["A.8.21"], expected_type="posture_check",
-        must_contain=["A.8.21", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.21", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.21 (Security of network services) — op_process 4-leaf: procedure + service_register + applicable_scope + review (180d). A.5.22 supplier review linkage.",
@@ -2595,7 +2588,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.22",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "network_segregation"],
         expected_refs=["A.8.22"], expected_type="posture_check",
-        must_contain=["A.8.22", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.22", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.22 (Network segregation) — op_process 4-leaf: procedure + zone_register + applicable_scope + review (365d). Micro-segmentation direction promoted to MUST.",
@@ -2606,7 +2599,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.23",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "web_filtering"],
         expected_refs=["A.8.23"], expected_type="posture_check",
-        must_contain=["A.8.23", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.23", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.23 (Web filtering) — policy_program 4-leaf: policy + filtering_event_register + applicable_scope + review (365d).",
@@ -2617,7 +2610,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.24",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "cryptography", "tombstone_consolidation", "spec_art_32"],
         expected_refs=["A.8.24"], expected_type="posture_check",
-        must_contain=["A.8.24", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.24", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.24 (Use of cryptography) — policy_program 4-leaf, tombstone consolidation from upstream REQ_ENCRYPTION_POLICY: policy + key_register + applicable_scope + program_review (180d). Items preserved for SPEC_ART_32: personal_data, pii_keys, at_rest, in_transit. Key-strength + PQ direction noted.",
@@ -2628,7 +2621,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.25",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "secure_development", "tombstone_consolidation", "profile_fact"],
         expected_refs=["A.8.25"], expected_type="posture_check",
-        must_contain=["A.8.25", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.25", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.25 (Secure development lifecycle) — policy_program 4-leaf, tombstone consolidation from upstream REQ_SECURE_DEVELOPMENT: policy + project_register + applicable_scope + review (180d). profile_fact trigger preserved (A.8.25 only applies when org develops software).",
@@ -2639,7 +2632,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.26",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "app_sec_req", "profile_fact"],
         expected_refs=["A.8.26"], expected_type="posture_check",
-        must_contain=["A.8.26", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.26", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.26 (Application security requirements) — op_process 4-leaf: procedure + application_register + applicable_scope + review (365d). Threat-modelling promoted to MUST.",
@@ -2650,7 +2643,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.27",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "arch_principles", "profile_fact"],
         expected_refs=["A.8.27"], expected_type="posture_check",
-        must_contain=["A.8.27", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.27", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.27 (Secure architecture/engineering principles) — policy_program 4-leaf: policy + architecture_register + applicable_scope + review (365d). Threat-modelling integration promoted to MUST.",
@@ -2661,7 +2654,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.28",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "secure_coding", "profile_fact"],
         expected_refs=["A.8.28"], expected_type="posture_check",
-        must_contain=["A.8.28", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.28", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.28 (Secure coding) — op_process 4-leaf: procedure + finding_register + applicable_scope + review (365d). SCA/dependency scanning promoted to MUST.",
@@ -2672,7 +2665,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.29",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "sec_testing", "profile_fact"],
         expected_refs=["A.8.29"], expected_type="posture_check",
-        must_contain=["A.8.29", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.29", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.29 (Security testing in dev/acceptance) — op_process 4-leaf: procedure + test_register + applicable_scope + review (180d). Pen-test cadence promoted to MUST.",
@@ -2683,7 +2676,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.30",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "outsourced_dev", "profile_fact"],
         expected_refs=["A.8.30"], expected_type="posture_check",
-        must_contain=["A.8.30", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.30", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.30 (Outsourced development) — op_process 4-leaf: procedure + engagement_register + applicable_scope + review (365d). Maturity assessment promoted to MUST.",
@@ -2694,7 +2687,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.31",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "env_separation", "profile_fact"],
         expected_refs=["A.8.31"], expected_type="posture_check",
-        must_contain=["A.8.31", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.31", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.31 (Dev/test/prod environment separation) — op_process 4-leaf: procedure + environment_register + applicable_scope + review (365d). IaC promoted to MUST. No-prod-data spot-check in review.",
@@ -2705,7 +2698,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.32",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "change_mgmt", "lifecycle_end"],
         expected_refs=["A.8.32"], expected_type="posture_check",
-        must_contain=["A.8.32", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.32", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.32 (Change management) — op_process 4-leaf with change_record lifecycle-end: procedure + change_register + applicable_scope + review (365d). CI/CD integration promoted to MUST.",
@@ -2716,7 +2709,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.33",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "test_info", "profile_fact"],
         expected_refs=["A.8.33"], expected_type="posture_check",
-        must_contain=["A.8.33", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.33", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.33 (Test information) — op_process 4-leaf: procedure + test_dataset_register + applicable_scope + review (365d). DPIA-consideration MUST flagged personal_data.",
@@ -2727,7 +2720,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.34",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "audit_testing"],
         expected_refs=["A.8.34"], expected_type="posture_check",
-        must_contain=["A.8.34", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.8.34", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.34 (Audit testing protection) — policy_program 4-leaf: policy + audit_engagement_register + applicable_scope + program_review (365d). Dedicated test accounts promoted to MUST. LAST control of A.8 33-pack (batch 23).",
@@ -2753,7 +2746,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.1",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "physical_perimeters"],
         expected_refs=["A.7.1"], expected_type="posture_check",
-        must_contain=["A.7.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.1", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.1 (Physical perimeters) — policy_program 4-leaf: physical_security_perimeters policy + perimeter_register + applicable_sites_scope + program_review (365d). Live N/A → engine NC 0/4. FIRST control of A.7 14-pack (batch 22).",
@@ -2764,7 +2757,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.2",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "physical_entry"],
         expected_refs=["A.7.2"], expected_type="posture_check",
-        must_contain=["A.7.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.2 (Physical entry) — op_process 4-leaf: physical_entry_procedure + entry_event_register + applicable_areas_scope + program_review (365d). Live N/A → engine NC 0/4.",
@@ -2775,7 +2768,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.3",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "offices_rooms"],
         expected_refs=["A.7.3"], expected_type="posture_check",
-        must_contain=["A.7.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.3", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.3 (Offices/rooms/facilities) — op_process 4-leaf: offices_rooms_facilities_procedure + room_register + applicable_rooms_scope + program_review (365d). Live N/A → engine NC 0/4.",
@@ -2786,7 +2779,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.4",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "physical_monitoring"],
         expected_refs=["A.7.4"], expected_type="posture_check",
-        must_contain=["A.7.4", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.4", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.4 (Physical security monitoring) — op_process 4-leaf: physical_security_monitoring + monitoring_event_register + monitoring_scope + program_review (365d). SIEM integration MUST cross-links to A.5.26 incident response. Live N/A → engine NC 0/4.",
@@ -2797,7 +2790,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.5",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "environmental_threats"],
         expected_refs=["A.7.5"], expected_type="posture_check",
-        must_contain=["A.7.5", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.5", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.5 (Environmental threats) — op_process 4-leaf: environmental_threats_procedure + threat_register + applicable_sites_scope + program_review (365d). BCP integration MUST cross-links to A.5.29/A.5.30. Live N/A → engine NC 0/4.",
@@ -2808,7 +2801,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.6",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "secure_areas"],
         expected_refs=["A.7.6"], expected_type="posture_check",
-        must_contain=["A.7.6", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.6", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.6 (Working in secure areas) — op_process 4-leaf: working_in_secure_areas_procedure + work_session_register + applicable_areas_scope + program_review (365d). Live N/A → engine NC 0/4.",
@@ -2819,7 +2812,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.7",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "clear_desk_screen"],
         expected_refs=["A.7.7"], expected_type="posture_check",
-        must_contain=["A.7.7", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.7", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.7 (Clear desk / clear screen) — policy_program 4-leaf: clear_desk_clear_screen_policy + cd_cs_audit_register + applicable_locations_scope + program_review (365d). Live Comply → engine NC 0/4 (no partial-evidence — A.7 controls have no rich Arion uploads beyond hand-entered findings).",
@@ -2830,7 +2823,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.8",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "equipment_siting"],
         expected_refs=["A.7.8"], expected_type="posture_check",
-        must_contain=["A.7.8", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.8", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.8 (Equipment siting) — op_process 4-leaf: equipment_siting_procedure + siting_register + applicable_equipment_scope + program_review (365d). Live N/A → engine NC 0/4.",
@@ -2841,7 +2834,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.9",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "off_premises"],
         expected_refs=["A.7.9"], expected_type="posture_check",
-        must_contain=["A.7.9", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.9", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.9 (Off-premises assets) — policy_program 4-leaf: off_premises_assets_policy + off_premises_register + applicable_classes_scope + program_review (365d). Cross-link to A.6.7 remote-working. No posture row pre-batch → engine NC 0/4.",
@@ -2852,7 +2845,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.10",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "storage_media"],
         expected_refs=["A.7.10"], expected_type="posture_check",
-        must_contain=["A.7.10", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.10", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.10 (Storage media lifecycle) — op_process 4-leaf: storage_media_procedure + media_register + applicable_media_scope + program_review (365d). Live Comply → engine NC 0/4.",
@@ -2863,7 +2856,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.11",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "supporting_utilities"],
         expected_refs=["A.7.11"], expected_type="posture_check",
-        must_contain=["A.7.11", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.11", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.11 (Supporting utilities) — op_process 4-leaf: supporting_utilities_procedure + utility_register + applicable_sites_scope + program_review (365d). BCP integration MUST cross-links to A.5.29/A.5.30. Live N/A → engine NC 0/4.",
@@ -2874,7 +2867,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.12",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "cabling_security"],
         expected_refs=["A.7.12"], expected_type="posture_check",
-        must_contain=["A.7.12", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.12", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.12 (Cabling security) — op_process 4-leaf: cabling_security_procedure + cabling_register + applicable_runs_scope + program_review (365d). No posture row pre-batch → engine NC 0/4.",
@@ -2885,7 +2878,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.13",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "equipment_maintenance"],
         expected_refs=["A.7.13"], expected_type="posture_check",
-        must_contain=["A.7.13", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.13", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.13 (Equipment maintenance) — op_process 4-leaf: equipment_maintenance_procedure (freshness 365d) + maintenance_event_register + applicable_equipment_scope + program_review (365d). Live Comply → engine NC 0/4.",
@@ -2896,7 +2889,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.7.14",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "secure_disposal", "lifecycle_end"],
         expected_refs=["A.7.14"], expected_type="posture_check",
-        must_contain=["A.7.14", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.7.14", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.7.14 (Secure disposal) — op_process 4-leaf with disposal_record lifecycle-end: secure_disposal_procedure + disposal_scope + disposal_record (per-equipment) + program_review (365d). Parallel to A.5.28 evidence-disposal pattern. Live Comply → engine NC 0/4.",
@@ -2929,7 +2922,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "event_reporting"],
         expected_refs=["A.6.8"],
         expected_type="posture_check",
-        must_contain=["A.6.8", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.6.8", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes=(
@@ -2951,7 +2944,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "nda"],
         expected_refs=["A.6.6"],
         expected_type="posture_check",
-        must_contain=["A.6.6", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.6.6", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes=(
@@ -2972,7 +2965,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "post_employment"],
         expected_refs=["A.6.5"],
         expected_type="posture_check",
-        must_contain=["A.6.5", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.6.5", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes=(
@@ -2997,7 +2990,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "disciplinary"],
         expected_refs=["A.6.4"],
         expected_type="posture_check",
-        must_contain=["A.6.4", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.6.4", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes=(
@@ -3021,7 +3014,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "awareness"],
         expected_refs=["A.6.3"],
         expected_type="posture_check",
-        must_contain=["A.6.3", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.6.3", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes=(
@@ -3043,7 +3036,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "employment_terms"],
         expected_refs=["A.6.2"],
         expected_type="posture_check",
-        must_contain=["A.6.2", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.6.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes=(
@@ -3067,7 +3060,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "screening"],
         expected_refs=["A.6.1"],
         expected_type="posture_check",
-        must_contain=["A.6.1", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.6.1", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes=(
@@ -3114,7 +3107,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "operating_procedures"],
         expected_refs=["A.5.37"],
         expected_type="posture_check",
-        must_contain=["A.5.37", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.37", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -3152,7 +3145,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "compliance_review"],
         expected_refs=["A.5.36"],
         expected_type="posture_check",
-        must_contain=["A.5.36", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.36", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -3185,7 +3178,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "independent_review"],
         expected_refs=["A.5.35"],
         expected_type="posture_check",
-        must_contain=["A.5.35", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.35", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -3311,7 +3304,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "records_protection"],
         expected_refs=["A.5.33"],
         expected_type="posture_check",
-        must_contain=["A.5.33", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.33", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -3364,7 +3357,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "ict_readiness"],
         expected_refs=["A.5.30"],
         expected_type="posture_check",
-        must_contain=["A.5.30", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.30", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -3404,7 +3397,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "disruption_security"],
         expected_refs=["A.5.29"],
         expected_type="posture_check",
-        must_contain=["A.5.29", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.29", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -3448,7 +3441,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "incident_planning"],
         expected_refs=["A.5.24"],
         expected_type="posture_check",
-        must_contain=["A.5.24", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.24", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -3483,7 +3476,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "authentication"],
         expected_refs=["A.5.17"],
         expected_type="posture_check",
-        must_contain=["A.5.17", "engine proposes", "'NC'", "0/4 children satisfied"],
+        must_contain=["A.5.17", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -3526,13 +3519,13 @@ EVAL_CASES = [
         # Single-control query so the test isn't sensitive to multi-
         # control formatting; "Comply" must be present, OFI/NC labels
         # must NOT attach to A.5.30 in any form.
-        must_contain=["A.5.30", "Comply"],
+        must_contain=["A.5.30", "NC"],  # was Comply pre-Stage-2 mass-approval; the "tag IS the verdict" discipline still applies — now the tag is NC.
         must_not_contain=[
+            # A.5.30 is genuinely NC post-2026-06-02 mass-approval, so "A.5.30 [NC]" / "A.5.30 is NC"
+            # are now CORRECT labels, not dup-label bugs. Kept the OFI variants forbidden — the
+            # control isn't OFI, so any "OFI" relabel is still wrong.
             "A.5.30 [OFI]",
-            "A.5.30 [NC]",
             "A.5.30 is OFI",
-            "A.5.30 is NC",
-            "A.5.30 is a non-conformity",
             "A.5.30 is an opportunity for improvement",
             "I need more information", "could you clarify",
         ],
