@@ -293,6 +293,11 @@ def evaluate_spec(
     leaf_verdicts:           list[LeafVerdict] = []
     derived_verdicts:        list[tuple[str, ControlVerdict]] = []
     child_outcomes:          list[bool] = []
+    # child_progress runs parallel to child_outcomes: True iff the child has
+    # ANY evidence of implementation (leaf with ≥1 items_recognised, or sub-
+    # verdict at Comply/OFI). Used by _compose_posture to distinguish "no
+    # evidence anywhere" (→ NC) from "partial evidence, gaps remain" (→ OFI).
+    child_progress:          list[bool] = []
     skipped_count:           int  = 0
     had_derivation_NA:       bool = False
     short_circuit_UNKNOWN_for: Optional[str] = None
@@ -310,11 +315,13 @@ def evaluate_spec(
             v.role = edge.role
             leaf_verdicts.append(v)
             child_outcomes.append(v.counts_as_comply)
+            child_progress.append(bool(v.items_recognised))
 
         elif isinstance(target, SpecDescriptor):
             sub = evaluate_spec(target, leaf_evaluator, eval_ctx,
                                 spec_resolver, inner_stack, _memo)
             child_outcomes.append(sub.posture == "Comply")
+            child_progress.append(sub.posture in ("Comply", "OFI"))
             leaf_verdicts.extend(sub.leaves)
 
         elif isinstance(target, ControlRef):
@@ -395,6 +402,7 @@ def evaluate_spec(
                 # holds sub.posture == 'Comply').
 
             child_outcomes.append(counts)
+            child_progress.append(sub.posture in ("Comply", "OFI"))
 
         else:
             raise TypeError(
@@ -417,9 +425,9 @@ def evaluate_spec(
             _memo[spec.control_id] = verdict
         return verdict
 
-    posture  = _compose_posture(spec.op, spec.n, child_outcomes, had_derivation_NA)
+    posture  = _compose_posture(spec.op, spec.n, child_outcomes, had_derivation_NA, child_progress)
     our_g, tenant_g = _build_gaps(leaf_verdicts, derived_verdicts)
-    reason   = _build_reason(spec.op, spec.n, child_outcomes, skipped_count)
+    reason   = _build_reason(spec.op, spec.n, child_outcomes, skipped_count, child_progress)
 
     verdict = ControlVerdict(
         control_id      = spec.control_id,
@@ -444,17 +452,27 @@ def _compose_posture(
     n:                  Optional[int],
     outcomes:           list[bool],
     had_derivation_NA:  bool = False,
+    progress:           Optional[list[bool]] = None,
 ) -> str:
     """Compose child outcomes (True = Comply) into a parent posture.
 
     Three-tier output: Comply when the op is fully satisfied, OFI when
-    partially satisfied (some children True, threshold not met), NC when
-    zero children are satisfied. The reviewer approves or rejects the NC
-    proposal in Stage-2 just like an OFI proposal — the engine doesn't get
-    the last word on what's a formal non-conformity, but it does flag the
-    "nothing at all" case separately so the queue surfaces it for human
-    attention. The empty-outcome branches keep their existing meaning
-    (vacuous Comply / all-NA OFI) because they're not "0 of N tried"."""
+    partially satisfied (some evidence present, threshold not met), NC
+    when there is no evidence anywhere across the children. The reviewer
+    approves or rejects the NC proposal in Stage-2 just like an OFI
+    proposal — the engine doesn't get the last word on what's a formal
+    non-conformity, but it does flag the "nothing at all" case separately
+    so the queue surfaces it for human attention.
+
+    The `progress` list runs parallel to `outcomes`: True iff the child has
+    ANY evidence (leaf with ≥1 items_recognised, or sub-verdict at
+    Comply/OFI). It distinguishes "0 of N satisfied AND no progress on
+    any child" (→ NC) from "0 of N fully satisfied BUT some children
+    partial" (→ OFI). Without it, the rule reduces to today's behaviour
+    where only fully-satisfied leaves move the needle.
+
+    The empty-outcome branches keep their existing meaning (vacuous Comply
+    / all-NA OFI) because they're not "0 of N tried"."""
     if not outcomes:
         # Distinguish two empty-outcome cases:
         # (a) All edges gated off by applies_when=False — defensible vacuous
@@ -469,18 +487,21 @@ def _compose_posture(
         if had_derivation_NA:
             return "OFI"
         return "Comply"
+
     n_sat = sum(1 for o in outcomes if o)
+    has_any_progress = any(progress) if progress else False
+
     if op == "ALL":
-        if all(outcomes):    return "Comply"
-        if n_sat == 0:       return "NC"
+        if all(outcomes):                      return "Comply"
+        if n_sat == 0 and not has_any_progress: return "NC"
         return "OFI"
     if op == "ANY":
         if any(outcomes):    return "Comply"
         return "NC"
     if op == "AT_LEAST_N":
         threshold = n if (n is not None and n >= 0) else 1
-        if n_sat >= threshold: return "Comply"
-        if n_sat == 0:         return "NC"
+        if n_sat >= threshold:                  return "Comply"
+        if n_sat == 0 and not has_any_progress: return "NC"
         return "OFI"
     raise ValueError(f"unknown op {op!r}")
 
@@ -548,12 +569,24 @@ def _build_gap_list(
     return our_g + tenant_g
 
 
-def _build_reason(op: str, n: Optional[int], outcomes: list[bool], skipped: int) -> str:
+def _build_reason(
+    op:        str,
+    n:         Optional[int],
+    outcomes:  list[bool],
+    skipped:   int,
+    progress:  Optional[list[bool]] = None,
+) -> str:
     total       = len(outcomes)
     satisfied   = sum(1 for o in outcomes if o)
     op_text     = op if op != "AT_LEAST_N" else f"AT_LEAST_{n}"
     skip_text   = f", {skipped} gated off by applies_when" if skipped else ""
-    return f"{op_text}: {satisfied}/{total} children satisfied{skip_text}"
+    partial_text = ""
+    if progress is not None:
+        # children with progress (partial evidence) but not satisfied
+        partial = sum(1 for o, p in zip(outcomes, progress) if p and not o)
+        if partial:
+            partial_text = f" ({partial} with partial evidence)"
+    return f"{op_text}: {satisfied}/{total} children satisfied{partial_text}{skip_text}"
 
 
 # ── Public entry point (skeleton — not yet wired) ─────────────────────────────
