@@ -227,23 +227,56 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
             # When the engine flips Comply→OFI/NC, the stored gap_description
             # is stale (it's the original evidence summary from the curated
             # upload). Replace it with a short auditor-facing gap line built
-            # from the engine's reason + unacked gap roles so the LLM
+            # from the engine's reason + unacked gap detail so the LLM
             # presents the actual missing artifacts, not the policy summary.
+            #
+            # Partition unacked leaves into:
+            #   fully_empty — leaf has zero items_recognised; pure miss
+            #   partial     — leaf has some items_recognised but not all;
+            #                 surfaces the workbook/extraction contribution
+            #                 alongside the residual gap so the user sees
+            #                 N/M MUSTs covered + the first specific miss
             if verdict.posture in ("OFI", "NC"):
-                missing_roles = sorted({
-                    l.role for l in unacked_leaves
-                    if not l.satisfied and l.role
-                })
+                fully_empty: list = []
+                partial: list = []
+                for l in unacked_leaves:
+                    if l.satisfied or not l.role:
+                        continue
+                    if l.items_recognised:
+                        partial.append(l)
+                    else:
+                        fully_empty.append(l)
+
                 ack_suffix = (
                     f" ({acked_count} acknowledged)" if acked_count else ""
                 )
-                if missing_roles:
-                    row["gap_description"] = (
-                        f"{verdict.reason}{ack_suffix}; missing artifacts of type: "
-                        + ", ".join(missing_roles)
+
+                parts = [f"{verdict.reason}{ack_suffix}"]
+
+                if fully_empty:
+                    missing_roles = sorted({l.role for l in fully_empty})
+                    parts.append(
+                        "missing artifacts of type: " + ", ".join(missing_roles)
                     )
-                elif verdict.reason:
-                    row["gap_description"] = verdict.reason + ack_suffix
+
+                if partial:
+                    partial_bits = []
+                    for l in sorted(partial, key=lambda x: x.role):
+                        sat = len(l.items_recognised)
+                        total = sat + len(l.items_unrecognised)
+                        first_miss = l.items_unrecognised[0] if l.items_unrecognised else ""
+                        # Cap the item description so the gap_description
+                        # stays compact (one line per partial leaf).
+                        first_miss_short = (first_miss[:80] + "…") if len(first_miss) > 80 else first_miss
+                        bit = f"{l.role} ({sat}/{total}"
+                        if first_miss_short:
+                            bit += f" — missing: {first_miss_short}"
+                        bit += ")"
+                        partial_bits.append(bit)
+                    parts.append("partial: " + ", ".join(partial_bits))
+
+                if len(parts) > 1 or verdict.reason:
+                    row["gap_description"] = "; ".join(parts)
             overrides += 1
         return overrides
 
