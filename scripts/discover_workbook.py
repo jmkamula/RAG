@@ -81,8 +81,9 @@ def main() -> int:
     ap.add_argument("--floor", type=float, default=0.0, help="Confidence floor (0.0-1.0); proposals below are suppressed")
     ap.add_argument("--json", action="store_true", help="Emit JSON instead of human-readable text")
     ap.add_argument("--mappings-dir", default=None, help="Override mappings dir (default: db/workbook_mappings)")
-    ap.add_argument("--persist", action="store_true", help="Write proposals to workbook_intake_proposal (requires --tenant-id)")
+    ap.add_argument("--persist", action="store_true", help="Write proposals + document_findings (requires --tenant-id)")
     ap.add_argument("--tenant-id", default=None, help="Tenant UUID for --persist")
+    ap.add_argument("--client-document-id", default=None, help="Override client_documents.id lookup (default: resolved from workbook filename)")
     args = ap.parse_args()
 
     if args.persist and not args.tenant_id:
@@ -124,12 +125,53 @@ def main() -> int:
         tenant_uuid = UUID(args.tenant_id)
         pg = build_pg_conn()
         try:
-            run_id = persist_proposals(
-                pg, tenant_uuid, str(wb_path), proposals
+            with pg.cursor() as cur:
+                cur.execute(
+                    "SELECT set_config('app.tenant_id', %s, TRUE)",
+                    (str(tenant_uuid),),
+                )
+                if args.client_document_id:
+                    client_doc_id = UUID(args.client_document_id)
+                else:
+                    # Two-step: storage_path → document_uploads.filename →
+                    # client_documents.id. document_uploads is the upload
+                    # audit log (knows the disk path); client_documents is
+                    # the evidence anchor (knows the display filename).
+                    cur.execute(
+                        """
+                        SELECT cd.id
+                          FROM document_uploads du
+                          JOIN client_documents cd
+                            ON cd.tenant_id = du.tenant_id
+                           AND cd.filename  = du.filename
+                         WHERE du.tenant_id = %s
+                           AND du.storage_path = %s
+                           AND cd.is_active
+                         ORDER BY cd.uploaded_at DESC
+                         LIMIT 1
+                        """,
+                        (str(tenant_uuid), str(wb_path)),
+                    )
+                    row = cur.fetchone()
+                    if not row:
+                        print(
+                            f"no client_documents row resolvable from storage_path={wb_path}. "
+                            f"Pass --client-document-id to override.",
+                            file=sys.stderr,
+                        )
+                        return 2
+                    client_doc_id = row[0]
+
+            run_id, findings_written = persist_proposals(
+                pg, tenant_uuid, str(wb_path), client_doc_id, proposals
             )
         finally:
             pg.close()
-        print(f"\npersisted {len(proposals)} proposal(s) as discovery_run_id={run_id}")
+        print(
+            f"\npersisted {len(proposals)} proposal(s) + {findings_written} "
+            f"document_findings as discovery_run_id={run_id} "
+            f"client_document_id={client_doc_id}"
+        )
 
     return 0
 

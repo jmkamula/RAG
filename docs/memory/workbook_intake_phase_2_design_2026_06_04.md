@@ -9,11 +9,21 @@ metadata:
 
 ACTIVE design as of 2026-06-04. Goal: ingest tenant workbooks (Arion Networks as messy-shape reference, but design for arbitrary tenant intake) and write `document_findings` rows bound to MUST ids so the engine can verdict against real workbook evidence. Closes the wiring gap where `document_findings.checklist_item_id` is null everywhere despite 10 sheets already importing to domain tables.
 
-## Pipeline shape (3 stages, decided)
+## Pipeline shape (REVISED 2026-06-04 — merged into posture Stage 1)
 
-1. **Discovery (Stage I)** — read-only fingerprint pass; produces `workbook_intake_proposal` per sheet with confidence + bindings. No writes to evidence.
-2. **Confirmation (Stage II)** — HITL cards; tenant accepts/rejects. Confirmed bindings persist in `workbook_evidence_mappings` (tenant-scoped SQL, RLS).
-3. **Extraction (Stage III)** — writes `document_findings` rows + `client_documents` pointer rows + `intake_warning` rows.
+The original 3-stage design (Discovery → Confirmation → Extraction with its own HITL surface) collided terminologically with the already-shipped posture Stage 1 / Stage 2 HITL pipeline AND duplicated the same conceptual layer ("is this a correct evidence claim?"). User flagged this directly: "i want to merge these to stage 1 stage 2." Acted on it.
+
+The revised shape:
+
+1. **Discovery** — fingerprint pass that produces `workbook_intake_proposal` (sheet-level breadcrumb, jsonb summary) AND writes `document_findings` rows inline — one per `(pass, satisfied-or-partial MUST)` with `inference_source='workbook'`, `checklist_item_id` populated, `workbook_proposal_id` linking back, `review_status='pending'`. No separate Confirmation or Extraction stages. Missing MUSTs do NOT get a finding row (gaps surface via curated MUST list vs satisfied set, the engine's job).
+2. **Posture Stage 1** (existing — `rag/posture/stage1_review_chat.py`) reviews workbook findings IN THE SAME QUEUE as LLM-doc-extracted findings. Source-agnostic — Stage 1 queries `document_findings WHERE review_status='pending'`. Zero code changes to Stage 1 to make this work.
+3. **Posture Stage 2** (existing — `rag/posture/stage2_approval_chat.py`) approves engine verdict deltas, unchanged.
+
+What this collapsed:
+- No `workbook_evidence_mappings` table. The YAML IS the binding rule; a confirmed `document_findings` row IS the confirmation.
+- No separate Stage III extraction. Discovery writes findings inline.
+- No new HITL surface. The existing Stage 1 chat picks them up for free.
+- The wiring gap CLAUDE.md flagged (`document_findings.checklist_item_id` null everywhere) closes naturally — workbook is the first extraction path that populates it.
 
 ## Core decisions
 
@@ -78,10 +88,12 @@ CamelCase splitting is an OPEN call. Recommendation: require column headers use 
 
 1. ~~Optional cleanups before Stage I~~ **DONE 2026-06-04**: `db/workbook_mappings/README.md` authored with locked decisions + schema cheat-sheet; `scripts/validate_workbook_mappings.py` validates every `target_evidence_requirement` (against `ALL_EVIDENCE_REQUIREMENTS` + all `DerivedSpec.direct_evidence`), `target_control` (matches requirement's `control_ref`), and `binds_to` id (must be ChecklistItem on the declared target). All 4 seed YAMLs clean. Exits 1 with allowed-id list on error.
 2. ~~Stage I engine~~ **DONE 2026-06-04** (in-memory v1): `rag/intake/workbook_discovery.py` (load YAMLs → tokenize → fingerprint sheets → emit `SheetProposal` / `PassProposal` dataclasses). Hand-rolled tokenizer (lowercase + split on `[\s_/-]+` + strip non-alnum + ~15 stopwords + trailing-s/es/ed/ing/ies stem with `_STEM_KEEP` exceptions). Subset-match for token bags. Conservative `coverage: partial`. CLI driver at `scripts/discover_workbook.py`. Verified against Arion `.xlsm`: 5 sheets matched 4 mappings; 33 sheets unmatched (expected — 8 of 12 originally-scoped mappings not yet authored). **Two real workbook gaps surfaced beyond the predicted-outcomes table**: Asset Register has no `Last Updated` column AT ALL; Risk Register has no `Last Assessed` column. These are real product gaps, not YAML calibration misses — feed back to Arion in Stage II.
-3. ~~Persistence (v1b)~~ **DONE 2026-06-04**: `db/schema_v31_workbook_intake_proposal.sql` (table + RLS + updated_at trigger + four indexes; unique key `(tenant_id, discovery_run_id, sheet_name, mapping_id)` so re-runs don't conflict). Writer at `rag/intake/workbook_persistence.py` (`persist_proposals(pg, tenant_id, workbook_uri, proposals) → run_id`); commits on success, rolls back + re-raises on error. CLI flags `--persist --tenant-id <uuid>` wired on `scripts/discover_workbook.py`. Verified end-to-end against Arion `.xlsm` — 5 proposals persisted (run `be16925a-5c51-413d-8cab-7cb856170b62`). Idempotency smoke-tested with second run + `--floor 0.5` (4 proposals, new run_id, no conflicts). Smoke-test run cleaned up; production snapshot retained for Stage II testing. **Supersession of prior runs is NOT implemented in v1b** — that's a Stage II concern (the schema has `superseded_at` + `superseded_by_id` columns ready).
-4. **Stage II (HITL UI)** — surface pending proposals to the tenant; let them confirm/reject/edit per pass; on confirm, write `workbook_evidence_mappings` (tenant-scoped); on supersede, mark prior runs superseded. Architecture not yet designed.
-5. Stage III (extraction) — depends on Stage II confirmed mappings.
-6. Re-ingest Arion workbook end-to-end → measure NC delta (168 NCs → ?). That delta is v1's proof.
+3. ~~Persistence (v1b)~~ **DONE 2026-06-04**: schema_v31 + writer; superseded by v32 in same session.
+4. ~~Stage II / III separate stages~~ **OBSOLETE 2026-06-04 — merged into posture Stage 1**. See "Pipeline shape REVISED" above. Concrete delivery:
+   - `db/schema_v32_workbook_intake_into_stage1.sql`: extends `document_findings.inference_source` CHECK to include `'workbook'`; simplifies `workbook_intake_proposal.status` CHECK to `pending|superseded` only (per-row review_status owns approve/reject); replaces misnamed `document_upload_id` with `client_document_id` FK; adds `document_findings.workbook_proposal_id` FK + index.
+   - `rag/intake/workbook_persistence.py`: in one transaction, inserts the proposal row + N `document_findings` rows (one per satisfied/partial MUST). FK note: `document_findings.document_id` references `client_documents`, NOT `document_uploads`. Two-step CLI lookup `storage_path → document_uploads.filename → client_documents.id`.
+   - Verified end-to-end against Arion `.xlsm`: 5 proposals + 29 findings persisted (run `af6ea615-e265-4363-b449-b106b9e400e8`, client_document_id `64f10b73-d6e1-4b54-9197-4640b8220eef`). Stage 1's `list_queue()` surfaces all 4 workbook-touched controls (A.5.9 / 6.1.2 / A.5.18 / A.5.26) with correct pending counts. Zero changes to Stage 1 code.
+5. Re-ingest Arion workbook end-to-end → measure NC delta (168 NCs → ?). That delta is the merge's proof. Requires tenant to actually approve the 29 pending findings via Stage 1 first, then engine to recompute.
 
 ## Engine vs predicted-outcomes deltas (2026-06-04 verification)
 
