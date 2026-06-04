@@ -1,0 +1,158 @@
+# Canonical workbook mapping: incident log sheet → A.5.26 evidence.
+#
+# Stage I (Discovery) reads this file, fingerprints each sheet in a tenant
+# workbook, and emits proposals. Stage II surfaces them for tenant
+# confirmation. Stage III extracts rows into document_findings + optional
+# client_documents pointer rows.
+#
+# Schema reference — every field in this file is part of the canonical
+# YAML schema. Subsequent mapping files must conform.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_26.incident_log
+
+# ── Sheet identification ─────────────────────────────────────────────────
+# Each fingerprint is a token bag matched (case-insensitive, stemmed) against
+# the tokenised sheet name. Multiple fingerprints OR together. Confidence
+# contribution from sheet-name match is 0.5 * (best token-overlap ratio).
+sheet_name_fingerprints:
+  - tokens: [incident, log]
+  - tokens: [security, incident]
+  - tokens: [incident, register]
+  - tokens: [incident, tracker]
+  - tokens: [ir, log]
+  - tokens: [ir, tracker]
+  - tokens: [breach, log]
+
+# Header row may not be row 1. Discovery tries each hint in order; first row
+# that yields ≥N required-column matches (N = 2) wins. SHEET_CONFIGS has
+# "Incident Log" header_row=2 (banner row above); seeded here so we don't
+# regress the already-working import path.
+header_row_hints: [1, 2, 3]
+
+# Minimum row count for the sheet to be considered populated. Sheets with
+# fewer rows of data than this produce a low-confidence proposal even on
+# perfect column match.
+min_data_rows: 1
+
+# ── Extraction passes ────────────────────────────────────────────────────
+# A sheet may feed multiple evidence leaves. Each pass declares its own
+# target leaf, column bindings, and freshness rule. The same row can be
+# read by multiple passes; each pass writes its own document_findings row.
+#
+# For Arion's Incident Log: pass 1 writes register evidence (Incident ID +
+# Date + Breach Classification), pass 2 writes closure evidence (Authorized
+# By + Description + Evidence Collected). Engine sees partial-coverage on
+# both leaves and produces NC at N/M for each.
+
+passes:
+
+  - pass_name: register
+    target_control: A.5.26
+    target_evidence_requirement: "req:A.5.26:incident_register"
+    target_evidence_type: register
+    freshness:
+      column_fingerprint: [date]
+      days: 90
+    required_columns:
+      - fingerprint: [incident, id]
+        binds_to: "item:A.5.26:reg_incident_id"
+      - fingerprint: [date]
+        binds_to: "item:A.5.26:reg_lifecycle_dates"
+        coverage: partial   # single Date column ≠ 5 lifecycle dates
+    optional_columns:
+      - fingerprint: [severity]
+        binds_to: "item:A.5.26:reg_severity"
+      - fingerprint: [breach, classification]
+        binds_to: "item:A.5.26:reg_severity"
+        coverage: partial   # classification ≈ severity but not exactly
+      - fingerprint: [status]
+        binds_to: "item:A.5.26:reg_status"
+      - fingerprint: [owner]
+        binds_to: "item:A.5.26:reg_owner"
+      - fingerprint: [incident, manager]
+        binds_to: "item:A.5.26:reg_owner"
+      - fingerprint: [public, impact]
+        binds_to: "item:A.5.26:reg_impact_flag"
+      - fingerprint: [regulator, relevant]
+        binds_to: "item:A.5.26:reg_impact_flag"
+      - fingerprint: [evidence, collected]
+        binds_to: "item:A.5.26:reg_evidence_link"
+      - fingerprint: [evidence, storage, location]
+        binds_to: "item:A.5.26:reg_evidence_link"
+
+  - pass_name: closure
+    target_control: A.5.26
+    target_evidence_requirement: "req:A.5.26:incident_closure_record"
+    target_evidence_type: revocation_record
+    # Closure is per-incident-when-closed, not a register; no freshness window
+    # on the leaf itself. Row-level filter only fires when a closure-shaped
+    # column is populated (e.g. Authorized By present implies closure).
+    trigger_columns:
+      - fingerprint: [authorized, by]
+      - fingerprint: [closure, by]
+      - fingerprint: [closed, by]
+    required_columns:
+      - fingerprint: [incident, id]
+        binds_to: "item:A.5.26:cls_incident_ref"
+      - fingerprint: [authorized, by]
+        binds_to: "item:A.5.26:cls_authoriser"
+    optional_columns:
+      - fingerprint: [root, cause]
+        binds_to: "item:A.5.26:cls_root_cause"
+      - fingerprint: [description]
+        binds_to: "item:A.5.26:cls_root_cause"
+        coverage: partial   # free-text description ≠ structured root cause
+      - fingerprint: [containment]
+        binds_to: "item:A.5.26:cls_containment_eff"
+      - fingerprint: [recovery]
+        binds_to: "item:A.5.26:cls_recovery_valid"
+      - fingerprint: [restoration, reason]
+        binds_to: "item:A.5.26:cls_root_cause"
+        coverage: partial
+      - fingerprint: [pii, involved]
+        binds_to: "item:A.5.26:cls_gdpr_triggered"
+      - fingerprint: [supervisory, authority, notified]
+        binds_to: "item:A.5.26:cls_external_notif"
+      - fingerprint: [data, subject, notified]
+        binds_to: "item:A.5.26:cls_external_notif"
+      - fingerprint: [evidence, storage, location]
+        binds_to: "item:A.5.26:cls_evidence_archive"
+      - fingerprint: [chain, custody]
+        binds_to: "item:A.5.26:cls_evidence_archive"
+      - fingerprint: [sla, met]
+        binds_to: "item:A.5.26:cls_sla_met"
+
+# ── Pointer columns ──────────────────────────────────────────────────────
+# Sheets may reference external documents (e.g. "Evidence Storage Location"
+# pointing to a forensic-evidence file). Each pointer column emits a
+# client_documents row even if the file isn't uploaded yet, so the gap
+# surfaces as "claimed but not provided" in the Stage III intake report.
+pointer_columns:
+  - column_fingerprint: [evidence, storage, location]
+    document_kind: forensic_evidence
+    surfaces_gap_when_missing: true
+
+# ── Cross-control links ──────────────────────────────────────────────────
+# Informational — used by the Stage II HITL card to show "this sheet also
+# touches X". Does not write evidence to these controls. Drives narrative
+# completeness checks (e.g. if Incident Log writes evidence but A.5.25
+# triage register is empty, flag the gap).
+cross_control_links:
+  - control: A.5.25
+    rationale: "triage decisions feed incident register (reg_incident_id ties back to A.5.25 triage_id)"
+  - control: A.5.27
+    rationale: "closure records hand off to lessons-learned (cls_lessons_handoff)"
+  - control: A.5.28
+    rationale: "evidence storage / chain-of-custody columns feed evidence-handling discipline"
+  - control: A.5.9
+    rationale: "Asset ID column ties incidents to asset register"
+
+# ── Confidence weighting overrides ───────────────────────────────────────
+# Default weights (sheet_name 0.5, required_columns 0.4, row_count 0.1) live
+# in the discovery engine. Override here per-mapping when warranted. Leave
+# unset to inherit defaults.
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

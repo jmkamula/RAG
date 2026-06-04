@@ -1,0 +1,128 @@
+# Canonical workbook mapping: risk register sheet → 6.1.2 evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.6_1_2.risk_register
+
+# ── Sheet identification ─────────────────────────────────────────────────
+sheet_name_fingerprints:
+  - tokens: [risk, register]
+  - tokens: [risk, log]
+  - tokens: [risk, inventory]
+  - tokens: [security, risk, register]
+  - tokens: [information, security, risk, register]
+  - tokens: [risk, assessment, log]
+
+# SHEET_CONFIGS has "Risk Register" header_row=1.
+header_row_hints: [1, 2, 3]
+
+min_data_rows: 1
+
+# ── Extraction passes ────────────────────────────────────────────────────
+# Single-pass. Procedure / methodology scope / program review live in
+# documents, not rows.
+
+passes:
+
+  - pass_name: register
+    target_control: "6.1.2"
+    target_evidence_requirement: "req:6.1.2:risk_register"
+    target_evidence_type: register
+    freshness:
+      # Annual refresh (looser than asset register's 90d — risk registers
+      # don't churn daily). Row-level: each risk's last_assessed date must
+      # be within the window for that row to count as fresh.
+      column_fingerprint: [last, assessed]
+      alternative_fingerprints:
+        - [assessment, date]
+        - [last, reviewed]
+        - [last, updated]
+        - [reviewed, date]
+      days: 365
+
+    required_columns:
+      - fingerprint: [risk, id]
+        binds_to: "item:6.1.2:reg_risk_id"
+      - fingerprint: [owner]
+        binds_to: "item:6.1.2:reg_owner"
+      - fingerprint: [risk, owner]
+        binds_to: "item:6.1.2:reg_owner"
+      - fingerprint: [responsible, party]
+        binds_to: "item:6.1.2:reg_owner"
+        coverage: partial   # "responsible party" weaker than named risk owner
+      - fingerprint: [treatment, status]
+        binds_to: "item:6.1.2:reg_treatment_status"
+      - fingerprint: [treatment, decision]
+        binds_to: "item:6.1.2:reg_treatment_status"
+      - fingerprint: [status]
+        binds_to: "item:6.1.2:reg_treatment_status"
+        coverage: partial   # generic "Status" weaker than treatment-specific
+      - fingerprint: [last, assessed]
+        binds_to: "item:6.1.2:reg_last_assessed"
+      - fingerprint: [assessment, date]
+        binds_to: "item:6.1.2:reg_last_assessed"
+
+    # ── Column groups ────────────────────────────────────────────────────
+    # Risk description is defined as "asset, threat, vulnerability" — no
+    # single column carries the full description on most workbooks. The
+    # combination of Threat + Vulnerability (+ Asset Name for context)
+    # satisfies the MUST. Falls back to a single description column if
+    # the tenant collapses it into one cell.
+    column_groups:
+      - group_name: risk_description_components
+        binds_to: "item:6.1.2:reg_description"
+        requires: all
+        columns:
+          - fingerprint: [threat]
+          - fingerprint: [vulnerability]
+      - group_name: risk_description_single
+        binds_to: "item:6.1.2:reg_description"
+        requires: any
+        columns:
+          - fingerprint: [risk, description]
+          - fingerprint: [description]
+          - fingerprint: [risk, statement]
+
+    # Scoring is "likelihood + consequence (impact)" — three-column group
+    # (Likelihood + Impact + Risk Score) is the standard shape. A single
+    # combined Risk Score column alone is partial — engine sees the score
+    # but can't audit the underlying L × C derivation.
+      - group_name: risk_scoring_components
+        binds_to: "item:6.1.2:reg_scoring"
+        requires: all
+        columns:
+          - fingerprint: [likelihood]
+          - fingerprint: [impact]
+      - group_name: risk_scoring_combined_only
+        binds_to: "item:6.1.2:reg_scoring"
+        requires: any
+        coverage: partial   # combined score without L/C breakdown
+        columns:
+          - fingerprint: [risk, score]
+          - fingerprint: [risk, rating]
+          - fingerprint: [risk, level]
+
+    optional_columns:
+      - fingerprint: [issues, register, link]
+        binds_to: "item:6.1.2:reg_4_1_link"
+      - fingerprint: [issue, ref]
+        binds_to: "item:6.1.2:reg_4_1_link"
+
+# ── Pointer columns ──────────────────────────────────────────────────────
+pointer_columns: []
+
+# ── Cross-control links ──────────────────────────────────────────────────
+cross_control_links:
+  - control: A.5.9
+    rationale: "Asset ID column on risk rows ties each risk to the asset register"
+  - control: "6.1.3"
+    rationale: "Treatment status / treatment decision lives in the Risk Treatment Plan sheet (6.1.3); v1 schema does not cross-sheet-join, so reg_treatment_status will be unsatisfied here when tenants split the data across two sheets"
+  - control: "4.1"
+    rationale: "Issues register entries (4.1) often surface the risks that land here"
+  - control: A.8.8
+    rationale: "Technical vulnerability management feeds the Vulnerability column"
+
+# ── Confidence weighting overrides ───────────────────────────────────────
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

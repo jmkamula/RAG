@@ -1,0 +1,143 @@
+# Canonical workbook mapping: asset register sheet → A.5.9 evidence.
+#
+# Stage I (Discovery) reads this file, fingerprints each sheet in a tenant
+# workbook, and emits proposals. Stage II surfaces them for tenant
+# confirmation. Stage III extracts rows into document_findings + optional
+# client_documents pointer rows.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_9.asset_register
+
+# ── Sheet identification ─────────────────────────────────────────────────
+sheet_name_fingerprints:
+  - tokens: [asset, register]
+  - tokens: [asset, inventory]
+  - tokens: [asset, list]
+  - tokens: [information, asset, register]
+  - tokens: [it, asset, register]
+  - tokens: [cmdb]
+
+# Asset registers commonly have headers in row 1, but allow drift for sheets
+# with banner rows above. SHEET_CONFIGS has "Asset Register" header_row=1.
+header_row_hints: [1, 2, 3]
+
+min_data_rows: 1
+
+# ── Extraction passes ────────────────────────────────────────────────────
+# Single-pass: the sheet IS the register. Procedure / discovery / review
+# leaves on A.5.9 are document-shaped, not row-shaped, and do not live in
+# this workbook.
+
+passes:
+
+  - pass_name: register
+    target_control: A.5.9
+    target_evidence_requirement: "req:A.5.9:asset_inventory"
+    target_evidence_type: asset_register
+    freshness:
+      # Row-level freshness — each row's last_updated date must be within
+      # freshness_days for the row to count as fresh. If the column is
+      # missing from the sheet, engine emits a warning and skips the check
+      # (does not fail-closed on missing data).
+      column_fingerprint: [last, updated]
+      alternative_fingerprints:
+        - [updated, date]
+        - [modified, date]
+        - [last, modified]
+        - [last, reviewed]
+      days: 90
+    required_columns:
+      - fingerprint: [asset, id]
+        binds_to: "item:A.5.9:asset_records"
+      - fingerprint: [asset, name]
+        binds_to: "item:A.5.9:asset_records"
+      - fingerprint: [owner]
+        binds_to: "item:A.5.9:owner_per_asset"
+      - fingerprint: [asset, owner]
+        binds_to: "item:A.5.9:owner_per_asset"
+      - fingerprint: [location]
+        binds_to: "item:A.5.9:location"
+      - fingerprint: [asset, location]
+        binds_to: "item:A.5.9:location"
+      - fingerprint: [hosting, location]
+        binds_to: "item:A.5.9:location"
+      - fingerprint: [asset, type]
+        binds_to: "item:A.5.9:asset_type"
+      - fingerprint: [category]
+        binds_to: "item:A.5.9:asset_type"
+        coverage: partial   # generic "Category" weaker than asset-type taxonomy
+      - fingerprint: [last, updated]
+        binds_to: "item:A.5.9:last_updated"
+      - fingerprint: [modified, date]
+        binds_to: "item:A.5.9:last_updated"
+      - fingerprint: [last, reviewed]
+        binds_to: "item:A.5.9:last_updated"
+        coverage: partial   # review date ≠ update date
+
+    # ── Column groups ────────────────────────────────────────────────────
+    # A column_group expresses "ALL of these columns must be present to
+    # satisfy the bound MUST." Default behaviour (multiple required_columns
+    # binding to same MUST) is ANY-of — first column found satisfies it.
+    # Use groups when no single column suffices and the combination is
+    # what counts.
+    column_groups:
+      - group_name: cia_triad_classification
+        binds_to: "item:A.5.9:classification"
+        requires: all
+        columns:
+          - fingerprint: [confidentiality]
+          - fingerprint: [integrity]
+          - fingerprint: [availability]
+      # Alternative single-column classification — if the tenant has one
+      # column called "Classification" or "Sensitivity", that satisfies the
+      # MUST without the triad. ANY group below ORs with the ALL group above.
+      - group_name: single_label_classification
+        binds_to: "item:A.5.9:classification"
+        requires: any
+        columns:
+          - fingerprint: [classification]
+          - fingerprint: [sensitivity]
+          - fingerprint: [info, class]
+
+    optional_columns:
+      - fingerprint: [lifecycle, status]
+        binds_to: "item:A.5.9:lifecycle_status"
+      - fingerprint: [status]
+        binds_to: "item:A.5.9:lifecycle_status"
+        coverage: partial
+      - fingerprint: [dependencies]
+        binds_to: "item:A.5.9:dependencies"
+      - fingerprint: [related, assets]
+        binds_to: "item:A.5.9:dependencies"
+      - fingerprint: [personal, data, types]
+        binds_to: "item:A.5.9:dfi_link"
+      - fingerprint: [pii, categories]
+        binds_to: "item:A.5.9:dfi_link"
+      - fingerprint: [retention, period]
+        binds_to: "item:A.5.9:dfi_link"
+        coverage: partial   # retention hints at PII presence but is its own concept
+
+# ── Pointer columns ──────────────────────────────────────────────────────
+# Asset_Location can reference systems (Odoo Cloud, Azure Cloud Platform,
+# MSFT Sharepoint) but those are vendor names, not document IDs. Not a
+# pointer column in the client_documents sense. None declared here.
+pointer_columns: []
+
+# ── Cross-control links ──────────────────────────────────────────────────
+cross_control_links:
+  - control: A.5.12
+    rationale: "classification per asset draws from A.5.12 classification scheme"
+  - control: A.5.13
+    rationale: "labelling per A.5.13 applies the classification recorded here"
+  - control: A.7.14
+    rationale: "asset retirement / disposal handed off per A.7.14"
+  - control: A.8.10
+    rationale: "information-deletion linked to asset retirement"
+  - control: Art.30
+    rationale: "PII-overlay columns (Personal Data Types, Data Subjects, Processing Purposes, Retention Period) hint at records-of-processing scope; an art30 mapping would also fingerprint-match this sheet"
+
+# ── Confidence weighting overrides ───────────────────────────────────────
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

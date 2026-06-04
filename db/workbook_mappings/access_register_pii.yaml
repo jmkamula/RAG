@@ -1,0 +1,171 @@
+# Canonical workbook mapping: PII-scoped access register sheet → A.5.18 evidence.
+#
+# Sheet name suggests multi-target (A.5.18 + A.5.34) but the actual MUSTs
+# don't agree: A.5.34's pii_processing_register is a PII-PROCESSING-activity
+# register (categories / lawful basis / retention / transfers), while this
+# sheet is an ACCESS register specialised for PII-containing systems. The
+# PII-overlay columns enrich A.5.18 evidence; they don't satisfy any A.5.34
+# MUST. Single pass to A.5.18.
+#
+# A future workbook mapping for A.5.34 will fingerprint-match a true PII
+# processing register sheet (RoPA-shaped: activity / purpose / lawful_basis
+# / retention / transfers), which is a different sheet entirely.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_18.access_register_pii
+
+# ── Sheet identification ─────────────────────────────────────────────────
+sheet_name_fingerprints:
+  - tokens: [access, register, pii]
+  - tokens: [pii, access, register]
+  - tokens: [access, register, pii, systems]
+  - tokens: [pii, systems, access]
+  # General access registers — same canonical mapping. The PII-overlay
+  # columns are optional; absent ones just don't satisfy the privileged
+  # flag / data_accuracy SHOULDs.
+  - tokens: [access, register]
+  - tokens: [access, rights, register]
+  - tokens: [user, access, register]
+  - tokens: [access, review, log]
+    # weaker — review logs are review-record-shaped, not register-shaped;
+    # the engine will still propose, tenant can reject in Stage II
+  - tokens: [access, log]
+
+header_row_hints: [1, 2, 3]
+
+min_data_rows: 1
+
+# ── Extraction passes ────────────────────────────────────────────────────
+# Single pass to A.5.18 access_rights_register. See file-header note for
+# why A.5.34 is NOT a second pass target despite the sheet-name overlap.
+
+passes:
+
+  - pass_name: access_register
+    target_control: A.5.18
+    target_evidence_requirement: "req:A.5.18:access_rights_register"
+    target_evidence_type: register
+    # A.5.18 register has no freshness_days at the requirement level — the
+    # 180d freshness lives on the review leaf, not on the register itself.
+    # Per-row last_verified surfaces as a column binding, not as a
+    # freshness check.
+
+    required_columns:
+      - fingerprint: [user, id]
+        binds_to: "item:A.5.18:reg_idmgmt_link"
+      - fingerprint: [identity, id]
+        binds_to: "item:A.5.18:reg_idmgmt_link"
+      - fingerprint: [date, granted]
+        binds_to: "item:A.5.18:reg_grant_date"
+      - fingerprint: [grant, date]
+        binds_to: "item:A.5.18:reg_grant_date"
+      - fingerprint: [last, verified]
+        binds_to: "item:A.5.18:reg_last_verified"
+      - fingerprint: [pii, review, date]
+        binds_to: "item:A.5.18:reg_last_verified"
+        coverage: partial   # quarterly review date ≠ per-row last-verified
+      - fingerprint: [next, review, due]
+        binds_to: "item:A.5.18:reg_review_due"
+      - fingerprint: [review, due, date]
+        binds_to: "item:A.5.18:reg_review_due"
+
+    # ── Column groups ────────────────────────────────────────────────────
+    # Subject-to-asset mapping needs both halves: the subject (Name or
+    # User ID) AND the asset (System / Application). Either alone is
+    # insufficient — the MUST is the *relationship*, not the endpoints.
+    column_groups:
+      - group_name: subject_asset_mapping
+        binds_to: "item:A.5.18:reg_subject_asset"
+        requires: all
+        columns:
+          - fingerprint: [name]
+            alternative_fingerprints:
+              - [user, name]
+              - [subject, name]
+              - [identity]
+          - fingerprint: [system]
+            alternative_fingerprints:
+              - [system, application]
+              - [application]
+              - [asset]
+              - [resource]
+
+    # Authoriser may be a generic "Authorized By" OR a PII-scoped
+    # "PII Approver" — either satisfies the MUST. Any-of group.
+      - group_name: authoriser_source
+        binds_to: "item:A.5.18:reg_authoriser"
+        requires: any
+        columns:
+          - fingerprint: [authorized, by]
+          - fingerprint: [authoriser]
+          - fingerprint: [approved, by]
+          - fingerprint: [pii, approver]
+          - fingerprint: [dpo]
+            coverage: partial   # DPO column suggests PII-scoped approval but isn't the full grant-authoriser
+
+    # Status is "active / suspended / revoked." No direct Status column on
+    # most workbooks — presence/absence of "Date of Revoke" derives the
+    # state. v1 schema doesn't support column-derived bindings; declare
+    # the direct binding and accept partial coverage when Date of Revoke
+    # is present (proves at least the revoked path is tracked).
+      - group_name: status_explicit
+        binds_to: "item:A.5.18:reg_status"
+        requires: any
+        columns:
+          - fingerprint: [status]
+          - fingerprint: [access, status]
+      - group_name: status_derived_from_revoke_date
+        binds_to: "item:A.5.18:reg_status"
+        requires: any
+        coverage: partial   # presence of revoke-date column hints at active/revoked tracking but isn't an explicit status field
+        columns:
+          - fingerprint: [date, revoked]
+          - fingerprint: [revoke, date]
+          - fingerprint: [date, of, revoke]
+          - fingerprint: [revocation, date]
+
+    optional_columns:
+      - fingerprint: [pii, role]
+        binds_to: "item:A.5.18:reg_privileged_flag"
+        # PII Role (Privileged / Standard) functions as the privileged-flag
+        # for PII-scoped grants
+      - fingerprint: [privileged]
+        binds_to: "item:A.5.18:reg_privileged_flag"
+      - fingerprint: [scope, to, pii]
+        binds_to: "item:A.5.18:reg_privileged_flag"
+        coverage: partial   # "Full PII / Partial / None" scope ≠ privileged flag, but tracks similar concept
+      - fingerprint: [temporary]
+        binds_to: "item:A.5.18:reg_temporary_flag"
+      - fingerprint: [expiry, date]
+        binds_to: "item:A.5.18:reg_temporary_flag"
+        coverage: partial   # expiry date hints at temporary access
+      - fingerprint: [business, justification]
+        binds_to: "item:A.5.18:reg_business_justification"
+      - fingerprint: [reason]
+        binds_to: "item:A.5.18:reg_business_justification"
+        coverage: partial
+      - fingerprint: [access, rights]
+        binds_to: "item:A.5.18:reg_subject_asset"
+        coverage: partial   # description of rights enriches the subject-asset mapping
+
+# ── Pointer columns ──────────────────────────────────────────────────────
+pointer_columns: []
+
+# ── Cross-control links ──────────────────────────────────────────────────
+cross_control_links:
+  - control: A.5.16
+    rationale: "User ID column anchors the A.5.16 identity register link (reg_idmgmt_link MUST); identity-pair integrity sits at the A.5.18 review leaf"
+  - control: A.5.17
+    rationale: "Access grants pair with A.5.17 authentication info (credentials); a sibling credential register sheet would fingerprint elsewhere"
+  - control: A.5.34
+    rationale: "Sheet name overlap with PII control is incidental — A.5.34 pii_processing_register is RoPA-shaped (activity / lawful_basis / retention / transfers), NOT access-shaped. NOT a pass target on this mapping. A future YAML for a RoPA sheet will fingerprint-match A.5.34 directly"
+  - control: A.8.2
+    rationale: "Privileged-access oversight (A.8.2) consumes the reg_privileged_flag rows from this register"
+  - control: A.6.5
+    rationale: "HR off-boarding (A.6.5) triggers revocation entries via Date of Revoke column"
+
+# ── Confidence weighting overrides ───────────────────────────────────────
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1
