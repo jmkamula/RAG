@@ -154,6 +154,16 @@ class GenericLeafEvaluator:
             # (commit 4): findings that haven't been user-approved don't feed
             # the engine. Pre-deploy rows were backfilled to 'approved' by the
             # schema migration so existing tenants aren't quietly downgraded.
+            #
+            # NOTE: no cd.evidence_type filter here. checklist_item_id is
+            # leaf-scoped — every item id is bound to exactly one leaf, so
+            # any approved per-item finding by definition belongs to that
+            # leaf regardless of how the source document is tagged. The
+            # filter was a Phase-1-era safety net from before per-item
+            # bindings existed; with workbook intake, one source document
+            # legitimately satisfies many leaves of different evidence_types
+            # (one .xlsm feeds asset_register / register / risk_register /
+            # revocation_record leaves simultaneously).
             cur.execute("""
                 SELECT df.checklist_item_id,
                        cd.uploaded_at
@@ -161,14 +171,13 @@ class GenericLeafEvaluator:
                 JOIN client_documents cd
                   ON cd.id = df.document_id
                 WHERE cd.tenant_id        = %s
-                  AND cd.evidence_type    = %s
                   AND cd.is_active        = TRUE
                   AND cd.is_current       = TRUE
                   AND df.checklist_item_id = ANY(%s)
                   AND df.status           = 'present'
                   AND df.is_active        = TRUE
                   AND df.review_status    = 'approved'
-            """, (self._tenant_id, evidence_type, list(must_item_ids)))
+            """, (self._tenant_id, list(must_item_ids)))
             per_item_rows = cur.fetchall()
 
             if per_item_rows:
