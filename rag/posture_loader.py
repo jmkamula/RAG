@@ -194,13 +194,26 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
                 # in a later iteration when we have a richer view.
                 continue
 
-            # HITL Stage-2 gate (commit 5): only apply the in-memory overlay
-            # when the engine proposal for this row has been user-approved.
-            # 'proposed' / 'rejected' / 'none' keep the live posture_controls
-            # finding untouched. The persisted proposal (commit 4) still
-            # records the engine's view so the Stage-2 chat surface can list
-            # it; we just don't preempt the user's decision in the answer.
-            if row.get("engine_proposal_status") != "approved":
+            # Two paths trigger the in-memory overlay:
+            #   (a) HITL Stage-2 gate: engine_proposal_status='approved' —
+            #       Stage-2 user accepted the engine's proposed verdict
+            #       (e.g. Comply→NC promotion). 'proposed' / 'rejected' /
+            #       'none' otherwise keep the live posture_controls finding
+            #       untouched; the persisted proposal (commit 4) still
+            #       records the engine's view for the Stage-2 chat surface.
+            #   (b) Engine agrees with live at NC/OFI: no Stage-2 proposal
+            #       exists (suppression), but the engine's structured
+            #       4-leaf reasoning is strictly more informative than the
+            #       legacy PC.gap_description prose. Overlay the engine
+            #       reason / gap_list so chat surfaces the auditor-grade
+            #       detail. Comply==Comply still skipped — engine adds
+            #       nothing. See [[engine_agreement_suppression]].
+            status        = row.get("engine_proposal_status")
+            agrees_on_gap = (
+                verdict.posture in ("NC", "OFI")
+                and row.get("finding") == verdict.posture
+            )
+            if status != "approved" and not agrees_on_gap:
                 continue
 
             # Suppress acknowledged leaves from the headline. Verdict stays
@@ -303,10 +316,13 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
     Idempotency: the skip-no-op check compares the proposed (finding, reason)
     against the LATEST engine PA row for the control (any status). If they
     match exactly, the proposal is treated as a no-op and skipped — pending
-    rows skip churn; approved/rejected rows skip the re-propose. The
-    [[engine_agreement_suppression]] product debt is preserved as before:
-    when there's no engine PA history at all AND the engine agrees with the
-    live finding AND lifecycle is 'none', skip.
+    rows skip churn; approved/rejected rows skip the re-propose.
+
+    Concurrence path ([[engine_agreement_suppression]] fix): when the engine
+    agrees with the live finding at NC or OFI, write the engine PA at
+    status='active' (no Stage-2 queue entry) so chat / LLM context can pick
+    up the engine's structured 4-leaf reason via PA. Comply / N/A
+    concurrence is still skipped — engine adds nothing on top.
 
     Writes commit at the end. On exception, rolls back and re-raises; caller
     treats persistence as best-effort.
@@ -371,14 +387,29 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
                     standard_id          = standard_id_full,
                     engine_authored_only = True,
                 )
+
+                # NC/OFI concurrence: engine and live both say the same
+                # gap-bearing verdict. The live decision stands; the engine
+                # attaches its structured 4-leaf reason at status='active'
+                # so chat / LLM context can surface auditor-grade detail.
+                # No Stage-2 entry needed — there's nothing to decide.
+                # See [[engine_agreement_suppression]].
+                agrees_nc_ofi_concur = (
+                    posture in ("NC", "OFI") and live_finding == posture
+                )
+
                 if latest is not None:
                     if latest["finding"] == posture and (latest["gap_description"] or "") == reason:
                         continue
                 else:
-                    # No engine PA history yet. Skip when engine agrees with
-                    # live AND lifecycle is fresh — [[engine_agreement_suppression]].
-                    if live_finding == posture and cur_status in ("none", None):
+                    # No engine PA history yet. Skip when engine concurs with
+                    # live at Comply / N/A — engine adds nothing on top of a
+                    # clean posture. NC / OFI concurrence falls through to
+                    # write an 'active' engine PA (above).
+                    if live_finding == posture and not agrees_nc_ofi_concur:
                         continue
+
+                write_status = "active" if agrees_nc_ofi_concur else "pending"
 
                 set_assertion(
                     cur,
@@ -386,23 +417,27 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
                     control_ref     = control_ref,
                     standard_id     = standard_id_full,
                     source          = "engine",
-                    status          = "pending",
+                    status          = write_status,
                     finding         = posture,
                     gap_description = reason,
                     set_by          = "engine",
                 )
-                cur.execute(
-                    """
-                    UPDATE posture_controls
-                       SET engine_proposal_status = 'proposed',
-                           engine_proposed_at     = NOW()
-                     WHERE tenant_id   = %s
-                       AND standard_id = %s
-                       AND control_ref = %s
-                       AND is_active   = TRUE
-                    """,
-                    (tenant_id, standard_id_full, control_ref),
-                )
+                # Lifecycle marker only fires for proposals awaiting a Stage-2
+                # decision. 'active' concurrences need no queue entry — the
+                # live finding already matches.
+                if write_status == "pending":
+                    cur.execute(
+                        """
+                        UPDATE posture_controls
+                           SET engine_proposal_status = 'proposed',
+                               engine_proposed_at     = NOW()
+                         WHERE tenant_id   = %s
+                           AND standard_id = %s
+                           AND control_ref = %s
+                           AND is_active   = TRUE
+                        """,
+                        (tenant_id, standard_id_full, control_ref),
+                    )
                 written += 1
         pg_conn.commit()
         return written
