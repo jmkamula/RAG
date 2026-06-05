@@ -1,0 +1,85 @@
+# Canonical workbook mapping: change management log sheet → A.8.32 change
+# programme review evidence.
+#
+# Tenants typically maintain a change management log listing each change
+# request with change owner, requestor, justification, approvers, approval
+# date, implementation date, review date, review outcome. This YAML binds
+# the canonical review-date / reviewer columns to A.8.32:change_program_review
+# (annual programme review) and surfaces register-completeness / emergency-
+# ratio / incident-trending as partial signals.
+
+schema_version: 1
+mapping_id: workbook.iso.A_8_32.change_management_review
+
+sheet_name_fingerprints:
+  - tokens: [change, log]
+  - tokens: [change, register]
+  - tokens: [change, mgmt]
+  - tokens: [change, management]
+  - tokens: [cab, log]
+  - tokens: [rfc, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: change_programme_review
+    target_control: "A.8.32"
+    target_evidence_requirement: "req:A.8.32:change_program_review"
+    target_evidence_type: review_record
+    freshness:
+      column_fingerprint: [review, date]
+      alternative_fingerprints:
+        - [implementation, date]
+        - [approval, date]
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [review, date]
+        binds_to: "item:A.8.32:rev_date"
+        alternative_fingerprints:
+          - [implementation, date]
+          - [approval, date]
+      - fingerprint: [change, owner]
+        binds_to: "item:A.8.32:rev_reviewer"
+        alternative_fingerprints:
+          - [approvers]
+          - [reviewer]
+          - [cab]
+    optional_columns:
+      # Register-completeness signal: presence of a Change ID column means
+      # each change is enumerated; emergency-ratio is hinted by Change Type
+      # or Priority columns; incident trending is partial via Impact and
+      # Risk Assessment / Review outcome columns.
+      - fingerprint: [change, id]
+        binds_to: "item:A.8.32:rev_register_completeness"
+        coverage: partial
+      - fingerprint: [change, type]
+        binds_to: "item:A.8.32:rev_emergency_ratio"
+        coverage: partial
+      - fingerprint: [priority]
+        binds_to: "item:A.8.32:rev_emergency_ratio"
+        coverage: partial
+      - fingerprint: [impact, risk]
+        binds_to: "item:A.8.32:rev_change_incidents"
+        coverage: partial
+      - fingerprint: [review, outcome]
+        binds_to: "item:A.8.32:rev_findings_update"
+        coverage: partial
+      - fingerprint: [rollback, plan]
+        binds_to: "item:A.8.32:rev_change_incidents"
+        coverage: partial
+      - fingerprint: [next, review]
+        binds_to: "item:A.8.32:rev_next_date"
+
+cross_control_links:
+  - control: "A.5.26"
+    rationale: "Change-induced incidents cross-link to incident register"
+  - control: "6.3"
+    rationale: "ISMS-level changes (6.3) tracked via the same log shape"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

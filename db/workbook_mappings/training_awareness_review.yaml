@@ -1,0 +1,77 @@
+# Canonical workbook mapping: training & awareness log → A.6.3 awareness
+# programme review evidence.
+#
+# Tenants maintain a record of awareness / training events: training ID,
+# title, date delivered, trainer, participants, completion status, evaluation
+# results, next training date. This YAML targets A.6.3:awareness_programme_review
+# which is the annual review of the awareness programme — its MUSTs map well
+# to completion-rate and effectiveness columns.
+
+schema_version: 1
+mapping_id: workbook.iso.A_6_3.training_awareness_review
+
+sheet_name_fingerprints:
+  - tokens: [training, record]
+  - tokens: [training, log]
+  - tokens: [awareness, record]
+  - tokens: [awareness, log]
+  - tokens: [training, awareness]
+  - tokens: [security, awareness]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: awareness_programme_review
+    target_control: "A.6.3"
+    target_evidence_requirement: "req:A.6.3:awareness_programme_review"
+    target_evidence_type: review_record
+    freshness:
+      column_fingerprint: [date, delivered]
+      alternative_fingerprints:
+        - [training, date]
+        - [delivery, date]
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [date, delivered]
+        binds_to: "item:A.6.3:rev_date"
+        alternative_fingerprints:
+          - [training, date]
+          - [date]
+      - fingerprint: [trainer]
+        binds_to: "item:A.6.3:rev_reviewer"
+        alternative_fingerprints:
+          - [instructor]
+          - [facilitator]
+          - [reviewer]
+    optional_columns:
+      - fingerprint: [completion, status]
+        binds_to: "item:A.6.3:rev_completion_rate"
+        coverage: partial
+      - fingerprint: [participants]
+        binds_to: "item:A.6.3:rev_completion_rate"
+        coverage: partial
+      - fingerprint: [evaluation, results]
+        binds_to: "item:A.6.3:rev_effectiveness"
+        coverage: partial
+      - fingerprint: [training, title]
+        binds_to: "item:A.6.3:rev_curriculum_check"
+        coverage: partial
+      - fingerprint: [proof, completion]
+        binds_to: "item:A.6.3:rev_register_update"
+        coverage: partial
+      - fingerprint: [next, training, date]
+        binds_to: "item:A.6.3:rev_next_date"
+
+cross_control_links:
+  - control: "7.2"
+    rationale: "Same log feeds clause 7.2 competence evidence"
+  - control: "7.3"
+    rationale: "Same log feeds clause 7.3 awareness completion register"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

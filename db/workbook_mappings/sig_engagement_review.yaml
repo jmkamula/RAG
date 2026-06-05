@@ -1,0 +1,72 @@
+# Canonical workbook mapping: special-interest-group engagement log →
+# A.5.6 SIG engagement review evidence.
+#
+# Tenants maintain a register of special interest groups (industry forums,
+# CERTs, regulator working groups, vendor advisory boards) they engage
+# with for security knowledge. The same sheet typically tracks last review
+# date per entry. This YAML binds those columns to A.5.6:sig_engagement_review.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_6.sig_engagement_review
+
+sheet_name_fingerprints:
+  - tokens: [special, interest]
+  - tokens: [spec, int]              # tenants commonly abbreviate column / sheet tags
+  - tokens: [sig, engagement]
+  - tokens: [sig, log]
+  - tokens: [interest, group]
+  - tokens: [int, engagement]
+  - tokens: [community, engagement]
+  - tokens: [industry, forum]
+
+header_row_hints: [1, 2, 3]   # Arion's sheet has the table at row 3
+min_data_rows: 1
+
+passes:
+
+  - pass_name: sig_engagement_review
+    target_control: "A.5.6"
+    target_evidence_requirement: "req:A.5.6:sig_engagement_review"
+    target_evidence_type: review_record
+    freshness:
+      column_fingerprint: [last, review, date]
+      alternative_fingerprints:
+        - [review, date]
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [last, review, date]
+        binds_to: "item:A.5.6:rev_date"
+        alternative_fingerprints:
+          - [review, date]
+      - fingerprint: [assigned, to]
+        binds_to: "item:A.5.6:rev_reviewer"
+        alternative_fingerprints:
+          - [owner]
+          - [reviewer]
+    optional_columns:
+      - fingerprint: [findings]
+        binds_to: "item:A.5.6:rev_per_entry"
+        coverage: partial
+      - fingerprint: [engagement, type]
+        binds_to: "item:A.5.6:rev_per_entry"
+        coverage: partial
+      - fingerprint: [focus, area]
+        binds_to: "item:A.5.6:rev_scope_check"
+        coverage: partial
+      - fingerprint: [tags]
+        binds_to: "item:A.5.6:rev_register_update"
+        coverage: partial
+      - fingerprint: [next, review, date]
+        binds_to: "item:A.5.6:rev_next_date"
+
+cross_control_links:
+  - control: "A.5.5"
+    rationale: "Authority-contact register (A.5.5) often lives alongside SIG register"
+  - control: "A.5.7"
+    rationale: "SIG outputs feed threat-intelligence programme (A.5.7)"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

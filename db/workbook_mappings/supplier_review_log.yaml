@@ -1,0 +1,103 @@
+# Canonical workbook mapping: supplier review register sheet → A.5.22 supplier
+# review evidence.
+#
+# Tenants typically maintain a third-party / vendor risk register listing each
+# supplier with date of last security review, risk rating, controls in place,
+# and next planned review. This YAML binds the canonical review-date /
+# reviewer columns to A.5.22:supplier_review_record (per-supplier review).
+#
+# A.5.22 has 12 MUSTs many of which are content-rich audit judgements (rev_scope,
+# rev_performance, rev_reports, rev_audit, etc.) — these can't be directly
+# columnar. The YAML maps date + owner / reviewer cleanly and surfaces the
+# remaining MUSTs as partial-evidence hints via supporting columns.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_22.supplier_review_log
+
+sheet_name_fingerprints:
+  - tokens: [supplier, review]
+  - tokens: [vendor, review]
+  - tokens: [vendor, risk]
+  - tokens: [third, party, risk]
+  - tokens: [third, party, vendor]
+  - tokens: [supplier, register]
+  - tokens: [supplier, assessment]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: per_supplier_review
+    target_control: "A.5.22"
+    target_evidence_requirement: "req:A.5.22:supplier_review_record"
+    target_evidence_type: review_record
+    freshness:
+      column_fingerprint: [last, review, date]
+      alternative_fingerprints:
+        - [review, date]
+        - [last, review]
+        - [last, assessment]
+        - [date]
+      days: 365
+    required_columns:
+      # Scope is the most reliable signal that a per-supplier review row
+      # was actually carried out. A.5.22 spec doesn't have rev_date /
+      # rev_reviewer MUSTs — the per-row date IS the scope-of-review
+      # signal under this leaf's semantics.
+      - fingerprint: [last, review, date]
+        binds_to: "item:A.5.22:rev_scope"
+        coverage: partial
+        alternative_fingerprints:
+          - [review, date]
+          - [last, assessment]
+      - fingerprint: [vendor, name]
+        binds_to: "item:A.5.22:rev_scope"
+        coverage: partial
+        alternative_fingerprints:
+          - [supplier, name]
+          - [vendor]
+          - [supplier]
+    optional_columns:
+      - fingerprint: [service, provided]
+        binds_to: "item:A.5.22:rev_scope"
+        coverage: partial
+      - fingerprint: [risk, level]
+        binds_to: "item:A.5.22:rev_findings"
+        coverage: partial
+      - fingerprint: [security, controls]
+        binds_to: "item:A.5.22:rev_audit"
+        coverage: partial
+      - fingerprint: [compliance, certs]
+        binds_to: "item:A.5.22:rev_compliance"
+        coverage: partial
+      - fingerprint: [dpa, signed]
+        binds_to: "item:A.5.22:rev_compliance"
+        coverage: partial
+      - fingerprint: [data, shared]
+        binds_to: "item:A.5.22:rev_scope"
+        coverage: partial
+      - fingerprint: [data, location]
+        binds_to: "item:A.5.22:rev_scope"
+        coverage: partial
+      - fingerprint: [next, review, date]
+        binds_to: "item:A.5.22:rev_scope"
+        coverage: partial
+      - fingerprint: [notes]
+        binds_to: "item:A.5.22:rev_findings"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.19"
+    rationale: "Same supplier register feeds A.5.19 supplier inventory"
+  - control: "A.5.20"
+    rationale: "DPA / agreement columns indicate A.5.20 agreement coverage"
+  - control: "A.5.21"
+    rationale: "ICT / cloud-supplier classification feeds A.5.21"
+  - control: "Art.28"
+    rationale: "DPA signed column → GDPR Art.28 processor obligations"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1
