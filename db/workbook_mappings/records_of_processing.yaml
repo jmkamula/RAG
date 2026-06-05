@@ -1,0 +1,93 @@
+# Canonical workbook mapping: GDPR Records of Processing Activities (RoPA)
+# sheet → Art.30 records_of_processing evidence.
+#
+# Art.30 mandates per-activity records with the controller name/contact,
+# purposes, data subject categories, data categories, recipient categories,
+# third-country transfers (with safeguards), retention, and security
+# measures. If the org also acts as processor, processor-side records
+# (Art.30.2) are maintained alongside.
+
+schema_version: 1
+mapping_id: workbook.gdpr.Art_30.records_of_processing
+
+sheet_name_fingerprints:
+  - tokens: [ropa]
+  - tokens: [records, processing]
+  - tokens: [records, of, processing]
+  - tokens: [processing, activities]
+  - tokens: [art, "30", register]
+  - tokens: [processing, register]
+
+header_row_hints: [1, 2, 3]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: ropa
+    target_control: "Art.30"
+    target_evidence_requirement: "req:Art.30:records_of_processing"
+    target_evidence_type: records_of_processing
+    required_columns:
+      - fingerprint: [purpose]
+        binds_to: "item:Art.30:purposes"
+        alternative_fingerprints:
+          - [purposes, processing]
+          - [processing, purpose]
+      - fingerprint: [data, subjects]
+        binds_to: "item:Art.30:categories_ds"
+        alternative_fingerprints:
+          - [categories, data, subjects]
+          - [subject, categories]
+      - fingerprint: [personal, data]
+        binds_to: "item:Art.30:categories_data"
+        alternative_fingerprints:
+          - [data, categories]
+          - [categories, data]
+      - fingerprint: [recipients]
+        binds_to: "item:Art.30:recipients"
+        alternative_fingerprints:
+          - [data, recipients]
+          - [categories, recipients]
+      - fingerprint: [retention]
+        binds_to: "item:Art.30:retention"
+        alternative_fingerprints:
+          - [retention, period]
+          - [time, limits]
+    optional_columns:
+      - fingerprint: [controller]
+        binds_to: "item:Art.30:controller_name"
+        alternative_fingerprints:
+          - [controller, name]
+          - [data, controller]
+      - fingerprint: [transfers]
+        binds_to: "item:Art.30:transfers"
+        alternative_fingerprints:
+          - [third, country, transfers]
+          - [international, transfers]
+        coverage: partial
+      - fingerprint: [safeguards]
+        binds_to: "item:Art.30:transfers"
+        coverage: partial
+      - fingerprint: [security, measures]
+        binds_to: "item:Art.30:security"
+        alternative_fingerprints:
+          - [technical, organisational, measures]
+          - [tom]
+      - fingerprint: [processor]
+        binds_to: "item:Art.30:processor_records"
+        coverage: partial    # presence hints at processor-side records existing
+
+cross_control_links:
+  - control: "Art.6"
+    rationale: "Each activity has a lawful basis (Art.6 register)"
+  - control: "Art.13"
+    rationale: "Privacy-notice content (Art.13) sourced from RoPA"
+  - control: "Art.32"
+    rationale: "Security measures column feeds Art.32 evidence"
+  - control: "A.5.34"
+    rationale: "PII processing register (A.5.34) is the ISO sibling of RoPA"
+
+confidence_weights:
+  sheet_name: 0.6     # RoPA naming is distinctive
+  required_columns: 0.3
+  row_count: 0.1

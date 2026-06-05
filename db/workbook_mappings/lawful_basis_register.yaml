@@ -1,0 +1,82 @@
+# Canonical workbook mapping: GDPR lawful basis register sheet → Art.6
+# lawful_basis_register evidence.
+#
+# Tenants maintain a register enumerating each processing activity and
+# the chosen lawful basis under Art.6.1.a-f, with justification, and links
+# to consent capture (Art.7) or LIA (legitimate interests assessment) where
+# applicable. Typically a per-activity register sheet.
+
+schema_version: 1
+mapping_id: workbook.gdpr.Art_6.lawful_basis_register
+
+sheet_name_fingerprints:
+  - tokens: [lawful, basis]
+  - tokens: [lawful, basis, register]
+  - tokens: [legal, basis]
+  - tokens: [processing, basis]
+  - tokens: [art, "6", register]
+  - tokens: [legal, basis, register]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: lawful_basis_register
+    target_control: "Art.6"
+    target_evidence_requirement: "req:Art.6:lawful_basis_register"
+    target_evidence_type: lawful_basis_register
+    freshness:
+      column_fingerprint: [review, date]
+      alternative_fingerprints:
+        - [last, reviewed]
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [activity]
+        binds_to: "item:Art.6:activities_enumerated"
+        alternative_fingerprints:
+          - [processing, activity]
+          - [activity, name]
+      - fingerprint: [lawful, basis]
+        binds_to: "item:Art.6:basis_per_activity"
+        alternative_fingerprints:
+          - [legal, basis]
+          - [basis]
+          - [art, 6, basis]
+      - fingerprint: [justification]
+        binds_to: "item:Art.6:justification"
+        alternative_fingerprints:
+          - [rationale]
+          - [reasoning]
+    optional_columns:
+      - fingerprint: [consent, link]
+        binds_to: "item:Art.6:consent_link"
+        alternative_fingerprints:
+          - [consent, record]
+          - [art, 7, ref]
+        coverage: partial
+      - fingerprint: [lia, link]
+        binds_to: "item:Art.6:lia_link"
+        alternative_fingerprints:
+          - [legitimate, interests, assessment]
+          - [lia]
+        coverage: partial
+      - fingerprint: [owner]
+        binds_to: "item:Art.6:owner"
+        alternative_fingerprints:
+          - [dpo]
+          - [privacy, lead]
+
+cross_control_links:
+  - control: "Art.7"
+    rationale: "Consent-based activities link to Art.7 consent register"
+  - control: "Art.30"
+    rationale: "Same activity universe feeds Art.30 RoPA"
+  - control: "Art.13"
+    rationale: "Lawful basis disclosed in the privacy notice (Art.13.1.c)"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

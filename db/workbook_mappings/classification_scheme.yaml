@@ -1,0 +1,79 @@
+# Canonical workbook mapping: Information Classification Scheme sheet →
+# A.5.12 classification scheme evidence.
+#
+# Tenants maintain a classification scheme table defining the levels
+# (typically Public / Internal / Confidential / Restricted), per-level CIA
+# expectations, definitions/examples, handling implications, and the
+# decision authority for classification. This is a control-doctrine table,
+# not a per-row log — one row per classification level.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_12.classification_scheme
+
+sheet_name_fingerprints:
+  - tokens: [classification, scheme]
+  - tokens: [information, classification]
+  - tokens: [data, classification]
+  - tokens: [classification, levels]
+  - tokens: [classification, matrix]
+
+header_row_hints: [1, 2, 3]
+min_data_rows: 2   # at least 2 classification levels (e.g. Public + Internal)
+
+passes:
+
+  - pass_name: classification_scheme
+    target_control: "A.5.12"
+    target_evidence_requirement: "req:A.5.12:information_classification_scheme"
+    target_evidence_type: classification_scheme
+    required_columns:
+      - fingerprint: [level]
+        binds_to: "item:A.5.12:levels_defined"
+        alternative_fingerprints:
+          - [classification, level]
+          - [classification]
+          - [tier]
+      - fingerprint: [definition]
+        binds_to: "item:A.5.12:level_definitions"
+        alternative_fingerprints:
+          - [description]
+    optional_columns:
+      - fingerprint: [confidentiality]
+        binds_to: "item:A.5.12:cia_dimensions"
+        coverage: partial
+      - fingerprint: [integrity]
+        binds_to: "item:A.5.12:cia_dimensions"
+        coverage: partial
+      - fingerprint: [availability]
+        binds_to: "item:A.5.12:cia_dimensions"
+        coverage: partial
+      - fingerprint: [examples]
+        binds_to: "item:A.5.12:level_definitions"
+        coverage: partial
+      - fingerprint: [handling]
+        binds_to: "item:A.5.12:handling_per_level"
+        alternative_fingerprints:
+          - [handling, rules]
+          - [handling, instructions]
+      - fingerprint: [decision, authority]
+        binds_to: "item:A.5.12:classification_authority"
+        alternative_fingerprints:
+          - [classifier]
+          - [owner]
+      - fingerprint: [default]
+        binds_to: "item:A.5.12:default_class"
+        alternative_fingerprints:
+          - [default, classification]
+
+cross_control_links:
+  - control: "A.5.13"
+    rationale: "Labelling (A.5.13) implements the classification scheme"
+  - control: "A.5.14"
+    rationale: "Information transfer (A.5.14) handling rules vary by level"
+  - control: "A.5.33"
+    rationale: "Records management (A.5.33) retention varies by classification"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

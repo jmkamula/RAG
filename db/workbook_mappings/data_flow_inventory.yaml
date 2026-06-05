@@ -1,0 +1,79 @@
+# Canonical workbook mapping: Personal Data Flow Inventory sheet →
+# Art.30 data_flow_inventory evidence.
+#
+# Tenants maintain a data-flow inventory listing systems holding personal
+# data, flows between systems, external recipients, third-country transfers,
+# and retention per system or per data category. This is the operational
+# detail behind the Art.30 RoPA — the systems-and-flows view.
+
+schema_version: 1
+mapping_id: workbook.gdpr.Art_30.data_flow_inventory
+
+sheet_name_fingerprints:
+  - tokens: [data, flow]
+  - tokens: [data, flow, inventory]
+  - tokens: [data, flow, map]
+  - tokens: [dfi]
+  - tokens: [systems, inventory]
+  - tokens: [personal, data, inventory]
+  - tokens: [data, mapping]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: data_flow_inventory
+    target_control: "Art.30"
+    target_evidence_requirement: "req:Art.30:data_flow_inventory"
+    target_evidence_type: data_flow_inventory
+    required_columns:
+      - fingerprint: [system]
+        binds_to: "item:Art.30:dfi_systems"
+        alternative_fingerprints:
+          - [system, name]
+          - [application]
+          - [system, application]
+      - fingerprint: [data, flow]
+        binds_to: "item:Art.30:dfi_flows"
+        alternative_fingerprints:
+          - [source, destination]
+          - [flow]
+    optional_columns:
+      - fingerprint: [source]
+        binds_to: "item:Art.30:dfi_flows"
+        coverage: partial
+      - fingerprint: [destination]
+        binds_to: "item:Art.30:dfi_flows"
+        coverage: partial
+      - fingerprint: [recipients]
+        binds_to: "item:Art.30:dfi_recipients"
+        alternative_fingerprints:
+          - [external, recipients]
+          - [processors]
+      - fingerprint: [transfers]
+        binds_to: "item:Art.30:dfi_transfers"
+        alternative_fingerprints:
+          - [third, country]
+          - [international, transfers]
+        coverage: partial
+      - fingerprint: [safeguards]
+        binds_to: "item:Art.30:dfi_transfers"
+        coverage: partial
+      - fingerprint: [retention]
+        binds_to: "item:Art.30:dfi_retention"
+        alternative_fingerprints:
+          - [retention, period]
+
+cross_control_links:
+  - control: "Art.30"
+    rationale: "DFI is the systems-and-flows operational layer beneath the Art.30 RoPA"
+  - control: "Art.32"
+    rationale: "System inventory feeds Art.32 security risk assessment"
+  - control: "A.5.9"
+    rationale: "PII-holding subset of the A.5.9 asset register"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

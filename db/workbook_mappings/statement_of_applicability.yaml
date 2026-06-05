@@ -1,0 +1,81 @@
+# Canonical workbook mapping: Statement of Applicability sheet → 6.1.3 SoA
+# evidence.
+#
+# The SoA is the master ISO 27001 compliance artefact — every Annex A control
+# enumerated with applicability decision, justification, implementation
+# status, and reference to the implementing policy/procedure. Tenants
+# typically maintain this as a dedicated sheet with the table starting
+# several rows down (header block above with version, owner, approvals).
+
+schema_version: 1
+mapping_id: workbook.iso.6_1_3.statement_of_applicability
+
+sheet_name_fingerprints:
+  - tokens: [statement, applicability]
+  - tokens: [statement, of, applicability]
+  - tokens: [soa]
+  - tokens: [annex, a, applicability]
+
+# SoA sheets commonly have a metadata block (version, owner, approvals) at
+# the top with the actual control table starting at row 12-15. Include a
+# wide range of header-row hints so discovery finds the table.
+header_row_hints: [1, 2, 13, 12, 14, 15, 10, 11]
+min_data_rows: 10   # SoA should enumerate ALL 93 Annex A controls
+
+passes:
+
+  - pass_name: soa
+    target_control: "6.1.3"
+    target_evidence_requirement: "req:6.1.3:statement_of_applicability"
+    target_evidence_type: statement_of_applicability
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [version, date]
+        - [approval, date]
+      days: 365
+    required_columns:
+      - fingerprint: [control, id]
+        binds_to: "item:6.1.3:soa_all_annex_a"
+        alternative_fingerprints:
+          - [control, ref]
+          - [control, number]
+      - fingerprint: [applicable]
+        binds_to: "item:6.1.3:soa_inclusion_status"
+        alternative_fingerprints:
+          - [inclusion, status]
+          - [applicability]
+      - fingerprint: [justification]
+        binds_to: "item:6.1.3:soa_justification"
+        alternative_fingerprints:
+          - [rationale]
+          - [reason]
+    optional_columns:
+      - fingerprint: [status]
+        binds_to: "item:6.1.3:soa_implementation_status"
+        alternative_fingerprints:
+          - [implementation, status]
+      - fingerprint: [linked, policies]
+        binds_to: "item:6.1.3:soa_reference"
+        alternative_fingerprints:
+          - [linked, processes]
+          - [reference]
+          - [policy, reference]
+        coverage: partial
+      - fingerprint: [notes]
+        binds_to: "item:6.1.3:soa_reference"
+        coverage: partial
+      - fingerprint: [control, title]
+        binds_to: "item:6.1.3:soa_all_annex_a"
+        coverage: partial
+
+cross_control_links:
+  - control: "6.1.3"
+    rationale: "SoA is the authoritative output of clause 6.1.3"
+  - control: "6.1.2"
+    rationale: "SoA references controls selected via risk treatment"
+
+confidence_weights:
+  sheet_name: 0.6     # SoA sheet name is highly distinctive
+  required_columns: 0.3
+  row_count: 0.1

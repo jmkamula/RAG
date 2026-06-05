@@ -1,0 +1,74 @@
+# Canonical workbook mapping: Risk Treatment Plan sheet → 6.1.3 RTP evidence.
+#
+# The Risk Treatment Plan is the operational companion to the SoA: per-risk
+# rows listing chosen treatment option, controls implementing it, residual
+# risk, risk owner, and approval status. Tenants maintain this as a separate
+# sheet keyed by Risk ID (cross-references the 6.1.2 risk register).
+
+schema_version: 1
+mapping_id: workbook.iso.6_1_3.risk_treatment_plan
+
+sheet_name_fingerprints:
+  - tokens: [risk, treatment, plan]
+  - tokens: [risk, treatment]
+  - tokens: [treatment, plan]
+  - tokens: [rtp]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: rtp
+    target_control: "6.1.3"
+    target_evidence_requirement: "req:6.1.3:risk_treatment_plan"
+    target_evidence_type: risk_treatment_plan
+    required_columns:
+      - fingerprint: [treatment, option]
+        binds_to: "item:6.1.3:options"
+        alternative_fingerprints:
+          - [option]
+      - fingerprint: [risk, owner]
+        binds_to: "item:6.1.3:owners"
+        alternative_fingerprints:
+          - [owner]
+      - fingerprint: [residual, risk]
+        binds_to: "item:6.1.3:residual"
+        alternative_fingerprints:
+          - [residual]
+    optional_columns:
+      - fingerprint: [isms, applicable, controls]
+        binds_to: "item:6.1.3:controls"
+        alternative_fingerprints:
+          - [applicable, controls]
+          - [controls]
+          - [iso, controls]
+      - fingerprint: [treatment, action]
+        binds_to: "item:6.1.3:controls"
+        coverage: partial
+      - fingerprint: [status]
+        binds_to: "item:6.1.3:approval"
+        coverage: partial    # "Implemented" status hints at approval but isn't the formal sign-off
+      - fingerprint: [implementation, date]
+        binds_to: "item:6.1.3:approval"
+        coverage: partial
+      - fingerprint: [risk, id]
+        binds_to: "item:6.1.3:soa_ref"
+        coverage: partial    # risk_id ties back to 6.1.2 register; SoA ref typically separate column
+      - fingerprint: [review, date]
+        binds_to: "item:6.1.3:approval"
+        coverage: partial
+      - fingerprint: [residual, risk, level]
+        binds_to: "item:6.1.3:residual"
+        coverage: partial
+
+cross_control_links:
+  - control: "6.1.2"
+    rationale: "RTP per-risk rows cross-reference the 6.1.2 risk register"
+  - control: "6.1.3"
+    rationale: "RTP and SoA are paired outputs of clause 6.1.3 (planning)"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1
