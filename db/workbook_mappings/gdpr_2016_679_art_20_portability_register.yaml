@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_20.portability_register
 
 sheet_name_fingerprints:
   - tokens: [portability, request, register]
-  - tokens: [request, register]
+  - tokens: [portability, request, reg]
   - tokens: [portability, request]
 
 header_row_hints: [1, 2]

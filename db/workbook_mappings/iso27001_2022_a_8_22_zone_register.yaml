@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_22.zone_register
 
 sheet_name_fingerprints:
   - tokens: [network, zone, register]
-  - tokens: [zone, register]
+  - tokens: [network, zone, reg]
   - tokens: [network, zone]
 
 header_row_hints: [1, 2]

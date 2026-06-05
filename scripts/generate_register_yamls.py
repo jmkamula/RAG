@@ -74,7 +74,7 @@ def ctrl_key(c):
 register_leaves.sort(key=lambda er: (std_key(er.standard_id), ctrl_key(er.control_ref), er.id))
 
 
-_STOP = {'per','row','record','captured','exists','named','flagged','linked','each','of','the','and',
+_STOP = {'per','row','captured','exists','named','flagged','linked','each','of','the','and',
          'a','to','for','with','in','on','at','every','any','all','one','two','three','must','should',
          'also','no','not','if','where','when','that','this','from','by','as','is','are','was','were',
          'an','it','its','their','our','your','my','be','been','being','have','has','had','do','does','did'}
@@ -127,25 +127,74 @@ def sheet_fingerprints(er) -> list[list[str]]:
                                                      [information, security, register]]
     """
     title_words = [w for w in words_from(er.title)]
+    # Drop ISMS prefix variant — tenants often omit it on their sheets
+    # ("Document Cont. Reg." not "ISMS Document Control Register").
+    no_isms = [w for w in title_words if w != 'isms']
+    no_iso = [w for w in title_words if w not in {'isms', 'information', 'security'}]
+
     out = []
-    # Primary: drop generic kind-word and use 2-token combo with the
-    # most-specific preceding tokens. Never emit a single-token generic
-    # fingerprint ([register] / [log] / [inventory]) — every register-
-    # named sheet would then match every register YAML.
-    for kind in ('register', 'log', 'inventory', 'matrix', 'record', 'scheme'):
-        if kind in title_words:
-            idx = title_words.index(kind)
-            if idx >= 2:
-                # Three-token fingerprint for higher specificity
-                out.append([title_words[idx-2], title_words[idx-1], kind])
-            if idx >= 1:
-                out.append([title_words[idx-1], kind])
-            break
-    # Secondary: first two-three meaningful tokens of the title
-    if len(title_words) >= 3:
-        out.append(title_words[:3])
-    if len(title_words) >= 2:
-        out.append(title_words[:2])
+    KINDS = ('register', 'log', 'inventory', 'matrix', 'record', 'scheme')
+    # Abbreviations tenants commonly use that the tokenizer's stemmer
+    # doesn't normalise (no shared root): register↔reg, document↔doc,
+    # records↔rec. Emit both forms as alternative fingerprints.
+    ABBREV = {
+        'register': 'reg',
+        'document': 'doc',
+        'information': 'info',
+        'compliance': 'compl',
+    }
+
+    def emit(fp: list[str]):
+        # Emit all 2^N variants combining full + abbreviated forms for tokens
+        # that have an abbreviation mapping. e.g. [document, register] →
+        # [document, register], [doc, register], [document, reg], [doc, reg].
+        # Caps at 16 variants per fingerprint to avoid combinatorial blowup
+        # on long phrases.
+        variants = [[]]
+        for t in fp:
+            forms = [t]
+            if t in ABBREV and ABBREV[t] != t:
+                forms.append(ABBREV[t])
+            new_variants = []
+            for v in variants:
+                for f in forms:
+                    new_variants.append(v + [f])
+                    if len(new_variants) >= 16:
+                        break
+                if len(new_variants) >= 16:
+                    break
+            variants = new_variants
+        for v in variants:
+            out.append(v)
+
+    # Primary: drop generic kind-word and use the most-specific token
+    # combo. When the title has 3+ tokens before the kind word, ONLY emit
+    # the 3-token form — the 2-token [X, kind] form would over-match
+    # sibling leaves whose title shares the last [X, kind] pair (e.g.
+    # "Off-Premises Asset Register" must NOT match "Asset Register").
+    # Try both the full title and the ISMS-stripped variant.
+    for source in (title_words, no_isms, no_iso):
+        for kind in KINDS:
+            if kind in source:
+                idx = source.index(kind)
+                if idx >= 2:
+                    # Prefer 3-token specificity; skip the 2-token form
+                    # when there's a qualifier word available.
+                    emit([source[idx-2], source[idx-1], kind])
+                elif idx >= 1:
+                    # Short title (e.g. "Asset Register" / "Risk Register"):
+                    # 2-token is the only option and is appropriately specific.
+                    emit([source[idx-1], kind])
+                break
+    # Secondary: first two AND three meaningful tokens of the title (with
+    # ISMS prefix stripped). Both forms are useful — short tenant sheet
+    # names (e.g. "Interested Parties") match the 2-token form; longer
+    # names match the 3-token form.
+    if len(no_isms) >= 3:
+        emit(no_isms[:3])
+    if len(no_isms) >= 2:
+        emit(no_isms[:2])
+
     # Dedupe while preserving order
     seen = set()
     deduped = []

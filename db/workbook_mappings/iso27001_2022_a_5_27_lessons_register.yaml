@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_27.lessons_register
 
 sheet_name_fingerprints:
   - tokens: [lessons, learned, register]
-  - tokens: [learned, register]
+  - tokens: [lessons, learned, reg]
   - tokens: [lessons, learned]
 
 header_row_hints: [1, 2]

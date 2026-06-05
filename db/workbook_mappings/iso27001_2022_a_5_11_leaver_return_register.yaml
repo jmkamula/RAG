@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_11.leaver_return_register
 
 sheet_name_fingerprints:
   - tokens: [asset, return, register]
-  - tokens: [return, register]
+  - tokens: [asset, return, reg]
   - tokens: [leaver, asset, return]
   - tokens: [leaver, asset]
 

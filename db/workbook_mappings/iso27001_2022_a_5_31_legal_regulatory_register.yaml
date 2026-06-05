@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_31.legal_regulatory_register
 
 sheet_name_fingerprints:
   - tokens: [contractual, requirements, register]
-  - tokens: [requirements, register]
+  - tokens: [contractual, requirements, reg]
   - tokens: [legal, statutory, regulatory]
   - tokens: [legal, statutory]
 

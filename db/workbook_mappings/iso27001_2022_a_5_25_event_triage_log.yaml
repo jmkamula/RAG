@@ -7,7 +7,6 @@ mapping_id: workbook.ISO27001_2022.A_5_25.event_triage_log
 
 sheet_name_fingerprints:
   - tokens: [event, triage, log]
-  - tokens: [triage, log]
   - tokens: [security, event, triage]
   - tokens: [security, event]
 

@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_6_8.event_report_register
 
 sheet_name_fingerprints:
   - tokens: [event, report, register]
-  - tokens: [report, register]
+  - tokens: [event, report, reg]
   - tokens: [event, report]
 
 header_row_hints: [1, 2]

@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_49.invocation_register
 
 sheet_name_fingerprints:
   - tokens: [derogation, invocation, register]
-  - tokens: [invocation, register]
+  - tokens: [derogation, invocation, reg]
   - tokens: [derogation, invocation]
 
 header_row_hints: [1, 2]

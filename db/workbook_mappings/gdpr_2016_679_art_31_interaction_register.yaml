@@ -7,6 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_31.interaction_register
 
 sheet_name_fingerprints:
   - tokens: [interaction, register]
+  - tokens: [interaction, reg]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

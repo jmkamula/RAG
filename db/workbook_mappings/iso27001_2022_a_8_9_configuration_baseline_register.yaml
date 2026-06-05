@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_9.configuration_baseline_register
 
 sheet_name_fingerprints:
   - tokens: [configuration, baseline, register]
-  - tokens: [baseline, register]
+  - tokens: [configuration, baseline, reg]
   - tokens: [configuration, baseline]
 
 header_row_hints: [1, 2]

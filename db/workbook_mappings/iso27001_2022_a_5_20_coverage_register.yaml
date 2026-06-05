@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_20.coverage_register
 
 sheet_name_fingerprints:
   - tokens: [agreement, coverage, register]
-  - tokens: [coverage, register]
+  - tokens: [agreement, coverage, reg]
   - tokens: [supplier, agreement, coverage]
   - tokens: [supplier, agreement]
 

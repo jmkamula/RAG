@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_34.audit_engagement_register
 
 sheet_name_fingerprints:
   - tokens: [testing, engagement, register]
-  - tokens: [engagement, register]
+  - tokens: [testing, engagement, reg]
   - tokens: [audit, testing, engagement]
   - tokens: [audit, testing]
 

@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_7_6.work_session_register
 
 sheet_name_fingerprints:
   - tokens: [work, session, register]
-  - tokens: [session, register]
+  - tokens: [work, session, reg]
   - tokens: [secure, area, work]
   - tokens: [secure, area]
 

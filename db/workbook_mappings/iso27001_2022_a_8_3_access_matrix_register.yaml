@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_3.access_matrix_register
 
 sheet_name_fingerprints:
   - tokens: [access, matrix, register]
-  - tokens: [matrix, register]
+  - tokens: [access, matrix, reg]
   - tokens: [system, access, matrix]
   - tokens: [system, access]
 

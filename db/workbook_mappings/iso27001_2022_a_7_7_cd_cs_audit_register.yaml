@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_7_7.cd_cs_audit_register
 
 sheet_name_fingerprints:
   - tokens: [screen, audit, register]
-  - tokens: [audit, register]
+  - tokens: [screen, audit, reg]
   - tokens: [clear, desk, clear]
   - tokens: [clear, desk]
 

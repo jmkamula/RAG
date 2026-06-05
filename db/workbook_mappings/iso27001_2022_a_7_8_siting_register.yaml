@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_7_8.siting_register
 
 sheet_name_fingerprints:
   - tokens: [equipment, siting, register]
-  - tokens: [siting, register]
+  - tokens: [equipment, siting, reg]
   - tokens: [equipment, siting]
 
 header_row_hints: [1, 2]

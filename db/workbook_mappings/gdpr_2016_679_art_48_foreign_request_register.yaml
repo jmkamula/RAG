@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_48.foreign_request_register
 
 sheet_name_fingerprints:
   - tokens: [authority, request, register]
-  - tokens: [request, register]
+  - tokens: [authority, request, reg]
   - tokens: [foreign, authority, request]
   - tokens: [foreign, authority]
 

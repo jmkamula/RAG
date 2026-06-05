@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_7.threat_intel_feed_register
 
 sheet_name_fingerprints:
   - tokens: [intelligence, feed, register]
-  - tokens: [feed, register]
+  - tokens: [intelligence, feed, reg]
   - tokens: [threat, intelligence, feed]
   - tokens: [threat, intelligence]
 

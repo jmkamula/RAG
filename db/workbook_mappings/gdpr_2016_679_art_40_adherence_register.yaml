@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_40.adherence_register
 
 sheet_name_fingerprints:
   - tokens: [code, adherence, register]
-  - tokens: [adherence, register]
+  - tokens: [code, adherence, reg]
   - tokens: [code, adherence]
 
 header_row_hints: [1, 2]

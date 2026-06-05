@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_7_9.off_premises_register
 
 sheet_name_fingerprints:
   - tokens: [premises, asset, register]
-  - tokens: [asset, register]
+  - tokens: [premises, asset, reg]
   - tokens: [off, premises, asset]
   - tokens: [off, premises]
 

@@ -6,7 +6,8 @@ schema_version: 1
 mapping_id: workbook.ISO27001_2022.9_1.measurement_record
 
 sheet_name_fingerprints:
-  - tokens: [isms, measurement]
+  - tokens: [isms, measurement, record]
+  - tokens: [measurement, record]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

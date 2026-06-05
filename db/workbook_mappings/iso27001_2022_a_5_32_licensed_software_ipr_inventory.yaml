@@ -7,7 +7,6 @@ mapping_id: workbook.ISO27001_2022.A_5_32.licensed_software_ipr_inventory
 
 sheet_name_fingerprints:
   - tokens: [software, ipr, inventory]
-  - tokens: [ipr, inventory]
   - tokens: [licensed, software, ipr]
   - tokens: [licensed, software]
 

@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_7_2.entry_event_register
 
 sheet_name_fingerprints:
   - tokens: [entry, event, register]
-  - tokens: [event, register]
+  - tokens: [entry, event, reg]
   - tokens: [physical, entry, event]
   - tokens: [physical, entry]
 

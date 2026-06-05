@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_6_4.disciplinary_case_register
 
 sheet_name_fingerprints:
   - tokens: [disciplinary, case, register]
-  - tokens: [case, register]
+  - tokens: [disciplinary, case, reg]
   - tokens: [disciplinary, case]
 
 header_row_hints: [1, 2]

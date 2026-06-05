@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_6_2.signed_terms_register
 
 sheet_name_fingerprints:
   - tokens: [employment, terms, register]
-  - tokens: [terms, register]
+  - tokens: [employment, terms, reg]
   - tokens: [signed, employment, terms]
   - tokens: [signed, employment]
 

@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_7_1.perimeter_register
 
 sheet_name_fingerprints:
   - tokens: [site, perimeter, register]
-  - tokens: [perimeter, register]
+  - tokens: [site, perimeter, reg]
   - tokens: [site, perimeter]
 
 header_row_hints: [1, 2]

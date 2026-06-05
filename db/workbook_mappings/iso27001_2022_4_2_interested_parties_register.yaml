@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.4_2.interested_parties_register
 
 sheet_name_fingerprints:
   - tokens: [parties, requirements, register]
-  - tokens: [requirements, register]
+  - tokens: [parties, requirements, reg]
   - tokens: [interested, parties, requirements]
   - tokens: [interested, parties]
 

@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_27.architecture_register
 
 sheet_name_fingerprints:
   - tokens: [reference, architecture, register]
-  - tokens: [architecture, register]
+  - tokens: [reference, architecture, reg]
   - tokens: [reference, architecture]
 
 header_row_hints: [1, 2]

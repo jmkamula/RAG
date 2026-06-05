@@ -7,7 +7,9 @@ mapping_id: workbook.ISO27001_2022.A_5_8.project_security_register
 
 sheet_name_fingerprints:
   - tokens: [project, security, register]
-  - tokens: [security, register]
+  - tokens: [project, security, reg]
+  - tokens: [project, register]
+  - tokens: [project, reg]
   - tokens: [project, security]
 
 header_row_hints: [1, 2]

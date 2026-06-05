@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_17.erasure_register
 
 sheet_name_fingerprints:
   - tokens: [erasure, request, register]
-  - tokens: [request, register]
+  - tokens: [erasure, request, reg]
   - tokens: [erasure, request]
 
 header_row_hints: [1, 2]

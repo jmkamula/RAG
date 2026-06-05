@@ -7,8 +7,9 @@ mapping_id: workbook.ISO27001_2022.6_3.isms_change_register
 
 sheet_name_fingerprints:
   - tokens: [isms, change, register]
+  - tokens: [isms, change, reg]
   - tokens: [change, register]
-  - tokens: [isms, change]
+  - tokens: [change, reg]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

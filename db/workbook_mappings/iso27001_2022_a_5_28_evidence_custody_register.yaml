@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_28.evidence_custody_register
 
 sheet_name_fingerprints:
   - tokens: [evidence, custody, register]
-  - tokens: [custody, register]
+  - tokens: [evidence, custody, reg]
   - tokens: [evidence, custody]
 
 header_row_hints: [1, 2]

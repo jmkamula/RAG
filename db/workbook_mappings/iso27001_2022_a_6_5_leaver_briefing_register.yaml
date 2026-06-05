@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_6_5.leaver_briefing_register
 
 sheet_name_fingerprints:
   - tokens: [leaver, briefing, register]
-  - tokens: [briefing, register]
+  - tokens: [leaver, briefing, reg]
   - tokens: [leaver, briefing]
 
 header_row_hints: [1, 2]

@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_19.installation_register
 
 sheet_name_fingerprints:
   - tokens: [software, installation, register]
-  - tokens: [installation, register]
+  - tokens: [software, installation, reg]
   - tokens: [software, installation]
 
 header_row_hints: [1, 2]

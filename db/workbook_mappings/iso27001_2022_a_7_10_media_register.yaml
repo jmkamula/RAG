@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_7_10.media_register
 
 sheet_name_fingerprints:
   - tokens: [storage, media, register]
-  - tokens: [media, register]
+  - tokens: [storage, media, reg]
   - tokens: [storage, media]
 
 header_row_hints: [1, 2]

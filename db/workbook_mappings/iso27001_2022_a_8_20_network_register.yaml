@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_20.network_register
 
 sheet_name_fingerprints:
   - tokens: [network, inventory, register]
-  - tokens: [inventory, register]
+  - tokens: [network, inventory, reg]
   - tokens: [network, inventory]
 
 header_row_hints: [1, 2]

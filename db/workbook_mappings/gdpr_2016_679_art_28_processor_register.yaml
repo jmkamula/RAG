@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_28.processor_register
 
 sheet_name_fingerprints:
   - tokens: [processor, dpa, register]
-  - tokens: [dpa, register]
+  - tokens: [processor, dpa, reg]
   - tokens: [processor, dpa]
 
 header_row_hints: [1, 2]

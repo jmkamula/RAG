@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_10.criminal_data_processing_register
 
 sheet_name_fingerprints:
   - tokens: [data, processing, register]
-  - tokens: [processing, register]
+  - tokens: [data, processing, reg]
   - tokens: [criminal, data, processing]
   - tokens: [criminal, data]
 

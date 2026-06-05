@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_30.engagement_register
 
 sheet_name_fingerprints:
   - tokens: [development, engagement, register]
-  - tokens: [engagement, register]
+  - tokens: [development, engagement, reg]
   - tokens: [outsourced, development, engagement]
   - tokens: [outsourced, development]
 

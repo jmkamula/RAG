@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_7_12.cabling_register
 
 sheet_name_fingerprints:
   - tokens: [cabling, run, register]
-  - tokens: [run, register]
+  - tokens: [cabling, run, reg]
   - tokens: [cabling, run]
 
 header_row_hints: [1, 2]

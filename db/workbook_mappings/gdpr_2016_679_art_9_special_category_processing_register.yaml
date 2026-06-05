@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_9.special_category_processing_register
 
 sheet_name_fingerprints:
   - tokens: [category, processing, register]
-  - tokens: [processing, register]
+  - tokens: [category, processing, reg]
   - tokens: [special, category, processing]
   - tokens: [special, category]
 

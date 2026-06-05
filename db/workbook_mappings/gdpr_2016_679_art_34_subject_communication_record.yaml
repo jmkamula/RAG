@@ -6,6 +6,7 @@ schema_version: 1
 mapping_id: workbook.GDPR_2016_679.Art_34.subject_communication_record
 
 sheet_name_fingerprints:
+  - tokens: [subject, communication, record]
   - tokens: [subject, communication]
 
 header_row_hints: [1, 2]

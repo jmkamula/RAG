@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_8.child_consent_register
 
 sheet_name_fingerprints:
   - tokens: [child, consent, register]
-  - tokens: [consent, register]
+  - tokens: [child, consent, reg]
   - tokens: [child, consent]
 
 header_row_hints: [1, 2]

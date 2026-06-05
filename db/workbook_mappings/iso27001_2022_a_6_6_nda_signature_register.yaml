@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_6_6.nda_signature_register
 
 sheet_name_fingerprints:
   - tokens: [nda, signature, register]
-  - tokens: [signature, register]
+  - tokens: [nda, signature, reg]
   - tokens: [nda, signature]
 
 header_row_hints: [1, 2]

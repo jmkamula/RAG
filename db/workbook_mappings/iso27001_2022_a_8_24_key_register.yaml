@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_24.key_register
 
 sheet_name_fingerprints:
   - tokens: [cryptographic, key, register]
-  - tokens: [key, register]
+  - tokens: [cryptographic, key, reg]
   - tokens: [cryptographic, key]
 
 header_row_hints: [1, 2]

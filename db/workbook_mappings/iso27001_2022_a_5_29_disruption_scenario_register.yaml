@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_29.disruption_scenario_register
 
 sheet_name_fingerprints:
   - tokens: [disruption, scenario, register]
-  - tokens: [scenario, register]
+  - tokens: [disruption, scenario, reg]
   - tokens: [disruption, scenario]
 
 header_row_hints: [1, 2]

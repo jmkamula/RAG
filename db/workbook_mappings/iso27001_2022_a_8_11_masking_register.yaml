@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_11.masking_register
 
 sheet_name_fingerprints:
   - tokens: [dataset, masking, register]
-  - tokens: [masking, register]
+  - tokens: [dataset, masking, reg]
   - tokens: [dataset, masking]
 
 header_row_hints: [1, 2]

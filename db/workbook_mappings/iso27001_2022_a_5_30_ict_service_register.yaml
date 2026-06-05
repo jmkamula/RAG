@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_30.ict_service_register
 
 sheet_name_fingerprints:
   - tokens: [service, continuity, register]
-  - tokens: [continuity, register]
+  - tokens: [service, continuity, reg]
   - tokens: [ict, service, continuity]
   - tokens: [ict, service]
 

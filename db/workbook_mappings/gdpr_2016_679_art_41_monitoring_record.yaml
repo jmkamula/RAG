@@ -6,6 +6,7 @@ schema_version: 1
 mapping_id: workbook.GDPR_2016_679.Art_41.monitoring_record
 
 sheet_name_fingerprints:
+  - tokens: [monitoring, activity, record]
   - tokens: [code, monitoring, activity]
   - tokens: [code, monitoring]
 

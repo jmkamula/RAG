@@ -7,9 +7,8 @@ mapping_id: workbook.ISO27001_2022.6_1_1.planned_action_register
 
 sheet_name_fingerprints:
   - tokens: [planned, action, register]
-  - tokens: [action, register]
-  - tokens: [isms, planned, action]
-  - tokens: [isms, planned]
+  - tokens: [planned, action, reg]
+  - tokens: [planned, action]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

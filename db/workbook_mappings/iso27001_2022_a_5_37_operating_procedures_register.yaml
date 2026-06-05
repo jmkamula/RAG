@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_37.operating_procedures_register
 
 sheet_name_fingerprints:
   - tokens: [operating, procedures, register]
-  - tokens: [procedures, register]
+  - tokens: [operating, procedures, reg]
   - tokens: [documented, operating, procedures]
   - tokens: [documented, operating]
 

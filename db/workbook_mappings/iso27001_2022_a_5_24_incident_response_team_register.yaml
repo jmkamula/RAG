@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_24.incident_response_team_register
 
 sheet_name_fingerprints:
   - tokens: [response, team, register]
-  - tokens: [team, register]
+  - tokens: [response, team, reg]
   - tokens: [incident, response, team]
   - tokens: [incident, response]
 

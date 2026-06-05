@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_1.endpoint_register
 
 sheet_name_fingerprints:
   - tokens: [endpoint, inventory, register]
-  - tokens: [inventory, register]
+  - tokens: [endpoint, inventory, reg]
   - tokens: [endpoint, inventory]
 
 header_row_hints: [1, 2]

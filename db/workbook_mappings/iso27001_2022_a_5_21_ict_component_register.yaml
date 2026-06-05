@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_21.ict_component_register
 
 sheet_name_fingerprints:
   - tokens: [component, vendor, register]
-  - tokens: [vendor, register]
+  - tokens: [component, vendor, reg]
   - tokens: [ict, component, vendor]
   - tokens: [ict, component]
 

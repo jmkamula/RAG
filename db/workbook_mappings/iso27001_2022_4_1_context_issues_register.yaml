@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.4_1.context_issues_register
 
 sheet_name_fingerprints:
   - tokens: [external, issues, register]
-  - tokens: [issues, register]
+  - tokens: [external, issues, reg]
   - tokens: [internal, external, issues]
   - tokens: [internal, external]
 

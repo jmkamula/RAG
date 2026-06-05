@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_22.automated_decision_register
 
 sheet_name_fingerprints:
   - tokens: [decision, making, register]
-  - tokens: [making, register]
+  - tokens: [decision, making, reg]
   - tokens: [automated, decision, making]
   - tokens: [automated, decision]
 

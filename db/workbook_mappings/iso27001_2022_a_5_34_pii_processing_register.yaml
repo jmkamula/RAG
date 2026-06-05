@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_34.pii_processing_register
 
 sheet_name_fingerprints:
   - tokens: [pii, processing, register]
-  - tokens: [processing, register]
+  - tokens: [pii, processing, reg]
   - tokens: [pii, processing]
 
 header_row_hints: [1, 2]

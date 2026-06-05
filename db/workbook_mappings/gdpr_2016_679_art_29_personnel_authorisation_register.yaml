@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_29.personnel_authorisation_register
 
 sheet_name_fingerprints:
   - tokens: [personnel, authorisation, register]
-  - tokens: [authorisation, register]
+  - tokens: [personnel, authorisation, reg]
   - tokens: [personnel, authorisation]
 
 header_row_hints: [1, 2]

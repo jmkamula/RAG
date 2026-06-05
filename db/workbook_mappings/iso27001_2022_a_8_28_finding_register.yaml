@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_28.finding_register
 
 sheet_name_fingerprints:
   - tokens: [coding, finding, register]
-  - tokens: [finding, register]
+  - tokens: [coding, finding, reg]
   - tokens: [secure, coding, finding]
   - tokens: [secure, coding]
 

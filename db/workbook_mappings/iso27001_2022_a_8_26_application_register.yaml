@@ -7,7 +7,9 @@ mapping_id: workbook.ISO27001_2022.A_8_26.application_register
 
 sheet_name_fingerprints:
   - tokens: [security, requirements, register]
-  - tokens: [requirements, register]
+  - tokens: [security, requirements, reg]
+  - tokens: [application, requirements, register]
+  - tokens: [application, requirements, reg]
   - tokens: [application, security, requirements]
   - tokens: [application, security]
 

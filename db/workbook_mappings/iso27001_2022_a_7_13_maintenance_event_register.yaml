@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_7_13.maintenance_event_register
 
 sheet_name_fingerprints:
   - tokens: [maintenance, event, register]
-  - tokens: [event, register]
+  - tokens: [maintenance, event, reg]
   - tokens: [maintenance, event]
 
 header_row_hints: [1, 2]

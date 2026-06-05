@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_22.review_schedule_register
 
 sheet_name_fingerprints:
   - tokens: [review, schedule, register]
-  - tokens: [schedule, register]
+  - tokens: [review, schedule, reg]
   - tokens: [supplier, review, schedule]
   - tokens: [supplier, review]
 

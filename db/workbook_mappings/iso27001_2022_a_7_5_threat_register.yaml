@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_7_5.threat_register
 
 sheet_name_fingerprints:
   - tokens: [site, threat, register]
-  - tokens: [threat, register]
+  - tokens: [site, threat, reg]
   - tokens: [site, threat]
 
 header_row_hints: [1, 2]

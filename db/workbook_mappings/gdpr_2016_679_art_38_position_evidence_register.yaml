@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_38.position_evidence_register
 
 sheet_name_fingerprints:
   - tokens: [position, evidence, register]
-  - tokens: [evidence, register]
+  - tokens: [position, evidence, reg]
   - tokens: [dpo, position, evidence]
   - tokens: [dpo, position]
 

@@ -7,9 +7,13 @@ mapping_id: workbook.ISO27001_2022.6_2.security_objectives_register
 
 sheet_name_fingerprints:
   - tokens: [security, objectives, register]
+  - tokens: [security, objectives, reg]
   - tokens: [objectives, register]
+  - tokens: [objectives, reg]
   - tokens: [information, security, objectives]
+  - tokens: [info, security, objectives]
   - tokens: [information, security]
+  - tokens: [info, security]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

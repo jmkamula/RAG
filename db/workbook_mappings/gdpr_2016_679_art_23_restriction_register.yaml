@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_23.restriction_register
 
 sheet_name_fingerprints:
   - tokens: [restriction, application, register]
-  - tokens: [application, register]
+  - tokens: [restriction, application, reg]
   - tokens: [art, restriction, application]
   - tokens: [art, restriction]
 

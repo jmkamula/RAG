@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_32.risk_appropriate_measures_register
 
 sheet_name_fingerprints:
   - tokens: [appropriate, measures, register]
-  - tokens: [measures, register]
+  - tokens: [appropriate, measures, reg]
   - tokens: [risk, appropriate, measures]
   - tokens: [risk, appropriate]
 

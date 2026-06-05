@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_12.rights_request_register
 
 sheet_name_fingerprints:
   - tokens: [rights, request, register]
-  - tokens: [request, register]
+  - tokens: [rights, request, reg]
   - tokens: [rights, request]
 
 header_row_hints: [1, 2]

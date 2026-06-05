@@ -7,6 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_7_3.room_register
 
 sheet_name_fingerprints:
   - tokens: [room, register]
+  - tokens: [room, reg]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

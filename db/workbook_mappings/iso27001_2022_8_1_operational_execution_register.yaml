@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.8_1.operational_execution_register
 
 sheet_name_fingerprints:
   - tokens: [operational, execution, register]
-  - tokens: [execution, register]
+  - tokens: [operational, execution, reg]
   - tokens: [operational, execution]
 
 header_row_hints: [1, 2]

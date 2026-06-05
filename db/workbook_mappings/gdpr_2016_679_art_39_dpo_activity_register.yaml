@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_39.dpo_activity_register
 
 sheet_name_fingerprints:
   - tokens: [dpo, activity, register]
-  - tokens: [activity, register]
+  - tokens: [dpo, activity, reg]
   - tokens: [dpo, activity]
 
 header_row_hints: [1, 2]

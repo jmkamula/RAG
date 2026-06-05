@@ -6,8 +6,8 @@ schema_version: 1
 mapping_id: workbook.ISO27001_2022.7_1.isms_resources_record
 
 sheet_name_fingerprints:
-  - tokens: [isms, resource, allocation]
-  - tokens: [isms, resource]
+  - tokens: [resource, allocation, record]
+  - tokens: [resource, allocation]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

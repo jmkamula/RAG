@@ -57,7 +57,7 @@ def _stem(token: str) -> str:
     return token
 
 
-_SPLIT_RE = re.compile(r"[\s_/\-]+")
+_SPLIT_RE = re.compile(r"[\s_/\-&+,]+")
 _NON_ALNUM_RE = re.compile(r"[^a-z0-9]+")
 
 

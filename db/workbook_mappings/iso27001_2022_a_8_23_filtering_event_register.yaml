@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_23.filtering_event_register
 
 sheet_name_fingerprints:
   - tokens: [filtering, event, register]
-  - tokens: [event, register]
+  - tokens: [filtering, event, reg]
   - tokens: [web, filtering, event]
   - tokens: [web, filtering]
 

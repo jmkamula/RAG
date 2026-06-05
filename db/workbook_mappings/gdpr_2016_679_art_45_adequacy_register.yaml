@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_45.adequacy_register
 
 sheet_name_fingerprints:
   - tokens: [adequacy, reliance, register]
-  - tokens: [reliance, register]
+  - tokens: [adequacy, reliance, reg]
   - tokens: [adequacy, reliance]
 
 header_row_hints: [1, 2]

@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_47.bcr_register
 
 sheet_name_fingerprints:
   - tokens: [bcr, coverage, register]
-  - tokens: [coverage, register]
+  - tokens: [bcr, coverage, reg]
   - tokens: [bcr, coverage]
 
 header_row_hints: [1, 2]

@@ -7,6 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_31.environment_register
 
 sheet_name_fingerprints:
   - tokens: [environment, register]
+  - tokens: [environment, reg]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

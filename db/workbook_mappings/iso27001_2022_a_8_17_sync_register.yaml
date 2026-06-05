@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_17.sync_register
 
 sheet_name_fingerprints:
   - tokens: [sync, status, register]
-  - tokens: [status, register]
+  - tokens: [sync, status, reg]
   - tokens: [clock, sync, status]
   - tokens: [clock, sync]
 

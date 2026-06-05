@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_16.rectification_register
 
 sheet_name_fingerprints:
   - tokens: [rectification, request, register]
-  - tokens: [request, register]
+  - tokens: [rectification, request, reg]
   - tokens: [rectification, request]
 
 header_row_hints: [1, 2]

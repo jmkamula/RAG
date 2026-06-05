@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_10.deletion_register
 
 sheet_name_fingerprints:
   - tokens: [deletion, disposal, register]
-  - tokens: [disposal, register]
+  - tokens: [deletion, disposal, reg]
   - tokens: [deletion, disposal]
 
 header_row_hints: [1, 2]

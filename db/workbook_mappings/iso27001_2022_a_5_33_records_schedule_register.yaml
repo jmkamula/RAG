@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_5_33.records_schedule_register
 
 sheet_name_fingerprints:
   - tokens: [retention, protection, register]
-  - tokens: [protection, register]
+  - tokens: [retention, protection, reg]
   - tokens: [records, schedule, class]
   - tokens: [records, schedule]
 

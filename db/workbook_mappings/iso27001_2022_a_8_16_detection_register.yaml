@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_16.detection_register
 
 sheet_name_fingerprints:
   - tokens: [use, case, register]
-  - tokens: [case, register]
+  - tokens: [use, case, reg]
   - tokens: [detection, use, case]
   - tokens: [detection, use]
 

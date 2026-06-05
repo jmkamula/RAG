@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_7_11.utility_register
 
 sheet_name_fingerprints:
   - tokens: [site, utility, register]
-  - tokens: [utility, register]
+  - tokens: [site, utility, reg]
   - tokens: [site, utility]
 
 header_row_hints: [1, 2]

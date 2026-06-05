@@ -7,7 +7,9 @@ mapping_id: workbook.ISO27001_2022.A_5_36.compliance_review_schedule
 
 sheet_name_fingerprints:
   - tokens: [compliance, review, schedule]
+  - tokens: [compl, review, schedule]
   - tokens: [compliance, review]
+  - tokens: [compl, review]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_44.transfer_register
 
 sheet_name_fingerprints:
   - tokens: [international, transfer, register]
-  - tokens: [transfer, register]
+  - tokens: [international, transfer, reg]
   - tokens: [international, transfer]
 
 header_row_hints: [1, 2]

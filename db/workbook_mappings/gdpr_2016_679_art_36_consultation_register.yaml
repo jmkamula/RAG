@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_36.consultation_register
 
 sheet_name_fingerprints:
   - tokens: [prior, consultation, register]
-  - tokens: [consultation, register]
+  - tokens: [prior, consultation, reg]
   - tokens: [prior, consultation]
 
 header_row_hints: [1, 2]

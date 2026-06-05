@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_8_21.service_register
 
 sheet_name_fingerprints:
   - tokens: [network, services, register]
-  - tokens: [services, register]
+  - tokens: [network, services, reg]
   - tokens: [network, services]
 
 header_row_hints: [1, 2]

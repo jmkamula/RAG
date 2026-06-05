@@ -6,6 +6,7 @@ schema_version: 1
 mapping_id: workbook.GDPR_2016_679.Art_43.certification_issuance_record
 
 sheet_name_fingerprints:
+  - tokens: [certification, issuance, record]
   - tokens: [certification, issuance]
 
 header_row_hints: [1, 2]

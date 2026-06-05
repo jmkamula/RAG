@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_14.source_register
 
 sheet_name_fingerprints:
   - tokens: [art, source, register]
-  - tokens: [source, register]
+  - tokens: [art, source, reg]
   - tokens: [art, source]
 
 header_row_hints: [1, 2]

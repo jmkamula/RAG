@@ -7,9 +7,8 @@ mapping_id: workbook.ISO27001_2022.7_3.awareness_completion_register
 
 sheet_name_fingerprints:
   - tokens: [awareness, completion, register]
-  - tokens: [completion, register]
-  - tokens: [isms, awareness, completion]
-  - tokens: [isms, awareness]
+  - tokens: [awareness, completion, reg]
+  - tokens: [awareness, completion]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

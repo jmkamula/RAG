@@ -7,7 +7,7 @@ mapping_id: workbook.ISO27001_2022.A_6_3.training_completion_register
 
 sheet_name_fingerprints:
   - tokens: [training, completion, register]
-  - tokens: [completion, register]
+  - tokens: [training, completion, reg]
   - tokens: [training, completion]
 
 header_row_hints: [1, 2]

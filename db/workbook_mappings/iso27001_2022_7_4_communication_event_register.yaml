@@ -7,9 +7,8 @@ mapping_id: workbook.ISO27001_2022.7_4.communication_event_register
 
 sheet_name_fingerprints:
   - tokens: [communication, event, register]
-  - tokens: [event, register]
-  - tokens: [isms, communication, event]
-  - tokens: [isms, communication]
+  - tokens: [communication, event, reg]
+  - tokens: [communication, event]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

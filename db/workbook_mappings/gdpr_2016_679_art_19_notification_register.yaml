@@ -7,7 +7,7 @@ mapping_id: workbook.GDPR_2016_679.Art_19.notification_register
 
 sheet_name_fingerprints:
   - tokens: [recipient, notification, register]
-  - tokens: [notification, register]
+  - tokens: [recipient, notification, reg]
   - tokens: [recipient, notification]
 
 header_row_hints: [1, 2]
