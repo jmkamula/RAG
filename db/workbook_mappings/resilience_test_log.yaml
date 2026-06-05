@@ -1,0 +1,64 @@
+# Canonical workbook mapping: resilience test log → Art.32 resilience_test
+# evidence.
+#
+# Art.32.1.d requires periodic testing of the effectiveness of technical and
+# organisational measures. Tenants typically maintain a test log: test
+# scope, date, findings, remediation. This is distinct from BCP/DR test
+# logs (which target A.5.29 / A.5.30 review_records) — Art.32 testing is
+# specifically about the SECURITY OF PROCESSING measures, not continuity.
+
+schema_version: 1
+mapping_id: workbook.gdpr.Art_32.resilience_test_log
+
+sheet_name_fingerprints:
+  - tokens: [resilience, test]
+  - tokens: [resilience, log]
+  - tokens: [security, test]
+  - tokens: [art, "32", test]
+  - tokens: [processing, security, test]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: resilience_test
+    target_control: "Art.32"
+    target_evidence_requirement: "req:Art.32:resilience_test"
+    target_evidence_type: test_log
+    freshness:
+      column_fingerprint: [test, date]
+      alternative_fingerprints:
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [test, scope]
+        binds_to: "item:Art.32:resilience_test_scope"
+        alternative_fingerprints:
+          - [scope]
+      - fingerprint: [test, date]
+        binds_to: "item:Art.32:resilience_test_recent"
+        alternative_fingerprints:
+          - [date]
+      - fingerprint: [findings]
+        binds_to: "item:Art.32:resilience_test_findings"
+    optional_columns:
+      - fingerprint: [independent]
+        binds_to: "item:Art.32:resilience_test_independent"
+        coverage: partial
+      - fingerprint: [external, tester]
+        binds_to: "item:Art.32:resilience_test_independent"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.29"
+    rationale: "Continuity tests (A.5.29) complement Art.32 resilience tests"
+  - control: "A.8.13"
+    rationale: "Backup restore tests (A.8.13) contribute to resilience evidence"
+  - control: "A.8.29"
+    rationale: "Security testing (A.8.29) is the operational engine"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

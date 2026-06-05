@@ -1,0 +1,63 @@
+# Canonical workbook mapping: segregation of duties matrix → A.5.3 SoD evidence.
+#
+# A doctrine table enumerating conflicting duty pairs (e.g. requestor vs
+# approver, developer vs production-deployer) and the separation mechanism
+# for each pair, with compensating controls where full separation isn't
+# feasible. Tenants typically maintain this as a small fixed-row table.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_3.segregation_of_duties
+
+sheet_name_fingerprints:
+  - tokens: [segregation, duties]
+  - tokens: [sod, matrix]
+  - tokens: [duty, separation]
+  - tokens: [conflicting, duties]
+  - tokens: [duties, matrix]
+
+header_row_hints: [1, 2, 3]
+min_data_rows: 2
+
+passes:
+
+  - pass_name: sod_matrix
+    target_control: "A.5.3"
+    target_evidence_requirement: "req:A.5.3:segregation_of_duties"
+    target_evidence_type: segregation_matrix
+    required_columns:
+      - fingerprint: [conflict, pair]
+        binds_to: "item:A.5.3:conflict_pairs"
+        alternative_fingerprints:
+          - [conflicting, duties]
+          - [conflict, duties]
+          - [duty, pair]
+      - fingerprint: [separation, method]
+        binds_to: "item:A.5.3:separation_method"
+        alternative_fingerprints:
+          - [separation, mechanism]
+          - [control, mechanism]
+    optional_columns:
+      - fingerprint: [compensating, controls]
+        binds_to: "item:A.5.3:compensating"
+        alternative_fingerprints:
+          - [compensating]
+        coverage: partial
+      - fingerprint: [scope]
+        binds_to: "item:A.5.3:coverage_scope"
+        coverage: partial
+      - fingerprint: [owner]
+        binds_to: "item:A.5.3:owner"
+        alternative_fingerprints:
+          - [responsible]
+          - [accountable]
+
+cross_control_links:
+  - control: "A.5.18"
+    rationale: "SoD enforcement happens at access-rights provisioning (A.5.18)"
+  - control: "A.8.2"
+    rationale: "Privileged-access oversight (A.8.2) complements SoD"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

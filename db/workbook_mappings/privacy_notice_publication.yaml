@@ -1,0 +1,70 @@
+# Canonical workbook mapping: privacy notice publication log → Art.13
+# publication_record evidence.
+#
+# Tenants maintain a log tracking each version of their privacy notice:
+# version id, publication URL / location, effective date, approver, and
+# linkage to the archived prior version. Proves what data subjects actually
+# saw at any point in time.
+
+schema_version: 1
+mapping_id: workbook.gdpr.Art_13.privacy_notice_publication
+
+sheet_name_fingerprints:
+  - tokens: [privacy, notice]
+  - tokens: [privacy, notice, log]
+  - tokens: [notice, publication]
+  - tokens: [notice, version]
+  - tokens: [privacy, statement]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: privacy_notice_publication
+    target_control: "Art.13"
+    target_evidence_requirement: "req:Art.13:publication_record"
+    target_evidence_type: publication_record
+    freshness:
+      column_fingerprint: [effective, date]
+      alternative_fingerprints:
+        - [publication, date]
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [version]
+        binds_to: "item:Art.13:rec_version"
+      - fingerprint: [url]
+        binds_to: "item:Art.13:rec_publication_url"
+        alternative_fingerprints:
+          - [publication, location]
+          - [location]
+      - fingerprint: [effective, date]
+        binds_to: "item:Art.13:rec_effective_date"
+        alternative_fingerprints:
+          - [publication, date]
+      - fingerprint: [approval]
+        binds_to: "item:Art.13:rec_approval"
+        alternative_fingerprints:
+          - [approver]
+          - [approved, by]
+    optional_columns:
+      - fingerprint: [prior, version]
+        binds_to: "item:Art.13:rec_prior_archive"
+        coverage: partial
+      - fingerprint: [archive]
+        binds_to: "item:Art.13:rec_prior_archive"
+        coverage: partial
+      - fingerprint: [change, summary]
+        binds_to: "item:Art.13:rec_change_summary"
+
+cross_control_links:
+  - control: "Art.14"
+    rationale: "Art.14 (data not from subject) shares the same publication discipline"
+  - control: "Art.6"
+    rationale: "Lawful basis published in the notice (Art.13.1.c)"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

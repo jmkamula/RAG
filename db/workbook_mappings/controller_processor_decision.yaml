@@ -1,0 +1,71 @@
+# Canonical workbook mapping: controller/processor role decision matrix →
+# Art.24 controller_processor_decision_record evidence.
+#
+# Tenants document the role-determination decision per processing activity:
+# the activity (RoPA reference), counterparty, role chosen (controller /
+# processor / joint controller), basis, and link to the contract that
+# embodies the chosen role.
+
+schema_version: 1
+mapping_id: workbook.gdpr.Art_24.controller_processor_decision
+
+sheet_name_fingerprints:
+  - tokens: [controller, processor]
+  - tokens: [role, decision]
+  - tokens: [controller, decision]
+  - tokens: [processor, decision]
+  - tokens: [role, determination]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: controller_processor_decision
+    target_control: "Art.24"
+    target_evidence_requirement: "req:Art.24:controller_processor_decision_record"
+    target_evidence_type: decision_record
+    required_columns:
+      - fingerprint: [activity]
+        binds_to: "item:Art.24:role_activity_id"
+        alternative_fingerprints:
+          - [processing, activity]
+          - [activity, id]
+      - fingerprint: [counterparty]
+        binds_to: "item:Art.24:role_counterparty"
+        alternative_fingerprints:
+          - [partner]
+          - [vendor]
+      - fingerprint: [role]
+        binds_to: "item:Art.24:role_chosen"
+        alternative_fingerprints:
+          - [role, chosen]
+          - [role, type]
+      - fingerprint: [basis]
+        binds_to: "item:Art.24:role_basis"
+        alternative_fingerprints:
+          - [rationale]
+          - [reasoning]
+      - fingerprint: [contract]
+        binds_to: "item:Art.24:role_contract_link"
+        alternative_fingerprints:
+          - [contract, ref]
+          - [dpa]
+          - [agreement]
+    optional_columns:
+      - fingerprint: [review, trigger]
+        binds_to: "item:Art.24:role_review_trigger"
+        coverage: partial
+
+cross_control_links:
+  - control: "Art.26"
+    rationale: "Joint controller decisions link to Art.26 arrangements"
+  - control: "Art.28"
+    rationale: "Processor role triggers Art.28 DPA requirements"
+  - control: "Art.30"
+    rationale: "Per-activity decisions feed the RoPA"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

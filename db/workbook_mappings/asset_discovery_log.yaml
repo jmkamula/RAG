@@ -1,0 +1,67 @@
+# Canonical workbook mapping: asset discovery sources log → A.5.9 asset
+# discovery upstream evidence.
+#
+# Tenants document the discovery tools and processes that feed the asset
+# register: tool / source name, scan cadence, reconciliation rule, scope
+# coverage. Distinct from the asset register itself (A.5.9:asset_inventory)
+# which is the OUTPUT; this leaf is the UPSTREAM PROCESS.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_9.asset_discovery_log
+
+sheet_name_fingerprints:
+  - tokens: [asset, discovery]
+  - tokens: [discovery, sources]
+  - tokens: [discovery, log]
+  - tokens: [cspm, log]
+  - tokens: [scan, log]
+  - tokens: [asset, sources]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: asset_discovery_upstream
+    target_control: "A.5.9"
+    target_evidence_requirement: "req:A.5.9:asset_discovery_upstream"
+    target_evidence_type: discovery_record
+    required_columns:
+      - fingerprint: [source]
+        binds_to: "item:A.5.9:disc_sources"
+        alternative_fingerprints:
+          - [tool]
+          - [discovery, source]
+          - [scanner]
+      - fingerprint: [cadence]
+        binds_to: "item:A.5.9:disc_cadence"
+        alternative_fingerprints:
+          - [frequency]
+          - [scan, frequency]
+      - fingerprint: [reconciliation]
+        binds_to: "item:A.5.9:disc_reconciliation"
+        alternative_fingerprints:
+          - [reconciliation, rule]
+          - [unknown, asset]
+      - fingerprint: [scope]
+        binds_to: "item:A.5.9:disc_scope_coverage"
+        alternative_fingerprints:
+          - [coverage]
+    optional_columns:
+      - fingerprint: [gap, remediation]
+        binds_to: "item:A.5.9:disc_gap_remediation"
+        coverage: partial
+      - fingerprint: [a812, link]
+        binds_to: "item:A.5.9:disc_a812_link"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.9"
+    rationale: "Discovery upstream feeds the asset register (A.5.9:asset_inventory)"
+  - control: "A.8.20"
+    rationale: "Network scanning overlaps with A.8.20 network inventory"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

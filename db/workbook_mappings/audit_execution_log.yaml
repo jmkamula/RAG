@@ -1,0 +1,65 @@
+# Canonical workbook mapping: audit execution log → 9.2 audit_execution_record
+# evidence. Per-audit detail layer beneath the audit programme review.
+#
+# Same sheet shape as Arion's "Audit Log" (already targeted by
+# internal_audit_log.yaml for the review_record leaf). This YAML targets
+# the SEPARATE audit_record evidence_type leaf which captures per-audit
+# detail: id, scope, auditor, date, finding-handling, status.
+
+schema_version: 1
+mapping_id: workbook.iso.9_2.audit_execution_log
+
+sheet_name_fingerprints:
+  - tokens: [audit, log]
+  - tokens: [internal, audit]
+  - tokens: [audit, register]
+  - tokens: [audit, schedule]
+  - tokens: [isms, audit]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: audit_execution
+    target_control: "9.2"
+    target_evidence_requirement: "req:9.2:audit_execution_record"
+    target_evidence_type: audit_record
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [audit, date]
+      days: 365
+    required_columns:
+      - fingerprint: [audit, id]
+        binds_to: "item:9.2:rec_audit_id"
+        alternative_fingerprints:
+          - [id]
+      - fingerprint: [date]
+        binds_to: "item:9.2:rec_date"
+      - fingerprint: [scope]
+        binds_to: "item:9.2:rec_scope"
+      - fingerprint: [auditor]
+        binds_to: "item:9.2:rec_auditor"
+    optional_columns:
+      - fingerprint: [findings]
+        binds_to: "item:9.2:rec_findings"
+        coverage: partial
+      - fingerprint: [status]
+        binds_to: "item:9.2:rec_handoff"
+        coverage: partial
+      - fingerprint: [corrective, action]
+        binds_to: "item:9.2:rec_handoff"
+        coverage: partial
+      - fingerprint: [follow, up]
+        binds_to: "item:9.2:rec_handoff"
+        coverage: partial
+
+cross_control_links:
+  - control: "10.2"
+    rationale: "Audit findings populate the nonconformity register"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

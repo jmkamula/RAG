@@ -1,0 +1,69 @@
+# Canonical workbook mapping: privacy-by-default settings record → Art.25.2
+# default_settings_record evidence.
+#
+# Art.25.2 requires that, by default, only personal data necessary for each
+# specific purpose is processed. Tenants document the default settings per
+# system: collection amount, processing extent, storage period, accessibility.
+# This is the privacy-default proof for each personal-data system.
+
+schema_version: 1
+mapping_id: workbook.gdpr.Art_25.default_settings_record
+
+sheet_name_fingerprints:
+  - tokens: [privacy, default]
+  - tokens: [default, settings]
+  - tokens: [privacy, by, default]
+  - tokens: [art, "25", defaults]
+  - tokens: [pbd, settings]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: default_settings
+    target_control: "Art.25"
+    target_evidence_requirement: "req:Art.25:default_settings_record"
+    target_evidence_type: configuration_record
+    required_columns:
+      - fingerprint: [system]
+        binds_to: "item:Art.25:default_systems_inventoried"
+        alternative_fingerprints:
+          - [system, name]
+          - [application]
+      - fingerprint: [default, amount]
+        binds_to: "item:Art.25:default_amount"
+        alternative_fingerprints:
+          - [collection, default]
+          - [data, minimisation]
+      - fingerprint: [default, extent]
+        binds_to: "item:Art.25:default_extent"
+        alternative_fingerprints:
+          - [processing, default]
+      - fingerprint: [default, storage]
+        binds_to: "item:Art.25:default_storage"
+        alternative_fingerprints:
+          - [storage, period]
+          - [retention, default]
+      - fingerprint: [default, accessibility]
+        binds_to: "item:Art.25:default_accessibility"
+        alternative_fingerprints:
+          - [access, default]
+    optional_columns:
+      - fingerprint: [exception]
+        binds_to: "item:Art.25:default_exception_register"
+        coverage: partial
+      - fingerprint: [dpia, link]
+        binds_to: "item:Art.25:default_review_dpia_link"
+        coverage: partial
+
+cross_control_links:
+  - control: "Art.30"
+    rationale: "System inventory cross-links to RoPA"
+  - control: "Art.35"
+    rationale: "Changes to defaults that increase processing trigger DPIA review"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1
