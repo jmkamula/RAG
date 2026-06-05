@@ -1,0 +1,58 @@
+# Canonical workbook mapping: ICT EOL replacement log → A.5.21 EOL
+# replacement record evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_21.eol_replacement_log
+
+sheet_name_fingerprints:
+  - tokens: [eol, replacement]
+  - tokens: [end, of, life]
+  - tokens: [component, replacement]
+  - tokens: [ict, eol]
+  - tokens: [eol, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: eol_replacement
+    target_control: "A.5.21"
+    target_evidence_requirement: "req:A.5.21:eol_replacement_record"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [cutover, date]
+      alternative_fingerprints:
+        - [date]
+      days: 180
+    required_columns:
+      - fingerprint: [eol, trigger]
+        binds_to: "item:A.5.21:eol_trigger"
+        alternative_fingerprints:
+          - [trigger]
+          - [reason]
+      - fingerprint: [replacement]
+        binds_to: "item:A.5.21:eol_replacement"
+        alternative_fingerprints:
+          - [replacement, component]
+      - fingerprint: [cutover, date]
+        binds_to: "item:A.5.21:eol_cutover"
+        alternative_fingerprints:
+          - [cutover]
+      - fingerprint: [authoriser]
+        binds_to: "item:A.5.21:eol_authoriser"
+        alternative_fingerprints:
+          - [approved, by]
+    optional_columns:
+      - fingerprint: [verification]
+        binds_to: "item:A.5.21:eol_verification"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.19"
+    rationale: "ICT EOL may coincide with supplier offboarding"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

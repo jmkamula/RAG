@@ -1,0 +1,67 @@
+# Canonical workbook mapping: ICT recovery event log → A.5.30 ICT recovery
+# record evidence. Per-recovery (real or scheduled-test) record.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_30.ict_recovery_log
+
+sheet_name_fingerprints:
+  - tokens: [ict, recovery]
+  - tokens: [recovery, log]
+  - tokens: [recovery, event]
+  - tokens: [dr, recovery]
+  - tokens: [restore, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: ict_recovery
+    target_control: "A.5.30"
+    target_evidence_requirement: "req:A.5.30:ict_recovery_record"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [recovery, date]
+      alternative_fingerprints:
+        - [date]
+      days: 180
+    required_columns:
+      - fingerprint: [recovery, id]
+        binds_to: "item:A.5.30:rec_recovery_id"
+        alternative_fingerprints:
+          - [id]
+      - fingerprint: [type]
+        binds_to: "item:A.5.30:rec_type"
+      - fingerprint: [services]
+        binds_to: "item:A.5.30:rec_services"
+        alternative_fingerprints:
+          - [scope]
+      - fingerprint: [rto, target]
+        binds_to: "item:A.5.30:rec_rto_target"
+      - fingerprint: [actual, time]
+        binds_to: "item:A.5.30:rec_actual_time"
+        alternative_fingerprints:
+          - [actual, recovery]
+    optional_columns:
+      - fingerprint: [success, status]
+        binds_to: "item:A.5.30:rec_success_status"
+        alternative_fingerprints:
+          - [rto, met]
+        coverage: partial
+      - fingerprint: [gaps]
+        binds_to: "item:A.5.30:rec_gaps"
+        coverage: partial
+      - fingerprint: [signoff]
+        binds_to: "item:A.5.30:rec_signoff"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.29"
+    rationale: "ICT recovery pairs with continuity plan activation"
+  - control: "A.8.13"
+    rationale: "Restore-test results feed ICT recovery evidence"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

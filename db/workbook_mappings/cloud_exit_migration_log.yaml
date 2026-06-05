@@ -1,0 +1,62 @@
+# Canonical workbook mapping: cloud service exit / migration log → A.5.23
+# exit migration record evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_23.cloud_exit_migration_log
+
+sheet_name_fingerprints:
+  - tokens: [cloud, exit]
+  - tokens: [cloud, migration]
+  - tokens: [exit, migration]
+  - tokens: [csp, exit]
+  - tokens: [service, exit]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: cloud_exit_migration
+    target_control: "A.5.23"
+    target_evidence_requirement: "req:A.5.23:exit_migration_record"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [exit, date]
+      alternative_fingerprints:
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [exit, trigger]
+        binds_to: "item:A.5.23:exit_trigger"
+        alternative_fingerprints:
+          - [trigger]
+          - [reason]
+      - fingerprint: [migration, plan]
+        binds_to: "item:A.5.23:exit_migration_plan"
+        alternative_fingerprints:
+          - [migration]
+      - fingerprint: [authoriser]
+        binds_to: "item:A.5.23:exit_authoriser"
+        alternative_fingerprints:
+          - [approved, by]
+    optional_columns:
+      - fingerprint: [data, deletion]
+        binds_to: "item:A.5.23:exit_data_deletion"
+        coverage: partial
+      - fingerprint: [data, destruction]
+        binds_to: "item:A.5.23:exit_data_deletion"
+        coverage: partial
+      - fingerprint: [handover]
+        binds_to: "item:A.5.23:exit_handover"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.19"
+    rationale: "Cloud-supplier exits trigger supplier offboarding lifecycle"
+  - control: "A.8.10"
+    rationale: "Cloud exits often require data deletion validation (A.8.10)"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

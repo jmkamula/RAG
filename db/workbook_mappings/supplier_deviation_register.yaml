@@ -1,0 +1,61 @@
+# Canonical workbook mapping: supplier agreement deviation register →
+# A.5.20 deviation register evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_20.supplier_deviation_register
+
+sheet_name_fingerprints:
+  - tokens: [supplier, deviation]
+  - tokens: [vendor, deviation]
+  - tokens: [agreement, deviation]
+  - tokens: [contract, deviation]
+  - tokens: [supplier, exception]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: supplier_deviation
+    target_control: "A.5.20"
+    target_evidence_requirement: "req:A.5.20:deviation_register"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [approval, date]
+      days: 365
+    required_columns:
+      - fingerprint: [clause]
+        binds_to: "item:A.5.20:dev_clause"
+        alternative_fingerprints:
+          - [clause, deviated]
+          - [template, section]
+      - fingerprint: [supplier]
+        binds_to: "item:A.5.20:dev_supplier"
+        alternative_fingerprints:
+          - [vendor]
+          - [supplier, id]
+      - fingerprint: [reason]
+        binds_to: "item:A.5.20:dev_reason"
+        alternative_fingerprints:
+          - [rationale]
+      - fingerprint: [approver]
+        binds_to: "item:A.5.20:dev_approver"
+        alternative_fingerprints:
+          - [approved, by]
+    optional_columns:
+      - fingerprint: [compensating]
+        binds_to: "item:A.5.20:dev_compensating"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.19"
+    rationale: "Deviations registered against supplier portfolio"
+  - control: "A.5.22"
+    rationale: "Deviations reviewed in supplier review cycle"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1
