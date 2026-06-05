@@ -1,0 +1,74 @@
+# Canonical workbook mapping: BCP/DR plan activation log → A.5.29 plan
+# activation record evidence.
+#
+# Per-activation record: activation_id, type (real_disruption /
+# scheduled_test), triggered_scenario_ref, scope of degradation, duration
+# (start / end / restoration), gaps surfaced, restoration status, signoff
+# (activation-authority + CISO + exec for real disruption).
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_29.plan_activation_log
+
+sheet_name_fingerprints:
+  - tokens: [plan, activation]
+  - tokens: [bcp, activation]
+  - tokens: [continuity, activation]
+  - tokens: [disruption, log]
+  - tokens: [activation, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: plan_activation
+    target_control: "A.5.29"
+    target_evidence_requirement: "req:A.5.29:plan_activation_record"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [activation, date]
+      alternative_fingerprints:
+        - [date]
+      days: 180
+    required_columns:
+      - fingerprint: [activation, id]
+        binds_to: "item:A.5.29:act_activation_id"
+        alternative_fingerprints:
+          - [id]
+      - fingerprint: [type]
+        binds_to: "item:A.5.29:act_type"
+        alternative_fingerprints:
+          - [activation, type]
+      - fingerprint: [scenario]
+        binds_to: "item:A.5.29:act_scenario_ref"
+        alternative_fingerprints:
+          - [scenario, ref]
+      - fingerprint: [scope]
+        binds_to: "item:A.5.29:act_scope"
+        alternative_fingerprints:
+          - [degradation, scope]
+      - fingerprint: [duration]
+        binds_to: "item:A.5.29:act_duration"
+        alternative_fingerprints:
+          - [start, end]
+    optional_columns:
+      - fingerprint: [gaps]
+        binds_to: "item:A.5.29:act_gaps"
+        coverage: partial
+      - fingerprint: [restoration]
+        binds_to: "item:A.5.29:act_restoration"
+        coverage: partial
+      - fingerprint: [signoff]
+        binds_to: "item:A.5.29:act_signoff"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.30"
+    rationale: "ICT readiness (A.5.30) recovery records pair with disruption activations"
+  - control: "Art.32"
+    rationale: "Activation drills feed Art.32 resilience evidence"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

@@ -1,0 +1,63 @@
+# Canonical workbook mapping: lessons-learned improvement action log →
+# A.5.27 improvement action record evidence.
+#
+# Per-lesson record: lesson_ref (links to lessons register), action_type
+# (control_updated / training_added / procedure_revised), evidence of
+# change, authoriser, closure_date.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_27.improvement_action_record
+
+sheet_name_fingerprints:
+  - tokens: [lessons, learned]
+  - tokens: [lessons, action]
+  - tokens: [improvement, record]
+  - tokens: [lesson, action, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: improvement_action
+    target_control: "A.5.27"
+    target_evidence_requirement: "req:A.5.27:improvement_action_record"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [closure, date]
+      alternative_fingerprints:
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [lesson, ref]
+        binds_to: "item:A.5.27:imp_lesson_ref"
+        alternative_fingerprints:
+          - [lesson, id]
+      - fingerprint: [action, type]
+        binds_to: "item:A.5.27:imp_action_type"
+        alternative_fingerprints:
+          - [action]
+          - [improvement, type]
+      - fingerprint: [authoriser]
+        binds_to: "item:A.5.27:imp_authoriser"
+        alternative_fingerprints:
+          - [approver]
+      - fingerprint: [closure, date]
+        binds_to: "item:A.5.27:imp_closure_date"
+        alternative_fingerprints:
+          - [date]
+    optional_columns:
+      - fingerprint: [evidence]
+        binds_to: "item:A.5.27:imp_evidence"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.26"
+    rationale: "Lessons-learned register feeds from incident closure (A.5.26)"
+  - control: "10.1"
+    rationale: "ISMS-level improvement actions overlap"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

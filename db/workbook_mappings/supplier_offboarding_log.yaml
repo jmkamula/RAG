@@ -1,0 +1,70 @@
+# Canonical workbook mapping: supplier offboarding log → A.5.19 supplier
+# offboarding record evidence.
+#
+# Per-supplier record: trigger (termination / non-renewal), data return
+# or destruction evidence (with attestation), logical/physical access
+# removal, transition completion, offboarding authoriser.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_19.supplier_offboarding_log
+
+sheet_name_fingerprints:
+  - tokens: [supplier, offboarding]
+  - tokens: [vendor, offboarding]
+  - tokens: [supplier, termination]
+  - tokens: [vendor, termination]
+  - tokens: [supplier, exit]
+  - tokens: [vendor, exit]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: supplier_offboarding
+    target_control: "A.5.19"
+    target_evidence_requirement: "req:A.5.19:offboarding_record"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [offboarding, date]
+        - [termination, date]
+      days: 365
+    required_columns:
+      - fingerprint: [trigger]
+        binds_to: "item:A.5.19:off_trigger"
+        alternative_fingerprints:
+          - [reason]
+          - [termination, reason]
+      - fingerprint: [data, return]
+        binds_to: "item:A.5.19:off_data_return"
+        alternative_fingerprints:
+          - [data, destruction]
+          - [data, handover]
+      - fingerprint: [access, removal]
+        binds_to: "item:A.5.19:off_access_removal"
+        alternative_fingerprints:
+          - [access, revoked]
+      - fingerprint: [authoriser]
+        binds_to: "item:A.5.19:off_authoriser"
+        alternative_fingerprints:
+          - [approved, by]
+    optional_columns:
+      - fingerprint: [transition]
+        binds_to: "item:A.5.19:off_transition"
+        coverage: partial
+      - fingerprint: [handover]
+        binds_to: "item:A.5.19:off_transition"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.20"
+    rationale: "Offboarding triggered by agreement (A.5.20) termination clauses"
+  - control: "A.5.22"
+    rationale: "Offboarding closes the supplier review lifecycle"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

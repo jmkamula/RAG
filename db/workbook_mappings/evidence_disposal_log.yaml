@@ -1,0 +1,72 @@
+# Canonical workbook mapping: evidence package disposal log → A.5.28
+# evidence disposal record.
+#
+# Per-package closure: package_ref (custody chain), closure_type
+# (external_handover / retention_expiry / destruction), authoriser,
+# method, final_hash (chain-of-custody integrity proof), closure_date.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_28.evidence_disposal_log
+
+sheet_name_fingerprints:
+  - tokens: [evidence, disposal]
+  - tokens: [evidence, closure]
+  - tokens: [custody, closure]
+  - tokens: [evidence, handover]
+  - tokens: [chain, custody]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: evidence_disposal
+    target_control: "A.5.28"
+    target_evidence_requirement: "req:A.5.28:evidence_disposal_record"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [closure, date]
+      alternative_fingerprints:
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [package, ref]
+        binds_to: "item:A.5.28:disp_package_ref"
+        alternative_fingerprints:
+          - [package, id]
+          - [custody, id]
+      - fingerprint: [closure, type]
+        binds_to: "item:A.5.28:disp_closure_type"
+        alternative_fingerprints:
+          - [disposal, type]
+          - [closure]
+      - fingerprint: [authoriser]
+        binds_to: "item:A.5.28:disp_authoriser"
+        alternative_fingerprints:
+          - [approved, by]
+      - fingerprint: [method]
+        binds_to: "item:A.5.28:disp_method"
+        alternative_fingerprints:
+          - [disposal, method]
+      - fingerprint: [closure, date]
+        binds_to: "item:A.5.28:disp_closure_date"
+        alternative_fingerprints:
+          - [date]
+    optional_columns:
+      - fingerprint: [final, hash]
+        binds_to: "item:A.5.28:disp_final_hash"
+        coverage: partial
+      - fingerprint: [hash]
+        binds_to: "item:A.5.28:disp_final_hash"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.28"
+    rationale: "Evidence custody (A.5.28) full lifecycle"
+  - control: "A.7.14"
+    rationale: "Physical evidence disposal overlaps with A.7.14 equipment disposal"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

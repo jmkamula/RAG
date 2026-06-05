@@ -1,0 +1,68 @@
+# Canonical workbook mapping: event triage decision log → A.5.25 triage
+# decision evidence.
+#
+# Per-event triage record: event_ref, outcome (false_positive /
+# filed_near_miss / escalated_incident), rationale, decision authority,
+# handoff into A.5.26 incident register where escalated.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_25.triage_decision_log
+
+sheet_name_fingerprints:
+  - tokens: [triage, log]
+  - tokens: [triage, decision]
+  - tokens: [event, triage]
+  - tokens: [security, event]
+  - tokens: [soc, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: triage_decision
+    target_control: "A.5.25"
+    target_evidence_requirement: "req:A.5.25:triage_decision_record"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [triage, date]
+      days: 180
+    required_columns:
+      - fingerprint: [event, ref]
+        binds_to: "item:A.5.25:dec_event_ref"
+        alternative_fingerprints:
+          - [event, id]
+          - [alert, id]
+      - fingerprint: [outcome]
+        binds_to: "item:A.5.25:dec_outcome"
+        alternative_fingerprints:
+          - [decision]
+          - [triage, outcome]
+      - fingerprint: [rationale]
+        binds_to: "item:A.5.25:dec_rationale"
+        alternative_fingerprints:
+          - [reasoning]
+          - [justification]
+      - fingerprint: [authority]
+        binds_to: "item:A.5.25:dec_authority"
+        alternative_fingerprints:
+          - [decided, by]
+          - [triaged, by]
+    optional_columns:
+      - fingerprint: [handoff]
+        binds_to: "item:A.5.25:dec_handoff"
+        coverage: partial
+      - fingerprint: [incident, ref]
+        binds_to: "item:A.5.25:dec_handoff"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.26"
+    rationale: "Escalated events feed A.5.26 incident register via dec_handoff"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1
