@@ -1,0 +1,76 @@
+# Canonical workbook mapping: ISMS objectives register sheet → 6.2 objectives
+# programme review evidence.
+#
+# Tenants maintain an objectives register: objective ID, description, alignment
+# with policy, KPIs, responsible party, start/target dates, status, progress
+# notes, review date, review outcome, next review date. This YAML targets
+# 6.2:objectives_program_review (periodic review of the objectives programme).
+
+schema_version: 1
+mapping_id: workbook.iso.6_2.isms_objectives_review
+
+sheet_name_fingerprints:
+  - tokens: [isms, objectives]
+  - tokens: [security, objectives]
+  - tokens: [objectives, register]
+  - tokens: [objectives, log]
+  - tokens: [kpi, register]
+  - tokens: [objectives]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: objectives_programme_review
+    target_control: "6.2"
+    target_evidence_requirement: "req:6.2:objectives_program_review"
+    target_evidence_type: review_record
+    freshness:
+      column_fingerprint: [review, date]
+      alternative_fingerprints:
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [review, date]
+        binds_to: "item:6.2:rev_date"
+      - fingerprint: [responsible, party]
+        binds_to: "item:6.2:rev_reviewer"
+        alternative_fingerprints:
+          - [owner]
+          - [reviewer]
+    optional_columns:
+      - fingerprint: [current, status]
+        binds_to: "item:6.2:rev_currency"
+        coverage: partial
+      - fingerprint: [progress, notes]
+        binds_to: "item:6.2:rev_currency"
+        coverage: partial
+      - fingerprint: [alignment, isms, policy]
+        binds_to: "item:6.2:rev_alignment"
+        coverage: partial
+      - fingerprint: [key, performance, indicators]
+        binds_to: "item:6.2:rev_kpi_health"
+        coverage: partial
+      - fingerprint: [kpi]
+        binds_to: "item:6.2:rev_kpi_health"
+        coverage: partial
+      - fingerprint: [review, outcome]
+        binds_to: "item:6.2:rev_currency"
+        coverage: partial
+      - fingerprint: [next, review, date]
+        binds_to: "item:6.2:rev_currency"
+        coverage: partial
+
+cross_control_links:
+  - control: "5.2"
+    rationale: "Objectives derive from the information-security policy (5.2)"
+  - control: "9.1"
+    rationale: "KPI columns feed the monitoring & measurement programme (9.1)"
+  - control: "9.3"
+    rationale: "Objectives review is a 9.3.2 management-review input"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

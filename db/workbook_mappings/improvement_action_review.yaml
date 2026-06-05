@@ -1,0 +1,80 @@
+# Canonical workbook mapping: ISMS action tracker / improvement action tracker
+# → 10.1 improvement programme review evidence.
+#
+# Tenants maintain an action tracker for ISMS improvements: action ID, related
+# risk / NC, treatment action, owner, status, due date, completion date,
+# comments. This YAML targets 10.1:improvement_program_review (annual review
+# of how continual-improvement signals are being captured and closed).
+
+schema_version: 1
+mapping_id: workbook.iso.10_1.improvement_action_review
+
+sheet_name_fingerprints:
+  - tokens: [isms, action, tracker]
+  - tokens: [action, tracker]
+  - tokens: [improvement, tracker]
+  - tokens: [improvement, register]
+  - tokens: [improvement, log]
+  - tokens: [action, log]
+  - tokens: [continual, improvement]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: improvement_programme_review
+    target_control: "10.1"
+    target_evidence_requirement: "req:10.1:improvement_program_review"
+    target_evidence_type: review_record
+    freshness:
+      column_fingerprint: [due, date]
+      alternative_fingerprints:
+        - [completion, date]
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [due, date]
+        binds_to: "item:10.1:rev_date"
+        alternative_fingerprints:
+          - [completion, date]
+          - [date]
+      - fingerprint: [owner]
+        binds_to: "item:10.1:rev_reviewer"
+        alternative_fingerprints:
+          - [reviewer]
+          - [responsible]
+    optional_columns:
+      - fingerprint: [related, risk]
+        binds_to: "item:10.1:rev_signal_capture"
+        coverage: partial
+      - fingerprint: [treatment, action]
+        binds_to: "item:10.1:rev_signal_capture"
+        coverage: partial
+      - fingerprint: [action]
+        binds_to: "item:10.1:rev_signal_capture"
+        coverage: partial
+      - fingerprint: [status]
+        binds_to: "item:10.1:rev_closure_quality"
+        coverage: partial
+      - fingerprint: [comments]
+        binds_to: "item:10.1:rev_closure_quality"
+        coverage: partial
+      - fingerprint: [completion, date]
+        binds_to: "item:10.1:rev_closure_quality"
+        coverage: partial
+
+cross_control_links:
+  - control: "10.2"
+    rationale: "NCs (10.2) are one source of improvement actions"
+  - control: "6.1.3"
+    rationale: "Risk-treatment plan (6.1.3) is another source"
+  - control: "9.2"
+    rationale: "Audit findings (9.2) drive improvement actions"
+  - control: "9.3"
+    rationale: "Mgmt review (9.3) decisions become improvement actions"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

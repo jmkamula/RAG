@@ -1,0 +1,83 @@
+# Canonical workbook mapping: nonconformity tracker sheet → 10.2 NC programme
+# review evidence.
+#
+# Tenants maintain a nonconformity register: NC ID, date identified, description,
+# root cause, severity, corrective action, owner, target completion, follow-up,
+# results, status, verification outcome. The same sheet supports both the
+# nonconformity register (10.2:nonconformity_register) and the periodic
+# review of NC handling discipline (10.2:nc_program_review). This YAML
+# targets the review leaf.
+
+schema_version: 1
+mapping_id: workbook.iso.10_2.nonconformity_review
+
+sheet_name_fingerprints:
+  - tokens: [nonconformity, register]
+  - tokens: [non, conformity]
+  - tokens: [nonconf, tracker]
+  - tokens: [nc, log]
+  - tokens: [nc, register]
+  - tokens: [corrective, action]
+  - tokens: [nonconformance, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: nonconformity_programme_review
+    target_control: "10.2"
+    target_evidence_requirement: "req:10.2:nc_program_review"
+    target_evidence_type: review_record
+    freshness:
+      column_fingerprint: [date, identified]
+      alternative_fingerprints:
+        - [follow, up, date]
+        - [target, completion, date]
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [date, identified]
+        binds_to: "item:10.2:rev_date"
+        alternative_fingerprints:
+          - [date]
+      - fingerprint: [responsible, person]
+        binds_to: "item:10.2:rev_reviewer"
+        alternative_fingerprints:
+          - [owner]
+          - [responsible, owner]
+    optional_columns:
+      - fingerprint: [status]
+        binds_to: "item:10.2:rev_closure_progress"
+        coverage: partial
+      - fingerprint: [root, cause]
+        binds_to: "item:10.2:rev_root_cause_quality"
+        coverage: partial
+      - fingerprint: [severity, level]
+        binds_to: "item:10.2:rev_root_cause_quality"
+        coverage: partial
+      - fingerprint: [corrective, action]
+        binds_to: "item:10.2:rev_closure_progress"
+        coverage: partial
+      - fingerprint: [verification, outcome]
+        binds_to: "item:10.2:rev_recurrence_check"
+        coverage: partial
+      - fingerprint: [follow, up]
+        binds_to: "item:10.2:rev_recurrence_check"
+        coverage: partial
+      - fingerprint: [target, completion, date]
+        binds_to: "item:10.2:rev_closure_progress"
+        coverage: partial
+
+cross_control_links:
+  - control: "9.2"
+    rationale: "Audit findings (9.2) are a primary source of NCs"
+  - control: "9.3"
+    rationale: "NC trends are a 9.3.2 management-review input"
+  - control: "10.1"
+    rationale: "Improvement actions (10.1) close NCs"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1
