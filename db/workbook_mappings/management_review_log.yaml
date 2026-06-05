@@ -1,0 +1,89 @@
+# Canonical workbook mapping: management review log sheet → 9.3 management
+# review programme review evidence.
+#
+# Clause 9.3 mandates top-management ISMS review. Tenants typically maintain
+# a meeting-minutes-style log: meeting id, date, participants, topics
+# discussed, actions agreed, action owner, due date, action status. This
+# YAML binds the canonical columns (date, participants/attendees as
+# reviewer) to the annual programme-review leaf and surfaces action-
+# closure linkage as partial evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.9_3.management_review_log
+
+# ── Sheet identification ─────────────────────────────────────────────────
+# "Management Review" is the distinctive token pair. Also accept the
+# common variants used in different ISMS templates.
+sheet_name_fingerprints:
+  - tokens: [management, review]
+  - tokens: [mgmt, review]
+  - tokens: [leadership, review]
+  - tokens: [top, management]
+  - tokens: [isms, management]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+# ── Extraction passes ────────────────────────────────────────────────────
+passes:
+
+  - pass_name: management_review_programme
+    target_control: "9.3"
+    target_evidence_requirement: "req:9.3:management_review_program_review"
+    target_evidence_type: review_record
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [meeting, date]
+        - [review, date]
+      days: 365
+    required_columns:
+      - fingerprint: [date]
+        binds_to: "item:9.3:rev_date"
+      # "Participants" / "Attendees" identifies the reviewer(s) — top
+      # management or their delegates per clause 9.3.1.
+      - fingerprint: [participants]
+        binds_to: "item:9.3:rev_reviewer"
+        alternative_fingerprints:
+          - [attendees]
+          - [reviewer]
+          - [chair]
+    optional_columns:
+      # The cadence-met / inputs-completeness / action-closure MUSTs aren't
+      # directly columnar; they're audit-time judgements over the full set
+      # of meeting rows. Presence of these supporting columns is partial
+      # evidence that the programme is being run end-to-end.
+      - fingerprint: [topics, discussed]
+        binds_to: "item:9.3:rev_inputs_completeness"
+        coverage: partial    # topics column proves something was discussed,
+                             # not that every 9.3.2 a-g input was covered
+      - fingerprint: [agenda]
+        binds_to: "item:9.3:rev_inputs_completeness"
+        coverage: partial
+      - fingerprint: [actions, agreed]
+        binds_to: "item:9.3:rev_action_closure"
+        coverage: partial    # actions list proves decisions were made,
+                             # not that they were followed through
+      - fingerprint: [action, status]
+        binds_to: "item:9.3:rev_action_closure"
+        coverage: partial    # status proves tracking, but cadence_met needs
+                             # the full schedule context
+      - fingerprint: [due, date]
+        binds_to: "item:9.3:rev_cadence_met"
+        coverage: partial
+      - fingerprint: [next, review]
+        binds_to: "item:9.3:rev_next_date"
+
+# ── Cross-control links ──────────────────────────────────────────────────
+cross_control_links:
+  - control: "5.1"
+    rationale: "Top management leadership (5.1) is exercised through 9.3 reviews"
+  - control: "10.1"
+    rationale: "Decisions from 9.3 reviews drive improvement actions (10.1)"
+  - control: "10.2"
+    rationale: "Action closure from 9.3 ties to nonconformity register (10.2)"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

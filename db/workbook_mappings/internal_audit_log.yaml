@@ -1,0 +1,88 @@
+# Canonical workbook mapping: internal audit log sheet → 9.2 audit programme
+# review evidence.
+#
+# A tenant typically maintains one "Audit Log" sheet listing each internal
+# audit performed: date, scope, auditor, findings, corrective actions,
+# status. The same sheet supports both the audit_execution_record (per-audit)
+# and the audit_program_review (annual review of programme coverage).
+#
+# v1 scope: this YAML binds ONLY to 9.2:audit_program_review (the annual /
+# end-of-cycle review of the programme). The per-audit execution record
+# (req:9.2:audit_execution_record) is a separate evidence_type='audit_record'
+# leaf — a future internal_audit_executions.yaml will target it from the
+# same sheet via a second pass when row-level routing lands in v2.
+
+schema_version: 1
+mapping_id: workbook.iso.9_2.internal_audit_log
+
+# ── Sheet identification ─────────────────────────────────────────────────
+# Token bags match against the tokenised sheet name. The Audit Log shape is
+# distinctive enough (audit + log/register/schedule) to avoid false matches
+# against generic "Schedule" or "Tracker" sheets.
+sheet_name_fingerprints:
+  - tokens: [audit, log]
+  - tokens: [internal, audit]
+  - tokens: [audit, register]
+  - tokens: [audit, schedule]
+  - tokens: [isms, audit]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+# ── Extraction passes ────────────────────────────────────────────────────
+# Single pass targeting the annual audit programme review. The presence of
+# the canonical columns (date, auditor) on this sheet is sufficient signal
+# that the programme has been reviewed at least at the last entry's date;
+# freshness gates whether that's recent enough vs the 365d window.
+#
+# Per-audit (execution) findings come through a separate audit_record leaf
+# and are intentionally NOT bound here to avoid 1-pass-per-row over-claim.
+
+passes:
+
+  - pass_name: audit_programme_review
+    target_control: "9.2"
+    target_evidence_requirement: "req:9.2:audit_program_review"
+    target_evidence_type: review_record
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [audit, date]
+        - [completion, date]
+      days: 365
+    required_columns:
+      - fingerprint: [date]
+        binds_to: "item:9.2:rev_date"
+      - fingerprint: [auditor]
+        binds_to: "item:9.2:rev_reviewer"
+    optional_columns:
+      # Scope + status + corrective-action columns are hints that the audit
+      # was carried through the lifecycle (planned → executed → findings →
+      # closure). Each loosely contributes to one of the audit-programme
+      # MUSTs that aren't directly columnar.
+      - fingerprint: [scope]
+        binds_to: "item:9.2:rev_cycle_progress"
+        coverage: partial    # scope per audit ≠ end-of-cycle coverage check
+      - fingerprint: [status]
+        binds_to: "item:9.2:rev_completion"
+        coverage: partial    # per-audit status ≠ programme completion check
+      - fingerprint: [corrective, action]
+        binds_to: "item:9.2:rev_finding_closure"
+        coverage: partial    # action linkage hints at closure but doesn't prove it
+      - fingerprint: [follow, up]
+        binds_to: "item:9.2:rev_finding_closure"
+        coverage: partial
+      - fingerprint: [next, review]
+        binds_to: "item:9.2:rev_next_date"
+
+# ── Cross-control links ──────────────────────────────────────────────────
+cross_control_links:
+  - control: "10.1"
+    rationale: "Audit findings drive nonconformity register entries (10.1)"
+  - control: "10.2"
+    rationale: "Corrective-action closure is the 10.2 lifecycle being audited"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1
