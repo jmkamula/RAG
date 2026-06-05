@@ -1,0 +1,72 @@
+# Canonical workbook mapping: operational risk assessment log → 8.2
+# operational_risk_assessment_record evidence.
+#
+# Clause 8.2 mandates risk assessments at planned intervals or on significant
+# change. Tenants typically maintain a log of when each assessment ran, who
+# ran it, what criteria were applied, and where the results live. Distinct
+# from the 6.1.2 risk register (the OUTPUT) — this is the EXECUTION log of
+# each assessment cycle.
+
+schema_version: 1
+mapping_id: workbook.iso.8_2.operational_risk_assessment_log
+
+sheet_name_fingerprints:
+  - tokens: [risk, assessment, log]
+  - tokens: [risk, assessment, record]
+  - tokens: [operational, risk, assessment]
+  - tokens: [risk, assessment, cycle]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: operational_risk_assessment
+    target_control: "8.2"
+    target_evidence_requirement: "req:8.2:operational_risk_assessment_record"
+    target_evidence_type: risk_assessment_record
+    freshness:
+      column_fingerprint: [last, assessment, date]
+      alternative_fingerprints:
+        - [assessment, date]
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [last, assessment, date]
+        binds_to: "item:8.2:last_assessment"
+        alternative_fingerprints:
+          - [assessment, date]
+          - [date]
+      - fingerprint: [owner]
+        binds_to: "item:8.2:owner"
+        alternative_fingerprints:
+          - [risk, manager]
+          - [responsible]
+    optional_columns:
+      - fingerprint: [planned, interval]
+        binds_to: "item:8.2:planned_interval"
+        coverage: partial
+      - fingerprint: [trigger]
+        binds_to: "item:8.2:significant_change"
+        coverage: partial
+      - fingerprint: [significant, change]
+        binds_to: "item:8.2:significant_change"
+        coverage: partial
+      - fingerprint: [criteria]
+        binds_to: "item:8.2:criteria_applied"
+        coverage: partial
+      - fingerprint: [results]
+        binds_to: "item:8.2:results_documented"
+        coverage: partial
+      - fingerprint: [comparison]
+        binds_to: "item:8.2:comparison_to_prior"
+        coverage: partial
+
+cross_control_links:
+  - control: "6.1.2"
+    rationale: "Operational assessments execute against the 6.1.2 criteria and feed the register"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

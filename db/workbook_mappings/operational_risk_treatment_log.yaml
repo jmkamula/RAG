@@ -1,0 +1,70 @@
+# Canonical workbook mapping: operational risk treatment log → 8.3
+# operational_risk_treatment_record evidence.
+#
+# Clause 8.3 mandates that the risk treatment plan (6.1.3) actually be
+# implemented and that results be retained. Tenants typically maintain a
+# per-treatment-item status log: planned vs in-progress vs complete,
+# residual risk, owner, target date. Distinct from the RTP itself (the
+# PLAN) — this is the EXECUTION log.
+
+schema_version: 1
+mapping_id: workbook.iso.8_3.operational_risk_treatment_log
+
+sheet_name_fingerprints:
+  - tokens: [risk, treatment, log]
+  - tokens: [risk, treatment, record]
+  - tokens: [treatment, status]
+  - tokens: [treatment, execution]
+  - tokens: [risk, treatment, tracker]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: operational_risk_treatment
+    target_control: "8.3"
+    target_evidence_requirement: "req:8.3:operational_risk_treatment_record"
+    target_evidence_type: risk_treatment_record
+    required_columns:
+      - fingerprint: [implementation, status]
+        binds_to: "item:8.3:implementation_status"
+        alternative_fingerprints:
+          - [status]
+          - [treatment, status]
+      - fingerprint: [residual, risk]
+        binds_to: "item:8.3:residual_risk"
+        alternative_fingerprints:
+          - [residual]
+      - fingerprint: [owner]
+        binds_to: "item:8.3:per_item_owner"
+        alternative_fingerprints:
+          - [responsible]
+          - [treatment, owner]
+      - fingerprint: [target, date]
+        binds_to: "item:8.3:per_item_target_date"
+        alternative_fingerprints:
+          - [target, completion]
+          - [due, date]
+    optional_columns:
+      - fingerprint: [plan]
+        binds_to: "item:8.3:plan_implemented"
+        coverage: partial
+      - fingerprint: [retention]
+        binds_to: "item:8.3:retention"
+        coverage: partial
+      - fingerprint: [soa, link]
+        binds_to: "item:8.3:soa_link"
+        coverage: partial
+      - fingerprint: [control, ref]
+        binds_to: "item:8.3:soa_link"
+        coverage: partial
+
+cross_control_links:
+  - control: "6.1.3"
+    rationale: "Operational treatment executes the 6.1.3 RTP per item"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1
