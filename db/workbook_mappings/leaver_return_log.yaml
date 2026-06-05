@@ -1,0 +1,78 @@
+# Canonical workbook mapping: per-leaver asset return log → A.5.11 leaver
+# return evidence.
+#
+# Per-leaver record: leaver_ref, items_returned (laptop / phone / token /
+# badge), items_unreturned (with write-off rationale), write-off authoriser,
+# access confirmation, dual signoff (returning party + receiving), closure
+# date.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_11.leaver_return_log
+
+sheet_name_fingerprints:
+  - tokens: [leaver, return]
+  - tokens: [leaver, log]
+  - tokens: [asset, return]
+  - tokens: [offboarding, return]
+  - tokens: [equipment, return]
+  - tokens: [exit, checklist]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: leaver_return
+    target_control: "A.5.11"
+    target_evidence_requirement: "req:A.5.11:per_leaver_return_record"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [closure, date]
+      alternative_fingerprints:
+        - [return, date]
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [leaver, ref]
+        binds_to: "item:A.5.11:rec_leaver_ref"
+        alternative_fingerprints:
+          - [leaver, id]
+          - [employee, id]
+          - [employee]
+      - fingerprint: [items, returned]
+        binds_to: "item:A.5.11:rec_items_returned"
+        alternative_fingerprints:
+          - [returned, items]
+          - [assets, returned]
+      - fingerprint: [closure, date]
+        binds_to: "item:A.5.11:rec_closure_date"
+        alternative_fingerprints:
+          - [return, date]
+          - [date]
+    optional_columns:
+      - fingerprint: [items, unreturned]
+        binds_to: "item:A.5.11:rec_items_unreturned"
+        coverage: partial
+      - fingerprint: [unreturned]
+        binds_to: "item:A.5.11:rec_items_unreturned"
+        coverage: partial
+      - fingerprint: [writeoff, authoriser]
+        binds_to: "item:A.5.11:rec_writeoff_auth"
+        coverage: partial
+      - fingerprint: [access, confirmed]
+        binds_to: "item:A.5.11:rec_access_confirmed"
+        coverage: partial
+      - fingerprint: [dual, signoff]
+        binds_to: "item:A.5.11:rec_dual_signoff"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.18"
+    rationale: "Access revocation paired with leaver return process"
+  - control: "A.6.5"
+    rationale: "Post-employment process drives leaver triggers"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

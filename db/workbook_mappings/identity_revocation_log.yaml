@@ -1,0 +1,73 @@
+# Canonical workbook mapping: identity revocation log → A.5.16 identity
+# revocation evidence.
+#
+# Per-identity revocation record: identity_id, trigger_type, effective_date,
+# actual_timestamp (SLA tracking), dual signoff, residual cleanup. Pairs
+# with A.5.18 access_revocation_log via rev_identity_pair MUST.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_16.identity_revocation_log
+
+sheet_name_fingerprints:
+  - tokens: [identity, revocation]
+  - tokens: [identity, removal]
+  - tokens: [identity, deprovisioning]
+  - tokens: [account, disablement]
+  - tokens: [identity, termination]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: identity_revocation
+    target_control: "A.5.16"
+    target_evidence_requirement: "req:A.5.16:identity_revocation_record"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [effective, date]
+      alternative_fingerprints:
+        - [date]
+      days: 90
+    required_columns:
+      - fingerprint: [identity, ref]
+        binds_to: "item:A.5.16:rev_identity_ref"
+        alternative_fingerprints:
+          - [identity, id]
+          - [user, id]
+          - [account, id]
+      - fingerprint: [trigger, type]
+        binds_to: "item:A.5.16:rev_trigger_type"
+        alternative_fingerprints:
+          - [trigger]
+          - [reason]
+      - fingerprint: [effective, date]
+        binds_to: "item:A.5.16:rev_effective_date"
+        alternative_fingerprints:
+          - [date]
+    optional_columns:
+      - fingerprint: [actual, timestamp]
+        binds_to: "item:A.5.16:rev_actual_timestamp"
+        coverage: partial
+      - fingerprint: [sla, met]
+        binds_to: "item:A.5.16:rev_sla_met"
+        coverage: partial
+      - fingerprint: [dual, signoff]
+        binds_to: "item:A.5.16:rev_dual_signoff"
+        coverage: partial
+      - fingerprint: [residual, cleanup]
+        binds_to: "item:A.5.16:rev_residual_cleanup"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.17"
+    rationale: "Credential revocation pairs with identity revocation"
+  - control: "A.5.18"
+    rationale: "Access revocation pairs with identity revocation"
+  - control: "A.5.11"
+    rationale: "Leaver process triggers identity revocation"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

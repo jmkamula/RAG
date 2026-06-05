@@ -1,0 +1,81 @@
+# Canonical workbook mapping: access revocation log → A.5.18 access
+# revocation evidence.
+#
+# Per-revocation record: trigger (termination / role change), effective
+# date, evidence that access was actually disabled, authoriser, SLA-met
+# flag, paired A.5.16 identity revocation, residual cleanup, completeness.
+# Arion has "Access Rev. Log Non-PII Systems" sheet.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_18.access_revocation_log
+
+sheet_name_fingerprints:
+  - tokens: [access, revocation]
+  - tokens: [access, rev, log]
+  - tokens: [access, removal]
+  - tokens: [access, termination]
+  - tokens: [deprovisioning, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: access_revocation
+    target_control: "A.5.18"
+    target_evidence_requirement: "req:A.5.18:access_revocation_record"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [effective, date]
+        - [revocation, date]
+      days: 90
+    required_columns:
+      - fingerprint: [trigger]
+        binds_to: "item:A.5.18:rev_trigger"
+        alternative_fingerprints:
+          - [reason]
+          - [termination, reason]
+      - fingerprint: [effective, date]
+        binds_to: "item:A.5.18:rev_date_recorded"
+        alternative_fingerprints:
+          - [revocation, date]
+          - [date]
+      - fingerprint: [authoriser]
+        binds_to: "item:A.5.18:rev_authoriser"
+        alternative_fingerprints:
+          - [authorised, by]
+          - [approver]
+    optional_columns:
+      - fingerprint: [disabled, proof]
+        binds_to: "item:A.5.18:rev_disabled_proof"
+        coverage: partial
+      - fingerprint: [evidence]
+        binds_to: "item:A.5.18:rev_disabled_proof"
+        coverage: partial
+      - fingerprint: [sla, met]
+        binds_to: "item:A.5.18:rev_sla_met"
+        coverage: partial
+      - fingerprint: [identity, ref]
+        binds_to: "item:A.5.18:rev_identity_pair"
+        coverage: partial
+      - fingerprint: [residual]
+        binds_to: "item:A.5.18:rev_residual_cleanup"
+        coverage: partial
+      - fingerprint: [completeness]
+        binds_to: "item:A.5.18:rev_completeness"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.16"
+    rationale: "Paired identity revocation in A.5.16 (rev_identity_pair MUST)"
+  - control: "A.5.11"
+    rationale: "Leaver process feeds revocation triggers"
+  - control: "A.6.5"
+    rationale: "Post-employment process drives termination triggers"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

@@ -1,0 +1,78 @@
+# Canonical workbook mapping: equipment disposal log → A.7.14 disposal_record
+# evidence.
+#
+# Per-equipment disposal record: equipment_id (cross-link to A.5.9 asset
+# register), trigger, method actually used, authoriser, destination,
+# certificate of destruction, software-removal step.
+
+schema_version: 1
+mapping_id: workbook.iso.A_7_14.equipment_disposal_log
+
+sheet_name_fingerprints:
+  - tokens: [equipment, disposal]
+  - tokens: [disposal, log]
+  - tokens: [asset, disposal]
+  - tokens: [hardware, disposal]
+  - tokens: [media, disposal]
+  - tokens: [decommissioning, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: equipment_disposal
+    target_control: "A.7.14"
+    target_evidence_requirement: "req:A.7.14:disposal_record"
+    target_evidence_type: revocation_record
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [disposal, date]
+      days: 365
+    required_columns:
+      - fingerprint: [equipment, id]
+        binds_to: "item:A.7.14:disp_equipment_id"
+        alternative_fingerprints:
+          - [asset, id]
+          - [device, id]
+          - [serial, number]
+      - fingerprint: [trigger]
+        binds_to: "item:A.7.14:disp_trigger"
+        alternative_fingerprints:
+          - [reason]
+          - [disposal, reason]
+      - fingerprint: [method]
+        binds_to: "item:A.7.14:disp_method"
+        alternative_fingerprints:
+          - [disposal, method]
+      - fingerprint: [authoriser]
+        binds_to: "item:A.7.14:disp_authoriser"
+        alternative_fingerprints:
+          - [approved, by]
+    optional_columns:
+      - fingerprint: [destination]
+        binds_to: "item:A.7.14:disp_destination"
+        coverage: partial
+      - fingerprint: [certificate]
+        binds_to: "item:A.7.14:disp_certificate"
+        coverage: partial
+      - fingerprint: [software, step]
+        binds_to: "item:A.7.14:disp_software_step"
+        coverage: partial
+      - fingerprint: [license, deactivation]
+        binds_to: "item:A.7.14:disp_software_step"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.9"
+    rationale: "Equipment ID cross-links to A.5.9 asset register"
+  - control: "A.7.10"
+    rationale: "Storage media disposal shares the same lifecycle pattern"
+  - control: "A.8.10"
+    rationale: "Information deletion runs alongside hardware disposal"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1
