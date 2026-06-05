@@ -22,6 +22,9 @@ sheet_name_fingerprints:
   - tokens: [third, party, vendor]
   - tokens: [supplier, register]
   - tokens: [supplier, assessment]
+  - tokens: [business, partner]            # tenants commonly use partner-vocabulary
+  - tokens: [partner, assessment]
+  - tokens: [partner, risk]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

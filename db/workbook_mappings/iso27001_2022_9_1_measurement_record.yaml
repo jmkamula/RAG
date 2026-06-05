@@ -8,6 +8,16 @@ mapping_id: workbook.ISO27001_2022.9_1.measurement_record
 sheet_name_fingerprints:
   - tokens: [isms, measurement, record]
   - tokens: [measurement, record]
+  # Manual tuning: tenant vocabulary variants. "Measurement Record" rarely
+  # appears verbatim — tenants more commonly maintain "Monitoring Log",
+  # "KPI Tracker", "Metrics Tracker", or "Info Sec KPI Metrics Tracker".
+  - tokens: [monitor, log]
+  - tokens: [monitoring, log]
+  - tokens: [kpi, tracker]
+  - tokens: [kpi, metric]
+  - tokens: [metric, tracker]
+  - tokens: [security, metric]
+  - tokens: [info, sec, kpi]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

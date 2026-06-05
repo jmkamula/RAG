@@ -9,6 +9,16 @@ sheet_name_fingerprints:
   - tokens: [communication, event, register]
   - tokens: [communication, event, reg]
   - tokens: [communication, event]
+  # Manual tuning: tenants commonly maintain a "Risk Comms Matrix" or
+  # "Communications Plan" sheet listing what gets communicated to whom,
+  # how, and how often — fits the 7.4 communication-event leaf even
+  # though the title vocabulary differs.
+  - tokens: [risk, comm]
+  - tokens: [risk, communication]
+  - tokens: [comm, matrix]
+  - tokens: [communication, matrix]
+  - tokens: [comm, plan]
+  - tokens: [communication, plan]
 
 header_row_hints: [1, 2]
 min_data_rows: 1

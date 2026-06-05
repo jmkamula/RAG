@@ -16,6 +16,12 @@ sheet_name_fingerprints:
   - tokens: [information, asset, register]
   - tokens: [it, asset, register]
   - tokens: [cmdb]
+  # BIA (Business Impact Assessment) sheets are asset-shaped — per-asset
+  # row with CIA scoring + value/impact assessment columns. Map to A.5.9
+  # alongside the BCP-side evidence. Tenant could approve both.
+  - tokens: [bia]
+  - tokens: [business, impact]
+  - tokens: [impact, assessment]
 
 # Asset registers commonly have headers in row 1, but allow drift for sheets
 # with banner rows above. SHEET_CONFIGS has "Asset Register" header_row=1.

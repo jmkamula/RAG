@@ -9,6 +9,14 @@ sheet_name_fingerprints:
   - tokens: [endpoint, inventory, register]
   - tokens: [endpoint, inventory, reg]
   - tokens: [endpoint, inventory]
+  # Manual tuning: BYOD compliance logs are an A.8.1 endpoint-inventory
+  # variant — same conceptual shape (per-device record with compliance
+  # status, OS version, owner).
+  - tokens: [byod, log]
+  - tokens: [byod, compl]
+  - tokens: [byod, compliance]
+  - tokens: [device, compliance]
+  - tokens: [endpoint, compliance]
 
 header_row_hints: [1, 2]
 min_data_rows: 1
