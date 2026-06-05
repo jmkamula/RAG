@@ -1901,6 +1901,8 @@ def _serialize_verdict(v) -> dict:
     to the parent's composition the same way."""
     children = []
     for leaf in (v.leaves or []):
+        recognised = list(leaf.items_recognised or [])
+        unrecognised = list(leaf.items_unrecognised or [])
         children.append({
             "kind":          "leaf",
             "evidence_type": leaf.evidence_type,
@@ -1909,7 +1911,11 @@ def _serialize_verdict(v) -> dict:
             "title":         "",  # filled by _enrich_titles
             "satisfied":     leaf.counts_as_comply,
             "reason":        _humanize_reason(leaf.reason or ""),
-            "items_unrecognised": list(leaf.items_unrecognised or []),
+            "items_recognised":   recognised,
+            "items_unrecognised": unrecognised,
+            # Partial = not satisfied yet but at least one MUST is recognised.
+            # The UI uses this to render a third state between ✓ and ✗.
+            "partial":            (not leaf.counts_as_comply) and bool(recognised),
         })
     frameworks: set[str] = set()
     for role, sub in (v.derived_from or []):

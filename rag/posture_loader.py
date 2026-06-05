@@ -398,6 +398,30 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
                     posture in ("NC", "OFI") and live_finding == posture
                 )
 
+                # If the engine view has shifted to concurrence with live but
+                # a stale pending proposal still sits in the queue, supersede
+                # it: the engine no longer holds the divergent view, so the
+                # Stage-2 entry is obsolete. PC.engine_proposal_status is
+                # reset so list_queue / approve no longer surfaces it.
+                if (agrees_nc_ofi_concur
+                        and latest is not None
+                        and latest.get("status") == "pending"):
+                    cur.execute(
+                        "UPDATE posture_assertions "
+                        "   SET status='superseded', superseded_at=NOW() "
+                        " WHERE id=%s",
+                        (latest["id"],),
+                    )
+                    cur.execute(
+                        "UPDATE posture_controls "
+                        "   SET engine_proposal_status='none', "
+                        "       engine_proposed_at     =NULL "
+                        " WHERE tenant_id=%s AND standard_id=%s "
+                        "   AND control_ref=%s AND is_active=TRUE",
+                        (tenant_id, standard_id_full, control_ref),
+                    )
+                    latest = None  # rerun the no-op gate against a clean slate
+
                 if latest is not None:
                     if latest["finding"] == posture and (latest["gap_description"] or "") == reason:
                         continue

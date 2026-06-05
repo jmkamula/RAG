@@ -1031,14 +1031,28 @@ function renderVerdictTree(verdict, selfStd) {
             Composition · ${sat} of ${tot} satisfied${fw?` · derived from ${fw}`:''}
           </div>`;
 
-  // Render a sat/pending marker + title for one child (leaf or derived).
-  const renderRow = (label, sub, satisfied) => {
-    const mark = satisfied
-      ? '<span style="color:#2F8F4D;font-weight:600">✓</span>'
-      : '<span style="color:#B5651B;font-weight:600">✗</span>';
+  // Render a sat/partial/pending marker + title for one child.
+  // Three states: ✓ satisfied · ◐ partial (some MUSTs recognised, not all)
+  // · ✗ no evidence yet. Partial children also surface the recognised/
+  // missing counts inline so the reviewer sees real progress at a glance.
+  const renderRow = (label, sub, satisfied, partial, rec, missing) => {
+    let mark, partialNote = '';
+    if (satisfied) {
+      mark = '<span style="color:#2F8F4D;font-weight:600">✓</span>';
+    } else if (partial) {
+      mark = '<span style="color:#9C6F1B;font-weight:600">◐</span>';
+      const recN = rec || 0;
+      const missN = missing || 0;
+      const tot = recN + missN;
+      if (tot > 0) {
+        partialNote = ` <span style="color:#9C6F1B;font-size:10px">(${recN}/${tot} recognised)</span>`;
+      }
+    } else {
+      mark = '<span style="color:#B5651B;font-weight:600">✗</span>';
+    }
     return `<li style="margin-top:3px">
       <span style="display:inline-block;min-width:14px">${mark}</span>
-      <strong>${label}</strong>${sub?` — <span style="color:#3A382E">${sub}</span>`:''}
+      <strong>${label}</strong>${partialNote}${sub?` — <span style="color:#3A382E">${sub}</span>`:''}
     </li>`;
   };
 
@@ -1059,7 +1073,8 @@ function renderVerdictTree(verdict, selfStd) {
   for (const std of Object.keys(grouped)) {
     let rows = '';
     for (const c of grouped[std]) {
-      rows += renderRow(esc(c.from_control_ref || '?'), esc(c.title || ''), c.satisfied);
+      // Derived children don't carry partial counts at this serialiser level.
+      rows += renderRow(esc(c.from_control_ref || '?'), esc(c.title || ''), c.satisfied, false, 0, 0);
     }
     const isStructural = std === selfStd;
     const header = isStructural
@@ -1077,7 +1092,9 @@ function renderVerdictTree(verdict, selfStd) {
     let rows = '';
     for (const c of leaves) {
       const primary = esc(c.title || c.evidence_type || 'leaf');
-      rows += renderRow(primary, '', c.satisfied);
+      const rec = (c.items_recognised || []).length;
+      const missing = (c.items_unrecognised || []).length;
+      rows += renderRow(primary, '', c.satisfied, !!c.partial, rec, missing);
     }
     h += `<div style="margin-top:6px;padding:8px 10px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;font-size:11px;line-height:1.5">
       <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">Direct evidence</div>

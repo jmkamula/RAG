@@ -1,34 +1,25 @@
 ---
 name: engine-agreement-suppression
-description: "posture_loader.py:343 silently suppresses Stage-2 proposals when engine NC agrees with live NC; loses engine's 4-leaf reasoning; first observed cleanly in batch 4 A.5.26"
+description: "RESOLVED 2026-06-05 (fea23f3): posture_loader writes engine 'active' PA + overlays in-memory on NC/OFI concurrence with live; Comply/N/A concurrence still skipped"
 metadata: 
   node_type: memory
   type: project
   originSessionId: 99048f90-bd73-4ace-9570-e5eec76ba3e0
 ---
 
-`posture_loader._persist_engine_proposals` skips proposal persistence when engine agrees with the live finding and there's no existing pending proposal:
+**Status:** RESOLVED 2026-06-05 (commit fea23f3, "engine: surface engine reason on NC/OFI concurrence with live").
 
-```python
-# posture_loader.py:343-344
-if live_finding == posture and cur_status in ("none", None):
-    continue
-```
+**What was lossy:** `posture_loader._persist_engine_proposals` skipped proposal persistence when engine agreed with live finding and no proposal existed (`live_finding == posture and cur_status in ("none", None)` → `continue`). Designed to prevent Stage-2 queue flooding with auto-Comply rows, but also discarded the engine's 4-leaf structured reason for NC==NC and OFI==OFI agreement cases. Symmetric blind spot in `_apply_engine_overlay`: gated on `engine_proposal_status='approved'` so the in-memory overlay never fired for concurrence cases either, even when reasoning existed.
 
-**Why it exists:** prevents the Stage-2 queue from flooding with ~80 auto-Comply rows where engine + intake already align. Useful suppression.
+**Fix (both halves):**
+- **Writer:** at NC/OFI concurrence with no matching prior engine PA, `set_assertion(..., status='active', source='engine', set_by='engine')`. No `engine_proposal_status='proposed'` bump — Stage-2 queue stays clean (there's nothing to decide). Comply / N/A concurrence still skipped.
+- **Reader:** overlay gate extended — fires when `verdict.posture in {NC,OFI}` AND `row.finding == verdict.posture`, in addition to the existing `engine_proposal_status='approved'` path. The existing rewrite branch in `_apply_engine_overlay` then replaces `gap_description` with the engine's structured reason + unacked leaf accounting.
 
-**Where it's lossy:** *NC-on-NC* agreement (and to a lesser extent OFI-on-OFI). The engine has structured 4-leaf reasoning (`'ALL: 0/4 children satisfied'`) that's strictly more informative than the legacy single-leaf gap_description. Suppressing the proposal hides the engine's structured view from both the Stage-2 queue and the LLM context — the tenant can no longer see *which* of the 4 sibling leaves is missing, only the legacy "drill not conducted" prose.
+**Why:** the 4-leaf reasoning (`'0/4 children satisfied'` + per-role accounting) is strictly more informative than the legacy single-leaf gap_description prose, and the agreement case is exactly where the engine's structured view used to vanish.
 
-**First observed cleanly:** batch 4 (2026-05-31, [[curation-phase-b-batch-4-2026-05-31]]) on A.5.26. Live=NC, engine=NC at 0/4 → no proposal persisted → no Stage-2 surface → can't be eval-covered through LLM chat.
+**How to apply (future work):**
+- On Arion specifically, the change was a no-op at commit time: real NC/OFI concurrence rows all carry `engine_proposal_status='approved'` from the prior Stage-2 mass-approval session (already overlaid via approved-gate path); the 7 'none'-status concurrence rows are synthetic test-section controls (X.XXXX.99) with no curated engine verdict. Forward-looking value: new tenants without Stage-2 history, live postures flipped to NC/OFI outside Stage-2, future re-onboards.
+- No eval case appended — a would-fail-pre-change test can't be constructed against current Arion data without reverting a Stage-2 approval. If a real concurrence-without-history case appears later (e.g. new tenant), add the eval then.
+- Forward design note from the original suppression analysis still holds: separate `engine_finding` + `engine_reason` (always populated when applicable) from the proposal lifecycle columns. Phase 1b/1c already moved verdict to `posture_assertions`; this commit closes the loop by ensuring the engine PA gets written for concurrence too.
 
-**Possible improvement (product call, not coded):**
-- Keep the suppression for `Comply == Comply` agreement (engine adds nothing).
-- Persist the engine reason for `NC == NC` and `OFI == OFI` agreement, even without raising it as a Stage-2 *proposal* — surface it as informational context. This would let the LLM access the 4-leaf detail without spamming the Stage-2 review queue.
-- Schema change required: separate `engine_finding` + `engine_reason` (always populated when applicable) from `engine_proposal_finding` + `engine_proposal_reason` (only when divergent).
-
-**How to apply:**
-- When a future Phase B batch promotes a control where live posture is already NC (or OFI), expect the engine proposal to not surface through Stage-2. Verify the engine signature via `compute_engine_verdicts()` directly, and document the suppression in the batch memory.
-- Eval cases need a non-LLM surface to lock these controls' 4-leaf shape. Currently no such surface in `tests/eval_suite.py` — would need to add one (e.g. unit-test pattern that inspects `compute_engine_verdicts()` output and asserts leaf count + signature).
-- If product decides the suppression should be relaxed for NC/OFI agreement, the change is localised to `posture_loader._persist_engine_proposals` + the `posture_controls` schema.
-
-Related: [[curation-phase-b-batch-4-2026-05-31]] for the originating context, [[hitl-two-stage-approval-design]] for the broader Stage-2 design intent the suppression serves.
+Related: [[posture-assertions-phase-1b]], [[posture-assertions-phase-1c]], [[hitl-two-stage-approval-design]], [[curation-phase-b-batch-4-2026-05-31]] for the originating A.5.26 context.

@@ -247,7 +247,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.24",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "accountability"],
         expected_refs=["Art.24"], expected_type="posture_check",
-        must_contain=["Art.24", "engine proposes", "OFI", "partial evidence"],  # Re-proposed 2026-06-04 after composition-rule any-progress→OFI: ISO deps A.5.9/A.5.18 now show partial evidence → cascades to Art.24
+        must_contain=["Art.24", "engine concurs", "NC", "partial evidence"],  # Updated 2026-06-05 (compose_posture rule reverted: 0 fully satisfied → NC; partial alone no longer earns OFI). Engine concurs with live NC; partial surfaced in reason.
         must_not_contain=["0/6 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.24 (Accountability) — DerivedSpec with 6 ISO deps (5.1, 5.3, 9.3, A.5.1, A.5.34, A.5.36) + 4 NEW direct evidence (privacy_programme_charter + gdpr_compliance_register + controller_processor_decision_record + accountability_program_review). 10 children total. FIRST DerivedSpec to go from 0 direct_evidence to 4 in one batch. Hits a 10-child verdict (largest verdict surface).",
@@ -258,7 +258,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.25",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "dpbd"],
         expected_refs=["Art.25"], expected_type="posture_check",
-        must_contain=["Art.25", "engine proposes", "OFI", "partial evidence"],  # Re-proposed 2026-06-04 after composition-rule any-progress→OFI: ISO deps with partial evidence cascade to Art.25
+        must_contain=["Art.25", "engine concurs", "NC", "partial evidence"],  # Updated 2026-06-05 (compose_posture rule reverted): engine concurs with live NC; partial surfaced in reason.
         must_not_contain=["0/7 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.25 (DPbD) — DerivedSpec with 6 ISO deps + 4 direct (default_settings_record primary id preserved + dpbd_procedure + applicable_design_scope + program_review). 10 children. Mirror of Art.24 expansion pattern.",
@@ -324,7 +324,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.32",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "security"],
         expected_refs=["Art.32"], expected_type="posture_check",
-        must_contain=["Art.32", "engine proposes", "OFI", "partial evidence"],  # Re-proposed 2026-06-04 after composition-rule any-progress→OFI: ISO deps with partial evidence cascade to Art.32
+        must_contain=["Art.32", "engine concurs", "NC"],  # Updated 2026-06-05 (compose_posture rule reverted): engine concurs with live NC. Pure DerivedSpec cascade loses partial signal under the new rule (deps roll up to NC, not OFI), so reason omits "(N with partial evidence)" — partial visibility lives at the leaf level via posture detail, not at the cascade headline.
         must_not_contain=["0/6 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.32 (Security) — DerivedSpec with 5 ISO deps + 4 direct (resilience_test_record primary id preserved + risk_appropriate_measures_register + applicable_scope_note + program_review). 9 children. Mirror Art.24/25 expansion. Note: case #24 still tests this article via a different query format and is known-stale.",
@@ -414,7 +414,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.16",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "rectification"],
         expected_refs=["Art.16"], expected_type="posture_check",
-        must_contain=["Art.16", "engine proposes", "OFI", "partial evidence"],  # Re-proposed 2026-06-04 after composition-rule any-progress→OFI: A.5.34 dep with partial evidence cascades to Art.16
+        must_contain=["Art.16", "engine concurs", "NC", "partial evidence"],  # Updated 2026-06-05 (compose_posture rule reverted): engine concurs with live NC; partial surfaced in reason.
         must_not_contain=["0/1 children satisfied", "0/2 children satisfied",
                           "no curated multi-leaf",
                           "I need more information", "could you clarify"],
@@ -426,7 +426,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.17",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "erasure"],
         expected_refs=["Art.17"], expected_type="posture_check",
-        must_contain=["Art.17", "engine proposes", "OFI", "partial evidence"],  # Re-proposed 2026-06-04 after composition-rule any-progress→OFI: A.5.34+A.8.10 deps with partial evidence cascade to Art.17
+        must_contain=["Art.17", "engine concurs", "NC", "partial evidence"],  # Updated 2026-06-05 (compose_posture rule reverted): engine concurs with live NC; partial surfaced in reason.
         must_not_contain=["0/1 children satisfied", "0/3 children satisfied",
                           "no curated multi-leaf",
                           "I need more information", "could you clarify"],
@@ -520,7 +520,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.6",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "lawful_basis"],
         expected_refs=["Art.6"], expected_type="posture_check",
-        must_contain=["Art.6", "engine proposes", "OFI", "partial evidence"],  # Re-proposed 2026-06-04 after composition-rule any-progress→OFI: A.5.34/A.5.31 deps with partial evidence cascade to Art.6
+        must_contain=["Art.6", "engine concurs", "NC", "partial evidence"],  # Updated 2026-06-05 (compose_posture rule reverted): engine concurs with live NC; partial surfaced in reason.
         must_not_contain=["0/1 children satisfied", "0/3 children satisfied",
                           "no curated multi-leaf",
                           "I need more information", "could you clarify"],
@@ -695,7 +695,7 @@ EVAL_CASES = [
         query="pending engine verdict for 6.1.2",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "op_process", "risk_assessment"],
         expected_refs=["6.1.2"], expected_type="posture_check",
-        must_contain=["6.1.2", "engine proposes", "OFI", "partial evidence"],  # Re-proposed 2026-06-04 after composition-rule any-progress→OFI: workbook risk_register leaf 4/6 → control OFI
+        must_contain=["6.1.2", "engine concurs", "NC", "partial evidence"],  # Updated 2026-06-05 (compose_posture rule reverted): workbook risk_register leaf 4/6 is partial but not fully satisfied — engine concurs with live NC; partial surfaced in reason.
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks clause 6.1.2 (Risk assessment) — op_process 4-leaf: risk_assessment (primary, id preserved) + risk_register + methodology_scope + program_review (365d). Primary-leaf id preserved: req:6.1.2:risk_assessment.",
@@ -1661,7 +1661,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program"],
         expected_refs=["A.5.9"],
         expected_type="posture_check",
-        must_contain=["A.5.9", "engine proposes", "OFI", "partial evidence"],  # Re-proposed 2026-06-04 after composition-rule any-progress→OFI: workbook asset_inventory leaf 5/6 → control OFI
+        must_contain=["A.5.9", "engine concurs", "NC", "partial evidence"],  # Updated 2026-06-05 (compose_posture rule reverted): workbook asset_inventory leaf 5/6 is partial but not fully satisfied — engine concurs with live NC; partial surfaced in reason.
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",

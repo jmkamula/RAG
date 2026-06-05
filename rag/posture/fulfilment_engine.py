@@ -456,20 +456,22 @@ def _compose_posture(
 ) -> str:
     """Compose child outcomes (True = Comply) into a parent posture.
 
-    Three-tier output: Comply when the op is fully satisfied, OFI when
-    partially satisfied (some evidence present, threshold not met), NC
-    when there is no evidence anywhere across the children. The reviewer
-    approves or rejects the NC proposal in Stage-2 just like an OFI
-    proposal — the engine doesn't get the last word on what's a formal
-    non-conformity, but it does flag the "nothing at all" case separately
-    so the queue surfaces it for human attention.
+    Three-tier output: Comply when the op is fully satisfied, OFI when at
+    least one child is fully satisfied (but the threshold isn't met yet),
+    NC otherwise — including the case where some children show partial
+    evidence but none are fully satisfied. The reviewer approves or rejects
+    the NC proposal in Stage-2 just like an OFI proposal — the engine
+    doesn't get the last word on what's a formal non-conformity, but it
+    does flag "nothing fully done yet" as NC so the queue prioritises
+    foundational gaps over later-stage partial-completion polishing.
 
     The `progress` list runs parallel to `outcomes`: True iff the child has
     ANY evidence (leaf with ≥1 items_recognised, or sub-verdict at
-    Comply/OFI). It distinguishes "0 of N satisfied AND no progress on
-    any child" (→ NC) from "0 of N fully satisfied BUT some children
-    partial" (→ OFI). Without it, the rule reduces to today's behaviour
-    where only fully-satisfied leaves move the needle.
+    Comply/OFI). It is NOT used to lift NC → OFI — partial evidence alone
+    doesn't earn OFI under the current rule. It is retained for the
+    reason-string builder (`_build_reason`) which surfaces "(N with
+    partial evidence)" so the partial work is still visible to the
+    reviewer, just not promoted in the verdict.
 
     The empty-outcome branches keep their existing meaning (vacuous Comply
     / all-NA OFI) because they're not "0 of N tried"."""
@@ -489,19 +491,18 @@ def _compose_posture(
         return "Comply"
 
     n_sat = sum(1 for o in outcomes if o)
-    has_any_progress = any(progress) if progress else False
 
     if op == "ALL":
-        if all(outcomes):                      return "Comply"
-        if n_sat == 0 and not has_any_progress: return "NC"
+        if all(outcomes):  return "Comply"
+        if n_sat == 0:     return "NC"
         return "OFI"
     if op == "ANY":
-        if any(outcomes):    return "Comply"
+        if any(outcomes):  return "Comply"
         return "NC"
     if op == "AT_LEAST_N":
         threshold = n if (n is not None and n >= 0) else 1
-        if n_sat >= threshold:                  return "Comply"
-        if n_sat == 0 and not has_any_progress: return "NC"
+        if n_sat >= threshold:  return "Comply"
+        if n_sat == 0:          return "NC"
         return "OFI"
     raise ValueError(f"unknown op {op!r}")
 

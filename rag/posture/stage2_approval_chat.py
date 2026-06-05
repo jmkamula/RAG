@@ -549,7 +549,23 @@ def render_stage2_answer(
                 f"hasn't run yet for this tenant."
             )
         status = proposal["status"]
-        if status == "none" or not proposal.get("proposed_finding"):
+        if status == "none":
+            # Engine concurs with live (no Stage-2 decision pending). When an
+            # 'active' engine PA exists (NC/OFI concurrence), surface its
+            # structured reason so partial-evidence progress is still visible
+            # to the reviewer. See [[engine_agreement_suppression]].
+            if proposal.get("proposed_finding") and proposal.get("reason"):
+                return (
+                    f"{ctrl}: engine concurs with live at "
+                    f"{proposal['live_finding']!r}.\n"
+                    f"Reason: {proposal['reason']}"
+                )
+            return (
+                f"{ctrl}: engine has no current proposal (status: "
+                f"{status!r}). Posture stays at "
+                f"{proposal['live_finding']!r}."
+            )
+        if not proposal.get("proposed_finding"):
             return (
                 f"{ctrl}: engine has no current proposal (status: "
                 f"{status!r}). Posture stays at "
