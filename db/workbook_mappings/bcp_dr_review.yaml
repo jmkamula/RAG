@@ -1,0 +1,87 @@
+# Canonical workbook mapping: business continuity / DR plan log →
+# A.5.29 continuity programme review evidence.
+#
+# Tenants maintain a BCP/DR log: plan id, plan name, owner, last updated,
+# critical systems, recover objectives, backup location, test date, exercise
+# type, participants, scenario tested, issues identified, action items, next
+# review date. This YAML targets A.5.29:continuity_program_review — the
+# periodic review of the continuity programme. A future bcp_test_log.yaml
+# may target A.5.29:plan_activation_record (revocation_record family) once
+# the row-attribution v2 schema lands.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_29.bcp_dr_review
+
+sheet_name_fingerprints:
+  - tokens: [business, cont]
+  - tokens: [continuity, plan]
+  - tokens: [bcp, log]
+  - tokens: [bcdr]
+  - tokens: [disaster, recovery]
+  - tokens: [dr, plan]
+  - tokens: [bcp]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: continuity_programme_review
+    target_control: "A.5.29"
+    target_evidence_requirement: "req:A.5.29:continuity_program_review"
+    target_evidence_type: review_record
+    freshness:
+      column_fingerprint: [date, last, updated]
+      alternative_fingerprints:
+        - [last, updated]
+        - [next, review, date]
+        - [test, date]
+        - [date]
+      days: 180
+    required_columns:
+      - fingerprint: [date, last, updated]
+        binds_to: "item:A.5.29:rev_date"
+        alternative_fingerprints:
+          - [last, updated]
+          - [test, date]
+          - [review, date]
+      - fingerprint: [owner]
+        binds_to: "item:A.5.29:rev_reviewer"
+        alternative_fingerprints:
+          - [reviewer]
+    optional_columns:
+      - fingerprint: [scenario, tested]
+        binds_to: "item:A.5.29:rev_scenario_currency"
+        coverage: partial
+      - fingerprint: [exercise, type]
+        binds_to: "item:A.5.29:rev_test_results"
+        coverage: partial
+      - fingerprint: [test, date]
+        binds_to: "item:A.5.29:rev_test_results"
+        coverage: partial
+      - fingerprint: [issues, identified]
+        binds_to: "item:A.5.29:rev_real_divergence"
+        coverage: partial
+      - fingerprint: [action, items]
+        binds_to: "item:A.5.29:rev_actions"
+        coverage: partial
+      - fingerprint: [backup, location]
+        binds_to: "item:A.5.29:rev_fallback_validity"
+        coverage: partial
+      - fingerprint: [recover, objectives]
+        binds_to: "item:A.5.29:rev_fallback_validity"
+        coverage: partial
+      - fingerprint: [next, review, date]
+        binds_to: "item:A.5.29:rev_actions"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.30"
+    rationale: "ICT readiness (A.5.30) is the technical sibling of A.5.29"
+  - control: "A.8.13"
+    rationale: "Restore-test data feeds back from A.8.13"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

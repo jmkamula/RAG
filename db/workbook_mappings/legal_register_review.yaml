@@ -1,0 +1,73 @@
+# Canonical workbook mapping: legal & regulatory obligations register sheet →
+# A.5.31 obligations register review evidence.
+#
+# Tenants maintain a register of legal / regulatory / contractual obligations:
+# requirement name, authority, compliance measures, responsible owner, last
+# review date, next review date, findings. The same sheet supports both the
+# register (A.5.31:legal_register) and the periodic review of that register
+# (A.5.31:obligations_register_review). This YAML targets the review leaf.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_31.legal_register_review
+
+sheet_name_fingerprints:
+  - tokens: [legal, register]
+  - tokens: [legal, regulatory]
+  - tokens: [regulatory, compliance]
+  - tokens: [compliance, register]
+  - tokens: [legal, compl]            # tenants commonly abbreviate "Compl."
+  - tokens: [regul, compl]
+  - tokens: [obligations, register]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: obligations_register_review
+    target_control: "A.5.31"
+    target_evidence_requirement: "req:A.5.31:obligations_register_review"
+    target_evidence_type: review_record
+    freshness:
+      column_fingerprint: [last, review, date]
+      alternative_fingerprints:
+        - [review, date]
+        - [date]
+      days: 180
+    required_columns:
+      - fingerprint: [last, review, date]
+        binds_to: "item:A.5.31:rev_date"
+        alternative_fingerprints:
+          - [review, date]
+      - fingerprint: [responsible, owner]
+        binds_to: "item:A.5.31:rev_reviewer"
+        alternative_fingerprints:
+          - [owner]
+          - [reviewer]
+    optional_columns:
+      - fingerprint: [findings]
+        binds_to: "item:A.5.31:rev_per_entry"
+        coverage: partial
+      - fingerprint: [requirement, name]
+        binds_to: "item:A.5.31:rev_scope_check"
+        coverage: partial
+      - fingerprint: [relevant, authority]
+        binds_to: "item:A.5.31:rev_scope_check"
+        coverage: partial
+      - fingerprint: [compliance, measures]
+        binds_to: "item:A.5.31:rev_per_entry"
+        coverage: partial
+      - fingerprint: [next, review, date]
+        binds_to: "item:A.5.31:rev_horizon"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.34"
+    rationale: "PII-related obligations cross-link to PII processing register"
+  - control: "Art.6"
+    rationale: "Lawful basis obligations sit in the legal register"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1
