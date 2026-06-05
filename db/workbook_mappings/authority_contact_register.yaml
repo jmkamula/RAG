@@ -1,0 +1,64 @@
+# Canonical workbook mapping: authority contact register → A.5.5 evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_5.authority_contact_register
+
+sheet_name_fingerprints:
+  - tokens: [authority, contact]
+  - tokens: [authorities, contact]
+  - tokens: [regulator, contact]
+  - tokens: [legal, contact]
+  - tokens: [authority, register]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: authority_contact
+    target_control: "A.5.5"
+    target_evidence_requirement: "req:A.5.5:authority_contact_register"
+    target_evidence_type: contact_register
+    freshness:
+      column_fingerprint: [last, verified]
+      alternative_fingerprints:
+        - [date]
+        - [last, review]
+      days: 365
+    required_columns:
+      - fingerprint: [authority]
+        binds_to: "item:A.5.5:authorities_listed"
+        alternative_fingerprints:
+          - [regulator]
+          - [body]
+      - fingerprint: [contact, details]
+        binds_to: "item:A.5.5:contact_details"
+        alternative_fingerprints:
+          - [contact]
+          - [email]
+          - [phone]
+      - fingerprint: [owner]
+        binds_to: "item:A.5.5:owner"
+        alternative_fingerprints:
+          - [responsible]
+    optional_columns:
+      - fingerprint: [escalation, criteria]
+        binds_to: "item:A.5.5:escalation_criteria"
+        coverage: partial
+      - fingerprint: [engagement, criteria]
+        binds_to: "item:A.5.5:escalation_criteria"
+        coverage: partial
+      - fingerprint: [last, verified]
+        binds_to: "item:A.5.5:last_verified"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.26"
+    rationale: "Authority contacts drive incident-notification path"
+  - control: "Art.33"
+    rationale: "Supervisory authority contact is the GDPR breach-notification recipient"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

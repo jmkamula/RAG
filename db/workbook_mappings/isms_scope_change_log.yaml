@@ -1,0 +1,46 @@
+# Canonical workbook mapping: ISMS scope change log → 4.3 evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.4_3.isms_scope_change_log
+
+sheet_name_fingerprints:
+  - tokens: [scope, change]
+  - tokens: [isms, scope, change]
+  - tokens: [scope, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: scope_change
+    target_control: "4.3"
+    target_evidence_requirement: "req:4.3:scope_change_record"
+    target_evidence_type: change_record
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [approval, date]
+      days: 365
+    required_columns:
+      - fingerprint: [trigger]
+        binds_to: "item:4.3:chg_trigger"
+        alternative_fingerprints:
+          - [reason]
+      - fingerprint: [summary]
+        binds_to: "item:4.3:chg_summary"
+        alternative_fingerprints:
+          - [description]
+      - fingerprint: [approval]
+        binds_to: "item:4.3:chg_approval"
+        alternative_fingerprints:
+          - [approved, by]
+    optional_columns:
+      - fingerprint: [impact]
+        binds_to: "item:4.3:chg_impact"
+        coverage: partial
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

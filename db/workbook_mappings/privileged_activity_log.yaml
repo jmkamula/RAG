@@ -1,0 +1,63 @@
+# Canonical workbook mapping: privileged user activity log → A.8.2 evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.A_8_2.privileged_activity_log
+
+sheet_name_fingerprints:
+  - tokens: [privileged, activity]
+  - tokens: [privileged, log]
+  - tokens: [admin, activity]
+  - tokens: [admin, log]
+  - tokens: [pam, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: privileged_activity
+    target_control: "A.8.2"
+    target_evidence_requirement: "req:A.8.2:privileged_activity_log"
+    target_evidence_type: monitoring_record
+    freshness:
+      column_fingerprint: [timestamp]
+      alternative_fingerprints:
+        - [date]
+      days: 180
+    required_columns:
+      - fingerprint: [user]
+        binds_to: "item:A.8.2:log_who"
+        alternative_fingerprints:
+          - [identity]
+          - [account]
+      - fingerprint: [action]
+        binds_to: "item:A.8.2:log_what"
+        alternative_fingerprints:
+          - [command]
+          - [activity]
+      - fingerprint: [timestamp]
+        binds_to: "item:A.8.2:log_when"
+        alternative_fingerprints:
+          - [date]
+          - [time]
+    optional_columns:
+      - fingerprint: [retention]
+        binds_to: "item:A.8.2:log_retention"
+        coverage: partial
+      - fingerprint: [anomaly]
+        binds_to: "item:A.8.2:log_anomaly_alert"
+        coverage: partial
+      - fingerprint: [tamper]
+        binds_to: "item:A.8.2:log_tamper_protect"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.16"
+    rationale: "Privileged accounts are an A.5.16 identity-management subset"
+  - control: "A.8.15"
+    rationale: "Privileged logs feed into A.8.15 log source register"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

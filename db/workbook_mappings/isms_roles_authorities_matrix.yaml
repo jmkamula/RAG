@@ -1,0 +1,57 @@
+# Canonical workbook mapping: ISMS roles, responsibilities and authorities
+# matrix → 5.3 evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.5_3.isms_roles_authorities_matrix
+
+sheet_name_fingerprints:
+  - tokens: [isms, roles]
+  - tokens: [roles, responsibilities, authorities]
+  - tokens: [isms, raci]
+  - tokens: [isms, responsibility, matrix]
+
+header_row_hints: [1, 2, 3]
+min_data_rows: 2
+
+passes:
+
+  - pass_name: isms_roles_authorities
+    target_control: "5.3"
+    target_evidence_requirement: "req:5.3:isms_roles_authorities"
+    target_evidence_type: responsibility_matrix
+    required_columns:
+      - fingerprint: [role]
+        binds_to: "item:5.3:authorities_assigned"
+        alternative_fingerprints:
+          - [position]
+      - fingerprint: [authority]
+        binds_to: "item:5.3:authorities_assigned"
+        alternative_fingerprints:
+          - [authorities]
+          - [decision, rights]
+      - fingerprint: [owner]
+        binds_to: "item:5.3:owner"
+        alternative_fingerprints:
+          - [matrix, owner]
+    optional_columns:
+      - fingerprint: [conformance]
+        binds_to: "item:5.3:isms_conformance"
+        coverage: partial
+      - fingerprint: [reporting]
+        binds_to: "item:5.3:performance_reporting"
+        coverage: partial
+      - fingerprint: [communicated]
+        binds_to: "item:5.3:communicated"
+        coverage: partial
+      - fingerprint: [a52, link]
+        binds_to: "item:5.3:a52_consistency"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.2"
+    rationale: "Operational A.5.2 RACI consistent with ISMS-level 5.3 matrix"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

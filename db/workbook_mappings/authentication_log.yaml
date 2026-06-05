@@ -1,0 +1,57 @@
+# Canonical workbook mapping: authentication activity log → A.8.5 evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.A_8_5.authentication_log
+
+sheet_name_fingerprints:
+  - tokens: [authentication, log]
+  - tokens: [auth, log]
+  - tokens: [login, log]
+  - tokens: [signin, log]
+  - tokens: [identity, events]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: authentication_activity
+    target_control: "A.8.5"
+    target_evidence_requirement: "req:A.8.5:authentication_log"
+    target_evidence_type: monitoring_record
+    freshness:
+      column_fingerprint: [timestamp]
+      alternative_fingerprints:
+        - [date]
+      days: 180
+    required_columns:
+      - fingerprint: [auth, event]
+        binds_to: "item:A.8.5:log_auth_events"
+        alternative_fingerprints:
+          - [event]
+          - [signin]
+          - [login]
+    optional_columns:
+      - fingerprint: [failure, cluster]
+        binds_to: "item:A.8.5:log_failure_clusters"
+        coverage: partial
+      - fingerprint: [impossible, travel]
+        binds_to: "item:A.8.5:log_impossible_travel"
+        coverage: partial
+      - fingerprint: [mfa, anomaly]
+        binds_to: "item:A.8.5:log_mfa_anomalies"
+        coverage: partial
+      - fingerprint: [retention]
+        binds_to: "item:A.8.5:log_retention"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.17"
+    rationale: "Authentication events validate credential lifecycle"
+  - control: "A.8.15"
+    rationale: "Auth logs feed log source register"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

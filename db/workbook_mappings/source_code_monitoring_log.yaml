@@ -1,0 +1,52 @@
+# Canonical workbook mapping: source code access monitoring log → A.8.4 evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.A_8_4.source_code_monitoring_log
+
+sheet_name_fingerprints:
+  - tokens: [source, code, log]
+  - tokens: [repo, log]
+  - tokens: [repository, access]
+  - tokens: [code, access]
+  - tokens: [scm, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: source_code_monitoring
+    target_control: "A.8.4"
+    target_evidence_requirement: "req:A.8.4:source_code_monitoring_log"
+    target_evidence_type: monitoring_record
+    freshness:
+      column_fingerprint: [timestamp]
+      alternative_fingerprints:
+        - [date]
+      days: 180
+    required_columns:
+      - fingerprint: [repo, event]
+        binds_to: "item:A.8.4:log_repo_events"
+        alternative_fingerprints:
+          - [repository, event]
+          - [clone]
+          - [push]
+    optional_columns:
+      - fingerprint: [secrets, hit]
+        binds_to: "item:A.8.4:log_secrets_hits"
+        coverage: partial
+      - fingerprint: [dependency, finding]
+        binds_to: "item:A.8.4:log_dep_findings"
+        coverage: partial
+      - fingerprint: [bypass]
+        binds_to: "item:A.8.4:log_bypass_attempts"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.8.28"
+    rationale: "Source-code findings feed secure-coding metrics"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

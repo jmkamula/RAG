@@ -1,0 +1,55 @@
+# Canonical workbook mapping: information security roles & responsibilities
+# matrix → A.5.2 evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_2.security_roles_matrix
+
+sheet_name_fingerprints:
+  - tokens: [security, roles]
+  - tokens: [security, raci]
+  - tokens: [infosec, roles]
+  - tokens: [security, responsibilities]
+  - tokens: [security, responsibility, matrix]
+
+header_row_hints: [1, 2, 3]
+min_data_rows: 2
+
+passes:
+
+  - pass_name: security_roles
+    target_control: "A.5.2"
+    target_evidence_requirement: "req:A.5.2:roles_and_responsibilities"
+    target_evidence_type: responsibility_matrix
+    required_columns:
+      - fingerprint: [role]
+        binds_to: "item:A.5.2:roles_enumerated"
+        alternative_fingerprints:
+          - [position]
+      - fingerprint: [responsibilities]
+        binds_to: "item:A.5.2:responsibilities"
+        alternative_fingerprints:
+          - [description]
+      - fingerprint: [allocation]
+        binds_to: "item:A.5.2:allocation"
+        alternative_fingerprints:
+          - [assigned, to]
+          - [holder]
+    optional_columns:
+      - fingerprint: [reporting]
+        binds_to: "item:A.5.2:reporting_lines"
+        coverage: partial
+      - fingerprint: [asset, owner]
+        binds_to: "item:A.5.2:asset_owner_resp"
+        coverage: partial
+      - fingerprint: [topic, coverage]
+        binds_to: "item:A.5.2:topic_alignment"
+        coverage: partial
+
+cross_control_links:
+  - control: "5.3"
+    rationale: "ISMS-level RACI (5.3) consistent with this A.5.2 matrix"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

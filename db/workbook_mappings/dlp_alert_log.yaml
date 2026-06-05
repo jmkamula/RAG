@@ -1,0 +1,54 @@
+# Canonical workbook mapping: DLP (data leakage prevention) alert log →
+# A.8.12 evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.A_8_12.dlp_alert_log
+
+sheet_name_fingerprints:
+  - tokens: [dlp, alert]
+  - tokens: [dlp, log]
+  - tokens: [data, leakage]
+  - tokens: [data, loss]
+  - tokens: [exfiltration, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: dlp_alert
+    target_control: "A.8.12"
+    target_evidence_requirement: "req:A.8.12:dlp_alert_log"
+    target_evidence_type: monitoring_record
+    freshness:
+      column_fingerprint: [timestamp]
+      alternative_fingerprints:
+        - [date]
+      days: 180
+    required_columns:
+      - fingerprint: [alert]
+        binds_to: "item:A.8.12:log_alerts"
+        alternative_fingerprints:
+          - [event]
+          - [rule]
+    optional_columns:
+      - fingerprint: [disposition]
+        binds_to: "item:A.8.12:log_dispositions"
+        coverage: partial
+      - fingerprint: [classification]
+        binds_to: "item:A.8.12:log_classification_breakdown"
+        coverage: partial
+      - fingerprint: [retention]
+        binds_to: "item:A.8.12:log_retention"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.12"
+    rationale: "DLP rules driven by classification scheme"
+  - control: "A.5.13"
+    rationale: "DLP enforces labelling boundaries"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

@@ -1,0 +1,52 @@
+# Canonical workbook mapping: failover/redundancy test register → A.8.14
+# evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.A_8_14.failover_test_register
+
+sheet_name_fingerprints:
+  - tokens: [failover, test]
+  - tokens: [failover, log]
+  - tokens: [redundancy, test]
+  - tokens: [ha, test]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: failover_test
+    target_control: "A.8.14"
+    target_evidence_requirement: "req:A.8.14:failover_test_register"
+    target_evidence_type: monitoring_record
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [test, date]
+      days: 365
+    required_columns:
+      - fingerprint: [test, id]
+        binds_to: "item:A.8.14:reg_test_id"
+        alternative_fingerprints:
+          - [id]
+      - fingerprint: [service]
+        binds_to: "item:A.8.14:reg_service"
+      - fingerprint: [type]
+        binds_to: "item:A.8.14:reg_type"
+        alternative_fingerprints:
+          - [test, type]
+      - fingerprint: [date]
+        binds_to: "item:A.8.14:reg_date"
+      - fingerprint: [outcome]
+        binds_to: "item:A.8.14:reg_outcome"
+
+cross_control_links:
+  - control: "A.5.30"
+    rationale: "Failover tests contribute to ICT recovery evidence"
+  - control: "A.8.13"
+    rationale: "Backup/restore tests overlap"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

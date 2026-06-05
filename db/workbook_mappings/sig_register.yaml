@@ -1,0 +1,66 @@
+# Canonical workbook mapping: special interest group register → A.5.6 evidence.
+# Sibling YAML to sig_engagement_review.yaml — same sheet, different leaf
+# (register vs review). Both proposals surface for one sheet.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_6.sig_register
+
+sheet_name_fingerprints:
+  - tokens: [special, interest]
+  - tokens: [spec, int]                       # Arion abbreviation
+  - tokens: [sig, register]
+  - tokens: [sig, log]
+  - tokens: [interest, group]
+  - tokens: [community, register]
+
+header_row_hints: [1, 2, 3]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: sig_register
+    target_control: "A.5.6"
+    target_evidence_requirement: "req:A.5.6:special_interest_group_register"
+    target_evidence_type: contact_register
+    freshness:
+      column_fingerprint: [last, engaged]
+      alternative_fingerprints:
+        - [last, review, date]
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [group, name]
+        binds_to: "item:A.5.6:sigs_listed"
+        alternative_fingerprints:
+          - [sig, name]
+          - [forum]
+      - fingerprint: [focus, area]
+        binds_to: "item:A.5.6:topics_shared"
+        alternative_fingerprints:
+          - [topics]
+          - [tags]
+      - fingerprint: [owner]
+        binds_to: "item:A.5.6:owner"
+        alternative_fingerprints:
+          - [assigned, to]
+    optional_columns:
+      - fingerprint: [engagement, type]
+        binds_to: "item:A.5.6:basis_of_contact"
+        coverage: partial
+      - fingerprint: [last, engaged]
+        binds_to: "item:A.5.6:last_engaged"
+        coverage: partial
+      - fingerprint: [last, review, date]
+        binds_to: "item:A.5.6:last_engaged"
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.5"
+    rationale: "Authority contact register pairs with SIG register"
+  - control: "A.5.7"
+    rationale: "SIG outputs feed threat intelligence programme"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

@@ -1,0 +1,49 @@
+# Canonical workbook mapping: capacity monitoring log → A.8.6 evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.A_8_6.capacity_monitoring_log
+
+sheet_name_fingerprints:
+  - tokens: [capacity, log]
+  - tokens: [capacity, monitoring]
+  - tokens: [resource, utilisation]
+  - tokens: [utilisation, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: capacity_monitoring
+    target_control: "A.8.6"
+    target_evidence_requirement: "req:A.8.6:capacity_monitoring_log"
+    target_evidence_type: monitoring_record
+    freshness:
+      column_fingerprint: [timestamp]
+      alternative_fingerprints:
+        - [date]
+      days: 365
+    required_columns:
+      - fingerprint: [resource]
+        binds_to: "item:A.8.6:log_samples"
+        alternative_fingerprints:
+          - [system]
+          - [metric]
+    optional_columns:
+      - fingerprint: [breach]
+        binds_to: "item:A.8.6:log_breaches"
+        coverage: partial
+      - fingerprint: [threshold]
+        binds_to: "item:A.8.6:log_breaches"
+        coverage: partial
+      - fingerprint: [action]
+        binds_to: "item:A.8.6:log_actions"
+        coverage: partial
+      - fingerprint: [retention]
+        binds_to: "item:A.8.6:log_retention"
+        coverage: partial
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

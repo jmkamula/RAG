@@ -1,0 +1,50 @@
+# Canonical workbook mapping: ISMS roles change log → 5.3 evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.5_3.isms_roles_change_log
+
+sheet_name_fingerprints:
+  - tokens: [roles, change]
+  - tokens: [responsibilities, change]
+  - tokens: [isms, roles, change]
+  - tokens: [org, change]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: isms_roles_change
+    target_control: "5.3"
+    target_evidence_requirement: "req:5.3:isms_roles_change_record"
+    target_evidence_type: change_record
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [approval, date]
+      days: 365
+    required_columns:
+      - fingerprint: [trigger]
+        binds_to: "item:5.3:chg_trigger"
+        alternative_fingerprints:
+          - [reason]
+      - fingerprint: [summary]
+        binds_to: "item:5.3:chg_summary"
+        alternative_fingerprints:
+          - [description]
+      - fingerprint: [approval]
+        binds_to: "item:5.3:chg_approval"
+        alternative_fingerprints:
+          - [approved, by]
+    optional_columns:
+      - fingerprint: [communication]
+        binds_to: "item:5.3:chg_comms"
+        coverage: partial
+      - fingerprint: [comms]
+        binds_to: "item:5.3:chg_comms"
+        coverage: partial
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1
