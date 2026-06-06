@@ -151,21 +151,69 @@ def parse_stage1_intent(query: str) -> Optional[Stage1Intent]:
 
 # ── Read paths ────────────────────────────────────────────────────────────────
 
-def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[dict]:
-    """Return the pending findings for one control. Each row is
-    {finding_id, status, confidence, excerpt, inferred_from_control_ref,
-    inferred_from_standard_id, inference_source}.
+# Module-level cache: checklist_item_id → (must_text, leaf_id, leaf_title,
+# category). Built lazily on first call so import is cheap. The curation
+# set is static for the process lifetime; rebuild only on engine restart.
+_ITEM_LOOKUP: Optional[dict[str, tuple[str, str, str, str]]] = None
 
-    The inference fields let the UI show the source control when a finding
-    was derived (e.g. a GDPR article inferred from an ISO control via xfw)
-    rather than directly extracted — see [[stage1-detail-show-inference-chain-idea]]."""
+def _build_item_lookup() -> dict[str, tuple[str, str, str, str]]:
+    """Index every ChecklistItem (MUST + SHOULD) across the curation set.
+    Returns {item_id: (text, leaf_id, leaf_title, category)}."""
+    from enrichment.documents.document_requirements import (
+        ALL_EVIDENCE_REQUIREMENTS, ALL_DERIVED_SPECS,
+    )
+    out: dict[str, tuple[str, str, str, str]] = {}
+    def add(er):
+        for it in list(er.must_contain) + list(er.should_contain):
+            out[it.id] = (it.text, er.id, er.title, it.category)
+    for er in ALL_EVIDENCE_REQUIREMENTS:
+        add(er)
+    for spec in ALL_DERIVED_SPECS:
+        for er in spec.direct_evidence:
+            add(er)
+    return out
+
+# Excerpt-parse regex: extracts sheet_name + column_name from the
+# "sheet 'X' col 'Y'" excerpt format the workbook persistence layer emits.
+# Falls back gracefully when the excerpt has another shape (LLM doc
+# extraction, xfw inference, etc.) — the parser returns (None, None).
+import re as _re
+_EXCERPT_RE = _re.compile(r"sheet '([^']+)' col '([^']+)'")
+
+
+def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[dict]:
+    """Return the pending findings for one control. Each row carries enough
+    context for the Stage-1 detail view to group by sheet + leaf and show
+    the MUST text the binding satisfies:
+
+    Keys:
+      finding_id, status, confidence, excerpt, extracted_at,
+      inferred_from_control_ref, inferred_from_standard_id, inference_source,
+      checklist_item_id, must_text, must_category (must|should),
+      leaf_id, leaf_title,
+      sheet_name, column_name (parsed from excerpt; None when not workbook-shaped)
+
+    The MUST + leaf fields come from the curation lookup; the sheet/column
+    fields come from parsing the excerpt. None values are returned when a
+    field can't be resolved (older findings without checklist_item_id,
+    LLM-doc-extraction excerpts in another shape, etc.) — the UI handles
+    those gracefully.
+
+    Inference fields let the UI show the source control when a finding
+    was derived (GDPR Art via xfw) rather than directly extracted — see
+    [[stage1-detail-show-inference-chain-idea]]."""
+    global _ITEM_LOOKUP
+    if _ITEM_LOOKUP is None:
+        _ITEM_LOOKUP = _build_item_lookup()
+
     with pg_conn.cursor() as cur:
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
         cur.execute(
             """
             SELECT id::text, status, confidence, excerpt, extracted_at::text,
                    inferred_from_control_ref, inferred_from_standard_id,
-                   inference_source
+                   inference_source,
+                   checklist_item_id
               FROM document_findings
              WHERE tenant_id     = %s
                AND control_ref   = %s
@@ -175,19 +223,39 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
             """,
             (tenant_id, control_ref),
         )
-        return [
-            {
-                "finding_id":                r[0],
-                "status":                    r[1],
-                "confidence":                r[2],
-                "excerpt":                   r[3] or "",
-                "extracted_at":              r[4],
-                "inferred_from_control_ref": r[5],
-                "inferred_from_standard_id": r[6],
-                "inference_source":          r[7],
-            }
-            for r in cur.fetchall()
-        ]
+        rows = cur.fetchall()
+
+    out: list[dict] = []
+    for r in rows:
+        excerpt = r[3] or ""
+        item_id = r[8]
+        # Curation lookup
+        if item_id and item_id in _ITEM_LOOKUP:
+            must_text, leaf_id, leaf_title, category = _ITEM_LOOKUP[item_id]
+        else:
+            must_text, leaf_id, leaf_title, category = None, None, None, None
+        # Parse sheet + column from excerpt when in workbook shape
+        m = _EXCERPT_RE.match(excerpt)
+        sheet_name = m.group(1) if m else None
+        column_name = m.group(2) if m else None
+        out.append({
+            "finding_id":                r[0],
+            "status":                    r[1],
+            "confidence":                r[2],
+            "excerpt":                   excerpt,
+            "extracted_at":              r[4],
+            "inferred_from_control_ref": r[5],
+            "inferred_from_standard_id": r[6],
+            "inference_source":          r[7],
+            "checklist_item_id":         item_id,
+            "must_text":                 must_text,
+            "must_category":             category,
+            "leaf_id":                   leaf_id,
+            "leaf_title":                leaf_title,
+            "sheet_name":                sheet_name,
+            "column_name":               column_name,
+        })
+    return out
 
 
 def list_queue(pg_conn, tenant_id: str) -> list[dict]:

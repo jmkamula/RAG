@@ -427,6 +427,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div>
           <div class="detail-title" id="dp-ref">—</div>
           <div class="detail-std" id="dp-std">—</div>
+          <div id="dp-canonical-title" style="font-size:13px;font-weight:600;color:#3A382E;margin-top:4px;display:none"></div>
+          <div id="dp-canonical-desc" style="font-size:11px;color:#5C5A4C;margin-top:3px;line-height:1.4;display:none"></div>
         </div>
         <button class="btn-close" onclick="closeDetail()" aria-label="Close"><i class="ti ti-x"></i></button>
       </div>
@@ -671,6 +673,9 @@ async function selectHeatCell(c, ev) {
 
   document.getElementById('dp-ref').textContent = c.control_ref;
   document.getElementById('dp-std').textContent = c.display_name || c.standard_id;
+  // Reset canonical summary — the heatcell click doesn't fetch a verdict,
+  // so the previous selection's title/description would otherwise leak.
+  populateCanonicalSummary(null);
   document.getElementById('dp-finding').innerHTML = pill(c.finding);
   document.getElementById('dp-sys-wrap').style.display = 'none';
   // Confirmation status + engine state in the meta footer.
@@ -868,6 +873,28 @@ function statusPill(status) {
   return `<span class="pill ${m[status]||'p-na'}">${status}</span>`;
 }
 
+// Render the canonical control summary in the detail panel header.
+// Called by both selectStage1 + selectStage2 so the user always sees the
+// control's plain-English title (e.g. "Internal audit" for 9.2) and
+// description when available.
+function populateCanonicalSummary(summary) {
+  const titleEl = document.getElementById('dp-canonical-title');
+  const descEl  = document.getElementById('dp-canonical-desc');
+  if (!summary || !summary.title) {
+    titleEl.style.display = 'none';
+    descEl.style.display = 'none';
+    return;
+  }
+  titleEl.textContent = summary.title;
+  titleEl.style.display = 'block';
+  if (summary.description && summary.description.trim()) {
+    descEl.textContent = summary.description;
+    descEl.style.display = 'block';
+  } else {
+    descEl.style.display = 'none';
+  }
+}
+
 function renderStage1(controls, total) {
   const body = document.getElementById('body-queue');
   document.getElementById('queue-title').textContent = 'Intake approval';
@@ -958,6 +985,9 @@ async function selectStage1(c, ev) {
   try {
     const d = await api(`/api/v1/stage1/queue/${encodeURIComponent(c.control_ref)}`);
     s1Details[c.control_ref] = d.findings;
+    // Canonical control summary — title at minimum, description when
+    // populated. Decays gracefully to bare ref when Neo4j is unreachable.
+    populateCanonicalSummary(d.control_summary);
     const gap = document.getElementById('dp-gap');
     if (!d.findings.length) {
       gap.innerHTML = '<span class="muted">(no pending findings)</span>';
@@ -968,34 +998,93 @@ async function selectStage1(c, ev) {
     // user doesn't have to guess what "partial / medium" means.
     let h = `<div style="font-size:10px;color:#9C9A8E;margin-bottom:6px;line-height:1.4">
       <strong>Evidence</strong> = how well the document covers this control
-      (missing / partial / present). <strong>Confidence</strong> = the extractor's
-      certainty in that assessment (low / medium / high).
+      (missing / partial / present). <strong>Confidence</strong> = the
+      extractor's certainty in that assessment (low / medium / high). When
+      one source feeds multiple leaves, the same column may appear under
+      each — the leaf header explains why.
     </div>`;
+
+    // Group findings by (sheet_name OR '(non-workbook)', leaf_id OR '(unbound)').
+    // Two-level grouping reveals the natural intake structure: one sheet
+    // can feed multiple leaves; same column on one sheet can satisfy
+    // multiple MUSTs on sibling leaves without looking like noise.
+    const grouped = {};
     for (const f of d.findings) {
-      // Inferred findings carry the source control (e.g. GDPR Art.10 derived
-      // from an ISO control via xfw). Surface it so the reviewer can trace
-      // why this finding exists — see [[stage1-detail-show-inference-chain-idea]].
-      let chain = '';
-      if (f.inferred_from_control_ref) {
-        const src = esc(f.inferred_from_standard_id || '');
-        const ref = esc(f.inferred_from_control_ref);
-        const via = f.inference_source && f.inference_source !== 'extracted'
-                    ? ` via ${esc(f.inference_source)}` : '';
-        chain = `<div style="margin-top:6px;padding:6px 8px;background:#fff;border:1px dashed #D9D5C5;border-radius:4px;font-size:10px;color:#3A382E">
-          <i class="ti ti-arrow-back-up" style="vertical-align:middle"></i>
-          Inferred from <strong>${src}${src?' · ':''}${ref}</strong>${via}
-        </div>`;
+      const sheet = f.sheet_name || '(non-workbook source)';
+      const leafKey = f.leaf_id || '(unbound)';
+      const leafTitle = f.leaf_title || 'Other findings';
+      if (!grouped[sheet]) grouped[sheet] = {};
+      if (!grouped[sheet][leafKey]) {
+        grouped[sheet][leafKey] = { title: leafTitle, leaf_id: f.leaf_id, items: [] };
       }
-      h += `<div style="margin-bottom:10px;padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA">
-        <div style="display:flex;gap:6px;margin-bottom:4px;align-items:center">
-          <span style="font-size:10px;color:#9C9A8E">Evidence:</span>
-          ${statusPill(f.status)}
-          <span style="font-size:10px;color:#9C9A8E;margin-left:6px">Confidence:</span>
-          <span class="pill p-src">${esc(f.confidence||'—')}</span>
-        </div>
-        <div style="font-size:12px;color:#3A382E;line-height:1.4">${esc(f.excerpt||'(no excerpt)')}</div>
-        ${chain}
-      </div>`;
+      grouped[sheet][leafKey].items.push(f);
+    }
+
+    for (const sheet of Object.keys(grouped)) {
+      h += `<div style="margin-bottom:14px">
+        <div style="font-size:11px;color:#3A382E;font-weight:600;margin-bottom:6px;
+                    border-bottom:1px solid #E8E5DA;padding-bottom:3px">
+          <i class="ti ti-table" style="vertical-align:middle"></i>
+          ${esc(sheet)}
+        </div>`;
+      for (const leafKey of Object.keys(grouped[sheet])) {
+        const grp = grouped[sheet][leafKey];
+        const refTag = grp.leaf_id
+          ? `<span style="color:#9C9A8E;font-size:10px;font-weight:400">
+               ${esc(grp.leaf_id)}
+             </span>`
+          : '';
+        h += `<div style="margin:6px 0 4px 0;padding:6px 8px;background:#F4F1E8;
+                          border-radius:5px;font-size:11px;color:#3A382E">
+          <strong>${esc(grp.title)}</strong> ${refTag}
+        </div>`;
+        for (const f of grp.items) {
+          // Inferred findings carry the source control (e.g. GDPR Art.10
+          // derived from an ISO control via xfw). Surface so the reviewer
+          // can trace why this finding exists — see [[stage1-detail-show-
+          // inference-chain-idea]].
+          let chain = '';
+          if (f.inferred_from_control_ref) {
+            const src = esc(f.inferred_from_standard_id || '');
+            const ref = esc(f.inferred_from_control_ref);
+            const via = f.inference_source && f.inference_source !== 'extracted'
+                        ? ` via ${esc(f.inference_source)}` : '';
+            chain = `<div style="margin-top:4px;padding:4px 6px;background:#fff;
+                                  border:1px dashed #D9D5C5;border-radius:4px;
+                                  font-size:10px;color:#3A382E">
+              <i class="ti ti-arrow-back-up" style="vertical-align:middle"></i>
+              Inferred from <strong>${src}${src?' · ':''}${ref}</strong>${via}
+            </div>`;
+          }
+          const mustText = f.must_text
+            ? esc(f.must_text)
+            : esc(f.excerpt || '(no excerpt)');
+          const mustId = f.checklist_item_id
+            ? `<code style="font-size:10px;color:#9C9A8E;background:#fff;
+                            padding:1px 4px;border-radius:3px;margin-left:4px">
+                 ${esc(f.checklist_item_id.split(':').slice(-1)[0])}
+               </code>`
+            : '';
+          const sourceLine = f.column_name
+            ? `col <code style="background:#fff;padding:1px 4px;border-radius:3px">
+                 ${esc(f.column_name)}
+               </code>`
+            : (f.must_text ? esc(f.excerpt) : '');
+          h += `<div style="margin:0 0 6px 14px;padding:6px 8px;background:#FAF8F2;
+                              border-radius:5px;border:1px solid #E8E5DA">
+            <div style="font-size:11px;color:#3A382E;line-height:1.4;margin-bottom:4px">
+              ${mustText}${mustId}
+            </div>
+            <div style="display:flex;gap:6px;align-items:center;font-size:10px">
+              ${statusPill(f.status)}
+              <span class="pill p-src">${esc(f.confidence||'—')}</span>
+              ${sourceLine ? `<span style="color:#9C9A8E;margin-left:4px">${sourceLine}</span>` : ''}
+            </div>
+            ${chain}
+          </div>`;
+        }
+      }
+      h += `</div>`;
     }
     gap.innerHTML = h;
     const ids = d.findings.map(f => f.finding_id);
@@ -1127,6 +1216,7 @@ async function selectStage2(p, ev) {
 
   try {
     const d = await api(`/api/v1/stage2/queue/${encodeURIComponent(p.control_ref)}`);
+    populateCanonicalSummary(d.control_summary);
     const v = d.verdict;
     const esc = s => (s||'').replace(/</g,'&lt;');
     if (!v) {

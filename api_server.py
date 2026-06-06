@@ -1788,7 +1788,39 @@ async def stage1_queue_for_control(
     try:
         set_session(conn, key_info.tenant_id)
         findings = list_pending_for_control(conn, key_info.tenant_id, control_ref)
-        return {"control_ref": control_ref, "findings": findings, "total": len(findings)}
+        # Resolve the canonical control summary (title + obligation text)
+        # from Neo4j so the detail surface can render "9.2 — Internal audit"
+        # instead of just "9.2". Standard_id derived from the first finding
+        # when available, otherwise lookup is best-effort across known
+        # standards.
+        from rag.posture_loader import _build_engine_neo4j_driver
+        standard_id = (findings[0].get("inferred_from_standard_id") if findings else None)
+        if not standard_id:
+            # Look up via posture_controls row for this control
+            with conn.cursor() as cur:
+                cur.execute(
+                    "SELECT standard_id FROM posture_controls "
+                    "WHERE tenant_id=%s AND control_ref=%s AND is_active=TRUE LIMIT 1",
+                    (key_info.tenant_id, control_ref),
+                )
+                row = cur.fetchone()
+                standard_id = row[0] if row else ""
+        control_summary = {"standard_id": standard_id, "control_ref": control_ref,
+                           "title": "", "description": ""}
+        if standard_id:
+            neo = _build_engine_neo4j_driver()
+            if neo is not None:
+                try:
+                    control_summary = _resolve_control_summary(neo, standard_id, control_ref)
+                finally:
+                    try: neo.close()
+                    except Exception: pass
+        return {
+            "control_ref":     control_ref,
+            "control_summary": control_summary,
+            "findings":        findings,
+            "total":           len(findings),
+        }
     finally:
         pool.putconn(conn)
 
@@ -1846,9 +1878,14 @@ async def stage2_proposal_detail(
 
         cid = f"{proposal['standard_id']}:{control_ref}"
         verdict = None
+        control_summary = {"standard_id": proposal["standard_id"], "control_ref": control_ref,
+                           "title": "", "description": ""}
         neo = _build_engine_neo4j_driver()
         if neo is not None:
             try:
+                control_summary = _resolve_control_summary(
+                    neo, proposal["standard_id"], control_ref,
+                )
                 v = evaluate_one_control(conn, neo, key_info.tenant_id, cid)
                 if v is not None:
                     verdict = _serialize_verdict(v)
@@ -1858,10 +1895,11 @@ async def stage2_proposal_detail(
                 except Exception: pass
 
         return {
-            "control_ref": control_ref,
-            "standard_id": proposal["standard_id"],
-            "proposal":    proposal,
-            "verdict":     verdict,
+            "control_ref":     control_ref,
+            "standard_id":     proposal["standard_id"],
+            "control_summary": control_summary,
+            "proposal":        proposal,
+            "verdict":         verdict,
         }
     finally:
         pool.putconn(conn)
@@ -1944,6 +1982,41 @@ def _serialize_verdict(v) -> dict:
         "children":                children,
         "frameworks_derived_from": sorted(frameworks),
     }
+
+
+def _resolve_control_summary(neo4j_driver, standard_id: str, control_ref: str) -> dict:
+    """Look up RequirementNode title + (where populated) description for a
+    control. Used by Stage-1/Stage-2 detail surfaces so the user sees what
+    e.g. '9.2' actually means without needing prior context.
+
+    Returns {title, description, standard_id, control_ref}. Best-effort:
+    any Neo4j failure returns empty title/description so the UI degrades
+    gracefully to the ref-only display."""
+    out = {
+        "standard_id": standard_id,
+        "control_ref": control_ref,
+        "title":       "",
+        "description": "",
+    }
+    if neo4j_driver is None:
+        return out
+    cid = f"{standard_id}:{control_ref}"
+    try:
+        with neo4j_driver.session() as s:
+            row = s.run(
+                "MATCH (n) WHERE n.id = $id "
+                "RETURN n.title AS title, "
+                "       coalesce(n.obligation_text, n.business_description, "
+                "                n.description, n.body, '') AS description "
+                "LIMIT 1",
+                id=cid,
+            ).single()
+            if row:
+                out["title"]       = row["title"] or ""
+                out["description"] = row["description"] or ""
+    except Exception:
+        pass
+    return out
 
 
 def _enrich_titles(neo4j_driver, verdict: dict) -> None:
