@@ -511,6 +511,22 @@ CLEAR_INTENT_PHRASES = [
     (re.compile(r'\bare\s+we\s+(?:iso\s*2700\d\s+)?certified\b', re.IGNORECASE),
      "posture_check", []),
 
+    # Posture-by-ref — "(what is) our (compliance) posture/status on/for <X>"
+    # Goes to posture_check (per-control finding lookup, not a general gap
+    # report). Previously this fell through to the LLM classifier which
+    # would occasionally route the same query to "definition" because the
+    # "what is" prefix is definition-flavored — see [[case_40_classifier_
+    # short_circuit]]. Variants like "is X a non-conformity" (case #25) and
+    # "what's our status on X" share the family.
+    (re.compile(r'\bour\s+(?:compliance\s+)?(?:posture|status|finding|stance)\s+(?:on|for|with\s+regard\s+to)\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bwhat\s+(?:is|are)\s+our\s+(?:compliance\s+)?(?:posture|status|finding)\s+(?:on|for)\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bis\s+(?:[A-Z][\w.\d]*|[Aa]rt\.?\s*\d+)\s+a\s+(?:non[- ]?conformity|nc|gap|finding)\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bare\s+we\s+(?:compliant|comply|in\s+compliance)\s+with\b', re.IGNORECASE),
+     "posture_check", []),
+
     # Implementation / remediation queries — unambiguous "what should we do" phrases
     (re.compile(r'\bwhat\s+should\s+we\s+do\s+(?:to\s+)?(?:close|address|fix|remediat)\b', re.IGNORECASE),
      "implementation", []),
