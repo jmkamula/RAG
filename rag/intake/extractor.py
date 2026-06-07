@@ -224,16 +224,35 @@ def _extract_sections(
 
 _SYSTEM_PROMPT = """You are a compliance analyst reviewing a document to assess ISO 27001 / GDPR compliance.
 
-Your task: for each control provided, determine whether this document provides evidence of compliance.
+Your task: for each control provided, determine whether this document provides DIRECT, SUBSTANTIVE evidence of compliance.
+
+The bar is HIGH. Bind a control ONLY when:
+  (a) the document has substantive content about THIS CONTROL'S SPECIFIC SUBJECT
+      (e.g. bind A.5.23 cloud-services ONLY if the doc actually defines
+      cloud-service security obligations — NOT if it merely mentions
+      cloud as one of several deployment options), AND
+  (b) you can quote ≥40 characters of verbatim text from the document that
+      directly supports the binding (no paraphrase, no summary).
+
+When in doubt — OMIT. False-positive bindings (binding a control the doc
+doesn't really cover) are worse than missing bindings. The tenant can
+always re-extract; they cannot easily unrecognise spurious evidence.
 
 Rules:
-- Only assess controls that are clearly addressed in the document text
-- Use "not_addressed" when the document simply doesn't cover that control
-- Do NOT infer or assume — only extract explicit evidence
+- Only assess controls clearly and substantively addressed in the text
+- Do NOT bind on incidental mentions, topic adjacency, or assumed coverage
+- Do NOT bind because the doc's TITLE looks adjacent ("Supplier Policy"
+  alone does not bind cloud-services A.5.23 — the body must discuss
+  cloud-service security specifically)
+- Use "not_addressed" (omit from response) when the document doesn't
+  substantively cover the control
 - "Comply" = document demonstrates the control is implemented
 - "OFI" = document shows partial or planned implementation
 - "NC" = document explicitly states the control is not implemented or missing
-- "not_addressed" = the document does not address this control
+- Quote must be a real, verbatim substring of the document. Hallucinated
+  quotes are auto-rejected.
+- Cap your output at the 15 most-relevant controls. If more apply,
+  rank by directness of coverage and return only the top 15.
 
 Respond with JSON only — no markdown, no explanation."""
 
@@ -322,6 +341,39 @@ def _llm_extract(
 # RESPONSE PARSER
 # =============================================================================
 
+# Minimum evidence-quote length. Anything shorter (e.g. "the policy",
+# "as defined", "controls in place") is too generic to ground a binding
+# and is almost certainly the LLM grabbing whatever passing reference it
+# could find. Calibrated against the v1 over-attribution incident on
+# Arion's Supplier Vendor Security Policy / Access Control Policy /
+# Business Continuity Policy (~30-42 controls each, most coarse-matches).
+_MIN_EVIDENCE_LEN = 40
+
+# Drop low-confidence findings at parse time. The LLM uses "low" when
+# its own gut says the binding might not hold; we shouldn't write those
+# to the engine where they count toward leaf satisfaction.
+_DROP_CONFIDENCES = {"low"}
+
+
+def _evidence_grounded(evidence: str, doc: ParsedDocument) -> bool:
+    """Verbatim-quote check. The LLM is instructed to provide a quote that
+    actually appears in the document. Substring match (case-insensitive,
+    normalised whitespace) catches hallucinated quotes — a common failure
+    mode where the LLM paraphrases the doc but claims it's verbatim. We
+    use only the first 50 chars of the evidence to be lenient on minor
+    drift (the LLM sometimes elides trailing punctuation or articles)."""
+    if not evidence or len(evidence) < _MIN_EVIDENCE_LEN:
+        return False
+    body = (doc.full_text or "").lower()
+    if not body:
+        # Some extraction paths don't keep the full text — skip the check
+        # rather than wrongly drop. Tenant can still reject via Stage-1.
+        return True
+    needle = re.sub(r"\s+", " ", evidence[:50].lower()).strip()
+    haystack = re.sub(r"\s+", " ", body)
+    return needle in haystack
+
+
 def _parse_llm_response(
     raw:        str,
     doc:        ParsedDocument,
@@ -330,7 +382,17 @@ def _parse_llm_response(
     chunk_id:   str,
     page:       Optional[int] = None,
 ) -> list[DocumentFinding]:
-    """Parse the LLM JSON response into DocumentFinding objects."""
+    """Parse the LLM JSON response into DocumentFinding objects.
+
+    Post-process tightenings (2026-06-07, fix for over-attribution
+    incident — Supplier Vendor policy bound to 42 controls, Access
+    Control policy to 29, etc.):
+      - drop confidence='low'
+      - require evidence quote ≥ _MIN_EVIDENCE_LEN chars
+      - require quote to appear verbatim in the document text (catches
+        hallucinated quotes)
+    Cap at 15 retained findings per chunk (the LLM is also asked to
+    self-cap in the prompt; this enforces it on the parse side)."""
 
     # Strip markdown fences
     raw = re.sub(r'```json\s*|\s*```', '', raw).strip()
@@ -346,6 +408,9 @@ def _parse_llm_response(
     # Build control lookup for validation
     valid_refs = {c["ref"] for c in controls}
 
+    dropped_low_conf = 0
+    dropped_short_quote = 0
+    dropped_hallucinated = 0
     findings = []
     for item in items:
         ref     = item.get("control_ref", "").strip()
@@ -370,6 +435,17 @@ def _parse_llm_response(
         confidence = item.get("confidence", "medium")
         if confidence not in ("high", "medium", "low"):
             confidence = "medium"
+        if confidence in _DROP_CONFIDENCES:
+            dropped_low_conf += 1
+            continue
+
+        evidence = (item.get("evidence", "") or "").strip()[:500]
+        if len(evidence) < _MIN_EVIDENCE_LEN:
+            dropped_short_quote += 1
+            continue
+        if not _evidence_grounded(evidence, doc):
+            dropped_hallucinated += 1
+            continue
 
         findings.append(DocumentFinding(
             upload_id       = doc.upload_id or "",
@@ -378,13 +454,31 @@ def _parse_llm_response(
             control_ref     = ref,
             standard_id     = standard_id,
             finding         = finding,
-            evidence_text   = item.get("evidence", "")[:500],
+            evidence_text   = evidence,
             confidence      = confidence,
             section         = section,
             page_number     = page,
             extraction_path = doc.extraction_path.value,
             chunk_id        = chunk_id,
         ))
+
+    if dropped_low_conf or dropped_short_quote or dropped_hallucinated:
+        logger.info(
+            "extractor filters dropped %d findings on chunk %s (doc=%s): "
+            "low_conf=%d short_quote=%d hallucinated_quote=%d",
+            dropped_low_conf + dropped_short_quote + dropped_hallucinated,
+            chunk_id, doc.original_name,
+            dropped_low_conf, dropped_short_quote, dropped_hallucinated,
+        )
+
+    # Enforce 15-finding cap per chunk (the LLM is also prompted to cap;
+    # this is the parse-side enforcement). Retains highest-confidence
+    # findings first — Comply+high > OFI+high > NC+high > Comply+medium etc.
+    if len(findings) > 15:
+        conf_rank = {"high": 0, "medium": 1, "low": 2}
+        find_rank = {"Comply": 0, "OFI": 1, "NC": 2}
+        findings.sort(key=lambda f: (conf_rank.get(f.confidence, 3), find_rank.get(f.finding, 3)))
+        findings = findings[:15]
 
     return findings
 
