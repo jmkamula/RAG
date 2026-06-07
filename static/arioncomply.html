@@ -1140,7 +1140,11 @@ function renderVerdictTree(verdict, selfStd) {
   // Three states: ✓ satisfied · ◐ partial (some MUSTs recognised, not all)
   // · ✗ no evidence yet. Partial children also surface the recognised/
   // missing counts inline so the reviewer sees real progress at a glance.
-  const renderRow = (label, sub, satisfied, partial, rec, missing) => {
+  // `sources` (optional) is the list of {document_id, filename, evidence_type}
+  // that backs a satisfied/partial leaf — surfaces the actual uploaded
+  // filename so the reviewer can spot when one doc is over-attributed
+  // across many controls. See [[a523_policy_attribution_2026_06_07]].
+  const renderRow = (label, sub, satisfied, partial, rec, missing, sources) => {
     let mark, partialNote = '';
     if (satisfied) {
       mark = '<span style="color:#2F8F4D;font-weight:600">✓</span>';
@@ -1155,9 +1159,25 @@ function renderVerdictTree(verdict, selfStd) {
     } else {
       mark = '<span style="color:#B5651B;font-weight:600">✗</span>';
     }
+    // Source documents block — render below the title row for satisfied
+    // and partial leaves where we know the source. Filenames are truncated
+    // visually if very long but the full name lives in the tooltip.
+    let sourceBlock = '';
+    if (sources && sources.length) {
+      const items = sources.map(s => {
+        const fn = (s.filename || '(unnamed)').replace(/</g,'&lt;');
+        return `<div style="font-size:10px;color:#5C5A4C;margin-top:2px;
+                            padding-left:18px" title="${fn}">
+          <i class="ti ti-file-text" style="vertical-align:middle;color:#9C9A8E"></i>
+          via <code style="background:#fff;padding:1px 4px;border-radius:3px">${fn}</code>
+        </div>`;
+      }).join('');
+      sourceBlock = items;
+    }
     return `<li style="margin-top:3px">
       <span style="display:inline-block;min-width:14px">${mark}</span>
       <strong>${label}</strong>${partialNote}${sub?` — <span style="color:#3A382E">${sub}</span>`:''}
+      ${sourceBlock}
     </li>`;
   };
 
@@ -1179,7 +1199,8 @@ function renderVerdictTree(verdict, selfStd) {
     let rows = '';
     for (const c of grouped[std]) {
       // Derived children don't carry partial counts at this serialiser level.
-      rows += renderRow(esc(c.from_control_ref || '?'), esc(c.title || ''), c.satisfied, false, 0, 0);
+      // Source-doc attribution is leaf-only; derived rows skip.
+      rows += renderRow(esc(c.from_control_ref || '?'), esc(c.title || ''), c.satisfied, false, 0, 0, null);
     }
     const isStructural = std === selfStd;
     const header = isStructural
@@ -1199,7 +1220,7 @@ function renderVerdictTree(verdict, selfStd) {
       const primary = esc(c.title || c.evidence_type || 'leaf');
       const rec = (c.items_recognised || []).length;
       const missing = (c.items_unrecognised || []).length;
-      rows += renderRow(primary, '', c.satisfied, !!c.partial, rec, missing);
+      rows += renderRow(primary, '', c.satisfied, !!c.partial, rec, missing, c.source_documents);
     }
     h += `<div style="margin-top:6px;padding:8px 10px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;font-size:11px;line-height:1.5">
       <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">Direct evidence</div>

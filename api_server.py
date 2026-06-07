@@ -1890,6 +1890,7 @@ async def stage2_proposal_detail(
                 if v is not None:
                     verdict = _serialize_verdict(v)
                     _enrich_titles(neo, verdict)
+                    _enrich_leaf_sources(conn, key_info.tenant_id, verdict)
             finally:
                 try: neo.close()
                 except Exception: pass
@@ -1982,6 +1983,123 @@ def _serialize_verdict(v) -> dict:
         "children":                children,
         "frameworks_derived_from": sorted(frameworks),
     }
+
+
+# Module-level cache: leaf_id → set of all checklist_item_ids (MUST+SHOULD)
+# the leaf owns. Built lazily on first call; same shape as the cache in
+# stage1_review_chat.py but indexed reversely for fast per-leaf lookup.
+_LEAF_ITEM_IDS_CACHE: Optional[dict[str, set[str]]] = None
+
+def _leaf_item_ids() -> dict[str, set[str]]:
+    global _LEAF_ITEM_IDS_CACHE
+    if _LEAF_ITEM_IDS_CACHE is None:
+        from enrichment.documents.document_requirements import (
+            ALL_EVIDENCE_REQUIREMENTS, ALL_DERIVED_SPECS,
+        )
+        cache: dict[str, set[str]] = {}
+        def add(er):
+            cache[er.id] = {it.id for it in list(er.must_contain) + list(er.should_contain)}
+        for er in ALL_EVIDENCE_REQUIREMENTS:
+            add(er)
+        for spec in ALL_DERIVED_SPECS:
+            for er in spec.direct_evidence:
+                add(er)
+        _LEAF_ITEM_IDS_CACHE = cache
+    return _LEAF_ITEM_IDS_CACHE
+
+
+def _enrich_leaf_sources(pg_conn, tenant_id: str, verdict: dict) -> None:
+    """For each leaf child in the verdict, attach `source_documents`: the
+    list of {filename, document_id, evidence_type} for every uploaded
+    document whose findings satisfy the leaf.
+
+    Two binding paths are union'd:
+      - Phase 2 (per-item): findings with `checklist_item_id` in the leaf's
+        MUST+SHOULD set.
+      - Phase 1 (coarse): findings on this control_ref whose source doc
+        has `cd.evidence_type == leaf.evidence_type`.
+
+    Filter: only 'present' / approved / active findings on current docs.
+    Without this, the UI's verdict-tree leaf row shows only the curated
+    leaf title (e.g. 'Information Security for Use of Cloud Services
+    Policy') with no link to the actual source filename — making it hard
+    for the reviewer to spot when one doc has been over-attributed across
+    many controls. See [[a523_policy_attribution_2026_06_07]]."""
+    if not verdict or not verdict.get("children"):
+        return
+    control_id = verdict.get("control_id") or ""
+    if not control_id or ":" not in control_id:
+        return
+    # control_id is e.g. "ISO27001:2022:A.5.23"
+    parts = control_id.rsplit(":", 1)
+    standard_id = parts[0]
+    control_ref = parts[1]
+
+    leaf_children = [c for c in verdict["children"] if c.get("kind") == "leaf"]
+    if not leaf_children:
+        return
+
+    # Collect the union of all leaf MUST+SHOULD item IDs across this control
+    # so a single SQL query covers all of them.
+    leaf_item_ids = _leaf_item_ids()
+    all_item_ids: set[str] = set()
+    leaf_id_to_items: dict[str, set[str]] = {}
+    for c in leaf_children:
+        lid = c.get("leaf_id")
+        if lid and lid in leaf_item_ids:
+            leaf_id_to_items[lid] = leaf_item_ids[lid]
+            all_item_ids.update(leaf_item_ids[lid])
+
+    # Single query per control: every 'present'+'approved' finding on this
+    # control_ref with source doc info. Tag each row's matching leaf via
+    # checklist_item_id (Phase-2) or cd.evidence_type (Phase-1).
+    rows: list[tuple] = []
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+            cur.execute(
+                """
+                SELECT DISTINCT
+                    df.checklist_item_id,
+                    cd.id::text         AS doc_id,
+                    cd.filename,
+                    cd.evidence_type
+                  FROM document_findings df
+                  JOIN client_documents cd ON cd.id = df.document_id
+                 WHERE df.tenant_id     = %s
+                   AND df.control_ref   = %s
+                   AND df.standard_id   = %s
+                   AND df.status        = 'present'
+                   AND df.review_status = 'approved'
+                   AND df.is_active     = TRUE
+                   AND cd.is_active     = TRUE
+                   AND cd.is_current    = TRUE
+                """,
+                (tenant_id, control_ref, standard_id),
+            )
+            rows = cur.fetchall()
+    except Exception:
+        return  # best-effort; UI degrades to curated title only
+
+    # Bucket per leaf
+    for c in leaf_children:
+        lid = c.get("leaf_id")
+        leaf_et = c.get("evidence_type") or ""
+        item_ids = leaf_id_to_items.get(lid, set())
+        seen_doc_ids: set[str] = set()
+        sources: list[dict] = []
+        for item_id, doc_id, fname, doc_et in rows:
+            # Match: per-item (Phase 2) OR coarse evidence_type (Phase 1)
+            match = (item_id and item_id in item_ids) or (doc_et and doc_et == leaf_et)
+            if not match: continue
+            if doc_id in seen_doc_ids: continue
+            seen_doc_ids.add(doc_id)
+            sources.append({
+                "document_id":   doc_id,
+                "filename":      fname,
+                "evidence_type": doc_et,
+            })
+        c["source_documents"] = sources
 
 
 def _resolve_control_summary(neo4j_driver, standard_id: str, control_ref: str) -> dict:
