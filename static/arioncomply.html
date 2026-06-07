@@ -875,8 +875,11 @@ function statusPill(status) {
 
 // Render the canonical control summary in the detail panel header.
 // Called by both selectStage1 + selectStage2 so the user always sees the
-// control's plain-English title (e.g. "Internal audit" for 9.2) and
-// description when available.
+// control's plain-English title (e.g. "Internal audit" for 9.2). The
+// full standard text is intentionally NOT shown by default — clauses
+// like 6.1.3 carry multi-paragraph normative text that would dominate
+// the panel. A small "Show standard text" disclosure toggles it open
+// when the user wants the detail.
 function populateCanonicalSummary(summary) {
   const titleEl = document.getElementById('dp-canonical-title');
   const descEl  = document.getElementById('dp-canonical-desc');
@@ -887,8 +890,21 @@ function populateCanonicalSummary(summary) {
   }
   titleEl.textContent = summary.title;
   titleEl.style.display = 'block';
-  if (summary.description && summary.description.trim()) {
-    descEl.textContent = summary.description;
+  const hasDesc = !!(summary.description && summary.description.trim());
+  if (hasDesc) {
+    // Native <details> disclosure — collapsed by default. summary text
+    // is small/muted so it doesn't compete with the title.
+    descEl.innerHTML = `<details style="margin-top:2px">
+      <summary style="font-size:10px;color:#9C9A8E;cursor:pointer;
+                       list-style:none;display:inline-block;
+                       padding:1px 0">
+        Show standard text
+      </summary>
+      <div style="margin-top:4px;font-size:11px;color:#5C5A4C;
+                  line-height:1.4">${
+        summary.description.replace(/</g, '&lt;')
+      }</div>
+    </details>`;
     descEl.style.display = 'block';
   } else {
     descEl.style.display = 'none';
