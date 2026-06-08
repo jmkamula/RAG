@@ -29,6 +29,43 @@ from typing import Optional
 logger = logging.getLogger(__name__)
 
 
+def _kick_engine_sweep(pg_conn, tenant_id: str) -> int:
+    """Best-effort engine sweep after a Stage-1 batch approval/rejection.
+
+    Re-runs `load_posture` so newly-approved (or newly-rejected) evidence
+    flows into multi-leaf engine verdicts and the Stage-2 queue
+    reflects current reality without a manual sweep. Returns the number
+    of pending engine proposals for the tenant after the sweep, or -1
+    on failure.
+
+    Never raises. A sweep failure must NOT roll back the approval/
+    rejection that just committed — those approvals stand on their own.
+    """
+    try:
+        from rag.posture_loader import load_posture
+        load_posture(pg_conn, tenant_id)
+        with pg_conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+            cur.execute(
+                """
+                SELECT COUNT(*) FROM posture_assertions
+                 WHERE tenant_id = %s::uuid
+                   AND status    = 'pending'
+                   AND set_by    = 'engine'
+                """,
+                (tenant_id,),
+            )
+            row = cur.fetchone()
+            return int(row[0]) if row else 0
+    except Exception as e:
+        logger.warning("engine_kick after stage1 batch failed: %s", e)
+        try:
+            pg_conn.rollback()
+        except Exception:
+            pass
+        return -1
+
+
 # ── Slot grammar ──────────────────────────────────────────────────────────────
 
 # Approve verbs — limited to extraction-approval vocabulary so we don't
@@ -376,6 +413,7 @@ def approve_findings_for_control(
                 # The writer's INSERT path should have created the row in
                 # 'draft' / 'Not assessed' state, but defend against drift.
                 pg_conn.commit()
+                stage2_pending = _kick_engine_sweep(pg_conn, tenant_id)
                 return {
                     "ok": True,
                     "control_ref":  control_ref,
@@ -384,6 +422,7 @@ def approve_findings_for_control(
                     "finding":      headline,
                     "prior_finding": None,
                     "no_posture_row": True,
+                    "stage2_pending": stage2_pending,
                 }
             posture_id, prior_finding, prior_status, prior_source = pc
 
@@ -406,13 +445,15 @@ def approve_findings_for_control(
             )
 
         pg_conn.commit()
+        stage2_pending = _kick_engine_sweep(pg_conn, tenant_id)
         return {
-            "ok":            True,
-            "control_ref":   control_ref,
-            "standard_id":   standard_id,
-            "approved":      len(finding_ids),
-            "finding":       headline,
-            "prior_finding": prior_finding,
+            "ok":             True,
+            "control_ref":    control_ref,
+            "standard_id":    standard_id,
+            "approved":       len(finding_ids),
+            "finding":        headline,
+            "prior_finding":  prior_finding,
+            "stage2_pending": stage2_pending,
         }
 
     except Exception as e:
@@ -529,10 +570,12 @@ def approve_findings_by_ids(
                 ))
 
         pg_conn.commit()
+        stage2_pending = _kick_engine_sweep(pg_conn, tenant_id)
         return {
-            "ok":       True,
-            "approved": len(touched_rows),
-            "controls": control_results,
+            "ok":             True,
+            "approved":       len(touched_rows),
+            "controls":       control_results,
+            "stage2_pending": stage2_pending,
         }
     except Exception as e:
         logger.warning("stage1_review_chat.approve_by_ids: db error: %s", e)
