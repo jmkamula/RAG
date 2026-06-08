@@ -1307,20 +1307,19 @@ EVAL_CASES = [
         tags=["posture", "engine", "fulfilment_spec", "multi_leaf"],
         expected_refs=["A.5.1"],
         expected_type="posture_check",
-        # Pre-commit-4: posture_controls.finding for A.5.1 was 'Comply' because
-        # the tenant uploaded a policy and the extractor only checked policy
-        # presence — auditors, however, expect four artifacts (policy, approval,
-        # communication record, review record). Commit 4 wires the fulfilment
-        # engine into load_posture: A.5.1's 4-leaf FulfilmentSpec evaluates
-        # 1/4 satisfied → OFI, with the missing 3 leaves surfaced in the chat
-        # answer's gap list. This case locks in:
-        #   - engine overrides posture_controls for multi-leaf curated specs
-        #   - chat surface exposes the engine's gap_list (specific missing items)
-        #   - 'Comply' is forbidden for A.5.1 — the headline anti-regression.
-        must_contain=["A.5.1", "OFI"],
-        # Forbid A.5.1-specific Comply tags. The plain word "Comply" can't be
-        # forbidden — it appears in the cross-framework rendering of other
-        # ISO controls that address GDPR Art.32 (e.g. A.5.24 [Comply]).
+        # Three-phase verdict history:
+        #   Pre-commit-4:    Comply (extractor checked only policy presence)
+        #   Post-commit-4:   OFI (engine multi-leaf: 1/4 via coarse-matched
+        #                    policy from Access Control Policy doc)
+        #   Post-2026-06-08: NC (over-attribution cleanup: Access Control
+        #                    Policy no longer binds to A.5.1 — it correctly
+        #                    binds to A.5.15-18 only; tenant has no ISP
+        #                    doc separately uploaded; A.5.1 policy leaf has
+        #                    no binding; engine → NC, tenant approved)
+        # The headline anti-regression stays: NC is the honest verdict; the
+        # fake Comply / over-attributed OFI both forbidden. When the tenant
+        # uploads a real ISP doc, this case ratchets back to OFI / Comply.
+        must_contain=["A.5.1", "NC"],
         must_not_contain=[
             "A.5.1 [Comply]",
             "A.5.1 is Comply",
@@ -1328,9 +1327,10 @@ EVAL_CASES = [
             "A.5.1 currently rated as a Comply",
         ],
         notes=(
-            "Headline lock-in for the fulfilment engine. Would have failed "
-            "pre-commit-4 (answered Comply); passes post-commit-4 (OFI with "
-            "review/approval/communication gaps surfaced)."
+            "Headline anti-regression for A.5.1. Originally locked OFI "
+            "(post-fulfilment-engine); ratcheted to NC 2026-06-08 after "
+            "the over-attribution cleanup removed the LLM-misattributed "
+            "Access-Control-Policy-as-ISP binding."
         ),
     ),
 
