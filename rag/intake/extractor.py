@@ -57,8 +57,18 @@ def extract(
     if doc.extraction_path == ExtractionPath.STRUCTURED:
         return _extract_structured(doc)
 
-    # Scope controls to those relevant for this document type + standard
-    scoped = _scope_controls(controls, doc)
+    # Doc-mapping pre-filter (db/doc_mappings/*.yaml) — analog of the
+    # workbook intake YAML matcher, applied to docs. When a canonical
+    # doc-shape mapping matches the upload (e.g. "Supplier Vendor
+    # Security Policy.docx" → supplier_security_policy.yaml), we scope
+    # the LLM candidate set to ONLY that mapping's target_leaves' parent
+    # controls. Replaces the broad DOC_TYPE_CLAUSE_MAP path (which let
+    # one "policy" doc be evaluated against all of A.5-A.8) with a
+    # tight per-shape scope. Soft fallback to _scope_controls when no
+    # mapping matches — older / mapping-less docs continue to work.
+    scoped = _scope_controls_via_doc_mappings(controls, doc)
+    if not scoped:
+        scoped = _scope_controls(controls, doc)
     if not scoped:
         logger.warning(f"No controls scoped for {doc.original_name} — using all controls")
         scoped = controls[:MAX_CONTROLS_PER_CALL]
@@ -499,6 +509,49 @@ def _build_doc_context(doc: ParsedDocument) -> str:
     if doc.explicit_refs:
         parts.append(f"Controls explicitly cited: {', '.join(doc.explicit_refs[:10])}")
     return " | ".join(parts)
+
+
+def _scope_controls_via_doc_mappings(
+    controls: list[dict], doc: ParsedDocument,
+) -> list[dict]:
+    """Scope the control list via db/doc_mappings/*.yaml when one matches.
+
+    Returns the matched mapping(s)' target_controls (deduped) intersected
+    with the supplied `controls` list. Returns [] when no mapping matches
+    above the discovery confidence_floor — caller falls back to the
+    legacy DOC_TYPE_CLAUSE_MAP path.
+
+    Logs the chosen mapping(s) at INFO so the next upload's scoping is
+    visible in /tmp/api.log.
+    """
+    from .doc_discovery import discover_doc, union_target_controls
+
+    proposals = discover_doc(
+        filename  = doc.original_name or "",
+        body_text = doc.full_text or "",
+    )
+    if not proposals:
+        return []
+
+    target_ctrls = set(union_target_controls(proposals))
+    if not target_ctrls:
+        return []
+
+    # Intersect with the caller-provided control list — the caller already
+    # filtered to controls that exist in the curated set; we just narrow.
+    scoped = [c for c in controls if c.get("ref") in target_ctrls]
+
+    if proposals:
+        mapping_summary = ", ".join(
+            f"{p.mapping_id}({p.confidence})" for p in proposals
+        )
+        logger.info(
+            "doc_mappings matched %s → %d controls (%s): %s",
+            doc.original_name, len(scoped),
+            ", ".join(sorted(target_ctrls))[:120],
+            mapping_summary,
+        )
+    return scoped
 
 
 def _scope_controls(controls: list[dict], doc: ParsedDocument) -> list[dict]:

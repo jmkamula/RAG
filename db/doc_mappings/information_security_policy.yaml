@@ -15,9 +15,12 @@ filename_fingerprints:
   - tokens: [information, security, data, management]   # Arion convention
   - tokens: [isms, policy]
   - tokens: [isp, policy]
-  - tokens: [security, policy]
   - tokens: [infosec, policy]
   - tokens: [master, security, policy]
+  # Plain [security, policy] excluded — cross-matches every "<Topic>
+  # Security Policy" filename (supplier, cloud, access, …) and triggers
+  # false-positive ISP attribution. Require the "information" qualifier
+  # or one of the ISP-specific abbreviations.
 
 body_fingerprints:
   - tokens: [information, security, objectives]
