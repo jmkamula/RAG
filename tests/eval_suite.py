@@ -247,7 +247,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.24",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "accountability"],
         expected_refs=["Art.24"], expected_type="posture_check",
-        must_contain=["Art.24", "engine concurs", "NC", "partial evidence"],  # Updated 2026-06-05 (compose_posture rule reverted: 0 fully satisfied → NC; partial alone no longer earns OFI). Engine concurs with live NC; partial surfaced in reason.
+        must_contain=["Art.24", "engine concurs", "NC"],  # Updated 2026-06-08 post over-attribution cleanup: the "(N with partial evidence)" surface for GDPR articles came from ISO deps' policy leaves being satisfied via LLM-over-attributed Supplier/Access/BCP policy bindings. Those bindings soft-deleted; partial-cascade signal correctly gone. Engine still concurs with live NC; reason is "0/N children satisfied" without the partial-evidence suffix.
         must_not_contain=["0/6 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.24 (Accountability) — DerivedSpec with 6 ISO deps (5.1, 5.3, 9.3, A.5.1, A.5.34, A.5.36) + 4 NEW direct evidence (privacy_programme_charter + gdpr_compliance_register + controller_processor_decision_record + accountability_program_review). 10 children total. FIRST DerivedSpec to go from 0 direct_evidence to 4 in one batch. Hits a 10-child verdict (largest verdict surface).",
@@ -258,7 +258,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.25",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "dpbd"],
         expected_refs=["Art.25"], expected_type="posture_check",
-        must_contain=["Art.25", "engine concurs", "NC", "partial evidence"],  # Updated 2026-06-05 (compose_posture rule reverted): engine concurs with live NC; partial surfaced in reason.
+        must_contain=["Art.25", "engine concurs", "NC"],  # Updated 2026-06-08 post over-attribution cleanup: see case #184 for full reason. Partial-evidence cascade gone with the deleted policy bindings.
         must_not_contain=["0/7 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.25 (DPbD) — DerivedSpec with 6 ISO deps + 4 direct (default_settings_record primary id preserved + dpbd_procedure + applicable_design_scope + program_review). 10 children. Mirror of Art.24 expansion pattern.",
@@ -414,7 +414,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.16",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "rectification"],
         expected_refs=["Art.16"], expected_type="posture_check",
-        must_contain=["Art.16", "engine concurs", "NC", "partial evidence"],  # Updated 2026-06-05 (compose_posture rule reverted): engine concurs with live NC; partial surfaced in reason.
+        must_contain=["Art.16", "engine concurs", "NC"],  # Updated 2026-06-08 post over-attribution cleanup: partial-evidence cascade gone with the deleted A.5.34 policy bindings.
         must_not_contain=["0/1 children satisfied", "0/2 children satisfied",
                           "no curated multi-leaf",
                           "I need more information", "could you clarify"],
@@ -426,7 +426,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.17",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "erasure"],
         expected_refs=["Art.17"], expected_type="posture_check",
-        must_contain=["Art.17", "engine concurs", "NC", "partial evidence"],  # Updated 2026-06-05 (compose_posture rule reverted): engine concurs with live NC; partial surfaced in reason.
+        must_contain=["Art.17", "engine concurs", "NC"],  # Updated 2026-06-08 post over-attribution cleanup: partial-evidence cascade gone with the deleted A.5.34 + A.8.10 policy bindings.
         must_not_contain=["0/1 children satisfied", "0/3 children satisfied",
                           "no curated multi-leaf",
                           "I need more information", "could you clarify"],
@@ -520,7 +520,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.6",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "derivedspec", "lawful_basis"],
         expected_refs=["Art.6"], expected_type="posture_check",
-        must_contain=["Art.6", "engine concurs", "NC", "partial evidence"],  # Updated 2026-06-05 (compose_posture rule reverted): engine concurs with live NC; partial surfaced in reason.
+        must_contain=["Art.6", "engine concurs", "NC"],  # Updated 2026-06-08 post over-attribution cleanup: partial-evidence cascade gone with the deleted policy bindings (Art.6 depends on A.5.34 + A.5.31 etc.).
         must_not_contain=["0/1 children satisfied", "0/3 children satisfied",
                           "no curated multi-leaf",
                           "I need more information", "could you clarify"],
@@ -1828,7 +1828,7 @@ EVAL_CASES = [
         # is therefore 'OFI' at '1/4', not 'NC' at '0/4'. This locks the
         # partial-evidence multi-leaf path — a useful complement to the
         # 0/N-NC default the other Phase B cases exercise.
-        must_contain=["A.5.15", "already approved", 'OFI'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
+        must_contain=["A.5.15", "engine concurs", "'OFI'", "1/4 children satisfied"],  # Updated 2026-06-08 post over-attribution cleanup: A.5.15 lost its Stage-2 entry once tenant approved the re-extracted Access Control Policy binding (engine NC→OFI cleared the divergence; engine now concurs with live OFI). Chat surface returns "engine concurs with live at 'OFI'" + structured reason. The 1/4 reason text still locks the multi-leaf partial-evidence shape.
         must_not_contain=[
             "0/4 children satisfied",
             "0/1 children satisfied",
@@ -1838,10 +1838,11 @@ EVAL_CASES = [
         notes=(
             "Locks A.5.15 (Access control policy) Phase B promotion to "
             "policy_program 4-leaf with the partial-evidence shape: the "
-            "policy leaf is satisfied (legacy upload) but approval, "
-            "communication and review leaves are not, so engine proposes "
-            "'OFI' at '1/4 children satisfied'. Companion to cases 46-50 "
-            "which all sit at 0/4."
+            "policy leaf is satisfied (re-extracted Access Control Policy "
+            "doc via doc_mappings), three other leaves unsatisfied → "
+            "1/4 reason text. Companion to cases 46-50 which all sit at "
+            "0/4. Post-cleanup 2026-06-08: chat shape changed from "
+            "'engine proposes / already approved' to 'engine concurs'."
         ),
     ),
 
@@ -1963,7 +1964,7 @@ EVAL_CASES = [
         # 55 first introduced for A.5.15. A.5.23 is also profile_fact-
         # triggered (only fires for cloud-using tenants), so this case
         # additionally locks the profile_fact + partial-evidence combination.
-        must_contain=["A.5.23", "engine proposes", "'OFI'", "1/4 children satisfied"],
+        must_contain=["A.5.23", "already approved", "'NC'"],  # Updated 2026-06-08 post over-attribution cleanup: A.5.23's policy-leaf binding was the Supplier-Vendor-Security-Policy LLM-over-attribution. After re-extraction the binding became partial-only (LLM correctly OFI on cloud-services coverage), engine proposed NC, tenant approved → posture_controls.finding=NC, engine_proposal_status=approved. Chat returns "already approved 'NC'".
         must_not_contain=[
             "0/4 children satisfied",
             "0/1 children satisfied",
@@ -3238,7 +3239,7 @@ EVAL_CASES = [
         # the policy leaf is satisfied via legacy upload, the three new
         # leaves are unsatisfied. The 1/4 reason text PROVES the 4-leaf
         # promotion AND the partial-evidence path.
-        must_contain=["A.5.34", "engine proposes", "'OFI'", "1/4 children satisfied"],
+        must_contain=["A.5.34", "already approved", "'NC'"],  # Updated 2026-06-08 post over-attribution cleanup: A.5.34's previous policy-leaf binding was Supplier-Vendor-Security-Policy + Access-Control-Policy LLM-over-attribution (neither doc is actually a PII protection policy). After re-extraction those bindings are gone; engine proposed NC, tenant approved.
         must_not_contain=[
             "0/4 children satisfied",
             "0/1 children satisfied",
