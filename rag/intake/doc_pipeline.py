@@ -815,6 +815,49 @@ class DocumentPipeline:
 # CLI
 # =============================================================================
 
+def _resolve_original_filename(
+    db_url: str, tenant_id: str, file_path: str,
+) -> Optional[str]:
+    """Best-effort lookup: when --file points at a stored upload's
+    storage_path, return the user-facing filename from document_uploads.
+    Returns None on any DB failure (caller falls back to on-disk basename).
+
+    Closes the CLI <-> doc_mappings UX gap discovered 2026-06-08: the
+    storage_path basename is a UUID (the API renames on upload), and the
+    doc_mappings filename fingerprints all assume the user-facing name.
+    Without this resolution, reprocessing an existing upload by file path
+    skips every doc_mapping and silently falls back to the legacy broad
+    DOC_TYPE_CLAUSE_MAP path."""
+    if not db_url:
+        return None
+    try:
+        import psycopg
+        from pathlib import Path
+        abs_path = str(Path(file_path).resolve())
+        with psycopg.connect(db_url) as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "SELECT set_config('app.tenant_id', %s, TRUE)",
+                    (tenant_id,),
+                )
+                cur.execute(
+                    """
+                    SELECT filename FROM document_uploads
+                     WHERE tenant_id    = %s
+                       AND storage_path = %s
+                     ORDER BY created_at DESC
+                     LIMIT 1
+                    """,
+                    (tenant_id, abs_path),
+                )
+                row = cur.fetchone()
+                if row and row[0]:
+                    return row[0]
+    except Exception:
+        pass
+    return None
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="ArionComply Document Injection Pipeline",
@@ -834,6 +877,13 @@ Examples:
     parser.add_argument("--verbose",   action="store_true", help="Debug logging")
     parser.add_argument("--trace",     action="store_true", help="Write trace rows to intake_trace_log")
     parser.add_argument("--output",    help="Write results to JSON file")
+    parser.add_argument(
+        "--original-name",
+        help="User-facing filename override. The reader otherwise uses the on-disk basename, "
+             "which is a UUID for API uploads — that breaks doc_mappings filename fingerprints. "
+             "If omitted, the CLI auto-resolves from document_uploads.storage_path when --file "
+             "points at a stored upload.",
+    )
     args = parser.parse_args()
 
     if not args.file and not args.dir:
@@ -856,7 +906,20 @@ Examples:
     )
 
     if args.file:
-        result  = pipeline.run(args.file, args.tenant_id, args.upload_id)
+        # Resolve original_filename for doc_mappings filename matching.
+        # Order: explicit --original-name > auto-resolve from document_uploads
+        # (when --file points at a stored upload's storage_path) > the
+        # on-disk basename (fallback; works for fresh local files but
+        # produces UUID-named docs that don't match canonical fingerprints).
+        original_name = args.original_name
+        if not original_name:
+            original_name = _resolve_original_filename(
+                db_url, args.tenant_id, args.file,
+            )
+        result  = pipeline.run(
+            args.file, args.tenant_id, args.upload_id,
+            original_filename = original_name,
+        )
         results = [result]
         pipeline._print_result(result)
     else:
