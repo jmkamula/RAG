@@ -438,7 +438,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.18",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "restriction"],
         expected_refs=["Art.18"], expected_type="posture_check",
-        must_contain=["Art.18", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
+        must_contain=["Art.18", "engine proposes", "OFI", "1/4 children satisfied"],  # 2026-06-08: Access Mgmt Process upload + Stage-1 approve → engine-kick fresh OFI proposal
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.18 (Restriction) — op_process 4-leaf (NEW): restriction_procedure + restriction_register + applicable_grounds_scope + program_review (365d). Art.18.1 four grounds (a-d) catalogued in scope leaf; Art.18.2 'storage-only' exceptions enforced in MUST.",
@@ -471,7 +471,7 @@ EVAL_CASES = [
         query="pending engine verdict for Art.21",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "objection"],
         expected_refs=["Art.21"], expected_type="posture_check",
-        must_contain=["Art.21", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
+        must_contain=["Art.21", "engine proposes", "OFI", "1/4 children satisfied"],  # 2026-06-08: Access Mgmt Process upload + Stage-1 approve → engine-kick fresh OFI proposal
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.21 (Objection) — op_process 4-leaf (NEW): objection_procedure + objection_register + applicable_basis_scope + program_review (365d). Splits direct-marketing absolute (Art.21.2-3) vs legitimate-interests balancing (Art.21.1); Art.21.4 explicit-notice MUST enforced.",
@@ -1530,7 +1530,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "calibration"],
         expected_refs=["A.8.2"],
         expected_type="posture_check",
-        must_contain=["A.8.2", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
+        must_contain=["A.8.2", "engine proposes", "OFI", "1/4 children satisfied"],  # 2026-06-08: Access Mgmt Process upload + Stage-1 approve → engine-kick fresh OFI proposal
         must_not_contain=[
             # Pre-promotion the single-leaf spec would have produced this:
             "0/1 children satisfied",
@@ -2301,7 +2301,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "identity_management"],
         expected_refs=["A.5.16"],
         expected_type="posture_check",
-        must_contain=["A.5.16", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
+        must_contain=["A.5.16", "engine proposes", "OFI", "1/4 children satisfied"],  # 2026-06-08: Access Mgmt Process upload + Stage-1 approve → engine-kick fresh OFI proposal
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -2402,7 +2402,7 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.5",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "technical_control", "secure_auth"],
         expected_refs=["A.8.5"], expected_type="posture_check",
-        must_contain=["A.8.5", "already approved", 'NC'],  # Stage-2 approved 2026-06-02 (Phase C batch 1 session)
+        must_contain=["A.8.5", "engine proposes", "OFI", "1/4 children satisfied"],  # 2026-06-08: Access Mgmt Process upload + Stage-1 approve → engine-kick fresh OFI proposal
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.5 (Secure authentication) — technical_control 4-leaf: baseline + procedure + auth_log + review (180d). MFA universal/privileged + impossible-travel detection promoted to MUST.",
@@ -3477,7 +3477,7 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "authentication"],
         expected_refs=["A.5.17"],
         expected_type="posture_check",
-        must_contain=["A.5.17", "already approved", "'NC'"],  # Stage-2 approved 2026-06-02
+        must_contain=["A.5.17", "engine proposes", "OFI", "1/4 children satisfied"],  # 2026-06-08: Access Mgmt Process upload + Stage-1 approve → engine-kick fresh OFI proposal
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
