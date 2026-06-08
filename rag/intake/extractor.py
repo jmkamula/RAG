@@ -527,8 +527,9 @@ def _scope_controls_via_doc_mappings(
     from .doc_discovery import discover_doc, union_target_controls
 
     proposals = discover_doc(
-        filename  = doc.original_name or "",
-        body_text = doc.full_text or "",
+        filename     = doc.original_name or "",
+        body_text    = doc.full_text or "",
+        topic_tokens = doc.topic_tokens or None,
     )
     if not proposals:
         return []

@@ -44,17 +44,63 @@ _STEM_KEEP = frozenset({
     "ids",                 # don't stem to "id" (we want either to match either)
 })
 
+# Doc-shape synonym canonicalisation. A tenant uploading "Access Management
+# Process.docx" should match A.5.18's "Access Rights Management Procedure"
+# leaf — process and procedure are the same kind of artefact. Mapping
+# common doc-shape synonyms to a canonical token at tokenize time lets
+# both filename inputs and YAML fingerprints normalise to the same word
+# before subset-matching.
+#
+# Scope: only the shape WORDS (policy / procedure / plan / etc.). Topic
+# words (access / supplier / cloud) stay as-is. Adding a new pair here
+# must be carefully chosen — the synonym is bidirectional in effect, so
+# any leaf TITLE containing the canonical word will match an upload using
+# the synonym (and vice versa).
+_SHAPE_SYNONYMS = {
+    # → procedure
+    "process":         "procedure",
+    "workflow":        "procedure",
+    "wi":              "procedure",   # work instruction
+    "sop":             "procedure",   # standard operating procedure
+    # → policy
+    "standard":        "policy",
+    "directive":       "policy",
+    "rule":            "policy",
+    # → plan
+    "programme":       "plan",
+    "program":         "plan",
+    "roadmap":         "plan",
+    # → assessment (doc-shape only; do NOT map "review" — it's also a
+    # topic word in many leaf titles e.g. "Compliance Review Schedule")
+    "report":          "assessment",
+    "evaluation":      "assessment",
+    # → register
+    "log":             "register",
+    "list":            "register",
+    "inventory":       "register",
+    "tracker":         "register",
+    "record":          "register",
+}
+
 
 def _stem(token: str) -> str:
-    if token in _STEM_KEEP or len(token) <= 3:
-        return token
+    # Order matters: synonym applies AFTER stemming so plurals reach the
+    # table (e.g. "standards" → "standard" → "policy"). For tokens that
+    # skip stemming (≤3 chars or _STEM_KEEP-listed), still consult the
+    # synonym map — without this, "process" (in _STEM_KEEP to block the
+    # -s strip) never gets mapped to "procedure", and "sop"/"wi" don't
+    # map either.
+    if len(token) <= 3:
+        return _SHAPE_SYNONYMS.get(token, token)
+    if token in _STEM_KEEP:
+        return _SHAPE_SYNONYMS.get(token, token)
     for suf in _STEM_SUFFIXES:
         if token.endswith(suf) and len(token) - len(suf) >= 3:
             stem = token[: -len(suf)]
             if suf == "ies":
                 stem += "y"
-            return stem
-    return token
+            return _SHAPE_SYNONYMS.get(stem, stem)
+    return _SHAPE_SYNONYMS.get(token, token)
 
 
 _SPLIT_RE = re.compile(r"[\s_/\-&+,]+")

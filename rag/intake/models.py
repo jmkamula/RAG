@@ -61,6 +61,12 @@ class ParsedDocument:
     standard_ids:     list[str] = field(default_factory=list)
     scope_statement:  Optional[str] = None  # "this policy applies to..."
     explicit_refs:    list[str] = field(default_factory=list)  # control refs found by regex
+    # LLM-extracted topic keywords (5-10 words) from the doc body, used by
+    # doc_discovery to bridge filename-vocabulary gaps. E.g. a doc named
+    # "Access Management Process.docx" with body keywords [rbac, mfa,
+    # rights, identity, review] matches A.5.18 access_rights_procedure's
+    # title-derived fingerprints via the union of filename + topic tokens.
+    topic_tokens:     list[str] = field(default_factory=list)
 
     # Branching decision
     extraction_path:  ExtractionPath = ExtractionPath.FULL_DOCUMENT

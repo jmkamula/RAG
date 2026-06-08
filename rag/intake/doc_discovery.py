@@ -90,11 +90,12 @@ def _best_fp_score(fingerprints: list[dict], target_tokens: list[str]) -> float:
 
 
 def discover_doc(
-    filename:    str,
-    body_text:   str,
-    mappings:    Optional[list[dict]] = None,
+    filename:      str,
+    body_text:     str,
+    mappings:      Optional[list[dict]] = None,
     *,
     confidence_floor: float = 0.5,
+    topic_tokens:  Optional[list[str]] = None,
 ) -> list[DocProposal]:
     """Match a doc against all canonical doc-shape mappings; return any
     proposals at or above confidence_floor.
@@ -109,6 +110,14 @@ def discover_doc(
     Security and Data Management Policy" may match the ISP + privacy
     mappings). All passing proposals are returned; the extractor unions
     their target_leaves.
+
+    topic_tokens: LLM-extracted topic keywords from the doc body
+    (typically populated by the enricher). When provided, they're
+    union'd with filename tokens for fingerprint matching — bridges
+    filename-vocabulary gaps. E.g. "Access Management Process.docx"
+    + topic_tokens [rbac, mfa, rights, identity] match A.5.18's
+    `[rights, management, procedure]` fingerprint even though "rights"
+    doesn't appear in the filename.
     """
     if mappings is None:
         mappings = load_doc_mappings()
@@ -118,6 +127,14 @@ def discover_doc(
     filename_tokens = tokenize(Path(filename).stem)
     body_sample = (body_text or "")[:_BODY_TOKEN_SAMPLE_CHARS]
     body_tokens = tokenize(body_sample)
+    # Re-tokenize topic_tokens so the synonym layer (process→procedure
+    # etc.) applies uniformly to LLM-emitted words. The filename match
+    # uses the UNION of filename + topic tokens.
+    norm_topics: list[str] = []
+    if topic_tokens:
+        for t in topic_tokens:
+            norm_topics.extend(tokenize(str(t)))
+    filename_target = list(set(filename_tokens) | set(norm_topics))
 
     proposals: list[DocProposal] = []
     for m in mappings:
@@ -125,7 +142,7 @@ def discover_doc(
         w_filename = float(weights.get("filename", 0.6))
         w_body     = float(weights.get("body",     0.3))
 
-        filename_score = _best_fp_score(m.get("filename_fingerprints") or [], filename_tokens)
+        filename_score = _best_fp_score(m.get("filename_fingerprints") or [], filename_target)
         body_score     = _best_fp_score(m.get("body_fingerprints")     or [], body_tokens)
 
         confidence = filename_score * w_filename + body_score * w_body

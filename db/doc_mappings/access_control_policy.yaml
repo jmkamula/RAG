@@ -15,6 +15,16 @@ filename_fingerprints:
   - tokens: [user, access, policy]
   - tokens: [identity, access, policy]
   - tokens: [iam, policy]
+  # Procedure variants — tenant may upload "Access Management Process",
+  # "Access Control Procedure", or similar as the umbrella covering all
+  # 4 leaves (policy + 3 procedure neighbours). The synonym layer maps
+  # process / workflow / SOP → procedure so all forms canonicalise here.
+  - tokens: [access, control, procedure]
+  - tokens: [access, management, procedure]
+  - tokens: [logical, access, procedure]
+  - tokens: [user, access, procedure]
+  - tokens: [identity, access, procedure]
+  - tokens: [iam, procedure]
 
 body_fingerprints:
   - tokens: [access, granted]

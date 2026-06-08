@@ -103,9 +103,13 @@ def enrich(doc: ParsedDocument, api_key: Optional[str] = None) -> ParsedDocument
             if ref not in doc.explicit_refs:
                 doc.explicit_refs.append(ref)
 
-    # LLM classification if keyword detection failed
-    if (not doc.doc_type or not doc.standard_ids) and api_key:
-        logger.info(f"Keyword detection incomplete — using LLM for {doc.original_name}")
+    # LLM enrichment: ALWAYS run when an API key is available, even when
+    # keyword detection caught doc_type. The call also extracts topic_tokens
+    # — 5-10 doc-body topic words that bridge filename-vocabulary gaps for
+    # downstream doc_mappings discovery (a doc named "Access Management
+    # Process" picks up [rbac, mfa, rights] from content and matches
+    # A.5.18 procedure fingerprints that filename alone misses).
+    if api_key:
         _llm_classify(doc, api_key)
 
     if not doc.doc_type:
@@ -116,7 +120,8 @@ def enrich(doc: ParsedDocument, api_key: Optional[str] = None) -> ParsedDocument
     logger.info(
         f"Enriched: {doc.original_name} | type={doc.doc_type} | "
         f"standards={doc.standard_ids} | path={doc.extraction_path.value} | "
-        f"explicit_refs={len(doc.explicit_refs)} | ~{doc.token_estimate:,} tokens"
+        f"explicit_refs={len(doc.explicit_refs)} | topics={len(doc.topic_tokens)} | "
+        f"~{doc.token_estimate:,} tokens"
     )
     return doc
 
@@ -188,7 +193,8 @@ Return JSON only:
   "doc_type": one of ["policy","procedure","risk_register","evidence","audit_report","asset_inventory","other"],
   "standard_ids": list from ["ISO27001:2022","ISO27701:2019","GDPR:2016/679","SOC2:2017","NIST:CSF2","CYBER_ESSENTIALS"],
   "confidence": number between 0.0 and 1.0,
-  "scope": "one sentence describing what this document covers, or null"
+  "scope": "one sentence describing what this document covers, or null",
+  "topic_tokens": ["5-10 lowercase single-word topic SUBJECTS pulled from the document body — what the doc is ABOUT as a subject (e.g. access, rbac, mfa, rights, identity, encryption, supplier, incident, classification). Do NOT include verbs/actions (review, audit, monitor, assess), doc-shape words (policy, procedure, plan, register, report, standard), or filler words. Subject nouns only; precision matters."]
 }}"""
 
     try:
@@ -224,6 +230,33 @@ Return JSON only:
 
         if not doc.scope_statement and result.get("scope"):
             doc.scope_statement = result["scope"]
+
+        # topic_tokens — normalise + filter. Defensive against LLM emitting:
+        # (a) multi-word entries (split on whitespace),
+        # (b) doc-shape verbs / nouns that aren't real topic words —
+        #     "review", "audit", "report" are common LLM emissions that
+        #     subset-match leaf titles like "Management Review Procedure"
+        #     and cause false-positive scoping. The blacklist is the
+        #     symmetric counterpart of the tokenizer's shape-synonym map.
+        _TOPIC_SHAPE_BLOCKLIST = {
+            "policy", "procedure", "process", "plan", "program", "programme",
+            "register", "log", "list", "inventory", "tracker", "record",
+            "review", "audit", "report", "assessment", "evaluation",
+            "standard", "directive", "rule", "scheme", "matrix", "charter",
+            "agreement", "template", "baseline", "guideline", "manual",
+            "document", "doc", "approval",
+        }
+        if result.get("topic_tokens"):
+            seen: set[str] = set()
+            cleaned: list[str] = []
+            for raw in (result["topic_tokens"] or [])[:20]:
+                for part in re.split(r"[\s,;/]+", str(raw)):
+                    norm = re.sub(r"[^a-z0-9]", "", part.lower())
+                    if len(norm) >= 3 and norm not in seen \
+                            and norm not in _TOPIC_SHAPE_BLOCKLIST:
+                        seen.add(norm)
+                        cleaned.append(norm)
+            doc.topic_tokens = cleaned[:15]
 
     except Exception as e:
         logger.warning(f"LLM classification failed for {doc.original_name}: {e}")
