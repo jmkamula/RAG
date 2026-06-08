@@ -1,0 +1,50 @@
+# Canonical doc mapping: Information Security Policy (master ISP) → 5.2 + A.5.1.
+#
+# Every ISO 27001-aligned tenant has a master Information Security
+# Policy — the top-of-program policy doc that satisfies BOTH the
+# ISMS-clause-5.2 leaf AND the Annex A.5.1 policy leaf. They're
+# essentially the same artefact named twice (5.2 is the management-
+# system requirement; A.5.1 is the operational control). One uploaded
+# doc canonically covers both.
+
+schema_version: 1
+mapping_id: doc.iso.5_2.information_security_policy
+
+filename_fingerprints:
+  - tokens: [information, security, policy]
+  - tokens: [information, security, data, management]   # Arion convention
+  - tokens: [isms, policy]
+  - tokens: [isp, policy]
+  - tokens: [security, policy]
+  - tokens: [infosec, policy]
+  - tokens: [master, security, policy]
+
+body_fingerprints:
+  - tokens: [information, security, objectives]
+  - tokens: [security, governance]
+  - tokens: [top, management]
+  - tokens: [scope, isms]
+  - tokens: [information, security, principles]
+
+min_body_chars: 1500    # ISPs are substantive; sub-1500 chars likely a stub
+
+target_leaves:
+  - leaf_id: "req:5.2:information_security_policy"
+    control_ref: "5.2"
+    role: policy
+  - leaf_id: "req:A.5.1:isp_policy"
+    control_ref: "A.5.1"
+    role: policy
+
+cross_control_links:
+  - control: "4.3"
+    rationale: "ISP states the ISMS scope"
+  - control: "5.1"
+    rationale: "ISP is the artefact through which top-management leadership operates"
+  - control: "5.3"
+    rationale: "ISP enumerates security roles and authorities"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1

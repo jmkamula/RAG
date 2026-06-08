@@ -1,0 +1,50 @@
+# Canonical doc mapping: Access Control Policy → A.5.15 + identity/access family
+#
+# Tenants commonly upload a single Access Control Policy that covers the
+# A.5.15 policy leaf AND touches the procedural neighbours
+# A.5.16/A.5.17/A.5.18. The LLM extractor scopes only to these — the
+# pre-tightening default would have exposed all of A.5-A.8.
+
+schema_version: 1
+mapping_id: doc.iso.A_5_15.access_control_policy
+
+filename_fingerprints:
+  - tokens: [access, control, policy]
+  - tokens: [access, management, policy]
+  - tokens: [logical, access, policy]
+  - tokens: [user, access, policy]
+  - tokens: [identity, access, policy]
+  - tokens: [iam, policy]
+
+body_fingerprints:
+  - tokens: [access, granted]
+  - tokens: [least, privilege]
+  - tokens: [role, based, access]
+  - tokens: [rbac]
+
+min_body_chars: 800
+
+target_leaves:
+  - leaf_id: "req:A.5.15:access_control_policy"
+    control_ref: "A.5.15"
+    role: policy
+  - leaf_id: "req:A.5.18:access_rights_procedure"
+    control_ref: "A.5.18"
+    role: procedure
+  - leaf_id: "req:A.5.16:identity_management_procedure"
+    control_ref: "A.5.16"
+    role: procedure
+  - leaf_id: "req:A.5.17:authentication_information_procedure"
+    control_ref: "A.5.17"
+    role: procedure
+
+cross_control_links:
+  - control: "A.8.2"
+    rationale: "Privileged-access oversight references access control policy"
+  - control: "A.5.3"
+    rationale: "Segregation of duties is enforced via access control"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1

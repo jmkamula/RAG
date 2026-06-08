@@ -1,0 +1,55 @@
+# Canonical doc mapping: Supplier / Vendor Security Policy → A.5.19 family.
+#
+# A.5.19 is the supplier-relationship policy; A.5.20-23 are agreement +
+# ICT-supply-chain + supplier-review + cloud-services neighbours. The
+# A.5.19 policy doc typically references all of these obligations so the
+# LLM should evaluate the family — but NOT the entire Annex A as the
+# coarse path does today.
+
+schema_version: 1
+mapping_id: doc.iso.A_5_19.supplier_security_policy
+
+filename_fingerprints:
+  - tokens: [supplier, security, policy]
+  - tokens: [supplier, policy]
+  - tokens: [supplier, vendor, security]
+  - tokens: [vendor, security, policy]
+  - tokens: [vendor, management, policy]
+  - tokens: [third, party, security]
+  - tokens: [third, party, policy]
+  - tokens: [supply, chain, policy]
+  - tokens: [outsourcing, policy]
+
+body_fingerprints:
+  - tokens: [supplier, agreement]
+  - tokens: [supplier, risk]
+  - tokens: [vendor, relationship]
+  - tokens: [due, diligence]
+  - tokens: [third, party]
+
+min_body_chars: 800
+
+target_leaves:
+  - leaf_id: "req:A.5.19:supplier_risk_procedure"
+    control_ref: "A.5.19"
+    role: procedure
+  - leaf_id: "req:A.5.20:supplier_agreement_security_template"
+    control_ref: "A.5.20"
+    role: agreement_template
+  - leaf_id: "req:A.5.21:ict_supply_chain_procedure"
+    control_ref: "A.5.21"
+    role: procedure
+  - leaf_id: "req:A.5.23:cloud_services_policy"
+    control_ref: "A.5.23"
+    role: policy
+
+cross_control_links:
+  - control: "A.5.22"
+    rationale: "Supplier review is the program-level loop above the policy"
+  - control: "Art.28"
+    rationale: "GDPR processor obligations are a subset of supplier security"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1

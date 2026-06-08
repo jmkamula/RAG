@@ -1,0 +1,55 @@
+# Canonical doc mapping: Business Continuity Policy / Plan → A.5.29 + A.5.30.
+#
+# Tenants typically maintain a single BCP doc that covers both the
+# A.5.29 information-security-during-disruption plan AND A.5.30 ICT
+# readiness. The two leaves are natural siblings; one doc satisfies
+# both. Pre-tightening, "BCP" docs got matched against all A.5/A.7/
+# A.8 controls — the matcher now restricts to the two relevant leaves.
+
+schema_version: 1
+mapping_id: doc.iso.A_5_29.business_continuity_policy
+
+filename_fingerprints:
+  - tokens: [business, continuity, policy]
+  - tokens: [business, continuity, plan]
+  - tokens: [continuity, policy]
+  - tokens: [bcp]
+  - tokens: [bcm, policy]
+  - tokens: [dr, policy]
+  - tokens: [disaster, recovery, policy]
+  - tokens: [continuity, disruption]
+  - tokens: [ict, continuity]
+  - tokens: [ict, readiness]
+
+body_fingerprints:
+  - tokens: [recovery, time, objective]
+  - tokens: [rto]
+  - tokens: [rpo]
+  - tokens: [recovery, point, objective]
+  - tokens: [business, impact, analysis]
+  - tokens: [bia]
+  - tokens: [disaster, recovery]
+  - tokens: [continuity, scenario]
+
+min_body_chars: 800
+
+target_leaves:
+  - leaf_id: "req:A.5.29:information_security_during_disruption"
+    control_ref: "A.5.29"
+    role: plan
+  - leaf_id: "req:A.5.30:ict_readiness_for_business_continuity"
+    control_ref: "A.5.30"
+    role: plan
+
+cross_control_links:
+  - control: "A.8.13"
+    rationale: "Backup procedures support the ICT recovery plan"
+  - control: "A.8.14"
+    rationale: "Redundancy / failover capacity sits under ICT readiness"
+  - control: "Art.32"
+    rationale: "Art.32.1.b processing-availability obligation overlaps"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1
