@@ -37,32 +37,17 @@ no eval case caught it for nearly a day.
 
 See also: [[user-role]], [[human-in-the-loop-positioning]]
 
-## Stage-2 ratchet-fatigue — deferred shape-match helper
+## Stage-2 ratchet-fatigue — SHIPPED 2026-06-09 (376628d + 4eba6ff)
 
-Cases of the form `pending engine verdict for X` are state-sensitive:
-every Stage-2 approval (or Stage-1 approval that triggers an engine-
-kick producing a Stage-2 proposal) shifts the chat surface from
-"engine proposes ... 0/N" → "engine proposes ... 1/N" → "already
-approved ... 'OFI'" → eventually "already approved ... 'Comply'".
-Tenant action churn = constant re-ratcheting.
+Cases of the form `pending engine verdict for X` are state-sensitive
+(pending → approved → re-proposed). Strict-string `must_contain`
+required re-ratcheting on every state shift; two ratchets in one
+session on the same 9 cases proved the cost wasn't sustainable.
 
-On 2026-06-09 we ratcheted the same 9 cases (A.5.16, A.5.17,
-A.5.19, A.5.23, A.8.2, A.8.5, Art.18, Art.21, Art.46) **twice in
-one day**: once when the engine-kick proposed OFI, once again when
-Stage-2 approved. That's the strongest signal so far that the
-strict-string `must_contain` model doesn't scale for state-sensitive
-queries.
+**The fix:** EvalCase.shape="stage2" + `_check_stage2_shape()`
+validator that accepts ANY valid post-engine state and verifies
+internal consistency. All 157 Stage-2 cases converted; eval 194/198
+with no Stage-2 regressions.
 
-**The deferred fix** (proposed + accepted then parked 2026-06-09):
-ship `assert_stage2_shape(ref, response)` accepting ANY valid post-
-engine state (`already approved` ∨ `engine proposes X` ∨ `no pending
-verdict`) and additionally verifying internal consistency (if
-"engine proposes" then a finding label + `N/M children satisfied`
-must be present). Loose enough to survive evidence churn, strict
-enough to catch real regressions (clarification loops, no-spec
-errors, malformed multi-leaf math). ~50 cases would convert.
-
-Until then: ratchet when state shifts, expect to do it again. The
-ratchet shape today is `[ref, "already approved", "'OFI'"]` —
-literal single-quoted form pins the chat's `Live finding: 'OFI'`
-output.
+Full design + usage: [[eval-shape-validators]]. New Stage-2 cases
+should default to `shape="stage2"`, leave `must_contain=[]`.
