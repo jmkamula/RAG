@@ -465,6 +465,18 @@ _SHORT_CIRCUIT_REQUIRED_REF_PATTERN = re.compile(
 _ACTION_HINT_MARKERS = ("upload:", "run:", "tools/")
 
 
+_BULLET_PREFIXES = ("•", "* ", "- ")
+
+
+def _count_bullets(text: str) -> int:
+    if not text:
+        return 0
+    return sum(
+        1 for line in text.splitlines()
+        if line.lstrip().startswith(_BULLET_PREFIXES)
+    )
+
+
 def polish_short_circuit_answer(
     query:                str,
     deterministic_answer: str,
@@ -474,8 +486,13 @@ def polish_short_circuit_answer(
     Polish any deterministic short-circuit answer into conversational prose
     via LLMAnswer.compose(). Extracts every ref shape and action-hint line
     from the deterministic text so the composer can preserve them verbatim.
-    On any failure compose() returns the deterministic text unchanged —
-    the short-circuit invariant (no data loss) is preserved.
+
+    Data-loss guard: after the polish, verify every distinctive ref and
+    bullet from the deterministic answer survives in the composed output.
+    If the LLM silently dropped a bullet or ref (e.g. rewriting "6 total"
+    as "5 total" and omitting one document row), fall back to the
+    deterministic text. The short-circuit invariant — no data loss — is
+    enforced, not just hoped for.
     """
     if not deterministic_answer:
         return deterministic_answer
@@ -489,12 +506,38 @@ def polish_short_circuit_answer(
             action_hint = s
             break
 
-    return llm.compose(
+    composed = llm.compose(
         query              = query,
         deterministic_text = deterministic_answer,
         required_refs      = required_refs,
         action_hint        = action_hint,
     )
+
+    # Ref-drop guard: every distinctive ref in the input must survive.
+    if required_refs and composed:
+        composed_refs = set(_SHORT_CIRCUIT_REQUIRED_REF_PATTERN.findall(composed))
+        missing = sorted(set(required_refs) - composed_refs)
+        if missing:
+            get_logger().warning(
+                "polish_short_circuit_answer: LLM dropped refs %s — "
+                "falling back to deterministic text",
+                missing,
+            )
+            return deterministic_answer
+
+    # Bullet-drop guard: list-shaped answers (e.g. "Uploaded documents (N total)")
+    # lose data even when refs are sparse. If the composed has fewer bullets
+    # than the input, fall back.
+    det_bullets = _count_bullets(deterministic_answer)
+    if det_bullets and _count_bullets(composed or "") < det_bullets:
+        get_logger().warning(
+            "polish_short_circuit_answer: LLM dropped bullets "
+            "(deterministic=%d, composed=%d) — falling back",
+            det_bullets, _count_bullets(composed or ""),
+        )
+        return deterministic_answer
+
+    return composed
 
 
 from vector.retriever      import VectorRetriever
