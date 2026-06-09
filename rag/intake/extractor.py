@@ -620,16 +620,16 @@ def _scope_controls_via_doc_mappings(
     # filtered to controls that exist in the curated set; we just narrow.
     scoped = [c for c in controls if c.get("ref") in target_ctrls]
 
-    # Primary candidates = the top-confidence match's target list. Used as
-    # the yield-ratio denominator in the quality flag (schema_v36) — much
-    # tighter than the union, which inflates with every 0.6-confidence
-    # scaffold that fingerprinted to anything related. A doc whose
-    # umbrella match has 6 leaves and finds 5 is healthy regardless of
-    # how many tail scaffolds also matched.
-    top = max(proposals, key=lambda p: p.confidence)
-    primary_ctrls = set(top.target_controls or [])
-    primary_scoped = [c for c in controls if c.get("ref") in primary_ctrls]
-    doc.extraction_metrics["primary_candidate_controls"] = len(primary_scoped)
+    # Only claim a "primary candidate count" when doc_mappings actually
+    # contributed scoped controls. If proposals exist but the intersection
+    # with `controls` is empty (e.g. GDPR-only proposals against an ISO-
+    # only curated list), the caller falls back to `_scope_controls` —
+    # leave primary unset so the fallback's setdefault picks up.
+    if scoped:
+        top = max(proposals, key=lambda p: p.confidence)
+        primary_ctrls = set(top.target_controls or [])
+        primary_scoped = [c for c in controls if c.get("ref") in primary_ctrls]
+        doc.extraction_metrics["primary_candidate_controls"] = len(primary_scoped)
 
     if proposals:
         mapping_summary = ", ".join(
