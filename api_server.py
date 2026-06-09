@@ -2603,6 +2603,66 @@ _WRITE_KEYWORDS = (
 )
 
 
+@app.get("/api/v1/admin/intake/unmatched-patterns", tags=["admin"])
+async def admin_unmatched_patterns(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    limit:    int = 20,
+    days:     int = 30,
+):
+    """Group recent uploads where doc_mappings didn't match by tokenized
+    filename, return most common patterns as candidate umbrella YAMLs
+    to author. Each row is a doc-shape that would benefit from a new
+    `db/doc_mappings/*.yaml`.
+
+    Source: intake_trace_log rows with doc_mappings_match_count=0
+    in the last `days` days. Filenames are tokenized via the
+    workbook_discovery tokenizer (the same one doc_mappings YAMLs
+    use), so the returned tuples are valid fingerprint candidates."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT filename, COUNT(*) AS n
+                FROM intake_trace_log
+                WHERE tenant_id = %s::uuid
+                  AND stage     = 'extract'
+                  AND doc_mappings_match_count = 0
+                  AND traced_at > NOW() - (%s || ' days')::INTERVAL
+                GROUP BY filename
+                ORDER BY n DESC
+                LIMIT %s
+                """,
+                (key_info.tenant_id, days, limit * 5),
+            )
+            rows = cur.fetchall()
+
+        from rag.intake.workbook_discovery import tokenize
+        from pathlib import Path
+        patterns: dict[tuple, dict] = {}
+        for filename, count in rows:
+            tokens = tuple(tokenize(Path(filename).stem))
+            if not tokens:
+                continue
+            patterns.setdefault(tokens, {"tokens": list(tokens), "n_uploads": 0, "examples": []})
+            patterns[tokens]["n_uploads"] += count
+            if filename not in patterns[tokens]["examples"]:
+                patterns[tokens]["examples"].append(filename)
+
+        out = sorted(patterns.values(), key=lambda p: -p["n_uploads"])[:limit]
+        return {
+            "since_days": days,
+            "tenant_id":  key_info.tenant_id,
+            "count":      len(out),
+            "patterns":   out,
+        }
+    finally:
+        pool.putconn(conn)
+
+
 def _extraction_quality_flag(row: dict) -> tuple[str, str]:
     """Compute a red/yellow/green flag + one-line reason for an extract
     trace_log row. Returns (flag, reason).

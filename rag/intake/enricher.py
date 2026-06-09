@@ -109,8 +109,16 @@ def enrich(doc: ParsedDocument, api_key: Optional[str] = None) -> ParsedDocument
     # downstream doc_mappings discovery (a doc named "Access Management
     # Process" picks up [rbac, mfa, rights] from content and matches
     # A.5.18 procedure fingerprints that filename alone misses).
-    if api_key:
+    #
+    # SHA cache (schema_v37): same source bytes → cached LLM output.
+    # Eliminates the dominant non-determinism source — without cache the
+    # same doc could match a different doc_mappings umbrella across runs
+    # because topic_tokens drift between LLM invocations.
+    cache_hit = api_key and doc.source_sha256 and _enricher_cache_load(doc)
+    if api_key and not cache_hit:
         _llm_classify(doc, api_key)
+        if doc.source_sha256:
+            _enricher_cache_store(doc)
 
     if not doc.doc_type:
         doc.doc_type = "other"
@@ -260,3 +268,101 @@ Return JSON only:
 
     except Exception as e:
         logger.warning(f"LLM classification failed for {doc.original_name}: {e}")
+
+
+# =============================================================================
+# SHA-keyed enricher cache (schema_v37)
+# =============================================================================
+
+def _enricher_cache_load(doc: ParsedDocument) -> bool:
+    """Look up cached LLM-derived fields by source SHA. Returns True on
+    hit (doc is mutated in place); False on miss or any error.
+
+    Never raises — cache failures degrade gracefully to a fresh LLM call."""
+    try:
+        from rag.posture_loader import build_pg_conn
+        conn = build_pg_conn()
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT doc_type, standard_ids, topic_tokens, scope_statement
+                      FROM enricher_cache
+                     WHERE sha256 = %s
+                    """,
+                    (doc.source_sha256,),
+                )
+                row = cur.fetchone()
+            if not row:
+                return False
+            doc_type, standard_ids, topic_tokens, scope_statement = row
+            # Keyword-detection results already populated some fields;
+            # only overwrite when the cache has stronger data.
+            if doc_type and (not doc.doc_type or doc.doc_type == "other"):
+                doc.doc_type = doc_type
+            if standard_ids:
+                # Merge: cache extends what keyword detection found
+                for sid in standard_ids:
+                    if sid not in doc.standard_ids:
+                        doc.standard_ids.append(sid)
+            if topic_tokens:
+                doc.topic_tokens = list(topic_tokens)
+            if scope_statement and not doc.scope_statement:
+                doc.scope_statement = scope_statement
+            # Record the hit
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    UPDATE enricher_cache
+                       SET hit_count   = hit_count + 1,
+                           last_hit_at = NOW()
+                     WHERE sha256 = %s
+                    """,
+                    (doc.source_sha256,),
+                )
+            conn.commit()
+            logger.info(
+                f"enricher_cache HIT for {doc.original_name} "
+                f"(sha={doc.source_sha256[:12]}, topics={len(doc.topic_tokens)})"
+            )
+            return True
+        finally:
+            conn.close()
+    except Exception as e:
+        logger.warning(f"enricher_cache load failed (non-fatal): {e}")
+        return False
+
+
+def _enricher_cache_store(doc: ParsedDocument) -> None:
+    """Persist the LLM-derived fields keyed by source SHA. Never raises."""
+    try:
+        from rag.posture_loader import build_pg_conn
+        conn = build_pg_conn()
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    INSERT INTO enricher_cache
+                        (sha256, doc_type, standard_ids,
+                         topic_tokens, scope_statement)
+                    VALUES (%s, %s, %s, %s, %s)
+                    ON CONFLICT (sha256) DO UPDATE
+                       SET doc_type        = EXCLUDED.doc_type,
+                           standard_ids    = EXCLUDED.standard_ids,
+                           topic_tokens    = EXCLUDED.topic_tokens,
+                           scope_statement = EXCLUDED.scope_statement,
+                           cached_at       = NOW()
+                    """,
+                    (
+                        doc.source_sha256,
+                        doc.doc_type,
+                        doc.standard_ids or [],
+                        doc.topic_tokens or [],
+                        doc.scope_statement,
+                    ),
+                )
+            conn.commit()
+        finally:
+            conn.close()
+    except Exception as e:
+        logger.warning(f"enricher_cache store failed (non-fatal): {e}")

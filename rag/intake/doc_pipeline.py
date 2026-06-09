@@ -117,6 +117,9 @@ class IntakeTracer:
             "markdown_chars", "paragraph_chars", "candidate_controls",
             # schema_v36 — tight scope from top-confidence doc_mappings match
             "primary_candidate_controls",
+            # schema_v37 — doc_mappings match count (0 means fallback to
+            # legacy _scope_controls; surface via /admin/intake/unmatched-patterns)
+            "doc_mappings_match_count",
         }
         for k, v in metrics.items():
             if k in allowed:
@@ -368,6 +371,7 @@ class DocumentPipeline:
                 paragraph_chars      = doc.extraction_metrics.get("paragraph_chars"),
                 candidate_controls   = doc.extraction_metrics.get("candidate_controls"),
                 primary_candidate_controls = doc.extraction_metrics.get("primary_candidate_controls"),
+                doc_mappings_match_count = doc.extraction_metrics.get("doc_mappings_match_count"),
             )
 
             logger.info(f"Extracted {len(findings)} findings from {file_name}")

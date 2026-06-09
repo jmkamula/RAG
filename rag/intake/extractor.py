@@ -604,6 +604,11 @@ def _scope_controls_via_doc_mappings(
         body_text    = doc.full_text or "",
         topic_tokens = doc.topic_tokens or None,
     )
+    # Telemetry: how many doc_mappings YAMLs fingerprinted this upload?
+    # 0 means we fell through to legacy _scope_controls. Tracked so the
+    # admin endpoint can group unmatched filenames and surface missing
+    # umbrellas (schema_v37 + /admin/intake/unmatched-patterns).
+    doc.extraction_metrics["doc_mappings_match_count"] = len(proposals)
     if not proposals:
         return []
 
