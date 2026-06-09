@@ -385,17 +385,29 @@ def _evidence_grounded(evidence: str, doc: ParsedDocument) -> bool:
     normalised whitespace) catches hallucinated quotes — a common failure
     mode where the LLM paraphrases the doc but claims it's verbatim. We
     use only the first 50 chars of the evidence to be lenient on minor
-    drift (the LLM sometimes elides trailing punctuation or articles)."""
+    drift (the LLM sometimes elides trailing punctuation or articles).
+
+    Check against BOTH `doc.full_text` AND `doc.markdown` — the LLM is fed
+    one or the other depending on the extraction path, and they can
+    diverge significantly for docs where mammoth captures lists/tables/
+    list items that the paragraph walker drops. Citing from markdown
+    content invisible to full_text used to flag as hallucinated; now it
+    grounds correctly."""
     if not evidence or len(evidence) < _MIN_EVIDENCE_LEN:
         return False
-    body = (doc.full_text or "").lower()
-    if not body:
-        # Some extraction paths don't keep the full text — skip the check
-        # rather than wrongly drop. Tenant can still reject via Stage-1.
-        return True
     needle = re.sub(r"\s+", " ", evidence[:50].lower()).strip()
-    haystack = re.sub(r"\s+", " ", body)
-    return needle in haystack
+    for source in (doc.full_text, doc.markdown):
+        if not source:
+            continue
+        haystack = re.sub(r"\s+", " ", source.lower())
+        if needle in haystack:
+            return True
+    # Neither source has the quote. If both are missing entirely, the
+    # extraction path isn't keeping text — be lenient (tenant can still
+    # reject via Stage-1).
+    if not doc.full_text and not doc.markdown:
+        return True
+    return False
 
 
 def _parse_llm_response(
