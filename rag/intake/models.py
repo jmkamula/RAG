@@ -79,6 +79,12 @@ class ParsedDocument:
     source_sha256:    Optional[str] = None
     converter:        Optional[str] = None
 
+    # Extraction-quality telemetry — populated by the extractor as it runs
+    # so the pipeline can persist them on the trace_log without changing
+    # extract()'s return signature. Keys are the trace_log column names;
+    # see schema_v35.
+    extraction_metrics: dict = field(default_factory=dict)
+
 
 @dataclass
 class DocumentChunk:

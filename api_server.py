@@ -2603,6 +2603,112 @@ _WRITE_KEYWORDS = (
 )
 
 
+def _extraction_quality_flag(row: dict) -> tuple[str, str]:
+    """Compute a red/yellow/green flag + one-line reason for an extract
+    trace_log row. Returns (flag, reason)."""
+    findings = row.get("findings_kept") or 0
+    candidates = row.get("candidate_controls") or 0
+    halluc = row.get("dropped_hallucinated") or 0
+    md_chars = row.get("markdown_chars") or 0
+    para_chars = row.get("paragraph_chars") or 0
+    llm_calls = row.get("llm_calls") or 0
+
+    if candidates > 0 and findings == 0:
+        return "red", f"0 findings from {candidates} scoped controls"
+    if halluc > findings and findings >= 0:
+        return "yellow", f"hallucinated > kept ({halluc} > {findings})"
+    if candidates > 0 and findings * 5 < candidates:
+        return "yellow", f"yield ratio < 20% ({findings}/{candidates})"
+    if md_chars > para_chars * 3 and md_chars > 2000 and llm_calls < max(1, md_chars // 50000):
+        return "yellow", f"markdown ({md_chars}) under-chunked into {llm_calls} calls"
+    return "green", "ok"
+
+
+@app.get("/api/v1/admin/uploads/quality", tags=["admin"])
+async def admin_uploads_quality(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    limit:    int = 50,
+    flag:     Optional[str] = None,   # red | yellow | None=all
+):
+    """Recent uploads with extraction-quality flag derived from
+    intake_trace_log metrics (schema_v35). Use to spot under-extraction
+    or hallucination patterns without reading per-doc logs.
+
+    flag=red    — zero-yield extractions
+    flag=yellow — low yield, hallucination, or under-chunked markdown
+    omitted     — all rows, sorted worst-first
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT
+                    itl.upload_id, itl.filename, itl.traced_at,
+                    du.extraction_status,
+                    itl.llm_calls, itl.findings_raw, itl.findings_kept,
+                    itl.candidate_controls,
+                    itl.dropped_low_conf, itl.dropped_short_quote,
+                    itl.dropped_hallucinated, itl.dropped_unknown_ref,
+                    itl.markdown_chars, itl.paragraph_chars,
+                    itl.total_ms, itl.extraction_path
+                FROM intake_trace_log itl
+                LEFT JOIN document_uploads du ON du.id::text = itl.upload_id
+                WHERE itl.tenant_id = %s::uuid
+                  AND itl.stage    = 'extract'
+                ORDER BY itl.traced_at DESC
+                LIMIT %s
+                """,
+                (key_info.tenant_id, max(limit * 3, 50)),
+            )
+            cols = [d[0] for d in cur.description]
+            rows = [dict(zip(cols, r)) for r in cur.fetchall()]
+
+        out: list[dict] = []
+        for r in rows:
+            f, reason = _extraction_quality_flag(r)
+            if flag and f != flag:
+                continue
+            out.append({
+                "upload_id":          r["upload_id"],
+                "filename":           r["filename"],
+                "extracted_at":       r["traced_at"].isoformat() if r["traced_at"] else None,
+                "extraction_status":  r["extraction_status"],
+                "extraction_path":    r["extraction_path"],
+                "quality_flag":       f,
+                "quality_reason":     reason,
+                "llm_calls":          r["llm_calls"],
+                "candidate_controls": r["candidate_controls"],
+                "findings_kept":      r["findings_kept"],
+                "drops": {
+                    "low_conf":         r["dropped_low_conf"],
+                    "short_quote":      r["dropped_short_quote"],
+                    "hallucinated":     r["dropped_hallucinated"],
+                    "unknown_ref":      r["dropped_unknown_ref"],
+                },
+                "markdown_chars":   r["markdown_chars"],
+                "paragraph_chars":  r["paragraph_chars"],
+                "total_ms":         r["total_ms"],
+            })
+
+        # Sort: red first, then yellow, then green; within each flag, newest first.
+        flag_rank = {"red": 0, "yellow": 1, "green": 2}
+        out.sort(key=lambda x: (flag_rank.get(x["quality_flag"], 3), -(x["extracted_at"] is None), x["extracted_at"] or ""), reverse=False)
+        # Within-flag reversal for time: use negative timestamp via secondary sort
+        out_sorted: list[dict] = []
+        for f in ("red", "yellow", "green"):
+            bucket = [x for x in out if x["quality_flag"] == f]
+            bucket.sort(key=lambda x: x["extracted_at"] or "", reverse=True)
+            out_sorted.extend(bucket)
+        out = out_sorted[:limit]
+        return {"count": len(out), "uploads": out}
+    finally:
+        pool.putconn(conn)
+
+
 def _is_write_cypher(cypher: str) -> bool:
     upper = " " + cypher.upper().replace("\n", " ") + " "
     return any(kw in upper for kw in _WRITE_KEYWORDS)

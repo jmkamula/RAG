@@ -73,6 +73,12 @@ def extract(
         logger.warning(f"No controls scoped for {doc.original_name} — using all controls")
         scoped = controls[:MAX_CONTROLS_PER_CALL]
 
+    # Telemetry: how many candidates did we scope to? Combined with
+    # findings_kept downstream, gives the per-doc yield ratio.
+    doc.extraction_metrics["candidate_controls"] = len(scoped)
+    doc.extraction_metrics["paragraph_chars"]    = len(doc.full_text or "")
+    doc.extraction_metrics["markdown_chars"]     = len(doc.markdown or "")
+
     if doc.extraction_path == ExtractionPath.FULL_DOCUMENT:
         return _extract_full(doc, scoped, api_key)
     else:  # SECTION_BASED
@@ -159,6 +165,7 @@ def _extract_full(
             api_key    = api_key,
             chunk_hint = "full document",
         )
+        doc.extraction_metrics["llm_calls"] = doc.extraction_metrics.get("llm_calls", 0) + 1
         findings = _parse_llm_response(raw, doc, chunk_controls, section=None, chunk_id="full")
         all_findings.extend(findings)
 
@@ -212,6 +219,7 @@ def _extract_sections(
                 api_key    = api_key,
                 chunk_hint = section.heading or chunk_id,
             )
+            doc.extraction_metrics["llm_calls"] = doc.extraction_metrics.get("llm_calls", 0) + 1
             findings = _parse_llm_response(
                 raw, doc, control_chunk,
                 section  = section.heading,
@@ -500,6 +508,14 @@ def _parse_llm_response(
             chunk_id, doc.original_name,
             dropped_low_conf, dropped_short_quote, dropped_hallucinated, dropped_unknown_ref,
         )
+
+    # Accumulate drop counts onto the doc for pipeline-side persistence
+    # (schema_v35 quality telemetry — see [[intake-quality-telemetry]]).
+    m = doc.extraction_metrics
+    m["dropped_low_conf"]     = m.get("dropped_low_conf", 0)     + dropped_low_conf
+    m["dropped_short_quote"]  = m.get("dropped_short_quote", 0)  + dropped_short_quote
+    m["dropped_hallucinated"] = m.get("dropped_hallucinated", 0) + dropped_hallucinated
+    m["dropped_unknown_ref"]  = m.get("dropped_unknown_ref", 0)  + dropped_unknown_ref
 
     # Enforce 15-finding cap per chunk (the LLM is also prompted to cap;
     # this is the parse-side enforcement). Retains highest-confidence

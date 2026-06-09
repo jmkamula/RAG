@@ -111,6 +111,10 @@ class IntakeTracer:
             "findings_written", "posture_created", "posture_updated", "posture_skipped",
             # Stage 4.5 (xfw_proposer) metrics
             "proposals_written", "proposals_skipped", "xfw_targets",
+            # Stage 3 (extract) quality metrics — schema_v35
+            "dropped_low_conf", "dropped_short_quote", "dropped_hallucinated",
+            "dropped_unknown_ref",
+            "markdown_chars", "paragraph_chars", "candidate_controls",
         }
         for k, v in metrics.items():
             if k in allowed:
@@ -339,16 +343,28 @@ class DocumentPipeline:
             findings = extract(doc, controls, self.api_key)
             s3_ms = int((time.time() - t3) * 1000)
 
-            # Count LLM calls: full=1, section_based=n sections
-            llm_calls = 1
-            if doc.extraction_path == ExtractionPath.SECTION_BASED:
-                llm_calls = max(1, len(doc.raw_sections))
+            # Prefer the extractor's tracked LLM-call count over the
+            # section-count estimate — section_based now sometimes
+            # rebuilds sections from markdown chunks, so len(raw_sections)
+            # under-counts vs the actual call count.
+            llm_calls = doc.extraction_metrics.get("llm_calls")
+            if llm_calls is None:
+                llm_calls = 1 if doc.extraction_path != ExtractionPath.SECTION_BASED \
+                              else max(1, len(doc.raw_sections))
 
             tracer.write(
                 "extract", s3_ms,
                 llm_calls    = llm_calls,
                 findings_raw = len(findings),
                 findings_kept= len(findings),
+                # Quality telemetry — schema_v35
+                dropped_low_conf     = doc.extraction_metrics.get("dropped_low_conf"),
+                dropped_short_quote  = doc.extraction_metrics.get("dropped_short_quote"),
+                dropped_hallucinated = doc.extraction_metrics.get("dropped_hallucinated"),
+                dropped_unknown_ref  = doc.extraction_metrics.get("dropped_unknown_ref"),
+                markdown_chars       = doc.extraction_metrics.get("markdown_chars"),
+                paragraph_chars      = doc.extraction_metrics.get("paragraph_chars"),
+                candidate_controls   = doc.extraction_metrics.get("candidate_controls"),
             )
 
             logger.info(f"Extracted {len(findings)} findings from {file_name}")
