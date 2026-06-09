@@ -1,0 +1,87 @@
+# Canonical doc mapping: Risk Management Policy → ISMS Clause 6 + Clause 8
+# risk family
+#
+# Tenants commonly upload a single Risk Management Policy that covers
+# the planning side (6.1.1 opportunities/threats; 6.1.2 assessment;
+# 6.1.3 treatment) AND the operational side (8.2 operational risk
+# assessment; 8.3 operational risk treatment). Without an umbrella
+# mapping, the discovery layer fingerprint-matches "risk management"
+# against generic *management* tokens in unrelated YAMLs (supplier
+# management, business continuity management, off-premises asset
+# management) and the LLM gets a wrong-shape scope, returning 0
+# findings.
+#
+# Created 2026-06-09 after a Risk Management Policy upload extracted
+# 0 findings because no risk umbrella existed.
+
+schema_version: 1
+mapping_id: doc.iso.6_1.risk_management_policy
+
+filename_fingerprints:
+  - tokens: [risk, management, policy]
+  - tokens: [risk, policy]
+  - tokens: [risk, framework, policy]
+  - tokens: [risk, management, framework]
+  - tokens: [enterprise, risk, policy]
+  - tokens: [enterprise, risk, management]
+  # Procedure / process variants — synonym layer canonicalises
+  # process / workflow / SOP → procedure
+  - tokens: [risk, management, procedure]
+  - tokens: [risk, procedure]
+  # Programme variant — programme → plan via synonym layer
+  - tokens: [risk, management, plan]
+  - tokens: [risk, programme]
+  - tokens: [risk, program]
+
+body_fingerprints:
+  - tokens: [risk, register]
+  - tokens: [risk, treatment]
+  - tokens: [risk, appetite]
+  - tokens: [risk, tolerance]
+  - tokens: [risk, assessment]
+  - tokens: [likelihood, impact]
+  - tokens: [mitigation, plan]
+
+min_body_chars: 600
+
+target_leaves:
+  # Clause 6.1 — planning side
+  - leaf_id: "req:6.1.1:risk_opportunity_planning"
+    control_ref: "6.1.1"
+    role: planning_procedure
+  - leaf_id: "req:6.1.1:applicable_inputs_scope"
+    control_ref: "6.1.1"
+    role: scope_note
+  - leaf_id: "req:6.1.2:risk_assessment"
+    control_ref: "6.1.2"
+    role: risk_assessment
+  - leaf_id: "req:6.1.2:risk_methodology_scope"
+    control_ref: "6.1.2"
+    role: scope_note
+  - leaf_id: "req:6.1.3:risk_treatment_plan"
+    control_ref: "6.1.3"
+    role: risk_treatment_plan
+  # Clause 8 — operational side
+  - leaf_id: "req:8.2:assessment_trigger_procedure"
+    control_ref: "8.2"
+    role: procedure
+  - leaf_id: "req:8.2:applicable_assessment_scope"
+    control_ref: "8.2"
+    role: scope_note
+  - leaf_id: "req:8.3:treatment_execution_procedure"
+    control_ref: "8.3"
+    role: procedure
+  - leaf_id: "req:8.3:applicable_treatment_plan_scope"
+    control_ref: "8.3"
+    role: scope_note
+
+cross_control_links:
+  - control: "A.5.6"
+    rationale: "Risk-topic scope cross-references the operational risk policy"
+  - control: "8.1"
+    rationale: "Operational planning depends on the risk-treatment outputs"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1
