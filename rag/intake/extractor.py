@@ -78,6 +78,13 @@ def extract(
     doc.extraction_metrics["candidate_controls"] = len(scoped)
     doc.extraction_metrics["paragraph_chars"]    = len(doc.full_text or "")
     doc.extraction_metrics["markdown_chars"]     = len(doc.markdown or "")
+    # Fallback: when doc_mappings didn't match (legacy _scope_controls
+    # path took over), primary == union. The legacy path doesn't have a
+    # "primary" notion — every control in the clause-scope is equally
+    # weighted. Set primary = len(scoped) so the yield ratio computes
+    # the same as the old behaviour; the schema_v36 distinction kicks
+    # in only when doc_mappings narrows below the union.
+    doc.extraction_metrics.setdefault("primary_candidate_controls", len(scoped))
 
     if doc.extraction_path == ExtractionPath.FULL_DOCUMENT:
         return _extract_full(doc, scoped, api_key)

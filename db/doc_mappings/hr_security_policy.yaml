@@ -1,0 +1,91 @@
+# Canonical doc mapping: HR Security Policy → ISO 27001 A.6 People
+# Controls + adjacent identity-lifecycle controls
+#
+# Tenants commonly upload a single HR Security Policy / Personnel
+# Security Policy that covers the A.6 People Controls family AND
+# touches the identity-lifecycle neighbours (A.5.11 return of
+# assets on offboarding, A.5.18 access provisioning on onboarding).
+#
+# Created 2026-06-09 after an HR Security Policy upload fell
+# through to the legacy _scope_controls path (50-control "policy"
+# clause-scope) because no umbrella matched, producing a
+# 9/50 = 18% yield-ratio yellow flag for a healthy 9-finding
+# extraction. The right denominator was ~8 controls (the HR
+# umbrella's tight scope), not 50.
+
+schema_version: 1
+mapping_id: doc.iso.A_6.hr_security_policy
+
+filename_fingerprints:
+  - tokens: [hr, security, policy]
+  - tokens: [hr, policy]
+  - tokens: [personnel, security, policy]
+  - tokens: [people, security, policy]
+  - tokens: [human, resources, security, policy]
+  - tokens: [human, resources, policy]
+  # Procedure / process variants — synonym layer canonicalises
+  # process / workflow / SOP → procedure
+  - tokens: [hr, security, procedure]
+  - tokens: [hr, procedure]
+  - tokens: [personnel, security, procedure]
+  - tokens: [people, security, procedure]
+  - tokens: [onboarding, procedure]
+  - tokens: [offboarding, procedure]
+
+body_fingerprints:
+  - tokens: [background, checks]
+  - tokens: [security, awareness, training]
+  - tokens: [disciplinary, process]
+  - tokens: [termination, accounts]
+  - tokens: [onboarding]
+  - tokens: [offboarding]
+  - tokens: [non, disclosure, agreement]
+  - tokens: [confidentiality, agreement]
+
+min_body_chars: 500
+
+target_leaves:
+  # A.6 People Controls family
+  - leaf_id: "req:A.6.1:screening_procedure"
+    control_ref: "A.6.1"
+    role: procedure
+  - leaf_id: "req:A.6.2:employment_terms_template"
+    control_ref: "A.6.2"
+    role: template
+  - leaf_id: "req:A.6.3:security_awareness_programme"
+    control_ref: "A.6.3"
+    role: plan
+  - leaf_id: "req:A.6.4:disciplinary_process"
+    control_ref: "A.6.4"
+    role: procedure
+  - leaf_id: "req:A.6.5:post_employment_responsibilities"
+    control_ref: "A.6.5"
+    role: scope_note
+  - leaf_id: "req:A.6.6:confidentiality_agreement_template"
+    control_ref: "A.6.6"
+    role: template
+  - leaf_id: "req:A.6.8:reporting_procedure"
+    control_ref: "A.6.8"
+    role: procedure
+  # Identity-lifecycle neighbours touched by HR onboarding/offboarding
+  - leaf_id: "req:A.5.11:return_of_assets_procedure"
+    control_ref: "A.5.11"
+    role: procedure
+  - leaf_id: "req:A.5.18:access_rights_procedure"
+    control_ref: "A.5.18"
+    role: procedure
+
+cross_control_links:
+  - control: "A.5.2"
+    rationale: "Information security responsibilities defined for HR personnel"
+  - control: "A.5.16"
+    rationale: "Identity management lifecycle starts at HR onboarding"
+  - control: "A.5.17"
+    rationale: "Authentication info issued through HR onboarding"
+  - control: "A.6.7"
+    rationale: "Remote-working policy adjacencies"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1
