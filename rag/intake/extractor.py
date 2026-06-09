@@ -379,28 +379,46 @@ _MIN_EVIDENCE_LEN = 40
 _DROP_CONFIDENCES = {"low"}
 
 
+_GROUNDING_PUNCT_RE = re.compile(r"[^\w\s]")
+
+
+def _ground_normalize(s: str) -> str:
+    """Normalise for grounding match: lowercase, strip punctuation,
+    collapse whitespace. Punctuation handling is critical — the LLM
+    routinely cites bullet lists with semicolons inserted between items,
+    but the source text (paragraph walk OR mammoth markdown) renders
+    those bullets with dashes / hyphens / commas / no separator at all.
+    Word content + order is what makes a citation grounded; punctuation
+    is noise that varies across renderings."""
+    s = s.lower()
+    s = _GROUNDING_PUNCT_RE.sub(" ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+
+
 def _evidence_grounded(evidence: str, doc: ParsedDocument) -> bool:
     """Verbatim-quote check. The LLM is instructed to provide a quote that
-    actually appears in the document. Substring match (case-insensitive,
-    normalised whitespace) catches hallucinated quotes — a common failure
-    mode where the LLM paraphrases the doc but claims it's verbatim. We
-    use only the first 50 chars of the evidence to be lenient on minor
-    drift (the LLM sometimes elides trailing punctuation or articles).
+    actually appears in the document. Punctuation-stripped substring
+    match catches hallucinated quotes (LLM paraphrases the doc but
+    claims it's verbatim) while tolerating bullet-separator drift (LLM
+    inserts ';' between bullets that source renders with '-' or
+    newlines), markdown escapes (`\\(`, `\\-`), and case differences.
 
-    Check against BOTH `doc.full_text` AND `doc.markdown` — the LLM is fed
-    one or the other depending on the extraction path, and they can
-    diverge significantly for docs where mammoth captures lists/tables/
-    list items that the paragraph walker drops. Citing from markdown
-    content invisible to full_text used to flag as hallucinated; now it
-    grounds correctly."""
+    We use only the first 50 chars of the evidence (post-normalisation)
+    to be lenient on trailing punctuation/articles. Check against BOTH
+    `doc.full_text` AND `doc.markdown` because the LLM is fed one or
+    the other depending on extraction path, and they diverge for docs
+    where mammoth captures list/table content the paragraph walker
+    drops."""
     if not evidence or len(evidence) < _MIN_EVIDENCE_LEN:
         return False
-    needle = re.sub(r"\s+", " ", evidence[:50].lower()).strip()
+    needle = _ground_normalize(evidence)[:50]
+    if not needle:
+        return False
     for source in (doc.full_text, doc.markdown):
         if not source:
             continue
-        haystack = re.sub(r"\s+", " ", source.lower())
-        if needle in haystack:
+        if needle in _ground_normalize(source):
             return True
     # Neither source has the quote. If both are missing entirely, the
     # extraction path isn't keeping text — be lenient (tenant can still
