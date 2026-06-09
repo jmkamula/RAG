@@ -58,50 +58,68 @@ def normalize_iso27001(ref: str) -> Optional[str]:
     Normalize an ISO 27001 control ref to canonical form.
     Returns None if not recognizable as ISO 27001.
 
+    ISMS clauses (4-10) collide with Annex A categories (A.5-A.8) at
+    the 2-dot level — e.g. "8.2" is both ISMS clause 8.2 (Information
+    security risk assessment) AND Annex A.8.2 (Privileged access
+    rights). The normalizer cannot disambiguate from format alone, so
+    it favours preservation over heuristic prefixing.
+
+    Rules:
+      - 3-dot pattern (e.g. "6.1.1", "A.6.1.1") → ISMS clause, never
+        Annex A (which is single-subclause only). Strip any A.
+        prefix.
+      - "A.5.18" (canonical Annex A) → leave alone.
+      - "5.18" (bare 2-dot) → leave alone. Callers must pass the
+        canonical form (the LLM gets canonical refs in its input list
+        from doc_mappings; workbook readers must use the curated
+        canonical form). Auto-prefixing was the source of a data-
+        corruption bug where ISMS clauses 5.x/6.x/7.x/8.x landed in
+        Annex A storage.
+      - "9.2", "10.1" → leave alone (unambiguous, ISMS body).
+      - "A5.18" / "A 5.18" (no dot after A) → normalise to "A.5.18".
+
     Examples:
-      '5.18'   → 'A.5.18'
-      'A.5.18' → 'A.5.18'
-      '9.2'    → '9.2'   (main clause, not Annex A)
-      'A5.18'  → 'A.5.18'
+      '5.18'    → '5.18'        (bare, no auto-prefix)
+      'A.5.18'  → 'A.5.18'      (canonical Annex A)
+      '6.1.1'   → '6.1.1'       (ISMS clause, 3-dot)
+      'A.6.1.1' → '6.1.1'       (3-dot can't be Annex A, strip prefix)
+      'A5.18'   → 'A.5.18'      (canonicalise spacing)
+      '9.2'     → '9.2'         (ISMS body)
     """
     if not ref:
         return None
 
     ref = ref.strip()
 
-    # Already in canonical Annex A format
+    # 3-dot pattern: always ISMS clause, never Annex A. Strip any A. prefix.
+    m3 = re.match(r'^([Aa]\.?\s*)?(\d+\.\d+\.\d+)$', ref)
+    if m3:
+        return m3.group(2)
+
+    # Already canonical Annex A "A.x.y"
     if re.match(r'^A\.\d+\.\d+$', ref):
         return ref
 
-    # Already a main clause like "9.2"
-    if re.match(r'^(4|5|6|7|8|9|10)\.\d+$', ref):
-        clause, sub = ref.split('.')
-        # Main clauses have small sub-numbers (1-5 typically)
-        # Annex A has larger sub-numbers (5.18 = control 18 in section 5)
-        if int(sub) <= 10 and clause in ('4', '6', '7', '9', '10'):
-            return ref  # main clause format preserved
-        # Otherwise it's likely an Annex A ref without prefix
-        return f"A.{ref}"
+    # Bare 2-dot — leave alone. Callers must canonicalise upstream.
+    if re.match(r'^\d+\.\d+$', ref):
+        return ref
 
-    # Strip A. prefix variations: "A5.18", "A 5.18", "A.5.18"
-    cleaned = re.sub(r'^[Aa]\.?\s*', '', ref)
-    if re.match(r'^\d+\.\d+$', cleaned):
-        clause, sub = cleaned.split('.')
-        if clause in ('5', '6', '7', '8'):
-            return f"A.{cleaned}"
-        return cleaned
+    # "A5.18" / "A 5.18" → "A.5.18" (canonicalise spacing only — the
+    # caller explicitly wrote A-prefix, just clean the format).
+    m_a = re.match(r'^[Aa]\.?\s*(\d+\.\d+)$', ref)
+    if m_a:
+        return f"A.{m_a.group(1)}"
 
-    # Try full pattern match
-    m = _ISO27001_PATTERN.match(ref)
-    if m:
-        clause = m.group(1)
-        sub    = m.group(2)
-        subsub = m.group(3)
-        base   = f"{clause}.{sub}"
+    # Full multi-part match (e.g. "5.18.2"). Strip A. prefix if any —
+    # multi-part is always ISMS body.
+    m_full = _ISO27001_PATTERN.match(ref)
+    if m_full:
+        clause = m_full.group(1)
+        sub    = m_full.group(2)
+        subsub = m_full.group(3)
+        base = f"{clause}.{sub}"
         if subsub:
             base = f"{base}.{subsub}"
-        if clause in ('5', '6', '7', '8'):
-            return f"A.{base}"
         return base
 
     return None

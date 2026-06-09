@@ -427,6 +427,7 @@ def _parse_llm_response(
     dropped_low_conf = 0
     dropped_short_quote = 0
     dropped_hallucinated = 0
+    dropped_unknown_ref = 0
     findings = []
     for item in items:
         ref     = item.get("control_ref", "").strip()
@@ -435,15 +436,28 @@ def _parse_llm_response(
         if not ref or finding == "not_addressed":
             continue
 
-        # Normalize ref
-        for std in (doc.standard_ids or ["ISO27001:2022"]):
-            normalized = normalize_ref(ref, std)
-            if normalized:
-                ref = normalized
-                standard_id = std
-                break
-        else:
+        # Direct match against the candidate list first. If the LLM echoed
+        # back a ref from our input list, accept it as-is — that's the
+        # canonical form. This avoids the normalize_iso27001 ambiguity
+        # for 2-dot refs (ISMS clause 8.2 vs Annex A.8.2).
+        standard_id = None
+        if ref in valid_refs:
             standard_id = doc.standard_ids[0] if doc.standard_ids else "ISO27001:2022"
+        else:
+            # Try normalize as fallback (handles LLM rephrasing of A5.18 → A.5.18
+            # or ISMS-clause-A. corruption that earlier outputs produced).
+            for std in (doc.standard_ids or ["ISO27001:2022"]):
+                normalized = normalize_ref(ref, std)
+                if normalized and normalized in valid_refs:
+                    ref = normalized
+                    standard_id = std
+                    break
+
+        if standard_id is None:
+            # LLM returned a ref that isn't in our candidate list. Drop — we
+            # didn't ask about this control, so the binding is unverified.
+            dropped_unknown_ref += 1
+            continue
 
         if finding not in ("Comply", "OFI", "NC"):
             continue
@@ -478,13 +492,13 @@ def _parse_llm_response(
             chunk_id        = chunk_id,
         ))
 
-    if dropped_low_conf or dropped_short_quote or dropped_hallucinated:
+    if dropped_low_conf or dropped_short_quote or dropped_hallucinated or dropped_unknown_ref:
         logger.info(
             "extractor filters dropped %d findings on chunk %s (doc=%s): "
-            "low_conf=%d short_quote=%d hallucinated_quote=%d",
-            dropped_low_conf + dropped_short_quote + dropped_hallucinated,
+            "low_conf=%d short_quote=%d hallucinated_quote=%d unknown_ref=%d",
+            dropped_low_conf + dropped_short_quote + dropped_hallucinated + dropped_unknown_ref,
             chunk_id, doc.original_name,
-            dropped_low_conf, dropped_short_quote, dropped_hallucinated,
+            dropped_low_conf, dropped_short_quote, dropped_hallucinated, dropped_unknown_ref,
         )
 
     # Enforce 15-finding cap per chunk (the LLM is also prompted to cap;
