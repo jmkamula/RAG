@@ -56,8 +56,32 @@ Three coordinated surface changes ship alongside the rule reversal:
 - 8 eval cases (Art.6 / Art.16 / Art.17 / Art.24 / Art.25 / Art.32 / 6.1.2 / A.5.9) updated to expect "engine concurs with live at 'NC'" + (where applicable) "partial evidence". Art.32 omits the "partial evidence" assertion because pure DerivedSpec cascade loses the partial signal under the new rule (deps roll up to NC, child_progress=False at the parent).
 - 196/198 PASS (baseline; #2 + #25 known-stale).
 
+## 2026-06-09 follow-up: user re-confirmed the strict rule
+
+After uploading "Information Security and Data Management Process.docx"
+and approving all 18 findings (7 ISO + 11 GDPR xfw), user observed
+that NO Stage-2 entries appeared. Diagnosis: engine recomputed all 18
+controls, every verdict matched live (NC=NC or OFI=OFI), so engine-
+agreement suppression skipped writing Stage-2 entries. The compose
+rule was working as designed — the doc's high-level claims ("Implement
+RBAC", "incidents trigger response") count as PARTIAL evidence on
+their leaves but don't fully satisfy any leaf, so the strict rule
+keeps NC at NC and OFI at OFI.
+
+User direction: **"leave it as-is"** — strict rule reconfirmed. Doc-
+upload approvals that yield only partial-leaf evidence are a known,
+acceptable outcome under the rule. Stage-2 movement requires evidence
+that fills ALL MUSTs on at least one leaf.
+
+This is the cost side of the rule's benefit: it keeps the OFI
+population honest (no inflation from sprinkled partials) at the cost
+of needing more substantive evidence per upload to move the verdict.
+
 ## Related
 
 - [[engine-nc-at-zero-satisfied]] — the NC-at-zero rule this works alongside.
 - [[engine-agreement-suppression]] — concurrence path; the chat surface enhancement here builds on the writer's 'active' PA write from that fix.
 - [[leaf-evaluators-phase2-evidence-type-drop]] — the prerequisite that lets workbook findings reach the leaf evaluator and provide `items_recognised`.
+- [[stage1-engine-kick-after-batch]] — the auto-sweep that fires after
+  Stage-1 approval; surfaces engine concurrence (and thus the
+  "no Stage-2 movement" outcome) immediately rather than on next manual sweep.
