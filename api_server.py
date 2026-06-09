@@ -733,12 +733,15 @@ async def upload_document(
     try:
         set_session(conn, key_info.tenant_id, key_info.user_id)
         with conn.cursor() as cur:
+            # 'failed' rows are excluded too — a crashed pipeline produces no
+            # findings, so the same bytes should be re-uploadable once the bug
+            # is fixed. Predicate mirrored in schema_v33 unique index.
             cur.execute("""
                 SELECT id, filename, uploaded_at, extraction_status
                   FROM document_uploads
                  WHERE tenant_id = %s::uuid
                    AND sha256    = %s
-                   AND extraction_status <> 'duplicate'
+                   AND extraction_status NOT IN ('duplicate', 'failed')
                  LIMIT 1
             """, (key_info.tenant_id, file_sha256))
             existing = cur.fetchone()
