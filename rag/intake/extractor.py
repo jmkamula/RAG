@@ -643,7 +643,7 @@ def _merge_small_sections(sections: list[RawSection], min_tokens: int = 200) -> 
     Merge sections that are too small to assess independently.
     Small sections are appended to the next section.
     """
-    from intake.readers import CHARS_PER_TOKEN
+    from rag.intake.readers import CHARS_PER_TOKEN
     merged = []
     buffer = []
 
