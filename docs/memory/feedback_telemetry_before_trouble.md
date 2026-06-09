@@ -36,6 +36,31 @@ the Risk-Integrated doc was uploaded, the under-extraction would
 have flagged on the first run rather than after I noticed it
 manually.
 
+## Proof points — telemetry caught real bugs same day
+
+The 2026-06-09 schema_v35 quality endpoint caught two extractor
+bugs in production within hours of shipping, without manual log
+inspection:
+
+1. **Business Continuity and Disruption Response Plan.docx (red)**
+   — 0 findings / 2 hallucinated. Red flag pointed straight at the
+   grounding check using `doc.full_text` only when the LLM was fed
+   `doc.markdown`. Fix: `_evidence_grounded` checks both sources
+   (commit f5a4f95). Then yellow on the same doc (1 finding /
+   2 hallucinated) → `_evidence_grounded` punctuation-normalises
+   before substring match (commit 64cdcc8). Doc went 0 → 3 findings.
+
+2. **HR Security Policy.docx (yellow)** — 9 findings / 50
+   candidates = 18% yield. Yellow flag pointed at the union-of-
+   matches inflating the denominator. Fix: schema_v36 +
+   `primary_candidate_controls` from the top-confidence
+   doc_mappings match; only count the umbrella's tight target
+   list (commit b248a2b). Also surfaced a missing umbrella YAML
+   for HR-shape docs (commit 97e3a93).
+
+Both bugs would have been silent before telemetry — the chat
+surface said "completed". They flagged automatically afterwards.
+
 ## How to apply
 
 When designing or modifying a pipeline stage:
