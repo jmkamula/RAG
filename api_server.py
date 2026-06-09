@@ -2605,9 +2605,19 @@ _WRITE_KEYWORDS = (
 
 def _extraction_quality_flag(row: dict) -> tuple[str, str]:
     """Compute a red/yellow/green flag + one-line reason for an extract
-    trace_log row. Returns (flag, reason)."""
+    trace_log row. Returns (flag, reason).
+
+    Yield ratio uses `primary_candidate_controls` (schema_v36) — the
+    top-confidence doc_mappings match's target list — NOT the union.
+    Falls back to `candidate_controls` when primary isn't populated
+    (older rows pre-v36). The union still records what reached the
+    LLM for cost/perf tracking; it's just not the right denominator
+    for "did extraction find what it should have found"."""
     findings = row.get("findings_kept") or 0
-    candidates = row.get("candidate_controls") or 0
+    union_candidates = row.get("candidate_controls") or 0
+    primary_candidates = row.get("primary_candidate_controls")
+    # Use primary when available; otherwise fall back to union.
+    candidates = primary_candidates if primary_candidates is not None else union_candidates
     halluc = row.get("dropped_hallucinated") or 0
     md_chars = row.get("markdown_chars") or 0
     para_chars = row.get("paragraph_chars") or 0
@@ -2650,7 +2660,7 @@ async def admin_uploads_quality(
                     itl.upload_id, itl.filename, itl.traced_at,
                     du.extraction_status,
                     itl.llm_calls, itl.findings_raw, itl.findings_kept,
-                    itl.candidate_controls,
+                    itl.candidate_controls, itl.primary_candidate_controls,
                     itl.dropped_low_conf, itl.dropped_short_quote,
                     itl.dropped_hallucinated, itl.dropped_unknown_ref,
                     itl.markdown_chars, itl.paragraph_chars,
@@ -2682,6 +2692,7 @@ async def admin_uploads_quality(
                 "quality_reason":     reason,
                 "llm_calls":          r["llm_calls"],
                 "candidate_controls": r["candidate_controls"],
+                "primary_candidate_controls": r["primary_candidate_controls"],
                 "findings_kept":      r["findings_kept"],
                 "drops": {
                     "low_conf":         r["dropped_low_conf"],

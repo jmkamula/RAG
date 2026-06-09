@@ -115,6 +115,8 @@ class IntakeTracer:
             "dropped_low_conf", "dropped_short_quote", "dropped_hallucinated",
             "dropped_unknown_ref",
             "markdown_chars", "paragraph_chars", "candidate_controls",
+            # schema_v36 — tight scope from top-confidence doc_mappings match
+            "primary_candidate_controls",
         }
         for k, v in metrics.items():
             if k in allowed:
@@ -365,6 +367,7 @@ class DocumentPipeline:
                 markdown_chars       = doc.extraction_metrics.get("markdown_chars"),
                 paragraph_chars      = doc.extraction_metrics.get("paragraph_chars"),
                 candidate_controls   = doc.extraction_metrics.get("candidate_controls"),
+                primary_candidate_controls = doc.extraction_metrics.get("primary_candidate_controls"),
             )
 
             logger.info(f"Extracted {len(findings)} findings from {file_name}")

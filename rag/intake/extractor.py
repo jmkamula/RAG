@@ -608,6 +608,17 @@ def _scope_controls_via_doc_mappings(
     # filtered to controls that exist in the curated set; we just narrow.
     scoped = [c for c in controls if c.get("ref") in target_ctrls]
 
+    # Primary candidates = the top-confidence match's target list. Used as
+    # the yield-ratio denominator in the quality flag (schema_v36) — much
+    # tighter than the union, which inflates with every 0.6-confidence
+    # scaffold that fingerprinted to anything related. A doc whose
+    # umbrella match has 6 leaves and finds 5 is healthy regardless of
+    # how many tail scaffolds also matched.
+    top = max(proposals, key=lambda p: p.confidence)
+    primary_ctrls = set(top.target_controls or [])
+    primary_scoped = [c for c in controls if c.get("ref") in primary_ctrls]
+    doc.extraction_metrics["primary_candidate_controls"] = len(primary_scoped)
+
     if proposals:
         mapping_summary = ", ".join(
             f"{p.mapping_id}({p.confidence})" for p in proposals
