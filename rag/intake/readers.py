@@ -263,6 +263,23 @@ def _read_docx(file_path: str, file_name: str) -> ParsedDocument:
             level      = current_level,
         ))
 
+    # Table-heavy doc rescue: docx tables don't appear in
+    # `doc.paragraphs`, so the paragraph walker above misses them
+    # entirely. Mammoth's markdown stream captures everything (tables
+    # + lists + headings). When paragraph-walk content is small
+    # relative to markdown, the doc is table-dominated — rebuild
+    # sections from markdown chunks so the section-based extractor
+    # actually sees the operative content.
+    para_chars = sum(len(s.text) for s in sections)
+    md_chars   = len(md_text or "")
+    if md_text and md_chars > max(2000, para_chars * 3):
+        sections = _chunk_markdown_to_sections(md_text)
+        logger.info(
+            f"Rebuilt sections from markdown for {file_name}: "
+            f"paragraph_chars={para_chars} md_chars={md_chars} "
+            f"-> {len(sections)} chunks (table-heavy doc rescue)"
+        )
+
     return ParsedDocument(
         source_file   = file_path,
         file_type     = "docx",
@@ -273,6 +290,70 @@ def _read_docx(file_path: str, file_name: str) -> ParsedDocument:
         source_sha256 = src_sha,
         converter     = md_converter,
     )
+
+
+def _chunk_markdown_to_sections(
+    md: str,
+    target_chars: int = 20000,
+) -> list[RawSection]:
+    """Split markdown into synthetic sections targeting `target_chars`
+    per chunk (~5K tokens). Used as a rescue when paragraph-walk misses
+    table content.
+
+    Mammoth often emits docx tables as a single long block with no
+    `\\n\\n` separators, so we can't rely on paragraph boundaries
+    alone — split on single newlines too, and if even a single 'line'
+    is too long, hard-split it at byte boundaries. Sections carry no
+    heading because mammoth's markdown doesn't reliably emit `#`
+    syntax for docx-style headings.
+    """
+    if not md:
+        return []
+
+    # Prefer double-newline splits, then single-newline, then hard byte cuts
+    units: list[str] = []
+    for block in (md.split("\n\n") if "\n\n" in md else [md]):
+        if len(block) <= target_chars:
+            units.append(block)
+            continue
+        # Block too big — split on single newlines
+        for line in block.split("\n"):
+            if len(line) <= target_chars:
+                units.append(line)
+                continue
+            # Single line too big — hard split
+            for i in range(0, len(line), target_chars):
+                units.append(line[i:i + target_chars])
+
+    sections: list[RawSection] = []
+    buf: list[str] = []
+    buf_len = 0
+    idx = 0
+
+    def _flush():
+        nonlocal buf, buf_len, idx
+        if not buf:
+            return
+        sections.append(RawSection(
+            section_id = f"md_chunk_{idx}",
+            heading    = None,
+            text       = "\n".join(buf),
+            page_start = None,
+            page_end   = None,
+            level      = 0,
+        ))
+        idx += 1
+        buf, buf_len = [], 0
+
+    for u in units:
+        if not u.strip():
+            continue
+        buf.append(u)
+        buf_len += len(u) + 1
+        if buf_len >= target_chars:
+            _flush()
+    _flush()
+    return sections
 
 
 # =============================================================================

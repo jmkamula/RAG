@@ -606,15 +606,34 @@ def _scope_controls(controls: list[dict], doc: ParsedDocument) -> list[dict]:
     return scoped[:MAX_CONTROLS_PER_CALL * 2]   # allow up to 2 batches
 
 
+_SECTION_NARROW_THRESHOLD = 25   # only narrow if doc-level scope > 25
+
+
 def _scope_controls_to_section(
     controls: list[dict],
     section:  RawSection,
     doc:      ParsedDocument,
 ) -> list[dict]:
     """
-    Further scope controls to a specific section using heading keywords
-    and explicit refs found in the section text.
+    Further scope controls to a specific section. Narrowing is
+    SUBTRACTIVE — pick a subset of `controls` to send to the LLM —
+    so it's only safe when the doc-level scope is wide enough that
+    each section won't need the whole list anyway.
+
+    When the caller has already narrowed via doc_mappings (~6-15
+    controls), per-section narrowing only discards legitimate
+    candidates the LLM could find evidence for. The
+    _SECTION_NARROW_THRESHOLD gate skips narrowing in that case;
+    the caller's doc-level scope is used per section. The LLM's
+    40-char verbatim-quote bar + post-process filters handle false
+    positives.
+
+    For pre-doc_mappings flows (large `controls` lists from
+    `_scope_controls`), the original narrowing logic still applies.
     """
+    if len(controls) <= _SECTION_NARROW_THRESHOLD:
+        return controls
+
     # Extract refs explicitly mentioned in this section
     section_refs = set()
     for std in (doc.standard_ids or ["ISO27001:2022"]):
