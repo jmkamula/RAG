@@ -793,6 +793,17 @@ async def upload_document(
     try:
         set_session(conn, key_info.tenant_id, key_info.user_id)
         with conn.cursor() as cur:
+            # Cascade-on-success cleanup: clear prior 'failed'/'duplicate'
+            # rows for this exact SHA so the successful retry doesn't leave
+            # audit-log noise. Same txn as the INSERT below — if anything
+            # raises before commit, the prior row stays intact.
+            cur.execute("""
+                DELETE FROM document_uploads
+                 WHERE tenant_id = %s::uuid
+                   AND sha256    = %s
+                   AND extraction_status IN ('failed', 'duplicate')
+            """, (key_info.tenant_id, file_sha256))
+
             cur.execute("""
                 SELECT series_id, MAX(version_no)
                   FROM document_uploads
