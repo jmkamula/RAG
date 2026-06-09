@@ -189,10 +189,16 @@ def _extract_sections(
         if not section.text.strip():
             continue
 
-        # Scope controls to this section using heading keywords + explicit refs
+        # Scope controls to this section using heading keywords + explicit
+        # refs. When the section gives no signal, fall back to the doc-level
+        # scope — `controls` here is already pre-filtered by doc_mappings,
+        # so it's the tight target set, not the universe. Skipping the
+        # section entirely (the prior behaviour) discards real evidence in
+        # meta-policy docs where most section headings don't match the
+        # small keyword list (e.g. "Purpose", "Scope", "Roles", "Review").
         section_controls = _scope_controls_to_section(controls, section, doc)
         if not section_controls:
-            continue
+            section_controls = controls
 
         chunk_id = section.section_id
         text     = doc_context + f"\n\nSection: {section.heading or 'Untitled'}\n\n" + section.text
