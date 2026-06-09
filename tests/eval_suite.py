@@ -38,6 +38,13 @@ class EvalCase:
     must_not_contain: list = field(default_factory=list)
     min_findings:     int  = 0
     notes:            str  = ""
+    # When set, applies the named shape validator instead of literal-string
+    # `must_contain`. Use for state-sensitive queries where the chat surface
+    # cycles through valid states as the tenant acts on the control
+    # (pending → approved → re-proposed, etc.) and strict-string ratcheting
+    # is wasteful. Currently supports: "stage2".
+    # See [[feedback-eval-with-each-feature]] §"Stage-2 ratchet-fatigue".
+    shape:            Optional[str] = None
 
 
 @dataclass
@@ -100,7 +107,8 @@ EVAL_CASES = [
         query="pending engine verdict for Art.46",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "sccs", "safeguards", "profile_fact"],
         expected_refs=["Art.46"], expected_type="posture_check",
-        must_contain=["Art.46", "already approved", "'OFI'"],  # 2026-06-09 PM: Stage-2 OFI approval landed during the doc-extraction work session.
+        shape="stage2",  # ratcheted to shape validator 2026-06-09 to stop state-shift fatigue
+        must_contain=[],
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.46 (Appropriate safeguards) — op_process 4-leaf, profile_fact (NEW). 2021/914 SCCs modules + TIA + supplementary measures (EDPB 01/2020) + enforceable rights verification.",
@@ -438,7 +446,8 @@ EVAL_CASES = [
         query="pending engine verdict for Art.18",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "restriction"],
         expected_refs=["Art.18"], expected_type="posture_check",
-        must_contain=["Art.18", "already approved", "'OFI'"],  # 2026-06-09 PM: Stage-2 OFI approval landed; flipped from "engine proposes" (06-08) to "already approved" (06-09).
+        shape="stage2",  # ratcheted to shape validator 2026-06-09 to stop state-shift fatigue
+        must_contain=[],
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.18 (Restriction) — op_process 4-leaf (NEW): restriction_procedure + restriction_register + applicable_grounds_scope + program_review (365d). Art.18.1 four grounds (a-d) catalogued in scope leaf; Art.18.2 'storage-only' exceptions enforced in MUST.",
@@ -471,7 +480,8 @@ EVAL_CASES = [
         query="pending engine verdict for Art.21",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "objection"],
         expected_refs=["Art.21"], expected_type="posture_check",
-        must_contain=["Art.21", "already approved", "'OFI'"],  # 2026-06-09 PM: Stage-2 OFI approval landed; flipped from "engine proposes" (06-08) to "already approved" (06-09).
+        shape="stage2",  # ratcheted to shape validator 2026-06-09 to stop state-shift fatigue
+        must_contain=[],
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks Art.21 (Objection) — op_process 4-leaf (NEW): objection_procedure + objection_register + applicable_basis_scope + program_review (365d). Splits direct-marketing absolute (Art.21.2-3) vs legitimate-interests balancing (Art.21.1); Art.21.4 explicit-notice MUST enforced.",
@@ -1530,7 +1540,8 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "calibration"],
         expected_refs=["A.8.2"],
         expected_type="posture_check",
-        must_contain=["A.8.2", "already approved", "'OFI'"],  # 2026-06-09 PM: Stage-2 OFI approval landed; flipped from "engine proposes" (06-08) to "already approved" (06-09).
+        shape="stage2",  # ratcheted to shape validator 2026-06-09 to stop state-shift fatigue
+        must_contain=[],
         must_not_contain=[
             # Pre-promotion the single-leaf spec would have produced this:
             "0/1 children satisfied",
@@ -1867,7 +1878,8 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process"],
         expected_refs=["A.5.19"],
         expected_type="posture_check",
-        must_contain=["A.5.19", "already approved", "'OFI'"],  # 2026-06-09 PM: Stage-2 OFI approval landed during the doc-extraction work session.
+        shape="stage2",  # ratcheted to shape validator 2026-06-09 to stop state-shift fatigue
+        must_contain=[],
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -1964,7 +1976,8 @@ EVAL_CASES = [
         # 55 first introduced for A.5.15. A.5.23 is also profile_fact-
         # triggered (only fires for cloud-using tenants), so this case
         # additionally locks the profile_fact + partial-evidence combination.
-        must_contain=["A.5.23", "already approved", "'OFI'"],  # 2026-06-09 PM: Stage-2 OFI approval landed during the doc-extraction work session. Was 'NC' on 06-08 post over-attribution cleanup; re-flipped to OFI after fresh Risk-Mgmt extractions provided partial-evidence on the cloud-services policy leaf and the user explicitly approved the OFI Stage-2 proposal.
+        shape="stage2",  # ratcheted to shape validator 2026-06-09 to stop state-shift fatigue
+        must_contain=[],
         must_not_contain=[
             "0/4 children satisfied",
             "0/1 children satisfied",
@@ -2301,7 +2314,8 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "identity_management"],
         expected_refs=["A.5.16"],
         expected_type="posture_check",
-        must_contain=["A.5.16", "already approved", "'OFI'"],  # 2026-06-09 PM: Stage-2 OFI approval landed; flipped from "engine proposes" (06-08) to "already approved" (06-09).
+        shape="stage2",  # ratcheted to shape validator 2026-06-09 to stop state-shift fatigue
+        must_contain=[],
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -2402,7 +2416,8 @@ EVAL_CASES = [
         query="pending engine verdict for A.8.5",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "technical_control", "secure_auth"],
         expected_refs=["A.8.5"], expected_type="posture_check",
-        must_contain=["A.8.5", "already approved", "'OFI'"],  # 2026-06-09 PM: Stage-2 OFI approval landed; flipped from "engine proposes" (06-08) to "already approved" (06-09).
+        shape="stage2",  # ratcheted to shape validator 2026-06-09 to stop state-shift fatigue
+        must_contain=[],
         must_not_contain=["0/1 children satisfied", "no curated multi-leaf",
                           "I need more information", "could you clarify"],
         notes="Locks A.8.5 (Secure authentication) — technical_control 4-leaf: baseline + procedure + auth_log + review (180d). MFA universal/privileged + impossible-travel detection promoted to MUST.",
@@ -3477,7 +3492,8 @@ EVAL_CASES = [
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "authentication"],
         expected_refs=["A.5.17"],
         expected_type="posture_check",
-        must_contain=["A.5.17", "already approved", "'OFI'"],  # 2026-06-09 PM: Stage-2 OFI approval landed; flipped from "engine proposes" (06-08) to "already approved" (06-09).
+        shape="stage2",  # ratcheted to shape validator 2026-06-09 to stop state-shift fatigue
+        must_contain=[],
         must_not_contain=[
             "0/1 children satisfied",
             "no curated multi-leaf",
@@ -3597,6 +3613,95 @@ class EvalPipeline:
 # Test runner
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# Shape validators — for state-sensitive cases where the chat surface
+# cycles through several valid states as the tenant acts. Strict-string
+# must_contain ratchets on every tenant action; shape validators accept
+# ANY valid state and verify internal consistency instead.
+# ---------------------------------------------------------------------------
+
+_STAGE2_FINDING_RE      = re.compile(r"\b(NC|OFI|Comply|N/A)\b")
+_STAGE2_PROGRESS_RE     = re.compile(r"(\d+)\s*/\s*(\d+)\s+children satisfied", re.IGNORECASE)
+_STAGE2_FORBIDDEN_PHRASES = (
+    "0/1 children satisfied",      # single-leaf spec — multi-leaf curation incomplete
+    "no curated multi-leaf",       # spec not loaded
+    "I need more information",     # classifier didn't route
+    "could you clarify",
+)
+
+
+def _check_stage2_shape(answer: str, expected_refs: list) -> tuple[list[str], list[str]]:
+    """Validate a Stage-2 'pending engine verdict for X' response shape.
+
+    Accepts any of the three valid post-engine states:
+      - pending      : 'engine proposes' + finding label + 'N/M children satisfied'
+      - approved     : 'already approved' + 'Live finding' + finding label
+      - concurrence  : 'engine concurs with live' + finding label
+
+    Common requirements:
+      - At least one expected_ref appears in the answer
+      - A finding label (NC/OFI/Comply/N/A) appears
+      - For 'pending' shape: N/M satisfied with M >= 2 (multi-leaf;
+        '0/1' is a regression signal — single-leaf spec or pre-promotion)
+      - None of _STAGE2_FORBIDDEN_PHRASES appear (clarification loops,
+        no-spec errors, single-leaf shapes)
+
+    Returns (passed, failures) — same shape as the rest of run_case.
+    """
+    passed: list[str] = []
+    failures: list[str] = []
+
+    # Ref present
+    if expected_refs:
+        ref = expected_refs[0]
+        if ref in answer:
+            passed.append(f"stage2_shape: ref {ref!r} present")
+        else:
+            failures.append(f"stage2_shape: ref {ref!r} not in answer")
+
+    # State detection
+    al = answer.lower()
+    if "engine proposes" in al:
+        state = "pending"
+    elif "already approved" in al:
+        state = "approved"
+    elif "engine concurs with live" in al:
+        state = "concurrence"
+    else:
+        failures.append("stage2_shape: no recognised state phrase "
+                        "(engine proposes | already approved | engine concurs with live)")
+        return passed, failures
+    passed.append(f"stage2_shape: state={state}")
+
+    # Finding label
+    if _STAGE2_FINDING_RE.search(answer):
+        passed.append("stage2_shape: finding label present")
+    else:
+        failures.append("stage2_shape: no finding label (NC/OFI/Comply/N/A)")
+
+    # Pending: progress shape must be multi-leaf (N/M with M >= 2)
+    if state == "pending":
+        m = _STAGE2_PROGRESS_RE.search(answer)
+        if not m:
+            failures.append("stage2_shape: pending state but no 'N/M children satisfied'")
+        else:
+            n, total = int(m.group(1)), int(m.group(2))
+            if total < 2:
+                failures.append(
+                    f"stage2_shape: progress {n}/{total} — single-leaf, "
+                    "multi-leaf curation regressed?"
+                )
+            else:
+                passed.append(f"stage2_shape: progress {n}/{total}")
+
+    # Forbidden regression signals
+    for forbidden in _STAGE2_FORBIDDEN_PHRASES:
+        if forbidden.lower() in al:
+            failures.append(f"stage2_shape: forbidden regression {forbidden!r}")
+
+    return passed, failures
+
+
 def run_case(case: EvalCase, pipeline: EvalPipeline) -> EvalResult:
     t0 = time.time()
     try:
@@ -3629,11 +3734,19 @@ def run_case(case: EvalCase, pipeline: EvalPipeline) -> EvalResult:
         else:
             passed.append(f"ref_absent: {ref}")
 
-    for phrase in case.must_contain:
-        if re.search(re.escape(phrase), answer, re.IGNORECASE):
-            passed.append(f"contains: {phrase!r}")
-        else:
-            failures.append(f"MISSING required phrase: {phrase!r}")
+    # Shape validators replace must_contain for state-sensitive cases.
+    # When case.shape is set, must_contain is skipped — the shape check
+    # owns the assertion. must_not_contain still applies (defense in depth).
+    if case.shape == "stage2":
+        s_passed, s_failures = _check_stage2_shape(answer, case.expected_refs)
+        passed.extend(s_passed)
+        failures.extend(s_failures)
+    else:
+        for phrase in case.must_contain:
+            if re.search(re.escape(phrase), answer, re.IGNORECASE):
+                passed.append(f"contains: {phrase!r}")
+            else:
+                failures.append(f"MISSING required phrase: {phrase!r}")
 
     for phrase in case.must_not_contain:
         if re.search(re.escape(phrase), answer, re.IGNORECASE):
