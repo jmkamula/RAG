@@ -1113,21 +1113,66 @@ class LLMAnswer:
         # something to ground against. The LLM treats this as background
         # context — NOT as new evidence to cite. See [[conversational-
         # context-routing-followup]].
+        #
+        # Two failure modes the prompt explicitly guards against
+        # (smoke test 2097d01 exposed both):
+        #
+        # (a) LLM inverts the prior status (says "registered but NOT
+        #     uploaded" about a doc the prior turn just confirmed uploaded).
+        #     The status_constraint block pins the fact verbatim.
+        #
+        # (b) Deictic query with NO last_entity (e.g. inventory turn
+        #     followed by "what about the policy?"). The LLM invents a
+        #     referent and dumps unrelated content. The
+        #     deictic_clarify_block tells it to ask instead.
+        import re as _re
+        _DEICTIC_RE = _re.compile(
+            r"\b(this|that|it|those|these|what about|how about|tell me more|is it|are they|the (policy|plan|procedure|register|document|doc))\b",
+            _re.IGNORECASE,
+        )
+        is_deictic = bool(_DEICTIC_RE.search(query))
+
         prior_turn_block = ""
         if last_entity and last_entity.get("title"):
             ref_s   = f" ({last_entity['ref']})" if last_entity.get("ref") else ""
             type_s  = f" [{last_entity['doc_type']}]" if last_entity.get("doc_type") else ""
-            stat_s  = ""
-            if last_entity.get("status") == "registered_not_uploaded":
-                stat_s = " — registered but NOT uploaded"
+            # Status preservation: pin the upload status the prior short-
+            # circuit confirmed. The LLM must NOT invert this fact.
+            status_constraint = ""
+            if last_entity.get("status") == "uploaded":
+                uploaded_at = last_entity.get("uploaded_at") or ""
+                date_s = f" on {uploaded_at}" if uploaded_at else ""
+                status_constraint = (
+                    f" The doc IS UPLOADED{date_s} — this is a confirmed fact "
+                    f"from the previous turn. Do NOT say it is 'registered "
+                    f"but not uploaded' or any contradicting status."
+                )
+            elif last_entity.get("status") == "registered_not_uploaded":
+                status_constraint = (
+                    f" The doc is REGISTERED-BUT-NOT-UPLOADED — confirmed "
+                    f"from the previous turn. Do NOT invent an upload date."
+                )
             prior_turn_block = (
                 f"\nPRIOR-TURN CONTEXT: in the previous turn the user was "
-                f"asking about \"{last_entity['title']}\"{ref_s}{type_s}{stat_s}. "
+                f"asking about \"{last_entity['title']}\"{ref_s}{type_s}.{status_constraint} "
                 f"If the current query uses deictic words (\"this\", \"that\", "
-                f"\"the X document\", \"what about Y\") that don't resolve "
-                f"against the COMPLIANCE NODES below, you may reference this "
-                f"prior entity to clarify — don't claim it as compliance "
-                f"evidence.\n"
+                f"\"the X document\", \"what about Y\", \"is it ...?\", \"tell "
+                f"me more\") that don't resolve against the COMPLIANCE NODES "
+                f"below, you may reference this prior entity to clarify — "
+                f"don't claim it as new compliance evidence.\n"
+            )
+        elif is_deictic:
+            # Deictic query with no carried entity — almost always means
+            # the prior turn was an inventory list. Asking is safer than
+            # inventing a referent.
+            prior_turn_block = (
+                f"\nDEICTIC QUERY WITHOUT CONTEXT: the user's query uses "
+                f"deictic words (e.g. 'this', 'it', 'the policy', 'what "
+                f"about X', 'tell me more') but no specific entity was "
+                f"identified in the prior turn. If the COMPLIANCE NODES "
+                f"below clearly answer the question, use them. Otherwise, "
+                f"briefly ask which specific document or control the user "
+                f"means rather than inventing a referent.\n"
             )
 
         user = f"""QUERY: {query}{incident_header}{prior_turn_block}
