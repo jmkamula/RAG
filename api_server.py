@@ -83,6 +83,56 @@ SUPPORTED_EXTENSIONS = {
 # LIFESPAN — startup / shutdown
 # =============================================================================
 
+class _PrePingPool:
+    """Wraps psycopg2.pool.ThreadedConnectionPool with a per-checkout
+    `SELECT 1` ping. Postgres reaps idle TCP connections (cloud
+    middleboxes, idle_in_transaction_session_timeout, etc.); the
+    base pool happily returns them. First query then raises
+    `OperationalError: the connection is closed`.
+
+    Pre-ping eliminates that by validating each conn before handing
+    it out. Stale conns are closed and dropped from the pool; the
+    pool refills lazily. ~1-2ms per checkout — acceptable for the
+    request volume.
+
+    Drop-in interface (getconn / putconn / closeall) so the rest of
+    the codebase uses it unchanged.
+    """
+
+    def __init__(self, minconn, maxconn, dsn):
+        self._pool = psycopg2.pool.ThreadedConnectionPool(minconn, maxconn, dsn)
+        self.maxconn = maxconn
+
+    def getconn(self, key=None):
+        last_err = None
+        # Bounded retry: in the worst case all pool conns are stale and
+        # we replace them all. The pool auto-creates new ones to refill.
+        for _ in range(max(self.maxconn, 2)):
+            conn = self._pool.getconn(key)
+            try:
+                if getattr(conn, "closed", 0):
+                    raise psycopg2.OperationalError("conn.closed is truthy")
+                with conn.cursor() as cur:
+                    cur.execute("SELECT 1")
+                return conn
+            except (psycopg2.OperationalError, psycopg2.InterfaceError) as e:
+                last_err = e
+                logger.warning(f"pg_pool: discarding stale connection ({type(e).__name__})")
+                try:
+                    self._pool.putconn(conn, close=True)
+                except Exception:
+                    pass
+        raise psycopg2.OperationalError(
+            f"pg_pool: all connections stale after retry: {last_err}"
+        )
+
+    def putconn(self, conn, key=None, close=False):
+        return self._pool.putconn(conn, key=key, close=close)
+
+    def closeall(self):
+        return self._pool.closeall()
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Initialise shared resources once at startup."""
@@ -90,12 +140,12 @@ async def lifespan(app: FastAPI):
 
     # ── Postgres connection pool ──────────────────────────────────────────────
     try:
-        app.state.pg_pool = psycopg2.pool.ThreadedConnectionPool(
+        app.state.pg_pool = _PrePingPool(
             minconn = 2,
             maxconn = 10,
             dsn     = DATABASE_URL,
         )
-        logger.info("✓ Postgres pool ready")
+        logger.info("✓ Postgres pool ready (pre-ping)")
     except Exception as e:
         logger.error(f"✗ Postgres pool failed: {e}")
         app.state.pg_pool = None
