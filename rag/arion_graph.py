@@ -300,6 +300,26 @@ def _title_match_against(query: str, items: list, title_key: str) -> list:
     return [it for _, it in ranked]
 
 
+def _control_entity(control_ref: str, title: str = "") -> dict:
+    """Build a `last_entity` dict for short-circuits that resolved a
+    specific control (acknowledge, Stage-1/2, timeline, scope_na).
+    Standard_id is inferred from the ref shape: Art.* → GDPR, else
+    ISO27001:2022. Title is optional metadata for the LLM prompt.
+
+    Used to carry the matched control across turns so deictic
+    follow-ups ("is it approved?", "tell me more about it") have a
+    referent. See [[conversational-context-routing-followup]]."""
+    if not control_ref:
+        return {}
+    standard_id = "GDPR:2016/679" if control_ref.startswith("Art.") else "ISO27001:2022"
+    return {
+        "type":        "control",
+        "ref":         control_ref,
+        "standard_id": standard_id,
+        "title":       title or control_ref,
+    }
+
+
 def _resolve_upload_entity(
     query: str,
     uploaded: list,
@@ -1055,6 +1075,7 @@ def make_retrieve_node(
                     "question_type": "posture_check",
                     "confidence":    1.0,
                     "answer_source": "postgres",
+                    "last_entity":   _control_entity(_ack_intent.control_ref),
                 }
         except Exception as _ack_exc:
             get_logger().warning("acknowledge short-circuit failed: %s", _ack_exc)
@@ -1119,6 +1140,7 @@ def make_retrieve_node(
                     "question_type": "posture_check",
                     "confidence":    1.0,
                     "answer_source": "postgres",
+                    "last_entity":   _control_entity(_s1_intent.control_ref) if _s1_intent.control_ref else {},
                 }
         except Exception as _s1_exc:
             get_logger().warning("stage1 review short-circuit failed: %s", _s1_exc)
@@ -1185,6 +1207,7 @@ def make_retrieve_node(
                     "question_type": "posture_check",
                     "confidence":    1.0,
                     "answer_source": "postgres",
+                    "last_entity":   _control_entity(_s2_intent.control_ref) if _s2_intent.control_ref else {},
                 }
         except Exception as _s2_exc:
             get_logger().warning("stage2 approval short-circuit failed: %s", _s2_exc)
@@ -1245,6 +1268,7 @@ def make_retrieve_node(
                         "question_type": "posture_check",
                         "confidence":    1.0,
                         "answer_source": "postgres+llm",
+                        "last_entity":   _control_entity(_ref),
                     }
 
         # ── Postgres short-circuit for upload status questions ─────────────

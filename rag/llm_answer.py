@@ -1131,6 +1131,16 @@ class LLMAnswer:
             _re.IGNORECASE,
         )
         is_deictic = bool(_DEICTIC_RE.search(query))
+        # "Tell me more" / "what else" / "expand" — user wants depth on the
+        # prior entity. The LLM tends to echo Q1's status summary instead
+        # of probing deeper. Pattern 3 in [[conversational-context-
+        # routing-followup]]. The nudge below triggers a deeper-answer
+        # path when this pattern is recognised AND last_entity is set.
+        _EXPAND_RE = _re.compile(
+            r"\b(tell me more|what else|expand|elaborate|more detail|dig deeper|go deeper)\b",
+            _re.IGNORECASE,
+        )
+        wants_expansion = bool(_EXPAND_RE.search(query))
 
         prior_turn_block = ""
         if last_entity and last_entity.get("title"):
@@ -1152,9 +1162,20 @@ class LLMAnswer:
                     f" The doc is REGISTERED-BUT-NOT-UPLOADED — confirmed "
                     f"from the previous turn. Do NOT invent an upload date."
                 )
+            expand_directive = ""
+            if wants_expansion:
+                expand_directive = (
+                    f" The user has asked for MORE depth on this entity "
+                    f"— do not just repeat the upload-status summary from "
+                    f"the previous turn. Surface concrete additional "
+                    f"detail from the COMPLIANCE NODES below: posture "
+                    f"findings (NC/OFI/Comply), missing checklist items, "
+                    f"related controls, or specific gap descriptions. If "
+                    f"the nodes provide nothing new, say so plainly."
+                )
             prior_turn_block = (
                 f"\nPRIOR-TURN CONTEXT: in the previous turn the user was "
-                f"asking about \"{last_entity['title']}\"{ref_s}{type_s}.{status_constraint} "
+                f"asking about \"{last_entity['title']}\"{ref_s}{type_s}.{status_constraint}{expand_directive} "
                 f"If the current query uses deictic words (\"this\", \"that\", "
                 f"\"the X document\", \"what about Y\", \"is it ...?\", \"tell "
                 f"me more\") that don't resolve against the COMPLIANCE NODES "
