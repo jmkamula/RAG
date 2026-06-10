@@ -388,6 +388,13 @@ _DROP_CONFIDENCES = {"low"}
 
 _GROUNDING_PUNCT_RE = re.compile(r"[^\w\s]")
 
+# Detects ISO 27001 / GDPR control refs in evidence quotes — `5.31`,
+# `A.5.31`, `Art.32`, etc. Used by the referential-mention demotion rule.
+# No capture groups so findall returns full matches as strings.
+_REFERENTIAL_REF_RE = re.compile(
+    r"\b[Aa]\.\d+\.\d+(?:\.\d+)?\b|\b\d+\.\d+(?:\.\d+)?\b|\bArt\.\s*\d+(?:\.\d+)?\b"
+)
+
 
 def _ground_normalize(s: str) -> str:
     """Normalise for grounding match: lowercase, strip punctuation,
@@ -521,6 +528,25 @@ def _parse_llm_response(
         if not _evidence_grounded(evidence, doc):
             dropped_hallucinated += 1
             continue
+
+        # Referential-mention demotion: if the evidence quote cites OTHER
+        # control refs but NOT the bound one, the LLM is reading a register-
+        # shape doc (compliance requirements list, control matrix, gap
+        # analysis) and treating "doc mentions control X" as implementation
+        # of X. That's not real evidence. Demote Comply → OFI so the finding
+        # still surfaces for HITL review but doesn't claim "implemented".
+        # Doesn't drop — registers ARE partial evidence of awareness.
+        if finding == "Comply":
+            other_refs_in_quote = _REFERENTIAL_REF_RE.findall(evidence)
+            if other_refs_in_quote:
+                bound_short = ref[2:] if ref.startswith("A.") else ref
+                if (ref not in evidence) and (bound_short not in other_refs_in_quote):
+                    finding = "OFI"
+                    logger.info(
+                        "referential-mention demotion: %s → OFI (quote cites %s, "
+                        "not the bound ref) on chunk %s",
+                        ref, sorted(set(other_refs_in_quote))[:3], chunk_id,
+                    )
 
         findings.append(DocumentFinding(
             upload_id       = doc.upload_id or "",

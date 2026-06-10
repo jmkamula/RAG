@@ -1,0 +1,59 @@
+# Canonical doc mapping: Compliance Requirements / Legal Register
+# → A.5.31 obligations register.
+#
+# Tenants commonly maintain a "Compliance Requirements" or
+# "Legal Register" listing all applicable legal, statutory,
+# regulatory, and contractual obligations. This umbrella binds
+# such docs to A.5.31 (Identification of legal, statutory,
+# regulatory and contractual requirements) and resists the
+# LLM's natural urge to over-bind every control the register
+# happens to mention.
+#
+# Created 2026-06-10 after a Compliance Requirements.docx upload
+# fell through to legacy fallback (50 controls) and the LLM bound
+# A.5.19/20/21/23 from referential mentions of supplier-family
+# controls in the register's content — not from actual
+# implementation evidence. The umbrella narrows scope to A.5.31
+# so the supplier-family confusion can't happen.
+
+schema_version: 1
+mapping_id: doc.iso.A_5_31.compliance_requirements_register
+
+filename_fingerprints:
+  - tokens: [compliance, requirements]
+  - tokens: [compliance, requirements, register]
+  - tokens: [compliance, requirements, policy]
+  - tokens: [legal, register]
+  - tokens: [legal, regulatory, register]
+  - tokens: [obligations, register]
+  - tokens: [statutory, register]
+  - tokens: [regulatory, requirements]
+  - tokens: [legal, requirements, register]
+
+body_fingerprints:
+  - tokens: [statutory, requirements]
+  - tokens: [contractual, requirements]
+  - tokens: [regulatory, obligations]
+  - tokens: [applicable, laws]
+  - tokens: [legal, obligations]
+
+min_body_chars: 500
+
+target_leaves:
+  - leaf_id: "req:A.5.31:obligations_register_maintenance_procedure"
+    control_ref: "A.5.31"
+    role: procedure
+  - leaf_id: "req:A.5.31:applicable_obligations_scope"
+    control_ref: "A.5.31"
+    role: scope_note
+
+cross_control_links:
+  - control: "A.18.1"
+    rationale: "Compliance obligations also feed audit / management review"
+  - control: "5.2"
+    rationale: "Compliance commitment is a top-of-program policy statement"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1
