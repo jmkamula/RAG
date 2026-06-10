@@ -12,7 +12,6 @@ mapping_id: doc.iso.5_2.information_security_policy
 
 filename_fingerprints:
   - tokens: [information, security, policy]
-  - tokens: [information, security, data, management]   # Arion convention
   - tokens: [isms, policy]
   - tokens: [isp, policy]
   - tokens: [infosec, policy]
@@ -21,6 +20,14 @@ filename_fingerprints:
   # Security Policy" filename (supplier, cloud, access, …) and triggers
   # false-positive ISP attribution. Require the "information" qualifier
   # or one of the ISP-specific abbreviations.
+  #
+  # No tenant-specific naming conventions. doc_mappings is global —
+  # tenants with unusual filenames must either rename to a standard
+  # form or fall back to per-leaf scaffolds. (A previous
+  # `[information, security, data, management]` entry was removed
+  # 2026-06-10 because it cross-fired on "ISMS Change Management"
+  # docs via topic_token union — and the doc it was meant to cover
+  # also matches `[information, security, policy]` already.)
 
 body_fingerprints:
   - tokens: [information, security, objectives]

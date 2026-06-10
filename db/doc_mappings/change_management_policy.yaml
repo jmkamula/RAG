@@ -1,0 +1,71 @@
+# Canonical doc mapping: Change Management Policy / Process →
+# 6.3 ISMS planning of changes + A.8.32 Annex A change management.
+#
+# A change management doc covers BOTH the ISMS-level "planning of
+# changes" clause (6.3 — how changes to the ISMS itself are
+# planned) AND the operational A.8.32 control (technical change
+# management for systems / services). Both per-leaf scaffolds
+# already exist; this umbrella ties them together for the common
+# case where a single uploaded doc covers both surfaces.
+#
+# Created 2026-06-10 after an ISMS Change Management Process
+# upload extracted 1 finding because no umbrella matched, and the
+# 5.2 information_security_policy umbrella was spuriously firing
+# on the "ISMS" + topic-token union (since fixed in the same
+# commit).
+
+schema_version: 1
+mapping_id: doc.iso.A_8_32.change_management_policy
+
+filename_fingerprints:
+  - tokens: [change, management, policy]
+  - tokens: [change, management, procedure]
+  - tokens: [change, management, plan]
+  - tokens: [change, management]
+  - tokens: [change, control, policy]
+  - tokens: [change, control, procedure]
+  - tokens: [isms, change, management, policy]
+  - tokens: [isms, change, management, procedure]
+  - tokens: [isms, change, management]
+  # Synonym layer canonicalises process → procedure, programme → plan
+
+body_fingerprints:
+  - tokens: [change, request]
+  - tokens: [change, advisory]
+  - tokens: [emergency, change]
+  - tokens: [rollback, plan]
+  - tokens: [change, ticket]
+  - tokens: [change, record]
+  - tokens: [risk, assessment, change]
+  - tokens: [planning, changes]
+
+min_body_chars: 800
+
+target_leaves:
+  # ISMS clause 6.3 — Planning of changes (to the ISMS itself)
+  - leaf_id: "req:6.3:isms_change_planning"
+    control_ref: "6.3"
+    role: procedure
+  - leaf_id: "req:6.3:applicable_change_types_scope"
+    control_ref: "6.3"
+    role: scope_note
+  # Annex A.8.32 — Operational change management (systems / services)
+  - leaf_id: "req:A.8.32:change_management_procedure"
+    control_ref: "A.8.32"
+    role: procedure
+  - leaf_id: "req:A.8.32:applicable_change_scope"
+    control_ref: "A.8.32"
+    role: scope_note
+
+cross_control_links:
+  - control: "7.5"
+    rationale: "Change records are documented information under 7.5"
+  - control: "9.3"
+    rationale: "Significant changes feed management review inputs"
+  - control: "A.8.25"
+    rationale: "SDLC change controls overlap with A.8.32 for software changes"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1
