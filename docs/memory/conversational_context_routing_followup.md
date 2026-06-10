@@ -105,6 +105,44 @@ re-route to the prior intent rather than falling into the
 gap-analysis default. Deferred — wait for production signal on
 whether the MVP is sufficient.
 
+## Smoke test + LLM-answer-quality gap (2026-06-10, 2097d01)
+
+`scripts/test_conversational_context.py` exercises 5 follow-up
+patterns. **5/5 PASS on the "no generic empty-retrieval template"
+bar.** Routing works.
+
+But the test deliberately uses a low bar. Examining the actual
+answers exposes a SECOND failure mode the MVP doesn't address —
+LLM-answer-quality on follow-ups:
+
+  - **Pattern 1 (named-doc + deictic)**: A1 correctly says "uploaded
+    2026-04-28"; A2 then says "registered but NOT uploaded yet"
+    about the SAME doc. The LLM uses the prior-turn entity but
+    contradicts the upload status it just gave. Hallucinated
+    inversion.
+  - **Pattern 5 (inventory + deictic)**: Q2 asks "what about the
+    policy?" with no `last_entity` (inventory queries don't pick a
+    single entity). The LLM doesn't admit it doesn't know what
+    "the policy" refers to — it dumps random NCs on ISO clauses
+    10.1/10.2. Lost the deictic thread entirely.
+
+These are LLM-prompt-engineering failures, NOT state-flow
+failures. The fixes live in `rank_and_answer`'s system prompt /
+user message structure, not in ArionState plumbing:
+
+  - For Pattern 1: when `last_entity` already carries a definitive
+    status ("status": "uploaded"), the LLM should preserve that
+    fact, not contradict it. Could add explicit constraint to the
+    PRIOR-TURN CONTEXT block.
+  - For Pattern 5: when there's no `last_entity` AND the query has
+    deictic words, the LLM should ASK for clarification, not
+    invent a referent. Could add a "if you can't resolve the
+    deictic, ask which doc" instruction.
+
+Both deferred. The smoke test is the regression baseline — future
+prompt tweaks should net more PASSes (with tighter per-pattern
+heuristics) without regressing the existing 5.
+
 **What other short-circuits don't yet populate `last_entity`:**
 
 - `_answer_acknowledge` — acknowledge-gap short-circuit
