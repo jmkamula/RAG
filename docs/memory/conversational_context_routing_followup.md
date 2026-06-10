@@ -1,9 +1,7 @@
 ---
-name: conversational-context-routing-followup
-description: "PARTIAL: Option A (persist short-circuit entities) + lightweight C (LLM gets prior-turn entity in its prompt) SHIPPED 2026-06-10 (a3150ca). Option B (history-aware classifier re-routing) remains deferred."
+name: ""
 metadata: 
   node_type: memory
-  type: project
   originSessionId: 5808ba74-b22a-4a68-b4f1-19f18ce079cd
 ---
 
@@ -142,6 +140,49 @@ user message structure, not in ArionState plumbing:
 Both deferred. The smoke test is the regression baseline — future
 prompt tweaks should net more PASSes (with tighter per-pattern
 heuristics) without regressing the existing 5.
+
+## 2026-06-10 — both quality gaps closed (3cef7e4 + f76b389)
+
+**Pattern 1 fix (3cef7e4 — prompt-level):** the PRIOR-TURN
+CONTEXT block now includes an explicit status-preservation
+constraint when `last_entity.status` is set. Pre-fix the LLM
+would invert "uploaded 2026-04-28" → "registered but NOT
+uploaded yet" because it confused doc-level upload status with
+control-level engine_proposal_status='draft'. Post-fix A2
+reads: "the doc IS UPLOADED on 2026-04-28 — confirmed fact from
+the previous turn. Do NOT say it is 'registered but not
+uploaded'." Pattern 1 in smoke test 2097d01 now produces a
+faithful answer.
+
+**Pattern 5 fix (f76b389 — retrieve-stage short-circuit):**
+new `_is_deictic_only_query()` heuristic in arion_graph.py:
+- query ≤10 words
+- contains deictic phrase (this/that/it/what about/tell me more/
+  is it/the X) where X ∈ {policy/plan/procedure/register/
+  document/doc}
+- no explicit refs (A.x.y / Art.x / DOC### / CD-ARN-####)
+
+When true AND state["last_entity"] is empty, the retrieve node
+returns a deterministic clarification asking the user to name
+the specific doc/control. No retriever call, no LLM call.
+answer_source = "deictic_clarify". Eliminates the
+NC-dump-on-random-control failure mode.
+
+Eval verification: 194/198 PASS post-fix (same baseline as
+pre-fix). The short-circuit did NOT trip any of the 198 eval
+cases — the heuristic's 10-word ceiling + explicit-ref
+disqualifier guard against false positives.
+
+## What still doesn't perfectly work
+
+Pattern 3 ("tell me more about it") still just echoes Q1's
+upload-status response rather than probing deeper. The LLM has
+the entity in context but doesn't volunteer additional detail.
+Not a routing or correctness issue — depth-of-answer issue.
+Fix would be a prompt nudge: when query is "tell me more" /
+"what else" and last_entity is set, prompt the LLM to surface
+the doc's curated checklist items or related controls. Low
+priority; the answer isn't wrong, just thin.
 
 **What other short-circuits don't yet populate `last_entity`:**
 
