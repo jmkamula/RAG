@@ -176,25 +176,66 @@ from rag.framework_refs import (
 )
 
 
+# Shape words distinguish related-but-different doc types. A "Business
+# Continuity Policy" and "Business Continuity Plan" share the topic
+# (business + continuity) but are different artifacts. The title matcher
+# below requires shape words on both sides to canonicalise to the same
+# shape — otherwise "have we uploaded the policy?" wrongly hits a plan
+# titled "Business Continuity Plan".
+_SHAPE_CANONICAL = {
+    # canonical form          synonyms
+    "policy":     {"policy", "standard", "directive", "rule"},
+    "procedure":  {"procedure", "process", "workflow", "sop"},
+    "plan":       {"plan", "programme", "program", "roadmap"},
+    "register":   {"register", "log", "list", "inventory", "tracker", "record"},
+    "assessment": {"assessment", "report", "evaluation"},
+    "template":   {"template"},
+    "scope":      {"scope"},
+    "manual":     {"manual", "handbook", "guide", "guideline"},
+}
+_SHAPE_TOKEN_TO_CANONICAL = {
+    syn: canonical
+    for canonical, syns in _SHAPE_CANONICAL.items()
+    for syn in syns
+}
+
+
+def _detect_shape(words: set) -> str | None:
+    """Return the canonical shape word present in a set, or None."""
+    for w in words:
+        if w in _SHAPE_TOKEN_TO_CANONICAL:
+            return _SHAPE_TOKEN_TO_CANONICAL[w]
+    return None
+
+
 def _title_match_against(query: str, items: list, title_key: str) -> list:
     """
     Find items whose title overlaps the query by ≥2 significant words.
     Returns matching items ranked by overlap (best first). Significant =
     >3 chars and not in _STOP_WORDS.
+
+    Shape-word disambiguation: if both query and title contain a shape
+    word (policy/plan/procedure/register/etc), they must canonicalise
+    to the same shape. Stops "business continuity policy" from matching
+    a doc titled "Business Continuity Plan".
     """
-    q_words = {
-        w for w in re.split(r"[\W_]+", query.lower())
-        if len(w) > 3 and w not in _STOP_WORDS
-    }
+    # Shape detection runs on the FULL tokenization (pre-stopwords) because
+    # _STOP_WORDS strips shape words like "policy" / "plan" / "procedure".
+    # Those are needed to disambiguate doc types ("BC Policy" vs "BC Plan").
+    q_all = set(re.split(r"[\W_]+", query.lower()))
+    q_shape = _detect_shape(q_all)
+    q_words = {w for w in q_all if len(w) > 3 and w not in _STOP_WORDS}
     if not q_words:
         return []
     ranked = []
     for it in items:
         title = (it.get(title_key) or "").lower()
-        t_words = {
-            w for w in re.split(r"[\W_]+", title)
-            if len(w) > 3 and w not in _STOP_WORDS
-        }
+        t_all = set(re.split(r"[\W_]+", title))
+        t_shape = _detect_shape(t_all)
+        # If both sides name a shape, they must agree.
+        if q_shape and t_shape and q_shape != t_shape:
+            continue
+        t_words = {w for w in t_all if len(w) > 3 and w not in _STOP_WORDS}
         overlap = len(q_words & t_words)
         if overlap >= 2:
             ranked.append((overlap, it))
