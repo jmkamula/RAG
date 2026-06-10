@@ -1,7 +1,9 @@
 ---
-name: ""
+name: conversational-context-routing-followup
+description: "SHIPPED 2026-06-10: state['last_entity'] + LLM status-preservation + deictic-only retrieve short-circuit + 5 short-circuits populate last_entity + Pattern 3 expand-directive nudge. Smoke test 5/5 PASS. Only Option B (history-aware classifier re-routing), scope_na last_entity, and retrieval-side Pattern 3 depth fetch remain deferred."
 metadata: 
   node_type: memory
+  type: project
   originSessionId: 5808ba74-b22a-4a68-b4f1-19f18ce079cd
 ---
 
@@ -203,6 +205,47 @@ complaint (Q1 returns the right doc). Q2's bad fallback is a
 related-but-separate routing issue that requires LangGraph state
 threading work. Not in scope when the urgent fix was the
 matcher.
+
+## 2026-06-10 — 4 more short-circuits + Pattern 3 nudge (bb88640)
+
+New `_control_entity()` helper in `arion_graph.py` builds a
+control-shape last_entity (`{type: "control", ref, standard_id,
+title}`; standard_id inferred from `Art.` prefix). Plumbed into
+four additional short-circuit return paths:
+
+  - `acknowledge-gap`         → `_ack_intent.control_ref`
+  - `Stage-1 review`          → `_s1_intent.control_ref`
+  - `Stage-2 approval`        → `_s2_intent.control_ref`
+  - `Posture timeline`        → `_ref` from query
+
+Now follow-ups after any of these short-circuits carry the
+matched control across turns. The list of short-circuits that
+populate last_entity:
+
+  - upload-status (shipped a3150ca, 2026-06-10 AM)
+  - acknowledge-gap (bb88640)
+  - Stage-1 list/approve (bb88640)
+  - Stage-2 list/approve (bb88640)
+  - posture timeline (bb88640)
+
+Still missing: `_answer_scope_na` — that short-circuit is
+category-level ("physical security N/A for cloud-only tenant"),
+not control-level, so the entity shape doesn't map cleanly. Wait
+for a real user need before forcing the fit.
+
+**Pattern 3 expand-directive (bb88640).** When query matches
+`tell me more / what else / expand / elaborate / dig deeper / go
+deeper` AND last_entity is set, the PRIOR-TURN CONTEXT block
+adds an explicit instruction to surface concrete additional
+detail rather than repeat Q1's summary.
+
+Limitation: the directive lands in the prompt but the LLM is
+still working off the existing COMPLIANCE NODES retrieval. For a
+doc-shape entity, those nodes don't carry doc-specific detail
+(checklist items, leaf MUSTs). True depth needs a retrieval-side
+change: when query is expand-style AND last_entity.type ==
+"document", fetch the doc's checklist items / leaf evidence and
+inject as additional context. Not in scope for this iteration.
 
 ## Related
 
