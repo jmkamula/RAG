@@ -212,6 +212,17 @@ def _read_docx(file_path: str, file_name: str) -> ParsedDocument:
             md_converter = f"mammoth/{_pkg_version('mammoth')}"
         except Exception:
             md_converter = "mammoth"
+
+        # Strip embedded base64 image data URIs from the markdown.
+        # Mammoth inlines docx images as `![alt](data:image/png;base64,...)`
+        # which is pure noise to the LLM (it can't decode base64) and
+        # can dominate doc size — observed on 2026-06-10 with ISMS
+        # Automation Process.docx: 98.8% of 269KB markdown was a
+        # single embedded screenshot. Stripping leaves the alt text +
+        # a redaction marker so the LLM still knows an image was
+        # present; downstream OCR (future work) can pick up content.
+        if md_text:
+            md_text = _strip_base64_images(md_text)
     except Exception as e:
         logger.warning(f"mammoth markdown conversion failed for {file_name}: {e}")
 
@@ -316,7 +327,37 @@ def _read_docx(file_path: str, file_name: str) -> ParsedDocument:
     )
 
 
-_TABLE_SEPARATOR_RE = __import__("re").compile(
+import re as _re
+
+_BASE64_IMG_RE = _re.compile(
+    r"!\[([^\]]*)\]\(data:image/[^)]+\)",
+    flags=_re.DOTALL,
+)
+
+
+def _strip_base64_images(md: str) -> str:
+    """Replace inline `![alt](data:image/...;base64,...)` references with
+    `![image: alt]` markers. Preserves the alt text (which sometimes
+    has a useful description) and the structural presence of the image
+    so the LLM knows it's there, but drops the unreadable base64 blob
+    that bloats the prompt and crowds out real prose.
+
+    Future work: OCR the embedded images (Claude vision or Tesseract)
+    and inject the extracted text in place of the marker. For now the
+    marker is the placeholder."""
+    def _replace(m):
+        alt = (m.group(1) or "").strip()
+        if alt:
+            # Mammoth sometimes embeds a multi-line "AI-generated content
+            # may be incorrect" boilerplate in the alt text — keep only
+            # the first line for brevity.
+            alt = alt.split("\n")[0].strip()
+            return f"![image: {alt}]"
+        return "![image]"
+    return _BASE64_IMG_RE.sub(_replace, md)
+
+
+_TABLE_SEPARATOR_RE = _re.compile(
     r"^\s*\|?\s*[-:]+\s*(\|\s*[-:]+\s*)+\|?\s*$"
 )
 
@@ -340,8 +381,6 @@ def _synthesise_table_prose(md_text: str, max_chars: int = 12000) -> str:
     Capped at `max_chars` total to bound the input growth on
     pathological documents. Bigger tables truncate gracefully.
     """
-    import re as _re
-
     if not md_text:
         return ""
 
