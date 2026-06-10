@@ -7,11 +7,14 @@ mapping_id: workbook.iso.A_5_6.sig_register
 
 sheet_name_fingerprints:
   - tokens: [special, interest]
-  - tokens: [spec, int]                       # Arion abbreviation
   - tokens: [sig, register]
   - tokens: [sig, log]
   - tokens: [interest, group]
   - tokens: [community, register]
+  # No tenant-specific abbreviations. Removed 2026-06-10 [[doc-
+  # mappings-no-tenant-specific]]: previous `[spec, int]` matched
+  # one tenant's "Spec Int." shorthand at the cost of polluting
+  # the global namespace.
 
 header_row_hints: [1, 2, 3]
 min_data_rows: 1

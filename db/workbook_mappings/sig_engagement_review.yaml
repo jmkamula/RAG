@@ -11,13 +11,15 @@ mapping_id: workbook.iso.A_5_6.sig_engagement_review
 
 sheet_name_fingerprints:
   - tokens: [special, interest]
-  - tokens: [spec, int]              # tenants commonly abbreviate column / sheet tags
   - tokens: [sig, engagement]
   - tokens: [sig, log]
   - tokens: [interest, group]
-  - tokens: [int, engagement]
   - tokens: [community, engagement]
   - tokens: [industry, forum]
+  # Removed [spec, int] and [int, engagement] 2026-06-10 — tenant
+  # shorthand pollutes global namespace AND [int, engagement]
+  # cross-matched any "Integration Engagement" / "Internal
+  # Engagement" sheet (consistent with sibling sig_register.yaml).
 
 header_row_hints: [1, 2, 3]   # Arion's sheet has the table at row 3
 min_data_rows: 1

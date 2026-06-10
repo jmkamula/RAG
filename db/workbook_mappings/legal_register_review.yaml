@@ -15,9 +15,9 @@ sheet_name_fingerprints:
   - tokens: [legal, regulatory]
   - tokens: [regulatory, compliance]
   - tokens: [compliance, register]
-  - tokens: [legal, compl]            # tenants commonly abbreviate "Compl."
-  - tokens: [regul, compl]
   - tokens: [obligations, register]
+  # No abbreviation fingerprints (removed [legal, compl] / [regul, compl]
+  # 2026-06-10 — tenant-specific shorthand pollutes global namespace).
 
 header_row_hints: [1, 2]
 min_data_rows: 1

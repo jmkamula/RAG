@@ -8,7 +8,10 @@ sheet_name_fingerprints:
   - tokens: [manual, change]
   - tokens: [isms, change, log]
   - tokens: [doc, change, control]
-  - tokens: [doc, chng, control]            # Arion abbreviates as "Chng"
+  # No tenant-specific abbreviations. Removed 2026-06-10 [[doc-
+  # mappings-no-tenant-specific]]: previous `[doc, chng, control]`
+  # matched one tenant's "Chng" shorthand at the cost of polluting
+  # the global namespace.
 
 header_row_hints: [1, 2]
 min_data_rows: 1
