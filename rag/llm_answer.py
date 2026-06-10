@@ -496,6 +496,85 @@ When the query asks "what documents do we need for X":
 
 # ── Standard label helpers ────────────────────────────────────────────────────
 
+# ────────────────────────────────────────────────────────────────────────
+# Post-compose hallucination guard (L1).
+#
+# Catches the failure mode where the LLM duplicates a control across NC/OFI
+# sections, or fabricates a status the engine never emitted (e.g. listing
+# A.5.18 as "NC - All children unassessed" when posture says OFI). The
+# truth source is posture_by_ref (built in rank_and_answer); each line in
+# the composed answer is parsed for (ref, claimed_status) pairs and dropped
+# when the claim contradicts truth.
+#
+# Scope:
+#   - Only inspects refs where we have a definitive finding (NC/OFI/Comply).
+#   - Refs the tenant hasn't assessed are left alone (LLM may legitimately
+#     reference unassessed controls in xfw narrative).
+#   - "Addressed via A.X [NC], A.Y [OFI]" lines validate each ref/status
+#     pair independently — the per-ref window stops at the next ref.
+#   - The bullet/line containing a contradicted claim is dropped wholesale;
+#     numbered-list gaps are tolerated (markdown renderers auto-renumber).
+# ────────────────────────────────────────────────────────────────────────
+_VERIFIER_REF_RE = re.compile(
+    r"\b(?:A\.\d+(?:\.\d+){0,2}|Art\.\d+(?:\.\d+)?|\d+\.\d+(?:\.\d+){0,2})\b"
+)
+_VERIFIER_STATUS_RE = re.compile(r"\b(NC|OFI|Comply)\b", re.IGNORECASE)
+
+
+def _verify_posture_status_claims(
+    answer_text:    str,
+    posture_by_ref: dict,
+) -> tuple[str, list[str]]:
+    """
+    Drop lines whose (ref, claimed_status) pair contradicts the posture
+    truth in posture_by_ref. Returns (cleaned_text, violations).
+    """
+    if not answer_text or not posture_by_ref:
+        return answer_text, []
+
+    truth: dict[str, str] = {}
+    for _ref, _rec in posture_by_ref.items():
+        _f = (_rec.get("finding") or "").strip().upper()
+        if _f in ("NC", "OFI", "COMPLY"):
+            truth[_ref] = "COMPLY" if _f == "COMPLY" else _f
+
+    if not truth:
+        return answer_text, []
+
+    violations: list[str] = []
+    out_lines:  list[str] = []
+
+    for line in answer_text.splitlines():
+        refs = list(_VERIFIER_REF_RE.finditer(line))
+        if not refs:
+            out_lines.append(line)
+            continue
+
+        bad = False
+        for i, ref_m in enumerate(refs):
+            ref = ref_m.group(0)
+            expected = truth.get(ref)
+            if not expected:
+                continue
+            # Window from this ref to the next ref (or end of line)
+            win_start = ref_m.end()
+            win_end   = refs[i + 1].start() if i + 1 < len(refs) else len(line)
+            window    = line[win_start:win_end]
+            sm = _VERIFIER_STATUS_RE.search(window)
+            if not sm:
+                continue
+            claimed = sm.group(1).upper()
+            if claimed != expected:
+                violations.append(f"{ref}: claimed={claimed} actual={expected}")
+                bad = True
+                break
+
+        if not bad:
+            out_lines.append(line)
+
+    return "\n".join(out_lines), violations
+
+
 _STANDARD_LABELS = {
     "ISO27001:2022":  "ISO 27001",
     "ISO27001:2013":  "ISO 27001",
@@ -1353,6 +1432,25 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                 )
                 answer_text   = self._normalize_clause_refs(answer_text)
                 was_corrected  = True
+
+        # Post-compose hallucination guard: drop lines that contradict
+        # posture truth (LLM occasionally double-lists a control under
+        # both NC and OFI, fabricating the dramatic one).
+        answer_text, _claim_violations = _verify_posture_status_claims(
+            answer_text, posture_by_ref,
+        )
+        if _claim_violations and logger:
+            logger.log_call(
+                step       = "posture_claim_guard",
+                model      = self.answer_model,
+                system     = (
+                    f"Dropped {len(_claim_violations)} line(s) with "
+                    f"fabricated posture status"
+                ),
+                user       = "",
+                response   = "\n".join(_claim_violations),
+                latency_ms = 0,
+            )
 
         latency_ms = round((time.time() - t0) * 1000)
 
