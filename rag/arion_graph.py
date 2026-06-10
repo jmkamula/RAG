@@ -76,6 +76,63 @@ def _is_upload_status_query(query: str) -> bool:
     return any(p.search(query) for p in _UPLOAD_STATUS_PATTERNS)
 
 
+# ── Deictic-only query detection ───────────────────────────────────────────
+# Short follow-up queries that lean on prior-turn context: "this", "that",
+# "it", "what about X?", "tell me more", "is it ...?". When the prior turn
+# was an inventory list (no single entity), these queries have no referent
+# to resolve. Without short-circuiting, the retriever pulls whatever
+# default nodes match the topic word ("policy"), the LLM uses them, and
+# the user gets a NC dump that's unrelated to anything they meant.
+# See [[conversational-context-routing-followup]].
+
+_DEICTIC_PHRASES_RE = re.compile(
+    r"\b(this|that|it|those|these|what\s+about|how\s+about|"
+    r"tell\s+me\s+more|is\s+it|are\s+they|"
+    r"the\s+(policy|plan|procedure|register|document|doc)s?)\b",
+    re.IGNORECASE,
+)
+
+# Explicit refs that disqualify a query from "deictic-only". If the user
+# names A.5.18 / Art.32 / DOC006 / a control title, the retriever has a
+# real referent and we should not short-circuit.
+_EXPLICIT_REF_RE = re.compile(
+    r"\b(?:[Aa]\.\d+(?:\.\d+)*"
+    r"|Art(?:icle)?\.?\s?\d+(?:\(\d+\))?"
+    r"|\d+\.\d+(?:\.\d+)?"
+    r"|DOC\d{3,4}"
+    r"|CD-[A-Z]{2,4}-\d{3,4})\b",
+    re.IGNORECASE,
+)
+
+
+def _is_deictic_only_query(query: str) -> bool:
+    """True when the query relies on prior-turn context (deictic words /
+    "the X" / "tell me more") AND names no explicit control / doc ref of
+    its own. Used to short-circuit retrieval when no last_entity exists
+    to anchor the deictic referent."""
+    if not query or len(query.split()) > 10:
+        # Long queries usually carry their own context. Threshold tuned to
+        # catch "what about the policy" (5 words), "tell me more about it"
+        # (5 words), "is the access control policy compliant?" (7 words)
+        # would NOT match because it names a doc.
+        return False
+    if _EXPLICIT_REF_RE.search(query):
+        return False
+    return bool(_DEICTIC_PHRASES_RE.search(query))
+
+
+_DEICTIC_CLARIFY_RESPONSE = (
+    "I'm not sure which document or control you're asking about. Could "
+    "you name it specifically? For example:\n"
+    "  • \"Is the access control policy compliant?\"\n"
+    "  • \"What's the status of A.5.18?\"\n"
+    "  • \"Have we uploaded our business continuity policy?\"\n"
+    "If you meant to follow up on something from earlier, the prior "
+    "turn may have been a list rather than a single doc — happy to "
+    "drill into any item by name."
+)
+
+
 # ── Posture timeline query helpers (schema_v21 / posture_status_log) ────────
 #
 # "How did A.5.18 evolve?", "timeline for Art.32", "show me the history of
@@ -886,6 +943,28 @@ def make_retrieve_node(
     def retrieve(state: ArionState) -> dict:
         import re as _re
         from rag.classifier import QueryIntent, QuestionType
+
+        # ── Deictic-only short-circuit (no last_entity to anchor) ─────────
+        # Pattern 5 in [[conversational-context-routing-followup]]: when
+        # the user asks "what about the policy?" / "tell me more" / "is
+        # it ...?" with no entity carried from the prior turn (typically
+        # because the prior turn was an inventory list, not a single-doc
+        # match), neither the retriever nor the LLM has a real referent.
+        # Without this short-circuit the retriever pulls default nodes
+        # matching the topic word ("policy"), the LLM uses them, and
+        # the user gets an NC dump for unrelated controls. Asking which
+        # specific doc/control is the honest response.
+        if (_is_deictic_only_query(state["query"])
+                and not state.get("last_entity")):
+            return {
+                **state,
+                "answer_text":   _DEICTIC_CLARIFY_RESPONSE,
+                "answer":        _DEICTIC_CLARIFY_RESPONSE,
+                "cited_refs":    [],
+                "question_type": "unknown",
+                "confidence":    1.0,
+                "answer_source": "deictic_clarify",
+            }
 
         qtype_map = {
             "gap_analysis":       QuestionType.GAP_ANALYSIS,
