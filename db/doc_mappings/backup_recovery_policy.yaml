@@ -1,0 +1,85 @@
+# Canonical doc mapping: Backup and Recovery Policy / Plan / Process
+# → A.8.13 backup + A.8.14 redundancy + A.5.29-30 BC/DR family
+#
+# Tenants commonly upload a single backup-and-recovery doc that
+# covers the technical backup procedure (A.8.13), the redundancy
+# baseline (A.8.14 — geo-redundancy, replication), AND the broader
+# BC/DR recovery posture (A.5.29 disruption response, A.5.30 ICT
+# readiness with RTO/RPO). Per-leaf scaffolds exist for A.8.13 /
+# A.8.14 but nothing tied the family together for a single upload.
+#
+# Created 2026-06-10 after a Backup and Recovery Plan and Process
+# upload extracted 1 finding (A.8.13 only) because no umbrella
+# matched and the per-leaf A.8.13 scaffold was the only fingerprint
+# that fired.
+
+schema_version: 1
+mapping_id: doc.iso.A_8_13.backup_recovery_policy
+
+filename_fingerprints:
+  - tokens: [backup, recovery, policy]
+  - tokens: [backup, recovery, procedure]
+  - tokens: [backup, recovery, plan]
+  - tokens: [backup, policy]
+  - tokens: [backup, procedure]
+  - tokens: [backup, plan]
+  - tokens: [recovery, policy]
+  - tokens: [recovery, procedure]
+  - tokens: [recovery, plan]
+  - tokens: [disaster, recovery, policy]
+  - tokens: [disaster, recovery, plan]
+  - tokens: [disaster, recovery, procedure]
+  # Synonym layer canonicalises process → procedure, programme → plan
+  - tokens: [backup, restoration, procedure]
+  - tokens: [data, backup, policy]
+  - tokens: [data, recovery, procedure]
+
+body_fingerprints:
+  - tokens: [recovery, point, objective]
+  - tokens: [recovery, time, objective]
+  - tokens: [geo, redundancy]
+  - tokens: [restore, point]
+  - tokens: [backup, schedule]
+  - tokens: [retention, period]
+  - tokens: [restoration, test]
+  - tokens: [failover]
+  - tokens: [replication]
+
+min_body_chars: 500
+
+target_leaves:
+  # A.8.13 — Information backup (the canonical anchor)
+  - leaf_id: "req:A.8.13:backup_procedure"
+    control_ref: "A.8.13"
+    role: procedure
+  - leaf_id: "req:A.8.13:applicable_backup_scope"
+    control_ref: "A.8.13"
+    role: scope_note
+  # A.8.14 — Redundancy of information processing facilities
+  - leaf_id: "req:A.8.14:redundancy_baseline"
+    control_ref: "A.8.14"
+    role: baseline
+  - leaf_id: "req:A.8.14:failover_procedure"
+    control_ref: "A.8.14"
+    role: procedure
+  # A.5.29 — Information security during disruption
+  - leaf_id: "req:A.5.29:information_security_during_disruption"
+    control_ref: "A.5.29"
+    role: plan
+  # A.5.30 — ICT readiness for business continuity
+  - leaf_id: "req:A.5.30:ict_readiness_for_business_continuity"
+    control_ref: "A.5.30"
+    role: plan
+
+cross_control_links:
+  - control: "A.5.33"
+    rationale: "Backup integrity supports records-protection retention obligations"
+  - control: "A.7.10"
+    rationale: "Storage media handling overlaps when backups land on physical media"
+  - control: "A.8.7"
+    rationale: "Backups are themselves protected against malware"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1
