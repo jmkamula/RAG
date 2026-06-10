@@ -61,6 +61,19 @@ inspection:
 Both bugs would have been silent before telemetry — the chat
 surface said "completed". They flagged automatically afterwards.
 
+**3rd proof point (2026-06-10): diagnose before generalising.**
+ISMS Automation Process.docx looked "table-heavy" (markdown_chars
+269K vs paragraph_chars 2K, ratio 113×). I shipped SECTION_BASED
+override (commit 8738c0e) + table-prose synthesis (commit e777846)
+expecting more findings. Eval was unchanged. THEN inspected the
+markdown content: **98.8% was a single embedded base64 screenshot
+of all the doc's tables**. The doc isn't table-heavy in the
+markdown sense — it's IMAGE-heavy. The real fix was a base64
+strip (commit 8aee775). Lesson: the headline metric (md/para
+ratio) signalled a problem but not its shape; reading the actual
+content was necessary. Telemetry gives you the alert, not the
+diagnosis.
+
 ## How to apply
 
 When designing or modifying a pipeline stage:

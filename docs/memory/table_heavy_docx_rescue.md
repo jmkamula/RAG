@@ -64,6 +64,47 @@ Art.35). 4× yield from one pipeline fix.
   the document-level context block; section-level structural hints
   are lost. Acceptable trade-off.
 
+## 2026-06-10 extensions — three more layers
+
+Today added three further table-treatment layers on top of the
+original rescue:
+
+**Layer 2 — SECTION_BASED override** (commit 8738c0e). When the
+rescue fires AND token count fits FULL_DOCUMENT (≤100K), force
+SECTION_BASED anyway. One 269KB call skims the bulk; per-chunk
+calls focus attention on each rebuilt chunk. Detection: any
+section.section_id starts with `md_chunk_`. Cost: chunks × LLM
+call (~$0.03 per upload).
+
+**Layer 3 — Table-prose synthesis** (commit e777846). Walk the
+markdown for pipe-tables (`| col | col |` + `| --- |` separator)
+and synthesise each row as cite-able prose:
+`Row N: header1 = cell1; header2 = cell2;...`. Appended as both
+a new section AND to doc.markdown. Lets the LLM cite verbatim
+from synthetic prose; grounding works because we control the
+text. Bounded at 12000 chars. Helps docs with real markdown
+tables.
+
+**Layer 4 — Base64 image strip** (commit 8aee775). Mammoth
+inlines docx images as `![alt](data:image/png;base64,...)`. The
+base64 blob is unreadable noise that can dominate doc size —
+observed on ISMS Automation Process.docx: **98.8% of 269KB of
+"markdown" was a single embedded screenshot**. Strip the data
+URI, keep `![image: alt]` marker. Reduces LLM input + cost,
+eliminates base64-driven hallucinations.
+
+## What table-prose synthesis canNOT fix
+
+Layer 3 (table-prose synthesis) only helps when mammoth emits
+pipe-table markdown. If the docx renders tables as INLINE IMAGES
+(screenshots), mammoth captures them as base64 data URIs. Layer 4
+strips the noise but doesn't extract the content. The actual
+table content is lost unless we OCR the images.
+
+Future work: Claude vision API or Tesseract pre-pass on embedded
+images. Substantial build — deferred until enough tenants have
+image-heavy docs to justify the cost.
+
 ## When to revisit
 
 - If a future doc format produces similar paragraph-vs-content
