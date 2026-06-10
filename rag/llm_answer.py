@@ -789,6 +789,7 @@ class LLMAnswer:
         doc_contexts:     dict | None = None,   # node_id → DocumentContext
         incident_contexts:list | None = None,   # list[IncidentObligationContext]
         scope_standards:  list[str] | None = None,   # tenant's queryable standards
+        last_entity:      dict | None = None,   # prior-turn entity for deictic follow-ups
     ) -> "ComplianceAnswer":
         """
         Combined rank + answer in a single Mistral call.
@@ -1105,7 +1106,31 @@ class LLMAnswer:
             checklist_block = "\n".join(cl_lines)
 
         xfw_summary = f" ({len(xfw_nodes_list)} cross-framework)" if xfw_nodes_list else ""
-        user = f"""QUERY: {query}{incident_header}
+
+        # Prior-turn context: when the user just discussed a specific doc
+        # via the upload-status short-circuit, surface that here so deictic
+        # follow-ups ("what about the policy?", "this", "that doc") have
+        # something to ground against. The LLM treats this as background
+        # context — NOT as new evidence to cite. See [[conversational-
+        # context-routing-followup]].
+        prior_turn_block = ""
+        if last_entity and last_entity.get("title"):
+            ref_s   = f" ({last_entity['ref']})" if last_entity.get("ref") else ""
+            type_s  = f" [{last_entity['doc_type']}]" if last_entity.get("doc_type") else ""
+            stat_s  = ""
+            if last_entity.get("status") == "registered_not_uploaded":
+                stat_s = " — registered but NOT uploaded"
+            prior_turn_block = (
+                f"\nPRIOR-TURN CONTEXT: in the previous turn the user was "
+                f"asking about \"{last_entity['title']}\"{ref_s}{type_s}{stat_s}. "
+                f"If the current query uses deictic words (\"this\", \"that\", "
+                f"\"the X document\", \"what about Y\") that don't resolve "
+                f"against the COMPLIANCE NODES below, you may reference this "
+                f"prior entity to clarify — don't claim it as compliance "
+                f"evidence.\n"
+            )
+
+        user = f"""QUERY: {query}{incident_header}{prior_turn_block}
 
 COMPLIANCE NODES ({len(primary_nodes_list)} primary{xfw_summary}):
 {nodes_block}{checklist_block}

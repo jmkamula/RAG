@@ -66,6 +66,16 @@ class ArionState(TypedDict):
     error:        str
     resolver_trace: object          # ResolverTrace from last resolve() call
 
+    # ── Conversational context (carries across turns) ──────────────────────
+    # Last short-circuit-matched entity, e.g. {"type": "document",
+    # "title": "Business Continuity Policy", "ref": "DOC007",
+    # "doc_type": "policy"}. Populated when an upload-status short-circuit
+    # matched a specific doc; read on the next turn so the LLM has prior-
+    # turn context for deictic follow-ups ("what about X?", "this", "that
+    # doc"). Empty dict when no prior match. See [[conversational-context-
+    # routing-followup]].
+    last_entity:  dict
+
 
 def make_initial_state(tenant: TenantProfile, query: str = "") -> ArionState:
     """Create the initial state for a new conversation thread."""
@@ -95,4 +105,5 @@ def make_initial_state(tenant: TenantProfile, query: str = "") -> ArionState:
         answer_source   = "",
         error           = "",
         resolver_trace  = None,
+        last_entity     = {},
     )

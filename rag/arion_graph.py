@@ -243,6 +243,49 @@ def _title_match_against(query: str, items: list, title_key: str) -> list:
     return [it for _, it in ranked]
 
 
+def _resolve_upload_entity(
+    query: str,
+    uploaded: list,
+    alerts: list,
+) -> dict:
+    """Return a small summary of the doc that an upload-status query
+    matched against, for next-turn conversational context. Returns
+    `{}` when no specific doc was named or no match was found —
+    inventory-style queries ("what docs have we uploaded?") don't
+    produce a single-entity context.
+
+    Used to populate `state["last_entity"]` so the LLM can reference
+    the prior turn on deictic follow-ups. See [[conversational-
+    context-routing-followup]]."""
+    polarity = _detect_upload_polarity(query)
+    if polarity != "positive":
+        return {}
+    # Title-match against uploaded first, then alerts. We only return
+    # an entity when the query named a SPECIFIC doc by title — generic
+    # inventory queries have no single subject to carry forward.
+    hits = _title_match_against(query, uploaded or [], "document_title")
+    if hits:
+        d = hits[0]
+        return {
+            "type":        "document",
+            "title":       d.get("document_title") or d.get("filename") or "",
+            "ref":         d.get("external_ref") or d.get("platform_ref") or "",
+            "doc_type":    d.get("doc_type") or "",
+            "status":      d.get("document_status") or "uploaded",
+            "uploaded_at": (d.get("uploaded_at") or "")[:10] if d.get("uploaded_at") else "",
+        }
+    hits = _title_match_against(query, alerts or [], "document_title")
+    if hits:
+        a = hits[0]
+        return {
+            "type":     "document",
+            "title":    a.get("document_title") or "",
+            "ref":      a.get("external_ref") or "",
+            "status":   "registered_not_uploaded",
+        }
+    return {}
+
+
 def _answer_upload_status(
     query:    str,
     alerts:   list,
@@ -1147,6 +1190,11 @@ def make_retrieve_node(
                     deterministic_answer = pg_answer,
                     llm                  = llm,
                 )
+                # Carry the matched entity (if any) into next-turn state
+                # so deictic follow-ups ("this", "what about the policy?")
+                # have the LLM access to prior-turn context.
+                # See [[conversational-context-routing-followup]].
+                last_entity = _resolve_upload_entity(state["query"], _uploaded, _alerts)
                 return {
                     **state,
                     "answer_text":   composed,
@@ -1155,6 +1203,7 @@ def make_retrieve_node(
                     "question_type": "document_inventory",
                     "confidence":    1.0,
                     "answer_source": "postgres+llm",
+                    "last_entity":   last_entity,
                 }
 
         # ── Resolver: dispatch to per-taxonomy data sources ──────────────
@@ -1248,6 +1297,11 @@ def make_retrieve_node(
             # to this set so we never reference a framework the client
             # hasn't actually rolled out.
             scope_standards  = list(getattr(tenant, "applicable_standards", []) or []),
+            # Prior-turn entity (populated by upload-status short-circuit
+            # on the previous turn) — lets the LLM ground deictic
+            # follow-ups instead of returning a generic empty-retrieval
+            # template. See [[conversational-context-routing-followup]].
+            last_entity      = state.get("last_entity") or None,
         )
 
 
