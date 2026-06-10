@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import os
 import json
+import logging
 import re
 import time
 from dataclasses import dataclass, field
@@ -519,6 +520,37 @@ _VERIFIER_REF_RE = re.compile(
     r"\b(?:A\.\d+(?:\.\d+){0,2}|Art\.\d+(?:\.\d+)?|\d+\.\d+(?:\.\d+){0,2})\b"
 )
 _VERIFIER_STATUS_RE = re.compile(r"\b(NC|OFI|Comply)\b", re.IGNORECASE)
+_BULLET_LINE_RE = re.compile(r"^\s*(?:[-*•]|\d+\.)\s")
+
+
+def _classify_section_header(line: str) -> str | None:
+    """
+    Returns 'NC' / 'OFI' / 'COMPLY' for posture-section headers, 'RESET'
+    for sections that shouldn't inherit status (cross-framework, not yet
+    assessed), and None for non-headers. Bullets are explicitly excluded
+    even if they contain section keywords.
+    """
+    s = line.strip()
+    if not s or len(s) > 120:
+        return None
+    if _BULLET_LINE_RE.match(s):
+        return None
+    if "**" not in s and not s.startswith("#"):
+        return None
+    plain = re.sub(r"[*#]", "", s).strip().rstrip(":").strip().lower()
+    if not plain:
+        return None
+    if "cross" in plain and "framework" in plain:
+        return "RESET"
+    if "not yet assessed" in plain or "unassessed" in plain:
+        return "RESET"
+    if re.search(r"\bnon[- ]?conform", plain) or "(nc)" in plain:
+        return "NC"
+    if "opportunit" in plain or "(ofi)" in plain:
+        return "OFI"
+    if re.search(r"\bcompl(y|iant)\b", plain) and "noncompliant" not in plain:
+        return "COMPLY"
+    return None
 
 
 def _verify_posture_status_claims(
@@ -541,10 +573,17 @@ def _verify_posture_status_claims(
     if not truth:
         return answer_text, []
 
-    violations: list[str] = []
-    out_lines:  list[str] = []
+    violations:      list[str] = []
+    out_lines:       list[str] = []
+    current_section: str | None = None     # NC / OFI / COMPLY / None
 
     for line in answer_text.splitlines():
+        header = _classify_section_header(line)
+        if header is not None:
+            current_section = None if header == "RESET" else header
+            out_lines.append(line)
+            continue
+
         refs = list(_VERIFIER_REF_RE.finditer(line))
         if not refs:
             out_lines.append(line)
@@ -561,9 +600,13 @@ def _verify_posture_status_claims(
             win_end   = refs[i + 1].start() if i + 1 < len(refs) else len(line)
             window    = line[win_start:win_end]
             sm = _VERIFIER_STATUS_RE.search(window)
-            if not sm:
+            if sm:
+                claimed = sm.group(1).upper()
+            elif current_section:
+                # No inline status; inherit from section header
+                claimed = current_section
+            else:
                 continue
-            claimed = sm.group(1).upper()
             if claimed != expected:
                 violations.append(f"{ref}: claimed={claimed} actual={expected}")
                 bad = True
@@ -572,7 +615,34 @@ def _verify_posture_status_claims(
         if not bad:
             out_lines.append(line)
 
-    return "\n".join(out_lines), violations
+    cleaned = "\n".join(out_lines)
+    if violations:
+        cleaned = _renumber_numbered_lists(cleaned)
+    return cleaned, violations
+
+
+_NUMBERED_BULLET_RE = re.compile(r"^(\s*)(\d+)\.(\s+)")
+
+
+def _renumber_numbered_lists(text: str) -> str:
+    """
+    Rewrite contiguous blocks of `^N. ` bullets to monotonic 1, 2, 3...
+    so drops above don't leave a `1. 3. 5.` visual artifact. A block
+    breaks on any line that isn't a numbered bullet.
+    """
+    out: list[str] = []
+    counter = 0
+    for line in text.splitlines():
+        m = _NUMBERED_BULLET_RE.match(line)
+        if m:
+            counter += 1
+            out.append(_NUMBERED_BULLET_RE.sub(
+                lambda mm: f"{mm.group(1)}{counter}.{mm.group(3)}", line, count=1,
+            ))
+        else:
+            out.append(line)
+            counter = 0
+    return "\n".join(out)
 
 
 _STANDARD_LABELS = {
@@ -1439,18 +1509,23 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         answer_text, _claim_violations = _verify_posture_status_claims(
             answer_text, posture_by_ref,
         )
-        if _claim_violations and logger:
-            logger.log_call(
-                step       = "posture_claim_guard",
-                model      = self.answer_model,
-                system     = (
-                    f"Dropped {len(_claim_violations)} line(s) with "
-                    f"fabricated posture status"
-                ),
-                user       = "",
-                response   = "\n".join(_claim_violations),
-                latency_ms = 0,
+        if _claim_violations:
+            logging.getLogger("rag.llm_answer").warning(
+                "posture_claim_guard: dropped %d line(s): %s",
+                len(_claim_violations), "; ".join(_claim_violations),
             )
+            if logger:
+                logger.log_call(
+                    step       = "posture_claim_guard",
+                    model      = self.answer_model,
+                    system     = (
+                        f"Dropped {len(_claim_violations)} line(s) with "
+                        f"fabricated posture status"
+                    ),
+                    user       = "",
+                    response   = "\n".join(_claim_violations),
+                    latency_ms = 0,
+                )
 
         latency_ms = round((time.time() - t0) * 1000)
 
