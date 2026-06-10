@@ -1,6 +1,6 @@
 ---
 name: conversational-context-routing-followup
-description: "FOLLOW-UP: short-circuit answers don't write semantic state, so conversational references in the next turn ('this', 'that doc', 'the X') fall through to a generic 'no primary compliance nodes' LLM template. Three layers, three fixes ranked by cost."
+description: "PARTIAL: Option A (persist short-circuit entities) + lightweight C (LLM gets prior-turn entity in its prompt) SHIPPED 2026-06-10 (a3150ca). Option B (history-aware classifier re-routing) remains deferred."
 metadata: 
   node_type: memory
   type: project
@@ -70,6 +70,52 @@ B is more principled but touches the classifier's prompt design.
 - AND the prior turn was a short-circuit answer (check
   `intake_trace_log` or simply: was the prior answer
   deterministic / template-shaped?).
+
+## 2026-06-10 — MVP shipped (a3150ca)
+
+Options A + lightweight C landed as one commit:
+
+- **arion_state.py** — new `last_entity: dict` field on ArionState.
+  Defaults to empty. Populated by short-circuit returns.
+- **arion_graph.py** — new helper `_resolve_upload_entity()` mirrors
+  `_answer_upload_status` shape but returns just the matched doc
+  dict (or `{}`). Called in the upload-status short-circuit return
+  path; matched entity written to `state["last_entity"]` so it
+  carries to the next turn via PostgresSaver. `make_retrieve_node`
+  reads state["last_entity"] and passes it to `rank_and_answer`.
+- **llm_answer.py** — `rank_and_answer()` accepts a new
+  `last_entity` parameter and, when present, injects a `PRIOR-TURN
+  CONTEXT:` block into the user message. The LLM is told to use
+  it for deictic resolution ("this", "that", "the X document")
+  NOT as new compliance evidence to cite.
+
+Smoke test on Arion (two-turn conversation sharing session_id):
+  Q1: "have we uploaded our business continuity policy?"
+      → Yes, DOC007 (Policy), uploaded 2026-04-28.
+  Q2: "this is the plan, what about the policy document?"
+      → Pre-fix: "The query does not provide any primary compliance
+        nodes..." (generic empty-retrieval template)
+      → Post-fix: contextual response about the BC Policy DOC007
+        from the prior turn.
+
+**What's still missing (Option B):** classifier-side re-routing
+of deictic queries. When a short follow-up has no clear intent
+match AND a `last_entity` exists, the classifier should
+re-route to the prior intent rather than falling into the
+gap-analysis default. Deferred — wait for production signal on
+whether the MVP is sufficient.
+
+**What other short-circuits don't yet populate `last_entity`:**
+
+- `_answer_acknowledge` — acknowledge-gap short-circuit
+- Stage-1 / Stage-2 list/approve chat surfaces
+- `_answer_scope_na` — physical/dev controls N/A short-circuit
+- Posture timeline queries ("how did A.5.18 evolve?")
+
+Each takes ~10-15 LOC: resolve the matched entity → return it in
+state["last_entity"] on the short-circuit return. Wait for a
+real user need (a follow-up after any of these short-circuits
+falls into the bad template) before generalising.
 
 ## Why we deferred today
 
