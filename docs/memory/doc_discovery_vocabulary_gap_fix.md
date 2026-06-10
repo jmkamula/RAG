@@ -106,8 +106,34 @@ format).
   (`log → register`, etc.) help workbook discovery catch shape
   variants too. Tested clean.
 
+## 2026-06-10 extension — chat title matcher
+
+The same shape-canonical idea now lives in a THIRD place:
+`arion_graph._title_match_against` uses `_SHAPE_CANONICAL` (a
+local copy of the same synonym map) to disambiguate doc titles
+in chat queries. Without it, "have we uploaded our business
+continuity policy?" was matching a doc titled "Business
+Continuity Plan" (2-word topic overlap was enough; the
+distinguishing `policy` vs `plan` got stripped by `_STOP_WORDS`
+before the matcher ran).
+
+Fix (commit f693954): detect shape from the FULL tokenization
+BEFORE stopword stripping. If both query and matched title name
+a shape, they must canonicalise to the same shape.
+
+**Shape canonicalization now exists in 3 places.** Keep them in
+sync when adding new shape synonyms:
+- `rag/intake/workbook_discovery.py:_SHAPE_SYNONYMS` (workbook intake)
+- `rag/intake/doc_discovery.py` (uses the workbook tokenizer)
+- `rag/arion_graph.py:_SHAPE_CANONICAL` (chat title matcher)
+
+Future cleanup: pull these into a shared module if drift starts
+mattering.
+
 ## Related
 
 - [[doc-curation-engine-v1]] — the architecture this extends.
 - [[workbook-intake-corpus-v1-complete]] — the shared tokenizer's other
   consumer.
+- [[conversational-context-routing-followup]] — the same chat-side
+  bug surfaced a separate routing follow-up.
