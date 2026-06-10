@@ -280,6 +280,30 @@ def _read_docx(file_path: str, file_name: str) -> ParsedDocument:
             f"-> {len(sections)} chunks (table-heavy doc rescue)"
         )
 
+    # Table-prose synthesis: even after the rescue, markdown tables
+    # render as `| cell | cell |` rows that the LLM can't cite as
+    # ≥40-char verbatim quotes. Synthesise each row as a sentence
+    # ("Row N: header1 = cell1; header2 = cell2; ...") and append.
+    # Both the LLM input (doc.markdown) and the grounding haystack
+    # (doc.full_text — built from sections downstream) pick up the
+    # synthesis automatically.
+    table_prose = _synthesise_table_prose(md_text or "")
+    if table_prose:
+        sections.append(RawSection(
+            section_id = "table_prose_synthesis",
+            heading    = "Table content (synthesised for extraction)",
+            text       = table_prose,
+            page_start = None,
+            page_end   = None,
+            level      = 0,
+        ))
+        md_text = (md_text or "") + "\n\n" + table_prose
+        logger.info(
+            f"Table-prose synthesis for {file_name}: "
+            f"emitted {len(table_prose)} chars across "
+            f"{table_prose.count('Row ')} rows"
+        )
+
     return ParsedDocument(
         source_file   = file_path,
         file_type     = "docx",
@@ -290,6 +314,87 @@ def _read_docx(file_path: str, file_name: str) -> ParsedDocument:
         source_sha256 = src_sha,
         converter     = md_converter,
     )
+
+
+_TABLE_SEPARATOR_RE = __import__("re").compile(
+    r"^\s*\|?\s*[-:]+\s*(\|\s*[-:]+\s*)+\|?\s*$"
+)
+
+
+def _synthesise_table_prose(md_text: str, max_chars: int = 12000) -> str:
+    """Walk markdown table blocks in `md_text` and emit per-row prose
+    the LLM can cite verbatim.
+
+    Mammoth renders docx tables as pipe-delimited markdown rows. Each
+    cell on its own is too short to clear the extractor's 40-char
+    verbatim-quote bar — and the LLM that tries to synthesise across
+    cells routinely hallucinates connections that grounding then
+    rejects. Synthesising deterministically here gives the LLM real
+    grounded prose to cite, captured into the doc text we trust.
+
+    Output shape per table:
+        Table N:
+        Row 1: <Header1> = <cell1>; <Header2> = <cell2>; ...
+        Row 2: ...
+
+    Capped at `max_chars` total to bound the input growth on
+    pathological documents. Bigger tables truncate gracefully.
+    """
+    import re as _re
+
+    if not md_text:
+        return ""
+
+    lines = md_text.split("\n")
+    out_blocks: list[str] = []
+    i = 0
+    table_idx = 0
+    total_chars = 0
+
+    while i < len(lines) and total_chars < max_chars:
+        line = lines[i]
+        # A markdown table needs a separator on line i+1 (e.g. `| --- |`)
+        if "|" in line and i + 1 < len(lines) and _TABLE_SEPARATOR_RE.match(lines[i + 1]):
+            header_line = line
+            data_lines: list[str] = []
+            j = i + 2
+            while j < len(lines) and "|" in lines[j] and lines[j].strip():
+                data_lines.append(lines[j])
+                j += 1
+
+            headers = [c.strip() for c in header_line.strip().strip("|").split("|")]
+            headers = [h for h in headers if h]
+
+            row_proses: list[str] = []
+            for row_num, dline in enumerate(data_lines, 1):
+                cells = [c.strip() for c in dline.strip().strip("|").split("|")]
+                if not any(c for c in cells):
+                    continue
+                pairs = []
+                for h, c in zip(headers, cells):
+                    if c:
+                        pairs.append(f"{h} = {c}")
+                if pairs:
+                    row_proses.append(f"Row {row_num}: " + "; ".join(pairs) + ".")
+
+            if row_proses:
+                table_idx += 1
+                block = f"Table {table_idx}:\n" + "\n".join(row_proses)
+                if total_chars + len(block) > max_chars:
+                    # Partial truncation — keep what fits, mark the rest
+                    remaining = max_chars - total_chars
+                    block = block[:remaining] + "\n[... table truncated ...]"
+                    out_blocks.append(block)
+                    total_chars = max_chars
+                    break
+                out_blocks.append(block)
+                total_chars += len(block) + 2  # +2 for the joining "\n\n"
+
+            i = j
+        else:
+            i += 1
+
+    return "\n\n".join(out_blocks)
 
 
 def _chunk_markdown_to_sections(
