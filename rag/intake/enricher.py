@@ -255,15 +255,27 @@ Return JSON only:
             "document", "doc", "approval",
         }
         if result.get("topic_tokens"):
+            # Apply the same stemming the downstream tokenizer applies,
+            # so the blocklist catches plural / variant forms. Without
+            # this, "policies" slips past (blocklist has "policy") and
+            # later gets stemmed to "policy" when fingerprint-matching
+            # — bridging into doc-shape fingerprints like [isms, policy].
+            from rag.intake.workbook_discovery import _stem
             seen: set[str] = set()
             cleaned: list[str] = []
             for raw in (result["topic_tokens"] or [])[:20]:
                 for part in re.split(r"[\s,;/]+", str(raw)):
                     norm = re.sub(r"[^a-z0-9]", "", part.lower())
-                    if len(norm) >= 3 and norm not in seen \
-                            and norm not in _TOPIC_SHAPE_BLOCKLIST:
-                        seen.add(norm)
-                        cleaned.append(norm)
+                    if len(norm) < 3:
+                        continue
+                    stemmed = _stem(norm)
+                    if stemmed in _TOPIC_SHAPE_BLOCKLIST or norm in _TOPIC_SHAPE_BLOCKLIST:
+                        continue
+                    if stemmed in seen or norm in seen:
+                        continue
+                    seen.add(norm)
+                    seen.add(stemmed)
+                    cleaned.append(norm)
             doc.topic_tokens = cleaned[:15]
 
     except Exception as e:
