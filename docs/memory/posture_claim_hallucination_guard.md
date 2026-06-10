@@ -1,6 +1,6 @@
 ---
 name: posture-claim-hallucination-guard
-description: "SHIPPED 2026-06-10 (14633c1): L1 post-compose guard in rank_and_answer drops lines whose (control_ref, claimed_status) pair contradicts posture_by_ref truth. Catches the LLM duplicating a control across NC/OFI sections + fabricating reason text ('All children unassessed' doesn't exist in code)."
+description: "SHIPPED 2026-06-10 (14633c1 + 5b98a42): L1 post-compose guard in rank_and_answer drops lines whose (control_ref, claimed_status) pair contradicts posture_by_ref truth. v2 is section-aware (claim inferred from **Non-Conformities (NC):** style headers when bullet has no inline [STATUS]), logs violations via std logger, and renumbers bullets after drops."
 metadata: 
   node_type: memory
   type: project
@@ -82,6 +82,40 @@ post-LLM parity check + drop bad output rather than trust prompts.
 The general principle: **the truth is in the data; the LLM output
 is the suspect. Add a verifier that detects when LLM output
 contradicts the source data.**
+
+## 2026-06-10 — v2 (5b98a42)
+
+The v1 guard only caught **explicit** status tokens (`[NC]`, `OFI`,
+etc). On the next reproduction the LLM swapped to PROSE — "Access
+control is not effectively implemented" under a `**Non-Conformities
+(NC):**` section header — and the guard saw no claim to validate, so
+the fabricated NC bullets passed through untouched.
+
+Three extensions:
+
+**Section-aware claim inference.** A new `_classify_section_header()`
+recognises `**Non-Conformities (NC):**` / `**Opportunities for
+Improvement (OFI):**` / `**Comply:**` headers (and `RESET` markers
+like `**Cross-Framework:**` / `**Not yet assessed:**`). The line
+walker tracks `current_section` and, when a bullet has a ref but no
+inline status token, treats the section as the claim. Heuristics:
+header lines have `**` or `#`, length < 120, and don't start with a
+bullet marker.
+
+**Standard-logger fallback.** `logging.getLogger("rag.llm_answer")
+.warning(...)` runs unconditionally on violation, so a line like
+`WARNING rag.llm_answer: posture_claim_guard: dropped 2 line(s):
+A.5.15: claimed=NC actual=OFI; A.5.18: claimed=NC actual=OFI`
+lands in `/tmp/api.log` — the chain logger isn't enabled in
+production, so without this the guard was invisible.
+
+**Renumber after drops.** Contiguous `^N. ` bullet blocks are
+rewritten to monotonic 1, 2, 3 after dropping. Eliminates the
+`1. 3. 5.` numbering gap that reads as a rendering bug. Only fires
+when at least one violation was detected, so clean answers are
+untouched.
+
+Eval 195/198 with v2 — known-stale #2/#25/#26 only.
 
 ## Related
 
