@@ -77,15 +77,33 @@ def enrich(doc: ParsedDocument, api_key: Optional[str] = None) -> ParsedDocument
         logger.info(f"STRUCTURED path: {doc.original_name} ({doc.doc_type})")
         return doc
 
-    # Decide extraction path based on token count
+    # Decide extraction path based on token count and structure.
+    #
+    # Table-heavy override: when the docx reader's markdown-rescue fired
+    # (raw_sections rebuilt from mammoth markdown chunks because the
+    # paragraph walk captured <33% of content), the LLM is best served
+    # by per-chunk attention even if total tokens fit FULL_DOCUMENT.
+    # A single 269KB call on a 99%-tables doc skims the bulk and
+    # over-fits the prose minority. SECTION_BASED gives each chunk
+    # focused attention. See [[table-heavy-docx-rescue]].
+    table_heavy = any(
+        s.section_id.startswith("md_chunk_")
+        for s in doc.raw_sections
+    )
     if doc.token_estimate > TOKEN_SECTION_LIMIT:
         doc.extraction_path = ExtractionPath.MANUAL_REVIEW
         logger.warning(
             f"Document too large ({doc.token_estimate:,} tokens): {doc.original_name} — flagged for manual review"
         )
         return doc
-    elif doc.token_estimate > TOKEN_FULL_LIMIT:
+    elif doc.token_estimate > TOKEN_FULL_LIMIT or table_heavy:
         doc.extraction_path = ExtractionPath.SECTION_BASED
+        if table_heavy and doc.token_estimate <= TOKEN_FULL_LIMIT:
+            logger.info(
+                f"Table-heavy override: {doc.original_name} forced to "
+                f"SECTION_BASED ({len(doc.raw_sections)} chunks) despite "
+                f"{doc.token_estimate:,} tokens fitting FULL"
+            )
     else:
         doc.extraction_path = ExtractionPath.FULL_DOCUMENT
 
