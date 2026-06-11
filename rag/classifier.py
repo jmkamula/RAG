@@ -439,6 +439,18 @@ IMPLEMENTATION_VERBS   = re.compile(
 # High-confidence practitioner phrases that map directly to a control cluster
 # without needing full vector cluster disambiguation.
 # Format: (pattern, question_type, primary_refs)
+# Intent types where the LLM intake classifier is trusted to skip the
+# clarification round-trip even when vector clusters look ambiguous.
+# Each entry is an intent where asking the user to disambiguate adds
+# friction without information value — the answer shape is determined
+# by intent type, and these intents have a single dominant shape.
+_BYPASS_CLARIFICATION_TYPES = frozenset({
+    QuestionType.DOCUMENT_INVENTORY,
+    QuestionType.DOCUMENT_CONTENT,
+    QuestionType.POSTURE_CHECK,
+})
+
+
 CLEAR_INTENT_PHRASES = [
     # Encryption / cryptography gaps
     (re.compile(r'\bencryption\s+gaps?\b', re.IGNORECASE),
@@ -1068,12 +1080,19 @@ class QueryClassifier:
         Builds client context from document_alerts and posture so the
         clarifier can cite specific known facts rather than abstract options.
         """
-        # Safety net: if LLM intake classifier recognises this as a document
-        # query, bypass clarification — document queries are answered directly
-        # by design (DOCUMENT_INVENTORY_PHRASES / DOCUMENT_CONTENT_PHRASES
-        # cover the obvious phrasings; this catches LLM-detected paraphrases).
+        # Safety net: if the LLM intake classifier recognises an
+        # unambiguous intent type, bypass clarification — regex phrase lists
+        # (DOCUMENT_INVENTORY_PHRASES / CLEAR_INTENT_PHRASES) cover the
+        # obvious wordings; this catches LLM-detected paraphrases. Trying
+        # to cover every possible phrasing with regex is a treadmill; this
+        # delegates the call to the LLM intake classifier instead.
+        #
+        # POSTURE_CHECK queries ("what's our X compliance status", "where
+        # do we stand on Y") are intent-unambiguous — the user wants to
+        # see status. They may follow up with remediation, but asking
+        # which kind of answer they want costs 10s and adds friction.
         llm_qtype = self._llm_classify_intake(user_input, clusters)
-        if llm_qtype in (QuestionType.DOCUMENT_INVENTORY, QuestionType.DOCUMENT_CONTENT):
+        if llm_qtype in _BYPASS_CLARIFICATION_TYPES:
             session = self._build_session(user_input, clusters[0], llm_qtype)
             return IntakeResult(
                 state         = IntakeState.CLEAR,
