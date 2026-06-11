@@ -13491,13 +13491,20 @@ REQ_C72_COMPETENCE_RECORD = EvidenceRequirement(
     must_contain  = [
         ChecklistItem("item:7.2:required_competence","Required competence defined per role affecting ISMS performance", "must", False, "Clause 7.2 a)"),
         ChecklistItem("item:7.2:basis_of_competence","Basis of competence (education, training, experience) recorded per person", "must", False, "Clause 7.2 b)"),
-        ChecklistItem("item:7.2:gap_actions",       "Actions taken to close competence gaps (training, hiring, mentoring) where applicable", "must", False, "Clause 7.2 c)"),
         ChecklistItem("item:7.2:effectiveness",     "Evaluation that competence actions were effective", "must", False, "Clause 7.2 c)"),
         ChecklistItem("item:7.2:documented",        "Documented information retained as evidence of competence", "must", False, "Clause 7.2 d)"),
         ChecklistItem("item:7.2:owner",             "Named owner of the record (HR partner with ISMS Manager)", "must", False, "Accountability"),
     ],
     should_contain= [
         ChecklistItem("item:7.2:training_matrix",   "Training matrix per role (current + required)", "should", False, "Operational view"),
+        # Downgraded MUST → SHOULD 2026-06-11: ISO 27001 7.2 c) is
+        # conditional ("where applicable, take actions to acquire the
+        # necessary competence"); not every competence register has gap-
+        # action rows. Orgs commonly track gap actions in separate
+        # Development Plan / Training Plan docs, leaving the register
+        # itself as a state snapshot. Keeps the item visible as a SHOULD
+        # so the chat surface still suggests it without failing the leaf.
+        ChecklistItem("item:7.2:gap_actions",       "Actions taken to close competence gaps (training, hiring, mentoring) where applicable", "should", False, "Clause 7.2 c) — conditional"),
     ],
 )
 
@@ -13683,10 +13690,17 @@ REQ_C74_EVENT_REGISTER = EvidenceRequirement(
         ChecklistItem("item:7.4:reg_audience",      "Per-row audience (which internal group / external party)", "must", False, "Clause 7.4 c)"),
         ChecklistItem("item:7.4:reg_channel",       "Per-row channel used", "must", False, "Clause 7.4 d)"),
         ChecklistItem("item:7.4:reg_date",          "Per-row date / time of communication", "must", False, "Currency"),
-        ChecklistItem("item:7.4:reg_sender",        "Per-row sender / responsible person", "must", False, "Accountability"),
     ],
     should_contain= [
         ChecklistItem("item:7.4:reg_ack",           "Per-row acknowledgement evidence where required (read-receipt, attendance log, signed receipt)", "should", False, "Closure proof"),
+        # Downgraded MUST → SHOULD 2026-06-11: ISO 27001 7.4 has no
+        # clause requiring per-row sender. Matrix-shape registers (per-
+        # risk comms plan) can't naturally provide per-row sender — the
+        # sender is implicit (the organisation, owned by ISMS Manager).
+        # The leaf accepts both event-log and matrix shapes, so this
+        # item is a SHOULD: log-shape sheets benefit from tracking it,
+        # matrix-shape sheets don't.
+        ChecklistItem("item:7.4:reg_sender",        "Per-row sender / responsible person", "should", False, "Accountability — log-shape registers"),
     ],
 )
 
