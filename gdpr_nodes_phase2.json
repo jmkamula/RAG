@@ -57,7 +57,7 @@
     "id": "GDPR:2016/679:Art.1.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.1.1",
-    "title": "Subject-matter and objectives — paragraph 1",
+    "title": "Subject-matter and objectives \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -111,7 +111,7 @@
     "id": "GDPR:2016/679:Art.1.3",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.1.3",
-    "title": "Subject-matter and objectives — paragraph 3",
+    "title": "Subject-matter and objectives \u2014 paragraph 3",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -225,7 +225,7 @@
     "id": "GDPR:2016/679:Art.2.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.2.1",
-    "title": "Material scope — paragraph 1",
+    "title": "Material scope \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -335,7 +335,7 @@
     "id": "GDPR:2016/679:Art.3.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.3.1",
-    "title": "Territorial scope — paragraph 1",
+    "title": "Territorial scope \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -450,7 +450,7 @@
     "id": "GDPR:2016/679:Art.4.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.4.1",
-    "title": "Definitions — paragraph 1",
+    "title": "Definitions \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -529,8 +529,8 @@
     ],
     "gap_indicators": [
       "No documented data protection policy or privacy policy",
-      "No accountability evidence — no senior management sign-off on data protection commitments",
-      "No data retention schedule — personal data kept indefinitely or without defined limits",
+      "No accountability evidence \u2014 no senior management sign-off on data protection commitments",
+      "No data retention schedule \u2014 personal data kept indefinitely or without defined limits",
       "Processing activities not mapped to a lawful basis under Art.6"
     ],
     "audit_question_refs": [
@@ -562,7 +562,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "GOVERNANCE",
         "confidence": "HIGH",
-        "rationale": "Risk assessment process identifies and addresses risks to personal data principles — the ISO mechanism for systematic GDPR compliance.",
+        "rationale": "Risk assessment process identifies and addresses risks to personal data principles \u2014 the ISO mechanism for systematic GDPR compliance.",
         "posture_lookup_ref": "ISO27001:2022:A.6.1.2"
       },
       "ISO27001:2022:A.5.2": {
@@ -587,7 +587,7 @@
     "id": "GDPR:2016/679:Art.5.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.5.1",
-    "title": "Principles relating to processing of personal data — paragraph 1",
+    "title": "Principles relating to processing of personal data \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -605,8 +605,8 @@
     ],
     "gap_indicators": [
       "No documented data protection policy or privacy policy",
-      "No accountability evidence — no senior management sign-off on data protection commitments",
-      "No data retention schedule — personal data kept indefinitely or without defined limits",
+      "No accountability evidence \u2014 no senior management sign-off on data protection commitments",
+      "No data retention schedule \u2014 personal data kept indefinitely or without defined limits",
       "Processing activities not mapped to a lawful basis under Art.6"
     ],
     "audit_question_refs": [
@@ -640,7 +640,7 @@
     "id": "GDPR:2016/679:Art.5.1.a",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.5.1.a",
-    "title": "Principles relating to processing of personal data — 1(a)",
+    "title": "Principles relating to processing of personal data \u2014 1(a)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -658,8 +658,8 @@
     ],
     "gap_indicators": [
       "No documented data protection policy or privacy policy",
-      "No accountability evidence — no senior management sign-off on data protection commitments",
-      "No data retention schedule — personal data kept indefinitely or without defined limits",
+      "No accountability evidence \u2014 no senior management sign-off on data protection commitments",
+      "No data retention schedule \u2014 personal data kept indefinitely or without defined limits",
       "Processing activities not mapped to a lawful basis under Art.6"
     ],
     "audit_question_refs": [
@@ -705,7 +705,7 @@
     "id": "GDPR:2016/679:Art.5.1.b",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.5.1.b",
-    "title": "Principles relating to processing of personal data — 1(b)",
+    "title": "Principles relating to processing of personal data \u2014 1(b)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -723,8 +723,8 @@
     ],
     "gap_indicators": [
       "No documented data protection policy or privacy policy",
-      "No accountability evidence — no senior management sign-off on data protection commitments",
-      "No data retention schedule — personal data kept indefinitely or without defined limits",
+      "No accountability evidence \u2014 no senior management sign-off on data protection commitments",
+      "No data retention schedule \u2014 personal data kept indefinitely or without defined limits",
       "Processing activities not mapped to a lawful basis under Art.6"
     ],
     "audit_question_refs": [
@@ -754,7 +754,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
-        "rationale": "Asset inventory must record processing purposes for each personal data asset — foundational requirement for purpose limitation.",
+        "rationale": "Asset inventory must record processing purposes for each personal data asset \u2014 foundational requirement for purpose limitation.",
         "posture_lookup_ref": "ISO27001:2022:A.5.9"
       }
     },
@@ -770,7 +770,7 @@
     "id": "GDPR:2016/679:Art.5.1.c",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.5.1.c",
-    "title": "Principles relating to processing of personal data — 1(c)",
+    "title": "Principles relating to processing of personal data \u2014 1(c)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -788,8 +788,8 @@
     ],
     "gap_indicators": [
       "No documented data protection policy or privacy policy",
-      "No accountability evidence — no senior management sign-off on data protection commitments",
-      "No data retention schedule — personal data kept indefinitely or without defined limits",
+      "No accountability evidence \u2014 no senior management sign-off on data protection commitments",
+      "No data retention schedule \u2014 personal data kept indefinitely or without defined limits",
       "Processing activities not mapped to a lawful basis under Art.6"
     ],
     "audit_question_refs": [
@@ -810,7 +810,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information deletion control ensures data no longer adequate, relevant or limited is deleted — direct technical implementation of minimisation.",
+        "rationale": "Information deletion control ensures data no longer adequate, relevant or limited is deleted \u2014 direct technical implementation of minimisation.",
         "posture_lookup_ref": "ISO27001:2022:A.8.10"
       },
       "ISO27001:2022:A.8.11": {
@@ -828,7 +828,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "ENABLES",
         "confidence": "HIGH",
-        "rationale": "Asset inventory identifies all personal data holdings — prerequisite to assessing adequacy, relevance and necessity of each dataset.",
+        "rationale": "Asset inventory identifies all personal data holdings \u2014 prerequisite to assessing adequacy, relevance and necessity of each dataset.",
         "posture_lookup_ref": "ISO27001:2022:A.5.9"
       }
     },
@@ -844,7 +844,7 @@
     "id": "GDPR:2016/679:Art.5.1.d",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.5.1.d",
-    "title": "Principles relating to processing of personal data — 1(d)",
+    "title": "Principles relating to processing of personal data \u2014 1(d)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -862,8 +862,8 @@
     ],
     "gap_indicators": [
       "No documented data protection policy or privacy policy",
-      "No accountability evidence — no senior management sign-off on data protection commitments",
-      "No data retention schedule — personal data kept indefinitely or without defined limits",
+      "No accountability evidence \u2014 no senior management sign-off on data protection commitments",
+      "No data retention schedule \u2014 personal data kept indefinitely or without defined limits",
       "Processing activities not mapped to a lawful basis under Art.6"
     ],
     "audit_question_refs": [
@@ -909,7 +909,7 @@
     "id": "GDPR:2016/679:Art.5.1.e",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.5.1.e",
-    "title": "Principles relating to processing of personal data — 1(e)",
+    "title": "Principles relating to processing of personal data \u2014 1(e)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -927,8 +927,8 @@
     ],
     "gap_indicators": [
       "No documented data protection policy or privacy policy",
-      "No accountability evidence — no senior management sign-off on data protection commitments",
-      "No data retention schedule — personal data kept indefinitely or without defined limits",
+      "No accountability evidence \u2014 no senior management sign-off on data protection commitments",
+      "No data retention schedule \u2014 personal data kept indefinitely or without defined limits",
       "Processing activities not mapped to a lawful basis under Art.6"
     ],
     "audit_question_refs": [
@@ -949,7 +949,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information deletion is the primary technical control for storage limitation — data must be deleted when retention period expires.",
+        "rationale": "Information deletion is the primary technical control for storage limitation \u2014 data must be deleted when retention period expires.",
         "posture_lookup_ref": "ISO27001:2022:A.8.10"
       },
       "ISO27001:2022:A.5.33": {
@@ -958,7 +958,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Protection of records control includes retention schedules — must define and enforce GDPR-compliant retention periods.",
+        "rationale": "Protection of records control includes retention schedules \u2014 must define and enforce GDPR-compliant retention periods.",
         "posture_lookup_ref": "ISO27001:2022:A.5.33"
       },
       "ISO27001:2022:A.5.31": {
@@ -983,7 +983,7 @@
     "id": "GDPR:2016/679:Art.5.1.f",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.5.1.f",
-    "title": "Principles relating to processing of personal data — 1(f)",
+    "title": "Principles relating to processing of personal data \u2014 1(f)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -1001,8 +1001,8 @@
     ],
     "gap_indicators": [
       "No documented data protection policy or privacy policy",
-      "No accountability evidence — no senior management sign-off on data protection commitments",
-      "No data retention schedule — personal data kept indefinitely or without defined limits",
+      "No accountability evidence \u2014 no senior management sign-off on data protection commitments",
+      "No data retention schedule \u2014 personal data kept indefinitely or without defined limits",
       "Processing activities not mapped to a lawful basis under Art.6"
     ],
     "audit_question_refs": [
@@ -1023,7 +1023,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Cryptography is the primary technical control for integrity and confidentiality of personal data — encryption at rest and in transit.",
+        "rationale": "Cryptography is the primary technical control for integrity and confidentiality of personal data \u2014 encryption at rest and in transit.",
         "posture_lookup_ref": "ISO27001:2022:A.8.24"
       },
       "ISO27001:2022:A.5.15": {
@@ -1032,7 +1032,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Access control ensures personal data is only accessible to authorised persons — core confidentiality control.",
+        "rationale": "Access control ensures personal data is only accessible to authorised persons \u2014 core confidentiality control.",
         "posture_lookup_ref": "ISO27001:2022:A.5.15"
       },
       "ISO27001:2022:A.8.5": {
@@ -1068,7 +1068,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information access restriction implements need-to-know principle for personal data — direct confidentiality control.",
+        "rationale": "Information access restriction implements need-to-know principle for personal data \u2014 direct confidentiality control.",
         "posture_lookup_ref": "ISO27001:2022:A.8.3"
       }
     },
@@ -1084,7 +1084,7 @@
     "id": "GDPR:2016/679:Art.5.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.5.2",
-    "title": "Principles relating to processing of personal data — paragraph 2",
+    "title": "Principles relating to processing of personal data \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -1102,8 +1102,8 @@
     ],
     "gap_indicators": [
       "No documented data protection policy or privacy policy",
-      "No accountability evidence — no senior management sign-off on data protection commitments",
-      "No data retention schedule — personal data kept indefinitely or without defined limits",
+      "No accountability evidence \u2014 no senior management sign-off on data protection commitments",
+      "No data retention schedule \u2014 personal data kept indefinitely or without defined limits",
       "Processing activities not mapped to a lawful basis under Art.6"
     ],
     "audit_question_refs": [
@@ -1131,7 +1131,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Independent review of information security is the primary ISO mechanism for demonstrating accountability — documented, auditable.",
+        "rationale": "Independent review of information security is the primary ISO mechanism for demonstrating accountability \u2014 documented, auditable.",
         "posture_lookup_ref": "ISO27001:2022:A.5.35"
       },
       "ISO27001:2022:A.5.36": {
@@ -1140,7 +1140,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Compliance with policies and standards requires documented evidence of compliance — the accountability paper trail.",
+        "rationale": "Compliance with policies and standards requires documented evidence of compliance \u2014 the accountability paper trail.",
         "posture_lookup_ref": "ISO27001:2022:A.5.36"
       },
       "ISO27001:2022:A.9.1": {
@@ -1186,10 +1186,10 @@
     "evidence_requirements": [
       "Documented lawful basis for each processing activity (consent/contract/legal obligation/legitimate interest etc.)",
       "Legitimate interest assessments (LIAs) where Art.6(1)(f) is relied upon",
-      "Legal basis register — one entry per processing activity"
+      "Legal basis register \u2014 one entry per processing activity"
     ],
     "gap_indicators": [
-      "No legal basis register — processing activities lack documented lawful basis",
+      "No legal basis register \u2014 processing activities lack documented lawful basis",
       "Legitimate interest relied upon without a completed Legitimate Interest Assessment",
       "Consent used as lawful basis where it was not freely given or is bundled with other terms"
     ],
@@ -1212,7 +1212,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Legal requirements control is the direct ISO mechanism for identifying and documenting the lawful basis for each processing activity — a mandatory GDPR requirement.",
+        "rationale": "Legal requirements control is the direct ISO mechanism for identifying and documenting the lawful basis for each processing activity \u2014 a mandatory GDPR requirement.",
         "posture_lookup_ref": "ISO27001:2022:A.5.31"
       },
       "ISO27001:2022:A.6.1.2": {
@@ -1221,7 +1221,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "GOVERNANCE",
         "confidence": "HIGH",
-        "rationale": "Risk assessment must consider lawfulness risks — processing without a legal basis is a high-probability, high-impact risk.",
+        "rationale": "Risk assessment must consider lawfulness risks \u2014 processing without a legal basis is a high-probability, high-impact risk.",
         "posture_lookup_ref": "ISO27001:2022:A.6.1.2"
       },
       "ISO27001:2022:A.5.9": {
@@ -1230,7 +1230,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "ENABLES",
         "confidence": "HIGH",
-        "rationale": "Asset inventory must record the lawful basis for each personal data asset — foundational for demonstrating Art.6 compliance.",
+        "rationale": "Asset inventory must record the lawful basis for each personal data asset \u2014 foundational for demonstrating Art.6 compliance.",
         "posture_lookup_ref": "ISO27001:2022:A.5.9"
       }
     },
@@ -1246,7 +1246,7 @@
     "id": "GDPR:2016/679:Art.6.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.6.1",
-    "title": "Lawfulness of processing — paragraph 1",
+    "title": "Lawfulness of processing \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -1258,10 +1258,10 @@
     "evidence_requirements": [
       "Documented lawful basis for each processing activity (consent/contract/legal obligation/legitimate interest etc.)",
       "Legitimate interest assessments (LIAs) where Art.6(1)(f) is relied upon",
-      "Legal basis register — one entry per processing activity"
+      "Legal basis register \u2014 one entry per processing activity"
     ],
     "gap_indicators": [
-      "No legal basis register — processing activities lack documented lawful basis",
+      "No legal basis register \u2014 processing activities lack documented lawful basis",
       "Legitimate interest relied upon without a completed Legitimate Interest Assessment",
       "Consent used as lawful basis where it was not freely given or is bundled with other terms"
     ],
@@ -1287,7 +1287,7 @@
     "id": "GDPR:2016/679:Art.6.1.a",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.6.1.a",
-    "title": "Lawfulness of processing — 1(a)",
+    "title": "Lawfulness of processing \u2014 1(a)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -1299,10 +1299,10 @@
     "evidence_requirements": [
       "Documented lawful basis for each processing activity (consent/contract/legal obligation/legitimate interest etc.)",
       "Legitimate interest assessments (LIAs) where Art.6(1)(f) is relied upon",
-      "Legal basis register — one entry per processing activity"
+      "Legal basis register \u2014 one entry per processing activity"
     ],
     "gap_indicators": [
-      "No legal basis register — processing activities lack documented lawful basis",
+      "No legal basis register \u2014 processing activities lack documented lawful basis",
       "Legitimate interest relied upon without a completed Legitimate Interest Assessment",
       "Consent used as lawful basis where it was not freely given or is bundled with other terms"
     ],
@@ -1349,7 +1349,7 @@
     "id": "GDPR:2016/679:Art.6.1.b",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.6.1.b",
-    "title": "Lawfulness of processing — 1(b)",
+    "title": "Lawfulness of processing \u2014 1(b)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -1361,10 +1361,10 @@
     "evidence_requirements": [
       "Documented lawful basis for each processing activity (consent/contract/legal obligation/legitimate interest etc.)",
       "Legitimate interest assessments (LIAs) where Art.6(1)(f) is relied upon",
-      "Legal basis register — one entry per processing activity"
+      "Legal basis register \u2014 one entry per processing activity"
     ],
     "gap_indicators": [
-      "No legal basis register — processing activities lack documented lawful basis",
+      "No legal basis register \u2014 processing activities lack documented lawful basis",
       "Legitimate interest relied upon without a completed Legitimate Interest Assessment",
       "Consent used as lawful basis where it was not freely given or is bundled with other terms"
     ],
@@ -1411,7 +1411,7 @@
     "id": "GDPR:2016/679:Art.6.1.c",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.6.1.c",
-    "title": "Lawfulness of processing — 1(c)",
+    "title": "Lawfulness of processing \u2014 1(c)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -1423,10 +1423,10 @@
     "evidence_requirements": [
       "Documented lawful basis for each processing activity (consent/contract/legal obligation/legitimate interest etc.)",
       "Legitimate interest assessments (LIAs) where Art.6(1)(f) is relied upon",
-      "Legal basis register — one entry per processing activity"
+      "Legal basis register \u2014 one entry per processing activity"
     ],
     "gap_indicators": [
-      "No legal basis register — processing activities lack documented lawful basis",
+      "No legal basis register \u2014 processing activities lack documented lawful basis",
       "Legitimate interest relied upon without a completed Legitimate Interest Assessment",
       "Consent used as lawful basis where it was not freely given or is bundled with other terms"
     ],
@@ -1473,7 +1473,7 @@
     "id": "GDPR:2016/679:Art.6.1.d",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.6.1.d",
-    "title": "Lawfulness of processing — 1(d)",
+    "title": "Lawfulness of processing \u2014 1(d)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -1485,10 +1485,10 @@
     "evidence_requirements": [
       "Documented lawful basis for each processing activity (consent/contract/legal obligation/legitimate interest etc.)",
       "Legitimate interest assessments (LIAs) where Art.6(1)(f) is relied upon",
-      "Legal basis register — one entry per processing activity"
+      "Legal basis register \u2014 one entry per processing activity"
     ],
     "gap_indicators": [
-      "No legal basis register — processing activities lack documented lawful basis",
+      "No legal basis register \u2014 processing activities lack documented lawful basis",
       "Legitimate interest relied upon without a completed Legitimate Interest Assessment",
       "Consent used as lawful basis where it was not freely given or is bundled with other terms"
     ],
@@ -1536,7 +1536,7 @@
     "id": "GDPR:2016/679:Art.6.1.e",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.6.1.e",
-    "title": "Lawfulness of processing — 1(e)",
+    "title": "Lawfulness of processing \u2014 1(e)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -1548,10 +1548,10 @@
     "evidence_requirements": [
       "Documented lawful basis for each processing activity (consent/contract/legal obligation/legitimate interest etc.)",
       "Legitimate interest assessments (LIAs) where Art.6(1)(f) is relied upon",
-      "Legal basis register — one entry per processing activity"
+      "Legal basis register \u2014 one entry per processing activity"
     ],
     "gap_indicators": [
-      "No legal basis register — processing activities lack documented lawful basis",
+      "No legal basis register \u2014 processing activities lack documented lawful basis",
       "Legitimate interest relied upon without a completed Legitimate Interest Assessment",
       "Consent used as lawful basis where it was not freely given or is bundled with other terms"
     ],
@@ -1598,7 +1598,7 @@
     "id": "GDPR:2016/679:Art.6.1.f",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.6.1.f",
-    "title": "Lawfulness of processing — 1(f)",
+    "title": "Lawfulness of processing \u2014 1(f)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -1610,10 +1610,10 @@
     "evidence_requirements": [
       "Documented lawful basis for each processing activity (consent/contract/legal obligation/legitimate interest etc.)",
       "Legitimate interest assessments (LIAs) where Art.6(1)(f) is relied upon",
-      "Legal basis register — one entry per processing activity"
+      "Legal basis register \u2014 one entry per processing activity"
     ],
     "gap_indicators": [
-      "No legal basis register — processing activities lack documented lawful basis",
+      "No legal basis register \u2014 processing activities lack documented lawful basis",
       "Legitimate interest relied upon without a completed Legitimate Interest Assessment",
       "Consent used as lawful basis where it was not freely given or is bundled with other terms"
     ],
@@ -1699,7 +1699,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Protection of records must cover consent records — the controller must be able to demonstrate consent was freely given and specific.",
+        "rationale": "Protection of records must cover consent records \u2014 the controller must be able to demonstrate consent was freely given and specific.",
         "posture_lookup_ref": "ISO27001:2022:A.5.33"
       },
       "ISO27001:2022:A.8.10": {
@@ -1708,7 +1708,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "ENABLES",
         "confidence": "HIGH",
-        "rationale": "Information deletion enables withdrawal of consent — when consent is withdrawn, personal data must be deletable on request.",
+        "rationale": "Information deletion enables withdrawal of consent \u2014 when consent is withdrawn, personal data must be deletable on request.",
         "posture_lookup_ref": "ISO27001:2022:A.8.10"
       },
       "ISO27001:2022:A.5.9": {
@@ -1717,7 +1717,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "ENABLES",
         "confidence": "HIGH",
-        "rationale": "Asset inventory must track consent status per data subject and processing activity — prerequisite for consent management.",
+        "rationale": "Asset inventory must track consent status per data subject and processing activity \u2014 prerequisite for consent management.",
         "posture_lookup_ref": "ISO27001:2022:A.5.9"
       },
       "ISO27001:2022:A.8.15": {
@@ -1742,7 +1742,7 @@
     "id": "GDPR:2016/679:Art.7.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.7.1",
-    "title": "Conditions for consent — paragraph 1",
+    "title": "Conditions for consent \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -1791,7 +1791,7 @@
     "id": "GDPR:2016/679:Art.7.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.7.2",
-    "title": "Conditions for consent — paragraph 2",
+    "title": "Conditions for consent \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -1866,7 +1866,7 @@
     "id": "GDPR:2016/679:Art.7.3",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.7.3",
-    "title": "Conditions for consent — paragraph 3",
+    "title": "Conditions for consent \u2014 paragraph 3",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -1914,7 +1914,7 @@
     "id": "GDPR:2016/679:Art.7.4",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.7.4",
-    "title": "Conditions for consent — paragraph 4",
+    "title": "Conditions for consent \u2014 paragraph 4",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -2032,7 +2032,7 @@
     "id": "GDPR:2016/679:Art.8.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.8.1",
-    "title": "Conditions applicable to child's consent in relation to information society services — paragraph 1",
+    "title": "Conditions applicable to child's consent in relation to information society services \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -2087,7 +2087,7 @@
     "id": "GDPR:2016/679:Art.8.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.8.2",
-    "title": "Conditions applicable to child's consent in relation to information society services — paragraph 2",
+    "title": "Conditions applicable to child's consent in relation to information society services \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -2181,7 +2181,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information classification must identify special category data and apply heightened classification — explicit GDPR requirement for additional protection of sensitive categories.",
+        "rationale": "Information classification must identify special category data and apply heightened classification \u2014 explicit GDPR requirement for additional protection of sensitive categories.",
         "posture_lookup_ref": "ISO27001:2022:A.5.12"
       },
       "ISO27001:2022:A.8.3": {
@@ -2190,7 +2190,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information access restriction must enforce stricter access controls for special category data — need-to-know at highest level.",
+        "rationale": "Information access restriction must enforce stricter access controls for special category data \u2014 need-to-know at highest level.",
         "posture_lookup_ref": "ISO27001:2022:A.8.3"
       },
       "ISO27001:2022:A.8.24": {
@@ -2199,7 +2199,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Cryptography applies with heightened urgency to special category data — encryption at rest and in transit is effectively mandatory.",
+        "rationale": "Cryptography applies with heightened urgency to special category data \u2014 encryption at rest and in transit is effectively mandatory.",
         "posture_lookup_ref": "ISO27001:2022:A.8.24"
       },
       "ISO27001:2022:A.5.9": {
@@ -2254,7 +2254,7 @@
     "id": "GDPR:2016/679:Art.9.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.9.1",
-    "title": "Processing of special categories of personal data — paragraph 1",
+    "title": "Processing of special categories of personal data \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -2320,7 +2320,7 @@
     "id": "GDPR:2016/679:Art.9.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.9.2",
-    "title": "Processing of special categories of personal data — paragraph 2",
+    "title": "Processing of special categories of personal data \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -2383,7 +2383,7 @@
     "id": "GDPR:2016/679:Art.9.2.a",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.9.2.a",
-    "title": "Processing of special categories of personal data — 2(a)",
+    "title": "Processing of special categories of personal data \u2014 2(a)",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -2445,7 +2445,7 @@
     "id": "GDPR:2016/679:Art.9.2.b",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.9.2.b",
-    "title": "Processing of special categories of personal data — 2(b)",
+    "title": "Processing of special categories of personal data \u2014 2(b)",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -2511,7 +2511,7 @@
     "id": "GDPR:2016/679:Art.9.2.c",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.9.2.c",
-    "title": "Processing of special categories of personal data — 2(c)",
+    "title": "Processing of special categories of personal data \u2014 2(c)",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -2575,7 +2575,7 @@
     "id": "GDPR:2016/679:Art.9.2.h",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.9.2.h",
-    "title": "Processing of special categories of personal data — 2(h)",
+    "title": "Processing of special categories of personal data \u2014 2(h)",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -2638,7 +2638,7 @@
     "id": "GDPR:2016/679:Art.9.2.j",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.9.2.j",
-    "title": "Processing of special categories of personal data — 2(j)",
+    "title": "Processing of special categories of personal data \u2014 2(j)",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -2738,7 +2738,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information access restriction must limit access to criminal convictions data to only those with an explicit legal basis to process it — most restrictive access tier.",
+        "rationale": "Information access restriction must limit access to criminal convictions data to only those with an explicit legal basis to process it \u2014 most restrictive access tier.",
         "posture_lookup_ref": "ISO27001:2022:A.8.3"
       },
       "ISO27001:2022:A.5.9": {
@@ -2756,7 +2756,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Legal requirements control must identify the specific legal basis permitting processing of criminal data — only official authorities or specific legal derogations apply.",
+        "rationale": "Legal requirements control must identify the specific legal basis permitting processing of criminal data \u2014 only official authorities or specific legal derogations apply.",
         "posture_lookup_ref": "ISO27001:2022:A.5.31"
       }
     },
@@ -2793,7 +2793,7 @@
     "id": "GDPR:2016/679:Art.10.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.10.1",
-    "title": "Processing of personal data relating to criminal convictions and offences — paragraph 1",
+    "title": "Processing of personal data relating to criminal convictions and offences \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -2902,7 +2902,7 @@
     "id": "GDPR:2016/679:Art.11.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.11.1",
-    "title": "Processing which does not require identification — paragraph 1",
+    "title": "Processing which does not require identification \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -2956,7 +2956,7 @@
     "id": "GDPR:2016/679:Art.11.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.11.2",
-    "title": "Processing which does not require identification — paragraph 2",
+    "title": "Processing which does not require identification \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -3052,7 +3052,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "MEDIUM",
-        "rationale": "Documented operating procedures must cover data subject communication processes — timely, clear responses to subject requests.",
+        "rationale": "Documented operating procedures must cover data subject communication processes \u2014 timely, clear responses to subject requests.",
         "posture_lookup_ref": "ISO27001:2022:A.5.37"
       },
       "ISO27001:2022:A.5.31": {
@@ -3098,7 +3098,7 @@
     "id": "GDPR:2016/679:Art.12.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.12.1",
-    "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject — paragraph 1",
+    "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -3167,7 +3167,7 @@
     "id": "GDPR:2016/679:Art.12.3",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.12.3",
-    "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject — paragraph 3",
+    "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject \u2014 paragraph 3",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -3235,7 +3235,7 @@
     "id": "GDPR:2016/679:Art.12.6",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.12.6",
-    "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject — paragraph 6",
+    "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject \u2014 paragraph 6",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -3340,7 +3340,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "MEDIUM",
-        "rationale": "Documented operating procedures must define the privacy notice process — what information is provided, when, and in what format.",
+        "rationale": "Documented operating procedures must define the privacy notice process \u2014 what information is provided, when, and in what format.",
         "posture_lookup_ref": "ISO27001:2022:A.5.37"
       },
       "ISO27001:2022:A.5.9": {
@@ -3393,7 +3393,7 @@
     "id": "GDPR:2016/679:Art.13.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.1",
-    "title": "Information to be provided where personal data are collected from the data subject — paragraph 1",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -3454,7 +3454,7 @@
     "id": "GDPR:2016/679:Art.13.1.a",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.1.a",
-    "title": "Information to be provided where personal data are collected from the data subject — 1(a)",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 1(a)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -3514,7 +3514,7 @@
     "id": "GDPR:2016/679:Art.13.1.b",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.1.b",
-    "title": "Information to be provided where personal data are collected from the data subject — 1(b)",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 1(b)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -3574,7 +3574,7 @@
     "id": "GDPR:2016/679:Art.13.1.c",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.1.c",
-    "title": "Information to be provided where personal data are collected from the data subject — 1(c)",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 1(c)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -3634,7 +3634,7 @@
     "id": "GDPR:2016/679:Art.13.1.d",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.1.d",
-    "title": "Information to be provided where personal data are collected from the data subject — 1(d)",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 1(d)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -3695,7 +3695,7 @@
     "id": "GDPR:2016/679:Art.13.1.e",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.1.e",
-    "title": "Information to be provided where personal data are collected from the data subject — 1(e)",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 1(e)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -3755,7 +3755,7 @@
     "id": "GDPR:2016/679:Art.13.1.f",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.1.f",
-    "title": "Information to be provided where personal data are collected from the data subject — 1(f)",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 1(f)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -3823,7 +3823,7 @@
     "id": "GDPR:2016/679:Art.13.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.2",
-    "title": "Information to be provided where personal data are collected from the data subject — paragraph 2",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -3886,7 +3886,7 @@
     "id": "GDPR:2016/679:Art.13.2.a",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.2.a",
-    "title": "Information to be provided where personal data are collected from the data subject — 2(a)",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 2(a)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -3947,7 +3947,7 @@
     "id": "GDPR:2016/679:Art.13.2.b",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.2.b",
-    "title": "Information to be provided where personal data are collected from the data subject — 2(b)",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 2(b)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4009,7 +4009,7 @@
     "id": "GDPR:2016/679:Art.13.2.c",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.2.c",
-    "title": "Information to be provided where personal data are collected from the data subject — 2(c)",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 2(c)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4070,7 +4070,7 @@
     "id": "GDPR:2016/679:Art.13.2.d",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.2.d",
-    "title": "Information to be provided where personal data are collected from the data subject — 2(d)",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 2(d)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4130,7 +4130,7 @@
     "id": "GDPR:2016/679:Art.13.2.e",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.13.2.e",
-    "title": "Information to be provided where personal data are collected from the data subject — 2(e)",
+    "title": "Information to be provided where personal data are collected from the data subject \u2014 2(e)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4268,7 +4268,7 @@
     "id": "GDPR:2016/679:Art.14.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.14.1",
-    "title": "Information to be provided where personal data have not been obtained from the data subject — paragraph 1",
+    "title": "Information to be provided where personal data have not been obtained from the data subject \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4330,7 +4330,7 @@
     "id": "GDPR:2016/679:Art.14.3",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.14.3",
-    "title": "Information to be provided where personal data have not been obtained from the data subject — paragraph 3",
+    "title": "Information to be provided where personal data have not been obtained from the data subject \u2014 paragraph 3",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4419,24 +4419,6 @@
     "operational_caps": [],
     "security_domains": [],
     "cross_framework_summary": {
-      "ISO27001:2022:A.5.9": {
-        "related_req_id": "ISO27001:2022:A.5.9",
-        "related_title": "ISO 27001:2022 A.5.9",
-        "related_standard": "ISO27001:2022",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Asset inventory is the operational foundation for subject access requests — you cannot fulfil Art.15 without knowing where all personal data for a subject is held.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.9"
-      },
-      "ISO27001:2022:A.5.15": {
-        "related_req_id": "ISO27001:2022:A.5.15",
-        "related_title": "ISO 27001:2022 A.5.15",
-        "related_standard": "ISO27001:2022",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Access control systems must support the ability to extract all personal data for a specific data subject on request.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.15"
-      },
       "ISO27001:2022:A.5.33": {
         "related_req_id": "ISO27001:2022:A.5.33",
         "related_title": "ISO 27001:2022 A.5.33",
@@ -4446,14 +4428,14 @@
         "rationale": "Records of processing activities (Art.30) provide the structured information required to respond to subject access requests.",
         "posture_lookup_ref": "ISO27001:2022:A.5.33"
       },
-      "ISO27001:2022:A.8.5": {
-        "related_req_id": "ISO27001:2022:A.8.5",
-        "related_title": "ISO 27001:2022 A.8.5",
+      "ISO27001:2022:A.5.34": {
+        "related_req_id": "ISO27001:2022:A.5.34",
+        "related_title": "ISO 27001:2022 A.5.34",
         "related_standard": "ISO27001:2022",
-        "relationship_type": "ENABLES",
-        "confidence": "MEDIUM",
-        "rationale": "Secure authentication of the requesting data subject is required before releasing their personal data.",
-        "posture_lookup_ref": "ISO27001:2022:A.8.5"
+        "relationship_type": "IMPLEMENTS",
+        "confidence": "HIGH",
+        "rationale": "PII protection includes subject access request procedures \u2014 the primary control for fulfilling DSAR identification, search, and response.",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
       }
     },
     "edges": [],
@@ -4489,7 +4471,7 @@
     "id": "GDPR:2016/679:Art.15.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.15.1",
-    "title": "Right of access by the data subject — paragraph 1",
+    "title": "Right of access by the data subject \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4551,7 +4533,7 @@
     "id": "GDPR:2016/679:Art.15.1.a",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.15.1.a",
-    "title": "Right of access by the data subject — 1(a)",
+    "title": "Right of access by the data subject \u2014 1(a)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4612,7 +4594,7 @@
     "id": "GDPR:2016/679:Art.15.1.b",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.15.1.b",
-    "title": "Right of access by the data subject — 1(b)",
+    "title": "Right of access by the data subject \u2014 1(b)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4672,7 +4654,7 @@
     "id": "GDPR:2016/679:Art.15.1.c",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.15.1.c",
-    "title": "Right of access by the data subject — 1(c)",
+    "title": "Right of access by the data subject \u2014 1(c)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4733,7 +4715,7 @@
     "id": "GDPR:2016/679:Art.15.1.d",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.15.1.d",
-    "title": "Right of access by the data subject — 1(d)",
+    "title": "Right of access by the data subject \u2014 1(d)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4795,7 +4777,7 @@
     "id": "GDPR:2016/679:Art.15.1.e",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.15.1.e",
-    "title": "Right of access by the data subject — 1(e)",
+    "title": "Right of access by the data subject \u2014 1(e)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4863,7 +4845,7 @@
     "id": "GDPR:2016/679:Art.15.1.f",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.15.1.f",
-    "title": "Right of access by the data subject — 1(f)",
+    "title": "Right of access by the data subject \u2014 1(f)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4925,7 +4907,7 @@
     "id": "GDPR:2016/679:Art.15.1.g",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.15.1.g",
-    "title": "Right of access by the data subject — 1(g)",
+    "title": "Right of access by the data subject \u2014 1(g)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -4987,7 +4969,7 @@
     "id": "GDPR:2016/679:Art.15.1.h",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.15.1.h",
-    "title": "Right of access by the data subject — 1(h)",
+    "title": "Right of access by the data subject \u2014 1(h)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -5048,7 +5030,7 @@
     "id": "GDPR:2016/679:Art.15.3",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.15.3",
-    "title": "Right of access by the data subject — paragraph 3",
+    "title": "Right of access by the data subject \u2014 paragraph 3",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -5149,15 +5131,6 @@
     "operational_caps": [],
     "security_domains": [],
     "cross_framework_summary": {
-      "ISO27001:2022:A.5.9": {
-        "related_req_id": "ISO27001:2022:A.5.9",
-        "related_title": "ISO 27001:2022 A.5.9",
-        "related_standard": "ISO27001:2022",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Asset inventory with data locations enables finding and correcting inaccurate personal data across all systems including backups.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.9"
-      },
       "ISO27001:2022:A.8.9": {
         "related_req_id": "ISO27001:2022:A.8.9",
         "related_title": "ISO 27001:2022 A.8.9",
@@ -5173,8 +5146,17 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "MEDIUM",
-        "rationale": "Backup systems must accommodate rectification requests — corrections should propagate to backup copies where technically feasible.",
+        "rationale": "Backup systems must accommodate rectification requests \u2014 corrections should propagate to backup copies where technically feasible.",
         "posture_lookup_ref": "ISO27001:2022:A.8.13"
+      },
+      "ISO27001:2022:A.5.34": {
+        "related_req_id": "ISO27001:2022:A.5.34",
+        "related_title": "ISO 27001:2022 A.5.34",
+        "related_standard": "ISO27001:2022",
+        "relationship_type": "IMPLEMENTS",
+        "confidence": "HIGH",
+        "rationale": "PII protection includes rectification procedures for maintaining accuracy of personal data.",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
       }
     },
     "edges": [],
@@ -5210,7 +5192,7 @@
     "id": "GDPR:2016/679:Art.16.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.16.1",
-    "title": "Right to rectification — paragraph 1",
+    "title": "Right to rectification \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -5314,17 +5296,8 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information deletion is the primary technical control for the right to be forgotten — secure, verifiable, complete erasure.",
+        "rationale": "Information deletion is the primary technical control for the right to be forgotten \u2014 secure, verifiable, complete erasure.",
         "posture_lookup_ref": "ISO27001:2022:A.8.10"
-      },
-      "ISO27001:2022:A.5.9": {
-        "related_req_id": "ISO27001:2022:A.5.9",
-        "related_title": "ISO 27001:2022 A.5.9",
-        "related_standard": "ISO27001:2022",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Asset inventory identifies all locations where a data subject's personal data is held — prerequisite for complete erasure.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.9"
       },
       "ISO27001:2022:A.8.13": {
         "related_req_id": "ISO27001:2022:A.8.13",
@@ -5332,7 +5305,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
-        "rationale": "Backup management must address erasure requests — controller must consider whether backup copies must also be erased or overwritten.",
+        "rationale": "Backup management must address erasure requests \u2014 controller must consider whether backup copies must also be erased or overwritten.",
         "posture_lookup_ref": "ISO27001:2022:A.8.13"
       },
       "ISO27001:2022:A.7.14": {
@@ -5343,6 +5316,15 @@
         "confidence": "MEDIUM",
         "rationale": "Secure disposal of equipment must ensure deleted personal data is not recoverable from decommissioned storage media.",
         "posture_lookup_ref": "ISO27001:2022:A.7.14"
+      },
+      "ISO27001:2022:A.5.34": {
+        "related_req_id": "ISO27001:2022:A.5.34",
+        "related_title": "ISO 27001:2022 A.5.34",
+        "related_standard": "ISO27001:2022",
+        "relationship_type": "IMPLEMENTS",
+        "confidence": "HIGH",
+        "rationale": "PII protection includes erasure procedures \u2014 the procedural side of right-to-be-forgotten alongside A.8.10 information deletion.",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
       }
     },
     "edges": [],
@@ -5380,7 +5362,7 @@
     "id": "GDPR:2016/679:Art.17.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.17.1",
-    "title": "Right to erasure ('right to be forgotten') — paragraph 1",
+    "title": "Right to erasure ('right to be forgotten') \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -5451,7 +5433,7 @@
     "id": "GDPR:2016/679:Art.17.1.a",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.17.1.a",
-    "title": "Right to erasure ('right to be forgotten') — 1(a)",
+    "title": "Right to erasure ('right to be forgotten') \u2014 1(a)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -5512,7 +5494,7 @@
     "id": "GDPR:2016/679:Art.17.1.b",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.17.1.b",
-    "title": "Right to erasure ('right to be forgotten') — 1(b)",
+    "title": "Right to erasure ('right to be forgotten') \u2014 1(b)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -5575,7 +5557,7 @@
     "id": "GDPR:2016/679:Art.17.1.c",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.17.1.c",
-    "title": "Right to erasure ('right to be forgotten') — 1(c)",
+    "title": "Right to erasure ('right to be forgotten') \u2014 1(c)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -5640,7 +5622,7 @@
     "id": "GDPR:2016/679:Art.17.1.d",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.17.1.d",
-    "title": "Right to erasure ('right to be forgotten') — 1(d)",
+    "title": "Right to erasure ('right to be forgotten') \u2014 1(d)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -5701,7 +5683,7 @@
     "id": "GDPR:2016/679:Art.17.1.e",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.17.1.e",
-    "title": "Right to erasure ('right to be forgotten') — 1(e)",
+    "title": "Right to erasure ('right to be forgotten') \u2014 1(e)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -5784,32 +5766,14 @@
     "operational_caps": [],
     "security_domains": [],
     "cross_framework_summary": {
-      "ISO27001:2022:A.5.15": {
-        "related_req_id": "ISO27001:2022:A.5.15",
-        "related_title": "ISO 27001:2022 A.5.15",
+      "ISO27001:2022:A.5.34": {
+        "related_req_id": "ISO27001:2022:A.5.34",
+        "related_title": "ISO 27001:2022 A.5.34",
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Access control can implement processing restrictions technically — flagging restricted records and preventing further processing.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.15"
-      },
-      "ISO27001:2022:A.8.3": {
-        "related_req_id": "ISO27001:2022:A.8.3",
-        "related_title": "ISO 27001:2022 A.8.3",
-        "related_standard": "ISO27001:2022",
-        "relationship_type": "IMPLEMENTS",
-        "confidence": "HIGH",
-        "rationale": "Information access restriction implements the technical capability to restrict processing of specific personal data records.",
-        "posture_lookup_ref": "ISO27001:2022:A.8.3"
-      },
-      "ISO27001:2022:A.5.9": {
-        "related_req_id": "ISO27001:2022:A.5.9",
-        "related_title": "ISO 27001:2022 A.5.9",
-        "related_standard": "ISO27001:2022",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Asset inventory must support restriction flags per data subject record — prerequisite for managing restriction requests.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.9"
+        "rationale": "PII protection includes processing-restriction procedures triggered by subject requests.",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
       }
     },
     "edges": [],
@@ -5846,7 +5810,7 @@
     "id": "GDPR:2016/679:Art.18.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.18.1",
-    "title": "Right to restriction of processing — paragraph 1",
+    "title": "Right to restriction of processing \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -5912,7 +5876,7 @@
     "id": "GDPR:2016/679:Art.18.1.a",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.18.1.a",
-    "title": "Right to restriction of processing — 1(a)",
+    "title": "Right to restriction of processing \u2014 1(a)",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -5966,7 +5930,7 @@
     "id": "GDPR:2016/679:Art.18.1.b",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.18.1.b",
-    "title": "Right to restriction of processing — 1(b)",
+    "title": "Right to restriction of processing \u2014 1(b)",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -6020,7 +5984,7 @@
     "id": "GDPR:2016/679:Art.18.1.c",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.18.1.c",
-    "title": "Right to restriction of processing — 1(c)",
+    "title": "Right to restriction of processing \u2014 1(c)",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -6074,7 +6038,7 @@
     "id": "GDPR:2016/679:Art.18.1.d",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.18.1.d",
-    "title": "Right to restriction of processing — 1(d)",
+    "title": "Right to restriction of processing \u2014 1(d)",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -6159,6 +6123,15 @@
         "confidence": "MEDIUM",
         "rationale": "Documented operating procedures must include the process for notifying recipients when rectification, erasure or restriction has been applied to personal data shared with them.",
         "posture_lookup_ref": "ISO27001:2022:A.5.37"
+      },
+      "ISO27001:2022:A.5.34": {
+        "related_req_id": "ISO27001:2022:A.5.34",
+        "related_title": "ISO 27001:2022 A.5.34",
+        "related_standard": "ISO27001:2022",
+        "relationship_type": "IMPLEMENTS",
+        "confidence": "HIGH",
+        "rationale": "PII protection includes recipient-notification procedures when data is rectified, erased, or restricted.",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
       }
     },
     "edges": [],
@@ -6195,7 +6168,7 @@
     "id": "GDPR:2016/679:Art.19.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.19.1",
-    "title": "Notification obligation regarding rectification or erasure of personal data or restriction of processing — paragraph 1",
+    "title": "Notification obligation regarding rectification or erasure of personal data or restriction of processing \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -6277,7 +6250,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information transfer controls must cover secure provision of portable personal data — format, encryption, integrity verification.",
+        "rationale": "Information transfer controls must cover secure provision of portable personal data \u2014 format, encryption, integrity verification.",
         "posture_lookup_ref": "ISO27001:2022:A.5.14"
       },
       "ISO27001:2022:A.8.24": {
@@ -6286,26 +6259,17 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Cryptography must protect portable personal data in transit — the exported dataset must be encrypted for transmission.",
+        "rationale": "Cryptography must protect portable personal data in transit \u2014 the exported dataset must be encrypted for transmission.",
         "posture_lookup_ref": "ISO27001:2022:A.8.24"
       },
-      "ISO27001:2022:A.5.9": {
-        "related_req_id": "ISO27001:2022:A.5.9",
-        "related_title": "ISO 27001:2022 A.5.9",
+      "ISO27001:2022:A.5.34": {
+        "related_req_id": "ISO27001:2022:A.5.34",
+        "related_title": "ISO 27001:2022 A.5.34",
         "related_standard": "ISO27001:2022",
-        "relationship_type": "ENABLES",
+        "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Asset inventory with data formats supports portability — knowing where data is held and in what format enables structured export.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.9"
-      },
-      "ISO27001:2022:A.8.5": {
-        "related_req_id": "ISO27001:2022:A.8.5",
-        "related_title": "ISO 27001:2022 A.8.5",
-        "related_standard": "ISO27001:2022",
-        "relationship_type": "ENABLES",
-        "confidence": "MEDIUM",
-        "rationale": "Secure authentication of requesting data subject required before releasing portable copy of their personal data.",
-        "posture_lookup_ref": "ISO27001:2022:A.8.5"
+        "rationale": "PII protection includes data-portability procedures (structured machine-readable export).",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
       }
     },
     "edges": [],
@@ -6343,7 +6307,7 @@
     "id": "GDPR:2016/679:Art.20.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.20.1",
-    "title": "Right to data portability — paragraph 1",
+    "title": "Right to data portability \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -6424,23 +6388,14 @@
     "operational_caps": [],
     "security_domains": [],
     "cross_framework_summary": {
-      "ISO27001:2022:A.5.15": {
-        "related_req_id": "ISO27001:2022:A.5.15",
-        "related_title": "ISO 27001:2022 A.5.15",
+      "ISO27001:2022:A.5.34": {
+        "related_req_id": "ISO27001:2022:A.5.34",
+        "related_title": "ISO 27001:2022 A.5.34",
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Access control systems must implement opt-out/objection flags that prevent processing for direct marketing and profiling.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.15"
-      },
-      "ISO27001:2022:A.5.9": {
-        "related_req_id": "ISO27001:2022:A.5.9",
-        "related_title": "ISO 27001:2022 A.5.9",
-        "related_standard": "ISO27001:2022",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Asset inventory with purpose metadata enables identifying and stopping all processing activities the subject has objected to.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.9"
+        "rationale": "PII protection includes objection-handling procedures including opt-out flags for direct marketing/profiling.",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
       }
     },
     "edges": [],
@@ -6476,7 +6431,7 @@
     "id": "GDPR:2016/679:Art.21.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.21.1",
-    "title": "Right to object — paragraph 1",
+    "title": "Right to object \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -6530,7 +6485,7 @@
     "id": "GDPR:2016/679:Art.21.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.21.2",
-    "title": "Right to object — paragraph 2",
+    "title": "Right to object \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -6626,7 +6581,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "GOVERNANCE",
         "confidence": "HIGH",
-        "rationale": "Risk assessment must evaluate risks of automated decision-making including profiling — Art.22 requires DPIA in many cases.",
+        "rationale": "Risk assessment must evaluate risks of automated decision-making including profiling \u2014 Art.22 requires DPIA in many cases.",
         "posture_lookup_ref": "ISO27001:2022:A.6.1.2"
       },
       "ISO27001:2022:A.8.9": {
@@ -6672,7 +6627,7 @@
     "id": "GDPR:2016/679:Art.22.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.22.1",
-    "title": "Automated individual decision-making, including profiling — paragraph 1",
+    "title": "Automated individual decision-making, including profiling \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -6733,7 +6688,7 @@
     "id": "GDPR:2016/679:Art.22.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.22.2",
-    "title": "Automated individual decision-making, including profiling — paragraph 2",
+    "title": "Automated individual decision-making, including profiling \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -6793,7 +6748,7 @@
     "id": "GDPR:2016/679:Art.22.3",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.22.3",
-    "title": "Automated individual decision-making, including profiling — paragraph 3",
+    "title": "Automated individual decision-making, including profiling \u2014 paragraph 3",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -6909,7 +6864,7 @@
     "id": "GDPR:2016/679:Art.23.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.23.1",
-    "title": "Restrictions — paragraph 1",
+    "title": "Restrictions \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -6982,7 +6937,7 @@
     "gap_indicators": [
       "No data protection policy approved by management",
       "GDPR roles and responsibilities not defined or documented",
-      "No periodic review of data protection measures — compliance treated as one-time exercise"
+      "No periodic review of data protection measures \u2014 compliance treated as one-time exercise"
     ],
     "audit_question_refs": [
       "Are appropriate technical and organisational measures implemented and documented?",
@@ -7003,7 +6958,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information security policies demonstrate the controller's commitment to data protection — foundational accountability document.",
+        "rationale": "Information security policies demonstrate the controller's commitment to data protection \u2014 foundational accountability document.",
         "posture_lookup_ref": "ISO27001:2022:A.5.1"
       },
       "ISO27001:2022:A.5.4": {
@@ -7012,7 +6967,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Management responsibilities control ensures top management takes accountability for GDPR compliance — Art.24 is a governance obligation.",
+        "rationale": "Management responsibilities control ensures top management takes accountability for GDPR compliance \u2014 Art.24 is a governance obligation.",
         "posture_lookup_ref": "ISO27001:2022:A.5.4"
       },
       "ISO27001:2022:A.5.2": {
@@ -7046,7 +7001,7 @@
     "id": "GDPR:2016/679:Art.24.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.24.1",
-    "title": "Responsibility of the controller — paragraph 1",
+    "title": "Responsibility of the controller \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -7063,7 +7018,7 @@
     "gap_indicators": [
       "No data protection policy approved by management",
       "GDPR roles and responsibilities not defined or documented",
-      "No periodic review of data protection measures — compliance treated as one-time exercise"
+      "No periodic review of data protection measures \u2014 compliance treated as one-time exercise"
     ],
     "audit_question_refs": [
       "M11.0",
@@ -7101,7 +7056,7 @@
     "id": "GDPR:2016/679:Art.24.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.24.2",
-    "title": "Responsibility of the controller — paragraph 2",
+    "title": "Responsibility of the controller \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -7118,7 +7073,7 @@
     "gap_indicators": [
       "No data protection policy approved by management",
       "GDPR roles and responsibilities not defined or documented",
-      "No periodic review of data protection measures — compliance treated as one-time exercise"
+      "No periodic review of data protection measures \u2014 compliance treated as one-time exercise"
     ],
     "audit_question_refs": [],
     "parent_ref": "Art.24",
@@ -7174,12 +7129,12 @@
     "guidance": "",
     "evidence_requirements": [
       "Privacy by design standard incorporated into system development lifecycle",
-      "Data minimisation controls — technical evidence that only necessary data is processed",
+      "Data minimisation controls \u2014 technical evidence that only necessary data is processed",
       "Privacy impact screening for new projects processing personal data"
     ],
     "gap_indicators": [
-      "No privacy by design process — data protection considered after development, not during",
-      "No data minimisation controls — systems collect more personal data than necessary",
+      "No privacy by design process \u2014 data protection considered after development, not during",
+      "No data minimisation controls \u2014 systems collect more personal data than necessary",
       "No privacy impact screening for new projects"
     ],
     "audit_question_refs": [
@@ -7207,7 +7162,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Secure development lifecycle is the ISO mechanism for embedding privacy by design — security and privacy requirements built in from the start of development, not bolted on afterwards.",
+        "rationale": "Secure development lifecycle is the ISO mechanism for embedding privacy by design \u2014 security and privacy requirements built in from the start of development, not bolted on afterwards.",
         "posture_lookup_ref": "ISO27001:2022:A.8.25"
       },
       "ISO27001:2022:A.8.27": {
@@ -7243,7 +7198,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Data masking is a key privacy-by-default technical control — using masked/pseudonymised data by default reduces exposure.",
+        "rationale": "Data masking is a key privacy-by-default technical control \u2014 using masked/pseudonymised data by default reduces exposure.",
         "posture_lookup_ref": "ISO27001:2022:A.8.11"
       },
       "ISO27001:2022:A.8.10": {
@@ -7252,7 +7207,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information deletion with automated retention enforcement implements privacy by default — data deleted automatically when no longer needed.",
+        "rationale": "Information deletion with automated retention enforcement implements privacy by default \u2014 data deleted automatically when no longer needed.",
         "posture_lookup_ref": "ISO27001:2022:A.8.10"
       }
     },
@@ -7268,7 +7223,7 @@
     "id": "GDPR:2016/679:Art.25.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.25.1",
-    "title": "Data protection by design and by default — paragraph 1",
+    "title": "Data protection by design and by default \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -7279,12 +7234,12 @@
     "guidance": "",
     "evidence_requirements": [
       "Privacy by design standard incorporated into system development lifecycle",
-      "Data minimisation controls — technical evidence that only necessary data is processed",
+      "Data minimisation controls \u2014 technical evidence that only necessary data is processed",
       "Privacy impact screening for new projects processing personal data"
     ],
     "gap_indicators": [
-      "No privacy by design process — data protection considered after development, not during",
-      "No data minimisation controls — systems collect more personal data than necessary",
+      "No privacy by design process \u2014 data protection considered after development, not during",
+      "No data minimisation controls \u2014 systems collect more personal data than necessary",
       "No privacy impact screening for new projects"
     ],
     "audit_question_refs": [
@@ -7318,7 +7273,7 @@
     "id": "GDPR:2016/679:Art.25.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.25.2",
-    "title": "Data protection by design and by default — paragraph 2",
+    "title": "Data protection by design and by default \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -7329,12 +7284,12 @@
     "guidance": "",
     "evidence_requirements": [
       "Privacy by design standard incorporated into system development lifecycle",
-      "Data minimisation controls — technical evidence that only necessary data is processed",
+      "Data minimisation controls \u2014 technical evidence that only necessary data is processed",
       "Privacy impact screening for new projects processing personal data"
     ],
     "gap_indicators": [
-      "No privacy by design process — data protection considered after development, not during",
-      "No data minimisation controls — systems collect more personal data than necessary",
+      "No privacy by design process \u2014 data protection considered after development, not during",
+      "No data minimisation controls \u2014 systems collect more personal data than necessary",
       "No privacy impact screening for new projects"
     ],
     "audit_question_refs": [
@@ -7374,7 +7329,7 @@
     "applies_to": [
       "controller"
     ],
-    "obligation_text": "Where two or more controllers jointly determine the purposes and means of processing, they shall be joint controllers. They shall in a transparent manner determine their respective responsibilities for compliance with the obligations under this Regulation, in particular as regards the exercising of the rights of the data subject, by means of an arrangement between them. The arrangement referred to in paragraph 1 shall duly reflect the respective roles and relationships of the joint controllers vis-à-vis the data subjects. The essence of the arrangement shall be made available to the data subject.",
+    "obligation_text": "Where two or more controllers jointly determine the purposes and means of processing, they shall be joint controllers. They shall in a transparent manner determine their respective responsibilities for compliance with the obligations under this Regulation, in particular as regards the exercising of the rights of the data subject, by means of an arrangement between them. The arrangement referred to in paragraph 1 shall duly reflect the respective roles and relationships of the joint controllers vis-\u00e0-vis the data subjects. The essence of the arrangement shall be made available to the data subject.",
     "intent": "",
     "guidance": "",
     "evidence_requirements": [],
@@ -7395,7 +7350,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information security in supplier relationships covers joint controller arrangements — security requirements and responsibilities must be defined in joint controller agreements.",
+        "rationale": "Information security in supplier relationships covers joint controller arrangements \u2014 security requirements and responsibilities must be defined in joint controller agreements.",
         "posture_lookup_ref": "ISO27001:2022:A.5.19"
       },
       "ISO27001:2022:A.5.20": {
@@ -7443,7 +7398,7 @@
     "id": "GDPR:2016/679:Art.26.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.26.1",
-    "title": "Joint controllers — paragraph 1",
+    "title": "Joint controllers \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -7497,13 +7452,13 @@
     "id": "GDPR:2016/679:Art.26.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.26.2",
-    "title": "Joint controllers — paragraph 2",
+    "title": "Joint controllers \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
       "controller"
     ],
-    "obligation_text": "The arrangement referred to in paragraph 1 shall duly reflect the respective roles and relationships of the joint controllers vis-à-vis the data subjects. The essence of the arrangement shall be made available to the data subject.",
+    "obligation_text": "The arrangement referred to in paragraph 1 shall duly reflect the respective roles and relationships of the joint controllers vis-\u00e0-vis the data subjects. The essence of the arrangement shall be made available to the data subject.",
     "intent": "",
     "guidance": "",
     "evidence_requirements": [],
@@ -7610,7 +7565,7 @@
     "id": "GDPR:2016/679:Art.27.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.27.1",
-    "title": "Representatives of controllers or processors not established in the Union — paragraph 1",
+    "title": "Representatives of controllers or processors not established in the Union \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -7668,7 +7623,7 @@
     "id": "GDPR:2016/679:Art.27.4",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.27.4",
-    "title": "Representatives of controllers or processors not established in the Union — paragraph 4",
+    "title": "Representatives of controllers or processors not established in the Union \u2014 paragraph 4",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -7735,13 +7690,13 @@
     "guidance": "",
     "evidence_requirements": [
       "Data Processing Agreements (DPAs) in place with all processors, containing Art.28(3) mandatory clauses",
-      "Processor due diligence records — assessment of processor security measures",
+      "Processor due diligence records \u2014 assessment of processor security measures",
       "Sub-processor register with controller approval records"
     ],
     "gap_indicators": [
       "DPAs absent or not in place with all processors",
       "DPAs do not contain the Art.28(3) mandatory clauses",
-      "No sub-processor register — sub-processors engaged without controller approval",
+      "No sub-processor register \u2014 sub-processors engaged without controller approval",
       "Processor due diligence not conducted before engagement"
     ],
     "audit_question_refs": [
@@ -7764,7 +7719,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information security in supplier relationships is the primary ISO control for managing data processor relationships — security requirements imposed on all processors by contract.",
+        "rationale": "Information security in supplier relationships is the primary ISO control for managing data processor relationships \u2014 security requirements imposed on all processors by contract.",
         "posture_lookup_ref": "ISO27001:2022:A.5.19"
       },
       "ISO27001:2022:A.5.20": {
@@ -7773,7 +7728,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Addressing information security within supplier agreements directly implements Art.28 — processor contracts must contain specific GDPR-mandated clauses (subject matter, duration, nature, purpose).",
+        "rationale": "Addressing information security within supplier agreements directly implements Art.28 \u2014 processor contracts must contain specific GDPR-mandated clauses (subject matter, duration, nature, purpose).",
         "posture_lookup_ref": "ISO27001:2022:A.5.20"
       },
       "ISO27001:2022:A.5.22": {
@@ -7791,7 +7746,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
-        "rationale": "Managing security in the ICT supply chain extends processor oversight to sub-processors — Art.28 requires controller approval for sub-processor engagements.",
+        "rationale": "Managing security in the ICT supply chain extends processor oversight to sub-processors \u2014 Art.28 requires controller approval for sub-processor engagements.",
         "posture_lookup_ref": "ISO27001:2022:A.5.21"
       }
     },
@@ -7824,7 +7779,7 @@
     "id": "GDPR:2016/679:Art.28.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.28.1",
-    "title": "Processor — paragraph 1",
+    "title": "Processor \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -7835,13 +7790,13 @@
     "guidance": "",
     "evidence_requirements": [
       "Data Processing Agreements (DPAs) in place with all processors, containing Art.28(3) mandatory clauses",
-      "Processor due diligence records — assessment of processor security measures",
+      "Processor due diligence records \u2014 assessment of processor security measures",
       "Sub-processor register with controller approval records"
     ],
     "gap_indicators": [
       "DPAs absent or not in place with all processors",
       "DPAs do not contain the Art.28(3) mandatory clauses",
-      "No sub-processor register — sub-processors engaged without controller approval",
+      "No sub-processor register \u2014 sub-processors engaged without controller approval",
       "Processor due diligence not conducted before engagement"
     ],
     "audit_question_refs": [],
@@ -7866,7 +7821,7 @@
     "id": "GDPR:2016/679:Art.28.3",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.28.3",
-    "title": "Processor — paragraph 3",
+    "title": "Processor \u2014 paragraph 3",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -7878,13 +7833,13 @@
     "guidance": "",
     "evidence_requirements": [
       "Data Processing Agreements (DPAs) in place with all processors, containing Art.28(3) mandatory clauses",
-      "Processor due diligence records — assessment of processor security measures",
+      "Processor due diligence records \u2014 assessment of processor security measures",
       "Sub-processor register with controller approval records"
     ],
     "gap_indicators": [
       "DPAs absent or not in place with all processors",
       "DPAs do not contain the Art.28(3) mandatory clauses",
-      "No sub-processor register — sub-processors engaged without controller approval",
+      "No sub-processor register \u2014 sub-processors engaged without controller approval",
       "Processor due diligence not conducted before engagement"
     ],
     "audit_question_refs": [],
@@ -7909,7 +7864,7 @@
     "id": "GDPR:2016/679:Art.28.3.a",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.28.3.a",
-    "title": "Processor — 3(a)",
+    "title": "Processor \u2014 3(a)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -7921,13 +7876,13 @@
     "guidance": "",
     "evidence_requirements": [
       "Data Processing Agreements (DPAs) in place with all processors, containing Art.28(3) mandatory clauses",
-      "Processor due diligence records — assessment of processor security measures",
+      "Processor due diligence records \u2014 assessment of processor security measures",
       "Sub-processor register with controller approval records"
     ],
     "gap_indicators": [
       "DPAs absent or not in place with all processors",
       "DPAs do not contain the Art.28(3) mandatory clauses",
-      "No sub-processor register — sub-processors engaged without controller approval",
+      "No sub-processor register \u2014 sub-processors engaged without controller approval",
       "Processor due diligence not conducted before engagement"
     ],
     "audit_question_refs": [],
@@ -7973,7 +7928,7 @@
     "id": "GDPR:2016/679:Art.28.3.b",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.28.3.b",
-    "title": "Processor — 3(b)",
+    "title": "Processor \u2014 3(b)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -7985,13 +7940,13 @@
     "guidance": "",
     "evidence_requirements": [
       "Data Processing Agreements (DPAs) in place with all processors, containing Art.28(3) mandatory clauses",
-      "Processor due diligence records — assessment of processor security measures",
+      "Processor due diligence records \u2014 assessment of processor security measures",
       "Sub-processor register with controller approval records"
     ],
     "gap_indicators": [
       "DPAs absent or not in place with all processors",
       "DPAs do not contain the Art.28(3) mandatory clauses",
-      "No sub-processor register — sub-processors engaged without controller approval",
+      "No sub-processor register \u2014 sub-processors engaged without controller approval",
       "Processor due diligence not conducted before engagement"
     ],
     "audit_question_refs": [],
@@ -8038,7 +7993,7 @@
     "id": "GDPR:2016/679:Art.28.3.c",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.28.3.c",
-    "title": "Processor — 3(c)",
+    "title": "Processor \u2014 3(c)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -8050,13 +8005,13 @@
     "guidance": "",
     "evidence_requirements": [
       "Data Processing Agreements (DPAs) in place with all processors, containing Art.28(3) mandatory clauses",
-      "Processor due diligence records — assessment of processor security measures",
+      "Processor due diligence records \u2014 assessment of processor security measures",
       "Sub-processor register with controller approval records"
     ],
     "gap_indicators": [
       "DPAs absent or not in place with all processors",
       "DPAs do not contain the Art.28(3) mandatory clauses",
-      "No sub-processor register — sub-processors engaged without controller approval",
+      "No sub-processor register \u2014 sub-processors engaged without controller approval",
       "Processor due diligence not conducted before engagement"
     ],
     "audit_question_refs": [],
@@ -8104,7 +8059,7 @@
     "id": "GDPR:2016/679:Art.28.3.f",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.28.3.f",
-    "title": "Processor — 3(f)",
+    "title": "Processor \u2014 3(f)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -8116,13 +8071,13 @@
     "guidance": "",
     "evidence_requirements": [
       "Data Processing Agreements (DPAs) in place with all processors, containing Art.28(3) mandatory clauses",
-      "Processor due diligence records — assessment of processor security measures",
+      "Processor due diligence records \u2014 assessment of processor security measures",
       "Sub-processor register with controller approval records"
     ],
     "gap_indicators": [
       "DPAs absent or not in place with all processors",
       "DPAs do not contain the Art.28(3) mandatory clauses",
-      "No sub-processor register — sub-processors engaged without controller approval",
+      "No sub-processor register \u2014 sub-processors engaged without controller approval",
       "Processor due diligence not conducted before engagement"
     ],
     "audit_question_refs": [],
@@ -8169,7 +8124,7 @@
     "id": "GDPR:2016/679:Art.28.3.g",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.28.3.g",
-    "title": "Processor — 3(g)",
+    "title": "Processor \u2014 3(g)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -8181,13 +8136,13 @@
     "guidance": "",
     "evidence_requirements": [
       "Data Processing Agreements (DPAs) in place with all processors, containing Art.28(3) mandatory clauses",
-      "Processor due diligence records — assessment of processor security measures",
+      "Processor due diligence records \u2014 assessment of processor security measures",
       "Sub-processor register with controller approval records"
     ],
     "gap_indicators": [
       "DPAs absent or not in place with all processors",
       "DPAs do not contain the Art.28(3) mandatory clauses",
-      "No sub-processor register — sub-processors engaged without controller approval",
+      "No sub-processor register \u2014 sub-processors engaged without controller approval",
       "Processor due diligence not conducted before engagement"
     ],
     "audit_question_refs": [],
@@ -8233,7 +8188,7 @@
     "id": "GDPR:2016/679:Art.28.3.h",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.28.3.h",
-    "title": "Processor — 3(h)",
+    "title": "Processor \u2014 3(h)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -8245,13 +8200,13 @@
     "guidance": "",
     "evidence_requirements": [
       "Data Processing Agreements (DPAs) in place with all processors, containing Art.28(3) mandatory clauses",
-      "Processor due diligence records — assessment of processor security measures",
+      "Processor due diligence records \u2014 assessment of processor security measures",
       "Sub-processor register with controller approval records"
     ],
     "gap_indicators": [
       "DPAs absent or not in place with all processors",
       "DPAs do not contain the Art.28(3) mandatory clauses",
-      "No sub-processor register — sub-processors engaged without controller approval",
+      "No sub-processor register \u2014 sub-processors engaged without controller approval",
       "Processor due diligence not conducted before engagement"
     ],
     "audit_question_refs": [],
@@ -8339,7 +8294,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Terms and conditions of employment must include data processing obligations — staff process personal data only on controller instructions, as required by Art.29.",
+        "rationale": "Terms and conditions of employment must include data processing obligations \u2014 staff process personal data only on controller instructions, as required by Art.29.",
         "posture_lookup_ref": "ISO27001:2022:A.6.2"
       },
       "ISO27001:2022:A.6.3": {
@@ -8348,7 +8303,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
-        "rationale": "Information security awareness and training must cover Art.29 obligations — staff must understand they process data only on documented controller instructions.",
+        "rationale": "Information security awareness and training must cover Art.29 obligations \u2014 staff must understand they process data only on documented controller instructions.",
         "posture_lookup_ref": "ISO27001:2022:A.6.3"
       },
       "ISO27001:2022:A.5.2": {
@@ -8397,7 +8352,7 @@
     "id": "GDPR:2016/679:Art.29.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.29.1",
-    "title": "Processing under the authority of the controller or processor — paragraph 1",
+    "title": "Processing under the authority of the controller or processor \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -8510,7 +8465,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Inventory of information and associated assets is the ISO equivalent of the ROPA — must be extended to include all GDPR mandatory fields (purpose, lawful basis, retention, recipients).",
+        "rationale": "Inventory of information and associated assets is the ISO equivalent of the ROPA \u2014 must be extended to include all GDPR mandatory fields (purpose, lawful basis, retention, recipients).",
         "posture_lookup_ref": "ISO27001:2022:A.5.9"
       },
       "ISO27001:2022:A.5.33": {
@@ -8519,7 +8474,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Protection of records must cover the ROPA itself as a compliance record — must be maintained, protected and available to the DPA.",
+        "rationale": "Protection of records must cover the ROPA itself as a compliance record \u2014 must be maintained, protected and available to the DPA.",
         "posture_lookup_ref": "ISO27001:2022:A.5.33"
       },
       "ISO27001:2022:A.5.37": {
@@ -8528,7 +8483,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "MEDIUM",
-        "rationale": "Documented operating procedures must include the ROPA maintenance process — how often reviewed, who updates it, change control.",
+        "rationale": "Documented operating procedures must include the ROPA maintenance process \u2014 how often reviewed, who updates it, change control.",
         "posture_lookup_ref": "ISO27001:2022:A.5.37"
       }
     },
@@ -8544,7 +8499,7 @@
     "id": "GDPR:2016/679:Art.30.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.30.1",
-    "title": "Records of processing activities — paragraph 1",
+    "title": "Records of processing activities \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -8594,7 +8549,7 @@
     "id": "GDPR:2016/679:Art.30.1.a",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.30.1.a",
-    "title": "Records of processing activities — 1(a)",
+    "title": "Records of processing activities \u2014 1(a)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -8667,7 +8622,7 @@
     "id": "GDPR:2016/679:Art.30.1.b",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.30.1.b",
-    "title": "Records of processing activities — 1(b)",
+    "title": "Records of processing activities \u2014 1(b)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -8737,7 +8692,7 @@
     "id": "GDPR:2016/679:Art.30.1.c",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.30.1.c",
-    "title": "Records of processing activities — 1(c)",
+    "title": "Records of processing activities \u2014 1(c)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -8807,7 +8762,7 @@
     "id": "GDPR:2016/679:Art.30.1.f",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.30.1.f",
-    "title": "Records of processing activities — 1(f)",
+    "title": "Records of processing activities \u2014 1(f)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -8878,7 +8833,7 @@
     "id": "GDPR:2016/679:Art.30.1.g",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.30.1.g",
-    "title": "Records of processing activities — 1(g)",
+    "title": "Records of processing activities \u2014 1(g)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -8950,7 +8905,7 @@
     "id": "GDPR:2016/679:Art.30.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.30.2",
-    "title": "Records of processing activities — paragraph 2",
+    "title": "Records of processing activities \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -9000,7 +8955,7 @@
     "id": "GDPR:2016/679:Art.30.4",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.30.4",
-    "title": "Records of processing activities — paragraph 4",
+    "title": "Records of processing activities \u2014 paragraph 4",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -9130,7 +9085,7 @@
     "id": "GDPR:2016/679:Art.31.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.31.1",
-    "title": "Cooperation with the supervisory authority — paragraph 1",
+    "title": "Cooperation with the supervisory authority \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -9200,16 +9155,16 @@
     "evidence_requirements": [
       "Information security risk assessment explicitly addressing personal data processing risks",
       "Technical and organisational security measures documentation (encryption, access control, backup, testing)",
-      "Evidence of regular security testing — vulnerability assessments, penetration tests, or security audits",
+      "Evidence of regular security testing \u2014 vulnerability assessments, penetration tests, or security audits",
       "Encryption policy covering personal data at rest and in transit, with key management procedure",
       "Incident detection and response capability with documented procedure"
     ],
     "gap_indicators": [
-      "No risk assessment addressing personal data processing risks — security measures not justified",
+      "No risk assessment addressing personal data processing risks \u2014 security measures not justified",
       "Encryption policy does not explicitly scope personal data at rest and in transit",
       "No key management procedure for encryption keys covering personal data",
-      "No regular testing of security measures — no vulnerability management or security audit process",
-      "Backups exist but restoration not tested — Art.32(1)(c) availability obligation unverified",
+      "No regular testing of security measures \u2014 no vulnerability management or security audit process",
+      "Backups exist but restoration not tested \u2014 Art.32(1)(c) availability obligation unverified",
       "Staff processing personal data not subject to confidentiality obligations (Art.32(4))"
     ],
     "audit_question_refs": [
@@ -9232,7 +9187,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "GOVERNANCE",
         "confidence": "HIGH",
-        "rationale": "Risk assessment is the explicit mechanism Art.32 requires — 'appropriate to the risk' means a documented risk assessment must justify the measures chosen. ISO 6.1.2 is the framework.",
+        "rationale": "Risk assessment is the explicit mechanism Art.32 requires \u2014 'appropriate to the risk' means a documented risk assessment must justify the measures chosen. ISO 6.1.2 is the framework.",
         "posture_lookup_ref": "ISO27001:2022:A.6.1.2"
       },
       "ISO27001:2022:A.5.1": {
@@ -9274,7 +9229,7 @@
     "id": "GDPR:2016/679:Art.32.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.32.1",
-    "title": "Security of processing — paragraph 1",
+    "title": "Security of processing \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -9287,16 +9242,16 @@
     "evidence_requirements": [
       "Information security risk assessment explicitly addressing personal data processing risks",
       "Technical and organisational security measures documentation (encryption, access control, backup, testing)",
-      "Evidence of regular security testing — vulnerability assessments, penetration tests, or security audits",
+      "Evidence of regular security testing \u2014 vulnerability assessments, penetration tests, or security audits",
       "Encryption policy covering personal data at rest and in transit, with key management procedure",
       "Incident detection and response capability with documented procedure"
     ],
     "gap_indicators": [
-      "No risk assessment addressing personal data processing risks — security measures not justified",
+      "No risk assessment addressing personal data processing risks \u2014 security measures not justified",
       "Encryption policy does not explicitly scope personal data at rest and in transit",
       "No key management procedure for encryption keys covering personal data",
-      "No regular testing of security measures — no vulnerability management or security audit process",
-      "Backups exist but restoration not tested — Art.32(1)(c) availability obligation unverified",
+      "No regular testing of security measures \u2014 no vulnerability management or security audit process",
+      "Backups exist but restoration not tested \u2014 Art.32(1)(c) availability obligation unverified",
       "Staff processing personal data not subject to confidentiality obligations (Art.32(4))"
     ],
     "audit_question_refs": [
@@ -9323,7 +9278,7 @@
     "id": "GDPR:2016/679:Art.32.1.a",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.32.1.a",
-    "title": "Security of processing — 1(a)",
+    "title": "Security of processing \u2014 1(a)",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -9336,16 +9291,16 @@
     "evidence_requirements": [
       "Information security risk assessment explicitly addressing personal data processing risks",
       "Technical and organisational security measures documentation (encryption, access control, backup, testing)",
-      "Evidence of regular security testing — vulnerability assessments, penetration tests, or security audits",
+      "Evidence of regular security testing \u2014 vulnerability assessments, penetration tests, or security audits",
       "Encryption policy covering personal data at rest and in transit, with key management procedure",
       "Incident detection and response capability with documented procedure"
     ],
     "gap_indicators": [
-      "No risk assessment addressing personal data processing risks — security measures not justified",
+      "No risk assessment addressing personal data processing risks \u2014 security measures not justified",
       "Encryption policy does not explicitly scope personal data at rest and in transit",
       "No key management procedure for encryption keys covering personal data",
-      "No regular testing of security measures — no vulnerability management or security audit process",
-      "Backups exist but restoration not tested — Art.32(1)(c) availability obligation unverified",
+      "No regular testing of security measures \u2014 no vulnerability management or security audit process",
+      "Backups exist but restoration not tested \u2014 Art.32(1)(c) availability obligation unverified",
       "Staff processing personal data not subject to confidentiality obligations (Art.32(4))"
     ],
     "audit_question_refs": [
@@ -9370,7 +9325,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Use of cryptography is the direct implementation of the encryption requirement — must cover personal data at rest and in transit, with a documented key management procedure.",
+        "rationale": "Use of cryptography is the direct implementation of the encryption requirement \u2014 must cover personal data at rest and in transit, with a documented key management procedure.",
         "posture_lookup_ref": "ISO27001:2022:A.8.24"
       },
       "ISO27001:2022:A.8.11": {
@@ -9379,7 +9334,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Data masking implements pseudonymisation — transforming personal data so it cannot be attributed to a data subject without additional information held separately.",
+        "rationale": "Data masking implements pseudonymisation \u2014 transforming personal data so it cannot be attributed to a data subject without additional information held separately.",
         "posture_lookup_ref": "ISO27001:2022:A.8.11"
       }
     },
@@ -9395,7 +9350,7 @@
     "id": "GDPR:2016/679:Art.32.1.b",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.32.1.b",
-    "title": "Security of processing — 1(b)",
+    "title": "Security of processing \u2014 1(b)",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -9408,16 +9363,16 @@
     "evidence_requirements": [
       "Information security risk assessment explicitly addressing personal data processing risks",
       "Technical and organisational security measures documentation (encryption, access control, backup, testing)",
-      "Evidence of regular security testing — vulnerability assessments, penetration tests, or security audits",
+      "Evidence of regular security testing \u2014 vulnerability assessments, penetration tests, or security audits",
       "Encryption policy covering personal data at rest and in transit, with key management procedure",
       "Incident detection and response capability with documented procedure"
     ],
     "gap_indicators": [
-      "No risk assessment addressing personal data processing risks — security measures not justified",
+      "No risk assessment addressing personal data processing risks \u2014 security measures not justified",
       "Encryption policy does not explicitly scope personal data at rest and in transit",
       "No key management procedure for encryption keys covering personal data",
-      "No regular testing of security measures — no vulnerability management or security audit process",
-      "Backups exist but restoration not tested — Art.32(1)(c) availability obligation unverified",
+      "No regular testing of security measures \u2014 no vulnerability management or security audit process",
+      "Backups exist but restoration not tested \u2014 Art.32(1)(c) availability obligation unverified",
       "Staff processing personal data not subject to confidentiality obligations (Art.32(4))"
     ],
     "audit_question_refs": [
@@ -9438,7 +9393,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Access control implements confidentiality — ensures only authorised persons can access personal data processing systems.",
+        "rationale": "Access control implements confidentiality \u2014 ensures only authorised persons can access personal data processing systems.",
         "posture_lookup_ref": "ISO27001:2022:A.5.15"
       },
       "ISO27001:2022:A.8.3": {
@@ -9447,7 +9402,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information access restriction implements confidentiality at the data level — users access only the personal data they need.",
+        "rationale": "Information access restriction implements confidentiality at the data level \u2014 users access only the personal data they need.",
         "posture_lookup_ref": "ISO27001:2022:A.8.3"
       },
       "ISO27001:2022:A.8.7": {
@@ -9465,7 +9420,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Network security implements confidentiality and integrity in transit — personal data traversing networks must be protected.",
+        "rationale": "Network security implements confidentiality and integrity in transit \u2014 personal data traversing networks must be protected.",
         "posture_lookup_ref": "ISO27001:2022:A.8.20"
       },
       "ISO27001:2022:A.8.14": {
@@ -9474,7 +9429,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Redundancy of information processing facilities implements resilience — processing systems must withstand and recover from failures without loss of data availability.",
+        "rationale": "Redundancy of information processing facilities implements resilience \u2014 processing systems must withstand and recover from failures without loss of data availability.",
         "posture_lookup_ref": "ISO27001:2022:A.8.14"
       },
       "ISO27001:2022:A.5.29": {
@@ -9499,7 +9454,7 @@
     "id": "GDPR:2016/679:Art.32.1.c",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.32.1.c",
-    "title": "Security of processing — 1(c)",
+    "title": "Security of processing \u2014 1(c)",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -9512,16 +9467,16 @@
     "evidence_requirements": [
       "Information security risk assessment explicitly addressing personal data processing risks",
       "Technical and organisational security measures documentation (encryption, access control, backup, testing)",
-      "Evidence of regular security testing — vulnerability assessments, penetration tests, or security audits",
+      "Evidence of regular security testing \u2014 vulnerability assessments, penetration tests, or security audits",
       "Encryption policy covering personal data at rest and in transit, with key management procedure",
       "Incident detection and response capability with documented procedure"
     ],
     "gap_indicators": [
-      "No risk assessment addressing personal data processing risks — security measures not justified",
+      "No risk assessment addressing personal data processing risks \u2014 security measures not justified",
       "Encryption policy does not explicitly scope personal data at rest and in transit",
       "No key management procedure for encryption keys covering personal data",
-      "No regular testing of security measures — no vulnerability management or security audit process",
-      "Backups exist but restoration not tested — Art.32(1)(c) availability obligation unverified",
+      "No regular testing of security measures \u2014 no vulnerability management or security audit process",
+      "Backups exist but restoration not tested \u2014 Art.32(1)(c) availability obligation unverified",
       "Staff processing personal data not subject to confidentiality obligations (Art.32(4))"
     ],
     "audit_question_refs": [
@@ -9543,7 +9498,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information backup is the primary technical control for restoring personal data availability — must be tested, offsite, and cover recovery time objectives appropriate to the risk.",
+        "rationale": "Information backup is the primary technical control for restoring personal data availability \u2014 must be tested, offsite, and cover recovery time objectives appropriate to the risk.",
         "posture_lookup_ref": "ISO27001:2022:A.8.13"
       },
       "ISO27001:2022:A.5.30": {
@@ -9561,7 +9516,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
-        "rationale": "Redundancy prevents the need for restoration in many failure scenarios — a complement to backup/recovery.",
+        "rationale": "Redundancy prevents the need for restoration in many failure scenarios \u2014 a complement to backup/recovery.",
         "posture_lookup_ref": "ISO27001:2022:A.8.14"
       }
     },
@@ -9577,7 +9532,7 @@
     "id": "GDPR:2016/679:Art.32.1.d",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.32.1.d",
-    "title": "Security of processing — 1(d)",
+    "title": "Security of processing \u2014 1(d)",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -9590,16 +9545,16 @@
     "evidence_requirements": [
       "Information security risk assessment explicitly addressing personal data processing risks",
       "Technical and organisational security measures documentation (encryption, access control, backup, testing)",
-      "Evidence of regular security testing — vulnerability assessments, penetration tests, or security audits",
+      "Evidence of regular security testing \u2014 vulnerability assessments, penetration tests, or security audits",
       "Encryption policy covering personal data at rest and in transit, with key management procedure",
       "Incident detection and response capability with documented procedure"
     ],
     "gap_indicators": [
-      "No risk assessment addressing personal data processing risks — security measures not justified",
+      "No risk assessment addressing personal data processing risks \u2014 security measures not justified",
       "Encryption policy does not explicitly scope personal data at rest and in transit",
       "No key management procedure for encryption keys covering personal data",
-      "No regular testing of security measures — no vulnerability management or security audit process",
-      "Backups exist but restoration not tested — Art.32(1)(c) availability obligation unverified",
+      "No regular testing of security measures \u2014 no vulnerability management or security audit process",
+      "Backups exist but restoration not tested \u2014 Art.32(1)(c) availability obligation unverified",
       "Staff processing personal data not subject to confidentiality obligations (Art.32(4))"
     ],
     "audit_question_refs": [
@@ -9624,7 +9579,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Management of technical vulnerabilities requires regular assessment of security weaknesses — directly implements testing requirement.",
+        "rationale": "Management of technical vulnerabilities requires regular assessment of security weaknesses \u2014 directly implements testing requirement.",
         "posture_lookup_ref": "ISO27001:2022:A.8.8"
       },
       "ISO27001:2022:A.8.29": {
@@ -9660,7 +9615,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
-        "rationale": "Monitoring activities provides continuous testing of security measures — anomaly detection and security event monitoring.",
+        "rationale": "Monitoring activities provides continuous testing of security measures \u2014 anomaly detection and security event monitoring.",
         "posture_lookup_ref": "ISO27001:2022:A.8.16"
       }
     },
@@ -9676,7 +9631,7 @@
     "id": "GDPR:2016/679:Art.32.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.32.2",
-    "title": "Security of processing — paragraph 2",
+    "title": "Security of processing \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -9689,16 +9644,16 @@
     "evidence_requirements": [
       "Information security risk assessment explicitly addressing personal data processing risks",
       "Technical and organisational security measures documentation (encryption, access control, backup, testing)",
-      "Evidence of regular security testing — vulnerability assessments, penetration tests, or security audits",
+      "Evidence of regular security testing \u2014 vulnerability assessments, penetration tests, or security audits",
       "Encryption policy covering personal data at rest and in transit, with key management procedure",
       "Incident detection and response capability with documented procedure"
     ],
     "gap_indicators": [
-      "No risk assessment addressing personal data processing risks — security measures not justified",
+      "No risk assessment addressing personal data processing risks \u2014 security measures not justified",
       "Encryption policy does not explicitly scope personal data at rest and in transit",
       "No key management procedure for encryption keys covering personal data",
-      "No regular testing of security measures — no vulnerability management or security audit process",
-      "Backups exist but restoration not tested — Art.32(1)(c) availability obligation unverified",
+      "No regular testing of security measures \u2014 no vulnerability management or security audit process",
+      "Backups exist but restoration not tested \u2014 Art.32(1)(c) availability obligation unverified",
       "Staff processing personal data not subject to confidentiality obligations (Art.32(4))"
     ],
     "audit_question_refs": [],
@@ -9756,7 +9711,7 @@
     "id": "GDPR:2016/679:Art.32.3",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.32.3",
-    "title": "Security of processing — paragraph 3",
+    "title": "Security of processing \u2014 paragraph 3",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -9769,16 +9724,16 @@
     "evidence_requirements": [
       "Information security risk assessment explicitly addressing personal data processing risks",
       "Technical and organisational security measures documentation (encryption, access control, backup, testing)",
-      "Evidence of regular security testing — vulnerability assessments, penetration tests, or security audits",
+      "Evidence of regular security testing \u2014 vulnerability assessments, penetration tests, or security audits",
       "Encryption policy covering personal data at rest and in transit, with key management procedure",
       "Incident detection and response capability with documented procedure"
     ],
     "gap_indicators": [
-      "No risk assessment addressing personal data processing risks — security measures not justified",
+      "No risk assessment addressing personal data processing risks \u2014 security measures not justified",
       "Encryption policy does not explicitly scope personal data at rest and in transit",
       "No key management procedure for encryption keys covering personal data",
-      "No regular testing of security measures — no vulnerability management or security audit process",
-      "Backups exist but restoration not tested — Art.32(1)(c) availability obligation unverified",
+      "No regular testing of security measures \u2014 no vulnerability management or security audit process",
+      "Backups exist but restoration not tested \u2014 Art.32(1)(c) availability obligation unverified",
       "Staff processing personal data not subject to confidentiality obligations (Art.32(4))"
     ],
     "audit_question_refs": [],
@@ -9823,7 +9778,7 @@
     "id": "GDPR:2016/679:Art.32.4",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.32.4",
-    "title": "Security of processing — paragraph 4",
+    "title": "Security of processing \u2014 paragraph 4",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -9836,16 +9791,16 @@
     "evidence_requirements": [
       "Information security risk assessment explicitly addressing personal data processing risks",
       "Technical and organisational security measures documentation (encryption, access control, backup, testing)",
-      "Evidence of regular security testing — vulnerability assessments, penetration tests, or security audits",
+      "Evidence of regular security testing \u2014 vulnerability assessments, penetration tests, or security audits",
       "Encryption policy covering personal data at rest and in transit, with key management procedure",
       "Incident detection and response capability with documented procedure"
     ],
     "gap_indicators": [
-      "No risk assessment addressing personal data processing risks — security measures not justified",
+      "No risk assessment addressing personal data processing risks \u2014 security measures not justified",
       "Encryption policy does not explicitly scope personal data at rest and in transit",
       "No key management procedure for encryption keys covering personal data",
-      "No regular testing of security measures — no vulnerability management or security audit process",
-      "Backups exist but restoration not tested — Art.32(1)(c) availability obligation unverified",
+      "No regular testing of security measures \u2014 no vulnerability management or security audit process",
+      "Backups exist but restoration not tested \u2014 Art.32(1)(c) availability obligation unverified",
       "Staff processing personal data not subject to confidentiality obligations (Art.32(4))"
     ],
     "audit_question_refs": [
@@ -9875,7 +9830,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
-        "rationale": "Terms and conditions of employment embed data processing obligations contractually — staff bound to process only on instructions.",
+        "rationale": "Terms and conditions of employment embed data processing obligations contractually \u2014 staff bound to process only on instructions.",
         "posture_lookup_ref": "ISO27001:2022:A.6.2"
       },
       "ISO27001:2022:A.6.4": {
@@ -9884,7 +9839,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "MEDIUM",
-        "rationale": "Disciplinary process applies where staff violate personal data processing obligations — deterrence and accountability.",
+        "rationale": "Disciplinary process applies where staff violate personal data processing obligations \u2014 deterrence and accountability.",
         "posture_lookup_ref": "ISO27001:2022:A.6.4"
       }
     },
@@ -9918,7 +9873,7 @@
     ],
     "gap_indicators": [
       "No personal data breach notification procedure with defined 72-hour escalation path",
-      "No breach register — breaches not documented including non-notified incidents",
+      "No breach register \u2014 breaches not documented including non-notified incidents",
       "Processor has no mechanism to notify controller without undue delay on breach discovery",
       "Breach notification content does not cover all Art.33(3) mandatory fields"
     ],
@@ -9941,7 +9896,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Incident management planning and preparation is the foundation for Art.33 compliance — 72-hour notification requires a pre-planned, rehearsed incident response process.",
+        "rationale": "Incident management planning and preparation is the foundation for Art.33 compliance \u2014 72-hour notification requires a pre-planned, rehearsed incident response process.",
         "posture_lookup_ref": "ISO27001:2022:A.5.24"
       },
       "ISO27001:2022:A.5.25": {
@@ -9959,7 +9914,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Response to information security incidents implements the breach containment and notification workflow — includes DPA notification.",
+        "rationale": "Response to information security incidents implements the breach containment and notification workflow \u2014 includes DPA notification.",
         "posture_lookup_ref": "ISO27001:2022:A.5.26"
       },
       "ISO27001:2022:A.6.8": {
@@ -9968,7 +9923,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "ENABLES",
         "confidence": "HIGH",
-        "rationale": "Information security event reporting by staff is the detection mechanism — staff must report potential breaches immediately to enable the 72-hour clock to start from awareness, not occurrence.",
+        "rationale": "Information security event reporting by staff is the detection mechanism \u2014 staff must report potential breaches immediately to enable the 72-hour clock to start from awareness, not occurrence.",
         "posture_lookup_ref": "ISO27001:2022:A.6.8"
       },
       "ISO27001:2022:A.8.15": {
@@ -9986,7 +9941,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Collection of evidence supports the breach documentation requirements — Art.33(5) requires all breaches to be documented including those not notified to the DPA.",
+        "rationale": "Collection of evidence supports the breach documentation requirements \u2014 Art.33(5) requires all breaches to be documented including those not notified to the DPA.",
         "posture_lookup_ref": "ISO27001:2022:A.5.28"
       }
     },
@@ -10002,7 +9957,7 @@
     "id": "GDPR:2016/679:Art.33.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.33.1",
-    "title": "Notification of a personal data breach to the supervisory authority — paragraph 1",
+    "title": "Notification of a personal data breach to the supervisory authority \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -10019,7 +9974,7 @@
     ],
     "gap_indicators": [
       "No personal data breach notification procedure with defined 72-hour escalation path",
-      "No breach register — breaches not documented including non-notified incidents",
+      "No breach register \u2014 breaches not documented including non-notified incidents",
       "Processor has no mechanism to notify controller without undue delay on breach discovery",
       "Breach notification content does not cover all Art.33(3) mandatory fields"
     ],
@@ -10047,7 +10002,7 @@
     "id": "GDPR:2016/679:Art.33.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.33.2",
-    "title": "Notification of a personal data breach to the supervisory authority — paragraph 2",
+    "title": "Notification of a personal data breach to the supervisory authority \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -10064,7 +10019,7 @@
     ],
     "gap_indicators": [
       "No personal data breach notification procedure with defined 72-hour escalation path",
-      "No breach register — breaches not documented including non-notified incidents",
+      "No breach register \u2014 breaches not documented including non-notified incidents",
       "Processor has no mechanism to notify controller without undue delay on breach discovery",
       "Breach notification content does not cover all Art.33(3) mandatory fields"
     ],
@@ -10092,7 +10047,7 @@
     "id": "GDPR:2016/679:Art.33.3",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.33.3",
-    "title": "Notification of a personal data breach to the supervisory authority — paragraph 3",
+    "title": "Notification of a personal data breach to the supervisory authority \u2014 paragraph 3",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -10109,7 +10064,7 @@
     ],
     "gap_indicators": [
       "No personal data breach notification procedure with defined 72-hour escalation path",
-      "No breach register — breaches not documented including non-notified incidents",
+      "No breach register \u2014 breaches not documented including non-notified incidents",
       "Processor has no mechanism to notify controller without undue delay on breach discovery",
       "Breach notification content does not cover all Art.33(3) mandatory fields"
     ],
@@ -10135,7 +10090,7 @@
     "id": "GDPR:2016/679:Art.33.3.a",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.33.3.a",
-    "title": "Notification of a personal data breach to the supervisory authority — 3(a)",
+    "title": "Notification of a personal data breach to the supervisory authority \u2014 3(a)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -10152,7 +10107,7 @@
     ],
     "gap_indicators": [
       "No personal data breach notification procedure with defined 72-hour escalation path",
-      "No breach register — breaches not documented including non-notified incidents",
+      "No breach register \u2014 breaches not documented including non-notified incidents",
       "Processor has no mechanism to notify controller without undue delay on breach discovery",
       "Breach notification content does not cover all Art.33(3) mandatory fields"
     ],
@@ -10201,7 +10156,7 @@
     "id": "GDPR:2016/679:Art.33.3.b",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.33.3.b",
-    "title": "Notification of a personal data breach to the supervisory authority — 3(b)",
+    "title": "Notification of a personal data breach to the supervisory authority \u2014 3(b)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -10218,7 +10173,7 @@
     ],
     "gap_indicators": [
       "No personal data breach notification procedure with defined 72-hour escalation path",
-      "No breach register — breaches not documented including non-notified incidents",
+      "No breach register \u2014 breaches not documented including non-notified incidents",
       "Processor has no mechanism to notify controller without undue delay on breach discovery",
       "Breach notification content does not cover all Art.33(3) mandatory fields"
     ],
@@ -10268,7 +10223,7 @@
     "id": "GDPR:2016/679:Art.33.3.c",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.33.3.c",
-    "title": "Notification of a personal data breach to the supervisory authority — 3(c)",
+    "title": "Notification of a personal data breach to the supervisory authority \u2014 3(c)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -10285,7 +10240,7 @@
     ],
     "gap_indicators": [
       "No personal data breach notification procedure with defined 72-hour escalation path",
-      "No breach register — breaches not documented including non-notified incidents",
+      "No breach register \u2014 breaches not documented including non-notified incidents",
       "Processor has no mechanism to notify controller without undue delay on breach discovery",
       "Breach notification content does not cover all Art.33(3) mandatory fields"
     ],
@@ -10332,7 +10287,7 @@
     "id": "GDPR:2016/679:Art.33.3.d",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.33.3.d",
-    "title": "Notification of a personal data breach to the supervisory authority — 3(d)",
+    "title": "Notification of a personal data breach to the supervisory authority \u2014 3(d)",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -10349,7 +10304,7 @@
     ],
     "gap_indicators": [
       "No personal data breach notification procedure with defined 72-hour escalation path",
-      "No breach register — breaches not documented including non-notified incidents",
+      "No breach register \u2014 breaches not documented including non-notified incidents",
       "Processor has no mechanism to notify controller without undue delay on breach discovery",
       "Breach notification content does not cover all Art.33(3) mandatory fields"
     ],
@@ -10398,7 +10353,7 @@
     "id": "GDPR:2016/679:Art.33.5",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.33.5",
-    "title": "Notification of a personal data breach to the supervisory authority — paragraph 5",
+    "title": "Notification of a personal data breach to the supervisory authority \u2014 paragraph 5",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -10415,7 +10370,7 @@
     ],
     "gap_indicators": [
       "No personal data breach notification procedure with defined 72-hour escalation path",
-      "No breach register — breaches not documented including non-notified incidents",
+      "No breach register \u2014 breaches not documented including non-notified incidents",
       "Processor has no mechanism to notify controller without undue delay on breach discovery",
       "Breach notification content does not cover all Art.33(3) mandatory fields"
     ],
@@ -10480,7 +10435,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Incident response must include the data subject communication workflow — Art.34 requires notification without undue delay when breach is likely to result in high risk to subjects.",
+        "rationale": "Incident response must include the data subject communication workflow \u2014 Art.34 requires notification without undue delay when breach is likely to result in high risk to subjects.",
         "posture_lookup_ref": "ISO27001:2022:A.5.26"
       },
       "ISO27001:2022:A.5.24": {
@@ -10489,7 +10444,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
-        "rationale": "Incident management planning must pre-define the criteria and process for data subject notification — cannot be improvised during a live breach response.",
+        "rationale": "Incident management planning must pre-define the criteria and process for data subject notification \u2014 cannot be improvised during a live breach response.",
         "posture_lookup_ref": "ISO27001:2022:A.5.24"
       }
     },
@@ -10505,7 +10460,7 @@
     "id": "GDPR:2016/679:Art.34.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.34.1",
-    "title": "Communication of a personal data breach to the data subject — paragraph 1",
+    "title": "Communication of a personal data breach to the data subject \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -10545,7 +10500,7 @@
     "id": "GDPR:2016/679:Art.34.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.34.2",
-    "title": "Communication of a personal data breach to the data subject — paragraph 2",
+    "title": "Communication of a personal data breach to the data subject \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -10607,7 +10562,7 @@
     "id": "GDPR:2016/679:Art.34.3",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.34.3",
-    "title": "Communication of a personal data breach to the data subject — paragraph 3",
+    "title": "Communication of a personal data breach to the data subject \u2014 paragraph 3",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -10663,7 +10618,7 @@
       "Records of DPO consultation on DPIAs"
     ],
     "gap_indicators": [
-      "No DPIA process — high-risk processing commenced without impact assessment",
+      "No DPIA process \u2014 high-risk processing commenced without impact assessment",
       "DPIAs not triggered for systematic monitoring, large-scale special category processing, or profiling",
       "DPIAs completed after processing commences rather than before"
     ],
@@ -10686,7 +10641,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information security risk assessment is the ISO framework that most closely aligns with DPIA methodology — Art.35 requires systematic assessment of risks to rights and freedoms, which ISO 6.1.2 structures. DPIA extends this to privacy specifically.",
+        "rationale": "Information security risk assessment is the ISO framework that most closely aligns with DPIA methodology \u2014 Art.35 requires systematic assessment of risks to rights and freedoms, which ISO 6.1.2 structures. DPIA extends this to privacy specifically.",
         "posture_lookup_ref": "ISO27001:2022:A.6.1.2"
       },
       "ISO27001:2022:A.5.8": {
@@ -10713,7 +10668,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "MEDIUM",
-        "rationale": "Legal requirements control must include DPIA obligations — identifying when a DPIA is legally required (profiling, systematic monitoring, large-scale special category processing).",
+        "rationale": "Legal requirements control must include DPIA obligations \u2014 identifying when a DPIA is legally required (profiling, systematic monitoring, large-scale special category processing).",
         "posture_lookup_ref": "ISO27001:2022:A.5.31"
       }
     },
@@ -10729,7 +10684,7 @@
     "id": "GDPR:2016/679:Art.35.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.35.1",
-    "title": "Data protection impact assessment — paragraph 1",
+    "title": "Data protection impact assessment \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -10745,7 +10700,7 @@
       "Records of DPO consultation on DPIAs"
     ],
     "gap_indicators": [
-      "No DPIA process — high-risk processing commenced without impact assessment",
+      "No DPIA process \u2014 high-risk processing commenced without impact assessment",
       "DPIAs not triggered for systematic monitoring, large-scale special category processing, or profiling",
       "DPIAs completed after processing commences rather than before"
     ],
@@ -10771,7 +10726,7 @@
     "id": "GDPR:2016/679:Art.35.3",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.35.3",
-    "title": "Data protection impact assessment — paragraph 3",
+    "title": "Data protection impact assessment \u2014 paragraph 3",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -10787,7 +10742,7 @@
       "Records of DPO consultation on DPIAs"
     ],
     "gap_indicators": [
-      "No DPIA process — high-risk processing commenced without impact assessment",
+      "No DPIA process \u2014 high-risk processing commenced without impact assessment",
       "DPIAs not triggered for systematic monitoring, large-scale special category processing, or profiling",
       "DPIAs completed after processing commences rather than before"
     ],
@@ -10837,7 +10792,7 @@
     "id": "GDPR:2016/679:Art.35.7",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.35.7",
-    "title": "Data protection impact assessment — paragraph 7",
+    "title": "Data protection impact assessment \u2014 paragraph 7",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -10853,7 +10808,7 @@
       "Records of DPO consultation on DPIAs"
     ],
     "gap_indicators": [
-      "No DPIA process — high-risk processing commenced without impact assessment",
+      "No DPIA process \u2014 high-risk processing commenced without impact assessment",
       "DPIAs not triggered for systematic monitoring, large-scale special category processing, or profiling",
       "DPIAs completed after processing commences rather than before"
     ],
@@ -10958,7 +10913,7 @@
     "id": "GDPR:2016/679:Art.36.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.36.1",
-    "title": "Prior consultation — paragraph 1",
+    "title": "Prior consultation \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -11053,7 +11008,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information security roles and responsibilities must include the DPO role — designation, independence, tasks and reporting line should be documented here.",
+        "rationale": "Information security roles and responsibilities must include the DPO role \u2014 designation, independence, tasks and reporting line should be documented here.",
         "posture_lookup_ref": "ISO27001:2022:A.5.2"
       },
       "ISO27001:2022:A.5.4": {
@@ -11062,7 +11017,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
-        "rationale": "Management responsibilities must include the DPO in governance structures — top management must ensure DPO has resources and access required by Arts.37-39.",
+        "rationale": "Management responsibilities must include the DPO in governance structures \u2014 top management must ensure DPO has resources and access required by Arts.37-39.",
         "posture_lookup_ref": "ISO27001:2022:A.5.4"
       }
     },
@@ -11078,7 +11033,7 @@
     "id": "GDPR:2016/679:Art.37.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.37.1",
-    "title": "Designation of the data protection officer — paragraph 1",
+    "title": "Designation of the data protection officer \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -11120,7 +11075,7 @@
     "id": "GDPR:2016/679:Art.37.5",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.37.5",
-    "title": "Designation of the data protection officer — paragraph 5",
+    "title": "Designation of the data protection officer \u2014 paragraph 5",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -11184,7 +11139,7 @@
     "id": "GDPR:2016/679:Art.37.7",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.37.7",
-    "title": "Designation of the data protection officer — paragraph 7",
+    "title": "Designation of the data protection officer \u2014 paragraph 7",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -11277,7 +11232,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "MEDIUM",
-        "rationale": "Segregation of duties supports DPO independence — the DPO must not be in a position that creates a conflict of interest with their data protection oversight role.",
+        "rationale": "Segregation of duties supports DPO independence \u2014 the DPO must not be in a position that creates a conflict of interest with their data protection oversight role.",
         "posture_lookup_ref": "ISO27001:2022:A.5.3"
       },
       "ISO27001:2022:A.5.4": {
@@ -11324,7 +11279,7 @@
     "id": "GDPR:2016/679:Art.38.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.38.2",
-    "title": "Position of the data protection officer — paragraph 2",
+    "title": "Position of the data protection officer \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -11380,7 +11335,7 @@
     "id": "GDPR:2016/679:Art.38.3",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.38.3",
-    "title": "Position of the data protection officer — paragraph 3",
+    "title": "Position of the data protection officer \u2014 paragraph 3",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -11496,7 +11451,7 @@
     "id": "GDPR:2016/679:Art.39.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.39.1",
-    "title": "Tasks of the data protection officer — paragraph 1",
+    "title": "Tasks of the data protection officer \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -11605,7 +11560,7 @@
     "id": "GDPR:2016/679:Art.40.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.40.1",
-    "title": "Codes of conduct — paragraph 1",
+    "title": "Codes of conduct \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -11713,7 +11668,7 @@
     "id": "GDPR:2016/679:Art.41.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.41.1",
-    "title": "Monitoring of approved codes of conduct — paragraph 1",
+    "title": "Monitoring of approved codes of conduct \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -11824,7 +11779,7 @@
     "id": "GDPR:2016/679:Art.42.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.42.1",
-    "title": "Certification — paragraph 1",
+    "title": "Certification \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -11932,7 +11887,7 @@
     "id": "GDPR:2016/679:Art.43.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.43.1",
-    "title": "Certification bodies — paragraph 1",
+    "title": "Certification bodies \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -12019,7 +11974,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Legal, statutory and regulatory requirements must include the transfer restrictions under Chapter V — adequacy decisions, standard contractual clauses, binding corporate rules.",
+        "rationale": "Legal, statutory and regulatory requirements must include the transfer restrictions under Chapter V \u2014 adequacy decisions, standard contractual clauses, binding corporate rules.",
         "posture_lookup_ref": "ISO27001:2022:A.5.31"
       }
     },
@@ -12058,7 +12013,7 @@
     "id": "GDPR:2016/679:Art.44.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.44.1",
-    "title": "General principle for transfers — paragraph 1",
+    "title": "General principle for transfers \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "absolute",
     "applies_to": [
@@ -12147,7 +12102,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Legal requirements control must track adequacy decisions — the list of adequate countries changes; compliance requires monitoring Commission decisions and adjusting transfer practices.",
+        "rationale": "Legal requirements control must track adequacy decisions \u2014 the list of adequate countries changes; compliance requires monitoring Commission decisions and adjusting transfer practices.",
         "posture_lookup_ref": "ISO27001:2022:A.5.31"
       },
       "ISO27001:2022:A.5.22": {
@@ -12156,7 +12111,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Monitoring and review of supplier services must include adequacy status of third-country recipients — a previously adequate country losing adequacy (as with US Privacy Shield) requires immediate action.",
+        "rationale": "Monitoring and review of supplier services must include adequacy status of third-country recipients \u2014 a previously adequate country losing adequacy (as with US Privacy Shield) requires immediate action.",
         "posture_lookup_ref": "ISO27001:2022:A.5.22"
       },
       "ISO27001:2022:A.5.19": {
@@ -12202,7 +12157,7 @@
     "id": "GDPR:2016/679:Art.45.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.45.1",
-    "title": "Transfers on the basis of an adequacy decision — paragraph 1",
+    "title": "Transfers on the basis of an adequacy decision \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -12282,7 +12237,7 @@
     "gap_indicators": [
       "Personal data transferred to third countries without SCCs or other Art.46 safeguards",
       "No Transfer Impact Assessments for transfers to countries without adequacy decisions",
-      "No register of international transfers — transfers not mapped or managed"
+      "No register of international transfers \u2014 transfers not mapped or managed"
     ],
     "audit_question_refs": [
       "Are SCCs or other Art.46 safeguards in place for all third-country transfers?",
@@ -12303,7 +12258,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Addressing security in supplier agreements must cover international transfer safeguards — SCCs, BCRs or other Art.46 mechanisms must be reflected in data processing agreements.",
+        "rationale": "Addressing security in supplier agreements must cover international transfer safeguards \u2014 SCCs, BCRs or other Art.46 mechanisms must be reflected in data processing agreements.",
         "posture_lookup_ref": "ISO27001:2022:A.5.20"
       },
       "ISO27001:2022:A.5.14": {
@@ -12312,7 +12267,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
-        "rationale": "Information transfer controls must address international transfers specifically — encryption, lawful basis verification, adequacy confirmation before transfer.",
+        "rationale": "Information transfer controls must address international transfers specifically \u2014 encryption, lawful basis verification, adequacy confirmation before transfer.",
         "posture_lookup_ref": "ISO27001:2022:A.5.14"
       },
       "ISO27001:2022:A.5.19": {
@@ -12321,7 +12276,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
-        "rationale": "Supplier relationship security must assess third-country processors for GDPR transfer compliance — adequacy or safeguards in place.",
+        "rationale": "Supplier relationship security must assess third-country processors for GDPR transfer compliance \u2014 adequacy or safeguards in place.",
         "posture_lookup_ref": "ISO27001:2022:A.5.19"
       }
     },
@@ -12358,7 +12313,7 @@
     "id": "GDPR:2016/679:Art.46.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.46.1",
-    "title": "Transfers subject to appropriate safeguards — paragraph 1",
+    "title": "Transfers subject to appropriate safeguards \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -12376,7 +12331,7 @@
     "gap_indicators": [
       "Personal data transferred to third countries without SCCs or other Art.46 safeguards",
       "No Transfer Impact Assessments for transfers to countries without adequacy decisions",
-      "No register of international transfers — transfers not mapped or managed"
+      "No register of international transfers \u2014 transfers not mapped or managed"
     ],
     "audit_question_refs": [],
     "parent_ref": "Art.46",
@@ -12421,7 +12376,7 @@
     "id": "GDPR:2016/679:Art.46.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.46.2",
-    "title": "Transfers subject to appropriate safeguards — paragraph 2",
+    "title": "Transfers subject to appropriate safeguards \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -12439,7 +12394,7 @@
     "gap_indicators": [
       "Personal data transferred to third countries without SCCs or other Art.46 safeguards",
       "No Transfer Impact Assessments for transfers to countries without adequacy decisions",
-      "No register of international transfers — transfers not mapped or managed"
+      "No register of international transfers \u2014 transfers not mapped or managed"
     ],
     "audit_question_refs": [],
     "parent_ref": "Art.46",
@@ -12542,7 +12497,7 @@
     "id": "GDPR:2016/679:Art.47.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.47.1",
-    "title": "Binding corporate rules — paragraph 1",
+    "title": "Binding corporate rules \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -12652,7 +12607,7 @@
     "id": "GDPR:2016/679:Art.48.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.48.1",
-    "title": "Transfers or disclosures not authorised by Union law — paragraph 1",
+    "title": "Transfers or disclosures not authorised by Union law \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -12765,7 +12720,7 @@
     "id": "GDPR:2016/679:Art.49.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.49.1",
-    "title": "Derogations for specific situations — paragraph 1",
+    "title": "Derogations for specific situations \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -12875,7 +12830,7 @@
     "id": "GDPR:2016/679:Art.50.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.50.1",
-    "title": "International cooperation for the protection of personal data — paragraph 1",
+    "title": "International cooperation for the protection of personal data \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -12986,7 +12941,7 @@
     "id": "GDPR:2016/679:Art.51.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.51.1",
-    "title": "Supervisory authority — paragraph 1",
+    "title": "Supervisory authority \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -13098,7 +13053,7 @@
     "id": "GDPR:2016/679:Art.52.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.52.1",
-    "title": "Independence — paragraph 1",
+    "title": "Independence \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -13178,7 +13133,7 @@
     "source_pages": [],
     "parse_confidence": "high",
     "parse_notes": "Built from seed. Recitals: [121]",
-    "business_description": "This article requires that each member of a country's data protection supervisory authority is appointed through a transparent process. This means that the appointment must be clear and open, typically involving the parliament, government, head of State, or an independent body. For controllers and processors, this ensures that the supervisory authority overseeing their compliance with data protection laws is composed of members appointed in a fair and open manner. This article is relevant when understanding the legitimacy and authority of the supervisory body that may audit or investigate your organization’s data practices.",
+    "business_description": "This article requires that each member of a country's data protection supervisory authority is appointed through a transparent process. This means that the appointment must be clear and open, typically involving the parliament, government, head of State, or an independent body. For controllers and processors, this ensures that the supervisory authority overseeing their compliance with data protection laws is composed of members appointed in a fair and open manner. This article is relevant when understanding the legitimacy and authority of the supervisory body that may audit or investigate your organization\u2019s data practices.",
     "query_keywords": {
       "exact": [
         "supervisory authority",
@@ -13203,7 +13158,7 @@
     "id": "GDPR:2016/679:Art.53.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.53.1",
-    "title": "General conditions for the members of the supervisory authority — paragraph 1",
+    "title": "General conditions for the members of the supervisory authority \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -13311,7 +13266,7 @@
     "id": "GDPR:2016/679:Art.54.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.54.1",
-    "title": "Rules on the establishment of the supervisory authority — paragraph 1",
+    "title": "Rules on the establishment of the supervisory authority \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -13421,7 +13376,7 @@
     "id": "GDPR:2016/679:Art.55.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.55.1",
-    "title": "Competence — paragraph 1",
+    "title": "Competence \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -13529,7 +13484,7 @@
     "id": "GDPR:2016/679:Art.56.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.56.1",
-    "title": "Competence of the lead supervisory authority — paragraph 1",
+    "title": "Competence of the lead supervisory authority \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -13641,7 +13596,7 @@
     "id": "GDPR:2016/679:Art.57.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.57.1",
-    "title": "Tasks — paragraph 1",
+    "title": "Tasks \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -13754,7 +13709,7 @@
     "id": "GDPR:2016/679:Art.58.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.58.1",
-    "title": "Powers — paragraph 1",
+    "title": "Powers \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -13869,7 +13824,7 @@
     "id": "GDPR:2016/679:Art.59.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.59.1",
-    "title": "Activity reports — paragraph 1",
+    "title": "Activity reports \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -13982,7 +13937,7 @@
     "id": "GDPR:2016/679:Art.60.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.60.1",
-    "title": "Cooperation between the lead supervisory authority and the other supervisory authorities concerned — paragraph 1",
+    "title": "Cooperation between the lead supervisory authority and the other supervisory authorities concerned \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -14090,7 +14045,7 @@
     "id": "GDPR:2016/679:Art.61.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.61.1",
-    "title": "Mutual assistance — paragraph 1",
+    "title": "Mutual assistance \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -14199,7 +14154,7 @@
     "id": "GDPR:2016/679:Art.62.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.62.1",
-    "title": "Joint operations of supervisory authorities — paragraph 1",
+    "title": "Joint operations of supervisory authorities \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -14310,7 +14265,7 @@
     "id": "GDPR:2016/679:Art.63.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.63.1",
-    "title": "Consistency mechanism — paragraph 1",
+    "title": "Consistency mechanism \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -14417,7 +14372,7 @@
     "id": "GDPR:2016/679:Art.64.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.64.1",
-    "title": "Opinion of the Board — paragraph 1",
+    "title": "Opinion of the Board \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -14526,7 +14481,7 @@
     "id": "GDPR:2016/679:Art.65.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.65.1",
-    "title": "Dispute resolution by the Board — paragraph 1",
+    "title": "Dispute resolution by the Board \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -14634,7 +14589,7 @@
     "id": "GDPR:2016/679:Art.66.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.66.1",
-    "title": "Urgency procedure — paragraph 1",
+    "title": "Urgency procedure \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -14743,7 +14698,7 @@
     "id": "GDPR:2016/679:Art.67.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.67.1",
-    "title": "Exchange of information — paragraph 1",
+    "title": "Exchange of information \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -14850,7 +14805,7 @@
     "id": "GDPR:2016/679:Art.68.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.68.1",
-    "title": "European Data Protection Board — paragraph 1",
+    "title": "European Data Protection Board \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -14958,7 +14913,7 @@
     "id": "GDPR:2016/679:Art.69.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.69.1",
-    "title": "Independence — paragraph 1",
+    "title": "Independence \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -15063,7 +15018,7 @@
     "id": "GDPR:2016/679:Art.70.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.70.1",
-    "title": "Tasks of the Board — paragraph 1",
+    "title": "Tasks of the Board \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -15174,7 +15129,7 @@
     "id": "GDPR:2016/679:Art.71.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.71.1",
-    "title": "Reports — paragraph 1",
+    "title": "Reports \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -15282,7 +15237,7 @@
     "id": "GDPR:2016/679:Art.72.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.72.1",
-    "title": "Procedure — paragraph 1",
+    "title": "Procedure \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -15388,7 +15343,7 @@
     "id": "GDPR:2016/679:Art.73.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.73.1",
-    "title": "Chair — paragraph 1",
+    "title": "Chair \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -15499,7 +15454,7 @@
     "id": "GDPR:2016/679:Art.74.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.74.1",
-    "title": "Tasks of the Chair — paragraph 1",
+    "title": "Tasks of the Chair \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -15607,7 +15562,7 @@
     "id": "GDPR:2016/679:Art.75.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.75.1",
-    "title": "Secretariat — paragraph 1",
+    "title": "Secretariat \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -15714,7 +15669,7 @@
     "id": "GDPR:2016/679:Art.76.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.76.1",
-    "title": "Confidentiality — paragraph 1",
+    "title": "Confidentiality \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -15827,7 +15782,7 @@
     "id": "GDPR:2016/679:Art.77.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.77.1",
-    "title": "Right to lodge a complaint with a supervisory authority — paragraph 1",
+    "title": "Right to lodge a complaint with a supervisory authority \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -15935,7 +15890,7 @@
     "id": "GDPR:2016/679:Art.78.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.78.1",
-    "title": "Right to an effective judicial remedy against a supervisory authority — paragraph 1",
+    "title": "Right to an effective judicial remedy against a supervisory authority \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -16045,7 +16000,7 @@
     "id": "GDPR:2016/679:Art.79.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.79.1",
-    "title": "Right to an effective judicial remedy against a controller or processor — paragraph 1",
+    "title": "Right to an effective judicial remedy against a controller or processor \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -16156,7 +16111,7 @@
     "id": "GDPR:2016/679:Art.80.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.80.1",
-    "title": "Representation of data subjects — paragraph 1",
+    "title": "Representation of data subjects \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -16264,7 +16219,7 @@
     "id": "GDPR:2016/679:Art.81.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.81.1",
-    "title": "Suspension of proceedings — paragraph 1",
+    "title": "Suspension of proceedings \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -16377,7 +16332,7 @@
     "id": "GDPR:2016/679:Art.82.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.82.1",
-    "title": "Right to compensation and liability — paragraph 1",
+    "title": "Right to compensation and liability \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -16433,7 +16388,7 @@
     "id": "GDPR:2016/679:Art.82.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.82.2",
-    "title": "Right to compensation and liability — paragraph 2",
+    "title": "Right to compensation and liability \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -16520,7 +16475,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
-        "rationale": "Compliance with policies and standards is what Art.83 ultimately rewards — demonstrated compliance reduces administrative fines under the 'effectiveness of measures taken' assessment.",
+        "rationale": "Compliance with policies and standards is what Art.83 ultimately rewards \u2014 demonstrated compliance reduces administrative fines under the 'effectiveness of measures taken' assessment.",
         "posture_lookup_ref": "ISO27001:2022:A.5.36"
       },
       "ISO27001:2022:A.5.35": {
@@ -16529,7 +16484,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
-        "rationale": "Independent review produces the documented evidence that demonstrates compliance — the audit trail that mitigates regulatory enforcement.",
+        "rationale": "Independent review produces the documented evidence that demonstrates compliance \u2014 the audit trail that mitigates regulatory enforcement.",
         "posture_lookup_ref": "ISO27001:2022:A.5.35"
       }
     },
@@ -16565,7 +16520,7 @@
     "id": "GDPR:2016/679:Art.83.4",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.83.4",
-    "title": "General conditions for imposing administrative fines — paragraph 4",
+    "title": "General conditions for imposing administrative fines \u2014 paragraph 4",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -16628,7 +16583,7 @@
     "id": "GDPR:2016/679:Art.83.5",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.83.5",
-    "title": "General conditions for imposing administrative fines — paragraph 5",
+    "title": "General conditions for imposing administrative fines \u2014 paragraph 5",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -16741,7 +16696,7 @@
     "id": "GDPR:2016/679:Art.84.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.84.1",
-    "title": "Penalties — paragraph 1",
+    "title": "Penalties \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -16824,7 +16779,7 @@
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "MEDIUM",
-        "rationale": "Legal requirements control must identify where national law derogations under Art.85 apply — journalistic, academic, artistic or literary purposes may override standard GDPR requirements.",
+        "rationale": "Legal requirements control must identify where national law derogations under Art.85 apply \u2014 journalistic, academic, artistic or literary purposes may override standard GDPR requirements.",
         "posture_lookup_ref": "ISO27001:2022:A.5.31"
       },
       "ISO27001:2022:A.6.1.2": {
@@ -16876,7 +16831,7 @@
     "id": "GDPR:2016/679:Art.85.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.85.1",
-    "title": "Processing and freedom of expression and information — paragraph 1",
+    "title": "Processing and freedom of expression and information \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -16934,7 +16889,7 @@
     "id": "GDPR:2016/679:Art.85.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.85.2",
-    "title": "Processing and freedom of expression and information — paragraph 2",
+    "title": "Processing and freedom of expression and information \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -17046,7 +17001,7 @@
     "id": "GDPR:2016/679:Art.86.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.86.1",
-    "title": "Processing and public access to official documents — paragraph 1",
+    "title": "Processing and public access to official documents \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -17153,7 +17108,7 @@
     "id": "GDPR:2016/679:Art.87.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.87.1",
-    "title": "Processing of the national identification number — paragraph 1",
+    "title": "Processing of the national identification number \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -17260,7 +17215,7 @@
     "id": "GDPR:2016/679:Art.88.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.88.1",
-    "title": "Processing in the context of employment — paragraph 1",
+    "title": "Processing in the context of employment \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "conditional",
     "applies_to": [
@@ -17372,7 +17327,7 @@
     "id": "GDPR:2016/679:Art.89.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.89.1",
-    "title": "Safeguards and derogations relating to processing for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes — paragraph 1",
+    "title": "Safeguards and derogations relating to processing for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "risk_based",
     "applies_to": [
@@ -17487,7 +17442,7 @@
     "id": "GDPR:2016/679:Art.90.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.90.1",
-    "title": "Obligations of secrecy — paragraph 1",
+    "title": "Obligations of secrecy \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -17595,7 +17550,7 @@
     "id": "GDPR:2016/679:Art.91.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.91.1",
-    "title": "Existing data protection rules of churches and religious associations — paragraph 1",
+    "title": "Existing data protection rules of churches and religious associations \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -17704,7 +17659,7 @@
     "id": "GDPR:2016/679:Art.92.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.92.1",
-    "title": "Exercise of the delegation — paragraph 1",
+    "title": "Exercise of the delegation \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -17813,7 +17768,7 @@
     "id": "GDPR:2016/679:Art.93.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.93.1",
-    "title": "Committee procedure — paragraph 1",
+    "title": "Committee procedure \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -17922,7 +17877,7 @@
     "id": "GDPR:2016/679:Art.94.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.94.1",
-    "title": "Repeal of Directive 95/46/EC — paragraph 1",
+    "title": "Repeal of Directive 95/46/EC \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -18032,7 +17987,7 @@
     "id": "GDPR:2016/679:Art.95.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.95.1",
-    "title": "Relationship with Directive 2002/58/EC — paragraph 1",
+    "title": "Relationship with Directive 2002/58/EC \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -18139,7 +18094,7 @@
     "id": "GDPR:2016/679:Art.96.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.96.1",
-    "title": "Relationship with previously concluded Agreements — paragraph 1",
+    "title": "Relationship with previously concluded Agreements \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -18246,7 +18201,7 @@
     "id": "GDPR:2016/679:Art.97.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.97.1",
-    "title": "Commission reports — paragraph 1",
+    "title": "Commission reports \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -18349,7 +18304,7 @@
     "id": "GDPR:2016/679:Art.98.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.98.1",
-    "title": "Review of other Union legal acts on data protection — paragraph 1",
+    "title": "Review of other Union legal acts on data protection \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -18459,7 +18414,7 @@
     "id": "GDPR:2016/679:Art.99.1",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.99.1",
-    "title": "Entry into force and application — paragraph 1",
+    "title": "Entry into force and application \u2014 paragraph 1",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [
@@ -18513,7 +18468,7 @@
     "id": "GDPR:2016/679:Art.99.2",
     "standard_id": "GDPR:2016/679",
     "ref": "Art.99.2",
-    "title": "Entry into force and application — paragraph 2",
+    "title": "Entry into force and application \u2014 paragraph 2",
     "node_type": "obligation",
     "obligation_type": "informational",
     "applies_to": [

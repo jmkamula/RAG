@@ -770,60 +770,6 @@
         "rationale": "Asset inventory must capture sources of indirectly obtained data to identify where Art.14 notification obligations apply.",
         "posture_lookup_ref": "ISO27001:2022:A.5.9"
       },
-      "GDPR:2016/679:Art.15": {
-        "related_req_id": "GDPR:2016/679:Art.15",
-        "related_title": "GDPR Art.15",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Asset inventory is the operational foundation for subject access requests \u2014 you cannot fulfil Art.15 without knowing where all personal data for a subject is held.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.9"
-      },
-      "GDPR:2016/679:Art.16": {
-        "related_req_id": "GDPR:2016/679:Art.16",
-        "related_title": "GDPR Art.16",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Asset inventory with data locations enables finding and correcting inaccurate personal data across all systems including backups.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.9"
-      },
-      "GDPR:2016/679:Art.17": {
-        "related_req_id": "GDPR:2016/679:Art.17",
-        "related_title": "GDPR Art.17",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Asset inventory identifies all locations where a data subject's personal data is held \u2014 prerequisite for complete erasure.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.9"
-      },
-      "GDPR:2016/679:Art.18": {
-        "related_req_id": "GDPR:2016/679:Art.18",
-        "related_title": "GDPR Art.18",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Asset inventory must support restriction flags per data subject record \u2014 prerequisite for managing restriction requests.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.9"
-      },
-      "GDPR:2016/679:Art.20": {
-        "related_req_id": "GDPR:2016/679:Art.20",
-        "related_title": "GDPR Art.20",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Asset inventory with data formats supports portability \u2014 knowing where data is held and in what format enables structured export.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.9"
-      },
-      "GDPR:2016/679:Art.21": {
-        "related_req_id": "GDPR:2016/679:Art.21",
-        "related_title": "GDPR Art.21",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Asset inventory with purpose metadata enables identifying and stopping all processing activities the subject has objected to.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.9"
-      },
       "GDPR:2016/679:Art.30": {
         "related_req_id": "GDPR:2016/679:Art.30",
         "related_title": "GDPR Art.30",
@@ -1229,33 +1175,6 @@
         "rationale": "Access control ensures personal data is only accessible to authorised persons \u2014 core confidentiality control.",
         "posture_lookup_ref": "ISO27001:2022:A.5.15"
       },
-      "GDPR:2016/679:Art.15": {
-        "related_req_id": "GDPR:2016/679:Art.15",
-        "related_title": "GDPR Art.15",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "ENABLES",
-        "confidence": "HIGH",
-        "rationale": "Access control systems must support the ability to extract all personal data for a specific data subject on request.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.15"
-      },
-      "GDPR:2016/679:Art.18": {
-        "related_req_id": "GDPR:2016/679:Art.18",
-        "related_title": "GDPR Art.18",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "IMPLEMENTS",
-        "confidence": "HIGH",
-        "rationale": "Access control can implement processing restrictions technically \u2014 flagging restricted records and preventing further processing.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.15"
-      },
-      "GDPR:2016/679:Art.21": {
-        "related_req_id": "GDPR:2016/679:Art.21",
-        "related_title": "GDPR Art.21",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "IMPLEMENTS",
-        "confidence": "HIGH",
-        "rationale": "Access control systems must implement opt-out/objection flags that prevent processing for direct marketing and profiling.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.15"
-      },
       "GDPR:2016/679:Art.32.1.b": {
         "related_req_id": "GDPR:2016/679:Art.32.1.b",
         "related_title": "GDPR Art.32.1.b",
@@ -1463,15 +1382,6 @@
         "rationale": "Access rights management directly implements Art.5.1.f integrity and confidentiality principle.",
         "posture_lookup_ref": "ISO27001:2022:A.5.18"
       },
-      "GDPR:2016/679:Art.15": {
-        "related_req_id": "GDPR:2016/679:Art.15",
-        "related_title": "GDPR Art.15",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "SUPPORTS",
-        "confidence": "HIGH",
-        "rationale": "Accurate access records are required to fulfil Art.15 data subject access requests.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.18"
-      },
       "GDPR:2016/679:Art.17": {
         "related_req_id": "GDPR:2016/679:Art.17",
         "related_title": "GDPR Art.17",
@@ -1479,15 +1389,6 @@
         "relationship_type": "SUPPORTS",
         "confidence": "MEDIUM",
         "rationale": "Access revocation processes support implementation of Art.17 right to erasure.",
-        "posture_lookup_ref": "ISO27001:2022:A.5.18"
-      },
-      "GDPR:2016/679:Art.18": {
-        "related_req_id": "GDPR:2016/679:Art.18",
-        "related_title": "GDPR Art.18",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "SUPPORTS",
-        "confidence": "MEDIUM",
-        "rationale": "Restricting access rights is the technical mechanism for implementing Art.18 restriction of processing.",
         "posture_lookup_ref": "ISO27001:2022:A.5.18"
       },
       "GDPR:2016/679:Art.32": {
@@ -2774,7 +2675,71 @@
     "security_domains": [
       "Protection"
     ],
-    "cross_framework_summary": {},
+    "cross_framework_summary": {
+      "GDPR:2016/679:Art.15": {
+        "related_req_id": "GDPR:2016/679:Art.15",
+        "related_title": "GDPR Art.15",
+        "related_standard": "GDPR:2016/679",
+        "relationship_type": "IMPLEMENTS",
+        "confidence": "HIGH",
+        "rationale": "PII protection includes subject access request procedures \u2014 the primary control for fulfilling DSAR identification, search, and response.",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
+      },
+      "GDPR:2016/679:Art.16": {
+        "related_req_id": "GDPR:2016/679:Art.16",
+        "related_title": "GDPR Art.16",
+        "related_standard": "GDPR:2016/679",
+        "relationship_type": "IMPLEMENTS",
+        "confidence": "HIGH",
+        "rationale": "PII protection includes rectification procedures for maintaining accuracy of personal data.",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
+      },
+      "GDPR:2016/679:Art.17": {
+        "related_req_id": "GDPR:2016/679:Art.17",
+        "related_title": "GDPR Art.17",
+        "related_standard": "GDPR:2016/679",
+        "relationship_type": "IMPLEMENTS",
+        "confidence": "HIGH",
+        "rationale": "PII protection includes erasure procedures \u2014 the procedural side of right-to-be-forgotten alongside A.8.10 information deletion.",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
+      },
+      "GDPR:2016/679:Art.18": {
+        "related_req_id": "GDPR:2016/679:Art.18",
+        "related_title": "GDPR Art.18",
+        "related_standard": "GDPR:2016/679",
+        "relationship_type": "IMPLEMENTS",
+        "confidence": "HIGH",
+        "rationale": "PII protection includes processing-restriction procedures triggered by subject requests.",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
+      },
+      "GDPR:2016/679:Art.19": {
+        "related_req_id": "GDPR:2016/679:Art.19",
+        "related_title": "GDPR Art.19",
+        "related_standard": "GDPR:2016/679",
+        "relationship_type": "IMPLEMENTS",
+        "confidence": "HIGH",
+        "rationale": "PII protection includes recipient-notification procedures when data is rectified, erased, or restricted.",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
+      },
+      "GDPR:2016/679:Art.20": {
+        "related_req_id": "GDPR:2016/679:Art.20",
+        "related_title": "GDPR Art.20",
+        "related_standard": "GDPR:2016/679",
+        "relationship_type": "IMPLEMENTS",
+        "confidence": "HIGH",
+        "rationale": "PII protection includes data-portability procedures (structured machine-readable export).",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
+      },
+      "GDPR:2016/679:Art.21": {
+        "related_req_id": "GDPR:2016/679:Art.21",
+        "related_title": "GDPR Art.21",
+        "related_standard": "GDPR:2016/679",
+        "relationship_type": "IMPLEMENTS",
+        "confidence": "HIGH",
+        "rationale": "PII protection includes objection-handling procedures including opt-out flags for direct marketing/profiling.",
+        "posture_lookup_ref": "ISO27001:2022:A.5.34"
+      }
+    },
     "edges": [
       {
         "source_id": "ISO27001:2022:A.5.34",
@@ -4706,15 +4671,6 @@
         "rationale": "Information access restriction must enforce stricter access controls for special category data \u2014 need-to-know at highest level.",
         "posture_lookup_ref": "ISO27001:2022:A.8.3"
       },
-      "GDPR:2016/679:Art.18": {
-        "related_req_id": "GDPR:2016/679:Art.18",
-        "related_title": "GDPR Art.18",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "IMPLEMENTS",
-        "confidence": "HIGH",
-        "rationale": "Information access restriction implements the technical capability to restrict processing of specific personal data records.",
-        "posture_lookup_ref": "ISO27001:2022:A.8.3"
-      },
       "GDPR:2016/679:Art.32.1.b": {
         "related_req_id": "GDPR:2016/679:Art.32.1.b",
         "related_title": "GDPR Art.32.1.b",
@@ -4868,24 +4824,6 @@
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
         "rationale": "Secure authentication prevents unauthorised access to personal data processing systems.",
-        "posture_lookup_ref": "ISO27001:2022:A.8.5"
-      },
-      "GDPR:2016/679:Art.15": {
-        "related_req_id": "GDPR:2016/679:Art.15",
-        "related_title": "GDPR Art.15",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "ENABLES",
-        "confidence": "MEDIUM",
-        "rationale": "Secure authentication of the requesting data subject is required before releasing their personal data.",
-        "posture_lookup_ref": "ISO27001:2022:A.8.5"
-      },
-      "GDPR:2016/679:Art.20": {
-        "related_req_id": "GDPR:2016/679:Art.20",
-        "related_title": "GDPR Art.20",
-        "related_standard": "GDPR:2016/679",
-        "relationship_type": "ENABLES",
-        "confidence": "MEDIUM",
-        "rationale": "Secure authentication of requesting data subject required before releasing portable copy of their personal data.",
         "posture_lookup_ref": "ISO27001:2022:A.8.5"
       },
       "GDPR:2016/679:Art.32": {
