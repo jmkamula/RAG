@@ -22,9 +22,18 @@ sheet_name_fingerprints:
   - tokens: [third, party, vendor]
   - tokens: [supplier, register]
   - tokens: [supplier, assessment]
-  - tokens: [business, partner]            # tenants commonly use partner-vocabulary
-  - tokens: [partner, assessment]
-  - tokens: [partner, risk]
+  # Removed `[business, partner]`, `[partner, assessment]`,
+  # `[partner, risk]` 2026-06-11: "partner" is overloaded —
+  # tenants use it for personnel attestation registers (e.g.
+  # contractors/consultants signing NDAs) as well as for
+  # third-party suppliers. The supplier-review leaf wants
+  # third-party-vendor data; personnel attestation goes to
+  # A.6.3 (training) + A.6.6 (NDA) via the personnel_security_
+  # attestation_register mapping. Drop the ambiguous fingerprints
+  # — explicit `business, partner` titles that ARE actually
+  # supplier registers should be renamed by the tenant, or this
+  # YAML's column-level pass will catch a true supplier-shape
+  # sheet anyway.
 
 header_row_hints: [1, 2]
 min_data_rows: 1

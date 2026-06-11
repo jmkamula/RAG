@@ -1,0 +1,116 @@
+# Workbook mapping: personnel security attestation register.
+#
+# Tenants often maintain a single sheet that summarises each person's
+# compliance attestations: NDA signed (date), Training completed
+# (date), BYOD attestation, Access Registry membership, etc. One row
+# per person, one column per attestation type. This is a SUMMARY
+# register — distinct from the canonical per-event leaves which
+# expect one row per signature / per training-completion.
+#
+# The summary register can feed partial evidence to:
+#   - A.6.3:training_completion_register (per-person training date)
+#   - A.6.6:nda_signature_register (per-person NDA signature date)
+#
+# Several MUSTs of those leaves (module_id, score, signature_method,
+# template_version, variant) genuinely don't fit a summary register
+# — they require per-event detail the summary doesn't carry. This
+# mapping accepts that: the leaves will be partial, not fully
+# satisfied, when the only evidence is the summary register.
+#
+# Tenants with separate per-event training logs / per-event NDA
+# signing records should rely on those for full satisfaction; the
+# summary register provides complementary cross-check evidence.
+
+schema_version: 1
+mapping_id: workbook.iso.personnel_security_attestation_register
+
+sheet_name_fingerprints:
+  - tokens: [personnel, attestation]
+  - tokens: [personnel, security, attestation]
+  - tokens: [staff, attestation]
+  - tokens: [employee, attestation]
+  - tokens: [compliance, attestation]
+  - tokens: [business, partner, assessment]   # narrower than `[business, partner]` — requires "assessment" too
+  - tokens: [contractor, attestation]
+
+header_row_hints: [1, 7]                       # row 7 catches sheets with narrative intro on rows 1-6
+min_data_rows: 1
+
+passes:
+
+  # ── Pass 1: feeds A.6.3 training-completion-register leaf ──
+  - pass_name: training_attestation
+    target_control: "A.6.3"
+    target_evidence_requirement: "req:A.6.3:training_completion_register"
+    target_evidence_type: register
+    required_columns:
+      # Personnel identifier — name / id / employee number / partner.
+      - fingerprint: [partner, name]
+        binds_to: "item:A.6.3:reg_personnel_id"
+      - fingerprint: [employee, name]
+        binds_to: "item:A.6.3:reg_personnel_id"
+      - fingerprint: [employee, id]
+        binds_to: "item:A.6.3:reg_personnel_id"
+      - fingerprint: [staff, id]
+        binds_to: "item:A.6.3:reg_personnel_id"
+      - fingerprint: [personnel, id]
+        binds_to: "item:A.6.3:reg_personnel_id"
+      - fingerprint: [name]
+        binds_to: "item:A.6.3:reg_personnel_id"
+      # Training completion date.
+      - fingerprint: [training, completed]
+        binds_to: "item:A.6.3:reg_completion_date"
+      - fingerprint: [training, date]
+        binds_to: "item:A.6.3:reg_completion_date"
+      - fingerprint: [completion, date]
+        binds_to: "item:A.6.3:reg_completion_date"
+    optional_columns:
+      - fingerprint: [next, review]
+        binds_to: "item:A.6.3:reg_next_due"
+      - fingerprint: [next, due]
+        binds_to: "item:A.6.3:reg_next_due"
+      - fingerprint: [overall, status]
+        binds_to: "item:A.6.3:reg_status"
+      - fingerprint: [status]
+        binds_to: "item:A.6.3:reg_status"
+
+  # ── Pass 2: feeds A.6.6 NDA-signature-register leaf ──
+  - pass_name: nda_attestation
+    target_control: "A.6.6"
+    target_evidence_requirement: "req:A.6.6:nda_signature_register"
+    target_evidence_type: register
+    required_columns:
+      # Personnel identifier (same vocabulary as Pass 1).
+      - fingerprint: [partner, name]
+        binds_to: "item:A.6.6:reg_signatory_id"
+      - fingerprint: [employee, name]
+        binds_to: "item:A.6.6:reg_signatory_id"
+      - fingerprint: [employee, id]
+        binds_to: "item:A.6.6:reg_signatory_id"
+      - fingerprint: [staff, id]
+        binds_to: "item:A.6.6:reg_signatory_id"
+      - fingerprint: [personnel, id]
+        binds_to: "item:A.6.6:reg_signatory_id"
+      - fingerprint: [name]
+        binds_to: "item:A.6.6:reg_signatory_id"
+      # NDA signature date.
+      - fingerprint: [nda, signed]
+        binds_to: "item:A.6.6:reg_signature_date"
+      - fingerprint: [nda, date]
+        binds_to: "item:A.6.6:reg_signature_date"
+      - fingerprint: [confidentiality, signed]
+        binds_to: "item:A.6.6:reg_signature_date"
+      - fingerprint: [signature, date]
+        binds_to: "item:A.6.6:reg_signature_date"
+    optional_columns:
+      - fingerprint: [overall, status]
+        binds_to: "item:A.6.6:reg_expiry_or_active"
+      - fingerprint: [status]
+        binds_to: "item:A.6.6:reg_expiry_or_active"
+      - fingerprint: [active]
+        binds_to: "item:A.6.6:reg_expiry_or_active"
+
+confidence_weights:
+  sheet_name: 0.5
+  required_columns: 0.4
+  row_count: 0.1

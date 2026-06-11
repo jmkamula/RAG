@@ -10,6 +10,14 @@ sheet_name_fingerprints:
   - tokens: [parties, requirements, reg]
   - tokens: [interested, parties, requirements]
   - tokens: [interested, parties]
+  # Stakeholder-map shape: tenants also maintain a per-party
+  # stakeholder map with internal/external categorisation — same
+  # 4.2 evidence, different visual layout. Category column holds
+  # "Internal"/"External" as row values rather than as separate
+  # columns.
+  - tokens: [internal, external, parties]
+  - tokens: [stakeholder, register]
+  - tokens: [stakeholder, map]
 
 header_row_hints: [1, 2]
 min_data_rows: 1
@@ -26,23 +34,44 @@ passes:
         - [date]
       days: 365
     required_columns:
+      # Party identifier — tenants name this column "Parties Listed",
+      # "Nature of the Party", "Stakeholder", "Party Name", etc.
       - fingerprint: [parties, listed]
         binds_to: "item:4.2:parties_listed"
+      - fingerprint: [nature, party]
+        binds_to: "item:4.2:parties_listed"
+      - fingerprint: [stakeholder]
+        binds_to: "item:4.2:parties_listed"
+      - fingerprint: [party, name]
+        binds_to: "item:4.2:parties_listed"
+      # Requirements / interests / concerns — what the party needs
+      # from / cares about regarding the ISMS.
       - fingerprint: [requirements]
+        binds_to: "item:4.2:requirements"
+      - fingerprint: [interest]
+        binds_to: "item:4.2:requirements"
+      - fingerprint: [concern]
+        binds_to: "item:4.2:requirements"
+      - fingerprint: [needs, expectations]
         binds_to: "item:4.2:requirements"
     optional_columns:
       - fingerprint: [addressed]
         binds_to: "item:4.2:addressed"
-        coverage: partial
+      # "ISMS Requirement" column ("Policies, training, awareness" /
+      # "Risk treatment plan" etc.) IS the addressed dimension —
+      # how the ISMS responds to the party's interest.
+      - fingerprint: [isms, requirement]
+        binds_to: "item:4.2:addressed"
+      - fingerprint: [communication, method]
+        binds_to: "item:4.2:addressed"
       - fingerprint: [owner]
         binds_to: "item:4.2:owner"
-        coverage: partial
       - fingerprint: [last, assessed]
         binds_to: "item:4.2:reg_last_assessed"
-        coverage: partial
+      - fingerprint: [category]
+        binds_to: "item:4.2:reg_scope_link"
       - fingerprint: [scope, link]
         binds_to: "item:4.2:reg_scope_link"
-        coverage: partial
 
 confidence_weights:
   sheet_name: 0.5

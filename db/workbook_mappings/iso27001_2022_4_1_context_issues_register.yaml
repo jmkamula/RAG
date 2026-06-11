@@ -9,7 +9,14 @@ sheet_name_fingerprints:
   - tokens: [external, issues, register]
   - tokens: [external, issues, reg]
   - tokens: [internal, external, issues]
-  - tokens: [internal, external]
+  # Removed `[internal, external]` 2026-06-11: too broad — matched
+  # stakeholder-map sheets ("Internal&External Parties") that are 4.2
+  # interested-parties evidence, not 4.1 context-issues evidence.
+  # The 4.1 leaf wants internal/external ISSUES; the parties sheet
+  # has internal/external CATEGORIES of stakeholders. 4.2 mapping
+  # handles those.
+  - tokens: [context, issues]
+  - tokens: [issues, register]
 
 header_row_hints: [1, 2]
 min_data_rows: 1
