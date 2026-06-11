@@ -189,10 +189,110 @@ def _label_for_standard(standard_id: str) -> str:
     return _STANDARD_LABEL_MAP.get(standard_id, standard_id.split(":")[0])
 
 
+# Engine-reason artifact "role" names → human-readable form. Roles come
+# from posture_loader's missing-artifacts list and use snake_case from
+# the curated EvidenceRequirement spec. Render them in natural language
+# so the row reads as instructions, not as field identifiers.
+_ROLE_LABELS = {
+    "procedure":                     "operating procedure",
+    "register":                      "register",
+    "review_record":                 "review record",
+    "scope_note":                    "scope note",
+    "revocation_record":             "revocation records",
+    "configuration_baseline":        "configuration baseline",
+    "monitoring_record":             "monitoring records",
+    "communication_record":          "communication records",
+    "approval":                      "approval records",
+    "discovery_record":              "discovery records",
+    "policy":                        "policy document",
+    "matrix":                        "controls matrix",
+    "directive":                     "directive",
+    "asset_register":                "asset register",
+    "contact_register":              "contact register",
+    "non_return_record":             "non-return records",
+    "return_record":                 "return records",
+    "disposal_record":               "disposal records",
+    "application_record":            "application records",
+    "closure_record":                "closure records",
+    "exercise_record":               "exercise / drill records",
+    "activation_record":             "activation records",
+    "operating_procedures_register": "operating procedures register",
+    "schedule_register":             "schedule register",
+    "nonconformity_register":        "nonconformity register",
+    "isms_scope":                    "ISMS scope statement",
+    "manual":                        "manual",
+    "statement_of_applicability":    "statement of applicability",
+}
+
+
+def _pretty_role(role: str) -> str:
+    return _ROLE_LABELS.get(role, role.replace("_", " "))
+
+
+def _prettify_reason(reason: str) -> str:
+    """
+    Convert an engine reason string to readable form.
+
+    Input shape (from posture_loader._compose):
+      "ALL: 0/4 children satisfied; missing artifacts of type: a, b;
+       partial: leaf_role (X/Y — missing: ...)"
+
+    Conservative rewrites: counts to "X of Y requirements met",
+    "missing artifacts of type" to "still needed", snake_case roles
+    to natural words. Partial-leaf text is light-touch since the
+    inner detail is unpredictable.
+    """
+    if not reason:
+        return ""
+
+    segments = [s.strip() for s in reason.split(";")]
+    out: list[str] = []
+
+    for seg in segments:
+        if not seg:
+            continue
+        # "ALL: X/Y children satisfied" or "X/Y children satisfied"
+        m = re.match(
+            r"^(?:ALL:\s*)?(\d+)\s*/\s*(\d+)\s+children\s+satisfied\s*(.*)$",
+            seg, re.IGNORECASE,
+        )
+        if m:
+            sat, total, tail = m.group(1), m.group(2), m.group(3).strip()
+            text = f"{sat} of {total} requirements met"
+            if tail:
+                text += f" {tail}"
+            out.append(text)
+            continue
+        # "missing artifacts of type: a, b, c"
+        m = re.match(r"^missing\s+artifacts\s+of\s+type:\s*(.+)$", seg, re.IGNORECASE)
+        if m:
+            roles = [r.strip() for r in m.group(1).split(",") if r.strip()]
+            pretty = [_pretty_role(r) for r in roles]
+            out.append("still needed: " + ", ".join(pretty))
+            continue
+        # "partial: leaf_role (X/Y — missing: ...), ..."
+        m = re.match(r"^partial:\s*(.+)$", seg, re.IGNORECASE | re.DOTALL)
+        if m:
+            partial_text = m.group(1)
+            # Replace snake_case role tokens with pretty form. Only
+            # rewrites tokens we recognise; unknown words pass through.
+            partial_text = re.sub(
+                r"\b([a-z][a-z0-9_]+_[a-z0-9_]+)\b",
+                lambda mm: _pretty_role(mm.group(1)),
+                partial_text,
+            )
+            out.append("partial: " + partial_text)
+            continue
+        out.append(seg)
+
+    return "; ".join(out)
+
+
 def _compose_posture_enumeration_answer(
     expanded_nodes: list,
     posture:        dict,
     scope_standards: list[str],
+    tenant_name:    str = "",
 ) -> str | None:
     """
     Deterministic markdown for POSTURE_CHECK enumeration queries.
@@ -286,6 +386,7 @@ def _compose_posture_enumeration_answer(
             if line:
                 reason = line
                 break
+        reason = _prettify_reason(reason)
         return f"- {head}: {reason}" if reason else f"- {head}"
 
     nc_bucket.sort(key=lambda x: x[0].ref)
@@ -294,6 +395,12 @@ def _compose_posture_enumeration_answer(
     xfw_bucket.sort(key=lambda x: x[0].ref)
 
     parts: list[str] = []
+    name_for_lead = (tenant_name or "").strip() or "your organisation"
+    parts.append(
+        f"Please find our findings below, based on the information we "
+        f"have on file for {name_for_lead}."
+    )
+    parts.append("")
     if nc_bucket:
         parts.append(f"**Non-Conformities (NC) — {len(nc_bucket)}:**")
         parts.extend(_row(n, rec) for n, rec in nc_bucket)
@@ -1582,6 +1689,7 @@ def make_retrieve_node(
                 expanded_nodes  = all_nodes,
                 posture         = posture,
                 scope_standards = list(getattr(tenant, "applicable_standards", []) or []),
+                tenant_name     = getattr(tenant, "name", "") or "",
             )
             if _det_text:
                 _det_refs = [

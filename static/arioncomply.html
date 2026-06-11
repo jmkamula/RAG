@@ -1373,6 +1373,17 @@ async function doOverride() {
   } catch(e) { toast(`Error: ${e.message}`); }
 }
 
+// ── Markdown rendering ──
+// Minimal inline-markdown parser for chat output. Handles **bold**,
+// *italic*, and newlines. Order matters — bold first so **text** isn't
+// partially consumed by the italic pass.
+function renderMd(text) {
+  return (text || '')
+    .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
+}
+
 // ── Chat ──
 function appendMsg(role, text, refs, ms) {
   const empty = document.getElementById('chat-empty');
@@ -1409,7 +1420,7 @@ function appendMsg(role, text, refs, ms) {
     if (ms) inner += `<div class="msg-meta">${(ms/1000).toFixed(1)}s</div>`;
     div.innerHTML = inner;
   } else {
-    let inner = `<div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div>`;
+    let inner = `<div class="msg-bubble">${renderMd(text)}</div>`;
     if (refs && refs.length) {
       inner += `<div class="msg-refs">${refs.map(r=>`<span class="ref-tag">${r}</span>`).join('')}</div>`;
     }
@@ -1491,7 +1502,7 @@ async function sendChat() {
           } else if (evt.type === 'token') {
             fullText += evt.text;
             bubble.querySelector('.msg-bubble').innerHTML =
-              fullText.replace(/\n/g,'<br>') +
+              renderMd(fullText) +
               '<span class="stream-cursor">&#9609;</span>';
             scrollChat();
           } else if (evt.type === 'done') {
