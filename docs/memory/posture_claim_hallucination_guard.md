@@ -1,6 +1,6 @@
 ---
 name: posture-claim-hallucination-guard
-description: "SHIPPED 2026-06-10 (14633c1 + 5b98a42): L1 post-compose guard in rank_and_answer drops lines whose (control_ref, claimed_status) pair contradicts posture_by_ref truth. v2 is section-aware (claim inferred from **Non-Conformities (NC):** style headers when bullet has no inline [STATUS]), logs violations via std logger, and renumbers bullets after drops."
+description: "SHIPPED L1+L3 2026-06-10/11. L1 (14633c1+5b98a42) is post-compose guard in rank_and_answer that drops lines contradicting posture truth. L3 (adc1a8f) bypasses LLM entirely for enumeration-shape POSTURE_CHECK queries — deterministic markdown from posture_by_ref. Same query → byte-identical output. L2 (pre-compose dedup) still deferred."
 metadata: 
   node_type: memory
   type: project
@@ -116,6 +116,69 @@ when at least one violation was detected, so clean answers are
 untouched.
 
 Eval 195/198 with v2 — known-stale #2/#25/#26 only.
+
+## 2026-06-11 — L3 shipped (adc1a8f)
+
+L1 fixed individual hallucinated bullets but didn't address
+*selection stochasticity*: same query → different controls listed
+each run, because rank_and_answer picks 5-7 nodes from ~30
+candidates and the choice drifts run-to-run. Tenant complaint:
+"I'm not getting consistent answers here. I also want the
+control number and name. Markdown bold doesn't seem to work."
+
+The structural fix: for enumeration-shape POSTURE_CHECK queries
+("what is our X compliance status", "what are our NCs", "where
+do we stand", "list our gaps"), the truth IS the structured
+posture data. The LLM rank step adds no signal, only risk.
+Bypass rank_and_answer entirely and compose markdown directly.
+
+`rag/arion_graph.py` additions:
+
+  - `_POSTURE_ENUMERATION_RE` — regex matching enumeration query
+    shapes. Single-control questions ("is Art.5 a NC?", "what
+    does A.5.18 mean?") still route through the LLM.
+  - `_is_posture_enumeration_query(q)` — bool gate.
+  - `_compose_posture_enumeration_answer(...)` — buckets
+    `expanded_nodes` by posture finding (NC/OFI/Comply), sorts
+    by ref, formats `**STD REF — Title**: reason` per row;
+    cross-framework section inherits per-linked-ref finding
+    via `xfw_edges` + posture_by_ref, dedupes duplicate
+    rel_type edges.
+
+The composer is called in the retrieve node just before
+`llm.rank_and_answer(...)`; when it returns text, the function
+short-circuits with `answer_source="posture_enumeration_
+deterministic"`.
+
+What this delivered (vs prior LLM-compose):
+
+  - **Determinism**: byte-identical answer for the same posture
+    state on every run.
+  - **Control names always present**: format always
+    `**ISO 27001 A.X.Y — Title**`, regardless of LLM mood.
+  - **Markdown stable**: flat bullet list, no nested `1.` + `-`,
+    bold renders cleanly across renderers.
+  - **Latency**: 35s → 3-6s on the user's reference query.
+
+What this didn't break:
+
+  - rank_and_answer (and the L1 guard inside it) still runs for
+    free-form posture queries, definition queries, gap queries
+    where the user wants narrative not enumeration.
+  - Eval 194/198 — known-stochastic only.
+
+## Three-tier strategy now stands
+
+  - **L1 (shipped)** — post-compose verifier on LLM output;
+    catches per-line hallucinations.
+  - **L2 (deferred)** — pre-compose dedup of context blocks; not
+    needed once L3 covers the highest-risk intent.
+  - **L3 (shipped)** — deterministic compose for enumerations;
+    bypass LLM entirely where truth is structured.
+
+The general principle stays the same as the polish guard / extractor
+grounding rules: **the truth is in the data. The LLM is the suspect.**
+For enumerations, the simplest guard is to skip the suspect.
 
 ## Related
 
