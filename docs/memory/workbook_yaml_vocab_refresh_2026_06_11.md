@@ -179,6 +179,14 @@ tenant approves Stage-2 → live posture flips. This was the
 first time the full pipeline carried workbook intake through
 to posture progression.
 
+## Eval after the full arc
+
+Eval 192/198 post-G2 — all 6 fails in the known-stochastic set
+(#2, #16, #21, #24, #25, #26). No new failure shapes from the
+spec change or the three live OFI flips. Three flipped controls
+are ISMS clauses (7.2 / 7.4 / 9.1); the eval suite's NC-focused
+cases are largely on Annex A controls and unaffected.
+
 ## Principle
 
 **Reserve `coverage: partial` for genuinely weak signals — not
