@@ -1,6 +1,6 @@
 ---
 name: workbook-yaml-vocab-refresh-2026-06-11
-description: "SHIPPED 2026-06-11 (31366e1 + 78b8f27): three workbook_mappings YAMLs (7.2/9.1/7.4) had narrow standard-jargon fingerprints AND spurious coverage:partial flags. Broadened vocabulary + dropped over-conservative coverage flags. Arion's 3 orphan sheets went 0 → 16 findings; 9.1 then NC → OFI (Stage-2 proposal) once items moved from 'partial' to 'present'."
+description: "SHIPPED 2026-06-11 (31366e1 + 78b8f27 + 4e6d1f1): full arc on 7.2/9.1/7.4 register-leaf coverage. F1 broadened YAML vocab (3 orphan sheets 0→16 findings). G1 dropped spurious coverage:partial flags (9.1 leaf 0/6→6/6 → NC→OFI). G2 downgraded 2 ChecklistItem MUSTs to SHOULDs (gap_actions + reg_sender) — 7.2 + 7.4 leaves became fully-satisfiable from register evidence alone, both flipped NC→OFI. Three end-to-end OFI flips in one session driven by workbook evidence."
 metadata: 
   node_type: memory
   type: project
@@ -141,18 +141,43 @@ correcting how the engine reads it.
 Then call `load_posture(pg, tenant_id)` to recompute engine
 verdicts and write new Stage-2 proposals.
 
-## G1 lever (shipped) vs G2 lever (deferred)
+## G1 lever (shipped) and G2 lever (shipped)
 
   - **G1 — YAML accounting fix.** Move bindings out of
     `optional_columns: coverage: partial` when the column
     actually provides full evidence. Mechanical, low-risk.
     SHIPPED 2026-06-11.
-  - **G2 — curation review.** Audit whether items currently
-    marked MUST_CONTAIN in the spec are really MUSTs vs SHOULDs.
-    For 7.2 `gap_actions` and 7.4 `reg_sender`: do real tenant
-    registers always have these, or is it sometimes acceptable
-    for a register to not track them? Pending separate
-    conversation.
+  - **G2 — curation review.** Audited whether items marked
+    MUST_CONTAIN in the spec should remain mandatory:
+
+      - `item:7.2:gap_actions` MUST → SHOULD. ISO 27001 7.2 c)
+        is conditional ("where applicable, take actions to
+        acquire the necessary competence"). Orgs commonly track
+        gap actions in separate Development Plan docs. Kept as
+        SHOULD so chat still surfaces it.
+      - `item:7.4:reg_sender` MUST → SHOULD. No clause requires
+        per-row sender. Matrix-shape registers (per-risk comms
+        plan) can't naturally provide it — sender is implicit
+        for the organisation. Log-shape registers still benefit.
+
+    SHIPPED 2026-06-11 (4e6d1f1). Loader at
+    `enrichment/documents/load_to_neo4j.py` pruned 2 stale
+    MUST_CONTAIN edges cleanly via declarative sweep — no
+    orphan ERs/items left. Engine sweep after the spec change
+    saw 7.2 + 7.4 leaves fully satisfied → proposed OFI on
+    both → tenant approved → live OFI.
+
+## Three OFI flips in one arc
+
+  - 9.1 NC → OFI (after G1 coverage-flag fix)
+  - 7.2 NC → OFI (after G2 gap_actions downgrade)
+  - 7.4 NC → OFI (after G2 reg_sender downgrade)
+
+Same end-to-end shape for each: workbook → satisfied leaf
+(via item-level checklist_item_id) → engine proposes OFI →
+tenant approves Stage-2 → live posture flips. This was the
+first time the full pipeline carried workbook intake through
+to posture progression.
 
 ## Principle
 
