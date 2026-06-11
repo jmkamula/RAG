@@ -35,16 +35,55 @@ passes:
         - [date]
       days: 365
     required_columns:
+      # The identifier — event / communication / risk / item id.
+      # Matrix-style sheets (per-risk comms plan) and log-style sheets
+      # (per-event history) both fit; tenants name the row-id column
+      # after whatever their unit of communication is.
       - fingerprint: [event, id]
         binds_to: "item:7.4:reg_event_id"
+      - fingerprint: [communication, id]
+        binds_to: "item:7.4:reg_event_id"
+      - fingerprint: [risk, id]
+        binds_to: "item:7.4:reg_event_id"
+      - fingerprint: [item, id]
+        binds_to: "item:7.4:reg_event_id"
+      # The "what is being communicated" — topic / subject / message /
+      # description / risk-description (matrix-style).
       - fingerprint: [topic]
+        binds_to: "item:7.4:reg_topic"
+      - fingerprint: [subject]
+        binds_to: "item:7.4:reg_topic"
+      - fingerprint: [message]
+        binds_to: "item:7.4:reg_topic"
+      - fingerprint: [risk, description]
         binds_to: "item:7.4:reg_topic"
     optional_columns:
       - fingerprint: [audience]
         binds_to: "item:7.4:reg_audience"
         coverage: partial
+      - fingerprint: [recipient]
+        binds_to: "item:7.4:reg_audience"
+        coverage: partial
+      - fingerprint: [interested, party]
+        binds_to: "item:7.4:reg_audience"
+        coverage: partial
+      - fingerprint: [stakeholder]
+        binds_to: "item:7.4:reg_audience"
+        coverage: partial
       - fingerprint: [channel]
         binds_to: "item:7.4:reg_channel"
+        coverage: partial
+      - fingerprint: [method]
+        binds_to: "item:7.4:reg_channel"
+        coverage: partial
+      - fingerprint: [medium]
+        binds_to: "item:7.4:reg_channel"
+        coverage: partial
+      - fingerprint: [frequency]
+        binds_to: "item:7.4:reg_date"
+        coverage: partial
+      - fingerprint: [schedule]
+        binds_to: "item:7.4:reg_date"
         coverage: partial
       - fingerprint: [date]
         binds_to: "item:7.4:reg_date"

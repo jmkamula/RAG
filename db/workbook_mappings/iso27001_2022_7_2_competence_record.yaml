@@ -19,21 +19,67 @@ passes:
     target_evidence_requirement: "req:7.2:competence_record"
     target_evidence_type: register
     required_columns:
+      # Competence dimension — what competence is needed/held.
+      # Any one of competence/competency/skill counts as a match.
       - fingerprint: [required, competence]
         binds_to: "item:7.2:required_competence"
+      - fingerprint: [competence]
+        binds_to: "item:7.2:required_competence"
+      - fingerprint: [competency]
+        binds_to: "item:7.2:required_competence"
+      - fingerprint: [skill]
+        binds_to: "item:7.2:required_competence"
+      # Basis dimension — training / education / experience / qualification / certification.
       - fingerprint: [basis, of, competence]
+        binds_to: "item:7.2:basis_of_competence"
+      - fingerprint: [training]
+        binds_to: "item:7.2:basis_of_competence"
+      - fingerprint: [qualification]
+        binds_to: "item:7.2:basis_of_competence"
+      - fingerprint: [certification]
+        binds_to: "item:7.2:basis_of_competence"
+      - fingerprint: [education]
+        binds_to: "item:7.2:basis_of_competence"
+      - fingerprint: [experience]
         binds_to: "item:7.2:basis_of_competence"
     optional_columns:
       - fingerprint: [gap, actions]
         binds_to: "item:7.2:gap_actions"
         coverage: partial
+      - fingerprint: [gap]
+        binds_to: "item:7.2:gap_actions"
+        coverage: partial
+      - fingerprint: [development, plan]
+        binds_to: "item:7.2:gap_actions"
+        coverage: partial
       - fingerprint: [effectiveness]
+        binds_to: "item:7.2:effectiveness"
+        coverage: partial
+      - fingerprint: [score]
+        binds_to: "item:7.2:effectiveness"
+        coverage: partial
+      - fingerprint: [rating]
+        binds_to: "item:7.2:effectiveness"
+        coverage: partial
+      - fingerprint: [assessment]
         binds_to: "item:7.2:effectiveness"
         coverage: partial
       - fingerprint: [documented]
         binds_to: "item:7.2:documented"
         coverage: partial
+      - fingerprint: [evaluation]
+        binds_to: "item:7.2:documented"
+        coverage: partial
       - fingerprint: [owner]
+        binds_to: "item:7.2:owner"
+        coverage: partial
+      - fingerprint: [employee]
+        binds_to: "item:7.2:owner"
+        coverage: partial
+      - fingerprint: [staff]
+        binds_to: "item:7.2:owner"
+        coverage: partial
+      - fingerprint: [role]
         binds_to: "item:7.2:owner"
         coverage: partial
 

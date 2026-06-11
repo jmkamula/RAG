@@ -34,21 +34,50 @@ passes:
         - [date]
       days: 90
     required_columns:
+      # Identifier — tenant may call it metric / measurement / KPI / indicator.
       - fingerprint: [metric, id]
         binds_to: "item:9.1:rec_metric_id"
+      - fingerprint: [measurement, id]
+        binds_to: "item:9.1:rec_metric_id"
+      - fingerprint: [kpi, id]
+        binds_to: "item:9.1:rec_metric_id"
+      - fingerprint: [indicator, id]
+        binds_to: "item:9.1:rec_metric_id"
+      # The observed reading — value / result / actual / reading.
       - fingerprint: [value]
+        binds_to: "item:9.1:rec_value"
+      - fingerprint: [result]
+        binds_to: "item:9.1:rec_value"
+      - fingerprint: [actual]
+        binds_to: "item:9.1:rec_value"
+      - fingerprint: [reading]
         binds_to: "item:9.1:rec_value"
     optional_columns:
       - fingerprint: [date]
         binds_to: "item:9.1:rec_date"
         coverage: partial
+      - fingerprint: [period]
+        binds_to: "item:9.1:rec_date"
+        coverage: partial
       - fingerprint: [threshold]
+        binds_to: "item:9.1:rec_threshold"
+        coverage: partial
+      - fingerprint: [target]
+        binds_to: "item:9.1:rec_threshold"
+        coverage: partial
+      - fingerprint: [benchmark]
+        binds_to: "item:9.1:rec_threshold"
+        coverage: partial
+      - fingerprint: [criteria]
         binds_to: "item:9.1:rec_threshold"
         coverage: partial
       - fingerprint: [status]
         binds_to: "item:9.1:rec_status"
         coverage: partial
       - fingerprint: [owner]
+        binds_to: "item:9.1:rec_owner"
+        coverage: partial
+      - fingerprint: [responsible]
         binds_to: "item:9.1:rec_owner"
         coverage: partial
 
