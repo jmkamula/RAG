@@ -104,6 +104,12 @@ Post-curation, re-upload of Security Test Report.docx:
   - After: 1 + 2 = 3 findings (A.5.15 + Art.32.1.b + Art.5.1.f).
     Art.18 and Art.21 no longer surface.
 
+Eval 196/198 (only #25/#26 known-stale) — best result of the
+session. Cases #2/#16/#21/#24 (frequently borderline) all PASSed
+this run, suggesting bridge cleanup may help xfw-touching answers
+stay on-target. Borderline LLM cases are stochastic, so single-run
+shouldn't be over-claimed, but no regressions either.
+
 ## Related
 
 - [[posture-claim-hallucination-guard]] — bridge curation
