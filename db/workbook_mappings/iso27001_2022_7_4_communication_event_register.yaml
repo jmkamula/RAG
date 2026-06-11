@@ -57,40 +57,32 @@ passes:
         binds_to: "item:7.4:reg_topic"
       - fingerprint: [risk, description]
         binds_to: "item:7.4:reg_topic"
+    # Full coverage by default — a real Interested Party column IS the
+    # audience evidence, a real Comms Method column IS the channel.
+    # Reserve `coverage: partial` for genuinely weak signals.
     optional_columns:
       - fingerprint: [audience]
         binds_to: "item:7.4:reg_audience"
-        coverage: partial
       - fingerprint: [recipient]
         binds_to: "item:7.4:reg_audience"
-        coverage: partial
       - fingerprint: [interested, party]
         binds_to: "item:7.4:reg_audience"
-        coverage: partial
       - fingerprint: [stakeholder]
         binds_to: "item:7.4:reg_audience"
-        coverage: partial
       - fingerprint: [channel]
         binds_to: "item:7.4:reg_channel"
-        coverage: partial
       - fingerprint: [method]
         binds_to: "item:7.4:reg_channel"
-        coverage: partial
       - fingerprint: [medium]
         binds_to: "item:7.4:reg_channel"
-        coverage: partial
       - fingerprint: [frequency]
         binds_to: "item:7.4:reg_date"
-        coverage: partial
       - fingerprint: [schedule]
         binds_to: "item:7.4:reg_date"
-        coverage: partial
       - fingerprint: [date]
         binds_to: "item:7.4:reg_date"
-        coverage: partial
       - fingerprint: [sender]
         binds_to: "item:7.4:reg_sender"
-        coverage: partial
 
 confidence_weights:
   sheet_name: 0.5

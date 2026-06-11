@@ -42,46 +42,38 @@ passes:
         binds_to: "item:7.2:basis_of_competence"
       - fingerprint: [experience]
         binds_to: "item:7.2:basis_of_competence"
+    # All bindings default to full coverage. If a column exists for the
+    # bound MUST, that item lands in `satisfied`, not `partial`. The
+    # `coverage: partial` flag is reserved for cases where a column
+    # provides only weak/indirect evidence (rare for register columns —
+    # they typically ARE the evidence for the item they map to).
     optional_columns:
       - fingerprint: [gap, actions]
         binds_to: "item:7.2:gap_actions"
-        coverage: partial
       - fingerprint: [gap]
         binds_to: "item:7.2:gap_actions"
-        coverage: partial
       - fingerprint: [development, plan]
         binds_to: "item:7.2:gap_actions"
-        coverage: partial
       - fingerprint: [effectiveness]
         binds_to: "item:7.2:effectiveness"
-        coverage: partial
       - fingerprint: [score]
         binds_to: "item:7.2:effectiveness"
-        coverage: partial
       - fingerprint: [rating]
         binds_to: "item:7.2:effectiveness"
-        coverage: partial
       - fingerprint: [assessment]
         binds_to: "item:7.2:effectiveness"
-        coverage: partial
       - fingerprint: [documented]
         binds_to: "item:7.2:documented"
-        coverage: partial
       - fingerprint: [evaluation]
         binds_to: "item:7.2:documented"
-        coverage: partial
       - fingerprint: [owner]
         binds_to: "item:7.2:owner"
-        coverage: partial
       - fingerprint: [employee]
         binds_to: "item:7.2:owner"
-        coverage: partial
       - fingerprint: [staff]
         binds_to: "item:7.2:owner"
-        coverage: partial
       - fingerprint: [role]
         binds_to: "item:7.2:owner"
-        coverage: partial
 
 confidence_weights:
   sheet_name: 0.5
