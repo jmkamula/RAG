@@ -133,6 +133,192 @@ _DEICTIC_CLARIFY_RESPONSE = (
 )
 
 
+# ── Deterministic posture-enumeration compose (L3 hallucination guard) ─────
+#
+# For POSTURE_CHECK queries that ask to ENUMERATE findings ("what is our X
+# compliance status", "what are our NCs", "where do we stand"), the truth
+# IS the posture data. The LLM rank step adds no signal, only risk: same
+# query → different controls selected run-to-run, missing titles, broken
+# markdown when the LLM picks an unusual list shape.
+#
+# This compose path bypasses rank_and_answer for matching queries and
+# formats posture deterministically. Free-form posture questions
+# ("explain how A.5.18 affects us") still route through the LLM.
+# See [[posture-claim-hallucination-guard]] L3.
+
+_POSTURE_ENUMERATION_RE = re.compile(
+    r"""
+    \b(?:
+       # "what is/are our [topic] compliance/posture status"
+       what(?:\'s|\s+is|\s+are)\s+our\s+[\w\s\-]{0,80}\s+(?:compliance|posture)\s+(?:status|finding|posture)\b
+       # "what is/are our compliance/posture status"
+     | what(?:\'s|\s+is|\s+are)\s+our\s+(?:compliance|posture)\s+(?:status|finding|posture)\b
+       # "what are our (main/compliance) NCs / OFIs / gaps / findings"
+     | what(?:\'s|\s+is|\s+are)\s+our\s+
+         (?:main\s+|top\s+|biggest\s+|compliance\s+|posture\s+|open\s+|outstanding\s+)*
+         (?:NCs?|non[- ]?conform\w*|OFIs?|opportunit\w+\s+for\s+improvement|gaps?|findings?|non[- ]?compliance(?:s)?)\b
+       # "where do/are we stand[ing]" / "where are we (on X)"
+     | where\s+(?:do|are)\s+we\s+(?:stand|standing|at)\b
+     | where\s+are\s+we\s+(?:on|with|for)\s+
+       # "list / show our NCs / gaps / findings / posture"
+     | (?:list|show)\s+(?:me\s+)?(?:our\s+|the\s+|all\s+)?
+         (?:NCs?|non[- ]?conform\w*|OFIs?|opportunit\w+\s+for\s+improvement|
+            gaps?|findings?|posture|status|compliance\s+status)\b
+    )
+    """,
+    re.IGNORECASE | re.VERBOSE,
+)
+
+
+def _is_posture_enumeration_query(query: str) -> bool:
+    return bool(query) and bool(_POSTURE_ENUMERATION_RE.search(query.strip()))
+
+
+_STANDARD_LABEL_MAP = {
+    "ISO27001:2022":  "ISO 27001",
+    "ISO27001:2013":  "ISO 27001",
+    "GDPR:2016/679":  "GDPR",
+    "GDPR":           "GDPR",
+    "ISO27002:2022":  "ISO 27002",
+    "ISO27701:2019":  "ISO 27701",
+    "ISO27701:2022":  "ISO 27701",
+}
+
+
+def _label_for_standard(standard_id: str) -> str:
+    return _STANDARD_LABEL_MAP.get(standard_id, standard_id.split(":")[0])
+
+
+def _compose_posture_enumeration_answer(
+    expanded_nodes: list,
+    posture:        dict,
+    scope_standards: list[str],
+) -> str | None:
+    """
+    Deterministic markdown for POSTURE_CHECK enumeration queries.
+
+    Returns None if no postured nodes are in the retrieved set (caller
+    falls back to rank_and_answer for empty-retrieval handling).
+
+    Format: flat bullet list per status bucket. Each row carries
+    "**STD REF — Title**: reason" so the control name is always
+    surfaced and bold renders cleanly.
+    """
+    if not expanded_nodes or not posture:
+        return None
+
+    posture_by_ref: dict[str, dict] = {}
+    for nid, rec in (posture or {}).items():
+        ref = rec.get("control_ref") or nid.split(":")[-1]
+        if ref:
+            posture_by_ref[ref] = rec
+
+    postured_stds: set[str] = set()
+    for nid in (posture or {}):
+        parts = nid.split(":")
+        if len(parts) >= 2:
+            postured_stds.add(":".join(parts[:2]))
+    if "ISO27001:2022" in postured_stds:
+        primary_std = "ISO27001:2022"
+    elif postured_stds:
+        primary_std = sorted(postured_stds)[0]
+    else:
+        primary_std = "ISO27001:2022"
+
+    scope_set = set(scope_standards or []) | {primary_std}
+
+    nc_bucket:     list = []
+    ofi_bucket:    list = []
+    comply_bucket: list = []
+    xfw_bucket:    list = []
+
+    for n in expanded_nodes:
+        if getattr(n, "is_informational", False):
+            continue
+        if n.standard_id not in scope_set:
+            continue
+        rec     = (posture or {}).get(n.node_id, {})
+        finding = (rec.get("finding") or "").upper()
+
+        if n.standard_id == primary_std:
+            if finding == "NC":
+                nc_bucket.append((n, rec))
+            elif finding == "OFI":
+                ofi_bucket.append((n, rec))
+            elif finding == "COMPLY":
+                comply_bucket.append((n, rec))
+            # Skip N/A (out of scope) and unassessed
+        else:
+            # Cross-framework: inherit finding from linked primary controls
+            linked: list[tuple[str, str]] = []
+            for edge in (getattr(n, "xfw_edges", []) or []):
+                lref = (edge.source_id.split(":")[-1]
+                        if n.node_id == edge.target_id
+                        else edge.target_id.split(":")[-1])
+                if not lref:
+                    continue
+                lrec  = posture_by_ref.get(lref, {})
+                lfind = (lrec.get("finding") or "").upper()
+                if lfind in ("NC", "OFI", "COMPLY"):
+                    linked.append((lref, lfind))
+            # Dedupe linked refs — Neo4j can return multiple edges of
+            # different rel_type to the same target.
+            seen_refs: set[str] = set()
+            uniq_linked: list[tuple[str, str]] = []
+            for lr, lf in linked:
+                if lr not in seen_refs:
+                    seen_refs.add(lr)
+                    uniq_linked.append((lr, lf))
+            if uniq_linked:
+                xfw_bucket.append((n, uniq_linked))
+
+    if not (nc_bucket or ofi_bucket or comply_bucket or xfw_bucket):
+        return None
+
+    def _row(n, rec) -> str:
+        title   = (getattr(n, "title", "") or "").strip()
+        ref_str = f"{_label_for_standard(n.standard_id)} {n.ref}"
+        head    = f"**{ref_str} — {title}**" if title else f"**{ref_str}**"
+        reason  = (rec.get("gap_description") or rec.get("evidence_text") or "").strip()
+        # First non-empty line only — keep rows scannable
+        for raw in reason.splitlines():
+            line = raw.strip()
+            if line:
+                reason = line
+                break
+        return f"- {head}: {reason}" if reason else f"- {head}"
+
+    nc_bucket.sort(key=lambda x: x[0].ref)
+    ofi_bucket.sort(key=lambda x: x[0].ref)
+    comply_bucket.sort(key=lambda x: x[0].ref)
+    xfw_bucket.sort(key=lambda x: x[0].ref)
+
+    parts: list[str] = []
+    if nc_bucket:
+        parts.append(f"**Non-Conformities (NC) — {len(nc_bucket)}:**")
+        parts.extend(_row(n, rec) for n, rec in nc_bucket)
+        parts.append("")
+    if ofi_bucket:
+        parts.append(f"**Opportunities for Improvement (OFI) — {len(ofi_bucket)}:**")
+        parts.extend(_row(n, rec) for n, rec in ofi_bucket)
+        parts.append("")
+    if comply_bucket:
+        parts.append(f"**Compliant — {len(comply_bucket)}:**")
+        parts.extend(_row(n, rec) for n, rec in comply_bucket)
+        parts.append("")
+    if xfw_bucket:
+        parts.append("**Cross-Framework:**")
+        for n, linked in xfw_bucket:
+            title   = (getattr(n, "title", "") or "").strip()
+            ref_str = f"{_label_for_standard(n.standard_id)} {n.ref}"
+            head    = f"**{ref_str} — {title}**" if title else f"**{ref_str}**"
+            tag_list = ", ".join(f"{lr} [{lf}]" for lr, lf in linked)
+            parts.append(f"- {head} — addressed via {tag_list}")
+        parts.append("")
+
+    return "\n".join(parts).rstrip()
+
+
 # ── Posture timeline query helpers (schema_v21 / posture_status_log) ────────
 #
 # "How did A.5.18 evolve?", "timeline for Art.32", "show me the history of
@@ -1385,6 +1571,40 @@ def make_retrieve_node(
             s.split(":")[0].replace("ISO27001", "ISO 27001")
             for s in state["standards"]
         )
+
+        # Deterministic compose for POSTURE_CHECK enumeration queries.
+        # Truth IS the posture data; LLM ranking adds stochasticity, drops
+        # control titles, and breaks markdown. See L3 in
+        # [[posture-claim-hallucination-guard]].
+        if (intent.question_type == QuestionType.POSTURE_CHECK
+                and _is_posture_enumeration_query(state["query"])):
+            _det_text = _compose_posture_enumeration_answer(
+                expanded_nodes  = all_nodes,
+                posture         = posture,
+                scope_standards = list(getattr(tenant, "applicable_standards", []) or []),
+            )
+            if _det_text:
+                _det_refs = [
+                    n.ref for n in all_nodes
+                    if (posture or {}).get(n.node_id, {}).get("finding")
+                       in ("NC", "OFI", "Comply")
+                ]
+                _det_findings = {
+                    n.ref: (posture or {}).get(n.node_id, {}).get("finding")
+                    for n in all_nodes
+                    if (posture or {}).get(n.node_id, {}).get("finding")
+                }
+                return {
+                    "answer_text":      _det_text,
+                    "verified":         True,
+                    "was_corrected":    False,
+                    "cited_refs":       _det_refs,
+                    "posture_findings": _det_findings,
+                    "node_count":       len(all_nodes),
+                    "neo4j_ms":         neo4j_ms,
+                    "resolver_trace":   _trace,
+                    "answer_source":    "posture_enumeration_deterministic",
+                }
 
         result = llm.rank_and_answer(
             query            = state["query"],
