@@ -1,6 +1,6 @@
 ---
 name: workbook-yaml-vocab-refresh-2026-06-11
-description: "SHIPPED 2026-06-11 (31366e1): three workbook_mappings YAMLs (7.2/9.1/7.4) had narrow standard-jargon fingerprints. Broadened to semantic-class vocabulary. Arion's 3 orphan sheets ('Competence Records', 'Monitoring Log', 'Risk Comms Matrix') went from 0 → 16 findings (6 satisfied + 10 partial)."
+description: "SHIPPED 2026-06-11 (31366e1 + 78b8f27): three workbook_mappings YAMLs (7.2/9.1/7.4) had narrow standard-jargon fingerprints AND spurious coverage:partial flags. Broadened vocabulary + dropped over-conservative coverage flags. Arion's 3 orphan sheets went 0 → 16 findings; 9.1 then NC → OFI (Stage-2 proposal) once items moved from 'partial' to 'present'."
 metadata: 
   node_type: memory
   type: project
@@ -90,6 +90,78 @@ YAMLs being isolated from chat behaviour is expected.
     Owner/Date), not a change-log per se. May be no-op evidence.
 
 These are F2 candidates; structural mismatches, not vocab gaps.
+
+## 2026-06-11 PM — G1 coverage-flag fix (78b8f27)
+
+After the vocab broadening landed and the user approved 16
+findings, posture for 7.2/7.4/9.1 stayed at NC despite all the
+register evidence. Investigation revealed two compounding issues:
+
+**1. Bulk-generator default was over-conservative.** All items in
+`optional_columns` were given `coverage: partial`. The flag means
+"column found but only weak/indirect evidence" — but for genuine
+register columns (a real Owner column, a real Date column), the
+column IS the evidence. The flag was actively wrong, not just
+conservative.
+
+**2. The engine drops partial findings.** `leaf_evaluators.py:177`
+filters on `df.status = 'present'`. Items with
+`status='partial'` (which is what `coverage: partial` produces
+in the workbook persistence path) **don't reach `items_recognised`
+at all** — the engine never sees them. So the YAML's spurious
+partial flag was hiding evidence the workbook contained.
+
+Removing the `coverage: partial` flag where the column genuinely
+provides full evidence:
+
+  - **9.1 measurement_record**: 0/6 → 6/6 recognised → leaf
+    fully satisfied → engine flips 9.1 from NC → **OFI** as a
+    Stage-2 proposal (live still NC until tenant approves the
+    flip).
+  - **7.2 competence_record**: 2/6 → 5/6 recognised; `gap_actions`
+    genuinely missing in tenant's sheet (no Development Plan
+    column). G2 candidate (should this MUST stay a MUST?).
+  - **7.4 communication_event_register**: 2/6 → 5/6 recognised;
+    `reg_sender` genuinely missing (sheet is a matrix not an
+    event log). G2 candidate.
+
+## Operational pattern: in-place finding-status correction
+
+When a YAML-coverage fix changes how an item should be classified
+*after* findings have already been approved, prefer:
+
+  `UPDATE document_findings SET status='present', confidence='high'
+   WHERE workbook_proposal_id IN (...) AND status='partial';`
+
+over supersede-and-re-persist. The in-place update preserves the
+tenant's existing approval (`review_status='approved'`, `reviewed_at`,
+`reviewed_by`) — they already approved this evidence, we're just
+correcting how the engine reads it.
+
+Then call `load_posture(pg, tenant_id)` to recompute engine
+verdicts and write new Stage-2 proposals.
+
+## G1 lever (shipped) vs G2 lever (deferred)
+
+  - **G1 — YAML accounting fix.** Move bindings out of
+    `optional_columns: coverage: partial` when the column
+    actually provides full evidence. Mechanical, low-risk.
+    SHIPPED 2026-06-11.
+  - **G2 — curation review.** Audit whether items currently
+    marked MUST_CONTAIN in the spec are really MUSTs vs SHOULDs.
+    For 7.2 `gap_actions` and 7.4 `reg_sender`: do real tenant
+    registers always have these, or is it sometimes acceptable
+    for a register to not track them? Pending separate
+    conversation.
+
+## Principle
+
+**Reserve `coverage: partial` for genuinely weak signals — not
+as a default for non-required columns.** Bulk-generator should
+treat absence-of-required as "missing" and presence-of-mapped
+as "full coverage" unless the column type is inherently
+ambiguous (a free-text "Notes" column, an undated "Status"
+column where no semantics are enforced, etc).
 
 ## Related
 
