@@ -626,14 +626,24 @@ class DocumentPipeline:
                         f"committed): {_wbd_error}"
                     )
 
-            tracer.write(
-                "workbook_discovery",
-                int((time.time() - t4_6) * 1000),
-                status            = "error" if _wbd_error else "ok",
-                error_detail      = _wbd_error,
-                proposals_written = _wbd_proposals,
-                findings_written  = _wbd_findings,
-            )
+            # Trace only when the workbook path actually ran. The
+            # tracer's stage column has a CHECK constraint
+            # (intake_trace_log_stage_check) that we haven't yet
+            # extended to include "workbook_discovery", so writing
+            # this stage row on every upload would CheckViolation
+            # for non-xlsx files. Until schema_v3X adds the new
+            # stage value, gate on _is_workbook. PDF/docx uploads
+            # don't need a workbook_discovery telemetry row anyway
+            # — the stage genuinely didn't run for them.
+            if _is_workbook and not self.dry_run:
+                tracer.write(
+                    "workbook_discovery",
+                    int((time.time() - t4_6) * 1000),
+                    status            = "error" if _wbd_error else "ok",
+                    error_detail      = _wbd_error,
+                    proposals_written = _wbd_proposals,
+                    findings_written  = _wbd_findings,
+                )
 
             s4_ms = int((time.time() - t4) * 1000)
 
