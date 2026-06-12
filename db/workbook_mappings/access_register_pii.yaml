@@ -148,6 +148,20 @@ passes:
         binds_to: "item:A.5.18:reg_subject_asset"
         coverage: partial   # description of rights enriches the subject-asset mapping
 
+    # Sample-row anchor: PII access registers list people in the
+    # subject column. A title-match where the name column holds
+    # company names (e.g. a third-party access register mislabelled as
+    # PII) is a false positive.
+    sample_value_anchors:
+      - column_fingerprint: [name]
+        alternative_fingerprints:
+          - [user, name]
+          - [subject, name]
+        value_pattern: person_name
+        min_match_ratio: 0.6
+        confidence_boost: 0.10
+        confidence_penalty: -0.25
+
 # ── Pointer columns ──────────────────────────────────────────────────────
 pointer_columns: []
 

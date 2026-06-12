@@ -205,18 +205,22 @@ def check_anchor(
     values:           list[str],
     pattern_name:     str,
     min_match_ratio:  float = 0.7,
-) -> tuple[bool, float]:
-    """Return (passes_threshold, actual_ratio) for a column of sample values.
+) -> tuple[bool | None, float, int]:
+    """Return (passes_threshold, actual_ratio, sample_size) for a column.
 
-    Empty values are skipped — they don't count either way. If all values
-    are empty, returns (False, 0.0): we can't anchor without data.
+    Empty values are skipped — they don't count either way. When the
+    usable sample is empty (all values blank, or unknown pattern),
+    returns (None, 0.0, 0) — caller should treat that as **inert**
+    (no boost, no penalty). A real data check requires real data; an
+    empty column means we have nothing to verify, not that the column
+    contradicts the proposal.
     """
     pattern = _PATTERNS.get(pattern_name)
     if pattern is None:
-        return (False, 0.0)
+        return (None, 0.0, 0)
     sample = [v for v in values if v and v.strip()]
     if not sample:
-        return (False, 0.0)
+        return (None, 0.0, 0)
     matches = sum(1 for v in sample if pattern(v))
     ratio = matches / len(sample)
-    return (ratio >= min_match_ratio, ratio)
+    return (ratio >= min_match_ratio, ratio, len(sample))

@@ -43,6 +43,18 @@ passes:
         binds_to: "item:A.8.1:reg_compliance"
         coverage: partial
 
+    # Sample-row anchor: endpoint registers track owners (people).
+    # Catches sheets that title-match but list non-personnel data.
+    sample_value_anchors:
+      - column_fingerprint: [owner]
+        alternative_fingerprints:
+          - [user, name]
+          - [assignee]
+        value_pattern: person_name
+        min_match_ratio: 0.6
+        confidence_boost: 0.10
+        confidence_penalty: -0.25
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

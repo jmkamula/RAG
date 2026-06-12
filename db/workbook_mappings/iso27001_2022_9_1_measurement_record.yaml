@@ -75,6 +75,17 @@ passes:
       - fingerprint: [responsible]
         binds_to: "item:9.1:rec_owner"
 
+    # Sample-row anchor: measurement records have a date column. A
+    # title-match without real dates is a false positive.
+    sample_value_anchors:
+      - column_fingerprint: [date]
+        alternative_fingerprints:
+          - [period]
+        value_pattern: iso_date
+        min_match_ratio: 0.7
+        confidence_boost: 0.10
+        confidence_penalty: -0.25
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4

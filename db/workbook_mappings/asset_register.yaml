@@ -123,6 +123,20 @@ passes:
         binds_to: "item:A.5.9:dfi_link"
         coverage: partial   # retention hints at PII presence but is its own concept
 
+    # Sample-row anchor: asset registers have date columns (last_updated /
+    # last_reviewed / modified_date) that should contain real dates. A
+    # sheet that title-matches but has e.g. status text in the date
+    # column is a false positive.
+    sample_value_anchors:
+      - column_fingerprint: [last, updated]
+        alternative_fingerprints:
+          - [modified, date]
+          - [last, reviewed]
+        value_pattern: iso_date
+        min_match_ratio: 0.7
+        confidence_boost: 0.10
+        confidence_penalty: -0.25
+
 # ── Pointer columns ──────────────────────────────────────────────────────
 # Asset_Location can reference systems (Odoo Cloud, Azure Cloud Platform,
 # MSFT Sharepoint) but those are vendor names, not document IDs. Not a

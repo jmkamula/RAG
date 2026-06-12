@@ -73,6 +73,18 @@ passes:
       - fingerprint: [next, review]
         binds_to: "item:A.8.32:rev_next_date"
 
+    # Sample-row anchor: change logs carry review-date / next-review
+    # columns that should contain real dates.
+    sample_value_anchors:
+      - column_fingerprint: [review, date]
+        alternative_fingerprints:
+          - [next, review]
+          - [approval, date]
+        value_pattern: iso_date
+        min_match_ratio: 0.7
+        confidence_boost: 0.10
+        confidence_penalty: -0.25
+
 cross_control_links:
   - control: "A.5.26"
     rationale: "Change-induced incidents cross-link to incident register"

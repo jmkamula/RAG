@@ -550,7 +550,24 @@ def _apply_sample_value_anchors(
         sample_values = [r[col_idx] if col_idx < len(r) else "" for r in sample_rows]
 
         min_ratio = float(anchor.get("min_match_ratio", 0.7))
-        passed, ratio = _check_anchor(sample_values, pat_name, min_ratio)
+        passed, ratio, sample_size = _check_anchor(sample_values, pat_name, min_ratio)
+
+        if passed is None:
+            # Inert: empty/unusable sample. Anchor doesn't fire either
+            # way — we can't verify, but we can't refute either. Record
+            # for telemetry so the operator can see anchors that didn't
+            # decide. No boost, no penalty.
+            decisions.append({
+                "fingerprint": fp,
+                "pattern":     pat_name,
+                "header":      header,
+                "ratio":       0.0,
+                "sample_size": sample_size,
+                "passed":      None,
+                "delta":       0.0,
+                "decision":    "inert",
+            })
+            continue
 
         if passed:
             boost = float(anchor.get("confidence_boost", 0.0))
@@ -565,6 +582,7 @@ def _apply_sample_value_anchors(
             "pattern":     pat_name,
             "header":      header,
             "ratio":       round(ratio, 3),
+            "sample_size": sample_size,
             "passed":      passed,
             "delta":       boost,
             "decision":    decision,

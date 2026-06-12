@@ -51,6 +51,18 @@ passes:
         binds_to: "item:7.5:reg_classification"
         coverage: partial
 
+    # Sample-row anchor: document registers carry approval-date / next-
+    # review-date columns that should contain real dates. A title-match
+    # without real dates is a false positive.
+    sample_value_anchors:
+      - column_fingerprint: [approval, date]
+        alternative_fingerprints:
+          - [next, review]
+        value_pattern: iso_date
+        min_match_ratio: 0.7
+        confidence_boost: 0.10
+        confidence_penalty: -0.25
+
 confidence_weights:
   sheet_name: 0.5
   required_columns: 0.4
