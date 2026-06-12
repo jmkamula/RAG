@@ -559,6 +559,82 @@ class DocumentPipeline:
                 xfw_targets       = _xfw_targets,
             )
 
+            # ── Stage 4.6: workbook discovery (xlsx/xlsm only) ───────────────
+            # Complements the doc-extractor path. The extractor reads xlsx as
+            # tokenised text and runs LLM extraction; workbook discovery reads
+            # the same file as STRUCTURED rows and produces per-row evidence
+            # bound to specific checklist_item_ids. Both paths are useful and
+            # not mutually exclusive — discovery adds the structured layer
+            # without disturbing the LLM findings already written.
+            #
+            # Best-effort: any failure here is logged and swallowed. The
+            # upload itself succeeded via Stage 4; workbook discovery is a
+            # bonus pass.
+            t4_6 = time.time()
+            _wbd_proposals = 0
+            _wbd_findings  = 0
+            _wbd_error: Optional[str] = None
+            _is_workbook = file_name.lower().endswith((".xlsx", ".xlsm"))
+            _wbd_doc_id  = summary.get("doc_id")
+            if _is_workbook and _wbd_doc_id and not self.dry_run:
+                try:
+                    import openpyxl
+                    from rag.intake.workbook_discovery import discover_workbook
+                    from rag.intake.workbook_persistence import persist_proposals
+                    from uuid import UUID
+
+                    _wb = openpyxl.load_workbook(
+                        file_path, keep_vba=True, data_only=True, read_only=True,
+                    )
+                    _rows_per_sheet: dict[str, list[list]] = {}
+                    for _sheet_name in _wb.sheetnames:
+                        _ws = _wb[_sheet_name]
+                        _rows_per_sheet[_sheet_name] = [
+                            list(r) for r in _ws.iter_rows(values_only=True)
+                        ]
+                    _wb.close()
+
+                    _proposals = discover_workbook(_rows_per_sheet)
+
+                    if _proposals:
+                        _wbd_conn = psycopg2.connect(self.db_url)
+                        try:
+                            _, _wbd_findings = persist_proposals(
+                                _wbd_conn,
+                                UUID(tenant_id),
+                                file_path,
+                                UUID(_wbd_doc_id),
+                                _proposals,
+                            )
+                            _wbd_proposals = len(_proposals)
+                            logger.info(
+                                f"Stage 4.6: workbook discovery wrote "
+                                f"{_wbd_proposals} proposals + {_wbd_findings} "
+                                f"findings"
+                            )
+                        finally:
+                            _wbd_conn.close()
+                    else:
+                        logger.info(
+                            "Stage 4.6: workbook discovery matched 0 sheets — "
+                            "no proposals to persist"
+                        )
+                except Exception as e:
+                    _wbd_error = f"{type(e).__name__}: {e}"
+                    logger.warning(
+                        f"workbook_discovery hook failed (Stage 4 already "
+                        f"committed): {_wbd_error}"
+                    )
+
+            tracer.write(
+                "workbook_discovery",
+                int((time.time() - t4_6) * 1000),
+                status            = "error" if _wbd_error else "ok",
+                error_detail      = _wbd_error,
+                proposals_written = _wbd_proposals,
+                findings_written  = _wbd_findings,
+            )
+
             s4_ms = int((time.time() - t4) * 1000)
 
             tracer.write(
