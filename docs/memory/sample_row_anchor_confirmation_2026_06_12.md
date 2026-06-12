@@ -1,6 +1,6 @@
 ---
 name: sample-row-anchor-confirmation-2026-06-12
-description: "SHIPPED 2026-06-12 (127a12c): deterministic data-shape inspection for borderline-confidence (30-70%) workbook fingerprint matches. New rag/intake/value_patterns.py (9 patterns) + _apply_sample_value_anchors in workbook_discovery.py + drop-threshold gate at 0.30 + anchor_decisions telemetry on SheetProposal. Pilot anchors on supplier_review_log (company_name) + personnel_security_attestation_register (person_name). Auto-catches the false-positive supplier match on Business Partners Assessment that F2 had to clean up manually."
+description: "SHIPPED 2026-06-12 (127a12c + 11c5362): deterministic data-shape inspection for borderline-confidence (30-70%) workbook fingerprint matches. value_patterns.py (9 patterns) + _apply_sample_value_anchors + drop-threshold gate + anchor_decisions telemetry. Pilot expanded to 10 anchors across YAMLs that cover Arion's full in-band proposal set. Inert-on-empty fix: empty sample columns produce no boost/penalty (None signal), so template-shape registers with unfilled cells aren't falsely penalised."
 metadata: 
   node_type: memory
   type: project
@@ -95,6 +95,8 @@ hurt more than missed boosts.
 
 ## Pilot anchors shipped
 
+Initial pilot (127a12c):
+
   - `supplier_review_log.yaml` — vendor/supplier/partner-name
     column → `company_name` pattern. Catches sheets where
     "Partner" terminology is used for personnel, not vendors.
@@ -102,6 +104,46 @@ hurt more than missed boosts.
     employee/staff/personnel-name column → `person_name`
     pattern. Catches sheets where the personnel YAML title-
     matches a third-party register.
+
+Expansion (11c5362) — 8 more anchors across the YAMLs that
+cover Arion's in-band proposal set:
+
+  - `asset_register.yaml`                              → iso_date on `[last,updated]`
+  - `change_management_review.yaml`                    → iso_date on `[review,date]`
+  - `iso27001_2022_7_5_isms_document_register.yaml`    → iso_date on `[approval,date]`
+  - `access_revocation_log.yaml`                       → iso_date on `[effective,date]`
+  - `iso27001_2022_a_8_3_access_matrix_register.yaml`  → iso_date on `[last,recert]`
+  - `iso27001_2022_9_1_measurement_record.yaml`        → iso_date on `[date]`
+  - `access_register_pii.yaml`                         → person_name on `[name]`
+  - `iso27001_2022_a_8_1_endpoint_register.yaml`       → person_name on `[owner]`
+
+Pattern: a register's date column should hold ISO-parseable
+dates; an access register's name column should hold person names.
+Cheap to author (~10 LOC YAML each), high-precision (false-
+positive rate is the inverse of the value pattern's false-
+positive rate — for iso_date, near zero).
+
+## Inert-on-empty fix (11c5362)
+
+First post-pilot measurement on Arion's full workbook surfaced
+a bug: anchors on empty date columns were producing
+`ratio=0.0` and triggering the −0.25 penalty. Template-shape
+registers (workbooks with header rows but no data rows yet)
+got falsely demoted from ~0.6 to ~0.35 confidence. Empty isn't
+"contradicting"; it's "no data to verify".
+
+Fix in `value_patterns.check_anchor`: return signal type is
+now `(passed: bool|None, ratio: float, sample_size: int)`.
+When all sample cells are blank, `passed=None`. Caller
+(`_apply_sample_value_anchors`) treats None as **inert** —
+no boost, no penalty, logged for telemetry as
+`decision="inert"`.
+
+Result: empty columns are silently neutral. Anchors only
+contribute confidence when they have real data to inspect.
+The "inert" telemetry surface still lets operators see which
+anchors were defeated by sparse workbooks and might benefit
+from a different column choice.
 
 ## Validation
 
@@ -120,6 +162,23 @@ Yusufov):
 The system would have caught the false positive without F2's
 manual cleanup. Future tenants with similar mis-labels won't
 require curation intervention.
+
+## Measured impact on Arion's workbook (post-pilot expansion)
+
+  - 38 proposals total
+  - 5 proposals with anchor decisions (13%)
+    - 4 inert (empty sample, no impact)
+    - 1 boost (Access Rev. Log Non-PII → access_register_pii
+      at +0.10 confidence: column matches person_name pattern
+      via "Users Reviewed" / "Reviewer" sample data)
+  - 0 false-positive penalties
+  - 0 false-positive drops
+
+The 4 inert decisions are on legitimately-template sheets
+(Document Cont. Reg., User BYOD Compl. Log, Access Register
+PII Systems, Info Sec KPI Metrics Tracker) where the date
+columns exist but have no data yet. Future workbook re-runs
+once those cells are populated will flip inert → boost.
 
 ## What this doesn't solve
 
