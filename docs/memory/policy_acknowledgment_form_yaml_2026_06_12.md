@@ -94,20 +94,20 @@ Mutua Kamula, Albert Zagrobskii × 3 policies):
     independent findings (A.5.1 + A.6.2 + 3 GDPR xfw); both
     paths complementary, not duplicative
 
-## Pipeline routing footnote
+## Pipeline routing footnote — RESOLVED 2026-06-12 (b2e880c)
 
-The auto-upload pipeline routed this `.xlsx` through the
-**doc extractor path** (LLM-driven) not the **workbook
-discovery path** (structured). The 2 LLM findings + 3 xfw
-proposals landed via the doc path; the 7 structured findings
-were produced by running `scripts/discover_workbook.py`
-manually post-hoc.
+Initially the auto-upload pipeline only routed `.xlsx` files
+through the doc-extractor path (LLM-driven); workbook discovery
+was CLI-only. The 7 structured findings on Arion's
+acknowledgment upload only landed after a manual
+`scripts/discover_workbook.py` run.
 
-This is a known architectural gap: workbook discovery doesn't
-fire automatically on `.xlsx` uploads — only via CLI. Long-
-term, the pipeline should run BOTH paths on `.xlsx` uploads
-(they produce complementary evidence). Not fixed in this
-session; tracked as future work.
+Resolved later the same day in
+[[doc-pipeline-stage-4-6-2026-06-12]]: doc_pipeline.py now has
+Stage 4.6 that auto-runs workbook discovery on xlsx/xlsm
+uploads after Stage 4.5 (xfw proposer). Re-upload of the same
+Acknowledgment file produced all 10 findings (LLM + xfw +
+workbook) automatically.
 
 ## Related
 
