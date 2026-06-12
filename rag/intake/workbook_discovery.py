@@ -21,6 +21,18 @@ from typing import Any, Iterable
 
 import yaml
 
+from rag.intake.value_patterns import check_anchor as _check_anchor
+
+
+# Anchor confidence band: only sheets in this confidence range get
+# sample-row anchor checks. Above HIGH_THRESHOLD the fingerprint match
+# is already strong; below DROP_THRESHOLD the sheet is filtered before
+# anchors would have time to fire. The band is the "ambiguous"
+# zone where data-shape disambiguation pays off.
+_ANCHOR_BAND_LO   = 0.30
+_ANCHOR_BAND_HI   = 0.70
+_DROP_THRESHOLD   = 0.30   # post-anchor floor — below this, proposal dropped
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Tokenizer
@@ -417,6 +429,11 @@ class SheetProposal:
     row_count: int
     passes: list[PassProposal] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
+    # Per-anchor telemetry from sample-row inspection. Empty list when
+    # the proposal didn't enter the anchor band or the YAML declared
+    # no anchors. Each entry: {anchor, pattern, header, ratio, passed,
+    # delta, decision}. See _apply_sample_value_anchors.
+    anchor_decisions: list[dict] = field(default_factory=list)
 
 
 def evaluate_pass(
@@ -481,6 +498,79 @@ def evaluate_pass(
             )
 
     return prop
+
+
+def _apply_sample_value_anchors(
+    pass_block:  dict,
+    headers:     list[str],
+    header_tokens: list[list[str]],
+    data_rows:   list[list[str]],
+) -> tuple[float, list[dict]]:
+    """Apply per-pass sample_value_anchors to verify column data shape.
+
+    Returns (confidence_delta, anchor_decisions). Pure side-effect-free.
+    The caller folds delta into the overall sheet confidence.
+
+    Each anchor specifies a `column_fingerprint` (with optional
+    `alternative_fingerprints`) — the helper locates the matching
+    column directly via `_find_column`, so anchors work even when
+    multiple bindings share the same MUST id.
+
+    `anchor_decisions` is a list of telemetry records describing each
+    anchor that fired:
+      {fingerprint, pattern, header, ratio, passed, delta, decision}.
+    """
+    anchors = (pass_block or {}).get("sample_value_anchors") or []
+    if not anchors or not headers or not data_rows:
+        return (0.0, [])
+
+    # First N data rows for sampling. 5 is enough — first rows tend to
+    # be representative, and we want to stay cheap.
+    SAMPLE_N = 5
+    sample_rows = data_rows[:SAMPLE_N]
+
+    delta = 0.0
+    decisions: list[dict] = []
+
+    for anchor in anchors:
+        fp       = anchor.get("column_fingerprint")
+        pat_name = anchor.get("value_pattern")
+        if not fp or not pat_name:
+            continue
+        hit = _find_column(
+            fp,
+            anchor.get("alternative_fingerprints"),
+            header_tokens,
+            headers,
+        )
+        if hit is None:
+            # No matching column in this sheet — anchor can't fire.
+            continue
+        col_idx, header = hit
+        sample_values = [r[col_idx] if col_idx < len(r) else "" for r in sample_rows]
+
+        min_ratio = float(anchor.get("min_match_ratio", 0.7))
+        passed, ratio = _check_anchor(sample_values, pat_name, min_ratio)
+
+        if passed:
+            boost = float(anchor.get("confidence_boost", 0.0))
+            decision = "boost"
+        else:
+            boost = float(anchor.get("confidence_penalty", 0.0))
+            decision = "penalty"
+        delta += boost
+
+        decisions.append({
+            "fingerprint": fp,
+            "pattern":     pat_name,
+            "header":      header,
+            "ratio":       round(ratio, 3),
+            "passed":      passed,
+            "delta":       boost,
+            "decision":    decision,
+        })
+
+    return (delta, decisions)
 
 
 def discover_sheet(
@@ -551,6 +641,34 @@ def discover_sheet(
 
         pass_props = [evaluate_pass(p, headers) for p in passes_yaml] if headers else []
 
+        # Sample-row anchor confirmation: only fire in the ambiguous
+        # band where fingerprint match alone could be a false positive.
+        # Above _ANCHOR_BAND_HI the match is already strong; below
+        # _ANCHOR_BAND_LO we'd drop the proposal anyway. See
+        # [[feedback-intake-label-unreliability]] for the broader
+        # design framing.
+        anchor_decisions_all: list[dict] = []
+        if _ANCHOR_BAND_LO <= confidence <= _ANCHOR_BAND_HI:
+            header_tokens = [tokenize(h) for h in headers] if headers else []
+            for pass_idx in range(len(passes_yaml)):
+                delta, decisions = _apply_sample_value_anchors(
+                    passes_yaml[pass_idx], headers, header_tokens, data_rows,
+                )
+                if decisions:
+                    anchor_decisions_all.extend(decisions)
+                confidence += delta
+            confidence = max(0.0, min(1.0, confidence))
+
+        # Drop-threshold gate: after anchors have had their say, if
+        # we're below _DROP_THRESHOLD the proposal is too uncertain
+        # to be useful; filter it before it lands in the orphan list.
+        if confidence < _DROP_THRESHOLD:
+            sheet_warnings.append(
+                f"proposal dropped: post-anchor confidence {round(confidence, 3)} "
+                f"< drop threshold {_DROP_THRESHOLD}"
+            )
+            continue
+
         proposals.append(SheetProposal(
             sheet=sheet_name,
             mapping_id=mapping.get("mapping_id", "?"),
@@ -561,6 +679,7 @@ def discover_sheet(
             row_count=row_count,
             passes=pass_props,
             warnings=sheet_warnings,
+            anchor_decisions=anchor_decisions_all,
         ))
 
     return proposals

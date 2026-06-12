@@ -73,6 +73,20 @@ passes:
         binds_to: "item:A.6.3:reg_status"
       - fingerprint: [status]
         binds_to: "item:A.6.3:reg_status"
+    # Sample-row anchor: the personnel-id column should hold PERSON
+    # names, not company names. Catches sheets where "Partner"
+    # terminology is used for third-party vendors instead of people.
+    sample_value_anchors:
+      - column_fingerprint: [partner, name]
+        alternative_fingerprints:
+          - [employee, name]
+          - [staff, name]
+          - [personnel, name]
+          - [name]
+        value_pattern: person_name
+        min_match_ratio: 0.6
+        confidence_boost: 0.10
+        confidence_penalty: -0.30
 
   # ── Pass 2: feeds A.6.6 NDA-signature-register leaf ──
   - pass_name: nda_attestation

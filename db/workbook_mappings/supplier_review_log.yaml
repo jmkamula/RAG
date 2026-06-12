@@ -92,6 +92,21 @@ passes:
       - fingerprint: [data, location]
         binds_to: "item:A.5.22:rev_scope"
         coverage: partial
+    # Sample-row anchor: the vendor/supplier name column should hold
+    # COMPANY names, not person names. Catches sheets where someone
+    # uses "Partner" / "Vendor" terminology but the rows are actually
+    # personnel (e.g. consultants signing NDAs).
+    sample_value_anchors:
+      - column_fingerprint: [vendor, name]
+        alternative_fingerprints:
+          - [supplier, name]
+          - [vendor]
+          - [supplier]
+          - [partner, name]
+        value_pattern: company_name
+        min_match_ratio: 0.6
+        confidence_boost: 0.10
+        confidence_penalty: -0.30
       - fingerprint: [next, review, date]
         binds_to: "item:A.5.22:rev_scope"
         coverage: partial
