@@ -396,6 +396,39 @@ _REFERENTIAL_REF_RE = re.compile(
 )
 
 
+# Questionnaire / checklist markers — when the LLM's "evidence" quote
+# contains one of these, the document is a questionnaire/template (a
+# list of questions to ASK), not a statement of compliance. The LLM is
+# fooled because questions about a control textually match the control
+# itself; without this filter every vendor assessment template
+# generates dozens of false-positive Comply findings.
+#
+# Surfaced 2026-06-12 by a Vendor Security Assessment Report.docx
+# upload that produced 22 ISO + 25 GDPR findings, almost all of them
+# `"Does the vendor X? (Y/N) - Proof Point: ..."` style questions.
+# Same shape as the [[extractor-referential-mention-demotion]] rule —
+# a content-level filter for a specific failure mode.
+_QUESTIONNAIRE_PATTERNS = [
+    re.compile(r"\(\s*Y\s*/\s*N\s*\)",                          re.IGNORECASE),  # "(Y/N)"
+    re.compile(r"\(\s*Yes\s*/\s*No\s*\)",                       re.IGNORECASE),  # "(Yes/No)"
+    re.compile(r"\b(?:Proof|Evidence)\s+Point\s*:",             re.IGNORECASE),  # "Proof Point:"
+    re.compile(                                                                  # interrogative + ? close
+        r"\b(?:Does|Has|Have|Is|Are|Will|Would|Can|Should)\s+(?:the|your|a|an|you)\b[^?]{0,200}\?",
+        re.IGNORECASE,
+    ),
+]
+
+
+def _looks_like_questionnaire(quote: str) -> bool:
+    """True when the evidence quote looks like a question/checklist
+    item, not a statement of compliance. One marker hit is enough —
+    the patterns are precise (no false-positive risk on statements).
+    """
+    if not quote:
+        return False
+    return any(p.search(quote) for p in _QUESTIONNAIRE_PATTERNS)
+
+
 def _ground_normalize(s: str) -> str:
     """Normalise for grounding match: lowercase, strip punctuation,
     collapse whitespace. Punctuation handling is critical — the LLM
@@ -476,10 +509,11 @@ def _parse_llm_response(
     # Build control lookup for validation
     valid_refs = {c["ref"] for c in controls}
 
-    dropped_low_conf = 0
-    dropped_short_quote = 0
-    dropped_hallucinated = 0
-    dropped_unknown_ref = 0
+    dropped_low_conf      = 0
+    dropped_short_quote   = 0
+    dropped_hallucinated  = 0
+    dropped_unknown_ref   = 0
+    dropped_questionnaire = 0
     findings = []
     for item in items:
         ref     = item.get("control_ref", "").strip()
@@ -528,6 +562,21 @@ def _parse_llm_response(
         if not _evidence_grounded(evidence, doc):
             dropped_hallucinated += 1
             continue
+        # Questionnaire / checklist filter: when the LLM's quoted
+        # evidence is a question or checklist item (Y/N, Proof Point,
+        # interrogative + "?"), the document is a questionnaire/
+        # template not a compliance statement. Drop — approving these
+        # would falsely advance posture based on questions ABOUT
+        # controls being mistaken for statements OF compliance.
+        if _looks_like_questionnaire(evidence):
+            dropped_questionnaire += 1
+            logger.info(
+                "questionnaire drop: %s — evidence quote is a "
+                "question/checklist item, not a statement of "
+                "compliance (chunk %s)",
+                ref, chunk_id,
+            )
+            continue
 
         # Referential-mention demotion: if the evidence quote cites OTHER
         # control refs but NOT the bound one, the LLM is reading a register-
@@ -563,22 +612,26 @@ def _parse_llm_response(
             chunk_id        = chunk_id,
         ))
 
-    if dropped_low_conf or dropped_short_quote or dropped_hallucinated or dropped_unknown_ref:
+    total_dropped = (dropped_low_conf + dropped_short_quote + dropped_hallucinated
+                     + dropped_unknown_ref + dropped_questionnaire)
+    if total_dropped:
         logger.info(
             "extractor filters dropped %d findings on chunk %s (doc=%s): "
-            "low_conf=%d short_quote=%d hallucinated_quote=%d unknown_ref=%d",
-            dropped_low_conf + dropped_short_quote + dropped_hallucinated + dropped_unknown_ref,
-            chunk_id, doc.original_name,
-            dropped_low_conf, dropped_short_quote, dropped_hallucinated, dropped_unknown_ref,
+            "low_conf=%d short_quote=%d hallucinated_quote=%d unknown_ref=%d "
+            "questionnaire=%d",
+            total_dropped, chunk_id, doc.original_name,
+            dropped_low_conf, dropped_short_quote, dropped_hallucinated,
+            dropped_unknown_ref, dropped_questionnaire,
         )
 
     # Accumulate drop counts onto the doc for pipeline-side persistence
     # (schema_v35 quality telemetry — see [[intake-quality-telemetry]]).
     m = doc.extraction_metrics
-    m["dropped_low_conf"]     = m.get("dropped_low_conf", 0)     + dropped_low_conf
-    m["dropped_short_quote"]  = m.get("dropped_short_quote", 0)  + dropped_short_quote
-    m["dropped_hallucinated"] = m.get("dropped_hallucinated", 0) + dropped_hallucinated
-    m["dropped_unknown_ref"]  = m.get("dropped_unknown_ref", 0)  + dropped_unknown_ref
+    m["dropped_low_conf"]      = m.get("dropped_low_conf", 0)      + dropped_low_conf
+    m["dropped_short_quote"]   = m.get("dropped_short_quote", 0)   + dropped_short_quote
+    m["dropped_hallucinated"]  = m.get("dropped_hallucinated", 0)  + dropped_hallucinated
+    m["dropped_unknown_ref"]   = m.get("dropped_unknown_ref", 0)   + dropped_unknown_ref
+    m["dropped_questionnaire"] = m.get("dropped_questionnaire", 0) + dropped_questionnaire
 
     # Enforce 15-finding cap per chunk (the LLM is also prompted to cap;
     # this is the parse-side enforcement). Retains highest-confidence
