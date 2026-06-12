@@ -126,6 +126,57 @@ guards on both paths.
     able by paraphrase but the surface form is the common
     template export.
 
+## Operational outcome — same-day backlog cleanup
+
+The filter ships forward-looking; the 47 pre-filter findings
+from the Vendor upload sat in Stage-1 queue afterward. Cleanup
+ran in two passes:
+
+  1. **Bulk reject 40 wrong-shape findings**: direct UPDATE
+     setting `review_status='rejected'`, `is_active=FALSE`,
+     `rejection_reason='Vendor questionnaire template — questions
+     about vendor controls mistaken for Arion compliance
+     statements. Filter shipped d7f1160 prevents future repeats.'`
+     The constraint `document_findings_review_inactive_check`
+     requires `is_active=FALSE` when status is rejected/expired —
+     set both fields in the same UPDATE.
+  2. **Approve 6 keepers** (A.5.19/20/21/22, Art.28×2) via
+     `/api/v1/findings/approve` — these are legitimate
+     evidence of Arion having a vendor-assessment *program*
+     (the document's descriptive purpose statement passes the
+     questionnaire filter).
+
+## Posture honesty after approval
+
+The 6 approvals triggered the engine sweep via
+`_kick_engine_sweep`. Only **A.5.21 produced a Stage-2
+proposal (NC → OFI)** — the engine saw 1 of 4 leaves now
+satisfied. The other 5 controls' live posture stayed unchanged
+because their LLM-extracted findings have **no
+`checklist_item_id`** — without item-binding, the engine's
+Phase-2 path can't recognise the evidence on any specific MUST,
+and the Phase-1 fallback alone wasn't enough to flip live
+posture.
+
+This is the **path-A architecture in action** (see
+`[[stage1-contract-change-path-a-2026-05-25]]`): Stage-1
+confirms evidence + records audit trail; engine + Stage-2 own
+posture flips. The headline-recompute logic in
+`_recompute_posture_for_control` *recommends* a finding (the
+API response shows `finding: Comply, prior_finding: NC`) but
+doesn't directly mutate `posture_controls.finding` — the
+engine sweep does, and only when it can defend the flip with
+per-leaf evidence.
+
+Net for the Vendor questionnaire upload after full processing:
+**1 honest posture progression (A.5.21 NC→OFI)** out of 47
+initial findings. The other 5 keepers contributed to audit
+trail without overstating posture. The 40 rejects never reached
+the engine.
+
+This is the right system behaviour: program-level narrative is
+real evidence; per-MUST claims require per-MUST binding.
+
 ## Related
 
 - [[extractor-referential-mention-demotion]] — sibling content
