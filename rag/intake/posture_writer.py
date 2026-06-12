@@ -168,32 +168,18 @@ def _match_registered_document(
     if row:
         return (str(row[0]), row[1])
 
-    # 3. Fuzzy title-keyword match against registered rows only
-    stem      = re.sub(r'\.[A-Za-z0-9]{1,5}$', '', filename or '')
-    # Split on non-alphanumerics including '_' — Python \W keeps '_' as a
-    # word char, which would leave "Access_Control_Policy" as one token.
-    keywords  = {w.lower() for w in re.split(r'[\W_]+', stem) if len(w) > 3}
-    if keywords:
-        cur.execute(
-            """
-            SELECT id, document_title, document_status FROM client_documents
-            WHERE tenant_id   = %s
-              AND is_active   = TRUE
-              AND document_title IS NOT NULL
-              AND (external_ref IS NOT NULL OR platform_ref IS NOT NULL)
-            """,
-            (tenant_id,),
-        )
-        best, best_overlap = None, 0
-        for row in cur.fetchall():
-            title_words = {w.lower() for w in re.split(r'[\W_]+', row[1] or '') if len(w) > 3}
-            overlap     = len(keywords & title_words)
-            # Require at least 2 overlapping significant words to avoid
-            # generic single-word matches (e.g. "policy")
-            if overlap >= 2 and overlap > best_overlap:
-                best, best_overlap = row, overlap
-        if best:
-            return (str(best[0]), best[2])
+    # Step 3 (fuzzy title-keyword overlap) REMOVED 2026-06-12.
+    # The "≥ 2 overlapping significant words" rule was unprincipled
+    # and caused real-world conflations — e.g. "ISMS Change Management
+    # Process.docx" and "ISMS Policy and Process Documents
+    # Acknowledgment.xlsx" matched on {isms, process}, two different
+    # docs got tied to the same client_documents row, and the engine
+    # silently mis-bound evidence_type. Replaced by deterministic
+    # rules only: explicit DOC-prefix (step 1), exact filename match
+    # against registered rows (step 2), and orphan-filename fallback
+    # (step 4). Tenants who want consolidation across renames use
+    # external_ref / platform_ref or rename the upload to match the
+    # registered title exactly.
 
     # 4. Final fallback — match orphan row by filename so re-uploads
     # of the same file consolidate instead of creating more orphans.
