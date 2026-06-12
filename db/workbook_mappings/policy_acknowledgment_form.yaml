@@ -1,0 +1,182 @@
+# Workbook mapping: policy-acknowledgment form export.
+#
+# Tenants commonly use Microsoft Forms / Google Forms / Typeform to
+# collect personnel acknowledgments that they've read security
+# policies. The exported sheet has one row per submission: Id +
+# timestamp + email + name + one column per policy acknowledged.
+#
+# Microsoft Forms exports default to sheet name "Sheet1" — useless as
+# a fingerprint signal on its own. To avoid false positives on any
+# tenant's "Sheet1" tab containing unrelated data, this mapping
+# leans heavily on COLUMN-level fingerprints (confidence_weights
+# sheet_name=0.1, required_columns=0.8) and adds anchors on the
+# Name + Completion-time columns. A sheet named "Sheet1" without
+# form-shape columns will score below the drop threshold and be
+# filtered before persistence.
+#
+# Same evidence feeds two leaves:
+#   - A.6.3:training_completion_register (acknowledgment = awareness)
+#   - 7.4:communication_event_register (per-row distribution event)
+#
+# Partial coverage is expected: an acknowledgment form doesn't
+# carry per-row module_id / score (A.6.3) or channel (7.4) — those
+# are honestly missing from this evidence shape.
+
+schema_version: 1
+mapping_id: workbook.forms.policy_acknowledgment
+
+sheet_name_fingerprints:
+  - tokens: [sheet1]                       # MS Forms default
+  - tokens: [acknowledgment]
+  - tokens: [acknowledgement]              # British spelling
+  - tokens: [policy, acknowledgment]
+  - tokens: [policy, acknowledgement]
+  - tokens: [form, responses]
+  - tokens: [form, response]
+  - tokens: [training, acknowledgment]
+  - tokens: [attestation]
+  - tokens: [responses]                    # Google Forms default
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  # ── Pass 1: A.6.3 training-completion via acknowledgment ─────────
+  # Each acknowledgment row IS evidence that the person was made
+  # aware of the policy. Maps personnel_id + completion_date directly;
+  # module_id / score / next_due are absent from form-export shape
+  # and stay missing.
+  #
+  # Fingerprints are deliberately FORM-SPECIFIC. Generic [name] /
+  # [date] alone are everywhere; combined with `[sheet1]` they would
+  # false-match any default Excel tab. The acknowledgment-statement
+  # column is the only column unique enough to anchor identity, so
+  # it's a required signal here.
+  - pass_name: training_acknowledgment
+    target_control: "A.6.3"
+    target_evidence_requirement: "req:A.6.3:training_completion_register"
+    target_evidence_type: register
+    required_columns:
+      # Personnel identifier — form-specific signals only.
+      # Plain [name] excluded — "Asset Name" / "Vendor Name" etc.
+      # would false-match.
+      - fingerprint: [full, name]
+        binds_to: "item:A.6.3:reg_personnel_id"
+      - fingerprint: [email]
+        binds_to: "item:A.6.3:reg_personnel_id"
+      - fingerprint: [respondent, name]
+        binds_to: "item:A.6.3:reg_personnel_id"
+      # Completion timestamp — form-specific signals only.
+      # Plain [date] excluded — every register has "some kind" of date.
+      - fingerprint: [completion, time]
+        binds_to: "item:A.6.3:reg_completion_date"
+      - fingerprint: [completion, date]
+        binds_to: "item:A.6.3:reg_completion_date"
+      - fingerprint: [submission, date]
+        binds_to: "item:A.6.3:reg_completion_date"
+      - fingerprint: [submission, time]
+        binds_to: "item:A.6.3:reg_completion_date"
+      # Acknowledgment statement — REQUIRED gate signal. A sheet
+      # without one of these columns isn't a policy-acknowledgment
+      # form, regardless of other column matches.
+      - fingerprint: [acknowledgment, statement]
+        binds_to: "item:A.6.3:reg_status"
+      - fingerprint: [acknowledgement, statement]
+        binds_to: "item:A.6.3:reg_status"
+      - fingerprint: [policy, acknowledgment]
+        binds_to: "item:A.6.3:reg_status"
+      - fingerprint: [policy, acknowledgement]
+        binds_to: "item:A.6.3:reg_status"
+    sample_value_anchors:
+      # Name column should hold person names (Forms exports for
+      # security training have actual employees).
+      - column_fingerprint: [full, name]
+        alternative_fingerprints:
+          - [name]
+        value_pattern: person_name
+        min_match_ratio: 0.6
+        confidence_boost: 0.10
+        confidence_penalty: -0.25
+      # Completion-time column should hold real timestamps.
+      - column_fingerprint: [completion, time]
+        alternative_fingerprints:
+          - [completion, date]
+          - [submission, date]
+          - [date]
+        value_pattern: iso_date
+        min_match_ratio: 0.7
+        confidence_boost: 0.10
+        confidence_penalty: -0.25
+
+  # ── Pass 2: 7.4 communication-event-register ─────────────────────
+  # Each form submission row IS a communication event: the policy was
+  # distributed (channel: online form), received (audience: person),
+  # and acknowledged (topic + date). Covers 4 of 5 MUSTs; channel is
+  # absent from form exports as a column (it's implicit).
+  - pass_name: communication_event
+    target_control: "7.4"
+    target_evidence_requirement: "req:7.4:communication_event_register"
+    target_evidence_type: register
+    required_columns:
+      # Event id — plain [id] is safe here because the
+      # acknowledgment-statement column (below) gates the whole
+      # YAML; nothing without that distinctive signal will reach
+      # this pass.
+      - fingerprint: [id]
+        binds_to: "item:7.4:reg_event_id"
+      - fingerprint: [response, id]
+        binds_to: "item:7.4:reg_event_id"
+      - fingerprint: [submission, id]
+        binds_to: "item:7.4:reg_event_id"
+      # Topic = which policy was acknowledged — the gate signal.
+      # Forms exports use the acknowledgment statement column header
+      # as the policy name. WITHOUT this column, this isn't a
+      # policy acknowledgment form.
+      - fingerprint: [acknowledgment, statement]
+        binds_to: "item:7.4:reg_topic"
+      - fingerprint: [acknowledgement, statement]
+        binds_to: "item:7.4:reg_topic"
+      - fingerprint: [policy, acknowledgment]
+        binds_to: "item:7.4:reg_topic"
+      - fingerprint: [policy, acknowledgement]
+        binds_to: "item:7.4:reg_topic"
+      # Audience — form-specific signals.
+      - fingerprint: [email]
+        binds_to: "item:7.4:reg_audience"
+      - fingerprint: [full, name]
+        binds_to: "item:7.4:reg_audience"
+      - fingerprint: [respondent]
+        binds_to: "item:7.4:reg_audience"
+      # Date — form-specific signals.
+      - fingerprint: [completion, time]
+        binds_to: "item:7.4:reg_date"
+      - fingerprint: [completion, date]
+        binds_to: "item:7.4:reg_date"
+      - fingerprint: [submission, date]
+        binds_to: "item:7.4:reg_date"
+      - fingerprint: [submission, time]
+        binds_to: "item:7.4:reg_date"
+    sample_value_anchors:
+      - column_fingerprint: [email]
+        value_pattern: email
+        min_match_ratio: 0.6
+        confidence_boost: 0.10
+        confidence_penalty: -0.25
+      - column_fingerprint: [completion, time]
+        alternative_fingerprints:
+          - [completion, date]
+          - [submission, date]
+        value_pattern: iso_date
+        min_match_ratio: 0.7
+        confidence_boost: 0.10
+        confidence_penalty: -0.25
+
+# Confidence weighting deliberately deprioritises sheet_name (since
+# "Sheet1" matches trivially) and weights column-level evidence
+# heavily. A sheet named "Sheet1" without form-shape columns will
+# score below the 0.30 drop threshold.
+confidence_weights:
+  sheet_name:        0.1
+  required_columns:  0.8
+  row_count:         0.1
