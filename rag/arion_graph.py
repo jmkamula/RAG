@@ -288,11 +288,65 @@ def _prettify_reason(reason: str) -> str:
     return "; ".join(out)
 
 
+def _fetch_auditor_attestations(tenant_id: str) -> dict[str, dict]:
+    """Return {control_ref → {report, attested_at, excerpt}} for the most
+    recent approved finding from a doc with evidence_type='audit_report'
+    on each control. Used to surface auditor context alongside engine
+    verdicts without overriding them. See [[feedback-intake-label-
+    unreliability]] and the end-of-day liability discussion 2026-06-12.
+
+    Best-effort: on DB error returns empty dict so posture compose
+    still runs without auditor context.
+    """
+    try:
+        import psycopg2, os
+        from dotenv import load_dotenv
+        load_dotenv(".env")
+        conn = psycopg2.connect(os.getenv("DATABASE_URL"))
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "SELECT set_config('app.tenant_id', %s, TRUE)",
+                    (tenant_id,),
+                )
+                cur.execute(
+                    """
+                    SELECT DISTINCT ON (df.control_ref)
+                           df.control_ref,
+                           cd.filename,
+                           df.extracted_at,
+                           df.excerpt
+                      FROM document_findings df
+                      JOIN client_documents cd ON cd.id = df.document_id
+                     WHERE df.tenant_id      = %s::uuid
+                       AND cd.evidence_type  = 'audit_report'
+                       AND df.is_active      = TRUE
+                       AND df.review_status  = 'approved'
+                       AND cd.is_active      = TRUE
+                     ORDER BY df.control_ref, df.extracted_at DESC
+                    """,
+                    (tenant_id,),
+                )
+                out: dict[str, dict] = {}
+                for ref, filename, at, excerpt in cur.fetchall():
+                    out[ref] = {
+                        "report":   filename,
+                        "at":       at,
+                        "excerpt":  (excerpt or "")[:160],  # short snippet
+                    }
+                return out
+        finally:
+            conn.close()
+    except Exception:
+        return {}
+
+
 def _compose_posture_enumeration_answer(
     expanded_nodes: list,
     posture:        dict,
     scope_standards: list[str],
     tenant_name:    str = "",
+    auditor_attestations: dict[str, dict] | None = None,
 ) -> str | None:
     """
     Deterministic markdown for POSTURE_CHECK enumeration queries.
@@ -375,6 +429,8 @@ def _compose_posture_enumeration_answer(
     if not (nc_bucket or ofi_bucket or comply_bucket or xfw_bucket):
         return None
 
+    aud = auditor_attestations or {}
+
     def _row(n, rec) -> str:
         title   = (getattr(n, "title", "") or "").strip()
         ref_str = f"{_label_for_standard(n.standard_id)} {n.ref}"
@@ -387,7 +443,35 @@ def _compose_posture_enumeration_answer(
                 reason = line
                 break
         reason = _prettify_reason(reason)
-        return f"- {head}: {reason}" if reason else f"- {head}"
+        main_line = f"- {head}: {reason}" if reason else f"- {head}"
+
+        # Auditor context — when an external audit report has an
+        # approved finding on this control, surface the attestation
+        # under the main row. Doesn't change the engine verdict;
+        # purely operator-visible context so the gap between
+        # auditor-blessed-clauses and engine-bound-MUSTs is clear
+        # rather than hidden.
+        att = aud.get(n.ref)
+        if att:
+            try:
+                date_str = att["at"].strftime("%Y-%m-%d")
+            except Exception:
+                date_str = str(att.get("at") or "")
+            snippet = (att.get("excerpt") or "").strip()
+            if snippet:
+                # Trim to one sentence-ish for readability.
+                if len(snippet) > 140:
+                    snippet = snippet[:137] + "…"
+                main_line += (
+                    f"\n  ↳ *External auditor ({att['report']}, {date_str}): "
+                    f"\"{snippet}\"*"
+                )
+            else:
+                main_line += (
+                    f"\n  ↳ *External auditor confirmed "
+                    f"({att['report']}, {date_str})*"
+                )
+        return main_line
 
     nc_bucket.sort(key=lambda x: x[0].ref)
     ofi_bucket.sort(key=lambda x: x[0].ref)
@@ -1690,6 +1774,9 @@ def make_retrieve_node(
                 posture         = posture,
                 scope_standards = list(getattr(tenant, "applicable_standards", []) or []),
                 tenant_name     = getattr(tenant, "name", "") or "",
+                auditor_attestations = _fetch_auditor_attestations(
+                    str(getattr(tenant, "tenant_id", "") or "")
+                ),
             )
             if _det_text:
                 _det_refs = [
