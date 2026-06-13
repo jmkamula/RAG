@@ -1,6 +1,6 @@
 ---
 name: leaf-driven-scan-pilot-2026-06-12
-description: "SHIPPED 2026-06-12 (474882b): leaf-driven scan back-binds existing approved findings to specific MUSTs they semantically satisfy but weren't tagged with at extraction time. Pilot on A.6.3 training_completion_register found 2 false-negative bindings (reg_module_id + reg_score on 'Training & Awarnesse' columns). End-to-end: persist → Stage-1 approval → engine sweep → Stage-2 OFI → live NC→OFI."
+description: "SHIPPED 2026-06-12 (474882b) + extended 2026-06-13 (dd5da67) to A.5.18. Leaf-driven scan back-binds existing approved findings to specific MUSTs they semantically satisfy. A.6.3 pilot: 2 bindings, end-to-end NC→OFI flip. A.5.18 second-control validation: 15 bindings approved as audit trail; engine view flipped Phase-1→Phase-2, revealed previous OFI was Phase-1-lenient over-coverage. Tenant rejected the proposed NC to preserve prior judgment."
 metadata: 
   node_type: memory
   type: project
@@ -156,6 +156,80 @@ false-negatives are most likely (multi-leaf controls where
 columns commonly fit multiple MUSTs across leaves). A.5.18
 access registers and A.5.16 identity registers are the next
 two natural candidates.
+
+## 2026-06-13 — A.5.18 second-control validation (dd5da67)
+
+Authored catalogs for all 4 A.5.18 leaves (register / revocation_
+record / review / procedure — 31 MUSTs total). Scan produced 16
+proposals; one (rev_completeness via `[all, access]`) was a
+false-positive caught during dry-run review, tightened to
+`[completeness]` / `[completeness, check]` / `[all, access,
+revoked]`. The remaining 15 persisted + approved.
+
+**Bindings added:**
+  - access_revocation_record: 1 → 4 of 8 MUSTs bound
+  - access_rights_review: 0 → 4 of 8 MUSTs bound
+  - access_rights_procedure: 0 → 1 of 8 MUSTs bound
+  - access_rights_register: 0 new (already 6 of 7)
+
+**Engine impact — the Phase-1 vs Phase-2 reveal:**
+
+Pre-leaf-scan, A.5.18's engine verdict was OFI 1/4 children
+satisfied. After leaf-scan, engine recomputed to NC 0/4
+satisfied (4 partial). All four leaves now show as
+non-satisfied even though we ADDED evidence.
+
+Root cause: `leaf_evaluators._fetch_recognised_items` has two
+paths. Phase-2 (per-MUST checklist_item_id) fires when any
+finding on this control has checklist_item_id populated. If
+Phase-2 returns 0 recognised, Phase-1 (coarse `cd.evidence_type
+= leaf.evidence_type` match) fires as fallback — and Phase-1
+returns ALL of the leaf's MUSTs as recognised when ANY doc of
+the right type exists.
+
+Pre-leaf-scan: 3 of A.5.18's 4 leaves had no checklist_item_id
+findings → Phase-1 fired and called them satisfied. The register
+leaf alone had Phase-2 bindings (partial 4/7) — but no, wait,
+let me re-check. Actually likely the register leaf was where
+Phase-1 fired and showed 1/4 satisfied (the 4 recognised via
+Phase-1's all-MUSTs-on-any-doc rule).
+
+Post-leaf-scan: every leaf has SOME checklist_item_id finding →
+Phase-2 takes over universally → strict per-MUST view shows
+partial on all → 0/4 satisfied → NC.
+
+**This is not a regression of evidence. It's a regression of
+LENIENCY.** Leaf-scan revealed that the previous "satisfied"
+was Phase-1 over-counting. The actual per-MUST evidence is
+unchanged.
+
+**Operational outcome:** rejected the Stage-2 NC proposal to
+preserve the prior tenant OFI judgment. The 15 leaf-scan
+approvals stand as audit-trail enrichment (visible per-MUST
+bindings) but didn't progress posture. The "Phase-1 fallback
+retirement" backlog item just earned real evidence — see
+[[feedback-phase-1-fallback-masks-gaps]].
+
+## Per-control validation pattern
+
+A.6.3 had a "clean win" (false-negative recovery + posture
+flip). A.5.18 had a "harder win" (audit-trail enrichment +
+Phase-1 mask revealed). Both validate leaf-scan, with
+different shapes of value. The pattern across leaves seems to
+be:
+
+  - **Posture-progression wins**: leaves where the existing
+    Phase-2 bindings are 1-2 short of full coverage AND the
+    missing MUSTs have evidence in some other column of an
+    already-indexed sheet. A.6.3 fit this.
+  - **Audit-trail wins**: leaves with many unmet MUSTs that
+    aren't close to full coverage. Leaf-scan adds visibility
+    but doesn't flip posture. A.5.18 fit this.
+
+Both are valuable. Posture-progression is the more visible
+win, but audit-trail enrichment is what makes the system
+defensible under examination — see
+[[feedback-audit-blessing-not-immunity]].
 
 ## Related
 
