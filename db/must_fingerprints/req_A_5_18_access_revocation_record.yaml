@@ -1,0 +1,78 @@
+# Per-MUST fingerprint catalog for req:A.5.18:access_revocation_record
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.18:access_revocation_record"
+target_control: "A.5.18"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.18:rev_trigger"
+    description: "Revocation trigger captured (termination / role change / contract end)"
+    excerpt_keywords:
+      - [trigger]
+      - [reason]
+      - [comments]
+      - [notes]
+      - [stopped, working]
+      - [project, completed]
+
+  - must_id: "item:A.5.18:rev_authoriser"
+    description: "Authoriser of the revocation (named individual)"
+    excerpt_keywords:
+      - [reviewer]
+      - [authoriser]
+      - [authorized, by]
+      - [approver]
+      - [approved, by]
+
+  - must_id: "item:A.5.18:rev_date_recorded"
+    description: "Effective date per record"
+    excerpt_keywords:
+      - [review, date]
+      - [effective, date]
+      - [date, of, revoke]
+      - [revocation, date]
+      - [revoke, date]
+      - [date, revoked]
+      - [disabled, date]
+
+  - must_id: "item:A.5.18:rev_disabled_proof"
+    description: "Evidence access was actually disabled"
+    excerpt_keywords:
+      - [findings]
+      - [proof]
+      - [disabled]
+      - [account, disabled]
+      - [deactivated]
+
+  - must_id: "item:A.5.18:rev_identity_pair"
+    description: "Identity-pair check per record — confirms A.5.16 identity registry was also closed"
+    excerpt_keywords:
+      - [identity, pair]
+      - [user, id]
+      - [identity, id]
+      - [users, reviewed]
+
+  - must_id: "item:A.5.18:rev_residual_cleanup"
+    description: "Residual cleanup status"
+    excerpt_keywords:
+      - [residual]
+      - [cleanup]
+      - [mailbox]
+      - [shared, mailbox]
+
+  - must_id: "item:A.5.18:rev_sla_met"
+    description: "SLA-met flag per record"
+    excerpt_keywords:
+      - [sla]
+      - [within, hours]
+      - [within, days]
+      - [target]
+
+  - must_id: "item:A.5.18:rev_completeness"
+    description: "Completeness check per record — all access rights for the subject covered"
+    excerpt_keywords:
+      - [completeness]
+      - [completeness, check]
+      - [all, access, revoked]
+      - [completeness, scope]

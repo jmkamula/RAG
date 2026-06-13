@@ -1,0 +1,64 @@
+# Per-MUST fingerprint catalog for req:A.5.18:access_rights_register
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.18:access_rights_register"
+target_control: "A.5.18"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.18:reg_idmgmt_link"
+    description: "Linkage to A.5.16 identity-management register"
+    excerpt_keywords:
+      - [user, id]
+      - [identity, id]
+      - [identity]
+      - [employee, id]
+
+  - must_id: "item:A.5.18:reg_subject_asset"
+    description: "Subject-to-asset rights mapping"
+    excerpt_keywords:
+      - [system, application]
+      - [access, rights]
+      - [role, system]
+      - [resource]
+
+  - must_id: "item:A.5.18:reg_grant_date"
+    description: "Per-row grant date"
+    excerpt_keywords:
+      - [date, granted]
+      - [grant, date]
+      - [date, of, grant]
+      - [issued, date]
+
+  - must_id: "item:A.5.18:reg_last_verified"
+    description: "Per-row last-verified date"
+    excerpt_keywords:
+      - [last, verified]
+      - [last, reviewed]
+      - [review, date, quarterly]
+      - [last, confirmation]
+
+  - must_id: "item:A.5.18:reg_review_due"
+    description: "Per-row next review-due date"
+    excerpt_keywords:
+      - [next, review]
+      - [review, due]
+      - [next, due]
+      - [next, audit]
+
+  - must_id: "item:A.5.18:reg_status"
+    description: "Status field per row (active / suspended / revoked)"
+    excerpt_keywords:
+      - [status]
+      - [active, suspended]
+      - [revoke]
+      - [revoked]
+
+  - must_id: "item:A.5.18:reg_authoriser"
+    description: "Authoriser captured per grant"
+    excerpt_keywords:
+      - [authoriser]
+      - [authorized, by]
+      - [approver]
+      - [approved, by]
+      - [pii, approver]

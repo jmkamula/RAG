@@ -1,0 +1,75 @@
+# Per-MUST fingerprint catalog for req:A.5.18:access_rights_procedure
+#
+# Procedure-shape leaves are mostly satisfied by uploaded procedure
+# documents that contain canonical phrases. Leaf-scan is the back-bind
+# pass for LLM-extracted findings (no checklist_item_id) whose excerpts
+# describe these elements.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.18:access_rights_procedure"
+target_control: "A.5.18"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.18:policy_reference"
+    description: "References the topic-specific access control policy (A.5.15)"
+    excerpt_keywords:
+      - [topic, specific, policy]
+      - [access, control, policy]
+      - ["A.5.15"]
+      - [policy, reference]
+
+  - must_id: "item:A.5.18:asset_owner_authorization"
+    description: "Asset owner authorization required before access is granted"
+    excerpt_keywords:
+      - [asset, owner, authorization]
+      - [asset, owner, approval]
+      - [owner, authorisation]
+      - [approved, by, authorized, personnel]
+      - [authorized, personnel]
+
+  - must_id: "item:A.5.18:identity_link"
+    description: "Explicit linkage to A.5.16 identity management"
+    excerpt_keywords:
+      - [identity, management]
+      - ["A.5.16"]
+      - [identity, register]
+
+  - must_id: "item:A.5.18:least_privilege"
+    description: "Provisioning applies least privilege and segregation-of-duties"
+    excerpt_keywords:
+      - [least, privilege]
+      - [minimum, privilege]
+      - [need, to, know]
+      - [segregation, duties]
+
+  - must_id: "item:A.5.18:modification_path"
+    description: "Path for modification of access on role or responsibility change"
+    excerpt_keywords:
+      - [role, change]
+      - [responsibility, change]
+      - [modification, access]
+      - [access, modification]
+      - [transfer]
+
+  - must_id: "item:A.5.18:privileged_route"
+    description: "Privileged access requests route through the A.8.2 privileged-access process"
+    excerpt_keywords:
+      - [privileged, access]
+      - [privileged, route]
+      - ["A.8.2"]
+
+  - must_id: "item:A.5.18:service_account_handling"
+    description: "Service account / non-human identity handling stated"
+    excerpt_keywords:
+      - [service, account]
+      - [non, human, identity]
+      - [machine, account]
+
+  - must_id: "item:A.5.18:sla_targets"
+    description: "SLA targets stated per operation"
+    excerpt_keywords:
+      - [sla, target]
+      - [within, days]
+      - [time, frame]
+      - [grant, within]

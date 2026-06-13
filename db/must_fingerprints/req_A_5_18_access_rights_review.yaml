@@ -1,0 +1,65 @@
+# Per-MUST fingerprint catalog for req:A.5.18:access_rights_review
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.18:access_rights_review"
+target_control: "A.5.18"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.18:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date]
+      - [date, of, review]
+      - [reviewed, on]
+
+  - must_id: "item:A.5.18:rev_reviewer"
+    description: "Reviewer identity and role recorded"
+    excerpt_keywords:
+      - [reviewer]
+      - [reviewed, by]
+      - [review, by]
+
+  - must_id: "item:A.5.18:rev_coverage"
+    description: "Coverage stated — full register reviewed OR risk-tiered sample"
+    excerpt_keywords:
+      - [users, reviewed]
+      - [coverage]
+      - [scope]
+      - [system, application, name]
+
+  - must_id: "item:A.5.18:rev_outcome"
+    description: "Outcome per reviewed subject (no change / amended / revoked)"
+    excerpt_keywords:
+      - [outcome]
+      - [findings]
+      - [result]
+      - [accounts, disabled]
+
+  - must_id: "item:A.5.18:rev_actions"
+    description: "Action items closed where rights were amended or revoked"
+    excerpt_keywords:
+      - [actions]
+      - [closure]
+      - [action, items]
+      - [follow, up]
+
+  - must_id: "item:A.5.18:rev_orphan_check"
+    description: "Orphan-access check — every register row reconciled against identity register"
+    excerpt_keywords:
+      - [orphan]
+      - [reconciliation]
+      - [unactive, accounts]
+
+  - must_id: "item:A.5.18:rev_privileged_check"
+    description: "Privileged-access subset reviewed with extra scrutiny"
+    excerpt_keywords:
+      - [privileged, check]
+      - [admin, review]
+      - [privileged, access, review]
+
+  - must_id: "item:A.5.18:rev_identity_pair"
+    description: "Identity-pair check per record — confirms A.5.16 identity register was also closed"
+    excerpt_keywords:
+      - [identity, pair]
+      - [identity, check]

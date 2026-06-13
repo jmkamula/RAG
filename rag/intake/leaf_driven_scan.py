@@ -113,9 +113,11 @@ def load_catalogs(target_leaf_id: Optional[str] = None) -> list[LeafCatalog]:
 _NORM_RE = re.compile(r"[^\w\s]", re.UNICODE)
 
 
-def _norm(text: str) -> str:
-    """Lowercase + strip punctuation + collapse whitespace."""
-    t = (text or "").lower()
+def _norm(text) -> str:
+    """Lowercase + strip punctuation + collapse whitespace. Tolerates
+    non-string inputs (YAML can parse bare digits as ints) by stringifying
+    first."""
+    t = str(text or "").lower()
     t = _NORM_RE.sub(" ", t)
     return " ".join(t.split())
 
