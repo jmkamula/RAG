@@ -122,20 +122,23 @@ class GenericLeafEvaluator:
     ) -> tuple[set[str], datetime | None]:
         """Returns (set of recognised item_ids, latest matching upload datetime).
 
-        Phase 1 (today's data): the extractor doesn't tag findings by
-        checklist_item_id — it writes (control_ref, status) at the control
-        level. We use *coarse matching*: if there's any 'present' finding
-        for this (control_ref, standard_id) backed by an artifact of the
-        leaf's evidence_type, we treat ALL the leaf's MUST items as
-        implicitly recognised. This produces realistic verdicts:
-          - A.5.1 with policy uploaded → policy leaf satisfied;
-                approval/communication/review leaves unsatisfied (no
-                artifacts of those types for A.5.1).
-          - 5.2 with policy uploaded → policy leaf satisfied → Comply.
+        Per-MUST recognition: a leaf MUST is recognised only when an approved,
+        active finding is bound to its checklist_item_id with status='present'.
+        The earlier Phase-1 fallback — coarse (control_ref, evidence_type)
+        match that called ALL of a leaf's MUSTs satisfied when any doc of the
+        right type existed — was retired 2026-06-13 after it was found to
+        systematically overstate coverage and mask per-MUST gaps that
+        workbook intake / leaf-scan / doc curation later exposed (see
+        [[feedback-phase-1-fallback-masks-gaps]]).
 
-        Phase 2 (when the extractor populates checklist_item_id on findings):
-        the per-item path below kicks in automatically — if any per-item
-        rows match, they take precedence over the coarse signal.
+        Findings without checklist_item_id no longer feed the engine. The
+        intake paths (workbook YAML, doc curation, leaf-scan back-binding)
+        are responsible for setting checklist_item_id; LLM-extracted findings
+        carry it natively when the extractor is given the per-MUST candidate
+        list.
+
+        `evidence_type` and `control_ref` remain in the signature for caller
+        symmetry but are unused.
 
         RLS-scoped via set_config; querying as arioncomply_app means we MUST
         set app.tenant_id, even though we also filter by tenant_id explicitly.
@@ -149,21 +152,18 @@ class GenericLeafEvaluator:
                 (self._tenant_id,),
             )
 
-            # ── Phase 2 path: per-checklist-item findings ────────────────
-            # df.review_status = 'approved' enforces the HITL Stage-1 gate
-            # (commit 4): findings that haven't been user-approved don't feed
-            # the engine. Pre-deploy rows were backfilled to 'approved' by the
-            # schema migration so existing tenants aren't quietly downgraded.
+            # Per-checklist-item findings. df.review_status='approved'
+            # enforces the HITL Stage-1 gate (commit 4): findings that
+            # haven't been user-approved don't feed the engine.
             #
-            # NOTE: no cd.evidence_type filter here. checklist_item_id is
-            # leaf-scoped — every item id is bound to exactly one leaf, so
-            # any approved per-item finding by definition belongs to that
-            # leaf regardless of how the source document is tagged. The
-            # filter was a Phase-1-era safety net from before per-item
-            # bindings existed; with workbook intake, one source document
-            # legitimately satisfies many leaves of different evidence_types
-            # (one .xlsm feeds asset_register / register / risk_register /
-            # revocation_record leaves simultaneously).
+            # No cd.evidence_type filter: checklist_item_id is leaf-scoped —
+            # every item id is bound to exactly one leaf, so any approved
+            # per-item finding by definition belongs to that leaf regardless
+            # of how the source document is tagged. With workbook intake,
+            # one source document legitimately satisfies many leaves of
+            # different evidence_types (one .xlsm feeds asset_register /
+            # register / risk_register / revocation_record leaves
+            # simultaneously).
             cur.execute("""
                 SELECT df.checklist_item_id,
                        cd.uploaded_at
@@ -180,42 +180,16 @@ class GenericLeafEvaluator:
             """, (self._tenant_id, list(must_item_ids)))
             per_item_rows = cur.fetchall()
 
-            if per_item_rows:
-                recognised: set[str] = set()
-                latest: datetime | None = None
-                for item_id, uploaded_at in per_item_rows:
-                    recognised.add(item_id)
-                    if uploaded_at is not None and (latest is None or uploaded_at > latest):
-                        latest = uploaded_at
-                return recognised, latest
+            if not per_item_rows:
+                return set(), None
 
-            # ── Phase 1 fallback: coarse (control, evidence_type) match ──
-            if not control_ref or not standard_id:
-                # Insufficient identifiers to do coarse match
-                return set(), None
-            # Same HITL Stage-1 gate as the Phase-2 path above.
-            cur.execute("""
-                SELECT cd.uploaded_at
-                FROM document_findings df
-                JOIN client_documents cd
-                  ON cd.id = df.document_id
-                WHERE cd.tenant_id     = %s
-                  AND cd.evidence_type = %s
-                  AND cd.is_active     = TRUE
-                  AND cd.is_current    = TRUE
-                  AND df.control_ref   = %s
-                  AND df.standard_id   = %s
-                  AND df.status        = 'present'
-                  AND df.is_active     = TRUE
-                  AND df.review_status = 'approved'
-                ORDER BY cd.uploaded_at DESC NULLS LAST
-                LIMIT 1
-            """, (self._tenant_id, evidence_type, control_ref, standard_id))
-            row = cur.fetchone()
-            if row is None:
-                return set(), None
-            # Coarse signal: treat all MUST items as implicitly recognised.
-            return set(must_item_ids), row[0]
+            recognised: set[str] = set()
+            latest: datetime | None = None
+            for item_id, uploaded_at in per_item_rows:
+                recognised.add(item_id)
+                if uploaded_at is not None and (latest is None or uploaded_at > latest):
+                    latest = uploaded_at
+            return recognised, latest
 
     # ── Freshness check ──────────────────────────────────────────────────────
 

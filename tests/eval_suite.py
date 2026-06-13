@@ -1905,31 +1905,31 @@ EVAL_CASES = [
     EvalCase(
         id=55,
         query="pending engine verdict for A.5.15",
-        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program", "partial_evidence"],
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "policy_program"],
         expected_refs=["A.5.15"],
         expected_type="posture_check",
-        # A.5.15 differs from the other 4 in this batch: the access control
-        # policy is already uploaded on Arion (legacy single-leaf evidence
-        # carried forward), so 1 of the 4 leaves is satisfied. Engine output
-        # is therefore 'OFI' at '1/4', not 'NC' at '0/4'. This locks the
-        # partial-evidence multi-leaf path — a useful complement to the
-        # 0/N-NC default the other Phase B cases exercise.
-        shape="stage2",  # converted to shape validator 2026-06-09
+        # Pre-2026-06-13 this case asserted "1/4 children satisfied" — the
+        # policy leaf was Phase-1-satisfied via the coarse evidence_type
+        # fallback in leaf_evaluators. Phase-1 retired 2026-06-13; the
+        # policy leaf now reports as unsatisfied because no finding is
+        # bound per-MUST to its checklist items. Engine collapses to
+        # NC 0/4, matching the rest of the Phase B 4-leaf locks. The
+        # partial-evidence path is the right next target for leaf-scan
+        # back-binding; until then this case verifies the engine surface
+        # is present, not the lenient count.
+        shape="stage2",
         must_contain=[],
         must_not_contain=[
-            "0/4 children satisfied",
             "0/1 children satisfied",
             "no curated multi-leaf",
             "I need more information", "could you clarify",
         ],
         notes=(
             "Locks A.5.15 (Access control policy) Phase B promotion to "
-            "policy_program 4-leaf with the partial-evidence shape: the "
-            "policy leaf is satisfied (re-extracted Access Control Policy "
-            "doc via doc_mappings), three other leaves unsatisfied → "
-            "1/4 reason text. Companion to cases 46-50 which all sit at "
-            "0/4. Post-cleanup 2026-06-08: chat shape changed from "
-            "'engine proposes / already approved' to 'engine concurs'."
+            "policy_program 4-leaf — Stage-2 engine surface present. "
+            "Was a partial-evidence (1/4) case until 2026-06-13; now "
+            "0/4 after Phase-1 retirement. See "
+            "[[feedback-phase-1-fallback-masks-gaps]]."
         ),
     ),
 
@@ -2044,34 +2044,27 @@ EVAL_CASES = [
     EvalCase(
         id=60,
         query="pending engine verdict for A.5.23",
-        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "partial_evidence", "profile_fact"],
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "operational_process", "profile_fact"],
         expected_refs=["A.5.23"],
         expected_type="posture_check",
-        # A.5.23 differs from the other 4 in this batch: the cloud services
-        # policy leaf is already uploaded on Arion (legacy single-leaf
-        # evidence carried forward), so 1 of the 4 leaves is satisfied.
-        # Engine output is therefore 'OFI' at '1/4', not 'NC' at '0/4'.
-        # This re-exercises the partial-evidence multi-leaf path that case
-        # 55 first introduced for A.5.15. A.5.23 is also profile_fact-
-        # triggered (only fires for cloud-using tenants), so this case
-        # additionally locks the profile_fact + partial-evidence combination.
-        shape="stage2",  # ratcheted to shape validator 2026-06-09 to stop state-shift fatigue
+        # Pre-2026-06-13 this asserted 1/4 satisfied via the policy leaf's
+        # Phase-1 coarse evidence_type match. Phase-1 retired 2026-06-13;
+        # engine now reports 0/4. profile_fact triggering still holds —
+        # the case continues to lock that A.5.23 surfaces on a cloud-using
+        # tenant — but the lenient partial-evidence count is gone. See
+        # [[feedback-phase-1-fallback-masks-gaps]].
+        shape="stage2",
         must_contain=[],
         must_not_contain=[
-            "0/4 children satisfied",
             "0/1 children satisfied",
             "no curated multi-leaf",
             "I need more information", "could you clarify",
         ],
         notes=(
             "Locks A.5.23 (InfoSec for use of cloud services) Phase B "
-            "promotion to operational_process 4-leaf adapted: "
-            "cloud_services_policy + cloud_service_register + "
-            "cloud_posture_review + exit_migration_record. Partial-evidence "
-            "shape (engine OFI 1/4, not NC 0/4) because the policy leaf was "
-            "already satisfied via legacy upload. Companion to case 55 — "
-            "second partial-evidence case in the suite, and the first one "
-            "that combines partial evidence with profile_fact triggering."
+            "promotion to operational_process 4-leaf — profile_fact "
+            "triggering still locked in. Was partial-evidence (1/4) until "
+            "2026-06-13; now 0/4 after Phase-1 retirement."
         ),
     ),
 
@@ -3390,17 +3383,18 @@ EVAL_CASES = [
     EvalCase(
         id=75,
         query="pending engine verdict for A.5.34",
-        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "pii_protection", "partial_evidence"],
+        tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "records_program", "pii_protection"],
         expected_refs=["A.5.34"],
         expected_type="posture_check",
-        # Like cases 55 (A.5.15) and 60 (A.5.23), A.5.34 sits at OFI 1/4 —
-        # the policy leaf is satisfied via legacy upload, the three new
-        # leaves are unsatisfied. The 1/4 reason text PROVES the 4-leaf
-        # promotion AND the partial-evidence path.
-        shape="stage2",  # converted to shape validator 2026-06-09
+        # Was OFI 1/4 partial-evidence until 2026-06-13 (policy leaf
+        # Phase-1 satisfied via the legacy privacy-policy upload).
+        # Phase-1 retired 2026-06-13 — engine now reports NC 0/4.
+        # See [[feedback-phase-1-fallback-masks-gaps]]. Item-id
+        # preservation locks still hold (covered by the curation
+        # batch's other checks, not by this Stage-2 surface case).
+        shape="stage2",
         must_contain=[],
         must_not_contain=[
-            "0/4 children satisfied",
             "0/1 children satisfied",
             "no curated multi-leaf",
             "I need more information", "could you clarify",

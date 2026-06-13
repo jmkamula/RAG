@@ -76,6 +76,20 @@ because the previous "1 satisfied" was Phase-1 lenient on
 prior tenant judgment; documented the architectural finding
 here.
 
+## Retirement shipped
+
+2026-06-13 (same session) — Phase-1 fallback block deleted from
+`rag/posture/leaf_evaluators.py:_fetch_recognised_items`. Pre-flight
+survey on Arion showed 0 leaves currently Phase-1-satisfied (the
+workbook intake + leaf-scan investments had already moved everything
+to Phase-2 organically). Eval suite caught the 3 partial-evidence
+cases that had encoded the lenient view (#55 A.5.15, #60 A.5.23,
+#75 A.5.34, all asserting "1/4 children satisfied" via the policy
+leaf's Phase-1 match); the cases were re-authored to acknowledge the
+honest 0/4 output and the `partial_evidence` tag dropped. Function
+signature kept (`evidence_type`, `control_ref` now unused but
+preserved for caller symmetry).
+
 ## Related
 
 - [[leaf-driven-scan-pilot-2026-06-12]] — where this finding
