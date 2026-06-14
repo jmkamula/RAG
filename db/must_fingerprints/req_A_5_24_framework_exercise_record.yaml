@@ -1,0 +1,64 @@
+# Per-MUST fingerprint catalog for req:A.5.24:framework_exercise_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-exercise drill record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.24:framework_exercise_record"
+target_control: "A.5.24"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.24:ex_exercise_id"
+    description: "Exercise identifier per record"
+    excerpt_keywords:
+      - [ir, exercise, id]
+      - [tabletop, exercise, id]
+      - [exercise, record, id]
+      - [drill, id, ir]
+
+  - must_id: "item:A.5.24:ex_type"
+    description: "Exercise type per record"
+    excerpt_keywords:
+      - [tabletop, exercise]
+      - [live, simulation]
+      - [red, team, drill]
+      - [regulator, led, exercise]
+
+  - must_id: "item:A.5.24:ex_scenario"
+    description: "Scenario per record"
+    excerpt_keywords:
+      - [exercise, scenario]
+      - [ir, exercise, scenario]
+      - [threat, actor, archetype, exercise]
+      - [simulated, exercise]
+
+  - must_id: "item:A.5.24:ex_participants"
+    description: "Participant list per record"
+    excerpt_keywords:
+      - [ir, exercise, participants]
+      - [exercise, participant, list]
+      - [tabletop, participants]
+      - [exercise, observers]
+
+  - must_id: "item:A.5.24:ex_gaps"
+    description: "Gaps identified per record"
+    excerpt_keywords:
+      - [exercise, gaps, identified]
+      - [exercise, finding, severity]
+      - [tabletop, gaps]
+      - [drill, gaps]
+
+  - must_id: "item:A.5.24:ex_remediation"
+    description: "Remediation actions captured per record"
+    excerpt_keywords:
+      - [exercise, remediation, action]
+      - [exercise, gap, action, item]
+      - [tabletop, follow, up, action]
+      - [exercise, action, owner, due]
+
+  - must_id: "item:A.5.24:ex_signoff"
+    description: "Signoff per record"
+    excerpt_keywords:
+      - [exercise, lead, signoff]
+      - [ir, team, lead, exercise, signoff]
+      - [exec, sponsor, exercise, signoff]

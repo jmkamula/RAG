@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:A.5.19:supplier_register
+#
+# Reviewed-from-skeleton 2026-06-14. Per-supplier register columns.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.19:supplier_register"
+target_control: "A.5.19"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.19:reg_inventory"
+    description: "Each supplier captured: identity, products/services, criticality"
+    excerpt_keywords:
+      - [supplier, register]
+      - [supplier, inventory]
+      - [list, of, suppliers]
+      - [supplier, id, column]
+      - [vendor, register]
+
+  - must_id: "item:A.5.19:reg_supplier_type"
+    description: "Supplier type per row (ICT service / ICT infra component / logistics / utilities)"
+    excerpt_keywords:
+      - [supplier, type, column]
+      - [ict, service, supplier]
+      - [ict, infra, supplier]
+      - [logistics, supplier]
+
+  - must_id: "item:A.5.19:reg_classification"
+    description: "Risk classification (tier or category) per row"
+    excerpt_keywords:
+      - [supplier, tier, column]
+      - [supplier, risk, classification]
+      - [supplier, category, column]
+      - [vendor, tier, column]
+
+  - must_id: "item:A.5.19:reg_access_type"
+    description: "Access type per row (logical / physical / network / application / app-to-app)"
+    excerpt_keywords:
+      - [supplier, access, type]
+      - [logical, access, supplier]
+      - [app, to, app, supplier]
+      - [network, access, supplier]
+
+  - must_id: "item:A.5.19:reg_owner"
+    description: "Named internal owner accountable per supplier"
+    excerpt_keywords:
+      - [supplier, relationship, owner]
+      - [supplier, owner, column]
+      - [vendor, owner, column]
+      - [infosec, contact, per, supplier]

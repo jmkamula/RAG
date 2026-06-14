@@ -1,0 +1,71 @@
+# Per-MUST fingerprint catalog for req:A.5.19:supplier_risk_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Supplier-risk procedure vocabulary.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.19:supplier_risk_procedure"
+target_control: "A.5.19"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.19:supplier_types"
+    description: "Supplier types identified and documented"
+    excerpt_keywords:
+      - [supplier, types, identified]
+      - [ict, services, ict, infrastructure]
+      - [logistics, utilities, financial]
+      - [supplier, types, documented]
+
+  - must_id: "item:A.5.19:risk_rules"
+    description: "InfoSec rules per supplier type / access type with minimum requirements"
+    excerpt_keywords:
+      - [supplier, infosec, rules]
+      - [supplier, minimum, requirement]
+      - [rules, per, supplier, type]
+      - [supplier, baseline, controls]
+
+  - must_id: "item:A.5.19:selection_criteria"
+    description: "Selection and evaluation criteria"
+    excerpt_keywords:
+      - [supplier, selection, criteria]
+      - [supplier, evaluation, criteria]
+      - [supplier, risk, analysis, selection]
+      - [supplier, references, attestations]
+
+  - must_id: "item:A.5.19:due_diligence"
+    description: "Due diligence steps before engagement"
+    excerpt_keywords:
+      - [supplier, due, diligence]
+      - [supplier, questionnaire]
+      - [supplier, attestation, review]
+      - [vendor, due, diligence]
+
+  - must_id: "item:A.5.19:agreement_handoff"
+    description: "Conditions under which security requirements get into the supplier agreement (handoff to A.5.20)"
+    excerpt_keywords:
+      - ["A.5.20"]
+      - [supplier, agreement, handoff]
+      - [requirements, into, agreement]
+      - [handoff, to, supplier, agreement]
+
+  - must_id: "item:A.5.19:ongoing_monitoring"
+    description: "Ongoing monitoring approach"
+    excerpt_keywords:
+      - [supplier, ongoing, monitoring]
+      - [supplier, periodic, reassessment]
+      - [event, triggered, supplier, review]
+      - [third, party, report, supplier]
+
+  - must_id: "item:A.5.19:incident_joint_mgmt"
+    description: "Incident and contingency handling jointly with the supplier"
+    excerpt_keywords:
+      - [supplier, joint, incident]
+      - [supplier, contingency, joint]
+      - [joint, incident, mgmt, supplier]
+
+  - must_id: "item:A.5.19:training_personnel"
+    description: "Training of own personnel on appropriate engagement"
+    excerpt_keywords:
+      - [supplier, engagement, training]
+      - [supplier, awareness, personnel]
+      - [supplier, info, exchange, training]

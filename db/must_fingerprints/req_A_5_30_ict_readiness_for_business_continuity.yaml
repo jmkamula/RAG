@@ -1,0 +1,65 @@
+# Per-MUST fingerprint catalog for req:A.5.30:ict_readiness_for_business_continuity
+#
+# Reviewed-from-skeleton 2026-06-14. ICT BCP plan document.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.30:ict_readiness_for_business_continuity"
+target_control: "A.5.30"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.30:rto_rpo"
+    description: "Recovery Time and Recovery Point Objectives per ICT service"
+    excerpt_keywords:
+      - [rto, per, service]
+      - [rpo, per, service]
+      - [recovery, time, objective]
+      - [recovery, point, objective]
+
+  - must_id: "item:A.5.30:bia_link"
+    description: "BIA-link explicit (RTO/RPO targets traceable to BIA)"
+    excerpt_keywords:
+      - [business, impact, assessment, link]
+      - [bia, traceable]
+      - [rto, derived, from, bia]
+      - [bia, link, ict]
+
+  - must_id: "item:A.5.30:recovery_procedures"
+    description: "Recovery procedures documented per ICT service"
+    excerpt_keywords:
+      - [ict, recovery, procedure]
+      - [ict, service, recovery, runbook]
+      - [step, by, step, recovery]
+      - [recovery, runbook]
+
+  - must_id: "item:A.5.30:failover"
+    description: "Failover / redundancy arrangements"
+    excerpt_keywords:
+      - [failover, arrangement]
+      - [active, active, redundancy]
+      - [active, passive, redundancy]
+      - [cold, standby]
+
+  - must_id: "item:A.5.30:backup"
+    description: "Backup arrangements aligned to RPO"
+    excerpt_keywords:
+      - [backup, aligned, rpo]
+      - [backup, restore, tested]
+      - [backup, geographic, separation]
+      - [backup, frequency, rpo]
+
+  - must_id: "item:A.5.30:test_records"
+    description: "Test cadence and records"
+    excerpt_keywords:
+      - [ict, test, cadence]
+      - [last, test, date, service]
+      - [ict, test, gaps, remediation]
+      - [ict, recovery, test, record]
+
+  - must_id: "item:A.5.30:bcp_alignment"
+    description: "Alignment with A.5.29 disruption-security plan stated explicitly"
+    excerpt_keywords:
+      - ["A.5.29"]
+      - [bcp, alignment, ict]
+      - [ict, mechanical, layer, bcp]
+      - [ict, bcp, pair]

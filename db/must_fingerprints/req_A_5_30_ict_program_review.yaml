@@ -1,0 +1,62 @@
+# Per-MUST fingerprint catalog for req:A.5.30:ict_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. ICT readiness program audit cycle.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.30:ict_program_review"
+target_control: "A.5.30"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.30:rev_date"
+    description: "Review date within the planned 180-day interval"
+    excerpt_keywords:
+      - [ict, program, review, date]
+      - [ict, readiness, reviewed, on]
+      - [180, day, ict, review]
+
+  - must_id: "item:A.5.30:rev_reviewer"
+    description: "Reviewer identity"
+    excerpt_keywords:
+      - [ict, readiness, reviewed, by]
+      - [cto, ict, review]
+      - [bcp, program, owner, ict, review]
+      - [cfo, critical, service, signoff]
+
+  - must_id: "item:A.5.30:rev_rto_compliance"
+    description: "RTO/RPO compliance audit"
+    excerpt_keywords:
+      - [rto, compliance, audit]
+      - [rpo, compliance, audit]
+      - [rto, gap, per, service]
+      - [rto, target, gap]
+
+  - must_id: "item:A.5.30:rev_restore_success"
+    description: "Restore-success-rate analysis"
+    excerpt_keywords:
+      - [restore, success, rate]
+      - [restore, attempted, sample]
+      - [failed, restore, investigated]
+      - [restore, success, analysis]
+
+  - must_id: "item:A.5.30:rev_scenario_coverage"
+    description: "Scenario-coverage audit"
+    excerpt_keywords:
+      - [scenarios, tested, via, recovery]
+      - [scenarios, still, untested]
+      - [bcp, scenario, coverage, audit]
+
+  - must_id: "item:A.5.30:rev_dependency_check"
+    description: "Dependency-currency check"
+    excerpt_keywords:
+      - [dependency, currency, check]
+      - [dependency, map, validated]
+      - [dependency, shifts, flagged]
+
+  - must_id: "item:A.5.30:rev_actions"
+    description: "Action items captured"
+    excerpt_keywords:
+      - [ict, review, action, items]
+      - [tighten, rto, for, service]
+      - [retire, stale, scenario, ict]
+      - [refresh, test, ict]

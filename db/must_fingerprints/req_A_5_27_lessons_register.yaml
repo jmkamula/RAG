@@ -1,0 +1,62 @@
+# Per-MUST fingerprint catalog for req:A.5.27:lessons_register
+#
+# Reviewed-from-skeleton 2026-06-14. Lessons-learned register columns.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.27:lessons_register"
+target_control: "A.5.27"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.27:reg_lesson_id"
+    description: "Each lesson captured with a unique identifier"
+    excerpt_keywords:
+      - [lessons, register]
+      - [lesson, id, column]
+      - [lessons, learned, register]
+      - [lesson, identifier]
+
+  - must_id: "item:A.5.27:reg_source_incident"
+    description: "Source incident reference per row (links to A.5.26 incident register)"
+    excerpt_keywords:
+      - ["A.5.26"]
+      - [source, incident, lesson]
+      - [incident, ref, lesson]
+      - [lesson, from, incident]
+
+  - must_id: "item:A.5.27:reg_root_cause_type"
+    description: "Root-cause type per row"
+    excerpt_keywords:
+      - [lesson, root, cause, type]
+      - [root, cause, category, lesson]
+      - [lesson, rca, type]
+
+  - must_id: "item:A.5.27:reg_target"
+    description: "Target per row (which control / training / procedure is affected)"
+    excerpt_keywords:
+      - [lesson, target, control]
+      - [lesson, target, procedure]
+      - [lesson, target, training]
+      - [lesson, affects, column]
+
+  - must_id: "item:A.5.27:reg_owner"
+    description: "Named owner accountable for the action per row"
+    excerpt_keywords:
+      - [lesson, action, owner]
+      - [lesson, owner, column]
+      - [lesson, accountable, owner]
+
+  - must_id: "item:A.5.27:reg_status"
+    description: "Status per row (open / in-progress / closed / accepted)"
+    excerpt_keywords:
+      - [lesson, status, column]
+      - [lesson, status, open]
+      - [lesson, status, closed]
+      - [lesson, status, accepted]
+
+  - must_id: "item:A.5.27:reg_due_closed"
+    description: "Action due date + closure date per row"
+    excerpt_keywords:
+      - [lesson, due, date]
+      - [lesson, closure, date]
+      - [lesson, action, due]

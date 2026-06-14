@@ -1,0 +1,60 @@
+# Per-MUST fingerprint catalog for req:A.5.30:ict_service_register
+#
+# Reviewed-from-skeleton 2026-06-14. Per-ICT-service register.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.30:ict_service_register"
+target_control: "A.5.30"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.30:reg_service_id"
+    description: "Each in-scope ICT service captured with a unique identifier"
+    excerpt_keywords:
+      - [ict, service, register]
+      - [ict, service, id, column]
+      - [ict, services, list]
+
+  - must_id: "item:A.5.30:reg_criticality"
+    description: "Criticality tier per row"
+    excerpt_keywords:
+      - [ict, criticality, tier]
+      - [tier, 1, mission, critical]
+      - [tier, 2, business, critical]
+      - [tier, 3, supporting]
+
+  - must_id: "item:A.5.30:reg_rto_rpo"
+    description: "RTO/RPO targets per row"
+    excerpt_keywords:
+      - [rto, rpo, per, service, column]
+      - [rto, target, per, ict]
+      - [rpo, target, per, ict]
+
+  - must_id: "item:A.5.30:reg_asset_link"
+    description: "Asset-link per row (cross-link to A.5.9 asset register)"
+    excerpt_keywords:
+      - ["A.5.9"]
+      - [asset, link, per, service]
+      - [service, to, asset, mapping]
+
+  - must_id: "item:A.5.30:reg_dependencies"
+    description: "Service dependencies per row"
+    excerpt_keywords:
+      - [service, dependencies, column]
+      - [upstream, downstream, services]
+      - [recovery, order, dependencies]
+      - [ict, dependency, map]
+
+  - must_id: "item:A.5.30:reg_recovery_owner"
+    description: "Named recovery owner per row"
+    excerpt_keywords:
+      - [ict, recovery, owner]
+      - [recovery, owner, per, service]
+      - [technical, lead, recovery]
+
+  - must_id: "item:A.5.30:reg_last_tested"
+    description: "Last-tested date per row"
+    excerpt_keywords:
+      - [ict, last, tested, date]
+      - [service, test, date, column]
+      - [stale, test, ict]

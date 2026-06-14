@@ -1,0 +1,51 @@
+# Per-MUST fingerprint catalog for req:A.5.19:offboarding_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-supplier offboarding record.
+# v2 raw produced 30 false-positive proposals — generic "termination /
+# access removal" language fanned across all MUSTs. Tightened.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.19:offboarding_record"
+target_control: "A.5.19"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.19:off_trigger"
+    description: "Offboarding trigger captured (termination / non-renewal / supplier failure / re-tendering)"
+    excerpt_keywords:
+      - [supplier, offboarding, trigger]
+      - [supplier, termination, trigger]
+      - [supplier, non, renewal]
+      - [supplier, re, tendering]
+      - [supplier, failure, offboarding]
+
+  - must_id: "item:A.5.19:off_authoriser"
+    description: "Authoriser of the offboarding decision"
+    excerpt_keywords:
+      - [supplier, offboarding, authoriser]
+      - [supplier, offboarding, signed, off]
+      - [vendor, offboarding, decision, signed]
+
+  - must_id: "item:A.5.19:off_access_removal"
+    description: "Logical and physical access removal evidence (link to A.5.18 / A.7.2)"
+    excerpt_keywords:
+      - ["A.5.18"]
+      - ["A.7.2"]
+      - [supplier, access, removed]
+      - [supplier, access, removal, evidence]
+
+  - must_id: "item:A.5.19:off_data_return"
+    description: "Data return or destruction evidence"
+    excerpt_keywords:
+      - [supplier, data, returned]
+      - [supplier, data, destroyed]
+      - [supplier, data, return, attestation]
+      - [supplier, data, destruction, attestation]
+
+  - must_id: "item:A.5.19:off_transition"
+    description: "Transition completion evidence"
+    excerpt_keywords:
+      - [supplier, transition, completed]
+      - [supplier, handover, completed]
+      - [replacement, supplier, engaged]
+      - [supplier, operational, handover]

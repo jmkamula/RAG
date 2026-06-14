@@ -1,0 +1,67 @@
+# Per-MUST fingerprint catalog for req:A.5.30:ict_recovery_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-ICT-recovery-event record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.30:ict_recovery_record"
+target_control: "A.5.30"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.30:rec_recovery_id"
+    description: "Recovery event identifier per record"
+    excerpt_keywords:
+      - [ict, recovery, event, id]
+      - [recovery, record, id]
+      - [recovery, event, identifier]
+
+  - must_id: "item:A.5.30:rec_type"
+    description: "Recovery type per record"
+    excerpt_keywords:
+      - [recovery, type, per, record]
+      - [real_recovery]
+      - [chaos, engineering, test]
+      - [scheduled, recovery, test]
+
+  - must_id: "item:A.5.30:rec_services"
+    description: "Services in scope per record"
+    excerpt_keywords:
+      - [services, recovered]
+      - [recovery, scope, services]
+      - [recovery, services, ref]
+
+  - must_id: "item:A.5.30:rec_rto_target"
+    description: "RTO target per record"
+    excerpt_keywords:
+      - [rto, target, per, recovery]
+      - [recovery, rto, committed]
+
+  - must_id: "item:A.5.30:rec_actual_time"
+    description: "Actual recovery time per record"
+    excerpt_keywords:
+      - [actual, recovery, time]
+      - [rto, met, calculation]
+      - [recovery, achieved, in]
+      - [recovery, duration, actual]
+
+  - must_id: "item:A.5.30:rec_success_status"
+    description: "Success status per record (rto_met / rto_missed_with_reason / partial / failed)"
+    excerpt_keywords:
+      - [rto_met]
+      - [rto_missed_with_reason]
+      - [partial_recovery_acceptable]
+      - [recovery, success, status]
+
+  - must_id: "item:A.5.30:rec_gaps"
+    description: "Gaps surfaced per record"
+    excerpt_keywords:
+      - [recovery, gaps, surfaced]
+      - [recovery, gap, severity]
+      - [recovery, fell, short]
+
+  - must_id: "item:A.5.30:rec_signoff"
+    description: "Signoff per record"
+    excerpt_keywords:
+      - [recovery, signoff]
+      - [bcp, program, owner, recovery, signoff]
+      - [recovery, exec, sponsor]

@@ -1,0 +1,46 @@
+# Per-MUST fingerprint catalog for req:A.5.27:improvement_action_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-improvement-action record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.27:improvement_action_record"
+target_control: "A.5.27"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.27:imp_lesson_ref"
+    description: "Lesson identifier per record (links to lessons register)"
+    excerpt_keywords:
+      - [improvement, action, lesson, ref]
+      - [improvement, lesson, id]
+      - [action, from, lesson]
+
+  - must_id: "item:A.5.27:imp_action_type"
+    description: "Action type captured (control updated / training added / procedure amended / risk accepted)"
+    excerpt_keywords:
+      - [improvement, control, updated]
+      - [improvement, training, added]
+      - [improvement, procedure, amended]
+      - [lesson, risk, accepted]
+
+  - must_id: "item:A.5.27:imp_authoriser"
+    description: "Authoriser per record"
+    excerpt_keywords:
+      - [improvement, authoriser]
+      - [improvement, signed, off, by]
+      - [lesson, action, signed, by]
+
+  - must_id: "item:A.5.27:imp_closure_date"
+    description: "Closure date recorded"
+    excerpt_keywords:
+      - [improvement, closure, date]
+      - [improvement, closed, on]
+      - [lesson, action, closure, date]
+
+  - must_id: "item:A.5.27:imp_evidence"
+    description: "Evidence of change"
+    excerpt_keywords:
+      - [improvement, evidence, of, change]
+      - [control, configuration, diff, lesson]
+      - [training, record, lesson]
+      - [procedure, revision, link, lesson]

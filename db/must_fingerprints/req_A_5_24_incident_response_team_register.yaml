@@ -1,0 +1,61 @@
+# Per-MUST fingerprint catalog for req:A.5.24:incident_response_team_register
+#
+# Reviewed-from-skeleton 2026-06-14. IR team roster register.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.24:incident_response_team_register"
+target_control: "A.5.24"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.24:reg_member_id"
+    description: "Each IR team member captured with a unique identifier"
+    excerpt_keywords:
+      - [ir, team, register]
+      - [ir, team, roster]
+      - [ir, team, member, id]
+
+  - must_id: "item:A.5.24:reg_role"
+    description: "Role per row (ir_lead / deputy / comms / legal / forensic_specialist / technical_lead)"
+    excerpt_keywords:
+      - [ir, lead, role]
+      - [ir, deputy, role]
+      - [ir, forensic, specialist]
+      - [ir, comms, lead, role]
+      - [ir, technical, lead, role]
+
+  - must_id: "item:A.5.24:reg_tier"
+    description: "Tier per row (primary / backup / escalation_only)"
+    excerpt_keywords:
+      - [ir, team, tier]
+      - [primary, backup, escalation]
+      - [ir, activation, order, tier]
+
+  - must_id: "item:A.5.24:reg_backup_named"
+    description: "Backup named per row (no single-person roles)"
+    excerpt_keywords:
+      - [ir, backup, named, per]
+      - [no, single, person, role]
+      - [ir, rotation, continuity]
+
+  - must_id: "item:A.5.24:reg_oncall"
+    description: "On-call status per row"
+    excerpt_keywords:
+      - [ir, on, call, status]
+      - [ir, rotation, oncall]
+      - [ir, oncall, handover]
+
+  - must_id: "item:A.5.24:reg_contact"
+    description: "Contact info per row across multiple channels"
+    excerpt_keywords:
+      - [ir, contact, channels]
+      - [ir, out, of, band, channel]
+      - [ir, secondary, phone]
+      - [ir, multi, channel, contact]
+
+  - must_id: "item:A.5.24:reg_training_current"
+    description: "Training-currency per row"
+    excerpt_keywords:
+      - [ir, training, current]
+      - [ir, last, training, date]
+      - [ir, training, stale, flag]

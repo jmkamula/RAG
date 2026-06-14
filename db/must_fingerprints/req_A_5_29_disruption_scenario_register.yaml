@@ -1,0 +1,61 @@
+# Per-MUST fingerprint catalog for req:A.5.29:disruption_scenario_register
+#
+# Reviewed-from-skeleton 2026-06-14. Per-scenario register.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.29:disruption_scenario_register"
+target_control: "A.5.29"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.29:reg_scenario_id"
+    description: "Each in-scope scenario captured with a unique identifier"
+    excerpt_keywords:
+      - [scenario, id, column]
+      - [disruption, scenario, register]
+      - [scenario, register, column]
+
+  - must_id: "item:A.5.29:reg_type"
+    description: "Scenario type per row"
+    excerpt_keywords:
+      - [scenario, type, column]
+      - [cyber, attack, scenario, type]
+      - [natural, event, scenario, type]
+      - [supplier, failure, scenario, type]
+
+  - must_id: "item:A.5.29:reg_severity"
+    description: "Severity tier per row"
+    excerpt_keywords:
+      - [scenario, severity, column]
+      - [tier, 1, full, disruption]
+      - [tier, 2, partial, disruption]
+      - [tier, 3, localised, disruption]
+
+  - must_id: "item:A.5.29:reg_in_scope_ctrls"
+    description: "In-scope controls per row"
+    excerpt_keywords:
+      - [scenario, in, scope, controls]
+      - [scenario, impacts, controls]
+      - ["A.5.9"]
+      - [scenario, control, impact, column]
+
+  - must_id: "item:A.5.29:reg_fallback"
+    description: "Fallback path per row"
+    excerpt_keywords:
+      - [scenario, fallback, path]
+      - [scenario, compensating, measure]
+      - [scenario, fallback, column]
+
+  - must_id: "item:A.5.29:reg_owner"
+    description: "Named owner per row"
+    excerpt_keywords:
+      - [scenario, owner, column]
+      - [scenario, plan, owner]
+      - [bcp, scenario, owner]
+
+  - must_id: "item:A.5.29:reg_last_tested"
+    description: "Last-tested date per row"
+    excerpt_keywords:
+      - [scenario, last, tested]
+      - [scenario, test, date, column]
+      - [scenario, stale, flag]

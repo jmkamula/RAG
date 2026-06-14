@@ -1,0 +1,80 @@
+# Per-MUST fingerprint catalog for req:A.5.24:incident_response_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. A.5.24 is the STRATEGIC IR planning
+# layer (vs A.5.26 which is the operational response procedure). Overlap
+# with A.5.26 procedure is intentional — same vocabulary, framework-level.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.24:incident_response_procedure"
+target_control: "A.5.24"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.24:roles"
+    description: "Roles and responsibilities defined (IR lead, deputies, comms lead, legal liaison, exec sponsor)"
+    excerpt_keywords:
+      - [ir, framework, roles]
+      - [ir, lead, deputies]
+      - [exec, sponsor, ir]
+      - [comms, lead, ir, framework]
+
+  - must_id: "item:A.5.24:detection"
+    description: "Detection and reporting process"
+    excerpt_keywords:
+      - ["A.5.25"]
+      - [ir, framework, detection]
+      - [ir, framework, reporting, sources]
+      - [user, reports, ir, framework]
+
+  - must_id: "item:A.5.24:assessment"
+    description: "Incident assessment and classification criteria"
+    excerpt_keywords:
+      - [ir, framework, severity, tiers]
+      - [ir, framework, classification, criteria]
+      - [ir, framework, tier, triggers]
+
+  - must_id: "item:A.5.24:response"
+    description: "Response and escalation procedures"
+    excerpt_keywords:
+      - [ir, framework, escalation, procedure]
+      - [ir, framework, decision, authority]
+      - [out, of, hours, ir, handling]
+
+  - must_id: "item:A.5.24:communications"
+    description: "External communication paths (regulator, legal, PR, law enforcement)"
+    excerpt_keywords:
+      - [ir, framework, regulator, comms]
+      - [ir, framework, pr, comms]
+      - [law, enforcement, ir]
+      - [ir, framework, external, comms]
+
+  - must_id: "item:A.5.24:personal_data"
+    description: "Step to determine if personal data breach occurred"
+    excerpt_keywords:
+      - [personal, data, breach, determination]
+      - [dpia, aware, classification]
+      - [controller, processor, analysis, breach]
+
+  - must_id: "item:A.5.24:notification"
+    description: "Notification process for personal data breaches (Art.33 + Art.34)"
+    excerpt_keywords:
+      - ["Art.33"]
+      - ["Art.34"]
+      - [supervisory, authority, less, 72h]
+      - [data, subject, notification, high, risk]
+
+  - must_id: "item:A.5.24:evidence"
+    description: "Evidence collection and preservation (cross-link to A.5.28)"
+    excerpt_keywords:
+      - ["A.5.28"]
+      - [chain, of, custody, mandatory]
+      - [ir, framework, evidence, collection]
+      - [ir, framework, evidence, preservation]
+
+  - must_id: "item:A.5.24:exercise_cadence"
+    description: "Exercise / test cadence stated explicitly"
+    excerpt_keywords:
+      - [ir, exercise, cadence]
+      - [ir, framework, exercise, annual]
+      - [tabletop, cadence]
+      - [ir, exercise, schedule]

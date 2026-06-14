@@ -1,0 +1,68 @@
+# Per-MUST fingerprint catalog for req:A.5.29:plan_activation_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-plan-activation record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.29:plan_activation_record"
+target_control: "A.5.29"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.29:act_activation_id"
+    description: "Activation identifier per record"
+    excerpt_keywords:
+      - [bcp, activation, id]
+      - [plan, activation, record, id]
+      - [continuity, activation, id]
+
+  - must_id: "item:A.5.29:act_type"
+    description: "Activation type per record (real_disruption / scheduled_test / partial_drill / regulator_led_exercise)"
+    excerpt_keywords:
+      - [bcp, activation, type]
+      - [real_disruption]
+      - [scheduled_test]
+      - [partial_drill, bcp]
+      - [regulator_led_exercise]
+
+  - must_id: "item:A.5.29:act_scenario_ref"
+    description: "Triggered scenario reference per record"
+    excerpt_keywords:
+      - [bcp, scenario, ref, per, activation]
+      - [scenario, register, ref, activation]
+      - [bcp, scenario, triggered]
+
+  - must_id: "item:A.5.29:act_duration"
+    description: "Duration per record (start time, end time, restoration time)"
+    excerpt_keywords:
+      - [bcp, activation, duration]
+      - [bcp, restoration, time]
+      - [bcp, activation, start, end]
+
+  - must_id: "item:A.5.29:act_scope"
+    description: "Scope of degradation per record"
+    excerpt_keywords:
+      - [bcp, degradation, scope]
+      - [controls, dropped, to, fallback]
+      - [bcp, scope, of, activation]
+
+  - must_id: "item:A.5.29:act_gaps"
+    description: "Gaps surfaced per record"
+    excerpt_keywords:
+      - [bcp, activation, gaps]
+      - [plan, fell, short]
+      - [bcp, gap, severity]
+
+  - must_id: "item:A.5.29:act_restoration"
+    description: "Restoration status per record"
+    excerpt_keywords:
+      - [bcp, restoration, status]
+      - [controls, back, to, normal]
+      - [outstanding, remediation, bcp]
+
+  - must_id: "item:A.5.29:act_signoff"
+    description: "Signoff per record"
+    excerpt_keywords:
+      - [bcp, activation, signoff]
+      - [activation, authority, signoff]
+      - [ciso, bcp, signoff]
+      - [exec, sponsor, tier1, bcp]

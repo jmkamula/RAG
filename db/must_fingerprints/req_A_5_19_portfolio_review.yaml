@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.5.19:portfolio_review
+#
+# Reviewed-from-skeleton 2026-06-14. Supplier portfolio review.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.19:portfolio_review"
+target_control: "A.5.19"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.19:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [supplier, portfolio, review, date]
+      - [supplier, portfolio, reviewed, on]
+      - [supplier, register, review, date]
+
+  - must_id: "item:A.5.19:rev_reviewer"
+    description: "Reviewer identity (procurement + InfoSec lead)"
+    excerpt_keywords:
+      - [supplier, portfolio, reviewed, by]
+      - [procurement, infosec, supplier, review]
+      - [supplier, portfolio, reviewer]
+
+  - must_id: "item:A.5.19:rev_outcome"
+    description: "Outcome per supplier or per tier"
+    excerpt_keywords:
+      - [supplier, re, tiered]
+      - [supplier, added, removed]
+      - [supplier, portfolio, outcome]
+      - [supplier, tier, change]
+
+  - must_id: "item:A.5.19:rev_actions"
+    description: "Action items captured where monitoring or training arrangements need adjustment"
+    excerpt_keywords:
+      - [supplier, portfolio, action, items]
+      - [supplier, monitoring, adjusted]
+      - [supplier, training, adjusted]

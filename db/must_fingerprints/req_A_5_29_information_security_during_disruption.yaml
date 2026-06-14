@@ -1,0 +1,75 @@
+# Per-MUST fingerprint catalog for req:A.5.29:information_security_during_disruption
+#
+# Reviewed-from-skeleton 2026-06-14. BCP-security plan document.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.29:information_security_during_disruption"
+target_control: "A.5.29"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.29:scenarios"
+    description: "Disruption scenarios considered"
+    excerpt_keywords:
+      - [disruption, scenarios, considered]
+      - ["A.5.7"]
+      - ["A.5.21"]
+      - [cyber, attack, scenario]
+      - [natural, event, scenario, disruption]
+      - [supplier, failure, scenario]
+
+  - must_id: "item:A.5.29:must_continue"
+    description: "Security controls that must continue operating during disruption"
+    excerpt_keywords:
+      - [controls, must, continue, during, disruption]
+      - [encryption, must, continue]
+      - [access, control, during, disruption]
+      - [audit, logging, during, disruption]
+
+  - must_id: "item:A.5.29:degradation_levels"
+    description: "Acceptable degradation levels stated"
+    excerpt_keywords:
+      - [acceptable, degradation, level]
+      - [degradation, tier]
+      - [controls, drop, to, compensating]
+      - [controls, hold, at, full]
+
+  - must_id: "item:A.5.29:fallback"
+    description: "Fallback / compensating security measures"
+    excerpt_keywords:
+      - [fallback, security, measure]
+      - [compensating, control, disruption]
+      - [primary, control, fail, fallback]
+      - [residual, risk, fallback]
+
+  - must_id: "item:A.5.29:activation_authority"
+    description: "Activation authority defined"
+    excerpt_keywords:
+      - [bcp, activation, authority]
+      - [declares, plan, active]
+      - [bcp, stood, down]
+      - [bcp, activation, criteria]
+
+  - must_id: "item:A.5.29:communication"
+    description: "Communication during disruption"
+    excerpt_keywords:
+      - [disruption, communication]
+      - [out, of, band, channels]
+      - [bcp, communication, plan]
+      - [communication, during, disruption]
+
+  - must_id: "item:A.5.29:restoration"
+    description: "Restoration of normal security controls after disruption ends"
+    excerpt_keywords:
+      - [restoration, normal, controls]
+      - [re, encryption, post, disruption]
+      - [audit, log, replay]
+      - [post, disruption, restoration]
+
+  - must_id: "item:A.5.29:test_schedule"
+    description: "Test schedule for the plan"
+    excerpt_keywords:
+      - [bcp, test, schedule]
+      - [bcp, test, cadence]
+      - [continuity, plan, test]
+      - [bcp, exercise, schedule]

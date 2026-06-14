@@ -1,0 +1,60 @@
+# Per-MUST fingerprint catalog for req:A.5.24:framework_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. IR framework audit cycle.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.24:framework_program_review"
+target_control: "A.5.24"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.24:rev_date"
+    description: "Review date within the planned 180-day interval"
+    excerpt_keywords:
+      - [ir, framework, review, date]
+      - [ir, framework, reviewed, on]
+      - [180, day, ir, framework, review]
+
+  - must_id: "item:A.5.24:rev_reviewer"
+    description: "Reviewer identity (CISO + IR lead + DPO + Legal)"
+    excerpt_keywords:
+      - [ir, framework, reviewed, by]
+      - [ciso, ir, framework, review]
+      - [dpo, ir, framework, review]
+
+  - must_id: "item:A.5.24:rev_exercise_results"
+    description: "Exercise-result analysis"
+    excerpt_keywords:
+      - [ir, exercise, result, analysis]
+      - [exercises, completed, vs, planned]
+      - [exercise, gap, remediation, review]
+
+  - must_id: "item:A.5.24:rev_real_divergence"
+    description: "Real-incident vs framework divergence"
+    excerpt_keywords:
+      - [ir, framework, vs, real, divergence]
+      - [real, response, deviated, framework]
+      - [ir, framework, too, prescriptive]
+
+  - must_id: "item:A.5.24:rev_team_readiness"
+    description: "Team-readiness audit"
+    excerpt_keywords:
+      - [ir, team, readiness, audit]
+      - [ir, training, currency, audit]
+      - [ir, tier, under, staffed]
+      - [ir, backup, compliance]
+
+  - must_id: "item:A.5.24:rev_gdpr_72h_feasibility"
+    description: "GDPR 72-hour feasibility check"
+    excerpt_keywords:
+      - [72, hour, feasibility, ir]
+      - ["Art.33", "feasibility"]
+      - [personal, data, incident, notification, gap]
+
+  - must_id: "item:A.5.24:rev_actions"
+    description: "Action items captured"
+    excerpt_keywords:
+      - [ir, framework, action, items]
+      - [comms, playbook, refreshed]
+      - [ir, exercise, scope, expanded]
+      - [ir, framework, 72h, path, tightened]

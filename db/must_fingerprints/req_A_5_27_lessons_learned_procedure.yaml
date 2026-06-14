@@ -1,0 +1,69 @@
+# Per-MUST fingerprint catalog for req:A.5.27:lessons_learned_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Lessons-learned procedure vocabulary.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.27:lessons_learned_procedure"
+target_control: "A.5.27"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.27:trigger"
+    description: "Post-incident review trigger"
+    excerpt_keywords:
+      - [post, incident, review, trigger]
+      - [lessons, learned, trigger]
+      - [incident, threshold, lessons]
+
+  - must_id: "item:A.5.27:capture_format"
+    description: "Lessons capture format"
+    excerpt_keywords:
+      - [what, worked, what, did, not]
+      - [lessons, capture, format]
+      - [root, causes, control, gaps]
+      - [post, mortem, format]
+
+  - must_id: "item:A.5.27:root_cause_typing"
+    description: "Root-cause typing"
+    excerpt_keywords:
+      - [root, cause, typing]
+      - [rca, typing]
+      - [patching, gap, root, cause]
+      - [mfa, gap, root, cause]
+
+  - must_id: "item:A.5.27:pattern_analysis"
+    description: "Recurring-pattern analysis"
+    excerpt_keywords:
+      - [recurring, pattern, lessons]
+      - [systemic, cause, lessons]
+      - [lesson, across, incidents]
+      - [pattern, analysis, incident]
+
+  - must_id: "item:A.5.27:actions"
+    description: "Action items assigned to owners with target dates"
+    excerpt_keywords:
+      - [lesson, action, owner, due]
+      - [lesson, action, target, date]
+      - [lesson, owner, action]
+
+  - must_id: "item:A.5.27:tracking"
+    description: "Tracking actions to closure with status updates"
+    excerpt_keywords:
+      - [lesson, action, tracking]
+      - [lesson, status, updates]
+      - [lesson, action, closure, tracking]
+
+  - must_id: "item:A.5.27:risk_register_update"
+    description: "Risk-assessment update step"
+    excerpt_keywords:
+      - [lesson, into, risk, register]
+      - [lessons, risk, assessment, update]
+      - [risk, register, lesson, exposure]
+
+  - must_id: "item:A.5.27:feedback_loop"
+    description: "Feedback loop into risk register, control catalogue, training"
+    excerpt_keywords:
+      - [lesson, into, control, catalogue]
+      - [lesson, into, training]
+      - [lesson, feedback, loop]
+      - [lesson, programme, feedback]
