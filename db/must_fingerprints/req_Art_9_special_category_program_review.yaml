@@ -1,0 +1,41 @@
+# Per-MUST fingerprint catalog for req:Art.9:special_category_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.9 program review.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.9:special_category_program_review"
+target_control: "Art.9"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.9:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [special, category, review, date]
+      - [art, 9, program, reviewed, on]
+
+  - must_id: "item:Art.9:rev_reviewer"
+    description: "Reviewer identity (DPO + executive sponsor)"
+    excerpt_keywords:
+      - [special, category, reviewed, by, dpo]
+      - [special, category, executive, sponsor, review]
+
+  - must_id: "item:Art.9:rev_register_currency"
+    description: "Register currency check"
+    excerpt_keywords:
+      - [special, category, register, currency]
+      - [art, 9, 2, condition, still, appropriate]
+
+  - must_id: "item:Art.9:rev_safeguards_audit"
+    description: "Safeguards audit"
+    excerpt_keywords:
+      - ["Art.9.3"]
+      - [art, 9, 3, secrecy, audit]
+      - [special, category, safeguards, audit]
+
+  - must_id: "item:Art.9:rev_silent_onboarding"
+    description: "Silent-onboarding sweep"
+    excerpt_keywords:
+      - [special, category, silent, onboarding]
+      - [no, procedure, special, category]
+      - [special, category, ingested, without, procedure]

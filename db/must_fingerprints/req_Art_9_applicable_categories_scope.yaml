@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:Art.9:applicable_categories_scope
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.9 scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.9:applicable_categories_scope"
+target_control: "Art.9"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.9:scope_categories_in_use"
+    description: "Art.9.1 categories actually processed enumerated"
+    excerpt_keywords:
+      - ["Art.9.1"]
+      - [special, categories, processed]
+      - [art, 9, 1, categories, in, scope]
+
+  - must_id: "item:Art.9:scope_exclusions"
+    description: "Categories explicitly NOT processed"
+    excerpt_keywords:
+      - [special, category, not, processed]
+      - [special, category, exclusion]
+      - [special, category, scope, rationale]
+
+  - must_id: "item:Art.9:scope_conditions_in_use"
+    description: "Art.9.2 conditions in use across activities"
+    excerpt_keywords:
+      - ["Art.9.2"]
+      - [art, 9, 2, conditions, in, use]
+      - [special, category, condition, in, scope]
+
+  - must_id: "item:Art.9:scope_member_state_overlay"
+    description: "Member State derogations applied"
+    excerpt_keywords:
+      - ["Art.9.4"]
+      - [member, state, special, category, derogation]
+      - [member, state, genetic, biometric]

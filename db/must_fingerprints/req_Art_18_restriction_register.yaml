@@ -1,0 +1,43 @@
+# Per-MUST fingerprint catalog for req:Art.18:restriction_register
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.18 restriction register.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.18:restriction_register"
+target_control: "Art.18"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.18:reg_subject_id"
+    description: "Subject identifier per row"
+    excerpt_keywords:
+      - [restriction, register, subject, id]
+      - [art, 18, restriction, register]
+      - [restriction, request, subject, id]
+
+  - must_id: "item:Art.18:reg_ground"
+    description: "Per-row Art.18.1 ground (a-d) cited"
+    excerpt_keywords:
+      - ["Art.18.1"]
+      - [art, 18, 1, ground, a, b, c, d]
+      - [restriction, ground, per, row]
+
+  - must_id: "item:Art.18:reg_scope"
+    description: "Per-row scope"
+    excerpt_keywords:
+      - [restriction, scope, column]
+      - [restriction, data, scope]
+      - [restriction, systems, scope]
+
+  - must_id: "item:Art.18:reg_start_date"
+    description: "Per-row restriction start date"
+    excerpt_keywords:
+      - [restriction, start, date, column]
+      - [restriction, effective, from]
+
+  - must_id: "item:Art.18:reg_lift_status"
+    description: "Per-row lift status"
+    excerpt_keywords:
+      - [restriction, lift, status]
+      - [restriction, lifted, on, date]
+      - [restriction, active, status]

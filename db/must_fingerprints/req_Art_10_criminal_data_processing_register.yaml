@@ -1,0 +1,47 @@
+# Per-MUST fingerprint catalog for req:Art.10:criminal_data_processing_register
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.10 criminal data register.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.10:criminal_data_processing_register"
+target_control: "Art.10"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.10:reg_activity_id"
+    description: "Activity identifier per row"
+    excerpt_keywords:
+      - [criminal, data, register]
+      - [criminal, convictions, activity, id]
+      - ["Art.30"]
+      - [criminal, data, activity, register]
+
+  - must_id: "item:Art.10:reg_legal_basis"
+    description: "Per-row legal basis"
+    excerpt_keywords:
+      - [criminal, data, legal, basis]
+      - [official, authority, criminal]
+      - [member, state, law, criminal]
+
+  - must_id: "item:Art.10:reg_purpose"
+    description: "Per-row purpose"
+    excerpt_keywords:
+      - [criminal, data, purpose]
+      - [pre, employment, screening, criminal]
+      - [sanctions, check, criminal]
+      - [regulatory, kyc, criminal]
+      - [fraud, investigation, criminal]
+
+  - must_id: "item:Art.10:reg_safeguards"
+    description: "Per-row safeguards"
+    excerpt_keywords:
+      - [criminal, data, safeguards]
+      - [criminal, data, retention, limit]
+      - [criminal, data, access, restriction]
+      - [criminal, separate, system]
+
+  - must_id: "item:Art.10:reg_approval"
+    description: "Per-row approval signature + date"
+    excerpt_keywords:
+      - [criminal, data, approval, column]
+      - [criminal, data, signed, by]

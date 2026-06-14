@@ -1,0 +1,53 @@
+# Per-MUST fingerprint catalog for req:Art.22:automated_decision_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.22 procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.22:automated_decision_procedure"
+target_control: "Art.22"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.22:intake_channel"
+    description: "Intake channel via Art.12 procedure"
+    excerpt_keywords:
+      - ["Art.12"]
+      - [art, 22, intake, channel]
+      - [automated, decision, request, intake]
+
+  - must_id: "item:Art.22:art22_2_grounds"
+    description: "Art.22.2 grounds catalog"
+    excerpt_keywords:
+      - ["Art.22.2"]
+      - [art, 22, 2, grounds, catalog]
+      - [contract, necessity, automated]
+      - [member, state, law, automated, decision]
+
+  - must_id: "item:Art.22:human_intervention"
+    description: "Human intervention pathway"
+    excerpt_keywords:
+      - [human, intervention, pathway]
+      - [request, human, decision]
+      - [art, 22, human, review]
+
+  - must_id: "item:Art.22:expression_of_view"
+    description: "Expression-of-view mechanism"
+    excerpt_keywords:
+      - [expression, of, view]
+      - [art, 22, view, mechanism]
+      - [subject, communicate, context]
+
+  - must_id: "item:Art.22:contest_mechanism"
+    description: "Contest-decision mechanism"
+    excerpt_keywords:
+      - [contest, automated, decision]
+      - [art, 22, contest, mechanism]
+      - [subject, contest, decision]
+
+  - must_id: "item:Art.22:special_category_overlay"
+    description: "Special-category overlay (Art.22.4)"
+    excerpt_keywords:
+      - ["Art.22.4"]
+      - [art, 22, 4, special, category]
+      - ["Art.9.2.a"]
+      - [art, 9, special, category, automated, decision]

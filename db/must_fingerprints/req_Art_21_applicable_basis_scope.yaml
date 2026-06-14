@@ -1,0 +1,30 @@
+# Per-MUST fingerprint catalog for req:Art.21:applicable_basis_scope
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.21 scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.21:applicable_basis_scope"
+target_control: "Art.21"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.21:scope_legitimate_interests"
+    description: "Legitimate-interests activities enumerated"
+    excerpt_keywords:
+      - ["Art.6.1.f"]
+      - [legitimate, interests, art, 21, scope]
+      - [art, 6, 1, f, rows, objection]
+
+  - must_id: "item:Art.21:scope_public_task"
+    description: "Public-task activities enumerated"
+    excerpt_keywords:
+      - ["Art.6.1.e"]
+      - [public, task, art, 21, scope]
+      - [art, 6, 1, e, public, task]
+
+  - must_id: "item:Art.21:scope_direct_marketing"
+    description: "Direct-marketing activities enumerated"
+    excerpt_keywords:
+      - ["Art.21.2"]
+      - [direct, marketing, scope]
+      - [direct, marketing, art, 21, 2]

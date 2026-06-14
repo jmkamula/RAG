@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:Art.6:lawful_basis_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.6 program review.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.6:lawful_basis_program_review"
+target_control: "Art.6"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.6:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [lawful, basis, review, date]
+      - [art, 6, program, reviewed]
+
+  - must_id: "item:Art.6:rev_reviewer"
+    description: "Reviewer identity (DPO or Privacy Lead)"
+    excerpt_keywords:
+      - [lawful, basis, reviewed, by, dpo]
+      - [privacy, lead, lawful, basis, review]
+
+  - must_id: "item:Art.6:rev_register_currency"
+    description: "Register currency check"
+    excerpt_keywords:
+      - [lawful, basis, register, currency]
+      - [ropa, basis, assignment, current]
+      - [lawful, basis, refresh]
+
+  - must_id: "item:Art.6:rev_basis_appropriateness"
+    description: "Basis-appropriateness sample"
+    excerpt_keywords:
+      - [lawful, basis, appropriateness, sample]
+      - [high, volume, lawful, basis, re, evaluation]
+      - [high, sensitivity, lawful, basis, re, evaluation]
+
+  - must_id: "item:Art.6:rev_regulator_guidance"
+    description: "Regulator-guidance sweep"
+    excerpt_keywords:
+      - [edpb, guidance, sweep]
+      - [supervisory, authority, guidance, lawful]
+      - [regulator, guidance, lawful, basis]

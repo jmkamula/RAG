@@ -1,0 +1,43 @@
+# Per-MUST fingerprint catalog for req:Art.22:automated_decision_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.22 program review.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.22:automated_decision_program_review"
+target_control: "Art.22"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.22:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [art, 22, program, review, date]
+      - [art, 22, reviewed, on]
+
+  - must_id: "item:Art.22:rev_reviewer"
+    description: "Reviewer identity (DPO + ML/product lead)"
+    excerpt_keywords:
+      - [art, 22, reviewed, by, dpo]
+      - [ml, lead, art, 22, review]
+      - [product, lead, art, 22, review]
+
+  - must_id: "item:Art.22:rev_basis_currency"
+    description: "Basis currency check"
+    excerpt_keywords:
+      - [art, 22, 2, basis, currency]
+      - [in, scope, system, art, 22, 2, valid]
+      - [art, 22, basis, refresh]
+
+  - must_id: "item:Art.22:rev_safeguards_health"
+    description: "Safeguards health"
+    excerpt_keywords:
+      - [art, 22, safeguards, health]
+      - [human, intervention, queue, used]
+      - [contest, mechanism, functioning]
+
+  - must_id: "item:Art.22:rev_silent_promotion"
+    description: "Silent-promotion sweep"
+    excerpt_keywords:
+      - [art, 22, silent, promotion, sweep]
+      - [flag, for, review, promoted, automated]
+      - [art, 22, silent, scope, change]

@@ -1,0 +1,46 @@
+# Per-MUST fingerprint catalog for req:Art.19:notification_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.19 procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.19:notification_procedure"
+target_control: "Art.19"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.19:trigger_events"
+    description: "Trigger events stated (Art.16/17/18)"
+    excerpt_keywords:
+      - ["Art.16"]
+      - ["Art.17"]
+      - ["Art.18"]
+      - [art, 19, trigger, events]
+      - [rectification, erasure, restriction, trigger]
+
+  - must_id: "item:Art.19:recipient_inventory"
+    description: "Recipient inventory mechanism"
+    excerpt_keywords:
+      - [recipient, inventory, mechanism]
+      - ["Art.30"]
+      - [ropa, recipients, column]
+
+  - must_id: "item:Art.19:notification_method"
+    description: "Notification delivery method"
+    excerpt_keywords:
+      - [art, 19, notification, method]
+      - [art, 19, email, api]
+      - [art, 19, monthly, digest]
+
+  - must_id: "item:Art.19:impossibility_grounds"
+    description: "Impossibility / disproportionate-effort assessment"
+    excerpt_keywords:
+      - [art, 19, impossibility, assessment]
+      - [disproportionate, effort, art, 19]
+      - [art, 19, impossibility, criteria]
+
+  - must_id: "item:Art.19:subject_information"
+    description: "Subject is informed about the recipients on request"
+    excerpt_keywords:
+      - [art, 19, second, sentence]
+      - [subject, informed, recipients, request]
+      - [recipient, list, on, request]

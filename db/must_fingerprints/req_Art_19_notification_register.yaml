@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:Art.19:notification_register
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.19 notification register.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.19:notification_register"
+target_control: "Art.19"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.19:reg_event_id"
+    description: "Per-row source event id"
+    excerpt_keywords:
+      - [art, 19, notification, register]
+      - [recipient, notification, event, id]
+      - [art, 12, register, ref]
+
+  - must_id: "item:Art.19:reg_recipient_list"
+    description: "Per-row recipients notified list"
+    excerpt_keywords:
+      - [recipient, notified, list]
+      - [art, 19, recipient, list]
+      - [recipients, notified, per, event]
+
+  - must_id: "item:Art.19:reg_notification_date"
+    description: "Per-row notification date"
+    excerpt_keywords:
+      - [art, 19, notification, date]
+      - [recipient, notification, date, column]
+
+  - must_id: "item:Art.19:reg_omission_grounds"
+    description: "Per-row omitted recipients with impossibility/disproportionality grounds"
+    excerpt_keywords:
+      - [art, 19, omission, grounds]
+      - [impossibility, art, 19]
+      - [disproportionality, art, 19]
+      - [omitted, recipient, art, 19]

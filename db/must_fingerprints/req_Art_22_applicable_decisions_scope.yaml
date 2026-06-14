@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:Art.22:applicable_decisions_scope
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.22 scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.22:applicable_decisions_scope"
+target_control: "Art.22"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.22:scope_in_scope_systems"
+    description: "In-scope systems enumerated"
+    excerpt_keywords:
+      - [art, 22, in, scope, systems]
+      - [automated, decision, systems, list]
+      - [art, 22, model, systems]
+
+  - must_id: "item:Art.22:scope_solely_automated"
+    description: "Operational test for 'solely automated'"
+    excerpt_keywords:
+      - [solely, automated, test]
+      - [meaningful, human, involvement]
+      - [art, 22, solely, automated, operational]
+
+  - must_id: "item:Art.22:scope_significant_effects"
+    description: "Test for legal or similarly significant effects"
+    excerpt_keywords:
+      - [significant, effects, test]
+      - [legal, effects, automated]
+      - [employment, insurance, eligibility, automated]
+      - [art, 22, significant, effect]
+
+  - must_id: "item:Art.22:scope_exclusions"
+    description: "Out-of-scope automated processes"
+    excerpt_keywords:
+      - [art, 22, exclusion, rationale]
+      - [flag, for, review, exclusion]
+      - [recommender, no, significant, effect]

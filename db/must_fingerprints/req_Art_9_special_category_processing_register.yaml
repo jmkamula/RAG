@@ -1,0 +1,51 @@
+# Per-MUST fingerprint catalog for req:Art.9:special_category_processing_register
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.9 special category register.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.9:special_category_processing_register"
+target_control: "Art.9"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.9:reg_activity_id"
+    description: "Activity identifier per row"
+    excerpt_keywords:
+      - [special, category, register]
+      - [special, category, activity, id]
+      - ["Art.30"]
+
+  - must_id: "item:Art.9:reg_category"
+    description: "Art.9.1 category per row"
+    excerpt_keywords:
+      - ["Art.9.1"]
+      - [special, category, type]
+      - [health, biometric, genetic, per]
+      - [racial, religious, special, category]
+
+  - must_id: "item:Art.9:reg_condition"
+    description: "Art.9.2 condition per row"
+    excerpt_keywords:
+      - ["Art.9.2"]
+      - [art, 9, 2, condition, per]
+      - [special, category, condition, citation]
+
+  - must_id: "item:Art.9:reg_safeguards"
+    description: "Safeguards in place per row"
+    excerpt_keywords:
+      - ["Art.9.3"]
+      - [special, category, safeguards]
+      - [secrecy, obligation, special]
+      - [technical, organisational, special, category]
+
+  - must_id: "item:Art.9:reg_approval"
+    description: "Per-row approval signature + date"
+    excerpt_keywords:
+      - [special, category, approval, column]
+      - [special, category, signed, by]
+
+  - must_id: "item:Art.9:reg_ropa_xref"
+    description: "Per-row cross-reference to Art.30 RoPA"
+    excerpt_keywords:
+      - [special, category, ropa, ref]
+      - [art, 30, special, category, link]

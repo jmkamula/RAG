@@ -1,0 +1,51 @@
+# Per-MUST fingerprint catalog for req:Art.9:special_category_authorisation_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.9 procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.9:special_category_authorisation_procedure"
+target_control: "Art.9"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.9:proc_proposal_intake"
+    description: "Intake process for new special-category processing proposals"
+    excerpt_keywords:
+      - [special, category, proposal, intake]
+      - [no, quiet, onboarding, special]
+      - [new, special, category, intake]
+
+  - must_id: "item:Art.9:proc_condition_selection"
+    description: "Art.9.2 condition selection (a-j) with rationale"
+    excerpt_keywords:
+      - ["Art.9.2"]
+      - [art, 9, 2, condition, rationale]
+      - [special, category, condition, selection]
+
+  - must_id: "item:Art.9:proc_explicit_consent"
+    description: "For Art.9.2.a explicit-consent route"
+    excerpt_keywords:
+      - ["Art.9.2.a"]
+      - [explicit, consent, special, category]
+      - [art, 9, 2, a, explicit]
+
+  - must_id: "item:Art.9:proc_safeguards"
+    description: "Safeguards required by the chosen Art.9.2 condition"
+    excerpt_keywords:
+      - ["Art.9.2.h"]
+      - [health, secrecy, obligation]
+      - [art, 9, 2, condition, safeguards]
+      - [special, category, safeguards, required]
+
+  - must_id: "item:Art.9:proc_approval_authority"
+    description: "Approval authority for special-category processing"
+    excerpt_keywords:
+      - [dpo, executive, sponsor, special]
+      - [special, category, approval, authority]
+      - [special, category, dpo, executive, approval]
+
+  - must_id: "item:Art.9:proc_owner"
+    description: "Named owner of the procedure"
+    excerpt_keywords:
+      - [special, category, procedure, owner]
+      - [dpo, special, category, owner]

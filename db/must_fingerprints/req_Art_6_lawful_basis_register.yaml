@@ -1,0 +1,54 @@
+# Per-MUST fingerprint catalog for req:Art.6:lawful_basis_register
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.6 lawful basis register.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.6:lawful_basis_register"
+target_control: "Art.6"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.6:activities_enumerated"
+    description: "Processing activities enumerated"
+    excerpt_keywords:
+      - [lawful, basis, register]
+      - [processing, activities, lawful, basis]
+      - ["Art.30"]
+      - [activity, per, basis]
+
+  - must_id: "item:Art.6:basis_per_activity"
+    description: "Chosen lawful basis named per activity"
+    excerpt_keywords:
+      - [lawful, basis, per, activity]
+      - ["Art.6.1"]
+      - [consent, contract, legal, obligation, per]
+      - [vital, interests, public, task, per]
+      - [legitimate, interests, per, activity]
+
+  - must_id: "item:Art.6:justification"
+    description: "Justification recorded for the chosen basis"
+    excerpt_keywords:
+      - [lawful, basis, justification]
+      - [lawful, basis, recorded, per]
+      - [basis, rationale, per, activity]
+
+  - must_id: "item:Art.6:consent_link"
+    description: "For consent-based activities, link to Art.7"
+    excerpt_keywords:
+      - ["Art.7"]
+      - [consent, capture, record]
+      - [consent, link, per, activity]
+
+  - must_id: "item:Art.6:lia_link"
+    description: "For legitimate-interests activities, link to LIA"
+    excerpt_keywords:
+      - [legitimate, interest, assessment]
+      - [lia, necessity, balance]
+      - [lia, per, activity]
+
+  - must_id: "item:Art.6:owner"
+    description: "Named owner of the register"
+    excerpt_keywords:
+      - [lawful, basis, register, owner]
+      - [dpo, lawful, basis, owner]
+      - [privacy, lead, lawful, basis]

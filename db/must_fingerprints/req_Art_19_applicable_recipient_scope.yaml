@@ -1,0 +1,30 @@
+# Per-MUST fingerprint catalog for req:Art.19:applicable_recipient_scope
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.19 scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.19:applicable_recipient_scope"
+target_control: "Art.19"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.19:scope_recipient_classes"
+    description: "Recipient classes enumerated"
+    excerpt_keywords:
+      - [art, 19, recipient, classes]
+      - [processors, joint, controllers, recipient]
+      - [third, country, recipient, art, 19]
+
+  - must_id: "item:Art.19:scope_excluded_recipients"
+    description: "Excluded recipient categories with rationale"
+    excerpt_keywords:
+      - [art, 19, excluded, recipient]
+      - [art, 19, aggregate, data, exclusion]
+      - [art, 19, recipient, exclusion, rationale]
+
+  - must_id: "item:Art.19:scope_art17_2_overlay"
+    description: "Art.17.2 public-disclosure overlay"
+    excerpt_keywords:
+      - ["Art.17.2"]
+      - [art, 17, 2, public, disclosure]
+      - [art, 19, take, down, efforts]

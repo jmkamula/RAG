@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:Art.21:objection_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.21 program review.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.21:objection_program_review"
+target_control: "Art.21"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.21:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [art, 21, program, review, date]
+      - [art, 21, reviewed, on]
+
+  - must_id: "item:Art.21:rev_reviewer"
+    description: "Reviewer identity (DPO + marketing/product lead)"
+    excerpt_keywords:
+      - [art, 21, reviewed, by, dpo]
+      - [marketing, lead, art, 21, review]
+
+  - must_id: "item:Art.21:rev_direct_marketing_sla"
+    description: "Direct-marketing immediate-cessation SLA"
+    excerpt_keywords:
+      - [direct, marketing, immediate, cessation, sla]
+      - [direct, marketing, sla, met]
+      - [direct, marketing, objection, sla]
+
+  - must_id: "item:Art.21:rev_balancing_quality"
+    description: "Balancing-test quality sample"
+    excerpt_keywords:
+      - [art, 21, balancing, test, quality]
+      - [compelling, grounds, documentation, art, 21]
+      - [art, 21, continuing, decision, documentation]
+
+  - must_id: "item:Art.21:rev_explicit_notice_audit"
+    description: "Explicit-notice audit"
+    excerpt_keywords:
+      - [art, 21, explicit, notice, audit]
+      - [art, 21, 4, notice, audit]
+      - [art, 21, right, surface, audit]

@@ -1,0 +1,30 @@
+# Per-MUST fingerprint catalog for req:Art.10:applicable_legal_basis_scope
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.10 scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.10:applicable_legal_basis_scope"
+target_control: "Art.10"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.10:scope_authority_vs_authorised"
+    description: "Official-authority vs specific-authorisation split"
+    excerpt_keywords:
+      - [official, authority, vs, authorisation]
+      - [criminal, data, official, authority]
+      - [criminal, data, specific, authorisation]
+
+  - must_id: "item:Art.10:scope_ms_law_register"
+    description: "Member State law register"
+    excerpt_keywords:
+      - [member, state, law, criminal, register]
+      - [ms, law, citation, criminal]
+      - [criminal, data, ms, law, list]
+
+  - must_id: "item:Art.10:scope_exclusions"
+    description: "Out-of-scope activities"
+    excerpt_keywords:
+      - [criminal, data, scope, exclusion]
+      - [journalistic, criminal, exclusion]
+      - [non, eu, jurisdiction, criminal]

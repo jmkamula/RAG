@@ -1,0 +1,46 @@
+# Per-MUST fingerprint catalog for req:Art.21:objection_register
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.21 objection register.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.21:objection_register"
+target_control: "Art.21"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.21:reg_request_id"
+    description: "Per-row request id"
+    excerpt_keywords:
+      - [art, 21, objection, register]
+      - [objection, request, id, column]
+      - [art, 12, cross, ref, objection]
+
+  - must_id: "item:Art.21:reg_objection_type"
+    description: "Per-row objection type"
+    excerpt_keywords:
+      - [direct, marketing, objection, absolute]
+      - [legitimate, interests, objection, balancing]
+      - [scientific, research, objection]
+      - [art, 21, objection, type, column]
+
+  - must_id: "item:Art.21:reg_grounds"
+    description: "Per-row grounds for continuing"
+    excerpt_keywords:
+      - [art, 21, continuing, grounds]
+      - [compelling, grounds, legitimate, interest]
+      - [art, 21, objection, grounds, continued]
+
+  - must_id: "item:Art.21:reg_outcome"
+    description: "Per-row outcome"
+    excerpt_keywords:
+      - [art, 21, processing, ceased]
+      - [art, 21, continued, compelling, grounds]
+      - [art, 21, partial, outcome]
+      - [art, 21, objection, outcome]
+
+  - must_id: "item:Art.21:reg_response_date"
+    description: "Per-row response date"
+    excerpt_keywords:
+      - [art, 21, response, date]
+      - ["Art.12.3"]
+      - [art, 12, 3, sla, tracking, objection]

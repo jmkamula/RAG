@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:Art.18:restriction_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.18 program review.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.18:restriction_program_review"
+target_control: "Art.18"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.18:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [restriction, program, review, date]
+      - [art, 18, program, reviewed]
+
+  - must_id: "item:Art.18:rev_reviewer"
+    description: "Reviewer identity (DPO + ops lead)"
+    excerpt_keywords:
+      - [restriction, reviewed, by, dpo]
+      - [restriction, program, reviewer]
+
+  - must_id: "item:Art.18:rev_active_restrictions"
+    description: "Active-restrictions check"
+    excerpt_keywords:
+      - [active, restriction, ground, valid]
+      - [art, 18, 1, ground, still, valid]
+      - [active, restriction, audit]
+
+  - must_id: "item:Art.18:rev_exception_compliance"
+    description: "Exception compliance"
+    excerpt_keywords:
+      - ["Art.18.2"]
+      - [art, 18, 2, exception, compliance]
+      - [restricted, records, used, per, exception]
+
+  - must_id: "item:Art.18:rev_art19_compliance"
+    description: "Art.19 notification compliance"
+    excerpt_keywords:
+      - ["Art.19"]
+      - [art, 19, notification, audit]
+      - [restriction, recipient, notification, fired]

@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:Art.21:objection_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.21 procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.21:objection_procedure"
+target_control: "Art.21"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.21:intake_channel"
+    description: "Intake channel via Art.12 procedure"
+    excerpt_keywords:
+      - ["Art.12"]
+      - [art, 21, objection, intake]
+      - [objection, rights, portal]
+
+  - must_id: "item:Art.21:explicit_notice"
+    description: "Right is explicitly drawn to subject's attention (Art.21.4)"
+    excerpt_keywords:
+      - ["Art.21.4"]
+      - [art, 21, 4, explicit, notice]
+      - [right, drawn, attention, first, communication]
+
+  - must_id: "item:Art.21:legitimate_interests_balance"
+    description: "Legitimate-interests objection — balancing test"
+    excerpt_keywords:
+      - [art, 21, balancing, test]
+      - [compelling, legitimate, grounds]
+      - [art, 21, legitimate, interest, balance]
+
+  - must_id: "item:Art.21:direct_marketing_absolute"
+    description: "Direct marketing objection — absolute right (Art.21.3)"
+    excerpt_keywords:
+      - ["Art.21.3"]
+      - [direct, marketing, absolute, right]
+      - [direct, marketing, immediate, cessation]
+
+  - must_id: "item:Art.21:scientific_research"
+    description: "Scientific-research / statistical-purposes overlay (Art.21.6)"
+    excerpt_keywords:
+      - ["Art.21.6"]
+      - [art, 21, 6, scientific, research]
+      - [public, interest, task, derogation]
+
+  - must_id: "item:Art.21:response_deadline"
+    description: "One-month response deadline"
+    excerpt_keywords:
+      - [art, 21, one, month, deadline]
+      - [art, 21, response, sla]

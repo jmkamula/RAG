@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:Art.6:lawful_basis_determination_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.6 procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.6:lawful_basis_determination_procedure"
+target_control: "Art.6"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.6:proc_basis_catalog"
+    description: "Catalog of the 6 Art.6.1 bases with practical examples"
+    excerpt_keywords:
+      - [lawful, basis, catalog]
+      - ["Art.6.1"]
+      - [six, lawful, bases]
+      - [lawful, basis, selection, guide]
+
+  - must_id: "item:Art.6:proc_decision_inputs"
+    description: "Decision inputs documented"
+    excerpt_keywords:
+      - [lawful, basis, decision, inputs]
+      - [activity, purpose, basis, decision]
+      - [data, minimisation, basis, decision]
+
+  - must_id: "item:Art.6:proc_decision_authority"
+    description: "Decision authority stated"
+    excerpt_keywords:
+      - [lawful, basis, decision, authority]
+      - [dpo, approves, lawful, basis]
+      - [privacy, lead, approves, basis]
+
+  - must_id: "item:Art.6:proc_change_trigger"
+    description: "Trigger list for re-evaluating the basis"
+    excerpt_keywords:
+      - [lawful, basis, re, evaluation, trigger]
+      - [purpose, change, lawful, basis]
+      - [regulator, guidance, lawful, basis]

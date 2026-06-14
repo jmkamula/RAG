@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:Art.18:applicable_grounds_scope
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.18 scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.18:applicable_grounds_scope"
+target_control: "Art.18"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.18:scope_grounds_catalog"
+    description: "Art.18.1 grounds catalog (a-d)"
+    excerpt_keywords:
+      - ["Art.18.1"]
+      - [art, 18, 1, grounds, catalog]
+      - [restriction, grounds, scope]
+
+  - must_id: "item:Art.18:scope_art18_2_exceptions"
+    description: "Art.18.2 exceptions enumerated"
+    excerpt_keywords:
+      - ["Art.18.2"]
+      - [art, 18, 2, exceptions]
+      - [restriction, subject, consent, exception]
+      - [restriction, legal, claims, exception]
+
+  - must_id: "item:Art.18:scope_data_classes"
+    description: "Data classes covered"
+    excerpt_keywords:
+      - [restriction, data, classes, scope]
+      - [restriction, flag, partition, lock]
+      - [restriction, implementation, pattern]

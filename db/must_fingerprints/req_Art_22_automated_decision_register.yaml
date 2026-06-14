@@ -1,0 +1,46 @@
+# Per-MUST fingerprint catalog for req:Art.22:automated_decision_register
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.22 automated decision register.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.22:automated_decision_register"
+target_control: "Art.22"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.22:reg_system_id"
+    description: "System / model identifier per row"
+    excerpt_keywords:
+      - [art, 22, automated, decision, register]
+      - [automated, decision, system, id]
+      - [model, id, art, 22]
+
+  - must_id: "item:Art.22:reg_decisions_made"
+    description: "Decision categories made"
+    excerpt_keywords:
+      - [art, 22, decision, categories]
+      - [loan, approval, automated]
+      - [employment, screening, automated]
+      - [pricing, decision, automated]
+
+  - must_id: "item:Art.22:reg_art22_2_basis"
+    description: "Art.22.2 basis cited per row"
+    excerpt_keywords:
+      - ["Art.22.2"]
+      - [art, 22, 2, basis, per]
+      - [art, 22, 2, contract, ms, explicit]
+
+  - must_id: "item:Art.22:reg_safeguards"
+    description: "Per-row Art.22.3 safeguards in place"
+    excerpt_keywords:
+      - ["Art.22.3"]
+      - [art, 22, 3, safeguards, per]
+      - [human, intervention, queue, per]
+      - [model, explanation, per, system]
+
+  - must_id: "item:Art.22:reg_dpia_link"
+    description: "Per-row DPIA reference"
+    excerpt_keywords:
+      - ["Art.35"]
+      - [art, 22, dpia, reference]
+      - [dpia, per, automated, system]

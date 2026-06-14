@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:Art.6:applicable_activities_scope
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.6 scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.6:applicable_activities_scope"
+target_control: "Art.6"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.6:scope_ropa_link"
+    description: "Link to Art.30 RoPA"
+    excerpt_keywords:
+      - ["Art.30"]
+      - [ropa, lawful, basis, link]
+      - [ropa, art, 6, basis]
+
+  - must_id: "item:Art.6:scope_member_state"
+    description: "Member State law overlay"
+    excerpt_keywords:
+      - ["Art.6.2"]
+      - ["Art.6.3"]
+      - [member, state, derogation, lawful]
+      - [member, state, specification, lawful]
+
+  - must_id: "item:Art.6:scope_special_overlay"
+    description: "Special category overlay rule"
+    excerpt_keywords:
+      - ["Art.9"]
+      - [art, 9, condition, plus, basis]
+      - [special, category, art, 6, overlay]

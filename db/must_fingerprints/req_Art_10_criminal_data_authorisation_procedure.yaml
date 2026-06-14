@@ -1,0 +1,43 @@
+# Per-MUST fingerprint catalog for req:Art.10:criminal_data_authorisation_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.10 procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.10:criminal_data_authorisation_procedure"
+target_control: "Art.10"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.10:proc_legal_basis_check"
+    description: "Legal-basis verification step"
+    excerpt_keywords:
+      - [criminal, data, legal, basis, check]
+      - [official, authority, verified, criminal]
+      - [member, state, authorisation, criminal]
+
+  - must_id: "item:Art.10:proc_member_state_law"
+    description: "Member State law identified per applicable jurisdiction"
+    excerpt_keywords:
+      - [member, state, law, criminal, identified]
+      - [ms, authorisation, criminal, route]
+
+  - must_id: "item:Art.10:proc_safeguards"
+    description: "Safeguards required by Art.10"
+    excerpt_keywords:
+      - [art, 10, safeguards]
+      - [criminal, retention, limit, ms]
+      - [criminal, access, restriction, safeguard]
+
+  - must_id: "item:Art.10:proc_comprehensive_register"
+    description: "Restriction — comprehensive register only under official authority"
+    excerpt_keywords:
+      - [comprehensive, criminal, register]
+      - [official, authority, comprehensive, register]
+      - [criminal, convictions, register, official]
+
+  - must_id: "item:Art.10:proc_approval"
+    description: "Approval authority for any criminal-data activity"
+    excerpt_keywords:
+      - [dpo, criminal, data, approval]
+      - [criminal, data, executive, sponsor]
+      - [criminal, data, legal, counsel, approval]

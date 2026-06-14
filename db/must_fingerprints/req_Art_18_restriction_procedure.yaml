@@ -1,0 +1,51 @@
+# Per-MUST fingerprint catalog for req:Art.18:restriction_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.18 restriction procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.18:restriction_procedure"
+target_control: "Art.18"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.18:intake_channel"
+    description: "Intake channel via Art.12 procedure"
+    excerpt_keywords:
+      - ["Art.12"]
+      - [restriction, request, intake]
+      - [restriction, rights, portal]
+
+  - must_id: "item:Art.18:grounds_assessment"
+    description: "Assessment of which Art.18.1 ground applies"
+    excerpt_keywords:
+      - ["Art.18.1"]
+      - [art, 18, 1, ground, assessment]
+      - [restriction, ground, per, request]
+
+  - must_id: "item:Art.18:restriction_mechanism"
+    description: "Technical restriction mechanism"
+    excerpt_keywords:
+      - [restriction, flag, data, store]
+      - [restriction, restricted, partition]
+      - [restriction, access, lock]
+
+  - must_id: "item:Art.18:response_deadline"
+    description: "One-month response deadline"
+    excerpt_keywords:
+      - [restriction, one, month, deadline]
+      - [restriction, response, sla]
+      - [art, 18, response, deadline]
+
+  - must_id: "item:Art.18:lift_communication"
+    description: "Pre-lift communication to subject (Art.18.3)"
+    excerpt_keywords:
+      - ["Art.18.3"]
+      - [restriction, pre, lift, communication]
+      - [restriction, lift, subject, notice]
+
+  - must_id: "item:Art.18:recipient_notification"
+    description: "Notification to recipients per Art.19"
+    excerpt_keywords:
+      - ["Art.19"]
+      - [restriction, recipient, notification]
+      - [restriction, art, 19, notification]
