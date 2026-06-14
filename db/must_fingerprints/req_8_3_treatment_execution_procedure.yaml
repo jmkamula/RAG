@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:8.3:treatment_execution_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 8.3 treatment execution.
+
+schema_version: 1
+target_evidence_requirement: "req:8.3:treatment_execution_procedure"
+target_control: "8.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:8.3:proc_assignment"
+    description: "Assignment rules"
+    excerpt_keywords:
+      - [treatment, item, assignment]
+      - [treatment, lands, with, owner]
+      - [treatment, item, operational, owner]
+
+  - must_id: "item:8.3:proc_status_cadence"
+    description: "Status-reporting cadence"
+    excerpt_keywords:
+      - [treatment, status, reporting, cadence]
+      - [treatment, monthly, status]
+      - [risk, treatment, status, reporting]
+
+  - must_id: "item:8.3:proc_escalation"
+    description: "Escalation rule when items slip past target date"
+    excerpt_keywords:
+      - [treatment, escalation, rule]
+      - [treatment, slip, past, target]
+      - [risk, treatment, escalation]
+
+  - must_id: "item:8.3:proc_residual_revisit"
+    description: "Residual-risk re-acceptance pathway"
+    excerpt_keywords:
+      - ["6.1.3"]
+      - [residual, risk, re, acceptance]
+      - [residual, divergence, risk, owner]
+      - [residual, risk, revisit]

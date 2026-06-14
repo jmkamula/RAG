@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:8.2:operational_risk_assessment_record
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 8.2 operational risk assessment.
+
+schema_version: 1
+target_evidence_requirement: "req:8.2:operational_risk_assessment_record"
+target_control: "8.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:8.2:planned_interval"
+    description: "Planned interval observed"
+    excerpt_keywords:
+      - [operational, risk, assessment, planned, interval]
+      - [risk, assessment, planned, interval]
+      - [annual, risk, assessment, interval]
+
+  - must_id: "item:8.2:significant_change"
+    description: "Significant-change trigger for ad-hoc reassessments"
+    excerpt_keywords:
+      - [significant, change, risk, reassessment]
+      - [ad, hoc, risk, assessment, trigger]
+      - [significant, change, trigger, documented]
+
+  - must_id: "item:8.2:criteria_applied"
+    description: "Criteria from 6.1.2 a) applied"
+    excerpt_keywords:
+      - ["6.1.2"]
+      - [risk, criteria, applied, assessment]
+      - [risk, assessment, criteria, methodology]
+
+  - must_id: "item:8.2:results_documented"
+    description: "Results documented and retained"
+    excerpt_keywords:
+      - [operational, risk, assessment, results, retained]
+      - [risk, assessment, results, documented]
+
+  - must_id: "item:8.2:last_assessment"
+    description: "Last assessment date recorded"
+    excerpt_keywords:
+      - [operational, risk, last, assessment, date]
+      - [risk, assessment, last, conducted, on]
+
+  - must_id: "item:8.2:owner"
+    description: "Per-assessment owner"
+    excerpt_keywords:
+      - [risk, manager, assessment, owner]
+      - [function, risk, owner, assessment]
+      - [operational, risk, assessment, owner]

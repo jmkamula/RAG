@@ -1,0 +1,58 @@
+# Per-MUST fingerprint catalog for req:5.2:information_security_policy
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 5.2 ISP document.
+
+schema_version: 1
+target_evidence_requirement: "req:5.2:information_security_policy"
+target_control: "5.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:5.2:purpose"
+    description: "Appropriate to the purpose of the organisation"
+    excerpt_keywords:
+      - [isp, purpose, organisation]
+      - [policy, appropriate, to, purpose]
+      - [isp, organisational, purpose]
+
+  - must_id: "item:5.2:objectives"
+    description: "Information security objectives or framework"
+    excerpt_keywords:
+      - [information, security, objectives]
+      - [isp, objectives, framework]
+      - [isms, objectives, stated]
+
+  - must_id: "item:5.2:commitment_req"
+    description: "Commitment to satisfy applicable requirements"
+    excerpt_keywords:
+      - [commitment, applicable, requirements]
+      - [isp, satisfy, requirements]
+      - [legal, regulatory, commitment]
+
+  - must_id: "item:5.2:commitment_imp"
+    description: "Commitment to continual improvement of the ISMS"
+    excerpt_keywords:
+      - [continual, improvement, isms]
+      - [isp, continual, improvement]
+      - [isms, improvement, commitment]
+
+  - must_id: "item:5.2:approved"
+    description: "Approved by top management"
+    excerpt_keywords:
+      - [isp, approved, top, management]
+      - [top, management, approved]
+      - [board, approved, isp]
+
+  - must_id: "item:5.2:communicated"
+    description: "Communicated within the organisation"
+    excerpt_keywords:
+      - [isp, communicated, organisation]
+      - [isp, available, to, interested, parties]
+      - [isp, distributed]
+
+  - must_id: "item:5.2:owner"
+    description: "Named owner of the policy"
+    excerpt_keywords:
+      - [isp, owner, isms, manager]
+      - [isp, document, owner]
+      - [isms, manager, isp]

@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:8.3:treatment_execution_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 8.3 program review.
+
+schema_version: 1
+target_evidence_requirement: "req:8.3:treatment_execution_program_review"
+target_control: "8.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:8.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [treatment, program, review, date]
+      - [treatment, reviewed, on]
+
+  - must_id: "item:8.3:rev_reviewer"
+    description: "Reviewer identity (Risk Manager + ISMS Manager + ops lead)"
+    excerpt_keywords:
+      - [treatment, reviewed, by]
+      - [risk, manager, isms, treatment, review]
+
+  - must_id: "item:8.3:rev_progress"
+    description: "Progress check"
+    excerpt_keywords:
+      - [treatment, progress, check]
+      - [treatment, on, track, slipping]
+      - [treatment, item, status, update]
+
+  - must_id: "item:8.3:rev_residual_revisit"
+    description: "Residual revisit check"
+    excerpt_keywords:
+      - [treatment, residual, revisit]
+      - [residual, divergence, treatment]
+      - [residual, escalation]
+
+  - must_id: "item:8.3:rev_soa_currency"
+    description: "SoA currency check"
+    excerpt_keywords:
+      - [soa, currency, check]
+      - [statement, of, applicability, currency]
+      - [newly, implemented, control, soa]

@@ -1,0 +1,30 @@
+# Per-MUST fingerprint catalog for req:6.3:applicable_change_types_scope
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 6.3 scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:6.3:applicable_change_types_scope"
+target_control: "6.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:6.3:scope_in_scope_types"
+    description: "ISMS-level change types enumerated"
+    excerpt_keywords:
+      - [isms, change, scope, types]
+      - [isms, scope, policy, manual, types]
+      - [isms, risk, criteria, change, scope]
+
+  - must_id: "item:6.3:scope_a832_boundary"
+    description: "Boundary with A.8.32"
+    excerpt_keywords:
+      - ["A.8.32"]
+      - [isms, change, a832, boundary]
+      - [technical, ict, change, boundary]
+
+  - must_id: "item:6.3:scope_thresholds"
+    description: "Threshold rules"
+    excerpt_keywords:
+      - [isms, change, threshold]
+      - [isms, significant, enough]
+      - [isms, change, planning, threshold]

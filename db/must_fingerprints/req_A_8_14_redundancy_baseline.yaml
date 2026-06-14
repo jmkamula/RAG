@@ -1,0 +1,47 @@
+# Per-MUST fingerprint catalog for req:A.8.14:redundancy_baseline
+#
+# Reviewed-from-skeleton 2026-06-14. Redundancy config baseline.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.14:redundancy_baseline"
+target_control: "A.8.14"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.14:bl_critical_services"
+    description: "Critical services enumerated with availability requirement"
+    excerpt_keywords:
+      - ["A.5.30"]
+      - [critical, services, availability]
+      - [bia, critical, services]
+      - [availability, requirement, per, service]
+
+  - must_id: "item:A.8.14:bl_redundancy_approach"
+    description: "Redundancy approach per service"
+    excerpt_keywords:
+      - [active, active, redundancy]
+      - [active, passive, redundancy]
+      - [cold, standby]
+      - [multi, region, redundancy]
+
+  - must_id: "item:A.8.14:bl_cross_az"
+    description: "Cross-AZ / cross-region distribution for cloud-hosted services"
+    excerpt_keywords:
+      - [cross, az, distribution]
+      - [cross, region, distribution]
+      - [multi, az, deployment]
+      - [single, az, insufficient]
+
+  - must_id: "item:A.8.14:bl_monitoring"
+    description: "Monitoring of redundant components"
+    excerpt_keywords:
+      - [redundancy, monitoring]
+      - [redundant, component, monitoring]
+      - [silent, single, point, loss]
+
+  - must_id: "item:A.8.14:bl_sla_implications"
+    description: "SLA implications documented"
+    excerpt_keywords:
+      - [redundancy, sla, implication]
+      - [tenant, availability, promised]
+      - [single, instance, sla]

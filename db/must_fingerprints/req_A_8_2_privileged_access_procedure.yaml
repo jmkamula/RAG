@@ -1,0 +1,52 @@
+# Per-MUST fingerprint catalog for req:A.8.2:privileged_access_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Privileged access procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.2:privileged_access_procedure"
+target_control: "A.8.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.2:proc_authorisation"
+    description: "Formal authorisation process before privileged access is granted"
+    excerpt_keywords:
+      - [privileged, access, authorisation]
+      - [privileged, granted, formal, authorisation]
+      - [admin, access, authorisation]
+
+  - must_id: "item:A.8.2:proc_need_to_use"
+    description: "Privileged access granted on need-to-use, event-by-event basis"
+    excerpt_keywords:
+      - [need, to, use, privileged]
+      - [event, by, event, privileged]
+      - [privileged, only, when, needed]
+
+  - must_id: "item:A.8.2:proc_separate_accounts"
+    description: "Separate accounts mandated for administrative actions"
+    excerpt_keywords:
+      - [separate, admin, account]
+      - [admin, account, distinct]
+      - [daily, use, vs, admin, account]
+      - [separate, privileged, account]
+
+  - must_id: "item:A.8.2:proc_expiry"
+    description: "Expiry rules defined for privileged access rights"
+    excerpt_keywords:
+      - [privileged, access, expiry]
+      - [admin, access, expiry, rule]
+      - [time, limited, privileged]
+
+  - must_id: "item:A.8.2:proc_accountability"
+    description: "Users acknowledge accountability for their privileged access"
+    excerpt_keywords:
+      - [privileged, accountability, acknowledgement]
+      - [admin, acceptable, use, signed]
+      - [privileged, user, signed, accountability]
+
+  - must_id: "item:A.8.2:proc_break_glass"
+    description: "Break-glass account governance"
+    excerpt_keywords:
+      - [break, glass, account]
+      - [sealed, credentials, emergency]
+      - [break, glass, post, use, review]

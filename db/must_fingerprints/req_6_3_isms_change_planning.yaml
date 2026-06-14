@@ -1,0 +1,44 @@
+# Per-MUST fingerprint catalog for req:6.3:isms_change_planning
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 6.3 change planning procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:6.3:isms_change_planning"
+target_control: "6.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:6.3:change_identification"
+    description: "Identification trigger for ISMS-level changes"
+    excerpt_keywords:
+      - [isms, change, identification]
+      - [isms, scope, change, trigger]
+      - [isms, policy, change, identified]
+
+  - must_id: "item:6.3:planning_required"
+    description: "Planning required before significant changes"
+    excerpt_keywords:
+      - [isms, change, planning, required]
+      - [isms, significant, change, planning]
+      - [isms, change, consequence, planning]
+
+  - must_id: "item:6.3:impact_consideration"
+    description: "Consideration of impact on ISMS effectiveness"
+    excerpt_keywords:
+      - [isms, change, impact]
+      - [isms, effectiveness, impact, change]
+      - [isms, change, integrity, considered]
+
+  - must_id: "item:6.3:approval"
+    description: "Approval authority before implementation"
+    excerpt_keywords:
+      - [isms, change, approval]
+      - [isms, change, approved, before, implementation]
+      - [isms, change, authority]
+
+  - must_id: "item:6.3:comms"
+    description: "Communication of the change to affected stakeholders"
+    excerpt_keywords:
+      - ["7.4"]
+      - [isms, change, communicated]
+      - [isms, change, stakeholder, communication]

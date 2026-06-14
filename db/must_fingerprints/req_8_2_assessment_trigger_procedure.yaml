@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:8.2:assessment_trigger_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 8.2 trigger procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:8.2:assessment_trigger_procedure"
+target_control: "8.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:8.2:proc_cadence"
+    description: "Planned-interval cadence stated per risk tier"
+    excerpt_keywords:
+      - [operational, risk, cadence, per, tier]
+      - [risk, assessment, annual, semi, annual]
+      - [risk, assessment, planned, interval, tier]
+
+  - must_id: "item:8.2:proc_change_catalog"
+    description: "Catalog of significant changes that trigger reassessment"
+    excerpt_keywords:
+      - [significant, change, catalog, reassessment]
+      - [risk, reassessment, trigger, catalog]
+      - [m, and, a, risk, trigger]
+
+  - must_id: "item:8.2:proc_invocation"
+    description: "Invocation path"
+    excerpt_keywords:
+      - [risk, reassessment, invocation]
+      - [risk, assessment, requested, approved]
+      - [risk, assessment, scheduled, change, driven]
+
+  - must_id: "item:8.2:proc_link_to_6_1_2"
+    description: "Link to the 6.1.2 procedure"
+    excerpt_keywords:
+      - ["6.1.2"]
+      - [risk, methodology, link, 612]
+      - [operational, risk, uses, 612]

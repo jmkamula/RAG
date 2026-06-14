@@ -1,0 +1,41 @@
+# Per-MUST fingerprint catalog for req:A.8.14:failover_test_register
+#
+# Reviewed-from-skeleton 2026-06-14. Failover test register.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.14:failover_test_register"
+target_control: "A.8.14"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.14:reg_test_id"
+    description: "Per-test unique identifier"
+    excerpt_keywords:
+      - [failover, test, id]
+      - [failover, test, register, id]
+
+  - must_id: "item:A.8.14:reg_service"
+    description: "Per-test service tested"
+    excerpt_keywords:
+      - [failover, service, tested, column]
+      - [failover, target, service]
+
+  - must_id: "item:A.8.14:reg_date"
+    description: "Per-test date"
+    excerpt_keywords:
+      - [failover, test, date]
+      - [failover, tested, on]
+
+  - must_id: "item:A.8.14:reg_type"
+    description: "Per-test type"
+    excerpt_keywords:
+      - [planned, drill, failover]
+      - [unplanned, real, failover]
+      - [fault, injection, failover]
+
+  - must_id: "item:A.8.14:reg_outcome"
+    description: "Per-test outcome + actual recovery time"
+    excerpt_keywords:
+      - [failover, outcome]
+      - [failover, success, partial, failure]
+      - [failover, recovery, time, vs, target]

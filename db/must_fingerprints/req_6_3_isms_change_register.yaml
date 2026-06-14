@@ -1,0 +1,48 @@
+# Per-MUST fingerprint catalog for req:6.3:isms_change_register
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 6.3 change register.
+
+schema_version: 1
+target_evidence_requirement: "req:6.3:isms_change_register"
+target_control: "6.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:6.3:reg_change_id"
+    description: "Unique change identifier per row"
+    excerpt_keywords:
+      - [isms, change, register, id]
+      - [isms, change, id, column]
+
+  - must_id: "item:6.3:reg_change_type"
+    description: "Per-row change type"
+    excerpt_keywords:
+      - [isms, change, type, column]
+      - [isms, scope, policy, manual, change]
+      - [isms, roles, risk, criteria, change]
+
+  - must_id: "item:6.3:reg_trigger"
+    description: "Per-row trigger stated"
+    excerpt_keywords:
+      - [isms, change, trigger, column]
+      - [isms, audit, finding, change]
+      - [isms, regulator, change, trigger]
+
+  - must_id: "item:6.3:reg_impact_summary"
+    description: "Per-row impact summary recorded"
+    excerpt_keywords:
+      - [isms, change, impact, summary, column]
+      - [isms, change, impact, recorded]
+
+  - must_id: "item:6.3:reg_approval"
+    description: "Per-row approval signature + date"
+    excerpt_keywords:
+      - [isms, change, approval, column]
+      - [isms, change, signature, date]
+
+  - must_id: "item:6.3:reg_status"
+    description: "Per-row status"
+    excerpt_keywords:
+      - [isms, change, status, column]
+      - [isms, change, proposed, approved, implemented]
+      - [isms, change, withdrawn, status]

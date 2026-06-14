@@ -1,0 +1,57 @@
+# Per-MUST fingerprint catalog for req:9.3:management_review
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 9.3 management review minutes.
+
+schema_version: 1
+target_evidence_requirement: "req:9.3:management_review"
+target_control: "9.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:9.3:approved"
+    description: "Approved by top management attendee"
+    excerpt_keywords:
+      - [management, review, approved, top, management]
+      - [management, review, top, attendee, signed]
+
+  - must_id: "item:9.3:audit_results"
+    description: "Internal audit results included"
+    excerpt_keywords:
+      - ["9.2"]
+      - [internal, audit, results, in, review]
+      - [management, review, audit, included]
+
+  - must_id: "item:9.3:nonconf"
+    description: "Nonconformities and corrective actions status"
+    excerpt_keywords:
+      - [management, review, nonconformities]
+      - [management, review, corrective, action, status]
+      - ["10.1"]
+
+  - must_id: "item:9.3:monitoring"
+    description: "Monitoring and measurement results"
+    excerpt_keywords:
+      - [management, review, monitoring, results]
+      - [management, review, measurement, results]
+      - ["9.1"]
+
+  - must_id: "item:9.3:objectives"
+    description: "Progress toward information security objectives"
+    excerpt_keywords:
+      - [management, review, objectives]
+      - [management, review, progress, objectives]
+      - [isms, objectives, status]
+
+  - must_id: "item:9.3:interested"
+    description: "Feedback from interested parties"
+    excerpt_keywords:
+      - [management, review, interested, parties]
+      - [management, review, stakeholder, feedback]
+      - [external, party, feedback, isms]
+
+  - must_id: "item:9.3:decisions"
+    description: "Decisions and actions recorded"
+    excerpt_keywords:
+      - [management, review, decisions]
+      - [management, review, actions, recorded]
+      - [management, review, outputs]

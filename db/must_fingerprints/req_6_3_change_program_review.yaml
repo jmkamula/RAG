@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:6.3:change_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 6.3 program review.
+
+schema_version: 1
+target_evidence_requirement: "req:6.3:change_program_review"
+target_control: "6.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:6.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [isms, change, program, review, date]
+      - [isms, change, reviewed, on]
+
+  - must_id: "item:6.3:rev_reviewer"
+    description: "Reviewer identity (ISMS Manager + change-management lead)"
+    excerpt_keywords:
+      - [isms, change, reviewed, by]
+      - [change, management, lead, isms]
+
+  - must_id: "item:6.3:rev_register_currency"
+    description: "Register currency check"
+    excerpt_keywords:
+      - [isms, change, register, currency]
+      - [isms, change, reached, implementation]
+      - [isms, change, withdrawn]
+
+  - must_id: "item:6.3:rev_boundary_check"
+    description: "A.8.32 boundary check"
+    excerpt_keywords:
+      - ["A.8.32"]
+      - [isms, change, boundary, check]
+      - [technical, change, mis, routed]
+
+  - must_id: "item:6.3:rev_silent_changes"
+    description: "Silent-change sweep"
+    excerpt_keywords:
+      - [isms, silent, change, sweep]
+      - [no, register, entry, change]
+      - [isms, scope, change, without, register]

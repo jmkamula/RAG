@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:5.2:isp_communication_evidence
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 5.2 communication evidence.
+
+schema_version: 1
+target_evidence_requirement: "req:5.2:isp_communication_evidence"
+target_control: "5.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:5.2:com_audience"
+    description: "Audience coverage stated"
+    excerpt_keywords:
+      - [isp, audience, coverage]
+      - [isp, employees, contractors, third]
+      - [isp, distributed, to, all]
+
+  - must_id: "item:5.2:com_channels"
+    description: "Distribution channels stated"
+    excerpt_keywords:
+      - [isp, intranet, distribution]
+      - [isp, onboarding, pack]
+      - [isp, signed, acknowledgement, channel]
+
+  - must_id: "item:5.2:com_acknowledgement"
+    description: "Acknowledgement record"
+    excerpt_keywords:
+      - [isp, signed, receipt]
+      - [isp, training, completion]
+      - [isp, acknowledgement, record]
+
+  - must_id: "item:5.2:com_refresher"
+    description: "Refresher cadence"
+    excerpt_keywords:
+      - [isp, annual, re, acknowledgement]
+      - [isp, refresher, cadence]
+      - [isp, on, policy, update, re, ack]

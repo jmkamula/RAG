@@ -1,0 +1,53 @@
+# Per-MUST fingerprint catalog for req:A.6.7:remote_working_policy
+#
+# Reviewed-from-skeleton 2026-06-14. Remote working policy.
+
+schema_version: 1
+target_evidence_requirement: "req:A.6.7:remote_working_policy"
+target_control: "A.6.7"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.6.7:equipment"
+    description: "Approved equipment for remote working"
+    excerpt_keywords:
+      - [approved, remote, equipment]
+      - [corporate, laptop, remote]
+      - [remote, working, hardware]
+      - [byod, remote, working]
+
+  - must_id: "item:A.6.7:network"
+    description: "Network security requirements (VPN etc.)"
+    excerpt_keywords:
+      - [vpn, remote, working]
+      - [remote, network, security]
+      - [secure, network, remote]
+      - [home, network, remote]
+
+  - must_id: "item:A.6.7:physical"
+    description: "Physical security at remote location"
+    excerpt_keywords:
+      - [physical, security, remote, location]
+      - [remote, physical, security]
+      - [home, office, physical, security]
+
+  - must_id: "item:A.6.7:access"
+    description: "Access control requirements"
+    excerpt_keywords:
+      - [remote, access, control]
+      - [remote, working, access]
+      - [remote, authentication, requirement]
+
+  - must_id: "item:A.6.7:personal_data"
+    description: "Handling of personal data when working remotely"
+    excerpt_keywords:
+      - [personal, data, remote, working]
+      - [pii, remote, working]
+      - [remote, personal, data, handling]
+
+  - must_id: "item:A.6.7:reporting"
+    description: "Incident reporting when working remotely"
+    excerpt_keywords:
+      - [remote, incident, reporting]
+      - [remote, working, incident, report]
+      - [report, incident, while, remote]

@@ -1,0 +1,44 @@
+# Per-MUST fingerprint catalog for req:A.8.14:failover_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Failover procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.14:failover_procedure"
+target_control: "A.8.14"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.14:proc_runbook"
+    description: "Per-service failover runbook"
+    excerpt_keywords:
+      - [failover, runbook]
+      - [failover, steps, per, service]
+      - [failover, validation, checks]
+
+  - must_id: "item:A.8.14:proc_failover_authority"
+    description: "Failover invocation authority per service"
+    excerpt_keywords:
+      - [failover, authority]
+      - [automated, vs, manual, failover]
+      - [on, call, failover, authority]
+
+  - must_id: "item:A.8.14:proc_communications"
+    description: "Stakeholder communications during failover"
+    excerpt_keywords:
+      - [failover, status, page]
+      - [failover, customer, notification]
+      - [failover, communication, plan]
+
+  - must_id: "item:A.8.14:proc_failback"
+    description: "Failback procedure"
+    excerpt_keywords:
+      - [failback, procedure]
+      - [return, to, primary, after, recovery]
+      - [failback, more, risky]
+
+  - must_id: "item:A.8.14:proc_a530_link"
+    description: "Cross-link to A.5.30 ICT readiness"
+    excerpt_keywords:
+      - ["A.5.30"]
+      - [failover, ict, readiness, link]
+      - [failover, broader, recovery, plan]

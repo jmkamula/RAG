@@ -1,0 +1,30 @@
+# Per-MUST fingerprint catalog for req:9.3:applicable_inputs_outputs_scope
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 9.3 scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:9.3:applicable_inputs_outputs_scope"
+target_control: "9.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:9.3:scope_required_inputs"
+    description: "Required inputs enumerated per clause 9.3.2 a-g"
+    excerpt_keywords:
+      - [management, review, required, inputs]
+      - [9, 3, 2, a, g, inputs]
+      - [management, review, mandatory, inputs]
+
+  - must_id: "item:9.3:scope_optional_inputs"
+    description: "Optional / organisation-determined inputs"
+    excerpt_keywords:
+      - [management, review, optional, inputs]
+      - [management, review, sectoral, threat, intel]
+      - [management, review, m, and, a, pipeline]
+
+  - must_id: "item:9.3:scope_output_types"
+    description: "Output types in scope"
+    excerpt_keywords:
+      - [management, review, output, types]
+      - [management, review, improvement, opportunities]
+      - [management, review, isms, changes, output]

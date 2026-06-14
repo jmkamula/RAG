@@ -1,0 +1,59 @@
+# Per-MUST fingerprint catalog for req:A.8.2:privileged_access_recertification
+#
+# Reviewed-from-skeleton 2026-06-14. Privileged-access recertification review.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.2:privileged_access_recertification"
+target_control: "A.8.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.2:rc_date"
+    description: "Recertification date within the planned interval"
+    excerpt_keywords:
+      - [privileged, recertification, date]
+      - [privileged, access, recertified, on]
+      - [180, day, privileged, recert]
+
+  - must_id: "item:A.8.2:rc_reviewer"
+    description: "Reviewer identity (asset owner or delegated authority)"
+    excerpt_keywords:
+      - [privileged, recertified, by]
+      - [asset, owner, privileged, recert]
+      - [privileged, recert, reviewer]
+
+  - must_id: "item:A.8.2:rc_per_account"
+    description: "Per-privileged-account outcome"
+    excerpt_keywords:
+      - [privileged, account, re, confirmed]
+      - [privileged, account, amended]
+      - [privileged, account, revoked]
+      - [per, privileged, account, outcome]
+
+  - must_id: "item:A.8.2:rc_role_change_trigger"
+    description: "Role-change events trigger ad-hoc recertification"
+    excerpt_keywords:
+      - [role, change, privileged, recert]
+      - [ad, hoc, privileged, recertification]
+      - [privileged, recert, trigger, role, change]
+
+  - must_id: "item:A.8.2:rc_sla_met"
+    description: "Revocation-actions-within-SLA flag per row"
+    excerpt_keywords:
+      - [privileged, sla, met]
+      - [privileged, revocation, sla]
+      - [privileged, sla, breach]
+
+  - must_id: "item:A.8.2:rc_actions"
+    description: "Revocation/modification actions completed"
+    excerpt_keywords:
+      - [privileged, recert, action, completed]
+      - [privileged, access, revoked, action]
+      - [privileged, recert, action, items]
+
+  - must_id: "item:A.8.2:rc_a518_pairing"
+    description: "Cross-link to A.5.18 general access review"
+    excerpt_keywords:
+      - ["A.5.18"]
+      - [privileged, paired, general, access]
+      - [no, orphan, privileged]

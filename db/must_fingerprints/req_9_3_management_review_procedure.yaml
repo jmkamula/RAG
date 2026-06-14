@@ -1,0 +1,44 @@
+# Per-MUST fingerprint catalog for req:9.3:management_review_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 9.3 procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:9.3:management_review_procedure"
+target_control: "9.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:9.3:proc_cadence"
+    description: "Cadence stated"
+    excerpt_keywords:
+      - [management, review, cadence]
+      - [management, review, annual, minimum]
+      - [management, review, trigger, based]
+
+  - must_id: "item:9.3:proc_attendees"
+    description: "Required attendees listed"
+    excerpt_keywords:
+      - [management, review, attendees]
+      - [management, review, top, management, attendees]
+      - [management, review, isms, manager]
+
+  - must_id: "item:9.3:proc_agenda"
+    description: "Agenda template covering all 9.3.2 a-g inputs"
+    excerpt_keywords:
+      - [management, review, agenda, template]
+      - [management, review, 9, 3, 2, inputs]
+
+  - must_id: "item:9.3:proc_input_gathering"
+    description: "Input-gathering process"
+    excerpt_keywords:
+      - [management, review, input, gathering]
+      - [management, review, pre, meeting, inputs]
+      - [management, review, inputs, deadline]
+
+  - must_id: "item:9.3:proc_output_tracking"
+    description: "Output-tracking process"
+    excerpt_keywords:
+      - ["10.1"]
+      - ["10.2"]
+      - [management, review, output, tracking]
+      - [management, review, decisions, into, improvement]

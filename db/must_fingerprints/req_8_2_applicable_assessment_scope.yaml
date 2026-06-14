@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:8.2:applicable_assessment_scope
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 8.2 scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:8.2:applicable_assessment_scope"
+target_control: "8.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:8.2:scope_asset_classes"
+    description: "Asset/process classes in scope for operational assessment"
+    excerpt_keywords:
+      - [operational, risk, asset, scope]
+      - [production, systems, risk, scope]
+      - [data, flows, risk, scope]
+      - [supplier, integration, risk, scope]
+
+  - must_id: "item:8.2:scope_per_class_tier"
+    description: "Risk tier per asset class drives cadence"
+    excerpt_keywords:
+      - [risk, tier, per, asset, class]
+      - [operational, risk, tier]
+      - [risk, based, cadence]
+
+  - must_id: "item:8.2:scope_exclusions"
+    description: "Out-of-scope classes (test/dev environments)"
+    excerpt_keywords:
+      - [test, dev, risk, scope, exclusion]
+      - [risk, scope, exclusion, operational]
+      - ["6.1.2"]

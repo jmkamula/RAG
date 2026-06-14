@@ -1,0 +1,46 @@
+# Per-MUST fingerprint catalog for req:A.8.5:secure_authentication_baseline
+#
+# Reviewed-from-skeleton 2026-06-14. Authentication config baseline.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.5:secure_authentication_baseline"
+target_control: "A.8.5"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.5:bl_factor_requirements"
+    description: "Authentication factor requirements per risk tier"
+    excerpt_keywords:
+      - [authentication, factor, per, risk]
+      - [step, up, authentication]
+      - [factor, requirement, per, tier]
+
+  - must_id: "item:A.8.5:bl_mfa_scope"
+    description: "MFA scope — universal for privileged + remote + cross-tenant"
+    excerpt_keywords:
+      - [mfa, universal, privileged]
+      - [mfa, remote, access, scope]
+      - [phishing, resistant, mfa]
+      - [mfa, scope, baseline]
+
+  - must_id: "item:A.8.5:bl_password_standard"
+    description: "Password standard configured"
+    excerpt_keywords:
+      - [password, length, requirement]
+      - [breach, list, checking]
+      - [nist, 800, 63b]
+      - [no, rotation, unless, compromise]
+
+  - must_id: "item:A.8.5:bl_lockout"
+    description: "Lockout / throttling configured for failed attempts"
+    excerpt_keywords:
+      - [authentication, lockout]
+      - [failed, attempts, lockout]
+      - [authentication, throttling]
+
+  - must_id: "item:A.8.5:bl_secure_transmission"
+    description: "Secure transmission enforced (TLS only)"
+    excerpt_keywords:
+      - [tls, only, authentication]
+      - [no, plaintext, credentials]
+      - [legacy, protocol, retired, auth]

@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:5.2:isp_approval_record
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 5.2 approval record.
+
+schema_version: 1
+target_evidence_requirement: "req:5.2:isp_approval_record"
+target_control: "5.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:5.2:app_signature"
+    description: "Signature of top management"
+    excerpt_keywords:
+      - [isp, top, management, signature]
+      - [isp, ceo, signature]
+      - [isp, board, chair, signature]
+
+  - must_id: "item:5.2:app_date"
+    description: "Approval date stated"
+    excerpt_keywords:
+      - [isp, approval, date, stated]
+      - [isp, signed, on, date]
+
+  - must_id: "item:5.2:app_role"
+    description: "Approving role identified (CEO, board chair)"
+    excerpt_keywords:
+      - [isp, approving, role]
+      - [isp, ceo, board, chair]
+      - [delegated, authority, isp]
+
+  - must_id: "item:5.2:app_scope_at_approval"
+    description: "Scope statement (4.3) version that was in effect at approval"
+    excerpt_keywords:
+      - ["4.3"]
+      - [isp, scope, version, at, approval]
+      - [scope, statement, isp, approval]

@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:A.8.5:authentication_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. Authentication program review.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.5:authentication_program_review"
+target_control: "A.8.5"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.5:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [authentication, program, review, date]
+      - [a85, reviewed, on]
+
+  - must_id: "item:A.8.5:rev_reviewer"
+    description: "Reviewer identity (IAM lead + InfoSec lead)"
+    excerpt_keywords:
+      - [iam, lead, authentication, review]
+      - [authentication, reviewed, by, infosec]
+
+  - must_id: "item:A.8.5:rev_anomaly_outcomes"
+    description: "Anomaly-detection outcomes reviewed"
+    excerpt_keywords:
+      - [authentication, anomaly, outcome]
+      - [true, positive, authentication]
+      - [missed, detection, authentication]
+
+  - must_id: "item:A.8.5:rev_threat_landscape"
+    description: "Threat-landscape review"
+    excerpt_keywords:
+      - ["A.5.7"]
+      - [authentication, threat, landscape]
+      - [new, attack, pattern, authentication]
+
+  - must_id: "item:A.8.5:rev_exception_inventory"
+    description: "Exception inventory re-confirmed / retired"
+    excerpt_keywords:
+      - [authentication, exception, inventory]
+      - [legacy, auth, exception, retired]
+      - [authentication, exception, re, confirmed]
+
+  - must_id: "item:A.8.5:rev_baseline_update"
+    description: "Baseline / procedure updates published from findings"
+    excerpt_keywords:
+      - [authentication, baseline, updated]
+      - [authentication, procedure, updated]
+      - [authentication, findings, propagated]

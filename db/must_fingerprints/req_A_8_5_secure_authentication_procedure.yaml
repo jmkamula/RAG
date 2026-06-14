@@ -1,0 +1,44 @@
+# Per-MUST fingerprint catalog for req:A.8.5:secure_authentication_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Authentication procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.5:secure_authentication_procedure"
+target_control: "A.8.5"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.5:proc_enrolment"
+    description: "Factor enrolment procedure"
+    excerpt_keywords:
+      - [mfa, enrolment, procedure]
+      - [factor, enrolment]
+      - [identity, proofing, enrolment]
+
+  - must_id: "item:A.8.5:proc_recovery"
+    description: "Account recovery flow with identity-proofing"
+    excerpt_keywords:
+      - [account, recovery, identity, proofing]
+      - [not, email, only, password, reset]
+      - [account, recovery, flow]
+
+  - must_id: "item:A.8.5:proc_exception"
+    description: "Exception process for lost-MFA / new-device scenarios"
+    excerpt_keywords:
+      - [lost, mfa, exception]
+      - [new, device, mfa, exception]
+      - [mfa, identity, proofing, fallback]
+
+  - must_id: "item:A.8.5:proc_legacy_handling"
+    description: "Legacy protocol handling"
+    excerpt_keywords:
+      - [legacy, protocol, rejection]
+      - [legacy, protocol, compensating]
+      - [legacy, auth, exception]
+
+  - must_id: "item:A.8.5:proc_a517_linkage"
+    description: "Cross-link to A.5.17 authentication info procedure"
+    excerpt_keywords:
+      - ["A.5.17"]
+      - [credential, rotation, link]
+      - [authentication, info, procedure, link]

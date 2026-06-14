@@ -1,0 +1,53 @@
+# Per-MUST fingerprint catalog for req:A.8.2:privileged_access_baseline
+#
+# Reviewed-from-skeleton 2026-06-14. Privileged access config baseline.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.2:privileged_access_baseline"
+target_control: "A.8.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.2:bl_systems_in_scope"
+    description: "Systems and processes in scope for privileged access governance"
+    excerpt_keywords:
+      - [privileged, access, scope]
+      - [privileged, systems, in, scope]
+      - [pam, scope]
+
+  - must_id: "item:A.8.2:bl_role_catalogue"
+    description: "Privileged role catalogue per system"
+    excerpt_keywords:
+      - [privileged, role, catalogue]
+      - [privileged, roles, per, system]
+      - [admin, role, catalogue]
+
+  - must_id: "item:A.8.2:bl_strong_auth"
+    description: "Strong authentication required for all privileged access"
+    excerpt_keywords:
+      - [mfa, privileged, access]
+      - [privileged, strong, authentication]
+      - [admin, mfa, enforced]
+
+  - must_id: "item:A.8.2:bl_jit_capability"
+    description: "Just-in-time / time-bound elevation capability"
+    excerpt_keywords:
+      - [just, in, time, elevation]
+      - [jit, elevation]
+      - [time, bound, privilege]
+      - [eliminates, standing, privilege]
+
+  - must_id: "item:A.8.2:bl_pam_tool"
+    description: "PAM tooling configured"
+    excerpt_keywords:
+      - [pam, tooling]
+      - [privileged, access, vaulting]
+      - [session, recording, privileged]
+      - [command, brokering, privileged]
+
+  - must_id: "item:A.8.2:bl_admin_tools_restricted"
+    description: "Access to system-administration tools restricted to privileged roles only"
+    excerpt_keywords:
+      - [admin, tools, restricted]
+      - [system, administration, tool, restricted]
+      - [admin, tool, access, governance]

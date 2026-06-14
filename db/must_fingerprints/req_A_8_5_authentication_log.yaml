@@ -1,0 +1,45 @@
+# Per-MUST fingerprint catalog for req:A.8.5:authentication_log
+#
+# Reviewed-from-skeleton 2026-06-14. Authentication monitoring log.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.5:authentication_log"
+target_control: "A.8.5"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.5:log_auth_events"
+    description: "All authentication events captured"
+    excerpt_keywords:
+      - [authentication, event, captured]
+      - [auth, success, failure, log]
+      - [mfa, challenge, log]
+      - [step, up, log]
+
+  - must_id: "item:A.8.5:log_failure_clusters"
+    description: "Failure-cluster detection"
+    excerpt_keywords:
+      - [brute, force, detection]
+      - [password, spraying, detection]
+      - [failure, cluster, authentication]
+
+  - must_id: "item:A.8.5:log_impossible_travel"
+    description: "Impossible-travel / geo-anomaly detection"
+    excerpt_keywords:
+      - [impossible, travel]
+      - [geo, anomaly, authentication]
+      - [auth, geo, anomaly, detection]
+
+  - must_id: "item:A.8.5:log_mfa_anomalies"
+    description: "MFA-prompt fatigue / push-bombing detection"
+    excerpt_keywords:
+      - [mfa, prompt, fatigue]
+      - [push, bombing, detection]
+      - [mfa, anomaly, detection]
+
+  - must_id: "item:A.8.5:log_retention"
+    description: "Retention period defined and enforced"
+    excerpt_keywords:
+      - [authentication, log, retention]
+      - ["A.8.15"]
+      - [auth, log, retention, period]

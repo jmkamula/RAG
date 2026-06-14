@@ -1,0 +1,52 @@
+# Per-MUST fingerprint catalog for req:8.3:operational_risk_treatment_record
+#
+# Reviewed-from-skeleton 2026-06-14. ISMS clause 8.3 treatment record.
+
+schema_version: 1
+target_evidence_requirement: "req:8.3:operational_risk_treatment_record"
+target_control: "8.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:8.3:plan_implemented"
+    description: "Treatment plan from 6.1.3 being implemented"
+    excerpt_keywords:
+      - ["6.1.3"]
+      - [treatment, plan, implemented]
+      - [risk, treatment, status, per, item]
+
+  - must_id: "item:8.3:implementation_status"
+    description: "Implementation status per treatment item"
+    excerpt_keywords:
+      - [treatment, status, planned]
+      - [treatment, status, in, progress]
+      - [treatment, status, complete]
+      - [treatment, status, deferred]
+
+  - must_id: "item:8.3:residual_risk"
+    description: "Residual risk recorded after treatment"
+    excerpt_keywords:
+      - [residual, risk, after, treatment]
+      - [residual, risk, recorded]
+      - [post, treatment, residual]
+
+  - must_id: "item:8.3:retention"
+    description: "Documented information of results retained"
+    excerpt_keywords:
+      - [treatment, results, retained]
+      - [risk, treatment, documented]
+      - [treatment, records, retained]
+
+  - must_id: "item:8.3:per_item_owner"
+    description: "Per-treatment-item owner identified"
+    excerpt_keywords:
+      - [treatment, item, owner]
+      - [treatment, per, item, owner]
+      - [risk, treatment, accountable, owner]
+
+  - must_id: "item:8.3:per_item_target_date"
+    description: "Per-treatment-item target completion date"
+    excerpt_keywords:
+      - [treatment, target, date]
+      - [treatment, target, completion]
+      - [treatment, due, date]

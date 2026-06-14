@@ -1,0 +1,48 @@
+# Per-MUST fingerprint catalog for req:A.8.2:privileged_activity_log
+#
+# Reviewed-from-skeleton 2026-06-14. Privileged activity log.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.2:privileged_activity_log"
+target_control: "A.8.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.2:log_who"
+    description: "Identity of the privileged user captured per action"
+    excerpt_keywords:
+      - [privileged, user, identity, log]
+      - [admin, user, log, per, action]
+
+  - must_id: "item:A.8.2:log_what"
+    description: "Action performed captured"
+    excerpt_keywords:
+      - [privileged, command, log]
+      - [admin, action, log, captured]
+      - [privileged, change, log]
+
+  - must_id: "item:A.8.2:log_when"
+    description: "Timestamp captured per action"
+    excerpt_keywords:
+      - [privileged, log, timestamp]
+      - [admin, action, timestamp, log]
+
+  - must_id: "item:A.8.2:log_retention"
+    description: "Log retention period defined and enforced"
+    excerpt_keywords:
+      - [privileged, log, retention]
+      - [admin, log, retention, period]
+
+  - must_id: "item:A.8.2:log_tamper_protect"
+    description: "Log integrity protection"
+    excerpt_keywords:
+      - [privileged, log, write, once]
+      - [siem, forwarding, privileged]
+      - [privileged, log, tamper, protect]
+
+  - must_id: "item:A.8.2:log_anomaly_alert"
+    description: "Anomaly alerting configured"
+    excerpt_keywords:
+      - [privileged, anomaly, alert]
+      - [unusual, hours, privileged]
+      - [unusual, command, privileged]
