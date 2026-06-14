@@ -90,6 +90,40 @@ honest 0/4 output and the `partial_evidence` tag dropped. Function
 signature kept (`evidence_type`, `control_ref` now unused but
 preserved for caller symmetry).
 
+## Validated at scale — 35-control Phase-1 surge resolved 2026-06-14
+
+The pre-flight survey was too narrow. It counted "leaves currently
+Phase-1-satisfied" but missed the upstream effect: many controls
+were live=OFI (set via prior approvals) where the engine's OFI view
+had been backed by Phase-1 satisfying at least one leaf. After
+retirement, those controls' engine verdicts flipped to NC, producing
+35 Stage-2 "OFI→NC" proposals visible to the tenant.
+
+Recovery attempt: authored leaf-scan catalogs for all 35 controls
+(batches 8-10, ~92 leaves, ~700 MUSTs), ran scan across all 35.
+Result: 18 per-MUST back-bindings on 9 of 35 controls. Even after
+approving all 18, NO control reverted to OFI because no leaf
+reached full-MUST satisfaction — best case was 2/7 MUSTs bound on
+A.5.15:access_control_policy.
+
+This confirmed the architectural prediction: Phase-1 was crediting
+1 finding as 8/8 because the doc matched evidence_type; the real
+per-MUST evidence on Arion was 1-2/N for every flipped leaf. The
+NCs are legitimate gaps the standards (ISO 27002:2022 + GDPR)
+articulate but Arion's corpus doesn't.
+
+Tenant accepted all 35 NCs as the honest posture. Live distribution:
+167 NC / 10 OFI / 0 Comply / 0 N/A on 177 evaluable controls.
+
+Insight: when retiring a lenient fallback, the pre-flight survey
+must measure not just "currently satisfied via fallback" but
+"controls whose OFI verdict depends on the fallback satisfying
+≥1 leaf". The latter is the actual blast radius. For future
+retirement of a lenient path, instrument the engine to log which
+leaves' satisfaction depend on the lenient signal vs the strict
+one, then count controls where every satisfied leaf depends on
+the lenient path — that's the at-risk count.
+
 ## Related
 
 - [[leaf-driven-scan-pilot-2026-06-12]] — where this finding
