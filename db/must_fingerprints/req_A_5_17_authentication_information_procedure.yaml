@@ -1,0 +1,86 @@
+# Per-MUST fingerprint catalog for req:A.5.17:authentication_information_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Authentication procedure vocabulary.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.17:authentication_information_procedure"
+target_control: "A.5.17"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.17:allocation"
+    description: "Initial allocation method for authentication information"
+    excerpt_keywords:
+      - [initial, credential, allocation]
+      - [hardware, token, allocation]
+      - [in, person, allocation]
+      - [ephemeral, link, allocation]
+      - [credential, issuance, method]
+
+  - must_id: "item:A.5.17:transmission"
+    description: "Transmission method requirements"
+    excerpt_keywords:
+      - [out, of, band, credential]
+      - [credential, transmission, encrypted]
+      - [never, via, plain, email]
+      - [different, channel, identity]
+
+  - must_id: "item:A.5.17:storage"
+    description: "Storage requirements"
+    excerpt_keywords:
+      - [hashed, salted]
+      - [argon2, bcrypt, scrypt]
+      - [secrets, manager, vaulted]
+      - [never, plaintext, stored]
+
+  - must_id: "item:A.5.17:complexity"
+    description: "Password / credential complexity and rotation requirements"
+    excerpt_keywords:
+      - [password, complexity]
+      - [credential, length, requirement]
+      - [character, classes, password]
+      - [password, max, age]
+      - [password, history]
+
+  - must_id: "item:A.5.17:mfa"
+    description: "Multi-factor authentication mandated"
+    excerpt_keywords:
+      - [multi, factor, authentication, mandated]
+      - [mfa, required, for]
+      - [mfa, admin, accounts]
+      - [mfa, remote, access]
+      - [phishing, resistant, mfa]
+
+  - must_id: "item:A.5.17:reset"
+    description: "Reset / recovery process with identity re-verification"
+    excerpt_keywords:
+      - [credential, reset, process]
+      - [out, of, band, reset]
+      - [no, static, security, questions]
+      - [reset, rate, limited]
+      - [credential, recovery]
+
+  - must_id: "item:A.5.17:compromise_response"
+    description: "Compromise-response path"
+    excerpt_keywords:
+      - [credential, compromise, response]
+      - [forced, rotation, compromise]
+      - [identity, investigation, compromise]
+      - [compromise, scope, expansion]
+
+  - must_id: "item:A.5.17:identity_link"
+    description: "Cross-reference to A.5.16 identity lifecycle"
+    excerpt_keywords:
+      - ["A.5.16"]
+      - [identity, lifecycle, paired]
+      - [credential, follows, identity]
+      - [paired, with, identity, lifecycle]
+
+  - must_id: "item:A.5.17:user_advisory"
+    description: "Advisory guidance to personnel on protecting their authentication information"
+    excerpt_keywords:
+      - [no, sharing, credentials]
+      - [no, re, use, password]
+      - [password, manager, guidance]
+      - [credential, hygiene, advisory]
+      - [user, advisory, credential]

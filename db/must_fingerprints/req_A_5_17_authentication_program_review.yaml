@@ -1,0 +1,64 @@
+# Per-MUST fingerprint catalog for req:A.5.17:authentication_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. Authentication program audit cycle.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.17:authentication_program_review"
+target_control: "A.5.17"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.17:rev_date"
+    description: "Review date within the planned 180-day interval"
+    excerpt_keywords:
+      - [authentication, program, review, date]
+      - [credential, program, reviewed, on]
+      - [180, day, authentication, review]
+
+  - must_id: "item:A.5.17:rev_reviewer"
+    description: "Reviewer identity (IT identity-lead + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [authentication, reviewed, by]
+      - [identity, lead, authentication, review]
+      - [vault, custodian, review]
+      - [credential, program, reviewer]
+
+  - must_id: "item:A.5.17:rev_rotation_compliance"
+    description: "Rotation-compliance audit"
+    excerpt_keywords:
+      - [rotation, compliance, audit]
+      - [credentials, past, rotation]
+      - [stale, credential, root, cause]
+      - [credential, rotation, sample]
+
+  - must_id: "item:A.5.17:rev_mfa_coverage"
+    description: "MFA enrolment coverage audit"
+    excerpt_keywords:
+      - [mfa, coverage, audit]
+      - [mfa, enrolment, gap]
+      - [percent, mfa, enrolled]
+      - [mfa, gap, per, identity]
+
+  - must_id: "item:A.5.17:rev_vault_discipline"
+    description: "Vault-discipline audit"
+    excerpt_keywords:
+      - [vault, discipline, audit]
+      - [credentials, in, vault, audit]
+      - [config, file, credential, audit]
+      - [spreadsheet, credential, audit]
+
+  - must_id: "item:A.5.17:rev_compromise_sample"
+    description: "Compromise-response sample"
+    excerpt_keywords:
+      - [compromise, response, sample]
+      - [recent, compromise, re, examined]
+      - [forced, rotation, sample]
+      - [scope, expansion, sample]
+
+  - must_id: "item:A.5.17:rev_actions"
+    description: "Action items captured"
+    excerpt_keywords:
+      - [authentication, review, action, items]
+      - [expand, mfa, action]
+      - [retire, phishable, factor]
+      - [service, token, rotation, automation]

@@ -1,0 +1,98 @@
+# Per-MUST fingerprint catalog for req:A.5.22:supplier_review_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-supplier review record (12 MUSTs).
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.22:supplier_review_record"
+target_control: "A.5.22"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.22:rev_scope"
+    description: "Scope of review (security practices, service delivery, changes since last review)"
+    excerpt_keywords:
+      - [supplier, review, scope]
+      - [scope, of, supplier, review]
+      - [supplier, security, practices, reviewed]
+      - [changes, since, last, supplier, review]
+
+  - must_id: "item:A.5.22:rev_performance"
+    description: "Service performance monitored against agreement"
+    excerpt_keywords:
+      - [supplier, sla, performance]
+      - [service, performance, vs, agreement]
+      - [supplier, sla, breach]
+      - [supplier, performance, measured]
+
+  - must_id: "item:A.5.22:rev_incidents"
+    description: "Information exchanged about InfoSec incidents"
+    excerpt_keywords:
+      - [supplier, incident, review]
+      - [joint, incident, review, supplier]
+      - [supplier, infosec, incidents]
+      - [incident, information, exchanged, supplier]
+
+  - must_id: "item:A.5.22:rev_problems"
+    description: "Identified problems / incidents managed through to resolution"
+    excerpt_keywords:
+      - [supplier, problems, managed]
+      - [supplier, incident, resolved]
+      - [supplier, problem, resolution]
+
+  - must_id: "item:A.5.22:rev_reports"
+    description: "Supplier-provided service reports reviewed + progress meetings held"
+    excerpt_keywords:
+      - [supplier, service, report, reviewed]
+      - [progress, meeting, supplier]
+      - [supplier, report, accepted]
+
+  - must_id: "item:A.5.22:rev_audit"
+    description: "Audit conducted (own audit or independent attestation accepted)"
+    excerpt_keywords:
+      - [supplier, audit, conducted]
+      - [supplier, soc2, accepted]
+      - [supplier, iso, 27001, attestation]
+      - [supplier, audit, follow, up]
+
+  - must_id: "item:A.5.22:rev_findings"
+    description: "Findings recorded per review with severity"
+    excerpt_keywords:
+      - [supplier, findings, severity]
+      - [supplier, review, findings]
+      - [supplier, finding, severity]
+
+  - must_id: "item:A.5.22:rev_corrective"
+    description: "Corrective actions raised for deficiencies, tracked to closure"
+    excerpt_keywords:
+      - [supplier, corrective, action]
+      - [supplier, deficiency, corrective]
+      - [corrective, action, closure, supplier]
+
+  - must_id: "item:A.5.22:rev_audit_trails"
+    description: "Supplier audit trails / event records reviewed"
+    excerpt_keywords:
+      - [supplier, audit, trail]
+      - [supplier, event, records, reviewed]
+      - [supplier, operational, problem, log]
+
+  - must_id: "item:A.5.22:rev_continuity"
+    description: "Supplier continuity capability verified"
+    excerpt_keywords:
+      - ["A.5.29"]
+      - ["A.5.30"]
+      - [supplier, continuity, verified]
+      - [supplier, bcp, capability]
+
+  - must_id: "item:A.5.22:rev_subsupplier"
+    description: "Supplier's own supplier relationships reviewed"
+    excerpt_keywords:
+      - [supplier, sub, supplier, review]
+      - [fourth, party, oversight]
+      - [supplier, supply, chain, review]
+
+  - must_id: "item:A.5.22:rev_compliance"
+    description: "Supplier's compliance-review / enforcement responsibilities confirmed"
+    excerpt_keywords:
+      - [supplier, compliance, confirmed]
+      - [supplier, enforcement, responsibility]
+      - [supplier, compliance, review]

@@ -1,0 +1,63 @@
+# Per-MUST fingerprint catalog for req:A.5.13:labelling_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. Labelling program audit cycle.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.13:labelling_program_review"
+target_control: "A.5.13"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.13:rev_date"
+    description: "Review date within the planned annual interval"
+    excerpt_keywords:
+      - [labelling, program, review, date]
+      - [labelling, reviewed, on]
+      - [annual, labelling, review]
+
+  - must_id: "item:A.5.13:rev_reviewer"
+    description: "Reviewer identity (InfoSec + Data Protection Officer)"
+    excerpt_keywords:
+      - [labelling, reviewed, by]
+      - [data, protection, officer, labelling]
+      - [infosec, labelling, review]
+
+  - must_id: "item:A.5.13:rev_coverage_trend"
+    description: "Coverage-trend analysis"
+    excerpt_keywords:
+      - [labelling, coverage, trend]
+      - [coverage, delta, since, last]
+      - [labelling, drop, investigated]
+      - [coverage, per, system, trend]
+
+  - must_id: "item:A.5.13:rev_scheme_alignment"
+    description: "Scheme-alignment audit"
+    excerpt_keywords:
+      - ["A.5.12"]
+      - [scheme, alignment, audit]
+      - [labels, vs, levels, audit]
+      - [labelling, drift, scheme]
+
+  - must_id: "item:A.5.13:rev_persistence_audit"
+    description: "Persistence audit"
+    excerpt_keywords:
+      - [persistence, audit, labelling]
+      - [label, survives, transformation, sample]
+      - [transformed, items, label, check]
+      - [export, copy, label, audit]
+
+  - must_id: "item:A.5.13:rev_training_sample"
+    description: "Training-effectiveness sample"
+    excerpt_keywords:
+      - [labelling, training, sample]
+      - [training, effectiveness, labelling]
+      - [newly, created, item, labelling]
+      - [labelling, training, audit]
+
+  - must_id: "item:A.5.13:rev_actions"
+    description: "Action items captured"
+    excerpt_keywords:
+      - [labelling, review, actions]
+      - [extend, labelling, to, platform]
+      - [tighten, labelling, automation]
+      - [labelling, training, refresh]

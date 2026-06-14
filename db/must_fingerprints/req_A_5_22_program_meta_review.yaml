@@ -1,0 +1,45 @@
+# Per-MUST fingerprint catalog for req:A.5.22:program_meta_review
+#
+# Reviewed-from-skeleton 2026-06-14. Supplier review program meta audit.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.22:program_meta_review"
+target_control: "A.5.22"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.22:pgm_date"
+    description: "Meta-review date within the planned interval"
+    excerpt_keywords:
+      - [supplier, program, meta, review, date]
+      - [supplier, review, program, audit, date]
+
+  - must_id: "item:A.5.22:pgm_reviewer"
+    description: "Reviewer identity (program owner + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [supplier, program, owner, audit]
+      - [infosec, lead, supplier, program]
+      - [supplier, program, meta, reviewer]
+
+  - must_id: "item:A.5.22:pgm_coverage"
+    description: "Coverage rate (fraction of supplier portfolio reviewed in period, by tier)"
+    excerpt_keywords:
+      - [supplier, coverage, rate]
+      - [supplier, portfolio, reviewed, fraction]
+      - [supplier, coverage, by, tier]
+
+  - must_id: "item:A.5.22:pgm_closure"
+    description: "Findings-closure rate (open / aged / closed)"
+    excerpt_keywords:
+      - [supplier, findings, closure, rate]
+      - [supplier, finding, aged]
+      - [supplier, finding, open]
+      - [supplier, closure, ratio]
+
+  - must_id: "item:A.5.22:pgm_outcome"
+    description: "Cadence-adjustment decisions or scope-adjustment decisions"
+    excerpt_keywords:
+      - [supplier, cadence, adjusted]
+      - [supplier, scope, adjusted]
+      - [supplier, re, tier, decision]
+      - [supplier, program, cadence, change]

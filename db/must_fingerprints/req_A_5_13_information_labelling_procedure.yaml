@@ -1,0 +1,65 @@
+# Per-MUST fingerprint catalog for req:A.5.13:information_labelling_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Labelling procedure vocabulary.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.13:information_labelling_procedure"
+target_control: "A.5.13"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.13:scheme_alignment"
+    description: "Alignment with A.5.12 classification scheme"
+    excerpt_keywords:
+      - ["A.5.12"]
+      - [aligned, with, classification, scheme]
+      - [classification, level, alignment]
+      - [labelling, scheme, alignment]
+
+  - must_id: "item:A.5.13:visual_marks"
+    description: "Visual marking conventions per classification level"
+    excerpt_keywords:
+      - [watermark, classification]
+      - [header, footer, classification]
+      - [banner, classification]
+      - [visual, marking, label]
+
+  - must_id: "item:A.5.13:metadata_tags"
+    description: "Digital metadata tags or sensitivity labels"
+    excerpt_keywords:
+      - [microsoft, purview]
+      - [sensitivity, label]
+      - [metadata, tag, classification]
+      - [google, label]
+
+  - must_id: "item:A.5.13:physical_media"
+    description: "Physical media labelling rules"
+    excerpt_keywords:
+      - [physical, media, labelling]
+      - [paper, document, labelling]
+      - [archive, box, labelling]
+      - ["A.7.10"]
+
+  - must_id: "item:A.5.13:label_persistence"
+    description: "Label persistence on copying, export, transformation"
+    excerpt_keywords:
+      - [label, persistence]
+      - [label, survives, export]
+      - [label, on, copy]
+      - [label, on, transformation]
+
+  - must_id: "item:A.5.13:pii_overlay"
+    description: "PII overlay rule where applicable"
+    excerpt_keywords:
+      - [pii, overlay]
+      - [contains, pii, footer]
+      - [pii, label, overlay]
+      - [personal, data, overlay]
+
+  - must_id: "item:A.5.13:training_ref"
+    description: "References training so personnel know how to apply labels"
+    excerpt_keywords:
+      - [labelling, training]
+      - [classification, training, reference]
+      - [label, application, training]
+      - [labelling, awareness]

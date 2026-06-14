@@ -1,0 +1,63 @@
+# Per-MUST fingerprint catalog for req:A.5.13:labelling_coverage_register
+#
+# Reviewed-from-skeleton 2026-06-14. Per-system labelling coverage register.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.13:labelling_coverage_register"
+target_control: "A.5.13"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.13:reg_system_id"
+    description: "Each in-scope information system captured with a unique identifier"
+    excerpt_keywords:
+      - [labelling, coverage, register]
+      - [system, id, labelling]
+      - [labelling, system, list]
+      - [per, system, labelling, scope]
+
+  - must_id: "item:A.5.13:reg_scope"
+    description: "Scope per row (which content classes this system stores)"
+    excerpt_keywords:
+      - [system, scope, content, classes]
+      - [scope, column, labelling]
+      - [content, classes, per, system]
+
+  - must_id: "item:A.5.13:reg_classification_levels"
+    description: "Classification levels deployed per row"
+    excerpt_keywords:
+      - [classification, levels, deployed, per]
+      - [levels, in, use, per, system]
+      - [classification, subset, per, system]
+      - ["A.5.12"]
+
+  - must_id: "item:A.5.13:reg_enabled_flag"
+    description: "Labelling-enabled flag per row"
+    excerpt_keywords:
+      - [labelling, enabled, flag]
+      - [labelling, enabled, partial]
+      - [labelling, enabled, no]
+      - [remediation, date, labelling]
+
+  - must_id: "item:A.5.13:reg_coverage_pct"
+    description: "Coverage percentage per row"
+    excerpt_keywords:
+      - [coverage, percentage, labelling]
+      - [labelling, coverage, pct]
+      - [percent, labelled, per, system]
+      - [sampled, coverage, labelling]
+
+  - must_id: "item:A.5.13:reg_automation"
+    description: "Automation level per row"
+    excerpt_keywords:
+      - [automation, level, labelling]
+      - [manual, assisted, automatic, labelling]
+      - [auto, labelling, per]
+      - [labelling, automation, column]
+
+  - must_id: "item:A.5.13:reg_owner"
+    description: "System owner per row"
+    excerpt_keywords:
+      - [labelling, system, owner, column]
+      - [labelling, owner, per, platform]
+      - [system, owner, labelling, accountability]

@@ -1,0 +1,66 @@
+# Per-MUST fingerprint catalog for req:A.8.13:backup_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Backup procedure vocabulary.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.13:backup_procedure"
+target_control: "A.8.13"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.13:scope"
+    description: "Scope — which information, software, systems are backed up"
+    excerpt_keywords:
+      - [backup, scope]
+      - [systems, backed, up]
+      - [backup, applies, to]
+      - [backup, coverage]
+
+  - must_id: "item:A.8.13:frequency"
+    description: "Frequency per asset class"
+    excerpt_keywords:
+      - [backup, frequency]
+      - [backup, hourly]
+      - [backup, daily]
+      - [backup, continuous]
+      - [backup, rpo, frequency]
+
+  - must_id: "item:A.8.13:retention"
+    description: "Retention period per asset class"
+    excerpt_keywords:
+      - [backup, retention, period]
+      - [backup, retained, for]
+      - [retention, per, asset, class]
+      - [backup, recovery, range]
+
+  - must_id: "item:A.8.13:storage_separation"
+    description: "Storage separation (offsite OR air-gapped OR immutable-storage)"
+    excerpt_keywords:
+      - [offsite, backup]
+      - [air, gapped, backup]
+      - [immutable, storage, backup]
+      - [3, 2, 1, rule]
+
+  - must_id: "item:A.8.13:encryption"
+    description: "Encryption of backups at rest + in transit"
+    excerpt_keywords:
+      - [backup, encryption, at, rest]
+      - [backup, encryption, in, transit]
+      - [encrypted, backup]
+      - ["A.8.24"]
+
+  - must_id: "item:A.8.13:restore_test_cadence"
+    description: "Restore-test cadence stated"
+    excerpt_keywords:
+      - [restore, test, cadence]
+      - [restore, test, annual]
+      - [restore, test, quarterly]
+      - [backup, restore, frequency, test]
+
+  - must_id: "item:A.8.13:rpo_alignment"
+    description: "RPO alignment with A.5.30 ICT readiness"
+    excerpt_keywords:
+      - ["A.5.30"]
+      - [rpo, alignment]
+      - [bia, rpo, backup]
+      - [backup, frequency, rpo, met]

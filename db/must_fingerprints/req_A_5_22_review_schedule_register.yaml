@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.5.22:review_schedule_register
+#
+# Reviewed-from-skeleton 2026-06-14. Per-supplier review schedule.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.22:review_schedule_register"
+target_control: "A.5.22"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.22:sch_cadence"
+    description: "Cadence per supplier (proportional to tier)"
+    excerpt_keywords:
+      - [supplier, review, cadence]
+      - [supplier, tier, cadence]
+      - [high, tier, monthly, supplier]
+      - [low, tier, annually, supplier]
+
+  - must_id: "item:A.5.22:sch_last_review"
+    description: "Last review date per row"
+    excerpt_keywords:
+      - [supplier, last, review, date]
+      - [supplier, reviewed, on, column]
+      - [last, supplier, review]
+
+  - must_id: "item:A.5.22:sch_next_review"
+    description: "Next review date per row"
+    excerpt_keywords:
+      - [supplier, next, review, date]
+      - [next, supplier, review, due]
+      - [next, supplier, review, scheduled]
+
+  - must_id: "item:A.5.22:sch_owner"
+    description: "Named owner accountable for executing the review"
+    excerpt_keywords:
+      - [supplier, review, owner, column]
+      - [supplier, reviewer, assigned]
+      - [accountable, for, supplier, review]

@@ -1,0 +1,48 @@
+# Per-MUST fingerprint catalog for req:A.5.22:change_response_log
+#
+# Reviewed-from-skeleton 2026-06-14. Per-change response record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.22:change_response_log"
+target_control: "A.5.22"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.22:chg_type"
+    description: "Change type captured (network / technology / dev tools / location / sub-contractor / re-tendering)"
+    excerpt_keywords:
+      - [supplier, change, type]
+      - [network, change, supplier]
+      - [supplier, re, tendering]
+      - [supplier, location, change]
+      - [supplier, technology, change]
+
+  - must_id: "item:A.5.22:chg_impact"
+    description: "Impact assessment on InfoSec arrangements"
+    excerpt_keywords:
+      - [supplier, change, impact]
+      - [supplier, change, infosec, impact]
+      - [supplier, change, controls, affected]
+      - [supplier, change, threat]
+
+  - must_id: "item:A.5.22:chg_treatment"
+    description: "Treatment decided (accept / mitigate / re-paper agreement / terminate)"
+    excerpt_keywords:
+      - [supplier, change, treatment]
+      - [supplier, re, paper, agreement]
+      - [supplier, mitigate, change]
+      - [supplier, terminate, relationship]
+
+  - must_id: "item:A.5.22:chg_authoriser"
+    description: "Authoriser of the treatment decision"
+    excerpt_keywords:
+      - [supplier, change, authoriser]
+      - [supplier, change, signed, off]
+      - [risk, acceptance, supplier, change]
+
+  - must_id: "item:A.5.22:chg_escalation"
+    description: "Escalation criteria for findings"
+    excerpt_keywords:
+      - [supplier, change, escalation]
+      - [supplier, finding, terminate, relationship]
+      - [supplier, change, escalation, criteria]

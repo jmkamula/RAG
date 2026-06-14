@@ -1,0 +1,67 @@
+# Per-MUST fingerprint catalog for req:A.5.26:incident_closure_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-incident closure record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.26:incident_closure_record"
+target_control: "A.5.26"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.26:cls_incident_ref"
+    description: "Incident identifier per record"
+    excerpt_keywords:
+      - [incident, closure, ref]
+      - [incident, closed, id]
+      - [closure, record, incident, id]
+
+  - must_id: "item:A.5.26:cls_authoriser"
+    description: "Closure authority per record"
+    excerpt_keywords:
+      - [incident, closure, authoriser]
+      - [incident, closed, by]
+      - [closure, signed, off, by]
+
+  - must_id: "item:A.5.26:cls_root_cause"
+    description: "Root cause captured"
+    excerpt_keywords:
+      - [incident, root, cause, captured]
+      - [root, cause, technical, organisational]
+      - [rca, per, incident]
+
+  - must_id: "item:A.5.26:cls_containment_eff"
+    description: "Containment effectiveness assessed"
+    excerpt_keywords:
+      - [containment, effectiveness, assessed]
+      - [containment, limited, damage]
+      - [containment, success, incident]
+
+  - must_id: "item:A.5.26:cls_recovery_valid"
+    description: "Recovery validation evidenced"
+    excerpt_keywords:
+      - [recovery, validation, evidenced]
+      - [system, returned, to, secure, state]
+      - [recovery, verified, per, incident]
+
+  - must_id: "item:A.5.26:cls_sla_met"
+    description: "MTTC / MTTR / containment-SLA-met flag per record"
+    excerpt_keywords:
+      - [mttc, met]
+      - [mttr, met]
+      - [containment, sla, met]
+      - [incident, sla, met, flag]
+
+  - must_id: "item:A.5.26:cls_gdpr_triggered"
+    description: "GDPR Art.33 breach-notification trigger flag per record"
+    excerpt_keywords:
+      - ["Art.33"]
+      - [breach, notification, triggered, per]
+      - [personal, data, breach, trigger, flag]
+      - [gdpr, trigger, per, incident]
+
+  - must_id: "item:A.5.26:cls_lessons_handoff"
+    description: "Handoff reference into A.5.27 lessons register"
+    excerpt_keywords:
+      - ["A.5.27"]
+      - [lessons, register, handoff]
+      - [lessons, learned, handoff, incident]

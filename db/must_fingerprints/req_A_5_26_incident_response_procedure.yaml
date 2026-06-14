@@ -1,0 +1,110 @@
+# Per-MUST fingerprint catalog for req:A.5.26:incident_response_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. The heaviest leaf in batch 3: 12 MUSTs
+# covering distinct incident-response steps. v2 raw produced 95 false-
+# positive proposals — generic "incident" vocabulary fanned out everywhere.
+# Each MUST tightened with phase-specific anchors.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.26:incident_response_procedure"
+target_control: "A.5.26"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.26:roles"
+    description: "Roles and responsibilities for incident response defined"
+    excerpt_keywords:
+      - [incident, manager, role]
+      - [incident, response, roles]
+      - [security, team, ir, role]
+      - [comms, lead, incident]
+      - [legal, lead, incident]
+
+  - must_id: "item:A.5.26:severity_tier_matrix"
+    description: "Severity-tier matrix defined explicitly"
+    excerpt_keywords:
+      - [severity, tier, matrix]
+      - [p1, p2, p3, incident]
+      - [incident, severity, criteria]
+      - [response, cadence, per, tier]
+
+  - must_id: "item:A.5.26:classification_link"
+    description: "References incident classification used at triage (links to A.5.25)"
+    excerpt_keywords:
+      - ["A.5.25"]
+      - [triage, classification, reference]
+      - [classification, from, triage]
+      - [triage, link, incident]
+
+  - must_id: "item:A.5.26:containment"
+    description: "Containment steps documented (immediate actions to limit damage)"
+    excerpt_keywords:
+      - [incident, containment, step]
+      - [containment, action, limit, damage]
+      - [immediate, containment, action]
+      - [incident, containment, procedure]
+
+  - must_id: "item:A.5.26:eradication"
+    description: "Eradication and recovery steps documented"
+    excerpt_keywords:
+      - [eradication, step]
+      - [restore, secure, state]
+      - [incident, eradication]
+      - [recovery, after, incident, eradication]
+
+  - must_id: "item:A.5.26:investigation"
+    description: "Investigation steps defined (root cause analysis, timeline reconstruction)"
+    excerpt_keywords:
+      - [incident, investigation, step]
+      - [root, cause, analysis, incident]
+      - [timeline, reconstruction, incident]
+      - [forensic, investigation, incident]
+
+  - must_id: "item:A.5.26:evidence_collection"
+    description: "Evidence collection step embedded in response"
+    excerpt_keywords:
+      - ["A.5.28"]
+      - [evidence, collection, incident]
+      - [evidence, handling, incident]
+      - [forensic, evidence, incident]
+
+  - must_id: "item:A.5.26:communication"
+    description: "Internal and external communication criteria"
+    excerpt_keywords:
+      - [incident, communication, criteria]
+      - [internal, communication, incident]
+      - [external, communication, incident]
+      - [who, informed, when]
+
+  - must_id: "item:A.5.26:gdpr_72h_trigger_check"
+    description: "GDPR Art.33 72h notification trigger"
+    excerpt_keywords:
+      - ["Art.33"]
+      - [72, hour, notification]
+      - [supervisory, authority, notification]
+      - [breach, notification, 72h]
+      - [personal, data, breach, trigger]
+
+  - must_id: "item:A.5.26:authority_contacts"
+    description: "Authority/regulator contact list referenced (links to A.5.5)"
+    excerpt_keywords:
+      - ["A.5.5"]
+      - [authority, contact, list]
+      - [regulator, contact, incident]
+      - [authority, contact, reference]
+
+  - must_id: "item:A.5.26:action_logging"
+    description: "All response decisions and actions logged"
+    excerpt_keywords:
+      - [incident, action, logged]
+      - [incident, decisions, logged]
+      - [response, action, logged]
+      - [post, incident, review, log]
+
+  - must_id: "item:A.5.26:post_review"
+    description: "Post-incident review step required after closure"
+    excerpt_keywords:
+      - ["A.5.27"]
+      - [lessons, learned, handoff]
+      - [post, incident, review, step]
+      - [incident, post, review]

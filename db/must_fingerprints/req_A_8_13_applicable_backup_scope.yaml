@@ -1,0 +1,33 @@
+# Per-MUST fingerprint catalog for req:A.8.13:applicable_backup_scope
+#
+# Reviewed-from-skeleton 2026-06-14. Backup scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.13:applicable_backup_scope"
+target_control: "A.8.13"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.13:scope_systems"
+    description: "Systems / datasets enumerated with RPO tier per row"
+    excerpt_keywords:
+      - [backup, scope, systems]
+      - [systems, in, backup, scope]
+      - [rpo, tier, per, system]
+      - ["A.5.30"]
+
+  - must_id: "item:A.8.13:scope_exclusions"
+    description: "Exclusion rationale where backup not required"
+    excerpt_keywords:
+      - [backup, exclusion, rationale]
+      - [backup, not, required]
+      - [ephemeral, reconstructable, excluded]
+      - [excluded, from, backup]
+
+  - must_id: "item:A.8.13:scope_vendor_managed"
+    description: "Vendor-managed backups delegated to A.5.19/A.5.21"
+    excerpt_keywords:
+      - ["A.5.19"]
+      - ["A.5.21"]
+      - [vendor, managed, backup]
+      - [supplier, backup, obligation]

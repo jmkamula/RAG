@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:A.5.26:incident_register
+#
+# Reviewed-from-skeleton 2026-06-14. Per-incident register columns.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.26:incident_register"
+target_control: "A.5.26"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.26:reg_incident_id"
+    description: "Each incident captured with a unique identifier"
+    excerpt_keywords:
+      - [incident, id, column]
+      - [incident, register, id]
+      - ["A.5.25"]
+      - [incident, register, list]
+
+  - must_id: "item:A.5.26:reg_severity"
+    description: "Severity per row (per the classification scale used at triage)"
+    excerpt_keywords:
+      - [incident, severity, column]
+      - [incident, severity, per, row]
+      - [p1, severity]
+      - [severity, scale, incident, register]
+
+  - must_id: "item:A.5.26:reg_status"
+    description: "Status per row (open / contained / eradicated / recovered / closed)"
+    excerpt_keywords:
+      - [incident, status, column]
+      - [incident, status, contained]
+      - [incident, status, eradicated]
+      - [incident, status, recovered]
+      - [incident, status, closed]
+
+  - must_id: "item:A.5.26:reg_owner"
+    description: "Named Incident Manager / owner per row"
+    excerpt_keywords:
+      - [incident, manager, per, incident]
+      - [incident, owner, column]
+      - [incident, accountability, column]
+
+  - must_id: "item:A.5.26:reg_lifecycle_dates"
+    description: "Lifecycle dates per row: detected / contained / eradicated / recovered / closed"
+    excerpt_keywords:
+      - [incident, lifecycle, dates]
+      - [detected, contained, recovered]
+      - [incident, timeline, columns]
+      - [incident, dates, detected, closed]

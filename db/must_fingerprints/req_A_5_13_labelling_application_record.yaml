@@ -1,0 +1,62 @@
+# Per-MUST fingerprint catalog for req:A.5.13:labelling_application_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-platform enablement record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.13:labelling_application_record"
+target_control: "A.5.13"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.13:app_system_ref"
+    description: "Platform identifier per record"
+    excerpt_keywords:
+      - [labelling, enabled, on, system]
+      - [labelling, deployed, to, platform]
+      - [platform, ref, labelling, enablement]
+
+  - must_id: "item:A.5.13:app_enablement_date"
+    description: "Enablement date recorded"
+    excerpt_keywords:
+      - [labelling, enablement, date]
+      - [labels, deployed, on]
+      - [labelling, enabled, on, date]
+      - [sensitivity, label, rollout, date]
+
+  - must_id: "item:A.5.13:app_method"
+    description: "Enablement method per record"
+    excerpt_keywords:
+      - [sensitivity, label, policy, deployed]
+      - [dlp, rule, wired]
+      - [manual, tagging, training, given]
+      - [enablement, method, labelling]
+
+  - must_id: "item:A.5.13:app_scope"
+    description: "Scope per record (which content classes the platform stores)"
+    excerpt_keywords:
+      - [labelling, scope, per, platform]
+      - [content, classes, per, enablement]
+      - [labelling, applies, to, scope]
+
+  - must_id: "item:A.5.13:app_training"
+    description: "Training rollout per record"
+    excerpt_keywords:
+      - [labelling, refresher, per, platform]
+      - [labelling, training, rolled, out]
+      - [new, joiner, labelling, integration]
+      - [training, completed, labelling, platform]
+
+  - must_id: "item:A.5.13:app_coverage_check"
+    description: "Coverage verification per record"
+    excerpt_keywords:
+      - [coverage, verification, post, enablement]
+      - [labelling, sample, re, checked]
+      - [legacy, items, labelling, remediated]
+      - [post, enablement, coverage, check]
+
+  - must_id: "item:A.5.13:app_owner"
+    description: "Owner per record (platform owner accepts ongoing accountability)"
+    excerpt_keywords:
+      - [platform, owner, labelling, accountability]
+      - [labelling, ongoing, accountability]
+      - [labelling, owner, per, record]

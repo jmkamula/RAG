@@ -1,0 +1,55 @@
+# Per-MUST fingerprint catalog for req:A.8.13:restore_test_register
+#
+# Reviewed-from-skeleton 2026-06-14. Per-restore-test register.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.13:restore_test_register"
+target_control: "A.8.13"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.13:reg_test_id"
+    description: "Per-test unique identifier"
+    excerpt_keywords:
+      - [restore, test, id]
+      - [restore, test, register]
+      - [backup, test, id]
+
+  - must_id: "item:A.8.13:reg_date"
+    description: "Per-test date"
+    excerpt_keywords:
+      - [restore, test, date]
+      - [restore, test, performed, on]
+      - [backup, test, date, column]
+
+  - must_id: "item:A.8.13:reg_target"
+    description: "Per-test backup target tested"
+    excerpt_keywords:
+      - [restore, test, target]
+      - [restore, target, system]
+      - [restore, target, dataset]
+      - [backup, target, tested]
+
+  - must_id: "item:A.8.13:reg_outcome"
+    description: "Per-test outcome (success / partial / failure)"
+    excerpt_keywords:
+      - [restore, test, outcome]
+      - [restore, success]
+      - [restore, partial]
+      - [restore, failure]
+
+  - must_id: "item:A.8.13:reg_rpo_met"
+    description: "Per-test RPO-met flag (auditor-critical proof)"
+    excerpt_keywords:
+      - [rpo, met, flag]
+      - [data, recoverable, to, rpo]
+      - [restore, rpo, met]
+      - [restore, sla, met]
+
+  - must_id: "item:A.8.13:reg_integrity_check"
+    description: "Per-test integrity-verification artefact"
+    excerpt_keywords:
+      - [restore, checksum]
+      - [restore, hash, verification]
+      - [restore, integrity, check]
+      - [functional, test, of, restored]
