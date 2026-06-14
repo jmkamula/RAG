@@ -1835,8 +1835,65 @@ def make_retrieve_node(
             except Exception as _te:
                 logger.debug(f"[trace] write skipped: {_te}")
 
+        # Per-MUST advisory appendix for single-control posture_check
+        # queries. Translates the engine's per-leaf verdict into a
+        # tenant-actionable guide: which MUSTs are covered, which are
+        # missing, what evidence shape to produce. Deterministic compose
+        # (no LLM) — same data path as the engine's NC/OFI verdict.
+        #
+        # Targeting: single control identified in cited_refs (LLM)
+        # or intent.cited_refs (classifier). Skip when 0 or >1 to
+        # avoid wall-of-text on broad queries.
+        import logging as _adv_logging
+        _adv_log = _adv_logging.getLogger("rag.arion_graph.advisory")
+        _advisory_text = ""
+        try:
+            # Fire on both POSTURE_CHECK and CROSS_FRAMEWORK — the latter
+            # catches GDPR Art.X queries that route via xfw inheritance.
+            if intent.question_type in (
+                QuestionType.POSTURE_CHECK,
+                QuestionType.CROSS_FRAMEWORK,
+            ):
+                _result_refs = list(getattr(result, "cited_refs", []) or [])
+                _intent_refs = list(getattr(intent, "cited_refs", []) or [])
+                # Prefer the classifier's cited refs — those reflect what
+                # the USER asked about. The LLM's result refs include xfw
+                # bridges (e.g. A.5.15 query → result_refs=[A.5.15, Art.32.1.b])
+                # which would suppress the advisory due to len>1.
+                _candidate_refs = _intent_refs or _result_refs
+                _single_ctrl = _candidate_refs[0] if len(_candidate_refs) == 1 else None
+                _adv_log.info(
+                    f"[advisory] qtype=POSTURE_CHECK result_refs={_result_refs} "
+                    f"intent_refs={_intent_refs} single={_single_ctrl}"
+                )
+                if _single_ctrl:
+                    from rag.posture.advisory import build_per_must_advisory
+                    from rag.posture_loader import build_pg_conn
+                    _std = "GDPR:2016/679" if _single_ctrl.startswith("Art.") else "ISO27001:2022"
+                    _tenant_uuid = str(getattr(tenant, "tenant_id", "") or "")
+                    if _tenant_uuid:
+                        _pg_adv = build_pg_conn()
+                        try:
+                            _advisory_text = build_per_must_advisory(
+                                pg_conn      = _pg_adv,
+                                tenant_id    = _tenant_uuid,
+                                control_ref  = _single_ctrl,
+                                standard_id  = _std,
+                            )
+                        finally:
+                            try: _pg_adv.close()
+                            except Exception: pass
+                        _adv_log.info(
+                            f"[advisory] built {len(_advisory_text)} chars for "
+                            f"{_single_ctrl} ({_std})"
+                        )
+        except Exception as _ae:
+            _adv_log.warning(f"[advisory] skipped: {_ae}", exc_info=True)
+
+        _answer = result.answer_text + (_advisory_text or "")
+
         return {
-            "answer_text":    result.answer_text,
+            "answer_text":    _answer,
             "verified":       result.verified,
             "was_corrected":  result.was_corrected,
             "cited_refs":     result.cited_refs,

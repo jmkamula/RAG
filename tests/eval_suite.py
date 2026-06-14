@@ -81,6 +81,38 @@ EVAL_CASES = [
     # informal); Art.47/49 N/A (no BCRs, no derogations).
 
     EvalCase(
+        id=199,
+        query="is A.5.15 compliant?",
+        tags=["posture", "advisory", "per_must"],
+        expected_refs=["A.5.15"],
+        expected_type="posture_check",
+        # Locks the per-MUST advisory appendix shipped 2026-06-14.
+        # When a posture_check (or cross_framework) query identifies a
+        # single control with NC/OFI verdict, the chat answer must
+        # include a "How to advance X" deterministic appendix listing
+        # per-leaf coverage + upload hint. Arion's A.5.15 has 2 of 4
+        # leaves partially evidenced and 0 fully satisfied → advisory
+        # fires.
+        must_contain=[
+            "A.5.15",
+            "How to advance A.5.15",
+            "Still needed:",
+            "To address:",
+            "Source: ISO/IEC 27002:2022",
+        ],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+        ],
+        notes=(
+            "Locks the per-MUST advisory appendix (rag/posture/advisory.py "
+            "build_per_must_advisory). Renders for single-control POSTURE_CHECK "
+            "or CROSS_FRAMEWORK queries on NC/OFI controls. Includes the "
+            "'How to advance', 'Still needed', 'To address' and 'Source: ISO/IEC' "
+            "anchors so any regression in the deterministic compose surfaces here."
+        ),
+    ),
+
+    EvalCase(
         id=198,
         query="pending engine verdict for Art.44",
         tags=["posture", "engine", "stage2", "multi_leaf", "phase_b", "gdpr", "op_process", "transfers"],
