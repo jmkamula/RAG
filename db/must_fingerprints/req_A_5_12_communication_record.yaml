@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:A.5.12:communication_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-communication-event record
+# patterns — audience, channel, date, training-completion.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.12:communication_record"
+target_control: "A.5.12"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.12:comm_date"
+    description: "Date of publication/communication"
+    excerpt_keywords:
+      - [classification, scheme, communicated, on]
+      - [scheme, published, on]
+      - [communication, date, classification]
+      - [classification, training, date]
+
+  - must_id: "item:A.5.12:comm_audience"
+    description: "Audience reached (all information creators, owners, custodians)"
+    excerpt_keywords:
+      - [audience, reached]
+      - [communicated, to, all, creators]
+      - [communicated, to, owners]
+      - [audience, classification, scheme]
+
+  - must_id: "item:A.5.12:comm_channel"
+    description: "Channel used (training module, classification guide, role-specific workshops)"
+    excerpt_keywords:
+      - [classification, training, module]
+      - [classification, guide]
+      - [role, specific, workshop, classification]
+      - [communication, channel, classification]
+
+  - must_id: "item:A.5.12:comm_onboarding"
+    description: "Distribution at onboarding for new personnel evidenced"
+    excerpt_keywords:
+      - [classification, in, induction]
+      - [classification, onboarding]
+      - [induction, pack, classification]
+      - [new, joiner, classification, training]
+
+  - must_id: "item:A.5.12:comm_training"
+    description: "Classification training completion captured at user level"
+    excerpt_keywords:
+      - [classification, training, completed]
+      - [training, completion, classification]
+      - [per, user, classification, training]
+      - [classification, training, record]

@@ -1,0 +1,125 @@
+# Per-MUST fingerprint catalog for req:A.5.20:supplier_agreement_security_template
+#
+# Reviewed-from-skeleton 2026-06-14. Contract template clause patterns —
+# 14 MUSTs covering distinct contractual elements. Each MUST has tight
+# vocabulary specific to that clause type to avoid generic policy text
+# matching multiple MUSTs (the v2 fan-out problem with 26 false-positive
+# proposals on a single DPA-related policy clause).
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.20:supplier_agreement_security_template"
+target_control: "A.5.20"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.20:minimum_requirements"
+    description: "Minimum security requirements (controls baseline, certifications expected)"
+    excerpt_keywords:
+      - [minimum, security, requirements, supplier]
+      - [supplier, security, baseline]
+      - [certifications, required, supplier]
+      - [supplier, controls, baseline]
+
+  - must_id: "item:A.5.20:data_handling"
+    description: "Data handling requirements (encryption at rest and in transit, location/sovereignty)"
+    excerpt_keywords:
+      - [encryption, at, rest, in, transit]
+      - [supplier, encryption, requirement]
+      - [data, sovereignty, supplier]
+      - [data, location, supplier, clause]
+
+  - must_id: "item:A.5.20:classification_map"
+    description: "Information classification mapping (org scheme → supplier scheme)"
+    excerpt_keywords:
+      - [classification, mapping, supplier]
+      - [supplier, classification, scheme]
+      - [classification, alignment, supplier]
+      - [scheme, mapping, supplier]
+
+  - must_id: "item:A.5.20:authorized_personnel"
+    description: "Named or role-defined authorized personnel + conditions for access"
+    excerpt_keywords:
+      - [supplier, authorized, personnel]
+      - [named, supplier, personnel]
+      - [supplier, access, conditions]
+      - [authorized, personnel, supplier, clause]
+
+  - must_id: "item:A.5.20:screening"
+    description: "Screening / vetting requirements for supplier personnel"
+    excerpt_keywords:
+      - [supplier, personnel, screening]
+      - [vetting, supplier, staff]
+      - [background, check, supplier]
+      - [supplier, screening, requirement]
+
+  - must_id: "item:A.5.20:training_awareness"
+    description: "Training and awareness requirements"
+    excerpt_keywords:
+      - [supplier, training, requirement]
+      - [supplier, awareness, requirement]
+      - [supplier, info, sec, training]
+      - [security, training, supplier, clause]
+
+  - must_id: "item:A.5.20:acceptable_use"
+    description: "Acceptable + unacceptable use rules stated"
+    excerpt_keywords:
+      - [acceptable, use, supplier]
+      - [supplier, acceptable, use, clause]
+      - [supplier, unacceptable, use]
+      - [aup, supplier]
+
+  - must_id: "item:A.5.20:subprocessor_limits"
+    description: "Sub-processor / fourth-party restrictions"
+    excerpt_keywords:
+      - [subprocessor, restriction]
+      - [sub, processor, approval]
+      - [fourth, party, restriction]
+      - [propagation, of, requirements, subprocessor]
+
+  - must_id: "item:A.5.20:audit_rights"
+    description: "Audit rights"
+    excerpt_keywords:
+      - [right, to, audit, supplier]
+      - [supplier, audit, rights]
+      - [audit, in, lieu, attestation]
+      - [supplier, attestation, accepted]
+
+  - must_id: "item:A.5.20:incident_notification"
+    description: "Incident notification clause with timeline"
+    excerpt_keywords:
+      - [incident, notification, timeline]
+      - [supplier, incident, notification]
+      - [within, 24h, of, detection]
+      - [breach, notification, supplier, clause]
+
+  - must_id: "item:A.5.20:incident_contacts"
+    description: "Security incident contacts named on each side"
+    excerpt_keywords:
+      - [incident, contact, named]
+      - [security, incident, point, of, contact]
+      - [supplier, incident, contact]
+      - [escalation, contact, supplier]
+
+  - must_id: "item:A.5.20:defect_resolution"
+    description: "Defect resolution and conflict resolution processes"
+    excerpt_keywords:
+      - [defect, resolution, supplier]
+      - [conflict, resolution, supplier]
+      - [dispute, resolution, supplier]
+      - [supplier, defect, process]
+
+  - must_id: "item:A.5.20:termination_return"
+    description: "Termination obligations: data return/destruction, transition arrangements"
+    excerpt_keywords:
+      - [termination, data, return]
+      - [supplier, data, return, on, termination]
+      - [data, destruction, on, termination]
+      - [transition, arrangements, supplier]
+
+  - must_id: "item:A.5.20:legal_compliance"
+    description: "Legal, statutory, regulatory, contractual obligations"
+    excerpt_keywords:
+      - [legal, statutory, regulatory, supplier]
+      - [data, protection, supplier, obligation]
+      - [supplier, ip, copyright]
+      - [regulatory, compliance, supplier, clause]

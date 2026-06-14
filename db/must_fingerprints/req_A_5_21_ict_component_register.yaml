@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:A.5.21:ict_component_register
+#
+# Reviewed-from-skeleton 2026-06-14. ICT-component register column
+# patterns. Workbook column refs likely.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.21:ict_component_register"
+target_control: "A.5.21"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.21:reg_component"
+    description: "Component / service identified per row"
+    excerpt_keywords:
+      - [ict, component, register]
+      - [component, column]
+      - [vendor, product, version, column]
+      - [ict, service, register]
+
+  - must_id: "item:A.5.21:reg_owner"
+    description: "Named internal owner per component"
+    excerpt_keywords:
+      - [component, owner, column]
+      - [ict, component, owner, per]
+      - [architecture, team, owner]
+      - [platform, team, owner]
+
+  - must_id: "item:A.5.21:reg_critical_flag"
+    description: "Critical-component flag per row"
+    excerpt_keywords:
+      - [critical, component, flag]
+      - [critical, flag, column]
+      - [critical, per, row]
+      - ["5.21e"]
+
+  - must_id: "item:A.5.21:reg_eol_date"
+    description: "End-of-support / end-of-life date per row"
+    excerpt_keywords:
+      - [end, of, life, date, column]
+      - [eol, date, per]
+      - [end, of, support, per]
+      - [vendor, eol, column]
+
+  - must_id: "item:A.5.21:reg_subsupplier"
+    description: "Disclosed sub-suppliers / fourth parties per row"
+    excerpt_keywords:
+      - [sub, supplier, per, component]
+      - [fourth, party, column]
+      - [subsupplier, list, column]
+      - [component, fourth, party]

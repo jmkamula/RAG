@@ -1,0 +1,81 @@
+# Per-MUST fingerprint catalog for req:A.5.21:ict_supply_chain_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Supply-chain procedure vocabulary.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.21:ict_supply_chain_procedure"
+target_control: "A.5.21"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.21:critical_components"
+    description: "Identification of critical components needing special scrutiny"
+    excerpt_keywords:
+      - [critical, components, scrutiny]
+      - [critical, ict, components]
+      - [outsourced, critical, components]
+      - [criticality, assessment, supply, chain]
+
+  - must_id: "item:A.5.21:sourcing_controls"
+    description: "Sourcing controls (approved vendor list, banned-vendor list, country-of-origin)"
+    excerpt_keywords:
+      - [approved, vendor, list]
+      - [banned, vendor, list]
+      - [country, of, origin]
+      - [sourcing, controls, ict]
+
+  - must_id: "item:A.5.21:integrity_verification"
+    description: "Component integrity verification on delivery"
+    excerpt_keywords:
+      - [signed, firmware]
+      - [hash, verification, component]
+      - [signed, packages, verification]
+      - [component, integrity, on, delivery]
+
+  - must_id: "item:A.5.21:patching_expectations"
+    description: "Support and patching expectations stated for each ICT product/service"
+    excerpt_keywords:
+      - [patching, expectation, supplier]
+      - [support, expectation, ict, product]
+      - [vendor, patching, sla]
+      - [security, patch, expectation]
+
+  - must_id: "item:A.5.21:traceability"
+    description: "Traceability of critical components through the supply chain"
+    excerpt_keywords:
+      - [supply, chain, traceability]
+      - [component, provenance]
+      - [end, to, end, traceability]
+      - [sbom]
+
+  - must_id: "item:A.5.21:subsupplier_visibility"
+    description: "Sub-supplier visibility expectations"
+    excerpt_keywords:
+      - [sub, supplier, visibility]
+      - [fourth, party, disclosure]
+      - [subsupplier, listing]
+      - [component, disclosure, supplier]
+
+  - must_id: "item:A.5.21:requirements_propagation"
+    description: "ICT service / product suppliers required to propagate requirements"
+    excerpt_keywords:
+      - [propagate, requirements, sub]
+      - [supplier, propagation, requirement]
+      - [flow, down, requirement]
+      - [requirements, sub, contractor]
+
+  - must_id: "item:A.5.21:monitoring_validation"
+    description: "Monitoring and validation methods for conformance"
+    excerpt_keywords:
+      - [supplier, conformance, monitoring]
+      - [validation, supplier, security]
+      - [monitoring, supplier, controls]
+      - [conformance, validation, supplier]
+
+  - must_id: "item:A.5.21:incident_sharing"
+    description: "Rules for sharing information about supply chain issues"
+    excerpt_keywords:
+      - [supply, chain, incident, sharing]
+      - [supplier, compromise, sharing]
+      - [intra, group, sharing, supply]
+      - [supply, chain, issue, sharing]

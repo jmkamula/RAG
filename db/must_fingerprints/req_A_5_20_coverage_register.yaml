@@ -1,0 +1,51 @@
+# Per-MUST fingerprint catalog for req:A.5.20:coverage_register
+#
+# Reviewed-from-skeleton 2026-06-14. Supplier-agreement coverage register
+# patterns — per-supplier columns. Policy clauses about DPAs match here
+# would be FALSE POSITIVES; per-row markers required.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.20:coverage_register"
+target_control: "A.5.20"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.20:cov_owner"
+    description: "Named owner accountable for the agreement"
+    excerpt_keywords:
+      - [agreement, owner, column]
+      - [supplier, agreement, owner, per]
+      - [procurement, partner, per, supplier]
+      - [legal, partner, per, supplier]
+
+  - must_id: "item:A.5.20:cov_signed_date"
+    description: "Signed-date of the active agreement per supplier"
+    excerpt_keywords:
+      - [agreement, signed, date, column]
+      - [signed, date, per, supplier]
+      - [supplier, agreement, signed, on]
+      - [dpa, signed, on, per]
+
+  - must_id: "item:A.5.20:cov_template_version"
+    description: "Template version applied per supplier"
+    excerpt_keywords:
+      - [template, version, per, supplier]
+      - [agreement, template, version, column]
+      - [contract, template, version, applied]
+      - [dpa, template, version, applied]
+
+  - must_id: "item:A.5.20:cov_term"
+    description: "Agreement term and renewal/expiry date per row"
+    excerpt_keywords:
+      - [agreement, term, column]
+      - [expiry, date, per, supplier]
+      - [renewal, date, per, supplier]
+      - [contract, term, per, supplier]
+
+  - must_id: "item:A.5.20:cov_tier"
+    description: "Supplier tier per row"
+    excerpt_keywords:
+      - [supplier, tier, column]
+      - [tier, per, supplier]
+      - [supplier, classification, tier]
+      - [tier, drives, clause]

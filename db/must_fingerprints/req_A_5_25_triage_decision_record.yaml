@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:A.5.25:triage_decision_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-decision lifecycle-end record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.25:triage_decision_record"
+target_control: "A.5.25"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.25:dec_event_ref"
+    description: "Event identifier per record (links back to the triage log row)"
+    excerpt_keywords:
+      - [triage, decision, event, ref]
+      - [decision, per, event, ref]
+      - [event, id, decision]
+      - [decision, links, triage, log]
+
+  - must_id: "item:A.5.25:dec_authority"
+    description: "Triage decision authority per record"
+    excerpt_keywords:
+      - [triage, decision, authority]
+      - [decision, made, by, role]
+      - [triage, decision, signed, by]
+      - [authority, per, triage, decision]
+
+  - must_id: "item:A.5.25:dec_outcome"
+    description: "Decision outcome captured (false positive / near-miss / incident)"
+    excerpt_keywords:
+      - [triage, outcome, per, record]
+      - [false, positive, decision]
+      - [filed, near, miss, decision]
+      - [escalated, incident, decision]
+
+  - must_id: "item:A.5.25:dec_rationale"
+    description: "Rationale stated"
+    excerpt_keywords:
+      - [triage, rationale, per]
+      - [decision, rationale, criteria]
+      - [criteria, based, reasoning, triage]
+      - [decision, rationale, captured]
+
+  - must_id: "item:A.5.25:dec_handoff"
+    description: "Where escalated: handoff reference into A.5.26 incident register"
+    excerpt_keywords:
+      - ["A.5.26"]
+      - [handoff, incident, register]
+      - [escalated, to, incident, register]
+      - [incident, register, ref, triage]

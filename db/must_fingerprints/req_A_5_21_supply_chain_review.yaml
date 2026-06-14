@@ -1,0 +1,48 @@
+# Per-MUST fingerprint catalog for req:A.5.21:supply_chain_review
+#
+# Reviewed-from-skeleton 2026-06-14. ICT supply-chain review patterns.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.21:supply_chain_review"
+target_control: "A.5.21"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.21:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [supply, chain, review, date]
+      - [ict, supply, chain, reviewed, on]
+      - [supply, chain, review, conducted]
+
+  - must_id: "item:A.5.21:rev_reviewer"
+    description: "Reviewer identity (architecture lead + InfoSec lead)"
+    excerpt_keywords:
+      - [architecture, lead, supply, chain]
+      - [supply, chain, reviewer]
+      - [infosec, lead, supply, chain, review]
+      - [supply, chain, reviewed, by]
+
+  - must_id: "item:A.5.21:rev_eol_pipeline"
+    description: "EOL pipeline review"
+    excerpt_keywords:
+      - [eol, pipeline, review]
+      - [components, reaching, eol]
+      - [eol, horizon]
+      - [replacement, status, pipeline]
+
+  - must_id: "item:A.5.21:rev_maturity"
+    description: "Vendor maturity review (recent attestations, incidents, sub-supplier disclosures)"
+    excerpt_keywords:
+      - [vendor, maturity, review]
+      - [supplier, attestation, review]
+      - [supplier, incident, review]
+      - [sub, supplier, disclosure, review]
+
+  - must_id: "item:A.5.21:rev_actions"
+    description: "Action items captured per critical component"
+    excerpt_keywords:
+      - [supply, chain, action, items]
+      - [supplier, replan, replacement]
+      - [tighten, supplier, monitoring]
+      - [push, supplier, upgrade]

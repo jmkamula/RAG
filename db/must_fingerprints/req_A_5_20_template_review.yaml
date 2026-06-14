@@ -1,0 +1,58 @@
+# Per-MUST fingerprint catalog for req:A.5.20:template_review
+#
+# Reviewed-from-skeleton 2026-06-14. Review-record patterns for the
+# supplier-agreement-template audit cycle.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.20:template_review"
+target_control: "A.5.20"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.20:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [template, review, date]
+      - [supplier, template, reviewed, on]
+      - [contract, template, review, conducted]
+      - [agreement, template, last, reviewed]
+
+  - must_id: "item:A.5.20:rev_reviewer"
+    description: "Reviewer identity (legal + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [legal, infosec, template, review]
+      - [supplier, template, reviewed, by]
+      - [contract, template, reviewer]
+      - [legal, counsel, template, review]
+
+  - must_id: "item:A.5.20:rev_outcome"
+    description: "Outcome (no change / amended; version increment if amended)"
+    excerpt_keywords:
+      - [template, version, incremented]
+      - [template, amended, version]
+      - [template, no, change]
+      - [contract, template, outcome]
+
+  - must_id: "item:A.5.20:rev_regulatory"
+    description: "Regulatory changes considered"
+    excerpt_keywords:
+      - [regulatory, changes, template]
+      - [data, protection, change, template]
+      - [sector, specific, obligation, template]
+      - [regulatory, drift, template]
+
+  - must_id: "item:A.5.20:rev_threat_landscape"
+    description: "Threat-landscape changes considered"
+    excerpt_keywords:
+      - [threat, landscape, template]
+      - [incident, notification, expectation]
+      - [emergent, threat, template]
+      - [threat, shift, template]
+
+  - must_id: "item:A.5.20:rev_repapering"
+    description: "Re-papering plan for existing supplier agreements"
+    excerpt_keywords:
+      - [re, papering, supplier]
+      - [supplier, re, contracting, plan]
+      - [existing, supplier, template, upgrade]
+      - [repaper, supplier, agreement]

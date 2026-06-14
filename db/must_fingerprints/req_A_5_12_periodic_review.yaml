@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.5.12:periodic_review
+#
+# Reviewed-from-skeleton 2026-06-14. Classification-scheme review record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.12:periodic_review"
+target_control: "A.5.12"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.12:review_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [classification, scheme, review, date]
+      - [classification, reviewed, on]
+      - [scheme, review, conducted]
+      - [scheme, last, reviewed]
+
+  - must_id: "item:A.5.12:review_reviewer"
+    description: "Reviewer identity and role"
+    excerpt_keywords:
+      - [classification, reviewed, by]
+      - [ciso, reviewed, scheme]
+      - [scheme, reviewer]
+      - [data, protection, reviewer]
+
+  - must_id: "item:A.5.12:review_outcome"
+    description: "Outcome captured (no change / amended / re-issued)"
+    excerpt_keywords:
+      - [no, change, classification]
+      - [scheme, amended]
+      - [scheme, re, issued]
+      - [classification, outcome]
+
+  - must_id: "item:A.5.12:review_downstream"
+    description: "Downstream-control alignment checked (A.5.13/A.5.10/A.5.14)"
+    excerpt_keywords:
+      - ["A.5.13"]
+      - ["A.5.10"]
+      - ["A.5.14"]
+      - [labelling, alignment]
+      - [downstream, alignment, classification]

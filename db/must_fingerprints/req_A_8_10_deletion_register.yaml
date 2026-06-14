@@ -1,0 +1,58 @@
+# Per-MUST fingerprint catalog for req:A.8.10:deletion_register
+#
+# Reviewed-from-skeleton 2026-06-14. Per-deletion-event register column
+# patterns.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.10:deletion_register"
+target_control: "A.8.10"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.10:reg_event_id"
+    description: "Per-deletion unique identifier"
+    excerpt_keywords:
+      - [deletion, event, id]
+      - [deletion, register, id]
+      - [deletion, log, id]
+      - [data, deletion, id, column]
+
+  - must_id: "item:A.8.10:reg_trigger"
+    description: "Per-deletion trigger"
+    excerpt_keywords:
+      - [deletion, trigger, column]
+      - [retention, expiry, trigger]
+      - [dsar, triggered, deletion]
+      - [legal, hold, release, trigger]
+
+  - must_id: "item:A.8.10:reg_target"
+    description: "Per-deletion target identifier"
+    excerpt_keywords:
+      - [deletion, target, column]
+      - [dataset, deleted, id]
+      - [asset, deleted, ref]
+      - [media, id, deleted]
+
+  - must_id: "item:A.8.10:reg_method"
+    description: "Per-deletion method used"
+    excerpt_keywords:
+      - [deletion, method, column]
+      - [crypto, erase, used]
+      - [overwrite, method]
+      - [physical, destruction, method]
+
+  - must_id: "item:A.8.10:reg_verification"
+    description: "Per-deletion verification artefact reference"
+    excerpt_keywords:
+      - [deletion, verification, ref]
+      - [certificate, of, destruction]
+      - [deletion, audit, log, ref]
+      - [signed, attestation, deletion]
+
+  - must_id: "item:A.8.10:reg_backup_sweep"
+    description: "Per-deletion backup-sweep confirmation"
+    excerpt_keywords:
+      - [backup, sweep, confirmed]
+      - [backup, deletion, confirmed]
+      - [orphan, backup, copy]
+      - [next, backup, cycle, deletion]

@@ -1,0 +1,73 @@
+# Per-MUST fingerprint catalog for req:A.5.25:event_assessment_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Triage procedure vocabulary.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.25:event_assessment_procedure"
+target_control: "A.5.25"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.25:detection_sources"
+    description: "Detection sources enumerated (monitoring, user reports, third parties)"
+    excerpt_keywords:
+      - [detection, sources, enumerated]
+      - [monitoring, user, reports, third]
+      - [event, detection, sources]
+      - [siem, user, report]
+
+  - must_id: "item:A.5.25:triage_timeline"
+    description: "Timeline for triage decision after detection"
+    excerpt_keywords:
+      - [triage, timeline]
+      - [triage, sla]
+      - [time, to, triage]
+      - [decision, within, of, detection]
+
+  - must_id: "item:A.5.25:decision_authority"
+    description: "Decision authority named (who decides event vs incident)"
+    excerpt_keywords:
+      - [triage, decision, maker]
+      - [event, vs, incident, decision]
+      - [who, decides, triage]
+      - [decision, authority, triage]
+
+  - must_id: "item:A.5.25:classification_scale"
+    description: "Classification scale used (event, near-miss, incident with severity)"
+    excerpt_keywords:
+      - [event, near, miss, incident]
+      - [triage, classification, scale]
+      - [severity, scale, triage]
+      - [classification, levels, triage]
+
+  - must_id: "item:A.5.25:assessment_criteria"
+    description: "Assessment criteria (impact, scope, certainty)"
+    excerpt_keywords:
+      - [impact, scope, certainty]
+      - [triage, criteria]
+      - [severity, criteria]
+      - [assessment, criteria, triage]
+
+  - must_id: "item:A.5.25:handoff"
+    description: "Handoff to incident response process (A.5.26)"
+    excerpt_keywords:
+      - [handoff, incident, response]
+      - ["A.5.26"]
+      - [escalation, to, incident, response]
+      - [triage, to, incident, handoff]
+
+  - must_id: "item:A.5.25:correlation"
+    description: "Correlation / aggregation of events for trend identification"
+    excerpt_keywords:
+      - [event, correlation]
+      - [event, aggregation]
+      - ["A.8.16"]
+      - [trend, identification, events]
+
+  - must_id: "item:A.5.25:competent_access"
+    description: "Competent personnel given access to event/incident/weakness records"
+    excerpt_keywords:
+      - [competent, personnel, event, access]
+      - [access, event, records]
+      - [event, record, permissions]
+      - [need, to, know, event, records]

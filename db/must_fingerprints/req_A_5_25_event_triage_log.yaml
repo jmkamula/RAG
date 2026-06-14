@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:A.5.25:event_triage_log
+#
+# Reviewed-from-skeleton 2026-06-14. Per-event triage register column
+# patterns.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.25:event_triage_log"
+target_control: "A.5.25"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.25:log_event_id"
+    description: "Each event captured with a unique identifier and detection timestamp"
+    excerpt_keywords:
+      - [event, id, column]
+      - [triage, log, event, id]
+      - [detection, timestamp, column]
+      - [event, register, column]
+
+  - must_id: "item:A.5.25:log_source"
+    description: "Detection source per row"
+    excerpt_keywords:
+      - [detection, source, column]
+      - [event, source, per, row]
+      - [monitoring, system, reported]
+      - [reporter, column]
+
+  - must_id: "item:A.5.25:log_classification"
+    description: "Classification per row (event / near-miss / incident / false positive)"
+    excerpt_keywords:
+      - [event, classification, column]
+      - [near, miss, column]
+      - [false, positive, column]
+      - [severity, per, event]
+
+  - must_id: "item:A.5.25:log_owner"
+    description: "Named triager per row"
+    excerpt_keywords:
+      - [triager, column]
+      - [triage, owner, column]
+      - [per, event, triager]
+      - [triage, accountability, column]
+
+  - must_id: "item:A.5.25:log_decision"
+    description: "Triage decision per row"
+    excerpt_keywords:
+      - [triage, decision, column]
+      - [escalated, to, incident]
+      - [closed, as, false, positive]
+      - [filed, as, near, miss]

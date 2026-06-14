@@ -1,0 +1,62 @@
+# Per-MUST fingerprint catalog for req:A.5.12:information_classification_scheme
+#
+# Reviewed-from-skeleton 2026-06-14. Classification-scheme document
+# patterns — level enumerations + handling rules + authority.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.12:information_classification_scheme"
+target_control: "A.5.12"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.12:levels_defined"
+    description: "Classification levels defined"
+    excerpt_keywords:
+      - [classification, levels]
+      - [public, internal, confidential]
+      - [internal, confidential, restricted]
+      - [classification, scheme, levels]
+      - [data, classification, levels]
+
+  - must_id: "item:A.5.12:level_definitions"
+    description: "Definition and indicative examples per level"
+    excerpt_keywords:
+      - [definition, per, level]
+      - [per, level, examples]
+      - [classification, level, definition]
+      - [indicative, examples, per]
+
+  - must_id: "item:A.5.12:cia_dimensions"
+    description: "Each level addresses confidentiality, integrity, availability"
+    excerpt_keywords:
+      - [confidentiality, integrity, availability]
+      - [cia, per, level]
+      - [cia, triad, per, classification]
+      - [confidentiality, integrity, level]
+
+  - must_id: "item:A.5.12:default_class"
+    description: "Default classification for unclassified information"
+    excerpt_keywords:
+      - [default, classification]
+      - [unclassified, default]
+      - [fail, safe, classification]
+      - [default, level, internal]
+
+  - must_id: "item:A.5.12:classification_authority"
+    description: "Decision authority for classifying information"
+    excerpt_keywords:
+      - [classification, authority]
+      - [owner, classifies]
+      - [classification, decision, authority]
+      - [data, owner, classifies]
+      - [who, classifies]
+
+  - must_id: "item:A.5.12:handling_per_level"
+    description: "Handling implications per level"
+    excerpt_keywords:
+      - [handling, per, level]
+      - ["A.5.13"]
+      - ["A.5.10"]
+      - ["A.5.14"]
+      - [labelling, per, level]
+      - [handling, requirements, per]

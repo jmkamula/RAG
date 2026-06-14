@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:A.5.21:eol_replacement_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-replacement-event lifecycle-end
+# patterns — EOL/replacement of an ICT component.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.21:eol_replacement_record"
+target_control: "A.5.21"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.21:eol_trigger"
+    description: "EOL trigger per record"
+    excerpt_keywords:
+      - [eol, trigger, per, record]
+      - [vendor, announcement, eol]
+      - [end, of, support, trigger]
+      - [vulnerability, driven, decommission]
+
+  - must_id: "item:A.5.21:eol_replacement"
+    description: "Replacement component selected and sourcing controls re-applied"
+    excerpt_keywords:
+      - [replacement, component, selected]
+      - [eol, replacement, decision]
+      - [sourcing, controls, re, applied]
+      - [replacement, component, sourcing]
+
+  - must_id: "item:A.5.21:eol_authoriser"
+    description: "Authoriser of the replacement"
+    excerpt_keywords:
+      - [eol, replacement, authoriser]
+      - [replacement, signed, off, by]
+      - [eol, decision, signed, by]
+      - [risk, acceptance, eol]
+
+  - must_id: "item:A.5.21:eol_cutover"
+    description: "Cutover date executed"
+    excerpt_keywords:
+      - [eol, cutover, date]
+      - [replacement, cutover, executed]
+      - [eol, migration, completed, on]
+      - [compensating, controls, eol, delay]
+
+  - must_id: "item:A.5.21:eol_verification"
+    description: "Post-replacement verification"
+    excerpt_keywords:
+      - [post, replacement, verification]
+      - [eol, replacement, verified]
+      - [integrity, verification, replacement]
+      - [functional, acceptance, replacement]

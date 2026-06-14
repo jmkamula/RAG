@@ -1,0 +1,34 @@
+# Per-MUST fingerprint catalog for req:A.5.12:management_approval
+#
+# Reviewed-from-skeleton 2026-06-14. Approval-event patterns —
+# signatory, date, version reference.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.12:management_approval"
+target_control: "A.5.12"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.12:approval_signatory"
+    description: "Signatory at appropriate management level (CISO or data-protection lead)"
+    excerpt_keywords:
+      - [approved, by, ciso]
+      - [classification, signed, by]
+      - [signatory, classification, scheme]
+      - [endorsed, by, top, management]
+
+  - must_id: "item:A.5.12:approval_date"
+    description: "Approval date recorded"
+    excerpt_keywords:
+      - [approved, on, date]
+      - [classification, approval, date]
+      - [scheme, signed, on]
+      - [date, of, approval, classification]
+
+  - must_id: "item:A.5.12:approval_target"
+    description: "Reference to the specific version of the classification scheme being approved"
+    excerpt_keywords:
+      - [classification, scheme, version]
+      - [scheme, version, approved]
+      - [approved, version]
+      - [version, reference, classification]

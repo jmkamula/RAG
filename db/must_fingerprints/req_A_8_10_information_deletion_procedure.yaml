@@ -1,0 +1,59 @@
+# Per-MUST fingerprint catalog for req:A.8.10:information_deletion_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Deletion-procedure vocabulary.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.10:information_deletion_procedure"
+target_control: "A.8.10"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.10:deletion_methods"
+    description: "Deletion methods per media class"
+    excerpt_keywords:
+      - [crypto, erase]
+      - [overwrite, deletion]
+      - [physical, destruction, media]
+      - [logical, delete]
+      - [deletion, method, per, media]
+
+  - must_id: "item:A.8.10:retention_trigger"
+    description: "Retention trigger source"
+    excerpt_keywords:
+      - [retention, trigger, source]
+      - ["A.5.33"]
+      - [records, schedule, link]
+      - [retention, schedule, trigger]
+
+  - must_id: "item:A.8.10:gdpr_erasure_path"
+    description: "GDPR Art.17 erasure path (DSAR-triggered deletion)"
+    excerpt_keywords:
+      - ["Art.17"]
+      - [dsar, erasure, path]
+      - [right, to, erasure]
+      - ["A.5.34"]
+      - [erasure, request, deletion]
+
+  - must_id: "item:A.8.10:legal_hold"
+    description: "Legal-hold integration overriding deletion"
+    excerpt_keywords:
+      - [legal, hold, override]
+      - [legal, hold, deletion]
+      - [hold, rationale]
+      - [hold, termination, criteria]
+
+  - must_id: "item:A.8.10:scope_systems"
+    description: "Scope covers backups + replicas + caches + audit copies"
+    excerpt_keywords:
+      - [backup, replica, cache]
+      - [deletion, includes, backups]
+      - [audit, copy, deletion]
+      - [secondary, system, deletion]
+
+  - must_id: "item:A.8.10:verification"
+    description: "Verification of deletion"
+    excerpt_keywords:
+      - [deletion, audit, log]
+      - [sample, re, read, verification]
+      - [certificate, of, destruction]
+      - [deletion, verification, evidence]

@@ -1,0 +1,55 @@
+# Per-MUST fingerprint catalog for req:A.5.25:triage_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. Triage-program audit cycle.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.25:triage_program_review"
+target_control: "A.5.25"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.25:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [triage, program, review, date]
+      - [triage, reviewed, on]
+      - [event, triage, review, conducted]
+
+  - must_id: "item:A.5.25:rev_reviewer"
+    description: "Reviewer identity (SecOps lead + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [secops, lead, triage, review]
+      - [infosec, lead, triage, review]
+      - [triage, reviewed, by]
+
+  - must_id: "item:A.5.25:rev_fp_rate"
+    description: "False-positive rate analysed across the period"
+    excerpt_keywords:
+      - [false, positive, rate]
+      - [fp, rate, analysis]
+      - [triage, fp, rate]
+      - [false, positive, ratio, triage]
+
+  - must_id: "item:A.5.25:rev_missed"
+    description: "Missed-event analysis"
+    excerpt_keywords:
+      - [missed, event, analysis, triage]
+      - [triage, miss, analysis]
+      - [lessons, learned, missed, events]
+      - [triage, gap, analysis]
+
+  - must_id: "item:A.5.25:rev_calibration"
+    description: "Calibration outcome"
+    excerpt_keywords:
+      - [triage, calibration]
+      - [severity, threshold, adjusted]
+      - [criteria, recalibrated]
+      - [detection, source, calibrated]
+
+  - must_id: "item:A.5.25:rev_actions"
+    description: "Action items captured"
+    excerpt_keywords:
+      - [triage, review, action, items]
+      - [add, monitoring, source]
+      - [adjust, severity, threshold]
+      - [triage, improvement, actions]

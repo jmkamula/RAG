@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:A.5.20:deviation_register
+#
+# Reviewed-from-skeleton 2026-06-14. Per-deviation register patterns.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.20:deviation_register"
+target_control: "A.5.20"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.20:dev_supplier"
+    description: "Supplier identifier per row (link to A.5.19 supplier register)"
+    excerpt_keywords:
+      - [deviation, supplier, column]
+      - [per, deviation, supplier]
+      - ["A.5.19"]
+      - [supplier, ref, deviation]
+
+  - must_id: "item:A.5.20:dev_clause"
+    description: "Clause deviated from per row"
+    excerpt_keywords:
+      - [deviation, clause, column]
+      - [clause, deviated, from]
+      - [template, section, deviation]
+      - [contract, clause, exception]
+
+  - must_id: "item:A.5.20:dev_reason"
+    description: "Reason for the deviation captured"
+    excerpt_keywords:
+      - [deviation, reason, column]
+      - [deviation, rationale, per]
+      - [commercial, necessity, deviation]
+      - [supplier, capability, deviation]
+
+  - must_id: "item:A.5.20:dev_approver"
+    description: "Approver of the deviation, at level proportional to residual risk"
+    excerpt_keywords:
+      - [deviation, approver, column]
+      - [per, deviation, approver]
+      - [deviation, approved, by]
+      - [risk, acceptance, deviation]
+
+  - must_id: "item:A.5.20:dev_compensating"
+    description: "Compensating control stated"
+    excerpt_keywords:
+      - [compensating, control, deviation]
+      - [alternative, requirement, deviation]
+      - [monitoring, compensating, deviation]
+      - [contractual, remedy, deviation]
