@@ -1,0 +1,89 @@
+# Per-MUST fingerprint catalog for req:A.5.16:identity_revocation_record
+#
+# Reviewed-from-skeleton 2026-06-14. The revocation_record shape parallels
+# A.5.18:access_revocation_record — same SLA-met / identity_pair / residual-
+# cleanup logic, applied to identity lifecycle end. Patterns lean on
+# auditor-canonical vocabulary (SLA met, deactivated, effective date)
+# rather than the verbose multi-token enums from the MUST descriptions.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.16:identity_revocation_record"
+target_control: "A.5.16"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.16:rev_identity_ref"
+    description: "Identity identifier per record (links to identity register entry)"
+    # Per-record markers only — generic single-bigrams match policy text
+    # that mentions user IDs as a concept rather than per-record evidence.
+    # The "must never be re-issued once disabled" policy clause is NOT
+    # per-record evidence even though it mentions both user IDs and
+    # disabling; require active-revocation language.
+    excerpt_keywords:
+      - [identity, was, revoked]
+      - [account, was, revoked]
+      - [identity, was, disabled]
+      - [revocation, record, for]
+      - [revoked, identity, entry]
+      - [per, revoked, identity]
+
+  - must_id: "item:A.5.16:rev_trigger_type"
+    description: "Trigger type per record (termination / contract_end / suspension_to_disable / incident_revocation / orphan_cleanup)"
+    excerpt_keywords:
+      - [revocation, reason]
+      - [revocation, trigger]
+      - [termination]
+      - [contract, end]
+      - [contract_end]
+      - [incident, revocation]
+      - [orphan, cleanup]
+
+  - must_id: "item:A.5.16:rev_effective_date"
+    description: "Effective date per record (last working day OR contract expiry OR incident decision time)"
+    excerpt_keywords:
+      - [effective, date]
+      - [last, working, day]
+      - [last, day]
+      - [termination, date]
+      - [contract, expiry]
+      - [decision, date]
+
+  - must_id: "item:A.5.16:rev_actual_timestamp"
+    description: "Actual revocation timestamp per record (drives SLA-met calculation)"
+    excerpt_keywords:
+      - [revocation, date]
+      - [revoked, on]
+      - [date, revoked]
+      - [disabled, date]
+      - [date, disabled]
+      - [deactivated, on]
+
+  - must_id: "item:A.5.16:rev_sla_met"
+    description: "SLA-met flag per record (yes / no_with_reason — gap between effective and actual must be within stated SLA, or exception logged)"
+    excerpt_keywords:
+      - [sla, met]
+      - [within, sla]
+      - [within, hours]
+      - [within, days]
+      - [sla, breach]
+      - [no_with_reason]
+
+  - must_id: "item:A.5.16:rev_dual_signoff"
+    description: "Dual signoff per record (IT identity-owner + HR or hiring manager — captures even when in-person handover impossible)"
+    excerpt_keywords:
+      - [dual, signoff]
+      - [dual, sign, off]
+      - [signed, off]
+      - [hr, signoff]
+      - [manager, approval]
+      - [two, signatures]
+
+  - must_id: "item:A.5.16:rev_residual_cleanup"
+    description: "Residual-cleanup status per record (mailbox forwarding configured, file-share access transferred or revoked, group memberships cleared)"
+    excerpt_keywords:
+      - [mailbox, forwarding]
+      - [mailbox, transferred]
+      - [file, share, access]
+      - [group, memberships]
+      - [residual, cleanup]
+      - [shared, mailbox]

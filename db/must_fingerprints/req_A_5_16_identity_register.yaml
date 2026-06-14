@@ -1,0 +1,97 @@
+# Per-MUST fingerprint catalog for req:A.5.16:identity_register
+#
+# Reviewed-from-skeleton 2026-06-14. Tightened to avoid false positives
+# from policy-statement excerpts that talk ABOUT identity but don't
+# represent register-row evidence. Each MUST anchors on column-header
+# style tokens (or per-row data shapes) rather than verbs/phrases that
+# describe identity management generally.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.16:identity_register"
+target_control: "A.5.16"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.16:reg_identity_id"
+    description: "Each active identity captured with a unique identifier (employee id, contractor id, service-account id, shared-account id)"
+    # Generic single-bigrams ([user, id], [employee, id]) match policy
+    # text that talks ABOUT user IDs. Per-row-shaped patterns only.
+    excerpt_keywords:
+      - [unique, identifier, per]
+      - [identity, id, column]
+      - [user, id, column]
+      - [username, column]
+      - [register, of, identities]
+      - [each, identity, has]
+
+  - must_id: "item:A.5.16:reg_identity_type"
+    description: "Identity type per row (human_employee / human_contractor / service / shared / system_account) — drives policy variant applied"
+    excerpt_keywords:
+      - [identity, type]
+      - [account, type]
+      - [user, type]
+      - [service, account]
+      - [contractor]
+      - [human_employee]
+      - [shared, account]
+
+  - must_id: "item:A.5.16:reg_owner"
+    description: "Named owner per row (human owner accountable for THIS identity — even for service accounts, must be a human)"
+    excerpt_keywords:
+      - [account, owner]
+      - [identity, owner]
+      - [named, owner]
+      - [owner, name]
+      - [accountable, owner]
+      - [responsible, manager]
+
+  - must_id: "item:A.5.16:reg_status"
+    description: "Status per row (active / suspended / disabled / pending_termination) updated as lifecycle events fire"
+    excerpt_keywords:
+      - [account, status]
+      - [identity, status]
+      - [employment, status]
+      - [status, active]
+      - [status, disabled]
+      - [pending_termination]
+
+  - must_id: "item:A.5.16:reg_hr_link"
+    description: "HR-record link per row for human identities (joiner/leaver triggers cascade automatically — no manual sync)"
+    excerpt_keywords:
+      - [hr, record]
+      - [hr, link]
+      - [hr, system]
+      - [joiner, leaver]
+      - [hr, trigger]
+      - [hr, integration]
+      - [people, system]
+
+  - must_id: "item:A.5.16:reg_service_expiry"
+    description: "Expiry date per row for service / shared / temporary identities (forces deliberate renewal rather than indefinite drift)"
+    excerpt_keywords:
+      - [expiry, date]
+      - [expiration, date]
+      - [account, expiry]
+      - [valid, until]
+      - [renewal, date]
+      - [contract, expiry]
+
+  - must_id: "item:A.5.16:reg_last_used"
+    description: "Last-used timestamp per row (drives auto-suspend at N days idle; orphan detection)"
+    excerpt_keywords:
+      - [last, used]
+      - [last, login]
+      - [last, sign]
+      - [last, activity]
+      - [last, access]
+      - [days, idle]
+
+  - must_id: "item:A.5.16:reg_created_modified"
+    description: "Created and last-modified timestamps per row"
+    excerpt_keywords:
+      - [created, date]
+      - [created, on]
+      - [date, created]
+      - [last, modified]
+      - [modified, date]
+      - [created, modified]

@@ -1,0 +1,96 @@
+# Per-MUST fingerprint catalog for req:A.5.16:identity_management_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Procedure-shape MUSTs are mostly
+# satisfied by uploaded procedure documents that use canonical lifecycle
+# vocabulary (joiner-mover-leaver, least privilege, deactivation). The
+# skeleton's per-id-token suggestions (creation/modification/termination
+# etc.) were tightened to multi-token sets that distinguish each lifecycle
+# phase from generic "identity management" prose.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.16:identity_management_procedure"
+target_control: "A.5.16"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.16:unique_identity"
+    description: "Unique identity per person (no shared user accounts for individuals; named accountability)"
+    excerpt_keywords:
+      - [unique, identity]
+      - [unique, user]
+      - [no, shared, accounts]
+      - [named, accountability]
+      - [one, person, one]
+      - [individual, accountability]
+
+  - must_id: "item:A.5.16:creation"
+    description: "Identity creation steps (verification of person, naming convention, initial entitlements — least-privilege at issuance)"
+    excerpt_keywords:
+      - [identity, creation]
+      - [account, creation]
+      - [account, provisioning]
+      - [joiner, process]
+      - [naming, convention]
+      - [least, privilege]
+      - [initial, entitlements]
+
+  - must_id: "item:A.5.16:modification"
+    description: "Modification steps for role changes (add/remove entitlements; same-day or next-business-day SLA)"
+    excerpt_keywords:
+      - [role, change]
+      - [mover, process]
+      - [modify, access]
+      - [change, entitlements]
+      - [same, day, sla]
+      - [next, business, day]
+
+  - must_id: "item:A.5.16:termination"
+    description: "Termination steps with stated deactivation timeline (e.g. within 24h of last day; immediate on involuntary termination)"
+    excerpt_keywords:
+      - [termination, process]
+      - [leaver, process]
+      - [deactivation, timeline]
+      - [within, 24h]
+      - [within, hours]
+      - [immediate, on, termination]
+      - [last, working, day]
+
+  - must_id: "item:A.5.16:suspension"
+    description: "Suspension steps for leave of absence, risk events (under investigation), or extended inactivity (auto-suspend at N days idle)"
+    excerpt_keywords:
+      - [account, suspension]
+      - [leave, of, absence]
+      - [auto, suspend]
+      - [days, idle]
+      - [under, investigation]
+      - [extended, inactivity]
+
+  - must_id: "item:A.5.16:ownership"
+    description: "Ownership of each lifecycle phase (HR triggers from leaver register; IT executes; manager approves; InfoSec oversight)"
+    excerpt_keywords:
+      - [hr, triggers]
+      - [it, executes]
+      - [manager, approves]
+      - [infosec, oversight]
+      - [lifecycle, ownership]
+      - [raci]
+
+  - must_id: "item:A.5.16:service_accounts"
+    description: "Service / shared / non-human account governance (named human owner, expiry, scope, monitoring)"
+    excerpt_keywords:
+      - [service, account]
+      - [shared, account]
+      - [non, human, identity]
+      - [machine, account]
+      - [service, account, owner]
+      - [service, account, expiry]
+
+  - must_id: "item:A.5.16:authn_link"
+    description: "Cross-reference to A.5.17 authentication-information lifecycle (credential issuance and revocation are paired with identity events)"
+    excerpt_keywords:
+      - ["A.5.17"]
+      - [authentication, information]
+      - [credential, lifecycle]
+      - [credential, issuance]
+      - [credential, revocation]
+      - [paired, with, identity]

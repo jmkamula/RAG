@@ -1,0 +1,82 @@
+# Per-MUST fingerprint catalog for req:A.5.16:identity_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. Review-record MUSTs match
+# review/audit output vocabulary (findings, sample, outliers, orphan)
+# rather than the generic "review date" / "reviewer" tokens the
+# skeleton suggested.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.16:identity_program_review"
+target_control: "A.5.16"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.16:rev_date"
+    description: "Review date within the planned 180-day interval"
+    excerpt_keywords:
+      - [review, date]
+      - [review, conducted, on]
+      - [reviewed, on]
+      - [date, of, review]
+      - [last, reviewed]
+      - [180, day]
+
+  - must_id: "item:A.5.16:rev_reviewer"
+    description: "Reviewer identity (IT identity-lead + HR partner + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [reviewer]
+      - [reviewed, by]
+      - [identity, lead]
+      - [hr, partner]
+      - [infosec, lead]
+      - [conducted, by]
+
+  - must_id: "item:A.5.16:rev_orphan_analysis"
+    description: "Orphan analysis (identities without active HR record / business reason; remediation per orphan)"
+    excerpt_keywords:
+      - [orphan, accounts]
+      - [orphan, identities]
+      - [orphaned, account]
+      - [without, hr, record]
+      - [no, business, reason]
+      - [stale, account]
+
+  - must_id: "item:A.5.16:rev_termination_sla"
+    description: "Termination-SLA analysis (gap between leaver effective_date and identity_revocation date; outliers investigated)"
+    excerpt_keywords:
+      - [termination, sla]
+      - [sla, analysis]
+      - [sla, gap]
+      - [sla, outliers]
+      - [sla, exceptions]
+      - [revocation, lag]
+
+  - must_id: "item:A.5.16:rev_contractor_expiry"
+    description: "Contractor-expiry verification (audit that expired contractor identities are actually disabled, not just flagged)"
+    excerpt_keywords:
+      - [contractor, expiry]
+      - [expired, contractor]
+      - [contractor, disabled]
+      - [contractor, audit]
+      - [expired, identities]
+      - [contractor, lapsed]
+
+  - must_id: "item:A.5.16:rev_service_hygiene"
+    description: "Service-account hygiene audit (sample of service accounts re-validated: owner still employed, scope still appropriate, expiry not lapsed)"
+    excerpt_keywords:
+      - [service, account, audit]
+      - [service, account, sample]
+      - [service, account, hygiene]
+      - [service, account, owner]
+      - [service, account, expiry]
+      - [non, human, account, audit]
+
+  - must_id: "item:A.5.16:rev_actions"
+    description: "Action items captured from review (tighten auto-suspend, expand HR-cascade automation, retire shared accounts)"
+    excerpt_keywords:
+      - [action, items]
+      - [remediation, plan]
+      - [findings, addressed]
+      - [follow, up, actions]
+      - [improvement, actions]
+      - [corrective, action]
