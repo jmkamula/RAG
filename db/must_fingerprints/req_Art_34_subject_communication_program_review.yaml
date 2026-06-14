@@ -1,0 +1,43 @@
+# Per-MUST fingerprint catalog for req:Art.34:subject_communication_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.34 program review.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.34:subject_communication_program_review"
+target_control: "Art.34"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.34:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [art, 34, program, review, date]
+      - [art, 34, reviewed, on]
+
+  - must_id: "item:Art.34:rev_reviewer"
+    description: "Reviewer identity (DPO + legal + incident-response lead)"
+    excerpt_keywords:
+      - [art, 34, reviewed, by, dpo]
+      - [art, 34, legal, lead, review]
+      - [art, 34, ir, lead, review]
+
+  - must_id: "item:Art.34:rev_decision_defensibility"
+    description: "High-risk decision defensibility"
+    excerpt_keywords:
+      - [art, 34, decision, defensibility]
+      - [art, 34, high, risk, decision, audit]
+      - [art, 34, sampled, decision, audit]
+
+  - must_id: "item:Art.34:rev_exception_audit"
+    description: "Exception-claim audit"
+    excerpt_keywords:
+      - [art, 34, 3, exception, audit]
+      - [art, 34, encryption, exception, audit]
+      - [art, 34, exception, claim, legitimacy]
+
+  - must_id: "item:Art.34:rev_content_quality"
+    description: "Content-quality audit"
+    excerpt_keywords:
+      - [art, 34, content, quality, audit]
+      - [art, 34, plain, language, audit]
+      - [art, 34, communication, dpo, contact, audit]

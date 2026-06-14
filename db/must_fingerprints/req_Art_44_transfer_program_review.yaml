@@ -1,0 +1,44 @@
+# Per-MUST fingerprint catalog for req:Art.44:transfer_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.44 program review.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.44:transfer_program_review"
+target_control: "Art.44"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.44:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [transfer, program, review, date]
+      - [art, 44, reviewed, on]
+
+  - must_id: "item:Art.44:rev_reviewer"
+    description: "Reviewer identity (DPO + legal counsel + procurement)"
+    excerpt_keywords:
+      - [transfer, reviewed, by, dpo]
+      - [transfer, legal, counsel, review]
+      - [transfer, procurement, review]
+
+  - must_id: "item:Art.44:rev_register_currency"
+    description: "Register currency"
+    excerpt_keywords:
+      - [transfer, register, currency]
+      - [transfer, assessment, freshness]
+      - [transfer, last, assessment, window]
+
+  - must_id: "item:Art.44:rev_mechanism_validity"
+    description: "Mechanism-validity sample"
+    excerpt_keywords:
+      - [art, 45, adequacy, decision, current]
+      - [sccs, current, version]
+      - [bcrs, current, approval]
+      - [transfer, mechanism, validity, sample]
+
+  - must_id: "item:Art.44:rev_silent_transfer_sweep"
+    description: "Silent-transfer sweep"
+    excerpt_keywords:
+      - [silent, transfer, sweep]
+      - [unflagged, transfer, audit]
+      - [new, vendor, transfer, unflagged]

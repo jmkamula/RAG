@@ -1,0 +1,45 @@
+# Per-MUST fingerprint catalog for req:Art.45:adequacy_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.45 adequacy procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.45:adequacy_procedure"
+target_control: "Art.45"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.45:adequacy_decision_check"
+    description: "Adequacy-decision check"
+    excerpt_keywords:
+      - ["Art.45.3"]
+      - [art, 45, 3, commission, decision]
+      - [adequacy, decision, verified]
+      - [eu, register, adequacy]
+
+  - must_id: "item:Art.45:recipient_eligibility"
+    description: "Recipient eligibility check"
+    excerpt_keywords:
+      - [us, dpf, certification]
+      - [recipient, active, list, certification]
+      - [recipient, self, certification]
+
+  - must_id: "item:Art.45:partial_adequacy"
+    description: "Partial / sector / territory-specific adequacy"
+    excerpt_keywords:
+      - [partial, adequacy]
+      - [sector, specific, adequacy]
+      - [us, dpf, certified, entities, only]
+
+  - must_id: "item:Art.45:repeal_monitoring"
+    description: "Repeal monitoring — Schrems-style invalidations"
+    excerpt_keywords:
+      - [schrems, invalidation]
+      - [schrems, i, ii, decision]
+      - ["Art.45.5"]
+      - [commission, amend, repeal, suspend]
+
+  - must_id: "item:Art.45:owner"
+    description: "Named owner (DPO + legal counsel)"
+    excerpt_keywords:
+      - [art, 45, owner, dpo, legal]
+      - [adequacy, procedure, owner]

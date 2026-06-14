@@ -1,0 +1,54 @@
+# Per-MUST fingerprint catalog for req:Art.46:safeguards_register
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.46 safeguards register.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.46:safeguards_register"
+target_control: "Art.46"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.46:reg_transfer_id"
+    description: "Per-row transfer id"
+    excerpt_keywords:
+      - [safeguards, register]
+      - [art, 46, transfer, id]
+      - [safeguards, art, 44, register, ref]
+
+  - must_id: "item:Art.46:reg_safeguard"
+    description: "Per-row safeguard type"
+    excerpt_keywords:
+      - ["Art.46.2"]
+      - ["Art.46.3"]
+      - [art, 46, 2, safeguard]
+      - [art, 46, 3, safeguard]
+
+  - must_id: "item:Art.46:reg_sccs_module"
+    description: "Per-row SCC module where applicable"
+    excerpt_keywords:
+      - [sccs, module]
+      - [sccs, module, 1, c2c]
+      - [sccs, module, 2, c2p]
+      - [sccs, module, 3, p2p]
+      - [sccs, module, 4, p2c]
+
+  - must_id: "item:Art.46:reg_tia_outcome"
+    description: "Per-row TIA outcome"
+    excerpt_keywords:
+      - [tia, outcome, column]
+      - [tia, acceptable, supplementary]
+      - [tia, not, acceptable]
+
+  - must_id: "item:Art.46:reg_supplementary_measures"
+    description: "Per-row supplementary measures applied"
+    excerpt_keywords:
+      - [supplementary, measures, applied]
+      - [supplementary, encryption, keys]
+      - [supplementary, pseudonymisation, per]
+
+  - must_id: "item:Art.46:reg_signed_date"
+    description: "Per-row safeguard signed / countersigned date"
+    excerpt_keywords:
+      - [safeguards, signed, date]
+      - [sccs, countersigned, date]
+      - [art, 46, signed, on]

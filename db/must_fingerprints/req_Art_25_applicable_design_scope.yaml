@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:Art.25:applicable_design_scope
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.25 scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.25:applicable_design_scope"
+target_control: "Art.25"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.25:scope_design_activities"
+    description: "Design activities in scope"
+    excerpt_keywords:
+      - [dpbd, scope, design, activities]
+      - [new, product, dpbd, scope]
+      - [new, feature, dpbd, scope]
+      - [new, processor, dpbd, scope]
+
+  - must_id: "item:Art.25:scope_significant_change"
+    description: "Definition of 'significant change'"
+    excerpt_keywords:
+      - [dpbd, significant, change, definition]
+      - [significant, change, re, design, review]
+      - [art, 25, significant, change]
+
+  - must_id: "item:Art.25:scope_exclusions"
+    description: "Out-of-scope changes"
+    excerpt_keywords:
+      - [dpbd, exclusion, scope]
+      - [bug, fix, dpbd, exclusion]
+      - [internal, refactoring, dpbd, exclusion]

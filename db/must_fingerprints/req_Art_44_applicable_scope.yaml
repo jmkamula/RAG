@@ -1,0 +1,30 @@
+# Per-MUST fingerprint catalog for req:Art.44:applicable_scope
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.44 scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.44:applicable_scope"
+target_control: "Art.44"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.44:scope_transfer_definition"
+    description: "Operational definition of 'transfer' per EDPB 05/2021"
+    excerpt_keywords:
+      - [edpb, 05, 2021]
+      - [transfer, three, cumulative, criteria]
+      - [transfer, operational, definition]
+
+  - must_id: "item:Art.44:scope_eu_eea"
+    description: "EU/EEA boundary"
+    excerpt_keywords:
+      - [eu, eea, boundary, transfer]
+      - [gdpr, territorial, scope, transfer]
+      - [transfer, within, eu, eea]
+
+  - must_id: "item:Art.44:scope_excluded_flows"
+    description: "Excluded flows"
+    excerpt_keywords:
+      - [transfer, excluded, internal, eu]
+      - [transit, only, transfer, excluded]
+      - [non, personal, data, transfer, excluded]

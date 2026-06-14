@@ -1,0 +1,43 @@
+# Per-MUST fingerprint catalog for req:Art.44:transfer_principle_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.44 transfer procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.44:transfer_principle_procedure"
+target_control: "Art.44"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.44:transfer_identification"
+    description: "Transfer-identification mechanism"
+    excerpt_keywords:
+      - [transfer, identification, mechanism]
+      - [transfer, flagged, at, intake]
+      - [transfer, vendor, onboarding, flagged]
+
+  - must_id: "item:Art.44:mechanism_selection"
+    description: "Mechanism-selection decision tree"
+    excerpt_keywords:
+      - ["Art.45", "Art.46"]
+      - [transfer, mechanism, selection]
+      - [adequacy, safeguards, bcrs, derogation, order]
+
+  - must_id: "item:Art.44:level_of_protection"
+    description: "Level-of-protection assessment"
+    excerpt_keywords:
+      - [art, 44, level, of, protection]
+      - [art, 44, final, clause]
+      - [protection, not, undermined, transfer]
+
+  - must_id: "item:Art.44:onward_transfer"
+    description: "Onward-transfer handling"
+    excerpt_keywords:
+      - [art, 44, onward, transfer]
+      - [art, 44, subsequent, transfers]
+      - [art, 44, second, sentence, onward]
+
+  - must_id: "item:Art.44:owner"
+    description: "Named owner (DPO + legal counsel)"
+    excerpt_keywords:
+      - [transfer, procedure, owner]
+      - [art, 44, dpo, legal, counsel, owner]

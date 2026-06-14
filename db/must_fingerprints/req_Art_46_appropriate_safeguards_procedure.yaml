@@ -1,0 +1,55 @@
+# Per-MUST fingerprint catalog for req:Art.46:appropriate_safeguards_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.46 procedure.
+# v2 raw produced 6 FPs from generic transfer safeguards language.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.46:appropriate_safeguards_procedure"
+target_control: "Art.46"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.46:safeguard_selection"
+    description: "Safeguard-selection decision tree"
+    excerpt_keywords:
+      - ["Art.46.2"]
+      - ["Art.46.3"]
+      - [art, 46, 2, a, f, safeguard]
+      - [art, 46, 3, after, authorisation]
+
+  - must_id: "item:Art.46:sccs_handling"
+    description: "SCCs handling — current 2021/914 EU SCCs version"
+    excerpt_keywords:
+      - [2021, 914, sccs]
+      - [eu, sccs, modules]
+      - [sccs, modules, 1, 2, 3, 4]
+      - [sccs, correct, module, relationship]
+
+  - must_id: "item:Art.46:tia"
+    description: "Transfer Impact Assessment (TIA) per Schrems II"
+    excerpt_keywords:
+      - [schrems, ii, tia]
+      - [transfer, impact, assessment]
+      - [third, country, law, fundamental, rights]
+
+  - must_id: "item:Art.46:supplementary_measures"
+    description: "Supplementary measures applied where TIA reveals gaps"
+    excerpt_keywords:
+      - [supplementary, measures, applied]
+      - [encryption, keys, only, eu]
+      - [supplementary, pseudonymisation]
+      - [tia, gap, supplementary]
+
+  - must_id: "item:Art.46:enforceable_rights"
+    description: "Enforceable data subject rights and effective legal remedies"
+    excerpt_keywords:
+      - [enforceable, data, subject, rights]
+      - [effective, legal, remedies]
+      - [art, 46, enforceable, rights]
+
+  - must_id: "item:Art.46:owner"
+    description: "Named owner (DPO + legal counsel + procurement)"
+    excerpt_keywords:
+      - [art, 46, owner, dpo, legal]
+      - [safeguards, procedure, owner]
+      - [art, 46, procurement, owner]

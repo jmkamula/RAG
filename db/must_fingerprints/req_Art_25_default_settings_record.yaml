@@ -1,0 +1,44 @@
+# Per-MUST fingerprint catalog for req:Art.25:default_settings_record
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.25 default settings record.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.25:default_settings_record"
+target_control: "Art.25"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.25:default_systems_inventoried"
+    description: "Personal-data systems inventoried"
+    excerpt_keywords:
+      - ["Art.30"]
+      - [personal, data, systems, inventoried]
+      - [data, by, default, systems, inventory]
+
+  - must_id: "item:Art.25:default_amount"
+    description: "Default collection minimises the amount of personal data"
+    excerpt_keywords:
+      - [default, amount, minimised]
+      - [default, data, minimisation]
+      - [minimum, personal, data, by, default]
+
+  - must_id: "item:Art.25:default_extent"
+    description: "Default processing minimises the extent"
+    excerpt_keywords:
+      - [default, processing, extent]
+      - [default, extent, minimised]
+      - [minimise, extent, of, processing, default]
+
+  - must_id: "item:Art.25:default_storage"
+    description: "Default storage period set to the minimum necessary"
+    excerpt_keywords:
+      - [default, storage, minimum]
+      - [default, retention, minimum]
+      - [storage, period, minimum, default]
+
+  - must_id: "item:Art.25:default_accessibility"
+    description: "Default accessibility limited"
+    excerpt_keywords:
+      - [default, accessibility, limited]
+      - [default, not, made, accessible]
+      - [indefinite, recipients, default, restricted]

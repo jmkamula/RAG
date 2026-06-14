@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:Art.44:transfer_register
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.44 transfer register.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.44:transfer_register"
+target_control: "Art.44"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.44:reg_transfer_id"
+    description: "Per-row unique transfer identifier"
+    excerpt_keywords:
+      - [transfer, register]
+      - [art, 44, transfer, id]
+      - [cross, border, transfer, register]
+
+  - must_id: "item:Art.44:reg_destination"
+    description: "Per-row destination country + recipient entity"
+    excerpt_keywords:
+      - [transfer, destination, column]
+      - [transfer, recipient, country]
+      - [transfer, third, country, destination]
+
+  - must_id: "item:Art.44:reg_data_categories"
+    description: "Per-row data categories"
+    excerpt_keywords:
+      - ["Art.30"]
+      - [transfer, data, categories, ropa]
+      - [transfer, data, types, column]
+
+  - must_id: "item:Art.44:reg_mechanism"
+    description: "Per-row Art.45/46/47/49 mechanism cited"
+    excerpt_keywords:
+      - [transfer, mechanism, column]
+      - ["Art.45", "Art.46", "Art.47", "Art.49"]
+      - [transfer, sccs, mechanism]
+      - [transfer, adequacy, mechanism]
+
+  - must_id: "item:Art.44:reg_assessed_date"
+    description: "Per-row last-assessed date"
+    excerpt_keywords:
+      - [transfer, last, assessed, date]
+      - [transfer, staleness, date]
+
+  - must_id: "item:Art.44:reg_owner"
+    description: "Per-row owner"
+    excerpt_keywords:
+      - [transfer, owner, column]
+      - [transfer, per, row, accountable, owner]

@@ -1,0 +1,63 @@
+# Per-MUST fingerprint catalog for req:Art.33:notification_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.33 procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.33:notification_procedure"
+target_control: "Art.33"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.33:proc_intake"
+    description: "Internal intake — how operational events reach the breach-notification team"
+    excerpt_keywords:
+      - ["A.5.25"]
+      - ["A.5.26"]
+      - [art, 33, intake, from, incident]
+      - [breach, notification, internal, intake]
+
+  - must_id: "item:Art.33:proc_severity_gate"
+    description: "Severity gate — when notification is NOT required"
+    excerpt_keywords:
+      - ["Art.33.1"]
+      - [art, 33, 1, unlikely, risk, exception]
+      - [no, notify, decision, art, 33]
+      - [breach, severity, gate]
+
+  - must_id: "item:Art.33:proc_awareness_definition"
+    description: "Definition of 'awareness' (when the 72h clock starts)"
+    excerpt_keywords:
+      - [breach, awareness, definition]
+      - [72h, clock, start, awareness]
+      - [art, 33, awareness, reasonable, degree]
+
+  - must_id: "item:Art.33:proc_drafting"
+    description: "Drafting workflow"
+    excerpt_keywords:
+      - ["Art.33.3"]
+      - [art, 33, 3, template]
+      - [breach, notification, drafting, workflow]
+      - [art, 33, dpo, legal, sign, off]
+
+  - must_id: "item:Art.33:proc_dispatch"
+    description: "Dispatch path to lead supervisory authority"
+    excerpt_keywords:
+      - ["Art.56"]
+      - ["Art.55"]
+      - [lead, supervisory, authority, dispatch]
+      - [art, 33, sa, channel, receipt]
+
+  - must_id: "item:Art.33:proc_delay_handling"
+    description: "Delay handling — if past 72h"
+    excerpt_keywords:
+      - [art, 33, past, 72h, delay]
+      - [art, 33, 1, last, sentence, reason]
+      - [breach, late, notification, reason]
+
+  - must_id: "item:Art.33:proc_processor_inbound"
+    description: "Processor inbound — handling Art.33.2 notifications"
+    excerpt_keywords:
+      - ["Art.33.2"]
+      - [art, 33, 2, processor, inbound]
+      - [processor, breach, notification, received]
+      - [sub, processor, breach, notification]

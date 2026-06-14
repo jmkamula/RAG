@@ -1,0 +1,53 @@
+# Per-MUST fingerprint catalog for req:Art.34:subject_communication_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.34 procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.34:subject_communication_procedure"
+target_control: "Art.34"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.34:high_risk_gate"
+    description: "High-risk gate — when subject communication IS required"
+    excerpt_keywords:
+      - [art, 34, high, risk, gate]
+      - [art, 34, likely, high, risk]
+      - [subject, communication, required]
+
+  - must_id: "item:Art.34:without_undue_delay"
+    description: "Timing — 'without undue delay' interpretation"
+    excerpt_keywords:
+      - [art, 34, without, undue, delay]
+      - [art, 34, decision, matrix, severity]
+      - [art, 34, timing, subject, communication]
+
+  - must_id: "item:Art.34:content"
+    description: "Communication content per Art.34.2"
+    excerpt_keywords:
+      - ["Art.34.2"]
+      - [art, 34, 2, content]
+      - [plain, language, breach, communication]
+      - [dpo, contact, art, 34]
+
+  - must_id: "item:Art.34:exception_assessment"
+    description: "Art.34.3 exception assessment"
+    excerpt_keywords:
+      - ["Art.34.3"]
+      - [art, 34, 3, exception]
+      - [encryption, deemed, appropriate, art, 34]
+      - [disproportionate, effort, art, 34]
+
+  - must_id: "item:Art.34:public_communication"
+    description: "Public communication route"
+    excerpt_keywords:
+      - [art, 34, public, communication, route]
+      - [art, 34, individual, disproportionate]
+      - [art, 34, equally, effective, public]
+
+  - must_id: "item:Art.34:sa_consultation"
+    description: "SA consultation pathway"
+    excerpt_keywords:
+      - [art, 34, sa, consultation]
+      - [art, 34, 4, sa, may, require]
+      - [supervisory, authority, art, 34, override]

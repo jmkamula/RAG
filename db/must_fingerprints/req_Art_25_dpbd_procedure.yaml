@@ -1,0 +1,45 @@
+# Per-MUST fingerprint catalog for req:Art.25:dpbd_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.25 DPbD procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.25:dpbd_procedure"
+target_control: "Art.25"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.25:proc_checkpoint"
+    description: "Design-stage checkpoint stated"
+    excerpt_keywords:
+      - [dpbd, design, stage, checkpoint]
+      - [data, protection, by, design, checkpoint]
+      - [dpbd, sdlc, integration]
+
+  - must_id: "item:Art.25:proc_inputs"
+    description: "Inputs to DPbD review"
+    excerpt_keywords:
+      - [dpbd, review, inputs]
+      - [data, minimisation, dpbd]
+      - [special, category, overlay, dpbd]
+      - [retention, rules, dpbd]
+
+  - must_id: "item:Art.25:proc_dpia_integration"
+    description: "Integration with Art.35 DPIA"
+    excerpt_keywords:
+      - ["Art.35"]
+      - [dpbd, escalates, to, dpia]
+      - [art, 25, art, 35, integration]
+
+  - must_id: "item:Art.25:proc_record"
+    description: "Per-review record retained"
+    excerpt_keywords:
+      - [dpbd, review, record, retained]
+      - [dpbd, design, decision, recorded]
+      - [dpbd, measures, recorded]
+
+  - must_id: "item:Art.25:proc_authority"
+    description: "Decision authority for DPbD outcomes"
+    excerpt_keywords:
+      - [dpbd, decision, authority]
+      - [dpo, product, engineering, dpbd]
+      - [dpbd, signed, off, by]

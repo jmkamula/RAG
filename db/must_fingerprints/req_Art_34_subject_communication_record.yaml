@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:Art.34:subject_communication_record
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.34 subject communication record.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.34:subject_communication_record"
+target_control: "Art.34"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.34:reg_breach_id"
+    description: "Per-row breach id"
+    excerpt_keywords:
+      - [art, 34, breach, id]
+      - [art, 33, register, cross, reference]
+      - [art, 34, subject, communication, register]
+
+  - must_id: "item:Art.34:reg_high_risk_decision"
+    description: "Per-row high-risk decision"
+    excerpt_keywords:
+      - [art, 34, high, risk, decision]
+      - [art, 34, no, communication, rationale]
+      - [art, 34, communicate, rationale]
+
+  - must_id: "item:Art.34:reg_communication_date"
+    description: "Per-row communication date"
+    excerpt_keywords:
+      - [art, 34, communication, date]
+      - [art, 34, communicated, on]
+
+  - must_id: "item:Art.34:reg_communication_method"
+    description: "Per-row communication method"
+    excerpt_keywords:
+      - [art, 34, email, in, app]
+      - [art, 34, public, notice, communication]
+      - [art, 34, communication, method, mixed]
+
+  - must_id: "item:Art.34:reg_subjects_reached"
+    description: "Per-row subjects-reached count"
+    excerpt_keywords:
+      - [art, 34, subjects, reached, count]
+      - [art, 34, public, communication, used]
+      - [art, 34, unable, to, calculate]
+
+  - must_id: "item:Art.34:reg_exception_cited"
+    description: "Per-row Art.34.3 exception cited"
+    excerpt_keywords:
+      - ["Art.34.3"]
+      - [art, 34, 3, exception, cited]
+      - [art, 34, encryption, exception]

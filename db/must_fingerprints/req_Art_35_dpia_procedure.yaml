@@ -1,0 +1,58 @@
+# Per-MUST fingerprint catalog for req:Art.35:dpia_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.35 DPIA procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.35:dpia_procedure"
+target_control: "Art.35"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.35:trigger_criteria"
+    description: "Trigger criteria — Art.35.3 mandatory cases"
+    excerpt_keywords:
+      - ["Art.35.3"]
+      - [art, 35, 3, mandatory, cases]
+      - [systematic, monitoring, dpia]
+      - [special, category, large, scale, dpia]
+      - [public, area, dpia]
+
+  - must_id: "item:Art.35:content_minimum"
+    description: "Minimum content per Art.35.7"
+    excerpt_keywords:
+      - ["Art.35.7"]
+      - [art, 35, 7, content]
+      - [systematic, description, dpia]
+      - [necessity, proportionality, dpia]
+      - [dpia, measures, address, risk]
+
+  - must_id: "item:Art.35:dpo_advice"
+    description: "DPO advice mandatory (Art.35.2)"
+    excerpt_keywords:
+      - ["Art.35.2"]
+      - [art, 35, 2, dpo, advice]
+      - [dpo, consulted, during, dpia]
+      - [dpia, dpo, advice, recorded]
+
+  - must_id: "item:Art.35:subject_consultation"
+    description: "Subject consultation considered (Art.35.9)"
+    excerpt_keywords:
+      - ["Art.35.9"]
+      - [art, 35, 9, subject, consultation]
+      - [dpia, subject, views, sought]
+      - [dpia, representative, consulted]
+
+  - must_id: "item:Art.35:art36_escalation"
+    description: "Art.36 prior-consultation escalation"
+    excerpt_keywords:
+      - ["Art.36"]
+      - [art, 36, prior, consultation]
+      - [residual, high, risk, escalate, sa]
+
+  - must_id: "item:Art.35:review_trigger"
+    description: "Review trigger — DPIA reviewed when processing risk changes"
+    excerpt_keywords:
+      - ["Art.35.11"]
+      - [art, 35, 11, review, trigger]
+      - [dpia, processing, risk, change]
+      - [dpia, refreshed, when, changes]

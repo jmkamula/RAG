@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:Art.35:dpia_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.35 program review.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.35:dpia_program_review"
+target_control: "Art.35"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.35:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [dpia, program, review, date]
+      - [art, 35, program, reviewed]
+
+  - must_id: "item:Art.35:rev_reviewer"
+    description: "Reviewer identity (DPO + executive sponsor + lead privacy engineer)"
+    excerpt_keywords:
+      - [dpia, reviewed, by, dpo]
+      - [dpia, executive, sponsor, review]
+      - [dpia, privacy, engineer, review]
+
+  - must_id: "item:Art.35:rev_coverage"
+    description: "Coverage check"
+    excerpt_keywords:
+      - [dpia, coverage, audit]
+      - [dpia, in, scope, activity, audit]
+      - [art, 35, 5, white, list, justification]
+
+  - must_id: "item:Art.35:rev_advice_quality"
+    description: "DPO-advice quality sample"
+    excerpt_keywords:
+      - [dpo, advice, quality, sample]
+      - [dpo, advice, substantive]
+      - [dpo, advice, rubber, stamp, audit]
+
+  - must_id: "item:Art.35:rev_art36_audit"
+    description: "Art.36 escalation audit"
+    excerpt_keywords:
+      - ["Art.36"]
+      - [art, 36, escalation, audit]
+      - [residual, high, risk, dpia, sa]
+
+  - must_id: "item:Art.35:rev_review_cadence"
+    description: "Review-cadence audit"
+    excerpt_keywords:
+      - ["Art.35.11"]
+      - [art, 35, 11, dpia, refresh]
+      - [dpia, processing, changed, refresh]

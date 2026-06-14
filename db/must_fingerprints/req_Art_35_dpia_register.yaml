@@ -1,0 +1,52 @@
+# Per-MUST fingerprint catalog for req:Art.35:dpia_register
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.35 DPIA register.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.35:dpia_register"
+target_control: "Art.35"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.35:reg_dpia_id"
+    description: "Per-row DPIA identifier"
+    excerpt_keywords:
+      - [dpia, register]
+      - [dpia, id, column]
+      - [dpia, identifier, per]
+
+  - must_id: "item:Art.35:reg_processing_activity"
+    description: "Per-row processing activity"
+    excerpt_keywords:
+      - ["Art.30"]
+      - [dpia, ropa, cross, reference]
+      - [dpia, processing, activity, ref]
+
+  - must_id: "item:Art.35:reg_trigger"
+    description: "Per-row trigger"
+    excerpt_keywords:
+      - ["Art.35.3"]
+      - [dpia, trigger, per, row]
+      - [dpia, sa, list, trigger]
+      - [dpia, risk, based, trigger]
+
+  - must_id: "item:Art.35:reg_dpo_advice_date"
+    description: "Per-row DPO advice date + summary"
+    excerpt_keywords:
+      - [dpia, dpo, advice, date]
+      - [dpo, advice, dpia, summary]
+      - [dpia, dpo, consulted, on]
+
+  - must_id: "item:Art.35:reg_residual_risk"
+    description: "Per-row residual-risk level"
+    excerpt_keywords:
+      - [dpia, residual, risk, level]
+      - [dpia, residual, after, mitigation]
+
+  - must_id: "item:Art.35:reg_outcome"
+    description: "Per-row outcome (proceed / mitigate / Art.36 consult / abandon)"
+    excerpt_keywords:
+      - [dpia, proceed, outcome]
+      - [dpia, mitigate, then, proceed]
+      - ["Art.36"]
+      - [dpia, abandon, outcome]

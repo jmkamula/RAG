@@ -1,0 +1,45 @@
+# Per-MUST fingerprint catalog for req:Art.33:breach_notification
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.33 breach notification.
+# v2 raw produced 7 FPs from generic breach notification language.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.33:breach_notification"
+target_control: "Art.33"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.33:timing"
+    description: "Notified within 72 hours of becoming aware"
+    excerpt_keywords:
+      - [within, 72, hours, becoming, aware]
+      - [art, 33, 72, hour, sla]
+      - [72, hour, breach, notification, art, 33]
+
+  - must_id: "item:Art.33:nature"
+    description: "Nature of the breach including categories and approximate number"
+    excerpt_keywords:
+      - [art, 33, nature, of, breach]
+      - [art, 33, categories, approximate, number]
+      - [breach, data, subject, count, notification]
+
+  - must_id: "item:Art.33:consequences"
+    description: "Likely consequences of the breach"
+    excerpt_keywords:
+      - [art, 33, likely, consequences]
+      - [breach, likely, consequences, recorded]
+      - [breach, impact, notification]
+
+  - must_id: "item:Art.33:measures"
+    description: "Measures taken or proposed to address the breach"
+    excerpt_keywords:
+      - [art, 33, measures, taken]
+      - [breach, measures, proposed, addressed]
+      - [breach, remediation, notification]
+
+  - must_id: "item:Art.33:dpo_contact"
+    description: "Contact details of DPO or other contact point"
+    excerpt_keywords:
+      - [art, 33, dpo, contact]
+      - [breach, notification, dpo, contact]
+      - [breach, contact, point, notification]

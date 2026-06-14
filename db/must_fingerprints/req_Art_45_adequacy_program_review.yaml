@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:Art.45:adequacy_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.45 program review.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.45:adequacy_program_review"
+target_control: "Art.45"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.45:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [adequacy, program, review, date]
+      - [art, 45, reviewed, on]
+
+  - must_id: "item:Art.45:rev_reviewer"
+    description: "Reviewer identity (DPO + legal counsel)"
+    excerpt_keywords:
+      - [adequacy, reviewed, by, dpo]
+      - [adequacy, legal, counsel, review]
+
+  - must_id: "item:Art.45:rev_decision_currency"
+    description: "Decision currency"
+    excerpt_keywords:
+      - [adequacy, decision, currency]
+      - [adequacy, decision, in, force]
+      - [adequacy, decision, not, repealed, suspended]
+
+  - must_id: "item:Art.45:rev_recipient_recheck"
+    description: "Recipient-eligibility recheck"
+    excerpt_keywords:
+      - [us, dpf, certification, active, recheck]
+      - [recipient, eligibility, recheck]
+      - [adequacy, certification, audit]
+
+  - must_id: "item:Art.45:rev_fallback_readiness"
+    description: "Fallback readiness"
+    excerpt_keywords:
+      - [adequacy, fallback, readiness]
+      - [sccs, pre, staged, invalidation]
+      - [art, 46, fallback, vendor]

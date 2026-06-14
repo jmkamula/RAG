@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:Art.46:safeguards_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. GDPR Art.46 program review.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.46:safeguards_program_review"
+target_control: "Art.46"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.46:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [safeguards, program, review, date]
+      - [art, 46, reviewed, on]
+
+  - must_id: "item:Art.46:rev_reviewer"
+    description: "Reviewer identity (DPO + legal counsel)"
+    excerpt_keywords:
+      - [safeguards, reviewed, by, dpo]
+      - [safeguards, legal, counsel, review]
+
+  - must_id: "item:Art.46:rev_tia_currency"
+    description: "TIA currency"
+    excerpt_keywords:
+      - [tia, currency]
+      - [tia, refreshed, third, country, law]
+      - [tia, materially, changed]
+
+  - must_id: "item:Art.46:rev_sccs_version"
+    description: "SCCs version audit"
+    excerpt_keywords:
+      - [sccs, version, audit]
+      - [sccs, old, version, migration]
+      - [sccs, 2021, 914, migration]
+
+  - must_id: "item:Art.46:rev_supplementary_audit"
+    description: "Supplementary measures audit"
+    excerpt_keywords:
+      - [supplementary, measures, audit]
+      - [encryption, keys, in, place, vendor]
+      - [supplementary, pseudonymisation, audit]
