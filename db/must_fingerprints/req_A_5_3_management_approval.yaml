@@ -1,0 +1,28 @@
+# Per-MUST fingerprint catalog for req:A.5.3:management_approval
+#
+# Reviewed-from-skeleton 2026-06-14. SoD matrix approval.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.3:management_approval"
+target_control: "A.5.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.3:approval_signatory"
+    description: "Signatory at top-management level"
+    excerpt_keywords:
+      - [sod, matrix, approved, by]
+      - [segregation, matrix, signed, by]
+      - [sod, top, management, signatory]
+
+  - must_id: "item:A.5.3:approval_date"
+    description: "Approval date recorded"
+    excerpt_keywords:
+      - [sod, matrix, approved, on]
+      - [segregation, matrix, signed, on]
+
+  - must_id: "item:A.5.3:approval_target"
+    description: "Reference to the specific version being approved"
+    excerpt_keywords:
+      - [sod, matrix, version, approved]
+      - [segregation, matrix, version, ref]

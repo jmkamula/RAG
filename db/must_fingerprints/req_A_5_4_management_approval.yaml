@@ -1,0 +1,28 @@
+# Per-MUST fingerprint catalog for req:A.5.4:management_approval
+#
+# Reviewed-from-skeleton 2026-06-14. Management directive approval.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.4:management_approval"
+target_control: "A.5.4"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.4:approval_signatory"
+    description: "Signatory at top-management level"
+    excerpt_keywords:
+      - [management, directive, approved, by, ceo]
+      - [management, directive, signed, by, board]
+      - [management, directive, top, management, signatory]
+
+  - must_id: "item:A.5.4:approval_date"
+    description: "Approval date recorded"
+    excerpt_keywords:
+      - [management, directive, approved, on]
+      - [management, directive, signed, on]
+
+  - must_id: "item:A.5.4:approval_target"
+    description: "Reference to the specific version of the management directive"
+    excerpt_keywords:
+      - [management, directive, version, approved]
+      - [management, directive, version, ref]

@@ -1,0 +1,53 @@
+# Per-MUST fingerprint catalog for req:A.5.37:operating_procedures_register
+#
+# Reviewed-from-skeleton 2026-06-14. Operating procedures catalogue.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.37:operating_procedures_register"
+target_control: "A.5.37"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.37:procedure_inventory"
+    description: "Inventory of operating procedures"
+    excerpt_keywords:
+      - [operating, procedures, register]
+      - [runbook, catalogue]
+      - [procedures, inventory, list]
+      - [operating, procedure, list]
+
+  - must_id: "item:A.5.37:scope_coverage"
+    description: "Scope coverage stated"
+    excerpt_keywords:
+      - [procedure, coverage, scope]
+      - [procedures, every, facility]
+      - [procedure, coverage, gap]
+
+  - must_id: "item:A.5.37:owner_per_procedure"
+    description: "Ownership per procedure"
+    excerpt_keywords:
+      - [procedure, owner, per, row]
+      - [procedure, accountability, owner]
+      - [procedure, operator, owner]
+
+  - must_id: "item:A.5.37:audience_per_procedure"
+    description: "Intended audience per procedure"
+    excerpt_keywords:
+      - [procedure, audience, column]
+      - [procedure, intended, personnel]
+      - [procedure, access, permission]
+
+  - must_id: "item:A.5.37:availability"
+    description: "Availability mechanism stated per procedure"
+    excerpt_keywords:
+      - [procedure, intranet, location]
+      - [procedure, runbook, system, location]
+      - [procedure, wiki, path]
+      - [procedure, availability, mechanism]
+
+  - must_id: "item:A.5.37:version_control"
+    description: "Version control per procedure"
+    excerpt_keywords:
+      - [procedure, version, control]
+      - [procedure, last, updated, date]
+      - [procedure, review, due, date]

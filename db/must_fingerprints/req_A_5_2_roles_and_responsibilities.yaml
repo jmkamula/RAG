@@ -1,0 +1,53 @@
+# Per-MUST fingerprint catalog for req:A.5.2:roles_and_responsibilities
+#
+# Reviewed-from-skeleton 2026-06-14. Responsibility matrix.
+# v2 raw produced 11 FPs — generic "roles" / "responsibilities" language.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.2:roles_and_responsibilities"
+target_control: "A.5.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.2:roles_enumerated"
+    description: "Information security roles enumerated"
+    excerpt_keywords:
+      - [ciso, isms, manager, asset, owner]
+      - [risk, owner, incident, manager]
+      - [isms, roles, enumerated]
+      - [security, roles, catalogue]
+
+  - must_id: "item:A.5.2:allocation"
+    description: "Allocation to named individuals or positions"
+    excerpt_keywords:
+      - [allocated, to, named, individual]
+      - [role, named, individual, allocation]
+      - [position, name, role, allocation]
+
+  - must_id: "item:A.5.2:responsibilities"
+    description: "Responsibilities described per role"
+    excerpt_keywords:
+      - [responsibility, per, role, described]
+      - [decision, rights, per, role]
+      - [oversight, execution, per, role]
+
+  - must_id: "item:A.5.2:asset_owner_resp"
+    description: "Accountability for protection and risk management of specific assets"
+    excerpt_keywords:
+      - [asset, owner, accountability]
+      - [asset, owner, risk, management]
+      - [asset, protection, accountability]
+
+  - must_id: "item:A.5.2:topic_alignment"
+    description: "Allocation covers ISMS operation, asset ownership, risk management"
+    excerpt_keywords:
+      - [isms, operation, allocation]
+      - [audit, security, review, topic]
+      - [isms, allocation, topics]
+
+  - must_id: "item:A.5.2:reporting_lines"
+    description: "Reporting and escalation lines stated"
+    excerpt_keywords:
+      - [reporting, lines, stated]
+      - [escalation, lines, role]
+      - [role, reports, to]

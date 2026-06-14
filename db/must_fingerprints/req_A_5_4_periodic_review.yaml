@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:A.5.4:periodic_review
+#
+# Reviewed-from-skeleton 2026-06-14. Management directive review.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.4:periodic_review"
+target_control: "A.5.4"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.4:review_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [management, directive, review, date]
+      - [management, directive, reviewed, on]
+
+  - must_id: "item:A.5.4:review_reviewer"
+    description: "Reviewer identity"
+    excerpt_keywords:
+      - [management, directive, reviewed, by]
+      - [ciso, management, directive, review]
+      - [compliance, lead, management, directive]
+
+  - must_id: "item:A.5.4:review_outcome"
+    description: "Outcome and policy-reference drift checked"
+    excerpt_keywords:
+      - [management, directive, no, change]
+      - [management, directive, amended]
+      - [management, directive, policy, reference, drift]
+
+  - must_id: "item:A.5.4:review_actions"
+    description: "Actions captured where the directive needed amendment"
+    excerpt_keywords:
+      - [management, directive, action, items]
+      - [management, directive, scope, change]
+      - [management, directive, new, personnel, category]

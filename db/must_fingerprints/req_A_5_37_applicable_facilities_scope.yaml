@@ -1,0 +1,40 @@
+# Per-MUST fingerprint catalog for req:A.5.37:applicable_facilities_scope
+#
+# Reviewed-from-skeleton 2026-06-14. Facilities scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.37:applicable_facilities_scope"
+target_control: "A.5.37"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.37:scope_systems"
+    description: "Systems in scope enumerated"
+    excerpt_keywords:
+      - [procedures, scope, systems]
+      - [production, applications, scope]
+      - [key, infrastructure, scope]
+      - [procedure, applicable, systems]
+
+  - must_id: "item:A.5.37:scope_facility_classes"
+    description: "Facility classes / categories"
+    excerpt_keywords:
+      - [compute, storage, network, scope]
+      - [security, tooling, scope]
+      - [observability, identity, scope]
+      - [facility, class, procedure]
+
+  - must_id: "item:A.5.37:scope_saas"
+    description: "Key SaaS environments"
+    excerpt_keywords:
+      - [m365, procedure, scope]
+      - [salesforce, procedure, scope]
+      - [servicenow, procedure, scope]
+      - [saas, procedure, scope]
+
+  - must_id: "item:A.5.37:scope_asset_link"
+    description: "Cross-link to A.5.9 asset register"
+    excerpt_keywords:
+      - ["A.5.9"]
+      - [procedure, facility, asset, link]
+      - [facility, asset, register, link]

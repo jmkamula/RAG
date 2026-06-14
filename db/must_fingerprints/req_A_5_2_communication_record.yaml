@@ -1,0 +1,30 @@
+# Per-MUST fingerprint catalog for req:A.5.2:communication_record
+#
+# Reviewed-from-skeleton 2026-06-14. Roles & responsibilities communication.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.2:communication_record"
+target_control: "A.5.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.2:comm_date"
+    description: "Date of publication/communication"
+    excerpt_keywords:
+      - [responsibility, matrix, communicated, on]
+      - [roles, matrix, published, on]
+      - [isms, responsibilities, communicated]
+
+  - must_id: "item:A.5.2:comm_audience"
+    description: "Audience reached"
+    excerpt_keywords:
+      - [responsibility, matrix, audience]
+      - [responsibility, matrix, distributed, to]
+      - [isms, roles, distributed, to]
+
+  - must_id: "item:A.5.2:comm_channel"
+    description: "Channel used"
+    excerpt_keywords:
+      - [responsibility, matrix, intranet]
+      - [responsibility, matrix, training, session]
+      - [isms, roles, onboarding, pack]

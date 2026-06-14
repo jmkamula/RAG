@@ -1,0 +1,58 @@
+# Per-MUST fingerprint catalog for req:A.5.28:evidence_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. Evidence-handling program audit.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.28:evidence_program_review"
+target_control: "A.5.28"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.28:rev_date"
+    description: "Review date within the planned annual interval"
+    excerpt_keywords:
+      - [evidence, program, review, date]
+      - [evidence, handling, reviewed, on]
+
+  - must_id: "item:A.5.28:rev_reviewer"
+    description: "Reviewer identity (InfoSec lead + legal counsel jointly)"
+    excerpt_keywords:
+      - [evidence, reviewed, by]
+      - [legal, counsel, evidence, review]
+      - [evidence, handling, reviewer]
+
+  - must_id: "item:A.5.28:rev_competence"
+    description: "Competence/training status of authorised personnel reviewed"
+    excerpt_keywords:
+      - [evidence, competence, audit]
+      - [evidence, certification, audit]
+      - [evidence, training, status, review]
+
+  - must_id: "item:A.5.28:rev_custody_incidents"
+    description: "Custody-incident analysis"
+    excerpt_keywords:
+      - [evidence, custody, incident]
+      - [broken, seal, event]
+      - [evidence, missing, handover, signature]
+      - [unauthorised, access, evidence]
+
+  - must_id: "item:A.5.28:rev_integrity_audit"
+    description: "Integrity-verification audit"
+    excerpt_keywords:
+      - [evidence, hash, audit]
+      - [evidence, register, re, hashed]
+      - [evidence, hash, mismatch, investigated]
+
+  - must_id: "item:A.5.28:rev_legal_alignment"
+    description: "Alignment-with-current-legal-standards check"
+    excerpt_keywords:
+      - [evidence, jurisdictional, updates]
+      - [evidence, case, law, shifts]
+      - [evidence, regulator, guidance, shifts]
+
+  - must_id: "item:A.5.28:rev_actions"
+    description: "Action items captured for the program"
+    excerpt_keywords:
+      - [evidence, program, action, items]
+      - [evidence, tooling, retrain]
+      - [evidence, jurisdiction, tagging, update]

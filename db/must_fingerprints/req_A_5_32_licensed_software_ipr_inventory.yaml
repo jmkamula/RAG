@@ -1,0 +1,48 @@
+# Per-MUST fingerprint catalog for req:A.5.32:licensed_software_ipr_inventory
+#
+# Reviewed-from-skeleton 2026-06-14. IPR inventory register.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.32:licensed_software_ipr_inventory"
+target_control: "A.5.32"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.32:licensed_inventory"
+    description: "Inventory of licensed commercial software"
+    excerpt_keywords:
+      - [licensed, software, inventory]
+      - [licence, entitlement, register]
+      - [seats, cores, sites, entitlements]
+      - [licence, expiry, per, entry]
+
+  - must_id: "item:A.5.32:opensource_inventory"
+    description: "Open-source components inventory with licence type"
+    excerpt_keywords:
+      - [open, source, inventory]
+      - [open, source, licence, type, per]
+      - [sbom, components]
+      - [open, source, register]
+
+  - must_id: "item:A.5.32:owned_ipr"
+    description: "Organisation-owned IPR entries"
+    excerpt_keywords:
+      - [owned, ipr, trademark]
+      - [owned, ipr, patent]
+      - [owned, ipr, trade, secret]
+      - [ipr, protection, scope]
+
+  - must_id: "item:A.5.32:owner_per_entry"
+    description: "Named owner per entry"
+    excerpt_keywords:
+      - [ipr, owner, per, entry]
+      - [procurement, owner, ipr]
+      - [engineering, owner, ipr]
+      - [ipr, renewal, accountability]
+
+  - must_id: "item:A.5.32:asset_link"
+    description: "Linkage to A.5.9 asset register"
+    excerpt_keywords:
+      - ["A.5.9"]
+      - [ipr, asset, register, link]
+      - [licensed, asset, link]

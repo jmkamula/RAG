@@ -1,0 +1,55 @@
+# Per-MUST fingerprint catalog for req:A.5.32:ipr_audit_review
+#
+# Reviewed-from-skeleton 2026-06-14. IPR audit review record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.32:ipr_audit_review"
+target_control: "A.5.32"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.32:audit_cadence"
+    description: "Audit date within the planned interval"
+    excerpt_keywords:
+      - [ipr, audit, date]
+      - [ipr, audit, cadence]
+      - [licence, audit, date]
+
+  - must_id: "item:A.5.32:audit_reviewer"
+    description: "Reviewer identity and role (procurement / legal / engineering)"
+    excerpt_keywords:
+      - [ipr, audit, reviewer]
+      - [licence, audit, by, procurement]
+      - [legal, ipr, audit]
+      - [engineering, ipr, audit]
+
+  - must_id: "item:A.5.32:audit_entitlement"
+    description: "Entitlement check"
+    excerpt_keywords:
+      - [licence, entitlement, check]
+      - [deployed, seats, vs, licence]
+      - [licence, allowance, audit]
+      - [licence, exception, remediated]
+
+  - must_id: "item:A.5.32:audit_opensource"
+    description: "Open-source attribution and licence-obligation check"
+    excerpt_keywords:
+      - [open, source, attribution, check]
+      - [notice, file, check]
+      - [source, availability, check]
+      - [open, source, licence, obligation]
+
+  - must_id: "item:A.5.32:audit_expiry"
+    description: "Expired/expiring licences flagged"
+    excerpt_keywords:
+      - [expired, licence, flagged]
+      - [licence, renewal, completed]
+      - [licence, removal, completed]
+      - [expiring, licence, flagged]
+
+  - must_id: "item:A.5.32:audit_inventory_update"
+    description: "Inventory updated as a result of the audit"
+    excerpt_keywords:
+      - [ipr, inventory, updated, after, audit]
+      - [licence, inventory, refresh]
+      - [ipr, inventory, change, log]

@@ -1,0 +1,57 @@
+# Per-MUST fingerprint catalog for req:A.5.32:intellectual_property_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. IPR procedure document.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.32:intellectual_property_procedure"
+target_control: "A.5.32"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.32:scope_iprs"
+    description: "Scope of IPRs covered"
+    excerpt_keywords:
+      - [software, licences, ipr]
+      - [trademarks, copyrights, patents]
+      - [trade, secrets, ipr]
+      - [ai, model, weights, ipr]
+      - [ipr, scope]
+
+  - must_id: "item:A.5.32:third_party_respect"
+    description: "Third-party IPR respect"
+    excerpt_keywords:
+      - [third, party, ipr, respect]
+      - [open, source, licence, compliance]
+      - [royalty, payment, ipr]
+      - [attribution, ipr]
+
+  - must_id: "item:A.5.32:usage_controls"
+    description: "Usage controls preventing unlicensed software installation"
+    excerpt_keywords:
+      - [unlicensed, software, prevention]
+      - [allow, listing, software]
+      - [mdm, edr, software, control]
+      - [procurement, gate, software]
+
+  - must_id: "item:A.5.32:employee_creations"
+    description: "Employee-creations rule"
+    excerpt_keywords:
+      - [work, product, ownership]
+      - [open, source, contribution, policy]
+      - [prior, ip, carve, out]
+      - [employee, ipr, creation]
+
+  - must_id: "item:A.5.32:incident_handling"
+    description: "Handling path for suspected IPR infringement"
+    excerpt_keywords:
+      - [ipr, infringement, handling]
+      - [cease, and, desist]
+      - [ipr, takedown]
+      - [ipr, internal, report, path]
+
+  - must_id: "item:A.5.32:owner"
+    description: "Named owner of the procedure"
+    excerpt_keywords:
+      - [ipr, procedure, owner]
+      - [legal, it, ipr, owner]
+      - [ipr, accountable, owner]

@@ -1,0 +1,51 @@
+# Per-MUST fingerprint catalog for req:A.5.28:evidence_disposal_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-evidence disposal record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.28:evidence_disposal_record"
+target_control: "A.5.28"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.28:disp_package_ref"
+    description: "Package identifier per record"
+    excerpt_keywords:
+      - [evidence, disposal, package, ref]
+      - [evidence, custody, register, ref]
+      - [evidence, package, id, disposed]
+
+  - must_id: "item:A.5.28:disp_closure_type"
+    description: "Closure type per record"
+    excerpt_keywords:
+      - [evidence, external, handover, closure]
+      - [evidence, retention, destruction, closure]
+      - [evidence, case, closed, internal]
+
+  - must_id: "item:A.5.28:disp_method"
+    description: "Closure method per record"
+    excerpt_keywords:
+      - [evidence, sealed, handover, receipt]
+      - [evidence, secure, destruction, witness]
+      - [evidence, destruction, method]
+
+  - must_id: "item:A.5.28:disp_authoriser"
+    description: "Authoriser per record"
+    excerpt_keywords:
+      - [evidence, disposal, authoriser]
+      - [counsel, sign, off, external, handover]
+      - [evidence, closure, signed, by]
+
+  - must_id: "item:A.5.28:disp_final_hash"
+    description: "Final hash per record"
+    excerpt_keywords:
+      - [evidence, final, hash]
+      - [evidence, handover, hash, matches]
+      - [evidence, pre, destruction, hash]
+
+  - must_id: "item:A.5.28:disp_closure_date"
+    description: "Closure date recorded"
+    excerpt_keywords:
+      - [evidence, closure, date]
+      - [evidence, disposal, date]
+      - [evidence, closed, on]

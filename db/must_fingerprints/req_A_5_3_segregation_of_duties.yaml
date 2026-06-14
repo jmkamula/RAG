@@ -1,0 +1,48 @@
+# Per-MUST fingerprint catalog for req:A.5.3:segregation_of_duties
+#
+# Reviewed-from-skeleton 2026-06-14. Segregation matrix document.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.3:segregation_of_duties"
+target_control: "A.5.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.3:conflict_pairs"
+    description: "Conflicting duty pairs identified"
+    excerpt_keywords:
+      - [conflicting, duty, pairs]
+      - [requestor, vs, approver]
+      - [developer, vs, production, deployer]
+      - [vendor, vs, payment, authoriser]
+      - [sod, conflict, pair]
+
+  - must_id: "item:A.5.3:separation_method"
+    description: "Separation mechanism stated per pair"
+    excerpt_keywords:
+      - [different, people, separation]
+      - [four, eyes, separation]
+      - [time, bound, role, swap]
+      - [separation, mechanism, per, pair]
+
+  - must_id: "item:A.5.3:compensating"
+    description: "Compensating controls where full separation is not feasible"
+    excerpt_keywords:
+      - [small, team, exception, separation]
+      - [supervisory, review, compensating]
+      - [automated, logging, compensating]
+      - [sod, compensating, control]
+
+  - must_id: "item:A.5.3:coverage_scope"
+    description: "Scope of coverage stated"
+    excerpt_keywords:
+      - [sod, scope]
+      - [sod, coverage, functional, areas]
+      - [segregation, matrix, scope]
+
+  - must_id: "item:A.5.3:owner"
+    description: "Named owner of the matrix"
+    excerpt_keywords:
+      - [sod, matrix, owner]
+      - [segregation, matrix, owner]
+      - [sod, owner, accountable]

@@ -1,0 +1,67 @@
+# Per-MUST fingerprint catalog for req:A.5.28:evidence_custody_register
+#
+# Reviewed-from-skeleton 2026-06-14. Evidence custody register.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.28:evidence_custody_register"
+target_control: "A.5.28"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.28:reg_package_id"
+    description: "Each evidence package captured with a unique identifier"
+    excerpt_keywords:
+      - [evidence, package, id]
+      - [evidence, custody, register, id]
+      - [evidence, package, identifier]
+
+  - must_id: "item:A.5.28:reg_evidence_type"
+    description: "Evidence type per row"
+    excerpt_keywords:
+      - [evidence, type, column]
+      - [log, export, evidence, type]
+      - [disk, image, evidence, type]
+      - [memory, capture, evidence, type]
+
+  - must_id: "item:A.5.28:reg_source_incident"
+    description: "Source incident reference per row (links to A.5.26)"
+    excerpt_keywords:
+      - ["A.5.26"]
+      - [evidence, source, incident, ref]
+      - [incident, evidence, link]
+
+  - must_id: "item:A.5.28:reg_custodian"
+    description: "Current custodian per row"
+    excerpt_keywords:
+      - [evidence, custodian, column]
+      - [sealed, storage, location]
+      - [evidence, custody, holder]
+
+  - must_id: "item:A.5.28:reg_location"
+    description: "Current location per row"
+    excerpt_keywords:
+      - [evidence, location, column]
+      - [evidence, vault, id]
+      - [evidence, cloud, bucket, ref]
+      - [external, party, receipt, id]
+
+  - must_id: "item:A.5.28:reg_acquisition_hash"
+    description: "Acquisition hash per row"
+    excerpt_keywords:
+      - [evidence, acquisition, hash]
+      - [evidence, hash, at, collection]
+      - [evidence, fingerprint, recorded]
+
+  - must_id: "item:A.5.28:reg_status"
+    description: "Status per row (active / handed-over / disposed)"
+    excerpt_keywords:
+      - [evidence, status, column]
+      - [evidence, active, status]
+      - [evidence, handed, over, status]
+      - [evidence, disposed, status]
+
+  - must_id: "item:A.5.28:reg_retention_end"
+    description: "Retention end-date per row"
+    excerpt_keywords:
+      - [evidence, retention, end, date]
+      - [evidence, disposal, trigger, date]

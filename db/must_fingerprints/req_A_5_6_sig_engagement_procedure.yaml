@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:A.5.6:sig_engagement_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. SIG engagement procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.6:sig_engagement_procedure"
+target_control: "A.5.6"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.6:proc_join_path"
+    description: "Path to join a new SIG"
+    excerpt_keywords:
+      - [sig, join, path]
+      - [sig, business, case]
+      - [sig, budget, allocation]
+      - [sig, approval, to, join]
+
+  - must_id: "item:A.5.6:proc_attendance"
+    description: "Attendance/participation expectations per membership"
+    excerpt_keywords:
+      - [sig, attendance, expectation]
+      - [sig, participation, requirement]
+      - [sig, working, group, attendance]
+
+  - must_id: "item:A.5.6:proc_value_capture"
+    description: "Value-capture path"
+    excerpt_keywords:
+      - ["A.5.7"]
+      - [sig, intelligence, flow]
+      - [sig, insights, flow, back]
+      - [sig, value, capture, path]
+
+  - must_id: "item:A.5.6:proc_disengagement"
+    description: "Disengagement path for dormant memberships"
+    excerpt_keywords:
+      - [sig, disengagement, path]
+      - [sig, dormant, membership]
+      - [sig, low, value, membership, retire]

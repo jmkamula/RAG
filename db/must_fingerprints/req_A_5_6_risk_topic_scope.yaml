@@ -1,0 +1,41 @@
+# Per-MUST fingerprint catalog for req:A.5.6:risk_topic_scope
+#
+# Reviewed-from-skeleton 2026-06-14. SIG topic scope.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.6:risk_topic_scope"
+target_control: "A.5.6"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.6:scope_threat_categories"
+    description: "Threat categories prioritised driving SIG choices"
+    excerpt_keywords:
+      - [ransomware, sig, scope]
+      - [supply, chain, sig, scope]
+      - [insider, threat, sig, scope]
+      - [sig, threat, category, scope]
+
+  - must_id: "item:A.5.6:scope_sectoral"
+    description: "Sectoral concerns driving sector-specific memberships"
+    excerpt_keywords:
+      - [finance, isac, sig, scope]
+      - [health, isac, sig, scope]
+      - [critical, infra, forum, sig, scope]
+      - [sig, sectoral, scope]
+
+  - must_id: "item:A.5.6:scope_tech_stack"
+    description: "Technology-stack components for which vendor/community SIGs are valuable"
+    excerpt_keywords:
+      - [sig, cloud, vendor, group]
+      - [sig, os, community]
+      - [sig, network, group]
+      - [sig, tech, stack, scope]
+
+  - must_id: "item:A.5.6:scope_skill_domains"
+    description: "Professional development / skill domains"
+    excerpt_keywords:
+      - [ciso, peer, group, sig]
+      - [secure, coding, community, sig]
+      - [sig, professional, development]
+      - [sig, skill, domain, scope]

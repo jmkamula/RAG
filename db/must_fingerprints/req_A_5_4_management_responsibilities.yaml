@@ -1,0 +1,46 @@
+# Per-MUST fingerprint catalog for req:A.5.4:management_responsibilities
+#
+# Reviewed-from-skeleton 2026-06-14. Management directive document.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.4:management_responsibilities"
+target_control: "A.5.4"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.4:mandate_statement"
+    description: "Statement that personnel are required to apply InfoSec policies"
+    excerpt_keywords:
+      - [personnel, required, to, apply, policies]
+      - [management, directive, mandate]
+      - [personnel, must, follow, infosec, policies]
+
+  - must_id: "item:A.5.4:scope_personnel"
+    description: "Applicability to all personnel (employees, contractors, third parties)"
+    excerpt_keywords:
+      - [applies, to, all, personnel]
+      - [employees, contractors, third, parties]
+      - [acting, on, behalf, of, organisation]
+
+  - must_id: "item:A.5.4:policy_references"
+    description: "Names or references the in-scope policies"
+    excerpt_keywords:
+      - [in, scope, policies, named]
+      - [topic, specific, policies, referenced]
+      - [policies, procedures, referenced, directive]
+
+  - must_id: "item:A.5.4:competence_link"
+    description: "Link to competence and training requirement (A.7.2)"
+    excerpt_keywords:
+      - ["A.7.2"]
+      - [competence, training, link]
+      - [know, how, to, comply]
+      - [training, requirement, directive]
+
+  - must_id: "item:A.5.4:enforcement"
+    description: "Statement of consequence for non-compliance (link to A.6.4)"
+    excerpt_keywords:
+      - ["A.6.4"]
+      - [disciplinary, consequence, non, compliance]
+      - [enforcement, directive]
+      - [hr, disciplinary, link, directive]

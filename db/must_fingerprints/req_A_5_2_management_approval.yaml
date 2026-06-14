@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:A.5.2:management_approval
+#
+# Reviewed-from-skeleton 2026-06-14. Responsibility matrix approval.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.2:management_approval"
+target_control: "A.5.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.2:approval_signatory"
+    description: "Signatory at top-management level"
+    excerpt_keywords:
+      - [responsibility, matrix, approved, by, ceo]
+      - [responsibility, matrix, signed, by, board]
+      - [isms, responsibilities, top, management, signatory]
+
+  - must_id: "item:A.5.2:approval_date"
+    description: "Approval date recorded"
+    excerpt_keywords:
+      - [responsibility, matrix, approved, on]
+      - [responsibility, matrix, signed, on]
+      - [isms, responsibilities, approval, date]
+
+  - must_id: "item:A.5.2:approval_target"
+    description: "Reference to the specific version of the responsibility matrix being approved"
+    excerpt_keywords:
+      - [responsibility, matrix, version, approved]
+      - [responsibility, matrix, version, ref]

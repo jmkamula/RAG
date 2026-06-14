@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.5.6:sig_engagement_review
+#
+# Reviewed-from-skeleton 2026-06-14. SIG engagement review.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.6:sig_engagement_review"
+target_control: "A.5.6"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.6:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [sig, engagement, review, date]
+      - [sig, engagement, reviewed, on]
+
+  - must_id: "item:A.5.6:rev_reviewer"
+    description: "Reviewer identity and role recorded"
+    excerpt_keywords:
+      - [sig, engagement, reviewed, by]
+      - [sig, engagement, reviewer]
+
+  - must_id: "item:A.5.6:rev_per_entry"
+    description: "Per-entry outcome (continue / disengage / upgrade)"
+    excerpt_keywords:
+      - [sig, per, entry, continue]
+      - [sig, disengage, decision]
+      - [sig, value, delivered, notes]
+      - [sig, upgrade, decision]
+
+  - must_id: "item:A.5.6:rev_register_update"
+    description: "Changes propagated back to the register"
+    excerpt_keywords:
+      - [sig, register, updated, after, review]
+      - [sig, register, refresh]
+
+  - must_id: "item:A.5.6:rev_scope_check"
+    description: "Cross-check against the risk-topic scope"
+    excerpt_keywords:
+      - [sig, scope, cross, check]
+      - [new, sig, threat, domain]
+      - [sig, scope, gap]

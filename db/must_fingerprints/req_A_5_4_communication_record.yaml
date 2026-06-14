@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:A.5.4:communication_record
+#
+# Reviewed-from-skeleton 2026-06-14. Management directive communication.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.4:communication_record"
+target_control: "A.5.4"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.4:comm_date"
+    description: "Date of publication/communication"
+    excerpt_keywords:
+      - [management, directive, communicated, on]
+      - [management, directive, published, on]
+
+  - must_id: "item:A.5.4:comm_audience"
+    description: "Audience reached"
+    excerpt_keywords:
+      - [management, directive, audience]
+      - [management, directive, distributed, to]
+      - [contractors, third, parties, directive]
+
+  - must_id: "item:A.5.4:comm_channel"
+    description: "Channel used"
+    excerpt_keywords:
+      - [management, directive, all, hands, briefing]
+      - [management, directive, intranet]
+      - [management, directive, training, module]
+
+  - must_id: "item:A.5.4:comm_onboarding"
+    description: "Distribution at onboarding for new personnel"
+    excerpt_keywords:
+      - [management, directive, induction]
+      - [management, directive, onboarding]
+      - [induction, pack, directive]

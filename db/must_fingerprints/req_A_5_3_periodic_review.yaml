@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:A.5.3:periodic_review
+#
+# Reviewed-from-skeleton 2026-06-14. SoD matrix review.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.3:periodic_review"
+target_control: "A.5.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.3:review_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [sod, matrix, review, date]
+      - [segregation, matrix, reviewed, on]
+
+  - must_id: "item:A.5.3:review_reviewer"
+    description: "Reviewer identity and role"
+    excerpt_keywords:
+      - [sod, matrix, reviewed, by]
+      - [risk, owner, sod, review]
+      - [compliance, lead, sod, review]
+
+  - must_id: "item:A.5.3:review_outcome"
+    description: "Outcome per conflict pair"
+    excerpt_keywords:
+      - [sod, conflict, pair, outcome]
+      - [sod, pair, retired]
+      - [new, sod, pair, added]
+
+  - must_id: "item:A.5.3:review_actions"
+    description: "Actions captured where compensating controls failed in practice"
+    excerpt_keywords:
+      - [sod, compensating, failed]
+      - [sod, audit, finding, action]
+      - [sod, operational, incident, action]

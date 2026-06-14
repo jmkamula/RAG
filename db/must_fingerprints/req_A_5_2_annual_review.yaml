@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:A.5.2:annual_review
+#
+# Reviewed-from-skeleton 2026-06-14. Responsibility matrix review.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.2:annual_review"
+target_control: "A.5.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.2:review_date"
+    description: "Review date within the planned review interval"
+    excerpt_keywords:
+      - [responsibility, matrix, review, date]
+      - [responsibility, matrix, reviewed, on]
+      - [isms, roles, reviewed, on]
+
+  - must_id: "item:A.5.2:review_reviewer"
+    description: "Reviewer identity and role"
+    excerpt_keywords:
+      - [responsibility, matrix, reviewed, by]
+      - [responsibility, matrix, reviewer]
+
+  - must_id: "item:A.5.2:review_outcome"
+    description: "Outcome (no change / amended / role added or removed)"
+    excerpt_keywords:
+      - [responsibility, matrix, no, change]
+      - [responsibility, matrix, amended]
+      - [role, added, removed]

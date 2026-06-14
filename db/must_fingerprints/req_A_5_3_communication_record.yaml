@@ -1,0 +1,30 @@
+# Per-MUST fingerprint catalog for req:A.5.3:communication_record
+#
+# Reviewed-from-skeleton 2026-06-14. SoD communication.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.3:communication_record"
+target_control: "A.5.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.3:comm_date"
+    description: "Date of publication/communication"
+    excerpt_keywords:
+      - [sod, matrix, communicated, on]
+      - [segregation, matrix, published]
+      - [sod, communication, date]
+
+  - must_id: "item:A.5.3:comm_audience"
+    description: "Audience reached"
+    excerpt_keywords:
+      - [sod, matrix, audience]
+      - [segregation, matrix, distributed]
+      - [sod, role, holders, audience]
+
+  - must_id: "item:A.5.3:comm_channel"
+    description: "Channel used"
+    excerpt_keywords:
+      - [sod, matrix, intranet]
+      - [segregation, matrix, briefing]
+      - [sod, manager, cascade]

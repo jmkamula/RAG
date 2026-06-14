@@ -1,0 +1,68 @@
+# Per-MUST fingerprint catalog for req:A.5.28:evidence_collection_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Evidence-collection procedure (forensic).
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.28:evidence_collection_procedure"
+target_control: "A.5.28"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.28:identification"
+    description: "Identification step (what counts as evidence)"
+    excerpt_keywords:
+      - [evidence, identification, step]
+      - [witness, statement, evidence]
+      - [network, capture, evidence]
+      - [logs, images, evidence]
+
+  - must_id: "item:A.5.28:acquisition"
+    description: "Acquisition method per evidence type"
+    excerpt_keywords:
+      - [disk, imaging]
+      - [memory, capture, evidence]
+      - [log, export, evidence]
+      - [photographic, evidence, acquisition]
+
+  - must_id: "item:A.5.28:integrity"
+    description: "Integrity verification step (cryptographic hashes)"
+    excerpt_keywords:
+      - [cryptographic, hash, evidence]
+      - [evidence, hash, recorded]
+      - [evidence, hash, verified, handover]
+
+  - must_id: "item:A.5.28:chain_of_custody"
+    description: "Chain-of-custody enforcement"
+    excerpt_keywords:
+      - [chain, of, custody]
+      - [evidence, custody, handover]
+      - [evidence, signature, transfer]
+
+  - must_id: "item:A.5.28:preservation"
+    description: "Preservation method"
+    excerpt_keywords:
+      - [write, blocked, storage]
+      - [evidence, secure, vault]
+      - [evidence, environmental, controls]
+      - [read, only, evidence, storage]
+
+  - must_id: "item:A.5.28:retention"
+    description: "Retention period stated"
+    excerpt_keywords:
+      - [evidence, retention, period]
+      - [evidence, open, investigation, override]
+      - [evidence, retention, case, status]
+
+  - must_id: "item:A.5.28:competence"
+    description: "Competent personnel requirements"
+    excerpt_keywords:
+      - [evidence, competent, personnel]
+      - [evidence, certification, expectation]
+      - [evidence, authorised, collector]
+
+  - must_id: "item:A.5.28:liaison"
+    description: "Liaison path with external authorities"
+    excerpt_keywords:
+      - [law, enforcement, liaison]
+      - [regulator, liaison, evidence]
+      - [evidence, external, authority, liaison]

@@ -1,0 +1,46 @@
+# Per-MUST fingerprint catalog for req:A.5.37:procedures_maintenance_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Procedures-maintenance procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.37:procedures_maintenance_procedure"
+target_control: "A.5.37"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.37:proc_template"
+    description: "Template definition stated"
+    excerpt_keywords:
+      - [procedure, template, purpose, scope]
+      - [procedure, template, prerequisites, steps]
+      - [procedure, template, verification, rollback]
+      - [procedure, template, contacts]
+
+  - must_id: "item:A.5.37:proc_review_path"
+    description: "Review path before publication"
+    excerpt_keywords:
+      - [procedure, peer, review, operators]
+      - [procedure, infosec, sign, off]
+      - [procedure, review, before, publication]
+
+  - must_id: "item:A.5.37:proc_update_triggers"
+    description: "Update triggers enumerated"
+    excerpt_keywords:
+      - ["A.8.32"]
+      - [procedure, system, change, update]
+      - [procedure, finding, driven, update]
+      - [procedure, exercise, outcome, update]
+
+  - must_id: "item:A.5.37:proc_retire_path"
+    description: "Retirement path for obsolete procedures"
+    excerpt_keywords:
+      - [procedure, retirement, path]
+      - [procedure, superseded, archived]
+      - [procedure, decommissioned, retired]
+
+  - must_id: "item:A.5.37:proc_maintainer"
+    description: "Named maintainer of the register"
+    excerpt_keywords:
+      - [procedures, register, maintainer]
+      - [operations, lead, procedures, maintainer]
+      - [procedure, catalogue, currency, owner]

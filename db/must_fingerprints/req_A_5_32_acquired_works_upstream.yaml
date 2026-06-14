@@ -1,0 +1,41 @@
+# Per-MUST fingerprint catalog for req:A.5.32:acquired_works_upstream
+#
+# Reviewed-from-skeleton 2026-06-14. IPR intake process.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.32:acquired_works_upstream"
+target_control: "A.5.32"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.32:intake_procurement"
+    description: "Procurement intake — every commercial software purchase routes through licence review"
+    excerpt_keywords:
+      - [software, procurement, intake]
+      - [licence, review, before, deployment]
+      - [procurement, gate, licence]
+      - [commercial, software, intake]
+
+  - must_id: "item:A.5.32:intake_opensource"
+    description: "Open-source adoption path"
+    excerpt_keywords:
+      - [open, source, adoption, path]
+      - [licence, compatibility, gate]
+      - [dependency, addition, licence]
+      - [open, source, intake]
+
+  - must_id: "item:A.5.32:intake_content"
+    description: "Third-party content licensing"
+    excerpt_keywords:
+      - [third, party, content, licensing]
+      - [image, font, dataset, licensing]
+      - [ai, training, data, licensing]
+      - [content, permitted, use, terms]
+
+  - must_id: "item:A.5.32:intake_ma"
+    description: "M&A or contractor-handover intake"
+    excerpt_keywords:
+      - [m, and, a, ipr, intake]
+      - [contractor, handover, ipr]
+      - [ipr, transferred, in, inventoried]
+      - [ipr, ownership, re, confirmed]
