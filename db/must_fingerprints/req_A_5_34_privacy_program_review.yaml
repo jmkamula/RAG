@@ -1,0 +1,86 @@
+# Per-MUST fingerprint catalog for req:A.5.34:privacy_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. Review-record patterns specific to
+# the annual privacy program audit cycle.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.34:privacy_program_review"
+target_control: "A.5.34"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.34:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [privacy, program, review, date]
+      - [privacy, review, conducted]
+      - [12, month, privacy, review]
+      - [annual, privacy, review]
+
+  - must_id: "item:A.5.34:rev_reviewer"
+    description: "Reviewer identity and role recorded (DPO or Privacy Officer + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [dpo, reviewed]
+      - [privacy, officer, reviewed]
+      - [privacy, program, reviewer]
+      - [legal, counsel, sign, off, privacy]
+
+  - must_id: "item:A.5.34:rev_register_check"
+    description: "Per-activity outcome (verified / amended / retired / new added)"
+    excerpt_keywords:
+      - [per, activity, outcome]
+      - [activity, verified]
+      - [activity, retired]
+      - [new, activity, added]
+      - [ropa, entry, decision]
+
+  - must_id: "item:A.5.34:rev_register_update"
+    description: "Changes propagated back to the live register"
+    excerpt_keywords:
+      - [ropa, updated, after, review]
+      - [register, refreshed, privacy]
+      - [pii, register, change, log]
+      - [privacy, register, refresh]
+
+  - must_id: "item:A.5.34:rev_scope_check"
+    description: "Cross-check against the privacy applicability scope"
+    excerpt_keywords:
+      - [privacy, scope, cross, check]
+      - [new, jurisdiction, privacy]
+      - [new, regulated, activity, privacy]
+      - [scope, change, since, last, privacy]
+
+  - must_id: "item:A.5.34:rev_dsar_metrics"
+    description: "DSAR metrics review"
+    excerpt_keywords:
+      - [dsar, metrics]
+      - [dsar, volume]
+      - [dsar, response, time]
+      - [dsar, sla]
+      - [data, subject, request, metrics]
+
+  - must_id: "item:A.5.34:rev_dpia_review"
+    description: "DPIA completion status reviewed"
+    excerpt_keywords:
+      - [dpia, completion, status]
+      - [dpia, refresh]
+      - [high, risk, processing, without, dpia]
+      - [data, protection, impact, assessment, status]
+
+  - must_id: "item:A.5.34:rev_breach_history"
+    description: "Breach history for the period"
+    excerpt_keywords:
+      - [breach, history, review]
+      - ["Art.33", "Art.34"]
+      - [72, hour, breach]
+      - [data, subject, breach, notification]
+      - [personal, data, breach, list]
+
+  - must_id: "item:A.5.34:rev_transfer_validity"
+    description: "Transfer-mechanism validity check"
+    excerpt_keywords:
+      - [sccs, current, edition]
+      - [adequacy, decision, validity]
+      - [schrems, shift]
+      - [transfer, mechanism, review]
+      - [bcrs, validity]

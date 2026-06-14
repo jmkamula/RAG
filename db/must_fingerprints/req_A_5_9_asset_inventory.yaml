@@ -1,0 +1,73 @@
+# Per-MUST fingerprint catalog for req:A.5.9:asset_inventory
+#
+# Reviewed-from-skeleton 2026-06-14. Asset-register column-header
+# patterns. Arion has a real asset register sheet whose columns this
+# catalog should back-bind on. Avoid singletons like [asset] or [owner]
+# — they match policy text too easily.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.9:asset_inventory"
+target_control: "A.5.9"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.9:asset_records"
+    description: "Asset records exist (information assets, software, hardware, services, cloud resources)"
+    excerpt_keywords:
+      - [asset, register]
+      - [asset, inventory]
+      - [list, of, assets]
+      - [information, assets]
+      - [register, of, assets]
+      - [asset, catalogue]
+
+  - must_id: "item:A.5.9:asset_type"
+    description: "Asset type tag (information / software / hardware / service / facility) so type-specific controls can be applied"
+    excerpt_keywords:
+      - [asset, type]
+      - [asset, category]
+      - [asset, class]
+      - [type, column]
+      - [information, software, hardware]
+      - [hardware, software, service]
+
+  - must_id: "item:A.5.9:owner_per_asset"
+    description: "Owner named per asset (individual or role accountable for protection and risk decisions)"
+    excerpt_keywords:
+      - [asset, owner]
+      - [owner, per, asset]
+      - [named, asset, owner]
+      - [accountable, owner]
+      - [responsible, owner]
+      - [risk, owner]
+
+  - must_id: "item:A.5.9:classification"
+    description: "Classification per asset (links to the A.5.12 classification scheme)"
+    excerpt_keywords:
+      - [asset, classification]
+      - [classification, column]
+      - [classification, label]
+      - [classification, per, asset]
+      - [cia, triad]
+      - ["A.5.12"]
+      - [confidentiality, integrity, availability]
+
+  - must_id: "item:A.5.9:location"
+    description: "Location or hosting system where the asset resides (data centre, cloud region, endpoint pool)"
+    excerpt_keywords:
+      - [asset, location]
+      - [hosting, location]
+      - [data, centre]
+      - [data, center]
+      - [cloud, region]
+      - [hosting, system]
+
+  - must_id: "item:A.5.9:last_updated"
+    description: "Last-updated date per record (proves the register is actively maintained, not snapshotted)"
+    excerpt_keywords:
+      - [last, updated, on]
+      - [last, updated, date]
+      - [register, updated]
+      - [updated, column]
+      - [last, modified, on]
+      - [updated, timestamp]

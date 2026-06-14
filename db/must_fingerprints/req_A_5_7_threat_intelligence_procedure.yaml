@@ -1,0 +1,84 @@
+# Per-MUST fingerprint catalog for req:A.5.7:threat_intelligence_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Procedure-leaf patterns for threat
+# intelligence. Distinctive vocabulary (TTP, IOC, ISAC, threat actor)
+# keeps risk of false positives low.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.7:threat_intelligence_procedure"
+target_control: "A.5.7"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.7:sources"
+    description: "Threat intelligence sources enumerated"
+    excerpt_keywords:
+      - [open, source, intel]
+      - [vendor, feeds]
+      - [isac]
+      - [government, advisories]
+      - [paid, intel, services]
+      - [threat, intel, sources]
+
+  - must_id: "item:A.5.7:collection_cadence"
+    description: "Collection cadence stated per source"
+    excerpt_keywords:
+      - [collection, cadence]
+      - [continuous, collection]
+      - [daily, collection]
+      - [feed, polling, frequency]
+      - [intel, collection, schedule]
+
+  - must_id: "item:A.5.7:analysis_approach"
+    description: "Analysis approach defined"
+    excerpt_keywords:
+      - [intel, analysis]
+      - [relevance, to, assets]
+      - [correlation, prioritisation]
+      - [integrity, verification]
+      - [intelligence, analysis, approach]
+
+  - must_id: "item:A.5.7:layers"
+    description: "Three intelligence layers covered: strategic / tactical / operational"
+    excerpt_keywords:
+      - [strategic, tactical, operational]
+      - [three, layers, intel]
+      - [intelligence, layers]
+      - [strategic, intel]
+      - [tactical, intel]
+
+  - must_id: "item:A.5.7:products"
+    description: "Intelligence products defined per layer"
+    excerpt_keywords:
+      - [ioc, list]
+      - [ttp, signature]
+      - [threat, briefing]
+      - [sector, advisory]
+      - [intelligence, product]
+
+  - must_id: "item:A.5.7:distribution"
+    description: "Distribution path to named consumers"
+    excerpt_keywords:
+      - [distribution, path]
+      - [sec, ops, distribution]
+      - [exec, briefing, channel]
+      - [risk, owner, distribution]
+      - [intel, dissemination]
+
+  - must_id: "item:A.5.7:control_use"
+    description: "Use into technical controls (firewall blocklists, IDS rules, EDR indicators, vulnerability prioritisation)"
+    excerpt_keywords:
+      - [firewall, blocklist]
+      - [ids, rules]
+      - [edr, indicators]
+      - [vulnerability, prioritisation]
+      - [intel, into, controls]
+
+  - must_id: "item:A.5.7:risk_feedback"
+    description: "Feedback loop into the risk register"
+    excerpt_keywords:
+      - [intel, into, risk, register]
+      - [risk, reassessment, from, intel]
+      - [new, exposure, intel]
+      - [intel, triggers, risk]
+      - [risk, register, intel]

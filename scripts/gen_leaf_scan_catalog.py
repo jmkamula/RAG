@@ -64,16 +64,60 @@ _STOPWORDS = {
     "linked", "links", "link",
 }
 
-# Words that suggest evidence-type-specific synonym clusters
+# Evidence-shape patterns: multi-token sets that imply per-record/per-row
+# evidence rather than policy prose. Generic singletons like [row] or
+# [disabled] match policy text too easily — they were removed after the
+# A.5.16 review pass that surfaced these false positives.
 _EVIDENCE_TYPE_SYNONYMS: dict[str, list[list[str]]] = {
-    "register":         [["row"], ["entry"], ["record"]],
-    "review_record":    [["review", "date"], ["last", "review"], ["cycle"]],
-    "revocation_record":[["revoked"], ["disabled"], ["deactivated"]],
-    "disposal_record":  [["disposed"], ["destroyed"], ["wiped"]],
-    "audit_log":        [["timestamp"], ["audit"], ["event"]],
-    "policy":           [["policy"], ["approved"], ["effective", "date"]],
-    "procedure":        [["procedure"], ["steps"], ["responsible"]],
-    "scope_note":       [["scope"], ["applies", "to"], ["excluded"]],
+    "register":         [["per", "row"], ["each", "entry"], ["column", "header"]],
+    "review_record":    [["review", "findings"], ["audit", "outcomes"], ["last", "reviewed"]],
+    "revocation_record":[["revocation", "entry"], ["per", "revoked"], ["was", "revoked"]],
+    "disposal_record":  [["disposal", "entry"], ["per", "disposed"], ["each", "disposed"]],
+    "audit_log":        [["audit", "event"], ["per", "audit"]],
+    "policy":           [["approved", "by"], ["effective", "date"]],
+    "procedure":        [["procedure", "step"], ["responsibility", "of"]],
+    "scope_note":       [["in", "scope"], ["scope", "includes"], ["excluded", "from"]],
+    "register_record":  [["per", "record"], ["each", "record"]],
+}
+
+# Role-prefix safety nets — multi-token sets that imply per-record evidence
+# shape for common item-id prefixes (reg_, rev_, scope_, pol_, proc_).
+# Appended as a low-priority backup if the description didn't yield enough
+# distinctive patterns.
+_ROLE_PREFIX_HINTS: dict[str, list[list[str]]] = {
+    "reg":   [["per", "row"], ["each", "row"], ["column", "containing"]],
+    "rev":   [["per", "revocation"], ["per", "revoked", "identity"], ["revocation", "record"]],
+    "scope": [["in", "scope"], ["scope", "includes"], ["applicable", "to"]],
+    "pol":   [["policy", "clause"], ["approved", "by"]],
+    "proc":  [["procedure", "step"], ["process", "step"]],
+    "audit": [["audit", "event"], ["audit", "entry"]],
+    "doc":   [["document", "id"], ["per", "document"]],
+}
+
+# Tokens we never emit as singletons — they're too generic and reliably
+# match policy/procedure text rather than per-record evidence. Reviewer
+# can still hand-add them with explicit context (e.g. [account, status]).
+_NEVER_EMIT_SINGLETON = {
+    "user", "users", "account", "accounts", "identity", "identities",
+    "id", "ids", "name", "names", "owner", "status", "type", "role",
+    "date", "time", "timestamp", "record", "entry", "row", "field",
+    "column", "value", "data", "system", "module", "service", "credential",
+    "credentials", "password", "passwords", "token", "tokens",
+    "policy", "procedure", "process", "review", "audit", "report",
+    "active", "disabled", "enabled", "revoked", "removed", "added",
+    "created", "modified", "updated", "deleted", "approved", "rejected",
+    "yes", "no", "true", "false", "high", "medium", "low",
+    "person", "people", "individual", "individuals",
+    "trigger", "triggers", "step", "steps",
+    "level", "levels", "scope", "scopes",
+    # Numeric units
+    "days", "hours", "minutes", "weeks", "months", "years",
+    # Connector/adjective noise seen in v2 generator output
+    "shared", "non", "last", "cross", "reference", "phase",
+    "human", "stated", "named", "unique", "valid", "expired",
+    "termination", "creation", "modification", "suspension",
+    "reviewer", "ownership", "lifecycle", "deactivation",
+    "verification", "authn", "actual",
 }
 
 
@@ -108,13 +152,16 @@ _PUNCT_RE = re.compile(r"[^\w\s]")  # strip hyphens too — they split compound 
 def _phrases_from_description(text: str) -> list[list[str]]:
     """Pull 1-3 word noun-ish phrases out of an item description.
 
-    Simple heuristic: tokenize on whitespace + hyphens + punctuation, drop
-    stopwords, return:
-      - each remaining single token
+    Tokenize on whitespace + hyphens + punctuation, drop stopwords,
+    return:
+      - each remaining single token (UNLESS it's in _NEVER_EMIT_SINGLETON)
       - each remaining adjacent bigram
+      - each remaining adjacent trigram
 
-    Parentheticals are kept (they often hold examples like "(current /
-    overdue / waived)" which are useful match anchors).
+    The singleton suppression for high-risk tokens is the lesson from
+    the A.5.16 review: words like 'user', 'disabled', 'status' match
+    policy text far too easily on their own. Reviewer can still add
+    them manually with surrounding context.
     """
     if not text:
         return []
@@ -123,11 +170,12 @@ def _phrases_from_description(text: str) -> list[list[str]]:
     out: list[list[str]] = []
     seen: set[tuple[str, ...]] = set()
     for i, t in enumerate(tokens):
-        # singleton
-        key = (t,)
-        if key not in seen:
-            seen.add(key)
-            out.append([t])
+        # singleton (suppressed for high-risk generic tokens)
+        if t not in _NEVER_EMIT_SINGLETON:
+            key = (t,)
+            if key not in seen:
+                seen.add(key)
+                out.append([t])
         # bigram with next
         if i + 1 < len(tokens):
             t2 = tokens[i + 1]
@@ -135,6 +183,13 @@ def _phrases_from_description(text: str) -> list[list[str]]:
             if key2 not in seen:
                 seen.add(key2)
                 out.append([t, t2])
+        # trigram with next two
+        if i + 2 < len(tokens):
+            t2, t3 = tokens[i + 1], tokens[i + 2]
+            key3 = (t, t2, t3)
+            if key3 not in seen:
+                seen.add(key3)
+                out.append([t, t2, t3])
     return out
 
 
@@ -167,14 +222,22 @@ def _suggest_keywords(
 
     id_tokens = _tokens_from_item_id(item_id)
     if id_tokens:
-        # Full id phrase
-        _add(id_tokens)
-        # Single tokens
+        # Full id phrase (multi-token only — single-token id stems like
+        # 'trigger' or 'reviewer' are too generic on their own)
+        if len(id_tokens) >= 2:
+            _add(id_tokens)
+        # Singles only if not high-risk
         for t in id_tokens:
-            _add([t])
+            if t not in _NEVER_EMIT_SINGLETON:
+                _add([t])
 
     for phrase in _phrases_from_description(item_text):
         _add(phrase)
+
+    # Role-prefix safety net (e.g. reg_* → [per, row]; rev_* → [revocation, record])
+    role_prefix = _role_prefix(item_id)
+    for hint in _ROLE_PREFIX_HINTS.get(role_prefix, []):
+        _add(hint)
 
     # Evidence-type scaffold sits last so it doesn't drown out id signal
     for scaffold in _evidence_type_scaffold(evidence_type):
@@ -183,6 +246,13 @@ def _suggest_keywords(
     # Cap at ~8 to keep the human reviewer's eye unburdened — they'll
     # add tenant-vocabulary synonyms manually anyway.
     return suggestions[:8]
+
+
+def _role_prefix(item_id: str) -> str:
+    """Pull the role prefix from an item id (e.g. reg_/rev_/scope_/pol_)."""
+    tail = item_id.rsplit(":", 1)[-1]
+    head = tail.split("_", 1)[0] if "_" in tail else ""
+    return head if head in _ROLE_PREFIX_HINTS else ""
 
 
 def _fetch_leaves(neo, control_ref: str | None, leaf_id: str | None) -> list[dict]:

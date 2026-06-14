@@ -1,0 +1,57 @@
+# Per-MUST fingerprint catalog for req:A.5.34:privacy_applicability_scope
+#
+# Reviewed-from-skeleton 2026-06-14. Scope-note patterns for privacy
+# applicability — which laws/jurisdictions/role/data-subjects apply.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.34:privacy_applicability_scope"
+target_control: "A.5.34"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.34:scope_jurisdictions"
+    description: "Jurisdictions covered for privacy"
+    excerpt_keywords:
+      - [privacy, jurisdictions, scope]
+      - [data, subject, residency, scope]
+      - [processing, locations, scope]
+      - [transfer, destinations, scope]
+      - [places, of, business, privacy]
+
+  - must_id: "item:A.5.34:scope_privacy_laws"
+    description: "Applicable privacy laws enumerated per jurisdiction"
+    excerpt_keywords:
+      - [gdpr, applicable]
+      - [uk, gdpr, applicable]
+      - [ccpa, applicable]
+      - [lgpd, applicable]
+      - [applicable, privacy, laws, per]
+      - [privacy, regimes, per, jurisdiction]
+
+  - must_id: "item:A.5.34:scope_data_subjects"
+    description: "Data subject categories the organisation touches"
+    excerpt_keywords:
+      - [data, subject, categories, scope]
+      - [data, subjects, in, scope]
+      - [minors, in, scope]
+      - [healthcare, patients, scope]
+      - [special, category, subjects, scope]
+
+  - must_id: "item:A.5.34:scope_regulated_activities"
+    description: "Regulated activities pulling in sectoral privacy regimes"
+    excerpt_keywords:
+      - [hipaa, applicable]
+      - [glba, applicable]
+      - [eprivacy, applicable]
+      - [psd2, applicable]
+      - [sectoral, privacy, regime]
+      - [regulated, activity, privacy]
+
+  - must_id: "item:A.5.34:scope_controller_role"
+    description: "Controller vs Processor vs Joint Controller status"
+    excerpt_keywords:
+      - [controller, status]
+      - [processor, status]
+      - [joint, controller]
+      - [controller, processor, role]
+      - ["Art.24", "Art.28"]

@@ -1,0 +1,93 @@
+# Per-MUST fingerprint catalog for req:A.5.34:privacy_and_pii_protection_policy
+#
+# Reviewed-from-skeleton 2026-06-14. Policy-leaf patterns can be more
+# permissive — policy documents legitimately describe these elements.
+# But several MUSTs cross-reference specific articles/controls; lean
+# on those refs for stronger anchors.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.34:privacy_and_pii_protection_policy"
+target_control: "A.5.34"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.34:applicable_laws"
+    description: "Applicable privacy laws identified"
+    excerpt_keywords:
+      - [gdpr]
+      - [uk, gdpr]
+      - [hipaa]
+      - [ccpa]
+      - [lgpd]
+      - [pipeda]
+      - [applicable, privacy, laws]
+
+  - must_id: "item:A.5.34:lawful_basis"
+    description: "Lawful basis discipline"
+    excerpt_keywords:
+      - [lawful, basis, identified]
+      - [legal, basis, processing]
+      - [consent, contract, legal, obligation]
+      - [vital, interests]
+      - [public, task]
+      - [legitimate, interests]
+
+  - must_id: "item:A.5.34:data_subject_rights"
+    description: "Data subject rights enabled"
+    excerpt_keywords:
+      - [data, subject, rights]
+      - [access, rectification, erasure]
+      - [portability, restriction, objection]
+      - [dsar, intake]
+      - [response, sla]
+      - [subject, access, request]
+
+  - must_id: "item:A.5.34:retention_minimisation"
+    description: "Retention and data minimisation requirements"
+    excerpt_keywords:
+      - [data, minimisation]
+      - [data, minimization]
+      - [retain, only, as, long, as]
+      - [collect, only, what, necessary]
+      - ["A.5.33"]
+      - [retention, minimisation]
+
+  - must_id: "item:A.5.34:security_controls_ref"
+    description: "References security controls applied to PII"
+    excerpt_keywords:
+      - ["A.8.24"]
+      - ["A.5.15"]
+      - ["A.8.3"]
+      - [encryption, pii]
+      - [pii, access, control]
+      - [pii, security, controls]
+
+  - must_id: "item:A.5.34:breach_handling"
+    description: "Breach handling reference (A.5.24/A.5.26 + GDPR Art.33/34)"
+    excerpt_keywords:
+      - ["A.5.24"]
+      - ["A.5.26"]
+      - ["Art.33"]
+      - ["Art.34"]
+      - [72, hour, notification]
+      - [supervisory, authority, notification]
+      - [breach, notification]
+
+  - must_id: "item:A.5.34:transfer_restrictions"
+    description: "Cross-border transfer discipline"
+    excerpt_keywords:
+      - [cross, border, transfer]
+      - [sccs]
+      - [adequacy, decision]
+      - [bcrs]
+      - ["A.5.14"]
+      - [transfer, restrictions, policy]
+
+  - must_id: "item:A.5.34:owner"
+    description: "Named owner of the privacy program (DPO / Privacy Officer)"
+    excerpt_keywords:
+      - [dpo, designated]
+      - [data, protection, officer]
+      - [privacy, officer, named]
+      - [privacy, program, owner]
+      - [chief, privacy, officer]

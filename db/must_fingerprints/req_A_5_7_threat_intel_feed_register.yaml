@@ -1,0 +1,74 @@
+# Per-MUST fingerprint catalog for req:A.5.7:threat_intel_feed_register
+#
+# Reviewed-from-skeleton 2026-06-14. Threat-intel feed register column
+# patterns — feed-specific vocabulary (IOC, TTP, ISAC, feed source).
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.7:threat_intel_feed_register"
+target_control: "A.5.7"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.7:reg_source_id"
+    description: "Each active source captured with a unique identifier"
+    excerpt_keywords:
+      - [feed, register]
+      - [feed, id, column]
+      - [threat, intel, feed]
+      - [intel, source, id]
+      - [intel, feed, register]
+      - [feeds, list]
+
+  - must_id: "item:A.5.7:reg_layer"
+    description: "Intelligence layer per row (strategic / tactical / operational)"
+    excerpt_keywords:
+      - [intel, layer]
+      - [strategic, tactical, operational]
+      - [tactical, operational]
+      - [intelligence, layer, column]
+      - [feed, layer]
+
+  - must_id: "item:A.5.7:reg_owner"
+    description: "Internal owner per row accountable for the source"
+    excerpt_keywords:
+      - [feed, owner]
+      - [intel, owner]
+      - [source, owner, column]
+      - [intel, source, owner]
+      - [feed, custodian]
+
+  - must_id: "item:A.5.7:reg_last_received"
+    description: "Last-received timestamp per row (stale-feed detection)"
+    excerpt_keywords:
+      - [last, received]
+      - [feed, last, received]
+      - [stale, feed]
+      - [last, ingestion]
+      - [last, fetched]
+
+  - must_id: "item:A.5.7:reg_cost"
+    description: "Cost per row (paid feeds vs free)"
+    excerpt_keywords:
+      - [feed, cost]
+      - [paid, vs, free]
+      - [feed, price]
+      - [subscription, cost]
+      - [annual, cost, feed]
+
+  - must_id: "item:A.5.7:reg_signal_rating"
+    description: "Signal/noise rating per row (high/medium/low)"
+    excerpt_keywords:
+      - [signal, noise, rating]
+      - [signal, to, noise]
+      - [feed, value, rating]
+      - [intel, quality, rating]
+      - [feed, signal, rating]
+
+  - must_id: "item:A.5.7:reg_internal_input"
+    description: "Internal sources captured alongside external"
+    excerpt_keywords:
+      - [internal, source]
+      - [internal, intel]
+      - ["A.5.6"]
+      - [internal, ir, observations]
+      - [internal, input]

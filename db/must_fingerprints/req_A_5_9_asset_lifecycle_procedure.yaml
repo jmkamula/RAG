@@ -1,0 +1,63 @@
+# Per-MUST fingerprint catalog for req:A.5.9:asset_lifecycle_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Procedure leaves match canonical
+# lifecycle vocabulary (intake, registration, retirement, owner-assignment)
+# rather than per-row register patterns.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.9:asset_lifecycle_procedure"
+target_control: "A.5.9"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.9:proc_intake"
+    description: "Intake path — every new asset (procured, built, granted) is registered before going operational"
+    excerpt_keywords:
+      - [asset, intake]
+      - [asset, registration]
+      - [new, asset, registered]
+      - [registered, before, operational]
+      - [register, new, asset]
+      - [procurement, register]
+
+  - must_id: "item:A.5.9:proc_classification"
+    description: "Classification at creation and on material change (cross-link to A.5.12)"
+    # [cia, triad] dropped — matches workbook column "cia_triad_classification"
+    # which is per-row register evidence, not a procedural classification rule.
+    excerpt_keywords:
+      - [classification, on, creation]
+      - [classify, on, intake]
+      - [classification, on, material, change]
+      - [reclassify, on, change]
+      - ["A.5.12"]
+
+  - must_id: "item:A.5.9:proc_ownership"
+    description: "Ownership assignment rules (who can be an owner, transfer process on role change)"
+    excerpt_keywords:
+      - [owner, assignment]
+      - [ownership, transfer]
+      - [transfer, on, role, change]
+      - [who, can, own]
+      - [owner, eligibility]
+
+  - must_id: "item:A.5.9:proc_retirement"
+    description: "Retirement and disposal handoff (status set to retired, disposal handled per A.7.14/A.8.10, register row archived)"
+    excerpt_keywords:
+      - [asset, retirement]
+      - [asset, disposal]
+      - [retirement, handoff]
+      - [disposal, handoff]
+      - ["A.7.14"]
+      - ["A.8.10"]
+      - [retired, status]
+
+  - must_id: "item:A.5.9:proc_maintainer"
+    description: "Named maintainer of the register and escalation path when intake fails"
+    # [register, owner] dropped — matches workbook 'Asset Register' + 'Asset_Owner'
+    # column heads which are per-row evidence, not procedural maintainer naming.
+    excerpt_keywords:
+      - [register, maintainer]
+      - [intake, escalation]
+      - [escalation, path]
+      - [responsible, for, register]
+      - [register, custodian]

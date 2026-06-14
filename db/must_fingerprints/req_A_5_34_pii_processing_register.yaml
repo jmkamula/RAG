@@ -1,0 +1,81 @@
+# Per-MUST fingerprint catalog for req:A.5.34:pii_processing_register
+#
+# Reviewed-from-skeleton 2026-06-14. PII processing register (RoPA-style)
+# column patterns. Arion's privacy policy prose was matching 3 MUSTs in
+# v2 — tightened to require per-activity / column-header shape.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.34:pii_processing_register"
+target_control: "A.5.34"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.34:pii_inventory"
+    description: "PII categories enumerated per processing activity"
+    excerpt_keywords:
+      - [pii, categories, per, activity]
+      - [data, categories, processed]
+      - [pii, inventory, column]
+      - [ropa, data, categories]
+      - [special, category, per, activity]
+
+  - must_id: "item:A.5.34:reg_data_subjects"
+    description: "Data subject categories per processing activity"
+    excerpt_keywords:
+      - [data, subjects, per, activity]
+      - [data, subject, column]
+      - [ropa, data, subjects]
+      - [subject, categories, per]
+      - [data, subjects, list, column]
+
+  - must_id: "item:A.5.34:reg_purposes"
+    description: "Processing purposes stated per activity"
+    excerpt_keywords:
+      - [processing, purpose, per, activity]
+      - [purpose, column]
+      - [ropa, purposes]
+      - [specific, explicit, legitimate]
+
+  - must_id: "item:A.5.34:reg_lawful_basis"
+    description: "Lawful basis recorded per activity"
+    excerpt_keywords:
+      - [lawful, basis, per, activity]
+      - [lawful, basis, column]
+      - [legal, basis, per, processing]
+      - [ropa, lawful, basis]
+
+  - must_id: "item:A.5.34:reg_retention"
+    description: "Retention period per activity"
+    excerpt_keywords:
+      - [retention, period, per, activity]
+      - [retention, column]
+      - [retention, schedule, column]
+      - ["A.5.33"]
+      - [data, retention, per, activity]
+
+  - must_id: "item:A.5.34:reg_transfers"
+    description: "Cross-border transfers per activity"
+    excerpt_keywords:
+      - [cross, border, transfer, per]
+      - [transfer, mechanism, column]
+      - [sccs, per, activity]
+      - [adequacy, per, transfer]
+      - [bcrs, derogations]
+      - [transfer, destinations, column]
+
+  - must_id: "item:A.5.34:reg_owner_per_activity"
+    description: "Owner per processing activity"
+    excerpt_keywords:
+      - [activity, owner, column]
+      - [owner, per, processing, activity]
+      - [ropa, activity, owner]
+      - [processing, owner, per]
+
+  - must_id: "item:A.5.34:reg_controls_applied"
+    description: "Security controls applied per activity"
+    excerpt_keywords:
+      - [controls, applied, per, activity]
+      - [security, controls, column]
+      - [encryption, per, activity]
+      - [pseudonymisation, per, activity]
+      - [controls, mapping, per, activity]

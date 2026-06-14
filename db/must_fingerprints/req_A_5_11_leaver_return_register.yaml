@@ -1,0 +1,75 @@
+# Per-MUST fingerprint catalog for req:A.5.11:leaver_return_register
+#
+# Reviewed-from-skeleton 2026-06-14. Register column-header patterns
+# for the leaver-return register. Arion's "Upon termination, accounts
+# shall be deactivated, and assets returned on the employee's last day"
+# policy clause fanned out across 9 MUSTs in v2 — tightened here to
+# require per-leaver / per-row evidence shape.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.11:leaver_return_register"
+target_control: "A.5.11"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.11:reg_leaver_id"
+    description: "Each leaver/role-changer captured with a unique identifier"
+    excerpt_keywords:
+      - [leaver, id]
+      - [leaver, register]
+      - [register, of, leavers]
+      - [per, leaver]
+      - [leaver, identifier]
+
+  - must_id: "item:A.5.11:reg_trigger_type"
+    description: "Trigger type per row (termination / role_change / contract_end / secondment_end / agreement_change)"
+    excerpt_keywords:
+      - [trigger, type, column]
+      - [leaver, trigger]
+      - [role_change]
+      - [contract_end]
+      - [secondment_end]
+      - [agreement_change]
+
+  - must_id: "item:A.5.11:reg_effective_date"
+    description: "Effective date per row (last working day or role-change date — drives return-deadline calculations)"
+    excerpt_keywords:
+      - [effective, date, column]
+      - [last, working, day, column]
+      - [leaver, effective, date]
+      - [return, deadline]
+
+  - must_id: "item:A.5.11:reg_owner"
+    description: "Return owner per row (typically the leaver's line manager + IT custody handler)"
+    excerpt_keywords:
+      - [return, owner]
+      - [custody, handler]
+      - [line, manager, owner]
+      - [owner, per, leaver]
+
+  - must_id: "item:A.5.11:reg_asset_list"
+    description: "Per-leaver asset list (link to A.5.9 asset register entries assigned to this person)"
+    excerpt_keywords:
+      - [per, leaver, assets]
+      - [leaver, asset, list]
+      - [assets, assigned, leaver]
+      - ["A.5.9"]
+      - [asset, register, link]
+
+  - must_id: "item:A.5.11:reg_status"
+    description: "Status per row (pending / in_progress / complete / exception / written_off)"
+    excerpt_keywords:
+      - [return, status, column]
+      - [return, status, pending]
+      - [return, status, complete]
+      - [written_off]
+      - [in_progress]
+
+  - must_id: "item:A.5.11:reg_access_revoke"
+    description: "Access-revocation timestamp per row (when corp accounts/SSO/credentials were disabled — should align with effective date)"
+    excerpt_keywords:
+      - [access, revoke, timestamp]
+      - [revocation, timestamp]
+      - [sso, disabled, on]
+      - [credentials, rotated, on]
+      - [revoke, date, column]

@@ -1,0 +1,71 @@
+# Per-MUST fingerprint catalog for req:A.5.11:return_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. Review-record patterns match
+# audit/review output vocabulary specific to leaver-return programs.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.11:return_program_review"
+target_control: "A.5.11"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.11:rev_date"
+    description: "Review date within the planned annual interval"
+    excerpt_keywords:
+      - [review, conducted, on]
+      - [reviewed, on]
+      - [annual, review, date]
+      - [last, reviewed]
+
+  - must_id: "item:A.5.11:rev_reviewer"
+    description: "Reviewer identity (HR head + IT head + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [reviewed, by]
+      - [reviewer]
+      - [hr, head]
+      - [it, head]
+      - [infosec, lead, review]
+
+  - must_id: "item:A.5.11:rev_unreturned_rate"
+    description: "Unreturned-asset rate analysed (count of leavers with status=exception or written_off; root cause per cluster)"
+    excerpt_keywords:
+      - [unreturned, rate]
+      - [non, return, rate]
+      - [exception, rate]
+      - [unreturned, analysis]
+      - [root, cause, unreturned]
+
+  - must_id: "item:A.5.11:rev_revoke_latency"
+    description: "Access-revocation latency analysed (gap between effective_date and access_revoke_timestamp; investigate outliers)"
+    excerpt_keywords:
+      - [revocation, latency]
+      - [revoke, latency]
+      - [revocation, gap, analysis]
+      - [sla, outliers]
+      - [revoke, delay, analysis]
+
+  - must_id: "item:A.5.11:rev_writeoff_audit"
+    description: "Write-off audit (any leaver row written off — was risk acceptance appropriately authorised? what value was lost?)"
+    excerpt_keywords:
+      - [write, off, audit]
+      - [write, off, review]
+      - [risk, acceptance, audit]
+      - [written, off, leaver, review]
+
+  - must_id: "item:A.5.11:rev_byod_health"
+    description: "BYOD-wipe health check (sample of recent BYOD leavers re-verified for selective-wipe success or org-data presence)"
+    excerpt_keywords:
+      - [byod, wipe]
+      - [byod, health, check]
+      - [selective, wipe, verification]
+      - [byod, leaver, sample]
+      - [org, data, presence]
+
+  - must_id: "item:A.5.11:rev_actions"
+    description: "Action items captured (e.g. tighten access-revoke automation, expand asset checklist, retrain managers)"
+    excerpt_keywords:
+      - [action, items, from, review]
+      - [remediation, plan]
+      - [follow, up, actions]
+      - [improvement, actions]
+      - [corrective, actions]

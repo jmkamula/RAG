@@ -1,0 +1,70 @@
+# Per-MUST fingerprint catalog for req:A.5.7:threat_intel_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. Review-record patterns specific to
+# threat-intel program audit output.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.7:threat_intel_program_review"
+target_control: "A.5.7"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.7:rev_date"
+    description: "Review date within the planned 180-day interval"
+    excerpt_keywords:
+      - [intel, program, review, date]
+      - [reviewed, on]
+      - [180, day, review]
+      - [intel, review, conducted]
+
+  - must_id: "item:A.5.7:rev_reviewer"
+    description: "Reviewer identity (program owner + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [program, owner, review]
+      - [intel, program, owner]
+      - [infosec, lead, review]
+      - [reviewed, by, intel]
+
+  - must_id: "item:A.5.7:rev_feed_value"
+    description: "Feed-value analysis per source"
+    excerpt_keywords:
+      - [feed, value, analysis]
+      - [actionable, iocs]
+      - [feeds, dropped]
+      - [feeds, retained]
+      - [intel, feed, retention]
+
+  - must_id: "item:A.5.7:rev_consumer_feedback"
+    description: "Consumer feedback collected from named consumers"
+    excerpt_keywords:
+      - [consumer, feedback]
+      - [sec, ops, feedback]
+      - [exec, feedback, intel]
+      - ["A.5.21"]
+      - ["A.5.25"]
+
+  - must_id: "item:A.5.7:rev_products_delivered"
+    description: "Products delivered count and distribution evidenced"
+    excerpt_keywords:
+      - [products, delivered]
+      - [briefings, delivered]
+      - [advisories, distributed]
+      - [intel, products, count]
+
+  - must_id: "item:A.5.7:rev_missed"
+    description: "Missed-event analysis"
+    excerpt_keywords:
+      - [missed, events]
+      - [intel, miss, analysis]
+      - [intel, gap, analysis]
+      - [missed, by, intel]
+      - ["A.5.27"]
+
+  - must_id: "item:A.5.7:rev_actions"
+    description: "Action items captured for the program"
+    excerpt_keywords:
+      - [action, items, intel, program]
+      - [new, feed, added]
+      - [stale, feed, retired]
+      - [analysis, cadence, tuned]
+      - [intel, improvement, action]

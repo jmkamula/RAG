@@ -1,0 +1,65 @@
+# Per-MUST fingerprint catalog for req:A.5.7:intel_product_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-product (lifecycle-end) record
+# patterns. An "intel product" is a threat brief / IOC list / advisory.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.7:intel_product_record"
+target_control: "A.5.7"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.7:prod_id"
+    description: "Product identifier per record (unique, sequenced)"
+    excerpt_keywords:
+      - [intel, product, id]
+      - [briefing, id]
+      - [advisory, id]
+      - [ioc, list, id]
+      - [product, identifier, per]
+
+  - must_id: "item:A.5.7:prod_layer"
+    description: "Intelligence layer per record (strategic / tactical / operational)"
+    excerpt_keywords:
+      - [product, layer]
+      - [strategic, briefing]
+      - [tactical, briefing]
+      - [operational, ioc]
+      - [intel, product, layer]
+
+  - must_id: "item:A.5.7:prod_sources"
+    description: "Source feeds aggregated per record (links to feed register entries)"
+    excerpt_keywords:
+      - [aggregated, sources]
+      - [feed, sources, used]
+      - [source, feeds, per, product]
+      - [intel, product, sources]
+      - [sources, list, per, product]
+
+  - must_id: "item:A.5.7:prod_consumer"
+    description: "Named consumer(s) per record (sec ops, IT/network, risk owners, exec briefing)"
+    excerpt_keywords:
+      - [intel, consumer]
+      - [briefing, audience]
+      - [sec, ops, briefed]
+      - [exec, briefing]
+      - [intel, recipients]
+
+  - must_id: "item:A.5.7:prod_distribution"
+    description: "Distribution date and channel per record"
+    excerpt_keywords:
+      - [distribution, date]
+      - [distribution, channel]
+      - [briefing, distributed, on]
+      - [product, distributed]
+      - [delivery, channel]
+
+  - must_id: "item:A.5.7:prod_action_taken"
+    description: "Action taken downstream per record (firewall rule / IDS signature / risk register entry / control update / no-op)"
+    excerpt_keywords:
+      - [action, taken, on, intel]
+      - [intel, actioned]
+      - [firewall, rule, added]
+      - [ids, signature, added]
+      - [risk, register, updated]
+      - [no, op, downstream]

@@ -1,0 +1,59 @@
+# Per-MUST fingerprint catalog for req:A.5.31:applicable_obligations_scope
+#
+# Reviewed-from-skeleton 2026-06-14. Scope-note patterns — sectoral
+# classification + jurisdiction + service types that determine which
+# obligations apply.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.31:applicable_obligations_scope"
+target_control: "A.5.31"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.31:scope_jurisdictions"
+    description: "Jurisdictions covered (HQ, places of business, customer locations, data residency, transfer destinations)"
+    excerpt_keywords:
+      - [scope, jurisdictions]
+      - [applicable, jurisdictions]
+      - [hq, jurisdiction]
+      - [places, of, business]
+      - [data, residency, scope]
+      - [transfer, destinations, scope]
+
+  - must_id: "item:A.5.31:scope_sectoral_class"
+    description: "Sectoral classification (NIS2 essential/important, DORA financial-entity, critical-infrastructure designation, etc.)"
+    excerpt_keywords:
+      - [nis2, essential]
+      - [nis2, important]
+      - [dora, financial]
+      - [critical, infrastructure, designation]
+      - [sectoral, classification]
+      - [regulated, sector]
+
+  - must_id: "item:A.5.31:scope_customer_types"
+    description: "Customer types driving contractual obligations"
+    excerpt_keywords:
+      - [customer, types, scope]
+      - [regulated, industry, customers]
+      - [government, customers]
+      - [b2c, consumers]
+      - [customer, segments, regulated]
+
+  - must_id: "item:A.5.31:scope_data_categories"
+    description: "Personal/sensitive/regulated data categories processed"
+    excerpt_keywords:
+      - [personal, data, processed]
+      - [sensitive, data, scope]
+      - [special, category, data]
+      - [regulated, data, categories]
+      - [data, categories, in, scope]
+
+  - must_id: "item:A.5.31:scope_services"
+    description: "Services offered (regulated activities — payments, health data processing, telco, AI systems under upcoming regimes)"
+    excerpt_keywords:
+      - [regulated, services]
+      - [payment, processing]
+      - [health, data, processing]
+      - [telco, regulated]
+      - [ai, system, regulated]
+      - [services, in, scope]

@@ -1,0 +1,55 @@
+# Per-MUST fingerprint catalog for req:A.5.31:obligations_register_maintenance_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Procedure-leaf patterns for how the
+# obligations register is maintained.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.31:obligations_register_maintenance_procedure"
+target_control: "A.5.31"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.31:proc_intake_path"
+    description: "Intake path from trigger to register entry"
+    excerpt_keywords:
+      - [intake, obligation]
+      - [register, obligation, intake]
+      - [how, obligations, added]
+      - [adding, obligation, procedure]
+      - [intake, path, register]
+
+  - must_id: "item:A.5.31:proc_maintainer"
+    description: "Named maintainer (compliance lead, legal counsel, or designate)"
+    excerpt_keywords:
+      - [register, maintainer]
+      - [compliance, lead, maintains]
+      - [legal, counsel, maintains]
+      - [obligations, register, maintainer]
+      - [responsible, for, register, accuracy]
+
+  - must_id: "item:A.5.31:proc_update_triggers"
+    description: "Update triggers enumerated (new law/regulation, regulator guidance, new customer contract, new jurisdiction, sectoral code change)"
+    excerpt_keywords:
+      - [register, update, trigger]
+      - [new, law, triggers]
+      - [regulator, guidance]
+      - [new, jurisdiction, triggers]
+      - [sectoral, code, change]
+      - [trigger, register, update]
+
+  - must_id: "item:A.5.31:proc_change_assessment"
+    description: "Impact-assessment step when an obligation changes"
+    excerpt_keywords:
+      - [obligation, change, assessment]
+      - [impact, assessment, obligation]
+      - [gap, action, obligation, change]
+      - [affected, controls, identified]
+      - [change, impact, regulation]
+
+  - must_id: "item:A.5.31:proc_authority_sync"
+    description: "Authority-contact sync (A.5.5 register update)"
+    excerpt_keywords:
+      - ["A.5.5"]
+      - [authority, contact, sync]
+      - [new, regulator, contact]
+      - [authority, register, update]

@@ -1,0 +1,75 @@
+# Per-MUST fingerprint catalog for req:A.5.31:legal_regulatory_register
+#
+# Reviewed-from-skeleton 2026-06-14. Register column-header patterns for
+# legal/regulatory obligations. Arion's GDPR compliance prose fanned out
+# across 9 MUSTs in v2 — tightened here to require per-entry / column-
+# header shape.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.31:legal_regulatory_register"
+target_control: "A.5.31"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.31:laws_listed"
+    description: "Applicable laws and regulations enumerated"
+    excerpt_keywords:
+      - [list, of, applicable, laws]
+      - [register, of, regulations]
+      - [obligations, register]
+      - [legal, register, column]
+      - [applicable, regulations, list]
+      - [regulatory, requirements, register]
+
+  - must_id: "item:A.5.31:jurisdictions"
+    description: "Jurisdictions covered explicitly per entry"
+    excerpt_keywords:
+      - [jurisdiction, column]
+      - [jurisdiction, per, entry]
+      - [data, residency, per]
+      - [places, of, operation]
+      - [jurisdictions, list]
+
+  - must_id: "item:A.5.31:obligation_type"
+    description: "Obligation type tag (statutory / regulatory / contractual / sectoral-code)"
+    excerpt_keywords:
+      - [obligation, type, column]
+      - [statutory, regulatory, contractual]
+      - [sectoral, code]
+      - [obligation, classification]
+
+  - must_id: "item:A.5.31:owner_per_item"
+    description: "Owner named per requirement (who tracks change and compliance)"
+    excerpt_keywords:
+      - [obligation, owner, per]
+      - [owner, per, requirement]
+      - [requirement, owner, column]
+      - [regulatory, owner]
+      - [owner, per, regulation]
+
+  - must_id: "item:A.5.31:last_verified"
+    description: "Last-verified or last-reviewed date per entry"
+    excerpt_keywords:
+      - [last, verified, on]
+      - [last, reviewed, on]
+      - [verified, date, column]
+      - [per, entry, verification, date]
+      - [obligation, last, reviewed]
+
+  - must_id: "item:A.5.31:compliance_approach"
+    description: "Approach for compliance per item"
+    excerpt_keywords:
+      - [compliance, approach, per]
+      - [how, obligation, met]
+      - [evidencing, control, per]
+      - [compliance, mapping, column]
+      - [obligation, evidenced, by]
+
+  - must_id: "item:A.5.31:contractual"
+    description: "Contractual obligations summarised"
+    excerpt_keywords:
+      - [contractual, obligations, register]
+      - [customer, contract, obligations]
+      - [regulator, agreements]
+      - [sectoral, codes]
+      - [contractual, requirements, list]

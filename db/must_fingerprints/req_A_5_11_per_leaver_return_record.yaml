@@ -1,0 +1,72 @@
+# Per-MUST fingerprint catalog for req:A.5.11:per_leaver_return_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-record (revocation_record shape)
+# patterns — require active-voice past-tense / per-record markers to
+# avoid matching policy prose about return obligations.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.11:per_leaver_return_record"
+target_control: "A.5.11"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.11:rec_leaver_ref"
+    description: "Leaver identifier per record (links to leaver register)"
+    excerpt_keywords:
+      - [return, record, for, leaver]
+      - [per, leaver, return, record]
+      - [leaver, ref, column]
+      - [leaver, id, return]
+
+  - must_id: "item:A.5.11:rec_items_returned"
+    description: "Itemised list of returned items per record (matched against the leaver's asset list from A.5.9)"
+    excerpt_keywords:
+      - [items, returned, list]
+      - [itemised, returned]
+      - [list, of, returned, items]
+      - [returned, against, asset, list]
+      - [return, checklist, completed]
+
+  - must_id: "item:A.5.11:rec_items_unreturned"
+    description: "Itemised list of NOT-returned items per record (with reason: lost / damaged / kept-by-agreement / dispute)"
+    excerpt_keywords:
+      - [unreturned, items]
+      - [items, not, returned]
+      - [non, return, reason]
+      - [kept, by, agreement]
+      - [lost, damaged, dispute]
+
+  - must_id: "item:A.5.11:rec_access_confirmed"
+    description: "Access-revocation confirmed per record (corp accounts disabled, SSO removed, credentials rotated)"
+    excerpt_keywords:
+      - [access, revocation, confirmed]
+      - [accounts, disabled, on]
+      - [sso, removed]
+      - [credentials, rotated]
+      - [revocation, confirmation, per, record]
+
+  - must_id: "item:A.5.11:rec_dual_signoff"
+    description: "Dual signoff per record (returning party + receiving role) — captured even when in-person handover isn't possible (remote attestation)"
+    excerpt_keywords:
+      - [dual, signoff]
+      - [returning, party, signed]
+      - [receiving, role, signed]
+      - [remote, attestation]
+      - [two, signatures]
+
+  - must_id: "item:A.5.11:rec_writeoff_auth"
+    description: "Write-off authoriser per record where applicable (proportional to asset value; InfoSec sign-off for data-bearing devices)"
+    excerpt_keywords:
+      - [write, off, authoriser]
+      - [write, off, signed, by]
+      - [risk, acceptance, signed]
+      - [infosec, sign, off]
+      - [write_off_authorisation]
+
+  - must_id: "item:A.5.11:rec_closure_date"
+    description: "Closure date recorded"
+    excerpt_keywords:
+      - [closure, date]
+      - [record, closed, on]
+      - [closed, on, date]
+      - [return, completed, on]

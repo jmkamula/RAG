@@ -1,0 +1,52 @@
+# Per-MUST fingerprint catalog for req:A.5.9:asset_discovery_upstream
+#
+# Reviewed-from-skeleton 2026-06-14. Discovery-record patterns match
+# tooling vocabulary (CSPM, EDR, MDM, network scan) — distinctive enough
+# that policy/procedure text rarely contains them in isolation.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.9:asset_discovery_upstream"
+target_control: "A.5.9"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.9:disc_sources"
+    description: "Discovery sources enumerated (network scan tool, CSPM tool, EDR/MDM inventory, procurement system, license database)"
+    excerpt_keywords:
+      - [cspm]
+      - [network, scan]
+      - [edr, inventory]
+      - [mdm, inventory]
+      - [license, database]
+      - [procurement, system]
+      - [discovery, source]
+
+  - must_id: "item:A.5.9:disc_cadence"
+    description: "Discovery cadence per source (continuous / daily / weekly)"
+    excerpt_keywords:
+      - [discovery, cadence]
+      - [scan, cadence]
+      - [continuous, discovery]
+      - [daily, scan]
+      - [weekly, scan]
+      - [scan, schedule]
+
+  - must_id: "item:A.5.9:disc_scope_coverage"
+    description: "Coverage statement — what categories of assets each source covers and where gaps exist (e.g., personal devices, OT)"
+    excerpt_keywords:
+      - [discovery, coverage]
+      - [coverage, gap]
+      - [scope, of, discovery]
+      - [personal, devices]
+      - [ot, assets]
+      - [shadow, it]
+
+  - must_id: "item:A.5.9:disc_reconciliation"
+    description: "Reconciliation rule — discovered-but-not-in-register entries are flagged for owner assignment and classification"
+    excerpt_keywords:
+      - [discovered, not, registered]
+      - [flagged, for, owner]
+      - [unregistered, asset]
+      - [reconciliation, rule]
+      - [discovered, but, not]
+      - [shadow, asset]

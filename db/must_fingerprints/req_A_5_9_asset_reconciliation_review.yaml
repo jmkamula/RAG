@@ -1,0 +1,55 @@
+# Per-MUST fingerprint catalog for req:A.5.9:asset_reconciliation_review
+#
+# Reviewed-from-skeleton 2026-06-14. Review-record patterns match
+# reconciliation output (delta per source, additions, mismatches).
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.9:asset_reconciliation_review"
+target_control: "A.5.9"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.9:rev_date"
+    description: "Reconciliation date within the planned interval (typically within 90 days of last reconciliation)"
+    excerpt_keywords:
+      - [reconciliation, date]
+      - [last, reconciled]
+      - [reconciled, on]
+      - [reconciliation, interval]
+      - [90, days]
+
+  - must_id: "item:A.5.9:rev_reviewer"
+    description: "Reviewer identity and role recorded"
+    excerpt_keywords:
+      - [reconciled, by]
+      - [reviewed, by]
+      - [reconciler]
+      - [conducted, by]
+
+  - must_id: "item:A.5.9:rev_per_source"
+    description: "Per-source delta — what each discovery source surfaced vs what the register held (additions, removals, mismatches)"
+    excerpt_keywords:
+      - [per, source, delta]
+      - [discovery, source, delta]
+      - [additions, removals]
+      - [register, vs, discovery]
+      - [mismatches, identified]
+      - [reconciliation, delta]
+
+  - must_id: "item:A.5.9:rev_register_update"
+    description: "Register updated as a result of the reconciliation with reference to this review"
+    excerpt_keywords:
+      - [register, updated, after]
+      - [updated, following, reconciliation]
+      - [register, change, log]
+      - [reconciliation, result]
+      - [register, refreshed]
+
+  - must_id: "item:A.5.9:rev_unassigned_owner"
+    description: "Treatment of unassigned-owner rows (owner assignment forced or row retired)"
+    excerpt_keywords:
+      - [unassigned, owner]
+      - [orphan, asset]
+      - [assets, without, owner]
+      - [owner, missing]
+      - [forced, owner, assignment]

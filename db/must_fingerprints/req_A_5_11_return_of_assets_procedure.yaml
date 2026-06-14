@@ -1,0 +1,78 @@
+# Per-MUST fingerprint catalog for req:A.5.11:return_of_assets_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Procedure-leaf patterns can be
+# more permissive since procedure documents legitimately describe these
+# elements in narrative form. Common policy clauses like Arion's
+# "Upon termination, accounts shall be deactivated, and assets returned"
+# legitimately satisfy SOME of these MUSTs (asset_checklist, triggers).
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.11:return_of_assets_procedure"
+target_control: "A.5.11"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.11:asset_checklist"
+    description: "Checklist of asset types to be returned — physical (laptops, mobile devices, badges, tokens) and logical (corp credentials, data on personal devices)"
+    excerpt_keywords:
+      - [return, checklist]
+      - [assets, to, be, returned]
+      - [laptops, badges, tokens]
+      - [corporate, credentials]
+      - [physical, logical, assets]
+      - [return, of, devices]
+
+  - must_id: "item:A.5.11:triggers"
+    description: "Triggers enumerated (termination, role change, contract end, change of agreement, end of secondment)"
+    excerpt_keywords:
+      - [termination, role, change]
+      - [contract, end]
+      - [end, of, secondment]
+      - [change, of, agreement]
+      - [return, trigger]
+      - [upon, termination]
+
+  - must_id: "item:A.5.11:verification"
+    description: "Verification step signed by both the returning party and the receiving role (IT/manager) with itemised confirmation"
+    excerpt_keywords:
+      - [returning, party, verification]
+      - [receiving, role, verification]
+      - [itemised, confirmation]
+      - [dual, verification]
+      - [return, verification, signed]
+
+  - must_id: "item:A.5.11:data_handling"
+    description: "Data wipe / sanitisation step for assets carrying organisational information (cross-link to A.8.10 deletion)"
+    excerpt_keywords:
+      - [data, wipe]
+      - [secure, wipe]
+      - [sanitisation, step]
+      - [data, sanitization]
+      - ["A.8.10"]
+      - [wipe, before, reuse]
+
+  - must_id: "item:A.5.11:data_preservation"
+    description: "Data preservation step BEFORE wipe (org information on the asset must be captured / migrated, not just deleted)"
+    excerpt_keywords:
+      - [data, preservation]
+      - [preserve, before, wipe]
+      - [capture, before, wipe]
+      - [data, migration, before, wipe]
+      - [retain, then, wipe]
+
+  - must_id: "item:A.5.11:non_return_path"
+    description: "Non-return path defined (when assets cannot be physically returned — remote staff, lost device, contractor dispute — alternative attestation + risk acceptance)"
+    excerpt_keywords:
+      - [non, return, path]
+      - [lost, device, path]
+      - [remote, staff, return]
+      - [alternative, attestation]
+      - [risk, acceptance, non, return]
+
+  - must_id: "item:A.5.11:owner"
+    description: "Owner of the procedure (typically HR + IT joint with InfoSec sign-off authority)"
+    excerpt_keywords:
+      - [procedure, owner]
+      - [process, owner]
+      - [hr, it, infosec, joint]
+      - [procedure, signed, off, by]
