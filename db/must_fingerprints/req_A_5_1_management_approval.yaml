@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:A.5.1:management_approval
+#
+# Reviewed-from-skeleton 2026-06-14. ISP approval — top-management level.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.1:management_approval"
+target_control: "A.5.1"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.1:approval_signatory"
+    description: "Signatory at top-management level (CEO, board chair)"
+    excerpt_keywords:
+      - [isp, approved, by, ceo]
+      - [isp, signed, by, board]
+      - [isp, top, management, signatory]
+      - [board, chair, isp]
+
+  - must_id: "item:A.5.1:approval_date"
+    description: "Approval date recorded"
+    excerpt_keywords:
+      - [isp, approved, on, date]
+      - [isp, signed, on, date]
+      - [information, security, policy, approval, date]
+
+  - must_id: "item:A.5.1:approval_target"
+    description: "Reference to the specific policy version being approved"
+    excerpt_keywords:
+      - [isp, version, approved]
+      - [isp, version, ref]
+      - [information, security, policy, version]

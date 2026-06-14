@@ -1,0 +1,51 @@
+# Per-MUST fingerprint catalog for req:A.5.8:project_security_closure_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-project closure record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.8:project_security_closure_record"
+target_control: "A.5.8"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.8:cls_project_ref"
+    description: "Project identifier per record"
+    excerpt_keywords:
+      - [project, closure, ref]
+      - [project, security, closure, id]
+      - [project, closed, security, id]
+
+  - must_id: "item:A.5.8:cls_closure_date"
+    description: "Closure date recorded"
+    excerpt_keywords:
+      - [project, security, closure, date]
+      - [project, closed, on, security]
+
+  - must_id: "item:A.5.8:cls_gates_passed"
+    description: "Gates-passed summary per record"
+    excerpt_keywords:
+      - [project, gates, passed, summary]
+      - [project, security, gates, closed]
+      - [project, gate, gap, risk, acceptance]
+
+  - must_id: "item:A.5.8:cls_residual_risks"
+    description: "Residual-risk register transfer per record"
+    excerpt_keywords:
+      - [project, residual, risk, transfer]
+      - [outstanding, risk, accepted, operational, owner]
+      - [project, residual, risk, named]
+
+  - must_id: "item:A.5.8:cls_artefacts_archived"
+    description: "Security artefacts archived per record"
+    excerpt_keywords:
+      - [project, threat, model, archived]
+      - [project, pen, test, report, archived]
+      - [project, dpia, archived]
+      - [project, exception, register, archived]
+
+  - must_id: "item:A.5.8:cls_signoff"
+    description: "Final signoff per record (three-way)"
+    excerpt_keywords:
+      - [project, sponsor, infosec, operational, signoff]
+      - [project, security, three, way, signoff]
+      - [project, closure, signoff]

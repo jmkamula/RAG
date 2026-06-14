@@ -1,0 +1,63 @@
+# Per-MUST fingerprint catalog for req:A.5.8:project_management_security_integration
+#
+# Reviewed-from-skeleton 2026-06-14. Project security integration procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.8:project_management_security_integration"
+target_control: "A.5.8"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.8:initiation_gate"
+    description: "Security gate at project initiation"
+    excerpt_keywords:
+      - [project, security, initiation, gate]
+      - [project, risk, assessment, initiation]
+      - [project, classification, of, information]
+      - [security, gate, project, start]
+
+  - must_id: "item:A.5.8:role"
+    description: "Information security role defined in the project governance"
+    excerpt_keywords:
+      - [project, infosec, role]
+      - [project, security, advisor]
+      - [project, security, gate, owner]
+      - [project, security, reviewer]
+
+  - must_id: "item:A.5.8:requirements"
+    description: "Security requirements captured in project plan"
+    excerpt_keywords:
+      - [project, security, requirements]
+      - [project, non, functional, security]
+      - [project, data, protection, requirements]
+      - [project, requirements, document]
+
+  - must_id: "item:A.5.8:change_control"
+    description: "In-project change control step"
+    excerpt_keywords:
+      - [project, change, control, security]
+      - [project, security, impact, change]
+      - [project, scope, change, security]
+      - [project, in, flight, security, change]
+
+  - must_id: "item:A.5.8:assessment_pre_golive"
+    description: "Security assessment before go-live"
+    excerpt_keywords:
+      - [pen, test, before, go, live]
+      - [project, pre, golive, assessment]
+      - [project, control, verification, golive]
+      - [residual, risk, acceptance, golive]
+
+  - must_id: "item:A.5.8:acceptance_criteria"
+    description: "Risk-acceptance criteria stated"
+    excerpt_keywords:
+      - [project, risk, acceptance, criteria]
+      - [project, named, approver, per, tier]
+      - [project, residual, risk, escalation]
+
+  - must_id: "item:A.5.8:closure_signoff"
+    description: "Project closure security sign-off step"
+    excerpt_keywords:
+      - [project, closure, security, signoff]
+      - [project, handover, operations, security]
+      - [project, outstanding, risk, transfer]

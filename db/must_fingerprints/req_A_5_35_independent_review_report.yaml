@@ -1,0 +1,60 @@
+# Per-MUST fingerprint catalog for req:A.5.35:independent_review_report
+#
+# Reviewed-from-skeleton 2026-06-14. Independent review audit report.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.35:independent_review_report"
+target_control: "A.5.35"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.35:review_date"
+    description: "Review date and period covered"
+    excerpt_keywords:
+      - [independent, review, date]
+      - [independent, review, period, covered]
+      - [observation, window, independent, review]
+
+  - must_id: "item:A.5.35:independence"
+    description: "Independence of the reviewer demonstrated"
+    excerpt_keywords:
+      - [reviewer, independence, demonstrated]
+      - [external, auditor, independence]
+      - [rotating, internal, reviewer]
+      - [no, operational, conflict, reviewer]
+
+  - must_id: "item:A.5.35:scope"
+    description: "Scope covers people, processes, and technologies"
+    excerpt_keywords:
+      - [people, processes, technologies, scope]
+      - [independent, review, scope]
+      - [three, dimensions, audit, scope]
+
+  - must_id: "item:A.5.35:significant_change_check"
+    description: "Significant-change trigger check"
+    excerpt_keywords:
+      - [significant, change, trigger]
+      - [m, and, a, review, trigger]
+      - [significant, change, review, triggered]
+      - [planned, vs, significant, change]
+
+  - must_id: "item:A.5.35:findings"
+    description: "Findings listed with severity"
+    excerpt_keywords:
+      - [independent, findings, severity]
+      - [independent, observation, finding]
+      - [findings, traceable, observation]
+
+  - must_id: "item:A.5.35:recommendations"
+    description: "Recommendations stated"
+    excerpt_keywords:
+      - [independent, recommendations]
+      - [recommendations, priority, owner]
+      - [actionable, recommendation, independent]
+
+  - must_id: "item:A.5.35:management_response"
+    description: "Management response to findings"
+    excerpt_keywords:
+      - [management, response, to, findings]
+      - [management, accept, remediate, transfer]
+      - [management, response, in, report]

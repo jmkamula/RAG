@@ -1,0 +1,59 @@
+# Per-MUST fingerprint catalog for req:A.5.23:cloud_posture_review
+#
+# Reviewed-from-skeleton 2026-06-14. Cloud-posture review record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.23:cloud_posture_review"
+target_control: "A.5.23"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.23:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [cloud, posture, review, date]
+      - [cloud, posture, reviewed, on]
+      - [csp, posture, review, conducted]
+
+  - must_id: "item:A.5.23:rev_reviewer"
+    description: "Reviewer identity (platform lead + InfoSec)"
+    excerpt_keywords:
+      - [cloud, posture, reviewed, by]
+      - [platform, lead, cloud, review]
+      - [infosec, lead, cloud, review]
+
+  - must_id: "item:A.5.23:rev_attestation"
+    description: "CSP attestation refresh checked per service"
+    excerpt_keywords:
+      - [csp, attestation, refresh]
+      - [csp, attestation, current, stale]
+      - [csp, soc2, refresh]
+
+  - must_id: "item:A.5.23:rev_config_drift"
+    description: "Configuration-drift assessment"
+    excerpt_keywords:
+      - [cloud, config, drift]
+      - [cloud, configuration, drift]
+      - [cspm, drift, audit]
+      - [shared, responsibility, config, audit]
+
+  - must_id: "item:A.5.23:rev_geo_compliance"
+    description: "Geographic-location compliance check"
+    excerpt_keywords:
+      - [data, geo, drift]
+      - [data, non, approved, region]
+      - [cloud, geo, compliance, audit]
+
+  - must_id: "item:A.5.23:rev_incidents"
+    description: "Cloud-incidents in the period reviewed"
+    excerpt_keywords:
+      - [cloud, incident, review]
+      - [csp, disclosed, incident]
+      - [cloud, incident, period, review]
+
+  - must_id: "item:A.5.23:rev_actions"
+    description: "Action items captured per service"
+    excerpt_keywords:
+      - [cloud, review, action, items]
+      - [cloud, service, action, per]
+      - [cloud, improvement, action]

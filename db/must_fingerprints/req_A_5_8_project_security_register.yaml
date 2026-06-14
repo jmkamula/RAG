@@ -1,0 +1,60 @@
+# Per-MUST fingerprint catalog for req:A.5.8:project_security_register
+#
+# Reviewed-from-skeleton 2026-06-14. Per-project register columns.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.8:project_security_register"
+target_control: "A.5.8"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.8:reg_project_id"
+    description: "Each in-scope project captured with a unique identifier"
+    excerpt_keywords:
+      - [project, register]
+      - [project, id, column]
+      - [project, security, register, id]
+
+  - must_id: "item:A.5.8:reg_tier"
+    description: "Security tier per row"
+    excerpt_keywords:
+      - [project, security, tier, column]
+      - [project, full, lightweight, waived]
+      - [security, tier, per, project]
+
+  - must_id: "item:A.5.8:reg_stage"
+    description: "Current stage per row"
+    excerpt_keywords:
+      - [project, stage, column]
+      - [initiation, requirements, build]
+      - [pre, go, live, live, closed]
+      - [project, lifecycle, stage]
+
+  - must_id: "item:A.5.8:reg_owner"
+    description: "Project owner per row"
+    excerpt_keywords:
+      - [project, owner, column]
+      - [project, delivery, owner]
+      - [project, owner, per, row]
+
+  - must_id: "item:A.5.8:reg_infosec_liaison"
+    description: "InfoSec liaison per row"
+    excerpt_keywords:
+      - [project, infosec, liaison]
+      - [project, security, reviewer, column]
+      - [project, infosec, contact, per]
+
+  - must_id: "item:A.5.8:reg_planned_closure"
+    description: "Planned closure date per row"
+    excerpt_keywords:
+      - [project, planned, closure, date]
+      - [project, closure, gate, trigger]
+      - [project, end, date, column]
+
+  - must_id: "item:A.5.8:reg_sdlc_link"
+    description: "SDLC link per row where project involves software development"
+    excerpt_keywords:
+      - ["A.8.25"]
+      - ["A.8.26"]
+      - [project, sdlc, link]
+      - [software, project, security]

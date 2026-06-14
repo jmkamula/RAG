@@ -1,0 +1,47 @@
+# Per-MUST fingerprint catalog for req:A.5.23:exit_migration_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-cloud-service exit record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.23:exit_migration_record"
+target_control: "A.5.23"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.23:exit_trigger"
+    description: "Exit trigger captured"
+    excerpt_keywords:
+      - [cloud, exit, trigger]
+      - [csp, termination, trigger]
+      - [csp, replacement, trigger]
+      - [csp, failure, exit]
+
+  - must_id: "item:A.5.23:exit_authoriser"
+    description: "Authoriser of the exit"
+    excerpt_keywords:
+      - [cloud, exit, authoriser]
+      - [csp, exit, signed, off, by]
+      - [risk, acceptance, cloud, exit, delay]
+
+  - must_id: "item:A.5.23:exit_migration_plan"
+    description: "Migration plan executed"
+    excerpt_keywords:
+      - [cloud, migration, plan, executed]
+      - [csp, data, export, executed]
+      - [cloud, dependency, rewiring]
+      - [replacement, service, stood, up]
+
+  - must_id: "item:A.5.23:exit_handover"
+    description: "Handover of configuration + data evidence"
+    excerpt_keywords:
+      - [cloud, backup, downloaded]
+      - [cloud, config, preserved]
+      - [cloud, handover, evidence]
+
+  - must_id: "item:A.5.23:exit_data_deletion"
+    description: "Data deletion confirmation from the CSP"
+    excerpt_keywords:
+      - [csp, data, deletion, attestation]
+      - [csp, deletion, log]
+      - [csp, deletion, audit, trail]
+      - [csp, data, deletion, confirmed]

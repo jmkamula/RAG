@@ -1,0 +1,58 @@
+# Per-MUST fingerprint catalog for req:A.5.8:project_security_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. Project security program audit.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.8:project_security_program_review"
+target_control: "A.5.8"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.8:rev_date"
+    description: "Review date within the planned annual interval"
+    excerpt_keywords:
+      - [project, security, program, review, date]
+      - [project, security, reviewed, on]
+
+  - must_id: "item:A.5.8:rev_reviewer"
+    description: "Reviewer identity (InfoSec lead + PMO)"
+    excerpt_keywords:
+      - [project, security, reviewed, by]
+      - [pmo, infosec, project, review]
+      - [project, security, program, reviewer]
+
+  - must_id: "item:A.5.8:rev_tiering"
+    description: "Tiering audit"
+    excerpt_keywords:
+      - [project, tiering, audit]
+      - [project, tier, calibration]
+      - [project, re, tiered, sample]
+
+  - must_id: "item:A.5.8:rev_gate_skip"
+    description: "Gate-skip rate analysed"
+    excerpt_keywords:
+      - [project, gate, skip, rate]
+      - [project, bypassed, gate]
+      - [project, gate, skip, root, cause]
+
+  - must_id: "item:A.5.8:rev_late_detection"
+    description: "Late-detection analysis"
+    excerpt_keywords:
+      - [project, late, detection, analysis]
+      - [project, security, after, golive]
+      - [project, post, golive, security, gap]
+
+  - must_id: "item:A.5.8:rev_capacity"
+    description: "InfoSec capacity vs project pipeline reviewed"
+    excerpt_keywords:
+      - [infosec, capacity, project, pipeline]
+      - [reviewer, capacity, project]
+      - [project, gate, silent, fail, capacity]
+
+  - must_id: "item:A.5.8:rev_actions"
+    description: "Action items captured for the program"
+    excerpt_keywords:
+      - [project, security, program, action, items]
+      - [project, template, update]
+      - [project, manager, retrain]
+      - [project, tiering, criteria, tightened]

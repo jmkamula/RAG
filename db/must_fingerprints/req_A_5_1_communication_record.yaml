@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:A.5.1:communication_record
+#
+# Reviewed-from-skeleton 2026-06-14. ISP communication record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.1:communication_record"
+target_control: "A.5.1"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.1:comm_date"
+    description: "Date of publication/communication"
+    excerpt_keywords:
+      - [isp, communicated, on]
+      - [isp, published, on]
+      - [information, security, policy, published]
+
+  - must_id: "item:A.5.1:comm_audience"
+    description: "Audience reached"
+    excerpt_keywords:
+      - [isp, distributed, to, all, staff]
+      - [isp, audience]
+      - [information, security, policy, distributed]
+
+  - must_id: "item:A.5.1:comm_channel"
+    description: "Channel used"
+    excerpt_keywords:
+      - [isp, intranet, publication]
+      - [isp, training, session]
+      - [isp, town, hall]
+      - [isp, email, distribution]

@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:A.5.1:isp_policy
+#
+# Reviewed-from-skeleton 2026-06-14. Top-level Information Security
+# Policy document. v2 raw produced 8 FPs from generic ISP language.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.1:isp_policy"
+target_control: "A.5.1"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.1:scope"
+    description: "Scope of the policy defined"
+    excerpt_keywords:
+      - [isp, scope, defined]
+      - [information, security, policy, scope]
+      - [policy, applies, to, assets]
+      - [policy, scope, personnel]
+
+  - must_id: "item:A.5.1:principles"
+    description: "Information security principles and objectives stated"
+    excerpt_keywords:
+      - [information, security, principles]
+      - [information, security, objectives]
+      - [isms, objectives]
+      - [security, commitment, principles]
+
+  - must_id: "item:A.5.1:roles"
+    description: "Roles and responsibilities for information security"
+    excerpt_keywords:
+      - [information, security, roles, responsibilities]
+      - [isms, roles]
+      - [security, accountability, roles]
+      - [ciso, role, defined]
+
+  - must_id: "item:A.5.1:legal_compliance"
+    description: "Commitment to legal, regulatory and contractual compliance"
+    excerpt_keywords:
+      - [legal, regulatory, contractual, commitment]
+      - [statutory, compliance, commitment]
+      - [commitment, to, compliance]
+      - [legal, obligations, isp]
+
+  - must_id: "item:A.5.1:topic_refs"
+    description: "References to topic-specific policies"
+    excerpt_keywords:
+      - ["A.5.10"]
+      - ["A.5.12"]
+      - [topic, specific, policies]
+      - [policy, hierarchy, ref]

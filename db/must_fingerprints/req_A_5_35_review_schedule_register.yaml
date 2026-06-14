@@ -1,0 +1,52 @@
+# Per-MUST fingerprint catalog for req:A.5.35:review_schedule_register
+#
+# Reviewed-from-skeleton 2026-06-14. Independent review schedule.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.35:review_schedule_register"
+target_control: "A.5.35"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.35:sch_cadence"
+    description: "Planned cadence stated"
+    excerpt_keywords:
+      - [independent, review, cadence]
+      - [annual, independent, review]
+      - [risk, tier, review, cadence]
+
+  - must_id: "item:A.5.35:sch_scope_areas"
+    description: "Scope areas planned"
+    excerpt_keywords:
+      - [independent, review, scope, areas]
+      - [isms, end, to, end, review]
+      - [independent, review, sliced]
+
+  - must_id: "item:A.5.35:sch_owner"
+    description: "Named owner accountable for executing the schedule"
+    excerpt_keywords:
+      - [independent, review, schedule, owner]
+      - [ciso, independent, review, owner]
+      - [management, sponsor, review]
+
+  - must_id: "item:A.5.35:sch_last_review"
+    description: "Last review date recorded"
+    excerpt_keywords:
+      - [last, independent, review]
+      - [independent, review, last, date]
+      - [last, audit, independent]
+
+  - must_id: "item:A.5.35:sch_next_review"
+    description: "Next review date stated"
+    excerpt_keywords:
+      - [next, independent, review, date]
+      - [independent, review, next, due]
+      - [next, audit, scheduled]
+
+  - must_id: "item:A.5.35:sch_reviewer_selection"
+    description: "Reviewer selection mechanism"
+    excerpt_keywords:
+      - [reviewer, selection, mechanism]
+      - [external, rotation, reviewer]
+      - [audit, firm, framework, agreement]
+      - [internal, independence, criteria]

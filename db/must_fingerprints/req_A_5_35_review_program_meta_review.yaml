@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:A.5.35:review_program_meta_review
+#
+# Reviewed-from-skeleton 2026-06-14. Independent-review program meta-audit.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.35:review_program_meta_review"
+target_control: "A.5.35"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.35:pgm_date"
+    description: "Meta-review date within the planned interval"
+    excerpt_keywords:
+      - [independent, review, program, meta, date]
+      - [independent, review, program, audit, date]
+
+  - must_id: "item:A.5.35:pgm_reviewer"
+    description: "Reviewer identity (program owner + InfoSec + audit committee)"
+    excerpt_keywords:
+      - [independent, review, program, reviewer]
+      - [audit, committee, chair]
+      - [independent, review, program, owner, audit]
+
+  - must_id: "item:A.5.35:pgm_coverage"
+    description: "Coverage check"
+    excerpt_keywords:
+      - [independent, review, coverage, audit]
+      - [planned, scope, areas, reviewed]
+      - [independent, review, schedule, ran]
+
+  - must_id: "item:A.5.35:pgm_independence_check"
+    description: "Independence-discipline check"
+    excerpt_keywords:
+      - [reviewer, independence, audit]
+      - [reviewer, rotation, worked]
+      - [reviewer, own, area, conflict]
+
+  - must_id: "item:A.5.35:pgm_closure"
+    description: "Findings-closure rate across the program"
+    excerpt_keywords:
+      - [independent, finding, closure, rate]
+      - [independent, finding, aged]
+      - [independent, finding, open, count]
+
+  - must_id: "item:A.5.35:pgm_outcome"
+    description: "Cadence-adjustment or scope-adjustment decisions"
+    excerpt_keywords:
+      - [independent, review, cadence, adjusted]
+      - [independent, review, scope, adjusted]
+      - [reviewer, pool, changed]

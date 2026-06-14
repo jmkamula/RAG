@@ -1,0 +1,57 @@
+# Per-MUST fingerprint catalog for req:A.5.23:cloud_service_register
+#
+# Reviewed-from-skeleton 2026-06-14. Per-cloud-service register.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.23:cloud_service_register"
+target_control: "A.5.23"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.23:reg_service"
+    description: "Each cloud service identified per row"
+    excerpt_keywords:
+      - [cloud, service, register]
+      - [csp, service, column]
+      - [cloud, service, list]
+
+  - must_id: "item:A.5.23:reg_owner"
+    description: "Named internal owner accountable per service"
+    excerpt_keywords:
+      - [cloud, service, owner, column]
+      - [platform, owner, per, cloud]
+      - [cloud, service, business, owner]
+
+  - must_id: "item:A.5.23:reg_classification"
+    description: "Data classification per service"
+    excerpt_keywords:
+      - [cloud, service, classification, column]
+      - [data, classification, per, cloud, service]
+
+  - must_id: "item:A.5.23:reg_geo"
+    description: "Geographic location of data per service"
+    excerpt_keywords:
+      - [cloud, region, column]
+      - [data, sub, region, column]
+      - [cloud, geo, location, per, service]
+
+  - must_id: "item:A.5.23:reg_responsibility"
+    description: "Shared-responsibility split recorded per service"
+    excerpt_keywords:
+      - [shared, responsibility, per, service]
+      - [csp, managed, vs, org, managed, per]
+      - [responsibility, split, column]
+
+  - must_id: "item:A.5.23:reg_agreement"
+    description: "Reference to the agreement / contract in force per service"
+    excerpt_keywords:
+      - [cloud, agreement, ref, per]
+      - ["A.5.20"]
+      - [cloud, contract, ref, column]
+
+  - must_id: "item:A.5.23:reg_exit_readiness"
+    description: "Exit-plan readiness flag per service"
+    excerpt_keywords:
+      - [cloud, exit, readiness, flag]
+      - [exit, plan, ready, column]
+      - [cloud, exit, plan, stale]

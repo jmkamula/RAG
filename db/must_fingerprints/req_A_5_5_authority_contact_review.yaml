@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.5.5:authority_contact_review
+#
+# Reviewed-from-skeleton 2026-06-14. Authority review record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.5:authority_contact_review"
+target_control: "A.5.5"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.5:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [authority, register, review, date]
+      - [authority, contact, reviewed]
+
+  - must_id: "item:A.5.5:rev_reviewer"
+    description: "Reviewer identity and role recorded"
+    excerpt_keywords:
+      - [authority, register, reviewed, by]
+      - [authority, contact, reviewer]
+
+  - must_id: "item:A.5.5:rev_per_entry"
+    description: "Per-entry outcome (verified / amended / removed)"
+    excerpt_keywords:
+      - [authority, per, entry, outcome]
+      - [authority, verified, amended]
+      - [authority, removed, per, entry]
+
+  - must_id: "item:A.5.5:rev_register_update"
+    description: "Changes propagated back to the live register"
+    excerpt_keywords:
+      - [authority, register, updated, after, review]
+      - [authority, register, refresh]
+      - [authority, register, change, log]
+
+  - must_id: "item:A.5.5:rev_scope_check"
+    description: "Cross-check against the applicable-authorities scope"
+    excerpt_keywords:
+      - [authority, scope, cross, check]
+      - [new, jurisdiction, authority, scope]
+      - [new, sector, authority, scope]

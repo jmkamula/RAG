@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:A.5.35:finding_response_register
+#
+# Reviewed-from-skeleton 2026-06-14. Per-finding response register.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.35:finding_response_register"
+target_control: "A.5.35"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.35:fr_finding_id"
+    description: "Per-finding unique identifier"
+    excerpt_keywords:
+      - [independent, finding, id]
+      - [audit, finding, id, column]
+      - [finding, register, id]
+
+  - must_id: "item:A.5.35:fr_severity"
+    description: "Severity recorded per finding"
+    excerpt_keywords:
+      - [independent, finding, severity, column]
+      - [audit, finding, severity, per, row]
+
+  - must_id: "item:A.5.35:fr_status"
+    description: "Current status per finding"
+    excerpt_keywords:
+      - [audit, finding, status, column]
+      - [independent, finding, status]
+      - [finding, open, aged, overdue]
+
+  - must_id: "item:A.5.35:fr_owner"
+    description: "Named owner per finding"
+    excerpt_keywords:
+      - [independent, finding, owner]
+      - [audit, finding, owner, column]
+      - [finding, target, closure, date]
+
+  - must_id: "item:A.5.35:fr_treatment"
+    description: "Agreed treatment per finding"
+    excerpt_keywords:
+      - [audit, finding, treatment]
+      - [accept, remediate, transfer, finding]
+      - [management, response, committed]
+
+  - must_id: "item:A.5.35:fr_closure_evidence"
+    description: "Closure evidence reference per closed finding"
+    excerpt_keywords:
+      - [audit, finding, closure, evidence]
+      - [independent, finding, closed, artefact]
+      - [finding, addressed, proof]

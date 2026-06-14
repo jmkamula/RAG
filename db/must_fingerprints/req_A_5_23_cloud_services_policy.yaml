@@ -1,0 +1,98 @@
+# Per-MUST fingerprint catalog for req:A.5.23:cloud_services_policy
+#
+# Reviewed-from-skeleton 2026-06-14. Cloud services policy — 12 MUSTs.
+# v2 raw produced 17 FPs from generic cloud-policy language.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.23:cloud_services_policy"
+target_control: "A.5.23"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.23:scope"
+    description: "Scope of cloud services covered (IaaS / PaaS / SaaS, public / private / hybrid)"
+    excerpt_keywords:
+      - [iaas, paas, saas, scope]
+      - [public, private, hybrid, cloud]
+      - [cloud, services, scope, defined]
+
+  - must_id: "item:A.5.23:risk_management"
+    description: "How information security risks in cloud use will be managed"
+    excerpt_keywords:
+      - [cloud, risk, assessment]
+      - [cloud, risk, treatment]
+      - [cloud, infosec, risk, management]
+
+  - must_id: "item:A.5.23:selection"
+    description: "Cloud service selection criteria"
+    excerpt_keywords:
+      - [cloud, selection, criteria]
+      - [csp, selection, criteria]
+      - [cloud, provider, evaluation]
+
+  - must_id: "item:A.5.23:industry_standards"
+    description: "Cloud agreements based on accepted industry standards"
+    excerpt_keywords:
+      - [cloud, industry, standards]
+      - [csp, agreement, industry, standard]
+      - [iso, 27017, cloud]
+
+  - must_id: "item:A.5.23:shared_responsibility"
+    description: "Shared-responsibility model"
+    excerpt_keywords:
+      - [shared, responsibility, model]
+      - [csp, managed, vs, customer, managed]
+      - [shared, responsibility, matrix]
+
+  - must_id: "item:A.5.23:responsibilities"
+    description: "Roles and responsibilities for cloud service use and management (internal)"
+    excerpt_keywords:
+      - [cloud, internal, responsibilities]
+      - [cloud, role, internal]
+      - [cloud, governance, roles, internal]
+
+  - must_id: "item:A.5.23:controls_method"
+    description: "How CSP-side controls will be obtained, evaluated and used"
+    excerpt_keywords:
+      - [csp, attestation, review]
+      - [csp, api, check]
+      - [csp, configuration, discovery]
+      - [csp, controls, evaluation]
+
+  - must_id: "item:A.5.23:geographic_location"
+    description: "Geographic-location requirements"
+    excerpt_keywords:
+      - [data, region, requirement]
+      - [data, residency, cloud]
+      - [data, location, cloud, requirement]
+      - [data, sovereignty, cloud]
+
+  - must_id: "item:A.5.23:personal_data"
+    description: "How personal data in cloud storage is protected"
+    excerpt_keywords:
+      - [personal, data, cloud, encryption]
+      - [personal, data, sovereignty, cloud]
+      - [sub, processor, control, cloud]
+      - [pii, cloud, protection]
+
+  - must_id: "item:A.5.23:sub_processing"
+    description: "Sub-processing terms for cloud"
+    excerpt_keywords:
+      - [csp, sub, processor, notification]
+      - [csp, sub, processor, approval]
+      - [cloud, sub, processor, terms]
+
+  - must_id: "item:A.5.23:incidents"
+    description: "Procedures for handling cloud-related security incidents"
+    excerpt_keywords:
+      - ["A.5.24"]
+      - ["A.5.26"]
+      - [cloud, incident, support, obligation]
+      - [csp, incident, support]
+
+  - must_id: "item:A.5.23:forensic_support"
+    description: "Forensic / digital-evidence support expectations from the CSP"
+    excerpt_keywords:
+      - [csp, forensic, support]
+      - [cloud, digital, evidence]
+      - [csp, evidence, collection, support]

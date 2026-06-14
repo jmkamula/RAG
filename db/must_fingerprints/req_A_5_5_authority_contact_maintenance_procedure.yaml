@@ -1,0 +1,45 @@
+# Per-MUST fingerprint catalog for req:A.5.5:authority_contact_maintenance_procedure
+#
+# Reviewed-from-skeleton 2026-06-14. Authority maintenance procedure.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.5:authority_contact_maintenance_procedure"
+target_control: "A.5.5"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.5:proc_intake_path"
+    description: "Intake path for adding a new authority"
+    excerpt_keywords:
+      - [new, authority, intake]
+      - [adding, authority, procedure]
+      - [authority, register, intake]
+
+  - must_id: "item:A.5.5:proc_maintainer"
+    description: "Named maintainer of the register"
+    excerpt_keywords:
+      - [authority, register, maintainer]
+      - [compliance, lead, authority, register]
+      - [security, manager, authority, register]
+
+  - must_id: "item:A.5.5:proc_update_triggers"
+    description: "Update triggers enumerated"
+    excerpt_keywords:
+      - [authority, register, update, trigger]
+      - [new, jurisdiction, authority]
+      - [regulator, reorganisation]
+      - [contact, change, alert, authority]
+
+  - must_id: "item:A.5.5:proc_verification_cadence"
+    description: "Re-verification cadence for contact details"
+    excerpt_keywords:
+      - [authority, contact, verification, cadence]
+      - [annual, re, verification, authority]
+      - [authority, contact, refresh, cadence]
+
+  - must_id: "item:A.5.5:proc_activation_path"
+    description: "Activation path — who contacts whom on which trigger"
+    excerpt_keywords:
+      - [authority, activation, path]
+      - [authority, contact, on, trigger]
+      - [regulatory, deadline, contact, path]

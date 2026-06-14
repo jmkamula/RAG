@@ -1,0 +1,48 @@
+# Per-MUST fingerprint catalog for req:A.5.5:authority_contact_register
+#
+# Reviewed-from-skeleton 2026-06-14. Authority contact register columns.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.5:authority_contact_register"
+target_control: "A.5.5"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.5:authorities_listed"
+    description: "Relevant authorities enumerated"
+    excerpt_keywords:
+      - [authority, contact, register]
+      - [regulator, contact, register]
+      - [dpa, contact]
+      - [cert, csirt, contact]
+      - [supervisory, authority, list]
+
+  - must_id: "item:A.5.5:contact_details"
+    description: "Current contact details per authority"
+    excerpt_keywords:
+      - [authority, contact, details, column]
+      - [authority, phone, email]
+      - [regulator, contact, info]
+      - [authority, contact, role]
+
+  - must_id: "item:A.5.5:escalation_criteria"
+    description: "Engagement criteria per authority"
+    excerpt_keywords:
+      - [authority, engagement, criteria]
+      - [regulator, deadline, contact]
+      - [authority, incident, class, contact]
+      - [authority, escalation, criteria]
+
+  - must_id: "item:A.5.5:last_verified"
+    description: "Last-verified date per entry"
+    excerpt_keywords:
+      - [authority, last, verified]
+      - [authority, contact, verification, date]
+      - [regulator, contact, refreshed]
+
+  - must_id: "item:A.5.5:owner"
+    description: "Named owner responsible for the register"
+    excerpt_keywords:
+      - [authority, register, owner]
+      - [authority, contact, owner]
+      - [regulator, contact, register, owner]
