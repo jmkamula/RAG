@@ -1,0 +1,63 @@
+# Per-MUST fingerprint catalog for req:A.5.33:records_schedule_register
+#
+# Reviewed-from-skeleton 2026-06-14. Records-schedule register.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.33:records_schedule_register"
+target_control: "A.5.33"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.33:records_schedule"
+    description: "Records inventory or schedule listing every record class"
+    excerpt_keywords:
+      - [records, schedule]
+      - [records, inventory]
+      - [hr, records, list]
+      - [financial, records, list]
+      - [records, register]
+
+  - must_id: "item:A.5.33:retention_periods"
+    description: "Retention period per record class"
+    excerpt_keywords:
+      - [retention, period, per, class]
+      - [retention, years, months]
+      - [start, trigger, end, trigger]
+      - [retention, schedule, per, class]
+
+  - must_id: "item:A.5.33:retention_drivers"
+    description: "Legal/regulatory driver per retention period"
+    excerpt_keywords:
+      - [retention, driver, per]
+      - [statute, retention, driver]
+      - [contractual, retention, driver]
+      - [retention, justification, per, class]
+
+  - must_id: "item:A.5.33:reg_owner_per_class"
+    description: "Owner per record class"
+    excerpt_keywords:
+      - [records, owner, per, class]
+      - [hr, owner, personnel, records]
+      - [finance, owner, financial, records]
+      - [records, accountable, per, class]
+
+  - must_id: "item:A.5.33:reg_protection_class"
+    description: "Protection class per record class"
+    excerpt_keywords:
+      - [protection, class, per, record]
+      - [classification, profile, per, record, class]
+      - [access, encryption, protection, per, record]
+
+  - must_id: "item:A.5.33:reg_storage_location"
+    description: "Storage location per class"
+    excerpt_keywords:
+      - [records, storage, location]
+      - [physical, archive, per, class]
+      - [records, repository, location]
+
+  - must_id: "item:A.5.33:reg_last_verified"
+    description: "Last-verified date per class"
+    excerpt_keywords:
+      - [records, last, verified]
+      - [class, verification, date]
+      - [records, schedule, last, reviewed]

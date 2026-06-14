@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:A.5.15:management_approval
+#
+# Reviewed-from-skeleton 2026-06-14. Access-control-policy approval.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.15:management_approval"
+target_control: "A.5.15"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.15:approval_signatory"
+    description: "Signatory at appropriate management level"
+    excerpt_keywords:
+      - [access, policy, signed, by, ciso]
+      - [access, policy, approved, by]
+      - [access, policy, signatory]
+
+  - must_id: "item:A.5.15:approval_date"
+    description: "Approval date recorded"
+    excerpt_keywords:
+      - [access, policy, approved, on]
+      - [access, policy, signed, on]
+      - [access, policy, approval, date]
+
+  - must_id: "item:A.5.15:approval_target"
+    description: "Reference to the specific version being approved"
+    excerpt_keywords:
+      - [access, policy, version, approved]
+      - [access, policy, version, ref]

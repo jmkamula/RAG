@@ -1,0 +1,47 @@
+# Per-MUST fingerprint catalog for req:A.5.10:communication_record
+#
+# Reviewed-from-skeleton 2026-06-14. AUP communication record patterns.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.10:communication_record"
+target_control: "A.5.10"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.10:comm_date"
+    description: "Date of publication/communication"
+    excerpt_keywords:
+      - [aup, communicated, on]
+      - [acceptable, use, published, on]
+      - [aup, communication, date]
+
+  - must_id: "item:A.5.10:comm_audience"
+    description: "Audience reached (all in-scope users)"
+    excerpt_keywords:
+      - [aup, audience, reached]
+      - [acceptable, use, audience]
+      - [aup, distributed, to, users]
+      - [contractors, aup, distributed]
+
+  - must_id: "item:A.5.10:comm_channel"
+    description: "Channel used (training, intranet, signature campaign)"
+    excerpt_keywords:
+      - [aup, training, module]
+      - [aup, intranet, publication]
+      - [aup, signature, campaign]
+
+  - must_id: "item:A.5.10:comm_onboarding"
+    description: "Distribution at onboarding for new personnel"
+    excerpt_keywords:
+      - [aup, in, induction]
+      - [aup, onboarding]
+      - [induction, pack, aup]
+      - [new, joiner, aup]
+
+  - must_id: "item:A.5.10:comm_acknowledgement"
+    description: "User-level acknowledgement captured"
+    excerpt_keywords:
+      - [aup, acknowledgement]
+      - [aup, e, signature]
+      - [aup, click, through]
+      - [aup, training, completion]

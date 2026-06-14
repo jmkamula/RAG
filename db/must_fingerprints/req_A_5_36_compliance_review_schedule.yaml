@@ -1,0 +1,50 @@
+# Per-MUST fingerprint catalog for req:A.5.36:compliance_review_schedule
+#
+# Reviewed-from-skeleton 2026-06-14. Compliance schedule register.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.36:compliance_review_schedule"
+target_control: "A.5.36"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.36:sch_full_catalogue"
+    description: "Full catalogue of in-scope items enumerated"
+    excerpt_keywords:
+      - [compliance, catalogue]
+      - [infosec, policy, plus, topic, specific]
+      - [compliance, full, catalogue, items]
+      - [policies, rules, standards, catalogue]
+
+  - must_id: "item:A.5.36:sch_cadence"
+    description: "Cadence per item"
+    excerpt_keywords:
+      - [compliance, cadence, per, item]
+      - [compliance, annual, baseline]
+      - [compliance, tighter, high, risk]
+      - [compliance, item, cadence]
+
+  - must_id: "item:A.5.36:sch_last_review"
+    description: "Last review date per item"
+    excerpt_keywords:
+      - [compliance, last, review, per, item]
+      - [compliance, last, reviewed, column]
+
+  - must_id: "item:A.5.36:sch_next_review"
+    description: "Next review date per item"
+    excerpt_keywords:
+      - [compliance, next, review, per, item]
+      - [compliance, next, due]
+
+  - must_id: "item:A.5.36:sch_owner"
+    description: "Named owner per item"
+    excerpt_keywords:
+      - [compliance, reviewer, per, item]
+      - [compliance, owner, per, item]
+
+  - must_id: "item:A.5.36:sch_method_planned"
+    description: "Planned method per item"
+    excerpt_keywords:
+      - [compliance, planned, method]
+      - [compliance, sampling, vs, audit]
+      - [compliance, method, per, item]

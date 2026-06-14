@@ -1,0 +1,47 @@
+# Per-MUST fingerprint catalog for req:A.5.14:periodic_review
+#
+# Reviewed-from-skeleton 2026-06-14. Transfer-policy review record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.14:periodic_review"
+target_control: "A.5.14"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.14:review_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [transfer, policy, review, date]
+      - [transfer, policy, reviewed, on]
+      - [transfer, policy, last, reviewed]
+
+  - must_id: "item:A.5.14:review_reviewer"
+    description: "Reviewer identity"
+    excerpt_keywords:
+      - [transfer, policy, reviewed, by]
+      - [dpo, transfer, policy, review]
+      - [legal, cross, border, review]
+      - [ciso, transfer, policy, review]
+
+  - must_id: "item:A.5.14:review_outcome"
+    description: "Outcome captured"
+    excerpt_keywords:
+      - [transfer, policy, no, change]
+      - [transfer, policy, amended]
+      - [transfer, policy, re, issued]
+
+  - must_id: "item:A.5.14:review_legal_scan"
+    description: "Legal-landscape scan (GDPR Chap V, sector specifics)"
+    excerpt_keywords:
+      - [cross, border, ruling, updates]
+      - [gdpr, chap, v, scan]
+      - [transfer, regulator, guidance]
+      - [sector, transfer, rules]
+
+  - must_id: "item:A.5.14:review_tech_check"
+    description: "Technology check — new transfer mechanisms in use"
+    excerpt_keywords:
+      - [new, transfer, mechanism]
+      - [ai, assistant, transfer]
+      - [new, collab, platform, transfer]
+      - [new, file, sharing, tool]

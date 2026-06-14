@@ -1,0 +1,57 @@
+# Per-MUST fingerprint catalog for req:A.5.10:acceptable_use_policy
+#
+# Reviewed-from-skeleton 2026-06-14. AUP policy document patterns.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.10:acceptable_use_policy"
+target_control: "A.5.10"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.10:scope"
+    description: "Scope of the policy"
+    excerpt_keywords:
+      - [acceptable, use, scope]
+      - [aup, scope]
+      - [acceptable, use, policy, applies, to]
+      - [aup, applies, to]
+
+  - must_id: "item:A.5.10:acceptable_uses"
+    description: "Acceptable use rules stated"
+    excerpt_keywords:
+      - [acceptable, use, rules]
+      - [acceptable, use, work, purposes]
+      - [personal, use, boundaries]
+      - [byod, acceptable, use]
+
+  - must_id: "item:A.5.10:prohibited_uses"
+    description: "Prohibited use rules stated"
+    excerpt_keywords:
+      - [prohibited, use, rules]
+      - [unauthorised, software]
+      - [security, bypassing, activities]
+      - [unlawful, harmful, prohibited]
+
+  - must_id: "item:A.5.10:handling_procedures"
+    description: "Handling procedures per information class"
+    excerpt_keywords:
+      - ["A.5.12"]
+      - [aup, handling, per, class]
+      - [acceptable, use, handling, per, class]
+      - [storage, transmission, disposal, aup]
+
+  - must_id: "item:A.5.10:monitoring"
+    description: "Monitoring expectations stated transparently"
+    excerpt_keywords:
+      - [aup, monitoring, transparent]
+      - [organisation, may, inspect]
+      - [monitoring, expectations, aup]
+      - [acceptable, use, monitoring]
+
+  - must_id: "item:A.5.10:enforcement"
+    description: "Enforcement and disciplinary consequences referenced"
+    excerpt_keywords:
+      - ["A.6.4"]
+      - [disciplinary, consequence, aup]
+      - [aup, enforcement]
+      - [aup, breach, disciplinary]

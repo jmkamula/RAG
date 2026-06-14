@@ -1,0 +1,62 @@
+# Per-MUST fingerprint catalog for req:A.5.33:records_program_review
+#
+# Reviewed-from-skeleton 2026-06-14. Records program audit cycle.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.33:records_program_review"
+target_control: "A.5.33"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.33:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [records, program, review, date]
+      - [records, schedule, reviewed, on]
+
+  - must_id: "item:A.5.33:rev_reviewer"
+    description: "Reviewer identity"
+    excerpt_keywords:
+      - [records, manager, review]
+      - [compliance, lead, records, review]
+      - [legal, counsel, records, signoff]
+
+  - must_id: "item:A.5.33:rev_schedule_check"
+    description: "Per-class outcome (verified / amended / retired / new added)"
+    excerpt_keywords:
+      - [records, per, class, outcome]
+      - [retention, still, adequate]
+      - [protection, class, still, adequate]
+      - [records, class, retired]
+      - [new, records, class, added]
+
+  - must_id: "item:A.5.33:rev_register_update"
+    description: "Changes propagated back to the live schedule"
+    excerpt_keywords:
+      - [records, schedule, updated, after, review]
+      - [records, schedule, change, log]
+      - [records, schedule, refresh]
+
+  - must_id: "item:A.5.33:rev_scope_check"
+    description: "Cross-check against the records-categories scope"
+    excerpt_keywords:
+      - [records, scope, cross, check]
+      - [new, business, activity, records]
+      - [new, legal, driver, records]
+      - [records, scope, change]
+
+  - must_id: "item:A.5.33:rev_disposal_audit"
+    description: "Disposal audit"
+    excerpt_keywords:
+      - [records, disposal, audit]
+      - [past, retention, end, date, disposed]
+      - [certificate, of, destruction, audit]
+      - [records, disposal, sample]
+
+  - must_id: "item:A.5.33:rev_legal_hold_status"
+    description: "Active legal-hold status reviewed"
+    excerpt_keywords:
+      - [legal, hold, status, review]
+      - [active, legal, hold, list]
+      - [stale, hold, retired]
+      - [legal, hold, basis]

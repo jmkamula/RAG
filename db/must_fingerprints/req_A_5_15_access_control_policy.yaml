@@ -1,0 +1,66 @@
+# Per-MUST fingerprint catalog for req:A.5.15:access_control_policy
+#
+# Reviewed-from-skeleton 2026-06-14. v2 raw produced 20 false-positive
+# proposals — Arion has access-control policy text that generically
+# mentions "access control rules" without anchoring to specific MUSTs.
+# Tightened with principle-specific anchors.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.15:access_control_policy"
+target_control: "A.5.15"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.15:need_to_know"
+    description: "Principle of need-to-know stated"
+    excerpt_keywords:
+      - [need, to, know, principle]
+      - [need, to, know, basis]
+      - [need, to, know, access]
+
+  - must_id: "item:A.5.15:least_privilege"
+    description: "Principle of least privilege stated"
+    excerpt_keywords:
+      - [least, privilege, principle]
+      - [minimum, privilege]
+      - [least, privilege, access]
+
+  - must_id: "item:A.5.15:rbac"
+    description: "Role-based access control as the default model"
+    excerpt_keywords:
+      - [role, based, access, control]
+      - [rbac, default]
+      - [abac, exception]
+      - [attribute, based, access, exception]
+
+  - must_id: "item:A.5.15:authorisation"
+    description: "Authorisation rules — who can authorise access at which level"
+    excerpt_keywords:
+      - [access, authorisation, rules]
+      - ["A.5.18"]
+      - [who, authorises, access]
+      - [access, authority, rules]
+
+  - must_id: "item:A.5.15:segregation_link"
+    description: "Cross-link to A.5.3 segregation of duties"
+    excerpt_keywords:
+      - ["A.5.3"]
+      - [segregation, of, duties]
+      - [sod, principle]
+      - [separation, of, duties]
+
+  - must_id: "item:A.5.15:logical_rules"
+    description: "Logical access rules"
+    excerpt_keywords:
+      - [logical, access, rules]
+      - [system, access, rules]
+      - [application, access, rules]
+      - [network, segment, access]
+
+  - must_id: "item:A.5.15:physical_rules"
+    description: "Physical access rules"
+    excerpt_keywords:
+      - [physical, access, rules]
+      - [premises, access, rules]
+      - [server, room, access]
+      - [restricted, area, access]

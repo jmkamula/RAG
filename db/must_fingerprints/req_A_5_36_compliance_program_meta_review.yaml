@@ -1,0 +1,58 @@
+# Per-MUST fingerprint catalog for req:A.5.36:compliance_program_meta_review
+#
+# Reviewed-from-skeleton 2026-06-14. Compliance-program meta-review.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.36:compliance_program_meta_review"
+target_control: "A.5.36"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.36:pgm_date"
+    description: "Meta-review date within the planned interval"
+    excerpt_keywords:
+      - [compliance, program, meta, review, date]
+      - [compliance, program, audit, date]
+
+  - must_id: "item:A.5.36:pgm_reviewer"
+    description: "Reviewer identity (compliance program owner + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [compliance, program, owner, audit]
+      - [compliance, program, meta, reviewer]
+      - [infosec, lead, compliance, program]
+
+  - must_id: "item:A.5.36:pgm_coverage"
+    description: "Coverage check — did the schedule actually run?"
+    excerpt_keywords:
+      - [compliance, schedule, ran]
+      - [compliance, fraction, catalogue, reviewed]
+      - [compliance, coverage, audit]
+
+  - must_id: "item:A.5.36:pgm_catalogue_check"
+    description: "Catalogue currency check"
+    excerpt_keywords:
+      - [compliance, catalogue, currency]
+      - [new, policy, not, in, catalogue]
+      - [retired, policy, in, catalogue]
+
+  - must_id: "item:A.5.36:pgm_method_review"
+    description: "Method effectiveness review"
+    excerpt_keywords:
+      - [compliance, method, effectiveness]
+      - [compliance, rubber, stamping]
+      - [compliance, method, audit]
+      - [real, nc, surfacing]
+
+  - must_id: "item:A.5.36:pgm_closure"
+    description: "Findings-closure rate across the program"
+    excerpt_keywords:
+      - [compliance, closure, rate]
+      - [compliance, aged, finding]
+      - [compliance, open, count]
+
+  - must_id: "item:A.5.36:pgm_outcome"
+    description: "Cadence-adjustment or method-adjustment decisions"
+    excerpt_keywords:
+      - [compliance, cadence, adjusted]
+      - [compliance, method, adjusted]
+      - [compliance, program, tightened]

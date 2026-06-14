@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.5.33:records_categories_scope
+#
+# Reviewed-from-skeleton 2026-06-14. Records scope note.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.33:records_categories_scope"
+target_control: "A.5.33"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.33:scope_business_activities"
+    description: "Business activities considered"
+    excerpt_keywords:
+      - [records, business, activities, scope]
+      - [hr, finance, operations, records, scope]
+      - [regulated, activities, records, scope]
+
+  - must_id: "item:A.5.33:scope_jurisdictions"
+    description: "Jurisdictions covered"
+    excerpt_keywords:
+      - [records, jurisdictions, scope]
+      - [records, data, residency]
+      - [right, to, erasure, records, scope]
+
+  - must_id: "item:A.5.33:scope_legal_drivers"
+    description: "Legal/regulatory drivers enumerated"
+    excerpt_keywords:
+      - [records, legal, driver]
+      - [corporate, law, records]
+      - [tax, law, records]
+      - [employment, law, records]
+
+  - must_id: "item:A.5.33:scope_data_categories"
+    description: "Personal/sensitive/regulated data categories handled"
+    excerpt_keywords:
+      - [pii, overlay, records, scope]
+      - [special, category, records, retention]
+      - [sensitive, records, scope]

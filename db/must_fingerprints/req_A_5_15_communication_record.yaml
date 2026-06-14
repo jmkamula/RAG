@@ -1,0 +1,43 @@
+# Per-MUST fingerprint catalog for req:A.5.15:communication_record
+#
+# Reviewed-from-skeleton 2026-06-14. Access-control-policy communication.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.15:communication_record"
+target_control: "A.5.15"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.15:comm_date"
+    description: "Date of publication/communication"
+    excerpt_keywords:
+      - [access, control, policy, communicated, on]
+      - [access, policy, published, on]
+
+  - must_id: "item:A.5.15:comm_audience"
+    description: "Audience reached"
+    excerpt_keywords:
+      - [access, policy, audience]
+      - [access, policy, distributed, to]
+      - [managers, system, owners, audience]
+
+  - must_id: "item:A.5.15:comm_channel"
+    description: "Channel used"
+    excerpt_keywords:
+      - [access, policy, manager, briefing]
+      - [access, policy, admin, training]
+      - [access, policy, intranet]
+
+  - must_id: "item:A.5.15:comm_decision_makers"
+    description: "Decision-maker awareness specifically captured"
+    excerpt_keywords:
+      - [manager, training, access]
+      - [system, owner, briefing, access]
+      - [access, decision, maker, awareness]
+
+  - must_id: "item:A.5.15:comm_onboarding"
+    description: "Onboarding coverage for new managers and admins"
+    excerpt_keywords:
+      - [new, manager, access, policy, induction]
+      - [admin, induction, access, policy]
+      - [role, induction, access, policy]

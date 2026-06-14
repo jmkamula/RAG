@@ -1,0 +1,64 @@
+# Per-MUST fingerprint catalog for req:A.5.36:nonconformity_register
+#
+# Reviewed-from-skeleton 2026-06-14. v2 raw produced 14 false-positive
+# proposals — generic NC vocabulary fanned out. Tightened with
+# per-NC register-row markers.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.36:nonconformity_register"
+target_control: "A.5.36"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.36:nc_id"
+    description: "Per-NC unique identifier traceable back to the source review record"
+    excerpt_keywords:
+      - [nc, register]
+      - [nonconformity, register]
+      - [nc, id, column]
+      - [nc, identifier, per]
+
+  - must_id: "item:A.5.36:nc_severity"
+    description: "Severity recorded per NC"
+    excerpt_keywords:
+      - [nc, severity, column]
+      - [nonconformity, severity]
+      - [nc, severity, per, row]
+
+  - must_id: "item:A.5.36:nc_status"
+    description: "Current status per NC"
+    excerpt_keywords:
+      - [nc, status, column]
+      - [nc, status, open]
+      - [nc, status, closed]
+      - [nc, status, aged, overdue]
+      - [nc, risk, accepted, exception]
+
+  - must_id: "item:A.5.36:nc_owner"
+    description: "Named owner per NC"
+    excerpt_keywords:
+      - [nc, owner, column]
+      - [nc, accountable, per]
+      - [nc, target, closure, date]
+
+  - must_id: "item:A.5.36:nc_root_cause"
+    description: "Root cause noted per NC where determined"
+    excerpt_keywords:
+      - [nc, root, cause, per]
+      - [nc, rca, per, row]
+      - [systemic, nc, root, cause]
+
+  - must_id: "item:A.5.36:nc_corrective_action"
+    description: "Corrective action stated per NC"
+    excerpt_keywords:
+      - [nc, corrective, action]
+      - [nc, policy, update, action]
+      - [nc, training, action]
+      - [nc, control, implementation, action]
+
+  - must_id: "item:A.5.36:nc_closure_evidence"
+    description: "Closure evidence reference per closed NC"
+    excerpt_keywords:
+      - [nc, closure, evidence, ref]
+      - [nc, addressed, artefact]
+      - [nc, closure, proof]

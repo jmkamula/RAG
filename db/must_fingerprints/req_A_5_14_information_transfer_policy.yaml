@@ -1,0 +1,66 @@
+# Per-MUST fingerprint catalog for req:A.5.14:information_transfer_policy
+#
+# Reviewed-from-skeleton 2026-06-14. Information-transfer policy document.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.14:information_transfer_policy"
+target_control: "A.5.14"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.14:scheme_alignment"
+    description: "Alignment with A.5.12 classification scheme"
+    excerpt_keywords:
+      - ["A.5.12"]
+      - [transfer, protections, per, level]
+      - [classification, scheme, transfer]
+      - [cascade, from, classification]
+
+  - must_id: "item:A.5.14:electronic_transfer"
+    description: "Rules for electronic transfers"
+    excerpt_keywords:
+      - [electronic, transfer, rules]
+      - [file, transfer, encryption]
+      - [api, transfer, rules]
+      - [cloud, sharing, encryption]
+
+  - must_id: "item:A.5.14:physical_media"
+    description: "Rules for physical media transfers"
+    excerpt_keywords:
+      - [physical, media, transfer]
+      - [removable, storage, transfer]
+      - [tamper, evident, packaging]
+      - [paper, document, transfer]
+
+  - must_id: "item:A.5.14:verbal_visual"
+    description: "Rules for verbal and visual transfers"
+    excerpt_keywords:
+      - [verbal, transfer, rules]
+      - [visual, transfer, rules]
+      - [screen, share, sensitive]
+      - [public, space, discussion]
+
+  - must_id: "item:A.5.14:authorisation"
+    description: "Authorisation requirements for transfers above defined classification levels"
+    excerpt_keywords:
+      - [transfer, authorisation]
+      - [transfer, above, classification, level]
+      - [approval, for, transfer]
+      - [counterpart, type, authorisation]
+
+  - must_id: "item:A.5.14:internal_vs_external"
+    description: "Distinction between internal and external transfer requirements"
+    excerpt_keywords:
+      - [internal, external, transfer]
+      - [within, org, transfer]
+      - [outbound, transfer, controls]
+      - [external, party, transfer]
+
+  - must_id: "item:A.5.14:legal_jurisdiction"
+    description: "Legal and jurisdictional considerations (GDPR Art.44-49)"
+    excerpt_keywords:
+      - ["Art.44"]
+      - ["Art.49"]
+      - [cross, border, transfer]
+      - [data, sovereignty, transfer]
+      - [transfer, mechanism, international]

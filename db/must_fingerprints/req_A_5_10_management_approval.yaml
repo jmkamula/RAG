@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:A.5.10:management_approval
+#
+# Reviewed-from-skeleton 2026-06-14. AUP approval event.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.10:management_approval"
+target_control: "A.5.10"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.10:approval_signatory"
+    description: "Signatory at appropriate management level"
+    excerpt_keywords:
+      - [aup, approved, by, ciso]
+      - [aup, signed, by]
+      - [acceptable, use, signatory]
+      - [hr, director, aup, approved]
+
+  - must_id: "item:A.5.10:approval_date"
+    description: "Approval date recorded"
+    excerpt_keywords:
+      - [aup, approved, on, date]
+      - [acceptable, use, approval, date]
+      - [aup, signed, on]
+
+  - must_id: "item:A.5.10:approval_target"
+    description: "Reference to the specific version of the AUP being approved"
+    excerpt_keywords:
+      - [aup, version, approved]
+      - [acceptable, use, version, approved]
+      - [aup, signed, version, ref]

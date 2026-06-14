@@ -1,0 +1,62 @@
+# Per-MUST fingerprint catalog for req:A.5.36:compliance_review_record
+#
+# Reviewed-from-skeleton 2026-06-14. Per-cycle compliance review.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.36:compliance_review_record"
+target_control: "A.5.36"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.36:review_date"
+    description: "Review date and period covered"
+    excerpt_keywords:
+      - [compliance, review, date]
+      - [compliance, review, period, covered]
+      - [compliance, cycle, date]
+
+  - must_id: "item:A.5.36:scope"
+    description: "Scope of this cycle"
+    excerpt_keywords:
+      - [compliance, review, scope]
+      - [policies, rules, standards, reviewed]
+      - [compliance, cycle, scope]
+      - [compliance, slice, of, catalogue]
+
+  - must_id: "item:A.5.36:schedule"
+    description: "Schedule honoured for this cycle"
+    excerpt_keywords:
+      - [compliance, schedule, honoured]
+      - [compliance, gap, flagged, next, cycle]
+      - [compliance, planned, vs, actual]
+
+  - must_id: "item:A.5.36:method"
+    description: "Method used per item"
+    excerpt_keywords:
+      - [compliance, method, used]
+      - [control, sampling, compliance]
+      - [formal, audit, compliance]
+      - [automated, check, compliance]
+      - [compliance, walkthrough]
+
+  - must_id: "item:A.5.36:findings"
+    description: "Findings recorded per review with severity"
+    excerpt_keywords:
+      - [compliance, findings, severity]
+      - [nonconformity, finding, severity]
+      - [compliance, opportunity, for, improvement]
+      - [compliance, finding, evidenced]
+
+  - must_id: "item:A.5.36:corrective_actions"
+    description: "Corrective actions opened per nonconformity finding"
+    excerpt_keywords:
+      - [corrective, actions, per, nc]
+      - [nc, finding, corrective, action]
+      - [compliance, finding, action, opened]
+
+  - must_id: "item:A.5.36:owner"
+    description: "Named owner of this review cycle"
+    excerpt_keywords:
+      - [compliance, lead, ran, review]
+      - [compliance, review, cycle, owner]
+      - [compliance, reviewer, named]

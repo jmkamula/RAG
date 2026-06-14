@@ -1,0 +1,56 @@
+# Per-MUST fingerprint catalog for req:A.5.33:records_protection_policy
+#
+# Reviewed-from-skeleton 2026-06-14. Records-protection policy document.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.33:records_protection_policy"
+target_control: "A.5.33"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.33:classification_scheme"
+    description: "Records classification scheme stated"
+    excerpt_keywords:
+      - ["A.5.12"]
+      - [records, classification, scheme]
+      - [record, class, protection, class]
+      - [records, protection, classification]
+
+  - must_id: "item:A.5.33:protection_requirements"
+    description: "Protection requirements per record class"
+    excerpt_keywords:
+      - [records, access, control, per, class]
+      - [records, encryption, per, class]
+      - [records, immutability]
+      - [records, integrity, verification]
+
+  - must_id: "item:A.5.33:format_guidance"
+    description: "Format-specific protection guidance"
+    excerpt_keywords:
+      - [paper, vs, digital, records]
+      - [worm, storage]
+      - [records, format, guidance]
+      - [hybrid, records, protection]
+
+  - must_id: "item:A.5.33:legal_hold"
+    description: "Legal-hold provisions overriding normal retention"
+    excerpt_keywords:
+      - [legal, hold, provisions]
+      - [litigation, hold]
+      - [regulatory, investigation, hold]
+      - [legal, hold, invocation]
+
+  - must_id: "item:A.5.33:disposal"
+    description: "Disposal procedure at end of retention"
+    excerpt_keywords:
+      - [records, disposal, procedure]
+      - [secure, destruction, records]
+      - [certificate, of, destruction]
+      - [witness, disposal, high, sensitivity]
+
+  - must_id: "item:A.5.33:owner"
+    description: "Named owner of the procedure"
+    excerpt_keywords:
+      - [records, manager, owner]
+      - [legal, counsel, records, owner]
+      - [records, procedure, owner]

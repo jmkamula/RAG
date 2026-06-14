@@ -1,0 +1,44 @@
+# Per-MUST fingerprint catalog for req:A.5.14:communication_record
+#
+# Reviewed-from-skeleton 2026-06-14. Transfer-policy communication record.
+
+schema_version: 1
+target_evidence_requirement: "req:A.5.14:communication_record"
+target_control: "A.5.14"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.5.14:comm_date"
+    description: "Date of publication/communication"
+    excerpt_keywords:
+      - [transfer, policy, communicated, on]
+      - [transfer, policy, published, on]
+      - [transfer, policy, communication, date]
+
+  - must_id: "item:A.5.14:comm_audience"
+    description: "Audience reached"
+    excerpt_keywords:
+      - [transfer, policy, audience]
+      - [transfer, policy, distributed]
+      - [users, handle, sensitive, transfer, targeted]
+
+  - must_id: "item:A.5.14:comm_channel"
+    description: "Channel used"
+    excerpt_keywords:
+      - [transfer, policy, training, module]
+      - [transfer, policy, intranet]
+      - [transfer, policy, signature, campaign]
+
+  - must_id: "item:A.5.14:comm_onboarding"
+    description: "Distribution at onboarding"
+    excerpt_keywords:
+      - [transfer, policy, induction]
+      - [transfer, rules, onboarding]
+      - [induction, transfer, channels]
+
+  - must_id: "item:A.5.14:comm_acknowledgement"
+    description: "User-level acknowledgement captured"
+    excerpt_keywords:
+      - [transfer, policy, acknowledgement]
+      - [transfer, policy, e, signature]
+      - [transfer, policy, training, completion]
