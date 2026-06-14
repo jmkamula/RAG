@@ -1509,6 +1509,51 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         answer_text, _claim_violations = _verify_posture_status_claims(
             answer_text, posture_by_ref,
         )
+
+        # Cross-framework bridge footer: when the query asks about a GDPR
+        # article, the LLM is stochastic about citing the ISO bridges it
+        # was given. Append a deterministic enumeration so the inter-
+        # framework linkage is always visible. Skip if no bridges in
+        # context (handled by xfw_nodes_list filter above), or if the
+        # LLM already enumerated them all.
+        from rag.classifier import QuestionType as _QT
+        if intent and intent.question_type == _QT.CROSS_FRAMEWORK and xfw_nodes_list:
+            article_refs = [r for r in (getattr(intent, "cited_refs", []) or [])
+                            if r.startswith("Art.")]
+            if not article_refs:
+                # Fallback: extract from query
+                article_refs = re.findall(r"\bArt\.\d+(?:\.\d+)?\b", query)
+            if article_refs:
+                bridge_entries: list[tuple[str, str]] = []  # (ref, posture_tag)
+                for _n in xfw_nodes_list:
+                    _linked = xfw_rel_map.get(_n.node_id) or set()
+                    # Include this xfw bridge if it links to any of the queried articles
+                    # (or any article in the family — Art.32 bridges include Art.32.1.d)
+                    if not any(any(a == lr or lr.startswith(a + ".") for lr in _linked)
+                               for a in article_refs):
+                        continue
+                    _rec = posture_by_ref.get(_n.ref, {}) or {}
+                    _f   = _rec.get("finding", "") or "Not yet assessed"
+                    bridge_entries.append((_n.ref, _f))
+                # Dedupe by ref, preserve sort
+                seen_refs: set[str] = set()
+                unique_bridges = []
+                for _ref, _f in sorted(bridge_entries):
+                    if _ref in seen_refs:
+                        continue
+                    seen_refs.add(_ref)
+                    unique_bridges.append((_ref, _f))
+                # Skip footer if the LLM already cited every bridge
+                missing = [r for r, _ in unique_bridges if r not in answer_text]
+                if unique_bridges and missing:
+                    bridge_strs = [f"{r} [{f}]" for r, f in unique_bridges]
+                    article_label = ", ".join(article_refs)
+                    footer = (
+                        f"\n\n↳ Bridges to ISO 27001 for {article_label}: "
+                        + ", ".join(bridge_strs)
+                    )
+                    answer_text = (answer_text or "").rstrip() + footer
+
         if _claim_violations:
             logging.getLogger("rag.llm_answer").warning(
                 "posture_claim_guard: dropped %d line(s): %s",

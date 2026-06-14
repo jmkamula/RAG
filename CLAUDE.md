@@ -28,22 +28,17 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 195/198 PASS before any restart (198 cases; #2 + #24 + #25 known-stale;
-#   #3 + #21 + #33 also LLM-stochastic but ~85-95% PASS — not formally known-stale):
-#   #24 + #25 — "what is our GDPR Art.32 status?" / "is Art.5 a non-conformity?"
-#         (re-authored 2026-06-14 to shape="cross_framework" — verifies at least
-#         one ISO bridge ref appears). #24 stochastic (~60-70% pass rate, LLM
-#         sometimes drops bridges; sometimes cites a non-canonical bridge like
-#         A.5.35 which is valid). #25 consistently failing — Art.5 has its own
-#         DerivedSpec posture now, and the LLM answers from that without
-#         invoking bridges. Follow-up: prompt or compose-side fix to force
-#         bridge enumeration on cross-framework queries. See
-#         memory case_24_art32_bridge_followup.md.
+# Must be 195/198 PASS before any restart (198 cases; #2 known-stale,
+#   #3/#6/#16/#21/#26/#33 LLM-stochastic ~85-95%):
 #   #2  — "what are our main compliance gaps?" (~40-60% pass rate; LLM-stochastic
 #         A.5.26 mention; since Phase C batch 1 / Stage-2 mass-approval session
 #         brought Arion to 168 NCs on 2026-06-02 — A.5.26 no longer reliably
 #         tops the answer among 168 candidates. Follow-up: case_2_drift_followup.md).
-# Any non-#2/#24/#25 regression blocks restart.
+#   #24 + #25 (Art.32 / Art.5) — STABILISED 2026-06-14 via cross_framework
+#         shape validator + deterministic bridge footer in compose
+#         (llm_answer.rank_and_answer appends "↳ Bridges to ISO 27001 for
+#         Art.X: ...").
+# Any non-#2 regression blocks restart.
 # Whenever you add a user-facing feature/fix, append an EvalCase that would
 # have failed pre-change and passes post-change — see the feedback-memory rule.
 ```
