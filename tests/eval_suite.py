@@ -1188,12 +1188,30 @@ EVAL_CASES = [
         tags=["cross_framework", "xfw_inheritance", "gdpr"],
         expected_refs=["Art.32"],
         expected_type="cross_framework",
-        # Art.32 is a Layer-2 node and must NEVER carry a standalone NC/OFI
-        # tag — its posture is inherited from linked ISO controls. The answer
-        # must reference at least one A.5.x bridge control.
-        must_contain=["Art.32", "A.5"],
-        must_not_contain=["Art.32 [NC]", "Art.32 [OFI]", "Art.32 is a non-conformity"],
-        notes="Commit 432605c: Art.32 posture via xfw inheritance, never direct.",
+        # Architectural invariant: the answer must cite the article AND at
+        # least one ISO bridge ref. The LLM has freedom to pick which bridge
+        # to surface (Art.32 has 26 bridges across A.5/A.6/A.8/ISMS), so the
+        # shape validator just looks for any ISO-shaped ref.
+        #
+        # Re-authored 2026-06-13: original case asserted Art.32 must NEVER
+        # carry an NC/OFI tag (pure Layer-2 inheritance). Phase B batch 29a
+        # (2026-06-02) promoted Art.32 to a DerivedSpec with 4 direct
+        # evidence leaves, so Art.32 now legitimately has its own posture.
+        # Bridge linkage to ISO controls preserved — that's what the shape
+        # check still locks in.
+        shape="cross_framework",
+        must_contain=[],
+        must_not_contain=[],
+        notes=(
+            "Locks the cross-framework bridge surface — Art.32 answer must "
+            "cite at least one ISO bridge ref. Re-authored 2026-06-13 from "
+            "literal-string 'A.5' check to shape validator after Art.32 "
+            "became a DerivedSpec with direct evidence (batch 29a). "
+            "Bridges: A.5.1, A.5.15, A.5.18, A.5.23, A.5.24, A.5.26, "
+            "A.5.29, A.5.30, A.5.35, A.6.2, A.6.3, A.6.4, A.8.3, A.8.5, "
+            "A.8.7, A.8.8, A.8.11, A.8.13, A.8.14, A.8.16, A.8.20, "
+            "A.8.24, A.8.29, 6.1.2, 9.1."
+        ),
     ),
 
     EvalCase(
@@ -1202,17 +1220,21 @@ EVAL_CASES = [
         tags=["cross_framework", "xfw_inheritance", "gdpr"],
         expected_refs=["Art.5"],
         expected_type="cross_framework",
-        # Lock in xfw inheritance behavioural contract:
-        #   (1) the answer mentions Art.5 (the query subject)
-        #   (2) it cites at least one ISO bridge control (A.5.x)
-        #   (3) it NEVER attaches an NC/OFI tag to Art.5 itself — Layer-2
-        #       nodes always inherit posture from linked primaries.
-        # Skip a strict "addressed via" phrasing check — the LLM uses
-        # equivalent phrasings ("implemented through", "covered by") and
-        # the load-bearing test is the anti-hallucination one below.
-        must_contain=["Art.5", "A.5"],
-        must_not_contain=["Art.5 [NC]", "Art.5 [OFI]", "Art.5 is a non-conformity"],
-        notes="Commit 432605c: anti-hallucination on Layer-2 posture.",
+        # Same shape as #24. Art.5 was also promoted to a DerivedSpec
+        # (Phase B; SPEC_ART_5_1_E referencing four A.5.33 items), so the
+        # old anti-hallucination guard ('Art.5 [NC]' is illegal) no longer
+        # applies — Art.5 can legitimately have its own posture.
+        # The architectural invariant that remains: Art.5 answer must cite
+        # at least one ISO bridge (its derivation surface).
+        shape="cross_framework",
+        must_contain=[],
+        must_not_contain=[],
+        notes=(
+            "Locks the cross-framework bridge surface for Art.5. Re-authored "
+            "2026-06-13 alongside #24 — both Art.5 and Art.32 now carry their "
+            "own DerivedSpec posture post Phase B, so 'must never have a "
+            "posture tag' is no longer the right invariant."
+        ),
     ),
 
     EvalCase(
@@ -3771,6 +3793,11 @@ _STAGE2_FORBIDDEN_PHRASES = (
     "could you clarify",
 )
 
+# ISO bridge ref: Annex A controls (A.5.18, A.6.4), ISMS clauses (6.1.2, 9.1),
+# or ISO 27701 PIMS clauses. Used by the cross_framework shape validator to
+# verify that an article-status answer cites at least one ISO bridge.
+_ISO_BRIDGE_RE = re.compile(r"\b(A\.\d+(?:\.\d+)?|\d+\.\d+(?:\.\d+)?)\b")
+
 
 def _check_stage2_shape(answer: str, expected_refs: list) -> tuple[list[str], list[str]]:
     """Validate a Stage-2 'pending engine verdict for X' response shape.
@@ -3844,6 +3871,55 @@ def _check_stage2_shape(answer: str, expected_refs: list) -> tuple[list[str], li
     return passed, failures
 
 
+def _check_cross_framework_shape(answer: str, expected_refs: list) -> tuple[list[str], list[str]]:
+    """Validate a cross-framework article-status answer shape.
+
+    The architectural invariant: a GDPR article answer must cite at least one
+    ISO bridge — every Article spec has IMPLEMENTS/SUPPORTS/GOVERNANCE edges
+    to ISO controls. The LLM has freedom to pick WHICH bridge to surface
+    (A.5.x, A.6.x, A.8.x, ISMS clause), so this validator just looks for any
+    ISO-shaped ref.
+
+    Note: as of 2026-06-02 batch 29a, Articles can also carry their own
+    DerivedSpec posture (Art.32, Art.5 both have direct evidence leaves),
+    so a bracketed posture on the article is no longer a hallucination per
+    se. The old `Art.X [NC]` guard is dropped.
+
+    Checks:
+      - At least one expected_ref appears in the answer
+      - At least one ISO bridge ref appears (A.x.y or N.M ISMS form), and
+        is not just the article number itself
+    """
+    passed: list[str] = []
+    failures: list[str] = []
+
+    # Article ref present
+    if expected_refs:
+        ref = expected_refs[0]
+        if ref in answer:
+            passed.append(f"xfw_shape: article ref {ref!r} present")
+        else:
+            failures.append(f"xfw_shape: article ref {ref!r} not in answer")
+
+    # ISO bridge ref present (Annex A: A.x.y; ISMS clauses: x.y / x.y.z).
+    # Exclude self-matches from GDPR sub-paragraphs: Art.32.1.d → 32.1 leaks
+    # through the numeric pattern. Strip 'Art.' prefix on expected_refs and
+    # filter any bridge candidate that starts with '<article_number>.' or
+    # equals the article number itself.
+    article_nums = {e.replace("Art.", "").strip() for e in expected_refs if e.startswith("Art.")}
+    bridge_hits = set(_ISO_BRIDGE_RE.findall(answer))
+    bridge_hits = {
+        b for b in bridge_hits
+        if not any(b == n or b.startswith(n + ".") for n in article_nums)
+    }
+    if bridge_hits:
+        passed.append(f"xfw_shape: ISO bridge ref(s) present ({sorted(bridge_hits)[:3]})")
+    else:
+        failures.append("xfw_shape: no ISO bridge ref (e.g. A.5.x, A.8.x, ISMS clause) found")
+
+    return passed, failures
+
+
 def run_case(case: EvalCase, pipeline: EvalPipeline) -> EvalResult:
     t0 = time.time()
     try:
@@ -3881,6 +3957,10 @@ def run_case(case: EvalCase, pipeline: EvalPipeline) -> EvalResult:
     # owns the assertion. must_not_contain still applies (defense in depth).
     if case.shape == "stage2":
         s_passed, s_failures = _check_stage2_shape(answer, case.expected_refs)
+        passed.extend(s_passed)
+        failures.extend(s_failures)
+    elif case.shape == "cross_framework":
+        s_passed, s_failures = _check_cross_framework_shape(answer, case.expected_refs)
         passed.extend(s_passed)
         failures.extend(s_failures)
     else:

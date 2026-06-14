@@ -30,11 +30,15 @@ PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
 # Must be 195/198 PASS before any restart (198 cases; #2 + #24 + #25 known-stale;
 #   #3 + #21 + #33 also LLM-stochastic but ~85-95% PASS — not formally known-stale):
-#   #25 — "is Art.5 a non-conformity?" (anti-hallucination, since 2026-05-27)
-#   #24 — "what is our GDPR Art.32 status?" (~30-50% pass rate; LLM-stochastic
-#         A.5-bridge mention; since 2026-05-30 batch 2). Some runs both pass;
-#         a 196/198 or 197/198 result is fine but isn't reproducible. Follow-up:
-#         see memory case_24_art32_bridge_followup.md.
+#   #24 + #25 — "what is our GDPR Art.32 status?" / "is Art.5 a non-conformity?"
+#         (re-authored 2026-06-14 to shape="cross_framework" — verifies at least
+#         one ISO bridge ref appears). #24 stochastic (~60-70% pass rate, LLM
+#         sometimes drops bridges; sometimes cites a non-canonical bridge like
+#         A.5.35 which is valid). #25 consistently failing — Art.5 has its own
+#         DerivedSpec posture now, and the LLM answers from that without
+#         invoking bridges. Follow-up: prompt or compose-side fix to force
+#         bridge enumeration on cross-framework queries. See
+#         memory case_24_art32_bridge_followup.md.
 #   #2  — "what are our main compliance gaps?" (~40-60% pass rate; LLM-stochastic
 #         A.5.26 mention; since Phase C batch 1 / Stage-2 mass-approval session
 #         brought Arion to 168 NCs on 2026-06-02 — A.5.26 no longer reliably
