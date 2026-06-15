@@ -365,6 +365,57 @@ Only include controls that are addressed in this document.
 For controls not addressed, omit them from the response entirely."""
 
 
+# Catalog crosscheck — lazy-loaded per-process. Maps must_id → list of
+# keyword_sets pulled from db/must_fingerprints/*.yaml. Reuses the same
+# fingerprints leaf-scan uses; this turns the catalog set into a
+# dual-purpose asset (back-bind regex matcher + extractor 2nd opinion).
+# When the LLM emits a checklist_item_id, we run the evidence quote
+# against the catalog's fingerprints for that MUST. Three outcomes:
+#   - catalog absent → no crosscheck (counted)
+#   - catalog present + match → confirmed (counted)
+#   - catalog present + no match → disagreement (counted, binding kept)
+# Disagreement is a SOFT signal: autogen catalogs are noisy enough that
+# silent drops would lose real bindings. Surface in trace_log + dashboard.
+_MUST_FINGERPRINTS_CACHE: Optional[dict] = None
+
+
+def _load_must_fingerprints() -> dict:
+    global _MUST_FINGERPRINTS_CACHE
+    if _MUST_FINGERPRINTS_CACHE is not None:
+        return _MUST_FINGERPRINTS_CACHE
+    try:
+        from .leaf_driven_scan import load_catalogs
+        cats = load_catalogs()
+        out: dict[str, list[list[str]]] = {}
+        for cat in cats:
+            for fp in cat.fingerprints:
+                # Multiple catalogs could declare the same must_id — merge
+                # keyword sets defensively.
+                out.setdefault(fp.must_id, []).extend(fp.excerpt_keywords)
+        _MUST_FINGERPRINTS_CACHE = out
+        return out
+    except Exception as e:
+        logger.warning(f"crosscheck: failed to load catalogs: {e}")
+        _MUST_FINGERPRINTS_CACHE = {}
+        return {}
+
+
+def _crosscheck_must_binding(must_id: str, evidence: str) -> str:
+    """Return one of: 'unavailable' (no catalog), 'confirmed' (excerpt
+    matches catalog fingerprints), 'disagreement' (catalog has
+    fingerprints but excerpt matches none).
+    """
+    cats = _load_must_fingerprints()
+    keyword_sets = cats.get(must_id)
+    if not keyword_sets:
+        return "unavailable"
+    try:
+        from .leaf_driven_scan import _excerpt_matches
+        return "confirmed" if _excerpt_matches(evidence, keyword_sets) else "disagreement"
+    except Exception:
+        return "unavailable"
+
+
 # Neo4j MUST-fetcher — env-driven; cached per-process so repeated calls
 # inside one extract() invocation share a driver. Returns
 #   {leaf_id: [(item_id, item_text), ...], ...}
@@ -702,6 +753,12 @@ def _parse_llm_response(
     dropped_hallucinated  = 0
     dropped_unknown_ref   = 0
     dropped_questionnaire = 0
+    # Catalog crosscheck (schema_v42) — counts only, no rejections. Surfaces
+    # cases where the LLM picked a valid MUST id but the evidence quote
+    # doesn't match the catalog's keyword fingerprints for that MUST.
+    crosscheck_confirmed     = 0
+    crosscheck_disagreements = 0
+    crosscheck_unavailable   = 0
     findings = []
     for item in items:
         ref     = item.get("control_ref", "").strip()
@@ -795,6 +852,19 @@ def _parse_llm_response(
             allowed = valid_items_by_ctrl.get(ref, set())
             if raw_item_id in allowed:
                 bound_item_id = raw_item_id
+                # Catalog crosscheck — soft signal. Tally without dropping.
+                outcome = _crosscheck_must_binding(bound_item_id, evidence)
+                if outcome == "confirmed":
+                    crosscheck_confirmed += 1
+                elif outcome == "disagreement":
+                    crosscheck_disagreements += 1
+                    logger.info(
+                        "crosscheck disagreement: %s — catalog fingerprints "
+                        "do not match evidence excerpt (chunk %s)",
+                        bound_item_id, chunk_id,
+                    )
+                else:
+                    crosscheck_unavailable += 1
 
         findings.append(DocumentFinding(
             upload_id         = doc.upload_id or "",
@@ -832,6 +902,10 @@ def _parse_llm_response(
     m["dropped_hallucinated"]  = m.get("dropped_hallucinated", 0)  + dropped_hallucinated
     m["dropped_unknown_ref"]   = m.get("dropped_unknown_ref", 0)   + dropped_unknown_ref
     m["dropped_questionnaire"] = m.get("dropped_questionnaire", 0) + dropped_questionnaire
+    # schema_v42 — crosscheck telemetry
+    m["crosscheck_confirmed"]     = m.get("crosscheck_confirmed", 0)     + crosscheck_confirmed
+    m["crosscheck_disagreements"] = m.get("crosscheck_disagreements", 0) + crosscheck_disagreements
+    m["crosscheck_unavailable"]   = m.get("crosscheck_unavailable", 0)   + crosscheck_unavailable
 
     # Enforce 15-finding cap per chunk (the LLM is also prompted to cap;
     # this is the parse-side enforcement). Retains highest-confidence

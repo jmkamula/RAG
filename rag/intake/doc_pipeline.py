@@ -124,6 +124,8 @@ class IntakeTracer:
             #   dropped_questionnaire (from 2026-06-12 filter)
             #   skipped_as_toc        (from 2026-06-15 filter)
             "dropped_questionnaire", "skipped_as_toc",
+            # schema_v42 — extractor↔catalog crosscheck signals
+            "crosscheck_confirmed", "crosscheck_disagreements", "crosscheck_unavailable",
         }
         for k, v in metrics.items():
             if k in allowed:
@@ -379,6 +381,10 @@ class DocumentPipeline:
                 # schema_v41 — doc-shape filter signals
                 dropped_questionnaire = doc.extraction_metrics.get("dropped_questionnaire"),
                 skipped_as_toc        = doc.extraction_metrics.get("skipped_as_toc"),
+                # schema_v42 — extractor↔catalog crosscheck signals
+                crosscheck_confirmed     = doc.extraction_metrics.get("crosscheck_confirmed"),
+                crosscheck_disagreements = doc.extraction_metrics.get("crosscheck_disagreements"),
+                crosscheck_unavailable   = doc.extraction_metrics.get("crosscheck_unavailable"),
             )
 
             logger.info(f"Extracted {len(findings)} findings from {file_name}")

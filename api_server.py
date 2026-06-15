@@ -3025,6 +3025,9 @@ def _extraction_quality_flag(row: dict) -> tuple[str, str]:
     # schema_v41 — doc-shape filter signals
     toc_reason  = row.get("skipped_as_toc")
     questionnaire = row.get("dropped_questionnaire") or 0
+    # schema_v42 — crosscheck signals
+    cx_confirmed     = row.get("crosscheck_confirmed") or 0
+    cx_disagreements = row.get("crosscheck_disagreements") or 0
 
     # Per-doc binding rate (joined in admin_uploads_quality). When non-NULL
     # these are the count of active findings on the corresponding
@@ -3054,6 +3057,12 @@ def _extraction_quality_flag(row: dict) -> tuple[str, str]:
     # so the operator can see which uploads aren't influencing posture.
     if active_findings is not None and active_findings > 0 and (bound_findings or 0) == 0:
         return "yellow", f"all {active_findings} findings unbound (no checklist_item_id)"
+    # Crosscheck disagreement dominance — when the LLM emitted MUST bindings
+    # but the catalog fingerprints don't corroborate, the extractor and
+    # catalog disagree on what the evidence actually demonstrates. Soft
+    # signal (binding kept), tenant should triage.
+    if cx_disagreements > 0 and cx_disagreements >= max(cx_confirmed, 1):
+        return "yellow", f"crosscheck disagreement ({cx_disagreements} disagree vs {cx_confirmed} confirmed)"
     if candidates > 0 and findings * 5 < candidates and not is_legacy_fallback:
         return "yellow", f"yield ratio < 20% ({findings}/{candidates})"
     if md_chars > para_chars * 3 and md_chars > 2000 and llm_calls < max(1, md_chars // 50000):
@@ -3091,6 +3100,8 @@ async def admin_uploads_quality(
                     itl.dropped_low_conf, itl.dropped_short_quote,
                     itl.dropped_hallucinated, itl.dropped_unknown_ref,
                     itl.dropped_questionnaire, itl.skipped_as_toc,
+                    itl.crosscheck_confirmed, itl.crosscheck_disagreements,
+                    itl.crosscheck_unavailable,
                     itl.markdown_chars, itl.paragraph_chars,
                     itl.total_ms, itl.extraction_path,
                     itl.doc_mappings_match_count,
@@ -3152,6 +3163,11 @@ async def admin_uploads_quality(
                 "doc_mappings_match_count": r["doc_mappings_match_count"],
                 "active_findings":  r["active_findings"],
                 "bound_findings":   r["bound_findings"],
+                "crosscheck": {
+                    "confirmed":     r["crosscheck_confirmed"],
+                    "disagreements": r["crosscheck_disagreements"],
+                    "unavailable":   r["crosscheck_unavailable"],
+                },
                 "markdown_chars":   r["markdown_chars"],
                 "paragraph_chars":  r["paragraph_chars"],
                 "total_ms":         r["total_ms"],
