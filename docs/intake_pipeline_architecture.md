@@ -64,6 +64,7 @@ upload → reader → enricher → [TOC filter] → [doc-mapping discovery]
 | LLM rephrases ref (A5.18 → A.5.18) | `normalize_ref` post-LLM | 2026-05 |
 | Annex A vs ISMS clause confusion (5.x → A.5.x) | strict valid_refs match + 3-dot ISMS-only rule | 2026-06-09 |
 | Findings landed unbound to MUSTs | per-MUST candidate list to LLM + checklist_item_id validation | **2026-06-15 (B)** |
+| LLM picks legitimate MUST id but evidence doesn't match it semantically | catalog crosscheck — evidence vs `must_fingerprints` keyword sets, soft signal counted in `crosscheck_disagreements` | **2026-06-15** |
 
 ### Telemetry surfaces
 
