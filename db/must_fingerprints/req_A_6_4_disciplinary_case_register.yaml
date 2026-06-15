@@ -1,0 +1,85 @@
+# Per-MUST fingerprint catalog for req:A.6.4:disciplinary_case_register
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:A.6.4:disciplinary_case_register"
+target_control: "A.6.4"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.6.4:reg_closure_date"
+    description: "Per-case closure date"
+    excerpt_keywords:
+      - [closure, date]
+      - [closure]
+      - [case]
+      - [case, closure]
+      - [case, closure, date]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+
+  - must_id: "item:A.6.4:reg_decision_authority"
+    description: "Per-case decision authority (named role)"
+    excerpt_keywords:
+      - [decision, authority]
+      - [decision]
+      - [authority]
+      - [case]
+      - [case, decision]
+      - [case, decision, authority]
+      - [decision, authority, named]
+      - [authority, named]
+
+  - must_id: "item:A.6.4:reg_action_taken"
+    description: "Per-case action taken (matches the action_range categories; 'no action' is a valid outcome where investigation didn't substantiate)"
+    excerpt_keywords:
+      - [action, taken]
+      - [action]
+      - [taken]
+      - [case]
+      - [case, action]
+      - [case, action, taken]
+      - [action, taken, matches]
+      - [taken, matches]
+
+  - must_id: "item:A.6.4:reg_investigation_outcome"
+    description: "Per-case investigation outcome (substantiated / not-substantiated / partially-substantiated)"
+    excerpt_keywords:
+      - [investigation, outcome]
+      - [investigation]
+      - [outcome]
+      - [case]
+      - [case, investigation]
+      - [case, investigation, outcome]
+      - [investigation, outcome, substantiated]
+      - [outcome, substantiated]
+
+  - must_id: "item:A.6.4:reg_violation_type"
+    description: "Per-case violation type (matches the procedure's violation_scope categories)"
+    excerpt_keywords:
+      - [violation]
+      - [case]
+      - [case, violation]
+      - [case, violation, matches]
+      - [violation, matches]
+      - [violation, matches, violation_scope]
+      - [matches]
+      - [matches, violation_scope]
+
+  - must_id: "item:A.6.4:reg_case_id"
+    description: "Per-case unique identifier (anonymised externally; internal traceability to personnel record preserved)"
+    excerpt_keywords:
+      - [case, id]
+      - [case]
+      - [case, unique]
+      - [case, unique, identifier]
+      - [unique, identifier]
+      - [unique, identifier, anonymised]
+      - [identifier]
+      - [identifier, anonymised]
+

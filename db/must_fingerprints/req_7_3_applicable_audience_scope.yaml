@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:7.3:applicable_audience_scope
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:7.3:applicable_audience_scope"
+target_control: "7.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:7.3:scope_external"
+    description: "External-party coverage stated (auditors, embedded vendor staff, visiting researchers as relevant)"
+    excerpt_keywords:
+      - [external]
+      - [external, party]
+      - [external, party, coverage]
+      - [party]
+      - [party, coverage]
+      - [party, coverage, stated]
+      - [coverage]
+      - [coverage, stated]
+
+  - must_id: "item:7.3:scope_contractors"
+    description: "Contractor coverage stated (which contractor classes are in scope; cross-link to A.5.19 supplier)"
+    excerpt_keywords:
+      - [contractors]
+      - [contractor]
+      - [contractor, coverage]
+      - [contractor, coverage, stated]
+      - [coverage]
+      - [coverage, stated]
+      - [coverage, stated, contractor]
+      - [stated, contractor]
+
+  - must_id: "item:7.3:scope_employees"
+    description: "Employee coverage stated (all employees, all locations)"
+    excerpt_keywords:
+      - [employees]
+      - [employee]
+      - [employee, coverage]
+      - [employee, coverage, stated]
+      - [coverage]
+      - [coverage, stated]
+      - [coverage, stated, employees]
+      - [stated, employees]
+

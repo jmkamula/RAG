@@ -1,0 +1,73 @@
+# Per-MUST fingerprint catalog for req:Art.20:portability_register
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.20:portability_register"
+target_control: "Art.20"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.20:reg_delivery_date"
+    description: "Per-row delivery date (within Art.12.3 SLA)"
+    excerpt_keywords:
+      - [delivery, date]
+      - [delivery]
+      - [delivery, date, within]
+      - [date, within]
+      - [date, within, art]
+      - [within]
+      - [within, art]
+      - [within, art, sla]
+
+  - must_id: "item:Art.20:reg_destination"
+    description: "Per-row destination (export to subject / direct controller transmission)"
+    excerpt_keywords:
+      - [destination]
+      - [destination, export]
+      - [destination, export, subject]
+      - [export]
+      - [export, subject]
+      - [export, subject, direct]
+      - [subject]
+      - [subject, direct]
+
+  - must_id: "item:Art.20:reg_format_delivered"
+    description: "Per-row delivered format"
+    excerpt_keywords:
+      - [format, delivered]
+      - [format]
+      - [delivered]
+      - [delivered, format]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+
+  - must_id: "item:Art.20:reg_applicability_decision"
+    description: "Per-row applicability decision (in-scope / out-of-scope with grounds)"
+    excerpt_keywords:
+      - [applicability, decision]
+      - [applicability]
+      - [decision]
+      - [applicability, decision, scope]
+      - [decision, scope]
+      - [decision, scope, out]
+      - [scope, out]
+      - [scope, out, scope]
+
+  - must_id: "item:Art.20:reg_request_id"
+    description: "Per-row request id (Art.12 register cross-reference)"
+    excerpt_keywords:
+      - [request, id]
+      - [request]
+      - [request, art]
+      - [request, art, cross]
+      - [art]
+      - [art, cross]
+      - [art, cross, reference]
+      - [cross, reference]
+

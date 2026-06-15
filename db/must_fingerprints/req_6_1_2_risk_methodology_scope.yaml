@@ -1,0 +1,61 @@
+# Per-MUST fingerprint catalog for req:6.1.2:risk_methodology_scope
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:6.1.2:risk_methodology_scope"
+target_control: "6.1.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:6.1.2:scope_exclusions"
+    description: "Exclusions stated explicitly with rationale"
+    excerpt_keywords:
+      - [exclusions]
+      - [exclusions, stated]
+      - [exclusions, stated, explicitly]
+      - [stated, explicitly]
+      - [stated, explicitly, rationale]
+      - [explicitly]
+      - [explicitly, rationale]
+      - [rationale]
+
+  - must_id: "item:6.1.2:scope_asset_classes"
+    description: "Asset/process classes in scope enumerated (data, systems, people, suppliers, premises)"
+    excerpt_keywords:
+      - [asset, classes]
+      - [asset]
+      - [classes]
+      - [asset, classes, scope]
+      - [classes, scope]
+      - [classes, scope, enumerated]
+      - [scope, enumerated]
+      - [scope, enumerated, people]
+
+  - must_id: "item:6.1.2:scope_acceptance_bands"
+    description: "Acceptance bands stated (low/medium/high → accept/treat thresholds)"
+    excerpt_keywords:
+      - [acceptance, bands]
+      - [acceptance]
+      - [bands]
+      - [acceptance, bands, stated]
+      - [bands, stated]
+      - [bands, stated, low]
+      - [stated, low]
+      - [stated, low, medium]
+
+  - must_id: "item:6.1.2:scope_scoring_scale"
+    description: "Scoring scale stated (e.g"
+    excerpt_keywords:
+      - [scoring, scale]
+      - [scoring]
+      - [scale]
+      - [scoring, scale, stated]
+      - [scale, stated]
+      - [scale, stated, qualitative]
+      - [stated, qualitative]
+      - [stated, qualitative, ale]
+

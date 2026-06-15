@@ -1,0 +1,97 @@
+# Per-MUST fingerprint catalog for req:A.6.5:post_employment_responsibilities
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:A.6.5:post_employment_responsibilities"
+target_control: "A.6.5"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.6.5:owner"
+    description: "Named owner of the procedure (HR with InfoSec + Legal partners)"
+    excerpt_keywords:
+      - [named, owner]
+      - [named, owner, infosec]
+      - [owner, infosec]
+      - [owner, infosec, legal]
+      - [infosec]
+      - [infosec, legal]
+      - [infosec, legal, partners]
+      - [legal]
+
+  - must_id: "item:A.6.5:offboarding_integration"
+    description: "Integration with operational offboarding (A.5.11 asset return, A.5.16 identity revocation, A.5.17 credential revocation, A.5.18 access revoc"
+    excerpt_keywords:
+      - [offboarding, integration]
+      - [offboarding]
+      - [integration]
+      - [integration, operational]
+      - [integration, operational, offboarding]
+      - [operational]
+      - [operational, offboarding]
+      - [operational, offboarding, asset]
+
+  - must_id: "item:A.6.5:role_change_scope"
+    description: "Coverage of role change within the organisation, not just termination (joiner-mover-leaver — mover is the typically-missed leg)"
+    excerpt_keywords:
+      - [role, change, scope]
+      - [change]
+      - [coverage]
+      - [coverage, role]
+      - [coverage, role, change]
+      - [role, change]
+      - [role, change, within]
+      - [change, within]
+
+  - must_id: "item:A.6.5:enforcement"
+    description: "Enforcement approach (legal action for breach, breach of contract claims, regulatory referral where misconduct + sectoral notification oblig"
+    excerpt_keywords:
+      - [enforcement]
+      - [enforcement, approach]
+      - [enforcement, approach, legal]
+      - [approach]
+      - [approach, legal]
+      - [approach, legal, action]
+      - [legal]
+      - [legal, action]
+
+  - must_id: "item:A.6.5:communication"
+    description: "Communication mechanism to leavers (exit briefing with signed acknowledgment; reminder letter; intranet reference) — drives the leaver-brief"
+    excerpt_keywords:
+      - [communication]
+      - [communication, mechanism]
+      - [communication, mechanism, leavers]
+      - [mechanism]
+      - [mechanism, leavers]
+      - [mechanism, leavers, exit]
+      - [leavers]
+      - [leavers, exit]
+
+  - must_id: "item:A.6.5:duration"
+    description: "Duration of each obligation (indefinite for confidentiality; time-limited for non-compete; per-jurisdiction limits where law caps duration)"
+    excerpt_keywords:
+      - [duration]
+      - [duration, obligation]
+      - [duration, obligation, indefinite]
+      - [obligation]
+      - [obligation, indefinite]
+      - [obligation, indefinite, confidentiality]
+      - [indefinite]
+      - [indefinite, confidentiality]
+
+  - must_id: "item:A.6.5:surviving_duties"
+    description: "Surviving duties enumerated (confidentiality — typically indefinite; IP protection; non-disparagement; non-poach where lawful; non-compete w"
+    excerpt_keywords:
+      - [surviving, duties]
+      - [surviving]
+      - [duties]
+      - [surviving, duties, enumerated]
+      - [duties, enumerated]
+      - [duties, enumerated, confidentiality]
+      - [enumerated]
+      - [enumerated, confidentiality]
+

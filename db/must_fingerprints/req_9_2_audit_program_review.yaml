@@ -1,0 +1,73 @@
+# Per-MUST fingerprint catalog for req:9.2:audit_program_review
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:9.2:audit_program_review"
+target_control: "9.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:9.2:rev_finding_closure"
+    description: "Finding-closure check — last cycle's NCs reached 10.2 closure"
+    excerpt_keywords:
+      - [finding, closure]
+      - [finding]
+      - [closure]
+      - [finding, closure, check]
+      - [closure, check]
+      - [closure, check, last]
+      - [check]
+      - [check, last]
+
+  - must_id: "item:9.2:rev_cycle_progress"
+    description: "Cycle progress check — at end-of-cycle every ISMS process audited at least once"
+    excerpt_keywords:
+      - [cycle, progress]
+      - [cycle]
+      - [progress]
+      - [cycle, progress, check]
+      - [progress, check]
+      - [progress, check, end]
+      - [check]
+      - [check, end]
+
+  - must_id: "item:9.2:rev_completion"
+    description: "Completion check — every scheduled audit happened (or deferred with documented reason)"
+    excerpt_keywords:
+      - [completion]
+      - [completion, check]
+      - [completion, check, every]
+      - [check]
+      - [check, every]
+      - [check, every, scheduled]
+      - [every]
+      - [every, scheduled]
+
+  - must_id: "item:9.2:rev_reviewer"
+    description: "Reviewer identity (ISMS Manager + lead auditor)"
+    excerpt_keywords:
+      - [reviewer, identity]
+      - [reviewer, identity, isms]
+      - [identity, isms]
+      - [identity, isms, manager]
+      - [isms]
+      - [isms, manager]
+      - [isms, manager, lead]
+      - [manager]
+
+  - must_id: "item:9.2:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date]
+      - [review, date, within]
+      - [date, within]
+      - [date, within, planned]
+      - [within]
+      - [within, planned]
+      - [within, planned, interval]
+      - [planned]
+

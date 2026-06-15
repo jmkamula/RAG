@@ -1,0 +1,103 @@
+# Per-MUST fingerprint catalog for req:Art.28:data_processing_agreement
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.28:data_processing_agreement"
+target_control: "Art.28"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.28:audit"
+    description: "Audit rights and information to demonstrate compliance"
+    excerpt_keywords:
+      - [audit, rights]
+      - [audit, rights, demonstrate]
+      - [rights]
+      - [rights, demonstrate]
+      - [rights, demonstrate, compliance]
+      - [demonstrate]
+      - [demonstrate, compliance]
+      - [compliance]
+
+  - must_id: "item:Art.28:deletion"
+    description: "Deletion or return of data at end of service"
+    excerpt_keywords:
+      - [deletion]
+      - [deletion, return]
+      - [deletion, return, end]
+      - [return]
+      - [return, end]
+      - [return, end, service]
+      - [end]
+      - [end, service]
+
+  - must_id: "item:Art.28:assistance"
+    description: "Assistance with Art.32-36 obligations"
+    excerpt_keywords:
+      - [assistance]
+      - [assistance, art]
+      - [assistance, art, obligations]
+      - [art]
+      - [art, obligations]
+      - [obligations]
+
+  - must_id: "item:Art.28:rights"
+    description: "Assistance with data subject rights"
+    excerpt_keywords:
+      - [rights]
+      - [assistance]
+      - [assistance, subject]
+      - [assistance, subject, rights]
+      - [subject]
+      - [subject, rights]
+
+  - must_id: "item:Art.28:subprocessors"
+    description: "Sub-processor restrictions and approval process"
+    excerpt_keywords:
+      - [subprocessors]
+      - [sub]
+      - [sub, processor]
+      - [sub, processor, restrictions]
+      - [processor]
+      - [processor, restrictions]
+      - [processor, restrictions, approval]
+      - [restrictions]
+
+  - must_id: "item:Art.28:security"
+    description: "Security measures per Art.32"
+    excerpt_keywords:
+      - [security]
+      - [security, measures]
+      - [security, measures, art]
+      - [measures]
+      - [measures, art]
+      - [art]
+
+  - must_id: "item:Art.28:confidentiality"
+    description: "Confidentiality obligations on processor staff"
+    excerpt_keywords:
+      - [confidentiality]
+      - [confidentiality, obligations]
+      - [confidentiality, obligations, processor]
+      - [obligations]
+      - [obligations, processor]
+      - [obligations, processor, staff]
+      - [processor]
+      - [processor, staff]
+
+  - must_id: "item:Art.28:instructions"
+    description: "Process only on documented controller instructions"
+    excerpt_keywords:
+      - [instructions]
+      - [only]
+      - [only, documented]
+      - [only, documented, controller]
+      - [documented]
+      - [documented, controller]
+      - [documented, controller, instructions]
+      - [controller]
+

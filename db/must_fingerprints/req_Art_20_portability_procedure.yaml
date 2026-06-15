@@ -1,0 +1,85 @@
+# Per-MUST fingerprint catalog for req:Art.20:portability_procedure
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.20:portability_procedure"
+target_control: "Art.20"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.20:third_party_rights"
+    description: "Third-party rights protection (Art.20.4 — must not adversely affect others)"
+    excerpt_keywords:
+      - [third, party, rights]
+      - [third]
+      - [party]
+      - [rights]
+      - [third, party]
+      - [party, rights]
+      - [party, rights, protection]
+      - [rights, protection]
+
+  - must_id: "item:Art.20:scope_boundary"
+    description: "Scope boundary — only data 'provided by' the subject (excludes derived data and observed data per EDPB guidance)"
+    excerpt_keywords:
+      - [boundary]
+      - [scope, boundary]
+      - [scope, boundary, only]
+      - [boundary, only]
+      - [boundary, only, provided]
+      - [only]
+      - [only, provided]
+      - [only, provided, subject]
+
+  - must_id: "item:Art.20:direct_transmission"
+    description: "Direct controller-to-controller transmission supported where technically feasible (Art.20.2)"
+    excerpt_keywords:
+      - [direct, transmission]
+      - [direct]
+      - [transmission]
+      - [direct, controller]
+      - [direct, controller, controller]
+      - [controller]
+      - [controller, controller]
+      - [controller, controller, transmission]
+
+  - must_id: "item:Art.20:export_format"
+    description: "Export format documented (JSON / CSV / XML — machine-readable, structured, commonly used)"
+    excerpt_keywords:
+      - [export, format]
+      - [export]
+      - [format]
+      - [export, format, documented]
+      - [format, documented]
+      - [format, documented, json]
+      - [documented]
+      - [documented, json]
+
+  - must_id: "item:Art.20:applicability_check"
+    description: "Applicability assessment per request (basis = consent/contract AND automated processing)"
+    excerpt_keywords:
+      - [applicability, check]
+      - [applicability]
+      - [check]
+      - [applicability, assessment]
+      - [applicability, assessment, request]
+      - [assessment]
+      - [assessment, request]
+      - [assessment, request, basis]
+
+  - must_id: "item:Art.20:intake_channel"
+    description: "Intake channel via Art.12 procedure"
+    excerpt_keywords:
+      - [intake, channel]
+      - [intake]
+      - [channel]
+      - [intake, channel, via]
+      - [channel, via]
+      - [channel, via, art]
+      - [via]
+      - [via, art]
+

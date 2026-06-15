@@ -1,0 +1,87 @@
+# Per-MUST fingerprint catalog for req:9.2:internal_audit_programme
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:9.2:internal_audit_programme"
+target_control: "9.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:9.2:owner"
+    description: "Named owner of the programme (typically ISMS Manager + independent auditor)"
+    excerpt_keywords:
+      - [named, owner]
+      - [named, owner, programme]
+      - [owner, programme]
+      - [owner, programme, typically]
+      - [programme]
+      - [programme, typically]
+      - [programme, typically, isms]
+      - [typically]
+
+  - must_id: "item:9.2:corrective"
+    description: "Corrective action follow-up process"
+    excerpt_keywords:
+      - [corrective]
+      - [corrective, action]
+      - [corrective, action, follow]
+      - [action]
+      - [action, follow]
+      - [follow]
+
+  - must_id: "item:9.2:reporting"
+    description: "Reporting process to management defined"
+    excerpt_keywords:
+      - [reporting]
+      - [reporting, management]
+      - [reporting, management, defined]
+      - [management]
+      - [management, defined]
+      - [defined]
+
+  - must_id: "item:9.2:independence"
+    description: "Auditor independence and competence requirements"
+    excerpt_keywords:
+      - [independence]
+      - [auditor]
+      - [auditor, independence]
+      - [auditor, independence, competence]
+      - [independence, competence]
+      - [independence, competence, requirements]
+      - [competence]
+      - [competence, requirements]
+
+  - must_id: "item:9.2:criteria"
+    description: "Audit criteria defined"
+    excerpt_keywords:
+      - [criteria]
+      - [audit, criteria]
+      - [audit, criteria, defined]
+      - [criteria, defined]
+      - [defined]
+
+  - must_id: "item:9.2:scope"
+    description: "Audit scope covering all ISMS processes"
+    excerpt_keywords:
+      - [audit, scope]
+      - [audit, scope, covering]
+      - [scope, covering]
+      - [scope, covering, isms]
+      - [covering]
+      - [covering, isms]
+      - [covering, isms, processes]
+      - [isms]
+
+  - must_id: "item:9.2:frequency"
+    description: "Audit frequency defined"
+    excerpt_keywords:
+      - [frequency]
+      - [audit, frequency]
+      - [audit, frequency, defined]
+      - [frequency, defined]
+      - [defined]
+

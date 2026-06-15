@@ -1,0 +1,73 @@
+# Per-MUST fingerprint catalog for req:Art.24:controller_processor_decision_record
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.24:controller_processor_decision_record"
+target_control: "Art.24"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.24:role_contract_link"
+    description: "Per-row contract link (DPA Art.28 / Art.26 arrangement / Art.46 transfer mechanism)"
+    excerpt_keywords:
+      - [role, contract]
+      - [contract]
+      - [contract, dpa]
+      - [contract, dpa, art]
+      - [dpa]
+      - [dpa, art]
+      - [dpa, art, art]
+      - [art]
+
+  - must_id: "item:Art.24:role_basis"
+    description: "Per-row decision basis (who determines means and purposes — EDPB Guidelines 7/2020 test)"
+    excerpt_keywords:
+      - [role, basis]
+      - [basis]
+      - [decision]
+      - [decision, basis]
+      - [decision, basis, determines]
+      - [basis, determines]
+      - [basis, determines, means]
+      - [determines]
+
+  - must_id: "item:Art.24:role_chosen"
+    description: "Per-row role chosen (controller / processor / joint controller / third party)"
+    excerpt_keywords:
+      - [role, chosen]
+      - [chosen]
+      - [role, chosen, controller]
+      - [chosen, controller]
+      - [chosen, controller, processor]
+      - [controller]
+      - [controller, processor]
+      - [controller, processor, joint]
+
+  - must_id: "item:Art.24:role_counterparty"
+    description: "Per-row counterparty (customer / vendor / partner)"
+    excerpt_keywords:
+      - [role, counterparty]
+      - [counterparty]
+      - [counterparty, customer]
+      - [counterparty, customer, vendor]
+      - [customer]
+      - [customer, vendor]
+      - [customer, vendor, partner]
+      - [vendor]
+
+  - must_id: "item:Art.24:role_activity_id"
+    description: "Per-row processing activity (Art.30 RoPA reference)"
+    excerpt_keywords:
+      - [role, activity, id]
+      - [activity]
+      - [processing]
+      - [processing, activity]
+      - [processing, activity, art]
+      - [activity, art]
+      - [activity, art, ropa]
+      - [art]
+

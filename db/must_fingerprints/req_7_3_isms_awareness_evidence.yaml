@@ -1,0 +1,79 @@
+# Per-MUST fingerprint catalog for req:7.3:isms_awareness_evidence
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:7.3:isms_awareness_evidence"
+target_control: "7.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:7.3:owner"
+    description: "Named owner of the programme"
+    excerpt_keywords:
+      - [named, owner]
+      - [named, owner, programme]
+      - [owner, programme]
+      - [programme]
+
+  - must_id: "item:7.3:cadence"
+    description: "Delivery cadence stated (onboarding + annual refresher, with refresh on policy update)"
+    excerpt_keywords:
+      - [cadence]
+      - [delivery]
+      - [delivery, cadence]
+      - [delivery, cadence, stated]
+      - [cadence, stated]
+      - [cadence, stated, onboarding]
+      - [stated, onboarding]
+      - [stated, onboarding, annual]
+
+  - must_id: "item:7.3:delivery_method"
+    description: "Delivery method stated (LMS module, induction session, periodic refresher)"
+    excerpt_keywords:
+      - [delivery, method]
+      - [delivery]
+      - [method]
+      - [delivery, method, stated]
+      - [method, stated]
+      - [method, stated, lms]
+      - [stated, lms]
+      - [stated, lms, induction]
+
+  - must_id: "item:7.3:nonconformity_consequences"
+    description: "Content covers consequences of not conforming to ISMS requirements"
+    excerpt_keywords:
+      - [nonconformity, consequences]
+      - [nonconformity]
+      - [consequences]
+      - [content]
+      - [content, consequences]
+      - [content, consequences, not]
+      - [consequences, not]
+      - [consequences, not, conforming]
+
+  - must_id: "item:7.3:contribution"
+    description: "Content covers contribution to ISMS effectiveness (incl"
+    excerpt_keywords:
+      - [contribution]
+      - [content]
+      - [content, contribution]
+      - [content, contribution, isms]
+      - [contribution, isms]
+      - [contribution, isms, effectiveness]
+      - [isms]
+      - [isms, effectiveness]
+
+  - must_id: "item:7.3:policy_awareness"
+    description: "Content covers awareness of the InfoSec policy"
+    excerpt_keywords:
+      - [awareness]
+      - [content]
+      - [content, awareness]
+      - [content, awareness, infosec]
+      - [awareness, infosec]
+      - [infosec]
+

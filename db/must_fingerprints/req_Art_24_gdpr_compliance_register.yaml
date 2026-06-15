@@ -1,0 +1,82 @@
+# Per-MUST fingerprint catalog for req:Art.24:gdpr_compliance_register
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.24:gdpr_compliance_register"
+target_control: "Art.24"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.24:reg_last_assessed"
+    description: "Per-row last-assessed date (drives staleness)"
+    excerpt_keywords:
+      - [last, assessed]
+      - [assessed]
+      - [last, assessed, date]
+      - [assessed, date]
+      - [assessed, date, staleness]
+      - [date, staleness]
+      - [staleness]
+      - [per, row]
+
+  - must_id: "item:Art.24:reg_owner"
+    description: "Per-row owner"
+    excerpt_keywords:
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:Art.24:reg_status"
+    description: "Per-row implementation status (implemented / partial / planned / N/A)"
+    excerpt_keywords:
+      - [implementation]
+      - [implementation, status]
+      - [implementation, status, implemented]
+      - [status, implemented]
+      - [status, implemented, partial]
+      - [implemented]
+      - [implemented, partial]
+      - [implemented, partial, planned]
+
+  - must_id: "item:Art.24:reg_implementing_artefact"
+    description: "Per-row link to the implementing artefact (procedure / policy / register / DPA / certification)"
+    excerpt_keywords:
+      - [implementing, artefact]
+      - [implementing]
+      - [artefact]
+      - [implementing, artefact, dpa]
+      - [artefact, dpa]
+      - [artefact, dpa, certification]
+      - [dpa]
+      - [dpa, certification]
+
+  - must_id: "item:Art.24:reg_applicability"
+    description: "Per-row applicability assessment (in scope / N/A with reason)"
+    excerpt_keywords:
+      - [applicability]
+      - [applicability, assessment]
+      - [applicability, assessment, scope]
+      - [assessment]
+      - [assessment, scope]
+      - [assessment, scope, reason]
+      - [scope, reason]
+      - [reason]
+
+  - must_id: "item:Art.24:reg_article_id"
+    description: "Per-row GDPR article identifier"
+    excerpt_keywords:
+      - [article, id]
+      - [article]
+      - [gdpr]
+      - [gdpr, article]
+      - [gdpr, article, identifier]
+      - [article, identifier]
+      - [identifier]
+      - [per, row]
+

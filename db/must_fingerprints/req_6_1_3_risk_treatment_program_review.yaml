@@ -1,0 +1,73 @@
+# Per-MUST fingerprint catalog for req:6.1.3:risk_treatment_program_review
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:6.1.3:risk_treatment_program_review"
+target_control: "6.1.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:6.1.3:rev_residual_reaffirm"
+    description: "Residual risks re-affirmed by owners (or re-treatment triggered)"
+    excerpt_keywords:
+      - [residual, reaffirm]
+      - [residual]
+      - [reaffirm]
+      - [residual, risks]
+      - [residual, risks, affirmed]
+      - [risks]
+      - [risks, affirmed]
+      - [risks, affirmed, owners]
+
+  - must_id: "item:6.1.3:rev_soa_currency"
+    description: "SoA currency check — still matches treatment plan + Annex A version"
+    excerpt_keywords:
+      - [soa, currency]
+      - [soa]
+      - [currency]
+      - [soa, currency, check]
+      - [currency, check]
+      - [currency, check, still]
+      - [check]
+      - [check, still]
+
+  - must_id: "item:6.1.3:rev_plan_progress"
+    description: "Plan progress check — every treatment item status updated"
+    excerpt_keywords:
+      - [plan, progress]
+      - [plan]
+      - [progress]
+      - [plan, progress, check]
+      - [progress, check]
+      - [progress, check, every]
+      - [check]
+      - [check, every]
+
+  - must_id: "item:6.1.3:rev_reviewer"
+    description: "Reviewer identity (Risk Manager + ISMS Manager + risk owners as needed)"
+    excerpt_keywords:
+      - [reviewer, identity]
+      - [reviewer, identity, risk]
+      - [identity, risk]
+      - [identity, risk, manager]
+      - [risk]
+      - [risk, manager]
+      - [risk, manager, isms]
+      - [manager]
+
+  - must_id: "item:6.1.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date]
+      - [review, date, within]
+      - [date, within]
+      - [date, within, planned]
+      - [within]
+      - [within, planned]
+      - [within, planned, interval]
+      - [planned]
+

@@ -1,0 +1,73 @@
+# Per-MUST fingerprint catalog for req:Art.26:joint_controller_register
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.26:joint_controller_register"
+target_control: "Art.26"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.26:reg_signed_date"
+    description: "Per-row arrangement signature date"
+    excerpt_keywords:
+      - [signed, date]
+      - [signed]
+      - [arrangement]
+      - [arrangement, signature]
+      - [arrangement, signature, date]
+      - [signature]
+      - [signature, date]
+      - [per, row]
+
+  - must_id: "item:Art.26:reg_essence_published"
+    description: "Per-row essence-of-arrangement published location (privacy notice URL)"
+    excerpt_keywords:
+      - [essence, published]
+      - [essence]
+      - [published]
+      - [essence, arrangement]
+      - [essence, arrangement, published]
+      - [arrangement]
+      - [arrangement, published]
+      - [arrangement, published, location]
+
+  - must_id: "item:Art.26:reg_responsibilities"
+    description: "Per-row responsibility split summary"
+    excerpt_keywords:
+      - [responsibilities]
+      - [responsibility]
+      - [responsibility, split]
+      - [responsibility, split, summary]
+      - [split]
+      - [split, summary]
+      - [summary]
+      - [per, row]
+
+  - must_id: "item:Art.26:reg_activity"
+    description: "Per-row processing activity (Art.30 RoPA reference)"
+    excerpt_keywords:
+      - [activity]
+      - [processing]
+      - [processing, activity]
+      - [processing, activity, art]
+      - [activity, art]
+      - [activity, art, ropa]
+      - [art]
+      - [art, ropa]
+
+  - must_id: "item:Art.26:reg_counterparty"
+    description: "Per-row joint-controller counterparty"
+    excerpt_keywords:
+      - [counterparty]
+      - [joint]
+      - [joint, controller]
+      - [joint, controller, counterparty]
+      - [controller]
+      - [controller, counterparty]
+      - [per, row]
+      - [each, row]
+

@@ -1,0 +1,97 @@
+# Per-MUST fingerprint catalog for req:A.6.6:nda_template
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:A.6.6:nda_template"
+target_control: "A.6.6"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.6.6:owner"
+    description: "Named owner of the template (Legal counsel with InfoSec partner)"
+    excerpt_keywords:
+      - [named, owner]
+      - [named, owner, template]
+      - [owner, template]
+      - [owner, template, legal]
+      - [template]
+      - [template, legal]
+      - [template, legal, counsel]
+      - [legal]
+
+  - must_id: "item:A.6.6:last_reviewed"
+    description: "Last-reviewed date on the template (review evidence — drives the freshness check)"
+    excerpt_keywords:
+      - [last, reviewed]
+      - [reviewed]
+      - [last, reviewed, date]
+      - [reviewed, date]
+      - [reviewed, date, template]
+      - [date, template]
+      - [date, template, review]
+      - [template]
+
+  - must_id: "item:A.6.6:signature_requirement"
+    description: "Signature requirement enforced before access granted (no access without signed NDA — gates A.5.18 access grant for non-employees)"
+    excerpt_keywords:
+      - [signature, requirement]
+      - [signature]
+      - [requirement]
+      - [signature, requirement, enforced]
+      - [requirement, enforced]
+      - [requirement, enforced, before]
+      - [enforced]
+      - [enforced, before]
+
+  - must_id: "item:A.6.6:return_destruction"
+    description: "Return or destruction obligation at end of relationship (with certified-destruction option for paper, secure-deletion for digital — links to"
+    excerpt_keywords:
+      - [return, destruction]
+      - [return]
+      - [destruction]
+      - [return, destruction, obligation]
+      - [destruction, obligation]
+      - [destruction, obligation, end]
+      - [obligation]
+      - [obligation, end]
+
+  - must_id: "item:A.6.6:duration"
+    description: "Duration of confidentiality obligation (indefinite for trade secrets; time-limited for non-trade-secret confidential info — typically 3-5 ye"
+    excerpt_keywords:
+      - [duration]
+      - [duration, confidentiality]
+      - [duration, confidentiality, obligation]
+      - [confidentiality]
+      - [confidentiality, obligation]
+      - [confidentiality, obligation, indefinite]
+      - [obligation]
+      - [obligation, indefinite]
+
+  - must_id: "item:A.6.6:info_classes"
+    description: "Information classes protected (cross-link to A.5.12 classification — confidential / restricted / trade-secret tiers; PII overlay where appli"
+    excerpt_keywords:
+      - [info, classes]
+      - [info]
+      - [classes]
+      - [classes, protected]
+      - [classes, protected, cross]
+      - [protected]
+      - [protected, cross]
+      - [protected, cross, classification]
+
+  - must_id: "item:A.6.6:parties_covered"
+    description: "Parties covered (employees, contractors, suppliers, visitors with access to sensitive info, M&A counterparties)"
+    excerpt_keywords:
+      - [parties, covered]
+      - [parties]
+      - [covered]
+      - [parties, covered, employees]
+      - [covered, employees]
+      - [covered, employees, contractors]
+      - [employees]
+      - [employees, contractors]
+

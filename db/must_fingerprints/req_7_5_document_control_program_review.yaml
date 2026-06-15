@@ -1,0 +1,73 @@
+# Per-MUST fingerprint catalog for req:7.5:document_control_program_review
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:7.5:document_control_program_review"
+target_control: "7.5"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:7.5:rev_coverage"
+    description: "Coverage check — every in-scope document class has at least one register entry"
+    excerpt_keywords:
+      - [coverage]
+      - [coverage, check]
+      - [coverage, check, every]
+      - [check]
+      - [check, every]
+      - [check, every, scope]
+      - [every]
+      - [every, scope]
+
+  - must_id: "item:7.5:rev_stale_sweep"
+    description: "Stale-document sweep — overdue review dates surfaced; refresh or retire decisions made"
+    excerpt_keywords:
+      - [stale, sweep]
+      - [stale]
+      - [sweep]
+      - [stale, document]
+      - [stale, document, sweep]
+      - [document]
+      - [document, sweep]
+      - [document, sweep, overdue]
+
+  - must_id: "item:7.5:rev_currency"
+    description: "Register currency check — every row reviewed; next-review dates met or rescheduled"
+    excerpt_keywords:
+      - [currency]
+      - [currency, check]
+      - [currency, check, every]
+      - [check]
+      - [check, every]
+      - [check, every, reviewed]
+      - [every]
+      - [every, reviewed]
+
+  - must_id: "item:7.5:rev_reviewer"
+    description: "Reviewer identity (ISMS Manager + document-control lead)"
+    excerpt_keywords:
+      - [reviewer, identity]
+      - [reviewer, identity, isms]
+      - [identity, isms]
+      - [identity, isms, manager]
+      - [isms]
+      - [isms, manager]
+      - [isms, manager, document]
+      - [manager]
+
+  - must_id: "item:7.5:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date]
+      - [review, date, within]
+      - [date, within]
+      - [date, within, planned]
+      - [within]
+      - [within, planned]
+      - [within, planned, interval]
+      - [planned]
+

@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:A.8.8:applicable_vuln_scope
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.8:applicable_vuln_scope"
+target_control: "A.8.8"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.8:scope_exclusions"
+    description: "Exclusion rationale (vendor-managed assets covered via supplier obligations A.5.20)"
+    excerpt_keywords:
+      - [exclusions]
+      - [exclusion]
+      - [exclusion, rationale]
+      - [exclusion, rationale, vendor]
+      - [rationale]
+      - [rationale, vendor]
+      - [rationale, vendor, managed]
+      - [vendor]
+
+  - must_id: "item:A.8.8:scope_coverage_pct"
+    description: "Target coverage percentage per class (with rationale for gaps)"
+    excerpt_keywords:
+      - [coverage, pct]
+      - [coverage]
+      - [pct]
+      - [target]
+      - [target, coverage]
+      - [target, coverage, percentage]
+      - [coverage, percentage]
+      - [coverage, percentage, class]
+
+  - must_id: "item:A.8.8:scope_asset_classes"
+    description: "Asset classes enumerated with scanning approach per class"
+    excerpt_keywords:
+      - [asset, classes]
+      - [asset]
+      - [classes]
+      - [asset, classes, enumerated]
+      - [classes, enumerated]
+      - [classes, enumerated, scanning]
+      - [enumerated]
+      - [enumerated, scanning]
+

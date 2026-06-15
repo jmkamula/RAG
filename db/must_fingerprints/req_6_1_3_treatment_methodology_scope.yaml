@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:6.1.3:treatment_methodology_scope
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:6.1.3:treatment_methodology_scope"
+target_control: "6.1.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:6.1.3:scope_cost_benefit"
+    description: "Cost-benefit rules for treatment selection (when to mitigate vs accept)"
+    excerpt_keywords:
+      - [cost, benefit]
+      - [cost]
+      - [benefit]
+      - [cost, benefit, rules]
+      - [benefit, rules]
+      - [benefit, rules, treatment]
+      - [rules]
+      - [rules, treatment]
+
+  - must_id: "item:6.1.3:scope_acceptance_authority"
+    description: "Residual-risk acceptance authority per band (who can sign off on residual high vs medium vs low)"
+    excerpt_keywords:
+      - [acceptance, authority]
+      - [acceptance]
+      - [authority]
+      - [residual]
+      - [residual, risk]
+      - [residual, risk, acceptance]
+      - [risk]
+      - [risk, acceptance]
+
+  - must_id: "item:6.1.3:scope_options_catalog"
+    description: "Treatment options catalog (modify / share / avoid / retain — ISO 31000 4-option model)"
+    excerpt_keywords:
+      - [options, catalog]
+      - [options]
+      - [catalog]
+      - [treatment]
+      - [treatment, options]
+      - [treatment, options, catalog]
+      - [options, catalog, modify]
+      - [catalog, modify]
+

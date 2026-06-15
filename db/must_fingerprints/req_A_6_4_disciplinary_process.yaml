@@ -1,0 +1,97 @@
+# Per-MUST fingerprint catalog for req:A.6.4:disciplinary_process
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:A.6.4:disciplinary_process"
+target_control: "A.6.4"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.6.4:owner"
+    description: "Named owner of the procedure (HR with InfoSec partner)"
+    excerpt_keywords:
+      - [named, owner]
+      - [named, owner, infosec]
+      - [owner, infosec]
+      - [owner, infosec, partner]
+      - [infosec]
+      - [infosec, partner]
+      - [partner]
+      - [procedure, step]
+
+  - must_id: "item:A.6.4:communicated"
+    description: "Communicated to personnel and interested parties (in employment contract, code of conduct, intranet, awareness training)"
+    excerpt_keywords:
+      - [communicated]
+      - [communicated, personnel]
+      - [communicated, personnel, interested]
+      - [personnel]
+      - [personnel, interested]
+      - [personnel, interested, parties]
+      - [interested]
+      - [interested, parties]
+
+  - must_id: "item:A.6.4:action_range"
+    description: "Range of actions defined (verbal warning, written warning, suspension, termination, legal referral, regulator notification where mandatory)"
+    excerpt_keywords:
+      - [action, range]
+      - [action]
+      - [range]
+      - [range, actions]
+      - [range, actions, defined]
+      - [actions]
+      - [actions, defined]
+      - [actions, defined, verbal]
+
+  - must_id: "item:A.6.4:decision_authority"
+    description: "Decision authority named (HR + line management + Legal as appropriate; escalation to executive for senior personnel)"
+    excerpt_keywords:
+      - [decision, authority]
+      - [decision]
+      - [authority]
+      - [decision, authority, named]
+      - [authority, named]
+      - [authority, named, line]
+      - [named, line]
+      - [named, line, management]
+
+  - must_id: "item:A.6.4:investigation_step"
+    description: "Investigation step before action, with right of explanation (procedural fairness — drives employment-tribunal defensibility)"
+    excerpt_keywords:
+      - [investigation, step]
+      - [investigation]
+      - [investigation, step, before]
+      - [step, before]
+      - [step, before, action]
+      - [before]
+      - [before, action]
+      - [before, action, right]
+
+  - must_id: "item:A.6.4:violation_scope"
+    description: "Scope of violations covered (policy breach, negligence, deliberate misuse, repeated non-compliance with awareness training, deliberate circu"
+    excerpt_keywords:
+      - [violation, scope]
+      - [violation]
+      - [scope, violations]
+      - [scope, violations, covered]
+      - [violations]
+      - [violations, covered]
+      - [violations, covered, breach]
+      - [covered]
+
+  - must_id: "item:A.6.4:formalised"
+    description: "Formalised in writing with HR + Legal review (drives consistent application; ad-hoc disciplinary action is a fairness / employment-tribunal "
+    excerpt_keywords:
+      - [formalised]
+      - [formalised, writing]
+      - [formalised, writing, legal]
+      - [writing]
+      - [writing, legal]
+      - [writing, legal, review]
+      - [legal]
+      - [legal, review]
+

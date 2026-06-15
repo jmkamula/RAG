@@ -1,0 +1,73 @@
+# Per-MUST fingerprint catalog for req:Art.26:joint_controller_arrangement
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.26:joint_controller_arrangement"
+target_control: "Art.26"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.26:signature"
+    description: "Signed by both joint controllers with date"
+    excerpt_keywords:
+      - [signature]
+      - [signed]
+      - [signed, both]
+      - [signed, both, joint]
+      - [both]
+      - [both, joint]
+      - [both, joint, controllers]
+      - [joint]
+
+  - must_id: "item:Art.26:data_subject_against_either"
+    description: "Statement that subject may exercise rights against either controller (Art.26.3)"
+    excerpt_keywords:
+      - [subject, against, either]
+      - [subject]
+      - [against]
+      - [either]
+      - [statement]
+      - [statement, subject]
+      - [statement, subject, may]
+      - [subject, may]
+
+  - must_id: "item:Art.26:contact_point"
+    description: "Contact point for data subjects identified"
+    excerpt_keywords:
+      - [contact, point]
+      - [contact]
+      - [point]
+      - [contact, point, subjects]
+      - [point, subjects]
+      - [point, subjects, identified]
+      - [subjects]
+      - [subjects, identified]
+
+  - must_id: "item:Art.26:relationship_essence"
+    description: "Essence of the arrangement made available to data subjects (in privacy notice or similar)"
+    excerpt_keywords:
+      - [relationship, essence]
+      - [relationship]
+      - [essence]
+      - [essence, arrangement]
+      - [essence, arrangement, made]
+      - [arrangement]
+      - [arrangement, made]
+      - [arrangement, made, available]
+
+  - must_id: "item:Art.26:respective_responsibilities"
+    description: "Respective responsibilities for compliance allocated (Art.13/14 information, Art.15-22 rights, Art.32 security, Art.33-34 breach)"
+    excerpt_keywords:
+      - [respective, responsibilities]
+      - [respective]
+      - [responsibilities]
+      - [respective, responsibilities, compliance]
+      - [responsibilities, compliance]
+      - [responsibilities, compliance, allocated]
+      - [compliance]
+      - [compliance, allocated]
+

@@ -1,0 +1,97 @@
+# Per-MUST fingerprint catalog for req:A.6.8:event_report_register
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:A.6.8:event_report_register"
+target_control: "A.6.8"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.6.8:reg_closure_date"
+    description: "Per-row closure date (every report reaches a closed state, no open-forever)"
+    excerpt_keywords:
+      - [closure, date]
+      - [closure]
+      - [closure, date, every]
+      - [date, every]
+      - [date, every, report]
+      - [every]
+      - [every, report]
+      - [every, report, reaches]
+
+  - must_id: "item:A.6.8:reg_triage_outcome"
+    description: "Per-row triage outcome (incident-confirmed → A.5.26 register; false-positive-closed; near-miss-filed-for-trend; pending-investigation)"
+    excerpt_keywords:
+      - [triage, outcome]
+      - [triage]
+      - [outcome]
+      - [triage, outcome, incident]
+      - [outcome, incident]
+      - [outcome, incident, confirmed]
+      - [incident]
+      - [incident, confirmed]
+
+  - must_id: "item:A.6.8:reg_summary"
+    description: "Per-row content summary (one-line headline + classification — observed / suspected / near-miss)"
+    excerpt_keywords:
+      - [summary]
+      - [content]
+      - [content, summary]
+      - [content, summary, one]
+      - [summary, one]
+      - [summary, one, line]
+      - [one]
+      - [one, line]
+
+  - must_id: "item:A.6.8:reg_report_timestamp"
+    description: "Per-row report timestamp (drives timeliness analysis — gap between event time and report time)"
+    excerpt_keywords:
+      - [report, timestamp]
+      - [report, timestamp, timeliness]
+      - [timestamp, timeliness]
+      - [timestamp, timeliness, analysis]
+      - [timeliness]
+      - [timeliness, analysis]
+      - [timeliness, analysis, gap]
+      - [analysis]
+
+  - must_id: "item:A.6.8:reg_reporter"
+    description: "Per-row reporter identity or 'anonymous' (anonymous reports are first-class; non-attribution is the point of the option)"
+    excerpt_keywords:
+      - [reporter]
+      - [reporter, identity]
+      - [reporter, identity, anonymous]
+      - [identity, anonymous]
+      - [identity, anonymous, anonymous]
+      - [anonymous]
+      - [anonymous, anonymous]
+      - [anonymous, anonymous, reports]
+
+  - must_id: "item:A.6.8:reg_channel"
+    description: "Per-row channel used (drives channel-mix analysis — are some channels under-used?)"
+    excerpt_keywords:
+      - [channel]
+      - [channel, used]
+      - [channel, used, channel]
+      - [used]
+      - [used, channel]
+      - [used, channel, mix]
+      - [channel, mix]
+      - [channel, mix, analysis]
+
+  - must_id: "item:A.6.8:reg_report_id"
+    description: "Per-row report identifier (links to A.5.25 triage record where the report was triaged)"
+    excerpt_keywords:
+      - [report, id]
+      - [report, identifier]
+      - [report, identifier, triage]
+      - [identifier]
+      - [identifier, triage]
+      - [identifier, triage, report]
+      - [triage]
+      - [triage, report]
+

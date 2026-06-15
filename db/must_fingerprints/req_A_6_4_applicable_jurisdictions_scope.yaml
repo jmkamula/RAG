@@ -1,0 +1,61 @@
+# Per-MUST fingerprint catalog for req:A.6.4:applicable_jurisdictions_scope
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:A.6.4:applicable_jurisdictions_scope"
+target_control: "A.6.4"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.6.4:scope_legal_review"
+    description: "Legal review path stated (when local employment counsel must be engaged before action — typically all dismissal cases + suspension cases ove"
+    excerpt_keywords:
+      - [legal, review]
+      - [legal]
+      - [legal, review, path]
+      - [review, path]
+      - [review, path, stated]
+      - [path]
+      - [path, stated]
+      - [path, stated, local]
+
+  - must_id: "item:A.6.4:scope_regulator_notify"
+    description: "Regulator-notification triggers per jurisdiction (financial-services FSA notification for serious misconduct, healthcare professional body n"
+    excerpt_keywords:
+      - [regulator, notify]
+      - [regulator]
+      - [notify]
+      - [regulator, notification]
+      - [regulator, notification, triggers]
+      - [notification]
+      - [notification, triggers]
+      - [notification, triggers, jurisdiction]
+
+  - must_id: "item:A.6.4:scope_worker_categories"
+    description: "Worker categories addressed (employees → full process; contractors → contract-based termination; secondees → escalation to home employer)"
+    excerpt_keywords:
+      - [worker, categories]
+      - [worker]
+      - [categories]
+      - [worker, categories, addressed]
+      - [categories, addressed]
+      - [categories, addressed, employees]
+      - [addressed]
+      - [addressed, employees]
+
+  - must_id: "item:A.6.4:scope_jurisdictions"
+    description: "Jurisdictions covered (employment-law variants — at-will US states vs just-cause EU vs notice-period UK — drive process step variations)"
+    excerpt_keywords:
+      - [jurisdictions]
+      - [jurisdictions, covered]
+      - [jurisdictions, covered, employment]
+      - [covered]
+      - [covered, employment]
+      - [covered, employment, law]
+      - [employment]
+      - [employment, law]
+

@@ -1,0 +1,70 @@
+# Per-MUST fingerprint catalog for req:Art.32:risk_appropriate_measures_register
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.32:risk_appropriate_measures_register"
+target_control: "Art.32"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.32:reg_owner"
+    description: "Per-row owner"
+    excerpt_keywords:
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:Art.32:reg_appropriateness"
+    description: "Per-row appropriateness justification (state of art / cost / nature of processing weighted against risk)"
+    excerpt_keywords:
+      - [appropriateness]
+      - [appropriateness, justification]
+      - [appropriateness, justification, state]
+      - [justification]
+      - [justification, state]
+      - [justification, state, art]
+      - [state]
+      - [state, art]
+
+  - must_id: "item:Art.32:reg_measures"
+    description: "Per-row T&O measures applied (pseudonymisation / encryption / CIA / resilience / restoration)"
+    excerpt_keywords:
+      - [measures]
+      - [measures, pseudonymisation]
+      - [measures, pseudonymisation, encryption]
+      - [pseudonymisation]
+      - [pseudonymisation, encryption]
+      - [pseudonymisation, encryption, cia]
+      - [encryption]
+      - [encryption, cia]
+
+  - must_id: "item:Art.32:reg_risk_assessment"
+    description: "Per-row risk-to-rights-and-freedoms assessment (likelihood + severity)"
+    excerpt_keywords:
+      - [risk, assessment]
+      - [risk]
+      - [assessment]
+      - [risk, rights]
+      - [risk, rights, freedoms]
+      - [rights]
+      - [rights, freedoms]
+      - [rights, freedoms, assessment]
+
+  - must_id: "item:Art.32:reg_activity_id"
+    description: "Per-row processing activity (Art.30 RoPA cross-reference)"
+    excerpt_keywords:
+      - [activity, id]
+      - [activity]
+      - [processing]
+      - [processing, activity]
+      - [processing, activity, art]
+      - [activity, art]
+      - [activity, art, ropa]
+      - [art]
+

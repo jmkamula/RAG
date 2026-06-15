@@ -1,0 +1,84 @@
+# Per-MUST fingerprint catalog for req:6.1.2:risk_register
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:6.1.2:risk_register"
+target_control: "6.1.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:6.1.2:reg_last_assessed"
+    description: "Last assessment date per row (drives staleness)"
+    excerpt_keywords:
+      - [last, assessed]
+      - [assessed]
+      - [last, assessment]
+      - [last, assessment, date]
+      - [assessment]
+      - [assessment, date]
+      - [assessment, date, staleness]
+      - [date, staleness]
+
+  - must_id: "item:6.1.2:reg_treatment_status"
+    description: "Treatment status per row (accept / mitigate / transfer / avoid; link to 6.1.3 plan)"
+    excerpt_keywords:
+      - [treatment, status]
+      - [treatment]
+      - [treatment, status, accept]
+      - [status, accept]
+      - [status, accept, mitigate]
+      - [accept]
+      - [accept, mitigate]
+      - [accept, mitigate, transfer]
+
+  - must_id: "item:6.1.2:reg_scoring"
+    description: "Likelihood + consequence scores per row applied per the procedure's criteria"
+    excerpt_keywords:
+      - [scoring]
+      - [likelihood]
+      - [likelihood, consequence]
+      - [likelihood, consequence, scores]
+      - [consequence]
+      - [consequence, scores]
+      - [consequence, scores, criteria]
+      - [scores]
+
+  - must_id: "item:6.1.2:reg_owner"
+    description: "Risk owner per row"
+    excerpt_keywords:
+      - [risk]
+      - [risk, owner]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:6.1.2:reg_description"
+    description: "Risk description per row (asset, threat, vulnerability)"
+    excerpt_keywords:
+      - [description]
+      - [risk]
+      - [risk, description]
+      - [risk, description, asset]
+      - [description, asset]
+      - [description, asset, threat]
+      - [asset]
+      - [asset, threat]
+
+  - must_id: "item:6.1.2:reg_risk_id"
+    description: "Unique risk identifier per row"
+    excerpt_keywords:
+      - [risk, id]
+      - [risk]
+      - [unique, risk]
+      - [unique, risk, identifier]
+      - [risk, identifier]
+      - [identifier]
+      - [per, row]
+      - [each, row]
+

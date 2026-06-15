@@ -1,0 +1,61 @@
+# Per-MUST fingerprint catalog for req:A.6.5:surviving_obligations_scope
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:A.6.5:surviving_obligations_scope"
+target_control: "A.6.5"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.6.5:scope_worker_categories"
+    description: "Worker categories addressed (employees vs contractors vs interns — different obligation scope)"
+    excerpt_keywords:
+      - [worker, categories]
+      - [worker]
+      - [categories]
+      - [worker, categories, addressed]
+      - [categories, addressed]
+      - [categories, addressed, employees]
+      - [addressed]
+      - [addressed, employees]
+
+  - must_id: "item:A.6.5:scope_jurisdictional_limits"
+    description: "Jurisdictional limits on enforceability (US California voids non-compete; EU restricts duration; UK courts test reasonableness)"
+    excerpt_keywords:
+      - [jurisdictional, limits]
+      - [jurisdictional]
+      - [limits]
+      - [jurisdictional, limits, enforceability]
+      - [limits, enforceability]
+      - [limits, enforceability, california]
+      - [enforceability]
+      - [enforceability, california]
+
+  - must_id: "item:A.6.5:scope_role_mapping"
+    description: "Role-to-obligation mapping (executive level may have extended non-compete; standard staff only confidentiality + IP; sales/CSM commonly have"
+    excerpt_keywords:
+      - [role, mapping]
+      - [mapping]
+      - [role, obligation]
+      - [role, obligation, mapping]
+      - [obligation]
+      - [obligation, mapping]
+      - [obligation, mapping, executive]
+      - [mapping, executive]
+
+  - must_id: "item:A.6.5:scope_obligation_catalogue"
+    description: "Obligation catalogue enumerated (confidentiality / IP / non-disparagement / non-poach / non-compete / cooperation-with-investigations)"
+    excerpt_keywords:
+      - [obligation, catalogue]
+      - [obligation]
+      - [catalogue]
+      - [obligation, catalogue, enumerated]
+      - [catalogue, enumerated]
+      - [catalogue, enumerated, confidentiality]
+      - [enumerated]
+      - [enumerated, confidentiality]
+

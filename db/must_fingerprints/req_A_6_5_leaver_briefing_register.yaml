@@ -1,0 +1,85 @@
+# Per-MUST fingerprint catalog for req:A.6.5:leaver_briefing_register
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:A.6.5:leaver_briefing_register"
+target_control: "A.6.5"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.6.5:reg_obligations_covered"
+    description: "Per-row covered obligations list (confidentiality + IP + non-poach + non-compete where applicable per jurisdiction)"
+    excerpt_keywords:
+      - [obligations, covered]
+      - [obligations]
+      - [covered]
+      - [covered, obligations]
+      - [covered, obligations, confidentiality]
+      - [obligations, confidentiality]
+      - [obligations, confidentiality, non]
+      - [confidentiality]
+
+  - must_id: "item:A.6.5:reg_acknowledgment"
+    description: "Per-row signed acknowledgment evidence (digital signature / signed PDF / recorded receipt of intranet artefact)"
+    excerpt_keywords:
+      - [acknowledgment]
+      - [signed]
+      - [signed, acknowledgment]
+      - [signed, acknowledgment, evidence]
+      - [acknowledgment, evidence]
+      - [acknowledgment, evidence, digital]
+      - [evidence]
+      - [evidence, digital]
+
+  - must_id: "item:A.6.5:reg_briefer"
+    description: "Per-row briefer identity (HR partner; line manager joins for role-change cases)"
+    excerpt_keywords:
+      - [briefer]
+      - [briefer, identity]
+      - [briefer, identity, partner]
+      - [identity, partner]
+      - [identity, partner, line]
+      - [partner]
+      - [partner, line]
+      - [partner, line, manager]
+
+  - must_id: "item:A.6.5:reg_briefing_date"
+    description: "Per-row briefing date (typically last working day or shortly after; for role change, at point of role transition)"
+    excerpt_keywords:
+      - [briefing, date]
+      - [briefing]
+      - [briefing, date, typically]
+      - [date, typically]
+      - [date, typically, last]
+      - [typically]
+      - [typically, last]
+      - [typically, last, working]
+
+  - must_id: "item:A.6.5:reg_trigger"
+    description: "Per-row trigger (termination / contract end / role change within org / retirement)"
+    excerpt_keywords:
+      - [trigger, termination]
+      - [trigger, termination, contract]
+      - [termination, contract]
+      - [termination, contract, end]
+      - [contract]
+      - [contract, end]
+      - [contract, end, role]
+      - [end]
+
+  - must_id: "item:A.6.5:reg_leaver_id"
+    description: "Per-row leaver identifier (links to identity register A.5.16; cross-link to A.5.11 return-of-assets record + A.5.16 identity revocation)"
+    excerpt_keywords:
+      - [leaver, id]
+      - [leaver]
+      - [leaver, identifier]
+      - [leaver, identifier, identity]
+      - [identifier]
+      - [identifier, identity]
+      - [identifier, identity, cross]
+      - [identity, cross]
+

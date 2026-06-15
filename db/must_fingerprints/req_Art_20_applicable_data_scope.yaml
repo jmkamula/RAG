@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:Art.20:applicable_data_scope
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.20:applicable_data_scope"
+target_control: "Art.20"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.20:scope_exclusions"
+    description: "Out-of-scope activities (basis legal obligation / vital interests / public task / legitimate interests; manual processing)"
+    excerpt_keywords:
+      - [exclusions]
+      - [out]
+      - [out, scope]
+      - [out, scope, activities]
+      - [scope, activities]
+      - [scope, activities, basis]
+      - [activities]
+      - [activities, basis]
+
+  - must_id: "item:Art.20:scope_data_categorisation"
+    description: "Categorisation rules — what counts as 'provided by' the subject vs derived/observed (EDPB Guidelines WP242 reference)"
+    excerpt_keywords:
+      - [categorisation]
+      - [categorisation, rules]
+      - [categorisation, rules, counts]
+      - [rules]
+      - [rules, counts]
+      - [rules, counts, provided]
+      - [counts]
+      - [counts, provided]
+
+  - must_id: "item:Art.20:scope_in_scope_activities"
+    description: "Art.30 RoPA activities in scope (basis consent / contract AND automated)"
+    excerpt_keywords:
+      - [scope, activities]
+      - [activities]
+      - [art]
+      - [art, ropa]
+      - [art, ropa, activities]
+      - [ropa]
+      - [ropa, activities]
+      - [ropa, activities, scope]
+

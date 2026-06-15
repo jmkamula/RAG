@@ -1,0 +1,72 @@
+# Per-MUST fingerprint catalog for req:7.3:awareness_completion_register
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:7.3:awareness_completion_register"
+target_control: "7.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:7.3:reg_expiry"
+    description: "Expiry / next-due date per row (drives refresher trigger)"
+    excerpt_keywords:
+      - [expiry]
+      - [expiry, next]
+      - [expiry, next, due]
+      - [next]
+      - [next, due]
+      - [next, due, date]
+      - [due]
+      - [due, date]
+
+  - must_id: "item:7.3:reg_acknowledgement"
+    description: "Acknowledgement per row (signed receipt, LMS attestation, quiz pass)"
+    excerpt_keywords:
+      - [acknowledgement]
+      - [acknowledgement, signed]
+      - [acknowledgement, signed, receipt]
+      - [signed]
+      - [signed, receipt]
+      - [signed, receipt, lms]
+      - [receipt]
+      - [receipt, lms]
+
+  - must_id: "item:7.3:reg_completion_date"
+    description: "Completion date per row"
+    excerpt_keywords:
+      - [completion, date]
+      - [completion]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:7.3:reg_module"
+    description: "Module identifier per row (policy module, contribution module, consequences module)"
+    excerpt_keywords:
+      - [identifier]
+      - [identifier, contribution]
+      - [identifier, contribution, consequences]
+      - [contribution]
+      - [contribution, consequences]
+      - [consequences]
+      - [per, row]
+      - [each, row]
+
+  - must_id: "item:7.3:reg_subject_id"
+    description: "Subject identifier per row (employee or contractor)"
+    excerpt_keywords:
+      - [subject, id]
+      - [subject]
+      - [subject, identifier]
+      - [subject, identifier, employee]
+      - [identifier]
+      - [identifier, employee]
+      - [identifier, employee, contractor]
+      - [employee]
+

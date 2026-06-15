@@ -1,0 +1,61 @@
+# Per-MUST fingerprint catalog for req:9.2:audit_cycle_coverage_scope
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:9.2:audit_cycle_coverage_scope"
+target_control: "9.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:9.2:scope_exclusions"
+    description: "Any explicit exclusions with rationale (rare — generally all ISMS processes are in scope)"
+    excerpt_keywords:
+      - [exclusions]
+      - [explicit]
+      - [explicit, exclusions]
+      - [explicit, exclusions, rationale]
+      - [exclusions, rationale]
+      - [exclusions, rationale, rare]
+      - [rationale]
+      - [rationale, rare]
+
+  - must_id: "item:9.2:scope_high_risk"
+    description: "High-risk process audit frequency (annual audit even within longer cycle)"
+    excerpt_keywords:
+      - [high, risk]
+      - [risk]
+      - [high, risk, audit]
+      - [risk, audit]
+      - [risk, audit, frequency]
+      - [audit, frequency]
+      - [audit, frequency, annual]
+      - [frequency]
+
+  - must_id: "item:9.2:scope_rotation"
+    description: "Process-rotation plan (which processes audited each year of the cycle)"
+    excerpt_keywords:
+      - [rotation]
+      - [rotation, plan]
+      - [rotation, plan, processes]
+      - [plan]
+      - [plan, processes]
+      - [plan, processes, audited]
+      - [processes]
+      - [processes, audited]
+
+  - must_id: "item:9.2:scope_cycle_length"
+    description: "Audit cycle length stated (typically 3 years for full ISMS coverage)"
+    excerpt_keywords:
+      - [cycle, length]
+      - [cycle]
+      - [length]
+      - [audit, cycle]
+      - [audit, cycle, length]
+      - [cycle, length, stated]
+      - [length, stated]
+      - [length, stated, typically]
+

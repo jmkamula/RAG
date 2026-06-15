@@ -1,0 +1,103 @@
+# Per-MUST fingerprint catalog for req:6.1.2:risk_assessment
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:6.1.2:risk_assessment"
+target_control: "6.1.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:6.1.2:personal_data"
+    description: "Personal data processing risks explicitly addressed"
+    excerpt_keywords:
+      - [personal]
+      - [personal, processing]
+      - [personal, processing, risks]
+      - [processing]
+      - [processing, risks]
+      - [processing, risks, explicitly]
+      - [risks]
+      - [risks, explicitly]
+
+  - must_id: "item:6.1.2:evaluation"
+    description: "Risks evaluated against acceptance criteria"
+    excerpt_keywords:
+      - [evaluation]
+      - [risks]
+      - [risks, evaluated]
+      - [risks, evaluated, against]
+      - [evaluated]
+      - [evaluated, against]
+      - [evaluated, against, acceptance]
+      - [against]
+
+  - must_id: "item:6.1.2:likelihood"
+    description: "Realistic likelihood assessed"
+    excerpt_keywords:
+      - [likelihood]
+      - [realistic]
+      - [realistic, likelihood]
+      - [realistic, likelihood, assessed]
+      - [likelihood, assessed]
+      - [assessed]
+
+  - must_id: "item:6.1.2:consequences"
+    description: "Potential consequences analysed"
+    excerpt_keywords:
+      - [consequences]
+      - [potential]
+      - [potential, consequences]
+      - [potential, consequences, analysed]
+      - [consequences, analysed]
+      - [analysed]
+
+  - must_id: "item:6.1.2:owners"
+    description: "Risk owners identified"
+    excerpt_keywords:
+      - [owners]
+      - [risk]
+      - [risk, owners]
+      - [risk, owners, identified]
+      - [owners, identified]
+      - [identified]
+
+  - must_id: "item:6.1.2:identification"
+    description: "Risks to confidentiality, integrity and availability identified"
+    excerpt_keywords:
+      - [identification]
+      - [risks]
+      - [risks, confidentiality]
+      - [risks, confidentiality, integrity]
+      - [confidentiality]
+      - [confidentiality, integrity]
+      - [confidentiality, integrity, availability]
+      - [integrity]
+
+  - must_id: "item:6.1.2:consistency"
+    description: "Consistent and comparable results produced"
+    excerpt_keywords:
+      - [consistency]
+      - [consistent]
+      - [consistent, comparable]
+      - [consistent, comparable, results]
+      - [comparable]
+      - [comparable, results]
+      - [comparable, results, produced]
+      - [results]
+
+  - must_id: "item:6.1.2:criteria"
+    description: "Risk acceptance criteria defined"
+    excerpt_keywords:
+      - [criteria]
+      - [risk]
+      - [risk, acceptance]
+      - [risk, acceptance, criteria]
+      - [acceptance]
+      - [acceptance, criteria]
+      - [acceptance, criteria, defined]
+      - [criteria, defined]
+

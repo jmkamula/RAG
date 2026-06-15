@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:Art.28:applicable_processors_scope
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.28:applicable_processors_scope"
+target_control: "Art.28"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.28:scope_exclusions"
+    description: "Out-of-scope vendors (those processing only their own data, intra-group with no GDPR transfer)"
+    excerpt_keywords:
+      - [exclusions]
+      - [out]
+      - [out, scope]
+      - [out, scope, vendors]
+      - [scope, vendors]
+      - [scope, vendors, processing]
+      - [vendors]
+      - [vendors, processing]
+
+  - must_id: "item:Art.28:scope_controller_vs_processor"
+    description: "Controller-vs-processor decision criteria (means & purpose test per EDPB guidelines)"
+    excerpt_keywords:
+      - [controller, vs, processor]
+      - [controller]
+      - [vs]
+      - [processor]
+      - [controller, processor]
+      - [controller, processor, decision]
+      - [processor, decision]
+      - [processor, decision, criteria]
+
+  - must_id: "item:Art.28:scope_processor_types"
+    description: "Processor types in scope (cloud / SaaS providers, payroll, marketing platforms, analytics, support ticketing, etc.)"
+    excerpt_keywords:
+      - [processor, types]
+      - [processor]
+      - [types]
+      - [processor, types, scope]
+      - [types, scope]
+      - [types, scope, cloud]
+      - [scope, cloud]
+      - [scope, cloud, saas]
+

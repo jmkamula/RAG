@@ -1,0 +1,97 @@
+# Per-MUST fingerprint catalog for req:A.6.8:event_reporting_procedure
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:A.6.8:event_reporting_procedure"
+target_control: "A.6.8"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.6.8:owner"
+    description: "Named owner of the procedure (typically InfoSec on-call with HR + Legal partners for sensitive cases)"
+    excerpt_keywords:
+      - [named, owner]
+      - [named, owner, typically]
+      - [owner, typically]
+      - [owner, typically, infosec]
+      - [typically]
+      - [typically, infosec]
+      - [typically, infosec, call]
+      - [infosec]
+
+  - must_id: "item:A.6.8:handoff_to_triage"
+    description: "Handoff to triage process (A.5.25 assessment-and-decision) on receipt — drives traceability from report through to closure"
+    excerpt_keywords:
+      - [handoff, triage]
+      - [handoff]
+      - [triage]
+      - [handoff, triage, assessment]
+      - [triage, assessment]
+      - [triage, assessment, decision]
+      - [assessment]
+      - [assessment, decision]
+
+  - must_id: "item:A.6.8:no_blame"
+    description: "No-blame / non-retaliation statement encourages honest reporting (drives reporting culture; under-reporting is the #1 risk for incident prog"
+    excerpt_keywords:
+      - [no, blame]
+      - [blame]
+      - [blame, non]
+      - [blame, non, retaliation]
+      - [non, retaliation]
+      - [non, retaliation, statement]
+      - [retaliation]
+      - [retaliation, statement]
+
+  - must_id: "item:A.6.8:timeliness"
+    description: "Timeliness expectation (e.g"
+    excerpt_keywords:
+      - [timeliness]
+      - [timeliness, expectation]
+      - [timeliness, expectation, soon]
+      - [expectation]
+      - [expectation, soon]
+      - [expectation, soon, practicable]
+      - [soon]
+      - [soon, practicable]
+
+  - must_id: "item:A.6.8:what_to_report"
+    description: "What to report — observed events, suspected events, near-misses (no judgement required at reporting stage; over-reporting is preferred to un"
+    excerpt_keywords:
+      - [report, observed]
+      - [report, observed, events]
+      - [observed]
+      - [observed, events]
+      - [observed, events, suspected]
+      - [events]
+      - [events, suspected]
+      - [events, suspected, events]
+
+  - must_id: "item:A.6.8:audience"
+    description: "Procedure addresses all personnel (employees, contractors, third parties with access)"
+    excerpt_keywords:
+      - [audience]
+      - [addresses]
+      - [addresses, personnel]
+      - [addresses, personnel, employees]
+      - [personnel]
+      - [personnel, employees]
+      - [personnel, employees, contractors]
+      - [employees]
+
+  - must_id: "item:A.6.8:channels"
+    description: "Multiple reporting channels offered (email, hotline, portal, manager, ticket system) — drives discoverability and accessibility under variou"
+    excerpt_keywords:
+      - [channels]
+      - [multiple]
+      - [multiple, reporting]
+      - [multiple, reporting, channels]
+      - [reporting]
+      - [reporting, channels]
+      - [reporting, channels, offered]
+      - [channels, offered]
+

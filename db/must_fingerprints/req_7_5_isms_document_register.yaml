@@ -1,0 +1,95 @@
+# Per-MUST fingerprint catalog for req:7.5:isms_document_register
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:7.5:isms_document_register"
+target_control: "7.5"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:7.5:reg_classification"
+    description: "Information classification per row (cross-link to A.5.12)"
+    excerpt_keywords:
+      - [classification]
+      - [classification, cross]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:7.5:reg_next_review"
+    description: "Next review date per row (drives staleness alerts)"
+    excerpt_keywords:
+      - [next, review]
+      - [next]
+      - [next, review, date]
+      - [review, date]
+      - [review, date, staleness]
+      - [date, staleness]
+      - [date, staleness, alerts]
+      - [staleness]
+
+  - must_id: "item:7.5:reg_approval_date"
+    description: "Last approval date per row"
+    excerpt_keywords:
+      - [approval, date]
+      - [approval]
+      - [last, approval]
+      - [last, approval, date]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+
+  - must_id: "item:7.5:reg_version"
+    description: "Current version per row"
+    excerpt_keywords:
+      - [version]
+      - [current]
+      - [current, version]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:7.5:reg_owner"
+    description: "Document owner per row"
+    excerpt_keywords:
+      - [document]
+      - [document, owner]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:7.5:reg_title"
+    description: "Document title per row"
+    excerpt_keywords:
+      - [title]
+      - [document]
+      - [document, title]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:7.5:reg_doc_id"
+    description: "Unique document identifier per row"
+    excerpt_keywords:
+      - [doc, id]
+      - [doc]
+      - [unique, document]
+      - [unique, document, identifier]
+      - [document]
+      - [document, identifier]
+      - [identifier]
+      - [per, row]
+

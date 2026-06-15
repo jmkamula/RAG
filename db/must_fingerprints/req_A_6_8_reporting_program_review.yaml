@@ -1,0 +1,97 @@
+# Per-MUST fingerprint catalog for req:A.6.8:reporting_program_review
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:A.6.8:reporting_program_review"
+target_control: "A.6.8"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.6.8:rev_register_update"
+    description: "Changes propagated to the procedure / scope with reference to this review"
+    excerpt_keywords:
+      - [update]
+      - [changes]
+      - [changes, propagated]
+      - [changes, propagated, scope]
+      - [propagated]
+      - [propagated, scope]
+      - [propagated, scope, reference]
+      - [scope, reference]
+
+  - must_id: "item:A.6.8:rev_acknowledgment_rate"
+    description: "Acknowledgment rate to reporters (where reporter known) — drives reporter satisfaction and ongoing willingness to report"
+    excerpt_keywords:
+      - [acknowledgment, rate]
+      - [acknowledgment]
+      - [rate]
+      - [acknowledgment, rate, reporters]
+      - [rate, reporters]
+      - [rate, reporters, reporter]
+      - [reporters]
+      - [reporters, reporter]
+
+  - must_id: "item:A.6.8:rev_triage_handoff"
+    description: "Triage handoff check — every report reached A.5.25 triage; no reports lost in the handoff; cycle time from report to triage measured"
+    excerpt_keywords:
+      - [triage, handoff]
+      - [triage]
+      - [handoff]
+      - [triage, handoff, check]
+      - [handoff, check]
+      - [handoff, check, every]
+      - [check]
+      - [check, every]
+
+  - must_id: "item:A.6.8:rev_channel_mix"
+    description: "Channel-mix analysis (which channels are being used; under-used channels may need awareness promotion or retirement)"
+    excerpt_keywords:
+      - [channel, mix]
+      - [channel]
+      - [mix]
+      - [channel, mix, analysis]
+      - [mix, analysis]
+      - [mix, analysis, channels]
+      - [analysis]
+      - [analysis, channels]
+
+  - must_id: "item:A.6.8:rev_volume_trend"
+    description: "Volume trend analysis (report rate per segment — sudden drops may indicate under-reporting; sudden spikes may indicate a campaign or a known"
+    excerpt_keywords:
+      - [volume, trend]
+      - [volume]
+      - [trend]
+      - [volume, trend, analysis]
+      - [trend, analysis]
+      - [trend, analysis, report]
+      - [analysis]
+      - [analysis, report]
+
+  - must_id: "item:A.6.8:rev_reviewer"
+    description: "Reviewer identity (InfoSec lead + HR partner; Legal for whistleblower-territory cases)"
+    excerpt_keywords:
+      - [reviewer, identity]
+      - [reviewer, identity, infosec]
+      - [identity, infosec]
+      - [identity, infosec, lead]
+      - [infosec]
+      - [infosec, lead]
+      - [infosec, lead, partner]
+      - [lead]
+
+  - must_id: "item:A.6.8:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date]
+      - [review, date, within]
+      - [date, within]
+      - [date, within, planned]
+      - [within]
+      - [within, planned]
+      - [within, planned, interval]
+      - [planned]
+

@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:Art.37:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.37:applicable_scope"
+target_control: "Art.37"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.37:scope_voluntary_assessment"
+    description: "Voluntary-designation assessment — even when not mandatory, did the org choose to designate (rationale recorded)"
+    excerpt_keywords:
+      - [voluntary, assessment]
+      - [voluntary]
+      - [assessment]
+      - [voluntary, designation]
+      - [voluntary, designation, assessment]
+      - [designation]
+      - [designation, assessment]
+      - [designation, assessment, even]
+
+  - must_id: "item:Art.37:scope_ms_law_overlay"
+    description: "MS law overlay — Art.37.4 second sentence (MS may require designation in additional cases)"
+    excerpt_keywords:
+      - [ms, law, overlay]
+      - [ms]
+      - [law]
+      - [overlay]
+      - [law, overlay]
+      - [law, overlay, art]
+      - [overlay, art]
+      - [overlay, art, second]
+
+  - must_id: "item:Art.37:scope_criteria_test"
+    description: "Art.37.1 criteria test operationalised (a public authority / b core activities = systematic monitoring large-scale / c core activities = lar"
+    excerpt_keywords:
+      - [criteria, test]
+      - [criteria]
+      - [test]
+      - [art]
+      - [art, criteria]
+      - [art, criteria, test]
+      - [criteria, test, operationalised]
+      - [test, operationalised]
+

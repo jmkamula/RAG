@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:Art.32:resilience_test
+# Auto-generated skeleton — review and tighten before commit.
+#
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.32:resilience_test"
+target_control: "Art.32"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.32:resilience_test_findings"
+    description: "Findings recorded and remediated or accepted"
+    excerpt_keywords:
+      - [resilience, test, findings]
+      - [resilience]
+      - [test]
+      - [findings]
+      - [findings, recorded]
+      - [findings, recorded, remediated]
+      - [recorded]
+      - [recorded, remediated]
+
+  - must_id: "item:Art.32:resilience_test_recent"
+    description: "Test executed within the freshness window (last 12 months)"
+    excerpt_keywords:
+      - [resilience, test, recent]
+      - [resilience]
+      - [test]
+      - [recent]
+      - [test, executed]
+      - [test, executed, within]
+      - [executed]
+      - [executed, within]
+
+  - must_id: "item:Art.32:resilience_test_scope"
+    description: "Test scope covers confidentiality, integrity, availability and resilience"
+    excerpt_keywords:
+      - [resilience, test, scope]
+      - [resilience]
+      - [test]
+      - [test, scope]
+      - [test, scope, confidentiality]
+      - [scope, confidentiality]
+      - [scope, confidentiality, integrity]
+      - [confidentiality]
+
