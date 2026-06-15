@@ -120,6 +120,10 @@ class IntakeTracer:
             # schema_v37 — doc_mappings match count (0 means fallback to
             # legacy _scope_controls; surface via /admin/intake/unmatched-patterns)
             "doc_mappings_match_count",
+            # schema_v41 — doc-shape filter signals
+            #   dropped_questionnaire (from 2026-06-12 filter)
+            #   skipped_as_toc        (from 2026-06-15 filter)
+            "dropped_questionnaire", "skipped_as_toc",
         }
         for k, v in metrics.items():
             if k in allowed:
@@ -372,6 +376,9 @@ class DocumentPipeline:
                 candidate_controls   = doc.extraction_metrics.get("candidate_controls"),
                 primary_candidate_controls = doc.extraction_metrics.get("primary_candidate_controls"),
                 doc_mappings_match_count = doc.extraction_metrics.get("doc_mappings_match_count"),
+                # schema_v41 — doc-shape filter signals
+                dropped_questionnaire = doc.extraction_metrics.get("dropped_questionnaire"),
+                skipped_as_toc        = doc.extraction_metrics.get("skipped_as_toc"),
             )
 
             logger.info(f"Extracted {len(findings)} findings from {file_name}")

@@ -3015,11 +3015,38 @@ def _extraction_quality_flag(row: dict) -> tuple[str, str]:
     md_chars = row.get("markdown_chars") or 0
     para_chars = row.get("paragraph_chars") or 0
     llm_calls = row.get("llm_calls") or 0
+    # schema_v41 — doc-shape filter signals
+    toc_reason  = row.get("skipped_as_toc")
+    questionnaire = row.get("dropped_questionnaire") or 0
 
+    # Per-doc binding rate (joined in admin_uploads_quality). When non-NULL
+    # these are the count of active findings on the corresponding
+    # client_documents row (matched via sha256). bound_findings is the
+    # subset with checklist_item_id != NULL — the only findings that can
+    # feed the engine post Phase-1 retirement.
+    active_findings = row.get("active_findings")
+    bound_findings  = row.get("bound_findings")
+
+    # TOC skip — the filter prevented LLM calls entirely. RED because the
+    # upload is wasted: no findings will ever come from it. Operator action
+    # is to remove from active queue or re-upload as an actual policy.
+    if toc_reason:
+        return "red", f"skipped as TOC ({toc_reason})"
     if candidates > 0 and findings == 0:
         return "red", f"0 findings from {candidates} scoped controls"
+    # Questionnaire dominance — when most LLM output got dropped as
+    # per-question shape, the kept findings are residual descriptive
+    # passages. Worth flagging even when yield ratio looks normal.
+    if questionnaire > 0 and questionnaire >= max(findings, 1) * 2:
+        return "yellow", f"questionnaire drops dominate ({questionnaire} dropped vs {findings} kept)"
     if halluc > findings and findings >= 0:
         return "yellow", f"hallucinated > kept ({halluc} > {findings})"
+    # Inert findings — all active findings unbound (no checklist_item_id).
+    # Post Phase-1 retirement (2026-06-13) these can't feed the engine,
+    # so the upload's evidence value is purely audit-trail. Worth flagging
+    # so the operator can see which uploads aren't influencing posture.
+    if active_findings is not None and active_findings > 0 and (bound_findings or 0) == 0:
+        return "yellow", f"all {active_findings} findings unbound (no checklist_item_id)"
     if candidates > 0 and findings * 5 < candidates:
         return "yellow", f"yield ratio < 20% ({findings}/{candidates})"
     if md_chars > para_chars * 3 and md_chars > 2000 and llm_calls < max(1, md_chars // 50000):
@@ -3056,10 +3083,29 @@ async def admin_uploads_quality(
                     itl.candidate_controls, itl.primary_candidate_controls,
                     itl.dropped_low_conf, itl.dropped_short_quote,
                     itl.dropped_hallucinated, itl.dropped_unknown_ref,
+                    itl.dropped_questionnaire, itl.skipped_as_toc,
                     itl.markdown_chars, itl.paragraph_chars,
-                    itl.total_ms, itl.extraction_path
+                    itl.total_ms, itl.extraction_path,
+                    df_agg.active_findings, df_agg.bound_findings
                 FROM intake_trace_log itl
                 LEFT JOIN document_uploads du ON du.id::text = itl.upload_id
+                -- Bridge to client_documents via sha256 + tenant (no direct FK).
+                -- Then aggregate active vs per-MUST-bound finding counts so the
+                -- quality flag can detect inert-output uploads (findings exist
+                -- but none have checklist_item_id → can't feed engine).
+                LEFT JOIN client_documents cd
+                  ON cd.checksum_sha256 = du.sha256
+                 AND cd.tenant_id       = du.tenant_id
+                LEFT JOIN LATERAL (
+                    SELECT
+                        COUNT(*) FILTER (WHERE df.is_active = TRUE) AS active_findings,
+                        COUNT(*) FILTER (
+                            WHERE df.is_active = TRUE
+                              AND df.checklist_item_id IS NOT NULL
+                        ) AS bound_findings
+                    FROM document_findings df
+                    WHERE df.document_id = cd.id
+                ) df_agg ON TRUE
                 WHERE itl.tenant_id = %s::uuid
                   AND itl.stage    = 'extract'
                 ORDER BY itl.traced_at DESC
@@ -3092,7 +3138,11 @@ async def admin_uploads_quality(
                     "short_quote":      r["dropped_short_quote"],
                     "hallucinated":     r["dropped_hallucinated"],
                     "unknown_ref":      r["dropped_unknown_ref"],
+                    "questionnaire":    r["dropped_questionnaire"],
                 },
+                "skipped_as_toc":   r["skipped_as_toc"],
+                "active_findings":  r["active_findings"],
+                "bound_findings":   r["bound_findings"],
                 "markdown_chars":   r["markdown_chars"],
                 "paragraph_chars":  r["paragraph_chars"],
                 "total_ms":         r["total_ms"],
