@@ -150,14 +150,24 @@ missing and what to upload". All three surfaces emit the same
 information in their native shape; any catalog/MUST change
 propagates to all three automatically.
 
-## Future surface still on backlog
+## Hybrid template loop (extended 2026-06-15)
 
-3. **Document templates per evidence_type** — pre-built starter
-   register / procedure that the tenant fills in, with MUST
-   descriptions as section headings. Captured in
-   `[[curation-document-templates-idea]]` — would reuse
-   `build_per_must_advisory_data()` to determine sections to
-   include per leaf.
+The advisory data is now both **read-only display** AND **writeable
+form input**. See `[[templates-hybrid-2026-06-15]]` — shipped
+2026-06-15 as Phase A+B+C:
+
+  - **A**: `POST /api/v1/dashboard/control/{ref}/template` writes
+    per-MUST `document_findings` rows (`checklist_item_id` set,
+    `inference_source='form'`)
+  - **B**: dashboard UI textareas per missing MUST + Save button
+    triggers live advisory re-render
+  - **C**: `GET .../template/document` downloads a markdown doc
+    with MUST descriptions as section headings + tenant text as
+    bodies + visible "(not yet filled in)" placeholders
+
+The form save and doc generate read/write the SAME
+`document_findings` rows — no draft table, no separate storage.
+The per-MUST binding IS the storage.
 
 ## Eval lock
 
