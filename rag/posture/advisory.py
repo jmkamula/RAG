@@ -265,6 +265,18 @@ def build_per_must_advisory_data(
     for leaf in verdict.leaves:
         unrec = list(leaf.items_unrecognised or [])
         rec   = list(leaf.items_recognised or [])
+        unrec_ids = list(leaf.item_ids_unrecognised or [])
+        rec_ids   = list(leaf.item_ids_recognised   or [])
+        # Pair (id, text) so the form surface can bind inputs to MUST IDs.
+        # `items_*` arrays kept text-only for backwards compat (chat
+        # markdown renderer + existing eval cases). `must_items` is the
+        # canonical pair list — UI consumes that for the form.
+        must_items: list[dict] = []
+        for _id, _t in zip(rec_ids, rec):
+            must_items.append({"id": _id, "text": _t, "satisfied": True})
+        for _id, _t in zip(unrec_ids, unrec):
+            must_items.append({"id": _id, "text": _t, "satisfied": False})
+
         if not unrec:
             # Fully satisfied — include in output so UI shows the ✓ row,
             # but no upload hint needed.
@@ -278,6 +290,7 @@ def build_per_must_advisory_data(
                 "n_total":             len(rec),
                 "items_have":          list(rec),
                 "items_missing":       [],
+                "must_items":          must_items,
                 "upload_hint":         "",
             })
             continue
@@ -292,6 +305,7 @@ def build_per_must_advisory_data(
             "n_total":             len(rec) + len(unrec),
             "items_have":          list(rec),
             "items_missing":       list(unrec),
+            "must_items":          must_items,
             "upload_hint":         _hint_for(leaf.evidence_type),
         })
 

@@ -124,6 +124,12 @@ class LeafVerdict:
     reason:             str                   # one-line rationale for display
     items_recognised:   list[str] = field(default_factory=list)
     items_unrecognised: list[str] = field(default_factory=list)
+    # Parallel ID arrays — same order as items_recognised / items_unrecognised.
+    # Populated by GenericLeafEvaluator from must_item_ids. Consumed by the
+    # per-MUST advisory form (advisory.py + UI) to bind tenant-entered text
+    # to specific checklist_item_ids on save.
+    item_ids_recognised:   list[str] = field(default_factory=list)
+    item_ids_unrecognised: list[str] = field(default_factory=list)
 
     @property
     def counts_as_comply(self) -> bool:

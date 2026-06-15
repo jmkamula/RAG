@@ -78,6 +78,11 @@ class GenericLeafEvaluator:
         # 3. Determine satisfied + freshness
         items_recognised   = [must_item_texts[i] for i in must_item_ids if i in recognised_ids]
         items_unrecognised = [must_item_texts[i] for i in must_item_ids if i not in recognised_ids]
+        # Parallel ID arrays — same order as the text arrays so consumers
+        # can pair (id, text) safely. Used by per-MUST advisory form to
+        # bind tenant inputs to specific checklist_item_ids.
+        item_ids_recognised   = [i for i in must_item_ids if i in recognised_ids]
+        item_ids_unrecognised = [i for i in must_item_ids if i not in recognised_ids]
         satisfied          = len(items_unrecognised) == 0
 
         fresh, freshness_reason = self._check_freshness(
@@ -97,6 +102,8 @@ class GenericLeafEvaluator:
             reason             = reason,
             items_recognised   = items_recognised,
             items_unrecognised = items_unrecognised,
+            item_ids_recognised   = item_ids_recognised,
+            item_ids_unrecognised = item_ids_unrecognised,
         )
 
     # ── Neo4j: fetch MUST checklist items for a leaf ──────────────────────────
