@@ -1,6 +1,6 @@
 ---
 name: per-must-advisory-2026-06-14
-description: "SHIPPED 2026-06-14 (20a641c): per-MUST chat-side advisory appendix. Deterministic compose from evaluate_one_control() per-leaf items_recognised/unrecognised + upload-hint templates per evidence_type + source label per standard. Hooks rank_and_answer for POSTURE_CHECK or CROSS_FRAMEWORK intent with single control in intent.cited_refs. Locked by eval case 199."
+description: "SHIPPED 2026-06-14 chat (20a641c) + 2026-06-15 dashboard endpoint (20ecd18): per-MUST advisory data path. Deterministic compose from evaluate_one_control() per-leaf items_recognised/unrecognised + upload-hint templates per evidence_type + source label per standard. Chat surface hooks rank_and_answer for POSTURE_CHECK/CROSS_FRAMEWORK with single control in intent.cited_refs (locked by eval #199). Dashboard endpoint GET /api/v1/dashboard/control/{control_ref}/advisory returns structured JSON (auto-infers standard_id from prefix)."
 metadata: 
   node_type: memory
   type: project
@@ -111,21 +111,39 @@ cached on the module (`_DRIVER` module-level var).
   preferring `intent.cited_refs` (classifier-extracted, reflects
   the user's literal mention) over `result.cited_refs`.
 
-## Same data, future surfaces
+## Two surfaces sharing one data path
 
-`build_per_must_advisory` is the data path for three downstream
-surfaces:
+`build_per_must_advisory_data(pg, tenant_id, control_ref,
+standard_id, neo4j_driver=None)` is the canonical data builder.
+Returns dict (or None) with shape documented in the source file.
+Two renderers consume it:
 
-1. Chat (shipped today)
-2. **Per-control dashboard drill-in card** — same function, render
-   as HTML/JSX checklist with ✓/✗ per MUST
+1. **Chat appendix** (shipped 2026-06-14, 20a641c).
+   `build_per_must_advisory()` → `_render_advisory_markdown(data)`
+   → markdown string. Hook in `arion_graph.py:make_retrieve_node`
+   after `rank_and_answer`. Locked by eval #199.
+
+2. **Dashboard drill-in endpoint** (shipped 2026-06-15, 20ecd18).
+   `GET /api/v1/dashboard/control/{control_ref}/advisory` →
+   structured JSON. UI consumes for per-leaf cards with ✓/✗
+   icons. Auto-infers standard_id from control_ref prefix
+   (`Art.*` → GDPR, default → ISO 27001:2022). Override via
+   `?standard_id=...` query param. Returns `advisory: null`
+   when no advisory warranted.
+
+The data builder is the single source of truth for "what's
+missing and what to upload". Both surfaces emit the same
+information in their native shape; any catalog/MUST change
+propagates to both automatically.
+
+## Future surface still on backlog
+
 3. **Document templates per evidence_type** — pre-built starter
    register / procedure that the tenant fills in, with MUST
-   descriptions as section headings
-
-Items 2 and 3 are in `[[curation-document-templates-idea]]`
-backlog — both reuse `build_per_must_advisory`'s output as their
-data source, so they're additive not duplicative.
+   descriptions as section headings. Captured in
+   `[[curation-document-templates-idea]]` — would reuse
+   `build_per_must_advisory_data()` to determine sections to
+   include per leaf.
 
 ## Eval lock
 
