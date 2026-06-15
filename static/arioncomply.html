@@ -773,6 +773,20 @@ async function selectHeatCell(c, ev) {
          <div style="margin-top:8px;font-size:11px;color:#9C9A8E">No derivation tree available for this control.</div>`;
     }
   }
+
+  // ── "How to advance" advisory panel ────────────────────────────────────
+  // Fetched after the verdict tree (parallel would be cleaner but we want
+  // the tree to render first so the user doesn't see a flash of empty
+  // state on the slower of the two calls). Appends below the tree.
+  try {
+    const adv = await api(`/api/v1/dashboard/control/${encodeURIComponent(c.control_ref)}/advisory`);
+    if (selected !== null && selected.control_ref === c.control_ref && adv.advisory) {
+      const dp = document.getElementById('dp-gap');
+      if (dp) dp.insertAdjacentHTML('beforeend', renderAdvisoryPanel(adv.advisory));
+    }
+  } catch (e) {
+    // Silent: advisory is supplementary; never block the existing tree.
+  }
 }
 
 function configureDashboardActions(c) {
@@ -1109,6 +1123,73 @@ async function selectStage1(c, ev) {
     document.getElementById('dp-gap').textContent = `Error: ${e.message}`;
   }
 }
+
+// ─── "How to advance" advisory panel renderer ────────────────────────────
+// Consumes structured data from /api/v1/dashboard/control/{ref}/advisory.
+// Same data path as the chat per-MUST advisory; this is the dashboard
+// surface. See memory [[per-must-advisory-2026-06-14]].
+function renderAdvisoryPanel(adv) {
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');
+  if (!adv) return '';
+
+  const summary = `currently ${esc(adv.posture)}; ${adv.n_satisfied} of ${adv.n_leaves} leaves satisfied, ${adv.n_partial} partial`;
+
+  // Skip leaves that are fully satisfied — advisory is about what's
+  // missing, not what's covered.
+  const unmet = (adv.leaves || []).filter(l => !l.satisfied);
+  if (!unmet.length) return '';
+
+  let body = '';
+  for (const l of unmet) {
+    const have = (l.items_have || []);
+    const missing = (l.items_missing || []);
+
+    body += `<div style="margin-top:10px;padding:10px 12px;background:#fff;border:1px solid #E8E5DA;border-radius:5px">
+      <div style="font-size:11px;color:#3A382E;font-weight:600">
+        <span style="color:#9C6F1B">◐</span>
+        ${esc(l.leaf_label)}
+        <span style="color:#9C9A8E;font-weight:400"> · ${esc(l.evidence_type_label)} · ${l.n_have}/${l.n_total} elements covered</span>
+      </div>`;
+
+    if (have.length) {
+      body += `<div style="margin-top:6px;font-size:11px;color:#2F8F4D">
+        <strong style="color:#3A382E;font-weight:600">Have:</strong>
+        <ul style="margin:4px 0 0 18px;padding:0">`;
+      for (const t of have) {
+        body += `<li style="color:#2F8F4D">${esc(t)}</li>`;
+      }
+      body += `</ul></div>`;
+    }
+
+    if (missing.length) {
+      body += `<div style="margin-top:6px;font-size:11px">
+        <strong style="color:#3A382E;font-weight:600">Still needed:</strong>
+        <ul style="margin:4px 0 0 18px;padding:0;color:#9C2E2E">`;
+      for (const t of missing) {
+        body += `<li>${esc(t)}</li>`;
+      }
+      body += `</ul></div>`;
+    }
+
+    if (l.upload_hint) {
+      body += `<div style="margin-top:8px;padding:6px 8px;background:#FAF8F2;border-left:3px solid #9C6F1B;font-size:11px;color:#3A382E">
+        <strong>To address:</strong> ${esc(l.upload_hint)}
+      </div>`;
+    }
+
+    body += `</div>`;
+  }
+
+  return `<div style="margin-top:16px;padding-top:12px;border-top:1px dashed #C8C5B8">
+    <div style="font-size:12px;color:#3A382E;font-weight:600">
+      ↳ How to advance ${esc(adv.control_ref)}
+    </div>
+    <div style="font-size:11px;color:#9C9A8E;margin-top:2px">${esc(summary)}</div>
+    ${body}
+    <div style="margin-top:10px;font-size:10px;color:#9C9A8E;font-style:italic">${esc(adv.source || '')}</div>
+  </div>`;
+}
+
 
 // ─── Shared engine verdict tree renderer ─────────────────────────────────
 // Renders the composition tree produced by /api/v1/stage2/queue/{ref}.
