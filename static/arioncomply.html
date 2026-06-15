@@ -1205,11 +1205,19 @@ function renderAdvisoryPanel(adv) {
         </div>
         <div style="font-size:11px;color:#9C9A8E;margin-top:2px">${esc(summary)}</div>
       </div>
-      <button onclick="saveAdvisoryForm(this)"
-              style="font-size:11px;padding:6px 12px;background:#3A382E;color:#fff;border:none;
-                     border-radius:4px;cursor:pointer;font-family:inherit">
-        Save evidence
-      </button>
+      <div style="display:flex;gap:6px">
+        <button onclick="downloadAdvisoryDoc()"
+                title="Download a markdown template combining your filled MUSTs (auditor-readable)"
+                style="font-size:11px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #E8E5DA;
+                       border-radius:4px;cursor:pointer;font-family:inherit">
+          Download .md
+        </button>
+        <button onclick="saveAdvisoryForm(this)"
+                style="font-size:11px;padding:6px 12px;background:#3A382E;color:#fff;border:none;
+                       border-radius:4px;cursor:pointer;font-family:inherit">
+          Save evidence
+        </button>
+      </div>
     </div>
     ${body}
     <div style="margin-top:10px;font-size:10px;color:#9C9A8E;font-style:italic">${esc(adv.source || '')}</div>
@@ -1220,6 +1228,43 @@ function renderAdvisoryPanel(adv) {
 // Form save handler — collects all non-empty textareas in the advisory
 // panel, POSTs to the template endpoint, then refetches+rerenders the
 // advisory so n/M counts update live ("2/7 → 3/7" feedback).
+// Download the form-authored evidence as a markdown template document.
+// Hits GET /api/v1/dashboard/control/{ref}/template/document. The
+// server renders MUST descriptions as section headings + tenant input
+// as bodies + "(not yet filled in)" placeholders for unfilled MUSTs.
+function downloadAdvisoryDoc() {
+  const panel = document.getElementById('advisory-panel');
+  if (!panel) return;
+  const controlRef = panel.dataset.control;
+  const standardId = panel.dataset.standard || '';
+  // Browser-native download — fetch as blob, save with the server's
+  // Content-Disposition filename.
+  fetch(API_URL + `/api/v1/dashboard/control/${encodeURIComponent(controlRef)}/template/document?standard_id=${encodeURIComponent(standardId)}`, {
+    headers: {'X-API-Key': API_KEY},
+  })
+  .then(r => {
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const cd = r.headers.get('Content-Disposition') || '';
+    const m = cd.match(/filename="?([^"]+)"?/);
+    const fname = m ? m[1] : `template_${controlRef.replace(/\./g,'_')}.md`;
+    return r.blob().then(b => ({blob: b, fname}));
+  })
+  .then(({blob, fname}) => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = fname;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    const s = document.getElementById('advisory-save-status');
+    if (s) s.textContent = `Downloaded ${fname}.`;
+  })
+  .catch(e => {
+    const s = document.getElementById('advisory-save-status');
+    if (s) s.textContent = `Download failed: ${e.message}`;
+  });
+}
+
 async function saveAdvisoryForm(btn) {
   const panel = document.getElementById('advisory-panel');
   if (!panel) return;

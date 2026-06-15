@@ -2810,6 +2810,69 @@ async def dashboard_control_advisory(
         pool.putconn(conn)
 
 
+@app.get("/api/v1/dashboard/control/{control_ref}/template/document", tags=["posture"])
+async def dashboard_control_template_document(
+    control_ref: str,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("posture")),
+    leaf:        Optional[str] = None,
+    standard_id: Optional[str] = None,
+    format:      Optional[str] = "md",
+):
+    """Generate a downloadable template document from form-authored
+    evidence for a control (or a single leaf).
+
+    Query params:
+      - leaf:        optional leaf_id (e.g. req:A.5.15:access_control_policy).
+                     If omitted, generates a combined document with one
+                     section per leaf.
+      - standard_id: optional, auto-inferred from control_ref prefix.
+      - format:      'md' (default). Future: 'docx'.
+
+    MUST headings come from Neo4j ChecklistItem.text; section bodies
+    come from form-authored document_findings rows. Missing MUSTs render
+    as "_(not yet filled in)_" placeholders so the auditor can see
+    what's still pending vs filled.
+
+    Returns the document as an attachment download.
+    """
+    if not standard_id:
+        standard_id = "GDPR:2016/679" if control_ref.startswith("Art.") else "ISO27001:2022"
+    fmt = (format or "md").lower()
+    if fmt not in ("md",):
+        raise HTTPException(status_code=400, detail=f"Unsupported format: {fmt}")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        from rag.posture.template_document import build_template_document
+        doc = build_template_document(
+            pg_conn      = conn,
+            tenant_id    = key_info.tenant_id,
+            control_ref  = control_ref,
+            standard_id  = standard_id,
+            leaf_id      = leaf,
+        )
+    finally:
+        pool.putconn(conn)
+
+    if doc is None:
+        raise HTTPException(
+            status_code=404,
+            detail="No template available for this control/leaf (no curated MUSTs found).",
+        )
+
+    from fastapi.responses import Response
+    return Response(
+        content=doc["content"],
+        media_type=doc["mime_type"],
+        headers={
+            "Content-Disposition": f'attachment; filename="{doc["filename"]}"',
+        },
+    )
+
+
 @app.get("/api/v1/posture/{control_ref}", tags=["posture"])
 async def posture_control(
     control_ref: str,
