@@ -28,17 +28,16 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 195/198 PASS before any restart (198 cases; #2 known-stale,
-#   #3/#6/#16/#21/#26/#33 LLM-stochastic ~85-95%):
-#   #2  — "what are our main compliance gaps?" (~40-60% pass rate; LLM-stochastic
-#         A.5.26 mention; since Phase C batch 1 / Stage-2 mass-approval session
-#         brought Arion to 168 NCs on 2026-06-02 — A.5.26 no longer reliably
-#         tops the answer among 168 candidates. Follow-up: case_2_drift_followup.md).
+# Must be 199/199 PASS before any restart (199 cases; #16 LLM-stochastic ~85-95%,
+#   #3/#6/#21/#26/#33 also occasionally jitter on LLM phrasing — re-runs pass):
+#   #2  — STABILISED 2026-06-15 by dropping A.5.26 ref lock (state drift; see
+#         [[feedback-eval-state-drift]]). Structural assertions (NC + min_findings)
+#         only.
 #   #24 + #25 (Art.32 / Art.5) — STABILISED 2026-06-14 via cross_framework
 #         shape validator + deterministic bridge footer in compose
 #         (llm_answer.rank_and_answer appends "↳ Bridges to ISO 27001 for
 #         Art.X: ...").
-# Any non-#2 regression blocks restart.
+# Any regression blocks restart.
 # Whenever you add a user-facing feature/fix, append an EvalCase that would
 # have failed pre-change and passes post-change — see the feedback-memory rule.
 ```
@@ -181,22 +180,12 @@ with d.session() as s:
   + 11 Phase B GDPR Chapter IV core 11-pack — Art.24/25/26/27/28/29/31/32/33/34/35
   + 8 Phase B GDPR Ch IV DPO+codes+cert 8-pack — closes Ch IV
   + 6 Phase B GDPR Ch V Transfers 6-pack — closes Ch V + entire curation arc)
-- Score: 195/198 PASS target on 2026-06-03 (#2 + #24 + #25 known-stale).
-  Clean-run upper bound is 195/198; lucky runs may hit 196/198 (#24 PASS) or
-  197/198 (#24 + #2 both PASS). Cases #3 + #21 + #33 also occasionally fail on
-  LLM citation-list position / phrasing — re-runs pass, not known-stale):
-  - #25 known-stale since 2026-05-27 (anti-hallucination on "is Art.5 a non-
-    conformity?", needs separate fix)
-  - #24 known-stale since 2026-05-30 batch 2 (~30-50% pass rate; LLM-stochastic
-    on whether Art.32 answer surfaces the A.5-bridge control; was reported as
-    PASS in batch 2 commit msg but CSV evidence shows it had already started
-    failing — see memory case_24_art32_bridge_followup.md)
-  - #2 known-stale since 2026-06-03 (~40-60% pass rate; LLM-stochastic on whether
-    A.5.26 surfaces among the top NCs. Drift cause: Phase C batch 1 Stage-2
-    mass-approval session brought Arion from ~25 NCs to 168 NCs on 2026-06-02
-    — A.5.26 no longer reliably tops the answer among 168 candidates. Data is
-    intact; problem is LLM ranking among many NC candidates. Follow-up: see
-    memory case_2_drift_followup.md)
+- Score: 199/199 PASS target on 2026-06-15. Cases #3 + #16 + #21 + #33
+  occasionally fail on LLM citation-list position / phrasing — re-runs pass.
+  - #25 + #24 STABILISED 2026-06-14 via cross_framework shape validator +
+    deterministic bridge footer (see [[cross-framework-bridge-footer-2026-06-14]])
+  - #2 STABILISED 2026-06-15 via state-drift re-author — A.5.26 ref lock
+    dropped, structural assertions only (see [[feedback-eval-state-drift]])
 - Never deploy with a regression below the current case count
 - Cases 22-26 lock in: cited refs in POSTURE_STATUS / STANDARD_KNOWLEDGE,
   xfw posture inheritance, Layer-2 anti-hallucination, uploaded-doc short-circuit

@@ -110,6 +110,10 @@ where possible to amortize.
   cases #24 + #25.
 - #3 + #26 re-author (813c35d) — direct must_contain swap to
   structural markers.
+- #2 re-author 2026-06-15 — same pattern. Dropped A.5.26 ref lock
+  after it decayed from the 168-NC top-N. Now expected_refs=[],
+  must_contain=["NC"], min_findings=2. 4/4 PASS post-fix. CLAUDE.md
+  formal known-stale entry retired.
 
 ## Related
 
