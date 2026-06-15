@@ -1,6 +1,6 @@
 ---
 name: per-must-advisory-2026-06-14
-description: "SHIPPED 2026-06-14 chat (20a641c) + 2026-06-15 dashboard endpoint (20ecd18): per-MUST advisory data path. Deterministic compose from evaluate_one_control() per-leaf items_recognised/unrecognised + upload-hint templates per evidence_type + source label per standard. Chat surface hooks rank_and_answer for POSTURE_CHECK/CROSS_FRAMEWORK with single control in intent.cited_refs (locked by eval #199). Dashboard endpoint GET /api/v1/dashboard/control/{control_ref}/advisory returns structured JSON (auto-infers standard_id from prefix)."
+description: "SHIPPED chat 2026-06-14 (20a641c) + dashboard endpoint 2026-06-15 (20ecd18) + dashboard UI 2026-06-15 (9cf5f8a): per-MUST advisory data path. Deterministic compose from evaluate_one_control() per-leaf items_recognised/unrecognised + upload-hint templates per evidence_type + source label per standard. Chat surface hooks rank_and_answer for POSTURE_CHECK/CROSS_FRAMEWORK with single control in intent.cited_refs (locked by eval #199). Dashboard endpoint GET /api/v1/dashboard/control/{control_ref}/advisory returns structured JSON; dashboard UI (static/arioncomply.html:renderAdvisoryPanel) renders 'How to advance' card stack below the verdict tree on heatmap drill-in. Three surfaces, one data path."
 metadata: 
   node_type: memory
   type: project
@@ -111,12 +111,12 @@ cached on the module (`_DRIVER` module-level var).
   preferring `intent.cited_refs` (classifier-extracted, reflects
   the user's literal mention) over `result.cited_refs`.
 
-## Two surfaces sharing one data path
+## Three surfaces sharing one data path
 
 `build_per_must_advisory_data(pg, tenant_id, control_ref,
 standard_id, neo4j_driver=None)` is the canonical data builder.
 Returns dict (or None) with shape documented in the source file.
-Two renderers consume it:
+Three surfaces consume it:
 
 1. **Chat appendix** (shipped 2026-06-14, 20a641c).
    `build_per_must_advisory()` → `_render_advisory_markdown(data)`
@@ -125,16 +125,30 @@ Two renderers consume it:
 
 2. **Dashboard drill-in endpoint** (shipped 2026-06-15, 20ecd18).
    `GET /api/v1/dashboard/control/{control_ref}/advisory` →
-   structured JSON. UI consumes for per-leaf cards with ✓/✗
-   icons. Auto-infers standard_id from control_ref prefix
-   (`Art.*` → GDPR, default → ISO 27001:2022). Override via
-   `?standard_id=...` query param. Returns `advisory: null`
-   when no advisory warranted.
+   structured JSON. Auto-infers standard_id from control_ref
+   prefix (`Art.*` → GDPR, default → ISO 27001:2022). Override
+   via `?standard_id=...` query param. Returns
+   `advisory: null` when no advisory warranted.
+
+3. **Dashboard UI panel** (shipped 2026-06-15, 9cf5f8a).
+   `static/arioncomply.html:renderAdvisoryPanel(advisory)` is
+   the JS renderer. Called from the heatmap drill-in flow on
+   NC/OFI controls — fetches the endpoint after the verdict
+   tree, appends a "How to advance" card stack below the tree
+   via `insertAdjacentHTML('beforeend', ...)`. Best-effort
+   (silent on error so verdict tree always renders).
+
+   Card shape per unmet leaf:
+     ◐ <leaf_label> · <evidence_type> · N/M elements covered
+     Have:   <recognised items, green>
+     Still needed:  <missing items, red>
+     To address: <upload hint pegged to evidence_type>
+     [footer] Source: <standard citation>
 
 The data builder is the single source of truth for "what's
-missing and what to upload". Both surfaces emit the same
+missing and what to upload". All three surfaces emit the same
 information in their native shape; any catalog/MUST change
-propagates to both automatically.
+propagates to all three automatically.
 
 ## Future surface still on backlog
 
