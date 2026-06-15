@@ -121,6 +121,12 @@ class DocumentFinding:
     finding:         str            # Comply | OFI | NC | not_addressed
     evidence_text:   str            # excerpt from document
     confidence:      str            # high | medium | low
+    # Per-MUST binding — when populated, the finding is bound to a specific
+    # checklist item on a curated leaf. Only set by paths that have access
+    # to the per-MUST candidate list (doc_mappings-scoped extraction, workbook
+    # intake, leaf-scan back-bind). Without it, findings stay at Phase-1
+    # coarse coverage and can't feed the engine post 2026-06-13 retirement.
+    checklist_item_id: Optional[str] = None
 
     # Location
     section:         Optional[str] = None

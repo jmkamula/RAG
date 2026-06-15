@@ -104,10 +104,24 @@ def extract(
     # in only when doc_mappings narrows below the union.
     doc.extraction_metrics.setdefault("primary_candidate_controls", len(scoped))
 
+    # Per-MUST binding: when doc_mappings narrowed to specific leaves, fetch
+    # those leaves' checklist items from Neo4j and pass them to the LLM as
+    # candidate ids. Findings come back tagged with checklist_item_id; the
+    # writer persists the binding. Without this, findings stay at Phase-1
+    # coarse coverage and can't feed the engine (post 2026-06-13 retirement).
+    target_leaves = doc.extraction_metrics.get("target_leaves") or []
+    leaf_musts = None
+    if target_leaves:
+        leaf_ids = [t.get("leaf_id") for t in target_leaves if t.get("leaf_id")]
+        leaf_musts = _fetch_leaf_musts(leaf_ids)
+        doc.extraction_metrics["leaf_musts_count"] = sum(
+            len(items) for items in leaf_musts.values()
+        )
+
     if doc.extraction_path == ExtractionPath.FULL_DOCUMENT:
-        return _extract_full(doc, scoped, api_key)
+        return _extract_full(doc, scoped, api_key, leaf_musts=leaf_musts)
     else:  # SECTION_BASED
-        return _extract_sections(doc, scoped, api_key)
+        return _extract_sections(doc, scoped, api_key, leaf_musts=leaf_musts)
 
 
 # =============================================================================
@@ -166,9 +180,10 @@ def _extract_structured(doc: ParsedDocument) -> list[DocumentFinding]:
 # =============================================================================
 
 def _extract_full(
-    doc:      ParsedDocument,
-    controls: list[dict],
-    api_key:  str,
+    doc:        ParsedDocument,
+    controls:   list[dict],
+    api_key:    str,
+    leaf_musts: Optional[dict] = None,
 ) -> list[DocumentFinding]:
     """Single LLM call for the entire document."""
 
@@ -189,9 +204,14 @@ def _extract_full(
             doc_name   = doc.original_name,
             api_key    = api_key,
             chunk_hint = "full document",
+            leaf_musts = leaf_musts,
         )
         doc.extraction_metrics["llm_calls"] = doc.extraction_metrics.get("llm_calls", 0) + 1
-        findings = _parse_llm_response(raw, doc, chunk_controls, section=None, chunk_id="full")
+        findings = _parse_llm_response(
+            raw, doc, chunk_controls,
+            section=None, chunk_id="full",
+            leaf_musts=leaf_musts,
+        )
         all_findings.extend(findings)
 
     logger.info(f"Full extraction: {len(all_findings)} findings from {doc.original_name}")
@@ -203,9 +223,10 @@ def _extract_full(
 # =============================================================================
 
 def _extract_sections(
-    doc:      ParsedDocument,
-    controls: list[dict],
-    api_key:  str,
+    doc:        ParsedDocument,
+    controls:   list[dict],
+    api_key:    str,
+    leaf_musts: Optional[dict] = None,
 ) -> list[DocumentFinding]:
     """
     One LLM call per section.
@@ -243,24 +264,32 @@ def _extract_sections(
                 doc_name   = doc.original_name,
                 api_key    = api_key,
                 chunk_hint = section.heading or chunk_id,
+                leaf_musts = leaf_musts,
             )
             doc.extraction_metrics["llm_calls"] = doc.extraction_metrics.get("llm_calls", 0) + 1
             findings = _parse_llm_response(
                 raw, doc, control_chunk,
-                section  = section.heading,
-                chunk_id = chunk_id,
-                page     = section.page_start,
+                section    = section.heading,
+                chunk_id   = chunk_id,
+                page       = section.page_start,
+                leaf_musts = leaf_musts,
             )
 
             # Merge: Comply > OFI > NC > not_addressed
-            # If same control found in multiple sections, keep the strongest
+            # Dedup key is (control_ref, checklist_item_id) — distinct MUST
+            # bindings on the same control are SEPARATE findings (the engine
+            # needs each to mark its respective MUST satisfied). When the
+            # binding is None, we fall back to control_ref dedup as before
+            # so unbound findings still collapse to one row per control.
             _PRIORITY = {"Comply": 3, "OFI": 2, "NC": 1, "not_addressed": 0}
             for f in findings:
-                existing = all_findings.get(f.control_ref)
+                key = (f.control_ref, f.checklist_item_id) if f.checklist_item_id \
+                      else (f.control_ref, None)
+                existing = all_findings.get(key)
                 if existing is None:
-                    all_findings[f.control_ref] = f
+                    all_findings[key] = f
                 elif _PRIORITY.get(f.finding, 0) > _PRIORITY.get(existing.finding, 0):
-                    all_findings[f.control_ref] = f
+                    all_findings[key] = f
 
     result = list(all_findings.values())
     logger.info(f"Section extraction: {len(result)} findings from {doc.original_name}")
@@ -319,6 +348,7 @@ Respond with a JSON array:
 [
   {{
     "control_ref": "A.5.18",
+    "checklist_item_id": "item:A.5.18:review_record",
     "finding": "Comply",
     "evidence": "one sentence from the document that supports this finding",
     "confidence": "high"
@@ -326,8 +356,57 @@ Respond with a JSON array:
   ...
 ]
 
+The "checklist_item_id" field is optional — include it ONLY when the
+"Available checklist items per control" block was provided in this prompt
+AND the evidence quote clearly matches one specific MUST item. Use the
+id verbatim. Omit the field entirely otherwise.
+
 Only include controls that are addressed in this document.
 For controls not addressed, omit them from the response entirely."""
+
+
+# Neo4j MUST-fetcher — env-driven; cached per-process so repeated calls
+# inside one extract() invocation share a driver. Returns
+#   {leaf_id: [(item_id, item_text), ...], ...}
+# When Neo4j is unavailable or any leaf has zero MUSTs in the graph, the
+# caller treats that leaf as having no per-MUST binding hints — LLM still
+# runs but findings stay unbound (graceful degradation, no exception).
+_NEO_DRIVER_CACHE = {}
+
+
+def _fetch_leaf_musts(leaf_ids: list[str]) -> dict[str, list[tuple[str, str]]]:
+    if not leaf_ids:
+        return {}
+    try:
+        from neo4j import GraphDatabase
+        import os
+        uri  = os.getenv("NEO4J_URI",      "bolt://localhost:7687")
+        user = os.getenv("NEO4J_USER",     "neo4j")
+        pw   = os.getenv("NEO4J_PASSWORD", "")
+        key  = (uri, user)
+        drv  = _NEO_DRIVER_CACHE.get(key)
+        if drv is None:
+            drv = GraphDatabase.driver(uri, auth=(user, pw))
+            _NEO_DRIVER_CACHE[key] = drv
+        with drv.session() as s:
+            res = s.run(
+                """
+                MATCH (er:EvidenceRequirement)-[:MUST_CONTAIN]->(item:ChecklistItem)
+                WHERE er.id IN $leaf_ids
+                RETURN er.id AS leaf_id, item.id AS item_id, item.text AS item_text
+                ORDER BY er.id, item.id
+                """,
+                leaf_ids=leaf_ids,
+            )
+            out: dict[str, list[tuple[str, str]]] = {}
+            for row in res:
+                out.setdefault(row["leaf_id"], []).append(
+                    (row["item_id"], row["item_text"] or row["item_id"])
+                )
+            return out
+    except Exception as e:
+        logger.warning(f"Neo4j unavailable for MUST fetch: {e}")
+        return {}
 
 
 def _llm_extract(
@@ -336,6 +415,7 @@ def _llm_extract(
     doc_name:   str,
     api_key:    str,
     chunk_hint: str = "",
+    leaf_musts: Optional[dict] = None,
 ) -> str:
     """Make one LLM extraction call. Returns raw JSON string."""
 
@@ -344,11 +424,42 @@ def _llm_extract(
         for c in controls
     )
 
+    # When leaf_musts is supplied (doc_mappings narrowed to specific leaves),
+    # render a per-control MUST-items section. The LLM is asked to tag each
+    # finding with the checklist_item_id that best matches the evidence
+    # quote — enabling per-MUST binding without the leaf-scan back-step.
+    must_section = ""
+    if leaf_musts:
+        # Group by control_ref (the LLM doesn't need leaf_id context — every
+        # checklist_item_id is unique and resolves to its leaf downstream).
+        ctrl_to_items: dict[str, list[tuple[str, str]]] = {}
+        for leaf_id, items in leaf_musts.items():
+            # leaf_id format: "req:A.5.18:access_rights_procedure" → control "A.5.18"
+            parts = leaf_id.split(":")
+            if len(parts) >= 2:
+                ctrl = parts[1]
+                ctrl_to_items.setdefault(ctrl, []).extend(items)
+        if ctrl_to_items:
+            blocks = []
+            for ctrl in sorted(ctrl_to_items.keys()):
+                items = ctrl_to_items[ctrl]
+                if not items:
+                    continue
+                lines = "\n".join(f"  * {iid} — {itext}" for iid, itext in items)
+                blocks.append(f"{ctrl}:\n{lines}")
+            must_section = (
+                "\n\nFor each finding, also tag the single checklist_item_id "
+                "whose text best matches your evidence quote. Use the id "
+                "EXACTLY as listed; omit the field if none clearly applies.\n\n"
+                "Available checklist items per control:\n"
+                + "\n\n".join(blocks)
+            )
+
     user_prompt = _USER_TEMPLATE.format(
         doc_context  = f"Document: {doc_name}" + (f" | Section: {chunk_hint}" if chunk_hint else ""),
         text         = text[:80000],   # safety cap — should be within context window
         control_list = control_list,
-    )
+    ) + must_section
 
     body = json.dumps({
         "model":      EXTRACT_MODEL,
@@ -543,6 +654,7 @@ def _parse_llm_response(
     section:    Optional[str],
     chunk_id:   str,
     page:       Optional[int] = None,
+    leaf_musts: Optional[dict] = None,
 ) -> list[DocumentFinding]:
     """Parse the LLM JSON response into DocumentFinding objects.
 
@@ -569,6 +681,21 @@ def _parse_llm_response(
 
     # Build control lookup for validation
     valid_refs = {c["ref"] for c in controls}
+
+    # Build the per-control valid checklist_item_id set. When leaf_musts is
+    # supplied (doc_mappings narrowed to specific leaves), we accept the
+    # LLM's checklist_item_id ONLY when it appears in this control's MUSTs.
+    # Otherwise the field is dropped (silently — the finding stays unbound
+    # rather than carrying a hallucinated id).
+    valid_items_by_ctrl: dict[str, set[str]] = {}
+    if leaf_musts:
+        for leaf_id, items_list in leaf_musts.items():
+            parts = leaf_id.split(":")
+            if len(parts) >= 2:
+                ctrl = parts[1]
+                bucket = valid_items_by_ctrl.setdefault(ctrl, set())
+                for iid, _itext in items_list:
+                    bucket.add(iid)
 
     dropped_low_conf      = 0
     dropped_short_quote   = 0
@@ -658,19 +785,31 @@ def _parse_llm_response(
                         ref, sorted(set(other_refs_in_quote))[:3], chunk_id,
                     )
 
+        # Per-MUST binding: accept the LLM's checklist_item_id only when
+        # it's in the valid set for this control. Hallucinated ids are
+        # silently dropped (finding stays unbound rather than carrying a
+        # bad binding through to the engine).
+        bound_item_id = None
+        raw_item_id = (item.get("checklist_item_id") or "").strip()
+        if raw_item_id and valid_items_by_ctrl:
+            allowed = valid_items_by_ctrl.get(ref, set())
+            if raw_item_id in allowed:
+                bound_item_id = raw_item_id
+
         findings.append(DocumentFinding(
-            upload_id       = doc.upload_id or "",
-            tenant_id       = "",   # set by writer
-            document_name   = doc.original_name,
-            control_ref     = ref,
-            standard_id     = standard_id,
-            finding         = finding,
-            evidence_text   = evidence,
-            confidence      = confidence,
-            section         = section,
-            page_number     = page,
-            extraction_path = doc.extraction_path.value,
-            chunk_id        = chunk_id,
+            upload_id         = doc.upload_id or "",
+            tenant_id         = "",   # set by writer
+            document_name     = doc.original_name,
+            control_ref       = ref,
+            standard_id       = standard_id,
+            finding           = finding,
+            evidence_text     = evidence,
+            confidence        = confidence,
+            checklist_item_id = bound_item_id,
+            section           = section,
+            page_number       = page,
+            extraction_path   = doc.extraction_path.value,
+            chunk_id          = chunk_id,
         ))
 
     total_dropped = (dropped_low_conf + dropped_short_quote + dropped_hallucinated
@@ -734,6 +873,12 @@ def _scope_controls_via_doc_mappings(
     above the discovery confidence_floor — caller falls back to the
     legacy DOC_TYPE_CLAUSE_MAP path.
 
+    Side effect: stores the matched proposals' `target_leaves` on
+    `doc.extraction_metrics["target_leaves"]` (deduped by leaf_id) so the
+    extractor can fetch per-MUST checklist items and pass them to the LLM
+    for per-MUST binding. Without this, findings land unbound and can't
+    feed the engine post 2026-06-13 Phase-1 retirement.
+
     Logs the chosen mapping(s) at INFO so the next upload's scoping is
     visible in /tmp/api.log.
     """
@@ -755,6 +900,15 @@ def _scope_controls_via_doc_mappings(
     target_ctrls = set(union_target_controls(proposals))
     if not target_ctrls:
         return []
+
+    # Collect target_leaves across all matched proposals, deduped by leaf_id.
+    leaves_by_id: dict[str, dict] = {}
+    for p in proposals:
+        for leaf in (p.target_leaves or []):
+            lid = leaf.get("leaf_id")
+            if lid and lid not in leaves_by_id:
+                leaves_by_id[lid] = leaf
+    doc.extraction_metrics["target_leaves"] = list(leaves_by_id.values())
 
     # Intersect with the caller-provided control list — the caller already
     # filtered to controls that exist in the curated set; we just narrow.

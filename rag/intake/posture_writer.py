@@ -334,13 +334,13 @@ def _write_document_findings(
                     """
                     INSERT INTO document_findings (
                         id, tenant_id, document_id,
-                        control_ref, standard_id,
+                        control_ref, standard_id, checklist_item_id,
                         status, confidence, excerpt,
                         section_number, extracted_at,
                         is_active, retention_class
                     ) VALUES (
                         %s, %s, %s,
-                        %s, %s,
+                        %s, %s, %s,
                         %s, %s, %s,
                         %s, NOW(),
                         TRUE, %s
@@ -349,7 +349,7 @@ def _write_document_findings(
                     """,
                     (
                         f.id, tenant_id, doc_id,
-                        f.control_ref, f.standard_id,
+                        f.control_ref, f.standard_id, f.checklist_item_id,
                         _map_df_status(f.finding),
                         _map_confidence(f.confidence),
                         f.evidence_text[:500] if f.evidence_text else None,

@@ -18,6 +18,7 @@ Run:
 """
 from __future__ import annotations
 
+import json
 import sys
 from types import SimpleNamespace
 
@@ -123,11 +124,96 @@ def test_toc() -> int:
     return fails
 
 
+def test_checklist_binding() -> int:
+    """The 2026-06-15 per-MUST binding wiring: LLM response checklist_item_id
+    flows into DocumentFinding.checklist_item_id ONLY when the id is in the
+    valid per-control set. Hallucinated ids are silently dropped.
+    """
+    print("\n_parse_llm_response checklist_item_id binding")
+    from rag.intake.extractor import _parse_llm_response
+    from rag.intake.models import ParsedDocument, ExtractionPath
+
+    # Synthetic doc whose full_text contains an excerpt the LLM can "ground" to
+    excerpt = "Access rights shall be reviewed quarterly and revoked on termination."
+    doc = ParsedDocument(
+        source_file="/tmp/x.docx", file_type="docx",
+        original_name="Access Control Policy.docx",
+        full_text="Section 4. " + excerpt + " Additional content here.",
+        standard_ids=["ISO27001:2022"],
+        extraction_path=ExtractionPath.FULL_DOCUMENT,
+    )
+    controls = [{"ref": "A.5.18", "title": "Access rights", "standard_id": "ISO27001:2022"}]
+    leaf_musts = {
+        "req:A.5.18:access_rights_procedure": [
+            ("item:A.5.18:review_record", "Access rights reviewed periodically"),
+            ("item:A.5.18:revocation_record", "Rights revoked on lifecycle events"),
+        ],
+    }
+
+    # Valid id case
+    llm_response_valid = json.dumps([{
+        "control_ref": "A.5.18",
+        "checklist_item_id": "item:A.5.18:review_record",
+        "finding": "Comply",
+        "evidence": excerpt,
+        "confidence": "high",
+    }])
+    findings = _parse_llm_response(
+        llm_response_valid, doc, controls,
+        section=None, chunk_id="full", leaf_musts=leaf_musts,
+    )
+    fails = 0
+    fails += 0 if _check("valid id retained", len(findings) == 1 and findings[0].checklist_item_id == "item:A.5.18:review_record", True) else 1
+
+    # Hallucinated id case — same valid finding shape but a made-up id
+    llm_response_bad_id = json.dumps([{
+        "control_ref": "A.5.18",
+        "checklist_item_id": "item:A.5.18:NOT_A_REAL_MUST",
+        "finding": "Comply",
+        "evidence": excerpt,
+        "confidence": "high",
+    }])
+    findings = _parse_llm_response(
+        llm_response_bad_id, doc, controls,
+        section=None, chunk_id="full", leaf_musts=leaf_musts,
+    )
+    fails += 0 if _check("hallucinated id dropped", len(findings) == 1 and findings[0].checklist_item_id is None, True) else 1
+
+    # No leaf_musts (legacy fallback path) — id ignored even if present
+    llm_response_legacy = json.dumps([{
+        "control_ref": "A.5.18",
+        "checklist_item_id": "item:A.5.18:review_record",
+        "finding": "Comply",
+        "evidence": excerpt,
+        "confidence": "high",
+    }])
+    findings = _parse_llm_response(
+        llm_response_legacy, doc, controls,
+        section=None, chunk_id="full", leaf_musts=None,
+    )
+    fails += 0 if _check("legacy path ignores id", len(findings) == 1 and findings[0].checklist_item_id is None, True) else 1
+
+    # Omitted id (LLM correctly omits when no match) — finding still kept
+    llm_response_omit = json.dumps([{
+        "control_ref": "A.5.18",
+        "finding": "Comply",
+        "evidence": excerpt,
+        "confidence": "high",
+    }])
+    findings = _parse_llm_response(
+        llm_response_omit, doc, controls,
+        section=None, chunk_id="full", leaf_musts=leaf_musts,
+    )
+    fails += 0 if _check("omitted id ok", len(findings) == 1 and findings[0].checklist_item_id is None, True) else 1
+
+    return fails
+
+
 def main() -> int:
     print("─" * 70)
     print("  rag/intake/extractor — content-shape filters")
     print("─" * 70)
-    fails = test_questionnaire() + test_toc()
+    fails = test_questionnaire() + test_toc() + test_checklist_binding()
     print()
     if fails == 0:
         print(f"  All tests PASS")
