@@ -193,7 +193,187 @@ def _source_label(control_ref: str, standard_id: str) -> str:
     return f"Source: {standard_id} {control_ref}."
 
 
-# ── Main entry point ─────────────────────────────────────────────────────────
+# ── Data builder (UI surfaces consume this) ──────────────────────────────────
+
+def build_per_must_advisory_data(
+    pg_conn,
+    tenant_id:    str,
+    control_ref:  str,
+    standard_id:  str = "ISO27001:2022",
+    neo4j_driver = None,
+) -> Optional[dict]:
+    """Return structured advisory data for the given control, or None if no
+    advisory is warranted.
+
+    Returns dict with shape:
+      {
+        "control_ref":    "A.5.15",
+        "standard_id":    "ISO27001:2022",
+        "posture":        "NC" | "OFI",
+        "reason":         "ALL: 0/4 children satisfied (1 with partial evidence)",
+        "n_leaves":       4,
+        "n_satisfied":    0,
+        "n_partial":      1,
+        "leaves": [
+          {
+            "leaf_id":              "req:A.5.15:access_control_policy",
+            "leaf_label":           "access control policy",
+            "evidence_type":        "policy",
+            "evidence_type_label":  "policy document",
+            "satisfied":            false,
+            "n_have":               2,
+            "n_total":              7,
+            "items_have":           [<text>, ...],
+            "items_missing":        [<text>, ...],
+            "upload_hint":          "Update the policy document to ..."
+          },
+          ...
+        ],
+        "source":              "Source: ISO/IEC 27002:2022 §5.15 ..."
+      }
+
+    Returns None when:
+      - No control_ref
+      - Neo4j driver unavailable
+      - No verdict (control not curated multi-leaf)
+      - Posture is Comply or N/A (no advisory needed)
+      - All leaves fully satisfied (no MUST gaps)
+    """
+    if not control_ref:
+        return None
+
+    if neo4j_driver is None:
+        neo4j_driver = _get_neo_driver()
+        if neo4j_driver is None:
+            return None
+
+    full_id = f"{standard_id}:{control_ref}"
+    try:
+        verdict = evaluate_one_control(pg_conn, neo4j_driver, tenant_id, full_id)
+    except Exception as e:
+        logger.warning("advisory: evaluate_one_control failed for %s: %s", full_id, e)
+        return None
+    if verdict is None or not verdict.leaves:
+        return None
+
+    posture = (verdict.posture or "").upper()
+    if posture not in ("NC", "OFI"):
+        return None
+
+    leaves_out: list[dict] = []
+    any_unmet = False
+    for leaf in verdict.leaves:
+        unrec = list(leaf.items_unrecognised or [])
+        rec   = list(leaf.items_recognised or [])
+        if not unrec:
+            # Fully satisfied — include in output so UI shows the ✓ row,
+            # but no upload hint needed.
+            leaves_out.append({
+                "leaf_id":             leaf.leaf_id,
+                "leaf_label":          leaf.leaf_id.split(":")[-1].replace("_", " "),
+                "evidence_type":       leaf.evidence_type,
+                "evidence_type_label": _humanize_evidence_type(leaf.evidence_type),
+                "satisfied":           True,
+                "n_have":              len(rec),
+                "n_total":             len(rec),
+                "items_have":          list(rec),
+                "items_missing":       [],
+                "upload_hint":         "",
+            })
+            continue
+        any_unmet = True
+        leaves_out.append({
+            "leaf_id":             leaf.leaf_id,
+            "leaf_label":          leaf.leaf_id.split(":")[-1].replace("_", " "),
+            "evidence_type":       leaf.evidence_type,
+            "evidence_type_label": _humanize_evidence_type(leaf.evidence_type),
+            "satisfied":           False,
+            "n_have":              len(rec),
+            "n_total":             len(rec) + len(unrec),
+            "items_have":          list(rec),
+            "items_missing":       list(unrec),
+            "upload_hint":         _hint_for(leaf.evidence_type),
+        })
+
+    if not any_unmet:
+        # All leaves satisfied — UI doesn't need advisory
+        return None
+
+    return {
+        "control_ref": control_ref,
+        "standard_id": standard_id,
+        "posture":     posture,
+        "reason":      verdict.reason or "",
+        "n_leaves":    len(verdict.leaves),
+        "n_satisfied": sum(1 for l in leaves_out if l["satisfied"]),
+        "n_partial":   sum(1 for l in leaves_out
+                            if (not l["satisfied"]) and l["n_have"] > 0),
+        "leaves":      leaves_out,
+        "source":      _source_label(control_ref, standard_id),
+    }
+
+
+# ── Markdown renderer (chat surface) ─────────────────────────────────────────
+
+def _render_advisory_markdown(data: dict) -> str:
+    """Render the data dict as markdown. Same shape as before — chat
+    surfaces use this. Returns "" if data is None."""
+    if not data:
+        return ""
+    posture     = data["posture"]
+    control_ref = data["control_ref"]
+    n_leaves    = data["n_leaves"]
+    n_satisfied = data["n_satisfied"]
+    n_partial   = data["n_partial"]
+
+    header_line = (
+        f"↳ **How to advance {control_ref}** "
+        f"(currently {posture}; "
+        f"{n_satisfied} of {n_leaves} leaves satisfied, {n_partial} partial)"
+    )
+
+    leaf_sections: list[str] = []
+    for leaf in data["leaves"]:
+        if leaf["satisfied"]:
+            continue  # advisory is only for unmet leaves
+        leaf_label = leaf["leaf_label"]
+        et_label   = leaf["evidence_type_label"]
+        n_have, n_total = leaf["n_have"], leaf["n_total"]
+
+        lines = [f"  - **{leaf_label}** ({et_label}) — {n_have}/{n_total} elements covered."]
+        rec = leaf["items_have"]
+        if rec:
+            have_str = "; ".join(t[:80] for t in rec[:6])
+            if len(rec) > 6:
+                have_str += f"; (+{len(rec) - 6} more)"
+            lines.append(f"    Have: {have_str}.")
+
+        miss = leaf["items_missing"]
+        miss_show = miss[:10]
+        miss_tail = f" (+{len(miss) - 10} more)" if len(miss) > 10 else ""
+
+        lines.append("    Still needed:")
+        for it in miss_show:
+            lines.append(f"      - {it}")
+        if miss_tail:
+            lines.append(f"      - …{miss_tail}")
+        lines.append(f"    To address: {leaf['upload_hint']}")
+        leaf_sections.append("\n".join(lines))
+
+    if not leaf_sections:
+        return ""
+
+    return (
+        "\n\n"
+        + header_line
+        + "\n\n"
+        + "\n\n".join(leaf_sections)
+        + "\n\n"
+        + data["source"]
+    )
+
+
+# ── Main entry point (chat path) ─────────────────────────────────────────────
 
 def build_per_must_advisory(
     pg_conn,
@@ -211,92 +391,11 @@ def build_per_must_advisory(
     If neo4j_driver is None, lazily creates one from env vars. Returns ""
     on any failure (chat path must never break on advisory issues).
     """
-    if not control_ref:
-        return ""
-
-    if neo4j_driver is None:
-        neo4j_driver = _get_neo_driver()
-        if neo4j_driver is None:
-            return ""
-
-    full_id = f"{standard_id}:{control_ref}"
-    try:
-        verdict = evaluate_one_control(pg_conn, neo4j_driver, tenant_id, full_id)
-    except Exception as e:
-        logger.warning("advisory: evaluate_one_control failed for %s: %s", full_id, e)
-        return ""
-    if verdict is None or not verdict.leaves:
-        return ""
-
-    # Only render advisory if the engine sees NC or OFI. Comply / N/A
-    # control surfaces don't need advisory.
-    posture = (verdict.posture or "").upper()
-    if posture not in ("NC", "OFI"):
-        return ""
-
-    # Per-leaf sections
-    leaf_sections: list[str] = []
-    total_missing = 0
-
-    for leaf in verdict.leaves:
-        unrec = list(leaf.items_unrecognised or [])
-        rec   = list(leaf.items_recognised or [])
-        if not unrec:
-            # Leaf fully satisfied; show as covered, no action needed
-            continue
-        total_missing += len(unrec)
-
-        et_h = _humanize_evidence_type(leaf.evidence_type)
-        leaf_ref_short = leaf.leaf_id.split(":")[-1].replace("_", " ")
-        n_total = len(rec) + len(unrec)
-        n_have  = len(rec)
-        header  = (
-            f"  - **{leaf_ref_short}** ({et_h}) — "
-            f"{n_have}/{n_total} elements covered."
-        )
-        lines = [header]
-
-        if rec:
-            have_str = "; ".join(t[:80] for t in rec[:6])
-            if len(rec) > 6:
-                have_str += f"; (+{len(rec) - 6} more)"
-            lines.append(f"    Have: {have_str}.")
-
-        # Missing items (first N, then "+ M more" if very long)
-        miss_show = unrec[:10]
-        if len(unrec) > 10:
-            miss_tail = f" (+{len(unrec) - 10} more)"
-        else:
-            miss_tail = ""
-
-        lines.append("    Still needed:")
-        for it in miss_show:
-            lines.append(f"      - {it}")
-        if miss_tail:
-            lines.append(f"      - …{miss_tail}")
-
-        lines.append(f"    To address: {_hint_for(leaf.evidence_type)}")
-        leaf_sections.append("\n".join(lines))
-
-    if not leaf_sections:
-        return ""
-
-    n_leaves = len(verdict.leaves)
-    n_satisfied = sum(1 for l in verdict.leaves if not (l.items_unrecognised or []))
-    n_partial   = sum(1 for l in verdict.leaves
-                       if (l.items_unrecognised or []) and (l.items_recognised or []))
-
-    header_line = (
-        f"↳ **How to advance {control_ref}** "
-        f"(currently {posture}; "
-        f"{n_satisfied} of {n_leaves} leaves satisfied, {n_partial} partial)"
+    data = build_per_must_advisory_data(
+        pg_conn      = pg_conn,
+        tenant_id    = tenant_id,
+        control_ref  = control_ref,
+        standard_id  = standard_id,
+        neo4j_driver = neo4j_driver,
     )
-
-    return (
-        "\n\n"
-        + header_line
-        + "\n\n"
-        + "\n\n".join(leaf_sections)
-        + "\n\n"
-        + _source_label(control_ref, standard_id)
-    )
+    return _render_advisory_markdown(data) if data else ""

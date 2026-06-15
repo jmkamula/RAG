@@ -2590,6 +2590,51 @@ async def dashboard_control_evidence(
         pool.putconn(conn)
 
 
+@app.get("/api/v1/dashboard/control/{control_ref}/advisory", tags=["posture"])
+async def dashboard_control_advisory(
+    control_ref: str,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("posture")),
+    standard_id: Optional[str] = None,
+):
+    """Per-MUST advisory data for one control — the structured form of
+    what the chat appendix renders as markdown. Dashboard drill-in cards
+    consume this to show per-leaf coverage with ✓/✗ icons, missing
+    fulfilment criteria, and upload hints.
+
+    Returns 200 with `advisory: null` when no advisory is warranted
+    (control is Comply / N/A, all MUSTs satisfied, or control not
+    multi-leaf curated). Returns 200 with structured data otherwise.
+
+    See [[per-must-advisory-2026-06-14]] for the data path.
+    """
+    # Infer standard from control_ref shape if not supplied
+    if not standard_id:
+        if control_ref.startswith("Art."):
+            standard_id = "GDPR:2016/679"
+        else:
+            standard_id = "ISO27001:2022"
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        from rag.posture.advisory import build_per_must_advisory_data
+        data = build_per_must_advisory_data(
+            pg_conn     = conn,
+            tenant_id   = key_info.tenant_id,
+            control_ref = control_ref,
+            standard_id = standard_id,
+        )
+        return {
+            "control_ref": control_ref,
+            "standard_id": standard_id,
+            "advisory":    data,
+            "trace_id":    request.state.trace_id,
+        }
+    finally:
+        pool.putconn(conn)
+
+
 @app.get("/api/v1/posture/{control_ref}", tags=["posture"])
 async def posture_control(
     control_ref: str,
