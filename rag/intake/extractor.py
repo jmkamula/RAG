@@ -57,6 +57,24 @@ def extract(
     if doc.extraction_path == ExtractionPath.STRUCTURED:
         return _extract_structured(doc)
 
+    # TOC / document-index filter — same shape as the questionnaire filter
+    # but at the doc level. TOC docs describe what policies exist; their
+    # body is "X.Y Title — Purpose: Defines …" blurbs that read like real
+    # statements of compliance but are just descriptions OF other docs.
+    # Without this gate every uploaded TOC produces dozens of inert
+    # findings (no checklist_item_id, can't feed engine post Phase-1
+    # retirement) that clutter the Stage-1 queue. Surfaced 2026-06-15 by
+    # a "TOC Information Security Documents.docx" upload producing 47
+    # spurious pending findings.
+    toc_reason = _looks_like_toc(doc)
+    if toc_reason:
+        logger.info(
+            "Skipping extraction — document looks like a TOC/index: %s (%s)",
+            doc.original_name, toc_reason,
+        )
+        doc.extraction_metrics["skipped_as_toc"] = toc_reason
+        return []
+
     # Doc-mapping pre-filter (db/doc_mappings/*.yaml) — analog of the
     # workbook intake YAML matcher, applied to docs. When a canonical
     # doc-shape mapping matches the upload (e.g. "Supplier Vendor
@@ -427,6 +445,49 @@ def _looks_like_questionnaire(quote: str) -> bool:
     if not quote:
         return False
     return any(p.search(quote) for p in _QUESTIONNAIRE_PATTERNS)
+
+
+# TOC detection — doc-level analog of the questionnaire filter.
+# A Table-of-Contents document lists what policies an org HAS; its body
+# is dominated by lines like "2.1 Information Security Policy — Purpose:
+# Defines the overarching security objectives…" These read like real
+# compliance statements to the LLM but are descriptions OF other docs.
+_TOC_FILENAME_TOKENS = ("toc", "table of contents", "index of")
+_TOC_LINE_RE = re.compile(
+    r"\b\d+\.\d+\s+[A-Z][\w &/-]{2,80}\s+[—\-–]\s+"
+    r"(?:Purpose|Defines|Establishes|Provides|Describes|Outlines)\b",
+)
+
+
+def _looks_like_toc(doc: "ParsedDocument") -> str:
+    """Detect a TOC / document-index upload. Returns a non-empty reason
+    string when detected, else "".
+
+    Two signals — either is sufficient:
+      (1) Filename token: "TOC", "Table of Contents", "Index of"
+      (2) Content density: ≥3 TOC-shape lines AND ≥30% of body lines
+          match. The filename signal alone is enough for the common case;
+          density catches TOCs that don't self-label.
+    """
+    name = (getattr(doc, "original_name", "") or "").lower()
+    for tok in _TOC_FILENAME_TOKENS:
+        if tok in name:
+            return f"filename token '{tok}'"
+
+    text = (getattr(doc, "full_text", "") or
+            getattr(doc, "markdown", "") or "")
+    text = text[:20_000]  # cap scan for cost
+    if not text:
+        return ""
+
+    toc_hits = _TOC_LINE_RE.findall(text)
+    if len(toc_hits) < 3:
+        return ""
+    nonblank = sum(1 for ln in text.splitlines() if ln.strip()) or 1
+    density = len(toc_hits) / nonblank
+    if density >= 0.30:
+        return f"toc-shape density {len(toc_hits)}/{nonblank} ({density:.0%})"
+    return ""
 
 
 def _ground_normalize(s: str) -> str:
