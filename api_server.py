@@ -3011,6 +3011,13 @@ def _extraction_quality_flag(row: dict) -> tuple[str, str]:
     primary_candidates = row.get("primary_candidate_controls")
     # Use primary when available; otherwise fall back to union.
     candidates = primary_candidates if primary_candidates is not None else union_candidates
+    # doc_mappings_match_count = 0 means the legacy _scope_controls fallback
+    # fired (no curated mapping matched). The "candidates" then is a broad
+    # clause-scope (often the 50-control cap), and yield ratio against it is
+    # noise — there's no meaningful "expected" denominator. Surface the gap
+    # via /admin/intake/unmatched-patterns instead.
+    doc_mapping_matches = row.get("doc_mappings_match_count")
+    is_legacy_fallback  = (doc_mapping_matches == 0)
     halluc = row.get("dropped_hallucinated") or 0
     md_chars = row.get("markdown_chars") or 0
     para_chars = row.get("paragraph_chars") or 0
@@ -3047,7 +3054,7 @@ def _extraction_quality_flag(row: dict) -> tuple[str, str]:
     # so the operator can see which uploads aren't influencing posture.
     if active_findings is not None and active_findings > 0 and (bound_findings or 0) == 0:
         return "yellow", f"all {active_findings} findings unbound (no checklist_item_id)"
-    if candidates > 0 and findings * 5 < candidates:
+    if candidates > 0 and findings * 5 < candidates and not is_legacy_fallback:
         return "yellow", f"yield ratio < 20% ({findings}/{candidates})"
     if md_chars > para_chars * 3 and md_chars > 2000 and llm_calls < max(1, md_chars // 50000):
         return "yellow", f"markdown ({md_chars}) under-chunked into {llm_calls} calls"
@@ -3086,6 +3093,7 @@ async def admin_uploads_quality(
                     itl.dropped_questionnaire, itl.skipped_as_toc,
                     itl.markdown_chars, itl.paragraph_chars,
                     itl.total_ms, itl.extraction_path,
+                    itl.doc_mappings_match_count,
                     df_agg.active_findings, df_agg.bound_findings
                 FROM intake_trace_log itl
                 LEFT JOIN document_uploads du ON du.id::text = itl.upload_id
@@ -3141,6 +3149,7 @@ async def admin_uploads_quality(
                     "questionnaire":    r["dropped_questionnaire"],
                 },
                 "skipped_as_toc":   r["skipped_as_toc"],
+                "doc_mappings_match_count": r["doc_mappings_match_count"],
                 "active_findings":  r["active_findings"],
                 "bound_findings":   r["bound_findings"],
                 "markdown_chars":   r["markdown_chars"],
