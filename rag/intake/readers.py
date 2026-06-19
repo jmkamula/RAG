@@ -94,13 +94,37 @@ def read_document(
 # =============================================================================
 
 def _read_pdf(file_path: str, file_name: str) -> ParsedDocument:
+    """PDF reader — Layer A (2026-06-19): captures tables into a markdown
+    rendering alongside the existing section-based text extraction.
+
+    Mirrors the docx → mammoth pattern: extract a markdown representation
+    that includes tables (which `page.extract_text()` flattens or drops),
+    set on `ParsedDocument.markdown`, and apply the same table-heavy
+    rescue + table-prose synthesis as the docx path.
+
+    Closes the 0% bind-rate gap on PDF uploads vs ~14-92% on docx/workbook
+    by giving the LLM extractor access to the structural content PDFs
+    bury in tables (audit findings, control matrices, certification
+    scopes).
+    """
     try:
         import pdfplumber
     except ImportError:
         raise ImportError("pdfplumber required: pip install pdfplumber")
 
+    import hashlib
+
     sections = []
     page_count = 0
+    md_parts:  list[str] = []     # per-page markdown blocks
+    src_sha:   Optional[str] = None
+
+    # File-level sha (used as src_sha256 telemetry; matches docx pattern)
+    try:
+        with open(file_path, "rb") as _fh:
+            src_sha = hashlib.sha256(_fh.read()).hexdigest()
+    except Exception:
+        pass
 
     with pdfplumber.open(file_path) as pdf:
         page_count = len(pdf.pages)
@@ -110,6 +134,24 @@ def _read_pdf(file_path: str, file_name: str) -> ParsedDocument:
 
         for page_num, page in enumerate(pdf.pages, 1):
             text = page.extract_text() or ""
+
+            # --- markdown layer: per-page text + tables ----------------
+            page_md: list[str] = []
+            if text.strip():
+                page_md.append(text.strip())
+            try:
+                tables = page.extract_tables() or []
+            except Exception as e:
+                logger.debug(f"pdfplumber table extraction failed on {file_name} page {page_num}: {e}")
+                tables = []
+            for table in tables:
+                md_table = _pdf_table_to_markdown(table)
+                if md_table:
+                    page_md.append(md_table)
+            if page_md:
+                md_parts.append(f"## Page {page_num}\n\n" + "\n\n".join(page_md))
+            # ---------------------------------------------------------
+
             if not text.strip():
                 continue
 
@@ -174,13 +216,85 @@ def _read_pdf(file_path: str, file_name: str) -> ParsedDocument:
                         level      = 0,
                     ))
 
+    md_text: Optional[str] = "\n\n".join(md_parts) if md_parts else None
+
+    # Table-heavy doc rescue (mirrors docx): if paragraph extraction is
+    # sparse vs markdown, rebuild sections from markdown so the section-
+    # based extractor sees table content.
+    para_chars = sum(len(s.text) for s in sections)
+    md_chars   = len(md_text or "")
+    if md_text and md_chars > max(2000, para_chars * 3):
+        sections = _chunk_markdown_to_sections(md_text)
+        logger.info(
+            f"Rebuilt sections from markdown for {file_name}: "
+            f"paragraph_chars={para_chars} md_chars={md_chars} "
+            f"-> {len(sections)} chunks (table-heavy PDF rescue)"
+        )
+
+    # Table-prose synthesis (mirrors docx): emit per-row sentences so the
+    # LLM can cite ≥40-char verbatim quotes from table content.
+    table_prose = _synthesise_table_prose(md_text or "")
+    if table_prose:
+        sections.append(RawSection(
+            section_id = "table_prose_synthesis",
+            heading    = "Table content (synthesised for extraction)",
+            text       = table_prose,
+            page_start = None,
+            page_end   = None,
+            level      = 0,
+        ))
+        md_text = (md_text or "") + "\n\n" + table_prose
+        logger.info(
+            f"Table-prose synthesis for {file_name}: emitted "
+            f"{len(table_prose)} chars across {table_prose.count('Row ')} rows"
+        )
+
     return ParsedDocument(
-        source_file  = file_path,
-        file_type    = "pdf",
+        source_file   = file_path,
+        file_type     = "pdf",
         original_name = file_name,
-        raw_sections = sections,
-        page_count   = page_count,
+        raw_sections  = sections,
+        page_count    = page_count,
+        markdown      = md_text,
+        source_sha256 = src_sha,
+        converter     = "pdfplumber",
     )
+
+
+def _pdf_table_to_markdown(table: list) -> str:
+    """Convert a pdfplumber-extracted table (list[list[str|None]]) to
+    GitHub-flavoured markdown. Returns "" for empty / single-cell tables
+    (not worth the markdown overhead).
+
+    Row 0 is treated as the header — pdfplumber doesn't reliably mark
+    headers, but the first row is the convention for most extraction
+    consumers. Empty cells (None or whitespace) become a single space
+    so the column structure is preserved.
+    """
+    if not table or len(table) < 2 or not any(table):
+        return ""
+    # Normalise cells: None → "", strip newlines + outer whitespace, replace
+    # pipes (markdown's column separator) with a similar-looking visual.
+    def _cell(c) -> str:
+        s = (c or "").replace("\n", " ").replace("|", "/").strip()
+        return s if s else " "
+    rows = [[_cell(c) for c in row] for row in table if row]
+    if not rows or all(all(not c.strip() for c in r) for r in rows):
+        return ""
+    # Pad short rows to the max column count
+    ncols = max(len(r) for r in rows)
+    rows = [r + [" "] * (ncols - len(r)) for r in rows]
+    header = rows[0]
+    body   = rows[1:]
+    if not body:
+        # Single-row "table" — emit as a paragraph not a table
+        return " · ".join(c.strip() for c in header if c.strip())
+    lines = []
+    lines.append("| " + " | ".join(header) + " |")
+    lines.append("| " + " | ".join("---" for _ in header) + " |")
+    for row in body:
+        lines.append("| " + " | ".join(row) + " |")
+    return "\n".join(lines)
 
 
 # =============================================================================
