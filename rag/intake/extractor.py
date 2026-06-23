@@ -214,6 +214,16 @@ def _extract_full(
         )
         all_findings.extend(findings)
 
+    # Pass-2: targeted recall on partial leaves. See
+    # [[per-must-recall-strategy]] — single-pass LLM extraction has a
+    # structural ceiling on metadata + cross-section MUSTs (dates,
+    # version refs, reviewer rows, revision-history bullets). When a
+    # leaf has 1+ but <N MUSTs bound, the doc clearly evidences the
+    # control area and likely contains the missed metadata too. A
+    # focused pass-2 call with unfilled MUSTs as the candidate list
+    # surfaces these.
+    all_findings = _run_pass2(doc, leaf_musts, all_findings, api_key, controls)
+
     logger.info(f"Full extraction: {len(all_findings)} findings from {doc.original_name}")
     return all_findings
 
@@ -292,6 +302,9 @@ def _extract_sections(
                     all_findings[key] = f
 
     result = list(all_findings.values())
+    # Pass-2: targeted recall on partial leaves. Runs doc-scoped (not
+    # section-scoped) because cross-section linking is the whole point.
+    result = _run_pass2(doc, leaf_musts, result, api_key, controls)
     logger.info(f"Section extraction: {len(result)} findings from {doc.original_name}")
     return result
 
@@ -475,6 +488,246 @@ def _fetch_leaf_musts(leaf_ids: list[str]) -> dict[str, list[tuple[str, str]]]:
         return {}
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# PASS 2 — targeted recall on partial leaves
+# Per [[per-must-recall-strategy]] (2026-06-23 strategy doc): single-pass
+# LLM extraction has a structural ceiling on metadata + cross-section
+# MUSTs. Pass 2 runs after pass-1 collects findings; for any leaf with
+# 1+ but <N MUSTs bound, it issues a focused LLM call listing only the
+# unfilled MUSTs and asking the LLM to ground each in verbatim text.
+#
+# Cost: ~one LLM call per partial leaf. Bounded by doc_mappings scope
+# (typically ≤5 controls × ≤4 leaves = ≤20 partial leaves worst case).
+# Typical: 1-3 partial leaves per doc → +1-3 LLM calls, ~$0.05-0.10.
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _find_partial_leaves(
+    leaf_musts:     Optional[dict],
+    pass1_findings: list,
+) -> list[tuple[str, list[tuple[str, str]]]]:
+    """Return [(leaf_id, unfilled_musts), ...] for leaves where pass-1
+    bound some MUSTs but not all. Leaves with zero pass-1 bindings are
+    NOT included — they're either truly empty in the doc or fully outside
+    its scope; pass-2 has no signal that the doc covers them.
+    """
+    if not leaf_musts:
+        return []
+    covered: set[str] = set()
+    for f in pass1_findings or []:
+        cid = getattr(f, "checklist_item_id", None)
+        if cid:
+            covered.add(cid)
+    out = []
+    for leaf_id, items in (leaf_musts or {}).items():
+        if not items:
+            continue
+        n_total = len(items)
+        unfilled = [(iid, itext) for (iid, itext) in items if iid not in covered]
+        n_filled = n_total - len(unfilled)
+        if 0 < n_filled < n_total:
+            out.append((leaf_id, unfilled))
+    return out
+
+
+_PASS2_SYSTEM_PROMPT = """You are a compliance analyst doing a SECOND PASS on a document.
+The first pass extracted some MUST bindings but may have missed
+metadata-shaped items (dates, version numbers, signatory rows,
+revision-history bullets, cross-section references).
+
+Re-read the document with fresh attention to ONLY the specific MUSTs
+listed in the user message. For each MUST you can ground in verbatim
+text from the document, emit one finding. Omit any MUST you cannot
+ground — do not guess, do not infer.
+
+Rules:
+- "evidence" MUST be a verbatim substring of the document (≥40 chars)
+- "checklist_item_id" MUST be one of the IDs from the listed MUSTs
+- Treat the same evidence quote as bindable to multiple MUSTs ONLY when
+  the quote literally contains content satisfying each
+- A sign-off row like "Approved | Joseph Kamula | ISMS Owner | 22 June 2026"
+  contains THREE MUSTs (signatory + role + date) — emit each separately
+- A revision-history entry like "v1.1, 15 Jun 2026, Zorko Petrusa: added X"
+  contains the version (approval_target), date (review_date or approval_date),
+  reviewer (review_reviewer), and outcome (review_outcome) — emit each
+
+Respond with JSON only — no markdown, no commentary."""
+
+
+def _llm_extract_pass2(
+    text:           str,
+    leaf_id:        str,
+    evidence_type:  str,
+    unfilled_musts: list[tuple[str, str]],
+    doc_name:       str,
+    api_key:        str,
+) -> str:
+    """Pass-2 focused LLM call. Returns raw JSON string."""
+    must_list = "\n".join(
+        f'  - "{iid}": {itext}' for iid, itext in unfilled_musts
+    )
+
+    # Parse control_ref out of leaf_id: "req:A.5.15:management_approval" → "A.5.15"
+    parts = leaf_id.split(":")
+    ctrl_ref = parts[1] if len(parts) >= 2 else ""
+
+    user_prompt = f"""Document: {doc_name}
+
+Pass-2 target: leaf "{leaf_id}" (evidence type: {evidence_type}, control {ctrl_ref})
+
+The first pass bound some MUSTs on this leaf. These specific MUSTs are
+still UNFILLED — examine the document carefully for content that
+evidences each:
+
+{must_list}
+
+Document text:
+\"\"\"
+{text[:80000]}
+\"\"\"
+
+Respond with a JSON array. For each MUST above that you can ground in
+verbatim text, emit one finding:
+
+[
+  {{
+    "control_ref": "{ctrl_ref}",
+    "checklist_item_id": "<one id from the list above, verbatim>",
+    "finding": "Comply",
+    "evidence": "verbatim quote of >=40 characters",
+    "confidence": "high"
+  }},
+  ...
+]
+
+Omit any MUST you cannot ground. Do not invent quotes. Do not guess."""
+
+    body = json.dumps({
+        "model":      EXTRACT_MODEL,
+        "max_tokens": 4000,
+        "system":     _PASS2_SYSTEM_PROMPT,
+        "messages":   [{"role": "user", "content": user_prompt}],
+    }).encode()
+
+    req = urllib.request.Request(
+        "https://api.anthropic.com/v1/messages",
+        data    = body,
+        headers = {
+            "Content-Type":      "application/json",
+            "x-api-key":         api_key,
+            "anthropic-version": "2023-06-01",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            data = json.loads(resp.read())
+        return data["content"][0]["text"]
+    except urllib.error.HTTPError as e:
+        try:
+            err_body = e.read().decode()[:500]
+        except Exception:
+            err_body = "<no body>"
+        logger.error(
+            f"Pass-2 LLM call failed for {doc_name} [{leaf_id}]: "
+            f"HTTP {e.code}: {err_body}"
+        )
+        return "[]"
+    except Exception as e:
+        logger.error(f"Pass-2 LLM call failed for {doc_name} [{leaf_id}]: {e}")
+        return "[]"
+
+
+def _run_pass2(
+    doc,
+    leaf_musts:     Optional[dict],
+    pass1_findings: list,
+    api_key:        str,
+    controls:       list[dict],
+) -> list:
+    """Run pass-2 targeted extraction. Returns the merged finding list
+    (pass-1 + pass-2 with parse-time dedup by (control_ref, checklist_item_id)).
+    """
+    if not leaf_musts:
+        return pass1_findings
+    partial = _find_partial_leaves(leaf_musts, pass1_findings)
+    if not partial:
+        doc.extraction_metrics["pass2_leaves_targeted"] = 0
+        doc.extraction_metrics["pass2_findings"] = 0
+        return pass1_findings
+
+    logger.info(
+        f"Pass-2: {len(partial)} partial leaves to re-examine "
+        f"({sum(len(unf) for _, unf in partial)} unfilled MUSTs total)"
+    )
+
+    # Build the doc text once (markdown if available, else full_text)
+    doc_text = doc.markdown if doc.markdown else (doc.full_text or "")
+    text_with_ctx = _build_doc_context(doc) + "\n\n" + doc_text
+
+    # leaf_id → evidence_type lookup. Pass-2 prompts include the evidence
+    # type so the LLM knows whether to look for a register-row vs a
+    # policy statement vs a review record etc.
+    leaf_evidence_type: dict[str, str] = {}
+    try:
+        for cat_id, items in (doc.extraction_metrics.get("target_leaves") or []):
+            pass  # not iterable in this shape; leave empty
+    except Exception:
+        pass
+    # Read evidence_type from target_leaves metric set by
+    # _scope_controls_via_doc_mappings (list of dicts).
+    for tl in (doc.extraction_metrics.get("target_leaves") or []):
+        if isinstance(tl, dict) and tl.get("leaf_id"):
+            leaf_evidence_type[tl["leaf_id"]] = tl.get("role") or tl.get("evidence_type") or "evidence"
+
+    pass2_findings: list = []
+    pass2_llm_calls = 0
+    for leaf_id, unfilled in partial:
+        evidence_type = leaf_evidence_type.get(leaf_id, "evidence")
+        raw = _llm_extract_pass2(
+            text           = text_with_ctx,
+            leaf_id        = leaf_id,
+            evidence_type  = evidence_type,
+            unfilled_musts = unfilled,
+            doc_name       = doc.original_name,
+            api_key        = api_key,
+        )
+        pass2_llm_calls += 1
+        # Reuse the standard parse pipeline so filters (grounding, crosscheck,
+        # questionnaire, referential demotion, validation) apply uniformly.
+        parsed = _parse_llm_response(
+            raw, doc, controls,
+            section=None,
+            chunk_id=f"pass2:{leaf_id}",
+            leaf_musts=leaf_musts,
+        )
+        pass2_findings.extend(parsed)
+
+    # Dedup by (control_ref, checklist_item_id): pass-2 may re-emit a MUST
+    # pass-1 also caught (LLM stochasticity). Keep the higher-confidence one.
+    merged: dict[tuple, "DocumentFinding"] = {}
+    for f in pass1_findings + pass2_findings:
+        key = (f.control_ref, f.checklist_item_id or f"_unbound_{id(f)}")
+        existing = merged.get(key)
+        if existing is None:
+            merged[key] = f
+        else:
+            # Higher confidence wins; tie-break on chunk_id (pass-1 first)
+            conf_rank = {"high": 0, "medium": 1, "low": 2}
+            if conf_rank.get(f.confidence, 3) < conf_rank.get(existing.confidence, 3):
+                merged[key] = f
+
+    final = list(merged.values())
+
+    doc.extraction_metrics["pass2_leaves_targeted"] = len(partial)
+    doc.extraction_metrics["pass2_findings"] = len(pass2_findings)
+    doc.extraction_metrics["llm_calls"] = doc.extraction_metrics.get("llm_calls", 0) + pass2_llm_calls
+    logger.info(
+        f"Pass-2: +{len(pass2_findings)} findings across {len(partial)} "
+        f"leaves ({pass2_llm_calls} LLM calls); final dedup retained {len(final)} "
+        f"(pass-1 was {len(pass1_findings)})"
+    )
+    return final
+
+
 def _llm_extract(
     text:       str,
     controls:   list[dict],
@@ -529,7 +782,7 @@ def _llm_extract(
 
     body = json.dumps({
         "model":      EXTRACT_MODEL,
-        "max_tokens": 2000,
+        "max_tokens": 4000,
         "system":     _SYSTEM_PROMPT,
         "messages":   [{"role": "user", "content": user_prompt}],
     }).encode()
@@ -742,8 +995,31 @@ def _parse_llm_response(
     try:
         items = json.loads(raw)
     except json.JSONDecodeError as e:
-        logger.warning(f"JSON parse error in LLM response: {e}\nRaw: {raw[:200]}")
-        return []
+        # Salvage: max_tokens truncation cuts the JSON mid-object. Trim
+        # back to the last complete `}` followed by `,` (or none), close
+        # the array, retry. Recovers the N-1 valid findings instead of
+        # silently dropping the entire response.
+        items = None
+        try:
+            last_complete = raw.rfind("},")
+            if last_complete < 0:
+                last_complete = raw.rfind("}")
+            if last_complete > 0:
+                salvaged = raw[: last_complete + 1].rstrip().rstrip(",") + "]"
+                # Ensure leading [
+                if not salvaged.lstrip().startswith("["):
+                    salvaged = "[" + salvaged.lstrip()
+                items = json.loads(salvaged)
+                logger.warning(
+                    f"JSON parse error recovered via salvage: {e} — "
+                    f"kept {len(items) if isinstance(items, list) else 0} "
+                    f"complete findings from truncated response"
+                )
+        except Exception:
+            items = None
+        if items is None:
+            logger.warning(f"JSON parse error in LLM response: {e}\nRaw: {raw[:200]}")
+            return []
 
     # Build control lookup for validation
     valid_refs = {c["ref"] for c in controls}
