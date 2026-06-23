@@ -93,22 +93,39 @@ link, not evidence for a MUST).
   would produce bound findings; that's a separate workstream, not
   cleanup.
 
-## Future hardening
+## Future hardening — RESOLVED 2026-06-23 (0e510cf)
 
 The root cause that allowed 537 stale workbook findings to accumulate
-is: **`workbook_persistence` doesn't supersede prior extract batches
-on re-extract**. Same likely applies to doc-side extractor. Each
-re-extract just inserts; nothing flips the prior batch to
-`is_active=FALSE`.
+was: **writers INSERT new findings on re-extract without retiring
+prior batches**. Shipped writer-side supersede in both intake paths:
 
-Could be solved by either:
-- Writer-side: on extract success, supersede prior active findings
-  for the same `document_id + inference_source` before writing new
-- Schema-side: unique constraint on `(document_id,
-  inference_source, extract_batch_id)` with a CHECK that only one
-  batch is `is_active=TRUE`
+- `workbook_persistence.persist_proposals`: in same transaction as
+  new inserts, supersede prior pending `workbook_intake_proposal`
+  rows + prior active `inference_source='workbook'` findings with
+  `rejection_reason='superseded_by_extract_run:<run_uuid>'`. Gated
+  on `proposals` non-empty.
 
-Not shipping today; logged here for the next intake-side iteration.
+- `posture_writer._write_document_findings`: before per-row INSERT
+  loop, supersede prior active `inference_source='extracted'`
+  findings with
+  `rejection_reason='superseded_by_extract_batch:<timestamp>'`.
+  Gated on `findings` non-empty.
+
+Both run in the same transaction as the new writes; rollback
+restores prior state if the inserts fail. Smoke test against live
+Arion workbook verified: 197 prior → 1 new + 197 superseded with
+correct rejection_reason. Schema gotcha caught during smoke test:
+`workbook_intake_proposal` has CHECK
+`(status='superseded') = (superseded_at IS NOT NULL)`, so the
+UPDATE must set `superseded_at = now()`.
+
+`leaf_driven_scan.persist` intentionally NOT changed —
+back-bind-from-finding semantics + within-call dedup are
+sufficient.
+
+Effect: future workbook + doc re-extracts will not accumulate
+stale findings; this entry's manual cleanup of 795 rows was a
+one-off catch-up.
 
 ## Related
 
