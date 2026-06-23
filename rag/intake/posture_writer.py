@@ -326,6 +326,24 @@ def _write_document_findings(
     """
     written = 0
     with conn.cursor() as cur:
+        # Supersede prior extract batches for this document before writing the
+        # new one. Without this, re-extracts pile up duplicate findings (see
+        # multipath_data_cleanup_2026_06_23 retrospective). Gated on findings
+        # being non-empty so a 0-finding extract doesn't wipe prior evidence.
+        if findings:
+            cur.execute(
+                """
+                UPDATE document_findings
+                SET is_active = FALSE,
+                    review_status = 'rejected',
+                    rejection_reason = 'superseded_by_extract_batch:' || NOW()::text,
+                    reviewed_at = COALESCE(reviewed_at, now())
+                WHERE document_id = %s
+                  AND inference_source = 'extracted'
+                  AND is_active = TRUE
+                """,
+                (doc_id,),
+            )
         for f in findings:
             sp = f"sp_df_{f.id.replace('-', '')[:16]}"
             cur.execute(f"SAVEPOINT {sp}")

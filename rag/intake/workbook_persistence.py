@@ -118,6 +118,35 @@ def persist_proposals(
                 (tenant_str,),
             )
 
+            # Supersede prior extract batches for this document before writing
+            # the new one. Same transaction — if writes fail, rollback restores
+            # the prior batch. Without this, re-extracts pile up duplicate
+            # findings (see multipath_data_cleanup_2026_06_23 retrospective).
+            if proposals:
+                cur.execute(
+                    """
+                    UPDATE workbook_intake_proposal
+                    SET status = 'superseded',
+                        superseded_at = now()
+                    WHERE client_document_id = %s
+                      AND status = 'pending'
+                    """,
+                    (doc_str,),
+                )
+                cur.execute(
+                    """
+                    UPDATE document_findings
+                    SET is_active = FALSE,
+                        review_status = 'rejected',
+                        rejection_reason = %s,
+                        reviewed_at = COALESCE(reviewed_at, now())
+                    WHERE document_id = %s
+                      AND inference_source = 'workbook'
+                      AND is_active = TRUE
+                    """,
+                    (f"superseded_by_extract_run:{run_uuid}", doc_str),
+                )
+
             for p in proposals:
                 cur.execute(
                     """
