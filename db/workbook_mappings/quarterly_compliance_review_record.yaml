@@ -1,0 +1,75 @@
+# Canonical workbook mapping: Quarterly Security Review →
+# A.5.36:compliance_review_record. Per-quarter scope-by-scope review
+# log with findings + remediation tracking — direct fit for the
+# A.5.36 compliance review record MUSTs.
+#
+# Authored 2026-06-23 (Part B). Closes the "Quarterly Security
+# Review" gap surfaced by Arion's 2026-06-23 workbook re-upload.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_36.quarterly_compliance_review_record
+
+sheet_name_fingerprints:
+  - tokens: [quarterly, security, review]
+  - tokens: [quarterly, review]
+  - tokens: [quarterly, compliance]
+  - tokens: [security, review, log]
+  - tokens: [compliance, review, log]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: compliance_review_record
+    target_control: "A.5.36"
+    target_evidence_requirement: "req:A.5.36:compliance_review_record"
+    target_evidence_type: review_record
+    freshness:
+      column_fingerprint: [date]
+      alternative_fingerprints:
+        - [review, date]
+        - [next, review]
+      days: 120  # quarterly cadence
+    required_columns:
+      - fingerprint: [date]
+        binds_to: "item:A.5.36:review_date"
+        alternative_fingerprints:
+          - [review, date]
+      - fingerprint: [reviewer]
+        binds_to: "item:A.5.36:owner"
+        alternative_fingerprints:
+          - [owner]
+          - [action, owner]
+      - fingerprint: [scope]
+        binds_to: "item:A.5.36:scope"
+    optional_columns:
+      - fingerprint: [findings]
+        binds_to: "item:A.5.36:findings"
+        alternative_fingerprints:
+          - [findings, summary]
+        coverage: partial
+      - fingerprint: [remediation]
+        binds_to: "item:A.5.36:corrective_actions"
+        alternative_fingerprints:
+          - [remediation, actions]
+          - [corrective, action]
+          - [remidiation, actions]   # tolerate the workbook's typo
+        coverage: partial
+      - fingerprint: [details]
+        binds_to: "item:A.5.36:method"
+        alternative_fingerprints:
+          - [method]
+        coverage: partial
+      - fingerprint: [review, quarter]
+        binds_to: "item:A.5.36:schedule"
+        alternative_fingerprints:
+          - [quarter]
+          - [next, review, date]
+        coverage: partial
+
+cross_control_links:
+  - control: "10.1"
+    rationale: "Quarterly review findings feed improvement actions"
+  - control: "10.2"
+    rationale: "High-risk issues populate the nonconformity register"

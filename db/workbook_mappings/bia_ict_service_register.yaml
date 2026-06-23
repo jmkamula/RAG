@@ -1,0 +1,78 @@
+# Canonical workbook mapping: Business Impact Assessment → A.5.30
+# ict_service_register leaf. BIA outputs (per-asset criticality, RTO,
+# RPO, dependencies) directly feed ICT readiness for business
+# continuity — this YAML binds the BIA sheet's per-asset rows to
+# A.5.30 service register MUSTs.
+#
+# Cross-references A.5.9 asset register (BIA is the same per-asset
+# row shape with risk-impact additions).
+#
+# Authored 2026-06-23 (Part B). Closes the "BIA Bus. Impact Ass."
+# gap surfaced by Arion's 2026-06-23 workbook re-upload.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_30.bia_ict_service_register
+
+sheet_name_fingerprints:
+  - tokens: [bia]
+  - tokens: [business, impact]
+  - tokens: [business, impact, assessment]
+  - tokens: [bia, bus]
+  - tokens: [impact, assessment]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: ict_service_register
+    target_control: "A.5.30"
+    target_evidence_requirement: "req:A.5.30:ict_service_register"
+    target_evidence_type: register
+    freshness:
+      column_fingerprint: [last, tested]
+      alternative_fingerprints:
+        - [last, review]
+        - [review, date]
+      days: 365
+    required_columns:
+      - fingerprint: [asset, id]
+        binds_to: "item:A.5.30:reg_service_id"
+        alternative_fingerprints:
+          - [service, id]
+          - [id]
+      - fingerprint: [asset, owner]
+        binds_to: "item:A.5.30:reg_recovery_owner"
+        alternative_fingerprints:
+          - [recovery, owner]
+          - [owner]
+    optional_columns:
+      - fingerprint: [criticality]
+        binds_to: "item:A.5.30:reg_criticality"
+        alternative_fingerprints:
+          - [overall, priority]
+          - [priority]
+          - [asset, value]
+        coverage: partial
+      - fingerprint: [rto]
+        binds_to: "item:A.5.30:reg_rto_rpo"
+        alternative_fingerprints:
+          - [rpo]
+          - [rto, rpo]
+        coverage: partial
+      - fingerprint: [dependencies]
+        binds_to: "item:A.5.30:reg_dependencies"
+        alternative_fingerprints:
+          - [dependencies, comments]
+        coverage: partial
+      - fingerprint: [asset, name]
+        binds_to: "item:A.5.30:reg_asset_link"
+        alternative_fingerprints:
+          - [name]
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.9"
+    rationale: "BIA per-asset rows overlap with asset register"
+  - control: "6.1.2"
+    rationale: "BIA scores feed risk assessment inputs"

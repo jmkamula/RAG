@@ -1,0 +1,75 @@
+# Canonical workbook mapping: ISMS Schedule → 10.1
+# improvement_action_register. The "ISMS Schedule" is a task tracker
+# for ISMS activities (audits, improvement actions, ad-hoc workstreams)
+# with per-task REF ID, owner, due date, status. Tasks that complete
+# constitute improvement actions; the sheet is the per-action register.
+#
+# Cross-references 9.2 (audit tasks within the sheet — REF ID
+# starting AUD*) feed the audit programme; finer per-task binding to
+# 9.2 would need row-filter logic not yet in the YAML schema.
+#
+# Authored 2026-06-23 (Part B). Closes the "ISMS Schedule" gap
+# surfaced by Arion's 2026-06-23 workbook re-upload.
+
+schema_version: 1
+mapping_id: workbook.iso.10_1.isms_schedule_improvement_register
+
+sheet_name_fingerprints:
+  - tokens: [isms, schedule]
+  - tokens: [isms, action, schedule]
+  - tokens: [isms, task, schedule]
+  - tokens: [improvement, schedule]
+  - tokens: [action, tracker]
+
+header_row_hints: [1, 2]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: improvement_action_register
+    target_control: "10.1"
+    target_evidence_requirement: "req:10.1:improvement_action_register"
+    target_evidence_type: register
+    freshness:
+      column_fingerprint: [due, date]
+      alternative_fingerprints:
+        - [completion, date]
+        - [target, date]
+      days: 365
+    required_columns:
+      - fingerprint: [ref, id]
+        binds_to: "item:10.1:reg_action_id"
+        alternative_fingerprints:
+          - [action, id]
+          - [id]
+      - fingerprint: [owner]
+        binds_to: "item:10.1:reg_owner"
+        alternative_fingerprints:
+          - [responsible]
+    optional_columns:
+      - fingerprint: [due, date]
+        binds_to: "item:10.1:reg_target_date"
+        alternative_fingerprints:
+          - [target, date]
+          - [completion, date]
+        coverage: partial
+      - fingerprint: [status]
+        binds_to: "item:10.1:reg_status"
+        coverage: partial
+      - fingerprint: [task]
+        binds_to: "item:10.1:reg_dimension"
+        alternative_fingerprints:
+          - [description]
+          - [action, description]
+        coverage: partial
+      - fingerprint: [priority]
+        binds_to: "item:10.1:reg_trigger_type"
+        alternative_fingerprints:
+          - [trigger]
+        coverage: partial
+
+cross_control_links:
+  - control: "9.2"
+    rationale: "Audit-shaped tasks (REF ID AUD*) feed the audit programme"
+  - control: "10.2"
+    rationale: "Improvement actions originate from nonconformities"

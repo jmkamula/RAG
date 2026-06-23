@@ -763,6 +763,13 @@ _META_SHEET_PATTERNS = (
     "version history",  # different from compliance change-control logs
     "readme",
     "cover",  # cover sheets
+    # Self-change-log for the workbook itself (Arion's "This Doc Chng Control"
+    # — DOC005's change history with rows 0-12 self-metadata + 15+ change
+    # entries on the workbook itself). The evidence shape doesn't match any
+    # MUST leaf cleanly; better filtered than half-mapped. Added 2026-06-23.
+    "doc chng control", "this doc chng",
+    "doc change control", "doc change log",
+    "chng control", "change control",
 )
 
 

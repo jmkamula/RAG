@@ -1,0 +1,69 @@
+# Canonical workbook mapping: special interest group register → A.5.6
+# contact_register leaf. Per-group engagement record (SIG name, focus,
+# owner, engagement basis, last-engaged date) — direct fit for the
+# A.5.6 register MUSTs.
+#
+# Authored 2026-06-23 (Part B). Closes the "Spec Int Engagement log"
+# gap surfaced by Arion's 2026-06-23 workbook re-upload.
+
+schema_version: 1
+mapping_id: workbook.iso.A_5_6.special_interest_group_register
+
+sheet_name_fingerprints:
+  - tokens: [spec, int, engagement]
+  - tokens: [special, interest, group]
+  - tokens: [special, interest, engagement]
+  - tokens: [sig, log]
+  - tokens: [sig, register]
+  - tokens: [interest, group, log]
+
+header_row_hints: [1, 2, 3]
+min_data_rows: 1
+
+passes:
+
+  - pass_name: sig_register
+    target_control: "A.5.6"
+    target_evidence_requirement: "req:A.5.6:special_interest_group_register"
+    target_evidence_type: contact_register
+    freshness:
+      column_fingerprint: [last, review]
+      alternative_fingerprints:
+        - [last, engaged]
+        - [last, contact]
+        - [next, review]
+      days: 365
+    required_columns:
+      - fingerprint: [group, name]
+        binds_to: "item:A.5.6:sigs_listed"
+        alternative_fingerprints:
+          - [name]
+          - [group]
+      - fingerprint: [assigned, to]
+        binds_to: "item:A.5.6:owner"
+        alternative_fingerprints:
+          - [owner]
+          - [responsible]
+    optional_columns:
+      - fingerprint: [focus, area]
+        binds_to: "item:A.5.6:topics_shared"
+        alternative_fingerprints:
+          - [topics]
+          - [focus]
+        coverage: partial
+      - fingerprint: [engagement, type]
+        binds_to: "item:A.5.6:basis_of_contact"
+        alternative_fingerprints:
+          - [basis]
+          - [type]
+        coverage: partial
+      - fingerprint: [last, review, date]
+        binds_to: "item:A.5.6:last_engaged"
+        alternative_fingerprints:
+          - [last, engaged]
+          - [last, contact]
+        coverage: partial
+
+cross_control_links:
+  - control: "A.5.7"
+    rationale: "Special interest groups feed threat intelligence pipeline"
