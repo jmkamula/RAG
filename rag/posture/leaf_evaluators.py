@@ -67,6 +67,16 @@ class GenericLeafEvaluator:
         must_item_ids   = [it[0] for it in must_items]
         must_item_texts = {it[0]: it[1] for it in must_items}
 
+        # 1b. Tenant scope filter (schema_v43): drop MUSTs the tenant has
+        # explicitly marked N/A. Cloud-only tenants typically mark
+        # physical-scope MUSTs (item:A.5.15:physical_rules etc.) as N/A;
+        # excluding them from the denominator lets leaves earn satisfaction
+        # without needing physical-infrastructure evidence the tenant can
+        # never produce. Audit trail lives in tenant_must_overrides.
+        na_ids = self._fetch_na_must_ids(must_item_ids)
+        if na_ids:
+            must_item_ids = [i for i in must_item_ids if i not in na_ids]
+
         # 2. Postgres: which items are 'present' for current artifacts of this type?
         recognised_ids, latest_uploaded_at = self._fetch_recognised_items(
             evidence_type   = leaf.evidence_type,
@@ -105,6 +115,35 @@ class GenericLeafEvaluator:
             item_ids_recognised   = item_ids_recognised,
             item_ids_unrecognised = item_ids_unrecognised,
         )
+
+    # ── Postgres: fetch tenant N/A overrides for MUSTs (schema_v43) ──────────
+
+    def _fetch_na_must_ids(self, must_item_ids: list[str]) -> set[str]:
+        """Return the subset of supplied must_ids that this tenant has
+        marked as N/A (applies=false). Empty set when no overrides exist.
+        Silent on missing table — degrades gracefully if schema_v43
+        hasn't been applied.
+        """
+        if not must_item_ids:
+            return set()
+        try:
+            with self._pg.cursor() as cur:
+                cur.execute(
+                    "SELECT set_config('app.tenant_id', %s, TRUE)",
+                    (self._tenant_id,),
+                )
+                cur.execute(
+                    """
+                    SELECT must_id FROM tenant_must_overrides
+                     WHERE tenant_id = %s::uuid
+                       AND applies = FALSE
+                       AND must_id = ANY(%s)
+                    """,
+                    (self._tenant_id, list(must_item_ids)),
+                )
+                return {row[0] for row in cur.fetchall()}
+        except Exception:
+            return set()
 
     # ── Neo4j: fetch MUST checklist items for a leaf ──────────────────────────
 
