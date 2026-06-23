@@ -3188,6 +3188,90 @@ async def admin_uploads_quality(
         pool.putconn(conn)
 
 
+@app.post("/api/v1/admin/uploads/{upload_id}/reextract", tags=["admin"])
+async def admin_reextract_upload(
+    upload_id:        str,
+    request:          Request,
+    background_tasks: BackgroundTasks,
+    key_info:         APIKeyInfo = Depends(require_api_key),
+):
+    """Re-run extraction on an existing upload without requiring re-upload
+    of bytes. Use when an extractor improvement ships (filter, prompt,
+    reader enhancement, per-MUST binding wiring) and you want existing
+    docs to benefit.
+
+    Behavior:
+      - Looks up the upload by id (tenant-scoped via RLS)
+      - Verifies the original file is still on disk at storage_path
+      - Queues `_run_pipeline` on the existing file, reusing the same
+        upload_id (the pipeline writes new document_findings rows;
+        previously-approved findings on the same client_documents row
+        stay active — tenant decides whether to reject the old ones
+        via Stage-1 after seeing the new shape)
+      - Returns immediately; poll /api/v1/documents/{upload_id}/status
+
+    Limitations (deliberate, MVP):
+      - Does NOT auto-supersede prior findings. Two sets coexist until
+        tenant triages. Add a `supersede=true` flag here if/when
+        operationally needed.
+      - Does NOT re-run on duplicate-status uploads (those have no
+        independent storage; re-extract their canonical instead).
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT id, filename, storage_path, extraction_status
+                  FROM document_uploads
+                 WHERE id        = %s::uuid
+                   AND tenant_id = %s::uuid
+                """,
+                (upload_id, key_info.tenant_id),
+            )
+            row = cur.fetchone()
+    finally:
+        pool.putconn(conn)
+
+    if not row:
+        raise HTTPException(404, f"upload {upload_id} not found for this tenant")
+    existing_id, filename, storage_path, status = row
+    if status == "duplicate":
+        raise HTTPException(
+            400,
+            f"upload is marked duplicate; re-extract the canonical instead",
+        )
+    if not storage_path or not Path(storage_path).exists():
+        raise HTTPException(
+            404,
+            f"upload file missing at {storage_path or '(no path)'} — cannot re-extract",
+        )
+
+    api_key = os.getenv("ANTHROPIC_API_KEY", "")
+    background_tasks.add_task(
+        _run_pipeline,
+        file_path         = storage_path,
+        tenant_id         = key_info.tenant_id,
+        upload_id         = upload_id,
+        db_url            = DATABASE_URL,
+        api_key           = api_key,
+        original_filename = filename,
+    )
+
+    logger.info(
+        f"Re-extract queued: {filename} upload_id={upload_id[:8]} "
+        f"tenant={key_info.tenant_id[:8]}"
+    )
+    return {
+        "ok":         True,
+        "upload_id":  upload_id,
+        "filename":   filename,
+        "message":    "Re-extraction queued — poll /api/v1/documents/{upload_id}/status",
+    }
+
+
 def _is_write_cypher(cypher: str) -> bool:
     upper = " " + cypher.upper().replace("\n", " ") + " "
     return any(kw in upper for kw in _WRITE_KEYWORDS)
