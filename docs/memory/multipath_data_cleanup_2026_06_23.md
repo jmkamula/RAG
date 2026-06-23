@@ -81,9 +81,15 @@ link, not evidence for a MUST).
 ## What was NOT cleaned
 
 - **`posture_assertions` 359 active `backfill:schema_v29` rows**:
-  Phase-1c memory captured the fix — engine reader excludes
-  `backfill:%` set_by, so these rows are inert. Could clean for DB
-  hygiene; no functional impact. Deferred as low priority.
+  CLEANED 2026-06-23 (commit pending). Flipped to
+  `status='superseded'` with `superseded_at=now()` — pure hygiene
+  pass; engine reader (`get_latest_engine_assertion` with
+  `engine_authored_only=True`) already excluded these rows.
+  Verified only one caller exists (`posture_loader.py:383`) and it
+  uses the engine-authored-only path. Post-state: all backfill
+  rows now 'superseded' (433 total); 308 legit active PAs intact
+  (40 engine + 234 trigger:document + 34 trigger:engine). Eval not
+  re-run — functional behavior unchanged.
 
 - **Doc re-extraction**: the 100+2 soft-deleted doc-side unbound rows
   came from pre-Direction-C extracts. Direction C (2026-06-08) ships
