@@ -329,8 +329,23 @@ Rules:
 - "NC" = document explicitly states the control is not implemented or missing
 - Quote must be a real, verbatim substring of the document. Hallucinated
   quotes are auto-rejected.
-- Cap your output at the 15 most-relevant controls. If more apply,
-  rank by directness of coverage and return only the top 15.
+- When a per-MUST checklist is provided, emit ONE finding PER MUST item
+  that the document evidences — do not collapse multiple distinct MUST
+  items into a single finding. Sign-off blocks, revision history rows,
+  and dated artefacts contain multiple separate MUSTs in close
+  proximity; bind each independently:
+    * "Approved | Joseph Kamula | ISMS Owner | 11 Apr 2025"
+      → bind signatory → approval_signatory  (quote includes name + role)
+      → bind date      → approval_date       (quote includes the date)
+      → bind version   → approval_target     (quote includes "v1.1" or similar)
+    * Revision-history bullets like "added SLA-met flag" each map to
+      their respective MUSTs (sla_targets / completeness / orphan-access etc.)
+    * Reviewer-row entries map to review_reviewer + review_date + review_outcome
+  Dates and version references that look like metadata ARE first-class
+  evidence when a MUST asks for them.
+- Do not cap your output. Emit every applicable MUST binding the
+  document evidences — recall over precision when the per-MUST list
+  is provided and the evidence quote is verbatim.
 
 Respond with JSON only — no markdown, no explanation."""
 
@@ -907,14 +922,24 @@ def _parse_llm_response(
     m["crosscheck_disagreements"] = m.get("crosscheck_disagreements", 0) + crosscheck_disagreements
     m["crosscheck_unavailable"]   = m.get("crosscheck_unavailable", 0)   + crosscheck_unavailable
 
-    # Enforce 15-finding cap per chunk (the LLM is also prompted to cap;
-    # this is the parse-side enforcement). Retains highest-confidence
-    # findings first — Comply+high > OFI+high > NC+high > Comply+medium etc.
-    if len(findings) > 15:
+    # Per-chunk finding cap. Pre-2026-06-23 this was hard 15 — fine when
+    # findings were 1-per-control. With per-MUST binding active (post B,
+    # 2026-06-15) a single control can carry 5-15 MUSTs; 4 well-scoped
+    # controls × ~7 MUSTs = ~28 candidates per chunk. Capping at 15
+    # silently dropped legitimate MUST bindings (esp. metadata-shaped
+    # ones like approval_date, approval_target, review_date — surfaced
+    # 2026-06-23 when a re-uploaded policy still showed 0 leaves
+    # satisfied despite the text containing the evidence).
+    #
+    # New cap: 60. Generous headroom for doc_mappings-scoped extractions
+    # (typically ≤5 controls × ≤15 MUSTs each); still gated by
+    # validation (grounded quote, valid ref, valid item_id) so noise
+    # doesn't grow proportionally. Confidence-ordered retention kept.
+    if len(findings) > 60:
         conf_rank = {"high": 0, "medium": 1, "low": 2}
         find_rank = {"Comply": 0, "OFI": 1, "NC": 2}
         findings.sort(key=lambda f: (conf_rank.get(f.confidence, 3), find_rank.get(f.finding, 3)))
-        findings = findings[:15]
+        findings = findings[:60]
 
     return findings
 
