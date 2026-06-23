@@ -748,6 +748,31 @@ def _normalise_finding_value(val: str) -> str:
     return "not_addressed"
 
 
+# Workbook meta sheets that aren't compliance data — skipped at read time so
+# they don't show up as candidates for either path. Substring match on the
+# lowercased sheet name. Surfaced 2026-06-23 on Arion's workbook: 5 of 38
+# sheets are TOC / Documentation / Mapping / Instructions / Formulas, all
+# spreadsheet metadata not posture evidence.
+_META_SHEET_PATTERNS = (
+    "table of contents", "toc",
+    "documentation",
+    "mapping",  # workbook's internal mapping reference, not compliance data
+    "instructions", "definitions",
+    "formulas", "formula",
+    "key", "legend",
+    "version history",  # different from compliance change-control logs
+    "readme",
+    "cover",  # cover sheets
+)
+
+
+def _is_meta_sheet(sheet_name: str) -> bool:
+    if not sheet_name:
+        return False
+    s = sheet_name.strip().lower()
+    return any(p in s for p in _META_SHEET_PATTERNS)
+
+
 def _read_xlsx(file_path: str, file_name: str) -> ParsedDocument:
     try:
         import openpyxl
@@ -756,8 +781,13 @@ def _read_xlsx(file_path: str, file_name: str) -> ParsedDocument:
 
     wb       = openpyxl.load_workbook(file_path, read_only=True, data_only=True)
     sections = []
+    skipped_meta = []
 
     for sheet_name in wb.sheetnames:
+        if _is_meta_sheet(sheet_name):
+            skipped_meta.append(sheet_name)
+            continue
+
         ws = wb[sheet_name]
 
         rows = list(ws.iter_rows(values_only=True))
@@ -836,13 +866,20 @@ def _read_xlsx(file_path: str, file_name: str) -> ParsedDocument:
 
     wb.close()
 
-    return ParsedDocument(
+    doc = ParsedDocument(
         source_file   = file_path,
         file_type     = "xlsx",
         original_name = file_name,
         raw_sections  = sections,
         page_count    = 0,
     )
+    if skipped_meta:
+        doc.extraction_metrics["workbook_skipped_meta_sheets"] = ", ".join(skipped_meta)
+        logger.info(
+            f"_read_xlsx: skipped {len(skipped_meta)} meta sheet(s): "
+            f"{', '.join(skipped_meta)}"
+        )
+    return doc
 
 
 # =============================================================================

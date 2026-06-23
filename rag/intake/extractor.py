@@ -55,6 +55,34 @@ def extract(
         return []
 
     if doc.extraction_path == ExtractionPath.STRUCTURED:
+        # Workbook intake architecture (Part A, 2026-06-23): for xlsx/xlsm/xls
+        # files the workbook_persistence path (Stage 4.6) is the canonical
+        # finding writer — it uses db/workbook_mappings/*.yaml for
+        # deterministic per-MUST binding (the 92%-bind-rate path). Running
+        # _extract_structured in parallel produced duplicate, unbound
+        # findings that cluttered Stage-1 (the 93-unbound problem on the
+        # 2026-06-23 Arion re-upload). Sheets with no YAML mapping now
+        # produce 0 findings here + an unmapped-sheet telemetry signal;
+        # operators see "needs new YAML" instead of "noisy approximation".
+        # CSV files still go through _extract_structured (no
+        # multi-sheet structure for workbook_persistence to use).
+        if (doc.file_type or "").lower() in ("xlsx", "xlsm"):
+            n_mapped, n_unmapped, unmapped_names = _classify_workbook_sheets(doc)
+            doc.extraction_metrics["workbook_sheets_total"]    = n_mapped + n_unmapped
+            doc.extraction_metrics["workbook_sheets_mapped"]   = n_mapped
+            doc.extraction_metrics["workbook_sheets_unmapped"] = n_unmapped
+            if unmapped_names:
+                doc.extraction_metrics["workbook_unmapped_sheets"] = ", ".join(unmapped_names[:10])
+                logger.info(
+                    "workbook %s: %d unmapped sheets (need YAMLs): %s",
+                    doc.original_name, n_unmapped, ", ".join(unmapped_names),
+                )
+            logger.info(
+                "workbook %s: structured extraction retired; "
+                "workbook_persistence (Stage 4.6) is the canonical path",
+                doc.original_name,
+            )
+            return []
         return _extract_structured(doc)
 
     # TOC / document-index filter — same shape as the questionnaire filter
@@ -122,6 +150,56 @@ def extract(
         return _extract_full(doc, scoped, api_key, leaf_musts=leaf_musts)
     else:  # SECTION_BASED
         return _extract_sections(doc, scoped, api_key, leaf_musts=leaf_musts)
+
+
+# =============================================================================
+# WORKBOOK SHEET CLASSIFIER (Part A, 2026-06-23)
+# =============================================================================
+
+# Threshold for "sheet name probably matches a YAML". 0.5 jaccard requires
+# at least half the sheet-name tokens to be in the YAML's fingerprints.
+# Lower = more permissive (fewer flagged unmapped); higher = stricter.
+_WORKBOOK_SHEET_MATCH_THRESHOLD = 0.5
+
+
+def _classify_workbook_sheets(doc: ParsedDocument) -> tuple[int, int, list[str]]:
+    """Return (n_mapped, n_unmapped, unmapped_sheet_names) for the
+    workbook's content sheets (meta sheets already filtered by reader).
+
+    A sheet is 'mapped' when at least one db/workbook_mappings/*.yaml
+    has sheet_name_fingerprints scoring above the threshold. This is
+    a telemetry-grade signal — workbook_persistence does its own full
+    discovery at Stage 4.6 with column/row scoring on top.
+
+    Silent on import errors / missing mappings — degrades gracefully.
+    """
+    try:
+        from rag.intake.workbook_discovery import load_mappings, _best_sheet_name_score
+        mappings = load_mappings()
+    except Exception as e:
+        logger.warning(f"_classify_workbook_sheets: load failed: {e}")
+        return 0, 0, []
+
+    n_mapped = 0
+    n_unmapped = 0
+    unmapped_names: list[str] = []
+    for section in doc.raw_sections:
+        sheet_name = (section.metadata or {}).get("sheet_name") or section.heading or ""
+        if not sheet_name:
+            continue
+        try:
+            best = max(
+                (_best_sheet_name_score(sheet_name, m) for m in mappings),
+                default=0.0,
+            )
+        except Exception:
+            best = 0.0
+        if best >= _WORKBOOK_SHEET_MATCH_THRESHOLD:
+            n_mapped += 1
+        else:
+            n_unmapped += 1
+            unmapped_names.append(sheet_name)
+    return n_mapped, n_unmapped, unmapped_names
 
 
 # =============================================================================

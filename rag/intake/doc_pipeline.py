@@ -126,6 +126,10 @@ class IntakeTracer:
             "dropped_questionnaire", "skipped_as_toc",
             # schema_v42 — extractor↔catalog crosscheck signals
             "crosscheck_confirmed", "crosscheck_disagreements", "crosscheck_unavailable",
+            # schema_v44 — workbook sheet classification (Part A: structured-extraction retirement)
+            "workbook_sheets_total", "workbook_sheets_mapped",
+            "workbook_sheets_unmapped", "workbook_unmapped_sheets",
+            "workbook_skipped_meta_sheets",
         }
         for k, v in metrics.items():
             if k in allowed:
@@ -385,6 +389,12 @@ class DocumentPipeline:
                 crosscheck_confirmed     = doc.extraction_metrics.get("crosscheck_confirmed"),
                 crosscheck_disagreements = doc.extraction_metrics.get("crosscheck_disagreements"),
                 crosscheck_unavailable   = doc.extraction_metrics.get("crosscheck_unavailable"),
+                # schema_v44 — workbook sheet classification (xlsx/xlsm only)
+                workbook_sheets_total        = doc.extraction_metrics.get("workbook_sheets_total"),
+                workbook_sheets_mapped       = doc.extraction_metrics.get("workbook_sheets_mapped"),
+                workbook_sheets_unmapped     = doc.extraction_metrics.get("workbook_sheets_unmapped"),
+                workbook_unmapped_sheets     = doc.extraction_metrics.get("workbook_unmapped_sheets"),
+                workbook_skipped_meta_sheets = doc.extraction_metrics.get("workbook_skipped_meta_sheets"),
             )
 
             logger.info(f"Extracted {len(findings)} findings from {file_name}")
@@ -589,6 +599,39 @@ class DocumentPipeline:
             _wbd_error: Optional[str] = None
             _is_workbook = file_name.lower().endswith((".xlsx", ".xlsm"))
             _wbd_doc_id  = summary.get("doc_id")
+            # When extract returns 0 findings (new Part-A behaviour: xlsx/xlsm
+            # skip _extract_structured), summary lacks doc_id but the workbook
+            # still has a client_documents row from the upload. Look it up by
+            # sha256 — safer than filename because dedup normalises bytes.
+            if _is_workbook and not _wbd_doc_id and not self.dry_run:
+                try:
+                    import hashlib
+                    with open(file_path, "rb") as _f:
+                        _sha = hashlib.sha256(_f.read()).hexdigest()
+                    _wbd_conn_lookup = psycopg2.connect(self.db_url)
+                    try:
+                        with _wbd_conn_lookup.cursor() as _cur:
+                            _cur.execute("SET app.tenant_id = %s", (tenant_id,))
+                            _cur.execute(
+                                """
+                                SELECT id::text FROM client_documents
+                                WHERE tenant_id = %s::uuid
+                                  AND checksum_sha256 = %s
+                                  AND is_active = TRUE
+                                ORDER BY uploaded_at DESC LIMIT 1
+                                """,
+                                (tenant_id, _sha),
+                            )
+                            _row = _cur.fetchone()
+                            if _row:
+                                _wbd_doc_id = _row[0]
+                                logger.info(
+                                    f"Stage 4.6: doc_id from sha256 lookup: {_wbd_doc_id}"
+                                )
+                    finally:
+                        _wbd_conn_lookup.close()
+                except Exception as _e:
+                    logger.warning(f"Stage 4.6: doc_id lookup failed: {_e}")
             if _is_workbook and _wbd_doc_id and not self.dry_run:
                 try:
                     import openpyxl
