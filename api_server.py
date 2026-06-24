@@ -3272,6 +3272,59 @@ async def admin_reextract_upload(
     }
 
 
+@app.get("/api/v1/templates/{leaf_id}", tags=["templates"])
+async def get_template(
+    leaf_id:  str,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Render a leaf's template scaffold scoped to the calling tenant.
+
+    Transformations applied at render time:
+      - MUST sections corresponding to `tenant_must_overrides.applies =
+        FALSE` for this tenant are stripped (e.g. Arion cloud-only:
+        A.5.15:physical_rules removed from the template)
+      - Identity placeholders <<TENANT_NAME>>, <<TENANT_SECTOR>>,
+        <<TENANT_COUNTRY>>, <<TENANT_SHORT>>, <<TENANT_INDUSTRY>>,
+        <<GENERATED_DATE>> substituted from the `tenants` row
+      - <<TEXT>> fill-in placeholders and <<MUST item:X>> /
+        <<SHOULD item:X>> markers are preserved — the markers bind the
+        upload-side extractor when the tenant uploads back
+
+    Returns JSON. For markdown-file download, use the sibling
+    `/api/v1/templates/{leaf_id}/download` endpoint (Content-Disposition
+    attachment).
+
+    leaf_id format: `req:<control_ref>:<slug>` — colons in URL paths
+    are accepted by FastAPI directly or via %3A encoding.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        from rag.templates.renderer import render_template
+        rendered = render_template(conn, key_info.tenant_id, leaf_id)
+    finally:
+        pool.putconn(conn)
+
+    if rendered is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"No template stored for leaf_id={leaf_id!r}. "
+                   f"Run enrichment/templates/load_to_postgres.py to populate.",
+        )
+
+    return {
+        "leaf_id":             rendered.leaf_id,
+        "template_version":    rendered.template_version,
+        "body_md":             rendered.body_md,
+        "must_total":          rendered.must_total,
+        "must_rendered":       rendered.must_rendered,
+        "must_dropped_for_tenant": rendered.must_dropped,
+        "placeholders_filled": rendered.placeholders_filled,
+    }
+
+
 def _is_write_cypher(cypher: str) -> bool:
     upper = " " + cypher.upper().replace("\n", " ") + " "
     return any(kw in upper for kw in _WRITE_KEYWORDS)
