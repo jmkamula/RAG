@@ -180,6 +180,74 @@ def _upsert(cur, row: TemplateRow, loaded_by: str) -> str:
     return "updated"
 
 
+def _upsert_neo4j(driver, parsed: list[TemplateRow]) -> dict[str, int]:
+    """Attach each loaded template to its EvidenceRequirement in Neo4j as a
+    thin (:Template) node + [:HAS_TEMPLATE] edge. Body stays in Postgres
+    to avoid bloating graph nodes — Neo4j carries only the metadata
+    needed for graph queries ("which leaves have hand-refined templates?"
+    "find all GDPR Art.X templates"...).
+
+    Schema:
+        (er:EvidenceRequirement {id: $leaf_id})
+            -[:HAS_TEMPLATE]->
+        (t:Template {leaf_id, template_version, must_count, should_count,
+                     source_file, last_loaded_at})
+
+    Idempotent via MERGE; re-runs reset properties. Final orphan sweep
+    removes any :Template node whose leaf_id is not in the loaded set
+    (covers template file deletion or rename).
+    """
+    counts = {"merged": 0, "swept": 0}
+    loaded_leaf_ids = [row.leaf_id for row in parsed]
+
+    with driver.session() as s:
+        for row in parsed:
+            s.run(
+                """
+                MATCH (er:EvidenceRequirement {id: $leaf_id})
+                MERGE (er)-[:HAS_TEMPLATE]->(t:Template {leaf_id: $leaf_id})
+                SET   t.template_version = $template_version,
+                      t.must_count       = $must_count,
+                      t.should_count     = $should_count,
+                      t.source_file      = $source_file,
+                      t.last_loaded_at   = datetime()
+                """,
+                leaf_id          = row.leaf_id,
+                template_version = row.template_version,
+                must_count       = row.must_count,
+                should_count     = row.should_count,
+                source_file      = row.source_file,
+            )
+            counts["merged"] += 1
+
+        # Orphan sweep — any :Template not in the loaded set is stale
+        sweep = s.run(
+            """
+            MATCH (t:Template)
+            WHERE NOT t.leaf_id IN $loaded
+            DETACH DELETE t
+            RETURN count(t) AS swept
+            """,
+            loaded=loaded_leaf_ids,
+        )
+        rec = sweep.single()
+        counts["swept"] = rec["swept"] if rec else 0
+
+    return counts
+
+
+def _build_neo4j_driver():
+    """Construct a Neo4j driver from env. Returns None on missing config
+    so the loader can still run Postgres-only when Neo4j is unreachable."""
+    from neo4j import GraphDatabase
+    uri      = os.environ.get("NEO4J_URI")
+    user     = os.environ.get("NEO4J_USER")
+    password = os.environ.get("NEO4J_PASSWORD")
+    if not (uri and user and password):
+        return None
+    return GraphDatabase.driver(uri, auth=(user, password))
+
+
 def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     parser.add_argument(
@@ -194,7 +262,12 @@ def main(argv: Optional[list[str]] = None) -> int:
     )
     parser.add_argument(
         "--dry-run", action="store_true",
-        help="Parse + validate but don't write to Postgres",
+        help="Parse + validate but don't write to Postgres or Neo4j",
+    )
+    parser.add_argument(
+        "--skip-neo4j", action="store_true",
+        help="Postgres-only load; skip the (:Template) attachment step "
+             "(useful when Neo4j is unreachable or for fast iteration)",
     )
     args = parser.parse_args(argv)
 
@@ -248,9 +321,29 @@ def main(argv: Optional[list[str]] = None) -> int:
         conn.close()
 
     print(
-        f"templates load: inserted={counts['inserted']} "
+        f"templates load (Postgres): inserted={counts['inserted']} "
         f"updated={counts['updated']} unchanged={counts['unchanged']} "
         f"total={len(parsed)}"
+    )
+
+    # Neo4j attachment — thin (:Template) node + [:HAS_TEMPLATE] edge per
+    # leaf. Body stays in Postgres; Neo4j gets metadata for graph queries.
+    if args.skip_neo4j:
+        print("templates load (Neo4j): SKIPPED (--skip-neo4j)")
+        return 0
+
+    driver = _build_neo4j_driver()
+    if driver is None:
+        print("templates load (Neo4j): SKIPPED (no NEO4J_URI/USER/PASSWORD)")
+        return 0
+
+    try:
+        neo_counts = _upsert_neo4j(driver, parsed)
+    finally:
+        driver.close()
+    print(
+        f"templates load (Neo4j): merged={neo_counts['merged']} "
+        f"orphans_swept={neo_counts['swept']}"
     )
     return 0
 
