@@ -47,29 +47,61 @@ once per `propose_for_findings` or `propose_backfill` run.
 
 ## Coverage
 
-On Arion's 72 existing xfw_bridge findings:
+On Arion's 72 existing xfw_bridge findings (after `derives_from`
+chain resolution added in second iteration):
 
 | Outcome | Count | Examples |
 |---|---|---|
-| **Bound** | 58 | Art.32 → item:Art.32:reg_owner; Art.28 → item:Art.28:assistance; Art.15 → item:Art.15:proc_exceptions |
-| **Unbindable** | 14 | Art.5 family (no curated direct_evidence) + Art.85 |
+| **Bound** | 71 | Art.32 → item:Art.32:reg_owner; Art.5.1.f → Art.32 → item:Art.32:reg_owner (via derives_from); Art.5.1.a → Art.6 → item:Art.6:owner |
+| **Unbindable** | 1 | Art.85 — national-law derogation, not curated as direct OR derived; the IMPLEMENTS edge from A.5.31 is technically defensible but the article is irrelevant for most orgs |
 
-The 14 unbindable target controls correspond to a curation gap —
-Art.5 has 9 DerivedSpecs (Art.5, Art.5.1, Art.5.1.a-f, Art.5.2)
-all with empty `direct_evidence`. Curation of Art.5 leaf level
-would close the gap (future workstream).
+## Diagnosis correction (mid-iteration)
+
+First pass identified 14 "uncurated" target controls (Art.5
+family + Art.85) — **this was wrong**. GDPR is fully curated;
+Art.5 family is curated AS DERIVED SPECS by design (`derives_from`
+chains pointing to operational implementers). The standard itself
+has this shape: Art.5 declares principles; Art.6–Art.32
+operationalize them. Duplicating Art.32's leaves onto Art.5.1.f
+would be redundant — that's why direct_evidence is empty.
+
+Examples of curated derivation:
+```
+Art.5.1.f  derives_from → Art.32   (security principle → T&O measures)
+Art.5.2    derives_from → Art.24   (accountability → controller responsibility)
+Art.5.1.e  derives_from → A.5.33 + Art.25  (storage limitation)
+Art.5.1.a  derives_from → Art.6 + Art.13   (lawfulness)
+Art.5      derives_from → Art.5.1 + Art.5.2  (top principle)
+```
+
+The fix was to extend `_pick_canonical_item` with a third
+resolution step: walk `derives_from` recursively when direct and
+rolled-up lookups miss. Loaded from `ALL_DERIVED_SPECS` and
+cached. 13 of the 14 "uncurated" bridges resolved through the
+chain.
+
+Only Art.85 (1 bridge) stays unbound — it has no DerivedSpec
+entry at all. Curating Art.85 is low-value (national-law
+derogation; doesn't typically apply); the IMPLEMENTS edge from
+A.5.31 → Art.85 in Neo4j is a niche curated link that maps to no
+implementable evidence.
 
 ## Code change in `xfw_proposer.py`
 
 Added:
 - `_load_canonical_bindings(driver)` — module-cached Neo4j lookup
+  for control_ref → (leaf, item)
+- `_load_derives_chain()` — module-cached Python lookup from
+  `ALL_DERIVED_SPECS` for control_ref → [derives_from refs]
 - `_rollup_sub_clause(ref)` — Art.X.Y.Z → Art.X for GDPR refs
-- `_pick_canonical_item(control_ref, bindings)` — chooses the
-  item, returns None when uncovered
+- `_pick_canonical_item(control_ref, bindings)` — recursive
+  resolver: direct → rolled-up → derives_from chain. Depth-bounded
+  at 5 hops to handle deep chains like Art.5 → Art.5.1 →
+  Art.5.1.a → Art.6.
 
 Threaded `checklist_item_id` param through `_insert_proposal` and
 both call sites (`propose_for_findings` + `propose_backfill`).
-Bindings cache loaded once per run.
+Caches loaded once per run.
 
 ## Semantic caveat
 

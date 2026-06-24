@@ -169,6 +169,7 @@ def _clear_pending_proposals(
 
 
 _CANONICAL_BINDINGS_CACHE: Optional[dict[str, tuple[str, str]]] = None
+_DERIVES_CHAIN_CACHE:      Optional[dict[str, list[str]]]      = None
 
 
 def _load_canonical_bindings(driver: Driver) -> dict[str, tuple[str, str]]:
@@ -182,10 +183,7 @@ def _load_canonical_bindings(driver: Driver) -> dict[str, tuple[str, str]]:
       - Canonical item: prefer one whose id contains owner/charter/
         scope_processing; else first alphabetically
 
-    Cached per-process — Neo4j is queried once and reused. Bridges to
-    controls not in the cache (e.g. Art.5 family, Art.85 — currently
-    uncurated as direct_evidence) stay unbound; downstream curation
-    work will close the gap.
+    Cached per-process — Neo4j is queried once and reused.
     """
     import re
     global _CANONICAL_BINDINGS_CACHE
@@ -216,8 +214,40 @@ def _load_canonical_bindings(driver: Driver) -> dict[str, tuple[str, str]]:
     return out
 
 
+def _load_derives_chain() -> dict[str, list[str]]:
+    """Load control_ref → [derives_from target refs] from curated
+    DerivedSpec definitions. Used to resolve transitively-derived
+    specs (Art.5 family etc.) — these have empty direct_evidence by
+    *design* (the principle is an alias for its operational
+    implementer) but their derives_from chain points to operational
+    targets that DO have curated leaves.
+
+    Examples:
+      Art.5.1.f → [Art.32]      (security principle → T&O measures)
+      Art.5.2   → [Art.24]      (accountability → controller responsibility)
+      Art.5.1.e → [A.5.33, Art.25]  (storage limitation → retention + DPbD)
+      Art.5     → [Art.5.1, Art.5.2]  (top principle → sub-principles)
+    """
+    global _DERIVES_CHAIN_CACHE
+    if _DERIVES_CHAIN_CACHE is not None:
+        return _DERIVES_CHAIN_CACHE
+    out: dict[str, list[str]] = {}
+    try:
+        from enrichment.documents.document_requirements import ALL_DERIVED_SPECS
+        for s in ALL_DERIVED_SPECS:
+            targets = [d.target_control_ref for d in s.derives_from if d.target_control_ref]
+            if targets:
+                out[s.control_ref] = targets
+    except Exception as e:
+        logger.warning(
+            f"xfw_proposer: failed to load derives chain: {type(e).__name__}: {e}"
+        )
+    _DERIVES_CHAIN_CACHE = out
+    return out
+
+
 def _rollup_sub_clause(ref: str) -> str:
-    """Roll up GDPR sub-clause to parent: Art.32.1.b → Art.32; Art.5.1.f → Art.5.
+    """Roll up GDPR sub-clause to parent: Art.32.1.b → Art.32.
     ISO refs (A.5.x or 5.x) pass through unchanged."""
     if not ref.startswith("Art."):
         return ref
@@ -230,13 +260,48 @@ def _rollup_sub_clause(ref: str) -> str:
 def _pick_canonical_item(
     control_ref: str,
     bindings:    dict[str, tuple[str, str]],
+    *,
+    _depth:      int = 0,
+    _seen:       Optional[set[str]] = None,
 ) -> Optional[str]:
     """Find a canonical checklist_item_id for the given control_ref.
-    Tries direct lookup first, then rolled-up parent. Returns None
-    when no curated leaves exist for the target (Art.5 family etc.)."""
-    for c in (control_ref, _rollup_sub_clause(control_ref)):
-        if c in bindings:
-            return bindings[c][1]
+
+    Resolution order (each falls through to the next when no match):
+      1. Direct lookup in bindings
+      2. Rolled-up parent (Art.32.1.b → Art.32)
+      3. derives_from chain — transitively-derived specs (Art.5 family
+         etc.) resolve to their operational targets (Art.32, Art.24,
+         A.5.33 etc.). Curated AS DERIVED by design; the principle
+         is an alias for the operational implementer.
+
+    Returns None when no resolution exists (truly uncurated, e.g.
+    Art.85 national-law derogation). Recursion depth-bounded at 5 to
+    handle chains like Art.5 → Art.5.1 → Art.5.1.a → Art.6.
+    """
+    if _depth > 5:
+        return None
+    if _seen is None:
+        _seen = set()
+    if control_ref in _seen:
+        return None
+    _seen.add(control_ref)
+    # Step 1: direct
+    if control_ref in bindings:
+        return bindings[control_ref][1]
+    # Step 2: rolled-up parent (Art.32.1.b → Art.32)
+    rolled = _rollup_sub_clause(control_ref)
+    if rolled != control_ref and rolled in bindings:
+        return bindings[rolled][1]
+    # Step 3: derives_from chain (recursive)
+    chain = _load_derives_chain()
+    candidates = list(chain.get(control_ref, []))
+    if rolled != control_ref:
+        candidates += chain.get(rolled, [])
+    for next_ref in candidates:
+        item = _pick_canonical_item(next_ref, bindings,
+                                    _depth=_depth + 1, _seen=_seen)
+        if item:
+            return item
     return None
 
 
