@@ -4,70 +4,214 @@ control_ref: A.5.18
 standard_id: ISO27001:2022
 evidence_type: procedure
 trigger_type: universal
-template_version: 1
+template_version: 2
 must_count: 8
 should_count: 3
 ---
 
-# Access Rights Management Procedure
+# Access Rights Procedure
 
-> A.5.18 requires that access rights be provisioned, reviewed, modified and removed in accordance with the topic-specific policy on access control (A.5.15). The procedure documents the operational steps for grant, modification and revocation, the SLA targets for each operation, the handling of service accounts, and the linkage to identity management. The access rights register, periodic review and revocation record are sibling leaves
+## What this template gives you
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+The **operational runbook** for provisioning, modifying, and
+revoking access. A.5.15 is the policy (the rules); this is the
+procedure (how the rules are operated day-to-day). It's
+joiner-mover-leaver + privileged access + service accounts. The
+auditor traces sample tickets through this procedure end-to-end —
+each step needs evidence (approver name, date, system change record,
+acknowledgement).
 
-## 1. Asset owner authorization required before access is granted (named authoriser per asset class, not generic 'IT manager')
+## When to use it
+
+You're producing the Access Rights Procedure required by **ISO/IEC
+27001:2022 A.5.18**. Operates the A.5.15 policy.
+
+## Before you start
+
+- [ ] **A.5.15 Access Control Policy** approved — this procedure
+      implements its rules
+- [ ] **A.5.16 Identity Management Procedure** in place — every
+      access right binds to a managed identity
+- [ ] **A.5.2 Operational Roles** + **5.3 RACI** — authoriser
+      identities resolve to named roles
+- [ ] **A.5.3 Segregation Matrix** — provisioning honours flagged
+      combinations
+- [ ] **A.8.2 Privileged Access** procedure — privileged route
+      handed off here
+
+## Cross-references
+
+- **A.5.15 policy** (the rules)
+- **A.5.16 Identity Management** (the actor side)
+- **A.5.17 Authentication Information** (the credentials side)
+- **A.5.11 Return of Assets** (revocation flow)
+- **A.8.2 Privileged Access** (PAM subset)
+- **A.6.1 Screening** (joiner prerequisite)
+- **A.6.4 Disciplinary** (escalation when access violated)
+
+## Estimated effort
+
+**4-6 hours** for v1; **1 hour** for refresh.
+
+---
+
+> **Replace the placeholders below with your content. Leave the
+> MUST and SHOULD heading markers untouched — they bind this document
+> to the checklist when you upload it back.**
+
+## 1. Require asset-owner authorisation before granting access
 
 <<MUST item:A.5.18:asset_owner_authorization>>
-_Why: 27002:5.18a_
+_Authorisation point — the named authoriser per asset class is the
+gating decision, not a generic "IT manager"._
+
+State the authorisation rule per asset class (typically from the
+A.5.15 policy table), how the request reaches the authoriser, what
+the authoriser sees, and how their decision is recorded.
+
+**✓ Good**: "Provisioning request flow: (1) Requester submits via
+the access portal selecting target role + business justification.
+(2) Portal routes to the authoriser per A.5.15 class — manager
+auto-CC'd. (3) Authoriser sees: requester identity, current
+roles, requested role, A.5.3 segregation conflicts flagged
+inline, business justification. (4) Approve/deny decision
+recorded with timestamp + identity; denial requires reason.
+(5) Approved request → provisioning system applies the role +
+notifies requester within SLA per MUST 6."
+
+**✗ Avoid**: "Provisioning by IT" (generic owner — auditor will
+ask who exactly approved this and you can't say)."
 
 <<TEXT>>
 
-## 2. Provisioning applies least privilege and segregation-of-duties checks (cross-link to A.5.3 segregation of duties — flagged combinations are blocked or compensated)
+## 2. Apply least privilege + segregation checks
 
 <<MUST item:A.5.18:least_privilege>>
-_Why: 27002:5.18b / A.5.3_
+_Procedural enforcement of A.5.15 principles — the procedure must
+block obvious violations + flag less obvious ones._
+
+State HOW least privilege is applied (role-based bundles, not
+ad-hoc grants) and HOW segregation conflicts are detected.
+
+**✓ Good**: "Least-privilege enforcement: (a) Provisioning only via
+defined role bundles in Okta — no ad-hoc permission grants.
+(b) Bundle changes require A.5.15 review + ISMS Manager sign-off.
+(c) Segregation conflicts (cross-checked against A.5.3 matrix) are
+flagged inline at request time; provisioning blocks if conflict is
+in the 'never combine' set; warns + requires explicit override
+sign-off if in the 'flag for review' set; passes if not in the
+matrix."
 
 <<TEXT>>
 
-## 3. References the topic-specific access control policy (A.5.15) — drives consistency between policy and operational practice
+## 3. Reference the A.5.15 policy
 
 <<MUST item:A.5.18:policy_reference>>
-_Why: 27002:5.18c / A.5.15_
+_Consistency — procedure should explicitly cite the policy it
+implements._
+
+Cross-link to the A.5.15 policy and state which sections of it this
+procedure operationalises.
+
+**✓ Good**: "This procedure operationalises the rules stated in the
+A.5.15 Access Control Policy (DOC-AC v3.2). Specifically: the
+authoriser table (Section 6 of A.5.15) drives MUST 1 above; the
+RBAC default (Section 3 of A.5.15) drives MUST 2; the segregation
+linkage (Section 7 of A.5.15) drives the conflict-check in MUST 2."
 
 <<TEXT>>
 
-## 4. Path for modification of access on role or responsibility change (joiner-mover-leaver flows; mover is the typically-missed leg)
+## 4. Define modification path (joiner-mover-leaver)
 
 <<MUST item:A.5.18:modification_path>>
-_Why: 27002:5.18g_
+_Lifecycle flows — the MOVER leg is the most-missed; spell it out._
+
+Three lifecycles + the trigger for each. Mover is missed most often
+(role change without access change) — auditors hunt for this.
+
+**✓ Good** (table):
+
+| Lifecycle | Trigger | Steps |
+|---|---|---|
+| Joiner | HR offer accepted → ID issued | Identity created (A.5.16) → role bundles assigned per documented role-fit → manager approves → access live within SLA |
+| Mover (role change) | HRIS role-change event | Old role bundles revoked → new role bundles requested + approved → segregation re-checked → access reconfigured within SLA — **mover trigger fires within 5 business days of the role-change event** |
+| Leaver | HR last-day notification | Access frozen at COB on last day → all roles + identities revoked within 24h SLA → manager attestation of completion → A.5.11 return of assets follows |
 
 <<TEXT>>
 
-## 5. Privileged access requests route through the A.8.2 privileged-access process (separate intake, separate approval, separate logging)
+## 5. Route privileged access through A.8.2
 
 <<MUST item:A.5.18:privileged_route>>
-_Why: 27002:5.18i / A.8.2_
+_Privileged access is a separate lane — separate intake, separate
+approval, separate logging._
+
+State the handoff: privileged-access requests don't go through this
+procedure; they go through the A.8.2 PAM process and come back here
+only for the identity record.
+
+**✓ Good**: "Privileged access (admin, root, production-write,
+identity-admin, security-admin, finance-admin) is handled by the
+A.8.2 Privileged Access Management procedure (DOC-PAM). This
+procedure (A.5.18) handles the standard-role lane only. A request
+flagged 'privileged' at intake is routed to PAM; once approved
+there, the resulting identity + role assignment is recorded in
+the A.5.16 identity register; this procedure does NOT independently
+approve privileged requests."
 
 <<TEXT>>
 
-## 6. SLA targets stated per operation (grant within X days, modification within Y days, revocation within Z hours of trigger — drives the rev_sla_met flag on revocation_record)
+## 6. State SLA targets per operation
 
 <<MUST item:A.5.18:sla_targets>>
-_Why: 27002:5.18d/g — timeliness_
+_Time targets — turn "we revoke access promptly" into "we revoke
+within 24h of the last-day event"._
+
+The SLA targets drive the rev_sla_met flag on revocation records.
+Auditor compares sampled revocations against SLA to assess
+discipline.
+
+**✓ Good**: "SLA targets: (a) New-joiner grant: within 1 business
+day of identity creation. (b) Mover modification: within 5 business
+days of role-change event. (c) Leaver revocation: within 24 hours
+of role termination (last day COB + 24h max). (d) Privileged
+request: within 1 business day of A.8.2 approval. SLA performance
+reported at quarterly ISMS Steering Committee."
 
 <<TEXT>>
 
-## 7. Service account / non-human identity handling stated (provisioning, owner attribution, periodic re-attestation — service accounts are the weakest spot in most access programs)
+## 7. Handle service accounts / non-human identities
 
 <<MUST item:A.5.18:service_account_handling>>
-_Why: 27002:5.18 — all identity classes_
+_Service accounts are typically the weakest lane — they get
+provisioned at integration time + forgotten._
+
+State: provisioning, owner attribution, periodic re-attestation,
+rotation.
+
+**✓ Good**: "Service accounts (CI service principals, app-to-app
+API keys, scheduled-job identities) are managed under this
+procedure with specific overlays: (a) Each service account has a
+named HUMAN owner (system owner or platform team lead — never
+"the service"). (b) Provisioning requires explicit A.5.16
+identity-management procedure entry + scope-of-use documentation.
+(c) Re-attestation every 90 days: owner confirms the account is
+still needed + scope unchanged. (d) Credentials rotated per
+A.5.17 (key rotation policy)."
 
 <<TEXT>>
 
-## 8. Explicit linkage to A.5.16 identity management (every access right attaches to a registered identity; no orphan access)
+## 8. Link every access right to a registered identity
 
 <<MUST item:A.5.18:identity_link>>
-_Why: A.5.16 coherence_
+_No orphan access — every grant binds to an A.5.16 identity record._
+
+State the policy + the enforcement mechanism.
+
+**✓ Good**: "Every access right granted by this procedure binds to
+a registered identity in the A.5.16 identity register. Provisioning
+system rejects requests targeting unregistered identities. Quarterly
+reconciliation: identities in access systems vs identity register;
+discrepancies trigger A.5.18 program review."
 
 <<TEXT>>
 
@@ -75,25 +219,32 @@ _Why: A.5.16 coherence_
 
 ## Recommended additions
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
-
-### 1. Temporary access provisions for time-bound tasks or third parties (expiry date mandatory; automated revocation at expiry)
+### Temporary / time-bound access
 
 <<SHOULD item:A.5.18:temporary_access>>
-_Why: 27002:5.18e_
+_Auto-expiry mechanism for short-term needs (contractor stints,
+incident-response elevation, etc.)._
+
+State the temporary-access mechanism: max duration, auto-expiry,
+extension procedure if longer needed.
 
 <<TEXT>>
 
-### 2. Retention period for approval evidence stated (drives the audit trail for who-approved-what-when)
+### Approval-record retention
 
 <<SHOULD item:A.5.18:approval_retention>>
-_Why: Accountability_
+_The approval-decision record is the audit artefact — retain it
+for the documented period._
+
+Per A.5.33 records retention.
 
 <<TEXT>>
 
-### 3. Emergency-access ('break-glass') procedure stated separately (pre-approved accounts with mandatory post-use justification + audit)
+### Emergency / break-glass
 
 <<SHOULD item:A.5.18:emergency_access>>
-_Why: Operational realism_
+_Pairs with A.5.15's emergency provision — the procedure side._
+
+State break-glass mechanism + post-hoc review.
 
 <<TEXT>>
