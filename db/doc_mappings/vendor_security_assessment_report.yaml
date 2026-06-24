@@ -1,0 +1,81 @@
+# Canonical doc mapping: Vendor / Supplier Security Assessment Report →
+# A.5.21 supply chain + A.5.22 supplier review record family.
+#
+# Tenants commonly produce per-vendor assessment reports as the
+# EVIDENCE of A.5.22 supplier reviews. This is the assessment-report
+# shape (a record of an evaluation activity), distinct from the
+# supplier_security_policy.yaml umbrella which targets the POLICY
+# shape (the requirements doc).
+#
+# Authored 2026-06-24 after the extractor's unconditional unbound
+# drop (commit b4bf331) surfaced that this doc shape had no
+# coverage — extracts produced 0 findings instead of the prior
+# 3 unbound control-level matches.
+
+schema_version: 1
+mapping_id: doc.iso.A_5_22.supplier_security_assessment_report
+
+filename_fingerprints:
+  - tokens: [vendor, security, assessment, report]
+  - tokens: [vendor, assessment, report]
+  - tokens: [vendor, security, assessment]
+  - tokens: [supplier, security, assessment, report]
+  - tokens: [supplier, assessment, report]
+  - tokens: [supplier, security, assessment]
+  - tokens: [vendor, privacy, assessment]
+  - tokens: [vendor, privacy, security, assessment]
+  - tokens: [vendor, risk, assessment]
+  - tokens: [supplier, risk, assessment]
+  - tokens: [third, party, assessment]
+  - tokens: [third, party, security, assessment]
+  - tokens: [vendor, due, diligence]
+  - tokens: [supplier, due, diligence]
+  - tokens: [vendor, evaluation]
+  - tokens: [supplier, evaluation]
+  # The doc may also describe an ongoing review programme, not just
+  # a per-vendor record
+  - tokens: [vendor, review, record]
+  - tokens: [supplier, review, record]
+
+body_fingerprints:
+  - tokens: [vendor, evaluation]
+  - tokens: [security, posture]
+  - tokens: [risk, assessment]
+  - tokens: [data, processing, agreement]
+  - tokens: [vendor, classification]
+  - tokens: [third, party, vendors]
+  - tokens: [critical, services]
+  - tokens: [vendor, security]
+
+min_body_chars: 500
+
+target_leaves:
+  # A.5.22 supplier review — the assessment IS the review record
+  - leaf_id: "req:A.5.22:supplier_review_record"
+    control_ref: "A.5.22"
+    role: review_record
+  - leaf_id: "req:A.5.22:review_schedule_register"
+    control_ref: "A.5.22"
+    role: register
+  # A.5.21 supply-chain — the vendor security assessment evidences
+  # supply-chain review activity
+  - leaf_id: "req:A.5.21:supply_chain_review"
+    control_ref: "A.5.21"
+    role: review_record
+  # A.5.19/A.5.20 family — the report may reference policy alignment
+  # and supplier agreements as part of the assessment
+
+cross_control_links:
+  - control: "A.5.19"
+    rationale: "Vendor assessment evidences the supplier-policy in action"
+  - control: "A.5.20"
+    rationale: "Vendor agreement terms feed assessment criteria"
+  - control: "A.5.23"
+    rationale: "Cloud-service vendors are a critical assessment subset"
+  - control: "Art.28"
+    rationale: "GDPR processor evaluation aligns with vendor assessment"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1

@@ -1,0 +1,91 @@
+# Canonical doc mapping: PII / Client Data Handling Process →
+# A.5.34 PII protection (anchor) + classification + access +
+# deletion adjacencies.
+#
+# Tenants commonly maintain a single end-to-end "Data Handling
+# Process" or "Client Data Handling Procedure" describing the
+# Collect → Classify → Restrict-access → Process → Store →
+# Delete lifecycle for personally identifiable information.
+# This umbrella anchors such docs to A.5.34 (PII protection)
+# with cross-coverage on classification (A.5.12), access
+# (A.5.15), and deletion (A.8.10).
+#
+# Authored 2026-06-24 after the extractor's unconditional
+# unbound drop (commit b4bf331) surfaced this doc shape with
+# no specific mapping coverage. The previous extraction produced
+# 10 unbound findings spread across A.5.1/2/12/15/31/34/36/37,
+# A.8.2/10 — most from referential mentions, not real evidence.
+# Narrowing scope here forces the LLM to focus on per-MUST
+# binding for the PII-handling lifecycle.
+
+schema_version: 1
+mapping_id: doc.iso.A_5_34.pii_data_handling_process
+
+filename_fingerprints:
+  - tokens: [lead, sales, client, data, handling]
+  - tokens: [client, data, handling]
+  - tokens: [client, data, process]
+  - tokens: [client, data, procedure]
+  - tokens: [pii, handling]
+  - tokens: [pii, process]
+  - tokens: [pii, procedure]
+  - tokens: [pii, data, handling]
+  - tokens: [personal, data, handling]
+  - tokens: [personal, data, process]
+  - tokens: [data, handling, process]
+  - tokens: [data, handling, procedure]
+  - tokens: [customer, data, handling]
+  - tokens: [data, lifecycle, process]
+  - tokens: [data, lifecycle, procedure]
+
+body_fingerprints:
+  - tokens: [personally, identifiable, information]
+  - tokens: [pii, collection]
+  - tokens: [data, classification]
+  - tokens: [secure, channels]
+  - tokens: [data, retention]
+  - tokens: [data, deletion]
+  - tokens: [gdpr, compliance]
+  - tokens: [data, subject, rights]
+  - tokens: [data, minimization]
+  - tokens: [anonymize, data]
+
+min_body_chars: 500
+
+target_leaves:
+  # A.5.34 anchor — PII protection
+  - leaf_id: "req:A.5.34:pii_processing_register"
+    control_ref: "A.5.34"
+    role: register
+  - leaf_id: "req:A.5.34:privacy_and_pii_protection_policy"
+    control_ref: "A.5.34"
+    role: policy
+  - leaf_id: "req:A.5.34:privacy_applicability_scope"
+    control_ref: "A.5.34"
+    role: scope_note
+  # A.5.12 classification — the doc describes the classification step
+  - leaf_id: "req:A.5.12:information_classification_scheme"
+    control_ref: "A.5.12"
+    role: scheme
+  # A.8.10 deletion — the doc describes secure deletion / anonymization
+  - leaf_id: "req:A.8.10:information_deletion_procedure"
+    control_ref: "A.8.10"
+    role: procedure
+  - leaf_id: "req:A.8.10:applicable_deletion_scope"
+    control_ref: "A.8.10"
+    role: scope_note
+
+cross_control_links:
+  - control: "A.5.15"
+    rationale: "Access restriction step references A.5.15 access control policy"
+  - control: "Art.5"
+    rationale: "GDPR data-protection principles underpin the process steps"
+  - control: "Art.32"
+    rationale: "Security of processing — technical/organizational measures"
+  - control: "A.5.31"
+    rationale: "Compliance obligations driving the GDPR + ISO 27001 alignment"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1

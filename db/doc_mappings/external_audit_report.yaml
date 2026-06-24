@@ -1,0 +1,91 @@
+# Canonical doc mapping: External ISO 27001 / certification audit
+# report → 9.2 audit_execution_record + 9.3 management review +
+# 10.1 improvement actions.
+#
+# Tenants frequently upload third-party certification body audit
+# reports (Stage 1, Stage 2, surveillance, recertification) as
+# direct evidence of the ISMS clauses 9.2 / 9.3 / 10.1 audit +
+# review + improvement chain. These reports document findings,
+# nonconformities, observations, and improvement opportunities
+# from an external auditor.
+#
+# Authored 2026-06-24 after the extractor's unconditional unbound
+# drop (commit b4bf331) surfaced that this doc shape had no
+# coverage — a Czech-language ISO 27001 audit report extract
+# produced 10 unbound findings (clauses 9, 9.1, 9.2, 9.3, 10,
+# 10.1, 10.2, 7.5, A.5.15, A.5.19) with no per-MUST binding.
+#
+# Note: filename heuristics work on English titles. Non-English
+# audit reports rely on the enricher's topic_tokens (which may
+# emit translated keywords) for filename_target unioning. Body
+# fingerprints intentionally English-only — adding multilingual
+# variants is a future i18n workstream.
+
+schema_version: 1
+mapping_id: doc.iso.9_2.external_audit_report
+
+filename_fingerprints:
+  - tokens: [audit, report]
+  - tokens: [external, audit, report]
+  - tokens: [certification, audit, report]
+  - tokens: [iso27001, audit, report]
+  - tokens: [iso, "27001", audit]
+  - tokens: [stage, "1", audit]
+  - tokens: [stage, "2", audit]
+  - tokens: [stage, audit, report]
+  - tokens: [surveillance, audit]
+  - tokens: [surveillance, audit, report]
+  - tokens: [recertification, audit]
+  - tokens: [recertification, audit, report]
+  - tokens: [audit, finding, report]
+  - tokens: [client, report, "27001"]
+  - tokens: [certification, report]
+  - tokens: [audit, opinion, report]
+  - tokens: [registrar, report]
+
+body_fingerprints:
+  - tokens: [nonconformity, finding]
+  - tokens: [opportunity, for, improvement]
+  - tokens: [audit, finding]
+  - tokens: [management, review]
+  - tokens: [continual, improvement]
+  - tokens: [audit, conclusion]
+  - tokens: [certification, decision]
+  - tokens: [audit, criteria]
+  - tokens: [iso, iec, "27001"]
+
+min_body_chars: 500
+
+target_leaves:
+  # 9.2 internal audit — external reports also evidence this
+  # programme's execution
+  - leaf_id: "req:9.2:audit_execution_record"
+    control_ref: "9.2"
+    role: audit_record
+  - leaf_id: "req:9.2:audit_program_review"
+    control_ref: "9.2"
+    role: review_record
+  # 9.3 management review — audit reports feed management review inputs
+  - leaf_id: "req:9.3:management_review"
+    control_ref: "9.3"
+    role: review_record
+  # 10.1 improvement — audit findings drive improvement actions
+  - leaf_id: "req:10.1:improvement_action_register"
+    control_ref: "10.1"
+    role: register
+  - leaf_id: "req:10.1:applicable_triggers_scope"
+    control_ref: "10.1"
+    role: scope_note
+
+cross_control_links:
+  - control: "10.2"
+    rationale: "Nonconformities from audit feed the nonconformity register"
+  - control: "5.1"
+    rationale: "Top-management commitment is an audit-evaluable input"
+  - control: "7.5"
+    rationale: "Documented information completeness is a common audit topic"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1
