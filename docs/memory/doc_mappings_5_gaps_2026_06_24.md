@@ -100,9 +100,28 @@ differs) but will exercise the real pipeline on re-extract.
 
 ## Re-extract results
 
-Will fill in after the batch re-extract completes — kicked off
-in background. Expected: 5 docs go from 0 findings to non-zero
-bound findings via the new doc_mappings.
+All 5 docs went from 0 → non-zero bound findings:
+
+| Doc | Pre | Post | Mapping |
+|---|---|---|---|
+| HR Security Policy.docx | 0 | **15 bound** | hr_security_policy.yaml (existing) |
+| 214427_Client Report 27001_DG3D87.pdf (Czech) | 0 | **11 bound** | external_audit_report.yaml (NEW) |
+| Vendor Security Assessment Report.docx | 0 | **5 bound** | vendor_security_assessment_report.yaml (NEW) |
+| Lead Sales and Client Data Handling.docx | 0 | **5 bound** | pii_data_handling_process.yaml (NEW) |
+| Compliance Requirements.docx | 0 | **3 bound** | compliance_requirements_register.yaml (existing) |
+
+Total: **39 new bound findings** across the 5 docs.
+
+Tenant-wide: extracted bound 329 → 348 (+19 net — some of the 39
+superseded prior bound findings from related controls via the
+writer-supersede mechanism). 0 unbound across all
+engine-actionable sources. xfw_bridge 95 → 72 (some by-design
+bridges got superseded during the re-extracts).
+
+The Czech audit report match validates the
+`[client, report, "27001"]` filename fingerprint — non-English
+docs CAN match doc_mappings via numeric/identifier tokens that
+are language-invariant.
 
 ## Related
 
