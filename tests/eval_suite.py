@@ -1387,18 +1387,20 @@ EVAL_CASES = [
         tags=["documents", "rename", "evidence_model", "document_content"],
         expected_refs=["4.3"],
         expected_type="document_content",
+        shape="musts_listing",  # converted 2026-06-24 from brittle 3-string match
         # Commit 1 of the evidence-model rename. The chat path now traverses
         #   RequirementNode -[:SATISFIED_BY]-> FulfilmentSpec
         #                     -[:REQUIRES_EVIDENCE]-> EvidenceRequirement
         # instead of the old direct (n)-[:REQUIRES_DOCUMENT]->(:DocumentRequirement)
-        # edge. The 4.3 ISMS Scope Statement is one of the 18 hand-curated
-        # leaves; a regression on the FulfilmentSpec hop would drop its
-        # checklist entirely (no must-items returned).
-        must_contain=["Boundaries", "ISMS", "must"],
+        # edge. The 4.3 ISMS Scope Statement is a multi-leaf control; a
+        # regression on the FulfilmentSpec hop would collapse the MUST
+        # enumeration. Shape check counts numbered/bulleted items (≥5) —
+        # robust to LLM phrasing variance on any single MUST's wording.
         must_not_contain=["FulfilmentSpec", "REQUIRES_EVIDENCE", "EvidenceRequirement"],
         notes=(
             "Locks in REQUIRES_DOCUMENT->REQUIRES_EVIDENCE rename and the "
-            "FulfilmentSpec traversal hop in graph_expander."
+            "FulfilmentSpec traversal hop in graph_expander. Shape validator "
+            "(musts_listing) replaced 3-string match per feedback-eval-state-drift."
         ),
     ),
 
@@ -3930,6 +3932,51 @@ def _check_stage2_shape(answer: str, expected_refs: list) -> tuple[list[str], li
     return passed, failures
 
 
+_MUSTS_LISTING_LINE_RE = re.compile(
+    r"^\s*(?:\d+[\.\)]|[-*•])\s+\S",
+    re.MULTILINE,
+)
+
+
+def _check_musts_listing_shape(answer: str, expected_refs: list) -> tuple[list[str], list[str]]:
+    """Validate a 'list the MUSTs for control X' answer shape.
+
+    Load-bearing invariants for these queries (e.g. case #31 "what must our
+    ISMS scope statement contain?"):
+      - The canonical ref is cited
+      - The answer enumerates per-MUST items (numbered list or bullets)
+      - The enumeration has enough rows to plausibly cover a 4-leaf control
+        (≥5 items — the 4.3 leaf has 18; thinner returns suggest the
+        FulfilmentSpec → REQUIRES_EVIDENCE traversal partially collapsed)
+
+    Replaces brittle 3-substring assertions that flake on LLM phrasing
+    (per `feedback-eval-state-drift`). The numbered-list shape is
+    deterministic given the deterministic compose path; the SPECIFIC
+    keywords used in any item's prose are LLM-stochastic.
+    """
+    passed: list[str] = []
+    failures: list[str] = []
+
+    if expected_refs:
+        ref = expected_refs[0]
+        if ref in answer:
+            passed.append(f"musts_listing: ref {ref!r} present")
+        else:
+            failures.append(f"musts_listing: ref {ref!r} not in answer")
+
+    enumerated_lines = _MUSTS_LISTING_LINE_RE.findall(answer)
+    n_lines = len(enumerated_lines)
+    if n_lines >= 5:
+        passed.append(f"musts_listing: {n_lines} enumerated items")
+    else:
+        failures.append(
+            f"musts_listing: only {n_lines} enumerated items "
+            f"(expected ≥5 — FulfilmentSpec traversal may have collapsed)"
+        )
+
+    return passed, failures
+
+
 def _check_cross_framework_shape(answer: str, expected_refs: list) -> tuple[list[str], list[str]]:
     """Validate a cross-framework article-status answer shape.
 
@@ -4020,6 +4067,10 @@ def run_case(case: EvalCase, pipeline: EvalPipeline) -> EvalResult:
         failures.extend(s_failures)
     elif case.shape == "cross_framework":
         s_passed, s_failures = _check_cross_framework_shape(answer, case.expected_refs)
+        passed.extend(s_passed)
+        failures.extend(s_failures)
+    elif case.shape == "musts_listing":
+        s_passed, s_failures = _check_musts_listing_shape(answer, case.expected_refs)
         passed.extend(s_passed)
         failures.extend(s_failures)
     else:
