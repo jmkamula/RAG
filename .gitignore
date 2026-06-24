@@ -25,3 +25,6 @@ archive/
 
 # OS
 .DS_Store
+
+# Claude Code runtime locks (per-session)
+.claude/scheduled_tasks.lock
