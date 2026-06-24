@@ -1,0 +1,83 @@
+# Canonical doc mapping: Training & Awareness Policy → A.6.3 family.
+#
+# Tenants commonly upload a single Training & Awareness Policy that
+# covers the A.6.3 awareness/education/training control. The doc
+# typically scopes the audience + curriculum + describes the programme
+# itself, so we union the per-leaf scaffolds (audience_curriculum_scope
+# + security_awareness_programme) under one umbrella.
+#
+# The pre-existing per-leaf scaffolds required the exact tokens
+# "education" + "training" / "education" + "awareness" — too narrow.
+# Arion-shaped names like "Training and Awareness Policy" don't
+# include "education" so neither scaffold matched, and the LLM
+# extractor fell through to broader (incorrect) supplier-policy or
+# DPIA-procedure mappings via topic-token leakage.
+#
+# This umbrella widens the filename + body vocabulary to cover the
+# common privacy + security training shape.
+
+schema_version: 1
+mapping_id: doc.iso.A_6_3.training_awareness_policy
+
+filename_fingerprints:
+  - tokens: [training, awareness, policy]
+  - tokens: [training, awareness]
+  - tokens: [security, awareness, policy]
+  - tokens: [security, awareness]
+  - tokens: [awareness, training, policy]
+  - tokens: [awareness, policy]
+  - tokens: [training, policy]
+  - tokens: [training, programme]
+  - tokens: [training, program]
+  - tokens: [staff, training, policy]
+  - tokens: [employee, training, policy]
+  - tokens: [privacy, training, policy]
+  # Procedure variants — tenant may upload the doc as a procedure
+  # rather than a policy.
+  - tokens: [training, awareness, procedure]
+  - tokens: [security, awareness, procedure]
+  - tokens: [awareness, procedure]
+  - tokens: [training, procedure]
+
+body_fingerprints:
+  - tokens: [security, awareness]
+  - tokens: [awareness, training]
+  - tokens: [security, training]
+  - tokens: [privacy, training]
+  - tokens: [training, programme]
+  - tokens: [training, program]
+  - tokens: [annual, training]
+  - tokens: [mandatory, training]
+  - tokens: [onboarding, training]
+  - tokens: [learning, management]
+
+min_body_chars: 600
+
+target_leaves:
+  - leaf_id: "req:A.6.3:security_awareness_programme"
+    control_ref: "A.6.3"
+    role: training_programme
+  - leaf_id: "req:A.6.3:audience_curriculum_scope"
+    control_ref: "A.6.3"
+    role: scope_note
+  - leaf_id: "req:A.6.3:training_completion_register"
+    control_ref: "A.6.3"
+    role: register
+  - leaf_id: "req:A.6.3:awareness_programme_review"
+    control_ref: "A.6.3"
+    role: review_record
+
+cross_control_links:
+  - control: "A.6.2"
+    rationale: "Employment terms reference training obligations"
+  - control: "A.6.4"
+    rationale: "Disciplinary process references training acknowledgement"
+  - control: "A.5.18"
+    rationale: "Access-rights training is part of the awareness programme"
+  - control: "Art.39"
+    rationale: "GDPR DPO tasks include staff awareness — privacy training overlap"
+
+confidence_weights:
+  filename: 0.6
+  body: 0.3
+  explicit_refs: 0.1
