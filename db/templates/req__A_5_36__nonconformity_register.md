@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.36 requires corrective actions tracked to closure — but the corrective-action promise is theoretical without a per-NC lifecycle tracker. The nonconformity register catalogues every NC raised: severity, owner, agreed corrective action, target date, closure status, root cause. This is the audit-defensibility artefact paired with the review records
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-NC unique identifier traceable back to the source review record
 

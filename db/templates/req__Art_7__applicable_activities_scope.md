@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the register — which processing activities rely on consent (per Art.6.1.a) vs other lawful bases. Without this, consent gets over-applied (worst case: 'consent default') or under-applied (worst case: covert reliance)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Activities using consent as the lawful basis enumerated (drawn from the Art.6 lawful basis register)
 

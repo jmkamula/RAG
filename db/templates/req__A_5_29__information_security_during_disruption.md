@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.29 requires planning to maintain information security at an APPROPRIATE LEVEL during disruption — graceful degradation, not all-or-nothing. The plan documents disruption scenarios, controls that must keep operating, fallback / compensating measures, communication paths, and restoration steps. The scenario register, periodic program review and per-activation record are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Disruption scenarios considered (cyber attack [link to A.5.7 threat intel], natural event, supplier failure [link to A.5.21], regulatory action, key-personnel loss)
 

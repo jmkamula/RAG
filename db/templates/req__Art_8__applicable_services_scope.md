@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which services count as 'offered directly to a child' under Art.8. Critical for B2B / professional-service tenants who may incidentally process minors' data but don't 'offer to' them directly (e.g. a parent purchases on a family-account UI)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Services in scope enumerated (those advertised to / used by minors directly)
 

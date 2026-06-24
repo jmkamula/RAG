@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.35 requires controllers to carry out a DPIA before processing 'likely to result in a high risk' (including Art.35.3 mandatory cases). The procedure governs DPIA triggers + drafting + DPO advice + Art.36 prior consultation pathway
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Trigger criteria — Art.35.3 mandatory cases (systematic monitoring / special-category large-scale / public-area large-scale monitoring) PLUS SA-published list + sectoral guidance
 

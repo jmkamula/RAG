@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.34 requires the controller to communicate the breach to affected data subjects 'without undue delay' when the breach is likely to result in a high risk to their rights and freedoms (with Art.34.3 exceptions). Companion to Art.33 procedure but with different threshold + audience + exceptions
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. High-risk gate — when subject communication IS required (likely to result in high risk to rights and freedoms)
 

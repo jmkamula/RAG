@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.32 requires appropriate procedures to protect IPR — both the organisation's own and third parties'. The procedure documents usage controls, third-party respect mechanisms, employee-creation rules and the linkage to acquisition. The licensed/IPR inventory, the acquired-works upstream and the annual audit are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Scope of IPRs covered (software licences, trademarks, copyrights, patents, trade secrets, AI model weights / training data where applicable)
 

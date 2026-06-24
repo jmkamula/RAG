@@ -14,7 +14,7 @@ should_count: 2
 
 > Periodic verification that screening is happening at the right depth for each role tier, that legal/sectoral driver shifts have been incorporated, that re-screening cadence is being met, and that the register has no gaps. Annual cadence (freshness=365) matches the HR-program-review doctrine
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

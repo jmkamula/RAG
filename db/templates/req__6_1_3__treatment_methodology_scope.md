@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the treatment plan — what options are available (4 standard: modify/share/avoid/retain), residual-acceptance authority, treatment cost-vs-benefit threshold rules
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Treatment options catalog (modify / share / avoid / retain — ISO 31000 4-option model)
 

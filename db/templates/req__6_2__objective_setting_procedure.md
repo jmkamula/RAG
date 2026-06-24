@@ -13,7 +13,7 @@ should_count: 1
 
 > The methodology behind the register — how objectives are derived from policy + risk assessment + party requirements, who approves, what planning produces (resources, who, when, evaluation per clause 6.2 planning)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Inputs to objective-setting (5.2 policy, 6.1.2 risk results, 4.2 party requirements)
 

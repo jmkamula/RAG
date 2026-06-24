@@ -13,7 +13,7 @@ should_count: 2
 
 > The upstream that drives the register. Documents which authorities are relevant today and on what basis — jurisdictions of operation, sectoral obligations, types of personal data processed, critical-service classifications. ISO 27002:2022 § 5.5 expects the organisation to know which authorities apply before claiming to maintain contact with them
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Jurisdictions covered (HQ, places of business, customer locations) — each maps to one or more authorities
 

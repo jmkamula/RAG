@@ -13,7 +13,7 @@ should_count: 1
 
 > The accountability anchor document — Art.24's 'data protection policies' (Art.24.2) operationalised as a privacy programme charter that names the programme owner, scope, governance forum cadence, and explicit Art.24 demonstrability statement. ISO 27001 doesn't require this as a discrete artifact; Art.24 does
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Statement of GDPR compliance objective + accountability commitment
 

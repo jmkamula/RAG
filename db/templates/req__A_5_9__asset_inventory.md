@@ -14,7 +14,7 @@ should_count: 3
 
 > A.5.9 requires an inventory of information and associated assets — including owners — developed and maintained. The register is the live record. Lifecycle procedure, the discovery/onboarding upstream and reconciliation review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Asset records exist (information assets, software, hardware, services, cloud resources)
 

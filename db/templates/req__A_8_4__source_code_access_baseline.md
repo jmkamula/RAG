@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.4 baseline — repository configuration state. Defines the RBAC model, branch protection, secrets scanning, dependency rules. profile_fact trigger because A.8.4 only applies where the organisation develops software. The procedure, monitoring log and review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. RBAC configured per repository (read / write / admin) at the platform level
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > Clause 4.4 requires the organisation to establish, implement, maintain, and continually improve an ISMS including its processes and their interactions. The ISMS manual is the canonical artefact describing the system as a whole. Sibling leaves: process interaction map, per-update change record, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Reference to ISMS scope statement (4.3)
 

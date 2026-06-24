@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.35 expects reviews at planned intervals — without a schedule, 'planned' becomes 'when leadership asks for it'. The schedule register is the calendar of upcoming independent reviews: which scope areas, what cadence, which reviewer or selection mechanism, last review date, next review date
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Planned cadence stated (annual is the doctrine baseline; risk-tier or scope-area may drive tighter cadences for hot domains)
 

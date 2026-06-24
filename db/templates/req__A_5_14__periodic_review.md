@@ -14,7 +14,7 @@ should_count: 2
 
 > Transfer policies decay as the technology landscape shifts (new collaboration platforms, new AI tools that exfiltrate by design), as the legal landscape shifts (cross-border data flow rulings, regulator guidance), and as the org's transfer mix shifts (new supplier integrations, new regulatory reporting). The review captures the periodic check: technology check, legal-landscape scan, transfer-mix audit, training-effectiveness sample, and resulting program adjustments
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

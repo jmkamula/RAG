@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.22 gives subjects the right NOT to be subject to solely-automated decisions producing legal effects or similarly significant effects. The procedure governs intake of objections, the safeguards Art.22.3 requires (human intervention, expression of view, contest decision)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Intake channel via Art.12 procedure
 

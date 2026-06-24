@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that drives which template variants exist and which parties require NDA before access. Documents the party categories, the info-class threshold that triggers NDA requirement (some orgs require NDA for all visitors; others only for those touching confidential info)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Party categories enumerated (employees, contractors, suppliers, visitors, M&A counterparties, partners with joint-development)
 

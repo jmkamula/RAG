@@ -14,7 +14,7 @@ should_count: 2
 
 > Periodic check that memberships are still earning their place. Each entry is reviewed for value delivered, currency of contact, and continued relevance against the risk-topic scope. Dormant memberships are pruned; gaps where a new SIG should be joined are flagged
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

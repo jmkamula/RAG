@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.7 expects intelligence to actually reach consumers and inform defensive action — not just be produced and filed. The per-product record evidences each delivered artefact: product id, layer, source feeds aggregated, named consumer(s), distribution date, action taken downstream (firewall rule pushed / IDS signature added / risk register entry / exec briefing). One record per published product, traceable back to the feed register and forward to the consumer's control
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Product identifier per record (unique, sequenced)
 

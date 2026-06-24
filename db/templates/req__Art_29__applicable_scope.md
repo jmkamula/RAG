@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which personnel categories act under controller/processor authority (employees + contractors + embedded vendor staff), distinct from sub-processors (Art.28 territory)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Personnel categories in scope (employees + contractors + embedded third-party staff)
 

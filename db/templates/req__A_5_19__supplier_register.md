@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.19 requires the org to know who its suppliers are, what they provide, the nature of access they hold, and their risk classification. The register is the live source of truth — feeding the periodic review and offboarding leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each supplier captured: identity, products/services, criticality
 

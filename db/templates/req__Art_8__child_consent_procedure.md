@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.8 requires that when offering information-society services directly to a child, consent is only lawful if the child is at least 16 (or as low as 13 per Member State law) OR parental consent is obtained. The procedure is the canonical artefact. Sibling leaves: child consent register, applicable services scope, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Age threshold stated per applicable Member State (16 default; some MS lower it to 13/14/15)
 

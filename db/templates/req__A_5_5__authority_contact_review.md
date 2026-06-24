@@ -14,7 +14,7 @@ should_count: 2
 
 > Periodic verification that the register is still accurate, the scope is still correct, and the maintenance procedure is being followed. ISO 27002:2022 § 5.5 expects contact to be maintained — drift between register and reality is the audit failure mode this leaf catches
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval (typically within 12 months of last review)
 

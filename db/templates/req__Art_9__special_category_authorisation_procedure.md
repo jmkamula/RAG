@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.9 prohibits special-category processing UNLESS one of the Art.9.2 conditions applies. The procedure is the canonical artefact — how a proposed special-category activity is reviewed, what Art.9.2 condition is documented, who approves. Sibling leaves: processing register, applicable categories scope, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Intake process for new special-category processing proposals (no quiet onboarding)
 

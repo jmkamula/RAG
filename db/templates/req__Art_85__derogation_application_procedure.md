@@ -13,7 +13,7 @@ should_count: 2
 
 > How the organisation identifies which processing activities fall under Art.85 (journalism / academic / artistic / literary expression), how it looks up the applicable Member-State national-law derogations per jurisdiction of operation, and how it applies derogations consistently while documenting the legal basis per activity. The procedure is the canonical artefact. Sibling leaves: per-jurisdiction derogation register, applicable activities scope, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Named owner of the procedure (typically DPO + legal counsel + editorial/academic lead)
 

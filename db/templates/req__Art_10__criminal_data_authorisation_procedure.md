@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.10 permits processing of criminal convictions / offences data ONLY under control of official authority OR when Member State law specifically authorises it with appropriate safeguards. The procedure is the canonical artefact. Sibling leaves: processing register, applicable legal-basis scope, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Legal-basis verification step — official-authority OR Member State authorisation cited per activity
 

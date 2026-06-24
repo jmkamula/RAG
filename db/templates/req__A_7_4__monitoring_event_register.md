@@ -13,7 +13,7 @@ should_count: 1
 
 > The catalogue of detection events worth investigating — anomalous access attempts, alarms triggered, CCTV-detected behaviour requiring review. Subset of raw detection signal (after first-pass filtering)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-event unique identifier
 

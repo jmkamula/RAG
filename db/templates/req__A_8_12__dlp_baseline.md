@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.12 baseline — DLP tool stack, channel coverage, classification-driven ruleset, alert-routing. Procedure, alert log and review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Channels with DLP controls active (email / web / endpoint / cloud-storage / IM / removable-media / printing)
 

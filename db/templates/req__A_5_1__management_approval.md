@@ -13,7 +13,7 @@ should_count: 1
 
 > A.5.1 requires top management to approve the InfoSec policy. The approval can live inside the policy as a signed cover page, in a board minute, or as a separate signed cover letter — any form that names a top-management signatory and a date
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Signatory at top-management level (CEO, board chair, or delegated equivalent)
 

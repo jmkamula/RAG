@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.16 expects every identity termination to be evidenced — not just procedurally promised. The revocation record evidences each disable/remove event: identity id, trigger type, effective date, actual revocation timestamp, SLA-met flag, dual signoff, residual-cleanup status (mailbox forwarding, file-share access transfer). One record per terminated identity, traceable back to the identity register and to the originating trigger (A.5.11 leaver register, contractor expiry, security event)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Identity identifier per record (links to identity register entry)
 

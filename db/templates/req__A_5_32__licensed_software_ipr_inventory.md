@@ -13,7 +13,7 @@ should_count: 2
 
 > The register at the heart of IPR protection. Without an inventory of what's licensed, what's open-source, what's internally created, A.5.32 enforcement is theoretical. The inventory tracks entitlements, expiry, attribution obligations and ownership for each entry
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Inventory of licensed commercial software with entitlements (seats / cores / sites) and expiry per licence
 

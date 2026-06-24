@@ -14,7 +14,7 @@ should_count: 1
 
 > Per-activity register for every Art.10 processing operation — which Member State law applies, what safeguards, what retention. Annual refresh (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Activity identifier per row (links to Art.30 RoPA)
 

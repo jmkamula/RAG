@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.14 baseline — critical services identified, availability requirements per service, redundancy approach per service. Procedure (failover), failover-test register, review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Critical services enumerated with availability requirement per service (drawn from A.5.30 BIA)
 

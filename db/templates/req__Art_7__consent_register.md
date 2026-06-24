@@ -14,7 +14,7 @@ should_count: 1
 
 > Per-consent record proving capture for any subject whose data is processed under Art.6.1.a consent. Annual refresh (freshness=365). Auditor's go-to artefact when challenging the lawful basis for a consent-based activity
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Subject identifier per row (pseudonymous or direct identifier)
 

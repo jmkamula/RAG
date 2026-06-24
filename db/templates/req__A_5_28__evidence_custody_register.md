@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.28 requires that the integrity and provenance of every evidence package be demonstrable on demand. The custody register catalogues every evidence package handled: id, source incident, evidence type, acquisition method, acquisition hash, current custodian, current location, retention end-date, status (active/handed-over/disposed). It is the operational record that proves chain of custody at audit time
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each evidence package captured with a unique identifier
 

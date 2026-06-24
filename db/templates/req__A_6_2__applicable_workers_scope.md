@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that drives which template variants exist. Documents the worker categories the org engages (employees, contractors, interns, secondees, agency workers) and which template each uses
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Worker categories enumerated (employees, fixed-term, contractors, interns, secondees from suppliers, agency workers)
 

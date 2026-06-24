@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.29 requires the plan to cover all relevant scenarios — invisible scenarios are the ones that hit unprepared. The register catalogues every in-scope disruption scenario: scenario id, type, severity tier, in-scope controls, fallback path, last-test date, owner. It is the operational record that proves the plan actually covers the org's risk landscape, not just the easy scenarios
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each in-scope scenario captured with a unique identifier
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.37 governs whether a DPO must be designated (Art.37.1 a-c) and the qualifications + publication requirements. Paired with Art.38 (position) + Art.39 (tasks)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Applicability assessment per Art.37.1 a-c criteria (public authority / core systematic monitoring / core large-scale special category)
 

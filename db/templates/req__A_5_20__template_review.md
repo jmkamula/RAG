@@ -14,7 +14,7 @@ should_count: 2
 
 > The supplier agreement template ages: regulations change, threat landscape shifts, internal control baselines evolve. The periodic review captures who reviewed it, when, what changed, and the re-papering plan for existing supplier agreements that need to catch up
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

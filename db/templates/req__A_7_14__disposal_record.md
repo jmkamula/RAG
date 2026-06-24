@@ -13,7 +13,7 @@ should_count: 1
 
 > Lifecycle-end variant — one record per piece of equipment disposed of. Proves the chain-of-custody from collection through to destruction-or-handover. Parallel to A.5.28 evidence-disposal pattern
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-record equipment identifier (cross-link to A.5.9 asset register, retired entry)
 

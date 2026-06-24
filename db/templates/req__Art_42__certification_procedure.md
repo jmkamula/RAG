@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.42 governs how a controller/processor obtains and maintains GDPR certification per approved certification mechanisms (Art.42.5). Certification provides demonstrability + may serve transfer safeguards (Art.46.2.f)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Certification scheme selection — which Art.42.5 approved scheme + which Art.43 accredited body
 

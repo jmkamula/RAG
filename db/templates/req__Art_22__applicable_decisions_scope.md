@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which automated processes count as 'solely automated' + 'legal effects or similarly significant'. Crucial: routine fraud-detection that flags-for-human-review is OUT of scope; loan-approval decided-by-algorithm is IN scope
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Operational test for 'solely automated' (no meaningful human involvement)
 

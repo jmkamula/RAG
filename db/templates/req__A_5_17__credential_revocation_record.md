@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.17 expects every credential revocation to be evidenced — credentials issued and never retired are the basis of every credential-stuffing risk that materialises years later. The revocation record evidences each disable/reissue event: credential ref, trigger type, effective time, actual revocation timestamp, replacement issued (if applicable), residual-access-cleanup. One record per credential event, paired with the corresponding A.5.16 identity revocation record where the trigger is identity-level. Independent records fire for credential-only events (rotation, lost-token reissue, factor downgrade)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Credential identifier per record (links to credential register entry; specific instance, not just type)
 

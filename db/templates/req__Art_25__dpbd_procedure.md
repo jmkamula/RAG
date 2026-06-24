@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.25.1 requires the controller to implement T&O measures at the time of determining means of processing AND at the time of processing itself. The procedure governs HOW DPbD reviews are integrated into product/system design — design-stage privacy review checkpoints, decision authority, output (defaults + measures register)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Design-stage checkpoint stated (when DPbD review happens in the product / system development lifecycle)
 

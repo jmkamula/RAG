@@ -13,7 +13,7 @@ should_count: 1
 
 > The methodology behind the matrix — what model is used (RACI, DACI, RAPID), how decision rights are split when more than one role overlaps, how conflicts are resolved, how new roles get added
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Responsibility model stated (RACI, DACI, RAPID or equivalent)
 

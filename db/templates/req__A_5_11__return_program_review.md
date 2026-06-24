@@ -14,7 +14,7 @@ should_count: 2
 
 > The return process creates value only if it actually closes — unreturned-asset rates, delayed-access-revocation incidents, BYOD-wipe failures all signal the program is leaking. The review captures the planned-interval check: unreturned rate, access-revocation latency, exception/write-off analysis, workforce-model coverage, and resulting program adjustments. Annual cadence — HR methodology stability
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned annual interval
 

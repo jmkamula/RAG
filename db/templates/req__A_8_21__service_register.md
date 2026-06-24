@@ -13,7 +13,7 @@ should_count: 1
 
 > Per-service catalogue — service id, provider, security mechanisms in use, SLA performance, last-review date
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row service identifier (ISP / CDN / DNS / SD-WAN / managed-firewall)
 

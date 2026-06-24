@@ -13,7 +13,7 @@ should_count: 1
 
 > A.7.7 requires clear-desk rules for papers/removable media plus clear-screen rules for information processing facilities. The policy states both rules and enforcement. The audit register, applicable-locations scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Clear-desk rule for papers and removable media when desk unattended
 

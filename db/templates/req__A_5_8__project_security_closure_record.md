@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.8 expects each project to formally close out security — not just go-live and dissolve the team. The closure record evidences the handover gate: project id, gates passed, outstanding risks transferred to operations with named owner, security artefacts archived, and final signoff. One record per closed project, traceable back to the project register and through to operational ownership
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Project identifier per record (links to project register)
 

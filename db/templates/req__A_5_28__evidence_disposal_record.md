@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.28 requires that the chain of custody be demonstrable end-to-end — including the *end* of the chain. The disposal record evidences the legitimate closure of each evidence package: either external handover (to law enforcement, regulator, opposing counsel) with receipt OR retention-driven destruction with witness + method + final hash. One record per closed package, traceable back to the custody register and through to the source incident
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Package identifier per record (links to custody register)
 

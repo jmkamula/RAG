@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.19 requires processes and procedures to manage information security risks arising from supplier relationships. The procedure documents how supplier types are identified, how selection happens, how due diligence is conducted, how monitoring is run, and how requirements get into the agreement (A.5.20). The supplier register, periodic review and offboarding records are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Supplier types identified and documented (ICT services, ICT infrastructure components, logistics, utilities, financial, etc.)
 

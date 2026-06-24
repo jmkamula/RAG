@@ -13,7 +13,7 @@ should_count: 1
 
 > Clause 5.3 makes assignment of conflicting-duty controls a top-management responsibility. The approval may be a signed cover page on the matrix, a board minute, or a delegated equivalent — any form that names a top-management signatory, a date, and the specific matrix version being approved
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Signatory at top-management level (CEO, board chair, or delegated equivalent)
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which processing activities are within Art.32 scope (any processing of personal data), Art.32.2 risk factors (accidental/unlawful events the measures must protect against), Art.32.4 persons-acting-under-authority compliance
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Processing activities in scope (cross-link to Art.30 RoPA)
 

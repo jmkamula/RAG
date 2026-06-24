@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.12 requires information to be classified per the organisation's security needs across confidentiality, integrity, availability, and interested-party requirements. The scheme defines levels and handling implications. Approval, communication and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Classification levels defined (e.g. Public / Internal / Confidential / Restricted)
 

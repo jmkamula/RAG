@@ -13,7 +13,7 @@ should_count: 3
 
 > A.6.8 requires the organisation to provide a mechanism for personnel to report observed or suspected information security events through appropriate channels in a timely manner. The procedure documents the channels, what to report, timeliness expectation, no-blame culture, and handoff to triage. The event report register, reporting-audience scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Multiple reporting channels offered (email, hotline, portal, manager, ticket system) — drives discoverability and accessibility under various conditions including when normal tooling is unavailable
 

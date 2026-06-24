@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.21 requires components to be replaced before they reach end-of-life or end-of-support, or compensated for with stated controls if that is unavoidable. The replacement record evidences the actual execution: replacement selected (with sourcing controls re-applied), the cutover date, and post-replacement verification — or, where replacement was delayed, the compensating controls and risk acceptance
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. EOL trigger per record (vendor announcement / contract end / vulnerability-driven decommission)
 

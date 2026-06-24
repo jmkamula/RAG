@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.6 requires contact with special interest groups (SIGs), security forums, and professional associations. The register lists current memberships and engagements with the basis for each. Engagement procedure, the risk-topic scope (which threats/skills drive the membership choices) and annual review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. SIGs and forums enumerated (ISACs, ISC2/ISACA chapters, vendor security groups, sector-specific councils)
 

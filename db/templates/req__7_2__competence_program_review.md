@@ -14,7 +14,7 @@ should_count: 1
 
 > Annual verification that the record is current per role, every gap has a closure path, effectiveness is being evaluated for completed actions (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

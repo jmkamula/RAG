@@ -14,7 +14,7 @@ should_count: 1
 
 > Per-improvement record — every improvement action with trigger, owner, target date, effectiveness assessment on closure. Distinct from 10.2 NC register (which is reactive — fixing NCs) and 6.1.1 action register (which is forward-planning): this is targeted improvement of ISMS suitability/adequacy/effectiveness. Annual refresh (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Unique action identifier per row
 

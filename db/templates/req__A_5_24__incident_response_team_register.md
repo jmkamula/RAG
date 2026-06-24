@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.24 requires the responders to be ready before the incident — half a team during a real incident is the failure mode. The register catalogues every named responder: name (or stable role), tier, on-call status, contact info (multiple channels), training currency, backup. It is the operational record that proves the team is staffed-and-trained, not just nominated on the org chart
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each IR team member captured with a unique identifier (employee or contractor id)
 

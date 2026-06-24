@@ -13,7 +13,7 @@ should_count: 2
 
 > A.7.5 requires protection against physical and environmental threats. The procedure documents threat assessment, protection measures per threat, detection systems, response, and recovery. The threat register, applicable-sites scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Threat assessment per site (fire, flood, earthquake, civil unrest, power, vandalism, climate-related risk)
 

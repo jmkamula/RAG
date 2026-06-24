@@ -13,7 +13,7 @@ should_count: 2
 
 > Art.15 read with Art.12 implies a documented operational process — the procedure prescribes how access requests are received, verified, fulfilled, timed and exception-handled, regardless of whether any DSAR has yet occurred. The actual responses are the per-event response leaf
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Intake channels for DSARs enumerated (web form, email, post, in-person) and a single point of receipt named
 

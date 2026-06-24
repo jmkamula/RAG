@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.10 requires information deleted when no longer required. Procedure documents retention triggers, deletion methods per media class, verification approach. Per-deletion register (lifecycle-end), applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Retention trigger source (cross-link to A.5.33 records protection retention schedule)
 

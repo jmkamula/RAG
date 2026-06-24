@@ -13,7 +13,7 @@ should_count: 1
 
 > Per-dataset application of masking — which production datasets feed which non-production environments via what technique, when last refreshed
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row source dataset identifier (from A.5.9 + A.5.34 PII inventory)
 

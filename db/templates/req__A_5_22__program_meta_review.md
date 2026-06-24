@@ -14,7 +14,7 @@ should_count: 2
 
 > The review program itself needs review — are we covering enough of the portfolio, is the cadence right, are findings being closed, is the program returning value? The meta-review evidences the periodic self-assessment of the program and the resulting adjustments
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Meta-review date within the planned interval
 

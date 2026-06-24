@@ -13,7 +13,7 @@ should_count: 1
 
 > The catalogue of in-scope equipment with location, class, protection measures applied, owner
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row equipment identifier (cross-link to A.5.9 asset register)
 

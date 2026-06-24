@@ -14,7 +14,7 @@ should_count: 2
 
 > Art.17 requires the controller to erase personal data without undue delay on any of the six grounds, subject to the Art.17.3 exceptions. The procedure must cover intake, identity verification, ground assessment, exception assessment (with documented refusal where applicable), erasure across all systems including backups/replicas (links to A.8.10), Art.17.2 notification of public-disclosure recipients where the controller has made the data public, and Art.19 notification of routine recipients. ISO does not require this combination as a discrete artifact; Art.17 does.
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Intake channel published and accessible to data subjects
 

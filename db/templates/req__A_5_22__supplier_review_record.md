@@ -14,7 +14,7 @@ should_count: 2
 
 > A.5.22 requires regular monitoring, review and evaluation of supplier information security practices and service delivery. Each review record evidences the activity for one supplier in one period: performance monitored, reports reviewed, audit conducted, incidents and audit-trails examined, corrective actions tracked. The schedule register, program meta-review and change-response log are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Scope of review (security practices, service delivery, changes since last review)
 

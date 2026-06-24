@@ -14,7 +14,7 @@ should_count: 1
 
 > Per-activity register for every special-category processing operation — which Art.9.1 category, which Art.9.2 condition, what safeguards, what RoPA reference. Annual refresh (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Activity identifier per row (links to Art.30 RoPA)
 

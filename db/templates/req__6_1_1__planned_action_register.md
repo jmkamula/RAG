@@ -13,7 +13,7 @@ should_count: 1
 
 > The live output of the planning procedure — every action targeting a risk or opportunity with owner, due date, integration target. Distinct from the risk register (6.1.2) and the SoA (6.1.3): this tracks ISMS-level planning actions, not control implementations
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Unique action identifier per row
 

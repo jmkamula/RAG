@@ -14,7 +14,7 @@ should_count: 2
 
 > Periodic audit reconciling deployed software / used content against the inventory and licence entitlements. Catches drift the intake and procedure leaves miss — over-deployment of seat-limited licences, expired licences still in use, missing attribution, undeclared open-source components
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Audit date within the planned interval (typically annual; more frequent if a vendor audit risk is high)
 

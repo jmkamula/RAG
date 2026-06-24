@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.3 requires conflicting duties and conflicting areas of responsibility to be segregated. The matrix identifies conflict pairs and the mechanism preventing one person from holding both. Approval, communication and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Conflicting duty pairs identified (e.g. requestor vs approver, developer vs production deployer, vendor relationship vs payment authorisation)
 

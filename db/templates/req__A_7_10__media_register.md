@@ -13,7 +13,7 @@ should_count: 1
 
 > The catalogue of issued storage media — id, classification, current holder, lifecycle stage. Drives 'where is media X' query and stale-issue detection
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row media identifier (serial/asset tag)
 

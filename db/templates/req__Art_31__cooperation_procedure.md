@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.31 requires controllers and processors to cooperate with the supervisory authority. The procedure governs how SA inquiries arrive, get routed, drafted, approved, and responded to — including production of evidence to demonstrate compliance
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. SA intake channel (dedicated mailbox + DPO direct + legal counsel)
 

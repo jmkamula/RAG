@@ -13,7 +13,7 @@ should_count: 1
 
 > Per-engagement catalogue — vendor id, scope, contract reference, maturity-assessment outcome, delivered-code-test status
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-engagement unique identifier
 

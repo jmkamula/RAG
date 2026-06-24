@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.20 requires networks + devices secured, managed, controlled. Policy states architecture principles, zone model, monitoring requirement, change-control linkage. Per-network register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Security architecture principles (defence-in-depth / segmentation / fail-safe / zero-trust direction)
 

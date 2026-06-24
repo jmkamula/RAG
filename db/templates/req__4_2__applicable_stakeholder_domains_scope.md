@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the framework. Documents which stakeholder categories are in scope, the legal vs voluntary split, and what is explicitly excluded with rationale
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Stakeholder categories in scope enumerated (mirrors framework categories or narrows them)
 

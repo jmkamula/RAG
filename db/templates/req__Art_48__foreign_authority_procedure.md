@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.48 provides that any judgment or administrative decision of a third-country authority requiring disclosure of personal data may only be recognised if based on an international agreement (e.g. MLAT). The procedure governs how foreign-authority requests are received, evaluated, and responded to
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Foreign-authority request intake channel (DPO + legal + executive sponsor)
 

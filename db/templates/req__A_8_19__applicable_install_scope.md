@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — what counts as 'operational system' for A.8.19 scope. Production vs dev vs test handling (dev/test typically governed differently)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Operational systems enumerated (production + customer-facing + business-critical)
 

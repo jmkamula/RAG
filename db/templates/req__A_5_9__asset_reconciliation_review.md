@@ -14,7 +14,7 @@ should_count: 2
 
 > Periodic reconciliation of the register against discovery feeds. The cadence is quarterly (freshness=90) because asset drift is daily and the register's value collapses fast without reconciliation. Annual review is insufficient for this control. Outputs feed back into the register and into procurement / cloud-provisioning hooks
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Reconciliation date within the planned interval (typically within 90 days of last reconciliation)
 

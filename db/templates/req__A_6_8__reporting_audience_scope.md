@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that drives the procedure's audience and the awareness-promotion focus. Documents who CAN report (every person with access — including non-employees), who SHOULD know about the channel, and how the channel surfaces to each segment
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Audience segments enumerated (employees, contractors, suppliers' staff with access, visitors, customers in some sectors — anyone who might observe an event)
 

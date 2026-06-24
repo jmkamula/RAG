@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.2 requires audit logs of privileged actions. The activity log captures who performed which privileged action, when, on which system — the continuous evidence stream that the procedure was applied (and that anomalies surface for review)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Identity of the privileged user captured per action
 

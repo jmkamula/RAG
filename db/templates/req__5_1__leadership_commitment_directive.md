@@ -13,7 +13,7 @@ should_count: 1
 
 > Clause 5.1 requires top management to demonstrate leadership and commitment to the ISMS. The signed directive is the canonical artefact addressing all of clause 5.1 a-h. Sibling leaves: leadership engagement framework, per-reaffirmation record, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Policy and objectives compatible with strategic direction
 

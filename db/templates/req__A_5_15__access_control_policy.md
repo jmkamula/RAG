@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.15 requires rules controlling physical and logical access based on business and information security requirements. The policy states the principles and decision rules; the provisioning procedure (lifecycle) lives at A.5.18. Approval, communication and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Physical access rules (premises, server rooms, restricted areas)
 

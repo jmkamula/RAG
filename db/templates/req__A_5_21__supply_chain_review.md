@@ -14,7 +14,7 @@ should_count: 2
 
 > ICT supply chains are volatile — vendor M&A, EOL pipelines, new vulnerability disclosures and sub-supplier shifts can move risk significantly inside a year. The review record captures the planned-interval review of the component register, the vendor-maturity assessment, the EOL pipeline and the resulting action items
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

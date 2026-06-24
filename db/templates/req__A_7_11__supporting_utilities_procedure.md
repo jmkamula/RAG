@@ -13,7 +13,7 @@ should_count: 1
 
 > A.7.11 requires information processing facilities to be protected from power failures and other supporting-utility disruptions. The procedure documents critical utilities, redundancy, monitoring, maintenance, testing. The utility register, applicable-sites scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Critical utilities identified (power, cooling, water, communications, gas where relevant)
 

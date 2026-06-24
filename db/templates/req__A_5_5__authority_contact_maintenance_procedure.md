@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.5 requires authority contact to be maintained, not just established once. The procedure documents who keeps the register current, what triggers an update, how new authorities enter the register when scope changes, and the activation path when an incident requires engagement
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Named maintainer of the register (compliance lead, security manager, or designate)
 

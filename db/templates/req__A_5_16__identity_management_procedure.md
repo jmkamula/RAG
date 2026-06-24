@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.16 requires the full lifecycle of identities to be managed — creation, modification, suspension, termination — across human, contractor, service, shared and non-human account types. The procedure documents each lifecycle step, timeliness expectations, ownership chain (HR triggers, IT executes, manager approves), and the connection to authentication-information lifecycle in A.5.17. The identity register, periodic program review and per-identity revocation record are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Identity creation steps (verification of person, naming convention, initial entitlements — least-privilege at issuance)
 

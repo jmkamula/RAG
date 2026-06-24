@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.19 requires procedures + measures to securely manage software installation. Procedure documents approved-software list, approval workflow, integrity verification, post-install verification, role-restriction. Per-installation register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Approved software list maintained (positive list — only approved software permitted)
 

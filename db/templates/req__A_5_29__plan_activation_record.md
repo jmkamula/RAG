@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.29 expects the plan to be ACTIVATED — not just written. The activation record evidences each invocation: activation id, type (real_disruption / scheduled_test / partial_drill), scenario triggered, scope of degradation, duration, gaps surfaced, restoration status, sign-off. One record per activation, covering BOTH real disruptions AND scheduled tests (type field distinguishes). Real activations cross-reference A.5.26 incident_register where the disruption was incident-driven
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Activation identifier per record (unique, sequenced)
 

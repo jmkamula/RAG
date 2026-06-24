@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which third-party data sources the org consumes. Documents what counts as 'not from the subject' (public records, affiliates, brokers, analytics enrichment) and where notice can be delayed under Art.14.5 exceptions
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Source types enumerated (data brokers, public records, affiliates, enrichment vendors, customer lists)
 

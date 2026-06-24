@@ -13,7 +13,7 @@ should_count: 1
 
 > The procedure documenting HOW top management demonstrates commitment in practice — board cadence, executive sponsor touchpoints, integration into business-leadership rhythms. The directive is the promise; this is the operating discipline
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Board-level cadence for InfoSec reporting (frequency, topics, format)
 

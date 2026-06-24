@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.8 requires information security to be integrated into project management across the full lifecycle: initiation, requirements, design/build, pre-go-live assessment, closure handover. The procedure documents gates, deliverables, roles, tiering rules and acceptance criteria. The project register, periodic program review and per-project closure record are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Security gate at project initiation (risk assessment, classification of information, scope of personal data if applicable)
 

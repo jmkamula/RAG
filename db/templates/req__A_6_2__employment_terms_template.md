@@ -13,7 +13,7 @@ should_count: 3
 
 > A.6.2 requires employment contractual agreements to state both personnel's and the organisation's information security responsibilities. The template carries the standard clauses (personnel duties, org duties, policy references, duration, signature requirement). The signed-terms register, applicable-workers scope and periodic template review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Personnel's information security responsibilities stated (confidentiality, acceptable use, access discipline, incident reporting obligation)
 

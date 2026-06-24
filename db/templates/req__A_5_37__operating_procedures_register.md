@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.37 requires operating procedures for information processing facilities to be documented and made available to personnel who need them. The register is the live catalogue: every procedure listed with the facility/system it covers, the owner, version, last-updated and review-due dates, and the availability mechanism. Maintenance procedure, applicable-facilities scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Inventory of operating procedures (which facilities/systems they cover — backup, restore, patching, on-call response, change deployment, monitoring response, capacity, log-handling, etc.)
 

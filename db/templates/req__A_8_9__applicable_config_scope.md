@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — which asset classes have baselines, which are vendor-managed (delegated to supplier per A.5.19), which are exception-managed
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Asset classes enumerated with baseline approach per class
 

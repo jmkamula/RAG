@@ -13,7 +13,7 @@ should_count: 2
 
 > The operational catalogue of who has completed which training, when. Each row: personnel identifier, training module, completion date, quiz score (where applicable), next-due date. Drives the audit-defensibility 'show me every active employee completed mandatory training this year' query
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row personnel identifier (links to identity register A.5.16)
 

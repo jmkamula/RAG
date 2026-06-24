@@ -13,7 +13,7 @@ should_count: 1
 
 > Clause 8.1 requires the organisation to plan, implement, and control processes to meet ISMS requirements and to implement actions determined in Clause 6. The procedure is the canonical artefact. Sibling leaves: operational execution register, applicable processes scope, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Criteria established for ISMS-relevant processes
 

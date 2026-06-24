@@ -13,7 +13,7 @@ should_count: 2
 
 > An approved template alone does not protect the org — each supplier agreement must actually carry the relevant clauses. The coverage register tracks, per supplier, the template version applied, the date the agreement was signed, the agreement term, and the supplier tier — so it is auditable that the agreed clauses are in force
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Template version applied per supplier
 

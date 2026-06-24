@@ -14,7 +14,7 @@ should_count: 1
 
 > Per-change record capturing every ISMS-level change — the integration point between 4.3 scope changes, 4.4 manual changes, 5.3 roles changes (whose own change records flow up here). Annual refresh (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Unique change identifier per row
 

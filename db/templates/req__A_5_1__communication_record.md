@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.1 requires the policy to be published and communicated to relevant personnel. Evidence must show active distribution (date, audience, channel), not mere availability on an intranet
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Date of publication/communication
 

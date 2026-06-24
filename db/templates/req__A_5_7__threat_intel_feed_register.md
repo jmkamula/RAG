@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.7 requires a curated set of sources, not an ad-hoc list. The feed register catalogues every active intelligence source with metadata that allows the program review to assess which feeds deliver value: source name, layer, owner inside the org, last received signal, cost, signal/noise rating. Decommissioned feeds are retained with end-date for traceability
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each active source captured with a unique identifier
 

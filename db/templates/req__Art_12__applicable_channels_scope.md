@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which channels accept rights requests (rights portal, email, postal, in-person), how they route into the procedure
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Channels enumerated (rights portal, dedicated email, postal address, in-product flow, phone)
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — Member State law citations authorising the org's criminal-data processing. Documents which laws have been mapped, what safeguards each law mandates, where the org is the 'official authority' vs operating under specific authorisation
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Member State law register — every applicable MS law cited with title, article, scope
 

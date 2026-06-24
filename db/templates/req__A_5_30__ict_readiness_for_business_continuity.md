@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.30 requires ICT readiness to be planned, implemented, maintained, and tested per business continuity objectives. The plan documents per-service RTO/RPO targets (BIA-derived), recovery procedures, backup arrangements, failover/redundancy provisions, and test cadence. The service register, periodic program review and per-recovery event record are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Recovery Time and Recovery Point Objectives per ICT service (BIA-derived; RTO = how long can it be down; RPO = how much data loss is acceptable)
 

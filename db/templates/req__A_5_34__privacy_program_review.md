@@ -14,7 +14,7 @@ should_count: 2
 
 > Periodic verification that the policy still matches applicable law, the register reflects current processing reality, DSARs are being responded to within SLA, breaches were handled per Art.33/34, transfers still have valid legal mechanisms, and DPIAs are completed where required. ISO 27002:2022 § 5.34 + GDPR's accountability principle (Art.5.2 + Art.24) expect the privacy program to be MAINTAINED — drift between policy and reality is the audit failure mode this leaf catches. Annual cadence (freshness=365) matches A.5.35 independent review + A.5.36 compliance review + A.5.33 records-family default
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval (typically within 12 months of last review)
 

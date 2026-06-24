@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.12 requires controllers to facilitate the exercise of subject rights — concise + transparent + intelligible + accessible communication, free of charge, with one-month response. The procedure governs HOW rights are exercised across all of Art.13-22. Sibling leaves: rights request register, applicable channels scope, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Communication concise + transparent + intelligible + easily accessible + plain language
 

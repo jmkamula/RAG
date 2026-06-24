@@ -14,7 +14,7 @@ should_count: 2
 
 > The continuity plan creates value only when actually exercised — scenarios that go stale, fallbacks that wouldn't actually work, communication paths that have changed all signal the plan is drifting. The review captures the planned-interval check: scenario-currency audit, test-result analysis, fallback-validity check, real-disruption divergence analysis, and resulting plan adjustments. Cadence tightened to 180 days — disruption landscape shifts
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned 180-day interval
 

@@ -14,7 +14,7 @@ should_count: 1
 
 > Per-NC record tracking the full lifecycle: identification → root cause → corrective action → effectiveness check → closure. The auditor's most-scrutinised register: an open NC with no closure timeline signals a broken ISMS. Annual refresh (freshness=365). Cross-link to A.5.36 nonconformity register for compliance-with-rules NCs
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Unique NC identifier per row
 

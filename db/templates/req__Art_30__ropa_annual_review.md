@@ -14,7 +14,7 @@ should_count: 3
 
 > Even with maintenance triggers in place, drift accumulates between RoPA and reality. An annual (or more frequent) review verifies each activity against current operations, propagates corrections back to the register, and produces auditable evidence that the register is not stale
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval (typically within 12 months of last review)
 

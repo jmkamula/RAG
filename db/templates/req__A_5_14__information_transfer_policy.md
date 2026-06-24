@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.14 requires rules, procedures or agreements covering all transfer facilities within the organisation and to/from external parties. The policy documents electronic/physical/verbal transfer rules, authorisation thresholds, classification-aware protections, jurisdictional considerations and approved-channel lists. Approval, communication and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Rules for electronic transfers (email, file transfer, cloud sharing, APIs) with encryption requirements per classification level
 

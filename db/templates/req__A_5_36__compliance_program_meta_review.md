@@ -14,7 +14,7 @@ should_count: 2
 
 > The compliance review program itself needs review — is the catalogue current, is the method choice right, are findings being closed, are continuous-compliance signals being used effectively? The meta-review evidences periodic self-assessment and the resulting adjustments
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Meta-review date within the planned interval
 

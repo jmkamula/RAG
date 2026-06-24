@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — what counts as test information in this org. Includes synthetic / sampled / production-derived. Excludes pure-config (no data values); test fixtures committed to repos go under A.8.4
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Test-information classes in scope (synthetic-generated / production-derived / vendor-provided / user-contributed)
 

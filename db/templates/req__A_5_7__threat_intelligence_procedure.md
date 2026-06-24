@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.7 requires information about information security threats to be collected and analysed to produce threat intelligence across strategic, tactical and operational layers. The procedure documents sources, collection cadence, analysis approach, the three intelligence layers, distribution to named consumers, and the feedback loop into risk and operational controls. The feed register, periodic program review and per-product intelligence records are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Threat intelligence sources enumerated (open-source feeds, vendor feeds, ISACs, government advisories, paid intel services)
 

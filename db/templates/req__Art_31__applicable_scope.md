@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which SAs the org is subject to (lead + concerned per Art.55-56), what cooperation entails (inquiries + on-site access per Art.58.1)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Lead supervisory authority identified
 

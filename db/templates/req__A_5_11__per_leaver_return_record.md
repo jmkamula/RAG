@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.11 expects each leaver/role-changer to have a closed-out return event — either confirmed return with verification OR documented non-return with risk-accepted write-off. The per-leaver record evidences the actual closure: leaver id, items returned (with itemised verification), items not returned (with reason + write-off authoriser), access-revocation confirmation, dual signoff, closure date. One record per leaver row, traceable back to the register
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Leaver identifier per record (links to leaver register)
 

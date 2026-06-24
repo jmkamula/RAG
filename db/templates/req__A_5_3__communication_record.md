@@ -13,7 +13,7 @@ should_count: 2
 
 > Affected role-holders must know their conflicts and the separation mechanisms that apply to them — an approved-but-unknown matrix doesn't prevent anything. Evidence must show active distribution (date, audience, channel), not just availability of the matrix on an intranet
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Date of publication/communication
 

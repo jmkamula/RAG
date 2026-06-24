@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the procedure — which signal sources count as improvement triggers vs which route elsewhere (NCs to 10.2; risk-driven changes to 6.1.3; ICT changes to A.8.32)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Internal signal sources in scope (9.1 measurements, 9.2 audit findings non-NC observations, 9.3 mgmt review decisions, 7.3 awareness assessment gaps)
 

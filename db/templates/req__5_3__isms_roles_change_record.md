@@ -13,7 +13,7 @@ should_count: 1
 
 > Per-change record capturing each amendment to the roles matrix — role added, role retired, role-holder changed. Lifecycle-end artefact proving role drift is being managed, not silent
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Change trigger stated (org restructure, new control area, person change, new framework)
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.29 requires security-testing processes defined + implemented. Procedure documents test types, lifecycle gates, acceptance criteria, defect handling, pen-test cadence. Per-test register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Test types (SAST / DAST / IAST / SCA / fuzzing / manual review / penetration testing) with applicability rules
 

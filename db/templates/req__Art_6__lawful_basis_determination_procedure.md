@@ -13,7 +13,7 @@ should_count: 1
 
 > The procedure governing how a lawful basis is chosen per processing activity — who decides, what inputs are weighed, how the choice is documented. Without an explicit procedure, basis selection drifts (e.g. defaulting to consent when legitimate interests is more appropriate, or vice versa)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Decision inputs documented (activity purpose, data minimisation alternatives, subject expectations)
 

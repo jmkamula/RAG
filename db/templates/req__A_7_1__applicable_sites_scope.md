@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that drives the register. Documents the sites in scope, the operational/regulatory drivers for physical security per site type, and the exclusions (cloud-only deployments, home offices handled via A.6.7 + A.7.9)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Sites enumerated (HQ, regional offices, owned data centres, co-located rack space, lab facilities)
 

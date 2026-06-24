@@ -13,7 +13,7 @@ should_count: 4
 
 > A.5.2 requires information security roles and responsibilities to be defined and allocated according to organization needs. Evidence is a responsibility matrix (or equivalent section in the ISMS charter) enumerating roles, allocating them to named individuals or positions, and stating reporting lines. Approval, communication and periodic review of this allocation are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Information security roles enumerated (CISO, ISMS Manager, Asset Owners, Risk Owners, Incident Manager, DPO where applicable)
 

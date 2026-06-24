@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.13 requires every information-storing platform to actually apply labels — the systems where labelling isn't enabled are the ones where classified info leaks out. The register catalogues every in-scope information platform: system id, scope, labelling-enabled flag, automation level (manual/assisted/automatic), coverage %, owner. It is the operational record that proves labelling is org-wide, not just on the platforms IT remembered to configure
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each in-scope information system captured with a unique identifier (file shares, M365 tenants, drive backends, ticketing systems, code repos with sensitive data)
 

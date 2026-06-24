@@ -14,7 +14,7 @@ should_count: 1
 
 > Art.32.1.d requires a process for regularly testing, assessing and evaluating the effectiveness of technical and organisational measures for ensuring the security of processing.
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Test scope covers confidentiality, integrity, availability and resilience
 

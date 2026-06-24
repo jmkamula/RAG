@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — which asset classes are in scope, what coverage is expected (full / sampled / boundary-only), which are vendor-managed (delegated A.5.19/A.5.21)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Asset classes enumerated with monitoring coverage expectation per class
 

@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.21 requires the org to know which ICT components are in use, who supplies them, which are critical, when they reach end-of-life, and what sub-suppliers stand behind them. The register is the live source of truth — feeding the periodic review and EOL-replacement leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Component / service identified per row (vendor, product, version)
 

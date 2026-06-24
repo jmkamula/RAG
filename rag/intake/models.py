@@ -136,6 +136,13 @@ class DocumentFinding:
     extraction_path: str = "full"
     chunk_id:        Optional[str] = None
 
+    # Source-of-truth lane. When set, the writer persists it as
+    # document_findings.inference_source instead of the DB default
+    # 'extracted'. Allows the templated-upload fast path to mark its
+    # rows as 'templated' (deterministic, no-LLM) without spinning up
+    # a separate writer.
+    inference_source: Optional[str] = None
+
     # Set on write
     id:              Optional[str] = None
 

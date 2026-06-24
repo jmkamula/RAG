@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.18 requires that access rights be provisioned, reviewed, modified and removed in accordance with the topic-specific policy on access control (A.5.15). The procedure documents the operational steps for grant, modification and revocation, the SLA targets for each operation, the handling of service accounts, and the linkage to identity management. The access rights register, periodic review and revocation record are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Asset owner authorization required before access is granted (named authoriser per asset class, not generic 'IT manager')
 

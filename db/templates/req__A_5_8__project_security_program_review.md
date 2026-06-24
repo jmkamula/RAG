@@ -14,7 +14,7 @@ should_count: 2
 
 > The gate process creates value only if it's catching things — projects with skipped gates, late-detected security issues, and tiering-misclassifications all signal the program is leaking. The review captures the planned-interval check: gate-skip rate, late-detection analysis, tier-mix shifts, InfoSec capacity vs project demand, and resulting program adjustments. Annual cadence — methodology stability outweighs short-cycle drift
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned annual interval
 

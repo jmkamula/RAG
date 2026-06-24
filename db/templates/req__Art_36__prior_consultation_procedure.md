@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.36 requires the controller to consult the SA before processing where a DPIA indicates residual high risk despite mitigations. The procedure governs trigger detection, SA engagement, and the 8-week waiting period
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Trigger detection — Art.35 DPIA flagging residual high risk despite mitigations
 

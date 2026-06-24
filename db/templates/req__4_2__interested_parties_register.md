@@ -14,7 +14,7 @@ should_count: 1
 
 > Clause 4.2 requires the organization to determine interested parties relevant to the ISMS and their requirements. The register is the canonical artefact — party rows with category, requirements, ISMS treatment decision, owner. Sibling leaves: stakeholder identification framework, applicable-domains scope, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Interested parties listed per row (regulators, customers, suppliers, personnel, shareholders, communities)
 

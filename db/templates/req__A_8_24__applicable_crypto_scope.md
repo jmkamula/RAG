@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — which data classes require encryption (drawn from A.5.12 + A.5.34 PII inventory). Vendor-managed encryption (cloud-provider-managed keys) delegated to A.5.19/A.5.21
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Data classes enumerated with encryption obligation per class (drawn from A.5.12 classification + A.5.34 PII)
 

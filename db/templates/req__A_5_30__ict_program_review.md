@@ -14,7 +14,7 @@ should_count: 2
 
 > The ICT continuity plan creates value only if RTO/RPO commitments actually hold under test — services that fall out of compliance, dependencies that have shifted, backup restores that fail, test scenarios that have gone stale all signal the plan is drifting. The review captures the planned-interval check: RTO/RPO compliance audit, dependency-currency check, restore-success-rate analysis, scenario-coverage audit, and resulting plan adjustments. Cadence tightened to 180 days — ICT landscape shifts continuously
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned 180-day interval
 

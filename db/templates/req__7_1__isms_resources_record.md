@@ -14,7 +14,7 @@ should_count: 1
 
 > Clause 7.1 requires the organisation to determine and provide resources needed for ISMS establishment, implementation, maintenance, and improvement. The record is the canonical artefact — financial, human, infrastructure, technology resources committed. Sibling leaves: determination procedure, applicable resource categories scope, program review. Annual refresh (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Financial resources allocated (budget for ISMS activities)
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > Transfer-policy authority is needed when rules are enforced against users (refusing to send / requiring encryption) or against external counterparties (mandating agreements before disclosure). Management approval establishes the legitimate authority for the policy and the consequences of violation. Approval names a signatory at the appropriate management level, a date, and the specific policy version
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Signatory at appropriate management level (typically CISO with executive endorsement; CIO co-sign where transfer mechanisms involve IT systems)
 

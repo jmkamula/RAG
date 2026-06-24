@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.25 expects records of events, incidents and weaknesses to be maintained and accessible to competent personnel. The triage log is the live source of truth — every triaged event, its classification, decision and owner — feeding the periodic review and the per-event triage-decision records
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each event captured with a unique identifier and detection timestamp
 

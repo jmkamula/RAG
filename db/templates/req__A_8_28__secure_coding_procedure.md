@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.28 requires secure-coding principles applied. Procedure documents language-specific standards, common-vulnerability prevention, code-review gates, automated analysis, secrets management. Per-finding register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Language-specific coding standards published (Python / Java / JavaScript / Go / C/C++ / Rust as applicable)
 

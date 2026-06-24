@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — whether the controller/processor is in scope for Art.27 (not established in EU AND processing falls under Art.3.2) and any Art.27.2 exceptions (occasional + no large-scale special-category + low risk + public authority)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Establishment analysis — where the controller/processor is established + why Art.3.2 applies (offering goods/services OR monitoring behaviour in Union)
 

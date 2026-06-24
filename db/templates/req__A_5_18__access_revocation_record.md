@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.18 requires that access be removed on change of role, termination, or contract end. Revocation records evidence that those removals actually happened (not just were ordered) — one record per revocation event, traceable back to the register and to the originating trigger. SLA-met flag is auditor-critical — proves not just THAT access was revoked but that the revocation timestamp was within the stated SLA (the famous 'within 24h of role-change' timeliness promise). Identity-pair check enforces bidirectional A.5.16 ↔ A.5.18 lifecycle pairing — closes 'identity disabled but access lingers' gap
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Revocation trigger captured (termination / role change / contract end / explicit revoke / incident-driven / temporary-expiry / orphan-cleanup)
 

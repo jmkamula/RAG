@@ -14,7 +14,7 @@ should_count: 2
 
 > A.5.26 expects incidents to be tracked from detection through closure, with the trail of actions preserved. The incident register is the live master record — every incident, its severity, status, owner, and the key lifecycle dates (detection, containment, eradication, recovery, closure) — feeding the periodic IR-program review and the per-incident closure records. Fast-data freshness (90d) per Style v2 — an incident register that's a year stale is not a register
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each incident captured with a unique identifier (links to A.5.25 triage decision)
 

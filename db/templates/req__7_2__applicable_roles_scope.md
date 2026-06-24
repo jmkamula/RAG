@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the record — which roles actually affect ISMS performance (per clause 7.2 'whose work affects'). Not every role in the org — but more than just InfoSec staff
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. ISMS-team roles enumerated (CISO, ISMS Manager, InfoSec analyst, auditor)
 

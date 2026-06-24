@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the procedure — which topic classes are in scope, which audiences (4.2 parties subset), what's regulator-mandated vs voluntary
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Topic classes in scope (policy comms, objective comms, performance reporting, incident comms, change comms, breach notification)
 

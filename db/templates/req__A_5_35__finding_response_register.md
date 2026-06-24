@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.35 requires management response to findings — but the response promise is theoretical without a per-finding lifecycle tracker. The register catalogues every finding from every independent review: severity, owner, agreed treatment, target date, closure status. This is the audit-defensibility artefact: 'show me what you did with the findings from the 2024 review' has a one-table answer
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-finding unique identifier traceable back to the source review report
 

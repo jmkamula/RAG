@@ -14,7 +14,7 @@ should_count: 2
 
 > Art.25.2 requires that, by default, only personal data which are necessary for each specific purpose are processed. This is a system property — a record listing the personal-data systems and confirming that their default settings minimise the amount, extent, storage period, and accessibility of personal data. ISO 27001 does not require this as a discrete artifact; Art.25.2 does.
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Personal-data systems inventoried (links to Art.30 records)
 

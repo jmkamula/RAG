@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.33 requires test information selected, protected, managed. Procedure documents selection criteria, masking requirements, protection equivalence, access controls, lifecycle, PII constraint. Per-dataset register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Selection criteria — synthetic preferred; production-derived only with masking (cross-link to A.8.11)
 

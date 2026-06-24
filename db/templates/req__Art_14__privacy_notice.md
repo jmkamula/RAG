@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.14 requires controllers to provide privacy information when personal data is obtained from sources other than the data subject. Content mirrors Art.13 plus the source-disclosure requirement (Art.14.2.f). Sibling leaves: source register, applicable sources scope, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Identity and contact details of controller
 

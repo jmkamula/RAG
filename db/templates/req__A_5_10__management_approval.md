@@ -13,7 +13,7 @@ should_count: 1
 
 > AUPs are enforceable only when management has explicitly approved them — the approval establishes the authority behind the disciplinary consequences. The approval names a signatory at the appropriate management level, a date, and the specific policy version
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Signatory at appropriate management level (typically CISO or HR director, with top-management endorsement)
 

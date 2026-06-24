@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — every collection point where personal data is taken directly from the subject (web forms, sign-up flows, in-app prompts, in-person, phone, email). Each needs the notice presented at the moment of collection
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Collection points enumerated (web forms, sign-up, in-app, phone, in-person, paper)
 

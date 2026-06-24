@@ -14,7 +14,7 @@ should_count: 2
 
 > The threat intelligence program creates value only if it closes the loop into defensive action — feeds get retired when stale, consumer feedback drives product changes, and analysis effort tracks the threats relevant to the org. The review captures the planned-interval check: feed-value analysis, products delivered, consumer feedback, missed-event analysis, and resulting program adjustments. Cadence tightened to 180 days — detection landscape volatility outpaces annual cycles
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned 180-day interval
 

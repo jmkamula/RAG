@@ -14,7 +14,7 @@ should_count: 2
 
 > Periodic verification that the register reflects the facility scope, procedures are still accurate (not just 'documented' but matching reality), availability mechanisms still work (operators can actually find them), and the maintenance procedure is being followed. Annual cadence (freshness=365) matches the records-family default — operational procedure methodology is stable, individual procedures get updated continuously via maintenance
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval (typically within 12 months of last review)
 

@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.23 requires exit strategies for cloud services and the CSP must support transition + data handover on termination. The exit-migration record evidences the actual execution: trigger captured, migration plan executed, data export and deletion confirmed, transition completed, with authoriser
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Exit trigger captured (termination / replacement / CSP failure / business change)
 

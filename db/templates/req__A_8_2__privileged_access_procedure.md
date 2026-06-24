@@ -13,7 +13,7 @@ should_count: 2
 
 > A.8.2 requires the allocation and use of privileged access rights to be restricted and managed on a need-to-use, event-by-event basis with formal authorisation. The procedure documents provisioning, use, expiry and deprovisioning of privileged access — the operational counterpart to the baseline
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Privileged access granted on need-to-use, event-by-event basis (less than or equal to the period needed)
 

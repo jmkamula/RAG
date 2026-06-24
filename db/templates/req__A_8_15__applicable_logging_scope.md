@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — which systems must emit which log classes, what regulatory drivers apply per class (GDPR Art.30 audit trail / sector-specific requirements)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Systems in scope enumerated (drawn from A.5.9 asset register)
 

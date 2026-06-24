@@ -14,7 +14,7 @@ should_count: 1
 
 > Periodic verification — approved-algorithms table still current vs NIST/regulator advisories, key-rotation compliance, PII-key audit, exception inventory (freshness=180; cryptographic landscape evolves; PQC transition window)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval (≤180 days)
 

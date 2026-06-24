@@ -13,7 +13,7 @@ should_count: 2
 
 > Every triaged event must close — as a false positive, as a near-miss filed for trend tracking, or by escalation to incident response (A.5.26). The decision record evidences the actual closure: which event, what was decided, the rationale, the authority, and the handoff link where applicable
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Event identifier per record (links back to the triage log row)
 

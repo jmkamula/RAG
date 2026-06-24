@@ -14,7 +14,7 @@ should_count: 1
 
 > Periodic verification that authentication baseline still matches threat landscape, exception inventory is current, and the log shows expected hygiene (freshness=180; auth attack patterns evolve fast)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval (≤180 days)
 

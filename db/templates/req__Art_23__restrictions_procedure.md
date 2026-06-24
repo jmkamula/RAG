@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.23 permits Member State law to restrict the scope of Art.12-22 obligations + Art.34 communication when the restriction respects essence of rights AND is necessary + proportionate in a democratic society for one of the Art.23.1 a-j purposes
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Member State law identification per applicable jurisdiction
 

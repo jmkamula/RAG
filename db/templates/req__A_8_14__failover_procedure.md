@@ -13,7 +13,7 @@ should_count: 1
 
 > Operational counterpart — how failover is invoked, who has authority, failback path, cross-control wiring to A.5.30 ICT readiness
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Failover invocation authority per service (automated vs manual; on-call authority)
 

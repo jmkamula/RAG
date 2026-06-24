@@ -13,7 +13,7 @@ should_count: 1
 
 > The methodology that produces and refreshes the parties register — which categories are surveyed, how requirements are elicited (contract reading, regulator notices, surveys), on what cadence
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Identification methodology stated (stakeholder mapping technique, RACI/power-interest grid, or equivalent)
 

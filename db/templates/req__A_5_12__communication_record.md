@@ -13,7 +13,7 @@ should_count: 2
 
 > Every information creator (i.e. every employee) needs to know which level applies and how to classify their output — an unknown scheme produces unclassified information by default, which collapses A.5.13 and A.5.10 downstream. Evidence must show active distribution and ideally individual training completion
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Date of publication/communication
 

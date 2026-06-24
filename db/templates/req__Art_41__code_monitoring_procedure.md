@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.41 governs the accredited body that monitors a code of conduct's compliance. Applies when the org IS the monitoring body. Very rare for typical controllers/processors
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Accreditation by competent SA (Art.41.1)
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.22 requires groups of services / users / systems segregated. Procedure documents zone model, inter-zone flow rules, enforcement, exception path. Per-zone register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Rationale for segregation (sensitivity / function / trust level / regulatory)
 

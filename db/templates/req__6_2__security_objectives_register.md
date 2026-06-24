@@ -14,7 +14,7 @@ should_count: 1
 
 > Clause 6.2 requires information security objectives to be established at relevant functions and levels. The register is the canonical artefact — every objective with owner, KPI, target date, progress. Sibling leaves: objective-setting methodology, applicable functions scope, program review. Annual refresh (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Objectives stated at relevant functions and levels
 

@@ -13,7 +13,7 @@ should_count: 2
 
 > A.8.11 requires masking procedures for personal data in non-production environments. Procedure documents masking techniques, scope, roles. Per-application masking register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Scope — which systems/environments require masking (cross-link to A.5.12 classification + A.8.31 environment separation)
 

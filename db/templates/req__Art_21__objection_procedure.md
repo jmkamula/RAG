@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.21 gives subjects the right to object to processing based on legitimate interests / public task (Art.21.1) AND an absolute right to object to direct marketing (Art.21.2). Distinct workflows for absolute (direct marketing) vs balancing (legitimate interests)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Intake channel via Art.12 procedure
 

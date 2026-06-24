@@ -13,7 +13,7 @@ should_count: 1
 
 > Aggregate event view — blocked-access trending, override events, malware-category hits. Drives 'does the filter actually work' visibility
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Aggregate blocked-event volume per category (rolling window)
 

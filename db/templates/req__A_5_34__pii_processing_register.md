@@ -13,7 +13,7 @@ should_count: 3
 
 > The operational catalog of every processing activity involving PII — what categories, whose, on what legal basis, retained how long, owned by whom, protected how, transferred where. Often shared with (or extended from) the GDPR Art.30 Records of Processing (RoPA) — same operational artefact serves both ISO A.5.34 and GDPR Art.30. Without this register, the privacy policy is theoretical; with it, A.5.34 / Art.30 / Art.25 / Art.5 can all be evidenced from a single source
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. PII categories enumerated per processing activity (basic identifiers, contact data, financial, health, biometric, special-category — GDPR Art.9 / sectoral equivalents); links to GDPR Art.30 RoPA
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.26 requires security requirements identified, specified, approved during development/acquisition. Procedure documents intake step, requirement categories, approval, traceability. Per-application register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Security-requirements gathering step at project initiation (cross-link to A.5.8 project + A.8.25 SDLC)
 

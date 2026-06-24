@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — what security events constitute a 'personal data breach' under Art.4(12), boundary with Art.34 (subject notification), lead supervisory authority identification
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Operational definition of 'personal data breach' per Art.4(12) — breach of security leading to accidental/unlawful destruction/loss/alteration/unauthorised disclosure/access
 

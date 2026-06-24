@@ -13,7 +13,7 @@ should_count: 2
 
 > A.6.1 requires background verification checks on candidates and ongoing checks proportional to role risk. The procedure documents the check types, timing, proportionality, legal considerations, decision authority, retention rules, and re-screening triggers. The screening record register, applicable-roles scope and periodic program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Types of checks defined (identity, employment history, education, criminal record where lawful, financial where role-relevant, sanctions/PEP for finance-sector roles)
 

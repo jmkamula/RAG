@@ -13,7 +13,7 @@ should_count: 2
 
 > A.7.2 requires secure areas to be protected by appropriate entry controls and access points. The procedure documents authorisation, entry mechanisms, visitor handling, deliveries, emergency egress, and periodic review. The entry register, applicable-areas scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Authorisation list per secure area (who is permitted, by role or name; cross-link to A.5.18)
 

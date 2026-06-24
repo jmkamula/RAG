@@ -13,7 +13,7 @@ should_count: 2
 
 > The operational catalogue of who has signed which version of the employment terms. Each row: personnel identifier, template version signed, signature date, current-version check. Drives the 'every active employee has current terms' completeness check
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row personnel identifier (links to identity register A.5.16)
 

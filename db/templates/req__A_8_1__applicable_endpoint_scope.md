@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream that drives the policy and register. Documents which endpoint classes apply, exclusions (kiosks → A.8.18; servers → A.8.9), and the BYOD authorisation model
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Endpoint classes enumerated (laptop / desktop / mobile / tablet / contractor-owned)
 

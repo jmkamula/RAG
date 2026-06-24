@@ -14,7 +14,7 @@ should_count: 3
 
 > A.5.18 requires periodic review of access rights. Each review record captures the planned-interval review of subject-asset pairs in the register, the reviewer's identity, the outcome per subject, the orphan-access check, and any resulting modifications or revocations. Review freshness tightened to 180d for Style v2 alignment — access drift is high-volume, matches A.5.16 / A.5.17 / A.5.25 / A.5.26 volatility family
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval (typically within 6 months of last review under the 180d cadence)
 

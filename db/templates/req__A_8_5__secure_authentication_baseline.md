@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.5 baseline — the authentication configuration state. Factor requirements per access tier, MFA enforcement, session management, lockout thresholds. The procedure, auth log and review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Authentication factor requirements per risk tier (single / MFA / step-up)
 

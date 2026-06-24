@@ -13,7 +13,7 @@ should_count: 1
 
 > Clause 5.3 makes the assignment of information-security roles and authorities a top-management responsibility. The approval can live inside the responsibility matrix as a signed cover page, in a board minute, or as a separate signed delegation — any form that names a top-management signatory, a date, and the specific allocation being approved
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Signatory at top-management level (CEO, board chair, or delegated equivalent)
 

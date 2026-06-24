@@ -14,7 +14,7 @@ should_count: 2
 
 > A.5.1 requires the policy to be reviewed at planned intervals (typically annually) and after significant changes. The review record captures who reviewed it, when, and the outcome (unchanged / amended / retired). Annual cadence (365d) — master InfoSec policy is stable; topic-specific policies they reference may move faster
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned review interval (typically within 12 months of last review)
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.26 requires joint controllers to determine in a transparent manner their respective responsibilities. The arrangement is the canonical contractual artefact — distinguishes joint controllers from independent controllers (Art.4(7)) or controller-processor relationships (Art.28)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Respective responsibilities for compliance allocated (Art.13/14 information, Art.15-22 rights, Art.32 security, Art.33-34 breach)
 

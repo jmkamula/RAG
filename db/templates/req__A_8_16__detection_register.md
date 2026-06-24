@@ -13,7 +13,7 @@ should_count: 1
 
 > Catalogue of active detections — rule / use-case id, asset coverage, last-tuning date, true-positive rate, status
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-detection use-case identifier (rule id / hunt id / playbook id)
 

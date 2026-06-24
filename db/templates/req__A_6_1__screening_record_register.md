@@ -13,7 +13,7 @@ should_count: 2
 
 > The operational catalogue of screening events. Every candidate / new hire / re-screened employee has a row: candidate identifier, role tier, checks performed, outcome, decision authority, decision date. Drives the audit-defensibility 'show me you screened this person before they got access' question
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-record candidate identifier (links to identity register A.5.16 once hired; anonymised pre-hire to comply with data minimisation)
 

@@ -13,7 +13,7 @@ should_count: 2
 
 > Clause 9.2 requires the organisation to conduct internal audits at planned intervals to provide information on whether the ISMS conforms to its own requirements and to ISO 27001. The programme is the canonical artefact specifying frequency, scope, criteria, independence and reporting. Sibling leaves: per-audit execution records, audit-cycle coverage note, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Audit frequency defined
 

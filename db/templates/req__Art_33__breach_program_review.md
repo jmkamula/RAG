@@ -14,7 +14,7 @@ should_count: 1
 
 > Annual verification that the 72h SLA is being met, severity-gate decisions are defensible, exercises are validating the procedure (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

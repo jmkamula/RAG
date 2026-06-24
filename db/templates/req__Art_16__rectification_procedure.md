@@ -14,7 +14,7 @@ should_count: 2
 
 > Art.16 requires the controller to rectify inaccurate personal data without undue delay and to complete incomplete data. The procedure must cover intake, identity verification (Art.12.6), data location across all systems including replicas, the correction step itself, response to the data subject within one month (Art.12.3), and onward notification to recipients per Art.19. ISO does not require this as a discrete artifact; Art.16 does.
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Intake channel published and accessible to data subjects
 

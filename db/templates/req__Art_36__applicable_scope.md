@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — when prior consultation IS required (Art.36.1 residual high risk; Art.36.5 MS law additional cases)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Operational interpretation of 'residual high risk' (post-mitigation high likelihood × severity)
 

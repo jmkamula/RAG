@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that drives the procedure. Documents which sites and which areas within sites are monitored, by which mechanisms, and the rationale per area
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Sites covered by monitoring (drawn from A.7.1 applicable-sites scope)
 

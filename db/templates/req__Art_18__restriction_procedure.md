@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.18 gives subjects the right to restrict processing in 4 specific grounds (accuracy contested, unlawful but no erasure, no longer needed but subject needs for claims, objection pending). Procedure as primary; restriction register, applicable grounds scope, program review are siblings
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Intake channel via Art.12 procedure (rights portal)
 

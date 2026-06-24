@@ -14,7 +14,7 @@ should_count: 1
 
 > Per-document record — every controlled ISMS document with owner, version, approval date, next review date. The live inventory that proves the policy is being applied. Annual refresh (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Unique document identifier per row
 

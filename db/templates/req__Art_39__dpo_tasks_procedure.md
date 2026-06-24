@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.39 enumerates the DPO's tasks (Art.39.1 a-e + Art.39.2 risk-based approach). The procedure documents how each task is operationalised in practice
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Inform + advise the controller/processor + employees who carry out processing (Art.39.1.a)
 

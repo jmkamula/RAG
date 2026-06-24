@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.46 permits transfers without adequacy when the controller/processor has provided appropriate safeguards AND enforceable data subject rights and effective legal remedies are available. The procedure governs safeguard selection (SCCs / BCRs / codes / certification / ad-hoc clauses) + Schrems II TIA + supplementary measures
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Safeguard-selection decision tree (Art.46.2 a-f or Art.46.3 a-b after authorisation)
 

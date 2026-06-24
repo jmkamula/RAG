@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.7 requires the controller to demonstrate consent was given, in a clearly distinguishable form, with the right to withdraw being as easy as giving. The procedure is the canonical artefact — capture mechanism, withdrawal mechanism, evidence retention. Sibling leaves: consent register, applicable activities scope, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Capture mechanism documented (granular, freely given, unambiguous affirmative action — no pre-ticked boxes)
 

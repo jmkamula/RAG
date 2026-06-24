@@ -13,7 +13,7 @@ should_count: 2
 
 > A.8.25 requires rules for secure development. Policy states SDLC principles, environment requirements, version control, security-requirement integration, testing integration, personal-data handling. Per-project register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Security principles for software design (cross-link to A.8.27 architecture principles)
 

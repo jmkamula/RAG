@@ -330,6 +330,8 @@ def _write_document_findings(
         # new one. Without this, re-extracts pile up duplicate findings (see
         # multipath_data_cleanup_2026_06_23 retrospective). Gated on findings
         # being non-empty so a 0-finding extract doesn't wipe prior evidence.
+        # Covers both 'extracted' (LLM path) and 'templated' (no-LLM
+        # fast-path) — re-extracts may flip between the two paths.
         if findings:
             cur.execute(
                 """
@@ -339,7 +341,7 @@ def _write_document_findings(
                     rejection_reason = 'superseded_by_extract_batch:' || NOW()::text,
                     reviewed_at = COALESCE(reviewed_at, now())
                 WHERE document_id = %s
-                  AND inference_source = 'extracted'
+                  AND inference_source IN ('extracted', 'templated')
                   AND is_active = TRUE
                 """,
                 (doc_id,),
@@ -348,33 +350,68 @@ def _write_document_findings(
             sp = f"sp_df_{f.id.replace('-', '')[:16]}"
             cur.execute(f"SAVEPOINT {sp}")
             try:
-                cur.execute(
-                    """
-                    INSERT INTO document_findings (
-                        id, tenant_id, document_id,
-                        control_ref, standard_id, checklist_item_id,
-                        status, confidence, excerpt,
-                        section_number, extracted_at,
-                        is_active, retention_class
-                    ) VALUES (
-                        %s, %s, %s,
-                        %s, %s, %s,
-                        %s, %s, %s,
-                        %s, NOW(),
-                        TRUE, %s
+                # inference_source: honour the field on DocumentFinding when
+                # set (templated upload fast-path sets 'templated'); otherwise
+                # rely on the DB column default ('extracted').
+                if getattr(f, "inference_source", None):
+                    cur.execute(
+                        """
+                        INSERT INTO document_findings (
+                            id, tenant_id, document_id,
+                            control_ref, standard_id, checklist_item_id,
+                            status, confidence, excerpt,
+                            section_number, extracted_at,
+                            is_active, retention_class,
+                            inference_source
+                        ) VALUES (
+                            %s, %s, %s,
+                            %s, %s, %s,
+                            %s, %s, %s,
+                            %s, NOW(),
+                            TRUE, %s,
+                            %s
+                        )
+                        ON CONFLICT (id) DO NOTHING
+                        """,
+                        (
+                            f.id, tenant_id, doc_id,
+                            f.control_ref, f.standard_id, f.checklist_item_id,
+                            _map_df_status(f.finding),
+                            _map_confidence(f.confidence),
+                            f.evidence_text[:500] if f.evidence_text else None,
+                            f.section,
+                            _RETENTION_CLASS,
+                            f.inference_source,
+                        ),
                     )
-                    ON CONFLICT (id) DO NOTHING
-                    """,
-                    (
-                        f.id, tenant_id, doc_id,
-                        f.control_ref, f.standard_id, f.checklist_item_id,
-                        _map_df_status(f.finding),
-                        _map_confidence(f.confidence),
-                        f.evidence_text[:500] if f.evidence_text else None,
-                        f.section,
-                        _RETENTION_CLASS,
-                    ),
-                )
+                else:
+                    cur.execute(
+                        """
+                        INSERT INTO document_findings (
+                            id, tenant_id, document_id,
+                            control_ref, standard_id, checklist_item_id,
+                            status, confidence, excerpt,
+                            section_number, extracted_at,
+                            is_active, retention_class
+                        ) VALUES (
+                            %s, %s, %s,
+                            %s, %s, %s,
+                            %s, %s, %s,
+                            %s, NOW(),
+                            TRUE, %s
+                        )
+                        ON CONFLICT (id) DO NOTHING
+                        """,
+                        (
+                            f.id, tenant_id, doc_id,
+                            f.control_ref, f.standard_id, f.checklist_item_id,
+                            _map_df_status(f.finding),
+                            _map_confidence(f.confidence),
+                            f.evidence_text[:500] if f.evidence_text else None,
+                            f.section,
+                            _RETENTION_CLASS,
+                        ),
+                    )
                 cur.execute(f"RELEASE SAVEPOINT {sp}")
                 written += 1
                 logger.debug(f"  ✓ document_finding: {f.control_ref} [{f.finding}]")

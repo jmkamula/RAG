@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.6 baseline — what resources are monitored, what the current and expected demand is, what alert thresholds apply. The procedure, monitoring log and review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Resources monitored (CPU / memory / storage / network / DB connections / licences)
 

@@ -13,7 +13,7 @@ should_count: 2
 
 > A directive that personnel haven't seen is not an applied directive. Evidence must show active distribution to all personnel and, critically, that new personnel are reached at onboarding — not just availability of the directive on an intranet
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Date of publication/communication
 

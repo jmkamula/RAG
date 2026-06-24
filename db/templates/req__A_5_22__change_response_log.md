@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.22 requires the org to manage changes in supplier service delivery — network/tech changes, new dev tools, location changes, change of sub-contractors, re-tendering. Each change is evidenced by a log entry: change type captured, impact assessed, treatment decided, with escalation to termination where findings warrant
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Change type captured (network / technology / dev tools / location / sub-contractor / re-tendering)
 

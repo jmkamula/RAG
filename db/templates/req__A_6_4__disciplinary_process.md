@@ -13,7 +13,7 @@ should_count: 3
 
 > A.6.4 requires a formalised, communicated disciplinary process for personnel and interested parties who violate information security policy. The procedure documents how violations are surfaced, investigated, decided, communicated, and recorded — typically owned jointly with HR. The case register, applicable-jurisdictions scope and periodic process review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Formalised in writing with HR + Legal review (drives consistent application; ad-hoc disciplinary action is a fairness / employment-tribunal risk)
 

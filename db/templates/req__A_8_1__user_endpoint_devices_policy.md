@@ -13,7 +13,7 @@ should_count: 2
 
 > A.8.1 requires protection of information stored on, processed by, or accessible via user endpoint devices. The policy defines device classes in scope, baseline protections per class, and the authorisation model for endpoint enrolment. The endpoint register, applicable-classes scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Scope — device classes in scope (corporate-owned, BYOD, contractor)
 

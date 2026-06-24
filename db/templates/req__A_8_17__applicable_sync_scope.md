@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — which system classes need sync, what drift tolerance per class (sub-second for forensics-critical; seconds acceptable elsewhere)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. System classes enumerated with drift tolerance per class
 

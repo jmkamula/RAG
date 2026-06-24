@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.17 requires clocks synchronised to approved sources. Procedure names sources, protocol, scope, monitoring. Per-system sync register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Approved time sources named (stratum-1 NTP / GPS / vendor-cloud time service)
 

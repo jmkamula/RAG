@@ -13,7 +13,7 @@ should_count: 3
 
 > Art.30 requires controllers (and where applicable, processors) to maintain a record of processing activities. The register is the live source of truth for what is processed, why, for whom, where it goes, and how long it is kept. Maintenance, the upstream data flow inventory and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Name and contact details of controller (and DPO/representative where appointed)
 

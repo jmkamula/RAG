@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.27 requires non-EU controllers/processors targeting EU data subjects under Art.3.2 to designate a representative in the EU in writing. The designation document is the canonical artefact
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Identity and contact details of designated representative (EU establishment)
 

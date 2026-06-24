@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that drives which obligations apply to which roles. Documents the obligation catalogue, the role-to-obligation mapping (executive vs senior vs standard get different post-employment terms), and the jurisdictional caps (where law limits enforceability of e.g. non-compete)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Obligation catalogue enumerated (confidentiality / IP / non-disparagement / non-poach / non-compete / cooperation-with-investigations)
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.15 requires logs produced, stored, protected, analysed. Procedure documents content standards, retention, protection, central collection, analysis integration. Per-source register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Required log content per source class (who / what / when / where / outcome / target)
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > Clause 7.4 requires the organisation to determine the need for internal and external ISMS communications. The procedure is the canonical artefact stating what, when, with whom, how, and by whom. Sibling leaves: communication event register, applicable communication scope, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. What is communicated (policy, objectives, performance, incidents, changes)
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the procedure — which kinds of changes are 'ISMS-level' (clause 6.3 scope) vs operational (A.8.32 scope). Boundary clarification prevents both gaps and overlaps
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. ISMS-level change types enumerated (scope, policy, manual, risk criteria, organisational, structural)
 

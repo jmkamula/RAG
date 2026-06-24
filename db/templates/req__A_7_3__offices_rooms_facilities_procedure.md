@@ -13,7 +13,7 @@ should_count: 1
 
 > A.7.3 requires physical security to be designed and implemented for offices, rooms, and facilities. The procedure documents room classification, locking, signage, key/card management, and occupancy. The room register, applicable-rooms scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Classification of rooms (general, restricted, secure, high-security)
 

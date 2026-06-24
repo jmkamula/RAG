@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the procedure — which 4.1 issue categories and 4.2 party categories feed planning, what cadence inputs are refreshed at, what 'significant change' triggers ad-hoc replanning
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. 4.1 issue categories enumerated as planning inputs
 

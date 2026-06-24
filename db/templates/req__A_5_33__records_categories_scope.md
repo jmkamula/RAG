@@ -13,7 +13,7 @@ should_count: 2
 
 > The upstream that drives the schedule. Documents the business activities, legal/regulatory drivers, and data categories that determine what counts as a 'record' for the organisation. ISO 27002:2022 § 5.33 expects organisations to know which records they need to keep before claiming to protect them. Drift between the scope and the schedule is the audit failure mode this leaf catches — it surfaces missing classes (e.g., 'we started processing health data; where are the HIPAA records?')
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Business activities considered (HR/employment, finance/tax, sales/customer, operations/security, regulated activities — each may generate distinct record classes)
 

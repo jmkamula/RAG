@@ -14,7 +14,7 @@ should_count: 2
 
 > A.5.19 expects periodic review of the supplier portfolio — to refresh risk classifications, re-test selection criteria, and confirm that monitoring and training arrangements still fit the supplier mix
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

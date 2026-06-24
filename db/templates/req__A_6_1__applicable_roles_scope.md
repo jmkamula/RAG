@@ -13,7 +13,7 @@ should_count: 2
 
 > The upstream that drives the procedure. Documents which role tiers exist, which checks each tier requires, and the legal/regulatory drivers for sectoral check requirements (financial-services PEP + sanctions, healthcare credentialing, government clearance levels)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Role tiers defined (junior office, standard, sensitive [access to special-category PII or financial systems], privileged [admin / production access], executive)
 

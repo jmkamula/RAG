@@ -14,7 +14,7 @@ should_count: 3
 
 > A.6.6 requires confidentiality or non-disclosure agreements appropriate to the organisation's information protection needs, regularly reviewed, and signed by personnel and relevant interested parties. The template carries the clauses (parties, info classes, duration, return/destruction, signature, last-reviewed date). The signature register, applicable-parties scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Parties covered (employees, contractors, suppliers, visitors with access to sensitive info, M&A counterparties)
 

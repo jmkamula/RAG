@@ -13,7 +13,7 @@ should_count: 2
 
 > The operational catalogue of exit briefings and role-change briefings. Each event: leaver identifier, trigger (termination / contract end / role change), briefing date, briefer, signed acknowledgment of surviving obligations. Drives 'show me every leaver acknowledged their post-employment obligations' audit
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row leaver identifier (links to identity register A.5.16; cross-link to A.5.11 return-of-assets record + A.5.16 identity revocation)
 

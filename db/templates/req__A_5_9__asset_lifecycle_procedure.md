@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.9 requires the register to be maintained — the lifecycle procedure documents how assets enter, change and leave the register. Covers procurement intake, ownership transfer, classification at creation/change, retirement and disposal handoff (A.7.14 / A.8.10)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Intake path — every new asset (procured, built, granted) is registered before going operational
 

@@ -14,7 +14,7 @@ should_count: 1
 
 > The live measurement output — per-metric values captured over time, analysed against thresholds, fed into 9.3 management review. Distinct from the procedure: the procedure is the plan, this is the data. Quarterly refresh (freshness=90 — measurement tempo)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Metric identifier per row (matches procedure's metric catalog)
 

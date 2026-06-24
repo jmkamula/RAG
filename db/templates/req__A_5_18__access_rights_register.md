@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.18 requires a central record of access rights — without a register, 'who has access to what' devolves to system-by-system queries that drift apart. The register is the live source of truth: every subject-to-asset right mapped, every grant authorised + dated + statused. It feeds the periodic review (which surveys it) and the revocation record (which closes rows out)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Subject-to-asset rights mapping (who has access to what — drives review and the orphan-access check)
 

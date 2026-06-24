@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the programme — who is 'persons doing work under the organisation's control' (per clause 7.3). Includes employees, often contractors, sometimes embedded suppliers
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Employee coverage stated (all employees, all locations)
 

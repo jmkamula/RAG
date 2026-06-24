@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.27 requires knowledge from incidents to be used to strengthen and improve information security controls, update risk assessments, refresh incident plans, and update training. The procedure documents capture, action assignment, pattern analysis, root-cause typing and feedback into the broader control framework. The lessons register, periodic program review and per-lesson improvement-action record are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Post-incident review trigger (every incident above a threshold, or all incidents)
 

@@ -14,7 +14,7 @@ should_count: 1
 
 > Clause 8.3 requires the organisation to implement the 6.1.3 treatment plan and retain documented information of results. Per-treatment-item records are the canonical artefact. Sibling leaves: execution procedure, applicable plan-items scope, program review. Operational freshness (180d)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Treatment plan from 6.1.3 being implemented (status per item)
 

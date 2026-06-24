@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — which devices + traffic paths are in scope. Corporate-managed devices typically yes. On-network traffic yes. BYOD case-by-case. Off-network corporate-managed via remote-proxy
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Device classes in scope (corporate-managed / contractor / BYOD with approval)
 

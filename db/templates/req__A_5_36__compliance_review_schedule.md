@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.36 expects regular review — without a schedule, 'regular' becomes 'when something goes wrong'. The schedule register is the calendar: every in-scope policy/rule/standard, the planned cadence per item (proportional to risk and change rate), the last review date and the next review date
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Full catalogue of in-scope items enumerated (InfoSec policy + every topic-specific policy + rules + applicable standards — completeness is the integrity check)
 

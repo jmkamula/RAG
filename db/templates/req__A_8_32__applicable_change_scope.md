@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — what counts as a change requiring CM, what gets exempt (read-only operations / break-glass usage already covered elsewhere)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Change classes enumerated with CM path per class (standard / normal / emergency / pre-approved)
 

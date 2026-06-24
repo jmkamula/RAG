@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which Member State laws actually restrict Art.12-22/34 rights for the org's processing. Most orgs face none; regulated industries face several
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Member State law register — every applicable law cited with title, article, scope
 

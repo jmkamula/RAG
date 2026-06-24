@@ -14,7 +14,7 @@ should_count: 3
 
 > A.6.3 requires personnel and relevant interested parties to receive appropriate awareness, education, and training, with regular updates as policies and procedures change. The programme document describes the audience, curriculum per role, onboarding training, refresh cadence, awareness mechanisms, and training records. The completion register, audience-curriculum scope and periodic programme review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Scope and audience defined (all personnel + relevant interested parties such as contractors, third parties with access)
 

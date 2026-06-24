@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.8 requires every project to be visible to the security function — invisible projects are the ones that miss gates. The register catalogues every in-scope project: id, name, security tier, current stage, owner, InfoSec liaison, planned closure date, status. It is the operational record that proves the gate process is actually applied org-wide, not just on the projects InfoSec happens to hear about
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each in-scope project captured with a unique identifier
 

@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.26 requires documented procedures for responding to information security incidents end-to-end. The procedure covers roles, containment, investigation, eradication and recovery, communication, evidence collection, action logging and closure. The incident register, periodic IR-program review and per-incident closure record are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Roles and responsibilities for incident response defined (Incident Manager, security team, comms lead, legal)
 

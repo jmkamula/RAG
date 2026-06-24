@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — what counts as 'network service' for A.8.21. ISP / CDN / DNS / SD-WAN / cloud connectivity / managed-firewall / VPN-as-service all in scope
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Service classes enumerated with assessment depth per class
 

@@ -13,7 +13,7 @@ should_count: 2
 
 > Clause 4.3 requires the organisation to determine and document the boundaries and applicability of the ISMS. The scope statement is the canonical artefact — boundaries, interfaces, exclusions, locations, products/services. Sibling leaves: determination methodology, per-change record, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Boundaries of the ISMS defined
 

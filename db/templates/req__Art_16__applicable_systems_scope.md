@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — every system holding rectifiable personal data that needs to be touched on a rectification request
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Systems enumerated (PII inventory cross-reference — A.5.34:pii_inventory + Art.30 RoPA)
 

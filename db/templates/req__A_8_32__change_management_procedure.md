@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.32 requires changes to information processing facilities + systems subject to CM procedures. Procedure documents scope, approval workflow, risk-assessment-per-change, rollback, emergency-change path, post-implementation review. Per-change register (lifecycle-end), applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Scope — which change classes require formal CM (production / customer-facing / security-relevant / cross-system)
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > A.7.6 requires security measures for working in secure areas. The procedure documents secure-area definition, device restrictions, escort requirements, clean entry/exit. The work session register, applicable-areas scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Secure area definition (which areas are 'secure' per A.7.1 classification)
 

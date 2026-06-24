@@ -13,7 +13,7 @@ should_count: 1
 
 > Clause 7.3 requires persons doing work under the organisation's control to be aware of the InfoSec policy, their contribution to ISMS effectiveness, and consequences of nonconformity. The programme is the canonical artefact — content + delivery method + cadence. Sibling leaves: completion register, applicable audience scope, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Content covers awareness of the InfoSec policy
 

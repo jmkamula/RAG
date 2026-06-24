@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.6 expects active engagement, not nominal membership. The procedure documents how SIGs are joined, how value is captured back into the organisation (intel sharing into threat-intelligence A.5.7, runbook updates, training inputs) and how dormant memberships are pruned
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Path to join a new SIG (business case linked to risk-topic scope, approval, budget allocation)
 

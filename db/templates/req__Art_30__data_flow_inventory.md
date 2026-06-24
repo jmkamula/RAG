@@ -13,7 +13,7 @@ should_count: 3
 
 > The upstream data picture that feeds RoPA accuracy. Where the register is activity-centric (one row per processing activity), the data flow inventory is data-centric — which systems hold personal data, how data moves between them, who receives it, and which transfers cross borders. EDPB guidance treats data mapping as the foundation for accurate Art.30 records
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Systems holding personal data enumerated (production systems, SaaS, backups, analytics, archives)
 

@@ -14,7 +14,7 @@ should_count: 2
 
 > The labelling program creates value only if labels actually stick across the estate — systems where coverage drops, transformations that strip labels, training gaps where users mis-apply, and new platforms that came online without labelling enabled all signal the program is leaking. The review captures the planned-interval check: coverage-trend analysis, drop-detection, scheme-alignment audit, training-effectiveness sample, and resulting program adjustments. Annual cadence — cascades from A.5.12 classification scheme review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned annual interval
 

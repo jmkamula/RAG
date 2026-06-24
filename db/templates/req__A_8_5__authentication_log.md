@@ -13,7 +13,7 @@ should_count: 1
 
 > Continuous evidence stream — auth events, failure patterns, suspicious-login signals, MFA bypass attempts. Feeds detection (A.8.16) and incident triage (A.5.25)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. All authentication events captured (success / failure / MFA challenge / step-up)
 

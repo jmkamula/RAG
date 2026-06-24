@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — what counts as 'outsourced development'. Custom-development contractor yes. Staff augmentation typically governed under A.6.5 + A.5.20. Pre-existing COTS via A.5.19/A.5.20
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Engagement types in scope (turn-key contract / dedicated team / co-development / pen-test-as-development)
 

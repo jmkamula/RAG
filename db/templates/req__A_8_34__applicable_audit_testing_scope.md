@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — what counts as audit testing on operational systems. Internal audit yes. External pen-test yes. Regulator inspection yes. Routine application testing under A.8.29
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Engagement types in scope (internal audit / third-party pen-test / regulator inspection / customer security assessment)
 

@@ -14,7 +14,7 @@ should_count: 2
 
 > The lessons program creates value only if it closes the loop — actions actually get done, lessons reduce repeat incidents, and the patterns drive systemic improvements. The review captures the planned-interval check: action-closure rate, repeat-incident detection, training-impact evidence, feedback-loop effectiveness and resulting program adjustments
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

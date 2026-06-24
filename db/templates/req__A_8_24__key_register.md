@@ -13,7 +13,7 @@ should_count: 1
 
 > Per-key catalogue — key id, purpose, algorithm + strength, custodian, lifecycle dates. Drives 'every active key complies with current approved-algorithms table' audit
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row unique key identifier
 

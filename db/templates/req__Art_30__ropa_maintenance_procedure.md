@@ -13,7 +13,7 @@ should_count: 3
 
 > Art.30 implies an ongoing obligation — the register must reflect current reality. The maintenance procedure documents who keeps it current, what changes trigger an update, the path from trigger to register entry, and the link to other GDPR gates (Art.28 DPA on new processor, Art.35 DPIA on high-risk new purpose)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Named maintainer (DPO, privacy lead, or controller's designate) with documented responsibility for register accuracy
 

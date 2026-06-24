@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.24 requires the org to plan and prepare for incidents — not just react when they happen. The framework documents roles, authorities, detection-and-reporting paths, classification criteria, escalation thresholds, communication paths (internal + external + regulator), evidence-handling integration (A.5.28), lessons-learned integration (A.5.27), and exercise/test cadence. The IR team register, periodic program review and per-exercise activation record are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Roles and responsibilities defined (IR lead, deputies, comms lead, legal liaison, exec sponsor; named individuals or stable roles, not 'TBD')
 

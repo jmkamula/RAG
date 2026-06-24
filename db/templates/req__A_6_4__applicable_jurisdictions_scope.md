@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that drives procedure variants. Documents which jurisdictions the procedure operates in (employment-law variations affect what's permissible — required-notice periods, just-cause requirements, statutory remediation steps) and how it extends to non-employee workers (contractors get different process leverage)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Jurisdictions covered (employment-law variants — at-will US states vs just-cause EU vs notice-period UK — drive process step variations)
 

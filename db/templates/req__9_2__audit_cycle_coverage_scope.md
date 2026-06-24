@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the programme — which ISMS processes are audited every cycle, which on a multi-year rotation, what makes a cycle 'complete'. Surveillance-cycle auditors expect to see this explicitly
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Audit cycle length stated (typically 3 years for full ISMS coverage)
 

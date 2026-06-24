@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which media classes are in scope, applicable use cases, exclusions
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Media classes (USB drives, external HDDs, optical disks, tape, paper-with-PII, mobile devices with data)
 

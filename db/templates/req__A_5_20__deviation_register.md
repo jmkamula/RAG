@@ -13,7 +13,7 @@ should_count: 2
 
 > Where a supplier successfully negotiates softer terms than the template (or omits a clause entirely), the org needs an auditable record: which clause, which supplier, the reason, the compensating control, the approver. This is the lifecycle-end slot of operational_process applied to agreements: each deviation is the supplier 'exiting' the standard template path
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Clause deviated from per row (identified by template section)
 

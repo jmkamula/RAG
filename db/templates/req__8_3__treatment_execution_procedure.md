@@ -13,7 +13,7 @@ should_count: 1
 
 > The procedure governing how treatments move from 6.1.3 plan items to implemented controls — assignment rules, status reporting cadence, escalation when items slip, residual-risk re-acceptance when treatment falls short of plan
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Assignment rules (how each plan item lands with an operational owner)
 

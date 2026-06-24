@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — every system holding erasable personal data including backups + replicas + third-party processors (per Art.17 'all instances' + Art.28 flow-through)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Systems enumerated (cross-ref to A.5.34:pii_inventory + A.8.10:scope_systems + Art.30 RoPA)
 

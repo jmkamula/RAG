@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.30 expects recovery to be EVIDENCED — not just promised. The recovery record evidences each event: recovery id, type (real_recovery / scheduled_test / partial_drill), services in scope, RTO/RPO targets, actual recovery time, success status, gaps surfaced, sign-off. HYBRID variant (like A.5.29) — covers BOTH real recovery events AND scheduled tests via type field. Real recoveries cross-reference A.5.29 activation_record (BCP-driven events) and A.5.26 incident_register (incident-driven recovery)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Recovery event identifier per record (unique, sequenced)
 

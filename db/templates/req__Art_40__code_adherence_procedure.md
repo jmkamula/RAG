@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.40 encourages associations to draw up codes; controllers/processors choose to adhere (Art.40.3). The procedure governs adherence selection, compliance demonstration, and monitoring body interaction
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Code selection rationale — which approved Art.40 code is adhered to and why (sector relevance / customer requirement)
 

@@ -14,7 +14,7 @@ should_count: 2
 
 > The framework creates value only if it actually runs when incidents hit — exercise results that surface gaps, team coverage gaps, framework-vs-actual-response divergence, GDPR-72h-feasibility check all signal the framework is or isn't ready. The review captures the planned-interval check: exercise-result analysis, team-readiness audit, real-incident-vs-framework divergence analysis, GDPR-readiness verification, and resulting framework adjustments. Cadence tightened to 180 days — IR readiness erodes between exercises
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned 180-day interval
 

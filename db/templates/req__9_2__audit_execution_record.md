@@ -14,7 +14,7 @@ should_count: 1
 
 > Per-audit record capturing what was audited, by whom, when, with what findings — the lifecycle-end artefact of each audit engagement. Distinct from the programme: the programme is the plan, the execution record is the proof. Annual refresh (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Unique audit identifier per row
 

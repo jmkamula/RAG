@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.4 requires management to require all personnel to apply information security per the policy framework. The directive itself is the artefact — a mandate letter, board statement, or equivalent that binds personnel to InfoSec policies. Approval, communication and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Statement that personnel are required to apply InfoSec policies, topic-specific policies, and procedures
 

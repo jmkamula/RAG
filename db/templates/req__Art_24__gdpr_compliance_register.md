@@ -14,7 +14,7 @@ should_count: 1
 
 > Per-obligation register tracking the org's posture against every GDPR article in scope. Annual refresh (freshness=365). Distinct from the Art.30 RoPA (activities) and the lawful-basis register (Art.6 per-activity): this is the meta-tracker of compliance posture per article
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row GDPR article identifier
 

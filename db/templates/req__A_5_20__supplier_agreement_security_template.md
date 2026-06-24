@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.20 requires information security requirements to be established and agreed with each supplier based on the relationship type. The template is the standard clause set attached to supplier agreements; the coverage register, periodic template review and deviation register are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Minimum security requirements (controls baseline, certifications expected)
 

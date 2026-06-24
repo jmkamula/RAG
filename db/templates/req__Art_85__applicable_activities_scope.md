@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which of the organisation's processing activities fall under Art.85 categories (journalism / academic / artistic / literary expression). Critical for tenants with mixed activities (e.g. a publisher that also runs e-commerce — only the editorial activities qualify)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Activities in scope enumerated, classified by Art.85 category (journalism / academic / artistic / literary)
 

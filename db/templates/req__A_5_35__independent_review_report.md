@@ -14,7 +14,7 @@ should_count: 3
 
 > A.5.35 requires the organisation's approach to information security to be reviewed independently at planned intervals (or on significant change). Each review report evidences the activity for one review cycle: reviewer independence demonstrated, scope covering people/processes/technology, findings recorded with severity, recommendations stated, management response documented. The review schedule register, program meta-review and finding-response register are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Independence of the reviewer demonstrated (separate function, external auditor, or rotating internal reviewer with no operational ownership of the reviewed areas)
 

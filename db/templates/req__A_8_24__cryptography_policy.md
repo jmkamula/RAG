@@ -13,7 +13,7 @@ should_count: 2
 
 > A.8.24 requires a policy on effective use of cryptography. Policy states approved algorithms, key-management approach, at-rest + in-transit requirements, roles. Per-key register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Approved cryptographic algorithms with minimum strengths (per regulator/NIST/CNSA-compliant tables)
 

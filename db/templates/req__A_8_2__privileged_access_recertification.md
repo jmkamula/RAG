@@ -14,7 +14,7 @@ should_count: 1
 
 > A.8.2 calls for periodic review of privileged access — typically more frequent than the general access review at A.5.18 (this curation sets freshness at 180 days; tenants with high-risk processing may run quarterly). The recertification record evidences that each privileged grant was re-confirmed by the asset owner
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Recertification date within the planned interval (≤180 days since last)
 

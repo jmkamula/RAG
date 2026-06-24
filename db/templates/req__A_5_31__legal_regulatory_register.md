@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.31 requires applicable legal, statutory, regulatory and contractual requirements relevant to information security to be identified, documented and kept up to date. The register enumerates them and maps each to the compliance approach. Maintenance procedure, applicable-obligations scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Applicable laws and regulations enumerated (GDPR, sectoral, jurisdictional, transfer regimes)
 

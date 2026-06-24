@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — operational interpretation of the four Art.18.1 grounds, what the restriction looks like per data class, exception handling per Art.18.2
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Art.18.1 grounds catalog (a-d) with practical examples
 

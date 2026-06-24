@@ -13,7 +13,7 @@ should_count: 1
 
 > The methodology that produces and refreshes the issues register — what frameworks are used (SWOT, PESTLE, threat intel ingest), which sources are consulted, on what cadence. Without a documented framework the register is hard to defend as 'systematic'
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Framework reference stated (SWOT, PESTLE, ISO 31000 5.4, or equivalent)
 

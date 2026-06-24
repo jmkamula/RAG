@@ -13,7 +13,7 @@ should_count: 1
 
 > A.7.12 requires cables carrying power, data, or supporting services to be protected from interception, interference, or damage. The procedure documents routing, separation, labelling, tamper-evidence, patch-panel security. The cabling register, applicable-runs scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Cable routing principles (conduits, protected paths, away from public areas)
 

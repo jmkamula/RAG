@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the register — which processing activities are within Art.6 scope (any processing of personal data), the relationship to Art.30 RoPA (Art.30 catalogs, Art.6 assigns the basis per item), Member State law overlays
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Link to Art.30 RoPA — every RoPA entry must have a corresponding Art.6 basis assignment
 

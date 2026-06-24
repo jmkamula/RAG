@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.23 expects the org to know which cloud services are in use, where they store and process data, what classification of data they hold, what the shared-responsibility split looks like in practice, and what the agreement says. The register is the live source of truth — feeding the periodic posture review and exit-migration leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each cloud service identified per row (provider, service name, deployment model)
 

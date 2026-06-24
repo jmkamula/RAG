@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.44 establishes that any transfer of personal data to a third country / international organisation requires compliance with Chapter V conditions, applied also to onward transfers. The procedure governs how transfers are identified, classified by mechanism (Art.45/46/47/49), and tracked
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Transfer-identification mechanism — any flow of personal data outside EU/EEA flagged at intake (vendor onboarding, integration design, support routing)
 

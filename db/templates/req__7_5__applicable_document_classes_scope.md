@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the register — which document classes are 'ISMS documented information' (ISO-required, org-determined-necessary) vs incidental
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. ISO 27001:2022-required document classes enumerated (scope statement, policy, SoA, risk register, audit programme, etc.)
 

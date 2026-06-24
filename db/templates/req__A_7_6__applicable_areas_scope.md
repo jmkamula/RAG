@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which areas are 'secure' for A.7.6 purposes (drawn from A.7.1 classification), and what additional rules apply per tier
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Secure areas in scope (drawn from A.7.1 register)
 

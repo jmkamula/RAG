@@ -14,7 +14,7 @@ should_count: 2
 
 > Periodic verification that the register still reflects current obligations and that the compliance approach for each is still adequate. The cadence is semi-annual (freshness=180) because regulatory change is faster than annual; this matches the prior single-leaf freshness signal
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval (within 6 months of last review)
 

@@ -13,7 +13,7 @@ should_count: 2
 
 > The operational catalogue of NDA signings. Each row: signatory identifier, NDA variant signed, template version, signature date. Drives the 'every party with access has signed a current NDA' completeness check; the audit-defensibility gate for A.5.18 access grants to non-employees
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row signatory identifier (links to identity register A.5.16 for employees; supplier register A.5.19 for contractors; visitor-log for visitors)
 

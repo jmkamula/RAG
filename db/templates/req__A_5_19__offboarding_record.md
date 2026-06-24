@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.19 requires that transitions at the end of a supplier relationship are managed — anything that needs to move (information, processing facilities, access) does move. Offboarding records evidence that those transitions actually happened: data returned/destroyed, access removed, lessons captured. One record per offboarding event, traceable back to the supplier register
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Offboarding trigger captured (termination / non-renewal / supplier failure / re-tendering)
 

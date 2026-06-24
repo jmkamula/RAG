@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.17 requires authentication information (passwords, tokens, keys, certificates, biometric data) to be allocated and managed by a controlled process, with personnel advised on appropriate handling. The procedure documents allocation, transmission, storage, complexity/rotation, reset/recovery, user advisory, MFA expectations and the connection to identity lifecycle in A.5.16. The credential register, periodic program review and per-credential revocation record are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Initial allocation method for authentication information per credential type (in-person, secure channel, ephemeral link, hardware-token enrolment)
 

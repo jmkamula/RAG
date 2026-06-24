@@ -13,7 +13,7 @@ should_count: 1
 
 > The methodology behind the resources record — how needs are estimated, what inputs drive sizing (risk treatment plan scale, objectives, training demand), who approves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Inputs to resource determination (6.1.3 treatment plan, 6.2 objectives, 7.2/7.3 competence/awareness demand, audit plan)
 

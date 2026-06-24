@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which Art.9.1 categories the org actually processes, which Art.9.2 conditions are in use, what's out of scope. Categorical clarity prevents 'we don't process special category data' assertions that are technically false (e.g. CVs revealing trade-union membership)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Art.9.1 categories actually processed enumerated
 

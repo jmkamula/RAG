@@ -14,7 +14,7 @@ should_count: 2
 
 > A.5.36 requires regular review of compliance with the InfoSec policy, topic-specific policies, rules and standards. Each review record evidences the activity for one cycle: schedule honoured, scope covered, method used, findings recorded, corrective actions opened. The schedule register, program meta-review and nonconformity register are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Schedule honoured for this cycle (each planned policy/rule/standard actually reviewed in the period; gaps flagged for next cycle)
 

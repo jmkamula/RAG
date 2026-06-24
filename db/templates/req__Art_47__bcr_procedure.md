@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.47 governs BCRs as a transfer safeguard for intra-group transfers. Requires lead SA approval per Art.47.1 + content per Art.47.2 a-n
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Lead SA approval evidence per Art.47.1 with consistency mechanism
 

@@ -13,7 +13,7 @@ should_count: 2
 
 > The upstream that drives the register. Documents the threat categories, technology stack components, sectoral concerns and skill domains that justify each SIG membership. ISO 27002:2022 § 5.6 expects engagement to be relevant — random or legacy memberships fail the test
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Threat categories prioritised (ransomware, supply-chain, insider, sector-specific) that justify SIG choices
 

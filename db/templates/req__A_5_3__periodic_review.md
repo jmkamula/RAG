@@ -14,7 +14,7 @@ should_count: 2
 
 > Org structure shifts (new roles, reorganisations, M&A) create new conflict pairs and obsolete old ones. The review captures who reviewed the matrix, when, and the outcome — and propagates corrections back to the matrix and compensating controls
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

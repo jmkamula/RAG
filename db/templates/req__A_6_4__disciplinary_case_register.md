@@ -13,7 +13,7 @@ should_count: 2
 
 > The operational catalogue of disciplinary cases (anonymised at the audit-trail layer to comply with privacy requirements). Each case: violation type, investigation outcome, action taken, decision authority, closure date. Drives the 'show me how the disciplinary process actually operates' audit question
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-case unique identifier (anonymised externally; internal traceability to personnel record preserved)
 

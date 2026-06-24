@@ -13,7 +13,7 @@ should_count: 3
 
 > A.6.5 requires surviving information security responsibilities after termination or change of employment to be defined, enforced, and communicated. The procedure documents what obligations persist, for how long, how leavers are briefed, how enforcement happens, and how role-change scenarios are handled. The leaver-briefing register, surviving-obligations scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Surviving duties enumerated (confidentiality — typically indefinite; IP protection; non-disparagement; non-poach where lawful; non-compete where lawful)
 

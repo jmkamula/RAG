@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — what counts as a 'transfer' (EDPB Guidelines 05/2021 three cumulative criteria: controller/processor / personal data made available / to a recipient in a third country), boundary with intra-group / EU/EEA flows
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Operational definition of 'transfer' per EDPB 05/2021 three cumulative criteria
 

@@ -14,7 +14,7 @@ should_count: 2
 
 > Access control policies decay as the IT estate grows — new systems, new cloud services, new federated identity sources all stress the policy. Review checks whether the rules still cover the actual estate, whether least-privilege is still operationalised correctly, and whether downstream A.5.18 provisioning is aligned
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > Per-version publication evidence — version number, publication URL / location, effective date, approval. Proves the notice is actually accessible to subjects, not just drafted
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Version identifier per row (when notice content changes)
 

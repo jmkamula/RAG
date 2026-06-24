@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the records — which assets / processes / suppliers are individually assessed at the operational layer (per clause 8.2). Distinct from 6.1.2 (which is the methodology) and 6.1.3 (which is the treatment plan)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Asset/process classes in scope for operational assessment (production systems, data flows, supplier integrations, deployed products)
 

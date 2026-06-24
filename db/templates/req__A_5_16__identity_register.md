@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.16 requires every identity to be visible to the security function — invisible identities are the ones that go stale, get reused, or persist past their owner's departure. The register catalogues every active identity (human + service + shared + non-human): identity id, type, owner, status, created/modified/last-used timestamps. It is the operational record that proves identity hygiene is org-wide, not just on the systems IT remembered to onboard to the IAM platform
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each active identity captured with a unique identifier (employee id, contractor id, service-account id, shared-account id)
 

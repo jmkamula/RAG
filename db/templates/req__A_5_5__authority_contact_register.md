@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.5 requires the organization to establish and maintain contact with relevant authorities. The register is the live source of truth for which authorities apply, who to reach, and on what trigger. Maintenance, the applicable-authorities scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Relevant authorities enumerated (DPA, sectoral regulator, law enforcement, CERT/CSIRT)
 

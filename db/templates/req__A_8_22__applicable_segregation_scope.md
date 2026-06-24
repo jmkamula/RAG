@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — which network domains are in scope. Cloud VPCs typically yes. Vendor-managed pass-through ISPs typically delegated. OT typically tighter rules. Multi-tenant systems require per-tenant zones
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Network domains in scope (corporate / cloud / OT / multi-tenant SaaS) with segregation expectation per domain
 

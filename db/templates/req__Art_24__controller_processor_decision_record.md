@@ -13,7 +13,7 @@ should_count: 1
 
 > Per-relationship record documenting whether the org acts as controller, processor, joint controller, or third-party recipient for each processing activity. Art.24's accountability scope is shaped by this role assignment — without explicit documentation, role disputes during audits become unwinnable
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row processing activity (Art.30 RoPA reference)
 

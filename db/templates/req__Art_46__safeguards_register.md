@@ -14,7 +14,7 @@ should_count: 1
 
 > Per-transfer record proving Art.46 safeguard is in place with TIA + supplementary measures where applicable. Annual refresh (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row transfer id (Art.44 register cross-ref)
 

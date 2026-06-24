@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the register — which functions and which levels are required to carry objectives (per clause 6.2 'at relevant functions and levels'); any explicit exclusions
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Functions in scope enumerated (engineering, ops, sales, legal, HR, finance as relevant)
 

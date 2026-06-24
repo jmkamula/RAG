@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.25 requires the organization to assess information security events and decide whether to categorise them as incidents. The procedure documents detection sources, assessment criteria, decision authority, classification scale and handoff to incident response (A.5.26). The event triage log, periodic triage-program review and per-event triage decision record are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Detection sources enumerated (monitoring, user reports, third parties)
 

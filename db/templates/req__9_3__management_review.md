@@ -14,7 +14,7 @@ should_count: 2
 
 > Clause 9.3 requires top management to review the ISMS at planned intervals. The minutes per review are the canonical artefact. Sibling leaves: management review procedure, applicable inputs/outputs scope, program review. Annual review minimum (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Internal audit results included
 

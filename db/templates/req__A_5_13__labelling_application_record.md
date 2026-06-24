@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.13 expects labelling to be applied as the org's information estate grows — every new platform that stores information of any classification level should be brought into scope, not just the platforms IT happened to configure first. The application record evidences each enablement event: platform id, scope, enablement method, coverage verification, training rollout, owner. One record per platform/system onboarding (or major re-config), traceable back to the coverage register
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Platform identifier per record (links to coverage register entry)
 

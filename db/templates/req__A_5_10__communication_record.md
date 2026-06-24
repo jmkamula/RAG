@@ -13,7 +13,7 @@ should_count: 2
 
 > AUP enforcement requires the user to have been informed of the rules — courts and tribunals routinely hinge on this. Evidence must show active distribution and, ideally, individual acknowledgement (signature, click-through, training completion) — not just availability on an intranet
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Date of publication/communication
 

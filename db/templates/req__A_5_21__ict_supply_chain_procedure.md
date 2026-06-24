@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.21 requires processes to manage information security risks in the ICT products and services supply chain. The procedure covers sourcing, integrity verification, sub-supplier visibility, requirements propagation and identification of critical components. The component register, periodic review and EOL-replacement records are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Sourcing controls (approved vendor list, banned-vendor list, country-of-origin considerations)
 

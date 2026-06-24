@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.19 obliges the controller to notify recipients of rectification / erasure / restriction of personal data, unless impossible or disproportionate. The procedure governs how recipient lists are maintained and notifications fired
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Trigger events stated (Art.16 rectification / Art.17 erasure / Art.18 restriction)
 

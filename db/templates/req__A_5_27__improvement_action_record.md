@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.27 expects lessons to actually strengthen and improve controls — not just be captured in a register. The improvement-action record evidences the actual loop-closure: which lesson, what was changed (control updated / training added / procedure amended / risk formally accepted), proof of the change, authoriser and closure date. One record per closed lesson, traceable back to the lessons register and through to the source incident
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Lesson identifier per record (links to lessons register)
 

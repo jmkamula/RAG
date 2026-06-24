@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.31 expects the register to be 'kept up to date'. The procedure documents who keeps it current, what triggers an update (new regulation, regulator guidance, customer contract change, jurisdiction expansion), and the intake path from trigger to register entry
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Named maintainer (compliance lead, legal counsel, or designate) with documented responsibility for register accuracy
 

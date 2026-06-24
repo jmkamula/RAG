@@ -14,7 +14,7 @@ should_count: 2
 
 > Classification schemes are the foundation of handling controls — a stale scheme produces stale handling. Review checks whether the levels still match the actual sensitivity gradient, whether new categories have emerged (e.g. AI training corpora), and whether downstream controls (A.5.13, A.5.10, A.5.14) still align
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

@@ -14,7 +14,7 @@ should_count: 1
 
 > The live output of the assessment procedure — every identified risk with owner, scoring, treatment status. Distinct from the procedure: the procedure is the methodology, the register is the data. Annual refresh (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Unique risk identifier per row
 

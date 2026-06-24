@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.49 provides specific narrowly-construed derogations from the Art.45/46 rule when no adequacy decision and no appropriate safeguards apply. The procedure governs derogation selection + EDPB-strict-construction discipline + non-repetitive-non-massive constraint
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Art.49.1 a-g derogation catalog (explicit consent / contract necessity / public interest / legal claims / vital interests / public register / compelling legitimate interests last-resort)
 

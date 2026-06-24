@@ -13,7 +13,7 @@ should_count: 1
 
 > The per-version approval evidence — who signed off, on what date, against what scope. Distinct from the policy file itself: this is the audit trail of top-management approval across versions
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Signature of top management on the latest version
 

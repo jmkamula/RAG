@@ -13,7 +13,7 @@ should_count: 2
 
 > Clause 5.2 requires top management to establish an information security policy appropriate to the organisation's purpose. The policy is the canonical artefact. Sibling leaves: approval record, communication evidence, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Appropriate to the purpose of the organisation
 

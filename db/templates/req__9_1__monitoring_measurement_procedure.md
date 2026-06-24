@@ -14,7 +14,7 @@ should_count: 1
 
 > Clause 9.1 requires the organisation to determine what is monitored and measured, by what methods, when, who, and how analysed. The procedure is the canonical artefact. Sibling leaves: measurement record (the live data), applicable measurement scope, program review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. What is monitored and measured (ISMS processes and security controls)
 

@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.13 requires procedures for information labelling aligned with the classification scheme defined in A.5.12. The procedure documents per-level marking conventions, automated tooling rules, persistence requirements, training links, and legacy-asset handling. The coverage register, periodic program review and per-platform application record are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Visual marking conventions per classification level (headers, watermarks, banners, footers)
 

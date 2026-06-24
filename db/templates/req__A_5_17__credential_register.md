@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.17 requires every credential type to be visible — secret-sprawl is the failure mode where ad-hoc credentials proliferate outside the central vault, escape rotation, and persist past their owner. The register catalogues every credential type deployed: type id, scope, vault location, rotation cadence, MFA factors required, owner. It is the operational record that proves credential governance covers ALL credentials in use, not just the ones IT remembered to onboard to the password manager
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each credential type captured with a unique identifier (user_password / admin_password / api_key / service_token / cert / mfa_factor / break_glass)
 

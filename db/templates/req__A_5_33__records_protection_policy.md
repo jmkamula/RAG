@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.33 requires records to be protected from loss, destruction, falsification, unauthorized access, and unauthorized release. The policy/procedure documents how records are classified, what protection is applied per class, how disposal is carried out at end of retention, and how legal-hold overrides operate. The records schedule (per-class register), records-categories scope (upstream that determines what counts as a 'record') and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Protection requirements per record class (access control, encryption at rest, immutability where needed, integrity verification — protects against loss, destruction, falsification, unauthorized access and release)
 

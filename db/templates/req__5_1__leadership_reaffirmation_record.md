@@ -13,7 +13,7 @@ should_count: 1
 
 > Per-reaffirmation record capturing each annual (or trigger-based) re-signature of the commitment directive plus evidence of leadership activity in the period. Lifecycle-end artefact: the directive is signed once, but commitment must be visibly renewed
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Reaffirmation date stated
 

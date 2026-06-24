@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.31 requires environments separated + secured. Procedure documents distinct environments, network/identity separation, data-handling rules, promotion process, per-env access. Per-environment register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Distinct environments enumerated (dev / test / staging / production) with purpose per environment
 

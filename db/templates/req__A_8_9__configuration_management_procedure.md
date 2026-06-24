@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.9 requires configurations established, documented, implemented, monitored, reviewed. Procedure documents baseline ownership, deployment, drift detection, approval flow. Baseline register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Baseline authority defined per asset class (who owns each baseline)
 

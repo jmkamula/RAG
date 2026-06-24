@@ -13,7 +13,7 @@ should_count: 2
 
 > Per-request evidence that a specific DSAR was answered in line with Art.15. Each response covers confirmation, the Art.15(1)(a-h) information set, third-country transfer safeguards under Art.15(2), the copy of personal data per Art.15(3), and was delivered within Art.12(3) timing
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Confirmation that personal data is or is not processed
 

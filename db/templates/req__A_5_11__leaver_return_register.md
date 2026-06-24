@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.11 requires every triggered return event to be tracked — invisible leavers are the ones who walk out with assets. The register catalogues every in-flight return: leaver id, trigger type, departure/effective date, asset list (linked to A.5.9 asset register), current status, owner. It is the operational record that proves the return process is actually applied every time, not just on the leavers HR happens to remember to log
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each leaver/role-changer captured with a unique identifier (employee or contractor id; do not store sensitive PII beyond what HR retains)
 

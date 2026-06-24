@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.21 requires security mechanisms, service levels, requirements identified, implemented, monitored. Procedure documents the assessment approach, security-mechanism standards, SLA monitoring. Per-service register, applicable scope, program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Security-mechanism standards per service class (encryption / authentication / integrity / availability) with minimum baselines
 

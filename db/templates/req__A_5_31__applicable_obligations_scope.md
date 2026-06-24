@@ -13,7 +13,7 @@ should_count: 2
 
 > The upstream that drives the register. Documents the business activity surfaces — jurisdictions, services, customer types, data categories, sectoral classifications — that determine which obligations apply. ISO 27002:2022 § 5.31 expects organisations to know their applicability before listing obligations
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Jurisdictions covered (HQ, places of business, customer locations, data residency, transfer destinations)
 

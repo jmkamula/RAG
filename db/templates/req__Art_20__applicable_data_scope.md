@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which Art.30 RoPA activities fall in Art.20 scope (basis consent or contract AND automated). Defines what 'provided by' the subject means operationally
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Art.30 RoPA activities in scope (basis consent / contract AND automated)
 

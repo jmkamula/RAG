@@ -13,7 +13,7 @@ should_count: 1
 
 > The catalogue of critical utilities per site — feed type, redundancy in place, last test, provider, owner
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row site + utility pair
 

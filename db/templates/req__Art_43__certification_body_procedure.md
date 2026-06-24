@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.43 governs the accredited body that issues GDPR certifications. Applies when the org IS the certification body. Extremely rare for typical controllers/processors
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Accreditation per Art.43.1 (by SA OR by national accreditation body per ISO 17065)
 

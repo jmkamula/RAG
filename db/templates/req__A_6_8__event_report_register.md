@@ -13,7 +13,7 @@ should_count: 2
 
 > The operational catalogue of every event report received. Each row: report identifier, channel used, reporter identity (or 'anonymous'), report timestamp, content summary, triage outcome (link to A.5.25 triage record), closure. Drives the 'show me the reporting program is actually used and acted on' audit
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row report identifier (links to A.5.25 triage record where the report was triaged)
 

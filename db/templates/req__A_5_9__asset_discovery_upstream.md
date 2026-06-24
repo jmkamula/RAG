@@ -13,7 +13,7 @@ should_count: 2
 
 > The upstream that feeds the register. Where the lifecycle procedure covers intake of known new assets, the discovery upstream documents how the org finds assets it didn't already know about — network scans, cloud-tenant inventory APIs, procurement export, endpoint-management exports — and how those feeds reconcile into the register
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Discovery sources enumerated (network scan tool, CSPM tool, EDR/MDM inventory, procurement system, license database)
 

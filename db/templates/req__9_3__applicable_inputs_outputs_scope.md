@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream that bounds the procedure — which inputs (9.3.2 a-g) are MUST and which are organisation-determined, what output types the review can authorise, escalation thresholds
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Required inputs enumerated per clause 9.3.2 a-g (audit results, NC status, monitoring, objectives, party feedback, opportunities for improvement, changes)
 

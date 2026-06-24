@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream that drives the register and procedure. Documents which systems fall under A.8.3 governance and how classification tiers map to enforcement strictness
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Systems enumerated (drawn from A.5.9 asset register, filtered to access-relevant assets)
 

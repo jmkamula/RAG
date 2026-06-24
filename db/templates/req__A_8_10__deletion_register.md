@@ -13,7 +13,7 @@ should_count: 1
 
 > Per-deletion lifecycle-end record — what was deleted, when, by what method, with verification artefact. Parallels A.5.28 evidence handling disposal pattern and A.7.14 secure disposal
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-deletion unique identifier
 

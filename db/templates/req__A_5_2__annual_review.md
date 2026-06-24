@@ -14,7 +14,7 @@ should_count: 2
 
 > ISO 27002:2022 § 5.2 implementation guidance treats role allocation as needing periodic review to keep up with organizational change. The review record captures who reviewed the matrix, when, and the outcome (unchanged / re-allocated / new role introduced)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned review interval (typically within 12 months of last review)
 

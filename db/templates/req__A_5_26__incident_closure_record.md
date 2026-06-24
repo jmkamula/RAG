@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.26 requires incidents to close with documented outcomes that feed § 5.27 lessons-learned. The closure record evidences the actual close: which incident, the root cause, the containment effectiveness, the recovery validation, and the handoff to lessons-learned. One record per incident, traceable back to the incident register
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Incident identifier per record (links to the incident register)
 

@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.37 expects procedures to be documented AND kept available — both require maintenance. The procedure documents who keeps the register and procedures current, what triggers an update (system change, control change, finding-driven update, exercise outcome), and the lifecycle from draft → review → publish → retire
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Named maintainer of the register (typically operations lead with InfoSec partner) accountable for catalogue currency
 

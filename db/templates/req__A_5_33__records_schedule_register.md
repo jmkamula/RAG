@@ -13,7 +13,7 @@ should_count: 3
 
 > The operational register at the heart of A.5.33. Without a records schedule listing every record class with retention, driver, owner and protection assignment, the policy is theoretical. The schedule is queried at audit time to demonstrate that the organisation knows what records it holds, why it holds them, and for how long
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Records inventory or schedule listing every record class the organisation holds (HR records, financial records, customer records, contract records, security/audit logs, processing-activity records, system records, training records, incident records, etc.)
 

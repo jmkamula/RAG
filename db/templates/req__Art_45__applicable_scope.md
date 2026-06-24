@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which destinations covered by Art.45.3 decisions the org actually relies on + recipient-eligibility verification approach
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Adequate destinations in use (e.g. UK, Japan, US-DPF certified)
 

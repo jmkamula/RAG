@@ -14,7 +14,7 @@ should_count: 1
 
 > Periodic verification — source-register currency, silent-source detection, retention compliance, integrity-verification spot-checks (freshness=180; threat landscape volatile)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval (≤180 days)
 

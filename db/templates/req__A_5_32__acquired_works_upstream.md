@@ -13,7 +13,7 @@ should_count: 2
 
 > The upstream that feeds the inventory. Where the procedure covers ongoing protection and the inventory holds the current state, the intake upstream documents how new IPR enters the org — software procurement, open-source dependency adoption, third-party content licensing, M&A IPR transfer — and how each route results in an inventory entry
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Procurement intake — every commercial software purchase routes through licence review and inventory registration before deployment
 

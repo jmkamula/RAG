@@ -14,7 +14,7 @@ should_count: 2
 
 > Living log of every access request received and its handling. Distinct from the per-event response leaf: the register is the universal record showing the population of requests, status, and timing compliance — auditor-facing evidence that the procedure operates in practice. Style v2 freshness 180d — high-volume DSAR data, slower than incident-register fast-data (90d) but faster than annual review
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Request received date (the start of the Art.12.3 clock) per row
 

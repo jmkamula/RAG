@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — which datasets need masking when entering non-production. Drawn from A.5.34 PII inventory + A.5.12 classification. Documents exclusion rationale (e.g. synthetic-only test data)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Datasets enumerated with masking obligation per dataset (drawn from A.5.34 PII inventory)
 

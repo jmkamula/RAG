@@ -13,7 +13,7 @@ should_count: 1
 
 > Per-network inventory — segment id, classification, perimeter type, owner. Drives 'every segment has a documented zone + perimeter' audit
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row segment / VPC / VLAN identifier
 

@@ -14,7 +14,7 @@ should_count: 1
 
 > Per-transfer record cataloguing every flow of personal data outside EU/EEA — destination, mechanism, last-assessed date. Drives 'show me every transfer with its safeguard' audit. Annual refresh (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-row unique transfer identifier
 

@@ -103,6 +103,21 @@ def extract(
         doc.extraction_metrics["skipped_as_toc"] = toc_reason
         return []
 
+    # Templated-upload fast-path: when the doc text contains
+    # <<MUST item:X>> markers (because the tenant downloaded one of our
+    # template scaffolds, edited it, and uploaded back), bind per-MUST
+    # deterministically without any LLM call. Per-MUST evidence is the
+    # tenant's text between the marker and the next marker / section /
+    # rule. See _extract_templated() in this module.
+    templated_findings = _extract_templated(doc)
+    if templated_findings is not None:
+        doc.extraction_metrics["templated_findings"] = len(templated_findings)
+        logger.info(
+            "Templated fast-path: %s → %d findings (no LLM call)",
+            doc.original_name, len(templated_findings),
+        )
+        return templated_findings
+
     # Doc-mapping pre-filter (db/doc_mappings/*.yaml) — analog of the
     # workbook intake YAML matcher, applied to docs. When a canonical
     # doc-shape mapping matches the upload (e.g. "Supplier Vendor
@@ -200,6 +215,130 @@ def _classify_workbook_sheets(doc: ParsedDocument) -> tuple[int, int, list[str]]
             n_unmapped += 1
             unmapped_names.append(sheet_name)
     return n_mapped, n_unmapped, unmapped_names
+
+
+# =============================================================================
+# TEMPLATED PATH — uploads derived from db/templates/*.md scaffolds
+# =============================================================================
+
+# Marker shape mirrors enrichment/templates/load_to_postgres.py — tight to
+# real item-ID structure (avoids false positives on example placeholders).
+_TEMPLATED_MUST_RE   = re.compile(
+    r"<<MUST\s+(item:[A-Za-z0-9.]+:[a-z0-9_]+)>>", re.IGNORECASE,
+)
+_TEMPLATED_SHOULD_RE = re.compile(
+    r"<<SHOULD\s+(item:[A-Za-z0-9.]+:[a-z0-9_]+)>>", re.IGNORECASE,
+)
+_TEMPLATED_TEXT_PLACEHOLDER = re.compile(r"<<\s*TEXT\s*>>", re.IGNORECASE)
+_TEMPLATED_WHY_LINE         = re.compile(r"^\s*_Why:\s.*?_\s*$", re.MULTILINE)
+
+
+def _control_ref_to_standard(control_ref: str) -> str:
+    """Map a control_ref prefix to its standard_id. Aligns with the rest
+    of the intake pipeline's normalisation (rag/intake/ref_normalizer.py)."""
+    if control_ref.startswith("Art."):
+        return "GDPR:2016/679"
+    # ISO 27001 covers both Annex A (A.5.x, A.7.x...) and ISMS clauses (4.x..10.x)
+    return "ISO27001:2022"
+
+
+def _extract_templated(doc: ParsedDocument) -> Optional[list[DocumentFinding]]:
+    """Templated-upload fast path.
+
+    Detects `<<MUST item:X>>` / `<<SHOULD item:X>>` markers inserted by
+    our template scaffolds. When found, parses per-MUST evidence
+    deterministically (no LLM) and returns the resulting findings.
+    Returns None when no markers are present so the caller falls
+    through to the LLM extraction path.
+
+    Per-MUST evidence is the text between one marker and the next
+    marker / heading / horizontal rule. Status derives from whether the
+    `<<TEXT>>` placeholder is still present (untouched → status='missing'
+    → finding='NC') or has been replaced by tenant content (→
+    status='present' → finding='Comply').
+
+    The fast path uses doc.markdown when available (preserves the
+    section structure cleanly); falls back to doc.full_text otherwise.
+    """
+    body = (doc.markdown or "") or (doc.full_text or "")
+    if not body:
+        return None
+
+    # Cheap detection — bail out early if no markers anywhere
+    must_markers   = _TEMPLATED_MUST_RE.findall(body)
+    should_markers = _TEMPLATED_SHOULD_RE.findall(body)
+    if not must_markers and not should_markers:
+        return None
+
+    # Build (offset, kind, item_id) tuples for every marker so we can
+    # slice the body between markers
+    anchors: list[tuple[int, str, str, int]] = []  # (start, kind, item_id, end)
+    for m in _TEMPLATED_MUST_RE.finditer(body):
+        anchors.append((m.start(), "MUST", m.group(1), m.end()))
+    for m in _TEMPLATED_SHOULD_RE.finditer(body):
+        anchors.append((m.start(), "SHOULD", m.group(1), m.end()))
+    anchors.sort(key=lambda a: a[0])
+
+    findings: list[DocumentFinding] = []
+    for i, (start, kind, item_id, mark_end) in enumerate(anchors):
+        # Evidence: text from end-of-marker to start-of-next-marker (or EOF)
+        slice_end = anchors[i + 1][0] if i + 1 < len(anchors) else len(body)
+        section_body = body[mark_end:slice_end]
+
+        # Truncate at the next heading line — `## ` (h2) or `### ` (h3)
+        # marks the next section even when no further marker follows
+        # (an unfilled section sees the next heading before any later
+        # marker). Also truncate at horizontal rule (`---` on its own line),
+        # which separates the MUST block from "Recommended additions"
+        # (SHOULDs) and other suffix sections. Without these guards an
+        # empty section's "evidence" leaks into adjacent headings and
+        # incorrectly flips to status=present.
+        boundary = re.search(r"^(?:#{2,}\s|---\s*$)", section_body, re.MULTILINE)
+        if boundary:
+            section_body = section_body[:boundary.start()]
+
+        # Strip the _Why: italic guidance line and the <<TEXT>> placeholder
+        cleaned = _TEMPLATED_WHY_LINE.sub("", section_body)
+        # Detect whether the tenant left the <<TEXT>> placeholder intact
+        had_placeholder = bool(_TEMPLATED_TEXT_PLACEHOLDER.search(cleaned))
+        cleaned_no_ph   = _TEMPLATED_TEXT_PLACEHOLDER.sub("", cleaned).strip()
+
+        # Also strip trailing horizontal rules and section-break artefacts
+        cleaned_no_ph = re.sub(r"^[-=]{3,}\s*$", "", cleaned_no_ph, flags=re.MULTILINE).strip()
+
+        # Status: empty or only-placeholder → not filled
+        # We treat SHOULD-empty the same as MUST-empty for now —
+        # the engine knows the MUST/SHOULD category and weights accordingly.
+        if not cleaned_no_ph:
+            finding = "NC"
+            evidence = "(template section left blank by tenant)" if had_placeholder \
+                       else "(template section empty)"
+        else:
+            finding = "Comply"
+            evidence = cleaned_no_ph[:500]
+
+        # item:A.5.15:physical_rules → control_ref='A.5.15'
+        parts = item_id.split(":")
+        if len(parts) < 3:
+            continue  # malformed marker
+        control_ref = parts[1]
+        standard_id = _control_ref_to_standard(control_ref)
+
+        findings.append(DocumentFinding(
+            upload_id         = doc.upload_id or "",
+            tenant_id         = "",
+            document_name     = doc.original_name,
+            control_ref       = control_ref,
+            standard_id       = standard_id,
+            finding           = finding,
+            evidence_text     = evidence,
+            confidence        = "high",         # deterministic bind — no inference
+            checklist_item_id = item_id,
+            extraction_path   = "templated",
+            inference_source  = "templated",
+        ))
+
+    return findings
 
 
 # =============================================================================

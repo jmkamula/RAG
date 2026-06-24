@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which Art.6 activities are subject to Art.21 objection right (Art.6.1.e public task + Art.6.1.f legitimate interests + direct-marketing activities under any basis)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Legitimate-interests activities enumerated (links to Art.6 register Art.6.1.f rows)
 

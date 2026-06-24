@@ -13,7 +13,7 @@ should_count: 1
 
 > Upstream — what counts as in-scope development. In-house product development yes. Major internal tooling typically yes. Quick scripts / one-off automation typically not. Outsourced via A.8.30
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Development classes in scope (in-house product / major internal tooling / API-as-product / customer-facing add-ons)
 

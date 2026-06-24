@@ -13,7 +13,7 @@ should_count: 1
 
 > Evidence that the policy was actually communicated — distribution channels used, audience coverage, acknowledgement records, refresher cadence. 'Approved but not communicated' is a common audit finding
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Distribution channels stated (intranet, onboarding pack, all-hands, signed acknowledgement)
 

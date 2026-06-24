@@ -13,7 +13,7 @@ should_count: 1
 
 > Access decisions are the most-audited control area in ISMS audits — the approval makes the principles explicit and authoritative. Names a signatory at the appropriate management level, a date, and the specific policy version
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Signatory at appropriate management level (typically CISO with IT / business endorsement)
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which schemes are relevant (Art.42.5 register), which processing activities are in certification scope, business case (Art.42.1 voluntary)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Available approved schemes enumerated
 

@@ -13,7 +13,7 @@ should_count: 1
 
 > Catalogue of endpoints in scope of the policy — device id, class, owner, enrolment status, compliance state. Drives 'show me every issued device is enrolled and compliant' audit
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Per-device unique identifier (serial, asset tag, MDM-issued id)
 

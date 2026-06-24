@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.27 requires lessons to be captured and acted on — without a register the action items disappear into someone's mailbox. The register tracks per-lesson: the source incident, root-cause type, control or training affected, owner, status, action due date and closure date. It feeds the periodic program review and the per-lesson improvement-action records
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each lesson captured with a unique identifier
 

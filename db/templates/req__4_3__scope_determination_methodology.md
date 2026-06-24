@@ -13,7 +13,7 @@ should_count: 1
 
 > The methodology behind the scope statement — what inputs were used (context issues 4.1, interested parties 4.2, business strategy), what criteria drove inclusion/exclusion decisions, who approved
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Inputs consumed (4.1 issues, 4.2 parties, business strategy, regulatory obligations)
 

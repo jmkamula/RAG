@@ -13,7 +13,7 @@ should_count: 4
 
 > A.5.34 requires identification of and compliance with privacy and PII protection requirements per applicable law, regulation, and contract. The policy (PIMS-aligned where ISO/IEC 27701 is in scope) names the applicable privacy laws, states the lawful basis discipline, enables data subject rights, sets retention/minimisation, links to the operational security controls applied to PII, and documents breach handling. The PII processing register, privacy applicability scope and periodic program review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Applicable privacy laws identified (GDPR, UK GDPR, regional equivalents, sectoral privacy laws — HIPAA, LGPD, PIPEDA, CCPA, etc.) — each named, not just 'privacy laws'
 

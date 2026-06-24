@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.29 binds processor + person acting under processor's authority + person acting under controller's authority to process personal data ONLY on documented instructions from the controller (unless required by Union/Member State law). The procedure governs how instructions are received, recorded, and enforced internally
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Instructions source documented (DPA terms + change orders / customer support tickets / contract amendments)
 

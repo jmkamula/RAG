@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.2 requires identification of users needing privileged access per system and restriction of access to system-administration tools. The baseline defines the privileged role catalogue, the systems in scope, the strong-authentication configuration, and the PAM tooling boundaries — the configuration state against which the procedure operates
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Privileged role catalogue per system (which roles exist, what they grant)
 

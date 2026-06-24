@@ -14,7 +14,7 @@ should_count: 2
 
 > Periodic verification that the schedule reflects the scope, the procedure still matches the protection requirements per class, and disposal/legal-hold discipline is being followed. ISO 27002:2022 § 5.33 expects records protection to be maintained — drift between schedule and reality (new classes emerging, retention periods overrun, disposals not happening) is the audit failure mode this leaf catches. Annual cadence (freshness=365) matches the stable doctrine of records-management methodology
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval (typically within 12 months of last review)
 

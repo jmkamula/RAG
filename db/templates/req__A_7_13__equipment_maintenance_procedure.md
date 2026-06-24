@@ -14,7 +14,7 @@ should_count: 1
 
 > A.7.13 requires equipment to be maintained correctly to ensure availability, integrity, and confidentiality. The procedure documents schedules, authorised providers, supervision, offsite-maintenance controls, post-verification. The maintenance event register, applicable-equipment scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Maintenance schedule per equipment class with intervals
 

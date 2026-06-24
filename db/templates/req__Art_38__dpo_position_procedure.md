@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.38 establishes the DPO's position guarantees: involvement in all data-protection issues, resources, independence, no conflict of interest. The procedure documents how these guarantees are operationally enforced
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. DPO involvement in 'all issues which relate to the protection of personal data' (Art.38.1) — invitation rights + escalation paths
 

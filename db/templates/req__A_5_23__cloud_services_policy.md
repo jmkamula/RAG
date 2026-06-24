@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.23 requires a topic-specific policy on use of cloud services covering scope, risk management, selection, shared-responsibility split, incident handling and exit. The cloud service register, periodic posture review and exit-migration records are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Scope of cloud services covered (IaaS / PaaS / SaaS, public / private / hybrid)
 

@@ -13,7 +13,7 @@ should_count: 2
 
 > A.5.30 requires every in-scope ICT service to have a defined recovery posture — invisible services are the ones that don't come back when the org needs them. The register catalogues every in-scope ICT service: service id, criticality tier, RTO/RPO targets, dependencies, recovery owner, last-tested date. It is the operational record that proves the plan covers the org's ACTUAL service inventory, not just the easy-to-restore subset
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Each in-scope ICT service captured with a unique identifier
 

@@ -13,7 +13,7 @@ should_count: 2
 
 > The upstream that drives the register. Documents the information processing facilities the organisation operates — what counts as a 'facility' (production systems, staging where production data is touched, key SaaS environments, on-prem infrastructure). ISO 27002:2022 § 5.37 expects every facility to have a documented procedure — drift between scope and register is the audit failure mode this leaf catches
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Systems in scope enumerated (production applications, databases, key infrastructure components — drives 'which facilities need a procedure')
 

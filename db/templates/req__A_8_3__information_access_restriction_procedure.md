@@ -13,7 +13,7 @@ should_count: 1
 
 > A.8.3 requires access to information and associated assets to be restricted per the topic-specific access control policy (A.5.15). The procedure documents enforcement mechanism, authorisation workflow, and recertification cadence. The access matrix register, applicable-scope and periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Enforcement mechanism per system (ACL / RBAC / ABAC / IdP claims)
 

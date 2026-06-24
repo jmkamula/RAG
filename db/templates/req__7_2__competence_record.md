@@ -14,7 +14,7 @@ should_count: 2
 
 > Clause 7.2 requires the organisation to determine necessary competence of persons whose work affects ISMS performance and ensure they are competent. The record is the canonical artefact mapping role → required competence → actual competence → gap actions. Sibling leaves: determination procedure, applicable roles scope, program review. Annual refresh (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Required competence defined per role affecting ISMS performance
 

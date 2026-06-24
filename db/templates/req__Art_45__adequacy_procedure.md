@@ -13,7 +13,7 @@ should_count: 1
 
 > Art.45 permits transfers to third countries / international organisations covered by an EU Commission adequacy decision. The procedure governs how adequacy is verified per transfer, including sub-decision conditions (e.g. US Data Privacy Framework requires recipient self-certification status)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Adequacy-decision check — Art.45.3 Commission decision verified against current EU register
 

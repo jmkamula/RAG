@@ -13,7 +13,7 @@ should_count: 1
 
 > The methodology behind the competence record — how 'required competence' is defined per role, how individuals are assessed, what evidence counts (certifications, degree, experience years, demonstrated skill)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Method for mapping ISMS-affecting roles to required competence (skills matrix or equivalent)
 

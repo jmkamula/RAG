@@ -14,7 +14,7 @@ should_count: 2
 
 > The identity program creates value only if the lifecycle actually closes — orphan accounts, lingering contractor access, stale service credentials, missed termination SLAs all signal the program is leaking. The review captures the planned-interval check: orphan analysis, SLA-miss analysis, service-account hygiene audit, contractor expiry verification, and resulting program adjustments. Cadence tightened to 180 days — identity drift is high-volume
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned 180-day interval
 

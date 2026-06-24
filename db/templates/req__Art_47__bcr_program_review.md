@@ -14,7 +14,7 @@ should_count: 1
 
 > Annual verification — every bound entity still in compliance, complaints handled per Art.47.2.i, training delivered, lead SA notified of material changes (freshness=365)
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

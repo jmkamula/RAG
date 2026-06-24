@@ -13,7 +13,7 @@ should_count: 2
 
 > The upstream that drives the policy and the register. Documents the privacy laws applicable to the organisation, the jurisdictions where data subjects live and where processing happens, the data subject categories the org touches, and the regulated activities that pull in sectoral privacy regimes. ISO 27002:2022 § 5.34 expects organisations to know which privacy regimes apply before claiming compliance — drift between scope and register is the audit failure mode this leaf catches
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Applicable privacy laws enumerated per jurisdiction (GDPR for EU/EEA, UK GDPR for UK, CCPA for California residents, LGPD for Brazil, PIPEDA for Canada, sectoral laws — HIPAA, GLBA, FERPA where relevant)
 

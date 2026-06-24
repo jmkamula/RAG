@@ -13,7 +13,7 @@ should_count: 1
 
 > The upstream — which Art.49.1 derogations the org actually relies on, with strict-construction analysis
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Derogations actually relied on enumerated (most orgs: a explicit consent + b contract; some: e legal claims)
 

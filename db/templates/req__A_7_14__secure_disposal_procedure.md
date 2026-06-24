@@ -13,7 +13,7 @@ should_count: 1
 
 > A.7.14 requires equipment containing storage media to be verified for data and licensed-software removal before disposal or re-use. The procedure documents verification methods, certificates, chain of custody, approved providers, destruction method per class. The disposal scope + disposal-record register (lifecycle-end) + periodic review are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Scope (all equipment containing any form of storage media — laptops, servers, phones, printers/MFDs with storage, network gear)
 

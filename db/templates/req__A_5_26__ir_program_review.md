@@ -14,7 +14,7 @@ should_count: 2
 
 > IR readiness erodes between exercises and between incidents. The review records the planned-interval check of the program: MTTC/MTTR trends, exercise outcomes, procedure currency against threat landscape, and the resulting calibration of roles, runbooks and contact lists
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Review date within the planned interval
 

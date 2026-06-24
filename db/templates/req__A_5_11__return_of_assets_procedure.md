@@ -13,7 +13,7 @@ should_count: 3
 
 > A.5.11 requires personnel to return all organisational assets upon change or termination. The procedure documents the trigger events, asset checklist (physical + logical), verification step, data preservation and wipe, role accountability and exception handling. The leaver register, periodic program review and per-leaver return record are sibling leaves
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Triggers enumerated (termination, role change, contract end, change of agreement, end of secondment)
 

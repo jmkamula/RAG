@@ -13,7 +13,7 @@ should_count: 2
 
 > The upstream that drives the programme. Documents the role-to-curriculum mapping: which audience segments need which training modules. Drives both the curriculum catalogue and the completion-register expected-modules computation
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Audience segments enumerated (all-staff baseline, role-specific tiers — developers, admins, finance, HR, executives, contractors, board)
 

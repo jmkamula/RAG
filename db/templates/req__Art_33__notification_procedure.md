@@ -13,7 +13,7 @@ should_count: 1
 
 > The procedure governing how Art.33 notifications get drafted, approved, and dispatched within 72 hours. The notification record is the per-event output; this is the operating discipline that makes 72h achievable
 
-> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 
 ## 1. Definition of 'awareness' (when the 72h clock starts) — typically when the controller has reasonable degree of certainty that a security event has occurred and resulted in a personal data breach (EDPB Guidelines 9/2022 reference)
 
