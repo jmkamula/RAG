@@ -42,6 +42,9 @@ class ClientFacts:
     criminal_conviction_data:     bool = False   # Art.10
     childrens_data:               bool = False   # Art.8, age verification
 
+    # ── Sector-specific processing ────────────────────────────────────────
+    journalism_academic_artistic_processing: bool = False  # Art.85 derogation eligibility
+
     # ── Processing activities ─────────────────────────────────────────────
     automated_decision_making:    bool = False   # Art.22
     profiling:                    bool = False   # Art.22

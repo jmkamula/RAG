@@ -172,6 +172,17 @@ RULE_CHILDRENS_DATA = ObligationRule(
     ],
 )
 
+RULE_JOURNALISM_ACADEMIC_ARTISTIC = ObligationRule(
+    id          = "journalism_academic_artistic_processing",
+    description = "Processing for journalistic, academic, artistic, or literary expression",
+    rationale   = "Art.85 permits Member-State law derogations from Chapter II/III/IV/V/VI/VII/IX when necessary to reconcile data protection with freedom of expression",
+    condition   = lambda f: f.journalism_academic_artistic_processing and f.gdpr_in_scope,
+    trigger_type= "profile_fact",
+    mandatory_controls = [
+        "GDPR:2016/679:Art.85",      # freedom of expression derogation
+    ],
+)
+
 # ── Automated decision making ──────────────────────────────────────────────────
 
 RULE_AUTOMATED_DECISIONS = ObligationRule(

@@ -1870,6 +1870,108 @@ REQ_ART10_PROGRAM_REVIEW = EvidenceRequirement(
 )
 
 
+# ── Art.85 Freedom of expression derogations — op_process 4-leaf, profile_fact ─
+# Profile_fact triggered — applies when the organisation has processing for
+# journalistic, academic, artistic, or literary expression purposes. For most
+# B2B / SaaS / financial tenants this resolves to N/A; for media organisations,
+# publishers, academic institutions, and arts-sector orgs it is operationally
+# central.
+#
+# Art.85 grants Member States authority to derogate from Chapters II, III, IV,
+# V, VI, VII, IX of GDPR via national law when necessary to reconcile data
+# protection with freedom of expression. Each Member State implements
+# differently — the per-jurisdiction national-law landscape is the meaningful
+# scope. Tenant obligations IF Art.85 applies:
+#   1. Classify processing activities that fall under Art.85 categories
+#   2. Identify the national-law derogations in each jurisdiction of operation
+#   3. Apply derogations consistently (decide which GDPR provisions are derogated for which activities)
+#   4. Document the legal basis + scope per derogation invoked
+
+REQ_ART85_DEROGATION_PROCEDURE = EvidenceRequirement(
+    id            = "req:Art.85:derogation_application_procedure",
+    control_ref   = "Art.85",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "procedure",
+    title         = "Art.85 Derogation Application Procedure",
+    trigger_type  = "profile_fact",
+    description   = "How the organisation identifies which processing activities fall under Art.85 (journalism / academic / artistic / literary expression), how it looks up the applicable Member-State national-law derogations per jurisdiction of operation, and how it applies derogations consistently while documenting the legal basis per activity. The procedure is the canonical artefact. Sibling leaves: per-jurisdiction derogation register, applicable activities scope, program review",
+    must_contain  = [
+        ChecklistItem("item:Art.85:proc_owner",            "Named owner of the procedure (typically DPO + legal counsel + editorial/academic lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.85:proc_activity_classification","Classification rules for journalism / academic / artistic / literary expression activities (distinguishes from general processing)", "must", True, "Art.85.1 — scope of expression purposes"),
+        ChecklistItem("item:Art.85:proc_jurisdiction_lookup","National-law lookup process per Member State of operation (each MS implements Art.85 differently per Art.85.2)", "must", True, "Art.85.2 — Member State law"),
+        ChecklistItem("item:Art.85:proc_derogation_decision","Decision rules for which GDPR provisions are derogated for which activities (Chapter II/III/IV/V/VI/VII/IX scope of permissible derogations)", "must", True, "Art.85.2 — necessary derogations"),
+        ChecklistItem("item:Art.85:proc_legal_basis_docs","Per-derogation legal-basis documentation requirement (which national-law provision authorises which derogation for which activity)", "must", True, "Demonstrability under Art.5.2"),
+        ChecklistItem("item:Art.85:proc_consistency_check","Cross-activity consistency check (same activity type → same derogations applied; document divergences)", "must", True, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.85:proc_subject_rights_interaction","Guidance on residual data-subject rights when derogations apply (rights may be limited but rarely fully extinguished)", "should", True, "Recital 153 — reconcile both rights"),
+        ChecklistItem("item:Art.85:proc_external_legal_review","External legal review trigger (new jurisdiction / novel activity / national-law change)", "should", True, "Risk discipline"),
+    ],
+)
+
+REQ_ART85_NATIONAL_LAW_REGISTER = EvidenceRequirement(
+    id            = "req:Art.85:national_law_derogation_register",
+    control_ref   = "Art.85",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "register",
+    title         = "Per-Jurisdiction Art.85 National Law Derogation Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-jurisdiction record of the national-law provisions invoked for Art.85 derogations. One row per (Member State × derogated GDPR provision × activity scope) tuple. Refreshed at the national-law currency cadence — annual review minimum (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.85:reg_owner",             "Named owner of the register", "must", True, "Accountability"),
+        ChecklistItem("item:Art.85:reg_member_state",      "Per-row Member State whose national law is being invoked", "must", True, "Art.85.2 — Member State law"),
+        ChecklistItem("item:Art.85:reg_national_provision","Per-row specific national-law citation (statute + section + as-of date)", "must", True, "Demonstrability"),
+        ChecklistItem("item:Art.85:reg_derogated_articles","Per-row enumeration of GDPR articles being derogated (must be from Chapter II/III/IV/V/VI/VII/IX)", "must", True, "Art.85.2 — scope of permissible derogations"),
+        ChecklistItem("item:Art.85:reg_activity_scope",    "Per-row activity scope (which processing this derogation covers — journalism / academic / artistic / literary)", "must", True, "Art.85.1"),
+        ChecklistItem("item:Art.85:reg_currency_date",     "Per-row as-of-date of the national-law citation (proves the law cited is still in force)", "must", True, "Art.85.2 — current state of law"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.85:reg_commission_notification","Reference to Member State notification to Commission per Art.85.3 (where available)", "should", True, "Art.85.3 — Commission notification"),
+        ChecklistItem("item:Art.85:reg_review_date",       "Per-row next planned review date", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART85_APPLICABLE_ACTIVITIES_SCOPE = EvidenceRequirement(
+    id            = "req:Art.85:applicable_activities_scope",
+    control_ref   = "Art.85",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "scope_note",
+    title         = "Applicable Art.85 Activities Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which of the organisation's processing activities fall under Art.85 categories (journalism / academic / artistic / literary expression). Critical for tenants with mixed activities (e.g. a publisher that also runs e-commerce — only the editorial activities qualify)",
+    must_contain  = [
+        ChecklistItem("item:Art.85:scope_in_scope_activities","Activities in scope enumerated, classified by Art.85 category (journalism / academic / artistic / literary)", "must", True, "Art.85.1 — purposes enumerated"),
+        ChecklistItem("item:Art.85:scope_out_of_scope_activities","Adjacent activities explicitly out of scope (e.g. subscriber-management, advertising — these don't qualify as expression)", "must", True, "Defensibility — scope boundary"),
+        ChecklistItem("item:Art.85:scope_jurisdiction_list","List of Member States in which Art.85-qualifying activities occur (drives the per-jurisdiction lookup workload)", "must", True, "Art.85.2 — per-Member-State law"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.85:scope_change_drivers", "Trigger list for re-scoping (new editorial product, expansion into new Member State, acquisition of journalism arm)", "should", True, "Currency"),
+    ],
+)
+
+REQ_ART85_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:Art.85:program_review",
+    control_ref   = "Art.85",
+    standard_id   = "GDPR:2016/679",
+    evidence_type = "review_record",
+    title         = "Art.85 Derogation Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification that the national-law register is current per Member State, no in-scope activity is operating without a documented derogation basis, and any GDPR-Chapter changes have been reflected (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:Art.85:rev_date",             "Review date within the planned interval", "must", True, "Periodic accountability"),
+        ChecklistItem("item:Art.85:rev_reviewer",         "Reviewer identity (DPO + legal counsel + editorial/academic lead)", "must", True, "Accountability"),
+        ChecklistItem("item:Art.85:rev_law_currency",     "Member State law currency check — every cited national-law provision still in force; new MS implementations swept in", "must", True, "Art.85.2 — currency"),
+        ChecklistItem("item:Art.85:rev_scope_coverage",   "Scope coverage — every in-scope activity has a derogation basis (or explicit decision to NOT invoke Art.85 for it)", "must", True, "Defensibility"),
+        ChecklistItem("item:Art.85:rev_subject_rights_audit","Subject-rights audit — confirm derogations are not over-applied (residual rights still honoured where not legitimately derogated)", "must", True, "Recital 153"),
+    ],
+    should_contain= [
+        ChecklistItem("item:Art.85:rev_next_date",        "Next planned review date stated", "should", True, "Planning"),
+    ],
+)
+
+
 # ── Profile-fact — cloud/processors ───────────────────────────────────────────
 
 # ── Art.28 Processor (DPA) — policy_program 4-leaf (batch 29a 2026-06-02) ─────
@@ -16823,6 +16925,16 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_ART10_APPLICABLE_LEGAL_BASIS_SCOPE,
     REQ_ART10_PROGRAM_REVIEW,
     # ── End batch 27 ─────────────────────────────────────────────────────────
+    # ── Art.85 — op_process 4-leaf (profile_fact: org has journalism/academic/artistic/literary processing)
+    # Authored 2026-06-24 — closes the last truly-uncurated GDPR article surfaced
+    # by the xfw_bridge MUST binding work. Sector-applicability gate via
+    # ClientFacts.journalism_academic_artistic_processing → RULE_JOURNALISM_ACADEMIC_ARTISTIC.
+    # Resolves to N/A for typical B2B/SaaS/financial tenants; operationally
+    # central for media organisations, publishers, academic institutions.
+    REQ_ART85_DEROGATION_PROCEDURE,
+    REQ_ART85_NATIONAL_LAW_REGISTER,
+    REQ_ART85_APPLICABLE_ACTIVITIES_SCOPE,
+    REQ_ART85_PROGRAM_REVIEW,
     # A.5.23 — 4-leaf operational_process adapted (policy + register + posture_review + exit_migration)
     REQ_CLOUD_SERVICES_POLICY,
     REQ_CLOUD_SERVICE_REGISTER,
