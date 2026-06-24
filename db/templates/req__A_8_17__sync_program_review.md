@@ -1,0 +1,65 @@
+---
+leaf_id: req:A.8.17:sync_program_review
+control_ref: A.8.17
+standard_id: ISO27001:2022
+evidence_type: review_record
+trigger_type: universal
+freshness_days: 365
+template_version: 1
+must_count: 5
+should_count: 1
+---
+
+# Periodic Clock Sync Program Review
+
+> Annual verification — drift compliance per class, source-availability, scope completeness (freshness=365)
+
+> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+
+## 1. Review date within the planned interval
+
+<<MUST item:A.8.17:rev_date>>
+_Why: 27002:8.17 — periodic_
+
+<<TEXT>>
+
+## 2. Reviewer identity (Infrastructure lead + Security Operations)
+
+<<MUST item:A.8.17:rev_reviewer>>
+_Why: Accountability_
+
+<<TEXT>>
+
+## 3. Drift compliance per class (samples within tolerance)
+
+<<MUST item:A.8.17:rev_drift_compliance>>
+_Why: 27002:8.17 — synchronized_
+
+<<TEXT>>
+
+## 4. Scope-completeness check (new system class covered)
+
+<<MUST item:A.8.17:rev_scope_completeness>>
+_Why: Drift prevention_
+
+<<TEXT>>
+
+## 5. Findings propagated to procedure / scope
+
+<<MUST item:A.8.17:rev_findings_update>>
+_Why: Closes the loop_
+
+<<TEXT>>
+
+---
+
+## Recommended additions
+
+_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+
+### 1. Next planned review date stated
+
+<<SHOULD item:A.8.17:rev_next_date>>
+_Why: Planning_
+
+<<TEXT>>

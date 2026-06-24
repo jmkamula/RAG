@@ -1,0 +1,72 @@
+---
+leaf_id: req:A.8.26:appsec_program_review
+control_ref: A.8.26
+standard_id: ISO27001:2022
+evidence_type: review_record
+trigger_type: profile_fact
+freshness_days: 365
+template_version: 1
+must_count: 6
+should_count: 1
+---
+
+# Periodic Application Security Requirements Review
+
+> Annual verification — requirements catalogue currency vs threat landscape, traceability sample, exception inventory (freshness=365)
+
+> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+
+## 1. Review date within the planned interval
+
+<<MUST item:A.8.26:rev_date>>
+_Why: 27002:8.26 — periodic_
+
+<<TEXT>>
+
+## 2. Reviewer identity (Engineering + InfoSec + Product)
+
+<<MUST item:A.8.26:rev_reviewer>>
+_Why: Accountability_
+
+<<TEXT>>
+
+## 3. Requirements-catalogue currency check (new threat patterns → requirement-category updates)
+
+<<MUST item:A.8.26:rev_catalogue_currency>>
+_Why: 27002:8.26 — information security requirements_
+
+<<TEXT>>
+
+## 4. Sample-based traceability verification (requirements → test cases mapping intact)
+
+<<MUST item:A.8.26:rev_traceability_sample>>
+_Why: 27002:8.26 — specified_
+
+<<TEXT>>
+
+## 5. Exception inventory re-confirmed / retired
+
+<<MUST item:A.8.26:rev_exception_inventory>>
+_Why: Drift prevention_
+
+<<TEXT>>
+
+## 6. Findings propagated to procedure / scope
+
+<<MUST item:A.8.26:rev_findings_update>>
+_Why: Closes the loop_
+
+<<TEXT>>
+
+---
+
+## Recommended additions
+
+_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+
+### 1. Next planned review date stated
+
+<<SHOULD item:A.8.26:rev_next_date>>
+_Why: Planning_
+
+<<TEXT>>

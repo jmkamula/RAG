@@ -1,0 +1,50 @@
+---
+leaf_id: req:A.7.7:applicable_locations_scope
+control_ref: A.7.7
+standard_id: ISO27001:2022
+evidence_type: scope_note
+trigger_type: universal
+template_version: 1
+must_count: 3
+should_count: 1
+---
+
+# Applicable Locations Scope
+
+> The upstream — which locations are covered by clear-desk/clear-screen rules (offices, meeting rooms, lab benches, home offices, shared coworking spaces)
+
+> **Edit the `<<TEXT>>` placeholders inline. Leave the MUST and SHOULD markers untouched — they bind this document to the checklist when you upload it back.**
+
+## 1. Locations enumerated (offices, meeting rooms, lab benches, home offices, coworking spaces, customer-site visits)
+
+<<MUST item:A.7.7:scope_locations>>
+_Why: 27002:7.7 — relevant_
+
+<<TEXT>>
+
+## 2. Per-location overlay against information-classification handled (Class III docs require locked storage, etc.)
+
+<<MUST item:A.7.7:scope_classification_overlay>>
+_Why: Cross-control coherence_
+
+<<TEXT>>
+
+## 3. Screen-lock baseline per location (auto-lock after N minutes — varies by location risk)
+
+<<MUST item:A.7.7:scope_screen_lock_baseline>>
+_Why: 27002:7.7 — clear screen_
+
+<<TEXT>>
+
+---
+
+## Recommended additions
+
+_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+
+### 1. Trigger list for re-scoping (new location, new work-pattern — return to office, hot-desking)
+
+<<SHOULD item:A.7.7:scope_change_drivers>>
+_Why: Currency_
+
+<<TEXT>>
