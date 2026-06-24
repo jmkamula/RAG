@@ -3272,6 +3272,68 @@ async def admin_reextract_upload(
     }
 
 
+def _template_download_filename(leaf_id: str) -> str:
+    """req:A.5.15:access_control_policy → A_5_15_access_control_policy.md
+    Strip the leading 'req:' prefix and convert remaining colons/dots
+    to underscores for filesystem safety.
+    """
+    base = leaf_id[4:] if leaf_id.startswith("req:") else leaf_id
+    safe = base.replace(":", "_").replace(".", "_")
+    return f"{safe}.md"
+
+
+@app.get("/api/v1/templates/{leaf_id}/download", tags=["templates"])
+async def download_template(
+    leaf_id:  str,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Download the rendered template as a markdown file attachment.
+
+    Same render pipeline as `GET /api/v1/templates/{leaf_id}` (tenant
+    scope + placeholder substitution + N/A MUST stripping), but
+    returns the body as a file attachment with Content-Disposition
+    suitable for save-to-disk in a browser.
+
+    Filename: `{control_ref}_{slug}.md` (colons/dots → underscores).
+    e.g. req:A.5.15:access_control_policy → A_5_15_access_control_policy.md
+
+    A header comment is prepended for in-file provenance — tenant
+    name, generation date, leaf id + version, MUSTs-in-scope ratio.
+    Markdown renderers ignore HTML comments so the header is
+    invisible in rendered views but inspectable in source.
+
+    Future: docx via pandoc; not in v1.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        from rag.templates.renderer import render_template
+        rendered = render_template(conn, key_info.tenant_id, leaf_id, include_header=True)
+    finally:
+        pool.putconn(conn)
+
+    if rendered is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"No template stored for leaf_id={leaf_id!r}.",
+        )
+
+    from fastapi.responses import Response
+    return Response(
+        content    = rendered.body_md,
+        media_type = "text/markdown; charset=utf-8",
+        headers    = {
+            "Content-Disposition":
+                f'attachment; filename="{_template_download_filename(leaf_id)}"',
+            "X-Template-Version":     str(rendered.template_version),
+            "X-Musts-Rendered":       str(rendered.must_rendered),
+            "X-Musts-Dropped":        str(rendered.must_dropped),
+        },
+    )
+
+
 @app.get("/api/v1/templates/{leaf_id}", tags=["templates"])
 async def get_template(
     leaf_id:  str,
