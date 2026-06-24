@@ -168,34 +168,114 @@ def _clear_pending_proposals(
         return cur.rowcount
 
 
+_CANONICAL_BINDINGS_CACHE: Optional[dict[str, tuple[str, str]]] = None
+
+
+def _load_canonical_bindings(driver: Driver) -> dict[str, tuple[str, str]]:
+    """Load control_ref → (canonical_leaf_id, canonical_item_id) from Neo4j.
+    Used to bind xfw_bridge findings to a target MUST item so they're
+    engine-eligible post Phase-1 retirement.
+
+    Selection heuristic:
+      - Canonical leaf: prefer one whose id contains register/procedure/
+        record/agreement/programme/policy; else first alphabetically
+      - Canonical item: prefer one whose id contains owner/charter/
+        scope_processing; else first alphabetically
+
+    Cached per-process — Neo4j is queried once and reused. Bridges to
+    controls not in the cache (e.g. Art.5 family, Art.85 — currently
+    uncurated as direct_evidence) stay unbound; downstream curation
+    work will close the gap.
+    """
+    import re
+    global _CANONICAL_BINDINGS_CACHE
+    if _CANONICAL_BINDINGS_CACHE is not None:
+        return _CANONICAL_BINDINGS_CACHE
+    by_ctrl: dict[str, list[tuple[str, list[str]]]] = {}
+    with driver.session() as s:
+        rows = s.run("""
+            MATCH (req:EvidenceRequirement)
+            OPTIONAL MATCH (req)-[:MUST_CONTAIN]->(item:ChecklistItem)
+            RETURN req.id AS leaf, req.control_ref AS ctrl, collect(item.id) AS items
+        """).data()
+    for r in rows:
+        if not r.get("items"):
+            continue
+        by_ctrl.setdefault(r["ctrl"], []).append((r["leaf"], r["items"]))
+    CANONICAL_LEAF = re.compile(r"(register|procedure|record|agreement|programme|policy)")
+    OWNER_ITEM = re.compile(r"owner|charter|scope_processing")
+    out: dict[str, tuple[str, str]] = {}
+    for ctrl, leaves in by_ctrl.items():
+        cands = [l for l in leaves if CANONICAL_LEAF.search(l[0])]
+        chosen_leaf, items = (cands[0] if cands else sorted(leaves)[0])
+        owners = [i for i in items if OWNER_ITEM.search(i)]
+        chosen_item = owners[0] if owners else sorted(items)[0]
+        out[ctrl] = (chosen_leaf, chosen_item)
+    _CANONICAL_BINDINGS_CACHE = out
+    logger.info(f"xfw_proposer: loaded {len(out)} canonical bindings from Neo4j")
+    return out
+
+
+def _rollup_sub_clause(ref: str) -> str:
+    """Roll up GDPR sub-clause to parent: Art.32.1.b → Art.32; Art.5.1.f → Art.5.
+    ISO refs (A.5.x or 5.x) pass through unchanged."""
+    if not ref.startswith("Art."):
+        return ref
+    parts = ref.split(".")
+    if len(parts) >= 2:
+        return f"{parts[0]}.{parts[1]}"
+    return ref
+
+
+def _pick_canonical_item(
+    control_ref: str,
+    bindings:    dict[str, tuple[str, str]],
+) -> Optional[str]:
+    """Find a canonical checklist_item_id for the given control_ref.
+    Tries direct lookup first, then rolled-up parent. Returns None
+    when no curated leaves exist for the target (Art.5 family etc.)."""
+    for c in (control_ref, _rollup_sub_clause(control_ref)):
+        if c in bindings:
+            return bindings[c][1]
+    return None
+
+
 def _insert_proposal(
     conn,
     *,
-    tenant_id:        str,
-    document_id:      str,
-    control_ref:      str,
-    standard_id:      str,
-    status:           str,
-    confidence:       str,
+    tenant_id:         str,
+    document_id:       str,
+    control_ref:       str,
+    standard_id:       str,
+    status:            str,
+    confidence:        str,
     inferred_from_ref: str,
     inferred_from_std: str,
-    excerpt:          Optional[str] = None,
+    excerpt:           Optional[str] = None,
+    checklist_item_id: Optional[str] = None,
 ) -> bool:
-    """Insert one pending xfw proposal. Returns True on success."""
+    """Insert one pending xfw proposal. Returns True on success.
+
+    checklist_item_id binds the bridge to a target-framework MUST so
+    the proposal is engine-eligible once approved (Phase-1 requires
+    bound findings). Caller picks the binding via
+    `_pick_canonical_item`; None bridges stay unbound and surface as
+    a curation gap on the target standard.
+    """
     with conn.cursor() as cur:
         try:
             cur.execute(
                 """
                 INSERT INTO document_findings (
                     id, tenant_id, document_id,
-                    control_ref, standard_id,
+                    control_ref, standard_id, checklist_item_id,
                     status, confidence, excerpt,
                     extracted_at, is_active, retention_class,
                     inference_source,
                     inferred_from_control_ref, inferred_from_standard_id
                 ) VALUES (
                     %s, %s, %s,
-                    %s, %s,
+                    %s, %s, %s,
                     %s, %s, %s,
                     NOW(), TRUE, 'compliance',
                     'xfw_bridge',
@@ -204,7 +284,7 @@ def _insert_proposal(
                 """,
                 (
                     str(uuid.uuid4()), tenant_id, document_id,
-                    control_ref, standard_id,
+                    control_ref, standard_id, checklist_item_id,
                     status, confidence, excerpt,
                     inferred_from_ref, inferred_from_std,
                 ),
@@ -246,6 +326,12 @@ def propose_for_findings(
 
     _clear_pending_proposals(conn, tenant_id, document_id=document_id)
 
+    # Load canonical bindings once for this run — picks a per-control
+    # (leaf, item) to bind bridges to so they're engine-eligible after
+    # tenant approval. Cached per-process. Bridges to uncurated targets
+    # (Art.5 family etc.) get None checklist_item_id and stay unbound.
+    bindings = _load_canonical_bindings(driver)
+
     # Dedup within this run so duplicate source rows don't produce duplicate
     # proposals. Source-level dedup happens on (control_ref, standard_id);
     # proposal-level dedup happens on (document_id, control_ref, standard_id).
@@ -275,6 +361,7 @@ def propose_for_findings(
                 continue
             seen_proposals.add(key)
             status = _PIPELINE_TO_DF_STATUS.get(src_status, "partial")
+            chk_item = _pick_canonical_item(tgt_ref, bindings)
             ok = _insert_proposal(
                 conn,
                 tenant_id=tenant_id,
@@ -286,6 +373,7 @@ def propose_for_findings(
                 inferred_from_ref=f.control_ref,
                 inferred_from_std=f.standard_id,
                 excerpt=(f.evidence_text or "")[:500] or None,
+                checklist_item_id=chk_item,
             )
             if ok:
                 summary.proposals_written += 1
@@ -324,6 +412,9 @@ def propose_backfill(
 
         _clear_pending_proposals(conn, tenant_id, document_id=None)
 
+        # Same canonical-binding cache used in propose_for_findings.
+        bindings = _load_canonical_bindings(driver)
+
         # DISTINCT collapses pre-existing duplicate document_findings rows
         # so each (doc_id, ref, std) source produces at most one walk and
         # one proposal per IMPLEMENTS target. Confidence/excerpt come from
@@ -361,6 +452,7 @@ def propose_backfill(
                     continue
                 seen_proposals.add(key)
                 proposal_status = _PIPELINE_TO_DF_STATUS.get(src_status, "partial")
+                chk_item = _pick_canonical_item(tgt_ref, bindings)
                 ok = _insert_proposal(
                     conn,
                     tenant_id=tenant_id,
@@ -372,6 +464,7 @@ def propose_backfill(
                     inferred_from_ref=ctrl_ref,
                     inferred_from_std=std_id,
                     excerpt=excerpt,
+                    checklist_item_id=chk_item,
                 )
                 if ok:
                     summary.proposals_written += 1
