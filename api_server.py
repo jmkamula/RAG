@@ -3369,6 +3369,7 @@ async def download_template(
     leaf_id:  str,
     request:  Request,
     key_info: APIKeyInfo = Depends(require_api_key),
+    empty:    bool = False,
 ):
     """Download the rendered template as a markdown file attachment.
 
@@ -3381,9 +3382,14 @@ async def download_template(
     e.g. req:A.5.15:access_control_policy → A_5_15_access_control_policy.md
 
     A header comment is prepended for in-file provenance — tenant
-    name, generation date, leaf id + version, MUSTs-in-scope ratio.
-    Markdown renderers ignore HTML comments so the header is
-    invisible in rendered views but inspectable in source.
+    name, generation date, leaf id + version, MUSTs-in-scope ratio,
+    prefill count. Markdown renderers ignore HTML comments so the
+    header is invisible in rendered views but inspectable in source.
+
+    By default, the rendered template is PREFILLED with the tenant's
+    prior approved evidence per MUST (composed by source-rank dedup;
+    multiple distinct excerpts surfaced with attribution). Pass
+    `?empty=true` to opt out — useful when starting from scratch.
 
     Future: docx via pandoc; not in v1.
     """
@@ -3392,7 +3398,11 @@ async def download_template(
     try:
         set_session(conn, key_info.tenant_id)
         from rag.templates.renderer import render_template
-        rendered = render_template(conn, key_info.tenant_id, leaf_id, include_header=True)
+        rendered = render_template(
+            conn, key_info.tenant_id, leaf_id,
+            include_header = True,
+            prefill        = not empty,
+        )
     finally:
         pool.putconn(conn)
 
@@ -3412,6 +3422,7 @@ async def download_template(
             "X-Template-Version":     str(rendered.template_version),
             "X-Musts-Rendered":       str(rendered.must_rendered),
             "X-Musts-Dropped":        str(rendered.must_dropped),
+            "X-Musts-Prefilled":      str(rendered.musts_prefilled),
         },
     )
 
@@ -3421,6 +3432,7 @@ async def get_template(
     leaf_id:  str,
     request:  Request,
     key_info: APIKeyInfo = Depends(require_api_key),
+    empty:    bool = False,
 ):
     """Render a leaf's template scaffold scoped to the calling tenant.
 
@@ -3441,13 +3453,21 @@ async def get_template(
 
     leaf_id format: `req:<control_ref>:<slug>` — colons in URL paths
     are accepted by FastAPI directly or via %3A encoding.
+
+    By default, the rendered template is PREFILLED with the tenant's
+    prior approved evidence per MUST (sources: templated > form >
+    workbook > extracted > leaf_scan; xfw_bridge surfaced as footer).
+    Pass `?empty=true` for a blank scaffold instead.
     """
     pool = request.app.state.pg_pool
     conn = pool.getconn()
     try:
         set_session(conn, key_info.tenant_id)
         from rag.templates.renderer import render_template
-        rendered = render_template(conn, key_info.tenant_id, leaf_id)
+        rendered = render_template(
+            conn, key_info.tenant_id, leaf_id,
+            prefill = not empty,
+        )
     finally:
         pool.putconn(conn)
 
@@ -3458,6 +3478,7 @@ async def get_template(
                    f"Run enrichment/templates/load_to_postgres.py to populate.",
         )
 
+    from dataclasses import asdict
     return {
         "leaf_id":             rendered.leaf_id,
         "template_version":    rendered.template_version,
@@ -3466,6 +3487,8 @@ async def get_template(
         "must_rendered":       rendered.must_rendered,
         "must_dropped_for_tenant": rendered.must_dropped,
         "placeholders_filled": rendered.placeholders_filled,
+        "musts_prefilled":     rendered.musts_prefilled,
+        "prefill_sources":     [asdict(s) for s in rendered.prefill_sources],
     }
 
 
