@@ -3272,6 +3272,88 @@ async def admin_reextract_upload(
     }
 
 
+@app.get("/api/v1/journey/state", tags=["journey"])
+async def get_journey_state(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Return the tenant's onboarding journey state.
+
+    Reads-only computation across:
+      - templates (the catalogue + version)
+      - document_findings (MUSTs satisfied)
+      - tenant_must_overrides (N/A MUSTs)
+      - client_facts (profile completeness)
+      - Neo4j (leaves + MUST item ids per leaf)
+
+    The phase determination:
+      profile     — ClientFacts not yet completed
+      foundation  — 1+ of the 20 anchor templates incomplete
+      operational — all anchors complete; non-anchor templates remain
+      annual      — all templates complete; freshness-driven reviews
+
+    `next_actions` is a top-5 recommendation queue for the current
+    phase. Each row points at template_url + download_url so the
+    client can route the tenant to fill them.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        from rag.posture_loader import _build_engine_neo4j_driver
+        neo4j_driver = _build_engine_neo4j_driver()
+        from rag.journey.state import compute_journey_state
+        try:
+            state = compute_journey_state(conn, neo4j_driver, key_info.tenant_id)
+        finally:
+            if neo4j_driver is not None:
+                neo4j_driver.close()
+    finally:
+        pool.putconn(conn)
+
+    from dataclasses import asdict
+    return asdict(state)
+
+
+@app.get("/api/v1/journey/next", tags=["journey"])
+async def get_journey_next(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Return only the single top recommended next action.
+
+    Convenience endpoint for clients that just need "what should I
+    do next?" without the full state payload. Same data source as
+    /journey/state — pulls the first row of next_actions and the
+    phase context. Returns 200 with empty `recommendation` when
+    nothing remains (annual phase with no freshness work).
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        from rag.posture_loader import _build_engine_neo4j_driver
+        neo4j_driver = _build_engine_neo4j_driver()
+        from rag.journey.state import compute_journey_state
+        try:
+            state = compute_journey_state(conn, neo4j_driver, key_info.tenant_id)
+        finally:
+            if neo4j_driver is not None:
+                neo4j_driver.close()
+    finally:
+        pool.putconn(conn)
+
+    from dataclasses import asdict
+    top = state.next_actions[0] if state.next_actions else None
+    return {
+        "phase":           state.phase,
+        "phase_name":      state.phase_name,
+        "phase_message":   state.phase_message,
+        "posture_pct":     state.posture_pct,
+        "recommendation":  asdict(top) if top else None,
+    }
+
+
 def _template_download_filename(leaf_id: str) -> str:
     """req:A.5.15:access_control_policy → A_5_15_access_control_policy.md
     Strip the leading 'req:' prefix and convert remaining colons/dots
