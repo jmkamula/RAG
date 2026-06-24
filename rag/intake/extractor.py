@@ -1122,6 +1122,7 @@ def _parse_llm_response(
     dropped_hallucinated  = 0
     dropped_unknown_ref   = 0
     dropped_questionnaire = 0
+    dropped_unbound       = 0
     # Catalog crosscheck (schema_v42) — counts only, no rejections. Surfaces
     # cases where the LLM picked a valid MUST id but the evidence quote
     # doesn't match the catalog's keyword fingerprints for that MUST.
@@ -1235,6 +1236,18 @@ def _parse_llm_response(
                 else:
                     crosscheck_unavailable += 1
 
+        # Unbound-finding drop: post Phase-1 retirement (2026-06-13) the
+        # engine ignores unbound rows (no checklist_item_id). They only
+        # clutter Stage-1. Direction-C (per-MUST binding via doc_mappings)
+        # is the canonical path; if it didn't bind, the right answer is
+        # to add the missing doc_mapping, not to emit inert control-level
+        # matches. Drop unconditionally — un-mapped docs that previously
+        # produced "evidence of awareness" control-level findings will
+        # now produce 0 findings, surfacing the doc_mapping gap clearly.
+        if bound_item_id is None:
+            dropped_unbound += 1
+            continue
+
         findings.append(DocumentFinding(
             upload_id         = doc.upload_id or "",
             tenant_id         = "",   # set by writer
@@ -1252,15 +1265,15 @@ def _parse_llm_response(
         ))
 
     total_dropped = (dropped_low_conf + dropped_short_quote + dropped_hallucinated
-                     + dropped_unknown_ref + dropped_questionnaire)
+                     + dropped_unknown_ref + dropped_questionnaire + dropped_unbound)
     if total_dropped:
         logger.info(
             "extractor filters dropped %d findings on chunk %s (doc=%s): "
             "low_conf=%d short_quote=%d hallucinated_quote=%d unknown_ref=%d "
-            "questionnaire=%d",
+            "questionnaire=%d unbound=%d",
             total_dropped, chunk_id, doc.original_name,
             dropped_low_conf, dropped_short_quote, dropped_hallucinated,
-            dropped_unknown_ref, dropped_questionnaire,
+            dropped_unknown_ref, dropped_questionnaire, dropped_unbound,
         )
 
     # Accumulate drop counts onto the doc for pipeline-side persistence
@@ -1271,6 +1284,7 @@ def _parse_llm_response(
     m["dropped_hallucinated"]  = m.get("dropped_hallucinated", 0)  + dropped_hallucinated
     m["dropped_unknown_ref"]   = m.get("dropped_unknown_ref", 0)   + dropped_unknown_ref
     m["dropped_questionnaire"] = m.get("dropped_questionnaire", 0) + dropped_questionnaire
+    m["dropped_unbound"]       = m.get("dropped_unbound", 0)       + dropped_unbound
     # schema_v42 — crosscheck telemetry
     m["crosscheck_confirmed"]     = m.get("crosscheck_confirmed", 0)     + crosscheck_confirmed
     m["crosscheck_disagreements"] = m.get("crosscheck_disagreements", 0) + crosscheck_disagreements
