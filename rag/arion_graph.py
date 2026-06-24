@@ -1822,6 +1822,29 @@ def make_retrieve_node(
             last_entity      = state.get("last_entity") or None,
         )
 
+        # Append a deterministic "Templates available" footer for
+        # action-oriented questions where the cited refs have
+        # templates in the catalogue. Same shape as the cross-framework
+        # bridge footer (handled inside rank_and_answer) — surface
+        # structural data deterministically rather than relying on the
+        # LLM to mention every relevant template.
+        try:
+            from rag.templates.answer_footer import build_template_footer
+            qt_value = (
+                intent.question_type.value
+                if intent and getattr(intent, "question_type", None)
+                else None
+            )
+            tmpl_footer = build_template_footer(
+                cited_refs    = result.cited_refs or [],
+                question_type = qt_value,
+                db_url        = os.getenv("DATABASE_URL"),
+            )
+            if tmpl_footer:
+                result.answer_text = (result.answer_text or "").rstrip() + tmpl_footer
+        except Exception as e:
+            logger.warning(f"template footer skipped: {type(e).__name__}: {e}")
+
 
         # ── Write structured trace to DB (best-effort, never blocks answer) ─
         if _trace:
