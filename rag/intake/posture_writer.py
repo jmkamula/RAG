@@ -315,10 +315,12 @@ def _ensure_client_document(
 # =============================================================================
 
 def _write_document_findings(
-    findings:  list[DocumentFinding],
-    tenant_id: str,
-    doc_id:    str,           # client_documents.id
+    findings:    list[DocumentFinding],
+    tenant_id:   str,
+    doc_id:      str,           # client_documents.id
     conn,
+    *,
+    uploaded_by: Optional[str] = None,
 ) -> int:
     """
     Insert document_findings rows. Returns count of successfully written rows.
@@ -353,7 +355,26 @@ def _write_document_findings(
                 # inference_source: honour the field on DocumentFinding when
                 # set (templated upload fast-path sets 'templated'); otherwise
                 # rely on the DB column default ('extracted').
-                if getattr(f, "inference_source", None):
+                src = getattr(f, "inference_source", None)
+
+                # Auto-approve discipline: templated rows are deterministic
+                # tenant authorship (the tenant downloaded the template,
+                # wrote content under explicit <<MUST item:X>> markers,
+                # and uploaded). The HITL Stage-1 gate exists for INFERENCE
+                # uncertainty — templated has none. Land the row
+                # review_status='approved' + confirmed_by=<uploading user>
+                # + confirmed_at=now() so the engine sees it immediately +
+                # the audit trail captures "authored by user X via
+                # templated upload". A separate visibility endpoint surfaces
+                # these for tenant review without blocking posture.
+                if src == "templated":
+                    review_status = "approved"
+                    confirmed_by  = uploaded_by  # may be None for legacy paths
+                else:
+                    review_status = "pending"
+                    confirmed_by  = None
+
+                if src:
                     cur.execute(
                         """
                         INSERT INTO document_findings (
@@ -362,14 +383,17 @@ def _write_document_findings(
                             status, confidence, excerpt,
                             section_number, extracted_at,
                             is_active, retention_class,
-                            inference_source
+                            inference_source,
+                            review_status, confirmed_by, confirmed_at
                         ) VALUES (
                             %s, %s, %s,
                             %s, %s, %s,
                             %s, %s, %s,
                             %s, NOW(),
                             TRUE, %s,
-                            %s
+                            %s,
+                            %s, %s::uuid,
+                            CASE WHEN %s = 'approved' THEN NOW() ELSE NULL END
                         )
                         ON CONFLICT (id) DO NOTHING
                         """,
@@ -381,10 +405,13 @@ def _write_document_findings(
                             f.evidence_text[:500] if f.evidence_text else None,
                             f.section,
                             _RETENTION_CLASS,
-                            f.inference_source,
+                            src,
+                            review_status, confirmed_by, review_status,
                         ),
                     )
                 else:
+                    # No inference_source override → DB default 'extracted',
+                    # default review_status 'pending'.
                     cur.execute(
                         """
                         INSERT INTO document_findings (
@@ -729,12 +756,13 @@ def _persist_document_metadata(
 
 
 def write_findings(
-    findings:  list[DocumentFinding],
-    tenant_id: str,
-    upload_id: str,
+    findings:    list[DocumentFinding],
+    tenant_id:   str,
+    upload_id:   str,
     conn,
     *,
-    metadata:  Optional[dict] = None,
+    metadata:    Optional[dict] = None,
+    uploaded_by: Optional[str]  = None,
 ) -> dict:
     """
     Stage 4 entry point. Write all findings to document_findings and
@@ -776,7 +804,8 @@ def write_findings(
         _persist_document_metadata(tenant_id, doc_id, metadata, conn)
 
     # ── Stage 4A: document_findings ───────────────────────────────────────
-    written = _write_document_findings(findings, tenant_id, doc_id, conn)
+    written = _write_document_findings(findings, tenant_id, doc_id, conn,
+                                       uploaded_by = uploaded_by)
 
     # ── Stage 4B: posture_controls ────────────────────────────────────────
     groups: dict[tuple, list[DocumentFinding]] = {}

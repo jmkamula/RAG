@@ -720,8 +720,16 @@ def _run_pipeline(
     db_url:            str,
     api_key:           str,
     original_filename: Optional[str] = None,
+    user_id:           Optional[str] = None,
 ):
-    """Run document pipeline in background thread."""
+    """Run document pipeline in background thread.
+
+    user_id is the X-API-Key holder's UUID — used to attribute
+    auto-approved templated findings via document_findings.confirmed_by
+    (per the no-Stage-1 path for tenant-authored marker-bearing
+    uploads). Other intake lanes leave confirmed_by NULL until
+    Stage-1 acts on them.
+    """
     from rag.intake.doc_pipeline import DocumentPipeline
     pipeline = DocumentPipeline(
         db_url  = db_url,
@@ -729,7 +737,8 @@ def _run_pipeline(
         trace   = True,
     )
     result = pipeline.run(file_path, tenant_id, upload_id,
-                          original_filename=original_filename)
+                          original_filename = original_filename,
+                          user_id           = user_id)
     logger.info(
         f"Pipeline complete: {result.document_name} "
         f"status={result.status} findings={result.findings_count}"
@@ -909,6 +918,7 @@ async def upload_document(
         db_url            = DATABASE_URL,
         api_key           = api_key,
         original_filename = file.filename,
+        user_id           = key_info.user_id,
     )
 
     logger.info(
@@ -3258,6 +3268,7 @@ async def admin_reextract_upload(
         db_url            = DATABASE_URL,
         api_key           = api_key,
         original_filename = filename,
+        user_id           = key_info.user_id,
     )
 
     logger.info(
@@ -3269,6 +3280,78 @@ async def admin_reextract_upload(
         "upload_id":  upload_id,
         "filename":   filename,
         "message":    "Re-extraction queued — poll /api/v1/documents/{upload_id}/status",
+    }
+
+
+@app.get("/api/v1/stage1/auto-approved", tags=["hitl"])
+async def stage1_auto_approved(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    days:     int = 30,
+    limit:    int = 200,
+):
+    """List recently auto-approved templated findings.
+
+    Templated uploads land with review_status='approved' at write time
+    (the tenant authored the marker-bearing document; HITL Stage-1
+    review is redundant). This endpoint exposes them for visibility +
+    audit: the tenant can review what was auto-bound and revert any
+    row that was unintentional.
+
+    Filters:
+      - inference_source = 'templated'
+      - review_status    = 'approved'
+      - confirmed_at     within last `days` days (default 30)
+
+    Returns up to `limit` rows (default 200), newest first.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT df.id::text, df.checklist_item_id, df.control_ref,
+                       df.standard_id, df.status, df.confidence,
+                       LEFT(df.excerpt, 200) AS excerpt_preview,
+                       df.confirmed_by::text, df.confirmed_at,
+                       cd.filename
+                  FROM document_findings df
+                  JOIN client_documents cd ON cd.id = df.document_id
+                 WHERE df.tenant_id        = %s::uuid
+                   AND df.is_active        = TRUE
+                   AND df.inference_source = 'templated'
+                   AND df.review_status    = 'approved'
+                   AND df.confirmed_at     > now() - (%s * interval '1 day')
+                 ORDER BY df.confirmed_at DESC
+                 LIMIT %s
+                """,
+                (key_info.tenant_id, days, limit),
+            )
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+
+    return {
+        "tenant_id": key_info.tenant_id,
+        "days":      days,
+        "count":     len(rows),
+        "findings": [
+            {
+                "id":              r[0],
+                "checklist_item_id": r[1],
+                "control_ref":     r[2],
+                "standard_id":     r[3],
+                "status":          r[4],
+                "confidence":      r[5],
+                "excerpt_preview": r[6],
+                "authored_by":     r[7],
+                "confirmed_at":    r[8].isoformat() if r[8] else None,
+                "source_filename": r[9],
+            }
+            for r in rows
+        ],
     }
 
 

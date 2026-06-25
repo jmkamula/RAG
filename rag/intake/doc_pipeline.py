@@ -197,6 +197,7 @@ class DocumentPipeline:
         tenant_id:         str,
         upload_id:         Optional[str] = None,
         original_filename: Optional[str] = None,
+        user_id:           Optional[str] = None,
     ) -> PipelineResult:
         """
         Process one document.
@@ -456,7 +457,8 @@ class DocumentPipeline:
             try:
                 summary = write_findings(
                     findings, tenant_id, upload_id, conn,
-                    metadata = doc_metadata,
+                    metadata    = doc_metadata,
+                    uploaded_by = user_id,
                 )
 
                 # Persist the parsed markdown alongside the findings so the
