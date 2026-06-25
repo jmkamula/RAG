@@ -166,6 +166,26 @@ def _substitute_placeholders(
     return body_md, n_filled
 
 
+def _extract_leaf_title(body_md: str, leaf_id: str) -> str:
+    """Pull the first H1 from the body (the leaf's title). Falls back to
+    a slug-derived title from leaf_id if no H1."""
+    m = re.search(r"^#\s+(.+?)\s*$", body_md, re.MULTILINE)
+    if m:
+        return m.group(1).strip()
+    # Fallback: req:A.5.18:access_revocation_record → "Access Revocation Record"
+    parts = leaf_id.split(":")
+    slug = parts[-1] if parts else leaf_id
+    return slug.replace("_", " ").title()
+
+
+def _extract_control_ref_from_leaf_id(leaf_id: str) -> str:
+    """req:A.5.18:access_revocation_record → A.5.18"""
+    parts = leaf_id.split(":")
+    if len(parts) >= 2:
+        return parts[1]
+    return leaf_id
+
+
 def _clean_excerpt(text: str) -> str:
     """Strip the leaf-scan back-bind marker prefix that's an internal
     annotation, not tenant content. Leaves the rest untouched."""
@@ -483,16 +503,55 @@ def render_template(
     body, n_filled = _substitute_placeholders(body, tenant_row)
 
     if include_header:
-        header = (
-            f"<!-- Rendered for {tenant_row.get('name','(unknown tenant)')} "
-            f"on {_dt.date.today().isoformat()} — "
+        # Two-layer header:
+        # 1. Tenant-visible CONSULTANT PREAMBLE — disclaimer + tenant
+        #    name + generation date + leaf identity. Reads as advisory,
+        #    not authoritative. Strips the on-disk H1 + leading
+        #    instruction blockquote (replaced by the preamble's own
+        #    H1 + disclaimer).
+        # 2. Hidden provenance HTML comment — version + MUST counts +
+        #    prefill telemetry. Invisible in rendered markdown views.
+        tenant_name = tenant_row.get("name") or "(unknown tenant)"
+        leaf_title  = _extract_leaf_title(body_md, leaf_id)
+        control_ref = _extract_control_ref_from_leaf_id(leaf_id)
+        std_label   = "ISO/IEC 27001:2022" if not control_ref.startswith("Art.") else "GDPR 2016/679"
+        gen_date    = _dt.date.today().isoformat()
+
+        # Strip the on-disk YAML frontmatter block (--- ... ---) — its
+        # leaf_id/version/counts already live in the provenance comment.
+        body = re.sub(r"^---\n.*?\n---\n+", "", body, count=1, flags=re.DOTALL)
+        # Strip the on-disk H1 line (leaf title) — we replace it with
+        # the tenant-personalised preamble H1.
+        body = re.sub(r"^#\s+[^\n]+\n+", "", body, count=1, flags=re.MULTILINE)
+        # Strip the leading instruction blockquote ("> **Replace each
+        # blank fill-in marker...") — redundant with the preamble's
+        # disclaimer.
+        body = re.sub(
+            r"^>\s*\*\*Replace each blank fill-in marker[^\n]+\n+",
+            "", body, count=1, flags=re.MULTILINE,
+        )
+
+        preamble = (
+            f"# {leaf_title} — drafted for {tenant_name}\n\n"
+            f"> **Advisory template.** A starting draft to help your "
+            f"compliance journey. NOT an authoritative evidence "
+            f"guideline — an auditor will examine your *actual* "
+            f"artefacts, not this template. Use what's useful, change "
+            f"what isn't, delete what doesn't apply.\n\n"
+            f"> _Generated {gen_date} · "
+            f"Control: {control_ref} ({std_label}) · "
+            f"Leaf: `{leaf_id}`_\n\n"
+            f"---\n\n"
+        )
+        provenance = (
+            f"<!-- Rendered for {tenant_name} on {gen_date} — "
             f"leaf {leaf_id} v{template_version} — "
             f"{kept}/{must_total} MUSTs in scope"
         )
         if prefill and musts_prefilled:
-            header += f" — {musts_prefilled} prefilled from prior evidence"
-        header += " -->\n\n"
-        body = header + body
+            provenance += f" — {musts_prefilled} prefilled from prior evidence"
+        provenance += " -->\n\n"
+        body = provenance + preamble + body
 
     return RenderedTemplate(
         leaf_id             = leaf_id,
