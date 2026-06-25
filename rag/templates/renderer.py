@@ -320,20 +320,26 @@ def _compose_prefill_block(
     return "\n\n".join(parts)
 
 
-def _apply_prefills(
+def _apply_prefills_and_wrap_edit_zones(
     body_md:       str,
     prefills:      dict[str, str],
 ) -> tuple[str, int]:
-    """For each <<MUST item:X>> marker in body_md, if a prefill exists
-    for that item_id, replace the FIRST <<TEXT>> or <<NAME>> placeholder
-    that appears in the marker's section (between this marker and the
-    next heading/marker/rule).
+    """Per-MUST transformation:
+
+      1. Substitute the FIRST <<TEXT>> / <<NAME>> placeholder in the
+         section with the composed prefill content (if any)
+      2. Wrap the placeholder OR the prefill substitution with edit-zone
+         markers `<!-- EDIT-ZONE-START item:X -->` ... `<!-- EDIT-ZONE-END item:X -->`
+
+    Edit-zone markers are what the extractor's fast-path uses to separate
+    *tenant authoring* from *template scaffolding* (guidance prose, MUST
+    headings, prefilled prior evidence). Without them, the extractor
+    would treat the guidance + prefill as tenant evidence on upload —
+    "circular counting" where the tenant gets credit for our scaffold
+    + their own prior approved findings.
 
     Returns (new_body, n_musts_prefilled).
     """
-    if not prefills:
-        return body_md, 0
-
     # Find all MUST markers + their positions
     markers = list(_MUST_MARKER_RE.finditer(body_md))
     if not markers:
@@ -356,11 +362,27 @@ def _apply_prefills(
         owned     = section_body[:section_split]
         afterward = section_body[section_split:]
 
-        # Substitute first placeholder in owned
+        # Substitute first placeholder in owned (if prefill available)
         prefill = prefills.get(item_id)
-        if prefill and _PLACEHOLDER_RE.search(owned):
-            owned = _PLACEHOLDER_RE.sub(prefill, owned, count=1)
+        ph_match = _PLACEHOLDER_RE.search(owned)
+        if prefill and ph_match:
+            # Replace placeholder with EDIT-ZONE-wrapped prefill
+            wrapped = (
+                f"<!-- EDIT-ZONE-START {item_id} -->\n"
+                f"{prefill}\n"
+                f"<!-- EDIT-ZONE-END {item_id} -->"
+            )
+            owned = owned[:ph_match.start()] + wrapped + owned[ph_match.end():]
             n_prefilled += 1
+        elif ph_match:
+            # No prefill, but placeholder present — wrap the placeholder
+            # itself so the extractor knows where tenant authoring starts.
+            wrapped = (
+                f"<!-- EDIT-ZONE-START {item_id} -->\n"
+                f"{ph_match.group(0)}\n"
+                f"<!-- EDIT-ZONE-END {item_id} -->"
+            )
+            owned = owned[:ph_match.start()] + wrapped + owned[ph_match.end():]
 
         out_parts.append(owned)
         out_parts.append(afterward)
@@ -425,16 +447,21 @@ def render_template(
     # PREFILL — for each MUST surviving the N/A strip, look up the
     # tenant's prior approved+active evidence and compose it into the
     # section's <<TEXT>>/<<NAME>> placeholder. Skipped when prefill=False
-    # (tenant requested blank template via ?empty=true) or when there's
-    # no evidence on any MUST.
+    # (tenant requested blank template via ?empty=true).
+    #
+    # EDIT-ZONE wrapping ALWAYS runs (independent of prefill on/off) so
+    # the upload-side extractor has stable markers to find tenant
+    # authoring vs template scaffolding. Without these markers, the
+    # extractor would treat v2 guidance prose + prefilled prior evidence
+    # as new tenant evidence on re-upload — "circular counting".
     musts_prefilled       = 0
     prefill_sources_out: list[PrefillSource] = []
+    prefills: dict[str, str] = {}
     if prefill:
         surviving_must_ids = list(set(_MUST_MARKER_RE.findall(body)))
         evidence_per_must  = _fetch_prefill_evidence(pg_conn, tenant_id, surviving_must_ids)
         bridge_per_must    = _fetch_bridge_footers(pg_conn, tenant_id, surviving_must_ids)
 
-        prefills: dict[str, str] = {}
         for must_id in surviving_must_ids:
             distinct = _dedup_evidence(evidence_per_must.get(must_id, []))
             bridges  = bridge_per_must.get(must_id, [])
@@ -449,7 +476,9 @@ def render_template(
                     extracted_at_iso = d.extracted_at.date().isoformat(),
                 ))
 
-        body, musts_prefilled = _apply_prefills(body, prefills)
+    # ALWAYS wrap edit zones — even when prefill is off, the placeholders
+    # need to be flagged for the upload-side extractor.
+    body, musts_prefilled = _apply_prefills_and_wrap_edit_zones(body, prefills)
 
     body, n_filled = _substitute_placeholders(body, tenant_row)
 
