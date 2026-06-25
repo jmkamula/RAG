@@ -4,7 +4,7 @@ control_ref: 6.1.3
 standard_id: ISO27001:2022
 evidence_type: risk_treatment_plan
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 6
 should_count: 1
 ---
@@ -60,6 +60,9 @@ hours** for refresh on register updates.
 ## 1. Select a risk-treatment option per risk
 
 <<MUST item:6.1.3:options>>
+
+> _Standard text:_ Risk treatment options selected for each risk
+
 _Clause 6.1.3(a) — treatment options selected._
 
 For each risk **flagged for treatment** in the register, name the
@@ -83,6 +86,9 @@ named option.
 ## 2. Determine controls for each chosen option
 
 <<MUST item:6.1.3:controls>>
+
+> _Standard text:_ Controls determined to implement the chosen options
+
 _Clause 6.1.3(b) — controls determined to implement the option._
 
 For each "Modify" row, name **which controls** (Annex A or otherwise)
@@ -101,6 +107,9 @@ control beyond Annex A."
 ## 3. Reference the Statement of Applicability
 
 <<MUST item:6.1.3:soa_ref>>
+
+> _Standard text:_ Reference to the live Statement of Applicability (the SoA leaf)
+
 _Clause 6.1.3(c-d) — produce the SoA._
 
 State that the SoA is the companion artefact and link to the sibling
@@ -117,6 +126,9 @@ references the controls by their SoA identifier."
 ## 4. Identify residual risk per treated risk
 
 <<MUST item:6.1.3:residual>>
+
+> _Standard text:_ Residual risk identified per treated risk
+
 _Clause 6.1.3(e) — residual risk identified._
 
 After the treatment is in place, what risk REMAINS? Score it with
@@ -137,6 +149,9 @@ eliminated."
 ## 5. Identify treatment owners
 
 <<MUST item:6.1.3:owners>>
+
+> _Standard text:_ Risk treatment owners identified per treated risk
+
 _Accountability — who delivers the treatment._
 
 The **treatment owner** is the role responsible for *getting the
@@ -153,6 +168,9 @@ Billing Product Manager (migration). Risk owner: CFO."
 ## 6. Capture risk-owner approval + residual acceptance
 
 <<MUST item:6.1.3:approval>>
+
+> _Standard text:_ Risk owners' approval of the plan AND acceptance of residual risks recorded
+
 _Clause 6.1.3(f) — approval + acceptance of residual._
 
 Each risk owner formally **approves the treatment plan** (says yes to
@@ -173,6 +191,9 @@ the audit artefact."
 ### Target completion dates per treatment item
 
 <<SHOULD item:6.1.3:timeline>>
+
+> _Standard text:_ Target completion dates per treatment item
+
 _Implementation tracking — turn the plan into a schedule._
 
 Each treatment row gets a target date (when the control will be

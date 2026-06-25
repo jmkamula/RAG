@@ -4,7 +4,7 @@ control_ref: A.5.19
 standard_id: ISO27001:2022
 evidence_type: procedure
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 8
 should_count: 3
 ---
@@ -57,6 +57,9 @@ A.5.19**. Sits at the top of the supplier control family
 ## 1. Identify and document supplier types
 
 <<MUST item:A.5.19:supplier_types>>
+
+> _Standard text:_ Supplier types identified and documented (ICT services, ICT infrastructure components, logistics, utilities, financial, etc.)
+
 _Type-driven risk — different supplier types carry different risk
 profiles + need different controls._
 
@@ -79,6 +82,9 @@ where in-scope data flows through chain."
 ## 2. Define selection + evaluation criteria
 
 <<MUST item:A.5.19:selection_criteria>>
+
+> _Standard text:_ Selection and evaluation criteria based on sensitivity of information and services (risk analysis, references, attestations)
+
 _Risk-proportional intake — high-risk suppliers get more scrutiny
 than low-risk._
 
@@ -99,6 +105,9 @@ Tier 1 acceptable on questionnaire + standard terms."
 ## 3. State infosec rules per supplier type / access type
 
 <<MUST item:A.5.19:risk_rules>>
+
+> _Standard text:_ InfoSec rules per supplier type / access type with minimum requirements
+
 _The minimum bar — what every supplier in a given type must satisfy._
 
 State minimum requirements per category. Auditor checks the matrix
@@ -119,6 +128,9 @@ State minimum requirements per category. Auditor checks the matrix
 ## 4. State due-diligence steps before engagement
 
 <<MUST item:A.5.19:due_diligence>>
+
+> _Standard text:_ Due diligence steps before engagement (questionnaire, attestation review, audit)
+
 _Pre-engagement work — what you do BEFORE the contract is signed._
 
 The intake gates. State who does each step + what evidence is
@@ -140,6 +152,9 @@ cannot be signed before all steps complete."
 ## 5. Define ongoing monitoring
 
 <<MUST item:A.5.19:ongoing_monitoring>>
+
+> _Standard text:_ Ongoing monitoring approach (periodic reassessment, event-triggered review, third-party reports)
+
 _Post-engagement — selection is not enough; the supplier must be
 re-evaluated over time._
 
@@ -162,6 +177,9 @@ records sibling leaf captures the outputs."
 ## 6. Define handoff to supplier agreements (A.5.20)
 
 <<MUST item:A.5.19:agreement_handoff>>
+
+> _Standard text:_ Conditions under which security requirements get into the supplier agreement (handoff to A.5.20)
+
 _Conditions when security clauses must enter the contract._
 
 State which findings from the intake assessment must end up in the
@@ -181,6 +199,9 @@ date X') become contract conditions with milestones."
 ## 7. Train own personnel on supplier engagement
 
 <<MUST item:A.5.19:training_personnel>>
+
+> _Standard text:_ Training of own personnel on appropriate engagement and information exchange with suppliers
+
 _People-side control — your staff need to know how to engage
 suppliers correctly + handle the data exchange._
 
@@ -201,6 +222,9 @@ refresh + immediate on procedure update."
 ## 8. State incident + contingency handling with the supplier
 
 <<MUST item:A.5.19:incident_joint_mgmt>>
+
+> _Standard text:_ Incident and contingency handling jointly with the supplier
+
 _Incident coordination — what happens when something goes wrong
 on either side._
 
@@ -226,6 +250,9 @@ service continuity; supplier exit per the A.5.20 termination clauses."
 ### Supplier tiering model documented separately
 
 <<SHOULD item:A.5.19:tiering_model>>
+
+> _Standard text:_ Tiering model with concrete criteria (data sensitivity, dependency, financial exposure)
+
 _Model rigor — make the tier rubric a separately-maintained
 artefact so it can evolve._
 
@@ -236,6 +263,9 @@ The scoring rubric is its own document; this procedure references it.
 ### Standard questionnaire referenced
 
 <<SHOULD item:A.5.19:questionnaire_ref>>
+
+> _Standard text:_ Reference to standard supplier security questionnaire
+
 _Reuse the industry baseline (SIG, CAIQ, or your own)._
 
 State which questionnaire format you use and where it lives.
@@ -245,6 +275,9 @@ State which questionnaire format you use and where it lives.
 ### Resilience / disengagement plan
 
 <<SHOULD item:A.5.19:resilience_plan>>
+
+> _Standard text:_ Backup or alternative supplier processes / treatment of supplier disruption
+
 _Exit-readiness — what's the plan when the supplier exits or you exit?_
 
 State the disengagement plan reference (typically per-supplier in

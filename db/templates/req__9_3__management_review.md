@@ -5,7 +5,7 @@ standard_id: ISO27001:2022
 evidence_type: review_record
 trigger_type: universal
 freshness_days: 365
-template_version: 2
+template_version: 3
 must_count: 7
 should_count: 2
 ---
@@ -66,6 +66,9 @@ the meeting itself; **1-2 hours** to write up the record.
 ## 1. Record internal audit results
 
 <<MUST item:9.3:audit_results>>
+
+> _Standard text:_ Internal audit results included
+
 _Clause 9.3.2(c)(2) — internal audit results._
 
 Summary of audits run in the period, count of findings by
@@ -85,6 +88,9 @@ attachment A."
 ## 2. Record nonconformity + corrective-action status
 
 <<MUST item:9.3:nonconf>>
+
+> _Standard text:_ Nonconformities and corrective actions status
+
 _Clause 9.3.2(c)(3) — status of nonconformities + corrective actions._
 
 The open + closed ledger from the 10.1 register. Highlight any
@@ -103,6 +109,9 @@ escalation."
 ## 3. Record monitoring + measurement results
 
 <<MUST item:9.3:monitoring>>
+
+> _Standard text:_ Monitoring and measurement results
+
 _Clause 9.3.2(c)(4) — monitoring and measurement results._
 
 The 9.1 metrics dashboard. State each metric, current value, trend,
@@ -121,6 +130,9 @@ freshness (% of accounts reviewed in last 90 days): 87% / target
 ## 4. Record progress against information security objectives
 
 <<MUST item:9.3:objectives>>
+
+> _Standard text:_ Progress toward information security objectives
+
 _Clause 9.3.2(c)(5) — extent of objectives fulfilment._
 
 The objectives stated in your 5.2 policy / 6.2 plan, scored against
@@ -138,6 +150,9 @@ on track at this review."
 ## 5. Record feedback from interested parties
 
 <<MUST item:9.3:interested>>
+
+> _Standard text:_ Feedback from interested parties
+
 _Clause 9.3.2(c)(7) — feedback from interested parties._
 
 Customers, regulators, certification bodies, contracted parties.
@@ -158,6 +173,9 @@ frequent' — review recommended (action: AC-220)."
 ## 6. Record decisions + actions
 
 <<MUST item:9.3:decisions>>
+
+> _Standard text:_ Decisions and actions recorded
+
 _Clause 9.3.3 — decisions related to continual improvement +
 changes to the ISMS._
 
@@ -179,6 +197,9 @@ Action: ISMS Manager."
 ## 7. Top-management attendance + sign-off
 
 <<MUST item:9.3:approved>>
+
+> _Standard text:_ Approved by top management attendee
+
 _Top management commitment — a member must attend (and sign)._
 
 Name the top-management attendee(s) and have them sign the record.
@@ -199,6 +220,9 @@ Owner); <<CISO_NAME>> (CISO). Signed: <<CEO_NAME>>, on
 ### Meeting date + next planned date
 
 <<SHOULD item:9.3:date>>
+
+> _Standard text:_ Date of review
+
 _Cadence discipline._
 
 State this review's date + the next planned management review date.
@@ -208,6 +232,9 @@ State this review's date + the next planned management review date.
 ### Attendee list (beyond top management)
 
 <<SHOULD item:9.3:attendees>>
+
+> _Standard text:_ Attendees listed
+
 _Completeness — who else was in the room shapes the conversation._
 
 ISMS Manager, DPO, key control owners, internal auditor. Listing them

@@ -4,7 +4,7 @@ control_ref: A.5.15
 standard_id: ISO27001:2022
 evidence_type: policy
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 7
 should_count: 3
 ---
@@ -58,6 +58,9 @@ You're producing the Access Control Policy required by **ISO/IEC
 ## 1. State physical access rules
 
 <<MUST item:A.5.15:physical_rules>>
+
+> _Standard text:_ Physical access rules (premises, server rooms, restricted areas)
+
 _Physical access rules — premises, server rooms, restricted areas._
 
 If you have premises in ISMS scope, define rules for: site entry,
@@ -83,6 +86,9 @@ This MUST is marked N/A in the tenant scope overlay."
 ## 2. State logical access rules
 
 <<MUST item:A.5.15:logical_rules>>
+
+> _Standard text:_ Logical access rules (systems, applications, network segments)
+
 _Logical access rules — systems, applications, network segments._
 
 The core of access control for most orgs. Define rules for:
@@ -104,6 +110,9 @@ credentials). (e) Privileged actions logged + alerted (A.8.15).
 ## 3. Make RBAC the default access model
 
 <<MUST item:A.5.15:rbac>>
+
+> _Standard text:_ Role-based access control as the default model with stated exceptions (attribute-based, individual grants)
+
 _Default model — RBAC unless explicitly excepted._
 
 State RBAC as the default + the explicit exceptions (when ABAC or
@@ -122,6 +131,9 @@ access only — auto-expire 24h + post-hoc review per A.8.2."
 ## 4. State the least-privilege principle
 
 <<MUST item:A.5.15:least_privilege>>
+
+> _Standard text:_ Principle of least privilege stated
+
 _Behavioural principle — give the minimum access needed for the
 role to perform its function._
 
@@ -142,6 +154,9 @@ A.5.18 cycle."
 ## 5. State the need-to-know principle
 
 <<MUST item:A.5.15:need_to_know>>
+
+> _Standard text:_ Principle of need-to-know stated
+
 _Information-access principle — access to data is on need-to-know,
 even within a role's permission scope._
 
@@ -162,6 +177,9 @@ reviews surface unusual patterns to managers."
 ## 6. Define authorisation rules
 
 <<MUST item:A.5.15:authorisation>>
+
+> _Standard text:_ Authorisation rules — who can authorise access at which level (cross-link to A.5.18 procedure)
+
 _Who can authorise access at which level — cross-link to A.5.18._
 
 State per-class or per-system: who's the authoriser. This is what
@@ -182,6 +200,9 @@ A.5.18 provisioning references at decision time.
 ## 7. Link to segregation of duties (A.5.3)
 
 <<MUST item:A.5.15:segregation_link>>
+
+> _Standard text:_ Cross-link to A.5.3 segregation of duties — access decisions respect documented separation
+
 _Cross-control coherence — access decisions must respect A.5.3._
 
 State that authorisation decisions respect documented segregation
@@ -204,6 +225,9 @@ reviewed at every role change + annually."
 ### Emergency / break-glass access
 
 <<SHOULD item:A.5.15:emergency_access>>
+
+> _Standard text:_ Emergency / break-glass access provisions (with mandatory after-the-fact justification)
+
 _Operational continuity — sometimes "break the rule, fix it after"
 is the right answer (e.g. lone-engineer on-call needing prod
 access at 3am)._
@@ -216,6 +240,9 @@ post-hoc review, full audit trail.
 ### Third-party / contractor access
 
 <<SHOULD item:A.5.15:third_party>>
+
+> _Standard text:_ Third-party / contractor access rules referenced (link to A.5.19 supplier relationships)
+
 _Coverage — contractors + suppliers operate under same access
 rules, with contractual hooks per A.5.19/20._
 
@@ -227,6 +254,9 @@ identity store, time-bound, contract-referenced authorisation).
 ### Periodic review cadence
 
 <<SHOULD item:A.5.15:review_cadence>>
+
+> _Standard text:_ Periodic access review cadence stated (typically quarterly for privileged, annual otherwise — link to A.5.18)
+
 _Drift prevention — access drifts without cadence._
 
 State review cadence: typically quarterly for privileged, annual

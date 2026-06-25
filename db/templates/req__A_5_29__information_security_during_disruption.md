@@ -4,7 +4,7 @@ control_ref: A.5.29
 standard_id: ISO27001:2022
 evidence_type: plan
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 8
 should_count: 3
 ---
@@ -60,6 +60,9 @@ annual exercise**; **plus** post-exercise refresh.
 ## 1. Document the disruption scenarios considered
 
 <<MUST item:A.5.29:scenarios>>
+
+> _Standard text:_ Disruption scenarios considered (cyber attack [link to A.5.7 threat intel], natural event, supplier failure [link to A.5.21], regulatory action, key-personnel loss)
+
 _Scenario list — disruption isn't a single event; planning is
 scenario-specific._
 
@@ -84,6 +87,9 @@ State the scenarios. Each has different security implications.
 ## 2. Name security controls that must continue operating
 
 <<MUST item:A.5.29:must_continue>>
+
+> _Standard text:_ Security controls that must continue operating during disruption (named explicitly — encryption, access control, audit logging at minimum)
+
 _Non-negotiable baseline — even during disruption, some controls
 hold at full strength._
 
@@ -104,6 +110,9 @@ these is escalated to ISMS Owner + DPO."
 ## 3. State acceptable degradation levels per control
 
 <<MUST item:A.5.29:degradation_levels>>
+
+> _Standard text:_ Acceptable degradation levels stated (which controls can drop to compensating, which must hold at full — risk-tiered)
+
 _Graceful degradation — risk-tiered controls that CAN drop to
 compensating._
 
@@ -125,6 +134,9 @@ compensating measures replace it. Tiered by risk.
 ## 4. Define fallback / compensating security measures
 
 <<MUST item:A.5.29:fallback>>
+
+> _Standard text:_ Fallback / compensating security measures when primary controls fail (per-control: what replaces it, what residual risk it accepts)
+
 _When primary fails, what's the backup — and what residual risk
 does it accept._
 
@@ -145,6 +157,9 @@ on-call elevated coverage."
 ## 5. Plan communication during disruption
 
 <<MUST item:A.5.29:communication>>
+
+> _Standard text:_ Communication during disruption (internal personnel, external customers, regulators, suppliers; out-of-band channels when corp comms compromised)
+
 _Internal + external comms — out-of-band channels when corp comms
 compromised._
 
@@ -165,6 +180,9 @@ stored offline in IR kit."
 ## 6. Plan restoration of normal security controls
 
 <<MUST item:A.5.29:restoration>>
+
+> _Standard text:_ Restoration of normal security controls after disruption ends (sequenced, verified — re-encryption, audit-log replay, access-control reactivation)
+
 _Stand-down sequence — restoring controls in the right order
 prevents re-disruption._
 
@@ -184,6 +202,9 @@ Each step verified + recorded in stand-down log."
 ## 7. Define activation authority
 
 <<MUST item:A.5.29:activation_authority>>
+
+> _Standard text:_ Activation authority defined (who declares the plan active; who declares it stood down; criteria for each)
+
 _Who declares the plan active + who declares it stood down._
 
 State criteria + named role.
@@ -202,6 +223,9 @@ Manager joint decision; documented criteria met."
 ## 8. State test schedule for the plan
 
 <<MUST item:A.5.29:test_schedule>>
+
+> _Standard text:_ Test schedule for the plan (cadence stated; promoted from SHOULD because untested continuity plans fail when actually needed)
+
 _Untested continuity plans degrade — annual minimum, often quarterly
 tabletop._
 
@@ -225,6 +249,9 @@ lessons-learned + 10.1 improvement actions."
 ### BCP integration
 
 <<SHOULD item:A.5.29:bcp_integration>>
+
+> _Standard text:_ Integration with the broader Business Continuity Plan (this is the security ANNEX to the BCP — BCP itself is out of scope)
+
 _BCP cross-link — this plan is the security overlay on a broader
 business continuity plan._
 
@@ -235,6 +262,9 @@ State the BCP that this is the security-controls overlay on.
 ### Residual-risk register
 
 <<SHOULD item:A.5.29:residual_risk>>
+
+> _Standard text:_ Residual-risk register for disruption scenarios where degradation creates accepted exposure (named risk owner per scenario)
+
 _Each fallback + degradation accepts residual risk — capture
 explicitly._
 
@@ -246,6 +276,9 @@ register entry for audit.
 ### Third-party-service plans
 
 <<SHOULD item:A.5.29:third_party>>
+
+> _Standard text:_ Third-party-dependent controls flagged (where the plan relies on supplier action — cross-link to A.5.22 review)
+
 _Supplier-side disruption affecting our delivery — pair with the
 A.5.21 supply-chain risk procedure._
 

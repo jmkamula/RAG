@@ -4,7 +4,7 @@ control_ref: A.6.3
 standard_id: ISO27001:2022
 evidence_type: training_programme
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 7
 should_count: 3
 ---
@@ -60,6 +60,9 @@ refresh + delivery.
 ## 1. Define scope and audience
 
 <<MUST item:A.6.3:scope_audience>>
+
+> _Standard text:_ Scope and audience defined (all personnel + relevant interested parties such as contractors, third parties with access)
+
 _Who has to take this training — and at what depth._
 
 State the audiences + which curricula apply.
@@ -81,6 +84,9 @@ State the audiences + which curricula apply.
 ## 2. Align curriculum to job functions
 
 <<MUST item:A.6.3:curriculum>>
+
+> _Standard text:_ Curriculum aligned to job functions (general awareness for all, deeper modules per role — developers, admins, finance, HR, executives)
+
 _Role-specific content — generic training degrades for technical
 roles + executives._
 
@@ -104,6 +110,9 @@ posture. 30 min. (f) **GDPR deep-dive** (DPO + privacy team) —
 ## 3. Train at onboarding BEFORE access granted
 
 <<MUST item:A.6.3:onboarding>>
+
+> _Standard text:_ Initial training on onboarding BEFORE access to information assets (gates A.5.18 access grant)
+
 _Onboarding gate — training is a precondition for the A.5.18
 access grant._
 
@@ -123,6 +132,9 @@ included."
 ## 4. State refresh cadence
 
 <<MUST item:A.6.3:refresh_cadence>>
+
+> _Standard text:_ Refresh cadence (typically annual) plus update on significant policy changes
+
 _Annual minimum + event-triggered._
 
 State cadence + triggers.
@@ -141,6 +153,9 @@ modules are current; gaps closed before access change."
 ## 5. Provide awareness mechanisms beyond formal training
 
 <<MUST item:A.6.3:awareness_mechanisms>>
+
+> _Standard text:_ Awareness mechanisms beyond formal training (newsletters, phishing simulations, posters, lunch-and-learns, all-hands updates)
+
 _Training is a touchpoint; awareness is a habit — mechanisms
 sustain it._
 
@@ -162,6 +177,9 @@ in collaboration tools."
 ## 6. Maintain training records
 
 <<MUST item:A.6.3:training_records>>
+
+> _Standard text:_ Training records maintained (who completed what, when) for audit and the completion register leaf
+
 _Who took what, when — audit evidence + drives the completion
 register leaf._
 
@@ -179,6 +197,9 @@ Manager + DPO see all; subject access on request per GDPR Art.15."
 ## 7. Name programme owner
 
 <<MUST item:A.6.3:owner>>
+
+> _Standard text:_ Named owner of the programme (typically Security Awareness Lead within InfoSec; HR partner for delivery logistics)
+
 _Accountability — every controlled doc needs a named owner._
 
 The Security Awareness Lead (typically within InfoSec) owns
@@ -200,6 +221,9 @@ ISMS Manager + Head of People."
 ### Role-specific deep-dives documented
 
 <<SHOULD item:A.6.3:role_specific_deep>>
+
+> _Standard text:_ Role-specific deep dives (developers — secure coding from A.8.25; admins — privileged-access discipline from A.8.2; finance — fraud awareness; HR — DSAR handling)
+
 _For high-risk roles, depth above the standard role module._
 
 State the deep-dive programmes for engineers (secure SDLC), admins
@@ -210,6 +234,9 @@ State the deep-dive programmes for engineers (secure SDLC), admins
 ### Effectiveness metrics
 
 <<SHOULD item:A.6.3:effectiveness_metrics>>
+
+> _Standard text:_ Effectiveness measurement (quiz pass rates, phishing simulation click rates trend, reporting-rate trend from A.6.8)
+
 _Measure outcomes, not just completion._
 
 State the metrics: phishing-sim click rate trend, security-question
@@ -220,6 +247,9 @@ results, reporting rate, attestation refresh on-time rate.
 ### Programme budget
 
 <<SHOULD item:A.6.3:budget>>
+
+> _Standard text:_ Programme budget / resource allocation (signals management commitment — under-resourced awareness is a frequent audit finding)
+
 _Programme sustainability — budget signals organisational
 commitment._
 

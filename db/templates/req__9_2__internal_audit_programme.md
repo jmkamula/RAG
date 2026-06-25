@@ -4,7 +4,7 @@ control_ref: 9.2
 standard_id: ISO27001:2022
 evidence_type: audit_programme
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 7
 should_count: 2
 ---
@@ -59,6 +59,9 @@ auditor time depending on scope sample.
 ## 1. Define audit frequency
 
 <<MUST item:9.2:frequency>>
+
+> _Standard text:_ Audit frequency defined
+
 _Clause 9.2.2(a) — frequency and methods._
 
 State how often audits run and the cycle by which the full ISMS
@@ -81,6 +84,9 @@ non-trivial ISMS).
 ## 2. Define audit scope covering all ISMS processes
 
 <<MUST item:9.2:scope>>
+
+> _Standard text:_ Audit scope covering all ISMS processes
+
 _Clause 9.2.2(a) — scope per audit._
 
 Each audit cycle's scope, mapped to the ISMS clauses + Annex A
@@ -99,6 +105,9 @@ significant changes trigger pre-deployment audit of new controls."
 ## 3. Define audit criteria
 
 <<MUST item:9.2:criteria>>
+
+> _Standard text:_ Audit criteria defined
+
 _Clause 9.2.2(a) — criteria for each audit._
 
 The **standards** the audit measures against. Always includes ISO/IEC
@@ -118,6 +127,9 @@ baseline."
 ## 4. Set auditor independence + competence requirements
 
 <<MUST item:9.2:independence>>
+
+> _Standard text:_ Auditor independence and competence requirements
+
 _Clause 9.2.2(b) — auditor selection ensuring impartiality and
 objectivity._
 
@@ -139,6 +151,9 @@ independent review per A.5.35."
 ## 5. Define the reporting process
 
 <<MUST item:9.2:reporting>>
+
+> _Standard text:_ Reporting process to management defined
+
 _Clause 9.2.2(c) — report results to relevant management._
 
 Where findings go, to whom, in what format, on what cadence.
@@ -156,6 +171,9 @@ Review. Quarterly roll-up published at the ISMS Steering Committee."
 ## 6. Define corrective-action follow-up
 
 <<MUST item:9.2:corrective>>
+
+> _Standard text:_ Corrective action follow-up process
+
 _Clause 9.2.2(d) — implement corrections + corrective actions._
 
 Findings don't close themselves — state the closure mechanism. Pairs
@@ -173,6 +191,9 @@ Manager + back into the next audit cycle."
 ## 7. Name the programme owner
 
 <<MUST item:9.2:owner>>
+
+> _Standard text:_ Named owner of the programme (typically ISMS Manager + independent auditor)
+
 _Accountability — every controlled doc needs a named owner._
 
 Typically split: the **ISMS Manager** owns the programme; the
@@ -193,6 +214,9 @@ independence."
 ### Publish the cycle schedule
 
 <<SHOULD item:9.2:schedule>>
+
+> _Standard text:_ Audit schedule for current period
+
 _Visibility — auditees know when their area will be audited._
 
 Publish the per-quarter schedule so audited teams can prepare.
@@ -203,6 +227,9 @@ Avoids the "ambush" feel that triggers political pushback.
 ### Record-retention for audit artefacts
 
 <<SHOULD item:9.2:records>>
+
+> _Standard text:_ Record retention requirements (cross-link to 7.5)
+
 _Audit records have specific retention needs (typically 6 years
 or as required by certification body)._
 

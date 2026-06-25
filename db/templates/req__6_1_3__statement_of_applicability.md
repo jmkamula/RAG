@@ -8,6 +8,7 @@ freshness_days: 365
 template_version: 2
 must_count: 7
 should_count: 1
+table_shape: hybrid
 ---
 
 # Statement of Applicability (SoA)
@@ -54,139 +55,145 @@ tenants find their SoA outgrows a word-processor.
 
 ---
 
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
+## The 93-row control table
 
-## 1. Enumerate all 93 Annex A controls
+This is the **heart of the SoA**. One row per Annex A control (all
+93). The auditor's first check is **count** — if you don't have 93
+rows, you've already failed Clause 6.1.3(d).
+
+<!-- TABLE-COLUMNS leaf:req:6.1.3:statement_of_applicability -->
+<!-- column: item:6.1.3:soa_all_annex_a -->
+<!-- column: item:6.1.3:soa_inclusion_status -->
+<!-- column: item:6.1.3:soa_justification -->
+<!-- column: item:6.1.3:soa_implementation_status -->
+<!-- column: item:6.1.3:soa_reference -->
+<!-- /TABLE-COLUMNS -->
+
+<!-- EDIT-ZONE-START leaf:req:6.1.3:statement_of_applicability -->
+| Control Ref | Applicable (Yes/No) | Justification | Implementation Status | Implementing Policy / Procedure |
+|---|---|---|---|---|
+| A.5.1       |                     |               |                       |                                  |
+| A.5.2       |                     |               |                       |                                  |
+| ... (add rows A.5.3 through A.8.34 — all 93) | | | | |
+<!-- EDIT-ZONE-END leaf:req:6.1.3:statement_of_applicability -->
+
+## Column guidance — what to fill in
+
+### Control Ref (all 93)
 
 <<MUST item:6.1.3:soa_all_annex_a>>
-_Clause 6.1.3(d) — every Annex A control listed; no omissions._
 
-The auditor's first check is **count**: do you have 93 rows? If you
-don't, you've already failed Clause 6.1.3(d). Use the ISO/IEC
-27001:2022 Annex A as the authoritative list — A.5.1 through A.8.34
-across four control categories.
+> _Standard text:_ All 93 Annex A controls enumerated (no omissions)
 
-**✓ Good**: A spreadsheet with one row per control, sorted by Annex
-A id, with columns: Ref, Title, Applicable (Yes/No), Justification,
-Status (Implemented/Partial/Planned/Not-Applicable),
-Implementing-Policy, Owner, Last-Reviewed.
+Use the ISO/IEC 27001:2022 Annex A as the authoritative list —
+A.5.1 through A.8.34 across four control categories. Don't omit
+"obvious" exclusions (e.g. A.7.x physical if you're cloud-only) —
+they MUST appear with explicit Not Applicable status + justification.
 
-**✗ Avoid**: Omitting "obvious" exclusions (e.g. A.7.x physical
-controls if you're cloud-only) — they MUST appear with explicit
-"Not Applicable" status + justification.
+**✓ Good**: Spreadsheet with one row per control, sorted by Annex A
+id. Count check at top: "93/93".
 
-<<TEXT>>
+**✗ Avoid**: Omitting Not-Applicable controls — auditor will catch
+this on first scan.
 
-## 2. State the Applicable / Not Applicable status per control
+### Applicable (Yes/No)
 
 <<MUST item:6.1.3:soa_inclusion_status>>
-_Clause 6.1.3(d) — applicability per control._
 
-Each row gets a binary: **Applicable** (control is in scope, you
-implement it) or **Not Applicable** (control is out of scope, you
-don't). "Partially applicable" is not a valid SoA status — either
-the control applies and you implement it, or it doesn't.
+> _Standard text:_ Inclusion status per control (Applicable / Not
+> Applicable)
 
-**✓ Good**: Discrete Applicable=Yes/No column. (Implementation
-*depth* lives in MUST 4, not here.)
+Each row: **Applicable** (in scope, you implement it) or **Not
+Applicable** (out of scope, you don't). "Partially applicable" is
+not a valid SoA status.
 
-<<TEXT>>
+**✓ Good**: Discrete column with Yes/No. Implementation depth lives
+in the "Implementation Status" column, not here.
 
-## 3. Justify each inclusion AND exclusion
+**✗ Avoid**: Mixing applicability and implementation status — they're
+separate dimensions.
+
+### Justification
 
 <<MUST item:6.1.3:soa_justification>>
-_Clause 6.1.3(d) — justification for inclusion or exclusion._
 
-For **Applicable=Yes**, justification is typically: "(a) Risk-driven
-— addresses R-XXX from the register; (b) Legal/regulatory — required
-by Y law; (c) Contractual — required by customer Z's MSA; (d)
-Best-practice — sectoral expectation."
+> _Standard text:_ Justification per control (why included / why
+> excluded)
 
-For **Applicable=No**, justification must be defensible — explain why
-the control doesn't apply to your context. "Cloud-only, no physical
-premises in ISMS scope per 4.3" is fine for A.7.x. "We're small"
-is not.
+For **Applicable=Yes**: risk-driven (R-XXX), legal/regulatory
+(law Y), contractual (customer Z), or best-practice.
 
-**✓ Good** (excerpt):
+For **Applicable=No**: defensible reasoning — "cloud-only, no
+premises in 4.3" is fine; "we're small" is not.
 
-| Ref | Applicable | Justification |
-|---|---|---|
-| A.5.15 | Yes | Risk-driven (R-001, R-002 access mismanagement); contractual (customer MSAs require RBAC) |
-| A.7.1 | No | Cloud-only operations; no premises in 4.3 ISMS scope |
-| A.7.10 | No | No physical storage media — cloud-only |
-| A.8.25 | Yes | Risk-driven (R-007 supply-chain) + best practice for SDLC |
+**✓ Good**: `Risk-driven (R-001, R-002 access mismanagement);
+contractual (customer MSAs require RBAC)`
 
-**✗ Avoid**: "Standard ISO control" (says nothing about *why* it
-applies to YOU).
+**✗ Avoid**: "Standard ISO control" — says nothing about why it
+applies to YOU.
 
-<<TEXT>>
-
-## 4. Show implementation status per Applicable control
+### Implementation Status
 
 <<MUST item:6.1.3:soa_implementation_status>>
-_Clause 6.1.3(d) — status of implementation._
 
-For every Applicable=Yes row, status is one of: **Implemented**
-(fully operating), **Partial** (operating with known gaps), **Planned**
-(committed and dated). "Not Implemented" without a plan is a finding.
+> _Standard text:_ Status of implementation per included control
+> (Implemented / Partially / Planned)
 
-**✓ Good**: "Implemented", "Partial — gap: <specific>, target Q3",
-"Planned — target Q4, owner: <named>."
+Discrete: `Implemented` (fully operating), `Partial` (operating with
+known gaps), `Planned` (committed + dated). "Not Implemented" without
+a plan is a finding.
 
-**✗ Avoid**: All rows "Implemented" on day 1 of the ISMS (auditor
-will pick this apart immediately). Be honest — partial + planned is
-expected and respected.
+**✓ Good**: `Partial — gap: <specific>, target Q3`, `Planned —
+target Q4, owner: <named>`
 
-<<TEXT>>
+**✗ Avoid**: All rows "Implemented" on day 1 — be honest. Partial +
+planned is expected and respected.
 
-## 5. Reference the implementing policy / procedure per control
+### Implementing Policy / Procedure
 
 <<MUST item:6.1.3:soa_reference>>
-_Audit defensibility — every Applicable control needs an artefact._
+
+> _Standard text:_ Reference to the implementing policy/procedure
+> per included control
 
 For each Applicable=Yes row, name the document that *implements* the
 control. This is what the auditor asks for sample evidence from.
 
-**✓ Good** (excerpt):
+**✓ Good**: `Access Control Policy (DOC-014)`, `Incident Response
+Procedure (DOC-024)`
 
-| Ref | Implementing Policy / Procedure |
-|---|---|
-| A.5.1 | Information Security Policy (DOC-001) |
-| A.5.15 | Access Control Policy (DOC-014) |
-| A.5.18 | Access Rights Procedure (DOC-015) |
-| A.5.24 | Incident Response Procedure (DOC-024) |
+**✗ Avoid**: "Various" or "the ISMS" — auditor needs a specific
+artefact.
 
-**✗ Avoid**: References to "various" or "the ISMS" — the auditor
-needs a specific artefact to sample.
+---
 
-<<TEXT>>
+## Document-level fields
 
-## 6. Name the SoA owner
+These are properties of the SoA AS A DOCUMENT — not per-row data.
+
+### Owner
 
 <<MUST item:6.1.3:soa_owner>>
-_Accountability — every controlled doc needs a named owner._
 
-The **ISMS Manager** owns the SoA. They keep it current; significant
-SoA changes go to top management.
+> _Standard text:_ Named owner of the SoA (typically ISMS Manager)
 
-**✓ Good**: "Document owner: ISMS Manager (<<ISMS_MANAGER_NAME>>).
-Approver: ISMS Owner (<<CEO_NAME>>). Annual review at management
-review per Clause 9.3."
+The ISMS Manager owns the SoA. Significant SoA changes go to top
+management for approval.
 
+<!-- EDIT-ZONE-START item:6.1.3:soa_owner -->
 <<TEXT>>
+<!-- EDIT-ZONE-END item:6.1.3:soa_owner -->
 
-## 7. State version + approval date
+### Version + Approval Date
 
 <<MUST item:6.1.3:soa_version>>
-_Document control — required by Clause 7.5._
+
+> _Standard text:_ Version number and approval date stated
 
 Standard metadata. The SoA is the most-versioned ISMS artefact —
 expect 4-12 versions per year as the control landscape evolves.
 
-**✓ Good header block**:
-
+**Example header block**:
 ```
 Version:        v2.4
 Approved:       <<APPROVAL_DATE>> by <<ISMS_OWNER_NAME>>
@@ -195,20 +202,24 @@ Change history: v1.0 initial — v1.1 added A.8.27 — v2.0
                 certification body audit cycle — ...
 ```
 
+<!-- EDIT-ZONE-START item:6.1.3:soa_version -->
 <<TEXT>>
+<!-- EDIT-ZONE-END item:6.1.3:soa_version -->
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-### List additional / external controls beyond Annex A
+_For tenants who carry additional control sets._
+
+### External / Additional Controls
 
 <<SHOULD item:6.1.3:soa_external_controls>>
-_Completeness — your real control universe may exceed Annex A._
+
+> _Standard text:_ External / additional controls beyond Annex A
+> listed where used (sectoral, contractual)
 
 If you operate sectoral or contractual controls beyond Annex A (PCI
-DSS for payment processing; HIPAA Technical Safeguards if you handle
-PHI; customer-specific obligations; SOC2 controls), list them here so
-the SoA is a complete view of what governs your ISMS.
-
-<<TEXT>>
+DSS, HIPAA Technical Safeguards, customer-specific obligations, SOC2
+controls), list them here as additional table rows so the SoA is a
+complete view.

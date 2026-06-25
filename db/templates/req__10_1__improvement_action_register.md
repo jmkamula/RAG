@@ -8,6 +8,7 @@ template_version: 2
 must_count: 7
 should_count: 1
 freshness_days: 365
+table_shape: true
 ---
 
 # Improvement Action Register
@@ -51,137 +52,155 @@ operational cost** of updating per finding.
 
 ---
 
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:10.1:improvement_action_register -->
+<!-- column: item:10.1:reg_action_id -->
+<!-- column: item:10.1:reg_trigger_type -->
+<!-- column: item:10.1:reg_dimension -->
+<!-- column: item:10.1:reg_owner -->
+<!-- column: item:10.1:reg_target_date -->
+<!-- column: item:10.1:reg_status -->
+<!-- column: item:10.1:reg_effectiveness -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Assign a unique action identifier per row
+## Register
+
+Fill one row per improvement action. Each column maps to a MUST item
+the auditor will check — empty columns count as unsatisfied. Add as
+many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:10.1:improvement_action_register -->
+| Action ID | Trigger | Dimension | Owner | Target Date | Status | Effectiveness |
+|---|---|---|---|---|---|---|
+|           |         |           |       |             |        |               |
+|           |         |           |       |             |        |               |
+|           |         |           |       |             |        |               |
+<!-- EDIT-ZONE-END leaf:req:10.1:improvement_action_register -->
+
+## Column guidance — what to fill in
+
+### Action ID
 
 <<MUST item:10.1:reg_action_id>>
-_Traceability — every row needs an identifier the org references
-in audit reports, management reviews, change records._
 
-Use a stable prefix + numeric sequence. Avoid recycling IDs after
-closure.
+> _Standard text:_ Unique action identifier per row
 
-**✓ Good**: "Action ID format: AC-NNN (e.g. AC-001, AC-042,
-AC-117). Sequence is org-wide and never recycled. Closed rows
-retain their ID in the historical view of the register."
+Stable prefix + numeric sequence. Avoid recycling IDs after closure
+— keep closed rows in the historical view with their IDs intact.
 
-<<TEXT>>
+**✓ Good**: `AC-001`, `AC-117`, `AC-2026-042`
 
-## 2. Record the trigger type per row
+**✗ Avoid**: Free-text descriptions as IDs ("RBAC slip") — auditor
+needs a stable handle to reference across status changes.
+
+### Trigger
 
 <<MUST item:10.1:reg_trigger_type>>
-_Clause 10.1 — improvement comes from multiple sources; the
-register makes the inflow visible._
 
-Common trigger types: **audit_finding** (from 9.2), **measurement_gap**
-(from 9.1), **mgmt_review_decision** (from 9.3), **lessons_learned**
-(from A.5.27), **party_feedback** (customer / regulator), **risk_treatment**
-(from 6.1.3), **opportunity** (proactive — no triggering finding).
+> _Standard text:_ Per-row trigger type (audit finding / measurement
+> gap / opportunity / party feedback / mgmt review output)
 
-**✓ Good**: Discrete column with values from the list above.
-Auditor can pivot the register by trigger to see flow rate from
-each source.
+Discrete value: `audit_finding`, `measurement_gap`,
+`mgmt_review_decision`, `lessons_learned`, `party_feedback`,
+`risk_treatment`, `opportunity`. Auditor pivots the register by
+trigger to see flow rate from each source.
 
-<<TEXT>>
+**✓ Good**: `audit_finding (Q1 internal)`, `lessons_learned (INC-042)`
 
-## 3. Record the improvement dimension per row
+**✗ Avoid**: Mixing the trigger value with the reasoning narrative —
+keep this column to the discrete category.
+
+### Dimension
 
 <<MUST item:10.1:reg_dimension>>
-_Clause 10.1 — suitability, adequacy, or effectiveness._
 
-ISO 27001 distinguishes three: **suitability** (is the control
-right for the situation?), **adequacy** (is it complete?),
-**effectiveness** (does it actually work?). Categorising helps the
-review process — different remedies apply.
+> _Standard text:_ Per-row improvement dimension (suitability /
+> adequacy / effectiveness)
 
-**✓ Good**: Discrete column with values {suitability, adequacy,
-effectiveness}. Example rows: "Replace single-factor login with
-MFA" → suitability; "Add break-glass procedure for emergency
-access" → adequacy; "Tighten access-review automation cadence to
-weekly" → effectiveness.
+ISO 27001 distinguishes three. **Suitability** (is the control right
+for the situation?). **Adequacy** (is it complete?). **Effectiveness**
+(does it actually work?). Categorising helps the review process —
+different remedies apply.
 
-<<TEXT>>
+**✓ Good**: `effectiveness` (tighten cadence on existing control),
+`adequacy` (control was incomplete), `suitability` (wrong control)
 
-## 4. Record per-row owner
+**✗ Avoid**: "Improvement" or "Fix" — both are not values from the
+ISO triad.
+
+### Owner
 
 <<MUST item:10.1:reg_owner>>
-_Accountability — each row has a single named owner with authority._
 
-The owner is responsible for delivering the action — not for the
-control's normal operation, but for the *change* the action requires.
+> _Standard text:_ Per-row owner
 
-**✓ Good**: "Owner column: named individual (not 'IT' or 'the
-security team'). Role-holder accountable for delivering by target
-date. Re-assignment must be explicit (recorded in row history)."
+Named individual or role with authority to deliver the action — not
+"IT" or "the security team". Role-holder accountable for delivering
+by target date. Re-assignment must be explicit (recorded in row
+history).
 
-<<TEXT>>
+**✓ Good**: `<<ISMS_MANAGER_NAME>>`, `VP Engineering`, `DPO`
 
-## 5. Record per-row target completion date
+**✗ Avoid**: "TBD" or unassigned — an action without an owner drifts.
+
+### Target Date
 
 <<MUST item:10.1:reg_target_date>>
-_Time-bounded — improvements without deadlines drift indefinitely._
 
-Each row gets a target date. Slippage is OK — but it must be
-visible (date moves with reason captured), not hidden.
+> _Standard text:_ Per-row target completion date
 
-**✓ Good**: "Target date column: initial target + history of slips.
-Format: '2026-09-30 (slipped from 2026-06-30: vendor dependency)'.
-Slip > 60 days requires re-approval at next ISMS Steering Committee."
+Each row gets a target date. Slippage is OK — but it must be visible
+(date moves with reason captured), not hidden. A slip beyond 60 days
+should re-trigger management review approval.
 
-<<TEXT>>
+**✓ Good**: `2026-09-30 (slipped from 2026-06-30: vendor dependency)`
 
-## 6. Record per-row status
+**✗ Avoid**: "When possible" or "Q3" without a specific date.
+
+### Status
 
 <<MUST item:10.1:reg_status>>
-_Lifecycle — every row moves through a finite set of states._
 
-Common: **proposed** (raised, not yet approved) → **approved**
-(authorised + funded) → **in_progress** (work happening) → **closed**
-(implemented + effectiveness verified) → **superseded** (replaced by a
-later row) / **rejected** (formal decision not to act).
+> _Standard text:_ Per-row status (proposed / approved / in-progress /
+> closed / superseded)
 
-**✓ Good**: Discrete column with values above. Each transition
-records who + when in the row history.
+Discrete lifecycle: `proposed` → `approved` → `in_progress` → `closed`
+/ `superseded` / `rejected`. Each transition records who + when in
+the row history.
 
-<<TEXT>>
+**✓ Good**: `in_progress`, `closed (2026-06-14)`, `superseded by AC-203`
 
-## 7. Record effectiveness assessment on closure
+**✗ Avoid**: Status that doesn't reset on slip — owner says "still
+in progress" 18 months later without a refreshed target date.
+
+### Effectiveness
 
 <<MUST item:10.1:reg_effectiveness>>
-_Clause 10.1 — confirm the corrective action achieved its intended
-effect. This MUST is the one auditors most often find weak._
 
-When a row moves to "closed", record **did it work?** — measurable
+> _Standard text:_ Per-row effectiveness assessment captured on
+> closure (did the improvement work?)
+
+When a row moves to `closed`, record **did it work?** — measurable
 before/after, sample evidence, signoff. Without this, "closed" rows
 are theatre.
 
-**✓ Good**: "Effectiveness assessment captured at closure: (a)
-intended effect re-stated, (b) measurable outcome (metric delta /
-re-audit result / control test outcome), (c) verifier identity
-(NOT the same person as the owner), (d) closure decision recorded.
-Example: AC-117 SBOM tooling — intended effect: cover 100% of
-production components in SBOM; outcome at closure: 100%
-(0/127 → 127/127) verified by re-running A.5.21 supply-chain
-review; verifier: SecOps Manager; closed 2026-06-15."
+**✓ Good**: `100% SBOM coverage (0/127 → 127/127), verified by SecOps
+Manager 2026-06-15` — measurable outcome + verifier identity.
 
-**✗ Avoid**: "Done" as the closure note (no measurable evidence).
-
-<<TEXT>>
+**✗ Avoid**: "Done" — no measurable evidence; auditor will reopen.
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-### Per-row source cross-reference
+_These strengthen the register but aren't strictly required for the
+MUST checks. Add them as extra columns in the table if they apply._
+
+### Source Reference
 
 <<SHOULD item:10.1:reg_source_xref>>
-_Traceability back to the originating finding / decision / review._
 
-Each row points back to its source artefact: audit report ID,
-management-review minutes date, incident PIR doc, etc. Lets the
-auditor close the loop in either direction.
+> _Standard text:_ Per-row source cross-reference (audit report ID /
+> management-review minutes date / incident PIR doc)
 
-<<TEXT>>
+Closes the loop: row points back to its originating finding /
+decision / review. Auditor can navigate in either direction.

@@ -8,6 +8,7 @@ freshness_days: 90
 template_version: 2
 must_count: 6
 should_count: 3
+table_shape: true
 ---
 
 # Inventory of Information and Associated Assets
@@ -31,7 +32,8 @@ ownership transferred).
 ## Before you start
 
 - [ ] **4.3 ISMS Scope** clear — only in-scope assets in this register
-- [ ] **A.5.12 Classification Scheme** in place — needed for MUST 3
+- [ ] **A.5.12 Classification Scheme** in place — needed for the
+      Classification column
 - [ ] **5.3 Roles** clear — owners are named individuals/roles
 
 ## Cross-references
@@ -52,157 +54,165 @@ operational cost** for maintenance.
 
 ---
 
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.9:asset_inventory -->
+<!-- column: item:A.5.9:asset_records -->
+<!-- column: item:A.5.9:owner_per_asset -->
+<!-- column: item:A.5.9:classification -->
+<!-- column: item:A.5.9:location -->
+<!-- column: item:A.5.9:last_updated -->
+<!-- column: item:A.5.9:asset_type -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Create per-asset records covering all in-scope categories
+## Register
+
+Fill one row per asset. Each column maps to a MUST item the auditor
+will check — empty columns count as unsatisfied. Add as many rows as
+you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.9:asset_inventory -->
+| Asset ID | Owner | Classification | Location | Last Updated | Asset Type |
+|---|---|---|---|---|---|
+|          |       |                |          |              |            |
+|          |       |                |          |              |            |
+|          |       |                |          |              |            |
+<!-- EDIT-ZONE-END leaf:req:A.5.9:asset_inventory -->
+
+## Column guidance — what to fill in
+
+### Asset ID
 
 <<MUST item:A.5.9:asset_records>>
-_Asset coverage — the register must include all asset types in
-ISMS scope: information, software, hardware, services, cloud
-resources, facilities (if in scope)._
 
-State the categories you cover and how each category gets onto the
-register. Categories typically: information assets (datasets,
-documents), software (apps, libraries), hardware (devices, network
-infra), services (SaaS, APIs), cloud resources (storage, compute,
-identity stores), facilities (if you have premises in scope).
+> _Standard text:_ Asset records exist (information assets, software,
+> hardware, services, cloud resources)
 
-**✓ Good**: "Register covers (a) information assets — customer
-datasets, employee records, IP, ISMS records; (b) software —
-production services, internal tools, third-party licences; (c)
-hardware — endpoints, network appliances (if any in scope), MFA
-tokens; (d) services — SaaS subscriptions, managed APIs, paid
-data feeds; (e) cloud resources — AWS accounts, S3 buckets,
-databases, IAM roles, KMS keys; (f) facilities — N/A
-(cloud-only per scope statement)."
+Stable unique identifier per asset. Use a convention that scales: a
+prefix per asset type + a sequence (e.g. `AST-DATA-001`,
+`AST-SVC-014`). Don't recycle IDs after disposal — keep them in the
+historical view.
 
-<<TEXT>>
+**✓ Good**: `ARION-SVC-001`, `ARION-DATA-CUST-PROD`, `ARION-IAM-OKTA`
 
-## 2. Name a per-asset owner
+**✗ Avoid**: free-text names that get edited ("Customer DB" → "Customer
+Database" → "Cust DB") — the auditor can't trace the same asset across
+quarters.
+
+### Owner
 
 <<MUST item:A.5.9:owner_per_asset>>
-_Accountability — every asset has a named owner with authority to
-decide on its protection and risk treatment._
 
-The owner is a **role or named individual** — not "IT" or "everyone".
-For multi-stakeholder assets, a single accountable owner with
-documented stakeholders.
+> _Standard text:_ Owner named per asset (individual or role
+> accountable for protection and risk decisions)
 
-**✓ Good**: "Ownership rules: (a) product engineering assets →
-VP Engineering or delegated team lead. (b) customer data assets →
-DPO is accountable + relevant product owner is the operational
-owner. (c) Corporate IT assets → IT Manager. (d) Specific
-inventory entries record the named role + current incumbent.
-Re-assignment recorded in row history."
+A **role or named individual** with authority to decide on the asset's
+protection. Not "IT" or "everyone". For multi-stakeholder assets, a
+single accountable owner with documented stakeholders.
 
-**✗ Avoid**: "Owner: IT team" (un-actionable).
+**✓ Good**: `VP Engineering (currently <<ISMS_MANAGER_NAME>>)`,
+`DPO + Customer Success Director` (joint), `IT Manager`
 
-<<TEXT>>
+**✗ Avoid**: "Owner: IT team" — un-actionable for the auditor.
 
-## 3. Classify every asset
+### Classification
 
 <<MUST item:A.5.9:classification>>
-_A.5.12 classification scheme applied to every row — the
-classification drives downstream control intensity._
 
-Each asset gets a class from the A.5.12 scheme. Without
-classification, you can't apply the right protection. Multi-class
-assets get the highest applicable class (the data inside an asset
-wins over the asset itself).
+> _Standard text:_ Classification per asset (links to the A.5.12
+> classification scheme)
 
-**✓ Good**: "Each row carries the A.5.12 classification (Public /
-Internal / Confidential / Restricted). PII flag set independently
-on the same row (cross-cuts the class). Class is re-evaluated on
-significant change to asset content or use."
+A.5.12 scheme value: Public / Internal / Confidential / Restricted.
+Plus a PII flag (independent of class — cross-cuts). Re-evaluate on
+significant change to asset content or use.
 
-<<TEXT>>
+**✓ Good**: `Restricted (+ PII)`, `Confidential`, `Internal`
 
-## 4. Record location / hosting per asset
+**✗ Avoid**: "High / Medium / Low" if your scheme uses different terms
+— the value must match A.5.12 exactly.
+
+### Location
 
 <<MUST item:A.5.9:location>>
-_Where the asset physically or logically resides — drives
-jurisdictional, access, and physical-controls applicability._
 
-For cloud resources: region (eu-west-1) + account. For SaaS: vendor
-+ region. For data: storage system + (where relevant) physical
-location. For hardware: site or assigned-to user.
+> _Standard text:_ Location or hosting system where the asset resides
+> (data centre, cloud region, endpoint pool)
 
-**✓ Good**: "Location column captures: (a) cloud assets — provider
-+ region + account ID + service. (b) SaaS — vendor + tenancy
-region. (c) data sets — primary storage system + replication
-locations (driven by GDPR transfer analysis). (d) endpoints —
-assigned-user country (no fixed site for cloud-only)."
+Where the asset physically or logically resides. Drives jurisdictional,
+access, and physical-controls applicability.
 
-<<TEXT>>
+**✓ Good**:
+- Cloud: `AWS eu-west-1 / account 123-prod / S3`
+- SaaS: `Okta (EU pod, Frankfurt)`
+- Data: `RDS prod-customers / replicated to eu-west-2`
+- Endpoint: `assigned-user: <<TENANT_COUNTRY>> remote pool`
 
-## 5. Update timestamp per record
+**✗ Avoid**: "Cloud" alone — auditor can't sample without region +
+account.
+
+### Last Updated
 
 <<MUST item:A.5.9:last_updated>>
-_Freshness signal — proves the register is alive, not snapshotted._
 
-Each row carries a last-updated date. Stale rows surface in the
-A.5.9 review (sibling leaf). Freshness target: every row touched
-within 90 days OR has explicit "no-change-confirmed" attestation
-within 90 days.
+> _Standard text:_ Last-updated date per record (proves the register
+> is actively maintained, not snapshotted)
 
-**✓ Good**: "Each row has 'last_updated' + 'last_attested'
-columns. 'last_updated' = real change; 'last_attested' = owner
-re-confirmed unchanged. Either resets the 90-day clock.
-Quarterly review surfaces rows beyond 90 days for attestation
-push."
+Each row's last-updated date. Two columns help in practice:
+`last_updated` (real change) vs `last_attested` (owner confirmed
+unchanged). Either resets the 90-day freshness clock.
 
-<<TEXT>>
+**✓ Good**: `2026-05-12` (updated) / `2026-06-22` (attested unchanged)
 
-## 6. Tag asset type
+**✗ Avoid**: An entire register dated to the same day — auditor
+sees that as a one-time snapshot, not active maintenance.
+
+### Asset Type
 
 <<MUST item:A.5.9:asset_type>>
-_Type-specific controls — different asset types have different
-applicable controls (e.g. A.8.x technological controls apply
-differently to data vs hardware vs services)._
 
-A typed register lets you pivot to "all software" or "all
-services" for control-applicability sweeps.
+> _Standard text:_ Asset type tag (information / software / hardware /
+> service / facility) so type-specific controls can be applied
 
-**✓ Good**: Discrete column with values {information, software,
-hardware, service, cloud_resource, facility}. Asset-type
-distribution reviewed at the A.5.9 program review (sibling leaf).
+Discrete category from: `information`, `software`, `hardware`,
+`service`, `cloud_resource`, `facility`. Lets you pivot to "all
+software" or "all services" for control-applicability sweeps.
 
-<<TEXT>>
+**✓ Good**: `information`, `cloud_resource`, `service`
+
+**✗ Avoid**: Free-text variations ("software" / "Software" / "SW")
+that break grouping queries.
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-### Lifecycle status
+_These strengthen the register but aren't strictly required for the
+MUST checks. Add them as extra columns in the table if they apply._
+
+### Lifecycle Status
 
 <<SHOULD item:A.5.9:lifecycle_status>>
-_Asset lifecycle awareness — onboarded / active / sunsetting /
-retired._
+
+> _Standard text:_ Asset lifecycle awareness — onboarded / active /
+> sunsetting / retired
 
 Track lifecycle so retired assets don't carry stale controls and
 sunset assets get the right compensating controls.
 
-<<TEXT>>
-
 ### Dependencies
 
 <<SHOULD item:A.5.9:dependencies>>
-_Cross-asset coupling — useful for impact analysis (R-CIA chain)._
 
-For each asset, list immediate dependencies (this DB → that
-service; this service → that API key). Enables blast-radius
-analysis at incident time + drives BCP scope.
+> _Standard text:_ Cross-asset coupling — useful for impact analysis
+> (R-CIA chain)
 
-<<TEXT>>
+For each asset, list immediate dependencies (this DB → that service;
+this service → that API key). Enables blast-radius analysis at
+incident time + drives BCP scope.
 
-### Data Flow Inventory cross-link
+### Data Flow Inventory cross-link (PII-bearing assets)
 
 <<SHOULD item:A.5.9:dfi_link>>
-_PII-bearing assets → Art.30 RoPA data-flow inventory._
+
+> _Standard text:_ PII-bearing assets → Art.30 RoPA data-flow inventory
 
 For any asset holding personal data, cross-link to the Art.30 RoPA
 data-flow inventory row. Closes the ISO ↔ GDPR loop.
-
-<<TEXT>>

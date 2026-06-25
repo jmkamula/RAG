@@ -4,7 +4,7 @@ control_ref: A.5.1
 standard_id: ISO27001:2022
 evidence_type: policy
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 5
 should_count: 2
 ---
@@ -57,6 +57,9 @@ management-system level, one is operational).
 ## 1. Define the policy scope
 
 <<MUST item:A.5.1:scope>>
+
+> _Standard text:_ Scope of the policy defined (which assets, locations, personnel)
+
 _Scope clarity — which assets, locations, personnel does this
 policy apply to?_
 
@@ -79,6 +82,9 @@ in their agreements (per A.5.20)."
 ## 2. State principles + objectives
 
 <<MUST item:A.5.1:principles>>
+
+> _Standard text:_ Information security principles and objectives stated
+
 _The behavioural backbone — what does <<TENANT_NAME>> commit to in
 operating its information security?_
 
@@ -104,6 +110,9 @@ applicable law and contracts is non-negotiable."
 ## 3. Assign roles + responsibilities
 
 <<MUST item:A.5.1:roles>>
+
+> _Standard text:_ Roles and responsibilities for information security
+
 _Operational roles — who DOES the security work day-to-day._
 
 Distinct from the Clause 5.3 ISMS-governance roles. A.5.1 names the
@@ -126,6 +135,9 @@ matrix + A.5.2 operational roles."
 ## 4. Commit to legal, regulatory, contractual compliance
 
 <<MUST item:A.5.1:legal_compliance>>
+
+> _Standard text:_ Commitment to legal, regulatory and contractual compliance
+
 _Operational expression of the Clause 5.2(c) commitment._
 
 Where Clause 5.2 makes the high-level commitment, A.5.1 names the
@@ -145,6 +157,9 @@ contract clauses cascaded to suppliers per A.5.20."
 ## 5. List topic-specific policies that flow from this one
 
 <<MUST item:A.5.1:topic_refs>>
+
+> _Standard text:_ References to topic-specific policies that flow from this one (e.g. A.5.10 AUP, A.5.12 classification, A.6.4 disciplinary)
+
 _A.5.1 is the umbrella — name the children._
 
 The topic-specific policies under A.5: the A.5.10 AUP, A.5.12
@@ -176,6 +191,9 @@ needs the explicit cross-reference list).
 ### Version + approval metadata
 
 <<SHOULD item:A.5.1:version>>
+
+> _Standard text:_ Version number and effective date
+
 _Document control._
 
 Standard header block with version, approval date, next review.
@@ -185,6 +203,9 @@ Standard header block with version, approval date, next review.
 ### Named owner
 
 <<SHOULD item:A.5.1:owner>>
+
+> _Standard text:_ Policy owner named (typically CISO or equivalent)
+
 _Accountability._
 
 Document owner + approver named explicitly.

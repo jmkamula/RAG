@@ -4,7 +4,7 @@ control_ref: 4.3
 standard_id: ISO27001:2022
 evidence_type: scope_statement
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 6
 should_count: 2
 ---
@@ -68,6 +68,9 @@ to refresh.
 ## 1. Define the ISMS boundary
 
 <<MUST item:4.3:boundaries>>
+
+> _Standard text:_ Boundaries of the ISMS defined
+
 _ISO/IEC 27001:2022 Clause 4.3(a) — boundaries must be determined._
 
 The boundary is what is **inside** your ISMS. State it in business
@@ -90,6 +93,9 @@ state inclusion first).
 ## 2. Document interfaces and dependencies
 
 <<MUST item:4.3:interfaces>>
+
+> _Standard text:_ Interfaces and dependencies with other organisations
+
 _ISO/IEC 27001:2022 Clause 4.3(b) — interfaces with other organisations._
 
 This is **where your ISMS meets the outside world** — cloud providers,
@@ -110,6 +116,9 @@ trust flows across each interface.
 ## 3. State exclusions with justification
 
 <<MUST item:4.3:exclusions>>
+
+> _Standard text:_ Any exclusions with justification
+
 _ISO/IEC 27001:2022 Clause 4.3(c) — exclusions must be justified._
 
 If you EXCLUDE part of the organisation from the ISMS, you must
@@ -134,6 +143,9 @@ catch this through interfaces).
 ## 4. Enumerate physical and logical locations
 
 <<MUST item:4.3:locations>>
+
+> _Standard text:_ Physical and logical locations covered
+
 _The scope statement must be unambiguous about where it applies._
 
 List the physical sites + the logical environments (AWS regions, SaaS
@@ -154,6 +166,9 @@ auditor cannot sample what you cannot list.
 ## 5. List products and services in scope
 
 <<MUST item:4.3:products_services>>
+
+> _Standard text:_ Products and services in scope
+
 _The "what we do" half of scope, paired with the "where" of locations._
 
 What products and services do you offer that fall under the ISMS?
@@ -175,6 +190,9 @@ through them.
 ## 6. Name the document owner
 
 <<MUST item:4.3:owner>>
+
+> _Standard text:_ Named owner of the scope statement (ISMS Manager)
+
 _Accountability — every controlled doc needs a named owner._
 
 The owner is typically the **ISMS Manager** or equivalent senior
@@ -200,6 +218,9 @@ for the MUST checks._
 ### Reference key interested parties (link to Clause 4.2)
 
 <<SHOULD item:4.3:stakeholders>>
+
+> _Standard text:_ Key interested parties referenced (link to 4.2)
+
 _Cross-link to your Clause 4.2 register — the parties whose
 expectations are addressed by the ISMS._
 
@@ -212,6 +233,9 @@ seen your 4.2 register.
 ### Add version + review metadata
 
 <<SHOULD item:4.3:version>>
+
+> _Standard text:_ Version number and review date
+
 _Document control discipline — required by Clause 7.5._
 
 Standard top-of-document metadata: version, approval date, next

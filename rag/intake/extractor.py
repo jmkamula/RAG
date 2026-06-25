@@ -336,17 +336,26 @@ def _extract_templated(doc: ParsedDocument) -> Optional[list[DocumentFinding]]:
     if not must_markers and not should_markers:
         return None
 
-    # Mode A1: tabular layout — single leaf-zone wraps a markdown table,
-    # column→MUST mapping in a sibling TABLE-COLUMNS block. Used for
-    # register / record / matrix / log / inventory evidence types.
+    # Mode A: hybrid edit-zone extraction. Templates can carry BOTH:
+    #   - Table zones (`<!-- EDIT-ZONE-START leaf:req:X -->`) wrapping a
+    #     markdown table — per-row MUSTs become columns; column→MUST
+    #     mapping in a sibling TABLE-COLUMNS metadata block. Used for
+    #     register/record/matrix/log/inventory shapes.
+    #   - Per-MUST zones (`<!-- EDIT-ZONE-START item:X -->`) wrapping
+    #     narrative content. Used for policy/procedure/scope_note
+    #     shapes, AND for doc-level MUSTs in hybrid templates (e.g.
+    #     SoA owner+version are narrative, the 93-row body is tabular).
+    # Both processed in one pass so hybrid v2 anchors work.
     table_zones = list(_TEMPLATED_TABLE_ZONE_RE.finditer(body))
-    if table_zones:
-        return _extract_templated_via_table(doc, body, table_zones)
+    edit_zones  = list(_TEMPLATED_EDIT_ZONE_RE.finditer(body))
 
-    # Mode A2: per-MUST edit-zone layout
-    edit_zones = list(_TEMPLATED_EDIT_ZONE_RE.finditer(body))
-    if edit_zones:
-        return _extract_templated_via_edit_zones(doc, edit_zones)
+    if table_zones or edit_zones:
+        findings: list[DocumentFinding] = []
+        if table_zones:
+            findings.extend(_extract_templated_via_table(doc, body, table_zones))
+        if edit_zones:
+            findings.extend(_extract_templated_via_edit_zones(doc, edit_zones))
+        return findings
 
     # Mode B: legacy full-section scan
     return _extract_templated_via_full_section(doc, body)

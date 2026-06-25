@@ -7,6 +7,7 @@ trigger_type: universal
 template_version: 2
 must_count: 6
 should_count: 1
+table_shape: hybrid
 ---
 
 # ISMS Roles, Responsibilities and Authorities Matrix
@@ -31,7 +32,7 @@ operational security roles. Both exist; this one is one layer up.
 - [ ] **4.3 ISMS Scope** defined (you're assigning roles within scope)
 - [ ] **5.2 Information Security Policy** approved (this matrix
       implements the responsibility commitments stated there)
-- [ ] **Current org chart** — for the cross-link in MUST 7
+- [ ] **Current org chart** — for the cross-link
 
 ## Cross-references
 
@@ -48,133 +49,145 @@ operational security roles. Both exist; this one is one layer up.
 
 ---
 
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
+## Decision authority table
 
-## 1. Assign the role for ISMS conformance to ISO 27001:2022
+This is the **load-bearing** part of the matrix — the per-decision
+rows that say who can make each call. Fill one row per decision-type.
+
+<!-- TABLE-COLUMNS leaf:req:5.3:isms_roles_authorities -->
+<!-- column: item:5.3:isms_conformance -->
+<!-- column: item:5.3:performance_reporting -->
+<!-- column: item:5.3:authorities_assigned -->
+<!-- /TABLE-COLUMNS -->
+
+<!-- EDIT-ZONE-START leaf:req:5.3:isms_roles_authorities -->
+| ISMS Conformance Role | Performance Reporting Role | Decision Authorities (decision → authority) |
+|---|---|---|
+|                        |                            |                                              |
+|                        |                            |                                              |
+|                        |                            |                                              |
+<!-- EDIT-ZONE-END leaf:req:5.3:isms_roles_authorities -->
+
+## Column guidance — what to fill in
+
+### ISMS Conformance Role
 
 <<MUST item:5.3:isms_conformance>>
-_Clause 5.3(a) — responsibility for ensuring conformance._
 
-This is the role accountable for: "the ISMS conforms to the standard."
+> _Standard text:_ Role assigned for ensuring the ISMS conforms to
+> ISO 27001:2022 (Clause 5.3a)
+
+The role accountable for: "the ISMS conforms to the standard."
 Usually the **ISMS Manager** in mid-size orgs; can be split between
-ISMS Manager + ISMS Owner. State which role, who currently holds it,
-what authority they have.
+ISMS Manager + ISMS Owner.
 
-**✓ Good**: "ISMS Manager. Currently <<ISMS_MANAGER_NAME>>. Accountable
-for: maintaining ISMS-wide alignment with ISO/IEC 27001:2022,
-preparing certification audits, owning the SoA and risk treatment
-plan. Authority: convene management review, request resources from
-budget owners, escalate conformance gaps directly to ISMS Owner."
+**✓ Good**: `ISMS Manager (<<ISMS_MANAGER_NAME>>). Accountable for:
+maintaining ISMS-wide alignment with ISO/IEC 27001:2022, preparing
+certification audits, owning the SoA and risk treatment plan.
+Authority: convene management review, request resources from budget
+owners, escalate conformance gaps directly to ISMS Owner.`
 
-**✗ Avoid**: Vague "Information Security Team" (un-named — not
-auditable).
+**✗ Avoid**: "Information Security Team" — un-named, not auditable.
 
-<<TEXT>>
-
-## 2. Assign the role for reporting ISMS performance to top management
+### Performance Reporting Role
 
 <<MUST item:5.3:performance_reporting>>
-_Clause 5.3(b) — performance reporting upward._
 
-The role who **delivers the ISMS performance pack to top management**.
-Often the same as MUST 1 (ISMS Manager); can be split when there's a
-dedicated ISMS reporting analyst.
+> _Standard text:_ Role assigned for reporting on ISMS performance
+> to top management (Clause 5.3b)
 
-**✓ Good**: "ISMS Manager. Frequency: quarterly to the ISMS Steering
-Committee, annually to the Board via the CEO. Report content
-defined in the ISMS Performance Reporting standard (link)."
+Who **delivers the ISMS performance pack to top management**. Often
+the same as Conformance Role; can be split when there's a dedicated
+ISMS reporting analyst.
+
+**✓ Good**: `ISMS Manager. Frequency: quarterly to ISMS Steering
+Committee, annually to the Board via the CEO. Report content per
+the ISMS Performance Reporting standard (link).`
 
 **✗ Avoid**: Unclear cadence or recipient.
 
-<<TEXT>>
-
-## 3. Document authorities for each role
+### Decision Authorities
 
 <<MUST item:5.3:authorities_assigned>>
-_Clause 5.3 — authorities assigned._
 
-Beyond responsibility, name the **decision rights** each role carries:
-who can approve risk acceptance? Who can authorise an exception?
-Who can suspend an asset from service?
+> _Standard text:_ Authorities assigned for each role (decision
+> rights, sign-off authority)
 
-**✓ Good** (table excerpt):
+For each decision-type, the named authority. Drives provisioning,
+incident response, risk acceptance.
 
-| Decision | Authority |
-|---|---|
-| Accept residual risk > target | ISMS Owner |
-| Approve risk treatment plan | ISMS Manager (proposes) + Risk Owners (ratify) |
-| Authorise control exceptions (time-limited) | CISO / DPO if PII |
-| Declare an information security incident | Incident Manager on call |
-| Approve emergency/break-glass access | Engineering Manager + retroactive DPO review |
+**Example rows** (fill out with your own):
+
+```
+Accept residual risk > target              → ISMS Owner
+Approve risk treatment plan                → ISMS Manager + Risk Owners
+Authorise control exceptions (time-bound)  → CISO / DPO if PII
+Declare an InfoSec incident                → Incident Manager on call
+Approve emergency/break-glass access       → Eng Manager + retro DPO review
+```
 
 **✗ Avoid**: Listing roles without saying what they can *decide*.
 
-<<TEXT>>
+---
 
-## 4. Communicate the matrix across the organisation
+## Document-level fields
+
+These are the **single-value** MUSTs — they don't belong in the
+decision-authority table above. Fill the narrative below.
+
+### Communication
 
 <<MUST item:5.3:communicated>>
-_Clause 5.3 — communicated within the organisation._
 
-Same expectation as 5.2: communication is a control, not an
-artefact-property. State how role-holders + their colleagues know
-who carries each responsibility.
+> _Standard text:_ Roles communicated within the organization
+> (Clause 5.3 — communicated)
 
-**✓ Good**: "Communication: (1) Always available at <intranet link>.
-(2) New joiners see the matrix in security induction. (3) When a
-role-holder changes, all-staff change-notice issued + matrix updated
-the same day (per the change-record sibling leaf)."
+How role-holders + their colleagues know who carries each
+responsibility. Communication is a control, not an
+artefact-property.
 
+<!-- EDIT-ZONE-START item:5.3:communicated -->
 <<TEXT>>
+<!-- EDIT-ZONE-END item:5.3:communicated -->
 
-## 5. Name the document owner
+### Owner
 
 <<MUST item:5.3:owner>>
-_Accountability — every controlled doc needs a named owner._
+
+> _Standard text:_ Named owner of the matrix (typically ISMS Manager)
 
 The **ISMS Manager** owns the matrix as an artefact (keeps it
-current). Top management approves it (carries weight). Don't confuse
-the two.
+current). Top management approves it (carries weight).
 
-**✓ Good**: "Document owner: ISMS Manager
-(<<ISMS_MANAGER_NAME>>). Approver: ISMS Owner (<<CEO_NAME>>).
-Review cadence: annual + on significant org change."
-
+<!-- EDIT-ZONE-START item:5.3:owner -->
 <<TEXT>>
+<!-- EDIT-ZONE-END item:5.3:owner -->
 
-## 6. Flag consistency with A.5.2 operational security roles
+### Consistency with A.5.2
 
 <<MUST item:5.3:a52_consistency>>
-_Cross-control coherence._
+
+> _Standard text:_ Consistency with A.5.2 operational security
+> roles flagged inline (cross-control coherence)
 
 The Clause 5.3 matrix (management-system altitude) and the A.5.2
-operational roles must not contradict each other — same person can't
-be both incident-on-call and the appeal authority for that incident,
-for example. Call out the cross-link.
+operational roles must not contradict each other. Call out the
+cross-link explicitly.
 
-**✓ Good**: "Consistency with A.5.2: The operational roles in A.5.2
-(Incident Manager, Vulnerability Owner, Asset Owner, etc.) are
-assigned per the Roles & Responsibilities standard (link). Each
-A.5.2 role names the Clause 5.3 person it reports to. Cross-checked
-at every annual review of either artefact."
-
+<!-- EDIT-ZONE-START item:5.3:a52_consistency -->
 <<TEXT>>
+<!-- EDIT-ZONE-END item:5.3:a52_consistency -->
 
 ---
 
-## Recommended additions
+## Recommended additional context
 
-### Link each role to a real org-chart position
+### Org-chart linkage
 
 <<SHOULD item:5.3:org_chart_link>>
-_Visibility — auditors and joiners trace ISMS roles to the people on
-the org chart._
+
+> _Standard text:_ Integration with the organizational chart (link
+> from each role to a real org-chart position)
 
 For each role, add a column or line that names the org-chart position
-that currently holds it (e.g. "ISMS Manager = VP Engineering's
-report → Information Security Lead"). When a role-holder leaves, this
-makes the gap obvious immediately.
-
-<<TEXT>>
+that currently holds it.

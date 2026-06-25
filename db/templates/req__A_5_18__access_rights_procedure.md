@@ -4,7 +4,7 @@ control_ref: A.5.18
 standard_id: ISO27001:2022
 evidence_type: procedure
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 8
 should_count: 3
 ---
@@ -62,6 +62,9 @@ You're producing the Access Rights Procedure required by **ISO/IEC
 ## 1. Require asset-owner authorisation before granting access
 
 <<MUST item:A.5.18:asset_owner_authorization>>
+
+> _Standard text:_ Asset owner authorization required before access is granted (named authoriser per asset class, not generic 'IT manager')
+
 _Authorisation point — the named authoriser per asset class is the
 gating decision, not a generic "IT manager"._
 
@@ -87,6 +90,9 @@ ask who exactly approved this and you can't say)."
 ## 2. Apply least privilege + segregation checks
 
 <<MUST item:A.5.18:least_privilege>>
+
+> _Standard text:_ Provisioning applies least privilege and segregation-of-duties checks (cross-link to A.5.3 segregation of duties — flagged combinations are blocked or compensated)
+
 _Procedural enforcement of A.5.15 principles — the procedure must
 block obvious violations + flag less obvious ones._
 
@@ -107,6 +113,9 @@ matrix."
 ## 3. Reference the A.5.15 policy
 
 <<MUST item:A.5.18:policy_reference>>
+
+> _Standard text:_ References the topic-specific access control policy (A.5.15) — drives consistency between policy and operational practice
+
 _Consistency — procedure should explicitly cite the policy it
 implements._
 
@@ -124,6 +133,9 @@ linkage (Section 7 of A.5.15) drives the conflict-check in MUST 2."
 ## 4. Define modification path (joiner-mover-leaver)
 
 <<MUST item:A.5.18:modification_path>>
+
+> _Standard text:_ Path for modification of access on role or responsibility change (joiner-mover-leaver flows; mover is the typically-missed leg)
+
 _Lifecycle flows — the MOVER leg is the most-missed; spell it out._
 
 Three lifecycles + the trigger for each. Mover is missed most often
@@ -142,6 +154,9 @@ Three lifecycles + the trigger for each. Mover is missed most often
 ## 5. Route privileged access through A.8.2
 
 <<MUST item:A.5.18:privileged_route>>
+
+> _Standard text:_ Privileged access requests route through the A.8.2 privileged-access process (separate intake, separate approval, separate logging)
+
 _Privileged access is a separate lane — separate intake, separate
 approval, separate logging._
 
@@ -163,6 +178,9 @@ approve privileged requests."
 ## 6. State SLA targets per operation
 
 <<MUST item:A.5.18:sla_targets>>
+
+> _Standard text:_ SLA targets stated per operation (grant within X days, modification within Y days, revocation within Z hours of trigger — drives the rev_sla_met flag on revocation_record)
+
 _Time targets — turn "we revoke access promptly" into "we revoke
 within 24h of the last-day event"._
 
@@ -182,6 +200,9 @@ reported at quarterly ISMS Steering Committee."
 ## 7. Handle service accounts / non-human identities
 
 <<MUST item:A.5.18:service_account_handling>>
+
+> _Standard text:_ Service account / non-human identity handling stated (provisioning, owner attribution, periodic re-attestation — service accounts are the weakest spot in most access programs)
+
 _Service accounts are typically the weakest lane — they get
 provisioned at integration time + forgotten._
 
@@ -203,6 +224,9 @@ A.5.17 (key rotation policy)."
 ## 8. Link every access right to a registered identity
 
 <<MUST item:A.5.18:identity_link>>
+
+> _Standard text:_ Explicit linkage to A.5.16 identity management (every access right attaches to a registered identity; no orphan access)
+
 _No orphan access — every grant binds to an A.5.16 identity record._
 
 State the policy + the enforcement mechanism.
@@ -222,6 +246,9 @@ discrepancies trigger A.5.18 program review."
 ### Temporary / time-bound access
 
 <<SHOULD item:A.5.18:temporary_access>>
+
+> _Standard text:_ Temporary access provisions for time-bound tasks or third parties (expiry date mandatory; automated revocation at expiry)
+
 _Auto-expiry mechanism for short-term needs (contractor stints,
 incident-response elevation, etc.)._
 
@@ -233,6 +260,9 @@ extension procedure if longer needed.
 ### Approval-record retention
 
 <<SHOULD item:A.5.18:approval_retention>>
+
+> _Standard text:_ Retention period for approval evidence stated (drives the audit trail for who-approved-what-when)
+
 _The approval-decision record is the audit artefact — retain it
 for the documented period._
 
@@ -243,6 +273,9 @@ Per A.5.33 records retention.
 ### Emergency / break-glass
 
 <<SHOULD item:A.5.18:emergency_access>>
+
+> _Standard text:_ Emergency-access ('break-glass') procedure stated separately (pre-approved accounts with mandatory post-use justification + audit)
+
 _Pairs with A.5.15's emergency provision — the procedure side._
 
 State break-glass mechanism + post-hoc review.

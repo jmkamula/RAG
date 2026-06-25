@@ -4,7 +4,7 @@ control_ref: 7.5
 standard_id: ISO27001:2022
 evidence_type: policy
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 6
 should_count: 2
 ---
@@ -57,6 +57,9 @@ corrective) AND any organisation-determined necessary information
 ## 1. List the ISO 27001-required documented information
 
 <<MUST item:7.5:iso_required_docs>>
+
+> _Standard text:_ ISO 27001:2022 required documented information enumerated
+
 _Clause 7.5.1(a) — required by ISO 27001._
 
 Enumerate the documents that the standard itself mandates. This is
@@ -78,6 +81,9 @@ Storage location + owner for each: see the ISMS Document Register
 ## 2. Identify org-determined necessary information
 
 <<MUST item:7.5:org_defined>>
+
+> _Standard text:_ Organisation-determined necessary documented information identified
+
 _Clause 7.5.1(b) — determined necessary by the organisation._
 
 Beyond the ISO-required minimum, what additional documents YOU
@@ -99,6 +105,9 @@ ISMS Document Register."
 ## 3. Define the creation + update process
 
 <<MUST item:7.5:creation_update>>
+
+> _Standard text:_ Creation and update process (identification, format, review, approval)
+
 _Clause 7.5.2 — creation, update, identification, review, approval._
 
 How a new document is created and approved; how an existing document
@@ -121,6 +130,9 @@ schedule. (6) Document Register updated by ISMS Manager same day."
 ## 4. Control distribution, access, retrieval, retention, disposition
 
 <<MUST item:7.5:control>>
+
+> _Standard text:_ Control of documented information (distribution, access, retrieval, retention, disposition)
+
 _Clause 7.5.3 — control of documented information._
 
 The five operational verbs. Cover each.
@@ -140,6 +152,9 @@ The five operational verbs. Cover each.
 ## 5. Protect against loss of legibility, integrity, unauthorised use
 
 <<MUST item:7.5:legibility>>
+
+> _Standard text:_ Protection from loss of legibility, loss of integrity, unauthorised use
+
 _Clause 7.5.3 — protection requirements._
 
 Three sub-protections: legibility (will it still be readable?),
@@ -160,6 +175,9 @@ audit results) restricted to need-to-know roles."
 ## 6. Control externally-originated documents
 
 <<MUST item:7.5:external_docs>>
+
+> _Standard text:_ Control of documented information of external origin determined necessary
+
 _Clause 7.5.3 — control external documents determined necessary._
 
 Documents you didn't author but rely on (ISO standards copies,
@@ -182,6 +200,9 @@ Document Register with source, version-as-of, owner."
 ### State document-format standards
 
 <<SHOULD item:7.5:format_standards>>
+
+> _Standard text:_ Format standards for ISMS documents (templates, naming)
+
 _Format consistency reduces friction in retrieval and audit._
 
 State preferred formats per document type (PDF for approved policies,
@@ -192,6 +213,9 @@ markdown for procedures, .xlsx for registers, etc.).
 ### Address accessibility
 
 <<SHOULD item:7.5:accessibility>>
+
+> _Standard text:_ Accessibility provisions for personnel needing documents
+
 _Documents need to be reachable when needed (consider on-call,
 incident response, disaster recovery)._
 

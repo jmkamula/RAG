@@ -4,7 +4,7 @@ control_ref: 5.2
 standard_id: ISO27001:2022
 evidence_type: policy
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 7
 should_count: 2
 ---
@@ -59,6 +59,9 @@ approval); **30 min** for annual refresh.
 ## 1. State how the policy fits the organisation's purpose
 
 <<MUST item:5.2:purpose>>
+
+> _Standard text:_ Appropriate to the purpose of the organisation
+
 _Clause 5.2(a) — appropriate to the purpose of the organisation._
 
 Connect the policy to **what your business does** and **why
@@ -80,6 +83,9 @@ nothing — every org "is committed.")
 ## 2. Set security objectives (or the framework for setting them)
 
 <<MUST item:5.2:objectives>>
+
+> _Standard text:_ Information security objectives or framework for setting them
+
 _Clause 5.2(b) — provides framework for setting objectives._
 
 State either current security objectives (concrete, measurable) or
@@ -102,6 +108,9 @@ protect", "best-in-class security").
 ## 3. Commit to satisfying applicable requirements
 
 <<MUST item:5.2:commitment_req>>
+
+> _Standard text:_ Commitment to satisfy applicable requirements
+
 _Clause 5.2(c) — commitment to applicable requirements._
 
 Acknowledge the regulatory, contractual, and standards obligations
@@ -124,6 +133,9 @@ commits to the discipline).
 ## 4. Commit to continual improvement
 
 <<MUST item:5.2:commitment_imp>>
+
+> _Standard text:_ Commitment to continual improvement of the ISMS
+
 _Clause 5.2(d) — commitment to continual improvement._
 
 The Clause 10.1 hook in the policy. Phrase as behaviour, not slogan
@@ -143,6 +155,9 @@ refresh as the threat landscape evolves."
 ## 5. Document top-management approval
 
 <<MUST item:5.2:approved>>
+
+> _Standard text:_ Approved by top management
+
 _Top-management commitment — the signature is the audit evidence._
 
 Signed approval by a named member of top management (CEO, CISO, or
@@ -160,6 +175,9 @@ no later than <<APPROVAL_DATE_PLUS_1_YEAR>>."
 ## 6. Communicate the policy across the organisation
 
 <<MUST item:5.2:communicated>>
+
+> _Standard text:_ Communicated within the organisation
+
 _Clause 5.2(f) — communication is part of the control._
 
 The policy isn't communicated by existing — a deliberate mechanism
@@ -182,6 +200,9 @@ communication — evidence that people received it is required).
 ## 7. Name the document owner
 
 <<MUST item:5.2:owner>>
+
+> _Standard text:_ Named owner of the policy (ISMS Manager)
+
 _Accountability — every controlled doc needs a named owner._
 
 The **ISMS Manager** (or equivalent) owns the artefact. Top
@@ -199,6 +220,9 @@ Reviewer: Data Protection & Risk Manager. Approver: <<CEO_NAME>>, CEO."
 ### Make the policy available to interested parties
 
 <<SHOULD item:5.2:available>>
+
+> _Standard text:_ Available to interested parties as appropriate
+
 _Clause 5.2(g) — available to interested parties as appropriate._
 
 If customers, regulators, or auditors are likely to request your
@@ -214,6 +238,9 @@ on request via <legal@>; provided to certification body during audit."
 ### State review frequency
 
 <<SHOULD item:5.2:review_date>>
+
+> _Standard text:_ Review date or frequency stated
+
 _Document-control discipline — required by Clause 7.5._
 
 Note next planned review date + conditions that trigger ad-hoc review

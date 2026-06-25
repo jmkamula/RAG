@@ -7,6 +7,7 @@ trigger_type: universal
 template_version: 2
 must_count: 9
 should_count: 3
+table_shape: hybrid
 ---
 
 # Records of Processing Activities (RoPA)
@@ -43,7 +44,7 @@ one-off document.
 ## Cross-references
 
 - **Art.32 Security Measures** — RoPA references the T&O measures
-  applied
+  applied (Art.32 register has the detail)
 - **Art.5.1.b Purpose Limitation** — purposes column enables
   enforcement
 - **Art.5.1.e Storage Limitation** — retention column enables
@@ -57,235 +58,225 @@ one-off document.
 ## Estimated effort
 
 **2-4 weeks** for v1 (data-flow discovery is the bulk); **ongoing
-operational cost** to maintain (each new activity, processor,
-purpose creates an RoPA row).
+operational cost** to maintain.
 
 ---
 
-> **Replace the placeholders below with your content. Leave the
-> MUST and SHOULD heading markers untouched — they bind this document
-> to the checklist when you upload it back.**
+## Per-activity table
 
-## 1. Record controller name + DPO contact
+This is the **per-processing-activity register**. One row per
+activity. Most MUSTs are per-row columns. Controller identity +
+processor-side records are document-level (filled below the table).
 
-<<MUST item:Art.30:controller_name>>
-_Art.30(1)(a) — identity of the controller, joint controllers,
-representative, DPO._
+<!-- TABLE-COLUMNS leaf:req:Art.30:records_of_processing -->
+<!-- column: item:Art.30:purposes -->
+<!-- column: item:Art.30:categories_ds -->
+<!-- column: item:Art.30:categories_data -->
+<!-- column: item:Art.30:recipients -->
+<!-- column: item:Art.30:transfers -->
+<!-- column: item:Art.30:retention -->
+<!-- column: item:Art.30:security -->
+<!-- /TABLE-COLUMNS -->
 
-State the legal entity name, registered address, DPO contact (if
-appointed), representative contact (if non-EU controller).
+<!-- EDIT-ZONE-START leaf:req:Art.30:records_of_processing -->
+| Purposes | Data Subjects | Data Categories | Recipients | Transfers + Safeguards | Retention | T&O Measures |
+|---|---|---|---|---|---|---|
+|          |               |                 |            |                        |           |              |
+|          |               |                 |            |                        |           |              |
+|          |               |                 |            |                        |           |              |
+<!-- EDIT-ZONE-END leaf:req:Art.30:records_of_processing -->
 
-**✓ Good**: "Controller: <<TENANT_NAME>>, <<TENANT_LEGAL_NAME>>
-Limited (registered office: <<REGISTERED_ADDRESS>>, company number
-<<COMPANY_NUMBER>>). DPO: <<DPO_NAME>>, contact dpo@<<TENANT_DOMAIN>>.
-Joint controllers (if applicable): listed per processing activity
-where joint relationship exists, with the Art.26 arrangement
-referenced. EU representative (if non-EU controller): not applicable
-— <<TENANT_NAME>> is EU-established."
+## Column guidance — what to fill in
 
-<<TEXT>>
-
-## 2. State purposes of processing per activity
+### Purposes
 
 <<MUST item:Art.30:purposes>>
-_Art.30(1)(b) — purposes of processing._
+
+> _Standard text:_ Purposes of the processing stated per activity
+> (Art.30(1)(b))
 
 Each activity row gets one or more purposes. Purposes must be
 specific, explicit, legitimate (Art.5.1.b).
 
-**✓ Good** (activity-row sample): "Activity: Customer-account
-management. Purposes: (1) Service delivery — operating the SaaS
-platform contracted to the customer. (2) Customer support —
-resolving service incidents. (3) Billing + revenue collection.
-(4) Account-security monitoring (Art.32 alignment). Lawful basis:
-contract (Art.6.1.b) for purposes 1-3; legitimate interest (Art.6.1.f
-+ Recital 49) for purpose 4 with documented LIA."
+**✓ Good**: `Customer account management — service delivery
+(Art.6.1.b contract); customer support (Art.6.1.b); billing
+(Art.6.1.b); security monitoring (Art.6.1.f LIA documented).`
 
-**✗ Avoid**: "Various business purposes" (purpose-limitation
-violation by definition).
+**✗ Avoid**: "Various business purposes" — purpose-limitation
+violation by definition.
 
-<<TEXT>>
-
-## 3. State categories of data subjects per activity
+### Data Subjects
 
 <<MUST item:Art.30:categories_ds>>
-_Art.30(1)(c) — categories of data subjects._
 
-Identify the subject categories per activity — not individual
-names, but defined classes.
+> _Standard text:_ Categories of data subjects per activity
+> (Art.30(1)(c))
 
-**✓ Good**: "Per-activity data-subject categories: Customer
-end-users (the people using customer instances); Customer admin
-users (the people managing customer instances); Prospective
-customers (sales leads); Employees + contractors of
-<<TENANT_NAME>>; Job applicants; Service-provider personnel (when
-direct-named in DPAs). Children: not knowingly processed — see
-A.6.3 + Art.8 stance."
+Defined classes, not individual names.
 
-<<TEXT>>
+**✓ Good**: `Customer end-users; Customer admin users; Prospective
+customers (sales leads); Employees + contractors of <<TENANT_NAME>>;
+Job applicants`
 
-## 4. State categories of personal data per activity
+**✗ Avoid**: "Users" alone — too broad.
+
+### Data Categories
 
 <<MUST item:Art.30:categories_data>>
-_Art.30(1)(c) — categories of personal data._
 
-Data categories, not raw field lists. Distinguish identifiers from
-behavioural data from special-category data.
+> _Standard text:_ Categories of personal data per activity
+> (Art.30(1)(c))
 
-**✓ Good**: "Per-activity data categories: (a) Identifiers (name,
-email, phone, work address). (b) Account-related (login identifier,
-password hash, MFA factor). (c) Usage / behavioural (action logs,
-session timestamps, IP, user-agent). (d) Service-content (data the
-end-user inputs into <<TENANT_NAME>> as part of using the service —
-processed under instruction per Art.28). (e) Communications
-(support tickets, sales emails). (f) Financial (billing contact,
-payment-instrument reference — full PAN handled by Stripe processor
-only, never by <<TENANT_NAME>>). Special category: not processed
-unless customer instance content includes it (covered by DPA
-restrictions)."
+Categories, not raw field lists. Distinguish identifiers from
+behavioural data from special-category.
 
-<<TEXT>>
+**✓ Good**: `Identifiers (name, email, phone); Account-related
+(login, password hash, MFA factor); Usage/behavioural (action logs,
+IPs); Service-content (instructed by customer per Art.28).`
 
-## 5. State categories of recipients per activity
+**✗ Avoid**: "Personal data" — too vague.
+
+### Recipients
 
 <<MUST item:Art.30:recipients>>
-_Art.30(1)(d) — recipients including processors._
 
-Internal recipients (departments / role classes) + external
-processors + third-party recipients.
+> _Standard text:_ Categories of recipients per activity (including
+> processors and third parties) (Art.30(1)(d))
 
-**✓ Good** (recipient table sample):
+Internal recipients + external processors + third-party recipients.
+Cross-link to A.5.20 supplier register.
 
-| Activity | Recipients |
-|---|---|
-| Customer account mgmt | Internal: customer success, support, finance. Processors: AWS (IaaS — DPA + SCC), Okta (identity), Stripe (billing — DPA + DPF) |
-| Marketing comms | Internal: marketing. Processors: HubSpot (CRM — DPA + SCC) |
-| HR / payroll | Internal: HR + finance. Processors: payroll provider (DPA, EU-hosted) |
-| Customer support | Internal: support. Processors: Zendesk (DPA + SCC) |
+**✓ Good**: `Internal: customer success, support, finance.
+Processors: AWS (DPA + SCC), Okta (identity), Stripe (billing — DPF).`
 
-<<TEXT>>
+**✗ Avoid**: "Service providers" without naming them.
 
-## 6. State third-country transfers + safeguards
+### Transfers + Safeguards
 
 <<MUST item:Art.30:transfers>>
-_Art.30(1)(e) — international transfers + safeguards._
 
-Per activity: which transfers occur, to where, on what
-Art.45-49 basis.
+> _Standard text:_ Transfers to third countries or international
+> organisations with safeguards identified (Art.30(1)(e))
 
-**✓ Good** (transfer table sample):
+Per row: which transfers occur, to where, on what Art.45-49 basis.
 
-| Activity / Recipient | Destination | Mechanism |
-|---|---|---|
-| AWS (IaaS) | eu-west-1 / eu-west-2 primary; us-east-1 for DR-only | EU residency primary; SCC + supplementary measures per Schrems II for any rare US fallback |
-| Okta (identity) | EU pod (Frankfurt) | EU residency; SCC stand-by |
-| Stripe (billing) | US | EU-US DPF certified; SCC stand-by |
-| HubSpot (CRM) | US | EU-US DPF certified |
-| Zendesk (support) | EU pod | EU residency; SCC stand-by |
+**✓ Good**: `AWS eu-west-1 (EU residency); Okta EU pod
+(Frankfurt); Stripe US (DPF + SCC stand-by). No transfers to
+non-adequacy countries without Art.46 + TIA per EDPB 01/2020.`
 
-No transfers to non-adequacy countries without explicit
-Art.46 safeguards + TIA per EDPB 01/2020.
+**✗ Avoid**: "Global processors" without per-vendor breakdown.
 
-<<TEXT>>
-
-## 7. State retention periods per category
+### Retention
 
 <<MUST item:Art.30:retention>>
-_Art.30(1)(f) — envisaged time limits for erasure._
 
-Per data category (or activity) — when does deletion happen?
-Cross-link to A.5.33 retention schedule.
+> _Standard text:_ Envisaged time limits for erasure per category
+> (Art.30(1)(f))
 
-**✓ Good** (retention sample):
+When does deletion happen? Cross-link to A.5.33 retention schedule.
 
-| Category | Retention | Trigger |
-|---|---|---|
-| Customer account identifiers | Duration of contract + 7 years (records / tax) | Contract end |
-| Customer usage logs | 13 months rolling | Time-based |
-| Customer service-content | Per customer DPA (default: 30 days post-termination, then deletion confirmed in writing) | Contract end + grace |
-| Marketing prospect data | 24 months from last engagement | Inactivity |
-| Job applicant data (unsuccessful) | 12 months | Decision date |
-| Employee HR data | Duration of employment + 7 years | Employment end |
-| Support tickets | 5 years | Closure date |
-| Billing / financial records | 7 years (statutory) | Record date |
+**✓ Good**: `Customer account: contract end + 7y (tax). Usage logs:
+13 months rolling. Service-content: per customer DPA (30d post-term
+default). Marketing prospect: 24 months from last engagement.`
 
-Cross-link to A.5.33 records retention schedule for the
-authoritative source.
+**✗ Avoid**: "Indefinite" — fails storage-limitation (Art.5.1.e).
 
-<<TEXT>>
-
-## 8. State technical + organisational security measures
+### T&O Measures
 
 <<MUST item:Art.30:security>>
-_Art.30(1)(g) — general description of T&O measures (Art.32)._
 
-General description — the detail lives in Art.32
-risk_appropriate_measures_register; this is the summary.
+> _Standard text:_ General description of technical and
+> organisational security measures (Art.32) (Art.30(1)(g))
 
-**✓ Good**: "General T&O measures: (a) Encryption at rest (AES-256
-on storage; envelope encryption for sensitive data) + in transit
-(TLS 1.2+ baseline, 1.3 preferred). (b) Access control per
-A.5.15-18: RBAC default, MFA mandatory, quarterly privileged
-review. (c) Logging + monitoring per A.8.15 — write-only immutable
-sink; 90-day hot, 6-year cold. (d) Backups per A.8.13 — encrypted,
-geo-redundant, tested restore quarterly. (e) Incident response per
-A.5.24 with GDPR Art.33 72h SLA. (f) Supplier discipline per
-A.5.19-23. (g) Training per A.6.3 with privacy module mandatory.
-(h) DPO + privacy team operating per A.5.34. Full register: Art.32
-risk_appropriate_measures_register."
+General description — detail lives in Art.32
+risk_appropriate_measures_register. This is the summary.
 
-<<TEXT>>
+**✓ Good**: `Encryption at rest (AES-256) + in transit (TLS 1.2+);
+RBAC + MFA per A.5.15-18; audit logging A.8.15; backup A.8.13; IR
+per A.5.24 with GDPR Art.33 72h SLA; full register at Art.32.`
 
-## 9. Include processor-side records if applicable
-
-<<MUST item:Art.30:processor_records>>
-_Art.30(2) — if you act as processor for others, the Art.30(2)
-parallel register applies._
-
-If <<TENANT_NAME>> processes data on behalf of customers (as a
-processor), you also maintain Art.30(2) records per controller you
-serve.
-
-**✓ Good**: "<<TENANT_NAME>> acts as processor for customer
-instances of the SaaS product. The Art.30(2) processor-side
-register is maintained separately, with one row per customer
-controller, capturing: (a) controller identity + DPO contact; (b)
-categories of processing on their behalf; (c) cross-border
-transfers within the processing (we are EU-hosted by default);
-(d) general T&O measures. Customer DPAs serve as the
-authoritative cross-reference."
-
-<<TEXT>>
+**✗ Avoid**: "Appropriate measures" — vague.
 
 ---
 
-## Recommended additions
+## Document-level fields
 
-### Maintenance procedure cross-link
+### Controller + DPO Identity
+
+<<MUST item:Art.30:controller_name>>
+
+> _Standard text:_ Name and contact details of controller (and DPO/
+> representative where appointed) (Art.30(1)(a))
+
+Legal entity, registered address, DPO contact, representative contact
+if non-EU controller.
+
+**✓ Good**:
+```
+Controller: <<TENANT_NAME>> Limited
+Registered office: <<REGISTERED_ADDRESS>>
+Company number: <<COMPANY_NUMBER>>
+DPO: <<DPO_NAME>>, dpo@<<TENANT_DOMAIN>>
+Joint controllers: [list per activity where applicable, with Art.26
+  arrangement referenced]
+EU representative: N/A (EU-established)
+```
+
+<!-- EDIT-ZONE-START item:Art.30:controller_name -->
+<<TEXT>>
+<!-- EDIT-ZONE-END item:Art.30:controller_name -->
+
+### Processor-side Records (if applicable)
+
+<<MUST item:Art.30:processor_records>>
+
+> _Standard text:_ If the org also acts as processor, processor-side
+> records per Art.30.2.a-d are included or kept as a parallel
+> register
+
+If <<TENANT_NAME>> processes data on behalf of customers, the
+Art.30(2) processor-side register applies — one row per controller
+served, capturing controller identity + processing categories +
+transfers + T&O measures.
+
+**✓ Good**: `<<TENANT_NAME>> acts as processor for customer instances
+of the SaaS. Art.30(2) register maintained separately, with one row
+per customer controller. Customer DPAs serve as the authoritative
+cross-reference.`
+
+<!-- EDIT-ZONE-START item:Art.30:processor_records -->
+<<TEXT>>
+<!-- EDIT-ZONE-END item:Art.30:processor_records -->
+
+---
+
+## Recommended additional context
+
+### Maintenance Procedure Reference
 
 <<SHOULD item:Art.30:maintained>>
-_Pair with the Art.30 ropa_maintenance_procedure sibling leaf._
 
-State that the RoPA is maintained per the documented procedure.
+> _Standard text:_ Pair with the Art.30 ropa_maintenance_procedure
+> sibling leaf
 
-<<TEXT>>
+State that the RoPA is maintained per the documented procedure
+(ropa_maintenance_procedure leaf).
 
-### Availability commitment
+### Availability Commitment
 
 <<SHOULD item:Art.30:availability>>
-_Art.30(4) — made available to the supervisory authority on request._
 
-State the SLA for making the RoPA available (typically immediate
-electronic transfer).
+> _Standard text:_ Art.30(4) — made available to the supervisory
+> authority on request
 
-<<TEXT>>
+SLA for making the RoPA available (typically immediate electronic
+transfer).
 
-### Register versioning
+### Register Versioning
 
 <<SHOULD item:Art.30:reg_versioning>>
-_Version + changelog — auditors want to see this evolves with
-the business._
+
+> _Standard text:_ Version + changelog — auditors want to see this
+> evolves with the business
 
 Standard versioning + change-log columns on each row.
-
-<<TEXT>>

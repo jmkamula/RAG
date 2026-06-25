@@ -4,7 +4,7 @@ control_ref: A.5.24
 standard_id: ISO27001:2022
 evidence_type: procedure
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 9
 should_count: 3
 ---
@@ -61,6 +61,9 @@ exercise cost (annual tabletop minimum, often quarterly).
 ## 1. Define roles + responsibilities
 
 <<MUST item:A.5.24:roles>>
+
+> _Standard text:_ Roles and responsibilities defined (IR lead, deputies, comms lead, legal liaison, exec sponsor; named individuals or stable roles, not 'TBD')
+
 _Named roles — incidents don't wait for "we'll figure out who's
 in charge"._
 
@@ -83,6 +86,9 @@ rotate — role definitions stable."
 ## 2. Define detection + reporting process
 
 <<MUST item:A.5.24:detection>>
+
+> _Standard text:_ Detection and reporting process (where reports come from — A.5.25 triage, monitoring/SOC, user reports, supplier notifications, A.5.7 threat intel)
+
 _Where reports come from — A.5.25 triage feeds; monitoring/SOC;
 user reports; supplier notifications; A.5.7 threat intel._
 
@@ -103,6 +109,9 @@ exec sponsor."
 ## 3. Define assessment + classification
 
 <<MUST item:A.5.24:assessment>>
+
+> _Standard text:_ Incident assessment and classification criteria (severity tiers; what triggers each tier; alignment with A.5.25 triage decision criteria)
+
 _Severity tiers — drive the response intensity + notification
 obligations._
 
@@ -126,6 +135,9 @@ between tiers as the investigation evolves.
 ## 4. Define response + escalation
 
 <<MUST item:A.5.24:response>>
+
+> _Standard text:_ Response and escalation procedures (decision authority per severity tier; out-of-hours handling; cross-team coordination)
+
 _Per-severity response playbook + escalation authority._
 
 State who decides what at each tier + the time SLAs.
@@ -146,6 +158,9 @@ decision."
 ## 5. Determine whether a personal-data breach occurred
 
 <<MUST item:A.5.24:personal_data>>
+
+> _Standard text:_ Step to determine if personal data breach occurred (DPIA-aware classification, controller/processor analysis)
+
 _GDPR alignment — every incident assessed for personal-data
 implications. This is the 72h clock trigger._
 
@@ -164,6 +179,9 @@ data. If breach: the 72h clock starts at the moment of awareness
 ## 6. Define notification process for personal-data breaches
 
 <<MUST item:A.5.24:notification>>
+
+> _Standard text:_ Notification process for personal data breaches (supervisory authority < 72h; data subjects when high-risk; notification content per Art.33(3))
+
 _GDPR Art.33 (supervisory authority < 72h) + Art.34 (data subjects
 when high-risk)._
 
@@ -188,6 +206,9 @@ public notice fallback if direct impractical."
 ## 7. Mandate evidence collection + preservation
 
 <<MUST item:A.5.24:evidence>>
+
+> _Standard text:_ Evidence collection and preservation requirements (cross-link to A.5.28 evidence-handling procedure; chain-of-custody mandatory from initiation)
+
 _Chain-of-custody from initiation — late evidence preservation
 loses cases._
 
@@ -208,6 +229,9 @@ retention: 6 years for Sev 1-2 closure records."
 ## 8. State exercise + test cadence
 
 <<MUST item:A.5.24:exercise_cadence>>
+
+> _Standard text:_ Exercise / test cadence stated explicitly (annual minimum, more frequent for high-risk org; promoted from SHOULD because untested plans degrade)
+
 _Untested plans degrade — this is required, not optional._
 
 State the cadence + the test types.
@@ -227,6 +251,9 @@ improvement actions."
 ## 9. Define external communication paths
 
 <<MUST item:A.5.24:communications>>
+
+> _Standard text:_ External communication paths (regulator, legal, PR, law enforcement) with thresholds and named owners
+
 _Regulator, legal, PR, law enforcement — pre-built channels prevent
 ad-hoc panic decisions._
 
@@ -253,6 +280,9 @@ shared without specifics 3-6 months post-resolution."
 ### Lessons-learned cross-link
 
 <<SHOULD item:A.5.24:lessons>>
+
+> _Standard text:_ Lessons learned process (cross-link to A.5.27 lessons register; how lessons feed back into framework revisions)
+
 _A.5.27 hook — every Sev 1-2 incident produces a lessons-learned
 output._
 
@@ -263,6 +293,9 @@ State the trigger + the artefact location.
 ### Authority + sector contact register
 
 <<SHOULD item:A.5.24:contacts>>
+
+> _Standard text:_ External contact list maintained (regulator, legal counsel, PR firm, forensic specialists, CSP support) with rotation review
+
 _Cross-link to A.5.5 + A.5.6 — your contacts must be current
 BEFORE you need them._
 
@@ -273,6 +306,9 @@ State that contacts are maintained + reviewed quarterly.
 ### Supplier-side incident path
 
 <<SHOULD item:A.5.24:supplier_path>>
+
+> _Standard text:_ Supplier-driven incident path documented (A.5.21 supplier-side incidents trigger our framework even when we're not directly hit)
+
 _Cross-link to A.5.19 incident_joint_mgmt — bi-directional path._
 
 State that supplier-side incidents flow through the same procedure

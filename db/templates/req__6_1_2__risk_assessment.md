@@ -4,7 +4,7 @@ control_ref: 6.1.2
 standard_id: ISO27001:2022
 evidence_type: risk_assessment
 trigger_type: universal
-template_version: 2
+template_version: 3
 must_count: 8
 should_count: 2
 ---
@@ -62,6 +62,9 @@ for the first full run of the procedure to build the live register.
 ## 1. Define risk acceptance criteria
 
 <<MUST item:6.1.2:criteria>>
+
+> _Standard text:_ Risk acceptance criteria defined
+
 _Clause 6.1.2(a) — criteria for accepting risks._
 
 State the thresholds for **what risk levels are acceptable** without
@@ -83,6 +86,9 @@ register with the accepting role, date, and review date."
 ## 2. Make results consistent and comparable
 
 <<MUST item:6.1.2:consistency>>
+
+> _Standard text:_ Consistent and comparable results produced
+
 _Clause 6.1.2(b) — produces consistent, valid and comparable results._
 
 The procedure must say *how* different assessors will reach similar
@@ -105,6 +111,9 @@ assessors will pick different numbers).
 ## 3. Identify CIA risks
 
 <<MUST item:6.1.2:identification>>
+
+> _Standard text:_ Risks to confidentiality, integrity and availability identified
+
 _Clause 6.1.2(c) — risks to confidentiality, integrity, availability._
 
 State the **identification techniques** — asset-based, threat-based,
@@ -125,6 +134,9 @@ each risk."
 ## 4. Identify risk owners
 
 <<MUST item:6.1.2:owners>>
+
+> _Standard text:_ Risk owners identified
+
 _Clause 6.1.2(c) — risk owners identified._
 
 Every risk in the register has **one named owner** with authority to
@@ -147,6 +159,9 @@ ownership defeats the point of distributed risk management).
 ## 5. Analyse potential consequences
 
 <<MUST item:6.1.2:consequences>>
+
+> _Standard text:_ Potential consequences analysed
+
 _Clause 6.1.2(d) — potential consequences analysed._
 
 For each risk, the consequence dimensions you analyse and how you
@@ -166,6 +181,9 @@ damage per GDPR Recital 75)."
 ## 6. Assess realistic likelihood
 
 <<MUST item:6.1.2:likelihood>>
+
+> _Standard text:_ Realistic likelihood assessed
+
 _Clause 6.1.2(d) — realistic likelihood assessed._
 
 Likelihood is your most-cited audit weakness. State the data sources
@@ -183,6 +201,9 @@ rationale is recorded in the register cell."
 ## 7. Evaluate risks against acceptance criteria
 
 <<MUST item:6.1.2:evaluation>>
+
+> _Standard text:_ Risks evaluated against acceptance criteria
+
 _Clause 6.1.2(e) — evaluated against the criteria from MUST 1._
 
 This MUST closes the loop: each assessed risk has a clear
@@ -199,6 +220,9 @@ between zones at re-assessment trigger a treatment-plan review."
 ## 8. Address personal-data processing risks explicitly
 
 <<MUST item:6.1.2:personal_data>>
+
+> _Standard text:_ Personal data processing risks explicitly addressed
+
 _GDPR alignment — Art.32 requires risk-based T&O measures, Art.35
 requires DPIA for high-risk processing._
 
@@ -224,6 +248,9 @@ personal-data risks."
 ### Reference the methodology you base this on
 
 <<SHOULD item:6.1.2:methodology>>
+
+> _Standard text:_ Methodology documented (ISO 31000, NIST SP 800-30, or equivalent)
+
 _Repeatability — readers should be able to trace your approach to a
 recognised methodology._
 
@@ -235,6 +262,9 @@ or FAIR. Name yours + cite where your adaptations diverge.
 ### State assessment date + next review date
 
 <<SHOULD item:6.1.2:date>>
+
+> _Standard text:_ Assessment date and next review date
+
 _Document-control discipline — required by Clause 7.5._
 
 Standard top-of-document metadata.
