@@ -8,72 +8,94 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 2
+table_shape: true
 ---
 
 # Periodic Lessons-Learned Program Review
 
 > The lessons program creates value only if it closes the loop — actions actually get done, lessons reduce repeat incidents, and the patterns drive systemic improvements. The review captures the planned-interval check: action-closure rate, repeat-incident detection, training-impact evidence, feedback-loop effectiveness and resulting program adjustments
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.27:lessons_program_review -->
+<!-- column: item:A.5.27:rev_date -->
+<!-- column: item:A.5.27:rev_reviewer -->
+<!-- column: item:A.5.27:rev_closure_rate -->
+<!-- column: item:A.5.27:rev_repeat -->
+<!-- column: item:A.5.27:rev_training_impact -->
+<!-- column: item:A.5.27:rev_actions -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.27:lessons_program_review -->
+| Rev Date | Rev Reviewer | Rev Closure Rate | Rev Repeat | Rev Training Impact | Rev Actions |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.27:lessons_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.5.27:rev_date>>
 _Why: 27002:5.27 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (program owner + InfoSec lead jointly)
+### Rev Reviewer
 
 <<MUST item:A.5.27:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (program owner + InfoSec lead jointly)
 
-## 3. Action-closure rate analysed (open / aged / closed) against targets
+### Rev Closure Rate
 
 <<MUST item:A.5.27:rev_closure_rate>>
 _Why: 27002:5.27a_
 
-<<TEXT>>
+> _Standard text:_ Action-closure rate analysed (open / aged / closed) against targets
 
-## 4. Repeat-incident analysis (lessons that should have prevented later incidents — did they?)
+### Rev Repeat
 
 <<MUST item:A.5.27:rev_repeat>>
 _Why: 27002:5.27a,e_
 
-<<TEXT>>
+> _Standard text:_ Repeat-incident analysis (lessons that should have prevented later incidents — did they?)
 
-## 5. Training-impact evidence reviewed where lessons drove curriculum changes
+### Rev Training Impact
 
 <<MUST item:A.5.27:rev_training_impact>>
 _Why: 27002:5.27d_
 
-<<TEXT>>
+> _Standard text:_ Training-impact evidence reviewed where lessons drove curriculum changes
 
-## 6. Action items captured for the program (e.g. tighten root-cause typing, expand pattern scope)
+### Rev Actions
 
 <<MUST item:A.5.27:rev_actions>>
 _Why: 27002:5.27_
 
-<<TEXT>>
+> _Standard text:_ Action items captured for the program (e.g. tighten root-cause typing, expand pattern scope)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. External benchmark or industry-practice input considered
+### Rev Benchmark
 
 <<SHOULD item:A.5.27:rev_benchmark>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ External benchmark or industry-practice input considered
 
-### 2. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.5.27:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

@@ -8,58 +8,79 @@ freshness_days: 180
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Treatment Execution Program Review
 
 > Semi-annual verification that the plan is being executed on schedule, slipping items get escalated, completed items had residual risk re-affirmed (freshness=180 — operational tempo)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:8.3:treatment_execution_program_review -->
+<!-- column: item:8.3:rev_date -->
+<!-- column: item:8.3:rev_reviewer -->
+<!-- column: item:8.3:rev_progress -->
+<!-- column: item:8.3:rev_residual_revisit -->
+<!-- column: item:8.3:rev_soa_currency -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:8.3:treatment_execution_program_review -->
+| Rev Date | Rev Reviewer | Rev Progress | Rev Residual Revisit | Rev Soa Currency |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:8.3:treatment_execution_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:8.3:rev_date>>
 _Why: Clause 8.3 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (Risk Manager + ISMS Manager + ops lead)
+### Rev Reviewer
 
 <<MUST item:8.3:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (Risk Manager + ISMS Manager + ops lead)
 
-## 3. Progress check — every active plan item status updated; on-track vs slipping called out
+### Rev Progress
 
 <<MUST item:8.3:rev_progress>>
 _Why: Effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Progress check — every active plan item status updated; on-track vs slipping called out
 
-## 4. Residual revisit check — completed items had owner re-affirm residual; divergent residuals escalated
+### Rev Residual Revisit
 
 <<MUST item:8.3:rev_residual_revisit>>
 _Why: Clause 8.3 — results_
 
-<<TEXT>>
+> _Standard text:_ Residual revisit check — completed items had owner re-affirm residual; divergent residuals escalated
 
-## 5. SoA currency check — newly implemented controls reflected in the SoA (6.1.3 leaf)
+### Rev Soa Currency
 
 <<MUST item:8.3:rev_soa_currency>>
 _Why: Cross-clause coherence_
 
-<<TEXT>>
+> _Standard text:_ SoA currency check — newly implemented controls reflected in the SoA (6.1.3 leaf)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:8.3:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

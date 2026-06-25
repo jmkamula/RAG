@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Automated Decision-Making Register
 
 > Per-decision-system record (NOT per individual decision) for every solely-automated decision system in scope. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.22:automated_decision_register -->
+<!-- column: item:Art.22:reg_system_id -->
+<!-- column: item:Art.22:reg_decisions_made -->
+<!-- column: item:Art.22:reg_art22_2_basis -->
+<!-- column: item:Art.22:reg_safeguards -->
+<!-- column: item:Art.22:reg_dpia_link -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. System / model identifier per row
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.22:automated_decision_register -->
+| Reg System Id | Reg Decisions Made | Reg Art22 2 Basis | Reg Safeguards | Reg Dpia Link |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.22:automated_decision_register -->
+
+## Column guidance — what to fill in
+
+### Reg System Id
 
 <<MUST item:Art.22:reg_system_id>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ System / model identifier per row
 
-## 2. Decision categories made (loan approval, employment screening, pricing, etc.)
+### Reg Decisions Made
 
 <<MUST item:Art.22:reg_decisions_made>>
 _Why: Defining scope_
 
-<<TEXT>>
+> _Standard text:_ Decision categories made (loan approval, employment screening, pricing, etc.)
 
-## 3. Art.22.2 basis cited per row (contract / MS law / explicit consent)
+### Reg Art22 2 Basis
 
 <<MUST item:Art.22:reg_art22_2_basis>>
 _Why: Art.22.2_
 
-<<TEXT>>
+> _Standard text:_ Art.22.2 basis cited per row (contract / MS law / explicit consent)
 
-## 4. Per-row Art.22.3 safeguards in place (human intervention queue, contest UI, model explanation)
+### Reg Safeguards
 
 <<MUST item:Art.22:reg_safeguards>>
 _Why: Art.22.3_
 
-<<TEXT>>
+> _Standard text:_ Per-row Art.22.3 safeguards in place (human intervention queue, contest UI, model explanation)
 
-## 5. Per-row DPIA reference (Art.35 nearly always triggered for Art.22)
+### Reg Dpia Link
 
 <<MUST item:Art.22:reg_dpia_link>>
 _Why: Art.35.3.a_
 
-<<TEXT>>
+> _Standard text:_ Per-row DPIA reference (Art.35 nearly always triggered for Art.22)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row objection count (Art.22-related rights requests this period)
+### Reg Objection Count
 
 <<SHOULD item:Art.22:reg_objection_count>>
 _Why: Operational visibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row objection count (Art.22-related rights requests this period)

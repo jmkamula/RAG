@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Rights Request Register
 
 > Per-request record covering EVERY data subject right exercise (Art.15-22). Centralised log — drives Art.12.3 SLA tracking. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.12:rights_request_register -->
+<!-- column: item:Art.12:reg_request_id -->
+<!-- column: item:Art.12:reg_right_type -->
+<!-- column: item:Art.12:reg_request_date -->
+<!-- column: item:Art.12:reg_response_date -->
+<!-- column: item:Art.12:reg_outcome -->
+<!-- column: item:Art.12:reg_sla_met -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Unique request identifier per row
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.12:rights_request_register -->
+| Reg Request Id | Reg Right Type | Reg Request Date | Reg Response Date | Reg Outcome | Reg Sla Met |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.12:rights_request_register -->
+
+## Column guidance — what to fill in
+
+### Reg Request Id
 
 <<MUST item:Art.12:reg_request_id>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Unique request identifier per row
 
-## 2. Per-row right type (Art.15 access / Art.16 rectification / Art.17 erasure / Art.18 restriction / Art.20 portability / Art.21 objection / Art.22 automated)
+### Reg Right Type
 
 <<MUST item:Art.12:reg_right_type>>
 _Why: Cross-article coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-row right type (Art.15 access / Art.16 rectification / Art.17 erasure / Art.18 restriction / Art.20 portability / Art.21 objection / Art.22 automated)
 
-## 3. Per-row request received date
+### Reg Request Date
 
 <<MUST item:Art.12:reg_request_date>>
 _Why: SLA tracking_
 
-<<TEXT>>
+> _Standard text:_ Per-row request received date
 
-## 4. Per-row response sent date (or extension notice date)
+### Reg Response Date
 
 <<MUST item:Art.12:reg_response_date>>
 _Why: Art.12.3 SLA_
 
-<<TEXT>>
+> _Standard text:_ Per-row response sent date (or extension notice date)
 
-## 5. Per-row outcome (fulfilled / partial / refused with grounds / extended)
+### Reg Outcome
 
 <<MUST item:Art.12:reg_outcome>>
 _Why: Audit clarity_
 
-<<TEXT>>
+> _Standard text:_ Per-row outcome (fulfilled / partial / refused with grounds / extended)
 
-## 6. Per-row SLA-met flag (one month or notified extension)
+### Reg Sla Met
 
 <<MUST item:Art.12:reg_sla_met>>
 _Why: Art.12.3 — timeliness_
 
-<<TEXT>>
+> _Standard text:_ Per-row SLA-met flag (one month or notified extension)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row identity verification method used
+### Reg Identity Method
 
 <<SHOULD item:Art.12:reg_identity_method>>
 _Why: Art.12.6 audit_
 
-<<TEXT>>
+> _Standard text:_ Per-row identity verification method used

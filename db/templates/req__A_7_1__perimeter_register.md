@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Per-Site Perimeter Register
 
 > The catalogue of perimeters across all sites — site identifier, perimeter id, area classification, barrier inventory, access-point list, owner. Drives 'show me every site has a defined perimeter' completeness check
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.7.1:perimeter_register -->
+<!-- column: item:A.7.1:reg_site_id -->
+<!-- column: item:A.7.1:reg_perimeter_id -->
+<!-- column: item:A.7.1:reg_classification -->
+<!-- column: item:A.7.1:reg_barriers -->
+<!-- column: item:A.7.1:reg_last_assessed -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Site identifier per perimeter row (HQ, regional offices, data centres, co-locations)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.7.1:perimeter_register -->
+| Reg Site Id | Reg Perimeter Id | Reg Classification | Reg Barriers | Reg Last Assessed |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.7.1:perimeter_register -->
+
+## Column guidance — what to fill in
+
+### Reg Site Id
 
 <<MUST item:A.7.1:reg_site_id>>
 _Why: 27002:7.1 — defined_
 
-<<TEXT>>
+> _Standard text:_ Site identifier per perimeter row (HQ, regional offices, data centres, co-locations)
 
-## 2. Perimeter identifier per row (a site may have multiple perimeters — outer + inner + secure-room)
+### Reg Perimeter Id
 
 <<MUST item:A.7.1:reg_perimeter_id>>
 _Why: 27002:7.1 — security perimeters_
 
-<<TEXT>>
+> _Standard text:_ Perimeter identifier per row (a site may have multiple perimeters — outer + inner + secure-room)
 
-## 3. Area classification per row (matches policy's classification scheme)
+### Reg Classification
 
 <<MUST item:A.7.1:reg_classification>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Area classification per row (matches policy's classification scheme)
 
-## 4. Barriers in place per row (specific barrier inventory — what walls, what doors, what mechanisms)
+### Reg Barriers
 
 <<MUST item:A.7.1:reg_barriers>>
 _Why: 27002:7.1 — used to protect_
 
-<<TEXT>>
+> _Standard text:_ Barriers in place per row (specific barrier inventory — what walls, what doors, what mechanisms)
 
-## 5. Last assessment date per row (drives staleness detection)
+### Reg Last Assessed
 
 <<MUST item:A.7.1:reg_last_assessed>>
 _Why: 27002:7.1 — maintained_
 
-<<TEXT>>
+> _Standard text:_ Last assessment date per row (drives staleness detection)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Remediation log per row where barriers fall short of classification requirements
+### Reg Remediation
 
 <<SHOULD item:A.7.1:reg_remediation>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Remediation log per row where barriers fall short of classification requirements

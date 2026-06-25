@@ -8,65 +8,86 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 2
+table_shape: true
 ---
 
 # ISMS Communication Event Register
 
 > Per-communication record — what was communicated, when, to whom, via what channel, with what acknowledgement. The proof communications actually happened, not just planned. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:7.4:communication_event_register -->
+<!-- column: item:7.4:reg_event_id -->
+<!-- column: item:7.4:reg_topic -->
+<!-- column: item:7.4:reg_audience -->
+<!-- column: item:7.4:reg_channel -->
+<!-- column: item:7.4:reg_date -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Unique event identifier per row
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:7.4:communication_event_register -->
+| Reg Event Id | Reg Topic | Reg Audience | Reg Channel | Reg Date |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:7.4:communication_event_register -->
+
+## Column guidance — what to fill in
+
+### Reg Event Id
 
 <<MUST item:7.4:reg_event_id>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Unique event identifier per row
 
-## 2. Per-row topic (matches procedure 'what' catalog)
+### Reg Topic
 
 <<MUST item:7.4:reg_topic>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-row topic (matches procedure 'what' catalog)
 
-## 3. Per-row audience (which internal group / external party)
+### Reg Audience
 
 <<MUST item:7.4:reg_audience>>
 _Why: Clause 7.4 c)_
 
-<<TEXT>>
+> _Standard text:_ Per-row audience (which internal group / external party)
 
-## 4. Per-row channel used
+### Reg Channel
 
 <<MUST item:7.4:reg_channel>>
 _Why: Clause 7.4 d)_
 
-<<TEXT>>
+> _Standard text:_ Per-row channel used
 
-## 5. Per-row date / time of communication
+### Reg Date
 
 <<MUST item:7.4:reg_date>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-row date / time of communication
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row acknowledgement evidence where required (read-receipt, attendance log, signed receipt)
+### Reg Ack
 
 <<SHOULD item:7.4:reg_ack>>
 _Why: Closure proof_
 
-<<TEXT>>
+> _Standard text:_ Per-row acknowledgement evidence where required (read-receipt, attendance log, signed receipt)
 
-### 2. Per-row sender / responsible person
+### Reg Sender
 
 <<SHOULD item:7.4:reg_sender>>
 _Why: Accountability — log-shape registers_
 
-<<TEXT>>
+> _Standard text:_ Per-row sender / responsible person

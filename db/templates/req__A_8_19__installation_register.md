@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Software Installation Register
 
 > Per-installation record — what was installed, when, where, by whom, verification artefact
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.19:installation_register -->
+<!-- column: item:A.8.19:reg_install_id -->
+<!-- column: item:A.8.19:reg_software -->
+<!-- column: item:A.8.19:reg_target -->
+<!-- column: item:A.8.19:reg_actor -->
+<!-- column: item:A.8.19:reg_verification -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-install unique identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.19:installation_register -->
+| Reg Install Id | Reg Software | Reg Target | Reg Actor | Reg Verification |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.19:installation_register -->
+
+## Column guidance — what to fill in
+
+### Reg Install Id
 
 <<MUST item:A.8.19:reg_install_id>>
 _Why: Auditability_
 
-<<TEXT>>
+> _Standard text:_ Per-install unique identifier
 
-## 2. Per-install software name + version + source (from approved list)
+### Reg Software
 
 <<MUST item:A.8.19:reg_software>>
 _Why: 27002:8.19 — securely manage_
 
-<<TEXT>>
+> _Standard text:_ Per-install software name + version + source (from approved list)
 
-## 3. Per-install target system
+### Reg Target
 
 <<MUST item:A.8.19:reg_target>>
 _Why: 27002:8.19 — operational systems_
 
-<<TEXT>>
+> _Standard text:_ Per-install target system
 
-## 4. Per-install authorised actor (privileged role assignment)
+### Reg Actor
 
 <<MUST item:A.8.19:reg_actor>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-install authorised actor (privileged role assignment)
 
-## 5. Per-install verification artefacts (signature check / functional test / vuln-scan result)
+### Reg Verification
 
 <<MUST item:A.8.19:reg_verification>>
 _Why: 27002:8.19 — securely_
 
-<<TEXT>>
+> _Standard text:_ Per-install verification artefacts (signature check / functional test / vuln-scan result)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-install cross-link to A.8.32 change record where applicable
+### Reg Change Link
 
 <<SHOULD item:A.8.19:reg_change_link>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-install cross-link to A.8.32 change record where applicable

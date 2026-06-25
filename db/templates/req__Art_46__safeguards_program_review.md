@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Safeguards Program Review
 
 > Annual verification — SCCs on current version, TIAs current, supplementary measures effective, vendor compliance attested (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.46:safeguards_program_review -->
+<!-- column: item:Art.46:rev_date -->
+<!-- column: item:Art.46:rev_reviewer -->
+<!-- column: item:Art.46:rev_sccs_version -->
+<!-- column: item:Art.46:rev_tia_currency -->
+<!-- column: item:Art.46:rev_supplementary_audit -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.46:safeguards_program_review -->
+| Rev Date | Rev Reviewer | Rev Sccs Version | Rev Tia Currency | Rev Supplementary Audit |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.46:safeguards_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.46:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + legal counsel)
+### Rev Reviewer
 
 <<MUST item:Art.46:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + legal counsel)
 
-## 3. SCCs version audit — any old-version SCCs identified for migration
+### Rev Sccs Version
 
 <<MUST item:Art.46:rev_sccs_version>>
 _Why: Commission Decision 2021/914_
 
-<<TEXT>>
+> _Standard text:_ SCCs version audit — any old-version SCCs identified for migration
 
-## 4. TIA currency — TIAs refreshed where third-country law has changed materially
+### Rev Tia Currency
 
 <<MUST item:Art.46:rev_tia_currency>>
 _Why: Schrems II — ongoing duty_
 
-<<TEXT>>
+> _Standard text:_ TIA currency — TIAs refreshed where third-country law has changed materially
 
-## 5. Supplementary measures audit — applied measures (encryption keys, pseudonymisation, etc.) actually in place at vendor
+### Rev Supplementary Audit
 
 <<MUST item:Art.46:rev_supplementary_audit>>
 _Why: EDPB 01/2020_
 
-<<TEXT>>
+> _Standard text:_ Supplementary measures audit — applied measures (encryption keys, pseudonymisation, etc.) actually in place at vendor
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.46:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

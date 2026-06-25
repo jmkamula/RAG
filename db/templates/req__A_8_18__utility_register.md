@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Privileged Utility Programs Register
 
 > Per-utility inventory — utility id, capability, current location, authorised users, last-use
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.18:utility_register -->
+<!-- column: item:A.8.18:reg_utility_id -->
+<!-- column: item:A.8.18:reg_capability -->
+<!-- column: item:A.8.18:reg_location -->
+<!-- column: item:A.8.18:reg_authorised -->
+<!-- column: item:A.8.18:reg_last_use -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row utility identifier (name + version)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.18:utility_register -->
+| Reg Utility Id | Reg Capability | Reg Location | Reg Authorised | Reg Last Use |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.18:utility_register -->
+
+## Column guidance — what to fill in
+
+### Reg Utility Id
 
 <<MUST item:A.8.18:reg_utility_id>>
 _Why: Identification_
 
-<<TEXT>>
+> _Standard text:_ Per-row utility identifier (name + version)
 
-## 2. Per-row capability description (what controls it can override)
+### Reg Capability
 
 <<MUST item:A.8.18:reg_capability>>
 _Why: 27002:8.18 — utility programs that can override_
 
-<<TEXT>>
+> _Standard text:_ Per-row capability description (what controls it can override)
 
-## 3. Per-row current location (systems where installed) — drives removal-where-unneeded principle
+### Reg Location
 
 <<MUST item:A.8.18:reg_location>>
 _Why: 27002:8.18 — restricted_
 
-<<TEXT>>
+> _Standard text:_ Per-row current location (systems where installed) — drives removal-where-unneeded principle
 
-## 4. Per-row authorised user list (with approval lineage)
+### Reg Authorised
 
 <<MUST item:A.8.18:reg_authorised>>
 _Why: 27002:8.18 — restricted_
 
-<<TEXT>>
+> _Standard text:_ Per-row authorised user list (with approval lineage)
 
-## 5. Per-row last-use timestamp (drives 'still needed' review)
+### Reg Last Use
 
 <<MUST item:A.8.18:reg_last_use>>
 _Why: Drift detection_
 
-<<TEXT>>
+> _Standard text:_ Per-row last-use timestamp (drives 'still needed' review)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row JIT-vault availability flag (where applicable, indicates non-standing-install path)
+### Reg Jit Vault
 
 <<SHOULD item:A.8.18:reg_jit_vault>>
 _Why: Modern maturity_
 
-<<TEXT>>
+> _Standard text:_ Per-row JIT-vault availability flag (where applicable, indicates non-standing-install path)

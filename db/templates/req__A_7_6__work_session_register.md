@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Secure Area Work Session Register
 
 > The catalogue of non-routine work sessions in secure areas (maintenance visits, audits, deep-cleans, third-party visits). Each entry: session id, area, purpose, personnel, supervision
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.7.6:work_session_register -->
+<!-- column: item:A.7.6:reg_session_id -->
+<!-- column: item:A.7.6:reg_area -->
+<!-- column: item:A.7.6:reg_purpose -->
+<!-- column: item:A.7.6:reg_personnel -->
+<!-- column: item:A.7.6:reg_timestamps -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-session unique identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.7.6:work_session_register -->
+| Reg Session Id | Reg Area | Reg Purpose | Reg Personnel | Reg Timestamps |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.7.6:work_session_register -->
+
+## Column guidance — what to fill in
+
+### Reg Session Id
 
 <<MUST item:A.7.6:reg_session_id>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-session unique identifier
 
-## 2. Per-session secure area
+### Reg Area
 
 <<MUST item:A.7.6:reg_area>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-session secure area
 
-## 3. Per-session purpose (maintenance / audit / deep-clean / visitor / emergency)
+### Reg Purpose
 
 <<MUST item:A.7.6:reg_purpose>>
 _Why: 27002:7.6 — authorised_
 
-<<TEXT>>
+> _Standard text:_ Per-session purpose (maintenance / audit / deep-clean / visitor / emergency)
 
-## 4. Per-session personnel (including third parties, escorts, supervisors)
+### Reg Personnel
 
 <<MUST item:A.7.6:reg_personnel>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-session personnel (including third parties, escorts, supervisors)
 
-## 5. Per-session entry/exit timestamps
+### Reg Timestamps
 
 <<MUST item:A.7.6:reg_timestamps>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Per-session entry/exit timestamps
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-session work-permit reference where the permit system applies
+### Reg Work Permit
 
 <<SHOULD item:A.7.6:reg_work_permit>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-session work-permit reference where the permit system applies

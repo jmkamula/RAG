@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Clear Desk / Clear Screen Audit Register
 
 > The catalogue of spot-check audits with findings. Each audit row: date, scope, findings, sanctions applied
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.7.7:cd_cs_audit_register -->
+<!-- column: item:A.7.7:reg_audit_id -->
+<!-- column: item:A.7.7:reg_date -->
+<!-- column: item:A.7.7:reg_scope -->
+<!-- column: item:A.7.7:reg_findings -->
+<!-- column: item:A.7.7:reg_remediation -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-audit unique identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.7.7:cd_cs_audit_register -->
+| Reg Audit Id | Reg Date | Reg Scope | Reg Findings | Reg Remediation |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.7.7:cd_cs_audit_register -->
+
+## Column guidance — what to fill in
+
+### Reg Audit Id
 
 <<MUST item:A.7.7:reg_audit_id>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-audit unique identifier
 
-## 2. Per-audit date
+### Reg Date
 
 <<MUST item:A.7.7:reg_date>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Per-audit date
 
-## 3. Per-audit scope (which floors / areas covered)
+### Reg Scope
 
 <<MUST item:A.7.7:reg_scope>>
 _Why: 27002:7.7 — appropriately enforced_
 
-<<TEXT>>
+> _Standard text:_ Per-audit scope (which floors / areas covered)
 
-## 4. Per-audit findings (count of violations, types observed)
+### Reg Findings
 
 <<MUST item:A.7.7:reg_findings>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Per-audit findings (count of violations, types observed)
 
-## 5. Per-audit remediation log (awareness email sent, repeat-violator escalation)
+### Reg Remediation
 
 <<MUST item:A.7.7:reg_remediation>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Per-audit remediation log (awareness email sent, repeat-violator escalation)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-audit trend analysis (vs previous audit — improvement / worsening / steady)
+### Reg Trend
 
 <<SHOULD item:A.7.7:reg_trend>>
 _Why: Continual improvement_
 
-<<TEXT>>
+> _Standard text:_ Per-audit trend analysis (vs previous audit — improvement / worsening / steady)

@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Equipment Siting Register
 
 > The catalogue of in-scope equipment with location, class, protection measures applied, owner
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.7.8:siting_register -->
+<!-- column: item:A.7.8:reg_equipment_id -->
+<!-- column: item:A.7.8:reg_location -->
+<!-- column: item:A.7.8:reg_class -->
+<!-- column: item:A.7.8:reg_protection -->
+<!-- column: item:A.7.8:reg_owner -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row equipment identifier (cross-link to A.5.9 asset register)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.7.8:siting_register -->
+| Reg Equipment Id | Reg Location | Reg Class | Reg Protection | Reg Owner |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.7.8:siting_register -->
+
+## Column guidance — what to fill in
+
+### Reg Equipment Id
 
 <<MUST item:A.7.8:reg_equipment_id>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-row equipment identifier (cross-link to A.5.9 asset register)
 
-## 2. Per-row location (site + room per A.7.3 register)
+### Reg Location
 
 <<MUST item:A.7.8:reg_location>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-row location (site + room per A.7.3 register)
 
-## 3. Per-row equipment class (drives required protection level)
+### Reg Class
 
 <<MUST item:A.7.8:reg_class>>
 _Why: 27002:7.8 — proportional_
 
-<<TEXT>>
+> _Standard text:_ Per-row equipment class (drives required protection level)
 
-## 4. Per-row protection measures in place (matches procedure's per-class requirements)
+### Reg Protection
 
 <<MUST item:A.7.8:reg_protection>>
 _Why: 27002:7.8 — implemented_
 
-<<TEXT>>
+> _Standard text:_ Per-row protection measures in place (matches procedure's per-class requirements)
 
-## 5. Per-row owner
+### Reg Owner
 
 <<MUST item:A.7.8:reg_owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-row owner
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row remediation log where protection falls short of required
+### Reg Remediation
 
 <<SHOULD item:A.7.8:reg_remediation>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Per-row remediation log where protection falls short of required

@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Processing Under Authority Program Review
 
 > Annual verification — every person touching personal data has a current authorisation row, training is current, processing stays within documented instructions (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.29:processing_under_authority_program_review -->
+<!-- column: item:Art.29:rev_date -->
+<!-- column: item:Art.29:rev_reviewer -->
+<!-- column: item:Art.29:rev_authorisation_completeness -->
+<!-- column: item:Art.29:rev_training_currency -->
+<!-- column: item:Art.29:rev_instruction_drift -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.29:processing_under_authority_program_review -->
+| Rev Date | Rev Reviewer | Rev Authorisation Completeness | Rev Training Currency | Rev Instruction Drift |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.29:processing_under_authority_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.29:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + HR + ops lead)
+### Rev Reviewer
 
 <<MUST item:Art.29:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + HR + ops lead)
 
-## 3. Authorisation completeness — every person with access has a register row
+### Rev Authorisation Completeness
 
 <<MUST item:Art.29:rev_authorisation_completeness>>
 _Why: Art.29 — under authority_
 
-<<TEXT>>
+> _Standard text:_ Authorisation completeness — every person with access has a register row
 
-## 4. Training currency — A.6.3 / 7.3 training current for every authorised person
+### Rev Training Currency
 
 <<MUST item:Art.29:rev_training_currency>>
 _Why: Cross-control_
 
-<<TEXT>>
+> _Standard text:_ Training currency — A.6.3 / 7.3 training current for every authorised person
 
-## 5. Instruction-drift sweep — sample processing activities to verify they stay within documented controller instructions
+### Rev Instruction Drift
 
 <<MUST item:Art.29:rev_instruction_drift>>
 _Why: Art.29 — only on documented instructions_
 
-<<TEXT>>
+> _Standard text:_ Instruction-drift sweep — sample processing activities to verify they stay within documented controller instructions
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.29:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

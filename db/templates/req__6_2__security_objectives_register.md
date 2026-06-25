@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Information Security Objectives Register
 
 > Clause 6.2 requires information security objectives to be established at relevant functions and levels. The register is the canonical artefact — every objective with owner, KPI, target date, progress. Sibling leaves: objective-setting methodology, applicable functions scope, program review. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:6.2:security_objectives_register -->
+<!-- column: item:6.2:objectives_stated -->
+<!-- column: item:6.2:consistent_with_policy -->
+<!-- column: item:6.2:measurable -->
+<!-- column: item:6.2:owner -->
+<!-- column: item:6.2:target_date -->
+<!-- column: item:6.2:progress_status -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Objectives stated at relevant functions and levels
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:6.2:security_objectives_register -->
+| Objectives Stated | Consistent With Policy | Measurable | Owner | Target Date | Progress Status |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:6.2:security_objectives_register -->
+
+## Column guidance — what to fill in
+
+### Objectives Stated
 
 <<MUST item:6.2:objectives_stated>>
 _Why: Clause 6.2 — established at relevant functions and levels_
 
-<<TEXT>>
+> _Standard text:_ Objectives stated at relevant functions and levels
 
-## 2. Per-objective consistency with the InfoSec policy (5.2) flagged
+### Consistent With Policy
 
 <<MUST item:6.2:consistent_with_policy>>
 _Why: Clause 6.2 a)_
 
-<<TEXT>>
+> _Standard text:_ Per-objective consistency with the InfoSec policy (5.2) flagged
 
-## 3. Per-objective KPI defined where practicable
+### Measurable
 
 <<MUST item:6.2:measurable>>
 _Why: Clause 6.2 b)_
 
-<<TEXT>>
+> _Standard text:_ Per-objective KPI defined where practicable
 
-## 4. Per-objective owner identified
+### Owner
 
 <<MUST item:6.2:owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-objective owner identified
 
-## 5. Per-objective target date stated
+### Target Date
 
 <<MUST item:6.2:target_date>>
 _Why: Concrete commitment_
 
-<<TEXT>>
+> _Standard text:_ Per-objective target date stated
 
-## 6. Per-objective progress status (on-track / at-risk / off-track / met)
+### Progress Status
 
 <<MUST item:6.2:progress_status>>
 _Why: Tracking_
 
-<<TEXT>>
+> _Standard text:_ Per-objective progress status (on-track / at-risk / off-track / met)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. KPI dashboard linked
+### Kpi Dashboard
 
 <<SHOULD item:6.2:kpi_dashboard>>
 _Why: Visibility_
 
-<<TEXT>>
+> _Standard text:_ KPI dashboard linked

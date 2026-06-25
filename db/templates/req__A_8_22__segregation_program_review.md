@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Periodic Network Segregation Program Review
 
 > Annual verification — zone-register completeness, exception inventory current, flow-rules still appropriate, enforcement coverage verified (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.22:segregation_program_review -->
+<!-- column: item:A.8.22:rev_date -->
+<!-- column: item:A.8.22:rev_reviewer -->
+<!-- column: item:A.8.22:rev_register_completeness -->
+<!-- column: item:A.8.22:rev_exception_inventory -->
+<!-- column: item:A.8.22:rev_enforcement_coverage -->
+<!-- column: item:A.8.22:rev_findings_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.22:segregation_program_review -->
+| Rev Date | Rev Reviewer | Rev Register Completeness | Rev Exception Inventory | Rev Enforcement Coverage | Rev Findings Update |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.22:segregation_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.8.22:rev_date>>
 _Why: 27002:8.22 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (Network Engineering + InfoSec + Application Engineering leads)
+### Rev Reviewer
 
 <<MUST item:A.8.22:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (Network Engineering + InfoSec + Application Engineering leads)
 
-## 3. Register-completeness check (new zones registered)
+### Rev Register Completeness
 
 <<MUST item:A.8.22:rev_register_completeness>>
 _Why: Drift prevention_
 
-<<TEXT>>
+> _Standard text:_ Register-completeness check (new zones registered)
 
-## 4. Exception inventory re-confirmed / retired
+### Rev Exception Inventory
 
 <<MUST item:A.8.22:rev_exception_inventory>>
 _Why: Drift prevention_
 
-<<TEXT>>
+> _Standard text:_ Exception inventory re-confirmed / retired
 
-## 5. Sample-based enforcement-coverage verification (configured rules match register)
+### Rev Enforcement Coverage
 
 <<MUST item:A.8.22:rev_enforcement_coverage>>
 _Why: 27002:8.22 — segregated_
 
-<<TEXT>>
+> _Standard text:_ Sample-based enforcement-coverage verification (configured rules match register)
 
-## 6. Findings propagated to procedure / register
+### Rev Findings Update
 
 <<MUST item:A.8.22:rev_findings_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Findings propagated to procedure / register
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.8.22:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

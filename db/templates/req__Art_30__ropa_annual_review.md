@@ -8,72 +8,93 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 3
+table_shape: true
 ---
 
 # RoPA Periodic Review Record
 
 > Even with maintenance triggers in place, drift accumulates between RoPA and reality. An annual (or more frequent) review verifies each activity against current operations, propagates corrections back to the register, and produces auditable evidence that the register is not stale
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.30:ropa_annual_review -->
+<!-- column: item:Art.30:rev_date -->
+<!-- column: item:Art.30:rev_reviewer -->
+<!-- column: item:Art.30:rev_outcome -->
+<!-- column: item:Art.30:rev_register_update -->
+<!-- column: item:Art.30:rev_gaps -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval (typically within 12 months of last review)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.30:ropa_annual_review -->
+| Rev Date | Rev Reviewer | Rev Outcome | Rev Register Update | Rev Gaps |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.30:ropa_annual_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.30:rev_date>>
 _Why: Periodic accuracy_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval (typically within 12 months of last review)
 
-## 2. Reviewer identity and role (DPO, privacy lead, or delegated equivalent)
+### Rev Reviewer
 
 <<MUST item:Art.30:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity and role (DPO, privacy lead, or delegated equivalent)
 
-## 3. Per-activity outcome (no change / amended / retired) recorded
+### Rev Outcome
 
 <<MUST item:Art.30:rev_outcome>>
 _Why: Auditable result_
 
-<<TEXT>>
+> _Standard text:_ Per-activity outcome (no change / amended / retired) recorded
 
-## 4. Changes propagated back to the live register with reference to this review
+### Rev Register Update
 
 <<MUST item:Art.30:rev_register_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Changes propagated back to the live register with reference to this review
 
-## 5. Gaps identified (missing activity, outdated retention, undocumented transfer) with remediation owner and target date
+### Rev Gaps
 
 <<MUST item:Art.30:rev_gaps>>
 _Why: Defect tracking_
 
-<<TEXT>>
+> _Standard text:_ Gaps identified (missing activity, outdated retention, undocumented transfer) with remediation owner and target date
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Ad-hoc review triggers listed (re-org, M&A, new processing line, new processor onboarded)
+### Rev Ad Hoc Triggers
 
 <<SHOULD item:Art.30:rev_ad_hoc_triggers>>
 _Why: Change-driven review_
 
-<<TEXT>>
+> _Standard text:_ Ad-hoc review triggers listed (re-org, M&A, new processing line, new processor onboarded)
 
-### 2. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.30:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated
 
-### 3. Cross-check against the data flow inventory recorded — both should describe the same reality
+### Rev Dfi Alignment
 
 <<SHOULD item:Art.30:rev_dfi_alignment>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Cross-check against the data flow inventory recorded — both should describe the same reality

@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Communication Program Review
 
 > Annual verification that planned communications happened on cadence, the register is complete, regulator-mandated comms met their deadlines (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:7.4:communication_program_review -->
+<!-- column: item:7.4:rev_date -->
+<!-- column: item:7.4:rev_reviewer -->
+<!-- column: item:7.4:rev_cadence_check -->
+<!-- column: item:7.4:rev_mandated_deadlines -->
+<!-- column: item:7.4:rev_audience_coverage -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:7.4:communication_program_review -->
+| Rev Date | Rev Reviewer | Rev Cadence Check | Rev Mandated Deadlines | Rev Audience Coverage |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:7.4:communication_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:7.4:rev_date>>
 _Why: Clause 7.4 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (ISMS Manager + comms lead)
+### Rev Reviewer
 
 <<MUST item:7.4:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (ISMS Manager + comms lead)
 
-## 3. Cadence check — planned communications actually delivered on time
+### Rev Cadence Check
 
 <<MUST item:7.4:rev_cadence_check>>
 _Why: Effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Cadence check — planned communications actually delivered on time
 
-## 4. Mandated deadlines check — every regulator-mandated comm met its SLA
+### Rev Mandated Deadlines
 
 <<MUST item:7.4:rev_mandated_deadlines>>
 _Why: Compliance currency_
 
-<<TEXT>>
+> _Standard text:_ Mandated deadlines check — every regulator-mandated comm met its SLA
 
-## 5. Audience coverage check — every in-scope audience reached for required topics
+### Rev Audience Coverage
 
 <<MUST item:7.4:rev_audience_coverage>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Audience coverage check — every in-scope audience reached for required topics
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:7.4:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

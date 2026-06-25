@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # DPIA Register
 
 > Per-DPIA record — every conducted DPIA with outcome (proceed / mitigate / Art.36 consult / abandon). Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.35:dpia_register -->
+<!-- column: item:Art.35:reg_dpia_id -->
+<!-- column: item:Art.35:reg_processing_activity -->
+<!-- column: item:Art.35:reg_trigger -->
+<!-- column: item:Art.35:reg_dpo_advice_date -->
+<!-- column: item:Art.35:reg_outcome -->
+<!-- column: item:Art.35:reg_residual_risk -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row DPIA identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.35:dpia_register -->
+| Reg Dpia Id | Reg Processing Activity | Reg Trigger | Reg Dpo Advice Date | Reg Outcome | Reg Residual Risk |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.35:dpia_register -->
+
+## Column guidance — what to fill in
+
+### Reg Dpia Id
 
 <<MUST item:Art.35:reg_dpia_id>>
 _Why: Audit_
 
-<<TEXT>>
+> _Standard text:_ Per-row DPIA identifier
 
-## 2. Per-row processing activity (Art.30 RoPA cross-reference)
+### Reg Processing Activity
 
 <<MUST item:Art.35:reg_processing_activity>>
 _Why: Cross-article_
 
-<<TEXT>>
+> _Standard text:_ Per-row processing activity (Art.30 RoPA cross-reference)
 
-## 3. Per-row trigger (Art.35.3.a-c / SA list / sectoral / risk-based)
+### Reg Trigger
 
 <<MUST item:Art.35:reg_trigger>>
 _Why: Art.35.1+3-4_
 
-<<TEXT>>
+> _Standard text:_ Per-row trigger (Art.35.3.a-c / SA list / sectoral / risk-based)
 
-## 4. Per-row DPO advice date + summary
+### Reg Dpo Advice Date
 
 <<MUST item:Art.35:reg_dpo_advice_date>>
 _Why: Art.35.2_
 
-<<TEXT>>
+> _Standard text:_ Per-row DPO advice date + summary
 
-## 5. Per-row outcome (proceed / mitigate-then-proceed / Art.36 consult / abandon)
+### Reg Outcome
 
 <<MUST item:Art.35:reg_outcome>>
 _Why: Audit clarity_
 
-<<TEXT>>
+> _Standard text:_ Per-row outcome (proceed / mitigate-then-proceed / Art.36 consult / abandon)
 
-## 6. Per-row residual-risk level after mitigations
+### Reg Residual Risk
 
 <<MUST item:Art.35:reg_residual_risk>>
 _Why: Art.36 trigger_
 
-<<TEXT>>
+> _Standard text:_ Per-row residual-risk level after mitigations
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row next review date
+### Reg Review Date
 
 <<SHOULD item:Art.35:reg_review_date>>
 _Why: Art.35.11_
 
-<<TEXT>>
+> _Standard text:_ Per-row next review date

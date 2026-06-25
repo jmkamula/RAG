@@ -7,86 +7,110 @@ trigger_type: universal
 template_version: 1
 must_count: 8
 should_count: 2
+table_shape: true
 ---
 
 # Identity Register
 
 > A.5.16 requires every identity to be visible to the security function — invisible identities are the ones that go stale, get reused, or persist past their owner's departure. The register catalogues every active identity (human + service + shared + non-human): identity id, type, owner, status, created/modified/last-used timestamps. It is the operational record that proves identity hygiene is org-wide, not just on the systems IT remembered to onboard to the IAM platform
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.16:identity_register -->
+<!-- column: item:A.5.16:reg_identity_id -->
+<!-- column: item:A.5.16:reg_identity_type -->
+<!-- column: item:A.5.16:reg_owner -->
+<!-- column: item:A.5.16:reg_status -->
+<!-- column: item:A.5.16:reg_created_modified -->
+<!-- column: item:A.5.16:reg_last_used -->
+<!-- column: item:A.5.16:reg_hr_link -->
+<!-- column: item:A.5.16:reg_service_expiry -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Each active identity captured with a unique identifier (employee id, contractor id, service-account id, shared-account id)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.16:identity_register -->
+| Reg Identity Id | Reg Identity Type | Reg Owner | Reg Status | Reg Created Modified | Reg Last Used | Reg Hr Link | Reg Service Expiry |
+|---|---|---|---|---|---|---|---|
+|          |          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.16:identity_register -->
+
+## Column guidance — what to fill in
+
+### Reg Identity Id
 
 <<MUST item:A.5.16:reg_identity_id>>
 _Why: 27002:5.16 — visibility_
 
-<<TEXT>>
+> _Standard text:_ Each active identity captured with a unique identifier (employee id, contractor id, service-account id, shared-account id)
 
-## 2. Identity type per row (human_employee / human_contractor / service / shared / system_account) — drives policy variant applied
+### Reg Identity Type
 
 <<MUST item:A.5.16:reg_identity_type>>
 _Why: 27002:5.16 — managed (all types)_
 
-<<TEXT>>
+> _Standard text:_ Identity type per row (human_employee / human_contractor / service / shared / system_account) — drives policy variant applied
 
-## 3. Named owner per row (human owner accountable for THIS identity — even for service accounts, must be a human)
+### Reg Owner
 
 <<MUST item:A.5.16:reg_owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Named owner per row (human owner accountable for THIS identity — even for service accounts, must be a human)
 
-## 4. Status per row (active / suspended / disabled / pending_termination) updated as lifecycle events fire
+### Reg Status
 
 <<MUST item:A.5.16:reg_status>>
 _Why: 27002:5.16 — lifecycle tracking_
 
-<<TEXT>>
+> _Standard text:_ Status per row (active / suspended / disabled / pending_termination) updated as lifecycle events fire
 
-## 5. Created and last-modified timestamps per row
+### Reg Created Modified
 
 <<MUST item:A.5.16:reg_created_modified>>
 _Why: Audit trail_
 
-<<TEXT>>
+> _Standard text:_ Created and last-modified timestamps per row
 
-## 6. Last-used timestamp per row (drives auto-suspend at N days idle; orphan detection)
+### Reg Last Used
 
 <<MUST item:A.5.16:reg_last_used>>
 _Why: 27002:5.16 — drift detection_
 
-<<TEXT>>
+> _Standard text:_ Last-used timestamp per row (drives auto-suspend at N days idle; orphan detection)
 
-## 7. HR-record link per row for human identities (joiner/leaver triggers cascade automatically — no manual sync)
+### Reg Hr Link
 
 <<MUST item:A.5.16:reg_hr_link>>
 _Why: 27002:5.16 + cross-link to [[A.5.11]]_
 
-<<TEXT>>
+> _Standard text:_ HR-record link per row for human identities (joiner/leaver triggers cascade automatically — no manual sync)
 
-## 8. Expiry date per row for service / shared / temporary identities (forces deliberate renewal rather than indefinite drift)
+### Reg Service Expiry
 
 <<MUST item:A.5.16:reg_service_expiry>>
 _Why: 27002:5.16 — managed (service-account discipline)_
 
-<<TEXT>>
+> _Standard text:_ Expiry date per row for service / shared / temporary identities (forces deliberate renewal rather than indefinite drift)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next attestation date per row (drives the periodic recertification cycle)
+### Reg Attestation Due
 
 <<SHOULD item:A.5.16:reg_attestation_due>>
 _Why: Drift prevention_
 
-<<TEXT>>
+> _Standard text:_ Next attestation date per row (drives the periodic recertification cycle)
 
-### 2. Risk tag per row where the identity has elevated privileges or sensitive scope (drives faster-cadence review)
+### Reg Risk Tag
 
 <<SHOULD item:A.5.16:reg_risk_tag>>
 _Why: Risk-based attention_
 
-<<TEXT>>
+> _Standard text:_ Risk tag per row where the identity has elevated privileges or sensitive scope (drives faster-cadence review)

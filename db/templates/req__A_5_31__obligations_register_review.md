@@ -8,72 +8,94 @@ freshness_days: 180
 template_version: 1
 must_count: 6
 should_count: 2
+table_shape: true
 ---
 
 # Periodic Legal/Regulatory Register Review
 
 > Periodic verification that the register still reflects current obligations and that the compliance approach for each is still adequate. The cadence is semi-annual (freshness=180) because regulatory change is faster than annual; this matches the prior single-leaf freshness signal
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.31:obligations_register_review -->
+<!-- column: item:A.5.31:rev_date -->
+<!-- column: item:A.5.31:rev_reviewer -->
+<!-- column: item:A.5.31:rev_per_entry -->
+<!-- column: item:A.5.31:rev_scope_check -->
+<!-- column: item:A.5.31:rev_horizon -->
+<!-- column: item:A.5.31:rev_register_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval (within 6 months of last review)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.31:obligations_register_review -->
+| Rev Date | Rev Reviewer | Rev Per Entry | Rev Scope Check | Rev Horizon | Rev Register Update |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.31:obligations_register_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.5.31:rev_date>>
 _Why: 27002:5.31 — kept up to date_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval (within 6 months of last review)
 
-## 2. Reviewer identity and role recorded (compliance lead with legal-counsel sign-off where material)
+### Rev Reviewer
 
 <<MUST item:A.5.31:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity and role recorded (compliance lead with legal-counsel sign-off where material)
 
-## 3. Per-entry outcome (verified / amended / retired / new added) with compliance-approach still-adequate confirmation
+### Rev Per Entry
 
 <<MUST item:A.5.31:rev_per_entry>>
 _Why: 27002:5.31b_
 
-<<TEXT>>
+> _Standard text:_ Per-entry outcome (verified / amended / retired / new added) with compliance-approach still-adequate confirmation
 
-## 4. Cross-check against the applicable-obligations scope — any new applicability that should add entries
+### Rev Scope Check
 
 <<MUST item:A.5.31:rev_scope_check>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Cross-check against the applicable-obligations scope — any new applicability that should add entries
 
-## 5. Forward-looking section — obligations entering force in the next 12-24 months that need preparation
+### Rev Horizon
 
 <<MUST item:A.5.31:rev_horizon>>
 _Why: Forward-looking compliance_
 
-<<TEXT>>
+> _Standard text:_ Forward-looking section — obligations entering force in the next 12-24 months that need preparation
 
-## 6. Changes propagated back to the live register with reference to this review
+### Rev Register Update
 
 <<MUST item:A.5.31:rev_register_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Changes propagated back to the live register with reference to this review
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Ad-hoc review triggers listed (major regulator action, court ruling, customer contract restructure)
+### Rev Ad Hoc Triggers
 
 <<SHOULD item:A.5.31:rev_ad_hoc_triggers>>
 _Why: Change-driven review_
 
-<<TEXT>>
+> _Standard text:_ Ad-hoc review triggers listed (major regulator action, court ruling, customer contract restructure)
 
-### 2. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.5.31:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

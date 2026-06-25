@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # DPO Designation Program Review
 
 > Annual verification — DPO designation still appropriate (org may have grown into Art.37.1 criteria), qualifications still hold, publication current (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.37:dpo_designation_program_review -->
+<!-- column: item:Art.37:rev_date -->
+<!-- column: item:Art.37:rev_reviewer -->
+<!-- column: item:Art.37:rev_criteria_recheck -->
+<!-- column: item:Art.37:rev_qualifications_currency -->
+<!-- column: item:Art.37:rev_publication_current -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.37:dpo_designation_program_review -->
+| Rev Date | Rev Reviewer | Rev Criteria Recheck | Rev Qualifications Currency | Rev Publication Current |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.37:dpo_designation_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.37:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (executive sponsor + legal counsel)
+### Rev Reviewer
 
 <<MUST item:Art.37:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (executive sponsor + legal counsel)
 
-## 3. Criteria recheck — Art.37.1 applicability re-assessed against current processing scope
+### Rev Criteria Recheck
 
 <<MUST item:Art.37:rev_criteria_recheck>>
 _Why: Art.37.1_
 
-<<TEXT>>
+> _Standard text:_ Criteria recheck — Art.37.1 applicability re-assessed against current processing scope
 
-## 4. Qualifications currency — DPO continuing-education or certification renewal evidence
+### Rev Qualifications Currency
 
 <<MUST item:Art.37:rev_qualifications_currency>>
 _Why: Art.37.5_
 
-<<TEXT>>
+> _Standard text:_ Qualifications currency — DPO continuing-education or certification renewal evidence
 
-## 5. Publication currency — privacy notice + SA registration still reflect current DPO contact
+### Rev Publication Current
 
 <<MUST item:Art.37:rev_publication_current>>
 _Why: Art.37.7_
 
-<<TEXT>>
+> _Standard text:_ Publication currency — privacy notice + SA registration still reflect current DPO contact
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.37:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

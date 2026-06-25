@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Periodic Cabling Program Review
 
 > Annual verification of inspection completeness, register currency, remediation closure. Freshness=365
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.7.12:cabling_program_review -->
+<!-- column: item:A.7.12:rev_date -->
+<!-- column: item:A.7.12:rev_reviewer -->
+<!-- column: item:A.7.12:rev_inspection_coverage -->
+<!-- column: item:A.7.12:rev_remediation_closure -->
+<!-- column: item:A.7.12:rev_register_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.7.12:cabling_program_review -->
+| Rev Date | Rev Reviewer | Rev Inspection Coverage | Rev Remediation Closure | Rev Register Update |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.7.12:cabling_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.7.12:rev_date>>
 _Why: 27002:7.12 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (Facilities + Network lead + InfoSec)
+### Rev Reviewer
 
 <<MUST item:A.7.12:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (Facilities + Network lead + InfoSec)
 
-## 3. Per-run inspection coverage in period (all runs inspected per planned cadence)
+### Rev Inspection Coverage
 
 <<MUST item:A.7.12:rev_inspection_coverage>>
 _Why: Drift prevention_
 
-<<TEXT>>
+> _Standard text:_ Per-run inspection coverage in period (all runs inspected per planned cadence)
 
-## 4. Remediation closure rate from prior period
+### Rev Remediation Closure
 
 <<MUST item:A.7.12:rev_remediation_closure>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Remediation closure rate from prior period
 
-## 5. Changes propagated to the register / procedure
+### Rev Register Update
 
 <<MUST item:A.7.12:rev_register_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Changes propagated to the register / procedure
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.7.12:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

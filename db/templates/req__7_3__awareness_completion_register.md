@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # ISMS Awareness Completion Register
 
 > Per-person completion record — who completed which module, on what date, with what acknowledgement. The proof that awareness was actually delivered, not just designed. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:7.3:awareness_completion_register -->
+<!-- column: item:7.3:reg_subject_id -->
+<!-- column: item:7.3:reg_module -->
+<!-- column: item:7.3:reg_completion_date -->
+<!-- column: item:7.3:reg_acknowledgement -->
+<!-- column: item:7.3:reg_expiry -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Subject identifier per row (employee or contractor)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:7.3:awareness_completion_register -->
+| Reg Subject Id | Reg Module | Reg Completion Date | Reg Acknowledgement | Reg Expiry |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:7.3:awareness_completion_register -->
+
+## Column guidance — what to fill in
+
+### Reg Subject Id
 
 <<MUST item:7.3:reg_subject_id>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Subject identifier per row (employee or contractor)
 
-## 2. Module identifier per row (policy module, contribution module, consequences module)
+### Reg Module
 
 <<MUST item:7.3:reg_module>>
 _Why: Coverage_
 
-<<TEXT>>
+> _Standard text:_ Module identifier per row (policy module, contribution module, consequences module)
 
-## 3. Completion date per row
+### Reg Completion Date
 
 <<MUST item:7.3:reg_completion_date>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Completion date per row
 
-## 4. Acknowledgement per row (signed receipt, LMS attestation, quiz pass)
+### Reg Acknowledgement
 
 <<MUST item:7.3:reg_acknowledgement>>
 _Why: Evidence preservation_
 
-<<TEXT>>
+> _Standard text:_ Acknowledgement per row (signed receipt, LMS attestation, quiz pass)
 
-## 5. Expiry / next-due date per row (drives refresher trigger)
+### Reg Expiry
 
 <<MUST item:7.3:reg_expiry>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Expiry / next-due date per row (drives refresher trigger)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row assessment score where the module included a knowledge check
+### Reg Assessment Score
 
 <<SHOULD item:7.3:reg_assessment_score>>
 _Why: Effectiveness signal_
 
-<<TEXT>>
+> _Standard text:_ Per-row assessment score where the module included a knowledge check

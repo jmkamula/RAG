@@ -7,72 +7,94 @@ trigger_type: universal
 template_version: 1
 must_count: 6
 should_count: 2
+table_shape: true
 ---
 
 # Disciplinary Case Register
 
 > The operational catalogue of disciplinary cases (anonymised at the audit-trail layer to comply with privacy requirements). Each case: violation type, investigation outcome, action taken, decision authority, closure date. Drives the 'show me how the disciplinary process actually operates' audit question
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.6.4:disciplinary_case_register -->
+<!-- column: item:A.6.4:reg_case_id -->
+<!-- column: item:A.6.4:reg_violation_type -->
+<!-- column: item:A.6.4:reg_investigation_outcome -->
+<!-- column: item:A.6.4:reg_action_taken -->
+<!-- column: item:A.6.4:reg_decision_authority -->
+<!-- column: item:A.6.4:reg_closure_date -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-case unique identifier (anonymised externally; internal traceability to personnel record preserved)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.6.4:disciplinary_case_register -->
+| Reg Case Id | Reg Violation Type | Reg Investigation Outcome | Reg Action Taken | Reg Decision Authority | Reg Closure Date |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.6.4:disciplinary_case_register -->
+
+## Column guidance — what to fill in
+
+### Reg Case Id
 
 <<MUST item:A.6.4:reg_case_id>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-case unique identifier (anonymised externally; internal traceability to personnel record preserved)
 
-## 2. Per-case violation type (matches the procedure's violation_scope categories)
+### Reg Violation Type
 
 <<MUST item:A.6.4:reg_violation_type>>
 _Why: 27002:6.4 — categorisation_
 
-<<TEXT>>
+> _Standard text:_ Per-case violation type (matches the procedure's violation_scope categories)
 
-## 3. Per-case investigation outcome (substantiated / not-substantiated / partially-substantiated)
+### Reg Investigation Outcome
 
 <<MUST item:A.6.4:reg_investigation_outcome>>
 _Why: 27002:6.4 — investigation_
 
-<<TEXT>>
+> _Standard text:_ Per-case investigation outcome (substantiated / not-substantiated / partially-substantiated)
 
-## 4. Per-case action taken (matches the action_range categories; 'no action' is a valid outcome where investigation didn't substantiate)
+### Reg Action Taken
 
 <<MUST item:A.6.4:reg_action_taken>>
 _Why: 27002:6.4 — actions_
 
-<<TEXT>>
+> _Standard text:_ Per-case action taken (matches the action_range categories; 'no action' is a valid outcome where investigation didn't substantiate)
 
-## 5. Per-case decision authority (named role)
+### Reg Decision Authority
 
 <<MUST item:A.6.4:reg_decision_authority>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-case decision authority (named role)
 
-## 6. Per-case closure date
+### Reg Closure Date
 
 <<MUST item:A.6.4:reg_closure_date>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Per-case closure date
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-case appeals log (where appeal was lodged; status tracked)
+### Reg Appeals Log
 
 <<SHOULD item:A.6.4:reg_appeals_log>>
 _Why: Fair process_
 
-<<TEXT>>
+> _Standard text:_ Per-case appeals log (where appeal was lodged; status tracked)
 
-### 2. Per-case lessons feed (where the violation surfaced a control gap, feeds back to relevant control owner / awareness curriculum)
+### Reg Lessons Feed
 
 <<SHOULD item:A.6.4:reg_lessons_feed>>
 _Why: Continual improvement_
 
-<<TEXT>>
+> _Standard text:_ Per-case lessons feed (where the violation surfaced a control gap, feeds back to relevant control owner / awareness curriculum)

@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # DPIA Program Review
 
 > Annual verification — every in-scope activity has a current DPIA, DPO advice was sought, Art.36 consultations escalated where residual risk warranted (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.35:dpia_program_review -->
+<!-- column: item:Art.35:rev_date -->
+<!-- column: item:Art.35:rev_reviewer -->
+<!-- column: item:Art.35:rev_coverage -->
+<!-- column: item:Art.35:rev_advice_quality -->
+<!-- column: item:Art.35:rev_art36_audit -->
+<!-- column: item:Art.35:rev_review_cadence -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.35:dpia_program_review -->
+| Rev Date | Rev Reviewer | Rev Coverage | Rev Advice Quality | Rev Art36 Audit | Rev Review Cadence |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.35:dpia_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.35:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + executive sponsor + lead privacy engineer)
+### Rev Reviewer
 
 <<MUST item:Art.35:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + executive sponsor + lead privacy engineer)
 
-## 3. Coverage check — every in-scope activity has a current DPIA OR documented Art.35.5 white-list justification
+### Rev Coverage
 
 <<MUST item:Art.35:rev_coverage>>
 _Why: Art.35.1_
 
-<<TEXT>>
+> _Standard text:_ Coverage check — every in-scope activity has a current DPIA OR documented Art.35.5 white-list justification
 
-## 4. DPO-advice quality sample — advice substantive, not rubber-stamp
+### Rev Advice Quality
 
 <<MUST item:Art.35:rev_advice_quality>>
 _Why: Art.35.2_
 
-<<TEXT>>
+> _Standard text:_ DPO-advice quality sample — advice substantive, not rubber-stamp
 
-## 5. Art.36 escalation audit — residual-high-risk DPIAs escalated to SA where required
+### Rev Art36 Audit
 
 <<MUST item:Art.35:rev_art36_audit>>
 _Why: Art.36_
 
-<<TEXT>>
+> _Standard text:_ Art.36 escalation audit — residual-high-risk DPIAs escalated to SA where required
 
-## 6. Review-cadence audit — DPIAs refreshed per Art.35.11 when processing changed
+### Rev Review Cadence
 
 <<MUST item:Art.35:rev_review_cadence>>
 _Why: Art.35.11_
 
-<<TEXT>>
+> _Standard text:_ Review-cadence audit — DPIAs refreshed per Art.35.11 when processing changed
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.35:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

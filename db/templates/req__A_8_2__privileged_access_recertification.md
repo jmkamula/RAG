@@ -8,72 +8,95 @@ freshness_days: 180
 template_version: 1
 must_count: 7
 should_count: 1
+table_shape: true
 ---
 
 # Privileged Access Recertification
 
 > A.8.2 calls for periodic review of privileged access — typically more frequent than the general access review at A.5.18 (this curation sets freshness at 180 days; tenants with high-risk processing may run quarterly). The recertification record evidences that each privileged grant was re-confirmed by the asset owner
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.2:privileged_access_recertification -->
+<!-- column: item:A.8.2:rc_date -->
+<!-- column: item:A.8.2:rc_reviewer -->
+<!-- column: item:A.8.2:rc_per_account -->
+<!-- column: item:A.8.2:rc_actions -->
+<!-- column: item:A.8.2:rc_sla_met -->
+<!-- column: item:A.8.2:rc_a518_pairing -->
+<!-- column: item:A.8.2:rc_role_change_trigger -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Recertification date within the planned interval (≤180 days since last)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.2:privileged_access_recertification -->
+| Rc Date | Rc Reviewer | Rc Per Account | Rc Actions | Rc Sla Met | Rc A518 Pairing | Rc Role Change Trigger |
+|---|---|---|---|---|---|---|
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.2:privileged_access_recertification -->
+
+## Column guidance — what to fill in
+
+### Rc Date
 
 <<MUST item:A.8.2:rc_date>>
 _Why: 27002:8.2k_
 
-<<TEXT>>
+> _Standard text:_ Recertification date within the planned interval (≤180 days since last)
 
-## 2. Reviewer identity (asset owner or delegated authority)
+### Rc Reviewer
 
 <<MUST item:A.8.2:rc_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (asset owner or delegated authority)
 
-## 3. Per-privileged-account outcome (re-confirmed / amended / revoked)
+### Rc Per Account
 
 <<MUST item:A.8.2:rc_per_account>>
 _Why: 27002:8.2k_
 
-<<TEXT>>
+> _Standard text:_ Per-privileged-account outcome (re-confirmed / amended / revoked)
 
-## 4. Revocation/modification actions completed for non-reconfirmed access
+### Rc Actions
 
 <<MUST item:A.8.2:rc_actions>>
 _Why: 27002:8.2k_
 
-<<TEXT>>
+> _Standard text:_ Revocation/modification actions completed for non-reconfirmed access
 
-## 5. Revocation-actions-within-SLA flag per row (auditor-critical timeliness proof, parallel to A.5.16 rev_sla_met)
+### Rc Sla Met
 
 <<MUST item:A.8.2:rc_sla_met>>
 _Why: 27002:8.2k modern interpretation (Style v2)_
 
-<<TEXT>>
+> _Standard text:_ Revocation-actions-within-SLA flag per row (auditor-critical timeliness proof, parallel to A.5.16 rev_sla_met)
 
-## 6. Cross-link to A.5.18 general access review — every privileged subject also appears under their general access row (no orphan privileged paths)
+### Rc A518 Pairing
 
 <<MUST item:A.8.2:rc_a518_pairing>>
 _Why: Cross-control coherence (Style v2)_
 
-<<TEXT>>
+> _Standard text:_ Cross-link to A.5.18 general access review — every privileged subject also appears under their general access row (no orphan privileged paths)
 
-## 7. Role-change events trigger ad-hoc recertification outside the interval
+### Rc Role Change Trigger
 
 <<MUST item:A.8.2:rc_role_change_trigger>>
 _Why: 27002:8.2g (Style v2 promotion)_
 
-<<TEXT>>
+> _Standard text:_ Role-change events trigger ad-hoc recertification outside the interval
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned recertification date stated
+### Rc Next Date
 
 <<SHOULD item:A.8.2:rc_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned recertification date stated

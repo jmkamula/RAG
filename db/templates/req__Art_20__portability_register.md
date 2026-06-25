@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Portability Request Register
 
 > Per-request record of Art.20 fulfilments. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.20:portability_register -->
+<!-- column: item:Art.20:reg_request_id -->
+<!-- column: item:Art.20:reg_applicability_decision -->
+<!-- column: item:Art.20:reg_format_delivered -->
+<!-- column: item:Art.20:reg_destination -->
+<!-- column: item:Art.20:reg_delivery_date -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row request id (Art.12 register cross-reference)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.20:portability_register -->
+| Reg Request Id | Reg Applicability Decision | Reg Format Delivered | Reg Destination | Reg Delivery Date |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.20:portability_register -->
+
+## Column guidance — what to fill in
+
+### Reg Request Id
 
 <<MUST item:Art.20:reg_request_id>>
 _Why: Cross-leaf_
 
-<<TEXT>>
+> _Standard text:_ Per-row request id (Art.12 register cross-reference)
 
-## 2. Per-row applicability decision (in-scope / out-of-scope with grounds)
+### Reg Applicability Decision
 
 <<MUST item:Art.20:reg_applicability_decision>>
 _Why: Art.20.1_
 
-<<TEXT>>
+> _Standard text:_ Per-row applicability decision (in-scope / out-of-scope with grounds)
 
-## 3. Per-row delivered format
+### Reg Format Delivered
 
 <<MUST item:Art.20:reg_format_delivered>>
 _Why: Art.20.1_
 
-<<TEXT>>
+> _Standard text:_ Per-row delivered format
 
-## 4. Per-row destination (export to subject / direct controller transmission)
+### Reg Destination
 
 <<MUST item:Art.20:reg_destination>>
 _Why: Art.20.2_
 
-<<TEXT>>
+> _Standard text:_ Per-row destination (export to subject / direct controller transmission)
 
-## 5. Per-row delivery date (within Art.12.3 SLA)
+### Reg Delivery Date
 
 <<MUST item:Art.20:reg_delivery_date>>
 _Why: Art.12.3_
 
-<<TEXT>>
+> _Standard text:_ Per-row delivery date (within Art.12.3 SLA)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row data volume metric (records / bytes)
+### Reg Data Volume
 
 <<SHOULD item:Art.20:reg_data_volume>>
 _Why: Operational_
 
-<<TEXT>>
+> _Standard text:_ Per-row data volume metric (records / bytes)

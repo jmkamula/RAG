@@ -7,65 +7,87 @@ trigger_type: universal
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Change Register
 
 > Per-change record — change id, target, risk tier, approval lineage, outcome, rollback-invoked flag. The continuous evidence stream
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.32:change_register -->
+<!-- column: item:A.8.32:reg_change_id -->
+<!-- column: item:A.8.32:reg_target -->
+<!-- column: item:A.8.32:reg_risk_tier -->
+<!-- column: item:A.8.32:reg_approval_lineage -->
+<!-- column: item:A.8.32:reg_outcome -->
+<!-- column: item:A.8.32:reg_emergency_flag -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-change unique identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.32:change_register -->
+| Reg Change Id | Reg Target | Reg Risk Tier | Reg Approval Lineage | Reg Outcome | Reg Emergency Flag |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.32:change_register -->
+
+## Column guidance — what to fill in
+
+### Reg Change Id
 
 <<MUST item:A.8.32:reg_change_id>>
 _Why: Auditability_
 
-<<TEXT>>
+> _Standard text:_ Per-change unique identifier
 
-## 2. Per-change target (system / config / data; cross-link to A.5.9 asset register)
+### Reg Target
 
 <<MUST item:A.8.32:reg_target>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-change target (system / config / data; cross-link to A.5.9 asset register)
 
-## 3. Per-change risk tier (drives approval path applied)
+### Reg Risk Tier
 
 <<MUST item:A.8.32:reg_risk_tier>>
 _Why: 27002:8.32 — change management_
 
-<<TEXT>>
+> _Standard text:_ Per-change risk tier (drives approval path applied)
 
-## 4. Per-change approval lineage (approver(s) + timestamp)
+### Reg Approval Lineage
 
 <<MUST item:A.8.32:reg_approval_lineage>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-change approval lineage (approver(s) + timestamp)
 
-## 5. Per-change outcome (success / partial / rolled-back / failed)
+### Reg Outcome
 
 <<MUST item:A.8.32:reg_outcome>>
 _Why: Continuous evidence_
 
-<<TEXT>>
+> _Standard text:_ Per-change outcome (success / partial / rolled-back / failed)
 
-## 6. Per-change emergency flag + post-hoc-review reference where emergency
+### Reg Emergency Flag
 
 <<MUST item:A.8.32:reg_emergency_flag>>
 _Why: Operational reality_
 
-<<TEXT>>
+> _Standard text:_ Per-change emergency flag + post-hoc-review reference where emergency
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-change actor (person or automated job)
+### Reg Actor
 
 <<SHOULD item:A.8.32:reg_actor>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-change actor (person or automated job)

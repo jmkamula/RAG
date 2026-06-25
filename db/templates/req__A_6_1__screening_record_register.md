@@ -7,72 +7,94 @@ trigger_type: universal
 template_version: 1
 must_count: 6
 should_count: 2
+table_shape: true
 ---
 
 # Per-Candidate Screening Record Register
 
 > The operational catalogue of screening events. Every candidate / new hire / re-screened employee has a row: candidate identifier, role tier, checks performed, outcome, decision authority, decision date. Drives the audit-defensibility 'show me you screened this person before they got access' question
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.6.1:screening_record_register -->
+<!-- column: item:A.6.1:reg_candidate_id -->
+<!-- column: item:A.6.1:reg_role_tier -->
+<!-- column: item:A.6.1:reg_checks_performed -->
+<!-- column: item:A.6.1:reg_outcome -->
+<!-- column: item:A.6.1:reg_decision_date -->
+<!-- column: item:A.6.1:reg_authoriser -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-record candidate identifier (links to identity register A.5.16 once hired; anonymised pre-hire to comply with data minimisation)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.6.1:screening_record_register -->
+| Reg Candidate Id | Reg Role Tier | Reg Checks Performed | Reg Outcome | Reg Decision Date | Reg Authoriser |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.6.1:screening_record_register -->
+
+## Column guidance — what to fill in
+
+### Reg Candidate Id
 
 <<MUST item:A.6.1:reg_candidate_id>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-record candidate identifier (links to identity register A.5.16 once hired; anonymised pre-hire to comply with data minimisation)
 
-## 2. Role tier per record (drives the proportional check-depth applied; junior / standard / sensitive / privileged)
+### Reg Role Tier
 
 <<MUST item:A.6.1:reg_role_tier>>
 _Why: 27002:6.1a — proportional_
 
-<<TEXT>>
+> _Standard text:_ Role tier per record (drives the proportional check-depth applied; junior / standard / sensitive / privileged)
 
-## 3. Checks performed per record (identity / employment-history / education / criminal / financial / sanctions — actual checks run, not just planned)
+### Reg Checks Performed
 
 <<MUST item:A.6.1:reg_checks_performed>>
 _Why: 27002:6.1a — verification_
 
-<<TEXT>>
+> _Standard text:_ Checks performed per record (identity / employment-history / education / criminal / financial / sanctions — actual checks run, not just planned)
 
-## 4. Outcome per record (cleared / cleared-with-conditions / blocked / superseded by waiver)
+### Reg Outcome
 
 <<MUST item:A.6.1:reg_outcome>>
 _Why: 27002:6.1 — decision_
 
-<<TEXT>>
+> _Standard text:_ Outcome per record (cleared / cleared-with-conditions / blocked / superseded by waiver)
 
-## 5. Decision date per record (proves the screening completed BEFORE access was granted per A.5.18)
+### Reg Decision Date
 
 <<MUST item:A.6.1:reg_decision_date>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Decision date per record (proves the screening completed BEFORE access was granted per A.5.18)
 
-## 6. Authoriser per record (named individual making the accept/reject decision)
+### Reg Authoriser
 
 <<MUST item:A.6.1:reg_authoriser>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Authoriser per record (named individual making the accept/reject decision)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Last rescreen date per record (for roles with ongoing-check obligations)
+### Reg Rescreen Date
 
 <<SHOULD item:A.6.1:reg_rescreen_date>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Last rescreen date per record (for roles with ongoing-check obligations)
 
-### 2. Third-party provider reference per record where used
+### Reg Provider Ref
 
 <<SHOULD item:A.6.1:reg_provider_ref>>
 _Why: Traceability_
 
-<<TEXT>>
+> _Standard text:_ Third-party provider reference per record where used

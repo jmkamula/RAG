@@ -7,65 +7,86 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 2
+table_shape: true
 ---
 
 # Supplier Register
 
 > A.5.19 requires the org to know who its suppliers are, what they provide, the nature of access they hold, and their risk classification. The register is the live source of truth — feeding the periodic review and offboarding leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.19:supplier_register -->
+<!-- column: item:A.5.19:reg_inventory -->
+<!-- column: item:A.5.19:reg_supplier_type -->
+<!-- column: item:A.5.19:reg_access_type -->
+<!-- column: item:A.5.19:reg_classification -->
+<!-- column: item:A.5.19:reg_owner -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Each supplier captured: identity, products/services, criticality
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.19:supplier_register -->
+| Reg Inventory | Reg Supplier Type | Reg Access Type | Reg Classification | Reg Owner |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.19:supplier_register -->
+
+## Column guidance — what to fill in
+
+### Reg Inventory
 
 <<MUST item:A.5.19:reg_inventory>>
 _Why: 27002:5.19a — types_
 
-<<TEXT>>
+> _Standard text:_ Each supplier captured: identity, products/services, criticality
 
-## 2. Supplier type per row (ICT service / ICT infra component / logistics / utilities / etc.)
+### Reg Supplier Type
 
 <<MUST item:A.5.19:reg_supplier_type>>
 _Why: 27002:5.19a_
 
-<<TEXT>>
+> _Standard text:_ Supplier type per row (ICT service / ICT infra component / logistics / utilities / etc.)
 
-## 3. Access type per row (logical / physical / network / application / app-to-app)
+### Reg Access Type
 
 <<MUST item:A.5.19:reg_access_type>>
 _Why: 27002:5.19g_
 
-<<TEXT>>
+> _Standard text:_ Access type per row (logical / physical / network / application / app-to-app)
 
-## 4. Risk classification (tier or category) per row
+### Reg Classification
 
 <<MUST item:A.5.19:reg_classification>>
 _Why: 27002:5.19b,d_
 
-<<TEXT>>
+> _Standard text:_ Risk classification (tier or category) per row
 
-## 5. Named internal owner accountable per supplier (relationship owner + InfoSec contact)
+### Reg Owner
 
 <<MUST item:A.5.19:reg_owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Named internal owner accountable per supplier (relationship owner + InfoSec contact)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Critical-supplier flag (drives audit + continuity scrutiny — link to A.5.29 / A.5.30)
+### Reg Critical Flag
 
 <<SHOULD item:A.5.19:reg_critical_flag>>
 _Why: 27002:5.19j_
 
-<<TEXT>>
+> _Standard text:_ Critical-supplier flag (drives audit + continuity scrutiny — link to A.5.29 / A.5.30)
 
-### 2. Disclosed sub-suppliers / fourth parties tracked per row
+### Reg Subsupplier
 
 <<SHOULD item:A.5.19:reg_subsupplier>>
 _Why: Supply-chain depth_
 
-<<TEXT>>
+> _Standard text:_ Disclosed sub-suppliers / fourth parties tracked per row

@@ -8,51 +8,70 @@ freshness_days: 365
 template_version: 1
 must_count: 3
 should_count: 2
+table_shape: true
 ---
 
 # Periodic Information Security Policy Review Record
 
 > A.5.1 requires the policy to be reviewed at planned intervals (typically annually) and after significant changes. The review record captures who reviewed it, when, and the outcome (unchanged / amended / retired). Annual cadence (365d) — master InfoSec policy is stable; topic-specific policies they reference may move faster
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.1:annual_review -->
+<!-- column: item:A.5.1:review_date -->
+<!-- column: item:A.5.1:review_outcome -->
+<!-- column: item:A.5.1:review_reviewer -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned review interval (typically within 12 months of last review)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.1:annual_review -->
+| Review Date | Review Outcome | Review Reviewer |
+|---|---|---|
+|          |          |          |
+|          |          |          |
+|          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.1:annual_review -->
+
+## Column guidance — what to fill in
+
+### Review Date
 
 <<MUST item:A.5.1:review_date>>
 _Why: 27002:5.1 — reviewed at planned intervals_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned review interval (typically within 12 months of last review)
 
-## 2. Outcome of the review (no change / amended to vN / retired)
+### Review Outcome
 
 <<MUST item:A.5.1:review_outcome>>
 _Why: 27002:5.1 — reviewed_
 
-<<TEXT>>
+> _Standard text:_ Outcome of the review (no change / amended to vN / retired)
 
-## 3. Reviewer identity and role
+### Review Reviewer
 
 <<MUST item:A.5.1:review_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity and role
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. List of significant-change triggers that should prompt an ad-hoc review
+### Review Triggers
 
 <<SHOULD item:A.5.1:review_triggers>>
 _Why: 27002:5.1 — review on significant change_
 
-<<TEXT>>
+> _Standard text:_ List of significant-change triggers that should prompt an ad-hoc review
 
-### 2. Next planned review date stated
+### Review Next Date
 
 <<SHOULD item:A.5.1:review_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

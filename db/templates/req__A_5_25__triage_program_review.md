@@ -8,72 +8,94 @@ freshness_days: 180
 template_version: 1
 must_count: 6
 should_count: 2
+table_shape: true
 ---
 
 # Periodic Event Triage Program Review
 
 > The triage program drifts when detection sources change, attack patterns evolve, or false-positive volume creeps. The review captures who reviewed the program, when, and the resulting calibration of detection sources, assessment criteria and classification scale
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.25:triage_program_review -->
+<!-- column: item:A.5.25:rev_date -->
+<!-- column: item:A.5.25:rev_reviewer -->
+<!-- column: item:A.5.25:rev_fp_rate -->
+<!-- column: item:A.5.25:rev_missed -->
+<!-- column: item:A.5.25:rev_calibration -->
+<!-- column: item:A.5.25:rev_actions -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.25:triage_program_review -->
+| Rev Date | Rev Reviewer | Rev Fp Rate | Rev Missed | Rev Calibration | Rev Actions |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.25:triage_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.5.25:rev_date>>
 _Why: 27002:5.25 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (SecOps lead + InfoSec lead jointly)
+### Rev Reviewer
 
 <<MUST item:A.5.25:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (SecOps lead + InfoSec lead jointly)
 
-## 3. False-positive rate analysed across the period
+### Rev Fp Rate
 
 <<MUST item:A.5.25:rev_fp_rate>>
 _Why: Calibration_
 
-<<TEXT>>
+> _Standard text:_ False-positive rate analysed across the period
 
-## 4. Missed-event analysis (events surfaced via lessons-learned that triage didn't catch)
+### Rev Missed
 
 <<MUST item:A.5.25:rev_missed>>
 _Why: Closing the loop with A.5.27_
 
-<<TEXT>>
+> _Standard text:_ Missed-event analysis (events surfaced via lessons-learned that triage didn't catch)
 
-## 5. Calibration outcome (detection sources / criteria / scale adjusted with rationale)
+### Rev Calibration
 
 <<MUST item:A.5.25:rev_calibration>>
 _Why: 27002:5.25 — keep current_
 
-<<TEXT>>
+> _Standard text:_ Calibration outcome (detection sources / criteria / scale adjusted with rationale)
 
-## 6. Action items captured (e.g. add monitoring source, adjust severity threshold)
+### Rev Actions
 
 <<MUST item:A.5.25:rev_actions>>
 _Why: 27002:5.25_
 
-<<TEXT>>
+> _Standard text:_ Action items captured (e.g. add monitoring source, adjust severity threshold)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. External threat intelligence input considered (link to A.5.7)
+### Rev Threat Intel
 
 <<SHOULD item:A.5.25:rev_threat_intel>>
 _Why: Detection landscape volatility_
 
-<<TEXT>>
+> _Standard text:_ External threat intelligence input considered (link to A.5.7)
 
-### 2. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.5.25:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

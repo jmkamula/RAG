@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Foreign Authority Request Register
 
 > Per-request record (most orgs will have empty register — that's a defensible outcome). Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.48:foreign_request_register -->
+<!-- column: item:Art.48:reg_request_id -->
+<!-- column: item:Art.48:reg_authority -->
+<!-- column: item:Art.48:reg_legal_basis_check -->
+<!-- column: item:Art.48:reg_decision -->
+<!-- column: item:Art.48:reg_date -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row request id (or 'no requests this period' affirmative statement)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.48:foreign_request_register -->
+| Reg Request Id | Reg Authority | Reg Legal Basis Check | Reg Decision | Reg Date |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.48:foreign_request_register -->
+
+## Column guidance — what to fill in
+
+### Reg Request Id
 
 <<MUST item:Art.48:reg_request_id>>
 _Why: Audit_
 
-<<TEXT>>
+> _Standard text:_ Per-row request id (or 'no requests this period' affirmative statement)
 
-## 2. Per-row requesting authority + jurisdiction
+### Reg Authority
 
 <<MUST item:Art.48:reg_authority>>
 _Why: Defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row requesting authority + jurisdiction
 
-## 3. Per-row legal-basis check outcome (international agreement / Art.49 derogation / refused)
+### Reg Legal Basis Check
 
 <<MUST item:Art.48:reg_legal_basis_check>>
 _Why: Art.48_
 
-<<TEXT>>
+> _Standard text:_ Per-row legal-basis check outcome (international agreement / Art.49 derogation / refused)
 
-## 4. Per-row decision (disclosed / partially-disclosed / refused)
+### Reg Decision
 
 <<MUST item:Art.48:reg_decision>>
 _Why: Audit clarity_
 
-<<TEXT>>
+> _Standard text:_ Per-row decision (disclosed / partially-disclosed / refused)
 
-## 5. Per-row decision date
+### Reg Date
 
 <<MUST item:Art.48:reg_date>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-row decision date
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row legal counsel review evidence
+### Reg Legal Review
 
 <<SHOULD item:Art.48:reg_legal_review>>
 _Why: Defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row legal counsel review evidence

@@ -7,51 +7,71 @@ trigger_type: universal
 template_version: 1
 must_count: 4
 should_count: 1
+table_shape: true
 ---
 
 # Information Security Policy Approval Record
 
 > The per-version approval evidence — who signed off, on what date, against what scope. Distinct from the policy file itself: this is the audit trail of top-management approval across versions
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:5.2:isp_approval_record -->
+<!-- column: item:5.2:app_signature -->
+<!-- column: item:5.2:app_date -->
+<!-- column: item:5.2:app_role -->
+<!-- column: item:5.2:app_scope_at_approval -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Signature of top management on the latest version
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:5.2:isp_approval_record -->
+| App Signature | App Date | App Role | App Scope At Approval |
+|---|---|---|---|
+|          |          |          |          |
+|          |          |          |          |
+|          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:5.2:isp_approval_record -->
+
+## Column guidance — what to fill in
+
+### App Signature
 
 <<MUST item:5.2:app_signature>>
 _Why: Clause 5.2 — approved by top management_
 
-<<TEXT>>
+> _Standard text:_ Signature of top management on the latest version
 
-## 2. Approval date stated
+### App Date
 
 <<MUST item:5.2:app_date>>
 _Why: Authenticity_
 
-<<TEXT>>
+> _Standard text:_ Approval date stated
 
-## 3. Approving role identified (CEO, board chair, or delegated authority with letter of delegation)
+### App Role
 
 <<MUST item:5.2:app_role>>
 _Why: Authority_
 
-<<TEXT>>
+> _Standard text:_ Approving role identified (CEO, board chair, or delegated authority with letter of delegation)
 
-## 4. Scope statement (4.3) version that was in effect at approval
+### App Scope At Approval
 
 <<MUST item:5.2:app_scope_at_approval>>
 _Why: Cross-clause coherence_
 
-<<TEXT>>
+> _Standard text:_ Scope statement (4.3) version that was in effect at approval
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Prior approval signatures retained for audit trail (covers turnover)
+### App Prior Versions
 
 <<SHOULD item:5.2:app_prior_versions>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Prior approval signatures retained for audit trail (covers turnover)

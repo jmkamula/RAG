@@ -7,65 +7,87 @@ trigger_type: profile_fact
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Security Test Register
 
 > Per-test record — test id, application, type, gate, outcome, findings count
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.29:test_register -->
+<!-- column: item:A.8.29:reg_test_id -->
+<!-- column: item:A.8.29:reg_app -->
+<!-- column: item:A.8.29:reg_type -->
+<!-- column: item:A.8.29:reg_gate -->
+<!-- column: item:A.8.29:reg_outcome -->
+<!-- column: item:A.8.29:reg_artefact_ref -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-test unique identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.29:test_register -->
+| Reg Test Id | Reg App | Reg Type | Reg Gate | Reg Outcome | Reg Artefact Ref |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.29:test_register -->
+
+## Column guidance — what to fill in
+
+### Reg Test Id
 
 <<MUST item:A.8.29:reg_test_id>>
 _Why: Auditability_
 
-<<TEXT>>
+> _Standard text:_ Per-test unique identifier
 
-## 2. Per-test application (cross-link to A.8.26 application register)
+### Reg App
 
 <<MUST item:A.8.29:reg_app>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-test application (cross-link to A.8.26 application register)
 
-## 3. Per-test type (matches procedure's test-types list)
+### Reg Type
 
 <<MUST item:A.8.29:reg_type>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-test type (matches procedure's test-types list)
 
-## 4. Per-test lifecycle gate (where in lifecycle this test ran)
+### Reg Gate
 
 <<MUST item:A.8.29:reg_gate>>
 _Why: 27002:8.29 — development life cycle_
 
-<<TEXT>>
+> _Standard text:_ Per-test lifecycle gate (where in lifecycle this test ran)
 
-## 5. Per-test outcome (pass / fail / waived-with-exception) + findings-count
+### Reg Outcome
 
 <<MUST item:A.8.29:reg_outcome>>
 _Why: 27002:8.29 — acceptance_
 
-<<TEXT>>
+> _Standard text:_ Per-test outcome (pass / fail / waived-with-exception) + findings-count
 
-## 6. Per-test artefact reference (report / scan output / pen-test deliverable retained)
+### Reg Artefact Ref
 
 <<MUST item:A.8.29:reg_artefact_ref>>
 _Why: Defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-test artefact reference (report / scan output / pen-test deliverable retained)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-test external/internal flag (independent vs internal)
+### Reg External
 
 <<SHOULD item:A.8.29:reg_external>>
 _Why: Assurance visibility_
 
-<<TEXT>>
+> _Standard text:_ Per-test external/internal flag (independent vs internal)

@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Physical Entry Event Register
 
 > The catalogue of entry events into secure areas — badge-swipes, visitor sign-ins, exceptions invoked. Drives 'show me who entered the server room on date X' audit
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.7.2:entry_event_register -->
+<!-- column: item:A.7.2:reg_event_id -->
+<!-- column: item:A.7.2:reg_subject -->
+<!-- column: item:A.7.2:reg_area -->
+<!-- column: item:A.7.2:reg_timestamp -->
+<!-- column: item:A.7.2:reg_method -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-event unique identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.7.2:entry_event_register -->
+| Reg Event Id | Reg Subject | Reg Area | Reg Timestamp | Reg Method |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.7.2:entry_event_register -->
+
+## Column guidance — what to fill in
+
+### Reg Event Id
 
 <<MUST item:A.7.2:reg_event_id>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-event unique identifier
 
-## 2. Per-event subject identifier (employee or visitor; for visitors, host also recorded)
+### Reg Subject
 
 <<MUST item:A.7.2:reg_subject>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-event subject identifier (employee or visitor; for visitors, host also recorded)
 
-## 3. Per-event area entered (from the perimeter register A.7.1)
+### Reg Area
 
 <<MUST item:A.7.2:reg_area>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-event area entered (from the perimeter register A.7.1)
 
-## 4. Per-event timestamp (entry; exit timestamp where mantrap enforces it)
+### Reg Timestamp
 
 <<MUST item:A.7.2:reg_timestamp>>
 _Why: 27002:7.2 — controls_
 
-<<TEXT>>
+> _Standard text:_ Per-event timestamp (entry; exit timestamp where mantrap enforces it)
 
-## 5. Per-event entry method (badge / biometric / mechanical / visitor-escort / exception-override)
+### Reg Method
 
 <<MUST item:A.7.2:reg_method>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Per-event entry method (badge / biometric / mechanical / visitor-escort / exception-override)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Anomaly flag per event (out-of-hours, unusual area for this subject, override-without-justification)
+### Reg Anomaly Flag
 
 <<SHOULD item:A.7.2:reg_anomaly_flag>>
 _Why: Detection_
 
-<<TEXT>>
+> _Standard text:_ Anomaly flag per event (out-of-hours, unusual area for this subject, override-without-justification)

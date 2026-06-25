@@ -7,86 +7,110 @@ trigger_type: universal
 template_version: 1
 must_count: 8
 should_count: 2
+table_shape: true
 ---
 
 # Per-Activation Plan Record
 
 > A.5.29 expects the plan to be ACTIVATED — not just written. The activation record evidences each invocation: activation id, type (real_disruption / scheduled_test / partial_drill), scenario triggered, scope of degradation, duration, gaps surfaced, restoration status, sign-off. One record per activation, covering BOTH real disruptions AND scheduled tests (type field distinguishes). Real activations cross-reference A.5.26 incident_register where the disruption was incident-driven
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.29:plan_activation_record -->
+<!-- column: item:A.5.29:act_activation_id -->
+<!-- column: item:A.5.29:act_type -->
+<!-- column: item:A.5.29:act_scenario_ref -->
+<!-- column: item:A.5.29:act_scope -->
+<!-- column: item:A.5.29:act_duration -->
+<!-- column: item:A.5.29:act_gaps -->
+<!-- column: item:A.5.29:act_restoration -->
+<!-- column: item:A.5.29:act_signoff -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Activation identifier per record (unique, sequenced)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.29:plan_activation_record -->
+| Act Activation Id | Act Type | Act Scenario Ref | Act Scope | Act Duration | Act Gaps | Act Restoration | Act Signoff |
+|---|---|---|---|---|---|---|---|
+|          |          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.29:plan_activation_record -->
+
+## Column guidance — what to fill in
+
+### Act Activation Id
 
 <<MUST item:A.5.29:act_activation_id>>
 _Why: 27002:5.29 — traceability_
 
-<<TEXT>>
+> _Standard text:_ Activation identifier per record (unique, sequenced)
 
-## 2. Activation type per record (real_disruption / scheduled_test / partial_drill / regulator_led_exercise)
+### Act Type
 
 <<MUST item:A.5.29:act_type>>
 _Why: 27002:5.29 — coverage taxonomy_
 
-<<TEXT>>
+> _Standard text:_ Activation type per record (real_disruption / scheduled_test / partial_drill / regulator_led_exercise)
 
-## 3. Triggered scenario reference per record (links to scenario register entry)
+### Act Scenario Ref
 
 <<MUST item:A.5.29:act_scenario_ref>>
 _Why: 27002:5.29 + cross-link to register_
 
-<<TEXT>>
+> _Standard text:_ Triggered scenario reference per record (links to scenario register entry)
 
-## 4. Scope of degradation per record (which controls dropped to fallback; which held at full; expected vs actual)
+### Act Scope
 
 <<MUST item:A.5.29:act_scope>>
 _Why: 27002:5.29 — appropriate level verification_
 
-<<TEXT>>
+> _Standard text:_ Scope of degradation per record (which controls dropped to fallback; which held at full; expected vs actual)
 
-## 5. Duration per record (start time, end time, restoration time)
+### Act Duration
 
 <<MUST item:A.5.29:act_duration>>
 _Why: 27002:5.29 — timeline_
 
-<<TEXT>>
+> _Standard text:_ Duration per record (start time, end time, restoration time)
 
-## 6. Gaps surfaced per record (where the plan or controls fell short; severity per gap)
+### Act Gaps
 
 <<MUST item:A.5.29:act_gaps>>
 _Why: 27002:5.29 — improvement feedback_
 
-<<TEXT>>
+> _Standard text:_ Gaps surfaced per record (where the plan or controls fell short; severity per gap)
 
-## 7. Restoration status per record (all controls back to normal; outstanding remediation items tracked)
+### Act Restoration
 
 <<MUST item:A.5.29:act_restoration>>
 _Why: 27002:5.29 — maintain after disruption ends_
 
-<<TEXT>>
+> _Standard text:_ Restoration status per record (all controls back to normal; outstanding remediation items tracked)
 
-## 8. Signoff per record (activation-authority + CISO; exec sponsor where tier-1 disruption)
+### Act Signoff
 
 <<MUST item:A.5.29:act_signoff>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Signoff per record (activation-authority + CISO; exec sponsor where tier-1 disruption)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Cross-reference to A.5.26 incident register where the activation was incident-driven (real disruptions tied to incidents)
+### Act Incident Link
 
 <<SHOULD item:A.5.29:act_incident_link>>
 _Why: Closing loop with [[A.5.26]]_
 
-<<TEXT>>
+> _Standard text:_ Cross-reference to A.5.26 incident register where the activation was incident-driven (real disruptions tied to incidents)
 
-### 2. Lessons feed per record to A.5.27 lessons register where the activation surfaced patterns worth retaining beyond this control
+### Act Lessons Feed
 
 <<SHOULD item:A.5.29:act_lessons_feed>>
 _Why: Closing loop with [[A.5.27]]_
 
-<<TEXT>>
+> _Standard text:_ Lessons feed per record to A.5.27 lessons register where the activation surfaced patterns worth retaining beyond this control

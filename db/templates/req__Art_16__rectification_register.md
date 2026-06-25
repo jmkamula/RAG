@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Rectification Request Register
 
 > Per-request record proving every Art.16 request was handled per procedure. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.16:rectification_register -->
+<!-- column: item:Art.16:reg_request_id -->
+<!-- column: item:Art.16:reg_subject_id -->
+<!-- column: item:Art.16:reg_systems_touched -->
+<!-- column: item:Art.16:reg_response_date -->
+<!-- column: item:Art.16:reg_art19_xref -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row request id (Art.12 cross-ref)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.16:rectification_register -->
+| Reg Request Id | Reg Subject Id | Reg Systems Touched | Reg Response Date | Reg Art19 Xref |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.16:rectification_register -->
+
+## Column guidance — what to fill in
+
+### Reg Request Id
 
 <<MUST item:Art.16:reg_request_id>>
 _Why: Cross-leaf_
 
-<<TEXT>>
+> _Standard text:_ Per-row request id (Art.12 cross-ref)
 
-## 2. Per-row subject identifier (pseudonymous)
+### Reg Subject Id
 
 <<MUST item:Art.16:reg_subject_id>>
 _Why: Audit_
 
-<<TEXT>>
+> _Standard text:_ Per-row subject identifier (pseudonymous)
 
-## 3. Per-row systems where rectification was applied
+### Reg Systems Touched
 
 <<MUST item:Art.16:reg_systems_touched>>
 _Why: Art.16 — across all instances_
 
-<<TEXT>>
+> _Standard text:_ Per-row systems where rectification was applied
 
-## 4. Per-row response date (Art.12.3 SLA)
+### Reg Response Date
 
 <<MUST item:Art.16:reg_response_date>>
 _Why: Art.12.3_
 
-<<TEXT>>
+> _Standard text:_ Per-row response date (Art.12.3 SLA)
 
-## 5. Per-row Art.19 notification reference
+### Reg Art19 Xref
 
 <<MUST item:Art.16:reg_art19_xref>>
 _Why: Art.19_
 
-<<TEXT>>
+> _Standard text:_ Per-row Art.19 notification reference
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row summary of correction made
+### Reg Correction Summary
 
 <<SHOULD item:Art.16:reg_correction_summary>>
 _Why: Audit clarity_
 
-<<TEXT>>
+> _Standard text:_ Per-row summary of correction made

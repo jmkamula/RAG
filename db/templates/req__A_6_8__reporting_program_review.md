@@ -8,79 +8,102 @@ freshness_days: 365
 template_version: 1
 must_count: 7
 should_count: 2
+table_shape: true
 ---
 
 # Periodic Reporting Program Review
 
 > Periodic verification that reports are coming in (under-reporting is the major risk), that triage handoff is working (no reports lost between A.6.8 intake and A.5.25 triage), that reporters are getting acknowledgment, and that the audience-channel surfacing is current. Annual cadence (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.6.8:reporting_program_review -->
+<!-- column: item:A.6.8:rev_date -->
+<!-- column: item:A.6.8:rev_reviewer -->
+<!-- column: item:A.6.8:rev_volume_trend -->
+<!-- column: item:A.6.8:rev_channel_mix -->
+<!-- column: item:A.6.8:rev_triage_handoff -->
+<!-- column: item:A.6.8:rev_acknowledgment_rate -->
+<!-- column: item:A.6.8:rev_register_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.6.8:reporting_program_review -->
+| Rev Date | Rev Reviewer | Rev Volume Trend | Rev Channel Mix | Rev Triage Handoff | Rev Acknowledgment Rate | Rev Register Update |
+|---|---|---|---|---|---|---|
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.6.8:reporting_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.6.8:rev_date>>
 _Why: 27002:6.8 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (InfoSec lead + HR partner; Legal for whistleblower-territory cases)
+### Rev Reviewer
 
 <<MUST item:A.6.8:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (InfoSec lead + HR partner; Legal for whistleblower-territory cases)
 
-## 3. Volume trend analysis (report rate per segment — sudden drops may indicate under-reporting; sudden spikes may indicate a campaign or a known issue surfacing)
+### Rev Volume Trend
 
 <<MUST item:A.6.8:rev_volume_trend>>
 _Why: Reporting culture health_
 
-<<TEXT>>
+> _Standard text:_ Volume trend analysis (report rate per segment — sudden drops may indicate under-reporting; sudden spikes may indicate a campaign or a known issue surfacing)
 
-## 4. Channel-mix analysis (which channels are being used; under-used channels may need awareness promotion or retirement)
+### Rev Channel Mix
 
 <<MUST item:A.6.8:rev_channel_mix>>
 _Why: 27002:6.8 — channels effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Channel-mix analysis (which channels are being used; under-used channels may need awareness promotion or retirement)
 
-## 5. Triage handoff check — every report reached A.5.25 triage; no reports lost in the handoff; cycle time from report to triage measured
+### Rev Triage Handoff
 
 <<MUST item:A.6.8:rev_triage_handoff>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Triage handoff check — every report reached A.5.25 triage; no reports lost in the handoff; cycle time from report to triage measured
 
-## 6. Acknowledgment rate to reporters (where reporter known) — drives reporter satisfaction and ongoing willingness to report
+### Rev Acknowledgment Rate
 
 <<MUST item:A.6.8:rev_acknowledgment_rate>>
 _Why: Reporting culture_
 
-<<TEXT>>
+> _Standard text:_ Acknowledgment rate to reporters (where reporter known) — drives reporter satisfaction and ongoing willingness to report
 
-## 7. Changes propagated to the procedure / scope with reference to this review
+### Rev Register Update
 
 <<MUST item:A.6.8:rev_register_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Changes propagated to the procedure / scope with reference to this review
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Ad-hoc review triggers (major incident exposing under-reporting, regulator enforcement on whistleblower regime, channel outage)
+### Rev Ad Hoc Triggers
 
 <<SHOULD item:A.6.8:rev_ad_hoc_triggers>>
 _Why: Change-driven review_
 
-<<TEXT>>
+> _Standard text:_ Ad-hoc review triggers (major incident exposing under-reporting, regulator enforcement on whistleblower regime, channel outage)
 
-### 2. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.6.8:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

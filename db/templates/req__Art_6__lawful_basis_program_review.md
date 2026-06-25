@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Lawful Basis Program Review
 
 > Annual verification that every processing activity has a current basis, the procedure is being followed, regulator guidance updates have been swept in (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.6:lawful_basis_program_review -->
+<!-- column: item:Art.6:rev_date -->
+<!-- column: item:Art.6:rev_reviewer -->
+<!-- column: item:Art.6:rev_register_currency -->
+<!-- column: item:Art.6:rev_basis_appropriateness -->
+<!-- column: item:Art.6:rev_regulator_guidance -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.6:lawful_basis_program_review -->
+| Rev Date | Rev Reviewer | Rev Register Currency | Rev Basis Appropriateness | Rev Regulator Guidance |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.6:lawful_basis_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.6:rev_date>>
 _Why: Art.5.2 — periodic accountability_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO or Privacy Lead)
+### Rev Reviewer
 
 <<MUST item:Art.6:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO or Privacy Lead)
 
-## 3. Register currency check — every Art.30 RoPA activity has a current Art.6 basis assignment
+### Rev Register Currency
 
 <<MUST item:Art.6:rev_register_currency>>
 _Why: Cross-clause coherence_
 
-<<TEXT>>
+> _Standard text:_ Register currency check — every Art.30 RoPA activity has a current Art.6 basis assignment
 
-## 4. Basis-appropriateness sample — high-volume / high-sensitivity activities re-evaluated for whether the chosen basis still fits
+### Rev Basis Appropriateness
 
 <<MUST item:Art.6:rev_basis_appropriateness>>
 _Why: Art.5.2 — accountability_
 
-<<TEXT>>
+> _Standard text:_ Basis-appropriateness sample — high-volume / high-sensitivity activities re-evaluated for whether the chosen basis still fits
 
-## 5. Regulator-guidance sweep — EDPB / supervisory authority guidance updates considered for impact
+### Rev Regulator Guidance
 
 <<MUST item:Art.6:rev_regulator_guidance>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Regulator-guidance sweep — EDPB / supervisory authority guidance updates considered for impact
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.6:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

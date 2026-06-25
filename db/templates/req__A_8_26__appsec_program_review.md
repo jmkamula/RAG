@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Periodic Application Security Requirements Review
 
 > Annual verification — requirements catalogue currency vs threat landscape, traceability sample, exception inventory (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.26:appsec_program_review -->
+<!-- column: item:A.8.26:rev_date -->
+<!-- column: item:A.8.26:rev_reviewer -->
+<!-- column: item:A.8.26:rev_catalogue_currency -->
+<!-- column: item:A.8.26:rev_traceability_sample -->
+<!-- column: item:A.8.26:rev_exception_inventory -->
+<!-- column: item:A.8.26:rev_findings_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.26:appsec_program_review -->
+| Rev Date | Rev Reviewer | Rev Catalogue Currency | Rev Traceability Sample | Rev Exception Inventory | Rev Findings Update |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.26:appsec_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.8.26:rev_date>>
 _Why: 27002:8.26 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (Engineering + InfoSec + Product)
+### Rev Reviewer
 
 <<MUST item:A.8.26:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (Engineering + InfoSec + Product)
 
-## 3. Requirements-catalogue currency check (new threat patterns → requirement-category updates)
+### Rev Catalogue Currency
 
 <<MUST item:A.8.26:rev_catalogue_currency>>
 _Why: 27002:8.26 — information security requirements_
 
-<<TEXT>>
+> _Standard text:_ Requirements-catalogue currency check (new threat patterns → requirement-category updates)
 
-## 4. Sample-based traceability verification (requirements → test cases mapping intact)
+### Rev Traceability Sample
 
 <<MUST item:A.8.26:rev_traceability_sample>>
 _Why: 27002:8.26 — specified_
 
-<<TEXT>>
+> _Standard text:_ Sample-based traceability verification (requirements → test cases mapping intact)
 
-## 5. Exception inventory re-confirmed / retired
+### Rev Exception Inventory
 
 <<MUST item:A.8.26:rev_exception_inventory>>
 _Why: Drift prevention_
 
-<<TEXT>>
+> _Standard text:_ Exception inventory re-confirmed / retired
 
-## 6. Findings propagated to procedure / scope
+### Rev Findings Update
 
 <<MUST item:A.8.26:rev_findings_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Findings propagated to procedure / scope
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.8.26:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

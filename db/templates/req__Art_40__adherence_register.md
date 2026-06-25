@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Code Adherence Register
 
 > Per-code register listing adhered codes + status. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.40:adherence_register -->
+<!-- column: item:Art.40:reg_code_id -->
+<!-- column: item:Art.40:reg_adherence_date -->
+<!-- column: item:Art.40:reg_scope -->
+<!-- column: item:Art.40:reg_monitoring_body -->
+<!-- column: item:Art.40:reg_status -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row code identifier (name + association + approval reference)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.40:adherence_register -->
+| Reg Code Id | Reg Adherence Date | Reg Scope | Reg Monitoring Body | Reg Status |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.40:adherence_register -->
+
+## Column guidance — what to fill in
+
+### Reg Code Id
 
 <<MUST item:Art.40:reg_code_id>>
 _Why: Audit_
 
-<<TEXT>>
+> _Standard text:_ Per-row code identifier (name + association + approval reference)
 
-## 2. Per-row adherence date
+### Reg Adherence Date
 
 <<MUST item:Art.40:reg_adherence_date>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-row adherence date
 
-## 3. Per-row scope of adherence (which processing activities)
+### Reg Scope
 
 <<MUST item:Art.40:reg_scope>>
 _Why: Defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row scope of adherence (which processing activities)
 
-## 4. Per-row monitoring body engaged (Art.41)
+### Reg Monitoring Body
 
 <<MUST item:Art.40:reg_monitoring_body>>
 _Why: Art.41_
 
-<<TEXT>>
+> _Standard text:_ Per-row monitoring body engaged (Art.41)
 
-## 5. Per-row status (active / suspended / withdrawn-on-date)
+### Reg Status
 
 <<MUST item:Art.40:reg_status>>
 _Why: Lifecycle_
 
-<<TEXT>>
+> _Standard text:_ Per-row status (active / suspended / withdrawn-on-date)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row last monitoring assessment date
+### Reg Last Assessment
 
 <<SHOULD item:Art.40:reg_last_assessment>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-row last monitoring assessment date

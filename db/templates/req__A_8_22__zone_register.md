@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Network Zone Register
 
 > Per-zone catalogue — zone id, classification, contained systems, enforcement boundary, owner
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.22:zone_register -->
+<!-- column: item:A.8.22:reg_zone_id -->
+<!-- column: item:A.8.22:reg_classification -->
+<!-- column: item:A.8.22:reg_contained_systems -->
+<!-- column: item:A.8.22:reg_enforcement -->
+<!-- column: item:A.8.22:reg_exceptions -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-zone unique identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.22:zone_register -->
+| Reg Zone Id | Reg Classification | Reg Contained Systems | Reg Enforcement | Reg Exceptions |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.22:zone_register -->
+
+## Column guidance — what to fill in
+
+### Reg Zone Id
 
 <<MUST item:A.8.22:reg_zone_id>>
 _Why: Identification_
 
-<<TEXT>>
+> _Standard text:_ Per-zone unique identifier
 
-## 2. Per-zone classification tier
+### Reg Classification
 
 <<MUST item:A.8.22:reg_classification>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-zone classification tier
 
-## 3. Per-zone contained-systems list (drawn from A.5.9)
+### Reg Contained Systems
 
 <<MUST item:A.8.22:reg_contained_systems>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-zone contained-systems list (drawn from A.5.9)
 
-## 4. Per-zone enforcement-boundary description (specific firewall / ACL / policy)
+### Reg Enforcement
 
 <<MUST item:A.8.22:reg_enforcement>>
 _Why: 27002:8.22 — segregated_
 
-<<TEXT>>
+> _Standard text:_ Per-zone enforcement-boundary description (specific firewall / ACL / policy)
 
-## 5. Per-zone exception inventory (cross-zone allowances with expiry)
+### Reg Exceptions
 
 <<MUST item:A.8.22:reg_exceptions>>
 _Why: Drift detection_
 
-<<TEXT>>
+> _Standard text:_ Per-zone exception inventory (cross-zone allowances with expiry)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-zone named owner
+### Reg Owner
 
 <<SHOULD item:A.8.22:reg_owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-zone named owner

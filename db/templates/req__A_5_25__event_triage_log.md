@@ -7,65 +7,86 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 2
+table_shape: true
 ---
 
 # Security Event Triage Log
 
 > A.5.25 expects records of events, incidents and weaknesses to be maintained and accessible to competent personnel. The triage log is the live source of truth — every triaged event, its classification, decision and owner — feeding the periodic review and the per-event triage-decision records
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.25:event_triage_log -->
+<!-- column: item:A.5.25:log_event_id -->
+<!-- column: item:A.5.25:log_source -->
+<!-- column: item:A.5.25:log_classification -->
+<!-- column: item:A.5.25:log_decision -->
+<!-- column: item:A.5.25:log_owner -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Each event captured with a unique identifier and detection timestamp
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.25:event_triage_log -->
+| Log Event Id | Log Source | Log Classification | Log Decision | Log Owner |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.25:event_triage_log -->
+
+## Column guidance — what to fill in
+
+### Log Event Id
 
 <<MUST item:A.5.25:log_event_id>>
 _Why: 27002:5.25 — records of events_
 
-<<TEXT>>
+> _Standard text:_ Each event captured with a unique identifier and detection timestamp
 
-## 2. Detection source per row (which monitoring system / user / third party reported it)
+### Log Source
 
 <<MUST item:A.5.25:log_source>>
 _Why: 27002:5.25 — events_
 
-<<TEXT>>
+> _Standard text:_ Detection source per row (which monitoring system / user / third party reported it)
 
-## 3. Classification per row (event / near-miss / incident / false positive) with severity
+### Log Classification
 
 <<MUST item:A.5.25:log_classification>>
 _Why: 27002:5.25 — categorised_
 
-<<TEXT>>
+> _Standard text:_ Classification per row (event / near-miss / incident / false positive) with severity
 
-## 4. Triage decision per row (close as false positive / file as near-miss / escalate to A.5.26)
+### Log Decision
 
 <<MUST item:A.5.25:log_decision>>
 _Why: 27002:5.25 — decision_
 
-<<TEXT>>
+> _Standard text:_ Triage decision per row (close as false positive / file as near-miss / escalate to A.5.26)
 
-## 5. Named triager per row (accountability)
+### Log Owner
 
 <<MUST item:A.5.25:log_owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Named triager per row (accountability)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. False-positive flag tracked separately (drives calibration in the program review)
+### Log Fp Tag
 
 <<SHOULD item:A.5.25:log_fp_tag>>
 _Why: Calibration_
 
-<<TEXT>>
+> _Standard text:_ False-positive flag tracked separately (drives calibration in the program review)
 
-### 2. Trend / correlation tag where related events should be grouped
+### Log Trend Tag
 
 <<SHOULD item:A.5.25:log_trend_tag>>
 _Why: 27002:5.25 — correlation_
 
-<<TEXT>>
+> _Standard text:_ Trend / correlation tag where related events should be grouped

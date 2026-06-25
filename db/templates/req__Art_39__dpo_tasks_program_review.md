@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # DPO Tasks Program Review
 
 > Annual verification — DPO actually performing each Art.39.1 task, risk-based priorities being honoured, awareness contribution effective (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.39:dpo_tasks_program_review -->
+<!-- column: item:Art.39:rev_date -->
+<!-- column: item:Art.39:rev_reviewer -->
+<!-- column: item:Art.39:rev_task_coverage -->
+<!-- column: item:Art.39:rev_risk_prioritisation_check -->
+<!-- column: item:Art.39:rev_quality_signals -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.39:dpo_tasks_program_review -->
+| Rev Date | Rev Reviewer | Rev Task Coverage | Rev Risk Prioritisation Check | Rev Quality Signals |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.39:dpo_tasks_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.39:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (executive sponsor)
+### Rev Reviewer
 
 <<MUST item:Art.39:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (executive sponsor)
 
-## 3. Task coverage audit — every Art.39.1 task has corresponding activity-register entries
+### Rev Task Coverage
 
 <<MUST item:Art.39:rev_task_coverage>>
 _Why: Art.39.1_
 
-<<TEXT>>
+> _Standard text:_ Task coverage audit — every Art.39.1 task has corresponding activity-register entries
 
-## 4. Risk prioritisation check — DPO attention skewed toward higher-risk processing
+### Rev Risk Prioritisation Check
 
 <<MUST item:Art.39:rev_risk_prioritisation_check>>
 _Why: Art.39.2_
 
-<<TEXT>>
+> _Standard text:_ Risk prioritisation check — DPO attention skewed toward higher-risk processing
 
-## 5. Quality signals — incident-trend reduction, DPIA-handling improvement, SA-interaction outcomes
+### Rev Quality Signals
 
 <<MUST item:Art.39:rev_quality_signals>>
 _Why: Effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Quality signals — incident-trend reduction, DPIA-handling improvement, SA-interaction outcomes
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.39:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

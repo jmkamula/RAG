@@ -8,79 +8,102 @@ freshness_days: 180
 template_version: 1
 must_count: 7
 should_count: 2
+table_shape: true
 ---
 
 # Periodic Incident Management Framework Review
 
 > The framework creates value only if it actually runs when incidents hit — exercise results that surface gaps, team coverage gaps, framework-vs-actual-response divergence, GDPR-72h-feasibility check all signal the framework is or isn't ready. The review captures the planned-interval check: exercise-result analysis, team-readiness audit, real-incident-vs-framework divergence analysis, GDPR-readiness verification, and resulting framework adjustments. Cadence tightened to 180 days — IR readiness erodes between exercises
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.24:framework_program_review -->
+<!-- column: item:A.5.24:rev_date -->
+<!-- column: item:A.5.24:rev_reviewer -->
+<!-- column: item:A.5.24:rev_exercise_results -->
+<!-- column: item:A.5.24:rev_team_readiness -->
+<!-- column: item:A.5.24:rev_real_divergence -->
+<!-- column: item:A.5.24:rev_gdpr_72h_feasibility -->
+<!-- column: item:A.5.24:rev_actions -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned 180-day interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.24:framework_program_review -->
+| Rev Date | Rev Reviewer | Rev Exercise Results | Rev Team Readiness | Rev Real Divergence | Rev Gdpr 72H Feasibility | Rev Actions |
+|---|---|---|---|---|---|---|
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.24:framework_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.5.24:rev_date>>
 _Why: 27002:5.24 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned 180-day interval
 
-## 2. Reviewer identity (CISO + IR lead + Data Protection Officer where personal data scope; Legal where regulator notification scope)
+### Rev Reviewer
 
 <<MUST item:A.5.24:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (CISO + IR lead + Data Protection Officer where personal data scope; Legal where regulator notification scope)
 
-## 3. Exercise-result analysis (last N exercises reviewed; gaps surfaced; remediation per gap; ratio-of-exercises-completed vs planned)
+### Rev Exercise Results
 
 <<MUST item:A.5.24:rev_exercise_results>>
 _Why: 27002:5.24 — preparation effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Exercise-result analysis (last N exercises reviewed; gaps surfaced; remediation per gap; ratio-of-exercises-completed vs planned)
 
-## 4. Team-readiness audit (training currency across responders; coverage gaps where a tier is under-staffed; backup-named compliance)
+### Rev Team Readiness
 
 <<MUST item:A.5.24:rev_team_readiness>>
 _Why: 27002:5.24 — preparation_
 
-<<TEXT>>
+> _Standard text:_ Team-readiness audit (training currency across responders; coverage gaps where a tier is under-staffed; backup-named compliance)
 
-## 5. Real-incident vs framework divergence (where actual responses deviated from framework — was the framework too prescriptive, missing a path, or just unused?)
+### Rev Real Divergence
 
 <<MUST item:A.5.24:rev_real_divergence>>
 _Why: Framework effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Real-incident vs framework divergence (where actual responses deviated from framework — was the framework too prescriptive, missing a path, or just unused?)
 
-## 6. GDPR 72-hour feasibility check (when did the last personal-data incident notify? what was the gap to 72h? is the path actually under 72h?)
+### Rev Gdpr 72H Feasibility
 
 <<MUST item:A.5.24:rev_gdpr_72h_feasibility>>
 _Why: GDPR Art.33 — 72hr feasibility verification_
 
-<<TEXT>>
+> _Standard text:_ GDPR 72-hour feasibility check (when did the last personal-data incident notify? what was the gap to 72h? is the path actually under 72h?)
 
-## 7. Action items captured (e.g. add new role, refresh communications playbook, expand exercise scope, tighten 72h path)
+### Rev Actions
 
 <<MUST item:A.5.24:rev_actions>>
 _Why: 27002:5.24 — framework adjustments_
 
-<<TEXT>>
+> _Standard text:_ Action items captured (e.g. add new role, refresh communications playbook, expand exercise scope, tighten 72h path)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Peer/industry practice scan (notable incidents in the sector; how peers responded; lessons applicable)
+### Rev Peer Practice
 
 <<SHOULD item:A.5.24:rev_peer_practice>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Peer/industry practice scan (notable incidents in the sector; how peers responded; lessons applicable)
 
-### 2. Next planned review date stated (within 180d of this review)
+### Rev Next Date
 
 <<SHOULD item:A.5.24:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated (within 180d of this review)

@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Automated Decision-Making Program Review
 
 > Annual verification — every in-scope system has a current Art.22.2 basis, safeguards functioning, DPIAs current, objections handled (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.22:automated_decision_program_review -->
+<!-- column: item:Art.22:rev_date -->
+<!-- column: item:Art.22:rev_reviewer -->
+<!-- column: item:Art.22:rev_basis_currency -->
+<!-- column: item:Art.22:rev_safeguards_health -->
+<!-- column: item:Art.22:rev_silent_promotion -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.22:automated_decision_program_review -->
+| Rev Date | Rev Reviewer | Rev Basis Currency | Rev Safeguards Health | Rev Silent Promotion |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.22:automated_decision_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.22:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + ML/product lead)
+### Rev Reviewer
 
 <<MUST item:Art.22:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + ML/product lead)
 
-## 3. Basis currency check — every in-scope system still has valid Art.22.2 basis
+### Rev Basis Currency
 
 <<MUST item:Art.22:rev_basis_currency>>
 _Why: Art.22.2_
 
-<<TEXT>>
+> _Standard text:_ Basis currency check — every in-scope system still has valid Art.22.2 basis
 
-## 4. Safeguards health — human intervention queue actually used, contest mechanism functioning
+### Rev Safeguards Health
 
 <<MUST item:Art.22:rev_safeguards_health>>
 _Why: Art.22.3_
 
-<<TEXT>>
+> _Standard text:_ Safeguards health — human intervention queue actually used, contest mechanism functioning
 
-## 5. Silent-promotion sweep — verify no flag-for-review system has been quietly promoted to solely-automated without procedure update
+### Rev Silent Promotion
 
 <<MUST item:Art.22:rev_silent_promotion>>
 _Why: Drift detection_
 
-<<TEXT>>
+> _Standard text:_ Silent-promotion sweep — verify no flag-for-review system has been quietly promoted to solely-automated without procedure update
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.22:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

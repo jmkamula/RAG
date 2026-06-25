@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Privacy Notice Program Review
 
 > Annual verification that the notice content is current with actual processing, the publication record reflects all deployed versions, every collection point still presents the notice (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.13:privacy_notice_program_review -->
+<!-- column: item:Art.13:rev_date -->
+<!-- column: item:Art.13:rev_reviewer -->
+<!-- column: item:Art.13:rev_content_currency -->
+<!-- column: item:Art.13:rev_collection_coverage -->
+<!-- column: item:Art.13:rev_publication_archive -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.13:privacy_notice_program_review -->
+| Rev Date | Rev Reviewer | Rev Content Currency | Rev Collection Coverage | Rev Publication Archive |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.13:privacy_notice_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.13:rev_date>>
 _Why: Art.5.2 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO or Privacy Lead)
+### Rev Reviewer
 
 <<MUST item:Art.13:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO or Privacy Lead)
 
-## 3. Content currency check — notice reflects current Art.30 RoPA + Art.6 basis register
+### Rev Content Currency
 
 <<MUST item:Art.13:rev_content_currency>>
 _Why: Cross-article coherence_
 
-<<TEXT>>
+> _Standard text:_ Content currency check — notice reflects current Art.30 RoPA + Art.6 basis register
 
-## 4. Coverage check — every in-scope collection point still presents the current notice
+### Rev Collection Coverage
 
 <<MUST item:Art.13:rev_collection_coverage>>
 _Why: Drift detection_
 
-<<TEXT>>
+> _Standard text:_ Coverage check — every in-scope collection point still presents the current notice
 
-## 5. Publication archive check — prior versions retained for audit defensibility
+### Rev Publication Archive
 
 <<MUST item:Art.13:rev_publication_archive>>
 _Why: Art.5.2_
 
-<<TEXT>>
+> _Standard text:_ Publication archive check — prior versions retained for audit defensibility
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.13:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

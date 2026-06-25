@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Restriction Program Review
 
 > Annual verification — restrictions still active are valid, Art.18.2 exceptions enforced, Art.19 notifications fired (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.18:restriction_program_review -->
+<!-- column: item:Art.18:rev_date -->
+<!-- column: item:Art.18:rev_reviewer -->
+<!-- column: item:Art.18:rev_active_restrictions -->
+<!-- column: item:Art.18:rev_exception_compliance -->
+<!-- column: item:Art.18:rev_art19_compliance -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.18:restriction_program_review -->
+| Rev Date | Rev Reviewer | Rev Active Restrictions | Rev Exception Compliance | Rev Art19 Compliance |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.18:restriction_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.18:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + ops lead)
+### Rev Reviewer
 
 <<MUST item:Art.18:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + ops lead)
 
-## 3. Active-restrictions check — every active row still has a valid Art.18.1 ground
+### Rev Active Restrictions
 
 <<MUST item:Art.18:rev_active_restrictions>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Active-restrictions check — every active row still has a valid Art.18.1 ground
 
-## 4. Exception compliance — restricted records only used per Art.18.2 exceptions
+### Rev Exception Compliance
 
 <<MUST item:Art.18:rev_exception_compliance>>
 _Why: Art.18.2_
 
-<<TEXT>>
+> _Standard text:_ Exception compliance — restricted records only used per Art.18.2 exceptions
 
-## 5. Art.19 notification compliance — recipient notifications fired for new/lifted restrictions
+### Rev Art19 Compliance
 
 <<MUST item:Art.18:rev_art19_compliance>>
 _Why: Art.19_
 
-<<TEXT>>
+> _Standard text:_ Art.19 notification compliance — recipient notifications fired for new/lifted restrictions
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.18:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Child Consent Register
 
 > Per-minor consent record proving the parental-authority path was followed. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.8:child_consent_register -->
+<!-- column: item:Art.8:reg_subject_id -->
+<!-- column: item:Art.8:reg_claimed_age -->
+<!-- column: item:Art.8:reg_route -->
+<!-- column: item:Art.8:reg_parental_evidence -->
+<!-- column: item:Art.8:reg_timestamp -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Minor's pseudonymous identifier per row
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.8:child_consent_register -->
+| Reg Subject Id | Reg Claimed Age | Reg Route | Reg Parental Evidence | Reg Timestamp |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.8:child_consent_register -->
+
+## Column guidance — what to fill in
+
+### Reg Subject Id
 
 <<MUST item:Art.8:reg_subject_id>>
 _Why: Demonstrability_
 
-<<TEXT>>
+> _Standard text:_ Minor's pseudonymous identifier per row
 
-## 2. Per-row claimed age at registration
+### Reg Claimed Age
 
 <<MUST item:Art.8:reg_claimed_age>>
 _Why: Decision trail_
 
-<<TEXT>>
+> _Standard text:_ Per-row claimed age at registration
 
-## 3. Per-row consent route (child if age threshold met / parental if below threshold)
+### Reg Route
 
 <<MUST item:Art.8:reg_route>>
 _Why: Art.8.1_
 
-<<TEXT>>
+> _Standard text:_ Per-row consent route (child if age threshold met / parental if below threshold)
 
-## 4. Per-row parental-authority evidence (where parental route used)
+### Reg Parental Evidence
 
 <<MUST item:Art.8:reg_parental_evidence>>
 _Why: Art.8.2 — verify_
 
-<<TEXT>>
+> _Standard text:_ Per-row parental-authority evidence (where parental route used)
 
-## 5. Per-row capture timestamp
+### Reg Timestamp
 
 <<MUST item:Art.8:reg_timestamp>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-row capture timestamp
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Re-verification trigger when minor crosses the age threshold (consent transitions from parental to direct)
+### Reg Re Verification
 
 <<SHOULD item:Art.8:reg_re_verification>>
 _Why: Lifecycle_
 
-<<TEXT>>
+> _Standard text:_ Re-verification trigger when minor crosses the age threshold (consent transitions from parental to direct)

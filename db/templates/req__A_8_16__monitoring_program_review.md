@@ -8,72 +8,95 @@ freshness_days: 180
 template_version: 1
 must_count: 7
 should_count: 1
+table_shape: true
 ---
 
 # Periodic Monitoring Program Review
 
 > Periodic verification — detection coverage gaps, true-positive rate trending, missed-detection postmortems, threat-intel feeding (freshness=180; threat landscape volatile)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.16:monitoring_program_review -->
+<!-- column: item:A.8.16:rev_date -->
+<!-- column: item:A.8.16:rev_reviewer -->
+<!-- column: item:A.8.16:rev_coverage -->
+<!-- column: item:A.8.16:rev_tp_trending -->
+<!-- column: item:A.8.16:rev_missed_postmortems -->
+<!-- column: item:A.8.16:rev_threat_intel_feed -->
+<!-- column: item:A.8.16:rev_register_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval (≤180 days)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.16:monitoring_program_review -->
+| Rev Date | Rev Reviewer | Rev Coverage | Rev Tp Trending | Rev Missed Postmortems | Rev Threat Intel Feed | Rev Register Update |
+|---|---|---|---|---|---|---|
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.16:monitoring_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.8.16:rev_date>>
 _Why: 27002:8.16 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval (≤180 days)
 
-## 2. Reviewer identity (Security Operations lead + InfoSec lead)
+### Rev Reviewer
 
 <<MUST item:A.8.16:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (Security Operations lead + InfoSec lead)
 
-## 3. Coverage check against threat-mapping (any uncovered MITRE technique surfaced)
+### Rev Coverage
 
 <<MUST item:A.8.16:rev_coverage>>
 _Why: 27002:8.16 — coverage_
 
-<<TEXT>>
+> _Standard text:_ Coverage check against threat-mapping (any uncovered MITRE technique surfaced)
 
-## 4. True-positive rate trending review per detection
+### Rev Tp Trending
 
 <<MUST item:A.8.16:rev_tp_trending>>
 _Why: Detection effectiveness_
 
-<<TEXT>>
+> _Standard text:_ True-positive rate trending review per detection
 
-## 5. Missed-detection postmortems reviewed (incidents that bypassed monitoring)
+### Rev Missed Postmortems
 
 <<MUST item:A.8.16:rev_missed_postmortems>>
 _Why: Detection improvement_
 
-<<TEXT>>
+> _Standard text:_ Missed-detection postmortems reviewed (incidents that bypassed monitoring)
 
-## 6. Threat-intel feeding effectiveness (cross-link to A.5.7 — new tactics translated to detections)
+### Rev Threat Intel Feed
 
 <<MUST item:A.8.16:rev_threat_intel_feed>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Threat-intel feeding effectiveness (cross-link to A.5.7 — new tactics translated to detections)
 
-## 7. Findings propagated to register / procedure / scope
+### Rev Register Update
 
 <<MUST item:A.8.16:rev_register_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Findings propagated to register / procedure / scope
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.8.16:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

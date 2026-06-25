@@ -7,79 +7,102 @@ trigger_type: universal
 template_version: 1
 must_count: 7
 should_count: 2
+table_shape: true
 ---
 
 # Labelling Coverage Register
 
 > A.5.13 requires every information-storing platform to actually apply labels — the systems where labelling isn't enabled are the ones where classified info leaks out. The register catalogues every in-scope information platform: system id, scope, labelling-enabled flag, automation level (manual/assisted/automatic), coverage %, owner. It is the operational record that proves labelling is org-wide, not just on the platforms IT remembered to configure
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.13:labelling_coverage_register -->
+<!-- column: item:A.5.13:reg_system_id -->
+<!-- column: item:A.5.13:reg_scope -->
+<!-- column: item:A.5.13:reg_enabled_flag -->
+<!-- column: item:A.5.13:reg_automation -->
+<!-- column: item:A.5.13:reg_coverage_pct -->
+<!-- column: item:A.5.13:reg_owner -->
+<!-- column: item:A.5.13:reg_classification_levels -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Each in-scope information system captured with a unique identifier (file shares, M365 tenants, drive backends, ticketing systems, code repos with sensitive data)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.13:labelling_coverage_register -->
+| Reg System Id | Reg Scope | Reg Enabled Flag | Reg Automation | Reg Coverage Pct | Reg Owner | Reg Classification Levels |
+|---|---|---|---|---|---|---|
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.13:labelling_coverage_register -->
+
+## Column guidance — what to fill in
+
+### Reg System Id
 
 <<MUST item:A.5.13:reg_system_id>>
 _Why: 27002:5.13 — visibility_
 
-<<TEXT>>
+> _Standard text:_ Each in-scope information system captured with a unique identifier (file shares, M365 tenants, drive backends, ticketing systems, code repos with sensitive data)
 
-## 2. Scope per row (which content classes this system stores — e.g. customer data, HR records, source code, financial)
+### Reg Scope
 
 <<MUST item:A.5.13:reg_scope>>
 _Why: Coverage analysis_
 
-<<TEXT>>
+> _Standard text:_ Scope per row (which content classes this system stores — e.g. customer data, HR records, source code, financial)
 
-## 3. Labelling-enabled flag per row (yes / partial / no — with remediation date if not yes)
+### Reg Enabled Flag
 
 <<MUST item:A.5.13:reg_enabled_flag>>
 _Why: 27002:5.13 — applied_
 
-<<TEXT>>
+> _Standard text:_ Labelling-enabled flag per row (yes / partial / no — with remediation date if not yes)
 
-## 4. Automation level per row (manual / assisted / automatic; drives which gaps need user training vs config)
+### Reg Automation
 
 <<MUST item:A.5.13:reg_automation>>
 _Why: 27002:5.13 — implemented_
 
-<<TEXT>>
+> _Standard text:_ Automation level per row (manual / assisted / automatic; drives which gaps need user training vs config)
 
-## 5. Coverage percentage per row (% of items in this system that carry a label — sampled or auto-measured)
+### Reg Coverage Pct
 
 <<MUST item:A.5.13:reg_coverage_pct>>
 _Why: Program effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Coverage percentage per row (% of items in this system that carry a label — sampled or auto-measured)
 
-## 6. System owner per row (named individual accountable for labelling on this platform)
+### Reg Owner
 
 <<MUST item:A.5.13:reg_owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ System owner per row (named individual accountable for labelling on this platform)
 
-## 7. Classification levels deployed per row (links to A.5.12 scheme — sometimes a system only uses a subset)
+### Reg Classification Levels
 
 <<MUST item:A.5.13:reg_classification_levels>>
 _Why: 27002:5.13 + cross-link to [[A.5.12]]_
 
-<<TEXT>>
+> _Standard text:_ Classification levels deployed per row (links to A.5.12 scheme — sometimes a system only uses a subset)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. DLP policy link per row where applicable (sensitivity-label-driven DLP rules wired to the system)
+### Reg Dlp Policy
 
 <<SHOULD item:A.5.13:reg_dlp_policy>>
 _Why: Defence-in-depth_
 
-<<TEXT>>
+> _Standard text:_ DLP policy link per row where applicable (sensitivity-label-driven DLP rules wired to the system)
 
-### 2. External-ingress flag per row where docs arrive from outside (triggers the external_handling SHOULD path)
+### Reg External Ingress
 
 <<SHOULD item:A.5.13:reg_external_ingress>>
 _Why: Real-world coverage_
 
-<<TEXT>>
+> _Standard text:_ External-ingress flag per row where docs arrive from outside (triggers the external_handling SHOULD path)

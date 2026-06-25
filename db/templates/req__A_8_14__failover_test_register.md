@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Failover Test Register
 
 > Per-test record — drilled failover events, real failover events, outcomes. Proves the baseline + procedure work in practice
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.14:failover_test_register -->
+<!-- column: item:A.8.14:reg_test_id -->
+<!-- column: item:A.8.14:reg_service -->
+<!-- column: item:A.8.14:reg_type -->
+<!-- column: item:A.8.14:reg_date -->
+<!-- column: item:A.8.14:reg_outcome -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-test unique identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.14:failover_test_register -->
+| Reg Test Id | Reg Service | Reg Type | Reg Date | Reg Outcome |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.14:failover_test_register -->
+
+## Column guidance — what to fill in
+
+### Reg Test Id
 
 <<MUST item:A.8.14:reg_test_id>>
 _Why: Auditability_
 
-<<TEXT>>
+> _Standard text:_ Per-test unique identifier
 
-## 2. Per-test service tested
+### Reg Service
 
 <<MUST item:A.8.14:reg_service>>
 _Why: 27002:8.14 — sufficient to meet_
 
-<<TEXT>>
+> _Standard text:_ Per-test service tested
 
-## 3. Per-test type (planned drill / unplanned real / fault-injection)
+### Reg Type
 
 <<MUST item:A.8.14:reg_type>>
 _Why: Distinguishing operational vs test signal_
 
-<<TEXT>>
+> _Standard text:_ Per-test type (planned drill / unplanned real / fault-injection)
 
-## 4. Per-test date
+### Reg Date
 
 <<MUST item:A.8.14:reg_date>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-test date
 
-## 5. Per-test outcome (success / partial / failure) + actual recovery time vs target
+### Reg Outcome
 
 <<MUST item:A.8.14:reg_outcome>>
 _Why: 27002:8.14 — sufficient_
 
-<<TEXT>>
+> _Standard text:_ Per-test outcome (success / partial / failure) + actual recovery time vs target
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-test findings + corrective actions where target missed
+### Reg Findings
 
 <<SHOULD item:A.8.14:reg_findings>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Per-test findings + corrective actions where target missed

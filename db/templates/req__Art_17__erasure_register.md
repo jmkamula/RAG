@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Erasure Request Register
 
 > Per-request record proving Art.17 lifecycle (grounds → exception assessment → erasure → notification). Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.17:erasure_register -->
+<!-- column: item:Art.17:reg_request_id -->
+<!-- column: item:Art.17:reg_grounds -->
+<!-- column: item:Art.17:reg_exceptions -->
+<!-- column: item:Art.17:reg_systems_erased -->
+<!-- column: item:Art.17:reg_response_date -->
+<!-- column: item:Art.17:reg_art19_xref -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row request id (Art.12 cross-ref)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.17:erasure_register -->
+| Reg Request Id | Reg Grounds | Reg Exceptions | Reg Systems Erased | Reg Response Date | Reg Art19 Xref |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.17:erasure_register -->
+
+## Column guidance — what to fill in
+
+### Reg Request Id
 
 <<MUST item:Art.17:reg_request_id>>
 _Why: Cross-leaf_
 
-<<TEXT>>
+> _Standard text:_ Per-row request id (Art.12 cross-ref)
 
-## 2. Per-row Art.17.1 ground (a-f) recorded
+### Reg Grounds
 
 <<MUST item:Art.17:reg_grounds>>
 _Why: Art.17.1_
 
-<<TEXT>>
+> _Standard text:_ Per-row Art.17.1 ground (a-f) recorded
 
-## 3. Per-row Art.17.3 exception assessment (none / cited exception)
+### Reg Exceptions
 
 <<MUST item:Art.17:reg_exceptions>>
 _Why: Art.17.3_
 
-<<TEXT>>
+> _Standard text:_ Per-row Art.17.3 exception assessment (none / cited exception)
 
-## 4. Per-row systems where erasure was applied (including backups + replicas)
+### Reg Systems Erased
 
 <<MUST item:Art.17:reg_systems_erased>>
 _Why: Art.17.1 — all instances_
 
-<<TEXT>>
+> _Standard text:_ Per-row systems where erasure was applied (including backups + replicas)
 
-## 5. Per-row response date (Art.12.3 SLA)
+### Reg Response Date
 
 <<MUST item:Art.17:reg_response_date>>
 _Why: Art.12.3_
 
-<<TEXT>>
+> _Standard text:_ Per-row response date (Art.12.3 SLA)
 
-## 6. Per-row Art.19 notification reference
+### Reg Art19 Xref
 
 <<MUST item:Art.17:reg_art19_xref>>
 _Why: Art.19_
 
-<<TEXT>>
+> _Standard text:_ Per-row Art.19 notification reference
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row Art.17.2 public-disclosure action where applicable
+### Reg Art17 2 Action
 
 <<SHOULD item:Art.17:reg_art17_2_action>>
 _Why: Art.17.2_
 
-<<TEXT>>
+> _Standard text:_ Per-row Art.17.2 public-disclosure action where applicable

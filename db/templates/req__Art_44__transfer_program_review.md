@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Transfer Program Review
 
 > Annual verification — every active transfer has a current Art.45/46/47/49 mechanism, register reflects current vendor landscape, Schrems II-style TIA considerations applied (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.44:transfer_program_review -->
+<!-- column: item:Art.44:rev_date -->
+<!-- column: item:Art.44:rev_reviewer -->
+<!-- column: item:Art.44:rev_register_currency -->
+<!-- column: item:Art.44:rev_mechanism_validity -->
+<!-- column: item:Art.44:rev_silent_transfer_sweep -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.44:transfer_program_review -->
+| Rev Date | Rev Reviewer | Rev Register Currency | Rev Mechanism Validity | Rev Silent Transfer Sweep |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.44:transfer_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.44:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + legal counsel + procurement)
+### Rev Reviewer
 
 <<MUST item:Art.44:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + legal counsel + procurement)
 
-## 3. Register currency — every flagged transfer in last-assessment freshness window
+### Rev Register Currency
 
 <<MUST item:Art.44:rev_register_currency>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Register currency — every flagged transfer in last-assessment freshness window
 
-## 4. Mechanism-validity sample — Art.45 adequacy decisions, Art.46 SCCs, Art.47 BCRs all current versions / approvals
+### Rev Mechanism Validity
 
 <<MUST item:Art.44:rev_mechanism_validity>>
 _Why: Art.44-49_
 
-<<TEXT>>
+> _Standard text:_ Mechanism-validity sample — Art.45 adequacy decisions, Art.46 SCCs, Art.47 BCRs all current versions / approvals
 
-## 5. Silent-transfer sweep — verify no new vendor or service-shape change created an unflagged transfer
+### Rev Silent Transfer Sweep
 
 <<MUST item:Art.44:rev_silent_transfer_sweep>>
 _Why: Drift detection_
 
-<<TEXT>>
+> _Standard text:_ Silent-transfer sweep — verify no new vendor or service-shape change created an unflagged transfer
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.44:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

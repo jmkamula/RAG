@@ -71,8 +71,191 @@ def _extract_template_version(body: str) -> Optional[int]:
     return None
 
 
+_TABULAR_EVIDENCE_SUFFIXES = ("_register", "_record", "_matrix", "_log", "_inventory")
+_TABULAR_EVIDENCE_EXACT = {
+    "register",
+    "statement_of_applicability",
+    "records_of_processing",
+    "review_record",
+    "responsibility_matrix",
+    "segregation_matrix",
+    "communication_record",
+    "monitoring_record",
+    "test_log",
+    "data_flow_inventory",
+    "lawful_basis_register",
+    "revocation_record",
+    "approval_record",
+    "audit_record",
+    "configuration_record",
+    "publication_record",
+    "change_record",
+    "discovery_record",
+    "risk_assessment_record",
+    "risk_treatment_record",
+    "decision_record",
+    "contact_register",
+    "asset_register",
+}
+
+
+def _is_tabular_evidence(evidence_type: str) -> bool:
+    """Classify the leaf's shape — tabular evidence types render as one
+    table + per-column guidance (registers, records, matrices, logs).
+    Narrative types render as per-MUST sections (policies, procedures,
+    scope notes, etc.).
+    """
+    if not evidence_type:
+        return False
+    if evidence_type in _TABULAR_EVIDENCE_EXACT:
+        return True
+    return any(evidence_type.endswith(s) for s in _TABULAR_EVIDENCE_SUFFIXES)
+
+
+def _column_header_from_item(item) -> str:
+    """Derive a short column header from the MUST item slug.
+
+    item.id format: 'item:A.5.9:owner_per_asset' → 'Owner Per Asset'
+    """
+    slug = item.id.split(":")[-1] if item.id else ""
+    return slug.replace("_", " ").title() or "Field"
+
+
+def _render_template_tabular(leaf) -> str:
+    """Compose markdown for a tabular leaf (register / record / matrix /
+    log / inventory). Single edit-zone wraps the table; per-MUST
+    guidance lives in a separate Column guidance section.
+
+    Schema markers:
+      <!-- TABLE-COLUMNS leaf:<leaf_id> -->
+      <!-- column: <item_id> -->
+      ...
+      <!-- /TABLE-COLUMNS -->
+
+      <!-- EDIT-ZONE-START leaf:<leaf_id> -->
+      | <header> | <header> | ... |
+      |---|---|---|
+      |          |          |     |
+      <!-- EDIT-ZONE-END leaf:<leaf_id> -->
+
+    The extractor reads the metadata block to map column index →
+    item_id, parses the table, and binds per-column MUST satisfaction
+    (any non-empty cell in a column → that MUST is present).
+    """
+    must_count   = len(leaf.must_contain)
+    should_count = len(leaf.should_contain)
+    desc         = (leaf.description or "").strip()
+    freshness    = leaf.freshness_days if leaf.freshness_days else None
+    headers      = [_column_header_from_item(item) for item in leaf.must_contain]
+
+    lines: list[str] = []
+    lines.append("---")
+    lines.append(f"leaf_id: {leaf.id}")
+    lines.append(f"control_ref: {leaf.control_ref}")
+    lines.append(f"standard_id: {leaf.standard_id}")
+    lines.append(f"evidence_type: {leaf.evidence_type}")
+    lines.append(f"trigger_type: {leaf.trigger_type or 'universal'}")
+    if freshness:
+        lines.append(f"freshness_days: {freshness}")
+    lines.append(f"template_version: 1")
+    lines.append(f"must_count: {must_count}")
+    lines.append(f"should_count: {should_count}")
+    lines.append("table_shape: true")
+    lines.append("---")
+    lines.append("")
+    lines.append(f"# {leaf.title}")
+    lines.append("")
+    if desc:
+        for d_line in desc.splitlines():
+            lines.append(f"> {d_line}" if d_line else ">")
+        lines.append("")
+
+    # Column metadata block — tells the extractor which column maps to
+    # which checklist_item_id. Order in this block = column order in
+    # the table.
+    lines.append(f"<!-- TABLE-COLUMNS leaf:{leaf.id} -->")
+    for item in leaf.must_contain:
+        lines.append(f"<!-- column: {item.id} -->")
+    lines.append("<!-- /TABLE-COLUMNS -->")
+    lines.append("")
+
+    lines.append("## Register")
+    lines.append("")
+    lines.append(
+        "Fill one row per record. Each column maps to a MUST item the "
+        "auditor will check — empty columns count as unsatisfied. "
+        "Add as many rows as you need."
+    )
+    lines.append("")
+
+    # The editable table inside the EDIT-ZONE.
+    header_row    = "| " + " | ".join(headers) + " |"
+    separator_row = "|" + "|".join(["---"] * len(headers)) + "|"
+    blank_row     = "|" + "|".join([" " * 10] * len(headers)) + "|"
+    lines.append(f"<!-- EDIT-ZONE-START leaf:{leaf.id} -->")
+    lines.append(header_row)
+    lines.append(separator_row)
+    for _ in range(3):
+        lines.append(blank_row)
+    lines.append(f"<!-- EDIT-ZONE-END leaf:{leaf.id} -->")
+    lines.append("")
+
+    lines.append("## Column guidance — what to fill in")
+    lines.append("")
+    for i, item in enumerate(leaf.must_contain):
+        header = headers[i]
+        lines.append(f"### {header}")
+        lines.append("")
+        lines.append(f"<<MUST {item.id}>>")
+        if item.rationale:
+            lines.append(f"_Why: {item.rationale}_")
+        lines.append("")
+        lines.append(f"> _Standard text:_ {item.text}")
+        lines.append("")
+
+    # SHOULDs — recommended additional columns
+    if leaf.should_contain:
+        lines.append("---")
+        lines.append("")
+        lines.append("## Recommended additional columns")
+        lines.append("")
+        lines.append(
+            "_These columns strengthen the register but are not strictly "
+            "required for the MUST checks. Add them to the table if they "
+            "apply to your environment._"
+        )
+        lines.append("")
+        for j, item in enumerate(leaf.should_contain, start=1):
+            header = _column_header_from_item(item)
+            lines.append(f"### {header}")
+            lines.append("")
+            lines.append(f"<<SHOULD {item.id}>>")
+            if item.rationale:
+                lines.append(f"_Why: {item.rationale}_")
+            lines.append("")
+            lines.append(f"> _Standard text:_ {item.text}")
+            lines.append("")
+
+    return "\n".join(lines).rstrip() + "\n"
+
+
 def _render_template(leaf) -> str:
-    """Compose the markdown body for one leaf's scaffold."""
+    """Compose the markdown body for one leaf's scaffold.
+
+    Dispatches by evidence_type:
+      - tabular (register / record / matrix / log / inventory) →
+        single-table layout with per-column guidance
+      - narrative (policy / procedure / scope_note / plan / ...) →
+        per-MUST sections (existing default)
+    """
+    if _is_tabular_evidence(leaf.evidence_type):
+        return _render_template_tabular(leaf)
+    return _render_template_narrative(leaf)
+
+
+def _render_template_narrative(leaf) -> str:
+    """Compose the markdown body for a narrative-shape leaf (existing
+    default — per-MUST sections)."""
     must_count   = len(leaf.must_contain)
     should_count = len(leaf.should_contain)
     desc         = (leaf.description or "").strip()

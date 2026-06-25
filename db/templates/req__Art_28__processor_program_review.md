@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Processor Program Review
 
 > Annual verification that every active processor has a current DPA, sub-processor authorisations are tracked, Art.32 assurance sources are still valid (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.28:processor_program_review -->
+<!-- column: item:Art.28:rev_date -->
+<!-- column: item:Art.28:rev_reviewer -->
+<!-- column: item:Art.28:rev_dpa_currency -->
+<!-- column: item:Art.28:rev_subprocessor_audit -->
+<!-- column: item:Art.28:rev_security_currency -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.28:processor_program_review -->
+| Rev Date | Rev Reviewer | Rev Dpa Currency | Rev Subprocessor Audit | Rev Security Currency |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.28:processor_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.28:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + procurement / vendor management lead)
+### Rev Reviewer
 
 <<MUST item:Art.28:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + procurement / vendor management lead)
 
-## 3. DPA currency check — every active processor has a current DPA (no expired or pre-onboarding processors active)
+### Rev Dpa Currency
 
 <<MUST item:Art.28:rev_dpa_currency>>
 _Why: Art.28.3 — written contract_
 
-<<TEXT>>
+> _Standard text:_ DPA currency check — every active processor has a current DPA (no expired or pre-onboarding processors active)
 
-## 4. Sub-processor audit — every active sub-processor authorised; unauthorised additions flagged
+### Rev Subprocessor Audit
 
 <<MUST item:Art.28:rev_subprocessor_audit>>
 _Why: Art.28.2_
 
-<<TEXT>>
+> _Standard text:_ Sub-processor audit — every active sub-processor authorised; unauthorised additions flagged
 
-## 5. Security assurance currency — Art.32-equivalent evidence (cert, audit) refreshed within validity period
+### Rev Security Currency
 
 <<MUST item:Art.28:rev_security_currency>>
 _Why: Art.28.3c_
 
-<<TEXT>>
+> _Standard text:_ Security assurance currency — Art.32-equivalent evidence (cert, audit) refreshed within validity period
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.28:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

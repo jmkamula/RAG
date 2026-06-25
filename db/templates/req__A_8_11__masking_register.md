@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Per-Dataset Masking Register
 
 > Per-dataset application of masking — which production datasets feed which non-production environments via what technique, when last refreshed
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.11:masking_register -->
+<!-- column: item:A.8.11:reg_dataset -->
+<!-- column: item:A.8.11:reg_target_env -->
+<!-- column: item:A.8.11:reg_technique -->
+<!-- column: item:A.8.11:reg_pii_classes -->
+<!-- column: item:A.8.11:reg_last_refreshed -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row source dataset identifier (from A.5.9 + A.5.34 PII inventory)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.11:masking_register -->
+| Reg Dataset | Reg Target Env | Reg Technique | Reg Pii Classes | Reg Last Refreshed |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.11:masking_register -->
+
+## Column guidance — what to fill in
+
+### Reg Dataset
 
 <<MUST item:A.8.11:reg_dataset>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-row source dataset identifier (from A.5.9 + A.5.34 PII inventory)
 
-## 2. Per-row target non-production environment
+### Reg Target Env
 
 <<MUST item:A.8.11:reg_target_env>>
 _Why: Identification_
 
-<<TEXT>>
+> _Standard text:_ Per-row target non-production environment
 
-## 3. Per-row masking technique applied (from procedure's approved-techniques list)
+### Reg Technique
 
 <<MUST item:A.8.11:reg_technique>>
 _Why: 27002:8.11 — applicable techniques_
 
-<<TEXT>>
+> _Standard text:_ Per-row masking technique applied (from procedure's approved-techniques list)
 
-## 4. Per-row PII classes present (drives technique selection — strong pseudonymisation for special-category PII)
+### Reg Pii Classes
 
 <<MUST item:A.8.11:reg_pii_classes>>
 _Why: GDPR Art.32 alignment_
 
-<<TEXT>>
+> _Standard text:_ Per-row PII classes present (drives technique selection — strong pseudonymisation for special-category PII)
 
-## 5. Per-row last refresh timestamp (drives stale-mask detection)
+### Reg Last Refreshed
 
 <<MUST item:A.8.11:reg_last_refreshed>>
 _Why: Drift detection_
 
-<<TEXT>>
+> _Standard text:_ Per-row last refresh timestamp (drives stale-mask detection)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row verification-sample link (re-identification residual-risk sample retained)
+### Reg Verification Sample
 
 <<SHOULD item:A.8.11:reg_verification_sample>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row verification-sample link (re-identification residual-risk sample retained)

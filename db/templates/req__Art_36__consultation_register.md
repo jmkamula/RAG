@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Prior Consultation Register
 
 > Per-consultation record. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.36:consultation_register -->
+<!-- column: item:Art.36:reg_consultation_id -->
+<!-- column: item:Art.36:reg_dpia_xref -->
+<!-- column: item:Art.36:reg_submission_date -->
+<!-- column: item:Art.36:reg_sa -->
+<!-- column: item:Art.36:reg_outcome -->
+<!-- column: item:Art.36:reg_decision_to_proceed -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row consultation id
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.36:consultation_register -->
+| Reg Consultation Id | Reg Dpia Xref | Reg Submission Date | Reg Sa | Reg Outcome | Reg Decision To Proceed |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.36:consultation_register -->
+
+## Column guidance — what to fill in
+
+### Reg Consultation Id
 
 <<MUST item:Art.36:reg_consultation_id>>
 _Why: Audit_
 
-<<TEXT>>
+> _Standard text:_ Per-row consultation id
 
-## 2. Per-row DPIA cross-reference (Art.35 register entry)
+### Reg Dpia Xref
 
 <<MUST item:Art.36:reg_dpia_xref>>
 _Why: Cross-article_
 
-<<TEXT>>
+> _Standard text:_ Per-row DPIA cross-reference (Art.35 register entry)
 
-## 3. Per-row submission date to SA
+### Reg Submission Date
 
 <<MUST item:Art.36:reg_submission_date>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-row submission date to SA
 
-## 4. Per-row supervisory authority engaged
+### Reg Sa
 
 <<MUST item:Art.36:reg_sa>>
 _Why: Art.55-56_
 
-<<TEXT>>
+> _Standard text:_ Per-row supervisory authority engaged
 
-## 5. Per-row outcome (approved / approved-with-conditions / advised-against)
+### Reg Outcome
 
 <<MUST item:Art.36:reg_outcome>>
 _Why: Art.36.2_
 
-<<TEXT>>
+> _Standard text:_ Per-row outcome (approved / approved-with-conditions / advised-against)
 
-## 6. Per-row controller decision after SA advice (proceed / modify / abandon)
+### Reg Decision To Proceed
 
 <<MUST item:Art.36:reg_decision_to_proceed>>
 _Why: Defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row controller decision after SA advice (proceed / modify / abandon)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row SA response date
+### Reg Response Date
 
 <<SHOULD item:Art.36:reg_response_date>>
 _Why: Audit clarity_
 
-<<TEXT>>
+> _Standard text:_ Per-row SA response date

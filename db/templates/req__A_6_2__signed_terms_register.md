@@ -7,65 +7,86 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 2
+table_shape: true
 ---
 
 # Signed Employment Terms Register
 
 > The operational catalogue of who has signed which version of the employment terms. Each row: personnel identifier, template version signed, signature date, current-version check. Drives the 'every active employee has current terms' completeness check
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.6.2:signed_terms_register -->
+<!-- column: item:A.6.2:reg_personnel_id -->
+<!-- column: item:A.6.2:reg_template_version -->
+<!-- column: item:A.6.2:reg_signature_date -->
+<!-- column: item:A.6.2:reg_signature_method -->
+<!-- column: item:A.6.2:reg_current_version_check -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row personnel identifier (links to identity register A.5.16)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.6.2:signed_terms_register -->
+| Reg Personnel Id | Reg Template Version | Reg Signature Date | Reg Signature Method | Reg Current Version Check |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.6.2:signed_terms_register -->
+
+## Column guidance — what to fill in
+
+### Reg Personnel Id
 
 <<MUST item:A.6.2:reg_personnel_id>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-row personnel identifier (links to identity register A.5.16)
 
-## 2. Template version signed per row (drives currency check — old-version signers may need recontract on material changes)
+### Reg Template Version
 
 <<MUST item:A.6.2:reg_template_version>>
 _Why: 27002:6.2 — current_
 
-<<TEXT>>
+> _Standard text:_ Template version signed per row (drives currency check — old-version signers may need recontract on material changes)
 
-## 3. Signature date per row (proves signing happened BEFORE access granted per A.5.18)
+### Reg Signature Date
 
 <<MUST item:A.6.2:reg_signature_date>>
 _Why: 27002:6.2 — before access_
 
-<<TEXT>>
+> _Standard text:_ Signature date per row (proves signing happened BEFORE access granted per A.5.18)
 
-## 4. Signature method per row (wet signature scanned / e-signature platform reference; ensures non-repudiation)
+### Reg Signature Method
 
 <<MUST item:A.6.2:reg_signature_method>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Signature method per row (wet signature scanned / e-signature platform reference; ensures non-repudiation)
 
-## 5. Current-version check flag per row (yes / no-with-rationale-for-grandfathering) — surfaces personnel on outdated terms
+### Reg Current Version Check
 
 <<MUST item:A.6.2:reg_current_version_check>>
 _Why: 27002:6.2 — currency_
 
-<<TEXT>>
+> _Standard text:_ Current-version check flag per row (yes / no-with-rationale-for-grandfathering) — surfaces personnel on outdated terms
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Amendment history per row where contracts were amended mid-employment (drives change tracking)
+### Reg Amendment History
 
 <<SHOULD item:A.6.2:reg_amendment_history>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Amendment history per row where contracts were amended mid-employment (drives change tracking)
 
-### 2. Worker category per row (employee / contractor / intern — different categories may use different templates)
+### Reg Worker Category
 
 <<SHOULD item:A.6.2:reg_worker_category>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Worker category per row (employee / contractor / intern — different categories may use different templates)

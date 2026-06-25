@@ -238,6 +238,24 @@ _TEMPLATED_EDIT_ZONE_RE     = re.compile(
     r"<!--\s*EDIT-ZONE-END\s+\1\s*-->",
     re.DOTALL | re.IGNORECASE,
 )
+# Tabular variant — single edit zone per LEAF (not per-MUST), wrapping
+# a markdown table. The column→MUST mapping lives in a sibling
+# TABLE-COLUMNS metadata block.
+_TEMPLATED_TABLE_ZONE_RE    = re.compile(
+    r"<!--\s*EDIT-ZONE-START\s+leaf:(req:[A-Za-z0-9.]+:[a-z0-9_]+)\s*-->"
+    r"(.*?)"
+    r"<!--\s*EDIT-ZONE-END\s+leaf:\1\s*-->",
+    re.DOTALL | re.IGNORECASE,
+)
+_TEMPLATED_TABLE_COLUMNS_RE = re.compile(
+    r"<!--\s*TABLE-COLUMNS\s+leaf:(req:[A-Za-z0-9.]+:[a-z0-9_]+)\s*-->"
+    r"(.*?)"
+    r"<!--\s*/TABLE-COLUMNS\s*-->",
+    re.DOTALL | re.IGNORECASE,
+)
+_TEMPLATED_TABLE_COLUMN_RE  = re.compile(
+    r"<!--\s*column:\s*(item:[A-Za-z0-9.]+:[a-z0-9_]+)\s*-->",
+)
 _TEMPLATED_PREFILL_COMMENT  = re.compile(
     r"<!--\s*prefilled\s+from\s+[^>]*-->",
     re.IGNORECASE,
@@ -318,13 +336,116 @@ def _extract_templated(doc: ParsedDocument) -> Optional[list[DocumentFinding]]:
     if not must_markers and not should_markers:
         return None
 
-    # Mode A: edit-zone-driven extraction
+    # Mode A1: tabular layout — single leaf-zone wraps a markdown table,
+    # column→MUST mapping in a sibling TABLE-COLUMNS block. Used for
+    # register / record / matrix / log / inventory evidence types.
+    table_zones = list(_TEMPLATED_TABLE_ZONE_RE.finditer(body))
+    if table_zones:
+        return _extract_templated_via_table(doc, body, table_zones)
+
+    # Mode A2: per-MUST edit-zone layout
     edit_zones = list(_TEMPLATED_EDIT_ZONE_RE.finditer(body))
     if edit_zones:
         return _extract_templated_via_edit_zones(doc, edit_zones)
 
     # Mode B: legacy full-section scan
     return _extract_templated_via_full_section(doc, body)
+
+
+def _extract_templated_via_table(
+    doc: ParsedDocument,
+    body: str,
+    table_zones: list,
+) -> list[DocumentFinding]:
+    """Tabular extraction. For each table zone, parse the markdown
+    table inside and bind per-column MUST satisfaction.
+
+    Mapping: a sibling `<!-- TABLE-COLUMNS leaf:<leaf_id> -->...<!-- /TABLE-COLUMNS -->`
+    block carries an ordered list of `<!-- column: <item_id> -->`
+    entries. Column index in the table aligns 1:1 with the metadata
+    order — first column → first metadata entry, etc.
+
+    For each column with at least one non-empty data cell (after the
+    header + separator rows), bind the corresponding MUST as
+    status='present'. Columns with all-empty cells stay unbound — the
+    MUST surfaces as "missing" via the engine's leaf evaluator.
+    """
+    # Build leaf_id → column item_ids map from all metadata blocks
+    leaf_columns: dict[str, list[str]] = {}
+    for tc in _TEMPLATED_TABLE_COLUMNS_RE.finditer(body):
+        leaf_id = tc.group(1)
+        cols    = _TEMPLATED_TABLE_COLUMN_RE.findall(tc.group(2))
+        if cols:
+            leaf_columns[leaf_id] = cols
+
+    findings: list[DocumentFinding] = []
+    n_zones_bound = 0
+    n_zones_empty = 0
+
+    for m in table_zones:
+        leaf_id   = m.group(1)
+        zone_text = m.group(2)
+        columns   = leaf_columns.get(leaf_id)
+        if not columns:
+            # No metadata for this leaf zone — skip rather than misbind
+            continue
+
+        # Parse rows: split lines, filter table rows starting with '|'
+        col_has_data = [False] * len(columns)
+        sample_cell  = [""] * len(columns)
+        rows_seen    = 0
+        for raw_line in zone_text.splitlines():
+            line = raw_line.strip()
+            if not line.startswith("|"):
+                continue
+            # Skip separator row (---|---|...)
+            if re.fullmatch(r"\|[\s\-:|]+\|", line):
+                continue
+            cells = [c.strip() for c in line.strip("|").split("|")]
+            if rows_seen == 0:
+                # First non-separator row = header. Don't count as data.
+                rows_seen = 1
+                continue
+            rows_seen += 1
+            # Map cells to columns; ignore extras / pad missing
+            for i in range(min(len(cells), len(columns))):
+                if cells[i] and not col_has_data[i]:
+                    col_has_data[i] = True
+                    sample_cell[i]  = cells[i]
+
+        bound_in_zone = 0
+        for i, item_id in enumerate(columns):
+            if not col_has_data[i]:
+                continue
+            parts = item_id.split(":")
+            if len(parts) < 3:
+                continue
+            control_ref = parts[1]
+            standard_id = _control_ref_to_standard(control_ref)
+            findings.append(DocumentFinding(
+                upload_id         = doc.upload_id or "",
+                tenant_id         = "",
+                document_name     = doc.original_name,
+                control_ref       = control_ref,
+                standard_id       = standard_id,
+                finding           = "Comply",
+                evidence_text     = sample_cell[i][:500],
+                confidence        = "high",
+                checklist_item_id = item_id,
+                extraction_path   = "templated",
+                inference_source  = "templated",
+            ))
+            bound_in_zone += 1
+
+        if bound_in_zone:
+            n_zones_bound += 1
+        else:
+            n_zones_empty += 1
+
+    doc.extraction_metrics["templated_table_zones_total"] = len(table_zones)
+    doc.extraction_metrics["templated_table_zones_bound"] = n_zones_bound
+    doc.extraction_metrics["templated_table_zones_empty"] = n_zones_empty
+    return findings
 
 
 def _extract_templated_via_edit_zones(

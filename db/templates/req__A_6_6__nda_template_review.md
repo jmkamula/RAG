@@ -8,72 +8,94 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 2
+table_shape: true
 ---
 
 # Periodic NDA Template Review
 
 > Periodic verification that the template still reflects current information classification (A.5.12), current jurisdictional enforceability (Schrems-style impacts on cross-border NDAs), and that all active signers are on a current-enough version. Annual cadence (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.6.6:nda_template_review -->
+<!-- column: item:A.6.6:rev_date -->
+<!-- column: item:A.6.6:rev_reviewer -->
+<!-- column: item:A.6.6:rev_classification_drift -->
+<!-- column: item:A.6.6:rev_enforceability -->
+<!-- column: item:A.6.6:rev_signer_currency -->
+<!-- column: item:A.6.6:rev_register_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.6.6:nda_template_review -->
+| Rev Date | Rev Reviewer | Rev Classification Drift | Rev Enforceability | Rev Signer Currency | Rev Register Update |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.6.6:nda_template_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.6.6:rev_date>>
 _Why: 27002:6.6 — regularly reviewed_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (Legal counsel + InfoSec lead jointly)
+### Rev Reviewer
 
 <<MUST item:A.6.6:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (Legal counsel + InfoSec lead jointly)
 
-## 3. Information-classification drift check — has A.5.12 classification scheme changed in ways affecting NDA info_classes?
+### Rev Classification Drift
 
 <<MUST item:A.6.6:rev_classification_drift>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Information-classification drift check — has A.5.12 classification scheme changed in ways affecting NDA info_classes?
 
-## 4. Enforceability check per jurisdiction (legal counsel input — case-law shifts, Schrems-style impacts on cross-border data flows in NDA scope)
+### Rev Enforceability
 
 <<MUST item:A.6.6:rev_enforceability>>
 _Why: 27002:6.6 — applicable laws_
 
-<<TEXT>>
+> _Standard text:_ Enforceability check per jurisdiction (legal counsel input — case-law shifts, Schrems-style impacts on cross-border data flows in NDA scope)
 
-## 5. Signer-currency analysis (% on current template version; plan for re-signing the gap where material clauses changed)
+### Rev Signer Currency
 
 <<MUST item:A.6.6:rev_signer_currency>>
 _Why: 27002:6.6 — current_
 
-<<TEXT>>
+> _Standard text:_ Signer-currency analysis (% on current template version; plan for re-signing the gap where material clauses changed)
 
-## 6. Changes propagated to the live template and to the signer-re-signing plan
+### Rev Register Update
 
 <<MUST item:A.6.6:rev_register_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Changes propagated to the live template and to the signer-re-signing plan
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Ad-hoc review triggers (material classification change, case-law shift, M&A bringing new counterparty types)
+### Rev Ad Hoc Triggers
 
 <<SHOULD item:A.6.6:rev_ad_hoc_triggers>>
 _Why: Change-driven review_
 
-<<TEXT>>
+> _Standard text:_ Ad-hoc review triggers (material classification change, case-law shift, M&A bringing new counterparty types)
 
-### 2. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.6.6:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

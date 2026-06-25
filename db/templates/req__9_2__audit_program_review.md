@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Audit Program Review
 
 > Annual verification that the programme is being executed, every planned audit happened (or was deferred with rationale), the cycle stays on track for full coverage (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:9.2:audit_program_review -->
+<!-- column: item:9.2:rev_date -->
+<!-- column: item:9.2:rev_reviewer -->
+<!-- column: item:9.2:rev_completion -->
+<!-- column: item:9.2:rev_cycle_progress -->
+<!-- column: item:9.2:rev_finding_closure -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:9.2:audit_program_review -->
+| Rev Date | Rev Reviewer | Rev Completion | Rev Cycle Progress | Rev Finding Closure |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:9.2:audit_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:9.2:rev_date>>
 _Why: Clause 9.2 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (ISMS Manager + lead auditor)
+### Rev Reviewer
 
 <<MUST item:9.2:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (ISMS Manager + lead auditor)
 
-## 3. Completion check — every scheduled audit happened (or deferred with documented reason)
+### Rev Completion
 
 <<MUST item:9.2:rev_completion>>
 _Why: Effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Completion check — every scheduled audit happened (or deferred with documented reason)
 
-## 4. Cycle progress check — at end-of-cycle every ISMS process audited at least once
+### Rev Cycle Progress
 
 <<MUST item:9.2:rev_cycle_progress>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Cycle progress check — at end-of-cycle every ISMS process audited at least once
 
-## 5. Finding-closure check — last cycle's NCs reached 10.2 closure
+### Rev Finding Closure
 
 <<MUST item:9.2:rev_finding_closure>>
 _Why: Clause 9.2e_
 
-<<TEXT>>
+> _Standard text:_ Finding-closure check — last cycle's NCs reached 10.2 closure
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:9.2:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

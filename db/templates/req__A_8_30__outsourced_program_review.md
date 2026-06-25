@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Periodic Outsourced Development Program Review
 
 > Annual verification — engagement-register currency, delivered-code-test coverage, vendor incident patterns (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.30:outsourced_program_review -->
+<!-- column: item:A.8.30:rev_date -->
+<!-- column: item:A.8.30:rev_reviewer -->
+<!-- column: item:A.8.30:rev_register_currency -->
+<!-- column: item:A.8.30:rev_test_coverage -->
+<!-- column: item:A.8.30:rev_vendor_incidents -->
+<!-- column: item:A.8.30:rev_findings_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.30:outsourced_program_review -->
+| Rev Date | Rev Reviewer | Rev Register Currency | Rev Test Coverage | Rev Vendor Incidents | Rev Findings Update |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.30:outsourced_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.8.30:rev_date>>
 _Why: 27002:8.30 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (Engineering + Supplier Management + InfoSec)
+### Rev Reviewer
 
 <<MUST item:A.8.30:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (Engineering + Supplier Management + InfoSec)
 
-## 3. Engagement-register currency check
+### Rev Register Currency
 
 <<MUST item:A.8.30:rev_register_currency>>
 _Why: Drift prevention_
 
-<<TEXT>>
+> _Standard text:_ Engagement-register currency check
 
-## 4. Delivered-code-test coverage per engagement (was every release tested before merge to production)
+### Rev Test Coverage
 
 <<MUST item:A.8.30:rev_test_coverage>>
 _Why: 27002:8.30 — review_
 
-<<TEXT>>
+> _Standard text:_ Delivered-code-test coverage per engagement (was every release tested before merge to production)
 
-## 5. Vendor incident-pattern review (cross-link to A.5.22 supplier review)
+### Rev Vendor Incidents
 
 <<MUST item:A.8.30:rev_vendor_incidents>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Vendor incident-pattern review (cross-link to A.5.22 supplier review)
 
-## 6. Findings propagated to procedure / contract terms
+### Rev Findings Update
 
 <<MUST item:A.8.30:rev_findings_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Findings propagated to procedure / contract terms
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.8.30:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Periodic Audit Testing Protection Program Review
 
 > Annual verification — register completeness, rollback-discipline compliance, evidence-preservation hygiene (freshness=365; audit-policy stable as documented in batch header)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.34:audit_testing_program_review -->
+<!-- column: item:A.8.34:rev_date -->
+<!-- column: item:A.8.34:rev_reviewer -->
+<!-- column: item:A.8.34:rev_register_completeness -->
+<!-- column: item:A.8.34:rev_rollback_compliance -->
+<!-- column: item:A.8.34:rev_evidence_hygiene -->
+<!-- column: item:A.8.34:rev_findings_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.34:audit_testing_program_review -->
+| Rev Date | Rev Reviewer | Rev Register Completeness | Rev Rollback Compliance | Rev Evidence Hygiene | Rev Findings Update |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.34:audit_testing_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.8.34:rev_date>>
 _Why: 27002:8.34 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (InfoSec lead + Internal Audit lead)
+### Rev Reviewer
 
 <<MUST item:A.8.34:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (InfoSec lead + Internal Audit lead)
 
-## 3. Register-completeness check (every recent audit engagement in register)
+### Rev Register Completeness
 
 <<MUST item:A.8.34:rev_register_completeness>>
 _Why: Drift prevention_
 
-<<TEXT>>
+> _Standard text:_ Register-completeness check (every recent audit engagement in register)
 
-## 4. Rollback-discipline compliance (no untracked changes introduced during testing)
+### Rev Rollback Compliance
 
 <<MUST item:A.8.34:rev_rollback_compliance>>
 _Why: 27002:8.34 — protection_
 
-<<TEXT>>
+> _Standard text:_ Rollback-discipline compliance (no untracked changes introduced during testing)
 
-## 5. Evidence-preservation hygiene check (artefacts retained per chain-of-custody)
+### Rev Evidence Hygiene
 
 <<MUST item:A.8.34:rev_evidence_hygiene>>
 _Why: Defensibility_
 
-<<TEXT>>
+> _Standard text:_ Evidence-preservation hygiene check (artefacts retained per chain-of-custody)
 
-## 6. Findings propagated to policy / scope
+### Rev Findings Update
 
 <<MUST item:A.8.34:rev_findings_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Findings propagated to policy / scope
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.8.34:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

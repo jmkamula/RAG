@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Consent Register
 
 > Per-consent record proving capture for any subject whose data is processed under Art.6.1.a consent. Annual refresh (freshness=365). Auditor's go-to artefact when challenging the lawful basis for a consent-based activity
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.7:consent_register -->
+<!-- column: item:Art.7:reg_subject_id -->
+<!-- column: item:Art.7:reg_scope -->
+<!-- column: item:Art.7:reg_timestamp -->
+<!-- column: item:Art.7:reg_mechanism -->
+<!-- column: item:Art.7:reg_withdrawal_status -->
+<!-- column: item:Art.7:reg_basis_link -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Subject identifier per row (pseudonymous or direct identifier)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.7:consent_register -->
+| Reg Subject Id | Reg Scope | Reg Timestamp | Reg Mechanism | Reg Withdrawal Status | Reg Basis Link |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.7:consent_register -->
+
+## Column guidance — what to fill in
+
+### Reg Subject Id
 
 <<MUST item:Art.7:reg_subject_id>>
 _Why: Demonstrability_
 
-<<TEXT>>
+> _Standard text:_ Subject identifier per row (pseudonymous or direct identifier)
 
-## 2. Per-row scope of consent (which activity / purpose)
+### Reg Scope
 
 <<MUST item:Art.7:reg_scope>>
 _Why: Art.7.1 — granular_
 
-<<TEXT>>
+> _Standard text:_ Per-row scope of consent (which activity / purpose)
 
-## 3. Per-row capture timestamp
+### Reg Timestamp
 
 <<MUST item:Art.7:reg_timestamp>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-row capture timestamp
 
-## 4. Per-row capture mechanism (checkbox UI version, sign-up event id, etc.)
+### Reg Mechanism
 
 <<MUST item:Art.7:reg_mechanism>>
 _Why: Auditability_
 
-<<TEXT>>
+> _Standard text:_ Per-row capture mechanism (checkbox UI version, sign-up event id, etc.)
 
-## 5. Per-row withdrawal status (current / withdrawn-on-date)
+### Reg Withdrawal Status
 
 <<MUST item:Art.7:reg_withdrawal_status>>
 _Why: Art.7.3_
 
-<<TEXT>>
+> _Standard text:_ Per-row withdrawal status (current / withdrawn-on-date)
 
-## 6. Per-row link to Art.6 lawful basis register entry (Art.6.1.a row)
+### Reg Basis Link
 
 <<MUST item:Art.7:reg_basis_link>>
 _Why: Cross-article coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-row link to Art.6 lawful basis register entry (Art.6.1.a row)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row consent-text version captured at time of capture (proves what they agreed to)
+### Reg Consent Version
 
 <<SHOULD item:Art.7:reg_consent_version>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row consent-text version captured at time of capture (proves what they agreed to)

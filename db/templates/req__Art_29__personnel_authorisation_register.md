@@ -8,51 +8,71 @@ freshness_days: 365
 template_version: 1
 must_count: 4
 should_count: 1
+table_shape: true
 ---
 
 # Personnel Authorisation Register
 
 > Per-person authorisation — every person acting under controller authority on personal data, with scope and source of authority. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.29:personnel_authorisation_register -->
+<!-- column: item:Art.29:reg_person_id -->
+<!-- column: item:Art.29:reg_authority_source -->
+<!-- column: item:Art.29:reg_scope -->
+<!-- column: item:Art.29:reg_status -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row person identifier (employee / contractor reference)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.29:personnel_authorisation_register -->
+| Reg Person Id | Reg Authority Source | Reg Scope | Reg Status |
+|---|---|---|---|
+|          |          |          |          |
+|          |          |          |          |
+|          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.29:personnel_authorisation_register -->
+
+## Column guidance — what to fill in
+
+### Reg Person Id
 
 <<MUST item:Art.29:reg_person_id>>
 _Why: Audit_
 
-<<TEXT>>
+> _Standard text:_ Per-row person identifier (employee / contractor reference)
 
-## 2. Per-row source of authority (which DPA + which controller instructions)
+### Reg Authority Source
 
 <<MUST item:Art.29:reg_authority_source>>
 _Why: Art.29_
 
-<<TEXT>>
+> _Standard text:_ Per-row source of authority (which DPA + which controller instructions)
 
-## 3. Per-row scope of processing the person is authorised to perform
+### Reg Scope
 
 <<MUST item:Art.29:reg_scope>>
 _Why: Art.29 — only on documented instructions_
 
-<<TEXT>>
+> _Standard text:_ Per-row scope of processing the person is authorised to perform
 
-## 4. Per-row status (active / suspended / revoked-on-date)
+### Reg Status
 
 <<MUST item:Art.29:reg_status>>
 _Why: Lifecycle_
 
-<<TEXT>>
+> _Standard text:_ Per-row status (active / suspended / revoked-on-date)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row training completion cross-reference (A.6.3 / 7.3 records)
+### Reg Training Xref
 
 <<SHOULD item:Art.29:reg_training_xref>>
 _Why: Cross-control_
 
-<<TEXT>>
+> _Standard text:_ Per-row training completion cross-reference (A.6.3 / 7.3 records)

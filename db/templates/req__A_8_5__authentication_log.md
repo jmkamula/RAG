@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Authentication Activity Log
 
 > Continuous evidence stream — auth events, failure patterns, suspicious-login signals, MFA bypass attempts. Feeds detection (A.8.16) and incident triage (A.5.25)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.5:authentication_log -->
+<!-- column: item:A.8.5:log_auth_events -->
+<!-- column: item:A.8.5:log_failure_clusters -->
+<!-- column: item:A.8.5:log_impossible_travel -->
+<!-- column: item:A.8.5:log_mfa_anomalies -->
+<!-- column: item:A.8.5:log_retention -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. All authentication events captured (success / failure / MFA challenge / step-up)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.5:authentication_log -->
+| Log Auth Events | Log Failure Clusters | Log Impossible Travel | Log Mfa Anomalies | Log Retention |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.5:authentication_log -->
+
+## Column guidance — what to fill in
+
+### Log Auth Events
 
 <<MUST item:A.8.5:log_auth_events>>
 _Why: 27002:8.5 — implemented_
 
-<<TEXT>>
+> _Standard text:_ All authentication events captured (success / failure / MFA challenge / step-up)
 
-## 2. Failure-cluster detection (brute force, password spraying)
+### Log Failure Clusters
 
 <<MUST item:A.8.5:log_failure_clusters>>
 _Why: Modern baseline_
 
-<<TEXT>>
+> _Standard text:_ Failure-cluster detection (brute force, password spraying)
 
-## 3. Impossible-travel / geo-anomaly detection where applicable
+### Log Impossible Travel
 
 <<MUST item:A.8.5:log_impossible_travel>>
 _Why: Modern baseline_
 
-<<TEXT>>
+> _Standard text:_ Impossible-travel / geo-anomaly detection where applicable
 
-## 4. MFA-prompt fatigue / push-bombing detection
+### Log Mfa Anomalies
 
 <<MUST item:A.8.5:log_mfa_anomalies>>
 _Why: 27002:8.5 — secure (modern attack vector)_
 
-<<TEXT>>
+> _Standard text:_ MFA-prompt fatigue / push-bombing detection
 
-## 5. Retention period defined and enforced (cross-link to A.8.15)
+### Log Retention
 
 <<MUST item:A.8.5:log_retention>>
 _Why: A.8.15 linkage_
 
-<<TEXT>>
+> _Standard text:_ Retention period defined and enforced (cross-link to A.8.15)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Events forwarded to SIEM with correlation to identity events (A.5.16)
+### Log Siem Forward
 
 <<SHOULD item:A.8.5:log_siem_forward>>
 _Why: Detection maturity_
 
-<<TEXT>>
+> _Standard text:_ Events forwarded to SIEM with correlation to identity events (A.5.16)

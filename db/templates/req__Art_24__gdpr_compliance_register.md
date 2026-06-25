@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # GDPR Compliance Register
 
 > Per-obligation register tracking the org's posture against every GDPR article in scope. Annual refresh (freshness=365). Distinct from the Art.30 RoPA (activities) and the lawful-basis register (Art.6 per-activity): this is the meta-tracker of compliance posture per article
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.24:gdpr_compliance_register -->
+<!-- column: item:Art.24:reg_article_id -->
+<!-- column: item:Art.24:reg_applicability -->
+<!-- column: item:Art.24:reg_implementing_artefact -->
+<!-- column: item:Art.24:reg_status -->
+<!-- column: item:Art.24:reg_owner -->
+<!-- column: item:Art.24:reg_last_assessed -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row GDPR article identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.24:gdpr_compliance_register -->
+| Reg Article Id | Reg Applicability | Reg Implementing Artefact | Reg Status | Reg Owner | Reg Last Assessed |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.24:gdpr_compliance_register -->
+
+## Column guidance — what to fill in
+
+### Reg Article Id
 
 <<MUST item:Art.24:reg_article_id>>
 _Why: Coverage_
 
-<<TEXT>>
+> _Standard text:_ Per-row GDPR article identifier
 
-## 2. Per-row applicability assessment (in scope / N/A with reason)
+### Reg Applicability
 
 <<MUST item:Art.24:reg_applicability>>
 _Why: Defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row applicability assessment (in scope / N/A with reason)
 
-## 3. Per-row link to the implementing artefact (procedure / policy / register / DPA / certification)
+### Reg Implementing Artefact
 
 <<MUST item:Art.24:reg_implementing_artefact>>
 _Why: Demonstrability_
 
-<<TEXT>>
+> _Standard text:_ Per-row link to the implementing artefact (procedure / policy / register / DPA / certification)
 
-## 4. Per-row implementation status (implemented / partial / planned / N/A)
+### Reg Status
 
 <<MUST item:Art.24:reg_status>>
 _Why: Status visibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row implementation status (implemented / partial / planned / N/A)
 
-## 5. Per-row owner
+### Reg Owner
 
 <<MUST item:Art.24:reg_owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-row owner
 
-## 6. Per-row last-assessed date (drives staleness)
+### Reg Last Assessed
 
 <<MUST item:Art.24:reg_last_assessed>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-row last-assessed date (drives staleness)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row residual risk where status is partial
+### Reg Residual Risk
 
 <<SHOULD item:Art.24:reg_residual_risk>>
 _Why: Risk visibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row residual risk where status is partial

@@ -7,72 +7,94 @@ trigger_type: universal
 template_version: 1
 must_count: 6
 should_count: 2
+table_shape: true
 ---
 
 # Compliance Review Schedule
 
 > A.5.36 expects regular review — without a schedule, 'regular' becomes 'when something goes wrong'. The schedule register is the calendar: every in-scope policy/rule/standard, the planned cadence per item (proportional to risk and change rate), the last review date and the next review date
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.36:compliance_review_schedule -->
+<!-- column: item:A.5.36:sch_full_catalogue -->
+<!-- column: item:A.5.36:sch_cadence -->
+<!-- column: item:A.5.36:sch_method_planned -->
+<!-- column: item:A.5.36:sch_last_review -->
+<!-- column: item:A.5.36:sch_next_review -->
+<!-- column: item:A.5.36:sch_owner -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Full catalogue of in-scope items enumerated (InfoSec policy + every topic-specific policy + rules + applicable standards — completeness is the integrity check)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.36:compliance_review_schedule -->
+| Sch Full Catalogue | Sch Cadence | Sch Method Planned | Sch Last Review | Sch Next Review | Sch Owner |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.36:compliance_review_schedule -->
+
+## Column guidance — what to fill in
+
+### Sch Full Catalogue
 
 <<MUST item:A.5.36:sch_full_catalogue>>
 _Why: 27002:5.36 — InfoSec policy + topic-specific policies + rules + standards_
 
-<<TEXT>>
+> _Standard text:_ Full catalogue of in-scope items enumerated (InfoSec policy + every topic-specific policy + rules + applicable standards — completeness is the integrity check)
 
-## 2. Cadence per item (annual baseline; tighter for high-risk or fast-changing items — e.g. acceptable use, access control)
+### Sch Cadence
 
 <<MUST item:A.5.36:sch_cadence>>
 _Why: 27002:5.36 — regularly_
 
-<<TEXT>>
+> _Standard text:_ Cadence per item (annual baseline; tighter for high-risk or fast-changing items — e.g. acceptable use, access control)
 
-## 3. Planned method per item (which items use sampling vs audit vs automated check)
+### Sch Method Planned
 
 <<MUST item:A.5.36:sch_method_planned>>
 _Why: 27002:5.36 — reviewed_
 
-<<TEXT>>
+> _Standard text:_ Planned method per item (which items use sampling vs audit vs automated check)
 
-## 4. Last review date per item
+### Sch Last Review
 
 <<MUST item:A.5.36:sch_last_review>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Last review date per item
 
-## 5. Next review date per item
+### Sch Next Review
 
 <<MUST item:A.5.36:sch_next_review>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next review date per item
 
-## 6. Named owner per item (reviewer accountable for the next cycle)
+### Sch Owner
 
 <<MUST item:A.5.36:sch_owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Named owner per item (reviewer accountable for the next cycle)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Ad-hoc change triggers documented (policy edit, regulator action, incident affecting a policy area) — fires reviews outside the planned cadence
+### Sch Change Triggers
 
 <<SHOULD item:A.5.36:sch_change_triggers>>
 _Why: Change-driven review_
 
-<<TEXT>>
+> _Standard text:_ Ad-hoc change triggers documented (policy edit, regulator action, incident affecting a policy area) — fires reviews outside the planned cadence
 
-### 2. Scheduled-vs-completed delta tracked (so missed reviews surface)
+### Sch Delta
 
 <<SHOULD item:A.5.36:sch_delta>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Scheduled-vs-completed delta tracked (so missed reviews surface)

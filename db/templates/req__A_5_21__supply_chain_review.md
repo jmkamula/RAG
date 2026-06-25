@@ -8,65 +8,86 @@ freshness_days: 180
 template_version: 1
 must_count: 5
 should_count: 2
+table_shape: true
 ---
 
 # Periodic ICT Supply Chain Review
 
 > ICT supply chains are volatile — vendor M&A, EOL pipelines, new vulnerability disclosures and sub-supplier shifts can move risk significantly inside a year. The review record captures the planned-interval review of the component register, the vendor-maturity assessment, the EOL pipeline and the resulting action items
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.21:supply_chain_review -->
+<!-- column: item:A.5.21:rev_date -->
+<!-- column: item:A.5.21:rev_reviewer -->
+<!-- column: item:A.5.21:rev_eol_pipeline -->
+<!-- column: item:A.5.21:rev_maturity -->
+<!-- column: item:A.5.21:rev_actions -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.21:supply_chain_review -->
+| Rev Date | Rev Reviewer | Rev Eol Pipeline | Rev Maturity | Rev Actions |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.21:supply_chain_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.5.21:rev_date>>
 _Why: 27002:5.21 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (typically architecture lead + InfoSec lead)
+### Rev Reviewer
 
 <<MUST item:A.5.21:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (typically architecture lead + InfoSec lead)
 
-## 3. EOL pipeline review (which components reach EOL in the next planning horizon, replacement status)
+### Rev Eol Pipeline
 
 <<MUST item:A.5.21:rev_eol_pipeline>>
 _Why: 27002:5.21i_
 
-<<TEXT>>
+> _Standard text:_ EOL pipeline review (which components reach EOL in the next planning horizon, replacement status)
 
-## 4. Vendor maturity review (recent attestations, incidents, sub-supplier disclosures)
+### Rev Maturity
 
 <<MUST item:A.5.21:rev_maturity>>
 _Why: 27002:5.21d_
 
-<<TEXT>>
+> _Standard text:_ Vendor maturity review (recent attestations, incidents, sub-supplier disclosures)
 
-## 5. Action items captured per critical component (e.g. tighten monitoring, push for upgrade, replan replacement)
+### Rev Actions
 
 <<MUST item:A.5.21:rev_actions>>
 _Why: 27002:5.21d,i_
 
-<<TEXT>>
+> _Standard text:_ Action items captured per critical component (e.g. tighten monitoring, push for upgrade, replan replacement)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. External threat intelligence input considered (link to A.5.7)
+### Rev Threat Intel
 
 <<SHOULD item:A.5.21:rev_threat_intel>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ External threat intelligence input considered (link to A.5.7)
 
-### 2. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.5.21:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

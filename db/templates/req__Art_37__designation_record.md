@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # DPO Designation Record
 
 > Per-DPO designation record (most orgs have 1; group designations may have more). Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.37:designation_record -->
+<!-- column: item:Art.37:reg_dpo_identity -->
+<!-- column: item:Art.37:reg_qualifications_evidence -->
+<!-- column: item:Art.37:reg_designation_date -->
+<!-- column: item:Art.37:reg_employment_type -->
+<!-- column: item:Art.37:reg_publication_evidence -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. DPO identity per row
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.37:designation_record -->
+| Reg Dpo Identity | Reg Qualifications Evidence | Reg Designation Date | Reg Employment Type | Reg Publication Evidence |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.37:designation_record -->
+
+## Column guidance — what to fill in
+
+### Reg Dpo Identity
 
 <<MUST item:Art.37:reg_dpo_identity>>
 _Why: Authenticity_
 
-<<TEXT>>
+> _Standard text:_ DPO identity per row
 
-## 2. Per-row qualifications evidence (CV / certifications / professional experience)
+### Reg Qualifications Evidence
 
 <<MUST item:Art.37:reg_qualifications_evidence>>
 _Why: Art.37.5_
 
-<<TEXT>>
+> _Standard text:_ Per-row qualifications evidence (CV / certifications / professional experience)
 
-## 3. Per-row designation date
+### Reg Designation Date
 
 <<MUST item:Art.37:reg_designation_date>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-row designation date
 
-## 4. Per-row employment type (internal staff / external service contract)
+### Reg Employment Type
 
 <<MUST item:Art.37:reg_employment_type>>
 _Why: Art.37.6_
 
-<<TEXT>>
+> _Standard text:_ Per-row employment type (internal staff / external service contract)
 
-## 5. Per-row publication evidence (privacy notice URL + SA notification confirmation)
+### Reg Publication Evidence
 
 <<MUST item:Art.37:reg_publication_evidence>>
 _Why: Art.37.7_
 
-<<TEXT>>
+> _Standard text:_ Per-row publication evidence (privacy notice URL + SA notification confirmation)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row link to employment / service contract document
+### Reg Contract Link
 
 <<SHOULD item:Art.37:reg_contract_link>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row link to employment / service contract document

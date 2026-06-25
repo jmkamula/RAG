@@ -8,79 +8,102 @@ freshness_days: 180
 template_version: 1
 must_count: 7
 should_count: 2
+table_shape: true
 ---
 
 # Periodic ICT Readiness Program Review
 
 > The ICT continuity plan creates value only if RTO/RPO commitments actually hold under test — services that fall out of compliance, dependencies that have shifted, backup restores that fail, test scenarios that have gone stale all signal the plan is drifting. The review captures the planned-interval check: RTO/RPO compliance audit, dependency-currency check, restore-success-rate analysis, scenario-coverage audit, and resulting plan adjustments. Cadence tightened to 180 days — ICT landscape shifts continuously
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.30:ict_program_review -->
+<!-- column: item:A.5.30:rev_date -->
+<!-- column: item:A.5.30:rev_reviewer -->
+<!-- column: item:A.5.30:rev_rto_compliance -->
+<!-- column: item:A.5.30:rev_dependency_check -->
+<!-- column: item:A.5.30:rev_restore_success -->
+<!-- column: item:A.5.30:rev_scenario_coverage -->
+<!-- column: item:A.5.30:rev_actions -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned 180-day interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.30:ict_program_review -->
+| Rev Date | Rev Reviewer | Rev Rto Compliance | Rev Dependency Check | Rev Restore Success | Rev Scenario Coverage | Rev Actions |
+|---|---|---|---|---|---|---|
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.30:ict_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.5.30:rev_date>>
 _Why: 27002:5.30 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned 180-day interval
 
-## 2. Reviewer identity (CTO/IT-ops head + BCP-program owner + InfoSec lead jointly; CFO sign-off where critical-service RTO has financial impact)
+### Rev Reviewer
 
 <<MUST item:A.5.30:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (CTO/IT-ops head + BCP-program owner + InfoSec lead jointly; CFO sign-off where critical-service RTO has financial impact)
 
-## 3. RTO/RPO compliance audit (sample of services re-tested; gap to target per service; root cause per gap)
+### Rev Rto Compliance
 
 <<MUST item:A.5.30:rev_rto_compliance>>
 _Why: 27002:5.30 — objectives verification_
 
-<<TEXT>>
+> _Standard text:_ RTO/RPO compliance audit (sample of services re-tested; gap to target per service; root cause per gap)
 
-## 4. Dependency-currency check (sample of services where dependency map re-validated against current reality; shifts flagged for plan update)
+### Rev Dependency Check
 
 <<MUST item:A.5.30:rev_dependency_check>>
 _Why: 27002:5.30 — readiness coordination_
 
-<<TEXT>>
+> _Standard text:_ Dependency-currency check (sample of services where dependency map re-validated against current reality; shifts flagged for plan update)
 
-## 5. Restore-success-rate analysis (last N restores attempted; success rate; failed restores investigated)
+### Rev Restore Success
 
 <<MUST item:A.5.30:rev_restore_success>>
 _Why: 27002:5.30 — backup verification_
 
-<<TEXT>>
+> _Standard text:_ Restore-success-rate analysis (last N restores attempted; success rate; failed restores investigated)
 
-## 6. Scenario-coverage audit (which scenarios from A.5.29 register actually tested via real recovery; which still untested; remediation plan per gap)
+### Rev Scenario Coverage
 
 <<MUST item:A.5.30:rev_scenario_coverage>>
 _Why: 27002:5.30 + cross-link to [[A.5.29]]_
 
-<<TEXT>>
+> _Standard text:_ Scenario-coverage audit (which scenarios from A.5.29 register actually tested via real recovery; which still untested; remediation plan per gap)
 
-## 7. Action items captured (e.g. add new service, tighten RTO for service that consistently misses, retire stale scenario, refresh test schedule)
+### Rev Actions
 
 <<MUST item:A.5.30:rev_actions>>
 _Why: 27002:5.30 — plan adjustments_
 
-<<TEXT>>
+> _Standard text:_ Action items captured (e.g. add new service, tighten RTO for service that consistently misses, retire stale scenario, refresh test schedule)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Cloud-provider posture noted (where ICT readiness depends on hyperscaler features — AZ failover, region replication; their SLA changes affect ours)
+### Rev Cloud Posture
 
 <<SHOULD item:A.5.30:rev_cloud_posture>>
 _Why: Cross-link to [[A.5.23]]_
 
-<<TEXT>>
+> _Standard text:_ Cloud-provider posture noted (where ICT readiness depends on hyperscaler features — AZ failover, region replication; their SLA changes affect ours)
 
-### 2. Next planned review date stated (within 180d of this review)
+### Rev Next Date
 
 <<SHOULD item:A.5.30:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated (within 180d of this review)

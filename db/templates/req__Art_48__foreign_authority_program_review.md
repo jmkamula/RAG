@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Foreign Authority Program Review
 
 > Annual verification — procedure tested via tabletop where no real requests occurred, agreements catalogue current, any actual disclosures defensible (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.48:foreign_authority_program_review -->
+<!-- column: item:Art.48:rev_date -->
+<!-- column: item:Art.48:rev_reviewer -->
+<!-- column: item:Art.48:rev_register_currency -->
+<!-- column: item:Art.48:rev_tabletop -->
+<!-- column: item:Art.48:rev_agreements_currency -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.48:foreign_authority_program_review -->
+| Rev Date | Rev Reviewer | Rev Register Currency | Rev Tabletop | Rev Agreements Currency |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.48:foreign_authority_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.48:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + legal counsel + executive sponsor)
+### Rev Reviewer
 
 <<MUST item:Art.48:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + legal counsel + executive sponsor)
 
-## 3. Register currency — every actual request handled per procedure
+### Rev Register Currency
 
 <<MUST item:Art.48:rev_register_currency>>
 _Why: Cross-leaf_
 
-<<TEXT>>
+> _Standard text:_ Register currency — every actual request handled per procedure
 
-## 4. Tabletop exercise — procedure tested at least annually against a hypothetical foreign authority request (mirrors A.5.24 IR exercises)
+### Rev Tabletop
 
 <<MUST item:Art.48:rev_tabletop>>
 _Why: Effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Tabletop exercise — procedure tested at least annually against a hypothetical foreign authority request (mirrors A.5.24 IR exercises)
 
-## 5. Agreements currency — international agreements catalogue refreshed
+### Rev Agreements Currency
 
 <<MUST item:Art.48:rev_agreements_currency>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Agreements currency — international agreements catalogue refreshed
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.48:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

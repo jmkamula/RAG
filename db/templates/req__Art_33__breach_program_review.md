@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Breach Notification Program Review
 
 > Annual verification that the 72h SLA is being met, severity-gate decisions are defensible, exercises are validating the procedure (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.33:breach_program_review -->
+<!-- column: item:Art.33:rev_date -->
+<!-- column: item:Art.33:rev_reviewer -->
+<!-- column: item:Art.33:rev_72h_compliance -->
+<!-- column: item:Art.33:rev_severity_audit -->
+<!-- column: item:Art.33:rev_exercise_link -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.33:breach_program_review -->
+| Rev Date | Rev Reviewer | Rev 72H Compliance | Rev Severity Audit | Rev Exercise Link |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.33:breach_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.33:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + legal + incident-response lead)
+### Rev Reviewer
 
 <<MUST item:Art.33:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + legal + incident-response lead)
 
-## 3. 72h-compliance audit — every required notification met the SLA (or had documented Art.33.1 delay reason)
+### Rev 72H Compliance
 
 <<MUST item:Art.33:rev_72h_compliance>>
 _Why: Art.33.1_
 
-<<TEXT>>
+> _Standard text:_ 72h-compliance audit — every required notification met the SLA (or had documented Art.33.1 delay reason)
 
-## 4. Severity-gate audit — sampled 'no-notify' decisions reviewed for defensibility against Art.33.1 risk threshold
+### Rev Severity Audit
 
 <<MUST item:Art.33:rev_severity_audit>>
 _Why: Art.33.1 — risk exception_
 
-<<TEXT>>
+> _Standard text:_ Severity-gate audit — sampled 'no-notify' decisions reviewed for defensibility against Art.33.1 risk threshold
 
-## 5. A.5.24 exercise integration — Art.33 procedure exercised within the year (table-top or live)
+### Rev Exercise Link
 
 <<MUST item:Art.33:rev_exercise_link>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ A.5.24 exercise integration — Art.33 procedure exercised within the year (table-top or live)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.33:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

@@ -8,58 +8,78 @@ freshness_days: 365
 template_version: 1
 must_count: 4
 should_count: 2
+table_shape: true
 ---
 
 # Periodic Supplier Portfolio Review
 
 > A.5.19 expects periodic review of the supplier portfolio — to refresh risk classifications, re-test selection criteria, and confirm that monitoring and training arrangements still fit the supplier mix
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.19:portfolio_review -->
+<!-- column: item:A.5.19:rev_date -->
+<!-- column: item:A.5.19:rev_reviewer -->
+<!-- column: item:A.5.19:rev_outcome -->
+<!-- column: item:A.5.19:rev_actions -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.19:portfolio_review -->
+| Rev Date | Rev Reviewer | Rev Outcome | Rev Actions |
+|---|---|---|---|
+|          |          |          |          |
+|          |          |          |          |
+|          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.19:portfolio_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.5.19:rev_date>>
 _Why: 27002:5.19e — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity and role (typically procurement + InfoSec lead)
+### Rev Reviewer
 
 <<MUST item:A.5.19:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity and role (typically procurement + InfoSec lead)
 
-## 3. Outcome per supplier or per tier (no change / re-tiered / added / removed)
+### Rev Outcome
 
 <<MUST item:A.5.19:rev_outcome>>
 _Why: 27002:5.19e_
 
-<<TEXT>>
+> _Standard text:_ Outcome per supplier or per tier (no change / re-tiered / added / removed)
 
-## 4. Action items captured where monitoring or training arrangements need adjustment
+### Rev Actions
 
 <<MUST item:A.5.19:rev_actions>>
 _Why: 27002:5.19i,k_
 
-<<TEXT>>
+> _Standard text:_ Action items captured where monitoring or training arrangements need adjustment
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Ad-hoc triggers (M&A, market events, new business line, supplier incident) prompting unscheduled review
+### Rev Triggers
 
 <<SHOULD item:A.5.19:rev_triggers>>
 _Why: Change-driven review_
 
-<<TEXT>>
+> _Standard text:_ Ad-hoc triggers (M&A, market events, new business line, supplier incident) prompting unscheduled review
 
-### 2. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.5.19:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

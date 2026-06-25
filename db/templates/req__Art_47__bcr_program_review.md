@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # BCR Program Review
 
 > Annual verification — every bound entity still in compliance, complaints handled per Art.47.2.i, training delivered, lead SA notified of material changes (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.47:bcr_program_review -->
+<!-- column: item:Art.47:rev_date -->
+<!-- column: item:Art.47:rev_reviewer -->
+<!-- column: item:Art.47:rev_compliance_audit -->
+<!-- column: item:Art.47:rev_complaints_handled -->
+<!-- column: item:Art.47:rev_change_notification -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.47:bcr_program_review -->
+| Rev Date | Rev Reviewer | Rev Compliance Audit | Rev Complaints Handled | Rev Change Notification |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.47:bcr_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.47:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + group privacy lead)
+### Rev Reviewer
 
 <<MUST item:Art.47:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + group privacy lead)
 
-## 3. Compliance audit — bound entities adhering to BCR provisions (sampled audit results)
+### Rev Compliance Audit
 
 <<MUST item:Art.47:rev_compliance_audit>>
 _Why: Art.47.2.j_
 
-<<TEXT>>
+> _Standard text:_ Compliance audit — bound entities adhering to BCR provisions (sampled audit results)
 
-## 4. Complaints-handling audit — Art.47.2.i path functioning + SAs receiving cooperation
+### Rev Complaints Handled
 
 <<MUST item:Art.47:rev_complaints_handled>>
 _Why: Art.47.2.i_
 
-<<TEXT>>
+> _Standard text:_ Complaints-handling audit — Art.47.2.i path functioning + SAs receiving cooperation
 
-## 5. Material-change notification — significant changes notified to lead SA per Art.63 consistency
+### Rev Change Notification
 
 <<MUST item:Art.47:rev_change_notification>>
 _Why: Art.47.2.k_
 
-<<TEXT>>
+> _Standard text:_ Material-change notification — significant changes notified to lead SA per Art.63 consistency
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.47:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

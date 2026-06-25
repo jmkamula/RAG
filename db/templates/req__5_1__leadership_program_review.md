@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Leadership Program Review
 
 > Annual verification that leadership commitment is being visibly demonstrated — directive signed and current, framework being followed, reaffirmations on cadence (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:5.1:leadership_program_review -->
+<!-- column: item:5.1:rev_date -->
+<!-- column: item:5.1:rev_reviewer -->
+<!-- column: item:5.1:rev_directive_currency -->
+<!-- column: item:5.1:rev_framework_adherence -->
+<!-- column: item:5.1:rev_reaffirmation_completeness -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:5.1:leadership_program_review -->
+| Rev Date | Rev Reviewer | Rev Directive Currency | Rev Framework Adherence | Rev Reaffirmation Completeness |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:5.1:leadership_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:5.1:rev_date>>
 _Why: Clause 5.1 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (ISMS Manager + non-executive director if available)
+### Rev Reviewer
 
 <<MUST item:5.1:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (ISMS Manager + non-executive director if available)
 
-## 3. Directive currency check — signed by current top management
+### Rev Directive Currency
 
 <<MUST item:5.1:rev_directive_currency>>
 _Why: Drift detection_
 
-<<TEXT>>
+> _Standard text:_ Directive currency check — signed by current top management
 
-## 4. Framework adherence check — board cadence happened, sponsor activities completed
+### Rev Framework Adherence
 
 <<MUST item:5.1:rev_framework_adherence>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Framework adherence check — board cadence happened, sponsor activities completed
 
-## 5. Reaffirmation record completeness — required reaffirmations all present
+### Rev Reaffirmation Completeness
 
 <<MUST item:5.1:rev_reaffirmation_completeness>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Reaffirmation record completeness — required reaffirmations all present
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:5.1:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

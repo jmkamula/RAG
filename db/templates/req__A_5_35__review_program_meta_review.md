@@ -8,72 +8,94 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 2
+table_shape: true
 ---
 
 # Periodic Independent Review Program Meta-Review
 
 > The review program itself needs review — are we picking reviewers that stay genuinely independent, is the cadence right, are findings closing, do reviews surface real issues or have they become rubber-stamps? The meta-review evidences periodic self-assessment of the review program and resulting adjustments
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.35:review_program_meta_review -->
+<!-- column: item:A.5.35:pgm_date -->
+<!-- column: item:A.5.35:pgm_reviewer -->
+<!-- column: item:A.5.35:pgm_independence_check -->
+<!-- column: item:A.5.35:pgm_coverage -->
+<!-- column: item:A.5.35:pgm_closure -->
+<!-- column: item:A.5.35:pgm_outcome -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Meta-review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.35:review_program_meta_review -->
+| Pgm Date | Pgm Reviewer | Pgm Independence Check | Pgm Coverage | Pgm Closure | Pgm Outcome |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.35:review_program_meta_review -->
+
+## Column guidance — what to fill in
+
+### Pgm Date
 
 <<MUST item:A.5.35:pgm_date>>
 _Why: 27002:5.35 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Meta-review date within the planned interval
 
-## 2. Reviewer identity (program owner + InfoSec lead jointly + audit committee chair where applicable)
+### Pgm Reviewer
 
 <<MUST item:A.5.35:pgm_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (program owner + InfoSec lead jointly + audit committee chair where applicable)
 
-## 3. Independence-discipline check — did the actual reviewers meet the criteria? rotation worked? any reviewer reviewing their own area?
+### Pgm Independence Check
 
 <<MUST item:A.5.35:pgm_independence_check>>
 _Why: 27002:5.35 — reviewed independently_
 
-<<TEXT>>
+> _Standard text:_ Independence-discipline check — did the actual reviewers meet the criteria? rotation worked? any reviewer reviewing their own area?
 
-## 4. Coverage check — did the schedule actually run? all planned scope areas reviewed?
+### Pgm Coverage
 
 <<MUST item:A.5.35:pgm_coverage>>
 _Why: 27002:5.35 — planned intervals_
 
-<<TEXT>>
+> _Standard text:_ Coverage check — did the schedule actually run? all planned scope areas reviewed?
 
-## 5. Findings-closure rate across the program (open / aged / closed)
+### Pgm Closure
 
 <<MUST item:A.5.35:pgm_closure>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Findings-closure rate across the program (open / aged / closed)
 
-## 6. Cadence-adjustment or scope-adjustment decisions (tighten / loosen / re-tier / change reviewer pool)
+### Pgm Outcome
 
 <<MUST item:A.5.35:pgm_outcome>>
 _Why: 27002:5.35 — adjustments_
 
-<<TEXT>>
+> _Standard text:_ Cadence-adjustment or scope-adjustment decisions (tighten / loosen / re-tier / change reviewer pool)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. External benchmarking or industry-practice input considered
+### Pgm Benchmark
 
 <<SHOULD item:A.5.35:pgm_benchmark>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ External benchmarking or industry-practice input considered
 
-### 2. Next planned meta-review date stated
+### Pgm Next Date
 
 <<SHOULD item:A.5.35:pgm_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned meta-review date stated

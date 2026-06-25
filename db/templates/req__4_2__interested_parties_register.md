@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Interested Parties and Requirements Register
 
 > Clause 4.2 requires the organization to determine interested parties relevant to the ISMS and their requirements. The register is the canonical artefact — party rows with category, requirements, ISMS treatment decision, owner. Sibling leaves: stakeholder identification framework, applicable-domains scope, program review
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:4.2:interested_parties_register -->
+<!-- column: item:4.2:parties_listed -->
+<!-- column: item:4.2:requirements -->
+<!-- column: item:4.2:addressed -->
+<!-- column: item:4.2:owner -->
+<!-- column: item:4.2:reg_last_assessed -->
+<!-- column: item:4.2:reg_scope_link -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Interested parties listed per row (regulators, customers, suppliers, personnel, shareholders, communities)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:4.2:interested_parties_register -->
+| Parties Listed | Requirements | Addressed | Owner | Reg Last Assessed | Reg Scope Link |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:4.2:interested_parties_register -->
+
+## Column guidance — what to fill in
+
+### Parties Listed
 
 <<MUST item:4.2:parties_listed>>
 _Why: Clause 4.2 — interested parties relevant_
 
-<<TEXT>>
+> _Standard text:_ Interested parties listed per row (regulators, customers, suppliers, personnel, shareholders, communities)
 
-## 2. Requirements per party documented (legal, regulatory, contractual, business expectations)
+### Requirements
 
 <<MUST item:4.2:requirements>>
 _Why: Clause 4.2 — relevant requirements_
 
-<<TEXT>>
+> _Standard text:_ Requirements per party documented (legal, regulatory, contractual, business expectations)
 
-## 3. Which requirements the ISMS will address per party (and how)
+### Addressed
 
 <<MUST item:4.2:addressed>>
 _Why: Clause 4.2 — addressed through the ISMS_
 
-<<TEXT>>
+> _Standard text:_ Which requirements the ISMS will address per party (and how)
 
-## 4. Named owner of the register
+### Owner
 
 <<MUST item:4.2:owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Named owner of the register
 
-## 5. Last assessment date per party row (drives staleness detection)
+### Reg Last Assessed
 
 <<MUST item:4.2:reg_last_assessed>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Last assessment date per party row (drives staleness detection)
 
-## 6. Per-row link to the ISMS scope (4.3) artefacts that address the party
+### Reg Scope Link
 
 <<MUST item:4.2:reg_scope_link>>
 _Why: Cross-clause coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-row link to the ISMS scope (4.3) artefacts that address the party
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-party priority tag (contractually-bound vs voluntary commitment)
+### Reg Priority
 
 <<SHOULD item:4.2:reg_priority>>
 _Why: Risk and priority clarity_
 
-<<TEXT>>
+> _Standard text:_ Per-party priority tag (contractually-bound vs voluntary commitment)

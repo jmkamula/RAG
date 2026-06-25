@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Periodic Test Information Program Review
 
 > Annual verification — register currency, no-live-PII spot-check, retention compliance, masking effectiveness (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.33:test_data_program_review -->
+<!-- column: item:A.8.33:rev_date -->
+<!-- column: item:A.8.33:rev_reviewer -->
+<!-- column: item:A.8.33:rev_register_currency -->
+<!-- column: item:A.8.33:rev_no_live_pii_check -->
+<!-- column: item:A.8.33:rev_retention_compliance -->
+<!-- column: item:A.8.33:rev_findings_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.33:test_data_program_review -->
+| Rev Date | Rev Reviewer | Rev Register Currency | Rev No Live Pii Check | Rev Retention Compliance | Rev Findings Update |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.33:test_data_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.8.33:rev_date>>
 _Why: 27002:8.33 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (Data Engineering + DPO + InfoSec)
+### Rev Reviewer
 
 <<MUST item:A.8.33:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (Data Engineering + DPO + InfoSec)
 
-## 3. Register-currency check (active datasets all registered; retired datasets archived/deleted)
+### Rev Register Currency
 
 <<MUST item:A.8.33:rev_register_currency>>
 _Why: Drift prevention_
 
-<<TEXT>>
+> _Standard text:_ Register-currency check (active datasets all registered; retired datasets archived/deleted)
 
-## 4. No-live-PII spot-check in non-production environments (auditor-critical for GDPR)
+### Rev No Live Pii Check
 
 <<MUST item:A.8.33:rev_no_live_pii_check>>
 _Why: GDPR alignment_
 
-<<TEXT>>
+> _Standard text:_ No-live-PII spot-check in non-production environments (auditor-critical for GDPR)
 
-## 5. Retention compliance (no datasets surviving past end-of-need)
+### Rev Retention Compliance
 
 <<MUST item:A.8.33:rev_retention_compliance>>
 _Why: 27002:8.33 — managed_
 
-<<TEXT>>
+> _Standard text:_ Retention compliance (no datasets surviving past end-of-need)
 
-## 6. Findings propagated to procedure / scope
+### Rev Findings Update
 
 <<MUST item:A.8.33:rev_findings_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Findings propagated to procedure / scope
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.8.33:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

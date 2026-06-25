@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Joint Controller Register
 
 > Per-relationship record for every active joint-controller arrangement. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.26:joint_controller_register -->
+<!-- column: item:Art.26:reg_counterparty -->
+<!-- column: item:Art.26:reg_activity -->
+<!-- column: item:Art.26:reg_responsibilities -->
+<!-- column: item:Art.26:reg_essence_published -->
+<!-- column: item:Art.26:reg_signed_date -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row joint-controller counterparty
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.26:joint_controller_register -->
+| Reg Counterparty | Reg Activity | Reg Responsibilities | Reg Essence Published | Reg Signed Date |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.26:joint_controller_register -->
+
+## Column guidance — what to fill in
+
+### Reg Counterparty
 
 <<MUST item:Art.26:reg_counterparty>>
 _Why: Audit_
 
-<<TEXT>>
+> _Standard text:_ Per-row joint-controller counterparty
 
-## 2. Per-row processing activity (Art.30 RoPA reference)
+### Reg Activity
 
 <<MUST item:Art.26:reg_activity>>
 _Why: Cross-article_
 
-<<TEXT>>
+> _Standard text:_ Per-row processing activity (Art.30 RoPA reference)
 
-## 3. Per-row responsibility split summary
+### Reg Responsibilities
 
 <<MUST item:Art.26:reg_responsibilities>>
 _Why: Art.26.1_
 
-<<TEXT>>
+> _Standard text:_ Per-row responsibility split summary
 
-## 4. Per-row essence-of-arrangement published location (privacy notice URL)
+### Reg Essence Published
 
 <<MUST item:Art.26:reg_essence_published>>
 _Why: Art.26.2_
 
-<<TEXT>>
+> _Standard text:_ Per-row essence-of-arrangement published location (privacy notice URL)
 
-## 5. Per-row arrangement signature date
+### Reg Signed Date
 
 <<MUST item:Art.26:reg_signed_date>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-row arrangement signature date
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row next-review date
+### Reg Review Date
 
 <<SHOULD item:Art.26:reg_review_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Per-row next-review date

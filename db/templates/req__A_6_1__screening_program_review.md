@@ -8,72 +8,94 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 2
+table_shape: true
 ---
 
 # Periodic Screening Program Review
 
 > Periodic verification that screening is happening at the right depth for each role tier, that legal/sectoral driver shifts have been incorporated, that re-screening cadence is being met, and that the register has no gaps. Annual cadence (freshness=365) matches the HR-program-review doctrine
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.6.1:screening_program_review -->
+<!-- column: item:A.6.1:rev_date -->
+<!-- column: item:A.6.1:rev_reviewer -->
+<!-- column: item:A.6.1:rev_register_check -->
+<!-- column: item:A.6.1:rev_scope_check -->
+<!-- column: item:A.6.1:rev_rescreen_status -->
+<!-- column: item:A.6.1:rev_register_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.6.1:screening_program_review -->
+| Rev Date | Rev Reviewer | Rev Register Check | Rev Scope Check | Rev Rescreen Status | Rev Register Update |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.6.1:screening_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.6.1:rev_date>>
 _Why: 27002:6.1 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity and role recorded (HR lead + InfoSec lead jointly; legal-counsel sign-off where jurisdictional shifts material)
+### Rev Reviewer
 
 <<MUST item:A.6.1:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity and role recorded (HR lead + InfoSec lead jointly; legal-counsel sign-off where jurisdictional shifts material)
 
-## 3. Per-tier outcome (did every new hire in this tier get the right checks? gaps flagged and remediated)
+### Rev Register Check
 
 <<MUST item:A.6.1:rev_register_check>>
 _Why: 27002:6.1 — completeness_
 
-<<TEXT>>
+> _Standard text:_ Per-tier outcome (did every new hire in this tier get the right checks? gaps flagged and remediated)
 
-## 4. Cross-check against the applicable-roles scope — any new role tier, new jurisdiction, new sectoral driver?
+### Rev Scope Check
 
 <<MUST item:A.6.1:rev_scope_check>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Cross-check against the applicable-roles scope — any new role tier, new jurisdiction, new sectoral driver?
 
-## 5. Rescreen status — for roles with ongoing-check obligations, what fraction completed on cadence vs aged-overdue
+### Rev Rescreen Status
 
 <<MUST item:A.6.1:rev_rescreen_status>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Rescreen status — for roles with ongoing-check obligations, what fraction completed on cadence vs aged-overdue
 
-## 6. Changes propagated back to the procedure / scope with reference to this review
+### Rev Register Update
 
 <<MUST item:A.6.1:rev_register_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Changes propagated back to the procedure / scope with reference to this review
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Ad-hoc review triggers listed (regulator enforcement action in sector, security incident involving inadequately-screened personnel)
+### Rev Ad Hoc Triggers
 
 <<SHOULD item:A.6.1:rev_ad_hoc_triggers>>
 _Why: Change-driven review_
 
-<<TEXT>>
+> _Standard text:_ Ad-hoc review triggers listed (regulator enforcement action in sector, security incident involving inadequately-screened personnel)
 
-### 2. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.6.1:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

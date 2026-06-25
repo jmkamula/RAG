@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Periodic Change Management Program Review
 
 > Annual verification — register completeness, emergency-change ratio, rollback-attainment, change-induced-incident trending (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.32:change_program_review -->
+<!-- column: item:A.8.32:rev_date -->
+<!-- column: item:A.8.32:rev_reviewer -->
+<!-- column: item:A.8.32:rev_register_completeness -->
+<!-- column: item:A.8.32:rev_emergency_ratio -->
+<!-- column: item:A.8.32:rev_change_incidents -->
+<!-- column: item:A.8.32:rev_findings_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.32:change_program_review -->
+| Rev Date | Rev Reviewer | Rev Register Completeness | Rev Emergency Ratio | Rev Change Incidents | Rev Findings Update |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.32:change_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.8.32:rev_date>>
 _Why: 27002:8.32 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (Change Management lead + Engineering + InfoSec)
+### Rev Reviewer
 
 <<MUST item:A.8.32:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (Change Management lead + Engineering + InfoSec)
 
-## 3. Register-completeness sample (sample of production changes traced to register)
+### Rev Register Completeness
 
 <<MUST item:A.8.32:rev_register_completeness>>
 _Why: Drift prevention_
 
-<<TEXT>>
+> _Standard text:_ Register-completeness sample (sample of production changes traced to register)
 
-## 4. Emergency-change ratio (high ratio signals process bypass)
+### Rev Emergency Ratio
 
 <<MUST item:A.8.32:rev_emergency_ratio>>
 _Why: Operational signal_
 
-<<TEXT>>
+> _Standard text:_ Emergency-change ratio (high ratio signals process bypass)
 
-## 5. Change-induced incident trending (cross-link to A.5.26 register — change as incident root cause)
+### Rev Change Incidents
 
 <<MUST item:A.8.32:rev_change_incidents>>
 _Why: Continuous improvement_
 
-<<TEXT>>
+> _Standard text:_ Change-induced incident trending (cross-link to A.5.26 register — change as incident root cause)
 
-## 6. Findings propagated to procedure / scope
+### Rev Findings Update
 
 <<MUST item:A.8.32:rev_findings_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Findings propagated to procedure / scope
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.8.32:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

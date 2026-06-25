@@ -8,72 +8,95 @@ freshness_days: 365
 template_version: 1
 must_count: 7
 should_count: 1
+table_shape: true
 ---
 
 # ISMS Document Register
 
 > Per-document record — every controlled ISMS document with owner, version, approval date, next review date. The live inventory that proves the policy is being applied. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:7.5:isms_document_register -->
+<!-- column: item:7.5:reg_doc_id -->
+<!-- column: item:7.5:reg_title -->
+<!-- column: item:7.5:reg_owner -->
+<!-- column: item:7.5:reg_version -->
+<!-- column: item:7.5:reg_approval_date -->
+<!-- column: item:7.5:reg_next_review -->
+<!-- column: item:7.5:reg_classification -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Unique document identifier per row
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:7.5:isms_document_register -->
+| Reg Doc Id | Reg Title | Reg Owner | Reg Version | Reg Approval Date | Reg Next Review | Reg Classification |
+|---|---|---|---|---|---|---|
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:7.5:isms_document_register -->
+
+## Column guidance — what to fill in
+
+### Reg Doc Id
 
 <<MUST item:7.5:reg_doc_id>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Unique document identifier per row
 
-## 2. Document title per row
+### Reg Title
 
 <<MUST item:7.5:reg_title>>
 _Why: Discoverability_
 
-<<TEXT>>
+> _Standard text:_ Document title per row
 
-## 3. Document owner per row
+### Reg Owner
 
 <<MUST item:7.5:reg_owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Document owner per row
 
-## 4. Current version per row
+### Reg Version
 
 <<MUST item:7.5:reg_version>>
 _Why: Clause 7.5.3 — control_
 
-<<TEXT>>
+> _Standard text:_ Current version per row
 
-## 5. Last approval date per row
+### Reg Approval Date
 
 <<MUST item:7.5:reg_approval_date>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Last approval date per row
 
-## 6. Next review date per row (drives staleness alerts)
+### Reg Next Review
 
 <<MUST item:7.5:reg_next_review>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Next review date per row (drives staleness alerts)
 
-## 7. Information classification per row (cross-link to A.5.12)
+### Reg Classification
 
 <<MUST item:7.5:reg_classification>>
 _Why: Clause 7.5.3 — protected_
 
-<<TEXT>>
+> _Standard text:_ Information classification per row (cross-link to A.5.12)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Retention period per row (cross-link to A.5.33 / A.5.34)
+### Reg Retention
 
 <<SHOULD item:7.5:reg_retention>>
 _Why: Clause 7.5.3 — retention_
 
-<<TEXT>>
+> _Standard text:_ Retention period per row (cross-link to A.5.33 / A.5.34)

@@ -8,65 +8,87 @@ freshness_days: 180
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Periodic SDLC Program Review
 
 > Periodic verification — gate-attainment per project class, exception-inventory current, lifecycle effectiveness (freshness=180; dev practices evolve)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.25:sdlc_program_review -->
+<!-- column: item:A.8.25:rev_date -->
+<!-- column: item:A.8.25:rev_reviewer -->
+<!-- column: item:A.8.25:rev_gate_attainment -->
+<!-- column: item:A.8.25:rev_exception_inventory -->
+<!-- column: item:A.8.25:rev_lifecycle_effectiveness -->
+<!-- column: item:A.8.25:rev_findings_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval (≤180 days)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.25:sdlc_program_review -->
+| Rev Date | Rev Reviewer | Rev Gate Attainment | Rev Exception Inventory | Rev Lifecycle Effectiveness | Rev Findings Update |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.25:sdlc_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.8.25:rev_date>>
 _Why: 27002:8.25 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval (≤180 days)
 
-## 2. Reviewer identity (Engineering leads + InfoSec)
+### Rev Reviewer
 
 <<MUST item:A.8.25:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (Engineering leads + InfoSec)
 
-## 3. Gate-attainment trending per project class
+### Rev Gate Attainment
 
 <<MUST item:A.8.25:rev_gate_attainment>>
 _Why: 27002:8.25 — applied_
 
-<<TEXT>>
+> _Standard text:_ Gate-attainment trending per project class
 
-## 4. Exception inventory re-confirmed / retired
+### Rev Exception Inventory
 
 <<MUST item:A.8.25:rev_exception_inventory>>
 _Why: Drift prevention_
 
-<<TEXT>>
+> _Standard text:_ Exception inventory re-confirmed / retired
 
-## 5. Lifecycle-effectiveness review (incidents that traced to SDLC gaps)
+### Rev Lifecycle Effectiveness
 
 <<MUST item:A.8.25:rev_lifecycle_effectiveness>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Lifecycle-effectiveness review (incidents that traced to SDLC gaps)
 
-## 6. Findings propagated to policy / scope
+### Rev Findings Update
 
 <<MUST item:A.8.25:rev_findings_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Findings propagated to policy / scope
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.8.25:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

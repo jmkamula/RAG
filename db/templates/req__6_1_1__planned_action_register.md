@@ -7,65 +7,87 @@ trigger_type: universal
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # ISMS Planned Action Register
 
 > The live output of the planning procedure — every action targeting a risk or opportunity with owner, due date, integration target. Distinct from the risk register (6.1.2) and the SoA (6.1.3): this tracks ISMS-level planning actions, not control implementations
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:6.1.1:planned_action_register -->
+<!-- column: item:6.1.1:reg_action_id -->
+<!-- column: item:6.1.1:reg_driver -->
+<!-- column: item:6.1.1:reg_type -->
+<!-- column: item:6.1.1:reg_owner -->
+<!-- column: item:6.1.1:reg_integration_target -->
+<!-- column: item:6.1.1:reg_status -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Unique action identifier per row
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:6.1.1:planned_action_register -->
+| Reg Action Id | Reg Driver | Reg Type | Reg Owner | Reg Integration Target | Reg Status |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:6.1.1:planned_action_register -->
+
+## Column guidance — what to fill in
+
+### Reg Action Id
 
 <<MUST item:6.1.1:reg_action_id>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Unique action identifier per row
 
-## 2. Per-row driver (4.1 issue id, 4.2 party requirement id, risk id, opportunity id)
+### Reg Driver
 
 <<MUST item:6.1.1:reg_driver>>
 _Why: Cross-clause traceability_
 
-<<TEXT>>
+> _Standard text:_ Per-row driver (4.1 issue id, 4.2 party requirement id, risk id, opportunity id)
 
-## 3. Per-row type (risk-addressing / opportunity-enhancing)
+### Reg Type
 
 <<MUST item:6.1.1:reg_type>>
 _Why: Clause 6.1.1 — risks AND opportunities_
 
-<<TEXT>>
+> _Standard text:_ Per-row type (risk-addressing / opportunity-enhancing)
 
-## 4. Owner per row
+### Reg Owner
 
 <<MUST item:6.1.1:reg_owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Owner per row
 
-## 5. Integration target per row (which ISMS process consumes this action)
+### Reg Integration Target
 
 <<MUST item:6.1.1:reg_integration_target>>
 _Why: Clause 6.1.1 — integrated into ISMS processes_
 
-<<TEXT>>
+> _Standard text:_ Integration target per row (which ISMS process consumes this action)
 
-## 6. Status per row (planned / in-progress / complete / deferred)
+### Reg Status
 
 <<MUST item:6.1.1:reg_status>>
 _Why: Tracking_
 
-<<TEXT>>
+> _Standard text:_ Status per row (planned / in-progress / complete / deferred)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row effectiveness evaluation captured on completion
+### Reg Effectiveness
 
 <<SHOULD item:6.1.1:reg_effectiveness>>
 _Why: Clause 6.1.1 — evaluate effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Per-row effectiveness evaluation captured on completion

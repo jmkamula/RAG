@@ -7,72 +7,93 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 3
+table_shape: true
 ---
 
 # Personal Data Flow Inventory
 
 > The upstream data picture that feeds RoPA accuracy. Where the register is activity-centric (one row per processing activity), the data flow inventory is data-centric — which systems hold personal data, how data moves between them, who receives it, and which transfers cross borders. EDPB guidance treats data mapping as the foundation for accurate Art.30 records
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.30:data_flow_inventory -->
+<!-- column: item:Art.30:dfi_systems -->
+<!-- column: item:Art.30:dfi_flows -->
+<!-- column: item:Art.30:dfi_recipients -->
+<!-- column: item:Art.30:dfi_transfers -->
+<!-- column: item:Art.30:dfi_retention -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Systems holding personal data enumerated (production systems, SaaS, backups, analytics, archives)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.30:data_flow_inventory -->
+| Dfi Systems | Dfi Flows | Dfi Recipients | Dfi Transfers | Dfi Retention |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.30:data_flow_inventory -->
+
+## Column guidance — what to fill in
+
+### Dfi Systems
 
 <<MUST item:Art.30:dfi_systems>>
 _Why: Art.30.1.c-d foundation_
 
-<<TEXT>>
+> _Standard text:_ Systems holding personal data enumerated (production systems, SaaS, backups, analytics, archives)
 
-## 2. Data flows between systems documented (sources, destinations, integration mechanism)
+### Dfi Flows
 
 <<MUST item:Art.30:dfi_flows>>
 _Why: Art.30.1.d foundation_
 
-<<TEXT>>
+> _Standard text:_ Data flows between systems documented (sources, destinations, integration mechanism)
 
-## 3. External recipients identified per flow (processors, joint controllers, third parties) — feeds Art.30.1.d
+### Dfi Recipients
 
 <<MUST item:Art.30:dfi_recipients>>
 _Why: Art.30.1.d_
 
-<<TEXT>>
+> _Standard text:_ External recipients identified per flow (processors, joint controllers, third parties) — feeds Art.30.1.d
 
-## 4. Third-country transfers identified per flow with safeguards (SCCs, adequacy, BCRs) — feeds Art.30.1.e
+### Dfi Transfers
 
 <<MUST item:Art.30:dfi_transfers>>
 _Why: Art.30.1.e / Chapter V_
 
-<<TEXT>>
+> _Standard text:_ Third-country transfers identified per flow with safeguards (SCCs, adequacy, BCRs) — feeds Art.30.1.e
 
-## 5. Retention period per system or per data category — feeds Art.30.1.f
+### Dfi Retention
 
 <<MUST item:Art.30:dfi_retention>>
 _Why: Art.30.1.f_
 
-<<TEXT>>
+> _Standard text:_ Retention period per system or per data category — feeds Art.30.1.f
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Cross-link to the asset/system inventory (ISO 27001 A.5.9) so the two registers stay aligned
+### Dfi Asset Link
 
 <<SHOULD item:Art.30:dfi_asset_link>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Cross-link to the asset/system inventory (ISO 27001 A.5.9) so the two registers stay aligned
 
-### 2. Notes data minimisation review touchpoints (Art.5.1.c) — flows or fields flagged for reduction
+### Dfi Minimisation
 
 <<SHOULD item:Art.30:dfi_minimisation>>
 _Why: Art.5.1.c linkage_
 
-<<TEXT>>
+> _Standard text:_ Notes data minimisation review touchpoints (Art.5.1.c) — flows or fields flagged for reduction
 
-### 3. Visual representation (data flow diagram) accompanies the tabular inventory
+### Dfi Visual
 
 <<SHOULD item:Art.30:dfi_visual>>
 _Why: Auditor/reviewer clarity_
 
-<<TEXT>>
+> _Standard text:_ Visual representation (data flow diagram) accompanies the tabular inventory

@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Restriction Register
 
 > Per-restriction record proving active restrictions are in place with documented grounds. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.18:restriction_register -->
+<!-- column: item:Art.18:reg_subject_id -->
+<!-- column: item:Art.18:reg_ground -->
+<!-- column: item:Art.18:reg_scope -->
+<!-- column: item:Art.18:reg_start_date -->
+<!-- column: item:Art.18:reg_lift_status -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Subject identifier per row
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.18:restriction_register -->
+| Reg Subject Id | Reg Ground | Reg Scope | Reg Start Date | Reg Lift Status |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.18:restriction_register -->
+
+## Column guidance — what to fill in
+
+### Reg Subject Id
 
 <<MUST item:Art.18:reg_subject_id>>
 _Why: Audit_
 
-<<TEXT>>
+> _Standard text:_ Subject identifier per row
 
-## 2. Per-row Art.18.1 ground (a-d) cited
+### Reg Ground
 
 <<MUST item:Art.18:reg_ground>>
 _Why: Art.18.1_
 
-<<TEXT>>
+> _Standard text:_ Per-row Art.18.1 ground (a-d) cited
 
-## 3. Per-row scope (which data, which systems are restricted)
+### Reg Scope
 
 <<MUST item:Art.18:reg_scope>>
 _Why: Implementation_
 
-<<TEXT>>
+> _Standard text:_ Per-row scope (which data, which systems are restricted)
 
-## 4. Per-row restriction start date
+### Reg Start Date
 
 <<MUST item:Art.18:reg_start_date>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-row restriction start date
 
-## 5. Per-row lift status (active / lifted-on-date with reason)
+### Reg Lift Status
 
 <<MUST item:Art.18:reg_lift_status>>
 _Why: Art.18.3_
 
-<<TEXT>>
+> _Standard text:_ Per-row lift status (active / lifted-on-date with reason)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row Art.19 notification reference
+### Reg Art19 Xref
 
 <<SHOULD item:Art.18:reg_art19_xref>>
 _Why: Cross-article coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-row Art.19 notification reference

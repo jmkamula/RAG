@@ -8,72 +8,94 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 2
+table_shape: true
 ---
 
 # Periodic Awareness Programme Review
 
 > Periodic verification that the curriculum still matches current policies, the completion register has no gaps, effectiveness metrics are trending right, and awareness mechanisms are being executed. Annual cadence (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.6.3:awareness_programme_review -->
+<!-- column: item:A.6.3:rev_date -->
+<!-- column: item:A.6.3:rev_reviewer -->
+<!-- column: item:A.6.3:rev_completion_rate -->
+<!-- column: item:A.6.3:rev_effectiveness -->
+<!-- column: item:A.6.3:rev_curriculum_check -->
+<!-- column: item:A.6.3:rev_register_update -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.6.3:awareness_programme_review -->
+| Rev Date | Rev Reviewer | Rev Completion Rate | Rev Effectiveness | Rev Curriculum Check | Rev Register Update |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.6.3:awareness_programme_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.6.3:rev_date>>
 _Why: 27002:6.3 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (Security Awareness Lead + InfoSec lead jointly)
+### Rev Reviewer
 
 <<MUST item:A.6.3:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (Security Awareness Lead + InfoSec lead jointly)
 
-## 3. Completion rate analysis (overall % current; per-audience-segment % current; aged-overdue list)
+### Rev Completion Rate
 
 <<MUST item:A.6.3:rev_completion_rate>>
 _Why: 27002:6.3 — completeness_
 
-<<TEXT>>
+> _Standard text:_ Completion rate analysis (overall % current; per-audience-segment % current; aged-overdue list)
 
-## 4. Effectiveness analysis (quiz pass-rate trend, phishing-simulation click-rate trend, reporting-rate trend per A.6.8)
+### Rev Effectiveness
 
 <<MUST item:A.6.3:rev_effectiveness>>
 _Why: 27002:6.3 — effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Effectiveness analysis (quiz pass-rate trend, phishing-simulation click-rate trend, reporting-rate trend per A.6.8)
 
-## 5. Curriculum currency check (referenced policies still align with the training content; new topics added per scope changes)
+### Rev Curriculum Check
 
 <<MUST item:A.6.3:rev_curriculum_check>>
 _Why: 27002:6.3 — current_
 
-<<TEXT>>
+> _Standard text:_ Curriculum currency check (referenced policies still align with the training content; new topics added per scope changes)
 
-## 6. Changes propagated to the curriculum / register / scope with reference to this review
+### Rev Register Update
 
 <<MUST item:A.6.3:rev_register_update>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Changes propagated to the curriculum / register / scope with reference to this review
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Ad-hoc review triggers (major incident exposing awareness gap, new compliance regime, major tech adoption)
+### Rev Ad Hoc Triggers
 
 <<SHOULD item:A.6.3:rev_ad_hoc_triggers>>
 _Why: Change-driven review_
 
-<<TEXT>>
+> _Standard text:_ Ad-hoc review triggers (major incident exposing awareness gap, new compliance regime, major tech adoption)
 
-### 2. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.6.3:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

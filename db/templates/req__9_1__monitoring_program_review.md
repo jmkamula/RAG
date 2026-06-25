@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Monitoring Program Review
 
 > Annual verification that measurements are flowing per the procedure, thresholds still discriminate, results actually feed 9.3 management review (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:9.1:monitoring_program_review -->
+<!-- column: item:9.1:rev_date -->
+<!-- column: item:9.1:rev_reviewer -->
+<!-- column: item:9.1:rev_flow_check -->
+<!-- column: item:9.1:rev_threshold_recalibration -->
+<!-- column: item:9.1:rev_mgmt_review_handoff -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:9.1:monitoring_program_review -->
+| Rev Date | Rev Reviewer | Rev Flow Check | Rev Threshold Recalibration | Rev Mgmt Review Handoff |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:9.1:monitoring_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:9.1:rev_date>>
 _Why: Clause 9.1 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (ISMS Manager + KPI lead)
+### Rev Reviewer
 
 <<MUST item:9.1:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (ISMS Manager + KPI lead)
 
-## 3. Flow check — every metric in the procedure's catalog has values flowing into the record
+### Rev Flow Check
 
 <<MUST item:9.1:rev_flow_check>>
 _Why: Effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Flow check — every metric in the procedure's catalog has values flowing into the record
 
-## 4. Threshold recalibration — targets reviewed for continued relevance and stretch
+### Rev Threshold Recalibration
 
 <<MUST item:9.1:rev_threshold_recalibration>>
 _Why: Validity_
 
-<<TEXT>>
+> _Standard text:_ Threshold recalibration — targets reviewed for continued relevance and stretch
 
-## 5. Management review handoff — last cycle's measurement results actually surfaced in 9.3 minutes
+### Rev Mgmt Review Handoff
 
 <<MUST item:9.1:rev_mgmt_review_handoff>>
 _Why: Clause 9.3.2c_
 
-<<TEXT>>
+> _Standard text:_ Management review handoff — last cycle's measurement results actually surfaced in 9.3 minutes
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:9.1:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

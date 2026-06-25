@@ -8,86 +8,109 @@ freshness_days: 365
 template_version: 1
 must_count: 7
 should_count: 3
+table_shape: true
 ---
 
 # Periodic DSAR Process Review
 
 > Periodic management review of DSAR handling effectiveness. Confirms the procedure produced timely, lawful responses across the year, identifies systemic defects (late responses, refusals, complaints to supervisory authority) and feeds corrective actions back into the procedure
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.15:dsar_process_review -->
+<!-- column: item:Art.15:rev_date -->
+<!-- column: item:Art.15:rev_reviewer -->
+<!-- column: item:Art.15:rev_volume -->
+<!-- column: item:Art.15:rev_timing -->
+<!-- column: item:Art.15:rev_defects -->
+<!-- column: item:Art.15:rev_corrective -->
+<!-- column: item:Art.15:rev_identity_pair_30 -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval (typically within 12 months of last review)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.15:dsar_process_review -->
+| Rev Date | Rev Reviewer | Rev Volume | Rev Timing | Rev Defects | Rev Corrective | Rev Identity Pair 30 |
+|---|---|---|---|---|---|---|
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.15:dsar_process_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.15:rev_date>>
 _Why: Periodic accuracy_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval (typically within 12 months of last review)
 
-## 2. Reviewer identity and role (DPO, privacy lead, or delegated equivalent)
+### Rev Reviewer
 
 <<MUST item:Art.15:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity and role (DPO, privacy lead, or delegated equivalent)
 
-## 3. Volume metric — number of DSARs received in the review period
+### Rev Volume
 
 <<MUST item:Art.15:rev_volume>>
 _Why: Effectiveness measurement_
 
-<<TEXT>>
+> _Standard text:_ Volume metric — number of DSARs received in the review period
 
-## 4. Timing metric — percentage within one month, count of extensions used, count of late responses
+### Rev Timing
 
 <<MUST item:Art.15:rev_timing>>
 _Why: Art.12.3 evidence_
 
-<<TEXT>>
+> _Standard text:_ Timing metric — percentage within one month, count of extensions used, count of late responses
 
-## 5. Defects identified (late responses, refusals, supervisory-authority complaints) referenced
+### Rev Defects
 
 <<MUST item:Art.15:rev_defects>>
 _Why: Defect tracking_
 
-<<TEXT>>
+> _Standard text:_ Defects identified (late responses, refusals, supervisory-authority complaints) referenced
 
-## 6. Corrective actions to the procedure with owner and target date
+### Rev Corrective
 
 <<MUST item:Art.15:rev_corrective>>
 _Why: Closes the loop_
 
-<<TEXT>>
+> _Standard text:_ Corrective actions to the procedure with owner and target date
 
-## 7. Bidirectional Art.15 ↔ Art.30 RoPA pair check — every system the review period's DSARs actually queried is captured in the data flow inventory; every system the inventory lists was reachable when DSARs landed on it (closes the silent inventory-drift gap)
+### Rev Identity Pair 30
 
 <<MUST item:Art.15:rev_identity_pair_30>>
 _Why: Art.30 cross-leaf coherence — drops rev_inventory_align SHOULD into MUST shape_
 
-<<TEXT>>
+> _Standard text:_ Bidirectional Art.15 ↔ Art.30 RoPA pair check — every system the review period's DSARs actually queried is captured in the data flow inventory; every system the inventory lists was reachable when DSARs landed on it (closes the silent inventory-drift gap)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.15:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated
 
-### 2. Training implications captured where defects trace to staff awareness
+### Rev Training Impl
 
 <<SHOULD item:Art.15:rev_training_impl>>
 _Why: EDPB 01/2022 — operational realism_
 
-<<TEXT>>
+> _Standard text:_ Training implications captured where defects trace to staff awareness
 
-### 3. Soft cross-check supplementary to rev_identity_pair_30 — narrative observations on inventory drift between formal pair checks
+### Rev Inventory Align
 
 <<SHOULD item:Art.15:rev_inventory_align>>
 _Why: Art.30 cross-leaf coherence (the rev_identity_pair_30 MUST carries the formal check)_
 
-<<TEXT>>
+> _Standard text:_ Soft cross-check supplementary to rev_identity_pair_30 — narrative observations on inventory drift between formal pair checks

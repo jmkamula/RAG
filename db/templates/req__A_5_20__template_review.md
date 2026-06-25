@@ -8,72 +8,94 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 2
+table_shape: true
 ---
 
 # Periodic Supplier Agreement Template Review
 
 > The supplier agreement template ages: regulations change, threat landscape shifts, internal control baselines evolve. The periodic review captures who reviewed it, when, what changed, and the re-papering plan for existing supplier agreements that need to catch up
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.20:template_review -->
+<!-- column: item:A.5.20:rev_date -->
+<!-- column: item:A.5.20:rev_reviewer -->
+<!-- column: item:A.5.20:rev_regulatory -->
+<!-- column: item:A.5.20:rev_threat_landscape -->
+<!-- column: item:A.5.20:rev_outcome -->
+<!-- column: item:A.5.20:rev_repapering -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.20:template_review -->
+| Rev Date | Rev Reviewer | Rev Regulatory | Rev Threat Landscape | Rev Outcome | Rev Repapering |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.20:template_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:A.5.20:rev_date>>
 _Why: 27002:5.20 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (legal + InfoSec lead jointly)
+### Rev Reviewer
 
 <<MUST item:A.5.20:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (legal + InfoSec lead jointly)
 
-## 3. Regulatory changes considered (data protection, sector-specific obligations)
+### Rev Regulatory
 
 <<MUST item:A.5.20:rev_regulatory>>
 _Why: 27002:5.20c,p_
 
-<<TEXT>>
+> _Standard text:_ Regulatory changes considered (data protection, sector-specific obligations)
 
-## 4. Threat-landscape changes considered (e.g. emergent incident-notification expectations)
+### Rev Threat Landscape
 
 <<MUST item:A.5.20:rev_threat_landscape>>
 _Why: 27002:5.20 — keep current_
 
-<<TEXT>>
+> _Standard text:_ Threat-landscape changes considered (e.g. emergent incident-notification expectations)
 
-## 5. Outcome (no change / amended; version increment if amended)
+### Rev Outcome
 
 <<MUST item:A.5.20:rev_outcome>>
 _Why: 27002:5.20_
 
-<<TEXT>>
+> _Standard text:_ Outcome (no change / amended; version increment if amended)
 
-## 6. Re-papering plan for existing supplier agreements that need to catch up to a new template version
+### Rev Repapering
 
 <<MUST item:A.5.20:rev_repapering>>
 _Why: Operational sufficiency_
 
-<<TEXT>>
+> _Standard text:_ Re-papering plan for existing supplier agreements that need to catch up to a new template version
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. External counsel or industry-benchmark input considered
+### Rev External Input
 
 <<SHOULD item:A.5.20:rev_external_input>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ External counsel or industry-benchmark input considered
 
-### 2. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:A.5.20:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

@@ -8,51 +8,71 @@ freshness_days: 365
 template_version: 1
 must_count: 4
 should_count: 1
+table_shape: true
 ---
 
 # Code Adherence Program Review
 
 > Annual verification — adherences still active, monitoring body engagements current, code-specific obligations honoured (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.40:code_program_review -->
+<!-- column: item:Art.40:rev_date -->
+<!-- column: item:Art.40:rev_reviewer -->
+<!-- column: item:Art.40:rev_adherence_currency -->
+<!-- column: item:Art.40:rev_monitoring_body_status -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.40:code_program_review -->
+| Rev Date | Rev Reviewer | Rev Adherence Currency | Rev Monitoring Body Status |
+|---|---|---|---|
+|          |          |          |          |
+|          |          |          |          |
+|          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.40:code_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.40:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + sector compliance lead)
+### Rev Reviewer
 
 <<MUST item:Art.40:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + sector compliance lead)
 
-## 3. Adherence currency — every active adherence has current monitoring body sign-off
+### Rev Adherence Currency
 
 <<MUST item:Art.40:rev_adherence_currency>>
 _Why: Art.40.4_
 
-<<TEXT>>
+> _Standard text:_ Adherence currency — every active adherence has current monitoring body sign-off
 
-## 4. Monitoring body status — body still accredited (Art.41) and engaged
+### Rev Monitoring Body Status
 
 <<MUST item:Art.40:rev_monitoring_body_status>>
 _Why: Art.41_
 
-<<TEXT>>
+> _Standard text:_ Monitoring body status — body still accredited (Art.41) and engaged
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.40:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

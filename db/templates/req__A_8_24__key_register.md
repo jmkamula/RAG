@@ -7,65 +7,87 @@ trigger_type: universal
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Cryptographic Key Register
 
 > Per-key catalogue — key id, purpose, algorithm + strength, custodian, lifecycle dates. Drives 'every active key complies with current approved-algorithms table' audit
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.8.24:key_register -->
+<!-- column: item:A.8.24:reg_key_id -->
+<!-- column: item:A.8.24:reg_purpose -->
+<!-- column: item:A.8.24:reg_algorithm -->
+<!-- column: item:A.8.24:reg_custodian -->
+<!-- column: item:A.8.24:reg_lifecycle_dates -->
+<!-- column: item:A.8.24:reg_pii_flag -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row unique key identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.8.24:key_register -->
+| Reg Key Id | Reg Purpose | Reg Algorithm | Reg Custodian | Reg Lifecycle Dates | Reg Pii Flag |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.8.24:key_register -->
+
+## Column guidance — what to fill in
+
+### Reg Key Id
 
 <<MUST item:A.8.24:reg_key_id>>
 _Why: Identification_
 
-<<TEXT>>
+> _Standard text:_ Per-row unique key identifier
 
-## 2. Per-row purpose (encryption-at-rest / TLS / signing / KEK / DEK / token-signing)
+### Reg Purpose
 
 <<MUST item:A.8.24:reg_purpose>>
 _Why: 27002:8.24 — effective use_
 
-<<TEXT>>
+> _Standard text:_ Per-row purpose (encryption-at-rest / TLS / signing / KEK / DEK / token-signing)
 
-## 3. Per-row algorithm + strength (must match policy's approved-algorithms table)
+### Reg Algorithm
 
 <<MUST item:A.8.24:reg_algorithm>>
 _Why: 27002:8.24a_
 
-<<TEXT>>
+> _Standard text:_ Per-row algorithm + strength (must match policy's approved-algorithms table)
 
-## 4. Per-row custodian (HSM / KMS / split-knowledge custodians)
+### Reg Custodian
 
 <<MUST item:A.8.24:reg_custodian>>
 _Why: 27002:8.24b_
 
-<<TEXT>>
+> _Standard text:_ Per-row custodian (HSM / KMS / split-knowledge custodians)
 
-## 5. Per-row lifecycle dates (generated / activated / next-rotation / retirement)
+### Reg Lifecycle Dates
 
 <<MUST item:A.8.24:reg_lifecycle_dates>>
 _Why: 27002:8.24b_
 
-<<TEXT>>
+> _Standard text:_ Per-row lifecycle dates (generated / activated / next-rotation / retirement)
 
-## 6. Per-row PII-key flag (drives stricter custody / GDPR Art.32 traceability)
+### Reg Pii Flag
 
 <<MUST item:A.8.24:reg_pii_flag>>
 _Why: GDPR Art.32_
 
-<<TEXT>>
+> _Standard text:_ Per-row PII-key flag (drives stricter custody / GDPR Art.32 traceability)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row rotation-status flag (overdue / within-window / not-due)
+### Reg Rotation Status
 
 <<SHOULD item:A.8.24:reg_rotation_status>>
 _Why: Drift detection_
 
-<<TEXT>>
+> _Standard text:_ Per-row rotation-status flag (overdue / within-window / not-due)

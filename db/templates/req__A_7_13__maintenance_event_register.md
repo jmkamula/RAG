@@ -7,65 +7,87 @@ trigger_type: universal
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Maintenance Event Register
 
 > The catalogue of maintenance events — equipment id, date, provider, supervision, outcome, post-verification
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.7.13:maintenance_event_register -->
+<!-- column: item:A.7.13:reg_event_id -->
+<!-- column: item:A.7.13:reg_equipment -->
+<!-- column: item:A.7.13:reg_date -->
+<!-- column: item:A.7.13:reg_provider -->
+<!-- column: item:A.7.13:reg_supervision_outcome -->
+<!-- column: item:A.7.13:reg_post_verify -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-event unique identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.7.13:maintenance_event_register -->
+| Reg Event Id | Reg Equipment | Reg Date | Reg Provider | Reg Supervision Outcome | Reg Post Verify |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.7.13:maintenance_event_register -->
+
+## Column guidance — what to fill in
+
+### Reg Event Id
 
 <<MUST item:A.7.13:reg_event_id>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-event unique identifier
 
-## 2. Per-event equipment (cross-link to A.5.9 asset register)
+### Reg Equipment
 
 <<MUST item:A.7.13:reg_equipment>>
 _Why: Cross-control coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-event equipment (cross-link to A.5.9 asset register)
 
-## 3. Per-event date
+### Reg Date
 
 <<MUST item:A.7.13:reg_date>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Per-event date
 
-## 4. Per-event provider (from authorised list)
+### Reg Provider
 
 <<MUST item:A.7.13:reg_provider>>
 _Why: 27002:7.13 — authorised_
 
-<<TEXT>>
+> _Standard text:_ Per-event provider (from authorised list)
 
-## 5. Per-event supervision outcome (in-house supervised / unsupervised-with-justification / pre-cleared provider)
+### Reg Supervision Outcome
 
 <<MUST item:A.7.13:reg_supervision_outcome>>
 _Why: 27002:7.13 — confidentiality_
 
-<<TEXT>>
+> _Standard text:_ Per-event supervision outcome (in-house supervised / unsupervised-with-justification / pre-cleared provider)
 
-## 6. Per-event post-verification result (passed / failed-with-action)
+### Reg Post Verify
 
 <<MUST item:A.7.13:reg_post_verify>>
 _Why: 27002:7.13 — integrity_
 
-<<TEXT>>
+> _Standard text:_ Per-event post-verification result (passed / failed-with-action)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-event offsite-maintenance chain-of-custody where applicable
+### Reg Offsite Chain
 
 <<SHOULD item:A.7.13:reg_offsite_chain>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-event offsite-maintenance chain-of-custody where applicable

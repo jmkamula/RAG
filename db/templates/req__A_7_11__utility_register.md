@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Per-Site Utility Register
 
 > The catalogue of critical utilities per site — feed type, redundancy in place, last test, provider, owner
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.7.11:utility_register -->
+<!-- column: item:A.7.11:reg_site_utility -->
+<!-- column: item:A.7.11:reg_redundancy_in_place -->
+<!-- column: item:A.7.11:reg_provider -->
+<!-- column: item:A.7.11:reg_last_test -->
+<!-- column: item:A.7.11:reg_next_test -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row site + utility pair
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.7.11:utility_register -->
+| Reg Site Utility | Reg Redundancy In Place | Reg Provider | Reg Last Test | Reg Next Test |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.7.11:utility_register -->
+
+## Column guidance — what to fill in
+
+### Reg Site Utility
 
 <<MUST item:A.7.11:reg_site_utility>>
 _Why: 27002:7.11 — supporting utilities_
 
-<<TEXT>>
+> _Standard text:_ Per-row site + utility pair
 
-## 2. Per-row redundancy in place (matches the policy's required redundancy)
+### Reg Redundancy In Place
 
 <<MUST item:A.7.11:reg_redundancy_in_place>>
 _Why: 27002:7.11 — protected_
 
-<<TEXT>>
+> _Standard text:_ Per-row redundancy in place (matches the policy's required redundancy)
 
-## 3. Per-row provider with SLA reference
+### Reg Provider
 
 <<MUST item:A.7.11:reg_provider>>
 _Why: 27002:7.11 — maintenance_
 
-<<TEXT>>
+> _Standard text:_ Per-row provider with SLA reference
 
-## 4. Per-row last test date and outcome
+### Reg Last Test
 
 <<MUST item:A.7.11:reg_last_test>>
 _Why: Continuity validation_
 
-<<TEXT>>
+> _Standard text:_ Per-row last test date and outcome
 
-## 5. Per-row next-test date scheduled
+### Reg Next Test
 
 <<MUST item:A.7.11:reg_next_test>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Per-row next-test date scheduled
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row autonomous-runtime stat (UPS minutes, generator fuel days)
+### Reg Runtime
 
 <<SHOULD item:A.7.11:reg_runtime>>
 _Why: Realism check_
 
-<<TEXT>>
+> _Standard text:_ Per-row autonomous-runtime stat (UPS minutes, generator fuel days)

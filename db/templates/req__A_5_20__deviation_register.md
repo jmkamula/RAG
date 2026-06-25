@@ -7,65 +7,86 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 2
+table_shape: true
 ---
 
 # Supplier Agreement Deviation Register
 
 > Where a supplier successfully negotiates softer terms than the template (or omits a clause entirely), the org needs an auditable record: which clause, which supplier, the reason, the compensating control, the approver. This is the lifecycle-end slot of operational_process applied to agreements: each deviation is the supplier 'exiting' the standard template path
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.20:deviation_register -->
+<!-- column: item:A.5.20:dev_clause -->
+<!-- column: item:A.5.20:dev_supplier -->
+<!-- column: item:A.5.20:dev_reason -->
+<!-- column: item:A.5.20:dev_compensating -->
+<!-- column: item:A.5.20:dev_approver -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Clause deviated from per row (identified by template section)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.20:deviation_register -->
+| Dev Clause | Dev Supplier | Dev Reason | Dev Compensating | Dev Approver |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.20:deviation_register -->
+
+## Column guidance — what to fill in
+
+### Dev Clause
 
 <<MUST item:A.5.20:dev_clause>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Clause deviated from per row (identified by template section)
 
-## 2. Supplier identifier per row (link to A.5.19 supplier register)
+### Dev Supplier
 
 <<MUST item:A.5.20:dev_supplier>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Supplier identifier per row (link to A.5.19 supplier register)
 
-## 3. Reason for the deviation captured (commercial necessity, market constraint, supplier capability)
+### Dev Reason
 
 <<MUST item:A.5.20:dev_reason>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Reason for the deviation captured (commercial necessity, market constraint, supplier capability)
 
-## 4. Compensating control stated (monitoring, contractual remedy, alternative requirement)
+### Dev Compensating
 
 <<MUST item:A.5.20:dev_compensating>>
 _Why: Risk-based_
 
-<<TEXT>>
+> _Standard text:_ Compensating control stated (monitoring, contractual remedy, alternative requirement)
 
-## 5. Approver of the deviation, at level proportional to residual risk
+### Dev Approver
 
 <<MUST item:A.5.20:dev_approver>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Approver of the deviation, at level proportional to residual risk
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Expiry / re-papering target date for each deviation (so deviations age out rather than persist indefinitely)
+### Dev Expiry
 
 <<SHOULD item:A.5.20:dev_expiry>>
 _Why: Drift control_
 
-<<TEXT>>
+> _Standard text:_ Expiry / re-papering target date for each deviation (so deviations age out rather than persist indefinitely)
 
-### 2. Trigger for reassessment when supplier or risk circumstances change
+### Dev Reassessment
 
 <<SHOULD item:A.5.20:dev_reassessment>>
 _Why: Change-driven_
 
-<<TEXT>>
+> _Standard text:_ Trigger for reassessment when supplier or risk circumstances change

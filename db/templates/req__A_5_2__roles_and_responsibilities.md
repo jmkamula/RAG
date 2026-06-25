@@ -7,86 +7,108 @@ trigger_type: universal
 template_version: 1
 must_count: 6
 should_count: 4
+table_shape: true
 ---
 
 # Information Security Roles and Responsibilities Matrix
 
 > A.5.2 requires information security roles and responsibilities to be defined and allocated according to organization needs. Evidence is a responsibility matrix (or equivalent section in the ISMS charter) enumerating roles, allocating them to named individuals or positions, and stating reporting lines. Approval, communication and periodic review of this allocation are sibling leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.2:roles_and_responsibilities -->
+<!-- column: item:A.5.2:roles_enumerated -->
+<!-- column: item:A.5.2:responsibilities -->
+<!-- column: item:A.5.2:allocation -->
+<!-- column: item:A.5.2:reporting_lines -->
+<!-- column: item:A.5.2:asset_owner_resp -->
+<!-- column: item:A.5.2:topic_alignment -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Information security roles enumerated (CISO, ISMS Manager, Asset Owners, Risk Owners, Incident Manager, DPO where applicable)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.2:roles_and_responsibilities -->
+| Roles Enumerated | Responsibilities | Allocation | Reporting Lines | Asset Owner Resp | Topic Alignment |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.2:roles_and_responsibilities -->
+
+## Column guidance — what to fill in
+
+### Roles Enumerated
 
 <<MUST item:A.5.2:roles_enumerated>>
 _Why: 27002:5.2a_
 
-<<TEXT>>
+> _Standard text:_ Information security roles enumerated (CISO, ISMS Manager, Asset Owners, Risk Owners, Incident Manager, DPO where applicable)
 
-## 2. Responsibilities described per role (decision rights, oversight, execution)
+### Responsibilities
 
 <<MUST item:A.5.2:responsibilities>>
 _Why: 27002:5.2b_
 
-<<TEXT>>
+> _Standard text:_ Responsibilities described per role (decision rights, oversight, execution)
 
-## 3. Allocation to named individuals or positions, not just abstract role labels
+### Allocation
 
 <<MUST item:A.5.2:allocation>>
 _Why: 27002:5.2d / Clause 5.3_
 
-<<TEXT>>
+> _Standard text:_ Allocation to named individuals or positions, not just abstract role labels
 
-## 4. Reporting and escalation lines stated (who each role reports to)
+### Reporting Lines
 
 <<MUST item:A.5.2:reporting_lines>>
 _Why: 27002:5.2f_
 
-<<TEXT>>
+> _Standard text:_ Reporting and escalation lines stated (who each role reports to)
 
-## 5. Accountability for protection and risk management of specific assets assigned
+### Asset Owner Resp
 
 <<MUST item:A.5.2:asset_owner_resp>>
 _Why: 27002:5.2g_
 
-<<TEXT>>
+> _Standard text:_ Accountability for protection and risk management of specific assets assigned
 
-## 6. Allocation covers ISMS operation, asset ownership, risk management, audits and security review topics
+### Topic Alignment
 
 <<MUST item:A.5.2:topic_alignment>>
 _Why: 27002:5.2b_
 
-<<TEXT>>
+> _Standard text:_ Allocation covers ISMS operation, asset ownership, risk management, audits and security review topics
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Links back to the Information Security Policy (A.5.1)
+### Isp Link
 
 <<SHOULD item:A.5.2:isp_link>>
 _Why: Coherence with policy framework_
 
-<<TEXT>>
+> _Standard text:_ Links back to the Information Security Policy (A.5.1)
 
-### 2. Notes conflicts to be resolved via segregation of duties (A.5.3)
+### Segregation Note
 
 <<SHOULD item:A.5.2:segregation_note>>
 _Why: 27002:5.2i / A.5.3_
 
-<<TEXT>>
+> _Standard text:_ Notes conflicts to be resolved via segregation of duties (A.5.3)
 
-### 3. For cloud and external services, responsibilities split between the organization and the provider stated
+### Cloud Responsibilities
 
 <<SHOULD item:A.5.2:cloud_responsibilities>>
 _Why: 27002:5.2k_
 
-<<TEXT>>
+> _Standard text:_ For cloud and external services, responsibilities split between the organization and the provider stated
 
-### 4. Notes competency/training requirements per role (cross-ref A.6.3)
+### Competency Link
 
 <<SHOULD item:A.5.2:competency_link>>
 _Why: 27002:5.2j / A.6.3_
 
-<<TEXT>>
+> _Standard text:_ Notes competency/training requirements per role (cross-ref A.6.3)

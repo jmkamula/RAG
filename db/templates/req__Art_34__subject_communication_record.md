@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # Subject Communication Record
 
 > Per-breach communication record — proves Art.34 communication was made (or documented exception applied). Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.34:subject_communication_record -->
+<!-- column: item:Art.34:reg_breach_id -->
+<!-- column: item:Art.34:reg_high_risk_decision -->
+<!-- column: item:Art.34:reg_exception_cited -->
+<!-- column: item:Art.34:reg_communication_method -->
+<!-- column: item:Art.34:reg_communication_date -->
+<!-- column: item:Art.34:reg_subjects_reached -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row breach id (Art.33 register cross-reference)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.34:subject_communication_record -->
+| Reg Breach Id | Reg High Risk Decision | Reg Exception Cited | Reg Communication Method | Reg Communication Date | Reg Subjects Reached |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.34:subject_communication_record -->
+
+## Column guidance — what to fill in
+
+### Reg Breach Id
 
 <<MUST item:Art.34:reg_breach_id>>
 _Why: Cross-article_
 
-<<TEXT>>
+> _Standard text:_ Per-row breach id (Art.33 register cross-reference)
 
-## 2. Per-row high-risk decision (high risk → communicate / no high risk → no communication, with rationale)
+### Reg High Risk Decision
 
 <<MUST item:Art.34:reg_high_risk_decision>>
 _Why: Art.34.1_
 
-<<TEXT>>
+> _Standard text:_ Per-row high-risk decision (high risk → communicate / no high risk → no communication, with rationale)
 
-## 3. Per-row Art.34.3 exception cited (if claimed)
+### Reg Exception Cited
 
 <<MUST item:Art.34:reg_exception_cited>>
 _Why: Art.34.3_
 
-<<TEXT>>
+> _Standard text:_ Per-row Art.34.3 exception cited (if claimed)
 
-## 4. Per-row communication method (email + in-app / public notice / mixed)
+### Reg Communication Method
 
 <<MUST item:Art.34:reg_communication_method>>
 _Why: Art.34.2_
 
-<<TEXT>>
+> _Standard text:_ Per-row communication method (email + in-app / public notice / mixed)
 
-## 5. Per-row communication date
+### Reg Communication Date
 
 <<MUST item:Art.34:reg_communication_date>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Per-row communication date
 
-## 6. Per-row subjects-reached count (or 'unable to calculate, public communication used')
+### Reg Subjects Reached
 
 <<MUST item:Art.34:reg_subjects_reached>>
 _Why: Effectiveness signal_
 
-<<TEXT>>
+> _Standard text:_ Per-row subjects-reached count (or 'unable to calculate, public communication used')
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row SA concurrence where SA consulted (Art.34.4)
+### Reg Sa Concurrence
 
 <<SHOULD item:Art.34:reg_sa_concurrence>>
 _Why: Art.34.4_
 
-<<TEXT>>
+> _Standard text:_ Per-row SA concurrence where SA consulted (Art.34.4)

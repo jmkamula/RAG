@@ -8,65 +8,86 @@ freshness_days: 90
 template_version: 1
 must_count: 5
 should_count: 2
+table_shape: true
 ---
 
 # Information Security Incident Register
 
 > A.5.26 expects incidents to be tracked from detection through closure, with the trail of actions preserved. The incident register is the live master record — every incident, its severity, status, owner, and the key lifecycle dates (detection, containment, eradication, recovery, closure) — feeding the periodic IR-program review and the per-incident closure records. Fast-data freshness (90d) per Style v2 — an incident register that's a year stale is not a register
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.26:incident_register -->
+<!-- column: item:A.5.26:reg_incident_id -->
+<!-- column: item:A.5.26:reg_severity -->
+<!-- column: item:A.5.26:reg_status -->
+<!-- column: item:A.5.26:reg_owner -->
+<!-- column: item:A.5.26:reg_lifecycle_dates -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Each incident captured with a unique identifier (links to A.5.25 triage decision)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.26:incident_register -->
+| Reg Incident Id | Reg Severity | Reg Status | Reg Owner | Reg Lifecycle Dates |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.26:incident_register -->
+
+## Column guidance — what to fill in
+
+### Reg Incident Id
 
 <<MUST item:A.5.26:reg_incident_id>>
 _Why: 27002:5.26 — recording_
 
-<<TEXT>>
+> _Standard text:_ Each incident captured with a unique identifier (links to A.5.25 triage decision)
 
-## 2. Severity per row (per the classification scale used at triage)
+### Reg Severity
 
 <<MUST item:A.5.26:reg_severity>>
 _Why: 27002:5.26 — coordination by severity_
 
-<<TEXT>>
+> _Standard text:_ Severity per row (per the classification scale used at triage)
 
-## 3. Status per row (open / contained / eradicated / recovered / closed)
+### Reg Status
 
 <<MUST item:A.5.26:reg_status>>
 _Why: 27002:5.26e_
 
-<<TEXT>>
+> _Standard text:_ Status per row (open / contained / eradicated / recovered / closed)
 
-## 4. Named Incident Manager / owner per row
+### Reg Owner
 
 <<MUST item:A.5.26:reg_owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Named Incident Manager / owner per row
 
-## 5. Lifecycle dates per row: detected / contained / eradicated / recovered / closed
+### Reg Lifecycle Dates
 
 <<MUST item:A.5.26:reg_lifecycle_dates>>
 _Why: 27002:5.26 — log of decisions_
 
-<<TEXT>>
+> _Standard text:_ Lifecycle dates per row: detected / contained / eradicated / recovered / closed
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Public-facing or regulator-relevant impact flag per row (drives notification path)
+### Reg Impact Flag
 
 <<SHOULD item:A.5.26:reg_impact_flag>>
 _Why: External notification triggers_
 
-<<TEXT>>
+> _Standard text:_ Public-facing or regulator-relevant impact flag per row (drives notification path)
 
-### 2. Reference to evidence package per row (link to A.5.28 evidence store)
+### Reg Evidence Link
 
 <<SHOULD item:A.5.26:reg_evidence_link>>
 _Why: Forensic preservation_
 
-<<TEXT>>
+> _Standard text:_ Reference to evidence package per row (link to A.5.28 evidence store)

@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Art.17 Erasure Program Review
 
 > Annual verification — SLAs met, backup erasure handled, Art.17.3 exception claims defensible, Art.17.2 public-disclosure actions taken where applicable (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.17:program_review -->
+<!-- column: item:Art.17:rev_date -->
+<!-- column: item:Art.17:rev_reviewer -->
+<!-- column: item:Art.17:rev_sla_compliance -->
+<!-- column: item:Art.17:rev_backup_handling -->
+<!-- column: item:Art.17:rev_exception_defensibility -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.17:program_review -->
+| Rev Date | Rev Reviewer | Rev Sla Compliance | Rev Backup Handling | Rev Exception Defensibility |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.17:program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.17:rev_date>>
 _Why: Periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + ops lead)
+### Rev Reviewer
 
 <<MUST item:Art.17:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + ops lead)
 
-## 3. SLA compliance (Art.12.3 one-month)
+### Rev Sla Compliance
 
 <<MUST item:Art.17:rev_sla_compliance>>
 _Why: Art.12.3_
 
-<<TEXT>>
+> _Standard text:_ SLA compliance (Art.12.3 one-month)
 
-## 4. Backup-handling sample — backups actually purged on cycle, immutable records correctly flagged-not-erased
+### Rev Backup Handling
 
 <<MUST item:Art.17:rev_backup_handling>>
 _Why: Art.17.1_
 
-<<TEXT>>
+> _Standard text:_ Backup-handling sample — backups actually purged on cycle, immutable records correctly flagged-not-erased
 
-## 5. Art.17.3 exception sample — refused requests have defensible exception grounds
+### Rev Exception Defensibility
 
 <<MUST item:Art.17:rev_exception_defensibility>>
 _Why: Art.17.3_
 
-<<TEXT>>
+> _Standard text:_ Art.17.3 exception sample — refused requests have defensible exception grounds
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.17:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

@@ -8,44 +8,63 @@ freshness_days: 365
 template_version: 1
 must_count: 3
 should_count: 1
+table_shape: true
 ---
 
 # Periodic resilience and restoration test record
 
 > Art.32.1.d requires a process for regularly testing, assessing and evaluating the effectiveness of technical and organisational measures for ensuring the security of processing.
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.32:resilience_test -->
+<!-- column: item:Art.32:resilience_test_scope -->
+<!-- column: item:Art.32:resilience_test_recent -->
+<!-- column: item:Art.32:resilience_test_findings -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Test scope covers confidentiality, integrity, availability and resilience
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.32:resilience_test -->
+| Resilience Test Scope | Resilience Test Recent | Resilience Test Findings |
+|---|---|---|
+|          |          |          |
+|          |          |          |
+|          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.32:resilience_test -->
+
+## Column guidance — what to fill in
+
+### Resilience Test Scope
 
 <<MUST item:Art.32:resilience_test_scope>>
 _Why: Art.32.1.d_
 
-<<TEXT>>
+> _Standard text:_ Test scope covers confidentiality, integrity, availability and resilience
 
-## 2. Test executed within the freshness window (last 12 months)
+### Resilience Test Recent
 
 <<MUST item:Art.32:resilience_test_recent>>
 _Why: Art.32.1.d — 'regularly'_
 
-<<TEXT>>
+> _Standard text:_ Test executed within the freshness window (last 12 months)
 
-## 3. Findings recorded and remediated or accepted
+### Resilience Test Findings
 
 <<MUST item:Art.32:resilience_test_findings>>
 _Why: Art.32.1.d evaluation requirement_
 
-<<TEXT>>
+> _Standard text:_ Findings recorded and remediated or accepted
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Test conducted or reviewed by an independent party
+### Resilience Test Independent
 
 <<SHOULD item:Art.32:resilience_test_independent>>
 _Why: Best practice for credibility_
 
-<<TEXT>>
+> _Standard text:_ Test conducted or reviewed by an independent party

@@ -8,65 +8,87 @@ freshness_days: 365
 template_version: 1
 must_count: 6
 should_count: 1
+table_shape: true
 ---
 
 # ISMS Resource Allocation Record
 
 > Clause 7.1 requires the organisation to determine and provide resources needed for ISMS establishment, implementation, maintenance, and improvement. The record is the canonical artefact — financial, human, infrastructure, technology resources committed. Sibling leaves: determination procedure, applicable resource categories scope, program review. Annual refresh (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:7.1:isms_resources_record -->
+<!-- column: item:7.1:financial -->
+<!-- column: item:7.1:human -->
+<!-- column: item:7.1:infrastructure -->
+<!-- column: item:7.1:technology -->
+<!-- column: item:7.1:owner -->
+<!-- column: item:7.1:approved_by -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Financial resources allocated (budget for ISMS activities)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:7.1:isms_resources_record -->
+| Financial | Human | Infrastructure | Technology | Owner | Approved By |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:7.1:isms_resources_record -->
+
+## Column guidance — what to fill in
+
+### Financial
 
 <<MUST item:7.1:financial>>
 _Why: Clause 7.1 — resources needed_
 
-<<TEXT>>
+> _Standard text:_ Financial resources allocated (budget for ISMS activities)
 
-## 2. Human resources assigned (headcount, roles, time allocation)
+### Human
 
 <<MUST item:7.1:human>>
 _Why: Clause 7.1 — resources_
 
-<<TEXT>>
+> _Standard text:_ Human resources assigned (headcount, roles, time allocation)
 
-## 3. Infrastructure provided (premises, equipment, transport)
+### Infrastructure
 
 <<MUST item:7.1:infrastructure>>
 _Why: Clause 7.1 — resources_
 
-<<TEXT>>
+> _Standard text:_ Infrastructure provided (premises, equipment, transport)
 
-## 4. Technology platforms supporting the ISMS (GRC tool, document repo, training platform)
+### Technology
 
 <<MUST item:7.1:technology>>
 _Why: Clause 7.1 — resources_
 
-<<TEXT>>
+> _Standard text:_ Technology platforms supporting the ISMS (GRC tool, document repo, training platform)
 
-## 5. Named owner of the resources record (typically ISMS Manager with finance partner)
+### Owner
 
 <<MUST item:7.1:owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Named owner of the resources record (typically ISMS Manager with finance partner)
 
-## 6. Approving authority recorded (top management for budget allocations)
+### Approved By
 
 <<MUST item:7.1:approved_by>>
 _Why: Clause 7.1 — provide_
 
-<<TEXT>>
+> _Standard text:_ Approving authority recorded (top management for budget allocations)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Reference to organisation budget where ISMS spend appears
+### Budget Link
 
 <<SHOULD item:7.1:budget_link>>
 _Why: Visibility_
 
-<<TEXT>>
+> _Standard text:_ Reference to organisation budget where ISMS spend appears

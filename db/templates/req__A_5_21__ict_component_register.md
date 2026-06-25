@@ -7,65 +7,86 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 2
+table_shape: true
 ---
 
 # ICT Component / Vendor Register
 
 > A.5.21 requires the org to know which ICT components are in use, who supplies them, which are critical, when they reach end-of-life, and what sub-suppliers stand behind them. The register is the live source of truth — feeding the periodic review and EOL-replacement leaves
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.21:ict_component_register -->
+<!-- column: item:A.5.21:reg_component -->
+<!-- column: item:A.5.21:reg_critical_flag -->
+<!-- column: item:A.5.21:reg_eol_date -->
+<!-- column: item:A.5.21:reg_subsupplier -->
+<!-- column: item:A.5.21:reg_owner -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Component / service identified per row (vendor, product, version)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.21:ict_component_register -->
+| Reg Component | Reg Critical Flag | Reg Eol Date | Reg Subsupplier | Reg Owner |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.21:ict_component_register -->
+
+## Column guidance — what to fill in
+
+### Reg Component
 
 <<MUST item:A.5.21:reg_component>>
 _Why: 27002:5.21e — track_
 
-<<TEXT>>
+> _Standard text:_ Component / service identified per row (vendor, product, version)
 
-## 2. Critical-component flag per row (drives 27002:5.21e scrutiny)
+### Reg Critical Flag
 
 <<MUST item:A.5.21:reg_critical_flag>>
 _Why: 27002:5.21e_
 
-<<TEXT>>
+> _Standard text:_ Critical-component flag per row (drives 27002:5.21e scrutiny)
 
-## 3. End-of-support / end-of-life date per row
+### Reg Eol Date
 
 <<MUST item:A.5.21:reg_eol_date>>
 _Why: 27002:5.21i_
 
-<<TEXT>>
+> _Standard text:_ End-of-support / end-of-life date per row
 
-## 4. Disclosed sub-suppliers / fourth parties per row
+### Reg Subsupplier
 
 <<MUST item:A.5.21:reg_subsupplier>>
 _Why: 27002:5.21b,c_
 
-<<TEXT>>
+> _Standard text:_ Disclosed sub-suppliers / fourth parties per row
 
-## 5. Named internal owner per component (typically architecture or platform team)
+### Reg Owner
 
 <<MUST item:A.5.21:reg_owner>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Named internal owner per component (typically architecture or platform team)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. SBOM hash / version reference per software component
+### Reg Sbom Ref
 
 <<SHOULD item:A.5.21:reg_sbom_ref>>
 _Why: Modern supply-chain hygiene_
 
-<<TEXT>>
+> _Standard text:_ SBOM hash / version reference per software component
 
-### 2. Approved-vendor / banned-vendor list check stamp per row
+### Reg Vendor Check
 
 <<SHOULD item:A.5.21:reg_vendor_check>>
 _Why: 27002:5.21a_
 
-<<TEXT>>
+> _Standard text:_ Approved-vendor / banned-vendor list check stamp per row

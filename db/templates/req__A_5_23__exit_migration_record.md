@@ -7,65 +7,86 @@ trigger_type: profile_fact
 template_version: 1
 must_count: 5
 should_count: 2
+table_shape: true
 ---
 
 # Cloud Service Exit / Migration Records
 
 > A.5.23 requires exit strategies for cloud services and the CSP must support transition + data handover on termination. The exit-migration record evidences the actual execution: trigger captured, migration plan executed, data export and deletion confirmed, transition completed, with authoriser
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.5.23:exit_migration_record -->
+<!-- column: item:A.5.23:exit_trigger -->
+<!-- column: item:A.5.23:exit_migration_plan -->
+<!-- column: item:A.5.23:exit_data_deletion -->
+<!-- column: item:A.5.23:exit_handover -->
+<!-- column: item:A.5.23:exit_authoriser -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Exit trigger captured (termination / replacement / CSP failure / business change)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.5.23:exit_migration_record -->
+| Exit Trigger | Exit Migration Plan | Exit Data Deletion | Exit Handover | Exit Authoriser |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.5.23:exit_migration_record -->
+
+## Column guidance — what to fill in
+
+### Exit Trigger
 
 <<MUST item:A.5.23:exit_trigger>>
 _Why: 27002:5.23h_
 
-<<TEXT>>
+> _Standard text:_ Exit trigger captured (termination / replacement / CSP failure / business change)
 
-## 2. Migration plan executed (data export, dependency-rewiring, replacement service stood up)
+### Exit Migration Plan
 
 <<MUST item:A.5.23:exit_migration_plan>>
 _Why: 27002:5.23h — transition_
 
-<<TEXT>>
+> _Standard text:_ Migration plan executed (data export, dependency-rewiring, replacement service stood up)
 
-## 3. Data deletion confirmation from the CSP (attestation, log, or audit-trail evidence)
+### Exit Data Deletion
 
 <<MUST item:A.5.23:exit_data_deletion>>
 _Why: 27002:5.23 — handover_
 
-<<TEXT>>
+> _Standard text:_ Data deletion confirmation from the CSP (attestation, log, or audit-trail evidence)
 
-## 4. Handover of configuration + data evidence (backup downloaded, config preserved)
+### Exit Handover
 
 <<MUST item:A.5.23:exit_handover>>
 _Why: 27002:5.23 — backup/handover_
 
-<<TEXT>>
+> _Standard text:_ Handover of configuration + data evidence (backup downloaded, config preserved)
 
-## 5. Authoriser of the exit (or of the delay + risk acceptance)
+### Exit Authoriser
 
 <<MUST item:A.5.23:exit_authoriser>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Authoriser of the exit (or of the delay + risk acceptance)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Rolling exit-readiness drill (test exits without actually exiting, for critical services)
+### Exit Drill
 
 <<SHOULD item:A.5.23:exit_drill>>
 _Why: Continuity preparedness_
 
-<<TEXT>>
+> _Standard text:_ Rolling exit-readiness drill (test exits without actually exiting, for critical services)
 
-### 2. Per-service exit plan freshness target (re-test on agreement renewal or major service change)
+### Exit Plan Freshness
 
 <<SHOULD item:A.5.23:exit_plan_freshness>>
 _Why: Drift control_
 
-<<TEXT>>
+> _Standard text:_ Per-service exit plan freshness target (re-test on agreement renewal or major service change)

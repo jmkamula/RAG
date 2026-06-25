@@ -7,58 +7,79 @@ trigger_type: universal
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Cabling Run Register
 
 > The catalogue of cabling runs (or aggregations) — site, run id, carried traffic class, routing class, last inspection
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.7.12:cabling_register -->
+<!-- column: item:A.7.12:reg_run_id -->
+<!-- column: item:A.7.12:reg_site -->
+<!-- column: item:A.7.12:reg_traffic_class -->
+<!-- column: item:A.7.12:reg_routing -->
+<!-- column: item:A.7.12:reg_last_inspected -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row run identifier
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.7.12:cabling_register -->
+| Reg Run Id | Reg Site | Reg Traffic Class | Reg Routing | Reg Last Inspected |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.7.12:cabling_register -->
+
+## Column guidance — what to fill in
+
+### Reg Run Id
 
 <<MUST item:A.7.12:reg_run_id>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row run identifier
 
-## 2. Per-row site
+### Reg Site
 
 <<MUST item:A.7.12:reg_site>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Per-row site
 
-## 3. Per-row carried traffic class (drives encryption + tamper-evidence requirements)
+### Reg Traffic Class
 
 <<MUST item:A.7.12:reg_traffic_class>>
 _Why: 27002:7.12 — proportional_
 
-<<TEXT>>
+> _Standard text:_ Per-row carried traffic class (drives encryption + tamper-evidence requirements)
 
-## 4. Per-row routing description (conduit / overhead-tray / under-floor / via-shared-corridor)
+### Reg Routing
 
 <<MUST item:A.7.12:reg_routing>>
 _Why: 27002:7.12 — protected_
 
-<<TEXT>>
+> _Standard text:_ Per-row routing description (conduit / overhead-tray / under-floor / via-shared-corridor)
 
-## 5. Per-row last-inspected date
+### Reg Last Inspected
 
 <<MUST item:A.7.12:reg_last_inspected>>
 _Why: Drift prevention_
 
-<<TEXT>>
+> _Standard text:_ Per-row last-inspected date
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row remediation log where protection falls short
+### Reg Remediation
 
 <<SHOULD item:A.7.12:reg_remediation>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Per-row remediation log where protection falls short

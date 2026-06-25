@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Awareness Program Review
 
 > Annual verification that the programme content reflects current policy, the audience is fully covered, completion rates are healthy, refresher cadence is being met (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:7.3:awareness_program_review -->
+<!-- column: item:7.3:rev_date -->
+<!-- column: item:7.3:rev_reviewer -->
+<!-- column: item:7.3:rev_content_currency -->
+<!-- column: item:7.3:rev_coverage -->
+<!-- column: item:7.3:rev_refresher -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:7.3:awareness_program_review -->
+| Rev Date | Rev Reviewer | Rev Content Currency | Rev Coverage | Rev Refresher |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:7.3:awareness_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:7.3:rev_date>>
 _Why: Clause 7.3 — periodic_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (HR partner + ISMS Manager)
+### Rev Reviewer
 
 <<MUST item:7.3:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (HR partner + ISMS Manager)
 
-## 3. Content currency check — material still reflects current 5.2 policy
+### Rev Content Currency
 
 <<MUST item:7.3:rev_content_currency>>
 _Why: Cross-clause coherence_
 
-<<TEXT>>
+> _Standard text:_ Content currency check — material still reflects current 5.2 policy
 
-## 4. Coverage check — register completion rate against the in-scope audience
+### Rev Coverage
 
 <<MUST item:7.3:rev_coverage>>
 _Why: Effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Coverage check — register completion rate against the in-scope audience
 
-## 5. Refresher cadence check — annual refreshers actually delivered
+### Rev Refresher
 
 <<MUST item:7.3:rev_refresher>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Refresher cadence check — annual refreshers actually delivered
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:7.3:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

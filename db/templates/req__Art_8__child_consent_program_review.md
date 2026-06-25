@@ -8,58 +8,79 @@ freshness_days: 365
 template_version: 1
 must_count: 5
 should_count: 1
+table_shape: true
 ---
 
 # Child Consent Program Review
 
 > Annual verification that age-verification and parental-consent flows are functioning, the register is current, no in-scope service is operating without the procedure (freshness=365)
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:Art.8:child_consent_program_review -->
+<!-- column: item:Art.8:rev_date -->
+<!-- column: item:Art.8:rev_reviewer -->
+<!-- column: item:Art.8:rev_verification_quality -->
+<!-- column: item:Art.8:rev_register_coverage -->
+<!-- column: item:Art.8:rev_threshold_currency -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Review date within the planned interval
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:Art.8:child_consent_program_review -->
+| Rev Date | Rev Reviewer | Rev Verification Quality | Rev Register Coverage | Rev Threshold Currency |
+|---|---|---|---|---|
+|          |          |          |          |          |
+|          |          |          |          |          |
+|          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:Art.8:child_consent_program_review -->
+
+## Column guidance — what to fill in
+
+### Rev Date
 
 <<MUST item:Art.8:rev_date>>
 _Why: Periodic accountability_
 
-<<TEXT>>
+> _Standard text:_ Review date within the planned interval
 
-## 2. Reviewer identity (DPO + product lead)
+### Rev Reviewer
 
 <<MUST item:Art.8:rev_reviewer>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Reviewer identity (DPO + product lead)
 
-## 3. Age-verification sample audit — claimed-age values look plausible vs other signals
+### Rev Verification Quality
 
 <<MUST item:Art.8:rev_verification_quality>>
 _Why: Art.8.2 — reasonable efforts_
 
-<<TEXT>>
+> _Standard text:_ Age-verification sample audit — claimed-age values look plausible vs other signals
 
-## 4. Register coverage — every in-scope service has consent rows flowing in
+### Rev Register Coverage
 
 <<MUST item:Art.8:rev_register_coverage>>
 _Why: Cross-leaf coherence_
 
-<<TEXT>>
+> _Standard text:_ Register coverage — every in-scope service has consent rows flowing in
 
-## 5. Member State threshold currency — any MS that has changed its age threshold reflected
+### Rev Threshold Currency
 
 <<MUST item:Art.8:rev_threshold_currency>>
 _Why: Currency_
 
-<<TEXT>>
+> _Standard text:_ Member State threshold currency — any MS that has changed its age threshold reflected
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Next planned review date stated
+### Rev Next Date
 
 <<SHOULD item:Art.8:rev_next_date>>
 _Why: Planning_
 
-<<TEXT>>
+> _Standard text:_ Next planned review date stated

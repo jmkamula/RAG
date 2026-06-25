@@ -7,72 +7,94 @@ trigger_type: universal
 template_version: 1
 must_count: 6
 should_count: 2
+table_shape: true
 ---
 
 # Training Completion Register
 
 > The operational catalogue of who has completed which training, when. Each row: personnel identifier, training module, completion date, quiz score (where applicable), next-due date. Drives the audit-defensibility 'show me every active employee completed mandatory training this year' query
 
-> **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
+<!-- TABLE-COLUMNS leaf:req:A.6.3:training_completion_register -->
+<!-- column: item:A.6.3:reg_personnel_id -->
+<!-- column: item:A.6.3:reg_module_id -->
+<!-- column: item:A.6.3:reg_completion_date -->
+<!-- column: item:A.6.3:reg_next_due -->
+<!-- column: item:A.6.3:reg_status -->
+<!-- column: item:A.6.3:reg_score -->
+<!-- /TABLE-COLUMNS -->
 
-## 1. Per-row personnel identifier (links to identity register A.5.16)
+## Register
+
+Fill one row per record. Each column maps to a MUST item the auditor will check — empty columns count as unsatisfied. Add as many rows as you need.
+
+<!-- EDIT-ZONE-START leaf:req:A.6.3:training_completion_register -->
+| Reg Personnel Id | Reg Module Id | Reg Completion Date | Reg Next Due | Reg Status | Reg Score |
+|---|---|---|---|---|---|
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+|          |          |          |          |          |          |
+<!-- EDIT-ZONE-END leaf:req:A.6.3:training_completion_register -->
+
+## Column guidance — what to fill in
+
+### Reg Personnel Id
 
 <<MUST item:A.6.3:reg_personnel_id>>
 _Why: Accountability_
 
-<<TEXT>>
+> _Standard text:_ Per-row personnel identifier (links to identity register A.5.16)
 
-## 2. Per-row training module identifier (links to the curriculum catalogue)
+### Reg Module Id
 
 <<MUST item:A.6.3:reg_module_id>>
 _Why: 27002:6.3 — curriculum_
 
-<<TEXT>>
+> _Standard text:_ Per-row training module identifier (links to the curriculum catalogue)
 
-## 3. Per-row completion date
+### Reg Completion Date
 
 <<MUST item:A.6.3:reg_completion_date>>
 _Why: Audit defensibility_
 
-<<TEXT>>
+> _Standard text:_ Per-row completion date
 
-## 4. Per-row next-due date (drives reminder/escalation workflow)
+### Reg Next Due
 
 <<MUST item:A.6.3:reg_next_due>>
 _Why: 27002:6.3 — regular updates_
 
-<<TEXT>>
+> _Standard text:_ Per-row next-due date (drives reminder/escalation workflow)
 
-## 5. Per-row status (current / overdue / waived-with-reason / N/A — for role change exemptions)
+### Reg Status
 
 <<MUST item:A.6.3:reg_status>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Per-row status (current / overdue / waived-with-reason / N/A — for role change exemptions)
 
-## 6. Per-row score where the module includes assessment (drives effectiveness metrics)
+### Reg Score
 
 <<MUST item:A.6.3:reg_score>>
 _Why: 27002:6.3 — effectiveness_
 
-<<TEXT>>
+> _Standard text:_ Per-row score where the module includes assessment (drives effectiveness metrics)
 
 ---
 
-## Recommended additions
+## Recommended additional columns
 
-_The items below strengthen the artefact but are not strictly required for the MUST checks. Fill in any that apply to your environment._
+_These columns strengthen the register but are not strictly required for the MUST checks. Add them to the table if they apply to your environment._
 
-### 1. Per-row phishing simulation participation log (separate from formal training — drives awareness metrics)
+### Reg Phishing Sim Log
 
 <<SHOULD item:A.6.3:reg_phishing_sim_log>>
 _Why: Continuous improvement_
 
-<<TEXT>>
+> _Standard text:_ Per-row phishing simulation participation log (separate from formal training — drives awareness metrics)
 
-### 2. Overdue-status alerting (notification to line manager when training crosses next-due date)
+### Reg Overdue Alerts
 
 <<SHOULD item:A.6.3:reg_overdue_alerts>>
 _Why: Operational discipline_
 
-<<TEXT>>
+> _Standard text:_ Overdue-status alerting (notification to line manager when training crosses next-due date)
