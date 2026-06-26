@@ -2713,6 +2713,11 @@ async def dashboard_control_template_save(
                 existing = cur.fetchone()
 
                 if text:
+                    # Auto-approve + audit attribution mirrors the templated
+                    # lane (posture_writer:370 — tenant authored, no inference
+                    # uncertainty). confirmed_by = the saver's user uuid +
+                    # confirmed_at = NOW() so the row surfaces in the
+                    # /api/v1/stage1/auto-approved visibility panel.
                     if existing:
                         cur.execute("""
                             UPDATE document_findings
@@ -2721,21 +2726,25 @@ async def dashboard_control_template_save(
                                    status        = 'present',
                                    confidence    = 'high',
                                    review_status = 'approved',
-                                   reviewed_at   = NOW()
+                                   reviewed_at   = NOW(),
+                                   confirmed_by  = %s::uuid,
+                                   confirmed_at  = NOW()
                              WHERE id = %s
-                        """, [text[:2000], doc_id, existing[0]])
+                        """, [text[:2000], doc_id, key_info.user_id, existing[0]])
                     else:
                         cur.execute("""
                             INSERT INTO document_findings
                                 (tenant_id, document_id, control_ref, standard_id,
                                  checklist_item_id, status, confidence, excerpt,
                                  inference_source, review_status, reviewed_at,
+                                 confirmed_by, confirmed_at,
                                  is_active, retention_class)
                             VALUES (%s::uuid, %s::uuid, %s, %s, %s, 'present',
                                     'high', %s, 'form', 'approved', NOW(),
+                                    %s::uuid, NOW(),
                                     TRUE, 'compliance')
                         """, [key_info.tenant_id, doc_id, control_ref, standard_id,
-                              ck, text[:2000]])
+                              ck, text[:2000], key_info.user_id])
                     n_saved += 1
                 elif existing:
                     # Empty text + existing row → soft-delete (tenant cleared the field)
@@ -3290,16 +3299,22 @@ async def stage1_auto_approved(
     days:     int = 30,
     limit:    int = 200,
 ):
-    """List recently auto-approved templated findings.
+    """List recently auto-approved tenant-authored findings.
 
-    Templated uploads land with review_status='approved' at write time
-    (the tenant authored the marker-bearing document; HITL Stage-1
-    review is redundant). This endpoint exposes them for visibility +
-    audit: the tenant can review what was auto-bound and revert any
-    row that was unintentional.
+    Two intake lanes write auto-approved rows because the content is
+    typed/edited by the tenant themselves (no inference uncertainty):
+
+      - `templated` — markdown upload through the marker-bearing
+        template (posture_writer:370)
+      - `form`      — per-MUST web form
+        (dashboard_control_template_save)
+
+    This endpoint exposes both for visibility + audit: the tenant can
+    review what was auto-bound and revert any row that was
+    unintentional.
 
     Filters:
-      - inference_source = 'templated'
+      - inference_source IN ('templated', 'form')
       - review_status    = 'approved'
       - confirmed_at     within last `days` days (default 30)
 
@@ -3321,7 +3336,7 @@ async def stage1_auto_approved(
                   JOIN client_documents cd ON cd.id = df.document_id
                  WHERE df.tenant_id        = %s::uuid
                    AND df.is_active        = TRUE
-                   AND df.inference_source = 'templated'
+                   AND df.inference_source IN ('templated', 'form')
                    AND df.review_status    = 'approved'
                    AND df.confirmed_at     > now() - (%s * interval '1 day')
                  ORDER BY df.confirmed_at DESC
