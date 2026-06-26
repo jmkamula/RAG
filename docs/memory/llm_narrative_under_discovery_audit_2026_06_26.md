@@ -1,122 +1,101 @@
 ---
 name: llm-narrative-under-discovery-audit-2026-06-26
-description: "AUDIT 2026-06-26: median yield = 17% on Arion's 80 (doc, control) extracted-source pairs (66% under 25%, 96% under 50%). Real, large, observable. SHIPPED schema_v48 + extractor finalizer + pipeline whitelist to surface pass-2 + per-doc yield ratio per intake — closes the silent-loss gap on the recall pass. 4 more gaps (G3-G6) catalogued for follow-ups."
+description: "AUDIT 2026-06-26, CORRECTED: original 17% median was wrong (bad denominator — counted catalog MUSTs across ALL leaves of a control, but most docs only address one or two). Real per-leaf median = 57%. Oracle ground-truth on low-yield docs: 94-100% of unfilled MUSTs are NOT IN THE DOC (wrong evidence type), only 0-6% are real extraction failures. Semantic-search arc closed — solving a problem ~5% of what I'd claimed. schema_v48 telemetry + MUST embedding index retained as foundation; G3-G6 gap catalog superseded."
 metadata:
   node_type: memory
   type: project
   originSessionId: 5808ba74-b22a-4a68-b4f1-19f18ce079cd
 ---
 
-## Headline numbers (Arion, 2026-06-26)
+## ⚠ CORRECTION — original audit was wrong
 
-80 (document, control) pairs from `document_findings` with
-`inference_source='extracted'`, joined to the catalog's
-`must_contain` totals per control:
+The initial audit reported **median 17% yield** as evidence of widespread
+LLM under-discovery. That number was real-as-measured but
+wrong-as-interpreted:
 
-- Median yield = **17%** (1 in 6 MUSTs captured) where catalog ≥ 6 MUSTs
-- **66% of pairs under 25% yield**
-- **96% of pairs under 50% yield**
+- **Denominator bug**: I summed MUSTs across ALL leaves of a control,
+  but most docs only address one or two leaves of a multi-leaf
+  control. E.g. A.5.18 has 31 MUSTs across 4 leaves; HR Security
+  Policy addresses only the **procedure** leaf (8 MUSTs). One
+  finding → audit reported 1/31 = 3%. Real per-leaf yield: 1/8 = 12%.
+- **Re-computed with per-leaf denominator**: median yield is **57%**,
+  mean is **57%**. 26% of (doc, leaf) pairs are above 75% yield.
+  Only 16% are below 25%.
+- **Oracle ground-truth on 2 low-yield docs**:
+  - HR Security Policy (3460 chars): 39 unfilled MUSTs, **0** evidenced
+    in the doc on full-doc-context check
+  - Access Management Process (7249 chars): 34 unfilled MUSTs, **2**
+    evidenced (6%) — both small misses ("Shared accounts are prohibited")
 
-All extracts were post-Phase B (2026-06-24+) — NOT a stale-catalog
-effect. Worst cases (e.g. HR Security Policy at 1/31 A.5.18 MUSTs =
-3%, Access Management Process at 1/30 A.5.17 = 3%) are docs that
-clearly evidence most of those MUSTs. The LLM is missing them.
+**The current single-shot LLM extractor is finding 94-100% of what's
+actually in the docs.** The "missing" MUSTs aren't extraction failures —
+they're **wrong evidence type for the doc that was uploaded** (the
+tenant uploaded a policy; the missing MUSTs need procedure / register /
+review-record evidence in different docs).
 
-## The key insight
+## What the data definitively says
 
-**Under-discovery is invisible by construction.** Today's drop
-counters (`dropped_short_quote`, `dropped_hallucinated`,
-`dropped_low_conf`, `dropped_unknown_ref`, `dropped_questionnaire`)
-all track MIS-BINDING — the LLM said something the validator
-rejected. None of them track what the LLM never saw in the first
-place. Under-discovery leaves no trace by definition; you have to
-go looking for it.
+| Question | Answer |
+|---|---|
+| Is the extractor missing evidence that's in the docs? | Mostly no (0-6% miss rate on the worst-yielding docs) |
+| Are the docs missing the necessary evidence? | Yes — the gap is overwhelmingly "wrong doc type for the missing MUSTs" |
+| Did the semantic-search prototype find anything? | Zero grounded findings on 2 docs, 132 verify calls |
+| Was the original audit signal real? | The 17% was real; the *interpretation* (= extraction problem) was wrong. Real signal: tenants need to upload more doc types per control. |
 
-The proxy signal is **yield ratio**: distinct MUSTs bound / catalog
-MUSTs in scope for the doc's target leaves. That's now persisted on
-every extract.
+## What this means for next direction
 
-## Six gaps catalogued
+**Stop the extraction-engine improvement arc.** The under-discovery
+gap at the magnitude originally claimed doesn't exist. The MUST
+embedding index + schema_v48 telemetry are retained as foundation —
+they correctly measure per-leaf yield going forward — but no more
+Phase 2/3 work.
 
-| # | Gap | Status |
+**The real product lever** is the user-facing evidence-class
+breakdown surface that the templating arc has been building toward:
+
+    A.5.18 Access Rights (NC)
+      Policy:    5/8  MUSTs covered by Access Control Policy.docx
+      Procedure: 0/12 → you need procedure evidence; use the template
+      Register:  0/6  → use the form/template for revocation register
+      Review:    0/5  → upload quarterly review record
+
+That maps onto the templating arc's tenant-authored lanes (templated
+upload, form). The 43% gap at median yield is mostly addressable by
+**telling the tenant which evidence type they're missing**, not by
+re-engineering extraction.
+
+## Artifact ledger
+
+What's kept (foundation cost paid, future surfaces may use):
+
+| Artifact | Status | Future use |
 |---|---|---|
-| G1 | Pass-2 metrics computed but dropped at trace write | SHIPPED 2026-06-26 (schema_v48) |
-| G2 | Per-doc yield ratio (distinct/total) not measured | SHIPPED 2026-06-26 (schema_v48) |
-| G3 | Pass-2 requires doc_mappings match — 8% of uploads get no recall | OPEN |
-| G4 | Single LLM call per chunk; large docs starve on attention | OPEN |
-| G5 | Crosscheck 75% disagreement rate (mis-binding noise) | OPEN |
-| G6 | Pass-2 fires on PARTIALLY-bound leaves only — zero-bound leaves get no recall | OPEN |
-
-## What G1+G2 actually ship
-
-schema_v48 adds 5 nullable columns to `intake_trace_log`:
-
-- `distinct_musts_bound` — the numerator (count(DISTINCT
-  checklist_item_id) in findings)
-- `leaf_musts_in_scope` — the denominator (sum of `must_contain`
-  across `target_leaves`)
-- `yield_ratio_pct` — 0-100 integer, clamped (pass-2 can over-bind)
-- `pass2_leaves_targeted` — partial-leaf count fed to recall pass
-- `pass2_findings` — additional findings from pass-2
-
-Extractor: `_finalize_yield_metrics(doc, findings)` called before
-each return path of `extract()`. Excludes unbound (Phase-1 coarse)
-findings from the numerator.
-
-Pipeline: `tracer.write("extract", ...)` passes the new keys
-explicitly + `_TraceWriter.allowed` whitelist updated (silent-drop
-gap that hid pass-2 metrics for as long as `_run_pass2` has existed).
-
-**Smoke result on real upload**: yield = 17% on a multi-control HR
-policy. Pass-2 fired, found 0 additional findings. Matches the audit
-median exactly. The metric is honest.
-
-## Non-obvious decisions
-
-### Yield denominator = target_leaves' MUSTs, not all leaves' MUSTs
-
-A doc that maps to ONE leaf of a 5-leaf control should be measured
-against that one leaf's MUSTs, not all 5 leaves' combined. When
-doc_mappings doesn't match (8% of Arion's uploads, 45% have NULL =
-pre-instrumentation), `leaf_musts_in_scope` is NULL and
-`yield_ratio_pct` is NULL — honest "we don't have a denominator"
-signal, not a fake number.
-
-### Cap at 100%, not raw ratio
-
-Pass-2 can bind MUSTs from leaves outside the doc_mappings target
-set (unusual but possible — the prompt doesn't strictly forbid it).
-That would produce yield > 100%. Cap at 100% so the metric stays
-comparable across uploads.
-
-### Exclude unbound findings from numerator
-
-Pre-2026-06-13 (Phase-1 retirement) extracts produced findings with
-NULL `checklist_item_id`. Those still satisfy a control coarsely
-but don't bind a specific MUST — don't count them toward yield.
-Otherwise the metric falsely inflates on legacy data.
+| schema_v48 yield/pass-2 telemetry | KEEP | Honest per-leaf yield tracking going forward; UX denominator source |
+| `musts_arioncomply` Chroma collection (4133 vectors) | KEEP | Could power "match tenant text → MUST" inside templating wizard; not a re-extraction lever |
+| `scripts/build_must_index.py` | KEEP | Rebuild script; idempotent |
+| `scripts/prototype_semantic_extract.py` | KEEP | Reference/diagnostic; not productionised |
+| /tmp/ground_truth_check.py | NOT COMMITTED | Diagnostic for future "is this MUST in this doc?" questions |
+| Original "G3-G6 gap catalog" in this memo | SUPERSEDED | At ≤6% real extraction-failure rate, the gap catalog is over-fitting |
 
 ## Carry-forward
 
-**The drop-counter pattern** was already a known anti-pattern (see
-[[feedback-telemetry-before-trouble]] — we instrument *what we
-caught*, not *what we missed*). This audit is the strongest evidence
-yet for that lesson: 5 drop counters running for months, none of
-them surfaced a 17%-yield problem.
-
-**Next investigation** (after G1+G2 collect real-world data): G3-G6
-in order of cheapness. G6 (zero-bound recall) is probably the next
-biggest win — pass-2 already exists and works, just needs its
-trigger broadened. G4 (multi-pass on large docs) is the harder
-structural fix.
+**The lesson is itself worth memory** — see
+[[feedback-validate-the-denominator]]. I anchored hours of work on a
+30-minute query result without validating the denominator. A flawed
+denominator can make a moderate problem look catastrophic and
+motivate work that misses the real lever.
 
 ## Related
 
-- [[tabular-evidence-rows-2026-06-26]] — same arc (under-discovery
-  fix), different class. That was templated-tabular multi-row;
-  this is LLM-narrative.
-- [[feedback-telemetry-before-trouble]] — the rule: track absence,
-  not just rejection.
-- [[templated-lane-discipline-2026-06-25]] — auto-approve trust:
-  for templated/form lanes there's no under-discovery (tenant
-  authored directly); this audit applies only to inference paths.
+- [[feedback-validate-the-denominator]] — the meta-lesson from this
+  arc. Validate the denominator of any ratio metric BEFORE building
+  infrastructure on it.
+- [[tabular-evidence-rows-2026-06-26]] — sibling under-discovery
+  fix; that one was a real, mechanically-identifiable gap (multi-row
+  evidence thrown away by first-non-empty-per-column logic).
+- [[templates-v2-anchors-complete-2026-06-25]] — where the actual
+  product win lives. The evidence-class breakdown UI uses the same
+  per-leaf MUST counts that this arc surfaced.
+- [[must-embedding-index-2026-06-26]] — the index built during this
+  arc. Retained; may power templating-wizard text→MUST suggestions
+  rather than extraction.
