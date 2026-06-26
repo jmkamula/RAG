@@ -2784,6 +2784,55 @@ async def dashboard_control_template_save(
     }
 
 
+@app.get("/api/v1/dashboard/control/{control_ref}/evidence-classes", tags=["posture"])
+async def dashboard_control_evidence_classes(
+    control_ref: str,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("posture")),
+    standard_id: Optional[str] = None,
+):
+    """Per-control evidence-class breakdown for the dashboard drill-in.
+
+    Groups the control's leaves by evidence_type (policy / procedure /
+    register / review_record / scope_note / ...) and reports per-class
+    coverage. Lets the tenant see at a glance:
+
+      "5/8 policy MUSTs covered (Access Control Policy.docx);
+       0/12 procedure MUSTs — use the template;
+       0/6 register MUSTs — use the form."
+
+    Action: each missing class can drive a template download / form
+    open (template_available flag per leaf).
+
+    See [[llm-narrative-under-discovery-audit-2026-06-26]] for the
+    audit dive that established this UX as the real product lever.
+    """
+    if not standard_id:
+        if control_ref.startswith("Art."):
+            standard_id = "GDPR:2016/679"
+        else:
+            standard_id = "ISO27001:2022"
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        from rag.posture.advisory import build_evidence_class_breakdown
+        data = build_evidence_class_breakdown(
+            pg_conn     = conn,
+            tenant_id   = key_info.tenant_id,
+            control_ref = control_ref,
+            standard_id = standard_id,
+        )
+        return {
+            "control_ref": control_ref,
+            "standard_id": standard_id,
+            "breakdown":   data,
+            "trace_id":    request.state.trace_id,
+        }
+    finally:
+        pool.putconn(conn)
+
+
 @app.get("/api/v1/dashboard/control/{control_ref}/advisory", tags=["posture"])
 async def dashboard_control_advisory(
     control_ref: str,

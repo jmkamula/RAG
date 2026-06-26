@@ -774,6 +774,20 @@ async function selectHeatCell(c, ev) {
     }
   }
 
+  // ── Evidence-class breakdown panel ─────────────────────────────────────
+  // High-level "what types of evidence do you have/need" rollup. Fetched
+  // alongside the advisory; renders ABOVE it (orienting view → editor).
+  // See [[evidence-class-breakdown-backend-2026-06-26]].
+  try {
+    const ec = await api(`/api/v1/dashboard/control/${encodeURIComponent(c.control_ref)}/evidence-classes`);
+    if (selected !== null && selected.control_ref === c.control_ref && ec.breakdown) {
+      const dp = document.getElementById('dp-gap');
+      if (dp) dp.insertAdjacentHTML('beforeend', renderEvidenceClassesPanel(ec.breakdown));
+    }
+  } catch (e) {
+    // Silent: supplementary panel; never block the tree.
+  }
+
   // ── "How to advance" advisory panel ────────────────────────────────────
   // Fetched after the verdict tree (parallel would be cleaner but we want
   // the tree to render first so the user doesn't see a flash of empty
@@ -1128,6 +1142,116 @@ async function selectStage1(c, ev) {
 // Consumes structured data from /api/v1/dashboard/control/{ref}/advisory.
 // Same data path as the chat per-MUST advisory; this is the dashboard
 // surface. See memory [[per-must-advisory-2026-06-14]].
+function renderEvidenceClassesPanel(b) {
+  // Per-control evidence-class rollup. Renders a compact table:
+  //   Class · n_bound / n_total · sources · template-CTA
+  // Visually highlights the missing classes (0% / red dot) so the
+  // tenant sees "you need register evidence" at a glance.
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');
+  const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  if (!b || !b.evidence_classes || !b.evidence_classes.length) return '';
+
+  // Header — overall yield
+  const overall = `${b.musts_bound}/${b.musts_total} (${b.overall_yield_pct}%)`;
+
+  let rows = '';
+  for (const cls of b.evidence_classes) {
+    const pct = cls.class_yield_pct;
+    // Visual cues by yield bucket
+    let dot, accent;
+    if (pct >= 75)      { dot = '#2F8F4D'; accent = '#2F8F4D'; }   // green
+    else if (pct >= 25) { dot = '#9C6F1B'; accent = '#9C6F1B'; }   // amber
+    else                { dot = '#9C2E2E'; accent = '#9C2E2E'; }   // red
+
+    // Per-leaf line(s): show sources + template flag
+    let leafLines = '';
+    for (const leaf of (cls.leaves || [])) {
+      const sources = (leaf.source_documents && leaf.source_documents.length)
+        ? leaf.source_documents.map(esc).join(', ')
+        : '<span style="color:#9C9A8E;font-style:italic">no source yet</span>';
+      const tplBadge = leaf.template_available
+        ? `<button class="ec-tpl-btn" onclick="downloadTemplateForLeaf('${attr(leaf.leaf_id)}')"
+                   title="Download template for ${attr(leaf.leaf_label)}"
+                   style="font-size:10px;padding:2px 8px;background:#fff;color:#3A382E;
+                          border:1px solid #C8C5B8;border-radius:3px;cursor:pointer;
+                          font-family:inherit;margin-left:6px">
+             📄 Template
+           </button>`
+        : '';
+      leafLines += `<div style="font-size:11px;color:#5C5A4F;margin-top:2px;padding-left:18px">
+        ${esc(leaf.leaf_label)} · ${leaf.musts_bound}/${leaf.musts_total} · sources: ${sources}${tplBadge}
+      </div>`;
+    }
+
+    rows += `<div class="ec-row" data-evtype="${attr(cls.evidence_type)}"
+                  style="padding:8px 10px;border-bottom:1px solid #F0EDE3">
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#3A382E">
+        <span style="color:${dot};font-size:14px;line-height:1">●</span>
+        <span style="font-weight:600;flex:1">${esc(cls.evidence_type_label)}</span>
+        <span style="color:${accent};font-weight:600;font-variant-numeric:tabular-nums">
+          ${cls.class_musts_bound}/${cls.class_musts_total}
+        </span>
+        <span style="color:#9C9A8E;font-size:11px;font-variant-numeric:tabular-nums;min-width:36px;text-align:right">
+          ${pct}%
+        </span>
+      </div>
+      ${leafLines}
+    </div>`;
+  }
+
+  return `<div id="evidence-classes-panel" data-control="${attr(b.control_ref)}"
+              style="margin-top:16px;padding:0;border:1px solid #E8E5DA;border-radius:5px;background:#fff;overflow:hidden">
+    <div style="display:flex;align-items:center;justify-content:space-between;
+                padding:10px 12px;background:#FAF8F2;border-bottom:1px solid #E8E5DA">
+      <div>
+        <div style="font-size:12px;color:#3A382E;font-weight:600">
+          Evidence coverage by type
+        </div>
+        <div style="font-size:11px;color:#9C9A8E;margin-top:2px">
+          Grouped by evidence_type · click 📄 to download a starter template
+        </div>
+      </div>
+      <div style="font-size:13px;color:#3A382E;font-weight:600;font-variant-numeric:tabular-nums">
+        ${esc(overall)}
+      </div>
+    </div>
+    ${rows}
+  </div>`;
+}
+
+async function downloadTemplateForLeaf(leafId) {
+  // GET /api/v1/templates/{leaf_id}/download — renders the starter
+  // template (markdown) with tenant identity placeholders substituted
+  // and prior approved evidence prefilled into each MUST's edit zone.
+  // The browser handles the Content-Disposition; we just navigate.
+  const url = `/api/v1/templates/${encodeURIComponent(leafId)}/download`;
+  try {
+    const resp = await fetch(url, { headers: { 'X-API-Key': API_KEY } });
+    if (!resp.ok) {
+      const t = await resp.text();
+      alert(`Template download failed: ${resp.status} ${t.slice(0,200)}`);
+      return;
+    }
+    const md = await resp.text();
+    // Trigger browser download with the server's suggested filename if
+    // available, else fall back to the leaf id slug.
+    const cd = resp.headers.get('Content-Disposition') || '';
+    const m  = /filename="?([^"]+)"?/i.exec(cd);
+    const filename = m ? m[1] : `${leafId.replace(/[:\/]/g, '_')}.md`;
+    const blob = new Blob([md], { type: 'text/markdown' });
+    const dlUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = dlUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(dlUrl);
+  } catch (e) {
+    alert(`Template download error: ${e.message}`);
+  }
+}
+
 function renderAdvisoryPanel(adv) {
   const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');
   const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');

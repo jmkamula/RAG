@@ -327,6 +327,229 @@ def build_per_must_advisory_data(
     }
 
 
+# ── Evidence-class breakdown (dashboard drill-in) ───────────────────────────
+
+
+def _fetch_source_documents_per_leaf(
+    pg_conn,
+    tenant_id:    str,
+    leaf_to_must_ids: dict[str, list[str]],
+) -> dict[str, list[str]]:
+    """For each leaf, return the distinct filenames that backed the bound
+    MUSTs. Empty list when no bindings for that leaf.
+
+    Uses the catalog's leaf → must_ids mapping (not Neo4j) so we don't
+    miss a binding if its checklist_item_id is present in document_findings
+    but the parent leaf relationship hasn't been recomputed yet.
+    """
+    all_must_ids = [mid for ids in leaf_to_must_ids.values() for mid in ids]
+    if not all_must_ids:
+        return {}
+    out: dict[str, list[str]] = {leaf: [] for leaf in leaf_to_must_ids}
+    with pg_conn.cursor() as cur:
+        cur.execute(
+            "SELECT set_config('app.tenant_id', %s::text, false)", (tenant_id,),
+        )
+        cur.execute(
+            """
+            SELECT df.checklist_item_id, cd.filename
+              FROM document_findings df
+              JOIN client_documents cd ON cd.id = df.document_id
+             WHERE df.tenant_id   = %s::uuid
+               AND df.is_active   = TRUE
+               AND df.review_status = 'approved'
+               AND df.checklist_item_id = ANY(%s)
+            """,
+            (tenant_id, all_must_ids),
+        )
+        # Build inverse map: must_id → leaf_id
+        must_to_leaf: dict[str, str] = {}
+        for leaf, ids in leaf_to_must_ids.items():
+            for mid in ids:
+                must_to_leaf[mid] = leaf
+        per_leaf_filenames: dict[str, set[str]] = {leaf: set() for leaf in leaf_to_must_ids}
+        for must_id, fn in cur.fetchall():
+            leaf = must_to_leaf.get(must_id)
+            if leaf and fn:
+                per_leaf_filenames[leaf].add(fn)
+        for leaf, fns in per_leaf_filenames.items():
+            out[leaf] = sorted(fns)
+    return out
+
+
+def _fetch_template_availability(
+    pg_conn,
+    leaf_ids: list[str],
+) -> dict[str, bool]:
+    """Look up which leaves have a template in the templates table."""
+    if not leaf_ids:
+        return {}
+    out: dict[str, bool] = {lid: False for lid in leaf_ids}
+    with pg_conn.cursor() as cur:
+        cur.execute(
+            "SELECT leaf_id FROM templates WHERE leaf_id = ANY(%s)",
+            (leaf_ids,),
+        )
+        for (lid,) in cur.fetchall():
+            out[lid] = True
+    return out
+
+
+def build_evidence_class_breakdown(
+    pg_conn,
+    tenant_id:    str,
+    control_ref:  str,
+    standard_id:  str = "ISO27001:2022",
+    neo4j_driver = None,
+) -> Optional[dict]:
+    """Per-control evidence-class breakdown for the dashboard drill-in.
+
+    Groups the control's leaves by evidence_type. For each class group:
+      - which leaves belong to that class
+      - per-leaf MUSTs total + bound + missing
+      - source documents that backed the bound MUSTs
+      - template availability per leaf
+      - class-level rollup + upload_hint
+
+    Returns the rollup regardless of posture (Comply controls show
+    "100% covered" cells; this is a *coverage* surface, not just
+    advisory). Returns None only when the control is uncurated.
+
+    Shape:
+      {
+        "control_ref": "A.5.18",
+        "standard_id": "ISO27001:2022",
+        "posture": "NC",
+        "n_leaves": 5,
+        "musts_total": 31,
+        "musts_bound": 5,
+        "overall_yield_pct": 16,
+        "evidence_classes": [
+          {
+            "evidence_type": "procedure",
+            "evidence_type_label": "procedure",
+            "class_musts_total": 8,
+            "class_musts_bound": 1,
+            "class_yield_pct":   12,
+            "upload_hint": "Document each missing step ...",
+            "leaves": [
+              {
+                "leaf_id":          "req:A.5.18:access_rights_procedure",
+                "leaf_label":       "access rights procedure",
+                "musts_total":      8,
+                "musts_bound":      1,
+                "yield_pct":        12,
+                "items_have":       [<text>...],
+                "items_missing":    [<text>...],
+                "must_items":       [{"id":..., "text":..., "satisfied":bool}],
+                "source_documents": ["Access Control Policy.docx"],
+                "template_available": true,
+              },
+              ...
+            ]
+          },
+          ...
+        ]
+      }
+    """
+    if not control_ref:
+        return None
+    if neo4j_driver is None:
+        neo4j_driver = _get_neo_driver()
+        if neo4j_driver is None:
+            return None
+
+    full_id = f"{standard_id}:{control_ref}"
+    try:
+        verdict = evaluate_one_control(pg_conn, neo4j_driver, tenant_id, full_id)
+    except Exception as e:
+        logger.warning("evidence_class_breakdown: evaluate failed for %s: %s", full_id, e)
+        return None
+    if verdict is None or not verdict.leaves:
+        return None
+
+    # Build the leaf → bound must_ids map from verdict, plus full must_ids
+    # set per leaf.
+    leaf_to_bound_ids: dict[str, list[str]] = {
+        leaf.leaf_id: list(leaf.item_ids_recognised or [])
+        for leaf in verdict.leaves
+    }
+    leaf_to_all_ids: dict[str, list[str]] = {
+        leaf.leaf_id: list(leaf.item_ids_recognised or []) + list(leaf.item_ids_unrecognised or [])
+        for leaf in verdict.leaves
+    }
+
+    leaf_ids = list(leaf_to_all_ids.keys())
+    source_docs    = _fetch_source_documents_per_leaf(pg_conn, tenant_id, leaf_to_bound_ids)
+    template_avail = _fetch_template_availability(pg_conn, leaf_ids)
+
+    # Group leaves by evidence_type
+    by_class: dict[str, list[dict]] = {}
+    musts_total_all = 0
+    musts_bound_all = 0
+    for leaf in verdict.leaves:
+        rec_ids   = list(leaf.item_ids_recognised   or [])
+        unrec_ids = list(leaf.item_ids_unrecognised or [])
+        rec_texts   = list(leaf.items_recognised   or [])
+        unrec_texts = list(leaf.items_unrecognised or [])
+        total = len(rec_ids) + len(unrec_ids)
+        bound = len(rec_ids)
+        musts_total_all += total
+        musts_bound_all += bound
+        yield_pct = int(round(bound / total * 100)) if total else 0
+
+        must_items: list[dict] = []
+        for _id, _t in zip(rec_ids, rec_texts):
+            must_items.append({"id": _id, "text": _t, "satisfied": True})
+        for _id, _t in zip(unrec_ids, unrec_texts):
+            must_items.append({"id": _id, "text": _t, "satisfied": False})
+
+        leaf_entry = {
+            "leaf_id":          leaf.leaf_id,
+            "leaf_label":       leaf.leaf_id.split(":")[-1].replace("_", " "),
+            "musts_total":      total,
+            "musts_bound":      bound,
+            "yield_pct":        yield_pct,
+            "items_have":       rec_texts,
+            "items_missing":    unrec_texts,
+            "must_items":       must_items,
+            "source_documents": source_docs.get(leaf.leaf_id, []),
+            "template_available": template_avail.get(leaf.leaf_id, False),
+        }
+        by_class.setdefault(leaf.evidence_type or "evidence", []).append(leaf_entry)
+
+    # Emit class rollups, ordered by class-total descending (most-MUSTs first)
+    classes_out: list[dict] = []
+    for et, leaves in by_class.items():
+        class_total = sum(l["musts_total"] for l in leaves)
+        class_bound = sum(l["musts_bound"] for l in leaves)
+        classes_out.append({
+            "evidence_type":       et,
+            "evidence_type_label": _humanize_evidence_type(et),
+            "class_musts_total":   class_total,
+            "class_musts_bound":   class_bound,
+            "class_yield_pct":     int(round(class_bound / class_total * 100))
+                                   if class_total else 0,
+            "upload_hint":         _hint_for(et),
+            "leaves":              leaves,
+        })
+    classes_out.sort(key=lambda c: -c["class_musts_total"])
+
+    overall_yield = int(round(musts_bound_all / musts_total_all * 100)) \
+                    if musts_total_all else 0
+    return {
+        "control_ref":      control_ref,
+        "standard_id":      standard_id,
+        "posture":          (verdict.posture or "").upper(),
+        "n_leaves":         len(verdict.leaves),
+        "musts_total":      musts_total_all,
+        "musts_bound":      musts_bound_all,
+        "overall_yield_pct": overall_yield,
+        "evidence_classes":  classes_out,
+        "source":           _source_label(control_ref, standard_id),
+    }
+
+
 # ── Markdown renderer (chat surface) ─────────────────────────────────────────
 
 def _render_advisory_markdown(data: dict) -> str:
