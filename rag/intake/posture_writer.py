@@ -35,6 +35,7 @@ DB schema expectations (actual columns as of schema v8):
 """
 from __future__ import annotations
 
+import json
 import logging
 import re
 import uuid
@@ -756,13 +757,14 @@ def _persist_document_metadata(
 
 
 def write_findings(
-    findings:    list[DocumentFinding],
-    tenant_id:   str,
-    upload_id:   str,
+    findings:     list[DocumentFinding],
+    tenant_id:    str,
+    upload_id:    str,
     conn,
     *,
-    metadata:    Optional[dict] = None,
-    uploaded_by: Optional[str]  = None,
+    metadata:     Optional[dict]      = None,
+    uploaded_by:  Optional[str]       = None,
+    tabular_rows: Optional[list[dict]] = None,
 ) -> dict:
     """
     Stage 4 entry point. Write all findings to document_findings and
@@ -807,6 +809,51 @@ def write_findings(
     written = _write_document_findings(findings, tenant_id, doc_id, conn,
                                        uploaded_by = uploaded_by)
 
+    # ── Stage 4A2: tabular_evidence_rows (per-row capture) ────────────────
+    # Schema_v47 — captures the full multi-row content of templated table
+    # zones so the renderer can replay all rows on round-trip (continuity
+    # across annual refresh) and future advisory can surface per-row
+    # completeness. Engine semantics (document_findings → posture) stay
+    # unchanged. See [[tabular-evidence-rows-2026-06-26]].
+    n_rows_persisted = 0
+    if tabular_rows:
+        with conn.cursor() as cur:
+            # Supersede prior rows for this document. Re-extract sweeps wipe
+            # the per-row history for this document_id so we don't accumulate
+            # stale rows. (Same supersession discipline as document_findings.)
+            cur.execute(
+                """
+                UPDATE tabular_evidence_rows
+                   SET is_active = FALSE
+                 WHERE document_id = %s::uuid AND is_active = TRUE
+                """,
+                (doc_id,),
+            )
+            for r in tabular_rows:
+                leaf_id   = r.get("leaf_id")
+                row_index = r.get("row_index")
+                cols      = r.get("column_values") or {}
+                if not leaf_id or row_index is None or not cols:
+                    continue
+                cur.execute(
+                    """
+                    INSERT INTO tabular_evidence_rows (
+                        tenant_id, document_id, leaf_id,
+                        row_index, column_values, is_active
+                    ) VALUES (
+                        %s::uuid, %s::uuid, %s,
+                        %s, %s::jsonb, TRUE
+                    )
+                    ON CONFLICT (document_id, leaf_id, row_index) DO UPDATE SET
+                        column_values = EXCLUDED.column_values,
+                        is_active     = TRUE,
+                        extracted_at  = now()
+                    """,
+                    (tenant_id, doc_id, leaf_id, row_index, json.dumps(cols)),
+                )
+                n_rows_persisted += 1
+        logger.info(f"tabular_evidence_rows: {n_rows_persisted} rows persisted")
+
     # ── Stage 4B: posture_controls ────────────────────────────────────────
     groups: dict[tuple, list[DocumentFinding]] = {}
     for f in findings:
@@ -824,6 +871,7 @@ def write_findings(
         "posture_skipped":   posture_skipped,
         "controls_assessed": [ref for ref, _ in groups.keys()],
         "doc_id":            doc_id,
+        "tabular_rows":      n_rows_persisted,
     }
     logger.info(
         f"Stage 4 complete: {written} findings written, "

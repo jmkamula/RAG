@@ -457,8 +457,9 @@ class DocumentPipeline:
             try:
                 summary = write_findings(
                     findings, tenant_id, upload_id, conn,
-                    metadata    = doc_metadata,
-                    uploaded_by = user_id,
+                    metadata     = doc_metadata,
+                    uploaded_by  = user_id,
+                    tabular_rows = doc.tabular_rows or None,
                 )
 
                 # Persist the parsed markdown alongside the findings so the

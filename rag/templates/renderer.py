@@ -51,6 +51,28 @@ _MUST_MARKER_RE = re.compile(
     r"<<MUST\s+(item:[A-Za-z0-9.]+:[a-z0-9_]+)>>",
 )
 
+# Tabular EDIT-ZONE markers — wrap a markdown table. Captures the leaf_id
+# in group 1 and the zone content (header + separator + data rows) in
+# group 2. Mirrors extractor._TEMPLATED_TABLE_ZONE_RE.
+_TABLE_ZONE_RE = re.compile(
+    r"<!--\s*EDIT-ZONE-START\s+leaf:(req:[A-Za-z0-9.]+:[a-z0-9_]+)\s*-->"
+    r"(.*?)"
+    r"<!--\s*EDIT-ZONE-END\s+leaf:\1\s*-->",
+    re.DOTALL | re.IGNORECASE,
+)
+
+# TABLE-COLUMNS metadata: maps leaf_id → ordered list of item_ids
+# (one per table column, left-to-right).
+_TABLE_COLUMNS_RE = re.compile(
+    r"<!--\s*TABLE-COLUMNS\s+leaf:(req:[A-Za-z0-9.]+:[a-z0-9_]+)\s*-->"
+    r"(.*?)"
+    r"<!--\s*/TABLE-COLUMNS\s*-->",
+    re.DOTALL | re.IGNORECASE,
+)
+_TABLE_COLUMN_RE = re.compile(
+    r"<!--\s*column:\s*(item:[A-Za-z0-9.]+:[a-z0-9_]+)\s*-->",
+)
+
 _PLACEHOLDER_RE = re.compile(
     r"<<(?:TEXT|NAME)>>",
 )
@@ -340,6 +362,117 @@ def _compose_prefill_block(
     return "\n\n".join(parts)
 
 
+def _fetch_tabular_rows(
+    pg_conn,
+    tenant_id: str,
+    leaf_id:   str,
+) -> list[dict]:
+    """Fetch the tenant's most-recent active per-row content for a
+    tabular leaf. Returns ordered list of {row_index, column_values}.
+
+    "Most-recent active" = the latest document_id with rows for this leaf.
+    Re-extracts supersede the prior document's rows (writer flips
+    is_active=FALSE on the older document_id), so the active-row set is
+    a single document's worth at any time.
+    """
+    rows: list[dict] = []
+    with pg_conn.cursor() as cur:
+        cur.execute(
+            "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
+        )
+        cur.execute(
+            """
+            SELECT row_index, column_values
+              FROM tabular_evidence_rows
+             WHERE tenant_id = %s::uuid
+               AND leaf_id   = %s
+               AND is_active = TRUE
+             ORDER BY document_id, row_index
+            """,
+            (tenant_id, leaf_id),
+        )
+        for ri, cv in cur.fetchall():
+            rows.append({"row_index": ri, "column_values": cv or {}})
+    return rows
+
+
+def _prefill_table_zones(body_md: str, pg_conn, tenant_id: str) -> tuple[str, int]:
+    """For each tabular EDIT-ZONE in the body, replace the empty
+    template table with one constructed from the tenant's prior
+    per-row evidence. Returns (new_body, n_zones_prefilled).
+
+    Header row is preserved verbatim from the template (so column
+    titles stay tenant-readable). Separator row preserved. Data rows
+    replaced with one row per prior tabular_evidence_rows entry,
+    cell-by-cell from column_values keyed by the TABLE-COLUMNS
+    metadata's item_id order.
+    """
+    # Build leaf_id → ordered item_ids map
+    leaf_columns: dict[str, list[str]] = {}
+    for tc in _TABLE_COLUMNS_RE.finditer(body_md):
+        leaf_id = tc.group(1)
+        cols    = _TABLE_COLUMN_RE.findall(tc.group(2))
+        if cols:
+            leaf_columns[leaf_id] = cols
+    if not leaf_columns:
+        return body_md, 0
+
+    n_prefilled = 0
+
+    def _replace_zone(m: "re.Match[str]") -> str:
+        nonlocal n_prefilled
+        leaf_id   = m.group(1)
+        zone_text = m.group(2)
+        columns   = leaf_columns.get(leaf_id)
+        if not columns:
+            return m.group(0)
+
+        prior = _fetch_tabular_rows(pg_conn, tenant_id, leaf_id)
+        if not prior:
+            return m.group(0)
+
+        # Extract header + separator lines verbatim from the existing zone
+        header_line = ""
+        sep_line    = ""
+        for raw in zone_text.splitlines():
+            line = raw.strip()
+            if not line.startswith("|"):
+                continue
+            if not header_line:
+                header_line = raw
+                continue
+            if re.fullmatch(r"\|[\s\-:|]+\|", line):
+                sep_line = raw
+                break
+        if not header_line:
+            return m.group(0)
+        if not sep_line:
+            sep_line = "|" + "|".join(["---"] * len(columns)) + "|"
+
+        data_lines: list[str] = []
+        for r in prior:
+            cv = r["column_values"]
+            # Sanitise cell text: strip newlines + pipes (markdown table
+            # boundary chars). Empty cells render as blank.
+            cells = []
+            for item_id in columns:
+                raw_text = (cv.get(item_id) or "")
+                cell = raw_text.replace("\n", " ").replace("|", "\\|").strip()
+                cells.append(cell)
+            data_lines.append("| " + " | ".join(cells) + " |")
+
+        new_zone = "\n" + header_line + "\n" + sep_line + "\n" + "\n".join(data_lines) + "\n"
+        n_prefilled += 1
+        return (
+            f"<!-- EDIT-ZONE-START leaf:{leaf_id} -->" +
+            new_zone +
+            f"<!-- EDIT-ZONE-END leaf:{leaf_id} -->"
+        )
+
+    new_body = _TABLE_ZONE_RE.sub(_replace_zone, body_md)
+    return new_body, n_prefilled
+
+
 def _apply_prefills_and_wrap_edit_zones(
     body_md:       str,
     prefills:      dict[str, str],
@@ -499,6 +632,15 @@ def render_template(
     # ALWAYS wrap edit zones — even when prefill is off, the placeholders
     # need to be flagged for the upload-side extractor.
     body, musts_prefilled = _apply_prefills_and_wrap_edit_zones(body, prefills)
+
+    # Tabular-zone prefill — for templates with a `EDIT-ZONE-START leaf:`
+    # block (register/record/matrix/log/inventory shapes), replay the
+    # tenant's prior per-row content from tabular_evidence_rows.
+    # Schema_v47; gated on prefill=True so ?empty=true still produces a
+    # blank table for fresh starts. See [[tabular-evidence-rows-2026-06-26]].
+    n_tables_prefilled = 0
+    if prefill:
+        body, n_tables_prefilled = _prefill_table_zones(body, pg_conn, tenant_id)
 
     body, n_filled = _substitute_placeholders(body, tenant_row)
 

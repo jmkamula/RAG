@@ -391,6 +391,7 @@ def _extract_templated_via_table(
     n_zones_bound = 0
     n_zones_empty = 0
 
+    n_rows_captured = 0
     for m in table_zones:
         leaf_id   = m.group(1)
         zone_text = m.group(2)
@@ -399,10 +400,18 @@ def _extract_templated_via_table(
             # No metadata for this leaf zone — skip rather than misbind
             continue
 
-        # Parse rows: split lines, filter table rows starting with '|'
+        # Parse rows. Two outputs:
+        #   - col_has_data + sample_cell: per-column satisfaction +
+        #     first-non-empty sample (legacy engine semantics).
+        #   - tabular_rows: per-row capture into doc.tabular_rows (the
+        #     full register content, persisted to
+        #     tabular_evidence_rows so the renderer can replay all
+        #     rows on round-trip and future advisory can surface
+        #     per-row completeness).
         col_has_data = [False] * len(columns)
         sample_cell  = [""] * len(columns)
         rows_seen    = 0
+        data_row_ix  = 0
         for raw_line in zone_text.splitlines():
             line = raw_line.strip()
             if not line.startswith("|"):
@@ -416,7 +425,23 @@ def _extract_templated_via_table(
                 rows_seen = 1
                 continue
             rows_seen += 1
-            # Map cells to columns; ignore extras / pad missing
+
+            # Per-row capture — sparse JSONB map {item_id: cell_text}.
+            # Skip the row entirely if every cell is empty (filler row).
+            row_payload: dict[str, str] = {}
+            for i in range(min(len(cells), len(columns))):
+                if cells[i]:
+                    row_payload[columns[i]] = cells[i][:1000]
+            if row_payload:
+                doc.tabular_rows.append({
+                    "leaf_id":       leaf_id,
+                    "row_index":     data_row_ix,
+                    "column_values": row_payload,
+                })
+                data_row_ix    += 1
+                n_rows_captured += 1
+
+            # Legacy per-column satisfaction
             for i in range(min(len(cells), len(columns))):
                 if cells[i] and not col_has_data[i]:
                     col_has_data[i] = True
@@ -454,6 +479,7 @@ def _extract_templated_via_table(
     doc.extraction_metrics["templated_table_zones_total"] = len(table_zones)
     doc.extraction_metrics["templated_table_zones_bound"] = n_zones_bound
     doc.extraction_metrics["templated_table_zones_empty"] = n_zones_empty
+    doc.extraction_metrics["templated_tabular_rows_captured"] = n_rows_captured
     return findings
 
 

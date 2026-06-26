@@ -85,6 +85,17 @@ class ParsedDocument:
     # see schema_v35.
     extraction_metrics: dict = field(default_factory=dict)
 
+    # Per-row tabular content for templated uploads. List of dicts:
+    #   {"leaf_id": "req:A.5.9:asset_inventory",
+    #    "row_index": 0,
+    #    "column_values": {"item:A.5.9:asset_records": "AST-001", ...}}
+    # The extractor populates this from table EDIT-ZONE content; the
+    # posture_writer persists into tabular_evidence_rows (schema_v47).
+    # See [[templates-v2-anchors-complete-2026-06-25]] +
+    # [[tabular-evidence-rows-2026-06-26]] for why we capture all rows
+    # (not just first non-empty per column).
+    tabular_rows: list[dict] = field(default_factory=list)
+
 
 @dataclass
 class DocumentChunk:
