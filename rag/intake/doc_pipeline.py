@@ -360,6 +360,26 @@ class DocumentPipeline:
             if not self.dry_run:
                 self._update_status(upload_id, "processing", 0)
 
+            # ── Templated-xlsx tenant cross-check ─────────────────────
+            # If the reader detected our _arion_meta sheet, validate the
+            # embedded tenant_id matches the uploading tenant before the
+            # extractor binds findings. Mismatch → strip the meta + log
+            # warning so the file falls through to the generic workbook
+            # lane (which will likely produce zero findings — safe
+            # default). See [[template-tenant-profile-2026-06-26]] +
+            # the xlsx round-trip arc.
+            tx_meta = doc.extraction_metrics.get("templated_xlsx_meta")
+            if tx_meta:
+                meta_tenant = tx_meta.get("tenant_id") or ""
+                if meta_tenant and meta_tenant != tenant_id:
+                    logger.warning(
+                        f"templated_xlsx tenant mismatch on {file_name}: "
+                        f"meta tenant_id={meta_tenant!r} vs uploading "
+                        f"tenant_id={tenant_id!r}. Stripping meta — file will "
+                        f"be processed via generic workbook lane."
+                    )
+                    doc.extraction_metrics.pop("templated_xlsx_meta", None)
+
             t3 = time.time()
             findings = extract(doc, controls, self.api_key)
             s3_ms = int((time.time() - t3) * 1000)
@@ -468,6 +488,15 @@ class DocumentPipeline:
             import psycopg2
             conn = psycopg2.connect(self.db_url)
             try:
+                # RLS needs app.tenant_id on this connection. Other tables
+                # (document_findings, client_documents, posture_controls)
+                # are scoped permissively for arioncomply_app, but
+                # tabular_evidence_rows (schema_v47) and tenant_profile
+                # (schema_v49) enforce strict RLS so any future read
+                # paths can't leak across tenants — INSERT also requires
+                # the GUC to be set.
+                with conn.cursor() as _cur:
+                    _cur.execute("SET app.tenant_id = %s", (tenant_id,))
                 summary = write_findings(
                     findings, tenant_id, upload_id, conn,
                     metadata     = doc_metadata,
