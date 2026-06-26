@@ -130,6 +130,11 @@ class IntakeTracer:
             "workbook_sheets_total", "workbook_sheets_mapped",
             "workbook_sheets_unmapped", "workbook_unmapped_sheets",
             "workbook_skipped_meta_sheets",
+            # schema_v48 — extraction yield + pass-2 telemetry (closes
+            # the silent-loss gap on the recall pass; see
+            # [[llm-narrative-under-discovery-audit-2026-06-26]])
+            "distinct_musts_bound", "leaf_musts_in_scope", "yield_ratio_pct",
+            "pass2_leaves_targeted", "pass2_findings",
         }
         for k, v in metrics.items():
             if k in allowed:
@@ -396,6 +401,14 @@ class DocumentPipeline:
                 workbook_sheets_unmapped     = doc.extraction_metrics.get("workbook_sheets_unmapped"),
                 workbook_unmapped_sheets     = doc.extraction_metrics.get("workbook_unmapped_sheets"),
                 workbook_skipped_meta_sheets = doc.extraction_metrics.get("workbook_skipped_meta_sheets"),
+                # schema_v48 — extraction yield + pass-2 telemetry. Closes
+                # the silent-loss gap on the recall pass; see
+                # [[llm-narrative-under-discovery-audit-2026-06-26]].
+                distinct_musts_bound  = doc.extraction_metrics.get("distinct_musts_bound"),
+                leaf_musts_in_scope   = doc.extraction_metrics.get("leaf_musts_in_scope"),
+                yield_ratio_pct       = doc.extraction_metrics.get("yield_ratio_pct"),
+                pass2_leaves_targeted = doc.extraction_metrics.get("pass2_leaves_targeted"),
+                pass2_findings        = doc.extraction_metrics.get("pass2_findings"),
             )
 
             logger.info(f"Extracted {len(findings)} findings from {file_name}")

@@ -162,9 +162,47 @@ def extract(
         )
 
     if doc.extraction_path == ExtractionPath.FULL_DOCUMENT:
-        return _extract_full(doc, scoped, api_key, leaf_musts=leaf_musts)
+        findings = _extract_full(doc, scoped, api_key, leaf_musts=leaf_musts)
     else:  # SECTION_BASED
-        return _extract_sections(doc, scoped, api_key, leaf_musts=leaf_musts)
+        findings = _extract_sections(doc, scoped, api_key, leaf_musts=leaf_musts)
+    _finalize_yield_metrics(doc, findings)
+    return findings
+
+
+def _finalize_yield_metrics(doc: ParsedDocument, findings: list) -> None:
+    """Compute under-discovery telemetry just before extract() returns.
+
+    Sets on doc.extraction_metrics (so the trace writer picks them up
+    when listed in its whitelist):
+
+      - distinct_musts_bound  — DISTINCT checklist_item_id across
+                                findings (the numerator)
+      - leaf_musts_in_scope   — catalog MUSTs across target_leaves
+                                (the denominator; copied from
+                                leaf_musts_count if previously set)
+      - yield_ratio_pct       — integer 0-100, or None when no
+                                denominator (no doc_mappings match)
+
+    Findings without a checklist_item_id (Phase-1 coarse coverage,
+    retired 2026-06-13) are excluded from the numerator — they don't
+    represent a satisfied MUST.
+
+    Audit context: median yield was 17% on Arion production corpus
+    (66% of doc/control pairs <25% yield). See
+    [[llm-narrative-under-discovery-audit-2026-06-26]].
+    """
+    distinct = {f.checklist_item_id for f in findings if getattr(f, "checklist_item_id", None)}
+    n_bound = len(distinct)
+    doc.extraction_metrics["distinct_musts_bound"] = n_bound
+
+    denom = doc.extraction_metrics.get("leaf_musts_count") or 0
+    if denom:
+        doc.extraction_metrics["leaf_musts_in_scope"] = denom
+        # Clamp 0..100 — bind rate can technically exceed 100% if pass-2
+        # binds MUSTs from leaves outside the doc_mappings target set
+        # (unusual but possible). Cap so the metric stays comparable.
+        pct = int(round(min(1.0, n_bound / denom) * 100))
+        doc.extraction_metrics["yield_ratio_pct"] = pct
 
 
 # =============================================================================
