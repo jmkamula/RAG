@@ -3501,14 +3501,16 @@ async def get_journey_next(
     }
 
 
-def _template_download_filename(leaf_id: str) -> str:
+def _template_download_filename(leaf_id: str, ext: str = "md") -> str:
     """req:A.5.15:access_control_policy → A_5_15_access_control_policy.md
+
     Strip the leading 'req:' prefix and convert remaining colons/dots
-    to underscores for filesystem safety.
+    to underscores for filesystem safety. The `ext` argument selects
+    the file extension (md / xlsx / future docx).
     """
     base = leaf_id[4:] if leaf_id.startswith("req:") else leaf_id
     safe = base.replace(":", "_").replace(".", "_")
-    return f"{safe}.md"
+    return f"{safe}.{ext}"
 
 
 @app.get("/api/v1/templates/{leaf_id}/download", tags=["templates"])
@@ -3517,29 +3519,31 @@ async def download_template(
     request:  Request,
     key_info: APIKeyInfo = Depends(require_api_key),
     empty:    bool = False,
+    format:   Optional[str] = "md",
 ):
-    """Download the rendered template as a markdown file attachment.
+    """Download the rendered template as a file attachment.
 
-    Same render pipeline as `GET /api/v1/templates/{leaf_id}` (tenant
-    scope + placeholder substitution + N/A MUST stripping), but
-    returns the body as a file attachment with Content-Disposition
-    suitable for save-to-disk in a browser.
+    Format options (?format=...):
+      - md (default): markdown. Same render pipeline as GET
+        /api/v1/templates/{leaf_id}; tenant identity placeholders
+        substituted, N/A MUSTs stripped, prior evidence prefilled
+        (?empty=true to opt out).
+      - xlsx: Excel workbook. Only valid for TABULAR templates
+        (those with a TABLE-COLUMNS metadata block — A.5.9 Asset
+        Inventory, 10.1 Improvement Action Register, etc.).
+        Workbook has Register / Guidance / hidden _arion_meta
+        sheets. Returns 400 for non-tabular leaves.
 
-    Filename: `{control_ref}_{slug}.md` (colons/dots → underscores).
-    e.g. req:A.5.15:access_control_policy → A_5_15_access_control_policy.md
+    Filename convention: `{control_ref}_{slug}.{ext}` (colons/dots →
+    underscores). e.g. req:A.5.9:asset_inventory → A_5_9_asset_inventory.xlsx
 
-    A header comment is prepended for in-file provenance — tenant
-    name, generation date, leaf id + version, MUSTs-in-scope ratio,
-    prefill count. Markdown renderers ignore HTML comments so the
-    header is invisible in rendered views but inspectable in source.
-
-    By default, the rendered template is PREFILLED with the tenant's
-    prior approved evidence per MUST (composed by source-rank dedup;
-    multiple distinct excerpts surfaced with attribution). Pass
-    `?empty=true` to opt out — useful when starting from scratch.
-
-    Future: docx via pandoc; not in v1.
+    See [[templates-v2-anchors-complete-2026-06-25]] for the tabular
+    templates list and the rationale for native-format downloads.
     """
+    fmt = (format or "md").lower()
+    if fmt not in ("md", "xlsx", "docx"):
+        raise HTTPException(status_code=400, detail=f"Unsupported format: {fmt}")
+
     pool = request.app.state.pg_pool
     conn = pool.getconn()
     try:
@@ -3550,14 +3554,75 @@ async def download_template(
             include_header = True,
             prefill        = not empty,
         )
+        if rendered is None:
+            raise HTTPException(
+                status_code=404,
+                detail=f"No template stored for leaf_id={leaf_id!r}.",
+            )
+
+        if fmt == "xlsx":
+            # Look up the raw on-disk template body for TABLE-COLUMNS extraction.
+            # The rendered body_md has had its frontmatter / H1 stripped when
+            # include_header=True, but TABLE-COLUMNS markers survive that.
+            from rag.templates.xlsx_renderer import render_template_xlsx
+            xlsx_bytes = render_template_xlsx(
+                pg_conn       = conn,
+                tenant_id     = key_info.tenant_id,
+                leaf_id       = leaf_id,
+                template_body = rendered.body_md,
+            )
+            if xlsx_bytes is None:
+                raise HTTPException(
+                    status_code=400,
+                    detail=(
+                        f"leaf_id={leaf_id!r} is not a tabular template "
+                        "(no TABLE-COLUMNS metadata). Use format=md instead."
+                    ),
+                )
+            from fastapi.responses import Response
+            return Response(
+                content    = xlsx_bytes,
+                media_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                headers    = {
+                    "Content-Disposition":
+                        f'attachment; filename="{_template_download_filename(leaf_id, ext="xlsx")}"',
+                    "X-Template-Version": str(rendered.template_version),
+                    "X-Template-Format":  "xlsx",
+                },
+            )
+
+        if fmt == "docx":
+            # Narrative templates only. Tabular templates have TABLE-COLUMNS
+            # metadata; .docx isn't the right format for those — surface a
+            # 400 so the tenant gets pointed at .xlsx instead.
+            if "TABLE-COLUMNS" in rendered.body_md:
+                raise HTTPException(
+                    status_code=400,
+                    detail=(
+                        f"leaf_id={leaf_id!r} is a tabular template; "
+                        ".docx is for narrative leaves. Use format=xlsx instead."
+                    ),
+                )
+            from rag.templates.docx_renderer import render_template_docx
+            docx_bytes = render_template_docx(
+                pg_conn       = conn,
+                tenant_id     = key_info.tenant_id,
+                leaf_id       = leaf_id,
+                template_body = rendered.body_md,
+            )
+            from fastapi.responses import Response
+            return Response(
+                content    = docx_bytes,
+                media_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                headers    = {
+                    "Content-Disposition":
+                        f'attachment; filename="{_template_download_filename(leaf_id, ext="docx")}"',
+                    "X-Template-Version": str(rendered.template_version),
+                    "X-Template-Format":  "docx",
+                },
+            )
     finally:
         pool.putconn(conn)
-
-    if rendered is None:
-        raise HTTPException(
-            status_code=404,
-            detail=f"No template stored for leaf_id={leaf_id!r}.",
-        )
 
     from fastapi.responses import Response
     return Response(

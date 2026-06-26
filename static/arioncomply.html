@@ -1142,6 +1142,25 @@ async function selectStage1(c, ev) {
 // Consumes structured data from /api/v1/dashboard/control/{ref}/advisory.
 // Same data path as the chat per-MUST advisory; this is the dashboard
 // surface. See memory [[per-must-advisory-2026-06-14]].
+// Mirror of scripts/generate_template_scaffolds._is_tabular_evidence —
+// MUST stay in sync. Tabular evidence_types get the .xlsx CTA; narrative
+// types only show .md.
+const _TABULAR_SUFFIXES = ['_register', '_record', '_matrix', '_log', '_inventory'];
+const _TABULAR_EXACT = new Set([
+  'register', 'statement_of_applicability', 'records_of_processing',
+  'review_record', 'responsibility_matrix', 'segregation_matrix',
+  'communication_record', 'monitoring_record', 'test_log', 'data_flow_inventory',
+  'lawful_basis_register', 'revocation_record', 'approval_record', 'audit_record',
+  'configuration_record', 'publication_record', 'change_record', 'discovery_record',
+  'risk_assessment_record', 'risk_treatment_record', 'decision_record',
+  'contact_register', 'asset_register',
+]);
+function isTabularEvidenceType(et) {
+  if (!et) return false;
+  if (_TABULAR_EXACT.has(et)) return true;
+  return _TABULAR_SUFFIXES.some(s => et.endsWith(s));
+}
+
 function renderEvidenceClassesPanel(b) {
   // Per-control evidence-class rollup. Renders a compact table:
   //   Class · n_bound / n_total · sources · template-CTA
@@ -1169,15 +1188,26 @@ function renderEvidenceClassesPanel(b) {
       const sources = (leaf.source_documents && leaf.source_documents.length)
         ? leaf.source_documents.map(esc).join(', ')
         : '<span style="color:#9C9A8E;font-style:italic">no source yet</span>';
-      const tplBadge = leaf.template_available
-        ? `<button class="ec-tpl-btn" onclick="downloadTemplateForLeaf('${attr(leaf.leaf_id)}')"
-                   title="Download template for ${attr(leaf.leaf_label)}"
-                   style="font-size:10px;padding:2px 8px;background:#fff;color:#3A382E;
-                          border:1px solid #C8C5B8;border-radius:3px;cursor:pointer;
-                          font-family:inherit;margin-left:6px">
-             📄 Template
-           </button>`
-        : '';
+      // Native-format downloads: tabular leaves → .xlsx (Register +
+      // Guidance sheets); narrative leaves → .docx (Word with proper
+      // headings + checkboxes). .md is always offered as a power-user
+      // / round-trip-safe option.
+      const isTabular = isTabularEvidenceType(cls.evidence_type);
+      const btnStyle = 'font-size:10px;padding:2px 8px;background:#fff;color:#3A382E;'
+                    + 'border:1px solid #C8C5B8;border-radius:3px;cursor:pointer;'
+                    + 'font-family:inherit;margin-left:6px';
+      let tplBadge = '';
+      if (leaf.template_available) {
+        if (isTabular) {
+          tplBadge += `<button onclick="downloadTemplateForLeaf('${attr(leaf.leaf_id)}','xlsx')"
+                                title="Download as Excel" style="${btnStyle}">📊 .xlsx</button>`;
+        } else {
+          tplBadge += `<button onclick="downloadTemplateForLeaf('${attr(leaf.leaf_id)}','docx')"
+                                title="Download as Word" style="${btnStyle}">📝 .docx</button>`;
+        }
+        tplBadge += `<button onclick="downloadTemplateForLeaf('${attr(leaf.leaf_id)}','md')"
+                              title="Download as Markdown" style="${btnStyle}">📄 .md</button>`;
+      }
       leafLines += `<div style="font-size:11px;color:#5C5A4F;margin-top:2px;padding-left:18px">
         ${esc(leaf.leaf_label)} · ${leaf.musts_bound}/${leaf.musts_total} · sources: ${sources}${tplBadge}
       </div>`;
@@ -1219,12 +1249,16 @@ function renderEvidenceClassesPanel(b) {
   </div>`;
 }
 
-async function downloadTemplateForLeaf(leafId) {
-  // GET /api/v1/templates/{leaf_id}/download — renders the starter
-  // template (markdown) with tenant identity placeholders substituted
-  // and prior approved evidence prefilled into each MUST's edit zone.
-  // The browser handles the Content-Disposition; we just navigate.
-  const url = `/api/v1/templates/${encodeURIComponent(leafId)}/download`;
+async function downloadTemplateForLeaf(leafId, fmt) {
+  // GET /api/v1/templates/{leaf_id}/download?format={md|xlsx}.
+  // - md (default): markdown with tenant placeholders substituted and
+  //   prior approved evidence prefilled into each MUST's edit zone.
+  // - xlsx: native Excel workbook for tabular templates (registers,
+  //   matrices, etc.) — Register sheet + Guidance sheet + hidden
+  //   _arion_meta. Only valid for tabular evidence types; backend
+  //   returns 400 for narrative leaves.
+  fmt = fmt || 'md';
+  const url = `/api/v1/templates/${encodeURIComponent(leafId)}/download?format=${encodeURIComponent(fmt)}`;
   try {
     const resp = await fetch(url, { headers: { 'X-API-Key': API_KEY } });
     if (!resp.ok) {
@@ -1232,13 +1266,15 @@ async function downloadTemplateForLeaf(leafId) {
       alert(`Template download failed: ${resp.status} ${t.slice(0,200)}`);
       return;
     }
-    const md = await resp.text();
-    // Trigger browser download with the server's suggested filename if
-    // available, else fall back to the leaf id slug.
+    const buf = await resp.arrayBuffer();
+    // Resolve filename + media type
     const cd = resp.headers.get('Content-Disposition') || '';
     const m  = /filename="?([^"]+)"?/i.exec(cd);
-    const filename = m ? m[1] : `${leafId.replace(/[:\/]/g, '_')}.md`;
-    const blob = new Blob([md], { type: 'text/markdown' });
+    const filename = m ? m[1] : `${leafId.replace(/[:\/]/g, '_')}.${fmt}`;
+    const ct = resp.headers.get('Content-Type') || (fmt === 'xlsx'
+      ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      : 'text/markdown');
+    const blob = new Blob([buf], { type: ct });
     const dlUrl = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = dlUrl;
