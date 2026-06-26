@@ -166,10 +166,26 @@ def _strip_na_sections(
 def _substitute_placeholders(
     body_md:    str,
     tenant_row: dict,
+    profile:    Optional[dict] = None,
 ) -> tuple[str, int]:
-    """Replace <<TENANT_NAME>>, <<TENANT_SECTOR>>, <<TENANT_COUNTRY>>,
-    <<TENANT_SHORT>>, <<GENERATED_DATE>> with values from the tenants
-    table. Returns (new_body, n_filled).
+    """Replace placeholders with tenant-specific values.
+
+    Two sources:
+      1. `tenants` table — name / short_code / sector / country /
+         industry. Fixed schema.
+      2. `tenant_profile` (k/v) — open-ended set covering CEO_NAME,
+         CISO_NAME, DPO_NAME, ISMS_MANAGER_NAME, ISMS_OWNER_NAME,
+         HR_PARTNER_NAME, AWARENESS_LEAD_NAME, REGISTERED_ADDRESS,
+         COMPANY_NUMBER, TENANT_DOMAIN, PRODUCT_OR_SERVICE,
+         APPROVAL_DATE, NEXT_REVIEW_DATE, etc.
+
+    Placeholder convention: `<<UPPER_SNAKE_NAME>>` ↔
+    `profile_key = 'upper_snake_name'.lower()`. Unknown placeholders
+    (not in `tenants` and not in `tenant_profile`) stay as literal
+    `<<NAME>>` text — tenant can fill them by hand or add a profile
+    row.
+
+    Returns (new_body, n_filled).
     """
     today = _dt.date.today().isoformat()
     fills = {
@@ -180,6 +196,14 @@ def _substitute_placeholders(
         "<<TENANT_INDUSTRY>>":(tenant_row.get("industry") or "").strip()   or "<<TENANT_INDUSTRY>>",
         "<<GENERATED_DATE>>": today,
     }
+    if profile:
+        for k, v in profile.items():
+            placeholder = f"<<{k.upper()}>>"
+            value = (v or "").strip()
+            if value:
+                # `tenants` table wins on key collision (e.g.
+                # tenant_profile shouldn't override TENANT_NAME).
+                fills.setdefault(placeholder, value)
     n_filled = 0
     for marker, value in fills.items():
         if value != marker and marker in body_md:
@@ -587,6 +611,18 @@ def render_template(
             )) if t_row else {}
         )
 
+        # Tenant profile (key/value) for open-ended placeholders. schema_v49.
+        # RLS scopes per tenant; missing rows just leave placeholders intact.
+        cur.execute(
+            "SELECT set_config('app.tenant_id', %s::text, true)", (tenant_id,),
+        )
+        cur.execute(
+            "SELECT profile_key, profile_value FROM tenant_profile "
+            " WHERE tenant_id = %s::uuid",
+            (tenant_id,),
+        )
+        tenant_profile = {k: v for k, v in cur.fetchall()}
+
         # N/A MUSTs from tenant_must_overrides (applies = FALSE)
         cur.execute(
             "SELECT must_id FROM tenant_must_overrides "
@@ -642,7 +678,7 @@ def render_template(
     if prefill:
         body, n_tables_prefilled = _prefill_table_zones(body, pg_conn, tenant_id)
 
-    body, n_filled = _substitute_placeholders(body, tenant_row)
+    body, n_filled = _substitute_placeholders(body, tenant_row, profile=tenant_profile)
 
     if include_header:
         # Two-layer header:

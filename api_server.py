@@ -3639,6 +3639,230 @@ async def download_template(
     )
 
 
+# ── Tenant profile key catalog ───────────────────────────────────────────────
+# Each entry: (key, group, label, description). Drives both the GET
+# response and the admin UI form. To add a new placeholder, add a row
+# here + (optionally) reference it from one of the templates in
+# db/templates/*.md. Renderer accepts any key; this catalog just gives
+# the UI human-grade copy for the known set.
+
+_TENANT_PROFILE_KEYS: list[dict] = [
+    # People
+    {"key": "ceo_name",            "group": "People",
+     "label": "CEO name",
+     "description": "Chief Executive Officer who signs off on top-level policies."},
+    {"key": "ciso_name",           "group": "People",
+     "label": "CISO name",
+     "description": "Chief Information Security Officer leading security operations."},
+    {"key": "dpo_name",            "group": "People",
+     "label": "DPO name",
+     "description": "Data Protection Officer (or equivalent privacy lead)."},
+    {"key": "isms_manager_name",   "group": "People",
+     "label": "ISMS Manager",
+     "description": "Day-to-day ISMS operator (per Clause 5.3a)."},
+    {"key": "isms_owner_name",     "group": "People",
+     "label": "ISMS Owner",
+     "description": "Top-management accountable owner of the ISMS (often CEO)."},
+    {"key": "hr_partner_name",     "group": "People",
+     "label": "HR partner",
+     "description": "HR contact for personnel-security workflows (A.6 controls)."},
+    {"key": "awareness_lead_name", "group": "People",
+     "label": "Awareness programme lead",
+     "description": "Lead for A.6.3 information-security awareness + training."},
+
+    # Org metadata
+    {"key": "registered_address",  "group": "Organisation",
+     "label": "Registered office address",
+     "description": "Legal registered address — appears in policy headers + privacy notices."},
+    {"key": "company_number",      "group": "Organisation",
+     "label": "Company number",
+     "description": "Registered company / business number (e.g. UK Companies House)."},
+    {"key": "tenant_domain",       "group": "Organisation",
+     "label": "Primary domain",
+     "description": "Public domain used in policy email addresses (dpo@…, ciso@…)."},
+
+    # Business context
+    {"key": "product_or_service",  "group": "Business",
+     "label": "Primary product / service",
+     "description": "Short description used in scope-statements and customer-facing docs."},
+
+    # Dates
+    {"key": "approval_date",       "group": "Dates",
+     "label": "Default approval date",
+     "description": "Default 'approved on' date for newly-rendered policies (override per doc)."},
+    {"key": "next_review_date",    "group": "Dates",
+     "label": "Default next review date",
+     "description": "Default 'next planned review' — typically approval_date + 365d."},
+]
+_TENANT_PROFILE_KEY_SET = {entry["key"] for entry in _TENANT_PROFILE_KEYS}
+
+
+def _count_template_references_per_key() -> dict[str, int]:
+    """Scan the templates table once per request and count how many
+    distinct templates reference each profile_key (via its
+    <<UPPER_SNAKE>> placeholder).
+
+    Surfaces the leverage of each profile field: "Used in 7 templates"
+    shows the tenant why filling once propagates everywhere. Cheap
+    enough (~645 templates × short regex scan) that we don't bother
+    caching for now.
+    """
+    pool = app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        with conn.cursor() as cur:
+            # Templates table is global (not tenant-scoped), no RLS dance needed.
+            cur.execute("SELECT leaf_id, body_md FROM templates")
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+    counts: dict[str, int] = {entry["key"]: 0 for entry in _TENANT_PROFILE_KEYS}
+    for leaf_id, body in rows:
+        if not body:
+            continue
+        # Find all <<UPPER_SNAKE>> placeholders in this template
+        seen_in_this_template: set[str] = set()
+        for m in _re.finditer(r"<<([A-Z][A-Z0-9_]*)>>", body):
+            seen_in_this_template.add(m.group(1).lower())
+        # Increment per known key seen at least once in this template
+        for key in seen_in_this_template & _TENANT_PROFILE_KEY_SET:
+            counts[key] = counts.get(key, 0) + 1
+    return counts
+
+
+@app.get("/api/v1/tenant/profile", tags=["templates"])
+async def get_tenant_profile(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Return the tenant's profile key/value pairs used for template
+    placeholder substitution (CEO_NAME, DPO_NAME, REGISTERED_ADDRESS,
+    APPROVAL_DATE, etc. — see schema_v49 + rag/templates/renderer.py).
+
+    Returns the FULL set of known placeholder keys with human-grade
+    label + description + per-key template reference count, so the
+    admin UI can render a complete form without merging metadata
+    client-side. Keys with no stored value return as empty strings.
+    Unknown placeholders in the body stay as `<<NAME>>` literals when
+    no profile value exists.
+
+    See [[template-tenant-profile-2026-06-26]] for the key set rationale.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                "SELECT profile_key, profile_value, updated_at "
+                "  FROM tenant_profile WHERE tenant_id = %s::uuid",
+                (key_info.tenant_id,),
+            )
+            stored = {r[0]: {"value": r[1], "updated_at": r[2].isoformat() if r[2] else None}
+                      for r in cur.fetchall()}
+    finally:
+        pool.putconn(conn)
+
+    refs = _count_template_references_per_key()
+
+    # Compose response: known keys (with metadata) followed by extras
+    out_rows: list[dict] = []
+    for entry in _TENANT_PROFILE_KEYS:
+        k = entry["key"]
+        out_rows.append({
+            "key":         k,
+            "value":       stored.get(k, {}).get("value", ""),
+            "updated_at":  stored.get(k, {}).get("updated_at"),
+            "known":       True,
+            "group":       entry["group"],
+            "label":       entry["label"],
+            "description": entry["description"],
+            "reference_count": refs.get(k, 0),
+        })
+    for k in sorted(stored.keys()):
+        if k in _TENANT_PROFILE_KEY_SET:
+            continue
+        out_rows.append({
+            "key":         k,
+            "value":       stored[k]["value"],
+            "updated_at":  stored[k]["updated_at"],
+            "known":       False,
+            "group":       "Other",
+            "label":       k.replace("_", " ").title(),
+            "description": "Custom placeholder (no catalog metadata).",
+            "reference_count": 0,
+        })
+    return {
+        "tenant_id": key_info.tenant_id,
+        "profile":   out_rows,
+    }
+
+
+@app.put("/api/v1/tenant/profile", tags=["templates"])
+async def put_tenant_profile(
+    request:  Request,
+    payload:  dict,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Upsert tenant profile key/value pairs.
+
+    Body shape:
+      {
+        "profile": [
+          {"key": "ceo_name",       "value": "Jane Doe"},
+          {"key": "dpo_name",       "value": "Bob Smith"},
+          {"key": "approval_date",  "value": "2026-01-15"},
+          ...
+        ]
+      }
+
+    Empty `value` (after strip) deletes the row. Unknown keys are
+    permitted — the renderer substitutes any key it finds.
+
+    Tenant-scoped via RLS; caller's user uuid is recorded on the row.
+    """
+    items = (payload or {}).get("profile", []) or []
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    n_upsert = n_delete = 0
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            for item in items:
+                key   = (item.get("key") or "").strip().lower()
+                value = (item.get("value") or "").strip()
+                if not key:
+                    continue
+                # Defensive: only allow keys matching the schema's regex
+                if not _re.match(r"^[a-z][a-z0-9_]*$", key):
+                    continue
+                if not value:
+                    cur.execute(
+                        "DELETE FROM tenant_profile "
+                        " WHERE tenant_id = %s::uuid AND profile_key = %s",
+                        (key_info.tenant_id, key),
+                    )
+                    n_delete += 1
+                else:
+                    cur.execute(
+                        """
+                        INSERT INTO tenant_profile
+                            (tenant_id, profile_key, profile_value, updated_by)
+                        VALUES (%s::uuid, %s, %s, %s::uuid)
+                        ON CONFLICT (tenant_id, profile_key) DO UPDATE SET
+                            profile_value = EXCLUDED.profile_value,
+                            updated_at    = now(),
+                            updated_by    = EXCLUDED.updated_by
+                        """,
+                        (key_info.tenant_id, key, value, key_info.user_id),
+                    )
+                    n_upsert += 1
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+    return {"upserted": n_upsert, "deleted": n_delete}
+
+
 @app.get("/api/v1/templates/{leaf_id}", tags=["templates"])
 async def get_template(
     leaf_id:  str,

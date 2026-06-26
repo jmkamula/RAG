@@ -292,6 +292,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <button class="nav-item" id="nav-docs" onclick="setMode('docs')">
       <i class="ti ti-cloud-upload" aria-hidden="true"></i> Documents
     </button>
+    <button class="nav-item" id="nav-profile" onclick="setMode('profile')">
+      <i class="ti ti-id-badge-2" aria-hidden="true"></i> Profile
+    </button>
 
     <div class="sidebar-divider"></div>
 
@@ -354,6 +357,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
 
+    <!-- Profile toolbar -->
+    <div class="main-toolbar" id="toolbar-profile" style="display:none">
+      <div>
+        <div class="main-title">Tenant profile</div>
+        <div class="main-sub">Fill once — names + dates + addresses propagate to every downloaded template</div>
+      </div>
+      <div>
+        <button class="btn-ask" onclick="saveTenantProfile()" id="btn-profile-save">
+          <i class="ti ti-device-floppy"></i> Save profile
+        </button>
+      </div>
+    </div>
+
     <!-- Dashboard body -->
     <div class="main-body" id="body-dashboard" style="padding:0">
       <div class="dash-wrap" id="dash-wrap">
@@ -411,6 +427,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             multiple onchange="handleFileSelect(event)">
         </div>
         <div class="upload-list" id="upload-list"></div>
+      </div>
+    </div>
+
+    <!-- Profile body -->
+    <div class="main-body" id="body-profile" style="display:none">
+      <div id="profile-wrap" style="max-width:780px;margin:20px auto;padding:0 20px">
+        <div class="empty"><i class="ti ti-loader-2" aria-hidden="true"></i><p>Loading profile…</p></div>
       </div>
     </div>
 
@@ -554,7 +577,7 @@ async function apiForm(path, formData) {
 // ── Mode switching ──
 function setMode(m) {
   mode = m;
-  ['dashboard','queue','chat','docs'].forEach(x => {
+  ['dashboard','queue','chat','docs','profile'].forEach(x => {
     document.getElementById('nav-'+x).classList.toggle('active', x===m);
     document.getElementById('toolbar-'+x).style.display = x===m ? '' : 'none';
     document.getElementById('body-'+x).style.display = x===m ? '' : 'none';
@@ -565,6 +588,126 @@ function setMode(m) {
   closeDetail();
   if (m === 'queue')     loadQueue();
   if (m === 'dashboard') loadDashboard();
+  if (m === 'profile')   loadProfile();
+}
+
+// ── Tenant Profile ───────────────────────────────────────────────────────
+// Form for the placeholder values that get substituted into every
+// downloaded template (xlsx / docx / md). See backend
+// [[template-tenant-profile-2026-06-26]].
+
+async function loadProfile() {
+  const wrap = document.getElementById('profile-wrap');
+  wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading profile…</p></div>';
+  try {
+    const d = await api('/api/v1/tenant/profile');
+    renderProfile(d.profile || []);
+  } catch (e) {
+    wrap.innerHTML = `<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn’t load profile: ${escapeHtml(e.message)}</p></div>`;
+  }
+}
+
+function renderProfile(rows) {
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');
+  const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  const wrap = document.getElementById('profile-wrap');
+
+  // Group rows by `group` field — preserves backend order within each group
+  const groups = [];
+  const groupIx = {};
+  for (const r of rows) {
+    const g = r.group || 'Other';
+    if (groupIx[g] === undefined) {
+      groupIx[g] = groups.length;
+      groups.push({name: g, rows: []});
+    }
+    groups[groupIx[g]].rows.push(r);
+  }
+
+  // Stats — empty vs filled
+  const n_total  = rows.length;
+  const n_filled = rows.filter(r => (r.value || '').trim()).length;
+
+  let html = `
+    <div style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;padding:14px 18px;margin-bottom:16px">
+      <div style="font-size:13px;color:#3A382E;font-weight:600">Profile completeness</div>
+      <div style="margin-top:6px;font-size:12px;color:#5C5A4F">
+        ${n_filled} of ${n_total} fields filled. Fields with values flow into every
+        downloaded template (Word, Excel, Markdown). Empty fields stay as
+        <code style="background:#F0EDE3;padding:1px 4px;border-radius:3px;font-size:11px">&lt;&lt;PLACEHOLDER&gt;&gt;</code>
+        text in the rendered output — your auditor will see them.
+      </div>
+    </div>
+  `;
+
+  for (const g of groups) {
+    html += `<div style="margin-bottom:18px">
+      <div style="font-size:11px;letter-spacing:0.6px;text-transform:uppercase;color:#9C9A8E;font-weight:600;margin-bottom:6px;padding-left:2px">${esc(g.name)}</div>
+      <div style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;overflow:hidden">`;
+    for (const r of g.rows) {
+      const isEmpty = !((r.value || '').trim());
+      const refTag = r.reference_count > 0
+        ? `<span style="color:#5C5A4F;font-size:11px">Used in ${r.reference_count} template${r.reference_count===1?'':'s'}</span>`
+        : `<span style="color:#9C9A8E;font-size:11px;font-style:italic">No template references yet</span>`;
+      html += `<div class="profile-row" style="padding:10px 14px;border-bottom:1px solid #F0EDE3">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <div style="font-size:12px;color:#3A382E;font-weight:600">
+            ${esc(r.label)}
+            ${isEmpty ? '<span style="color:#9C2E2E;font-size:11px;font-weight:400;margin-left:6px">empty</span>' : ''}
+          </div>
+          ${refTag}
+        </div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:2px">${esc(r.description)}</div>
+        <input type="text" class="profile-input" data-key="${attr(r.key)}"
+               placeholder="(empty — placeholder will appear literally in templates)"
+               value="${attr(r.value)}"
+               style="width:100%;margin-top:6px;padding:7px 10px;
+                      font-size:12px;font-family:inherit;
+                      background:#FAF8F2;border:1px solid ${isEmpty ? '#E8B5B5' : '#E8E5DA'};
+                      border-radius:4px;color:#3A382E;box-sizing:border-box" />
+        <div style="font-size:10px;color:#9C9A8E;margin-top:3px;font-family:Consolas,monospace">
+          ↳ replaces <code>&lt;&lt;${esc(r.key.toUpperCase())}&gt;&gt;</code> in templates
+        </div>
+      </div>`;
+    }
+    html += `</div></div>`;
+  }
+  wrap.innerHTML = html;
+}
+
+async function saveTenantProfile() {
+  const btn = document.getElementById('btn-profile-save');
+  const inputs = document.querySelectorAll('.profile-input');
+  const items = [];
+  inputs.forEach(el => {
+    items.push({
+      key:   el.dataset.key,
+      value: el.value,
+    });
+  });
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader-2"></i> Saving…';
+  try {
+    const resp = await fetch('/api/v1/tenant/profile', {
+      method:  'PUT',
+      headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
+      body:    JSON.stringify({profile: items}),
+    });
+    if (!resp.ok) {
+      const t = await resp.text();
+      alert(`Save failed: ${resp.status} ${t.slice(0,200)}`);
+    } else {
+      const d = await resp.json();
+      btn.innerHTML = `<i class="ti ti-check"></i> Saved (${d.upserted} updated, ${d.deleted} cleared)`;
+      setTimeout(() => { btn.innerHTML = '<i class="ti ti-device-floppy"></i> Save profile'; btn.disabled = false; }, 2000);
+      // Reload to refresh empty/filled indicators
+      loadProfile();
+    }
+  } catch (e) {
+    alert(`Save error: ${e.message}`);
+  } finally {
+    btn.disabled = false;
+  }
 }
 
 // ── Dashboard ──
