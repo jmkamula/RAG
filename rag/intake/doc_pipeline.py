@@ -361,13 +361,15 @@ class DocumentPipeline:
                 self._update_status(upload_id, "processing", 0)
 
             # ── Templated-xlsx tenant cross-check ─────────────────────
-            # If the reader detected our _arion_meta sheet, validate the
-            # embedded tenant_id matches the uploading tenant before the
-            # extractor binds findings. Mismatch → strip the meta + log
-            # warning so the file falls through to the generic workbook
-            # lane (which will likely produce zero findings — safe
-            # default). See [[template-tenant-profile-2026-06-26]] +
-            # the xlsx round-trip arc.
+            # If the reader detected our template (via _arion_meta or
+            # filename-fallback), validate the embedded tenant_id (when
+            # present) matches the uploading tenant. Mismatch → strip
+            # the meta + log warning so the file falls through to the
+            # generic workbook lane.
+            #
+            # Filename-fallback path has tenant_id='' (no source of
+            # truth for it once _arion_meta is gone); auth + RLS still
+            # scope the upload to the uploading tenant correctly.
             tx_meta = doc.extraction_metrics.get("templated_xlsx_meta")
             if tx_meta:
                 meta_tenant = tx_meta.get("tenant_id") or ""
@@ -379,6 +381,12 @@ class DocumentPipeline:
                         f"be processed via generic workbook lane."
                     )
                     doc.extraction_metrics.pop("templated_xlsx_meta", None)
+                elif tx_meta.get("source") == "filename_fallback":
+                    logger.info(
+                        f"templated_xlsx filename-fallback on {file_name}: "
+                        f"_arion_meta missing; resolved leaf_id="
+                        f"{tx_meta.get('leaf_id')!r} via filename convention."
+                    )
 
             t3 = time.time()
             findings = extract(doc, controls, self.api_key)

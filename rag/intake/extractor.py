@@ -479,6 +479,7 @@ def _extract_templated_xlsx(doc: ParsedDocument) -> Optional[list[DocumentFindin
 
     # Telemetry
     doc.extraction_metrics["templated_xlsx_leaf_id"]           = meta["leaf_id"]
+    doc.extraction_metrics["templated_xlsx_source"]            = meta.get("source", "meta")
     doc.extraction_metrics["templated_xlsx_columns"]           = len(columns)
     doc.extraction_metrics["templated_xlsx_columns_bound"]     = sum(col_has_data)
     doc.extraction_metrics["templated_xlsx_register_rows"]     = n_rows_captured
