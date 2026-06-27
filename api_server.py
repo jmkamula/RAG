@@ -3863,6 +3863,501 @@ async def put_tenant_profile(
     return {"upserted": n_upsert, "deleted": n_delete}
 
 
+# =============================================================================
+# Cite mode — external evidence (schema_v50)
+# =============================================================================
+# Per [[product-principle-evidence-stored-vs-cited]]: tenants whose evidence
+# lives in source systems (Odoo HR / Okta / ServiceNow / OneTrust) cite the
+# source rather than upload duplicate data. ArionComply tracks WHERE the
+# evidence lives + freshness + verification gates.
+#
+# Three table groups:
+#   1. tenant_external_system   — system registry (one per (tenant, system))
+#   2. external_evidence_source  — per-MUST cite rows (one per (tenant, must, system))
+#   3. external_evidence_verification_log — append-only verification history
+#
+# Engine treats fresh cites as evidence-present (see
+# rag/posture/leaf_evaluators._fetch_recognised_cites).
+
+
+@app.get("/api/v1/tenant/external-systems", tags=["templates"])
+async def list_external_systems(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """List the tenant's registered external evidence systems.
+
+    Each row: which system, where to look, who owns it, default cadence,
+    and which evidence_types it offers for as a cite source.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT id::text, system_name, system_url,
+                       owner_user_id::text, default_cadence_days,
+                       covers_evidence_types, created_at, updated_at
+                  FROM tenant_external_system
+                 WHERE tenant_id = %s::uuid AND is_active = TRUE
+                 ORDER BY system_name
+                """,
+                (key_info.tenant_id,),
+            )
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+    return {
+        "tenant_id": key_info.tenant_id,
+        "systems": [
+            {
+                "id":                    r[0],
+                "system_name":           r[1],
+                "system_url":            r[2] or "",
+                "owner_user_id":         r[3],
+                "default_cadence_days":  r[4],
+                "covers_evidence_types": r[5] or [],
+                "created_at":            r[6].isoformat() if r[6] else None,
+                "updated_at":            r[7].isoformat() if r[7] else None,
+            }
+            for r in rows
+        ],
+    }
+
+
+@app.put("/api/v1/tenant/external-systems", tags=["templates"])
+async def upsert_external_system(
+    request:  Request,
+    payload:  dict,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Create or update an external system entry.
+
+    Body:
+      {
+        "id":                    null | "<uuid>",   // null = create new
+        "system_name":           "Odoo HR",
+        "system_url":            "https://odoo.arion.com/hr",
+        "owner_user_id":         "<uuid>" | null,
+        "default_cadence_days":  365,
+        "covers_evidence_types": ["register", "record"]
+      }
+
+    Returns the saved row (with `id` populated on create).
+    """
+    name    = (payload.get("system_name") or "").strip()
+    url     = (payload.get("system_url") or "").strip() or None
+    owner   = payload.get("owner_user_id") or None
+    cadence = int(payload.get("default_cadence_days") or 365)
+    covers  = payload.get("covers_evidence_types") or []
+    sys_id  = payload.get("id")
+    if not name:
+        raise HTTPException(status_code=400, detail="system_name is required")
+    if not isinstance(covers, list):
+        raise HTTPException(status_code=400, detail="covers_evidence_types must be a list")
+    cadence = max(1, min(3650, cadence))
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            if sys_id:
+                cur.execute(
+                    """
+                    UPDATE tenant_external_system
+                       SET system_name           = %s,
+                           system_url            = %s,
+                           owner_user_id         = %s::uuid,
+                           default_cadence_days  = %s,
+                           covers_evidence_types = %s,
+                           updated_at            = now(),
+                           updated_by            = %s::uuid
+                     WHERE id = %s::uuid AND tenant_id = %s::uuid
+                     RETURNING id::text
+                    """,
+                    (name, url, owner, cadence, covers, key_info.user_id,
+                     sys_id, key_info.tenant_id),
+                )
+            else:
+                cur.execute(
+                    """
+                    INSERT INTO tenant_external_system
+                        (tenant_id, system_name, system_url, owner_user_id,
+                         default_cadence_days, covers_evidence_types,
+                         created_by, updated_by)
+                    VALUES (%s::uuid, %s, %s, %s::uuid, %s, %s, %s::uuid, %s::uuid)
+                    RETURNING id::text
+                    """,
+                    (key_info.tenant_id, name, url, owner, cadence, covers,
+                     key_info.user_id, key_info.user_id),
+                )
+            row = cur.fetchone()
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+    if not row:
+        raise HTTPException(status_code=404, detail="system not found for this tenant")
+    return {"id": row[0]}
+
+
+@app.delete("/api/v1/tenant/external-systems/{system_id}", tags=["templates"])
+async def delete_external_system(
+    system_id: str,
+    request:   Request,
+    key_info:  APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Soft-delete an external system entry. Any cites referencing it
+    will also be soft-deleted (so the engine stops counting them)."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                "UPDATE tenant_external_system SET is_active = FALSE, "
+                "updated_at = now(), updated_by = %s::uuid "
+                "WHERE id = %s::uuid AND tenant_id = %s::uuid",
+                (key_info.user_id, system_id, key_info.tenant_id),
+            )
+            cur.execute(
+                "UPDATE external_evidence_source SET is_active = FALSE, "
+                "updated_at = now(), updated_by = %s::uuid "
+                "WHERE system_id = %s::uuid AND tenant_id = %s::uuid",
+                (key_info.user_id, system_id, key_info.tenant_id),
+            )
+            n_cites = cur.rowcount
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+    return {"system_id": system_id, "cites_disabled": n_cites}
+
+
+@app.get("/api/v1/tenant/cites/leaf/{leaf_id:path}", tags=["templates"])
+async def list_cites_for_leaf(
+    leaf_id:  str,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """List external evidence cites for a leaf, grouped by source system.
+
+    Each group: which system, which MUSTs it covers, last verified, next
+    review due, current freshness state (fresh / yellow / red).
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT s.id::text, s.system_name, s.system_url,
+                       s.default_cadence_days,
+                       ees.must_id, ees.cadence_days, ees.per_must_note,
+                       ees.last_verified_at, ees.next_review_due
+                  FROM external_evidence_source ees
+                  JOIN tenant_external_system s ON s.id = ees.system_id
+                 WHERE ees.tenant_id = %s::uuid
+                   AND ees.leaf_id   = %s
+                   AND ees.is_active = TRUE
+                   AND s.is_active   = TRUE
+                 ORDER BY s.system_name, ees.must_id
+                """,
+                (key_info.tenant_id, leaf_id),
+            )
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+
+    # Group by system_id
+    from rag.posture.cite_mode import is_cite_fresh
+    groups: dict = {}
+    for r in rows:
+        sid = r[0]
+        if sid not in groups:
+            groups[sid] = {
+                "system_id":            sid,
+                "system_name":          r[1],
+                "system_url":           r[2] or "",
+                "default_cadence_days": r[3],
+                "musts":                [],
+            }
+        groups[sid]["musts"].append({
+            "must_id":          r[4],
+            "cadence_days":     r[5],
+            "per_must_note":    r[6] or "",
+            "last_verified_at": r[7].isoformat() if r[7] else None,
+            "next_review_due":  r[8].isoformat() if r[8] else None,
+            "is_fresh":         is_cite_fresh(r[7], r[5]),
+        })
+    return {
+        "tenant_id": key_info.tenant_id,
+        "leaf_id":   leaf_id,
+        "groups":    list(groups.values()),
+    }
+
+
+@app.put("/api/v1/tenant/cites/leaf/{leaf_id:path}/source/{system_id}", tags=["templates"])
+async def upsert_cites_for_leaf_source(
+    leaf_id:   str,
+    system_id: str,
+    request:   Request,
+    payload:   dict,
+    key_info:  APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Create or sync cites for (leaf, source). Per-MUST atomic data
+    model; UI passes `covered_must_ids[]` from the checkbox form.
+
+    Body:
+      {
+        "covered_must_ids":  ["item:A.5.18:reg_authoriser", ...],
+        "cadence_days":      180,                       // optional override
+        "per_must_notes":    {"item:A.5.18:...": "captured in Azure AD"}, // optional
+      }
+
+    Backend syncs:
+      - For each id in covered_must_ids: insert if missing, update note if changed
+      - For each existing active row for (leaf, system) NOT in covered_must_ids:
+        soft-delete (tenant unchecked it)
+    """
+    covered_ids = payload.get("covered_must_ids") or []
+    if not isinstance(covered_ids, list):
+        raise HTTPException(status_code=400, detail="covered_must_ids must be a list")
+    cadence  = payload.get("cadence_days")
+    notes    = payload.get("per_must_notes") or {}
+    if not isinstance(notes, dict):
+        raise HTTPException(status_code=400, detail="per_must_notes must be an object")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            # Resolve cadence default from system if not supplied
+            if cadence is None:
+                cur.execute(
+                    "SELECT default_cadence_days FROM tenant_external_system "
+                    " WHERE id = %s::uuid AND tenant_id = %s::uuid",
+                    (system_id, key_info.tenant_id),
+                )
+                row = cur.fetchone()
+                if not row:
+                    raise HTTPException(status_code=404, detail="system not found")
+                cadence = int(row[0])
+            cadence = max(1, min(3650, int(cadence)))
+
+            # Fetch current active rows for this (leaf, system)
+            cur.execute(
+                """
+                SELECT must_id FROM external_evidence_source
+                 WHERE tenant_id = %s::uuid AND leaf_id = %s AND system_id = %s::uuid
+                   AND is_active = TRUE
+                """,
+                (key_info.tenant_id, leaf_id, system_id),
+            )
+            existing = {r[0] for r in cur.fetchall()}
+            wanted   = set(covered_ids)
+
+            to_insert = wanted - existing
+            to_remove = existing - wanted
+            to_update = wanted & existing
+
+            n_insert = n_update = n_remove = 0
+
+            for mid in to_insert:
+                cur.execute(
+                    """
+                    INSERT INTO external_evidence_source
+                        (tenant_id, must_id, leaf_id, system_id,
+                         cadence_days, per_must_note, created_by, updated_by)
+                    VALUES (%s::uuid, %s, %s, %s::uuid, %s, %s, %s::uuid, %s::uuid)
+                    """,
+                    (key_info.tenant_id, mid, leaf_id, system_id, cadence,
+                     notes.get(mid), key_info.user_id, key_info.user_id),
+                )
+                n_insert += 1
+
+            for mid in to_update:
+                cur.execute(
+                    """
+                    UPDATE external_evidence_source
+                       SET cadence_days  = %s,
+                           per_must_note = %s,
+                           is_active     = TRUE,
+                           updated_at    = now(),
+                           updated_by    = %s::uuid
+                     WHERE tenant_id = %s::uuid AND must_id = %s AND system_id = %s::uuid
+                    """,
+                    (cadence, notes.get(mid), key_info.user_id,
+                     key_info.tenant_id, mid, system_id),
+                )
+                n_update += 1
+
+            for mid in to_remove:
+                cur.execute(
+                    """
+                    UPDATE external_evidence_source
+                       SET is_active  = FALSE,
+                           updated_at = now(),
+                           updated_by = %s::uuid
+                     WHERE tenant_id = %s::uuid AND must_id = %s AND system_id = %s::uuid
+                    """,
+                    (key_info.user_id, key_info.tenant_id, mid, system_id),
+                )
+                n_remove += 1
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+
+    return {
+        "leaf_id":   leaf_id,
+        "system_id": system_id,
+        "inserted":  n_insert,
+        "updated":   n_update,
+        "removed":   n_remove,
+    }
+
+
+@app.post(
+    "/api/v1/tenant/cites/leaf/{leaf_id:path}/source/{system_id}/verify",
+    tags=["templates"],
+)
+async def verify_cites_for_leaf_source(
+    leaf_id:   str,
+    system_id: str,
+    request:   Request,
+    payload:   dict,
+    key_info:  APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Record a verification attestation for (leaf, source). Updates
+    last_verified_at on ALL active cite rows in the group + appends one
+    row to external_evidence_verification_log.
+
+    Body:
+      {
+        "changes_detected": "5 new employees onboarded; ...",  // REQUIRED
+        "note":             "additional free-text",            // optional
+        "sample_upload_id": "<uuid>",                          // optional
+      }
+
+    The `changes_detected` field is the audit-grade payload — forces
+    real review rather than rubber-stamp verification.
+    """
+    changes = (payload.get("changes_detected") or "").strip()
+    if not changes:
+        raise HTTPException(
+            status_code=400,
+            detail="changes_detected is required — describe what changed "
+                   "since last verification (or 'no changes' explicitly).",
+        )
+    note   = (payload.get("note") or "").strip() or None
+    sample = payload.get("sample_upload_id") or None
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            # Update last_verified_at + next_review_due on all active cites
+            # in this (tenant, leaf, system) group. Compute next_review_due
+            # in SQL via interval arithmetic.
+            cur.execute(
+                """
+                UPDATE external_evidence_source
+                   SET last_verified_at = now(),
+                       next_review_due  = now() + make_interval(days => cadence_days),
+                       updated_at       = now(),
+                       updated_by       = %s::uuid
+                 WHERE tenant_id = %s::uuid
+                   AND leaf_id   = %s
+                   AND system_id = %s::uuid
+                   AND is_active = TRUE
+                RETURNING id
+                """,
+                (key_info.user_id, key_info.tenant_id, leaf_id, system_id),
+            )
+            updated_ids = cur.fetchall()
+            if not updated_ids:
+                raise HTTPException(
+                    status_code=404,
+                    detail="no active cites found for this (leaf, source)",
+                )
+
+            # Append the verification log row
+            cur.execute(
+                """
+                INSERT INTO external_evidence_verification_log
+                    (tenant_id, system_id, leaf_id, verified_by,
+                     changes_detected, sample_upload_id, note,
+                     musts_covered_count)
+                VALUES (%s::uuid, %s::uuid, %s, %s::uuid, %s, %s::uuid, %s, %s)
+                RETURNING id::text, verified_at
+                """,
+                (key_info.tenant_id, system_id, leaf_id, key_info.user_id,
+                 changes, sample, note, len(updated_ids)),
+            )
+            log_row = cur.fetchone()
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+    return {
+        "verification_log_id": log_row[0],
+        "verified_at":         log_row[1].isoformat(),
+        "musts_covered":       len(updated_ids),
+    }
+
+
+@app.get("/api/v1/tenant/cites/leaf/{leaf_id:path}/source/{system_id}/log", tags=["templates"])
+async def list_verification_log(
+    leaf_id:   str,
+    system_id: str,
+    request:   Request,
+    key_info:  APIKeyInfo = Depends(require_api_key),
+    limit:     int = 20,
+):
+    """Audit trail of verifications for (leaf, source), newest first."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT id::text, verified_at, verified_by::text,
+                       changes_detected, note, sample_upload_id::text,
+                       musts_covered_count
+                  FROM external_evidence_verification_log
+                 WHERE tenant_id = %s::uuid
+                   AND leaf_id   = %s
+                   AND system_id = %s::uuid
+                 ORDER BY verified_at DESC
+                 LIMIT %s
+                """,
+                (key_info.tenant_id, leaf_id, system_id, limit),
+            )
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+    return {
+        "leaf_id":   leaf_id,
+        "system_id": system_id,
+        "entries": [
+            {
+                "id":               r[0],
+                "verified_at":      r[1].isoformat() if r[1] else None,
+                "verified_by":      r[2],
+                "changes_detected": r[3],
+                "note":             r[4] or "",
+                "sample_upload_id": r[5],
+                "musts_covered":    r[6],
+            }
+            for r in rows
+        ],
+    }
+
+
 @app.get("/api/v1/templates/{leaf_id}", tags=["templates"])
 async def get_template(
     leaf_id:  str,

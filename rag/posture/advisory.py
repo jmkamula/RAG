@@ -377,6 +377,68 @@ def _fetch_source_documents_per_leaf(
     return out
 
 
+def _fetch_cites_per_leaf(
+    pg_conn,
+    tenant_id: str,
+    leaf_ids:  list[str],
+) -> dict[str, list[dict]]:
+    """For each leaf, fetch external_evidence_source rows grouped by
+    system_id. Returns {leaf_id: [{system_id, system_name, system_url,
+    musts: [{must_id, last_verified_at, next_review_due, is_fresh,
+    per_must_note}]}, ...]}.
+
+    Empty list when schema_v50 not applied (silent fallback).
+    """
+    if not leaf_ids:
+        return {}
+    out: dict[str, list[dict]] = {lid: [] for lid in leaf_ids}
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
+            )
+            cur.execute(
+                """
+                SELECT ees.leaf_id, s.id::text, s.system_name, s.system_url,
+                       ees.must_id, ees.cadence_days, ees.per_must_note,
+                       ees.last_verified_at, ees.next_review_due
+                  FROM external_evidence_source ees
+                  JOIN tenant_external_system s ON s.id = ees.system_id
+                 WHERE ees.tenant_id = %s::uuid
+                   AND ees.leaf_id   = ANY(%s)
+                   AND ees.is_active = TRUE
+                   AND s.is_active   = TRUE
+                 ORDER BY ees.leaf_id, s.system_name, ees.must_id
+                """,
+                (tenant_id, leaf_ids),
+            )
+            from rag.posture.cite_mode import is_cite_fresh
+            grouped: dict[tuple[str, str], dict] = {}
+            for row in cur.fetchall():
+                leaf_id, sys_id, sys_name, sys_url, must_id, cadence, note, lv, ndd = row
+                key = (leaf_id, sys_id)
+                if key not in grouped:
+                    grouped[key] = {
+                        "system_id":   sys_id,
+                        "system_name": sys_name,
+                        "system_url":  sys_url or "",
+                        "musts":       [],
+                    }
+                grouped[key]["musts"].append({
+                    "must_id":          must_id,
+                    "cadence_days":     cadence,
+                    "per_must_note":    note or "",
+                    "last_verified_at": lv.isoformat() if lv else None,
+                    "next_review_due":  ndd.isoformat() if ndd else None,
+                    "is_fresh":         is_cite_fresh(lv, cadence),
+                })
+            for (leaf_id, _sys_id), group in grouped.items():
+                out[leaf_id].append(group)
+    except Exception:
+        return out  # schema_v50 not applied — silent
+    return out
+
+
 def _fetch_template_availability(
     pg_conn,
     leaf_ids: list[str],
@@ -482,6 +544,7 @@ def build_evidence_class_breakdown(
     leaf_ids = list(leaf_to_all_ids.keys())
     source_docs    = _fetch_source_documents_per_leaf(pg_conn, tenant_id, leaf_to_bound_ids)
     template_avail = _fetch_template_availability(pg_conn, leaf_ids)
+    cites_per_leaf = _fetch_cites_per_leaf(pg_conn, tenant_id, leaf_ids)
 
     # Group leaves by evidence_type
     by_class: dict[str, list[dict]] = {}
@@ -504,6 +567,14 @@ def build_evidence_class_breakdown(
         for _id, _t in zip(unrec_ids, unrec_texts):
             must_items.append({"id": _id, "text": _t, "satisfied": False})
 
+        # Cite-acceptable: surface the cite lane on this leaf's UI card.
+        # Engine has already counted fresh cites toward `bound` above
+        # (leaf_evaluators._fetch_recognised_cites); the flag drives the
+        # frontend's render — whether to show "+ Cite source" + grouped
+        # cites + verify buttons for this leaf.
+        from rag.posture.cite_mode import is_cite_acceptable
+        cite_acceptable = is_cite_acceptable(leaf.evidence_type)
+
         leaf_entry = {
             "leaf_id":          leaf.leaf_id,
             "leaf_label":       leaf.leaf_id.split(":")[-1].replace("_", " "),
@@ -515,6 +586,8 @@ def build_evidence_class_breakdown(
             "must_items":       must_items,
             "source_documents": source_docs.get(leaf.leaf_id, []),
             "template_available": template_avail.get(leaf.leaf_id, False),
+            "cite_acceptable":  cite_acceptable,
+            "cites":            cites_per_leaf.get(leaf.leaf_id, []),
         }
         by_class.setdefault(leaf.evidence_type or "evidence", []).append(leaf_entry)
 

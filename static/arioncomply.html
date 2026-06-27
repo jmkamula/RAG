@@ -600,8 +600,12 @@ async function loadProfile() {
   const wrap = document.getElementById('profile-wrap');
   wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading profile…</p></div>';
   try {
-    const d = await api('/api/v1/tenant/profile');
-    renderProfile(d.profile || []);
+    const [profileResp, systemsResp] = await Promise.all([
+      api('/api/v1/tenant/profile'),
+      api('/api/v1/tenant/external-systems'),
+    ]);
+    renderProfile(profileResp.profile || []);
+    renderExternalSystems(systemsResp.systems || []);
   } catch (e) {
     wrap.innerHTML = `<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn’t load profile: ${escapeHtml(e.message)}</p></div>`;
   }
@@ -707,6 +711,241 @@ async function saveTenantProfile() {
     alert(`Save error: ${e.message}`);
   } finally {
     btn.disabled = false;
+  }
+}
+
+// ── Profile: External systems registry (cite-mode v1) ─────────────────
+// Tenants register their source-of-truth systems (Odoo HR, Okta, etc.)
+// once. Cites then reference these by id when a leaf needs evidence
+// from that system. See [[cite-mode-v1-backend-2026-06-27]].
+
+const EVIDENCE_TYPE_CATEGORIES = [
+  // Operational types the system commonly offers — drives the
+  // covers_evidence_types multi-select.
+  ['Registers',     ['register', 'asset_register', 'contact_register',
+                     'lawful_basis_register', 'data_flow_inventory',
+                     'records_of_processing']],
+  ['Records',       ['review_record', 'revocation_record', 'communication_record',
+                     'monitoring_record', 'approval_record', 'audit_record',
+                     'configuration_record', 'change_record', 'decision_record']],
+  ['Other',         ['responsibility_matrix', 'segregation_matrix',
+                     'configuration_baseline', 'approval', 'breach_notification',
+                     'dsar_response', 'audit_report', 'training_programme',
+                     'risk_assessment', 'test_log']],
+];
+
+function renderExternalSystems(systems) {
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');
+  const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  const wrap = document.getElementById('profile-wrap');
+
+  let html = `
+    <div style="margin-top:24px;padding:14px 18px;background:#fff;border:1px solid #E8E5DA;border-radius:6px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+        <div>
+          <div style="font-size:13px;color:#3A382E;font-weight:600">External evidence systems</div>
+          <div style="margin-top:4px;font-size:12px;color:#5C5A4F">
+            Systems where compliance evidence lives (HR / IAM / asset / ticketing / GRC).
+            Cite these from leaves that track operational data — ArionComply tracks freshness
+            + verification gates, your evidence stays in your systems.
+          </div>
+        </div>
+        <button class="btn-ask" onclick="addExternalSystemRow()" style="white-space:nowrap">
+          <i class="ti ti-plus"></i> Register system
+        </button>
+      </div>
+    </div>
+    <div id="external-systems-list" style="margin-top:12px"></div>
+  `;
+  wrap.insertAdjacentHTML('beforeend', html);
+
+  const list = document.getElementById('external-systems-list');
+  if (!systems.length) {
+    list.innerHTML = `<div style="background:#FAF8F2;border:1px dashed #C8C5B8;border-radius:6px;padding:14px 18px;font-size:12px;color:#9C9A8E;font-style:italic">
+      No systems registered yet. If your evidence lives in Odoo / Okta / ServiceNow / OneTrust etc., register them so you can cite them from your control evidence.
+    </div>`;
+    return;
+  }
+  for (const s of systems) {
+    list.insertAdjacentHTML('beforeend', renderExternalSystemRow(s, attr, esc));
+  }
+}
+
+function renderExternalSystemRow(s, attr, esc) {
+  const covers = (s.covers_evidence_types || []).join(', ') || '(any)';
+  return `<div class="ext-system-row" data-id="${attr(s.id)}"
+       style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;padding:12px 14px;margin-bottom:8px">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
+      <div style="flex:1">
+        <div style="font-size:13px;color:#3A382E;font-weight:600">${esc(s.system_name)}</div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:2px">
+          ${s.system_url ? `<a href="${attr(s.system_url)}" target="_blank" style="color:#534AB7;text-decoration:none">${esc(s.system_url)}</a> · ` : ''}
+          Cadence ${s.default_cadence_days}d · Covers: ${esc(covers)}
+        </div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button onclick="editExternalSystemRow('${attr(s.id)}')"
+                style="font-size:11px;padding:4px 10px;background:#fff;border:1px solid #C8C5B8;
+                       border-radius:4px;cursor:pointer;font-family:inherit">Edit</button>
+        <button onclick="deleteExternalSystem('${attr(s.id)}', '${attr(s.system_name)}')"
+                style="font-size:11px;padding:4px 10px;background:#fff;border:1px solid #C8C5B8;
+                       border-radius:4px;cursor:pointer;font-family:inherit;color:#9C2E2E">Delete</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function addExternalSystemRow() {
+  // Inline form — same row shape, no modal, no leaving the page
+  const list = document.getElementById('external-systems-list');
+  // Remove "no systems yet" placeholder if present
+  if (list.querySelector('.ext-system-row') === null) {
+    list.innerHTML = '';
+  }
+  list.insertAdjacentHTML('afterbegin', renderExternalSystemForm(null));
+}
+
+function editExternalSystemRow(systemId) {
+  const row = document.querySelector(`.ext-system-row[data-id="${systemId}"]`);
+  if (!row) return;
+  // Reload current state, then swap to form mode
+  api(`/api/v1/tenant/external-systems`).then(d => {
+    const s = (d.systems || []).find(x => x.id === systemId);
+    if (s) {
+      row.outerHTML = renderExternalSystemForm(s);
+    }
+  });
+}
+
+function renderExternalSystemForm(s) {
+  const attr = v => (v == null ? '' : String(v)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  const isNew = !s;
+  const sid = attr(s ? s.id : '');
+  const name = attr(s ? s.system_name : '');
+  const url  = attr(s ? s.system_url : '');
+  const cadence = s ? s.default_cadence_days : 365;
+  const covers = new Set(s ? (s.covers_evidence_types || []) : []);
+
+  let coversHtml = '';
+  for (const [groupName, types] of EVIDENCE_TYPE_CATEGORIES) {
+    coversHtml += `<div style="margin-top:6px"><div style="font-size:10px;color:#9C9A8E;letter-spacing:0.4px;text-transform:uppercase;margin-bottom:2px">${groupName}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
+    for (const t of types) {
+      const checked = covers.has(t) ? 'checked' : '';
+      coversHtml += `<label style="font-size:11px;cursor:pointer;padding:3px 8px;background:#FAF8F2;border:1px solid #E8E5DA;border-radius:3px;display:inline-flex;align-items:center;gap:4px">
+        <input type="checkbox" value="${t}" class="ext-system-covers" ${checked} style="margin:0">
+        ${t.replace(/_/g, ' ')}
+      </label>`;
+    }
+    coversHtml += `</div></div>`;
+  }
+
+  return `<div class="ext-system-row ext-system-form" data-id="${sid}"
+       style="background:#FAF8F2;border:1px solid #C8C5B8;border-radius:6px;padding:14px 16px;margin-bottom:8px">
+    <div style="font-size:13px;color:#3A382E;font-weight:600;margin-bottom:8px">
+      ${isNew ? 'Register external system' : 'Edit external system'}
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div>
+        <label style="font-size:11px;color:#5C5A4F;display:block;margin-bottom:2px">System name (e.g. "Odoo HR", "Azure AD", "ServiceNow CMDB")</label>
+        <input type="text" class="ext-system-name" value="${name}"
+               placeholder="System name"
+               style="width:100%;padding:6px 9px;font-size:12px;font-family:inherit;background:#fff;border:1px solid #E8E5DA;border-radius:4px;color:#3A382E;box-sizing:border-box">
+      </div>
+      <div>
+        <label style="font-size:11px;color:#5C5A4F;display:block;margin-bottom:2px">URL (where to find the data — internal link is fine)</label>
+        <input type="text" class="ext-system-url" value="${url}"
+               placeholder="https://"
+               style="width:100%;padding:6px 9px;font-size:12px;font-family:inherit;background:#fff;border:1px solid #E8E5DA;border-radius:4px;color:#3A382E;box-sizing:border-box">
+      </div>
+      <div>
+        <label style="font-size:11px;color:#5C5A4F;display:block;margin-bottom:2px">Default verification cadence (days)</label>
+        <input type="number" class="ext-system-cadence" value="${cadence}" min="1" max="3650"
+               style="width:120px;padding:6px 9px;font-size:12px;font-family:inherit;background:#fff;border:1px solid #E8E5DA;border-radius:4px;color:#3A382E;box-sizing:border-box">
+      </div>
+      <div>
+        <label style="font-size:11px;color:#5C5A4F;display:block">Offered for these evidence types (limits where the cite picker shows this system)</label>
+        ${coversHtml}
+      </div>
+      <div style="display:flex;gap:6px;margin-top:8px">
+        <button onclick="saveExternalSystemRow(this)" data-id="${sid}"
+                class="btn-ask" style="font-size:11px;padding:5px 12px">
+          <i class="ti ti-device-floppy"></i> Save
+        </button>
+        <button onclick="cancelExternalSystemForm(this)"
+                style="font-size:11px;padding:5px 12px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:4px;cursor:pointer;font-family:inherit">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function saveExternalSystemRow(btn) {
+  const row = btn.closest('.ext-system-form');
+  const id = btn.dataset.id || null;
+  const name = row.querySelector('.ext-system-name').value.trim();
+  if (!name) {
+    alert('System name is required.');
+    return;
+  }
+  const url = row.querySelector('.ext-system-url').value.trim();
+  const cadence = parseInt(row.querySelector('.ext-system-cadence').value || '365', 10);
+  const covers = Array.from(row.querySelectorAll('.ext-system-covers:checked')).map(el => el.value);
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader-2"></i> Saving…';
+  try {
+    const resp = await fetch('/api/v1/tenant/external-systems', {
+      method:  'PUT',
+      headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
+      body:    JSON.stringify({
+        id:                    id || null,
+        system_name:           name,
+        system_url:            url,
+        default_cadence_days:  cadence,
+        covers_evidence_types: covers,
+      }),
+    });
+    if (!resp.ok) {
+      const t = await resp.text();
+      alert(`Save failed: ${resp.status} ${t.slice(0,300)}`);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="ti ti-device-floppy"></i> Save';
+      return;
+    }
+    loadProfile();
+  } catch (e) {
+    alert(`Save error: ${e.message}`);
+    btn.disabled = false;
+    btn.innerHTML = '<i class="ti ti-device-floppy"></i> Save';
+  }
+}
+
+function cancelExternalSystemForm(btn) {
+  const row = btn.closest('.ext-system-form');
+  row.remove();
+  // Reload to restore the original row if this was an Edit cancel
+  loadProfile();
+}
+
+async function deleteExternalSystem(systemId, name) {
+  if (!confirm(`Delete "${name}"? Any cites referencing it will be deactivated.`)) {
+    return;
+  }
+  try {
+    const resp = await fetch(`/api/v1/tenant/external-systems/${encodeURIComponent(systemId)}`, {
+      method: 'DELETE',
+      headers: {'X-API-Key': API_KEY},
+    });
+    if (!resp.ok) {
+      const t = await resp.text();
+      alert(`Delete failed: ${resp.status} ${t.slice(0,200)}`);
+      return;
+    }
+    loadProfile();
+  } catch (e) {
+    alert(`Delete error: ${e.message}`);
   }
 }
 
@@ -1354,6 +1593,48 @@ function renderEvidenceClassesPanel(b) {
       leafLines += `<div style="font-size:11px;color:#5C5A4F;margin-top:2px;padding-left:18px">
         ${esc(leaf.leaf_label)} · ${leaf.musts_bound}/${leaf.musts_total} · sources: ${sources}${tplBadge}
       </div>`;
+
+      // Cited lane (schema_v50): only on cite-acceptable evidence_types.
+      // Shows existing cites grouped by source + a "Cite source" button.
+      // See [[cite-mode-v1-backend-2026-06-27]].
+      if (leaf.cite_acceptable) {
+        const cites = leaf.cites || [];
+        let citeRows = '';
+        for (const g of cites) {
+          // Stale calc: any must_id in this group not fresh = group is stale
+          const allFresh = g.musts.every(m => m.is_fresh);
+          const anyVerified = g.musts.some(m => m.last_verified_at);
+          let statusBadge;
+          if (!anyVerified) {
+            statusBadge = `<span style="color:#9C9A8E;font-size:10px;background:#FAF8F2;border:1px solid #E8E5DA;padding:1px 6px;border-radius:3px">unverified</span>`;
+          } else if (allFresh) {
+            statusBadge = `<span style="color:#2F8F4D;font-size:10px;background:#EBF5EE;border:1px solid #C8E0CF;padding:1px 6px;border-radius:3px">✓ fresh</span>`;
+          } else {
+            statusBadge = `<span style="color:#9C2E2E;font-size:10px;background:#FAEEEE;border:1px solid #E8C8C8;padding:1px 6px;border-radius:3px">stale — verify now</span>`;
+          }
+          const lastVer = g.musts.find(m => m.last_verified_at);
+          const verifiedText = lastVer
+            ? `verified ${lastVer.last_verified_at.slice(0,10)}`
+            : 'not yet verified';
+          citeRows += `<div style="font-size:11px;color:#5C5A4F;margin-top:3px;padding-left:34px;display:flex;align-items:center;gap:6px">
+            <span style="color:#534AB7">↗</span>
+            <span style="font-weight:600">${esc(g.system_name)}</span>
+            <span>· ${g.musts.length} MUST${g.musts.length===1?'':'s'} · ${verifiedText}</span>
+            ${statusBadge}
+            <button onclick="openCiteVerify('${attr(leaf.leaf_id)}','${attr(g.system_id)}','${attr(g.system_name)}')"
+                    style="font-size:10px;padding:2px 8px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:3px;cursor:pointer;font-family:inherit;margin-left:6px">Verify</button>
+            <button onclick="openCiteEdit('${attr(leaf.leaf_id)}','${attr(g.system_id)}','${attr(g.system_name)}')"
+                    style="font-size:10px;padding:2px 8px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:3px;cursor:pointer;font-family:inherit">Edit</button>
+          </div>`;
+        }
+        leafLines += citeRows;
+        leafLines += `<div style="font-size:11px;color:#5C5A4F;margin-top:3px;padding-left:34px">
+          <button onclick="openCiteCreate('${attr(leaf.leaf_id)}','${attr(cls.evidence_type)}')"
+                  style="font-size:10px;padding:2px 8px;background:#fff;color:#534AB7;border:1px solid #C8C5B8;border-radius:3px;cursor:pointer;font-family:inherit">
+            ↗ Cite external source
+          </button>
+        </div>`;
+      }
     }
 
     rows += `<div class="ec-row" data-evtype="${attr(cls.evidence_type)}"
@@ -1428,6 +1709,241 @@ async function downloadTemplateForLeaf(leafId, fmt) {
     URL.revokeObjectURL(dlUrl);
   } catch (e) {
     alert(`Template download error: ${e.message}`);
+  }
+}
+
+// ── Cite-mode modals (schema_v50) ──────────────────────────────────────
+// Three flows:
+//   openCiteCreate  — new cite for (leaf, [tenant picks source])
+//   openCiteEdit    — modify which MUSTs a (leaf, source) cite covers
+//   openCiteVerify  — record a verification attestation with
+//                     mandatory changes_detected text
+
+function _citeModalCloser() {
+  const m = document.getElementById('cite-modal');
+  if (m) m.remove();
+}
+
+function _renderCiteModal(title, bodyHtml, footerHtml) {
+  _citeModalCloser();
+  const modal = document.createElement('div');
+  modal.id = 'cite-modal';
+  modal.style.cssText = `
+    position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:9999;
+    display:flex;align-items:center;justify-content:center;padding:20px`;
+  modal.innerHTML = `
+    <div style="background:#fff;border:1px solid #E8E5DA;border-radius:8px;
+                max-width:720px;width:100%;max-height:90vh;overflow:hidden;
+                display:flex;flex-direction:column;box-shadow:0 4px 20px rgba(0,0,0,0.2)">
+      <div style="padding:14px 18px;border-bottom:1px solid #E8E5DA;display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:14px;color:#3A382E;font-weight:600">${title}</div>
+        <button onclick="_citeModalCloser()" style="background:none;border:none;font-size:20px;color:#9C9A8E;cursor:pointer">×</button>
+      </div>
+      <div style="padding:14px 18px;overflow-y:auto;flex:1">${bodyHtml}</div>
+      <div style="padding:12px 18px;border-top:1px solid #E8E5DA;display:flex;gap:8px;justify-content:flex-end">${footerHtml}</div>
+    </div>`;
+  modal.addEventListener('click', e => {
+    if (e.target === modal) _citeModalCloser();
+  });
+  document.body.appendChild(modal);
+}
+
+async function openCiteCreate(leafId, evidenceType) {
+  // Step 1: load tenant's registered systems → pick one
+  let systems;
+  try {
+    const d = await api('/api/v1/tenant/external-systems');
+    systems = d.systems || [];
+  } catch (e) {
+    alert(`Couldn't load systems: ${e.message}`);
+    return;
+  }
+  // Filter to systems whose covers_evidence_types includes this type
+  // (empty covers list = offered for everything)
+  const applicable = systems.filter(s =>
+    !s.covers_evidence_types.length || s.covers_evidence_types.includes(evidenceType)
+  );
+  if (!applicable.length) {
+    if (confirm(`No registered system covers "${evidenceType}". Open the Profile page to register one?`)) {
+      setMode('profile');
+    }
+    return;
+  }
+
+  // Build picker
+  const optionsHtml = applicable.map(s =>
+    `<option value="${s.id}">${s.system_name}${s.covers_evidence_types.length ? '' : ' (any type)'}</option>`
+  ).join('');
+  const body = `
+    <div style="font-size:12px;color:#5C5A4F;margin-bottom:10px">
+      Cite an external system as the source for one or more MUSTs of this leaf.
+      You'll pick which MUSTs the source covers on the next step.
+    </div>
+    <label style="font-size:11px;color:#5C5A4F;display:block;margin-bottom:4px">Pick a source system</label>
+    <select id="cite-pick-system" style="width:100%;padding:6px 9px;font-size:12px;background:#fff;border:1px solid #E8E5DA;border-radius:4px;color:#3A382E">
+      ${optionsHtml}
+    </select>`;
+  const footer = `
+    <button onclick="_citeModalCloser()" style="font-size:11px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:4px;cursor:pointer;font-family:inherit">Cancel</button>
+    <button class="btn-ask" onclick="_citeAdvanceToMustForm('${leafId.replace(/'/g, "\\'")}')" style="font-size:11px;padding:6px 12px">Next</button>`;
+  _renderCiteModal('Cite source — pick system', body, footer);
+}
+
+async function _citeAdvanceToMustForm(leafId, prefilledSystemId) {
+  const systemId = prefilledSystemId || document.getElementById('cite-pick-system').value;
+  // Find the leaf's MUST list — already on the page in `selected` /
+  // breakdown data. Re-fetch from advisory endpoint to get must_items.
+  // We use the existing /advisory endpoint which returns must_items
+  // arrays per leaf.
+  if (!selected || !selected.control_ref) {
+    alert('No control selected.');
+    return;
+  }
+  let leafData;
+  try {
+    const d = await api(`/api/v1/dashboard/control/${encodeURIComponent(selected.control_ref)}/evidence-classes`);
+    for (const cls of (d.breakdown?.evidence_classes || [])) {
+      for (const leaf of (cls.leaves || [])) {
+        if (leaf.leaf_id === leafId) { leafData = leaf; break; }
+      }
+    }
+  } catch (e) {
+    alert(`Couldn't load leaf MUSTs: ${e.message}`);
+    return;
+  }
+  if (!leafData || !leafData.must_items) {
+    alert(`Leaf data not found for ${leafId}`);
+    return;
+  }
+
+  // Also fetch current cite state for (leaf, system) to pre-check existing
+  let currentCoveredIds = new Set();
+  let cadence = null;
+  try {
+    const cites = await api(`/api/v1/tenant/cites/leaf/${encodeURIComponent(leafId)}`);
+    const g = (cites.groups || []).find(x => x.system_id === systemId);
+    if (g) {
+      g.musts.forEach(m => currentCoveredIds.add(m.must_id));
+      if (g.musts[0]) cadence = g.musts[0].cadence_days;
+    }
+  } catch (e) {}
+
+  // System default cadence as fallback
+  if (cadence === null) {
+    try {
+      const s = await api('/api/v1/tenant/external-systems');
+      const sys = (s.systems || []).find(x => x.id === systemId);
+      cadence = sys ? sys.default_cadence_days : 365;
+    } catch (e) { cadence = 365; }
+  }
+
+  let mustsHtml = '';
+  for (const m of leafData.must_items) {
+    const checked = currentCoveredIds.has(m.id) ? 'checked' : '';
+    mustsHtml += `<label style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #F0EDE3;cursor:pointer">
+      <input type="checkbox" value="${m.id}" class="cite-must-cb" ${checked} style="margin-top:2px">
+      <div style="font-size:11px;color:#3A382E;flex:1">
+        ${m.text.replace(/</g, '&lt;')}
+        <div style="font-size:10px;color:#9C9A8E;font-family:Consolas,monospace;margin-top:1px">${m.id}</div>
+      </div>
+    </label>`;
+  }
+
+  const body = `
+    <div style="font-size:12px;color:#5C5A4F;margin-bottom:10px">
+      Select which MUSTs this source covers. Unchecked MUSTs stay uncovered
+      (engine treats them as missing until you provide other evidence).
+    </div>
+    <div style="margin-bottom:10px">
+      <label style="font-size:11px;color:#5C5A4F;display:block;margin-bottom:2px">Verification cadence (days)</label>
+      <input type="number" id="cite-cadence" value="${cadence}" min="1" max="3650"
+             style="width:120px;padding:5px 9px;font-size:12px;background:#fff;border:1px solid #E8E5DA;border-radius:4px;color:#3A382E">
+    </div>
+    <div style="margin-top:8px;font-size:11px;font-weight:600;color:#3A382E">MUSTs of this leaf:</div>
+    ${mustsHtml}`;
+  const footer = `
+    <button onclick="_citeModalCloser()" style="font-size:11px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:4px;cursor:pointer;font-family:inherit">Cancel</button>
+    <button class="btn-ask" onclick="_citeSubmitForm('${leafId.replace(/'/g, "\\'")}','${systemId}')" style="font-size:11px;padding:6px 12px">Save cite</button>`;
+  _renderCiteModal('Cite source — pick MUSTs', body, footer);
+}
+
+async function _citeSubmitForm(leafId, systemId) {
+  const covered = Array.from(document.querySelectorAll('.cite-must-cb:checked')).map(el => el.value);
+  const cadence = parseInt(document.getElementById('cite-cadence').value || '365', 10);
+  try {
+    const resp = await fetch(`/api/v1/tenant/cites/leaf/${encodeURIComponent(leafId)}/source/${encodeURIComponent(systemId)}`, {
+      method:  'PUT',
+      headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
+      body:    JSON.stringify({
+        covered_must_ids: covered,
+        cadence_days:     cadence,
+      }),
+    });
+    if (!resp.ok) {
+      const t = await resp.text();
+      alert(`Save failed: ${resp.status} ${t.slice(0,200)}`);
+      return;
+    }
+    _citeModalCloser();
+    // Refresh the dashboard panel
+    if (selected) selectHeatCell(selected, { stopPropagation: ()=>{} });
+  } catch (e) {
+    alert(`Save error: ${e.message}`);
+  }
+}
+
+async function openCiteEdit(leafId, systemId, systemName) {
+  // Edit = same UI as Create but skip the system picker, jump to MUST form
+  _citeAdvanceToMustForm(leafId, systemId);
+}
+
+async function openCiteVerify(leafId, systemId, systemName) {
+  const body = `
+    <div style="font-size:12px;color:#5C5A4F;margin-bottom:10px">
+      Verifying <strong>${systemName.replace(/</g,'&lt;')}</strong> as source for this leaf.
+      Describe what changed since last verification — this is the audit-grade
+      payload, not a rubber-stamp.
+    </div>
+    <div style="margin-bottom:10px">
+      <label style="font-size:11px;color:#5C5A4F;display:block;margin-bottom:2px">
+        What changed? <span style="color:#9C2E2E">(required)</span>
+      </label>
+      <textarea id="cite-verify-changes" rows="6" placeholder="e.g. 5 new employees onboarded since last verification; all completed mandatory training via onboarding workflow. 1 contractor offboarded; access revoked per A.5.18 leaver flow. No orphan records."
+                style="width:100%;padding:8px 10px;font-size:12px;font-family:inherit;background:#FAF8F2;border:1px solid #E8E5DA;border-radius:4px;color:#3A382E;box-sizing:border-box;resize:vertical"></textarea>
+    </div>
+    <div style="margin-bottom:10px">
+      <label style="font-size:11px;color:#5C5A4F;display:block;margin-bottom:2px">Additional note (optional)</label>
+      <textarea id="cite-verify-note" rows="2" placeholder=""
+                style="width:100%;padding:6px 10px;font-size:12px;font-family:inherit;background:#fff;border:1px solid #E8E5DA;border-radius:4px;color:#3A382E;box-sizing:border-box;resize:vertical"></textarea>
+    </div>`;
+  const footer = `
+    <button onclick="_citeModalCloser()" style="font-size:11px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:4px;cursor:pointer;font-family:inherit">Cancel</button>
+    <button class="btn-ask" onclick="_citeSubmitVerify('${leafId.replace(/'/g, "\\'")}','${systemId}')" style="font-size:11px;padding:6px 12px"><i class="ti ti-check"></i> Confirm verification</button>`;
+  _renderCiteModal(`Verify cite — ${systemName}`, body, footer);
+}
+
+async function _citeSubmitVerify(leafId, systemId) {
+  const changes = document.getElementById('cite-verify-changes').value.trim();
+  const note    = document.getElementById('cite-verify-note').value.trim();
+  if (!changes) {
+    alert('Please describe what changed (or "no changes" explicitly).');
+    return;
+  }
+  try {
+    const resp = await fetch(`/api/v1/tenant/cites/leaf/${encodeURIComponent(leafId)}/source/${encodeURIComponent(systemId)}/verify`, {
+      method:  'POST',
+      headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
+      body:    JSON.stringify({changes_detected: changes, note: note}),
+    });
+    if (!resp.ok) {
+      const t = await resp.text();
+      alert(`Verify failed: ${resp.status} ${t.slice(0,200)}`);
+      return;
+    }
+    _citeModalCloser();
+    if (selected) selectHeatCell(selected, { stopPropagation: ()=>{} });
+  } catch (e) {
+    alert(`Verify error: ${e.message}`);
   }
 }
 

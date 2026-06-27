@@ -226,16 +226,81 @@ class GenericLeafEvaluator:
             """, (self._tenant_id, list(must_item_ids)))
             per_item_rows = cur.fetchall()
 
-            if not per_item_rows:
-                return set(), None
-
             recognised: set[str] = set()
             latest: datetime | None = None
             for item_id, uploaded_at in per_item_rows:
                 recognised.add(item_id)
                 if uploaded_at is not None and (latest is None or uploaded_at > latest):
                     latest = uploaded_at
-            return recognised, latest
+
+        # NB: we don't early-return when per_item_rows is empty — a leaf
+        # with zero stored findings may still be cite-covered. Continue to
+        # the cite-mode union below.
+
+        # ── Cite-mode (schema_v50): fresh external_evidence_source rows
+        # bound to in-scope MUSTs add to recognised. A cite is FRESH when
+        # last_verified_at is within (cadence_days + grace). Unverified
+        # cites (last_verified_at IS NULL) are NOT considered fresh —
+        # tenant must verify at least once before a cite counts toward
+        # posture. See [[product-principle-evidence-stored-vs-cited]].
+        cite_recognised, cite_latest = self._fetch_recognised_cites(must_item_ids)
+        recognised.update(cite_recognised)
+        if cite_latest is not None and (latest is None or cite_latest > latest):
+            latest = cite_latest
+
+        return recognised, latest
+
+    def _fetch_recognised_cites(
+        self,
+        must_item_ids: list[str],
+    ) -> tuple[set[str], datetime | None]:
+        """Return (set of must_ids covered by fresh cites, latest verified_at).
+
+        A cite is fresh when:
+            now <= last_verified_at + (cadence_days + grace_days)
+        with grace = min(cadence_days * 10%, 30 days).
+
+        SQL filter expresses this directly; no Python-side stale-check
+        loop. Returns empty set when schema_v50 isn't applied yet
+        (silent fallback).
+        """
+        if not must_item_ids:
+            return set(), None
+        try:
+            with self._pg.cursor() as cur:
+                cur.execute(
+                    "SELECT set_config('app.tenant_id', %s, TRUE)",
+                    (self._tenant_id,),
+                )
+                # Grace = min(cadence * 0.1, 30) — expressed as days in SQL.
+                # Fresh iff: now() <= last_verified_at + (cadence + grace) days
+                cur.execute(
+                    """
+                    SELECT must_id, last_verified_at
+                      FROM external_evidence_source
+                     WHERE tenant_id = %s::uuid
+                       AND is_active = TRUE
+                       AND last_verified_at IS NOT NULL
+                       AND must_id = ANY(%s)
+                       AND now() <= last_verified_at
+                                  + make_interval(days =>
+                                      cadence_days
+                                    + LEAST(GREATEST(cadence_days / 10, 1), 30))
+                    """,
+                    (self._tenant_id, list(must_item_ids)),
+                )
+                rows = cur.fetchall()
+        except Exception:
+            # schema_v50 not applied or table missing — silent fallback
+            return set(), None
+
+        recognised: set[str] = set()
+        latest: datetime | None = None
+        for must_id, verified_at in rows:
+            recognised.add(must_id)
+            if verified_at is not None and (latest is None or verified_at > latest):
+                latest = verified_at
+        return recognised, latest
 
     # ── Freshness check ──────────────────────────────────────────────────────
 
