@@ -196,38 +196,121 @@ User-confirmed via design discussion:
 
 ## v1 schema (schema_v50, planned)
 
+Three tables:
+
 ```sql
-CREATE TABLE external_evidence_source (
+-- 1. System registry — one row per (tenant, external system).
+-- Bridge between citing the same source across many leaves.
+CREATE TABLE tenant_external_system (
   id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tenant_id           UUID NOT NULL,
-  must_id             TEXT NOT NULL,
-  leaf_id             TEXT NOT NULL,
-  source_system_name  TEXT NOT NULL,    -- "Odoo HR" / "Azure AD" / "ServiceNow CMDB"
-  source_url          TEXT,
-  owner_user_id       UUID,              -- FK to users
-  cadence_days        INTEGER NOT NULL,  -- defaulted from leaf.freshness_days
-  last_verified_at    TIMESTAMPTZ,
-  last_verified_by    UUID,              -- FK to users
-  next_review_due     TIMESTAMPTZ,       -- computed = last_verified_at + cadence
+  system_name         TEXT NOT NULL,            -- "Odoo HR" / "Azure AD" / "ServiceNow CMDB"
+  system_url          TEXT,
+  owner_user_id       UUID,                     -- FK to users
+  default_cadence_days INTEGER NOT NULL DEFAULT 365,
+  covers_evidence_types TEXT[] NOT NULL,        -- ["register", "record"] — narrows where this system is offered
   is_active           BOOLEAN NOT NULL DEFAULT TRUE,
   created_at, created_by, updated_at, updated_by,
-  CONSTRAINT unique_cite_per_must_source UNIQUE (tenant_id, must_id, source_system_name)
+  CONSTRAINT unique_system_per_tenant UNIQUE (tenant_id, system_name)
 );
 
+-- 2. Per-MUST cite rows. Each binds one must_id to one source.
+-- Lookup-grouped by (tenant, leaf_id, system_id) for the UI/auditor view.
+CREATE TABLE external_evidence_source (
+  id                   UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id            UUID NOT NULL,
+  must_id              TEXT NOT NULL,
+  leaf_id              TEXT NOT NULL,
+  system_id            UUID NOT NULL REFERENCES tenant_external_system(id),
+  cadence_days         INTEGER NOT NULL,         -- defaulted from leaf.freshness_days
+  per_must_note        TEXT,                     -- optional: how this MUST is captured in source
+  last_verified_at     TIMESTAMPTZ,
+  next_review_due      TIMESTAMPTZ,              -- computed: last_verified_at + cadence
+  is_active            BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at, created_by, updated_at, updated_by,
+  CONSTRAINT unique_cite_per_must_system UNIQUE (tenant_id, must_id, system_id)
+);
+
+-- 3. Verification log — append-only history per (system, leaf).
+-- One entry covers all MUST rows in the group simultaneously
+-- (verify updates them all + appends one log row).
 CREATE TABLE external_evidence_verification_log (
   id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  cite_id             UUID NOT NULL REFERENCES external_evidence_source(id),
   tenant_id           UUID NOT NULL,
+  system_id           UUID NOT NULL REFERENCES tenant_external_system(id),
+  leaf_id             TEXT NOT NULL,
   verified_at         TIMESTAMPTZ NOT NULL DEFAULT now(),
-  verified_by         UUID NOT NULL,     -- FK to users
-  changes_detected    TEXT NOT NULL,     -- mandatory; the audit-grade payload
-  sample_upload_id    UUID               -- optional FK to document_uploads
+  verified_by         UUID NOT NULL,             -- FK to users
+  changes_detected    TEXT NOT NULL,             -- mandatory; the audit-grade payload
+  sample_upload_id    UUID,                      -- optional FK to document_uploads
+  note                TEXT                       -- optional free-text addition
 );
 ```
 
-RLS on both tables. Append-only verification log; current state
+RLS on all three tables. Append-only verification log; current state
 lives on `external_evidence_source.last_verified_at` for fast read,
 log retains history.
+
+## Per-MUST entry form (the "template" for cite creation)
+
+When tenant creates/edits a cite for a leaf, the UI is a per-MUST
+checkbox form listing every MUST of the leaf. Backend writes N rows
+in `external_evidence_source` (one per checked MUST). Same UI library
+as the existing form lane (`POST /api/v1/dashboard/control/{ref}/template`),
+adapted for cite metadata instead of free-text MUST values.
+
+Form shape:
+
+    Cite source for {leaf_id}
+
+      Source:  [dropdown of tenant_external_system rows where
+                covers_evidence_types includes this leaf's evidence_type]
+      Cadence: [days; default from leaf.freshness_days]
+      Owner:   [user dropdown; default = session user]
+
+      Which MUSTs does this source cover?
+      (renders every leaf.must_contain item as a row)
+
+        ☑ {must.text}
+          {must.id}
+          [Optional per_must_note input]
+
+        ☐ {next must, also pre-checked or unchecked based on
+           current cite state if editing}
+          ...
+
+      [Cancel]    [Save — covers N of M MUSTs]
+
+Submit posts the `covered_must_ids[]` array + cite metadata. Backend
+upserts N rows (creates new, updates existing per_must_note, soft-
+deletes removed).
+
+## Three UI surfaces
+
+| Surface | Use case | UI |
+|---|---|---|
+| Create cite | First time citing a source for a leaf | Per-MUST checkbox form above |
+| Edit cite | Add/remove MUST coverage for an existing (source, leaf) | Same form, pre-checked from current state |
+| Verify cite | Periodic refresh per cadence | Single dialog per (source, leaf): required `changes_detected` text + optional sample upload + optional note. Updates `last_verified_at` on ALL cite rows in the group + appends one row to `verification_log`. |
+
+## v1 build plan (next session)
+
+| Layer | Concrete change |
+|---|---|
+| Schema (v50) | tenant_external_system + external_evidence_source + verification_log |
+| Catalog | `is_cite_acceptable(evidence_type)` predicate (tabular suffixes + review_record + extension list) |
+| Engine | Per-MUST satisfaction: stored finding OR fresh cite. Stale cite dropped + warning. |
+| API — system registry | GET/PUT/DELETE /api/v1/tenant/external-systems |
+| API — cite | GET /api/v1/tenant/cites/leaf/{leaf_id} (grouped by source) |
+| API — cite | PUT /api/v1/tenant/cites/leaf/{leaf_id}/source/{system_id} (create/edit; body has covered_must_ids[]) |
+| API — verify | POST /api/v1/tenant/cites/leaf/{leaf_id}/source/{system_id}/verify (body: changes_detected required) |
+| API — delete | DELETE /api/v1/tenant/cites/leaf/{leaf_id}/source/{system_id} |
+| UI — leaf panel | New "Cited" sub-row per leaf grouped by source. Add/Edit/Verify/Remove. Color-coded freshness. |
+| UI — profile | New "External systems" section for system registry CRUD |
+| UI — onboarding | Journey wizard question: "Which systems do you use?" → creates tenant_external_system rows with sensible defaults |
+| Visibility | /api/v1/dashboard/cites/needs-verification — list cites past/near due |
+
+~2 sessions of focused work.
 
 ## Implementation scope (~1-2 sessions)
 
