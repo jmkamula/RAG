@@ -954,9 +954,12 @@ async function loadDashboard() {
   const wrap = document.getElementById('dash-wrap');
   wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-loader-2"></i><p>Loading posture…</p></div>';
   try {
-    const d = await api('/api/v1/dashboard/posture');
+    const [d, freshness] = await Promise.all([
+      api('/api/v1/dashboard/posture'),
+      api('/api/v1/dashboard/cites/needs-verification').catch(() => null),
+    ]);
     dashData = d;
-    renderDashboard(d);
+    renderDashboard(d, freshness);
   } catch (e) {
     wrap.innerHTML = `<div class="dash-empty"><i class="ti ti-alert-triangle"></i><p>Couldn’t load posture: ${e.message}</p></div>`;
   }
@@ -967,15 +970,21 @@ const _FINDING_CLASS = {
   'N/A': 'f-NA', 'Not assessed': 'f-NotAssessed'
 };
 
-function renderDashboard(d) {
+function renderDashboard(d, freshness) {
   const wrap = document.getElementById('dash-wrap');
   if (!d.frameworks || !d.frameworks.length) {
     wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-circle-check"></i><p>No frameworks in scope yet</p></div>';
     return;
   }
 
+  // Cite freshness card — only shown when any cite is past/near due.
+  let freshnessHtml = '';
+  if (freshness && (freshness.counts.red || freshness.counts.yellow || freshness.counts.upcoming)) {
+    freshnessHtml = renderCiteFreshnessCard(freshness);
+  }
+
   // Heatmap legend once at the top.
-  let html = `<div class="heat-legend" style="margin-bottom:14px">
+  let html = freshnessHtml + `<div class="heat-legend" style="margin-bottom:14px">
     <span><span class="heat-legend-swatch f-NC"></span>NC</span>
     <span><span class="heat-legend-swatch f-OFI"></span>OFI</span>
     <span><span class="heat-legend-swatch f-Comply"></span>Comply</span>
@@ -1718,6 +1727,100 @@ async function downloadTemplateForLeaf(leafId, fmt) {
 //   openCiteEdit    — modify which MUSTs a (leaf, source) cite covers
 //   openCiteVerify  — record a verification attestation with
 //                     mandatory changes_detected text
+
+// ── Cite freshness card (dashboard banner) ────────────────────────────
+// Surfaces cites past/near due so the tenant sees the verification
+// backlog at a glance. Three buckets: red (stale; engine no longer
+// counts), yellow (in grace; engine still counts), upcoming (due
+// within 7 days). Each row has a Verify CTA that opens the same
+// modal as the per-leaf cited lane.
+
+function renderCiteFreshnessCard(freshness) {
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');
+  const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  const c = freshness.counts;
+
+  // Headline
+  const parts = [];
+  if (c.red)      parts.push(`<span style="color:#9C2E2E;font-weight:600">${c.red} stale</span>`);
+  if (c.yellow)   parts.push(`<span style="color:#9C6F1B;font-weight:600">${c.yellow} due now</span>`);
+  if (c.upcoming) parts.push(`<span style="color:#5C5A4F;font-weight:600">${c.upcoming} due soon</span>`);
+  const headline = parts.join(' · ');
+
+  // Group rows by bucket — render most-urgent first
+  let rowsHtml = '';
+  const bucketMeta = {
+    red:      {label: 'Stale — engine no longer counts these', color: '#9C2E2E', icon: '⚠'},
+    yellow:   {label: 'In grace — verify now',                 color: '#9C6F1B', icon: '◐'},
+    upcoming: {label: 'Due in the next 7 days',                color: '#5C5A4F', icon: '○'},
+  };
+  for (const bucket of ['red', 'yellow', 'upcoming']) {
+    const items = (freshness.buckets || {})[bucket] || [];
+    if (!items.length) continue;
+    const meta = bucketMeta[bucket];
+    rowsHtml += `<div style="font-size:11px;letter-spacing:0.4px;text-transform:uppercase;color:${meta.color};font-weight:600;margin-top:10px;margin-bottom:4px">
+      ${meta.icon} ${meta.label} (${items.length})
+    </div>`;
+    for (const it of items) {
+      const overdue = it.days_overdue;
+      let when;
+      if (overdue === null) {
+        when = 'never verified';
+      } else if (overdue > 0) {
+        when = `${overdue}d overdue`;
+      } else if (overdue < 0) {
+        when = `due in ${-overdue}d`;
+      } else {
+        when = 'due today';
+      }
+      rowsHtml += `<div style="display:flex;align-items:center;gap:10px;padding:6px 10px;background:#fff;border:1px solid #F0EDE3;border-radius:4px;margin-bottom:4px;font-size:12px">
+        <span style="color:#3A382E;font-weight:600;min-width:80px">${esc(it.control_ref)}</span>
+        <span style="color:#5C5A4F;flex:1">${esc(it.leaf_label)} · ↗ ${esc(it.system_name)} · ${it.must_count} MUST${it.must_count===1?'':'s'}</span>
+        <span style="color:${meta.color};font-size:11px;font-variant-numeric:tabular-nums">${esc(when)}</span>
+        <button onclick="openCiteVerifyFromCard('${attr(it.control_ref)}','${attr(it.leaf_id)}','${attr(it.system_id)}','${attr(it.system_name)}')"
+                style="font-size:11px;padding:3px 10px;background:#3A382E;color:#fff;border:none;border-radius:3px;cursor:pointer;font-family:inherit">
+          Verify
+        </button>
+      </div>`;
+    }
+  }
+
+  return `<div id="cite-freshness-card" style="background:#FAF8F2;border:1px solid #E8E5DA;border-radius:6px;padding:12px 14px;margin-bottom:14px">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
+      <div>
+        <div style="font-size:13px;color:#3A382E;font-weight:600">Verifications needed</div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:2px">${headline}</div>
+      </div>
+      <button onclick="document.getElementById('cite-freshness-detail').style.display = document.getElementById('cite-freshness-detail').style.display === 'none' ? '' : 'none'"
+              style="font-size:11px;padding:4px 10px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:3px;cursor:pointer;font-family:inherit">
+        Toggle list
+      </button>
+    </div>
+    <div id="cite-freshness-detail" style="margin-top:8px">${rowsHtml}</div>
+  </div>`;
+}
+
+async function openCiteVerifyFromCard(controlRef, leafId, systemId, systemName) {
+  // Switch to the per-control drill-in so the cite group is visible after
+  // verification + open the verify modal in the same step.
+  // selected may be null; emulate clicking the dashboard cell.
+  // For simplicity: skip the heatmap select and just open the modal —
+  // the modal's refresh hook calls selectHeatCell only if `selected`
+  // is set, so we'll refresh the dashboard banner explicitly.
+  openCiteVerify(leafId, systemId, systemName);
+  // After modal closes, refresh the banner. Patch the modal's submit
+  // handler to also refresh dashboard — we add a one-shot wrapper.
+  // Simplest: poll for the modal element to be removed and then reload.
+  const observer = new MutationObserver(() => {
+    if (!document.getElementById('cite-modal')) {
+      observer.disconnect();
+      // Refresh dashboard so the freshness card recomputes
+      if (mode === 'dashboard') loadDashboard();
+    }
+  });
+  observer.observe(document.body, { childList: true });
+}
+
 
 function _citeModalCloser() {
   const m = document.getElementById('cite-modal');

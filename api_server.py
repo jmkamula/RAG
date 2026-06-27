@@ -4358,6 +4358,117 @@ async def list_verification_log(
     }
 
 
+@app.get("/api/v1/dashboard/cites/needs-verification", tags=["posture"])
+async def dashboard_cites_needs_verification(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    upcoming_window_days: int = 7,
+):
+    """Surface cites that need tenant attention, bucketed by urgency.
+
+    Buckets (by `next_review_due` vs now):
+      - red       — past grace (cite is STALE; engine no longer counts it).
+                    Verify NOW.
+      - yellow    — past next_review_due but within grace
+                    (min(cadence × 10%, 30 days)). Engine still counts
+                    them but they're amber on the panel.
+      - upcoming  — due within `upcoming_window_days` (default 7).
+                    Heads-up so the tenant can plan.
+
+    Grouped by (leaf_id, system_id) so the dashboard card shows
+    one row per (leaf × source) — same grouping as the per-leaf
+    cited lane.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            # Single query — bucket-bydefault using SQL CASE for clarity.
+            # Computes whether a cite is past grace (red), in grace
+            # (yellow), or due soon (upcoming) per its own cadence_days.
+            cur.execute(
+                """
+                WITH cite_state AS (
+                  SELECT ees.leaf_id,
+                         s.id::text         AS system_id,
+                         s.system_name,
+                         ees.must_id,
+                         ees.last_verified_at,
+                         ees.next_review_due,
+                         ees.cadence_days,
+                         -- grace in days: min(cadence x 10pct, 30); floor 1.
+                         LEAST(GREATEST(ees.cadence_days / 10, 1), 30) AS grace_days,
+                         CASE
+                           WHEN ees.last_verified_at IS NULL THEN 'red'
+                           WHEN now() > ees.last_verified_at
+                                     + make_interval(days =>
+                                         ees.cadence_days
+                                       + LEAST(GREATEST(ees.cadence_days / 10, 1), 30))
+                             THEN 'red'
+                           WHEN now() > ees.next_review_due
+                             THEN 'yellow'
+                           WHEN ees.next_review_due <= now() + make_interval(days => %s)
+                             THEN 'upcoming'
+                           ELSE 'fresh'
+                         END AS bucket
+                    FROM external_evidence_source ees
+                    JOIN tenant_external_system s ON s.id = ees.system_id
+                   WHERE ees.tenant_id = %s::uuid
+                     AND ees.is_active = TRUE
+                     AND s.is_active   = TRUE
+                )
+                SELECT leaf_id, system_id, system_name, bucket,
+                       count(*) AS must_count,
+                       MAX(last_verified_at) AS last_verified_at,
+                       MIN(next_review_due) AS next_review_due
+                  FROM cite_state
+                 WHERE bucket IN ('red', 'yellow', 'upcoming')
+                 GROUP BY leaf_id, system_id, system_name, bucket
+                 ORDER BY
+                   CASE bucket WHEN 'red' THEN 0 WHEN 'yellow' THEN 1 ELSE 2 END,
+                   MIN(next_review_due) NULLS FIRST,
+                   leaf_id
+                """,
+                (upcoming_window_days, key_info.tenant_id),
+            )
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+
+    buckets: dict[str, list[dict]] = {"red": [], "yellow": [], "upcoming": []}
+    for r in rows:
+        leaf_id, sys_id, sys_name, bucket, n, lv, ndd = r
+        # Days overdue / until: positive when overdue, negative when upcoming.
+        from datetime import datetime, timezone
+        now = datetime.now(timezone.utc)
+        if ndd:
+            delta = (now - ndd).days
+        else:
+            delta = None
+        buckets[bucket].append({
+            "leaf_id":          leaf_id,
+            "leaf_label":       leaf_id.split(":")[-1].replace("_", " "),
+            "control_ref":      leaf_id.split(":")[1] if leaf_id.startswith("req:") else "",
+            "system_id":        sys_id,
+            "system_name":      sys_name,
+            "must_count":       n,
+            "last_verified_at": lv.isoformat() if lv else None,
+            "next_review_due":  ndd.isoformat() if ndd else None,
+            "days_overdue":     delta,   # positive = overdue; negative = upcoming
+        })
+    return {
+        "tenant_id":            key_info.tenant_id,
+        "upcoming_window_days": upcoming_window_days,
+        "counts": {
+            "red":      len(buckets["red"]),
+            "yellow":   len(buckets["yellow"]),
+            "upcoming": len(buckets["upcoming"]),
+        },
+        "buckets": buckets,
+    }
+
+
 @app.get("/api/v1/templates/{leaf_id}", tags=["templates"])
 async def get_template(
     leaf_id:  str,
