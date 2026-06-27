@@ -11,7 +11,7 @@ should_count: 2
 
 # Remote Working Policy
 
-> A.6.7 requires a policy covering information security for remote working
+> A.6.7 requires a policy covering information security for remote working. This is the umbrella policy leaf; the per-worker procedure, the registered-workers register, and the periodic programme review are sibling leaves
 
 > **Replace each blank fill-in marker with your content. Leave the MUST and SHOULD heading markers untouched — they bind this document to the checklist when you upload it back.**
 

@@ -4178,7 +4178,7 @@ REQ_REMOTE_WORKING = EvidenceRequirement(
     evidence_type = "policy",
     title= "Remote Working Policy",
     trigger_type  = "profile_fact",
-    description   = "A.6.7 requires a policy covering information security for remote working",
+    description   = "A.6.7 requires a policy covering information security for remote working. This is the umbrella policy leaf; the per-worker procedure, the registered-workers register, and the periodic programme review are sibling leaves",
     must_contain  = [
         ChecklistItem("item:A.6.7:equipment",      "Approved equipment for remote working", "must", False, "A.6.7a"),
         ChecklistItem("item:A.6.7:physical",       "Physical security at remote location", "must", False, "A.6.7b"),
@@ -4190,6 +4190,86 @@ REQ_REMOTE_WORKING = EvidenceRequirement(
     should_contain= [
         ChecklistItem("item:A.6.7:family",    "Rules regarding family/visitor access to work equipment", "should", False, "Practical guidance"),
         ChecklistItem("item:A.6.7:travel",    "Security when travelling", "should", False, "A.6.7f"),
+    ],
+)
+
+# ── A.6.7 — Phase B promotion (2026-06-27, single-leaf → 4-leaf op_process) ───
+# Last A.6 control to be promoted; A.6.7 was deferred during batch 21 because
+# REQ_REMOTE_WORKING already existed as a single-leaf policy. Keeps the
+# existing policy leaf intact (preserves all 6 must / 2 should item-ids);
+# adds three operational siblings matching the A.6 family pattern (procedure
+# + register + review_record). trigger_type=profile_fact stays — A.6.7 only
+# applies when the tenant actually has remote workers (gated by
+# ClientFacts.has_remote_workers).
+# Authority: ISO 27002:2022 § 6.7 implementation guidance.
+
+REQ_A67_REMOTE_WORKING_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.6.7:remote_working_procedure",
+    control_ref   = "A.6.7",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "procedure",
+    title         = "Remote Working Approval and Management Procedure",
+    trigger_type  = "profile_fact",
+    description   = "Operational steps for granting, modifying and revoking remote-working arrangements per worker. Owns the joiner-mover-leaver flow for remote workers: who approves, on what evidence (suitable workspace, equipment provided, training completed), with what conditions. Pairs with A.6.7 policy (rules) and the remote-working register (who has access right now)",
+    must_contain  = [
+        ChecklistItem("item:A.6.7:proc_approval_workflow", "Per-worker approval workflow before remote-working starts (line manager + InfoSec sign-off, suitable-workspace attestation, equipment-provisioning checkpoint, awareness-training completion check)",                                                                              "must", False, "27002:6.7 — controlled approval"),
+        ChecklistItem("item:A.6.7:proc_grant_conditions",  "Conditions per approval recorded (location category — home / co-working / abroad; permitted hours; data-class restrictions; supervision requirements; expiry / review date)",                                                                                                          "must", False, "27002:6.7 — appropriate conditions"),
+        ChecklistItem("item:A.6.7:proc_equipment_provision","Equipment provisioning step (corporate device only / BYOD permitted with MDM / specific peripheral restrictions like external monitors / printers), cross-link to A.5.9 asset register so remote-issued equipment is tracked",                                                          "must", False, "27002:6.7 — equipment + A.5.9 link"),
+        ChecklistItem("item:A.6.7:proc_modification_path", "Modification path when worker's situation changes (relocation, role change, equipment swap, extended absence) — drives register update + may trigger re-approval",                                                                                                                       "must", False, "27002:6.7 — change handling"),
+        ChecklistItem("item:A.6.7:proc_revocation_path",   "Revocation path on termination / extended leave / approval expiry / policy breach — includes equipment return per A.5.11 and access revocation per A.5.18 (cross-link to leaver flows)",                                                                                                  "must", False, "27002:6.7 — return / A.5.11 + A.5.18 link"),
+        ChecklistItem("item:A.6.7:proc_incident_route",    "Incident-handling route for remote-context incidents (lost device, suspected unauthorised access at remote site, family-access exposure) — cross-link to A.5.24 incident response",                                                                                                       "must", False, "27002:6.7 — A.5.24 link"),
+        ChecklistItem("item:A.6.7:proc_owner",             "Named owner of the procedure (typically Head of IT / InfoSec with HR partner for approval workflow)",                                                                                                                                                                                    "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.7:proc_travel_briefing",   "Specific travel-briefing step for high-risk destinations (countries with elevated surveillance / corporate-espionage risk — burner laptop, restricted credentials, encrypted comms only)",                                                                                                "should", False, "27002:6.7f + Practical guidance"),
+        ChecklistItem("item:A.6.7:proc_family_briefing",   "Family/visitor access briefing (verbal explanation to the worker that family members must not use the corporate device — drives the policy's family-access rule into operational reality)",                                                                                              "should", False, "Practical guidance"),
+    ],
+)
+
+REQ_A67_REMOTE_WORKERS_REGISTER = EvidenceRequirement(
+    id            = "req:A.6.7:remote_workers_register",
+    control_ref   = "A.6.7",
+    standard_id   = "ISO27001:2022",
+    evidence_type = "register",
+    title         = "Approved Remote Workers Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-worker authoritative list of who is currently approved for remote working, with what conditions, on what equipment. The audit-defensibility surface for 'show me every active remote worker, when they were approved, and whether the approval is current'. Cross-references the A.5.16 identity register (every remote worker is also a registered identity) and the A.5.9 asset register (corporate equipment issued to them)",
+    must_contain  = [
+        ChecklistItem("item:A.6.7:reg_personnel_id",       "Per-row personnel identifier (links to A.5.16 identity register)",                                                                                                                                                                                                                       "must", False, "Accountability + A.5.16 link"),
+        ChecklistItem("item:A.6.7:reg_approval_date",      "Per-row approval date + approving manager identity (closes 'who said yes')",                                                                                                                                                                                                            "must", False, "27002:6.7 — controlled approval"),
+        ChecklistItem("item:A.6.7:reg_location_category",  "Per-row location category (home / co-working / abroad — drives jurisdictional risk; affects data-residency analysis where the worker handles personal data)",                                                                                                                          "must", False, "27002:6.7b + GDPR"),
+        ChecklistItem("item:A.6.7:reg_equipment_id",       "Per-row issued-equipment identifier (links to A.5.9 asset register; if BYOD, MDM-enrolment id)",                                                                                                                                                                                          "must", False, "27002:6.7 — equipment + A.5.9 link"),
+        ChecklistItem("item:A.6.7:reg_conditions_summary", "Per-row conditions summary (permitted hours, data-class restrictions, expiry date, supervision requirements)",                                                                                                                                                                          "must", False, "27002:6.7 — appropriate conditions"),
+        ChecklistItem("item:A.6.7:reg_review_due",         "Per-row next-review-due date (drives the periodic review's expected-set computation; typically 12 months from approval)",                                                                                                                                                                "must", False, "27002:6.7 — periodic re-evaluation"),
+        ChecklistItem("item:A.6.7:reg_status",             "Per-row status (active / suspended / expired-pending-revocation / revoked) — drives the leaver pair-check vs A.5.18 access register",                                                                                                                                                    "must", False, "Operational discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.6.7:reg_data_class_max",     "Per-row maximum data classification permitted (links to A.5.12 classification scheme — drives 'restricted-class data must not leave the office' enforcement)",                                                                                                                          "should", False, "A.5.12 link"),
+        ChecklistItem("item:A.6.7:reg_orphan_check",       "Orphan-row check: any row whose personnel_id is no longer in A.5.16 active identity register (caught at periodic review) — surfaces missed leaver-flow revocations",                                                                                                                    "should", False, "Continual assurance"),
+    ],
+)
+
+REQ_A67_PROGRAMME_REVIEW = EvidenceRequirement(
+    id              = "req:A.6.7:remote_working_review",
+    control_ref     = "A.6.7",
+    standard_id     = "ISO27001:2022",
+    evidence_type   = "review_record",
+    title           = "Periodic Remote Working Programme Review",
+    trigger_type    = "profile_fact",
+    description     = "Periodic verification that the policy is current, the register has no orphan rows (each row's personnel still in scope and approved), conditions are being honoured, and any incidents stemming from remote-work context have been triaged into lessons. Annual cadence (freshness=365)",
+    freshness_days  = 365,
+    must_contain    = [
+        ChecklistItem("item:A.6.7:rev_date",               "Review date within the planned interval (typically within 12 months of last review)",                                                                                                                                                                                                  "must", False, "27002:6.7 — periodic"),
+        ChecklistItem("item:A.6.7:rev_reviewer",           "Reviewer identity (Head of IT / InfoSec lead + HR partner; reviewer must not be the sole approver of any reviewed row)",                                                                                                                                                                  "must", False, "Accountability"),
+        ChecklistItem("item:A.6.7:rev_register_currency",  "Register-currency check (every row's personnel_id is still in A.5.16 active register; expired-approval rows surfaced and revoked or re-approved)",                                                                                                                                       "must", False, "27002:6.7 — currency"),
+        ChecklistItem("item:A.6.7:rev_orphan_check",       "Orphan-row check (any row whose personnel_id is no longer in A.5.16 active identity register) — surfaces missed leaver-flow revocations; cross-link to A.5.18 access review",                                                                                                            "must", False, "27002:6.7 + A.5.18 coherence"),
+        ChecklistItem("item:A.6.7:rev_incident_review",    "Remote-context incident review (any A.5.26 incident-register entries flagged as remote-work-related in the period; lessons fed back into policy / procedure)",                                                                                                                            "must", False, "27002:6.7 + A.5.27 link"),
+        ChecklistItem("item:A.6.7:rev_policy_currency",    "Policy-currency check (referenced policies still aligned — A.5.10 acceptable use, A.5.12 classification, A.5.15 access, A.5.18 access review, A.7.4 physical, A.7.7 desk policy, A.8.1 user endpoint, A.8.24 cryptography)",                                                              "must", False, "Cross-control coherence"),
+        ChecklistItem("item:A.6.7:rev_next_date",          "Next planned review date stated",                                                                                                                                                                                                                                                          "must", False, "Planning"),
+    ],
+    should_contain  = [
+        ChecklistItem("item:A.6.7:rev_ad_hoc_triggers",    "Ad-hoc review triggers (major incident exposing remote-work gap, policy change affecting remote workers, regulatory change for cross-border data, geographic-risk shift)",                                                                                                              "should", False, "Change-driven review"),
+        ChecklistItem("item:A.6.7:rev_metrics",            "Metrics noted (count of active remote workers, distribution by location category, count of expired-pending-revocation rows, count of remote-context incidents in period)",                                                                                                              "should", False, "Continual improvement"),
     ],
 )
 
@@ -16941,6 +17021,12 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_CLOUD_POSTURE_REVIEW,
     REQ_CLOUD_EXIT_MIGRATION,
     REQ_REMOTE_WORKING,
+    # A.6.7 — promoted to 4-leaf 2026-06-27 (the last A.6 single-leaf).
+    # Policy leaf above stays intact; procedure + register + review_record
+    # are siblings matching the A.6.3 / A.6.4 / A.6.5 pattern.
+    REQ_A67_REMOTE_WORKING_PROCEDURE,
+    REQ_A67_REMOTE_WORKERS_REGISTER,
+    REQ_A67_PROGRAMME_REVIEW,
     # REQ_SECURE_DEVELOPMENT (A.8.25) promoted to 4-leaf in batch 23 — see A.8 block above
 
     # Operational
