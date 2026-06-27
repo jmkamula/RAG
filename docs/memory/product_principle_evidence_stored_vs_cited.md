@@ -149,15 +149,109 @@ directly. Three gates we should support:
    `tabular_evidence_rows` storage. Auditor sees the sample as
    point-in-time proof the source data exists and matches the
    declared shape.
-2. **Verification attestation**: tenant clicks "I verified
-   $source against $leaf today" → updates `last_verified_at`.
-   Same trust model as form submission (tenant-attested).
+2. **Verification attestation with changes_detected**: tenant
+   clicks "I verified $source against $leaf today" → updates
+   `last_verified_at` + records a REQUIRED `changes_detected`
+   field describing what's different since last verification.
+   Forces a real review, not rubber-stamp. Examples:
+   - HR cite: "5 new employees onboarded since last verification;
+     all completed mandatory training via Workday onboarding
+     workflow. 1 contractor offboarded; access revoked per A.5.18
+     leaver flow (Okta ticket #4521)."
+   - IAM cite: "12 new identities added (matching HR new-hire
+     list). 3 identities disabled (matching HR leavers). 2
+     privileged-access additions reviewed + approved."
+   - Asset cite: "47 → 53 total assets. New: 4 laptops (issued to
+     new hires), 2 cloud subscriptions (S3 buckets for new
+     project). Retired: nothing in this period."
+   Future workflow: changes_detected can trigger follow-up actions
+   (e.g. "new employee" → A.6.3 training-assignment workflow).
 3. **Process documentation**: link or attached procedure showing
    how the source data is maintained (this often satisfies the
    PROCEDURE leaf of the same control).
 
 The combination of cite + at least one gate = audit-defensible
 without ArionComply needing to hold the data.
+
+## v1 design decisions (locked 2026-06-27)
+
+User-confirmed via design discussion:
+
+- **Granularity: per-MUST**. Each cite row binds to one (must_id,
+  source). UI groups by (source, leaf) for tenant + auditor view;
+  data model stays atomic.
+- **Verification**: click + named verifier (session user defaults)
+  + REQUIRED `changes_detected` field (see above) + optional
+  sample upload.
+- **review_record evidence_type**: cite-acceptable (some tenants
+  export review minutes from Jira/Confluence).
+- **cadence_days**: defaults to leaf's `freshness_days` when set,
+  else 365. Tenant can override per cite.
+- **Stale handling**: grace = `min(cadence × 10%, 30 days)`. YELLOW
+  in grace, RED after. Stale cites stay visible greyed-out with
+  prominent "VERIFY NOW" CTA — never hidden.
+- **Multiple cites per leaf**: allowed when different sources cover
+  different subsets (Azure AD for employees + Okta for contractors).
+  Unique constraint: `(tenant_id, must_id, source_system_name)`.
+
+## v1 schema (schema_v50, planned)
+
+```sql
+CREATE TABLE external_evidence_source (
+  id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id           UUID NOT NULL,
+  must_id             TEXT NOT NULL,
+  leaf_id             TEXT NOT NULL,
+  source_system_name  TEXT NOT NULL,    -- "Odoo HR" / "Azure AD" / "ServiceNow CMDB"
+  source_url          TEXT,
+  owner_user_id       UUID,              -- FK to users
+  cadence_days        INTEGER NOT NULL,  -- defaulted from leaf.freshness_days
+  last_verified_at    TIMESTAMPTZ,
+  last_verified_by    UUID,              -- FK to users
+  next_review_due     TIMESTAMPTZ,       -- computed = last_verified_at + cadence
+  is_active           BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at, created_by, updated_at, updated_by,
+  CONSTRAINT unique_cite_per_must_source UNIQUE (tenant_id, must_id, source_system_name)
+);
+
+CREATE TABLE external_evidence_verification_log (
+  id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  cite_id             UUID NOT NULL REFERENCES external_evidence_source(id),
+  tenant_id           UUID NOT NULL,
+  verified_at         TIMESTAMPTZ NOT NULL DEFAULT now(),
+  verified_by         UUID NOT NULL,     -- FK to users
+  changes_detected    TEXT NOT NULL,     -- mandatory; the audit-grade payload
+  sample_upload_id    UUID               -- optional FK to document_uploads
+);
+```
+
+RLS on both tables. Append-only verification log; current state
+lives on `external_evidence_source.last_verified_at` for fast read,
+log retains history.
+
+## Implementation scope (~1-2 sessions)
+
+| Layer | Change |
+|---|---|
+| Schema (v50) | external_evidence_source + verification_log |
+| Catalog | `is_cite_acceptable(evidence_type)` predicate (tabular suffixes + review_record + extension list) |
+| Engine | Per-MUST satisfaction: (stored finding OR fresh cite). Stale cite dropped + surfaced. |
+| API | GET/PUT/DELETE /api/v1/tenant/cites; POST /verify (with mandatory changes_detected) |
+| UI | Evidence-class panel gains "Cited" sub-row per leaf, grouped by source. Add/Verify/Edit/Remove buttons. Color-coded freshness badge. |
+| Visibility | `/api/v1/dashboard/cites/needs-verification` list + dashboard summary card |
+
+## What's NOT in scope
+
+- **API connectors per vendor** (Odoo / Okta / ServiceNow pulls).
+  Premature — explosion of integration work for marginal value
+  over manual cite + sample. Revisit only when a specific tenant
+  asks AND the volume justifies it.
+- **Vendor catalog** with pre-known endpoints. Same reason.
+- **Automated freshness via webhooks**. Tenant-attested freshness
+  is sufficient for the auditor; webhook-driven is a v2 nicety.
+- **Auto-triggered follow-up workflows from changes_detected**
+  (e.g. "new employee" → training assignment). Capture
+  changes_detected in v1; build the workflow trigger in v2.
 
 ## What's NOT in scope
 
