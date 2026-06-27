@@ -4,6 +4,54 @@
 Compliance RAG platform on Azure VM (172.211.244.144).
 Stack: FastAPI + LangGraph + Neo4j + ChromaDB + PostgreSQL + GPT-4o.
 
+## Product direction (2026-06-27)
+
+**ArionComply is a compliance program ledger, NOT a generic
+evidence repository.** Our role: track WHERE evidence lives +
+freshness + ownership + auditor-readable provenance. The tenant
+keeps evidence sovereignty in the systems that already hold their
+data (Odoo HR, Okta IAM, ServiceNow CMDB, etc.).
+
+Two coexisting evidence modes per (tenant, leaf):
+
+- **Stored mode** — small/startup tenants without external systems
+  of record. Evidence authored + held in-product via templates /
+  forms / `tabular_evidence_rows`. The templating arc serves this.
+- **Cited mode** — larger tenants where evidence lives in source
+  systems. ArionComply tracks the cite metadata + verification
+  cadence + auditor gates (periodic samples, verification
+  attestations with `changes_detected`, process documentation).
+
+Both modes contribute to the same leaf at per-MUST granularity;
+engine takes the union.
+
+See [[product-principle-evidence-stored-vs-cited]] for the full
+principle + [[product-concept-evidence-cascade-2026-06-27]] for
+the strategic evidence-cascade layer (event-driven implications:
+"new employee" → training/access/NDA artefacts needed).
+
+### Build sequence
+
+| Layer | Status |
+|---|---|
+| Templating arc (storage mode) — 20 v2 anchors + native formats (md/xlsx/docx) + xlsx round-trip + tenant profile + evidence-class UI | SHIPPED |
+| Stage-1 queue hygiene + A.6.7 promotion (catalog now 100% multi-leaf) | SHIPPED |
+| Cite-mode v1 — schema_v50 (tenant_external_system + external_evidence_source + verification_log), engine union, APIs, UI, journey wizard onboarding | DESIGNED + LOCKED — next ~2 sessions |
+| Structured change events on cite verifications (event vocabulary per evidence_type) | CAPTURED |
+| Evidence cascade — trigger catalog + implications tracking + actionable surface | CAPTURED |
+
+## Key memory entries
+
+Future sessions should read these before product work:
+
+- [[product-principle-evidence-stored-vs-cited]] — the cite/store coexistence model
+- [[product-concept-evidence-cascade-2026-06-27]] — event-driven implications
+- [[templates-v2-anchors-complete-2026-06-25]] — the 20 v2 anchor templates
+- [[template-tenant-profile-2026-06-26]] — placeholder substitution
+- [[evidence-class-breakdown-backend-2026-06-26]] — the dashboard drill-in surface
+- [[stage1-queue-sweep-2026-06-27]] + [[feedback-validate-set-membership]] — recent ops/lessons
+- [[curation-a67-remote-working-promotion-2026-06-27]] — the catalog's last single-leaf hole closed
+
 ## VM Access
 ```bash
 ssh -i ~/.ssh/arioncomplySK.pem arionlabs@172.211.244.144
@@ -65,14 +113,45 @@ curl -s -X POST http://localhost:8080/api/v1/chat \
 ```
 
 ## Key Files
-api_server.py              — FastAPI server, streaming endpoint, auth
-rag/arion_graph.py         — LangGraph pipeline, nodes, checkpointers
-rag/llm_answer.py          — LLM answer generation, layered node presentation
-rag/classifier.py          — Query classification, CLEAR_INTENT_PHRASES
-rag/resolver.py            — Per-taxonomy data source dispatch
-rag/graph_expander.py      — Neo4j graph traversal, xfw edge expansion
-static/arioncomply.html    — UI (single file, streaming chat)
-tests/eval_suite.py        — 21-query evaluation suite
+
+### Backend / pipeline
+- `api_server.py` — FastAPI server, all endpoints, auth
+- `rag/arion_graph.py` — LangGraph pipeline, nodes, checkpointers
+- `rag/llm_answer.py` — LLM answer generation, layered node presentation
+- `rag/classifier.py` — Query classification, CLEAR_INTENT_PHRASES
+- `rag/resolver.py` — Per-taxonomy data source dispatch
+- `rag/graph_expander.py` — Neo4j graph traversal, xfw edge expansion
+
+### Posture + advisory
+- `rag/posture_loader.py` — load_posture, tenant context cache
+- `rag/posture/advisory.py` — `build_per_must_advisory_data`, `build_evidence_class_breakdown`
+- `rag/posture/fulfilment_engine.py` — per-leaf MUST satisfaction
+- `rag/posture/engine_runner.py` — `evaluate_one_control`
+
+### Intake (uploads)
+- `rag/intake/readers.py` — file readers (xlsx incl. `_arion_meta` detection)
+- `rag/intake/extractor.py` — LLM extraction + templated fast paths (md + xlsx)
+- `rag/intake/posture_writer.py` — `write_findings` + per-tenant RLS GUC
+- `rag/intake/doc_pipeline.py` — orchestrator, tenant cross-check, telemetry
+
+### Templates / native formats
+- `rag/templates/renderer.py` — markdown render with tenant_profile substitution
+- `rag/templates/xlsx_renderer.py` — Excel (Register + Guidance + Document Fields + hidden _arion_meta)
+- `rag/templates/docx_renderer.py` — Word (Heading/Quote/Bullet, ☐/☒, markers preserved)
+- `db/templates/req__*.md` — 645+ template scaffolds (filesystem source of truth)
+- `scripts/build_must_index.py` — populates `musts_arioncomply` Chroma collection
+- `scripts/stage1_queue_sweep.py` — bulk-approve / soft-delete pending findings (uses loader's canonical catalog union)
+
+### Catalog
+- `enrichment/documents/document_requirements.py` — single source for ALL_EVIDENCE_REQUIREMENTS + ALL_DERIVED_SPECS
+- `enrichment/documents/load_to_neo4j.py` — Neo4j sync + orphan sweep
+- `enrichment/templates/load_to_postgres.py` — Postgres `templates` table sync
+
+### UI
+- `static/arioncomply.html` — single-page UI (Dashboard / Queue / Chat / Documents / Profile modes; streaming chat)
+
+### Tests
+- `tests/eval_suite.py` — 199-case end-to-end eval suite
 
 ## Architecture
 Query → classify node → retrieve node → update_session node → END
@@ -89,52 +168,17 @@ clarify node    (LLM rank_and_answer OR Postgres short-circuit)
 - Streaming: AsyncPostgresSaver (same DB)
 - thread_id format: `{tenant_id[:8]}:{session_id}`
 
-## Known Issues to Fix
+### Intake lanes
+- **Templated markdown** — `<<MUST item:X>>` markers + edit zones → deterministic fast-path extraction; auto-approved
+- **Templated xlsx** (round-trip) — `_arion_meta` hidden sheet → per-column + per-doc-field bindings; auto-approved; sample-stored in `tabular_evidence_rows`
+- **Form lane** (per-MUST web form) — `POST /api/v1/dashboard/control/{ref}/template` → auto-approved
+- **Workbook YAML** (xlsx → workbook_persistence) — deterministic per-MUST binding via YAML matchers
+- **Generic LLM extraction** — fallback for non-marker docs; goes through Stage-1 review queue
 
-### 1. Code duplication in rag/arion_graph.py (CRITICAL)
-The file contains duplicate definitions of these functions:
-- `_is_scope_na_query` (lines ~844 and removed, but verify)
-- `_answer_scope_na`
-- `make_retrieve_node`
-- `make_clarify_node`
-- `make_update_session_node`
-- `route_after_classify`
-- `build_arion_graph`
-
-**How to find duplicates:**
-```bash
-grep -n "^def " rag/arion_graph.py
-```
-Any function appearing twice must have the second copy removed.
-The FIRST copy of each function is the correct/patched version.
-The graph uses the LAST definition — so duplicates shadow fixes.
-
-**Fix approach:** For each duplicate, keep the first definition, remove the second.
-After removing duplicates, always run eval (60/62 must pass; #24 + #25 known-stale) before restarting.
-
-### 2. Clarification loop (depends on fix #1)
-Query: "what documents are missing?" triggers clarification instead of
-routing directly to document_inventory.
-
-Root cause: `make_update_session_node` (second duplicate) doesn't reset
-`needs_clarif=False` and `clarif_question=''` — so the next turn still
-sees `needs_clarif=True` and loops.
-
-Fix already applied to FIRST copy of `make_update_session_node`:
-```python
-def update_session(state: ArionState) -> dict:
-    return {
-        "turn_count":      state["turn_count"] + 1,
-        "clarif_count":    0,
-        "needs_clarif":    False,
-        "clarif_question": "",
-    }
-```
-Once duplicate is removed, this fix will take effect.
-
-### 3. Classifier duplicate pattern (minor)
-`rag/classifier.py` has the document_inventory pattern added twice around line 630.
-Remove the duplicate entry.
+### Auto-approve discipline
+`inference_source IN ('templated', 'form')` → auto-approved at write
+(tenant-authored, no inference uncertainty). All others land
+`pending` for Stage-1 HITL. Surfaced via `/api/v1/stage1/auto-approved`.
 
 ## Databases
 ```bash
@@ -157,11 +201,39 @@ from neo4j import GraphDatabase
 import os; from dotenv import load_dotenv; load_dotenv('.env')
 d = GraphDatabase.driver(os.getenv('NEO4J_URI'), auth=(os.getenv('NEO4J_USER'), os.getenv('NEO4J_PASSWORD')))
 with d.session() as s:
-    print('nodes:', s.run('MATCH (n) RETURN count(n) AS c').single()['c'])
-    print('rels:', s.run('MATCH ()-[r]->() RETURN count(r) AS c').single()['c'])
+    print('ER:', s.run('MATCH (n:EvidenceRequirement) RETURN count(n) AS c').single()['c'])
+    print('ChecklistItem:', s.run('MATCH (n:ChecklistItem) RETURN count(n) AS c').single()['c'])
 "
-# Expected: 654 nodes, 778 relationships
+# Expected (2026-06-27, post A.6.7 promotion): 648 EvidenceRequirement
+# + 4306 ChecklistItem nodes. Python catalog (the canonical union of
+# ALL_EVIDENCE_REQUIREMENTS + ALL_DERIVED_SPECS.direct_evidence) must
+# match — if they diverge, run `python3 enrichment/documents/load_to_neo4j.py`
+# to re-sync.
 ```
+
+## Catalog membership predicate
+
+For ANY "is this id in the catalog?" check, use the loader's
+canonical union — DO NOT roll your own scan:
+
+```python
+from enrichment.documents.document_requirements import (
+    ALL_EVIDENCE_REQUIREMENTS, ALL_DERIVED_SPECS,
+)
+all_ers = list(ALL_EVIDENCE_REQUIREMENTS) + [
+    er for ds in ALL_DERIVED_SPECS for er in ds.direct_evidence
+]
+valid_must_ids = {
+    ci.id for er in all_ers
+    for ci in list(er.must_contain) + list(er.should_contain)
+}
+```
+
+A hand-rolled `dir(drm) + isinstance(EvidenceRequirement)` scan
+misses leaves nested in `DerivedSpec.direct_evidence` — surfaced
+2026-06-27 when a queue-sweep with that wrong predicate
+soft-deleted 96 valid findings. See
+[[feedback-validate-set-membership]].
 
 ## Eval Baseline
 - Most recent: results/eval_20260602_b26.csv (157 cases — 21 core
@@ -187,6 +259,19 @@ with d.session() as s:
   + 11 Phase B GDPR Chapter IV core 11-pack — Art.24/25/26/27/28/29/31/32/33/34/35
   + 8 Phase B GDPR Ch IV DPO+codes+cert 8-pack — closes Ch IV
   + 6 Phase B GDPR Ch V Transfers 6-pack — closes Ch V + entire curation arc)
+- **Current baseline (2026-06-27)**: **197-199/199** target depending
+  on run. The known-stochastic / state-drift case set is:
+  - **#16** — LLM-stochastic on A.5.18 ref surfacing in
+    doc_inventory answers (~85-95% pass)
+  - **#21** — on the LLM-jitter list ("how should we prepare for
+    next ISO 27001 surveillance audit?")
+  - **#27** — STATE-DRIFT post-queue-cleanup (asks for "cross-
+    framework findings need review"; Stage-1 queue is now empty
+    after the 2026-06-27 full sweep, so the case may always fail
+    against a pre-sweep snapshot)
+  - **#3 / #5 / #6 / #26 / #31 / #33** — occasional LLM jitter
+- **Floor**: anything below 197/199 blocks restart and warrants
+  investigation. Re-run to distinguish variance from regression.
 - Score: 198/199 PASS target on 2026-06-23 (confirmed via baseline-confirm
   eval). Cases #3 + #5 + #16 + #21 + #33 occasionally fail on LLM
   phrasing / citation-list position — re-runs pass.
