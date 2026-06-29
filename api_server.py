@@ -4237,13 +4237,25 @@ async def verify_cites_for_leaf_source(
 
     Body:
       {
-        "changes_detected": "5 new employees onboarded; ...",  // REQUIRED
-        "note":             "additional free-text",            // optional
-        "sample_upload_id": "<uuid>",                          // optional
+        "changes_detected":   "5 new employees onboarded; ...",  // REQUIRED
+        "note":               "additional free-text",            // optional
+        "sample_upload_id":   "<uuid>",                          // optional
+        "structured_events": [                                   // optional (S2c)
+          {
+            "event_type":   "personnel_added",     // REQUIRED, must match
+                                                   // known event vocabulary
+            "count":        5,                     // REQUIRED, positive int
+            "subject_refs": ["emp:101", ...],      // optional
+            "metadata":     {...}                  // optional
+          },
+          ...
+        ]
       }
 
     The `changes_detected` field is the audit-grade payload — forces
-    real review rather than rubber-stamp verification.
+    real review rather than rubber-stamp verification. `structured_events`
+    is the cascade-engine substrate; if present, the cascade engine (S3)
+    will walk the event graph from these emissions.
     """
     changes = (payload.get("changes_detected") or "").strip()
     if not changes:
@@ -4254,6 +4266,47 @@ async def verify_cites_for_leaf_source(
         )
     note   = (payload.get("note") or "").strip() or None
     sample = payload.get("sample_upload_id") or None
+
+    # S2c: validate structured_events if provided.
+    raw_events = payload.get("structured_events") or []
+    if not isinstance(raw_events, list):
+        raise HTTPException(
+            status_code=400,
+            detail="structured_events must be a list",
+        )
+    # Lazy import to avoid hard coupling at module load.
+    from enrichment.events.event_nodes import ALL_EVENTS
+    known_event_types = {e.event_type for e in ALL_EVENTS}
+    validated_events: list[dict] = []
+    for i, ev in enumerate(raw_events):
+        if not isinstance(ev, dict):
+            raise HTTPException(400,
+                f"structured_events[{i}] must be an object")
+        et = ev.get("event_type")
+        if not et or et not in known_event_types:
+            raise HTTPException(400,
+                f"structured_events[{i}].event_type {et!r} unknown — "
+                f"must match Event.event_type in the cascade catalog")
+        cnt = ev.get("count")
+        if not isinstance(cnt, int) or cnt < 1:
+            raise HTTPException(400,
+                f"structured_events[{i}].count must be a positive integer")
+        clean = {"event_type": et, "count": cnt}
+        if "subject_refs" in ev:
+            sr = ev["subject_refs"]
+            if not isinstance(sr, list) or not all(isinstance(x, str) for x in sr):
+                raise HTTPException(400,
+                    f"structured_events[{i}].subject_refs must be a list of strings")
+            if sr:
+                clean["subject_refs"] = sr
+        if "metadata" in ev:
+            md = ev["metadata"]
+            if not isinstance(md, dict):
+                raise HTTPException(400,
+                    f"structured_events[{i}].metadata must be an object")
+            if md:
+                clean["metadata"] = md
+        validated_events.append(clean)
 
     pool = request.app.state.pg_pool
     conn = pool.getconn()
@@ -4285,28 +4338,470 @@ async def verify_cites_for_leaf_source(
                     detail="no active cites found for this (leaf, source)",
                 )
 
-            # Append the verification log row
+            # Append the verification log row (with structured_events JSONB)
+            import json as _json
             cur.execute(
                 """
                 INSERT INTO external_evidence_verification_log
                     (tenant_id, system_id, leaf_id, verified_by,
                      changes_detected, sample_upload_id, note,
-                     musts_covered_count)
-                VALUES (%s::uuid, %s::uuid, %s, %s::uuid, %s, %s::uuid, %s, %s)
+                     musts_covered_count, structured_events)
+                VALUES (%s::uuid, %s::uuid, %s, %s::uuid, %s, %s::uuid, %s, %s, %s::jsonb)
                 RETURNING id::text, verified_at
                 """,
                 (key_info.tenant_id, system_id, leaf_id, key_info.user_id,
-                 changes, sample, note, len(updated_ids)),
+                 changes, sample, note, len(updated_ids),
+                 _json.dumps(validated_events)),
             )
             log_row = cur.fetchone()
+
+            # ── S3 cascade fire ─────────────────────────────────────────
+            # If structured_events were submitted, synchronously walk the
+            # cascade graph and write triggered_implication rows. Best-
+            # effort: on engine error, log + swallow rather than fail
+            # the verification (audit trail still complete via log row).
+            implications_written = 0
+            followups_written    = 0
+            followups_satisfied  = 0
+            fact_changes_applied = 0
+            fact_changes_logged  = 0
+            scope_implications   = 0
+            suppressions         = 0
+            if validated_events:
+                neo_drv = None
+                try:
+                    from rag.posture_loader import _build_engine_neo4j_driver
+                    from rag.cascade.engine import fire_cascade
+                    neo_drv = _build_engine_neo4j_driver()
+                    if neo_drv is None:
+                        logger.warning("cascade engine: Neo4j driver "
+                                       "unavailable; skipping cascade for "
+                                       "verify %s", log_row[0])
+                    else:
+                        with neo_drv.session() as neo_session:
+                            cascade_result = fire_cascade(
+                                cur, neo_session,
+                                tenant_id           = key_info.tenant_id,
+                                verification_log_id = log_row[0],
+                                verified_at         = log_row[1],
+                                structured_events   = validated_events,
+                            )
+                            implications_written = cascade_result["implications"]
+                            followups_written    = cascade_result["followups_written"]
+                            followups_satisfied  = cascade_result["followups_satisfied"]
+                            fact_changes_applied = cascade_result.get("fact_changes_applied", 0)
+                            fact_changes_logged  = cascade_result.get("fact_changes_logged",  0)
+                            scope_implications   = cascade_result.get("scope_implications",   0)
+                            suppressions         = cascade_result.get("suppressions",         0)
+                except Exception as ex:
+                    logger.exception("cascade engine failed for verify %s: %s",
+                                     log_row[0], ex)
+                    # Continue — log the failure but don't roll back the
+                    # verification commit.
+                finally:
+                    if neo_drv is not None:
+                        try: neo_drv.close()
+                        except Exception: pass
         conn.commit()
     finally:
         pool.putconn(conn)
     return {
-        "verification_log_id": log_row[0],
-        "verified_at":         log_row[1].isoformat(),
-        "musts_covered":       len(updated_ids),
+        "verification_log_id":  log_row[0],
+        "verified_at":          log_row[1].isoformat(),
+        "musts_covered":        len(updated_ids),
+        "structured_events":    len(validated_events),
+        "implications_written": implications_written,
+        "followups_written":    followups_written,
+        "followups_satisfied":  followups_satisfied,
+        "fact_changes_applied": fact_changes_applied,
+        "fact_changes_logged":  fact_changes_logged,
+        "scope_implications":   scope_implications,
+        "suppressions":         suppressions,
     }
+
+
+@app.get("/api/v1/tenant/cascade-events/vocabulary", tags=["templates"])
+async def cascade_events_vocabulary(
+    request: Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Return the cascade-event vocabulary the verify-dialog UI uses to
+    populate the structured-events picker. Reads from
+    enrichment/events/event_nodes.py — single source of truth.
+
+    Grouped by category so the UI can render a categorised picker.
+    """
+    from enrichment.events.event_nodes import ALL_EVENTS
+    by_cat: dict[str, list[dict]] = {}
+    for ev in ALL_EVENTS:
+        cat = ev.category
+        by_cat.setdefault(cat, []).append({
+            "event_type":  ev.event_type,
+            "title":       ev.title,
+            "description": ev.description,
+        })
+    # Sort within each category by event_type for stable ordering.
+    for cat in by_cat:
+        by_cat[cat].sort(key=lambda e: e["event_type"])
+    return {"vocabulary": by_cat}
+
+
+@app.get("/api/v1/tenant/triggered-implications", tags=["posture"])
+async def list_triggered_implications(
+    request: Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    status:  str = "pending",
+    group_by_verification: bool = True,
+):
+    """List triggered implications for this tenant.
+
+    Default returns pending (the actionable set). Pass status=satisfied
+    or dismissed for historical views. Pass group_by_verification=False
+    for a flat list.
+
+    Pending rows past their due_date carry overdue=true in the response
+    (computed, not stored).
+    """
+    if status not in ("pending", "satisfied", "dismissed"):
+        raise HTTPException(400, "status must be pending / satisfied / dismissed")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT id::text,
+                       source_verification_id::text,
+                       source_event_type,
+                       cascade_path,
+                       cascade_depth,
+                       target_control_ref,
+                       target_standard_id,
+                       target_requirement_id,
+                       expected_action,
+                       fired_at,
+                       due_date,
+                       status,
+                       resolved_at,
+                       resolved_evidence_kind,
+                       dismissed_reason,
+                       deadline_string,
+                       rationale,
+                       scope_kind
+                  FROM triggered_implication
+                 WHERE tenant_id = %s::uuid
+                   AND status    = %s
+                 ORDER BY due_date NULLS LAST, fired_at DESC
+                """,
+                (key_info.tenant_id, status),
+            )
+            rows = cur.fetchall()
+
+    finally:
+        pool.putconn(conn)
+
+    from datetime import datetime, timezone
+    now = datetime.now(timezone.utc)
+    items = []
+    for r in rows:
+        due = r[10]
+        items.append({
+            "id":                    r[0],
+            "source_verification_id": r[1],
+            "source_event_type":     r[2],
+            "cascade_path":          r[3],
+            "cascade_depth":         r[4],
+            "target_control_ref":    r[5],
+            "target_standard_id":    r[6],
+            "target_requirement_id": r[7],
+            "expected_action":       r[8],
+            "fired_at":              r[9].isoformat() if r[9] else None,
+            "due_date":              due.isoformat() if due else None,
+            "overdue":               bool(status == "pending" and due and due < now),
+            "status":                r[11],
+            "resolved_at":           r[12].isoformat() if r[12] else None,
+            "resolved_evidence_kind": r[13],
+            "dismissed_reason":      r[14],
+            "deadline_string":       r[15],
+            "rationale":             r[16],
+            "scope_kind":            r[17],
+        })
+
+    if not group_by_verification:
+        return {"items": items, "count": len(items)}
+
+    # Group by source_verification_id; preserve per-group ordering
+    groups: dict[str, dict] = {}
+    for it in items:
+        vid = it["source_verification_id"]
+        if vid not in groups:
+            groups[vid] = {
+                "verification_id":  vid,
+                "source_event_types": [],
+                "implications":     [],
+            }
+        groups[vid]["implications"].append(it)
+        if it["source_event_type"] not in groups[vid]["source_event_types"]:
+            groups[vid]["source_event_types"].append(it["source_event_type"])
+    return {
+        "groups": list(groups.values()),
+        "count":  len(items),
+        "group_count": len(groups),
+    }
+
+
+@app.patch("/api/v1/tenant/triggered-implications/{imp_id}", tags=["posture"])
+async def update_triggered_implication(
+    imp_id:   str,
+    request:  Request,
+    payload:  dict,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Resolve a triggered implication.
+
+    Body must include status='satisfied' or status='dismissed'. When
+    dismissing, dismissed_reason is required (audit-grade). Satisfied
+    rows may optionally carry resolved_evidence_kind + resolved_evidence_id.
+    """
+    new_status = payload.get("status")
+    if new_status not in ("satisfied", "dismissed"):
+        raise HTTPException(400, "status must be 'satisfied' or 'dismissed'")
+
+    dismissed_reason = (payload.get("dismissed_reason") or "").strip() or None
+    if new_status == "dismissed" and not dismissed_reason:
+        raise HTTPException(400,
+            "dismissed_reason is required when dismissing — auditor-grade explanation")
+
+    ev_kind = payload.get("resolved_evidence_kind")
+    ev_id   = payload.get("resolved_evidence_id")
+    if ev_kind and ev_kind not in ("finding", "cite", "dismissal"):
+        raise HTTPException(400,
+            "resolved_evidence_kind must be finding / cite / dismissal")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                UPDATE triggered_implication
+                   SET status                 = %s,
+                       resolved_at            = now(),
+                       resolved_by            = %s::uuid,
+                       resolved_evidence_kind = %s,
+                       resolved_evidence_id   = %s::uuid,
+                       dismissed_reason       = %s
+                 WHERE tenant_id = %s::uuid
+                   AND id        = %s::uuid
+                   AND status    = 'pending'
+                RETURNING id::text, status, resolved_at
+                """,
+                (new_status, key_info.user_id, ev_kind, ev_id,
+                 dismissed_reason, key_info.tenant_id, imp_id),
+            )
+            updated = cur.fetchone()
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+    if not updated:
+        raise HTTPException(404,
+            "implication not found or no longer pending")
+    return {
+        "id":           updated[0],
+        "status":       updated[1],
+        "resolved_at":  updated[2].isoformat(),
+    }
+
+
+@app.get("/api/v1/tenant/expected-followups", tags=["posture"])
+async def list_expected_followups(
+    request: Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    status:  str = "pending",
+):
+    """List expected followup events for this tenant.
+
+    status: pending | satisfied | overdue. Default pending.
+    Overdue rows reflect cascade chains where a downstream event
+    was expected within a window but never arrived (e.g. personnel
+    offboarded but no privilege_revoked within 24h).
+    """
+    if status not in ("pending", "satisfied", "overdue"):
+        raise HTTPException(400, "status must be pending / satisfied / overdue")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT id::text, source_verification_id::text,
+                       source_event_type, expected_event_type,
+                       window_days, fired_at, expires_at, status,
+                       resolved_at, resolved_verification_id::text,
+                       rationale
+                  FROM expected_followup_event
+                 WHERE tenant_id = %s::uuid
+                   AND status    = %s
+                 ORDER BY expires_at
+                """,
+                (key_info.tenant_id, status),
+            )
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+
+    from datetime import datetime, timezone
+    now = datetime.now(timezone.utc)
+    items = []
+    for r in rows:
+        exp = r[6]
+        items.append({
+            "id":                       r[0],
+            "source_verification_id":   r[1],
+            "source_event_type":        r[2],
+            "expected_event_type":      r[3],
+            "window_days":              r[4],
+            "fired_at":                 r[5].isoformat() if r[5] else None,
+            "expires_at":               exp.isoformat() if exp else None,
+            "status":                   r[7],
+            "resolved_at":              r[8].isoformat() if r[8] else None,
+            "resolved_verification_id": r[9],
+            "rationale":                r[10],
+            "days_until_expiry":        (
+                int((exp - now).total_seconds() / 86400) if exp and r[7] == "pending" else None
+            ),
+        })
+    return {"items": items, "count": len(items)}
+
+
+@app.get("/api/v1/tenant/cascade-suppressions", tags=["posture"])
+async def list_cascade_suppressions(
+    request: Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    limit:   int = 50,
+):
+    """Audit log of EMITS_EVENT edges suppressed by applies_when
+    evaluation. Auditor view of "cascades that were considered and
+    consciously skipped because the condition didn't hold".
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT id::text,
+                       source_verification_id::text,
+                       source_event_type,
+                       target_event_type,
+                       applies_when,
+                       evaluation_context,
+                       cascade_path,
+                       fired_at
+                  FROM cascade_suppression_log
+                 WHERE tenant_id = %s::uuid
+                 ORDER BY fired_at DESC
+                 LIMIT %s
+                """,
+                (key_info.tenant_id, max(1, min(int(limit), 500))),
+            )
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+    return {
+        "items": [
+            {
+                "id":                     r[0],
+                "source_verification_id": r[1],
+                "source_event_type":      r[2],
+                "target_event_type":      r[3],
+                "applies_when":           r[4],
+                "evaluation_context":     r[5],
+                "cascade_path":           r[6],
+                "fired_at":               r[7].isoformat() if r[7] else None,
+            } for r in rows
+        ],
+        "count": len(rows),
+    }
+
+
+@app.get("/api/v1/tenant/client-facts/changes", tags=["posture"])
+async def list_client_fact_changes(
+    request: Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    limit:   int = 50,
+):
+    """Append-only audit log of cascade-fired ClientFact mutations.
+    Returns newest first. Each row carries the source verification,
+    operation, old/new value, and whether the change was applied
+    (false for v1 'recompute' which is observational).
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT id::text, fact_id, operation,
+                       old_value, new_value, applied,
+                       source_verification_id::text, source_event_type,
+                       rationale, fired_at
+                  FROM client_fact_change_log
+                 WHERE tenant_id = %s::uuid
+                 ORDER BY fired_at DESC
+                 LIMIT %s
+                """,
+                (key_info.tenant_id, max(1, min(int(limit), 500))),
+            )
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+    return {
+        "items": [
+            {
+                "id":                     r[0],
+                "fact_id":                r[1],
+                "operation":              r[2],
+                "old_value":              r[3],
+                "new_value":              r[4],
+                "applied":                r[5],
+                "source_verification_id": r[6],
+                "source_event_type":      r[7],
+                "rationale":              r[8],
+                "fired_at":               r[9].isoformat() if r[9] else None,
+            } for r in rows
+        ],
+        "count": len(rows),
+    }
+
+
+@app.post("/api/v1/tenant/expected-followups/sweep", tags=["posture"])
+async def run_followup_sweep(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Mark pending followups whose window elapsed as 'overdue'.
+
+    On-demand sweep (no scheduler yet). Returns count flipped.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            from rag.cascade.engine import sweep_overdue_followups
+            n = sweep_overdue_followups(cur, tenant_id=key_info.tenant_id)
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+    return {"overdue_marked": n}
 
 
 @app.get("/api/v1/tenant/cites/leaf/{leaf_id:path}/source/{system_id}/log", tags=["templates"])
