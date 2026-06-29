@@ -31,6 +31,17 @@ from typing import Optional
 
 # Edge types this catalog owns. New edge types must be added here
 # AND the loader must be updated to MERGE / prune them.
+#
+# S6 (intra-framework): PAIRS_WITH / PREREQUISITE_OF / ESCALATES_TO /
+#                       CASCADES_FROM / FEEDS_INTO / AUDITED_BY
+# S2b (cascade-suppression): BLOCKS_WHEN
+#   Source: RequirementNode (an obligation).
+#   Target: RequirementNode OR ClientFact representing a suppression
+#           condition. Semantics: when target's state matches the
+#           authored applies_when, the source obligation is SUPPRESSED
+#           (does not fire from a cascade). Example: A.5.33 retention
+#           expiry BLOCKS_WHEN A.5.31:legal_hold_active. Reserved at
+#           S2b — no edges authored yet, awaits curation pass.
 MANAGED_EDGE_TYPES = (
     "PAIRS_WITH",
     "PREREQUISITE_OF",
@@ -38,6 +49,7 @@ MANAGED_EDGE_TYPES = (
     "CASCADES_FROM",
     "FEEDS_INTO",
     "AUDITED_BY",
+    "BLOCKS_WHEN",
 )
 
 # Edge types that are SYMMETRIC — loader writes both directions.

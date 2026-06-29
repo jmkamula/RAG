@@ -18,12 +18,25 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
     from neo4j import GraphDatabase
     driver = GraphDatabase.driver(uri, auth=(user, password))
 
-    total_events   = 0
-    total_triggers = 0
-    total_doc_rels = 0
-    missing        = []
+    total_events       = 0
+    total_triggers     = 0
+    total_doc_rels     = 0
+    # S2b meta-cascade counters
+    total_emits        = 0
+    total_followups    = 0
+    total_fact_updates = 0
+    total_expands      = 0
+    total_cascades     = 0
+    missing            = []
 
     with driver.session() as s:
+        # ── Pre-pass: MERGE every Event node first so that meta-cascade
+        # edges (EMITS_EVENT, EXPECTS_FOLLOWUP_EVENT) can reference any
+        # target regardless of authoring order in ALL_EVENTS.
+        if not dry_run:
+            for event in ALL_EVENTS:
+                s.run("MERGE (e:Event {id: $id})", id=event.id).consume()
+
         for event in ALL_EVENTS:
 
             if dry_run:
@@ -108,9 +121,120 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
                 ).consume()
                 total_doc_rels += 1
 
+            # ── S2b: meta-cascade edges from the meditation patterns ─────
+            # Each field on Event is optional; loops are no-ops when empty.
+
+            # EMITS_EVENT — event → event (P1: cross-domain handoff)
+            for em in event.emits_events:
+                tgt = s.run(
+                    "MATCH (n:Event {id: $id}) RETURN n.id",
+                    id=em.target_event_id
+                ).single()
+                if not tgt:
+                    missing.append((event.event_type, em.target_event_id))
+                    continue
+                s.run("""
+                    MATCH (a:Event {id: $src})
+                    MATCH (b:Event {id: $tgt})
+                    MERGE (a)-[r:EMITS_EVENT]->(b)
+                    SET r.rationale    = $rationale,
+                        r.applies_when = coalesce($applies_when, ''),
+                        r.updated_at   = datetime()
+                """, src=event.id, tgt=em.target_event_id,
+                     rationale=em.rationale, applies_when=em.applies_when).consume()
+                total_emits += 1
+
+            # EXPECTS_FOLLOWUP_EVENT — event → event with window (P2)
+            for ef in event.expects_followups:
+                tgt = s.run(
+                    "MATCH (n:Event {id: $id}) RETURN n.id",
+                    id=ef.target_event_id
+                ).single()
+                if not tgt:
+                    missing.append((event.event_type, ef.target_event_id))
+                    continue
+                s.run("""
+                    MATCH (a:Event {id: $src})
+                    MATCH (b:Event {id: $tgt})
+                    MERGE (a)-[r:EXPECTS_FOLLOWUP_EVENT]->(b)
+                    SET r.window_days = $window_days,
+                        r.rationale   = $rationale,
+                        r.updated_at  = datetime()
+                """, src=event.id, tgt=ef.target_event_id,
+                     window_days=ef.window_days, rationale=ef.rationale).consume()
+                total_followups += 1
+
+            # UPDATES_FACT — event → ClientFact (P3)
+            for uf in event.updates_facts:
+                tgt = s.run(
+                    "MATCH (n:ClientFact {id: $id}) RETURN n.id",
+                    id=uf.fact_id
+                ).single()
+                if not tgt:
+                    missing.append((event.event_type, uf.fact_id))
+                    continue
+                s.run("""
+                    MATCH (a:Event {id: $src})
+                    MATCH (b:ClientFact {id: $tgt})
+                    MERGE (a)-[r:UPDATES_FACT {operation: $op}]->(b)
+                    SET r.rationale  = $rationale,
+                        r.updated_at = datetime()
+                """, src=event.id, tgt=uf.fact_id,
+                     op=uf.operation, rationale=uf.rationale).consume()
+                total_fact_updates += 1
+
+            # EXPANDS_SCOPE — event → RequirementNode (P4) with scope_kind
+            for es in event.expands_scope:
+                for control_id in es.control_set:
+                    tgt = s.run(
+                        "MATCH (n:RequirementNode {id: $id}) RETURN n.id",
+                        id=control_id
+                    ).single()
+                    if not tgt:
+                        missing.append((event.event_type, control_id))
+                        continue
+                    s.run("""
+                        MATCH (a:Event {id: $src})
+                        MATCH (b:RequirementNode {id: $tgt})
+                        MERGE (a)-[r:EXPANDS_SCOPE {scope_kind: $kind}]->(b)
+                        SET r.rationale  = $rationale,
+                            r.updated_at = datetime()
+                    """, src=event.id, tgt=control_id,
+                         kind=es.scope_kind, rationale=es.rationale).consume()
+                    total_expands += 1
+
+            # CASCADES_REVIEW — event → RequirementNode (re-evaluate)
+            for control_id in event.cascades_review:
+                tgt = s.run(
+                    "MATCH (n:RequirementNode {id: $id}) RETURN n.id",
+                    id=control_id
+                ).single()
+                if not tgt:
+                    missing.append((event.event_type, control_id))
+                    continue
+                s.run("""
+                    MATCH (a:Event {id: $src})
+                    MATCH (b:RequirementNode {id: $tgt})
+                    MERGE (a)-[r:CASCADES_REVIEW]->(b)
+                    SET r.updated_at = datetime()
+                """, src=event.id, tgt=control_id).consume()
+                total_cascades += 1
+
+            # Per-event progress line
+            meta_summary = ""
+            meta_counts = (
+                len(event.emits_events), len(event.expects_followups),
+                len(event.updates_facts),
+                sum(len(es.control_set) for es in event.expands_scope),
+                len(event.cascades_review),
+            )
+            if any(meta_counts):
+                meta_summary = (f"  meta=[em:{meta_counts[0]} fu:{meta_counts[1]} "
+                                f"uf:{meta_counts[2]} es:{meta_counts[3]} "
+                                f"cr:{meta_counts[4]}]")
             print(f"  ✓ {event.event_type:40s} "
                   f"{len(event.triggers)} triggers  "
-                  f"{len(event.requires_evidence)} docs")
+                  f"{len(event.requires_evidence)} docs{meta_summary}")
 
     driver.close()
 
@@ -121,6 +245,11 @@ def load(uri: str, user: str, password: str, dry_run: bool = False) -> None:
         print(f"✓ Event nodes:              {total_events}")
         print(f"✓ TRIGGERS_OBLIGATION rels: {total_triggers}")
         print(f"✓ REQUIRES_EVIDENCE rels:   {total_doc_rels}")
+        print(f"✓ EMITS_EVENT rels:         {total_emits}")
+        print(f"✓ EXPECTS_FOLLOWUP rels:    {total_followups}")
+        print(f"✓ UPDATES_FACT rels:        {total_fact_updates}")
+        print(f"✓ EXPANDS_SCOPE rels:       {total_expands}")
+        print(f"✓ CASCADES_REVIEW rels:     {total_cascades}")
 
     if missing:
         print(f"\n⚠ {len(missing)} nodes not found:")
@@ -144,6 +273,12 @@ def verify(uri: str, user: str, password: str) -> None:
         print(f"  Event nodes:              {stats['events']}")
         print(f"  TRIGGERS_OBLIGATION rels: {stats['trigs']}")
         print(f"  Event REQUIRES_EVIDENCE:  {stats['doc_rels']}")
+
+        # S2b meta-cascade edges
+        for et in ('EMITS_EVENT', 'EXPECTS_FOLLOWUP_EVENT',
+                   'UPDATES_FACT', 'EXPANDS_SCOPE', 'CASCADES_REVIEW'):
+            c = s.run(f"MATCH ()-[r:`{et}`]->() RETURN count(r) AS c").single()['c']
+            print(f"  {et:24s}: {c}")
 
         by_cat = s.run("""
             MATCH (e:Event)
