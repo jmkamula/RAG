@@ -1612,10 +1612,20 @@ async function selectHeatCell(c, ev) {
 
   document.getElementById('dp-ref').textContent = c.control_ref;
   document.getElementById('dp-std').textContent = c.display_name || c.standard_id;
-  // Reset canonical summary — the heatcell click doesn't fetch a verdict,
-  // so the previous selection's title/description would otherwise leak.
+  // Reset canonical summary first so the previous selection's title /
+  // description doesn't leak while we fetch the new one.
   populateCanonicalSummary(null);
   document.getElementById('dp-finding').innerHTML = pill(c.finding);
+
+  // Fetch canonical title + obligation_text for this control (async).
+  // Best-effort: panel still renders if Neo4j is unreachable.
+  api(`/api/v1/dashboard/control/${encodeURIComponent(c.control_ref)}/canonical?standard_id=${encodeURIComponent(c.standard_id || '')}`)
+    .then(s => {
+      if (selected && selected.control_ref === c.control_ref) {
+        populateCanonicalSummary(s);
+      }
+    })
+    .catch(() => { /* ref-only fallback is fine */ });
   document.getElementById('dp-sys-wrap').style.display = 'none';
   // Confirmation status + engine state in the meta footer.
   const bits = [];

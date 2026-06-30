@@ -5152,6 +5152,38 @@ async def cascade_timeline(
     }
 
 
+@app.get("/api/v1/dashboard/control/{control_ref}/canonical", tags=["posture"])
+async def dashboard_control_canonical(
+    control_ref: str,
+    request:     Request,
+    standard_id: Optional[str] = None,
+    key_info:    APIKeyInfo = Depends(require_api_key),
+):
+    """Return canonical title + obligation text for a control (the
+    standard's authoritative statement). Used by the dashboard heatmap
+    cell detail panel to surface "what does A.5.15 actually say?".
+
+    standard_id is optional: defaults to ISO27001:2022 when the ref
+    starts with A.x or a clause-style number; defaults to GDPR:2016/679
+    when the ref starts with Art.
+    """
+    if standard_id is None:
+        if control_ref.startswith("Art."):
+            standard_id = "GDPR:2016/679"
+        else:
+            standard_id = "ISO27001:2022"
+    neo_drv = None
+    try:
+        from rag.posture_loader import _build_engine_neo4j_driver
+        neo_drv = _build_engine_neo4j_driver()
+        summary = _resolve_control_summary(neo_drv, standard_id, control_ref)
+    finally:
+        if neo_drv is not None:
+            try: neo_drv.close()
+            except Exception: pass
+    return summary
+
+
 @app.get("/api/v1/dashboard/cascade-kpis", tags=["posture"])
 async def cascade_kpis(
     request: Request,
