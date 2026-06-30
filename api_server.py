@@ -2464,6 +2464,19 @@ async def dashboard_posture(
             """, [key_info.tenant_id])
             rows = cur.fetchall()
 
+        # ── S3e: cascade pressure overlay ────────────────────────────
+        # Read-only aggregation of triggered_implication rows; surfaces
+        # alongside each control. Pure observability — does NOT modify
+        # the live posture verdict here (the optional posture-flipping
+        # overlay runs in load_posture, writes pending PAs through
+        # Stage-2 like other engine proposals).
+        try:
+            from rag.cascade.posture_overlay import compute_cascade_pressure
+            cascade_pressure = compute_cascade_pressure(conn, key_info.tenant_id)
+        except Exception as ex:
+            logger.warning("cascade pressure overlay failed: %s", ex)
+            cascade_pressure = {}
+
         # Bucket controls by (standard, theme).
         by_std: dict = {}
         for (std, ref, finding, conf, gap, eng_status, eng_finding,
@@ -2481,6 +2494,8 @@ async def dashboard_posture(
             # surface as evidence text (see context_assembler relabel for
             # the chat side).
             display_gap = gap or _humanize_reason(eng_reason or "")
+            req_id = f"{std}:{ref}"
+            cp = cascade_pressure.get(req_id) or {}
             entry["groups"].setdefault(theme, []).append({
                 "control_ref":              ref,
                 "finding":                  finding,
@@ -2490,6 +2505,11 @@ async def dashboard_posture(
                 "engine_proposal_status":   eng_status,
                 "engine_proposed_finding":  eng_finding,
                 "engine_proposal_reason":   _humanize_reason(eng_reason or ""),
+                "cascade_pressure":         {
+                    "pending":   cp.get("pending_count",   0),
+                    "overdue":   cp.get("overdue_count",   0),
+                    "satisfied": cp.get("satisfied_count", 0),
+                } if cp else None,
             })
             entry["summary"][finding] = entry["summary"].get(finding, 0) + 1
             entry["summary"]["total"] += 1

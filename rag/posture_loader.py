@@ -114,13 +114,33 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
     # Fulfilment-engine overlay: override multi-leaf curated verdicts.
     engine_overrides = _apply_engine_overlay(posture, tenant_id, pg_conn)
 
+    # S3e: cascade overlay — controls with overdue triggered_implications
+    # get pending engine PAs (Stage-2 review queue). Best-effort: failure
+    # here does not corrupt the live posture.
+    cascade_proposals = 0
+    try:
+        from rag.cascade.posture_overlay import (
+            compute_cascade_pressure, propose_from_cascade,
+        )
+        pressure = compute_cascade_pressure(pg_conn, tenant_id)
+        if pressure:
+            live = {nid: rec["finding"] for nid, rec in posture.items()}
+            cascade_proposals = propose_from_cascade(
+                pg_conn, tenant_id, pressure, live,
+            )
+            if cascade_proposals:
+                pg_conn.commit()
+    except Exception as ex:
+        logger.warning("cascade posture overlay skipped: %s", ex)
+
     logger.info(
         f"load_posture: {len(posture)} controls loaded for {tenant_id} "
         f"({sum(1 for r in posture.values() if r['finding']=='NC')} NC, "
         f"{sum(1 for r in posture.values() if r['finding']=='OFI')} OFI, "
         f"{sum(1 for r in posture.values() if r['finding']=='Comply')} Comply, "
         f"{sum(1 for r in posture.values() if r['finding']=='N/A')} N/A; "
-        f"engine_overrides={engine_overrides})"
+        f"engine_overrides={engine_overrides}; "
+        f"cascade_proposals={cascade_proposals})"
     )
     return posture
 

@@ -89,7 +89,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .dash-group-label{font-size:11px;color:#5F5E5A;font-weight:500;margin-bottom:5px;display:flex;justify-content:space-between}
 .dash-group-label span:last-child{color:#9C9A8E}
 .heat-grid{display:flex;flex-wrap:wrap;gap:3px}
-.heat-cell{width:13px;height:13px;border-radius:2px;cursor:pointer;border:1px solid transparent;transition:transform .08s}
+.heat-cell{width:13px;height:13px;border-radius:2px;cursor:pointer;border:1px solid transparent;transition:transform .08s;position:relative}
 .heat-cell:hover{border-color:#3C3489;transform:scale(1.4)}
 .heat-cell.active{outline:2px solid #3C3489;outline-offset:1px}
 .heat-cell.f-NC{background:#D9534F}
@@ -97,6 +97,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .heat-cell.f-Comply{background:#7FB36F}
 .heat-cell.f-NA{background:#C9C7BC}
 .heat-cell.f-NotAssessed{background:#EEECE2;border:1px solid #DCD9CB}
+.heat-cell.cascade-pending::after{content:'';position:absolute;top:-2px;right:-2px;width:5px;height:5px;border-radius:50%;background:#3C3489;border:1px solid #fff;pointer-events:none}
+.heat-cell.cascade-overdue::after{content:'';position:absolute;top:-2px;right:-2px;width:5px;height:5px;border-radius:50%;background:#9C2E2E;border:1px solid #fff;pointer-events:none}
 .heat-legend{display:flex;gap:14px;align-items:center;font-size:11px;color:#5F5E5A;margin:4px 0 0}
 .heat-legend-swatch{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:middle;margin-right:4px}
 .dash-empty{padding:40px 20px;text-align:center;color:#9C9A8E;font-size:13px}
@@ -1052,7 +1054,11 @@ function renderDashboard(d, freshness, implications, followups) {
         <div class="heat-grid">`;
       for (const c of g.controls) {
         const cls = _FINDING_CLASS[c.finding] || 'f-NotAssessed';
-        const tip = `${c.control_ref} — ${c.finding}`;
+        const cp = c.cascade_pressure;
+        let cpCls = '', cpTip = '';
+        if (cp && cp.overdue > 0) { cpCls = ' cascade-overdue'; cpTip = ` · ${cp.overdue} overdue cascade implication${cp.overdue>1?'s':''}`; }
+        else if (cp && cp.pending > 0) { cpCls = ' cascade-pending'; cpTip = ` · ${cp.pending} pending cascade implication${cp.pending>1?'s':''}`; }
+        const tip = `${c.control_ref} — ${c.finding}${cpTip}`;
         // Escape JSON for an HTML single-quoted onclick attribute. Order
         // matters: encode `"` first (becomes &quot;) then `'` (becomes
         // &#39;). The browser HTML-decodes both back to `"` and `'` for
@@ -1061,7 +1067,7 @@ function renderDashboard(d, freshness, implications, followups) {
         // backslash escapes in attribute values).
         const safe = JSON.stringify({...c, standard_id: fw.standard_id, display_name: fw.display_name})
           .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-        html += `<div class="heat-cell ${cls}" title="${escapeHtml(tip)}" data-ref="${escapeHtml(c.control_ref)}" onclick='selectHeatCell(${safe}, event)'></div>`;
+        html += `<div class="heat-cell ${cls}${cpCls}" title="${escapeHtml(tip)}" data-ref="${escapeHtml(c.control_ref)}" onclick='selectHeatCell(${safe}, event)'></div>`;
       }
       html += '</div></div>';
     }
