@@ -1883,7 +1883,83 @@ INTRA_GDPR_EDGES: list[RelationshipEdge] = [
 ]
 
 
+# ── BLOCKS_WHEN edges (S3i — negative cascade) ────────────────────────
+# Each edge marks the SOURCE control's implications as suppressible
+# when the applies_when expression evaluates true against the cascade
+# metadata. Engine consults these before writing an implication on
+# the source control; matched blockers go to cascade_suppression_log
+# with suppression_kind='blocks_when'.
+#
+# The TARGET control is the state-bearing control that conceptually
+# manages the blocker condition (e.g., A.5.31 legal register is where
+# legal holds are recorded). The relationship is informational —
+# the engine evaluates applies_when against the cascade metadata, not
+# against the target control's own state. The target is a curation
+# anchor for "where would the auditor look to confirm the blocker?".
+
+BLOCKS_WHEN_EDGES: list[RelationshipEdge] = [
+    RelationshipEdge(
+        source_ref='A.5.33', source_standard_id='ISO27001:2022',
+        target_ref='A.5.31', target_standard_id='ISO27001:2022',
+        edge_type='BLOCKS_WHEN',
+        applies_when='legal_hold == true',
+        rationale='Retention-period-reached deletion is suppressed when '
+                  'a legal hold is active on the affected records. Auditor '
+                  'verifies hold via A.5.31 legal/regulatory register.',
+        citation='ISO27002:2022 §5.33 + §5.31 (legal-hold exception to retention)',
+        role='legal_hold',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.10', source_standard_id='ISO27001:2022',
+        target_ref='A.5.31', target_standard_id='ISO27001:2022',
+        edge_type='BLOCKS_WHEN',
+        applies_when='legal_hold == true',
+        rationale='Information deletion (A.8.10) is suppressed when a legal '
+                  'hold is active. Same blocker as A.5.33 retention path.',
+        citation='ISO27002:2022 §8.10 + §5.31',
+        role='legal_hold',
+    ),
+    RelationshipEdge(
+        source_ref='Art.17', source_standard_id='GDPR:2016/679',
+        target_ref='Art.6', target_standard_id='GDPR:2016/679',
+        edge_type='BLOCKS_WHEN',
+        applies_when='legal_obligation_to_retain == true',
+        rationale='GDPR Art.17.3.b: erasure is suppressed when processing '
+                  'is necessary for compliance with a legal obligation '
+                  '(Art.6.1.c lawful basis). Auditor verifies the legal-'
+                  'obligation basis in the Art.6 lawful-basis register.',
+        citation='GDPR Art.17.3.b read with Art.6.1.c',
+        role='legal_obligation',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.18', source_standard_id='ISO27001:2022',
+        target_ref='A.5.26', target_standard_id='ISO27001:2022',
+        edge_type='BLOCKS_WHEN',
+        applies_when='investigation_in_progress == true',
+        rationale='Access-rights revocation may be deferred when an '
+                  'incident investigation needs the subject to retain '
+                  'access for forensic continuity. Suppressed until '
+                  'investigation closes. Auditor verifies in A.5.26 '
+                  'incident register.',
+        citation='ISO27002:2022 §5.18 + §5.26 (investigation continuity)',
+        role='active_investigation',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.30', source_standard_id='ISO27001:2022',
+        target_ref='A.5.24', target_standard_id='ISO27001:2022',
+        edge_type='BLOCKS_WHEN',
+        applies_when='active_incident == true',
+        rationale='Scheduled ICT-readiness tests are suppressed while a '
+                  'real incident is in progress (avoid resource conflict). '
+                  'Auditor verifies via A.5.24 incident-response framework.',
+        citation='ISO27002:2022 §5.30 + §5.24',
+        role='active_incident',
+    ),
+]
+
+
 ALL_EDGES: list[RelationshipEdge] = (
     INTRA_ISO_EDGES
     + INTRA_GDPR_EDGES
+    + BLOCKS_WHEN_EDGES
 )

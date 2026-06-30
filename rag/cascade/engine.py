@@ -272,6 +272,26 @@ def fetch_fact_updates_for_event(neo_session, event_type: str) -> list[dict]:
              "rationale": r["rationale"] or ""} for r in result]
 
 
+def fetch_blockers_for_control(neo_session, requirement_id: str) -> list[dict]:
+    """Return all BLOCKS_WHEN edges on a control (the SOURCE of the
+    edge is the control whose implications are suppressible).
+
+    Each dict: {applies_when, rationale, target_requirement_id}.
+    """
+    result = neo_session.run(
+        """
+        MATCH (a:RequirementNode {id: $id})-[r:BLOCKS_WHEN]->(b:RequirementNode)
+        RETURN r.applies_when AS applies_when,
+               r.rationale    AS rationale,
+               b.id           AS target_id
+        """,
+        id=requirement_id,
+    )
+    return [{"applies_when":         rec["applies_when"] or "",
+             "rationale":            rec["rationale"] or "",
+             "target_requirement_id": rec["target_id"]} for rec in result]
+
+
 def fetch_scope_expansions_for_event(neo_session, event_type: str) -> list[dict]:
     """Return all EXPANDS_SCOPE edges for an event_type.
 
@@ -335,20 +355,25 @@ _APPLIES_WHEN_RE = re.compile(
 )
 
 
-def evaluate_applies_when(expr: str, metadata: dict) -> tuple[bool, str]:
+def evaluate_applies_when(expr: str, metadata: dict,
+                          default_for_missing: bool = True) -> tuple[bool, str]:
     """Evaluate an applies_when expression against a metadata dict.
 
     Returns (passes, evaluation_note). `passes` is False only when the
-    expression explicitly evaluates to false against a present field;
-    missing-field treated as pass to keep cascades permissive (the
-    safer side for v1 — false positives surface as dismissable
-    implications, false negatives are silent gaps).
+    expression explicitly evaluates to false against a present field.
+
+    `default_for_missing` controls behaviour when the field is absent:
+      True (default): used by EMITS_EVENT applies_when — "fire the
+        cascade unless explicitly suppressed". Missing field is
+        treated as pass.
+      False: used by BLOCKS_WHEN — "suppress only when explicitly
+        asserted". Missing field is treated as NOT matching.
     """
     if not expr or not expr.strip():
-        return True, "no-condition"
+        return default_for_missing, "no-condition"
     m = _APPLIES_WHEN_RE.match(expr)
     if not m:
-        return True, f"unparseable: {expr!r}"
+        return default_for_missing, f"unparseable: {expr!r}"
     field = m.group(1)
     op    = m.group(2)
     rhs   = m.group(3)
@@ -356,7 +381,7 @@ def evaluate_applies_when(expr: str, metadata: dict) -> tuple[bool, str]:
     if "." in field:
         field = field.split(".")[-1]
     if field not in metadata:
-        return True, f"field-absent: {field}"
+        return default_for_missing, f"field-absent: {field}"
     actual = metadata[field]
     if op is None:
         # Truthy check
@@ -444,6 +469,26 @@ def fire_cascade(
         if not top_et:
             continue
 
+        # S3h: clock attribution. If the tenant supplied occurred_at
+        # (event-actually-happened timestamp), use it to anchor the
+        # deadline clock. Otherwise fall back to verified_at.
+        clock_anchor = "verified_at"
+        clock_t = verified_at
+        oa_raw = ev.get("occurred_at")
+        if oa_raw:
+            from datetime import datetime, timezone
+            try:
+                oa = datetime.fromisoformat(str(oa_raw).replace("Z", "+00:00"))
+                if oa.tzinfo is None:
+                    oa = oa.replace(tzinfo=timezone.utc)
+                clock_t = oa
+                clock_anchor = "occurred_at"
+            except ValueError:
+                # Defensive: validation should have caught this at the
+                # endpoint. If we reach here, log and fall back to
+                # verified_at silently.
+                pass
+
         # ── Match against pending followups (P2 missing-event detection) ──
         # Every incoming structured event may satisfy a pending
         # expected_followup_event row. Match by event_type within tenant.
@@ -500,13 +545,13 @@ def fire_cascade(
                              target_control_ref, target_standard_id, target_requirement_id,
                              expected_action,
                              fired_at, due_date,
-                             deadline_string, rationale)
+                             deadline_string, rationale, clock_anchor)
                         VALUES (%s::uuid, %s::uuid, %s,
                                 %s::jsonb, 0,
                                 %s, %s, %s,
                                 'attestation_required',
                                 %s, %s,
-                                '', %s)
+                                '', %s, %s)
                         """,
                         (tenant_id, verification_log_id, top_et,
                          json.dumps([top_et, f"{top_et}:proof_missing"]),
@@ -514,7 +559,8 @@ def fire_cascade(
                          verified_at, verified_at,  # due immediately — closure already filed
                          f"Closure proof missing: {top_et} requires "
                          f"effectiveness_evidence in metadata; "
-                         f"{rec['rationale']}"),
+                         f"{rec['rationale']}",
+                         clock_anchor),
                     )
                     impl_count += 1
 
@@ -552,7 +598,50 @@ def fire_cascade(
 
             due_date = None
             if r.deadline_days is not None:
-                due_date = verified_at + timedelta(days=float(r.deadline_days))
+                # S3h: anchor deadline on occurred_at when supplied,
+                # else on verified_at (default behaviour).
+                due_date = clock_t + timedelta(days=float(r.deadline_days))
+
+            # S3i: BLOCKS_WHEN check — does the target control have a
+            # blocker that suppresses this implication given the
+            # cascade metadata?
+            blocked = False
+            blockers = fetch_blockers_for_control(
+                neo_session, r.target_requirement_id,
+            )
+            for b in blockers:
+                # BLOCKS_WHEN: strict eval (missing field = NOT blocking)
+                is_blocking, _note = evaluate_applies_when(
+                    b["applies_when"], ev_metadata,
+                    default_for_missing=False,
+                )
+                if is_blocking:
+                    pg_cursor.execute(
+                        """
+                        INSERT INTO cascade_suppression_log
+                            (tenant_id, source_verification_id,
+                             source_event_type, target_event_type,
+                             applies_when, evaluation_context, cascade_path,
+                             fired_at,
+                             suppression_kind, target_requirement_id)
+                        VALUES (%s::uuid, %s::uuid,
+                                %s, NULL,
+                                %s, %s::jsonb, %s::jsonb,
+                                %s,
+                                'blocks_when', %s)
+                        """,
+                        (tenant_id, verification_log_id,
+                         r.source_event_type,
+                         b["applies_when"],
+                         json.dumps(ev_metadata),
+                         json.dumps(r.cascade_path),
+                         verified_at,
+                         r.target_requirement_id),
+                    )
+                    blocked = True
+                    break
+            if blocked:
+                continue
 
             pg_cursor.execute(
                 """
@@ -562,20 +651,20 @@ def fire_cascade(
                      target_control_ref, target_standard_id, target_requirement_id,
                      expected_action,
                      fired_at, due_date,
-                     deadline_string, rationale)
+                     deadline_string, rationale, clock_anchor)
                 VALUES (%s::uuid, %s::uuid, %s,
                         %s::jsonb, %s,
                         %s, %s, %s,
                         %s,
                         %s, %s,
-                        %s, %s)
+                        %s, %s, %s)
                 """,
                 (tenant_id, verification_log_id, r.source_event_type,
                  json.dumps(r.cascade_path), r.cascade_depth,
                  r.target_control_ref, r.target_standard_id, r.target_requirement_id,
                  r.expected_action,
                  verified_at, due_date,
-                 r.deadline_string, r.rationale),
+                 r.deadline_string, r.rationale, clock_anchor),
             )
             impl_count += 1
 
@@ -701,20 +790,20 @@ def fire_cascade(
                      target_control_ref, target_standard_id, target_requirement_id,
                      expected_action, scope_kind,
                      fired_at, due_date,
-                     deadline_string, rationale)
+                     deadline_string, rationale, clock_anchor)
                 VALUES (%s::uuid, %s::uuid, %s,
                         %s::jsonb, 0,
                         %s, %s, %s,
                         'review_required', %s,
                         %s, NULL,
-                        '', %s)
+                        '', %s, %s)
                 """,
                 (tenant_id, verification_log_id, et,
                  json.dumps([et]),
                  ref, std_id, ex["target_requirement_id"],
                  ex["scope_kind"],
                  verified_at,
-                 ex["rationale"]),
+                 ex["rationale"], clock_anchor),
             )
             scope_impl_count += 1
 

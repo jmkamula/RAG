@@ -4326,6 +4326,29 @@ async def verify_cites_for_leaf_source(
                     f"structured_events[{i}].metadata must be an object")
             if md:
                 clean["metadata"] = md
+        # S3h: optional occurred_at — when the event actually HAPPENED.
+        # Distinct from verified_at (when the tenant attested it). Used
+        # by the cascade engine to anchor deadline clocks for scenarios
+        # like processor-discovered breach where awareness postdates
+        # occurrence. ISO 8601 timestamp string; must not be in the
+        # future.
+        if "occurred_at" in ev:
+            oa_raw = ev["occurred_at"]
+            if not isinstance(oa_raw, str) or not oa_raw.strip():
+                raise HTTPException(400,
+                    f"structured_events[{i}].occurred_at must be an ISO 8601 string")
+            from datetime import datetime, timezone
+            try:
+                oa = datetime.fromisoformat(oa_raw.replace("Z", "+00:00"))
+                if oa.tzinfo is None:
+                    oa = oa.replace(tzinfo=timezone.utc)
+            except ValueError:
+                raise HTTPException(400,
+                    f"structured_events[{i}].occurred_at not parseable as ISO 8601: {oa_raw!r}")
+            if oa > datetime.now(timezone.utc):
+                raise HTTPException(400,
+                    f"structured_events[{i}].occurred_at cannot be in the future")
+            clean["occurred_at"] = oa.isoformat()
         validated_events.append(clean)
 
     pool = request.app.state.pg_pool
@@ -4509,7 +4532,8 @@ async def list_triggered_implications(
                        dismissed_reason,
                        deadline_string,
                        rationale,
-                       scope_kind
+                       scope_kind,
+                       clock_anchor
                   FROM triggered_implication
                  WHERE tenant_id = %s::uuid
                    AND status    = %s
@@ -4547,6 +4571,7 @@ async def list_triggered_implications(
             "deadline_string":       r[15],
             "rationale":             r[16],
             "scope_kind":            r[17],
+            "clock_anchor":          r[18],
         })
 
     if not group_by_verification:
@@ -4723,7 +4748,9 @@ async def list_cascade_suppressions(
                        applies_when,
                        evaluation_context,
                        cascade_path,
-                       fired_at
+                       fired_at,
+                       suppression_kind,
+                       target_requirement_id
                   FROM cascade_suppression_log
                  WHERE tenant_id = %s::uuid
                  ORDER BY fired_at DESC
@@ -4745,6 +4772,8 @@ async def list_cascade_suppressions(
                 "evaluation_context":     r[5],
                 "cascade_path":           r[6],
                 "fired_at":               r[7].isoformat() if r[7] else None,
+                "suppression_kind":       r[8],
+                "target_requirement_id":  r[9],
             } for r in rows
         ],
         "count": len(rows),
