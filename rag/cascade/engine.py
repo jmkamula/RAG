@@ -464,6 +464,66 @@ def fire_cascade(
     # edges materialised. Avoids duplicate followup rows when the
     # same downstream event appears via two distinct paths.
 
+    # S3j: aggregation expansion. Walk structured_events and, for each
+    # event with aggregation config (threshold + period), count matching
+    # events in the rolling window from the verification log. If the
+    # NEW count crosses the threshold AND no recent fire of the
+    # aggregation_emits event exists within the window, expand the
+    # current verification's structured_events list with the synthetic
+    # threshold-crossed event so the cascade engine processes it like
+    # any tenant-emitted event.
+    expanded_events: list[dict] = list(structured_events)
+    for ev in list(structured_events):
+        top_et = ev.get("event_type")
+        if not top_et:
+            continue
+        spec = _event_spec_for(top_et)
+        if not (spec and spec.aggregation_threshold
+                and spec.aggregation_period_days
+                and spec.aggregation_emits):
+            continue
+        threshold = int(spec.aggregation_threshold)
+        period_d  = int(spec.aggregation_period_days)
+        emit_et   = spec.aggregation_emits
+        cnt = ev.get("count", 1)
+
+        # Count matching events from prior verifications in window
+        pg_cursor.execute(
+            """
+            SELECT coalesce(SUM((se->>'count')::int), 0) AS total
+              FROM external_evidence_verification_log v
+              CROSS JOIN LATERAL jsonb_array_elements(v.structured_events) se
+             WHERE v.tenant_id = %s::uuid
+               AND v.id        <> %s::uuid
+               AND v.verified_at >= now() - make_interval(days => %s)
+               AND se->>'event_type' = %s
+            """,
+            (tenant_id, verification_log_id, period_d, top_et),
+        )
+        row = pg_cursor.fetchone()
+        prior = int(row[0] or 0)
+        new_total = prior + int(cnt)
+
+        if prior >= threshold:
+            # Threshold was already crossed in the window — skip
+            continue
+        if new_total < threshold:
+            # Not yet crossed
+            continue
+        # Threshold just crossed by this verification. Synthesize the
+        # downstream event and let the regular processing handle it.
+        expanded_events.append({
+            "event_type": emit_et,
+            "count":      1,
+            "metadata":   {
+                "_aggregation_source": top_et,
+                "_aggregation_count":  new_total,
+                "_aggregation_window_days": period_d,
+            },
+        })
+
+    structured_events = expanded_events
+
     for ev in structured_events:
         top_et = ev.get("event_type")
         if not top_et:

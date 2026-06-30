@@ -85,6 +85,17 @@ class Event:
     # §5.36 require effectiveness verification on closure of certain
     # lifecycle events — bare closure is itself a finding.
     requires_effectiveness_proof: bool = False
+    # S3j: thresholded aggregation (P5 from cascade meditation).
+    # When BOTH _threshold and _period_days are set, the event is
+    # counted but its individual cascade is small/absent. After
+    # aggregation_threshold occurrences within the rolling
+    # aggregation_period_days, the cascade engine synthesises an
+    # aggregation_emits event and fires ITS cascade (which carries
+    # the "what to do" implications). Used for "20 phishing fails
+    # in a quarter -> A.6.4 disciplinary review" style escalations.
+    aggregation_threshold:   int | None = None
+    aggregation_period_days: int | None = None
+    aggregation_emits:       str | None = None  # event_type to fire
 
 
 # ── Incident events ───────────────────────────────────────────────────────────
@@ -1020,6 +1031,48 @@ EVENT_DATA_RETURN_ATTESTATION_RECEIVED = Event(
     ],
 )
 
+EVENT_PHISHING_TEST_FAILED = Event(
+    id               = "event:phishing_test_failed",
+    event_type       = "phishing_test_failed",
+    category         = "personnel",
+    title            = "Phishing simulation failure",
+    description      = "Personnel failed a simulated phishing test "
+                       "(clicked link / disclosed credentials / replied with sensitive info).",
+    legal_deadline   = None,
+    severity_default = "low",
+    # No individual triggers — single fails are observations, not
+    # cascades. Aggregation across the period IS the cascade.
+    triggers = [],
+    # S3j: 20 fails in a rolling 90-day window triggers the threshold
+    # event whose cascade requests disciplinary review + program-
+    # effectiveness reassessment.
+    aggregation_threshold   = 20,
+    aggregation_period_days = 90,
+    aggregation_emits       = "phishing_threshold_crossed",
+)
+
+EVENT_PHISHING_THRESHOLD_CROSSED = Event(
+    id               = "event:phishing_threshold_crossed",
+    event_type       = "phishing_threshold_crossed",
+    category         = "isms",
+    title            = "Phishing-test failure threshold crossed",
+    description      = "20+ phishing simulation failures within a 90-day "
+                       "rolling window. Personnel-program effectiveness in "
+                       "question; consider targeted retraining and/or "
+                       "disciplinary review per A.6.4.",
+    legal_deadline   = None,
+    severity_default = "medium",
+    triggers = [
+        EventTrigger("ISO27001:2022:A.6.3", "30 days",
+            "Awareness program effectiveness review"),
+        EventTrigger("ISO27001:2022:A.6.4", None,
+            "Disciplinary process consideration for repeat failures"),
+        EventTrigger("ISO27001:2022:A.5.36", None,
+            "Compliance review notified — training program shortfall"),
+    ],
+)
+
+
 EVENT_CONSENT_WITHDRAWN = Event(
     id               = "event:consent_withdrawn",
     event_type       = "consent_withdrawn",
@@ -1107,6 +1160,10 @@ ALL_EVENTS: list[Event] = [
     EVENT_PRODUCTION_DEPLOYMENT,
     EVENT_RETENTION_PERIOD_REACHED,
     EVENT_CONSENT_WITHDRAWN,
+
+    # ── S3j: thresholded aggregation (P5) ─────────────────────────
+    EVENT_PHISHING_TEST_FAILED,
+    EVENT_PHISHING_THRESHOLD_CROSSED,
 ]
 
 # Phrase detection map — used by classifier
