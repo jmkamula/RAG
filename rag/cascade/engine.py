@@ -669,14 +669,26 @@ def fire_cascade(
     }
 
 
-def sweep_overdue_followups(pg_cursor, *, tenant_id: str) -> int:
+def sweep_overdue_followups(
+    pg_cursor,
+    *,
+    tenant_id: str,
+    neo_session=None,
+) -> dict:
     """Periodic / on-demand sweep: mark pending expected_followup rows
-    whose window has elapsed as 'overdue'. Returns number flipped.
+    whose window has elapsed as 'overdue'. Returns dict with counts.
 
-    The cascade engine does NOT auto-fire implications for the overdue
-    state in v1 — that's an opinionated next layer (the SLA-breach
-    obligation is its own MUST, not a generic cascade output).
+    S3f: when neo_session is supplied, ALSO writes triggered_implication
+    rows for each overdue followup — targeting the controls that the
+    MISSING (expected) event would have satisfied via its
+    TRIGGERS_OBLIGATION edges. The implications carry
+    expected_action='attestation_required' and a 2-step cascade_path
+    [source_event, expected_event] to indicate the SLA breach pattern.
+
+    Returns:
+      {"overdue_marked": N, "sla_implications_written": M}
     """
+    # Step 1: flip pending → overdue, retain rows for follow-on processing
     pg_cursor.execute(
         """
         UPDATE expected_followup_event
@@ -685,8 +697,74 @@ def sweep_overdue_followups(pg_cursor, *, tenant_id: str) -> int:
          WHERE tenant_id = %s::uuid
            AND status    = 'pending'
            AND expires_at < now()
-        RETURNING id
+        RETURNING id::text, source_verification_id::text,
+                  source_event_type, expected_event_type,
+                  window_days, fired_at
         """,
         (tenant_id,),
     )
-    return len(pg_cursor.fetchall())
+    overdue_rows = pg_cursor.fetchall()
+    overdue_count = len(overdue_rows)
+    impl_written  = 0
+
+    # Step 2: optional cascade impl propagation
+    if neo_session is None or overdue_count == 0:
+        return {
+            "overdue_marked":            overdue_count,
+            "sla_implications_written":  0,
+        }
+
+    from datetime import datetime, timezone
+    now = datetime.now(timezone.utc)
+    seen_targets: set[tuple[str, str, str]] = set()
+    # Dedup: (verification_id, expected_event_type, target_requirement_id)
+
+    for (_fid, src_verification_id, src_event, exp_event,
+         _window, fired_at) in overdue_rows:
+        # Walk TRIGGERS_OBLIGATION on the expected (missing) event —
+        # those are the controls whose MUSTs the followup was meant
+        # to fulfil. The SLA-breach implication fires on each.
+        result = neo_session.run(
+            """
+            MATCH (e:Event {event_type: $et})-[r:TRIGGERS_OBLIGATION]->(n:RequirementNode)
+            RETURN n.id        AS req_id,
+                   r.rationale AS rationale
+            """,
+            et=exp_event,
+        )
+        for rec in result:
+            key = (src_verification_id, exp_event, rec["req_id"])
+            if key in seen_targets:
+                continue
+            seen_targets.add(key)
+
+            std_id, ref = _split_requirement_id(rec["req_id"])
+            pg_cursor.execute(
+                """
+                INSERT INTO triggered_implication
+                    (tenant_id, source_verification_id, source_event_type,
+                     cascade_path, cascade_depth,
+                     target_control_ref, target_standard_id, target_requirement_id,
+                     expected_action,
+                     fired_at, due_date,
+                     deadline_string, rationale)
+                VALUES (%s::uuid, %s::uuid, %s,
+                        %s::jsonb, 1,
+                        %s, %s, %s,
+                        'attestation_required',
+                        %s, %s,
+                        '', %s)
+                """,
+                (tenant_id, src_verification_id, src_event,
+                 json.dumps([src_event, f"{exp_event}:overdue"]),
+                 ref, std_id, rec["req_id"],
+                 now, now,   # due immediately — SLA already breached
+                 f"SLA breach: expected {exp_event} did not arrive within window; "
+                 f"{rec['rationale']}"),
+            )
+            impl_written += 1
+
+    return {
+        "overdue_marked":           overdue_count,
+        "sla_implications_written": impl_written,
+    }

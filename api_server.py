@@ -4807,21 +4807,36 @@ async def run_followup_sweep(
     request:  Request,
     key_info: APIKeyInfo = Depends(require_scope("posture")),
 ):
-    """Mark pending followups whose window elapsed as 'overdue'.
+    """Mark pending followups whose window elapsed as 'overdue', and
+    write triggered_implication rows on the controls whose MUSTs the
+    missing event would have satisfied (S3f SLA-breach propagation).
 
-    On-demand sweep (no scheduler yet). Returns count flipped.
+    Returns counts: {overdue_marked, sla_implications_written}.
     """
     pool = request.app.state.pg_pool
     conn = pool.getconn()
+    neo_drv = None
     try:
         set_session(conn, key_info.tenant_id)
+        from rag.cascade.engine import sweep_overdue_followups
+        from rag.posture_loader import _build_engine_neo4j_driver
+        neo_drv = _build_engine_neo4j_driver()
         with conn.cursor() as cur:
-            from rag.cascade.engine import sweep_overdue_followups
-            n = sweep_overdue_followups(cur, tenant_id=key_info.tenant_id)
+            if neo_drv is None:
+                result = sweep_overdue_followups(cur, tenant_id=key_info.tenant_id)
+            else:
+                with neo_drv.session() as neo_session:
+                    result = sweep_overdue_followups(
+                        cur, tenant_id=key_info.tenant_id,
+                        neo_session=neo_session,
+                    )
         conn.commit()
     finally:
+        if neo_drv is not None:
+            try: neo_drv.close()
+            except Exception: pass
         pool.putconn(conn)
-    return {"overdue_marked": n}
+    return result
 
 
 @app.get("/api/v1/tenant/cites/leaf/{leaf_id:path}/source/{system_id}/log", tags=["templates"])
