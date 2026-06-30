@@ -102,23 +102,49 @@ def _in_scope_standards(conn, tenant_id: str) -> set[str]:
         return {row[0] for row in cur.fetchall()}
 
 
-def _walk_implements(driver: Driver, source_id: str) -> list[tuple[str, str, str]]:
+def _compose_bridge_excerpt(rationale: str | None,
+                            source_excerpt: str | None) -> Optional[str]:
+    """S7: combine the catalog-managed bridge rationale with the source
+    document excerpt. Format:
+        [Bridge: <rationale>] <source_excerpt>
+    The rationale answers "why does this cross-framework relationship
+    apply?". The source excerpt answers "what does the original
+    document say?". Auditor needs both. Length-capped at 500.
+    """
+    rationale = (rationale or "").strip()
+    body      = (source_excerpt or "").strip()
+    if rationale:
+        # Trim rationale + body to fit 500-char column with delimiter.
+        budget = 500 - len(rationale) - len("[Bridge: ] ")
+        if budget < 50:
+            # Rationale too long — keep just the rationale prefix.
+            return f"[Bridge: {rationale[:480]}]"
+        return f"[Bridge: {rationale}] {body[:budget]}"
+    return body[:500] or None
+
+
+def _walk_implements(driver: Driver, source_id: str) -> list[tuple[str, str, str, str]]:
     """
     Walk IMPLEMENTS edges from a source control node to xfw'd target controls.
     Edges are bidirectional in Neo4j (both ISO→GDPR and GDPR→ISO exist);
     walking outbound only is sufficient because every ISO→GDPR edge has its
     reverse, so each pair is covered.
 
-    Returns list of (target_node_id, target_standard_id, target_ref).
+    Returns list of (target_node_id, target_standard_id, target_ref, rationale).
+    The rationale is surfaced from the catalog-managed edge (S4) when present;
+    empty string when missing (legacy edges or RELATED_TO walks).
     """
     cypher = """
-    MATCH (a {id: $src_id})-[:IMPLEMENTS]->(b)
+    MATCH (a {id: $src_id})-[r:IMPLEMENTS]->(b)
     WHERE b.standard_id <> a.standard_id
-    RETURN b.id AS tgt_id, b.standard_id AS tgt_std, b.ref AS tgt_ref
+    RETURN b.id          AS tgt_id,
+           b.standard_id AS tgt_std,
+           b.ref         AS tgt_ref,
+           coalesce(r.rationale, '') AS rationale
     """
     with driver.session() as s:
         return [
-            (row["tgt_id"], row["tgt_std"], row["tgt_ref"])
+            (row["tgt_id"], row["tgt_std"], row["tgt_ref"], row["rationale"])
             for row in s.run(cypher, src_id=source_id)
         ]
 
@@ -417,7 +443,7 @@ def propose_for_findings(
         targets = _walk_implements(driver, src_id)
         summary.edges_seen += len(targets)
 
-        for tgt_id, tgt_std, tgt_ref in targets:
+        for tgt_id, tgt_std, tgt_ref, rationale in targets:
             if tgt_std not in in_scope:
                 summary.proposals_skipped += 1
                 continue
@@ -427,6 +453,11 @@ def propose_for_findings(
             seen_proposals.add(key)
             status = _PIPELINE_TO_DF_STATUS.get(src_status, "partial")
             chk_item = _pick_canonical_item(tgt_ref, bindings)
+            # S7: prepend the catalog-managed bridge rationale (if any) so
+            # the auditor sees WHY this cross-framework proposal is asserted,
+            # not just THAT the source document mentions the originating
+            # control. Falls back to the bare source excerpt when no
+            # rationale is attached to the edge.
             ok = _insert_proposal(
                 conn,
                 tenant_id=tenant_id,
@@ -437,7 +468,7 @@ def propose_for_findings(
                 confidence=(f.confidence or "medium"),
                 inferred_from_ref=f.control_ref,
                 inferred_from_std=f.standard_id,
-                excerpt=(f.evidence_text or "")[:500] or None,
+                excerpt=_compose_bridge_excerpt(rationale, f.evidence_text),
                 checklist_item_id=chk_item,
             )
             if ok:
@@ -508,7 +539,7 @@ def propose_backfill(
             targets = _walk_implements(driver, src_id)
             summary.edges_seen += len(targets)
 
-            for tgt_id, tgt_std, tgt_ref in targets:
+            for tgt_id, tgt_std, tgt_ref, rationale in targets:
                 if tgt_std not in in_scope:
                     summary.proposals_skipped += 1
                     continue
@@ -528,7 +559,7 @@ def propose_backfill(
                     confidence=(conf or "medium"),
                     inferred_from_ref=ctrl_ref,
                     inferred_from_std=std_id,
-                    excerpt=excerpt,
+                    excerpt=_compose_bridge_excerpt(rationale, excerpt),
                     checklist_item_id=chk_item,
                 )
                 if ok:

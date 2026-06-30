@@ -1,13 +1,30 @@
 """
 ArionComply — Holistic Neo4j Relationship Loader
-Loads missing relationships from JSON source files without touching existing nodes.
+
+DEPRECATION NOTE (S4, 2026-06-30):
+  The cross-framework section (IMPLEMENTS / SUPPORTS / ENABLES /
+  GOVERNANCE) has been migrated to the unified relationship catalog
+  at enrichment/relationships/relationship_catalog.py + loader
+  enrichment/relationships/load_to_neo4j.py. Running this script now
+  re-writes the same edges in Neo4j WITHOUT the
+  managed_by='relationship_catalog' tag, breaking the catalog
+  loader's ownership semantics. Don't re-run unless you've
+  intentionally cleared the relationship catalog first.
+
+  The PART_OF section is still active here (PART_OF edges remain
+  outside the unified catalog).
 
 What this adds:
   1. PART_OF    — hierarchy within standards (A.5.1 PART_OF A.5)
+     [still owned here]
   2. IMPLEMENTS — cross-framework (ISO control IMPLEMENTS GDPR article)
+     [MIGRATED to relationship_catalog @ S4]
   3. SUPPORTS   — cross-framework (ISO control SUPPORTS GDPR article)
+     [MIGRATED to relationship_catalog @ S4]
   4. ENABLES    — cross-framework (ISO control ENABLES GDPR article)
+     [MIGRATED to relationship_catalog @ S4]
   5. RELATED_TO — cross-framework (other relationships)
+     [still owned here — not migrated]
 
 Safe to re-run — uses MERGE so no duplicates created.
 Existing nodes and relationships are never deleted.
