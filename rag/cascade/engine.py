@@ -272,6 +272,43 @@ def fetch_fact_updates_for_event(neo_session, event_type: str) -> list[dict]:
              "rationale": r["rationale"] or ""} for r in result]
 
 
+def load_cascade_overrides(pg_cursor, tenant_id: str) -> dict:
+    """Load active per-tenant cascade overrides keyed by event_type.
+
+    Returns dict[event_type, dict] where each value carries:
+      {
+        "mute_event":          bool,
+        "muted_targets":       set[str],   # target_requirement_id strings
+        "reason_event":        str | None,
+        "reason_targets":      dict[str, str],  # target_req_id -> reason
+      }
+    """
+    pg_cursor.execute(
+        """
+        SELECT override_kind, event_type, target_requirement_id, reason
+          FROM tenant_cascade_override
+         WHERE tenant_id = %s::uuid
+           AND is_active = TRUE
+        """,
+        (tenant_id,),
+    )
+    out: dict[str, dict] = {}
+    for kind, et, tgt, reason in pg_cursor.fetchall():
+        rec = out.setdefault(et, {
+            "mute_event":      False,
+            "muted_targets":   set(),
+            "reason_event":    None,
+            "reason_targets":  {},
+        })
+        if kind == "mute_event":
+            rec["mute_event"]   = True
+            rec["reason_event"] = reason or ""
+        elif kind == "mute_event_target":
+            rec["muted_targets"].add(tgt)
+            rec["reason_targets"][tgt] = reason or ""
+    return out
+
+
 def fetch_blockers_for_control(neo_session, requirement_id: str) -> list[dict]:
     """Return all BLOCKS_WHEN edges on a control (the SOURCE of the
     edge is the control whose implications are suppressible).
@@ -463,6 +500,9 @@ def fire_cascade(
     # whether direct or via EMITS_EVENT, gets its EXPECTS_FOLLOWUP_EVENT
     # edges materialised. Avoids duplicate followup rows when the
     # same downstream event appears via two distinct paths.
+
+    # S3n: load per-tenant cascade overrides up-front
+    cascade_overrides = load_cascade_overrides(pg_cursor, tenant_id)
 
     # S3j: aggregation expansion. Walk structured_events and, for each
     # event with aggregation config (threshold + period), count matching
@@ -661,6 +701,43 @@ def fire_cascade(
                 # S3h: anchor deadline on occurred_at when supplied,
                 # else on verified_at (default behaviour).
                 due_date = clock_t + timedelta(days=float(r.deadline_days))
+
+            # S3n: per-tenant policy override check — does the tenant
+            # mute this event (or specific event-target pair)?
+            override = cascade_overrides.get(r.source_event_type)
+            if override and (
+                override["mute_event"] or
+                r.target_requirement_id in override["muted_targets"]
+            ):
+                if override["mute_event"]:
+                    reason = override.get("reason_event") or "tenant policy: muted event"
+                else:
+                    reason = override["reason_targets"].get(
+                        r.target_requirement_id, "tenant policy: muted target"
+                    )
+                pg_cursor.execute(
+                    """
+                    INSERT INTO cascade_suppression_log
+                        (tenant_id, source_verification_id,
+                         source_event_type, target_event_type,
+                         applies_when, evaluation_context, cascade_path,
+                         fired_at,
+                         suppression_kind, target_requirement_id)
+                    VALUES (%s::uuid, %s::uuid,
+                            %s, NULL,
+                            %s, %s::jsonb, %s::jsonb,
+                            %s,
+                            'policy_override', %s)
+                    """,
+                    (tenant_id, verification_log_id,
+                     r.source_event_type,
+                     f"policy_override: {reason[:200]}",
+                     json.dumps(ev_metadata),
+                     json.dumps(r.cascade_path),
+                     verified_at,
+                     r.target_requirement_id),
+                )
+                continue
 
             # S3i: BLOCKS_WHEN check — does the target control have a
             # blocker that suppresses this implication given the
@@ -877,6 +954,51 @@ def fire_cascade(
     )
     suppression_count = pg_cursor.fetchone()[0]
 
+    # ── S3m: auto-resolve open implications via cite ──────────────────
+    # For each structured event whose metadata carries
+    # 'effectiveness_evidence', walk its TRIGGERS_OBLIGATION targets
+    # in Neo4j and resolve any open implications matching those
+    # targets on this tenant. The current verification is recorded as
+    # the resolving evidence so the auditor can trace the closure.
+    auto_resolved = 0
+    seen_resolve_targets: set[str] = set()
+    for ev in structured_events:
+        et = ev.get("event_type")
+        md = ev.get("metadata") or {}
+        if not et or not md.get("effectiveness_evidence"):
+            continue
+        result = neo_session.run(
+            """
+            MATCH (e:Event {event_type: $et})-[r:TRIGGERS_OBLIGATION]->(n:RequirementNode)
+            RETURN n.id AS req_id
+            """,
+            et=et,
+        )
+        for rec in result:
+            req_id = rec["req_id"]
+            if req_id in seen_resolve_targets:
+                continue
+            seen_resolve_targets.add(req_id)
+            # Resolve any OPEN pending implications matching this control,
+            # excluding this verification's own freshly-written rows.
+            pg_cursor.execute(
+                """
+                UPDATE triggered_implication
+                   SET status                 = 'satisfied',
+                       resolved_at            = %s,
+                       resolved_evidence_kind = 'cite',
+                       resolved_evidence_id   = %s::uuid
+                 WHERE tenant_id              = %s::uuid
+                   AND target_requirement_id  = %s
+                   AND status                 = 'pending'
+                   AND source_verification_id <> %s::uuid
+                RETURNING id
+                """,
+                (verified_at, verification_log_id,
+                 tenant_id, req_id, verification_log_id),
+            )
+            auto_resolved += len(pg_cursor.fetchall())
+
     return {
         "implications":           impl_count + scope_impl_count,
         "followups_written":      followup_count,
@@ -885,6 +1007,7 @@ def fire_cascade(
         "fact_changes_logged":    fact_changes_logged,
         "scope_implications":     scope_impl_count,
         "suppressions":           suppression_count,
+        "auto_resolved":          auto_resolved,
     }
 
 

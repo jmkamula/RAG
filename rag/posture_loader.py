@@ -812,6 +812,89 @@ def load_uploaded_documents(pg_conn, tenant_id: str) -> list[dict]:
         return []
 
 
+def load_per_control_implications(pg_conn, tenant_id: str) -> dict:
+    """S3k: per-control summary of pending/overdue triggered_implications.
+
+    Returns dict keyed by node_id (e.g. 'ISO27001:2022:A.6.3') with:
+      {
+        "pending":      int,
+        "overdue":      int,
+        "examples":     [
+          {"source_event_type": str, "expected_action": str,
+           "rationale": str, "due_date": iso str|None, "overdue": bool}
+        ],   # up to 3 sample rows for LLM context
+      }
+
+    The dict is sparse — only controls with at least one pending impl
+    have keys. Tenant context GUC must already be set by caller; this
+    function does its own set_config for safety.
+    """
+    from datetime import datetime, timezone
+    out: dict[str, dict] = {}
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute(
+                "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,),
+            )
+            cur.execute(
+                """
+                SELECT target_requirement_id,
+                       sum(CASE WHEN status = 'pending'
+                                  AND (due_date IS NULL OR due_date >= now())
+                                THEN 1 ELSE 0 END) AS pending,
+                       sum(CASE WHEN status = 'pending'
+                                  AND due_date IS NOT NULL
+                                  AND due_date < now()
+                                THEN 1 ELSE 0 END) AS overdue
+                  FROM triggered_implication
+                 WHERE tenant_id = %s::uuid
+                   AND status = 'pending'
+                 GROUP BY target_requirement_id
+                """,
+                (tenant_id,),
+            )
+            for req_id, pending, overdue in cur.fetchall():
+                if not (pending or overdue):
+                    continue
+                out[req_id] = {
+                    "pending":  int(pending or 0),
+                    "overdue":  int(overdue or 0),
+                    "examples": [],
+                }
+
+            if not out:
+                return out
+
+            # Pull up to 3 example rows per control for LLM context
+            cur.execute(
+                """
+                SELECT target_requirement_id, source_event_type,
+                       expected_action, rationale, due_date
+                  FROM triggered_implication
+                 WHERE tenant_id = %s::uuid
+                   AND status = 'pending'
+                 ORDER BY due_date NULLS LAST, fired_at DESC
+                """,
+                (tenant_id,),
+            )
+            now = datetime.now(timezone.utc)
+            for req_id, src_evt, action, rationale, due in cur.fetchall():
+                rec = out.get(req_id)
+                if rec is None or len(rec["examples"]) >= 3:
+                    continue
+                rec["examples"].append({
+                    "source_event_type": src_evt,
+                    "expected_action":   action,
+                    "rationale":         (rationale or "")[:160],
+                    "due_date":          due.isoformat() if due else None,
+                    "overdue":           bool(due and due < now),
+                })
+    except Exception as e:
+        logger.warning("load_per_control_implications failed: %s", e)
+        return {}
+    return out
+
+
 def load_tenant_context(pg_conn, tenant_id: str) -> dict:
     """
     Load all tenant context in one call:
@@ -820,6 +903,8 @@ def load_tenant_context(pg_conn, tenant_id: str) -> dict:
       scope              — TenantScope (standards + relationships)
       document_alerts    — list of missing/overdue document alerts
       uploaded_documents — list of files actually uploaded to the platform
+      implications       — S3k: per-control summary of pending/overdue
+                           triggered_implications
 
     Used by chat.py on startup to replace all hardcodes.
     """
@@ -830,6 +915,7 @@ def load_tenant_context(pg_conn, tenant_id: str) -> dict:
     scope              = load_tenant_scope(pg_conn, tenant_id)
     document_alerts    = load_document_alerts(pg_conn, tenant_id)
     uploaded_documents = load_uploaded_documents(pg_conn, tenant_id)
+    implications       = load_per_control_implications(pg_conn, tenant_id)
 
     critical = sum(1 for a in document_alerts if a.get("alert_type") == "CRITICAL")
     warning  = sum(1 for a in document_alerts if a.get("alert_type") == "WARNING")
@@ -839,7 +925,8 @@ def load_tenant_context(pg_conn, tenant_id: str) -> dict:
         f"queryable={scope.queryable_standards}, "
         f"gdpr_evaluable={scope.can_evaluate_gdpr}, "
         f"doc_alerts={len(document_alerts)} ({critical} critical, {warning} warning), "
-        f"uploaded={len(uploaded_documents)}"
+        f"uploaded={len(uploaded_documents)}, "
+        f"impls_per_control={len(implications)}"
     )
     return {
         "posture":            posture,
@@ -847,4 +934,5 @@ def load_tenant_context(pg_conn, tenant_id: str) -> dict:
         "scope":              scope,
         "document_alerts":    document_alerts,
         "uploaded_documents": uploaded_documents,
+        "implications":       implications,
     }

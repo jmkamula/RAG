@@ -51,6 +51,15 @@ from rag.context_assembler import ContextAssembler
 from rag.graph_expander    import GraphExpander
 from rag.llm_answer        import LLMAnswer
 from rag.chain_logger      import get_logger
+
+
+class _NullLogger:
+    """Fallback when chain logging isn't enabled — get_logger() returns
+    None in that case. Avoids 'NoneType has no attribute warning'."""
+    def warning(self, *args, **kwargs): pass
+    def info(self,    *args, **kwargs): pass
+    def error(self,   *args, **kwargs): pass
+    def debug(self,   *args, **kwargs): pass
 import re as _re_graph
 import re
 
@@ -911,6 +920,256 @@ def _answer_upload_status(
 
 # ── Posture timeline answerer (schema_v21) ───────────────────────────────────
 
+# ── S3l: cascade chat short-circuits ─────────────────────────────────
+_CASCADE_IMPL_PATTERNS = [
+    # Catch any of: "<verb-bit>* implications <preposition>"
+    # The space between "implications" and "for/on" can carry helper
+    # words ("do I have", "are there", "exist", etc.). Use a generic
+    # lookahead instead of explicit phrase enumeration.
+    re.compile(r'\b(?:cascade\s+)?implications?\s+(?:\w+\s+){0,5}?(?:on|for)\s+', re.IGNORECASE),
+    re.compile(r'\b(?:show|list)\s+(?:me\s+)?(?:the\s+)?(?:cascade\s+)?implications?\b', re.IGNORECASE),
+    re.compile(r'\bpending\s+implications?\b', re.IGNORECASE),
+    re.compile(r'\boverdue\s+implications?\b', re.IGNORECASE),
+]
+
+_CASCADE_FOLLOWUP_PATTERNS = [
+    re.compile(r'\boverdue\s+followups?\b', re.IGNORECASE),
+    re.compile(r'\bwhich\s+followups?\s+are\s+overdue\b', re.IGNORECASE),
+    re.compile(r'\b(?:show|list)\s+(?:me\s+)?(?:the\s+)?(?:overdue\s+|pending\s+)?expected\s+followups?\b', re.IGNORECASE),
+    re.compile(r'\b(?:overdue|pending|expected)\s+(?:event\s+)?followups?\b', re.IGNORECASE),
+]
+
+_CASCADE_SUPPRESSION_PATTERNS = [
+    re.compile(r'\bsuppressed\s+cascades?\b', re.IGNORECASE),
+    re.compile(r'\bblocked\s+(?:cascades?|implications?)\b', re.IGNORECASE),
+    re.compile(r'\bwhat\s+cascades?\s+(?:were|got|have\s+been)\s+(?:blocked|suppressed)\b', re.IGNORECASE),
+]
+
+
+def _is_cascade_impl_query(query: str) -> bool:
+    return any(p.search(query) for p in _CASCADE_IMPL_PATTERNS)
+
+
+def _is_cascade_followups_query(query: str) -> bool:
+    return any(p.search(query) for p in _CASCADE_FOLLOWUP_PATTERNS)
+
+
+def _is_cascade_suppressions_query(query: str) -> bool:
+    return any(p.search(query) for p in _CASCADE_SUPPRESSION_PATTERNS)
+
+
+def _answer_cascade_implications(
+    query:       str,
+    tenant_id:   str,
+    control_ref: Optional[str],
+) -> Optional[str]:
+    """Deterministic answer for 'what implications do I have for X?'.
+
+    When control_ref is supplied, scopes to that one control. When
+    None (no ref in query), returns a top-summary across all controls.
+    """
+    if not tenant_id:
+        return None
+    db_url = os.getenv("DATABASE_URL", "")
+    if not db_url:
+        return None
+    try:
+        import psycopg2
+        conn = psycopg2.connect(db_url)
+    except Exception:
+        return None
+
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SET LOCAL app.tenant_id = %s", (tenant_id,))
+            if control_ref:
+                cur.execute(
+                    """
+                    SELECT target_control_ref, source_event_type,
+                           cascade_path, cascade_depth, expected_action,
+                           due_date, status, rationale, scope_kind,
+                           clock_anchor
+                      FROM triggered_implication
+                     WHERE tenant_id = %s::uuid
+                       AND target_control_ref = %s
+                       AND status = 'pending'
+                     ORDER BY due_date NULLS LAST, fired_at DESC
+                     LIMIT 20
+                    """,
+                    (tenant_id, control_ref),
+                )
+            else:
+                cur.execute(
+                    """
+                    SELECT target_control_ref, source_event_type,
+                           cascade_path, cascade_depth, expected_action,
+                           due_date, status, rationale, scope_kind,
+                           clock_anchor
+                      FROM triggered_implication
+                     WHERE tenant_id = %s::uuid
+                       AND status = 'pending'
+                     ORDER BY due_date NULLS LAST, fired_at DESC
+                     LIMIT 30
+                    """,
+                    (tenant_id,),
+                )
+            rows = cur.fetchall()
+    finally:
+        conn.close()
+
+    if not rows:
+        if control_ref:
+            return (f"No pending cascade implications on {control_ref}. "
+                    f"Either no event has triggered obligations on this "
+                    f"control, or all triggered implications have been "
+                    f"satisfied or dismissed.")
+        return ("No pending cascade implications across any control. "
+                "Either no structured events have been emitted from cite "
+                "verifications, or all triggered implications have been "
+                "resolved.")
+
+    from datetime import datetime, timezone
+    now = datetime.now(timezone.utc)
+    overdue = sum(1 for r in rows if r[5] and r[5] < now)
+    head = (f"Cascade implications on {control_ref}" if control_ref
+            else "Cascade implications (pending)")
+    lines = [f"{head} — {overdue} overdue, {len(rows)-overdue} pending:", ""]
+    for r in rows:
+        ref, src_evt, path, depth, action, due, _status, rationale, scope_kind, anchor = r
+        path = path if isinstance(path, list) else []
+        is_overdue = bool(due and due < now)
+        tag = "OVERDUE" if is_overdue else "pending"
+        due_s = due.date().isoformat() if due else "open-ended"
+        path_s = " → ".join(path) if path else src_evt
+        suffix = f" (scope={scope_kind})" if scope_kind else ""
+        suffix += f" [clock={anchor}]" if anchor and anchor != "verified_at" else ""
+        lines.append(f"  - [{tag}] {ref}: {action} (due {due_s}){suffix}")
+        lines.append(f"    via {path_s}")
+        if rationale:
+            lines.append(f"    {rationale[:140]}")
+    return "\n".join(lines)
+
+
+def _answer_cascade_followups(query: str, tenant_id: str) -> Optional[str]:
+    """Deterministic answer for 'overdue followups' / 'which followups are overdue'."""
+    if not tenant_id:
+        return None
+    db_url = os.getenv("DATABASE_URL", "")
+    if not db_url:
+        return None
+    try:
+        import psycopg2
+        conn = psycopg2.connect(db_url)
+    except Exception:
+        return None
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SET LOCAL app.tenant_id = %s", (tenant_id,))
+            cur.execute(
+                """
+                SELECT source_event_type, expected_event_type, window_days,
+                       expires_at, status, rationale
+                  FROM expected_followup_event
+                 WHERE tenant_id = %s::uuid
+                   AND status IN ('pending', 'overdue')
+                 ORDER BY status, expires_at
+                """,
+                (tenant_id,),
+            )
+            rows = cur.fetchall()
+    finally:
+        conn.close()
+    if not rows:
+        return ("No pending or overdue expected followups. The cascade "
+                "engine isn't currently tracking any missing downstream "
+                "events.")
+    overdue = [r for r in rows if r[4] == 'overdue']
+    pending = [r for r in rows if r[4] == 'pending']
+    lines = [
+        f"Expected followups — {len(overdue)} overdue, {len(pending)} pending:",
+        "",
+    ]
+    if overdue:
+        lines.append("OVERDUE (expected window already elapsed):")
+        for src, exp, win, expires, _status, rat in overdue:
+            lines.append(f"  - {src} expected {exp} within {win}d; "
+                         f"expired {expires.date().isoformat()}")
+            if rat:
+                lines.append(f"    {rat[:140]}")
+    if pending:
+        if overdue:
+            lines.append("")
+        lines.append("PENDING (within window):")
+        from datetime import datetime, timezone
+        now = datetime.now(timezone.utc)
+        for src, exp, win, expires, _status, rat in pending:
+            days_left = int((expires - now).total_seconds() / 86400)
+            lines.append(f"  - {src} expects {exp} within {win}d; "
+                         f"{days_left}d remaining")
+    return "\n".join(lines)
+
+
+def _answer_cascade_suppressions(query: str, tenant_id: str) -> Optional[str]:
+    """Deterministic answer for 'show suppressed cascades' / 'what was blocked'."""
+    if not tenant_id:
+        return None
+    db_url = os.getenv("DATABASE_URL", "")
+    if not db_url:
+        return None
+    try:
+        import psycopg2
+        conn = psycopg2.connect(db_url)
+    except Exception:
+        return None
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SET LOCAL app.tenant_id = %s", (tenant_id,))
+            cur.execute(
+                """
+                SELECT suppression_kind, source_event_type,
+                       target_event_type, target_requirement_id,
+                       applies_when, fired_at
+                  FROM cascade_suppression_log
+                 WHERE tenant_id = %s::uuid
+                 ORDER BY fired_at DESC
+                 LIMIT 20
+                """,
+                (tenant_id,),
+            )
+            rows = cur.fetchall()
+    finally:
+        conn.close()
+    if not rows:
+        return ("No cascade suppressions recorded. Every fired cascade "
+                "has run without applies_when / BLOCKS_WHEN intercepts.")
+    lines = [f"Cascade suppressions (most recent {len(rows)}):", ""]
+    for kind, src, tgt_evt, tgt_req, applies, fired_at in rows:
+        when = fired_at.date().isoformat() if fired_at else "?"
+        if kind == "blocks_when":
+            lines.append(f"  - {when}  {kind:12s}  {src} -X-> {tgt_req}   "
+                         f"applies_when: {applies}")
+        else:
+            lines.append(f"  - {when}  {kind:12s}  {src} -X-> {tgt_evt}   "
+                         f"applies_when: {applies}")
+    return "\n".join(lines)
+
+
+_CASCADE_REF_PATTERN = re.compile(
+    r"\b(A\.\d+\.\d+|Art\.\d+(?:\.\d+)*(?:\.[a-z])?|\d+\.\d+(?:\.\d+)?)\b",
+    re.IGNORECASE,
+)
+
+
+def _extract_cascade_ref(query: str, focus_refs: list[str]) -> Optional[str]:
+    for r in focus_refs or []:
+        if r:
+            return r
+    m = _CASCADE_REF_PATTERN.search(query or "")
+    if not m:
+        return None
+    return m.group(1)
+
+
 def _answer_control_timeline(
     query:       str,
     tenant_id:   str,
@@ -1056,7 +1315,7 @@ def polish_short_circuit_answer(
         composed_refs = set(_SHORT_CIRCUIT_REQUIRED_REF_PATTERN.findall(composed))
         missing = sorted(set(required_refs) - composed_refs)
         if missing:
-            get_logger().warning(
+            (get_logger() or _NullLogger()).warning(
                 "polish_short_circuit_answer: LLM dropped refs %s — "
                 "falling back to deterministic text",
                 missing,
@@ -1068,7 +1327,7 @@ def polish_short_circuit_answer(
     # than the input, fall back.
     det_bullets = _count_bullets(deterministic_answer)
     if det_bullets and _count_bullets(composed or "") < det_bullets:
-        get_logger().warning(
+        (get_logger() or _NullLogger()).warning(
             "polish_short_circuit_answer: LLM dropped bullets "
             "(deterministic=%d, composed=%d) — falling back",
             det_bullets, _count_bullets(composed or ""),
@@ -1455,7 +1714,7 @@ def make_retrieve_node(
                     "last_entity":   _control_entity(_ack_intent.control_ref),
                 }
         except Exception as _ack_exc:
-            get_logger().warning("acknowledge short-circuit failed: %s", _ack_exc)
+            (get_logger() or _NullLogger()).warning("acknowledge short-circuit failed: %s", _ack_exc)
             # Fall through to normal pipeline.
 
         # ── Stage-1 batch-approval short-circuit ──────────────────────────
@@ -1520,7 +1779,7 @@ def make_retrieve_node(
                     "last_entity":   _control_entity(_s1_intent.control_ref) if _s1_intent.control_ref else {},
                 }
         except Exception as _s1_exc:
-            get_logger().warning("stage1 review short-circuit failed: %s", _s1_exc)
+            (get_logger() or _NullLogger()).warning("stage1 review short-circuit failed: %s", _s1_exc)
             # Fall through to normal pipeline.
 
         # ── Stage-2 engine-verdict approval short-circuit ─────────────────
@@ -1587,7 +1846,7 @@ def make_retrieve_node(
                     "last_entity":   _control_entity(_s2_intent.control_ref) if _s2_intent.control_ref else {},
                 }
         except Exception as _s2_exc:
-            get_logger().warning("stage2 approval short-circuit failed: %s", _s2_exc)
+            (get_logger() or _NullLogger()).warning("stage2 approval short-circuit failed: %s", _s2_exc)
             # Fall through to normal pipeline.
 
         # ── Scope N/A short-circuit ───────────────────────────────────────
@@ -1617,6 +1876,61 @@ def make_retrieve_node(
         # control has no history rows; falls through to the resolver in
         # that case so the user gets the current posture instead of a
         # "no data" dead-end.
+        # ── S3l: cascade chat short-circuits ──────────────────────────────
+        _tid = str(getattr(tenant, "tenant_id", "") or "")
+        if _is_cascade_followups_query(state["query"]):
+            _fu_ans = _answer_cascade_followups(state["query"], _tid)
+            if _fu_ans:
+                composed = polish_short_circuit_answer(
+                    query=state["query"], deterministic_answer=_fu_ans, llm=llm,
+                )
+                return {
+                    **state,
+                    "answer_text":   composed,
+                    "answer":        composed,
+                    "cited_refs":    [],
+                    "intent_type":   "posture_check",
+                    "question_type": "posture_check",
+                    "confidence":    1.0,
+                    "answer_source": "postgres+llm",
+                }
+
+        if _is_cascade_suppressions_query(state["query"]):
+            _sp_ans = _answer_cascade_suppressions(state["query"], _tid)
+            if _sp_ans:
+                composed = polish_short_circuit_answer(
+                    query=state["query"], deterministic_answer=_sp_ans, llm=llm,
+                )
+                return {
+                    **state,
+                    "answer_text":   composed,
+                    "answer":        composed,
+                    "cited_refs":    [],
+                    "intent_type":   "posture_check",
+                    "question_type": "posture_check",
+                    "confidence":    1.0,
+                    "answer_source": "postgres+llm",
+                }
+
+        if _is_cascade_impl_query(state["query"]):
+            _ci_ref = _extract_cascade_ref(state["query"], state.get("focus_refs", []))
+            _ci_ans = _answer_cascade_implications(state["query"], _tid, _ci_ref)
+            if _ci_ans:
+                composed = polish_short_circuit_answer(
+                    query=state["query"], deterministic_answer=_ci_ans, llm=llm,
+                )
+                return {
+                    **state,
+                    "answer_text":   composed,
+                    "answer":        composed,
+                    "cited_refs":    [_ci_ref] if _ci_ref else [],
+                    "intent_type":   "posture_check",
+                    "question_type": "posture_check",
+                    "confidence":    1.0,
+                    "answer_source": "postgres+llm",
+                    "last_entity":   _control_entity(_ci_ref) if _ci_ref else None,
+                }
+
         if _is_timeline_query(state["query"]):
             _ref = _extract_timeline_ref(state["query"], state.get("focus_refs", []))
             if _ref:

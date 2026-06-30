@@ -53,6 +53,8 @@ class TenantContext:
     document_alerts: list            # [{platform_ref, document_title, alert_type, ...}]
     loaded_at:       float           # time.time() when loaded
     ttl_seconds:     int = DEFAULT_TTL_SECONDS
+    # S3k: cascade implications per control (node_id → summary dict)
+    implications:    dict = None  # type: ignore[assignment]
 
     @property
     def is_expired(self) -> bool:
@@ -211,6 +213,7 @@ class TenantContextCache:
             posture_data         = posture,
             document_alerts      = document_alerts,
             uploaded_documents   = uploaded_documents,
+            implications         = ctx_data.get("implications", {}) or {},
         )
 
         return TenantContext(
@@ -222,6 +225,7 @@ class TenantContextCache:
             document_alerts = document_alerts,
             loaded_at       = time.time(),
             ttl_seconds     = self._ttl,
+            implications    = ctx_data.get("implications", {}) or {},
         )
 
     # ── Class-level factory methods ───────────────────────────────────────────

@@ -477,6 +477,38 @@ class ContextAssembler:
             return f"GDPR {ref}"
         return f"{std} {ref}"
 
+    def _render_implications_for_node(self, node_id: str) -> str:
+        """S3k: short LLM-context line for any pending/overdue cascade
+        implications on this control. Empty string when there are none.
+
+        Reads from self.tenant.implications (populated by load_per_control_
+        implications). Format:
+          'Cascade implications: 4 overdue, 2 pending — e.g. SLA breach:
+           expected privilege_revoked did not arrive (A.5.18, attestation_required, overdue)'
+        """
+        impls = getattr(self.tenant, "implications", {}) or {}
+        rec = impls.get(node_id)
+        if not rec:
+            return ""
+        overdue = rec.get("overdue", 0)
+        pending = rec.get("pending", 0)
+        if overdue + pending == 0:
+            return ""
+        examples = rec.get("examples", []) or []
+        ex_parts = []
+        for ex in examples[:2]:
+            tag = "OVERDUE" if ex.get("overdue") else "pending"
+            ex_parts.append(
+                f"[{tag}] {ex.get('source_event_type','')} "
+                f"({ex.get('expected_action','')}): "
+                f"{(ex.get('rationale') or '')[:120]}"
+            )
+        head = f"Cascade implications: {overdue} overdue, {pending} pending"
+        if ex_parts:
+            return head + "\n  - " + "\n  - ".join(ex_parts)
+        return head
+
+
     def _render_node_full(
         self,
         node:    ExpandedNode,
@@ -505,6 +537,11 @@ class ContextAssembler:
             # Posture data is loaded but this control has not been assessed
             # Explicit marker prevents LLM from inferring compliance status
             lines.append("Posture: ? Not yet assessed — do not infer compliance status")
+
+        # S3k: cascade implications on this control (pending/overdue)
+        impl_summary = self._render_implications_for_node(node.node_id)
+        if impl_summary:
+            lines.append(impl_summary)
 
         # Evidence requirements — what compliance looks like
         if (doc_layers.get("evidence") and

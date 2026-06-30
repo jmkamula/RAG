@@ -4410,6 +4410,7 @@ async def verify_cites_for_leaf_source(
             fact_changes_logged  = 0
             scope_implications   = 0
             suppressions         = 0
+            auto_resolved        = 0
             if validated_events:
                 neo_drv = None
                 try:
@@ -4436,6 +4437,7 @@ async def verify_cites_for_leaf_source(
                             fact_changes_logged  = cascade_result.get("fact_changes_logged",  0)
                             scope_implications   = cascade_result.get("scope_implications",   0)
                             suppressions         = cascade_result.get("suppressions",         0)
+                            auto_resolved        = cascade_result.get("auto_resolved",        0)
                 except Exception as ex:
                     logger.exception("cascade engine failed for verify %s: %s",
                                      log_row[0], ex)
@@ -4460,6 +4462,7 @@ async def verify_cites_for_leaf_source(
         "fact_changes_logged":  fact_changes_logged,
         "scope_implications":   scope_implications,
         "suppressions":         suppressions,
+        "auto_resolved":        auto_resolved,
     }
 
 
@@ -4722,6 +4725,155 @@ async def list_expected_followups(
             ),
         })
     return {"items": items, "count": len(items)}
+
+
+@app.get("/api/v1/tenant/cascade-overrides", tags=["posture"])
+async def list_cascade_overrides(
+    request: Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    include_inactive: bool = False,
+):
+    """List per-tenant cascade policy overrides."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT id::text, override_kind, event_type,
+                       target_requirement_id, reason, is_active,
+                       created_at, updated_at
+                  FROM tenant_cascade_override
+                 WHERE tenant_id = %s::uuid
+                """ + ("" if include_inactive else " AND is_active = TRUE") + """
+                 ORDER BY created_at DESC
+                """,
+                (key_info.tenant_id,),
+            )
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+    return {
+        "items": [
+            {
+                "id":                     r[0],
+                "override_kind":          r[1],
+                "event_type":             r[2],
+                "target_requirement_id":  r[3],
+                "reason":                 r[4],
+                "is_active":              r[5],
+                "created_at":             r[6].isoformat() if r[6] else None,
+                "updated_at":             r[7].isoformat() if r[7] else None,
+            } for r in rows
+        ],
+        "count": len(rows),
+    }
+
+
+@app.put("/api/v1/tenant/cascade-overrides", tags=["posture"])
+async def upsert_cascade_override(
+    request:  Request,
+    payload:  dict,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Create or update a cascade override. Required body fields:
+      override_kind: 'mute_event' | 'mute_event_target'
+      event_type:    e.g. 'phishing_threshold_crossed'
+      target_requirement_id: required when kind=mute_event_target
+      reason: auditor-grade explanation (required)
+    """
+    kind     = payload.get("override_kind")
+    event_t  = payload.get("event_type") or ""
+    target   = payload.get("target_requirement_id")
+    reason   = (payload.get("reason") or "").strip()
+    if kind not in ("mute_event", "mute_event_target"):
+        raise HTTPException(400, "override_kind must be 'mute_event' or 'mute_event_target'")
+    if not event_t:
+        raise HTTPException(400, "event_type is required")
+    if kind == "mute_event_target" and not target:
+        raise HTTPException(400, "target_requirement_id is required for mute_event_target")
+    if kind == "mute_event" and target:
+        raise HTTPException(400, "target_requirement_id must be empty for mute_event")
+    if not reason:
+        raise HTTPException(400, "reason is required (auditor-grade)")
+    # Validate event_type is known
+    from enrichment.events.event_nodes import ALL_EVENTS
+    if event_t not in {e.event_type for e in ALL_EVENTS}:
+        raise HTTPException(400, f"unknown event_type: {event_t!r}")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            # Supersede any existing active row for this (kind, event, target)
+            cur.execute(
+                """
+                UPDATE tenant_cascade_override
+                   SET is_active  = FALSE,
+                       updated_at = now(),
+                       updated_by = %s::uuid
+                 WHERE tenant_id     = %s::uuid
+                   AND override_kind = %s
+                   AND event_type    = %s
+                   AND coalesce(target_requirement_id, '') = coalesce(%s, '')
+                   AND is_active     = TRUE
+                """,
+                (key_info.user_id, key_info.tenant_id, kind, event_t, target),
+            )
+            cur.execute(
+                """
+                INSERT INTO tenant_cascade_override
+                    (tenant_id, override_kind, event_type,
+                     target_requirement_id, reason,
+                     created_by, updated_by)
+                VALUES (%s::uuid, %s, %s, %s, %s, %s::uuid, %s::uuid)
+                RETURNING id::text
+                """,
+                (key_info.tenant_id, kind, event_t, target, reason,
+                 key_info.user_id, key_info.user_id),
+            )
+            new_id = cur.fetchone()[0]
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+    return {"id": new_id, "override_kind": kind, "event_type": event_t,
+            "target_requirement_id": target, "reason": reason}
+
+
+@app.delete("/api/v1/tenant/cascade-overrides/{override_id}", tags=["posture"])
+async def delete_cascade_override(
+    override_id: str,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Soft-delete a cascade override (sets is_active=FALSE)."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                UPDATE tenant_cascade_override
+                   SET is_active  = FALSE,
+                       updated_at = now(),
+                       updated_by = %s::uuid
+                 WHERE tenant_id = %s::uuid
+                   AND id        = %s::uuid
+                   AND is_active = TRUE
+                RETURNING id::text
+                """,
+                (key_info.user_id, key_info.tenant_id, override_id),
+            )
+            updated = cur.fetchone()
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+    if not updated:
+        raise HTTPException(404, "override not found or already inactive")
+    return {"id": updated[0], "is_active": False}
 
 
 @app.get("/api/v1/tenant/cascade-suppressions", tags=["posture"])

@@ -60,6 +60,8 @@ class TenantProfile:
     posture_data:         dict  = field(default_factory=dict)   # full posture for clarifier context
     document_alerts:      list  = field(default_factory=list)   # missing doc alerts for clarifier
     uploaded_documents:   list  = field(default_factory=list)   # actually-uploaded files
+    # S3k: per-control cascade implications (node_id → summary)
+    implications:         dict  = field(default_factory=dict)
 
 
 @dataclass
@@ -452,6 +454,20 @@ _BYPASS_CLARIFICATION_TYPES = frozenset({
 
 
 CLEAR_INTENT_PHRASES = [
+    # S3l: cascade chat surface — route to posture_check so the
+    # short-circuit in arion_graph.make_retrieve_node fires before any
+    # clarifier prompt. No ref needed for tenant-wide cascade queries.
+    (re.compile(r'\b(?:overdue|pending|expected)\s+followups?\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bwhich\s+followups?\s+(?:are|got)\s+overdue\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bsuppressed\s+cascades?\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bblocked\s+(?:cascades?|implications?)\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bwhat\s+cascades?\s+(?:were|got|have\s+been)\s+(?:blocked|suppressed)\b', re.IGNORECASE),
+     "posture_check", []),
+
     # Encryption / cryptography gaps
     (re.compile(r'\bencryption\s+gaps?\b', re.IGNORECASE),
      "gap_analysis", ["A.8.24", "Art.32"]),
