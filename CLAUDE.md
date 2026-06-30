@@ -37,12 +37,14 @@ the strategic evidence-cascade layer (event-driven implications:
 | Templating arc (storage mode) — 20 v2 anchors + native formats (md/xlsx/docx) + xlsx round-trip + tenant profile + evidence-class UI | SHIPPED |
 | Stage-1 queue hygiene + A.6.7 promotion (catalog now 100% multi-leaf) | SHIPPED |
 | Cite-mode v1 — schema_v50 + tenant_external_system + external_evidence_source + verification_log + engine union + APIs + UI + freshness card | SHIPPED |
-| Relationship catalog — S1 scaffolding + S5 50 intra-GDPR edges + S6 160 intra-ISO edges (214 total) | SHIPPED |
+| Relationship catalog — 505 typed edges across 11 edge types (S4 286 xfw + S5 54 GDPR + S6 160 ISO + S2b 5 BLOCKS_WHEN); load_graph_relationships.py cross-framework deprecated | SHIPPED |
 | Cascade vocabulary — 53 events (11 existing + 42 operational) + 6 meta-cascade edge types | SHIPPED |
 | Cascade engine v1 — all 10 meditation patterns (P1..P10) + 23 API endpoints + 7 UI surfaces (KPIs/drill-in/timeline/overrides/bulk/notifications/event detail) | SHIPPED |
+| xfw_proposer uses catalog rationale on bridge proposals (S7) | SHIPPED |
 | Outbound notification delivery (email/Slack) | DEFERRED |
 | UPDATES_FACT recompute (source-of-truth queries per fact) | DEFERRED |
 | Periodic sweep scheduler for overdue followups | DEFERRED |
+| ISO 27001:2013→2022 renumbering in source JSONs (12 stale refs) | DEFERRED — data quality |
 
 ## Key memory entries
 

@@ -161,6 +161,38 @@ short-circuit paths flush out these.
 | Verification trends sparklines | KPI tiles cover the now; trends-over-time is a v2 feature. |
 | Cross-tenancy cascade | The 2026-06-29 meditation explicitly deferred this. All current logic is single-tenant scoped. |
 
+## Update (2026-06-30 evening) — S4 + S7 closed
+
+This retrospective was written immediately after S3u, when the
+cascade engine + UX layer were complete but S4 (migrate the 274
+cross-framework edges into the unified catalog) and S7 (wire
+xfw_proposer to the catalog rationale) were still deferred.
+Both shipped that same evening:
+
+- **S4** — 286 cross-framework edges migrated; all 274 existing
+  Neo4j-resident edges tagged `managed_by='relationship_catalog'`;
+  load_graph_relationships.py cross-framework section deprecated.
+  12 source-JSON edges silently dropped at MATCH-and-skip step
+  (pre-existing data quality artefacts; stale ISO 27001:2013 refs).
+- **S7** — `_walk_implements` returns the catalog `rationale`;
+  `_compose_bridge_excerpt` prepends `[Bridge: <rationale>]` so
+  xfw_bridge proposals answer "why" not just "that". Auditor-grade.
+
+**The original 7-step migration sequence (§10 of the design memo)
+is now complete.** Catalog owns 505 typed edges across 11 edge
+types. Cascade engine + UX + xfw_proposer integration: all in one
+unified loader.
+
+### Data quality follow-up worth filing
+
+The 12 dropped edges target ISO 27001:**2013** references (A.9.x
+that was renumbered to A.5.15/17/18 in 27001:**2022**; A.4.1 which
+doesn't exist in 2022; one A.6.1.2 ref that's actually clause
+6.1.2 mis-prefixed). When the next ISO mapping curation pass
+happens, fix these in `iso_nodes_phase1.json` /
+`gdpr_nodes_phase2.json` then re-run
+`scripts/extract_xfw_to_catalog.py` to regenerate the catalog block.
+
 ## Carry-forward insights for the next big arc
 
 1. **Always audit existing infrastructure before designing the next thing.**

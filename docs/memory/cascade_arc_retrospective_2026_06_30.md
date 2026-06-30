@@ -1,6 +1,6 @@
 ---
 name: cascade-arc-retrospective-2026-06-30
-description: "SHIPPED 2026-06-27→2026-06-30 (11 commits / 22 slices): cascade arc complete. All 10 cascade-meditation patterns implemented (P1 EMITS_EVENT through P10 implication grouping) + relationship catalog with 214 typed intra-framework edges (S5 GDPR 54 + S6 ISO 160) + cascade vocabulary with 53 events + cascade engine + 23 API endpoints + 7 UI surfaces. Memory + docs entry. Engine grew from 0 to ~1900 lines; eval stayed at 197/199 floor across every commit. KEY LESSON: audit before design — relationship-model audit revealed 70% of cascade was already built (existing 17 typed edges + 11 Events + 4 cross-framework edge classes); the actual gap was intra-framework structural edges + operational events + tenant-side implications surface. Full retrospective in docs/cascade_arc_retrospective_2026_06_30.md."
+description: "SHIPPED 2026-06-27→2026-06-30 (13 commits / 24 slices including S4+S7 closure): cascade arc + relationship catalog migration sequence both complete. All 10 cascade-meditation patterns implemented + 505 typed edges in relationship_catalog across 11 edge types (286 cross-framework migrated via S4 + 214 intra-framework authored S5/S6 + 5 BLOCKS_WHEN) + cascade vocabulary with 53 events + cascade engine + 23 API endpoints + 7 UI surfaces. xfw_proposer (S7) now uses catalog rationale in bridge excerpts. Engine grew from 0 to ~1900 lines; eval stayed at 197/199 floor across every commit. KEY LESSON: audit before design — relationship-model audit revealed 70% of cascade was already built; the actual gap was intra-framework structural edges + operational events + tenant-side implications surface. Full retrospective in docs/cascade_arc_retrospective_2026_06_30.md. SECONDARY DELIVERABLE: load_graph_relationships.py cross-framework section deprecated; relationship_catalog is now the single source of truth for typed edges. Data-quality follow-up filed: 12 source-JSON edges target ISO 27001:2013 refs (A.9.x, A.4.1) that need 2022 renumbering."
 metadata:
   node_type: memory
   type: project
@@ -115,6 +115,34 @@ unnoticed for months — short-circuit-heavy paths flushed it out.
 - Verification trends sparklines (KPI tiles cover the now)
 - Cross-tenancy cascade (single-tenant only; the meditation
   deferred this explicitly)
+
+## Update (2026-06-30 evening) — S4 + S7 closed
+
+Retrospective above was written between S3u and S4. Both
+remaining migration-sequence steps shipped that same evening:
+
+- **S4** — 286 cross-framework edges migrated from source JSONs
+  into XFW_EDGES; all 274 Neo4j-resident edges tagged
+  managed_by='relationship_catalog'; `load_graph_relationships.py`
+  cross-framework section marked deprecated. 12 dropped edges
+  reference ISO 27001:2013 numbering (filed as data-quality
+  follow-up).
+- **S7** — `_walk_implements` returns rationale; new
+  `_compose_bridge_excerpt` produces `[Bridge: <rationale>] <src>`
+  on xfw_bridge proposals so auditor sees WHY the cross-framework
+  link applies.
+
+**Migration sequence COMPLETE.** Catalog owns 505 typed edges
+(286 xfw + 54 GDPR + 160 ISO + 5 BLOCKS_WHEN) across 11 edge
+types. relationship_catalog is the single source of truth.
+
+### Data-quality follow-up filed
+
+12 dropped source-JSON edges target stale ISO 27001:**2013** refs
+(A.9.1/A.9.3 renumbered to A.5.15/17/18 in 2022; A.4.1 doesn't
+exist in 2022; one A.6.1.2 typo). Fix in
+`iso_nodes_phase1.json` + `gdpr_nodes_phase2.json` then re-run
+`scripts/extract_xfw_to_catalog.py` to regenerate. Not blocking.
 
 ## Carry-forward insights
 
