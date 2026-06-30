@@ -78,6 +78,13 @@ class Event:
     cascades_review:     list[str]             = field(default_factory=list)
     # RequirementNode ids to re-evaluate against new scope state
     applies_when:        str | None = None  # applicability gate for the event ITSELF
+    # S3g: closure-quality enforcement (P8 from cascade meditation).
+    # When True, the cascade engine emits 'closure_proof_missing'
+    # implications if structured_event metadata lacks an
+    # 'effectiveness_evidence' field. ISO 27001 cl. 10.1 + ISO 27002
+    # §5.36 require effectiveness verification on closure of certain
+    # lifecycle events — bare closure is itself a finding.
+    requires_effectiveness_proof: bool = False
 
 
 # ── Incident events ───────────────────────────────────────────────────────────
@@ -615,6 +622,10 @@ EVENT_ASSET_DISPOSED = Event(
         EventTrigger("ISO27001:2022:A.5.28", None,           "Evidence-handling chain entry"),
         EventTrigger("ISO27001:2022:A.5.9",  None,           "Register marked disposed"),
     ],
+    requires_effectiveness_proof = True,
+    # ISO 27002:2022 §7.14: equipment must be disposed of "in a
+    # secure manner". The disposal certificate / data-erasure proof
+    # IS the effectiveness evidence.
 )
 
 EVENT_ASSET_LOST_STOLEN = Event(
@@ -721,6 +732,11 @@ EVENT_SUPPLIER_TERMINATED = Event(
         ExpectedFollowup("event:data_return_attestation_received", 30,
             "Data-return or destruction attestation expected within 30 days"),
     ],
+    requires_effectiveness_proof = True,
+    # ISO 27002:2022 §5.20: supplier agreement closure includes the
+    # return / destruction proof. The expected_followup tracks the
+    # ATTESTATION arrival; requires_effectiveness_proof tracks whether
+    # the closure ITSELF was filed with the proof inline.
 )
 
 EVENT_SUPPLIER_BREACH_REPORTED = Event(
@@ -916,6 +932,9 @@ EVENT_CORRECTIVE_ACTION_CLOSED = Event(
         EventTrigger("ISO27001:2022:10.1",   None,           "Closure record + effectiveness evidence"),
         EventTrigger("ISO27001:2022:10.2",   None,           "Continual improvement input"),
     ],
+    requires_effectiveness_proof = True,
+    # ISO 27001 cl. 10.1: "the effectiveness of any corrective action
+    # taken shall be reviewed". Closure-without-proof is itself a NC.
 )
 
 EVENT_VULNERABILITY_DISCLOSED_CRITICAL = Event(

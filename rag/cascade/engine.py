@@ -378,6 +378,21 @@ def evaluate_applies_when(expr: str, metadata: dict) -> tuple[bool, str]:
     return passes, f"{field}={actual!r} {op} {expected!r}"
 
 
+def _event_spec_for(event_type: str):
+    """Look up an Event spec by event_type from the catalog.
+    Lazy-import to avoid cycles; cached at module level after first call.
+    Returns None if event_type not in catalog (defensive).
+    """
+    global _EVENT_SPEC_CACHE
+    if not hasattr(_event_spec_for, "_cache"):
+        try:
+            from enrichment.events.event_nodes import ALL_EVENTS
+            _event_spec_for._cache = {e.event_type: e for e in ALL_EVENTS}
+        except Exception:
+            _event_spec_for._cache = {}
+    return _event_spec_for._cache.get(event_type)
+
+
 _CLIENT_FACTS_COLUMNS = {
     "processes_personal_data", "eu_data_subjects", "uk_data_subjects",
     "role_controller", "role_processor", "role_joint_controller",
@@ -448,9 +463,64 @@ def fire_cascade(
         )
         matched_count += len(pg_cursor.fetchall())
 
+        # ── S3g: effectiveness proof check ───────────────────────────
+        # If this event's spec requires effectiveness proof AND the
+        # tenant didn't supply 'effectiveness_evidence' in metadata,
+        # emit closure_proof_missing implications on the TRIGGERS_
+        # OBLIGATION targets. Reuses 'attestation_required' action.
+        ev_metadata = ev.get("metadata") or {}
+        event_spec = _event_spec_for(top_et)
+        if event_spec and event_spec.requires_effectiveness_proof:
+            proof = ev_metadata.get("effectiveness_evidence")
+            if not proof:
+                # Walk this event's triggers + emit "proof missing" rows.
+                # Separate from walk_cascade output so the rationale is
+                # distinctive and the cascade_path marks the proof-missing
+                # branch explicitly.
+                proof_targets = neo_session.run(
+                    """
+                    MATCH (e:Event {event_type: $et})-[r:TRIGGERS_OBLIGATION]->(n:RequirementNode)
+                    RETURN n.id        AS req_id,
+                           r.rationale AS rationale
+                    """,
+                    et=top_et,
+                )
+                for rec in proof_targets:
+                    std_id, ref = _split_requirement_id(rec["req_id"])
+                    key = (rec["req_id"], "attestation_required",
+                           (top_et, f"{top_et}:proof_missing"))
+                    if key in seen_targets:
+                        continue
+                    seen_targets.add(key)
+                    pg_cursor.execute(
+                        """
+                        INSERT INTO triggered_implication
+                            (tenant_id, source_verification_id, source_event_type,
+                             cascade_path, cascade_depth,
+                             target_control_ref, target_standard_id, target_requirement_id,
+                             expected_action,
+                             fired_at, due_date,
+                             deadline_string, rationale)
+                        VALUES (%s::uuid, %s::uuid, %s,
+                                %s::jsonb, 0,
+                                %s, %s, %s,
+                                'attestation_required',
+                                %s, %s,
+                                '', %s)
+                        """,
+                        (tenant_id, verification_log_id, top_et,
+                         json.dumps([top_et, f"{top_et}:proof_missing"]),
+                         ref, std_id, rec["req_id"],
+                         verified_at, verified_at,  # due immediately — closure already filed
+                         f"Closure proof missing: {top_et} requires "
+                         f"effectiveness_evidence in metadata; "
+                         f"{rec['rationale']}"),
+                    )
+                    impl_count += 1
+
         # ── Walk cascade for implications + collect visited events ──
         rows, suppressions = walk_cascade(
-            neo_session, top_et, metadata=ev.get("metadata") or {},
+            neo_session, top_et, metadata=ev_metadata,
         )
         # Persist suppressions for audit
         for sp in suppressions:
