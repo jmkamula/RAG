@@ -297,6 +297,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <button class="nav-item" id="nav-profile" onclick="setMode('profile')">
       <i class="ti ti-id-badge-2" aria-hidden="true"></i> Profile
     </button>
+    <button class="nav-item" id="nav-cascade" onclick="setMode('cascade')">
+      <i class="ti ti-timeline" aria-hidden="true"></i> Cascade timeline
+    </button>
+    <button class="nav-item" id="nav-inbox" onclick="setMode('inbox')">
+      <i class="ti ti-bell" aria-hidden="true"></i> Notifications
+      <span class="nav-badge" id="nb-inbox" style="display:none">—</span>
+    </button>
 
     <div class="sidebar-divider"></div>
 
@@ -439,6 +446,59 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
 
+    <!-- Cascade timeline toolbar -->
+    <div class="main-toolbar" id="toolbar-cascade" style="display:none">
+      <div>
+        <div class="main-title">Cascade timeline</div>
+        <div class="main-sub">Chronological log of every cascade emission — verifications, implications, followups, suppressions</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input id="cascade-filter-control" placeholder="Control e.g. A.5.18"
+               style="font-size:12px;padding:4px 8px;background:#fff;border:1px solid #C8C5B8;border-radius:4px;color:#3A382E;font-family:inherit;width:140px">
+        <input id="cascade-filter-event" placeholder="Event e.g. personnel_offboarded"
+               style="font-size:12px;padding:4px 8px;background:#fff;border:1px solid #C8C5B8;border-radius:4px;color:#3A382E;font-family:inherit;width:220px">
+        <select id="cascade-filter-days" style="font-size:12px;padding:4px 8px;background:#fff;border:1px solid #C8C5B8;border-radius:4px;color:#3A382E;font-family:inherit">
+          <option value="7">last 7d</option>
+          <option value="30" selected>last 30d</option>
+          <option value="90">last 90d</option>
+          <option value="365">last 365d</option>
+        </select>
+        <button class="btn-ask" onclick="loadCascadeTimeline()" style="font-size:12px;padding:4px 12px">
+          <i class="ti ti-refresh"></i> Apply
+        </button>
+      </div>
+    </div>
+
+    <div class="main-body" id="body-cascade" style="display:none">
+      <div id="cascade-wrap" style="max-width:980px;margin:18px auto;padding:0 20px">
+        <div class="empty"><i class="ti ti-loader-2" aria-hidden="true"></i><p>Loading cascade timeline…</p></div>
+      </div>
+    </div>
+
+    <!-- Inbox toolbar -->
+    <div class="main-toolbar" id="toolbar-inbox" style="display:none">
+      <div>
+        <div class="main-title">Notifications</div>
+        <div class="main-sub">Cascade events that need your attention</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <select id="inbox-filter-status" onchange="loadInbox()" style="font-size:12px;padding:4px 8px;background:#fff;border:1px solid #C8C5B8;border-radius:4px;color:#3A382E;font-family:inherit">
+          <option value="unread" selected>unread</option>
+          <option value="all">all</option>
+          <option value="dismissed">dismissed</option>
+        </select>
+        <button onclick="markAllNotificationsRead()" class="btn-ask" style="font-size:12px;padding:4px 12px">
+          <i class="ti ti-checks"></i> Mark all read
+        </button>
+      </div>
+    </div>
+
+    <div class="main-body" id="body-inbox" style="display:none">
+      <div id="inbox-wrap" style="max-width:880px;margin:18px auto;padding:0 20px">
+        <div class="empty"><i class="ti ti-loader-2" aria-hidden="true"></i><p>Loading notifications…</p></div>
+      </div>
+    </div>
+
   </div>
 
   <!-- ── Detail panel ── -->
@@ -540,6 +600,8 @@ function connect() {
   // sidebar.
   if (mode === 'dashboard')   loadDashboard();
   else if (mode === 'queue')  loadQueue();
+  // Refresh the inbox bell badge on every connect.
+  refreshInboxBadge();
 }
 
 async function api(path, opts={}) {
@@ -579,19 +641,309 @@ async function apiForm(path, formData) {
 // ── Mode switching ──
 function setMode(m) {
   mode = m;
-  ['dashboard','queue','chat','docs','profile'].forEach(x => {
-    document.getElementById('nav-'+x).classList.toggle('active', x===m);
-    document.getElementById('toolbar-'+x).style.display = x===m ? '' : 'none';
-    document.getElementById('body-'+x).style.display = x===m ? '' : 'none';
+  ['dashboard','queue','chat','docs','profile','cascade','inbox'].forEach(x => {
+    const navEl = document.getElementById('nav-'+x);
+    if (navEl) navEl.classList.toggle('active', x===m);
+    const tbEl  = document.getElementById('toolbar-'+x);
+    if (tbEl) tbEl.style.display = x===m ? '' : 'none';
+    const bEl   = document.getElementById('body-'+x);
+    if (bEl) bEl.style.display = x===m ? '' : 'none';
   });
   document.getElementById('queue-filters').style.display = m==='queue' ? '' : 'none';
-  // Close the detail panel when switching modes — its state is tied to
-  // the previous view (a queue card or a dashboard cell).
   closeDetail();
   if (m === 'queue')     loadQueue();
   if (m === 'dashboard') loadDashboard();
   if (m === 'profile')   loadProfile();
+  if (m === 'cascade')   loadCascadeTimeline();
+  if (m === 'inbox')     loadInbox();
 }
+
+// ── Notifications inbox (S3t) ──────────────────────────────────────────
+async function refreshInboxBadge() {
+  try {
+    const d = await api('/api/v1/tenant/notifications?status=unread&limit=1');
+    const badge = document.getElementById('nb-inbox');
+    if (!badge) return;
+    if (d.unread > 0) {
+      badge.style.display = '';
+      badge.textContent = d.unread;
+      if (d.urgent > 0) badge.style.background = '#9C2E2E';
+      else badge.style.background = '#3C3489';
+    } else {
+      badge.style.display = 'none';
+    }
+  } catch (_) { /* silent */ }
+}
+
+async function loadInbox() {
+  const wrap = document.getElementById('inbox-wrap');
+  wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading notifications…</p></div>';
+  const status = document.getElementById('inbox-filter-status')?.value || 'unread';
+  try {
+    const d = await api(`/api/v1/tenant/notifications?status=${encodeURIComponent(status)}&limit=200`);
+    renderInbox(d, status);
+    refreshInboxBadge();
+  } catch (e) {
+    wrap.innerHTML = `<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn't load notifications: ${escapeHtml(e.message)}</p></div>`;
+  }
+}
+
+function renderInbox(d, status) {
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const wrap = document.getElementById('inbox-wrap');
+  if (!d.items || !d.items.length) {
+    wrap.innerHTML = `<div class="empty" style="margin-top:40px"><i class="ti ti-mail-opened"></i><p>No ${esc(status)} notifications.</p></div>`;
+    return;
+  }
+  const sevPalette = {
+    critical: {bg:'#FBF3F3', dot:'#9C2E2E', tag:'CRITICAL'},
+    high:     {bg:'#FBF3F3', dot:'#9C2E2E', tag:'HIGH'},
+    medium:   {bg:'#FBF7EE', dot:'#A87515', tag:'MEDIUM'},
+    low:      {bg:'#F2F5EE', dot:'#2D5F2D', tag:'LOW'},
+    info:     {bg:'#FAF8F2', dot:'#5C5A4F', tag:'INFO'},
+  };
+  let html = `<div style="font-size:11px;color:#5C5A4F;margin-bottom:14px">
+    <strong style="color:#3A382E">${d.count}</strong> ${esc(status)} notification${d.count===1?'':'s'} · ${d.unread} unread · ${d.urgent} urgent
+  </div>`;
+  html += `<div style="border:1px solid #E8E5DA;border-radius:6px;overflow:hidden;background:#fff">`;
+  for (const it of d.items) {
+    const p = sevPalette[it.severity] || sevPalette.info;
+    const ts = it.fired_at ? it.fired_at.slice(0,19).replace('T',' ') : '?';
+    const isRead = Boolean(it.read_at);
+    html += `<div style="padding:10px 14px;border-bottom:1px solid #F0EDDF;background:${isRead ? '#FFF' : p.bg};display:flex;gap:12px;align-items:flex-start">
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${p.dot};margin-top:6px;flex-shrink:0"></span>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;gap:8px;align-items:center;font-size:12px">
+          <span style="font-size:9px;font-weight:600;color:${p.dot};letter-spacing:.4px">${p.tag}</span>
+          <span style="font-size:10px;color:#9A9785">${esc(it.kind)}</span>
+          ${it.related_control_ref ? `<span style="font-family:monospace;font-size:10px;color:#5C5A4F">${esc(it.related_control_ref)}</span>` : ''}
+          <span style="margin-left:auto;font-size:10px;color:#9A9785;font-family:monospace">${esc(ts)}</span>
+        </div>
+        <div style="margin-top:3px;color:#3A382E;font-size:12px;font-weight:${isRead ? '400' : '500'}">${esc(it.title)}</div>
+        ${it.body ? `<div style="margin-top:4px;color:#5C5A4F;font-size:11px;line-height:1.5">${esc(it.body)}</div>` : ''}
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        ${!isRead ? `<button onclick="_notifAct('${it.id}','read')" title="Mark read" style="font-size:10px;padding:2px 6px;background:#fff;color:#3A382E;border:1px solid #E8E5DA;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-check"></i></button>` : ''}
+        ${!it.dismissed_at ? `<button onclick="_notifAct('${it.id}','dismiss')" title="Dismiss" style="font-size:10px;padding:2px 6px;background:#fff;color:#9C2E2E;border:1px solid #E0C8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-x"></i></button>` : ''}
+      </div>
+    </div>`;
+  }
+  html += `</div>`;
+  wrap.innerHTML = html;
+}
+
+async function _notifAct(id, action) {
+  try {
+    const r = await fetch(`/api/v1/tenant/notifications/${encodeURIComponent(id)}`, {
+      method:  'PATCH',
+      headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
+      body:    JSON.stringify({action: action}),
+    });
+    if (!r.ok) { alert(`Failed: ${r.status}`); return; }
+    loadInbox();
+  } catch (e) { alert(`Error: ${e.message}`); }
+}
+
+async function markAllNotificationsRead() {
+  try {
+    const r = await fetch('/api/v1/tenant/notifications/mark-all-read', {
+      method:  'POST',
+      headers: {'X-API-Key': API_KEY},
+    });
+    if (!r.ok) { alert(`Failed: ${r.status}`); return; }
+    loadInbox();
+  } catch (e) { alert(`Error: ${e.message}`); }
+}
+
+// ── Cascade timeline (S3q) ────────────────────────────────────────────
+async function loadCascadeTimeline() {
+  const wrap = document.getElementById('cascade-wrap');
+  wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading cascade timeline…</p></div>';
+  const cref  = (document.getElementById('cascade-filter-control')?.value || '').trim();
+  const evt   = (document.getElementById('cascade-filter-event')?.value || '').trim();
+  const days  = document.getElementById('cascade-filter-days')?.value || '30';
+  const qs = new URLSearchParams();
+  if (cref) qs.set('control_ref', cref);
+  if (evt)  qs.set('event_type',  evt);
+  qs.set('since_days', days);
+  qs.set('limit', '300');
+  try {
+    const d = await api('/api/v1/tenant/cascade-timeline?' + qs.toString());
+    renderCascadeTimeline(d);
+  } catch (e) {
+    wrap.innerHTML = `<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn't load timeline: ${escapeHtml(e.message)}</p></div>`;
+  }
+}
+
+function renderCascadeTimeline(d) {
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const wrap = document.getElementById('cascade-wrap');
+  if (!d.items || !d.items.length) {
+    wrap.innerHTML = `<div class="empty" style="margin-top:40px"><i class="ti ti-clock"></i><p>No cascade events in the last ${esc(d.since_days)} days for the chosen filters.</p></div>`;
+    return;
+  }
+  const counts = {verification:0, implication:0, followup:0, suppression:0};
+  for (const it of d.items) counts[it.kind] = (counts[it.kind]||0) + 1;
+  let html = `<div style="display:flex;gap:14px;margin-bottom:14px;font-size:11px;color:#5C5A4F">
+    <span><strong style="color:#3A382E">${d.count}</strong> events · last ${esc(d.since_days)}d</span>
+    <span>${counts.verification||0} verifications</span>
+    <span>${counts.implication||0} implications</span>
+    <span>${counts.followup||0} followups</span>
+    <span>${counts.suppression||0} suppressions</span>
+  </div>`;
+  html += `<div style="border:1px solid #E8E5DA;border-radius:6px;overflow:hidden;background:#fff">`;
+  for (const it of d.items) {
+    html += renderCascadeTimelineRow(it);
+  }
+  html += `</div>`;
+  wrap.innerHTML = html;
+}
+
+function renderCascadeTimelineRow(it) {
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  const ts = it.ts ? it.ts.slice(0,19).replace('T',' ') : '?';
+  const palette = {
+    verification:  {bg:'#EDF1F7', label:'verify',    color:'#33457A'},
+    implication:   {bg:'#FBF1E5', label:'impl',      color:'#A87515'},
+    followup:      {bg:'#EDF1F7', label:'followup',  color:'#33457A'},
+    suppression:   {bg:'#F0EDE3', label:'suppr',     color:'#5C5A4F'},
+  };
+  const p = palette[it.kind] || {bg:'#FAF8F2', label:it.kind, color:'#3A382E'};
+  let body = '';
+  if (it.kind === 'verification') {
+    body = `<strong>${esc(it.event_type)}</strong> × ${esc(it.count)}
+      <span style="color:#5C5A4F">on ${esc(it.leaf_id||'?')}</span>
+      ${it.summary ? `<div style="margin-top:3px;color:#3A382E">${esc(it.summary)}</div>` : ''}`;
+  } else if (it.kind === 'implication') {
+    const tag = (it.status === 'satisfied' ? 'SATISFIED'
+              : it.status === 'dismissed' ? 'DISMISSED'
+              : 'pending');
+    body = `${esc(it.event_type)} → <strong>${esc(it.control_ref||'?')}</strong>
+      <span style="color:#5C5A4F">[${esc(it.expected_action)}]</span>
+      <span style="font-size:10px;color:#9A9785">${tag}</span>
+      ${it.scope_kind ? ` <span style="font-size:10px;color:#5C5A4F">(scope=${esc(it.scope_kind)})</span>` : ''}
+      ${it.due_date ? ` <span style="font-size:10px;color:#5C5A4F">due ${esc(it.due_date.slice(0,10))}</span>` : ''}
+      ${(it.cascade_path && it.cascade_path.length > 1) ? `<div style="font-size:10px;color:#9A9785;font-family:monospace;margin-top:2px">${esc((it.cascade_path||[]).join(' → '))}</div>` : ''}
+      ${it.rationale ? `<div style="margin-top:3px;color:#3A382E">${esc(it.rationale.slice(0,200))}</div>` : ''}`;
+  } else if (it.kind === 'followup') {
+    body = `${esc(it.event_type)} expects <strong>${esc(it.expected_event_type)}</strong>
+      <span style="color:#5C5A4F">[${esc(it.status)}] within ${esc(it.window_days)}d</span>
+      <span style="font-size:10px;color:#5C5A4F">(expires ${esc((it.expires_at||'?').slice(0,10))})</span>`;
+  } else if (it.kind === 'suppression') {
+    const tgt = it.target_requirement_id || it.target_event_type || '?';
+    body = `<strong>${esc(it.event_type)}</strong> -X-> ${esc(tgt)}
+      <span style="font-size:10px;color:#5C5A4F">${esc(it.suppression_kind||'')}</span>
+      ${it.applies_when ? `<div style="font-size:10px;color:#3A382E;font-family:monospace;margin-top:2px">${esc(it.applies_when)}</div>` : ''}`;
+  } else {
+    body = esc(JSON.stringify(it));
+  }
+  return `<div onclick="openCascadeEventDetail('${attr(it.kind)}','${attr(it.id)}')" style="display:flex;gap:10px;padding:8px 12px;border-bottom:1px solid #F0EDDF;font-size:11px;align-items:flex-start;cursor:pointer" onmouseover="this.style.background='#FAF8F2'" onmouseout="this.style.background=''">
+    <span style="display:inline-block;min-width:55px;padding:1px 6px;background:${p.bg};color:${p.color};border-radius:10px;font-size:10px;text-transform:uppercase;letter-spacing:.3px;font-weight:600">${p.label}</span>
+    <span style="min-width:135px;color:#5C5A4F;font-family:monospace;font-size:10px">${esc(ts)}</span>
+    <span style="flex:1;color:#3A382E;line-height:1.5">${body}</span>
+  </div>`;
+}
+
+async function openCascadeEventDetail(kind, eid) {
+  // Build the modal scaffold first.
+  let body = '<div style="font-size:12px;color:#5C5A4F"><i class="ti ti-loader-2"></i> Loading…</div>';
+  let footer = `<button onclick="_cetCloser()" style="font-size:11px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:4px;cursor:pointer;font-family:inherit">Close</button>`;
+  _renderCetModal(`Cascade event detail`, body, footer);
+
+  try {
+    const d = await api(`/api/v1/tenant/cascade-event/${encodeURIComponent(kind)}/${encodeURIComponent(eid)}`);
+    _renderCetModal(`Cascade event detail — ${kind}`, renderCascadeEventDetailBody(d), footer);
+  } catch (e) {
+    _renderCetModal(`Cascade event detail`, `<div style="color:#9C2E2E">Couldn't load: ${escapeHtml(e.message)}</div>`, footer);
+  }
+}
+
+function renderCascadeEventDetailBody(d) {
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const f = d.focal || {};
+  const r = d.related || {};
+
+  // Focal block — pretty-print known fields, fall back to JSON for the rest.
+  const kvRow = (k, v) =>
+    v == null || v === '' ? '' :
+    `<div style="display:grid;grid-template-columns:160px 1fr;gap:6px;padding:3px 0;font-size:11px">
+       <div style="color:#5C5A4F">${esc(k)}</div>
+       <div style="color:#3A382E;font-family:${typeof v === 'object' ? 'monospace' : 'inherit'};word-break:break-all">${
+         typeof v === 'object' ? esc(JSON.stringify(v, null, 2)) : esc(String(v))
+       }</div>
+     </div>`;
+  const focalKeys = Object.keys(f).filter(k => k !== 'kind');
+  const focalHtml = `<div style="padding:10px 12px;background:#FAF8F2;border:1px solid #E8E5DA;border-radius:5px;margin-bottom:14px">
+    <div style="font-size:11px;font-weight:600;color:#3A382E;margin-bottom:6px">
+      <i class="ti ti-anchor"></i> Focal (${esc(f.kind || '?')})
+    </div>
+    ${focalKeys.map(k => kvRow(k, f[k])).join('')}
+  </div>`;
+
+  // Related rollups.
+  const relSection = (title, items, fmt) => {
+    if (!items || !items.length) return '';
+    return `<div style="margin-bottom:12px">
+      <div style="font-size:11px;font-weight:600;color:#3A382E;margin-bottom:6px">
+        ${esc(title)} <span style="color:#9A9785">· ${items.length}</span>
+      </div>
+      <div style="background:#fff;border:1px solid #E8E5DA;border-radius:5px;overflow:hidden">
+        ${items.map(fmt).join('')}
+      </div>
+    </div>`;
+  };
+
+  const implFmt = i =>
+    `<div style="padding:5px 10px;border-bottom:1px solid #F0EDDF;font-size:11px">
+       <span style="font-family:monospace;color:#3A382E">${esc(i.control_ref)}</span>
+       <span style="color:#5C5A4F"> [${esc(i.expected_action)}]</span>
+       <span style="font-size:10px;color:#9A9785"> ${esc(i.status)}</span>
+       ${i.scope_kind ? `<span style="font-size:10px;color:#5C5A4F"> (scope=${esc(i.scope_kind)})</span>` : ''}
+       ${i.due_date ? `<span style="font-size:10px;color:#5C5A4F"> due ${esc(i.due_date.slice(0,10))}</span>` : ''}
+     </div>`;
+  const fuFmt = fu =>
+    `<div style="padding:5px 10px;border-bottom:1px solid #F0EDDF;font-size:11px">
+       <span style="font-family:monospace;color:#3A382E">${esc(fu.source_event_type)} → ${esc(fu.expected_event_type)}</span>
+       <span style="color:#5C5A4F"> [${esc(fu.status)}] within ${esc(fu.window_days)}d</span>
+     </div>`;
+  const spFmt = sp =>
+    `<div style="padding:5px 10px;border-bottom:1px solid #F0EDDF;font-size:11px">
+       <span style="font-family:monospace;color:#3A382E">${esc(sp.source_event_type)} -X-> ${esc(sp.target_requirement_id || sp.target_event_type)}</span>
+       <span style="font-size:10px;color:#5C5A4F"> ${esc(sp.suppression_kind || '')}</span>
+       ${sp.applies_when ? `<div style="font-size:10px;color:#3A382E;font-family:monospace;margin-top:2px">${esc(sp.applies_when)}</div>` : ''}
+     </div>`;
+
+  return focalHtml +
+         relSection("Related implications", r.implications, implFmt) +
+         relSection("Related followups",    r.followups,    fuFmt) +
+         relSection("Related suppressions", r.suppressions, spFmt);
+}
+
+function _renderCetModal(title, body, footer) {
+  let m = document.getElementById('cet-modal');
+  if (m) m.remove();
+  m = document.createElement('div');
+  m.id = 'cet-modal';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(58,56,46,.5);z-index:9999;display:flex;align-items:center;justify-content:center';
+  m.onclick = (e) => { if (e.target === m) _cetCloser(); };
+  m.innerHTML = `
+    <div style="background:#FAF8F2;border:1px solid #C8C5B8;border-radius:6px;max-width:760px;width:90%;max-height:80vh;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(0,0,0,.18)">
+      <div style="padding:10px 14px;border-bottom:1px solid #E8E5DA;font-size:13px;font-weight:600;color:#3A382E;display:flex;align-items:center">
+        ${escapeHtml(title)}
+        <button onclick="_cetCloser()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:#9A9785;font-size:16px;padding:0 4px">&times;</button>
+      </div>
+      <div style="padding:14px;overflow:auto;flex:1">${body}</div>
+      <div style="padding:10px 14px;border-top:1px solid #E8E5DA;display:flex;justify-content:flex-end;gap:8px">${footer}</div>
+    </div>`;
+  document.body.appendChild(m);
+}
+
+function _cetCloser() {
+  const m = document.getElementById('cet-modal');
+  if (m) m.remove();
+}
+
 
 // ── Tenant Profile ───────────────────────────────────────────────────────
 // Form for the placeholder values that get substituted into every
@@ -602,15 +954,168 @@ async function loadProfile() {
   const wrap = document.getElementById('profile-wrap');
   wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading profile…</p></div>';
   try {
-    const [profileResp, systemsResp] = await Promise.all([
+    const [profileResp, systemsResp, overridesResp, vocabResp] = await Promise.all([
       api('/api/v1/tenant/profile'),
       api('/api/v1/tenant/external-systems'),
+      api('/api/v1/tenant/cascade-overrides').catch(() => ({items: []})),
+      api('/api/v1/tenant/cascade-events/vocabulary').catch(() => ({vocabulary: {}})),
     ]);
     renderProfile(profileResp.profile || []);
     renderExternalSystems(systemsResp.systems || []);
+    renderCascadeOverrides(overridesResp.items || [], vocabResp.vocabulary || {});
   } catch (e) {
     wrap.innerHTML = `<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn’t load profile: ${escapeHtml(e.message)}</p></div>`;
   }
+}
+
+
+// ── Cascade overrides admin (S3r) ──────────────────────────────────────
+function renderCascadeOverrides(overrides, vocab) {
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  const wrap = document.getElementById('profile-wrap');
+
+  // Event-type picker
+  let pickerOpts = '<option value="">— pick event type —</option>';
+  for (const [cat, evs] of Object.entries(vocab || {})) {
+    pickerOpts += `<optgroup label="${esc(cat)}">`;
+    for (const ev of evs) {
+      pickerOpts += `<option value="${attr(ev.event_type)}">${esc(ev.event_type)} — ${esc(ev.title || '')}</option>`;
+    }
+    pickerOpts += '</optgroup>';
+  }
+
+  // Existing overrides table
+  let rows = '';
+  if (!overrides.length) {
+    rows = `<tr><td colspan="5" style="padding:12px;color:#9C9A8E;font-size:12px;text-align:center">No cascade overrides registered.</td></tr>`;
+  } else {
+    for (const o of overrides) {
+      const target = o.target_requirement_id || '—';
+      const kindLabel = o.override_kind === 'mute_event' ? 'mute event' : 'mute target';
+      rows += `<tr>
+        <td style="padding:6px 8px;font-size:11px"><span style="background:#F0EDE3;color:#5C5A4F;padding:1px 6px;border-radius:8px;font-size:10px">${esc(kindLabel)}</span></td>
+        <td style="padding:6px 8px;font-size:11px;font-family:monospace">${esc(o.event_type)}</td>
+        <td style="padding:6px 8px;font-size:11px;font-family:monospace">${esc(target)}</td>
+        <td style="padding:6px 8px;font-size:11px;color:#3A382E">${esc(o.reason || '')}</td>
+        <td style="padding:6px 8px;text-align:right">
+          <button onclick="deleteCascadeOverride('${attr(o.id)}')" title="Remove" style="font-size:10px;padding:3px 8px;background:#fff;color:#9C2E2E;border:1px solid #E0C8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-trash"></i></button>
+        </td>
+      </tr>`;
+    }
+  }
+
+  const sectionHtml = `
+    <div style="margin-top:24px;padding:16px;background:#FAF8F2;border:1px solid #E8E5DA;border-radius:6px">
+      <div style="font-size:13px;font-weight:600;color:#3A382E;margin-bottom:4px">
+        <i class="ti ti-shield-off"></i> Cascade policy overrides
+      </div>
+      <div style="font-size:11px;color:#5C5A4F;margin-bottom:12px">
+        Mute specific cascade paths that don't fit your organisation.
+        Active overrides are consulted by the cascade engine before
+        firing implications.
+      </div>
+
+      <table style="width:100%;border-collapse:collapse;background:#fff;border:1px solid #E8E5DA;border-radius:4px;overflow:hidden;margin-bottom:14px">
+        <thead style="background:#F0EDE3;font-size:10px;text-transform:uppercase;color:#5C5A4F;letter-spacing:.4px">
+          <tr>
+            <th style="padding:6px 8px;text-align:left;font-weight:600">Kind</th>
+            <th style="padding:6px 8px;text-align:left;font-weight:600">Event</th>
+            <th style="padding:6px 8px;text-align:left;font-weight:600">Target control</th>
+            <th style="padding:6px 8px;text-align:left;font-weight:600">Reason</th>
+            <th style="padding:6px 8px"></th>
+          </tr>
+        </thead>
+        <tbody id="cascade-override-rows">${rows}</tbody>
+      </table>
+
+      <div style="padding:10px;background:#fff;border:1px dashed #E8E5DA;border-radius:4px">
+        <div style="font-size:11px;font-weight:600;color:#3A382E;margin-bottom:6px">Add an override</div>
+        <div style="display:grid;grid-template-columns:120px 1fr 1fr;gap:6px;align-items:center">
+          <label style="font-size:11px;color:#5C5A4F">Kind:</label>
+          <select id="cov-kind" onchange="_covKindChanged()" style="font-size:11px;padding:4px 6px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:inherit;grid-column:2/4">
+            <option value="mute_event_target">mute_event_target (single control)</option>
+            <option value="mute_event">mute_event (all targets)</option>
+          </select>
+
+          <label style="font-size:11px;color:#5C5A4F">Event type:</label>
+          <select id="cov-event" style="font-size:11px;padding:4px 6px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:inherit;grid-column:2/4">${pickerOpts}</select>
+
+          <label style="font-size:11px;color:#5C5A4F" id="cov-target-lbl">Target control:</label>
+          <input id="cov-target" placeholder="e.g. ISO27001:2022:A.6.4" style="font-size:11px;padding:4px 8px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:monospace;grid-column:2/4">
+
+          <label style="font-size:11px;color:#5C5A4F;align-self:start">Reason (required):</label>
+          <textarea id="cov-reason" rows="2" placeholder="Auditor-grade explanation — why this cascade does not apply to us." style="font-size:11px;padding:6px 8px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:inherit;grid-column:2/4;resize:vertical"></textarea>
+
+          <span></span>
+          <div style="grid-column:2/4;display:flex;justify-content:flex-end">
+            <button onclick="addCascadeOverride()" class="btn-ask" style="font-size:11px;padding:5px 14px">
+              <i class="ti ti-plus"></i> Add override
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  wrap.insertAdjacentHTML('beforeend', sectionHtml);
+}
+
+function _covKindChanged() {
+  const kind = document.getElementById('cov-kind').value;
+  const lbl  = document.getElementById('cov-target-lbl');
+  const inp  = document.getElementById('cov-target');
+  const needTarget = (kind === 'mute_event_target');
+  lbl.style.opacity  = needTarget ? '1' : '.4';
+  inp.disabled       = !needTarget;
+  inp.style.opacity  = needTarget ? '1' : '.4';
+  if (!needTarget) inp.value = '';
+}
+
+async function addCascadeOverride() {
+  const kind   = document.getElementById('cov-kind').value;
+  const event_t = document.getElementById('cov-event').value;
+  const target = document.getElementById('cov-target').value.trim();
+  const reason = document.getElementById('cov-reason').value.trim();
+  if (!event_t)            { alert('Pick an event type.'); return; }
+  if (!reason)             { alert('Reason is required.'); return; }
+  if (kind === 'mute_event_target' && !target) {
+    alert('Target control is required for mute_event_target.'); return;
+  }
+  const body = {
+    override_kind: kind,
+    event_type:    event_t,
+    reason:        reason,
+  };
+  if (kind === 'mute_event_target') body.target_requirement_id = target;
+  try {
+    const r = await fetch('/api/v1/tenant/cascade-overrides', {
+      method:  'PUT',
+      headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
+      body:    JSON.stringify(body),
+    });
+    if (!r.ok) {
+      const t = await r.text();
+      alert(`Add failed: ${r.status} ${t.slice(0,300)}`);
+      return;
+    }
+    loadProfile();
+  } catch (e) { alert(`Error: ${e.message}`); }
+}
+
+async function deleteCascadeOverride(id) {
+  if (!confirm('Remove this cascade override?')) return;
+  try {
+    const r = await fetch(`/api/v1/tenant/cascade-overrides/${encodeURIComponent(id)}`, {
+      method:  'DELETE',
+      headers: {'X-API-Key': API_KEY},
+    });
+    if (!r.ok) {
+      const t = await r.text();
+      alert(`Remove failed: ${r.status} ${t.slice(0,200)}`);
+      return;
+    }
+    loadProfile();
+  } catch (e) { alert(`Error: ${e.message}`); }
 }
 
 function renderProfile(rows) {
@@ -956,16 +1461,18 @@ async function loadDashboard() {
   const wrap = document.getElementById('dash-wrap');
   wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-loader-2"></i><p>Loading posture…</p></div>';
   try {
-    const [d, freshness, implications, followupsPending, followupsOverdue] = await Promise.all([
+    const [d, freshness, implications, followupsPending, followupsOverdue, kpis] = await Promise.all([
       api('/api/v1/dashboard/posture'),
       api('/api/v1/dashboard/cites/needs-verification').catch(() => null),
       api('/api/v1/tenant/triggered-implications?status=pending').catch(() => null),
       api('/api/v1/tenant/expected-followups?status=pending').catch(() => null),
       api('/api/v1/tenant/expected-followups?status=overdue').catch(() => null),
+      api('/api/v1/dashboard/cascade-kpis').catch(() => null),
     ]);
     dashData = d;
     renderDashboard(d, freshness, implications,
-                    {pending: followupsPending, overdue: followupsOverdue});
+                    {pending: followupsPending, overdue: followupsOverdue},
+                    kpis);
   } catch (e) {
     wrap.innerHTML = `<div class="dash-empty"><i class="ti ti-alert-triangle"></i><p>Couldn’t load posture: ${e.message}</p></div>`;
   }
@@ -976,11 +1483,26 @@ const _FINDING_CLASS = {
   'N/A': 'f-NA', 'Not assessed': 'f-NotAssessed'
 };
 
-function renderDashboard(d, freshness, implications, followups) {
+function renderDashboard(d, freshness, implications, followups, kpis) {
   const wrap = document.getElementById('dash-wrap');
   if (!d.frameworks || !d.frameworks.length) {
     wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-circle-check"></i><p>No frameworks in scope yet</p></div>';
     return;
+  }
+
+  // S3o: cascade KPI tile row — only shown when ANY cascade activity exists.
+  let kpisHtml = '';
+  if (kpis) {
+    const pi = kpis.pending_implications || {};
+    const pf = kpis.pending_followups   || {};
+    const sp = kpis.suppressions_30d    || {};
+    const anyActivity =
+      (pi.total || 0) + (pf.pending || 0) + (pf.overdue || 0) +
+      (sp.total || 0) + (kpis.auto_resolved_7d || 0) +
+      (kpis.verifications_7d && kpis.verifications_7d.total || 0) > 0;
+    if (anyActivity) {
+      kpisHtml = renderCascadeKpis(kpis);
+    }
   }
 
   // Cite freshness card — only shown when any cite is past/near due.
@@ -1006,7 +1528,7 @@ function renderDashboard(d, freshness, implications, followups) {
   }
 
   // Heatmap legend once at the top.
-  let html = freshnessHtml + implHtml + followupHtml + `<div class="heat-legend" style="margin-bottom:14px">
+  let html = kpisHtml + freshnessHtml + implHtml + followupHtml + `<div class="heat-legend" style="margin-bottom:14px">
     <span><span class="heat-legend-swatch f-NC"></span>NC</span>
     <span><span class="heat-legend-swatch f-OFI"></span>OFI</span>
     <span><span class="heat-legend-swatch f-Comply"></span>Comply</span>
@@ -1218,6 +1740,82 @@ async function selectHeatCell(c, ev) {
   } catch (e) {
     // Silent: advisory is supplementary; never block the existing tree.
   }
+
+  // ── S3p: cascade implications drill-in ───────────────────────────────
+  // Per-control pending implications fetched via the shared endpoint
+  // and filtered client-side. Resolve / dismiss inline; refresh on
+  // success so the panel reflects new state.
+  try {
+    const ti = await api('/api/v1/tenant/triggered-implications?status=pending&group_by_verification=false');
+    if (selected !== null && selected.control_ref === c.control_ref && ti && ti.items) {
+      const scoped = ti.items.filter(i => i.target_control_ref === c.control_ref);
+      if (scoped.length) {
+        const dp = document.getElementById('dp-gap');
+        if (dp) dp.insertAdjacentHTML('beforeend',
+          renderControlImplicationsDrillIn(c.control_ref, scoped));
+      }
+    }
+  } catch (e) {
+    // Silent: cascade drill-in is supplementary
+  }
+}
+
+
+function renderControlImplicationsDrillIn(controlRef, items) {
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const overdue = items.filter(i => i.overdue).length;
+  const overdueBadge = overdue > 0
+    ? `<span style="background:#9C2E2E;color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;margin-left:6px">${overdue} overdue</span>`
+    : '';
+  const rows = items.map(i => {
+    const tag = i.overdue ? 'OVERDUE' : 'pending';
+    const tagCss = i.overdue ? 'color:#9C2E2E;font-weight:600' : 'color:#5C5A4F';
+    const due = i.due_date ? i.due_date.slice(0,10) : 'open-ended';
+    const path = (i.cascade_path || []).join(' → ');
+    const anchor = (i.clock_anchor && i.clock_anchor !== 'verified_at')
+      ? ` <span style="font-size:10px;color:#9A9785">[clock=${esc(i.clock_anchor)}]</span>`
+      : '';
+    const scope = i.scope_kind
+      ? ` <span style="font-size:10px;color:#5C5A4F">(scope=${esc(i.scope_kind)})</span>`
+      : '';
+    return `<div style="padding:6px 8px;border-bottom:1px solid #F0EDDF;font-size:11px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="${tagCss};font-size:10px">[${tag}]</span>
+        <span style="color:#3A382E">${esc(i.expected_action)}</span>
+        <span style="color:#5C5A4F">due ${esc(due)}</span>${anchor}${scope}
+        <button onclick="_implResolveAndRefresh('${i.id}','satisfied','${esc(controlRef)}')"
+                title="Mark satisfied" style="margin-left:auto;font-size:10px;padding:1px 8px;background:#fff;color:#2D5F2D;border:1px solid #C8D8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-check"></i></button>
+        <button onclick="_implDismissPromptAndRefresh('${i.id}','${esc(controlRef)}')"
+                title="Dismiss with reason" style="font-size:10px;padding:1px 8px;background:#fff;color:#9C2E2E;border:1px solid #E0C8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-x"></i></button>
+      </div>
+      <div style="font-size:10px;color:#9A9785;margin-top:2px;font-family:monospace">${esc(path)}</div>
+      ${i.rationale ? `<div style="margin-top:3px;color:#3A382E">${esc(i.rationale.slice(0,200))}</div>` : ''}
+    </div>`;
+  }).join('');
+  return `<div style="margin-top:10px;border:1px solid #E8E5DA;border-radius:5px;background:#fff">
+    <div style="padding:6px 10px;background:#FAF8F2;border-bottom:1px solid #E8E5DA;font-size:11px;color:#3A382E;font-weight:600">
+      <i class="ti ti-list-check"></i> Cascade implications · ${items.length}${overdueBadge}
+    </div>
+    ${rows}
+  </div>`;
+}
+
+async function _implResolveAndRefresh(implId, status, controlRef) {
+  await _implResolve(implId, status);
+  // Re-fetch the cell selection to refresh both the drill-in + heatmap.
+  if (selected && selected.control_ref === controlRef) {
+    selectHeatCell(selected, { stopPropagation: ()=>{} });
+  }
+}
+
+function _implDismissPromptAndRefresh(implId, controlRef) {
+  const reason = prompt('Reason for dismissal (auditor-grade):');
+  if (!reason || !reason.trim()) return;
+  _implResolve(implId, 'dismissed', reason.trim()).then(() => {
+    if (selected && selected.control_ref === controlRef) {
+      selectHeatCell(selected, { stopPropagation: ()=>{} });
+    }
+  });
 }
 
 function configureDashboardActions(c) {
@@ -1878,9 +2476,13 @@ function renderTriggeredImplicationsPanel(data) {
       </div>`;
     }).join('');
     return `<div style="margin-bottom:12px;border:1px solid #E8E5DA;border-radius:4px;background:#fff">
-      <div style="padding:6px 10px;background:#FAF8F2;border-bottom:1px solid #E8E5DA;font-size:11px;color:#5C5A4F">
-        from verification — ${(g.source_event_types || []).map(esc).join(', ')}
-        <span style="margin-left:auto;float:right">${g.implications.length} implications</span>
+      <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#FAF8F2;border-bottom:1px solid #E8E5DA;font-size:11px;color:#5C5A4F">
+        <span>from verification — ${(g.source_event_types || []).map(esc).join(', ')}</span>
+        <span style="color:#9A9785">${g.implications.length} implications</span>
+        <span style="margin-left:auto;display:flex;gap:4px">
+          <button onclick="_implBulkResolve('${attr(g.verification_id)}','satisfy')" title="Satisfy all from this verification" style="font-size:10px;padding:2px 8px;background:#fff;color:#2D5F2D;border:1px solid #C8D8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-checks"></i> all</button>
+          <button onclick="_implBulkDismissPrompt('${attr(g.verification_id)}')" title="Dismiss all with shared reason" style="font-size:10px;padding:2px 8px;background:#fff;color:#9C2E2E;border:1px solid #E0C8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-x"></i> all</button>
+        </span>
       </div>
       ${grpRows}
     </div>`;
@@ -1896,6 +2498,72 @@ function renderTriggeredImplicationsPanel(data) {
     <div id="triggered-impl-body" style="display:block">${rowsHtml}</div>
   </div>`;
 }
+
+function renderCascadeKpis(k) {
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const pi = k.pending_implications || {};
+  const pf = k.pending_followups    || {};
+  const sp = k.suppressions_30d     || {};
+  const v7 = k.verifications_7d     || {};
+  const ar = k.auto_resolved_7d     || 0;
+  const cwp = k.controls_with_pressure || 0;
+
+  // Tile factory
+  const tile = (label, value, sub, accent) => {
+    const accentCss = accent === 'red'   ? 'color:#9C2E2E;' :
+                      accent === 'amber' ? 'color:#A87515;' :
+                      accent === 'green' ? 'color:#2D5F2D;' : 'color:#3A382E;';
+    return `<div style="flex:1;min-width:130px;padding:10px 12px;background:#fff;border:1px solid #E8E5DA;border-radius:5px">
+      <div style="font-size:10px;color:#9A9785;text-transform:uppercase;letter-spacing:.4px">${esc(label)}</div>
+      <div style="font-size:22px;font-weight:600;margin-top:2px;${accentCss}">${esc(value)}</div>
+      <div style="font-size:11px;color:#5C5A4F;margin-top:2px">${esc(sub)}</div>
+    </div>`;
+  };
+
+  const tiles = [];
+  // Pending implications (with overdue split)
+  tiles.push(tile(
+    "Implications",
+    pi.total || 0,
+    `${pi.overdue || 0} overdue · ${cwp} controls`,
+    (pi.overdue || 0) > 0 ? 'red' : ((pi.total || 0) > 0 ? 'amber' : null),
+  ));
+  // Pending followups
+  tiles.push(tile(
+    "Expected followups",
+    `${pf.pending || 0}`,
+    `${pf.overdue || 0} overdue`,
+    (pf.overdue || 0) > 0 ? 'red' : null,
+  ));
+  // Suppressions 30d
+  const supByKind = sp.by_kind || {};
+  const supBits = Object.entries(supByKind)
+    .map(([k,v]) => `${v} ${k.replace('_',' ')}`)
+    .join(' · ') || 'none';
+  tiles.push(tile(
+    "Suppressions (30d)",
+    sp.total || 0,
+    supBits,
+    null,
+  ));
+  // Auto-resolved 7d
+  tiles.push(tile(
+    "Auto-resolved (7d)",
+    ar,
+    (ar > 0 ? 'via cite verification' : 'none yet'),
+    ar > 0 ? 'green' : null,
+  ));
+  // Verifications 7d
+  tiles.push(tile(
+    "Verifications (7d)",
+    v7.total || 0,
+    `${v7.with_structured || 0} with structured events`,
+    null,
+  ));
+
+  return `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">${tiles.join('')}</div>`;
+}
+
 
 function renderExpectedFollowupsPanel(followups) {
   const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
@@ -1974,6 +2642,38 @@ function _implDismissPrompt(implId) {
   const reason = prompt('Reason for dismissal (auditor-grade — explain WHY this is not actionable):');
   if (!reason || !reason.trim()) return;
   _implResolve(implId, 'dismissed', reason.trim());
+}
+
+async function _implBulkResolve(verificationId, action, dismissedReason) {
+  if (!verificationId) return;
+  const body = {source_verification_id: verificationId, action: action};
+  if (action === 'dismiss' && dismissedReason) body.dismissed_reason = dismissedReason;
+  try {
+    const r = await fetch('/api/v1/tenant/triggered-implications/bulk', {
+      method:  'POST',
+      headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
+      body:    JSON.stringify(body),
+    });
+    if (!r.ok) {
+      const t = await r.text();
+      alert(`Bulk ${action} failed: ${r.status} ${t.slice(0,200)}`);
+      return;
+    }
+    const d = await r.json();
+    if (mode === 'dashboard') loadDashboard();
+    // Brief confirmation surface — tenant likely just shifted state.
+    const note = document.createElement('div');
+    note.textContent = `${d.action === 'satisfy' ? 'Satisfied' : 'Dismissed'} ${d.affected} implication${d.affected===1?'':'s'} from this verification.`;
+    note.style.cssText = 'position:fixed;bottom:20px;right:20px;padding:10px 14px;background:#2D5F2D;color:#fff;border-radius:4px;font-size:12px;z-index:9999;font-family:inherit;box-shadow:0 2px 8px rgba(0,0,0,.12)';
+    document.body.appendChild(note);
+    setTimeout(() => note.remove(), 3000);
+  } catch (e) { alert(`Error: ${e.message}`); }
+}
+
+function _implBulkDismissPrompt(verificationId) {
+  const reason = prompt('Shared dismissal reason for all implications from this verification (auditor-grade):');
+  if (!reason || !reason.trim()) return;
+  _implBulkResolve(verificationId, 'dismiss', reason.trim());
 }
 
 

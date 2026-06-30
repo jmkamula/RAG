@@ -561,6 +561,25 @@ def fire_cascade(
                 "_aggregation_window_days": period_d,
             },
         })
+        # S3t: notify on threshold crossing
+        try:
+            from rag.cascade.notify import notify as _notify
+            _notify(
+                pg_cursor,
+                tenant_id           = tenant_id,
+                kind                = "threshold_crossed",
+                title               = (f"Threshold crossed: {top_et} reached "
+                                       f"{new_total} in {period_d}-day window"),
+                body                = (f"Threshold of {threshold} crossed. "
+                                       f"Cascade engine synthesised {emit_et} → "
+                                       f"firing its TRIGGERS_OBLIGATION targets."),
+                severity            = "medium",
+                related_entity_kind = "external_evidence_verification_log",
+                related_entity_id   = verification_log_id,
+                related_event_type  = top_et,
+            )
+        except Exception:
+            pass
 
     structured_events = expanded_events
 
@@ -776,6 +795,27 @@ def fire_cascade(
                          r.target_requirement_id),
                     )
                     blocked = True
+                    # S3t: notify on cascade blocked
+                    try:
+                        from rag.cascade.notify import notify as _notify
+                        _notify(
+                            pg_cursor,
+                            tenant_id           = tenant_id,
+                            kind                = "cascade_blocked",
+                            title               = (f"Cascade blocked: {r.target_control_ref} "
+                                                   f"({b['applies_when']})"),
+                            body                = (f"Implication on {r.target_requirement_id} "
+                                                   f"was suppressed because the BLOCKS_WHEN "
+                                                   f"condition {b['applies_when']!r} matched "
+                                                   f"the verification metadata. Verify the "
+                                                   f"blocker remains active."),
+                            severity            = "medium",
+                            related_entity_kind = "cascade_suppression_log",
+                            related_control_ref = r.target_control_ref,
+                            related_event_type  = r.source_event_type,
+                        )
+                    except Exception:
+                        pass
                     break
             if blocked:
                 continue
@@ -1048,6 +1088,26 @@ def sweep_overdue_followups(
     overdue_rows = pg_cursor.fetchall()
     overdue_count = len(overdue_rows)
     impl_written  = 0
+
+    # S3t: notify on each overdue followup
+    if overdue_count > 0:
+        from rag.cascade.notify import notify as _notify
+        for (fid, src_vid, src_event, exp_event, window_d, fired_at) in overdue_rows:
+            _notify(
+                pg_cursor,
+                tenant_id           = tenant_id,
+                kind                = "followup_overdue",
+                title               = (f"Expected followup overdue: "
+                                       f"{src_event} → {exp_event}"),
+                body                = (f"Window of {window_d} day(s) elapsed without a "
+                                       f"matching {exp_event} verification. Cascade "
+                                       f"engine wrote SLA-breach implications on the "
+                                       f"controls this event would have satisfied."),
+                severity            = "high",
+                related_entity_kind = "expected_followup_event",
+                related_entity_id   = fid,
+                related_event_type  = src_event,
+            )
 
     # Step 2: optional cascade impl propagation
     if neo_session is None or overdue_count == 0:

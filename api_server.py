@@ -4727,6 +4727,768 @@ async def list_expected_followups(
     return {"items": items, "count": len(items)}
 
 
+@app.get("/api/v1/tenant/cascade-event/{kind}/{eid}", tags=["posture"])
+async def cascade_event_detail(
+    kind:     str,
+    eid:      str,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Auditor-grade detail for a single cascade-timeline row.
+
+    Returns the focal event plus all related rows chained from the
+    same source_verification_id (or — for verifications — every
+    implication/followup/suppression that fired from this
+    verification).
+    """
+    if kind not in ("verification", "implication", "followup", "suppression"):
+        raise HTTPException(400, "kind must be verification / implication / "
+                                  "followup / suppression")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            focal = None
+            verification_id = None
+            if kind == "verification":
+                cur.execute(
+                    """
+                    SELECT id::text, verified_at, leaf_id, system_id::text,
+                           structured_events, changes_detected, note,
+                           musts_covered_count
+                      FROM external_evidence_verification_log
+                     WHERE tenant_id = %s::uuid AND id = %s::uuid
+                    """,
+                    (key_info.tenant_id, eid),
+                )
+                r = cur.fetchone()
+                if r:
+                    verification_id = r[0]
+                    focal = {
+                        "kind":               "verification",
+                        "id":                 r[0],
+                        "verified_at":        r[1].isoformat() if r[1] else None,
+                        "leaf_id":            r[2],
+                        "system_id":          r[3],
+                        "structured_events":  r[4],
+                        "changes_detected":   r[5],
+                        "note":               r[6],
+                        "musts_covered_count": r[7],
+                    }
+            elif kind == "implication":
+                cur.execute(
+                    """
+                    SELECT id::text, source_verification_id::text,
+                           source_event_type, cascade_path, cascade_depth,
+                           target_control_ref, target_standard_id,
+                           target_requirement_id, expected_action,
+                           fired_at, due_date, status,
+                           resolved_at, resolved_by::text, resolved_evidence_kind,
+                           resolved_evidence_id::text, dismissed_reason,
+                           rationale, deadline_string, scope_kind, clock_anchor
+                      FROM triggered_implication
+                     WHERE tenant_id = %s::uuid AND id = %s::uuid
+                    """,
+                    (key_info.tenant_id, eid),
+                )
+                r = cur.fetchone()
+                if r:
+                    verification_id = r[1]
+                    focal = {
+                        "kind":              "implication",
+                        "id":                r[0],
+                        "source_verification_id": r[1],
+                        "source_event_type": r[2],
+                        "cascade_path":      r[3],
+                        "cascade_depth":     r[4],
+                        "target_control_ref": r[5],
+                        "target_standard_id": r[6],
+                        "target_requirement_id": r[7],
+                        "expected_action":   r[8],
+                        "fired_at":          r[9].isoformat() if r[9] else None,
+                        "due_date":          r[10].isoformat() if r[10] else None,
+                        "status":            r[11],
+                        "resolved_at":       r[12].isoformat() if r[12] else None,
+                        "resolved_by":       r[13],
+                        "resolved_evidence_kind": r[14],
+                        "resolved_evidence_id":   r[15],
+                        "dismissed_reason":  r[16],
+                        "rationale":         r[17],
+                        "deadline_string":   r[18],
+                        "scope_kind":        r[19],
+                        "clock_anchor":      r[20],
+                    }
+            elif kind == "followup":
+                cur.execute(
+                    """
+                    SELECT id::text, source_verification_id::text,
+                           source_event_type, expected_event_type,
+                           window_days, fired_at, expires_at, status,
+                           resolved_at, resolved_verification_id::text,
+                           rationale
+                      FROM expected_followup_event
+                     WHERE tenant_id = %s::uuid AND id = %s::uuid
+                    """,
+                    (key_info.tenant_id, eid),
+                )
+                r = cur.fetchone()
+                if r:
+                    verification_id = r[1]
+                    focal = {
+                        "kind":                  "followup",
+                        "id":                    r[0],
+                        "source_verification_id": r[1],
+                        "source_event_type":     r[2],
+                        "expected_event_type":   r[3],
+                        "window_days":           r[4],
+                        "fired_at":              r[5].isoformat() if r[5] else None,
+                        "expires_at":            r[6].isoformat() if r[6] else None,
+                        "status":                r[7],
+                        "resolved_at":           r[8].isoformat() if r[8] else None,
+                        "resolved_verification_id": r[9],
+                        "rationale":             r[10],
+                    }
+            elif kind == "suppression":
+                cur.execute(
+                    """
+                    SELECT id::text, source_verification_id::text,
+                           source_event_type, target_event_type,
+                           applies_when, evaluation_context, cascade_path,
+                           fired_at, suppression_kind, target_requirement_id
+                      FROM cascade_suppression_log
+                     WHERE tenant_id = %s::uuid AND id = %s::uuid
+                    """,
+                    (key_info.tenant_id, eid),
+                )
+                r = cur.fetchone()
+                if r:
+                    verification_id = r[1]
+                    focal = {
+                        "kind":                  "suppression",
+                        "id":                    r[0],
+                        "source_verification_id": r[1],
+                        "source_event_type":     r[2],
+                        "target_event_type":     r[3],
+                        "applies_when":          r[4],
+                        "evaluation_context":    r[5],
+                        "cascade_path":          r[6],
+                        "fired_at":              r[7].isoformat() if r[7] else None,
+                        "suppression_kind":      r[8],
+                        "target_requirement_id": r[9],
+                    }
+
+            if not focal:
+                raise HTTPException(404, f"{kind} {eid} not found")
+
+            # ── Related rows — anchored on verification_id ──────────
+            related = {
+                "implications": [],
+                "followups":    [],
+                "suppressions": [],
+            }
+            if verification_id:
+                cur.execute(
+                    """
+                    SELECT id::text, source_event_type, expected_action,
+                           target_control_ref, status, due_date,
+                           cascade_depth, rationale, scope_kind
+                      FROM triggered_implication
+                     WHERE tenant_id              = %s::uuid
+                       AND source_verification_id = %s::uuid
+                     ORDER BY fired_at
+                    """,
+                    (key_info.tenant_id, verification_id),
+                )
+                for r in cur.fetchall():
+                    related["implications"].append({
+                        "id":                r[0],
+                        "source_event_type": r[1],
+                        "expected_action":   r[2],
+                        "control_ref":       r[3],
+                        "status":            r[4],
+                        "due_date":          r[5].isoformat() if r[5] else None,
+                        "cascade_depth":     r[6],
+                        "rationale":         r[7],
+                        "scope_kind":        r[8],
+                    })
+                cur.execute(
+                    """
+                    SELECT id::text, source_event_type, expected_event_type,
+                           window_days, status, expires_at
+                      FROM expected_followup_event
+                     WHERE tenant_id              = %s::uuid
+                       AND source_verification_id = %s::uuid
+                     ORDER BY fired_at
+                    """,
+                    (key_info.tenant_id, verification_id),
+                )
+                for r in cur.fetchall():
+                    related["followups"].append({
+                        "id":                  r[0],
+                        "source_event_type":   r[1],
+                        "expected_event_type": r[2],
+                        "window_days":         r[3],
+                        "status":              r[4],
+                        "expires_at":          r[5].isoformat() if r[5] else None,
+                    })
+                cur.execute(
+                    """
+                    SELECT id::text, suppression_kind, source_event_type,
+                           target_event_type, target_requirement_id, applies_when
+                      FROM cascade_suppression_log
+                     WHERE tenant_id              = %s::uuid
+                       AND source_verification_id = %s::uuid
+                     ORDER BY fired_at
+                    """,
+                    (key_info.tenant_id, verification_id),
+                )
+                for r in cur.fetchall():
+                    related["suppressions"].append({
+                        "id":                    r[0],
+                        "suppression_kind":      r[1],
+                        "source_event_type":     r[2],
+                        "target_event_type":     r[3],
+                        "target_requirement_id": r[4],
+                        "applies_when":          r[5],
+                    })
+    finally:
+        pool.putconn(conn)
+
+    return {"focal": focal, "related": related}
+
+
+@app.get("/api/v1/tenant/cascade-timeline", tags=["posture"])
+async def cascade_timeline(
+    request:      Request,
+    key_info:     APIKeyInfo = Depends(require_api_key),
+    control_ref:  Optional[str] = None,
+    event_type:   Optional[str] = None,
+    since_days:   int = 30,
+    limit:        int = 200,
+):
+    """Chronological cascade-events timeline for the auditor view.
+
+    Unions four tables — verifications with structured events,
+    triggered implications, expected followups, suppressions — into
+    a single time-ordered stream. Each row carries kind +
+    descriptive payload + a stable id.
+
+    Filters:
+      control_ref: restrict to a single control's events
+      event_type:  restrict to a single source_event_type
+      since_days:  rolling window (default 30)
+      limit:       hard cap on returned rows
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    items: list[dict] = []
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            # ── Verifications with structured events ────────────────
+            cur.execute(
+                """
+                SELECT id::text, verified_at, leaf_id, structured_events,
+                       changes_detected, system_id::text
+                  FROM external_evidence_verification_log
+                 WHERE tenant_id   = %s::uuid
+                   AND verified_at >= now() - make_interval(days => %s)
+                   AND structured_events <> '[]'::jsonb
+                 ORDER BY verified_at DESC
+                 LIMIT %s
+                """,
+                (key_info.tenant_id, since_days, max(50, limit)),
+            )
+            for r in cur.fetchall():
+                evts = r[3] or []
+                for ev in evts:
+                    et = ev.get("event_type", "")
+                    if event_type and et != event_type:
+                        continue
+                    items.append({
+                        "kind":              "verification",
+                        "id":                r[0],
+                        "ts":                r[1].isoformat() if r[1] else None,
+                        "event_type":        et,
+                        "count":             ev.get("count", 1),
+                        "leaf_id":           r[2],
+                        "control_ref":       None,
+                        "summary":           (r[4] or "")[:240],
+                        "metadata":          ev.get("metadata") or {},
+                    })
+
+            # ── Implications fired / resolved ───────────────────────
+            cur.execute(
+                """
+                SELECT id::text, fired_at, source_event_type, expected_action,
+                       target_control_ref, target_standard_id, cascade_path,
+                       cascade_depth, status, resolved_at,
+                       resolved_evidence_kind, dismissed_reason,
+                       rationale, due_date, clock_anchor, scope_kind
+                  FROM triggered_implication
+                 WHERE tenant_id = %s::uuid
+                   AND fired_at  >= now() - make_interval(days => %s)
+                """ + ("   AND target_control_ref = %s\n" if control_ref else "") + """
+                """ + ("   AND source_event_type   = %s\n" if event_type   else "") + """
+                 ORDER BY fired_at DESC
+                 LIMIT %s
+                """,
+                tuple([key_info.tenant_id, since_days]
+                      + ([control_ref] if control_ref else [])
+                      + ([event_type]  if event_type  else [])
+                      + [max(50, limit)]),
+            )
+            for r in cur.fetchall():
+                items.append({
+                    "kind":           "implication",
+                    "id":             r[0],
+                    "ts":             r[1].isoformat() if r[1] else None,
+                    "event_type":     r[2],
+                    "expected_action": r[3],
+                    "control_ref":    r[4],
+                    "standard_id":    r[5],
+                    "cascade_path":   r[6],
+                    "cascade_depth":  r[7],
+                    "status":         r[8],
+                    "resolved_at":    r[9].isoformat() if r[9] else None,
+                    "resolved_evidence_kind": r[10],
+                    "dismissed_reason": r[11],
+                    "rationale":      (r[12] or "")[:200],
+                    "due_date":       r[13].isoformat() if r[13] else None,
+                    "clock_anchor":   r[14],
+                    "scope_kind":     r[15],
+                })
+
+            # ── Expected followups ──────────────────────────────────
+            cur.execute(
+                """
+                SELECT id::text, fired_at, source_event_type, expected_event_type,
+                       window_days, expires_at, status, rationale
+                  FROM expected_followup_event
+                 WHERE tenant_id = %s::uuid
+                   AND fired_at  >= now() - make_interval(days => %s)
+                """ + ("   AND source_event_type = %s\n" if event_type else "") + """
+                 ORDER BY fired_at DESC
+                 LIMIT %s
+                """,
+                tuple([key_info.tenant_id, since_days]
+                      + ([event_type] if event_type else [])
+                      + [max(50, limit)]),
+            )
+            for r in cur.fetchall():
+                items.append({
+                    "kind":           "followup",
+                    "id":             r[0],
+                    "ts":             r[1].isoformat() if r[1] else None,
+                    "event_type":     r[2],
+                    "expected_event_type": r[3],
+                    "window_days":    r[4],
+                    "expires_at":     r[5].isoformat() if r[5] else None,
+                    "status":         r[6],
+                    "rationale":      r[7],
+                })
+
+            # ── Suppressions ────────────────────────────────────────
+            cur.execute(
+                """
+                SELECT id::text, fired_at, suppression_kind,
+                       source_event_type, target_event_type,
+                       target_requirement_id, applies_when, cascade_path
+                  FROM cascade_suppression_log
+                 WHERE tenant_id = %s::uuid
+                   AND fired_at  >= now() - make_interval(days => %s)
+                """ + ("   AND source_event_type = %s\n" if event_type else "") + """
+                 ORDER BY fired_at DESC
+                 LIMIT %s
+                """,
+                tuple([key_info.tenant_id, since_days]
+                      + ([event_type] if event_type else [])
+                      + [max(50, limit)]),
+            )
+            for r in cur.fetchall():
+                items.append({
+                    "kind":             "suppression",
+                    "id":               r[0],
+                    "ts":               r[1].isoformat() if r[1] else None,
+                    "suppression_kind": r[2],
+                    "event_type":       r[3],
+                    "target_event_type": r[4],
+                    "target_requirement_id": r[5],
+                    "applies_when":     r[6],
+                    "cascade_path":     r[7],
+                })
+    finally:
+        pool.putconn(conn)
+
+    # Optional control filter applies to rows that don't have target
+    # filtering at SQL (verifications + suppressions whose tag isn't
+    # target_requirement_id).
+    if control_ref:
+        full_id_suffix = ":" + control_ref
+        def matches(item: dict) -> bool:
+            cr  = item.get("control_ref")
+            trq = item.get("target_requirement_id")
+            return (
+                cr == control_ref
+                or (trq and trq.endswith(full_id_suffix))
+                # Verifications are kept regardless — control scoping
+                # is best-effort via leaf_id pattern matching, not strict.
+                or item.get("kind") == "verification"
+            )
+        items = [i for i in items if matches(i)]
+
+    items.sort(key=lambda i: i.get("ts") or "", reverse=True)
+    items = items[:limit]
+    return {
+        "items":      items,
+        "count":      len(items),
+        "since_days": since_days,
+        "filters": {
+            "control_ref": control_ref,
+            "event_type":  event_type,
+        },
+    }
+
+
+@app.get("/api/v1/dashboard/cascade-kpis", tags=["posture"])
+async def cascade_kpis(
+    request: Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Aggregate cascade-output KPIs for the dashboard top tile row.
+
+    Returns counts across the cascade tables for this tenant:
+      pending_implications:  total / overdue / by_action
+      pending_followups:     total / overdue
+      suppressions_30d:      total / by_kind
+      auto_resolved_7d:      count of satisfied impls with kind='cite'
+      controls_with_pressure: distinct count of target_requirement_id
+                              having any pending implication
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            # ── Implications counts ──────────────────────────────────
+            cur.execute(
+                """
+                SELECT count(*) FILTER (WHERE status = 'pending') AS pending_total,
+                       count(*) FILTER (WHERE status = 'pending'
+                                          AND due_date IS NOT NULL
+                                          AND due_date < now()) AS overdue,
+                       count(*) FILTER (WHERE status = 'pending'
+                                          AND expected_action = 'evidence_required') AS evidence_pending,
+                       count(*) FILTER (WHERE status = 'pending'
+                                          AND expected_action = 'review_required') AS review_pending,
+                       count(*) FILTER (WHERE status = 'pending'
+                                          AND expected_action = 'attestation_required') AS attest_pending,
+                       count(DISTINCT target_requirement_id) FILTER (WHERE status = 'pending') AS controls_with_pressure
+                  FROM triggered_implication
+                 WHERE tenant_id = %s::uuid
+                """,
+                (key_info.tenant_id,),
+            )
+            impl_row = cur.fetchone()
+
+            # ── Followups ────────────────────────────────────────────
+            cur.execute(
+                """
+                SELECT count(*) FILTER (WHERE status = 'pending') AS pending,
+                       count(*) FILTER (WHERE status = 'overdue') AS overdue
+                  FROM expected_followup_event
+                 WHERE tenant_id = %s::uuid
+                """,
+                (key_info.tenant_id,),
+            )
+            fu_row = cur.fetchone()
+
+            # ── Suppressions in last 30 days ─────────────────────────
+            cur.execute(
+                """
+                SELECT suppression_kind, count(*)
+                  FROM cascade_suppression_log
+                 WHERE tenant_id = %s::uuid
+                   AND fired_at >= now() - interval '30 days'
+                 GROUP BY suppression_kind
+                """,
+                (key_info.tenant_id,),
+            )
+            supp_rows = cur.fetchall()
+            supp_by_kind = {r[0]: int(r[1]) for r in supp_rows}
+            supp_total = sum(supp_by_kind.values())
+
+            # ── Auto-resolved in last 7 days ─────────────────────────
+            cur.execute(
+                """
+                SELECT count(*)
+                  FROM triggered_implication
+                 WHERE tenant_id = %s::uuid
+                   AND status = 'satisfied'
+                   AND resolved_evidence_kind = 'cite'
+                   AND resolved_at >= now() - interval '7 days'
+                """,
+                (key_info.tenant_id,),
+            )
+            auto_row = cur.fetchone()
+
+            # ── Recent verifications (counts) ────────────────────────
+            cur.execute(
+                """
+                SELECT count(*),
+                       count(*) FILTER (WHERE structured_events <> '[]'::jsonb)
+                  FROM external_evidence_verification_log
+                 WHERE tenant_id = %s::uuid
+                   AND verified_at >= now() - interval '7 days'
+                """,
+                (key_info.tenant_id,),
+            )
+            verif_row = cur.fetchone()
+    finally:
+        pool.putconn(conn)
+
+    return {
+        "pending_implications": {
+            "total":       int(impl_row[0] or 0),
+            "overdue":     int(impl_row[1] or 0),
+            "by_action": {
+                "evidence_required":     int(impl_row[2] or 0),
+                "review_required":       int(impl_row[3] or 0),
+                "attestation_required":  int(impl_row[4] or 0),
+            },
+        },
+        "controls_with_pressure":  int(impl_row[5] or 0),
+        "pending_followups": {
+            "pending": int(fu_row[0] or 0),
+            "overdue": int(fu_row[1] or 0),
+        },
+        "suppressions_30d": {
+            "total":   supp_total,
+            "by_kind": supp_by_kind,
+        },
+        "auto_resolved_7d":  int(auto_row[0] or 0),
+        "verifications_7d": {
+            "total":              int(verif_row[0] or 0),
+            "with_structured":    int(verif_row[1] or 0),
+        },
+    }
+
+
+@app.get("/api/v1/tenant/notifications", tags=["posture"])
+async def list_notifications(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    status:   str = "unread",
+    limit:    int = 100,
+):
+    """List tenant notifications. status: unread | all | dismissed."""
+    if status not in ("unread", "all", "dismissed"):
+        raise HTTPException(400, "status must be unread / all / dismissed")
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            where_extra = ""
+            if status == "unread":
+                where_extra = " AND read_at IS NULL AND dismissed_at IS NULL"
+            elif status == "dismissed":
+                where_extra = " AND dismissed_at IS NOT NULL"
+            cur.execute(
+                f"""
+                SELECT id::text, kind, title, body, severity,
+                       related_entity_kind, related_entity_id::text,
+                       related_control_ref, related_event_type,
+                       fired_at, read_at, dismissed_at
+                  FROM tenant_notification
+                 WHERE tenant_id = %s::uuid
+                       {where_extra}
+                 ORDER BY fired_at DESC
+                 LIMIT %s
+                """,
+                (key_info.tenant_id, max(1, min(int(limit), 500))),
+            )
+            rows = cur.fetchall()
+            # Counts for the bell badge
+            cur.execute(
+                """
+                SELECT count(*) AS unread,
+                       count(*) FILTER (WHERE severity IN ('critical','high')) AS urgent
+                  FROM tenant_notification
+                 WHERE tenant_id = %s::uuid
+                   AND read_at IS NULL
+                   AND dismissed_at IS NULL
+                """,
+                (key_info.tenant_id,),
+            )
+            counts = cur.fetchone()
+    finally:
+        pool.putconn(conn)
+    return {
+        "items": [
+            {
+                "id":                   r[0],
+                "kind":                 r[1],
+                "title":                r[2],
+                "body":                 r[3],
+                "severity":             r[4],
+                "related_entity_kind":  r[5],
+                "related_entity_id":    r[6],
+                "related_control_ref":  r[7],
+                "related_event_type":   r[8],
+                "fired_at":             r[9].isoformat()  if r[9]  else None,
+                "read_at":              r[10].isoformat() if r[10] else None,
+                "dismissed_at":         r[11].isoformat() if r[11] else None,
+            } for r in rows
+        ],
+        "count":  len(rows),
+        "unread": int(counts[0] or 0),
+        "urgent": int(counts[1] or 0),
+    }
+
+
+@app.patch("/api/v1/tenant/notifications/{nid}", tags=["posture"])
+async def patch_notification(
+    nid:      str,
+    request:  Request,
+    payload:  dict,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Mark a notification read or dismissed.
+
+    Body: action: 'read' | 'dismiss' (read also accepted for idempotency).
+    """
+    action = payload.get("action")
+    if action not in ("read", "dismiss"):
+        raise HTTPException(400, "action must be 'read' or 'dismiss'")
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            if action == "read":
+                cur.execute(
+                    """
+                    UPDATE tenant_notification
+                       SET read_at = coalesce(read_at, now())
+                     WHERE tenant_id = %s::uuid
+                       AND id        = %s::uuid
+                    RETURNING id::text, read_at
+                    """,
+                    (key_info.tenant_id, nid),
+                )
+            else:  # dismiss
+                cur.execute(
+                    """
+                    UPDATE tenant_notification
+                       SET dismissed_at = coalesce(dismissed_at, now()),
+                           read_at      = coalesce(read_at, now())
+                     WHERE tenant_id = %s::uuid
+                       AND id        = %s::uuid
+                    RETURNING id::text, dismissed_at
+                    """,
+                    (key_info.tenant_id, nid),
+                )
+            updated = cur.fetchone()
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+    if not updated:
+        raise HTTPException(404, "notification not found")
+    return {"id": updated[0], "action": action,
+            "ts": updated[1].isoformat() if updated[1] else None}
+
+
+@app.post("/api/v1/tenant/notifications/mark-all-read", tags=["posture"])
+async def mark_all_notifications_read(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Mark every unread notification as read for this tenant."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                UPDATE tenant_notification
+                   SET read_at = now()
+                 WHERE tenant_id = %s::uuid
+                   AND read_at IS NULL
+                RETURNING id
+                """,
+                (key_info.tenant_id,),
+            )
+            rows = cur.fetchall()
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+    return {"marked_read": len(rows)}
+
+
+@app.post("/api/v1/tenant/triggered-implications/bulk", tags=["posture"])
+async def bulk_resolve_implications(
+    request:  Request,
+    payload:  dict,
+    key_info: APIKeyInfo = Depends(require_scope("posture")),
+):
+    """Bulk-resolve all pending implications from a single verification.
+
+    Body:
+      source_verification_id: UUID — required, the verification whose
+        implications to act on.
+      action: 'satisfy' | 'dismiss' — required.
+      dismissed_reason: required when action='dismiss'.
+
+    Resolves only currently-pending rows. Returns the count affected.
+    """
+    src_vid = payload.get("source_verification_id")
+    action  = payload.get("action")
+    reason  = (payload.get("dismissed_reason") or "").strip() or None
+    if not src_vid:
+        raise HTTPException(400, "source_verification_id is required")
+    if action not in ("satisfy", "dismiss"):
+        raise HTTPException(400, "action must be 'satisfy' or 'dismiss'")
+    if action == "dismiss" and not reason:
+        raise HTTPException(400,
+            "dismissed_reason is required when action='dismiss'")
+
+    new_status = "satisfied" if action == "satisfy" else "dismissed"
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                UPDATE triggered_implication
+                   SET status                 = %s,
+                       resolved_at            = now(),
+                       resolved_by            = %s::uuid,
+                       dismissed_reason       = %s
+                 WHERE tenant_id              = %s::uuid
+                   AND source_verification_id = %s::uuid
+                   AND status                 = 'pending'
+                RETURNING id
+                """,
+                (new_status, key_info.user_id, reason,
+                 key_info.tenant_id, src_vid),
+            )
+            rows = cur.fetchall()
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+    return {
+        "action":           action,
+        "affected":         len(rows),
+        "verification_id":  src_vid,
+        "status":           new_status,
+    }
+
+
 @app.get("/api/v1/tenant/cascade-overrides", tags=["posture"])
 async def list_cascade_overrides(
     request: Request,

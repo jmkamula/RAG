@@ -193,6 +193,27 @@ def propose_from_cascade(pg_conn, tenant_id: str,
                     },
                 )
                 written += 1
+                # S3t: notify on overdue cascade pressure
+                if overdue >= 1:
+                    try:
+                        from rag.cascade.notify import notify
+                        sev = "critical" if proposed == "NC" else "high"
+                        notify(
+                            cur,
+                            tenant_id           = tenant_id,
+                            kind                = "implication_overdue",
+                            title               = (f"Cascade pressure on {control_ref}: "
+                                                   f"{overdue} overdue implication(s)"),
+                            body                = (f"Cascade overlay proposing {proposed} on "
+                                                   f"{control_ref} (was {live or 'unassessed'}). "
+                                                   f"{overdue} overdue + {pending} pending "
+                                                   f"triggered_implication rows."),
+                            severity            = sev,
+                            related_entity_kind = "triggered_implication",
+                            related_control_ref = control_ref,
+                        )
+                    except Exception:
+                        pass
             except Exception as ex:
                 logger.warning("cascade overlay PA write failed for %s: %s",
                                req_id, ex)
