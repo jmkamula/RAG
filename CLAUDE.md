@@ -36,16 +36,21 @@ the strategic evidence-cascade layer (event-driven implications:
 |---|---|
 | Templating arc (storage mode) — 20 v2 anchors + native formats (md/xlsx/docx) + xlsx round-trip + tenant profile + evidence-class UI | SHIPPED |
 | Stage-1 queue hygiene + A.6.7 promotion (catalog now 100% multi-leaf) | SHIPPED |
-| Cite-mode v1 — schema_v50 (tenant_external_system + external_evidence_source + verification_log), engine union, APIs, UI, journey wizard onboarding | DESIGNED + LOCKED — next ~2 sessions |
-| Structured change events on cite verifications (event vocabulary per evidence_type) | CAPTURED |
-| Evidence cascade — trigger catalog + implications tracking + actionable surface | CAPTURED |
+| Cite-mode v1 — schema_v50 + tenant_external_system + external_evidence_source + verification_log + engine union + APIs + UI + freshness card | SHIPPED |
+| Relationship catalog — S1 scaffolding + S5 50 intra-GDPR edges + S6 160 intra-ISO edges (214 total) | SHIPPED |
+| Cascade vocabulary — 53 events (11 existing + 42 operational) + 6 meta-cascade edge types | SHIPPED |
+| Cascade engine v1 — all 10 meditation patterns (P1..P10) + 23 API endpoints + 7 UI surfaces (KPIs/drill-in/timeline/overrides/bulk/notifications/event detail) | SHIPPED |
+| Outbound notification delivery (email/Slack) | DEFERRED |
+| UPDATES_FACT recompute (source-of-truth queries per fact) | DEFERRED |
+| Periodic sweep scheduler for overdue followups | DEFERRED |
 
 ## Key memory entries
 
 Future sessions should read these before product work:
 
+- [[cascade-arc-retrospective-2026-06-30]] — full cascade arc summary; supersedes the
+  individual `cascade_*` and `relationship-model-*` memos as the entry point
 - [[product-principle-evidence-stored-vs-cited]] — the cite/store coexistence model
-- [[product-concept-evidence-cascade-2026-06-27]] — event-driven implications
 - [[templates-v2-anchors-complete-2026-06-25]] — the 20 v2 anchor templates
 - [[template-tenant-profile-2026-06-26]] — placeholder substitution
 - [[evidence-class-breakdown-backend-2026-06-26]] — the dashboard drill-in surface
