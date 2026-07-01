@@ -89,13 +89,15 @@ EVAL_CASES = [
         # Locks the per-MUST advisory appendix shipped 2026-06-14.
         # When a posture_check (or cross_framework) query identifies a
         # single control with NC/OFI verdict, the chat answer must
-        # include a "How to advance X" deterministic appendix listing
+        # include a "How to strengthen X" deterministic appendix listing
         # per-leaf coverage + upload hint. Arion's A.5.15 has 2 of 4
         # leaves partially evidenced and 0 fully satisfied → advisory
-        # fires.
+        # fires. Renamed "How to advance" → "How to strengthen" as
+        # part of the 2026-07-01 de-jargonize pass, so this assertion
+        # now locks in the tenant-facing verbiage.
         must_contain=[
             "A.5.15",
-            "How to advance A.5.15",
+            "How to strengthen A.5.15",
             "Still needed:",
             "To address:",
             "Source: ISO/IEC 27002:2022",
@@ -107,7 +109,7 @@ EVAL_CASES = [
             "Locks the per-MUST advisory appendix (rag/posture/advisory.py "
             "build_per_must_advisory). Renders for single-control POSTURE_CHECK "
             "or CROSS_FRAMEWORK queries on NC/OFI controls. Includes the "
-            "'How to advance', 'Still needed', 'To address' and 'Source: ISO/IEC' "
+            "'How to strengthen', 'Still needed', 'To address' and 'Source: ISO/IEC' "
             "anchors so any regression in the deterministic compose surfaces here."
         ),
     ),
@@ -3778,6 +3780,54 @@ EVAL_CASES = [
             "Single-control probe — multi-control dup-label is harder "
             "to assert via substring matching but flows from the same "
             "rule."
+        ),
+    ),
+
+    # ── De-jargonize pass 2026-07-01 lock-in ──────────────────────────────
+    # Locks in the tenant-facing vocabulary shipped during the 2026-07-01
+    # dejargonize pass. Any regression that surfaces raw system slugs into
+    # a POSTURE_CHECK enumeration answer fails these cases — the whole
+    # pass gets caught by a single re-run of eval_suite.py.
+
+    EvalCase(
+        id=200,
+        query="what are our NC findings on identity and access management?",
+        tags=["posture_check", "dejargonize", "regression_lock"],
+        expected_type="posture_check",
+        # NC findings for A.5.16 / A.5.17 / A.5.18 are all present on
+        # Arion — the enumeration answer must not leak raw catalog slugs
+        # ('review_record', 'revocation_record', 'req:A.5.16:...',
+        # 'ISO27001:2022') or engine-internal reason format
+        # ('missing artifacts of type', '0/4 children satisfied').
+        must_not_contain=[
+            # Raw evidence_type slugs — the enum echo the LLM sometimes
+            # produces from pre-prettify context.
+            "review_record",
+            "revocation_record",
+            # Machine standard tag — humanized via humanizeStandardId
+            # / _humanize_standard_id at every surface.
+            "ISO27001:2022",
+            # Engine reason format that _prettify_reason cleans.
+            "missing artifacts of type",
+            "children satisfied",
+            # Internal field name that would only surface via a bad
+            # prompt-context leak.
+            "checklist_item_id",
+        ],
+        # Note: 'req:A.5.X:...' leaf ids legitimately appear inside
+        # template-download URLs surfaced by the answer footer — not a
+        # tenant-facing jargon leak. Excluded from must_not_contain.
+        min_findings=1,
+        notes=(
+            "De-jargonize pass 2026-07-01 lock-in: chat enumeration for "
+            "an NC family (A.5.16/17/18 identity + auth + access) must "
+            "not leak raw evidence_type slugs, raw leaf_ids, raw "
+            "standard_ids, or engine-internal reason format. Would have "
+            "failed pre-dejargonize when the LLM echoed 'missing "
+            "artifacts of type: review_record, revocation_record' from "
+            "the pre-prettify gap_description; passes post-dejargonize "
+            "because _prettify_reason + expanded _ROLE_LABELS + prompt-"
+            "context humanization prevent the echo."
         ),
     ),
 ]

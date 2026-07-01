@@ -41,6 +41,7 @@ the strategic evidence-cascade layer (event-driven implications:
 | Cascade vocabulary — 53 events (11 existing + 42 operational) + 6 meta-cascade edge types | SHIPPED |
 | Cascade engine v1 — all 10 meditation patterns (P1..P10) + 23 API endpoints + 7 UI surfaces (KPIs/drill-in/timeline/overrides/bulk/notifications/event detail) | SHIPPED |
 | xfw_proposer uses catalog rationale on bridge proposals (S7) | SHIPPED |
+| De-jargonize UX pass across every tenant-facing surface (Evidence Package + dashboard + chat + templates + intake + notifications + profile + cascade + docs + queue + heatmap + streaming + inbox + admin + onboarding + session + errors) | SHIPPED |
 | Outbound notification delivery (email/Slack) | DEFERRED |
 | UPDATES_FACT recompute (source-of-truth queries per fact) | DEFERRED |
 | Periodic sweep scheduler for overdue followups | DEFERRED |
@@ -52,12 +53,63 @@ Future sessions should read these before product work:
 
 - [[cascade-arc-retrospective-2026-06-30]] — full cascade arc summary; supersedes the
   individual `cascade_*` and `relationship-model-*` memos as the entry point
+- [[dejargonize-ux-pass-2026-07-01]] — the natural-language UX pattern now in
+  force across every tenant-facing surface; conventions for helpers +
+  vocabulary future work must preserve
 - [[product-principle-evidence-stored-vs-cited]] — the cite/store coexistence model
 - [[templates-v2-anchors-complete-2026-06-25]] — the 20 v2 anchor templates
 - [[template-tenant-profile-2026-06-26]] — placeholder substitution
 - [[evidence-class-breakdown-backend-2026-06-26]] — the dashboard drill-in surface
 - [[stage1-queue-sweep-2026-06-27]] + [[feedback-validate-set-membership]] — recent ops/lessons
 - [[curation-a67-remote-working-promotion-2026-06-27]] — the catalog's last single-leaf hole closed
+
+## Tenant-facing language conventions (dejargonize pass 2026-07-01)
+
+Every tenant-facing surface now reads as natural compliance
+language rather than system slugs. When adding or editing text
+that a tenant might see, preserve these conventions:
+
+- **No `snake_case` slugs in visible text.** `evidence_type='review_record'`
+  renders as "review record" (or Title Case in headers). Helpers
+  in `rag/posture/advisory.py`: `_humanize_evidence_type()`,
+  `_humanize_leaf_label()`. Client-side mirrors in
+  `static/arioncomply.html`: `humanizeSource()`, `humanizeStandardId()`,
+  `humanizeNotifKind()`, `humanizeSlug()`, `humanizeEngineReason()`,
+  `humanizeStageName()`, `humanizeErrorType()`.
+- **No raw `req:X:Y` leaf ids.** Show the control ref (e.g. `A.5.15`)
+  or the leaf `title` from the catalog; keep the full id in
+  `data-` attributes / HTML comments for audit provenance only.
+- **No raw `ISO27001:2022` standard tags.** Use `humanizeStandardId()`
+  → "ISO 27001:2022".
+- **No system-internal event edge names** (`TRIGGERS_OBLIGATION`,
+  `BLOCKS_WHEN`, `EXPECTS_FOLLOWUP_EVENT`) in tenant prose. Explain
+  the intent instead.
+- **Vocabulary:** cascade "implications" → "follow-ups"; "cascade
+  events" → "recent events"; MUST/SHOULD → "required element" /
+  "recommended addition"; "engine proposal" → "posture proposal";
+  "extractor engine" → "extraction"; pipeline stage names
+  `read/enrich/extract/write/xfw` → `read/classify/extract findings/
+  post to posture/cross-framework`; `inference_source` slugs mapped
+  via `_SOURCE_HUMAN` (extracted → "uploaded document", etc.).
+- **Error messages:** tenant-UI-facing 4xx/5xx `HTTPException`
+  details are sentences, not field-name-driven strings. Raw
+  exception `str(e)` never surfaces — traceback goes to the log,
+  the tenant sees a short apology. Admin/dev-facing paths
+  (`/api/v1/admin/*`, `structured_events` validation) stay
+  technical intentionally.
+- **Deterministic backend labels first.** Where the LLM might
+  echo raw slugs (chat prose polish), humanize in the prompt
+  context too so the LLM never sees the debug form.
+
+The Evidence Package rewrite (`rag/posture/evidence_package.py`)
+is the canonical template — it reuses `business_description` on
+RequirementNode + `EvidenceRequirement.description` rather than
+hand-authoring per-node display text, which scales to arbitrary
+standards without re-authoring each leaf. Apply the same
+"reuse curated fields" principle for any new tenant-facing
+surface.
+
+Corresponding memory entry: [[dejargonize-ux-pass-2026-07-01]].
 
 ## VM Access
 ```bash

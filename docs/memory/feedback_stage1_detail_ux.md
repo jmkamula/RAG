@@ -31,6 +31,28 @@ Considered using an LLM to rewrite per-row finding labels into natural-language 
 
 A one-shot LLM summary header (single call per detail open, narrating the whole control's posture) remains reversible future work if it would add value. Don't bring it back without an explicit ask.
 
+## Post-dejargonize note (2026-07-01)
+
+Additional Stage-1 detail rules ratified via the 2026-07-01
+de-jargonize pass, folded into the same surface without
+contradicting the three rules above:
+
+  - Group header ref chip shows the short control ref
+    ('A.5.15') rather than the full `leaf_id` machine form
+    (`req:A.5.15:access_control_policy`). Full id still lives in
+    `data-` attributes for admin traceability.
+  - `standard_id` humanized (`ISO27001:2022` → `ISO 27001:2022`).
+  - `inference_source` slugs humanized (`workbook` →
+    "workbook upload", `leaf_scan` → "prior finding") via the
+    client-side `humanizeSource()` helper.
+  - Item-id chip beside a MUST shows just the last slug segment
+    (`boundaries`) not the full `item:X:Y`.
+
+The "no LLM crafting" rule still holds — deterministic rendering
+via humanizer helpers, not per-row LLM rewrites.
+
 ## Related
 
 - [[workbook-intake-corpus-v1-complete]] — the structured data the detail surface renders
+- [[dejargonize-ux-pass-2026-07-01]] — the surface-wide natural-
+  language pass; ratifies these rules across every detail panel.

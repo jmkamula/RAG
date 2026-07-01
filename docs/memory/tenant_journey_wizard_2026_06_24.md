@@ -122,6 +122,25 @@ Tenant-scoped via set_session RLS.
 - **In-app form rendering** — second tenant edit path (form generated
   from template markers) is deferred; download/upload is sufficient for v1
 
+## Post-dejargonize note (2026-07-01)
+
+Recommendation `why` strings were rewritten in the 2026-07-01
+de-jargonize pass:
+
+- Foundation: `"Foundation template — anchor #N in the
+  recommended onboarding sequence."` → `"Foundation document —
+  step N in the recommended onboarding sequence."` (drops
+  "template/anchor" system vocabulary)
+- Operational: `"Operational template — N MUST item(s) remain.
+  Smaller templates first builds momentum."` → `"Operational
+  document — N required element(s) still to fill in. Smaller
+  documents first build momentum."` (drops MUST jargon, matches
+  Evidence Package "Required element" vocabulary, fixes
+  `builds → build` agreement)
+
+Phase names, phase messages, per-leaf completion %, JSON payload
+shape all unchanged. See [[dejargonize-ux-pass-2026-07-01]].
+
 ## Related
 
 - [[templates-v1-foundation-2026-06-24]] — the template artefacts the
@@ -130,3 +149,5 @@ Tenant-scoped via set_session RLS.
   wizard is the user-facing realisation
 - [[feedback-anchor-before-choices]] — pattern used: anchored
   architecture before picking the chunk
+- [[dejargonize-ux-pass-2026-07-01]] — natural-language pass that
+  rewrote the recommendation `why` strings surfaced by this wizard

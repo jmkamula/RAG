@@ -104,11 +104,29 @@ expand-on-click; per-leaf rows show bound/total + source docs +
 template CTA. Missing classes get a "Use template" / "Open form" CTA
 that drives the templating arc's authoring lanes.
 
+## Post-dejargonize note (2026-07-01)
+
+Panel labels in this description reflect the pre-dejargonize
+strings. Post-2026-07-01 the drill-in reads:
+
+  - "Evidence coverage by type" → "Evidence coverage"
+  - "Direct evidence" → "Evidence for this control"
+  - "Composition · N of M satisfied" → "Coverage · N of M
+    elements in place"
+  - "no source yet" → "not yet evidenced"
+  - "How to advance X" (sibling advisory) → "How to strengthen X"
+  - evidence_type slugs rendered Title Case ("review_record" →
+    "Review Record") via `_humanize_evidence_type`
+  - `leaf_label` prefers `EvidenceRequirement.title` rather than
+    the `leaf_id.split(":")` fallback
+
+Backend data spine unchanged. See [[dejargonize-ux-pass-2026-07-01]].
+
 ## Related
 
 - [[per-must-advisory-2026-06-14]] — the sibling surface (per-MUST
-  advisory for chat + dashboard "How to advance" card stack). Same
-  data spine (`evaluate_one_control`), different audience.
+  advisory for chat + dashboard "How to strengthen" card stack).
+  Same data spine (`evaluate_one_control`), different audience.
 - [[llm-narrative-under-discovery-audit-2026-06-26]] — the audit
   dive that identified this UX as the real lever after the
   semantic-search arc was closed.
@@ -117,3 +135,5 @@ that drives the templating arc's authoring lanes.
 - [[templated-lane-discipline-2026-06-25]] +
   [[form-lane-parity-2026-06-26]] — the authoring lanes that
   template/form CTAs drive into.
+- [[dejargonize-ux-pass-2026-07-01]] — the surface-wide natural-
+  language pass that reworked this drill-in's labels.

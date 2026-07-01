@@ -173,13 +173,28 @@ The per-MUST binding IS the storage.
 
 Case #199 (`is A.5.15 compliant?`) — must_contain:
   - "A.5.15"
-  - "How to advance A.5.15"
+  - "How to strengthen A.5.15"    ← post-2026-07-01
   - "Still needed:"
   - "To address:"
   - "Source: ISO/IEC 27002:2022"
 
 Any regression in the deterministic compose, the hook condition,
 or the source label format will surface here.
+
+## Post-dejargonize note (2026-07-01)
+
+The advisory header phrase was renamed from **"How to advance
+X"** → **"How to strengthen X"** as part of the 2026-07-01
+de-jargonize pass, so both chat + dashboard say the same thing.
+The example output block above (`↳ How to advance A.5.15 …`) is
+the pre-rename shape; the current shape reads `↳ How to
+strengthen A.5.15 (currently NC; N of M required artifacts in
+place, K in progress)`. Card labels also swap `evidence_type`
+slugs for humanized labels (`review_record` → "Review Record"
+via `_humanize_evidence_type`) and use `EvidenceRequirement.title`
+where possible instead of the `leaf_id.split()`-based fallback.
+Case #199 assertion was updated accordingly. See
+[[dejargonize-ux-pass-2026-07-01]].
 
 ## Related
 
@@ -193,3 +208,6 @@ or the source label format will surface here.
   ride after `rank_and_answer` returns
 - [[curation-document-templates-idea]] — future surface that
   consumes the same `build_per_must_advisory` data path
+- [[dejargonize-ux-pass-2026-07-01]] — surface-wide natural-
+  language pass that renamed the header + humanized labels
+  used here
