@@ -568,11 +568,14 @@ def fire_cascade(
                 pg_cursor,
                 tenant_id           = tenant_id,
                 kind                = "threshold_crossed",
-                title               = (f"Threshold crossed: {top_et} reached "
-                                       f"{new_total} in {period_d}-day window"),
-                body                = (f"Threshold of {threshold} crossed. "
-                                       f"Cascade engine synthesised {emit_et} → "
-                                       f"firing its TRIGGERS_OBLIGATION targets."),
+                title               = (f"Threshold crossed: '{top_et.replace('_',' ')}' "
+                                       f"reached {new_total} in the last "
+                                       f"{period_d} days"),
+                body                = (f"The count of '{top_et.replace('_',' ')}' events "
+                                       f"crossed the threshold of {threshold}. "
+                                       f"This triggers a downstream '{emit_et.replace('_',' ')}' "
+                                       f"event, which raises the obligations on the "
+                                       f"controls that event covers."),
                 severity            = "medium",
                 related_entity_kind = "external_evidence_verification_log",
                 related_entity_id   = verification_log_id,
@@ -798,17 +801,25 @@ def fire_cascade(
                     # S3t: notify on cascade blocked
                     try:
                         from rag.cascade.notify import notify as _notify
+                        # Show only the last segment of the requirement id
+                        # (req:A.5.15:access_control_policy → access
+                        # control policy) so the notification body reads
+                        # naturally.
+                        _req_tail = r.target_requirement_id.rsplit(":", 1)[-1].replace("_", " ") \
+                                    if r.target_requirement_id else "the target artifact"
                         _notify(
                             pg_cursor,
                             tenant_id           = tenant_id,
                             kind                = "cascade_blocked",
-                            title               = (f"Cascade blocked: {r.target_control_ref} "
-                                                   f"({b['applies_when']})"),
-                            body                = (f"Implication on {r.target_requirement_id} "
-                                                   f"was suppressed because the BLOCKS_WHEN "
-                                                   f"condition {b['applies_when']!r} matched "
-                                                   f"the verification metadata. Verify the "
-                                                   f"blocker remains active."),
+                            title               = (f"Follow-up on {r.target_control_ref} "
+                                                   f"paused ({b['applies_when']})"),
+                            body                = (f"The expected follow-up on "
+                                                   f"'{_req_tail}' was paused because "
+                                                   f"the condition '{b['applies_when']}' "
+                                                   f"matched this event. Confirm this "
+                                                   f"pause condition still applies — "
+                                                   f"otherwise the follow-up should "
+                                                   f"resume."),
                             severity            = "medium",
                             related_entity_kind = "cascade_suppression_log",
                             related_control_ref = r.target_control_ref,
@@ -1097,12 +1108,18 @@ def sweep_overdue_followups(
                 pg_cursor,
                 tenant_id           = tenant_id,
                 kind                = "followup_overdue",
-                title               = (f"Expected followup overdue: "
-                                       f"{src_event} → {exp_event}"),
-                body                = (f"Window of {window_d} day(s) elapsed without a "
-                                       f"matching {exp_event} verification. Cascade "
-                                       f"engine wrote SLA-breach implications on the "
-                                       f"controls this event would have satisfied."),
+                title               = (f"Follow-up overdue: "
+                                       f"'{src_event.replace('_',' ')}' expected "
+                                       f"'{exp_event.replace('_',' ')}'"),
+                body                = (f"It's been {window_d} day"
+                                       f"{'s' if window_d != 1 else ''} since "
+                                       f"'{src_event.replace('_',' ')}' fired and we "
+                                       f"still don't have the expected "
+                                       f"'{exp_event.replace('_',' ')}' follow-up on "
+                                       f"file. The controls this follow-up covers "
+                                       f"have been flagged as SLA-breached — review "
+                                       f"and act, or add a note explaining why "
+                                       f"they're not applicable this time."),
                 severity            = "high",
                 related_entity_kind = "expected_followup_event",
                 related_entity_id   = fid,

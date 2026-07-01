@@ -715,7 +715,7 @@ function renderInbox(d, status) {
       <div style="flex:1;min-width:0">
         <div style="display:flex;gap:8px;align-items:center;font-size:12px">
           <span style="font-size:9px;font-weight:600;color:${p.dot};letter-spacing:.4px">${p.tag}</span>
-          <span style="font-size:10px;color:#9A9785">${esc(it.kind)}</span>
+          <span style="font-size:10px;color:#9A9785">${esc(humanizeNotifKind(it.kind))}</span>
           ${it.related_control_ref ? `<span style="font-family:monospace;font-size:10px;color:#5C5A4F">${esc(it.related_control_ref)}</span>` : ''}
           <span style="margin-left:auto;font-size:10px;color:#9A9785;font-family:monospace">${esc(ts)}</span>
         </div>
@@ -805,35 +805,48 @@ function renderCascadeTimelineRow(it) {
   const ts = it.ts ? it.ts.slice(0,19).replace('T',' ') : '?';
   const palette = {
     verification:  {bg:'#EDF1F7', label:'verify',    color:'#33457A'},
-    implication:   {bg:'#FBF1E5', label:'impl',      color:'#A87515'},
-    followup:      {bg:'#EDF1F7', label:'followup',  color:'#33457A'},
-    suppression:   {bg:'#F0EDE3', label:'suppr',     color:'#5C5A4F'},
+    implication:   {bg:'#FBF1E5', label:'follow-up', color:'#A87515'},
+    followup:      {bg:'#EDF1F7', label:'next step', color:'#33457A'},
+    suppression:   {bg:'#F0EDE3', label:'muted',     color:'#5C5A4F'},
   };
   const p = palette[it.kind] || {bg:'#FAF8F2', label:it.kind, color:'#3A382E'};
   let body = '';
   if (it.kind === 'verification') {
-    body = `<strong>${esc(it.event_type)}</strong> × ${esc(it.count)}
-      <span style="color:#5C5A4F">on ${esc(it.leaf_id||'?')}</span>
+    // event_type is a curated slug like 'policy_revised' — surface with
+    // spaces so it reads as a phrase. leaf_id shows as the short control
+    // ref rather than the full 'req:X:Y' machine id.
+    const evtLabel = (it.event_type||'').replace(/_/g, ' ');
+    const leafParts = it.leaf_id ? String(it.leaf_id).split(':') : [];
+    const leafShort = leafParts.length >= 2 ? leafParts[1] : (it.leaf_id||'?');
+    body = `<strong>${esc(evtLabel)}</strong> × ${esc(it.count)}
+      <span style="color:#5C5A4F">on ${esc(leafShort)}</span>
       ${it.summary ? `<div style="margin-top:3px;color:#3A382E">${esc(it.summary)}</div>` : ''}`;
   } else if (it.kind === 'implication') {
     const tag = (it.status === 'satisfied' ? 'SATISFIED'
               : it.status === 'dismissed' ? 'DISMISSED'
               : 'pending');
-    body = `${esc(it.event_type)} → <strong>${esc(it.control_ref||'?')}</strong>
-      <span style="color:#5C5A4F">[${esc(it.expected_action)}]</span>
+    const evt = (it.event_type||'').replace(/_/g, ' ');
+    const act = (it.expected_action||'').replace(/_/g, ' ');
+    const scope = (it.scope_kind||'').replace(/_/g, ' ');
+    body = `${esc(evt)} → <strong>${esc(it.control_ref||'?')}</strong>
+      <span style="color:#5C5A4F">[${esc(act)}]</span>
       <span style="font-size:10px;color:#9A9785">${tag}</span>
-      ${it.scope_kind ? ` <span style="font-size:10px;color:#5C5A4F">(scope=${esc(it.scope_kind)})</span>` : ''}
+      ${it.scope_kind ? ` <span style="font-size:10px;color:#5C5A4F">(scope: ${esc(scope)})</span>` : ''}
       ${it.due_date ? ` <span style="font-size:10px;color:#5C5A4F">due ${esc(it.due_date.slice(0,10))}</span>` : ''}
       ${(it.cascade_path && it.cascade_path.length > 1) ? `<div style="font-size:10px;color:#9A9785;font-family:monospace;margin-top:2px">${esc((it.cascade_path||[]).join(' → '))}</div>` : ''}
       ${it.rationale ? `<div style="margin-top:3px;color:#3A382E">${esc(it.rationale.slice(0,200))}</div>` : ''}`;
   } else if (it.kind === 'followup') {
-    body = `${esc(it.event_type)} expects <strong>${esc(it.expected_event_type)}</strong>
+    const evt = (it.event_type||'').replace(/_/g, ' ');
+    const expEvt = (it.expected_event_type||'').replace(/_/g, ' ');
+    body = `${esc(evt)} expects <strong>${esc(expEvt)}</strong>
       <span style="color:#5C5A4F">[${esc(it.status)}] within ${esc(it.window_days)}d</span>
       <span style="font-size:10px;color:#5C5A4F">(expires ${esc((it.expires_at||'?').slice(0,10))})</span>`;
   } else if (it.kind === 'suppression') {
-    const tgt = it.target_requirement_id || it.target_event_type || '?';
-    body = `<strong>${esc(it.event_type)}</strong> -X-> ${esc(tgt)}
-      <span style="font-size:10px;color:#5C5A4F">${esc(it.suppression_kind||'')}</span>
+    const evt = (it.event_type||'').replace(/_/g, ' ');
+    const tgt = it.target_requirement_id || (it.target_event_type||'').replace(/_/g, ' ') || '?';
+    const kind = (it.suppression_kind||'').replace(/_/g, ' ');
+    body = `<strong>${esc(evt)}</strong> -X-> ${esc(tgt)}
+      <span style="font-size:10px;color:#5C5A4F">${esc(kind)}</span>
       ${it.applies_when ? `<div style="font-size:10px;color:#3A382E;font-family:monospace;margin-top:2px">${esc(it.applies_when)}</div>` : ''}`;
   } else {
     body = esc(JSON.stringify(it));
@@ -846,16 +859,23 @@ function renderCascadeTimelineRow(it) {
 }
 
 async function openCascadeEventDetail(kind, eid) {
+  const _KIND_TITLE = {
+    verification: 'Verification event',
+    implication:  'Triggered follow-up',
+    followup:     'Expected next step',
+    suppression:  'Muted cascade path',
+  };
+  const titleFor = (k) => _KIND_TITLE[k] || 'Cascade event';
   // Build the modal scaffold first.
   let body = '<div style="font-size:12px;color:#5C5A4F"><i class="ti ti-loader-2"></i> Loading…</div>';
   let footer = `<button onclick="_cetCloser()" style="font-size:11px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:4px;cursor:pointer;font-family:inherit">Close</button>`;
-  _renderCetModal(`Cascade event detail`, body, footer);
+  _renderCetModal(titleFor(kind), body, footer);
 
   try {
     const d = await api(`/api/v1/tenant/cascade-event/${encodeURIComponent(kind)}/${encodeURIComponent(eid)}`);
-    _renderCetModal(`Cascade event detail — ${kind}`, renderCascadeEventDetailBody(d), footer);
+    _renderCetModal(titleFor(kind), renderCascadeEventDetailBody(d), footer);
   } catch (e) {
-    _renderCetModal(`Cascade event detail`, `<div style="color:#9C2E2E">Couldn't load: ${escapeHtml(e.message)}</div>`, footer);
+    _renderCetModal(titleFor(kind), `<div style="color:#9C2E2E">Couldn't load: ${escapeHtml(e.message)}</div>`, footer);
   }
 }
 
@@ -873,10 +893,20 @@ function renderCascadeEventDetailBody(d) {
          typeof v === 'object' ? esc(JSON.stringify(v, null, 2)) : esc(String(v))
        }</div>
      </div>`;
+  // The focal event's "kind" (verification / implication / etc.) becomes
+  // the panel title in tenant terms so the modal doesn't read as debug
+  // output ('Focal (verification)').
+  const _FOCAL_TITLE = {
+    verification: 'Verification event',
+    implication:  'Triggered follow-up',
+    followup:     'Expected next step',
+    suppression:  'Muted cascade path',
+  };
+  const focalTitle = _FOCAL_TITLE[f.kind] || 'Event details';
   const focalKeys = Object.keys(f).filter(k => k !== 'kind');
   const focalHtml = `<div style="padding:10px 12px;background:#FAF8F2;border:1px solid #E8E5DA;border-radius:5px;margin-bottom:14px">
     <div style="font-size:11px;font-weight:600;color:#3A382E;margin-bottom:6px">
-      <i class="ti ti-anchor"></i> Focal (${esc(f.kind || '?')})
+      <i class="ti ti-anchor"></i> ${esc(focalTitle)}
     </div>
     ${focalKeys.map(k => kvRow(k, f[k])).join('')}
   </div>`;
@@ -897,27 +927,37 @@ function renderCascadeEventDetailBody(d) {
   const implFmt = i =>
     `<div style="padding:5px 10px;border-bottom:1px solid #F0EDDF;font-size:11px">
        <span style="font-family:monospace;color:#3A382E">${esc(i.control_ref)}</span>
-       <span style="color:#5C5A4F"> [${esc(i.expected_action)}]</span>
+       <span style="color:#5C5A4F"> [${esc(humanizeSlug(i.expected_action))}]</span>
        <span style="font-size:10px;color:#9A9785"> ${esc(i.status)}</span>
-       ${i.scope_kind ? `<span style="font-size:10px;color:#5C5A4F"> (scope=${esc(i.scope_kind)})</span>` : ''}
+       ${i.scope_kind ? `<span style="font-size:10px;color:#5C5A4F"> (scope: ${esc(humanizeSlug(i.scope_kind))})</span>` : ''}
        ${i.due_date ? `<span style="font-size:10px;color:#5C5A4F"> due ${esc(i.due_date.slice(0,10))}</span>` : ''}
      </div>`;
   const fuFmt = fu =>
     `<div style="padding:5px 10px;border-bottom:1px solid #F0EDDF;font-size:11px">
-       <span style="font-family:monospace;color:#3A382E">${esc(fu.source_event_type)} → ${esc(fu.expected_event_type)}</span>
+       <span style="color:#3A382E">${esc(humanizeSlug(fu.source_event_type))} → ${esc(humanizeSlug(fu.expected_event_type))}</span>
        <span style="color:#5C5A4F"> [${esc(fu.status)}] within ${esc(fu.window_days)}d</span>
      </div>`;
-  const spFmt = sp =>
-    `<div style="padding:5px 10px;border-bottom:1px solid #F0EDDF;font-size:11px">
-       <span style="font-family:monospace;color:#3A382E">${esc(sp.source_event_type)} -X-> ${esc(sp.target_requirement_id || sp.target_event_type)}</span>
-       <span style="font-size:10px;color:#5C5A4F"> ${esc(sp.suppression_kind || '')}</span>
+  const spFmt = sp => {
+    // target_requirement_id is a machine 'req:X:Y' id; if a bare
+    // event_type target is present prefer that; otherwise strip req: to
+    // just the control ref so the row reads as a control name.
+    let tgt = sp.target_event_type ? humanizeSlug(sp.target_event_type) : '';
+    if (!tgt && sp.target_requirement_id) {
+      const parts = String(sp.target_requirement_id).split(':');
+      tgt = parts[1] || sp.target_requirement_id;
+    }
+    if (!tgt) tgt = '?';
+    return `<div style="padding:5px 10px;border-bottom:1px solid #F0EDDF;font-size:11px">
+       <span style="color:#3A382E">${esc(humanizeSlug(sp.source_event_type))} -X-> ${esc(tgt)}</span>
+       <span style="font-size:10px;color:#5C5A4F"> ${esc(humanizeSlug(sp.suppression_kind || ''))}</span>
        ${sp.applies_when ? `<div style="font-size:10px;color:#3A382E;font-family:monospace;margin-top:2px">${esc(sp.applies_when)}</div>` : ''}
      </div>`;
+  };
 
   return focalHtml +
-         relSection("Related implications", r.implications, implFmt) +
-         relSection("Related followups",    r.followups,    fuFmt) +
-         relSection("Related suppressions", r.suppressions, spFmt);
+         relSection("Related follow-ups", r.implications, implFmt) +
+         relSection("Related next steps",  r.followups,    fuFmt) +
+         relSection("Related muted paths", r.suppressions, spFmt);
 }
 
 function _renderCetModal(title, body, footer) {
@@ -975,15 +1015,30 @@ function renderCascadeOverrides(overrides, vocab) {
   const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
   const wrap = document.getElementById('profile-wrap');
 
-  // Event-type picker
+  // Event-type picker. Categories + event-type slugs are humanized for
+  // display; the underlying value stays the slug (that's what the API
+  // expects). Titles come pre-composed from the catalog.
   let pickerOpts = '<option value="">— pick event type —</option>';
   for (const [cat, evs] of Object.entries(vocab || {})) {
-    pickerOpts += `<optgroup label="${esc(cat)}">`;
+    const catLabel = String(cat).replace(/_/g, ' ');
+    pickerOpts += `<optgroup label="${esc(catLabel)}">`;
     for (const ev of evs) {
-      pickerOpts += `<option value="${attr(ev.event_type)}">${esc(ev.event_type)} — ${esc(ev.title || '')}</option>`;
+      const evLabel = ev.title || String(ev.event_type).replace(/_/g, ' ');
+      pickerOpts += `<option value="${attr(ev.event_type)}">${esc(evLabel)}</option>`;
     }
     pickerOpts += '</optgroup>';
   }
+
+  // Turn 'ISO27001:2022:A.6.4' or 'req:A.6.4:foo' into a tenant-friendly
+  // 'A.6.4' style ref — the machine-form breadcrumb belongs in a tooltip,
+  // not in the middle of a table cell.
+  const _prettyTarget = (t) => {
+    if (!t) return '—';
+    const s = String(t);
+    if (s.startsWith('req:')) return s.split(':')[1] || s;
+    const parts = s.split(':');
+    return parts[parts.length - 1] || s;
+  };
 
   // Existing overrides table
   let rows = '';
@@ -991,12 +1046,14 @@ function renderCascadeOverrides(overrides, vocab) {
     rows = `<tr><td colspan="5" style="padding:12px;color:#9C9A8E;font-size:12px;text-align:center">No cascade overrides registered.</td></tr>`;
   } else {
     for (const o of overrides) {
-      const target = o.target_requirement_id || '—';
+      const target = _prettyTarget(o.target_requirement_id);
+      const targetTooltip = o.target_requirement_id ? attr(o.target_requirement_id) : '';
       const kindLabel = o.override_kind === 'mute_event' ? 'mute event' : 'mute target';
+      const evLabel = String(o.event_type || '').replace(/_/g, ' ');
       rows += `<tr>
         <td style="padding:6px 8px;font-size:11px"><span style="background:#F0EDE3;color:#5C5A4F;padding:1px 6px;border-radius:8px;font-size:10px">${esc(kindLabel)}</span></td>
-        <td style="padding:6px 8px;font-size:11px;font-family:monospace">${esc(o.event_type)}</td>
-        <td style="padding:6px 8px;font-size:11px;font-family:monospace">${esc(target)}</td>
+        <td style="padding:6px 8px;font-size:11px">${esc(evLabel)}</td>
+        <td style="padding:6px 8px;font-size:11px" title="${targetTooltip}">${esc(target)}</td>
         <td style="padding:6px 8px;font-size:11px;color:#3A382E">${esc(o.reason || '')}</td>
         <td style="padding:6px 8px;text-align:right">
           <button onclick="deleteCascadeOverride('${attr(o.id)}')" title="Remove" style="font-size:10px;padding:3px 8px;background:#fff;color:#9C2E2E;border:1px solid #E0C8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-trash"></i></button>
@@ -1019,7 +1076,7 @@ function renderCascadeOverrides(overrides, vocab) {
       <table style="width:100%;border-collapse:collapse;background:#fff;border:1px solid #E8E5DA;border-radius:4px;overflow:hidden;margin-bottom:14px">
         <thead style="background:#F0EDE3;font-size:10px;text-transform:uppercase;color:#5C5A4F;letter-spacing:.4px">
           <tr>
-            <th style="padding:6px 8px;text-align:left;font-weight:600">Kind</th>
+            <th style="padding:6px 8px;text-align:left;font-weight:600">Scope</th>
             <th style="padding:6px 8px;text-align:left;font-weight:600">Event</th>
             <th style="padding:6px 8px;text-align:left;font-weight:600">Target control</th>
             <th style="padding:6px 8px;text-align:left;font-weight:600">Reason</th>
@@ -1032,17 +1089,17 @@ function renderCascadeOverrides(overrides, vocab) {
       <div style="padding:10px;background:#fff;border:1px dashed #E8E5DA;border-radius:4px">
         <div style="font-size:11px;font-weight:600;color:#3A382E;margin-bottom:6px">Add an override</div>
         <div style="display:grid;grid-template-columns:120px 1fr 1fr;gap:6px;align-items:center">
-          <label style="font-size:11px;color:#5C5A4F">Kind:</label>
+          <label style="font-size:11px;color:#5C5A4F">Scope:</label>
           <select id="cov-kind" onchange="_covKindChanged()" style="font-size:11px;padding:4px 6px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:inherit;grid-column:2/4">
-            <option value="mute_event_target">mute_event_target (single control)</option>
-            <option value="mute_event">mute_event (all targets)</option>
+            <option value="mute_event_target">Mute this event for one specific control</option>
+            <option value="mute_event">Mute this event across every control it fires on</option>
           </select>
 
           <label style="font-size:11px;color:#5C5A4F">Event type:</label>
           <select id="cov-event" style="font-size:11px;padding:4px 6px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:inherit;grid-column:2/4">${pickerOpts}</select>
 
           <label style="font-size:11px;color:#5C5A4F" id="cov-target-lbl">Target control:</label>
-          <input id="cov-target" placeholder="e.g. ISO27001:2022:A.6.4" style="font-size:11px;padding:4px 8px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:monospace;grid-column:2/4">
+          <input id="cov-target" placeholder="e.g. ISO27001:2022:A.6.4 (full machine ref — needed for exact match)" style="font-size:11px;padding:4px 8px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:monospace;grid-column:2/4">
 
           <label style="font-size:11px;color:#5C5A4F;align-self:start">Reason (required):</label>
           <textarea id="cov-reason" rows="2" placeholder="Auditor-grade explanation — why this cascade does not apply to us." style="font-size:11px;padding:6px 8px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;color:#3A382E;font-family:inherit;grid-column:2/4;resize:vertical"></textarea>
@@ -1079,7 +1136,7 @@ async function addCascadeOverride() {
   if (!event_t)            { alert('Pick an event type.'); return; }
   if (!reason)             { alert('Reason is required.'); return; }
   if (kind === 'mute_event_target' && !target) {
-    alert('Target control is required for mute_event_target.'); return;
+    alert('Target control is required when muting for a single control.'); return;
   }
   const body = {
     override_kind: kind,
@@ -1279,7 +1336,9 @@ function renderExternalSystems(systems) {
 }
 
 function renderExternalSystemRow(s, attr, esc) {
-  const covers = (s.covers_evidence_types || []).join(', ') || '(any)';
+  const covers = (s.covers_evidence_types || [])
+    .map(t => String(t).replace(/_/g, ' '))
+    .join(', ') || '(any)';
   return `<div class="ext-system-row" data-id="${attr(s.id)}"
        style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;padding:12px 14px;margin-bottom:8px">
     <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
@@ -1605,6 +1664,55 @@ function escapeHtml(s) {
     .replace(/"/g,'&quot;');
 }
 
+// Tenant-facing label for a document_findings.inference_source value.
+// Mirrors _SOURCE_HUMAN in rag/templates/renderer.py. Keep in sync when
+// a new source is added on the backend.
+const _SOURCE_HUMAN = {
+  templated:  'template edit',
+  form:       'form entry',
+  workbook:   'workbook upload',
+  extracted:  'uploaded document',
+  leaf_scan:  'prior finding',
+  xfw_bridge: 'cross-framework bridge',
+};
+function humanizeSource(s) {
+  if (!s) return '';
+  return _SOURCE_HUMAN[s] || String(s).replace(/_/g, ' ');
+}
+
+// 'ISO27001:2022' -> 'ISO 27001:2022'; 'GDPR:2016/679' -> 'GDPR'.
+// 'ISO27001' (no year) -> 'ISO 27001'. Machine tags never surface as-is.
+function humanizeStandardId(s) {
+  if (!s) return '';
+  s = String(s);
+  if (s.startsWith('ISO27001')) return 'ISO 27001' + s.slice(8);
+  if (s.startsWith('ISO27701')) return 'ISO 27701' + s.slice(8);
+  if (s.startsWith('GDPR')) return 'GDPR';
+  return s;
+}
+
+// tenant_notification.kind -> short tenant-facing label. Keep in sync
+// with the cascade notify() call sites in rag/cascade/*.py.
+const _NOTIF_KIND_LABEL = {
+  threshold_crossed:   'threshold crossed',
+  cascade_blocked:     'follow-up paused',
+  followup_overdue:    'follow-up overdue',
+  implication_overdue: 'action overdue',
+};
+function humanizeNotifKind(k) {
+  if (!k) return '';
+  return _NOTIF_KIND_LABEL[k] || String(k).replace(/_/g, ' ');
+}
+
+// Generic slug humanizer for cascade-side slugs (event_type,
+// expected_action, scope_kind, suppression_kind, cascade_path
+// segments). Curated events already carry human titles on the
+// vocabulary endpoint; this covers everything else.
+function humanizeSlug(s) {
+  if (!s) return '';
+  return String(s).replace(/_/g, ' ');
+}
+
 async function selectHeatCell(c, ev) {
   selected = {kind: 'dash', ...c};
   document.getElementById('detail-empty').style.display = 'none';
@@ -1781,30 +1889,32 @@ function renderControlImplicationsDrillIn(controlRef, items) {
     const tag = i.overdue ? 'OVERDUE' : 'pending';
     const tagCss = i.overdue ? 'color:#9C2E2E;font-weight:600' : 'color:#5C5A4F';
     const due = i.due_date ? i.due_date.slice(0,10) : 'open-ended';
-    const path = (i.cascade_path || []).join(' → ');
+    const path = (i.cascade_path || []).map(humanizeSlug).join(' → ');
+    // clock_anchor + scope_kind are cascade-internal facets. Show as
+    // parenthetical hints in plain language, not [clock=X] debug tags.
     const anchor = (i.clock_anchor && i.clock_anchor !== 'verified_at')
-      ? ` <span style="font-size:10px;color:#9A9785">[clock=${esc(i.clock_anchor)}]</span>`
+      ? ` <span style="font-size:10px;color:#9A9785">(clock: ${esc(humanizeSlug(i.clock_anchor))})</span>`
       : '';
     const scope = i.scope_kind
-      ? ` <span style="font-size:10px;color:#5C5A4F">(scope=${esc(i.scope_kind)})</span>`
+      ? ` <span style="font-size:10px;color:#5C5A4F">(scope: ${esc(humanizeSlug(i.scope_kind))})</span>`
       : '';
     return `<div style="padding:6px 8px;border-bottom:1px solid #F0EDDF;font-size:11px">
       <div style="display:flex;align-items:center;gap:6px">
         <span style="${tagCss};font-size:10px">[${tag}]</span>
-        <span style="color:#3A382E">${esc(i.expected_action)}</span>
+        <span style="color:#3A382E">${esc(humanizeSlug(i.expected_action))}</span>
         <span style="color:#5C5A4F">due ${esc(due)}</span>${anchor}${scope}
         <button onclick="_implResolveAndRefresh('${i.id}','satisfied','${esc(controlRef)}')"
                 title="Mark satisfied" style="margin-left:auto;font-size:10px;padding:1px 8px;background:#fff;color:#2D5F2D;border:1px solid #C8D8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-check"></i></button>
         <button onclick="_implDismissPromptAndRefresh('${i.id}','${esc(controlRef)}')"
                 title="Dismiss with reason" style="font-size:10px;padding:1px 8px;background:#fff;color:#9C2E2E;border:1px solid #E0C8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-x"></i></button>
       </div>
-      <div style="font-size:10px;color:#9A9785;margin-top:2px;font-family:monospace">${esc(path)}</div>
+      <div style="font-size:10px;color:#9A9785;margin-top:2px">${esc(path)}</div>
       ${i.rationale ? `<div style="margin-top:3px;color:#3A382E">${esc(i.rationale.slice(0,200))}</div>` : ''}
     </div>`;
   }).join('');
   return `<div style="margin-top:10px;border:1px solid #E8E5DA;border-radius:5px;background:#fff">
     <div style="padding:6px 10px;background:#FAF8F2;border-bottom:1px solid #E8E5DA;font-size:11px;color:#3A382E;font-weight:600">
-      <i class="ti ti-list-check"></i> Cascade implications · ${items.length}${overdueBadge}
+      <i class="ti ti-list-check"></i> Follow-ups triggered · ${items.length}${overdueBadge}
     </div>
     ${rows}
   </div>`;
@@ -2098,9 +2208,14 @@ async function selectStage1(c, ev) {
         </div>`;
       for (const leafKey of Object.keys(grouped[sheet])) {
         const grp = grouped[sheet][leafKey];
-        const refTag = grp.leaf_id
+        // Small right-side ref hint. The full leaf_id (req:X:Y) is a
+        // system identifier — surface just the control ref so reviewers
+        // see 'A.5.15' not 'req:A.5.15:access_control_policy'.
+        const parts = grp.leaf_id ? String(grp.leaf_id).split(':') : [];
+        const shortRef = parts.length >= 2 ? parts[1] : '';
+        const refTag = shortRef
           ? `<span style="color:#9C9A8E;font-size:10px;font-weight:400">
-               ${esc(grp.leaf_id)}
+               ${esc(shortRef)}
              </span>`
           : '';
         h += `<div style="margin:6px 0 4px 0;padding:6px 8px;background:#F4F1E8;
@@ -2114,10 +2229,10 @@ async function selectStage1(c, ev) {
           // inference-chain-idea]].
           let chain = '';
           if (f.inferred_from_control_ref) {
-            const src = esc(f.inferred_from_standard_id || '');
+            const src = esc(humanizeStandardId(f.inferred_from_standard_id || ''));
             const ref = esc(f.inferred_from_control_ref);
             const via = f.inference_source && f.inference_source !== 'extracted'
-                        ? ` via ${esc(f.inference_source)}` : '';
+                        ? ` via ${esc(humanizeSource(f.inference_source))}` : '';
             chain = `<div style="margin-top:4px;padding:4px 6px;background:#fff;
                                   border:1px dashed #D9D5C5;border-radius:4px;
                                   font-size:10px;color:#3A382E">
@@ -2510,23 +2625,24 @@ function renderTriggeredImplicationsPanel(data) {
       const dueBadge = i.overdue
         ? `<span style="color:#9C2E2E;font-weight:600">overdue ${_daysSince(i.due_date)}d</span>`
         : (i.due_date ? `<span style="color:#5C5A4F">due ${i.due_date.slice(0,10)}</span>` : '');
-      const path = (i.cascade_path || []).join(' → ');
+      const path = (i.cascade_path || []).map(humanizeSlug).join(' → ');
       const depthMark = i.cascade_depth > 0
         ? `<span style="color:#9A9785;font-size:10px;margin-right:4px">↳</span>`
         : '';
       return `<div style="display:flex;align-items:center;gap:8px;padding:5px 8px;border-bottom:1px solid #F0EDDF;font-size:11px">
         ${depthMark}<span style="font-family:monospace;color:#3A382E;min-width:90px">${esc(i.target_control_ref)}</span>
-        <span style="color:#5C5A4F">${esc(i.expected_action)}</span>
-        <span style="font-size:10px;color:#9A9785;font-family:monospace">${esc(path)}</span>
+        <span style="color:#5C5A4F">${esc(humanizeSlug(i.expected_action))}</span>
+        <span style="font-size:10px;color:#9A9785">${esc(path)}</span>
         <span style="margin-left:auto">${dueBadge}</span>
         <button onclick="_implResolve('${i.id}','satisfied')" title="Mark satisfied" style="font-size:10px;padding:2px 8px;background:#fff;color:#2D5F2D;border:1px solid #C8D8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-check"></i></button>
         <button onclick="_implDismissPrompt('${i.id}')" title="Dismiss with reason" style="font-size:10px;padding:2px 8px;background:#fff;color:#9C2E2E;border:1px solid #E0C8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-x"></i></button>
       </div>`;
     }).join('');
+    const evs = (g.source_event_types || []).map(humanizeSlug).map(esc).join(', ');
     return `<div style="margin-bottom:12px;border:1px solid #E8E5DA;border-radius:4px;background:#fff">
       <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#FAF8F2;border-bottom:1px solid #E8E5DA;font-size:11px;color:#5C5A4F">
-        <span>from verification — ${(g.source_event_types || []).map(esc).join(', ')}</span>
-        <span style="color:#9A9785">${g.implications.length} implications</span>
+        <span>from verification — ${evs}</span>
+        <span style="color:#9A9785">${g.implications.length} follow-up${g.implications.length===1?'':'s'}</span>
         <span style="margin-left:auto;display:flex;gap:4px">
           <button onclick="_implBulkResolve('${attr(g.verification_id)}','satisfy')" title="Satisfy all from this verification" style="font-size:10px;padding:2px 8px;background:#fff;color:#2D5F2D;border:1px solid #C8D8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-checks"></i> all</button>
           <button onclick="_implBulkDismissPrompt('${attr(g.verification_id)}')" title="Dismiss all with shared reason" style="font-size:10px;padding:2px 8px;background:#fff;color:#9C2E2E;border:1px solid #E0C8C8;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-x"></i> all</button>
@@ -2569,34 +2685,34 @@ function renderCascadeKpis(k) {
   };
 
   const tiles = [];
-  // Pending implications (with overdue split)
+  // Pending follow-ups (with overdue split)
   tiles.push(tile(
-    "Implications",
+    "Follow-ups",
     pi.total || 0,
-    `${pi.overdue || 0} overdue · ${cwp} controls`,
+    `${pi.overdue || 0} overdue · on ${cwp} control${cwp===1?'':'s'}`,
     (pi.overdue || 0) > 0 ? 'red' : ((pi.total || 0) > 0 ? 'amber' : null),
   ));
-  // Pending followups
+  // Expected downstream verifications
   tiles.push(tile(
-    "Expected followups",
+    "Expected next steps",
     `${pf.pending || 0}`,
     `${pf.overdue || 0} overdue`,
     (pf.overdue || 0) > 0 ? 'red' : null,
   ));
-  // Suppressions 30d
+  // Muted cascades 30d
   const supByKind = sp.by_kind || {};
   const supBits = Object.entries(supByKind)
-    .map(([k,v]) => `${v} ${k.replace('_',' ')}`)
+    .map(([k,v]) => `${v} ${humanizeSlug(k)}`)
     .join(' · ') || 'none';
   tiles.push(tile(
-    "Suppressions (30d)",
+    "Muted cascades (30d)",
     sp.total || 0,
     supBits,
     null,
   ));
   // Auto-resolved 7d
   tiles.push(tile(
-    "Auto-resolved (7d)",
+    "Auto-closed (7d)",
     ar,
     (ar > 0 ? 'via cite verification' : 'none yet'),
     ar > 0 ? 'green' : null,
@@ -2605,7 +2721,7 @@ function renderCascadeKpis(k) {
   tiles.push(tile(
     "Verifications (7d)",
     v7.total || 0,
-    `${v7.with_structured || 0} with structured events`,
+    `${v7.with_structured || 0} with event details`,
     null,
   ));
 
@@ -2630,9 +2746,9 @@ function renderExpectedFollowupsPanel(followups) {
           ? `<span style="color:#5C5A4F">expires in ${it.days_until_expiry}d</span>`
           : '');
     return `<div style="display:flex;align-items:center;gap:8px;padding:5px 8px;border-bottom:1px solid #F0EDDF;font-size:11px">
-      <span style="font-family:monospace;color:#3A382E">${esc(it.source_event_type)}</span>
+      <span style="color:#3A382E">${esc(humanizeSlug(it.source_event_type))}</span>
       <span style="color:#5C5A4F">expects</span>
-      <span style="font-family:monospace;color:#3A382E">${esc(it.expected_event_type)}</span>
+      <span style="color:#3A382E">${esc(humanizeSlug(it.expected_event_type))}</span>
       <span style="font-size:10px;color:#9A9785">${esc(window)}</span>
       <span style="margin-left:auto">${fate}</span>
     </div>`;
@@ -2640,19 +2756,19 @@ function renderExpectedFollowupsPanel(followups) {
   const sections = [];
   if (overdueCnt > 0) {
     sections.push(`<div style="margin-bottom:8px;border:1px solid #E0C8C8;border-radius:4px;background:#FBF3F3">
-      <div style="padding:6px 10px;background:#F0DCDC;border-bottom:1px solid #E0C8C8;font-size:11px;color:#9C2E2E;font-weight:600">overdue (no matching downstream event within window)</div>
+      <div style="padding:6px 10px;background:#F0DCDC;border-bottom:1px solid #E0C8C8;font-size:11px;color:#9C2E2E;font-weight:600">Overdue — no matching next step was recorded within the window</div>
       ${overdue.map(it => rowFor(it, true)).join('')}
     </div>`);
   }
   if (pendingCnt > 0) {
     sections.push(`<div style="margin-bottom:8px;border:1px solid #E8E5DA;border-radius:4px;background:#fff">
-      <div style="padding:6px 10px;background:#FAF8F2;border-bottom:1px solid #E8E5DA;font-size:11px;color:#5C5A4F">pending — awaiting matching downstream verification</div>
+      <div style="padding:6px 10px;background:#FAF8F2;border-bottom:1px solid #E8E5DA;font-size:11px;color:#5C5A4F">Pending — waiting for the next step to be verified</div>
       ${pending.map(it => rowFor(it, false)).join('')}
     </div>`);
   }
   return `<div style="margin-bottom:14px;padding:10px 12px;background:#FAF8F2;border:1px solid #E8E5DA;border-radius:6px">
     <div style="display:flex;align-items:center;margin-bottom:8px">
-      <span style="font-size:12px;font-weight:600;color:#3A382E"><i class="ti ti-arrow-back-up"></i> Expected followups</span>
+      <span style="font-size:12px;font-weight:600;color:#3A382E"><i class="ti ti-arrow-back-up"></i> Expected next steps</span>
       <span style="margin-left:8px;font-size:11px;color:#5C5A4F">${pendingCnt} pending / ${overdueCnt} overdue</span>
       ${overdueBadge}
     </div>
@@ -3906,14 +4022,14 @@ function addStage1Queue(card, id, d) {
   if (!pending.length) return;
 
   const rows = pending.map(f => {
-    const std  = (f.standard_id || '').split(':')[0];
+    const std  = humanizeStandardId((f.standard_id || '').split(':').slice(0,2).join(':'));
     const stat = (f.status || '').toLowerCase();
     const conf = (f.confidence || '').toLowerCase();
     const exc  = escHtml(f.excerpt);
     const fid  = escHtml(f.finding_id);
     const xfw  = f.inference_source && f.inference_source !== 'extracted';
     const xfwBadge = xfw
-      ? `<span class="review-xfw-badge" title="Inferred from ${escHtml(f.inferred_from_control_ref||'?')} (${escHtml((f.inferred_from_standard_id||'').split(':')[0]||'?')})">xfw</span>`
+      ? `<span class="review-xfw-badge" title="Inferred from ${escHtml(f.inferred_from_control_ref||'?')} (${escHtml(humanizeStandardId(f.inferred_from_standard_id||'?'))}) via ${escHtml(humanizeSource(f.inference_source))}">xfw</span>`
       : '';
     return `<div class="review-row" data-fid="${fid}">
       <input type="checkbox" class="review-check" data-fid="${fid}" onchange="updateBulkCount(this)">

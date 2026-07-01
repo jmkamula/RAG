@@ -198,16 +198,23 @@ def propose_from_cascade(pg_conn, tenant_id: str,
                     try:
                         from rag.cascade.notify import notify
                         sev = "critical" if proposed == "NC" else "high"
+                        _live_label = live or "not yet assessed"
                         notify(
                             cur,
                             tenant_id           = tenant_id,
                             kind                = "implication_overdue",
-                            title               = (f"Cascade pressure on {control_ref}: "
-                                                   f"{overdue} overdue implication(s)"),
-                            body                = (f"Cascade overlay proposing {proposed} on "
-                                                   f"{control_ref} (was {live or 'unassessed'}). "
-                                                   f"{overdue} overdue + {pending} pending "
-                                                   f"triggered_implication rows."),
+                            title               = (f"{control_ref} needs attention: "
+                                                   f"{overdue} overdue follow-up"
+                                                   f"{'s' if overdue != 1 else ''}"),
+                            body                = (f"{overdue} follow-up"
+                                                   f"{'s are' if overdue != 1 else ' is'} "
+                                                   f"overdue on {control_ref}"
+                                                   f"{f' (plus {pending} still in the window)' if pending else ''}. "
+                                                   f"Because of this, we're now suggesting "
+                                                   f"posture {proposed} for {control_ref} "
+                                                   f"(currently {_live_label}). Approve or "
+                                                   f"reject the proposal in the Stage-2 "
+                                                   f"queue."),
                             severity            = sev,
                             related_entity_kind = "triggered_implication",
                             related_control_ref = control_ref,
