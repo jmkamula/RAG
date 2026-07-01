@@ -5152,6 +5152,43 @@ async def cascade_timeline(
     }
 
 
+@app.get("/api/v1/dashboard/leaf/{leaf_id:path}/evidence-package",
+         tags=["posture"])
+async def dashboard_leaf_evidence_package(
+    leaf_id:  str,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    fmt:      str = "md",
+):
+    """Return an auto-generated evidence package for a leaf — auditor-
+    ready markdown showing standard obligation + per-MUST coverage
+    with source excerpts + citations. Refreshed on every download.
+
+    fmt='md' returns text/markdown (default). Future: docx/pdf.
+    """
+    if fmt != "md":
+        raise HTTPException(400, "only fmt='md' supported at v1")
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        from rag.posture.evidence_package import build_evidence_package
+        body = build_evidence_package(conn, key_info.tenant_id, leaf_id)
+    finally:
+        pool.putconn(conn)
+    if body is None:
+        raise HTTPException(404, f"leaf {leaf_id!r} not found in catalog")
+    # Serve as attachment with a stable filename
+    safe = leaf_id.replace(":", "_").replace("/", "_")
+    fname = f"evidence_package_{safe}.md"
+    from fastapi.responses import Response
+    return Response(
+        content=body,
+        media_type="text/markdown; charset=utf-8",
+        headers={"Content-Disposition": f'attachment; filename="{fname}"'},
+    )
+
+
 @app.get("/api/v1/dashboard/control/{control_ref}/canonical", tags=["posture"])
 async def dashboard_control_canonical(
     control_ref: str,

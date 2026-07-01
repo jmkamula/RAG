@@ -2233,6 +2233,16 @@ function renderEvidenceClassesPanel(b) {
         tplBadge += `<button onclick="downloadTemplateForLeaf('${attr(leaf.leaf_id)}','md')"
                               title="Download as Markdown" style="${btnStyle}">📄 .md</button>`;
       }
+      // Evidence Package — auto-generated summary of what backs each MUST.
+      // Only meaningful when the leaf has ≥1 approved finding; else the
+      // package is all ✗ and duplicates the starter template's message.
+      if ((leaf.musts_bound || 0) > 0) {
+        tplBadge += `<button onclick="downloadEvidencePackage('${attr(leaf.leaf_id)}')"
+                              title="Download Evidence Package (per-MUST coverage with source excerpts)"
+                              style="${btnStyle};background:#F2F5EE;border-color:#C8D8C8;color:#2D5F2D">
+                       📦 Evidence Package
+                     </button>`;
+      }
       leafLines += `<div style="font-size:11px;color:#5C5A4F;margin-top:2px;padding-left:18px">
         ${esc(leaf.leaf_label)} · ${leaf.musts_bound}/${leaf.musts_total} · sources: ${sources}${tplBadge}
       </div>`;
@@ -2314,6 +2324,34 @@ function renderEvidenceClassesPanel(b) {
     </div>
     ${rows}
   </div>`;
+}
+
+async function downloadEvidencePackage(leafId) {
+  // GET /api/v1/dashboard/leaf/{leaf_id}/evidence-package
+  // Auto-generated markdown: standard obligation + per-MUST coverage
+  // with source excerpts + citations. Refreshed on every download.
+  const url = `/api/v1/dashboard/leaf/${encodeURIComponent(leafId)}/evidence-package`;
+  try {
+    const resp = await fetch(url, { headers: { 'X-API-Key': API_KEY } });
+    if (!resp.ok) {
+      const t = await resp.text();
+      alert(`Evidence package failed: ${resp.status} ${t.slice(0,200)}`);
+      return;
+    }
+    const buf = await resp.arrayBuffer();
+    const cd  = resp.headers.get('Content-Disposition') || '';
+    const m   = /filename="?([^"]+)"?/i.exec(cd);
+    const filename = m ? m[1] : `evidence_package_${leafId.replace(/[:\/]/g,'_')}.md`;
+    const blob  = new Blob([buf], { type: 'text/markdown' });
+    const dlUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = dlUrl; a.download = filename;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(dlUrl);
+  } catch (e) {
+    alert(`Evidence package error: ${e.message}`);
+  }
 }
 
 async function downloadTemplateForLeaf(leafId, fmt) {
