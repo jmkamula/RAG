@@ -97,27 +97,53 @@ def _add_paragraph(doc, text: str, style: str | None = None,
 
 # ── Marker-aware line processing ────────────────────────────────────────────
 
+def _humanize_item_slug(mid: str) -> str:
+    """`item:4.3:boundaries` → 'boundaries'.
+
+    Drops the internal `item:CTRL:` prefix so the tenant-visible marker
+    reads as a natural label ('boundaries', 'exclusions', 'owner')
+    rather than a debug-log tag. The full id remains encoded in the
+    round-trip `<<MUST item:X>>` marker preserved in the source .md,
+    just not visually loud in the rendered doc."""
+    if not mid:
+        return ""
+    parts = mid.split(":")
+    slug = parts[-1] if parts else mid
+    return slug.replace("_", " ")
+
+
 def _render_marker_line(doc, marker_match: re.Match) -> None:
     """Render a <<MUST item:X>> or <<SHOULD item:X>> marker as a small
-    boxed-feel paragraph — visible structural anchor."""
+    label paragraph — visible structural anchor."""
     kind, mid = marker_match.group(1), marker_match.group(2)
+    kind_label = "Required element" if kind == "MUST" else "Recommended addition"
+    slug = _humanize_item_slug(mid)
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(6)
     p.paragraph_format.space_after  = Pt(2)
-    run = p.add_run(f"[ {kind} · {mid} ]")
-    run.font.name  = "Consolas"
-    run.font.size  = Pt(9)
+    run = p.add_run(f"◆ {kind_label} — {slug}")
+    run.font.name  = "Calibri"
+    run.font.size  = Pt(10)
+    run.bold = True
     run.font.color.rgb = RGBColor(0x9C, 0x6F, 0x1B)
 
 
 def _render_edit_zone_marker(doc, label: str, mid: str) -> None:
-    """Render an EDIT-ZONE-START / EDIT-ZONE-END line."""
+    """Render an EDIT-ZONE-START / EDIT-ZONE-END line as a subtle
+    guidance cue. The internal `item:X:Y` id is dropped from the
+    visible text — the surrounding structural markers keep round-trip
+    binding when we ship Phase B upload extraction."""
+    slug = _humanize_item_slug(mid)
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(2)
     p.paragraph_format.space_after  = Pt(2)
-    run = p.add_run(f"⇣ {label} ⇣  ({mid})")
-    run.font.name  = "Consolas"
-    run.font.size  = Pt(8)
+    text = (f"▽ Enter your evidence for “{slug}” below ▽"
+            if label == "EDIT START"
+            else f"△ End of “{slug}” △")
+    run = p.add_run(text)
+    run.font.name  = "Calibri"
+    run.font.size  = Pt(9)
+    run.italic = True
     run.font.color.rgb = RGBColor(0xBA, 0xB8, 0xAB)
 
 

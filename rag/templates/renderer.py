@@ -94,6 +94,41 @@ _SOURCE_RANK: dict[str, int] = {
 }
 
 
+# Tenant-facing labels for inference_source. The internal slug is a
+# useful audit tag but reads as jargon in a rendered template — the
+# tenant just wants to know 'where did this text come from'.
+_SOURCE_HUMAN: dict[str, str] = {
+    "templated":  "prior template edit",
+    "form":       "form entry",
+    "workbook":   "uploaded workbook",
+    "extracted":  "uploaded document",
+    "leaf_scan":  "prior finding",
+}
+
+
+def _humanize_source(src: str) -> str:
+    return _SOURCE_HUMAN.get(src, (src or "").replace("_", " "))
+
+
+# Machine control-ref labels like "GDPR:2016/679:Art.32" don't belong in
+# tenant-visible text. Reduce to the short human form the rest of the
+# product uses.
+def _humanize_control_ref(std_ref: str) -> str:
+    s = std_ref or ""
+    if s.startswith("GDPR:"):
+        parts = s.split(":", 2)
+        return f"GDPR {parts[-1]}" if len(parts) > 1 else s
+    if s.startswith("ISO27001:") or s.startswith("ISO27701:"):
+        # 'ISO27001:2022:A.5.15' -> 'ISO 27001:2022 A.5.15'
+        parts = s.split(":", 2)
+        if len(parts) == 3:
+            fam, yr, ref = parts
+            fam_h = "ISO 27001" if fam == "ISO27001" else "ISO 27701"
+            return f"{fam_h}:{yr} {ref}"
+        return s
+    return s
+
+
 @dataclass
 class EvidenceRow:
     must_id:         str
@@ -322,8 +357,11 @@ def _fetch_bridge_footers(
         )
         for row in cur.fetchall():
             mid, std, ref, doc, src_std, src_ref = row
-            label = f"{std}:{ref}"
-            src   = f"{src_std}:{src_ref}" if src_std and src_ref else doc
+            label = _humanize_control_ref(f"{std}:{ref}")
+            if src_std and src_ref:
+                src = _humanize_control_ref(f"{src_std}:{src_ref}")
+            else:
+                src = doc
             out[mid].append(f"{label} (from {src})")
     return out
 
@@ -371,7 +409,8 @@ def _compose_prefill_block(
     elif len(distinct_rows) > 1:
         for d in distinct_rows:
             parts.append(
-                f"**From {d.document_name} ({d.inference_source}, "
+                f"**From {d.document_name} "
+                f"({_humanize_source(d.inference_source)}, "
                 f"{d.extracted_at.date().isoformat()}):**"
             )
             parts.append(d.excerpt)
@@ -717,8 +756,7 @@ def render_template(
             f"artefacts, not this template. Use what's useful, change "
             f"what isn't, delete what doesn't apply.\n\n"
             f"> _Generated {gen_date} · "
-            f"Control: {control_ref} ({std_label}) · "
-            f"Leaf: `{leaf_id}`_\n\n"
+            f"{control_ref} · {std_label}_\n\n"
             f"---\n\n"
         )
         provenance = (
