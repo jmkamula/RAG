@@ -311,7 +311,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="filter-label muted" style="padding:0 8px">Tip</div>
       <div style="padding:0 8px;font-size:11px;color:#9C9A8E;line-height:1.5">
         Intake approval confirms evidence extracted from your documents.
-        Engine approval signs off on engine-derived posture verdicts.
+        Posture approval signs off on the posture updates we're suggesting for you.
       </div>
     </div>
   </div>
@@ -339,7 +339,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         </div>
         <div class="tabs" style="margin-left:8px">
           <button class="tab active" id="stab-1" onclick="setStage(1)">Intake approval <span class="fcount" id="sc-1">—</span></button>
-          <button class="tab" id="stab-2" onclick="setStage(2)">Engine approval <span class="fcount" id="sc-2">—</span></button>
+          <button class="tab" id="stab-2" onclick="setStage(2)">Posture approval <span class="fcount" id="sc-2">—</span></button>
         </div>
       </div>
       <button class="btn-sm btn-outline" onclick="loadQueue()">
@@ -422,6 +422,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             <button class="btn-send" id="btn-send" onclick="sendChat()">
               <i class="ti ti-send" aria-hidden="true"></i>
             </button>
+          </div>
+          <div class="chat-input-hint" style="font-size:10px;color:#9C9A8E;padding:4px 4px 0;text-align:right;user-select:none">
+            <kbd style="background:#F0EDE3;border:1px solid #D9D5C5;border-radius:3px;padding:1px 5px;font-family:inherit;font-size:10px;color:#5C5A4F">Enter</kbd> to send · <kbd style="background:#F0EDE3;border:1px solid #D9D5C5;border-radius:3px;padding:1px 5px;font-family:inherit;font-size:10px;color:#5C5A4F">Shift + Enter</kbd> for a new line
           </div>
         </div>
       </div>
@@ -689,7 +692,7 @@ async function loadInbox() {
     renderInbox(d, status);
     refreshInboxBadge();
   } catch (e) {
-    wrap.innerHTML = `<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn't load notifications: ${escapeHtml(e.message)}</p></div>`;
+    wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load notifications. Please refresh in a moment.</p></div>';
   }
 }
 
@@ -784,7 +787,7 @@ async function loadCascadeTimeline() {
     const d = await api('/api/v1/tenant/cascade-timeline?' + qs.toString());
     renderCascadeTimeline(d);
   } catch (e) {
-    wrap.innerHTML = `<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn't load timeline: ${escapeHtml(e.message)}</p></div>`;
+    wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load the timeline. Please refresh in a moment.</p></div>';
   }
 }
 
@@ -792,7 +795,7 @@ function renderCascadeTimeline(d) {
   const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
   const wrap = document.getElementById('cascade-wrap');
   if (!d.items || !d.items.length) {
-    wrap.innerHTML = `<div class="empty" style="margin-top:40px"><i class="ti ti-clock"></i><p>No cascade events in the last ${esc(d.since_days)} days for the chosen filters.</p></div>`;
+    wrap.innerHTML = `<div class="empty" style="margin-top:40px"><i class="ti ti-clock"></i><p>No activity in the last ${esc(d.since_days)} days for the chosen filters.</p></div>`;
     return;
   }
   const counts = {verification:0, implication:0, followup:0, suppression:0};
@@ -1017,7 +1020,7 @@ async function loadProfile() {
     renderExternalSystems(systemsResp.systems || []);
     renderCascadeOverrides(overridesResp.items || [], vocabResp.vocabulary || {});
   } catch (e) {
-    wrap.innerHTML = `<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn’t load profile: ${escapeHtml(e.message)}</p></div>`;
+    wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load your profile. Please refresh in a moment.</p></div>';
   }
 }
 
@@ -1509,7 +1512,7 @@ function cancelExternalSystemForm(btn) {
 }
 
 async function deleteExternalSystem(systemId, name) {
-  if (!confirm(`Delete "${name}"? Any cites referencing it will be deactivated.`)) {
+  if (!confirm(`Delete "${name}"? Any references to it will be deactivated.`)) {
     return;
   }
   try {
@@ -1546,7 +1549,7 @@ async function loadDashboard() {
                     {pending: followupsPending, overdue: followupsOverdue},
                     kpis);
   } catch (e) {
-    wrap.innerHTML = `<div class="dash-empty"><i class="ti ti-alert-triangle"></i><p>Couldn’t load posture: ${e.message}</p></div>`;
+    wrap.innerHTML = '<div class="dash-empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load your posture. Please refresh in a moment.</p></div>';
   }
 }
 
@@ -2066,7 +2069,7 @@ async function loadQueue() {
     loadStageCounts();
   } catch(e) {
     setStatus(false);
-    body.innerHTML = `<div class="empty"><i class="ti ti-alert-circle" aria-hidden="true"></i><p>${e.message}</p></div>`;
+    body.innerHTML = '<div class="empty"><i class="ti ti-alert-circle" aria-hidden="true"></i><p>Couldn\'t load the review queue. Please refresh in a moment.</p></div>';
   }
 }
 
@@ -2162,12 +2165,12 @@ function renderStage1(controls, total) {
 
 function renderStage2(proposals, total) {
   const body = document.getElementById('body-queue');
-  document.getElementById('queue-title').textContent = 'Engine approval';
+  document.getElementById('queue-title').textContent = 'Posture approval';
   document.getElementById('queue-sub').textContent =
-    `${total} engine proposal${total!==1?'s':''} pending — approve to apply the verdict to your posture`;
+    `${total} posture proposal${total!==1?'s':''} pending — approve to apply the change to your posture`;
 
   if (!proposals.length) {
-    body.innerHTML = '<div class="empty"><i class="ti ti-circle-check" aria-hidden="true"></i><p>Engine approval queue is empty</p></div>';
+    body.innerHTML = '<div class="empty"><i class="ti ti-circle-check" aria-hidden="true"></i><p>Posture approval queue is empty</p></div>';
     return;
   }
 
@@ -2890,7 +2893,7 @@ async function _implBulkResolve(verificationId, action, dismissedReason) {
 }
 
 function _implBulkDismissPrompt(verificationId) {
-  const reason = prompt('Shared dismissal reason for all implications from this verification (auditor-grade):');
+  const reason = prompt('Shared dismissal reason for all follow-ups from this verification (auditor-grade):');
   if (!reason || !reason.trim()) return;
   _implBulkResolve(verificationId, 'dismiss', reason.trim());
 }
@@ -2963,7 +2966,7 @@ async function openCiteCreate(leafId, evidenceType) {
   const footer = `
     <button onclick="_citeModalCloser()" style="font-size:11px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:4px;cursor:pointer;font-family:inherit">Cancel</button>
     <button class="btn-ask" onclick="_citeAdvanceToMustForm('${leafId.replace(/'/g, "\\'")}')" style="font-size:11px;padding:6px 12px">Next</button>`;
-  _renderCiteModal('Cite source — pick system', body, footer);
+  _renderCiteModal('Cite an external source — pick the system', body, footer);
 }
 
 async function _citeAdvanceToMustForm(leafId, prefilledSystemId) {
@@ -3040,8 +3043,8 @@ async function _citeAdvanceToMustForm(leafId, prefilledSystemId) {
     ${mustsHtml}`;
   const footer = `
     <button onclick="_citeModalCloser()" style="font-size:11px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:4px;cursor:pointer;font-family:inherit">Cancel</button>
-    <button class="btn-ask" onclick="_citeSubmitForm('${leafId.replace(/'/g, "\\'")}','${systemId}')" style="font-size:11px;padding:6px 12px">Save cite</button>`;
-  _renderCiteModal('Cite source — pick MUSTs', body, footer);
+    <button class="btn-ask" onclick="_citeSubmitForm('${leafId.replace(/'/g, "\\'")}','${systemId}')" style="font-size:11px;padding:6px 12px">Save reference</button>`;
+  _renderCiteModal('Cite an external source — pick which requirements it covers', body, footer);
 }
 
 async function _citeSubmitForm(leafId, systemId) {
@@ -3087,20 +3090,24 @@ async function _loadCascadeVocab() {
 
 async function openCiteVerify(leafId, systemId, systemName) {
   const vocab = await _loadCascadeVocab();
-  // Build optgroup-style event picker grouped by category.
-  let pickerOpts = '<option value="">— add structured event —</option>';
+  // Build optgroup-style event picker grouped by category. Category
+  // slugs + event slugs both humanized; the option value stays the
+  // machine event_type for exact backend match.
+  let pickerOpts = '<option value="">— add a detailed event —</option>';
   for (const [cat, evs] of Object.entries(vocab.vocabulary || {})) {
-    pickerOpts += `<optgroup label="${cat}">`;
+    const catLabel = String(cat).replace(/_/g, ' ');
+    pickerOpts += `<optgroup label="${catLabel}">`;
     for (const ev of evs) {
-      pickerOpts += `<option value="${ev.event_type}">${ev.event_type} — ${ev.title.replace(/"/g,'&quot;').replace(/</g,'&lt;')}</option>`;
+      const evLabel = (ev.title || ev.event_type).replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/_/g, ' ');
+      pickerOpts += `<option value="${ev.event_type}">${evLabel}</option>`;
     }
     pickerOpts += '</optgroup>';
   }
   const body = `
     <div style="font-size:12px;color:#5C5A4F;margin-bottom:10px">
-      Verifying <strong>${systemName.replace(/</g,'&lt;')}</strong> as source for this leaf.
-      Describe what changed since last verification — this is the audit-grade
-      payload, not a rubber-stamp.
+      Verifying <strong>${systemName.replace(/</g,'&lt;')}</strong> as the source for this control.
+      Describe what changed since your last check — this is the
+      auditor-grade record, not a rubber-stamp.
     </div>
     <div style="margin-bottom:10px">
       <label style="font-size:11px;color:#5C5A4F;display:block;margin-bottom:2px">
@@ -3111,7 +3118,7 @@ async function openCiteVerify(leafId, systemId, systemName) {
     </div>
     <div style="margin-bottom:10px;padding:8px 10px;border:1px dashed #E8E5DA;border-radius:4px;background:#FAF8F2">
       <div style="font-size:11px;color:#5C5A4F;margin-bottom:6px">
-        <strong>Structured events</strong> (optional) — quantified changes the cascade engine can act on.
+        <strong>Detailed events</strong> (optional) — quantified changes we can act on for you (e.g. trigger follow-up reviews).
       </div>
       <div id="cite-verify-events-list" style="margin-bottom:6px"></div>
       <div style="display:flex;gap:6px;align-items:center">
@@ -3130,7 +3137,7 @@ async function openCiteVerify(leafId, systemId, systemName) {
   const footer = `
     <button onclick="_citeModalCloser()" style="font-size:11px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:4px;cursor:pointer;font-family:inherit">Cancel</button>
     <button class="btn-ask" onclick="_citeSubmitVerify('${leafId.replace(/'/g, "\\'")}','${systemId}')" style="font-size:11px;padding:6px 12px"><i class="ti ti-check"></i> Confirm verification</button>`;
-  _renderCiteModal(`Verify cite — ${systemName}`, body, footer);
+  _renderCiteModal(`Verify ${systemName}`, body, footer);
   window._citeVerifyEvents = [];
   _citeRenderEventList();
 }
@@ -3164,7 +3171,7 @@ function _citeRenderEventList() {
   }
   list.innerHTML = evs.map((e, i) =>
     `<div style="display:flex;align-items:center;gap:8px;padding:4px 6px;background:#fff;border:1px solid #E8E5DA;border-radius:3px;margin-bottom:3px;font-size:11px">
-       <span style="font-family:monospace;color:#3A382E">${e.event_type.replace(/</g,'&lt;')}</span>
+       <span style="color:#3A382E">${humanizeSlug(e.event_type).replace(/</g,'&lt;')}</span>
        <span style="color:#5C5A4F">× ${e.count}</span>
        <button onclick="_citeRemoveEvent(${i})" style="margin-left:auto;font-size:10px;padding:1px 6px;background:#fff;color:#9C2E2E;border:1px solid #E8E5DA;border-radius:3px;cursor:pointer;font-family:inherit">remove</button>
      </div>`
@@ -3575,7 +3582,7 @@ function configureActionPanel(kind) {
   document.getElementById('tab-confirm').textContent = kind==='s1' ? 'Approve evidence' : 'Approve verdict';
   document.getElementById('tab-override').textContent = 'Reject';
   document.getElementById('btn-confirm').innerHTML = '<i class="ti ti-check"></i> ' +
-    (kind==='s1' ? 'Approve all pending findings' : 'Apply engine verdict');
+    (kind==='s1' ? 'Approve all pending findings' : 'Accept posture proposal');
   // Approve panel: hide the legacy "Reason (optional)" textarea — neither
   // Stage-1 nor Stage-2 approve takes a reason field today.
   document.getElementById('confirm-reason').parentElement.style.display = 'none';
@@ -3621,15 +3628,15 @@ async function doConfirm() {
       toast(`✓ ${selected.control_ref} evidence approved (${ids.length} finding${ids.length!==1?'s':''})`);
     } else {
       await api(`/api/v1/stage2/${encodeURIComponent(selected.control_ref)}/approve`, {method:'POST'});
-      toast(`✓ ${selected.control_ref} engine verdict applied`);
+      toast(`✓ ${selected.control_ref} posture proposal accepted`);
     }
     closeDetail();
     await loadQueue();
-  } catch(e) { toast(`Error: ${e.message}`); }
+  } catch(e) { toastError(selected?.kind==='s1' ? 'approving these findings' : 'accepting the posture proposal', e); }
   finally {
     btn.disabled = false;
     btn.innerHTML = '<i class="ti ti-check"></i> ' +
-      (selected?.kind==='s1' ? 'Approve all pending findings' : 'Apply engine verdict');
+      (selected?.kind==='s1' ? 'Approve all pending findings' : 'Accept posture proposal');
   }
 }
 
@@ -3649,11 +3656,11 @@ async function doOverride() {
       await api(`/api/v1/stage2/${encodeURIComponent(selected.control_ref)}/reject`, {
         method:'POST', body:JSON.stringify({rationale})
       });
-      toast(`✓ ${selected.control_ref} engine verdict rejected`);
+      toast(`✓ ${selected.control_ref} posture proposal rejected`);
     }
     closeDetail();
     await loadQueue();
-  } catch(e) { toast(`Error: ${e.message}`); }
+  } catch(e) { toastError(selected?.kind==='s1' ? 'rejecting these findings' : 'rejecting the posture proposal', e); }
 }
 
 // ── Markdown rendering ──
@@ -4294,6 +4301,26 @@ function toast(msg) {
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+// Surface a caught-exception error to the tenant. If the raw
+// message looks like a stack-adjacent shape (Python-style
+// ExceptionName, Traceback, HTTP status prefix) fall back to a
+// short generic apology. `fallback` names the operation so the
+// tenant knows what didn't happen ("saving your changes",
+// "downloading the file").
+function toastError(fallback, err) {
+  const raw = String((err && err.message) || err || '');
+  const looksTechnical =
+    /^\s*[A-Z][a-zA-Z_]*(Error|Exception)\b/.test(raw) ||
+    /^Traceback/.test(raw) ||
+    /^HTTP\s+\d{3}/i.test(raw) ||
+    /^\d{3}\s/.test(raw) ||
+    /^<class '/.test(raw);
+  const msg = (!raw || looksTechnical)
+    ? `Sorry — ${fallback} didn't go through. Please try again.`
+    : raw;
+  toast(msg);
 }
 
 connect();
