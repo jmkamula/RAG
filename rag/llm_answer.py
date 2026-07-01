@@ -1763,7 +1763,7 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             checklist_lines.append(
                 f"\n{ctx.control_ref}: {ctx.title}"
             )
-            checklist_lines.append(f"Type: {ctx.evidence_type}")
+            checklist_lines.append(f"Type: {(ctx.evidence_type or '').replace('_', ' ')}")
             checklist_lines.append(f"Purpose: {ctx.description}")
 
             if ctx.has_document_uploaded:

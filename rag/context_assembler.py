@@ -25,6 +25,17 @@ from rag.classifier     import QueryIntent, QuestionType, TenantProfile
 from rag.graph_expander import ExpandedContext, ExpandedNode, CrossFrameworkEdge
 
 
+def _humanize_slug(s: str) -> str:
+    """snake_case slug → human-readable form for LLM prompt context.
+
+    We spell out the slug so the LLM doesn't echo the underscore form
+    ('review_record') back into a user-facing answer. Mid-sentence
+    lowercase — the LLM decides case in prose."""
+    if not s:
+        return ""
+    return s.replace("_", " ")
+
+
 # ── Token budgets per question type ───────────────────────────────────────────
 # Approximate token counts for context assembly.
 # Primary nodes use ~150-250 tokens each (full content).
@@ -338,7 +349,7 @@ class ContextAssembler:
                 continue
 
             lines.append(f"\n── {ctx.control_ref}: {ctx.title}")
-            lines.append(f"   Type: {ctx.evidence_type}  |  Trigger: {ctx.trigger_type}")
+            lines.append(f"   Type: {_humanize_slug(ctx.evidence_type)}  |  Trigger: {_humanize_slug(ctx.trigger_type)}")
 
             if ctx.has_document_uploaded:
                 # Show evaluation results
