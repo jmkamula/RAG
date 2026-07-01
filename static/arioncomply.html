@@ -353,7 +353,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="main-title">Compliance chat</div>
         <div class="main-sub">Ask questions about your compliance posture</div>
       </div>
-      <button class="btn-sm btn-outline" onclick="clearChat()">
+      <button class="btn-sm btn-outline" onclick="clearChat()"
+              title="Start a new conversation. Follow-up questions in this chat won't have context from the current thread anymore.">
         <i class="ti ti-trash" aria-hidden="true"></i> Clear
       </button>
     </div>
@@ -401,6 +402,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <div class="chat-empty" id="chat-empty">
             <i class="ti ti-message-2" aria-hidden="true"></i>
             <p>Ask a compliance question</p>
+            <p style="font-size:11px;color:#9C9A8E;font-style:italic;margin-top:-4px">
+              Follow-up questions in this conversation carry context — ask
+              "why?" or "what about X?" and I'll know what you meant.
+            </p>
           </div>
         </div>
         <div class="chat-suggestions" id="chat-suggestions">
@@ -455,7 +460,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div style="display:flex;gap:8px;align-items:center">
         <input id="cascade-filter-control" placeholder="Control e.g. A.5.18"
                style="font-size:12px;padding:4px 8px;background:#fff;border:1px solid #C8C5B8;border-radius:4px;color:#3A382E;font-family:inherit;width:140px">
-        <input id="cascade-filter-event" placeholder="Event e.g. personnel_offboarded"
+        <input id="cascade-filter-event" placeholder="Event e.g. personnel offboarded"
                style="font-size:12px;padding:4px 8px;background:#fff;border:1px solid #C8C5B8;border-radius:4px;color:#3A382E;font-family:inherit;width:220px">
         <select id="cascade-filter-days" style="font-size:12px;padding:4px 8px;background:#fff;border:1px solid #C8C5B8;border-radius:4px;color:#3A382E;font-family:inherit">
           <option value="7">last 7d</option>
@@ -479,7 +484,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="main-toolbar" id="toolbar-inbox" style="display:none">
       <div>
         <div class="main-title">Notifications</div>
-        <div class="main-sub">Cascade events that need your attention</div>
+        <div class="main-sub">Recent events that need your attention</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <select id="inbox-filter-status" onchange="loadInbox()" style="font-size:12px;padding:4px 8px;background:#fff;border:1px solid #C8C5B8;border-radius:4px;color:#3A382E;font-family:inherit">
@@ -739,9 +744,15 @@ async function _notifAct(id, action) {
       headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
       body:    JSON.stringify({action: action}),
     });
-    if (!r.ok) { alert(`Failed: ${r.status}`); return; }
+    if (!r.ok) {
+      const verb = action === 'read' ? 'mark this notification read' : 'dismiss this notification';
+      alert(`Couldn't ${verb}. Please try again.`);
+      return;
+    }
     loadInbox();
-  } catch (e) { alert(`Error: ${e.message}`); }
+  } catch (e) {
+    alert("Couldn't update the notification — check your connection and try again.");
+  }
 }
 
 async function markAllNotificationsRead() {
@@ -750,9 +761,11 @@ async function markAllNotificationsRead() {
       method:  'POST',
       headers: {'X-API-Key': API_KEY},
     });
-    if (!r.ok) { alert(`Failed: ${r.status}`); return; }
+    if (!r.ok) { alert("Couldn't mark all notifications read. Please try again."); return; }
     loadInbox();
-  } catch (e) { alert(`Error: ${e.message}`); }
+  } catch (e) {
+    alert("Couldn't mark all notifications read — check your connection and try again.");
+  }
 }
 
 // ── Cascade timeline (S3q) ────────────────────────────────────────────
@@ -1637,8 +1650,8 @@ function renderDashboard(d, freshness, implications, followups, kpis) {
         const cls = _FINDING_CLASS[c.finding] || 'f-NotAssessed';
         const cp = c.cascade_pressure;
         let cpCls = '', cpTip = '';
-        if (cp && cp.overdue > 0) { cpCls = ' cascade-overdue'; cpTip = ` · ${cp.overdue} overdue cascade implication${cp.overdue>1?'s':''}`; }
-        else if (cp && cp.pending > 0) { cpCls = ' cascade-pending'; cpTip = ` · ${cp.pending} pending cascade implication${cp.pending>1?'s':''}`; }
+        if (cp && cp.overdue > 0) { cpCls = ' cascade-overdue'; cpTip = ` · ${cp.overdue} overdue follow-up${cp.overdue>1?'s':''}`; }
+        else if (cp && cp.pending > 0) { cpCls = ' cascade-pending'; cpTip = ` · ${cp.pending} pending follow-up${cp.pending>1?'s':''}`; }
         const tip = `${c.control_ref} — ${c.finding}${cpTip}`;
         // Escape JSON for an HTML single-quoted onclick attribute. Order
         // matters: encode `"` first (becomes &quot;) then `'` (becomes
@@ -1711,6 +1724,47 @@ function humanizeNotifKind(k) {
 function humanizeSlug(s) {
   if (!s) return '';
   return String(s).replace(/_/g, ' ');
+}
+
+// Turn an engine reason string into the same tenant-friendly form
+// _prettify_reason() emits server-side (rag/arion_graph.py). Handles
+// the shapes the engine composes:
+//   'ALL: 0/4 children satisfied; missing artifacts of type: a, b;
+//    partial: leaf_role (X/Y — missing: ...)'
+// Snake_case role tokens are space-separated; count phrasing is
+// rewritten to 'X of Y requirements met'; 'missing artifacts of
+// type' becomes 'still needed'.
+function humanizeEngineReason(reason) {
+  if (!reason) return '';
+  const segments = String(reason).split(';').map(s => s.trim()).filter(Boolean);
+  const out = [];
+  for (const seg of segments) {
+    // 'ALL: X/Y children satisfied' / 'X/Y children satisfied'
+    const m1 = /^(?:ALL:\s*)?(\d+)\s*\/\s*(\d+)\s+children\s+satisfied\s*(.*)$/i.exec(seg);
+    if (m1) {
+      const [_, sat, total, tail] = m1;
+      out.push(`${sat} of ${total} requirements met${tail ? ' ' + tail : ''}`);
+      continue;
+    }
+    // 'missing artifacts of type: a, b, c'
+    const m2 = /^missing\s+artifacts\s+of\s+type:\s*(.+)$/i.exec(seg);
+    if (m2) {
+      const items = m2[1].split(',').map(s => s.trim()).filter(Boolean)
+                          .map(s => s.replace(/_/g, ' '));
+      out.push('still needed: ' + items.join(', '));
+      continue;
+    }
+    // 'partial: leaf_role (X/Y — missing: ...)' — snake_case tokens spaced.
+    const m3 = /^partial:\s*(.+)$/i.exec(seg);
+    if (m3) {
+      const spaced = m3[1].replace(/\b([a-z][a-z0-9_]+_[a-z0-9_]+)\b/g,
+                                    (mm) => mm.replace(/_/g, ' '));
+      out.push('partial: ' + spaced);
+      continue;
+    }
+    out.push(seg);
+  }
+  return out.join('; ');
 }
 
 async function selectHeatCell(c, ev) {
@@ -2093,7 +2147,7 @@ function renderStage1(controls, total) {
         <div class="qcard-top">
           <div>
             <div class="qcard-ref">${c.control_ref}</div>
-            <div class="qcard-std">${c.standard_id}</div>
+            <div class="qcard-std">${humanizeStandardId(c.standard_id)}</div>
           </div>
           <div class="qcard-pills">
             <span class="pill p-src">${c.pending_count} pending</span>
@@ -2127,7 +2181,7 @@ function renderStage2(proposals, total) {
         <div class="qcard-top">
           <div>
             <div class="qcard-ref">${p.control_ref}</div>
-            <div class="qcard-std">${p.standard_id}</div>
+            <div class="qcard-std">${humanizeStandardId(p.standard_id)}</div>
           </div>
           <div class="qcard-pills">
             <span class="pill p-src">${live||'—'}</span>
@@ -2135,7 +2189,7 @@ function renderStage2(proposals, total) {
             ${pill(proposed)}
           </div>
         </div>
-        <div class="qcard-gap">${p.reason || '—'}</div>
+        <div class="qcard-gap">${humanizeEngineReason(p.reason) || '—'}</div>
       </div>`;
   }
   html += '</div>';
@@ -2148,7 +2202,7 @@ async function selectStage1(c, ev) {
   document.getElementById('detail-content').style.display = 'flex';
 
   document.getElementById('dp-ref').textContent = c.control_ref;
-  document.getElementById('dp-std').textContent = c.standard_id;
+  document.getElementById('dp-std').textContent = humanizeStandardId(c.standard_id);
   document.getElementById('dp-finding').innerHTML =
     `<span class="pill p-src">${c.pending_count} pending finding(s)</span>`;
   document.getElementById('dp-sys-wrap').style.display = 'none';
@@ -2177,10 +2231,11 @@ async function selectStage1(c, ev) {
     // user doesn't have to guess what "partial / medium" means.
     let h = `<div style="font-size:10px;color:#9C9A8E;margin-bottom:6px;line-height:1.4">
       <strong>Evidence</strong> = how well the document covers this control
-      (missing / partial / present). <strong>Confidence</strong> = the
-      extractor's certainty in that assessment (low / medium / high). When
-      one source feeds multiple leaves, the same column may appear under
-      each — the leaf header explains why.
+      (missing / partial / present). <strong>Confidence</strong> = our
+      certainty in that assessment (low / medium / high). One source can
+      cover several parts of a control — the same column may appear under
+      more than one artifact heading, and the heading explains which
+      requirement it's satisfying there.
     </div>`;
 
     // Group findings by (sheet_name OR '(non-workbook)', leaf_id OR '(unbound)').
@@ -2353,7 +2408,7 @@ function renderEvidenceClassesPanel(b) {
       // package is all ✗ and duplicates the starter template's message.
       if ((leaf.musts_bound || 0) > 0) {
         tplBadge += `<button onclick="downloadEvidencePackage('${attr(leaf.leaf_id)}')"
-                              title="Download Evidence Package (per-MUST coverage with source excerpts)"
+                              title="Download a coverage summary — per-element status with source excerpts, ready to hand to an auditor."
                               style="${btnStyle};background:#F2F5EE;border-color:#C8D8C8;color:#2D5F2D">
                        📦 Evidence Package
                      </button>`;
@@ -3104,7 +3159,7 @@ function _citeRenderEventList() {
   if (!list) return;
   const evs = window._citeVerifyEvents || [];
   if (!evs.length) {
-    list.innerHTML = '<div style="font-size:11px;color:#9A9785;font-style:italic">No structured events added.</div>';
+    list.innerHTML = '<div style="font-size:11px;color:#9A9785;font-style:italic">No events recorded yet — the free-text summary above is enough on its own.</div>';
     return;
   }
   list.innerHTML = evs.map((e, i) =>
@@ -3227,7 +3282,7 @@ function renderAdvisoryPanel(adv) {
       </div>
       <div style="display:flex;gap:6px">
         <button onclick="downloadAdvisoryDoc()"
-                title="Download a markdown template combining your filled MUSTs (auditor-readable)"
+                title="Download a Markdown draft that folds in what you've filled in — auditor-readable and safe to hand over."
                 style="font-size:11px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #E8E5DA;
                        border-radius:4px;cursor:pointer;font-family:inherit">
           Download .md
@@ -3465,12 +3520,12 @@ async function selectStage2(p, ev) {
   document.getElementById('detail-content').style.display = 'flex';
 
   document.getElementById('dp-ref').textContent = p.control_ref;
-  document.getElementById('dp-std').textContent = p.standard_id;
+  document.getElementById('dp-std').textContent = humanizeStandardId(p.standard_id);
   document.getElementById('dp-finding').innerHTML =
     `<span class="pill p-src">${p.live_finding||'—'}</span> → ${pill(p.proposed_finding)}`;
   document.getElementById('dp-sys-wrap').style.display = 'none';
   document.getElementById('dp-gap').innerHTML =
-    `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${(p.reason||'(no reason snapshotted)').replace(/</g,'&lt;')}</div>
+    `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${humanizeEngineReason(p.reason||'(no reason snapshotted)').replace(/</g,'&lt;')}</div>
      <div style="margin-top:10px"><i class="ti ti-loader-2"></i> Loading derivation…</div>`;
   document.getElementById('dp-meta').textContent =
     `Proposed at: ${p.proposed_at ? new Date(p.proposed_at).toLocaleString() : '—'}`;
@@ -3487,7 +3542,7 @@ async function selectStage2(p, ev) {
     if (!v) {
       // Engine couldn't be re-evaluated (Neo4j down?); show snapshot reason only.
       document.getElementById('dp-gap').innerHTML =
-        `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${esc(p.reason||'(engine unavailable)')}</div>`;
+        `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${esc(humanizeEngineReason(p.reason||'(engine unavailable)'))}</div>`;
       return;
     }
     document.getElementById('dp-gap').innerHTML = renderVerdictTree(v, d.standard_id || '');
@@ -3738,7 +3793,10 @@ async function sendChat() {
             finalLatency = evt.latency_ms || 0;
             finalType    = evt.answer_type || 'assistant';
           } else if (evt.type === 'error') {
-            fullText = 'Error: ' + evt.text;
+            // Server-side error text is already tenant-facing (see the
+            // /api/v1/chat/stream error path). Present verbatim, without
+            // a redundant 'Error:' prefix.
+            fullText = evt.text || 'Something went wrong while composing the answer. Please try again in a moment.';
           }
         } catch(e) {}
       }
@@ -3751,7 +3809,11 @@ async function sendChat() {
 
   } catch(e) {
     bubble.remove();
-    appendMsg('assistant', 'Error: ' + e.message, [], 0);
+    // Network / stream drop, not a compose-time error. Keep it short —
+    // the browser console has the details for developers.
+    appendMsg('assistant',
+      'Sorry, the connection dropped before I could finish. Please try again.',
+      [], 0);
   } finally {
     btn.disabled = false;
     input.focus();
@@ -3775,11 +3837,18 @@ function sendClarification(option) {
 
 function clearChat() {
   chatHistory = [];
+  // New session id so the backend starts a fresh conversation thread;
+  // follow-up questions after this point won't inherit any context from
+  // the prior chat.
   window._sessionId = Date.now().toString(36);
   document.getElementById('chat-messages').innerHTML = `
     <div class="chat-empty" id="chat-empty">
       <i class="ti ti-message-2" aria-hidden="true"></i>
       <p>Ask a compliance question</p>
+      <p style="font-size:11px;color:#9C9A8E;font-style:italic;margin-top:-4px">
+        Follow-up questions in this conversation carry context — ask
+        "why?" or "what about X?" and I'll know what you meant.
+      </p>
     </div>`;
   document.getElementById('chat-suggestions').style.display = '';
 }
@@ -3838,16 +3907,16 @@ function addDuplicateNotice(card, detail) {
     <div class="sum-item" style="flex:1;color:#8a8780;font-size:10.5px;line-height:1.4;margin-top:6px">
       The file's bytes match exactly. If you intended a different version,
       please verify the file you selected — even a small content change
-      produces a different file. If the extractor has improved since this
-      file was first processed and you want to re-run it with the latest
-      logic, use the action below.
+      produces a different file. If our extraction has improved since this
+      file was first processed and you want to re-run it, use the action
+      below.
     </div>
     <div class="sum-item" style="flex:1;margin-top:8px">
       <button class="btn-reextract" data-upload-id="${escHtml(canonicalId)}"
               style="font-size:11px;padding:5px 10px;border-radius:5px;
                      border:1px solid #d4d2cb;background:#fff;color:#534AB7;
                      cursor:pointer">
-        <i class="ti ti-refresh"></i> Re-extract with latest engine
+        <i class="ti ti-refresh"></i> Re-run extraction
       </button>
       <span class="reextract-state" style="margin-left:8px;font-size:10.5px;color:#8a8780"></span>
     </div>`;
@@ -3862,12 +3931,12 @@ async function triggerReExtract(btn) {
   const uploadId = btn.dataset.uploadId;
   const stateEl = btn.parentElement.querySelector('.reextract-state');
   if (!uploadId) {
-    if (stateEl) stateEl.textContent = 'No canonical upload id available.';
+    if (stateEl) stateEl.textContent = "Couldn't identify the original upload — please refresh and try again.";
     return;
   }
   btn.disabled = true;
   btn.style.opacity = 0.6;
-  if (stateEl) stateEl.textContent = 'Queuing re-extraction…';
+  if (stateEl) stateEl.textContent = 'Queuing…';
   try {
     const r = await fetch(`/api/v1/admin/uploads/${uploadId}/reextract`, {
       method: 'POST',
@@ -3877,11 +3946,19 @@ async function triggerReExtract(btn) {
       const e = await r.json().catch(()=>({detail:r.statusText}));
       throw new Error(typeof e.detail === 'string' ? e.detail : (e.detail && e.detail.message) || r.statusText);
     }
-    if (stateEl) stateEl.textContent = 'Re-extraction queued — refresh in a few seconds to see updated findings.';
+    if (stateEl) stateEl.textContent = 'Queued — refresh in a few seconds to see updated findings.';
   } catch (err) {
     btn.disabled = false;
     btn.style.opacity = 1;
-    if (stateEl) stateEl.textContent = `Failed: ${err.message}`;
+    // The message from the server may or may not be tenant-facing; if
+    // it's a stack-adjacent shape, fall back to a plain sentence.
+    const raw = String(err.message || '');
+    const looksTechnical = /^\s*[A-Z][a-zA-Z_]*(Error|Exception)\b|Traceback|<class '/.test(raw);
+    if (stateEl) {
+      stateEl.textContent = looksTechnical
+        ? "Sorry, that didn't go through — please try again."
+        : (raw || "Sorry, that didn't go through — please try again.");
+    }
   }
 }
 
@@ -3927,7 +4004,7 @@ function addUploadCard(id, name, size) {
       ${['read','enrich','extract','write','xfw'].map(s=>`
         <div class="trace-stage" id="stage_${id}_${s}">
           <span class="stage-dot stage-pending"></span>
-          <span class="stage-name">${s}</span>
+          <span class="stage-name">${humanizeStageName(s)}</span>
           <span class="stage-detail">—</span>
           <span class="stage-ms"></span>
         </div>`).join('')}
@@ -3978,15 +4055,42 @@ function fillTrace(cardId, d) {
   });
 }
 
+// Pipeline stage keys that map to friendlier labels shown on the
+// upload trace. Keys are the internal stage ids returned by the
+// intake pipeline; labels are what the tenant sees in the row.
+const _STAGE_LABEL = {
+  read:    'read',
+  enrich:  'classify',
+  extract: 'extract findings',
+  write:   'post to posture',
+  xfw:     'cross-framework',
+};
+function humanizeStageName(s) {
+  return _STAGE_LABEL[s] || String(s || '').replace(/_/g, ' ');
+}
+
 function stageDetail(stage, d) {
   if (stage==='read') return d.token_estimate ? `~${d.token_estimate} tokens` : '—';
-  if (stage==='enrich') return d.doc_type || '—';
+  if (stage==='enrich') {
+    // doc_type is a curated slug from the enricher (policy /
+    // risk_register / procedure / other …). Snake→space for
+    // tenant reading.
+    return d.doc_type ? String(d.doc_type).replace(/_/g, ' ') : '—';
+  }
   if (stage==='extract') return d.findings_written!=null ? `${d.findings_written} findings` : '—';
   if (stage==='write') return d.posture_created!=null ?
     `+${d.posture_created} created, ${d.posture_updated||0} updated, ${d.posture_skipped||0} skipped` : '—';
   if (stage==='xfw') {
     if (d.proposals_written==null) return '—';
-    const targets = (d.xfw_targets||[]).map(s=>s.split(':')[0]).join(', ');
+    // xfw_targets carry full 'ISO27001:2022:A.5.15' machine refs.
+    // Show a de-duped list of the standard-family prefixes in tenant
+    // form ('ISO 27001, GDPR') rather than 'ISO27001, GDPR:2016'.
+    const stds = new Set();
+    for (const t of (d.xfw_targets||[])) {
+      const fam = String(t || '').split(':')[0];
+      stds.add(humanizeStandardId(fam));
+    }
+    const targets = Array.from(stds).join(', ');
     return targets
       ? `${d.proposals_written} proposals → ${targets}`
       : `${d.proposals_written} proposals`;
@@ -4149,14 +4253,33 @@ async function _doFindingAction(finding_ids, action, rationale, rows) {
   }
 }
 
+// Backend error_type values are a mix of Python exception class names
+// (FileNotFound, DocumentTooLarge) and lowercase slugs (markdown_dup).
+// Neither reads well as a status pill. Map the ones we know; humanize
+// the rest.
+const _ERROR_LABEL = {
+  FileNotFound:      'File not found',
+  DocumentTooLarge:  'File too large',
+  markdown_dup:      'Duplicate markdown',
+  UnsupportedFormat: 'Unsupported format',
+  ExtractionTimeout: 'Extraction timed out',
+};
+function humanizeErrorType(t) {
+  if (!t) return 'Failed';
+  return _ERROR_LABEL[t] || String(t).replace(/_/g, ' ');
+}
+
 function updateCardStatus(card, status, detail='') {
   const el = card.querySelector('.upload-status');
   el.className = `upload-status us-${status}`;
   const labels = {queued:'Queued',processing:'Processing...',completed:'Complete',failed:'Failed',duplicate:'Duplicate'};
   if (status === 'duplicate') {
     el.textContent = 'Duplicate';
+  } else if (status === 'failed' && detail) {
+    const nice = humanizeErrorType(detail);
+    el.textContent = `Failed: ${nice.slice(0, 40)}`;
   } else {
-    el.textContent = detail ? `Failed: ${detail.slice(0,30)}` : labels[status];
+    el.textContent = labels[status];
   }
 }
 

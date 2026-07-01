@@ -670,9 +670,10 @@ def _render_advisory_markdown(data: dict) -> str:
     n_partial   = data["n_partial"]
 
     header_line = (
-        f"↳ **How to advance {control_ref}** "
+        f"↳ **How to strengthen {control_ref}** "
         f"(currently {posture}; "
-        f"{n_satisfied} of {n_leaves} leaves satisfied, {n_partial} partial)"
+        f"{n_satisfied} of {n_leaves} required artifacts in place, "
+        f"{n_partial} in progress)"
     )
 
     leaf_sections: list[str] = []

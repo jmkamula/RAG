@@ -462,7 +462,11 @@ async def chat(
     Returns a grounded answer with control references.
     """
     if not request.app.state.arion_graph:
-        raise HTTPException(503, "RAG pipeline not available")
+        raise HTTPException(
+            503,
+            "The answer service is unavailable right now. Please try "
+            "again in a moment."
+        )
 
     from rag.arion_state import make_initial_state
     from rag.tenant_context import TenantContextCache
@@ -526,7 +530,13 @@ async def chat(
         )
     except Exception as e:
         logger.error(f"Chat error: {e}", exc_info=True)
-        raise HTTPException(500, f"Pipeline error: {e}")
+        # Full traceback is in the server log; tenant-facing text is a
+        # short apology rather than a raw stack-adjacent message.
+        raise HTTPException(
+            500,
+            "Something went wrong while composing your answer. Please "
+            "try again in a moment."
+        )
 
 
 # =============================================================================
@@ -553,7 +563,11 @@ async def chat_stream(
     import json as _json
 
     if not request.app.state.arion_graph:
-        raise HTTPException(503, "RAG pipeline not available")
+        raise HTTPException(
+            503,
+            "The answer service is unavailable right now. Please try "
+            "again in a moment."
+        )
 
     t_start    = time.time()
     sid        = session_id or f"api_{uuid.uuid4().hex[:8]}"
@@ -597,10 +611,10 @@ async def chat_stream(
                 name = event.get("name", "")
 
                 if kind == "on_chain_start" and name == "classify":
-                    yield sse({"type": "status", "text": "Classifying intent..."})
+                    yield sse({"type": "status", "text": "Understanding your question..."})
 
                 elif kind == "on_chain_start" and name == "retrieve":
-                    yield sse({"type": "status", "text": "Retrieving compliance context..."})
+                    yield sse({"type": "status", "text": "Looking up the relevant compliance material..."})
 
                 elif kind == "on_chain_end" and not answer_text:
                     # Handles retrieve, clarify, and all short-circuit paths
@@ -639,7 +653,11 @@ async def chat_stream(
 
         except Exception as e:
             logger.error(f"Stream error: {e}", exc_info=True)
-            yield sse({"type": "error", "text": str(e)})
+            # Full traceback is in the server log; tenant-facing text is
+            # a short apology rather than a raw stack-adjacent message.
+            yield sse({"type": "error",
+                       "text": "Something went wrong while composing "
+                               "the answer. Please try again in a moment."})
 
 
     return StreamingResponse(
@@ -1463,7 +1481,10 @@ async def override_posture(
                   body.finding, body.gap_description))
             row = cur.fetchone()
             if not row:
-                raise HTTPException(404, f"Posture control {posture_id} not found")
+                raise HTTPException(
+                    404,
+                    "We couldn't find that posture entry for your tenant."
+                )
         conn.commit()
 
         logger.info(
@@ -1768,7 +1789,10 @@ async def findings_approve(
     key_info: APIKeyInfo = Depends(require_scope("hitl")),
 ):
     if not body.finding_ids:
-        raise HTTPException(400, "finding_ids is required")
+        raise HTTPException(
+            400,
+            "Please select at least one finding to act on."
+        )
     from rag.posture.stage1_review_chat import approve_findings_by_ids
 
     pool = request.app.state.pg_pool
@@ -1800,9 +1824,16 @@ async def findings_reject(
     key_info: APIKeyInfo = Depends(require_scope("hitl")),
 ):
     if not body.finding_ids:
-        raise HTTPException(400, "finding_ids is required")
+        raise HTTPException(
+            400,
+            "Please select at least one finding to act on."
+        )
     if not body.rationale or not body.rationale.strip():
-        raise HTTPException(400, "rationale is required for reject")
+        raise HTTPException(
+            400,
+            "Please explain why you're rejecting — the reason is recorded "
+            "for the audit trail."
+        )
     from rag.posture.stage1_review_chat import reject_findings_by_ids
 
     pool = request.app.state.pg_pool
@@ -1948,7 +1979,10 @@ async def stage2_proposal_detail(
         set_session(conn, key_info.tenant_id)
         proposal = get_proposal_for_control(conn, key_info.tenant_id, control_ref)
         if proposal is None:
-            raise HTTPException(404, f"No posture_controls row for {control_ref}")
+            raise HTTPException(
+                404,
+                f"We don't have a posture entry for {control_ref} yet."
+            )
 
         cid = f"{proposal['standard_id']}:{control_ref}"
         verdict = None
@@ -2271,10 +2305,21 @@ async def stage2_approve(
             return result
         reason = result.get("reason", "unknown")
         if reason in ("no_posture_row", "no_proposal"):
-            raise HTTPException(404, f"No pending engine proposal for {control_ref}")
+            raise HTTPException(
+                404,
+                f"There's no pending posture proposal for {control_ref} "
+                f"— it may have already been approved or rejected."
+            )
         if reason == "already_approved":
-            raise HTTPException(409, f"Engine proposal for {control_ref} already approved")
-        raise HTTPException(500, result.get("error", "approve failed"))
+            raise HTTPException(
+                409,
+                f"The posture proposal for {control_ref} has already "
+                f"been approved."
+            )
+        raise HTTPException(
+            500,
+            "Something went wrong while approving that proposal. Please try again."
+        )
     finally:
         pool.putconn(conn)
 
@@ -2289,7 +2334,11 @@ async def stage2_reject(
     """Reject the engine verdict for one control. Sets status to 'rejected';
     posture_controls.finding is NOT touched."""
     if not body.rationale or not body.rationale.strip():
-        raise HTTPException(400, "rationale is required for reject")
+        raise HTTPException(
+            400,
+            "Please explain why you're rejecting — the reason is recorded "
+            "for the audit trail."
+        )
     from rag.posture.stage2_approval_chat import reject_engine_proposal
 
     pool = request.app.state.pg_pool
@@ -2307,8 +2356,15 @@ async def stage2_reject(
             return result
         reason = result.get("reason", "unknown")
         if reason in ("no_posture_row", "no_proposal"):
-            raise HTTPException(404, f"No pending engine proposal for {control_ref}")
-        raise HTTPException(500, result.get("error", "reject failed"))
+            raise HTTPException(
+                404,
+                f"There's no pending posture proposal for {control_ref} "
+                f"— it may have already been approved or rejected."
+            )
+        raise HTTPException(
+            500,
+            "Something went wrong while rejecting that proposal. Please try again."
+        )
     finally:
         pool.putconn(conn)
 
@@ -3324,17 +3380,19 @@ async def admin_reextract_upload(
         pool.putconn(conn)
 
     if not row:
-        raise HTTPException(404, f"upload {upload_id} not found for this tenant")
+        raise HTTPException(404, "We couldn't find that upload for your tenant.")
     existing_id, filename, storage_path, status = row
     if status == "duplicate":
         raise HTTPException(
             400,
-            f"upload is marked duplicate; re-extract the canonical instead",
+            "This entry is a duplicate copy — please re-run extraction on "
+            "the original upload it points to.",
         )
     if not storage_path or not Path(storage_path).exists():
         raise HTTPException(
             404,
-            f"upload file missing at {storage_path or '(no path)'} — cannot re-extract",
+            "The original file for this upload is no longer on disk, so we "
+            "can't re-run extraction. Please upload the file again.",
         )
 
     api_key = os.getenv("ANTHROPIC_API_KEY", "")
@@ -4615,12 +4673,18 @@ async def update_triggered_implication(
     """
     new_status = payload.get("status")
     if new_status not in ("satisfied", "dismissed"):
-        raise HTTPException(400, "status must be 'satisfied' or 'dismissed'")
+        raise HTTPException(
+            400,
+            "Please mark the follow-up as either satisfied or dismissed."
+        )
 
     dismissed_reason = (payload.get("dismissed_reason") or "").strip() or None
     if new_status == "dismissed" and not dismissed_reason:
-        raise HTTPException(400,
-            "dismissed_reason is required when dismissing — auditor-grade explanation")
+        raise HTTPException(
+            400,
+            "Please add an auditor-grade explanation of why you're "
+            "dismissing this follow-up."
+        )
 
     ev_kind = payload.get("resolved_evidence_kind")
     ev_id   = payload.get("resolved_evidence_id")
@@ -4977,10 +5041,18 @@ async def cascade_timeline(
 
     Filters:
       control_ref: restrict to a single control's events
-      event_type:  restrict to a single source_event_type
+      event_type:  restrict to a single source_event_type. Tenants can
+                   type either the natural form ("personnel offboarded")
+                   or the machine slug ("personnel_offboarded"); the
+                   filter normalises to underscore form for exact match.
       since_days:  rolling window (default 30)
       limit:       hard cap on returned rows
     """
+    # Normalise event_type filter so the UI placeholder can show the
+    # natural form without breaking exact-match on the raw slug backing
+    # `structured_events[i].event_type`.
+    if event_type:
+        event_type = event_type.strip().replace(" ", "_").lower()
     pool = request.app.state.pg_pool
     conn = pool.getconn()
     items: list[dict] = []
@@ -5619,19 +5691,39 @@ async def upsert_cascade_override(
     target   = payload.get("target_requirement_id")
     reason   = (payload.get("reason") or "").strip()
     if kind not in ("mute_event", "mute_event_target"):
-        raise HTTPException(400, "override_kind must be 'mute_event' or 'mute_event_target'")
+        raise HTTPException(
+            400,
+            "Please pick either 'Mute this event for one specific control' "
+            "or 'Mute this event across every control it fires on'."
+        )
     if not event_t:
-        raise HTTPException(400, "event_type is required")
+        raise HTTPException(400, "Please pick the event you want to mute.")
     if kind == "mute_event_target" and not target:
-        raise HTTPException(400, "target_requirement_id is required for mute_event_target")
+        raise HTTPException(
+            400,
+            "This scope needs a specific target control (e.g. "
+            "'ISO27001:2022:A.6.4') — please fill it in."
+        )
     if kind == "mute_event" and target:
-        raise HTTPException(400, "target_requirement_id must be empty for mute_event")
+        raise HTTPException(
+            400,
+            "The 'mute across every control' scope doesn't take a target "
+            "control — leave the target field empty or switch scope."
+        )
     if not reason:
-        raise HTTPException(400, "reason is required (auditor-grade)")
+        raise HTTPException(
+            400,
+            "Please add an auditor-grade explanation of why this cascade "
+            "doesn't apply to you."
+        )
     # Validate event_type is known
     from enrichment.events.event_nodes import ALL_EVENTS
     if event_t not in {e.event_type for e in ALL_EVENTS}:
-        raise HTTPException(400, f"unknown event_type: {event_t!r}")
+        raise HTTPException(
+            400,
+            f"We don't recognise the event '{event_t}'. Please pick one "
+            f"from the dropdown."
+        )
 
     pool = request.app.state.pg_pool
     conn = pool.getconn()

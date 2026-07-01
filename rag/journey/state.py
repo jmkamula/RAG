@@ -283,7 +283,8 @@ def _pick_next_actions(
             if ls is None or ls.completion_pct >= 100.0:
                 continue
             out.append(_to_recommendation(ls,
-                why=f"Foundation template — anchor #{_ANCHOR_LEAVES.index(leaf_id) + 1} "
+                why=f"Foundation document — step "
+                    f"{_ANCHOR_LEAVES.index(leaf_id) + 1} "
                     f"in the recommended onboarding sequence."))
             if len(out) >= limit:
                 break
@@ -302,8 +303,9 @@ def _pick_next_actions(
         for ls in candidates[:limit]:
             unsat = ls.must_total - ls.must_satisfied - ls.must_na
             out.append(_to_recommendation(ls,
-                why=f"Operational template — {unsat} MUST item(s) remain. "
-                    f"Smaller templates first builds momentum."))
+                why=f"Operational document — {unsat} required "
+                    f"element{'s' if unsat != 1 else ''} still to "
+                    f"fill in. Smaller documents first build momentum."))
         return out
 
     # phase == 'annual'

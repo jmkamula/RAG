@@ -1317,6 +1317,31 @@ def _count_bullets(text: str) -> int:
     )
 
 
+# Post-polish jargon scrub. The LLM sometimes reintroduces the raw
+# evidence_type / role slug form ('review_record', 'revocation_record')
+# in prose even when the deterministic input used the humanized
+# label ('review record', 'revocation records') — the model pattern-
+# matches on the training-corpus form. Substitute the known slugs back
+# to natural language after compose so the tenant never sees the
+# debug form. Skips URL contexts by requiring word boundaries with no
+# adjacent `/` or `:`.
+def _scrub_jargon_slugs(text: str) -> str:
+    if not text or "_" not in text:
+        return text
+    out = text
+    for slug, label in _ROLE_LABELS.items():
+        if "_" not in slug or slug not in out:
+            continue
+        # Word-boundary substitution guarded against URL / id contexts
+        # (skips '/req:A.5.16:review_record/', 'item:X:review_record').
+        out = re.sub(
+            rf"(?<![A-Za-z0-9_/:]){re.escape(slug)}(?![A-Za-z0-9_/:])",
+            label,
+            out,
+        )
+    return out
+
+
 def polish_short_circuit_answer(
     query:                str,
     deterministic_answer: str,
@@ -1377,7 +1402,10 @@ def polish_short_circuit_answer(
         )
         return deterministic_answer
 
-    return composed
+    # Jargon scrub: substitute raw `_role` slugs the LLM sometimes echoes
+    # ('review_record', 'revocation_record') back to natural language.
+    # Locked in by eval case #200.
+    return _scrub_jargon_slugs(composed)
 
 
 from vector.retriever      import VectorRetriever
