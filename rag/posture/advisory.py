@@ -172,8 +172,41 @@ def _hint_for(evidence_type: str) -> str:
 
 
 def _humanize_evidence_type(et: str) -> str:
-    """Convert evidence_type to display form (underscores → spaces)."""
-    return (et or "").replace("_", " ")
+    """Convert evidence_type slug to display form. Snake_case → Title
+    Case. e.g. 'communication_record' → 'Communication Record',
+    'policy' → 'Policy'. Special-cased acronyms preserved."""
+    if not et:
+        return ""
+    # Common acronyms + already-uppercased words to preserve
+    preserve = {"iso", "gdpr", "dpia", "roi", "sla", "kpi", "cia"}
+    parts = et.replace("_", " ").split()
+    out = []
+    for w in parts:
+        if w.lower() in preserve:
+            out.append(w.upper())
+        else:
+            out.append(w.capitalize())
+    return " ".join(out)
+
+
+def _humanize_leaf_label(leaf) -> str:
+    """Prefer the catalog's authored title; fall back to snake_case-to-title.
+
+    leaf.title is human-friendly ('Information Security Policy (Annex A.5.1)').
+    The fallback strips the parent control_ref suffix when it's tacked on,
+    so we don't render 'Information Security Policy (Annex A.5.1) — Coverage'
+    in a per-leaf row where the control ref already appears in the parent.
+    """
+    if getattr(leaf, "title", None):
+        # Drop trailing " (Annex A.X)" style parenthetical if present
+        t = leaf.title
+        # Common patterns to strip: "(Annex A.5.1)", "(A.5.1)"
+        import re as _re
+        t = _re.sub(r"\s*\((?:Annex\s+)?[A-Z]?\.?[\d.]+\)\s*$", "", t).strip()
+        return t
+    # Fallback: leaf_id suffix → Title Case
+    slug = leaf.leaf_id.split(":")[-1] if getattr(leaf, "leaf_id", None) else ""
+    return _humanize_evidence_type(slug)
 
 
 # ── Source-of-truth label per standard ───────────────────────────────────────
@@ -282,7 +315,7 @@ def build_per_must_advisory_data(
             # but no upload hint needed.
             leaves_out.append({
                 "leaf_id":             leaf.leaf_id,
-                "leaf_label":          leaf.leaf_id.split(":")[-1].replace("_", " "),
+                "leaf_label":          _humanize_leaf_label(leaf),
                 "evidence_type":       leaf.evidence_type,
                 "evidence_type_label": _humanize_evidence_type(leaf.evidence_type),
                 "satisfied":           True,
@@ -297,7 +330,7 @@ def build_per_must_advisory_data(
         any_unmet = True
         leaves_out.append({
             "leaf_id":             leaf.leaf_id,
-            "leaf_label":          leaf.leaf_id.split(":")[-1].replace("_", " "),
+            "leaf_label":          _humanize_leaf_label(leaf),
             "evidence_type":       leaf.evidence_type,
             "evidence_type_label": _humanize_evidence_type(leaf.evidence_type),
             "satisfied":           False,
@@ -577,7 +610,7 @@ def build_evidence_class_breakdown(
 
         leaf_entry = {
             "leaf_id":          leaf.leaf_id,
-            "leaf_label":       leaf.leaf_id.split(":")[-1].replace("_", " "),
+            "leaf_label":       _humanize_leaf_label(leaf),
             "musts_total":      total,
             "musts_bound":      bound,
             "yield_pct":        yield_pct,

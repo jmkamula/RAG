@@ -2212,7 +2212,7 @@ function renderEvidenceClassesPanel(b) {
     for (const leaf of (cls.leaves || [])) {
       const sources = (leaf.source_documents && leaf.source_documents.length)
         ? leaf.source_documents.map(esc).join(', ')
-        : '<span style="color:#9C9A8E;font-style:italic">no source yet</span>';
+        : '<span style="color:#9C9A8E;font-style:italic">not yet evidenced</span>';
       // Native-format downloads: tabular leaves → .xlsx (Register +
       // Guidance sheets); narrative leaves → .docx (Word with proper
       // headings + checkboxes). .md is always offered as a power-user
@@ -2244,7 +2244,7 @@ function renderEvidenceClassesPanel(b) {
                      </button>`;
       }
       leafLines += `<div style="font-size:11px;color:#5C5A4F;margin-top:2px;padding-left:18px">
-        ${esc(leaf.leaf_label)} · ${leaf.musts_bound}/${leaf.musts_total} · sources: ${sources}${tplBadge}
+        ${esc(leaf.leaf_label)} · ${leaf.musts_bound}/${leaf.musts_total} covered · from: ${sources}${tplBadge}
       </div>`;
 
       // Cited lane (schema_v50): only on cite-acceptable evidence_types.
@@ -2312,10 +2312,10 @@ function renderEvidenceClassesPanel(b) {
                 padding:10px 12px;background:#FAF8F2;border-bottom:1px solid #E8E5DA">
       <div>
         <div style="font-size:12px;color:#3A382E;font-weight:600">
-          Evidence coverage by type
+          Evidence coverage
         </div>
         <div style="font-size:11px;color:#9C9A8E;margin-top:2px">
-          Grouped by evidence_type · click 📄 to download a starter template
+          Grouped by artifact type · use the download buttons for a starter template or a coverage summary
         </div>
       </div>
       <div style="font-size:13px;color:#3A382E;font-weight:600;font-variant-numeric:tabular-nums">
@@ -3035,7 +3035,7 @@ function renderAdvisoryPanel(adv) {
   const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
   if (!adv) return '';
 
-  const summary = `currently ${esc(adv.posture)}; ${adv.n_satisfied} of ${adv.n_leaves} leaves satisfied, ${adv.n_partial} partial`;
+  const summary = `Currently ${esc(adv.posture)} · ${adv.n_satisfied} of ${adv.n_leaves} required artifacts in place, ${adv.n_partial} in progress`;
 
   // Skip leaves that are fully satisfied — advisory is about what's
   // missing, not what's covered.
@@ -3052,7 +3052,9 @@ function renderAdvisoryPanel(adv) {
       <div style="font-size:11px;color:#3A382E;font-weight:600">
         <span style="color:#9C6F1B">◐</span>
         ${esc(l.leaf_label)}
-        <span style="color:#9C9A8E;font-weight:400"> · ${esc(l.evidence_type_label)} · <span class="leaf-count">${l.n_have}/${l.n_total}</span> elements covered</span>
+        ${(l.leaf_label !== l.evidence_type_label)
+            ? `<span style="color:#9C9A8E;font-weight:400"> · ${esc(l.evidence_type_label)}</span>` : ''}
+        <span style="color:#9C9A8E;font-weight:400"> · <span class="leaf-count">${l.n_have}/${l.n_total}</span> elements covered</span>
       </div>`;
 
     if (have.length) {
@@ -3103,7 +3105,7 @@ function renderAdvisoryPanel(adv) {
     <div style="display:flex;align-items:center;justify-content:space-between">
       <div>
         <div style="font-size:12px;color:#3A382E;font-weight:600">
-          ↳ How to advance ${esc(adv.control_ref)}
+          ↳ How to strengthen ${esc(adv.control_ref)}
         </div>
         <div style="font-size:11px;color:#9C9A8E;margin-top:2px">${esc(summary)}</div>
       </div>
@@ -3243,7 +3245,7 @@ function renderVerdictTree(verdict, selfStd) {
   const tot = v.children.length;
 
   let h = `<div style="font-size:11px;color:#3A382E;font-weight:600">
-            Composition · ${sat} of ${tot} satisfied${fw?` · derived from ${fw}`:''}
+            Coverage · ${sat} of ${tot} elements in place${fw?` · derived from ${fw}`:''}
           </div>`;
 
   // Render a sat/partial/pending marker + title for one child.
@@ -3264,7 +3266,7 @@ function renderVerdictTree(verdict, selfStd) {
       const missN = missing || 0;
       const tot = recN + missN;
       if (tot > 0) {
-        partialNote = ` <span style="color:#9C6F1B;font-size:10px">(${recN}/${tot} recognised)</span>`;
+        partialNote = ` <span style="color:#9C6F1B;font-size:10px">(${recN}/${tot} elements covered)</span>`;
       }
     } else {
       mark = '<span style="color:#B5651B;font-weight:600">✗</span>';
@@ -3315,9 +3317,9 @@ function renderVerdictTree(verdict, selfStd) {
     const isStructural = std === selfStd;
     const header = isStructural
       ? `<i class="ti ti-list-tree" style="vertical-align:middle"></i>
-         Composed of sub-articles`
+         Built from sub-sections`
       : `<i class="ti ti-arrow-back-up" style="vertical-align:middle"></i>
-         Derived from <strong>${esc(std)}</strong>`;
+         Bridged from <strong>${esc(std)}</strong>`;
     h += `<div style="margin-top:6px;padding:8px 10px;background:#fff;border:1px dashed #D9D5C5;border-radius:5px;font-size:11px;line-height:1.5">
       <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">${header}</div>
       <ul style="margin:0;padding:0 0 0 4px;list-style:none">${rows}</ul>
@@ -3327,13 +3329,13 @@ function renderVerdictTree(verdict, selfStd) {
   if (leaves.length) {
     let rows = '';
     for (const c of leaves) {
-      const primary = esc(c.title || c.evidence_type || 'leaf');
+      const primary = esc(c.title || c.evidence_type || 'Evidence');
       const rec = (c.items_recognised || []).length;
       const missing = (c.items_unrecognised || []).length;
       rows += renderRow(primary, '', c.satisfied, !!c.partial, rec, missing, c.source_documents);
     }
     h += `<div style="margin-top:6px;padding:8px 10px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;font-size:11px;line-height:1.5">
-      <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">Direct evidence</div>
+      <div style="font-size:10px;color:#9C9A8E;margin-bottom:4px">Evidence for this control</div>
       <ul style="margin:0;padding:0 0 0 4px;list-style:none">${rows}</ul>
     </div>`;
   }
