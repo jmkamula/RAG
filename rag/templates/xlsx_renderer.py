@@ -244,7 +244,7 @@ def render_template_xlsx(
 
     # Sheet 2: Guidance
     g = wb.create_sheet("Guidance")
-    g.append(["Column", "Standard text (auditor-grade guidance)"])
+    g.append(["Register column", "What auditors expect to see"])
     for col_ix in range(1, 3):
         cell = g.cell(row=1, column=col_ix)
         cell.fill   = header_fill
@@ -276,7 +276,7 @@ def render_template_xlsx(
             must_texts.update(_fetch_must_texts(pg_conn, missing_texts))
 
         d = wb.create_sheet("Document Fields")
-        d.append(["Field", "Standard text", "Your content"])
+        d.append(["Field", "What auditors expect to see", "Your content"])
         # Style header
         for col_ix in range(1, 4):
             cell = d.cell(row=1, column=col_ix)

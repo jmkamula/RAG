@@ -1319,26 +1319,55 @@ def _count_bullets(text: str) -> int:
 
 # Post-polish jargon scrub. The LLM sometimes reintroduces the raw
 # evidence_type / role slug form ('review_record', 'revocation_record')
-# in prose even when the deterministic input used the humanized
-# label ('review record', 'revocation records') — the model pattern-
-# matches on the training-corpus form. Substitute the known slugs back
-# to natural language after compose so the tenant never sees the
-# debug form. Skips URL contexts by requiring word boundaries with no
+# — or the raw engine-reason phrasing ('N/M children satisfied',
+# 'missing artifacts of type: X') — in prose even when the
+# deterministic input already used the humanized form. The model
+# pattern-matches on the training-corpus form. Substitute back to
+# natural language after compose so the tenant never sees the debug
+# form. Skips URL contexts by requiring word boundaries with no
 # adjacent `/` or `:`.
 def _scrub_jargon_slugs(text: str) -> str:
-    if not text or "_" not in text:
+    if not text:
         return text
     out = text
-    for slug, label in _ROLE_LABELS.items():
-        if "_" not in slug or slug not in out:
-            continue
-        # Word-boundary substitution guarded against URL / id contexts
-        # (skips '/req:A.5.16:review_record/', 'item:X:review_record').
-        out = re.sub(
-            rf"(?<![A-Za-z0-9_/:]){re.escape(slug)}(?![A-Za-z0-9_/:])",
-            label,
-            out,
-        )
+    # 1. Role slug substitutions (only worth running if `_` is present)
+    if "_" in out:
+        for slug, label in _ROLE_LABELS.items():
+            if "_" not in slug or slug not in out:
+                continue
+            # Word-boundary substitution guarded against URL / id contexts
+            # (skips '/req:A.5.16:review_record/', 'item:X:review_record').
+            out = re.sub(
+                rf"(?<![A-Za-z0-9_/:]){re.escape(slug)}(?![A-Za-z0-9_/:])",
+                label,
+                out,
+            )
+    # 2. Engine-reason phrasing the LLM reconstructs from context.
+    #    "N out of M children satisfied" / "N/M children satisfied" →
+    #    "N of M requirements met". Handles the "children" leak that
+    #    surfaces in POSTURE_CHECK enumerations even after prettify
+    #    ran on the deterministic input.
+    out = re.sub(
+        r"\b(\d+)\s+(?:out\s+of|of|/)\s+(\d+)\s+children\s+satisfied\b",
+        r"\1 of \2 requirements met",
+        out,
+        flags=re.IGNORECASE,
+    )
+    #    Same shape without the count phrasing: "M children satisfied" or
+    #    "children are unsatisfied".
+    out = re.sub(r"\bchildren\s+satisfied\b", "requirements met", out, flags=re.IGNORECASE)
+    out = re.sub(r"\bchildren\s+are\s+unsatisfied\b", "requirements are not yet met", out, flags=re.IGNORECASE)
+    out = re.sub(r"\bare\s+unsatisfied\b", "are not yet met", out, flags=re.IGNORECASE)
+    # 'N child(ren)' → 'N requirement(s)' for the count-singular case.
+    out = re.sub(r"\b(\d+)\s+child(?:ren)?\b", r"\1 requirement", out, flags=re.IGNORECASE)
+    out = re.sub(r"\bchildren\b", "requirements", out, flags=re.IGNORECASE)
+    #    "missing artifacts of type: a, b" → "still needed: a, b"
+    out = re.sub(
+        r"\bmissing\s+artifacts\s+of\s+type:",
+        "still needed:",
+        out,
+        flags=re.IGNORECASE,
+    )
     return out
 
 

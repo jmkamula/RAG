@@ -1554,6 +1554,71 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                     )
                     answer_text = (answer_text or "").rstrip() + footer
 
+        # Engine-reason phrasing scrub — the LLM sometimes reconstructs
+        # the raw '{N} out of {M} children satisfied' / 'missing artifacts
+        # of type: X' shapes when composing rank_and_answer responses,
+        # even though _prettify_reason cleans the enumeration path. This
+        # mirrors the same substitutions in rag/arion_graph.py:
+        # _scrub_jargon_slugs so both LLM paths land at the same tenant-
+        # facing vocabulary. Kept inline instead of importing from
+        # arion_graph to avoid circular deps.
+        if answer_text:
+            answer_text = re.sub(
+                r"\b(\d+)\s+(?:out\s+of|of|/)\s+(\d+)\s+children\s+satisfied\b",
+                r"\1 of \2 requirements met",
+                answer_text,
+                flags=re.IGNORECASE,
+            )
+            answer_text = re.sub(
+                r"\bchildren\s+satisfied\b",
+                "requirements met",
+                answer_text,
+                flags=re.IGNORECASE,
+            )
+            answer_text = re.sub(
+                r"\bchildren\s+are\s+unsatisfied\b",
+                "requirements are not yet met",
+                answer_text,
+                flags=re.IGNORECASE,
+            )
+            # Also catches 'N child(ren) having/with partial evidence' —
+            # the LLM sometimes uses the singular 'child' when count=1.
+            answer_text = re.sub(
+                r"\b(\d+)\s+child(?:ren)?\b",
+                r"\1 requirement",
+                answer_text,
+                flags=re.IGNORECASE,
+            )
+            # Bare '{N} children' (fallback for patterns not caught above)
+            answer_text = re.sub(
+                r"\bchildren\b",
+                "requirements",
+                answer_text,
+                flags=re.IGNORECASE,
+            )
+            answer_text = re.sub(
+                r"\bmissing\s+artifacts\s+of\s+type:",
+                "still needed:",
+                answer_text,
+                flags=re.IGNORECASE,
+            )
+            # Role-slug substitutions from _ROLE_LABELS (defined in
+            # rag/arion_graph.py). Lazy import to avoid the circular
+            # dependency (arion_graph imports LLMAnswer).
+            if "_" in answer_text:
+                try:
+                    from rag.arion_graph import _ROLE_LABELS
+                    for slug, label in _ROLE_LABELS.items():
+                        if "_" not in slug or slug not in answer_text:
+                            continue
+                        answer_text = re.sub(
+                            rf"(?<![A-Za-z0-9_/:]){re.escape(slug)}(?![A-Za-z0-9_/:])",
+                            label,
+                            answer_text,
+                        )
+                except Exception:
+                    pass
+
         if _claim_violations:
             logging.getLogger("rag.llm_answer").warning(
                 "posture_claim_guard: dropped %d line(s): %s",

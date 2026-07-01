@@ -270,8 +270,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <span class="status-text" id="stext">not connected</span>
   </div>
   <div class="topbar-right">
-    <input class="topbar-input" id="api-url" type="text" placeholder="API URL" value="http://172.211.244.144:8080">
-    <input class="topbar-input" id="api-key" type="password" placeholder="X-API-Key" value="arion_dev_key_2026" style="width:160px">
+    <input class="topbar-input" id="api-url" type="text"
+           placeholder="Server address" title="ArionComply server address"
+           value="http://172.211.244.144:8080">
+    <input class="topbar-input" id="api-key" type="password"
+           placeholder="Access key" title="Your ArionComply access key"
+           value="arion_dev_key_2026" style="width:160px">
     <button class="btn-sm btn-primary" onclick="connect()">Connect</button>
   </div>
 </div>
@@ -1868,7 +1872,7 @@ async function selectHeatCell(c, ev) {
   // then we upgrade to the full tree once fetched.
   document.getElementById('dp-gap').innerHTML =
     `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${escapeHtml(c.gap_excerpt || '')}</div>
-     <div style="margin-top:10px;font-size:11px;color:#9C9A8E"><i class="ti ti-loader-2"></i> Loading derivation…</div>`;
+     <div style="margin-top:10px;font-size:11px;color:#9C9A8E"><i class="ti ti-loader-2"></i> Loading details…</div>`;
 
   try {
     const d = await api(`/api/v1/stage2/queue/${encodeURIComponent(c.control_ref)}`);
@@ -2053,7 +2057,7 @@ function setStage(s) {
 
 async function loadQueue() {
   const body = document.getElementById('body-queue');
-  body.innerHTML = '<div class="empty"><i class="ti ti-loader-2" aria-hidden="true"></i><p>Loading...</p></div>';
+  body.innerHTML = '<div class="empty"><i class="ti ti-loader-2" aria-hidden="true"></i><p>Loading…</p></div>';
   try {
     if (stage === 1) {
       const d = await api('/api/v1/stage1/queue');
@@ -2083,11 +2087,24 @@ async function loadStageCounts() {
   } catch(e) {}
 }
 
+// Auditor-standard acronyms kept as visible pills (compact + industry
+// convention), but the hover tooltip expands them so tenants who
+// don't yet know the shorthand get the full term inline.
+const _FINDING_LONG = {
+  NC:      'Non-Conformity',
+  OFI:     'Opportunity for Improvement',
+  Comply:  'Compliant',
+  'N/A':   'Not applicable',
+};
 function pill(finding) {
   const m = {NC:'p-nc',OFI:'p-ofi',Comply:'p-comply','N/A':'p-na'};
-  return `<span class="pill ${m[finding]||'p-na'}">${finding}</span>`;
+  const longName = _FINDING_LONG[finding] || '';
+  const tip = longName ? ` title="${longName}"` : '';
+  return `<span class="pill ${m[finding]||'p-na'}"${tip}>${finding}</span>`;
 }
 
+// Status pill covers finding-status enums (present/partial/missing).
+// The word itself already reads naturally; no tooltip needed.
 function statusPill(status) {
   const m = {present:'p-comply',partial:'p-ofi',missing:'p-nc'};
   return `<span class="pill ${m[status]||'p-na'}">${status}</span>`;
@@ -3533,7 +3550,7 @@ async function selectStage2(p, ev) {
   document.getElementById('dp-sys-wrap').style.display = 'none';
   document.getElementById('dp-gap').innerHTML =
     `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${humanizeEngineReason(p.reason||'(no reason snapshotted)').replace(/</g,'&lt;')}</div>
-     <div style="margin-top:10px"><i class="ti ti-loader-2"></i> Loading derivation…</div>`;
+     <div style="margin-top:10px"><i class="ti ti-loader-2"></i> Loading details…</div>`;
   document.getElementById('dp-meta').textContent =
     `Proposed at: ${p.proposed_at ? new Date(p.proposed_at).toLocaleString() : '—'}`;
 
