@@ -290,7 +290,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </button>
     <button class="nav-item" id="nav-queue" onclick="setMode('queue')">
       <i class="ti ti-clipboard-check" aria-hidden="true"></i> Review queue
-      <span class="nav-badge" id="nb-queue">—</span>
+      <span class="nav-badge" id="nb-queue"
+            title="Items waiting for your review — intake findings + posture proposals combined">—</span>
     </button>
     <button class="nav-item" id="nav-chat" onclick="setMode('chat')">
       <i class="ti ti-message-2" aria-hidden="true"></i> Chat
@@ -306,7 +307,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </button>
     <button class="nav-item" id="nav-inbox" onclick="setMode('inbox')">
       <i class="ti ti-bell" aria-hidden="true"></i> Notifications
-      <span class="nav-badge" id="nb-inbox" style="display:none">—</span>
+      <span class="nav-badge" id="nb-inbox" style="display:none"
+            title="Unread notifications — red when any are urgent (critical or high severity)">—</span>
     </button>
 
     <div class="sidebar-divider"></div>
@@ -1784,7 +1786,7 @@ async function selectHeatCell(c, ev) {
   // Reset canonical summary first so the previous selection's title /
   // description doesn't leak while we fetch the new one.
   populateCanonicalSummary(null);
-  document.getElementById('dp-finding').innerHTML = pill(c.finding);
+  document.getElementById('dp-finding').innerHTML = pillWithLabel(c.finding);
 
   // Fetch canonical title + obligation_text for this control (async).
   // Best-effort: panel still renders if Neo4j is unreachable.
@@ -2101,6 +2103,16 @@ function pill(finding) {
   const longName = _FINDING_LONG[finding] || '';
   const tip = longName ? ` title="${longName}"` : '';
   return `<span class="pill ${m[finding]||'p-na'}"${tip}>${finding}</span>`;
+}
+
+// Detail-panel version: compact pill + the expanded acronym inline
+// so a tenant reading the panel doesn't need to hover to learn what
+// NC/OFI/Comply/N/A mean. Skips the inline label for '—' / null.
+function pillWithLabel(finding) {
+  const p = pill(finding);
+  const longName = _FINDING_LONG[finding];
+  if (!longName) return p;
+  return p + ` <span style="font-size:11px;color:#5C5A4F;margin-left:6px">${longName}</span>`;
 }
 
 // Status pill covers finding-status enums (present/partial/missing).
@@ -3546,7 +3558,7 @@ async function selectStage2(p, ev) {
   document.getElementById('dp-ref').textContent = p.control_ref;
   document.getElementById('dp-std').textContent = humanizeStandardId(p.standard_id);
   document.getElementById('dp-finding').innerHTML =
-    `<span class="pill p-src">${p.live_finding||'—'}</span> → ${pill(p.proposed_finding)}`;
+    `<span class="pill p-src">${p.live_finding||'—'}</span> → ${pillWithLabel(p.proposed_finding)}`;
   document.getElementById('dp-sys-wrap').style.display = 'none';
   document.getElementById('dp-gap').innerHTML =
     `<div style="padding:8px;background:#FAF8F2;border-radius:6px;border:1px solid #E8E5DA;font-size:12px;line-height:1.4">${humanizeEngineReason(p.reason||'(no reason snapshotted)').replace(/</g,'&lt;')}</div>
