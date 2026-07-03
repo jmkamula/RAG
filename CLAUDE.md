@@ -203,7 +203,6 @@ curl -s -X POST http://localhost:8080/api/v1/chat \
 - `rag/templates/xlsx_renderer.py` — Excel (Register + Guidance + Document Fields + hidden _arion_meta)
 - `rag/templates/docx_renderer.py` — Word (Heading/Quote/Bullet, ☐/☒, markers preserved)
 - `db/templates/req__*.md` — 645+ template scaffolds (filesystem source of truth)
-- `scripts/build_must_index.py` — populates `musts_arioncomply` Chroma collection
 - `scripts/stage1_queue_sweep.py` — bulk-approve / soft-delete pending findings (uses loader's canonical catalog union)
 
 ### Catalog

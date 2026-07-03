@@ -1,11 +1,34 @@
 ---
 name: must-embedding-index-2026-06-26
-description: "SHIPPED 2026-06-26 (3b75461): scripts/build_must_index.py + new ChromaDB collection musts_arioncomply with 4133 per-MUST embeddings (3270 MUSTs + 863 SHOULDs). Foundation for semantic-search extraction to replace the single-shot LLM path (audit median yield 17%). Same Chroma store, same embedding model as existing leaf collections — compatible vector space."
+description: "RETIRED 2026-07-03. SHIPPED 2026-06-26 (3b75461) as foundation for semantic-search extraction to replace the single-shot LLM path. Prototype (scripts/prototype_semantic_extract.py) validated the approach but the expected extraction improvement didn't materialise — the extractor stayed on the pattern-based path (doc_mappings + workbook_mappings + must_fingerprints). Collection sat unconsumed in production. RETIRED to avoid future confusion: musts_arioncomply Chroma collection deleted, scripts/build_must_index.py + scripts/prototype_semantic_extract.py removed. Framework-scoped collections (iso27001_2022 / gdpr_2016_679 / arioncombly_all) — the ones used by chat retrieval via vector/retriever.py — are unaffected and remain live. Historical detail preserved below."
 metadata:
   node_type: memory
   type: project
   originSessionId: 5808ba74-b22a-4a68-b4f1-19f18ce079cd
 ---
+
+## RETIRED 2026-07-03 — why
+
+The foundation shipped but the follow-on semantic-search extraction
+never became live. Prototype in `scripts/prototype_semantic_extract.py`
+was exercised on a handful of docs but the pattern-based path
+(catalog + doc_mappings + workbook_mappings + must_fingerprints)
+kept outperforming per-doc-per-MUST embedding recall, and the
+extractor remained on the pattern path. Collection sat unconsumed
+in production for a week.
+
+Retirement 2026-07-03 was triggered by the ISO 27701 arc raising
+"what about MUST embeddings for the new framework?" — clarifying
+that this collection was never live prevented an unnecessary
+extension into the retired path. Cleanup:
+
+  - Chroma collection `musts_arioncomply` deleted (4133 items)
+  - `scripts/build_must_index.py` removed
+  - `scripts/prototype_semantic_extract.py` removed
+  - CLAUDE.md Key Files entry removed
+
+Historical detail from the shipping memo preserved below for
+archaeology.
 
 ## What shipped
 
