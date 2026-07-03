@@ -1,5 +1,24 @@
 # ISO 27701 Onboarding Readiness Brief
 
+> **STATUS 2026-07-03 — SUPERSEDED by
+> [framework_27701_design.md](framework_27701_design.md).** This brief
+> remains as the strategic-context document (why 27701 first, current
+> readiness of code paths, work-breakdown estimates). The current-
+> authoritative plan for execution lives in the design doc, which
+> locks the five architectural decisions the brief had left open,
+> aligns phase estimates with the current codebase (post-templating,
+> post-cascade, post-dejargonize, post-Tier-4), and enumerates
+> stress-test signals + acceptance criteria.
+>
+> **Phase 0 amendment (2026-07-03):** Arion Networks tenant profile
+> shows `role_controller=true` AND `role_processor=true` per
+> client_facts. Both Annex A (controller) and Annex B (processor)
+> apply to the demo tenant, which affects design decision D4
+> (originally "Annex B deferred to v2 batch"). Open item for the
+> tenant to resolve before Phase 2.
+
+## Original brief (retained as strategic context)
+
 Strategic placeholder for the first multi-framework expansion. Drafted
 end-of-day after today's intake-pipeline + LLM-provider strategy work;
 not yet a plan to execute. When the framework #3 onboarding turn comes,
