@@ -115,6 +115,15 @@ class JourneyState:
     # Optional details
     annual_reviews_due: list[str]          = field(default_factory=list)
 
+    # Full anchor list with per-anchor completion — surfaced on the
+    # Get Started mode so tenants can browse the whole foundation
+    # sequence + pick which anchor to work on next. Each dict shape:
+    #   {control_ref, leaf_id, title, evidence_type, is_tabular,
+    #    must_total, must_satisfied, completion_pct, download_urls,
+    #    dashboard_url}
+    # 2026-07-03 (Tier-4 companion — see [[dejargonize-ux-pass...]]).
+    foundation_anchors: list[dict]         = field(default_factory=list)
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Phase determination
@@ -402,6 +411,47 @@ def compute_journey_state(
 
     next_actions = _pick_next_actions(leaf_states, phase)
 
+    # Foundation anchor rollup — full ordered list with per-anchor
+    # completion + shape hint (tabular vs narrative) so the Get
+    # Started mode can render the whole sequence with the right
+    # download button per shape. Skipped anchors (leaf_id not in
+    # the catalog / no template) still surface with completion_pct
+    # so the tenant sees the whole path.
+    from rag.templates.answer_footer import _is_tabular
+    foundation_anchors: list[dict] = []
+    by_leaf_id = {ls.leaf_id: ls for ls in anchor_states}
+    for seq_idx, anchor_leaf_id in enumerate(_ANCHOR_LEAVES, start=1):
+        ls = by_leaf_id.get(anchor_leaf_id)
+        if ls is None:
+            continue
+        is_tabular = _is_tabular(ls.evidence_type)
+        base_url = f"/api/v1/templates/{ls.leaf_id}/download"
+        if is_tabular:
+            primary_fmt, primary_label = "xlsx", "Excel starter"
+        else:
+            primary_fmt, primary_label = "docx", "Word starter"
+        foundation_anchors.append({
+            "sequence":        seq_idx,
+            "control_ref":     ls.control_ref,
+            "leaf_id":         ls.leaf_id,
+            "title":           ls.title,
+            "evidence_type":   ls.evidence_type,
+            "is_tabular":      is_tabular,
+            "must_total":      ls.must_total,
+            "must_satisfied":  ls.must_satisfied,
+            "completion_pct":  ls.completion_pct,
+            "primary_download": {
+                "format": primary_fmt,
+                "label":  primary_label,
+                "url":    f"{base_url}?format={primary_fmt}",
+            },
+            "alt_downloads": [
+                {"format": "md", "label": "Markdown",
+                 "url": f"{base_url}?format=md"},
+            ],
+            "dashboard_url":   f"/#dashboard?control={ls.control_ref}",
+        })
+
     return JourneyState(
         tenant_id            = tenant_id,
         phase                = phase,
@@ -416,4 +466,5 @@ def compute_journey_state(
         operational_total    = operational_total,
         operational_complete = operational_complete,
         next_actions         = next_actions,
+        foundation_anchors   = foundation_anchors,
     )

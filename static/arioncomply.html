@@ -285,6 +285,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <!-- ── Sidebar ── -->
   <div class="sidebar">
     <div class="nav-section">Workspace</div>
+    <button class="nav-item" id="nav-getstarted" onclick="setMode('getstarted')">
+      <i class="ti ti-rocket" aria-hidden="true"></i> Get started
+    </button>
     <button class="nav-item active" id="nav-dashboard" onclick="setMode('dashboard')">
       <i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard
     </button>
@@ -513,6 +516,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
 
+    <!-- Get Started toolbar -->
+    <div class="main-toolbar" id="toolbar-getstarted" style="display:none">
+      <div>
+        <div class="main-title">Get started</div>
+        <div class="main-sub">Your compliance program in four phases — download starter templates for the foundation, or cite what you already have.</div>
+      </div>
+      <button class="btn-sm btn-outline" onclick="loadGetStarted()">
+        <i class="ti ti-refresh" aria-hidden="true"></i> Refresh
+      </button>
+    </div>
+
+    <!-- Get Started body -->
+    <div class="main-body" id="body-getstarted" style="display:none">
+      <div id="getstarted-wrap" style="max-width:960px;margin:18px auto;padding:0 20px">
+        <div class="empty"><i class="ti ti-loader-2" aria-hidden="true"></i><p>Loading your journey…</p></div>
+      </div>
+    </div>
+
   </div>
 
   <!-- ── Detail panel ── -->
@@ -655,7 +676,7 @@ async function apiForm(path, formData) {
 // ── Mode switching ──
 function setMode(m) {
   mode = m;
-  ['dashboard','queue','chat','docs','profile','cascade','inbox'].forEach(x => {
+  ['dashboard','queue','chat','docs','profile','cascade','inbox','getstarted'].forEach(x => {
     const navEl = document.getElementById('nav-'+x);
     if (navEl) navEl.classList.toggle('active', x===m);
     const tbEl  = document.getElementById('toolbar-'+x);
@@ -665,11 +686,12 @@ function setMode(m) {
   });
   document.getElementById('queue-filters').style.display = m==='queue' ? '' : 'none';
   closeDetail();
-  if (m === 'queue')     loadQueue();
-  if (m === 'dashboard') loadDashboard();
-  if (m === 'profile')   loadProfile();
-  if (m === 'cascade')   loadCascadeTimeline();
-  if (m === 'inbox')     loadInbox();
+  if (m === 'queue')      loadQueue();
+  if (m === 'dashboard')  loadDashboard();
+  if (m === 'profile')    loadProfile();
+  if (m === 'cascade')    loadCascadeTimeline();
+  if (m === 'inbox')      loadInbox();
+  if (m === 'getstarted') loadGetStarted();
 }
 
 // ── Notifications inbox (S3t) ──────────────────────────────────────────
@@ -775,6 +797,118 @@ async function markAllNotificationsRead() {
   } catch (e) {
     alert("Couldn't mark all notifications read — check your connection and try again.");
   }
+}
+
+// ── Get Started (Tier-4 companion, 2026-07-03) ───────────────────────
+// Landing page for fresh tenants (Phase 0 / Foundation-with-zero-anchors)
+// and a reference index for anyone browsing the foundation sequence.
+// Reads-only against /api/v1/journey/state; renders a phase-progress
+// strip + next-recommended-action card + full 20-anchor list with
+// per-anchor completion + download buttons + cite-mode footer nudge.
+async function loadGetStarted() {
+  const wrap = document.getElementById('getstarted-wrap');
+  wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading your journey…</p></div>';
+  try {
+    const d = await api('/api/v1/journey/state');
+    renderGetStarted(d);
+  } catch (e) {
+    wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load your journey. Please refresh in a moment.</p></div>';
+  }
+}
+
+function renderGetStarted(d) {
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const attr = s => esc(s).replace(/"/g,'&quot;');
+  const wrap = document.getElementById('getstarted-wrap');
+
+  const phase = d.phase || 'profile';
+  const phaseIx = {profile:0, foundation:1, operational:2, annual:3}[phase] || 0;
+  const phaseLabels = ['Profile', 'Foundation', 'Operational', 'Annual'];
+
+  // ── Phase strip ──
+  let strip = `<div style="display:flex;gap:6px;margin-bottom:20px">`;
+  phaseLabels.forEach((lbl, i) => {
+    const active = i === phaseIx;
+    const past   = i <  phaseIx;
+    const bg   = active ? '#3A382E' : past ? '#E8E5DA' : '#FAF8F2';
+    const fg   = active ? '#FFFFFF' : past ? '#5C5A4F' : '#9C9A8E';
+    const bord = active ? '#3A382E' : '#E8E5DA';
+    strip += `<div style="flex:1;padding:8px 12px;background:${bg};color:${fg};border:1px solid ${bord};border-radius:4px;font-size:11px;font-weight:${active?600:400}">
+      <div style="font-size:9px;letter-spacing:.4px;text-transform:uppercase;opacity:.75">Phase ${i}</div>
+      <div style="margin-top:2px">${lbl}</div>
+    </div>`;
+  });
+  strip += `</div>`;
+
+  // ── Phase message card ──
+  const phaseMsg = `<div style="padding:14px 18px;background:#fff;border:1px solid #E8E5DA;border-radius:6px;margin-bottom:16px">
+    <div style="font-size:14px;font-weight:600;color:#3A382E;margin-bottom:4px">${esc(d.phase_name || '')}</div>
+    <div style="font-size:12px;color:#5C5A4F;line-height:1.5">${esc(d.phase_message || '')}</div>
+  </div>`;
+
+  // ── Next recommended action ──
+  let nextCard = '';
+  const nx = (d.next_actions && d.next_actions[0]) || null;
+  if (nx) {
+    nextCard = `<div style="padding:14px 18px;background:#FBFBF7;border:1px solid #C8C5B8;border-radius:6px;margin-bottom:20px">
+      <div style="font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:#9C6F1B;font-weight:600">Next recommended action</div>
+      <div style="font-size:14px;font-weight:600;color:#3A382E;margin-top:4px">${esc(nx.control_ref)} — ${esc(nx.title)}</div>
+      <div style="font-size:12px;color:#5C5A4F;line-height:1.5;margin-top:4px">${esc(nx.why || '')}</div>
+      <div style="margin-top:10px;display:flex;gap:8px;align-items:center;font-size:12px">
+        <a href="${attr(nx.download_url)}" target="_blank" rel="noopener"
+           style="background:#3A382E;color:#fff;padding:6px 14px;border-radius:4px;text-decoration:none">
+          <i class="ti ti-download"></i> Download starter
+        </a>
+        <a href="/#dashboard?control=${attr(nx.control_ref)}"
+           style="color:#534AB7;text-decoration:none">See details in dashboard →</a>
+      </div>
+    </div>`;
+  }
+
+  // ── Foundation anchors list ──
+  const anchors = d.foundation_anchors || [];
+  let anchorsHtml = '';
+  if (anchors.length) {
+    anchorsHtml = `<div style="margin-bottom:20px">
+      <div style="font-size:13px;font-weight:600;color:#3A382E;margin-bottom:4px">Foundation templates (${anchors.length})</div>
+      <div style="font-size:11px;color:#5C5A4F;margin-bottom:10px">The recommended sequence — most compliance programs start here. Every download opens in a new tab.</div>
+      <div style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;overflow:hidden">`;
+    for (const a of anchors) {
+      const pct = a.completion_pct || 0;
+      const stateIcon = pct >= 100 ? '<span style="color:#2F8F4D">✓</span>'
+                      : pct > 0    ? '<span style="color:#9C6F1B">◐</span>'
+                      : '<span style="color:#9C9A8E">○</span>';
+      const progLine = a.must_total > 0
+        ? `${a.must_satisfied} of ${a.must_total} elements covered`
+        : 'No elements yet';
+      const primary = a.primary_download;
+      const alt = (a.alt_downloads && a.alt_downloads[0]) || null;
+      anchorsHtml += `<div style="padding:8px 12px;border-bottom:1px solid #F0EDE3;display:flex;align-items:center;gap:12px">
+        <span style="min-width:22px;text-align:center;font-size:16px">${stateIcon}</span>
+        <div style="min-width:60px;font-size:11px;color:#9C9A8E;font-variant-numeric:tabular-nums">Step ${a.sequence}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12px;color:#3A382E">
+            <strong>${esc(a.control_ref)}</strong> · ${esc(a.title)}
+          </div>
+          <div style="font-size:10px;color:#9C9A8E;margin-top:2px">${esc(progLine)}</div>
+        </div>
+        <a href="${attr(primary.url)}" target="_blank" rel="noopener"
+           style="font-size:11px;padding:4px 10px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:3px;text-decoration:none">
+           <i class="ti ti-${a.is_tabular?'table':'file-text'}"></i> ${esc(primary.label)}
+        </a>
+        ${alt ? `<a href="${attr(alt.url)}" target="_blank" rel="noopener" style="font-size:10px;color:#5C5A4F;text-decoration:none">.md</a>` : ''}
+        <a href="/#dashboard?control=${attr(a.control_ref)}" title="See in dashboard" style="color:#534AB7;text-decoration:none;font-size:11px">→</a>
+      </div>`;
+    }
+    anchorsHtml += `</div></div>`;
+  }
+
+  // ── Cite-mode nudge footer ──
+  const citeFooter = `<div style="margin-top:8px;padding:12px 14px;background:#FAF8F2;border:1px dashed #C8C5B8;border-radius:5px;font-size:11px;color:#5C5A4F;line-height:1.5;font-style:italic">
+    💡 You don't have to use these. If you already have equivalents in your existing systems (Odoo, Okta, ServiceNow, OneTrust, …), you can cite those instead — <a href="#" onclick="event.preventDefault();setMode('dashboard')" style="color:#534AB7;text-decoration:none;font-style:normal">open the dashboard drill-in for any control</a> to register a cite from an external source.
+  </div>`;
+
+  wrap.innerHTML = strip + phaseMsg + nextCard + anchorsHtml + citeFooter;
 }
 
 // ── Cascade timeline (S3q) ────────────────────────────────────────────
