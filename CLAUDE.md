@@ -43,6 +43,10 @@ the strategic evidence-cascade layer (event-driven implications:
 | xfw_proposer uses catalog rationale on bridge proposals (S7) | SHIPPED |
 | De-jargonize UX pass across every tenant-facing surface (Evidence Package + dashboard + chat + templates + intake + notifications + profile + cascade + docs + queue + heatmap + streaming + inbox + admin + onboarding + session + errors) | SHIPPED |
 | Tier-4 starter kit — structured templates_block in chat + Get Started sidebar mode (fresh-tenant foundation sequence with phase strip / next-action card / 20-anchor list / cite nudge) | SHIPPED |
+| ISO 27701 Phase 0+1 — tenant enrolment + code-path pre-wiring verified | SHIPPED |
+| ISO 27701 Phase 2 Batch 1 — §A.7.2 controller + §B.8.2 processor (14 anchors × 4 leaves = 56 EvidenceRequirements + 34 GDPR/27001 bridge edges + iso27701_2019 Chroma collection + Arion posture seed) | SHIPPED |
+| ISO 27701 Phase 2 Batch 2 — §A.7.3 subject rights + §A.7.4 PbD + §B.8.3-4 mirrors (23 anchors) | PENDING |
+| ISO 27701 Phase 2 Batch 3 — §A.7.5 + §B.8.5 transfers (12 anchors) | PENDING |
 | Outbound notification delivery (email/Slack) | DEFERRED |
 | UPDATES_FACT recompute (source-of-truth queries per fact) | DEFERRED |
 | Periodic sweep scheduler for overdue followups | DEFERRED |

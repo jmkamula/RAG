@@ -21,7 +21,7 @@ from typing import Optional
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from vector.indexer import (
-    VectorIndexer, COL_ISO, COL_GDPR, COL_ALL,
+    VectorIndexer, COL_ISO, COL_GDPR, COL_27701, COL_ALL,
     AnthropicEmbeddingFunction, FallbackEmbeddingFunction,
 )
 
@@ -235,6 +235,26 @@ class VectorRetriever:
             query           = query,
             results         = results,
             standards_scope = ["GDPR:2016/679"],
+            role_filter     = role,
+            n_results       = n,
+        )
+
+    def search_27701(
+        self,
+        query: str,
+        n:     int           = 8,
+        role:  Optional[str] = None,
+    ) -> RetrievalContext:
+        """ISO 27701-scoped semantic search."""
+        collection = self._indexer.get_collection(COL_27701)
+        where      = self._build_where(role)
+        raw        = self._query(collection, query, n=n * 2, where=where)
+        results    = self._post_filter(self._process_results(raw), role)[:n]
+
+        return RetrievalContext(
+            query           = query,
+            results         = results,
+            standards_scope = ["ISO27701:2019"],
             role_filter     = role,
             n_results       = n,
         )

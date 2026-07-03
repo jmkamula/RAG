@@ -55,9 +55,10 @@ from models.requirement_node import RequirementNode
 
 COL_ISO    = "iso27001_2022"
 COL_GDPR   = "gdpr_2016_679"
+COL_27701  = "iso27701_2019"
 COL_ALL    = "arioncombly_all"
 
-COLLECTIONS = [COL_ISO, COL_GDPR, COL_ALL]
+COLLECTIONS = [COL_ISO, COL_GDPR, COL_27701, COL_ALL]
 
 
 # ── Embedding functions ────────────────────────────────────────────────────────
@@ -344,17 +345,19 @@ class VectorIndexer:
 
     def index_all(
         self,
-        iso_nodes:  list[RequirementNode],
-        gdpr_nodes: list[RequirementNode],
-        reset:      bool = False,
+        iso_nodes:    list[RequirementNode],
+        gdpr_nodes:   list[RequirementNode],
+        nodes_27701:  Optional[list[RequirementNode]] = None,
+        reset:        bool = False,
     ) -> dict:
         """
         Index all nodes into ChromaDB.
 
         Args:
-            iso_nodes:  ISO 27001 RequirementNodes
-            gdpr_nodes: GDPR RequirementNodes
-            reset:      If True, drop and recreate all collections first.
+            iso_nodes:    ISO 27001 RequirementNodes
+            gdpr_nodes:   GDPR RequirementNodes
+            nodes_27701:  ISO 27701 RequirementNodes (optional; empty until Batch 1 loads)
+            reset:        If True, drop and recreate all collections first.
 
         Returns:
             Stats dict with counts per collection.
@@ -362,7 +365,9 @@ class VectorIndexer:
         if reset:
             self._reset_collections()
 
-        print(f"Indexing {len(iso_nodes)} ISO + {len(gdpr_nodes)} GDPR nodes...")
+        nodes_27701 = nodes_27701 or []
+
+        print(f"Indexing {len(iso_nodes)} ISO + {len(gdpr_nodes)} GDPR + {len(nodes_27701)} 27701 nodes...")
         print(f"Persist dir: {self.persist_dir}")
         embed_label = {
             "fallback":   "fallback/hash (no API — not semantic)",
@@ -374,11 +379,12 @@ class VectorIndexer:
 
         # Index per-standard collections
         t0 = time.time()
-        self._index_collection(COL_ISO,  iso_nodes,  "ISO27001:2022")
-        self._index_collection(COL_GDPR, gdpr_nodes, "GDPR:2016/679")
+        self._index_collection(COL_ISO,   iso_nodes,   "ISO27001:2022")
+        self._index_collection(COL_GDPR,  gdpr_nodes,  "GDPR:2016/679")
+        self._index_collection(COL_27701, nodes_27701, "ISO27701:2019")
 
         # Index combined collection
-        all_nodes = iso_nodes + gdpr_nodes
+        all_nodes = iso_nodes + gdpr_nodes + nodes_27701
         self._index_collection(COL_ALL,  all_nodes,  "all")
 
         elapsed = time.time() - t0

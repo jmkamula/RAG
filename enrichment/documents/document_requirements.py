@@ -3791,6 +3791,1257 @@ REQ_ART49_PROGRAM_REVIEW = EvidenceRequirement(
 # ──────────────────────────────────────────────────────────────────────────────
 
 
+# ==============================================================================
+# ISO 27701:2019 — Batch 1 — Conditions for collection and processing
+# ==============================================================================
+# 14 anchors × 4 leaves = 56 EvidenceRequirements. Topic pair:
+#   Annex A §A.7.2.x — controller side (8 controls)
+#   Annex B §B.8.2.x — processor side (6 controls)
+# Spine mix: 12 × op_process + 2 × records_program (A.7.2.8 + B.8.2.6 —
+# records of processing are register-as-primary, natural records_program).
+# Role gating: all leaves trigger_type='profile_fact'. Tenants seed N/A
+# per role via posture_controls (no per-spec applies_when today).
+# Source-of-truth prose: ISO/IEC 27701:2019 §7.2 (controllers) + §8.2
+# (processors). GDPR bridges land in relationship_catalog.py per
+# Annex D Table D.1.
+
+# ── A.7.2.1 Identify and document purpose — op_process 4-leaf ─────────────────
+# §7.2.1: The organization shall identify and document the specific purposes
+# for which the PII will be processed. Foundation for consent, notice
+# (§7.3.2), and RoPA (§7.2.8). GDPR bridge: Art.5.1.b purpose limitation +
+# Art.32.4 processor instructions.
+
+REQ_A721_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.2.1:purpose_procedure",
+    control_ref   = "A.7.2.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Purpose Identification Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.2.1 requires each PII processing activity to have its purpose identified and documented before processing begins. The procedure governs how new purposes are identified (upstream trigger events), documented (fields captured), reviewed (legal + DPO signoff), and communicated (to §7.3.2 notice + §7.2.3 consent + §7.2.8 RoPA). Without a clear, documented purpose per activity, consent + notice cannot be validly given.",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.1:proc_intake_trigger",   "Intake triggers listed (new product launch, new processing activity, new data source, new integration)", "must", False, "§7.2.1 — purposes identified before processing"),
+        ChecklistItem("item:A.7.2.1:proc_documentation_fields","Documentation fields per purpose (purpose text, categories of PII, categories of subjects, retention, recipients, legal basis link)", "must", False, "§7.2.1 — documented"),
+        ChecklistItem("item:A.7.2.1:proc_specificity_test", "Specificity test — purpose statements must be sufficiently clear + detailed for use in §7.3.2 notice + §7.2.3 consent", "must", False, "§7.2.1 implementation guidance"),
+        ChecklistItem("item:A.7.2.1:proc_review_signoff",   "Review + signoff step (DPO + legal counsel) before purpose enters production register", "must", False, "§5.4.1.3 accountability"),
+        ChecklistItem("item:A.7.2.1:proc_change_control",   "Change-control — extending or changing a purpose requires re-review + potentially new consent (§7.2.2)", "must", False, "§7.2.2 implementation guidance — changing purposes"),
+        ChecklistItem("item:A.7.2.1:proc_downstream_notice","Downstream notice — purpose changes propagate to notice + consent + RoPA + PIA", "must", False, "§7.2.1 — usable in required information"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.1:proc_owner",            "Named owner (DPO or Privacy Office)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A721_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.2.1:purpose_register",
+    control_ref   = "A.7.2.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "PII Processing Purpose Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-purpose row — the canonical list of every documented purpose the organisation processes PII for. Annual refresh (freshness=365). Feeds §7.3.2 notice and §7.2.8 RoPA.",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.1:reg_purpose_id",        "Unique purpose identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.2.1:reg_purpose_text",      "Purpose statement text (clear + specific)", "must", False, "§7.2.1 — specific purposes"),
+        ChecklistItem("item:A.7.2.1:reg_activity_link",     "Processing activity link (which §7.2.8 RoPA row(s) implement this purpose)", "must", False, "§7.2.8 traceability"),
+        ChecklistItem("item:A.7.2.1:reg_categories",        "Categories of PII + categories of subjects per row", "must", False, "§7.2.1 implementation guidance"),
+        ChecklistItem("item:A.7.2.1:reg_lawful_basis_link", "Lawful basis link (which A.7.2.2 basis row this purpose relies on)", "must", False, "§7.2.2 cross-link"),
+        ChecklistItem("item:A.7.2.1:reg_retention",         "Retention period per purpose", "must", False, "Storage limitation"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.1:reg_notice_link",       "Notice link — which §7.3.2 notice text discloses this purpose to subjects", "should", False, "§7.3.2 traceability"),
+    ],
+)
+
+REQ_A721_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.2.1:applicable_scope",
+    control_ref   = "A.7.2.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Processing Activities Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which business activities involve PII processing (and therefore need documented purposes). Excludes non-PII activities. Sets the denominator for the purpose register.",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.1:scope_activities",      "In-scope processing activities enumerated", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.2.1:scope_pii_test",        "Operational test for 'involves PII processing' (identifiability + processing operation)", "must", False, "§7.2.1 — PII scope"),
+        ChecklistItem("item:A.7.2.1:scope_exclusions",      "Out-of-scope activities (anonymous analytics, aggregate reporting) with rationale", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.1:scope_change_drivers",  "Trigger list (new product line, new geo entry, new data source)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A721_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.2.1:program_review",
+    control_ref   = "A.7.2.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Purpose Documentation Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every in-scope activity has a documented purpose, purposes remain specific + clear, no undocumented processing has emerged (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.1:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.2.1:rev_reviewer",          "Reviewer identity (DPO + Privacy Office)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.2.1:rev_coverage_check",    "Coverage check — every in-scope activity has a purpose registered", "must", False, "§7.2.1 — every processing"),
+        ChecklistItem("item:A.7.2.1:rev_specificity_audit", "Specificity audit — sampled purposes reviewed for clarity + non-vagueness", "must", False, "§7.2.1 implementation guidance"),
+        ChecklistItem("item:A.7.2.1:rev_undocumented_sweep","Undocumented-processing sweep — new activities emerged since last review flagged for registration", "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.1:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.2.2 Identify lawful basis — op_process 4-leaf ─────────────────────────
+# §7.2.2: The organization shall determine, document and comply with the
+# relevant lawful basis for the processing of PII. Bridges to GDPR Art.6
+# lawfulness + Art.9/10 special-category + Art.22 automated decisions.
+
+REQ_A722_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.2.2:lawful_basis_procedure",
+    control_ref   = "A.7.2.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Lawful Basis Assessment Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.2.2 requires each PII processing activity to have a determined + documented lawful basis and to comply with that basis. The procedure governs how bases are selected from the applicable catalog (consent / contract / legal obligation / vital interests / public interest / legitimate interests), when balancing tests (legitimate interests) are performed, and how basis changes are handled.",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.2:proc_basis_catalog",    "Basis catalog — enumerated permitted bases per applicable jurisdiction (GDPR Art.6.1.a-f; other jurisdictions as applicable)", "must", False, "§7.2.2 implementation guidance — legal basis catalog"),
+        ChecklistItem("item:A.7.2.2:proc_selection_test",   "Selection test per basis (consent — freely given + specific + unambiguous; contract — necessity; legal obligation — cited law; vital interests — physical safety; public interest — cited task; legitimate interests — LIA with balancing test)", "must", False, "§7.2.2 implementation guidance"),
+        ChecklistItem("item:A.7.2.2:proc_lia_procedure",    "Legitimate-interests balancing test procedure (necessity + balancing against subject rights)", "must", False, "GDPR Art.6.1.f — balanced against interests + fundamental rights"),
+        ChecklistItem("item:A.7.2.2:proc_special_category_overlay","Special-category overlay (Art.9/10 basis required in addition to Art.6 for health, biometric, criminal, etc.)", "must", False, "§7.2.2 — special categories more stringent controls"),
+        ChecklistItem("item:A.7.2.2:proc_basis_change",     "Basis change procedure — changing basis requires re-assessment and often subject notice (§7.3.3)", "must", False, "§7.2.2 — changing/extending purposes"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.2:proc_review_signoff",   "DPO + legal counsel signoff before basis enters production", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A722_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.2.2:lawful_basis_register",
+    control_ref   = "A.7.2.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Lawful Basis Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-activity lawful basis record — the documented basis for every processing activity. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.2:reg_activity_id",       "Processing activity identifier per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.2.2:reg_primary_basis",     "Primary basis cited per row (Art.6.1.a-f or equivalent)", "must", False, "§7.2.2 — documented"),
+        ChecklistItem("item:A.7.2.2:reg_special_category_basis","Special-category basis where applicable (Art.9.2.a-j / Art.10 basis)", "must", False, "GDPR Art.9.2"),
+        ChecklistItem("item:A.7.2.2:reg_lia_reference",     "LIA reference per row where basis is legitimate interests", "must", False, "Art.6.1.f — balancing test recorded"),
+        ChecklistItem("item:A.7.2.2:reg_purpose_link",      "Purpose link (which A.7.2.1 purpose(s) this basis authorises)", "must", False, "§7.2.1 cross-link"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.2:reg_basis_date",        "Date basis established / last re-evaluated", "should", False, "Currency"),
+    ],
+)
+
+REQ_A722_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.2.2:applicable_scope",
+    control_ref   = "A.7.2.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Jurisdictions + Bases Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which jurisdictions apply to the org's processing (GDPR, UK GDPR, CCPA, LGPD, etc.) and therefore which lawful-basis catalogs are in play. Handles multi-jurisdictional overlap (e.g. cross-border processing needs bases valid in every applicable jurisdiction).",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.2:scope_jurisdictions",   "Applicable jurisdictions listed (with basis for each — establishment / target-market / monitoring)", "must", False, "§7.2.2 — applicable jurisdictions"),
+        ChecklistItem("item:A.7.2.2:scope_basis_catalogs",  "Per-jurisdiction basis catalog (Art.6.1 GDPR / CCPA opt-out model / LGPD Art.7)", "must", False, "§7.2.2 implementation guidance"),
+        ChecklistItem("item:A.7.2.2:scope_overlap_rules",   "Overlap rules — where an activity spans jurisdictions, most-restrictive-basis policy documented", "must", False, "Cross-border processing"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.2:scope_change_drivers",  "Trigger list (new geo entry, new regulation enacted)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A722_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.2.2:program_review",
+    control_ref   = "A.7.2.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Lawful Basis Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every activity has a valid basis, LIA balancing tests remain defensible, special-category dual-basis coverage intact, no basis-slippage (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.2:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.2.2:rev_reviewer",          "Reviewer identity (DPO + legal counsel)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.2.2:rev_basis_currency",    "Basis currency — every registered activity still has a valid basis in force", "must", False, "§7.2.2 — comply with basis"),
+        ChecklistItem("item:A.7.2.2:rev_lia_reaffirmation", "LIA reaffirmation — sampled legitimate-interests activities reviewed against current subject-rights context", "must", False, "GDPR Art.6.1.f — ongoing balancing"),
+        ChecklistItem("item:A.7.2.2:rev_special_category_audit","Special-category audit — dual-basis coverage confirmed where Art.9/10 data processed", "must", False, "GDPR Art.9.2"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.2:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.2.3 Determine when and how consent is to be obtained — op_process ─────
+# §7.2.3: The organization shall determine and document a process by which it
+# can demonstrate if, when and how consent for the processing of PII was
+# obtained from PII principals. Companion to A.7.2.4 (obtain/record).
+
+REQ_A723_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.2.3:consent_process_procedure",
+    control_ref   = "A.7.2.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Consent Determination Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.2.3 requires the org to determine + document HOW and WHEN consent will be obtained (as distinct from A.7.2.4 which is per-consent execution). Consent-quality requirements (freely given / specific / unambiguous / explicit for special categories) live here.",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.3:proc_when_consent_required","When-consent-required rules per activity (basis catalog references — see A.7.2.2)", "must", False, "§7.2.3 — when needed"),
+        ChecklistItem("item:A.7.2.3:proc_collection_mechanism","Collection mechanism per channel (web form / mobile app / physical form / verbal with recording)", "must", False, "§7.2.3 — how obtained"),
+        ChecklistItem("item:A.7.2.3:proc_quality_standard","Consent-quality standard (freely given / specific / unambiguous / clear affirmative act)", "must", False, "§7.2.4 implementation — consent should be freely given, specific, unambiguous, explicit"),
+        ChecklistItem("item:A.7.2.3:proc_no_bundling",     "No-bundling rule — consent not conditioned on service delivery except where genuinely necessary", "must", False, "§7.2.3 — not bundled"),
+        ChecklistItem("item:A.7.2.3:proc_children_overlay","Children-consent overlay — parental consent thresholds per jurisdiction (age of consent varies GDPR Art.8)", "must", False, "§7.2.3 — children subject to additional requirements"),
+        ChecklistItem("item:A.7.2.3:proc_special_category_overlay","Special-category explicit-consent overlay (Art.9.2.a explicit consent for health/biometric)", "must", False, "§7.2.4 — explicit"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.3:proc_owner",            "Named owner (DPO + Product / UX)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A723_CONSENT_ARTIFACT_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.2.3:consent_artifact_register",
+    control_ref   = "A.7.2.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Consent Mechanism Artifact Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-collection-channel record — the consent-collection artifact (form text, checkbox wording, UI screenshot, verbal script) captured before deployment, versioned on change. Annual review (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.3:reg_channel_id",        "Channel identifier per row (web signup / iOS app onboarding / support-call recording opt-in)", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.2.3:reg_artifact_snapshot", "Consent artifact snapshot (text + UI screenshot + version)", "must", False, "§7.2.4 — record consent"),
+        ChecklistItem("item:A.7.2.3:reg_purpose_link",      "Purpose link (which A.7.2.1 purposes this consent authorises)", "must", False, "§7.2.1 cross-link"),
+        ChecklistItem("item:A.7.2.3:reg_effective_date",    "Effective date per artifact version", "must", False, "Version tracking"),
+        ChecklistItem("item:A.7.2.3:reg_review_signoff",    "DPO + Legal signoff per artifact version", "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.3:reg_ux_review",         "UX review notes per version (dark-pattern check)", "should", False, "Consent-quality assurance"),
+    ],
+)
+
+REQ_A723_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.2.3:applicable_scope",
+    control_ref   = "A.7.2.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Consent Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which activities require consent (as opposed to relying on other Art.6 bases). Handles special categories where consent is the only viable basis + children where parental consent is required.",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.3:scope_consent_activities","Consent-required activity list (marketing / cookies non-essential / research participation / children)", "must", False, "§7.2.3 — when needed"),
+        ChecklistItem("item:A.7.2.3:scope_children_thresholds","Per-jurisdiction age-of-consent thresholds", "must", False, "GDPR Art.8 — 16 default, MS variation 13-16"),
+        ChecklistItem("item:A.7.2.3:scope_special_category_map","Special-category consent map — health / biometric / genetic / criminal / children require explicit consent unless another Art.9.2 basis applies", "must", False, "GDPR Art.9.2.a"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.3:scope_change_drivers",  "Trigger list (new marketing programme, new sensitive data collection)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A723_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.2.3:program_review",
+    control_ref   = "A.7.2.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Consent Determination Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — consent artifacts remain compliant, no-bundling holds, children handling correct, dark-pattern regression check (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.3:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.2.3:rev_reviewer",          "Reviewer identity (DPO + UX + Legal)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.2.3:rev_artifact_audit",    "Artifact audit — sampled consent forms reviewed against quality standard", "must", False, "§7.2.3 quality standard"),
+        ChecklistItem("item:A.7.2.3:rev_no_bundling_check", "No-bundling regression check — no service gated behind unrelated consent", "must", False, "§7.2.3 — not bundled"),
+        ChecklistItem("item:A.7.2.3:rev_children_audit",    "Children-consent audit — age-gates functioning where age-of-consent applies", "must", False, "GDPR Art.8"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.3:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.2.4 Obtain and record consent — op_process 4-leaf ─────────────────────
+# §7.2.4: The organization shall obtain and record consent from PII principals
+# according to the documented processes. Consent must be: freely given,
+# specific, unambiguous, explicit. Per-consent-event register.
+
+REQ_A724_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.2.4:consent_capture_procedure",
+    control_ref   = "A.7.2.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Consent Capture + Recording Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.2.4 requires per-consent-event capture with sufficient detail to demonstrate the consent on later request. Covers the record fields (who / when / what / how / version) and the demonstration pathway (subject request → consent-event lookup within X business days).",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.4:proc_record_fields",    "Per-consent record fields (subject identifier + timestamp + purposes consented to + artifact version consented to + collection mechanism)", "must", False, "§7.2.4 implementation — details of consent provided"),
+        ChecklistItem("item:A.7.2.4:proc_demonstration_pathway","Demonstration pathway — subject requests proof of consent, org retrieves record within stated SLA", "must", False, "§7.2.4 — provide on request"),
+        ChecklistItem("item:A.7.2.4:proc_pre_consent_information","Pre-consent information delivery per §7.3.3 (linked to A.7.3.3)", "must", False, "§7.2.4 — information delivered before consent process should follow guidance in 7.3.3"),
+        ChecklistItem("item:A.7.2.4:proc_freely_given_test","Freely-given test — no detriment for refusal, no bundled coercion", "must", False, "§7.2.4 — freely given"),
+        ChecklistItem("item:A.7.2.4:proc_specific_test",    "Specific test — one consent per purpose (or granular per-purpose selection)", "must", False, "§7.2.4 — specific"),
+        ChecklistItem("item:A.7.2.4:proc_unambiguous_test", "Unambiguous test — clear affirmative action, no pre-ticked boxes, no consent by silence", "must", False, "§7.2.4 — unambiguous + explicit"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.4:proc_withdrawal_link",  "Withdrawal pathway link (per §7.3.4 modify/withdraw consent)", "should", False, "§7.3.4 cross-link"),
+    ],
+)
+
+REQ_A724_CONSENT_RECORD_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.2.4:consent_record_register",
+    control_ref   = "A.7.2.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Per-Subject Consent Record Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-consent-event row — the auditable evidence that consent was given by a specific subject at a specific time for specific purposes with a specific artifact version. Not per-subject-summary; per-event.",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.4:reg_event_id",          "Unique consent event id per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.2.4:reg_subject_id",        "Subject identifier per row", "must", False, "§7.2.4 — identification of subject"),
+        ChecklistItem("item:A.7.2.4:reg_timestamp",         "Timestamp of consent per row", "must", False, "§7.2.4 — time consent provided"),
+        ChecklistItem("item:A.7.2.4:reg_purposes_consented","Purposes consented to per row (list of A.7.2.1 purpose ids)", "must", False, "§7.2.4 — specific"),
+        ChecklistItem("item:A.7.2.4:reg_artifact_version",  "Artifact version consented to per row (link to A.7.2.3 register)", "must", False, "§7.2.4 — consent statement"),
+        ChecklistItem("item:A.7.2.4:reg_channel",           "Collection channel per row (web / mobile / paper / verbal)", "must", False, "Traceability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.4:reg_withdrawal_link",   "Withdrawal timestamp where withdrawal has occurred", "should", False, "§7.3.4 cross-link"),
+    ],
+)
+
+REQ_A724_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.2.4:applicable_scope",
+    control_ref   = "A.7.2.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Consent Records Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which activities produce recordable consent events. Excludes non-consent bases (contract/legal obligation processing doesn't produce consent records).",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.4:scope_consent_activities","In-scope activities enumerated (map to A.7.2.3 consent-required list)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.2.4:scope_retention",       "Consent record retention (until withdrawn + statutory retention period for demonstration)", "must", False, "§7.2.4 — provide on request"),
+        ChecklistItem("item:A.7.2.4:scope_exclusions",      "Non-consent activities excluded with rationale (contract necessity / legal obligation basis)", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.4:scope_change_drivers",  "Trigger list (new consent-basis activity launched)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A724_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.2.4:program_review",
+    control_ref   = "A.7.2.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Consent Capture Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — consent records complete + retrievable within SLA, per-event demonstration works, withdrawal flags propagate to processing (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.4:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.2.4:rev_reviewer",          "Reviewer identity (DPO + Engineering)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.2.4:rev_retrievability",    "Retrievability test — sampled consent events retrieved within stated SLA", "must", False, "§7.2.4 — provide on request"),
+        ChecklistItem("item:A.7.2.4:rev_completeness_audit","Completeness audit — sampled consented users have retrievable records", "must", False, "§7.2.4 — record consent"),
+        ChecklistItem("item:A.7.2.4:rev_withdrawal_propagation","Withdrawal propagation — sampled withdrawals verified to have stopped downstream processing", "must", False, "§7.3.4 — modify or withdraw"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.4:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.2.5 Privacy impact assessment (PIA/DPIA) — op_process 4-leaf ──────────
+# §7.2.5: The organization shall assess the need for, and implement where
+# appropriate, a PIA whenever new processing of PII or changes to existing
+# processing is planned. GDPR bridge: Art.35 (DPIA) + Art.36 (Prior
+# consultation).
+
+REQ_A725_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.2.5:pia_procedure",
+    control_ref   = "A.7.2.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Privacy Impact Assessment Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.2.5 requires a documented PIA/DPIA process — when to trigger a PIA, what the assessment covers, who signs off, when to consult the supervisory authority. Bridges to GDPR Art.35 (mandatory-DPIA triggers) + Art.36 (prior consultation).",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.5:proc_trigger_criteria", "Trigger criteria — new processing / material changes / high-risk indicators (Art.35.3 mandatory list: systematic evaluation + large-scale special-category + systematic monitoring of public spaces + others per SA lists)", "must", False, "§7.2.5 — need for PIA + Art.35.3"),
+        ChecklistItem("item:A.7.2.5:proc_assessment_scope", "Assessment scope — PII types + storage + transfers + retention + risks to subjects + safeguards + residual risk", "must", False, "§7.2.5 implementation guidance + Art.35.7"),
+        ChecklistItem("item:A.7.2.5:proc_consultation",     "Stakeholder consultation — DPO opinion (Art.35.2) + subject-representative views where appropriate (Art.35.9)", "must", False, "GDPR Art.35.2 + Art.35.9"),
+        ChecklistItem("item:A.7.2.5:proc_signoff",          "Signoff — DPO signoff + business-owner signoff before processing commences", "must", False, "§7.2.5 accountability"),
+        ChecklistItem("item:A.7.2.5:proc_prior_consultation","Prior-consultation trigger — where residual high risk remains, SA consulted per Art.36", "must", False, "GDPR Art.36.1"),
+        ChecklistItem("item:A.7.2.5:proc_29134_alignment",  "Alignment with ISO/IEC 29134 methodology (referenced by §7.2.5)", "must", False, "§7.2.5 — Guidance on privacy impact assessments"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.5:proc_ref_toolkit",      "PIA toolkit / template referenced (form + risk-scoring rubric)", "should", False, "Consistency"),
+    ],
+)
+
+REQ_A725_PIA_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.2.5:pia_register",
+    control_ref   = "A.7.2.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "PIA / DPIA Report Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-PIA row — the register of completed PIAs (report link + date + signoff + residual risk + review-due date). Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.5:reg_pia_id",            "Unique PIA identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.2.5:reg_processing_activity","Processing activity assessed per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.2.5:reg_completion_date",   "PIA completion date per row", "must", False, "Currency"),
+        ChecklistItem("item:A.7.2.5:reg_signoff",           "Signoff identities per row (DPO + business owner)", "must", False, "§7.2.5 accountability"),
+        ChecklistItem("item:A.7.2.5:reg_residual_risk",     "Residual-risk rating per row (low/medium/high after mitigations)", "must", False, "Art.35.7.d"),
+        ChecklistItem("item:A.7.2.5:reg_sa_consultation",   "SA consultation flag per row (Art.36 invoked yes/no)", "must", False, "Art.36.1"),
+        ChecklistItem("item:A.7.2.5:reg_review_due",        "Next review due date per row (triggered by change or periodic)", "must", False, "§7.2.5 — changes to existing processing"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.5:reg_mitigations",       "Mitigations summary per row", "should", False, "Transparency"),
+    ],
+)
+
+REQ_A725_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.2.5:applicable_scope",
+    control_ref   = "A.7.2.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable PIA Triggers Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which processing activities crossed the PIA-required threshold. Handles the Art.35.3 mandatory list + SA-published lists + org-specific high-risk indicators.",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.5:scope_art35_3_mandatory","Art.35.3 mandatory categories mapped (systematic evaluation + Art.9/10 large-scale + systematic public monitoring)", "must", False, "GDPR Art.35.3"),
+        ChecklistItem("item:A.7.2.5:scope_sa_lists",        "SA-published mandatory-DPIA lists per applicable jurisdiction (Art.35.4)", "must", False, "GDPR Art.35.4"),
+        ChecklistItem("item:A.7.2.5:scope_org_indicators",  "Org-specific high-risk indicators (novel tech / vulnerable subjects / large-scale)", "must", False, "§7.2.5 — risks to PII principals"),
+        ChecklistItem("item:A.7.2.5:scope_exclusions",      "Out-of-scope processing (low-risk / legacy) with rationale", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.5:scope_change_drivers",  "Trigger list (new AI model / new geo / new data source)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A725_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.2.5:program_review",
+    control_ref   = "A.7.2.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "PIA Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every triggered activity has a completed PIA, PIAs remain current, SA-consultation obligations honoured (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.5:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.2.5:rev_reviewer",          "Reviewer identity (DPO + risk owner)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.2.5:rev_coverage_check",    "Coverage check — every triggered activity has a completed PIA on file", "must", False, "§7.2.5 — every new/changed processing"),
+        ChecklistItem("item:A.7.2.5:rev_currency_audit",    "Currency audit — PIAs older than currency threshold reviewed for material change", "must", False, "§7.2.5 — changes to existing processing"),
+        ChecklistItem("item:A.7.2.5:rev_sa_consultation_audit","SA-consultation audit — high-residual-risk PIAs verified to have escalated where required", "must", False, "Art.36.1"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.5:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.2.6 Contracts with PII processors — op_process 4-leaf ─────────────────
+# §7.2.6: The organization shall have a written contract with any PII
+# processor it uses. Bridges to GDPR Art.28 (processor). Cross-control:
+# 27001 A.5.19-23 supplier controls.
+
+REQ_A726_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.2.6:processor_contract_procedure",
+    control_ref   = "A.7.2.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "PII Processor Contracting Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.2.6 requires a written contract with every PII processor, addressing implementation of Annex B controls (or their equivalent). Bridges to GDPR Art.28.3 mandatory contract terms (documented instructions / confidentiality / security / subprocessor consent / Art.28.3.h assistance / return-or-delete / audit rights).",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.6:proc_written_form",     "Written form required — no verbal or informal processor arrangements", "must", False, "§7.2.6 — written contract"),
+        ChecklistItem("item:A.7.2.6:proc_art28_3_terms",    "Art.28.3 terms coverage (subject matter + duration + nature + purpose + PII categories + subject categories + controller/processor obligations)", "must", False, "GDPR Art.28.3"),
+        ChecklistItem("item:A.7.2.6:proc_annex_b_scope",    "Annex B implementation scope — which B.8.x controls apply per processor engagement (default: all)", "must", False, "§7.2.6 — implementation of appropriate controls in Annex B"),
+        ChecklistItem("item:A.7.2.6:proc_documented_instructions","Documented-instructions clause (Art.28.3.a) — processor acts only on written controller instructions", "must", False, "GDPR Art.28.3.a"),
+        ChecklistItem("item:A.7.2.6:proc_subprocessor_gate","Subprocessor consent gate (Art.28.2 + Art.28.4) — general or specific written authorisation", "must", False, "GDPR Art.28.2"),
+        ChecklistItem("item:A.7.2.6:proc_return_or_delete", "End-of-service disposition (Art.28.3.g) — return or delete all PII with certification", "must", False, "GDPR Art.28.3.g"),
+        ChecklistItem("item:A.7.2.6:proc_audit_rights",     "Audit rights (Art.28.3.h) — processor makes available all information + contributes to audits", "must", False, "GDPR Art.28.3.h"),
+        ChecklistItem("item:A.7.2.6:proc_exclusion_justification","Justification required if any Annex B control is excluded from contract (§5.4.1.3)", "must", False, "§7.2.6 — justify exclusion"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.6:proc_legal_review",     "Legal counsel review before signature", "should", False, "Defensibility"),
+    ],
+)
+
+REQ_A726_CONTRACT_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.2.6:processor_contract_register",
+    control_ref   = "A.7.2.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "PII Processor Contract Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-processor row — the register of PII processors engaged, the executed contract, its scope + expiry + Annex B coverage. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.6:reg_processor_id",      "Processor identifier per row (legal entity name)", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.2.6:reg_contract_reference","Executed contract reference (document + version + signature date)", "must", False, "§7.2.6 — written contract"),
+        ChecklistItem("item:A.7.2.6:reg_service_scope",     "Service scope per row (what the processor does + PII categories involved)", "must", False, "Art.28.3 subject matter + nature"),
+        ChecklistItem("item:A.7.2.6:reg_annex_b_coverage",  "Annex B controls covered per row (either 'all' or itemised subset with justification link)", "must", False, "§7.2.6 — all controls in Annex B assumed relevant"),
+        ChecklistItem("item:A.7.2.6:reg_subprocessor_flag", "Subprocessors permitted flag + list per row", "must", False, "Art.28.2"),
+        ChecklistItem("item:A.7.2.6:reg_expiry",            "Contract expiry / renewal date per row", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.6:reg_last_audit",        "Last processor audit / due-diligence date per row", "should", False, "Cross-link A.5.22 supplier review"),
+    ],
+)
+
+REQ_A726_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.2.6:applicable_scope",
+    control_ref   = "A.7.2.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Processor Engagements Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which supplier relationships qualify as 'PII processor' (as opposed to independent controller / vendor / integration). Correct classification determines whether A.7.2.6 or A.7.2.7 applies.",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.6:scope_processor_test",  "Processor test — supplier processes PII on org's behalf under org's instructions (not for its own purposes)", "must", False, "GDPR Art.4.8"),
+        ChecklistItem("item:A.7.2.6:scope_processor_list",  "In-scope processors enumerated with classification rationale", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.2.6:scope_exclusions",      "Excluded relationships (independent controllers / joint controllers → A.7.2.7 / non-PII vendors)", "must", False, "Classification defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.6:scope_change_drivers",  "Trigger list (new supplier onboarding / supplier role change)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A726_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.2.6:program_review",
+    control_ref   = "A.7.2.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Processor Contract Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every engaged processor has a current contract, Art.28.3 terms complete, subprocessor authorisations current (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.6:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.2.6:rev_reviewer",          "Reviewer identity (DPO + Procurement + Legal)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.2.6:rev_coverage_check",    "Coverage check — every engaged processor has a signed contract on file", "must", False, "§7.2.6 — written contract with any PII processor"),
+        ChecklistItem("item:A.7.2.6:rev_expiry_sweep",      "Expiry sweep — contracts approaching renewal flagged", "must", False, "Currency"),
+        ChecklistItem("item:A.7.2.6:rev_subprocessor_audit","Subprocessor audit — sampled contracts checked for current subprocessor authorisation", "must", False, "Art.28.2"),
+        ChecklistItem("item:A.7.2.6:rev_missing_terms_audit","Missing-terms audit — sampled contracts checked against Art.28.3 mandatory list", "must", False, "Art.28.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.6:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.2.7 Joint PII controller — op_process 4-leaf ──────────────────────────
+# §7.2.7: The organization shall determine respective roles and
+# responsibilities with any joint PII controller. Bridges to GDPR Art.26
+# joint controllers. profile_fact — many tenants have zero joint controller
+# arrangements.
+
+REQ_A727_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.2.7:joint_controller_procedure",
+    control_ref   = "A.7.2.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Joint PII Controller Arrangement Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.2.7 requires a documented arrangement with every joint controller — respective roles + responsibilities + subject-facing single point of contact. Bridges to GDPR Art.26 (arrangement + essence available to subjects + Art.26.3 subject can exercise rights against either party).",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.7:proc_classification_test","Classification test — when a relationship is joint control (jointly determine purposes + means) vs controller-processor vs independent controllers", "must", False, "GDPR Art.4.7 + Art.26.1"),
+        ChecklistItem("item:A.7.2.7:proc_arrangement_form", "Documented arrangement form — contract or equivalent binding document", "must", False, "§7.2.7 — contract or similar binding document"),
+        ChecklistItem("item:A.7.2.7:proc_role_allocation",  "Role + responsibility allocation (security / notice / rights fulfilment / breach notification / DPIA)", "must", False, "§7.2.7 implementation guidance"),
+        ChecklistItem("item:A.7.2.7:proc_essence_publication","Essence-of-arrangement publication — subject-facing summary of who does what, per Art.26.2", "must", False, "GDPR Art.26.2"),
+        ChecklistItem("item:A.7.2.7:proc_rights_exercise",  "Single point of contact + subject-rights routing (subjects can exercise against either controller regardless of arrangement)", "must", False, "GDPR Art.26.3"),
+        ChecklistItem("item:A.7.2.7:proc_breach_coordination","Breach-notification coordination — who notifies SA + subjects", "must", False, "Art.33 + Art.34 joint handling"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.7:proc_dispute_resolution","Dispute-resolution mechanism between joint controllers", "should", False, "Operational resilience"),
+    ],
+)
+
+REQ_A727_ARRANGEMENT_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.2.7:joint_controller_register",
+    control_ref   = "A.7.2.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Joint Controller Arrangement Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-arrangement row — the register of joint controller arrangements, the executed document, essence-publication link. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.7:reg_arrangement_id",    "Unique arrangement identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.2.7:reg_co_controller",     "Co-controller identity per row (legal entity)", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.2.7:reg_document_reference","Executed arrangement document reference per row", "must", False, "§7.2.7 — documented"),
+        ChecklistItem("item:A.7.2.7:reg_processing_scope",  "Processing scope per row (activities + PII categories jointly handled)", "must", False, "Art.26.1"),
+        ChecklistItem("item:A.7.2.7:reg_essence_url",       "Essence-of-arrangement URL / publication reference per row", "must", False, "Art.26.2"),
+        ChecklistItem("item:A.7.2.7:reg_effective_dates",   "Effective / termination dates per row", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.7:reg_contact_point",     "Subject-facing contact point per row", "should", False, "Art.26.1"),
+    ],
+)
+
+REQ_A727_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.2.7:applicable_scope",
+    control_ref   = "A.7.2.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Joint Controller Relationships Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which multi-party PII relationships involve joint control (as opposed to controller-processor or independent controllers). Many orgs have zero joint arrangements.",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.7:scope_joint_test",      "Joint-control test — jointly determine purposes AND means (both prongs required)", "must", False, "GDPR Art.4.7 + Art.26.1"),
+        ChecklistItem("item:A.7.2.7:scope_arrangements_list","In-scope arrangements enumerated (or 'none' with rationale)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.2.7:scope_exclusions",      "Relationships excluded (controller-processor → A.7.2.6 / independent-controllers → contract-not-arrangement)", "must", False, "Classification defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.7:scope_change_drivers",  "Trigger list (new partnership / new co-branded service)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A727_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.2.7:program_review",
+    control_ref   = "A.7.2.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Joint Controller Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every joint arrangement has a current documented arrangement, essence publications reachable, rights-routing functional (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.7:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.2.7:rev_reviewer",          "Reviewer identity (DPO + Legal)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.2.7:rev_coverage_check",    "Coverage check — every joint arrangement identified is documented", "must", False, "§7.2.7 — every joint controller"),
+        ChecklistItem("item:A.7.2.7:rev_essence_publication_audit","Essence-publication audit — sampled arrangements verified to have published essence reachable by subjects", "must", False, "Art.26.2"),
+        ChecklistItem("item:A.7.2.7:rev_rights_routing_test","Rights-routing test — sampled subject requests verified to route correctly regardless of party addressed", "must", False, "Art.26.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.7:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.2.8 Records related to processing PII — records_program 4-leaf ────────
+# §7.2.8: The organization shall determine and securely maintain the
+# necessary records in support of its obligations. This is the ROPA — Record
+# of Processing Activities. records_program spine (register-as-primary).
+# Bridges to GDPR Art.30 (Records of processing).
+
+REQ_A728_ROPA_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.2.8:pii_processing_ropa",
+    control_ref   = "A.7.2.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "PII Records of Processing (RoPA)",
+    trigger_type  = "profile_fact",
+    description   = "§7.2.8 requires records of PII processing activities to demonstrate accountability. Register-as-primary (records_program spine): the RoPA is the canonical artefact. Per-activity row — type / purpose / categories of PII + subjects / recipients + international transfers / retention / security measures. Bridges to GDPR Art.30 with the same required fields.",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.8:ropa_activity_id",      "Unique processing-activity identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.2.8:ropa_type_purpose",     "Type + purpose of processing per row (link to A.7.2.1 register)", "must", False, "§7.2.8 — type + purposes + Art.30.1.b"),
+        ChecklistItem("item:A.7.2.8:ropa_pii_categories",   "Categories of PII per row + categories of subjects (e.g. employees, customers, minors)", "must", False, "§7.2.8 — categories of PII + PII principals + Art.30.1.c"),
+        ChecklistItem("item:A.7.2.8:ropa_recipients",       "Categories of recipients per row (including third countries + international orgs)", "must", False, "§7.2.8 + Art.30.1.d + Art.30.1.e"),
+        ChecklistItem("item:A.7.2.8:ropa_transfer_safeguards","Transfer safeguards per row where third-country transfer occurs (Chap V mechanism cited)", "must", False, "Art.30.1.e + Chap V"),
+        ChecklistItem("item:A.7.2.8:ropa_retention",        "Retention period per row (or criteria)", "must", False, "Art.30.1.f"),
+        ChecklistItem("item:A.7.2.8:ropa_security_measures","General description of technical + organizational security measures per row", "must", False, "§7.2.8 + Art.30.1.g"),
+        ChecklistItem("item:A.7.2.8:ropa_owner",            "Named owner responsible for accuracy + completeness", "must", False, "§7.2.8 — owner responsible"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.8:ropa_dpia_link",        "DPIA report link per row where PIA performed (A.7.2.5)", "should", False, "§7.2.8 implementation — PIA report + cross-link"),
+    ],
+)
+
+REQ_A728_MAINTENANCE_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.2.8:ropa_maintenance_procedure",
+    control_ref   = "A.7.2.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "RoPA Maintenance Procedure",
+    trigger_type  = "profile_fact",
+    description   = "The procedure that keeps the RoPA accurate — how new activities are added, changes captured, retired activities removed, cadence for reconciliation against source-of-truth systems.",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.8:proc_add_activity",     "New-activity intake trigger + workflow (new product launch / new integration / new data source)", "must", False, "§7.2.8 — determine records"),
+        ChecklistItem("item:A.7.2.8:proc_change_capture",   "Change-capture — activity changes trigger RoPA update within stated SLA", "must", False, "Currency"),
+        ChecklistItem("item:A.7.2.8:proc_retire_activity",  "Retirement — activities that stop generate a retirement record (not deletion) for audit history", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.2.8:proc_reconciliation",   "Reconciliation cadence — against §7.2.1 purpose register + §7.2.2 basis register + §7.2.5 PIA register", "must", False, "Cross-register integrity"),
+        ChecklistItem("item:A.7.2.8:proc_secure_maintenance","Secure maintenance — access control + integrity for the RoPA itself", "must", False, "§7.2.8 — securely maintain"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.8:proc_owner",            "Named owner (DPO + Privacy Office)", "should", False, "§7.2.8 owner"),
+    ],
+)
+
+REQ_A728_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.2.8:applicable_scope",
+    control_ref   = "A.7.2.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "RoPA Coverage Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — coverage denominator for the RoPA. Every in-scope activity from A.7.2.1 purpose register must have a corresponding RoPA entry.",
+    must_contain  = [
+        ChecklistItem("item:A.7.2.8:scope_covered_activities","Covered activities enumerated (all processing activities the org performs)", "must", False, "§7.2.8 — activities that the organization performs"),
+        ChecklistItem("item:A.7.2.8:scope_coverage_test",   "Coverage test — RoPA rowcount reconciles against A.7.2.1 purpose register + system inventory", "must", False, "Integrity"),
+        ChecklistItem("item:A.7.2.8:scope_exclusions",      "Exclusions — anonymous / aggregate processing not in RoPA with rationale", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.8:scope_change_drivers",  "Trigger list (new product line / new geo / M&A activity)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A728_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.2.8:program_review",
+    control_ref   = "A.7.2.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "RoPA Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — RoPA is complete + accurate + current, cross-register integrity holds, owner accountability functional (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.2.8:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.2.8:rev_reviewer",          "Reviewer identity (DPO + Data Protection Council)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.2.8:rev_completeness",      "Completeness check — RoPA rowcount matches A.7.2.1 register + system inventory", "must", False, "§7.2.8 — accurate + complete"),
+        ChecklistItem("item:A.7.2.8:rev_accuracy_sample",   "Accuracy sample — random rows verified against source systems", "must", False, "Drift detection"),
+        ChecklistItem("item:A.7.2.8:rev_owner_signoff",     "Owner signoff — designated RoPA owner attests to accuracy + completeness", "must", False, "§7.2.8 — owner responsible"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.2.8:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.2.1 Customer agreement — op_process 4-leaf ────────────────────────────
+# §8.2.1: The organization (as PII processor) shall ensure the contract with
+# the customer (as PII controller) addresses the processor's role in
+# assisting with customer obligations. Bridges to Art.28.3.f + Art.28.3.e +
+# Art.28.9 + Art.35.1.
+
+REQ_B821_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.2.1:customer_agreement_procedure",
+    control_ref   = "B.8.2.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Customer PII Processing Agreement Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.2.1 requires the processor's contract with each customer to address the processor's role in assisting the customer's controller obligations (breach notification / PIA support / prior-consultation assistance / subject-rights operational support). Companion procedure from the processor side to A.7.2.6.",
+    must_contain  = [
+        ChecklistItem("item:B.8.2.1:proc_intake_gate",      "Intake gate — new customer onboarding blocked until PII processing agreement executed", "must", False, "§8.2.1 — where relevant"),
+        ChecklistItem("item:B.8.2.1:proc_assistance_scope", "Assistance scope enumerated (Art.28.3.e subject rights + Art.28.3.f security + breach notification + PIA support + prior consultation)", "must", False, "§8.2.1 — role in providing assistance"),
+        ChecklistItem("item:B.8.2.1:proc_documented_instructions","Documented-instructions mechanism (how instructions are recorded, escalated, disputed)", "must", False, "Art.28.3.a"),
+        ChecklistItem("item:B.8.2.1:proc_subject_matter_scope","Subject-matter + duration + nature + purpose scope per Art.28.3 requirements", "must", False, "§8.2.1 implementation — jurisdictions require these terms"),
+        ChecklistItem("item:B.8.2.1:proc_customer_dpia_support","Art.35.1 DPIA support pathway — how customer requests DPIA-input from processor", "must", False, "Art.35.1"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.1:proc_standard_terms",   "Standard terms template used across customers with change-control", "should", False, "Consistency"),
+    ],
+)
+
+REQ_B821_AGREEMENT_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.2.1:customer_agreement_register",
+    control_ref   = "B.8.2.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Customer PII Agreement Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-customer row — the register of executed processing agreements, coverage of assistance obligations, term. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.2.1:reg_customer_id",       "Customer identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:B.8.2.1:reg_agreement_reference","Executed agreement document reference per row", "must", False, "§8.2.1 — contract"),
+        ChecklistItem("item:B.8.2.1:reg_assistance_coverage","Assistance coverage per row (which Art.28.3.e-h obligations addressed)", "must", False, "§8.2.1 — assistance obligations"),
+        ChecklistItem("item:B.8.2.1:reg_instructions_channel","Documented-instructions channel per row (email log / ticket queue / portal)", "must", False, "Art.28.3.a"),
+        ChecklistItem("item:B.8.2.1:reg_term",              "Term / expiry / renewal per row", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.1:reg_customer_role",     "Customer role per row (controller / processor / joint) to route obligations correctly", "should", False, "§8.2.1 — depending on customer's role"),
+    ],
+)
+
+REQ_B821_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.2.1:applicable_scope",
+    control_ref   = "B.8.2.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Customer Engagements Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which customer engagements involve PII processing on the customer's behalf. Excludes non-PII services + own-controller services.",
+    must_contain  = [
+        ChecklistItem("item:B.8.2.1:scope_pii_processor_test","PII-processor test per engagement — processing PII on customer's behalf under customer's instructions", "must", False, "GDPR Art.4.8"),
+        ChecklistItem("item:B.8.2.1:scope_customer_list",   "In-scope customer engagements enumerated", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.2.1:scope_exclusions",      "Excluded engagements (own-controller services / non-PII services) with rationale", "must", False, "Classification defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.1:scope_change_drivers",  "Trigger list (new product line / new customer segment)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B821_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.2.1:program_review",
+    control_ref   = "B.8.2.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Customer Agreement Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every in-scope customer has an executed processing agreement covering the required assistance obligations (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.2.1:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.2.1:rev_reviewer",          "Reviewer identity (Legal + DPO + Sales Ops)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.2.1:rev_coverage_check",    "Coverage check — every in-scope customer has an executed agreement on file", "must", False, "§8.2.1 — where relevant"),
+        ChecklistItem("item:B.8.2.1:rev_gaps_audit",        "Gaps audit — sampled agreements checked for Art.28.3.e-h assistance coverage", "must", False, "§8.2.1 — assistance obligations"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.1:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.2.2 Organization's purposes — op_process 4-leaf ───────────────────────
+# §8.2.2: The organization shall ensure that PII processed on behalf of a
+# customer are only processed for the purposes expressed in the customer's
+# documented instructions. Bridges to GDPR Art.29 + Art.28.3.a + Art.32.4.
+
+REQ_B822_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.2.2:purpose_limitation_procedure",
+    control_ref   = "B.8.2.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Customer-Purpose Adherence Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.2.2 requires the processor to process PII ONLY for the purposes expressed in the customer's documented instructions — no side-purposes, no leverage of customer PII for own analytics or training. Governs how customer instructions are captured, cascaded internally, and audited.",
+    must_contain  = [
+        ChecklistItem("item:B.8.2.2:proc_instruction_capture","Instruction capture — customer purposes recorded per engagement (contract + change-notices)", "must", False, "§8.2.2 — documented instructions"),
+        ChecklistItem("item:B.8.2.2:proc_technical_binding","Technical binding — engineering controls that prevent processing beyond stated purposes (tenant isolation / data-tag enforcement / access scoping)", "must", False, "§8.2.2 — only processed for purposes"),
+        ChecklistItem("item:B.8.2.2:proc_no_side_purpose",  "No-side-purpose rule — customer PII not used for own analytics / ML training / product improvement without express permission", "must", False, "§8.2.2 — organization or subcontractors"),
+        ChecklistItem("item:B.8.2.2:proc_technical_justification","Technical-justification carve-out procedure — where processor must choose method for capacity reasons (per §8.2.2 implementation), justification documented + surfaced to customer", "must", False, "§8.2.2 implementation guidance"),
+        ChecklistItem("item:B.8.2.2:proc_customer_verification","Customer verification pathway — customer can audit purpose-limitation compliance", "must", False, "§8.2.2 — allow customer to verify"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.2:proc_owner",            "Named owner (Engineering + Privacy Engineering)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B822_ADHERENCE_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.2.2:purpose_adherence_register",
+    control_ref   = "B.8.2.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Customer Purpose Adherence Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-customer row — the stated purposes + technical-binding controls + any side-processing carve-outs. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.2.2:reg_customer_id",       "Customer identifier per row", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.2.2:reg_stated_purposes",   "Stated customer purposes per row (from B.8.2.1 agreement)", "must", False, "§8.2.2 — documented instructions"),
+        ChecklistItem("item:B.8.2.2:reg_binding_controls",  "Binding controls per row (tenant isolation config / data-tag enforcement / access scoping)", "must", False, "§8.2.2 — only processed for purposes"),
+        ChecklistItem("item:B.8.2.2:reg_permitted_secondary","Permitted secondary uses per row (where customer has authorised anonymised aggregate use)", "must", False, "§8.2.2 — express instruction"),
+        ChecklistItem("item:B.8.2.2:reg_last_verified",     "Last verification date per row", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.2:reg_customer_audit_history","Customer audit history — recent customer audits + findings", "should", False, "§8.2.2 — allow verification"),
+    ],
+)
+
+REQ_B822_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.2.2:applicable_scope",
+    control_ref   = "B.8.2.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Processing Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which processor services fall under B.8.2.2 (customer PII processed on their behalf) as opposed to org's own-controller processing.",
+    must_contain  = [
+        ChecklistItem("item:B.8.2.2:scope_services",        "In-scope services enumerated (customer-PII processing services)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.2.2:scope_own_controller",  "Own-controller carve-out — services where org acts as controller (billing / marketing to prospects) excluded with rationale", "must", False, "Classification defensibility"),
+        ChecklistItem("item:B.8.2.2:scope_data_flows",      "Data-flow map — customer PII vs own-controller PII boundary documented", "must", False, "§8.2.2 — only processed for purposes"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.2:scope_change_drivers",  "Trigger list (new service launch / new integration)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B822_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.2.2:program_review",
+    control_ref   = "B.8.2.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Purpose Adherence Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — technical bindings enforce customer purposes, no side-purpose drift, customer-verification pathways functional (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.2.2:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.2.2:rev_reviewer",          "Reviewer identity (DPO + Engineering Lead + Compliance)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.2.2:rev_technical_binding_audit","Technical binding audit — sampled tenant boundaries verified to enforce purpose limits", "must", False, "§8.2.2 — only processed for purposes"),
+        ChecklistItem("item:B.8.2.2:rev_side_purpose_sweep","Side-purpose drift sweep — cross-tenant analytics + ML training pipelines checked for unauthorised customer-PII use", "must", False, "§8.2.2 — no purposes other than expressed"),
+        ChecklistItem("item:B.8.2.2:rev_customer_verification_health","Customer verification health — audits requested + supported within stated SLA", "must", False, "§8.2.2 — allow customer to verify"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.2:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.2.3 Marketing and advertising use — op_process 4-leaf ─────────────────
+# §8.2.3: The organization shall not use PII processed under a contract for
+# marketing/advertising without establishing prior consent from the PII
+# principal, and shall not make such consent a condition of service. Bridge
+# to Art.7.4 (freely given consent — no service conditionality).
+
+REQ_B823_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.2.3:marketing_use_procedure",
+    control_ref   = "B.8.2.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Marketing / Advertising Use Prohibition Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.2.3 prohibits the processor from using customer PII for marketing/advertising without prior subject consent AND prohibits conditioning service on such consent. Governs how any marketing activity involving customer PII is gated, evidenced, and audited.",
+    must_contain  = [
+        ChecklistItem("item:B.8.2.3:proc_default_prohibition","Default prohibition — customer PII not usable for org's marketing/advertising by default", "must", False, "§8.2.3 — shall not use"),
+        ChecklistItem("item:B.8.2.3:proc_consent_evidence_requirement","Consent evidence requirement — if any marketing/advertising use is permitted, subject-level consent evidence required (from customer or via processor arrangement)", "must", False, "§8.2.3 — prior consent obtained"),
+        ChecklistItem("item:B.8.2.3:proc_no_conditionality","No-conditionality rule — service delivery not conditioned on subject accepting marketing", "must", False, "§8.2.3 — shall not make such consent a condition"),
+        ChecklistItem("item:B.8.2.3:proc_customer_marketing_permit","Customer-marketing permit path — customer explicitly authorises + provides consent evidence", "must", False, "§8.2.3 implementation — documented"),
+        ChecklistItem("item:B.8.2.3:proc_freely_given_alignment","Alignment with Art.7.4 — freely-given consent test factored into any permit granted", "must", False, "GDPR Art.7.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.3:proc_owner",            "Named owner (Marketing + Compliance)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B823_EXCEPTION_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.2.3:marketing_exception_register",
+    control_ref   = "B.8.2.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Marketing Use Exception Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-exception row — the register of authorised marketing/advertising uses of customer PII (typically zero rows for most processors). Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.2.3:reg_exception_id",      "Unique exception identifier per row", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.2.3:reg_customer_id",       "Customer identifier per row (which customer's PII involved)", "must", False, "Scope"),
+        ChecklistItem("item:B.8.2.3:reg_customer_permit",   "Customer-permit document reference per row (contract clause / signed permit)", "must", False, "§8.2.3 — customer contractual requirements documented"),
+        ChecklistItem("item:B.8.2.3:reg_subject_consent",   "Subject-level consent evidence path per row (customer-obtained + provided to processor OR processor-obtained direct)", "must", False, "§8.2.3 — prior consent"),
+        ChecklistItem("item:B.8.2.3:reg_activity_scope",    "Marketing activity scope per row (targeted advertising channels + creative)", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.3:reg_withdrawal_handling","Withdrawal handling pathway per row (how subject opt-out propagates)", "should", False, "Art.7.3 — right to withdraw"),
+    ],
+)
+
+REQ_B823_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.2.3:applicable_scope",
+    control_ref   = "B.8.2.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Marketing Activities Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which processor activities could touch customer PII for marketing/advertising purposes. For most processors, this scope is empty (customer PII strictly siloed from marketing).",
+    must_contain  = [
+        ChecklistItem("item:B.8.2.3:scope_marketing_channels","Marketing channels enumerated (email marketing / retargeting / in-product prompts / third-party ad platforms)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.2.3:scope_pii_isolation",   "Customer-PII isolation posture (marketing systems use own-controller data only)", "must", False, "§8.2.3 — default prohibition"),
+        ChecklistItem("item:B.8.2.3:scope_exceptions",      "Documented exceptions (empty for most processors) with rationale", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.3:scope_change_drivers",  "Trigger list (new marketing programme launched / new customer permit request)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B823_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.2.3:program_review",
+    control_ref   = "B.8.2.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Marketing Use Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — customer-PII isolation from marketing intact, exceptions defensible + honoured, no conditionality drift (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.2.3:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.2.3:rev_reviewer",          "Reviewer identity (DPO + Marketing Lead)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.2.3:rev_isolation_audit",   "Isolation audit — marketing systems verified to use own-controller PII only", "must", False, "§8.2.3 — shall not use"),
+        ChecklistItem("item:B.8.2.3:rev_conditionality_check","No-conditionality regression check — signup / renewal / support flows not gated on marketing consent", "must", False, "§8.2.3 — shall not make consent a condition"),
+        ChecklistItem("item:B.8.2.3:rev_exception_audit",   "Exception audit — any registered exceptions still defensible + consent evidence current", "must", False, "§8.2.3 — prior consent"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.3:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.2.4 Infringing instruction — op_process 4-leaf ────────────────────────
+# §8.2.4: The organization shall inform the customer if, in its opinion, a
+# processing instruction infringes applicable legislation. Bridge to
+# Art.28.3.h (processor's duty to inform).
+
+REQ_B824_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.2.4:infringing_instruction_procedure",
+    control_ref   = "B.8.2.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Infringing Instruction Notification Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.2.4 requires the processor to inform the customer if a processing instruction appears to infringe legislation / regulation. Governs the internal review triggering, escalation path, notification format, and record-keeping. Bridges to Art.28.3.h processor duty to notify.",
+    must_contain  = [
+        ChecklistItem("item:B.8.2.4:proc_review_trigger",   "Review trigger — which channels raise potential infringement (support / legal / engineering / compliance)", "must", False, "§8.2.4 — organization's opinion"),
+        ChecklistItem("item:B.8.2.4:proc_legal_assessment", "Legal assessment step — DPO / legal counsel assesses the instruction against applicable legislation", "must", False, "§8.2.4 — applicable legislation and/or regulation"),
+        ChecklistItem("item:B.8.2.4:proc_customer_notification","Customer notification format — written notice with cited legislation, dispute pathway, and 'processor's opinion' framing", "must", False, "§8.2.4 — inform the customer"),
+        ChecklistItem("item:B.8.2.4:proc_processing_pause", "Processing-pause protocol — where infringement is clear + severe, processing paused pending customer confirmation or withdrawal", "must", False, "Art.28.3.h"),
+        ChecklistItem("item:B.8.2.4:proc_notification_records","Notification record retention — every issued notice retained for audit", "must", False, "Audit trail"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.4:proc_owner",            "Named owner (DPO + Legal counsel)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B824_NOTIFICATION_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.2.4:infringing_notification_register",
+    control_ref   = "B.8.2.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Infringing Instruction Notification Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-notification row — the register of infringing-instruction notices issued. Often near-empty in practice, but every issued notice must be captured. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.2.4:reg_notification_id",   "Unique notification identifier per row", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.2.4:reg_customer_id",       "Customer identifier per row", "must", False, "Scope"),
+        ChecklistItem("item:B.8.2.4:reg_instruction_summary","Instruction summary per row (what the customer asked for)", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.2.4:reg_legislation_cited", "Legislation cited per row (which provision the instruction appears to infringe)", "must", False, "§8.2.4 — applicable legislation"),
+        ChecklistItem("item:B.8.2.4:reg_notification_date", "Notification issued date per row", "must", False, "Currency"),
+        ChecklistItem("item:B.8.2.4:reg_customer_response", "Customer response per row (withdrew / defended / disputed / no response)", "must", False, "Resolution audit trail"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.4:reg_escalation",        "Escalation history per row (Legal / DPO / SA notification if unresolved)", "should", False, "Governance"),
+    ],
+)
+
+REQ_B824_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.2.4:applicable_scope",
+    control_ref   = "B.8.2.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Instruction Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which customer-instruction channels are subject to infringement review. Broad by default (every documented instruction), narrower where technological constraints limit review ability per §8.2.4 implementation.",
+    must_contain  = [
+        ChecklistItem("item:B.8.2.4:scope_instruction_channels","Instruction channels enumerated (contract terms + change orders + support tickets + product configuration)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.2.4:scope_review_capability","Review capability disclosure — where technological constraints limit ability to detect infringement (per §8.2.4 implementation)", "must", False, "§8.2.4 implementation — depend on technological context"),
+        ChecklistItem("item:B.8.2.4:scope_priority_topics", "Priority topics — instruction types most likely to raise infringement issues (retention / disclosure / transfers / children / special category)", "must", False, "Risk targeting"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.4:scope_change_drivers",  "Trigger list (new legislation enacted / new product configuration surface)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B824_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.2.4:program_review",
+    control_ref   = "B.8.2.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Infringing Instruction Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — review triggers functional, notifications issued when required, escalation records intact (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.2.4:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.2.4:rev_reviewer",          "Reviewer identity (DPO + Legal)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.2.4:rev_trigger_health",    "Trigger health — sample of high-risk instruction categories reviewed for missed infringement flags", "must", False, "Drift detection"),
+        ChecklistItem("item:B.8.2.4:rev_notification_audit","Notification audit — sampled notifications reviewed for accuracy + timeliness", "must", False, "§8.2.4 — inform the customer"),
+        ChecklistItem("item:B.8.2.4:rev_legislation_currency","Legislation currency — cited legislation updated for regulatory changes", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.4:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.2.5 Customer obligations — op_process 4-leaf ──────────────────────────
+# §8.2.5: The organization shall provide the customer with appropriate
+# information such that the customer can demonstrate compliance. Bridges to
+# Art.28.3.h processor's duty to make available.
+
+REQ_B825_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.2.5:customer_information_procedure",
+    control_ref   = "B.8.2.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Customer Compliance Information Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.2.5 requires the processor to provide the customer with information sufficient for the customer to demonstrate their own compliance. Governs audit-support pathway (Art.28.3.h), certification-sharing (SOC 2 / ISO 27001 / 27701), and ad-hoc information requests.",
+    must_contain  = [
+        ChecklistItem("item:B.8.2.5:proc_information_catalog","Information catalog — what the org routinely makes available (certifications / audit reports / security whitepaper / DPIA input / data flow map)", "must", False, "§8.2.5 — appropriate information"),
+        ChecklistItem("item:B.8.2.5:proc_audit_support",    "Audit support pathway — how customers request + receive audit info within stated SLA", "must", False, "§8.2.5 implementation — audits by customer or another auditor"),
+        ChecklistItem("item:B.8.2.5:proc_third_party_audit","Third-party audit acceptance — customer-mandated auditor engagement rules", "must", False, "§8.2.5 — another auditor mandated"),
+        ChecklistItem("item:B.8.2.5:proc_information_request","Ad-hoc information request pathway — customer inquiries routed + responded within stated SLA", "must", False, "§8.2.5 — appropriate information"),
+        ChecklistItem("item:B.8.2.5:proc_contract_alignment","Contract alignment — audit + information rights consistent with B.8.2.1 agreement + Art.28.3.h", "must", False, "Art.28.3.h"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.5:proc_owner",            "Named owner (Trust + Compliance)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B825_SUPPORT_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.2.5:customer_audit_register",
+    control_ref   = "B.8.2.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Customer Audit + Information Support Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-support-request row — the register of customer audits + information requests + responses. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.2.5:reg_request_id",        "Unique request identifier per row", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.2.5:reg_customer_id",       "Requesting customer identifier per row", "must", False, "Scope"),
+        ChecklistItem("item:B.8.2.5:reg_request_type",      "Request type per row (audit / certification-share / DPIA input / DSAR support / configuration query)", "must", False, "§8.2.5 — appropriate information"),
+        ChecklistItem("item:B.8.2.5:reg_response_date",     "Response date per row (vs stated SLA)", "must", False, "Currency"),
+        ChecklistItem("item:B.8.2.5:reg_response_summary",  "Response summary per row (what was shared / rationale for redaction if any)", "must", False, "Audit trail"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.5:reg_customer_satisfaction","Customer satisfaction / follow-up per row", "should", False, "Continuous improvement"),
+    ],
+)
+
+REQ_B825_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.2.5:applicable_scope",
+    control_ref   = "B.8.2.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Information + Audit Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — what information the org holds that is relevant to customer compliance demonstration + which certification programs are current + how audits are supported per contract tier.",
+    must_contain  = [
+        ChecklistItem("item:B.8.2.5:scope_information_types","Information types available (certification reports / SOC 2 / ISO 27001 / ISO 27701 / pen test summaries / architecture whitepapers)", "must", False, "§8.2.5 — appropriate information"),
+        ChecklistItem("item:B.8.2.5:scope_audit_tiers",     "Audit tier map (contract tier → audit rights: e.g. Enterprise → onsite / Business → questionnaire / Startup → certification only)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.2.5:scope_certifications_current","Current certifications enumerated with expiry", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.5:scope_change_drivers",  "Trigger list (new certification obtained / certification lapsed / new audit tier launched)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B825_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.2.5:program_review",
+    control_ref   = "B.8.2.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Customer Support Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — support pathways functional, SLAs met, certifications current, audit rights honoured (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.2.5:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.2.5:rev_reviewer",          "Reviewer identity (Trust + Compliance + Sales Ops)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.2.5:rev_sla_audit",         "SLA audit — sampled requests measured against response SLA", "must", False, "§8.2.5 — appropriate information"),
+        ChecklistItem("item:B.8.2.5:rev_certification_health","Certification health — currency + scope of shared certifications reviewed", "must", False, "Currency"),
+        ChecklistItem("item:B.8.2.5:rev_audit_rights_audit","Audit rights audit — customer audits requested + granted per contract tier", "must", False, "§8.2.5 — audits conducted by customer"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.5:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.2.6 Records related to processing PII — records_program 4-leaf ────────
+# §8.2.6: The organization shall determine and maintain the necessary records
+# in support of demonstrating compliance with its obligations. Processor-side
+# RoPA. Bridges to GDPR Art.30.2 (processor Art.30 obligations) + Art.30.3-5.
+
+REQ_B826_ROPA_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.2.6:processor_ropa_register",
+    control_ref   = "B.8.2.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Processor Records of Processing (RoPA)",
+    trigger_type  = "profile_fact",
+    description   = "§8.2.6 requires processor-side records of processing carried out on behalf of each customer. Per-customer processing record. Register-as-primary (records_program spine). Bridges to Art.30.2 — smaller field set than controller RoPA (Art.30.1) but same secure-maintenance discipline.",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.2.6:ropa_customer_id",      "Customer identifier per row (each controller the org processes for)", "must", False, "Referenceability"),
+        ChecklistItem("item:B.8.2.6:ropa_processing_categories","Categories of processing carried out per customer per row (Art.30.2.b)", "must", False, "§8.2.6 — categories of processing carried out"),
+        ChecklistItem("item:B.8.2.6:ropa_transfers",        "Third-country / international-org transfers per row (Art.30.2.c) with cited safeguards", "must", False, "§8.2.6 — transfers to third countries"),
+        ChecklistItem("item:B.8.2.6:ropa_security_measures","General description of technical + organizational measures per row (Art.30.2.d)", "must", False, "§8.2.6 — technical and organizational security measures"),
+        ChecklistItem("item:B.8.2.6:ropa_subprocessor_list","Subprocessor list per row (Art.30.2 + Art.28.2)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.2.6:ropa_processor_dpo",    "Processor DPO / representative contact if applicable (Art.30.2.a)", "must", False, "Art.30.2.a"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.6:ropa_last_verified",    "Last verification date per row (against customer instruction record)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B826_MAINTENANCE_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.2.6:ropa_maintenance_procedure",
+    control_ref   = "B.8.2.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Processor RoPA Maintenance Procedure",
+    trigger_type  = "profile_fact",
+    description   = "How the processor RoPA is kept accurate — new customer onboarding trigger, customer instruction changes, subprocessor changes, retirement of customers, secure maintenance.",
+    must_contain  = [
+        ChecklistItem("item:B.8.2.6:proc_onboarding_trigger","New-customer onboarding trigger — RoPA row created per new engagement (link to B.8.2.1)", "must", False, "§8.2.6 — support of demonstrating compliance"),
+        ChecklistItem("item:B.8.2.6:proc_instruction_change","Instruction-change capture — customer purpose changes trigger RoPA update", "must", False, "§8.2.6 — as specified in applicable contract"),
+        ChecklistItem("item:B.8.2.6:proc_subprocessor_update","Subprocessor change — subprocessor additions / removals trigger RoPA update", "must", False, "Art.28.2 currency"),
+        ChecklistItem("item:B.8.2.6:proc_secure_maintenance","Secure maintenance — access control + integrity for the processor RoPA", "must", False, "§8.2.6 — maintain the necessary records"),
+        ChecklistItem("item:B.8.2.6:proc_customer_availability","Customer-availability path — how a customer requests + receives their RoPA row extract", "must", False, "§8.2.5 audit-support cross-link"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.6:proc_owner",            "Named owner (DPO + Trust Ops)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B826_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.2.6:applicable_scope",
+    control_ref   = "B.8.2.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Processor RoPA Coverage Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — every customer engagement in scope of B.8.2.1 must have a corresponding B.8.2.6 RoPA row. Excludes own-controller processing.",
+    must_contain  = [
+        ChecklistItem("item:B.8.2.6:scope_customer_engagements","In-scope customer engagements (from B.8.2.1 register)", "must", False, "§8.2.6 — carried out on behalf of a customer"),
+        ChecklistItem("item:B.8.2.6:scope_own_controller_exclusion","Own-controller processing excluded (goes to a separate own-controller RoPA if the org also acts as controller — Arion does both)", "must", False, "Classification defensibility"),
+        ChecklistItem("item:B.8.2.6:scope_coverage_test",   "Coverage test — processor RoPA rowcount reconciles against B.8.2.1 customer register", "must", False, "Integrity"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.6:scope_change_drivers",  "Trigger list (new customer onboarding / customer churn)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B826_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.2.6:program_review",
+    control_ref   = "B.8.2.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Processor RoPA Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — processor RoPA complete + accurate + current, cross-register reconciliation intact, secure maintenance (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.2.6:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.2.6:rev_reviewer",          "Reviewer identity (DPO + Trust Ops)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.2.6:rev_completeness",      "Completeness check — one RoPA row per active customer engagement", "must", False, "§8.2.6 — necessary records"),
+        ChecklistItem("item:B.8.2.6:rev_accuracy_sample",   "Accuracy sample — random rows verified against customer instruction record + subprocessor list", "must", False, "Drift detection"),
+        ChecklistItem("item:B.8.2.6:rev_customer_extract_test","Customer-extract test — sampled customers requested + received their RoPA row within SLA", "must", False, "§8.2.5 cross-link"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.2.6:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ==============================================================================
+# End ISO 27701 Batch 1 — 14 anchors × 4 leaves = 56 EvidenceRequirements.
+# Next: relationship_catalog.py Batch 1 bridges (SUPPORTS 27701→27001 +
+# IMPLEMENTS 27701→GDPR per Annex D).
+# ==============================================================================
+
+
 # ── Annex A.5.23 — InfoSec for use of cloud services — operational_process (4-leaf) ──
 # Promoted 2026-05-31 from single-leaf to multi-leaf per
 # [[curation-program-full-multi-leaf]]. Spine: operational_process → policy
@@ -17032,6 +18283,67 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     # Operational
     REQ_BREACH_NOTIFICATION,
     REQ_DSAR_RESPONSE,
+
+    # ── ISO 27701:2019 Batch 1 — Conditions for collection + processing (14 × 4 = 56 leaves) ──
+    # Controller side §A.7.2.x
+    REQ_A721_PROCEDURE,
+    REQ_A721_REGISTER,
+    REQ_A721_APPLICABLE_SCOPE,
+    REQ_A721_PROGRAM_REVIEW,
+    REQ_A722_PROCEDURE,
+    REQ_A722_REGISTER,
+    REQ_A722_APPLICABLE_SCOPE,
+    REQ_A722_PROGRAM_REVIEW,
+    REQ_A723_PROCEDURE,
+    REQ_A723_CONSENT_ARTIFACT_REGISTER,
+    REQ_A723_APPLICABLE_SCOPE,
+    REQ_A723_PROGRAM_REVIEW,
+    REQ_A724_PROCEDURE,
+    REQ_A724_CONSENT_RECORD_REGISTER,
+    REQ_A724_APPLICABLE_SCOPE,
+    REQ_A724_PROGRAM_REVIEW,
+    REQ_A725_PROCEDURE,
+    REQ_A725_PIA_REGISTER,
+    REQ_A725_APPLICABLE_SCOPE,
+    REQ_A725_PROGRAM_REVIEW,
+    REQ_A726_PROCEDURE,
+    REQ_A726_CONTRACT_REGISTER,
+    REQ_A726_APPLICABLE_SCOPE,
+    REQ_A726_PROGRAM_REVIEW,
+    REQ_A727_PROCEDURE,
+    REQ_A727_ARRANGEMENT_REGISTER,
+    REQ_A727_APPLICABLE_SCOPE,
+    REQ_A727_PROGRAM_REVIEW,
+    REQ_A728_ROPA_REGISTER,
+    REQ_A728_MAINTENANCE_PROCEDURE,
+    REQ_A728_APPLICABLE_SCOPE,
+    REQ_A728_PROGRAM_REVIEW,
+    # Processor side §B.8.2.x
+    REQ_B821_PROCEDURE,
+    REQ_B821_AGREEMENT_REGISTER,
+    REQ_B821_APPLICABLE_SCOPE,
+    REQ_B821_PROGRAM_REVIEW,
+    REQ_B822_PROCEDURE,
+    REQ_B822_ADHERENCE_REGISTER,
+    REQ_B822_APPLICABLE_SCOPE,
+    REQ_B822_PROGRAM_REVIEW,
+    REQ_B823_PROCEDURE,
+    REQ_B823_EXCEPTION_REGISTER,
+    REQ_B823_APPLICABLE_SCOPE,
+    REQ_B823_PROGRAM_REVIEW,
+    REQ_B824_PROCEDURE,
+    REQ_B824_NOTIFICATION_REGISTER,
+    REQ_B824_APPLICABLE_SCOPE,
+    REQ_B824_PROGRAM_REVIEW,
+    REQ_B825_PROCEDURE,
+    REQ_B825_SUPPORT_REGISTER,
+    REQ_B825_APPLICABLE_SCOPE,
+    REQ_B825_PROGRAM_REVIEW,
+    REQ_B826_ROPA_REGISTER,
+    REQ_B826_MAINTENANCE_PROCEDURE,
+    REQ_B826_APPLICABLE_SCOPE,
+    REQ_B826_PROGRAM_REVIEW,
+    # ── End ISO 27701 Batch 1 ────────────────────────────────────────────────
 ]
 
 
