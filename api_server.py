@@ -449,6 +449,10 @@ class ChatResponse(BaseModel):
     refs:       list[str]     = []
     trace_id:   str
     latency_ms: int
+    # Tier-4 structured templates block for action-oriented queries
+    # that cite NC/OFI controls. Payload shape:
+    # rag/templates/answer_footer.py:build_templates_block.
+    templates:  Optional[dict] = None
 
 
 @app.post("/api/v1/chat", response_model=ChatResponse, tags=["chat"])
@@ -527,6 +531,7 @@ async def chat(
             refs       = refs if isinstance(refs, list) else [],
             trace_id   = trace_id,
             latency_ms = latency_ms,
+            templates  = result.get("templates_block"),
         )
     except Exception as e:
         logger.error(f"Chat error: {e}", exc_info=True)
@@ -602,9 +607,10 @@ async def chat_stream(
                      if has_prior
                      else make_initial_state(tenant, query=question))
 
-            answer_text = ""
-            refs        = []
-            qtype       = None
+            answer_text     = ""
+            refs            = []
+            qtype           = None
+            templates_block = None
 
             async for event in graph.astream_events(state, cfg, version="v2"):
                 kind = event.get("event", "")
@@ -633,6 +639,10 @@ async def chat_stream(
                     if candidate:
                         answer_text = candidate
                         refs  = _out.get("cited_refs", []) or []
+                        # Tier-4 structured templates block (2026-07-02).
+                        # Captured here so we can emit it as its own
+                        # SSE event after tokens, before 'done'.
+                        templates_block = _out.get("templates_block") or None
                         if qtype != "clarification":
                             qtype = _out.get("question_type") or _out.get("answer_source")
                         # Strip selection artifacts
@@ -644,6 +654,12 @@ async def chat_stream(
                         for i in range(0, len(answer_text), 50):
                             yield sse({"type": "token", "text": answer_text[i:i+50]})
                             await asyncio.sleep(0)
+
+            # Tier-4 templates block — emit as its own event after tokens
+            # so the client can render it as a structured card block
+            # rather than parsing it out of the answer text.
+            if templates_block:
+                yield sse({"type": "templates", "block": templates_block})
 
             latency_ms = int((time.time() - t_start) * 1000)
             if hasattr(qtype, "value"):

@@ -61,6 +61,12 @@ class ArionState(TypedDict):
     cited_refs:   list[str]
     posture_findings: dict
     answer_source: str                   # "postgres" | "llm" | ""
+    # Tier-4 structured templates block (2026-07-02). Populated when
+    # the query is action-oriented and cited refs include NC/OFI
+    # controls. Payload shape documented in
+    # rag/templates/answer_footer.py:build_templates_block.
+    # Chat UI renders per-leaf; API consumers get JSON.
+    templates_block: dict | None
 
     # ── Error handling ─────────────────────────────────────────────────────
     error:        str
@@ -103,6 +109,7 @@ def make_initial_state(tenant: TenantProfile, query: str = "") -> ArionState:
         cited_refs      = [],
         posture_findings= {},
         answer_source   = "",
+        templates_block = None,
         error           = "",
         resolver_trace  = None,
         last_entity     = {},

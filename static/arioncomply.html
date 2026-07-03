@@ -3704,7 +3704,7 @@ function renderMd(text) {
 }
 
 // ── Chat ──
-function appendMsg(role, text, refs, ms) {
+function appendMsg(role, text, refs, ms, templatesBlock) {
   const empty = document.getElementById('chat-empty');
   if (empty) empty.remove();
   const sugg = document.getElementById('chat-suggestions');
@@ -3743,12 +3743,76 @@ function appendMsg(role, text, refs, ms) {
     if (refs && refs.length) {
       inner += `<div class="msg-refs">${refs.map(r=>`<span class="ref-tag">${r}</span>`).join('')}</div>`;
     }
+    if (templatesBlock) {
+      inner += renderTemplatesBlock(templatesBlock);
+    }
     if (ms) inner += `<div class="msg-meta">${(ms/1000).toFixed(1)}s</div>`;
     div.innerHTML = inner;
   }
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
   return div;
+}
+
+// Tier-4 structured templates block rendered under an assistant answer.
+// Contextual mode: per-leaf card with progress-aware line + right
+// format download + cite-mode secondary CTA + dashboard drill-in.
+// Also renders a small starter-kit nudge when the tenant is fresh.
+// Data shape: rag/templates/answer_footer.py:build_templates_block.
+function renderTemplatesBlock(block) {
+  if (!block) return '';
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const attr = s => esc(s).replace(/"/g,'&quot;');
+  const leaves = block.leaves || [];
+  const nudge  = block.starter_nudge;
+
+  let html = '';
+
+  if (leaves.length) {
+    html += `<div class="msg-templates" style="margin-top:10px;padding:10px 12px;background:#FAF8F2;border:1px solid #E8E5DA;border-radius:6px">
+      <div style="font-size:11px;color:#5C5A4F;margin-bottom:6px">
+        <i class="ti ti-toolbox"></i> Ready-to-use starters for the findings above
+      </div>`;
+    for (const l of leaves) {
+      const prog = l.progress || {bound:0, total:0, remaining:0};
+      const progLine = prog.total > 0
+        ? `${prog.remaining} of ${prog.total} required element${prog.total===1?'':'s'} still to fill in`
+        : 'Fresh template — no elements yet';
+      const primary = l.primary_download;
+      const dashboard = l.dashboard_url || '';
+      const citeLine = l.cite_acceptable
+        ? `<span style="color:#9C9A8E;font-size:11px;margin-left:auto"> · Already have it in another system?
+             <a href="#" onclick="event.preventDefault();openCiteCreate('${attr(l.leaf_id)}','${attr(l.evidence_type||'')}')" style="color:#534AB7">Cite it</a>
+           </span>`
+        : '';
+      html += `<div style="padding:8px 10px;background:#fff;border:1px solid #E8E5DA;border-radius:4px;margin-bottom:6px">
+        <div style="display:flex;align-items:baseline;gap:8px;font-size:12px">
+          <strong style="color:#3A382E">${esc(l.control_ref)}</strong>
+          <span style="color:#5C5A4F">${esc(l.title)}</span>
+          <span class="pill p-${(l.finding||'').toLowerCase() === 'nc' ? 'nc' : 'ofi'}"
+                title="${esc(_FINDING_LONG[l.finding] || l.finding)}"
+                style="font-size:9px">${esc(l.finding||'')}</span>
+        </div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:3px">${esc(progLine)}</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px;font-size:11px">
+          <a href="${attr(primary.url)}" target="_blank" rel="noopener"
+             style="background:#3A382E;color:#fff;padding:4px 10px;border-radius:3px;text-decoration:none;font-family:inherit">
+            <i class="ti ti-download"></i> ${esc(primary.label)}
+          </a>
+          <a href="${attr(dashboard)}" style="color:#534AB7;text-decoration:none">See in dashboard →</a>
+          ${citeLine}
+        </div>
+      </div>`;
+    }
+    html += '</div>';
+  }
+
+  if (nudge) {
+    html += `<div style="margin-top:6px;font-size:11px;color:#9C9A8E;font-style:italic;text-align:right">
+      <a href="${attr(nudge.url)}" style="color:#534AB7;text-decoration:none">${esc(nudge.message)}</a>
+    </div>`;
+  }
+  return html;
 }
 
 function showTyping() {
@@ -3794,6 +3858,7 @@ async function sendChat() {
   let finalRefs = [];
   let finalLatency = 0;
   let finalType = 'assistant';
+  let finalTemplates = null;
 
   try {
     const url = API_URL + '/api/v1/chat/stream?question=' + encodeURIComponent(q)
@@ -3824,6 +3889,10 @@ async function sendChat() {
               renderMd(fullText) +
               '<span class="stream-cursor">&#9609;</span>';
             scrollChat();
+          } else if (evt.type === 'templates') {
+            // Tier-4 structured templates block. Captured here; rendered
+            // by appendMsg after the message bubble is finalised below.
+            finalTemplates = evt.block || null;
           } else if (evt.type === 'done') {
             finalRefs    = evt.refs || [];
             finalLatency = evt.latency_ms || 0;
@@ -3840,7 +3909,7 @@ async function sendChat() {
 
     bubble.remove();
     const msgRole = finalType === 'clarification' ? 'clarification' : 'assistant';
-    appendMsg(msgRole, fullText || '(no answer)', finalRefs, finalLatency);
+    appendMsg(msgRole, fullText || '(no answer)', finalRefs, finalLatency, finalTemplates);
     chatHistory.push({role:'assistant', content: fullText});
 
   } catch(e) {

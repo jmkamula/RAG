@@ -170,3 +170,294 @@ def _title_from_source_file(source_file: str) -> str:
         return name
     slug = parts[2]
     return slug.replace("_", " ").title()
+
+
+# ─── Tier-4 structured templates block ────────────────────────────────────
+# Structured payload replacing the plain-text footer for the chat UI.
+# Renders per-leaf as a compact card: progress-aware line + primary
+# download in the right format for the leaf shape + cite-mode
+# secondary CTA where applicable + dashboard drill-in link.
+# See docs/memory/dejargonize_ux_pass_2026_07_01.md for the design
+# arc that led here.
+
+# Mirror of scripts/generate_template_scaffolds._TABULAR_EVIDENCE_*
+# Duplicated to keep this module load-cheap; keep in sync.
+_TABULAR_EVIDENCE_SUFFIXES = ("_register", "_record", "_matrix", "_log", "_inventory")
+_TABULAR_EVIDENCE_EXACT = {
+    "register", "statement_of_applicability", "records_of_processing",
+    "review_record", "responsibility_matrix", "segregation_matrix",
+    "communication_record", "monitoring_record", "test_log",
+    "data_flow_inventory", "lawful_basis_register", "revocation_record",
+    "approval_record", "audit_record", "configuration_record",
+    "publication_record", "change_record", "discovery_record",
+    "risk_assessment_record", "risk_treatment_record", "decision_record",
+    "contact_register", "asset_register",
+}
+
+
+def _is_tabular(evidence_type: str) -> bool:
+    if not evidence_type:
+        return False
+    if evidence_type in _TABULAR_EVIDENCE_EXACT:
+        return True
+    return any(evidence_type.endswith(s) for s in _TABULAR_EVIDENCE_SUFFIXES)
+
+
+def _formats_for(leaf_id: str, evidence_type: str) -> tuple[dict, list[dict]]:
+    """Return (primary_download, alt_downloads) for a leaf.
+
+    Tabular leaves (register/record/matrix/log/inventory) get .xlsx
+    as primary + .md alt. Narrative leaves get .docx as primary +
+    .md alt. .md is always available as an alt because it's the
+    canonical round-trip format.
+    """
+    base = f"/api/v1/templates/{leaf_id}/download"
+    if _is_tabular(evidence_type):
+        primary = {"format": "xlsx", "label": "Excel starter",
+                   "url": f"{base}?format=xlsx"}
+        alt     = [{"format": "md", "label": "Markdown",
+                    "url": f"{base}?format=md"}]
+    else:
+        primary = {"format": "docx", "label": "Word starter",
+                   "url": f"{base}?format=docx"}
+        alt     = [{"format": "md", "label": "Markdown",
+                    "url": f"{base}?format=md"}]
+    return primary, alt
+
+
+def _fetch_finding_by_ref(pg_conn, tenant_id: str, refs: list[str]) -> dict[str, str]:
+    """Return {control_ref → finding} for the tenant's posture on the
+    supplied refs. Only NC/OFI shape rows returned; Comply/N/A/None
+    filtered out."""
+    if not refs:
+        return {}
+    with pg_conn.cursor() as cur:
+        cur.execute(
+            "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,)
+        )
+        cur.execute(
+            """
+            SELECT control_ref, finding
+              FROM posture_controls
+             WHERE tenant_id   = %s::uuid
+               AND is_active   = TRUE
+               AND control_ref = ANY(%s)
+               AND finding    IN ('NC', 'OFI')
+            """,
+            (tenant_id, refs),
+        )
+        return {ref: finding for ref, finding in cur.fetchall()}
+
+
+def _fetch_leaf_progress(pg_conn, tenant_id: str, leaf_ids: list[str]) -> dict[str, dict]:
+    """Return {leaf_id → {bound, total, remaining}} — count of
+    per-MUST checklist items that have at least one active+approved
+    finding vs total MUST items on that leaf. Sourced from the
+    document_findings + catalog union."""
+    if not leaf_ids:
+        return {}
+
+    # Get total MUST count per leaf from the catalog.
+    try:
+        from enrichment.documents.document_requirements import (
+            ALL_EVIDENCE_REQUIREMENTS, ALL_DERIVED_SPECS,
+        )
+    except Exception:
+        return {}
+    all_ers = list(ALL_EVIDENCE_REQUIREMENTS) + [
+        er for ds in ALL_DERIVED_SPECS for er in ds.direct_evidence
+    ]
+    leaf_musts: dict[str, list[str]] = {}
+    for er in all_ers:
+        if er.id in leaf_ids:
+            leaf_musts[er.id] = [ci.id for ci in er.must_contain]
+
+    if not leaf_musts:
+        return {}
+
+    # Get bound count per leaf from active+approved findings.
+    all_must_ids = [mid for musts in leaf_musts.values() for mid in musts]
+    bound_by_leaf: dict[str, set[str]] = {lid: set() for lid in leaf_musts}
+    with pg_conn.cursor() as cur:
+        cur.execute(
+            "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,)
+        )
+        cur.execute(
+            """
+            SELECT DISTINCT df.checklist_item_id
+              FROM document_findings df
+              JOIN client_documents cd ON cd.id = df.document_id
+             WHERE cd.tenant_id      = %s::uuid
+               AND cd.is_active      = TRUE
+               AND df.is_active      = TRUE
+               AND df.review_status  = 'approved'
+               AND df.status         IN ('present', 'partial')
+               AND df.checklist_item_id = ANY(%s)
+            """,
+            (tenant_id, all_must_ids),
+        )
+        bound_item_ids = {r[0] for r in cur.fetchall()}
+    for lid, musts in leaf_musts.items():
+        bound_by_leaf[lid] = {m for m in musts if m in bound_item_ids}
+
+    out: dict[str, dict] = {}
+    for lid, musts in leaf_musts.items():
+        total = len(musts)
+        bound = len(bound_by_leaf[lid])
+        out[lid] = {"bound": bound, "total": total, "remaining": total - bound}
+    return out
+
+
+def _cite_acceptable_types() -> set:
+    """Set of evidence_types where cite-mode (external system) is an
+    acceptable evidence source — imported lazily from cite_mode."""
+    try:
+        from rag.posture.cite_mode import _CITE_ACCEPTABLE_TYPES
+        return _CITE_ACCEPTABLE_TYPES
+    except Exception:
+        return set()
+
+
+def build_templates_block(
+    cited_refs:    list[str],
+    question_type: Optional[str],
+    tenant_id:     str,
+    *,
+    pg_conn = None,
+    db_url:  Optional[str] = None,
+) -> Optional[dict]:
+    """Structured Tier-4 templates block for the chat answer footer.
+
+    Contextual mode only (starter-kit lives in the dedicated
+    "Get Started" mode, not in chat). For each cited ref where the
+    tenant's posture is NC or OFI:
+
+      - Primary + alt downloads in the right format for the leaf shape
+      - Progress: N of M required elements filled in
+      - Cite-mode secondary CTA when the leaf's evidence_type is
+        cite-acceptable
+      - Drill-in link to the dashboard
+
+    Also emits a `starter_nudge` when the tenant is fresh (Phase 0 /
+    Foundation-with-zero-anchors) so the chat gently points at the
+    Get Started mode.
+
+    Returns None when nothing to show (query not action-oriented, or
+    no NC/OFI cited refs, or no tenant_id / db).
+    """
+    qt = (question_type or "").lower()
+    if qt and qt not in _RELEVANT_QUESTION_TYPES:
+        return None
+
+    refs = sorted({r.strip() for r in (cited_refs or []) if r and r.strip()})
+    if not refs and not tenant_id:
+        return None
+
+    own_conn = False
+    if pg_conn is None:
+        if not db_url:
+            db_url = os.getenv("DATABASE_URL")
+        if not db_url:
+            return None
+        try:
+            import psycopg2
+            pg_conn = psycopg2.connect(db_url)
+            own_conn = True
+        except Exception as e:
+            logger.warning(f"templates_block: pg connect failed: {e}")
+            return None
+
+    try:
+        # 1. Filter cited refs to NC/OFI posture only.
+        finding_by_ref = _fetch_finding_by_ref(pg_conn, tenant_id, refs) if tenant_id else {}
+        gap_refs = [r for r in refs if r in finding_by_ref]
+
+        # 2. Look up primary templates for those refs.
+        primaries = _fetch_primary_templates(pg_conn, gap_refs) if gap_refs else []
+        primaries_by_ref = {p["control_ref"]: p for p in primaries}
+
+        # 3. Fetch per-leaf progress + evidence_type in one pass.
+        leaf_ids = [p["leaf_id"] for p in primaries]
+        progress_by_leaf = _fetch_leaf_progress(pg_conn, tenant_id, leaf_ids) if leaf_ids else {}
+
+        cite_ok_set = _cite_acceptable_types()
+
+        # 4. Pull evidence_type per leaf from Neo4j (via catalog lookup).
+        try:
+            from enrichment.documents.document_requirements import (
+                ALL_EVIDENCE_REQUIREMENTS, ALL_DERIVED_SPECS,
+            )
+            all_ers = list(ALL_EVIDENCE_REQUIREMENTS) + [
+                er for ds in ALL_DERIVED_SPECS for er in ds.direct_evidence
+            ]
+            evtype_by_leaf = {er.id: er.evidence_type for er in all_ers if er.id in set(leaf_ids)}
+        except Exception:
+            evtype_by_leaf = {}
+
+        # 5. Build per-leaf card payload.
+        leaves_out: list[dict] = []
+        for ref in gap_refs:
+            p = primaries_by_ref.get(ref)
+            if not p:
+                # Cited NC/OFI ref but no template — skip; nothing to offer.
+                continue
+            leaf_id = p["leaf_id"]
+            evidence_type = evtype_by_leaf.get(leaf_id, "")
+            primary_dl, alt_dls = _formats_for(leaf_id, evidence_type)
+            prog = progress_by_leaf.get(leaf_id, {"bound": 0, "total": 0, "remaining": 0})
+            cite_acceptable = evidence_type in cite_ok_set
+            leaves_out.append({
+                "control_ref":       ref,
+                "leaf_id":           leaf_id,
+                "title":             p["title"],
+                "finding":           finding_by_ref[ref],
+                "evidence_type":     evidence_type,
+                "progress":          prog,
+                "primary_download":  primary_dl,
+                "alt_downloads":     alt_dls,
+                "cite_acceptable":   cite_acceptable,
+                "dashboard_url":     f"/#dashboard?control={ref}",
+            })
+
+        # 6. Starter nudge — quick check on journey phase.
+        starter_nudge = None
+        try:
+            with pg_conn.cursor() as cur:
+                cur.execute(
+                    "SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,)
+                )
+                cur.execute(
+                    "SELECT processes_personal_data FROM client_facts "
+                    " WHERE tenant_id = %s::uuid",
+                    (tenant_id,),
+                )
+                row = cur.fetchone()
+            profile_row_exists = row is not None
+            # A very quick heuristic — proper phase computation lives
+            # in rag/journey/state.py; here we just check "did the
+            # tenant do the profile step?". If not, they're fresh.
+            if not profile_row_exists:
+                starter_nudge = {
+                    "message": "New to compliance? See where to start →",
+                    "url": "/#getstarted",
+                }
+        except Exception:
+            pass
+
+        if not leaves_out and not starter_nudge:
+            return None
+
+        return {
+            "mode":          "contextual" if leaves_out else "nudge_only",
+            "leaves":        leaves_out,
+            "starter_nudge": starter_nudge,
+        }
+    except Exception as e:
+        logger.warning(f"templates_block: build failed: {e}")
+        return None
+    finally:
+        if own_conn:
+            try:
+                pg_conn.close()
+            except Exception:
+                pass

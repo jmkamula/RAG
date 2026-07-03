@@ -316,6 +316,13 @@ class ComplianceAnswer:
     # without re-parsing the answer text.
     primary_refs:     list[str] = field(default_factory=list)
     xfw_refs:         list[str] = field(default_factory=list)
+    # Tier-4 structured templates block (see rag/templates/answer_footer.py
+    # :build_templates_block). Populated by arion_graph.py after
+    # rank_and_answer returns, when the query is action-oriented and
+    # cited refs include NC/OFI controls. The chat UI renders this as a
+    # per-leaf card block below the answer bubble; API consumers get the
+    # same data as JSON on the response.
+    templates_block:  dict | None = None
 
 
 
@@ -386,6 +393,16 @@ Rules for your answer:
   Never infer or assume compliance status. If a node has no posture tag, do not state one.
 - Lead with NC findings, then OFI, then Comply. Never list unassessed controls as gaps.
 - Be direct and actionable. State what is missing and what to do.
+- END WHEN THE ACTIONABLE CONTENT ENDS. For action-oriented queries
+  where cited controls are NC or OFI, a STRUCTURED "starter kit"
+  block will render automatically below your answer with per-control
+  download buttons + progress-aware lines ("5 of 7 elements still to
+  fill in") + cite-mode alternatives. You do NOT need to enumerate
+  templates or add a closing paragraph like "To achieve compliance,
+  focus on completing the missing artifacts" — that's exactly what
+  the block below shows. Stop when the last finding is described.
+  Optional single-sentence bridge like "The starter templates below
+  cover each of these" is fine; a full closing paragraph is not.
 - N/A CONTROLS: finding="N/A" means out of scope — NEVER report as a gap or finding.
   Arion Networks exclusions: all 7.x physical controls, A.8.25-A.8.31 dev controls.
   Do not cite A.7.x, A.8.25, A.8.26, A.8.27, A.8.28, A.8.29, A.8.30, A.8.31 as gaps.

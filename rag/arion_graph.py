@@ -2238,26 +2238,30 @@ def make_retrieve_node(
 
         # Append a deterministic "Templates available" footer for
         # action-oriented questions where the cited refs have
-        # templates in the catalogue. Same shape as the cross-framework
-        # bridge footer (handled inside rank_and_answer) — surface
-        # structural data deterministically rather than relying on the
-        # LLM to mention every relevant template.
+        # templates in the catalogue.
+        #
+        # Tier-4 (2026-07-02): builds a STRUCTURED payload instead of
+        # appending a plain-text footer. The chat UI renders it as a
+        # per-leaf card block (progress-aware + right format per shape
+        # + cite-mode secondary CTA + dashboard drill-in) below the
+        # answer bubble; API consumers get the same data as JSON on
+        # `ChatResponse.templates_block`. Text-appended footer retired.
         try:
-            from rag.templates.answer_footer import build_template_footer
+            from rag.templates.answer_footer import build_templates_block
             qt_value = (
                 intent.question_type.value
                 if intent and getattr(intent, "question_type", None)
                 else None
             )
-            tmpl_footer = build_template_footer(
+            _tenant_id_str = str(getattr(tenant, "tenant_id", "") or state.get("tenant_id", "") or "")
+            result.templates_block = build_templates_block(
                 cited_refs    = result.cited_refs or [],
                 question_type = qt_value,
+                tenant_id     = _tenant_id_str,
                 db_url        = os.getenv("DATABASE_URL"),
             )
-            if tmpl_footer:
-                result.answer_text = (result.answer_text or "").rstrip() + tmpl_footer
         except Exception as e:
-            logger.warning(f"template footer skipped: {type(e).__name__}: {e}")
+            logger.warning(f"templates_block skipped: {type(e).__name__}: {e}")
 
 
         # ── Write structured trace to DB (best-effort, never blocks answer) ─
@@ -2338,6 +2342,7 @@ def make_retrieve_node(
             "node_count":     len(all_nodes),
             "neo4j_ms":       neo4j_ms,
             "resolver_trace": _trace,
+            "templates_block": result.templates_block,
         }
 
     return retrieve
