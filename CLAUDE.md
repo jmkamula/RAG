@@ -42,6 +42,7 @@ the strategic evidence-cascade layer (event-driven implications:
 | Cascade engine v1 — all 10 meditation patterns (P1..P10) + 23 API endpoints + 7 UI surfaces (KPIs/drill-in/timeline/overrides/bulk/notifications/event detail) | SHIPPED |
 | xfw_proposer uses catalog rationale on bridge proposals (S7) | SHIPPED |
 | De-jargonize UX pass across every tenant-facing surface (Evidence Package + dashboard + chat + templates + intake + notifications + profile + cascade + docs + queue + heatmap + streaming + inbox + admin + onboarding + session + errors) | SHIPPED |
+| Tier-4 starter kit — structured templates_block in chat + Get Started sidebar mode (fresh-tenant foundation sequence with phase strip / next-action card / 20-anchor list / cite nudge) | SHIPPED |
 | Outbound notification delivery (email/Slack) | DEFERRED |
 | UPDATES_FACT recompute (source-of-truth queries per fact) | DEFERRED |
 | Periodic sweep scheduler for overdue followups | DEFERRED |
@@ -56,6 +57,10 @@ Future sessions should read these before product work:
 - [[dejargonize-ux-pass-2026-07-01]] — the natural-language UX pattern now in
   force across every tenant-facing surface; conventions for helpers +
   vocabulary future work must preserve
+- [[tier4-starter-kit-arc-2026-07-02]] — structured templates_block in chat +
+  Get Started sidebar mode; the "starter kit" surface for fresh tenants.
+  Establishes the pattern: emit structured payload → render as UI card, don't
+  inject text into answer_text.
 - [[product-principle-evidence-stored-vs-cited]] — the cite/store coexistence model
 - [[templates-v2-anchors-complete-2026-06-25]] — the 20 v2 anchor templates
 - [[template-tenant-profile-2026-06-26]] — placeholder substitution
