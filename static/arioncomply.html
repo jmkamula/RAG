@@ -2537,8 +2537,10 @@ function renderEvidenceClassesPanel(b) {
   const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
   if (!b || !b.evidence_classes || !b.evidence_classes.length) return '';
 
-  // Header — overall yield
-  const overall = `${b.musts_bound}/${b.musts_total} (${b.overall_yield_pct}%)`;
+  // Header — overall yield. Terminology: "elements" = MUSTs (matches
+  // per-leaf "N/M elements covered" strings in the verdict tree +
+  // templates_block "N of M elements to fill in").
+  const overall = `${b.musts_bound} of ${b.musts_total} elements covered (${b.overall_yield_pct}%)`;
 
   let rows = '';
   for (const cls of b.evidence_classes) {
@@ -3474,11 +3476,16 @@ function renderVerdictTree(verdict, selfStd) {
   const v = verdict;
   const externalFw = (v.frameworks_derived_from || []).filter(x => x !== selfStd);
   const fw  = externalFw.map(esc).join(', ');
-  const sat = v.children.filter(c => c.satisfied).length;
-  const tot = v.children.length;
+  const sat     = v.children.filter(c => c.satisfied).length;
+  const partial = v.children.filter(c => !c.satisfied && c.partial).length;
+  const tot     = v.children.length;
+  // Terminology convention: "artifacts" for leaves (documents / records
+  // that satisfy the control) · "elements" for MUSTs within a leaf.
+  // Matches the advisory panel opener at renderAdvisoryPanel.
+  const inProgress = partial > 0 ? `, ${partial} in progress` : '';
 
   let h = `<div style="font-size:11px;color:#3A382E;font-weight:600">
-            Coverage · ${sat} of ${tot} elements in place${fw?` · derived from ${fw}`:''}
+            Coverage · ${sat} of ${tot} artifacts in place${inProgress}${fw?` · derived from ${fw}`:''}
           </div>`;
 
   // Render a sat/partial/pending marker + title for one child.
