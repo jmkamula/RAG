@@ -2015,8 +2015,14 @@ async function selectHeatCell(c, ev) {
   try {
     const d = await api(`/api/v1/stage2/queue/${encodeURIComponent(c.control_ref)}`);
     if (selected !== null && selected.control_ref === c.control_ref && d.verdict) {
-      document.getElementById('dp-gap').innerHTML =
-        renderVerdictTree(d.verdict, d.standard_id || c.standard_id || '');
+      // slim: skip the coverage header + leaf list — Evidence coverage
+      // panel below covers the same info with richer per-leaf display.
+      // renderVerdictTree still emits derived-children blocks for
+      // DerivedSpec controls (Art.30, Art.32, etc.) since those have no
+      // equivalent elsewhere; returns empty string for leaf-only controls
+      // and the Evidence coverage + advisory panels take over.
+      const slimTree = renderVerdictTree(d.verdict, d.standard_id || c.standard_id || '', {slim: true});
+      document.getElementById('dp-gap').innerHTML = slimTree;
     } else if (selected !== null && selected.control_ref === c.control_ref) {
       // No engine verdict — drop the spinner and keep the gap excerpt only.
       document.getElementById('dp-gap').innerHTML =
@@ -3468,10 +3474,18 @@ function renderAdvisoryPanel(adv) {
 //   selfStd  — the control's own standard_id (so we can label same-standard
 //              children as "Composed of sub-articles" not "Derived from")
 // Returns:   HTML string (innerHTML for the gap-description container).
-function renderVerdictTree(verdict, selfStd) {
+function renderVerdictTree(verdict, selfStd, opts) {
+  // opts.slim: dashboard-mode flag — skip the coverage header + the
+  // "Evidence for this control" leaf block since the Evidence coverage
+  // panel below renders the same leaf information more richly (with
+  // download buttons, cite affordance, coverage bars). Derived children
+  // (cross-framework bridges, sub-article composition) are still rendered
+  // because they have no equivalent in the Evidence coverage panel.
+  // Stage-2 mode calls without opts → full tree (unchanged behaviour).
+  opts = opts || {};
   const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');
   if (!verdict || !Array.isArray(verdict.children)) {
-    return '<div class="muted">(no engine derivation available for this control)</div>';
+    return opts.slim ? '' : '<div class="muted">(no engine derivation available for this control)</div>';
   }
   const v = verdict;
   const externalFw = (v.frameworks_derived_from || []).filter(x => x !== selfStd);
@@ -3484,9 +3498,12 @@ function renderVerdictTree(verdict, selfStd) {
   // Matches the advisory panel opener at renderAdvisoryPanel.
   const inProgress = partial > 0 ? `, ${partial} in progress` : '';
 
-  let h = `<div style="font-size:11px;color:#3A382E;font-weight:600">
+  let h = '';
+  if (!opts.slim) {
+    h = `<div style="font-size:11px;color:#3A382E;font-weight:600">
             Coverage · ${sat} of ${tot} artifacts in place${inProgress}${fw?` · derived from ${fw}`:''}
           </div>`;
+  }
 
   // Render a sat/partial/pending marker + title for one child.
   // Three states: ✓ satisfied · ◐ partial (some MUSTs recognised, not all)
@@ -3566,7 +3583,7 @@ function renderVerdictTree(verdict, selfStd) {
     </div>`;
   }
 
-  if (leaves.length) {
+  if (leaves.length && !opts.slim) {
     let rows = '';
     for (const c of leaves) {
       const primary = esc(c.title || c.evidence_type || 'Evidence');
@@ -3580,6 +3597,12 @@ function renderVerdictTree(verdict, selfStd) {
     </div>`;
   }
   h += '</div>';
+  // In slim mode, if there were no derived children AND no leaves rendered,
+  // the output is just an empty wrapper div — return empty string so the
+  // caller's insertion is a no-op.
+  if (opts.slim && !derived.length && !h.replace(/<[^>]*>/g,'').trim()) {
+    return '';
+  }
   return h;
 }
 
