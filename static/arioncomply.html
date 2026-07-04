@@ -442,6 +442,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <!-- Docs body -->
     <div class="main-body" id="body-docs" style="display:none">
       <div class="docs-wrap">
+        <!-- Declared-intent dropdowns: session defaults for the next uploads.
+             Framework + Type hints override the enricher's keyword detection,
+             so a Privacy Policy uploaded without the string "PIMS" in it
+             still gets ISO 27701 scoping when the tenant declares it. -->
+        <div id="upload-declare" style="display:flex;align-items:center;gap:16px;
+                                        padding:10px 12px;background:#FAF8F2;
+                                        border:1px solid #E8E5DA;border-radius:6px;
+                                        margin-bottom:10px;font-size:12px;color:#3A382E">
+          <div style="display:flex;align-items:center;gap:8px">
+            <label for="declare-framework" style="font-weight:600">Framework:</label>
+            <select id="declare-framework"
+                    style="font-size:12px;padding:4px 8px;background:#fff;
+                           border:1px solid #C8C5B8;border-radius:4px;font-family:inherit">
+              <option value="auto">Auto-detect</option>
+              <!-- Populated dynamically from tenant's queryable standards -->
+            </select>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <label for="declare-type" style="font-weight:600">Type:</label>
+            <select id="declare-type"
+                    style="font-size:12px;padding:4px 8px;background:#fff;
+                           border:1px solid #C8C5B8;border-radius:4px;font-family:inherit">
+              <option value="auto">Auto-detect</option>
+              <option value="policy">Policy</option>
+              <option value="procedure">Procedure</option>
+              <option value="register">Register</option>
+              <option value="review_record">Review record</option>
+              <option value="approval_record">Approval</option>
+              <option value="agreement_template">Agreement / DPA</option>
+              <option value="privacy_notice">Notice</option>
+              <option value="risk_assessment">Risk assessment / DPIA</option>
+              <option value="plan">Plan</option>
+              <option value="scope_note">Scope note</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div style="margin-left:auto;font-size:11px;color:#9C9A8E;font-style:italic"
+               title="Declared values apply to every file uploaded until you change them. Leave both on Auto-detect to fall back to filename + content sniffing (previous behaviour).">
+            Applies to the next uploads
+          </div>
+        </div>
         <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()"
           ondragover="event.preventDefault();this.classList.add('drag-over')"
           ondragleave="this.classList.remove('drag-over')"
@@ -692,6 +733,34 @@ function setMode(m) {
   if (m === 'cascade')    loadCascadeTimeline();
   if (m === 'inbox')      loadInbox();
   if (m === 'getstarted') loadGetStarted();
+  if (m === 'docs')       populateFrameworkDropdown();
+}
+
+// Populate the intake framework dropdown from the tenant's queryable
+// standards (scope_loader output). Fetches once per Docs-mode entry;
+// idempotent — bails if already populated with more than the default.
+async function populateFrameworkDropdown() {
+  const sel = document.getElementById('declare-framework');
+  if (!sel) return;
+  if (sel.options.length > 1) return; // already populated
+  try {
+    const d = await api('/api/v1/tenant/scope');
+    const stds = (d.queryable_standards || d.direct_standards || []);
+    if (stds.length > 1) {
+      const opt = document.createElement('option');
+      opt.value = 'multi';
+      opt.textContent = 'Multi-standard (all enrolled)';
+      sel.appendChild(opt);
+    }
+    for (const sid of stds) {
+      const opt = document.createElement('option');
+      opt.value = sid;
+      opt.textContent = humanizeStandardId(sid);
+      sel.appendChild(opt);
+    }
+  } catch (_) {
+    // Silent — user can still upload with Auto-detect + any static enums we ship
+  }
 }
 
 // ── Notifications inbox (S3t) ──────────────────────────────────────────
@@ -4087,6 +4156,16 @@ async function uploadFile(file) {
   try {
     const fd = new FormData();
     fd.append('file', file);
+    // Declared-intent hints from the dropdowns above the drop zone.
+    // Session-level: whatever's picked when the file is dropped applies.
+    const fwSel = document.getElementById('declare-framework');
+    const tpSel = document.getElementById('declare-type');
+    if (fwSel && fwSel.value && fwSel.value !== 'auto') {
+      fd.append('declared_standard_id', fwSel.value);
+    }
+    if (tpSel && tpSel.value && tpSel.value !== 'auto') {
+      fd.append('declared_evidence_type', tpSel.value);
+    }
     const d = await apiForm('/api/v1/documents/upload', fd);
     card.dataset.uploadId = d.upload_id;
     uploads[d.upload_id] = {name:file.name, size:file.size, status:'queued'};

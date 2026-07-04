@@ -54,7 +54,12 @@ _DOC_TYPE_KEYWORDS = {
 }
 
 
-def enrich(doc: ParsedDocument, api_key: Optional[str] = None) -> ParsedDocument:
+def enrich(
+    doc:                  ParsedDocument,
+    api_key:              Optional[str]         = None,
+    hint_standard_ids:    Optional[list[str]]   = None,
+    hint_evidence_type:   Optional[str]         = None,
+) -> ParsedDocument:
     """
     Enrich a ParsedDocument with:
     - doc_type (from filename + content keywords, confirmed by LLM if needed)
@@ -62,6 +67,14 @@ def enrich(doc: ParsedDocument, api_key: Optional[str] = None) -> ParsedDocument
     - explicit_refs (control refs found by regex in full text)
     - scope_statement (first sentence containing "this policy/procedure applies to")
     - extraction_path (based on token count and file type)
+
+    hint_standard_ids / hint_evidence_type: tenant-declared intent from the
+    upload UI. When present, these override keyword detection — the enricher
+    still runs the LLM topic-tokens pass + extracts explicit_refs, but
+    doc.standard_ids and doc.doc_type are set from the hints. This bypasses
+    the "no keyword hit → wrong scope" failure mode (e.g. a Privacy Policy
+    without the string "PIMS" won't get tagged 27701 by keyword detection
+    alone; declaring 27701 in the upload UI closes that gap).
     """
     # Check for structured XLSX/CSV first — no LLM needed
     structured_sections = [
@@ -70,8 +83,8 @@ def enrich(doc: ParsedDocument, api_key: Optional[str] = None) -> ParsedDocument
     ]
     if structured_sections and doc.file_type in ("xlsx", "csv"):
         doc.extraction_path = ExtractionPath.STRUCTURED
-        doc.doc_type        = _detect_doc_type_keyword(doc)
-        doc.standard_ids    = _detect_standards_keyword(doc.full_text, doc.original_name)
+        doc.doc_type        = hint_evidence_type or _detect_doc_type_keyword(doc)
+        doc.standard_ids    = list(hint_standard_ids) if hint_standard_ids else _detect_standards_keyword(doc.full_text, doc.original_name)
         if not doc.doc_type:
             doc.doc_type = "risk_register" if doc.file_type in ("xlsx", "csv") else "other"
         logger.info(f"STRUCTURED path: {doc.original_name} ({doc.doc_type})")
@@ -107,9 +120,11 @@ def enrich(doc: ParsedDocument, api_key: Optional[str] = None) -> ParsedDocument
     else:
         doc.extraction_path = ExtractionPath.FULL_DOCUMENT
 
-    # Keyword-based detection (fast, no LLM)
-    doc.doc_type     = _detect_doc_type_keyword(doc)
-    doc.standard_ids = _detect_standards_keyword(doc.full_text, doc.original_name)
+    # Keyword-based detection (fast, no LLM). Tenant-declared hints (from
+    # the upload UI dropdowns) override keyword detection — the tenant's
+    # explicit statement of framework + evidence type is authoritative.
+    doc.doc_type     = hint_evidence_type or _detect_doc_type_keyword(doc)
+    doc.standard_ids = list(hint_standard_ids) if hint_standard_ids else _detect_standards_keyword(doc.full_text, doc.original_name)
 
     # Scope statement
     doc.scope_statement = _extract_scope_statement(doc.full_text)

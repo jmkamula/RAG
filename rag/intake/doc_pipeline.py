@@ -198,11 +198,13 @@ class DocumentPipeline:
 
     def run(
         self,
-        file_path:         str,
-        tenant_id:         str,
-        upload_id:         Optional[str] = None,
-        original_filename: Optional[str] = None,
-        user_id:           Optional[str] = None,
+        file_path:            str,
+        tenant_id:            str,
+        upload_id:            Optional[str]        = None,
+        original_filename:    Optional[str]        = None,
+        user_id:              Optional[str]        = None,
+        declared_standard_ids: Optional[list[str]] = None,
+        declared_evidence_type: Optional[str]      = None,
     ) -> PipelineResult:
         """
         Process one document.
@@ -312,8 +314,18 @@ class DocumentPipeline:
 
             # ── Stage 2: Enrich ───────────────────────────────────────────────
             logger.info(f"Stage 2: Enriching — ~{doc.token_estimate:,} tokens")
+            if declared_standard_ids or declared_evidence_type:
+                logger.info(
+                    f"Stage 2: tenant hints — standards={declared_standard_ids} "
+                    f"type={declared_evidence_type!r}"
+                )
             t2 = time.time()
-            doc = enrich(doc, api_key=self.api_key)
+            doc = enrich(
+                doc,
+                api_key            = self.api_key,
+                hint_standard_ids  = declared_standard_ids,
+                hint_evidence_type = declared_evidence_type,
+            )
             s2_ms = int((time.time() - t2) * 1000)
 
             tracer.write(

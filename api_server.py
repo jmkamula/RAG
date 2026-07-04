@@ -38,6 +38,7 @@ from fastapi import (
     Depends,
     FastAPI,
     File,
+    Form,
     Header,
     HTTPException,
     Request,
@@ -748,13 +749,15 @@ class DocumentStatus(BaseModel):
 
 
 def _run_pipeline(
-    file_path:         str,
-    tenant_id:         str,
-    upload_id:         str,
-    db_url:            str,
-    api_key:           str,
-    original_filename: Optional[str] = None,
-    user_id:           Optional[str] = None,
+    file_path:              str,
+    tenant_id:              str,
+    upload_id:              str,
+    db_url:                 str,
+    api_key:                str,
+    original_filename:      Optional[str]        = None,
+    user_id:                Optional[str]        = None,
+    declared_standard_ids:  Optional[list[str]]  = None,
+    declared_evidence_type: Optional[str]        = None,
 ):
     """Run document pipeline in background thread.
 
@@ -763,6 +766,12 @@ def _run_pipeline(
     (per the no-Stage-1 path for tenant-authored marker-bearing
     uploads). Other intake lanes leave confirmed_by NULL until
     Stage-1 acts on them.
+
+    declared_standard_ids / declared_evidence_type: tenant-declared
+    intent from the upload UI. When present, the enricher uses these
+    verbatim instead of running content-keyword detection — closing
+    the gap where privacy-relevant docs without the string "PIMS"
+    verbatim were missing ISO27701:2019 scope.
     """
     from rag.intake.doc_pipeline import DocumentPipeline
     pipeline = DocumentPipeline(
@@ -771,8 +780,10 @@ def _run_pipeline(
         trace   = True,
     )
     result = pipeline.run(file_path, tenant_id, upload_id,
-                          original_filename = original_filename,
-                          user_id           = user_id)
+                          original_filename      = original_filename,
+                          user_id                = user_id,
+                          declared_standard_ids  = declared_standard_ids,
+                          declared_evidence_type = declared_evidence_type)
     logger.info(
         f"Pipeline complete: {result.document_name} "
         f"status={result.status} findings={result.findings_count}"
@@ -784,10 +795,12 @@ def _run_pipeline(
 
 @app.post("/api/v1/documents/upload", tags=["documents"])
 async def upload_document(
-    request:          Request,
-    background_tasks: BackgroundTasks,
-    file:             UploadFile = File(...),
-    key_info:         APIKeyInfo = Depends(require_scope("documents")),
+    request:                Request,
+    background_tasks:       BackgroundTasks,
+    file:                   UploadFile     = File(...),
+    declared_standard_id:   Optional[str]  = Form(None),
+    declared_evidence_type: Optional[str]  = Form(None),
+    key_info:               APIKeyInfo     = Depends(require_scope("documents")),
 ):
     """
     Upload a compliance document for processing.
@@ -942,17 +955,72 @@ async def upload_document(
     finally:
         pool.putconn(conn)
 
+    # Parse declared framework + type hints from the upload UI dropdowns.
+    #   declared_standard_id values:
+    #     - None or "" or "auto"      → auto-detect (current keyword path)
+    #     - "multi"                    → apply all enrolled queryable standards
+    #     - "ISO27001:2022" / ...      → single-standard scoping
+    #   declared_evidence_type values:
+    #     - None or "" or "auto"      → auto-detect
+    #     - "policy" / "procedure" ..  → declared shape (matches _UPLOAD_HINTS keys)
+    _hint_stds: Optional[list[str]] = None
+    if declared_standard_id and declared_standard_id not in ("", "auto"):
+        if declared_standard_id == "multi":
+            # Resolve "multi" here to the tenant's enrolled + graph-loaded
+            # standards (same set scope_loader reports as queryable).
+            _c = pool.getconn()
+            try:
+                set_session(_c, key_info.tenant_id, key_info.user_id)
+                with _c.cursor() as _cur:
+                    _cur.execute("""
+                        SELECT ts.standard_id
+                          FROM tenant_standards ts
+                          JOIN standards s ON s.id = ts.standard_id
+                         WHERE ts.tenant_id = %s::uuid
+                           AND s.loaded_in_graph = TRUE
+                         ORDER BY ts.standard_id
+                    """, (key_info.tenant_id,))
+                    _hint_stds = [r[0] for r in _cur.fetchall()] or None
+            finally:
+                pool.putconn(_c)
+        else:
+            _hint_stds = [declared_standard_id]
+    _hint_evtype = declared_evidence_type if (declared_evidence_type and declared_evidence_type not in ("", "auto")) else None
+
+    # Persist declared values on document_uploads for audit + resume paths.
+    # doc_type + standard_ids columns already exist — reused for declared intent.
+    if _hint_stds or _hint_evtype:
+        _conn = pool.getconn()
+        try:
+            set_session(_conn, key_info.tenant_id, key_info.user_id)
+            with _conn.cursor() as _cur:
+                _cur.execute(
+                    """UPDATE document_uploads
+                          SET doc_type     = COALESCE(%s, doc_type),
+                              standard_ids = COALESCE(%s, standard_ids)
+                        WHERE id = %s::uuid""",
+                    (_hint_evtype, _hint_stds, upload_id),
+                )
+                _conn.commit()
+        except Exception as e:
+            _conn.rollback()
+            logger.warning(f"document_uploads declared-hint update failed: {e} — continuing")
+        finally:
+            pool.putconn(_conn)
+
     # Queue background processing
     api_key = os.getenv("ANTHROPIC_API_KEY", "")
     background_tasks.add_task(
         _run_pipeline,
-        file_path         = str(file_path),
-        tenant_id         = key_info.tenant_id,
-        upload_id         = upload_id,
-        db_url            = DATABASE_URL,
-        api_key           = api_key,
-        original_filename = file.filename,
-        user_id           = key_info.user_id,
+        file_path              = str(file_path),
+        tenant_id              = key_info.tenant_id,
+        upload_id              = upload_id,
+        db_url                 = DATABASE_URL,
+        api_key                = api_key,
+        original_filename      = file.filename,
+        user_id                = key_info.user_id,
+        declared_standard_ids  = _hint_stds,
+        declared_evidence_type = _hint_evtype,
     )
 
     logger.info(
@@ -3578,6 +3646,57 @@ def _count_template_references_per_key() -> dict[str, int]:
         for key in seen_in_this_template & _TENANT_PROFILE_KEY_SET:
             counts[key] = counts.get(key, 0) + 1
     return counts
+
+
+@app.get("/api/v1/tenant/scope", tags=["tenant"])
+async def tenant_scope(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Return the tenant's enrolled standards that are loaded in the graph
+    (i.e. queryable + citable). Used by the intake UI to populate the
+    declared-framework dropdown so the tenant can override the
+    enricher's keyword detection with explicit intent.
+
+    Returns:
+      {
+        "queryable_standards": ["ISO27001:2022", "ISO27701:2019", "GDPR:2016/679"],
+        "direct_standards":    ["ISO27001:2022", "ISO27701:2019"],
+        # ↑ what the tenant is directly enrolled in (before graph gate);
+        #   included so the UI can show "you subscribe but it isn't
+        #   curated yet" states.
+      }
+
+    Note: this is a compact projection of scope_loader.load_tenant_scope's
+    output — the same data the RAG uses for query routing.
+    """
+    # Use scope_loader for consistency with the RAG's query routing.
+    # This includes inferred standards (e.g. GDPR reachable via 27701's
+    # Annex D mapping even when the tenant isn't directly enrolled in
+    # GDPR as a primary framework).
+    from rag.scope_loader import load_tenant_scope
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        scope = load_tenant_scope(conn, key_info.tenant_id)
+    finally:
+        pool.putconn(conn)
+
+    # Dedupe queryable while preserving order — scope_loader can list a
+    # standard more than once when multiple relationship types point at
+    # it (satisfies + maps_to + implements).
+    seen = set()
+    queryable = []
+    for sid in scope.queryable_standards:
+        if sid not in seen:
+            seen.add(sid)
+            queryable.append(sid)
+
+    return {
+        "queryable_standards": queryable,
+        "direct_standards":    [s.id for s in scope.direct_standards],
+    }
 
 
 @app.get("/api/v1/tenant/profile", tags=["templates"])
