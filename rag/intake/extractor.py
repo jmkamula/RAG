@@ -176,6 +176,20 @@ def extract(
         doc.extraction_metrics["leaf_musts_count"] = sum(
             len(items) for items in leaf_musts.values()
         )
+    else:
+        # Fallback: no doc_mappings matched (real-world tenant filenames
+        # rarely hit our fingerprints — e.g. "Amendment to DOC003.docx" vs
+        # "privacy_notice.yaml"). Populate leaf_musts from all leaves under
+        # the scoped controls so the LLM still gets the MUST catalog to
+        # bind against. Without this, every finding stays unbound and is
+        # dropped — even when the doc is genuinely relevant.
+        scoped_leaf_ids = _fetch_leaves_for_controls(scoped)
+        if scoped_leaf_ids:
+            leaf_musts = _fetch_leaf_musts(scoped_leaf_ids)
+            doc.extraction_metrics["leaf_musts_count"] = sum(
+                len(items) for items in leaf_musts.values()
+            )
+            doc.extraction_metrics["leaf_musts_source"] = "scoped-controls-fallback"
 
     if doc.extraction_path == ExtractionPath.FULL_DOCUMENT:
         findings = _extract_full(doc, scoped, api_key, leaf_musts=leaf_musts)
@@ -1098,6 +1112,57 @@ def _crosscheck_must_binding(must_id: str, evidence: str) -> str:
 # caller treats that leaf as having no per-MUST binding hints — LLM still
 # runs but findings stay unbound (graceful degradation, no exception).
 _NEO_DRIVER_CACHE = {}
+
+
+def _fetch_leaves_for_controls(controls: list[dict]) -> list[str]:
+    """Return every EvidenceRequirement leaf id under the given controls.
+
+    Used when doc_mappings didn't match on filename (common: tenant
+    filenames like "Amendment to DOC003.docx" don't hit any fingerprint).
+    Populating leaf_musts from all leaves under the scoped controls gives
+    the LLM the MUST catalog it needs for per-MUST binding, restoring
+    content-based extraction even when filename patterns don't help.
+
+    Query walks RequirementNode → SATISFIED_BY → FulfilmentSpec →
+    REQUIRES_EVIDENCE → EvidenceRequirement (the leaves).
+    """
+    if not controls:
+        return []
+    # Build (standard_id, ref) tuples for the query
+    control_ids = []
+    for c in controls:
+        std = c.get("standard_id") or c.get("standard") or ""
+        ref = c.get("ref", "")
+        if std and ref:
+            control_ids.append(f"{std}:{ref}")
+    if not control_ids:
+        return []
+    try:
+        from neo4j import GraphDatabase
+        import os
+        uri  = os.getenv("NEO4J_URI",      "bolt://localhost:7687")
+        user = os.getenv("NEO4J_USER",     "neo4j")
+        pw   = os.getenv("NEO4J_PASSWORD", "")
+        key  = (uri, user)
+        drv  = _NEO_DRIVER_CACHE.get(key)
+        if drv is None:
+            drv = GraphDatabase.driver(uri, auth=(user, pw))
+            _NEO_DRIVER_CACHE[key] = drv
+        with drv.session() as s:
+            res = s.run(
+                """
+                MATCH (rn:RequirementNode)-[:SATISFIED_BY]->
+                      (:FulfilmentSpec)-[:REQUIRES_EVIDENCE]->
+                      (er:EvidenceRequirement)
+                WHERE rn.id IN $control_ids
+                RETURN DISTINCT er.id AS leaf_id
+                """,
+                control_ids=control_ids,
+            )
+            return [row["leaf_id"] for row in res if row["leaf_id"]]
+    except Exception as e:
+        logger.warning(f"Neo4j unavailable for leaf fetch: {e}")
+        return []
 
 
 def _fetch_leaf_musts(leaf_ids: list[str]) -> dict[str, list[tuple[str, str]]]:
