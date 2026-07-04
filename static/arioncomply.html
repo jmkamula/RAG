@@ -2597,6 +2597,20 @@ function renderEvidenceClassesPanel(b) {
         ${esc(leaf.leaf_label)} · ${leaf.musts_bound}/${leaf.musts_total} covered · from: ${sources}${tplBadge}
       </div>`;
 
+      // Dilution signal (loose end #12): when a leaf's evidence is spread
+      // across ≥3 source documents, surface a compact hint suggesting
+      // consolidation. Auditors + tenants both benefit from a single
+      // canonical artefact per leaf where feasible. Non-blocking, purely
+      // informational. Cite-mode leaves excluded — their provenance
+      // model is external source-of-truth, doc-count doesn't apply.
+      const docCount = (leaf.source_documents || []).length;
+      if (docCount >= 3 && !leaf.cite_acceptable) {
+        leafLines += `<div style="font-size:10px;color:#9C6F1B;margin-top:2px;padding-left:18px;font-style:italic"
+                           title="Multiple documents contributing to one leaf can dilute the audit trail. A single well-crafted artefact of the right shape usually satisfies the leaf more clearly and is easier to maintain.">
+          Spread across ${docCount} documents · consolidating may simplify audit
+        </div>`;
+      }
+
       // Cited lane (schema_v50): only on cite-acceptable evidence_types.
       // Shows existing cites grouped by source + a "Cite source" button.
       // See [[cite-mode-v1-backend-2026-06-27]].
