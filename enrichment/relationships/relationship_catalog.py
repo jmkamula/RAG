@@ -4572,10 +4572,423 @@ ISO27701_BATCH1_EDGES: list[RelationshipEdge] = [
 ]
 
 
+# ── ISO 27701:2019 Batch 2 bridges — Obligations to PII principals + PbD ────
+# 23 anchors: §A.7.3.1-10 subject rights + §A.7.4.1-9 privacy by design +
+# §B.8.3.1 processor obligations support + §B.8.4.1-3 processor PbD.
+# Bridges per Annex D Table D.1 (Article-level, since catalog uses Article
+# nodes not subclause nodes).
+# Author: 2026-07-04.
+
+ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
+    # ── SUPPORTS 27701 → 27001 (privacy augments existing security control) ──
+    # A.7.3.6 access/correction/erasure ↔ A.8.10 information deletion (erasure implementation)
+    RelationshipEdge(
+        source_ref='A.7.3.6', source_standard_id='ISO27701:2019',
+        target_ref='A.8.10', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.3.6 erasure right rides on top of 27001 A.8.10 information deletion — the operational deletion capability is the technical implementation of the privacy right.',
+        citation='ISO/IEC 27701:2019 §7.3.6 + ISO/IEC 27002:2022 §8.10',
+        role='high',
+    ),
+    # A.7.4.5 end-of-processing ↔ A.8.10 information deletion + A.5.9 asset register
+    RelationshipEdge(
+        source_ref='A.7.4.5', source_standard_id='ISO27701:2019',
+        target_ref='A.8.10', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.5 delete-or-deidentify at end of processing uses 27001 A.8.10 information deletion as the operational vehicle.',
+        citation='ISO/IEC 27701:2019 §7.4.5 + ISO/IEC 27002:2022 §8.10',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.5', source_standard_id='ISO27701:2019',
+        target_ref='A.5.9', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.5 requires reconciling with the asset/data inventory to ensure all copies deleted — asset register (27001 A.5.9) is the reconciliation source.',
+        citation='ISO/IEC 27701:2019 §7.4.5 + ISO/IEC 27002:2022 §5.9',
+        role='medium',
+    ),
+    # A.7.4.7 retention ↔ A.5.33 records retention (both are storage-limitation controls)
+    RelationshipEdge(
+        source_ref='A.7.4.7', source_standard_id='ISO27701:2019',
+        target_ref='A.5.33', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.7 PII retention schedules coexist with 27001 A.5.33 records protection retention — cross-frame coherence required.',
+        citation='ISO/IEC 27701:2019 §7.4.7 + ISO/IEC 27002:2022 §5.33',
+        role='high',
+    ),
+    # A.7.4.8 disposal ↔ A.5.28 information handling + A.7.14 secure disposal of equipment
+    RelationshipEdge(
+        source_ref='A.7.4.8', source_standard_id='ISO27701:2019',
+        target_ref='A.5.28', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.8 PII disposal reuses 27001 A.5.28 evidence-handling disposal_record shape.',
+        citation='ISO/IEC 27701:2019 §7.4.8 + ISO/IEC 27002:2022 §5.28',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.8', source_standard_id='ISO27701:2019',
+        target_ref='A.7.14', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.8 physical media disposal covered by 27001 A.7.14 secure disposal/reuse of equipment.',
+        citation='ISO/IEC 27701:2019 §7.4.8 + ISO/IEC 27002:2022 §7.14',
+        role='medium',
+    ),
+    # A.7.4.9 transmission controls ↔ A.5.14 information transfer + A.8.24 cryptography
+    RelationshipEdge(
+        source_ref='A.7.4.9', source_standard_id='ISO27701:2019',
+        target_ref='A.5.14', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.9 PII transmission augments 27001 A.5.14 information transfer with privacy-specific controls (audit logs of PII transmissions).',
+        citation='ISO/IEC 27701:2019 §7.4.9 + ISO/IEC 27002:2022 §5.14',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.9', source_standard_id='ISO27701:2019',
+        target_ref='A.8.24', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.9 encryption-in-transit uses 27001 A.8.24 cryptography as the implementation vehicle.',
+        citation='ISO/IEC 27701:2019 §7.4.9 + ISO/IEC 27002:2022 §8.24',
+        role='high',
+    ),
+    # B.8.4.2 return/transfer/disposal (processor side) ↔ A.5.19 supplier + A.5.28 disposal
+    RelationshipEdge(
+        source_ref='B.8.4.2', source_standard_id='ISO27701:2019',
+        target_ref='A.5.19', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.4.2 end-of-service PII handling operates within 27001 A.5.19 supplier relationships policy (processor-side).',
+        citation='ISO/IEC 27701:2019 §8.4.2 + ISO/IEC 27002:2022 §5.19',
+        role='medium',
+    ),
+    # B.8.4.3 transmission (processor side) ↔ A.5.14 + A.8.24
+    RelationshipEdge(
+        source_ref='B.8.4.3', source_standard_id='ISO27701:2019',
+        target_ref='A.5.14', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.4.3 processor-side transmission mirrors A.7.4.9 controller-side — augments 27001 A.5.14 information transfer.',
+        citation='ISO/IEC 27701:2019 §8.4.3 + ISO/IEC 27002:2022 §5.14',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.4.3', source_standard_id='ISO27701:2019',
+        target_ref='A.8.24', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.4.3 encryption-in-transit uses 27001 A.8.24 cryptography.',
+        citation='ISO/IEC 27701:2019 §8.4.3 + ISO/IEC 27002:2022 §8.24',
+        role='high',
+    ),
+
+    # ── IMPLEMENTS 27701 → GDPR (per Annex D Table D.1) ────────────────────
+    # §A.7.3.x subject rights → Art.11-22
+    RelationshipEdge(
+        source_ref='A.7.3.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.12', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.1 operationalises GDPR Art.12 — transparent information provision, communication + modalities for exercise of rights.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.1 → (12)(2)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.2', source_standard_id='ISO27701:2019',
+        target_ref='Art.13', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.2 determines the information provided to subjects — direct-collection Art.13 fields.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.2 → (13)(1)(a-f), (13)(2)(c-e), (13)(3)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.2', source_standard_id='ISO27701:2019',
+        target_ref='Art.14', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.2 also covers Art.14 indirect-collection additional fields (source of PII).',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.2 → (14)(1)(a-f), (14)(2)(b-f), (14)(3-5)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.3', source_standard_id='ISO27701:2019',
+        target_ref='Art.12', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.3 delivery of notice operationalises Art.12.1 concise, transparent, intelligible + easily accessible form.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.3 → (12)(1), (12)(7)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.3', source_standard_id='ISO27701:2019',
+        target_ref='Art.13', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.3 timing of provision — at time of collection per Art.13.3.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.3 → (13)(3)',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.4', source_standard_id='ISO27701:2019',
+        target_ref='Art.7', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.4 consent withdrawal mechanism operationalises Art.7.3 — as easy to withdraw as to give consent.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.4 → (7)(3)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.4', source_standard_id='ISO27701:2019',
+        target_ref='Art.18', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.4 modification of consent covers Art.18 restriction of processing scenarios.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.4 → (18)(1)(a-d)',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.5', source_standard_id='ISO27701:2019',
+        target_ref='Art.21', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.5 objection mechanism is the certifiable operationalisation of Art.21 right to object.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.5 → (21)(1-6)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.6', source_standard_id='ISO27701:2019',
+        target_ref='Art.16', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.6 correction operationalises Art.16 rectification.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.6 → (16)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.6', source_standard_id='ISO27701:2019',
+        target_ref='Art.17', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.6 erasure operationalises Art.17 right to erasure.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.6 → (17)(1)(a-f), (17)(2)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.6', source_standard_id='ISO27701:2019',
+        target_ref='Art.15', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.6 access operationalises Art.15 right of access.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.6 → (15)(1)(a-h), (15)(2), (18)(3)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.7', source_standard_id='ISO27701:2019',
+        target_ref='Art.19', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.7 is the certifiable operationalisation of Art.19 notification obligation regarding rectification/erasure/restriction.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.7 → (19)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.8', source_standard_id='ISO27701:2019',
+        target_ref='Art.15', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.8 provides copy of PII per Art.15.3.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.8 → (15)(3), (15)(4)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.8', source_standard_id='ISO27701:2019',
+        target_ref='Art.20', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.8 structured commonly-used machine-readable format aligns with Art.20 portability.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.8 → (20)(1-4)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.9', source_standard_id='ISO27701:2019',
+        target_ref='Art.12', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.9 request handling operationalises Art.12 modalities for exercise of rights + response-time obligations.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.9 → (12)(3-6)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.10', source_standard_id='ISO27701:2019',
+        target_ref='Art.22', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.10 covers subject-facing obligations for automated decision-making — Art.22.1 + Art.22.3 human intervention + Art.22.4 explicit consent for Art.9 data.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.10 → (22)(1), (22)(3)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.10', source_standard_id='ISO27701:2019',
+        target_ref='Art.13', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.3.10 notification of existence — Art.13.2.f + Art.14.2.g automated-decision disclosure at collection.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.3.10 → (13)(2)(f)',
+        role='medium',
+    ),
+
+    # §A.7.4.x privacy by design + default → Art.5 + Art.25 + Art.32
+    RelationshipEdge(
+        source_ref='A.7.4.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.1 collection limitation operationalises Art.5.1.b purpose limitation + Art.5.1.c data minimisation.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.4.1 → (5)(1)(b), (5)(1)(c)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.2', source_standard_id='ISO27701:2019',
+        target_ref='Art.25', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.2 processing limitation implements Art.25.2 privacy by default — only PII necessary for each specific purpose processed by default.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.4.2 → (25)(2)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.3', source_standard_id='ISO27701:2019',
+        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.3 accuracy operationalises Art.5.1.d accuracy principle.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.4.3 → (5)(1)(d)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.4', source_standard_id='ISO27701:2019',
+        target_ref='Art.25', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.4 minimisation objectives operationalise Art.25.1 privacy by design — pseudonymisation + data minimisation techniques.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.4.4 → (25)(1)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.4', source_standard_id='ISO27701:2019',
+        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.4 minimisation operationalises Art.5.1.c data minimisation + Art.5.1.e storage limitation.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.4.4 → (5)(1)(c), (5)(1)(e)',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.5', source_standard_id='ISO27701:2019',
+        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.5 end-of-processing deletion / de-identification operationalises Art.5.1.c minimisation + Art.5.1.e storage limitation.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.4.5 → (5)(1)(c), (5)(1)(e)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.5', source_standard_id='ISO27701:2019',
+        target_ref='Art.6', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.5 supports Art.6.4.e — compatibility test via de-identification for further processing.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.4.5 → (6)(4)(e)',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.5', source_standard_id='ISO27701:2019',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.5 de-identification operationalises Art.32.1.a pseudonymisation as a security measure.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.4.5 → (32)(1)(a)',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.6', source_standard_id='ISO27701:2019',
+        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.6 temp file disposal supports Art.5.1.c minimisation applied to transient PII.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.4.6 → (5)(1)(c)',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.7', source_standard_id='ISO27701:2019',
+        target_ref='Art.13', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.7 retention schedules underpin Art.13.2.a storage period disclosure.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.4.7 → (13)(2)(a), (14)(2)(a)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.8', source_standard_id='ISO27701:2019',
+        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.8 disposal operationalises Art.5.1.f integrity + confidentiality — secure destruction eliminates residual risk.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.4.8 → (5)(1)(f)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.9', source_standard_id='ISO27701:2019',
+        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.9 transmission controls operationalise Art.5.1.f integrity + confidentiality.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.4.9 → (5)(1)(f)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.9', source_standard_id='ISO27701:2019',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.4.9 encryption-in-transit operationalises Art.32.1.a security of processing pseudonymisation + encryption.',
+        citation='ISO/IEC 27701:2019 Annex D + Art.32.1.a',
+        role='high',
+    ),
+
+    # §B.8.3.1 processor obligations support → Art.28 + Art.15 + Art.17
+    RelationshipEdge(
+        source_ref='B.8.3.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.3.1 is the certifiable operationalisation of Art.28.3.e — processor assists controller with subject rights.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.3.1 → (28)(3)(e)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.3.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.15', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.3.1 supports customer Art.15 fulfilment — processor makes processing information available.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.3.1 → (15)(3)',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.3.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.17', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.3.1 supports customer Art.17 fulfilment — processor executes erasure on customer instruction.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.3.1 → (17)(2)',
+        role='medium',
+    ),
+
+    # §B.8.4.x processor PbD → Art.5 + Art.28 + Art.30
+    RelationshipEdge(
+        source_ref='B.8.4.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.4.1 processor temp file disposal supports Art.5.1.c minimisation.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.4.1 → (5)(1)(c)',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.4.2', source_standard_id='ISO27701:2019',
+        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.4.2 is the certifiable operationalisation of Art.28.3.g — processor returns or deletes PII at end of service.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.4.2 → (28)(3)(g)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.4.2', source_standard_id='ISO27701:2019',
+        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.4.2 end-of-service records support Art.30.1.f retention records.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.4.2 → (30)(1)(f)',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.4.3', source_standard_id='ISO27701:2019',
+        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.4.3 processor transmission controls operationalise Art.5.1.f integrity + confidentiality.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.4.3 → (5)(1)(f)',
+        role='high',
+    ),
+]
+
+
 ALL_EDGES: list[RelationshipEdge] = (
     INTRA_ISO_EDGES
     + INTRA_GDPR_EDGES
     + BLOCKS_WHEN_EDGES
     + XFW_EDGES
     + ISO27701_BATCH1_EDGES
+    + ISO27701_BATCH2_EDGES
 )

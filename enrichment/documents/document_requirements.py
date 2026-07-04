@@ -5037,8 +5037,1983 @@ REQ_B826_PROGRAM_REVIEW = EvidenceRequirement(
 
 # ==============================================================================
 # End ISO 27701 Batch 1 — 14 anchors × 4 leaves = 56 EvidenceRequirements.
-# Next: relationship_catalog.py Batch 1 bridges (SUPPORTS 27701→27001 +
-# IMPLEMENTS 27701→GDPR per Annex D).
+# ==============================================================================
+
+
+# ==============================================================================
+# ISO 27701:2019 — Batch 2 — Obligations to PII principals + Privacy by design
+# ==============================================================================
+# 23 anchors × 4 leaves = 92 EvidenceRequirements. Topic-parallel batch:
+#   Annex A §A.7.3.x — controller subject rights (10 controls)
+#   Annex A §A.7.4.x — controller privacy by design + by default (9 controls)
+#   Annex B §B.8.3.1 — processor obligations to PII principals (1 control)
+#   Annex B §B.8.4.x — processor privacy by design (3 controls)
+# Spine: all 23 use op_process 4-leaf (procedure + register + scope + review).
+# Source-of-truth: ISO/IEC 27701:2019 §7.3 + §7.4 + §8.3 + §8.4.
+
+# ── A.7.3.1 Determining and fulfilling obligations to PII principals ──────────
+# §7.3.1: The organization shall determine and document their legal, regulatory
+# and business obligations to PII principals related to the processing of their
+# PII and provide the means to meet these obligations.
+
+REQ_A731_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.3.1:obligations_procedure",
+    control_ref   = "A.7.3.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "PII Principal Obligations Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.3.1 requires the org to enumerate its legal/regulatory/business obligations to PII principals per jurisdiction + provide accessible + timely means to meet them. Covers obligation intake (legal + regulatory monitoring), fulfilment channel design, and contact-point-parity (contact route in same medium as PII collection channel).",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.1:proc_obligation_catalog","Obligation catalog per applicable jurisdiction (GDPR + UK GDPR + CCPA + LGPD as applicable) with citation for each obligation", "must", False, "§7.3.1 — legal, regulatory and business obligations"),
+        ChecklistItem("item:A.7.3.1:proc_fulfilment_means", "Fulfilment means enumerated per obligation (which subject-rights channel handles each right — access / rectification / erasure / portability / objection)", "must", False, "§7.3.1 — provide the means"),
+        ChecklistItem("item:A.7.3.1:proc_accessibility",    "Accessibility standard — accessible + timely means (WCAG-align, language accessibility, response-time SLA)", "must", False, "§7.3.1 — accessible and timely manner"),
+        ChecklistItem("item:A.7.3.1:proc_contact_parity",   "Contact-point parity — contact channel matches PII-collection channel (email if collected by email, web if collected via web; not phone/fax fallback)", "must", False, "§7.3.1 implementation guidance — similar way"),
+        ChecklistItem("item:A.7.3.1:proc_documented_extent","Documented extent — subject-facing description of which obligations are fulfilled + how", "must", False, "§7.3.1 — clear documentation"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.1:proc_owner",            "Named owner (DPO + Privacy Ops)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A731_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.3.1:obligations_register",
+    control_ref   = "A.7.3.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Applicable Obligations Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-obligation row — enumeration of every subject-rights obligation the org is subject to, with citation, jurisdiction, fulfilment channel, and response-time SLA. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.1:reg_obligation_id",     "Unique obligation identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.3.1:reg_citation",          "Legal / regulatory / business citation per row", "must", False, "§7.3.1 — determine and document"),
+        ChecklistItem("item:A.7.3.1:reg_jurisdiction",      "Applicable jurisdiction per row", "must", False, "§7.3.1 — vary from one jurisdiction"),
+        ChecklistItem("item:A.7.3.1:reg_fulfilment_channel","Fulfilment channel per row (which A.7.3.2-10 procedure handles it)", "must", False, "§7.3.1 — provide the means"),
+        ChecklistItem("item:A.7.3.1:reg_sla",               "Response-time SLA per row", "must", False, "§7.3.1 — timely manner"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.1:reg_last_reviewed",     "Last review date per row", "should", False, "Currency"),
+    ],
+)
+
+REQ_A731_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.3.1:applicable_scope",
+    control_ref   = "A.7.3.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Jurisdictions + Subjects Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which jurisdictions bind the org (establishment / target-market / monitoring) and which subject categories are covered. Determines the size of the A.7.3.1 obligation catalog.",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.1:scope_jurisdictions",   "Applicable jurisdictions listed with basis per row", "must", False, "GDPR Art.3 territorial scope + equivalents"),
+        ChecklistItem("item:A.7.3.1:scope_subject_categories","Subject categories per jurisdiction (customers / employees / minors / patients / etc.)", "must", False, "§7.3.1 — related to processing"),
+        ChecklistItem("item:A.7.3.1:scope_exclusions",      "Excluded jurisdictions / subjects with rationale", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.1:scope_change_drivers",  "Trigger list (new geo entry / new subject category / new regulation)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A731_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.3.1:program_review",
+    control_ref   = "A.7.3.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Obligations Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — obligations catalog current with regulatory landscape, fulfilment channels healthy, SLAs met, no missing obligations flagged (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.1:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.3.1:rev_reviewer",          "Reviewer identity (DPO + Legal)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.3.1:rev_catalog_currency",  "Catalog currency — recent regulatory / case-law developments incorporated", "must", False, "§7.3.1 — vary from one jurisdiction to another"),
+        ChecklistItem("item:A.7.3.1:rev_sla_audit",         "SLA audit — sampled A.7.3.9 request register measured against catalog SLAs", "must", False, "§7.3.1 — timely manner"),
+        ChecklistItem("item:A.7.3.1:rev_channel_health",    "Channel health — fulfilment channels reachable + functional", "must", False, "§7.3.1 — accessible"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.1:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.3.2 Determining information for PII principals ───────────────────────
+# §7.3.2: The organization shall determine and document the information to be
+# provided to PII principals regarding the processing + the timing of provision.
+
+REQ_A732_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.3.2:notice_content_procedure",
+    control_ref   = "A.7.3.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Privacy Notice Content Determination Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.3.2 requires the org to decide + document what information goes into subject-facing notices + when it's provided. Covers the field catalog (purposes / contact / basis / obtained-from / statutory-or-contractual / rights / withdrawal / transfers / recipients / retention / automated decisions / complaint / frequency) and update-on-change trigger.",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.2:proc_field_catalog",    "Field catalog — every information item that must be provided (purposes + controller identity + basis + source + statutory/contractual + rights + withdrawal + transfers + recipients + retention + automated decisions + complaint route + frequency)", "must", False, "§7.3.2 implementation guidance — examples"),
+        ChecklistItem("item:A.7.3.2:proc_timing_rules",     "Timing rules — when information is provided (prior to processing / at collection / within X days of request / just-in-time / periodic frequency)", "must", False, "§7.3.2 — timing of such a provision"),
+        ChecklistItem("item:A.7.3.2:proc_medium_selection", "Medium selection — which channels (privacy notice URL, layered notices, in-product prompts, contract clauses)", "must", False, "GDPR Art.12 — appropriate measures"),
+        ChecklistItem("item:A.7.3.2:proc_update_on_change", "Update-on-change — purpose changes / new processing trigger a notice update within stated SLA", "must", False, "§7.3.2 — updated information if purposes changed"),
+        ChecklistItem("item:A.7.3.2:proc_signoff",          "DPO + Legal signoff for notice text changes before deploy", "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.2:proc_ux_review",        "UX / accessibility review before deploy (icons, plain language, layered notice)", "should", False, "§7.3.3 — intelligible + accessible"),
+    ],
+)
+
+REQ_A732_NOTICE_ARTIFACT_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.3.2:notice_artifact_register",
+    control_ref   = "A.7.3.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Notice Artifact Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-notice-artifact row — the register of subject-facing privacy notices (public notice, layered notice, just-in-time prompts) with version, effective date, applicable audience. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.2:reg_notice_id",         "Unique notice identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.3.2:reg_audience",          "Target audience per row (public / customer / employee / minor / EU / US / etc.)", "must", False, "§7.3.3 — target audience"),
+        ChecklistItem("item:A.7.3.2:reg_field_coverage",    "Field coverage per row (which A.7.3.2 fields the notice covers)", "must", False, "§7.3.2 — type of information"),
+        ChecklistItem("item:A.7.3.2:reg_version_effective", "Version + effective date per row", "must", False, "Version tracking"),
+        ChecklistItem("item:A.7.3.2:reg_signoff",           "DPO + Legal signoff per version", "must", False, "Accountability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.2:reg_url",               "Public URL / distribution channel per row", "should", False, "§7.3.3 — accessible"),
+    ],
+)
+
+REQ_A732_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.3.2:applicable_scope",
+    control_ref   = "A.7.3.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Notice Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which processing contexts require a notice (direct collection vs indirect / customer vs employee / EU vs non-EU) and which fields differ per context.",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.2:scope_contexts",        "Notice contexts enumerated (direct / indirect / cookie / marketing / employee / minor / etc.)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.3.2:scope_field_diffs",     "Per-context field differences (e.g. indirect collection triggers additional Art.14 fields; children triggers plain-language obligation)", "must", False, "§7.3.2 — target audience"),
+        ChecklistItem("item:A.7.3.2:scope_exclusions",      "Excluded contexts with rationale", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.2:scope_change_drivers",  "Trigger list (new processing activity / new audience segment)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A732_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.3.2:program_review",
+    control_ref   = "A.7.3.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Notice Content Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — notices reflect current processing state, field coverage complete per context, updates issued on time (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.2:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.3.2:rev_reviewer",          "Reviewer identity (DPO + Legal + UX)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.3.2:rev_currency_audit",    "Currency audit — sampled notices verified against A.7.2.1 purpose register + A.7.2.8 RoPA", "must", False, "§7.3.2 — updated information"),
+        ChecklistItem("item:A.7.3.2:rev_field_completeness","Field completeness — sampled notices verified against catalog", "must", False, "§7.3.2 — type of information"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.2:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.3.3 Providing information to PII principals ───────────────────────────
+# §7.3.3: The organization shall provide subjects with clear + easily
+# accessible information identifying the controller + describing the processing.
+
+REQ_A733_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.3.3:notice_delivery_procedure",
+    control_ref   = "A.7.3.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Privacy Notice Delivery Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.3.3 governs HOW subjects actually receive + access the notice content determined in §7.3.2 — timely, concise, complete, transparent, intelligible, easily accessible + in clear plain language.",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.3:proc_at_collection",    "At-collection delivery — notice presented when PII is collected (form, signup flow, kiosk)", "must", False, "§7.3.3 — given at time of PII collection"),
+        ChecklistItem("item:A.7.3.3:proc_permanent_access", "Permanent accessibility — notice available at stable URL / in-product location at any time", "must", False, "§7.3.3 — permanently accessible"),
+        ChecklistItem("item:A.7.3.3:proc_plain_language",   "Plain-language standard — reading-level target, jargon audit, tested against target audience", "must", False, "§7.3.3 — clear and plain language"),
+        ChecklistItem("item:A.7.3.3:proc_layered_design",   "Layered / progressive design (short summary + expandable detail) where notice is long", "must", False, "§7.3.3 — concise + easily accessible"),
+        ChecklistItem("item:A.7.3.3:proc_visual_aids",      "Visual aids where helpful (icons, diagrams — per §7.3.3 NOTE)", "must", False, "§7.3.3 NOTE — icons and images"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.3:proc_readability_target","Readability target stated (Flesch score / school-grade)", "should", False, "Measurable clarity"),
+    ],
+)
+
+REQ_A733_DELIVERY_LOG_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.3.3:notice_delivery_log",
+    control_ref   = "A.7.3.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Notice Delivery Log",
+    trigger_type  = "profile_fact",
+    description   = "Per-delivery-touchpoint row — where + when the notice is surfaced (signup form / cookie banner / in-product prompt / periodic reminder). Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.3:reg_touchpoint_id",     "Unique touchpoint identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.3.3:reg_touchpoint_type",   "Touchpoint type per row (signup / renewal / cookie banner / just-in-time prompt / periodic reminder)", "must", False, "§7.3.3 — at time of collection"),
+        ChecklistItem("item:A.7.3.3:reg_notice_version",    "Notice version served per row (link to A.7.3.2 artifact register)", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.3.3:reg_deployment_date",   "Deployment date per row", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.3:reg_engagement_metric", "Engagement metric per row (view count, expand-detail rate)", "should", False, "Effectiveness signal"),
+    ],
+)
+
+REQ_A733_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.3.3:applicable_scope",
+    control_ref   = "A.7.3.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Delivery Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which delivery contexts are in scope (web, mobile, in-product, kiosk, paper, phone) and where notice-at-collection applies vs after-the-fact indirect collection.",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.3:scope_delivery_channels","Delivery channels enumerated with notice-at-collection status per channel", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.3.3:scope_indirect_collection","Indirect-collection handling — where PII sourced from third party, notice within reasonable time per Art.14.3", "must", False, "GDPR Art.14.3"),
+        ChecklistItem("item:A.7.3.3:scope_exclusions",      "Excluded contexts with rationale (e.g. B2B-only channels where notice is contract-embedded)", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.3:scope_change_drivers",  "Trigger list (new product surface / new data source)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A733_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.3.3:program_review",
+    control_ref   = "A.7.3.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Notice Delivery Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — notices reachable at every touchpoint, plain-language standard maintained, no delivery gaps (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.3:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.3.3:rev_reviewer",          "Reviewer identity (DPO + Product + UX)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.3.3:rev_reachability_audit","Reachability audit — sampled touchpoints verified to serve current notice", "must", False, "§7.3.3 — permanently accessible"),
+        ChecklistItem("item:A.7.3.3:rev_plain_language_audit","Plain-language audit — sampled notices reviewed against readability target", "must", False, "§7.3.3 — clear plain language"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.3:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.3.4 Providing mechanism to modify or withdraw consent ─────────────────
+# §7.3.4: The organization shall provide a mechanism for subjects to modify or
+# withdraw consent. Companion to A.7.2.4.
+
+REQ_A734_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.3.4:consent_withdrawal_procedure",
+    control_ref   = "A.7.3.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Consent Modification / Withdrawal Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.3.4 requires a mechanism for subjects to modify or withdraw consent + propagation to downstream processing + third parties. Withdrawal channel parity (same as collection).",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.4:proc_channel_parity",   "Channel parity — withdrawal via same medium as collection (email if email, web if web; not phone/fax fallback)", "must", False, "§7.3.4 implementation guidance — same as collection"),
+        ChecklistItem("item:A.7.3.4:proc_easy_as_giving",   "Withdrawal as easy as giving — no additional hurdles beyond original consent process (Art.7.3)", "must", False, "GDPR Art.7.3 — as easy to withdraw"),
+        ChecklistItem("item:A.7.3.4:proc_modification_paths","Modification paths (partial withdrawal / opt-in-to-fewer-purposes / restrict processing)", "must", False, "§7.3.4 — modify or withdraw"),
+        ChecklistItem("item:A.7.3.4:proc_response_sla",     "Response-time SLA stated + honoured", "must", False, "§7.3.4 implementation — response time"),
+        ChecklistItem("item:A.7.3.4:proc_propagation",      "Downstream propagation — withdrawal cascades to systems + authorised users + third parties (see A.7.3.7)", "must", False, "§7.3.4 — disseminate through systems"),
+        ChecklistItem("item:A.7.3.4:proc_pre_withdrawal_valid","Pre-withdrawal processing remains valid; post-withdrawal processing halts (Art.7.3 — no retroactive effect)", "must", False, "§7.3.4 additional information"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.4:proc_reminder",         "Periodic reminder that withdrawal is available (in-product / newsletter footer)", "should", False, "Best practice"),
+    ],
+)
+
+REQ_A734_WITHDRAWAL_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.3.4:withdrawal_event_register",
+    control_ref   = "A.7.3.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Consent Modification / Withdrawal Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-withdrawal-event row — audit trail of each consent withdrawal or modification with timestamp + propagation status. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.4:reg_event_id",          "Unique event identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.3.4:reg_subject_id",        "Subject identifier per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.3.4:reg_event_type",        "Event type per row (modification / partial withdrawal / full withdrawal)", "must", False, "§7.3.4 — modify or withdraw"),
+        ChecklistItem("item:A.7.3.4:reg_timestamp",         "Timestamp per row", "must", False, "Currency"),
+        ChecklistItem("item:A.7.3.4:reg_propagation_status","Propagation status per row (downstream systems notified / third parties informed)", "must", False, "§7.3.4 — dissemination"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.4:reg_channel",           "Withdrawal channel per row", "should", False, "Parity audit"),
+    ],
+)
+
+REQ_A734_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.3.4:applicable_scope",
+    control_ref   = "A.7.3.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Consent-Basis Activities Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which activities rely on consent (from A.7.2.3 / A.7.2.4 registers) and therefore need withdrawal channels. Non-consent bases (contract, legal obligation) don't populate this scope.",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.4:scope_consent_activities","Consent-based activities enumerated (link to A.7.2.2 lawful basis register)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.3.4:scope_channel_map",     "Per-activity collection channel → withdrawal channel map", "must", False, "§7.3.4 — same as collection"),
+        ChecklistItem("item:A.7.3.4:scope_jurisdiction_variance","Jurisdiction-specific variations (some jurisdictions restrict when withdrawal is possible)", "must", False, "§7.3.4 — some jurisdictions impose restrictions"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.4:scope_change_drivers",  "Trigger list (new consent-based activity)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A734_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.3.4:program_review",
+    control_ref   = "A.7.3.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Withdrawal Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — withdrawal channels functional, propagation reliable, SLA met, no consent-basis activity without a corresponding withdrawal path (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.4:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.3.4:rev_reviewer",          "Reviewer identity (DPO + Engineering)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.3.4:rev_channel_test",      "Channel test — end-to-end withdrawal test per channel", "must", False, "§7.3.4 — mechanism"),
+        ChecklistItem("item:A.7.3.4:rev_propagation_audit", "Propagation audit — sampled withdrawals verified to have stopped downstream processing + notified third parties", "must", False, "§7.3.4 — dissemination"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.4:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.3.5 Providing mechanism to object to PII processing ───────────────────
+# §7.3.5: The organization shall provide a mechanism for subjects to object.
+# GDPR Art.21 direct-marketing objection is absolute.
+
+REQ_A735_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.3.5:objection_procedure",
+    control_ref   = "A.7.3.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Objection Handling Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.3.5 requires an objection mechanism. Two flavours: absolute (Art.21.2 direct marketing / Art.21.6 statistics) and balancing-test (Art.21.1 legitimate-interests processing). Companion procedure to A.7.2.2 lawful basis.",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.5:proc_channel_consistency","Channel consistency with service type (online services offer online objection; §7.3.5 implementation guidance)", "must", False, "§7.3.5 — consistent with service type"),
+        ChecklistItem("item:A.7.3.5:proc_absolute_objection","Absolute objection handling (Art.21.2 marketing → processing must stop immediately)", "must", False, "GDPR Art.21.2-3"),
+        ChecklistItem("item:A.7.3.5:proc_balancing_test",   "Legitimate-interests balancing test — org demonstrates compelling grounds override subject rights or objection prevails", "must", False, "GDPR Art.21.1"),
+        ChecklistItem("item:A.7.3.5:proc_information_provision","Information provision — subjects informed of objection right at first communication (Art.21.4)", "must", False, "GDPR Art.21.4"),
+        ChecklistItem("item:A.7.3.5:proc_response_sla",     "Response-time SLA stated + honoured", "must", False, "§7.3.5 implementation"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.5:proc_owner",            "Named owner (DPO + Marketing lead for A.21.2 cases)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A735_OBJECTION_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.3.5:objection_register",
+    control_ref   = "A.7.3.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Objection Event Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-objection-event row — audit trail of each objection with type, resolution, and downstream propagation. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.5:reg_event_id",          "Unique event identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.3.5:reg_subject_id",        "Subject identifier per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.3.5:reg_objection_type",    "Objection type per row (absolute — marketing/stats; balancing — legitimate interests / public interest)", "must", False, "GDPR Art.21"),
+        ChecklistItem("item:A.7.3.5:reg_resolution",        "Resolution per row (processing halted / balancing test rejection with justification)", "must", False, "Art.21.1 — compelling grounds"),
+        ChecklistItem("item:A.7.3.5:reg_propagation_status","Downstream propagation status", "must", False, "Effectiveness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.5:reg_legal_review",      "Legal counsel signoff for balancing-test rejections", "should", False, "Defensibility"),
+    ],
+)
+
+REQ_A735_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.3.5:applicable_scope",
+    control_ref   = "A.7.3.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Objection Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which processing activities carry an objection right (direct marketing always; legitimate-interests processing; public-interest processing; research/statistics per Art.21.6).",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.5:scope_marketing_processing","Marketing processing enumerated (Art.21.2 absolute objection applies)", "must", False, "GDPR Art.21.2"),
+        ChecklistItem("item:A.7.3.5:scope_legitimate_interests","Legitimate-interests processing enumerated (Art.21.1 balancing-test objection applies)", "must", False, "GDPR Art.21.1"),
+        ChecklistItem("item:A.7.3.5:scope_public_task",     "Public-task processing enumerated (Art.21.1 applies)", "must", False, "GDPR Art.21.1"),
+        ChecklistItem("item:A.7.3.5:scope_research_stats",  "Research / statistics processing (Art.21.6 applies)", "must", False, "GDPR Art.21.6"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.5:scope_change_drivers",  "Trigger list (new legitimate-interests processing / new marketing programme)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A735_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.3.5:program_review",
+    control_ref   = "A.7.3.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Objection Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — objection channels functional, absolute objections honoured, balancing tests defensible, notification-of-right requirement met (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.5:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.3.5:rev_reviewer",          "Reviewer identity (DPO + Legal)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.3.5:rev_absolute_audit",    "Absolute-objection audit — sampled marketing objections verified to have halted processing", "must", False, "Art.21.3"),
+        ChecklistItem("item:A.7.3.5:rev_balancing_audit",   "Balancing-test audit — sampled rejections reviewed for defensibility", "must", False, "Art.21.1"),
+        ChecklistItem("item:A.7.3.5:rev_notification_audit","Notification-of-right audit — first-communication notices reviewed", "must", False, "Art.21.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.5:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.3.6 Access, correction and/or erasure ─────────────────────────────────
+# §7.3.6: The organization shall implement policies/procedures/mechanisms for
+# subject access, correction, erasure. GDPR Arts 15/16/17.
+
+REQ_A736_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.3.6:acr_procedure",
+    control_ref   = "A.7.3.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Access / Correction / Erasure Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.3.6 requires the umbrella procedure for the three core subject-rights operations. Bridges to GDPR Art.15 (access), Art.16 (rectification), Art.17 (erasure). Companion to A.7.3.9 (request handling).",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.6:proc_identity_verification","Identity verification step (proportionate — avoids granting rights to imposters)", "must", False, "GDPR Art.12.6 + §7.3.9"),
+        ChecklistItem("item:A.7.3.6:proc_access_flow",      "Access flow — Art.15 fields + copy of PII processed (link to A.7.3.8)", "must", False, "GDPR Art.15.1 + Art.15.3"),
+        ChecklistItem("item:A.7.3.6:proc_correction_flow",  "Correction flow — including subject-dispute path when correction is disputed", "must", False, "§7.3.6 — dispute about accuracy"),
+        ChecklistItem("item:A.7.3.6:proc_erasure_flow",     "Erasure flow — including retention-limit + legal-obligation exceptions", "must", False, "GDPR Art.17.3"),
+        ChecklistItem("item:A.7.3.6:proc_downstream_propagation","Downstream propagation — corrections/erasures pushed to systems + third parties (see A.7.3.7)", "must", False, "§7.3.6 — pass to third parties"),
+        ChecklistItem("item:A.7.3.6:proc_response_sla",     "Response-time SLA stated + honoured (undue delay standard)", "must", False, "§7.3.6 — without undue delay + Art.12.3"),
+        ChecklistItem("item:A.7.3.6:proc_refusal_reasoning","Refusal reasoning — where request refused / cannot be met, subject informed of reasons + right to complain", "must", False, "§7.3.6 — reasons why corrections cannot be made + Art.12.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.6:proc_self_service",     "Self-service surface where feasible (subject portal for direct access/correction)", "should", False, "Efficiency + Art.15.3"),
+    ],
+)
+
+REQ_A736_REQUEST_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.3.6:acr_request_register",
+    control_ref   = "A.7.3.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Access / Correction / Erasure Request Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-request row — audit trail of each ACR request with type, resolution, and SLA compliance. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.6:reg_request_id",        "Unique request identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.3.6:reg_subject_id",        "Subject identifier per row (post identity verification)", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.3.6:reg_request_type",      "Request type per row (access / correction / erasure)", "must", False, "§7.3.6"),
+        ChecklistItem("item:A.7.3.6:reg_received_date",     "Received date + resolution date per row (SLA measurable)", "must", False, "Currency"),
+        ChecklistItem("item:A.7.3.6:reg_outcome",           "Outcome per row (granted / refused with reason / partial)", "must", False, "§7.3.6 — inform of what changes made"),
+        ChecklistItem("item:A.7.3.6:reg_propagation",       "Propagation status per row (systems updated / third parties notified)", "must", False, "§7.3.6 — pass to third parties"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.6:reg_verification_method","Identity verification method used", "should", False, "Defensibility"),
+    ],
+)
+
+REQ_A736_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.3.6:applicable_scope",
+    control_ref   = "A.7.3.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable ACR Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which subjects are covered (all subjects always) and which restrictions apply (research derogations, legal-obligation retention, freedom-of-expression, etc.).",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.6:scope_subject_universe","Subject universe covered (customers / employees / prospects / research participants / etc.)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.3.6:scope_erasure_exceptions","Erasure exceptions enumerated (Art.17.3 legal obligation / freedom of expression / public interest / research / defence of legal claims)", "must", False, "GDPR Art.17.3"),
+        ChecklistItem("item:A.7.3.6:scope_jurisdiction_restrictions","Jurisdiction-specific restrictions on when + how correction/erasure can be requested", "must", False, "§7.3.6 — some jurisdictions impose restrictions"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.6:scope_change_drivers",  "Trigger list (new regulation / new subject category)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A736_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.3.6:program_review",
+    control_ref   = "A.7.3.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "ACR Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — request handling reliable, SLAs met, refusals defensible, propagation working, no ACR gaps in systems (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.6:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.3.6:rev_reviewer",          "Reviewer identity (DPO + Legal + Engineering)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.3.6:rev_sla_audit",         "SLA audit — sampled requests measured against undue-delay standard", "must", False, "§7.3.6 — undue delay + Art.12.3"),
+        ChecklistItem("item:A.7.3.6:rev_refusal_audit",     "Refusal audit — sampled refusals reviewed for defensibility + subject-notification of reason", "must", False, "§7.3.6 + Art.12.4"),
+        ChecklistItem("item:A.7.3.6:rev_propagation_audit", "Propagation audit — sampled corrections/erasures verified downstream", "must", False, "§7.3.6 — pass to third parties"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.6:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.3.7 PII controllers' obligations to inform third parties ──────────────
+# §7.3.7: The organization shall inform third parties with whom PII has been
+# shared of modifications, withdrawals, objections. GDPR Art.19 (rectification/
+# erasure/restriction notification).
+
+REQ_A737_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.3.7:third_party_notification_procedure",
+    control_ref   = "A.7.3.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Third-Party Notification Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.3.7 requires informing third parties (recipients of shared PII) when subjects modify consent, withdraw, object, or request correction/erasure/restriction. Bridges to GDPR Art.19.",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.7:proc_recipient_inventory","Recipient inventory — active communication channels with every third party PII has been shared with (link to A.7.5.4 disclosure register)", "must", False, "§7.3.7 — determine and maintain active channels"),
+        ChecklistItem("item:A.7.3.7:proc_trigger_map",      "Trigger map — which subject events (withdrawal / correction / erasure / restriction / objection) require third-party notification", "must", False, "§7.3.7 — modification, withdrawal or objections"),
+        ChecklistItem("item:A.7.3.7:proc_notification_format","Notification format standardised (e.g. structured message with subject ref, event type, expected action)", "must", False, "Consistency"),
+        ChecklistItem("item:A.7.3.7:proc_ack_receipt",      "Acknowledgement of receipt monitored", "must", False, "§7.3.7 — monitor acknowledgement"),
+        ChecklistItem("item:A.7.3.7:proc_impossibility_exception","Impossibility / disproportionate-effort exception documented per Art.19", "must", False, "GDPR Art.19 — unless proves impossible or disproportionate effort"),
+        ChecklistItem("item:A.7.3.7:proc_subject_disclosure","Subject-disclosure obligation — on request, org informs the subject of recipients notified (Art.19)", "must", False, "GDPR Art.19"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.7:proc_automation",       "Automation where feasible — scripted notification to processors + integrations", "should", False, "Reliability"),
+    ],
+)
+
+REQ_A737_NOTIFICATION_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.3.7:notification_register",
+    control_ref   = "A.7.3.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Third-Party Notification Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-notification-event row — audit trail of every third-party notification issued. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.7:reg_notification_id",   "Unique notification identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.3.7:reg_recipient",         "Recipient third party per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.3.7:reg_trigger_event",     "Trigger event per row (which subject event caused the notification)", "must", False, "§7.3.7"),
+        ChecklistItem("item:A.7.3.7:reg_dispatch_date",     "Dispatch date per row", "must", False, "Currency"),
+        ChecklistItem("item:A.7.3.7:reg_ack_received",      "Acknowledgement received flag + date per row", "must", False, "§7.3.7 — monitor acknowledgement"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.7:reg_impossibility_flag","Impossibility / disproportionate-effort invocation flag per row where applicable", "should", False, "Art.19"),
+    ],
+)
+
+REQ_A737_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.3.7:applicable_scope",
+    control_ref   = "A.7.3.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Third-Party Sharing Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which third parties have received the org's PII (from A.7.5 sharing/transfer/disclosure) and therefore require notification when subject events occur.",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.7:scope_recipients_list", "Third-party recipients enumerated (link to A.7.5.4 disclosure register)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.3.7:scope_channel_map",     "Per-recipient communication channel (email / API / portal)", "must", False, "§7.3.7 — active communication channels"),
+        ChecklistItem("item:A.7.3.7:scope_exclusions",      "Excluded recipients with rationale (e.g. one-time disclosures with PII already destroyed)", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.7:scope_change_drivers",  "Trigger list (new third-party sharing / termination of sharing)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A737_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.3.7:program_review",
+    control_ref   = "A.7.3.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Third-Party Notification Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — recipient inventory current, notifications issued reliably, acknowledgements tracked, impossibility invocations defensible (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.7:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.3.7:rev_reviewer",          "Reviewer identity (DPO + Vendor Management)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.3.7:rev_recipient_currency","Recipient inventory currency — reconciled against A.7.5.4 disclosure register", "must", False, "§7.3.7 — determine and maintain"),
+        ChecklistItem("item:A.7.3.7:rev_dispatch_audit",    "Dispatch audit — sampled subject events verified to have generated corresponding third-party notifications", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.3.7:rev_impossibility_audit","Impossibility-invocation audit — sampled invocations reviewed for defensibility", "must", False, "Art.19"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.7:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.3.8 Providing copy of PII processed ───────────────────────────────────
+# §7.3.8: The organization shall be able to provide a copy of the PII when
+# requested. GDPR Art.15.3 (copy) + Art.20 (portability, structured format).
+
+REQ_A738_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.3.8:copy_provision_procedure",
+    control_ref   = "A.7.3.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "PII Copy Provision Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.3.8 requires the org to provide a copy of processed PII on request. Bridges to Art.15.3 (copy of PII) + Art.20 (portability — structured, commonly used, machine-readable format).",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.8:proc_format_selection", "Format selection — structured, commonly used, accessible (Art.15.3 + machine-readable for Art.20)", "must", False, "§7.3.8 — structured, commonly used format"),
+        ChecklistItem("item:A.7.3.8:proc_scope_restriction","Scope restriction — copy relates specifically to that subject; no cross-subject leakage", "must", False, "§7.3.8 — relate specifically to that PII principal"),
+        ChecklistItem("item:A.7.3.8:proc_deleted_notification","Deleted-PII notification — where PII already deleted per retention policy, subject informed of that fact", "must", False, "§7.3.8 — inform PII principal that PII has been deleted"),
+        ChecklistItem("item:A.7.3.8:proc_no_reidentification","No-re-identification rule — de-identified data not re-identified solely to fulfil this control", "must", False, "§7.3.8 — should not seek to (re-)identify"),
+        ChecklistItem("item:A.7.3.8:proc_direct_transfer",  "Direct-transfer capability — where technically feasible, transfer directly to another controller (Art.20.2)", "must", False, "§7.3.8 — transfer copy from one organization to another"),
+        ChecklistItem("item:A.7.3.8:proc_response_sla",     "Response-time SLA stated + honoured", "must", False, "Art.12.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.8:proc_self_service",     "Self-service export where feasible", "should", False, "Efficiency"),
+    ],
+)
+
+REQ_A738_COPY_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.3.8:copy_request_register",
+    control_ref   = "A.7.3.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Copy Request Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-request row — audit trail of copy requests with format used, scope covered, and SLA. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.8:reg_request_id",        "Unique request identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.3.8:reg_subject_id",        "Subject identifier per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.3.8:reg_format_delivered",  "Format delivered per row (JSON / CSV / PDF / structured export)", "must", False, "§7.3.8 — structured format"),
+        ChecklistItem("item:A.7.3.8:reg_scope_summary",     "Scope summary per row (what PII was included)", "must", False, "§7.3.8 — relate specifically"),
+        ChecklistItem("item:A.7.3.8:reg_response_time",     "Response time per row (vs SLA)", "must", False, "Art.12.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.8:reg_direct_transfer",   "Direct-transfer flag if Art.20.2 invoked", "should", False, "Art.20.2"),
+    ],
+)
+
+REQ_A738_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.3.8:applicable_scope",
+    control_ref   = "A.7.3.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Copy Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which processing activities carry portability rights (Art.20 — consent-basis or contract-basis + automated). Copy-of-PII (Art.15.3) is broader — all subjects.",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.8:scope_art_15_universe", "Art.15.3 (copy) universe — all subjects with PII processed", "must", False, "GDPR Art.15.3"),
+        ChecklistItem("item:A.7.3.8:scope_art_20_universe", "Art.20 (portability) universe — subset where basis=consent OR contract AND processing is automated", "must", False, "GDPR Art.20.1"),
+        ChecklistItem("item:A.7.3.8:scope_derived_data",    "Derived/inferred data handling — original PII in scope; derived analytics + third-party enrichment typically out of scope", "must", False, "EDPB Guidelines on right to data portability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.8:scope_change_drivers",  "Trigger list (new consent/contract-basis processing)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A738_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.3.8:program_review",
+    control_ref   = "A.7.3.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Copy Provision Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — copy formats current, scope-restriction enforced, direct-transfer capability tested, SLAs met (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.8:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.3.8:rev_reviewer",          "Reviewer identity (DPO + Engineering)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.3.8:rev_scope_leakage_test","Scope-leakage test — sampled copies verified to contain only the requesting subject's PII", "must", False, "§7.3.8 — relate specifically"),
+        ChecklistItem("item:A.7.3.8:rev_format_currency",   "Format currency — output format aligns with commonly-used industry standards", "must", False, "§7.3.8 — commonly used format"),
+        ChecklistItem("item:A.7.3.8:rev_direct_transfer_test","Direct-transfer capability tested end-to-end", "must", False, "Art.20.2"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.8:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.3.9 Handling requests ─────────────────────────────────────────────────
+# §7.3.9: The organization shall define + document policies + procedures for
+# handling + responding to legitimate requests from PII principals.
+
+REQ_A739_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.3.9:request_handling_procedure",
+    control_ref   = "A.7.3.9",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Subject Request Handling Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.3.9 is the umbrella procedure covering intake, triage, routing, response, and follow-up for all subject-rights requests. Cross-links to A.7.3.4-8 procedures.",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.9:proc_intake_channels",  "Intake channels enumerated (email, web form, in-product, phone, mail)", "must", False, "§7.3.9 — handling and responding"),
+        ChecklistItem("item:A.7.3.9:proc_identity_verification","Identity verification (proportionate — not overly onerous)", "must", False, "GDPR Art.12.6"),
+        ChecklistItem("item:A.7.3.9:proc_triage_routing",   "Triage + routing — request classified + routed to correct A.7.3.x sub-procedure", "must", False, "§7.3.9 — handling"),
+        ChecklistItem("item:A.7.3.9:proc_response_times",   "Response times documented in privacy policy per jurisdiction", "must", False, "§7.3.9 — response times defined in privacy policy"),
+        ChecklistItem("item:A.7.3.9:proc_fee_policy",       "Fee policy (jurisdictions permit fees for excessive/repetitive; document rules)", "must", False, "§7.3.9 — some jurisdictions allow fee"),
+        ChecklistItem("item:A.7.3.9:proc_delay_notification","Delay notification — where response takes longer than SLA, subject informed of reason + revised timeline", "must", False, "§7.3.9 — inform of any delay"),
+        ChecklistItem("item:A.7.3.9:proc_complaint_route",  "Complaint route — subjects informed of right to complain to SA (Art.77 route)", "must", False, "GDPR Art.13.2.d + Art.14.2.e"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.9:proc_owner",            "Named owner (Privacy Ops)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A739_REQUEST_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.3.9:master_request_register",
+    control_ref   = "A.7.3.9",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Master Subject Request Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-request row — the umbrella register covering all subject-rights requests routed through the intake channel. Sub-registers on A.7.3.4-8 track type-specific detail. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.9:reg_request_id",        "Unique request identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.3.9:reg_intake_channel",    "Intake channel per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.3.9:reg_classified_type",   "Classified type per row (access / correction / erasure / portability / restriction / objection / complaint / other)", "must", False, "§7.3.9 — legitimate requests"),
+        ChecklistItem("item:A.7.3.9:reg_routing",           "Routing per row (which sub-procedure handled it)", "must", False, "§7.3.9 — handling"),
+        ChecklistItem("item:A.7.3.9:reg_sla_met_flag",      "SLA-met flag per row (auditor-critical timeliness proof)", "must", False, "§7.3.9 — response times"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.9:reg_fee_charged",       "Fee-charged flag + amount per row where applicable", "should", False, "§7.3.9 — fee cases"),
+    ],
+)
+
+REQ_A739_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.3.9:applicable_scope",
+    control_ref   = "A.7.3.9",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Request Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which requests are 'legitimate' (from a verifiable subject about their own PII) and which are excluded (from third parties without authorisation, unrelated to org's processing, etc.).",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.9:scope_legitimate_test", "Legitimate-request test (verifiable subject + about their own PII + relates to org's processing)", "must", False, "§7.3.9 — legitimate requests"),
+        ChecklistItem("item:A.7.3.9:scope_response_time_matrix","Per-jurisdiction response-time matrix (Art.12.3 30 days default + extensions)", "must", False, "GDPR Art.12.3"),
+        ChecklistItem("item:A.7.3.9:scope_fee_scope",       "Where fees permitted (excessive/repetitive under GDPR; other jurisdictions vary)", "must", False, "§7.3.9 — some jurisdictions"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.9:scope_change_drivers",  "Trigger list (new jurisdiction / new SA guidance)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A739_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.3.9:program_review",
+    control_ref   = "A.7.3.9",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Request Handling Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — intake channels functional, SLAs met, delay notifications issued, complaint routes surfaced, fees defensible where charged (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.9:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.3.9:rev_reviewer",          "Reviewer identity (DPO + Privacy Ops lead)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.3.9:rev_sla_audit",         "SLA audit — aggregate + sampled requests measured against response-time matrix", "must", False, "§7.3.9 — response times"),
+        ChecklistItem("item:A.7.3.9:rev_channel_test",      "Channel test — sampled inbound requests through each intake channel", "must", False, "§7.3.9 — handling"),
+        ChecklistItem("item:A.7.3.9:rev_complaint_route_test","Complaint-route visibility test — subject notice surfaces the SA-complaint right", "must", False, "Art.13.2.d + Art.14.2.e"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.9:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.3.10 Automated decision making ────────────────────────────────────────
+# §7.3.10: The organization shall identify + address obligations to subjects
+# resulting from decisions based solely on automated processing. GDPR Art.22.
+# Companion to already-curated Art.22 4-leaf.
+
+REQ_A7310_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.3.10:automated_decision_obligations_procedure",
+    control_ref   = "A.7.3.10",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Automated Decision Subject Obligations Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.3.10 requires the org to identify + address obligations to subjects arising from solely-automated decisions producing legal or similarly significant effects. Companion to the already-curated GDPR Art.22 4-leaf (this is the 27701-side counterpart).",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.10:proc_notification_of_existence","Notification-of-existence — subjects informed that automated decision-making occurs (Art.13.2.f + 14.2.g)", "must", False, "§7.3.10 — notifying the existence"),
+        ChecklistItem("item:A.7.3.10:proc_meaningful_logic","Meaningful information about the logic + envisaged consequences", "must", False, "GDPR Art.13.2.f + Art.15.1.h"),
+        ChecklistItem("item:A.7.3.10:proc_objection_pathway","Objection pathway — subjects can object to automated decision-making", "must", False, "§7.3.10 — allow objection"),
+        ChecklistItem("item:A.7.3.10:proc_human_intervention","Human intervention pathway (Art.22.3)", "must", False, "§7.3.10 — human intervention + Art.22.3"),
+        ChecklistItem("item:A.7.3.10:proc_jurisdiction_prohibition","Jurisdiction-specific full-automation prohibition awareness (§7.3.10 NOTE — some jurisdictions restrict full automation)", "must", False, "§7.3.10 NOTE"),
+        ChecklistItem("item:A.7.3.10:proc_cross_link_art22","Cross-link to A.7.2.5 PIA and the Art.22 4-leaf procedure register — no double-registration; this control handles the SUBJECT-facing obligations while Art.22 procedure handles the internal governance", "must", False, "GDPR Art.22 alignment"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.10:proc_owner",           "Named owner (DPO + ML/Product lead)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A7310_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.3.10:automated_decision_subject_events_register",
+    control_ref   = "A.7.3.10",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Automated Decision Subject Events Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-subject-event row — objections, requests for human intervention, contests. Distinct from the Art.22 system register (which tracks the systems). Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.10:reg_event_id",         "Unique event identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.3.10:reg_subject_id",       "Subject identifier per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.3.10:reg_event_type",       "Event type per row (objection / human-intervention request / contest / expression-of-view)", "must", False, "Art.22.3"),
+        ChecklistItem("item:A.7.3.10:reg_system",           "Automated system involved per row", "must", False, "Traceability to Art.22 register"),
+        ChecklistItem("item:A.7.3.10:reg_resolution",       "Resolution per row (human-reviewed decision / procedure applied / dismissed with reason)", "must", False, "Art.22.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.10:reg_response_time",    "Response time per row", "should", False, "Effectiveness"),
+    ],
+)
+
+REQ_A7310_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.3.10:applicable_scope",
+    control_ref   = "A.7.3.10",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Automated Decision Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — mirrors the Art.22 scope (solely-automated + legal or similarly significant effects). This scope note points at the Art.22 scope register to avoid duplication.",
+    must_contain  = [
+        ChecklistItem("item:A.7.3.10:scope_art22_alignment","Alignment with Art.22 applicable scope — reference the Art.22 scope register (item:Art.22:scope_solely_automated etc.)", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.3.10:scope_jurisdiction_prohibitions","Jurisdiction-specific prohibitions on full automation (§7.3.10 NOTE)", "must", False, "§7.3.10 NOTE"),
+        ChecklistItem("item:A.7.3.10:scope_subject_facing_only","Scope focus — subject-facing obligations only (system-side governance stays with Art.22 procedure)", "must", False, "Non-duplication"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.10:scope_change_drivers", "Trigger list (new automated decision system / new jurisdiction with full-automation prohibition)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A7310_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.3.10:program_review",
+    control_ref   = "A.7.3.10",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Automated Decision Subject Obligations Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — subject notification working, objection pathway healthy, human-intervention path functional, jurisdiction-prohibition scope current (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.3.10:rev_date",             "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.3.10:rev_reviewer",         "Reviewer identity (DPO + ML/Product lead + Legal)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.3.10:rev_notification_audit","Notification audit — sampled A.22 systems verified to have subject-notification surfaced", "must", False, "§7.3.10 — notifying the existence"),
+        ChecklistItem("item:A.7.3.10:rev_intervention_test","Human-intervention pathway test", "must", False, "Art.22.3"),
+        ChecklistItem("item:A.7.3.10:rev_jurisdiction_currency","Jurisdiction-currency check — new full-automation prohibitions surfaced", "must", False, "§7.3.10 NOTE"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.3.10:rev_next_date",        "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.4.1 Limit collection — op_process 4-leaf ─────────────────────────────
+# §7.4.1: The organization shall limit the collection of PII to the minimum
+# that is relevant, proportional + necessary. GDPR Art.5.1.b + Art.5.1.c.
+
+REQ_A741_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.4.1:collection_limitation_procedure",
+    control_ref   = "A.7.4.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Collection Limitation Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.4.1 requires the org to limit PII collection to what's adequate, relevant + necessary for identified purposes — including indirect collection (weblogs, system logs). Also encodes privacy-by-default (opt-in for optional collections).",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.1:proc_necessity_test",   "Necessity test per data field — adequate + relevant + necessary for stated purpose", "must", False, "§7.4.1 — adequate, relevant and necessary + Art.5.1.c"),
+        ChecklistItem("item:A.7.4.1:proc_indirect_collection","Indirect collection scoped (weblogs / cookies / device signals / third-party enrichment) — same necessity test applied", "must", False, "§7.4.1 — indirectly through web logs"),
+        ChecklistItem("item:A.7.4.1:proc_default_off",      "Privacy-by-default — optional collections disabled by default; enabled only by explicit subject choice", "must", False, "§7.4.1 — disabled by default + GDPR Art.25.2"),
+        ChecklistItem("item:A.7.4.1:proc_field_review",     "Data-field review — each new field added to a collection form goes through necessity review before deploy", "must", False, "Data minimisation"),
+        ChecklistItem("item:A.7.4.1:proc_removal_procedure","Field-removal procedure — periodic sweep of collected fields that are no longer necessary", "must", False, "§7.4.1 — minimum necessary"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.1:proc_owner",            "Named owner (Product / Privacy Engineering)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A741_COLLECTION_INVENTORY = EvidenceRequirement(
+    id            = "req:A.7.4.1:collection_field_inventory",
+    control_ref   = "A.7.4.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Collection Field Inventory",
+    trigger_type  = "profile_fact",
+    description   = "Per-field row — every PII field the org collects (direct + indirect) with necessity rationale + default state (opt-in vs required). Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.1:reg_field_id",          "Unique field identifier per row (form_id + field_name)", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.4.1:reg_purpose_link",      "Purpose link per row (which A.7.2.1 purpose this field supports)", "must", False, "§7.4.1 — for identified purposes"),
+        ChecklistItem("item:A.7.4.1:reg_necessity_rationale","Necessity rationale per row (adequate / relevant / necessary explanation)", "must", False, "§7.4.1 — adequate, relevant, necessary"),
+        ChecklistItem("item:A.7.4.1:reg_default_state",     "Default state per row (required / opt-in optional / opt-out optional)", "must", False, "§7.4.1 — disabled by default"),
+        ChecklistItem("item:A.7.4.1:reg_collection_mode",   "Collection mode per row (direct form / cookie / weblog / API integration / third-party enrichment)", "must", False, "§7.4.1 — indirect collection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.1:reg_last_reviewed",     "Last necessity-review date per row", "should", False, "Currency"),
+    ],
+)
+
+REQ_A741_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.4.1:applicable_scope",
+    control_ref   = "A.7.4.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Collection Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which collection surfaces are in scope (forms + cookies + APIs + logs + integrations + third-party enrichment).",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.1:scope_surfaces",        "Collection surfaces enumerated (customer forms / employee onboarding / marketing forms / cookies / weblogs / API webhooks / integrations)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.1:scope_indirect_map",    "Indirect-collection map (technical logs + inferred data + third-party enrichment)", "must", False, "§7.4.1 — indirect"),
+        ChecklistItem("item:A.7.4.1:scope_exclusions",      "Excluded surfaces with rationale (e.g. anonymous analytics)", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.1:scope_change_drivers",  "Trigger list (new product surface / new integration)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A741_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.4.1:program_review",
+    control_ref   = "A.7.4.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Collection Limitation Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — collection inventory current, necessity rationales defensible, privacy-by-default holds across surfaces, no unnecessary fields silently added (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.1:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.4.1:rev_reviewer",          "Reviewer identity (DPO + Privacy Engineering)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.4.1:rev_necessity_audit",   "Necessity audit — sampled fields reviewed against current purpose register", "must", False, "§7.4.1 — for identified purposes"),
+        ChecklistItem("item:A.7.4.1:rev_default_state_audit","Default-state audit — optional fields default off across surfaces", "must", False, "§7.4.1 — disabled by default"),
+        ChecklistItem("item:A.7.4.1:rev_drift_sweep",       "Drift sweep — new fields added since last review flagged for necessity review", "must", False, "Change control"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.1:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.4.2 Limit processing — op_process 4-leaf ─────────────────────────────
+# §7.4.2: The organization shall limit processing of PII to that which is
+# adequate, relevant + necessary. GDPR Art.5.1.b + Art.5.1.c applied to
+# processing operations (as opposed to collection).
+
+REQ_A742_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.4.2:processing_limitation_procedure",
+    control_ref   = "A.7.4.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Processing Limitation Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.4.2 limits processing operations to what's adequate + relevant + necessary. Covers disclosure limits, retention-during-processing, and access controls (who can access which PII).",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.2:proc_disclosure_limit", "Disclosure limitation — who PII is disclosed to (internal + external) constrained per purpose", "must", False, "§7.4.2 — disclosure"),
+        ChecklistItem("item:A.7.4.2:proc_access_limit",     "Access limitation — role-based access controls scoped by purpose", "must", False, "§7.4.2 — who is able to access"),
+        ChecklistItem("item:A.7.4.2:proc_storage_limit",    "Storage-during-processing limitation — no unnecessary retention in intermediate systems", "must", False, "§7.4.2 — period of PII storage"),
+        ChecklistItem("item:A.7.4.2:proc_default_minimum",  "Default-minimum — limited to minimum necessary by default; expansions require documented rationale", "must", False, "§7.4.2 — limited by default"),
+        ChecklistItem("item:A.7.4.2:proc_policy_link",      "Link to information-security + privacy policies (§6.2 / A.5.1) as the governance vehicle", "must", False, "§7.4.2 implementation — managed through policies"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.2:proc_owner",            "Named owner (DPO + Engineering)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A742_PROCESSING_INVENTORY = EvidenceRequirement(
+    id            = "req:A.7.4.2:processing_operation_inventory",
+    control_ref   = "A.7.4.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Processing Operation Inventory",
+    trigger_type  = "profile_fact",
+    description   = "Per-operation row — the ways PII is used inside the org (queries + reports + analytics + ML training + exports). Each row cites the necessity rationale + access controls. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.2:reg_operation_id",      "Unique operation identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.4.2:reg_operation_type",    "Operation type per row (query / report / analytics / ML training / export / integration)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.2:reg_purpose_link",      "Purpose link per row (A.7.2.1)", "must", False, "§7.4.2 — for identified purposes"),
+        ChecklistItem("item:A.7.4.2:reg_pii_scope",         "PII scope per row (which fields / categories)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.2:reg_access_group",      "Access group per row (which internal roles can perform this operation)", "must", False, "§7.4.2 — who can access"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.2:reg_last_reviewed",     "Last necessity-review date per row", "should", False, "Currency"),
+    ],
+)
+
+REQ_A742_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.4.2:applicable_scope",
+    control_ref   = "A.7.4.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Processing Operations Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — all internal + integration processing operations that touch PII. Excludes fully-anonymised data operations.",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.2:scope_internal_operations","Internal processing operations enumerated (application queries / reports / dashboards / ML pipelines / exports)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.2:scope_integrations",    "Integration processing (webhooks + third-party enrichment + backup + DR)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.2:scope_exclusions",      "Excluded operations (anonymised / aggregate) with rationale", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.2:scope_change_drivers",  "Trigger list (new product feature / new analytics pipeline)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A742_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.4.2:program_review",
+    control_ref   = "A.7.4.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Processing Limitation Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — processing operations inventoried, necessity rationales defensible, access limits enforced (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.2:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.4.2:rev_reviewer",          "Reviewer identity (DPO + Engineering)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.4.2:rev_necessity_audit",   "Necessity audit — sampled operations reviewed against current purpose register", "must", False, "§7.4.2"),
+        ChecklistItem("item:A.7.4.2:rev_access_audit",      "Access-limit audit — sampled access groups reviewed against operation registry", "must", False, "§7.4.2 — who can access"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.2:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.4.3 Accuracy and quality — op_process 4-leaf ─────────────────────────
+# §7.4.3: The organization shall ensure + document that PII is accurate,
+# complete + up-to-date throughout the lifecycle. GDPR Art.5.1.d.
+
+REQ_A743_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.4.3:accuracy_procedure",
+    control_ref   = "A.7.4.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "PII Accuracy + Quality Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.4.3 requires the org to maintain PII accuracy + completeness + currency throughout the lifecycle. Bridges to GDPR Art.5.1.d accuracy + Art.16 rectification. Cross-links to A.7.3.6 correction procedure.",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.3:proc_inaccuracy_prevention","Inaccuracy prevention — technical + procedural controls (input validation + duplicate detection + integration reconciliation)", "must", False, "§7.4.3 — minimize inaccuracies"),
+        ChecklistItem("item:A.7.4.3:proc_inaccuracy_response","Inaccuracy response — how the org responds when inaccuracy is detected (internal + subject-flagged)", "must", False, "§7.4.3 — respond to inaccurate PII"),
+        ChecklistItem("item:A.7.4.3:proc_lifecycle_coverage","Lifecycle coverage — applies at collection + processing + storage + sharing + disposal stages", "must", False, "§7.4.3 — throughout the lifecycle"),
+        ChecklistItem("item:A.7.4.3:proc_correction_link",  "Cross-link to A.7.3.6 correction procedure — subject-initiated rectification handled there", "must", False, "Integration"),
+        ChecklistItem("item:A.7.4.3:proc_up_to_date_check", "Up-to-date check cadence per PII category (e.g. contact details refresh cadence)", "must", False, "§7.4.3 — up-to-date"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.3:proc_owner",            "Named owner (Data Ops + Privacy Engineering)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A743_ACCURACY_LOG_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.4.3:accuracy_incident_register",
+    control_ref   = "A.7.4.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Accuracy Incident Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-incident row — detected inaccuracies + resolutions. Includes internal-detected + subject-reported cases. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.3:reg_incident_id",       "Unique incident identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.4.3:reg_detection_source", "Detection source per row (internal audit / subject rectification / integration reconciliation / external notification)", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.4.3:reg_pii_scope",         "PII scope per row (which fields / how many subjects affected)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.3:reg_resolution",        "Resolution per row (corrected / cannot-correct-with-reason / erased / pending)", "must", False, "§7.4.3 — respond to inaccurate PII"),
+        ChecklistItem("item:A.7.4.3:reg_root_cause",        "Root cause per row (where a systemic issue emerged, remediation link)", "must", False, "Continuous improvement"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.3:reg_third_party_notified","Third-party notification flag if A.7.3.7 fired", "should", False, "Downstream"),
+    ],
+)
+
+REQ_A743_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.4.3:applicable_scope",
+    control_ref   = "A.7.4.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Accuracy Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which PII categories need active accuracy management (contact details + address + payment info + employment status) vs which are relatively static.",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.3:scope_high_churn_fields","High-churn field categories (contact details / address / employment / preferences)", "must", False, "Prioritisation"),
+        ChecklistItem("item:A.7.4.3:scope_low_churn_fields","Low-churn field categories (date of birth / national ID / immutable identifiers)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.3:scope_verification_sources","Verification source map (postal address vs national registry vs subject self-serve)", "must", False, "Practicability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.3:scope_change_drivers",  "Trigger list (new PII category / new verification source)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A743_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.4.3:program_review",
+    control_ref   = "A.7.4.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Accuracy Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — prevention controls working, incident register growing at healthy rate (not stalled = under-detection), root-cause remediations closing (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.3:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.4.3:rev_reviewer",          "Reviewer identity (DPO + Data Ops)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.4.3:rev_prevention_health", "Prevention controls health (input validation / duplicate detection / reconciliation)", "must", False, "§7.4.3"),
+        ChecklistItem("item:A.7.4.3:rev_detection_rate",    "Detection rate check — under-detection surfaces via low incident counts", "must", False, "Drift detection"),
+        ChecklistItem("item:A.7.4.3:rev_root_cause_closure","Root-cause closure — systemic remediations from prior period reviewed for completeness", "must", False, "Continuous improvement"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.3:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.4.4 PII minimization objectives — op_process 4-leaf ──────────────────
+# §7.4.4: The organization shall define + document data minimization objectives
+# and mechanisms (e.g. de-identification) used to meet them.
+
+REQ_A744_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.4.4:minimization_procedure",
+    control_ref   = "A.7.4.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "PII Minimization Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.4.4 requires documented data-minimization objectives + mechanisms (de-identification / pseudonymisation / aggregation). Ties to ISO/IEC 20889 de-identification techniques.",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.4:proc_objectives_stated","Minimization objectives stated per processing activity (target level of identifiability required)", "must", False, "§7.4.4 — define and document objectives"),
+        ChecklistItem("item:A.7.4.4:proc_mechanism_map",    "Mechanism map — de-identification / pseudonymisation / aggregation / generalisation / suppression per activity", "must", False, "§7.4.4 — mechanisms used"),
+        ChecklistItem("item:A.7.4.4:proc_deidentification_technique","De-identification technique selection referencing ISO/IEC 20889 taxonomy", "must", False, "§7.4.4 NOTE 1 — ISO/IEC 20889"),
+        ChecklistItem("item:A.7.4.4:proc_technical_config", "Technical configurations documented (how the minimisation is implemented in code / infrastructure)", "must", False, "§7.4.4 — technical system configurations"),
+        ChecklistItem("item:A.7.4.4:proc_full_pii_justification","Where processing requires non-minimised PII (identified purpose demands it), justification documented", "must", False, "§7.4.4 — describe such processing"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.4:proc_owner",            "Named owner (Privacy Engineering + Data Science)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A744_MINIMIZATION_INVENTORY = EvidenceRequirement(
+    id            = "req:A.7.4.4:minimization_technique_inventory",
+    control_ref   = "A.7.4.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Minimization Technique Inventory",
+    trigger_type  = "profile_fact",
+    description   = "Per-processing-activity row — the applied minimisation technique + degree + rationale. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.4:reg_activity_id",       "Processing activity identifier per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.4.4:reg_objective",         "Minimization objective per row (target identifiability level — identified / pseudonymised / anonymised)", "must", False, "§7.4.4"),
+        ChecklistItem("item:A.7.4.4:reg_technique",         "Technique per row (masking / generalisation / suppression / noise addition / k-anonymity / differential privacy / etc.)", "must", False, "§7.4.4 — mechanisms"),
+        ChecklistItem("item:A.7.4.4:reg_implementation",    "Implementation reference per row (code repo / config file / infrastructure component)", "must", False, "§7.4.4 — technical configurations"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.4:reg_effectiveness_test","Effectiveness assessment per row (re-identification risk estimate)", "should", False, "Defensibility"),
+    ],
+)
+
+REQ_A744_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.4.4:applicable_scope",
+    control_ref   = "A.7.4.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Minimization Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which processing activities are candidates for minimisation (analytics + reporting + ML training + testing / dev environments) vs those needing full PII (operational transactions with the subject).",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.4:scope_candidates",      "Minimisation candidates enumerated (analytics + reporting + ML + test environments + logs)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.4:scope_full_pii_needed", "Full-PII contexts (operational transactions + notifications + support) with justification", "must", False, "§7.4.4 — non-de-identified processing"),
+        ChecklistItem("item:A.7.4.4:scope_reidentification_risk","Re-identification risk considerations per context (combinations of attributes / auxiliary data / linkage)", "must", False, "Effectiveness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.4:scope_change_drivers",  "Trigger list (new analytics use / new ML model)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A744_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.4.4:program_review",
+    control_ref   = "A.7.4.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Minimization Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — minimisation objectives current, techniques appropriate for risk profile, re-identification risk stable, no drift toward over-collection (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.4:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.4.4:rev_reviewer",          "Reviewer identity (DPO + Privacy Engineering)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.4.4:rev_technique_currency","Technique currency — techniques still appropriate for risk profile (advances in re-identification research surfaced)", "must", False, "§7.4.4"),
+        ChecklistItem("item:A.7.4.4:rev_drift_sweep",       "Drift sweep — new processing activities checked for minimisation opportunity", "must", False, "Continuous improvement"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.4:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.4.5 PII de-identification and deletion at end of processing ──────────
+# §7.4.5: The organization shall either delete PII or de-identify it when the
+# original PII is no longer necessary for the identified purpose. GDPR Art.5.1.c
+# + Art.5.1.e + Art.6.4.e (compatibility test via de-identification).
+
+REQ_A745_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.4.5:end_of_processing_procedure",
+    control_ref   = "A.7.4.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "End-of-Processing Deletion / De-identification Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.4.5 requires deletion or de-identification when original PII is no longer necessary. Complements A.7.4.7 retention + A.7.4.8 disposal.",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.5:proc_end_of_processing_trigger","End-of-processing trigger definition per activity (purpose fulfilled / consent withdrawn / retention lapsed / no further processing anticipated)", "must", False, "§7.4.5 — no longer necessary"),
+        ChecklistItem("item:A.7.4.5:proc_delete_or_deidentify","Delete-or-de-identify decision rule per activity", "must", False, "§7.4.5 — either delete or render de-identified"),
+        ChecklistItem("item:A.7.4.5:proc_deidentification_standard","De-identification standard — resulting data cannot reasonably permit re-identification", "must", False, "§7.4.5 — cannot reasonably permit re-identification"),
+        ChecklistItem("item:A.7.4.5:proc_verification",     "Verification — post-action verification that PII is actually gone / de-identified across all systems + backups", "must", False, "Effectiveness"),
+        ChecklistItem("item:A.7.4.5:proc_records",          "Record of end-of-processing action (link to A.7.4.5 register)", "must", False, "Audit trail"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.5:proc_owner",            "Named owner (Data Ops + Privacy Engineering)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A745_ACTION_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.4.5:end_of_processing_register",
+    control_ref   = "A.7.4.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "End-of-Processing Action Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-batch-action row — the register of delete / de-identify actions taken. Includes verification confirmation. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.5:reg_action_id",         "Unique action identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.4.5:reg_activity_link",     "Processing activity per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.4.5:reg_action_type",       "Action type per row (delete / de-identify)", "must", False, "§7.4.5"),
+        ChecklistItem("item:A.7.4.5:reg_scope",             "Scope per row (which records / systems / backup tier)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.5:reg_verification",      "Verification result per row (post-action check confirming PII gone)", "must", False, "Effectiveness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.5:reg_technique_used",    "De-identification technique used per row (link to A.7.4.4 register)", "should", False, "Traceability"),
+    ],
+)
+
+REQ_A745_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.4.5:applicable_scope",
+    control_ref   = "A.7.4.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable End-of-Processing Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which processing activities have foreseeable end-points (customer churn / consent withdrawal / retention lapse) and which are open-ended (ongoing customer relationships).",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.5:scope_end_triggers",    "End-trigger enumeration per activity type", "must", False, "§7.4.5 — no longer necessary"),
+        ChecklistItem("item:A.7.4.5:scope_backup_coverage", "Backup + DR system coverage (PII in backups within scope; deletion propagation policy documented)", "must", False, "Comprehensiveness"),
+        ChecklistItem("item:A.7.4.5:scope_exceptions",      "Exceptions (legal-hold / active litigation / regulator inspection) with rationale", "must", False, "GDPR Art.17.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.5:scope_change_drivers",  "Trigger list (retention policy change / new activity)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A745_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.4.5:program_review",
+    control_ref   = "A.7.4.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "End-of-Processing Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — end-triggers fire reliably, verification passes, no PII lingering past end-of-processing, backup propagation working (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.5:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.4.5:rev_reviewer",          "Reviewer identity (DPO + Data Ops + Infrastructure)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.4.5:rev_trigger_health",    "Trigger health — end-of-processing detection functioning across activity types", "must", False, "§7.4.5"),
+        ChecklistItem("item:A.7.4.5:rev_verification_audit","Verification audit — sampled actions verified to have removed PII across primary + backup", "must", False, "Effectiveness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.5:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.4.6 Temporary files — op_process 4-leaf ──────────────────────────────
+# §7.4.6: The organization shall ensure that temporary files created as a
+# result of PII processing are disposed of within a specified, documented
+# period. GDPR Art.5.1.c minimisation applied to transient artefacts.
+
+REQ_A746_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.4.6:temp_files_procedure",
+    control_ref   = "A.7.4.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Temporary Files Disposal Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.4.6 requires temporary files created during PII processing to be disposed of within a specified, documented period. Covers file-system journals, roll-back files, in-flight application state, and app-specific temp files.",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.6:proc_temp_file_taxonomy","Temp file taxonomy (application temp / file-system journal / database roll-back / cache / in-memory dump)", "must", False, "§7.4.6 other information — system + application temp"),
+        ChecklistItem("item:A.7.4.6:proc_disposal_period",  "Disposal period stated per taxonomy category", "must", False, "§7.4.6 — specified, documented period"),
+        ChecklistItem("item:A.7.4.6:proc_garbage_collection","Garbage-collection procedure — identifies unused temp files + last-use timestamp", "must", False, "§7.4.6 — garbage collection procedure"),
+        ChecklistItem("item:A.7.4.6:proc_periodic_check",   "Periodic check that unused temp files are deleted within the identified period", "must", False, "§7.4.6 — periodic checks"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.6:proc_owner",            "Named owner (Infrastructure + Application Ops)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A746_SWEEP_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.4.6:temp_files_sweep_register",
+    control_ref   = "A.7.4.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Temp Files Sweep Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-sweep-run row — records of periodic sweeps + volumes cleaned. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.6:reg_sweep_id",          "Unique sweep run identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.4.6:reg_system",            "System / infrastructure component per row", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.6:reg_scan_date",         "Scan date per row", "must", False, "Currency"),
+        ChecklistItem("item:A.7.4.6:reg_files_cleaned",     "Files cleaned + volume per row", "must", False, "Effectiveness"),
+        ChecklistItem("item:A.7.4.6:reg_anomalies_flagged", "Anomalies flagged per row (unusual accumulation / temp files past retention)", "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.6:reg_last_verified",     "Verification last-run date per row", "should", False, "Effectiveness"),
+    ],
+)
+
+REQ_A746_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.4.6:applicable_scope",
+    control_ref   = "A.7.4.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Temp-File Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which infrastructure surfaces create PII-touching temp files (application tier + database + cache + log-processing).",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.6:scope_infrastructure",  "Infrastructure surfaces enumerated (app servers + DB + cache + queue + log processors + backup staging)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.6:scope_file_types",      "File types per surface (application temp / journal / roll-back / cache spillover)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.6:scope_undeletable_exceptions","Undeletable-file exceptions (circumstances where deletion isn't possible per §7.4.6) with rationale + compensating controls", "must", False, "§7.4.6 — circumstances in which they cannot be deleted"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.6:scope_change_drivers",  "Trigger list (new infrastructure component)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A746_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.4.6:program_review",
+    control_ref   = "A.7.4.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Temp Files Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — sweep cadence honoured, disposal periods respected, anomalies investigated, no orphan temp files hanging around (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.6:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.4.6:rev_reviewer",          "Reviewer identity (Infrastructure + DPO)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.4.6:rev_sweep_health",      "Sweep health — cadence honoured, coverage complete", "must", False, "§7.4.6 — periodic checks"),
+        ChecklistItem("item:A.7.4.6:rev_orphan_sample",     "Orphan-file sample check — random directories checked for temp files past retention", "must", False, "Effectiveness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.6:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.4.7 Retention — op_process 4-leaf ────────────────────────────────────
+# §7.4.7: The organization shall not retain PII for longer than is necessary.
+# GDPR Art.5.1.e storage limitation. Cross-links to A.5.33 records retention +
+# A.5.34 PII protection.
+
+REQ_A747_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.4.7:retention_procedure",
+    control_ref   = "A.7.4.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "PII Retention Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.4.7 requires retention schedules based on necessity, taking into account legal + regulatory + business requirements. Where they conflict, a documented business decision is required.",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.7:proc_retention_schedules","Retention schedules per PII category + activity (with legal + regulatory + business rationale)", "must", False, "§7.4.7 — retention schedules"),
+        ChecklistItem("item:A.7.4.7:proc_conflict_resolution","Conflict-resolution rule — where legal + regulatory + business requirements conflict, documented risk-based decision", "must", False, "§7.4.7 — business decision based on risk assessment"),
+        ChecklistItem("item:A.7.4.7:proc_periodic_review",  "Periodic review — schedule refreshed on regulatory change or business shift", "must", False, "Currency"),
+        ChecklistItem("item:A.7.4.7:proc_deletion_trigger", "Deletion trigger — schedule expiry triggers A.7.4.5 end-of-processing action", "must", False, "Integration"),
+        ChecklistItem("item:A.7.4.7:proc_cross_link_a533",  "Cross-link to A.5.33 records retention (records-programme) — retention schedules coherent across the two frames", "must", False, "Integration"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.7:proc_owner",            "Named owner (DPO + Records Management)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A747_SCHEDULE_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.4.7:retention_schedule_register",
+    control_ref   = "A.7.4.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "PII Retention Schedule Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-category-and-activity row — the actual retention schedules. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.7:reg_category_id",       "Category / activity combination identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.4.7:reg_retention_period",  "Retention period per row (with unit — years / months / until event)", "must", False, "§7.4.7 — schedules"),
+        ChecklistItem("item:A.7.4.7:reg_rationale_type",    "Rationale type per row (legal / regulatory / business)", "must", False, "§7.4.7 — legal, regulatory, business"),
+        ChecklistItem("item:A.7.4.7:reg_citation",          "Citation per row (specific statute / regulation / business rationale document)", "must", False, "Defensibility"),
+        ChecklistItem("item:A.7.4.7:reg_deletion_trigger",  "Deletion trigger per row (calendar-based / event-based)", "must", False, "Integration with A.7.4.5"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.7:reg_conflict_flag",     "Conflict flag per row if legal + business tension exists", "should", False, "§7.4.7 — business decision"),
+    ],
+)
+
+REQ_A747_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.4.7:applicable_scope",
+    control_ref   = "A.7.4.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Retention Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which PII categories × activity combinations require dedicated retention schedules vs which follow defaults.",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.7:scope_regulated_data",  "Regulated PII categories (health / financial / employment / tax / other jurisdiction-specific)", "must", False, "§7.4.7 — legal + regulatory"),
+        ChecklistItem("item:A.7.4.7:scope_business_data",   "Business PII categories with business retention rationale", "must", False, "§7.4.7 — business requirements"),
+        ChecklistItem("item:A.7.4.7:scope_default_period",  "Default retention period for uncategorised PII", "must", False, "Comprehensiveness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.7:scope_change_drivers",  "Trigger list (new regulation / new business requirement)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A747_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.4.7:program_review",
+    control_ref   = "A.7.4.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Retention Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — retention schedules current, deletion triggers fire, no PII retained past schedule, conflicts documented (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.7:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.4.7:rev_reviewer",          "Reviewer identity (DPO + Legal + Records Management)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.4.7:rev_currency_check",    "Schedule currency check — recent regulatory / business changes reflected", "must", False, "§7.4.7 — retention schedules"),
+        ChecklistItem("item:A.7.4.7:rev_deletion_audit",    "Deletion audit — sampled records past schedule verified deleted per A.7.4.5", "must", False, "Effectiveness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.7:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.4.8 Disposal — op_process 4-leaf ─────────────────────────────────────
+# §7.4.8: The organization shall have documented policies, procedures + and/or
+# mechanisms for disposal of PII. Complements A.7.4.5 (delete-or-deidentify)
+# and A.5.28 (evidence handling — disposal_record shape).
+
+REQ_A748_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.4.8:disposal_procedure",
+    control_ref   = "A.7.4.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "PII Disposal Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.4.8 requires documented policies / procedures / mechanisms for disposal. Focuses on the HOW (techniques + media) whereas A.7.4.5 is the WHEN + WHAT (trigger + scope). Cross-links to A.5.28 evidence handling.",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.8:proc_technique_map",    "Technique map per media type (electronic — cryptographic erase + overwrite / physical — shredding + degaussing / cloud — provider-attested)", "must", False, "§7.4.8 — disposal techniques"),
+        ChecklistItem("item:A.7.4.8:proc_technique_selection","Technique selection factors (nature + extent of PII + metadata associations + media characteristics)", "must", False, "§7.4.8 — factors to consider"),
+        ChecklistItem("item:A.7.4.8:proc_media_lifecycle",  "Media lifecycle coverage (production + backup + archive + failed hardware + decommissioned equipment)", "must", False, "Comprehensiveness"),
+        ChecklistItem("item:A.7.4.8:proc_certificate",      "Disposal certificate / attestation captured per action", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.4.8:proc_cross_link_a528",  "Cross-link to A.5.28 evidence handling — disposal_record shape reused for evidence forensics", "must", False, "Integration"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.8:proc_owner",            "Named owner (Infrastructure + DPO)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A748_DISPOSAL_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.4.8:disposal_record_register",
+    control_ref   = "A.7.4.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "PII Disposal Record Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-disposal-action row — with media type + technique + certificate. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.8:reg_action_id",         "Unique disposal action identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.4.8:reg_media_type",        "Media type per row (SSD / HDD / paper / tape / cloud volume)", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.4.8:reg_technique",         "Technique per row (cryptographic erase / overwrite / degaussing / shredding / provider attestation)", "must", False, "§7.4.8 — techniques"),
+        ChecklistItem("item:A.7.4.8:reg_certificate_ref",   "Disposal certificate / attestation reference per row", "must", False, "Defensibility"),
+        ChecklistItem("item:A.7.4.8:reg_date",              "Disposal date per row", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.8:reg_verifier",          "Verifier identity per row", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A748_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.4.8:applicable_scope",
+    control_ref   = "A.7.4.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Disposal Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which disposal contexts arise (end-of-processing per A.7.4.5 + failed hardware + decommissioned equipment + returned devices + paper records).",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.8:scope_contexts",        "Disposal contexts enumerated (end-of-processing / hardware failure / decommission / device return / paper archive)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.8:scope_media_types",     "Media types in inventory (SSD / HDD / tape / paper / cloud volume / mobile device)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.8:scope_cloud_dependencies","Cloud disposal dependencies (provider attestations required, retention windows outside org's control)", "must", False, "Cloud specifics"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.8:scope_change_drivers",  "Trigger list (new media type / new cloud provider)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A748_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.4.8:program_review",
+    control_ref   = "A.7.4.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Disposal Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — techniques current, certificates on file for every disposal, media lifecycle coverage complete (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.8:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.4.8:rev_reviewer",          "Reviewer identity (Infrastructure + DPO)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.4.8:rev_technique_currency","Technique currency — techniques still appropriate given hardware / cloud evolution", "must", False, "§7.4.8"),
+        ChecklistItem("item:A.7.4.8:rev_certificate_audit", "Certificate audit — sampled disposals have valid certificates", "must", False, "Audit trail"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.8:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.4.9 PII transmission controls — op_process 4-leaf ────────────────────
+# §7.4.9: The organization shall subject transmitted PII (network transmission)
+# to appropriate controls. GDPR Art.32 security-during-transit.
+
+REQ_A749_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.4.9:transmission_controls_procedure",
+    control_ref   = "A.7.4.9",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "PII Transmission Controls Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.4.9 requires appropriate controls on PII transmitted over data-transmission networks (to another organisation / between org locations / etc.). Bridges to 27001 A.8.24 cryptography + A.5.14 information transfer.",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.9:proc_authz_channels",   "Authorised transmission channels defined (secure protocols + endpoints + auth requirements)", "must", False, "§7.4.9 — only authorized individuals"),
+        ChecklistItem("item:A.7.4.9:proc_encryption",       "Encryption-in-transit standard (TLS 1.2+ / VPN / SFTP / etc.) per channel", "must", False, "GDPR Art.32.1.a + §7.4.9"),
+        ChecklistItem("item:A.7.4.9:proc_audit_logs",       "Audit log retention for every transmission (who + what + when + where)", "must", False, "§7.4.9 — retention of audit logs"),
+        ChecklistItem("item:A.7.4.9:proc_integrity_verification","Integrity verification (checksums / signed payloads for critical transmissions)", "must", False, "GDPR Art.32.1.b"),
+        ChecklistItem("item:A.7.4.9:proc_recipient_verification","Recipient verification — PII reaches intended destination + not intercepted", "must", False, "§7.4.9 — reaches intended destination"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.9:proc_owner",            "Named owner (Infrastructure + Security Engineering)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A749_TRANSMISSION_INVENTORY = EvidenceRequirement(
+    id            = "req:A.7.4.9:transmission_channel_inventory",
+    control_ref   = "A.7.4.9",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "PII Transmission Channel Inventory",
+    trigger_type  = "profile_fact",
+    description   = "Per-channel row — the transmission channels the org uses for PII, with security profile + audit logging status. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.9:reg_channel_id",        "Unique channel identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.4.9:reg_endpoint",          "Source + destination endpoints per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.4.9:reg_encryption",        "Encryption standard per row (TLS 1.2 / TLS 1.3 / VPN / SFTP / etc.)", "must", False, "GDPR Art.32.1.a"),
+        ChecklistItem("item:A.7.4.9:reg_auth_mechanism",    "Authentication mechanism per row (mutual TLS / OAuth / API key + IP allowlist / etc.)", "must", False, "§7.4.9 — authorized"),
+        ChecklistItem("item:A.7.4.9:reg_audit_log_retention","Audit log retention per row", "must", False, "§7.4.9 — retention of audit logs"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.9:reg_last_penetration_test","Last pen-test / security assessment date per row", "should", False, "Assurance"),
+    ],
+)
+
+REQ_A749_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.4.9:applicable_scope",
+    control_ref   = "A.7.4.9",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Transmission Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which transmission contexts carry PII (customer-facing APIs / integrations / partner exchanges / cross-region backups / email / etc.).",
+    must_contain  = [
+        ChecklistItem("item:A.7.4.9:scope_customer_apis",   "Customer-facing APIs carrying PII", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.9:scope_integrations",    "Integration endpoints (partner APIs + processor exchanges + third-party enrichment)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.9:scope_internal_transfers","Internal transfers (cross-region backup / DR replication / data warehouse loads)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.4.9:scope_email_paths",     "Email + file-sharing paths where PII may be transmitted", "must", False, "Comprehensiveness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.9:scope_change_drivers",  "Trigger list (new integration / new region / new partner)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A749_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.4.9:program_review",
+    control_ref   = "A.7.4.9",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Transmission Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — encryption standards current, audit logs retained, no plaintext transmission paths, endpoints authenticated (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.4.9:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.4.9:rev_reviewer",          "Reviewer identity (Infrastructure + Security Engineering + DPO)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.4.9:rev_encryption_currency","Encryption currency — TLS / cipher-suite standards current (deprecated protocols flagged)", "must", False, "Modern baseline"),
+        ChecklistItem("item:A.7.4.9:rev_audit_log_retention_check","Audit-log retention check — retention meets policy", "must", False, "§7.4.9 — retention of audit logs"),
+        ChecklistItem("item:A.7.4.9:rev_shadow_channel_sweep","Shadow-channel sweep — unauthorised transmission paths flagged (e.g. developers using consumer file-sharing)", "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.4.9:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.3.1 Obligations to PII principals — op_process 4-leaf ────────────────
+# §8.3.1: The organization (as PII processor) shall provide the customer with
+# the means to comply with obligations related to PII principals. Bridges to
+# GDPR Art.28.3.e (subject rights assistance).
+
+REQ_B831_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.3.1:principal_obligations_support_procedure",
+    control_ref   = "B.8.3.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Customer Subject-Rights Support Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.3.1 requires the processor to provide the customer (controller) with the means to comply with their subject-rights obligations. Covers technical support paths + informational disclosures + contract-specified support scope.",
+    must_contain  = [
+        ChecklistItem("item:B.8.3.1:proc_technical_support","Technical support paths — APIs / features / configuration to fulfil rectification, erasure, portability, restriction", "must", False, "§8.3.1 — technical measures to facilitate"),
+        ChecklistItem("item:B.8.3.1:proc_informational_support","Informational support — customer can request info about processing (as processor's records permit) to inform Art.15 responses", "must", False, "§8.3.1 — information to facilitate"),
+        ChecklistItem("item:B.8.3.1:proc_contract_scope",   "Contract-scope reference — support scope specified in the B.8.2.1 customer agreement", "must", False, "§8.3.1 — should be specified in a contract"),
+        ChecklistItem("item:B.8.3.1:proc_sla",              "Response-time SLA per support-request type stated + honoured", "must", False, "Timeliness"),
+        ChecklistItem("item:B.8.3.1:proc_correction_erasure","Correction + erasure in timely fashion (example given in §8.3.1)", "must", False, "§8.3.1 — correction or deletion in timely fashion"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.3.1:proc_owner",            "Named owner (Product + Trust)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B831_SUPPORT_REQUEST_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.3.1:support_request_register",
+    control_ref   = "B.8.3.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Customer Subject-Rights Support Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-customer-request row — the register of customer requests for subject-rights support. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.3.1:reg_request_id",        "Unique request identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:B.8.3.1:reg_customer_id",       "Requesting customer identifier per row", "must", False, "Scope"),
+        ChecklistItem("item:B.8.3.1:reg_request_type",      "Request type per row (rectification support / erasure support / portability export / restriction / info-for-Art.15)", "must", False, "§8.3.1"),
+        ChecklistItem("item:B.8.3.1:reg_response",          "Response per row (what was provided / done)", "must", False, "Audit trail"),
+        ChecklistItem("item:B.8.3.1:reg_sla_met",           "SLA-met flag per row", "must", False, "Timeliness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.3.1:reg_contract_ref",      "Contract reference per row (which B.8.2.1 agreement scoped this support)", "should", False, "Traceability"),
+    ],
+)
+
+REQ_B831_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.3.1:applicable_scope",
+    control_ref   = "B.8.3.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Support Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — which customer engagements involve PII processing on their behalf (from B.8.2.1) and therefore require subject-rights support paths.",
+    must_contain  = [
+        ChecklistItem("item:B.8.3.1:scope_customer_engagements","Customer engagements enumerated (link to B.8.2.1 register)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.3.1:scope_support_matrix",  "Support matrix per contract tier (Enterprise API access / Business self-service / Startup email support)", "must", False, "Consistency"),
+        ChecklistItem("item:B.8.3.1:scope_exclusions",      "Excluded engagements (own-controller services) with rationale", "must", False, "Classification"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.3.1:scope_change_drivers",  "Trigger list (new contract tier / new self-service feature)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B831_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.3.1:program_review",
+    control_ref   = "B.8.3.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Support Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — technical support paths current, SLAs met, gaps in support matrix identified (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.3.1:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.3.1:rev_reviewer",          "Reviewer identity (DPO + Product + Trust)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.3.1:rev_path_currency",     "Support-path currency — technical paths remain functional after product changes", "must", False, "§8.3.1"),
+        ChecklistItem("item:B.8.3.1:rev_sla_audit",         "SLA audit — support responses measured against contract SLAs", "must", False, "Timeliness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.3.1:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.4.1 Temporary files (processor side) — op_process 4-leaf ─────────────
+# §8.4.1: Same as §7.4.6 but from processor perspective. Processor also has
+# temporary files, subject to the same disposal discipline.
+
+REQ_B841_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.4.1:temp_files_procedure",
+    control_ref   = "B.8.4.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Processor Temp Files Disposal Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.4.1 mirrors §7.4.6 from processor side — temp files created during processing of customer PII must be disposed of within a specified, documented period.",
+    must_contain  = [
+        ChecklistItem("item:B.8.4.1:proc_temp_taxonomy",    "Temp file taxonomy (customer-facing multi-tenant apps + shared infrastructure + integration middleware)", "must", False, "§8.4.1"),
+        ChecklistItem("item:B.8.4.1:proc_period",           "Disposal period stated per taxonomy category", "must", False, "§8.4.1 — specified, documented period"),
+        ChecklistItem("item:B.8.4.1:proc_gc_procedure",     "Garbage collection procedure identifying unused files + last-use timestamp", "must", False, "§8.4.1 — garbage collection"),
+        ChecklistItem("item:B.8.4.1:proc_tenant_isolation", "Tenant isolation of temp files — no cross-tenant leakage in shared infrastructure", "must", False, "Multi-tenant discipline"),
+        ChecklistItem("item:B.8.4.1:proc_periodic_check",   "Periodic check that temp files are deleted", "must", False, "§8.4.1 — periodic verification"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.4.1:proc_owner",            "Named owner (Platform Ops)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B841_SWEEP_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.4.1:temp_files_sweep_register",
+    control_ref   = "B.8.4.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Processor Temp Files Sweep Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-sweep-run row — customer-service infrastructure sweep records. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.4.1:reg_sweep_id",          "Unique sweep run identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:B.8.4.1:reg_system",            "System / component per row", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.4.1:reg_scan_date",         "Scan date per row", "must", False, "Currency"),
+        ChecklistItem("item:B.8.4.1:reg_files_cleaned",     "Files cleaned per row", "must", False, "Effectiveness"),
+        ChecklistItem("item:B.8.4.1:reg_tenant_boundary_check","Tenant-boundary integrity check per row", "must", False, "Multi-tenant discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.4.1:reg_anomalies",         "Anomalies per row (accumulation / undue retention)", "should", False, "Drift detection"),
+    ],
+)
+
+REQ_B841_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.4.1:applicable_scope",
+    control_ref   = "B.8.4.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Processor Temp-File Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — infrastructure serving customer processing (application tier + database + cache + queue).",
+    must_contain  = [
+        ChecklistItem("item:B.8.4.1:scope_infrastructure",  "Customer-serving infrastructure enumerated", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.4.1:scope_shared_paths",    "Shared paths where cross-tenant temp file leakage is possible (with mitigation)", "must", False, "Multi-tenant discipline"),
+        ChecklistItem("item:B.8.4.1:scope_undeletable",     "Undeletable-file circumstances with rationale + compensating controls", "must", False, "§8.4.1 — circumstances in which cannot be deleted"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.4.1:scope_change_drivers",  "Trigger list (new infrastructure)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B841_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.4.1:program_review",
+    control_ref   = "B.8.4.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Processor Temp Files Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — sweeps effective, tenant isolation intact, no cross-tenant leakage (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.4.1:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.4.1:rev_reviewer",          "Reviewer identity (Platform Ops + DPO)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.4.1:rev_sweep_health",      "Sweep health check", "must", False, "§8.4.1"),
+        ChecklistItem("item:B.8.4.1:rev_tenant_isolation_test","Tenant isolation test — sampled sweeps confirmed no cross-tenant temp file spillover", "must", False, "Multi-tenant discipline"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.4.1:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.4.2 Return, transfer or disposal of PII — op_process 4-leaf ──────────
+# §8.4.2: The organization shall provide the ability to return, transfer, or
+# dispose of PII securely + make its disposal policy available to the
+# customer. Bridges to GDPR Art.28.3.g.
+
+REQ_B842_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.4.2:return_transfer_disposal_procedure",
+    control_ref   = "B.8.4.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "PII Return / Transfer / Disposal Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.4.2 requires the processor to be able to return / transfer / dispose of PII securely at end of service + make the disposal policy available to the customer. Bridges to GDPR Art.28.3.g.",
+    must_contain  = [
+        ChecklistItem("item:B.8.4.2:proc_return_capability","Return capability — export PII to customer in structured format at end of service", "must", False, "§8.4.2 — return"),
+        ChecklistItem("item:B.8.4.2:proc_transfer_capability","Transfer capability — hand PII to nominated third party at customer request", "must", False, "§8.4.2 — transfer"),
+        ChecklistItem("item:B.8.4.2:proc_disposal_capability","Secure disposal capability — including from backups + DR + continuity systems", "must", False, "§8.4.2 — from wherever stored, including backups"),
+        ChecklistItem("item:B.8.4.2:proc_customer_visibility","Customer visibility — disposal policy made available to customer on request", "must", False, "§8.4.2 — make policy available"),
+        ChecklistItem("item:B.8.4.2:proc_lapse_protection", "Lapse-of-contract protection — retention period defined before disposal after contract termination (accidental lapse protection)", "must", False, "§8.4.2 — protection from accidental lapse"),
+        ChecklistItem("item:B.8.4.2:proc_certification",    "Certification / attestation of completion issued to customer", "must", False, "Art.28.3.g proof"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.4.2:proc_owner",            "Named owner (Trust + Platform Ops)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B842_ACTION_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.4.2:end_of_service_register",
+    control_ref   = "B.8.4.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "End-of-Service Action Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-customer-end-of-service row — the register of return / transfer / disposal actions taken at contract termination. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.4.2:reg_customer_id",       "Customer identifier per row", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.4.2:reg_termination_date",  "Contract termination date per row", "must", False, "Currency"),
+        ChecklistItem("item:B.8.4.2:reg_action_type",       "Action type per row (return / transfer / dispose / hybrid)", "must", False, "§8.4.2"),
+        ChecklistItem("item:B.8.4.2:reg_completion_date",   "Completion date per row (return delivered / disposal complete)", "must", False, "Effectiveness"),
+        ChecklistItem("item:B.8.4.2:reg_certification_ref", "Certification reference issued to customer", "must", False, "Audit trail"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.4.2:reg_verifier",          "Verifier identity per row", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B842_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.4.2:applicable_scope",
+    control_ref   = "B.8.4.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable End-of-Service Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — every customer whose contract terminates; also cases of merger / acquisition where PII moves.",
+    must_contain  = [
+        ChecklistItem("item:B.8.4.2:scope_termination_triggers","Termination triggers enumerated (contract expiry / customer offboarding / product discontinuation)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.4.2:scope_ma_events",       "M&A events — where PII moves to another controller (transfer scenario)", "must", False, "§8.4.2 — transfer to another PII controller"),
+        ChecklistItem("item:B.8.4.2:scope_retention_window","Post-termination retention window before disposal (accidental-lapse protection)", "must", False, "§8.4.2 — retention period"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.4.2:scope_change_drivers",  "Trigger list (new customer tier / new offboarding flow)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B842_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.4.2:program_review",
+    control_ref   = "B.8.4.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "End-of-Service Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — return / transfer / disposal working end-to-end, backup propagation reliable, certifications issued (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.4.2:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.4.2:rev_reviewer",          "Reviewer identity (Trust + DPO + Platform Ops)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.4.2:rev_completion_audit",  "Completion audit — sampled terminations verified end-to-end (data returned + disposal certified)", "must", False, "Effectiveness"),
+        ChecklistItem("item:B.8.4.2:rev_backup_propagation","Backup propagation audit — sampled disposals verified to have propagated to backup tiers", "must", False, "§8.4.2 — including backup + BC"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.4.2:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.4.3 PII transmission controls (processor side) — op_process 4-leaf ───
+# §8.4.3: Mirror of §7.4.9 from processor perspective. Bridges to Art.32
+# security-during-transit.
+
+REQ_B843_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.4.3:transmission_procedure",
+    control_ref   = "B.8.4.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Processor Transmission Controls Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.4.3 mirrors §7.4.9 from processor side — customer PII transmitted over networks subject to appropriate controls. Adds an explicit customer-consultation dimension where contract is silent.",
+    must_contain  = [
+        ChecklistItem("item:B.8.4.3:proc_authz_channels",   "Authorised transmission channels per customer", "must", False, "§8.4.3 — only authorized"),
+        ChecklistItem("item:B.8.4.3:proc_encryption",       "Encryption in transit standard per channel", "must", False, "GDPR Art.32.1.a + §8.4.3"),
+        ChecklistItem("item:B.8.4.3:proc_audit_data",       "Audit data retention per transmission event", "must", False, "§8.4.3 — retention of audit data"),
+        ChecklistItem("item:B.8.4.3:proc_contract_terms",   "Contract-terms coverage — customer-contract transmission requirements captured (B.8.2.1)", "must", False, "§8.4.3 — requirements included in contract"),
+        ChecklistItem("item:B.8.4.3:proc_customer_advice",  "Customer-advice path — where contract silent on transmission requirements, customer consulted before transmission", "must", False, "§8.4.3 — take advice from customer"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.4.3:proc_owner",            "Named owner (Platform Ops + Security Engineering)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B843_CHANNEL_INVENTORY = EvidenceRequirement(
+    id            = "req:B.8.4.3:transmission_channel_inventory",
+    control_ref   = "B.8.4.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Processor Transmission Channel Inventory",
+    trigger_type  = "profile_fact",
+    description   = "Per-channel row — the transmission channels used for customer PII. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.4.3:reg_channel_id",        "Unique channel identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:B.8.4.3:reg_customer",          "Customer per row (if channel is customer-specific)", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.4.3:reg_endpoint",          "Source + destination endpoints per row", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.4.3:reg_encryption",        "Encryption standard per row", "must", False, "GDPR Art.32.1.a"),
+        ChecklistItem("item:B.8.4.3:reg_contract_alignment","Contract-alignment status per row (in / not-in customer B.8.2.1 agreement)", "must", False, "§8.4.3 — contract requirements"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.4.3:reg_last_verified",     "Last verification date per row", "should", False, "Currency"),
+    ],
+)
+
+REQ_B843_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.4.3:applicable_scope",
+    control_ref   = "B.8.4.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Processor Transmission Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — every context transmitting customer PII (customer-facing APIs / partner exchanges / cross-region backups / subprocessor integrations).",
+    must_contain  = [
+        ChecklistItem("item:B.8.4.3:scope_customer_facing", "Customer-facing transmission (APIs + webhooks)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.4.3:scope_subprocessor_flows","Subprocessor flows (data-sharing with subprocessors)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.4.3:scope_internal_flows",  "Internal + cross-region flows (backup replication / DR / warehouse)", "must", False, "Coverage"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.4.3:scope_change_drivers",  "Trigger list (new subprocessor / new region)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B843_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.4.3:program_review",
+    control_ref   = "B.8.4.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Processor Transmission Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — encryption current, contract alignment intact, no unauthorised channels, customer consultation invoked when needed (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.4.3:rev_date",              "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.4.3:rev_reviewer",          "Reviewer identity (Platform Ops + Security Engineering + DPO)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.4.3:rev_contract_alignment_audit","Contract-alignment audit — sampled channels reviewed against customer B.8.2.1 agreements", "must", False, "§8.4.3 — contract requirements"),
+        ChecklistItem("item:B.8.4.3:rev_shadow_channel_sweep","Shadow-channel sweep — unauthorised channels flagged", "must", False, "Drift detection"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.4.3:rev_next_date",         "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ==============================================================================
+# End ISO 27701 Batch 2 — 23 anchors × 4 leaves = 92 EvidenceRequirements.
 # ==============================================================================
 
 
@@ -18344,6 +20319,36 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_B826_APPLICABLE_SCOPE,
     REQ_B826_PROGRAM_REVIEW,
     # ── End ISO 27701 Batch 1 ────────────────────────────────────────────────
+
+    # ── ISO 27701:2019 Batch 2 — Obligations to PII principals + Privacy by design ──
+    # §A.7.3.x controller subject rights (10 × 4 = 40 leaves)
+    REQ_A731_PROCEDURE, REQ_A731_REGISTER, REQ_A731_APPLICABLE_SCOPE, REQ_A731_PROGRAM_REVIEW,
+    REQ_A732_PROCEDURE, REQ_A732_NOTICE_ARTIFACT_REGISTER, REQ_A732_APPLICABLE_SCOPE, REQ_A732_PROGRAM_REVIEW,
+    REQ_A733_PROCEDURE, REQ_A733_DELIVERY_LOG_REGISTER, REQ_A733_APPLICABLE_SCOPE, REQ_A733_PROGRAM_REVIEW,
+    REQ_A734_PROCEDURE, REQ_A734_WITHDRAWAL_REGISTER, REQ_A734_APPLICABLE_SCOPE, REQ_A734_PROGRAM_REVIEW,
+    REQ_A735_PROCEDURE, REQ_A735_OBJECTION_REGISTER, REQ_A735_APPLICABLE_SCOPE, REQ_A735_PROGRAM_REVIEW,
+    REQ_A736_PROCEDURE, REQ_A736_REQUEST_REGISTER, REQ_A736_APPLICABLE_SCOPE, REQ_A736_PROGRAM_REVIEW,
+    REQ_A737_PROCEDURE, REQ_A737_NOTIFICATION_REGISTER, REQ_A737_APPLICABLE_SCOPE, REQ_A737_PROGRAM_REVIEW,
+    REQ_A738_PROCEDURE, REQ_A738_COPY_REGISTER, REQ_A738_APPLICABLE_SCOPE, REQ_A738_PROGRAM_REVIEW,
+    REQ_A739_PROCEDURE, REQ_A739_REQUEST_REGISTER, REQ_A739_APPLICABLE_SCOPE, REQ_A739_PROGRAM_REVIEW,
+    REQ_A7310_PROCEDURE, REQ_A7310_REGISTER, REQ_A7310_APPLICABLE_SCOPE, REQ_A7310_PROGRAM_REVIEW,
+    # §A.7.4.x controller privacy by design + default (9 × 4 = 36 leaves)
+    REQ_A741_PROCEDURE, REQ_A741_COLLECTION_INVENTORY, REQ_A741_APPLICABLE_SCOPE, REQ_A741_PROGRAM_REVIEW,
+    REQ_A742_PROCEDURE, REQ_A742_PROCESSING_INVENTORY, REQ_A742_APPLICABLE_SCOPE, REQ_A742_PROGRAM_REVIEW,
+    REQ_A743_PROCEDURE, REQ_A743_ACCURACY_LOG_REGISTER, REQ_A743_APPLICABLE_SCOPE, REQ_A743_PROGRAM_REVIEW,
+    REQ_A744_PROCEDURE, REQ_A744_MINIMIZATION_INVENTORY, REQ_A744_APPLICABLE_SCOPE, REQ_A744_PROGRAM_REVIEW,
+    REQ_A745_PROCEDURE, REQ_A745_ACTION_REGISTER, REQ_A745_APPLICABLE_SCOPE, REQ_A745_PROGRAM_REVIEW,
+    REQ_A746_PROCEDURE, REQ_A746_SWEEP_REGISTER, REQ_A746_APPLICABLE_SCOPE, REQ_A746_PROGRAM_REVIEW,
+    REQ_A747_PROCEDURE, REQ_A747_SCHEDULE_REGISTER, REQ_A747_APPLICABLE_SCOPE, REQ_A747_PROGRAM_REVIEW,
+    REQ_A748_PROCEDURE, REQ_A748_DISPOSAL_REGISTER, REQ_A748_APPLICABLE_SCOPE, REQ_A748_PROGRAM_REVIEW,
+    REQ_A749_PROCEDURE, REQ_A749_TRANSMISSION_INVENTORY, REQ_A749_APPLICABLE_SCOPE, REQ_A749_PROGRAM_REVIEW,
+    # §B.8.3.1 processor obligations to PII principals (1 × 4 = 4 leaves)
+    REQ_B831_PROCEDURE, REQ_B831_SUPPORT_REQUEST_REGISTER, REQ_B831_APPLICABLE_SCOPE, REQ_B831_PROGRAM_REVIEW,
+    # §B.8.4.x processor privacy by design (3 × 4 = 12 leaves)
+    REQ_B841_PROCEDURE, REQ_B841_SWEEP_REGISTER, REQ_B841_APPLICABLE_SCOPE, REQ_B841_PROGRAM_REVIEW,
+    REQ_B842_PROCEDURE, REQ_B842_ACTION_REGISTER, REQ_B842_APPLICABLE_SCOPE, REQ_B842_PROGRAM_REVIEW,
+    REQ_B843_PROCEDURE, REQ_B843_CHANNEL_INVENTORY, REQ_B843_APPLICABLE_SCOPE, REQ_B843_PROGRAM_REVIEW,
+    # ── End ISO 27701 Batch 2 ────────────────────────────────────────────────
 ]
 
 
