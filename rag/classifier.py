@@ -530,13 +530,24 @@ CLEAR_INTENT_PHRASES = [
 
     # Posture overview — unambiguous "what is our posture/status" phrases
     # These go to gap_analysis (closest current type; posture_check is future)
-    (re.compile(r'\bwhat\s+is\s+our\s+(?:iso\s*2700\d|compliance|isms?)\s+posture\b', re.IGNORECASE),
+    (re.compile(r'\bwhat\s+is\s+our\s+(?:iso\s*2700\d|compliance|isms?|pims?)\s+posture\b', re.IGNORECASE),
      "gap_analysis", []),
     (re.compile(r'\bwhat\s+is\s+our\s+(?:overall\s+)?compliance\s+(?:status|posture|picture)\b', re.IGNORECASE),
      "gap_analysis", []),
-    (re.compile(r'\bsummar(?:ise|ize)\s+our\s+(?:iso\s*2700\d|compliance|isms?)\s+(?:status|posture)\b', re.IGNORECASE),
+    (re.compile(r'\bsummar(?:ise|ize)\s+our\s+(?:iso\s*2700\d|compliance|isms?|pims?)\s+(?:status|posture)\b', re.IGNORECASE),
      "gap_analysis", []),
     (re.compile(r'\bare\s+we\s+(?:iso\s*2700\d\s+)?certified\b', re.IGNORECASE),
+     "posture_check", []),
+    # ISO 27701 / PIMS specific posture queries — treat as posture_check when
+    # asking about the framework itself (as opposed to a specific ref).
+    (re.compile(r'\b(?:is|are)\s+(?:our|we)\s+(?:pims|privacy\s+information\s+management\s+system|iso\s*27701)\s+(?:ok|compliant|ready|in\s+place)\b', re.IGNORECASE),
+     "posture_check", []),
+    (re.compile(r'\bwhat\s+(?:is|are)\s+our\s+(?:pims|privacy\s+information\s+management)\s+(?:posture|status|findings?)\b', re.IGNORECASE),
+     "gap_analysis", []),
+    # Direct 27701 Annex A/B ref queries — "is A.7.2.6 compliant?" etc.
+    # These already flow through the posture-by-ref pattern above but this
+    # explicit anchor gives short-circuit priority.
+    (re.compile(r'\b(?:is|what\s+is)\s+(?:our\s+)?(?:iso\s*27701\s+)?(A\.7\.[2-5]\.\d+|B\.8\.[2-5]\.\d+)\s+(?:compliant|posture|status|finding|a\s+nc|an?\s+ofi)\b', re.IGNORECASE),
      "posture_check", []),
 
     # Posture-by-ref — "(what is) our (compliance) posture/status on/for <X>"

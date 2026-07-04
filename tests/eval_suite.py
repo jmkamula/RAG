@@ -72,6 +72,82 @@ class EvalResult:
 
 EVAL_CASES = [
 
+    # ── ISO 27701 Phase 3 integration (2026-07-04) — chat + classifier surface ──
+    # 3 new cases locking in that 27701 is a first-class citable framework
+    # in chat after Phase 2 curation (49 controls, 196 leaves, 112 bridges).
+    # Baseline-preservation: cases target structural anchors, not specific
+    # phrasing (per feedback_eval_state_drift rule).
+
+    EvalCase(
+        id=203,
+        query="is ISO 27701 A.7.2.5 compliant?",
+        tags=["posture", "iso27701", "phase3", "annex_a", "pia"],
+        expected_refs=["A.7.2.5"],
+        expected_type="posture_check",
+        # Arion posture: A.7.2.5 = NC (no formal PIA/DPIA program). Verifies
+        # 27701 Annex A control refs surface in chat as posture_check with
+        # the correct expected_type + ref, and that the answer isn't hedged
+        # into a clarify.
+        must_contain=["A.7.2.5"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework", "unknown framework",
+        ],
+        notes=(
+            "Locks the ISO 27701 first-class-standard integration shipped "
+            "with Phase 3 (queryable_standards flip + LLM scope block + "
+            "citation format guidance). Would have failed pre-Phase-3 "
+            "because 27701 wasn't in queryable_standards and the LLM "
+            "system prompt didn't list 27701 as a citable standard."
+        ),
+    ),
+
+    EvalCase(
+        id=202,
+        query="is ISO 27701 A.7.2.6 (processor contracts) compliant?",
+        tags=["posture", "iso27701", "phase3", "cross_framework", "art28_bridge"],
+        expected_refs=["A.7.2.6"],
+        expected_type="posture_check",
+        # A.7.2.6 has the strongest cross-framework bridge — SUPPORTS A.5.19-22
+        # AND IMPLEMENTS Art.28. Verifies that a 27701 posture query surfaces
+        # both the primary posture AND the ISO 27001 supplier controls it
+        # supports, given the bridges landed in Batch 1.
+        must_contain=["A.7.2.6"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "27701 A.7.2.6 has the largest bridge fanout of any Batch 1 "
+            "control (3 SUPPORTS to A.5.19/20/22 + 1 IMPLEMENTS to Art.28). "
+            "The eval only verifies the primary ref surfaces reliably; the "
+            "bridge-fanout content varies with LLM composition."
+        ),
+    ),
+
+    EvalCase(
+        id=201,
+        query="what is our PIMS posture?",
+        tags=["posture", "iso27701", "phase3", "pims", "classifier_short_circuit"],
+        expected_type="gap_analysis",
+        # Verifies the classifier CLEAR_INTENT_PHRASES pattern added in
+        # Phase 3 for "PIMS posture" / "privacy information management"
+        # short-circuits to gap_analysis without hitting the LLM
+        # classifier. Arion has 49 27701 rows (36 OFI + 11 NC + 2 N/A),
+        # so the response should surface the finding-set at a high level.
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Locks the Phase 3 PIMS-scope classifier short-circuit "
+            "(rag/classifier.py CLEAR_INTENT_PHRASES 'pims|privacy "
+            "information management'). Would have missed the short-circuit "
+            "pre-Phase-3 and gone through the LLM classifier which has "
+            "no PIMS anchor."
+        ),
+    ),
+
     # ── Phase B batch 30 (2026-06-02) — GDPR Ch V Transfers 6-pack — FINAL BATCH ──
     # Art.44 general principle + Art.45 adequacy + Art.46 safeguards/SCCs
     # + Art.47 BCRs + Art.48 foreign authority + Art.49 derogations.

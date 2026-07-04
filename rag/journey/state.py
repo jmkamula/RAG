@@ -24,9 +24,10 @@ from typing import Optional
 logger = logging.getLogger(__name__)
 
 
-# The 20 hand-refined anchor leaves (template_version=2). Order encodes
-# the recommended foundation sequence. Tenants tackling Phase 1 work
-# through these first.
+# The hand-refined anchor leaves (template_version=2). Order encodes the
+# recommended foundation sequence. Tenants tackling Phase 1 work through
+# these first. 20 ISO 27001/GDPR foundation anchors + 5 ISO 27701 privacy
+# anchors interleaved where they naturally augment their 27001 sibling.
 _ANCHOR_LEAVES: list[str] = [
     # ISMS foundation (clauses 4-10)
     "req:4.3:isms_scope",
@@ -43,13 +44,21 @@ _ANCHOR_LEAVES: list[str] = [
     "req:A.5.1:isp_policy",
     "req:A.5.9:asset_inventory",
     "req:A.5.15:access_control_policy",
+    # ISO 27701 PIMS foundation — sits alongside the ISMS baseline
+    "req:A.7.2.1:purpose_procedure",              # what purposes we process PII for
+    "req:A.7.2.5:pia_procedure",                  # DPIA program (bridges Art.35)
     "req:A.5.18:access_rights_procedure",
+    "req:A.7.3.6:acr_procedure",                  # subject rights ACR (bridges Art.15/16/17)
     "req:A.5.19:supplier_risk_procedure",
+    "req:A.7.2.6:processor_contract_procedure",   # DPAs (bridges Art.28)
     "req:A.5.24:incident_response_procedure",
     "req:A.5.29:information_security_during_disruption",
     "req:A.6.3:security_awareness_programme",
-    # GDPR core
+    # Records + transfers foundation
+    "req:A.7.2.8:pii_processing_ropa",            # controller RoPA (bridges Art.30)
     "req:Art.30:records_of_processing",
+    "req:A.7.5.1:transfer_basis_procedure",       # Chap V basis
+    # GDPR closing
     "req:Art.32:risk_appropriate_measures_register",
 ]
 

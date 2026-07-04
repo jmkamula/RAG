@@ -47,7 +47,8 @@ the strategic evidence-cascade layer (event-driven implications:
 | ISO 27701 Phase 2 Batch 1 — §A.7.2 controller + §B.8.2 processor (14 anchors × 4 leaves = 56 EvidenceRequirements + 34 GDPR/27001 bridge edges + iso27701_2019 Chroma collection + Arion posture seed) | SHIPPED |
 | ISO 27701 Phase 2 Batch 2 — §A.7.3 subject rights + §A.7.4 PbD + §B.8.3-4 mirrors (23 anchors × 4 = 92 leaves + 48 bridges + posture seed) | SHIPPED |
 | ISO 27701 Phase 2 Batch 3 — §A.7.5 + §B.8.5 transfers (12 anchors × 4 = 48 leaves + 30 bridges + posture seed) — PHASE 2 CURATION COMPLETE 49 controls / 196 leaves / 112 bridges | SHIPPED |
-| ISO 27701 Phase 3 — queryable-standards gate flip + LLM scope block + classifier short-circuits + Get Started interleave + eval cases | PENDING |
+| ISO 27701 Phase 3 — queryable-standards gate flip + LLM scope block (prompt + citation format + Arion primary-framework rewrite) + 3 classifier short-circuits + 6 anchor interleave (_ANCHOR_LEAVES 20→26) + 3 eval cases (#201-203) | SHIPPED |
+| ISO 27701 Phase 4 — template scaffolds for 49 leaves (db/templates/req__A.7.*.md + req__B.8.*.md) + doc_mappings / workbook_mappings | PENDING |
 | Outbound notification delivery (email/Slack) | DEFERRED |
 | UPDATES_FACT recompute (source-of-truth queries per fact) | DEFERRED |
 | Periodic sweep scheduler for overdue followups | DEFERRED |

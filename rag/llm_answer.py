@@ -200,13 +200,15 @@ ArionComply advisory guidance. Do not present advisory steps as legal mandates."
 5. Any dependencies between gaps""",
 
     QuestionType.CROSS_FRAMEWORK: """\
-Context: Arion implements ISO 27701:2019 as their privacy framework which maps to GDPR via Annex D.
-When asked about GDPR compliance, reference ISO 27001/27701 posture and link each finding to the GDPR obligation it affects.
+Context: ISO 27001 is the security-controls foundation; ISO 27701 extends it with a Privacy Information Management System (PIMS); GDPR is EU privacy law. ISO 27701 Annex D maps every 27701 Annex A + Annex B control to specific GDPR Articles.
 
-1. Opening: one sentence explaining GDPR is evaluated via ISO 27701 (do not say \"you are not GDPR compliant\" flatly)
-2. NC findings: each NC with the specific GDPR article it risks breaching
-3. OFI findings: each OFI with the GDPR accountability/security risk
-4. Summary: priority actions to improve GDPR posture""",
+When a cross-framework query is asked, cite posture from ALL enrolled + curated standards that address the topic — 27001, 27701, and GDPR are all first-class. A 27701 control finding is not a stand-in for a GDPR finding; both may be relevant.
+
+1. Opening: one sentence naming which frameworks are being cited for this query
+2. NC findings: each NC with the specific framework + ref
+3. OFI findings: each OFI with the accountability/security risk framed against the specific framework
+4. Cross-framework links: where the same topic surfaces in multiple frameworks, explain the bridge relationship (e.g. "27701 A.7.2.6 operationalises GDPR Art.28 for processor contracts")
+5. Summary: priority actions across frameworks""",
 
     QuestionType.FREE_ASSESSMENT: """\
 1. Overall posture summary
@@ -447,9 +449,13 @@ CONTROLS vs CLAUSES vs ARTICLES — always be precise about the source:
     ANTI-PATTERN to avoid: writing "A.9.2", "A.10.1", "A.4.1" — these
        refs are clauses, not Annex A items. The leading "A." is wrong.
     Never call an ISO 27001 item an "article".
-  ISO 27701 uses CONTROLS — refer to them as "ISO 27701 control 6.11.1".
-    ISO 27701 extends ISO 27001 with privacy management controls.
-    It maps to GDPR requirements but is a certifiable standard, not a law.
+  ISO 27701 uses CONTROLS — refer to them as "ISO 27701 A.7.2.4" for controller
+    controls in Annex A, or "ISO 27701 B.8.5.6" for processor controls in Annex B.
+    ISO 27701 §5.x + §6.x are 27001/27002 mappings — cite as "ISO 27701 clause 5.4.1.3"
+    when relevant. Never call an ISO 27701 item an "article".
+    ISO 27701 extends ISO 27001 with a Privacy Information Management System (PIMS).
+    It is a certifiable standard, and its Annex D maps every 27701 control to
+    specific GDPR Articles.
   GDPR uses ARTICLES — refer to them as "GDPR Art. 32" or "GDPR article 32".
     GDPR is EU law, not a certifiable standard.
   NIS2 / DORA / eIDAS use ARTICLES — refer to them as "NIS2 Art.21" etc.
@@ -462,7 +468,7 @@ SELECTION ORDER:
 5. Comply nodes with relevant evidence
 
 CROSS-FRAMEWORK RULE: When a query topic has nodes from multiple standards (e.g. ISO 27001 A.5.15 AND GDPR Art.32 both address access control security), select nodes from ALL relevant standards. A complete answer addresses the full regulatory picture.
-For Arion Networks: ISO 27001 is the primary framework. ISO 27701 maps to GDPR. Always include relevant cross-framework nodes when they exist in the node list.
+For Arion Networks: ISO 27001 is the security-controls foundation. ISO 27701 is enrolled as a PIMS certification path, extending 27001 with controller-side (§A.7.x) and processor-side (§B.8.x) privacy controls that map to GDPR Chap V + Art.28 + Art.35 via Annex D. All three are first-class citable frameworks — always include relevant cross-framework nodes when they exist in the node list.
 
 CROSS-FRAMEWORK GUARDRAILS:
 - Only cite a GDPR article if it has a direct, material relationship to the query topic. Do not cite GDPR articles merely because they appear in the node list.
