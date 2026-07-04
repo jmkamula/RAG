@@ -2637,6 +2637,16 @@ function renderEvidenceClassesPanel(b) {
             ↗ Cite external source
           </button>
         </div>`;
+      } else {
+        // No cite lane for document-shaped artefacts (policy / procedure /
+        // plan / matrix). A policy IS the evidence — pointing at an
+        // external system doesn't substitute for the document itself.
+        // Explain the absence so tenants don't wonder why cite is
+        // available on some leaves but not others (loose end #9).
+        leafLines += `<div style="font-size:10px;color:#9C9A8E;margin-top:3px;padding-left:34px;font-style:italic"
+                           title="Cite-external is available for register + record shapes where the source of truth may live in an external system. A policy or procedure is itself the artefact — upload the document to satisfy this leaf.">
+          Upload only — this artefact <em>is</em> the evidence.
+        </div>`;
       }
     }
 
