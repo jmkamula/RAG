@@ -3408,28 +3408,20 @@ function renderAdvisoryPanel(adv) {
       body += `</ul></div>`;
     }
 
-    // Per-MUST form: one row per unsatisfied MUST with a textarea.
-    // Saved via POST /api/v1/dashboard/control/{ref}/template; each
-    // textarea binds to a checklist_item_id, written as a
-    // document_findings row with inference_source='form'.
+    // Read-only list of missing MUSTs for this leaf. Fill-in happens by
+    // downloading the template (docx / xlsx / md) from the templates
+    // block above and uploading the completed doc — the platform's
+    // primary storage-mode path since the web-fill lane was retired
+    // 2026-07-04.
     const missing_items = must_items.filter(m => !m.satisfied);
     if (missing_items.length) {
       body += `<div style="margin-top:8px">
-        <div style="font-size:11px;font-weight:600;color:#3A382E">Fill in to address:</div>`;
+        <div style="font-size:11px;font-weight:600;color:#3A382E">Still needed:</div>
+        <ul style="margin:4px 0 0 18px;padding:0">`;
       for (const m of missing_items) {
-        body += `<div style="margin-top:6px">
-          <label style="font-size:11px;color:#9C2E2E;display:block;margin-bottom:2px"
-                 title="${attr(m.id)}">
-            ${esc(m.text)}
-          </label>
-          <textarea class="advisory-input" data-must="${attr(m.id)}"
-                    placeholder="(empty — no evidence yet)"
-                    style="width:100%;min-height:46px;padding:6px 8px;font-size:11px;font-family:inherit;
-                           background:#FAF8F2;border:1px solid #E8E5DA;border-radius:4px;
-                           color:#3A382E;resize:vertical;box-sizing:border-box"></textarea>
-        </div>`;
+        body += `<li style="color:#9C2E2E;font-size:11px" title="${attr(m.id)}">${esc(m.text)}</li>`;
       }
-      body += `</div>`;
+      body += `</ul></div>`;
     }
 
     if (l.upload_hint) {
@@ -3450,116 +3442,10 @@ function renderAdvisoryPanel(adv) {
         </div>
         <div style="font-size:11px;color:#9C9A8E;margin-top:2px">${esc(summary)}</div>
       </div>
-      <div style="display:flex;gap:6px">
-        <button onclick="downloadAdvisoryDoc()"
-                title="Download a Markdown draft that folds in what you've filled in — auditor-readable and safe to hand over."
-                style="font-size:11px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #E8E5DA;
-                       border-radius:4px;cursor:pointer;font-family:inherit">
-          Download .md
-        </button>
-        <button onclick="saveAdvisoryForm(this)"
-                style="font-size:11px;padding:6px 12px;background:#3A382E;color:#fff;border:none;
-                       border-radius:4px;cursor:pointer;font-family:inherit">
-          Save evidence
-        </button>
-      </div>
     </div>
     ${body}
     <div style="margin-top:10px;font-size:10px;color:#9C9A8E;font-style:italic">${esc(adv.source || '')}</div>
-    <div id="advisory-save-status" style="margin-top:6px;font-size:11px;color:#9C9A8E;min-height:14px"></div>
   </div>`;
-}
-
-// Form save handler — collects all non-empty textareas in the advisory
-// panel, POSTs to the template endpoint, then refetches+rerenders the
-// advisory so n/M counts update live ("2/7 → 3/7" feedback).
-// Download the form-authored evidence as a markdown template document.
-// Hits GET /api/v1/dashboard/control/{ref}/template/document. The
-// server renders MUST descriptions as section headings + tenant input
-// as bodies + "(not yet filled in)" placeholders for unfilled MUSTs.
-function downloadAdvisoryDoc() {
-  const panel = document.getElementById('advisory-panel');
-  if (!panel) return;
-  const controlRef = panel.dataset.control;
-  const standardId = panel.dataset.standard || '';
-  // Browser-native download — fetch as blob, save with the server's
-  // Content-Disposition filename.
-  fetch(API_URL + `/api/v1/dashboard/control/${encodeURIComponent(controlRef)}/template/document?standard_id=${encodeURIComponent(standardId)}`, {
-    headers: {'X-API-Key': API_KEY},
-  })
-  .then(r => {
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const cd = r.headers.get('Content-Disposition') || '';
-    const m = cd.match(/filename="?([^"]+)"?/);
-    const fname = m ? m[1] : `template_${controlRef.replace(/\./g,'_')}.md`;
-    return r.blob().then(b => ({blob: b, fname}));
-  })
-  .then(({blob, fname}) => {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = fname;
-    document.body.appendChild(a); a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    const s = document.getElementById('advisory-save-status');
-    if (s) s.textContent = `Downloaded ${fname}.`;
-  })
-  .catch(e => {
-    const s = document.getElementById('advisory-save-status');
-    if (s) s.textContent = `Download failed: ${e.message}`;
-  });
-}
-
-async function saveAdvisoryForm(btn) {
-  const panel = document.getElementById('advisory-panel');
-  if (!panel) return;
-  const controlRef = panel.dataset.control;
-  const standardId = panel.dataset.standard || '';
-  const status     = document.getElementById('advisory-save-status');
-
-  const items = [];
-  panel.querySelectorAll('.advisory-leaf').forEach(leafDiv => {
-    const leafId  = leafDiv.dataset.leaf;
-    const evType  = leafDiv.dataset.evtype;
-    leafDiv.querySelectorAll('textarea.advisory-input').forEach(ta => {
-      const mustId = ta.dataset.must;
-      const text   = (ta.value || '').trim();
-      // Send all non-empty AND empty-with-prior-state items; the server
-      // distinguishes save vs clear by text length.
-      items.push({
-        checklist_item_id: mustId,
-        leaf_id:           leafId,
-        evidence_type:     evType,
-        text:              text,
-      });
-    });
-  });
-
-  if (status) status.textContent = 'Saving…';
-  btn.disabled = true;
-  try {
-    const r = await api(`/api/v1/dashboard/control/${encodeURIComponent(controlRef)}/template`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({standard_id: standardId, items})
-    });
-    if (status) status.textContent = `Saved ${r.n_saved} item(s)${r.n_cleared ? `; cleared ${r.n_cleared}` : ''} · refreshing…`;
-    // Refetch the advisory and re-render in place
-    const adv = await api(`/api/v1/dashboard/control/${encodeURIComponent(controlRef)}/advisory`);
-    const dp = document.getElementById('dp-gap');
-    // Replace just the advisory section (the verdict tree above stays).
-    if (dp) {
-      const existing = document.getElementById('advisory-panel');
-      if (existing) existing.outerHTML = renderAdvisoryPanel(adv.advisory);
-      else dp.insertAdjacentHTML('beforeend', renderAdvisoryPanel(adv.advisory));
-    }
-    const newStatus = document.getElementById('advisory-save-status');
-    if (newStatus) newStatus.textContent = `Saved ${r.n_saved} item(s).`;
-  } catch (e) {
-    if (status) status.textContent = `Save failed: ${e.message}`;
-  } finally {
-    btn.disabled = false;
-  }
 }
 
 

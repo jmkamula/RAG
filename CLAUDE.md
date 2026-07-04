@@ -240,12 +240,18 @@ clarify node    (LLM rank_and_answer OR Postgres short-circuit)
 ### Intake lanes
 - **Templated markdown** — `<<MUST item:X>>` markers + edit zones → deterministic fast-path extraction; auto-approved
 - **Templated xlsx** (round-trip) — `_arion_meta` hidden sheet → per-column + per-doc-field bindings; auto-approved; sample-stored in `tabular_evidence_rows`
-- **Form lane** (per-MUST web form) — `POST /api/v1/dashboard/control/{ref}/template` → auto-approved
 - **Workbook YAML** (xlsx → workbook_persistence) — deterministic per-MUST binding via YAML matchers
 - **Generic LLM extraction** — fallback for non-marker docs; goes through Stage-1 review queue
 
+RETIRED 2026-07-04: the per-MUST **web form** lane
+(`POST /api/v1/dashboard/control/{ref}/template` + textareas in
+the advisory panel). Redundant with the templated download →
+upload path. 5 legacy `inference_source='form'` findings retagged
+to `templated`. Endpoints removed; UI textareas replaced by a
+read-only "Still needed" list.
+
 ### Auto-approve discipline
-`inference_source IN ('templated', 'form')` → auto-approved at write
+`inference_source = 'templated'` → auto-approved at write
 (tenant-authored, no inference uncertainty). All others land
 `pending` for Stage-1 HITL. Surfaced via `/api/v1/stage1/auto-approved`.
 

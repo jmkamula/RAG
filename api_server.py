@@ -2692,189 +2692,6 @@ async def dashboard_control_evidence(
         pool.putconn(conn)
 
 
-@app.post("/api/v1/dashboard/control/{control_ref}/template", tags=["posture"])
-async def dashboard_control_template_save(
-    control_ref: str,
-    payload:     dict,
-    request:     Request,
-    key_info:    APIKeyInfo = Depends(require_scope("posture")),
-):
-    """Save per-MUST template form values.
-
-    Body shape:
-      {
-        "standard_id": "ISO27001:2022" | "GDPR:2016/679",  // optional, auto-inferred
-        "items": [
-          {
-            "checklist_item_id": "item:A.5.15:need_to_know",
-            "leaf_id":           "req:A.5.15:access_control_policy",
-            "evidence_type":     "policy",
-            "text":              "Access is granted on need-to-know basis ..."
-          },
-          ...
-        ]
-      }
-
-    Effect:
-      - For each (control_ref, leaf_id) pair, ensures a synthetic
-        client_documents row exists (one per leaf). filename
-        'template_<control>_<leaf>.md', document_title 'Template:
-        <control> :: <leaf>', evidence_type matches the leaf, is
-        is_metadata_only=true.
-      - For each item with non-empty text, ensures a
-        document_findings row exists with checklist_item_id set,
-        status='present', confidence='high', review_status='approved'
-        (tenant-authored is pre-approved), inference_source='form'.
-        Re-saves UPDATE the existing row's excerpt; deletions
-        (empty text) soft-delete the row (is_active=FALSE).
-      - Returns: {ok, n_saved, n_cleared, control_ref, standard_id,
-                  trace_id}
-
-    The flat write-direct-to-document_findings shape (rather than a
-    form_drafts table) keeps the engine seeing the evidence at the
-    moment of save with zero indirection. inference_source='form'
-    lets future cleanup distinguish form-authored from extracted.
-    """
-    items = (payload or {}).get("items", []) or []
-    standard_id = (payload or {}).get("standard_id")
-    if not standard_id:
-        standard_id = "GDPR:2016/679" if control_ref.startswith("Art.") else "ISO27001:2022"
-
-    pool = request.app.state.pg_pool
-    conn = pool.getconn()
-    n_saved = 0
-    n_cleared = 0
-    try:
-        set_session(conn, key_info.tenant_id)
-        with conn.cursor() as cur:
-            # Resolve / create the synthetic template document per leaf.
-            # One document per (tenant, control, leaf) — keeps the FK happy
-            # and lets later .docx generation group by leaf.
-            leaf_to_doc_id: dict[str, str] = {}
-            for item in items:
-                leaf_id = (item.get("leaf_id") or "").strip()
-                if not leaf_id or leaf_id in leaf_to_doc_id:
-                    continue
-                et = (item.get("evidence_type") or "").strip() or "policy"
-                short = leaf_id.split(":")[-1]
-                filename = f"template_{control_ref.replace('.', '_')}_{short}.md"
-                title    = f"Template: {control_ref} :: {short}"
-                # UPSERT-by-filename: one template doc per leaf per tenant.
-                cur.execute("""
-                    SELECT id FROM client_documents
-                     WHERE tenant_id = %s::uuid
-                       AND filename  = %s
-                       AND is_active = TRUE
-                     LIMIT 1
-                """, [key_info.tenant_id, filename])
-                row = cur.fetchone()
-                if row:
-                    leaf_to_doc_id[leaf_id] = str(row[0])
-                else:
-                    cur.execute("""
-                        INSERT INTO client_documents
-                            (tenant_id, filename, document_title, evidence_type,
-                             control_refs, is_metadata_only, is_current,
-                             document_status, retention_class)
-                        VALUES (%s::uuid, %s, %s, %s, %s, TRUE, TRUE,
-                                'registered', 'compliance')
-                        RETURNING id
-                    """, [key_info.tenant_id, filename, title, et, [control_ref]])
-                    leaf_to_doc_id[leaf_id] = str(cur.fetchone()[0])
-
-            # Per-MUST upsert into document_findings.
-            for item in items:
-                ck   = (item.get("checklist_item_id") or "").strip()
-                leaf = (item.get("leaf_id") or "").strip()
-                text = (item.get("text") or "").strip()
-                if not ck or not leaf or leaf not in leaf_to_doc_id:
-                    continue
-                doc_id = leaf_to_doc_id[leaf]
-
-                # Look up an existing form-authored finding for this MUST
-                cur.execute("""
-                    SELECT id FROM document_findings
-                     WHERE tenant_id         = %s::uuid
-                       AND control_ref       = %s
-                       AND standard_id       = %s
-                       AND checklist_item_id = %s
-                       AND inference_source  = 'form'
-                       AND is_active         = TRUE
-                     LIMIT 1
-                """, [key_info.tenant_id, control_ref, standard_id, ck])
-                existing = cur.fetchone()
-
-                if text:
-                    # Auto-approve + audit attribution mirrors the templated
-                    # lane (posture_writer:370 — tenant authored, no inference
-                    # uncertainty). confirmed_by = the saver's user uuid +
-                    # confirmed_at = NOW() so the row surfaces in the
-                    # /api/v1/stage1/auto-approved visibility panel.
-                    if existing:
-                        cur.execute("""
-                            UPDATE document_findings
-                               SET excerpt       = %s,
-                                   document_id   = %s::uuid,
-                                   status        = 'present',
-                                   confidence    = 'high',
-                                   review_status = 'approved',
-                                   reviewed_at   = NOW(),
-                                   confirmed_by  = %s::uuid,
-                                   confirmed_at  = NOW()
-                             WHERE id = %s
-                        """, [text[:2000], doc_id, key_info.user_id, existing[0]])
-                    else:
-                        cur.execute("""
-                            INSERT INTO document_findings
-                                (tenant_id, document_id, control_ref, standard_id,
-                                 checklist_item_id, status, confidence, excerpt,
-                                 inference_source, review_status, reviewed_at,
-                                 confirmed_by, confirmed_at,
-                                 is_active, retention_class)
-                            VALUES (%s::uuid, %s::uuid, %s, %s, %s, 'present',
-                                    'high', %s, 'form', 'approved', NOW(),
-                                    %s::uuid, NOW(),
-                                    TRUE, 'compliance')
-                        """, [key_info.tenant_id, doc_id, control_ref, standard_id,
-                              ck, text[:2000], key_info.user_id])
-                    n_saved += 1
-                elif existing:
-                    # Empty text + existing row → soft-delete (tenant cleared the field)
-                    cur.execute("""
-                        UPDATE document_findings
-                           SET is_active = FALSE
-                         WHERE id = %s
-                    """, [existing[0]])
-                    n_cleared += 1
-        conn.commit()
-    except Exception as e:
-        conn.rollback()
-        raise HTTPException(status_code=500, detail=f"Save failed: {e}")
-    finally:
-        pool.putconn(conn)
-
-    # Engine kick: re-run posture so the advisory call (next request) sees
-    # the new bindings. Best-effort; failure doesn't reverse the save.
-    try:
-        from rag.posture_loader import load_posture, build_pg_conn
-        _pg = build_pg_conn()
-        try:
-            load_posture(_pg, key_info.tenant_id)
-        finally:
-            try: _pg.close()
-            except Exception: pass
-    except Exception:
-        pass
-
-    return {
-        "ok":          True,
-        "n_saved":     n_saved,
-        "n_cleared":   n_cleared,
-        "control_ref": control_ref,
-        "standard_id": standard_id,
-        "trace_id":    request.state.trace_id,
-    }
-
 
 @app.get("/api/v1/dashboard/control/{control_ref}/evidence-classes", tags=["posture"])
 async def dashboard_control_evidence_classes(
@@ -2969,68 +2786,6 @@ async def dashboard_control_advisory(
     finally:
         pool.putconn(conn)
 
-
-@app.get("/api/v1/dashboard/control/{control_ref}/template/document", tags=["posture"])
-async def dashboard_control_template_document(
-    control_ref: str,
-    request:     Request,
-    key_info:    APIKeyInfo = Depends(require_scope("posture")),
-    leaf:        Optional[str] = None,
-    standard_id: Optional[str] = None,
-    format:      Optional[str] = "md",
-):
-    """Generate a downloadable template document from form-authored
-    evidence for a control (or a single leaf).
-
-    Query params:
-      - leaf:        optional leaf_id (e.g. req:A.5.15:access_control_policy).
-                     If omitted, generates a combined document with one
-                     section per leaf.
-      - standard_id: optional, auto-inferred from control_ref prefix.
-      - format:      'md' (default). Future: 'docx'.
-
-    MUST headings come from Neo4j ChecklistItem.text; section bodies
-    come from form-authored document_findings rows. Missing MUSTs render
-    as "_(not yet filled in)_" placeholders so the auditor can see
-    what's still pending vs filled.
-
-    Returns the document as an attachment download.
-    """
-    if not standard_id:
-        standard_id = "GDPR:2016/679" if control_ref.startswith("Art.") else "ISO27001:2022"
-    fmt = (format or "md").lower()
-    if fmt not in ("md",):
-        raise HTTPException(status_code=400, detail=f"Unsupported format: {fmt}")
-
-    pool = request.app.state.pg_pool
-    conn = pool.getconn()
-    try:
-        set_session(conn, key_info.tenant_id)
-        from rag.posture.template_document import build_template_document
-        doc = build_template_document(
-            pg_conn      = conn,
-            tenant_id    = key_info.tenant_id,
-            control_ref  = control_ref,
-            standard_id  = standard_id,
-            leaf_id      = leaf,
-        )
-    finally:
-        pool.putconn(conn)
-
-    if doc is None:
-        raise HTTPException(
-            status_code=404,
-            detail="No template available for this control/leaf (no curated MUSTs found).",
-        )
-
-    from fastapi.responses import Response
-    return Response(
-        content=doc["content"],
-        media_type=doc["mime_type"],
-        headers={
-            "Content-Disposition": f'attachment; filename="{doc["filename"]}"',
-        },
-    )
 
 
 @app.get("/api/v1/posture/{control_ref}", tags=["posture"])
@@ -3457,7 +3212,8 @@ async def stage1_auto_approved(
     unintentional.
 
     Filters:
-      - inference_source IN ('templated', 'form')
+      - inference_source = 'templated' (form-lane retired 2026-07-04;
+        legacy 'form' rows retagged to 'templated' in the same batch)
       - review_status    = 'approved'
       - confirmed_at     within last `days` days (default 30)
 
@@ -3479,7 +3235,7 @@ async def stage1_auto_approved(
                   JOIN client_documents cd ON cd.id = df.document_id
                  WHERE df.tenant_id        = %s::uuid
                    AND df.is_active        = TRUE
-                   AND df.inference_source IN ('templated', 'form')
+                   AND df.inference_source = 'templated'
                    AND df.review_status    = 'approved'
                    AND df.confirmed_at     > now() - (%s * interval '1 day')
                  ORDER BY df.confirmed_at DESC
