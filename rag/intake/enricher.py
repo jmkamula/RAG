@@ -147,7 +147,16 @@ def enrich(
     # Eliminates the dominant non-determinism source — without cache the
     # same doc could match a different doc_mappings umbrella across runs
     # because topic_tokens drift between LLM invocations.
-    cache_hit = api_key and doc.source_sha256 and _enricher_cache_load(doc)
+    # When declared hints are supplied, the tenant's declaration is
+    # authoritative on doc_type + standard_ids. The cache still reveals
+    # LLM-derived topic_tokens + scope_statement (useful signals not
+    # covered by the hints), but its cached doc_type + standard_ids must
+    # NOT overwrite the tenant's explicit intent. Pass suppression flags.
+    cache_hit = api_key and doc.source_sha256 and _enricher_cache_load(
+        doc,
+        suppress_type_merge      = bool(hint_evidence_type),
+        suppress_standards_merge = bool(hint_standard_ids),
+    )
     if api_key and not cache_hit:
         _llm_classify(doc, api_key)
         if doc.source_sha256:
@@ -319,11 +328,22 @@ Return JSON only:
 # SHA-keyed enricher cache (schema_v37)
 # =============================================================================
 
-def _enricher_cache_load(doc: ParsedDocument) -> bool:
+def _enricher_cache_load(
+    doc:                      ParsedDocument,
+    suppress_type_merge:      bool = False,
+    suppress_standards_merge: bool = False,
+) -> bool:
     """Look up cached LLM-derived fields by source SHA. Returns True on
     hit (doc is mutated in place); False on miss or any error.
 
-    Never raises — cache failures degrade gracefully to a fresh LLM call."""
+    Never raises — cache failures degrade gracefully to a fresh LLM call.
+
+    suppress_type_merge / suppress_standards_merge: when the caller has
+    declared explicit intent (upload UI dropdowns), the cache's cached
+    doc_type / standard_ids must not overwrite the tenant's declaration.
+    topic_tokens + scope_statement are still merged — those are helpful
+    signals the tenant didn't declare anyway.
+    """
     try:
         from rag.posture_loader import build_pg_conn
         conn = build_pg_conn()
@@ -343,9 +363,10 @@ def _enricher_cache_load(doc: ParsedDocument) -> bool:
             doc_type, standard_ids, topic_tokens, scope_statement = row
             # Keyword-detection results already populated some fields;
             # only overwrite when the cache has stronger data.
-            if doc_type and (not doc.doc_type or doc.doc_type == "other"):
+            if doc_type and (not doc.doc_type or doc.doc_type == "other") \
+                    and not suppress_type_merge:
                 doc.doc_type = doc_type
-            if standard_ids:
+            if standard_ids and not suppress_standards_merge:
                 # Merge: cache extends what keyword detection found
                 for sid in standard_ids:
                     if sid not in doc.standard_ids:

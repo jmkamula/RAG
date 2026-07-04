@@ -123,30 +123,45 @@ def _compose_bridge_excerpt(rationale: str | None,
     return body[:500] or None
 
 
-def _walk_implements(driver: Driver, source_id: str) -> list[tuple[str, str, str, str]]:
+def _walk_bridges(driver: Driver, source_id: str) -> list[tuple[str, str, str, str]]:
     """
-    Walk IMPLEMENTS edges from a source control node to xfw'd target controls.
-    Edges are bidirectional in Neo4j (both ISO→GDPR and GDPR→ISO exist);
-    walking outbound only is sufficient because every ISO→GDPR edge has its
-    reverse, so each pair is covered.
+    Walk cross-framework bridge edges from a source control node to bridged
+    target controls in other standards. Walks BOTH edge types
+    (IMPLEMENTS + SUPPORTS) in BOTH directions (undirected match).
+
+    - IMPLEMENTS: A implements B (A is the certifiable operationalisation
+      of B's obligation). Evidence for A → propagates to B, and vice versa.
+    - SUPPORTS:   A supports B (A helps satisfy B without being identical).
+      Evidence for A → still credits B (per the auditor mental model).
+
+    Undirected walk because:
+    - Old ISO 27001 ↔ GDPR bridges were loaded bidirectionally (both
+      A→B and B→A edges exist).
+    - Newer ISO 27701 bridges (Batch 1-3 curation 2026-07-03..07-04)
+      are single-direction (A→B only). Without undirected walk, evidence
+      landing on Art.28 wouldn't propagate to A.7.2.6 because there's
+      no outbound edge from Art.28.
 
     Returns list of (target_node_id, target_standard_id, target_ref, rationale).
-    The rationale is surfaced from the catalog-managed edge (S4) when present;
-    empty string when missing (legacy edges or RELATED_TO walks).
+    Deduped when the same target is reachable via both edge types.
     """
     cypher = """
-    MATCH (a {id: $src_id})-[r:IMPLEMENTS]->(b)
+    MATCH (a {id: $src_id})-[r:IMPLEMENTS|SUPPORTS]-(b)
     WHERE b.standard_id <> a.standard_id
-    RETURN b.id          AS tgt_id,
-           b.standard_id AS tgt_std,
-           b.ref         AS tgt_ref,
-           coalesce(r.rationale, '') AS rationale
+    RETURN DISTINCT b.id          AS tgt_id,
+                    b.standard_id AS tgt_std,
+                    b.ref         AS tgt_ref,
+                    coalesce(r.rationale, '') AS rationale
     """
     with driver.session() as s:
         return [
             (row["tgt_id"], row["tgt_std"], row["tgt_ref"], row["rationale"])
             for row in s.run(cypher, src_id=source_id)
         ]
+
+
+# Back-compat alias — callers still using the old name during migration.
+_walk_implements = _walk_bridges
 
 
 def _build_source_node_id(standard_id: str, control_ref: str) -> str:
@@ -440,7 +455,7 @@ def propose_for_findings(
         seen_sources.add((f.control_ref, f.standard_id))
         summary.sources_walked += 1
         src_id  = _build_source_node_id(f.standard_id, f.control_ref)
-        targets = _walk_implements(driver, src_id)
+        targets = _walk_bridges(driver, src_id)
         summary.edges_seen += len(targets)
 
         for tgt_id, tgt_std, tgt_ref, rationale in targets:
@@ -536,7 +551,7 @@ def propose_backfill(
                 continue
             summary.sources_walked += 1
             src_id  = _build_source_node_id(std_id, ctrl_ref)
-            targets = _walk_implements(driver, src_id)
+            targets = _walk_bridges(driver, src_id)
             summary.edges_seen += len(targets)
 
             for tgt_id, tgt_std, tgt_ref, rationale in targets:
