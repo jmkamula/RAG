@@ -4984,6 +4984,272 @@ ISO27701_BATCH2_EDGES: list[RelationshipEdge] = [
 ]
 
 
+# ── ISO 27701:2019 Batch 3 bridges — Transfers + Sharing + Disclosure ───────
+# 12 anchors: §A.7.5.1-4 controller + §B.8.5.1-8 processor. Heavy bridge to
+# GDPR Chapter V (Art.44-49) + Art.28.2/3.a/3.d/4 subprocessor terms.
+# Author: 2026-07-04.
+
+ISO27701_BATCH3_EDGES: list[RelationshipEdge] = [
+    # ── SUPPORTS 27701 → 27001 ─────────────────────────────────────────────
+    # Cross-jurisdiction transfer basis ↔ A.5.14 information transfer
+    RelationshipEdge(
+        source_ref='A.7.5.1', source_standard_id='ISO27701:2019',
+        target_ref='A.5.14', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.5.1 cross-jurisdiction transfer basis augments 27001 A.5.14 information transfer with the privacy-specific Chap V + Schrems II TIA overlay.',
+        citation='ISO/IEC 27701:2019 §7.5.1 + ISO/IEC 27002:2022 §5.14',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.5.2', source_standard_id='ISO27701:2019',
+        target_ref='A.5.14', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.5.2 destinations register operationalises 27001 A.5.14 information transfer at the country-map level.',
+        citation='ISO/IEC 27701:2019 §7.5.2 + ISO/IEC 27002:2022 §5.14',
+        role='medium',
+    ),
+    # A.7.5.3 + A.7.5.4 records ↔ A.5.9 asset register
+    RelationshipEdge(
+        source_ref='A.7.5.3', source_standard_id='ISO27701:2019',
+        target_ref='A.5.9', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.5.3 transfer records are a records-programme artefact — analogous to 27001 A.5.9 asset register discipline for PII transfer events.',
+        citation='ISO/IEC 27701:2019 §7.5.3 + ISO/IEC 27002:2022 §5.9',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.5.4', source_standard_id='ISO27701:2019',
+        target_ref='A.5.9', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.5.4 disclosure records — same records-programme pattern as A.5.9.',
+        citation='ISO/IEC 27701:2019 §7.5.4 + ISO/IEC 27002:2022 §5.9',
+        role='medium',
+    ),
+    # B.8.5.1 processor transfer basis ↔ A.5.14
+    RelationshipEdge(
+        source_ref='B.8.5.1', source_standard_id='ISO27701:2019',
+        target_ref='A.5.14', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.5.1 processor-side cross-jurisdiction transfers mirror A.7.5.1 — augment 27001 A.5.14.',
+        citation='ISO/IEC 27701:2019 §8.5.1 + ISO/IEC 27002:2022 §5.14',
+        role='high',
+    ),
+    # B.8.5.6/7/8 subcontractor chain ↔ A.5.19 + A.5.21 + A.5.22 supplier
+    RelationshipEdge(
+        source_ref='B.8.5.6', source_standard_id='ISO27701:2019',
+        target_ref='A.5.19', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.5.6 subcontractor disclosure operates within 27001 A.5.19 supplier relationships (subprocessor is a supplier).',
+        citation='ISO/IEC 27701:2019 §8.5.6 + ISO/IEC 27002:2022 §5.19',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.7', source_standard_id='ISO27701:2019',
+        target_ref='A.5.19', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.5.7 subcontractor engagement — same policy family as 27001 A.5.19 supplier policy + specialisation for privacy subprocessors.',
+        citation='ISO/IEC 27701:2019 §8.5.7 + ISO/IEC 27002:2022 §5.19',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.7', source_standard_id='ISO27701:2019',
+        target_ref='A.5.21', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.5.7 subcontractor written-contract flow-down aligns with 27001 A.5.21 managing ICT supply chain security.',
+        citation='ISO/IEC 27701:2019 §8.5.7 + ISO/IEC 27002:2022 §5.21',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.8', source_standard_id='ISO27701:2019',
+        target_ref='A.5.22', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.5.8 subcontractor-change monitoring aligns with 27001 A.5.22 monitoring, review + change management of supplier services.',
+        citation='ISO/IEC 27701:2019 §8.5.8 + ISO/IEC 27002:2022 §5.22',
+        role='high',
+    ),
+
+    # ── IMPLEMENTS 27701 → GDPR (per Annex D + Chap V) ─────────────────────
+    # A.7.5.1 transfer basis → Chapter V (Art.44 + Art.45 + Art.46 + Art.47 + Art.48 + Art.49)
+    RelationshipEdge(
+        source_ref='A.7.5.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.44', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.5.1 operationalises GDPR Art.44 general principle for transfers.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.5.1 → (44)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.5.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.45', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.5.1 covers Art.45 adequacy-decision transfers.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.5.1 → (45)(1-9)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.5.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.46', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.5.1 covers Art.46 appropriate safeguards (SCCs, BCRs, codes, certification).',
+        citation='ISO/IEC 27701:2019 Annex D — 7.5.1 → (46)(1-5)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.5.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.47', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.5.1 covers Art.47 binding corporate rules basis.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.5.1 → (47)(1-3)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.5.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.48', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.5.1 addresses Art.48 transfers not authorised by Union law (foreign court orders).',
+        citation='ISO/IEC 27701:2019 Annex D — 7.5.1 → (48)',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.5.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.49', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.5.1 covers Art.49 derogations for specific situations as last-resort transfer basis.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.5.1 → (49)(1-6)',
+        role='high',
+    ),
+    # A.7.5.2 destinations → Art.15.2 (subject-facing disclosure) + Art.30.1.e
+    RelationshipEdge(
+        source_ref='A.7.5.2', source_standard_id='ISO27701:2019',
+        target_ref='Art.15', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.5.2 destinations disclosure feeds Art.15.2 — subject-right to know transfer destinations.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.5.2 → (15)(2)',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.5.2', source_standard_id='ISO27701:2019',
+        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.5.2 destinations feed Art.30.1.e recipient records.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.5.2 → (30)(1)(e)',
+        role='medium',
+    ),
+    # A.7.5.3 transfer records → Art.30.1.e
+    RelationshipEdge(
+        source_ref='A.7.5.3', source_standard_id='ISO27701:2019',
+        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.5.3 transfer records support Art.30.1.e transfer-recipient recording.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.5.3 → (30)(1)(e)',
+        role='high',
+    ),
+    # A.7.5.4 disclosure records → Art.30.1.d
+    RelationshipEdge(
+        source_ref='A.7.5.4', source_standard_id='ISO27701:2019',
+        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 A.7.5.4 disclosure records support Art.30.1.d recipient recording.',
+        citation='ISO/IEC 27701:2019 Annex D — 7.5.4 → (30)(1)(d)',
+        role='high',
+    ),
+    # B.8.5.1 processor transfer basis → Chap V + Art.28
+    RelationshipEdge(
+        source_ref='B.8.5.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.44', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.5.1 processor-side Chap V compliance + Art.28 processor-instruction flow.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.5.1 → (44), (46), (48), (49)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.46', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.5.1 processor transfers under Art.46 safeguards.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.5.1 → (46)(1-5)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.48', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.5.1 handles Art.48 processor-side.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.5.1 → (48)',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.1', source_standard_id='ISO27701:2019',
+        target_ref='Art.49', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.5.1 processor Art.49 derogation invocation.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.5.1 → (49)(1-6)',
+        role='medium',
+    ),
+    # B.8.5.2 destinations → Art.30.2.c
+    RelationshipEdge(
+        source_ref='B.8.5.2', source_standard_id='ISO27701:2019',
+        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.5.2 processor destinations support Art.30.2.c transfer records.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.5.2 → (30)(2)(c)',
+        role='medium',
+    ),
+    # B.8.5.3 disclosure records → Art.30.1.d
+    RelationshipEdge(
+        source_ref='B.8.5.3', source_standard_id='ISO27701:2019',
+        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.5.3 processor disclosure records — same records-programme discipline as Art.30.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.5.3 → (30)(1)(d)',
+        role='medium',
+    ),
+    # B.8.5.4 notification → Art.28.3.a documented instructions
+    RelationshipEdge(
+        source_ref='B.8.5.4', source_standard_id='ISO27701:2019',
+        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.5.4 legally-binding request notification operationalises Art.28.3.a documented-instructions principle — processor doesn''t act on non-controller instructions without proper channel.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.5.4 → (28)(3)(a)',
+        role='high',
+    ),
+    # B.8.5.5 disclosure decision → Art.48 Union-law authorisation gate
+    RelationshipEdge(
+        source_ref='B.8.5.5', source_standard_id='ISO27701:2019',
+        target_ref='Art.48', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.5.5 reject-if-not-legally-binding operationalises Art.48 protection against foreign disclosure requests without Union-law basis.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.5.5 → (48)',
+        role='high',
+    ),
+    # B.8.5.6/7/8 subcontractor chain → Art.28.2 + Art.28.4
+    RelationshipEdge(
+        source_ref='B.8.5.6', source_standard_id='ISO27701:2019',
+        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.5.6 pre-use subcontractor disclosure operationalises Art.28.2 general/specific authorisation + Art.28.4 subprocessor obligations.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.5.6 → (28)(2), (28)(4)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.7', source_standard_id='ISO27701:2019',
+        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.5.7 subcontractor engagement operationalises Art.28.2 + Art.28.3.d flow-down of contract terms.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.5.7 → (28)(2), (28)(3)(d)',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.8', source_standard_id='ISO27701:2019',
+        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        edge_type='IMPLEMENTS',
+        rationale='27701 B.8.5.8 subcontractor-change notification operationalises Art.28.2 second sentence — inform controller of intended changes + opportunity to object.',
+        citation='ISO/IEC 27701:2019 Annex D — 8.5.8 → (28)(2)',
+        role='high',
+    ),
+]
+
+
 ALL_EDGES: list[RelationshipEdge] = (
     INTRA_ISO_EDGES
     + INTRA_GDPR_EDGES
@@ -4991,4 +5257,5 @@ ALL_EDGES: list[RelationshipEdge] = (
     + XFW_EDGES
     + ISO27701_BATCH1_EDGES
     + ISO27701_BATCH2_EDGES
+    + ISO27701_BATCH3_EDGES
 )

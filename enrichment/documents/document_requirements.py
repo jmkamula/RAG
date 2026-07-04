@@ -7017,6 +7017,1031 @@ REQ_B843_PROGRAM_REVIEW = EvidenceRequirement(
 # ==============================================================================
 
 
+# ==============================================================================
+# ISO 27701:2019 — Batch 3 — PII sharing, transfer, and disclosure
+# ==============================================================================
+# 12 anchors × 4 leaves = 48 EvidenceRequirements. Final Phase 2 batch.
+#   Annex A §A.7.5.x — controller transfer + disclosure (4 controls)
+#   Annex B §B.8.5.x — processor transfer + disclosure (8 controls)
+# Spine: all 12 use op_process 4-leaf (procedure + register + scope + review).
+# Source: ISO/IEC 27701:2019 §7.5 + §8.5. Bridges heavily to GDPR Chap V
+# (Art.44-49) + Art.28.
+
+# ── A.7.5.1 Identify basis for PII transfer between jurisdictions ────────────
+# §7.5.1: The organization shall identify + document the relevant basis for
+# transfers of PII between jurisdictions. GDPR Chap V (Art.44-49) is the
+# primary bridge — adequacy / safeguards / derogations.
+
+REQ_A751_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.5.1:transfer_basis_procedure",
+    control_ref   = "A.7.5.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "PII Transfer Basis Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.5.1 requires the org to identify + document the legal basis for every cross-jurisdiction PII transfer. Bridges to GDPR Chap V hierarchy (Art.45 adequacy → Art.46 safeguards → Art.47 BCRs → Art.49 derogations).",
+    must_contain  = [
+        ChecklistItem("item:A.7.5.1:proc_transfer_hierarchy","Transfer basis hierarchy — adequacy decision (Art.45) → appropriate safeguards (Art.46: SCCs, BCRs, codes, certification) → derogations (Art.49) as last resort", "must", False, "GDPR Art.44-49"),
+        ChecklistItem("item:A.7.5.1:proc_documented_compliance","Documented compliance with legislation/regulation applicable at origin AND destination jurisdiction per transfer", "must", False, "§7.5.1 — document compliance to such requirements"),
+        ChecklistItem("item:A.7.5.1:proc_sa_review",         "SA-review awareness — some jurisdictions require transfer agreements reviewed by supervisory authority", "must", False, "§7.5.1 — designated supervisory authority review"),
+        ChecklistItem("item:A.7.5.1:proc_schrems_tia",       "Schrems II Transfer Impact Assessment — for Art.46 safeguard transfers, assess third-country legal environment + supplementary measures per EDPB 01/2020", "must", False, "EDPB Recommendations 01/2020"),
+        ChecklistItem("item:A.7.5.1:proc_intra_jurisdiction","Intra-jurisdiction exclusion rule (§7.5.1 NOTE — where sender + recipient same jurisdiction, applicable law is the same)", "must", False, "§7.5.1 NOTE"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.1:proc_owner",             "Named owner (DPO + Legal counsel)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A751_TRANSFER_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.5.1:transfer_basis_register",
+    control_ref   = "A.7.5.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Cross-Jurisdiction Transfer Basis Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-transfer-relationship row — every cross-jurisdiction PII transfer flow with cited basis + jurisdiction pair. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.5.1:reg_transfer_id",        "Unique transfer relationship identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.5.1:reg_origin_jurisdiction","Origin jurisdiction per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.5.1:reg_destination_jurisdiction","Destination jurisdiction per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.5.1:reg_basis_cited",        "Basis cited per row (Art.45 adequacy / Art.46 SCC / Art.46 BCR / Art.49 derogation / non-EU equivalent)", "must", False, "§7.5.1 — basis for transfer"),
+        ChecklistItem("item:A.7.5.1:reg_tia_reference",      "TIA reference per row where Art.46 safeguard invoked", "must", False, "EDPB 01/2020"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.1:reg_supplementary_measures","Supplementary measures per row where TIA identified deficiencies", "should", False, "EDPB 01/2020"),
+    ],
+)
+
+REQ_A751_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.5.1:applicable_scope",
+    control_ref   = "A.7.5.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Cross-Jurisdiction Transfers Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — every PII flow that crosses a jurisdictional boundary. Includes internal cross-border transfers within multi-region org.",
+    must_contain  = [
+        ChecklistItem("item:A.7.5.1:scope_flow_inventory",   "PII flow inventory — every flow map row (from A.7.5.2) with jurisdiction pair", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.5.1:scope_internal_transfers","Internal cross-region transfers (multi-region cloud + branch offices)", "must", False, "Comprehensiveness"),
+        ChecklistItem("item:A.7.5.1:scope_exclusions",       "Excluded flows (intra-jurisdiction) with rationale", "must", False, "§7.5.1 NOTE"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.1:scope_change_drivers",   "Trigger list (new region / new processor / M&A)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A751_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.5.1:program_review",
+    control_ref   = "A.7.5.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Transfer Basis Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every transfer relationship has valid basis, TIAs current after Schrems II + regulatory updates (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.5.1:rev_date",               "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.5.1:rev_reviewer",           "Reviewer identity (DPO + Legal)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.5.1:rev_basis_currency",     "Basis currency — Art.45 adequacy decisions still in force (Privacy Shield lessons apply)", "must", False, "Post-Schrems"),
+        ChecklistItem("item:A.7.5.1:rev_tia_refresh",        "TIA refresh — recent case law + guidance considered", "must", False, "EDPB 01/2020"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.1:rev_next_date",          "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.5.2 Countries + international orgs to which PII can be transferred ──
+# §7.5.2: The organization shall specify + document countries + international
+# orgs to which PII can possibly be transferred. Made available to customers.
+
+REQ_A752_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.5.2:destinations_procedure",
+    control_ref   = "A.7.5.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Transfer Destinations Documentation Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.5.2 requires the org to maintain + publish the list of countries + international orgs to which PII can possibly be transferred, including via subcontractors. Companion to §7.3.2 notice + §7.5.1 basis.",
+    must_contain  = [
+        ChecklistItem("item:A.7.5.2:proc_destinations_publication","Destinations list publication — countries + international orgs made available to customers/subjects", "must", False, "§7.5.2 — made available to customers"),
+        ChecklistItem("item:A.7.5.2:proc_subcontractor_inclusion","Subcontractor destinations included — countries where subcontracted processing occurs", "must", False, "§7.5.2 — subcontracted PII processing"),
+        ChecklistItem("item:A.7.5.2:proc_law_enforcement_exception","Law enforcement exception — cases where destinations cannot be specified in advance (§7.5.2 last paragraph)", "must", False, "§7.5.2 — law enforcement authority"),
+        ChecklistItem("item:A.7.5.2:proc_alignment_7_5_1",   "Alignment with A.7.5.1 — every destination has a documented basis", "must", False, "§7.5.2 — considered in relation to 7.5.1"),
+        ChecklistItem("item:A.7.5.2:proc_change_notification","Change notification — new destinations added trigger notice update", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.2:proc_owner",             "Named owner (DPO + Trust)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A752_DESTINATIONS_REGISTER = EvidenceRequirement(
+    id            = "req:A.7.5.2:transfer_destinations_register",
+    control_ref   = "A.7.5.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Transfer Destinations Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-destination row — countries + international orgs where PII may be transferred. Annual refresh (freshness=365). Directly consumed by public notice.",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.5.2:reg_destination_id",     "Destination identifier per row (country ISO code or international org name)", "must", False, "Referenceability"),
+        ChecklistItem("item:A.7.5.2:reg_transfer_type",      "Transfer type per row (direct storage / subprocessing / support access / M&A)", "must", False, "§7.5.2 — normal operations"),
+        ChecklistItem("item:A.7.5.2:reg_basis_link",         "Basis link per row (link to A.7.5.1 register)", "must", False, "§7.5.2 — considered in relation to 7.5.1"),
+        ChecklistItem("item:A.7.5.2:reg_effective_date",     "Effective date per row (when destination added)", "must", False, "Currency"),
+        ChecklistItem("item:A.7.5.2:reg_public_disclosure",  "Public-disclosure status per row (in privacy notice / DPA schedule)", "must", False, "§7.5.2 — available to customers"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.2:reg_subcontractor",      "Subcontractor per row where the destination is via a subprocessor", "should", False, "§7.5.2 — subcontracted processing"),
+    ],
+)
+
+REQ_A752_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.5.2:applicable_scope",
+    control_ref   = "A.7.5.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Destinations Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — every jurisdiction where PII may be processed (direct + via subprocessor + via support access + via M&A). Excludes law-enforcement-request destinations documented separately.",
+    must_contain  = [
+        ChecklistItem("item:A.7.5.2:scope_normal_operations","Normal-operations destinations (direct + subprocessor + support tier)", "must", False, "§7.5.2 — normal operations"),
+        ChecklistItem("item:A.7.5.2:scope_law_enforcement",  "Law-enforcement-request handling (not in advance-disclosed list)", "must", False, "§7.5.2 — cannot be specified in advance"),
+        ChecklistItem("item:A.7.5.2:scope_multi_region_cloud","Multi-region cloud + backup destinations included", "must", False, "Comprehensiveness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.2:scope_change_drivers",   "Trigger list (new region / new subprocessor)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A752_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.5.2:program_review",
+    control_ref   = "A.7.5.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Destinations Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — destinations list current, public notice reflects register, subcontractor destinations captured (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.5.2:rev_date",               "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.5.2:rev_reviewer",           "Reviewer identity (DPO + Trust + Legal)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.5.2:rev_completeness",       "Completeness check — actual PII flows reconciled against register", "must", False, "§7.5.2 — countries to which PII can be transferred"),
+        ChecklistItem("item:A.7.5.2:rev_public_notice_sync", "Public notice sync — subject-facing destinations list matches register", "must", False, "§7.5.2 — available to customers"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.2:rev_next_date",          "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.5.3 Records of transfer of PII ────────────────────────────────────────
+# §7.5.3: The organization shall record transfers of PII to or from third
+# parties + ensure cooperation with those parties for subject-rights fulfilment.
+
+REQ_A753_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.5.3:transfer_records_procedure",
+    control_ref   = "A.7.5.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "PII Transfer Recording Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.5.3 requires event-level recording of PII transfers to/from third parties + cooperation channels for subject-rights fulfilment. Includes modification / erasure transfers arising from subject requests.",
+    must_contain  = [
+        ChecklistItem("item:A.7.5.3:proc_transfer_event_capture","Transfer event capture (to + from third parties)", "must", False, "§7.5.3 — record transfers"),
+        ChecklistItem("item:A.7.5.3:proc_rights_transfer",   "Rights-transfer capture — modifications / erasure transfers arising from subject requests", "must", False, "§7.5.3 — modified as a result of managing obligations"),
+        ChecklistItem("item:A.7.5.3:proc_cooperation_channel","Cooperation channel — third parties can be re-contacted for subject-rights follow-up", "must", False, "§7.5.3 — cooperation for future requests"),
+        ChecklistItem("item:A.7.5.3:proc_retention_policy",  "Retention period policy for transfer records (link to A.7.4.7)", "must", False, "§7.5.3 — retention period"),
+        ChecklistItem("item:A.7.5.3:proc_minimisation",      "Data minimisation applied to records themselves — only strictly needed information retained", "must", False, "§7.5.3 — data minimization principle"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.3:proc_owner",             "Named owner (DPO + Data Ops)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A753_TRANSFER_LOG = EvidenceRequirement(
+    id            = "req:A.7.5.3:transfer_event_log",
+    control_ref   = "A.7.5.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "PII Transfer Event Log",
+    trigger_type  = "profile_fact",
+    description   = "Per-transfer-event row — each PII transfer to/from a third party with recipient, timestamp, purpose. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.5.3:reg_event_id",           "Unique transfer event identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.5.3:reg_direction",          "Direction per row (outbound to third party / inbound from third party)", "must", False, "§7.5.3 — to or from"),
+        ChecklistItem("item:A.7.5.3:reg_third_party",        "Third party per row", "must", False, "Traceability"),
+        ChecklistItem("item:A.7.5.3:reg_pii_scope",          "PII scope per row (categories + volume)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.5.3:reg_timestamp",          "Timestamp per row", "must", False, "Currency"),
+        ChecklistItem("item:A.7.5.3:reg_basis_link",         "Basis link per row (which A.7.5.1 basis authorised this transfer)", "must", False, "§7.5.1 traceability"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.3:reg_subject_trigger",    "Subject-request trigger flag per row (rectification/erasure propagation)", "should", False, "§7.5.3 — managing obligations"),
+    ],
+)
+
+REQ_A753_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.5.3:applicable_scope",
+    control_ref   = "A.7.5.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Transfer Events Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — every third-party transfer event that constitutes a recordable transfer (excludes intra-org movements + fully-anonymised aggregate sharing).",
+    must_contain  = [
+        ChecklistItem("item:A.7.5.3:scope_recordable_events","Recordable transfer types (batch export / API push / support-driven / M&A / rights-fulfilment cascade)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.5.3:scope_exclusions",       "Excluded events (intra-org + fully-anonymised aggregates) with rationale", "must", False, "Defensibility"),
+        ChecklistItem("item:A.7.5.3:scope_retention_period", "Retention period for transfer records (per A.7.4.7 schedule)", "must", False, "§7.5.3 — retention"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.3:scope_change_drivers",   "Trigger list (new transfer type / new integration)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A753_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.5.3:program_review",
+    control_ref   = "A.7.5.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Transfer Records Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — transfer events captured, cooperation channels functional, minimisation principle applied (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.5.3:rev_date",               "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.5.3:rev_reviewer",           "Reviewer identity (DPO + Data Ops)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.5.3:rev_completeness",       "Completeness check — actual transfer events reconciled against log", "must", False, "§7.5.3 — record transfers"),
+        ChecklistItem("item:A.7.5.3:rev_cooperation_test",   "Cooperation channel test — sampled third parties re-contactable for subject-rights follow-up", "must", False, "§7.5.3 — cooperation"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.3:rev_next_date",          "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── A.7.5.4 Records of PII disclosure to third parties ───────────────────────
+# §7.5.4: The organization shall record disclosures of PII to third parties.
+# Includes normal-course + investigation/audit disclosures. Bridges to
+# GDPR Art.30.1.d recipients.
+
+REQ_A754_PROCEDURE = EvidenceRequirement(
+    id            = "req:A.7.5.4:disclosure_records_procedure",
+    control_ref   = "A.7.5.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "PII Disclosure Recording Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§7.5.4 requires disclosure records covering what, to whom, when, source of authority. Distinct from A.7.5.3 (transfers of PII for continuing processing) — disclosures are more about one-off release under authority.",
+    must_contain  = [
+        ChecklistItem("item:A.7.5.4:proc_normal_disclosures","Normal-course disclosures — recurring disclosures documented per relationship", "must", False, "§7.5.4 — normal operations"),
+        ChecklistItem("item:A.7.5.4:proc_investigation_disclosures","Investigation / audit disclosures — one-off recording of lawful investigation + external audit disclosures", "must", False, "§7.5.4 — lawful investigations or external audits"),
+        ChecklistItem("item:A.7.5.4:proc_authority_source", "Source-of-authority recording per row (contract / law / court order / regulator request)", "must", False, "§7.5.4 — source of the authority"),
+        ChecklistItem("item:A.7.5.4:proc_intake_gate",       "Intake gate — disclosures gated on documented request record before release", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.5.4:proc_retention_link",    "Retention link to A.7.4.7", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.4:proc_owner",             "Named owner (DPO + Legal)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_A754_DISCLOSURE_LOG = EvidenceRequirement(
+    id            = "req:A.7.5.4:disclosure_event_log",
+    control_ref   = "A.7.5.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "PII Disclosure Event Log",
+    trigger_type  = "profile_fact",
+    description   = "Per-disclosure-event row — every disclosure with recipient, PII scope, timing, source of authority. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.5.4:reg_disclosure_id",      "Unique disclosure identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:A.7.5.4:reg_recipient",          "Recipient identity per row", "must", False, "§7.5.4 — to whom"),
+        ChecklistItem("item:A.7.5.4:reg_pii_scope",          "PII scope per row (what was disclosed)", "must", False, "§7.5.4 — what PII"),
+        ChecklistItem("item:A.7.5.4:reg_timestamp",          "Timestamp per row", "must", False, "§7.5.4 — at what time"),
+        ChecklistItem("item:A.7.5.4:reg_source_of_authority","Source of authority per row (statute / contract / court order / customer instruction)", "must", False, "§7.5.4 — source of authority"),
+        ChecklistItem("item:A.7.5.4:reg_source_of_disclosure","Internal source of disclosure per row (which team / system released the data)", "must", False, "§7.5.4 — source of the disclosure"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.4:reg_customer_notification","Customer notification flag per row if the disclosure involved customer PII (link to B.8.5.4)", "should", False, "Integration"),
+    ],
+)
+
+REQ_A754_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:A.7.5.4:applicable_scope",
+    control_ref   = "A.7.5.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Disclosure Contexts Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — every context where PII is disclosed to a third party (normal course + investigation + audit + subpoena / court order).",
+    must_contain  = [
+        ChecklistItem("item:A.7.5.4:scope_normal_disclosures","Normal-course disclosures enumerated (recurring integrations)", "must", False, "Coverage"),
+        ChecklistItem("item:A.7.5.4:scope_investigation",    "Investigation contexts (internal + external law enforcement)", "must", False, "§7.5.4 — lawful investigations"),
+        ChecklistItem("item:A.7.5.4:scope_audit",            "External audit disclosures (regulatory + customer audits)", "must", False, "§7.5.4 — external audits"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.4:scope_change_drivers",   "Trigger list (new integration / new regulator inquiry)", "should", False, "Currency"),
+    ],
+)
+
+REQ_A754_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:A.7.5.4:program_review",
+    control_ref   = "A.7.5.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Disclosure Records Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — disclosures captured, source-of-authority documented per row, intake-gate functional (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:A.7.5.4:rev_date",               "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:A.7.5.4:rev_reviewer",           "Reviewer identity (DPO + Legal)", "must", False, "Accountability"),
+        ChecklistItem("item:A.7.5.4:rev_completeness",       "Completeness check — investigation + audit disclosures reconciled", "must", False, "§7.5.4"),
+        ChecklistItem("item:A.7.5.4:rev_authority_audit",    "Authority audit — sampled disclosures reviewed for documented authority", "must", False, "§7.5.4 — source of authority"),
+    ],
+    should_contain= [
+        ChecklistItem("item:A.7.5.4:rev_next_date",          "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.5.1 Basis for PII transfer between jurisdictions (processor) ─────────
+# §8.5.1: Processor should inform the customer in a timely manner of the
+# basis for PII transfers between jurisdictions + any intended changes.
+# Customer can object or terminate. Bridges to GDPR Chap V + Art.28.
+
+REQ_B851_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.5.1:transfer_basis_procedure",
+    control_ref   = "B.8.5.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Processor Cross-Jurisdiction Transfer Basis Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.5.1 requires the processor to inform the customer of transfer basis + any changes in advance so the customer can object or terminate. Covers subprocessor destinations + international transfers.",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.1:proc_basis_documentation","Compliance basis documented per transfer relationship (SCC / BCR / CBPR / adequacy)", "must", False, "§8.5.1 — document compliance"),
+        ChecklistItem("item:B.8.5.1:proc_customer_information","Customer information — transfer arrangements (suppliers, other parties, other countries) disclosed", "must", False, "§8.5.1 — inform the customer"),
+        ChecklistItem("item:B.8.5.1:proc_advance_notification","Advance notification of changes with agreed timeframe (customer can object / terminate)", "must", False, "§8.5.1 — inform the customer in advance"),
+        ChecklistItem("item:B.8.5.1:proc_carve_out_limits",  "Carve-out limits — where contract permits changes without notification (e.g. supplier swaps within same country), limits explicit", "must", False, "§8.5.1 — limits of allowance"),
+        ChecklistItem("item:B.8.5.1:proc_international_agreements","International-transfer agreement types identified (Model Contract Clauses / BCRs / CBPRs) per relevant country pair", "must", False, "§8.5.1 — Model Contract Clauses, Binding Corporate Rules or Cross Border Privacy Rules"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.1:proc_owner",             "Named owner (DPO + Legal + Trust)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B851_TRANSFER_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.5.1:transfer_basis_register",
+    control_ref   = "B.8.5.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Processor Transfer Basis Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-transfer-relationship row — every cross-jurisdiction transfer (including via subprocessors) with basis + customer-disclosure status. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.1:reg_relationship_id",    "Unique transfer relationship identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:B.8.5.1:reg_jurisdiction_pair",  "Origin + destination jurisdiction per row", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.5.1:reg_basis",              "Basis cited per row (Art.45/46/47/49 or equivalent)", "must", False, "§8.5.1"),
+        ChecklistItem("item:B.8.5.1:reg_customer_notification_date","Customer notification date per row", "must", False, "§8.5.1 — inform customer"),
+        ChecklistItem("item:B.8.5.1:reg_change_history",     "Change history per row (all previous bases + notification dates)", "must", False, "§8.5.1 — inform in advance"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.1:reg_customer_ack",       "Customer acknowledgement per row", "should", False, "Confirmation"),
+    ],
+)
+
+REQ_B851_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.5.1:applicable_scope",
+    control_ref   = "B.8.5.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Processor Transfer Scope",
+    trigger_type  = "profile_fact",
+    description   = "The upstream — every cross-jurisdiction customer PII flow (direct + via subprocessors + via support access from other regions).",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.1:scope_direct_transfers", "Direct customer-PII transfers (multi-region cloud / backup + DR)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.5.1:scope_subprocessor_transfers","Subprocessor-driven transfers (data flowing to subprocessor regions)", "must", False, "§8.5.1 — suppliers"),
+        ChecklistItem("item:B.8.5.1:scope_support_access",   "Support-access transfers (support engineers in different regions accessing customer PII)", "must", False, "Coverage"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.1:scope_change_drivers",   "Trigger list (new region / new subprocessor)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B851_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.5.1:program_review",
+    control_ref   = "B.8.5.1",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Processor Transfer Basis Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — customer notifications timely, change-advance notification honoured, basis currency intact (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.1:rev_date",               "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.5.1:rev_reviewer",           "Reviewer identity (DPO + Legal + Trust)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.5.1:rev_notification_audit", "Notification audit — advance-notification obligations verified for all changes since last review", "must", False, "§8.5.1 — inform in advance"),
+        ChecklistItem("item:B.8.5.1:rev_basis_currency",     "Basis currency — Art.45 adequacy currency + Art.46 SCC version currency", "must", False, "Post-Schrems compliance"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.1:rev_next_date",          "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.5.2 Countries + international orgs (processor side) ──────────────────
+# §8.5.2: Same as §7.5.2 from processor side.
+
+REQ_B852_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.5.2:destinations_procedure",
+    control_ref   = "B.8.5.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Processor Transfer Destinations Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.5.2 mirrors §7.5.2 from processor side — list of destinations for customer PII made available to customers.",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.2:proc_destinations_publication","Destinations publication per customer (customer receives the list of countries + international orgs)", "must", False, "§8.5.2 — available to customers"),
+        ChecklistItem("item:B.8.5.2:proc_subprocessor_inclusion","Subprocessor-derived destinations included", "must", False, "§8.5.2 — subcontracted PII processing"),
+        ChecklistItem("item:B.8.5.2:proc_law_enforcement_exception","Law enforcement exception handled per §8.5.4 + §8.5.5", "must", False, "§8.5.2 — cannot be specified in advance"),
+        ChecklistItem("item:B.8.5.2:proc_alignment_8_5_1",   "Alignment with B.8.5.1 basis register", "must", False, "§8.5.2 — considered in relation to 8.5.1"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.2:proc_owner",             "Named owner (Trust + DPO)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B852_DESTINATIONS_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.5.2:destinations_register",
+    control_ref   = "B.8.5.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Processor Transfer Destinations Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-destination row — countries + international orgs where customer PII may be processed. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.2:reg_destination_id",     "Destination identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:B.8.5.2:reg_role",               "Role per row (direct storage / subprocessor / support access)", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.5.2:reg_customer_disclosure","Customer disclosure status per row (published in DPA schedule / trust page / on request)", "must", False, "§8.5.2 — available to customers"),
+        ChecklistItem("item:B.8.5.2:reg_basis_link",         "Basis link per row (link to B.8.5.1)", "must", False, "§8.5.2 — 8.5.1 alignment"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.2:reg_subprocessor_link",  "Subprocessor link per row where destination is via a subprocessor", "should", False, "§8.5.2 — subcontracted"),
+    ],
+)
+
+REQ_B852_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.5.2:applicable_scope",
+    control_ref   = "B.8.5.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Processor Destinations Scope",
+    trigger_type  = "profile_fact",
+    description   = "Every jurisdiction where customer PII is processed (direct / subprocessor / support). Excludes law-enforcement-request destinations (handled via §8.5.4 + §8.5.5).",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.2:scope_normal",           "Normal-operations destinations enumerated", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.5.2:scope_law_enforcement",  "Law-enforcement exception handling documented", "must", False, "§8.5.2 — cannot be specified in advance"),
+        ChecklistItem("item:B.8.5.2:scope_support",          "Support-access destinations (where support engineers in other regions can access customer PII)", "must", False, "Comprehensiveness"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.2:scope_change_drivers",   "Trigger list (new region / new subprocessor)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B852_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.5.2:program_review",
+    control_ref   = "B.8.5.2",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Processor Destinations Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — destinations register + customer disclosures + subprocessor destinations aligned (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.2:rev_date",               "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.5.2:rev_reviewer",           "Reviewer identity (Trust + DPO)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.5.2:rev_completeness",       "Completeness check — actual customer-PII flows reconciled against register", "must", False, "§8.5.2"),
+        ChecklistItem("item:B.8.5.2:rev_disclosure_sync",    "Customer-facing disclosure sync (DPA schedule / trust page / on-request material matches register)", "must", False, "§8.5.2 — available to customers"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.2:rev_next_date",          "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.5.3 Records of PII disclosure to third parties (processor) ───────────
+# §8.5.3: Same as §7.5.4 from processor side.
+
+REQ_B853_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.5.3:disclosure_records_procedure",
+    control_ref   = "B.8.5.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Processor Disclosure Recording Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.5.3 mirrors §7.5.4 for processor — records disclosures of PII to third parties with what/whom/when + source of authority.",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.3:proc_normal_disclosures","Normal-course disclosures recorded", "must", False, "§8.5.3 — normal operations"),
+        ChecklistItem("item:B.8.5.3:proc_investigation_audit","Investigation + external audit disclosures also recorded", "must", False, "§8.5.3 — lawful investigations or external audits"),
+        ChecklistItem("item:B.8.5.3:proc_authority_source",  "Source of authority captured per disclosure", "must", False, "§8.5.3 — source of authority"),
+        ChecklistItem("item:B.8.5.3:proc_source_of_disclosure","Internal source (which team/system released data) captured", "must", False, "§8.5.3 — source of disclosure"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.3:proc_owner",             "Named owner (DPO + Trust + Legal)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B853_DISCLOSURE_LOG = EvidenceRequirement(
+    id            = "req:B.8.5.3:disclosure_event_log",
+    control_ref   = "B.8.5.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Processor Disclosure Event Log",
+    trigger_type  = "profile_fact",
+    description   = "Per-disclosure row — processor-side. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.3:reg_disclosure_id",      "Unique disclosure identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:B.8.5.3:reg_customer",           "Customer whose PII was disclosed per row", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.5.3:reg_recipient",          "Recipient per row", "must", False, "§8.5.3 — to whom"),
+        ChecklistItem("item:B.8.5.3:reg_timestamp",          "Timestamp per row", "must", False, "§8.5.3 — when"),
+        ChecklistItem("item:B.8.5.3:reg_source_of_authority","Source of authority per row", "must", False, "§8.5.3 — source of authority"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.3:reg_customer_notified",  "Customer notification flag per row (link to B.8.5.4 if legally-binding request)", "should", False, "Integration"),
+    ],
+)
+
+REQ_B853_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.5.3:applicable_scope",
+    control_ref   = "B.8.5.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Processor Disclosure Scope",
+    trigger_type  = "profile_fact",
+    description   = "Every context where customer PII is disclosed to a third party by the processor.",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.3:scope_normal_disclosures","Normal-course disclosures enumerated", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.5.3:scope_investigation",    "Investigation contexts", "must", False, "§8.5.3"),
+        ChecklistItem("item:B.8.5.3:scope_audit",            "External audit disclosures", "must", False, "§8.5.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.3:scope_change_drivers",   "Trigger list (new integration / new regulator inquiry)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B853_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.5.3:program_review",
+    control_ref   = "B.8.5.3",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Processor Disclosure Records Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — disclosures captured, authority documented (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.3:rev_date",               "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.5.3:rev_reviewer",           "Reviewer identity (DPO + Legal)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.5.3:rev_completeness",       "Completeness check", "must", False, "§8.5.3"),
+        ChecklistItem("item:B.8.5.3:rev_authority_audit",    "Authority audit — sampled disclosures", "must", False, "§8.5.3"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.3:rev_next_date",          "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.5.4 Notification of PII disclosure requests ──────────────────────────
+# §8.5.4: The organization shall notify the customer of any legally-binding
+# requests for PII disclosure. GDPR Art.28.3.a documented instructions.
+
+REQ_B854_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.5.4:notification_procedure",
+    control_ref   = "B.8.5.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Legally-Binding Disclosure Request Notification Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.5.4 requires the processor to notify the customer of legally-binding disclosure requests within agreed timeframes + agreed procedure. Handles gag-order exception.",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.4:proc_request_intake",    "Request intake path — law-enforcement / regulator / court requests routed to Legal", "must", False, "§8.5.4 — legally binding requests"),
+        ChecklistItem("item:B.8.5.4:proc_timeframe",         "Agreed timeframe per customer contract (typically 24-72h)", "must", False, "§8.5.4 — agreed timeframes"),
+        ChecklistItem("item:B.8.5.4:proc_notification_format","Notification format (contract-specified content — request source + PII scope + response deadline)", "must", False, "§8.5.4 — agreed procedure"),
+        ChecklistItem("item:B.8.5.4:proc_gag_order_exception","Gag-order exception — where notification prohibited by law, notification suppressed with legal-hold record retained for post-order disclosure", "must", False, "§8.5.4 — prohibition on disclosure"),
+        ChecklistItem("item:B.8.5.4:proc_legal_review",      "Legal counsel reviews every request before response", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.4:proc_owner",             "Named owner (Legal + DPO)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B854_REQUEST_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.5.4:disclosure_request_register",
+    control_ref   = "B.8.5.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Legally-Binding Disclosure Request Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-request row — every legally-binding disclosure request received. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.4:reg_request_id",         "Unique request identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:B.8.5.4:reg_requester",          "Requesting authority per row (law enforcement / regulator / court)", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.5.4:reg_customer_affected",  "Customer(s) whose PII was targeted per row", "must", False, "Scope"),
+        ChecklistItem("item:B.8.5.4:reg_customer_notification","Customer notification date per row (or gag-order flag)", "must", False, "§8.5.4 — notify customer"),
+        ChecklistItem("item:B.8.5.4:reg_response_outcome",   "Response outcome per row (data disclosed / request rejected / partial)", "must", False, "Audit trail"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.4:reg_legal_review",       "Legal counsel signoff per row", "should", False, "Defensibility"),
+    ],
+)
+
+REQ_B854_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.5.4:applicable_scope",
+    control_ref   = "B.8.5.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Legally-Binding Request Scope",
+    trigger_type  = "profile_fact",
+    description   = "Every legally-binding disclosure request (subpoenas, court orders, regulator inquiries with power to compel, national security letters).",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.4:scope_request_types",    "Request types enumerated (subpoena / court order / national security letter / regulator compulsion)", "must", False, "§8.5.4"),
+        ChecklistItem("item:B.8.5.4:scope_jurisdictions",    "Jurisdictions where the org may receive legally-binding requests", "must", False, "§8.5.4 — arise from any jurisdiction"),
+        ChecklistItem("item:B.8.5.4:scope_gag_order_scope",  "Gag-order-capable jurisdictions (where law can prohibit notification)", "must", False, "§8.5.4 — prohibition on disclosure"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.4:scope_change_drivers",   "Trigger list (new jurisdiction / new regulatory framework)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B854_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.5.4:program_review",
+    control_ref   = "B.8.5.4",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Disclosure Request Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — notifications timely, legal review consistent, gag-order compliance defensible (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.4:rev_date",               "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.5.4:rev_reviewer",           "Reviewer identity (Legal + DPO)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.5.4:rev_timeframe_audit",    "Timeframe audit — notifications within agreed timeframes", "must", False, "§8.5.4"),
+        ChecklistItem("item:B.8.5.4:rev_gag_order_audit",    "Gag-order audit — invocations defensible + post-order notifications issued when possible", "must", False, "§8.5.4"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.4:rev_next_date",          "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.5.5 Legally binding PII disclosures ──────────────────────────────────
+# §8.5.5: The organization shall reject any requests for PII disclosures
+# that are not legally binding + consult the corresponding customer + accept
+# only contractually agreed customer-authorised requests.
+
+REQ_B855_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.5.5:disclosure_decision_procedure",
+    control_ref   = "B.8.5.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Disclosure Decision Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.5.5 requires the org to reject non-legally-binding requests + consult customer + accept only customer-authorised requests. Distinct from B.8.5.4 which is about notification of a compulsory request.",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.5:proc_binding_assessment","Binding-vs-not assessment — legal counsel classifies every incoming request", "must", False, "§8.5.5 — legally binding"),
+        ChecklistItem("item:B.8.5.5:proc_default_reject",    "Default reject rule — non-binding disclosure requests rejected", "must", False, "§8.5.5 — reject any requests that are not legally binding"),
+        ChecklistItem("item:B.8.5.5:proc_customer_consultation","Customer consultation before disclosure of contractually-agreed requests", "must", False, "§8.5.5 — consult customer"),
+        ChecklistItem("item:B.8.5.5:proc_contractual_scope", "Contractually-agreed scope — what customer-authorised requests look like (per B.8.2.1 agreement clauses)", "must", False, "§8.5.5 — contractually agreed"),
+        ChecklistItem("item:B.8.5.5:proc_source_variety",    "Source variety awareness — courts, tribunals, admin authorities, any jurisdiction", "must", False, "§8.5.5 implementation — sources"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.5:proc_owner",             "Named owner (Legal + Trust)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B855_DECISION_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.5.5:disclosure_decision_register",
+    control_ref   = "B.8.5.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Disclosure Decision Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-decision row — every disclosure request evaluated (accept + reject) with rationale. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.5:reg_decision_id",        "Unique decision identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:B.8.5.5:reg_request_source",     "Request source per row", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.5.5:reg_binding_classification","Binding classification per row (legally binding / not binding)", "must", False, "§8.5.5"),
+        ChecklistItem("item:B.8.5.5:reg_outcome",            "Outcome per row (rejected / accepted / customer-consulted)", "must", False, "§8.5.5"),
+        ChecklistItem("item:B.8.5.5:reg_customer_authorisation","Customer authorisation reference per row (contract clause / one-off approval)", "must", False, "§8.5.5 — customer-authorised"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.5:reg_legal_review",       "Legal counsel signoff per row", "should", False, "Defensibility"),
+    ],
+)
+
+REQ_B855_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.5.5:applicable_scope",
+    control_ref   = "B.8.5.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Disclosure Decision Scope",
+    trigger_type  = "profile_fact",
+    description   = "Every disclosure request the org receives requiring a decision — legally-binding, customer-authorised, or reject-by-default.",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.5:scope_request_types",    "Request types requiring decision (legal request / third-party request / journalist request / marketing lead-gen request)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.5.5:scope_authorisation_paths","Customer authorisation paths (contract clause / one-off approval / DPA schedule)", "must", False, "§8.5.5 — contractually agreed"),
+        ChecklistItem("item:B.8.5.5:scope_default_reject",   "Default reject scope (informal / social-engineering / marketing requests)", "must", False, "§8.5.5 — reject"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.5:scope_change_drivers",   "Trigger list (new request type / new contract clause)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B855_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.5.5:program_review",
+    control_ref   = "B.8.5.5",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Disclosure Decision Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — binding classifications defensible, customer consultations happen, rejects sustained (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.5:rev_date",               "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.5.5:rev_reviewer",           "Reviewer identity (Legal + Trust + DPO)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.5.5:rev_classification_audit","Classification audit — sampled decisions reviewed for correctness", "must", False, "§8.5.5"),
+        ChecklistItem("item:B.8.5.5:rev_consultation_audit", "Consultation audit — customer-consultation happened before disclosure", "must", False, "§8.5.5 — consult customer"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.5:rev_next_date",          "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.5.6 Disclosure of subcontractors used to process PII ─────────────────
+# §8.5.6: The organization shall disclose any use of subcontractors to
+# process PII to the customer BEFORE use. GDPR Art.28.2 + Art.28.4.
+
+REQ_B856_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.5.6:subcontractor_disclosure_procedure",
+    control_ref   = "B.8.5.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Subcontractor Disclosure Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.5.6 requires disclosure of subcontractors used for PII processing to the customer BEFORE use. Covers the disclosure content (identity + countries + obligations mechanism) + NDA/on-request path for sensitive cases.",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.6:proc_pre_use_disclosure","Pre-use disclosure — customer informed before subcontractor onboards", "must", False, "§8.5.6 — before use"),
+        ChecklistItem("item:B.8.5.6:proc_disclosure_content","Disclosure content (subcontractor identity + countries + international orgs + obligations mechanism)", "must", False, "§8.5.6 implementation"),
+        ChecklistItem("item:B.8.5.6:proc_nda_path",          "NDA path — where public disclosure raises security risk, disclosure under NDA + on customer request", "must", False, "§8.5.6 — non-disclosure agreement"),
+        ChecklistItem("item:B.8.5.6:proc_countries_always_public","Countries list always public — per §8.5.6 last paragraph, the destination country list is disclosed in all cases", "must", False, "§8.5.6 — list should be disclosed in all cases"),
+        ChecklistItem("item:B.8.5.6:proc_customer_contract_link","Customer contract link — subcontracting provisions in the B.8.2.1 agreement", "must", False, "§8.5.6 implementation — customer contract"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.6:proc_owner",             "Named owner (Trust + Legal)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B856_DISCLOSURE_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.5.6:subcontractor_disclosure_register",
+    control_ref   = "B.8.5.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Subcontractor Disclosure Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-subcontractor-per-customer row — the audit trail of subcontractor disclosures. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.6:reg_subcontractor_id",   "Subcontractor identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:B.8.5.6:reg_customer_id",        "Customer per row", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.5.6:reg_disclosure_date",    "Disclosure date per row (pre-use)", "must", False, "§8.5.6 — before use"),
+        ChecklistItem("item:B.8.5.6:reg_countries",          "Countries + international orgs disclosed per row", "must", False, "§8.5.6 — countries"),
+        ChecklistItem("item:B.8.5.6:reg_disclosure_mode",    "Disclosure mode per row (public trust page / DPA schedule / NDA + on-request)", "must", False, "§8.5.6"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.6:reg_customer_ack",       "Customer acknowledgement per row", "should", False, "Confirmation"),
+    ],
+)
+
+REQ_B856_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.5.6:applicable_scope",
+    control_ref   = "B.8.5.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Subcontractor Scope",
+    trigger_type  = "profile_fact",
+    description   = "Every subcontractor that processes customer PII on the processor's behalf. Excludes suppliers who do not touch customer PII.",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.6:scope_pii_processing_test","PII-processing test per supplier (does the supplier touch customer PII?)", "must", False, "§8.5.6 — process PII"),
+        ChecklistItem("item:B.8.5.6:scope_subcontractor_list","In-scope subcontractors enumerated", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.5.6:scope_exclusions",       "Excluded suppliers (no PII contact) with rationale", "must", False, "Defensibility"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.6:scope_change_drivers",   "Trigger list (new supplier onboarding / supplier scope change)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B856_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.5.6:program_review",
+    control_ref   = "B.8.5.6",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Subcontractor Disclosure Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — pre-use disclosure honoured, disclosure content complete, NDA path used appropriately (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.6:rev_date",               "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.5.6:rev_reviewer",           "Reviewer identity (Trust + Legal + DPO)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.5.6:rev_pre_use_audit",      "Pre-use audit — sampled subcontractor onboardings verified against disclosure record", "must", False, "§8.5.6 — before use"),
+        ChecklistItem("item:B.8.5.6:rev_content_audit",      "Content audit — sampled disclosures include countries + obligations mechanism", "must", False, "§8.5.6 implementation"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.6:rev_next_date",          "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.5.7 Engagement of a subcontractor to process PII ─────────────────────
+# §8.5.7: The organization shall only engage a subcontractor to process PII
+# according to the customer contract. GDPR Art.28.2 + Art.28.3.d flow-down.
+
+REQ_B857_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.5.7:subcontractor_engagement_procedure",
+    control_ref   = "B.8.5.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Subcontractor Engagement Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.5.7 requires customer authorisation prior to subcontracting + written contract with subcontractor implementing Annex B controls (flow-down).",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.7:proc_customer_authorisation","Customer written authorisation prior to processing (Art.28.2 general or specific authorisation)", "must", False, "§8.5.7 — written authorization"),
+        ChecklistItem("item:B.8.5.7:proc_written_contract",  "Written contract with each subcontractor", "must", False, "§8.5.7 — written contract"),
+        ChecklistItem("item:B.8.5.7:proc_annex_b_flowdown", "Annex B flow-down — subcontractor contract requires Annex B controls (default: all)", "must", False, "§8.5.7 — Annex B controls"),
+        ChecklistItem("item:B.8.5.7:proc_risk_assessment_reflection","Contract scope reflects risk assessment (§5.4.1.2) + subprocessing scope (§6.12)", "must", False, "§8.5.7 — risk assessment + 6.12"),
+        ChecklistItem("item:B.8.5.7:proc_exclusion_justification","Justification for any excluded Annex B control per subcontractor (§5.4.1.3)", "must", False, "§8.5.7 — justify exclusion"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.7:proc_owner",             "Named owner (Procurement + Legal + DPO)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B857_ENGAGEMENT_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.5.7:subcontractor_engagement_register",
+    control_ref   = "B.8.5.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Subcontractor Engagement Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-subcontractor row — the audit trail of authorisation + contract + Annex B coverage. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.7:reg_subcontractor_id",   "Subcontractor identifier per row", "must", False, "Referenceability"),
+        ChecklistItem("item:B.8.5.7:reg_customer_authorisation","Customer authorisation reference per row (general or specific)", "must", False, "§8.5.7 — customer contract"),
+        ChecklistItem("item:B.8.5.7:reg_contract_reference", "Executed contract reference per row", "must", False, "§8.5.7 — written contract"),
+        ChecklistItem("item:B.8.5.7:reg_annex_b_coverage",   "Annex B controls covered per row (all / itemised)", "must", False, "§8.5.7 — Annex B"),
+        ChecklistItem("item:B.8.5.7:reg_engagement_date",    "Engagement effective date per row", "must", False, "Currency"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.7:reg_processing_scope",   "Processing scope per row (what the subcontractor does)", "should", False, "Traceability"),
+    ],
+)
+
+REQ_B857_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.5.7:applicable_scope",
+    control_ref   = "B.8.5.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Engagement Scope",
+    trigger_type  = "profile_fact",
+    description   = "Every new subcontractor engagement that processes customer PII.",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.7:scope_engagement_types", "Engagement types enumerated (SaaS subprocessor / infrastructure provider / support-outsourcing / one-off contractor)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.5.7:scope_authorisation_mode","Authorisation mode per engagement type (general via contract clause / specific per subcontractor)", "must", False, "§8.5.7"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.7:scope_change_drivers",   "Trigger list (new subprocessor category / new business unit)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B857_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.5.7:program_review",
+    control_ref   = "B.8.5.7",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Subcontractor Engagement Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every engagement has customer authorisation + Annex B flow-down (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.7:rev_date",               "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.5.7:rev_reviewer",           "Reviewer identity (Procurement + Legal + DPO)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.5.7:rev_authorisation_audit","Authorisation audit — every engagement traceable to customer authorisation", "must", False, "§8.5.7"),
+        ChecklistItem("item:B.8.5.7:rev_flowdown_audit",     "Flow-down audit — sampled contracts verified against Annex B coverage", "must", False, "§8.5.7 — Annex B"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.7:rev_next_date",          "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ── B.8.5.8 Change of subcontractor to process PII ───────────────────────────
+# §8.5.8: Under general written authorisation, inform the customer of any
+# intended additions or replacements of subcontractors + opportunity to object.
+# GDPR Art.28.2 second sentence.
+
+REQ_B858_PROCEDURE = EvidenceRequirement(
+    id            = "req:B.8.5.8:subcontractor_change_procedure",
+    control_ref   = "B.8.5.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "procedure",
+    title         = "Subcontractor Change Notification Procedure",
+    trigger_type  = "profile_fact",
+    description   = "§8.5.8 requires customer notification of intended subcontractor changes (add or replace) under general written authorisation, with opportunity for customer to object.",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.8:proc_change_trigger",    "Change trigger — every subcontractor addition or replacement triggers notification workflow", "must", False, "§8.5.8 — addition or replacement"),
+        ChecklistItem("item:B.8.5.8:proc_advance_notification","Advance notification with agreed timeframe (opportunity to object)", "must", False, "§8.5.8 — opportunity to object"),
+        ChecklistItem("item:B.8.5.8:proc_objection_handling","Objection handling — customer objection triggers negotiation / termination pathway", "must", False, "§8.5.8"),
+        ChecklistItem("item:B.8.5.8:proc_general_auth_scope","General-authorisation scope — under what contract clause is this procedure valid (versus specific-authorisation cases handled in B.8.5.7)", "must", False, "§8.5.8 — general written authorization"),
+        ChecklistItem("item:B.8.5.8:proc_notification_content","Notification content (new subcontractor identity + countries + Annex B coverage summary)", "must", False, "§8.5.6 alignment"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.8:proc_owner",             "Named owner (Trust + Legal + Procurement)", "should", False, "Accountability"),
+    ],
+)
+
+REQ_B858_CHANGE_REGISTER = EvidenceRequirement(
+    id            = "req:B.8.5.8:subcontractor_change_register",
+    control_ref   = "B.8.5.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "register",
+    title         = "Subcontractor Change Register",
+    trigger_type  = "profile_fact",
+    description   = "Per-change-event row — every subcontractor add / replace with customer notification date + objection status. Annual refresh (freshness=365).",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.8:reg_change_id",          "Unique change identifier per row", "must", False, "Audit trail"),
+        ChecklistItem("item:B.8.5.8:reg_change_type",        "Change type per row (add / replace / remove)", "must", False, "§8.5.8"),
+        ChecklistItem("item:B.8.5.8:reg_notification_date",  "Customer notification date per row", "must", False, "§8.5.8 — inform customer"),
+        ChecklistItem("item:B.8.5.8:reg_effective_date",     "Change effective date per row", "must", False, "Traceability"),
+        ChecklistItem("item:B.8.5.8:reg_objection_status",   "Objection status per row (none / raised / resolved / termination)", "must", False, "§8.5.8 — opportunity to object"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.8:reg_resolution",         "Resolution per row where objection raised", "should", False, "Audit trail"),
+    ],
+)
+
+REQ_B858_APPLICABLE_SCOPE = EvidenceRequirement(
+    id            = "req:B.8.5.8:applicable_scope",
+    control_ref   = "B.8.5.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "scope_note",
+    title         = "Applicable Change Scope",
+    trigger_type  = "profile_fact",
+    description   = "Every subcontractor change under general-authorisation contract clauses. Specific-authorisation cases go via B.8.5.7 fresh engagement.",
+    must_contain  = [
+        ChecklistItem("item:B.8.5.8:scope_general_auth_customers","Customers on general-authorisation contract per row", "must", False, "§8.5.8"),
+        ChecklistItem("item:B.8.5.8:scope_change_types",     "Change types in scope (add / replace / remove)", "must", False, "Coverage"),
+        ChecklistItem("item:B.8.5.8:scope_specific_auth_exclusion","Specific-authorisation customers excluded (they get fresh B.8.5.7 engagement each time)", "must", False, "Classification"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.8:scope_change_drivers",   "Trigger list (subprocessor churn / consolidation)", "should", False, "Currency"),
+    ],
+)
+
+REQ_B858_PROGRAM_REVIEW = EvidenceRequirement(
+    id            = "req:B.8.5.8:program_review",
+    control_ref   = "B.8.5.8",
+    standard_id   = "ISO27701:2019",
+    evidence_type = "review_record",
+    title         = "Subcontractor Change Program Review",
+    trigger_type  = "profile_fact",
+    description   = "Annual verification — every change notified in advance, objections handled defensibly, general-auth scope aligned with contracts (freshness=365)",
+    freshness_days = 365,
+    must_contain  = [
+        ChecklistItem("item:B.8.5.8:rev_date",               "Review date within the planned interval", "must", False, "Periodic"),
+        ChecklistItem("item:B.8.5.8:rev_reviewer",           "Reviewer identity (Trust + Legal)", "must", False, "Accountability"),
+        ChecklistItem("item:B.8.5.8:rev_notification_audit", "Notification audit — sampled changes verified against timeframe", "must", False, "§8.5.8"),
+        ChecklistItem("item:B.8.5.8:rev_objection_audit",    "Objection audit — objection outcomes reviewed for consistency", "must", False, "§8.5.8"),
+    ],
+    should_contain= [
+        ChecklistItem("item:B.8.5.8:rev_next_date",          "Next planned review date stated", "should", False, "Planning"),
+    ],
+)
+
+
+# ==============================================================================
+# End ISO 27701 Batch 3 — 12 anchors × 4 leaves = 48 EvidenceRequirements.
+# PHASE 2 CURATION COMPLETE: 49 anchors / 196 leaves / ~1,100 ChecklistItems.
+# ==============================================================================
+
+
 # ── Annex A.5.23 — InfoSec for use of cloud services — operational_process (4-leaf) ──
 # Promoted 2026-05-31 from single-leaf to multi-leaf per
 # [[curation-program-full-multi-leaf]]. Spine: operational_process → policy
@@ -20349,6 +21374,23 @@ ALL_EVIDENCE_REQUIREMENTS: list[EvidenceRequirement] = [
     REQ_B842_PROCEDURE, REQ_B842_ACTION_REGISTER, REQ_B842_APPLICABLE_SCOPE, REQ_B842_PROGRAM_REVIEW,
     REQ_B843_PROCEDURE, REQ_B843_CHANNEL_INVENTORY, REQ_B843_APPLICABLE_SCOPE, REQ_B843_PROGRAM_REVIEW,
     # ── End ISO 27701 Batch 2 ────────────────────────────────────────────────
+
+    # ── ISO 27701:2019 Batch 3 — PII sharing, transfer + disclosure (12 × 4 = 48 leaves) ──
+    # §A.7.5.x controller (4 × 4 = 16)
+    REQ_A751_PROCEDURE, REQ_A751_TRANSFER_REGISTER, REQ_A751_APPLICABLE_SCOPE, REQ_A751_PROGRAM_REVIEW,
+    REQ_A752_PROCEDURE, REQ_A752_DESTINATIONS_REGISTER, REQ_A752_APPLICABLE_SCOPE, REQ_A752_PROGRAM_REVIEW,
+    REQ_A753_PROCEDURE, REQ_A753_TRANSFER_LOG, REQ_A753_APPLICABLE_SCOPE, REQ_A753_PROGRAM_REVIEW,
+    REQ_A754_PROCEDURE, REQ_A754_DISCLOSURE_LOG, REQ_A754_APPLICABLE_SCOPE, REQ_A754_PROGRAM_REVIEW,
+    # §B.8.5.x processor (8 × 4 = 32)
+    REQ_B851_PROCEDURE, REQ_B851_TRANSFER_REGISTER, REQ_B851_APPLICABLE_SCOPE, REQ_B851_PROGRAM_REVIEW,
+    REQ_B852_PROCEDURE, REQ_B852_DESTINATIONS_REGISTER, REQ_B852_APPLICABLE_SCOPE, REQ_B852_PROGRAM_REVIEW,
+    REQ_B853_PROCEDURE, REQ_B853_DISCLOSURE_LOG, REQ_B853_APPLICABLE_SCOPE, REQ_B853_PROGRAM_REVIEW,
+    REQ_B854_PROCEDURE, REQ_B854_REQUEST_REGISTER, REQ_B854_APPLICABLE_SCOPE, REQ_B854_PROGRAM_REVIEW,
+    REQ_B855_PROCEDURE, REQ_B855_DECISION_REGISTER, REQ_B855_APPLICABLE_SCOPE, REQ_B855_PROGRAM_REVIEW,
+    REQ_B856_PROCEDURE, REQ_B856_DISCLOSURE_REGISTER, REQ_B856_APPLICABLE_SCOPE, REQ_B856_PROGRAM_REVIEW,
+    REQ_B857_PROCEDURE, REQ_B857_ENGAGEMENT_REGISTER, REQ_B857_APPLICABLE_SCOPE, REQ_B857_PROGRAM_REVIEW,
+    REQ_B858_PROCEDURE, REQ_B858_CHANGE_REGISTER, REQ_B858_APPLICABLE_SCOPE, REQ_B858_PROGRAM_REVIEW,
+    # ── End ISO 27701 Batch 3 (PHASE 2 CURATION COMPLETE) ────────────────────
 ]
 
 
