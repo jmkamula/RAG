@@ -2560,8 +2560,14 @@ function renderEvidenceClassesPanel(b) {
     // Per-leaf line(s): show sources + template flag
     let leafLines = '';
     for (const leaf of (cls.leaves || [])) {
+      // Filenames rendered as inline monospace tokens with a light
+      // background so they visually separate from surrounding prose
+      // (was: bare comma-joined text that read as part of the sentence).
+      const fileStyle = 'font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;'
+                      + 'font-size:10px;background:#FAF8F2;border:1px solid #E8E5DA;'
+                      + 'border-radius:3px;padding:0 4px;color:#3A382E;white-space:nowrap';
       const sources = (leaf.source_documents && leaf.source_documents.length)
-        ? leaf.source_documents.map(esc).join(', ')
+        ? leaf.source_documents.map(d => `<span style="${fileStyle}">${esc(d)}</span>`).join(' ')
         : '<span style="color:#9C9A8E;font-style:italic">not yet evidenced</span>';
       // Native-format downloads: tabular leaves → .xlsx (Register +
       // Guidance sheets); narrative leaves → .docx (Word with proper
@@ -2593,7 +2599,15 @@ function renderEvidenceClassesPanel(b) {
                        📦 Evidence Package
                      </button>`;
       }
-      leafLines += `<div style="font-size:11px;color:#5C5A4F;margin-top:2px;padding-left:18px">
+      // Cite-model tooltip (loose end #9 → tooltip form): document-shaped
+      // leaves don't accept external citations because the artefact IS
+      // the evidence. Explanation now discoverable via hover on the row
+      // rather than an always-visible italic line.
+      const rowTitle = !leaf.cite_acceptable
+        ? 'Upload only — this artefact is the evidence. External citations aren’t available for document-shaped leaves like policies and procedures.'
+        : '';
+      leafLines += `<div style="font-size:11px;color:#5C5A4F;margin-top:2px;padding-left:18px"
+                         ${rowTitle ? `title="${attr(rowTitle)}"` : ''}>
         ${esc(leaf.leaf_label)} · ${leaf.musts_bound}/${leaf.musts_total} covered · from: ${sources}${tplBadge}
       </div>`;
 
@@ -2651,17 +2665,11 @@ function renderEvidenceClassesPanel(b) {
             ↗ Cite external source
           </button>
         </div>`;
-      } else {
-        // No cite lane for document-shaped artefacts (policy / procedure /
-        // plan / matrix). A policy IS the evidence — pointing at an
-        // external system doesn't substitute for the document itself.
-        // Explain the absence so tenants don't wonder why cite is
-        // available on some leaves but not others (loose end #9).
-        leafLines += `<div style="font-size:10px;color:#9C9A8E;margin-top:3px;padding-left:34px;font-style:italic"
-                           title="Cite-external is available for register + record shapes where the source of truth may live in an external system. A policy or procedure is itself the artefact — upload the document to satisfy this leaf.">
-          Upload only — this artefact <em>is</em> the evidence.
-        </div>`;
       }
+      // Note: the "upload-only" explanation that previously rendered as
+      // an italic line here is now a tooltip on the leaf-row div above
+      // (loose end #9 revised 2026-07-04). Discoverable via hover;
+      // avoids stacking two italic hints under every non-cite leaf.
     }
 
     rows += `<div class="ec-row" data-evtype="${attr(cls.evidence_type)}"
