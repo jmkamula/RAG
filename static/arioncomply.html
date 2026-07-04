@@ -1932,13 +1932,15 @@ async function selectHeatCell(c, ev) {
     })
     .catch(() => { /* ref-only fallback is fine */ });
   document.getElementById('dp-sys-wrap').style.display = 'none';
-  // Confirmation status + engine state in the meta footer.
-  const bits = [];
-  if (c.confirmation_status) bits.push(`Confirmation: ${c.confirmation_status}`);
-  if (c.engine_proposal_status && c.engine_proposal_status !== 'none') {
-    bits.push(`Engine: ${c.engine_proposal_status}${c.engine_proposed_finding?` (→ ${c.engine_proposed_finding})`:''}`);
-  }
-  document.getElementById('dp-meta').textContent = bits.join(' · ') || '—';
+  // Details footer hidden on dashboard mode — the evidence tree already
+  // shows confirmation state via ✓/◐/✗ markers, and pending engine
+  // proposals surface through the dedicated Stage-2 queue mode. The
+  // Details section stays in the DOM so Stage-1 (batch-approval count)
+  // and Stage-2 (proposal timestamp + reason) modes can still populate
+  // it — just cleared + hidden here.
+  document.getElementById('dp-meta').textContent = '';
+  const dpMetaWrap = document.getElementById('dp-meta').closest('.dl');
+  if (dpMetaWrap) dpMetaWrap.style.display = 'none';
 
   configureDashboardActions(c);
 
@@ -2374,6 +2376,10 @@ async function selectStage1(c, ev) {
   document.getElementById('dp-sys-wrap').style.display = 'none';
   document.getElementById('dp-gap').innerHTML = '<i class="ti ti-loader-2"></i> Loading…';
   document.getElementById('dp-meta').textContent = '—';
+  // Show the Details section on Stage-1 (batch-approval count is
+  // populated below in the async fetch).
+  const dpMetaWrapS1 = document.getElementById('dp-meta').closest('.dl');
+  if (dpMetaWrapS1) dpMetaWrapS1.style.display = '';
 
   // Configure action panel for Stage 1
   configureActionPanel('s1');
@@ -3585,6 +3591,9 @@ async function selectStage2(p, ev) {
      <div style="margin-top:10px"><i class="ti ti-loader-2"></i> Loading details…</div>`;
   document.getElementById('dp-meta').textContent =
     `Proposed at: ${p.proposed_at ? new Date(p.proposed_at).toLocaleString() : '—'}`;
+  // Show the Details section on Stage-2 (proposal timestamp + reason).
+  const dpMetaWrapS2 = document.getElementById('dp-meta').closest('.dl');
+  if (dpMetaWrapS2) dpMetaWrapS2.style.display = '';
 
   configureActionPanel('s2');
   document.querySelectorAll('.qcard').forEach(el => el.classList.remove('active'));
