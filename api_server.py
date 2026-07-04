@@ -3173,10 +3173,12 @@ async def admin_uploads_quality(
 
 @app.post("/api/v1/admin/uploads/{upload_id}/reextract", tags=["admin"])
 async def admin_reextract_upload(
-    upload_id:        str,
-    request:          Request,
-    background_tasks: BackgroundTasks,
-    key_info:         APIKeyInfo = Depends(require_api_key),
+    upload_id:              str,
+    request:                Request,
+    background_tasks:       BackgroundTasks,
+    declared_standard_id:   Optional[str] = Form(None),
+    declared_evidence_type: Optional[str] = Form(None),
+    key_info:               APIKeyInfo    = Depends(require_api_key),
 ):
     """Re-run extraction on an existing upload without requiring re-upload
     of bytes. Use when an extractor improvement ships (filter, prompt,
@@ -3207,7 +3209,8 @@ async def admin_reextract_upload(
         with conn.cursor() as cur:
             cur.execute(
                 """
-                SELECT id, filename, storage_path, extraction_status
+                SELECT id, filename, storage_path, extraction_status,
+                       doc_type, standard_ids
                   FROM document_uploads
                  WHERE id        = %s::uuid
                    AND tenant_id = %s::uuid
@@ -3220,7 +3223,7 @@ async def admin_reextract_upload(
 
     if not row:
         raise HTTPException(404, "We couldn't find that upload for your tenant.")
-    existing_id, filename, storage_path, status = row
+    existing_id, filename, storage_path, status, stored_type, stored_stds = row
     if status == "duplicate":
         raise HTTPException(
             400,
@@ -3234,16 +3237,69 @@ async def admin_reextract_upload(
             "can't re-run extraction. Please upload the file again.",
         )
 
+    # Resolve declared hints for the re-run:
+    #   1. Form-field values from the current click (tenant just picked
+    #      the framework/type in the dropdowns and re-clicked)
+    #   2. Fall back to whatever was stored on the original upload row
+    #   3. If neither, pipeline reverts to keyword detection
+    # "multi" resolves against the current tenant scope at request time.
+    _hint_stds: Optional[list[str]] = None
+    if declared_standard_id and declared_standard_id not in ("", "auto"):
+        if declared_standard_id == "multi":
+            from rag.scope_loader import load_tenant_scope
+            _c = pool.getconn()
+            try:
+                set_session(_c, key_info.tenant_id, key_info.user_id)
+                _scope = load_tenant_scope(_c, key_info.tenant_id)
+                seen = set()
+                _hint_stds = []
+                for sid in _scope.queryable_standards:
+                    if sid not in seen:
+                        seen.add(sid)
+                        _hint_stds.append(sid)
+                if not _hint_stds:
+                    _hint_stds = None
+            finally:
+                pool.putconn(_c)
+        else:
+            _hint_stds = [declared_standard_id]
+    elif stored_stds:
+        _hint_stds = list(stored_stds)
+
+    _hint_evtype = declared_evidence_type if (declared_evidence_type and declared_evidence_type not in ("", "auto")) else (stored_type or None)
+
+    # If tenant just supplied new hints, persist so a future re-run inherits.
+    if (declared_standard_id and declared_standard_id not in ("", "auto")) or (declared_evidence_type and declared_evidence_type not in ("", "auto")):
+        _c = pool.getconn()
+        try:
+            set_session(_c, key_info.tenant_id, key_info.user_id)
+            with _c.cursor() as _cur:
+                _cur.execute(
+                    """UPDATE document_uploads
+                          SET doc_type     = COALESCE(%s, doc_type),
+                              standard_ids = COALESCE(%s, standard_ids)
+                        WHERE id = %s::uuid""",
+                    (_hint_evtype, _hint_stds, upload_id),
+                )
+                _c.commit()
+        except Exception as e:
+            _c.rollback()
+            logger.warning(f"document_uploads reextract-hint update failed: {e}")
+        finally:
+            pool.putconn(_c)
+
     api_key = os.getenv("ANTHROPIC_API_KEY", "")
     background_tasks.add_task(
         _run_pipeline,
-        file_path         = storage_path,
-        tenant_id         = key_info.tenant_id,
-        upload_id         = upload_id,
-        db_url            = DATABASE_URL,
-        api_key           = api_key,
-        original_filename = filename,
-        user_id           = key_info.user_id,
+        file_path              = storage_path,
+        tenant_id              = key_info.tenant_id,
+        upload_id              = upload_id,
+        db_url                 = DATABASE_URL,
+        api_key                = api_key,
+        original_filename      = filename,
+        user_id                = key_info.user_id,
+        declared_standard_ids  = _hint_stds,
+        declared_evidence_type = _hint_evtype,
     )
 
     logger.info(

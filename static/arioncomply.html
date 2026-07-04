@@ -4232,9 +4232,22 @@ async function triggerReExtract(btn) {
   btn.style.opacity = 0.6;
   if (stateEl) stateEl.textContent = 'Queuing…';
   try {
+    // Include declared framework + type hints from the intake dropdowns
+    // so a re-extract (e.g. after duplicate rejection) picks up the
+    // tenant's declared intent. Backend also falls back to whatever
+    // was stored on the original document_uploads row.
+    const fwSel = document.getElementById('declare-framework');
+    const tpSel = document.getElementById('declare-type');
+    const body = new URLSearchParams();
+    if (fwSel && fwSel.value && fwSel.value !== 'auto') body.append('declared_standard_id',   fwSel.value);
+    if (tpSel && tpSel.value && tpSel.value !== 'auto') body.append('declared_evidence_type', tpSel.value);
     const r = await fetch(`/api/v1/admin/uploads/${uploadId}/reextract`, {
       method: 'POST',
-      headers: {'X-API-Key': API_KEY},
+      headers: {
+        'X-API-Key':   API_KEY,
+        'Content-Type':'application/x-www-form-urlencoded',
+      },
+      body: body.toString() || undefined,
     });
     if (!r.ok) {
       const e = await r.json().catch(()=>({detail:r.statusText}));
