@@ -2574,45 +2574,48 @@ function renderEvidenceClassesPanel(b) {
       // headings + checkboxes). .md is always offered as a power-user
       // / round-trip-safe option.
       const isTabular = isTabularEvidenceType(cls.evidence_type);
-      const btnStyle = 'font-size:10px;padding:2px 8px;background:#fff;color:#3A382E;'
+      const btnStyle = 'font-size:10px;padding:3px 8px;background:#fff;color:#3A382E;'
                     + 'border:1px solid #C8C5B8;border-radius:3px;cursor:pointer;'
-                    + 'font-family:inherit;margin-left:4px';
-      const groupLabelStyle = 'font-size:10px;color:#9C9A8E;font-weight:600;'
-                            + 'text-transform:uppercase;letter-spacing:0.4px;'
-                            + 'margin-left:10px';
-      // Two labelled button groups: TEMPLATES (native format + markdown)
-      // and SUMMARY (Evidence Package — coverage report). Each group
-      // wrapped so labels stay adjacent to their buttons.
-      let tplBadge = '';
+                    + 'font-family:inherit;margin-right:4px';
+      const labelStyle = 'font-size:9px;color:#9C9A8E;font-weight:600;'
+                       + 'text-transform:uppercase;letter-spacing:0.5px;'
+                       + 'margin-right:6px';
+      // Build the button groups (Templates + Summary) as inline HTML that
+      // will sit inside its own row below the sources row.
+      let templatesGroup = '';
       if (leaf.template_available) {
-        tplBadge += `<span style="${groupLabelStyle}">Templates:</span>`;
+        templatesGroup += `<span style="${labelStyle}">Templates</span>`;
         if (isTabular) {
-          tplBadge += `<button onclick="downloadTemplateForLeaf('${attr(leaf.leaf_id)}','xlsx')"
-                                title="Download the starter template as Excel" style="${btnStyle}">📊 .xlsx</button>`;
+          templatesGroup += `<button onclick="downloadTemplateForLeaf('${attr(leaf.leaf_id)}','xlsx')"
+                                     title="Download the starter template as Excel" style="${btnStyle}">📊 .xlsx</button>`;
         } else {
-          tplBadge += `<button onclick="downloadTemplateForLeaf('${attr(leaf.leaf_id)}','docx')"
-                                title="Download the starter template as Word" style="${btnStyle}">📝 .docx</button>`;
+          templatesGroup += `<button onclick="downloadTemplateForLeaf('${attr(leaf.leaf_id)}','docx')"
+                                     title="Download the starter template as Word" style="${btnStyle}">📝 .docx</button>`;
         }
-        tplBadge += `<button onclick="downloadTemplateForLeaf('${attr(leaf.leaf_id)}','md')"
-                              title="Download the starter template as Markdown" style="${btnStyle}">📄 .md</button>`;
+        templatesGroup += `<button onclick="downloadTemplateForLeaf('${attr(leaf.leaf_id)}','md')"
+                                   title="Download the starter template as Markdown" style="${btnStyle}">📄 .md</button>`;
       }
-      // Evidence Package — auto-generated summary of what backs each MUST.
-      // Only meaningful when the leaf has ≥1 approved finding; else the
-      // package is all ✗ and duplicates the starter template's message.
+      let summaryGroup = '';
       if ((leaf.musts_bound || 0) > 0) {
-        tplBadge += `<span style="${groupLabelStyle}">Summary:</span>`;
-        tplBadge += `<button onclick="downloadEvidencePackage('${attr(leaf.leaf_id)}')"
-                              title="Download a coverage summary — per-element status with source excerpts, ready to hand to an auditor."
-                              style="${btnStyle};background:#F2F5EE;border-color:#C8D8C8;color:#2D5F2D">
-                       📦 Evidence Package
-                     </button>`;
+        summaryGroup += `<span style="${labelStyle}">Summary</span>`;
+        summaryGroup += `<button onclick="downloadEvidencePackage('${attr(leaf.leaf_id)}')"
+                                 title="Download a coverage summary — per-element status with source excerpts, ready to hand to an auditor."
+                                 style="${btnStyle};background:#F2F5EE;border-color:#C8D8C8;color:#2D5F2D">
+                          📦 Evidence Package
+                        </button>`;
       }
+      const actionsRow = (templatesGroup || summaryGroup)
+        ? `<div style="margin-top:6px;display:flex;flex-wrap:wrap;align-items:center;gap:16px">
+             ${templatesGroup ? `<div style="display:flex;align-items:center">${templatesGroup}</div>` : ''}
+             ${summaryGroup   ? `<div style="display:flex;align-items:center">${summaryGroup}</div>` : ''}
+           </div>`
+        : '';
+
       // Row tooltip aggregates two hints:
       //   Loose end #9 — cite-external absence (document-shaped leaves)
       //   Loose end #12 — dilution when spread across ≥3 documents
-      // Both were previously always-visible italic lines below the leaf
-      // row; consolidated into a discoverable tooltip so the row stays
-      // compact while the guidance remains accessible via hover.
+      // Both consolidated into a discoverable hover, freeing the row to
+      // stay compact + readable without stacking italic gray lines.
       const docCount = (leaf.source_documents || []).length;
       const rowTips = [];
       if (!leaf.cite_acceptable) {
@@ -2622,9 +2625,23 @@ function renderEvidenceClassesPanel(b) {
         rowTips.push(`Tip: evidence is spread across ${docCount} documents. Consolidating into a single artefact of the right shape usually simplifies the audit trail and is easier to maintain.`);
       }
       const rowTitle = rowTips.join('\n\n');
-      leafLines += `<div style="font-size:11px;color:#5C5A4F;margin-top:2px;padding-left:18px"
+
+      // Three-row leaf block: title+count / sources / actions.
+      // Vertical rhythm gives each leaf visible breathing room, matches
+      // the tenant's mental model of "here's the artifact, here's where
+      // it comes from, here's what I can do about it".
+      const sourcesRow = `<div style="margin-top:4px;display:flex;flex-wrap:wrap;align-items:center;gap:6px">
+        <span style="${labelStyle}">Sources</span>${sources}
+      </div>`;
+      leafLines += `<div class="leaf-block"
+                         style="margin-top:10px;padding:8px 10px;background:#FAF8F2;
+                                border:1px solid #F0EDE3;border-radius:4px"
                          ${rowTitle ? `title="${attr(rowTitle)}"` : ''}>
-        ${esc(leaf.leaf_label)} · ${leaf.musts_bound}/${leaf.musts_total} covered · from: ${sources}${tplBadge}
+        <div style="font-size:11px;color:#3A382E;font-weight:600">
+          ${esc(leaf.leaf_label)} · ${leaf.musts_bound}/${leaf.musts_total} covered
+        </div>
+        ${sourcesRow}
+        ${actionsRow}
       </div>`;
 
       // Cited lane (schema_v50): only on cite-acceptable evidence_types.
