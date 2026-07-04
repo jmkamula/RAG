@@ -2002,18 +2002,31 @@ def _scope_controls_via_doc_mappings(
     if not target_ctrls:
         return []
 
-    # Collect target_leaves across all matched proposals, deduped by leaf_id.
+    # Intersect with the caller-provided control list — the caller already
+    # filtered to controls that exist in the curated set; we just narrow.
+    scoped = [c for c in controls if c.get("ref") in target_ctrls]
+
+    # target_leaves must ONLY carry leaves whose parent control is
+    # actually in scope for this run. Without this filter, doc_mappings
+    # that match on filename tokens but target out-of-scope standards
+    # (e.g. an ISP-shaped doc's ISO 27001 A.5.1 mappings when the tenant
+    # declared ISO 27701 only) would poison leaf_musts with 27001 items
+    # while the LLM prompt only lists 27701 controls — the mismatch
+    # makes every finding unbound.
+    scoped_refs = {c.get("ref") for c in scoped}
+    scoped_stds = {c.get("standard_id") for c in scoped}
     leaves_by_id: dict[str, dict] = {}
     for p in proposals:
         for leaf in (p.target_leaves or []):
             lid = leaf.get("leaf_id")
-            if lid and lid not in leaves_by_id:
-                leaves_by_id[lid] = leaf
+            l_ref = leaf.get("control_ref")
+            l_std = leaf.get("standard_id")
+            # Keep leaves only when the parent control is in this run's
+            # scoped list. Belt-and-braces: check both ref and standard.
+            if l_ref and l_ref in scoped_refs and (not l_std or l_std in scoped_stds):
+                if lid and lid not in leaves_by_id:
+                    leaves_by_id[lid] = leaf
     doc.extraction_metrics["target_leaves"] = list(leaves_by_id.values())
-
-    # Intersect with the caller-provided control list — the caller already
-    # filtered to controls that exist in the curated set; we just narrow.
-    scoped = [c for c in controls if c.get("ref") in target_ctrls]
 
     # Only claim a "primary candidate count" when doc_mappings actually
     # contributed scoped controls. If proposals exist but the intersection
