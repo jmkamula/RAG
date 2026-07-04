@@ -58,113 +58,71 @@ def _get_neo_driver():
 
 # ── Upload-hint templates per evidence_type ──────────────────────────────────
 #
-# Each hint is a short action sentence pegged to the evidence shape. The
-# tenant reading this sees: "produce X to satisfy this leaf". Phrased as
-# concrete acts (update / upload / produce / document) rather than
-# abstract recommendations.
+# Compact verb + noun directive per evidence shape. The specificity of
+# WHAT to add lives in the "Still needed" list above these hints — the
+# hint gives the shape of the action, nothing more. Earlier versions
+# ended every hint with "each missing element" or "with a column per
+# missing element" — templated tail that was redundant with the Still
+# needed list. Trimmed to the actionable verb + object 2026-07-04
+# (loose end #6).
 
 _UPLOAD_HINTS: dict[str, str] = {
-    "policy":
-        "Update the policy document to articulate each missing element.",
-    "procedure":
-        "Document each missing step in the procedure document.",
-    "matrix":
-        "Update the controls matrix to cover each missing element.",
-    "directive":
-        "Update the management directive to articulate each missing element.",
-    "manual":
-        "Update the manual to articulate each missing element.",
-    "isms_scope":
-        "Update the ISMS scope statement to cover each missing element.",
-    "statement_of_applicability":
-        "Update the Statement of Applicability to cover each missing element.",
+    # Documents — narrative artefacts to update
+    "policy":                       "Update your policy document.",
+    "procedure":                    "Update your procedure document.",
+    "plan":                         "Update your plan document.",
+    "matrix":                       "Update your controls matrix.",
+    "directive":                    "Update your management directive.",
+    "management_directive":         "Update your management directive.",
+    "manual":                       "Update your manual.",
+    "isms_scope":                   "Update your ISMS scope statement.",
+    "statement_of_applicability":   "Update your Statement of Applicability.",
+    "scope_note":                   "Add a scope-note section.",
+    "agreement_template":           "Update your agreement template.",
+    "configuration_baseline":       "Update your configuration baseline.",
+    "classification_scheme":        "Update your classification scheme.",
+    "responsibility_matrix":        "Update your responsibility matrix.",
+    "segregation_matrix":           "Update your segregation matrix.",
+    "intake_process":               "Document your intake process.",
 
-    "register":
-        "Add or extend a register (spreadsheet / table) with a column or row per missing element.",
-    "asset_register":
-        "Add or extend the asset register with a column per missing element.",
-    "contact_register":
-        "Add or extend the contact register with a column per missing element.",
-    "schedule_register":
-        "Add or extend the schedule register with a column per missing element.",
-    "nonconformity_register":
-        "Add or extend the nonconformity register with a column per missing element.",
-    "operating_procedures_register":
-        "Add or extend the operating procedures register with a column per missing element.",
-    "lawful_basis_register":
-        "Add or extend the lawful basis register with a column per missing element.",
+    # Registers — spreadsheet-shaped inventories to add rows / columns to
+    "register":                     "Add or extend a register (spreadsheet or table).",
+    "asset_register":               "Add or extend the asset register.",
+    "contact_register":             "Add or extend the contact register.",
+    "schedule_register":            "Add or extend the schedule register.",
+    "nonconformity_register":       "Add or extend the nonconformity register.",
+    "operating_procedures_register":"Add or extend the operating procedures register.",
+    "lawful_basis_register":        "Add or extend the lawful basis register.",
 
-    "review_record":
-        "Conduct a review and produce a review record covering each missing element.",
-    "audit_report":
-        "Conduct an audit and produce a report covering each missing element.",
-    "management_review_minutes":
-        "Capture management review minutes covering each missing input.",
+    # Reviews + audits — periodic evidence of executed activity
+    "review_record":                "Add a review record.",
+    "audit_report":                 "Add an audit report.",
+    "management_review_minutes":    "Capture management review minutes.",
 
-    "approval":
-        "Produce an approval record with the missing signature / scope details.",
-    "approval_record":
-        "Produce an approval record with the missing signature / scope details.",
+    # Approvals — signed decision records
+    "approval":                     "Produce an approval record.",
+    "approval_record":              "Produce an approval record.",
 
-    "revocation_record":
-        "Capture per-event revocation records with fields for each missing element.",
-    "disposal_record":
-        "Capture per-disposal records with fields for each missing element.",
-    "closure_record":
-        "Capture per-closure records with fields for each missing element.",
-    "exercise_record":
-        "Capture per-exercise records with fields for each missing element.",
-    "activation_record":
-        "Capture per-activation records with fields for each missing element.",
-    "non_return_record":
-        "Capture per-non-return records with fields for each missing element.",
-    "return_record":
-        "Capture per-return records with fields for each missing element.",
-    "application_record":
-        "Capture per-application records with fields for each missing element.",
-    "discovery_record":
-        "Capture per-discovery records with fields for each missing element.",
-    "monitoring_record":
-        "Capture per-event monitoring records with fields for each missing element.",
-    "communication_record":
-        "Capture communication records covering each missing element (date, audience, channel).",
-    "communication_evidence":
-        "Capture communication evidence covering each missing element.",
-    "configuration_record":
-        "Capture per-system configuration records with fields for each missing element.",
-    "risk_assessment_record":
-        "Capture risk assessment records covering each missing element.",
-    "risk_treatment_record":
-        "Capture risk treatment records covering each missing element.",
-    "breach_notification":
-        "Capture breach notifications covering each missing required content element.",
-    "intake_process":
-        "Document the intake process covering each missing trigger / path.",
-
-    "scope_note":
-        "Add a scope-note section enumerating the missing elements.",
-    "agreement_template":
-        "Update the agreement template to include clauses for each missing element.",
-    "configuration_baseline":
-        "Update the configuration baseline to document each missing setting.",
-    "classification_scheme":
-        "Update the classification scheme to define each missing level / dimension.",
-    "responsibility_matrix":
-        "Update the responsibility matrix to allocate each missing role.",
-    "segregation_matrix":
-        "Update the segregation matrix to capture each missing conflict pair.",
-    "lawful_basis_register":
-        "Add or extend the lawful basis register with a column per missing element.",
-    "plan":
-        "Update the plan to articulate each missing element.",
-    "management_directive":
-        "Update the management directive to articulate each missing element.",
+    # Per-event records — one row per lifecycle event
+    "revocation_record":            "Capture per-event revocation records.",
+    "disposal_record":              "Capture per-disposal records.",
+    "closure_record":               "Capture per-closure records.",
+    "exercise_record":              "Capture per-exercise records.",
+    "activation_record":            "Capture per-activation records.",
+    "non_return_record":            "Capture per-non-return records.",
+    "return_record":                "Capture per-return records.",
+    "application_record":           "Capture per-application records.",
+    "discovery_record":             "Capture per-discovery records.",
+    "monitoring_record":            "Capture per-event monitoring records.",
+    "communication_record":         "Capture communication records (date, audience, channel).",
+    "communication_evidence":       "Capture communication evidence.",
+    "configuration_record":         "Capture per-system configuration records.",
+    "risk_assessment_record":       "Capture risk assessment records.",
+    "risk_treatment_record":        "Capture risk treatment records.",
+    "breach_notification":          "Capture breach notifications.",
 }
 
-_DEFAULT_HINT = (
-    "Produce evidence (document, record, or register) that articulates "
-    "each missing element."
-)
+_DEFAULT_HINT = "Produce evidence (document, record, or register)."
 
 
 def _hint_for(evidence_type: str) -> str:
