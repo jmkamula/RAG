@@ -411,7 +411,7 @@ Return JSON only:
 # These patterns allow skip-LLM fast classification for unambiguous queries.
 
 EXPLICIT_REF_PATTERN   = re.compile(
-    r'\b(Art\.\d+(\.\d+)*(\.[a-z])?|A\.\d+\.\d+|\d+\.\d+(\.\d+)?)\b'
+    r'\b(Art\.\d+(\.\d+)*(\.[a-z])?|[AB]\.\d+(\.\d+){1,2}|\d+\.\d+(\.\d+)?)\b'
 )
 DEFINITION_VERBS       = re.compile(
     r'\b(what does|what is|explain|define|describe|tell me about|'

@@ -2310,7 +2310,19 @@ def make_retrieve_node(
                 if _single_ctrl:
                     from rag.posture.advisory import build_per_must_advisory
                     from rag.posture_loader import build_pg_conn
-                    _std = "GDPR:2016/679" if _single_ctrl.startswith("Art.") else "ISO27001:2022"
+                    # Ref → standard routing:
+                    #   Art.X.Y.Z   → GDPR:2016/679
+                    #   B.X.Y.Z     → ISO27701:2019 (all Annex B is 27701)
+                    #   A.X.Y.Z     → ISO27701:2019 (3-part Annex A is 27701)
+                    #   A.X.Y       → ISO27001:2022 (2-part Annex A is 27001)
+                    if _single_ctrl.startswith("Art."):
+                        _std = "GDPR:2016/679"
+                    elif _single_ctrl.startswith("B."):
+                        _std = "ISO27701:2019"
+                    elif _single_ctrl.startswith("A.") and _single_ctrl.count(".") >= 3:
+                        _std = "ISO27701:2019"
+                    else:
+                        _std = "ISO27001:2022"
                     _tenant_uuid = str(getattr(tenant, "tenant_id", "") or "")
                     if _tenant_uuid:
                         _pg_adv = build_pg_conn()

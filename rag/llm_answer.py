@@ -2310,12 +2310,12 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         """Extract article and control references from answer text."""
         # GDPR: Art.32, Art.32.1, Art.32.1.a
         gdpr      = re.findall(r'\bArt\.\d+(?:\.\d+)*(?:\.[a-z])?\b', text)
-        # ISO Annex A: A.5.15, A.8.24
-        iso_annex = re.findall(r'\bA\.\d+\.\d+\b', text)
+        # ISO Annex A: A.5.15 (27001), A.7.2.5 (27701 3-part), B.8.5.6 (27701 processor)
+        iso_annex = re.findall(r'\b[AB]\.\d+(?:\.\d+){1,2}\b', text)
         # ISO Management clauses: 6.1.2, 5.1
         # Exclude numbers that are substrings of already-matched refs
         iso_mgmt  = re.findall(
-            r'(?<!Art\.)(?<!A\.)\b\d+\.\d+(?:\.\d+)?\b', text
+            r'(?<!Art\.)(?<![AB]\.)\b\d+\.\d+(?:\.\d+)?\b', text
         )
 
         # Build set of numeric suffixes already claimed
@@ -2325,11 +2325,23 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             if m:
                 claimed.add(m.group(1))
         for ref in iso_annex:
-            m = re.match(r'A\.(\d+\.\d+)', ref)
+            m = re.match(r'[AB]\.(\d+(?:\.\d+){1,2})', ref)
             if m:
                 claimed.add(m.group(1))
 
-        iso_mgmt = [r for r in iso_mgmt if r not in claimed]
+        # Filter iso_mgmt matches that are trailing substrings of any
+        # already-claimed ref (e.g. "2.5" appearing inside "A.7.2.5" —
+        # the lookbehind guard can't cover multi-char prefixes without
+        # variable-length lookbehind, so substring-check post-facto).
+        def _is_substring_of_claim(candidate: str) -> bool:
+            for c in claimed:
+                if c == candidate:
+                    return True
+                # trailing substring, dot-bounded (e.g. "2.5" in "7.2.5")
+                if c.endswith("." + candidate):
+                    return True
+            return False
+        iso_mgmt = [r for r in iso_mgmt if not _is_substring_of_claim(r)]
 
         # Deduplicate preserving order
         seen = set()
