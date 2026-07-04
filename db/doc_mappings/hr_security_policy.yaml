@@ -61,10 +61,10 @@ target_leaves:
   - leaf_id: "req:A.6.5:post_employment_responsibilities"
     control_ref: "A.6.5"
     role: scope_note
-  - leaf_id: "req:A.6.6:confidentiality_agreement_template"
+  - leaf_id: "req:A.6.6:nda_template"
     control_ref: "A.6.6"
     role: template
-  - leaf_id: "req:A.6.8:reporting_procedure"
+  - leaf_id: "req:A.6.8:event_reporting_procedure"
     control_ref: "A.6.8"
     role: procedure
   # Identity-lifecycle neighbours touched by HR onboarding/offboarding
