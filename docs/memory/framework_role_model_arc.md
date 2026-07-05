@@ -64,6 +64,28 @@ side effect. The LLM's 27001 gravity well is the natural output of
 treating co-equal standards. Role model turns propagation from LLM
 inference into deterministic routing.
 
+## Phase 3 shipped 2026-07-05 (role-aware extraction)
+
+- **rag/intake/doc_pipeline.py** — `_get_controls` gained a
+  `_filter_demonstrated_obligations` post-load step. Any OBLIGATION
+  RequirementNode whose DEMONSTRATES source is in the tenant's
+  PROGRAM/EXTENSION scope is excluded from the LLM candidate list.
+  Those get propagated deterministically at posture-load time via
+  Phase 2b/2c overlays.
+- OBLIGATIONs WITHOUT a demonstrator remain in the LLM candidate
+  set. Direct extraction still works for pure-legal content
+  (Art.1-4 definitions/scope, Art.7 consent mechanics, Art.11.x,
+  Art.13.1.a-d sub-obligations that don't have curated
+  DEMONSTRATES coverage yet).
+- Silent fallback: any Neo4j failure returns the unfiltered list;
+  Phase 3 is an overlay, not a hard dependency.
+- **On Arion:** 51 GDPR obligations excluded (matches the 51
+  RequirementNodes with DEMONSTRATES sources). LLM candidate set
+  478 → 427 controls. The A-strategy multi-framework prompt
+  (2026-07-05, commit ae37566) is preserved — it still helps the
+  LLM correctly bind PROGRAM/EXTENSION overlaps (e.g. A.5.15 +
+  B.8.5.1 for identity-management privacy overlay).
+
 ## Phase 2c shipped 2026-07-05 (finding-level materialisation for gaps)
 
 - **rag/posture_loader.py** — `_apply_demonstrates_overlay` upgraded

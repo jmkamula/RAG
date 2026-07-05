@@ -873,7 +873,66 @@ class DocumentPipeline:
                 logger.info(f"Loaded {len(controls)} controls for {std}")
             except Exception as e:
                 logger.warning(f"Could not load controls for {std}: {e}")
-        return all_controls
+
+        # Phase 3 (framework role model, 2026-07-05): exclude OBLIGATION
+        # controls that a PROGRAM/EXTENSION in scope already demonstrates.
+        # Those get propagated deterministically via DEMONSTRATES in
+        # posture_loader._apply_demonstrates_overlay; letting the LLM
+        # also extract them directly reintroduces the pre-Phase 3
+        # multi-framework guessing bias. Obligations WITHOUT a
+        # DEMONSTRATES source in tenant scope stay in the list so
+        # direct extraction still works for pure-legal content
+        # (Art.7 consent mechanics, Art.30 records, etc).
+        filtered = self._filter_demonstrated_obligations(all_controls, standard_ids)
+        excluded = len(all_controls) - len(filtered)
+        if excluded:
+            logger.info(
+                f"Phase 3 filter: {excluded} obligation controls excluded "
+                f"(demonstrated by PROGRAM/EXTENSION in scope; will be "
+                f"propagated via DEMONSTRATES at posture-load time)"
+            )
+        return filtered
+
+    def _filter_demonstrated_obligations(
+        self, controls: list[dict], standard_ids: list[str],
+    ) -> list[dict]:
+        """Return controls minus OBLIGATION rows whose DEMONSTRATES source
+        is in the tenant's PROGRAM/EXTENSION scope.
+
+        Silent fallback: any Neo4j failure returns the input list
+        unchanged — Phase 3 is an overlay, not a hard dependency."""
+        try:
+            from neo4j import GraphDatabase
+            driver = GraphDatabase.driver(
+                os.getenv("NEO4J_URI"),
+                auth=(os.getenv("NEO4J_USER"), os.getenv("NEO4J_PASSWORD")),
+            )
+            try:
+                with driver.session() as s:
+                    result = s.run(
+                        """
+                        MATCH (src:RequirementNode)-[:DEMONSTRATES]->(tgt:RequirementNode)
+                        WHERE src.standard_id IN $stds
+                          AND tgt.role_owner = 'obligation'
+                        RETURN DISTINCT tgt.ref AS ref, tgt.standard_id AS std
+                        """,
+                        stds=standard_ids,
+                    )
+                    excluded_keys = {(r["std"], r["ref"]) for r in result}
+            finally:
+                driver.close()
+        except Exception as e:
+            logger.warning(
+                f"Phase 3 obligation filter skipped ({type(e).__name__}: {e})"
+            )
+            return controls
+
+        if not excluded_keys:
+            return controls
+        return [
+            c for c in controls
+            if (c.get("standard_id"), c.get("ref")) not in excluded_keys
+        ]
 
     def _load_controls_from_neo4j(self, standard_id: str) -> list[dict]:
         neo4j_uri  = os.getenv("NEO4J_URI",      "bolt://localhost:7687")
