@@ -1,0 +1,104 @@
+---
+name: framework-role-model-arc
+description: Design + Phase 1 shipped for the framework role model (PROGRAM/EXTENSION/OBLIGATION); replaces peer-bridges as the multi-framework architecture
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: 5808ba74-b22a-4a68-b4f1-19f18ce079cd
+---
+
+Multi-framework architecture refactor kicked off 2026-07-05 after
+observing that the LLM extracts under a "27001 gravity well" bias
+(Privacy Policy Arion produced 30 findings all on 27001 + 28 xfw
+proposals to GDPR/27701 despite being privacy-primary content).
+
+## Design (2026-07-05 conversation)
+
+The three in-scope standards do NOT stand as peers. Their real
+relationship is hierarchical:
+
+    GDPR (law — what regulators enforce)
+      ▲
+      │ demonstrated-by
+      │
+    ISO 27701 (PIMS overlay — privacy extension)
+      ▲
+      │ extends (per ISO 27701 §4.1)
+      │
+    ISO 27001 (ISMS spine — baseline security)
+
+Model generalises to 20+ frameworks with three role values:
+
+- **program** — standalone management-system / attestation framework
+  (ISO 27001, SOC 2, HITRUST, TISAX, NIST CSF)
+- **extension** — extends a PROGRAM for a specific subject; requires
+  ≥1 PROGRAM (ISO 27701, 27017, 27018)
+- **obligation** — legal/regulatory/contractual mandate; not a
+  management system itself; demonstrated-by PROGRAM + EXTENSION
+  (GDPR, CCPA, NIS2, DORA, EU AI Act, HIPAA Privacy Rule, PCI DSS)
+
+Plus **guidance** for code-of-practice companions (ISO 27002).
+
+Two orthogonal axes on each standard:
+
+- **subject** (list) — what content domain: `information_security`,
+  `privacy`, `cloud`, `payment`, `health`, `financial`, `automotive`,
+  `ai_governance`, `resilience`, `financial_reporting`
+- **scope_type** — `org_wide` / `data_type_scoped` / `sector_scoped` /
+  `system_scoped`
+- **mandate_source** — `voluntary` / `attestation` / `legal` /
+  `contractual`
+
+Handles stress-test frameworks cleanly: SOC 2 (parallel PROGRAM to
+27001), NIS2 (prescriptive OBLIGATION with own leaves), PCI DSS
+(PROGRAM with scope filter), HITRUST (PROGRAM with inherits_from),
+EU AI Act (OBLIGATION, new subject).
+
+## Why (design conversation)
+
+Bridges are the wrong primitive when the relationship is
+hierarchical. A Privacy Policy isn't "27001 with GDPR/27701 bridges"
+— it's fundamentally a 27701 §A.7.3.2 artifact that happens to also
+demonstrate GDPR Art.13 (by design) and touches 27001 A.5.34 as a
+side effect. The LLM's 27001 gravity well is the natural output of
+treating co-equal standards. Role model turns propagation from LLM
+inference into deterministic routing.
+
+## Phase 1 shipped 2026-07-05 (no behavior change)
+
+- **schema_v60_standards_role_model.sql** — adds `role`, `subject`
+  (text[]), `scope_type`, `mandate_source` columns to `standards`.
+  Backfills all 6 rows in the existing registry
+  (ISO27001/27002/27701/27018, GDPR, NIST-CSF).
+- **rag/scope_loader.py** — `StandardInfo` dataclass gets role /
+  subject / scope_type / mandate_source fields. `TenantScope` gets
+  `programs` / `extensions` / `obligations` role-grouped accessors
+  and `subjects_in_scope()`.
+- **scripts/backfill_neo4j_subject_role.py** — one-shot pass that
+  writes `role_owner`, `subject`, `scope_type`, `mandate_source`
+  properties onto every RequirementNode + EvidenceRequirement based
+  on `standard_id`. 1322 nodes tagged across the 3 in-scope
+  standards (ISO27001: 598, ISO27701: 245, GDPR: 479).
+
+Existing registry infrastructure already had `standards`,
+`standard_relationships`, `tenant_standards`, `applicable_standards`,
+`tenant_evaluation_scope` view — much of the plumbing existed and
+just needed role metadata layered on. `standard_type` (existing:
+management_system / regulation / framework / code_of_practice) is
+ORTHOGONAL to `role` — 27701 is `standard_type=management_system`
+AND `role=extension` because it's an ISMS extension that only exists
+on top of another ISMS. Both columns coexist.
+
+## Operator note
+
+Until Phase 3 folds subject/role_owner into the Python catalog, the
+Neo4j backfill script must be re-run after every
+`load_to_neo4j.py` execution (idempotent; safe to re-run).
+
+Related memory:
+- [[framework-role-taxonomy-2026-07-05]] — vocabulary + subject list
+- [[framework-role-api-compatibility-decision]] — API contract
+  deferred as a "fight for another day" per user
+- Phase 2+ will add DEMONSTRATES edges + retire xfw for obligation
+  propagation; Phase 3 role-aware extraction + Phase 4 UI three-lens
+  + Phase 5 xfw retire

@@ -45,6 +45,18 @@ class StandardInfo:
     relationship:   str | None
     cert_body:      str | None = None
     cert_date:      str | None = None
+    # Role model (schema_v60, 2026-07-05). Orthogonal to standard_type.
+    #   role           — position in the compliance stack:
+    #                    program / extension / obligation / guidance
+    #   subject        — content domains: ['information_security'],
+    #                    ['privacy'], ['cloud','privacy'], etc.
+    #   scope_type     — org_wide / data_type_scoped / sector_scoped /
+    #                    system_scoped
+    #   mandate_source — voluntary / attestation / legal / contractual
+    role:           str | None = None
+    subject:        list[str] = field(default_factory=list)
+    scope_type:     str | None = None
+    mandate_source: str | None = None
 
 
 @dataclass
@@ -85,6 +97,44 @@ class TenantScope:
     @property
     def certified_standards(self) -> list[StandardInfo]:
         return [s for s in self.direct_standards if s.status == "certified"]
+
+    # ── Role-model accessors (schema_v60, 2026-07-05) ────────────────────
+    # Return the tenant's scope grouped by role. Combines direct +
+    # inferred so callers get the full compliance-stack view. Consumers
+    # in Phase 2+ (posture_loader propagation, dashboard three-lens
+    # view) use these instead of iterating standard_type.
+
+    @property
+    def programs(self) -> list[StandardInfo]:
+        """Standards playing the PROGRAM role in this tenant's stack —
+        the standalone management systems / attestation frameworks
+        (e.g. ISO 27001, SOC 2)."""
+        return [s for s in (self.direct_standards + self.inferred_standards)
+                if s.role == "program"]
+
+    @property
+    def extensions(self) -> list[StandardInfo]:
+        """Standards playing the EXTENSION role — PIMS / cloud / sector
+        overlays on top of a PROGRAM (e.g. ISO 27701)."""
+        return [s for s in (self.direct_standards + self.inferred_standards)
+                if s.role == "extension"]
+
+    @property
+    def obligations(self) -> list[StandardInfo]:
+        """Standards playing the OBLIGATION role — legal / regulatory /
+        contractual mandates demonstrated-by PROGRAM+EXTENSION (e.g.
+        GDPR, NIS2, DORA)."""
+        return [s for s in (self.direct_standards + self.inferred_standards)
+                if s.role == "obligation"]
+
+    def subjects_in_scope(self) -> set[str]:
+        """Union of subject tags across every standard in scope. Used
+        by the extractor to route content-classified uploads to
+        relevant role_owner leaves in Phase 3."""
+        out: set[str] = set()
+        for s in self.direct_standards + self.inferred_standards:
+            out.update(s.subject or [])
+        return out
 
     def can_answer_standard(self, standard_id: str) -> tuple[bool, str]:
         """
@@ -137,7 +187,11 @@ def load_tenant_scope(pg_conn, tenant_id: str) -> TenantScope:
                     tes.via_standard,
                     tes.relationship,
                     ts.cert_body,
-                    ts.cert_date::text
+                    ts.cert_date::text,
+                    s.role,
+                    s.subject,
+                    s.scope_type,
+                    s.mandate_source
                 FROM tenant_evaluation_scope tes
                 JOIN standards s ON s.id = tes.standard_id
                 LEFT JOIN tenant_standards ts
@@ -146,7 +200,16 @@ def load_tenant_scope(pg_conn, tenant_id: str) -> TenantScope:
                 WHERE tes.tenant_id = %s
                 ORDER BY
                     tes.scope_source,      -- direct first
-                    s.standard_type,       -- management_system before regulation
+                    -- Role first (program before extension before obligation),
+                    -- standard_type second (legacy tiebreak).
+                    CASE s.role
+                        WHEN 'program'    THEN 1
+                        WHEN 'extension'  THEN 2
+                        WHEN 'obligation' THEN 3
+                        WHEN 'guidance'   THEN 4
+                        ELSE 5
+                    END,
+                    s.standard_type,
                     tes.standard_id
             """, (tenant_id,))
 
@@ -181,6 +244,10 @@ def load_tenant_scope(pg_conn, tenant_id: str) -> TenantScope:
             relationship    = rec["relationship"],
             cert_body       = rec["cert_body"],
             cert_date       = rec["cert_date"],
+            role            = rec.get("role"),
+            subject         = list(rec.get("subject") or []),
+            scope_type      = rec.get("scope_type"),
+            mandate_source  = rec.get("mandate_source"),
         )
         if rec["scope_source"] == "direct":
             direct.append(info)
