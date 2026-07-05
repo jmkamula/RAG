@@ -974,11 +974,40 @@ def _extract_sections(
 # LLM CALL
 # =============================================================================
 
-_SYSTEM_PROMPT = """You are a compliance analyst reviewing a document to assess ISO 27001 / GDPR compliance.
+_SYSTEM_PROMPT = """You are a compliance analyst reviewing a document to assess multi-framework compliance (ISO 27001, ISO 27701, GDPR).
 
 Your task: for each control provided, determine whether this document provides DIRECT, SUBSTANTIVE evidence of compliance.
 
-The bar is HIGH. Bind a control ONLY when:
+MULTI-FRAMEWORK BINDING (READ FIRST)
+
+ArionComply is a multi-framework platform. One piece of evidence often
+qualifies under multiple standards simultaneously — you MUST bind it to
+EVERY qualifying standard, not just one.
+
+- Privacy content (data subject rights, purpose specification, lawful
+  basis, retention limits, cross-border transfers, DPIA, consent,
+  privacy notices, PII inventory) → bind directly to GDPR articles
+  AND to ISO 27701 privacy controls. Do NOT collapse both into a
+  single ISO 27001 binding.
+- Legal obligations tied to specific articles (72-hour breach
+  notification, Art.30 records, DPO designation, Chapter V transfer
+  mechanisms) → bind DIRECTLY to the GDPR article, not to a
+  27001/27701 proxy.
+- Security content that also touches PII (access logging on personal
+  data, encryption of personal data, backups containing PII) → bind
+  to ISO 27001 primary AND to ISO 27701 PII overlay AND to GDPR
+  Art.32 when the quote demonstrates security-of-processing.
+- Pure security content (no PII/privacy angle) → bind to ISO 27001
+  only.
+
+The controls list below is GROUPED BY STANDARD. Consider EACH standard
+independently — do not skip a standard because you already bound the
+same content elsewhere. Two findings for the same quote on different
+standards is EXPECTED, not duplicate.
+
+BAR FOR BINDING
+
+Bind a control ONLY when:
   (a) the document has substantive content about THIS CONTROL'S SPECIFIC SUBJECT
       (e.g. bind A.5.23 cloud-services ONLY if the doc actually defines
       cloud-service security obligations — NOT if it merely mentions
@@ -1440,6 +1469,61 @@ def _run_pass2(
     return final
 
 
+# Standard-specificity ranking for control-list ordering. Lower = shown
+# first to the LLM. Ordering counteracts the 27001-gravity-well bias
+# observed 2026-07-03: when 27001 + 27701 are both in scope, the LLM
+# preferentially bound findings to 27001 (heavy training-data
+# representation) and left 27701 to be reached only via xfw bridges.
+# Leading with legal / privacy-specific catalogs surfaces them at the
+# top of the LLM's attention window. Combined with the MULTI-FRAMEWORK
+# BINDING section of the system prompt (bind to every qualifying
+# standard), this is the "A" of the A+B multi-framework strategy.
+_STANDARD_SPECIFICITY_ORDER = {
+    "GDPR:2016/679":  1,   # legal — article-specific obligations
+    "ISO27701:2019":  2,   # PIMS — privacy-specific controls
+    "ISO27001:2022":  3,   # baseline security — LLM defaults here
+}
+
+
+def _render_control_list(controls: list[dict]) -> str:
+    """Render the controls block grouped by standard, most-specific first.
+
+    Groups make the multi-framework structure visible to the LLM so it
+    considers each standard independently; the specificity order puts
+    the standards the LLM tends to under-attend (27701 / GDPR) BEFORE
+    the one it over-attends (27001).
+    """
+    if not controls:
+        return ""
+
+    _STD_HUMAN = {
+        "GDPR:2016/679":  "GDPR (EU 2016/679) — legal obligations",
+        "ISO27701:2019":  "ISO 27701:2019 — privacy information management (PIMS)",
+        "ISO27001:2022":  "ISO 27001:2022 — information security baseline",
+    }
+
+    by_std: dict[str, list[dict]] = {}
+    for c in controls:
+        std = c.get("standard_id") or "UNKNOWN"
+        by_std.setdefault(std, []).append(c)
+
+    ordered_stds = sorted(
+        by_std.keys(),
+        key=lambda s: (_STANDARD_SPECIFICITY_ORDER.get(s, 99), s),
+    )
+
+    blocks: list[str] = []
+    for std in ordered_stds:
+        header = _STD_HUMAN.get(std, std)
+        lines = "\n".join(
+            f"- {c['ref']}: {c.get('title', c['ref'])}"
+            for c in by_std[std]
+        )
+        blocks.append(f"{header}:\n{lines}")
+
+    return "\n\n".join(blocks)
+
+
 def _llm_extract(
     text:       str,
     controls:   list[dict],
@@ -1450,10 +1534,7 @@ def _llm_extract(
 ) -> str:
     """Make one LLM extraction call. Returns raw JSON string."""
 
-    control_list = "\n".join(
-        f"- {c['ref']}: {c.get('title', c['ref'])}"
-        for c in controls
-    )
+    control_list = _render_control_list(controls)
 
     # When leaf_musts is supplied (doc_mappings narrowed to specific leaves),
     # render a per-control MUST-items section. The LLM is asked to tag each
