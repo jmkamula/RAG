@@ -2133,6 +2133,22 @@ async function selectHeatCell(c, ev) {
     // Silent: advisory is supplementary; never block the existing tree.
   }
 
+  // ── Framework role model: demonstrated-by provenance ─────────────────
+  // For OBLIGATION controls, surface which PROGRAM/EXTENSION postures
+  // contribute to demonstrating this obligation, with their current
+  // findings and rationale. Populated by posture_loader's DEMONSTRATES
+  // overlay (Phase 2b/2c); this fetch just renders the metadata.
+  try {
+    const dm = await api(`/api/v1/dashboard/control/${encodeURIComponent(c.control_ref)}/demonstrated-by?standard_id=${encodeURIComponent(c.standard_id || '')}`);
+    if (selected !== null && selected.control_ref === c.control_ref
+        && dm && dm.demonstrated_by && dm.demonstrated_by.length) {
+      const dp = document.getElementById('dp-gap');
+      if (dp) dp.insertAdjacentHTML('beforeend', renderDemonstratedByPanel(dm));
+    }
+  } catch (e) {
+    // Silent: demonstrated-by is supplementary
+  }
+
   // ── S3p: cascade implications drill-in ───────────────────────────────
   // Per-control pending implications fetched via the shared endpoint
   // and filtered client-side. Resolve / dismiss inline; refresh on
@@ -3504,6 +3520,55 @@ async function _citeSubmitVerify(leafId, systemId) {
     alert(`Verify error: ${e.message}`);
   }
 }
+
+function renderDemonstratedByPanel(dm) {
+  // Framework role model (Phase 4, 2026-07-05): render the list of
+  // PROGRAM/EXTENSION postures that demonstrate this obligation.
+  // dm shape: { control_ref, standard_id, demonstrated_by: [
+  //   { src_id, src_std, via_edge, finding, strength }, ... ],
+  //   propagated_finding, current_finding, materialised }
+  const esc = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const items = dm.demonstrated_by || [];
+  if (!items.length) return '';
+
+  // Header: propagated finding pill + intro sentence
+  let header = `<div style="font-size:11px;color:#3A382E;font-weight:600;margin-top:14px;margin-bottom:6px">
+    <i class="ti ti-git-branch" style="vertical-align:middle"></i>
+    Demonstrated by
+    ${dm.propagated_finding
+      ? `<span style="margin-left:6px;font-weight:400;color:#5C5A4F">— propagates to ${pillWithLabel(dm.propagated_finding)}</span>`
+      : ''}
+    ${dm.materialised
+      ? `<span style="margin-left:6px;font-size:10px;color:#7C7A6E;font-style:italic">(auto-inferred: no direct assessment)</span>`
+      : ''}
+  </div>`;
+
+  // Table of contributing sources with their current findings + rationale
+  const rows = items.map(it => {
+    const srcParts = (it.src_id || '').split(':');
+    const srcRef = srcParts.slice(2).join(':') || it.src_id || '?';
+    const stdShort = humanizeStandardId(it.src_std || '');
+    const pill = pillWithLabel(it.finding || '—');
+    const drill = `<a href="/#dashboard?control=${encodeURIComponent(srcRef)}"
+                     style="color:#534AB7;text-decoration:none;font-size:11px;margin-left:4px"
+                     title="Open this control in the dashboard">→</a>`;
+    return `<div style="padding:6px 10px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;margin-top:4px;font-size:11px;line-height:1.5">
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-family:monospace;font-weight:600;color:#3A382E">${esc(srcRef)}</span>
+        <span style="color:#7C7A6E">·</span>
+        <span style="color:#5C5A4F">${esc(stdShort)}</span>
+        ${drill}
+        <span style="margin-left:auto">${pill}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `<div style="margin-top:10px;padding:10px;background:#F5F3EA;border-radius:6px;border:1px solid #E8E5DA">
+    ${header}
+    ${rows}
+  </div>`;
+}
+
 
 function renderAdvisoryPanel(adv) {
   const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;');

@@ -64,6 +64,31 @@ side effect. The LLM's 27001 gravity well is the natural output of
 treating co-equal standards. Role model turns propagation from LLM
 inference into deterministic routing.
 
+## Phase 4a shipped 2026-07-05 (demonstrated-by drill-in provenance)
+
+- **api_server.py** — new endpoint
+  `GET /api/v1/dashboard/control/{control_ref}/demonstrated-by`
+  returns the list of PROGRAM/EXTENSION sources contributing to an
+  obligation, with each source's current finding + rationale, plus
+  `propagated_finding`, `current_finding`, and `materialised` flag.
+  Reads from tenant_context.posture (already populated by Phase 2b/2c).
+- **static/arioncomply.html** — `selectHeatCell` now fetches the
+  new endpoint after the advisory panel and renders a
+  "Demonstrated by" section via `renderDemonstratedByPanel()`.
+  Section shows per-source ref, humanized standard label, current
+  finding pill, and "→" drill-into-source link. Materialised
+  obligations get an "auto-inferred" tag so the tenant can
+  distinguish propagated postures from their own assessments.
+- Silent fallback: if the endpoint returns `demonstrated_by: null`
+  (non-obligation control, cache unavailable, etc.), the panel is
+  simply not rendered — no visible degradation.
+
+Deferred to Phase 4b (three-lens dashboard restructure): grouping
+the heatmap by role (Programs / Extensions / Obligations) or by
+subject. The drill-in surface delivers the auditor value that
+Phase 2b/2c metadata was blocked on; the dashboard grid restructure
+is a bigger UX change worth its own eval baseline.
+
 ## Phase 3 shipped 2026-07-05 (role-aware extraction)
 
 - **rag/intake/doc_pipeline.py** — `_get_controls` gained a

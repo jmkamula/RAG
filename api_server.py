@@ -2856,6 +2856,60 @@ async def dashboard_control_advisory(
 
 
 
+@app.get("/api/v1/dashboard/control/{control_ref}/demonstrated-by",
+         tags=["posture"])
+async def dashboard_control_demonstrated_by(
+    control_ref: str,
+    request:     Request,
+    key_info:    APIKeyInfo = Depends(require_scope("posture")),
+    standard_id: Optional[str] = None,
+):
+    """Framework role model provenance for OBLIGATION controls.
+
+    Returns the list of PROGRAM/EXTENSION controls that contribute to
+    demonstrating this obligation, along with their current findings
+    and the aggregated `propagated_finding`. Data is populated by
+    posture_loader._apply_demonstrates_overlay (Phase 2b/2c) and cached
+    in the tenant_context posture dict; this endpoint just surfaces it
+    to the UI drill-in.
+
+    Returns 200 with `demonstrated_by: null` when the control is not
+    an obligation, has no demonstrators in the tenant's scope, or the
+    tenant_context cache is unavailable. Returns 200 with the list
+    otherwise.
+    """
+    if not standard_id:
+        if control_ref.startswith("Art."):
+            standard_id = "GDPR:2016/679"
+        else:
+            standard_id = "ISO27001:2022"
+
+    cache = request.app.state.tenant_cache
+    if cache is None:
+        return {
+            "control_ref":         control_ref,
+            "standard_id":         standard_id,
+            "demonstrated_by":     None,
+            "propagated_finding":  None,
+            "trace_id":            request.state.trace_id,
+        }
+
+    ctx    = cache.load(key_info.tenant_id)
+    posture = (ctx.posture if ctx else {}) or {}
+    node_id = f"{standard_id}:{control_ref}"
+    rec     = posture.get(node_id) or {}
+
+    return {
+        "control_ref":         control_ref,
+        "standard_id":         standard_id,
+        "demonstrated_by":     rec.get("demonstrated_by"),
+        "propagated_finding":  rec.get("propagated_finding"),
+        "current_finding":     rec.get("finding"),
+        "materialised":        rec.get("source") == "demonstrates_propagation",
+        "trace_id":            request.state.trace_id,
+    }
+
+
 @app.get("/api/v1/posture/{control_ref}", tags=["posture"])
 async def posture_control(
     control_ref: str,
