@@ -64,6 +64,28 @@ side effect. The LLM's 27001 gravity well is the natural output of
 treating co-equal standards. Role model turns propagation from LLM
 inference into deterministic routing.
 
+## Phase 2c shipped 2026-07-05 (finding-level materialisation for gaps)
+
+- **rag/posture_loader.py** — `_apply_demonstrates_overlay` upgraded
+  to also materialise obligation postures that are 'Not assessed'
+  in `posture_controls` but have positive DEMONSTRATES sources. A
+  new SQL helper `_fetch_not_assessed_obligation_rows` pulls those
+  rows on demand (the main `load_posture` query still filters
+  Not-assessed out, keeping the fast path fast).
+- Materialised rows carry `source='demonstrates_propagation'` +
+  `finding` = propagated aggregate + a `gap_description` explaining
+  the propagation. Distinguishable from tenant-authored postures.
+- **Rule preserved:** propagation only fills gaps. Tenant-asserted
+  postures (any finding other than 'Not assessed') keep their
+  finding untouched; the demonstrated_by metadata attaches for the
+  UI to surface as auditor context.
+- **On Arion:** 4 materialisations (Art.32.1.b, Art.32.1.d,
+  Art.32.2, Art.32.4 — all Security-of-processing sub-articles),
+  all OFI from partial ISO 27001 demonstration. GDPR obligation
+  count grew 53→57; total posture rows 226→230. 33 tenant-asserted
+  NC obligations left untouched despite having positive
+  demonstrators (correct per rule).
+
 ## Phase 2b shipped 2026-07-05 (additive metadata overlay)
 
 - **scripts/seed_demonstrates_edges.py** — creates DEMONSTRATES

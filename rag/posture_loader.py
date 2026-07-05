@@ -114,17 +114,22 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
     # Fulfilment-engine overlay: override multi-leaf curated verdicts.
     engine_overrides = _apply_engine_overlay(posture, tenant_id, pg_conn)
 
-    # DEMONSTRATES overlay (framework role model, Phase 2b, 2026-07-05):
+    # DEMONSTRATES overlay (framework role model, Phase 2b+2c, 2026-07-05):
     # For every OBLIGATION control (GDPR articles, etc.), look up which
     # PROGRAM/EXTENSION controls demonstrate it via DEMONSTRATES edges
     # in Neo4j, aggregate the sources' current findings, and attach
-    # `demonstrated_by` + `propagated_finding` as METADATA on the
-    # obligation's posture record. `finding` itself is NOT modified —
-    # Phase 2b is deliberately additive so downstream consumers
-    # (Phase 3 extractor, Phase 4 UI) can read the metadata without
-    # any user-visible behavior change from Phase 1. Phase 2c will
-    # flip `finding` when the obligation has no direct posture.
-    demonstrates_overlays = _apply_demonstrates_overlay(posture)
+    # `demonstrated_by` + `propagated_finding` as metadata.
+    #
+    # Phase 2b: attach metadata; don't touch top-level `finding` for
+    # obligations the tenant has already assessed. Their assessment
+    # stands; the metadata surfaces the demonstration story.
+    # Phase 2c: for obligations that are 'Not assessed' (or have no
+    # posture_controls row), MATERIALISE a posture entry with
+    # `finding` = the propagated aggregate. Fills gaps only — never
+    # overrides an existing assessment.
+    demonstrates_overlays, materialised = _apply_demonstrates_overlay(
+        posture, tenant_id, pg_conn,
+    )
 
     # S3e: cascade overlay — controls with overdue triggered_implications
     # get pending engine PAs (Stage-2 review queue). Best-effort: failure
@@ -153,7 +158,8 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
         f"{sum(1 for r in posture.values() if r['finding']=='N/A')} N/A; "
         f"engine_overrides={engine_overrides}; "
         f"cascade_proposals={cascade_proposals}; "
-        f"demonstrates_overlays={demonstrates_overlays})"
+        f"demonstrates_overlays={demonstrates_overlays}; "
+        f"demonstrates_materialised={materialised})"
     )
     return posture
 
@@ -391,36 +397,97 @@ def _fetch_demonstrates_map() -> dict[str, list[dict]]:
         return {}
 
 
-def _apply_demonstrates_overlay(posture: dict) -> int:
-    """Attach `demonstrated_by` + `propagated_finding` to every
-    obligation posture record that has ≥1 PROGRAM/EXTENSION
-    demonstrator with a non-NC/non-N/A finding.
+def _fetch_not_assessed_obligation_rows(
+    pg_conn, tenant_id: str, target_ids: set[str],
+) -> dict[str, dict]:
+    """Fetch posture_controls rows with finding='Not assessed' for the
+    given obligation node_ids. Load-time filter excludes these from
+    the main posture dict; Phase 2c needs them so DEMONSTRATES can
+    materialise a propagated finding.
 
-    Additive only — the top-level `finding` is NOT modified. Phase 2c
-    will flip `finding` for obligations that are 'Not assessed' (or
-    have no row at all); Phase 2b just plumbs the provenance so the
-    UI + downstream consumers can read it now.
+    Silent failure returns {} — Phase 2c is an overlay, not a hard
+    dependency.
+    """
+    if not target_ids:
+        return {}
+    try:
+        with pg_conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+            cur.execute(
+                """
+                SELECT
+                    COALESCE(node_id, standard_id||':'||control_ref) AS node_id,
+                    control_ref, standard_id, finding, confidence,
+                    gap_description, action_required, source, source_authority,
+                    platform_ref, external_ref, soa_notes, remediation_status,
+                    linked_policies, last_updated, engine_proposal_status
+                FROM posture_controls
+                WHERE tenant_id = %s
+                  AND finding = 'Not assessed'
+                  AND control_ref IS NOT NULL
+                  AND COALESCE(node_id, standard_id||':'||control_ref) = ANY(%s)
+                """,
+                (tenant_id, list(target_ids)),
+            )
+            rows = cur.fetchall()
+            cols = [d[0] for d in cur.description]
+        out: dict[str, dict] = {}
+        for row in rows:
+            rec = dict(zip(cols, row))
+            nid = rec.pop("node_id")
+            if nid:
+                out[nid] = rec
+        return out
+    except Exception as e:
+        logger.warning("_fetch_not_assessed_obligation_rows failed: %s", e)
+        return {}
+
+
+def _apply_demonstrates_overlay(
+    posture: dict, tenant_id: str, pg_conn,
+) -> tuple[int, int]:
+    """Attach demonstrated_by + propagated_finding to obligation posture
+    records, and materialise Not-assessed obligation rows where
+    demonstration exists.
 
     Aggregation rule for `propagated_finding`:
       - If every contributing source is Comply  → 'Comply'
       - Else if any source is Comply or OFI     → 'OFI'  (partial)
       - Else (all sources NC / N/A / missing)   → not set
 
-    "Contributing" means the source has an entry in the posture dict.
-    Sources with no assessed posture don't count either way — they're
-    silent, not weakening.
+    Behaviour by target state:
+      - target has finding != 'Not assessed' → attach demonstrated_by +
+        propagated_finding as METADATA; DO NOT touch `finding`
+        (tenant's assessment stands). Phase 2b behavior.
+      - target has finding == 'Not assessed' (not in main posture
+        dict because SQL filters them out) → fetch the row from DB,
+        materialise into posture, and set `finding` = propagated_finding
+        with source='demonstrates_propagation'. Phase 2c behavior.
+      - target has no posture_controls row at all → skipped (we do not
+        invent postures from thin air).
 
-    Returns the count of obligation records enriched.
+    Returns (overlays, materialised).
     """
     demo_map = _fetch_demonstrates_map()
     if not demo_map:
-        return 0
+        return (0, 0)
+
+    # Phase 2c: fetch Not-assessed obligation rows for the DEMONSTRATES
+    # target set. These are candidates for finding materialisation.
+    not_assessed = _fetch_not_assessed_obligation_rows(
+        pg_conn, tenant_id, set(demo_map.keys()) - set(posture.keys()),
+    )
 
     overlays = 0
+    materialised = 0
     for tgt_id, sources in demo_map.items():
         tgt_rec = posture.get(tgt_id)
+        materialising = False
         if tgt_rec is None:
-            continue
+            tgt_rec = not_assessed.get(tgt_id)
+            if tgt_rec is None:
+                continue
+            materialising = True
 
         contributing: list[dict] = []
         for src in sources:
@@ -439,22 +506,41 @@ def _apply_demonstrates_overlay(posture: dict) -> int:
             })
 
         if not contributing:
+            # No demonstration to base propagation on. If we pulled this
+            # row for materialisation, drop it — Not-assessed with no
+            # positive demonstration stays out of posture, same as
+            # before Phase 2c.
             continue
 
-        # Attach provenance regardless of whether we propagate a finding —
-        # UI wants to show "demonstrated-by A, B, C" for auditor narrative.
         tgt_rec["demonstrated_by"] = contributing
-
         findings = {c["finding"] for c in contributing}
+        propagated: str | None = None
         if findings and findings <= {"Comply"}:
-            tgt_rec["propagated_finding"] = "Comply"
+            propagated = "Comply"
         elif findings & {"Comply", "OFI"}:
-            tgt_rec["propagated_finding"] = "OFI"
-        # else: sources exist but only NC/N/A → no positive propagation
+            propagated = "OFI"
+
+        if propagated:
+            tgt_rec["propagated_finding"] = propagated
+
+        if materialising:
+            # Only materialise if we have a positive propagation.
+            # Otherwise Not-assessed stays Not-assessed (unchanged).
+            if not propagated:
+                continue
+            tgt_rec["finding"]          = propagated
+            tgt_rec["source"]           = "demonstrates_propagation"
+            tgt_rec["gap_description"]  = (
+                f"Propagated from {len(contributing)} demonstrator(s) "
+                f"across PROGRAM/EXTENSION postures. See demonstrated_by."
+            )
+            tgt_rec["remediation_status"] = None
+            posture[tgt_id] = tgt_rec
+            materialised += 1
 
         overlays += 1
 
-    return overlays
+    return (overlays, materialised)
 
 
 def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
