@@ -64,6 +64,35 @@ side effect. The LLM's 27001 gravity well is the natural output of
 treating co-equal standards. Role model turns propagation from LLM
 inference into deterministic routing.
 
+## Phase 2b shipped 2026-07-05 (additive metadata overlay)
+
+- **scripts/seed_demonstrates_edges.py** — creates DEMONSTRATES
+  edges from every PROGRAM/EXTENSION → OBLIGATION relationship in
+  the existing cross-framework catalog. 235 edges seeded:
+  - ISO27001 → GDPR: IMPLEMENTS(90) + SUPPORTS(41) + ENABLES(11)
+    + GOVERNANCE(7) = 149
+  - ISO27701 → GDPR: IMPLEMENTS(86) = 86
+  Idempotent via MERGE on (source, target, via_edge). Direction
+  enforced: source.role_owner ∈ {program, extension} AND
+  target.role_owner = obligation.
+- **rag/posture_loader.py** — `_apply_demonstrates_overlay()`
+  reads the DEMONSTRATES map from Neo4j and attaches
+  `demonstrated_by` (list of contributing sources with their
+  findings) + `propagated_finding` to obligation posture records.
+  Aggregation: all sources Comply → Comply; any Comply/OFI → OFI;
+  else no propagation. Top-level `finding` is NOT modified (Phase
+  2c will flip it for Not-assessed obligations); this is a pure
+  metadata overlay so downstream consumers (Phase 3 extractor +
+  Phase 4 UI) can read the provenance without any user-visible
+  behavior change.
+- On Arion: 44 GDPR articles enriched — 33 propagate to OFI (27701
+  overlay partially demonstrates), 11 have only-NC demonstrators.
+
+Reverse GDPR→ISO edges (125 total) stay untouched — they are the
+auditor navigation direction, not demonstration. ISO27701 →
+ISO27001 SUPPORTS edges (26) stay untouched — those are the
+`extends` relationship at the control level.
+
 ## Phase 1 shipped 2026-07-05 (no behavior change)
 
 - **schema_v60_standards_role_model.sql** — adds `role`, `subject`

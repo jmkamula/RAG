@@ -114,6 +114,18 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
     # Fulfilment-engine overlay: override multi-leaf curated verdicts.
     engine_overrides = _apply_engine_overlay(posture, tenant_id, pg_conn)
 
+    # DEMONSTRATES overlay (framework role model, Phase 2b, 2026-07-05):
+    # For every OBLIGATION control (GDPR articles, etc.), look up which
+    # PROGRAM/EXTENSION controls demonstrate it via DEMONSTRATES edges
+    # in Neo4j, aggregate the sources' current findings, and attach
+    # `demonstrated_by` + `propagated_finding` as METADATA on the
+    # obligation's posture record. `finding` itself is NOT modified —
+    # Phase 2b is deliberately additive so downstream consumers
+    # (Phase 3 extractor, Phase 4 UI) can read the metadata without
+    # any user-visible behavior change from Phase 1. Phase 2c will
+    # flip `finding` when the obligation has no direct posture.
+    demonstrates_overlays = _apply_demonstrates_overlay(posture)
+
     # S3e: cascade overlay — controls with overdue triggered_implications
     # get pending engine PAs (Stage-2 review queue). Best-effort: failure
     # here does not corrupt the live posture.
@@ -140,7 +152,8 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
         f"{sum(1 for r in posture.values() if r['finding']=='Comply')} Comply, "
         f"{sum(1 for r in posture.values() if r['finding']=='N/A')} N/A; "
         f"engine_overrides={engine_overrides}; "
-        f"cascade_proposals={cascade_proposals})"
+        f"cascade_proposals={cascade_proposals}; "
+        f"demonstrates_overlays={demonstrates_overlays})"
     )
     return posture
 
@@ -316,6 +329,132 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
     except Exception as e:
         logger.warning("posture engine overlay skipped (%s: %s)", type(e).__name__, e)
         return 0
+
+
+# ── Framework role model overlays (Phase 2b, 2026-07-05) ─────────────
+
+# Rank of finding strengths, lowest = strongest. Used when aggregating
+# multiple PROGRAM/EXTENSION demonstrators pointing at the same
+# OBLIGATION control.
+_FINDING_STRENGTH = {"Comply": 0, "OFI": 1, "NC": 2, "N/A": 3}
+
+
+def _fetch_demonstrates_map() -> dict[str, list[dict]]:
+    """Load the DEMONSTRATES edge map from Neo4j, keyed by target
+    (obligation) node id. Returns {} on any failure — this is an
+    overlay, not a hard dependency.
+
+    Shape:
+      {
+        "GDPR:2016/679:Art.28": [
+          {"src_id": "ISO27001:2022:A.5.19", "src_std": "ISO27001:2022",
+           "via_edge": "IMPLEMENTS", "rationale": "...", "strength": "high"},
+          {"src_id": "ISO27701:2019:B.8.5.6", ...},
+        ],
+        ...
+      }
+    """
+    try:
+        driver = _build_engine_neo4j_driver()
+        if driver is None:
+            return {}
+        try:
+            with driver.session() as s:
+                out: dict[str, list[dict]] = {}
+                for r in s.run(
+                    """
+                    MATCH (src:RequirementNode)-[d:DEMONSTRATES]->(tgt:RequirementNode)
+                    RETURN
+                      tgt.id          AS tgt_id,
+                      src.id          AS src_id,
+                      src.standard_id AS src_std,
+                      d.via_edge      AS via_edge,
+                      d.rationale     AS rationale,
+                      d.strength      AS strength
+                    """
+                ):
+                    out.setdefault(r["tgt_id"], []).append({
+                        "src_id":    r["src_id"],
+                        "src_std":   r["src_std"],
+                        "via_edge":  r["via_edge"],
+                        "rationale": r["rationale"],
+                        "strength":  r["strength"],
+                    })
+                return out
+        finally:
+            try:
+                driver.close()
+            except Exception:
+                pass
+    except Exception as e:
+        logger.warning("_fetch_demonstrates_map failed: %s", e)
+        return {}
+
+
+def _apply_demonstrates_overlay(posture: dict) -> int:
+    """Attach `demonstrated_by` + `propagated_finding` to every
+    obligation posture record that has ≥1 PROGRAM/EXTENSION
+    demonstrator with a non-NC/non-N/A finding.
+
+    Additive only — the top-level `finding` is NOT modified. Phase 2c
+    will flip `finding` for obligations that are 'Not assessed' (or
+    have no row at all); Phase 2b just plumbs the provenance so the
+    UI + downstream consumers can read it now.
+
+    Aggregation rule for `propagated_finding`:
+      - If every contributing source is Comply  → 'Comply'
+      - Else if any source is Comply or OFI     → 'OFI'  (partial)
+      - Else (all sources NC / N/A / missing)   → not set
+
+    "Contributing" means the source has an entry in the posture dict.
+    Sources with no assessed posture don't count either way — they're
+    silent, not weakening.
+
+    Returns the count of obligation records enriched.
+    """
+    demo_map = _fetch_demonstrates_map()
+    if not demo_map:
+        return 0
+
+    overlays = 0
+    for tgt_id, sources in demo_map.items():
+        tgt_rec = posture.get(tgt_id)
+        if tgt_rec is None:
+            continue
+
+        contributing: list[dict] = []
+        for src in sources:
+            src_rec = posture.get(src["src_id"])
+            if src_rec is None:
+                continue
+            src_finding = src_rec.get("finding")
+            if src_finding not in _FINDING_STRENGTH:
+                continue
+            contributing.append({
+                "src_id":   src["src_id"],
+                "src_std":  src["src_std"],
+                "via_edge": src["via_edge"],
+                "finding":  src_finding,
+                "strength": src.get("strength"),
+            })
+
+        if not contributing:
+            continue
+
+        # Attach provenance regardless of whether we propagate a finding —
+        # UI wants to show "demonstrated-by A, B, C" for auditor narrative.
+        tgt_rec["demonstrated_by"] = contributing
+
+        findings = {c["finding"] for c in contributing}
+        if findings and findings <= {"Comply"}:
+            tgt_rec["propagated_finding"] = "Comply"
+        elif findings & {"Comply", "OFI"}:
+            tgt_rec["propagated_finding"] = "OFI"
+        # else: sources exist but only NC/N/A → no positive propagation
+
+        overlays += 1
+
+    return overlays
 
 
 def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
