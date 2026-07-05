@@ -123,7 +123,9 @@ def _compose_bridge_excerpt(rationale: str | None,
     return body[:500] or None
 
 
-def _walk_bridges(driver: Driver, source_id: str) -> list[tuple[str, str, str, str]]:
+def _walk_bridges(
+    driver: Driver, source_id: str,
+) -> list[tuple[str, str, str, str, str, str]]:
     """
     Walk cross-framework bridge edges from a source control node to bridged
     target controls in other standards. Walks BOTH edge types
@@ -142,20 +144,28 @@ def _walk_bridges(driver: Driver, source_id: str) -> list[tuple[str, str, str, s
       landing on Art.28 wouldn't propagate to A.7.2.6 because there's
       no outbound edge from Art.28.
 
-    Returns list of (target_node_id, target_standard_id, target_ref, rationale).
-    Deduped when the same target is reachable via both edge types.
+    Returns list of (target_node_id, target_standard_id, target_ref,
+    rationale, src_role, tgt_role). The role columns (Phase 1
+    role model) let callers filter PROGRAM/EXTENSION → OBLIGATION
+    edges — those are handled deterministically by DEMONSTRATES
+    propagation in posture_loader (Phase 2b/2c), so xfw proposals
+    for that direction would double-write. Deduped when the same
+    target is reachable via both edge types.
     """
     cypher = """
     MATCH (a {id: $src_id})-[r:IMPLEMENTS|SUPPORTS]-(b)
     WHERE b.standard_id <> a.standard_id
-    RETURN DISTINCT b.id          AS tgt_id,
-                    b.standard_id AS tgt_std,
-                    b.ref         AS tgt_ref,
-                    coalesce(r.rationale, '') AS rationale
+    RETURN DISTINCT b.id                    AS tgt_id,
+                    b.standard_id           AS tgt_std,
+                    b.ref                   AS tgt_ref,
+                    coalesce(r.rationale, '') AS rationale,
+                    coalesce(a.role_owner, '') AS src_role,
+                    coalesce(b.role_owner, '') AS tgt_role
     """
     with driver.session() as s:
         return [
-            (row["tgt_id"], row["tgt_std"], row["tgt_ref"], row["rationale"])
+            (row["tgt_id"], row["tgt_std"], row["tgt_ref"],
+             row["rationale"], row["src_role"], row["tgt_role"])
             for row in s.run(cypher, src_id=source_id)
         ]
 
@@ -458,8 +468,18 @@ def propose_for_findings(
         targets = _walk_bridges(driver, src_id)
         summary.edges_seen += len(targets)
 
-        for tgt_id, tgt_std, tgt_ref, rationale in targets:
+        for tgt_id, tgt_std, tgt_ref, rationale, src_role, tgt_role in targets:
             if tgt_std not in in_scope:
+                summary.proposals_skipped += 1
+                continue
+            # Phase 5 (framework role model, 2026-07-05): DEMONSTRATES
+            # propagation (Phase 2b/2c) is the deterministic replacement
+            # for PROGRAM/EXTENSION → OBLIGATION xfw proposals. Skip
+            # that direction here to avoid double-writing an in-memory
+            # posture overlay AND a Stage-1 xfw_bridge finding for the
+            # same relationship. Peer directions (PROGRAM ↔ PROGRAM,
+            # reverse OBLIGATION → PROGRAM navigation) stay active.
+            if src_role in ("program", "extension") and tgt_role == "obligation":
                 summary.proposals_skipped += 1
                 continue
             key = (document_id, tgt_ref, tgt_std)
@@ -554,8 +574,14 @@ def propose_backfill(
             targets = _walk_bridges(driver, src_id)
             summary.edges_seen += len(targets)
 
-            for tgt_id, tgt_std, tgt_ref, rationale in targets:
+            for tgt_id, tgt_std, tgt_ref, rationale, src_role, tgt_role in targets:
                 if tgt_std not in in_scope:
+                    summary.proposals_skipped += 1
+                    continue
+                # Phase 5 (framework role model, 2026-07-05): skip
+                # PROGRAM/EXTENSION → OBLIGATION direction — handled
+                # deterministically by DEMONSTRATES propagation.
+                if src_role in ("program", "extension") and tgt_role == "obligation":
                     summary.proposals_skipped += 1
                     continue
                 key = (doc_id, tgt_ref, tgt_std)

@@ -64,6 +64,31 @@ side effect. The LLM's 27001 gravity well is the natural output of
 treating co-equal standards. Role model turns propagation from LLM
 inference into deterministic routing.
 
+## Phase 5 shipped 2026-07-05 (xfw_proposer fallback-only)
+
+- **rag/intake/xfw_proposer.py** — `_walk_bridges` now also returns
+  `src_role` and `tgt_role` (populated by Phase 1's role_owner
+  backfill). Both call sites — `propose_for_findings` (per-upload)
+  and `propose_backfill` — skip target proposals where source is
+  PROGRAM/EXTENSION and target is OBLIGATION. That direction is
+  now handled deterministically by DEMONSTRATES propagation in
+  posture_loader (Phase 2b/2c); double-writing produces a
+  redundant Stage-1 xfw_bridge finding for a relationship that's
+  already surfaced as an in-memory posture overlay + drill-in
+  provenance (Phase 4a).
+- Kept directions:
+    - OBLIGATION → PROGRAM (reverse navigation surface, useful for
+      "which ISO controls implement this GDPR article")
+    - PROGRAM ↔ PROGRAM (future SOC 2 ↔ ISO 27001 peer bridges)
+    - PROGRAM ↔ EXTENSION (extension curation coverage)
+- Existing pending xfw_bridge findings in Stage-1 stay valid; the
+  filter applies only to newly-proposed rows from Phase 5 onward.
+- Safety note: Phase 5's filter assumes 1:1 correspondence between
+  IMPLEMENTS/SUPPORTS PROGRAM→OBLIGATION edges and DEMONSTRATES
+  edges — established by Phase 2a's seed. Any new IMPLEMENTS
+  edges added AFTER seed_demonstrates_edges.py runs need a
+  re-seed (idempotent) to maintain coverage.
+
 ## Phase 4a shipped 2026-07-05 (demonstrated-by drill-in provenance)
 
 - **api_server.py** — new endpoint
