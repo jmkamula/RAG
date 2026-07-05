@@ -2663,6 +2663,26 @@ async def dashboard_posture(
             "Other GDPR articles",
         ]
 
+        # Load role model metadata (schema_v60): role + subject per
+        # standard. Used by the three-lens dashboard restructure
+        # (Phase 4b, 2026-07-05) to group frameworks by their compliance-
+        # stack position. Silent fallback: role/subject may be None if
+        # the standard hasn't been backfilled yet.
+        role_meta: dict = {}
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "SELECT id, role, subject FROM standards WHERE id = ANY(%s)",
+                    ([std for std in by_std.keys()],),
+                )
+                for sid, role, subject in cur.fetchall():
+                    role_meta[sid] = {
+                        "role":    role,
+                        "subject": list(subject or []),
+                    }
+        except Exception as ex:
+            logger.warning("dashboard role_meta lookup failed: %s", ex)
+
         frameworks = []
         for std, entry in by_std.items():
             if std.startswith("ISO27001"):
@@ -2679,21 +2699,31 @@ async def dashboard_posture(
                 ctrls.sort(key=lambda c: _control_sort_key(c["control_ref"]))
                 groups_out.append({"label": label, "controls": ctrls})
 
+            meta = role_meta.get(std, {})
             frameworks.append({
                 "standard_id":  std,
                 "display_name": _STANDARD_DISPLAY.get(std, std),
+                "role":         meta.get("role"),
+                "subject":      meta.get("subject", []),
                 "summary":      entry["summary"],
                 "groups":       groups_out,
             })
 
-        # Stable display order: ISO 27001 first, then GDPR, then anything
-        # else alphabetically. Tenants that only have GDPR see GDPR first.
+        # Order frameworks by role (PROGRAM → EXTENSION → OBLIGATION),
+        # then by legacy hardcoded rank for stable ordering within each
+        # role. The role model view (three-lens) uses this same order,
+        # rendering role-band headers as it scans down the list.
+        _role_rank = {"program": 0, "extension": 1, "obligation": 2, "guidance": 3}
         def _std_rank(s):
             if s.startswith("ISO27001"): return 0
             if s.startswith("ISO27701"): return 1
             if s.startswith("GDPR"):     return 2
             return 9
-        frameworks.sort(key=lambda f: (_std_rank(f["standard_id"]), f["standard_id"]))
+        frameworks.sort(key=lambda f: (
+            _role_rank.get(f.get("role"), 9),
+            _std_rank(f["standard_id"]),
+            f["standard_id"],
+        ))
 
         return {
             "tenant_id":  key_info.tenant_id,

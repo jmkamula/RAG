@@ -1820,7 +1820,30 @@ function renderDashboard(d, freshness, implications, followups, kpis) {
     <span><span class="heat-legend-swatch f-NotAssessed"></span>Not assessed</span>
   </div>`;
 
+  // Framework role model (Phase 4b, 2026-07-05): render a role-band
+  // header before each transition (program / extension / obligation /
+  // guidance). Backend orders frameworks so all program rows come
+  // first, then extension, then obligation — matching the compliance
+  // stack (ISMS spine → PIMS overlay → legal test).
+  const _ROLE_HEADER = {
+    program:    { label: 'Programs',   sub: 'your ISMS spine — the management systems you certify or attest against' },
+    extension:  { label: 'Extensions', sub: 'overlays on top of a program — privacy, cloud, sector-specific' },
+    obligation: { label: 'Obligations', sub: 'legal / regulatory requirements — demonstrated by your programs + extensions' },
+    guidance:   { label: 'Guidance',   sub: 'companion documents (codes of practice)' },
+  };
+  let lastRole = null;
+
   for (const fw of d.frameworks) {
+    // Emit role-band header when the role changes. Fallback: skip
+    // header when role is null (backfill hasn't run for this std).
+    if (fw.role && fw.role !== lastRole) {
+      const rh = _ROLE_HEADER[fw.role] || { label: fw.role, sub: '' };
+      html += `<div style="margin:22px 0 8px;padding:6px 10px;background:#F0EEE3;border-left:3px solid #534AB7;border-radius:2px">
+        <div style="font-size:11px;font-weight:700;color:#3A382E;text-transform:uppercase;letter-spacing:0.4px">${escapeHtml(rh.label)}</div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:2px">${escapeHtml(rh.sub)}</div>
+      </div>`;
+      lastRole = fw.role;
+    }
     const s = fw.summary;
     const tot = s.total || 1;
     const segs = ['NC','OFI','Comply','N/A','Not assessed'].map(k => {

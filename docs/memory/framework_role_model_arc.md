@@ -64,6 +64,25 @@ side effect. The LLM's 27001 gravity well is the natural output of
 treating co-equal standards. Role model turns propagation from LLM
 inference into deterministic routing.
 
+## Phase 4b shipped 2026-07-05 (role-band dashboard headers)
+
+- **api_server.py** `/api/v1/dashboard/posture` — response
+  frameworks now carry `role` + `subject` fields (looked up from
+  the standards table in a single batch query with silent fallback).
+  Frameworks re-ordered by role rank (program → extension →
+  obligation → guidance) then by legacy standard rank as tiebreak.
+- **static/arioncomply.html** — `renderDashboard` emits a
+  role-band header (indigo left-bar chip) each time the role
+  transitions in the framework iteration. Copy is tenant-friendly:
+  "Programs — your ISMS spine…", "Extensions — overlays on top of
+  a program…", "Obligations — legal / regulatory requirements
+  demonstrated by your programs + extensions". Backfill-missing
+  role → header suppressed (no visible degradation).
+- Deliberately kept the linear scrollable layout instead of
+  role-tabs — tenants want to see the whole compliance stack
+  at once; the band headers make the hierarchy visible without
+  hiding rows behind clicks.
+
 ## Phase 5 shipped 2026-07-05 (xfw_proposer fallback-only)
 
 - **rag/intake/xfw_proposer.py** — `_walk_bridges` now also returns
