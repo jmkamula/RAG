@@ -3918,10 +3918,11 @@ async function doConfirm() {
     if (selected.kind === 's1') {
       const ids = (s1Details[selected.control_ref] || []).map(f => f.finding_id);
       if (!ids.length) throw new Error('No pending findings to approve');
-      await api('/api/v1/findings/approve', {
+      const resp = await api('/api/v1/findings/approve', {
         method:'POST', body:JSON.stringify({finding_ids: ids})
       });
       toast(`✓ ${selected.control_ref} evidence approved (${ids.length} finding${ids.length!==1?'s':''})`);
+      showEngineReport(resp);
     } else {
       await api(`/api/v1/stage2/${encodeURIComponent(selected.control_ref)}/approve`, {method:'POST'});
       toast(`✓ ${selected.control_ref} posture proposal accepted`);
@@ -4637,6 +4638,7 @@ async function _doFindingAction(finding_ids, action, rationale, rows) {
     if (action === 'approve') {
       const n = r.approved || finding_ids.length;
       toast(`✓ Approved ${n} finding${n===1?'':'s'}`);
+      showEngineReport(r);
     } else {
       const n = r.rejected || finding_ids.length;
       toast(`✓ Rejected ${n} finding${n===1?'':'s'}`);
@@ -4689,6 +4691,89 @@ function toast(msg) {
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+// Render the engine report attached to /api/v1/findings/approve responses
+// (see rag/posture/stage1_review_chat._build_engine_report_for_control).
+// Shows the tenant which leaves progressed, what's still missing, and
+// the top next-action hints. Silent no-op when the response has no
+// report (older backends, empty controls list, etc).
+function showEngineReport(resp) {
+  if (!resp || !resp.controls || !resp.controls.length) return;
+  const controlsWithReport = resp.controls.filter(
+    c => c.engine_report && (
+      (c.engine_report.next_actions && c.engine_report.next_actions.length) ||
+      (c.engine_report.leaves && c.engine_report.leaves.length)
+    )
+  );
+  if (!controlsWithReport.length) return;
+
+  const esc = s => (s == null ? '' : String(s))
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  // Remove any previous report panel so we don't stack.
+  const prev = document.getElementById('engine-report-panel');
+  if (prev) prev.remove();
+
+  const sections = controlsWithReport.map(c => {
+    const er = c.engine_report;
+    const changedBadge = c.posture_changed
+      ? `<span style="background:#1D9E75;color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;margin-left:6px">${esc(c.prior_finding || '?')} → ${esc(c.finding || '?')}</span>`
+      : `<span style="background:#EEECE2;color:#5C5A4F;padding:2px 8px;border-radius:10px;font-size:10px;margin-left:6px">${esc(c.finding || '?')} (unchanged)</span>`;
+
+    const progress = `${er.leaves_fully_satisfied}/${er.leaves_total} leaves fully satisfied`;
+
+    const actions = (er.next_actions || []).map(h =>
+      `<li style="margin-bottom:6px;padding-left:4px;color:#3A382E;font-size:12px;line-height:1.5">${esc(h)}</li>`
+    ).join('');
+
+    return `<div style="margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #E8E5DA">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+        <span style="font-family:monospace;font-weight:600;color:#3A382E">${esc(c.control_ref)}</span>
+        ${changedBadge}
+      </div>
+      <div style="font-size:11px;color:#7C7A6E;margin-bottom:8px">${esc(progress)}</div>
+      ${actions ? `<ol style="margin:0;padding-left:18px">${actions}</ol>` : ''}
+    </div>`;
+  }).join('');
+
+  const panel = document.createElement('div');
+  panel.id = 'engine-report-panel';
+  panel.style.cssText = [
+    'position:fixed',
+    'right:22px',
+    'bottom:22px',
+    'width:360px',
+    'max-height:70vh',
+    'overflow-y:auto',
+    'background:#fff',
+    'border:1px solid #D4D1C2',
+    'border-radius:8px',
+    'box-shadow:0 6px 24px rgba(60,52,137,0.14)',
+    'padding:14px 16px',
+    'z-index:1000',
+    'font-family:inherit',
+  ].join(';');
+  panel.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #F0EEE3">
+      <div style="font-size:12px;font-weight:600;color:#3A382E">
+        <i class="ti ti-report-analytics" style="vertical-align:middle"></i>
+        What your approval unlocked
+      </div>
+      <button type="button" onclick="document.getElementById('engine-report-panel').remove()"
+        style="border:0;background:transparent;color:#7C7A6E;font-size:16px;cursor:pointer;padding:0;line-height:1">×</button>
+    </div>
+    ${sections}
+    <div style="font-size:10px;color:#9C9A8E;margin-top:4px;text-align:right">Auto-dismiss in 25s</div>
+  `;
+  document.body.appendChild(panel);
+
+  // Auto-dismiss after 25 sec unless the tenant is interacting with it.
+  let dismissTimer = setTimeout(() => panel.remove(), 25000);
+  panel.addEventListener('mouseenter', () => clearTimeout(dismissTimer));
+  panel.addEventListener('mouseleave', () => {
+    dismissTimer = setTimeout(() => panel.remove(), 8000);
+  });
 }
 
 // Surface a caught-exception error to the tenant. If the raw
