@@ -207,6 +207,16 @@ def extract(
 
         if scoped_leaf_ids:
             leaf_musts = _fetch_leaf_musts(scoped_leaf_ids)
+            # Big step (RAG-native intake, 2026-07-06): MUST-level
+            # fingerprint pre-filter. After the leaf classifier keeps
+            # the relevant leaves, filter each leaf's MUSTs down to only
+            # those with fingerprint hits in doc content. Turns pass-1
+            # from a classifier ("which of 20 MUSTs binds here?") into
+            # a quote extractor ("here are 3 MUSTs — extract the quote
+            # if you find one"). Pass-2 still catches metadata-shaped
+            # MUSTs (dates, signatures) that fingerprints don't cover
+            # via its per-leaf unfilled-MUST recall pass.
+            leaf_musts = _filter_musts_via_fingerprints(leaf_musts, doc)
             doc.extraction_metrics["leaf_musts_count"] = sum(
                 len(items) for items in leaf_musts.values()
             )
@@ -2397,6 +2407,105 @@ def _classify_leaves_via_fingerprints(
         len(scoped_leaf_ids) - len(final),
     )
     return final
+
+
+def _filter_musts_via_fingerprints(
+    leaf_musts: dict, doc: ParsedDocument,
+) -> dict:
+    """MUST-level fingerprint pre-filter (big step of RAG-native intake).
+
+    For each leaf in leaf_musts, keep only the (item_id, item_text)
+    tuples whose must_id has ≥1 fingerprint keyword-set match in the
+    doc content. Preserves the dict shape so downstream code
+    (_llm_extract's must_section renderer) is unchanged.
+
+    Safety fallbacks (leaves in pool unchanged if any apply):
+      - Leaf has no fingerprint yaml at all (uncurated)
+      - ALL MUSTs of the leaf have zero fingerprint hits (unusual
+        vocabulary; let LLM decide)
+
+    Downstream compat: LLM's per-MUST binding tag comes back
+    unchanged; pass-2 still runs on partial leaves to catch
+    metadata-shaped MUSTs (dates, signatories, revision-history
+    rows) that fingerprints don't cover.
+
+    Silent fallback: any exception returns leaf_musts unchanged.
+    """
+    if not leaf_musts:
+        return leaf_musts
+
+    index = _get_leaf_fingerprint_index()
+    if not index:
+        return leaf_musts
+
+    try:
+        from .leaf_driven_scan import _excerpt_matches
+    except Exception:
+        return leaf_musts
+
+    body = doc.markdown or doc.full_text or ""
+    if not body:
+        return leaf_musts
+
+    filtered: dict[str, list[tuple[str, str]]] = {}
+    total_before = sum(len(v) for v in leaf_musts.values())
+    total_after  = 0
+    leaves_narrowed  = 0
+    leaves_unchanged = 0
+
+    for leaf_id, items in leaf_musts.items():
+        fps = index.get(leaf_id)
+        if fps is None:
+            # Uncurated leaf — safety fallback, all MUSTs stay in pool.
+            filtered[leaf_id] = items
+            total_after += len(items)
+            leaves_unchanged += 1
+            continue
+
+        # Build must_id → keyword_sets map for this leaf.
+        must_kw = {fp.must_id: fp.excerpt_keywords for fp in fps}
+
+        kept_items: list[tuple[str, str]] = []
+        for iid, itext in items:
+            keyword_sets = must_kw.get(iid)
+            if not keyword_sets:
+                # MUST with no fingerprint entry within a curated leaf:
+                # keep it (fingerprint catalog may cover the leaf but
+                # not every MUST — e.g. metadata MUSTs are typically
+                # unfingerprinted).
+                kept_items.append((iid, itext))
+                continue
+            if _excerpt_matches(body, keyword_sets):
+                kept_items.append((iid, itext))
+
+        if not kept_items:
+            # No MUSTs matched via fingerprint — likely vocabulary
+            # mismatch. Keep the full list; pass-2 or LLM classification
+            # can still find bindings.
+            filtered[leaf_id] = items
+            total_after += len(items)
+            leaves_unchanged += 1
+            continue
+
+        if len(kept_items) == len(items):
+            leaves_unchanged += 1
+        else:
+            leaves_narrowed += 1
+        filtered[leaf_id] = kept_items
+        total_after += len(kept_items)
+
+    doc.extraction_metrics["must_prefilter"]           = "fingerprint_pass1"
+    doc.extraction_metrics["musts_before_prefilter"]   = total_before
+    doc.extraction_metrics["musts_after_prefilter"]    = total_after
+    doc.extraction_metrics["leaves_narrowed_by_musts"] = leaves_narrowed
+    if total_before:
+        logger.info(
+            "MUST pre-filter for %s: %d/%d MUSTs kept "
+            "(%d leaves narrowed, %d unchanged)",
+            doc.original_name, total_after, total_before,
+            leaves_narrowed, leaves_unchanged,
+        )
+    return filtered
 
 
 def _scope_controls(controls: list[dict], doc: ParsedDocument) -> list[dict]:
