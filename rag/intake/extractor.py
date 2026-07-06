@@ -222,10 +222,38 @@ def extract(
             )
             doc.extraction_metrics["leaf_musts_source"] = "scoped-controls-fallback"
 
+    # LLM-free stage 4-5 (2026-07-06): deterministic fingerprint
+    # classifier + sentence-heuristic quote extraction. Runs on the
+    # scoped leaves (whether from doc_mappings target_leaves or the
+    # retrieval/heuristic fallback). Emits DocumentFindings directly;
+    # the LLM path below only sees leaves that fingerprints did NOT
+    # cover (curation gaps + metadata-shaped MUSTs pass-2 catches).
+    fp_leaf_pool: list[str] = []
+    if target_leaves:
+        fp_leaf_pool = [t.get("leaf_id") for t in target_leaves if t.get("leaf_id")]
+    elif scoped_leaf_ids:
+        fp_leaf_pool = list(scoped_leaf_ids)
+
+    fp_findings: list[DocumentFinding] = []
+    fp_covered: set[str] = set()
+    if fp_leaf_pool:
+        fp_findings, fp_covered = _extract_via_fingerprints(doc, fp_leaf_pool)
+
+    # Narrow the leaf_musts sent to the LLM to leaves NOT covered by
+    # fingerprint extraction. Preserves LLM effort for the actual gaps.
+    if leaf_musts and fp_covered:
+        leaf_musts = {
+            lid: items for lid, items in leaf_musts.items()
+            if lid not in fp_covered
+        }
+        doc.extraction_metrics["llm_leaves_after_fp_coverage"] = len(leaf_musts)
+
     if doc.extraction_path == ExtractionPath.FULL_DOCUMENT:
-        findings = _extract_full(doc, scoped, api_key, leaf_musts=leaf_musts)
+        llm_findings = _extract_full(doc, scoped, api_key, leaf_musts=leaf_musts)
     else:  # SECTION_BASED
-        findings = _extract_sections(doc, scoped, api_key, leaf_musts=leaf_musts)
+        llm_findings = _extract_sections(doc, scoped, api_key, leaf_musts=leaf_musts)
+
+    findings = fp_findings + llm_findings
     _finalize_yield_metrics(doc, findings)
     return findings
 
@@ -2506,6 +2534,195 @@ def _filter_musts_via_fingerprints(
             leaves_narrowed, leaves_unchanged,
         )
     return filtered
+
+
+# ── LLM-free intake stage 4-5 (2026-07-06) ──────────────────────────────
+# Fingerprint-native extraction: deterministic MUST classifier + sentence-
+# heuristic quote extraction. Replaces the LLM's classification pass for
+# curated leaves; the LLM continues to handle uncurated leaves (curation
+# gap) and pass-2 metadata recall on partial bindings.
+#
+# Auditor story: "Fingerprint keyword set {tokens} matched at line N;
+# here's the sentence." Reproducible, no framework bias, no LLM opinion.
+
+
+def _parse_leaf_id(leaf_id: str) -> tuple[str, str]:
+    """'req:A.5.15:access_control_policy' → ('A.5.15', 'ISO27001:2022')."""
+    parts = leaf_id.split(":")
+    control_ref = parts[1] if len(parts) >= 2 else ""
+    return control_ref, _control_ref_to_standard(control_ref)
+
+
+def _find_keyword_set_position(body: str, kw_set: list[str]) -> Optional[int]:
+    """Return the character offset in `body` where the first token of
+    the keyword set appears IF all tokens are present in the body.
+    Case-insensitive substring search. Returns None if not all tokens
+    are present.
+
+    We match on the raw body (not normalised) so the returned offset
+    can be used directly for quote extraction. Normalisation would strip
+    punctuation and collapse whitespace, shifting positions.
+    """
+    if not kw_set or not body:
+        return None
+    body_lower = body.lower()
+    positions: list[int] = []
+    for tok in kw_set:
+        tok_lower = str(tok or "").lower().strip()
+        if not tok_lower:
+            continue
+        idx = body_lower.find(tok_lower)
+        if idx < 0:
+            return None
+        positions.append(idx)
+    if not positions:
+        return None
+    # Anchor on the first-appearing token so the quote captures the
+    # earliest mention of the concept.
+    return min(positions)
+
+
+def _fingerprint_extract_matches(
+    scoped_leaf_ids: list[str], doc: ParsedDocument,
+) -> list[dict]:
+    """Stage 4 (LLM-free): scan doc content against each leaf's MUST
+    fingerprints; return one match record per (leaf, MUST) pair whose
+    keyword set is present.
+
+    Match shape:
+      {
+        must_id:      "item:A.5.15:rbac",
+        leaf_id:      "req:A.5.15:access_control_policy",
+        control_ref:  "A.5.15",
+        standard_id:  "ISO27001:2022",
+        matched_kw:   ["role", "based", "access"],
+        position:     1423,   # char offset in body
+      }
+    """
+    index = _get_leaf_fingerprint_index()
+    if not index or not scoped_leaf_ids:
+        return []
+    body = doc.markdown or doc.full_text or ""
+    if not body:
+        return []
+
+    matches: list[dict] = []
+    for leaf_id in scoped_leaf_ids:
+        fps = index.get(leaf_id)
+        if not fps:
+            continue
+        control_ref, standard_id = _parse_leaf_id(leaf_id)
+        for fp in fps:
+            for kw_set in fp.excerpt_keywords:
+                pos = _find_keyword_set_position(body, kw_set)
+                if pos is not None:
+                    matches.append({
+                        "must_id":     fp.must_id,
+                        "leaf_id":     leaf_id,
+                        "control_ref": control_ref,
+                        "standard_id": standard_id,
+                        "matched_kw":  kw_set,
+                        "position":    pos,
+                    })
+                    break   # first winning kw_set is enough per MUST
+    return matches
+
+
+_SENTENCE_BOUNDARIES = [". ", ".\n", "?\n", "!\n", "!\r\n", "?\r\n", ".\r\n", "\n\n"]
+
+
+def _extract_quote_around_match(
+    match: dict, doc: ParsedDocument, min_chars: int = 40,
+) -> Optional[str]:
+    """Stage 5 (LLM-free): return the sentence/paragraph containing the
+    matched keyword position. Falls back to paragraph scope when the
+    sentence is too short. Returns None only in pathological cases.
+    """
+    body = doc.markdown or doc.full_text or ""
+    pos = match.get("position")
+    if pos is None or pos >= len(body):
+        return None
+
+    # Find the sentence boundary before + after `pos`.
+    start = 0
+    for b in _SENTENCE_BOUNDARIES:
+        idx = body.rfind(b, 0, pos)
+        if idx >= 0:
+            start = max(start, idx + len(b))
+    end = len(body)
+    for b in _SENTENCE_BOUNDARIES:
+        idx = body.find(b, pos)
+        if idx >= 0 and idx < end:
+            end = idx + 1   # include the terminator
+    quote = body[start:end].strip()
+
+    if len(quote) < min_chars:
+        # Expand to paragraph. Paragraphs are separated by blank lines
+        # in both markdown and typical docx-flattened text.
+        p_start_idx = body.rfind("\n\n", 0, pos)
+        p_end_idx   = body.find("\n\n", pos)
+        p_start = p_start_idx + 2 if p_start_idx >= 0 else 0
+        p_end   = p_end_idx if p_end_idx >= 0 else len(body)
+        quote = body[p_start:p_end].strip()
+
+    return quote if len(quote) >= min_chars else None
+
+
+def _extract_via_fingerprints(
+    doc: ParsedDocument, scoped_leaf_ids: list[str],
+) -> tuple[list[DocumentFinding], set[str]]:
+    """LLM-free extraction. Returns (findings, covered_leaf_ids).
+
+    For each fingerprint match, emits a DocumentFinding with the
+    sentence-heuristic quote and inference_source='fingerprint_match'.
+    Deduped on (leaf_id, must_id). Callers use `covered_leaf_ids` to
+    route the remaining leaves through the LLM path.
+
+    finding='Comply' by default because a fingerprint match means the
+    doc addresses the MUST. The engine re-derives the leaf-level
+    posture from all its MUST bindings; Stage-1 gives the tenant the
+    final say. `confidence='medium'` reflects that fingerprint match
+    is deterministic but coarse (keyword presence ≠ full implementation).
+    """
+    matches = _fingerprint_extract_matches(scoped_leaf_ids, doc)
+    if not matches:
+        return ([], set())
+
+    findings: list[DocumentFinding] = []
+    covered:  set[str] = set()
+    seen:     set[tuple[str, str]] = set()
+
+    for m in matches:
+        key = (m["leaf_id"], m["must_id"])
+        if key in seen:
+            continue
+        seen.add(key)
+        quote = _extract_quote_around_match(m, doc)
+        if not quote:
+            continue
+        findings.append(DocumentFinding(
+            upload_id         = doc.upload_id or "",
+            tenant_id         = "",
+            document_name     = doc.original_name,
+            control_ref       = m["control_ref"],
+            standard_id       = m["standard_id"],
+            finding           = "Comply",
+            evidence_text     = quote,
+            confidence        = "medium",
+            checklist_item_id = m["must_id"],
+            extraction_path   = "fingerprint",
+            chunk_id          = f"fp:{m['must_id']}",
+            inference_source  = "fingerprint_match",
+        ))
+        covered.add(m["leaf_id"])
+
+    doc.extraction_metrics["fingerprint_findings"]        = len(findings)
+    doc.extraction_metrics["fingerprint_covered_leaves"]  = len(covered)
+    logger.info(
+        "fingerprint extraction for %s: %d findings on %d leaves "
+        "(no LLM)", doc.original_name, len(findings), len(covered),
+    )
+    return findings, covered
 
 
 def _scope_controls(controls: list[dict], doc: ParsedDocument) -> list[dict]:
