@@ -2524,31 +2524,44 @@ async function selectStage1(c, ev) {
       requirement it's satisfying there.
     </div>`;
 
-    // Group findings by (sheet_name OR '(non-workbook)', leaf_id OR '(unbound)').
-    // Two-level grouping reveals the natural intake structure: one sheet
-    // can feed multiple leaves; same column on one sheet can satisfy
-    // multiple MUSTs on sibling leaves without looking like noise.
+    // Group findings by source → leaf. Two-level grouping reveals the
+    // natural intake structure: one document (or sheet) can feed multiple
+    // leaves; same passage can satisfy multiple MUSTs on sibling leaves.
+    // Source label priority:
+    //   1. Workbook: "Sheet: {sheet_name}"
+    //   2. Doc uploads: filename (or document_title)
+    //   3. Fallback: "Uploaded document"
     const grouped = {};
     for (const f of d.findings) {
-      const sheet = f.sheet_name || '(non-workbook source)';
+      let sourceLabel;
+      if (f.sheet_name) {
+        sourceLabel = `Sheet: ${f.sheet_name}`;
+      } else if (f.document_title || f.filename) {
+        sourceLabel = f.document_title || f.filename;
+      } else {
+        sourceLabel = 'Uploaded document';
+      }
       const leafKey = f.leaf_id || '(unbound)';
       const leafTitle = f.leaf_title || 'Other findings';
-      if (!grouped[sheet]) grouped[sheet] = {};
-      if (!grouped[sheet][leafKey]) {
-        grouped[sheet][leafKey] = { title: leafTitle, leaf_id: f.leaf_id, items: [] };
+      if (!grouped[sourceLabel]) grouped[sourceLabel] = {};
+      if (!grouped[sourceLabel][leafKey]) {
+        grouped[sourceLabel][leafKey] = { title: leafTitle, leaf_id: f.leaf_id, items: [] };
       }
-      grouped[sheet][leafKey].items.push(f);
+      grouped[sourceLabel][leafKey].items.push(f);
     }
 
-    for (const sheet of Object.keys(grouped)) {
+    for (const source of Object.keys(grouped)) {
+      // Icon: workbook sheet vs uploaded document
+      const isSheet = source.startsWith('Sheet: ');
+      const srcIcon = isSheet ? 'ti-table' : 'ti-file-text';
       h += `<div style="margin-bottom:14px">
         <div style="font-size:11px;color:#3A382E;font-weight:600;margin-bottom:6px;
                     border-bottom:1px solid #E8E5DA;padding-bottom:3px">
-          <i class="ti ti-table" style="vertical-align:middle"></i>
-          ${esc(sheet)}
+          <i class="ti ${srcIcon}" style="vertical-align:middle"></i>
+          ${esc(source)}
         </div>`;
-      for (const leafKey of Object.keys(grouped[sheet])) {
-        const grp = grouped[sheet][leafKey];
+      for (const leafKey of Object.keys(grouped[source])) {
+        const grp = grouped[source][leafKey];
         // Small right-side ref hint. The full leaf_id (req:X:Y) is a
         // system identifier — surface just the control ref so reviewers
         // see 'A.5.15' not 'req:A.5.15:access_control_policy'.

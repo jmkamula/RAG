@@ -247,16 +247,19 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
         cur.execute(
             """
-            SELECT id::text, status, confidence, excerpt, extracted_at::text,
-                   inferred_from_control_ref, inferred_from_standard_id,
-                   inference_source,
-                   checklist_item_id
-              FROM document_findings
-             WHERE tenant_id     = %s
-               AND control_ref   = %s
-               AND review_status = 'pending'
-               AND is_active     = TRUE
-             ORDER BY extracted_at
+            SELECT df.id::text, df.status, df.confidence, df.excerpt,
+                   df.extracted_at::text,
+                   df.inferred_from_control_ref, df.inferred_from_standard_id,
+                   df.inference_source,
+                   df.checklist_item_id,
+                   cd.filename, cd.document_title
+              FROM document_findings df
+              LEFT JOIN client_documents cd ON cd.id = df.document_id
+             WHERE df.tenant_id     = %s
+               AND df.control_ref   = %s
+               AND df.review_status = 'pending'
+               AND df.is_active     = TRUE
+             ORDER BY df.extracted_at
             """,
             (tenant_id, control_ref),
         )
@@ -291,6 +294,8 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
             "leaf_title":                leaf_title,
             "sheet_name":                sheet_name,
             "column_name":               column_name,
+            "filename":                  r[9],
+            "document_title":            r[10],
         })
     return out
 
@@ -576,12 +581,38 @@ def approve_findings_by_ids(
         # + next-action hints so the tenant sees WHY the top-line
         # verdict did or didn't change. Best-effort — never blocks the
         # approval response.
+        #
+        # posture_changed uses ACTUAL live posture, not the aspirational
+        # headline `_recompute_posture_for_control` returns. Under the
+        # Stage-1 contract change (Path A, 2026-05-25), Stage-1 approval
+        # confirms EVIDENCE, not posture — the live finding stays put.
+        # A posture change comes from the engine's leaf composition
+        # (Stage-2), not from Stage-1 headline promotion. Report should
+        # reflect that honestly instead of showing a phantom "NC → Comply"
+        # badge when nothing actually changed.
         for cr in control_results:
             try:
                 cr["engine_report"] = _build_engine_report_for_control(
                     pg_conn, tenant_id,
                     cr["control_ref"], cr["standard_id"],
                 )
+                # Re-fetch the LIVE current finding so the SPA renders
+                # the actual state, not the aspirational headline.
+                with pg_conn.cursor() as pc_cur:
+                    pc_cur.execute(
+                        """
+                        SELECT finding FROM posture_controls
+                         WHERE tenant_id  = %s::uuid
+                           AND control_ref = %s
+                           AND standard_id = %s
+                           AND is_active   = TRUE
+                         LIMIT 1
+                        """,
+                        (tenant_id, cr["control_ref"], cr["standard_id"]),
+                    )
+                    row = pc_cur.fetchone()
+                if row:
+                    cr["finding"] = row[0]   # override aspirational headline
                 cr["posture_changed"] = (
                     cr.get("finding") != cr.get("prior_finding")
                     and cr.get("prior_finding") is not None
