@@ -2548,6 +2548,30 @@ def _gdpr_theme(control_ref: str) -> str:
     return "Controller, transfers & rights (Art.12+)"
 
 
+def _infer_standard_from_ref(control_ref: str) -> str:
+    """Map a bare control_ref to its standard_id when the caller didn't
+    supply one. Aligns with rag/intake/extractor._control_ref_to_standard.
+
+    ISO 27701 disambiguation (see [[posture-controls-ref-format]]):
+      Art.*         → GDPR
+      B.8.*         → 27701 (processor annex)
+      A.7.x.y (3+ dots) → 27701 controllers (A.7.2.1, A.7.3.2, ...)
+      A.7.x   (2 dots)  → 27001 Annex A physical controls (A.7.1, A.7.4)
+      Everything else → 27001 (A.5.*, A.6.*, A.8.*, ISMS body 4.x-10.x)
+    """
+    if not control_ref:
+        return "ISO27001:2022"
+    if control_ref.startswith("Art."):
+        return "GDPR:2016/679"
+    if control_ref.startswith("B.8."):
+        return "ISO27701:2019"
+    if control_ref.startswith("A.7."):
+        tail = control_ref[4:]
+        if "." in tail:
+            return "ISO27701:2019"
+    return "ISO27001:2022"
+
+
 def _control_sort_key(control_ref: str) -> tuple:
     """Natural sort: A.5.1 < A.5.2 < A.5.10, Art.5 < Art.5.1 < Art.5.1.a."""
     parts = control_ref.replace("A.", "").replace("Art.", "").split(".")
@@ -2815,10 +2839,7 @@ async def dashboard_control_evidence_classes(
     audit dive that established this UX as the real product lever.
     """
     if not standard_id:
-        if control_ref.startswith("Art."):
-            standard_id = "GDPR:2016/679"
-        else:
-            standard_id = "ISO27001:2022"
+        standard_id = _infer_standard_from_ref(control_ref)
 
     pool = request.app.state.pg_pool
     conn = pool.getconn()
@@ -2860,10 +2881,7 @@ async def dashboard_control_advisory(
     """
     # Infer standard from control_ref shape if not supplied
     if not standard_id:
-        if control_ref.startswith("Art."):
-            standard_id = "GDPR:2016/679"
-        else:
-            standard_id = "ISO27001:2022"
+        standard_id = _infer_standard_from_ref(control_ref)
 
     pool = request.app.state.pg_pool
     conn = pool.getconn()
@@ -2909,10 +2927,7 @@ async def dashboard_control_demonstrated_by(
     otherwise.
     """
     if not standard_id:
-        if control_ref.startswith("Art."):
-            standard_id = "GDPR:2016/679"
-        else:
-            standard_id = "ISO27001:2022"
+        standard_id = _infer_standard_from_ref(control_ref)
 
     cache = request.app.state.tenant_cache
     if cache is None:
@@ -5308,10 +5323,7 @@ async def dashboard_control_canonical(
     when the ref starts with Art.
     """
     if standard_id is None:
-        if control_ref.startswith("Art."):
-            standard_id = "GDPR:2016/679"
-        else:
-            standard_id = "ISO27001:2022"
+        standard_id = _infer_standard_from_ref(control_ref)
     neo_drv = None
     try:
         from rag.posture_loader import _build_engine_neo4j_driver
