@@ -145,6 +145,15 @@ def extract(
     # mapping matches — older / mapping-less docs continue to work.
     scoped = _scope_controls_via_doc_mappings(controls, doc)
     if not scoped:
+        # RAG-native scoping (2026-07-06 spike): query the ChromaDB
+        # catalog collections with the doc's text as the query. Returns
+        # semantically-similar leaves' parent controls — one call per
+        # in-scope standard, so smaller catalogs (27701) get fair
+        # representation and the LLM never sees the 27001-gravity-well
+        # candidate list. Silent fallback to _scope_controls (heuristic)
+        # when retrieval is unavailable or returns nothing.
+        scoped = _scope_controls_via_retrieval(controls, doc)
+    if not scoped:
         scoped = _scope_controls(controls, doc)
     if not scoped:
         logger.warning(f"No controls scoped for {doc.original_name} — using all controls")
@@ -2131,6 +2140,144 @@ def _scope_controls_via_doc_mappings(
             mapping_summary,
         )
     return scoped
+
+
+# RAG-native scoping (2026-07-06 spike).
+# Cached VectorRetriever + per-standard search dispatch. Lazy-init to
+# avoid Chroma client startup cost on tests that don't hit intake.
+_VECTOR_RETRIEVER = None
+
+
+def _get_vector_retriever():
+    """Lazy-init the VectorRetriever; returns None on failure so callers
+    can fall back silently to heuristic scoping."""
+    global _VECTOR_RETRIEVER
+    if _VECTOR_RETRIEVER is not None:
+        return _VECTOR_RETRIEVER
+    try:
+        from vector.retriever import VectorRetriever
+        _VECTOR_RETRIEVER = VectorRetriever()
+        return _VECTOR_RETRIEVER
+    except Exception as e:
+        logger.warning(
+            "VectorRetriever unavailable — falling back to heuristic scoping "
+            "(%s: %s)", type(e).__name__, e,
+        )
+        _VECTOR_RETRIEVER = False   # sentinel: don't retry every call
+        return None
+
+
+# Per-standard retrieval K (top-K controls kept from each collection).
+# Broader than typical chat retrieval because we want to catch anything
+# remotely relevant — the LLM still runs the per-MUST evidence check
+# downstream. Smaller catalogs (27701 with 49 controls, GDPR filtered
+# to non-demonstrated ~252) are fine with lower K; ISO 27001 with 126
+# controls gets the largest K.
+_RETRIEVAL_K_PER_STANDARD = {
+    "ISO27001:2022": 25,
+    "ISO27701:2019": 15,
+    "GDPR:2016/679": 20,
+}
+_RETRIEVAL_MIN_SCORE = 0.30       # skip results below this cosine score
+_RETRIEVAL_QUERY_CHAR_CAP = 2500  # doc-content window used as retrieval query
+
+
+def _scope_controls_via_retrieval(
+    controls: list[dict], doc: ParsedDocument,
+) -> list[dict]:
+    """Semantic-retrieval scoping: query each in-scope standard's ChromaDB
+    collection with the doc's text; return controls whose refs appear in
+    the top-K retrieval results.
+
+    Why: LLM-based classification (asking one LLM call "which of 427
+    controls does this text bind to?") suffers from training bias — the
+    LLM prefers well-known refs (ISO 27001) even when a more specific
+    match exists (ISO 27701 §A.7/§B.8 standalone controls). Retrieval
+    ranks by semantic similarity between the doc content and the
+    catalog leaves, which is the assignment we want.
+
+    Silent fallback: any exception returns [] so the caller can
+    continue to the heuristic `_scope_controls` path. Retrieval is an
+    overlay, not a hard dependency.
+    """
+    retriever = _get_vector_retriever()
+    if not retriever:
+        return []
+    if not controls:
+        return []
+
+    # Build the retrieval query. Prefer explicit doc.markdown when we
+    # have it (structured content with headings); fall back to
+    # full_text. Cap the length so we don't accidentally embed a 60K-
+    # token corpus — retrieval is a coarse-relevance signal, not a
+    # deep-content match.
+    body = (doc.markdown or doc.full_text or "")
+    if not body:
+        return []
+    title = (doc.original_name or "").rsplit(".", 1)[0]
+    query = f"{title}\n\n{body[:_RETRIEVAL_QUERY_CHAR_CAP]}"
+
+    # For each in-scope standard, query its dedicated collection and
+    # merge the top-K refs.
+    standards = list(doc.standard_ids or [])
+    matched_refs: dict[str, float] = {}   # ref → best score across standards
+    for std in standards:
+        k = _RETRIEVAL_K_PER_STANDARD.get(std, 15)
+        try:
+            if std == "ISO27001:2022":
+                ctx = retriever.search_iso(query, n=k)
+            elif std == "ISO27701:2019":
+                ctx = retriever.search_27701(query, n=k)
+            elif std == "GDPR:2016/679":
+                ctx = retriever.search_gdpr(query, n=k)
+            else:
+                ctx = retriever.search(query, n=k, standards=[std])
+        except Exception as e:
+            logger.warning(
+                "retrieval scoping failed for %s (%s: %s) — skipping standard",
+                std, type(e).__name__, e,
+            )
+            continue
+
+        for r in (ctx.results or []):
+            if r.score < _RETRIEVAL_MIN_SCORE:
+                continue
+            existing = matched_refs.get(r.ref)
+            if existing is None or r.score > existing:
+                matched_refs[r.ref] = r.score
+
+    if not matched_refs:
+        return []
+
+    # Filter the caller's `controls` list to matched refs; carry the
+    # retrieval score forward so downstream can sort/inspect.
+    scoped = []
+    for ctrl in controls:
+        ref = ctrl.get("ref", "")
+        score = matched_refs.get(ref)
+        if score is not None:
+            entry = dict(ctrl)
+            entry["_retrieval_score"] = score
+            scoped.append(entry)
+
+    if not scoped:
+        return []
+
+    # Sort by score descending so the LLM sees the strongest matches
+    # first (attention bias favors early items in long lists).
+    scoped.sort(key=lambda c: c.get("_retrieval_score", 0), reverse=True)
+
+    logger.info(
+        "retrieval-scoped %d controls for %s (from %d candidates; "
+        "top-3: %s)",
+        len(scoped), doc.original_name, len(controls),
+        [(c["ref"], f"{c['_retrieval_score']:.2f}") for c in scoped[:3]],
+    )
+    # Attach a telemetry breadcrumb so the trace shows retrieval fired
+    # (vs. doc_mappings or heuristic scoping).
+    doc.extraction_metrics.setdefault("scope_method", "retrieval")
+    doc.extraction_metrics["retrieval_scoped_count"] = len(scoped)
+    return scoped[:MAX_CONTROLS_PER_CALL * 2]
 
 
 def _scope_controls(controls: list[dict], doc: ParsedDocument) -> list[dict]:
