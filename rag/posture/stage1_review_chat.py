@@ -571,6 +571,25 @@ def approve_findings_by_ids(
 
         pg_conn.commit()
         stage2_pending = _kick_engine_sweep(pg_conn, tenant_id)
+
+        # Enrich each touched control with a leaf/MUST progress report
+        # + next-action hints so the tenant sees WHY the top-line
+        # verdict did or didn't change. Best-effort — never blocks the
+        # approval response.
+        for cr in control_results:
+            try:
+                cr["engine_report"] = _build_engine_report_for_control(
+                    pg_conn, tenant_id,
+                    cr["control_ref"], cr["standard_id"],
+                )
+                cr["posture_changed"] = (
+                    cr.get("finding") != cr.get("prior_finding")
+                    and cr.get("prior_finding") is not None
+                )
+            except Exception as e:
+                logger.warning("engine report attach failed for %s: %s",
+                               cr.get("control_ref"), e)
+
         return {
             "ok":             True,
             "approved":       len(touched_rows),
@@ -651,6 +670,173 @@ def _recompute_posture_for_control(
 
     return {"control_ref": control_ref, "standard_id": standard_id,
             "finding": headline, "prior_finding": prior_finding}
+
+
+# ── Engine report for tenant feedback (2026-07-06) ──────────────────────
+# After Stage-1 approval + engine-kick, tell the tenant what happened at
+# the leaf/MUST level and what the next actionable step is. Fills the UX
+# gap where "approve findings" felt like it did nothing when the top-line
+# posture didn't change (engine agreed with live NC → no Stage-2 fire).
+
+
+_DF_TO_ENGINE_SATISFIED = {"present"}   # 'partial' does not count
+_MAX_NEXT_ACTIONS_PER_CTRL = 3
+
+
+def _build_engine_report_for_control(
+    pg_conn, tenant_id: str, control_ref: str, standard_id: str,
+) -> dict:
+    """Return a per-control leaf/MUST progress snapshot + next-action
+    hints. Best-effort: any exception returns a minimal skeleton so the
+    approve response never fails on report generation.
+    """
+    report: dict = {
+        "leaves": [],
+        "next_actions": [],
+        "leaves_fully_satisfied": 0,
+        "leaves_total":           0,
+    }
+    try:
+        from rag.posture_loader import _build_engine_neo4j_driver
+        driver = _build_engine_neo4j_driver()
+        if driver is None:
+            return report
+        try:
+            leaves_raw: list[dict] = []
+            with driver.session() as s:
+                for r in s.run(
+                    """
+                    MATCH (rn:RequirementNode {id: $node_id})
+                          -[:SATISFIED_BY]->(fs:FulfilmentSpec)
+                          -[:REQUIRES_EVIDENCE]->(er:EvidenceRequirement)
+                    OPTIONAL MATCH (er)-[:MUST_CONTAIN]->(mi:ChecklistItem)
+                    RETURN er.id AS leaf_id, er.title AS title,
+                           collect(DISTINCT mi.id) AS musts
+                    ORDER BY er.id
+                    """,
+                    node_id=f"{standard_id}:{control_ref}",
+                ):
+                    leaves_raw.append({
+                        "leaf_id": r["leaf_id"],
+                        "title":   r["title"] or r["leaf_id"],
+                        "musts":   [m for m in (r["musts"] or []) if m],
+                    })
+        finally:
+            try:
+                driver.close()
+            except Exception:
+                pass
+
+        if not leaves_raw:
+            return report
+
+        # Fetch approved+active document_findings for this control,
+        # keyed by checklist_item_id → status
+        with pg_conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+            cur.execute(
+                """
+                SELECT checklist_item_id, status
+                  FROM document_findings
+                 WHERE tenant_id       = %s::uuid
+                   AND control_ref     = %s
+                   AND standard_id     = %s
+                   AND review_status   = 'approved'
+                   AND is_active       = TRUE
+                   AND checklist_item_id IS NOT NULL
+                """,
+                (tenant_id, control_ref, standard_id),
+            )
+            bindings: dict[str, str] = {}
+            for iid, status in cur.fetchall():
+                # Highest status wins (present > partial > missing)
+                if iid not in bindings or _finding_rank(status) > _finding_rank(bindings[iid]):
+                    bindings[iid] = status
+
+        # Compose per-leaf progress
+        for lf in leaves_raw:
+            musts = lf["musts"]
+            n_total  = len(musts)
+            n_present = sum(1 for m in musts if bindings.get(m) == "present")
+            n_partial = sum(1 for m in musts if bindings.get(m) == "partial")
+            missing   = [m for m in musts if m not in bindings]
+            partial_musts = [m for m in musts if bindings.get(m) == "partial"]
+            fully_satisfied = (n_present == n_total and n_total > 0)
+            report["leaves"].append({
+                "leaf_id":         lf["leaf_id"],
+                "title":           lf["title"],
+                "musts_present":   n_present,
+                "musts_partial":   n_partial,
+                "musts_total":     n_total,
+                "musts_missing":   missing,
+                "musts_incomplete": partial_musts,
+                "fully_satisfied": fully_satisfied,
+            })
+            if fully_satisfied:
+                report["leaves_fully_satisfied"] += 1
+        report["leaves_total"] = len(leaves_raw)
+
+        # Build next-action hints — prioritise leaves closest to
+        # completion, so the tenant sees "one more MUST to close this
+        # leaf" before "upload a whole new artefact for that leaf".
+        candidates: list[tuple[int, str]] = []
+        for lf in report["leaves"]:
+            if lf["fully_satisfied"]:
+                continue
+            n_total   = lf["musts_total"] or 1
+            n_present = lf["musts_present"]
+            n_partial = lf["musts_partial"]
+            gap       = n_total - n_present   # count partial as gap
+            # Prioritise leaves with high coverage first (small gap)
+            priority  = gap * 100 - n_partial   # ties broken by more partials first
+            title     = lf["title"]
+
+            if n_present == 0 and n_partial == 0:
+                hint = (
+                    f"Upload evidence for '{title}' — this leaf has no "
+                    f"bound evidence yet ({n_total} MUSTs needed)."
+                )
+            elif gap == 1 and lf["musts_missing"]:
+                # One MUST away from full satisfaction
+                missing_slug = lf["musts_missing"][0].split(":")[-1].replace("_", " ")
+                hint = (
+                    f"Complete '{missing_slug}' on '{title}' to fully "
+                    f"satisfy this leaf ({n_present}/{n_total} MUSTs bound)."
+                )
+            elif n_partial > 0:
+                partial_slug = lf["musts_incomplete"][0].split(":")[-1].replace("_", " ")
+                hint = (
+                    f"Firm up '{partial_slug}' on '{title}' — currently "
+                    f"partial ({n_present} full + {n_partial} partial of "
+                    f"{n_total} MUSTs)."
+                )
+            else:
+                hint = (
+                    f"'{title}' at {n_present}/{n_total} MUSTs. "
+                    f"Add evidence for: "
+                    f"{', '.join(m.split(':')[-1].replace('_', ' ') for m in lf['musts_missing'][:3])}"
+                    + ("…" if len(lf['musts_missing']) > 3 else "")
+                    + "."
+                )
+            candidates.append((priority, hint))
+
+        candidates.sort(key=lambda t: t[0])
+        report["next_actions"] = [h for _, h in candidates[:_MAX_NEXT_ACTIONS_PER_CTRL]]
+
+    except Exception as e:
+        logger.warning(
+            "engine report build failed for %s:%s (%s: %s)",
+            standard_id, control_ref, type(e).__name__, e,
+        )
+
+    return report
+
+
+def _finding_rank(status: str) -> int:
+    """document_findings.status ranking: present > partial > missing."""
+    if status == "present": return 2
+    if status == "partial": return 1
+    return 0
 
 
 def reject_findings_by_ids(
