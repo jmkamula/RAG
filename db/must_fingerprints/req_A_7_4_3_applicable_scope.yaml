@@ -1,0 +1,27 @@
+# Per-MUST fingerprint catalog for req:A.7.4.3:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.3:applicable_scope"
+target_control: "A.7.4.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.3:scope_high_churn_fields"
+    description: "High-churn field categories (contact details / address / employment / preferences)"
+    excerpt_keywords:
+      - [scope, high, churn, fields]
+
+  - must_id: "item:A.7.4.3:scope_low_churn_fields"
+    description: "Low-churn field categories (date of birth / national ID / immutable identifiers)"
+    excerpt_keywords:
+      - [scope, low, churn, fields]
+
+  - must_id: "item:A.7.4.3:scope_verification_sources"
+    description: "Verification source map (postal address vs national registry vs subject self-serve)"
+    excerpt_keywords:
+      - [scope, verification, sources]
+      - [verification, source, map]

@@ -1,0 +1,34 @@
+# Per-MUST fingerprint catalog for req:A.7.4.9:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.9:applicable_scope"
+target_control: "A.7.4.9"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.9:scope_customer_apis"
+    description: "Customer-facing APIs carrying PII"
+    excerpt_keywords:
+      - [scope, customer, apis]
+
+  - must_id: "item:A.7.4.9:scope_email_paths"
+    description: "Email + file-sharing paths where PII may be transmitted"
+    excerpt_keywords:
+      - [scope, email, paths]
+      - [email, file]
+
+  - must_id: "item:A.7.4.9:scope_integrations"
+    description: "Integration endpoints (partner APIs + processor exchanges + third-party enrichment)"
+    excerpt_keywords:
+      - [scope, integrations]
+      - [integration, endpoints]
+
+  - must_id: "item:A.7.4.9:scope_internal_transfers"
+    description: "Internal transfers (cross-region backup / DR replication / data warehouse loads)"
+    excerpt_keywords:
+      - [scope, internal, transfers]
+      - [internal, transfers]

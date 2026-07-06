@@ -1,0 +1,59 @@
+# Per-MUST fingerprint catalog for req:A.7.2.8:pii_processing_ropa
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.8:pii_processing_ropa"
+target_control: "A.7.2.8"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.8:ropa_activity_id"
+    description: "Unique processing-activity identifier per row"
+    excerpt_keywords:
+      - [ropa, activity]
+      - [unique, processing]
+
+  - must_id: "item:A.7.2.8:ropa_owner"
+    description: "Named owner responsible for accuracy + completeness"
+    excerpt_keywords:
+      - [ropa, owner]
+      - [named, owner, responsible, accuracy]
+
+  - must_id: "item:A.7.2.8:ropa_pii_categories"
+    description: "Categories of PII per row + categories of subjects (e.g. employees, customers, minors)"
+    excerpt_keywords:
+      - [ropa, pii, categories]
+      - [categories, pii, row, categories]
+
+  - must_id: "item:A.7.2.8:ropa_recipients"
+    description: "Categories of recipients per row (including third countries + international orgs)"
+    excerpt_keywords:
+      - [ropa, recipients]
+      - [categories, recipients, row]
+
+  - must_id: "item:A.7.2.8:ropa_retention"
+    description: "Retention period per row (or criteria)"
+    excerpt_keywords:
+      - [ropa, retention]
+      - [retention, period, row]
+
+  - must_id: "item:A.7.2.8:ropa_security_measures"
+    description: "General description of technical + organizational security measures per row"
+    excerpt_keywords:
+      - [ropa, security, measures]
+      - [general, description, technical, organizational]
+
+  - must_id: "item:A.7.2.8:ropa_transfer_safeguards"
+    description: "Transfer safeguards per row where third-country transfer occurs (Chap V mechanism cited)"
+    excerpt_keywords:
+      - [ropa, transfer, safeguards]
+      - [transfer, safeguards, row, third]
+
+  - must_id: "item:A.7.2.8:ropa_type_purpose"
+    description: "Type + purpose of processing per row (link to A.7.2.1 register)"
+    excerpt_keywords:
+      - [ropa, type, purpose]
+      - [type, purpose, processing, row]

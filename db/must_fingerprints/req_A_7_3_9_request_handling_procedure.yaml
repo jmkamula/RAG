@@ -1,0 +1,48 @@
+# Per-MUST fingerprint catalog for req:A.7.3.9:request_handling_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.9:request_handling_procedure"
+target_control: "A.7.3.9"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.9:proc_complaint_route"
+    description: "Complaint route — subjects informed of right to complain to SA (Art.77 route)"
+    excerpt_keywords:
+      - [complaint, route]
+
+  - must_id: "item:A.7.3.9:proc_delay_notification"
+    description: "Delay notification — where response takes longer than SLA, subject informed of reason + revised t..."
+    excerpt_keywords:
+      - [delay, notification]
+
+  - must_id: "item:A.7.3.9:proc_fee_policy"
+    description: "Fee policy (jurisdictions permit fees for excessive/repetitive; document rules)"
+    excerpt_keywords:
+      - [fee, policy]
+
+  - must_id: "item:A.7.3.9:proc_identity_verification"
+    description: "Identity verification (proportionate — not overly onerous)"
+    excerpt_keywords:
+      - [identity, verification]
+
+  - must_id: "item:A.7.3.9:proc_intake_channels"
+    description: "Intake channels enumerated (email, web form, in-product, phone, mail)"
+    excerpt_keywords:
+      - [intake, channels]
+      - [intake, channels, enumerated]
+
+  - must_id: "item:A.7.3.9:proc_response_times"
+    description: "Response times documented in privacy policy per jurisdiction"
+    excerpt_keywords:
+      - [response, times]
+      - [response, times, documented, privacy]
+
+  - must_id: "item:A.7.3.9:proc_triage_routing"
+    description: "Triage + routing — request classified + routed to correct A.7.3.x sub-procedure"
+    excerpt_keywords:
+      - [triage, routing]

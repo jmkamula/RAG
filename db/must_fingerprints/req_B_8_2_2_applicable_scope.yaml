@@ -1,0 +1,26 @@
+# Per-MUST fingerprint catalog for req:B.8.2.2:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.2:applicable_scope"
+target_control: "B.8.2.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.2:scope_data_flows"
+    description: "Data-flow map — customer PII vs own-controller PII boundary documented"
+    excerpt_keywords:
+      - [scope, data, flows]
+
+  - must_id: "item:B.8.2.2:scope_own_controller"
+    description: "Own-controller carve-out — services where org acts as controller (billing / marketing to prospect..."
+    excerpt_keywords:
+      - [scope, own, controller]
+
+  - must_id: "item:B.8.2.2:scope_services"
+    description: "In-scope services enumerated (customer-PII processing services)"
+    excerpt_keywords:
+      - [scope, services]

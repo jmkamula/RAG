@@ -1,0 +1,28 @@
+# Per-MUST fingerprint catalog for req:A.7.3.10:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.10:applicable_scope"
+target_control: "A.7.3.10"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.10:scope_art22_alignment"
+    description: "Alignment with Art.22 applicable scope — reference the Art.22 scope register (item:Art.22:scope_s..."
+    excerpt_keywords:
+      - [scope, art22, alignment]
+      - [alignment, art, applicable, scope]
+
+  - must_id: "item:A.7.3.10:scope_jurisdiction_prohibitions"
+    description: "Jurisdiction-specific prohibitions on full automation (§7.3.10 NOTE)"
+    excerpt_keywords:
+      - [scope, jurisdiction, prohibitions]
+
+  - must_id: "item:A.7.3.10:scope_subject_facing_only"
+    description: "Scope focus — subject-facing obligations only (system-side governance stays with Art.22 procedure)"
+    excerpt_keywords:
+      - [scope, subject, facing, only]
+      - [scope, focus]

@@ -1,0 +1,28 @@
+# Per-MUST fingerprint catalog for req:B.8.4.3:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.4.3:applicable_scope"
+target_control: "B.8.4.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.4.3:scope_customer_facing"
+    description: "Customer-facing transmission (APIs + webhooks)"
+    excerpt_keywords:
+      - [scope, customer, facing]
+
+  - must_id: "item:B.8.4.3:scope_internal_flows"
+    description: "Internal + cross-region flows (backup replication / DR / warehouse)"
+    excerpt_keywords:
+      - [scope, internal, flows]
+      - [internal, cross]
+
+  - must_id: "item:B.8.4.3:scope_subprocessor_flows"
+    description: "Subprocessor flows (data-sharing with subprocessors)"
+    excerpt_keywords:
+      - [scope, subprocessor, flows]
+      - [subprocessor, flows]

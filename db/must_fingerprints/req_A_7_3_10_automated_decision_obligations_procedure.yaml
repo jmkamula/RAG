@@ -1,0 +1,43 @@
+# Per-MUST fingerprint catalog for req:A.7.3.10:automated_decision_obligations_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.10:automated_decision_obligations_procedure"
+target_control: "A.7.3.10"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.10:proc_cross_link_art22"
+    description: "Cross-link to A.7.2.5 PIA and the Art.22 4-leaf procedure register — no double-registration; this..."
+    excerpt_keywords:
+      - [cross, link, art22]
+
+  - must_id: "item:A.7.3.10:proc_human_intervention"
+    description: "Human intervention pathway (Art.22.3)"
+    excerpt_keywords:
+      - [human, intervention]
+      - [human, intervention, pathway]
+
+  - must_id: "item:A.7.3.10:proc_jurisdiction_prohibition"
+    description: "Jurisdiction-specific full-automation prohibition awareness (§7.3.10 NOTE — some jurisdictions re..."
+    excerpt_keywords:
+      - [jurisdiction, prohibition]
+
+  - must_id: "item:A.7.3.10:proc_meaningful_logic"
+    description: "Meaningful information about the logic + envisaged consequences"
+    excerpt_keywords:
+      - [meaningful, logic]
+      - [meaningful, information, about, logic]
+
+  - must_id: "item:A.7.3.10:proc_notification_of_existence"
+    description: "Notification-of-existence — subjects informed that automated decision-making occurs (Art.13.2.f +..."
+    excerpt_keywords:
+      - [notification, existence]
+
+  - must_id: "item:A.7.3.10:proc_objection_pathway"
+    description: "Objection pathway — subjects can object to automated decision-making"
+    excerpt_keywords:
+      - [objection, pathway]

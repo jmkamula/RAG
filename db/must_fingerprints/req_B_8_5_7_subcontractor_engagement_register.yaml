@@ -1,0 +1,40 @@
+# Per-MUST fingerprint catalog for req:B.8.5.7:subcontractor_engagement_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.7:subcontractor_engagement_register"
+target_control: "B.8.5.7"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.7:reg_annex_b_coverage"
+    description: "Annex B controls covered per row (all / itemised)"
+    excerpt_keywords:
+      - [annex, coverage]
+      - [annex, controls, covered, row]
+
+  - must_id: "item:B.8.5.7:reg_contract_reference"
+    description: "Executed contract reference per row"
+    excerpt_keywords:
+      - [contract, reference]
+      - [executed, contract, reference, row]
+
+  - must_id: "item:B.8.5.7:reg_customer_authorisation"
+    description: "Customer authorisation reference per row (general or specific)"
+    excerpt_keywords:
+      - [customer, authorisation]
+      - [customer, authorisation, reference, row]
+
+  - must_id: "item:B.8.5.7:reg_engagement_date"
+    description: "Engagement effective date per row"
+    excerpt_keywords:
+      - [engagement, date]
+      - [engagement, effective, date, row]
+
+  - must_id: "item:B.8.5.7:reg_subcontractor_id"
+    description: "Subcontractor identifier per row"
+    excerpt_keywords:
+      - [subcontractor, identifier, row]

@@ -1,0 +1,27 @@
+# Per-MUST fingerprint catalog for req:A.7.3.7:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.7:applicable_scope"
+target_control: "A.7.3.7"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.7:scope_channel_map"
+    description: "Per-recipient communication channel (email / API / portal)"
+    excerpt_keywords:
+      - [scope, channel, map]
+
+  - must_id: "item:A.7.3.7:scope_exclusions"
+    description: "Excluded recipients with rationale (e.g. one-time disclosures with PII already destroyed)"
+    excerpt_keywords:
+      - [scope, exclusions]
+      - [excluded, recipients, rationale]
+
+  - must_id: "item:A.7.3.7:scope_recipients_list"
+    description: "Third-party recipients enumerated (link to A.7.5.4 disclosure register)"
+    excerpt_keywords:
+      - [scope, recipients, list]

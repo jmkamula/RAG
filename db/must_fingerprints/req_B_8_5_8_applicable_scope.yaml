@@ -1,0 +1,27 @@
+# Per-MUST fingerprint catalog for req:B.8.5.8:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.8:applicable_scope"
+target_control: "B.8.5.8"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.8:scope_change_types"
+    description: "Change types in scope (add / replace / remove)"
+    excerpt_keywords:
+      - [scope, change, types]
+
+  - must_id: "item:B.8.5.8:scope_general_auth_customers"
+    description: "Customers on general-authorisation contract per row"
+    excerpt_keywords:
+      - [scope, general, auth, customers]
+      - [customers, general]
+
+  - must_id: "item:B.8.5.8:scope_specific_auth_exclusion"
+    description: "Specific-authorisation customers excluded (they get fresh B.8.5.7 engagement each time)"
+    excerpt_keywords:
+      - [scope, specific, auth, exclusion]

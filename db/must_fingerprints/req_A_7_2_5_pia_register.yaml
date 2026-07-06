@@ -1,0 +1,49 @@
+# Per-MUST fingerprint catalog for req:A.7.2.5:pia_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.5:pia_register"
+target_control: "A.7.2.5"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.5:reg_completion_date"
+    description: "PIA completion date per row"
+    excerpt_keywords:
+      - [completion, date]
+      - [pia, completion, date, row]
+
+  - must_id: "item:A.7.2.5:reg_pia_id"
+    description: "Unique PIA identifier per row"
+    excerpt_keywords:
+      - [unique, pia, identifier, row]
+
+  - must_id: "item:A.7.2.5:reg_processing_activity"
+    description: "Processing activity assessed per row"
+    excerpt_keywords:
+      - [processing, activity]
+      - [processing, activity, assessed, row]
+
+  - must_id: "item:A.7.2.5:reg_residual_risk"
+    description: "Residual-risk rating per row (low/medium/high after mitigations)"
+    excerpt_keywords:
+      - [residual, risk]
+
+  - must_id: "item:A.7.2.5:reg_review_due"
+    description: "Next review due date per row (triggered by change or periodic)"
+    excerpt_keywords:
+      - [review, due]
+      - [next, review, due, date]
+
+  - must_id: "item:A.7.2.5:reg_sa_consultation"
+    description: "SA consultation flag per row (Art.36 invoked yes/no)"
+    excerpt_keywords:
+      - [consultation, flag, row]
+
+  - must_id: "item:A.7.2.5:reg_signoff"
+    description: "Signoff identities per row (DPO + business owner)"
+    excerpt_keywords:
+      - [signoff, identities, row]

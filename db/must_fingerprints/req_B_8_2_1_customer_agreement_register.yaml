@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:B.8.2.1:customer_agreement_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.1:customer_agreement_register"
+target_control: "B.8.2.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.1:reg_agreement_reference"
+    description: "Executed agreement document reference per row"
+    excerpt_keywords:
+      - [agreement, reference]
+      - [executed, agreement, document, reference]
+
+  - must_id: "item:B.8.2.1:reg_assistance_coverage"
+    description: "Assistance coverage per row (which Art.28.3.e-h obligations addressed)"
+    excerpt_keywords:
+      - [assistance, coverage]
+      - [assistance, coverage, row]
+
+  - must_id: "item:B.8.2.1:reg_customer_id"
+    description: "Customer identifier per row"
+    excerpt_keywords:
+      - [customer, identifier, row]
+
+  - must_id: "item:B.8.2.1:reg_instructions_channel"
+    description: "Documented-instructions channel per row (email log / ticket queue / portal)"
+    excerpt_keywords:
+      - [instructions, channel]
+
+  - must_id: "item:B.8.2.1:reg_term"
+    description: "Term / expiry / renewal per row"
+    excerpt_keywords:
+      - [term, expiry, renewal, row]

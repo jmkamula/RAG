@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:A.7.2.7:joint_controller_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.7:joint_controller_register"
+target_control: "A.7.2.7"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.7:reg_arrangement_id"
+    description: "Unique arrangement identifier per row"
+    excerpt_keywords:
+      - [unique, arrangement, identifier, row]
+
+  - must_id: "item:A.7.2.7:reg_document_reference"
+    description: "Executed arrangement document reference per row"
+    excerpt_keywords:
+      - [document, reference]
+      - [executed, arrangement, document, reference]
+
+  - must_id: "item:A.7.2.7:reg_effective_dates"
+    description: "Effective / termination dates per row"
+    excerpt_keywords:
+      - [effective, dates]
+      - [effective, termination, dates, row]
+
+  - must_id: "item:A.7.2.7:reg_essence_url"
+    description: "Essence-of-arrangement URL / publication reference per row"
+    excerpt_keywords:
+      - [essence, url]
+
+  - must_id: "item:A.7.2.7:reg_processing_scope"
+    description: "Processing scope per row (activities + PII categories jointly handled)"
+    excerpt_keywords:
+      - [processing, scope]
+      - [processing, scope, row]

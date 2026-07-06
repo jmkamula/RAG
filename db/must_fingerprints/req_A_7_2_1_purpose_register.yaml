@@ -1,0 +1,43 @@
+# Per-MUST fingerprint catalog for req:A.7.2.1:purpose_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.1:purpose_register"
+target_control: "A.7.2.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.1:reg_activity_link"
+    description: "Processing activity link (which §7.2.8 RoPA row(s) implement this purpose)"
+    excerpt_keywords:
+      - [activity, link]
+      - [processing, activity, link]
+
+  - must_id: "item:A.7.2.1:reg_categories"
+    description: "Categories of PII + categories of subjects per row"
+    excerpt_keywords:
+      - [categories, pii, categories, subjects]
+
+  - must_id: "item:A.7.2.1:reg_lawful_basis_link"
+    description: "Lawful basis link (which A.7.2.2 basis row this purpose relies on)"
+    excerpt_keywords:
+      - [lawful, basis, link]
+
+  - must_id: "item:A.7.2.1:reg_purpose_id"
+    description: "Unique purpose identifier per row"
+    excerpt_keywords:
+      - [unique, purpose, identifier, row]
+
+  - must_id: "item:A.7.2.1:reg_purpose_text"
+    description: "Purpose statement text (clear + specific)"
+    excerpt_keywords:
+      - [purpose, text]
+      - [purpose, statement, text]
+
+  - must_id: "item:A.7.2.1:reg_retention"
+    description: "Retention period per purpose"
+    excerpt_keywords:
+      - [retention, period, purpose]

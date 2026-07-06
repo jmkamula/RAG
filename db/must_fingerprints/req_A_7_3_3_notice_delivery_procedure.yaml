@@ -1,0 +1,34 @@
+# Per-MUST fingerprint catalog for req:A.7.3.3:notice_delivery_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.3:notice_delivery_procedure"
+target_control: "A.7.3.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.3:proc_layered_design"
+    description: "Layered / progressive design (short summary + expandable detail) where notice is long"
+    excerpt_keywords:
+      - [layered, design]
+      - [layered, progressive, design]
+
+  - must_id: "item:A.7.3.3:proc_permanent_access"
+    description: "Permanent accessibility — notice available at stable URL / in-product location at any time"
+    excerpt_keywords:
+      - [permanent, access]
+      - [permanent, accessibility]
+
+  - must_id: "item:A.7.3.3:proc_plain_language"
+    description: "Plain-language standard — reading-level target, jargon audit, tested against target audience"
+    excerpt_keywords:
+      - [plain, language]
+
+  - must_id: "item:A.7.3.3:proc_visual_aids"
+    description: "Visual aids where helpful (icons, diagrams — per §7.3.3 NOTE)"
+    excerpt_keywords:
+      - [visual, aids]
+      - [visual, aids, helpful]

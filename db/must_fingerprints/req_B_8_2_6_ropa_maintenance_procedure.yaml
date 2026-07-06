@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:B.8.2.6:ropa_maintenance_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.6:ropa_maintenance_procedure"
+target_control: "B.8.2.6"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.6:proc_customer_availability"
+    description: "Customer-availability path — how a customer requests + receives their RoPA row extract"
+    excerpt_keywords:
+      - [customer, availability]
+
+  - must_id: "item:B.8.2.6:proc_instruction_change"
+    description: "Instruction-change capture — customer purpose changes trigger RoPA update"
+    excerpt_keywords:
+      - [instruction, change]
+
+  - must_id: "item:B.8.2.6:proc_onboarding_trigger"
+    description: "New-customer onboarding trigger — RoPA row created per new engagement (link to B.8.2.1)"
+    excerpt_keywords:
+      - [onboarding, trigger]
+
+  - must_id: "item:B.8.2.6:proc_secure_maintenance"
+    description: "Secure maintenance — access control + integrity for the processor RoPA"
+    excerpt_keywords:
+      - [secure, maintenance]
+
+  - must_id: "item:B.8.2.6:proc_subprocessor_update"
+    description: "Subprocessor change — subprocessor additions / removals trigger RoPA update"
+    excerpt_keywords:
+      - [subprocessor, update]
+      - [subprocessor, change]

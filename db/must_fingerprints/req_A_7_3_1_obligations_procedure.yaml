@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.7.3.1:obligations_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.1:obligations_procedure"
+target_control: "A.7.3.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.1:proc_accessibility"
+    description: "Accessibility standard — accessible + timely means (WCAG-align, language accessibility, response-..."
+    excerpt_keywords:
+      - [accessibility, standard]
+
+  - must_id: "item:A.7.3.1:proc_contact_parity"
+    description: "Contact-point parity — contact channel matches PII-collection channel (email if collected by emai..."
+    excerpt_keywords:
+      - [contact, parity]
+
+  - must_id: "item:A.7.3.1:proc_documented_extent"
+    description: "Documented extent — subject-facing description of which obligations are fulfilled + how"
+    excerpt_keywords:
+      - [documented, extent]
+
+  - must_id: "item:A.7.3.1:proc_fulfilment_means"
+    description: "Fulfilment means enumerated per obligation (which subject-rights channel handles each right — acc..."
+    excerpt_keywords:
+      - [fulfilment, means]
+      - [fulfilment, means, enumerated, obligation]
+
+  - must_id: "item:A.7.3.1:proc_obligation_catalog"
+    description: "Obligation catalog per applicable jurisdiction (GDPR + UK GDPR + CCPA + LGPD as applicable) with ..."
+    excerpt_keywords:
+      - [obligation, catalog]
+      - [obligation, catalog, applicable, jurisdiction]

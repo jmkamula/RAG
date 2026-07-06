@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:B.8.2.2:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.2:program_review"
+target_control: "B.8.2.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.2:rev_customer_verification_health"
+    description: "Customer verification health — audits requested + supported within stated SLA"
+    excerpt_keywords:
+      - [customer, verification, health]
+
+  - must_id: "item:B.8.2.2:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:B.8.2.2:rev_reviewer"
+    description: "Reviewer identity (DPO + Engineering Lead + Compliance)"
+    excerpt_keywords:
+      - [reviewer, identity]
+
+  - must_id: "item:B.8.2.2:rev_side_purpose_sweep"
+    description: "Side-purpose drift sweep — cross-tenant analytics + ML training pipelines checked for unauthorise..."
+    excerpt_keywords:
+      - [side, purpose, sweep]
+
+  - must_id: "item:B.8.2.2:rev_technical_binding_audit"
+    description: "Technical binding audit — sampled tenant boundaries verified to enforce purpose limits"
+    excerpt_keywords:
+      - [technical, binding, audit]

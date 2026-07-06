@@ -1,0 +1,33 @@
+# Per-MUST fingerprint catalog for req:A.7.4.6:temp_files_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.6:temp_files_procedure"
+target_control: "A.7.4.6"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.6:proc_disposal_period"
+    description: "Disposal period stated per taxonomy category"
+    excerpt_keywords:
+      - [disposal, period]
+      - [disposal, period, stated, taxonomy]
+
+  - must_id: "item:A.7.4.6:proc_garbage_collection"
+    description: "Garbage-collection procedure — identifies unused temp files + last-use timestamp"
+    excerpt_keywords:
+      - [garbage, collection]
+
+  - must_id: "item:A.7.4.6:proc_periodic_check"
+    description: "Periodic check that unused temp files are deleted within the identified period"
+    excerpt_keywords:
+      - [periodic, check]
+      - [periodic, check, unused, temp]
+
+  - must_id: "item:A.7.4.6:proc_temp_file_taxonomy"
+    description: "Temp file taxonomy (application temp / file-system journal / database roll-back / cache / in-memo..."
+    excerpt_keywords:
+      - [temp, file, taxonomy]

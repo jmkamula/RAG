@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:A.7.4.2:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.2:applicable_scope"
+target_control: "A.7.4.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.2:scope_exclusions"
+    description: "Excluded operations (anonymised / aggregate) with rationale"
+    excerpt_keywords:
+      - [scope, exclusions]
+      - [excluded, operations]
+
+  - must_id: "item:A.7.4.2:scope_integrations"
+    description: "Integration processing (webhooks + third-party enrichment + backup + DR)"
+    excerpt_keywords:
+      - [scope, integrations]
+      - [integration, processing]
+
+  - must_id: "item:A.7.4.2:scope_internal_operations"
+    description: "Internal processing operations enumerated (application queries / reports / dashboards / ML pipeli..."
+    excerpt_keywords:
+      - [scope, internal, operations]
+      - [internal, processing, operations, enumerated]

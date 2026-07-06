@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.7.3.5:objection_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.5:objection_procedure"
+target_control: "A.7.3.5"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.5:proc_absolute_objection"
+    description: "Absolute objection handling (Art.21.2 marketing → processing must stop immediately)"
+    excerpt_keywords:
+      - [absolute, objection]
+      - [absolute, objection, handling]
+
+  - must_id: "item:A.7.3.5:proc_balancing_test"
+    description: "Legitimate-interests balancing test — org demonstrates compelling grounds override subject rights..."
+    excerpt_keywords:
+      - [balancing, test]
+
+  - must_id: "item:A.7.3.5:proc_channel_consistency"
+    description: "Channel consistency with service type (online services offer online objection; §7.3.5 implementat..."
+    excerpt_keywords:
+      - [channel, consistency]
+      - [channel, consistency, service, type]
+
+  - must_id: "item:A.7.3.5:proc_information_provision"
+    description: "Information provision — subjects informed of objection right at first communication (Art.21.4)"
+    excerpt_keywords:
+      - [information, provision]
+
+  - must_id: "item:A.7.3.5:proc_response_sla"
+    description: "Response-time SLA stated + honoured"
+    excerpt_keywords:
+      - [response, sla]

@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:A.7.4.7:retention_schedule_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.7:retention_schedule_register"
+target_control: "A.7.4.7"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.7:reg_category_id"
+    description: "Category / activity combination identifier per row"
+    excerpt_keywords:
+      - [category, activity, combination, identifier]
+
+  - must_id: "item:A.7.4.7:reg_citation"
+    description: "Citation per row (specific statute / regulation / business rationale document)"
+    excerpt_keywords:
+      - [citation, row]
+
+  - must_id: "item:A.7.4.7:reg_deletion_trigger"
+    description: "Deletion trigger per row (calendar-based / event-based)"
+    excerpt_keywords:
+      - [deletion, trigger]
+      - [deletion, trigger, row]
+
+  - must_id: "item:A.7.4.7:reg_rationale_type"
+    description: "Rationale type per row (legal / regulatory / business)"
+    excerpt_keywords:
+      - [rationale, type]
+      - [rationale, type, row]
+
+  - must_id: "item:A.7.4.7:reg_retention_period"
+    description: "Retention period per row (with unit — years / months / until event)"
+    excerpt_keywords:
+      - [retention, period]
+      - [retention, period, row]

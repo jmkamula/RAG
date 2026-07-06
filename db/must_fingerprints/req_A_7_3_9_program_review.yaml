@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:A.7.3.9:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.9:program_review"
+target_control: "A.7.3.9"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.9:rev_channel_test"
+    description: "Channel test — sampled inbound requests through each intake channel"
+    excerpt_keywords:
+      - [channel, test]
+
+  - must_id: "item:A.7.3.9:rev_complaint_route_test"
+    description: "Complaint-route visibility test — subject notice surfaces the SA-complaint right"
+    excerpt_keywords:
+      - [complaint, route, test]
+
+  - must_id: "item:A.7.3.9:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:A.7.3.9:rev_reviewer"
+    description: "Reviewer identity (DPO + Privacy Ops lead)"
+    excerpt_keywords:
+      - [reviewer, identity]
+
+  - must_id: "item:A.7.3.9:rev_sla_audit"
+    description: "SLA audit — aggregate + sampled requests measured against response-time matrix"
+    excerpt_keywords:
+      - [sla, audit]

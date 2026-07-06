@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.7.2.3:consent_process_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.3:consent_process_procedure"
+target_control: "A.7.2.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.3:proc_children_overlay"
+    description: "Children-consent overlay — parental consent thresholds per jurisdiction (age of consent varies GD..."
+    excerpt_keywords:
+      - [children, overlay]
+
+  - must_id: "item:A.7.2.3:proc_collection_mechanism"
+    description: "Collection mechanism per channel (web form / mobile app / physical form / verbal with recording)"
+    excerpt_keywords:
+      - [collection, mechanism]
+      - [collection, mechanism, channel]
+
+  - must_id: "item:A.7.2.3:proc_quality_standard"
+    description: "Consent-quality standard (freely given / specific / unambiguous / clear affirmative act)"
+    excerpt_keywords:
+      - [quality, standard]
+
+  - must_id: "item:A.7.2.3:proc_special_category_overlay"
+    description: "Special-category explicit-consent overlay (Art.9.2.a explicit consent for health/biometric)"
+    excerpt_keywords:
+      - [special, category, overlay]
+
+  - must_id: "item:A.7.2.3:proc_when_consent_required"
+    description: "When-consent-required rules per activity (basis catalog references — see A.7.2.2)"
+    excerpt_keywords:
+      - [consent, required]

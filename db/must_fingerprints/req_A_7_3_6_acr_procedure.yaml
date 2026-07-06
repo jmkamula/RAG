@@ -1,0 +1,47 @@
+# Per-MUST fingerprint catalog for req:A.7.3.6:acr_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.6:acr_procedure"
+target_control: "A.7.3.6"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.6:proc_access_flow"
+    description: "Access flow — Art.15 fields + copy of PII processed (link to A.7.3.8)"
+    excerpt_keywords:
+      - [access, flow]
+
+  - must_id: "item:A.7.3.6:proc_correction_flow"
+    description: "Correction flow — including subject-dispute path when correction is disputed"
+    excerpt_keywords:
+      - [correction, flow]
+
+  - must_id: "item:A.7.3.6:proc_downstream_propagation"
+    description: "Downstream propagation — corrections/erasures pushed to systems + third parties (see A.7.3.7)"
+    excerpt_keywords:
+      - [downstream, propagation]
+
+  - must_id: "item:A.7.3.6:proc_erasure_flow"
+    description: "Erasure flow — including retention-limit + legal-obligation exceptions"
+    excerpt_keywords:
+      - [erasure, flow]
+
+  - must_id: "item:A.7.3.6:proc_identity_verification"
+    description: "Identity verification step (proportionate — avoids granting rights to imposters)"
+    excerpt_keywords:
+      - [identity, verification]
+      - [identity, verification, step]
+
+  - must_id: "item:A.7.3.6:proc_refusal_reasoning"
+    description: "Refusal reasoning — where request refused / cannot be met, subject informed of reasons + right to..."
+    excerpt_keywords:
+      - [refusal, reasoning]
+
+  - must_id: "item:A.7.3.6:proc_response_sla"
+    description: "Response-time SLA stated + honoured (undue delay standard)"
+    excerpt_keywords:
+      - [response, sla]

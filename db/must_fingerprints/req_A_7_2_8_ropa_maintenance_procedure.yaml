@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:A.7.2.8:ropa_maintenance_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.8:ropa_maintenance_procedure"
+target_control: "A.7.2.8"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.8:proc_add_activity"
+    description: "New-activity intake trigger + workflow (new product launch / new integration / new data source)"
+    excerpt_keywords:
+      - [add, activity]
+
+  - must_id: "item:A.7.2.8:proc_change_capture"
+    description: "Change-capture — activity changes trigger RoPA update within stated SLA"
+    excerpt_keywords:
+      - [change, capture]
+
+  - must_id: "item:A.7.2.8:proc_reconciliation"
+    description: "Reconciliation cadence — against §7.2.1 purpose register + §7.2.2 basis register + §7.2.5 PIA reg..."
+    excerpt_keywords:
+      - [reconciliation, cadence]
+
+  - must_id: "item:A.7.2.8:proc_retire_activity"
+    description: "Retirement — activities that stop generate a retirement record (not deletion) for audit history"
+    excerpt_keywords:
+      - [retire, activity]
+
+  - must_id: "item:A.7.2.8:proc_secure_maintenance"
+    description: "Secure maintenance — access control + integrity for the RoPA itself"
+    excerpt_keywords:
+      - [secure, maintenance]

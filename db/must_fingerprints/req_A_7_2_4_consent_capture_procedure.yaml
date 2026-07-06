@@ -1,0 +1,41 @@
+# Per-MUST fingerprint catalog for req:A.7.2.4:consent_capture_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.4:consent_capture_procedure"
+target_control: "A.7.2.4"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.4:proc_demonstration_pathway"
+    description: "Demonstration pathway — subject requests proof of consent, org retrieves record within stated SLA"
+    excerpt_keywords:
+      - [demonstration, pathway]
+
+  - must_id: "item:A.7.2.4:proc_freely_given_test"
+    description: "Freely-given test — no detriment for refusal, no bundled coercion"
+    excerpt_keywords:
+      - [freely, test]
+
+  - must_id: "item:A.7.2.4:proc_pre_consent_information"
+    description: "Pre-consent information delivery per §7.3.3 (linked to A.7.3.3)"
+    excerpt_keywords:
+      - [pre, consent, information]
+
+  - must_id: "item:A.7.2.4:proc_record_fields"
+    description: "Per-consent record fields (subject identifier + timestamp + purposes consented to + artifact vers..."
+    excerpt_keywords:
+      - [record, fields]
+
+  - must_id: "item:A.7.2.4:proc_specific_test"
+    description: "Specific test — one consent per purpose (or granular per-purpose selection)"
+    excerpt_keywords:
+      - [specific, test]
+
+  - must_id: "item:A.7.2.4:proc_unambiguous_test"
+    description: "Unambiguous test — clear affirmative action, no pre-ticked boxes, no consent by silence"
+    excerpt_keywords:
+      - [unambiguous, test]

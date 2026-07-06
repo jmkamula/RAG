@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:B.8.4.1:temp_files_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.4.1:temp_files_procedure"
+target_control: "B.8.4.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.4.1:proc_gc_procedure"
+    description: "Garbage collection procedure identifying unused files + last-use timestamp"
+    excerpt_keywords:
+      - [garbage, collection, procedure, identifying]
+
+  - must_id: "item:B.8.4.1:proc_period"
+    description: "Disposal period stated per taxonomy category"
+    excerpt_keywords:
+      - [disposal, period, stated, taxonomy]
+
+  - must_id: "item:B.8.4.1:proc_periodic_check"
+    description: "Periodic check that temp files are deleted"
+    excerpt_keywords:
+      - [periodic, check]
+      - [periodic, check, temp, files]
+
+  - must_id: "item:B.8.4.1:proc_temp_taxonomy"
+    description: "Temp file taxonomy (customer-facing multi-tenant apps + shared infrastructure + integration middl..."
+    excerpt_keywords:
+      - [temp, taxonomy]
+      - [temp, file, taxonomy]
+
+  - must_id: "item:B.8.4.1:proc_tenant_isolation"
+    description: "Tenant isolation of temp files — no cross-tenant leakage in shared infrastructure"
+    excerpt_keywords:
+      - [tenant, isolation]
+      - [tenant, isolation, temp, files]

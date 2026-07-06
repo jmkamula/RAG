@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.7.4.9:transmission_channel_inventory
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.9:transmission_channel_inventory"
+target_control: "A.7.4.9"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.9:reg_audit_log_retention"
+    description: "Audit log retention per row"
+    excerpt_keywords:
+      - [audit, log, retention]
+      - [audit, log, retention, row]
+
+  - must_id: "item:A.7.4.9:reg_auth_mechanism"
+    description: "Authentication mechanism per row (mutual TLS / OAuth / API key + IP allowlist / etc.)"
+    excerpt_keywords:
+      - [auth, mechanism]
+      - [authentication, mechanism, row]
+
+  - must_id: "item:A.7.4.9:reg_channel_id"
+    description: "Unique channel identifier per row"
+    excerpt_keywords:
+      - [unique, channel, identifier, row]
+
+  - must_id: "item:A.7.4.9:reg_encryption"
+    description: "Encryption standard per row (TLS 1.2 / TLS 1.3 / VPN / SFTP / etc.)"
+    excerpt_keywords:
+      - [encryption, standard, row]
+
+  - must_id: "item:A.7.4.9:reg_endpoint"
+    description: "Source + destination endpoints per row"
+    excerpt_keywords:
+      - [source, destination, endpoints, row]

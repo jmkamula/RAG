@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:A.7.3.2:notice_content_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.2:notice_content_procedure"
+target_control: "A.7.3.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.2:proc_field_catalog"
+    description: "Field catalog — every information item that must be provided (purposes + controller identity + ba..."
+    excerpt_keywords:
+      - [field, catalog]
+
+  - must_id: "item:A.7.3.2:proc_medium_selection"
+    description: "Medium selection — which channels (privacy notice URL, layered notices, in-product prompts, contr..."
+    excerpt_keywords:
+      - [medium, selection]
+
+  - must_id: "item:A.7.3.2:proc_signoff"
+    description: "DPO + Legal signoff for notice text changes before deploy"
+    excerpt_keywords:
+      - [dpo, legal, signoff, notice]
+
+  - must_id: "item:A.7.3.2:proc_timing_rules"
+    description: "Timing rules — when information is provided (prior to processing / at collection / within X days ..."
+    excerpt_keywords:
+      - [timing, rules]
+
+  - must_id: "item:A.7.3.2:proc_update_on_change"
+    description: "Update-on-change — purpose changes / new processing trigger a notice update within stated SLA"
+    excerpt_keywords:
+      - [update, change]

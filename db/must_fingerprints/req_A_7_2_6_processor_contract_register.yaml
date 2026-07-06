@@ -1,0 +1,45 @@
+# Per-MUST fingerprint catalog for req:A.7.2.6:processor_contract_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.6:processor_contract_register"
+target_control: "A.7.2.6"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.6:reg_annex_b_coverage"
+    description: "Annex B controls covered per row (either 'all' or itemised subset with justification link)"
+    excerpt_keywords:
+      - [annex, coverage]
+      - [annex, controls, covered, row]
+
+  - must_id: "item:A.7.2.6:reg_contract_reference"
+    description: "Executed contract reference (document + version + signature date)"
+    excerpt_keywords:
+      - [contract, reference]
+      - [executed, contract, reference]
+
+  - must_id: "item:A.7.2.6:reg_expiry"
+    description: "Contract expiry / renewal date per row"
+    excerpt_keywords:
+      - [contract, expiry, renewal, date]
+
+  - must_id: "item:A.7.2.6:reg_processor_id"
+    description: "Processor identifier per row (legal entity name)"
+    excerpt_keywords:
+      - [processor, identifier, row]
+
+  - must_id: "item:A.7.2.6:reg_service_scope"
+    description: "Service scope per row (what the processor does + PII categories involved)"
+    excerpt_keywords:
+      - [service, scope]
+      - [service, scope, row]
+
+  - must_id: "item:A.7.2.6:reg_subprocessor_flag"
+    description: "Subprocessors permitted flag + list per row"
+    excerpt_keywords:
+      - [subprocessor, flag]
+      - [subprocessors, permitted, flag, list]

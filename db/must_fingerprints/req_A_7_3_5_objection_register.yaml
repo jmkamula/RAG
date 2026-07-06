@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.7.3.5:objection_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.5:objection_register"
+target_control: "A.7.3.5"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.5:reg_event_id"
+    description: "Unique event identifier per row"
+    excerpt_keywords:
+      - [unique, event, identifier, row]
+
+  - must_id: "item:A.7.3.5:reg_objection_type"
+    description: "Objection type per row (absolute — marketing/stats; balancing — legitimate interests / public int..."
+    excerpt_keywords:
+      - [objection, type]
+      - [objection, type, row]
+
+  - must_id: "item:A.7.3.5:reg_propagation_status"
+    description: "Downstream propagation status"
+    excerpt_keywords:
+      - [propagation, status]
+      - [downstream, propagation, status]
+
+  - must_id: "item:A.7.3.5:reg_resolution"
+    description: "Resolution per row (processing halted / balancing test rejection with justification)"
+    excerpt_keywords:
+      - [resolution, row]
+
+  - must_id: "item:A.7.3.5:reg_subject_id"
+    description: "Subject identifier per row"
+    excerpt_keywords:
+      - [subject, identifier, row]

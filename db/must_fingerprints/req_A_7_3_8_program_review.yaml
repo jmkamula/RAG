@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:A.7.3.8:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.8:program_review"
+target_control: "A.7.3.8"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.8:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:A.7.3.8:rev_direct_transfer_test"
+    description: "Direct-transfer capability tested end-to-end"
+    excerpt_keywords:
+      - [direct, transfer, test]
+
+  - must_id: "item:A.7.3.8:rev_format_currency"
+    description: "Format currency — output format aligns with commonly-used industry standards"
+    excerpt_keywords:
+      - [format, currency]
+
+  - must_id: "item:A.7.3.8:rev_reviewer"
+    description: "Reviewer identity (DPO + Engineering)"
+    excerpt_keywords:
+      - [reviewer, identity]
+
+  - must_id: "item:A.7.3.8:rev_scope_leakage_test"
+    description: "Scope-leakage test — sampled copies verified to contain only the requesting subject's PII"
+    excerpt_keywords:
+      - [scope, leakage, test]

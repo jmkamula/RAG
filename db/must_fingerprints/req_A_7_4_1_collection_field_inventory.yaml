@@ -1,0 +1,40 @@
+# Per-MUST fingerprint catalog for req:A.7.4.1:collection_field_inventory
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.1:collection_field_inventory"
+target_control: "A.7.4.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.1:reg_collection_mode"
+    description: "Collection mode per row (direct form / cookie / weblog / API integration / third-party enrichment)"
+    excerpt_keywords:
+      - [collection, mode]
+      - [collection, mode, row]
+
+  - must_id: "item:A.7.4.1:reg_default_state"
+    description: "Default state per row (required / opt-in optional / opt-out optional)"
+    excerpt_keywords:
+      - [default, state]
+      - [default, state, row]
+
+  - must_id: "item:A.7.4.1:reg_field_id"
+    description: "Unique field identifier per row (form_id + field_name)"
+    excerpt_keywords:
+      - [unique, field, identifier, row]
+
+  - must_id: "item:A.7.4.1:reg_necessity_rationale"
+    description: "Necessity rationale per row (adequate / relevant / necessary explanation)"
+    excerpt_keywords:
+      - [necessity, rationale]
+      - [necessity, rationale, row]
+
+  - must_id: "item:A.7.4.1:reg_purpose_link"
+    description: "Purpose link per row (which A.7.2.1 purpose this field supports)"
+    excerpt_keywords:
+      - [purpose, link]
+      - [purpose, link, row]

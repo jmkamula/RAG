@@ -1,0 +1,40 @@
+# Per-MUST fingerprint catalog for req:B.8.4.2:end_of_service_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.4.2:end_of_service_register"
+target_control: "B.8.4.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.4.2:reg_action_type"
+    description: "Action type per row (return / transfer / dispose / hybrid)"
+    excerpt_keywords:
+      - [action, type]
+      - [action, type, row]
+
+  - must_id: "item:B.8.4.2:reg_certification_ref"
+    description: "Certification reference issued to customer"
+    excerpt_keywords:
+      - [certification, ref]
+      - [certification, reference, issued, customer]
+
+  - must_id: "item:B.8.4.2:reg_completion_date"
+    description: "Completion date per row (return delivered / disposal complete)"
+    excerpt_keywords:
+      - [completion, date]
+      - [completion, date, row]
+
+  - must_id: "item:B.8.4.2:reg_customer_id"
+    description: "Customer identifier per row"
+    excerpt_keywords:
+      - [customer, identifier, row]
+
+  - must_id: "item:B.8.4.2:reg_termination_date"
+    description: "Contract termination date per row"
+    excerpt_keywords:
+      - [termination, date]
+      - [contract, termination, date, row]

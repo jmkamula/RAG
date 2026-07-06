@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:A.7.4.6:temp_files_sweep_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.6:temp_files_sweep_register"
+target_control: "A.7.4.6"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.6:reg_anomalies_flagged"
+    description: "Anomalies flagged per row (unusual accumulation / temp files past retention)"
+    excerpt_keywords:
+      - [anomalies, flagged]
+      - [anomalies, flagged, row]
+
+  - must_id: "item:A.7.4.6:reg_files_cleaned"
+    description: "Files cleaned + volume per row"
+    excerpt_keywords:
+      - [files, cleaned]
+      - [files, cleaned, volume, row]
+
+  - must_id: "item:A.7.4.6:reg_scan_date"
+    description: "Scan date per row"
+    excerpt_keywords:
+      - [scan, date]
+      - [scan, date, row]
+
+  - must_id: "item:A.7.4.6:reg_sweep_id"
+    description: "Unique sweep run identifier per row"
+    excerpt_keywords:
+      - [unique, sweep, run, identifier]
+
+  - must_id: "item:A.7.4.6:reg_system"
+    description: "System / infrastructure component per row"
+    excerpt_keywords:
+      - [system, infrastructure, component, row]

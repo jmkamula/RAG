@@ -1,0 +1,27 @@
+# Per-MUST fingerprint catalog for req:B.8.5.1:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.1:applicable_scope"
+target_control: "B.8.5.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.1:scope_direct_transfers"
+    description: "Direct customer-PII transfers (multi-region cloud / backup + DR)"
+    excerpt_keywords:
+      - [scope, direct, transfers]
+      - [direct, customer]
+
+  - must_id: "item:B.8.5.1:scope_subprocessor_transfers"
+    description: "Subprocessor-driven transfers (data flowing to subprocessor regions)"
+    excerpt_keywords:
+      - [scope, subprocessor, transfers]
+
+  - must_id: "item:B.8.5.1:scope_support_access"
+    description: "Support-access transfers (support engineers in different regions accessing customer PII)"
+    excerpt_keywords:
+      - [scope, support, access]

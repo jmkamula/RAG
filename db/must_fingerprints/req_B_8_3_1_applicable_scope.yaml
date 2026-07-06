@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:B.8.3.1:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.3.1:applicable_scope"
+target_control: "B.8.3.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.3.1:scope_customer_engagements"
+    description: "Customer engagements enumerated (link to B.8.2.1 register)"
+    excerpt_keywords:
+      - [scope, customer, engagements]
+      - [customer, engagements, enumerated]
+
+  - must_id: "item:B.8.3.1:scope_exclusions"
+    description: "Excluded engagements (own-controller services) with rationale"
+    excerpt_keywords:
+      - [scope, exclusions]
+      - [excluded, engagements]
+
+  - must_id: "item:B.8.3.1:scope_support_matrix"
+    description: "Support matrix per contract tier (Enterprise API access / Business self-service / Startup email s..."
+    excerpt_keywords:
+      - [scope, support, matrix]
+      - [support, matrix, contract, tier]

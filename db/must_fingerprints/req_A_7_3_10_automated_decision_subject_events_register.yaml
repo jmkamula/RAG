@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.7.3.10:automated_decision_subject_events_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.10:automated_decision_subject_events_register"
+target_control: "A.7.3.10"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.10:reg_event_id"
+    description: "Unique event identifier per row"
+    excerpt_keywords:
+      - [unique, event, identifier, row]
+
+  - must_id: "item:A.7.3.10:reg_event_type"
+    description: "Event type per row (objection / human-intervention request / contest / expression-of-view)"
+    excerpt_keywords:
+      - [event, type]
+      - [event, type, row]
+
+  - must_id: "item:A.7.3.10:reg_resolution"
+    description: "Resolution per row (human-reviewed decision / procedure applied / dismissed with reason)"
+    excerpt_keywords:
+      - [resolution, row]
+
+  - must_id: "item:A.7.3.10:reg_subject_id"
+    description: "Subject identifier per row"
+    excerpt_keywords:
+      - [subject, identifier, row]
+
+  - must_id: "item:A.7.3.10:reg_system"
+    description: "Automated system involved per row"
+    excerpt_keywords:
+      - [automated, system, involved, row]

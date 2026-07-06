@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:A.7.4.4:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.4:program_review"
+target_control: "A.7.4.4"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.4:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:A.7.4.4:rev_drift_sweep"
+    description: "Drift sweep — new processing activities checked for minimisation opportunity"
+    excerpt_keywords:
+      - [drift, sweep]
+
+  - must_id: "item:A.7.4.4:rev_reviewer"
+    description: "Reviewer identity (DPO + Privacy Engineering)"
+    excerpt_keywords:
+      - [reviewer, identity]
+
+  - must_id: "item:A.7.4.4:rev_technique_currency"
+    description: "Technique currency — techniques still appropriate for risk profile (advances in re-identification..."
+    excerpt_keywords:
+      - [technique, currency]

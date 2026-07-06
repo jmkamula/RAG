@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:B.8.2.4:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.4:applicable_scope"
+target_control: "B.8.2.4"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.4:scope_instruction_channels"
+    description: "Instruction channels enumerated (contract terms + change orders + support tickets + product confi..."
+    excerpt_keywords:
+      - [scope, instruction, channels]
+      - [instruction, channels, enumerated]
+
+  - must_id: "item:B.8.2.4:scope_priority_topics"
+    description: "Priority topics — instruction types most likely to raise infringement issues (retention / disclos..."
+    excerpt_keywords:
+      - [scope, priority, topics]
+      - [priority, topics]
+
+  - must_id: "item:B.8.2.4:scope_review_capability"
+    description: "Review capability disclosure — where technological constraints limit ability to detect infringeme..."
+    excerpt_keywords:
+      - [scope, review, capability]
+      - [review, capability, disclosure]

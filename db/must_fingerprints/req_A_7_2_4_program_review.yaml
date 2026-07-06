@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:A.7.2.4:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.4:program_review"
+target_control: "A.7.2.4"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.4:rev_completeness_audit"
+    description: "Completeness audit — sampled consented users have retrievable records"
+    excerpt_keywords:
+      - [completeness, audit]
+
+  - must_id: "item:A.7.2.4:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:A.7.2.4:rev_retrievability"
+    description: "Retrievability test — sampled consent events retrieved within stated SLA"
+    excerpt_keywords:
+      - [retrievability, test]
+
+  - must_id: "item:A.7.2.4:rev_reviewer"
+    description: "Reviewer identity (DPO + Engineering)"
+    excerpt_keywords:
+      - [reviewer, identity]
+
+  - must_id: "item:A.7.2.4:rev_withdrawal_propagation"
+    description: "Withdrawal propagation — sampled withdrawals verified to have stopped downstream processing"
+    excerpt_keywords:
+      - [withdrawal, propagation]

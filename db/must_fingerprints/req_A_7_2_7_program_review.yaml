@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:A.7.2.7:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.7:program_review"
+target_control: "A.7.2.7"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.7:rev_coverage_check"
+    description: "Coverage check — every joint arrangement identified is documented"
+    excerpt_keywords:
+      - [coverage, check]
+
+  - must_id: "item:A.7.2.7:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:A.7.2.7:rev_essence_publication_audit"
+    description: "Essence-publication audit — sampled arrangements verified to have published essence reachable by ..."
+    excerpt_keywords:
+      - [essence, publication, audit]
+
+  - must_id: "item:A.7.2.7:rev_reviewer"
+    description: "Reviewer identity (DPO + Legal)"
+    excerpt_keywords:
+      - [reviewer, identity]
+
+  - must_id: "item:A.7.2.7:rev_rights_routing_test"
+    description: "Rights-routing test — sampled subject requests verified to route correctly regardless of party ad..."
+    excerpt_keywords:
+      - [rights, routing, test]

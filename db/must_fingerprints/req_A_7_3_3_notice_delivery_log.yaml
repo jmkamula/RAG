@@ -1,0 +1,34 @@
+# Per-MUST fingerprint catalog for req:A.7.3.3:notice_delivery_log
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.3:notice_delivery_log"
+target_control: "A.7.3.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.3:reg_deployment_date"
+    description: "Deployment date per row"
+    excerpt_keywords:
+      - [deployment, date]
+      - [deployment, date, row]
+
+  - must_id: "item:A.7.3.3:reg_notice_version"
+    description: "Notice version served per row (link to A.7.3.2 artifact register)"
+    excerpt_keywords:
+      - [notice, version]
+      - [notice, version, served, row]
+
+  - must_id: "item:A.7.3.3:reg_touchpoint_id"
+    description: "Unique touchpoint identifier per row"
+    excerpt_keywords:
+      - [unique, touchpoint, identifier, row]
+
+  - must_id: "item:A.7.3.3:reg_touchpoint_type"
+    description: "Touchpoint type per row (signup / renewal / cookie banner / just-in-time prompt / periodic reminder)"
+    excerpt_keywords:
+      - [touchpoint, type]
+      - [touchpoint, type, row]

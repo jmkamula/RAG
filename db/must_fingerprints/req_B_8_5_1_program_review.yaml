@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:B.8.5.1:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.1:program_review"
+target_control: "B.8.5.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.1:rev_basis_currency"
+    description: "Basis currency — Art.45 adequacy currency + Art.46 SCC version currency"
+    excerpt_keywords:
+      - [basis, currency]
+
+  - must_id: "item:B.8.5.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:B.8.5.1:rev_notification_audit"
+    description: "Notification audit — advance-notification obligations verified for all changes since last review"
+    excerpt_keywords:
+      - [notification, audit]
+
+  - must_id: "item:B.8.5.1:rev_reviewer"
+    description: "Reviewer identity (DPO + Legal + Trust)"
+    excerpt_keywords:
+      - [reviewer, identity]

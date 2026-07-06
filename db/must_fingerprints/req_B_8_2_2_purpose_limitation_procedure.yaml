@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:B.8.2.2:purpose_limitation_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.2:purpose_limitation_procedure"
+target_control: "B.8.2.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.2:proc_customer_verification"
+    description: "Customer verification pathway — customer can audit purpose-limitation compliance"
+    excerpt_keywords:
+      - [customer, verification]
+      - [customer, verification, pathway]
+
+  - must_id: "item:B.8.2.2:proc_instruction_capture"
+    description: "Instruction capture — customer purposes recorded per engagement (contract + change-notices)"
+    excerpt_keywords:
+      - [instruction, capture]
+
+  - must_id: "item:B.8.2.2:proc_no_side_purpose"
+    description: "No-side-purpose rule — customer PII not used for own analytics / ML training / product improvemen..."
+    excerpt_keywords:
+      - [side, purpose]
+
+  - must_id: "item:B.8.2.2:proc_technical_binding"
+    description: "Technical binding — engineering controls that prevent processing beyond stated purposes (tenant i..."
+    excerpt_keywords:
+      - [technical, binding]
+
+  - must_id: "item:B.8.2.2:proc_technical_justification"
+    description: "Technical-justification carve-out procedure — where processor must choose method for capacity rea..."
+    excerpt_keywords:
+      - [technical, justification]

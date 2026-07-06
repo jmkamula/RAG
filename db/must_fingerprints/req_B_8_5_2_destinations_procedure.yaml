@@ -1,0 +1,33 @@
+# Per-MUST fingerprint catalog for req:B.8.5.2:destinations_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.2:destinations_procedure"
+target_control: "B.8.5.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.2:proc_alignment_8_5_1"
+    description: "Alignment with B.8.5.1 basis register"
+    excerpt_keywords:
+      - [alignment, basis, register]
+
+  - must_id: "item:B.8.5.2:proc_destinations_publication"
+    description: "Destinations publication per customer (customer receives the list of countries + international orgs)"
+    excerpt_keywords:
+      - [destinations, publication]
+      - [destinations, publication, customer]
+
+  - must_id: "item:B.8.5.2:proc_law_enforcement_exception"
+    description: "Law enforcement exception handled per §8.5.4 + §8.5.5"
+    excerpt_keywords:
+      - [law, enforcement, exception]
+      - [law, enforcement, exception, handled]
+
+  - must_id: "item:B.8.5.2:proc_subprocessor_inclusion"
+    description: "Subprocessor-derived destinations included"
+    excerpt_keywords:
+      - [subprocessor, inclusion]

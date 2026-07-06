@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.7.3.4:withdrawal_event_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.4:withdrawal_event_register"
+target_control: "A.7.3.4"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.4:reg_event_id"
+    description: "Unique event identifier per row"
+    excerpt_keywords:
+      - [unique, event, identifier, row]
+
+  - must_id: "item:A.7.3.4:reg_event_type"
+    description: "Event type per row (modification / partial withdrawal / full withdrawal)"
+    excerpt_keywords:
+      - [event, type]
+      - [event, type, row]
+
+  - must_id: "item:A.7.3.4:reg_propagation_status"
+    description: "Propagation status per row (downstream systems notified / third parties informed)"
+    excerpt_keywords:
+      - [propagation, status]
+      - [propagation, status, row]
+
+  - must_id: "item:A.7.3.4:reg_subject_id"
+    description: "Subject identifier per row"
+    excerpt_keywords:
+      - [subject, identifier, row]
+
+  - must_id: "item:A.7.3.4:reg_timestamp"
+    description: "Timestamp per row"
+    excerpt_keywords:
+      - [timestamp, row]

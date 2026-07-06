@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:B.8.5.6:subcontractor_disclosure_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.6:subcontractor_disclosure_register"
+target_control: "B.8.5.6"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.6:reg_countries"
+    description: "Countries + international orgs disclosed per row"
+    excerpt_keywords:
+      - [countries, international, orgs, disclosed]
+
+  - must_id: "item:B.8.5.6:reg_customer_id"
+    description: "Customer per row"
+    excerpt_keywords:
+      - [customer, row]
+
+  - must_id: "item:B.8.5.6:reg_disclosure_date"
+    description: "Disclosure date per row (pre-use)"
+    excerpt_keywords:
+      - [disclosure, date]
+      - [disclosure, date, row]
+
+  - must_id: "item:B.8.5.6:reg_disclosure_mode"
+    description: "Disclosure mode per row (public trust page / DPA schedule / NDA + on-request)"
+    excerpt_keywords:
+      - [disclosure, mode]
+      - [disclosure, mode, row]
+
+  - must_id: "item:B.8.5.6:reg_subcontractor_id"
+    description: "Subcontractor identifier per row"
+    excerpt_keywords:
+      - [subcontractor, identifier, row]

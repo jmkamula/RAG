@@ -1,0 +1,28 @@
+# Per-MUST fingerprint catalog for req:A.7.2.2:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.2:applicable_scope"
+target_control: "A.7.2.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.2:scope_basis_catalogs"
+    description: "Per-jurisdiction basis catalog (Art.6.1 GDPR / CCPA opt-out model / LGPD Art.7)"
+    excerpt_keywords:
+      - [scope, basis, catalogs]
+
+  - must_id: "item:A.7.2.2:scope_jurisdictions"
+    description: "Applicable jurisdictions listed (with basis for each — establishment / target-market / monitoring)"
+    excerpt_keywords:
+      - [scope, jurisdictions]
+      - [applicable, jurisdictions, listed]
+
+  - must_id: "item:A.7.2.2:scope_overlap_rules"
+    description: "Overlap rules — where an activity spans jurisdictions, most-restrictive-basis policy documented"
+    excerpt_keywords:
+      - [scope, overlap, rules]
+      - [overlap, rules]

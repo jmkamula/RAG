@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.7.3.4:consent_withdrawal_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.4:consent_withdrawal_procedure"
+target_control: "A.7.3.4"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.4:proc_channel_parity"
+    description: "Channel parity — withdrawal via same medium as collection (email if email, web if web; not phone/..."
+    excerpt_keywords:
+      - [channel, parity]
+
+  - must_id: "item:A.7.3.4:proc_easy_as_giving"
+    description: "Withdrawal as easy as giving — no additional hurdles beyond original consent process (Art.7.3)"
+    excerpt_keywords:
+      - [easy, giving]
+      - [withdrawal, easy, giving]
+
+  - must_id: "item:A.7.3.4:proc_modification_paths"
+    description: "Modification paths (partial withdrawal / opt-in-to-fewer-purposes / restrict processing)"
+    excerpt_keywords:
+      - [modification, paths]
+
+  - must_id: "item:A.7.3.4:proc_pre_withdrawal_valid"
+    description: "Pre-withdrawal processing remains valid; post-withdrawal processing halts (Art.7.3 — no retroacti..."
+    excerpt_keywords:
+      - [pre, withdrawal, valid]
+
+  - must_id: "item:A.7.3.4:proc_propagation"
+    description: "Downstream propagation — withdrawal cascades to systems + authorised users + third parties (see A..."
+    excerpt_keywords:
+      - [downstream, propagation]
+
+  - must_id: "item:A.7.3.4:proc_response_sla"
+    description: "Response-time SLA stated + honoured"
+    excerpt_keywords:
+      - [response, sla]

@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.7.5.4:disclosure_records_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.5.4:disclosure_records_procedure"
+target_control: "A.7.5.4"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.5.4:proc_authority_source"
+    description: "Source-of-authority recording per row (contract / law / court order / regulator request)"
+    excerpt_keywords:
+      - [authority, source]
+
+  - must_id: "item:A.7.5.4:proc_intake_gate"
+    description: "Intake gate — disclosures gated on documented request record before release"
+    excerpt_keywords:
+      - [intake, gate]
+
+  - must_id: "item:A.7.5.4:proc_investigation_disclosures"
+    description: "Investigation / audit disclosures — one-off recording of lawful investigation + external audit di..."
+    excerpt_keywords:
+      - [investigation, disclosures]
+      - [investigation, audit, disclosures]
+
+  - must_id: "item:A.7.5.4:proc_normal_disclosures"
+    description: "Normal-course disclosures — recurring disclosures documented per relationship"
+    excerpt_keywords:
+      - [normal, disclosures]
+
+  - must_id: "item:A.7.5.4:proc_retention_link"
+    description: "Retention link to A.7.4.7"
+    excerpt_keywords:
+      - [retention, link]

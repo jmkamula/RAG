@@ -1,0 +1,32 @@
+# Per-MUST fingerprint catalog for req:A.7.5.3:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.5.3:program_review"
+target_control: "A.7.5.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.5.3:rev_completeness"
+    description: "Completeness check — actual transfer events reconciled against log"
+    excerpt_keywords:
+      - [completeness, check]
+
+  - must_id: "item:A.7.5.3:rev_cooperation_test"
+    description: "Cooperation channel test — sampled third parties re-contactable for subject-rights follow-up"
+    excerpt_keywords:
+      - [cooperation, test]
+      - [cooperation, channel, test]
+
+  - must_id: "item:A.7.5.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:A.7.5.3:rev_reviewer"
+    description: "Reviewer identity (DPO + Data Ops)"
+    excerpt_keywords:
+      - [reviewer, identity]

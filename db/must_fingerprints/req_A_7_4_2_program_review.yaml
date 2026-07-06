@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:A.7.4.2:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.2:program_review"
+target_control: "A.7.4.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.2:rev_access_audit"
+    description: "Access-limit audit — sampled access groups reviewed against operation registry"
+    excerpt_keywords:
+      - [access, audit]
+
+  - must_id: "item:A.7.4.2:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:A.7.4.2:rev_necessity_audit"
+    description: "Necessity audit — sampled operations reviewed against current purpose register"
+    excerpt_keywords:
+      - [necessity, audit]
+
+  - must_id: "item:A.7.4.2:rev_reviewer"
+    description: "Reviewer identity (DPO + Engineering)"
+    excerpt_keywords:
+      - [reviewer, identity]

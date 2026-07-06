@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:B.8.5.8:subcontractor_change_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.8:subcontractor_change_procedure"
+target_control: "B.8.5.8"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.8:proc_advance_notification"
+    description: "Advance notification with agreed timeframe (opportunity to object)"
+    excerpt_keywords:
+      - [advance, notification]
+      - [advance, notification, agreed, timeframe]
+
+  - must_id: "item:B.8.5.8:proc_change_trigger"
+    description: "Change trigger — every subcontractor addition or replacement triggers notification workflow"
+    excerpt_keywords:
+      - [change, trigger]
+
+  - must_id: "item:B.8.5.8:proc_general_auth_scope"
+    description: "General-authorisation scope — under what contract clause is this procedure valid (versus specific..."
+    excerpt_keywords:
+      - [general, auth, scope]
+
+  - must_id: "item:B.8.5.8:proc_notification_content"
+    description: "Notification content (new subcontractor identity + countries + Annex B coverage summary)"
+    excerpt_keywords:
+      - [notification, content]
+
+  - must_id: "item:B.8.5.8:proc_objection_handling"
+    description: "Objection handling — customer objection triggers negotiation / termination pathway"
+    excerpt_keywords:
+      - [objection, handling]

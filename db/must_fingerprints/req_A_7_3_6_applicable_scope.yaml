@@ -1,0 +1,28 @@
+# Per-MUST fingerprint catalog for req:A.7.3.6:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.6:applicable_scope"
+target_control: "A.7.3.6"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.6:scope_erasure_exceptions"
+    description: "Erasure exceptions enumerated (Art.17.3 legal obligation / freedom of expression / public interes..."
+    excerpt_keywords:
+      - [scope, erasure, exceptions]
+      - [erasure, exceptions, enumerated]
+
+  - must_id: "item:A.7.3.6:scope_jurisdiction_restrictions"
+    description: "Jurisdiction-specific restrictions on when + how correction/erasure can be requested"
+    excerpt_keywords:
+      - [scope, jurisdiction, restrictions]
+
+  - must_id: "item:A.7.3.6:scope_subject_universe"
+    description: "Subject universe covered (customers / employees / prospects / research participants / etc.)"
+    excerpt_keywords:
+      - [scope, subject, universe]
+      - [subject, universe, covered]

@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:B.8.5.1:transfer_basis_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.1:transfer_basis_register"
+target_control: "B.8.5.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.1:reg_basis"
+    description: "Basis cited per row (Art.45/46/47/49 or equivalent)"
+    excerpt_keywords:
+      - [basis, cited, row]
+
+  - must_id: "item:B.8.5.1:reg_change_history"
+    description: "Change history per row (all previous bases + notification dates)"
+    excerpt_keywords:
+      - [change, history]
+      - [change, history, row]
+
+  - must_id: "item:B.8.5.1:reg_customer_notification_date"
+    description: "Customer notification date per row"
+    excerpt_keywords:
+      - [customer, notification, date]
+      - [customer, notification, date, row]
+
+  - must_id: "item:B.8.5.1:reg_jurisdiction_pair"
+    description: "Origin + destination jurisdiction per row"
+    excerpt_keywords:
+      - [jurisdiction, pair]
+      - [origin, destination, jurisdiction, row]
+
+  - must_id: "item:B.8.5.1:reg_relationship_id"
+    description: "Unique transfer relationship identifier per row"
+    excerpt_keywords:
+      - [unique, transfer, relationship, identifier]

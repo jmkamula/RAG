@@ -1,0 +1,33 @@
+# Per-MUST fingerprint catalog for req:A.7.5.2:destinations_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.5.2:destinations_procedure"
+target_control: "A.7.5.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.5.2:proc_change_notification"
+    description: "Change notification — new destinations added trigger notice update"
+    excerpt_keywords:
+      - [change, notification]
+
+  - must_id: "item:A.7.5.2:proc_destinations_publication"
+    description: "Destinations list publication — countries + international orgs made available to customers/subjects"
+    excerpt_keywords:
+      - [destinations, publication]
+      - [destinations, list, publication]
+
+  - must_id: "item:A.7.5.2:proc_law_enforcement_exception"
+    description: "Law enforcement exception — cases where destinations cannot be specified in advance (§7.5.2 last ..."
+    excerpt_keywords:
+      - [law, enforcement, exception]
+
+  - must_id: "item:A.7.5.2:proc_subcontractor_inclusion"
+    description: "Subcontractor destinations included — countries where subcontracted processing occurs"
+    excerpt_keywords:
+      - [subcontractor, inclusion]
+      - [subcontractor, destinations]

@@ -1,0 +1,44 @@
+# Per-MUST fingerprint catalog for req:A.7.5.3:transfer_event_log
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.5.3:transfer_event_log"
+target_control: "A.7.5.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.5.3:reg_basis_link"
+    description: "Basis link per row (which A.7.5.1 basis authorised this transfer)"
+    excerpt_keywords:
+      - [basis, link]
+      - [basis, link, row]
+
+  - must_id: "item:A.7.5.3:reg_direction"
+    description: "Direction per row (outbound to third party / inbound from third party)"
+    excerpt_keywords:
+      - [direction, row]
+
+  - must_id: "item:A.7.5.3:reg_event_id"
+    description: "Unique transfer event identifier per row"
+    excerpt_keywords:
+      - [unique, transfer, event, identifier]
+
+  - must_id: "item:A.7.5.3:reg_pii_scope"
+    description: "PII scope per row (categories + volume)"
+    excerpt_keywords:
+      - [pii, scope]
+      - [pii, scope, row]
+
+  - must_id: "item:A.7.5.3:reg_third_party"
+    description: "Third party per row"
+    excerpt_keywords:
+      - [third, party]
+      - [third, party, row]
+
+  - must_id: "item:A.7.5.3:reg_timestamp"
+    description: "Timestamp per row"
+    excerpt_keywords:
+      - [timestamp, row]

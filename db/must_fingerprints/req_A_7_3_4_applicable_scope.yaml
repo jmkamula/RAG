@@ -1,0 +1,26 @@
+# Per-MUST fingerprint catalog for req:A.7.3.4:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.4:applicable_scope"
+target_control: "A.7.3.4"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.4:scope_channel_map"
+    description: "Per-activity collection channel → withdrawal channel map"
+    excerpt_keywords:
+      - [scope, channel, map]
+
+  - must_id: "item:A.7.3.4:scope_consent_activities"
+    description: "Consent-based activities enumerated (link to A.7.2.2 lawful basis register)"
+    excerpt_keywords:
+      - [scope, consent, activities]
+
+  - must_id: "item:A.7.3.4:scope_jurisdiction_variance"
+    description: "Jurisdiction-specific variations (some jurisdictions restrict when withdrawal is possible)"
+    excerpt_keywords:
+      - [scope, jurisdiction, variance]

@@ -1,0 +1,23 @@
+# Per-MUST fingerprint catalog for req:B.8.5.7:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.7:applicable_scope"
+target_control: "B.8.5.7"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.7:scope_authorisation_mode"
+    description: "Authorisation mode per engagement type (general via contract clause / specific per subcontractor)"
+    excerpt_keywords:
+      - [scope, authorisation, mode]
+      - [authorisation, mode, engagement, type]
+
+  - must_id: "item:B.8.5.7:scope_engagement_types"
+    description: "Engagement types enumerated (SaaS subprocessor / infrastructure provider / support-outsourcing / ..."
+    excerpt_keywords:
+      - [scope, engagement, types]
+      - [engagement, types, enumerated]

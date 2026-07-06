@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:B.8.4.3:transmission_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.4.3:transmission_procedure"
+target_control: "B.8.4.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.4.3:proc_audit_data"
+    description: "Audit data retention per transmission event"
+    excerpt_keywords:
+      - [audit, data]
+      - [audit, data, retention, transmission]
+
+  - must_id: "item:B.8.4.3:proc_authz_channels"
+    description: "Authorised transmission channels per customer"
+    excerpt_keywords:
+      - [authz, channels]
+      - [authorised, transmission, channels, customer]
+
+  - must_id: "item:B.8.4.3:proc_contract_terms"
+    description: "Contract-terms coverage — customer-contract transmission requirements captured (B.8.2.1)"
+    excerpt_keywords:
+      - [contract, terms]
+
+  - must_id: "item:B.8.4.3:proc_customer_advice"
+    description: "Customer-advice path — where contract silent on transmission requirements, customer consulted bef..."
+    excerpt_keywords:
+      - [customer, advice]
+
+  - must_id: "item:B.8.4.3:proc_encryption"
+    description: "Encryption in transit standard per channel"
+    excerpt_keywords:
+      - [encryption, transit, standard, channel]

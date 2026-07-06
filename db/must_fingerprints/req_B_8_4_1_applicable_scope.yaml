@@ -1,0 +1,27 @@
+# Per-MUST fingerprint catalog for req:B.8.4.1:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.4.1:applicable_scope"
+target_control: "B.8.4.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.4.1:scope_infrastructure"
+    description: "Customer-serving infrastructure enumerated"
+    excerpt_keywords:
+      - [scope, infrastructure]
+
+  - must_id: "item:B.8.4.1:scope_shared_paths"
+    description: "Shared paths where cross-tenant temp file leakage is possible (with mitigation)"
+    excerpt_keywords:
+      - [scope, shared, paths]
+      - [shared, paths, cross]
+
+  - must_id: "item:B.8.4.1:scope_undeletable"
+    description: "Undeletable-file circumstances with rationale + compensating controls"
+    excerpt_keywords:
+      - [scope, undeletable]

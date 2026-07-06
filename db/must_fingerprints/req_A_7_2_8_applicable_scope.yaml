@@ -1,0 +1,28 @@
+# Per-MUST fingerprint catalog for req:A.7.2.8:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.8:applicable_scope"
+target_control: "A.7.2.8"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.8:scope_coverage_test"
+    description: "Coverage test — RoPA rowcount reconciles against A.7.2.1 purpose register + system inventory"
+    excerpt_keywords:
+      - [scope, coverage, test]
+      - [coverage, test]
+
+  - must_id: "item:A.7.2.8:scope_covered_activities"
+    description: "Covered activities enumerated (all processing activities the org performs)"
+    excerpt_keywords:
+      - [scope, covered, activities]
+      - [covered, activities, enumerated]
+
+  - must_id: "item:A.7.2.8:scope_exclusions"
+    description: "Exclusions — anonymous / aggregate processing not in RoPA with rationale"
+    excerpt_keywords:
+      - [scope, exclusions]

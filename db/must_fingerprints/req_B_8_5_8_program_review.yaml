@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:B.8.5.8:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.8:program_review"
+target_control: "B.8.5.8"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.8:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:B.8.5.8:rev_notification_audit"
+    description: "Notification audit — sampled changes verified against timeframe"
+    excerpt_keywords:
+      - [notification, audit]
+
+  - must_id: "item:B.8.5.8:rev_objection_audit"
+    description: "Objection audit — objection outcomes reviewed for consistency"
+    excerpt_keywords:
+      - [objection, audit]
+
+  - must_id: "item:B.8.5.8:rev_reviewer"
+    description: "Reviewer identity (Trust + Legal)"
+    excerpt_keywords:
+      - [reviewer, identity]

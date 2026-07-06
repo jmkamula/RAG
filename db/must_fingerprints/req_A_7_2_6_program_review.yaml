@@ -1,0 +1,41 @@
+# Per-MUST fingerprint catalog for req:A.7.2.6:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.6:program_review"
+target_control: "A.7.2.6"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.6:rev_coverage_check"
+    description: "Coverage check — every engaged processor has a signed contract on file"
+    excerpt_keywords:
+      - [coverage, check]
+
+  - must_id: "item:A.7.2.6:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:A.7.2.6:rev_expiry_sweep"
+    description: "Expiry sweep — contracts approaching renewal flagged"
+    excerpt_keywords:
+      - [expiry, sweep]
+
+  - must_id: "item:A.7.2.6:rev_missing_terms_audit"
+    description: "Missing-terms audit — sampled contracts checked against Art.28.3 mandatory list"
+    excerpt_keywords:
+      - [missing, terms, audit]
+
+  - must_id: "item:A.7.2.6:rev_reviewer"
+    description: "Reviewer identity (DPO + Procurement + Legal)"
+    excerpt_keywords:
+      - [reviewer, identity]
+
+  - must_id: "item:A.7.2.6:rev_subprocessor_audit"
+    description: "Subprocessor audit — sampled contracts checked for current subprocessor authorisation"
+    excerpt_keywords:
+      - [subprocessor, audit]

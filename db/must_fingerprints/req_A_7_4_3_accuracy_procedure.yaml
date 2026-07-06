@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:A.7.4.3:accuracy_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.3:accuracy_procedure"
+target_control: "A.7.4.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.3:proc_correction_link"
+    description: "Cross-link to A.7.3.6 correction procedure — subject-initiated rectification handled there"
+    excerpt_keywords:
+      - [correction, link]
+
+  - must_id: "item:A.7.4.3:proc_inaccuracy_prevention"
+    description: "Inaccuracy prevention — technical + procedural controls (input validation + duplicate detection +..."
+    excerpt_keywords:
+      - [inaccuracy, prevention]
+
+  - must_id: "item:A.7.4.3:proc_inaccuracy_response"
+    description: "Inaccuracy response — how the org responds when inaccuracy is detected (internal + subject-flagged)"
+    excerpt_keywords:
+      - [inaccuracy, response]
+
+  - must_id: "item:A.7.4.3:proc_lifecycle_coverage"
+    description: "Lifecycle coverage — applies at collection + processing + storage + sharing + disposal stages"
+    excerpt_keywords:
+      - [lifecycle, coverage]
+
+  - must_id: "item:A.7.4.3:proc_up_to_date_check"
+    description: "Up-to-date check cadence per PII category (e.g. contact details refresh cadence)"
+    excerpt_keywords:
+      - [date, check]

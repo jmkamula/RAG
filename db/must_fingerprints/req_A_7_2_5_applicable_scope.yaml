@@ -1,0 +1,32 @@
+# Per-MUST fingerprint catalog for req:A.7.2.5:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.5:applicable_scope"
+target_control: "A.7.2.5"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.5:scope_art35_3_mandatory"
+    description: "Art.35.3 mandatory categories mapped (systematic evaluation + Art.9/10 large-scale + systematic p..."
+    excerpt_keywords:
+      - [scope, art35, mandatory]
+      - [art, mandatory, categories, mapped]
+
+  - must_id: "item:A.7.2.5:scope_exclusions"
+    description: "Out-of-scope processing (low-risk / legacy) with rationale"
+    excerpt_keywords:
+      - [scope, exclusions]
+
+  - must_id: "item:A.7.2.5:scope_org_indicators"
+    description: "Org-specific high-risk indicators (novel tech / vulnerable subjects / large-scale)"
+    excerpt_keywords:
+      - [scope, org, indicators]
+
+  - must_id: "item:A.7.2.5:scope_sa_lists"
+    description: "SA-published mandatory-DPIA lists per applicable jurisdiction (Art.35.4)"
+    excerpt_keywords:
+      - [scope, lists]

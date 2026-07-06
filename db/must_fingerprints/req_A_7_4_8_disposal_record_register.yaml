@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.7.4.8:disposal_record_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.8:disposal_record_register"
+target_control: "A.7.4.8"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.8:reg_action_id"
+    description: "Unique disposal action identifier per row"
+    excerpt_keywords:
+      - [unique, disposal, action, identifier]
+
+  - must_id: "item:A.7.4.8:reg_certificate_ref"
+    description: "Disposal certificate / attestation reference per row"
+    excerpt_keywords:
+      - [certificate, ref]
+      - [disposal, certificate, attestation, reference]
+
+  - must_id: "item:A.7.4.8:reg_date"
+    description: "Disposal date per row"
+    excerpt_keywords:
+      - [disposal, date, row]
+
+  - must_id: "item:A.7.4.8:reg_media_type"
+    description: "Media type per row (SSD / HDD / paper / tape / cloud volume)"
+    excerpt_keywords:
+      - [media, type]
+      - [media, type, row]
+
+  - must_id: "item:A.7.4.8:reg_technique"
+    description: "Technique per row (cryptographic erase / overwrite / degaussing / shredding / provider attestation)"
+    excerpt_keywords:
+      - [technique, row]

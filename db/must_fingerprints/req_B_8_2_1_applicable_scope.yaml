@@ -1,0 +1,27 @@
+# Per-MUST fingerprint catalog for req:B.8.2.1:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.1:applicable_scope"
+target_control: "B.8.2.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.1:scope_customer_list"
+    description: "In-scope customer engagements enumerated"
+    excerpt_keywords:
+      - [scope, customer, list]
+
+  - must_id: "item:B.8.2.1:scope_exclusions"
+    description: "Excluded engagements (own-controller services / non-PII services) with rationale"
+    excerpt_keywords:
+      - [scope, exclusions]
+      - [excluded, engagements]
+
+  - must_id: "item:B.8.2.1:scope_pii_processor_test"
+    description: "PII-processor test per engagement — processing PII on customer's behalf under customer's instruct..."
+    excerpt_keywords:
+      - [scope, pii, processor, test]

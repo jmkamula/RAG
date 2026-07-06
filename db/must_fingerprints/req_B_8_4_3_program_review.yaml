@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:B.8.4.3:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.4.3:program_review"
+target_control: "B.8.4.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.4.3:rev_contract_alignment_audit"
+    description: "Contract-alignment audit — sampled channels reviewed against customer B.8.2.1 agreements"
+    excerpt_keywords:
+      - [contract, alignment, audit]
+
+  - must_id: "item:B.8.4.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:B.8.4.3:rev_reviewer"
+    description: "Reviewer identity (Platform Ops + Security Engineering + DPO)"
+    excerpt_keywords:
+      - [reviewer, identity]
+
+  - must_id: "item:B.8.4.3:rev_shadow_channel_sweep"
+    description: "Shadow-channel sweep — unauthorised channels flagged"
+    excerpt_keywords:
+      - [shadow, channel, sweep]

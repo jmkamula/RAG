@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:A.7.4.8:disposal_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.8:disposal_procedure"
+target_control: "A.7.4.8"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.8:proc_certificate"
+    description: "Disposal certificate / attestation captured per action"
+    excerpt_keywords:
+      - [disposal, certificate, attestation, captured]
+
+  - must_id: "item:A.7.4.8:proc_cross_link_a528"
+    description: "Cross-link to A.5.28 evidence handling — disposal_record shape reused for evidence forensics"
+    excerpt_keywords:
+      - [cross, link, a528]
+
+  - must_id: "item:A.7.4.8:proc_media_lifecycle"
+    description: "Media lifecycle coverage (production + backup + archive + failed hardware + decommissioned equipm..."
+    excerpt_keywords:
+      - [media, lifecycle]
+      - [media, lifecycle, coverage]
+
+  - must_id: "item:A.7.4.8:proc_technique_map"
+    description: "Technique map per media type (electronic — cryptographic erase + overwrite / physical — shredding..."
+    excerpt_keywords:
+      - [technique, map]
+      - [technique, map, media, type]
+
+  - must_id: "item:A.7.4.8:proc_technique_selection"
+    description: "Technique selection factors (nature + extent of PII + metadata associations + media characteristics)"
+    excerpt_keywords:
+      - [technique, selection]
+      - [technique, selection, factors]

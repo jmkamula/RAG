@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:B.8.5.4:notification_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.4:notification_procedure"
+target_control: "B.8.5.4"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.4:proc_gag_order_exception"
+    description: "Gag-order exception — where notification prohibited by law, notification suppressed with legal-ho..."
+    excerpt_keywords:
+      - [gag, order, exception]
+
+  - must_id: "item:B.8.5.4:proc_legal_review"
+    description: "Legal counsel reviews every request before response"
+    excerpt_keywords:
+      - [legal, review]
+      - [legal, counsel, reviews, request]
+
+  - must_id: "item:B.8.5.4:proc_notification_format"
+    description: "Notification format (contract-specified content — request source + PII scope + response deadline)"
+    excerpt_keywords:
+      - [notification, format]
+
+  - must_id: "item:B.8.5.4:proc_request_intake"
+    description: "Request intake path — law-enforcement / regulator / court requests routed to Legal"
+    excerpt_keywords:
+      - [request, intake]
+      - [request, intake, path]
+
+  - must_id: "item:B.8.5.4:proc_timeframe"
+    description: "Agreed timeframe per customer contract (typically 24-72h)"
+    excerpt_keywords:
+      - [agreed, timeframe, customer, contract]

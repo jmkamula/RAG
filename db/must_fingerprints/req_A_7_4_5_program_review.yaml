@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:A.7.4.5:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.5:program_review"
+target_control: "A.7.4.5"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.5:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:A.7.4.5:rev_reviewer"
+    description: "Reviewer identity (DPO + Data Ops + Infrastructure)"
+    excerpt_keywords:
+      - [reviewer, identity]
+
+  - must_id: "item:A.7.4.5:rev_trigger_health"
+    description: "Trigger health — end-of-processing detection functioning across activity types"
+    excerpt_keywords:
+      - [trigger, health]
+
+  - must_id: "item:A.7.4.5:rev_verification_audit"
+    description: "Verification audit — sampled actions verified to have removed PII across primary + backup"
+    excerpt_keywords:
+      - [verification, audit]

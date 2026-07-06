@@ -391,10 +391,24 @@ _TEMPLATED_PREFILL_COMMENT  = re.compile(
 
 def _control_ref_to_standard(control_ref: str) -> str:
     """Map a control_ref prefix to its standard_id. Aligns with the rest
-    of the intake pipeline's normalisation (rag/intake/ref_normalizer.py)."""
+    of the intake pipeline's normalisation (rag/intake/ref_normalizer.py).
+
+    ISO 27701 disambiguation (see [[posture-controls-ref-format]]):
+      27701 controllers use A.7.x.y (3+ dots), 27701 processors use B.8.x.y
+      27001 Annex A uses A.7.x (2 dots) for Physical Controls
+    """
     if control_ref.startswith("Art."):
         return "GDPR:2016/679"
-    # ISO 27001 covers both Annex A (A.5.x, A.7.x...) and ISMS clauses (4.x..10.x)
+    if control_ref.startswith("B.8."):
+        return "ISO27701:2019"
+    # A.7.x.y (3 or more dots after A.7) → 27701 controllers
+    # A.7.x   (2 dots) → 27001 Annex A physical controls
+    if control_ref.startswith("A.7."):
+        # Count dots in the "x.y..." tail to distinguish
+        tail = control_ref[4:]   # after "A.7."
+        if "." in tail:
+            return "ISO27701:2019"
+    # Everything else in Annex A (A.5.*, A.6.*, A.8.*) or ISMS body → 27001
     return "ISO27001:2022"
 
 

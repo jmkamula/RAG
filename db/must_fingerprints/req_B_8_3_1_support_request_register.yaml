@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:B.8.3.1:support_request_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.3.1:support_request_register"
+target_control: "B.8.3.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.3.1:reg_customer_id"
+    description: "Requesting customer identifier per row"
+    excerpt_keywords:
+      - [requesting, customer, identifier, row]
+
+  - must_id: "item:B.8.3.1:reg_request_id"
+    description: "Unique request identifier per row"
+    excerpt_keywords:
+      - [unique, request, identifier, row]
+
+  - must_id: "item:B.8.3.1:reg_request_type"
+    description: "Request type per row (rectification support / erasure support / portability export / restriction ..."
+    excerpt_keywords:
+      - [request, type]
+      - [request, type, row]
+
+  - must_id: "item:B.8.3.1:reg_response"
+    description: "Response per row (what was provided / done)"
+    excerpt_keywords:
+      - [response, row]
+
+  - must_id: "item:B.8.3.1:reg_sla_met"
+    description: "SLA-met flag per row"
+    excerpt_keywords:
+      - [sla, met]

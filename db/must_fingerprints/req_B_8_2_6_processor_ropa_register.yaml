@@ -1,0 +1,46 @@
+# Per-MUST fingerprint catalog for req:B.8.2.6:processor_ropa_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.6:processor_ropa_register"
+target_control: "B.8.2.6"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.6:ropa_customer_id"
+    description: "Customer identifier per row (each controller the org processes for)"
+    excerpt_keywords:
+      - [ropa, customer]
+      - [customer, identifier, row]
+
+  - must_id: "item:B.8.2.6:ropa_processing_categories"
+    description: "Categories of processing carried out per customer per row (Art.30.2.b)"
+    excerpt_keywords:
+      - [ropa, processing, categories]
+      - [categories, processing, carried, out]
+
+  - must_id: "item:B.8.2.6:ropa_processor_dpo"
+    description: "Processor DPO / representative contact if applicable (Art.30.2.a)"
+    excerpt_keywords:
+      - [ropa, processor, dpo]
+      - [processor, dpo, representative, contact]
+
+  - must_id: "item:B.8.2.6:ropa_security_measures"
+    description: "General description of technical + organizational measures per row (Art.30.2.d)"
+    excerpt_keywords:
+      - [ropa, security, measures]
+      - [general, description, technical, organizational]
+
+  - must_id: "item:B.8.2.6:ropa_subprocessor_list"
+    description: "Subprocessor list per row (Art.30.2 + Art.28.2)"
+    excerpt_keywords:
+      - [ropa, subprocessor, list]
+      - [subprocessor, list, row]
+
+  - must_id: "item:B.8.2.6:ropa_transfers"
+    description: "Third-country / international-org transfers per row (Art.30.2.c) with cited safeguards"
+    excerpt_keywords:
+      - [ropa, transfers]

@@ -1,0 +1,40 @@
+# Per-MUST fingerprint catalog for req:B.8.2.2:purpose_adherence_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.2:purpose_adherence_register"
+target_control: "B.8.2.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.2:reg_binding_controls"
+    description: "Binding controls per row (tenant isolation config / data-tag enforcement / access scoping)"
+    excerpt_keywords:
+      - [binding, controls]
+      - [binding, controls, row]
+
+  - must_id: "item:B.8.2.2:reg_customer_id"
+    description: "Customer identifier per row"
+    excerpt_keywords:
+      - [customer, identifier, row]
+
+  - must_id: "item:B.8.2.2:reg_last_verified"
+    description: "Last verification date per row"
+    excerpt_keywords:
+      - [last, verified]
+      - [last, verification, date, row]
+
+  - must_id: "item:B.8.2.2:reg_permitted_secondary"
+    description: "Permitted secondary uses per row (where customer has authorised anonymised aggregate use)"
+    excerpt_keywords:
+      - [permitted, secondary]
+      - [permitted, secondary, uses, row]
+
+  - must_id: "item:B.8.2.2:reg_stated_purposes"
+    description: "Stated customer purposes per row (from B.8.2.1 agreement)"
+    excerpt_keywords:
+      - [stated, purposes]
+      - [stated, customer, purposes, row]

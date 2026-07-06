@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:B.8.5.1:transfer_basis_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.1:transfer_basis_procedure"
+target_control: "B.8.5.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.1:proc_advance_notification"
+    description: "Advance notification of changes with agreed timeframe (customer can object / terminate)"
+    excerpt_keywords:
+      - [advance, notification]
+      - [advance, notification, changes, agreed]
+
+  - must_id: "item:B.8.5.1:proc_basis_documentation"
+    description: "Compliance basis documented per transfer relationship (SCC / BCR / CBPR / adequacy)"
+    excerpt_keywords:
+      - [basis, documentation]
+      - [compliance, basis, documented, transfer]
+
+  - must_id: "item:B.8.5.1:proc_carve_out_limits"
+    description: "Carve-out limits — where contract permits changes without notification (e.g. supplier swaps withi..."
+    excerpt_keywords:
+      - [carve, out, limits]
+
+  - must_id: "item:B.8.5.1:proc_customer_information"
+    description: "Customer information — transfer arrangements (suppliers, other parties, other countries) disclosed"
+    excerpt_keywords:
+      - [customer, information]
+
+  - must_id: "item:B.8.5.1:proc_international_agreements"
+    description: "International-transfer agreement types identified (Model Contract Clauses / BCRs / CBPRs) per rel..."
+    excerpt_keywords:
+      - [international, agreements]

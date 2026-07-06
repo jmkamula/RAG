@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:A.7.4.5:end_of_processing_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.5:end_of_processing_procedure"
+target_control: "A.7.4.5"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.5:proc_deidentification_standard"
+    description: "De-identification standard — resulting data cannot reasonably permit re-identification"
+    excerpt_keywords:
+      - [deidentification, standard]
+
+  - must_id: "item:A.7.4.5:proc_delete_or_deidentify"
+    description: "Delete-or-de-identify decision rule per activity"
+    excerpt_keywords:
+      - [delete, deidentify]
+
+  - must_id: "item:A.7.4.5:proc_end_of_processing_trigger"
+    description: "End-of-processing trigger definition per activity (purpose fulfilled / consent withdrawn / retent..."
+    excerpt_keywords:
+      - [end, processing, trigger]
+
+  - must_id: "item:A.7.4.5:proc_records"
+    description: "Record of end-of-processing action (link to A.7.4.5 register)"
+    excerpt_keywords:
+      - [record, end]

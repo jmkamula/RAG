@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:B.8.2.3:marketing_exception_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.3:marketing_exception_register"
+target_control: "B.8.2.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.3:reg_activity_scope"
+    description: "Marketing activity scope per row (targeted advertising channels + creative)"
+    excerpt_keywords:
+      - [activity, scope]
+      - [marketing, activity, scope, row]
+
+  - must_id: "item:B.8.2.3:reg_customer_id"
+    description: "Customer identifier per row (which customer's PII involved)"
+    excerpt_keywords:
+      - [customer, identifier, row]
+
+  - must_id: "item:B.8.2.3:reg_customer_permit"
+    description: "Customer-permit document reference per row (contract clause / signed permit)"
+    excerpt_keywords:
+      - [customer, permit]
+
+  - must_id: "item:B.8.2.3:reg_exception_id"
+    description: "Unique exception identifier per row"
+    excerpt_keywords:
+      - [unique, exception, identifier, row]
+
+  - must_id: "item:B.8.2.3:reg_subject_consent"
+    description: "Subject-level consent evidence path per row (customer-obtained + provided to processor OR process..."
+    excerpt_keywords:
+      - [subject, consent]

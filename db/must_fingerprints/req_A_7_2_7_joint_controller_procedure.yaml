@@ -1,0 +1,44 @@
+# Per-MUST fingerprint catalog for req:A.7.2.7:joint_controller_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.2.7:joint_controller_procedure"
+target_control: "A.7.2.7"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.2.7:proc_arrangement_form"
+    description: "Documented arrangement form — contract or equivalent binding document"
+    excerpt_keywords:
+      - [arrangement, form]
+      - [documented, arrangement, form]
+
+  - must_id: "item:A.7.2.7:proc_breach_coordination"
+    description: "Breach-notification coordination — who notifies SA + subjects"
+    excerpt_keywords:
+      - [breach, coordination]
+
+  - must_id: "item:A.7.2.7:proc_classification_test"
+    description: "Classification test — when a relationship is joint control (jointly determine purposes + means) v..."
+    excerpt_keywords:
+      - [classification, test]
+
+  - must_id: "item:A.7.2.7:proc_essence_publication"
+    description: "Essence-of-arrangement publication — subject-facing summary of who does what, per Art.26.2"
+    excerpt_keywords:
+      - [essence, publication]
+
+  - must_id: "item:A.7.2.7:proc_rights_exercise"
+    description: "Single point of contact + subject-rights routing (subjects can exercise against either controller..."
+    excerpt_keywords:
+      - [rights, exercise]
+      - [single, point, contact, subject]
+
+  - must_id: "item:A.7.2.7:proc_role_allocation"
+    description: "Role + responsibility allocation (security / notice / rights fulfilment / breach notification / D..."
+    excerpt_keywords:
+      - [role, allocation]
+      - [role, responsibility, allocation]

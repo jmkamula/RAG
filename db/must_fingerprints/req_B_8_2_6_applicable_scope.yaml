@@ -1,0 +1,27 @@
+# Per-MUST fingerprint catalog for req:B.8.2.6:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.6:applicable_scope"
+target_control: "B.8.2.6"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.6:scope_coverage_test"
+    description: "Coverage test — processor RoPA rowcount reconciles against B.8.2.1 customer register"
+    excerpt_keywords:
+      - [scope, coverage, test]
+      - [coverage, test]
+
+  - must_id: "item:B.8.2.6:scope_customer_engagements"
+    description: "In-scope customer engagements (from B.8.2.1 register)"
+    excerpt_keywords:
+      - [scope, customer, engagements]
+
+  - must_id: "item:B.8.2.6:scope_own_controller_exclusion"
+    description: "Own-controller processing excluded (goes to a separate own-controller RoPA if the org also acts a..."
+    excerpt_keywords:
+      - [scope, own, controller, exclusion]

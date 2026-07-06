@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:B.8.5.6:subcontractor_disclosure_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.6:subcontractor_disclosure_procedure"
+target_control: "B.8.5.6"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.6:proc_countries_always_public"
+    description: "Countries list always public — per §8.5.6 last paragraph, the destination country list is disclos..."
+    excerpt_keywords:
+      - [countries, always, public]
+      - [countries, list, always, public]
+
+  - must_id: "item:B.8.5.6:proc_customer_contract_link"
+    description: "Customer contract link — subcontracting provisions in the B.8.2.1 agreement"
+    excerpt_keywords:
+      - [customer, contract, link]
+
+  - must_id: "item:B.8.5.6:proc_disclosure_content"
+    description: "Disclosure content (subcontractor identity + countries + international orgs + obligations mechanism)"
+    excerpt_keywords:
+      - [disclosure, content]
+
+  - must_id: "item:B.8.5.6:proc_nda_path"
+    description: "NDA path — where public disclosure raises security risk, disclosure under NDA + on customer request"
+    excerpt_keywords:
+      - [nda, path]
+
+  - must_id: "item:B.8.5.6:proc_pre_use_disclosure"
+    description: "Pre-use disclosure — customer informed before subcontractor onboards"
+    excerpt_keywords:
+      - [pre, disclosure]

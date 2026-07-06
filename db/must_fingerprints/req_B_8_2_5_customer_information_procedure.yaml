@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:B.8.2.5:customer_information_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.5:customer_information_procedure"
+target_control: "B.8.2.5"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.5:proc_audit_support"
+    description: "Audit support pathway — how customers request + receive audit info within stated SLA"
+    excerpt_keywords:
+      - [audit, support]
+      - [audit, support, pathway]
+
+  - must_id: "item:B.8.2.5:proc_contract_alignment"
+    description: "Contract alignment — audit + information rights consistent with B.8.2.1 agreement + Art.28.3.h"
+    excerpt_keywords:
+      - [contract, alignment]
+
+  - must_id: "item:B.8.2.5:proc_information_catalog"
+    description: "Information catalog — what the org routinely makes available (certifications / audit reports / se..."
+    excerpt_keywords:
+      - [information, catalog]
+
+  - must_id: "item:B.8.2.5:proc_information_request"
+    description: "Ad-hoc information request pathway — customer inquiries routed + responded within stated SLA"
+    excerpt_keywords:
+      - [information, request]
+
+  - must_id: "item:B.8.2.5:proc_third_party_audit"
+    description: "Third-party audit acceptance — customer-mandated auditor engagement rules"
+    excerpt_keywords:
+      - [third, party, audit]

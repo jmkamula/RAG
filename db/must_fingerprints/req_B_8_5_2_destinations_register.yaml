@@ -1,0 +1,33 @@
+# Per-MUST fingerprint catalog for req:B.8.5.2:destinations_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.2:destinations_register"
+target_control: "B.8.5.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.2:reg_basis_link"
+    description: "Basis link per row (link to B.8.5.1)"
+    excerpt_keywords:
+      - [basis, link]
+      - [basis, link, row]
+
+  - must_id: "item:B.8.5.2:reg_customer_disclosure"
+    description: "Customer disclosure status per row (published in DPA schedule / trust page / on request)"
+    excerpt_keywords:
+      - [customer, disclosure]
+      - [customer, disclosure, status, row]
+
+  - must_id: "item:B.8.5.2:reg_destination_id"
+    description: "Destination identifier per row"
+    excerpt_keywords:
+      - [destination, identifier, row]
+
+  - must_id: "item:B.8.5.2:reg_role"
+    description: "Role per row (direct storage / subprocessor / support access)"
+    excerpt_keywords:
+      - [role, row]

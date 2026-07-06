@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:A.7.4.3:accuracy_incident_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4.3:accuracy_incident_register"
+target_control: "A.7.4.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.4.3:reg_detection_source"
+    description: "Detection source per row (internal audit / subject rectification / integration reconciliation / e..."
+    excerpt_keywords:
+      - [detection, source]
+      - [detection, source, row]
+
+  - must_id: "item:A.7.4.3:reg_incident_id"
+    description: "Unique incident identifier per row"
+    excerpt_keywords:
+      - [unique, incident, identifier, row]
+
+  - must_id: "item:A.7.4.3:reg_pii_scope"
+    description: "PII scope per row (which fields / how many subjects affected)"
+    excerpt_keywords:
+      - [pii, scope]
+      - [pii, scope, row]
+
+  - must_id: "item:A.7.4.3:reg_resolution"
+    description: "Resolution per row (corrected / cannot-correct-with-reason / erased / pending)"
+    excerpt_keywords:
+      - [resolution, row]
+
+  - must_id: "item:A.7.4.3:reg_root_cause"
+    description: "Root cause per row (where a systemic issue emerged, remediation link)"
+    excerpt_keywords:
+      - [root, cause]
+      - [root, cause, row]

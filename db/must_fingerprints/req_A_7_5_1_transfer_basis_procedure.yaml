@@ -1,0 +1,34 @@
+# Per-MUST fingerprint catalog for req:A.7.5.1:transfer_basis_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.5.1:transfer_basis_procedure"
+target_control: "A.7.5.1"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.5.1:proc_documented_compliance"
+    description: "Documented compliance with legislation/regulation applicable at origin AND destination jurisdicti..."
+    excerpt_keywords:
+      - [documented, compliance]
+      - [documented, compliance, legislation, regulation]
+
+  - must_id: "item:A.7.5.1:proc_intra_jurisdiction"
+    description: "Intra-jurisdiction exclusion rule (§7.5.1 NOTE — where sender + recipient same jurisdiction, appl..."
+    excerpt_keywords:
+      - [intra, jurisdiction]
+
+  - must_id: "item:A.7.5.1:proc_schrems_tia"
+    description: "Schrems II Transfer Impact Assessment — for Art.46 safeguard transfers, assess third-country lega..."
+    excerpt_keywords:
+      - [schrems, tia]
+      - [schrems, transfer, impact, assessment]
+
+  - must_id: "item:A.7.5.1:proc_transfer_hierarchy"
+    description: "Transfer basis hierarchy — adequacy decision (Art.45) → appropriate safeguards (Art.46: SCCs, BCR..."
+    excerpt_keywords:
+      - [transfer, hierarchy]
+      - [transfer, basis, hierarchy]

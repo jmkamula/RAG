@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:B.8.4.2:return_transfer_disposal_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.4.2:return_transfer_disposal_procedure"
+target_control: "B.8.4.2"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.4.2:proc_certification"
+    description: "Certification / attestation of completion issued to customer"
+    excerpt_keywords:
+      - [certification, attestation, completion, issued]
+
+  - must_id: "item:B.8.4.2:proc_customer_visibility"
+    description: "Customer visibility — disposal policy made available to customer on request"
+    excerpt_keywords:
+      - [customer, visibility]
+
+  - must_id: "item:B.8.4.2:proc_disposal_capability"
+    description: "Secure disposal capability — including from backups + DR + continuity systems"
+    excerpt_keywords:
+      - [disposal, capability]
+      - [secure, disposal, capability]
+
+  - must_id: "item:B.8.4.2:proc_lapse_protection"
+    description: "Lapse-of-contract protection — retention period defined before disposal after contract terminatio..."
+    excerpt_keywords:
+      - [lapse, protection]
+
+  - must_id: "item:B.8.4.2:proc_return_capability"
+    description: "Return capability — export PII to customer in structured format at end of service"
+    excerpt_keywords:
+      - [return, capability]
+
+  - must_id: "item:B.8.4.2:proc_transfer_capability"
+    description: "Transfer capability — hand PII to nominated third party at customer request"
+    excerpt_keywords:
+      - [transfer, capability]

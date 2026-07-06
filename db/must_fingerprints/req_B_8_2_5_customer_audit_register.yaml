@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:B.8.2.5:customer_audit_register
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.2.5:customer_audit_register"
+target_control: "B.8.2.5"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.2.5:reg_customer_id"
+    description: "Requesting customer identifier per row"
+    excerpt_keywords:
+      - [requesting, customer, identifier, row]
+
+  - must_id: "item:B.8.2.5:reg_request_id"
+    description: "Unique request identifier per row"
+    excerpt_keywords:
+      - [unique, request, identifier, row]
+
+  - must_id: "item:B.8.2.5:reg_request_type"
+    description: "Request type per row (audit / certification-share / DPIA input / DSAR support / configuration query)"
+    excerpt_keywords:
+      - [request, type]
+      - [request, type, row]
+
+  - must_id: "item:B.8.2.5:reg_response_date"
+    description: "Response date per row (vs stated SLA)"
+    excerpt_keywords:
+      - [response, date]
+      - [response, date, row]
+
+  - must_id: "item:B.8.2.5:reg_response_summary"
+    description: "Response summary per row (what was shared / rationale for redaction if any)"
+    excerpt_keywords:
+      - [response, summary]
+      - [response, summary, row]

@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:B.8.5.3:disclosure_event_log
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.3:disclosure_event_log"
+target_control: "B.8.5.3"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.3:reg_customer"
+    description: "Customer whose PII was disclosed per row"
+    excerpt_keywords:
+      - [customer, pii, disclosed, row]
+
+  - must_id: "item:B.8.5.3:reg_disclosure_id"
+    description: "Unique disclosure identifier per row"
+    excerpt_keywords:
+      - [unique, disclosure, identifier, row]
+
+  - must_id: "item:B.8.5.3:reg_recipient"
+    description: "Recipient per row"
+    excerpt_keywords:
+      - [recipient, row]
+
+  - must_id: "item:B.8.5.3:reg_source_of_authority"
+    description: "Source of authority per row"
+    excerpt_keywords:
+      - [source, authority]
+      - [source, authority, row]
+
+  - must_id: "item:B.8.5.3:reg_timestamp"
+    description: "Timestamp per row"
+    excerpt_keywords:
+      - [timestamp, row]

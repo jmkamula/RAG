@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:A.7.3.10:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3.10:program_review"
+target_control: "A.7.3.10"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:A.7.3.10:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
+  - must_id: "item:A.7.3.10:rev_intervention_test"
+    description: "Human-intervention pathway test"
+    excerpt_keywords:
+      - [intervention, test]
+
+  - must_id: "item:A.7.3.10:rev_jurisdiction_currency"
+    description: "Jurisdiction-currency check — new full-automation prohibitions surfaced"
+    excerpt_keywords:
+      - [jurisdiction, currency]
+
+  - must_id: "item:A.7.3.10:rev_notification_audit"
+    description: "Notification audit — sampled A.22 systems verified to have subject-notification surfaced"
+    excerpt_keywords:
+      - [notification, audit]
+
+  - must_id: "item:A.7.3.10:rev_reviewer"
+    description: "Reviewer identity (DPO + ML/Product lead + Legal)"
+    excerpt_keywords:
+      - [reviewer, identity]

@@ -1,0 +1,28 @@
+# Per-MUST fingerprint catalog for req:B.8.5.4:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.4:applicable_scope"
+target_control: "B.8.5.4"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.4:scope_gag_order_scope"
+    description: "Gag-order-capable jurisdictions (where law can prohibit notification)"
+    excerpt_keywords:
+      - [scope, gag, order, scope]
+
+  - must_id: "item:B.8.5.4:scope_jurisdictions"
+    description: "Jurisdictions where the org may receive legally-binding requests"
+    excerpt_keywords:
+      - [scope, jurisdictions]
+      - [jurisdictions, org, receive, legally]
+
+  - must_id: "item:B.8.5.4:scope_request_types"
+    description: "Request types enumerated (subpoena / court order / national security letter / regulator compulsion)"
+    excerpt_keywords:
+      - [scope, request, types]
+      - [request, types, enumerated]

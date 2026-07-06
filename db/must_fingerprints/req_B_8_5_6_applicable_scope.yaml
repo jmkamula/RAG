@@ -1,0 +1,27 @@
+# Per-MUST fingerprint catalog for req:B.8.5.6:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.6:applicable_scope"
+target_control: "B.8.5.6"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.6:scope_exclusions"
+    description: "Excluded suppliers (no PII contact) with rationale"
+    excerpt_keywords:
+      - [scope, exclusions]
+      - [excluded, suppliers]
+
+  - must_id: "item:B.8.5.6:scope_pii_processing_test"
+    description: "PII-processing test per supplier (does the supplier touch customer PII?)"
+    excerpt_keywords:
+      - [scope, pii, processing, test]
+
+  - must_id: "item:B.8.5.6:scope_subcontractor_list"
+    description: "In-scope subcontractors enumerated"
+    excerpt_keywords:
+      - [scope, subcontractor, list]

@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:B.8.5.5:disclosure_decision_procedure
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:B.8.5.5:disclosure_decision_procedure"
+target_control: "B.8.5.5"
+target_standard: "ISO27701:2019"
+
+must_fingerprints:
+  - must_id: "item:B.8.5.5:proc_binding_assessment"
+    description: "Binding-vs-not assessment — legal counsel classifies every incoming request"
+    excerpt_keywords:
+      - [binding, assessment]
+
+  - must_id: "item:B.8.5.5:proc_contractual_scope"
+    description: "Contractually-agreed scope — what customer-authorised requests look like (per B.8.2.1 agreement c..."
+    excerpt_keywords:
+      - [contractual, scope]
+
+  - must_id: "item:B.8.5.5:proc_customer_consultation"
+    description: "Customer consultation before disclosure of contractually-agreed requests"
+    excerpt_keywords:
+      - [customer, consultation]
+      - [customer, consultation, disclosure, contractually]
+
+  - must_id: "item:B.8.5.5:proc_default_reject"
+    description: "Default reject rule — non-binding disclosure requests rejected"
+    excerpt_keywords:
+      - [default, reject]
+      - [default, reject, rule]
+
+  - must_id: "item:B.8.5.5:proc_source_variety"
+    description: "Source variety awareness — courts, tribunals, admin authorities, any jurisdiction"
+    excerpt_keywords:
+      - [source, variety]
+      - [source, variety, awareness]
