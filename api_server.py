@@ -3420,23 +3420,22 @@ async def stage1_auto_approved(
     days:     int = 30,
     limit:    int = 200,
 ):
-    """List recently auto-approved tenant-authored findings.
+    """List recently auto-approved findings.
 
-    Two intake lanes write auto-approved rows because the content is
-    typed/edited by the tenant themselves (no inference uncertainty):
+    Three intake lanes write auto-approved rows because the content
+    has no inference uncertainty:
 
       - `templated` — markdown upload through the marker-bearing
-        template (posture_writer:370)
-      - `form`      — per-MUST web form
-        (dashboard_control_template_save)
+        template (tenant authored under explicit <<MUST X>> markers)
+      - `form` — retired 2026-07-04; legacy rows retagged to 'templated'
+      - `fingerprint_match` — deterministic MUST-keyword match
+        (2026-07-06 LLM-free stage 4-5). Each row carries the winning
+        keyword set + char-position + verbatim sentence — reproducible
+        without an LLM opinion.
 
-    This endpoint exposes both for visibility + audit: the tenant can
-    review what was auto-bound and revert any row that was
-    unintentional.
-
-    Filters:
-      - inference_source = 'templated' (form-lane retired 2026-07-04;
-        legacy 'form' rows retagged to 'templated' in the same batch)
+    This endpoint exposes all auto-approved rows for tenant review:
+    revert any row that was unintentional. Filters:
+      - inference_source ∈ ('templated', 'fingerprint_match')
       - review_status    = 'approved'
       - confirmed_at     within last `days` days (default 30)
 
@@ -3453,12 +3452,12 @@ async def stage1_auto_approved(
                        df.standard_id, df.status, df.confidence,
                        LEFT(df.excerpt, 200) AS excerpt_preview,
                        df.confirmed_by::text, df.confirmed_at,
-                       cd.filename
+                       cd.filename, df.inference_source
                   FROM document_findings df
                   JOIN client_documents cd ON cd.id = df.document_id
                  WHERE df.tenant_id        = %s::uuid
                    AND df.is_active        = TRUE
-                   AND df.inference_source = 'templated'
+                   AND df.inference_source IN ('templated', 'fingerprint_match')
                    AND df.review_status    = 'approved'
                    AND df.confirmed_at     > now() - (%s * interval '1 day')
                  ORDER BY df.confirmed_at DESC

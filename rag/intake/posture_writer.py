@@ -358,17 +358,19 @@ def _write_document_findings(
                 # rely on the DB column default ('extracted').
                 src = getattr(f, "inference_source", None)
 
-                # Auto-approve discipline: templated rows are deterministic
-                # tenant authorship (the tenant downloaded the template,
-                # wrote content under explicit <<MUST item:X>> markers,
-                # and uploaded). The HITL Stage-1 gate exists for INFERENCE
-                # uncertainty — templated has none. Land the row
-                # review_status='approved' + confirmed_by=<uploading user>
-                # + confirmed_at=now() so the engine sees it immediately +
-                # the audit trail captures "authored by user X via
-                # templated upload". A separate visibility endpoint surfaces
-                # these for tenant review without blocking posture.
-                if src == "templated":
+                # Auto-approve discipline: two source types skip Stage-1
+                # HITL because they have no INFERENCE uncertainty —
+                #   'templated' — tenant authored via explicit <<MUST X>>
+                #                 markers in a downloaded scaffold
+                #   'fingerprint_match' — deterministic MUST-keyword match
+                #                 with recorded provenance (kw set +
+                #                 char-position + verbatim sentence)
+                # Both land review_status='approved' + confirmed_by=
+                # <uploading user> + confirmed_at=now() so the engine
+                # sees them immediately. The audit trail captures the
+                # authorship path; auto-approved rows are surfaced via
+                # /api/v1/stage1/auto-approved for tenant review.
+                if src in ("templated", "fingerprint_match"):
                     review_status = "approved"
                     confirmed_by  = uploaded_by  # may be None for legacy paths
                 else:
