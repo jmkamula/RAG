@@ -193,6 +193,18 @@ def extract(
         # bind against. Without this, every finding stays unbound and is
         # dropped — even when the doc is genuinely relevant.
         scoped_leaf_ids = _fetch_leaves_for_controls(scoped)
+
+        # Medium step (RAG-native intake, 2026-07-06): use MUST
+        # fingerprints (db/must_fingerprints/*.yaml, 310 files) as a
+        # deterministic leaf-level classifier BEFORE the LLM sees the
+        # prompt. Leaves with ≥1 fingerprint hit in doc content are
+        # highly relevant; keep those exclusively. Leaves without a
+        # fingerprint yaml (uncurated) stay in the pool as a safety
+        # fallback — no data means "we don't know, keep it."
+        scoped_leaf_ids = _classify_leaves_via_fingerprints(
+            scoped_leaf_ids, doc,
+        )
+
         if scoped_leaf_ids:
             leaf_musts = _fetch_leaf_musts(scoped_leaf_ids)
             doc.extraction_metrics["leaf_musts_count"] = sum(
@@ -2278,6 +2290,113 @@ def _scope_controls_via_retrieval(
     doc.extraction_metrics.setdefault("scope_method", "retrieval")
     doc.extraction_metrics["retrieval_scoped_count"] = len(scoped)
     return scoped[:MAX_CONTROLS_PER_CALL * 2]
+
+
+# Medium step (RAG-native intake, 2026-07-06).
+# Leaf-level classifier using MUST fingerprints. Cache the loaded
+# catalog map at module scope; leaf_driven_scan.load_catalogs() parses
+# 310 YAMLs and is not cheap on every intake call.
+_LEAF_FINGERPRINT_CACHE = None
+
+
+def _get_leaf_fingerprint_index() -> dict[str, list]:
+    """Return {leaf_id: [MustFingerprint, ...]} indexed for quick
+    per-leaf scoring. Empty dict on load failure."""
+    global _LEAF_FINGERPRINT_CACHE
+    if _LEAF_FINGERPRINT_CACHE is not None:
+        return _LEAF_FINGERPRINT_CACHE
+    try:
+        from .leaf_driven_scan import load_catalogs
+        cats = load_catalogs()
+        out: dict[str, list] = {}
+        for cat in cats:
+            out[cat.target_evidence_requirement] = list(cat.fingerprints)
+        _LEAF_FINGERPRINT_CACHE = out
+        logger.info(
+            "loaded %d leaf fingerprint catalogs for intake classifier",
+            len(out),
+        )
+        return out
+    except Exception as e:
+        logger.warning(
+            "leaf fingerprint index unavailable (%s: %s) — classifier "
+            "skipped, all scoped leaves stay in pool",
+            type(e).__name__, e,
+        )
+        _LEAF_FINGERPRINT_CACHE = {}
+        return {}
+
+
+def _classify_leaves_via_fingerprints(
+    scoped_leaf_ids: list[str], doc: ParsedDocument,
+) -> list[str]:
+    """Score each scoped leaf against doc content via its MUST
+    fingerprints. Return the subset with ≥1 fingerprint hit, plus any
+    leaves that have no fingerprint yaml (safety fallback).
+
+    Why: the LLM currently sees ALL MUSTs for ALL leaves under the
+    scoped controls, then guesses which ones the doc addresses. This
+    is expensive (long prompt) and error-prone (LLM's per-MUST
+    discrimination is noisy). Fingerprint matching is deterministic
+    and cheap — leaves whose MUSTs literally appear in the text are
+    obviously relevant; leaves whose MUSTs don't appear anywhere are
+    unlikely to bind and just consume prompt space.
+
+    Silent fallback: any exception returns the full scoped_leaf_ids
+    unchanged. Classifier is an overlay, not a hard dependency.
+    """
+    if not scoped_leaf_ids:
+        return []
+
+    index = _get_leaf_fingerprint_index()
+    if not index:
+        return scoped_leaf_ids
+
+    from .leaf_driven_scan import _excerpt_matches
+    body = doc.markdown or doc.full_text or ""
+    if not body:
+        return scoped_leaf_ids
+
+    kept: list[str] = []
+    unfingerprinted: list[str] = []
+    matched_leaves = 0
+    for lid in scoped_leaf_ids:
+        fps = index.get(lid)
+        if fps is None:
+            # No fingerprint yaml for this leaf — pool it in as safety
+            # fallback (curation gap, not evidence of irrelevance).
+            unfingerprinted.append(lid)
+            continue
+        # Any fingerprint hit → leaf is relevant.
+        for fp in fps:
+            if _excerpt_matches(body, fp.excerpt_keywords):
+                kept.append(lid)
+                matched_leaves += 1
+                break
+
+    # If NO leaves had fingerprint hits, keep the full pool — indicates
+    # the doc content is either off-scope OR uses vocabulary the
+    # fingerprints don't cover. Either way, don't strip the pool to
+    # empty; let the LLM decide (with its own coverage checks).
+    if not kept:
+        doc.extraction_metrics["leaf_classifier"] = "no_hits_kept_full_pool"
+        return scoped_leaf_ids
+
+    final = kept + unfingerprinted
+    doc.extraction_metrics["leaf_classifier"] = "fingerprint_scored"
+    doc.extraction_metrics["leaves_fingerprint_hit"]      = matched_leaves
+    doc.extraction_metrics["leaves_unfingerprinted_kept"] = len(unfingerprinted)
+    doc.extraction_metrics["leaves_dropped_by_classifier"] = (
+        len(scoped_leaf_ids) - len(final)
+    )
+    logger.info(
+        "leaf classifier for %s: %d/%d leaves kept "
+        "(%d fingerprint hits + %d unfingerprinted safety; %d dropped)",
+        doc.original_name, len(final), len(scoped_leaf_ids),
+        matched_leaves, len(unfingerprinted),
+        len(scoped_leaf_ids) - len(final),
+    )
+    return final
 
 
 def _scope_controls(controls: list[dict], doc: ParsedDocument) -> list[dict]:
