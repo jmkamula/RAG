@@ -257,6 +257,7 @@ def approve_engine_proposal(
     tenant_id:    str,
     control_ref:  str,
     reviewed_by:  str = "chat_user",
+    standard_id:  Optional[str] = None,
 ) -> dict:
     """Promote the engine proposal to live finding for one control.
 
@@ -285,8 +286,19 @@ def approve_engine_proposal(
         with pg_conn.cursor() as cur:
             cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
 
+            # Defence in depth: prefer the PC row that actually has a
+            # pending engine proposal when the caller didn't supply
+            # standard_id explicitly. Prior to this ordering the query
+            # would arbitrarily LIMIT 1 across duplicate (control_ref,
+            # standard_id) rows — an issue when the pre-d60734a bug
+            # left orphan 27001-tagged copies of 27701 refs. See the
+            # commit for the upstream fix; this is the read-side guard.
+            std_filter = "AND pc.standard_id = %s" if standard_id else ""
+            params: list = [tenant_id, control_ref]
+            if standard_id:
+                params.append(standard_id)
             cur.execute(
-                """
+                f"""
                 SELECT pc.id, pc.standard_id, pc.finding,
                        pa.finding, pc.engine_proposal_status,
                        pa.gap_description
@@ -299,10 +311,14 @@ def approve_engine_proposal(
                    AND pa.status      = 'pending'
                  WHERE pc.tenant_id   = %s
                    AND pc.control_ref = %s
+                   {std_filter}
                    AND pc.is_active   = TRUE
+                 ORDER BY (pa.finding IS NOT NULL
+                          AND pc.engine_proposal_status = 'proposed') DESC,
+                          pc.last_updated DESC
                  LIMIT 1
                 """,
-                (tenant_id, control_ref),
+                params,
             )
             row = cur.fetchone()
             if row is None:
@@ -402,6 +418,7 @@ def reject_engine_proposal(
     control_ref:  str,
     rationale:    str,
     reviewed_by:  str = "chat_user",
+    standard_id:  Optional[str] = None,
 ) -> dict:
     """Reject the engine proposal. Sets engine_proposal_status='rejected'
     and stamps engine_approved_by / engine_approved_at (the field doubles as
@@ -424,8 +441,13 @@ def reject_engine_proposal(
         with pg_conn.cursor() as cur:
             cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
 
+            # Defence-in-depth ordering — see approve_engine_proposal.
+            std_filter = "AND pc.standard_id = %s" if standard_id else ""
+            params: list = [tenant_id, control_ref]
+            if standard_id:
+                params.append(standard_id)
             cur.execute(
-                """
+                f"""
                 SELECT pc.id, pc.standard_id,
                        pa.finding, pc.engine_proposal_status
                   FROM posture_controls pc
@@ -437,10 +459,14 @@ def reject_engine_proposal(
                    AND pa.status      = 'pending'
                  WHERE pc.tenant_id   = %s
                    AND pc.control_ref = %s
+                   {std_filter}
                    AND pc.is_active   = TRUE
+                 ORDER BY (pa.finding IS NOT NULL
+                          AND pc.engine_proposal_status = 'proposed') DESC,
+                          pc.last_updated DESC
                  LIMIT 1
                 """,
-                (tenant_id, control_ref),
+                params,
             )
             row = cur.fetchone()
             if row is None:
