@@ -35,6 +35,22 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+def _truncate_at_word(text: str, max_len: int) -> str:
+    """Return text truncated at the last word boundary within `max_len`,
+    with a trailing ellipsis when truncation happened. Used for
+    gap_description compaction so we don't cut mid-word (e.g.
+    'attaches to a…' → 'attaches to…')."""
+    if not text or len(text) <= max_len:
+        return text or ""
+    # Prefer the last whitespace before max_len. If that lands too far
+    # back (below 70% of the window), the token itself is long — hard
+    # cut is unavoidable but stays readable.
+    cutoff = text.rfind(" ", 0, max_len)
+    if cutoff < int(max_len * 0.7):
+        cutoff = max_len
+    return text[:cutoff].rstrip(" ,.;:—-") + "…"
+
+
 def load_posture(pg_conn, tenant_id: str) -> dict:
     """
     Load all assessed posture controls for a tenant from Postgres.
@@ -312,20 +328,49 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
                     )
 
                 if partial:
+                    # Lazy import — arion_graph carries the canonical
+                    # snake_case → pretty label map. Prettify at compose
+                    # time so ALL downstream read paths (not just the
+                    # arion_graph one that already calls _prettify_reason)
+                    # see human-readable roles.
+                    try:
+                        from rag.arion_graph import _pretty_role
+                    except Exception:
+                        def _pretty_role(r: str) -> str:
+                            return r.replace("_", " ")
+
                     partial_bits = []
                     for l in sorted(partial, key=lambda x: x.role):
                         sat = len(l.items_recognised)
                         total = sat + len(l.items_unrecognised)
                         first_miss = l.items_unrecognised[0] if l.items_unrecognised else ""
-                        # Cap the item description so the gap_description
-                        # stays compact (one line per partial leaf).
-                        first_miss_short = (first_miss[:80] + "…") if len(first_miss) > 80 else first_miss
-                        bit = f"{l.role} ({sat}/{total}"
+                        # Word-boundary truncation so we don't cut
+                        # mid-word ("attaches to a…"). Full-word +
+                        # ellipsis reads better than partial word.
+                        first_miss_short = _truncate_at_word(first_miss, 120)
+                        bit = f"{_pretty_role(l.role)} ({sat}/{total}"
                         if first_miss_short:
                             bit += f" — missing: {first_miss_short}"
                         bit += ")"
                         partial_bits.append(bit)
                     parts.append("partial: " + ", ".join(partial_bits))
+
+                # Also prettify the "missing artifacts of type" list —
+                # same snake_case → human treatment.
+                if fully_empty:
+                    try:
+                        from rag.arion_graph import _pretty_role as _pr
+                    except Exception:
+                        def _pr(r: str) -> str:
+                            return r.replace("_", " ")
+                    # Replace the raw-role entry we appended earlier
+                    for i, p in enumerate(parts):
+                        if p.startswith("missing artifacts of type: "):
+                            roles = p[len("missing artifacts of type: "):]
+                            pretty = ", ".join(_pr(r.strip())
+                                               for r in roles.split(",") if r.strip())
+                            parts[i] = "still needed: " + pretty
+                            break
 
                 if len(parts) > 1 or verdict.reason:
                     row["gap_description"] = "; ".join(parts)
