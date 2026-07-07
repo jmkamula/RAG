@@ -1690,6 +1690,165 @@ def _answer_scope_na(query: str, posture: dict) -> str:
     )
 
 
+def build_answer_envelope(
+    *,
+    answer_text:      str,
+    cited_refs:       list,
+    answer_source:    str,
+    question_type:    str,
+    state:            dict = None,
+    tenant           = None,
+    intent           = None,
+    # LLM-path metadata (optional; omitted from result when None)
+    verified:         bool = None,
+    was_corrected:    bool = None,
+    posture_findings: dict = None,
+    node_count:       int  = None,
+    neo4j_ms:         int  = None,
+    resolver_trace         = None,
+    last_entity:      dict = None,
+    # UX enrichment toggles
+    attach_templates: bool = True,
+    attach_advisory:  bool = True,
+    confidence:       float = 1.0,
+) -> dict:
+    """Standard retrieve() return dict shape + auto-attached UX
+    enrichments (templates_block, per-MUST advisory) based on
+    (question_type, cited_refs) — factoring out the boilerplate that
+    used to live open-coded at each of retrieve()'s ~13 return sites.
+
+    See task #203 for the migration arc. Wave 1: migrate the two
+    fresh-dict paths (deterministic enumeration + LLM fallback).
+    Wave 2: migrate the 11 `{**state, ...}` chat short-circuits.
+
+    Rules:
+      - `answer_text` also set as `answer` (alias — some consumers
+        read either).
+      - `question_type` also written to `intent_type` (both fields
+        are read downstream; the timeline short-circuit comment at
+        line ~2055 explains why they must be kept in sync).
+      - When `state` is supplied, spread it into the result first
+        (chat short-circuit shape). Explicit fields override state.
+      - `templates_block` attached automatically when:
+          * `attach_templates=True`
+          * cited_refs non-empty
+          * tenant + tenant_id resolvable
+          * question_type is action-oriented (implementation /
+            gap_analysis / posture_check / document_inventory /
+            document_content — matches
+            rag.templates.answer_footer._RELEVANT_QUESTION_TYPES).
+      - Per-MUST advisory appendix appended to answer_text when:
+          * `attach_advisory=True`
+          * exactly ONE cited_ref (single-control query)
+          * question_type in {posture_check, cross_framework}
+          * tenant + tenant_id resolvable
+        Uses intent.cited_refs preferentially when intent is passed
+        (matches the pre-envelope behaviour that prefers the
+        classifier's original cited refs over the LLM's expanded
+        set, so xfw expansion doesn't suppress the advisory).
+      - LLM-path metadata (`verified`, `posture_findings`,
+        `node_count`, `neo4j_ms`, `resolver_trace`, `last_entity`)
+        included only when the caller supplies them (chat short-
+        circuits typically pass None → keys omitted).
+    """
+    import os as _os
+    import logging as _logging
+    _elog = _logging.getLogger(__name__)
+
+    result: dict = {}
+    if state:
+        result.update(state)
+
+    # Per-MUST advisory appendix decision — evaluated before we
+    # freeze answer_text so we can append the advisory text.
+    # Prefer intent.cited_refs over the passed cited_refs (LLM
+    # expansion via xfw bridges brings sibling refs; classifier's
+    # intent has the USER's original single ref).
+    if attach_advisory:
+        _advisory_ref = None
+        _intent_refs = list(getattr(intent, "cited_refs", []) or []) if intent else []
+        _candidate_refs = _intent_refs or list(cited_refs or [])
+        if len(_candidate_refs) == 1 and question_type in ("posture_check", "cross_framework"):
+            _advisory_ref = _candidate_refs[0]
+        if _advisory_ref and tenant is not None:
+            _tid = str(getattr(tenant, "tenant_id", "") or "")
+            if _tid:
+                try:
+                    from rag.posture.advisory import build_per_must_advisory
+                    from rag.posture_loader import build_pg_conn
+                    if _advisory_ref.startswith("Art."):
+                        _std = "GDPR:2016/679"
+                    elif _advisory_ref.startswith("B."):
+                        _std = "ISO27701:2019"
+                    elif _advisory_ref.startswith("A.") and _advisory_ref.count(".") >= 3:
+                        _std = "ISO27701:2019"
+                    else:
+                        _std = "ISO27001:2022"
+                    _pg = build_pg_conn()
+                    try:
+                        _appendix = build_per_must_advisory(
+                            pg_conn      = _pg,
+                            tenant_id    = _tid,
+                            control_ref  = _advisory_ref,
+                            standard_id  = _std,
+                        )
+                        if _appendix:
+                            answer_text = (answer_text or "") + _appendix
+                    finally:
+                        try:
+                            _pg.close()
+                        except Exception:
+                            pass
+                except Exception as _e:
+                    _elog.warning(
+                        "envelope: per-MUST advisory skipped for %s: %s",
+                        _advisory_ref, _e,
+                    )
+
+    # Freeze core fields.
+    result["answer_text"]   = answer_text or ""
+    result["answer"]        = answer_text or ""   # alias
+    result["cited_refs"]    = list(cited_refs or [])
+    result["answer_source"] = answer_source
+    result["confidence"]    = confidence
+    if question_type:
+        result["question_type"] = question_type
+        result["intent_type"]   = question_type
+
+    # LLM-path metadata — include only when caller provided.
+    if verified is not None:
+        result["verified"] = verified
+    if was_corrected is not None:
+        result["was_corrected"] = was_corrected
+    if posture_findings is not None:
+        result["posture_findings"] = posture_findings
+    if node_count is not None:
+        result["node_count"] = node_count
+    if neo4j_ms is not None:
+        result["neo4j_ms"] = neo4j_ms
+    if resolver_trace is not None:
+        result["resolver_trace"] = resolver_trace
+    if last_entity is not None:
+        result["last_entity"] = last_entity
+
+    # UX enrichment: templates_block.
+    if attach_templates and cited_refs and tenant is not None:
+        _tid = str(getattr(tenant, "tenant_id", "") or "")
+        if _tid:
+            try:
+                from rag.templates.answer_footer import build_templates_block
+                result["templates_block"] = build_templates_block(
+                    cited_refs    = list(cited_refs),
+                    question_type = question_type,
+                    tenant_id     = _tid,
+                    db_url        = _os.getenv("DATABASE_URL"),
+                )
+            except Exception as _e:
+                _elog.warning("envelope: templates_block skipped: %s", _e)
+
+    return result
+
+
 def make_retrieve_node(
     retriever: VectorRetriever,
     expander:  GraphExpander,
@@ -2210,38 +2369,25 @@ def make_retrieve_node(
                     for n in all_nodes
                     if (posture or {}).get(n.node_id, {}).get("finding")
                 }
-                # Attach templates_block for the enumeration path too —
-                # tenant asking "what is our XXX compliance status?"
-                # gets the per-leaf template cards for their NC/OFI
-                # controls, same UX as single-control POSTURE_CHECK.
-                # Previously omitted; identified 2026-07-07 during a
-                # UI review — the deterministic short-circuit here was
-                # bypassing the templates_block hookup at line 2264.
-                _tb = None
-                try:
-                    from rag.templates.answer_footer import build_templates_block
-                    _tid = str(getattr(tenant, "tenant_id", "") or state.get("tenant_id", "") or "")
-                    _tb = build_templates_block(
-                        cited_refs    = _det_refs,
-                        question_type = "posture_check",
-                        tenant_id     = _tid,
-                        db_url        = os.getenv("DATABASE_URL"),
-                    )
-                except Exception as e:
-                    logger.warning(f"templates_block skipped (enumeration): {type(e).__name__}: {e}")
-                return {
-                    "answer_text":      _det_text,
-                    "verified":         True,
-                    "was_corrected":    False,
-                    "cited_refs":       _det_refs,
-                    "posture_findings": _det_findings,
-                    "node_count":       len(all_nodes),
-                    "neo4j_ms":         neo4j_ms,
-                    "resolver_trace":   _trace,
-                    "answer_source":    "posture_enumeration_deterministic",
-                    "question_type":    intent.question_type.value,
-                    "templates_block":  _tb,
-                }
+                # Wave 1 migration to build_answer_envelope (task #203):
+                # replaces the open-coded templates_block + return dict
+                # with the shared envelope. Same behavior (templates_block
+                # auto-attaches for action-oriented questions when
+                # cited_refs are present) — no expected change.
+                return build_answer_envelope(
+                    answer_text      = _det_text,
+                    cited_refs       = _det_refs,
+                    answer_source    = "posture_enumeration_deterministic",
+                    question_type    = intent.question_type.value,
+                    tenant           = tenant,
+                    intent           = intent,
+                    verified         = True,
+                    was_corrected    = False,
+                    posture_findings = _det_findings,
+                    node_count       = len(all_nodes),
+                    neo4j_ms         = neo4j_ms,
+                    resolver_trace   = _trace,
+                )
 
         result = llm.rank_and_answer(
             query            = state["query"],
@@ -2264,35 +2410,11 @@ def make_retrieve_node(
             last_entity      = state.get("last_entity") or None,
         )
 
-        # Append a deterministic "Templates available" footer for
-        # action-oriented questions where the cited refs have
-        # templates in the catalogue.
-        #
-        # Tier-4 (2026-07-02): builds a STRUCTURED payload instead of
-        # appending a plain-text footer. The chat UI renders it as a
-        # per-leaf card block (progress-aware + right format per shape
-        # + cite-mode secondary CTA + dashboard drill-in) below the
-        # answer bubble; API consumers get the same data as JSON on
-        # `ChatResponse.templates_block`. Text-appended footer retired.
-        try:
-            from rag.templates.answer_footer import build_templates_block
-            qt_value = (
-                intent.question_type.value
-                if intent and getattr(intent, "question_type", None)
-                else None
-            )
-            _tenant_id_str = str(getattr(tenant, "tenant_id", "") or state.get("tenant_id", "") or "")
-            result.templates_block = build_templates_block(
-                cited_refs    = result.cited_refs or [],
-                question_type = qt_value,
-                tenant_id     = _tenant_id_str,
-                db_url        = os.getenv("DATABASE_URL"),
-            )
-        except Exception as e:
-            logger.warning(f"templates_block skipped: {type(e).__name__}: {e}")
-
-
         # ── Write structured trace to DB (best-effort, never blocks answer) ─
+        # Note: previously the templates_block attachment + per-MUST
+        # advisory appendix lived open-coded here. Wave 1 migration
+        # (task #203) moved that logic into build_answer_envelope so
+        # every retrieve() return site gets consistent UX enrichment.
         if _trace:
             try:
                 _write_request_trace(
@@ -2304,86 +2426,25 @@ def make_retrieve_node(
             except Exception as _te:
                 logger.debug(f"[trace] write skipped: {_te}")
 
-        # Per-MUST advisory appendix for single-control posture_check
-        # queries. Translates the engine's per-leaf verdict into a
-        # tenant-actionable guide: which MUSTs are covered, which are
-        # missing, what evidence shape to produce. Deterministic compose
-        # (no LLM) — same data path as the engine's NC/OFI verdict.
-        #
-        # Targeting: single control identified in cited_refs (LLM)
-        # or intent.cited_refs (classifier). Skip when 0 or >1 to
-        # avoid wall-of-text on broad queries.
-        import logging as _adv_logging
-        _adv_log = _adv_logging.getLogger("rag.arion_graph.advisory")
-        _advisory_text = ""
-        try:
-            # Fire on both POSTURE_CHECK and CROSS_FRAMEWORK — the latter
-            # catches GDPR Art.X queries that route via xfw inheritance.
-            if intent.question_type in (
-                QuestionType.POSTURE_CHECK,
-                QuestionType.CROSS_FRAMEWORK,
-            ):
-                _result_refs = list(getattr(result, "cited_refs", []) or [])
-                _intent_refs = list(getattr(intent, "cited_refs", []) or [])
-                # Prefer the classifier's cited refs — those reflect what
-                # the USER asked about. The LLM's result refs include xfw
-                # bridges (e.g. A.5.15 query → result_refs=[A.5.15, Art.32.1.b])
-                # which would suppress the advisory due to len>1.
-                _candidate_refs = _intent_refs or _result_refs
-                _single_ctrl = _candidate_refs[0] if len(_candidate_refs) == 1 else None
-                _adv_log.info(
-                    f"[advisory] qtype=POSTURE_CHECK result_refs={_result_refs} "
-                    f"intent_refs={_intent_refs} single={_single_ctrl}"
-                )
-                if _single_ctrl:
-                    from rag.posture.advisory import build_per_must_advisory
-                    from rag.posture_loader import build_pg_conn
-                    # Ref → standard routing:
-                    #   Art.X.Y.Z   → GDPR:2016/679
-                    #   B.X.Y.Z     → ISO27701:2019 (all Annex B is 27701)
-                    #   A.X.Y.Z     → ISO27701:2019 (3-part Annex A is 27701)
-                    #   A.X.Y       → ISO27001:2022 (2-part Annex A is 27001)
-                    if _single_ctrl.startswith("Art."):
-                        _std = "GDPR:2016/679"
-                    elif _single_ctrl.startswith("B."):
-                        _std = "ISO27701:2019"
-                    elif _single_ctrl.startswith("A.") and _single_ctrl.count(".") >= 3:
-                        _std = "ISO27701:2019"
-                    else:
-                        _std = "ISO27001:2022"
-                    _tenant_uuid = str(getattr(tenant, "tenant_id", "") or "")
-                    if _tenant_uuid:
-                        _pg_adv = build_pg_conn()
-                        try:
-                            _advisory_text = build_per_must_advisory(
-                                pg_conn      = _pg_adv,
-                                tenant_id    = _tenant_uuid,
-                                control_ref  = _single_ctrl,
-                                standard_id  = _std,
-                            )
-                        finally:
-                            try: _pg_adv.close()
-                            except Exception: pass
-                        _adv_log.info(
-                            f"[advisory] built {len(_advisory_text)} chars for "
-                            f"{_single_ctrl} ({_std})"
-                        )
-        except Exception as _ae:
-            _adv_log.warning(f"[advisory] skipped: {_ae}", exc_info=True)
-
-        _answer = result.answer_text + (_advisory_text or "")
-
-        return {
-            "answer_text":    _answer,
-            "verified":       result.verified,
-            "was_corrected":  result.was_corrected,
-            "cited_refs":     result.cited_refs,
-            "posture_findings": result.posture_findings,
-            "node_count":     len(all_nodes),
-            "neo4j_ms":       neo4j_ms,
-            "resolver_trace": _trace,
-            "templates_block": result.templates_block,
-        }
+        _qt_value = (
+            intent.question_type.value
+            if intent and getattr(intent, "question_type", None)
+            else None
+        )
+        return build_answer_envelope(
+            answer_text      = result.answer_text,
+            cited_refs       = result.cited_refs or [],
+            answer_source    = "llm",
+            question_type    = _qt_value,
+            tenant           = tenant,
+            intent           = intent,
+            verified         = result.verified,
+            was_corrected    = result.was_corrected,
+            posture_findings = result.posture_findings,
+            node_count       = len(all_nodes),
+            neo4j_ms         = neo4j_ms,
+            resolver_trace   = _trace,
+        )
 
     return retrieve
 

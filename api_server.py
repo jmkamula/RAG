@@ -513,7 +513,11 @@ async def chat(
         )
 
         answer     = result.get("answer_text", "") or result.get("answer", "")
-        qtype      = result.get("question_type")
+        # question_type isn't in the ArionState schema (only intent_type
+        # is), so LangGraph strips it from graph.invoke() output.
+        # intent_type is set to the same value by build_answer_envelope
+        # + every chat short-circuit; use it as the primary read.
+        qtype      = result.get("intent_type") or result.get("question_type")
         refs       = result.get("cited_refs", [])
 
         # When pipeline needs clarification, surface the question to the user
@@ -645,7 +649,9 @@ async def chat_stream(
                         # SSE event after tokens, before 'done'.
                         templates_block = _out.get("templates_block") or None
                         if qtype != "clarification":
-                            qtype = _out.get("question_type") or _out.get("answer_source")
+                            qtype = (_out.get("intent_type")
+                                     or _out.get("question_type")
+                                     or _out.get("answer_source"))
                         # Strip selection artifacts
                         answer_text = answer_text.lstrip()
                         while answer_text.upper().startswith("SELECTED"):
