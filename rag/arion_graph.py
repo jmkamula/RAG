@@ -488,13 +488,20 @@ def _compose_posture_enumeration_answer(
         ref_str = f"{_label_for_standard(n.standard_id)} {n.ref}"
         head    = f"**{ref_str} — {title}**" if title else f"**{ref_str}**"
         reason  = (rec.get("gap_description") or rec.get("evidence_text") or "").strip()
-        # First non-empty line only — keep rows scannable
-        for raw in reason.splitlines():
-            line = raw.strip()
-            if line:
-                reason = line
-                break
-        reason = _prettify_reason(reason)
+        # posture_loader emits engine reasons as multi-line strings —
+        # summary on the first line, then indented bullet lines for
+        # each partial leaf (`  - operating procedure: 6/8 — needs …`).
+        # Preserve that structure so the LLM's final synthesis renders
+        # the bullets rather than collapsing them into one wall of
+        # text. Legacy narrative rows (single-line prose in
+        # posture_controls.gap_description) still work because
+        # `.strip()` above already cleared surrounding whitespace and
+        # single-line inputs pass through unchanged.
+        if "\n" in reason:
+            first, rest = reason.split("\n", 1)
+            reason = _prettify_reason(first.strip()) + "\n" + rest
+        else:
+            reason = _prettify_reason(reason)
         main_line = f"- {head}: {reason}" if reason else f"- {head}"
 
         # Auditor context — when an external audit report has an

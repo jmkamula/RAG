@@ -330,30 +330,34 @@ def _apply_engine_overlay(posture: dict, tenant_id: str, pg_conn) -> int:
                 if partial:
                     # Lazy import — arion_graph carries the canonical
                     # snake_case → pretty label map. Prettify at compose
-                    # time so ALL downstream read paths (not just the
-                    # arion_graph one that already calls _prettify_reason)
-                    # see human-readable roles.
+                    # time so ALL downstream read paths see human-
+                    # readable roles.
                     try:
                         from rag.arion_graph import _pretty_role
                     except Exception:
                         def _pretty_role(r: str) -> str:
                             return r.replace("_", " ")
 
-                    partial_bits = []
+                    # Emit partial bits as newline-separated bullets so
+                    # the LLM's final synthesis renders each leaf on
+                    # its own line. Previously we concatenated with
+                    # ", " which the LLM followed → wall-of-text prose
+                    # that was hard to scan. Downstream truncators
+                    # that limit gap_description to N chars still work
+                    # (they cut at char N regardless of newline
+                    # placement); rendering surfaces that preserve
+                    # newlines (chat, drill-in) get the bullets.
+                    partial_lines = []
                     for l in sorted(partial, key=lambda x: x.role):
                         sat = len(l.items_recognised)
                         total = sat + len(l.items_unrecognised)
                         first_miss = l.items_unrecognised[0] if l.items_unrecognised else ""
-                        # Word-boundary truncation so we don't cut
-                        # mid-word ("attaches to a…"). Full-word +
-                        # ellipsis reads better than partial word.
                         first_miss_short = _truncate_at_word(first_miss, 120)
-                        bit = f"{_pretty_role(l.role)} ({sat}/{total}"
+                        line = f"  - {_pretty_role(l.role)}: {sat}/{total}"
                         if first_miss_short:
-                            bit += f" — missing: {first_miss_short}"
-                        bit += ")"
-                        partial_bits.append(bit)
-                    parts.append("partial: " + ", ".join(partial_bits))
+                            line += f" — needs {first_miss_short}"
+                        partial_lines.append(line)
+                    parts.append("Partial evidence:\n" + "\n".join(partial_lines))
 
                 # Also prettify the "missing artifacts of type" list —
                 # same snake_case → human treatment.
