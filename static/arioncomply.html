@@ -4066,6 +4066,26 @@ function renderTemplatesBlock(block) {
              <a href="#" onclick="event.preventDefault();openCiteCreate('${attr(l.leaf_id)}','${attr(l.evidence_type||'')}')" style="color:#534AB7">Cite it</a>
            </span>`
         : '';
+      // Task #204: per-MUST advisory data now flows through the same
+      // structured payload as the template download. Show "still needed"
+      // bullets (cap at 3 to keep the card compact — full list on the
+      // dashboard drill-in) + the upload hint from the advisory helper.
+      const itemsMissing = Array.isArray(l.items_missing) ? l.items_missing : [];
+      const uploadHint   = l.upload_hint || '';
+      const missingSample = itemsMissing.slice(0, 3);
+      const moreCount     = itemsMissing.length - missingSample.length;
+      const missingHtml = itemsMissing.length
+        ? `<div style="margin-top:6px;font-size:11px;color:#3A382E">
+             <div style="color:#7C7A6E;margin-bottom:3px">Still needed:</div>
+             <ul style="margin:0;padding-left:16px;color:#3A382E">
+               ${missingSample.map(t => `<li style="margin-bottom:2px">${esc(t)}</li>`).join('')}
+               ${moreCount > 0 ? `<li style="color:#9C9A8E;font-style:italic">…and ${moreCount} more</li>` : ''}
+             </ul>
+           </div>`
+        : '';
+      const hintHtml = uploadHint
+        ? `<div style="margin-top:6px;font-size:11px;color:#5C5A4F;font-style:italic">${esc(uploadHint)}</div>`
+        : '';
       html += `<div style="padding:8px 10px;background:#fff;border:1px solid #E8E5DA;border-radius:4px;margin-bottom:6px">
         <div style="display:flex;align-items:baseline;gap:8px;font-size:12px">
           <strong style="color:#3A382E">${esc(l.control_ref)}</strong>
@@ -4075,6 +4095,8 @@ function renderTemplatesBlock(block) {
                 style="font-size:9px">${esc(l.finding||'')}</span>
         </div>
         <div style="font-size:11px;color:#5C5A4F;margin-top:3px">${esc(progLine)}</div>
+        ${missingHtml}
+        ${hintHtml}
         <div style="display:flex;align-items:center;gap:8px;margin-top:6px;font-size:11px">
           <a href="${attr(primary.url)}" target="_blank" rel="noopener"
              style="background:#3A382E;color:#fff;padding:4px 10px;border-radius:3px;text-decoration:none;font-family:inherit">

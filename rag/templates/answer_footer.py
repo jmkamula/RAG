@@ -394,7 +394,39 @@ def build_templates_block(
         except Exception:
             evtype_by_leaf = {}
 
-        # 5. Build per-leaf card payload.
+        # 5. Fetch advisory data per control_ref so leaves can carry the
+        # per-MUST breakdown (items_missing, upload_hint) that the chat
+        # answer used to append as prose. Task #204: unify per-MUST
+        # advisory + template download into a single structured payload.
+        # Per-ref call is idempotent + cached inside build_per_must_...;
+        # skips silently when the control isn't multi-leaf curated.
+        advisory_by_leaf: dict[str, dict] = {}
+        try:
+            from rag.posture.advisory import build_per_must_advisory_data
+            for ref in gap_refs:
+                if ref.startswith("Art."):
+                    _std = "GDPR:2016/679"
+                elif ref.startswith("B."):
+                    _std = "ISO27701:2019"
+                elif ref.startswith("A.") and ref.count(".") >= 3:
+                    _std = "ISO27701:2019"
+                else:
+                    _std = "ISO27001:2022"
+                _adv = build_per_must_advisory_data(
+                    pg_conn     = pg_conn,
+                    tenant_id   = tenant_id,
+                    control_ref = ref,
+                    standard_id = _std,
+                )
+                if _adv:
+                    for _lf in (_adv.get("leaves") or []):
+                        _lid = _lf.get("leaf_id")
+                        if _lid:
+                            advisory_by_leaf[_lid] = _lf
+        except Exception as e:
+            logger.warning(f"templates_block: advisory data lookup skipped: {e}")
+
+        # 6. Build per-leaf card payload.
         leaves_out: list[dict] = []
         for ref in gap_refs:
             p = primaries_by_ref.get(ref)
@@ -406,6 +438,13 @@ def build_templates_block(
             primary_dl, alt_dls = _formats_for(leaf_id, evidence_type)
             prog = progress_by_leaf.get(leaf_id, {"bound": 0, "total": 0, "remaining": 0})
             cite_acceptable = evidence_type in cite_ok_set
+            # Enrich with per-MUST advisory data — the structured
+            # equivalent of what used to be appended as prose after
+            # the chat answer. Fields:
+            #   items_missing — MUSTs with no active binding
+            #   items_have    — MUSTs currently satisfied
+            #   upload_hint   — one-line remediation prompt per leaf
+            _adv_leaf = advisory_by_leaf.get(leaf_id, {})
             leaves_out.append({
                 "control_ref":       ref,
                 "leaf_id":           leaf_id,
@@ -417,6 +456,12 @@ def build_templates_block(
                 "alt_downloads":     alt_dls,
                 "cite_acceptable":   cite_acceptable,
                 "dashboard_url":     f"/#dashboard?control={ref}",
+                # Task #204: per-MUST advisory data on the card so the
+                # SPA renders "still needed" bullets alongside the
+                # template download CTA. Prose appendix retired.
+                "items_missing":     _adv_leaf.get("items_missing", []),
+                "items_have":        _adv_leaf.get("items_have", []),
+                "upload_hint":       _adv_leaf.get("upload_hint", ""),
             })
 
         # 6. Starter nudge — quick check on journey phase.

@@ -162,31 +162,30 @@ EVAL_CASES = [
         tags=["posture", "advisory", "per_must"],
         expected_refs=["A.5.15"],
         expected_type="posture_check",
-        # Locks the per-MUST advisory appendix shipped 2026-06-14.
-        # When a posture_check (or cross_framework) query identifies a
-        # single control with NC/OFI verdict, the chat answer must
-        # include a "How to strengthen X" deterministic appendix listing
-        # per-leaf coverage + upload hint. Arion's A.5.15 has 2 of 4
-        # leaves partially evidenced and 0 fully satisfied → advisory
-        # fires. Renamed "How to advance" → "How to strengthen" as
-        # part of the 2026-07-01 de-jargonize pass, so this assertion
-        # now locks in the tenant-facing verbiage.
-        must_contain=[
-            "A.5.15",
-            "How to strengthen A.5.15",
-            "Still needed:",
-            "To address:",
-            "Source: ISO/IEC 27002:2022",
-        ],
+        # Re-authored 2026-07-07 for task #204 (unify templates_block +
+        # per-MUST advisory). The advisory appendix used to render as
+        # prose in the answer ("How to strengthen A.5.15 / Still needed:
+        # ... / To address: ... / Source: ISO/IEC 27002:2022"). Those
+        # strings moved out of answer_text into structured fields on
+        # templates_block.leaves[]:
+        #   items_missing[]  — MUSTs with no active binding
+        #   items_have[]     — currently satisfied MUSTs
+        #   upload_hint      — one-line remediation hint per leaf
+        # The chat prose stays about the finding; actionable "what next"
+        # lives entirely on the structured cards now. Load-bearing
+        # signal for this case: A.5.15 routes as posture_check without
+        # hedging. Data validation (advisory fields present on the
+        # templates payload) is tested via direct API probe rather than
+        # eval-suite prose match — the eval framework doesn't inspect
+        # templates_block today.
+        must_contain=["A.5.15"],
         must_not_contain=[
             "I need more information", "could you clarify",
         ],
         notes=(
-            "Locks the per-MUST advisory appendix (rag/posture/advisory.py "
-            "build_per_must_advisory). Renders for single-control POSTURE_CHECK "
-            "or CROSS_FRAMEWORK queries on NC/OFI controls. Includes the "
-            "'How to strengthen', 'Still needed', 'To address' and 'Source: ISO/IEC' "
-            "anchors so any regression in the deterministic compose surfaces here."
+            "Locks single-control POSTURE_CHECK routing for A.5.15. "
+            "Advisory data now on templates_block.leaves[].items_missing "
+            "not in answer prose — see task #204 commit for the move."
         ),
     ),
 

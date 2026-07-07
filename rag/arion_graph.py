@@ -1759,51 +1759,14 @@ def build_answer_envelope(
     if state:
         result.update(state)
 
-    # Per-MUST advisory appendix decision — evaluated before we
-    # freeze answer_text so we can append the advisory text.
-    # Prefer intent.cited_refs over the passed cited_refs (LLM
-    # expansion via xfw bridges brings sibling refs; classifier's
-    # intent has the USER's original single ref).
-    if attach_advisory:
-        _advisory_ref = None
-        _intent_refs = list(getattr(intent, "cited_refs", []) or []) if intent else []
-        _candidate_refs = _intent_refs or list(cited_refs or [])
-        if len(_candidate_refs) == 1 and question_type in ("posture_check", "cross_framework"):
-            _advisory_ref = _candidate_refs[0]
-        if _advisory_ref and tenant is not None:
-            _tid = str(getattr(tenant, "tenant_id", "") or "")
-            if _tid:
-                try:
-                    from rag.posture.advisory import build_per_must_advisory
-                    from rag.posture_loader import build_pg_conn
-                    if _advisory_ref.startswith("Art."):
-                        _std = "GDPR:2016/679"
-                    elif _advisory_ref.startswith("B."):
-                        _std = "ISO27701:2019"
-                    elif _advisory_ref.startswith("A.") and _advisory_ref.count(".") >= 3:
-                        _std = "ISO27701:2019"
-                    else:
-                        _std = "ISO27001:2022"
-                    _pg = build_pg_conn()
-                    try:
-                        _appendix = build_per_must_advisory(
-                            pg_conn      = _pg,
-                            tenant_id    = _tid,
-                            control_ref  = _advisory_ref,
-                            standard_id  = _std,
-                        )
-                        if _appendix:
-                            answer_text = (answer_text or "") + _appendix
-                    finally:
-                        try:
-                            _pg.close()
-                        except Exception:
-                            pass
-                except Exception as _e:
-                    _elog.warning(
-                        "envelope: per-MUST advisory skipped for %s: %s",
-                        _advisory_ref, _e,
-                    )
+    # Task #204: Per-MUST advisory appendix RETIRED as prose. The
+    # advisory data now flows through templates_block.leaves[].items_missing
+    # + upload_hint (see rag/templates/answer_footer.py enrichment loop).
+    # `attach_advisory` kept as a parameter for backward compat + so the
+    # SPA can suppress the enrichment if needed — but doesn't append text
+    # to answer_text any more. The chat prose stays about the finding;
+    # actionable "what next" lives entirely on the structured cards.
+    _ = attach_advisory   # noqa: F841 — signature preserved
 
     # Freeze core fields.
     result["answer_text"]   = answer_text or ""
