@@ -1878,15 +1878,19 @@ def make_retrieve_node(
         # specific doc/control is the honest response.
         if (_is_deictic_only_query(state["query"])
                 and not state.get("last_entity")):
-            return {
-                **state,
-                "answer_text":   _DEICTIC_CLARIFY_RESPONSE,
-                "answer":        _DEICTIC_CLARIFY_RESPONSE,
-                "cited_refs":    [],
-                "question_type": "unknown",
-                "confidence":    1.0,
-                "answer_source": "deictic_clarify",
-            }
+            # Wave 2 migration (task #203). No cited_refs so templates/
+            # advisory auto-attach skips anyway; being explicit here for
+            # clarity — a clarification response shouldn't try to sell
+            # template downloads.
+            return build_answer_envelope(
+                state            = state,
+                answer_text      = _DEICTIC_CLARIFY_RESPONSE,
+                cited_refs       = [],
+                answer_source    = "deictic_clarify",
+                question_type    = "unknown",
+                attach_templates = False,
+                attach_advisory  = False,
+            )
 
         qtype_map = {
             "gap_analysis":       QuestionType.GAP_ANALYSIS,
@@ -1968,17 +1972,21 @@ def make_retrieve_node(
                 finally:
                     _pg_conn.close()
                 _ack_answer = render_acknowledge_answer(_ack_result, _ack_intent)
-                return {
-                    **state,
-                    "answer_text":   _ack_answer,
-                    "answer":        _ack_answer,
-                    "cited_refs":    [_ack_intent.control_ref],
-                    "intent_type":   "posture_check",
-                    "question_type": "posture_check",
-                    "confidence":    1.0,
-                    "answer_source": "postgres",
-                    "last_entity":   _control_entity(_ack_intent.control_ref),
-                }
+                # Wave 2 migration. Acknowledge-gap is a conversational
+                # confirmation ("noted; the A.5.15 review-record gap is
+                # acknowledged"). Skip templates_block + advisory
+                # appendix — the tenant just told us the gap is OK; no
+                # need to immediately push them a template.
+                return build_answer_envelope(
+                    state            = state,
+                    answer_text      = _ack_answer,
+                    cited_refs       = [_ack_intent.control_ref],
+                    answer_source    = "postgres",
+                    question_type    = "posture_check",
+                    last_entity      = _control_entity(_ack_intent.control_ref),
+                    attach_templates = False,
+                    attach_advisory  = False,
+                )
         except Exception as _ack_exc:
             (get_logger() or _NullLogger()).warning("acknowledge short-circuit failed: %s", _ack_exc)
             # Fall through to normal pipeline.
@@ -2033,17 +2041,18 @@ def make_retrieve_node(
                     _s1_result, _s1_intent, listing=_s1_listing,
                 )
                 _refs = [_s1_intent.control_ref] if _s1_intent.control_ref else []
-                return {
-                    **state,
-                    "answer_text":   _s1_answer,
-                    "answer":        _s1_answer,
-                    "cited_refs":    _refs,
-                    "intent_type":   "posture_check",
-                    "question_type": "posture_check",
-                    "confidence":    1.0,
-                    "answer_source": "postgres",
-                    "last_entity":   _control_entity(_s1_intent.control_ref) if _s1_intent.control_ref else {},
-                }
+                # Wave 2 migration. Stage-1 approval is a HITL flow, not
+                # a "what next" surface — skip templates/advisory.
+                return build_answer_envelope(
+                    state            = state,
+                    answer_text      = _s1_answer,
+                    cited_refs       = _refs,
+                    answer_source    = "postgres",
+                    question_type    = "posture_check",
+                    last_entity      = _control_entity(_s1_intent.control_ref) if _s1_intent.control_ref else {},
+                    attach_templates = False,
+                    attach_advisory  = False,
+                )
         except Exception as _s1_exc:
             (get_logger() or _NullLogger()).warning("stage1 review short-circuit failed: %s", _s1_exc)
             # Fall through to normal pipeline.
@@ -2100,17 +2109,18 @@ def make_retrieve_node(
                     listing=_s2_listing, proposal=_s2_proposal,
                 )
                 _refs = [_s2_intent.control_ref] if _s2_intent.control_ref else []
-                return {
-                    **state,
-                    "answer_text":   _s2_answer,
-                    "answer":        _s2_answer,
-                    "cited_refs":    _refs,
-                    "intent_type":   "posture_check",
-                    "question_type": "posture_check",
-                    "confidence":    1.0,
-                    "answer_source": "postgres",
-                    "last_entity":   _control_entity(_s2_intent.control_ref) if _s2_intent.control_ref else {},
-                }
+                # Wave 2 migration. Stage-2 engine approval flow — same
+                # rationale as Stage-1: HITL surface, skip templates/advisory.
+                return build_answer_envelope(
+                    state            = state,
+                    answer_text      = _s2_answer,
+                    cited_refs       = _refs,
+                    answer_source    = "postgres",
+                    question_type    = "posture_check",
+                    last_entity      = _control_entity(_s2_intent.control_ref) if _s2_intent.control_ref else {},
+                    attach_templates = False,
+                    attach_advisory  = False,
+                )
         except Exception as _s2_exc:
             (get_logger() or _NullLogger()).warning("stage2 approval short-circuit failed: %s", _s2_exc)
             # Fall through to normal pipeline.
@@ -2125,15 +2135,17 @@ def make_retrieve_node(
                 deterministic_answer = na_answer,
                 llm                  = llm,
             )
-            return {
-                **state,
-                "answer_text":   composed,
-                "answer":        composed,
-                "cited_refs":    [],
-                "question_type": "gap_analysis",
-                "confidence":    1.0,
-                "answer_source": "postgres+llm",
-            }
+            # Wave 2 migration. Scope N/A response ("this doesn't apply
+            # to us") — no cited_refs, no templates surface makes sense.
+            return build_answer_envelope(
+                state            = state,
+                answer_text      = composed,
+                cited_refs       = [],
+                answer_source    = "postgres+llm",
+                question_type    = "gap_analysis",
+                attach_templates = False,
+                attach_advisory  = False,
+            )
 
         # ── Postgres short-circuit for posture timeline queries ────────────
         # "How did A.5.18 evolve?" / "show me the timeline for Art.32".
@@ -2144,22 +2156,26 @@ def make_retrieve_node(
         # "no data" dead-end.
         # ── S3l: cascade chat short-circuits ──────────────────────────────
         _tid = str(getattr(tenant, "tenant_id", "") or "")
+        # Wave 2 migration. Cascade + timeline short-circuits report on
+        # in-progress workflows (follow-ups, suppressions, implications,
+        # posture history) — templates_block would misfire here as a
+        # push-a-download surface where the tenant is asking about
+        # process state. Skip templates/advisory on all three.
         if _is_cascade_followups_query(state["query"]):
             _fu_ans = _answer_cascade_followups(state["query"], _tid)
             if _fu_ans:
                 composed = polish_short_circuit_answer(
                     query=state["query"], deterministic_answer=_fu_ans, llm=llm,
                 )
-                return {
-                    **state,
-                    "answer_text":   composed,
-                    "answer":        composed,
-                    "cited_refs":    [],
-                    "intent_type":   "posture_check",
-                    "question_type": "posture_check",
-                    "confidence":    1.0,
-                    "answer_source": "postgres+llm",
-                }
+                return build_answer_envelope(
+                    state            = state,
+                    answer_text      = composed,
+                    cited_refs       = [],
+                    answer_source    = "postgres+llm",
+                    question_type    = "posture_check",
+                    attach_templates = False,
+                    attach_advisory  = False,
+                )
 
         if _is_cascade_suppressions_query(state["query"]):
             _sp_ans = _answer_cascade_suppressions(state["query"], _tid)
@@ -2167,16 +2183,15 @@ def make_retrieve_node(
                 composed = polish_short_circuit_answer(
                     query=state["query"], deterministic_answer=_sp_ans, llm=llm,
                 )
-                return {
-                    **state,
-                    "answer_text":   composed,
-                    "answer":        composed,
-                    "cited_refs":    [],
-                    "intent_type":   "posture_check",
-                    "question_type": "posture_check",
-                    "confidence":    1.0,
-                    "answer_source": "postgres+llm",
-                }
+                return build_answer_envelope(
+                    state            = state,
+                    answer_text      = composed,
+                    cited_refs       = [],
+                    answer_source    = "postgres+llm",
+                    question_type    = "posture_check",
+                    attach_templates = False,
+                    attach_advisory  = False,
+                )
 
         if _is_cascade_impl_query(state["query"]):
             _ci_ref = _extract_cascade_ref(state["query"], state.get("focus_refs", []))
@@ -2185,17 +2200,16 @@ def make_retrieve_node(
                 composed = polish_short_circuit_answer(
                     query=state["query"], deterministic_answer=_ci_ans, llm=llm,
                 )
-                return {
-                    **state,
-                    "answer_text":   composed,
-                    "answer":        composed,
-                    "cited_refs":    [_ci_ref] if _ci_ref else [],
-                    "intent_type":   "posture_check",
-                    "question_type": "posture_check",
-                    "confidence":    1.0,
-                    "answer_source": "postgres+llm",
-                    "last_entity":   _control_entity(_ci_ref) if _ci_ref else None,
-                }
+                return build_answer_envelope(
+                    state            = state,
+                    answer_text      = composed,
+                    cited_refs       = [_ci_ref] if _ci_ref else [],
+                    answer_source    = "postgres+llm",
+                    question_type    = "posture_check",
+                    last_entity      = _control_entity(_ci_ref) if _ci_ref else None,
+                    attach_templates = False,
+                    attach_advisory  = False,
+                )
 
         if _is_timeline_query(state["query"]):
             _ref = _extract_timeline_ref(state["query"], state.get("focus_refs", []))
@@ -2211,22 +2225,18 @@ def make_retrieve_node(
                         deterministic_answer = _tl_answer,
                         llm                  = llm,
                     )
-                    return {
-                        **state,
-                        "answer_text":   composed,
-                        "answer":        composed,
-                        "cited_refs":    [_ref],
-                        # intent_type is what downstream consumers (including
-                        # eval_suite) read; question_type is for legacy paths
-                        # and the chat sync handler. Set both so the timeline
-                        # short-circuit shows up as posture_check end-to-end
-                        # even when classify falls back to 'unknown'.
-                        "intent_type":   "posture_check",
-                        "question_type": "posture_check",
-                        "confidence":    1.0,
-                        "answer_source": "postgres+llm",
-                        "last_entity":   _control_entity(_ref),
-                    }
+                    # Timeline query is a history report ("show me how
+                    # A.5.18 evolved"). Skip templates/advisory.
+                    return build_answer_envelope(
+                        state            = state,
+                        answer_text      = composed,
+                        cited_refs       = [_ref],
+                        answer_source    = "postgres+llm",
+                        question_type    = "posture_check",
+                        last_entity      = _control_entity(_ref),
+                        attach_templates = False,
+                        attach_advisory  = False,
+                    )
 
         # ── Postgres short-circuit for upload status questions ─────────────
         # Runs BEFORE the resolver: the resolver's DOCUMENT_STATUS handler
@@ -2255,16 +2265,19 @@ def make_retrieve_node(
                 # have the LLM access to prior-turn context.
                 # See [[conversational-context-routing-followup]].
                 last_entity = _resolve_upload_entity(state["query"], _uploaded, _alerts)
-                return {
-                    **state,
-                    "answer_text":   composed,
-                    "answer":        composed,
-                    "cited_refs":    [],
-                    "question_type": "document_inventory",
-                    "confidence":    1.0,
-                    "answer_source": "postgres+llm",
-                    "last_entity":   last_entity,
-                }
+                # Wave 2 migration. Upload inventory question — answers
+                # "do we have doc X?"; no cited_refs so templates auto-
+                # skip anyway. Being explicit for clarity.
+                return build_answer_envelope(
+                    state            = state,
+                    answer_text      = composed,
+                    cited_refs       = [],
+                    answer_source    = "postgres+llm",
+                    question_type    = "document_inventory",
+                    last_entity      = last_entity,
+                    attach_templates = False,
+                    attach_advisory  = False,
+                )
 
         # ── Resolver: dispatch to per-taxonomy data sources ──────────────
         # Replaces ~190 lines of inline retrieval assembly.
@@ -2301,15 +2314,19 @@ def make_retrieve_node(
                 deterministic_answer = _resolved.short_circuit_answer,
                 llm                  = llm,
             )
-            return {
-                **state,
-                "answer_text":   composed,
-                "answer":        composed,
-                "cited_refs":    [],
-                "question_type": state["intent_type"],
-                "confidence":    1.0,
-                "answer_source": "postgres+llm",
-            }
+            # Wave 2 migration. Resolver short-circuit — sets cited_refs=[]
+            # by convention (the SC has already composed its own citations
+            # into the answer text). No templates surface makes sense
+            # without cited_refs to route.
+            return build_answer_envelope(
+                state            = state,
+                answer_text      = composed,
+                cited_refs       = [],
+                answer_source    = "postgres+llm",
+                question_type    = state["intent_type"],
+                attach_templates = False,
+                attach_advisory  = False,
+            )
 
         # Store resolver trace in state for ANALYTICS display
         # (before we check for short-circuit so it's always available)
