@@ -2210,6 +2210,25 @@ def make_retrieve_node(
                     for n in all_nodes
                     if (posture or {}).get(n.node_id, {}).get("finding")
                 }
+                # Attach templates_block for the enumeration path too —
+                # tenant asking "what is our XXX compliance status?"
+                # gets the per-leaf template cards for their NC/OFI
+                # controls, same UX as single-control POSTURE_CHECK.
+                # Previously omitted; identified 2026-07-07 during a
+                # UI review — the deterministic short-circuit here was
+                # bypassing the templates_block hookup at line 2264.
+                _tb = None
+                try:
+                    from rag.templates.answer_footer import build_templates_block
+                    _tid = str(getattr(tenant, "tenant_id", "") or state.get("tenant_id", "") or "")
+                    _tb = build_templates_block(
+                        cited_refs    = _det_refs,
+                        question_type = "posture_check",
+                        tenant_id     = _tid,
+                        db_url        = os.getenv("DATABASE_URL"),
+                    )
+                except Exception as e:
+                    logger.warning(f"templates_block skipped (enumeration): {type(e).__name__}: {e}")
                 return {
                     "answer_text":      _det_text,
                     "verified":         True,
@@ -2220,6 +2239,8 @@ def make_retrieve_node(
                     "neo4j_ms":         neo4j_ms,
                     "resolver_trace":   _trace,
                     "answer_source":    "posture_enumeration_deterministic",
+                    "question_type":    intent.question_type.value,
+                    "templates_block":  _tb,
                 }
 
         result = llm.rank_and_answer(

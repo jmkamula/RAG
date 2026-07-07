@@ -60,6 +60,40 @@ The case still proves the short-circuit fires + names real titles
 + truncates correctly. It doesn't pin which doc happens to be in
 view.
 
+## Pattern 3 — LLM prose phrase drift
+
+**Symptom:** `must_contain=["NC"]` for gap-analysis queries silently
+decays when the tenant state shifts (mass-approval, sweep, upload
+surge). The LLM's answer prose becomes more verbose or uses "non-
+conformity" spelled out instead of the abbrev; literal string
+`"NC"` may not appear even though the answer is correct.
+
+**Concrete:** 2026-07-06 queue-cleanup arc moved 36 controls to NC
+in a batch approve. Cases #2 / #4 / #9 / #28 all had
+`must_contain=["NC"]`. Post-batch, the answers now describe 207
+NCs — enough that the LLM sometimes phrases prose differently on
+the top-N summary. 4 cases dropped from PASS → FAIL for prose-
+variance reasons that had nothing to do with correctness.
+
+**Fix:** don't literal-string-check LLM prose that varies. The
+`min_findings` counter already uses a **flexible regex**
+`r'\bNC\b|non.?conformit'` that catches BOTH "NC" and
+"non-conformity" variants. Rely on:
+  - `expected_type=gap_analysis` (routing must succeed)
+  - `must_not_contain=["I need more information", "could you clarify"]`
+    (hedging guard)
+  - `min_findings=2` (regex-flexible count check)
+  - Drop `must_contain=["NC"]` entirely
+
+The load-bearing signal is that the query routes to gap analysis
+with ≥2 findings and doesn't hedge. Literal phrase matching on
+LLM prose is fragile.
+
+Same fix for `expected_refs` on LLM-stochastic cases (#16, #21):
+drop the ref lock, keep the query-type routing check + prose
+keyword. Ref surfacing is prose-order-dependent and stochastic —
+locking specific refs turns a working case into a flip-flopper.
+
 ## When specific locks ARE safe
 
 Cases on **static infrastructure** (not tenant state):
