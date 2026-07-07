@@ -961,11 +961,12 @@ function renderGetStarted(d) {
           </div>
           <div style="font-size:10px;color:#9C9A8E;margin-top:2px">${esc(progLine)}</div>
         </div>
-        <a href="${attr(primary.url)}" target="_blank" rel="noopener"
-           style="font-size:11px;padding:4px 10px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:3px;text-decoration:none">
+        <button type="button"
+                onclick="downloadTemplateForLeaf('${attr(a.leaf_id)}','${attr(primary.format)}')"
+                style="font-size:11px;padding:4px 10px;background:#fff;color:#3A382E;border:1px solid #C8C5B8;border-radius:3px;font-family:inherit;cursor:pointer">
            <i class="ti ti-${a.is_tabular?'table':'file-text'}"></i> ${esc(primary.label)}
-        </a>
-        ${alt ? `<a href="${attr(alt.url)}" target="_blank" rel="noopener" style="font-size:10px;color:#5C5A4F;text-decoration:none">.md</a>` : ''}
+        </button>
+        ${alt ? `<a href="#" onclick="event.preventDefault();downloadTemplateForLeaf('${attr(a.leaf_id)}','${attr(alt.format)}')" style="font-size:10px;color:#5C5A4F;text-decoration:none">.md</a>` : ''}
         <a href="/#dashboard?control=${attr(a.control_ref)}" title="See in dashboard" style="color:#534AB7;text-decoration:none;font-size:11px">→</a>
       </div>`;
     }
@@ -4098,10 +4099,11 @@ function renderTemplatesBlock(block) {
         ${missingHtml}
         ${hintHtml}
         <div style="display:flex;align-items:center;gap:8px;margin-top:6px;font-size:11px">
-          <a href="${attr(primary.url)}" target="_blank" rel="noopener"
-             style="background:#3A382E;color:#fff;padding:4px 10px;border-radius:3px;text-decoration:none;font-family:inherit">
+          <button type="button"
+                  onclick="downloadTemplateForLeaf('${attr(l.leaf_id)}','${attr(primary.format)}')"
+                  style="background:#3A382E;color:#fff;padding:4px 10px;border:0;border-radius:3px;font-family:inherit;font-size:11px;cursor:pointer">
             <i class="ti ti-download"></i> ${esc(primary.label)}
-          </a>
+          </button>
           <a href="${attr(dashboard)}" style="color:#534AB7;text-decoration:none">See in dashboard →</a>
           ${citeLine}
         </div>
