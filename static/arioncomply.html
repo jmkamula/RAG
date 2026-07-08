@@ -4758,7 +4758,7 @@ function showEngineReport(resp) {
       ? `<span style="background:#1D9E75;color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;margin-left:6px">${esc(c.prior_finding || '?')} → ${esc(c.finding || '?')}</span>`
       : `<span style="background:#EEECE2;color:#5C5A4F;padding:2px 8px;border-radius:10px;font-size:10px;margin-left:6px">${esc(c.finding || '?')} (unchanged)</span>`;
 
-    const progress = `${er.leaves_fully_satisfied}/${er.leaves_total} leaves fully satisfied`;
+    const progress = `${er.leaves_fully_satisfied} of ${er.leaves_total} areas fully covered`;
 
     const actions = (er.next_actions || []).map(h =>
       `<li style="margin-bottom:6px;padding-left:4px;color:#3A382E;font-size:12px;line-height:1.5">${esc(h)}</li>`

@@ -713,6 +713,45 @@ def _recompute_posture_for_control(
 _DF_TO_ENGINE_SATISFIED = {"present"}   # 'partial' does not count
 _MAX_NEXT_ACTIONS_PER_CTRL = 3
 
+# MUST-slug prefix expansions used when building tenant-facing hints.
+# Curated MUST ids use short prefixes (proc_, reg_, rev_, ropa_, scope_,
+# item_) followed by the topic slug. The raw slug reads as engine debug
+# form ("proc maintainer"); tenant should see natural language
+# ("procedure maintainer" / "register field" / etc.).
+_MUST_PREFIX_LABELS = {
+    "proc":  "procedure",
+    "reg":   "register",
+    "rev":   "review",
+    "ropa":  "RoPA",
+    "scope": "scope",
+    "item":  "item",
+    "pia":   "PIA",
+    "dpia":  "DPIA",
+    "bia":   "BIA",
+    "bcp":   "BCP",
+    "sla":   "SLA",
+    "kpi":   "KPI",
+    "raci":  "RACI",
+    "pii":   "PII",
+    "cia":   "CIA",
+}
+
+
+def _pretty_must_slug(must_id: str) -> str:
+    """Convert a MUST id (item:A.5.9:proc_maintainer) to tenant-facing
+    prose ("procedure maintainer"). Expands the leading short prefix
+    (proc/reg/rev/etc.) via _MUST_PREFIX_LABELS before underscore-to-
+    space substitution, so tenants don't see engine debug slugs.
+    """
+    if not must_id:
+        return ""
+    tail = must_id.split(":")[-1]
+    if "_" in tail:
+        prefix, _, rest = tail.partition("_")
+        if prefix in _MUST_PREFIX_LABELS:
+            return f"{_MUST_PREFIX_LABELS[prefix]} {rest.replace('_', ' ')}"
+    return tail.replace("_", " ")
+
 
 def _build_engine_report_for_control(
     pg_conn, tenant_id: str, control_ref: str, standard_id: str,
@@ -824,28 +863,28 @@ def _build_engine_report_for_control(
 
             if n_present == 0 and n_partial == 0:
                 hint = (
-                    f"Upload evidence for '{title}' — this leaf has no "
-                    f"bound evidence yet ({n_total} MUSTs needed)."
+                    f"Upload evidence for '{title}' — this area has no "
+                    f"bound evidence yet ({n_total} requirements needed)."
                 )
             elif gap == 1 and lf["musts_missing"]:
-                # One MUST away from full satisfaction
-                missing_slug = lf["musts_missing"][0].split(":")[-1].replace("_", " ")
+                # One requirement away from full coverage
+                missing_label = _pretty_must_slug(lf["musts_missing"][0])
                 hint = (
-                    f"Complete '{missing_slug}' on '{title}' to fully "
-                    f"satisfy this leaf ({n_present}/{n_total} MUSTs bound)."
+                    f"Complete '{missing_label}' on '{title}' to fully "
+                    f"cover this area ({n_present}/{n_total} requirements met)."
                 )
             elif n_partial > 0:
-                partial_slug = lf["musts_incomplete"][0].split(":")[-1].replace("_", " ")
+                partial_label = _pretty_must_slug(lf["musts_incomplete"][0])
                 hint = (
-                    f"Firm up '{partial_slug}' on '{title}' — currently "
-                    f"partial ({n_present} full + {n_partial} partial of "
-                    f"{n_total} MUSTs)."
+                    f"Firm up '{partial_label}' on '{title}' — currently "
+                    f"partial ({n_present} complete + {n_partial} partial of "
+                    f"{n_total} requirements)."
                 )
             else:
                 hint = (
-                    f"'{title}' at {n_present}/{n_total} MUSTs. "
+                    f"'{title}' at {n_present}/{n_total} requirements met. "
                     f"Add evidence for: "
-                    f"{', '.join(m.split(':')[-1].replace('_', ' ') for m in lf['musts_missing'][:3])}"
+                    f"{', '.join(_pretty_must_slug(m) for m in lf['musts_missing'][:3])}"
                     + ("…" if len(lf['musts_missing']) > 3 else "")
                     + "."
                 )
