@@ -2631,6 +2631,72 @@ def _find_keyword_set_position(body: str, kw_set: list[str]) -> Optional[int]:
     return min(positions)
 
 
+_HEADER_BLOCK_KEYS = (
+    "owner", "version", "effective date", "approved by",
+    "approved on", "reviewed by", "reviewed on",
+    "next review", "last review", "last reviewed",
+    "classification", "document id", "doc id",
+    "author", "date", "date issued", "issue date",
+    "supersedes", "replaces", "revision",
+    "prepared by", "prepared on", "issued by",
+    "status", "category",
+)
+
+
+def _find_header_block_end(body: str) -> int:
+    """Return char offset where the doc-header metadata block ends.
+
+    Header block = contiguous "Key: value" style lines at the start of
+    the doc (title line + Owner: X + Version: Y + ... + Classification: Z),
+    ending just before the first substantive paragraph or heading. Every
+    policy doc has one; single-word MUST fingerprints (`owner`,
+    `reviewer`, `version`) would otherwise false-positive against this
+    block and trigger auto-approved fingerprint_match findings on the
+    wrong leaves (surfaced 2026-07-08 on A.5.9:owner_per_asset and
+    A.8.10:rev_reviewer for the Technical Consulting Privacy Procedure).
+
+    Tolerates markdown/mammoth wrapping (`__Owner:__`, `**owner:**`) and
+    backslash-escaped punctuation. Case-insensitive.
+
+    Returns 0 when no header block is detected — leaves the body
+    untouched for docs without a metadata preamble.
+    """
+    if not body:
+        return 0
+    sample = body[:2000]
+    lines = sample.split("\n")
+    first_hdr = -1
+    last_hdr  = -1
+    for idx, line in enumerate(lines):
+        # Strip markdown/mammoth decoration (underscores, asterisks,
+        # backslashes) before pattern-matching. Keep letters/spaces/colons.
+        stripped = re.sub(r"[\\_*]+", "", line).strip()
+        if not stripped:
+            continue
+        m = re.match(r"^([A-Za-z][A-Za-z\s]{2,40}?)\s*:", stripped)
+        if m:
+            key = m.group(1).strip().lower()
+            if any(hk in key for hk in _HEADER_BLOCK_KEYS):
+                if first_hdr < 0:
+                    first_hdr = idx
+                last_hdr = idx
+                continue
+        # Non-header line
+        if first_hdr >= 0:
+            # We were tracking a header block; end it here.
+            break
+        # No header line seen yet — allow up to 15 lines of "title /
+        # subtitle" before giving up.
+        if idx > 15:
+            break
+    if last_hdr < 0:
+        return 0
+    offset = 0
+    for i in range(last_hdr + 1):
+        offset += len(lines[i]) + 1   # +1 for the split-consumed \n
+    return offset
+
+
 def _fingerprint_extract_matches(
     scoped_leaf_ids: list[str], doc: ParsedDocument,
 ) -> list[dict]:
@@ -2655,6 +2721,14 @@ def _fingerprint_extract_matches(
     if not body:
         return []
 
+    # Skip the doc-header metadata block when scanning — see
+    # _find_header_block_end() for the rationale. If the header ends
+    # at offset H, we match against body[H:] and add H back to each
+    # match position so quote extraction still pulls from the correct
+    # location in the original body.
+    header_end = _find_header_block_end(body)
+    scan_body  = body[header_end:] if header_end > 0 else body
+
     matches: list[dict] = []
     for leaf_id in scoped_leaf_ids:
         fps = index.get(leaf_id)
@@ -2663,7 +2737,7 @@ def _fingerprint_extract_matches(
         control_ref, standard_id = _parse_leaf_id(leaf_id)
         for fp in fps:
             for kw_set in fp.excerpt_keywords:
-                pos = _find_keyword_set_position(body, kw_set)
+                pos = _find_keyword_set_position(scan_body, kw_set)
                 if pos is not None:
                     matches.append({
                         "must_id":     fp.must_id,
@@ -2671,7 +2745,7 @@ def _fingerprint_extract_matches(
                         "control_ref": control_ref,
                         "standard_id": standard_id,
                         "matched_kw":  kw_set,
-                        "position":    pos,
+                        "position":    pos + header_end,
                     })
                     break   # first winning kw_set is enough per MUST
     return matches

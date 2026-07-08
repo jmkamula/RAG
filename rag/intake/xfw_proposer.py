@@ -451,18 +451,32 @@ def propose_for_findings(
     # Dedup within this run so duplicate source rows don't produce duplicate
     # proposals. Source-level dedup happens on (control_ref, standard_id);
     # proposal-level dedup happens on (document_id, control_ref, standard_id).
-    seen_sources:   set[tuple[str, str]] = set()
-    seen_proposals: set[tuple[str, str, str]] = set()
-
+    # When multiple findings exist for the same source control, pick the one
+    # with the LONGEST substantive excerpt. Prior behavior (take-first-in-
+    # iteration-order) let header-only fingerprint_match findings win — the
+    # doc-header block (Owner/Version/Effective Date/Classification) matches
+    # single-token MUST fingerprints like `owner`, `reviewer`, and gets
+    # auto-approved. When such a header-only finding coexisted with a
+    # substantive one (e.g. A.8.10 with both a rev_reviewer header match
+    # AND a real "Access or receive client system data..." match), the
+    # bridge ended up inheriting the header-block excerpt instead of the
+    # substantive one. Sort per-group descending on excerpt length so the
+    # richest source drives the bridge.
+    best_per_source: dict[tuple[str, str], object] = {}
     for f in findings:
         if not f.control_ref or not f.standard_id:
             continue
         src_status = (f.finding or "").lower()
         if src_status not in _SOURCE_STATUSES_TO_PROPAGATE:
             continue
-        if (f.control_ref, f.standard_id) in seen_sources:
-            continue
-        seen_sources.add((f.control_ref, f.standard_id))
+        key = (f.control_ref, f.standard_id)
+        prev = best_per_source.get(key)
+        if prev is None or len(f.evidence_text or "") > len(prev.evidence_text or ""):
+            best_per_source[key] = f
+
+    seen_proposals: set[tuple[str, str, str]] = set()
+
+    for f in best_per_source.values():
         summary.sources_walked += 1
         src_id  = _build_source_node_id(f.standard_id, f.control_ref)
         targets = _walk_bridges(driver, src_id)
