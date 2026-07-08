@@ -1778,6 +1778,30 @@ def _looks_like_questionnaire(quote: str) -> bool:
     return any(p.search(quote) for p in _QUESTIONNAIRE_PATTERNS)
 
 
+def _looks_like_metadata_block(quote: str) -> bool:
+    """True when every non-empty line in the evidence quote is a doc
+    header/footer metadata key:value line (Owner: X / Version: Y /
+    Effective Date: Z / Classification: W / Last Reviewed: ...).
+
+    Symmetric with the fingerprint-side header/footer suppression:
+    even after that fix, the LLM can still latch onto the metadata
+    block and emit it as evidence for controls like A.5.37 (Documented
+    operating procedures — the LLM sees Version + Approved by and
+    reads it as procedure metadata). These are false-positives —
+    boilerplate metadata is not evidence of implementation.
+
+    Distinct from _looks_like_questionnaire (that catches Y/N
+    checklists). Reuses _is_metadata_key_line so header/footer
+    vocabulary stays a single source of truth.
+    """
+    if not quote:
+        return False
+    lines = [l for l in quote.split("\n") if l.strip()]
+    if not lines:
+        return False
+    return all(_is_metadata_key_line(l) for l in lines)
+
+
 # TOC detection — doc-level analog of the questionnaire filter.
 # A Table-of-Contents document lists what policies an org HAS; its body
 # is dominated by lines like "2.1 Information Security Policy — Purpose:
@@ -2012,6 +2036,20 @@ def _parse_llm_response(
                 "questionnaire drop: %s — evidence quote is a "
                 "question/checklist item, not a statement of "
                 "compliance (chunk %s)",
+                ref, chunk_id,
+            )
+            continue
+        # Header/footer metadata drop — LLM latched onto the doc
+        # metadata block (Owner: X / Version: Y / etc.) as evidence.
+        # These are boilerplate, not implementation. Counted under
+        # dropped_questionnaire to reuse the existing telemetry
+        # bucket (no schema change needed for a rare false-positive).
+        if _looks_like_metadata_block(evidence):
+            dropped_questionnaire += 1
+            logger.info(
+                "metadata-block drop: %s — evidence quote is doc "
+                "header/footer metadata, not substantive text "
+                "(chunk %s)",
                 ref, chunk_id,
             )
             continue
@@ -2643,6 +2681,25 @@ _HEADER_BLOCK_KEYS = (
 )
 
 
+_HEADER_KEY_RE = re.compile(r"^([A-Za-z][A-Za-z\s]{2,40}?)\s*:")
+
+
+def _is_metadata_key_line(line: str) -> bool:
+    """True when `line` is a "Key: value" style metadata line where the
+    Key matches one of _HEADER_BLOCK_KEYS. Tolerates markdown/mammoth
+    decoration (underscores, asterisks, backslashes) and is case-
+    insensitive on the key text.
+    """
+    stripped = re.sub(r"[\\_*]+", "", line).strip()
+    if not stripped:
+        return False
+    m = _HEADER_KEY_RE.match(stripped)
+    if not m:
+        return False
+    key = m.group(1).strip().lower()
+    return any(hk in key for hk in _HEADER_BLOCK_KEYS)
+
+
 def _find_header_block_end(body: str) -> int:
     """Return char offset where the doc-header metadata block ends.
 
@@ -2668,19 +2725,13 @@ def _find_header_block_end(body: str) -> int:
     first_hdr = -1
     last_hdr  = -1
     for idx, line in enumerate(lines):
-        # Strip markdown/mammoth decoration (underscores, asterisks,
-        # backslashes) before pattern-matching. Keep letters/spaces/colons.
-        stripped = re.sub(r"[\\_*]+", "", line).strip()
-        if not stripped:
+        if not line.strip():
             continue
-        m = re.match(r"^([A-Za-z][A-Za-z\s]{2,40}?)\s*:", stripped)
-        if m:
-            key = m.group(1).strip().lower()
-            if any(hk in key for hk in _HEADER_BLOCK_KEYS):
-                if first_hdr < 0:
-                    first_hdr = idx
-                last_hdr = idx
-                continue
+        if _is_metadata_key_line(line):
+            if first_hdr < 0:
+                first_hdr = idx
+            last_hdr = idx
+            continue
         # Non-header line
         if first_hdr >= 0:
             # We were tracking a header block; end it here.
@@ -2694,6 +2745,45 @@ def _find_header_block_end(body: str) -> int:
     offset = 0
     for i in range(last_hdr + 1):
         offset += len(lines[i]) + 1   # +1 for the split-consumed \n
+    return offset
+
+
+def _find_footer_block_start(body: str) -> int:
+    """Return char offset where the doc-footer metadata block starts,
+    or len(body) if no footer block detected.
+
+    Footer block = trailing contiguous "Key: value" metadata lines at
+    the END of the doc (Last Reviewed / Next Review Date / Approved by
+    signoff / Version footer / etc.). Same false-positive class as the
+    header block — A.6.6:last_reviewed still matched on a doc footer
+    even after the header suppression shipped. Symmetric fix: scan
+    backwards from the end.
+
+    Scans only the last 2000 chars. If no trailing metadata line found
+    in that window, returns len(body) (nothing suppressed).
+    """
+    if not body:
+        return 0
+    n            = len(body)
+    sample_start = max(0, n - 2000)
+    sample       = body[sample_start:]
+    lines        = sample.split("\n")
+    first_footer = -1
+    for idx in range(len(lines) - 1, -1, -1):
+        line = lines[idx]
+        if not line.strip():
+            continue
+        if _is_metadata_key_line(line):
+            first_footer = idx
+            continue
+        # Non-metadata line — the footer block ends (walking backwards
+        # means this is the "top" of the footer).
+        break
+    if first_footer < 0:
+        return n
+    offset = sample_start
+    for i in range(first_footer):
+        offset += len(lines[i]) + 1
     return offset
 
 
@@ -2721,13 +2811,15 @@ def _fingerprint_extract_matches(
     if not body:
         return []
 
-    # Skip the doc-header metadata block when scanning — see
-    # _find_header_block_end() for the rationale. If the header ends
-    # at offset H, we match against body[H:] and add H back to each
-    # match position so quote extraction still pulls from the correct
-    # location in the original body.
-    header_end = _find_header_block_end(body)
-    scan_body  = body[header_end:] if header_end > 0 else body
+    # Skip the doc-header and doc-footer metadata blocks when scanning —
+    # see _find_header_block_end() / _find_footer_block_start() for the
+    # rationale. If the header ends at offset H and the footer starts at
+    # F, we match against body[H:F] and add H back to each match position
+    # so quote extraction still pulls from the correct location in the
+    # original body.
+    header_end   = _find_header_block_end(body)
+    footer_start = _find_footer_block_start(body)
+    scan_body    = body[header_end:footer_start] if footer_start > header_end else body[header_end:]
 
     matches: list[dict] = []
     for leaf_id in scoped_leaf_ids:
