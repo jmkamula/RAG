@@ -159,6 +159,41 @@ def extract(
         logger.warning(f"No controls scoped for {doc.original_name} — using all controls")
         scoped = controls[:MAX_CONTROLS_PER_CALL]
 
+    # Union explicit_refs — when the doc self-cites its own control refs
+    # (e.g. a 27701 procedure that names A.7.4.1 in its Purpose section),
+    # promote those to the candidate set even if the fingerprint-based
+    # scoping missed them. Fingerprint scoping keys off filename tokens,
+    # which drift from the vocabulary of the standard the doc cites;
+    # explicit self-citation is the tenant author's unambiguous intent
+    # and should always be honored. Only unions refs whose parent
+    # control exists in the curated set (`controls`).
+    if doc.explicit_refs:
+        scoped_refs = {c.get("ref") for c in scoped}
+        added_controls: list[dict] = []
+        for ctrl in controls:
+            ref = ctrl.get("ref", "")
+            if ref in doc.explicit_refs and ref not in scoped_refs:
+                scoped.insert(0, ctrl)
+                scoped_refs.add(ref)
+                added_controls.append(ctrl)
+        # When doc_mappings pre-populated target_leaves (only for the
+        # controls IT matched), augment with the newly-promoted controls'
+        # leaves so the LLM prompt lists MUSTs for the self-cited refs.
+        # Without this, the LLM sees A.7.4.1 as a candidate but has no
+        # MUSTs to bind to → findings come back unbound and get dropped.
+        if added_controls and doc.extraction_metrics.get("target_leaves"):
+            new_leaf_ids = _fetch_leaves_for_controls(added_controls)
+            existing_leaves = doc.extraction_metrics["target_leaves"]
+            existing_ids = {l.get("leaf_id") for l in existing_leaves}
+            for lid in new_leaf_ids:
+                if lid not in existing_ids:
+                    existing_leaves.append({
+                        "leaf_id":     lid,
+                        "control_ref": lid.split(":")[1] if lid.startswith("req:") else None,
+                        "role":        "explicit_ref",
+                    })
+                    existing_ids.add(lid)
+
     # Telemetry: how many candidates did we scope to? Combined with
     # findings_kept downstream, gives the per-doc yield ratio.
     doc.extraction_metrics["candidate_controls"] = len(scoped)

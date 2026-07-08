@@ -207,6 +207,23 @@ def extract_refs_from_text(text: str, standard_id: str) -> list[str]:
             if ref:
                 found.add(ref)
 
+    if 'ISO27701' in std or 'ISO 27701' in std:
+        # Annex A (controller PIMS controls) → A.7.x.y
+        # Annex B (processor PIMS controls) → B.8.x.y
+        # Enforce the A/7 and B/8 pairing at extraction time — the standard
+        # is shaped that way; a bare "A.8.2.3" in doc text is almost always
+        # a legacy 27002:2013 ref, not a 27701 ref, and should not be
+        # promoted as an explicit 27701 candidate.
+        annex_pattern = re.compile(
+            r'\b([AB])\.?\s*([78])\.\s*(\d+)\.\s*(\d+)\b',
+            re.IGNORECASE,
+        )
+        for m in annex_pattern.finditer(text):
+            letter = m.group(1).upper()
+            clause = m.group(2)
+            if (letter == 'A' and clause == '7') or (letter == 'B' and clause == '8'):
+                found.add(f"{letter}.{clause}.{m.group(3)}.{m.group(4)}")
+
     return sorted(found)
 
 
