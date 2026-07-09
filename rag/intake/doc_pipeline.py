@@ -517,11 +517,22 @@ class DocumentPipeline:
                 # the GUC to be set.
                 with conn.cursor() as _cur:
                     _cur.execute("SET app.tenant_id = %s", (tenant_id,))
+                # Signal-fusion Wave 1 (2026-07-09): pass doc_mappings'
+                # target_controls to the writer so fingerprint_match findings
+                # only auto-approve when the doc-shape signal AND the MUST-
+                # keyword signal both agree the control belongs. Derived from
+                # extraction_metrics["target_leaves"] set during scoping.
+                _tgt_leaves = doc.extraction_metrics.get("target_leaves") or []
+                _target_controls: Optional[set[str]] = {
+                    lf.get("control_ref") for lf in _tgt_leaves
+                    if lf.get("control_ref")
+                } or None
                 summary = write_findings(
                     findings, tenant_id, upload_id, conn,
-                    metadata     = doc_metadata,
-                    uploaded_by  = user_id,
-                    tabular_rows = doc.tabular_rows or None,
+                    metadata        = doc_metadata,
+                    uploaded_by     = user_id,
+                    tabular_rows    = doc.tabular_rows or None,
+                    target_controls = _target_controls,
                 )
 
                 # Persist the parsed markdown alongside the findings so the

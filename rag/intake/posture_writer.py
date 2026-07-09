@@ -321,13 +321,31 @@ def _write_document_findings(
     doc_id:      str,           # client_documents.id
     conn,
     *,
-    uploaded_by: Optional[str] = None,
+    uploaded_by:     Optional[str]       = None,
+    target_controls: Optional[set[str]]  = None,
 ) -> int:
     """
     Insert document_findings rows. Returns count of successfully written rows.
     Uses per-row savepoints — failures are logged and skipped, not raised.
     """
     written = 0
+
+    # Signal-fusion Wave 1 (2026-07-09): single-signal fingerprint_match no
+    # longer auto-approves. A fingerprint hit is corroborated only when the
+    # doc_mappings independently identified the fingerprint's control_ref as
+    # in scope for this doc — i.e. the doc's filename+topic tokens (via
+    # doc_mappings discovery) AND the MUST-keyword tokens (via fingerprint)
+    # both agree this control belongs. Fingerprint-alone hits (on controls
+    # doc_mappings didn't target) go pending Stage-1 so loose-token false-
+    # positives (e.g. A.7.5.2 hits on DSR content, surfaced 2026-07-08) can
+    # no longer land unreviewed. Templated stays auto-approve (tenant
+    # authored via <<MUST X>> markers — no inference uncertainty at all).
+    # See [[27701-intake-arc-2026-07-08]] follow-up + the full signal-fusion
+    # arc for future waves. When target_controls is None (legacy callers)
+    # the corroboration check is skipped — fingerprint_match auto-approves
+    # as before. New callers should pass target_controls from
+    # doc.extraction_metrics["target_leaves"].
+
     with conn.cursor() as cur:
         # Supersede prior extract batches for this document before writing the
         # new one. Without this, re-extracts pile up duplicate findings (see
@@ -358,21 +376,31 @@ def _write_document_findings(
                 # rely on the DB column default ('extracted').
                 src = getattr(f, "inference_source", None)
 
-                # Auto-approve discipline: two source types skip Stage-1
-                # HITL because they have no INFERENCE uncertainty —
-                #   'templated' — tenant authored via explicit <<MUST X>>
-                #                 markers in a downloaded scaffold
-                #   'fingerprint_match' — deterministic MUST-keyword match
-                #                 with recorded provenance (kw set +
-                #                 char-position + verbatim sentence)
-                # Both land review_status='approved' + confirmed_by=
-                # <uploading user> + confirmed_at=now() so the engine
-                # sees them immediately. The audit trail captures the
-                # authorship path; auto-approved rows are surfaced via
-                # /api/v1/stage1/auto-approved for tenant review.
-                if src in ("templated", "fingerprint_match"):
+                # Auto-approve discipline (signal-fusion Wave 1, 2026-07-09):
+                #   'templated'        — tenant authored via <<MUST X>>
+                #                        markers. Zero inference uncertainty.
+                #                        Always auto-approve.
+                #   'fingerprint_match' — auto-approve ONLY when the LLM
+                #                        ('extracted') path ALSO landed a
+                #                        finding on the same control_ref
+                #                        in this batch. Two independent
+                #                        signals must agree the doc is about
+                #                        this control. Single-signal
+                #                        fingerprint hits land pending
+                #                        Stage-1 so loose-token false-
+                #                        positives don't slip through.
+                #   Everything else    — pending Stage-1.
+                if src == "templated":
                     review_status = "approved"
-                    confirmed_by  = uploaded_by  # may be None for legacy paths
+                    confirmed_by  = uploaded_by
+                elif src == "fingerprint_match" and (
+                    target_controls is None or f.control_ref in target_controls
+                ):
+                    # Corroborated: doc_mappings put this control in scope,
+                    # AND fingerprint's MUST-keyword tokens matched → two
+                    # independent signals agree.
+                    review_status = "approved"
+                    confirmed_by  = uploaded_by
                 else:
                     review_status = "pending"
                     confirmed_by  = None
@@ -759,14 +787,15 @@ def _persist_document_metadata(
 
 
 def write_findings(
-    findings:     list[DocumentFinding],
-    tenant_id:    str,
-    upload_id:    str,
+    findings:        list[DocumentFinding],
+    tenant_id:       str,
+    upload_id:       str,
     conn,
     *,
-    metadata:     Optional[dict]      = None,
-    uploaded_by:  Optional[str]       = None,
-    tabular_rows: Optional[list[dict]] = None,
+    metadata:        Optional[dict]       = None,
+    uploaded_by:     Optional[str]        = None,
+    tabular_rows:    Optional[list[dict]] = None,
+    target_controls: Optional[set[str]]   = None,
 ) -> dict:
     """
     Stage 4 entry point. Write all findings to document_findings and
@@ -808,8 +837,11 @@ def write_findings(
         _persist_document_metadata(tenant_id, doc_id, metadata, conn)
 
     # ── Stage 4A: document_findings ───────────────────────────────────────
-    written = _write_document_findings(findings, tenant_id, doc_id, conn,
-                                       uploaded_by = uploaded_by)
+    written = _write_document_findings(
+        findings, tenant_id, doc_id, conn,
+        uploaded_by     = uploaded_by,
+        target_controls = target_controls,
+    )
 
     # ── Stage 4A2: tabular_evidence_rows (per-row capture) ────────────────
     # Schema_v47 — captures the full multi-row content of templated table
