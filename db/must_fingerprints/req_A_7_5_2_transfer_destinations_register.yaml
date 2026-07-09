@@ -13,27 +13,33 @@ must_fingerprints:
   - must_id: "item:A.7.5.2:reg_basis_link"
     description: "Basis link per row (link to A.7.5.1 register)"
     excerpt_keywords:
-      - [basis, link]
-      - [basis, link, row]
+      - [destinations, basis, link]
+      - [transfer, basis, register, row]
+      - [destination, transfer, basis]
 
   - must_id: "item:A.7.5.2:reg_destination_id"
     description: "Destination identifier per row (country ISO code or international org name)"
     excerpt_keywords:
       - [destination, identifier, row]
+      - [country, iso, code]
+      - [destination, country, code]
 
   - must_id: "item:A.7.5.2:reg_effective_date"
     description: "Effective date per row (when destination added)"
     excerpt_keywords:
-      - [effective, date]
-      - [effective, date, row]
+      - [destination, effective, date]
+      - [effective, date, destination]
+      - [transfer, effective, date]
 
   - must_id: "item:A.7.5.2:reg_public_disclosure"
     description: "Public-disclosure status per row (in privacy notice / DPA schedule)"
     excerpt_keywords:
-      - [public, disclosure]
+      - [transfer, public, disclosure]
+      - [destinations, public, disclosure]
 
   - must_id: "item:A.7.5.2:reg_transfer_type"
     description: "Transfer type per row (direct storage / subprocessing / support access / M&A)"
     excerpt_keywords:
-      - [transfer, type]
       - [transfer, type, row]
+      - [transfer, type, destination]
+      - [direct, storage, subprocessing]

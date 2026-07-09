@@ -13,19 +13,23 @@ must_fingerprints:
   - must_id: "item:A.7.5.2:rev_completeness"
     description: "Completeness check — actual PII flows reconciled against register"
     excerpt_keywords:
-      - [completeness, check]
+      - [transfer, completeness, check]
+      - [destinations, completeness, review]
 
   - must_id: "item:A.7.5.2:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [destinations, review, date]
+      - [transfer, destinations, review]
 
   - must_id: "item:A.7.5.2:rev_public_notice_sync"
     description: "Public notice sync — subject-facing destinations list matches register"
     excerpt_keywords:
-      - [public, notice, sync]
+      - [destinations, public, notice, sync]
+      - [transfer, destinations, notice, sync]
 
   - must_id: "item:A.7.5.2:rev_reviewer"
     description: "Reviewer identity (DPO + Trust + Legal)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [destinations, reviewer]
+      - [transfer, destinations, reviewer]

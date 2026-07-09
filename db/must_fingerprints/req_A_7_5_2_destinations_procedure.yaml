@@ -13,21 +13,25 @@ must_fingerprints:
   - must_id: "item:A.7.5.2:proc_change_notification"
     description: "Change notification — new destinations added trigger notice update"
     excerpt_keywords:
-      - [change, notification]
+      - [destination, change, notification]
+      - [transfer, destination, notification]
+      - [country, added, notification]
 
   - must_id: "item:A.7.5.2:proc_destinations_publication"
     description: "Destinations list publication — countries + international orgs made available to customers/subjects"
     excerpt_keywords:
       - [destinations, publication]
       - [destinations, list, publication]
+      - [transfer, destinations, published]
 
   - must_id: "item:A.7.5.2:proc_law_enforcement_exception"
     description: "Law enforcement exception — cases where destinations cannot be specified in advance (§7.5.2 last ..."
     excerpt_keywords:
-      - [law, enforcement, exception]
+      - [transfer, law, enforcement, exception]
+      - [destination, law, enforcement]
 
   - must_id: "item:A.7.5.2:proc_subcontractor_inclusion"
     description: "Subcontractor destinations included — countries where subcontracted processing occurs"
     excerpt_keywords:
-      - [subcontractor, inclusion]
       - [subcontractor, destinations]
+      - [subcontractor, country, inclusion]
