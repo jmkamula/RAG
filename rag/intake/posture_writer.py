@@ -324,6 +324,8 @@ def _write_document_findings(
     uploaded_by:       Optional[str]       = None,
     target_controls:   Optional[set[str]]  = None,
     semantic_controls: Optional[set[str]]  = None,
+    explicit_refs:     Optional[set[str]]  = None,
+    llm_extracted:     Optional[set[str]]  = None,
 ) -> int:
     """
     Insert document_findings rows. Returns count of successfully written rows.
@@ -331,21 +333,22 @@ def _write_document_findings(
     """
     written = 0
 
-    # Signal-fusion Wave 1 (2026-07-09): single-signal fingerprint_match no
-    # longer auto-approves. A fingerprint hit is corroborated only when the
-    # doc_mappings independently identified the fingerprint's control_ref as
-    # in scope for this doc — i.e. the doc's filename+topic tokens (via
-    # doc_mappings discovery) AND the MUST-keyword tokens (via fingerprint)
-    # both agree this control belongs. Fingerprint-alone hits (on controls
-    # doc_mappings didn't target) go pending Stage-1 so loose-token false-
-    # positives (e.g. A.7.5.2 hits on DSR content, surfaced 2026-07-08) can
-    # no longer land unreviewed. Templated stays auto-approve (tenant
-    # authored via <<MUST X>> markers — no inference uncertainty at all).
-    # See [[27701-intake-arc-2026-07-08]] follow-up + the full signal-fusion
-    # arc for future waves. When target_controls is None (legacy callers)
-    # the corroboration check is skipped — fingerprint_match auto-approves
-    # as before. New callers should pass target_controls from
-    # doc.extraction_metrics["target_leaves"].
+    # Signal-fusion Wave 3 (2026-07-09): N-of-M consensus for fingerprint_match
+    # auto-approval. Four independent corroboration signals — each a
+    # different view of "is this control in scope for this doc?":
+    #   1. target_controls   — filename+topic-token match via doc_mappings
+    #   2. semantic_controls — body-content semantic match via musts_arioncomply
+    #                          top-K embedding lookup
+    #   3. explicit_refs     — doc self-cites the control ref (regex extract)
+    #   4. llm_extracted     — LLM produced any 'extracted' finding on the
+    #                          control in this batch
+    # Rule: ≥2 of the AVAILABLE signals must agree. When 0-1 signals are
+    # available (legacy caller, all sources returned None), the rule
+    # degrades to "auto-approve" so the previous behavior is preserved as
+    # the floor — Wave 3 can only make the gate STRICTER than before,
+    # never looser. Wave 1 was doc_mappings-only; Wave 2 added semantic
+    # as EITHER-OR; Wave 3 tightens to ≥2 with LLM + explicit as
+    # additional inputs.
 
     with conn.cursor() as cur:
         # Supersede prior extract batches for this document before writing the
@@ -395,29 +398,32 @@ def _write_document_findings(
                     review_status = "approved"
                     confirmed_by  = uploaded_by
                 elif src == "fingerprint_match":
-                    # Wave 1+2 corroboration: auto-approve when EITHER
-                    #  (a) doc_mappings target_controls contains the ref
-                    #      (filename+topic-token signal agrees), OR
-                    #  (b) semantic_controls (musts_arioncomply top-K)
-                    #      contains the ref (embedding signal agrees).
-                    # Both signals are independent from the fingerprint
-                    # itself; either agreeing is enough. If neither
-                    # signal is available (both None) — legacy behavior:
-                    # auto-approve. Once Wave 3 lands the N-of-M gate,
-                    # this either-or becomes a stricter both-required.
-                    corroborated_by_target = (
-                        target_controls is not None
-                        and f.control_ref in target_controls
-                    )
-                    corroborated_by_semantic = (
-                        semantic_controls is not None
-                        and f.control_ref in semantic_controls
-                    )
-                    if (
-                        (target_controls is None and semantic_controls is None)
-                        or corroborated_by_target
-                        or corroborated_by_semantic
+                    # Wave 3: N-of-M consensus. Count AVAILABLE signals and
+                    # AGREEING signals for this control_ref. Rule:
+                    #   available >= 2  → require agreeing >= 2
+                    #   available == 1  → require agreeing >= 1
+                    #   available == 0  → auto-approve (legacy floor)
+                    signal_available = 0
+                    signal_agrees    = 0
+                    for scope_set in (
+                        target_controls, semantic_controls,
+                        explicit_refs, llm_extracted,
                     ):
+                        # None OR empty set = unavailable (signal wasn't
+                        # computed OR the source ran but returned nothing
+                        # to compare against). Only non-empty sets count.
+                        if not scope_set:
+                            continue
+                        signal_available += 1
+                        if f.control_ref in scope_set:
+                            signal_agrees += 1
+                    if signal_available == 0:
+                        auto_approve = True   # legacy floor
+                    elif signal_available == 1:
+                        auto_approve = signal_agrees >= 1
+                    else:
+                        auto_approve = signal_agrees >= 2
+                    if auto_approve:
                         review_status = "approved"
                         confirmed_by  = uploaded_by
                     else:
@@ -819,6 +825,8 @@ def write_findings(
     tabular_rows:      Optional[list[dict]] = None,
     target_controls:   Optional[set[str]]   = None,
     semantic_controls: Optional[set[str]]   = None,
+    explicit_refs:     Optional[set[str]]   = None,
+    llm_extracted:     Optional[set[str]]   = None,
 ) -> dict:
     """
     Stage 4 entry point. Write all findings to document_findings and
@@ -865,6 +873,8 @@ def write_findings(
         uploaded_by       = uploaded_by,
         target_controls   = target_controls,
         semantic_controls = semantic_controls,
+        explicit_refs     = explicit_refs,
+        llm_extracted     = llm_extracted,
     )
 
     # ── Stage 4A2: tabular_evidence_rows (per-row capture) ────────────────

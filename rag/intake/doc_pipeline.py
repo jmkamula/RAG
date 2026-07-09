@@ -517,21 +517,21 @@ class DocumentPipeline:
                 # the GUC to be set.
                 with conn.cursor() as _cur:
                     _cur.execute("SET app.tenant_id = %s", (tenant_id,))
-                # Signal-fusion Wave 1+2 (2026-07-09): pass BOTH doc_mappings
-                # target_controls AND the semantic top-K controls (from the
-                # musts_arioncomply Chroma collection) to the writer. A
-                # fingerprint_match auto-approves when EITHER signal
-                # corroborates — two independent paths that both suggest the
-                # control belongs in this doc. Wave 1 = doc_mappings only;
-                # Wave 2 adds semantic embedding as the second contributor.
+                # Signal-fusion Wave 3 (2026-07-09): four independent
+                # corroboration signals for fingerprint_match auto-approval,
+                # each derived from a DIFFERENT view of the doc so their
+                # agreement is genuinely informative:
+                #   target_controls   — filename + topic tokens (doc_mappings)
+                #   semantic_controls — body-content semantic match (musts_arioncomply)
+                #   explicit_refs     — doc self-citations (regex-extracted refs)
+                #   llm_extract       — LLM ran and produced findings for this control
+                # The writer's gate requires ≥2 available signals to agree.
                 _tgt_leaves = doc.extraction_metrics.get("target_leaves") or []
                 _target_controls: Optional[set[str]] = {
                     lf.get("control_ref") for lf in _tgt_leaves
                     if lf.get("control_ref")
                 } or None
-                # Semantic scope — one embedding call per doc. Silent
-                # fallback returns empty set if the collection or key is
-                # unavailable; corroboration then degrades to Wave 1 only.
+
                 try:
                     from rag.intake.must_embedding_lookup import (
                         semantic_controls_in_scope,
@@ -543,6 +543,24 @@ class DocumentPipeline:
                 except Exception:
                     _semantic_controls = None
 
+                # Explicit refs are stored on ParsedDocument (set during
+                # enrichment via extract_refs_from_text). Convert to set of
+                # bare control_refs. None means the regex scan ran but found
+                # nothing; still a valid signal (0 agreement, 1 available).
+                _explicit_refs: Optional[set[str]] = (
+                    set(doc.explicit_refs) if doc.explicit_refs is not None else None
+                )
+
+                # LLM signal — set of control_refs where the LLM produced any
+                # 'extracted' finding in this batch. LLM is often excluded
+                # from fingerprint-covered leaves so this signal is sparse
+                # but strong when present.
+                _llm_extracted: Optional[set[str]] = {
+                    f.control_ref for f in findings
+                    if getattr(f, "inference_source", None) == "extracted"
+                    and f.control_ref
+                } or None
+
                 summary = write_findings(
                     findings, tenant_id, upload_id, conn,
                     metadata           = doc_metadata,
@@ -550,6 +568,8 @@ class DocumentPipeline:
                     tabular_rows       = doc.tabular_rows or None,
                     target_controls    = _target_controls,
                     semantic_controls  = _semantic_controls,
+                    explicit_refs      = _explicit_refs,
+                    llm_extracted      = _llm_extracted,
                 )
 
                 # Persist the parsed markdown alongside the findings so the
