@@ -321,8 +321,9 @@ def _write_document_findings(
     doc_id:      str,           # client_documents.id
     conn,
     *,
-    uploaded_by:     Optional[str]       = None,
-    target_controls: Optional[set[str]]  = None,
+    uploaded_by:       Optional[str]       = None,
+    target_controls:   Optional[set[str]]  = None,
+    semantic_controls: Optional[set[str]]  = None,
 ) -> int:
     """
     Insert document_findings rows. Returns count of successfully written rows.
@@ -393,14 +394,35 @@ def _write_document_findings(
                 if src == "templated":
                     review_status = "approved"
                     confirmed_by  = uploaded_by
-                elif src == "fingerprint_match" and (
-                    target_controls is None or f.control_ref in target_controls
-                ):
-                    # Corroborated: doc_mappings put this control in scope,
-                    # AND fingerprint's MUST-keyword tokens matched → two
-                    # independent signals agree.
-                    review_status = "approved"
-                    confirmed_by  = uploaded_by
+                elif src == "fingerprint_match":
+                    # Wave 1+2 corroboration: auto-approve when EITHER
+                    #  (a) doc_mappings target_controls contains the ref
+                    #      (filename+topic-token signal agrees), OR
+                    #  (b) semantic_controls (musts_arioncomply top-K)
+                    #      contains the ref (embedding signal agrees).
+                    # Both signals are independent from the fingerprint
+                    # itself; either agreeing is enough. If neither
+                    # signal is available (both None) — legacy behavior:
+                    # auto-approve. Once Wave 3 lands the N-of-M gate,
+                    # this either-or becomes a stricter both-required.
+                    corroborated_by_target = (
+                        target_controls is not None
+                        and f.control_ref in target_controls
+                    )
+                    corroborated_by_semantic = (
+                        semantic_controls is not None
+                        and f.control_ref in semantic_controls
+                    )
+                    if (
+                        (target_controls is None and semantic_controls is None)
+                        or corroborated_by_target
+                        or corroborated_by_semantic
+                    ):
+                        review_status = "approved"
+                        confirmed_by  = uploaded_by
+                    else:
+                        review_status = "pending"
+                        confirmed_by  = None
                 else:
                     review_status = "pending"
                     confirmed_by  = None
@@ -787,15 +809,16 @@ def _persist_document_metadata(
 
 
 def write_findings(
-    findings:        list[DocumentFinding],
-    tenant_id:       str,
-    upload_id:       str,
+    findings:          list[DocumentFinding],
+    tenant_id:         str,
+    upload_id:         str,
     conn,
     *,
-    metadata:        Optional[dict]       = None,
-    uploaded_by:     Optional[str]        = None,
-    tabular_rows:    Optional[list[dict]] = None,
-    target_controls: Optional[set[str]]   = None,
+    metadata:          Optional[dict]       = None,
+    uploaded_by:       Optional[str]        = None,
+    tabular_rows:      Optional[list[dict]] = None,
+    target_controls:   Optional[set[str]]   = None,
+    semantic_controls: Optional[set[str]]   = None,
 ) -> dict:
     """
     Stage 4 entry point. Write all findings to document_findings and
@@ -839,8 +862,9 @@ def write_findings(
     # ── Stage 4A: document_findings ───────────────────────────────────────
     written = _write_document_findings(
         findings, tenant_id, doc_id, conn,
-        uploaded_by     = uploaded_by,
-        target_controls = target_controls,
+        uploaded_by       = uploaded_by,
+        target_controls   = target_controls,
+        semantic_controls = semantic_controls,
     )
 
     # ── Stage 4A2: tabular_evidence_rows (per-row capture) ────────────────

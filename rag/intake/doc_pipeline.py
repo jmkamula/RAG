@@ -517,22 +517,39 @@ class DocumentPipeline:
                 # the GUC to be set.
                 with conn.cursor() as _cur:
                     _cur.execute("SET app.tenant_id = %s", (tenant_id,))
-                # Signal-fusion Wave 1 (2026-07-09): pass doc_mappings'
-                # target_controls to the writer so fingerprint_match findings
-                # only auto-approve when the doc-shape signal AND the MUST-
-                # keyword signal both agree the control belongs. Derived from
-                # extraction_metrics["target_leaves"] set during scoping.
+                # Signal-fusion Wave 1+2 (2026-07-09): pass BOTH doc_mappings
+                # target_controls AND the semantic top-K controls (from the
+                # musts_arioncomply Chroma collection) to the writer. A
+                # fingerprint_match auto-approves when EITHER signal
+                # corroborates — two independent paths that both suggest the
+                # control belongs in this doc. Wave 1 = doc_mappings only;
+                # Wave 2 adds semantic embedding as the second contributor.
                 _tgt_leaves = doc.extraction_metrics.get("target_leaves") or []
                 _target_controls: Optional[set[str]] = {
                     lf.get("control_ref") for lf in _tgt_leaves
                     if lf.get("control_ref")
                 } or None
+                # Semantic scope — one embedding call per doc. Silent
+                # fallback returns empty set if the collection or key is
+                # unavailable; corroboration then degrades to Wave 1 only.
+                try:
+                    from rag.intake.must_embedding_lookup import (
+                        semantic_controls_in_scope,
+                    )
+                    _semantic_controls: Optional[set[str]] = semantic_controls_in_scope(
+                        doc_text    = doc.markdown or doc.full_text,
+                        tenant_stds = doc.standard_ids or None,
+                    ) or None
+                except Exception:
+                    _semantic_controls = None
+
                 summary = write_findings(
                     findings, tenant_id, upload_id, conn,
-                    metadata        = doc_metadata,
-                    uploaded_by     = user_id,
-                    tabular_rows    = doc.tabular_rows or None,
-                    target_controls = _target_controls,
+                    metadata           = doc_metadata,
+                    uploaded_by        = user_id,
+                    tabular_rows       = doc.tabular_rows or None,
+                    target_controls    = _target_controls,
+                    semantic_controls  = _semantic_controls,
                 )
 
                 # Persist the parsed markdown alongside the findings so the
