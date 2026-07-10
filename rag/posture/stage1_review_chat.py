@@ -621,6 +621,14 @@ def approve_findings_by_ids(
                 logger.warning("engine report attach failed for %s: %s",
                                cr.get("control_ref"), e)
 
+        # Wave 4a: invalidate signal precision cache so the next
+        # auto-approve decision on this tenant reads fresh stats.
+        try:
+            from rag.intake.signal_precision import invalidate_cache
+            invalidate_cache(tenant_id)
+        except Exception:
+            pass
+
         return {
             "ok":             True,
             "approved":       len(touched_rows),
@@ -946,6 +954,13 @@ def reject_findings_by_ids(
             if n == 0:
                 return {"ok": False, "reason": "no_pending"}
         pg_conn.commit()
+        # Wave 4a — invalidate precision cache so future gate decisions
+        # reflect this rejection outcome.
+        try:
+            from rag.intake.signal_precision import invalidate_cache
+            invalidate_cache(tenant_id)
+        except Exception:
+            pass
         return {"ok": True, "rejected": n}
     except Exception as e:
         logger.warning("stage1_review_chat.reject_by_ids: db error: %s", e)

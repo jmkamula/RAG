@@ -398,31 +398,56 @@ def _write_document_findings(
                     review_status = "approved"
                     confirmed_by  = uploaded_by
                 elif src == "fingerprint_match":
-                    # Wave 3: N-of-M consensus. Count AVAILABLE signals and
-                    # AGREEING signals for this control_ref. Rule:
-                    #   available >= 2  → require agreeing >= 2
-                    #   available == 1  → require agreeing >= 1
-                    #   available == 0  → auto-approve (legacy floor)
-                    signal_available = 0
-                    signal_agrees    = 0
-                    for scope_set in (
-                        target_controls, semantic_controls,
-                        explicit_refs, llm_extracted,
+                    # Wave 3 (N-of-M) + Wave 4a (precision-weighted).
+                    # Signal roles differ:
+                    #   BASE signals (target_controls, semantic_controls,
+                    #     explicit_refs) — each has an INDEPENDENT view of
+                    #     "is this control in scope?" on the whole doc.
+                    #     Their absence is meaningful (the source ran and
+                    #     didn't see this control), so they count toward
+                    #     BOTH `available` and `agreeing`.
+                    #   BONUS signal (llm_extracted) — the LLM is often
+                    #     specifically EXCLUDED from fingerprint-covered
+                    #     leaves, so LLM's silence on a fingerprint-hit
+                    #     control isn't a signal at all. Only its
+                    #     AGREEMENT counts (as an extra vote). Its
+                    #     absence never tightens the rule.
+                    _agreeing_names: list[str] = []
+                    base_available = 0
+                    base_agrees    = 0
+                    for name, scope_set in (
+                        ("target_controls",   target_controls),
+                        ("semantic_controls", semantic_controls),
+                        ("explicit_refs",     explicit_refs),
                     ):
-                        # None OR empty set = unavailable (signal wasn't
-                        # computed OR the source ran but returned nothing
-                        # to compare against). Only non-empty sets count.
                         if not scope_set:
                             continue
-                        signal_available += 1
+                        base_available += 1
                         if f.control_ref in scope_set:
-                            signal_agrees += 1
-                    if signal_available == 0:
+                            base_agrees += 1
+                            _agreeing_names.append(name)
+                    # LLM bonus — adds to agrees only when it fires on
+                    # the same control. Doesn't push base_available.
+                    if llm_extracted and f.control_ref in llm_extracted:
+                        _agreeing_names.append("llm_extracted")
+                    # Wave 4a — precision-weighted agreement (last-90d
+                    # per-signal approve/reject rate on THIS tenant +
+                    # framework). Cold-start (< 5 samples) → 1.0
+                    # neutral (Wave 3 behavior).
+                    from rag.intake.signal_precision import compute_signal_precision
+                    precisions = compute_signal_precision(
+                        conn, tenant_id, standard_id=f.standard_id, window_days=90,
+                    )
+                    weighted_agreement = sum(
+                        precisions.get(n, 1.0) for n in _agreeing_names
+                    )
+                    if base_available == 0:
                         auto_approve = True   # legacy floor
-                    elif signal_available == 1:
-                        auto_approve = signal_agrees >= 1
+                    elif base_available == 1:
+                        auto_approve = weighted_agreement >= 1.0
                     else:
-                        auto_approve = signal_agrees >= 2
+                        auto_approve = weighted_agreement >= 2.0
+                    f.corroborating_signals = _agreeing_names
                     if auto_approve:
                         review_status = "approved"
                         confirmed_by  = uploaded_by
@@ -443,7 +468,8 @@ def _write_document_findings(
                             section_number, extracted_at,
                             is_active, retention_class,
                             inference_source,
-                            review_status, confirmed_by, confirmed_at
+                            review_status, confirmed_by, confirmed_at,
+                            corroborating_signals
                         ) VALUES (
                             %s, %s, %s,
                             %s, %s, %s,
@@ -452,7 +478,8 @@ def _write_document_findings(
                             TRUE, %s,
                             %s,
                             %s, %s::uuid,
-                            CASE WHEN %s = 'approved' THEN NOW() ELSE NULL END
+                            CASE WHEN %s = 'approved' THEN NOW() ELSE NULL END,
+                            %s
                         )
                         ON CONFLICT (id) DO NOTHING
                         """,
@@ -466,6 +493,7 @@ def _write_document_findings(
                             _RETENTION_CLASS,
                             src,
                             review_status, confirmed_by, review_status,
+                            getattr(f, "corroborating_signals", None) or [],
                         ),
                     )
                 else:

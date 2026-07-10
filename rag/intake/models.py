@@ -154,6 +154,11 @@ class DocumentFinding:
     # a separate writer.
     inference_source: Optional[str] = None
 
+    # Signal-fusion Wave 4a — writer stamps which independent
+    # corroboration signals agreed at auto-approve time. Read together
+    # with review_status to compute rolling per-signal precision.
+    corroborating_signals: Optional[list[str]] = None
+
     # Set on write
     id:              Optional[str] = None
 

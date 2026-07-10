@@ -552,12 +552,18 @@ class DocumentPipeline:
                 )
 
                 # LLM signal — set of control_refs where the LLM produced any
-                # 'extracted' finding in this batch. LLM is often excluded
-                # from fingerprint-covered leaves so this signal is sparse
-                # but strong when present.
+                # 'extracted' finding in this batch. LLM path leaves
+                # inference_source None on the finding object (relies on DB
+                # default 'extracted'); templated / fingerprint / workbook /
+                # leaf_scan set it explicitly. So "LLM finding" = the object
+                # doesn't have any of the explicit deterministic sources set.
+                _DETERMINISTIC_SOURCES = {
+                    "templated", "fingerprint_match", "workbook",
+                    "leaf_scan", "form", "xfw_bridge",
+                }
                 _llm_extracted: Optional[set[str]] = {
                     f.control_ref for f in findings
-                    if getattr(f, "inference_source", None) == "extracted"
+                    if getattr(f, "inference_source", None) not in _DETERMINISTIC_SOURCES
                     and f.control_ref
                 } or None
 
