@@ -1466,9 +1466,25 @@ Omit any MUST you cannot ground. Do not invent quotes. Do not guess."""
             "anthropic-version": "2023-06-01",
         },
     )
+    from rag.ai_trace import trace_llm_call
     try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            data = json.loads(resp.read())
+        with trace_llm_call(
+            purpose  = "extractor_pass2",
+            provider = "anthropic",
+            model    = EXTRACT_MODEL,
+            prompt   = user_prompt,
+            metadata = {"doc_name": doc_name, "leaf_id": leaf_id,
+                        "evidence_type": evidence_type},
+        ) as _trace:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                data = json.loads(resp.read())
+            _usage = data.get("usage") or {}
+            _text_out = data["content"][0]["text"] if data.get("content") else None
+            _trace.set_response(
+                response   = _text_out,
+                tokens_in  = _usage.get("input_tokens"),
+                tokens_out = _usage.get("output_tokens"),
+            )
         return data["content"][0]["text"]
     except urllib.error.HTTPError as e:
         try:
@@ -1698,9 +1714,25 @@ def _llm_extract(
         },
     )
 
+    from rag.ai_trace import trace_llm_call
     try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            data = json.loads(resp.read())
+        with trace_llm_call(
+            purpose  = "extractor",
+            provider = "anthropic",
+            model    = EXTRACT_MODEL,
+            prompt   = user_prompt,
+            metadata = {"doc_name": doc_name, "chunk_hint": chunk_hint,
+                        "n_controls": len(controls)},
+        ) as _trace:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                data = json.loads(resp.read())
+            _usage = data.get("usage") or {}
+            _text_out = data["content"][0]["text"] if data.get("content") else None
+            _trace.set_response(
+                response   = _text_out,
+                tokens_in  = _usage.get("input_tokens"),
+                tokens_out = _usage.get("output_tokens"),
+            )
         return data["content"][0]["text"]
     except urllib.error.HTTPError as e:
         try:

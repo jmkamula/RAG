@@ -1747,6 +1747,7 @@ class QueryClassifier:
     ) -> str:
         """Call OpenAI with a single user message. Returns raw text."""
         import time as _time
+        from rag.ai_trace import log_llm_call
         client = self._get_openai()
         _t0 = _time.time()
         try:
@@ -1757,6 +1758,7 @@ class QueryClassifier:
                 messages    = [{"role": "user", "content": prompt}],
             )
             result = response.choices[0].message.content.strip()
+            _lat = round((_time.time() - _t0) * 1000)
             _logger = get_logger()
             if _logger:
                 _logger.log_call(
@@ -1765,10 +1767,32 @@ class QueryClassifier:
                     system     = "",
                     user       = prompt[:600],
                     response   = result,
-                    latency_ms = round((_time.time() - _t0) * 1000),
+                    latency_ms = _lat,
                 )
+            _usage = getattr(response, "usage", None)
+            log_llm_call(
+                purpose    = "classifier",
+                provider   = "openai",
+                model      = model,
+                latency_ms = _lat,
+                tokens_in  = getattr(_usage, "prompt_tokens", None)     if _usage else None,
+                tokens_out = getattr(_usage, "completion_tokens", None) if _usage else None,
+                prompt     = prompt,
+                response   = result,
+                metadata   = {"step": step},
+            )
             return result
         except Exception as e:
+            log_llm_call(
+                purpose      = "classifier",
+                provider     = "openai",
+                model        = model,
+                latency_ms   = round((_time.time() - _t0) * 1000),
+                prompt       = prompt,
+                error_type   = type(e).__name__,
+                error_detail = str(e)[:500],
+                metadata     = {"step": step},
+            )
             return f"[LLM error: {e}]"
 
     def _parse_json(self, raw: str) -> dict | None:

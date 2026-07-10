@@ -2044,6 +2044,8 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         """Single OpenAI call. Returns response text."""
         client = self._get_client()
         t0 = time.time()
+        # Wave 4b — record every LLM call in ai_call_log
+        from rag.ai_trace import log_llm_call
         try:
             response = client.chat.completions.create(
                 model       = model,
@@ -2066,8 +2068,31 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                     response   = result,
                     latency_ms = latency,
                 )
+            _usage = getattr(response, "usage", None)
+            log_llm_call(
+                purpose    = "chat" if step in ("answer","compose") else (step or "chat"),
+                provider   = "openai",
+                model      = model,
+                latency_ms = latency,
+                tokens_in  = getattr(_usage, "prompt_tokens", None)     if _usage else None,
+                tokens_out = getattr(_usage, "completion_tokens", None) if _usage else None,
+                prompt     = f"[system] {system}\n\n[user] {user}",
+                response   = result,
+                metadata   = {"step": step},
+            )
             return result
         except Exception as e:
+            latency = round((time.time() - t0) * 1000)
+            log_llm_call(
+                purpose      = "chat" if step in ("answer","compose") else (step or "chat"),
+                provider     = "openai",
+                model        = model,
+                latency_ms   = latency,
+                prompt       = f"[system] {system}\n\n[user] {user}",
+                error_type   = type(e).__name__,
+                error_detail = str(e)[:500],
+                metadata     = {"step": step},
+            )
             raise RuntimeError(f"LLM call failed ({model}): {e}")
 
     def _verify(
@@ -2107,6 +2132,7 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             f"CONTEXT:\n{context_text[:5000]}\n\n"
             f"ANSWER:\n{answer_text}"
         )
+        from rag.ai_trace import log_llm_call
         try:
             response = client.chat.completions.create(
                 model       = self.verify_model,
@@ -2119,6 +2145,18 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             )
             raw    = response.choices[0].message.content.strip()
             parsed = self._parse_json(raw)
+            _usage = getattr(response, "usage", None)
+            log_llm_call(
+                purpose    = "chat",
+                provider   = "openai",
+                model      = self.verify_model,
+                latency_ms = round((time.time() - t0) * 1000),
+                tokens_in  = getattr(_usage, "prompt_tokens", None)     if _usage else None,
+                tokens_out = getattr(_usage, "completion_tokens", None) if _usage else None,
+                prompt     = f"[system] {VERIFICATION_PROMPT[:300]}\n\n[user] {prompt}",
+                response   = raw,
+                metadata   = {"step": "verify", "question_type": question_type},
+            )
 
             if parsed:
                 result = VerificationResult(
@@ -2140,8 +2178,17 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                         model       = self.verify_model,
                     )
                 return result
-        except Exception:
-            pass
+        except Exception as e:
+            log_llm_call(
+                purpose      = "chat",
+                provider     = "openai",
+                model        = self.verify_model,
+                latency_ms   = round((time.time() - t0) * 1000),
+                prompt       = f"[system] {VERIFICATION_PROMPT[:300]}\n\n[user] {prompt}",
+                error_type   = type(e).__name__,
+                error_detail = str(e)[:500],
+                metadata     = {"step": "verify"},
+            )
 
         return VerificationResult(
             verdict    = "pass",
@@ -2176,6 +2223,8 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             f"or say 'here is the corrected answer'. Just give the answer."
         )
         client = self._get_client()
+        from rag.ai_trace import log_llm_call
+        _t0 = time.time()
         try:
             response = client.chat.completions.create(
                 model       = self.answer_model,
@@ -2190,6 +2239,18 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                 ],
             )
             corrected = response.choices[0].message.content.strip()
+            _usage = getattr(response, "usage", None)
+            log_llm_call(
+                purpose    = "chat",
+                provider   = "openai",
+                model      = self.answer_model,
+                latency_ms = round((time.time() - _t0) * 1000),
+                tokens_in  = getattr(_usage, "prompt_tokens", None)     if _usage else None,
+                tokens_out = getattr(_usage, "completion_tokens", None) if _usage else None,
+                prompt     = correction_prompt,
+                response   = corrected,
+                metadata   = {"step": "correct"},
+            )
 
             # Strip any preamble the model adds despite instructions
             corrected = self._strip_correction_preamble(corrected)

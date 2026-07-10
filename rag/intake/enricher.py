@@ -248,6 +248,7 @@ Return JSON only:
 }}"""
 
     try:
+        from rag.ai_trace import trace_llm_call
         body = json.dumps({
             "model":      "claude-haiku-4-5-20251001",
             "max_tokens": 300,
@@ -263,9 +264,24 @@ Return JSON only:
                 "anthropic-version": "2023-06-01",
             },
         )
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            data = json.loads(resp.read())
-
+        with trace_llm_call(
+            purpose   = "enricher",
+            provider  = "anthropic",
+            model     = "claude-haiku-4-5-20251001",
+            tenant_id = getattr(doc, "tenant_id", None),
+            upload_id = getattr(doc, "upload_id", None),
+            prompt    = prompt,
+            metadata  = {"doc_name": doc.original_name},
+        ) as _trace:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                data = json.loads(resp.read())
+            _usage = data.get("usage") or {}
+            _text_out = data["content"][0]["text"] if data.get("content") else None
+            _trace.set_response(
+                response   = _text_out,
+                tokens_in  = _usage.get("input_tokens"),
+                tokens_out = _usage.get("output_tokens"),
+            )
         text = data["content"][0]["text"]
         # Strip any markdown fences
         text = re.sub(r'```json\s*|\s*```', '', text).strip()
