@@ -39,6 +39,7 @@ duplicate/cache-hit analysis; the preview supports diagnostics.
 """
 from __future__ import annotations
 import contextlib
+import contextvars
 import hashlib
 import logging
 import os
@@ -46,6 +47,48 @@ import time
 from typing import Optional
 
 logger = logging.getLogger(__name__)
+
+# Context propagation — callsites don't need to thread tenant_id /
+# upload_id / session_id / request_id through every layer. The
+# request/pipeline entry sets these once; log_llm_call reads them
+# via ContextVar as a fallback when the direct arg is None.
+_tenant_ctx:  contextvars.ContextVar[Optional[str]] = contextvars.ContextVar("ai_trace.tenant_id",  default=None)
+_upload_ctx:  contextvars.ContextVar[Optional[str]] = contextvars.ContextVar("ai_trace.upload_id",  default=None)
+_session_ctx: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar("ai_trace.session_id", default=None)
+_request_ctx: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar("ai_trace.request_id", default=None)
+
+
+def set_trace_context(
+    *,
+    tenant_id:  Optional[str] = None,
+    upload_id:  Optional[str] = None,
+    session_id: Optional[str] = None,
+    request_id: Optional[str] = None,
+) -> tuple:
+    """Stamp provenance IDs into the current async/thread context.
+    Returned tuple of `Token`s can be passed back to `reset_trace_context`
+    at request completion. Usually a fire-and-forget set at request
+    entry — the context vars auto-scope to the async task."""
+    return (
+        _tenant_ctx.set(tenant_id)   if tenant_id  else None,
+        _upload_ctx.set(upload_id)   if upload_id  else None,
+        _session_ctx.set(session_id) if session_id else None,
+        _request_ctx.set(request_id) if request_id else None,
+    )
+
+
+def reset_trace_context(tokens: tuple) -> None:
+    """Restore ContextVars to their prior values. Optional — the
+    async task boundary already isolates."""
+    try:
+        for cv, tok in zip(
+            (_tenant_ctx, _upload_ctx, _session_ctx, _request_ctx),
+            tokens,
+        ):
+            if tok is not None:
+                cv.reset(tok)
+    except Exception:
+        pass
 
 # Per-1M-token USD pricing snapshot 2026-07-10.
 # Update as providers publish new rates. Keys are normalized model
@@ -127,6 +170,16 @@ def log_llm_call(
     matching the app). This lets deep-call-stack sites log without
     threading a pool through every layer.
     """
+    # Fill in tenant/upload/session/request from ContextVars when the
+    # caller didn't pass them explicitly.
+    if tenant_id is None:
+        tenant_id = _tenant_ctx.get()
+    if upload_id is None:
+        upload_id = _upload_ctx.get()
+    if session_id is None:
+        session_id = _session_ctx.get()
+    if request_id is None:
+        request_id = _request_ctx.get()
     try:
         import psycopg2
         import json as _json

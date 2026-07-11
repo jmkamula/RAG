@@ -475,11 +475,20 @@ async def chat(
 
     from rag.arion_state import make_initial_state
     from rag.tenant_context import TenantContextCache
+    from rag.ai_trace import set_trace_context
 
     t_start    = time.time()
     trace_id   = request.state.trace_id
     # Prefix thread_id with tenant_id — prevents cross-tenant session collision
     session_id = body.session_id or f"api_{uuid.uuid4().hex[:8]}"
+
+    # Wave 4c: stamp tenant + session + request into the ai_trace ContextVars
+    # so every LLM call fired during this handler auto-tags with them.
+    set_trace_context(
+        tenant_id  = key_info.tenant_id,
+        session_id = session_id,
+        request_id = trace_id,
+    )
     # Prefix with tenant_id — prevents cross-tenant session collision
     thread_id  = f"{key_info.tenant_id[:8]}:{session_id}"
     thread_id  = f"{key_info.tenant_id[:8]}:{session_id}"
@@ -507,9 +516,16 @@ async def chat(
         state     = ({"query": body.question}
                      if has_prior
                      else make_initial_state(tenant, query=body.question))
+        # ContextVar propagation into the executor thread — asyncio's
+        # run_in_executor doesn't copy the current async context by
+        # default, so ai_trace ContextVars (tenant_id, session_id,
+        # request_id) would evaluate to None inside graph.invoke.
+        # Use copy_context().run(...) to carry them across.
+        import contextvars as _cv
+        _ctx = _cv.copy_context()
         result = await asyncio.get_event_loop().run_in_executor(
             None,
-            lambda: graph.invoke(state, cfg),
+            lambda: _ctx.run(graph.invoke, state, cfg),
         )
 
         answer     = result.get("answer_text", "") or result.get("answer", "")
@@ -780,6 +796,10 @@ def _run_pipeline(
     verbatim were missing ISO27701:2019 scope.
     """
     from rag.intake.doc_pipeline import DocumentPipeline
+    from rag.ai_trace import set_trace_context
+    # Wave 4c — stamp tenant + upload into ai_trace ContextVars so any
+    # LLM call during this pipeline auto-tags with them
+    set_trace_context(tenant_id=tenant_id, upload_id=upload_id)
     pipeline = DocumentPipeline(
         db_url  = db_url,
         api_key = api_key,
@@ -3272,6 +3292,313 @@ async def admin_uploads_quality(
             out_sorted.extend(bucket)
         out = out_sorted[:limit]
         return {"count": len(out), "uploads": out}
+    finally:
+        pool.putconn(conn)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Wave 4c (2026-07-11): tenant trace dashboard endpoints.
+#
+# Read-only aggregations across the existing trace tables:
+#   - ai_call_log         (Wave 4b)  per-LLM-call inventory
+#   - intake_trace_log    (schema_v35) per-doc pipeline stages
+#   - request_trace_log   per-chat-query classifier/retrieval trace
+#   - posture_history     posture change trail
+#
+# All endpoints are tenant-scoped via the request's API key. The SPA
+# `#trace` page consumes these to render the trace timeline.
+# ─────────────────────────────────────────────────────────────────────────────
+
+@app.get("/api/v1/trace/summary", tags=["trace"])
+async def trace_summary(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    hours:    int         = 24,
+):
+    """KPI rollup for the trace dashboard header. Returns totals for
+    the last N hours: AI calls + cost, upload extractions, chat
+    requests. Everything is tenant-scoped."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT
+                    count(*)                                              AS ai_calls,
+                    coalesce(sum(cost_usd), 0)::numeric(12,4)             AS cost_usd,
+                    coalesce(sum(tokens_in), 0)                           AS tokens_in,
+                    coalesce(sum(tokens_out), 0)                          AS tokens_out,
+                    coalesce(round(avg(latency_ms)), 0)::int              AS avg_latency_ms,
+                    count(*) FILTER (WHERE error_type IS NOT NULL)        AS errors
+                  FROM ai_call_log
+                 WHERE tenant_id = %s::uuid
+                   AND called_at > NOW() - make_interval(hours => %s)
+                """,
+                (key_info.tenant_id, hours),
+            )
+            r = cur.fetchone() or (0, 0, 0, 0, 0, 0)
+            ai = {
+                "calls":         int(r[0] or 0),
+                "cost_usd":      float(r[1] or 0),
+                "tokens_in":     int(r[2] or 0),
+                "tokens_out":    int(r[3] or 0),
+                "avg_latency_ms": int(r[4] or 0),
+                "errors":        int(r[5] or 0),
+            }
+            # AI calls broken down by purpose
+            cur.execute(
+                """
+                SELECT purpose,
+                       count(*)                          AS n,
+                       coalesce(sum(cost_usd), 0)::numeric(12,4) AS cost_usd
+                  FROM ai_call_log
+                 WHERE tenant_id = %s::uuid
+                   AND called_at > NOW() - make_interval(hours => %s)
+                 GROUP BY purpose
+                 ORDER BY n DESC
+                """,
+                (key_info.tenant_id, hours),
+            )
+            ai_by_purpose = [
+                {"purpose": p, "calls": int(n), "cost_usd": float(c)}
+                for p, n, c in cur.fetchall()
+            ]
+            # Uploads
+            cur.execute(
+                """
+                SELECT count(*), count(*) FILTER (WHERE extraction_status = 'completed')
+                  FROM document_uploads
+                 WHERE tenant_id = %s::uuid
+                   AND uploaded_at > NOW() - make_interval(hours => %s)
+                """,
+                (key_info.tenant_id, hours),
+            )
+            u_total, u_ok = cur.fetchone() or (0, 0)
+            # Chat requests
+            cur.execute(
+                """
+                SELECT count(*)
+                  FROM request_trace_log
+                 WHERE tenant_id = %s::uuid
+                   AND traced_at > NOW() - make_interval(hours => %s)
+                """,
+                (key_info.tenant_id, hours),
+            )
+            chat_n = cur.fetchone()[0] or 0
+            # Posture changes
+            cur.execute(
+                """
+                SELECT count(*)
+                  FROM posture_history
+                 WHERE tenant_id = %s::uuid
+                   AND created_at > NOW() - make_interval(hours => %s)
+                """,
+                (key_info.tenant_id, hours),
+            )
+            posture_changes = cur.fetchone()[0] or 0
+        return {
+            "window_hours":   hours,
+            "ai":             ai,
+            "ai_by_purpose":  ai_by_purpose,
+            "uploads_total":  int(u_total or 0),
+            "uploads_completed": int(u_ok or 0),
+            "chat_requests":  int(chat_n or 0),
+            "posture_changes": int(posture_changes or 0),
+        }
+    finally:
+        pool.putconn(conn)
+
+
+@app.get("/api/v1/trace/ai-calls", tags=["trace"])
+async def trace_ai_calls(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    hours:    int          = 24,
+    purpose:  Optional[str] = None,
+    provider: Optional[str] = None,
+    errors_only: bool       = False,
+    limit:    int          = 100,
+):
+    """Recent AI calls, tenant-scoped. Sorted newest-first."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        where = ["tenant_id = %s::uuid",
+                 "called_at > NOW() - make_interval(hours => %s)"]
+        params: list = [key_info.tenant_id, hours]
+        if purpose:
+            where.append("purpose = %s")
+            params.append(purpose)
+        if provider:
+            where.append("provider = %s")
+            params.append(provider)
+        if errors_only:
+            where.append("error_type IS NOT NULL")
+        with conn.cursor() as cur:
+            cur.execute(
+                f"""
+                SELECT id, called_at, purpose, provider, model,
+                       latency_ms, tokens_in, tokens_out, cost_usd::text,
+                       error_type, error_detail,
+                       upload_id::text, session_id, request_id,
+                       prompt_preview, response_preview, metadata
+                  FROM ai_call_log
+                 WHERE {' AND '.join(where)}
+                 ORDER BY called_at DESC
+                 LIMIT %s
+                """,
+                params + [limit],
+            )
+            rows = cur.fetchall()
+        return {
+            "count": len(rows),
+            "calls": [
+                {
+                    "id":             str(r[0]),
+                    "called_at":      r[1].isoformat() if r[1] else None,
+                    "purpose":        r[2],
+                    "provider":       r[3],
+                    "model":          r[4],
+                    "latency_ms":     r[5],
+                    "tokens_in":      r[6],
+                    "tokens_out":     r[7],
+                    "cost_usd":       float(r[8]) if r[8] else None,
+                    "error_type":     r[9],
+                    "error_detail":   r[10],
+                    "upload_id":      r[11],
+                    "session_id":     r[12],
+                    "request_id":     r[13],
+                    "prompt_preview": r[14],
+                    "response_preview": r[15],
+                    "metadata":       r[16],
+                }
+                for r in rows
+            ],
+        }
+    finally:
+        pool.putconn(conn)
+
+
+@app.get("/api/v1/trace/intake", tags=["trace"])
+async def trace_intake(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    hours:    int          = 24,
+    limit:    int          = 100,
+):
+    """Per-upload pipeline trace — one row per (upload_id, stage).
+    Groups by upload_id in the client for a "one upload → its N stages"
+    timeline view."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT
+                    upload_id, filename, stage, stage_status, stage_ms,
+                    total_ms, token_estimate, page_count, section_count,
+                    extraction_path, doc_type, standard_ids,
+                    llm_calls, findings_raw, findings_kept,
+                    posture_created, posture_updated, posture_skipped,
+                    error_type, error_detail,
+                    traced_at
+                  FROM intake_trace_log
+                 WHERE tenant_id = %s::uuid
+                   AND traced_at > NOW() - make_interval(hours => %s)
+                 ORDER BY traced_at DESC
+                 LIMIT %s
+                """,
+                (key_info.tenant_id, hours, limit),
+            )
+            rows = cur.fetchall()
+        return {
+            "count": len(rows),
+            "entries": [
+                {
+                    "upload_id":        r[0],
+                    "filename":         r[1],
+                    "stage":            r[2],
+                    "stage_status":     r[3],
+                    "stage_ms":         r[4],
+                    "total_ms":         r[5],
+                    "token_estimate":   r[6],
+                    "page_count":       r[7],
+                    "section_count":    r[8],
+                    "extraction_path":  r[9],
+                    "doc_type":         r[10],
+                    "standard_ids":     r[11],
+                    "llm_calls":        r[12],
+                    "findings_raw":     r[13],
+                    "findings_kept":    r[14],
+                    "posture_created":  r[15],
+                    "posture_updated":  r[16],
+                    "posture_skipped":  r[17],
+                    "error_type":       r[18],
+                    "error_detail":     r[19],
+                    "traced_at":        r[20].isoformat() if r[20] else None,
+                }
+                for r in rows
+            ],
+        }
+    finally:
+        pool.putconn(conn)
+
+
+@app.get("/api/v1/trace/requests", tags=["trace"])
+async def trace_requests(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    hours:    int          = 24,
+    limit:    int          = 100,
+):
+    """Chat/RAG request trace — classifier + retrieval outcomes."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT
+                    request_id, traced_at, query_text,
+                    classifier_type, taxonomy_type, handler_name, strategy,
+                    topic_ref, policy_short_circuit,
+                    nodes_primary, nodes_secondary, vector_hits, doc_contexts
+                  FROM request_trace_log
+                 WHERE tenant_id = %s::uuid
+                   AND traced_at > NOW() - make_interval(hours => %s)
+                 ORDER BY traced_at DESC
+                 LIMIT %s
+                """,
+                (key_info.tenant_id, hours, limit),
+            )
+            rows = cur.fetchall()
+        return {
+            "count": len(rows),
+            "entries": [
+                {
+                    "request_id":    r[0],
+                    "traced_at":     r[1].isoformat() if r[1] else None,
+                    "query_text":    r[2],
+                    "classifier":    r[3],
+                    "taxonomy":      r[4],
+                    "handler":       r[5],
+                    "strategy":      r[6],
+                    "topic_ref":     r[7],
+                    "short_circuit": r[8],
+                    "nodes_primary":   r[9],
+                    "nodes_secondary": r[10],
+                    "vector_hits":   r[11],
+                    "doc_contexts":  r[12],
+                }
+                for r in rows
+            ],
+        }
     finally:
         pool.putconn(conn)
 

@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS ai_call_log (
     CONSTRAINT ai_call_log_purpose_check
         CHECK (purpose IN (
             'chat', 'classifier', 'polish', 'polish_short_circuit',
+            'rank_answer', 'compose', 'correct', 'verify',
             'extractor', 'extractor_pass2', 'enricher',
             'xfw_proposer', 'cascade',
             'embedding_query', 'embedding_index',

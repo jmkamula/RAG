@@ -313,6 +313,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <span class="nav-badge" id="nb-inbox" style="display:none"
             title="Unread notifications — red when any are urgent (critical or high severity)">—</span>
     </button>
+    <button class="nav-item" id="nav-trace" onclick="setMode('trace')"
+            title="Diagnostic trace: AI calls, intake pipeline stages, chat requests, posture changes">
+      <i class="ti ti-timeline-event" aria-hidden="true"></i> Trace
+    </button>
 
     <div class="sidebar-divider"></div>
 
@@ -575,6 +579,33 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
 
+    <!-- Trace toolbar -->
+    <div class="main-toolbar" id="toolbar-trace" style="display:none">
+      <div>
+        <div class="main-title">Trace</div>
+        <div class="main-sub">AI calls, uploads, chat requests, posture changes — the diagnostic timeline for your tenant.</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <label style="font-size:11px;color:#5C5A4F;margin-right:6px">Window:</label>
+        <select id="trace-window" onchange="loadTrace()" style="padding:4px 8px;border:1px solid #D4D1C2;border-radius:3px;font-family:inherit;font-size:11px;background:#fff">
+          <option value="1">Last hour</option>
+          <option value="24" selected>Last 24 hours</option>
+          <option value="168">Last 7 days</option>
+          <option value="720">Last 30 days</option>
+        </select>
+        <button class="btn-sm btn-outline" onclick="loadTrace()">
+          <i class="ti ti-refresh" aria-hidden="true"></i> Refresh
+        </button>
+      </div>
+    </div>
+
+    <!-- Trace body -->
+    <div class="main-body" id="body-trace" style="display:none">
+      <div id="trace-wrap" style="max-width:1080px;margin:18px auto;padding:0 20px">
+        <div class="empty"><i class="ti ti-loader-2" aria-hidden="true"></i><p>Loading trace…</p></div>
+      </div>
+    </div>
+
   </div>
 
   <!-- ── Detail panel ── -->
@@ -717,7 +748,7 @@ async function apiForm(path, formData) {
 // ── Mode switching ──
 function setMode(m) {
   mode = m;
-  ['dashboard','queue','chat','docs','profile','cascade','inbox','getstarted'].forEach(x => {
+  ['dashboard','queue','chat','docs','profile','cascade','inbox','getstarted','trace'].forEach(x => {
     const navEl = document.getElementById('nav-'+x);
     if (navEl) navEl.classList.toggle('active', x===m);
     const tbEl  = document.getElementById('toolbar-'+x);
@@ -734,6 +765,7 @@ function setMode(m) {
   if (m === 'inbox')      loadInbox();
   if (m === 'getstarted') loadGetStarted();
   if (m === 'docs')       populateFrameworkDropdown();
+  if (m === 'trace')      loadTrace();
 }
 
 // Populate the intake framework dropdown from the tenant's queryable
@@ -883,6 +915,128 @@ async function loadGetStarted() {
   } catch (e) {
     wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load your journey. Please refresh in a moment.</p></div>';
   }
+}
+
+// ── Trace page (Wave 4c, 2026-07-11) ──────────────────────────────────
+// Diagnostic timeline: unified view over ai_call_log, intake_trace_log,
+// request_trace_log, posture_history. KPI header + 4 event lists.
+async function loadTrace() {
+  const wrap = document.getElementById('trace-wrap');
+  wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading trace…</p></div>';
+  const hours = parseInt(document.getElementById('trace-window')?.value || '24', 10);
+  try {
+    const [summary, aiCalls, intake, requests] = await Promise.all([
+      api(`/api/v1/trace/summary?hours=${hours}`),
+      api(`/api/v1/trace/ai-calls?hours=${hours}&limit=60`),
+      api(`/api/v1/trace/intake?hours=${hours}&limit=60`),
+      api(`/api/v1/trace/requests?hours=${hours}&limit=60`),
+    ]);
+    renderTrace(summary, aiCalls, intake, requests);
+  } catch (e) {
+    wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load trace. Please refresh in a moment.</p></div>';
+  }
+}
+
+function renderTrace(summary, aiCalls, intake, requests) {
+  const esc  = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const wrap = document.getElementById('trace-wrap');
+  const ai   = summary.ai || {};
+  const kpi = (label, value, sub) => `
+    <div style="flex:1;min-width:140px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;padding:12px 14px">
+      <div style="font-size:10px;color:#9C9A8E;text-transform:uppercase;letter-spacing:0.5px">${esc(label)}</div>
+      <div style="font-size:22px;color:#3A382E;font-weight:600;margin-top:4px">${esc(value)}</div>
+      ${sub ? `<div style="font-size:10px;color:#7C7A6E;margin-top:2px">${esc(sub)}</div>` : ''}
+    </div>`;
+
+  // KPI row
+  const kpiRow = `
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+      ${kpi('AI calls',       ai.calls || 0,      `$${(ai.cost_usd || 0).toFixed(4)} total cost`)}
+      ${kpi('Tokens in/out',  `${(ai.tokens_in||0).toLocaleString()} / ${(ai.tokens_out||0).toLocaleString()}`, `~${(ai.avg_latency_ms||0)}ms avg`)}
+      ${kpi('Errors',         ai.errors || 0,     ai.errors ? 'in AI calls' : 'no failures')}
+      ${kpi('Uploads',        `${summary.uploads_completed||0}/${summary.uploads_total||0}`, 'completed/total')}
+      ${kpi('Chat requests',  summary.chat_requests || 0, '')}
+      ${kpi('Posture events', summary.posture_changes || 0, '')}
+    </div>`;
+
+  // Cost breakdown by purpose
+  const byPurpose = (summary.ai_by_purpose || []);
+  const purposeRow = byPurpose.length === 0 ? '' : `
+    <div style="background:#fff;border:1px solid #E8E5DA;border-radius:5px;padding:12px 16px;margin-bottom:16px">
+      <div style="font-size:11px;color:#5C5A4F;font-weight:600;margin-bottom:8px">AI cost by purpose</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        ${byPurpose.map(p => `
+          <span style="background:#F0EEE3;padding:3px 8px;border-radius:3px;font-size:11px;color:#3A382E">
+            ${esc(p.purpose)} · ${p.calls} · $${p.cost_usd.toFixed(4)}
+          </span>`).join('')}
+      </div>
+    </div>`;
+
+  // Section renderer helper
+  const section = (title, count, tableRows) => `
+    <div style="background:#fff;border:1px solid #E8E5DA;border-radius:5px;padding:12px 16px;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div style="font-size:12px;color:#3A382E;font-weight:600">${esc(title)}</div>
+        <div style="font-size:11px;color:#9C9A8E">${count} row(s)</div>
+      </div>
+      ${count > 0
+        ? `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:11px">${tableRows}</table></div>`
+        : `<div style="font-size:11px;color:#9C9A8E;padding:8px 4px">No activity in this window.</div>`}
+    </div>`;
+
+  const th  = c => `<th style="text-align:left;padding:4px 8px 6px;color:#7C7A6E;font-weight:500;border-bottom:1px solid #EEECE2;white-space:nowrap">${esc(c)}</th>`;
+  const td  = c => `<td style="padding:5px 8px;border-bottom:1px solid #F5F2E9;color:#3A382E;vertical-align:top">${c}</td>`;
+  const tdM = c => `<td style="padding:5px 8px;border-bottom:1px solid #F5F2E9;color:#5C5A4F;font-family:ui-monospace,monospace;vertical-align:top">${esc(c)}</td>`;
+
+  // AI calls table
+  const aiRows = aiCalls.calls || [];
+  const aiTable = `
+    <thead><tr>${['Time','Purpose','Provider','Model','Tokens','$','Latency','Error'].map(th).join('')}</tr></thead>
+    <tbody>${aiRows.map(c => `<tr>
+      ${tdM((c.called_at||'').slice(0,19).replace('T',' '))}
+      ${td(esc(c.purpose||''))}
+      ${td(esc(c.provider||''))}
+      ${tdM(c.model||'')}
+      ${td(`${c.tokens_in||0} / ${c.tokens_out||0}`)}
+      ${td(c.cost_usd != null ? '$'+c.cost_usd.toFixed(4) : '—')}
+      ${td((c.latency_ms||0)+'ms')}
+      ${td(c.error_type ? `<span style="color:#B8443E">${esc(c.error_type)}</span>` : '—')}
+    </tr>`).join('')}</tbody>`;
+
+  // Intake table
+  const intakeRows = intake.entries || [];
+  const intakeTable = `
+    <thead><tr>${['Time','File','Stage','Status','Findings kept','Duration','Error'].map(th).join('')}</tr></thead>
+    <tbody>${intakeRows.map(e => `<tr>
+      ${tdM((e.traced_at||'').slice(0,19).replace('T',' '))}
+      ${td(esc(e.filename || '—'))}
+      ${td(esc(e.stage||''))}
+      ${td(esc(e.stage_status||''))}
+      ${td(e.findings_kept != null ? e.findings_kept : '—')}
+      ${td((e.total_ms||e.stage_ms||0)+'ms')}
+      ${td(e.error_type ? `<span style="color:#B8443E">${esc(e.error_type)}</span>` : '—')}
+    </tr>`).join('')}</tbody>`;
+
+  // Chat request table
+  const reqRows = requests.entries || [];
+  const reqTable = `
+    <thead><tr>${['Time','Classifier','Handler','Query','Nodes','Vector'].map(th).join('')}</tr></thead>
+    <tbody>${reqRows.map(e => `<tr>
+      ${tdM((e.traced_at||'').slice(0,19).replace('T',' '))}
+      ${td(esc(e.classifier||''))}
+      ${td(esc(e.handler||''))}
+      ${td(esc((e.query_text||'').slice(0,80)))}
+      ${td(`${e.nodes_primary||0}p / ${e.nodes_secondary||0}s`)}
+      ${td(e.vector_hits||0)}
+    </tr>`).join('')}</tbody>`;
+
+  wrap.innerHTML = `
+    ${kpiRow}
+    ${purposeRow}
+    ${section('AI calls',       aiRows.length,     aiTable)}
+    ${section('Intake pipeline', intakeRows.length, intakeTable)}
+    ${section('Chat requests',   reqRows.length,   reqTable)}
+  `;
 }
 
 function renderGetStarted(d) {
