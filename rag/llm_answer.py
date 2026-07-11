@@ -2041,59 +2041,31 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         max_tokens: int = 1500,
         step:       str = "answer",
     ) -> str:
-        """Single OpenAI call. Returns response text."""
-        client = self._get_client()
-        t0 = time.time()
-        # Wave 4b — record every LLM call in ai_call_log
-        from rag.ai_trace import log_llm_call
-        try:
-            response = client.chat.completions.create(
-                model       = model,
-                temperature = self.temperature,
-                max_tokens  = max_tokens,
-                messages    = [
-                    {"role": "system", "content": system},
-                    {"role": "user",   "content": user},
-                ],
-            )
-            result = response.choices[0].message.content.strip()
-            latency = round((time.time() - t0) * 1000)
-            logger = get_logger()
-            if logger:
-                logger.log_call(
-                    step       = step,
-                    model      = model,
-                    system     = system[:300],
-                    user       = user[:800],
-                    response   = result,
-                    latency_ms = latency,
-                )
-            _usage = getattr(response, "usage", None)
-            log_llm_call(
-                purpose    = "chat" if step in ("answer","compose") else (step or "chat"),
-                provider   = "openai",
+        """Single LLM call via the provider-neutral client."""
+        from rag.llm_client import call as llm_call
+        response = llm_call(
+            system      = system,
+            user        = user,
+            model       = model,
+            purpose     = "chat" if step in ("answer","compose") else (step or "chat"),
+            max_tokens  = max_tokens,
+            temperature = self.temperature,
+            metadata    = {"step": step},
+        )
+        if not response.ok:
+            raise RuntimeError(f"LLM call failed ({model}): {response.error}")
+        result = response.text.strip()
+        logger = get_logger()
+        if logger:
+            logger.log_call(
+                step       = step,
                 model      = model,
-                latency_ms = latency,
-                tokens_in  = getattr(_usage, "prompt_tokens", None)     if _usage else None,
-                tokens_out = getattr(_usage, "completion_tokens", None) if _usage else None,
-                prompt     = f"[system] {system}\n\n[user] {user}",
+                system     = system[:300],
+                user       = user[:800],
                 response   = result,
-                metadata   = {"step": step},
+                latency_ms = response.latency_ms,
             )
-            return result
-        except Exception as e:
-            latency = round((time.time() - t0) * 1000)
-            log_llm_call(
-                purpose      = "chat" if step in ("answer","compose") else (step or "chat"),
-                provider     = "openai",
-                model        = model,
-                latency_ms   = latency,
-                prompt       = f"[system] {system}\n\n[user] {user}",
-                error_type   = type(e).__name__,
-                error_detail = str(e)[:500],
-                metadata     = {"step": step},
-            )
-            raise RuntimeError(f"LLM call failed ({model}): {e}")
+        return result
 
     def _verify(
         self,
@@ -2102,8 +2074,7 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         posture:       dict | None = None,
         question_type: str | None  = None,  # e.g. "definition", "gap_analysis"
     ) -> VerificationResult:
-        """Run verification pass using gpt-4o-mini."""
-        client = self._get_client()
+        """Run verification pass using verify_model."""
         t0 = time.time()
 
         # Build posture preamble so verifier knows findings are factual inputs
@@ -2132,32 +2103,19 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             f"CONTEXT:\n{context_text[:5000]}\n\n"
             f"ANSWER:\n{answer_text}"
         )
-        from rag.ai_trace import log_llm_call
-        try:
-            response = client.chat.completions.create(
-                model       = self.verify_model,
-                temperature = 0.0,
-                max_tokens  = 400,
-                messages    = [
-                    {"role": "system", "content": VERIFICATION_PROMPT},
-                    {"role": "user",   "content": prompt},
-                ],
-            )
-            raw    = response.choices[0].message.content.strip()
+        from rag.llm_client import call as llm_call
+        response = llm_call(
+            system      = VERIFICATION_PROMPT,
+            user        = prompt,
+            model       = self.verify_model,
+            purpose     = "chat",
+            max_tokens  = 400,
+            temperature = 0.0,
+            metadata    = {"step": "verify", "question_type": question_type},
+        )
+        if response.ok:
+            raw    = response.text.strip()
             parsed = self._parse_json(raw)
-            _usage = getattr(response, "usage", None)
-            log_llm_call(
-                purpose    = "chat",
-                provider   = "openai",
-                model      = self.verify_model,
-                latency_ms = round((time.time() - t0) * 1000),
-                tokens_in  = getattr(_usage, "prompt_tokens", None)     if _usage else None,
-                tokens_out = getattr(_usage, "completion_tokens", None) if _usage else None,
-                prompt     = f"[system] {VERIFICATION_PROMPT[:300]}\n\n[user] {prompt}",
-                response   = raw,
-                metadata   = {"step": "verify", "question_type": question_type},
-            )
-
             if parsed:
                 result = VerificationResult(
                     verdict     = parsed.get("verdict", "pass"),
@@ -2174,21 +2132,10 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                         issues      = result.issues,
                         corrections = result.corrections,
                         reasoning   = result.reasoning,
-                        latency_ms  = round((time.time() - t0) * 1000),
+                        latency_ms  = response.latency_ms,
                         model       = self.verify_model,
                     )
                 return result
-        except Exception as e:
-            log_llm_call(
-                purpose      = "chat",
-                provider     = "openai",
-                model        = self.verify_model,
-                latency_ms   = round((time.time() - t0) * 1000),
-                prompt       = f"[system] {VERIFICATION_PROMPT[:300]}\n\n[user] {prompt}",
-                error_type   = type(e).__name__,
-                error_detail = str(e)[:500],
-                metadata     = {"step": "verify"},
-            )
 
         return VerificationResult(
             verdict    = "pass",
@@ -2222,43 +2169,31 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             f"Start your answer directly — do not acknowledge these instructions "
             f"or say 'here is the corrected answer'. Just give the answer."
         )
-        client = self._get_client()
-        from rag.ai_trace import log_llm_call
-        _t0 = time.time()
-        try:
-            response = client.chat.completions.create(
-                model       = self.answer_model,
-                temperature = self.temperature,
-                max_tokens  = self.max_tokens,
-                messages    = [
-                    {"role": "system",    "content": system},
-                    {"role": "user",      "content":
-                        self._build_user_message(query, context)},
-                    {"role": "assistant", "content": original},
-                    {"role": "user",      "content": correction_prompt},
-                ],
-            )
-            corrected = response.choices[0].message.content.strip()
-            _usage = getattr(response, "usage", None)
-            log_llm_call(
-                purpose    = "chat",
-                provider   = "openai",
-                model      = self.answer_model,
-                latency_ms = round((time.time() - _t0) * 1000),
-                tokens_in  = getattr(_usage, "prompt_tokens", None)     if _usage else None,
-                tokens_out = getattr(_usage, "completion_tokens", None) if _usage else None,
-                prompt     = correction_prompt,
-                response   = corrected,
-                metadata   = {"step": "correct"},
-            )
+        from rag.llm_client import call as llm_call
+        response = llm_call(
+            system      = system,
+            user        = "",  # overridden by messages
+            model       = self.answer_model,
+            purpose     = "chat",
+            max_tokens  = self.max_tokens,
+            temperature = self.temperature,
+            metadata    = {"step": "correct"},
+            messages    = [
+                {"role": "system",    "content": system},
+                {"role": "user",      "content": self._build_user_message(query, context)},
+                {"role": "assistant", "content": original},
+                {"role": "user",      "content": correction_prompt},
+            ],
+        )
+        if not response.ok:
+            return original, False, f"Correction failed: {response.error}"
 
-            # Strip any preamble the model adds despite instructions
-            corrected = self._strip_correction_preamble(corrected)
+        corrected = response.text.strip()
+        # Strip any preamble the model adds despite instructions
+        corrected = self._strip_correction_preamble(corrected)
 
-            note = f"Corrected after verification: {'; '.join(issues[:2])}"
-            return corrected, True, note
-        except Exception as e:
-            return original, False, f"Correction failed: {e}"
+        note = f"Corrected after verification: {'; '.join(issues[:2])}"
+        return corrected, True, note
 
     # Preamble patterns the model uses when acknowledging corrections
     _PREAMBLE_PATTERNS = [

@@ -229,7 +229,7 @@ def _llm_classify(doc: ParsedDocument, api_key: str) -> None:
     Use LLM to classify doc_type and standard when keyword detection fails.
     Small, fast call — first 1000 chars of document + filename.
     """
-    import urllib.request
+    from rag.llm_client import call as llm_call
 
     preview = doc.full_text[:1000]
     prompt  = f"""You are classifying a compliance document.
@@ -248,41 +248,20 @@ Return JSON only:
 }}"""
 
     try:
-        from rag.ai_trace import trace_llm_call
-        body = json.dumps({
-            "model":      "claude-haiku-4-5-20251001",
-            "max_tokens": 300,
-            "messages":   [{"role": "user", "content": prompt}],
-        }).encode()
-
-        req = urllib.request.Request(
-            "https://api.anthropic.com/v1/messages",
-            data    = body,
-            headers = {
-                "Content-Type":      "application/json",
-                "x-api-key":         api_key,
-                "anthropic-version": "2023-06-01",
-            },
+        response = llm_call(
+            system     = "",
+            user       = prompt,
+            model      = "claude-haiku-4-5-20251001",
+            purpose    = "enricher",
+            max_tokens = 300,
+            timeout_s  = 15.0,
+            tenant_id  = getattr(doc, "tenant_id", None),
+            upload_id  = getattr(doc, "upload_id", None),
+            metadata   = {"doc_name": doc.original_name},
         )
-        with trace_llm_call(
-            purpose   = "enricher",
-            provider  = "anthropic",
-            model     = "claude-haiku-4-5-20251001",
-            tenant_id = getattr(doc, "tenant_id", None),
-            upload_id = getattr(doc, "upload_id", None),
-            prompt    = prompt,
-            metadata  = {"doc_name": doc.original_name},
-        ) as _trace:
-            with urllib.request.urlopen(req, timeout=15) as resp:
-                data = json.loads(resp.read())
-            _usage = data.get("usage") or {}
-            _text_out = data["content"][0]["text"] if data.get("content") else None
-            _trace.set_response(
-                response   = _text_out,
-                tokens_in  = _usage.get("input_tokens"),
-                tokens_out = _usage.get("output_tokens"),
-            )
-        text = data["content"][0]["text"]
+        if not response.ok:
+            raise RuntimeError(response.error)
+        text = response.text
         # Strip any markdown fences
         text = re.sub(r'```json\s*|\s*```', '', text).strip()
         result = json.loads(text)

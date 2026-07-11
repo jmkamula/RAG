@@ -1745,20 +1745,19 @@ class QueryClassifier:
         max_tokens: int = 200,
         step:       str = "classify",
     ) -> str:
-        """Call OpenAI with a single user message. Returns raw text."""
-        import time as _time
-        from rag.ai_trace import log_llm_call
-        client = self._get_openai()
-        _t0 = _time.time()
-        try:
-            response = client.chat.completions.create(
-                model       = model,
-                temperature = self.temperature,
-                max_tokens  = max_tokens,
-                messages    = [{"role": "user", "content": prompt}],
-            )
-            result = response.choices[0].message.content.strip()
-            _lat = round((_time.time() - _t0) * 1000)
+        """LLM call via the provider-neutral client. Returns raw text."""
+        from rag.llm_client import call as llm_call
+        response = llm_call(
+            system      = "",
+            user        = prompt,
+            model       = model,
+            purpose     = "classifier",
+            max_tokens  = max_tokens,
+            temperature = self.temperature,
+            metadata    = {"step": step},
+        )
+        if response.ok:
+            result = response.text.strip()
             _logger = get_logger()
             if _logger:
                 _logger.log_call(
@@ -1767,33 +1766,10 @@ class QueryClassifier:
                     system     = "",
                     user       = prompt[:600],
                     response   = result,
-                    latency_ms = _lat,
+                    latency_ms = response.latency_ms,
                 )
-            _usage = getattr(response, "usage", None)
-            log_llm_call(
-                purpose    = "classifier",
-                provider   = "openai",
-                model      = model,
-                latency_ms = _lat,
-                tokens_in  = getattr(_usage, "prompt_tokens", None)     if _usage else None,
-                tokens_out = getattr(_usage, "completion_tokens", None) if _usage else None,
-                prompt     = prompt,
-                response   = result,
-                metadata   = {"step": step},
-            )
             return result
-        except Exception as e:
-            log_llm_call(
-                purpose      = "classifier",
-                provider     = "openai",
-                model        = model,
-                latency_ms   = round((_time.time() - _t0) * 1000),
-                prompt       = prompt,
-                error_type   = type(e).__name__,
-                error_detail = str(e)[:500],
-                metadata     = {"step": step},
-            )
-            return f"[LLM error: {e}]"
+        return f"[LLM error: {response.error}]"
 
     def _parse_json(self, raw: str) -> dict | None:
         """Parse JSON from LLM response, stripping markdown fences."""

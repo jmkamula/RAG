@@ -1450,55 +1450,23 @@ verbatim text, emit one finding:
 
 Omit any MUST you cannot ground. Do not invent quotes. Do not guess."""
 
-    body = json.dumps({
-        "model":      EXTRACT_MODEL,
-        "max_tokens": 4000,
-        "system":     _PASS2_SYSTEM_PROMPT,
-        "messages":   [{"role": "user", "content": user_prompt}],
-    }).encode()
-
-    req = urllib.request.Request(
-        "https://api.anthropic.com/v1/messages",
-        data    = body,
-        headers = {
-            "Content-Type":      "application/json",
-            "x-api-key":         api_key,
-            "anthropic-version": "2023-06-01",
-        },
+    from rag.llm_client import call as llm_call
+    response = llm_call(
+        system     = _PASS2_SYSTEM_PROMPT,
+        user       = user_prompt,
+        model      = EXTRACT_MODEL,
+        purpose    = "extractor_pass2",
+        max_tokens = 4000,
+        timeout_s  = 60.0,
+        metadata   = {"doc_name": doc_name, "leaf_id": leaf_id,
+                      "evidence_type": evidence_type},
     )
-    from rag.ai_trace import trace_llm_call
-    try:
-        with trace_llm_call(
-            purpose  = "extractor_pass2",
-            provider = "anthropic",
-            model    = EXTRACT_MODEL,
-            prompt   = user_prompt,
-            metadata = {"doc_name": doc_name, "leaf_id": leaf_id,
-                        "evidence_type": evidence_type},
-        ) as _trace:
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                data = json.loads(resp.read())
-            _usage = data.get("usage") or {}
-            _text_out = data["content"][0]["text"] if data.get("content") else None
-            _trace.set_response(
-                response   = _text_out,
-                tokens_in  = _usage.get("input_tokens"),
-                tokens_out = _usage.get("output_tokens"),
-            )
-        return data["content"][0]["text"]
-    except urllib.error.HTTPError as e:
-        try:
-            err_body = e.read().decode()[:500]
-        except Exception:
-            err_body = "<no body>"
+    if not response.ok:
         logger.error(
-            f"Pass-2 LLM call failed for {doc_name} [{leaf_id}]: "
-            f"HTTP {e.code}: {err_body}"
+            f"Pass-2 LLM call failed for {doc_name} [{leaf_id}]: {response.error}"
         )
         return "[]"
-    except Exception as e:
-        logger.error(f"Pass-2 LLM call failed for {doc_name} [{leaf_id}]: {e}")
-        return "[]"
+    return response.text
 
 
 def _run_pass2(
@@ -1697,56 +1665,23 @@ def _llm_extract(
         control_list = control_list,
     ) + must_section
 
-    body = json.dumps({
-        "model":      EXTRACT_MODEL,
-        "max_tokens": 4000,
-        "system":     _SYSTEM_PROMPT,
-        "messages":   [{"role": "user", "content": user_prompt}],
-    }).encode()
-
-    req = urllib.request.Request(
-        "https://api.anthropic.com/v1/messages",
-        data    = body,
-        headers = {
-            "Content-Type":      "application/json",
-            "x-api-key":         api_key,
-            "anthropic-version": "2023-06-01",
-        },
+    from rag.llm_client import call as llm_call
+    response = llm_call(
+        system     = _SYSTEM_PROMPT,
+        user       = user_prompt,
+        model      = EXTRACT_MODEL,
+        purpose    = "extractor",
+        max_tokens = 4000,
+        timeout_s  = 60.0,
+        metadata   = {"doc_name": doc_name, "chunk_hint": chunk_hint,
+                      "n_controls": len(controls)},
     )
-
-    from rag.ai_trace import trace_llm_call
-    try:
-        with trace_llm_call(
-            purpose  = "extractor",
-            provider = "anthropic",
-            model    = EXTRACT_MODEL,
-            prompt   = user_prompt,
-            metadata = {"doc_name": doc_name, "chunk_hint": chunk_hint,
-                        "n_controls": len(controls)},
-        ) as _trace:
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                data = json.loads(resp.read())
-            _usage = data.get("usage") or {}
-            _text_out = data["content"][0]["text"] if data.get("content") else None
-            _trace.set_response(
-                response   = _text_out,
-                tokens_in  = _usage.get("input_tokens"),
-                tokens_out = _usage.get("output_tokens"),
-            )
-        return data["content"][0]["text"]
-    except urllib.error.HTTPError as e:
-        try:
-            err_body = e.read().decode()[:500]
-        except Exception:
-            err_body = "<no body>"
+    if not response.ok:
         logger.error(
-            f"LLM extraction failed for {doc_name} [{chunk_hint}]: "
-            f"HTTP {e.code}: {err_body}"
+            f"LLM extraction failed for {doc_name} [{chunk_hint}]: {response.error}"
         )
         return "[]"
-    except Exception as e:
-        logger.error(f"LLM extraction failed for {doc_name} [{chunk_hint}]: {e}")
-        return "[]"
+    return response.text
 
 
 # =============================================================================
