@@ -188,6 +188,289 @@ def _build_extend_pool(
     return out
 
 
+_CRITIC_SYSTEM_PROMPT = """You are a compliance evidence critic reviewing a document.
+
+Deterministic signals (keyword fingerprints, semantic embeddings, ref
+regex) have proposed which controls this document covers. Your job:
+
+1. CONFIRM each priming-set proposal by finding a VERBATIM quote from
+   the document that grounds the control's requirement. When the
+   priming control lists candidate MUSTs, you MUST pick the ONE that
+   the quote best evidences (this binds the finding at the MUST level,
+   which is how the engine measures leaf satisfaction). If you can't
+   ground the control at all, REJECT with a short reason.
+
+2. EXTEND: independently identify OTHER controls this document covers
+   that the signals missed. For each, provide a verbatim quote. You
+   MUST only pick refs from the EXTEND POOL provided below. If you
+   believe the doc covers a control NOT in the pool, use
+   `flagged_missing_control` — do NOT invent refs.
+
+RULES:
+- Every quote must appear VERBATIM in the document body. Rejecting a
+  wrong signal is better than fabricating a confirmation.
+- Being cautious is better than being wrong.
+- Do NOT reference control refs outside the priming set or extend pool.
+- Confidence: "high" if the quote is unambiguous and specific; "medium"
+  if broadly relevant; "low" if only weakly implied (rare — prefer to
+  reject).
+
+Respond ONLY with valid JSON matching this schema (no prose before/after):
+
+{
+  "confirmed": [
+    {"control_ref": "A.7.2.3",
+     "checklist_item_id": "item:A.7.2.3:...",   // REQUIRED when candidate MUSTs are listed; pick the id whose text best matches your quote
+     "quote": "<verbatim from document>",
+     "confidence": "high|medium|low"}
+  ],
+  "rejected": [
+    {"control_ref": "A.7.5.2",
+     "reason": "<why the signal was wrong for this doc>"}
+  ],
+  "extended": [
+    {"control_ref": "A.7.4.5",
+     "checklist_item_id": "item:...",   // optional
+     "quote": "<verbatim from document>",
+     "confidence": "high|medium|low"}
+  ],
+  "flagged_missing_control": [
+    {"guess_ref": "A.5.19",
+     "reason": "<what evidence in the doc suggests a control not in the pool>"}
+  ]
+}
+"""
+
+
+def _format_priming_block(priming: list[PrimingControl]) -> str:
+    """Human-readable priming section for the prompt."""
+    if not priming:
+        return "(no signals proposed anything — extend from the pool below)"
+    lines: list[str] = []
+    for p in priming:
+        sources = " + ".join(p.signal_sources)
+        lines.append(
+            f'  - control_ref: "{p.control_ref}"  title: "{p.control_title}"  '
+            f'signals: {sources}  strength: {p.strength_score}'
+        )
+        # Include up to 5 candidate MUSTs so the LLM can bind to the right one
+        for m in p.candidate_musts[:5]:
+            mid  = m.get("must_id") or ""
+            text = m.get("text") or ""
+            src  = m.get("source", "catalog")
+            lines.append(f'      * {mid}  [{src}]  {text[:180]}')
+    return "\n".join(lines)
+
+
+def _format_extend_pool_block(pool: list[ExtendPoolControl]) -> str:
+    """Compact extend-pool listing — one line per control."""
+    if not pool:
+        return "(extend pool unavailable — confirm/reject only)"
+    lines: list[str] = []
+    for e in pool:
+        title = (e.title or "").replace('"', "'")
+        desc  = (e.description or "").replace("\n", " ")[:80]
+        lines.append(f'  - {e.control_ref} ({e.standard_id}): {title}  — {desc}')
+    return "\n".join(lines)
+
+
+def _build_critic_prompt(
+    doc_text:    str,
+    doc_name:    str,
+    priming:     list[PrimingControl],
+    extend_pool: list[ExtendPoolControl],
+) -> str:
+    """Assemble the full user prompt from priming + extend pool + doc text."""
+    priming_block   = _format_priming_block(priming)
+    extend_block    = _format_extend_pool_block(extend_pool)
+
+    return f"""DOCUMENT: {doc_name}
+────────────────────────────────────────────────────────────────────
+{doc_text[:60000]}
+────────────────────────────────────────────────────────────────────
+
+DETERMINISTIC SIGNALS SAY THIS DOC PROBABLY COVERS THESE CONTROLS
+(priming set — confirm or reject each):
+
+{priming_block}
+
+EXTEND POOL — additional controls that MAY apply if you find evidence
+(refs listed here are the ONLY valid refs for the "extended" step):
+
+{extend_block}
+
+Now respond with the JSON structure specified in the system prompt."""
+
+
+def _parse_critic_response(
+    raw:          str,
+    valid_refs:   set[str],
+    valid_musts:  dict[str, set[str]],   # control_ref → set of valid must_ids
+) -> dict:
+    """Parse the critic-verifier JSON response. Returns
+    {confirmed, rejected, extended, flagged_missing_control} with
+    stripped/validated entries. Refs outside `valid_refs` are dropped
+    from confirmed/extended (LLM tried to reference something not in
+    priming+pool). checklist_item_id is dropped if it's not in the
+    control's valid_musts (defensive against hallucinated ids)."""
+    import json as _json
+    import re as _re
+
+    raw = _re.sub(r'```json\s*|\s*```', '', raw).strip()
+    if not raw or raw == "{}":
+        return {"confirmed": [], "rejected": [], "extended": [], "flagged_missing_control": []}
+    try:
+        data = _json.loads(raw)
+    except _json.JSONDecodeError as e:
+        # Salvage the leading JSON object if the model appended prose
+        last_brace = raw.rfind("}")
+        if last_brace > 0:
+            try:
+                data = _json.loads(raw[: last_brace + 1])
+            except Exception:
+                logger.warning("critic_verifier parse error: %s", e)
+                return {"confirmed": [], "rejected": [], "extended": [], "flagged_missing_control": []}
+        else:
+            logger.warning("critic_verifier parse error: %s", e)
+            return {"confirmed": [], "rejected": [], "extended": [], "flagged_missing_control": []}
+
+    def _clean_entry(e: dict, allow_musts: bool = True) -> Optional[dict]:
+        cref = (e.get("control_ref") or "").strip()
+        if not cref or cref not in valid_refs:
+            return None
+        item_id = (e.get("checklist_item_id") or "").strip() or None
+        if item_id and allow_musts:
+            allowed = valid_musts.get(cref) or set()
+            if item_id not in allowed:
+                item_id = None  # hallucinated — drop silently
+        quote = (e.get("quote") or "").strip()
+        conf  = (e.get("confidence") or "medium").strip().lower()
+        if conf not in ("high", "medium", "low"):
+            conf = "medium"
+        if not quote or len(quote) < 20:
+            return None
+        return {
+            "control_ref":       cref,
+            "checklist_item_id": item_id,
+            "quote":             quote,
+            "confidence":        conf,
+        }
+
+    out = {
+        "confirmed": [],
+        "rejected":  [],
+        "extended":  [],
+        "flagged_missing_control": [],
+    }
+    for e in (data.get("confirmed") or []):
+        c = _clean_entry(e)
+        if c: out["confirmed"].append(c)
+    for e in (data.get("rejected") or []):
+        cref = (e.get("control_ref") or "").strip()
+        reason = (e.get("reason") or "").strip()[:400]
+        if cref:
+            out["rejected"].append({"control_ref": cref, "reason": reason})
+    for e in (data.get("extended") or []):
+        c = _clean_entry(e)
+        if c: out["extended"].append(c)
+    for e in (data.get("flagged_missing_control") or []):
+        gref   = (e.get("guess_ref") or "").strip()
+        reason = (e.get("reason") or "").strip()[:400]
+        if gref:
+            out["flagged_missing_control"].append({"guess_ref": gref, "reason": reason})
+    return out
+
+
+def _extract_critic_verifier(
+    doc,                        # ParsedDocument
+    priming:      list[PrimingControl],
+    extend_pool:  list[ExtendPoolControl],
+    model:        str = "claude-sonnet-4-6",
+    max_tokens:   int = 4000,
+    timeout_s:    float = 90.0,
+) -> tuple[dict, Optional[str]]:
+    """Run the critic-verifier LLM pass. Returns (parsed_response, error).
+
+    The parsed dict has {confirmed, rejected, extended, flagged_missing_control}.
+    Error is None on success, else the LlmResponse.error string. Never
+    raises — silent-fail contract of the whole intake stage.
+
+    IMPORTANT: this function does NOT convert to DocumentFinding — that's
+    done by the caller so grounding + posture-writer integration stays
+    in one place (extractor.py). This function only handles the LLM
+    interaction + response validation.
+    """
+    from rag.llm_client import call as llm_call
+
+    doc_text = doc.markdown or doc.full_text or ""
+    if not doc_text.strip():
+        return ({"confirmed": [], "rejected": [], "extended": [], "flagged_missing_control": []},
+                "empty doc text")
+
+    prompt = _build_critic_prompt(
+        doc_text    = doc_text,
+        doc_name    = getattr(doc, "original_name", "") or "unnamed",
+        priming     = priming,
+        extend_pool = extend_pool,
+    )
+
+    metadata = {
+        "step":          "critic_verifier",
+        "doc_name":      getattr(doc, "original_name", ""),
+        "priming_size":  len(priming),
+        "pool_size":     len(extend_pool),
+    }
+
+    # Try up to twice — LLM structured-JSON output is stochastic; a
+    # malformed response on attempt 1 usually parses cleanly on retry
+    # (same prompt, same temperature=0.0, different token sample).
+    response = None
+    for attempt in (1, 2):
+        response = llm_call(
+            system      = _CRITIC_SYSTEM_PROMPT,
+            user        = prompt,
+            model       = model,
+            purpose     = "extractor",
+            max_tokens  = max_tokens,
+            temperature = 0.0,
+            timeout_s   = timeout_s,
+            metadata    = {**metadata, "attempt": attempt},
+        )
+        if not response.ok:
+            break
+        # Quick parse check — if it parses, use this attempt
+        import json as _json_probe
+        import re as _re_probe
+        _probe_raw = _re_probe.sub(r'```json\s*|\s*```', '', response.text).strip()
+        try:
+            _json_probe.loads(_probe_raw)
+            break   # parsed — done
+        except _json_probe.JSONDecodeError:
+            if attempt == 2:
+                logger.warning("critic_verifier: both attempts returned malformed JSON")
+
+    if not response.ok:
+        return ({"confirmed": [], "rejected": [], "extended": [], "flagged_missing_control": []},
+                response.error)
+
+    # Build the valid ref/must sets from priming + extend pool so the
+    # parser can drop anything the LLM invented.
+    valid_refs: set[str] = set()
+    valid_musts: dict[str, set[str]] = {}
+    for p in priming:
+        valid_refs.add(p.control_ref)
+        valid_musts.setdefault(p.control_ref, set()).update(
+            m.get("must_id") for m in p.candidate_musts if m.get("must_id")
+        )
+    for e in extend_pool:
+        valid_refs.add(e.control_ref)
+        # Extend pool doesn't carry MUSTs — LLM can propose any MUST
+        # for extend controls; caller validates against Neo4j downstream
+
+    parsed = _parse_critic_response(response.text, valid_refs, valid_musts)
+    return parsed, None
+
+
 def build_control_meta_from_neo4j(control_refs: list[str], driver) -> dict[str, dict]:
     """Build the {control_ref → {title, standard_id, musts:[...]}} map
     from Neo4j. Used by _build_priming_set to populate control titles
