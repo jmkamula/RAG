@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 import time
 import urllib.request
@@ -283,7 +284,18 @@ def extract(
         }
         doc.extraction_metrics["llm_leaves_after_fp_coverage"] = len(leaf_musts)
 
-    if doc.extraction_path == ExtractionPath.FULL_DOCUMENT:
+    # Feature flag — Phase 5 of critic-verifier arc (2026-07-12).
+    # When USE_CRITIC_VERIFIER_PASS=1 (env), replace the current
+    # scan-against-candidate-list pass-1 with the critic-verifier
+    # LLM call (confirm/reject/extend). Fingerprint findings still
+    # emit as a signal source; critic-verifier reads them via the
+    # priming set builder. Default off — Wave 4 pipeline is
+    # authoritative until we A/B on Arion's uploaded corpus.
+    if os.getenv("USE_CRITIC_VERIFIER_PASS", "").lower() in ("1", "true", "yes"):
+        llm_findings = _run_critic_verifier_pass(
+            doc, scoped, fp_findings, fp_covered,
+        )
+    elif doc.extraction_path == ExtractionPath.FULL_DOCUMENT:
         llm_findings = _extract_full(doc, scoped, api_key, leaf_musts=leaf_musts)
     else:  # SECTION_BASED
         llm_findings = _extract_sections(doc, scoped, api_key, leaf_musts=leaf_musts)
@@ -291,6 +303,142 @@ def extract(
     findings = fp_findings + llm_findings
     _finalize_yield_metrics(doc, findings)
     return findings
+
+
+def _run_critic_verifier_pass(
+    doc:            "ParsedDocument",
+    scoped:         list[dict],
+    fp_findings:    list[DocumentFinding],
+    fp_covered:     set[str],
+) -> list[DocumentFinding]:
+    """Adapter — invoke the critic-verifier LLM pass and convert its
+    structured output into DocumentFinding objects compatible with
+    the existing writer. Silent-fail: returns [] on any error so the
+    intake never blocks on this experimental path.
+    """
+    from rag.intake.critic_verifier import (
+        _build_priming_set, _build_extend_pool,
+        build_control_meta_from_neo4j, _extract_critic_verifier,
+    )
+    from rag.intake.must_embedding_lookup import semantic_controls_in_scope
+    import os as _os
+
+    try:
+        # Signal collection — fingerprint hits, semantic top-K, explicit refs
+        fingerprint_hits = [
+            {"control_ref":  f.control_ref,
+             "must_id":      f.checklist_item_id,
+             "standard_id":  f.standard_id}
+            for f in (fp_findings or [])
+        ]
+        semantic_top_k = semantic_controls_in_scope(
+            doc_text    = doc.markdown or doc.full_text,
+            tenant_stds = doc.standard_ids or None,
+        ) or set()
+        explicit_refs = set(doc.explicit_refs or [])
+
+        # Control metadata (title, standard_id, MUSTs) from Neo4j —
+        # needed for the priming set candidate MUSTs display
+        from rag.posture_loader import _build_engine_neo4j_driver
+        driver = _build_engine_neo4j_driver()
+        all_refs = {h["control_ref"] for h in fingerprint_hits} | semantic_top_k | explicit_refs
+        meta = build_control_meta_from_neo4j(list(all_refs), driver) if driver else {}
+        try:
+            driver and driver.close()
+        except Exception:
+            pass
+
+        priming     = _build_priming_set(fingerprint_hits, semantic_top_k, explicit_refs, meta, max_size=10)
+        extend_pool = _build_extend_pool(doc.full_text, tenant_stds=doc.standard_ids or None, pool_size=100)
+
+        # Telemetry — surface on extraction_metrics so the trace log picks up
+        doc.extraction_metrics["critic_priming_size"] = len(priming)
+        doc.extraction_metrics["critic_pool_size"]    = len(extend_pool)
+
+        if not priming and not extend_pool:
+            logger.info(
+                "critic_verifier: no signals + no pool for %s — skipping",
+                doc.original_name,
+            )
+            return []
+
+        parsed, err = _extract_critic_verifier(doc, priming, extend_pool)
+        if err:
+            logger.warning("critic_verifier failed for %s: %s", doc.original_name, err)
+            return []
+
+        # Convert confirmed + extended into DocumentFinding objects.
+        # Grounding filter applied AFTER the parse so the write path
+        # still enforces "quote must appear in body" (defensive against
+        # LLM hallucinating quotes despite the prompt rules).
+        results: list[DocumentFinding] = []
+        _seen: set[tuple[str, str, str]] = set()   # (ctrl, item, quote-hash) dedup
+
+        for entry in (parsed.get("confirmed") or []) + (parsed.get("extended") or []):
+            quote = entry.get("quote") or ""
+            if not _evidence_grounded(quote, doc):
+                # Drop hallucinated quote — the LLM said something in
+                # the doc but our substring/normalise check disagrees.
+                continue
+            key = (entry["control_ref"], entry.get("checklist_item_id") or "", quote[:80])
+            if key in _seen:
+                continue
+            _seen.add(key)
+
+            # Standard_id — prefer the priming/pool metadata, else fall
+            # back to the doc's first declared standard
+            std_id: Optional[str] = None
+            for p in priming:
+                if p.control_ref == entry["control_ref"]:
+                    m = next((mm for mm in p.candidate_musts if mm.get("must_id") == entry.get("checklist_item_id")), None)
+                    std_id = m.get("standard_id") if m else None
+                    break
+            if not std_id:
+                for e in extend_pool:
+                    if e.control_ref == entry["control_ref"]:
+                        std_id = e.standard_id
+                        break
+            if not std_id and doc.standard_ids:
+                std_id = doc.standard_ids[0]
+
+            results.append(DocumentFinding(
+                upload_id         = doc.upload_id or "",
+                tenant_id         = "",
+                document_name     = doc.original_name,
+                control_ref       = entry["control_ref"],
+                standard_id       = std_id or "ISO27001:2022",
+                finding           = "Comply",
+                evidence_text     = quote,
+                confidence        = entry.get("confidence", "medium"),
+                checklist_item_id = entry.get("checklist_item_id"),
+                extraction_path   = "critic_verifier",
+                chunk_id          = f"cv:{entry['control_ref']}",
+                inference_source  = None,   # DB default 'extracted' — same treatment as LLM pass-1
+            ))
+
+        # Telemetry — findings raw/kept, rejections, extensions
+        doc.extraction_metrics["critic_confirmed_raw"] = len(parsed.get("confirmed") or [])
+        doc.extraction_metrics["critic_extended_raw"] = len(parsed.get("extended") or [])
+        doc.extraction_metrics["critic_rejected"]     = len(parsed.get("rejected") or [])
+        doc.extraction_metrics["critic_flagged_missing"] = len(parsed.get("flagged_missing_control") or [])
+        doc.extraction_metrics["critic_findings_kept"] = len(results)
+
+        logger.info(
+            "critic_verifier for %s: %d confirmed + %d extended → %d findings kept "
+            "(rejected=%d, flagged_missing=%d, priming=%d, pool=%d)",
+            doc.original_name,
+            len(parsed.get("confirmed") or []),
+            len(parsed.get("extended") or []),
+            len(results),
+            len(parsed.get("rejected") or []),
+            len(parsed.get("flagged_missing_control") or []),
+            len(priming), len(extend_pool),
+        )
+
+        return results
+    except Exception as e:
+        logger.warning("critic_verifier adapter failed: %s", e)
+        return []
 
 
 def _finalize_yield_metrics(doc: ParsedDocument, findings: list) -> None:
