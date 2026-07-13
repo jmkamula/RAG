@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from typing      import Optional
 
 from rag.classifier     import QueryIntent, QuestionType, TenantProfile
 from rag.graph_expander import ExpandedContext, ExpandedNode, CrossFrameworkEdge
@@ -92,6 +93,11 @@ class AssembledContext:
     primary_count:   int = 0
     secondary_count: int = 0
     approx_tokens:   int = 0
+
+    # Scope filter (2026-07-12) — tenant_id needed by llm_answer's
+    # scope block + post-response scrub. Optional-with-None default
+    # so pre-existing callers that don't pass it keep working.
+    tenant_id:       Optional[str] = None
 
 
 # ── ContextAssembler ──────────────────────────────────────────────────────────
@@ -221,6 +227,7 @@ class ContextAssembler:
             primary_count   = len(primary),
             secondary_count = len(secondary),
             approx_tokens   = approx_tokens,
+            tenant_id       = getattr(self.tenant, "tenant_id", None),
         )
 
     # ── Section renderers ──────────────────────────────────────────────

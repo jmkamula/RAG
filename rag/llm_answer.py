@@ -829,7 +829,12 @@ class LLMAnswer:
     # ── Prompt builders ────────────────────────────────────────────────────
 
     def _build_system_prompt(self, context: AssembledContext) -> str:
-        """Build the system prompt for this question type and tenant."""
+        """Build the system prompt for this question type and tenant.
+
+        Layer 2 of the scope filter (2026-07-12): append the tenant's
+        scope facts + N/A control list to the prompt. Tells the LLM
+        which controls are structurally out-of-scope so it doesn't
+        enumerate them in answers regardless of query."""
         standards_str = " + ".join(
             s.split(":")[0].replace("ISO27001", "ISO 27001")
             for s in context.intent.standards_scope
@@ -838,11 +843,39 @@ class LLMAnswer:
             context.question_type,
             ANSWER_STRUCTURES[QuestionType.UNKNOWN],
         )
-        return SYSTEM_PROMPT.format(
+        base = SYSTEM_PROMPT.format(
             tenant_name      = context.tenant_name,
             standards        = standards_str,
             answer_structure = structure,
         )
+        # Scope block — appended when we have tenant_id in context.
+        try:
+            from rag.scope_filter import (
+                get_tenant_na_scope, get_tenant_scope_facts,
+                build_scope_instruction,
+            )
+            tenant_id = getattr(context, "tenant_id", None)
+            if tenant_id:
+                import psycopg2, os as _os
+                _conn = psycopg2.connect(
+                    host    = _os.getenv("PGHOST",    "127.0.0.1"),
+                    dbname  = _os.getenv("PGDATABASE","arioncomply_compliance"),
+                    user    = _os.getenv("PGUSER",    "arioncomply_app"),
+                    password= _os.getenv("PGPASSWORD",""),
+                )
+                try:
+                    na_refs = get_tenant_na_scope(tenant_id, _conn)
+                    facts   = get_tenant_scope_facts(tenant_id, _conn)
+                    instr   = build_scope_instruction(na_refs, facts)
+                    if instr:
+                        base = base + "\n\n" + instr
+                finally:
+                    _conn.close()
+        except Exception as _e:
+            # Silent fallback — scope block is a safety net, not
+            # required for the prompt to function.
+            pass
+        return base
 
     def _build_user_message(
         self,
@@ -1659,6 +1692,40 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                     response   = "\n".join(_claim_violations),
                     latency_ms = 0,
                 )
+
+        # Layer 3 of scope filter (2026-07-12): post-response N/A scrub.
+        # If the LLM mentioned any N/A-scoped controls that the user
+        # didn't explicitly ask about, strip those sentences. Defensive
+        # net catching stochastic scope-creep past the prompt Layer 2.
+        try:
+            from rag.scope_filter import (
+                get_tenant_na_scope, filter_response_for_scope,
+            )
+            tenant_id = getattr(context, "tenant_id", None)
+            if tenant_id:
+                import psycopg2, os as _os
+                _conn = psycopg2.connect(
+                    host    = _os.getenv("PGHOST",    "127.0.0.1"),
+                    dbname  = _os.getenv("PGDATABASE","arioncomply_compliance"),
+                    user    = _os.getenv("PGUSER",    "arioncomply_app"),
+                    password= _os.getenv("PGPASSWORD",""),
+                )
+                try:
+                    na_refs = get_tenant_na_scope(tenant_id, _conn)
+                    if na_refs:
+                        filtered, stripped_refs = filter_response_for_scope(
+                            answer_text, na_refs, query or "",
+                        )
+                        if stripped_refs:
+                            logging.getLogger("rag.llm_answer").warning(
+                                "scope_filter: dropped N/A refs from response: %s",
+                                stripped_refs,
+                            )
+                            answer_text = filtered
+                finally:
+                    _conn.close()
+        except Exception:
+            pass  # scope filter is defensive; never blocks the answer
 
         latency_ms = round((time.time() - t0) * 1000)
 
