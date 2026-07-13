@@ -1708,6 +1708,94 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                     latency_ms = 0,
                 )
 
+        # Framework-version scope guard (2026-07-13, case #16 root cause).
+        # Two layers: (A) ref must be in valid namespace for the tenant's
+        # queryable_standards — catches ISO 27001:2013 A.9.x leaks under
+        # a 2022 tenant; (B) ref must appear in the LAYER 1/2 node set
+        # actually surfaced by the resolver — catches valid-syntax but
+        # off-topic refs (e.g. ISMS "9.1 Monitoring" cited for access
+        # rights). Applied post all other scrubs / verify+correct.
+        if answer_text and scope_standards:
+            try:
+                from rag.guards.framework_scope_guard import (
+                    scan_and_strip_off_scope_refs,
+                )
+                # Build the context ref set from LAYER 1 + LAYER 2 nodes
+                # plus doc_contexts (each ref appears with + without
+                # standard-prefix — accept either shape). Also
+                # include the user's own cited_refs and any refs
+                # extracted directly from the query text — a ref the
+                # user asked about is trivially in-scope for the
+                # answer even if the resolver surfaced GDPR bridges
+                # rather than the ISO leaf itself.
+                _context_refs: set[str] = set()
+                for n in list(selected_primary_nodes) + list(selected_xfw_nodes):
+                    if getattr(n, "ref", None):
+                        _context_refs.add(n.ref)
+                for _ctx in (doc_contexts or {}).values():
+                    if getattr(_ctx, "control_ref", None):
+                        _context_refs.add(_ctx.control_ref)
+                if intent and getattr(intent, "cited_refs", None):
+                    _context_refs.update(intent.cited_refs)
+                try:
+                    from rag.framework_refs import extract_ref_candidates
+                    _context_refs.update(extract_ref_candidates(query or ""))
+                except Exception:
+                    pass
+                # Neo4j driver — lazy-connect for the Layer A valid-set
+                # fetch. The framework_refs cache means this only fires
+                # on the first query per unique standards frozenset.
+                _neo = None
+                try:
+                    from neo4j import GraphDatabase as _GD
+                    import os as _os
+                    _neo = _GD.driver(
+                        _os.getenv("NEO4J_URI",       "bolt://localhost:7687"),
+                        auth=(_os.getenv("NEO4J_USER",     "neo4j"),
+                              _os.getenv("NEO4J_PASSWORD", "")),
+                    )
+                except Exception:
+                    _neo = None
+                try:
+                    cleaned, _guard_violations = scan_and_strip_off_scope_refs(
+                        answer_text,
+                        queryable_standards = scope_standards,
+                        context_refs        = _context_refs,
+                        neo_driver          = _neo,
+                    )
+                finally:
+                    if _neo is not None:
+                        try: _neo.close()
+                        except Exception: pass
+                if _guard_violations:
+                    answer_text = cleaned
+                    logging.getLogger("rag.llm_answer").warning(
+                        "framework_scope_guard: stripped %d off-scope ref(s): %s",
+                        len(_guard_violations),
+                        "; ".join(v["ref"] + f"({v['layer']})"
+                                  for v in _guard_violations),
+                    )
+                    if logger:
+                        logger.log_call(
+                            step       = "framework_scope_guard",
+                            model      = self.answer_model,
+                            system     = (
+                                f"Stripped {len(_guard_violations)} ref(s) "
+                                f"outside scope/context"
+                            ),
+                            user       = "",
+                            response   = "\n".join(
+                                f"{v['ref']} [Layer {v['layer']}]: {v['reason']}"
+                                for v in _guard_violations
+                            ),
+                            latency_ms = 0,
+                        )
+            except Exception as _e:
+                # Guard is defensive — never break the answer flow.
+                logging.getLogger("rag.llm_answer").warning(
+                    "framework_scope_guard failed (silent-fail): %s", _e,
+                )
+
         # Layer 3 of scope filter (2026-07-12): post-response N/A scrub.
         # If the LLM mentioned any N/A-scoped controls that the user
         # didn't explicitly ask about, strip those sentences. Defensive
@@ -1741,6 +1829,10 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                     _conn.close()
         except Exception:
             pass  # scope filter is defensive; never blocks the answer
+
+        # Re-extract cited_refs post-guards — the answer_text may have
+        # had refs stripped by framework_scope_guard or the N/A scrub.
+        cited_refs = self._extract_refs(answer_text)
 
         latency_ms = round((time.time() - t0) * 1000)
 

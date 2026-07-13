@@ -1237,34 +1237,46 @@ EVAL_CASES = [
         id=16,
         query="what documents do we need to address the access rights NC?",
         tags=["documents", "nc"],
-        # Re-authored 2026-07-07 — dropped expected_refs=['A.5.18']
-        # because it's LLM-stochastic (~85% pass rate per CLAUDE.md's
-        # baseline notes). The LLM often surfaces access-family refs
-        # (A.5.15, A.5.16, A.5.17, A.5.18) but doesn't reliably lead
-        # with any single one. Structural assertions (correct
-        # query type + "access" keyword in prose) are the load-bearing
-        # signal. Per [[feedback-eval-state-drift]] state-brittle ref
-        # locks should be replaced with structure checks.
+        # Re-tightened 2026-07-13. Prior "LLM-stochastic" was hiding
+        # two bugs stacked:
+        #   (a) LLM cited ISO 27001:2013 legacy refs (A.9.1/A.9.2/
+        #       A.11.x/A.14.x, or bare "9.1") — FIXED via
+        #       rag/guards/framework_scope_guard.py which strips off-
+        #       namespace + off-context refs post-answer.
+        #   (b) The resolver routes this query to DOCUMENT_STATUS
+        #       short_circuit (primary=0 nodes, docs=0), so the LLM
+        #       answers from training memory rather than in-context
+        #       refs. A.5.18 therefore doesn't reliably appear.
+        #       Separate root-cause pending.
+        # This case locks in (a) via forbidden_refs — no 2013 refs
+        # may ever leak into this tenant's answers. When (b) is
+        # fixed, add expected_refs=["A.5.18"] to lock the positive.
         expected_refs=[],
+        forbidden_refs=["A.9.1", "A.9.2", "A.14.2", "A.11.1"],
         expected_type="document_inventory",
         must_contain=["access"],
-        notes="Document checklist for access-family controls. Loose ref lock — LLM-stochastic per CLAUDE.md.",
+        notes="Access-rights docs. Locks framework_scope_guard: 2013 legacy refs forbidden.",
     ),
 
     EvalCase(
         id=17, query="what must our access control policy contain?",
         tags=["documents", "policy"],
-        # Re-authored 2026-07-07 — dropped expected_refs=['A.5.15'].
-        # LLM-stochastic: A.5.15 is the correct anchor (access CONTROL
-        # policy vs A.5.18 access RIGHTS), and the resolver surfaces it,
-        # but the LLM's answer prose often cites A.5.18 (the operational
-        # sibling) more prominently and drops A.5.15 from the refs field
-        # even when it appears in prose. Load-bearing signal is
-        # document_content routing + 'access' keyword in prose.
+        # Re-tightened 2026-07-13 alongside case #16. Locks the
+        # framework_scope_guard's job: no ISO 27001:2013 legacy refs
+        # (A.9.1/A.9.2/A.11.x/A.14.x) may leak into a 2022 tenant's
+        # answer for access-control policy content.
+        # Not asserting expected_refs=[A.5.15] because the LLM
+        # stochastically leads with A.5.18 (Access rights) vs A.5.15
+        # (Access control) — both are correct 2022 access-family
+        # refs, resolver family-relaxation lets either pass. Forcing
+        # citation of A.5.15 specifically is a SEPARATE root cause
+        # (prompt-tuning to lead with the query-topic control) —
+        # tracked outside the guard scope.
         expected_refs=[],
+        forbidden_refs=["A.9.1", "A.9.2", "A.11.1", "A.14.2"],
         expected_type="document_content",
         must_contain=["access"],
-        notes="Document content query. Loose ref lock per state-drift rule.",
+        notes="Access-control policy content. Locks framework_scope_guard.",
     ),
 
     EvalCase(

@@ -111,6 +111,111 @@ def normalize_control_ref(ref: str | None, standard_id: str | None) -> str | Non
     return ref
 
 
+# ── Framework-version scope guard (2026-07-13) ────────────────────────────────
+#
+# The LLM can hallucinate control refs from its training data — most
+# commonly ISO 27001:2013 Annex A (A.9.x, A.10.x, A.11.x, A.12.x, A.14.x)
+# leaking into answers about ISO 27001:2022, where those refs were
+# renumbered into A.5.x-A.8.x. Case #16 (root-caused 2026-07-13)
+# surfaced this: "Access Rights Policy → required by ISO 27001 9.1"
+# where 9.1 is the 2013 legacy for what's now A.5.15/A.5.18.
+#
+# The guard has two layers:
+#   Layer A — namespace validity for the tenant's queryable_standards
+#             (an ISO 27001:2022 tenant must not see A.9.x etc.)
+#   Layer B — context-provenance: any ref emitted by the LLM must
+#             actually exist in the LAYER 1/2 nodes provided in the
+#             prompt (catches valid-syntax off-topic refs like "9.1
+#             ISMS clause" cited for access-rights questions).
+#
+# Ground truth for Layer A = the Neo4j RequirementNode set for the
+# tenant's standards. Cached at module scope by frozenset(standards).
+# The cache is invalidated by process restart — safe because standards
+# metadata is static.
+
+import re as _re
+import logging as _logging
+
+_scope_logger = _logging.getLogger("rag.framework_refs")
+
+_VALID_REFS_BY_SCOPE: dict[frozenset, set[str]] = {}
+
+# Loose ref-shape pattern used to extract candidate control refs from
+# prose. Captures ISO Annex A (A.5.18), ISMS clauses (9.2, 6.1.2),
+# GDPR articles (Art.32, Art.5.1.a), and ISO 27701 (A.7.2.4, B.8.5.6).
+# Anchored to word boundaries so it doesn't fragment identifiers.
+_REF_TOKEN_RE = _re.compile(
+    r"""
+    (?:                                                 # one of:
+        A\.\d+\.\d+(?:\.\d+)?                            #   Annex A: A.5.18, A.7.2.4
+      | B\.\d+\.\d+(?:\.\d+)?                            #   ISO 27701 processor: B.8.5.6
+      | Art\.\d+(?:\.\d+(?:\.[a-z])?)?                   #   GDPR: Art.32, Art.5.1.a
+      | (?<![\w.])(?:[4-9]|10)\.[1-9](?:\.\d+)?(?!\w)    #   Bare ISMS clause 4.1-10.9 only
+                                                         #   (avoids matching "32.1" from Art.32.1)
+    )
+    """,
+    _re.VERBOSE,
+)
+
+
+def extract_ref_candidates(text: str) -> list[str]:
+    """Return the ordered list of ref-shaped tokens found in prose."""
+    if not text:
+        return []
+    return _REF_TOKEN_RE.findall(text)
+
+
+def _populate_valid_refs(standards: frozenset, neo_driver) -> set[str]:
+    """Fetch the full set of RequirementNode.ref values for these
+    standards from Neo4j. Called once per unique standards frozenset.
+    Silent-fail: returns empty set if Neo4j is unreachable (guard
+    then no-ops rather than false-positive-strip valid refs)."""
+    if not neo_driver:
+        return set()
+    try:
+        with neo_driver.session() as s:
+            r = s.run(
+                """
+                MATCH (n:RequirementNode)
+                WHERE n.standard_id IN $standards
+                RETURN DISTINCT n.ref AS ref
+                """,
+                standards=list(standards),
+            )
+            refs = {row["ref"] for row in r if row["ref"]}
+            return refs
+    except Exception as e:
+        _scope_logger.warning(
+            "framework_refs: valid-refs Neo4j fetch failed (%s) — "
+            "guard will no-op for standards=%s",
+            e, list(standards),
+        )
+        return set()
+
+
+def get_valid_refs_for_scope(
+    standards: list[str] | None,
+    neo_driver=None,
+) -> set[str]:
+    """Return the set of RequirementNode.ref values for these standards,
+    cached across calls. Empty set = fail-open (guard skips validation)."""
+    if not standards:
+        return set()
+    key = frozenset(standards)
+    cached = _VALID_REFS_BY_SCOPE.get(key)
+    if cached is not None:
+        return cached
+    refs = _populate_valid_refs(key, neo_driver)
+    if refs:
+        _VALID_REFS_BY_SCOPE[key] = refs
+    return refs
+
+
+def clear_valid_refs_cache() -> None:
+    """Test helper — reset the module-level cache."""
+    _VALID_REFS_BY_SCOPE.clear()
+
+
 def render_framework_refs(refs: list | None) -> str:
     """
     Render grouped framework refs as a single inline clause for prose.
