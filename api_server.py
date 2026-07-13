@@ -3656,6 +3656,96 @@ async def trace_sweeps(
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Outbound notification delivery (2026-07-13) — admin endpoints.
+# Configure per-tenant channels + manually trigger a delivery pass.
+# ─────────────────────────────────────────────────────────────────────────────
+
+@app.post("/api/v1/admin/notifications/channels", tags=["admin"])
+async def admin_notification_channel_upsert(
+    request:  Request,
+    channel_kind: str  = Form(...),
+    endpoint:     str  = Form(...),
+    min_severity: str  = Form("medium"),
+    is_active:    bool = Form(True),
+    key_info:     APIKeyInfo = Depends(require_api_key),
+):
+    """Create or update a delivery channel for the calling tenant.
+    channel_kind: email | slack | webhook | sms
+    endpoint: SMTP recipient(s) or Slack webhook URL, etc."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO tenant_notification_channel
+                     (tenant_id, channel_kind, endpoint, min_severity, is_active)
+                     VALUES (%s::uuid, %s, %s, %s, %s)
+                     RETURNING id
+                """,
+                (key_info.tenant_id, channel_kind, endpoint, min_severity, is_active),
+            )
+            row_id = cur.fetchone()[0]
+        conn.commit()
+        return {"id": str(row_id), "channel_kind": channel_kind, "endpoint": endpoint}
+    finally:
+        pool.putconn(conn)
+
+
+@app.get("/api/v1/admin/notifications/channels", tags=["admin"])
+async def admin_notification_channels_list(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """List configured channels for the calling tenant."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT id, channel_kind, endpoint, min_severity, is_active, updated_at
+                  FROM tenant_notification_channel
+                 WHERE tenant_id = %s::uuid
+                 ORDER BY channel_kind
+                """,
+                (key_info.tenant_id,),
+            )
+            rows = cur.fetchall()
+        return {
+            "count": len(rows),
+            "channels": [
+                {"id": str(r[0]), "channel_kind": r[1], "endpoint": r[2],
+                 "min_severity": r[3], "is_active": r[4],
+                 "updated_at": r[5].isoformat() if r[5] else None}
+                for r in rows
+            ],
+        }
+    finally:
+        pool.putconn(conn)
+
+
+@app.post("/api/v1/admin/notifications/deliver", tags=["admin"])
+async def admin_notifications_deliver_now(
+    request:  Request,
+    dry_run:  bool = False,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Manually trigger the delivery worker. Same code the sweep
+    scheduler calls; useful for testing after a channel config change."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        from rag.notifications.deliver import deliver_all
+        return deliver_all(conn, dry_run=dry_run)
+    finally:
+        pool.putconn(conn)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # UPDATES_FACT admin endpoints — Wave 3a (2026-07-13)
 #
 # Manual trigger for the fact-recompute worker. Same code path the

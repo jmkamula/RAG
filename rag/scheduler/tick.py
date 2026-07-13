@@ -266,10 +266,54 @@ def sweep_freshness_expiry(pg_conn, tick_id: str, dry_run: bool = False) -> dict
 
 # ── Public tick runner ───────────────────────────────────────────────
 
+def sweep_notification_delivery(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
+    """Outbound notification delivery. Reads undelivered
+    tenant_notification × tenant_notification_channel rows,
+    delivers per channel_kind, records attempts. Silent-fail per
+    (notification, channel).
+
+    Config: SMTP env vars for email channel; Slack webhook URLs
+    live in tenant_notification_channel.endpoint. Channels with
+    min_severity gate low-severity notifications out.
+    """
+    row_id = _log_start(pg_conn, tick_id, "notification_delivery")
+    scanned = 0
+    acted   = 0
+    errored = 0
+    detail: dict = {}
+    error_type = error_detail = None
+    try:
+        from rag.notifications.deliver import deliver_all
+        result = deliver_all(pg_conn, dry_run=dry_run)
+        scanned = result.get("notifications_scanned", 0)
+        acted   = result.get("delivered", 0)
+        errored = result.get("errored", 0)
+        detail  = {
+            "notifications_scanned": scanned,
+            "delivered":             acted,
+            "skipped":               result.get("skipped", 0),
+            "errored":               errored,
+            "dry_run":               dry_run,
+        }
+    except Exception as e:
+        error_type   = type(e).__name__
+        error_detail = str(e)[:400]
+        try:
+            pg_conn.rollback()
+        except Exception:
+            pass
+    status = "completed" if error_type is None else "failed"
+    _log_complete(pg_conn, row_id, scanned, acted, errored, detail,
+                  status=status, error_type=error_type, error_detail=error_detail)
+    return {"work_type": "notification_delivery", "scanned": scanned,
+            "acted_on": acted, "errored": errored, "detail": detail}
+
+
 _WORK_TYPES = {
-    "fact_recompute":     sweep_fact_recompute,
-    "overdue_followups":  sweep_overdue_followups,
-    "freshness_expiry":   sweep_freshness_expiry,
+    "fact_recompute":         sweep_fact_recompute,
+    "overdue_followups":      sweep_overdue_followups,
+    "freshness_expiry":       sweep_freshness_expiry,
+    "notification_delivery":  sweep_notification_delivery,
 }
 
 
