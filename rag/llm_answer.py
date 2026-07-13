@@ -780,7 +780,16 @@ class LLMAnswer:
         was_corrected = False
         correction_note = ""
 
-        if self.run_verify:
+        # Skip verify+correct for implementation/guidance queries — they
+        # produce long-form advice with many refs that trip the verifier
+        # into false-positive "fail" verdicts, and the corrective pass
+        # frequently truncates at max_tokens leaving a malformed answer.
+        # Verifier is designed for factual posture claims, not guidance.
+        _qt = getattr(context, "question_type", None)
+        _qt_str = getattr(_qt, "value", str(_qt or "")).lower()
+        _skip_verify = _qt_str in {"implementation", "gap_analysis"}
+
+        if self.run_verify and not _skip_verify:
             verification = self._verify(
                 context_text = context.context_text,
                 answer_text  = answer_text,
@@ -1524,7 +1533,13 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
 
         verification  = None
         was_corrected = False
-        if self.run_verify and selected_nodes:
+        # Skip verify+correct for implementation/gap_analysis queries —
+        # long-form guidance trips the verifier into false-positive
+        # "fail" verdicts; corrective pass frequently truncates at
+        # max_tokens leaving a malformed / empty answer.
+        _qt_val = (intent.question_type.value if intent and intent.question_type else "").lower()
+        _skip_verify = _qt_val in {"implementation", "gap_analysis"}
+        if self.run_verify and selected_nodes and not _skip_verify:
             verification = self._verify(
                 context_text  = selected_context,   # only selected nodes
                 answer_text   = answer_text,
@@ -2110,6 +2125,9 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
     ) -> str:
         """Single LLM call via the provider-neutral client."""
         from rag.llm_client import call as llm_call
+        # 180s — implementation/audit-prep answers can legitimately
+        # run 40-60s of token generation on gpt-4o-mini. Default 60s
+        # is too tight (case #21 caught this).
         response = llm_call(
             system      = system,
             user        = user,
@@ -2117,6 +2135,7 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             purpose     = "chat" if step in ("answer","compose") else (step or "chat"),
             max_tokens  = max_tokens,
             temperature = self.temperature,
+            timeout_s   = 180.0,
             metadata    = {"step": step},
         )
         if not response.ok:
