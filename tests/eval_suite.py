@@ -1300,11 +1300,14 @@ EVAL_CASES = [
         query="how should we prepare for our next ISO 27001 surveillance audit?",
         tags=["implementation", "audit"],
         # Re-authored 2026-07-07 — dropped expected_refs=['9.2'].
-        # LLM-stochastic: audit-prep answers reference the ISMS audit
-        # clauses (9.2 Internal Audit, 9.3 Management Review, 10.1
-        # Improvement) but prose ordering + explicit-ref surfacing
-        # varies. The load-bearing signal is that the query routes
-        # to implementation with 'audit' language in prose.
+        # Root cause of prior intermittent failures identified
+        # 2026-07-13 (commit 9443aeb): 60s LLM timeout + verify+correct
+        # loop truncating on long-form guidance. NOT phrasing jitter.
+        # Fix: skip verify+correct for implementation queries + bump
+        # timeout to 180s. Loose ref lock still preserved (audit-prep
+        # answers reference ISMS clauses 9.2/9.3/10.1 with varying
+        # order — the load-bearing signal is that the query routes
+        # to implementation with 'audit' in prose).
         expected_refs=[],
         expected_type="implementation",
         must_contain=["audit"],

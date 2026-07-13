@@ -146,15 +146,14 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 198/199 PASS before any restart (199 cases; #16 LLM-stochastic
-#   ~85-95% — fluctuates on A.5.18 ref surfacing in doc_inventory answers;
-#   #3/#5/#6/#21/#26/#33 also occasionally jitter on LLM phrasing — re-runs pass):
-#   #1 + #5 — STABILISED 2026-06-23 via schema_v43 tenant_must_overrides
+# Must be 202+/203 PASS before any restart (203 cases). Historically-
+# stochastic cases have been root-caused and stabilised:
+#   #1 + #5 (partial) — STABILISED 2026-06-23 via schema_v43 tenant_must_overrides
 #         (cloud-only A.5.15:physical_rules marked N/A; advisory no
 #         longer leaks "physical" into access-rights chat answers).
 #         See [[tenant-must-overrides-v43-2026-06-23]]. #5 still has
-#         residual LLM-stochastic "physical" trip from the LLM
-#         voluntarily mentioning logical-vs-physical scope (rare).
+#         residual "physical" trip from the LLM voluntarily mentioning
+#         logical-vs-physical scope (rare).
 #   #2  — STABILISED 2026-06-15 by dropping A.5.26 ref lock (state drift; see
 #         [[feedback-eval-state-drift]]). Structural assertions (NC + min_findings)
 #         only.
@@ -162,7 +161,13 @@ PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
 #         shape validator + deterministic bridge footer in compose
 #         (llm_answer.rank_and_answer appends "↳ Bridges to ISO 27001 for
 #         Art.X: ...").
-# Any regression below 197/199 blocks restart.
+#   #21 — STABILISED 2026-07-13 (9443aeb): NOT phrasing jitter — was 60s
+#         LLM timeout too tight + verify+correct loop truncating at
+#         max_tokens=1500. Fix: skip verify+correct for
+#         implementation/gap_analysis queries + timeout_s=180. See
+#         llm_answer.py:783,1533.
+# Any regression below 201/203 blocks restart. Prefer root-causing new
+# intermittent failures over labeling them "stochastic" — see #21 arc.
 # Whenever you add a user-facing feature/fix, append an EvalCase that would
 # have failed pre-change and passes post-change — see the feedback-memory rule.
 ```
@@ -334,22 +339,29 @@ soft-deleted 96 valid findings. See
   + 11 Phase B GDPR Chapter IV core 11-pack — Art.24/25/26/27/28/29/31/32/33/34/35
   + 8 Phase B GDPR Ch IV DPO+codes+cert 8-pack — closes Ch IV
   + 6 Phase B GDPR Ch V Transfers 6-pack — closes Ch V + entire curation arc)
-- **Current baseline (2026-06-27)**: **197-199/199** target depending
-  on run. The known-stochastic / state-drift case set is:
-  - **#16** — LLM-stochastic on A.5.18 ref surfacing in
-    doc_inventory answers (~85-95% pass)
-  - **#21** — on the LLM-jitter list ("how should we prepare for
-    next ISO 27001 surveillance audit?")
+- **Current baseline (2026-07-13)**: **202/203 PASS** target. Known
+  weak cases (either root-caused-stabilised or state-drift):
+  - **#16** — occasionally fails on A.5.18 ref surfacing in
+    doc_inventory answers (~85-95% pass). NOT YET ROOT-CAUSED.
+    When investigating, treat as latent bug not "stochastic".
+  - **#21** — STABILISED 2026-07-13 (9443aeb). Root cause: 60s LLM
+    timeout too tight + verify+correct loop truncating at
+    max_tokens=1500 for long-form guidance. Fix: skip verify+correct
+    for implementation/gap_analysis queries + timeout_s=180.
   - **#27** — STATE-DRIFT post-queue-cleanup (asks for "cross-
     framework findings need review"; Stage-1 queue is now empty
     after the 2026-06-27 full sweep, so the case may always fail
     against a pre-sweep snapshot)
-  - **#3 / #5 / #6 / #26 / #31 / #33** — occasional LLM jitter
-- **Floor**: anything below 197/199 blocks restart and warrants
+  - **#3 / #5 / #6 / #26 / #31 / #33** — sporadic LLM-phrasing failures
+    on citation-list position. Not yet root-caused. Same rule as
+    #16 above.
+  - **#200** — pre-existing WARN (posture_check vs gap_analysis
+    type mismatch), unrelated to LLM behavior.
+- **Rule**: "LLM-stochastic" is not an acceptable category — it usually
+  hides a real infra defect. Root-cause intermittent failures rather
+  than hedging assertions. See #21 arc (9443aeb).
+- **Floor**: anything below 201/203 blocks restart and warrants
   investigation. Re-run to distinguish variance from regression.
-- Score: 198/199 PASS target on 2026-06-23 (confirmed via baseline-confirm
-  eval). Cases #3 + #5 + #16 + #21 + #33 occasionally fail on LLM
-  phrasing / citation-list position — re-runs pass.
   - #1 + #5 (partial) STABILISED 2026-06-23 via schema_v43 tenant_must_overrides
     (A.5.15:physical_rules marked N/A for Arion; advisory no longer leaks
     "physical" into chat). See [[tenant-must-overrides-v43-2026-06-23]].
