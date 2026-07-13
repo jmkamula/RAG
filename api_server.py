@@ -3603,6 +3603,183 @@ async def trace_requests(
         pool.putconn(conn)
 
 
+@app.get("/api/v1/trace/sweeps", tags=["trace"])
+async def trace_sweeps(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    hours:    int = 168,
+    limit:    int = 60,
+):
+    """Recent scheduler sweep_log entries. Not tenant-scoped —
+    the sweep runs across all tenants, but access-gated by the
+    caller's API key (admin scope in production)."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT tick_id::text, work_type, status,
+                       started_at, completed_at,
+                       items_scanned, items_acted_on, items_error,
+                       detail, error_type, error_detail
+                  FROM sweep_log
+                 WHERE started_at > NOW() - make_interval(hours => %s)
+                 ORDER BY started_at DESC
+                 LIMIT %s
+                """,
+                (hours, limit),
+            )
+            rows = cur.fetchall()
+        return {
+            "count": len(rows),
+            "entries": [
+                {
+                    "tick_id":        r[0],
+                    "work_type":      r[1],
+                    "status":         r[2],
+                    "started_at":     r[3].isoformat() if r[3] else None,
+                    "completed_at":   r[4].isoformat() if r[4] else None,
+                    "items_scanned":  r[5],
+                    "items_acted_on": r[6],
+                    "items_error":    r[7],
+                    "detail":         r[8],
+                    "error_type":     r[9],
+                    "error_detail":   r[10],
+                }
+                for r in rows
+            ],
+        }
+    finally:
+        pool.putconn(conn)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UPDATES_FACT admin endpoints — Wave 3a (2026-07-13)
+#
+# Manual trigger for the fact-recompute worker. Same code path the
+# future scheduler (3b) will call periodically. Two endpoints:
+#   POST /api/v1/admin/facts/recompute            — all facts for tenant
+#   POST /api/v1/admin/facts/recompute/{fact_key} — one fact for tenant
+# Both return per-fact results (computed_value, changed, latency, error).
+# ─────────────────────────────────────────────────────────────────────────────
+
+@app.post("/api/v1/admin/facts/recompute", tags=["admin"])
+async def admin_facts_recompute_all(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Recompute every configured fact for the calling tenant.
+    Returns the per-fact result set. Writes to client_facts on delta
+    and to fact_recompute_log on every attempt."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        from rag.facts.recompute import recompute_all_for_tenant
+        results = recompute_all_for_tenant(conn, key_info.tenant_id)
+        return {
+            "tenant_id": key_info.tenant_id,
+            "count":     len(results),
+            "results": [
+                {
+                    "fact_key":       r.fact_key,
+                    "computed_value": r.computed_value,
+                    "prior_value":    r.prior_value,
+                    "changed":        r.changed,
+                    "source_type":    r.source_type,
+                    "latency_ms":     r.latency_ms,
+                    "error_type":     r.error_type,
+                    "error_detail":   r.error_detail,
+                }
+                for r in results
+            ],
+        }
+    finally:
+        pool.putconn(conn)
+
+
+@app.post("/api/v1/admin/facts/recompute/{fact_key}", tags=["admin"])
+async def admin_facts_recompute_one(
+    fact_key: str,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Recompute a single fact for the calling tenant."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        from rag.facts.recompute import recompute_client_fact
+        r = recompute_client_fact(conn, key_info.tenant_id, fact_key)
+        return {
+            "tenant_id":      key_info.tenant_id,
+            "fact_key":       r.fact_key,
+            "computed_value": r.computed_value,
+            "prior_value":    r.prior_value,
+            "changed":        r.changed,
+            "source_type":    r.source_type,
+            "latency_ms":     r.latency_ms,
+            "error_type":     r.error_type,
+            "error_detail":   r.error_detail,
+        }
+    finally:
+        pool.putconn(conn)
+
+
+@app.get("/api/v1/admin/facts/recompute-log", tags=["admin"])
+async def admin_facts_recompute_log(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    hours:    int = 168,   # default 7 days
+    limit:    int = 50,
+    changed_only: bool = False,
+):
+    """Recent fact_recompute_log entries for the calling tenant.
+    Feeds the trace UI. Optional changed_only filter shows only
+    deltas — useful for spotting drift."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                f"""
+                SELECT fact_key, computed_value, prior_value, changed,
+                       source_type, error_type, error_detail,
+                       computed_at, latency_ms
+                  FROM fact_recompute_log
+                 WHERE tenant_id = %s::uuid
+                   AND computed_at > NOW() - make_interval(hours => %s)
+                   {"AND changed = TRUE" if changed_only else ""}
+                 ORDER BY computed_at DESC
+                 LIMIT %s
+                """,
+                (key_info.tenant_id, hours, limit),
+            )
+            rows = cur.fetchall()
+        return {
+            "count": len(rows),
+            "entries": [
+                {
+                    "fact_key":       r[0],
+                    "computed_value": r[1],
+                    "prior_value":    r[2],
+                    "changed":        r[3],
+                    "source_type":    r[4],
+                    "error_type":     r[5],
+                    "error_detail":   r[6],
+                    "computed_at":    r[7].isoformat() if r[7] else None,
+                    "latency_ms":     r[8],
+                }
+                for r in rows
+            ],
+        }
+    finally:
+        pool.putconn(conn)
+
+
 @app.post("/api/v1/admin/uploads/{upload_id}/reextract", tags=["admin"])
 async def admin_reextract_upload(
     upload_id:              str,

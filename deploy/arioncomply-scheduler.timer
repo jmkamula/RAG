@@ -1,0 +1,19 @@
+# ArionComply sweep scheduler — systemd timer (Wave 3b, 2026-07-13)
+#
+# Fires arioncomply-scheduler.service every 30 minutes.
+
+[Unit]
+Description=Fire ArionComply sweep tick every 30 minutes
+Requires=arioncomply-scheduler.service
+
+[Timer]
+# Runs 5 minutes after boot, then every 30 minutes
+OnBootSec=5min
+OnUnitActiveSec=30min
+# Randomize by up to 60 seconds to spread load if multiple VMs use
+# the same service
+RandomizedDelaySec=60
+Persistent=true
+
+[Install]
+WantedBy=timers.target

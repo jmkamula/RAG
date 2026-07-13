@@ -1,0 +1,24 @@
+# ArionComply sweep scheduler — cron recipe (Wave 3b, 2026-07-13)
+#
+# Runs one sweep tick every 30 minutes. Adjust the cadence to fit
+# tenant volume. Each invocation is stateless — missed ticks just
+# delay the next work item; nothing corrupts.
+#
+# Install:
+#     sudo -u arionlabs crontab -e
+#     # paste this file's contents (adjust paths)
+#
+# Or use system cron:
+#     sudo cp deploy/scheduler.cron /etc/cron.d/arioncomply-scheduler
+#
+# Environment for python -m rag.scheduler:
+#     PGHOST, PGDATABASE, PGUSER, PGPASSWORD  — reads from .env, or
+#     override via the cron environment below.
+
+# Every 30 minutes on the hour + half-hour, at any hour of any day
+*/30 * * * *  cd /data/arioncomply && PYTHONPATH=/data/arioncomply /usr/bin/python3 -m rag.scheduler.tick >> /var/log/arioncomply/scheduler.log 2>&1
+
+# Alternative cadences to consider:
+# */5  * * * *   — every 5 minutes (aggressive; use if fact-refresh feels slow)
+# 0    * * * *   — hourly on the hour
+# 0    */6 * * * — every 6 hours (light touch — fine for stable tenant profiles)
