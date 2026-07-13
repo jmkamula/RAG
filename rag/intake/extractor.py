@@ -284,14 +284,16 @@ def extract(
         }
         doc.extraction_metrics["llm_leaves_after_fp_coverage"] = len(leaf_musts)
 
-    # Feature flag — Phase 5 of critic-verifier arc (2026-07-12).
-    # When USE_CRITIC_VERIFIER_PASS=1 (env), replace the current
-    # scan-against-candidate-list pass-1 with the critic-verifier
-    # LLM call (confirm/reject/extend). Fingerprint findings still
-    # emit as a signal source; critic-verifier reads them via the
-    # priming set builder. Default off — Wave 4 pipeline is
-    # authoritative until we A/B on Arion's uploaded corpus.
-    if os.getenv("USE_CRITIC_VERIFIER_PASS", "").lower() in ("1", "true", "yes"):
+    # Feature flag — critic-verifier arc, Phase 6 A/B validation
+    # (2026-07-13). Default: ON. The critic-verifier delivered +40%
+    # discovery, +39% auto-approve, at 3.18x cost (still trivial in
+    # absolute terms: $0.24/doc). Old scan-against-candidate-list
+    # pass-1 stays available via USE_CRITIC_VERIFIER_PASS=0 for
+    # rollback if a real-world doc regresses. Follow-up commit will
+    # remove the old paths once ~2 weeks of production evidence
+    # confirms critic-verifier works across all doc types.
+    _critic_flag = os.getenv("USE_CRITIC_VERIFIER_PASS", "1").lower()
+    if _critic_flag not in ("0", "false", "no", "off"):
         llm_findings = _run_critic_verifier_pass(
             doc, scoped, fp_findings, fp_covered,
         )
