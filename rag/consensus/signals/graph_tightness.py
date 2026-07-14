@@ -67,8 +67,16 @@ def graph_tightness(
     # Emit refs with tightness modifiers: majority members +boost,
     # outliers -penalty. Weight is the modifier — aggregator adds
     # this to the base score.
-    boost   = cfg.graph_tight_family_boost
-    penalty = cfg.graph_spread_penalty
+    #
+    # IMPORTANT: only apply modifiers when there's a STRICT majority
+    # (share > 0.5). At an even tie (2 families with 1 each →
+    # share = 0.5) the choice of majority is arbitrary (first-seen)
+    # and modifying the base scores would resolve a genuine ambiguity
+    # incorrectly. The aggregator's ambiguity detector needs to see
+    # the tie band intact.
+    strict_majority = tightness > 0.5
+    boost   = cfg.graph_tight_family_boost   if strict_majority else 0.0
+    penalty = cfg.graph_spread_penalty       if strict_majority else 0.0
     refs_out: list[tuple[str, float]] = []
     for ref, fam in families:
         if not fam:
@@ -78,7 +86,7 @@ def graph_tightness(
         else:
             refs_out.append((ref, penalty))
 
-    is_tight = tightness >= 0.5   # majority is at least half — heuristic
+    is_tight = strict_majority
 
     return SignalOutput(
         name       = "graph_tightness",

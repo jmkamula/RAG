@@ -39,12 +39,11 @@ from rag.consensus.types import (
     SignalOutput, ConsensusResult, ConsensusConfig,
     Clarification, ClarificationOption,
 )
-
-# NOTE: run_consensus is added to this namespace by Ship 1.10 once
-# rag.consensus.query_consensus lands. Deferred here so earlier
-# commits can import the types without a broken transitive import.
+from rag.consensus.query_consensus import run_consensus
+from rag.consensus.aggregator      import aggregate
 
 __all__ = [
     "SignalOutput", "ConsensusResult", "ConsensusConfig",
     "Clarification", "ClarificationOption",
+    "run_consensus", "aggregate",
 ]
