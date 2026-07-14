@@ -1,0 +1,50 @@
+"""
+Retrieval-first consensus layer for chat intent + topic detection.
+
+Overview
+--------
+The chat pipeline used to route intent primarily via LLM classification
+(with regex short-circuits as fast paths). That drifted from the
+original design where ChromaDB — enriched with natural-language
+business_description on every compliance node — was intended to be the
+anchor. Case #16 was the concrete symptom: "what documents do we need
+to address the access rights NC?" routed to DOCUMENT_STATUS short-
+circuit (primary=0 nodes), skipping the very corpus we built to
+answer it.
+
+This module puts retrieval back at the front, corroborated by 6 other
+cheap deterministic signals. Only when signals don't reach consensus
+does the legacy LLM classifier fire (see USE_LEGACY_CLASSIFIER env).
+
+Signals (see the taxonomies + rules in docs/ship_1_design):
+
+    A ChromaDB retrieval           the anchor
+    B explicit_refs (regex)        hard-anchor when hit
+    C curated_lexicon              CLEAR_INTENT + DOCUMENT_TOPIC_MAP
+    D posture_boost                tenant NC/OFI re-weight
+    E graph_tightness              family clustering across top-K
+    F framework_hint               "GDPR" / "ISO 27001" in query
+    G session_context              deictic follow-up support
+
+Public entry point: `run_consensus(query, tenant_ctx, session_ctx,
+retriever) -> ConsensusResult`.
+
+The ConsensusResult carries a verdict of "confident", "ambiguous" or
+"insufficient". The classify graph node reads it and:
+  - confident  → builds QueryIntent directly (no LLM classifier)
+  - ambiguous  → routes to clarify with a deterministic prompt
+  - insufficient → falls through to the legacy LLM classifier
+"""
+from rag.consensus.types import (
+    SignalOutput, ConsensusResult, ConsensusConfig,
+    Clarification, ClarificationOption,
+)
+
+# NOTE: run_consensus is added to this namespace by Ship 1.10 once
+# rag.consensus.query_consensus lands. Deferred here so earlier
+# commits can import the types without a broken transitive import.
+
+__all__ = [
+    "SignalOutput", "ConsensusResult", "ConsensusConfig",
+    "Clarification", "ClarificationOption",
+]
