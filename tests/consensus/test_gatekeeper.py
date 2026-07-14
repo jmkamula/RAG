@@ -212,6 +212,141 @@ def test_apply_modify_rejects_non_list_refs():
     return _ok(updated.refs == ["A.5.18"], f"refs={updated.refs}")
 
 
+# ── Ship 1.6b: deterministic-signal locks ────────────────────────────
+
+def test_signal_c_locks_question_type_against_override():
+    """Signal C fired with question_type=gap_analysis. The gatekeeper
+    tries to modify to posture_check. The lock must prevail."""
+    result = _result(refs=["A.5.18"], qt="gap_analysis")
+    signals = [
+        _sig("curated_lexicon", refs=[], question_type="gap_analysis"),
+        _sig("retrieval",       refs=[("A.5.18", 0.72)]),
+    ]
+    updated = _apply_decision(
+        result,
+        {"decision": "modify", "question_type": "posture_check", "reason": "n/a"},
+        signals=signals,
+    )
+    return _ok(
+        updated.question_type == "gap_analysis"
+        and any("blocked_qt_override" in n for n in updated.disagreement_notes),
+        f"qt={updated.question_type} notes={updated.disagreement_notes}",
+    )
+
+
+def test_signal_c_lock_only_when_c_fired():
+    """When Signal C didn't fire (or has no question_type opinion), the
+    gatekeeper's modify SHOULD apply normally."""
+    result = _result(refs=["A.5.18"], qt="posture_check")
+    signals = [
+        _sig("curated_lexicon", refs=[], question_type=None, fired=True),
+        _sig("retrieval",       refs=[("A.5.18", 0.72)]),
+    ]
+    updated = _apply_decision(
+        result,
+        {"decision": "modify", "question_type": "definition", "reason": "concept query"},
+        signals=signals,
+    )
+    return _ok(updated.question_type == "definition",
+               f"qt={updated.question_type}")
+
+
+def test_signal_b_locks_framework_against_override():
+    """Signal B (explicit_refs) fired with framework=GDPR:2016/679.
+    Gatekeeper tries to modify to ISO27001:2022. Lock must prevail."""
+    result = _result(refs=["Art.32"], fw="GDPR:2016/679")
+    signals = [
+        _sig("explicit_refs", refs=[("Art.32", 1.0)], framework="GDPR:2016/679"),
+    ]
+    updated = _apply_decision(
+        result,
+        {"decision": "modify", "framework": "ISO27001:2022", "reason": "n/a"},
+        signals=signals,
+    )
+    return _ok(
+        updated.framework == "GDPR:2016/679"
+        and any("blocked_fw_override" in n for n in updated.disagreement_notes),
+        f"fw={updated.framework} notes={updated.disagreement_notes}",
+    )
+
+
+def test_lock_allows_gatekeeper_to_modify_refs():
+    """When Signal C locks question_type, the gatekeeper can STILL
+    modify refs — the lock is bounded per-field, not per-decision."""
+    result = _result(refs=["A.5.18"], qt="gap_analysis")
+    signals = [
+        _sig("curated_lexicon", refs=[], question_type="gap_analysis"),
+        _sig("retrieval",       refs=[("A.5.18", 0.72), ("A.5.15", 0.65)]),
+    ]
+    updated = _apply_decision(
+        result,
+        {"decision": "modify",
+         "question_type": "posture_check",   # this should be blocked
+         "refs": ["A.5.15", "A.5.18"],       # this should apply
+         "reason": "reorder"},
+        signals=signals,
+    )
+    return _ok(
+        updated.question_type == "gap_analysis"       # locked
+        and updated.refs == ["A.5.15", "A.5.18"],     # modified
+        f"qt={updated.question_type} refs={updated.refs}",
+    )
+
+
+def test_approve_still_applies_locks_defensively():
+    """Even on approve, if Signal C had a question_type opinion and
+    the tentative somehow missed it, the lock restores it."""
+    result = _result(refs=["A.5.18"], qt=None)   # aggregator missed C
+    signals = [
+        _sig("curated_lexicon", refs=[], question_type="definition"),
+    ]
+    updated = _apply_decision(
+        result,
+        {"decision": "approve", "reason": "looks right"},
+        signals=signals,
+    )
+    return _ok(updated.question_type == "definition",
+               f"qt={updated.question_type}")
+
+
+def test_lock_upgrades_ambiguous_to_confident():
+    """When Signal C locks a question_type and the tentative was
+    ambiguous, verdict upgrades to confident (intent IS clear)."""
+    result = _result(verdict="ambiguous", refs=["A.5.18"], qt=None)
+    signals = [
+        _sig("curated_lexicon", refs=[], question_type="definition"),
+    ]
+    updated = _apply_decision(
+        result,
+        {"decision": "modify", "reason": "definition query"},
+        signals=signals,
+    )
+    return _ok(
+        updated.verdict == "confident"
+        and updated.question_type == "definition",
+        f"verdict={updated.verdict} qt={updated.question_type}",
+    )
+
+
+def test_reject_bypasses_locks():
+    """Reject is always allowed — it flips to insufficient regardless
+    of what signals locked. Falls through to LLM classifier."""
+    result = _result(refs=["A.5.18"], qt="gap_analysis")
+    signals = [
+        _sig("curated_lexicon", refs=[], question_type="gap_analysis"),
+    ]
+    updated = _apply_decision(
+        result,
+        {"decision": "reject", "reason": "genuinely ambiguous"},
+        signals=signals,
+    )
+    return _ok(
+        updated.verdict == "insufficient"
+        and updated.llm_fallback_needed is True,
+        f"verdict={updated.verdict}",
+    )
+
+
 # ── Full gatekeep() with fake LLM ────────────────────────────────────
 
 def test_gatekeep_approves_on_llm_approve():
@@ -333,6 +468,13 @@ TESTS = [
     test_apply_modify_null_fields_keep_tentative,
     test_apply_modify_rejects_invalid_question_type,
     test_apply_modify_rejects_non_list_refs,
+    test_signal_c_locks_question_type_against_override,
+    test_signal_c_lock_only_when_c_fired,
+    test_signal_b_locks_framework_against_override,
+    test_lock_allows_gatekeeper_to_modify_refs,
+    test_approve_still_applies_locks_defensively,
+    test_lock_upgrades_ambiguous_to_confident,
+    test_reject_bypasses_locks,
     test_gatekeep_approves_on_llm_approve,
     test_gatekeep_rejects_flips_to_insufficient,
     test_gatekeep_modify_changes_question_type,

@@ -100,19 +100,62 @@ def _extract_json_object(text: str) -> Optional[dict]:
         return None
 
 
+def _signals_lock_question_type(signals: list[SignalOutput]) -> Optional[str]:
+    """If Signal C (curated_lexicon) fired with a question_type, that's
+    authoritative — the gatekeeper cannot override it. Returns the locked
+    question_type or None if C didn't fire with one.
+
+    Ship 1.6b hard-bound: deterministic signals win where they fire.
+    See design note in module docstring."""
+    for s in signals:
+        if s.name == "curated_lexicon" and s.fired and s.question_type:
+            return s.question_type
+    return None
+
+
+def _signals_lock_framework(signals: list[SignalOutput]) -> Optional[str]:
+    """If Signal B (explicit_refs) fired with a framework, that's
+    authoritative — the user typed a specific ref of a specific shape.
+    Gatekeeper cannot override the framework in that case.
+
+    Note Signal F (framework_hint) is NOT authoritative here — it can
+    disagree with B legitimately (e.g., user names GDPR but types an
+    ISO ref). B wins the framework tie."""
+    for s in signals:
+        if s.name == "explicit_refs" and s.fired and s.framework:
+            return s.framework
+    return None
+
+
 def _apply_decision(
     tentative:  ConsensusResult,
     decision:   dict,
+    signals:    Optional[list[SignalOutput]] = None,
 ) -> ConsensusResult:
     """Apply a parsed gatekeeper decision to the tentative result.
-    Returns a NEW ConsensusResult (does not mutate the tentative)."""
+    Returns a NEW ConsensusResult (does not mutate the tentative).
+
+    Ship 1.6b: enforces structural bounds on what the gatekeeper can
+    modify. When a deterministic signal has an opinion (Signal C on
+    question_type, Signal B on framework), the gatekeeper CANNOT
+    override it via modify — only refs and verdict remain modifiable
+    in that case. This preserves the design principle that
+    deterministic signals lead and the LLM fills gaps."""
     from dataclasses import replace
 
     decision_kind = (decision.get("decision") or "").lower()
     reason        = decision.get("reason", "")[:200]
+    signals       = signals or []
+
+    # Compute deterministic locks up front so both modify + approve
+    # can annotate the disagreement notes when the LLM tried to
+    # override.
+    locked_qt = _signals_lock_question_type(signals)
+    locked_fw = _signals_lock_framework(signals)
 
     if decision_kind == "reject":
-        # Verdict flips to insufficient → LLM classifier fallback
+        # Reject is always allowed — the gatekeeper can say "no
+        # deterministic consensus" regardless of what signals fired.
         new_notes = list(tentative.disagreement_notes or []) + [
             f"gatekeeper: reject ({reason})"
         ]
@@ -125,44 +168,74 @@ def _apply_decision(
         )
 
     if decision_kind == "modify":
-        new_qt      = decision.get("question_type")
-        new_refs    = decision.get("refs")
-        new_fw      = decision.get("framework")
+        proposed_qt   = decision.get("question_type")
+        proposed_refs = decision.get("refs")
+        proposed_fw   = decision.get("framework")
 
-        # Validate question_type before applying
-        if new_qt and new_qt not in _VALID_QUESTION_TYPES:
-            new_qt = None
+        # Validate question_type shape before applying
+        if proposed_qt and proposed_qt not in _VALID_QUESTION_TYPES:
+            proposed_qt = None
 
         # Validate refs — must be a subset of what signals surfaced
         # (bounded contract: no invention)
-        if new_refs is not None and not isinstance(new_refs, list):
-            new_refs = None
+        if proposed_refs is not None and not isinstance(proposed_refs, list):
+            proposed_refs = None
+
+        # ── Enforce deterministic-signal locks ──────────────────────
+        override_notes: list[str] = []
+
+        # Question_type: Signal C is authoritative when it fired
+        if locked_qt is not None and proposed_qt and proposed_qt != locked_qt:
+            override_notes.append(
+                f"blocked_qt_override: gatekeeper tried "
+                f"{proposed_qt!r}, curated_lexicon locked {locked_qt!r}"
+            )
+            proposed_qt = None   # discard the LLM's opinion
+
+        # Framework: Signal B is authoritative when it fired
+        if locked_fw is not None and proposed_fw and proposed_fw != locked_fw:
+            override_notes.append(
+                f"blocked_fw_override: gatekeeper tried "
+                f"{proposed_fw!r}, explicit_refs locked {locked_fw!r}"
+            )
+            proposed_fw = None   # discard the LLM's opinion
 
         # If the gatekeeper resolved question_type on an ambiguous
-        # verdict, upgrade to confident — the intent IS clear now,
-        # the aggregator's tie-band was a false signal.
+        # verdict, upgrade to confident — the intent IS clear now.
+        # Uses the FINAL question_type (after lock enforcement) so
+        # locked_qt drives the upgrade even if the LLM didn't propose.
         new_verdict = tentative.verdict
         new_clarif  = tentative.clarification
-        if new_qt and tentative.verdict == "ambiguous":
+        effective_qt = proposed_qt or locked_qt or tentative.question_type
+        if effective_qt and tentative.verdict == "ambiguous":
             new_verdict = "confident"
             new_clarif  = None
+
+        notes = list(tentative.disagreement_notes or []) + [
+            f"gatekeeper: modify ({reason})"
+        ] + override_notes
 
         updated = replace(
             tentative,
             verdict            = new_verdict,
-            question_type      = new_qt or tentative.question_type,
-            refs               = list(new_refs) if new_refs is not None
+            question_type      = proposed_qt or locked_qt or tentative.question_type,
+            refs               = list(proposed_refs) if proposed_refs is not None
                                   else tentative.refs,
-            framework          = new_fw or tentative.framework,
+            framework          = proposed_fw or locked_fw or tentative.framework,
             clarification      = new_clarif,
-            disagreement_notes = list(tentative.disagreement_notes or [])
-                                  + [f"gatekeeper: modify ({reason})"],
+            disagreement_notes = notes,
         )
         return updated
 
     # decision_kind == "approve" (or unknown → treat as approve)
+    # Even on approve, we apply the locks in case the aggregator
+    # itself missed Signal C's opinion (defensive).
+    approve_qt = locked_qt or tentative.question_type
+    approve_fw = locked_fw or tentative.framework
     return replace(
         tentative,
+        question_type      = approve_qt,
+        framework          = approve_fw,
         disagreement_notes = list(tentative.disagreement_notes or [])
                               + [f"gatekeeper: approve ({reason})"],
     )
@@ -219,7 +292,7 @@ def gatekeep(
         decision = _extract_json_object(response.text or "")
         if not decision:
             return tentative
-        result = _apply_decision(tentative, decision)
+        result = _apply_decision(tentative, decision, signals=signals)
         # Track latency contribution
         result.latency_ms = (tentative.latency_ms or 0) + latency_ms
         return result
