@@ -138,12 +138,23 @@ def _apply_decision(
         if new_refs is not None and not isinstance(new_refs, list):
             new_refs = None
 
+        # If the gatekeeper resolved question_type on an ambiguous
+        # verdict, upgrade to confident — the intent IS clear now,
+        # the aggregator's tie-band was a false signal.
+        new_verdict = tentative.verdict
+        new_clarif  = tentative.clarification
+        if new_qt and tentative.verdict == "ambiguous":
+            new_verdict = "confident"
+            new_clarif  = None
+
         updated = replace(
             tentative,
+            verdict            = new_verdict,
             question_type      = new_qt or tentative.question_type,
             refs               = list(new_refs) if new_refs is not None
                                   else tentative.refs,
             framework          = new_fw or tentative.framework,
+            clarification      = new_clarif,
             disagreement_notes = list(tentative.disagreement_notes or [])
                                   + [f"gatekeeper: modify ({reason})"],
         )

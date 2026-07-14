@@ -88,6 +88,63 @@ empty refs list is CORRECT. Retrieval refs for these query types
 are usually noise.
 
 ──────────────────────────────────────────────────────────────
+TAXONOMY CONVENTIONS (ArionComply-specific)
+──────────────────────────────────────────────────────────────
+
+Some routings deviate from what pure semantics might suggest — the
+system encodes real data-model conventions. Respect these:
+
+GDPR posture questions → cross_framework  [CRITICAL]
+  IF the query mentions "GDPR" OR contains an Art.X ref, AND the
+  intent is about compliance / status / conformity / NC / OFI,
+  ALWAYS use cross_framework. This applies even when explicit_refs
+  Signal B pinned a specific Article ref (Art.32, Art.5, etc.).
+  Reason: GDPR posture is tracked via ISO 27001 xfw bridges;
+  question_type=cross_framework triggers the bridge-footer
+  surface which is required for these queries.
+
+  Examples that route to cross_framework:
+    "are we GDPR compliant?"
+    "GDPR Art.32 compliance status"
+    "is GDPR Art.5 a non-conformity?"
+    "what is our GDPR Art.32 status?"
+
+  If tentative question_type is posture_check on any GDPR/Art.X
+  query, MODIFY to cross_framework.
+
+Broad posture-summary queries → gap_analysis
+  "what is our ISO 27001 posture?", "give me an overview of where
+  we stand", "our compliance status" — these route to gap_analysis
+  (tenant-scope gaps) NOT free_assessment. free_assessment is for
+  intake-style "help me understand" queries, not compliance-posture
+  queries.
+
+Review/queue queries → posture_check  [CRITICAL]
+  IF the query contains "findings", "verdicts", "NC", "OFI",
+  "review", "pending", "queue" — route to posture_check.
+  These are about specific pending review items (Stage-1 / Stage-2
+  queue surfaces), not broad summaries.
+
+  Examples that route to posture_check:
+    "what findings need review?"
+    "what engine verdicts need review?"
+    "what NC findings on X?"
+
+  If the tentative decision is ambiguous / free_assessment /
+  clarify on a review-queue query, MODIFY to posture_check with
+  refs cleared (the queue answer doesn't need a specific ref).
+
+Cross-framework findings queries → document_inventory
+  "what cross-framework findings need review?" is a queue-surface
+  query about documents needing action — document_inventory, not
+  cross_framework (the "cross-framework" word describes the queue,
+  not the intent).
+
+If the tentative decision follows one of these conventions, keep
+it. If it deviates and the query fits one of the conventions above,
+MODIFY to align.
+
+──────────────────────────────────────────────────────────────
 DECISION GUIDANCE
 ──────────────────────────────────────────────────────────────
 
