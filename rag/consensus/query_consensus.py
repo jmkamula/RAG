@@ -139,3 +139,35 @@ def run_consensus(
     result = aggregate(signals, cfg)
     result.latency_ms = int((time.time() - t0) * 1000)
     return result
+
+
+# ── Intent-shape adapter for the classify graph node ─────────────────
+
+# question_types that require a tenant-posture fetch downstream.
+# Matches classifier.classify_query's needs_posture derivation.
+_POSTURE_INTENT_TYPES = {"gap_analysis", "posture_check"}
+
+
+def intent_dict_from_consensus(result: ConsensusResult) -> dict:
+    """Convert a ConsensusResult into the classify-node's expected
+    state-dict shape. Matches keys emitted by classifier.classify_query.
+
+    This is what makes Ship 1 a drop-in replacement — downstream
+    graph nodes (retrieve, update_session) don't need to change.
+    """
+    question_type = result.question_type or "unknown"
+    needs_posture = question_type in _POSTURE_INTENT_TYPES
+    return {
+        "intent_type":     question_type,
+        "focus_refs":      list(result.refs[:3]),   # top-3, same as classifier
+        "needs_posture":   needs_posture,
+        "confidence":      float(result.top_ref_confidence or 0.0),
+        "needs_clarif":    result.verdict == "ambiguous",
+        "clarif_question": (result.clarification.question
+                             if result.clarification else ""),
+        "clarif_count":    1 if result.verdict == "ambiguous" else 0,
+        # Diagnostics kept in state for downstream logging
+        "_consensus_verdict":       result.verdict,
+        "_consensus_corroborators": result.corroborators,
+        "_consensus_framework":     result.framework,
+    }

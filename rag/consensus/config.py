@@ -70,10 +70,20 @@ def default_config() -> ConsensusConfig:
         graph_tight_family_boost  = _env_float("CONSENSUS_GRAPH_TIGHT_BOOST",         0.05),
         graph_spread_penalty      = _env_float("CONSENSUS_GRAPH_SPREAD_PENALTY",     -0.10),
         log_full_signals_json = _env_bool("CONSENSUS_LOG_FULL_SIGNALS", True),
-        # USE_LEGACY_CLASSIFIER=1 (default) enables the LLM fallback path;
-        # =0 disables it (verdict=insufficient becomes a clarify).
-        llm_fallback_enabled  = _env_bool("USE_LEGACY_CLASSIFIER",   True),
+        # LLM fallback is always on when consensus is active — it's how
+        # we handle queries the deterministic signals can't classify.
+        # The FULL kill-switch (skip the whole consensus layer) is a
+        # separate env var USE_LEGACY_CLASSIFIER=1 checked at the
+        # graph-node wire-up level, not here.
+        llm_fallback_enabled  = True,
     )
+
+
+def consensus_layer_enabled() -> bool:
+    """The escape hatch: USE_LEGACY_CLASSIFIER=1 disables the whole
+    consensus layer and routes every query through the legacy LLM
+    classifier. Default OFF (i.e. consensus IS enabled)."""
+    return not _env_bool("USE_LEGACY_CLASSIFIER", False)
 
 
 # Cached process-wide default (env is read once at import; restart to

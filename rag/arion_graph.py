@@ -1449,12 +1449,65 @@ from vector.retriever      import VectorRetriever
 
 # ── Node implementations ────────────────────────────────────────────────────
 
+def _log_consensus_result(state, query: str, consensus, tenant_uuid: str = None):
+    """Persist a ConsensusResult to chat_consensus_log. Silent-fail.
+
+    state["tenant_id"] is a display name (e.g. "Arion Networks"), NOT
+    the UUID — so tenant_uuid must be passed explicitly by the caller.
+    """
+    if consensus is None or not tenant_uuid:
+        return
+    try:
+        import psycopg2, os as _os
+        from rag.consensus.log import log_consensus
+        tenant_id = tenant_uuid
+        conn = psycopg2.connect(
+            host    = _os.getenv("PGHOST",    "127.0.0.1"),
+            dbname  = _os.getenv("PGDATABASE","arioncomply_compliance"),
+            user    = _os.getenv("PGUSER",    "arioncomply_app"),
+            password= _os.getenv("PGPASSWORD",""),
+        )
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "SELECT set_config('app.tenant_id', %s, FALSE)",
+                    (tenant_id,),
+                )
+            conn.commit()
+            log_consensus(
+                pg_conn         = conn,
+                tenant_id       = tenant_id,
+                query           = query,
+                result          = consensus,
+                session_id      = state.get("session_id"),
+                request_id      = state.get("request_id"),
+                llm_fallback_used = (consensus.verdict == "insufficient"),
+            )
+        finally:
+            try: conn.close()
+            except Exception: pass
+    except Exception:
+        pass   # never break classify on log failure
+
+
 def make_classify_node(
     classifier: QueryClassifier,
+    tenant_posture: dict = None,
 ):
     """
     Node: classify intent.
-    Replaces: _handle_intake + _handle_query + classify_query routing.
+
+    Ship 1.12 (2026-07-14): retrieval-first consensus layer runs
+    BEFORE the legacy classifier calls. When consensus reaches a
+    confident verdict, the LLM classifier is skipped entirely.
+    Ambiguous verdicts drive a deterministic clarification.
+    Insufficient verdicts fall through to the legacy path.
+    Escape hatch: USE_LEGACY_CLASSIFIER=1 disables consensus entirely.
+
+    Args:
+        classifier:     QueryClassifier (LLM-backed fallback).
+        tenant_posture: posture dict keyed by node_id or ref. Passed
+                        into Signal D (posture_boost).
     """
     def classify(state: ArionState) -> dict:
         query  = state["query"]
@@ -1519,6 +1572,90 @@ def make_classify_node(
             active_refs    = state.get("focus_refs", []),
             active_cluster = None,
         )
+
+        # ── Ship 1.12: retrieval-first consensus layer ────────────────────
+        # Runs before the legacy LLM classifier. When consensus reaches
+        # a confident verdict, the LLM classifier is skipped entirely.
+        # See docs / commit 8c40985 for design.
+        from rag.consensus import (
+            run_consensus, intent_dict_from_consensus, consensus_layer_enabled,
+        )
+        from rag.consensus.config import default_config
+
+        if consensus_layer_enabled():
+            import types as _types
+            _tenant_ctx = _types.SimpleNamespace(
+                posture = tenant_posture or {},
+                scope   = _types.SimpleNamespace(
+                    queryable_standards = state["standards"],
+                ),
+            )
+            try:
+                _consensus = run_consensus(
+                    query               = query,
+                    tenant_context      = _tenant_ctx,
+                    session_context_arg = session,
+                    retriever           = classifier.retriever,
+                    cfg                 = default_config(),
+                )
+            except Exception as _e:
+                # Consensus errors must never break the classify node.
+                if logger:
+                    logger.log_call(
+                        step="consensus_error", model="", system="",
+                        user=str(_e)[:200], response="", latency_ms=0,
+                    )
+                _consensus = None
+
+            # Log the consensus decision (silent-fail).
+            _log_consensus_result(
+                state, query, _consensus,
+                tenant_uuid=getattr(classifier.tenant, "tenant_id", None),
+            )
+
+            # Consensus is "confident" ONLY if it also produced a
+            # question_type opinion. Signals may lock a ref (e.g.
+            # explicit_refs on A.5.18) without knowing whether the
+            # user wants posture / documents / definition. In that
+            # case fall through to the LLM classifier — it has the
+            # semantic breadth to decide.
+            _has_qt = (_consensus is not None
+                       and _consensus.question_type
+                       and _consensus.question_type != "unknown")
+            if _consensus is not None and _consensus.verdict == "confident" and _has_qt:
+                # Skip the LLM classifier entirely — trust consensus.
+                out = intent_dict_from_consensus(_consensus)
+                if logger:
+                    logger.log_call(
+                        step="consensus_confident", model="", system="",
+                        user=query[:200],
+                        response=(
+                            f"verdict={_consensus.verdict} "
+                            f"refs={_consensus.refs[:3]} "
+                            f"qt={_consensus.question_type} "
+                            f"corroborators={_consensus.corroborators}"
+                        ),
+                        latency_ms=_consensus.latency_ms,
+                    )
+                return out
+
+            if _consensus is not None and _consensus.verdict == "ambiguous":
+                # Emit a deterministic clarification — no LLM needed.
+                out = intent_dict_from_consensus(_consensus)
+                out["clarif_count"]   = state.get("clarif_count", 0) + 1
+                out["turn_count"]     = state.get("turn_count", 0) + 1
+                out["original_query"] = query
+                if logger:
+                    logger.log_call(
+                        step="consensus_ambiguous", model="", system="",
+                        user=query[:200],
+                        response=(_consensus.clarification.question
+                                   if _consensus.clarification else ""),
+                        latency_ms=_consensus.latency_ms,
+                    )
+                return out
+
+            # verdict == "insufficient" → fall through to legacy path
 
         # First turn: use process_intake (handles ambiguous clusters)
         # Follow-up turns: use classify_query (faster, session-aware)
@@ -2604,7 +2741,7 @@ def build_arion_graph(
     builder = StateGraph(ArionState)
 
     # Add nodes
-    builder.add_node("classify",       make_classify_node(classifier))
+    builder.add_node("classify",       make_classify_node(classifier, tenant_posture=posture))
     builder.add_node("retrieve",       make_retrieve_node(retriever, expander, assembler, llm, tenant, posture))
     builder.add_node("clarify",        make_clarify_node())
     builder.add_node("update_session", make_update_session_node())
