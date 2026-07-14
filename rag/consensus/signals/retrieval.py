@@ -59,20 +59,27 @@ def retrieve(
         return SignalOutput(name="retrieval", fired=False,
                             metadata={"empty": True})
 
-    # Build (ref, score) tuples, dedupe by ref keeping best score
-    seen_refs:      dict[str, float] = {}
-    framework_votes: dict[str, int]   = {}
-    all_scores:     list[float]       = []
+    # Build (ref, score) tuples, dedupe by ref keeping best score.
+    # Also record title + framework per ref so the aggregator's
+    # ambiguity clarification can render options without hitting Neo4j.
+    seen_refs:         dict[str, float] = {}
+    framework_votes:   dict[str, int]   = {}
+    all_scores:        list[float]       = []
+    titles_by_ref:     dict[str, str]    = {}
+    frameworks_by_ref: dict[str, str]    = {}
 
     for r in results:
         ref   = getattr(r, "ref", None)
         score = getattr(r, "score", 0.0) or 0.0
         std   = getattr(r, "standard_id", "")
+        title = getattr(r, "title", "") or ""
         if not ref:
             continue
         all_scores.append(score)
         if ref not in seen_refs or score > seen_refs[ref]:
             seen_refs[ref] = score
+            titles_by_ref[ref]     = title
+            frameworks_by_ref[ref] = std
         framework_votes[std] = framework_votes.get(std, 0) + 1
 
     if not seen_refs:
@@ -98,14 +105,17 @@ def retrieve(
         refs       = refs_out,
         framework  = primary_framework,
         metadata   = {
-            "n_results":         len(ordered),
-            "top_score":         top_score,
-            "top_ref":           ordered[0][0],
-            "tie_band_size":     tie_count,
-            "framework_votes":   framework_votes,
+            "n_results":          len(ordered),
+            "top_score":          top_score,
+            "top_ref":            ordered[0][0],
+            "tie_band_size":      tie_count,
+            "framework_votes":    framework_votes,
             "score_distribution": [round(s, 4) for _, s in ordered[:5]],
-            "above_min_floor":   top_score >= cfg.refs_min_floor,
-            "above_confident":   top_score >= cfg.refs_confident_floor,
+            "above_min_floor":    top_score >= cfg.refs_min_floor,
+            "above_confident":    top_score >= cfg.refs_confident_floor,
+            # For aggregator's ambiguity clarification rendering:
+            "titles_by_ref":      titles_by_ref,
+            "frameworks_by_ref":  frameworks_by_ref,
         },
         fired      = True,
     )
