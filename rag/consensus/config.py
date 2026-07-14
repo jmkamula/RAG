@@ -86,6 +86,15 @@ def consensus_layer_enabled() -> bool:
     return not _env_bool("USE_LEGACY_CLASSIFIER", False)
 
 
+def gatekeeper_enabled() -> bool:
+    """Ship 1.5 inline gatekeeper toggle. Default ON.
+
+    Set GATEKEEPER_ENABLED=0 to disable the LLM arbiter and let the
+    aggregator's tentative decision go straight to the graph node.
+    Useful for isolating gatekeeper regressions during tuning."""
+    return _env_bool("GATEKEEPER_ENABLED", True)
+
+
 # Cached process-wide default (env is read once at import; restart to
 # pick up new values — matches the rest of the codebase's pattern).
 _default: Optional[ConsensusConfig] = None

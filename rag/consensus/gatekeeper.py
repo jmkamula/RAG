@@ -1,0 +1,223 @@
+"""
+Inline consensus gatekeeper — bounded LLM arbiter.
+
+The gatekeeper reviews every non-hard-anchor consensus decision.
+It sees the query, all 7 signal outputs, and the aggregator's
+tentative decision. It can APPROVE, MODIFY (question_type / refs /
+framework), or REJECT (verdict → insufficient, falls to LLM
+classifier).
+
+Design principle: the LLM is bounded. It cannot invent refs the
+signals didn't surface, cannot invent question_types outside the
+enum, cannot author prose. It only reasons about which of the
+produced signals should carry the day.
+
+Cost profile:
+  - ~500 input tokens (query + signals + tentative)
+  - ~50 output tokens (JSON decision)
+  - ~500ms latency at gpt-4o-mini
+  - ~$0.0005 / call
+  - Skips on hard-anchor cases (explicit_refs + curated agree)
+"""
+from __future__ import annotations
+
+import json
+import re
+import time
+from typing import Optional
+
+from rag.consensus.types import (
+    SignalOutput, ConsensusResult, ConsensusConfig,
+)
+from rag.consensus.gatekeeper_prompts import (
+    GATEKEEPER_SYSTEM,
+    build_gatekeeper_user_message,
+    format_signals_view,
+    format_tentative_view,
+)
+
+
+_VALID_QUESTION_TYPES = {
+    "posture_check", "document_content", "document_inventory",
+    "implementation", "gap_analysis", "definition", "cross_framework",
+    "free_assessment", "unknown",
+}
+
+
+def gatekeeper_should_fire(
+    tentative: ConsensusResult,
+    signals:   list[SignalOutput],
+    cfg:       ConsensusConfig,
+) -> tuple[bool, str]:
+    """Decide whether to call the LLM gatekeeper for this tentative
+    decision. Returns (should_fire, reason).
+
+    Skip when:
+      - Explicit_refs + curated_lexicon already agree (hard anchor,
+        early-exit in run_consensus already skipped retrieval).
+        Nothing for the gatekeeper to arbitrate.
+      - No signal fired at all — the tentative is 'insufficient',
+        gatekeeping cannot rescue it, falls to LLM classifier.
+    """
+    if not any(s.fired for s in signals):
+        return False, "no signals fired"
+
+    # Hard-anchor path — retrieval was skipped, verdict must be confident
+    by_name = {s.name: s for s in signals}
+    sig_b = by_name.get("explicit_refs")
+    sig_c = by_name.get("curated_lexicon")
+    ret   = by_name.get("retrieval")
+    if (sig_b and sig_b.fired and sig_c and sig_c.fired
+            and ret and not ret.fired
+            and ret.metadata.get("reason") == "cheap_consensus_hit"):
+        return False, "hard_anchor_early_exit"
+
+    return True, "gatekeeping_applicable"
+
+
+def _extract_json_object(text: str) -> Optional[dict]:
+    """Pull the first JSON object out of the model response.
+    Tolerant of stray whitespace / code-fence wrappers."""
+    if not text:
+        return None
+    # Strip common wrappers
+    stripped = text.strip()
+    if stripped.startswith("```"):
+        # ```json\n{...}\n```
+        m = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", stripped, re.DOTALL)
+        if m:
+            stripped = m.group(1)
+    # Find the first { and matching close
+    m = re.search(r"\{[^{}]*\}", stripped, re.DOTALL)
+    if not m:
+        # Try a broader match (with nested braces)
+        m = re.search(r"\{.*\}", stripped, re.DOTALL)
+    if not m:
+        return None
+    try:
+        return json.loads(m.group(0))
+    except json.JSONDecodeError:
+        return None
+
+
+def _apply_decision(
+    tentative:  ConsensusResult,
+    decision:   dict,
+) -> ConsensusResult:
+    """Apply a parsed gatekeeper decision to the tentative result.
+    Returns a NEW ConsensusResult (does not mutate the tentative)."""
+    from dataclasses import replace
+
+    decision_kind = (decision.get("decision") or "").lower()
+    reason        = decision.get("reason", "")[:200]
+
+    if decision_kind == "reject":
+        # Verdict flips to insufficient → LLM classifier fallback
+        new_notes = list(tentative.disagreement_notes or []) + [
+            f"gatekeeper: reject ({reason})"
+        ]
+        return replace(
+            tentative,
+            verdict             = "insufficient",
+            clarification       = None,
+            llm_fallback_needed = True,
+            disagreement_notes  = new_notes,
+        )
+
+    if decision_kind == "modify":
+        new_qt      = decision.get("question_type")
+        new_refs    = decision.get("refs")
+        new_fw      = decision.get("framework")
+
+        # Validate question_type before applying
+        if new_qt and new_qt not in _VALID_QUESTION_TYPES:
+            new_qt = None
+
+        # Validate refs — must be a subset of what signals surfaced
+        # (bounded contract: no invention)
+        if new_refs is not None and not isinstance(new_refs, list):
+            new_refs = None
+
+        updated = replace(
+            tentative,
+            question_type      = new_qt or tentative.question_type,
+            refs               = list(new_refs) if new_refs is not None
+                                  else tentative.refs,
+            framework          = new_fw or tentative.framework,
+            disagreement_notes = list(tentative.disagreement_notes or [])
+                                  + [f"gatekeeper: modify ({reason})"],
+        )
+        return updated
+
+    # decision_kind == "approve" (or unknown → treat as approve)
+    return replace(
+        tentative,
+        disagreement_notes = list(tentative.disagreement_notes or [])
+                              + [f"gatekeeper: approve ({reason})"],
+    )
+
+
+def gatekeep(
+    query:      str,
+    tentative:  ConsensusResult,
+    signals:    list[SignalOutput],
+    cfg:        Optional[ConsensusConfig] = None,
+) -> ConsensusResult:
+    """Run the inline gatekeeper LLM on the tentative consensus.
+
+    Returns:
+        The final ConsensusResult after gatekeeper decision.
+        On any error (LLM failure, parse failure, timeout) the
+        tentative is returned UNCHANGED — the gatekeeper never
+        breaks the consensus flow.
+    """
+    if cfg is None:
+        from rag.consensus.config import default_config
+        cfg = default_config()
+
+    should_fire, reason = gatekeeper_should_fire(tentative, signals, cfg)
+    if not should_fire:
+        return tentative
+
+    # Build the LLM prompt
+    signals_view   = format_signals_view(signals)
+    tentative_view = format_tentative_view(tentative)
+    user_msg       = build_gatekeeper_user_message(
+        query        = query,
+        signals_view = signals_view,
+        tentative    = tentative_view,
+    )
+
+    # Call the LLM (silent-fail — tentative stays if anything goes wrong)
+    try:
+        from rag.llm_client import call as llm_call
+        t0 = time.time()
+        response = llm_call(
+            system      = GATEKEEPER_SYSTEM,
+            user        = user_msg,
+            model       = _gatekeeper_model(),
+            purpose     = "consensus_gatekeeper",
+            max_tokens  = 150,
+            temperature = 0.0,     # deterministic; we want stable decisions
+            timeout_s   = 15.0,
+            metadata    = {"step": "consensus_gatekeeper"},
+        )
+        latency_ms = int((time.time() - t0) * 1000)
+        if not response.ok:
+            return tentative
+        decision = _extract_json_object(response.text or "")
+        if not decision:
+            return tentative
+        result = _apply_decision(tentative, decision)
+        # Track latency contribution
+        result.latency_ms = (tentative.latency_ms or 0) + latency_ms
+        return result
+    except Exception:
+        return tentative
+
+
+def _gatekeeper_model() -> str:
+    """Model for the gatekeeper LLM call. Env-overridable so tenants
+    on local Mistral can point elsewhere."""
+    import os
+    return os.getenv("GATEKEEPER_MODEL", "gpt-4o-mini")

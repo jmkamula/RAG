@@ -148,6 +148,11 @@ class ConsensusConfig:
     # returns a generic clarify instead of running the LLM.
     llm_fallback_enabled:      bool  = True
 
+    # Ship 1.5: inline gatekeeper toggle. When False, aggregator's
+    # tentative decision goes straight through. Useful in tests
+    # that want to isolate aggregator behavior without LLM.
+    gatekeeper_enabled_flag:   bool  = True
+
     def with_overrides(self, **kwargs) -> "ConsensusConfig":
         """Return a copy with fields replaced — for tenant-scoped tuning later."""
         from dataclasses import replace

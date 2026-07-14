@@ -41,11 +41,11 @@ from rag.consensus.types import (
 )
 from rag.consensus.query_consensus import run_consensus, intent_dict_from_consensus
 from rag.consensus.aggregator      import aggregate
-from rag.consensus.config          import consensus_layer_enabled
+from rag.consensus.config          import consensus_layer_enabled, gatekeeper_enabled
 
 __all__ = [
     "SignalOutput", "ConsensusResult", "ConsensusConfig",
     "Clarification", "ClarificationOption",
     "run_consensus", "intent_dict_from_consensus",
-    "aggregate", "consensus_layer_enabled",
+    "aggregate", "consensus_layer_enabled", "gatekeeper_enabled",
 ]

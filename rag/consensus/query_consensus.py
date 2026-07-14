@@ -137,6 +137,19 @@ def run_consensus(
 
     # ── Aggregate ─────────────────────────────────────────────────────
     result = aggregate(signals, cfg)
+
+    # ── Ship 1.5: inline LLM gatekeeper ──────────────────────────────
+    # Bounded arbiter — reviews the tentative decision, can approve,
+    # modify (question_type/refs/framework), or reject (→ insufficient).
+    # Skips on hard-anchor cases where explicit_refs + curated already
+    # agree (cheap_consensus_hit path). Default ON; disable via
+    # GATEKEEPER_ENABLED=0.
+    from rag.consensus.config import gatekeeper_enabled
+    # Env flag AND config flag must both allow it — either can disable.
+    if gatekeeper_enabled() and getattr(cfg, "gatekeeper_enabled_flag", True):
+        from rag.consensus.gatekeeper import gatekeep
+        result = gatekeep(query, result, signals, cfg)
+
     result.latency_ms = int((time.time() - t0) * 1000)
     return result
 

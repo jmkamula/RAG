@@ -11,7 +11,10 @@ from rag.consensus import run_consensus
 from rag.consensus.types import ConsensusConfig
 
 
-CFG = ConsensusConfig()
+# These tests exercise the aggregator + signal dispatch. Gatekeeper
+# behavior is covered separately in test_gatekeeper.py — disable here
+# so we don't need a live LLM.
+CFG = ConsensusConfig(gatekeeper_enabled_flag=False)
 
 
 # ── Mocks ────────────────────────────────────────────────────────────
