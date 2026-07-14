@@ -780,6 +780,26 @@ class Resolver:
         gr, v_nodes, neo4j_ms, vector_ms, _nids = self._retrieve_and_expand(
             req, entry=entry, extra_node_ids=seeds
         )
+
+        # Ship 1.6 decoupling: for queries about a specific ref, extend
+        # the posture filter with xfw-linked nodes returned by graph
+        # expansion. This means a query about a GDPR / ISO 27701 article
+        # ALWAYS surfaces its ISO-27001 xfw bridges' posture, regardless
+        # of whether the intent was classified posture_check or
+        # cross_framework. Removes the hidden coupling where
+        # question_type was doing double duty as "surface xfw bridges."
+        if cited_seeds:
+            xfw_ids: set[str] = set()
+            for _node in list(gr.primary_nodes) + list(gr.secondary_nodes):
+                # Only add xfw-source nodes; other sources are self /
+                # parent / child of the cited ref (already covered)
+                src = getattr(_node, "source", "")
+                if src in ("xfw", "lateral"):
+                    xfw_ids.add(_node.node_id)
+            for _nid in xfw_ids:
+                if _nid in self._posture and _nid not in posture:
+                    posture[_nid] = self._posture[_nid]
+
         return ResolvedContext(
             taxonomy_type   = "POSTURE_STATUS",
             taxonomy_entry  = entry,
@@ -901,9 +921,15 @@ class Resolver:
     # --- Tier 4: Cross-cutting ---
 
     def _resolve_cross_framework(self, req, entry):
+        # Ship 1.6 alignment: also seed with cited refs so a query naming
+        # a specific article (GDPR Art.32, ISO 27701 A.7.2.5) gets
+        # focused xfw expansion around that ref — not just tenant-wide
+        # posture spread. Mirrors _resolve_posture_status's seeding.
+        cited_seeds      = _cited_ref_node_ids(req.cited_refs, req.standards)
         posture_node_ids = _posture_nc_ofi_ids(self._posture)
+        seeds            = cited_seeds + [n for n in posture_node_ids if n not in cited_seeds]
         gr, v_nodes, neo4j_ms, vector_ms, _nids = self._retrieve_and_expand(
-            req, entry=entry, extra_node_ids=posture_node_ids
+            req, entry=entry, extra_node_ids=seeds
         )
         return ResolvedContext(
             taxonomy_type   = "CROSS_FRAMEWORK",
