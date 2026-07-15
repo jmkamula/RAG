@@ -1581,14 +1581,19 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             answer_text, posture_by_ref,
         )
 
-        # Cross-framework bridge footer: when the query asks about a GDPR
+        # Cross-framework bridge footer: when the query mentions a GDPR
         # article, the LLM is stochastic about citing the ISO bridges it
         # was given. Append a deterministic enumeration so the inter-
-        # framework linkage is always visible. Skip if no bridges in
-        # context (handled by xfw_nodes_list filter above), or if the
-        # LLM already enumerated them all.
+        # framework linkage is always visible.
+        #
+        # Ship 1.7c: data-driven trigger — fires whenever there are
+        # xfw nodes in context AND the query has an article reference,
+        # regardless of the classified question_type. Previously this
+        # was gated on question_type == CROSS_FRAMEWORK, meaning
+        # posture_check-routed GDPR queries lost their bridge footer
+        # even when the resolver had surfaced xfw bridges.
         from rag.classifier import QuestionType as _QT
-        if intent and intent.question_type == _QT.CROSS_FRAMEWORK and xfw_nodes_list:
+        if xfw_nodes_list:
             article_refs = [r for r in (getattr(intent, "cited_refs", []) or [])
                             if r.startswith("Art.")]
             if not article_refs:
@@ -1729,12 +1734,25 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                 # answer even if the resolver surfaced GDPR bridges
                 # rather than the ISO leaf itself.
                 _context_refs: set[str] = set()
+                # Selected LAYER 1/2 nodes (the LLM's shortlist)
                 for n in list(selected_primary_nodes) + list(selected_xfw_nodes):
                     if getattr(n, "ref", None):
                         _context_refs.add(n.ref)
+                # Ship 1.7c: also include ALL refs from the resolver-
+                # surfaced node_list (not just what the LLM selected).
+                # This closes the coupling where the guard stripped
+                # xfw refs the resolver had legitimately provided but
+                # the LLM's selection had missed. As we add SOC2 /
+                # NIS2 / DORA, the xfw list will grow — the guard's
+                # context needs to grow with it.
+                for n in (node_list or []):
+                    if getattr(n, "ref", None):
+                        _context_refs.add(n.ref)
+                # Doc contexts (may not be in node_list)
                 for _ctx in (doc_contexts or {}).values():
                     if getattr(_ctx, "control_ref", None):
                         _context_refs.add(_ctx.control_ref)
+                # User's own cited refs and refs extracted from query text
                 if intent and getattr(intent, "cited_refs", None):
                     _context_refs.update(intent.cited_refs)
                 try:
