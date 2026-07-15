@@ -109,9 +109,24 @@ def _detect_ambiguity(
 
     If the top-K within tie_band span multiple graph_tightness
     families, emit a topic_ambiguity clarification.
+
+    Skip when the query has a decisive intent that doesn't need
+    a ref anchor (definition/gap_analysis/cross_framework can be
+    answered without pinning to one specific control). Retrieval
+    scores for those query types often mix unrelated refs — that's
+    NOT a topic ambiguity, it's the LLM having plenty to talk about.
     """
     if not ordered_refs or len(ordered_refs) < 2:
         return None
+
+    # Skip ambiguity check for intent types that don't need a specific
+    # ref anchor. Signal C (curated_lexicon) is the authority on this.
+    _refless_intent = {"definition", "gap_analysis", "cross_framework",
+                       "free_assessment"}
+    for sig in signals:
+        if (sig.fired and sig.name == "curated_lexicon"
+                and sig.question_type in _refless_intent):
+            return None
 
     top_score = ordered_refs[0][1]
     # Only refs within tie_band of the top
