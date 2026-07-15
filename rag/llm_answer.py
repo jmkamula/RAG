@@ -518,6 +518,19 @@ When the query asks "what documents do we need for X":
 - Structure: Document name → why required → key contents → current status
 """
 
+# ── Utility: UUID-shape detector ──────────────────────────────────────────────
+
+_UUID_RE = re.compile(
+    r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+)
+
+
+def _is_uuid_shape(s: str | None) -> bool:
+    if not s:
+        return False
+    return bool(_UUID_RE.match(s))
+
+
 # ── Standard label helpers ────────────────────────────────────────────────────
 
 # ────────────────────────────────────────────────────────────────────────
@@ -1017,7 +1030,33 @@ class LLMAnswer:
           - cited_refs: only refs from selected nodes
           - posture_findings: posture from selected nodes
           - was_corrected: True if verification triggered a correction
+
+        Ship 2' (2026-07-15): when CASEFILE_ENABLED=1 (default OFF),
+        the call is delegated to _casefile_flow — a compact digest-
+        based path with a deterministic preservation-check post-process.
+        See rag/casefile for the design.
         """
+        # ── Ship 2' case-file path (behind feature flag) ──────────────────
+        if os.getenv("CASEFILE_ENABLED", "0") == "1":
+            try:
+                return self._casefile_flow(
+                    query             = query,
+                    nodes             = nodes,
+                    posture           = posture,
+                    intent            = intent,
+                    tenant_name       = tenant_name,
+                    doc_contexts      = doc_contexts,
+                    incident_contexts = incident_contexts,
+                    scope_standards   = scope_standards,
+                    last_entity       = last_entity,
+                )
+            except Exception as _cfe:
+                # Fall-through to the legacy path — the case-file flow
+                # is opt-in and must never break rank_and_answer.
+                logging.getLogger("rag.llm_answer").warning(
+                    "casefile_flow failed, falling back to legacy: %s", _cfe,
+                )
+
         t0 = time.time()
 
         # ── Infer primary standard from intent and query ──────────────────
@@ -1910,6 +1949,223 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         r'\b(?:DOC\d{3}|CD-[A-Z]{2,4}-\d{3,4}|'
         r'A\.\d+(?:\.\d+)*|Art\.\d+(?:\(\d+\))?)\b'
     )
+
+    # ── Ship 2' case-file flow ────────────────────────────────────────────
+
+    def _casefile_flow(
+        self,
+        query:             str,
+        nodes:             list,
+        posture:           dict | None,
+        intent,
+        tenant_name:       str  = "",
+        doc_contexts:      dict | None = None,
+        incident_contexts: list | None = None,
+        scope_standards:   list[str] | None = None,
+        last_entity:       dict | None = None,
+    ) -> "ComplianceAnswer":
+        """
+        Ship 2' rank_and_answer variant: compact digest + preservation
+        check. Called from rank_and_answer when CASEFILE_ENABLED=1.
+
+        Flow:
+          1. Build a CaseFile wrapping the resolver's outputs.
+          2. Render (system, user) via build_prompt_pair(cf) — ~2k tokens.
+          3. Call LLM with the digest — no rank rubric, direct answer.
+          4. Extract PreservationSpec from the CaseFile.
+          5. check_and_repair the LLM output — deterministic footers
+             for any dropped refs/verdicts/bridges.
+          6. Log to chat_casefile_log (schema_v68) — silent-fail.
+          7. Return ComplianceAnswer with repaired text.
+
+        Verification / correction passes are SKIPPED here — the
+        preservation-check is our verification. Regressions surface
+        as repair events + eval-suite drops.
+        """
+        from rag.casefile import CaseFile
+        from rag.casefile.digest import (
+            build_prompt_pair, approx_tokens,
+        )
+        from rag.casefile.preservation import extract_preservation_spec
+        from rag.casefile.repair import check_and_repair
+
+        t0 = time.time()
+
+        # ── Build a CaseFile ───────────────────────────────────────────
+        # Split nodes into Layer 1 vs Layer 2. Same heuristic as the
+        # legacy path: xfw_edges non-empty ⇒ xfw node.
+        _nodes = list(nodes or [])
+        _xfw   = [n for n in _nodes if getattr(n, "xfw_edges", None)]
+        _prim  = [n for n in _nodes if not getattr(n, "xfw_edges", None)]
+
+        # Duck-typed resolver-shaped view. CaseFile only reads
+        # posture_nodes + graph_nodes, so a namespace with those two
+        # attributes is enough.
+        from types import SimpleNamespace
+        _graph = SimpleNamespace(
+            primary_nodes   = _prim,
+            secondary_nodes = [],
+            xfw_nodes       = _xfw,
+            doc_contexts    = dict(doc_contexts or {}),
+            xfw_edges       = [],
+        )
+        _resolved = SimpleNamespace(
+            posture_nodes = dict(posture or {}),
+            graph_nodes   = _graph,
+        )
+
+        # Duck-typed tenant view — CaseFile only needs .tenant_name +
+        # .scope.queryable_standards + .tenant_id.
+        # NOTE: rank_and_answer's `tenant_name` kwarg is currently
+        # passed the UUID from arion_graph (state["tenant_id"]). We
+        # detect that shape to populate tenant_id for logging; if it's
+        # a display name, tenant_id stays empty and logging skips.
+        _tid = tenant_name if _is_uuid_shape(tenant_name) else ""
+        _tenant = SimpleNamespace(
+            tenant_name = tenant_name or "",
+            tenant_id   = _tid,
+            scope       = SimpleNamespace(
+                queryable_standards = list(scope_standards or []),
+            ),
+        )
+
+        cf = CaseFile(
+            query        = query,
+            intent       = intent,
+            resolved     = _resolved,
+            session      = None,      # session ships in a later Ship 2' phase
+            tenant       = _tenant,
+            last_entity  = last_entity,
+            incidents    = list(incident_contexts or []),
+        )
+
+        # ── Render digest ─────────────────────────────────────────────
+        t_dig = time.time()
+        system_prompt, user_digest = build_prompt_pair(cf)
+        digest_ms = int((time.time() - t_dig) * 1000)
+
+        sys_tokens  = approx_tokens(system_prompt)
+        user_tokens = approx_tokens(user_digest)
+
+        # ── LLM call ──────────────────────────────────────────────────
+        raw = self._call_llm(
+            system     = system_prompt,
+            user       = user_digest,
+            model      = self.answer_model,
+            max_tokens = self.max_tokens,
+            step       = "rank_answer",
+        )
+        answer_text = self._normalize_clause_refs(raw)
+
+        # ── Preservation check + repair ───────────────────────────────
+        t_rep = time.time()
+        spec = extract_preservation_spec(cf)
+        repair_result = check_and_repair(answer_text, spec, cf)
+        answer_text = repair_result.text
+        repair_ms = int((time.time() - t_rep) * 1000)
+
+        # ── Log to chat_casefile_log (silent-fail) ────────────────────
+        try:
+            self._log_casefile_turn(
+                cf                    = cf,
+                system_prompt_tokens  = sys_tokens,
+                user_digest_tokens    = user_tokens,
+                repair_result         = repair_result,
+                digest_latency_ms     = digest_ms,
+                repair_latency_ms     = repair_ms,
+                total_latency_ms      = int((time.time() - t0) * 1000),
+                casefile_enabled      = True,
+                shadow_mode           = False,
+            )
+        except Exception as _le:
+            logging.getLogger("rag.llm_answer").debug(
+                "casefile log write skipped: %s", _le,
+            )
+
+        # ── Build ComplianceAnswer ───────────────────────────────────
+        cited_refs = self._extract_refs(answer_text)
+
+        # posture_findings shape: {ref → finding} for whatever the
+        # answer cited that we have posture on.
+        posture_by_ref = cf.posture_by_ref()
+        posture_findings = {
+            r: posture_by_ref[r].get("finding", "")
+            for r in cited_refs
+            if r in posture_by_ref
+        }
+        # Layer split for the response envelope.
+        primary_refs = [r for r in cited_refs if r in {n.ref for n in _prim}]
+        xfw_refs     = [r for r in cited_refs if r in {n.ref for n in _xfw}]
+
+        latency_ms = int((time.time() - t0) * 1000)
+        return ComplianceAnswer(
+            answer_text      = answer_text,
+            question_type    = intent.question_type if intent else None,
+            tenant_name      = tenant_name,
+            cited_refs       = cited_refs,
+            posture_findings = posture_findings,
+            verification     = None,
+            verified         = True,       # preservation check IS verification
+            model_used       = self.answer_model,
+            latency_ms       = latency_ms,
+            was_corrected    = repair_result.repaired,
+            primary_refs     = primary_refs,
+            xfw_refs         = xfw_refs,
+        )
+
+    def _log_casefile_turn(
+        self,
+        cf,
+        system_prompt_tokens: int,
+        user_digest_tokens:   int,
+        repair_result,
+        digest_latency_ms:    int,
+        repair_latency_ms:    int,
+        total_latency_ms:     int,
+        casefile_enabled:     bool,
+        shadow_mode:          bool,
+    ) -> None:
+        """Write one row to chat_casefile_log — best-effort, silent-fail.
+
+        Uses a fresh connection so the log write doesn't sit in the
+        session's psycopg2 pool (Ship 1 consensus_log pattern).
+        """
+        import psycopg2, os as _os
+        tenant_id = cf.tenant_id
+        if not tenant_id:
+            return  # nothing to log against
+        try:
+            conn = psycopg2.connect(
+                host     = _os.getenv("PGHOST",     "127.0.0.1"),
+                dbname   = _os.getenv("PGDATABASE", "arioncomply_compliance"),
+                user     = _os.getenv("PGUSER",     "arioncomply_app"),
+                password = _os.getenv("PGPASSWORD", ""),
+            )
+        except Exception:
+            return
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "SELECT set_config('app.tenant_id', %s, FALSE)",
+                    (tenant_id,),
+                )
+            from rag.casefile.log import log_casefile
+            log_casefile(
+                pg_conn              = conn,
+                tenant_id            = tenant_id,
+                case_file            = cf,
+                system_prompt_tokens = system_prompt_tokens,
+                user_digest_tokens   = user_digest_tokens,
+                repair_result        = repair_result,
+                digest_latency_ms    = digest_latency_ms,
+                repair_latency_ms    = repair_latency_ms,
+                total_latency_ms     = total_latency_ms,
+                casefile_enabled     = casefile_enabled,
+                shadow_mode          = shadow_mode,
+            )
+        finally:
+            try: conn.close()
+            except Exception: pass
 
     def compose(
         self,
