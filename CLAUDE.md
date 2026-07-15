@@ -146,8 +146,8 @@ grep -E "ERROR|WARNING" /tmp/api.log
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 202+/203 PASS before any restart (203 cases). Historically-
-# stochastic cases have been root-caused and stabilised:
+# Must be 205+/208 PASS before any restart (208 cases as of Ship 1 close).
+# Historically-stochastic cases have been root-caused and stabilised:
 #   #1 + #5 (partial) — STABILISED 2026-06-23 via schema_v43 tenant_must_overrides
 #         (cloud-only A.5.15:physical_rules marked N/A; advisory no
 #         longer leaks "physical" into access-rights chat answers).
@@ -157,17 +157,31 @@ PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
 #   #2  — STABILISED 2026-06-15 by dropping A.5.26 ref lock (state drift; see
 #         [[feedback-eval-state-drift]]). Structural assertions (NC + min_findings)
 #         only.
-#   #24 + #25 (Art.32 / Art.5) — STABILISED 2026-06-14 via cross_framework
-#         shape validator + deterministic bridge footer in compose
-#         (llm_answer.rank_and_answer appends "↳ Bridges to ISO 27001 for
-#         Art.X: ...").
+#   #24 + #25 (Art.32 / Art.5) — STABILISED 2026-07-14 (Ship 1.6-1.7): resolver
+#         xfw decoupling + Signal C question_type lock + dedicated xfw budget
+#         lane. Cross-framework bridges surface via data-driven bridge footer
+#         (not question_type-gated).
 #   #21 — STABILISED 2026-07-13 (9443aeb): NOT phrasing jitter — was 60s
 #         LLM timeout too tight + verify+correct loop truncating at
 #         max_tokens=1500. Fix: skip verify+correct for
 #         implementation/gap_analysis queries + timeout_s=180. See
 #         llm_answer.py:783,1533.
-# Any regression below 201/203 blocks restart. Prefer root-causing new
-# intermittent failures over labeling them "stochastic" — see #21 arc.
+#   #7 (A.8.19 ChatGPT) — STABILISED 2026-07-15 (Ship 1.7d): DOCUMENT_TOPIC_MAP
+#         entries for chatgpt/ai tools/llm use → A.8.19. Signal C emits at
+#         curated_lexicon_weight=1.00 (bumped from 0.30). Curator learnings
+#         are now top-tier signal weight — highest of any signal.
+# Residual 2-3 non-PASS after Ship 1 (target 205/208 not 208/208):
+#   #14, #3 (rotating) — LLM stochastically omits acronym (OFI/NC) from
+#         DEFINITION-query prose even when it's in context. Prose-layer
+#         issue, not intent — Ship 2 (AnswerPayload scaffold) is the fix.
+#   #33 (rotating) — LLM stochastically drops A.5.1 from prose even when
+#         Signal C locks it in focus_refs. Same class as #14. Ship 3
+#         (preservation-check polish) closes this.
+#   #200 — pre-existing gap_analysis vs posture_check mismatch on
+#         "NC findings on identity"; Signal C doesn't fire on this phrasing.
+# Any regression below 203/208 blocks restart. Prefer root-causing new
+# intermittent failures over labeling them "stochastic" — see #21 arc + Ship 1
+# consensus architecture below.
 # Whenever you add a user-facing feature/fix, append an EvalCase that would
 # have failed pre-change and passes post-change — see the feedback-memory rule.
 ```
@@ -231,6 +245,73 @@ curl -s -X POST http://localhost:8080/api/v1/chat \
 Query → classify node → retrieve node → update_session node → END
 ↓                ↓
 clarify node    (LLM rank_and_answer OR Postgres short-circuit)
+
+### Chat pipeline — Ship 1 consensus architecture (2026-07-14)
+
+The classify node runs **retrieval-first consensus** across 7
+deterministic signals before falling back to the LLM classifier.
+Curator-authored mappings dominate; LLM is a bounded arbiter, not
+a free-form decider.
+
+**Signal weights** (see `rag/consensus/types.py`):
+- Signal B (`explicit_refs`, regex) — 1.00 — user typed a literal ref
+- **Signal C (`curated_lexicon`) — 1.00 — highest tier — DOCUMENT_TOPIC_MAP +
+  CLEAR_INTENT_PHRASES. "Optimal place to enhance as we learn" —
+  when a curator maps a topic phrase to a ref, that mapping is
+  authoritative.**
+- Signal F (`framework_hint`) — 0.20 — "GDPR"/"ISO 27001" tokens
+- Signal G (`session_context`) — 0.10 — deictic follow-up refs
+- Signal A (`retrieval`) — cosine score in ~0.35-0.70 — ChromaDB semantic
+- Signal E (`graph_tightness`) — ±0.05/0.10 — family clustering modifier
+- Signal D (`posture_boost`) — 0.15 — tenant NC/OFI relevance
+
+**Aggregator** (`rag/consensus/aggregator.py`) sums signal weights per ref.
+Verdict = confident when top_score >= 0.35 AND ≥2 corroborators (with
+`llm_fallback_needed=True` on insufficient).
+
+**Gatekeeper** (`rag/consensus/gatekeeper.py`) is a **bounded LLM arbiter**:
+- Approves, modifies (refs / verdict only), or rejects — **cannot invent**
+- Signal C's `question_type` is HARD-LOCKED against LLM override (`_signals_lock_question_type`)
+- Signal B's `framework` is HARD-LOCKED against LLM override
+- Applied only when signals need arbitration; hard-anchor early-exit skips it
+- Design principle: deterministic signals lead, LLM fills gaps. NEVER lets
+  the LLM override a signal that already fired cleanly.
+
+**Escape hatch**: `USE_LEGACY_CLASSIFIER=1` disables consensus entirely,
+falls back to the pre-Ship-1 LLM classifier path. Default OFF.
+
+**Observability**: every consensus decision logged to `chat_consensus_log`
+(schema_v67). Column `llm_fallback_used` is the tuning signal.
+
+**When you edit routing behaviour**: prefer adding CLEAR_INTENT_PHRASES /
+DOCUMENT_TOPIC_MAP entries over prompt-tuning the LLM classifier or
+gatekeeper. Curator additions are top-tier signal weight; prompt
+instructions to LLMs are soft signals that get ignored ~5-15% of the time.
+
+### xfw dedicated lane — Ship 1.7 (2026-07-15)
+
+Cross-framework nodes have their own budget separate from primary
+(cited + parents + children + lateral). As tenants enrol more
+frameworks (SOC2/NIS2/DORA on top of ISO 27001 + GDPR + ISO 27701),
+xfw doesn't get squeezed by budget contention.
+
+`rag/graph_expander.py`:
+- `NODE_BUDGET_PRIMARY` — cited + parents + children + lateral
+- `NODE_BUDGET_XFW` — dedicated xfw lane
+- `_prioritise_xfw` ranks by relationship strength (IMPLEMENTS > SUPPORTS
+  > ENABLES > GOVERNANCE) + direction (outbound-from-cited first) +
+  anchor proximity + tenant scope applicability
+- `ExpandedContext.xfw_nodes` — first-class field
+- `GraphResult.xfw_nodes` — carried through resolver to rank_and_answer
+
+**Bridge footer** (`llm_answer.py:1595+`) is **data-driven** — fires
+whenever `xfw_nodes_list` is non-empty AND query has an article ref,
+regardless of question_type routing. Previously gated on
+CROSS_FRAMEWORK routing only; that coupling is removed.
+
+**Scope guard** (`framework_scope_guard`) sees ALL resolver-surfaced refs
+(primary + secondary + xfw), not just the LLM's LAYER 1/2 shortlist —
+so it stops stripping legitimate xfw citations.
 
 ### Answer layers
 - Layer 1: Primary standard nodes (ISO 27001 with posture NC/OFI/Comply)
