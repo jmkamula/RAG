@@ -16,7 +16,7 @@ import logging
 from typing import Callable
 
 from rag.answer.types    import AnswerPayloadBase, FreeformPayload
-from rag.answer.builders import freeform
+from rag.answer.builders import freeform, standard_knowledge
 
 
 logger = logging.getLogger("rag.answer.dispatcher")
@@ -27,7 +27,9 @@ logger = logging.getLogger("rag.answer.dispatcher")
 # Ship 2.2 = posture_status, etc.). Anything not in the registry
 # falls through to freeform.build.
 _BUILDERS: dict[str, Callable] = {
-    # Populated by Ship 2.1..2.5 as each builder is implemented.
+    # Ship 2.1
+    "definition": standard_knowledge.build,
+    # Ship 2.2..2.5 will register the remaining taxonomies here
 }
 
 
