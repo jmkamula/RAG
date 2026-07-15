@@ -173,10 +173,13 @@ PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
 # Residual 2-3 non-PASS after Ship 1 (target 205/208 not 208/208):
 #   #14, #3 (rotating) — LLM stochastically omits acronym (OFI/NC) from
 #         DEFINITION-query prose even when it's in context. Prose-layer
-#         issue, not intent — Ship 2 (AnswerPayload scaffold) is the fix.
+#         issue, not intent. Ship 2' (case-file pattern, 2026-07-15)
+#         addresses this via deterministic preservation-check footer.
+#         Behind CASEFILE_ENABLED=0 during rollout — flip to 1 to enable.
 #   #33 (rotating) — LLM stochastically drops A.5.1 from prose even when
-#         Signal C locks it in focus_refs. Same class as #14. Ship 3
-#         (preservation-check polish) closes this.
+#         Signal C locks it in focus_refs. Same class as #14. Ship 2'
+#         preservation footer closes this deterministically when the
+#         flag is on.
 #   #200 — pre-existing gap_analysis vs posture_check mismatch on
 #         "NC findings on identity"; Signal C doesn't fire on this phrasing.
 # Any regression below 203/208 blocks restart. Prefer root-causing new
@@ -312,6 +315,79 @@ CROSS_FRAMEWORK routing only; that coupling is removed.
 **Scope guard** (`framework_scope_guard`) sees ALL resolver-surfaced refs
 (primary + secondary + xfw), not just the LLM's LAYER 1/2 shortlist —
 so it stops stripping legitimate xfw citations.
+
+### Case-file pattern — Ship 2' (2026-07-15)
+
+Alternative rank_and_answer flow behind `CASEFILE_ENABLED=1`. Motivation:
+`rank_answer` prompts averaged **21,731 tokens** (14-day window, peak
+61,827), diluting the LLM's attention on ~550 tokens of actual answer.
+The case-file pattern hands the LLM a compact digest and repairs its
+output deterministically.
+
+**Flow** (inside `rank_and_answer._casefile_flow`):
+1. Build `CaseFile` (`rag/casefile/types.py`) wrapping the resolver's
+   posture + graph_nodes + intent + tenant + session + last_entity.
+2. Render `(system, user)` prompts via `build_prompt_pair(cf)` —
+   ~450 + ~200 tokens on realistic queries (33× reduction).
+3. LLM call — no rank rubric, direct answer. Verify+correct SKIPPED.
+4. `extract_preservation_spec(cf)` builds the MUST-preserve set:
+   * `required_refs` = cited refs (with data) ∪ top-3 ranked posture
+   * `draft_refs` = required refs whose posture is unconfirmed
+   * `verdict_by_ref` = {ref: NC|OFI|Comply}
+   * `bridge_footer` = deterministic xfw bridge line
+5. `check_and_repair(answer, spec, cf)` appends deterministic footers
+   for any dropped refs / verdicts / [DRAFT] tags / bridge lines.
+   APPEND-ONLY — never rewrites LLM prose.
+6. Log to `chat_casefile_log` (schema_v68) — silent-fail.
+
+**Digest shape** (fixed slots, empty sections omitted):
+```
+QUERY: ...
+DEICTIC WITHOUT CONTEXT: ... (optional)
+OPEN INCIDENTS: ... (optional)
+POSTURE (showing N of M assessed):
+- A.5.18 [NC-DRAFT] register incomplete
+- ...
+XFW BRIDGES:
+- Art.32 ← A.5.15 [Comply], A.5.18 [NC-DRAFT]
+OBLIGATIONS:
+- A.5.18: Access rights shall be...
+DOCUMENTS: (optional)
+SESSION active: A.5.18
+SCOPE: ISO 27001 + GDPR
+```
+
+**Slim system prompt** (~450 tokens vs 3,100): persona + 7 output
+rules + one-line NC/OFI/Comply glossary. Drops the LAYER-1/LAYER-2
+explainer + SELECTED_PRIMARY rubric + N/A-controls list (moved into
+the SCOPE section per turn).
+
+**Preservation guarantees** (repair pass appends missing elements):
+1. `required_refs` — every cited ref with data must appear
+2. `draft_refs` — [DRAFT] tag survives for unconfirmed postures
+3. `verdict_by_ref` — NC/OFI/Comply prefix adjacent to each ref
+4. `bridge_footer` — `↳ Bridges to ISO 27001 for Art.X: ...`
+
+Missing elements get consolidated into a `↳ Compliance facts: ...`
+footer — same append-only pattern as Ship 1.14's bridge footer.
+
+**Escape hatch**: `CASEFILE_ENABLED=0` disables the new path. Any
+exception in `_casefile_flow` also falls back to the legacy 900-LOC
+path — the case-file flow can never block a response.
+
+**Observability**: `chat_casefile_log` records `case_file_summary`,
+prompt-token breakdown, `repair_events[]`, `footers_added[]`,
+latency. Tuning signal: high `repair_events_count` on the same
+kind indicates the digest needs to surface that element more
+prominently OR the preservation trigger is too broad.
+
+Corresponding modules:
+- `rag/casefile/types.py` — CaseFile
+- `rag/casefile/digest.py` — build_prompt_pair, section renderers
+- `rag/casefile/preservation.py` — extract_preservation_spec
+- `rag/casefile/repair.py` — check_and_repair
+- `rag/casefile/log.py` — log_casefile
+- `db/schema_v68_chat_casefile_log.sql`
 
 ### Answer layers
 - Layer 1: Primary standard nodes (ISO 27001 with posture NC/OFI/Comply)

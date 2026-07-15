@@ -2525,6 +2525,11 @@ def make_retrieve_node(
             # follow-ups instead of returning a generic empty-retrieval
             # template. See [[conversational-context-routing-followup]].
             last_entity      = state.get("last_entity") or None,
+            # Explicit tenant UUID for Ship 2' observability. Note:
+            # state["tenant_id"] is a DISPLAY NAME here, not a UUID;
+            # the UUID lives on the tenant object. Ship 2' uses this
+            # for chat_casefile_log RLS.
+            tenant_id        = str(getattr(tenant, "tenant_id", "") or ""),
         )
 
         # ── Write structured trace to DB (best-effort, never blocks answer) ─

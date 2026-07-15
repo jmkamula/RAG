@@ -1017,6 +1017,7 @@ class LLMAnswer:
         incident_contexts:list | None = None,   # list[IncidentObligationContext]
         scope_standards:  list[str] | None = None,   # tenant's queryable standards
         last_entity:      dict | None = None,   # prior-turn entity for deictic follow-ups
+        tenant_id:        str  = "",     # tenant UUID for observability (Ship 2')
     ) -> "ComplianceAnswer":
         """
         Combined rank + answer in a single Mistral call.
@@ -1049,6 +1050,7 @@ class LLMAnswer:
                     incident_contexts = incident_contexts,
                     scope_standards   = scope_standards,
                     last_entity       = last_entity,
+                    tenant_id         = tenant_id,
                 )
             except Exception as _cfe:
                 # Fall-through to the legacy path — the case-file flow
@@ -1963,6 +1965,7 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         incident_contexts: list | None = None,
         scope_standards:   list[str] | None = None,
         last_entity:       dict | None = None,
+        tenant_id:         str  = "",
     ) -> "ComplianceAnswer":
         """
         Ship 2' rank_and_answer variant: compact digest + preservation
@@ -2016,11 +2019,17 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
 
         # Duck-typed tenant view — CaseFile only needs .tenant_name +
         # .scope.queryable_standards + .tenant_id.
-        # NOTE: rank_and_answer's `tenant_name` kwarg is currently
-        # passed the UUID from arion_graph (state["tenant_id"]). We
-        # detect that shape to populate tenant_id for logging; if it's
-        # a display name, tenant_id stays empty and logging skips.
-        _tid = tenant_name if _is_uuid_shape(tenant_name) else ""
+        # NOTE: historically arion_graph passes state["tenant_id"] as
+        # the tenant_name kwarg (which is actually a display name, not
+        # a UUID — see arion_graph.py:1455). Ship 2' adds an explicit
+        # tenant_id kwarg for observability. When set, we use it; when
+        # not, fall back to _is_uuid_shape on tenant_name.
+        if tenant_id:
+            _tid = tenant_id
+        elif _is_uuid_shape(tenant_name):
+            _tid = tenant_name
+        else:
+            _tid = ""
         _tenant = SimpleNamespace(
             tenant_name = tenant_name or "",
             tenant_id   = _tid,
