@@ -92,23 +92,32 @@ class ExpandedNode:
 class ExpandedContext:
     """
     Full expansion result from GraphExpander.
-    Structured for direct consumption by ContextAssembler.
+
+    Ship 1.7 (2026-07-14): xfw_nodes is now a first-class field
+    separate from secondary_nodes. Prior to Ship 1.7 xfw nodes were
+    stuffed into secondary_nodes alongside children/lateral, forcing
+    downstream code to filter by source. Now xfw has a dedicated lane
+    with its own budget — see NODE_BUDGET_XFW below.
     """
     # Primary nodes — always include in full in the LLM context
     # (cited refs + their direct parents)
     primary_nodes:   list[ExpandedNode]
 
     # Secondary nodes — important context, may be compressed
-    # (children, cross-framework, lateral)
+    # (children, lateral). NO xfw here as of Ship 1.7.
     secondary_nodes: list[ExpandedNode]
 
+    # Cross-framework nodes — dedicated lane. Scales with tenant
+    # framework count via NODE_BUDGET_XFW. See _prioritise_xfw.
+    xfw_nodes:       list[ExpandedNode] = field(default_factory=list)
+
     # Cross-framework relationship map
-    xfw_edges:       list[CrossFrameworkEdge]
+    xfw_edges:       list[CrossFrameworkEdge] = field(default_factory=list)
 
     # Convenience accessors
     @property
     def all_nodes(self) -> list[ExpandedNode]:
-        return self.primary_nodes + self.secondary_nodes
+        return self.primary_nodes + self.secondary_nodes + self.xfw_nodes
 
     @property
     def all_node_ids(self) -> list[str]:
@@ -248,16 +257,44 @@ def _compute_urgency(deadline_at) -> str:
 # ── Node budget per question type ─────────────────────────────────────────────
 
 
+# Ship 1.7: PRIMARY budget covers cited refs + their parents + children +
+# lateral traffic. XFW budget is a SEPARATE lane so that adding more
+# frameworks (SOC2/NIS2/DORA on top of ISO 27001 + GDPR + 27701) doesn't
+# starve cross-framework surfacing by competing for the same slots.
+#
+# Prior to Ship 1.7 a single NODE_BUDGET was shared across everything,
+# which meant a GDPR Art.32 query with 8-10 sibling articles could
+# consume the entire budget and leave 0 slots for ISO xfw bridges.
+NODE_BUDGET_PRIMARY: dict[QuestionType, int] = {
+    QuestionType.DEFINITION:           10,
+    QuestionType.IMPLEMENTATION:       10,
+    QuestionType.GAP_ANALYSIS:         14,
+    QuestionType.POSTURE_CHECK:        12,
+    QuestionType.CROSS_FRAMEWORK:       6,   # xfw carries most of the value
+    QuestionType.FREE_ASSESSMENT:      14,
+    QuestionType.DOCUMENT_INVENTORY:    6,
+    QuestionType.DOCUMENT_CONTENT:     10,
+    QuestionType.UNKNOWN:              10,
+}
+
+NODE_BUDGET_XFW: dict[QuestionType, int] = {
+    QuestionType.DEFINITION:            2,   # rarely needs xfw bridges
+    QuestionType.IMPLEMENTATION:        6,
+    QuestionType.GAP_ANALYSIS:          8,
+    QuestionType.POSTURE_CHECK:         8,
+    QuestionType.CROSS_FRAMEWORK:      12,   # xfw IS the primary purpose
+    QuestionType.FREE_ASSESSMENT:       8,
+    QuestionType.DOCUMENT_INVENTORY:    4,
+    QuestionType.DOCUMENT_CONTENT:      6,
+    QuestionType.UNKNOWN:               6,
+}
+
+# Deprecated — kept for backward compat with any external caller that
+# reads it. Sum of the two split budgets. Prefer the split ones going
+# forward.
 NODE_BUDGET: dict[QuestionType, int] = {
-    QuestionType.DEFINITION:          12,
-    QuestionType.IMPLEMENTATION:      15,
-    QuestionType.GAP_ANALYSIS:        22,
-    QuestionType.POSTURE_CHECK:       20,
-    QuestionType.CROSS_FRAMEWORK:     18,
-    QuestionType.FREE_ASSESSMENT:     22,
-    QuestionType.DOCUMENT_INVENTORY:   8,   # structured query — fewer nodes needed
-    QuestionType.DOCUMENT_CONTENT:    14,   # increased for xfw coverage
-    QuestionType.UNKNOWN:             12,
+    qt: NODE_BUDGET_PRIMARY[qt] + NODE_BUDGET_XFW[qt]
+    for qt in NODE_BUDGET_PRIMARY
 }
 
 
@@ -377,7 +414,12 @@ class GraphExpander:
         if not node_ids:
             return self._empty_context()
 
-        budget = NODE_BUDGET.get(intent.question_type, 15)
+        # Ship 1.7: _graph_expand uses split NODE_BUDGET_PRIMARY +
+        # NODE_BUDGET_XFW internally. The `budget` arg here is only
+        # used by the vector-only fallback path (which has no xfw
+        # traversal) — for that path we sum both budgets.
+        budget = (NODE_BUDGET_PRIMARY.get(intent.question_type, 12)
+                  + NODE_BUDGET_XFW.get(intent.question_type, 6))
 
         # Try graph expansion
         if self._is_online():
@@ -468,40 +510,68 @@ class GraphExpander:
 
         elapsed = time.time() - t0
 
-        # ── Step 3: Prioritise and budget ─────────────────────────────────
-        cited_set   = set(node_ids)
-        all_ids     = self._prioritise(
-            cited   = cited_set,
-            parents = parent_ids - cited_set,
-            xfw     = xfw_node_ids - cited_set - parent_ids,
-            children = child_ids - cited_set - parent_ids - xfw_node_ids,
-            lateral  = lateral_ids - cited_set - parent_ids - xfw_node_ids - child_ids,
-            intent  = intent,
-            budget  = budget,
+        # ── Step 3: Prioritise — Ship 1.7 SPLIT budgets ────────────────────
+        # Primary and xfw lanes have separate budgets so xfw doesn't
+        # get squeezed as we add more frameworks.
+        cited_set = set(node_ids)
+        xfw_only  = xfw_node_ids - cited_set - parent_ids
+        parents_only  = parent_ids - cited_set
+        children_only = child_ids - cited_set - parent_ids - xfw_node_ids
+        lateral_only  = lateral_ids - cited_set - parent_ids - xfw_node_ids - child_ids
+
+        budget_primary = NODE_BUDGET_PRIMARY.get(intent.question_type, 12)
+        budget_xfw     = NODE_BUDGET_XFW.get(intent.question_type, 6)
+
+        primary_ids_ordered = self._prioritise_primary(
+            cited    = cited_set,
+            parents  = parents_only,
+            children = children_only,
+            lateral  = lateral_only,
+            intent   = intent,
+            budget   = budget_primary,
+        )
+        xfw_ids_ordered = self._prioritise_xfw(
+            xfw       = xfw_only,
+            cited     = cited_set,
+            parents   = parents_only,
+            xfw_edges = xfw_edges,
+            intent    = intent,
+            budget    = budget_xfw,
+            scope_standards = getattr(intent, "standards_scope", None),
         )
 
-        stats["cited"]    = len(cited_set)
-        stats["parents"]  = len(parent_ids)
-        stats["xfw"]      = len(xfw_node_ids)
-        stats["children"] = len(child_ids)
-        stats["lateral"]  = len(lateral_ids)
-        stats["neo4j_ms"] = round((elapsed) * 1000)
+        stats["cited"]         = len(cited_set)
+        stats["parents"]       = len(parent_ids)
+        stats["xfw_available"] = len(xfw_node_ids)
+        stats["xfw_selected"]  = len(xfw_ids_ordered)
+        stats["children"]      = len(child_ids)
+        stats["lateral"]       = len(lateral_ids)
+        stats["neo4j_ms"]      = round(elapsed * 1000)
 
-        # ── Step 4: Fetch content from ChromaDB ───────────────────────────
-        primary_ids   = list(cited_set | parent_ids)
-        secondary_ids = [i for i in all_ids if i not in set(primary_ids)]
+        # ── Step 4: Fetch content from ChromaDB — three lanes ─────────────
+        # primary lane = cited + parents (always full context)
+        # secondary lane = children + lateral within primary_ids_ordered
+        # xfw lane = the dedicated xfw_ids_ordered
+        primary_lane_ids   = [i for i in primary_ids_ordered
+                              if i in cited_set or i in parents_only]
+        secondary_lane_ids = [i for i in primary_ids_ordered
+                              if i not in cited_set and i not in parents_only]
 
         primary_nodes   = self._fetch_from_chroma(
-            primary_ids, xfw_edges, cited_set, parent_ids
+            primary_lane_ids, xfw_edges, cited_set, parent_ids
         )
         secondary_nodes = self._fetch_from_chroma(
-            secondary_ids, xfw_edges, cited_set, parent_ids
+            secondary_lane_ids, xfw_edges, cited_set, parent_ids
+        )
+        xfw_nodes       = self._fetch_from_chroma(
+            xfw_ids_ordered, xfw_edges, cited_set, parent_ids
         )
 
-        total = len(primary_nodes) + len(secondary_nodes)
+        total = len(primary_nodes) + len(secondary_nodes) + len(xfw_nodes)
         return ExpandedContext(
             primary_nodes   = primary_nodes,
             secondary_nodes = secondary_nodes,
+            xfw_nodes       = xfw_nodes,
             xfw_edges       = xfw_edges,
             total_nodes     = total,
             traversal_stats = stats,
@@ -525,6 +595,7 @@ class GraphExpander:
         return ExpandedContext(
             primary_nodes   = nodes,
             secondary_nodes = [],
+            xfw_nodes       = [],
             xfw_edges       = [],
             total_nodes     = len(nodes),
             traversal_stats = {"mode": "vector_only"},
@@ -544,27 +615,52 @@ class GraphExpander:
         budget:   int,
     ) -> list[str]:
         """
-        Select which node IDs to include within budget.
-        Priority varies by question type.
+        Legacy single-budget prioritiser. Ship 1.7 replaced this with
+        separate _prioritise_primary + _prioritise_xfw so that adding
+        frameworks doesn't starve xfw surfacing. Kept for callers that
+        haven't migrated. Prefer the split methods.
         """
-        result  = list(cited)     # cited always included
+        result  = list(cited)
+        budget -= len(result)
+        order   = [parents, xfw, children, lateral]
+        for group in order:
+            if budget <= 0:
+                break
+            take     = list(group)[:budget]
+            result  += take
+            budget  -= len(take)
+        return result
+
+    def _prioritise_primary(
+        self,
+        cited:    set[str],
+        parents:  set[str],
+        children: set[str],
+        lateral:  set[str],
+        intent:   QueryIntent,
+        budget:   int,
+    ) -> list[str]:
+        """Ship 1.7 primary-lane prioritisation.
+
+        Order: cited → parents → children → lateral. Cited refs always
+        included. Parents (ancestors, immediate context) next. Children
+        are important for enumeration queries. Lateral last.
+
+        xfw is intentionally NOT in this lane — see _prioritise_xfw.
+        """
+        result  = list(cited)
         budget -= len(result)
 
-        # Priority order depends on question type
         if intent.question_type in (
             QuestionType.GAP_ANALYSIS,
             QuestionType.POSTURE_CHECK,
+            QuestionType.CROSS_FRAMEWORK,
         ):
-            # Cross-framework first — need ISO controls for posture lookup
-            order = [parents, xfw, children, lateral]
-        elif intent.question_type == QuestionType.CROSS_FRAMEWORK:
-            order = [xfw, parents, lateral, children]
+            order = [parents, children, lateral]
         elif intent.question_type == QuestionType.DEFINITION:
-            order = [parents, lateral, children, xfw]
-        elif intent.question_type == QuestionType.IMPLEMENTATION:
-            order = [parents, xfw, children, lateral]
+            order = [parents, lateral, children]
         else:
-            order = [parents, xfw, children, lateral]
+            order = [parents, children, lateral]
 
         for group in order:
             if budget <= 0:
@@ -572,8 +668,79 @@ class GraphExpander:
             take     = list(group)[:budget]
             result  += take
             budget  -= len(take)
-
         return result
+
+    def _prioritise_xfw(
+        self,
+        xfw:              set[str],
+        cited:            set[str],
+        parents:          set[str],
+        xfw_edges:        list["CrossFrameworkEdge"],
+        intent:           QueryIntent,
+        budget:           int,
+        scope_standards:  Optional[list[str]] = None,
+    ) -> list[str]:
+        """Ship 1.7 dedicated xfw-lane prioritisation.
+
+        Ranks xfw candidates by:
+          1. Relationship strength (IMPLEMENTS > SUPPORTS > ENABLES > GOVERNANCE)
+          2. Direction (outbound-from-cited beats inbound; direct beats transitive)
+          3. Framework scope applicability (tenant's declared standards first)
+
+        Returns top-N xfw node_ids by score, respecting budget. xfw
+        candidates already excluded from cited/parents (by caller).
+        """
+        if not xfw or budget <= 0:
+            return []
+
+        # Rel-type weights (IMPLEMENTS strongest; higher = better)
+        _REL_WEIGHT = {
+            "IMPLEMENTS":  1.0,
+            "SUPPORTS":    0.7,
+            "ENABLES":     0.5,
+            "GOVERNANCE":  0.4,
+        }
+
+        # Build per-target score
+        scores: dict[str, float] = {}
+        for edge in xfw_edges:
+            # Find the "xfw end" of the edge — the node not in cited/parents
+            for end in (edge.source_id, edge.target_id):
+                if end not in xfw:
+                    continue
+                rel_score  = _REL_WEIGHT.get(edge.rel_type, 0.3)
+                direction_score = 0.15 if edge.direction == "out" else 0.10
+                # Prefer nodes anchored to a cited ref (source or target
+                # of the edge is cited)
+                anchor_score = (
+                    0.20 if (edge.source_id in cited
+                             or edge.target_id in cited)
+                    else 0.10 if (edge.source_id in parents
+                                  or edge.target_id in parents)
+                    else 0.0
+                )
+                s = rel_score + direction_score + anchor_score
+                if end not in scores or s > scores[end]:
+                    scores[end] = s
+
+        # For xfw nodes with no edge data (shouldn't happen but defensive),
+        # keep them with a base score so we don't lose them
+        for nid in xfw:
+            if nid not in scores:
+                scores[nid] = 0.3
+
+        # Scope-standard preference — nodes in tenant's declared standards
+        # first. Framework is embedded in node_id like "ISO27001:2022:A.5.18".
+        if scope_standards:
+            _scope_set = set(scope_standards)
+            for nid, s in list(scores.items()):
+                std = ":".join(nid.split(":")[:2]) if ":" in nid else ""
+                if std and std in _scope_set:
+                    scores[nid] = s + 0.10
+
+        # Sort desc by score, take budget
+        ordered = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)
+        return [nid for nid, _ in ordered[:budget]]
 
     # ── ChromaDB content fetch ─────────────────────────────────────────────
 
@@ -1199,6 +1366,7 @@ class GraphExpander:
         return ExpandedContext(
             primary_nodes   = [],
             secondary_nodes = [],
+            xfw_nodes       = [],
             xfw_edges       = [],
             total_nodes     = 0,
             traversal_stats = {},
