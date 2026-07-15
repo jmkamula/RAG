@@ -38,18 +38,24 @@ class GraphResult:
     """
     Single unified type for all Neo4j output.
     Eliminates type inconsistencies between ExpandedContext, lists, and None.
+
+    Ship 1.7 (2026-07-14): xfw_nodes is a first-class field, carried
+    from ExpandedContext.xfw_nodes. Prior to Ship 1.7 xfw content was
+    mixed into secondary_nodes.
     """
     primary_nodes:      list = field(default_factory=list)
     secondary_nodes:    list = field(default_factory=list)
+    xfw_nodes:          list = field(default_factory=list)
     doc_contexts:       dict = field(default_factory=dict)
     node_ids_input:     int  = 0    # count of node_ids passed to _expand() — for trace
     # Phase 3 granularity fields
     posture_ids_used:   list = field(default_factory=list)  # NC/OFI ids passed to expand
     vector_top_scores:  list = field(default_factory=list)  # [(node_id, score), ...]
+    xfw_edges:          list = field(default_factory=list)  # cross-framework edge records
 
     @property
     def all_nodes(self) -> list:
-        return self.primary_nodes + self.secondary_nodes
+        return self.primary_nodes + self.secondary_nodes + self.xfw_nodes
 
     @classmethod
     def empty(cls) -> "GraphResult":
@@ -67,7 +73,9 @@ class GraphResult:
         return cls(
             primary_nodes   = list(getattr(expanded, "primary_nodes",   []) or []),
             secondary_nodes = list(getattr(expanded, "secondary_nodes", []) or []),
+            xfw_nodes       = list(getattr(expanded, "xfw_nodes",       []) or []),
             doc_contexts    = dict(getattr(expanded, "doc_contexts",    {}) or {}),
+            xfw_edges       = list(getattr(expanded, "xfw_edges",       []) or []),
         )
 
 
@@ -781,22 +789,14 @@ class Resolver:
             req, entry=entry, extra_node_ids=seeds
         )
 
-        # Ship 1.6 decoupling: for queries about a specific ref, extend
-        # the posture filter with xfw-linked nodes returned by graph
-        # expansion. This means a query about a GDPR / ISO 27701 article
-        # ALWAYS surfaces its ISO-27001 xfw bridges' posture, regardless
-        # of whether the intent was classified posture_check or
-        # cross_framework. Removes the hidden coupling where
-        # question_type was doing double duty as "surface xfw bridges."
+        # Ship 1.7b: xfw-linked posture surfaces via the explicit
+        # gr.xfw_nodes field (was filtering secondary_nodes by source
+        # before Ship 1.7). Cleaner + guaranteed to include the full
+        # xfw lane's contribution, not just what happened to land in
+        # secondary_nodes.
         if cited_seeds:
-            xfw_ids: set[str] = set()
-            for _node in list(gr.primary_nodes) + list(gr.secondary_nodes):
-                # Only add xfw-source nodes; other sources are self /
-                # parent / child of the cited ref (already covered)
-                src = getattr(_node, "source", "")
-                if src in ("xfw", "lateral"):
-                    xfw_ids.add(_node.node_id)
-            for _nid in xfw_ids:
+            for _node in getattr(gr, "xfw_nodes", []) or []:
+                _nid = _node.node_id
                 if _nid in self._posture and _nid not in posture:
                     posture[_nid] = self._posture[_nid]
 
@@ -882,6 +882,8 @@ class Resolver:
             neo4j_ms += int((time.time() - neo4j_t0b) * 1000)
             gr.primary_nodes   = gr2.primary_nodes
             gr.secondary_nodes = gr2.secondary_nodes
+            gr.xfw_nodes       = gr2.xfw_nodes      # Ship 1.7b — carry explicit xfw lane
+            gr.xfw_edges       = gr2.xfw_edges
             gr.node_ids_input  = len(node_ids)   # for trace accuracy
             for k, v in gr2.doc_contexts.items():
                 if k not in gr.doc_contexts:
