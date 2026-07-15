@@ -63,7 +63,7 @@ def default_config() -> ConsensusConfig:
         min_corroborators     = _env_int(  "CONSENSUS_MIN_CORROBORATORS",     2),
         max_top_k_retrieval   = _env_int(  "CONSENSUS_MAX_TOP_K",             10),
         explicit_ref_weight       = _env_float("CONSENSUS_EXPLICIT_REF_WEIGHT",       1.00),
-        curated_lexicon_weight    = _env_float("CONSENSUS_CURATED_LEXICON_WEIGHT",    0.30),
+        curated_lexicon_weight    = _env_float("CONSENSUS_CURATED_LEXICON_WEIGHT",    1.00),
         framework_hint_weight     = _env_float("CONSENSUS_FRAMEWORK_HINT_WEIGHT",     0.20),
         session_boost_weight      = _env_float("CONSENSUS_SESSION_BOOST_WEIGHT",      0.10),
         posture_boost_weight      = _env_float("CONSENSUS_POSTURE_BOOST_WEIGHT",      0.15),

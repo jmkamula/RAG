@@ -116,7 +116,9 @@ class ConsensusConfig:
 
     Weights (per-signal contribution to a ref's fused score):
       explicit_ref_weight       — Signal B hard anchor (1.0)
-      curated_lexicon_weight    — Signal C match (0.30)
+      curated_lexicon_weight    — Signal C match (1.00 — highest tier,
+                                    curator-authored mappings are
+                                    authoritative)
       framework_hint_weight     — Signal F match on framework (0.20)
       session_boost_weight      — Signal G active_ref boost (0.10)
       posture_boost_weight      — Signal D NC/OFI boost (0.15)
@@ -133,7 +135,15 @@ class ConsensusConfig:
     max_top_k_retrieval:       int   = 10
 
     explicit_ref_weight:       float = 1.00
-    curated_lexicon_weight:    float = 0.30
+    # Signal C (curated_lexicon) is the highest-weight signal because
+    # it encodes learned domain knowledge from human curators
+    # (DOCUMENT_TOPIC_MAP + CLEAR_INTENT_PHRASES). When the tenant/
+    # curator says "chatgpt → A.8.19", that mapping is authoritative
+    # — it's the optimal place to enhance as we learn from evals and
+    # real queries. Weight >= explicit_ref_weight so a curated topic
+    # match wins over retrieval spread even when the topic isn't
+    # semantically obvious in Chroma's business_description.
+    curated_lexicon_weight:    float = 1.00
     framework_hint_weight:     float = 0.20
     session_boost_weight:      float = 0.10
     posture_boost_weight:      float = 0.15

@@ -1594,8 +1594,11 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         # even when the resolver had surfaced xfw bridges.
         from rag.classifier import QuestionType as _QT
         if xfw_nodes_list:
+            # Filter Nones — cited_refs sometimes contains None entries
+            # in the consensus-layer path (Ship 1.7c widened this to all
+            # queries with xfw, exposing the pre-existing None issue).
             article_refs = [r for r in (getattr(intent, "cited_refs", []) or [])
-                            if r.startswith("Art.")]
+                            if r and r.startswith("Art.")]
             if not article_refs:
                 # Fallback: extract from query
                 article_refs = re.findall(r"\bArt\.\d+(?:\.\d+)?\b", query)

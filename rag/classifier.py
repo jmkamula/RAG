@@ -292,6 +292,18 @@ DOCUMENT_TOPIC_MAP: dict[str, str] = {
     "data subject":        "Art.15",
     "ropa":                "Art.30",
     "records of processing": "Art.30",
+    # AI / third-party software use — A.8.19 covers installation of
+    # software on operational systems. Enrichment for these queries
+    # isn't in Chroma's semantic embeddings today (A.8.19's
+    # business_description is about installation controls generically,
+    # not AI tools). Adding the curated mapping so Signal C routes
+    # deterministically. Same pattern used for cryptography/DPA/etc.
+    "chatgpt":             "A.8.19",
+    "generative ai":       "A.8.19",
+    "ai tools":            "A.8.19",
+    "ai use":              "A.8.19",
+    "llm use":             "A.8.19",
+    "third-party software": "A.8.19",
 }
 
 

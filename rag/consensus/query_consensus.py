@@ -167,12 +167,18 @@ def intent_dict_from_consensus(result: ConsensusResult) -> dict:
 
     This is what makes Ship 1 a drop-in replacement — downstream
     graph nodes (retrieve, update_session) don't need to change.
+
+    focus_refs is the aggregator's top-3 fused ranking. At
+    curated_lexicon_weight=1.0 (equal to explicit_refs), curated
+    topic mappings naturally rank at the top when they fire — no
+    union bypass needed. If a curated ref doesn't reach top-3,
+    that's a fusion-math signal, not a routing bypass to hide.
     """
     question_type = result.question_type or "unknown"
     needs_posture = question_type in _POSTURE_INTENT_TYPES
     return {
         "intent_type":     question_type,
-        "focus_refs":      list(result.refs[:3]),   # top-3, same as classifier
+        "focus_refs":      list(result.refs[:3]),
         "needs_posture":   needs_posture,
         "confidence":      float(result.top_ref_confidence or 0.0),
         "needs_clarif":    result.verdict == "ambiguous",
