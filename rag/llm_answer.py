@@ -915,12 +915,13 @@ class LLMAnswer:
         """Build the user message: context block + question."""
         posture_note = ""
         if context.has_posture:
+            from rag.id_types import ref_of
             findings = context.posture_summary
-            nc_refs  = [r.split(":")[-1] for r, v in findings.items()
+            nc_refs  = [ref_of(r) for r, v in findings.items()
                         if v.get("finding") == "NC"]
-            ofi_refs = [r.split(":")[-1] for r, v in findings.items()
+            ofi_refs = [ref_of(r) for r, v in findings.items()
                         if v.get("finding") == "OFI"]
-            comply_refs = [r.split(":")[-1] for r, v in findings.items()
+            comply_refs = [ref_of(r) for r, v in findings.items()
                            if v.get("finding") == "Comply"]
 
             parts = []
@@ -946,13 +947,13 @@ class LLMAnswer:
         doc_alerts = getattr(context, "document_alerts", None) or []
         if doc_alerts:
             # Identify which controls are in scope for this query
+            from rag.id_types import ref_of
             controls_in_scope = set()
             for nid in context.node_ids_used:
-                ref = nid.split(":")[-1] if ":" in nid else nid
-                controls_in_scope.add(ref)
+                controls_in_scope.add(ref_of(nid))
             # Also include posture refs
             for ref in context.posture_summary:
-                controls_in_scope.add(ref.split(":")[-1])
+                controls_in_scope.add(ref_of(ref))
 
             critical = [a for a in doc_alerts if a.get("alert_type") == "CRITICAL"]
             warning  = [a for a in doc_alerts if a.get("alert_type") == "WARNING"]
@@ -1078,11 +1079,12 @@ class LLMAnswer:
             # block below). Otherwise asking "what's our GDPR Art.32 status?"
             # would route into Layer 1 as [Not yet assessed] and the inheritance
             # path is never exercised.
+            from rag.id_types import standard_of
             postured_stds: set[str] = set()
             for nid in (posture or {}):
-                parts = nid.split(":")
-                if len(parts) >= 2:
-                    postured_stds.add(":".join(parts[:2]))
+                std = standard_of(nid)
+                if std:
+                    postured_stds.add(std)
 
             q = query_text.lower()
             keyword_candidates: list[str] = []
@@ -1147,14 +1149,15 @@ class LLMAnswer:
                                   if n.standard_id in _scope_set]
 
         # XFW relationship map: node_id → set of primary refs it links to
+        from rag.id_types import ref_of as _ref_of_edge
         xfw_rel_map = {}
         for n in xfw_nodes_list:
             linked = set()
             for edge in getattr(n, "xfw_edges", []):
                 if n.node_id == edge.target_id:
-                    linked.add(edge.source_id.split(":")[-1])
+                    linked.add(_ref_of_edge(edge.source_id))
                 else:
-                    linked.add(edge.target_id.split(":")[-1])
+                    linked.add(_ref_of_edge(edge.target_id))
             xfw_rel_map[n.node_id] = linked
 
         # Anti-hallucination guard: xfw nodes without a bridge to any
@@ -1169,9 +1172,10 @@ class LLMAnswer:
         # linked primary controls even when the primary control was not
         # retrieved into primary_nodes_list (the bridge spans the full
         # posture table, not just what graph traversal returned).
+        from rag.id_types import ref_of as _ref_of
         posture_by_ref: dict[str, dict] = {}
         for _nid, _rec in (posture or {}).items():
-            _ref = _rec.get("control_ref") or _nid.split(":")[-1]
+            _ref = _rec.get("control_ref") or _ref_of(_nid)
             if _ref:
                 posture_by_ref[_ref] = _rec
 
@@ -1343,10 +1347,10 @@ class LLMAnswer:
         from rag.classifier import QuestionType
         checklist_block = ""
         if doc_contexts and intent.dimensions.needs_documentation:
+            from rag.id_types import standard_of
             cl_lines = ["\nDOCUMENT CHECKLISTS (use these for document content questions):"]
             for node_id, ctx in list(doc_contexts.items())[:5]:
-                # Derive standard_id from node_id e.g. "ISO27001:2022:A.8.24"
-                std_id = ":".join(node_id.split(":")[:2]) if ":" in node_id else ""
+                std_id = standard_of(node_id)
                 full_ref = _format_ref(std_id, ctx.control_ref) if std_id else ctx.control_ref
                 cl_lines.append(
                     f"\n{full_ref} — {ctx.title} [{ctx.trigger_type}]"
@@ -2594,10 +2598,11 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         # Build posture preamble so verifier knows findings are factual inputs
         posture_preamble = ""
         if posture:
+            from rag.id_types import ref_of
             lines = ["FACTUAL POSTURE FINDINGS (these are pre-assessed facts, "
                      "not claims to verify against legal text):"]
             for node_id, rec in posture.items():
-                ref     = node_id.split(":")[-1]
+                ref     = ref_of(node_id)
                 finding = rec.get("finding", "?")
                 gap     = rec.get("gap_description", "")
                 lines.append(f"  {ref}: {finding}" +

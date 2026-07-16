@@ -457,9 +457,10 @@ class ContextAssembler:
         the finding."""
         if not posture:
             return ""
+        from rag.id_types import ref_of
         lines = ["[COMPLIANCE POSTURE SUMMARY — these are factual assessment findings]"]
         for node_id, rec in posture.items():
-            ref     = node_id.split(":")[-1]
+            ref     = ref_of(node_id)
             finding = rec.get("finding", "?")
             gap     = rec.get("gap_description", "")
             evidence = rec.get("evidence_note", "")

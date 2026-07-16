@@ -204,13 +204,13 @@ class ResolverTrace:
         )
 
     def full_trace(self) -> str:
+        from rag.id_types import ref_of
         # Format posture_ids_used — show refs not raw UUIDs
         _pids = ", ".join(
-            p.split(":")[-1] if ":" in p else p
-            for p in (self.posture_ids_used or [])[:6]
+            ref_of(p) for p in (self.posture_ids_used or [])[:6]
         ) or "none"
         _vscore_str = ", ".join(
-            f"{nid.split(':')[-1]}={score}"
+            f"{ref_of(nid)}={score}"
             for nid, score in (self.vector_top_scores or [])[:3]
         ) or "none"
 
@@ -278,9 +278,10 @@ def _posture_nc_ofi_ids(posture: dict, topic_ref: Optional[str] = None) -> list:
     """Return node_ids for NC/OFI controls, with topic_ref matches first."""
     topic_ids   = []
     finding_ids = []
+    from rag.id_types import ref_of
     for node_id, data in posture.items():
         finding = data.get("finding", "")
-        ref     = data.get("control_ref", "") or node_id.split(":")[-1]
+        ref     = data.get("control_ref", "") or ref_of(node_id)
         if topic_ref and (topic_ref in node_id or ref == topic_ref):
             topic_ids.append(node_id)
         elif finding in ("NC", "OFI"):

@@ -278,9 +278,10 @@ def _render_demonstrated_by(cf: CaseFile, max_items: int = 8) -> str:
         if not sources:
             continue
         entries: list[str] = []
+        from rag.id_types import ref_of
         for src in sources[:max_items]:
             src_id  = src.get("src_id", "")
-            src_ref = src_id.split(":")[-1] if src_id else ""
+            src_ref = ref_of(src_id) if src_id else ""
             src_std = src.get("src_std", "")
             std_lbl = ""
             if src_std == "ISO27001:2022":

@@ -732,9 +732,10 @@ class GraphExpander:
         # Scope-standard preference — nodes in tenant's declared standards
         # first. Framework is embedded in node_id like "ISO27001:2022:A.5.18".
         if scope_standards:
+            from rag.id_types import standard_of
             _scope_set = set(scope_standards)
             for nid, s in list(scores.items()):
-                std = ":".join(nid.split(":")[:2]) if ":" in nid else ""
+                std = standard_of(nid)
                 if std and std in _scope_set:
                     scores[nid] = s + 0.10
 

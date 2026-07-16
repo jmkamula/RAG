@@ -67,8 +67,9 @@ def posture_boost(
     if any_key is None:
         return SignalOutput(name="posture_boost", fired=False)
 
-    if ":" in str(any_key) and len(str(any_key).split(":")) >= 3:
-        # Raw shape — extract control_ref
+    from rag.id_types import is_node_id
+    if is_node_id(any_key):
+        # Raw node-id shape — reindex by control_ref
         for _nid, rec in tenant_posture.items():
             ref = (rec or {}).get("control_ref")
             if ref:

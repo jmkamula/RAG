@@ -977,10 +977,10 @@ class QueryClassifier:
             qtype = QuestionType.DEFINITION   # safest default
 
         # Derive refs from node IDs (format: "STANDARD:REF" or "STD:VER:REF")
+        from rag.id_types import ref_of
         resolved_refs = []
         for nid in node_ids[:5]:
-            parts = nid.split(":")
-            ref   = parts[-1]
+            ref = ref_of(nid)
             if ref and ref not in resolved_refs:
                 resolved_refs.append(ref)
 
@@ -1250,9 +1250,10 @@ class QueryClassifier:
         # Posture — find NC/OFI findings relevant to query clusters
         posture = getattr(self.tenant, "posture_data", None) or {}
         if posture:
-            nc_refs  = [r.split(":")[-1] for r, v in posture.items()
+            from rag.id_types import ref_of
+            nc_refs  = [ref_of(r) for r, v in posture.items()
                        if v.get("finding") == "NC"]
-            ofi_refs = [r.split(":")[-1] for r, v in posture.items()
+            ofi_refs = [ref_of(r) for r, v in posture.items()
                        if v.get("finding") == "OFI"]
             if nc_refs:
                 lines.append(f"- Open NC findings: {', '.join(nc_refs)}")

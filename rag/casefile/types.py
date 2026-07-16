@@ -332,9 +332,10 @@ class CaseFile:
         standard collisions), the last one wins. That matches the
         posture_by_ref build in rank_and_answer today.
         """
+        from rag.id_types import ref_of
         out: dict[str, dict] = {}
         for nid, rec in self.posture_nodes.items():
-            ref = rec.get("control_ref") or nid.split(":")[-1]
+            ref = rec.get("control_ref") or ref_of(nid)
             if ref:
                 out[ref] = rec
         return out
@@ -385,7 +386,8 @@ class CaseFile:
                 else:
                     other = getattr(edge, "target_id", "")
                 if other:
-                    linked.add(other.split(":")[-1])
+                    from rag.id_types import ref_of
+                    linked.add(ref_of(other))
             if linked:
                 out[n.ref] = sorted(linked)
         return out

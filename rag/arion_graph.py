@@ -413,17 +413,18 @@ def _compose_posture_enumeration_answer(
     if not expanded_nodes or not posture:
         return None
 
+    from rag.id_types import ref_of, standard_of
     posture_by_ref: dict[str, dict] = {}
     for nid, rec in (posture or {}).items():
-        ref = rec.get("control_ref") or nid.split(":")[-1]
+        ref = rec.get("control_ref") or ref_of(nid)
         if ref:
             posture_by_ref[ref] = rec
 
     postured_stds: set[str] = set()
     for nid in (posture or {}):
-        parts = nid.split(":")
-        if len(parts) >= 2:
-            postured_stds.add(":".join(parts[:2]))
+        std = standard_of(nid)
+        if std:
+            postured_stds.add(std)
     if "ISO27001:2022" in postured_stds:
         primary_std = "ISO27001:2022"
     elif postured_stds:
@@ -458,9 +459,9 @@ def _compose_posture_enumeration_answer(
             # Cross-framework: inherit finding from linked primary controls
             linked: list[tuple[str, str]] = []
             for edge in (getattr(n, "xfw_edges", []) or []):
-                lref = (edge.source_id.split(":")[-1]
+                lref = (ref_of(edge.source_id)
                         if n.node_id == edge.target_id
-                        else edge.target_id.split(":")[-1])
+                        else ref_of(edge.target_id))
                 if not lref:
                     continue
                 lrec  = posture_by_ref.get(lref, {})
@@ -1795,10 +1796,11 @@ def _answer_scope_na(query: str, posture: dict) -> str:
 
     if is_physical:
         # Confirm from posture that A.7.x are all N/A
+        from rag.id_types import ref_of
         na_controls = [
-            v.get("control_ref", k.split(":")[-1])
+            v.get("control_ref", ref_of(k))
             for k, v in posture.items()
-            if (v.get("control_ref","") or k.split(":")[-1]).startswith(("7.","A.7."))
+            if (v.get("control_ref","") or ref_of(k)).startswith(("7.","A.7."))
             and v.get("finding") == "N/A"
         ]
         controls_note = (
@@ -1814,10 +1816,11 @@ def _answer_scope_na(query: str, posture: dict) -> str:
             f"No physical security gaps apply to your organisation."
         )
     elif is_dev:
+        from rag.id_types import ref_of
         na_controls = [
-            v.get("control_ref", k.split(":")[-1])
+            v.get("control_ref", ref_of(k))
             for k, v in posture.items()
-            if (v.get("control_ref","") or k.split(":")[-1]).startswith(("A.8.2","8.2"))
+            if (v.get("control_ref","") or ref_of(k)).startswith(("A.8.2","8.2"))
             and v.get("finding") == "N/A"
         ]
         controls_note = (
@@ -2686,9 +2689,8 @@ def _write_request_trace(posture_db, trace, tenant, topic_ref) -> None:
 def _node_exists_check(node_id: str, retriever) -> bool:
     """Check if a node_id exists in ChromaDB."""
     try:
-        parts = node_id.split(":")
-        ref = parts[-1]
-        result = retriever.search_by_ref(ref)
+        from rag.id_types import ref_of
+        result = retriever.search_by_ref(ref_of(node_id))
         return result is not None
     except Exception:
         return False

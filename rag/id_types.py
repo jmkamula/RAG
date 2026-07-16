@@ -238,6 +238,49 @@ def is_control_ref(value) -> bool:
     return bool(_CONTROL_REF_RE.match(value))
 
 
+# ── Node-id accessor helpers (Ship 2'.m migration target) ─────────────
+#
+# These replace inline `node_id.split(":")` patterns across the
+# codebase. NodeId(...) itself validates strictly and raises on
+# malformed input; these helpers add a fallback for callers that
+# historically used `if ':' in node_id` guards.
+#
+# Use these when the caller doesn't want the shape-validation
+# strictness (e.g. legacy posture keys, edge ids from historical
+# writes). For NEW code, prefer `NodeId(value)` directly so
+# malformed inputs raise loudly.
+
+def ref_of(node_id: str) -> str:
+    """Return the ref part of a node_id.
+
+    Fallback: last colon-segment. Empty string on unparseable input.
+    Matches the legacy `node_id.split(":")[-1]` behavior.
+    """
+    try:
+        return NodeId(node_id).ref
+    except (ValueError, TypeError):
+        if isinstance(node_id, str) and ":" in node_id:
+            return node_id.split(":")[-1]
+        return str(node_id) if node_id else ""
+
+
+def standard_of(node_id: str) -> str:
+    """Return the STANDARD:VERSION prefix of a node_id.
+
+    Fallback: first two colon-segments joined. Empty string on
+    unparseable input. Matches the legacy
+    `":".join(node_id.split(":")[:2])` behavior.
+    """
+    try:
+        return NodeId(node_id).standard_id
+    except (ValueError, TypeError):
+        if isinstance(node_id, str) and ":" in node_id:
+            parts = node_id.split(":")
+            if len(parts) >= 2:
+                return ":".join(parts[:2])
+        return ""
+
+
 __all__ = [
     "TenantUUID",
     "TenantSlug",
@@ -247,4 +290,6 @@ __all__ = [
     "is_uuid",
     "is_node_id",
     "is_control_ref",
+    "ref_of",
+    "standard_of",
 ]
