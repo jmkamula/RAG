@@ -128,6 +128,38 @@ FactKeyParam = Annotated[
 ]
 
 
+# ── Session identifiers ───────────────────────────────────────────────
+# Ship 2'.l: session_id is caller-provided. Constrain to a safe shape
+# so it can't smuggle SQL fragments, path traversal, or bytes that
+# would break the LangGraph checkpoint key format
+# `f"{tenant_id}:{session_id}"`. Length cap prevents pathological
+# checkpoint-key sizes; character class matches the RFC 8446-ish
+# alphanum + underscore + hyphen convention used by URL-safe tokens.
+_SESSION_ID_PATTERN = r"^[A-Za-z0-9_-]{1,64}$"
+
+
+def build_thread_id(tenant_id: str, session_id: str) -> str:
+    """Compose the LangGraph checkpoint thread_id from tenant + session.
+
+    Ship 2'.l: uses the FULL tenant UUID as the prefix (was
+    `tenant_id[:8]`). The 8-char truncation had a 2^32 collision
+    space — with N tenants past ~65k, birthday-collision risk exists
+    that could let a crafted session_id read another tenant's
+    checkpoint. Full UUID puts collision at 2^128 — practically zero.
+    """
+    return f"{tenant_id}:{session_id}"
+
+
+def validate_session_id_shape(sid: str) -> bool:
+    """True when sid conforms to _SESSION_ID_PATTERN. Callers use
+    this at the request boundary to fail loudly on malformed shapes
+    (path traversal, SQL fragments, etc.)."""
+    if not sid or not isinstance(sid, str):
+        return False
+    import re
+    return bool(re.match(_SESSION_ID_PATTERN, sid))
+
+
 __all__ = [
     "TenantIdParam",
     "PostureIdParam",
@@ -142,4 +174,6 @@ __all__ = [
     "LeafIdParam",
     "CascadeKindParam",
     "FactKeyParam",
+    "build_thread_id",
+    "validate_session_id_shape",
 ]

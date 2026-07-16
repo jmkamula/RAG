@@ -65,6 +65,7 @@ from rag.api_types import (
     PostureIdParam, ProposalIdParam, OverrideIdParam, UploadIdParam,
     SystemIdParam, NotifIdParam, ImplicationIdParam, SeriesIdParam,
     ControlRefParam, LeafIdParam, CascadeKindParam, FactKeyParam,
+    build_thread_id, validate_session_id_shape,
 )
 
 try:
@@ -492,8 +493,20 @@ async def chat(
 
     t_start    = time.time()
     trace_id   = request.state.trace_id
-    # Prefix thread_id with tenant_id — prevents cross-tenant session collision
     session_id = body.session_id or f"api_{uuid.uuid4().hex[:8]}"
+
+    # Ship 2'.l: validate session_id shape at the boundary. Malformed
+    # ids (SQL fragments, path traversal bytes, oversized strings)
+    # get rejected here before they land in the LangGraph checkpoint
+    # key. Auto-generated ids always pass; only client-supplied ones
+    # are at risk.
+    if not validate_session_id_shape(session_id):
+        raise HTTPException(
+            400,
+            "The session id contains characters we don't support. "
+            "Please use letters, digits, hyphens, or underscores "
+            "(up to 64 characters).",
+        )
 
     # Wave 4c: stamp tenant + session + request into the ai_trace ContextVars
     # so every LLM call fired during this handler auto-tags with them.
@@ -502,9 +515,9 @@ async def chat(
         session_id = session_id,
         request_id = trace_id,
     )
-    # Prefix with tenant_id — prevents cross-tenant session collision
-    thread_id  = f"{key_info.tenant_id[:8]}:{session_id}"
-    thread_id  = f"{key_info.tenant_id[:8]}:{session_id}"
+    # Ship 2'.l: FULL tenant UUID (was tenant_id[:8]) — kills the 2^32
+    # collision surface. See rag/api_types.build_thread_id.
+    thread_id = build_thread_id(key_info.tenant_id, session_id)
 
     # Refresh tenant context (cached, TTL=60s)
     try:
@@ -610,7 +623,15 @@ async def chat_stream(
 
     t_start    = time.time()
     sid        = session_id or f"api_{uuid.uuid4().hex[:8]}"
-    thread_id  = f"{key_info.tenant_id[:8]}:{sid}"
+    # Ship 2'.l: validate + build with full tenant UUID.
+    if not validate_session_id_shape(sid):
+        raise HTTPException(
+            400,
+            "The session id contains characters we don't support. "
+            "Please use letters, digits, hyphens, or underscores "
+            "(up to 64 characters).",
+        )
+    thread_id = build_thread_id(key_info.tenant_id, sid)
 
     try:
         cache  = request.app.state.tenant_cache
