@@ -64,10 +64,12 @@ When a retire-by date passes, delete the legacy path.
   now broken; migrate to `state["tenant_display_name"]`.
 - **`_is_uuid_shape()` band-aid** — replaced by
   `rag/id_types.is_uuid`. Do not add new call sites.
-- **`node_id.split(":")`** — 14 known sites. Replace with
-  `rag.id_types.NodeId(...)` — `.standard_id`, `.version`, `.ref`
-  accessors are safer and future-proof against version tags
-  containing `:`.
+- **`node_id.split(":")`** — RETIRED 2026-07-16 in Ship 2'.m
+  (commit 6b47f66). All 21 live sites migrated to
+  `rag.id_types.ref_of()` / `standard_of()` helpers. For NEW code
+  use `NodeId(value)` directly to get strict validation +
+  `.standard_id`, `.version`, `.ref` accessors. Do not re-introduce
+  inline splits.
 - **`_pick_primary_std` inline** — retired from case-file flow
   2026-07-16. Legacy inline copy in `rank_and_answer` retires with
   the layer split (see above).
@@ -476,12 +478,17 @@ display name into `state["tenant_display_name"]`, (3) validating in
 [[ship-2-prime-i-id-discipline-and-digest-fix-2026-07-16]] for the
 audit that surfaced the sprawl.
 
-Deferred to Ship 2'.j (pre-external-API launch):
-- FastAPI `pydantic.UUID4` typing on all path/body ID params (returns
-  400 before Postgres does).
-- Shared `parse_node_id` helper to retire the 14 `.split(":")` sites.
-- Validate `session_id` against caller's tenant to prevent thread-id
-  spoofing.
+Follow-up arcs (post Ship 2'.i):
+- Ship 2'.j (2026-07-16) — closed 3 residual eval fails (#11, #31, #214)
+  via role-model-aware digest guidance + document-content MUST
+  enumeration. Baseline: 207/208.
+- Ship 2'.k (2026-07-16) — FastAPI Pydantic path-param validators
+  (36 endpoints) + fail-loud on log-write silent-fails. Baseline: 207/208.
+- Ship 2'.l (2026-07-16) — session_id shape validation +
+  build_thread_id() using full tenant UUID (was `[:8]` — 2^32
+  collision surface eliminated).
+- Ship 2'.m (2026-07-16) — retired 21 inline `node_id.split(":")`
+  sites via `ref_of()` / `standard_of()` helpers.
 
 ### Session persistence
 - Sync chat: PostgresSaver (arioncomply_sessions DB)
