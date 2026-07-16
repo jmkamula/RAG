@@ -100,7 +100,7 @@ def _draft_appears_near(text: str, ref: str, window: int = 80) -> bool:
 
 # ── Footer builders ──────────────────────────────────────────────────
 
-from rag.casefile.digest import _verdict_tag
+from rag.casefile.digest import _verdict_tag, _sanitize_gap_text
 
 
 def _compliance_facts_footer(
@@ -124,9 +124,9 @@ def _compliance_facts_footer(
             tag = _verdict_tag(verdict, draft)
             body = ""
             if verdict in ("NC", "OFI"):
-                body = (rec.get("gap_description") or "").strip()
+                body = _sanitize_gap_text((rec.get("gap_description") or "").strip())
             elif verdict == "Comply":
-                body = (rec.get("evidence_text") or "").strip()
+                body = _sanitize_gap_text((rec.get("evidence_text") or "").strip())
             body = " ".join(body.split())
             if len(body) > 100:
                 body = body[:99] + "…"

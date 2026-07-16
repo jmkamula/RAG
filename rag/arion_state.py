@@ -28,9 +28,16 @@ class ArionState(TypedDict):
     """
 
     # ── Conversation-level (static for session lifetime) ───────────────────
-    tenant_id:    str                    # e.g. "arion"
-    standards:    list[str]              # ["ISO27001:2022", "GDPR:2016/679"]
-    role:         str                    # "controller" | "processor" | "both"
+    # tenant_id is the CANONICAL UUID from tenants.id — used for Postgres
+    # RLS (app.tenant_id GUC) and every ::uuid cast in downstream writers.
+    # tenant_display_name is the human-readable label for prompts + UI.
+    # DO NOT put the display name in tenant_id — Ship 2'.i (2026-07-16)
+    # separated these after chat_casefile_log writes were silently failing
+    # because state["tenant_id"] used to be tenant.name. See id_types.py.
+    tenant_id:            str            # UUID (validated via TenantUUID)
+    tenant_display_name:  str            # "Arion Networks"
+    standards:            list[str]      # ["ISO27001:2022", "GDPR:2016/679"]
+    role:                 str            # "controller" | "processor" | "both"
 
     # ── Turn tracking ──────────────────────────────────────────────────────
     turn_count:   int                    # increments each completed turn
@@ -84,10 +91,22 @@ class ArionState(TypedDict):
 
 
 def make_initial_state(tenant: TenantProfile, query: str = "") -> ArionState:
-    """Create the initial state for a new conversation thread."""
+    """Create the initial state for a new conversation thread.
+
+    Ship 2'.i: tenant_id is now the canonical UUID (validated at
+    TenantProfile construction). The display name lives on
+    tenant_display_name — separate field, separate contract.
+    """
+    from rag.id_types import TenantUUID
+    # tenant.tenant_id must be UUID-shaped by contract; validate loudly.
+    # TenantUUID(...) raises ValueError if the fixture / caller handed
+    # us a slug or display name, which is exactly the failure mode we
+    # want to see early instead of silently miswriting logs downstream.
+    tid = TenantUUID(tenant.tenant_id)
     return ArionState(
-        tenant_id       = tenant.name,
-        standards       = tenant.applicable_standards,
+        tenant_id            = tid,
+        tenant_display_name  = tenant.name or "",
+        standards            = tenant.applicable_standards,
         role            = tenant.role[0] if tenant.role else "controller",
         turn_count      = 0,
         clarif_count    = 0,

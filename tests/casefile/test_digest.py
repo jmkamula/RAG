@@ -38,6 +38,8 @@ from rag.casefile.digest import (
     _render_deictic_hint,
     _verdict_tag,
     _posture_line,
+    _plan_for,
+    _sanitize_gap_text,
 )
 
 
@@ -548,7 +550,153 @@ def test_build_prompt_pair_returns_both():
     return _ok(isinstance(sys_p, str) and isinstance(user_p, str) and sys_p and user_p)
 
 
+# ── Ship 2'.i: intent-aware plan + jargon sanitizer ─────────────────
+
+def test_plan_definition_puts_obligations_first():
+    cf = make_cf(intent={"intent_type": "definition", "focus_refs": ["A.6.4"]})
+    plan = _plan_for(cf)
+    return _ok(
+        plan.obligations_first is True
+        and plan.obligation_chars >= 400
+        and plan.posture_limit <= 3,
+        f"plan={plan}",
+    )
+
+
+def test_plan_posture_check_keeps_posture_first():
+    cf = make_cf(intent={"intent_type": "posture_check", "focus_refs": ["A.5.18"]})
+    plan = _plan_for(cf)
+    return _ok(
+        plan.obligations_first is False
+        and plan.posture_limit >= 10,
+        f"plan={plan}",
+    )
+
+
+def test_plan_standard_knowledge_uses_definition_mode():
+    cf = make_cf(intent={"intent_type": "standard_knowledge"})
+    plan = _plan_for(cf)
+    return _ok(plan.obligations_first is True, f"plan={plan}")
+
+
+def test_plan_unknown_intent_falls_back_to_defaults():
+    cf = make_cf(intent={"intent_type": "gap_analysis"})
+    plan = _plan_for(cf)
+    return _ok(plan.obligations_first is False)
+
+
+def test_definition_digest_puts_obligations_above_posture():
+    """The key regression fix — for a "what is A.6.4?" query, OBLIGATIONS
+    must appear before POSTURE in the digest text."""
+    a64 = N(
+        node_id="ISO27001:2022:A.6.4", ref="A.6.4",
+        metadata={"obligation_text": "Disciplinary process. Personnel disciplinary framework."},
+    )
+    posture = _posture([("A.5.10", "NC", "unconfirmed")])
+    cf = make_cf(
+        query="what is ISO 27001 control A.6.4?",
+        primary=[a64], posture=posture,
+        intent={"intent_type": "definition", "focus_refs": ["A.6.4"]},
+    )
+    out = build_prompt_digest(cf)
+    obl_idx = out.find("OBLIGATIONS:")
+    pos_idx = out.find("POSTURE")
+    return _ok(
+        obl_idx != -1 and pos_idx != -1 and obl_idx < pos_idx,
+        f"OBLIGATIONS at {obl_idx}, POSTURE at {pos_idx}",
+    )
+
+
+def test_definition_digest_obligation_text_is_400_chars():
+    """A.6.4's full obligation should reach the digest — 160-char cap
+    was truncating before 'disciplinary' in the definition-query
+    Ship 2'.h regression."""
+    long_text = "Disciplinary process. " + ("More text here. " * 30)
+    a64 = N(
+        node_id="ISO27001:2022:A.6.4", ref="A.6.4",
+        metadata={"obligation_text": long_text},
+    )
+    cf = make_cf(
+        primary=[a64],
+        intent={"intent_type": "definition", "focus_refs": ["A.6.4"]},
+    )
+    out = build_prompt_digest(cf)
+    # The obligation body in the digest should be roughly 400 chars,
+    # not the default 160.
+    # Find the A.6.4 line and check its length.
+    line = next(l for l in out.split("\n") if l.startswith("- A.6.4:"))
+    return _ok(len(line) > 250, f"line len={len(line)}: {line[:80]}...")
+
+
+def test_sanitize_gap_text_children_satisfied():
+    return _ok(
+        _sanitize_gap_text("0/4 children satisfied") == "0 of 4 required items present",
+    )
+
+
+def test_sanitize_gap_text_missing_artifacts():
+    return _ok(
+        _sanitize_gap_text("missing artifacts of type: policy_document")
+        == "still needed: policy_document",
+    )
+
+
+def test_sanitize_gap_text_multi_jargon():
+    raw = "0/4 children satisfied; missing artifacts of type: register"
+    got = _sanitize_gap_text(raw)
+    return _ok(
+        "children satisfied" not in got and "missing artifacts of type" not in got,
+        got,
+    )
+
+
+def test_sanitize_gap_text_no_change_when_clean():
+    clean = "register incomplete; last review overdue"
+    return _ok(_sanitize_gap_text(clean) == clean)
+
+
+def test_posture_line_uses_sanitized_gap():
+    rec = {"finding": "NC", "gap_description": "0/4 children satisfied"}
+    line = _posture_line("A.5.18", rec, draft=True)
+    return _ok(
+        "children satisfied" not in line and "required items present" in line,
+        line,
+    )
+
+
+def test_definition_digest_end_to_end_preserves_key_terms():
+    """The Ship 2'.h regression #23: 'what is A.6.4?' — the word
+    'disciplinary' must appear in the digest even after truncation."""
+    a64 = N(
+        node_id="ISO27001:2022:A.6.4", ref="A.6.4",
+        metadata={},
+        document="ISO27001:2022 A.6.4: Disciplinary process\nTo ensure personnel and other relevant interested parties understand the consequences of information security policy violation, to deter and appropriately deal with personnel and other relevant interested parties who committed the violation.",
+    )
+    cf = make_cf(
+        query="what is ISO 27001 control A.6.4?",
+        primary=[a64],
+        intent={"intent_type": "definition", "focus_refs": ["A.6.4"]},
+    )
+    out = build_prompt_digest(cf)
+    return _ok(
+        "disciplinary" in out.lower() and "OBLIGATIONS:" in out,
+        f"digest does not contain 'disciplinary' — snippet: {out[:400]}",
+    )
+
+
 TESTS = [
+    test_plan_definition_puts_obligations_first,
+    test_plan_posture_check_keeps_posture_first,
+    test_plan_standard_knowledge_uses_definition_mode,
+    test_plan_unknown_intent_falls_back_to_defaults,
+    test_definition_digest_puts_obligations_above_posture,
+    test_definition_digest_obligation_text_is_400_chars,
+    test_sanitize_gap_text_children_satisfied,
+    test_sanitize_gap_text_missing_artifacts,
+    test_sanitize_gap_text_multi_jargon,
+    test_sanitize_gap_text_no_change_when_clean,
+    test_posture_line_uses_sanitized_gap,
+    test_definition_digest_end_to_end_preserves_key_terms,
     test_verdict_tag_variants,
     test_posture_line_nc_uses_gap,
     test_posture_line_comply_uses_evidence,

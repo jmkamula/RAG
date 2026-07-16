@@ -27,6 +27,38 @@ _CONFIRMED_STATES = {
     "confirmed", "overridden", "document_confirmed", "engine_confirmed",
 }
 
+# Process-cached fallback for {standard_id: role} lookups when the
+# tenant scope doesn't carry role-grouped accessors. Populated on
+# first CaseFile.role_of() call. Standards.role is globally stable
+# (not tenant-specific), so a single cache serves every tenant.
+_STANDARDS_ROLE_CACHE: dict[str, str] | None = None
+
+
+def _load_standards_role_map() -> dict[str, str]:
+    """Read {standard_id: role} from Postgres `standards.role` once
+    per process. Empty on failure — falls back gracefully."""
+    global _STANDARDS_ROLE_CACHE
+    if _STANDARDS_ROLE_CACHE is not None:
+        return _STANDARDS_ROLE_CACHE
+    try:
+        import os
+        import psycopg2
+        conn = psycopg2.connect(
+            host     = os.getenv("PGHOST",     "127.0.0.1"),
+            dbname   = os.getenv("PGDATABASE", "arioncomply_compliance"),
+            user     = os.getenv("PGUSER",     "arioncomply_app"),
+            password = os.getenv("PGPASSWORD", ""),
+        )
+        try:
+            with conn.cursor() as cur:
+                cur.execute("SELECT id, role FROM standards WHERE role IS NOT NULL")
+                _STANDARDS_ROLE_CACHE = {sid: role for sid, role in cur.fetchall()}
+        finally:
+            conn.close()
+    except Exception:
+        _STANDARDS_ROLE_CACHE = {}
+    return _STANDARDS_ROLE_CACHE
+
 
 @dataclass
 class CaseFile:
@@ -128,11 +160,59 @@ class CaseFile:
             return None
         return getattr(self.session, "active_cluster", None)
 
-    # ── Node accessors — Layer 1 / Layer 2 ───────────────────────────
+    # ── Node accessors ────────────────────────────────────────────────
+    #
+    # Ship 2'.i (2026-07-16): the primary_nodes/xfw_nodes split is a
+    # legacy artifact from before the role model (framework_role_model_arc,
+    # 2026-07-05). All obligations from all enrolled programs / extensions
+    # / obligations-role standards are first-class citizens. Bridges are
+    # relationships between obligations, not a classification of them.
+    #
+    # The three role-based accessors below (obligations_of_program,
+    # obligations_of_extension, obligations_of_obligation) let downstream
+    # code structure the digest by role instead of by "layer".
+    #
+    # primary_nodes() / secondary_nodes() / xfw_nodes() are kept for
+    # backward compat with pre-Ship-2'.i callers (legacy rank_and_answer
+    # path); new code should use all_nodes() + role_of() instead.
+
+    def _all_graph_nodes(self) -> list:
+        """Internal: every non-informational node the resolver surfaced,
+        pooled across primary/secondary/xfw. Ship 2'.i replaces layer-
+        based split with this single pool."""
+        gn = getattr(self.resolved, "graph_nodes", None)
+        if gn is None:
+            return []
+        pooled = (
+            list(getattr(gn, "primary_nodes",   []) or [])
+            + list(getattr(gn, "secondary_nodes", []) or [])
+            + list(getattr(gn, "xfw_nodes",     []) or [])
+        )
+        # De-duplicate on node_id — the same node can land in multiple
+        # buckets when the resolver's expansion overlaps.
+        seen: set[str] = set()
+        out: list = []
+        for n in pooled:
+            nid = getattr(n, "node_id", None)
+            if nid in seen or getattr(n, "is_informational", False):
+                continue
+            if nid:
+                seen.add(nid)
+            out.append(n)
+        return out
+
+    def all_nodes(self) -> list:
+        """Every non-informational obligation across all enrolled
+        programs / extensions / obligations. Deduplicated."""
+        return self._all_graph_nodes()
+
+    # ── Legacy accessors — do not extend (see framework-role-model-arc) ──
 
     def primary_nodes(self) -> list:
-        """Layer 1 nodes from the resolved graph. Filters out
-        informational-only rows (obligation nodes without content)."""
+        """LEGACY (do not use in new code): the resolver's primary_nodes
+        list. Ship 2'.i deprecates this in favour of all_nodes() +
+        role_of(). Retire-by: after legacy rank_and_answer path is
+        removed (retire-by 2026-08-15)."""
         gn = getattr(self.resolved, "graph_nodes", None)
         if gn is None:
             return []
@@ -140,6 +220,7 @@ class CaseFile:
                 if not getattr(n, "is_informational", False)]
 
     def secondary_nodes(self) -> list:
+        """LEGACY (do not use in new code): see primary_nodes."""
         gn = getattr(self.resolved, "graph_nodes", None)
         if gn is None:
             return []
@@ -147,18 +228,93 @@ class CaseFile:
                 if not getattr(n, "is_informational", False)]
 
     def xfw_nodes(self) -> list:
-        """Layer 2 (cross-framework) nodes. Filters out informational
-        rows. Does NOT filter unlinked xfw — that's rank_and_answer's
-        anti-hallucination guard, applied when rendering."""
+        """LEGACY (do not use in new code): the resolver's xfw_nodes
+        list. Ship 2'.i deprecates this — bridges are edges, not a
+        node identity. See framework-role-model-arc."""
         gn = getattr(self.resolved, "graph_nodes", None)
         if gn is None:
             return []
         return [n for n in getattr(gn, "xfw_nodes", []) or []
                 if not getattr(n, "is_informational", False)]
 
-    def all_nodes(self) -> list:
-        """Every non-informational node — Layer 1 + secondary + Layer 2."""
-        return self.primary_nodes() + self.secondary_nodes() + self.xfw_nodes()
+    # ── Role model accessors (framework-role-model-arc, 2026-07-05) ─────
+    #
+    # Every enrolled standard has a role: program / extension /
+    # obligation / guidance. Nodes inherit their standard's role. The
+    # digest structures its layout by role — no more primary/xfw split.
+
+    def _role_map(self) -> dict[str, str]:
+        """Return {standard_id: role} for every enrolled standard.
+
+        Preferred source: `tenant.scope` (TenantScope). When the scope
+        has role-grouped accessors (`.programs / .extensions /
+        .obligations` — Phase 1 of framework-role-model-arc), use them.
+
+        Fallback: read `standards.role` from Postgres. Cached per-
+        process since standards.role is globally stable (not tenant-
+        specific).
+        """
+        scope = getattr(self.tenant, "scope", None) if self.tenant else None
+        if scope is not None:
+            out: dict[str, str] = {}
+            for group_name in ("programs", "extensions", "obligations"):
+                role = group_name.rstrip("s")  # "programs" → "program"
+                group = getattr(scope, group_name, None) or []
+                for s in group:
+                    sid = getattr(s, "id", None)
+                    if sid:
+                        out[sid] = role
+            if out:
+                return out
+        # Fallback: process-cached Postgres lookup.
+        return _load_standards_role_map()
+
+    def role_of(self, ref: str) -> Optional[str]:
+        """Return the role of the standard that owns this ref, or None
+        if the ref isn't in any enrolled standard.
+
+        Roles: "program" | "extension" | "obligation".
+
+        Look-up path: find the ref among all_nodes(), read its
+        standard_id, check the tenant's role map. Falls back to None
+        when the ref is off-scope.
+        """
+        for n in self.all_nodes():
+            if n.ref == ref:
+                sid = getattr(n, "standard_id", None)
+                if sid:
+                    return self._role_map().get(sid)
+                break
+        # Not on any node — try posture record
+        posture = self.posture_by_ref()
+        rec = posture.get(ref)
+        if rec:
+            sid = rec.get("standard_id")
+            if sid:
+                return self._role_map().get(sid)
+        return None
+
+    def obligations_of_role(self, role: str) -> list:
+        """All non-informational nodes whose owning standard has this
+        role. role ∈ {"program", "extension", "obligation"}."""
+        rmap = self._role_map()
+        return [
+            n for n in self.all_nodes()
+            if rmap.get(getattr(n, "standard_id", "")) == role
+        ]
+
+    def demonstrated_by(self, ref: str) -> list[dict]:
+        """Return the demonstrated_by list for an OBLIGATION ref, or []
+        if the ref isn't an obligation OR has no demonstrators. Each
+        entry: {src_id, src_std, via_edge, finding, strength}.
+
+        Populated by posture_loader._apply_demonstrates_overlay (Phase 2b,
+        2026-07-05). See framework-role-model-arc.
+        """
+        rec = self.posture_by_ref().get(ref)
+        if not rec:
+            return []
+        return list(rec.get("demonstrated_by") or [])
 
     # ── Posture accessors ────────────────────────────────────────────
 
@@ -208,19 +364,21 @@ class CaseFile:
     # ── Cross-framework bridges ──────────────────────────────────────
 
     def xfw_bridges(self) -> dict[str, list[str]]:
-        """Return {xfw_ref: [primary_ref, ...], ...} — for each Layer 2
-        node, the primary refs it bridges to via IMPLEMENTS/SUPPORTS
-        edges.
+        """Return {ref: [linked_ref, ...], ...} — for every node with
+        cross-framework edges, list the refs it links to via
+        IMPLEMENTS/SUPPORTS/ENABLES/GOVERNANCE.
 
-        This is the single most-compressible signal in the current
-        prompt. Instead of the LLM re-deriving from per-node blocks,
-        we hand it a one-line mapping.
+        Ship 2'.i: iterates all_nodes() instead of xfw_nodes(). Bridges
+        are relationships between obligations, not a classification of
+        the node itself. See framework-role-model-arc.
         """
         out: dict[str, list[str]] = {}
-        for n in self.xfw_nodes():
+        for n in self.all_nodes():
+            edges = getattr(n, "xfw_edges", None)
+            if not edges:
+                continue
             linked: set[str] = set()
-            for edge in getattr(n, "xfw_edges", []) or []:
-                # Edge points one way; extract the *other* end's ref.
+            for edge in edges:
                 nid = n.node_id
                 if nid == getattr(edge, "target_id", None):
                     other = getattr(edge, "source_id", "")

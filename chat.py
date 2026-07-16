@@ -72,9 +72,13 @@ except Exception as _e:
     ARION_SCOPE       = None
     ARION_DOC_ALERTS  = []
     _tenant_cache     = None
-    # Fallback: build TenantProfile manually
+    # Fallback: build TenantProfile manually.
+    # Ship 2'.i: tenant_id MUST be the canonical UUID — not a slug.
+    # The old "arion-networks" slug here silently propagated into
+    # ArionState["tenant_id"] and broke every downstream write that
+    # cast to ::uuid (RLS, chat_casefile_log, etc). See id_types.py.
     ARION = TenantProfile(
-        tenant_id            = "arion-networks",
+        tenant_id            = ARION_TENANT_ID,
         name                 = "Arion Networks",
         applicable_standards = ["ISO27001:2022"],
         role                 = ["controller", "processor"],

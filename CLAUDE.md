@@ -30,6 +30,57 @@ principle + [[product-concept-evidence-cascade-2026-06-27]] for
 the strategic evidence-cascade layer (event-driven implications:
 "new employee" → training/access/NDA artefacts needed).
 
+## Before touching module X, read arc Y
+
+Before starting work in these areas, load the referenced arc doc
+into context. This is a codified discipline against re-inventing
+patterns that a later arc has superseded. Grep `docs/memory/` for
+the exact filename.
+
+| Touching this... | Read this first |
+|---|---|
+| Multi-framework classification / posture propagation / cross-framework "bridges" | [[framework-role-model-arc]] — programs / extensions / obligations. Do NOT split by "primary/xfw"; the layer split is deprecated. |
+| `rag/casefile/`, `rag/llm_answer.py::_casefile_flow`, prompt digest, preservation check | [[ship-2-prime-casefile-arc-2026-07-15]], [[ship-2-prime-i-id-discipline-and-digest-fix-2026-07-16]] |
+| Chat intent classification / routing | [[ship-1-consensus-arc-2026-07-15]] — 7-signal consensus + bounded gatekeeper. Curator-lexicon is top-tier weight (1.00) — add DOCUMENT_TOPIC_MAP entries rather than prompt-tuning. |
+| Any field named `X_id` / `X_ref` / `X_slug` — plus any Postgres `%s::uuid` cast | [[ship-2-prime-i-id-discipline-and-digest-fix-2026-07-16]] — naming rule; use `rag/id_types.TenantUUID / NodeId / ControlRef / LeafId` (validate at construction). |
+| Curation / DerivedSpec / multi-leaf specs | [[curation-phase-b-retrospective]] |
+| Cascade events + implications | [[cascade-arc-retrospective-2026-06-30]] |
+| De-jargonize / tenant-facing prose | [[dejargonize-ux-pass-2026-07-01]] |
+
+## Legacy — do not extend (retire-by tracking)
+
+These patterns are superseded and being retired. Do NOT add new
+call sites; migrate existing sites opportunistically when touched.
+When a retire-by date passes, delete the legacy path.
+
+- **primary_nodes / xfw_nodes layer split** in `rag/llm_answer.py::rank_and_answer` (legacy path).
+  Superseded by role model (framework-role-model-arc). Case-file
+  flow already switched (Ship 2'.i, 2026-07-16). Retire-by:
+  **2026-08-15** if `CASEFILE_ENABLED=1` holds baseline for 2
+  weeks — delete the legacy 900-LOC path in
+  `rank_and_answer` + the inline `_infer_primary_std` helper.
+- **`state["tenant_id"]` as display name** — fixed Ship 2'.i via
+  `arion_state.py:89`. Any read site expecting a display name is
+  now broken; migrate to `state["tenant_display_name"]`.
+- **`_is_uuid_shape()` band-aid** — replaced by
+  `rag/id_types.is_uuid`. Do not add new call sites.
+- **`node_id.split(":")`** — 14 known sites. Replace with
+  `rag.id_types.NodeId(...)` — `.standard_id`, `.version`, `.ref`
+  accessors are safer and future-proof against version tags
+  containing `:`.
+- **`_pick_primary_std` inline** — retired from case-file flow
+  2026-07-16. Legacy inline copy in `rank_and_answer` retires with
+  the layer split (see above).
+- **AnswerPayload dispatcher (Ship 2.0 / Ship 2.1)** — reverted
+  2026-07-15 (commit f246df3). Do NOT re-add per-taxonomy
+  dispatch tables; use soft-branching in
+  `rag/casefile/digest.py::_plan_for` if intent-aware section
+  budgets are needed.
+- **`CASEFILE_ENABLED=0` fallback** — the legacy `rank_and_answer`
+  path. Same retire-by as the layer split (2026-08-15).
+- **`USE_LEGACY_CLASSIFIER=1` fallback** — Ship 1's escape hatch.
+  Retire-by: 2026-09-01 if consensus baseline holds.
+
 ### Build sequence
 
 | Layer | Status |
@@ -393,6 +444,44 @@ Corresponding modules:
 - Layer 1: Primary standard nodes (ISO 27001 with posture NC/OFI/Comply)
 - Layer 2: Cross-framework nodes (GDPR xfw edges from Neo4j)
 - Short-circuit: document_inventory, scope N/A → direct Postgres answer, no LLM
+
+### Object-ID discipline (Ship 2'.i onward)
+
+Naming rule (enforce at review time):
+- Field called `X_id` → MUST be the canonical UUID.
+- Display names → `X_name` (never `X_id`).
+- URL-safe stable identifiers → `X_slug`.
+- Composite refs → `X_ref` (bare "A.5.18") or `X_node_id` (composite
+  "ISO27001:2022:A.5.18").
+
+Prefer the typed classes in `rag/id_types.py` for new code:
+- `TenantUUID(value)` — validates at construction, raises ValueError
+  on slug/display-name/None inputs. Retires the `_is_uuid_shape()`
+  band-aid pattern.
+- `NodeId(value)` — parses composite `STANDARD:VERSION:REF`; has
+  `.standard_id` / `.version` / `.ref` accessors. Retire inline
+  `.split(":")` when touching a site.
+- `ControlRef`, `LeafId` — regex-validated at construction.
+
+Migration is opportunistic: use the types in NEW code, migrate old
+sites when touched. Not a big-bang refactor.
+
+Ship 2'.i cleared the load-bearing case: `arion_state.py` was setting
+`state["tenant_id"] = tenant.name` (display name). Every downstream
+writer that cast to `::uuid` silently dropped rows for a display-name
+tenant_id inside a "best-effort" try/except. Fixed by (1) requiring
+`TenantUUID`-shaped input at `make_initial_state`, (2) separating the
+display name into `state["tenant_display_name"]`, (3) validating in
+`_log_casefile_turn` as defence-in-depth. See
+[[ship-2-prime-i-id-discipline-and-digest-fix-2026-07-16]] for the
+audit that surfaced the sprawl.
+
+Deferred to Ship 2'.j (pre-external-API launch):
+- FastAPI `pydantic.UUID4` typing on all path/body ID params (returns
+  400 before Postgres does).
+- Shared `parse_node_id` helper to retire the 14 `.split(":")` sites.
+- Validate `session_id` against caller's tenant to prevent thread-id
+  spoofing.
 
 ### Session persistence
 - Sync chat: PostgresSaver (arioncomply_sessions DB)

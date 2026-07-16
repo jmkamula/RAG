@@ -1452,9 +1452,15 @@ from vector.retriever      import VectorRetriever
 def _log_consensus_result(state, query: str, consensus, tenant_uuid: str = None):
     """Persist a ConsensusResult to chat_consensus_log. Silent-fail.
 
-    state["tenant_id"] is a display name (e.g. "Arion Networks"), NOT
-    the UUID — so tenant_uuid must be passed explicitly by the caller.
+    Ship 2'.i (2026-07-16): state["tenant_id"] is now the canonical
+    UUID. The tenant_uuid kwarg here is redundant with state["tenant_id"]
+    but kept as a defence-in-depth override for callers that carry the
+    tenant object but not the graph state (e.g. classifier eval paths).
     """
+    # Prefer state["tenant_id"] (Ship 2'.i UUID) then explicit tenant_uuid
+    # then TenantContext on classifier.tenant.
+    if tenant_uuid is None:
+        tenant_uuid = state.get("tenant_id") if isinstance(state, dict) else None
     if consensus is None or not tenant_uuid:
         return
     try:
@@ -2511,7 +2517,13 @@ def make_retrieve_node(
             nodes            = all_nodes,
             posture          = posture,
             intent           = intent,
-            tenant_name      = state["tenant_id"],
+            # Ship 2'.i: state["tenant_id"] is now the canonical UUID
+            # (was mistakenly a display name pre-2026-07-16). Feed the
+            # display-name kwarg from state["tenant_display_name"]
+            # (fallback to tenant.name for pre-Ship-2'.i state dicts
+            # that don't carry the field yet).
+            tenant_name      = state.get("tenant_display_name")
+                                or getattr(tenant, "name", "") or "",
             standards        = standards_str,
             doc_contexts     = doc_contexts     if doc_contexts     else None,
             incident_contexts= incident_contexts if incident_contexts else None,
@@ -2525,11 +2537,11 @@ def make_retrieve_node(
             # follow-ups instead of returning a generic empty-retrieval
             # template. See [[conversational-context-routing-followup]].
             last_entity      = state.get("last_entity") or None,
-            # Explicit tenant UUID for Ship 2' observability. Note:
-            # state["tenant_id"] is a DISPLAY NAME here, not a UUID;
-            # the UUID lives on the tenant object. Ship 2' uses this
-            # for chat_casefile_log RLS.
-            tenant_id        = str(getattr(tenant, "tenant_id", "") or ""),
+            # Explicit tenant UUID for Ship 2' observability + logging.
+            # Ship 2'.i: state["tenant_id"] IS the UUID now; the tenant
+            # object path is redundant but kept for defence-in-depth.
+            tenant_id        = state.get("tenant_id")
+                                or str(getattr(tenant, "tenant_id", "") or ""),
         )
 
         # ── Write structured trace to DB (best-effort, never blocks answer) ─

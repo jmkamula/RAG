@@ -519,16 +519,24 @@ When the query asks "what documents do we need for X":
 """
 
 # ── Utility: UUID-shape detector ──────────────────────────────────────────────
+#
+# Ship 2'.i: this is now a thin adapter over rag.id_types.is_uuid. The
+# module-local implementation existed as a Band-Aid for
+# rank_and_answer(tenant_name=<UUID or display name>) — callers were
+# handing us either shape. State-side that's fixed at arion_state.py:89
+# but this helper is kept for the _casefile_flow entry point which still
+# accepts both a UUID-shaped kwarg (Ship 2') and a legacy display-name
+# tenant_name kwarg for backwards compat.
+from rag.id_types import is_uuid as _is_uuid_shape
 
-_UUID_RE = re.compile(
-    r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-)
 
-
-def _is_uuid_shape(s: str | None) -> bool:
-    if not s:
-        return False
-    return bool(_UUID_RE.match(s))
+# NOTE: `_pick_primary_std` was introduced in an earlier Ship 2'.i
+# iteration to preserve the primary/xfw layer split. It was retired
+# 2026-07-16 alongside the layer split itself — the digest now
+# structures by role (framework-role-model-arc) instead of by "primary
+# standard". The legacy rank_and_answer path still has its own inline
+# `_infer_primary_std`; when that path is retired (retire-by 2026-08-15
+# per CLAUDE.md legacy tracker), the inline copy goes too.
 
 
 # ── Standard label helpers ────────────────────────────────────────────────────
@@ -1995,20 +2003,27 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         t0 = time.time()
 
         # ── Build a CaseFile ───────────────────────────────────────────
-        # Split nodes into Layer 1 vs Layer 2. Same heuristic as the
-        # legacy path: xfw_edges non-empty ⇒ xfw node.
+        # Ship 2'.i (2026-07-16): NO primary/xfw split. Every enrolled
+        # standard's obligations are first-class citizens per the
+        # framework-role-model-arc. All resolver nodes go into a single
+        # pool; the digest structures its layout by role
+        # (program/extension/obligation) instead of by layer identity.
+        # Bridges become a relationship view, not a node classification.
         _nodes = list(nodes or [])
-        _xfw   = [n for n in _nodes if getattr(n, "xfw_edges", None)]
-        _prim  = [n for n in _nodes if not getattr(n, "xfw_edges", None)]
+        _all_nodes = [n for n in _nodes if not getattr(n, "is_informational", False)]
 
         # Duck-typed resolver-shaped view. CaseFile only reads
-        # posture_nodes + graph_nodes, so a namespace with those two
-        # attributes is enough.
+        # posture_nodes + graph_nodes.
+        # Ship 2'.i: all obligations go into primary_nodes — the
+        # legacy split is retired. secondary_nodes / xfw_nodes are
+        # kept empty for backward-compat with CaseFile's legacy
+        # accessors (they'll be removed when the legacy
+        # rank_and_answer path is retired, retire-by 2026-08-15).
         from types import SimpleNamespace
         _graph = SimpleNamespace(
-            primary_nodes   = _prim,
+            primary_nodes   = _all_nodes,
             secondary_nodes = [],
-            xfw_nodes       = _xfw,
+            xfw_nodes       = [],
             doc_contexts    = dict(doc_contexts or {}),
             xfw_edges       = [],
         )
@@ -2019,15 +2034,14 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
 
         # Duck-typed tenant view — CaseFile only needs .tenant_name +
         # .scope.queryable_standards + .tenant_id.
-        # NOTE: historically arion_graph passes state["tenant_id"] as
-        # the tenant_name kwarg (which is actually a display name, not
-        # a UUID — see arion_graph.py:1455). Ship 2' adds an explicit
-        # tenant_id kwarg for observability. When set, we use it; when
-        # not, fall back to _is_uuid_shape on tenant_name.
-        if tenant_id:
+        # Ship 2'.i: the explicit tenant_id kwarg is the canonical UUID.
+        # The tenant_name fallback path handled the pre-Ship-2'.i case
+        # where state["tenant_id"] was a display name; that state is
+        # now cleaned up, but the shape guard remains as defence-in-depth.
+        if tenant_id and _is_uuid_shape(tenant_id):
             _tid = tenant_id
         elif _is_uuid_shape(tenant_name):
-            _tid = tenant_name
+            _tid = tenant_name       # legacy path — pre-2'.i callers
         else:
             _tid = ""
         _tenant = SimpleNamespace(
@@ -2102,9 +2116,23 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
             for r in cited_refs
             if r in posture_by_ref
         }
-        # Layer split for the response envelope.
-        primary_refs = [r for r in cited_refs if r in {n.ref for n in _prim}]
-        xfw_refs     = [r for r in cited_refs if r in {n.ref for n in _xfw}]
+        # Response envelope's primary_refs / xfw_refs fields — legacy
+        # bookkeeping for downstream UI consumers that still expect the
+        # split. Ship 2'.i: with no layer split, we classify by role:
+        # program+extension nodes → primary_refs; obligation nodes →
+        # xfw_refs (auditor navigation direction). Retire this split
+        # once downstream consumers no longer need the shape.
+        _role_by_ref: dict[str, str | None] = {}
+        for n in _all_nodes:
+            _role_by_ref[n.ref] = cf.role_of(n.ref)
+        primary_refs = [
+            r for r in cited_refs
+            if _role_by_ref.get(r) in ("program", "extension")
+        ]
+        xfw_refs = [
+            r for r in cited_refs
+            if _role_by_ref.get(r) == "obligation"
+        ]
 
         latency_ms = int((time.time() - t0) * 1000)
         return ComplianceAnswer(
@@ -2143,6 +2171,20 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
         tenant_id = cf.tenant_id
         if not tenant_id:
             return  # nothing to log against
+        # Defence-in-depth: post-Ship-2'.i, cf.tenant_id is always
+        # UUID-shaped (validated via TenantUUID at state construction).
+        # This guard catches any caller path that bypassed the state
+        # machinery and handed us a slug or display name directly —
+        # log-writes cast to ::uuid, and a silent InvalidTextRepresentation
+        # is exactly the failure mode Ship 2'.i was built to prevent.
+        if not _is_uuid_shape(tenant_id):
+            import logging as _lg
+            _lg.getLogger("rag.llm_answer").warning(
+                "casefile_log skipped: tenant_id %r is not UUID-shaped "
+                "(state should have validated this — investigate caller)",
+                tenant_id,
+            )
+            return
         try:
             conn = psycopg2.connect(
                 host     = _os.getenv("PGHOST",     "127.0.0.1"),

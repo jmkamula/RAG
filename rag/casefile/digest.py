@@ -26,6 +26,8 @@ token-budget assertions.
 from __future__ import annotations
 
 import logging
+import re
+from dataclasses import dataclass
 from typing import Optional
 
 from rag.casefile.types import CaseFile
@@ -52,15 +54,43 @@ def _verdict_tag(finding: str, draft: bool) -> str:
     return f"[{finding}{suffix}]"
 
 
+# Ship 2'.i: engine-jargon phrases that leak through gap_description
+# straight into the LLM's prose. These are internal fulfilment-engine
+# strings that should never surface to the tenant — dejargonize them
+# at the digest boundary, same policy as [[dejargonize-ux-pass-2026-07-01]].
+_JARGON_SUBS = [
+    # "0/4 children satisfied" → "0 of 4 required items present"
+    (re.compile(r"\b(\d+)/(\d+)\s+children\s+satisfied\b", re.IGNORECASE),
+     r"\1 of \2 required items present"),
+    # "partial evidence" (harmless but re-word for clarity)
+    (re.compile(r"\bwith partial evidence\b", re.IGNORECASE),
+     "with partial evidence"),
+    # "missing artifacts of type: X" (engine legacy)
+    (re.compile(r"\bmissing artifacts of type:\s*", re.IGNORECASE),
+     "still needed: "),
+]
+
+
+def _sanitize_gap_text(text: str) -> str:
+    """Strip engine-internal jargon out of gap_description before it
+    reaches the LLM digest. Same principles as the dejargonize UX pass."""
+    if not text:
+        return text
+    out = text
+    for pat, replacement in _JARGON_SUBS:
+        out = pat.sub(replacement, out)
+    return out
+
+
 # One-line posture entry: "- A.5.18 [NC-DRAFT] register incomplete"
 def _posture_line(ref: str, rec: dict, draft: bool, max_body_chars: int = 120) -> str:
     finding = rec.get("finding", "") or ""
     tag = _verdict_tag(finding, draft)
     body = ""
     if finding == "NC" or finding == "OFI":
-        body = (rec.get("gap_description", "") or "").strip()
+        body = _sanitize_gap_text((rec.get("gap_description", "") or "").strip())
     elif finding == "Comply":
-        body = (rec.get("evidence_text", "") or "").strip()
+        body = _sanitize_gap_text((rec.get("evidence_text", "") or "").strip())
     if body:
         # Collapse whitespace + newlines, cap length.
         body = " ".join(body.split())
@@ -116,7 +146,7 @@ def _render_query(cf: CaseFile) -> str:
     return f"QUERY: {q}" if q else "QUERY: (empty)"
 
 
-def _render_posture(cf: CaseFile, limit: int = 10) -> str:
+def _render_posture(cf: CaseFile, limit: int = 10, body_chars: int = 120) -> str:
     """Top-N ranked posture lines. Returns '' when nothing to show."""
     refs = _rank_posture_refs(cf, limit)
     if not refs:
@@ -128,7 +158,8 @@ def _render_posture(cf: CaseFile, limit: int = 10) -> str:
     )
     header = f"POSTURE (showing {len(refs)} of {total_assessed} assessed):"
     lines = [
-        _posture_line(r, posture[r], draft=cf.needs_draft_tag(r))
+        _posture_line(r, posture[r], draft=cf.needs_draft_tag(r),
+                       max_body_chars=body_chars)
         for r in refs
     ]
     return header + "\n" + "\n".join(lines)
@@ -172,14 +203,17 @@ def _render_obligations(
     max_items: int = 5,
     max_chars_each: int = 160,
 ) -> str:
-    """Short obligation excerpts for the top primary nodes.
+    """Short obligation excerpts for the top-N relevant nodes.
+
+    Ship 2'.i: iterates all_nodes() (no primary/xfw split — see
+    framework-role-model-arc). Priority: cited refs first, then
+    remaining nodes by insertion order.
 
     Uses node.metadata.obligation_text / business_description /
     node.document — same fallback chain as rank_and_answer's node
-    template. Prioritise Layer 1 nodes matching cited_refs first,
-    then any remaining Layer 1 nodes by insertion order.
+    template.
     """
-    primary = cf.primary_nodes()
+    primary = cf.all_nodes()
     if not primary:
         return ""
 
@@ -218,6 +252,108 @@ def _render_obligations(
     if not lines:
         return ""
     return "OBLIGATIONS:\n" + "\n".join(lines)
+
+
+def _render_demonstrated_by(cf: CaseFile, max_items: int = 8) -> str:
+    """When a cited ref is an OBLIGATION (e.g. GDPR Art.32), render its
+    DEMONSTRATED BY list — the PROGRAM/EXTENSION obligations that
+    contribute to its posture via IMPLEMENTS/SUPPORTS edges.
+
+    Ship 2'.i: this section replaces the "Posture from linked
+    primaries" block that used to hang off Layer 2 nodes. The
+    demonstrated_by data comes from posture_loader's Phase 2b overlay
+    (2026-07-05); see framework-role-model-arc.
+
+    Only fires when at least one cited ref has role='obligation'.
+    """
+    obligation_refs = [
+        r for r in cf.cited_refs if cf.role_of(r) == "obligation"
+    ]
+    if not obligation_refs:
+        return ""
+
+    lines: list[str] = []
+    for ref in obligation_refs:
+        sources = cf.demonstrated_by(ref)
+        if not sources:
+            continue
+        entries: list[str] = []
+        for src in sources[:max_items]:
+            src_id  = src.get("src_id", "")
+            src_ref = src_id.split(":")[-1] if src_id else ""
+            src_std = src.get("src_std", "")
+            std_lbl = ""
+            if src_std == "ISO27001:2022":
+                std_lbl = "ISO 27001 "
+            elif src_std == "ISO27701:2019":
+                std_lbl = "ISO 27701 "
+            finding = src.get("finding") or ""
+            edge    = src.get("via_edge", "").lower()
+            entry   = f"{std_lbl}{src_ref}"
+            if finding in ("NC", "OFI", "Comply"):
+                entry += f" [{finding}]"
+            if edge:
+                entry += f" via {edge}"
+            entries.append(entry)
+        if entries:
+            lines.append(f"For {ref}:")
+            for e in entries:
+                lines.append(f"  - {e}")
+    if not lines:
+        return ""
+    return "DEMONSTRATED BY:\n" + "\n".join(lines)
+
+
+def _render_programs(cf: CaseFile) -> str:
+    """List the tenant's enrolled standards grouped by role.
+
+    Ship 2'.i: makes the framework universe explicit at digest time.
+    Programs (ISMS spine), extensions (overlays), obligations
+    (regulatory demonstrated by programs+extensions).
+    """
+    scope = getattr(cf.tenant, "scope", None) if cf.tenant else None
+    if scope is None:
+        return ""
+
+    def _short_labels(standards):
+        # Dedup — TenantScope combines direct + inferred, so the same
+        # standard can appear multiple times (e.g. GDPR inferred via
+        # multiple ISO relationships).
+        seen: set[str] = set()
+        out: list[str] = []
+        for s in (standards or []):
+            sid = getattr(s, "id", "")
+            if not sid or sid in seen:
+                continue
+            seen.add(sid)
+            if sid == "ISO27001:2022":
+                out.append("ISO 27001")
+            elif sid == "ISO27701:2019":
+                out.append("ISO 27701 (extends ISO 27001)")
+            elif sid == "ISO27018:2019":
+                out.append("ISO 27018")
+            elif sid.startswith("GDPR"):
+                out.append("GDPR")
+            elif sid.startswith("NIS2"):
+                out.append("NIS2")
+            else:
+                out.append(sid)
+        return out
+
+    programs   = _short_labels(getattr(scope, "programs", []) or [])
+    extensions = _short_labels(getattr(scope, "extensions", []) or [])
+    obligations= _short_labels(getattr(scope, "obligations", []) or [])
+
+    parts: list[str] = []
+    if programs:
+        parts.append(f"programs: {', '.join(programs)}")
+    if extensions:
+        parts.append(f"extensions: {', '.join(extensions)}")
+    if obligations:
+        parts.append(f"obligations: {', '.join(obligations)}")
+    if not parts:
+        return ""
+    return "FRAMEWORKS ENROLLED — " + "; ".join(parts)
 
 
 def _render_documents(cf: CaseFile, max_items: int = 5) -> str:
@@ -291,11 +427,10 @@ def _render_scope(cf: CaseFile) -> str:
 
 # ── Deictic hint (from rank_and_answer's prior_turn_block logic) ─────
 
-import re as _re
-_DEICTIC_RE = _re.compile(
+_DEICTIC_RE = re.compile(
     r"\b(this|that|it|those|these|what about|how about|tell me more|"
     r"is it|are they|the (policy|plan|procedure|register|document|doc))\b",
-    _re.IGNORECASE,
+    re.IGNORECASE,
 )
 
 
@@ -315,19 +450,88 @@ def _render_deictic_hint(cf: CaseFile) -> str:
     )
 
 
+# ── Intent-aware section budgets ─────────────────────────────────────
+#
+# Ship 2'.i: The digest keeps its fixed-slots layout, but the section
+# budgets and ORDER shift based on question_type. Rationale:
+#
+#   For POSTURE_CHECK / GAP_ANALYSIS the LLM needs findings first —
+#   POSTURE section is prominent, obligation text is context.
+#
+#   For DEFINITION / STANDARD_KNOWLEDGE the LLM needs the control's
+#   obligation text prominently. Posture is background — otherwise
+#   the LLM biases toward enumerating tenant findings when asked
+#   "what is A.6.4?" (Ship 2'.h eval regression #22, #23, #213, #214).
+#
+# This is soft branching — same slot structure, different weights.
+# NOT a per-taxonomy dispatch table (which would re-introduce the
+# Ship 2 duplication problem).
+
+# Intent groups. Anything not listed uses posture-first defaults.
+_DEFINITION_INTENTS = {
+    "definition",
+    "standard_knowledge",
+    "definition_query",
+}
+
+
+@dataclass
+class _DigestPlan:
+    """Section ordering + budgets for one digest render."""
+    posture_limit:       int
+    posture_body_chars:  int
+    obligation_limit:    int
+    obligation_chars:    int
+    obligations_first:   bool     # if True, put OBLIGATIONS above POSTURE
+
+
+def _plan_for(cf: CaseFile) -> _DigestPlan:
+    """Choose section budgets/ordering based on question_type."""
+    if cf.question_type in _DEFINITION_INTENTS:
+        # DEFINITION mode: obligations lead, posture is secondary.
+        return _DigestPlan(
+            posture_limit       = 3,
+            posture_body_chars  = 80,     # tighter — posture is context
+            obligation_limit    = 5,
+            obligation_chars    = 400,    # was 160; large enough for
+                                          # "Disciplinary process" +
+                                          # opening sentence
+            obligations_first   = True,
+        )
+    # Default: posture-focused (matches Ship 2'.a-h behaviour).
+    return _DigestPlan(
+        posture_limit       = 10,
+        posture_body_chars  = 120,
+        obligation_limit    = 5,
+        obligation_chars    = 160,
+        obligations_first   = False,
+    )
+
+
 # ── Main digest builder ──────────────────────────────────────────────
 
 def build_prompt_digest(
     cf: CaseFile,
-    posture_limit:    int = 10,
-    obligation_limit: int = 5,
+    posture_limit:    int | None = None,
+    obligation_limit: int | None = None,
     document_limit:   int = 5,
 ) -> str:
     """Compact render of the CaseFile for the LLM user-prompt slot.
 
+    Section budgets and ORDER are chosen from `_plan_for(cf)` — a
+    soft-branching helper that shifts weights based on question_type.
+    Explicit `posture_limit` / `obligation_limit` kwargs override the
+    plan (used by tests + tuning).
+
     Returns a plain string. Sections that would be empty are omitted
     entirely — the LLM sees a lean prompt.
     """
+    plan = _plan_for(cf)
+    if posture_limit is None:
+        posture_limit = plan.posture_limit
+    if obligation_limit is None:
+        obligation_limit = plan.obligation_limit
+
     sections: list[str] = []
 
     def _add(section: str):
@@ -337,12 +541,60 @@ def build_prompt_digest(
     _add(_render_query(cf))
     _add(_render_deictic_hint(cf))
     _add(_render_incidents(cf))
-    _add(_render_posture(cf, limit=posture_limit))
-    _add(_render_xfw_bridges(cf))
-    _add(_render_obligations(cf, max_items=obligation_limit))
+
+    # Ship 2'.i: role-aware section ordering.
+    # If any cited ref is an OBLIGATION (regulatory — GDPR Art., NIS2,
+    # DORA, HIPAA, PCI DSS), the DEMONSTRATED BY section is the primary
+    # answer surface. Follow with OBLIGATIONS text (of ALL cited refs)
+    # then POSTURE.
+    # If no cited ref is an obligation OR the query is definition-style,
+    # fall through to the layout in _plan_for (obligations-first for
+    # definition / posture-first otherwise).
+    has_cited_obligation = any(
+        cf.role_of(r) == "obligation" for r in (cf.cited_refs or [])
+    )
+
+    if has_cited_obligation:
+        # OBLIGATION-cited: lead with the DEMONSTRATED BY surface,
+        # then OBLIGATIONS text so the LLM has the obligation context,
+        # then POSTURE ranked.
+        _add(_render_demonstrated_by(cf))
+        _add(_render_obligations(
+            cf, max_items=obligation_limit,
+            max_chars_each=plan.obligation_chars,
+        ))
+        _add(_render_posture(
+            cf, limit=posture_limit,
+            body_chars=plan.posture_body_chars,
+        ))
+    elif plan.obligations_first:
+        # DEFINITION mode: OBLIGATIONS lead, then XFW bridges,
+        # then POSTURE as background.
+        _add(_render_obligations(
+            cf, max_items=obligation_limit,
+            max_chars_each=plan.obligation_chars,
+        ))
+        _add(_render_xfw_bridges(cf))
+        _add(_render_posture(
+            cf, limit=posture_limit,
+            body_chars=plan.posture_body_chars,
+        ))
+    else:
+        # Default: POSTURE leads (gap_analysis / posture_check).
+        _add(_render_posture(
+            cf, limit=posture_limit,
+            body_chars=plan.posture_body_chars,
+        ))
+        _add(_render_xfw_bridges(cf))
+        _add(_render_obligations(
+            cf, max_items=obligation_limit,
+            max_chars_each=plan.obligation_chars,
+        ))
+
     _add(_render_documents(cf, max_items=document_limit))
     _add(_render_session(cf))
-    _add(_render_scope(cf))
+    _add(_render_programs(cf))     # framework-role-model context
+    _add(_render_scope(cf))        # standards list (kept for continuity)
 
     return "\n\n".join(sections)
 
@@ -377,27 +629,49 @@ Output rules (absolute):
 1. Preserve every ref exactly as it appears (A.5.18, Art.32, 9.2).
    Refs are the answer's audit trail — dropping any is a
    compliance failure.
-2. Report posture only from the tags in the POSTURE section:
-   NC (Non-Conformity) — required control absent or ineffective;
-   OFI (Opportunity for Improvement) — control exists with gaps;
-   Comply — control in place with evidence.
+2. Report posture only from the tags in the POSTURE / DEMONSTRATED
+   BY sections:
+     NC (Non-Conformity) — required control absent or ineffective;
+     OFI (Opportunity for Improvement) — control exists with gaps;
+     Comply — control in place with evidence.
    The -DRAFT suffix means posture is not yet auditor-confirmed —
-   keep the [DRAFT] tag in your answer when it's on the source.
-3. Cross-framework refs (Art.X, ISO 27701 A.7.x, etc.) carry no
-   posture of their own. Their status is inherited from the
-   controls in the XFW BRIDGES section — cite the primary refs
-   when reporting their posture.
+   keep the [DRAFT] tag when it's on the source.
+3. FRAMEWORK ROLES — every enrolled standard has one role:
+     PROGRAM (ISMS spine): ISO 27001 — carries direct posture on
+       every control.
+     EXTENSION (overlay on a program): ISO 27701 extends ISO 27001
+       with PIMS — carries direct posture on its extension controls.
+     OBLIGATION (legal/regulatory mandate): GDPR, NIS2, DORA — its
+       articles carry posture partly from tenant-asserted findings
+       AND partly from DEMONSTRATED-BY propagation (ISO 27001 /
+       ISO 27701 controls that implement the article contribute).
+   When answering about an OBLIGATION ref: describe the article's
+   requirement + cite the DEMONSTRATED BY sources that implement
+   it. When answering about a PROGRAM or EXTENSION ref: describe
+   its own control text + posture directly.
 4. Lead with NC findings, then OFI, then Comply. Never list
    "not yet assessed" or omitted controls as gaps.
-5. Cite frameworks only from the SCOPE line. Frameworks outside
-   scope are not implemented by the tenant and must never appear
-   in your answer.
+5. Cite frameworks only from the FRAMEWORKS ENROLLED line.
+   Frameworks outside scope are not implemented by the tenant and
+   must never appear in your answer.
 6. Cite controls with the readable framework prefix:
-   "ISO 27001 A.5.18", "GDPR Art. 32", "ISO 27001 clause 9.2".
+   "ISO 27001 A.5.18", "GDPR Art. 32", "ISO 27001 clause 9.2",
+   "ISO 27701 A.7.2.4".
    ISO body clauses (5.x/6.x/7.x/8.x/9.x/10.x) are NOT Annex A —
    never write "A.9.2" or "A.10.1".
 7. If the DEICTIC WITHOUT CONTEXT hint is present, follow it —
    ask which entity the user meant rather than inventing one.
+8. For "what is X" / "what does X mean" / "what is control X"
+   questions: LEAD with the control's official name from the
+   OBLIGATIONS section, quoted verbatim. Do not paraphrase the
+   title. Then briefly explain what the control requires from
+   the obligation text. Only mention posture AFTER defining.
+   Example: "A.6.4 (Disciplinary process) requires..." NOT
+   "A.6.4 is related to information security management".
+9. When defining a compliance acronym (NC, OFI, ISMS, DPIA, DPO,
+   RoPA, DSAR, DSR, DPA, PIMS, SoA), spell out the full phrase:
+   "OFI (Opportunity for Improvement)" — the acronym alone is
+   insufficient for a definition answer.
 
 Be direct and actionable. State what's missing and what to do.
 End when the actionable content ends — do not append closing

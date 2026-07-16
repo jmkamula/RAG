@@ -350,6 +350,141 @@ TESTS = [
 ]
 
 
+# ── Ship 2'.i: role-aware accessors (framework-role-model-arc) ───────
+
+@dataclass
+class FakeStandardInfo:
+    id: str
+    role: str = ""
+
+
+@dataclass
+class FakeRoleScope:
+    programs:    list = field(default_factory=list)
+    extensions:  list = field(default_factory=list)
+    obligations: list = field(default_factory=list)
+    queryable_standards: list = field(default_factory=list)
+
+
+def _tenant_with_role_scope():
+    return FakeTenant(
+        tenant_name="Arion Networks",
+        tenant_id="uuid-1",
+        scope=FakeRoleScope(
+            programs   = [FakeStandardInfo(id="ISO27001:2022")],
+            extensions = [FakeStandardInfo(id="ISO27701:2019")],
+            obligations= [FakeStandardInfo(id="GDPR:2016/679")],
+        ),
+    )
+
+
+def test_role_map_reads_scope_groupings():
+    cf = make_case(tenant=_tenant_with_role_scope())
+    rmap = cf._role_map()
+    return _ok(
+        rmap.get("ISO27001:2022") == "program"
+        and rmap.get("ISO27701:2019") == "extension"
+        and rmap.get("GDPR:2016/679") == "obligation",
+        f"got {rmap}",
+    )
+
+
+def test_role_of_uses_node_standard_id():
+    n = FakeNode(node_id="GDPR:2016/679:Art.32", ref="Art.32",
+                 standard_id="GDPR:2016/679")
+    cf = make_case(primary=[n], tenant=_tenant_with_role_scope())
+    return _ok(cf.role_of("Art.32") == "obligation")
+
+
+def test_role_of_falls_back_to_posture_record():
+    """When the ref isn't on a graph node but IS in the posture dict,
+    fall back to posture record's standard_id."""
+    posture = {
+        "GDPR:2016/679:Art.32": {
+            "finding": "NC", "control_ref": "Art.32",
+            "standard_id": "GDPR:2016/679",
+        }
+    }
+    cf = make_case(posture=posture, tenant=_tenant_with_role_scope())
+    return _ok(cf.role_of("Art.32") == "obligation")
+
+
+def test_role_of_none_when_off_scope():
+    cf = make_case(tenant=_tenant_with_role_scope())
+    return _ok(cf.role_of("NIST-CSF.PR-1") is None)
+
+
+def test_demonstrated_by_reads_posture_field():
+    posture = {
+        "GDPR:2016/679:Art.32": {
+            "finding": "NC",
+            "control_ref": "Art.32",
+            "demonstrated_by": [
+                {"src_id": "ISO27001:2022:A.5.15",
+                 "src_std": "ISO27001:2022",
+                 "via_edge": "IMPLEMENTS",
+                 "finding": "NC",
+                 "strength": "high"},
+            ],
+        }
+    }
+    cf = make_case(posture=posture, tenant=_tenant_with_role_scope())
+    sources = cf.demonstrated_by("Art.32")
+    return _ok(
+        len(sources) == 1
+        and sources[0]["src_id"] == "ISO27001:2022:A.5.15",
+    )
+
+
+def test_demonstrated_by_empty_when_no_field():
+    posture = {"ISO27001:2022:A.5.18": {"finding": "NC", "control_ref": "A.5.18"}}
+    cf = make_case(posture=posture, tenant=_tenant_with_role_scope())
+    return _ok(cf.demonstrated_by("A.5.18") == [])
+
+
+def test_obligations_of_role_program():
+    """Return only nodes owned by program-role standards."""
+    iso = FakeNode(node_id="ISO27001:2022:A.5.18", ref="A.5.18",
+                   standard_id="ISO27001:2022")
+    gdpr = FakeNode(node_id="GDPR:2016/679:Art.32", ref="Art.32",
+                    standard_id="GDPR:2016/679")
+    ext = FakeNode(node_id="ISO27701:2019:A.7.2.5", ref="A.7.2.5",
+                   standard_id="ISO27701:2019")
+    cf = make_case(primary=[iso, gdpr, ext], tenant=_tenant_with_role_scope())
+    program_refs = [n.ref for n in cf.obligations_of_role("program")]
+    return _ok(program_refs == ["A.5.18"], program_refs)
+
+
+def test_all_nodes_pools_and_dedupes():
+    """all_nodes should union primary + secondary + xfw and dedupe."""
+    # duplicate on node_id: same node in two buckets
+    n1 = FakeNode(node_id="ISO27001:2022:A.5.18", ref="A.5.18")
+    n2 = FakeNode(node_id="ISO27001:2022:A.5.15", ref="A.5.15")
+    gn = FakeGraph(
+        primary_nodes=[n1, n2],
+        secondary_nodes=[n1],       # dup
+        xfw_nodes=[],
+    )
+    cf = CaseFile(
+        query="q", intent=None,
+        resolved=FakeResolved(posture_nodes={}, graph_nodes=gn),
+    )
+    refs = [n.ref for n in cf.all_nodes()]
+    return _ok(refs == ["A.5.18", "A.5.15"], refs)
+
+
+TESTS = TESTS + [
+    test_role_map_reads_scope_groupings,
+    test_role_of_uses_node_standard_id,
+    test_role_of_falls_back_to_posture_record,
+    test_role_of_none_when_off_scope,
+    test_demonstrated_by_reads_posture_field,
+    test_demonstrated_by_empty_when_no_field,
+    test_obligations_of_role_program,
+    test_all_nodes_pools_and_dedupes,
+]
+
+
 def main():
     print("─" * 70)
     print("  CaseFile dataclass tests")
