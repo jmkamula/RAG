@@ -53,12 +53,11 @@ These patterns are superseded and being retired. Do NOT add new
 call sites; migrate existing sites opportunistically when touched.
 When a retire-by date passes, delete the legacy path.
 
-- **primary_nodes / xfw_nodes layer split** in `rag/llm_answer.py::rank_and_answer` (legacy path).
-  Superseded by role model (framework-role-model-arc). Case-file
-  flow already switched (Ship 2'.i, 2026-07-16). Retire-by:
-  **2026-08-15** if `CASEFILE_ENABLED=1` holds baseline for 2
-  weeks — delete the legacy 900-LOC path in
-  `rank_and_answer` + the inline `_infer_primary_std` helper.
+- **primary_nodes / xfw_nodes layer split** — RETIRED 2026-07-16 in
+  Ship 2'.n. `rank_and_answer` legacy body (~912 LOC), inline
+  `_infer_primary_std`, and `_pick_primary_std` all deleted. The
+  case-file flow (structured by role per framework-role-model-arc)
+  is the only path. Do NOT re-introduce a layer split.
 - **`state["tenant_id"]` as display name** — fixed Ship 2'.i via
   `arion_state.py:89`. Any read site expecting a display name is
   now broken; migrate to `state["tenant_display_name"]`.
@@ -70,16 +69,14 @@ When a retire-by date passes, delete the legacy path.
   use `NodeId(value)` directly to get strict validation +
   `.standard_id`, `.version`, `.ref` accessors. Do not re-introduce
   inline splits.
-- **`_pick_primary_std` inline** — retired from case-file flow
-  2026-07-16. Legacy inline copy in `rank_and_answer` retires with
-  the layer split (see above).
 - **AnswerPayload dispatcher (Ship 2.0 / Ship 2.1)** — reverted
   2026-07-15 (commit f246df3). Do NOT re-add per-taxonomy
   dispatch tables; use soft-branching in
   `rag/casefile/digest.py::_plan_for` if intent-aware section
   budgets are needed.
-- **`CASEFILE_ENABLED=0` fallback** — the legacy `rank_and_answer`
-  path. Same retire-by as the layer split (2026-08-15).
+- **`CASEFILE_ENABLED` env flag** — RETIRED 2026-07-16 in Ship 2'.n.
+  The case-file flow is the only path; no flag gate remains. Do NOT
+  re-introduce feature flags without an explicit retire-by date.
 - **`USE_LEGACY_CLASSIFIER=1` fallback** — Ship 1's escape hatch.
   Retire-by: 2026-09-01 if consensus baseline holds.
 
@@ -223,19 +220,17 @@ PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
 #         entries for chatgpt/ai tools/llm use → A.8.19. Signal C emits at
 #         curated_lexicon_weight=1.00 (bumped from 0.30). Curator learnings
 #         are now top-tier signal weight — highest of any signal.
-# Residual 2-3 non-PASS after Ship 1 (target 205/208 not 208/208):
-#   #14, #3 (rotating) — LLM stochastically omits acronym (OFI/NC) from
-#         DEFINITION-query prose even when it's in context. Prose-layer
-#         issue, not intent. Ship 2' (case-file pattern, 2026-07-15)
-#         addresses this via deterministic preservation-check footer.
-#         Behind CASEFILE_ENABLED=0 during rollout — flip to 1 to enable.
-#   #33 (rotating) — LLM stochastically drops A.5.1 from prose even when
-#         Signal C locks it in focus_refs. Same class as #14. Ship 2'
-#         preservation footer closes this deterministically when the
-#         flag is on.
+# Baseline: 207/208 PASS + 1 WARN + 0 FAIL as of Ship 2'.m (2026-07-16).
+# Ship 2'.n retired the legacy rank_and_answer path; case-file flow is
+# the ONLY path — no CASEFILE_ENABLED flag remains.
+#   #14, #33 — STABILISED 2026-07-16 in Ship 2'.j via deterministic
+#         preservation-check footer. Was: LLM stochastically dropped
+#         acronym / ref from DEFINITION-query prose. Now: repair pass
+#         appends missing ref/verdict/[DRAFT] as an audit footer.
 #   #200 — pre-existing gap_analysis vs posture_check mismatch on
-#         "NC findings on identity"; Signal C doesn't fire on this phrasing.
-# Any regression below 203/208 blocks restart. Prefer root-causing new
+#         "NC findings on identity"; Signal C doesn't fire on this
+#         phrasing. Own arc.
+# Any regression below 205/208 blocks restart. Prefer root-causing new
 # intermittent failures over labeling them "stochastic" — see #21 arc + Ship 1
 # consensus architecture below.
 # Whenever you add a user-facing feature/fix, append an EvalCase that would
@@ -371,11 +366,11 @@ so it stops stripping legitimate xfw citations.
 
 ### Case-file pattern — Ship 2' (2026-07-15)
 
-Alternative rank_and_answer flow behind `CASEFILE_ENABLED=1`. Motivation:
-`rank_answer` prompts averaged **21,731 tokens** (14-day window, peak
-61,827), diluting the LLM's attention on ~550 tokens of actual answer.
-The case-file pattern hands the LLM a compact digest and repairs its
-output deterministically.
+`rank_and_answer`'s only path as of Ship 2'.n (2026-07-16). Motivation:
+the legacy path's prompts averaged **21,731 tokens** (14-day window,
+peak 61,827), diluting the LLM's attention on ~550 tokens of actual
+answer. The case-file pattern hands the LLM a compact digest and
+repairs its output deterministically.
 
 **Flow** (inside `rank_and_answer._casefile_flow`):
 1. Build `CaseFile` (`rag/casefile/types.py`) wrapping the resolver's
@@ -424,9 +419,10 @@ the SCOPE section per turn).
 Missing elements get consolidated into a `↳ Compliance facts: ...`
 footer — same append-only pattern as Ship 1.14's bridge footer.
 
-**Escape hatch**: `CASEFILE_ENABLED=0` disables the new path. Any
-exception in `_casefile_flow` also falls back to the legacy 900-LOC
-path — the case-file flow can never block a response.
+**No escape hatch** — Ship 2'.n retired `CASEFILE_ENABLED` + the
+legacy fallback path. If the case-file flow errors, the error
+surfaces to the caller (fail-loud). To roll back this arc, `git
+revert` the Ship 2'.n commit — no runtime toggle.
 
 **Observability**: `chat_casefile_log` records `case_file_summary`,
 prompt-token breakdown, `repair_events[]`, `footers_added[]`,
@@ -489,6 +485,11 @@ Follow-up arcs (post Ship 2'.i):
   collision surface eliminated).
 - Ship 2'.m (2026-07-16) — retired 21 inline `node_id.split(":")`
   sites via `ref_of()` / `standard_of()` helpers.
+- Ship 2'.n (2026-07-16) — retired the legacy `rank_and_answer` body
+  (~912 LOC) + inline `_infer_primary_std` + file-scope
+  `_pick_primary_std` + `CASEFILE_ENABLED` env flag. The case-file
+  flow is now the only path — no gate, no fallback. Baseline: 162/162
+  unit tests + live smoke clean.
 
 ### Session persistence
 - Sync chat: PostgresSaver (arioncomply_sessions DB)
