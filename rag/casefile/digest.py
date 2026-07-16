@@ -356,29 +356,60 @@ def _render_programs(cf: CaseFile) -> str:
     return "FRAMEWORKS ENROLLED — " + "; ".join(parts)
 
 
-def _render_documents(cf: CaseFile, max_items: int = 5) -> str:
+# Query types where the LLM needs to ENUMERATE required document items.
+# For these, the DOCUMENTS section renders each MUST item as its own
+# line (not just a count) so the LLM has the actual text to cite.
+# Ship 2'.j: closes eval #31 (ISMS scope statement — needed ≥5 items
+# but digest only showed the count).
+_ENUMERATE_MUSTS_INTENTS = {
+    "document_content",
+    "document_inventory",
+}
+
+
+def _render_documents(cf: CaseFile, max_items: int = 5,
+                     max_musts_per_doc: int = 20) -> str:
     """Document-context lines when the resolver surfaced doc contexts.
-    Only fires for questions where documents actually matter — an
-    empty doc_contexts dict yields ''.
+
+    For document_content / document_inventory queries, ENUMERATE each
+    MUST item with its status. For other queries, show just the
+    summary count (LLM doesn't need the detail).
+
+    Empty doc_contexts → returns ''.
     """
     ctxs = cf.doc_contexts
     if not ctxs:
         return ""
+    enumerate_musts = cf.question_type in _ENUMERATE_MUSTS_INTENTS
     lines: list[str] = []
     for _nid, ctx in list(ctxs.items())[:max_items]:
         ref = getattr(ctx, "control_ref", "") or ""
         title = getattr(ctx, "title", "") or ""
-        # Show missing-must count when uploaded, "no upload" when not.
         try:
-            missing = ctx.missing_must
-            present = ctx.present_must
+            present    = ctx.present_must
             total_must = len(getattr(ctx, "must_contain", []) or [])
-            if getattr(ctx, "has_document_uploaded", False):
-                lines.append(
-                    f"- {ref}: {title} — {len(present)}/{total_must} required items present"
-                )
+            uploaded   = getattr(ctx, "has_document_uploaded", False)
+            if uploaded:
+                header = f"- {ref}: {title} — {len(present)}/{total_must} required items present"
             else:
-                lines.append(f"- {ref}: {title} — no document uploaded")
+                header = f"- {ref}: {title} — no document uploaded ({total_must} required items)"
+            lines.append(header)
+            if enumerate_musts:
+                for item in list(getattr(ctx, "must_contain", []) or [])[:max_musts_per_doc]:
+                    text = (getattr(item, "text", "") or "").strip()
+                    if not text:
+                        continue
+                    status = getattr(item, "status", None)
+                    if status == "present":
+                        mark = "✓"
+                    elif status in ("missing", None):
+                        mark = "•"
+                    else:
+                        mark = "?"
+                    # Truncate very long items to keep the digest lean.
+                    if len(text) > 140:
+                        text = text[:139] + "…"
+                    lines.append(f"    {mark} {text}")
         except AttributeError:
             lines.append(f"- {ref}: {title}")
     if not lines:
@@ -649,8 +680,23 @@ Output rules (absolute):
    requirement + cite the DEMONSTRATED BY sources that implement
    it. When answering about a PROGRAM or EXTENSION ref: describe
    its own control text + posture directly.
+   For a broad "are we [OBLIGATION-framework] compliant?" question
+   (e.g. "are we GDPR compliant?", "are we NIS2 compliant?"):
+   NEVER answer with a flat "you are / are not compliant" verdict.
+   Instead explain the compliance MODEL: this obligation framework
+   is demonstrated by the tenant's programs + extensions, and
+   summarise where the programs stand on the article-level
+   controls. Use the DEMONSTRATED BY data to name the specific
+   program/extension that carries the obligation
+   (e.g. "GDPR is demonstrated via ISO 27701 (PIMS extension of
+   ISO 27001)"). Then summarise the current posture across the
+   articles the programs implement.
 4. Lead with NC findings, then OFI, then Comply. Never list
-   "not yet assessed" or omitted controls as gaps.
+   "not yet assessed" or omitted controls as gaps. When the query
+   asks about "gaps" — use the word "gap(s)" naturally in the
+   answer. NC findings ARE the tenant's compliance gaps; mirror
+   the query's vocabulary rather than switching to
+   "non-conformities" exclusively.
 5. Cite frameworks only from the FRAMEWORKS ENROLLED line.
    Frameworks outside scope are not implemented by the tenant and
    must never appear in your answer.
