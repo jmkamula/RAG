@@ -2192,7 +2192,15 @@ Output SELECTED_PRIMARY: and SELECTED_XFW: lines first, then your answer directl
                 user     = _os.getenv("PGUSER",     "arioncomply_app"),
                 password = _os.getenv("PGPASSWORD", ""),
             )
-        except Exception:
+        except Exception as _ce:
+            # Ship 2'.k: fail-loud on the connect step. Silent-fail here
+            # was masking config errors that would otherwise be caught
+            # in dev. Best-effort principle preserved (we return), but
+            # the failure surfaces in the log at WARNING.
+            import logging as _lg
+            _lg.getLogger("rag.llm_answer").warning(
+                "casefile_log connect failed (best-effort skip): %s", _ce,
+            )
             return
         try:
             with conn.cursor() as cur:

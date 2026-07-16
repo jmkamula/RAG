@@ -50,9 +50,22 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
+# Ship 2'.k: FastAPI-side ID-shape validators. Every path param that
+# hits a Postgres ::uuid cast is typed via one of the *IdParam aliases
+# below — bad shapes return 422 at the door instead of 500 from the
+# cast. See rag/api_types.py + [[ship-2-prime-i-id-discipline...]].
+
 # ── Path setup ────────────────────────────────────────────────────────────────
 _ROOT = Path(__file__).parent
 sys.path.insert(0, str(_ROOT))
+
+# Ship 2'.k: FastAPI path-param types. Imported once at module load
+# (after sys.path is set), used across every endpoint below.
+from rag.api_types import (
+    PostureIdParam, ProposalIdParam, OverrideIdParam, UploadIdParam,
+    SystemIdParam, NotifIdParam, ImplicationIdParam, SeriesIdParam,
+    ControlRefParam, LeafIdParam, CascadeKindParam, FactKeyParam,
+)
 
 try:
     from dotenv import load_dotenv
@@ -773,7 +786,7 @@ class DocumentStatus(BaseModel):
 def _run_pipeline(
     file_path:              str,
     tenant_id:              str,
-    upload_id:              str,
+    upload_id: UploadIdParam,
     db_url:                 str,
     api_key:                str,
     original_filename:      Optional[str]        = None,
@@ -1072,7 +1085,7 @@ async def upload_document(
     tags=["documents"],
 )
 async def document_status(
-    upload_id: str,
+    upload_id: UploadIdParam,
     request:   Request,
     key_info:  APIKeyInfo = Depends(require_scope("documents")),
 ):
@@ -1242,7 +1255,7 @@ class DocumentVersion(BaseModel):
     tags=["documents"],
 )
 async def list_document_versions(
-    series_id: str,
+    series_id: SeriesIdParam,
     request:   Request,
     key_info:  APIKeyInfo = Depends(require_scope("documents")),
 ):
@@ -1353,7 +1366,7 @@ class PostureHistoryEntry(BaseModel):
     tags=["documents"],
 )
 async def posture_history(
-    control_ref: str,
+    control_ref: ControlRefParam,
     request:     Request,
     key_info:    APIKeyInfo = Depends(require_scope("documents")),
     standard_id: Optional[str] = None,
@@ -1500,7 +1513,7 @@ class OverrideRequest(BaseModel):
 
 @app.post("/api/v1/posture/{posture_id}/confirm", tags=["hitl"])
 async def confirm_posture(
-    posture_id: str,
+    posture_id: PostureIdParam,
     body:       ConfirmRequest,
     request:    Request,
     key_info:   APIKeyInfo = Depends(require_scope("hitl")),
@@ -1553,7 +1566,7 @@ async def confirm_posture(
 
 @app.post("/api/v1/posture/{posture_id}/override", tags=["hitl"])
 async def override_posture(
-    posture_id: str,
+    posture_id: PostureIdParam,
     body:       OverrideRequest,
     request:    Request,
     key_info:   APIKeyInfo = Depends(require_scope("hitl")),
@@ -1704,7 +1717,7 @@ async def list_xfw_proposals(
 
 @app.post("/api/v1/xfw-proposals/{proposal_id}/confirm", tags=["hitl"])
 async def confirm_xfw_proposal(
-    proposal_id: str,
+    proposal_id: ProposalIdParam,
     request:     Request,
     key_info:    APIKeyInfo = Depends(require_scope("hitl")),
 ):
@@ -1760,7 +1773,7 @@ async def confirm_xfw_proposal(
 
 @app.post("/api/v1/xfw-proposals/{proposal_id}/reject", tags=["hitl"])
 async def reject_xfw_proposal(
-    proposal_id: str,
+    proposal_id: ProposalIdParam,
     request:     Request,
     key_info:    APIKeyInfo = Depends(require_scope("hitl")),
 ):
@@ -1991,7 +2004,7 @@ async def stage1_queue(
 
 @app.get("/api/v1/stage1/queue/{control_ref}", tags=["hitl"])
 async def stage1_queue_for_control(
-    control_ref: str,
+    control_ref: ControlRefParam,
     request:     Request,
     key_info:    APIKeyInfo = Depends(require_scope("hitl")),
 ):
@@ -2070,7 +2083,7 @@ async def stage2_queue(
 
 @app.get("/api/v1/stage2/queue/{control_ref}", tags=["hitl"])
 async def stage2_proposal_detail(
-    control_ref: str,
+    control_ref: ControlRefParam,
     request:     Request,
     key_info:    APIKeyInfo = Depends(require_scope("hitl")),
 ):
@@ -2390,7 +2403,7 @@ def _enrich_titles(neo4j_driver, verdict: dict) -> None:
 
 @app.post("/api/v1/stage2/{control_ref}/approve", tags=["hitl"])
 async def stage2_approve(
-    control_ref: str,
+    control_ref: ControlRefParam,
     request:     Request,
     key_info:    APIKeyInfo = Depends(require_scope("hitl")),
 ):
@@ -2436,7 +2449,7 @@ async def stage2_approve(
 
 @app.post("/api/v1/stage2/{control_ref}/reject", tags=["hitl"])
 async def stage2_reject(
-    control_ref: str,
+    control_ref: ControlRefParam,
     body:        Stage2RejectRequest,
     request:     Request,
     key_info:    APIKeyInfo = Depends(require_scope("hitl")),
@@ -2786,7 +2799,7 @@ async def dashboard_posture(
 
 @app.get("/api/v1/dashboard/control/{control_ref}/evidence", tags=["posture"])
 async def dashboard_control_evidence(
-    control_ref: str,
+    control_ref: ControlRefParam,
     request:     Request,
     key_info:    APIKeyInfo = Depends(require_scope("posture")),
 ):
@@ -2843,7 +2856,7 @@ async def dashboard_control_evidence(
 
 @app.get("/api/v1/dashboard/control/{control_ref}/evidence-classes", tags=["posture"])
 async def dashboard_control_evidence_classes(
-    control_ref: str,
+    control_ref: ControlRefParam,
     request:     Request,
     key_info:    APIKeyInfo = Depends(require_scope("posture")),
     standard_id: Optional[str] = None,
@@ -2889,7 +2902,7 @@ async def dashboard_control_evidence_classes(
 
 @app.get("/api/v1/dashboard/control/{control_ref}/advisory", tags=["posture"])
 async def dashboard_control_advisory(
-    control_ref: str,
+    control_ref: ControlRefParam,
     request:     Request,
     key_info:    APIKeyInfo = Depends(require_scope("posture")),
     standard_id: Optional[str] = None,
@@ -2933,7 +2946,7 @@ async def dashboard_control_advisory(
 @app.get("/api/v1/dashboard/control/{control_ref}/demonstrated-by",
          tags=["posture"])
 async def dashboard_control_demonstrated_by(
-    control_ref: str,
+    control_ref: ControlRefParam,
     request:     Request,
     key_info:    APIKeyInfo = Depends(require_scope("posture")),
     standard_id: Optional[str] = None,
@@ -2983,7 +2996,7 @@ async def dashboard_control_demonstrated_by(
 
 @app.get("/api/v1/posture/{control_ref}", tags=["posture"])
 async def posture_control(
-    control_ref: str,
+    control_ref: ControlRefParam,
     request:     Request,
     key_info:    APIKeyInfo = Depends(require_scope("posture")),
     standard_id: Optional[str] = None,
@@ -3792,7 +3805,7 @@ async def admin_facts_recompute_all(
 
 @app.post("/api/v1/admin/facts/recompute/{fact_key}", tags=["admin"])
 async def admin_facts_recompute_one(
-    fact_key: str,
+    fact_key: FactKeyParam,
     request:  Request,
     key_info: APIKeyInfo = Depends(require_api_key),
 ):
@@ -3872,7 +3885,7 @@ async def admin_facts_recompute_log(
 
 @app.post("/api/v1/admin/uploads/{upload_id}/reextract", tags=["admin"])
 async def admin_reextract_upload(
-    upload_id:              str,
+    upload_id: UploadIdParam,
     request:                Request,
     background_tasks:       BackgroundTasks,
     declared_standard_id:   Optional[str] = Form(None),
@@ -4187,7 +4200,7 @@ def _template_download_filename(leaf_id: str, ext: str = "md") -> str:
 
 @app.get("/api/v1/templates/{leaf_id}/download", tags=["templates"])
 async def download_template(
-    leaf_id:  str,
+    leaf_id: LeafIdParam,
     request:  Request,
     key_info: APIKeyInfo = Depends(require_api_key),
     empty:    bool = False,
@@ -4728,7 +4741,7 @@ async def upsert_external_system(
 
 @app.delete("/api/v1/tenant/external-systems/{system_id}", tags=["templates"])
 async def delete_external_system(
-    system_id: str,
+    system_id: SystemIdParam,
     request:   Request,
     key_info:  APIKeyInfo = Depends(require_scope("posture")),
 ):
@@ -4760,7 +4773,7 @@ async def delete_external_system(
 
 @app.get("/api/v1/tenant/cites/leaf/{leaf_id:path}", tags=["templates"])
 async def list_cites_for_leaf(
-    leaf_id:  str,
+    leaf_id: LeafIdParam,
     request:  Request,
     key_info: APIKeyInfo = Depends(require_api_key),
 ):
@@ -4824,8 +4837,8 @@ async def list_cites_for_leaf(
 
 @app.put("/api/v1/tenant/cites/leaf/{leaf_id:path}/source/{system_id}", tags=["templates"])
 async def upsert_cites_for_leaf_source(
-    leaf_id:   str,
-    system_id: str,
+    leaf_id: LeafIdParam,
+    system_id: SystemIdParam,
     request:   Request,
     payload:   dict,
     key_info:  APIKeyInfo = Depends(require_scope("posture")),
@@ -4948,8 +4961,8 @@ async def upsert_cites_for_leaf_source(
     tags=["templates"],
 )
 async def verify_cites_for_leaf_source(
-    leaf_id:   str,
-    system_id: str,
+    leaf_id: LeafIdParam,
+    system_id: SystemIdParam,
     request:   Request,
     payload:   dict,
     key_info:  APIKeyInfo = Depends(require_scope("posture")),
@@ -5305,7 +5318,7 @@ async def list_triggered_implications(
 
 @app.patch("/api/v1/tenant/triggered-implications/{imp_id}", tags=["posture"])
 async def update_triggered_implication(
-    imp_id:   str,
+    imp_id: ImplicationIdParam,
     request:  Request,
     payload:  dict,
     key_info: APIKeyInfo = Depends(require_scope("posture")),
@@ -5438,8 +5451,8 @@ async def list_expected_followups(
 
 @app.get("/api/v1/tenant/cascade-event/{kind}/{eid}", tags=["posture"])
 async def cascade_event_detail(
-    kind:     str,
-    eid:      str,
+    kind: CascadeKindParam,
+    eid: str,
     request:  Request,
     key_info: APIKeyInfo = Depends(require_api_key),
 ):
@@ -5872,7 +5885,7 @@ async def cascade_timeline(
 @app.get("/api/v1/dashboard/leaf/{leaf_id:path}/evidence-package",
          tags=["posture"])
 async def dashboard_leaf_evidence_package(
-    leaf_id:  str,
+    leaf_id: LeafIdParam,
     request:  Request,
     key_info: APIKeyInfo = Depends(require_api_key),
     fmt:      str = "md",
@@ -5908,7 +5921,7 @@ async def dashboard_leaf_evidence_package(
 
 @app.get("/api/v1/dashboard/control/{control_ref}/canonical", tags=["posture"])
 async def dashboard_control_canonical(
-    control_ref: str,
+    control_ref: ControlRefParam,
     request:     Request,
     standard_id: Optional[str] = None,
     key_info:    APIKeyInfo = Depends(require_api_key),
@@ -6134,7 +6147,7 @@ async def list_notifications(
 
 @app.patch("/api/v1/tenant/notifications/{nid}", tags=["posture"])
 async def patch_notification(
-    nid:      str,
+    nid: NotifIdParam,
     request:  Request,
     payload:  dict,
     key_info: APIKeyInfo = Depends(require_scope("posture")),
@@ -6409,7 +6422,7 @@ async def upsert_cascade_override(
 
 @app.delete("/api/v1/tenant/cascade-overrides/{override_id}", tags=["posture"])
 async def delete_cascade_override(
-    override_id: str,
+    override_id: OverrideIdParam,
     request:  Request,
     key_info: APIKeyInfo = Depends(require_scope("posture")),
 ):
@@ -6587,8 +6600,8 @@ async def run_followup_sweep(
 
 @app.get("/api/v1/tenant/cites/leaf/{leaf_id:path}/source/{system_id}/log", tags=["templates"])
 async def list_verification_log(
-    leaf_id:   str,
-    system_id: str,
+    leaf_id: LeafIdParam,
+    system_id: SystemIdParam,
     request:   Request,
     key_info:  APIKeyInfo = Depends(require_api_key),
     limit:     int = 20,
@@ -6747,7 +6760,7 @@ async def dashboard_cites_needs_verification(
 
 @app.get("/api/v1/templates/{leaf_id}", tags=["templates"])
 async def get_template(
-    leaf_id:  str,
+    leaf_id: LeafIdParam,
     request:  Request,
     key_info: APIKeyInfo = Depends(require_api_key),
     empty:    bool = False,

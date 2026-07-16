@@ -1492,8 +1492,14 @@ def _log_consensus_result(state, query: str, consensus, tenant_uuid: str = None)
         finally:
             try: conn.close()
             except Exception: pass
-    except Exception:
-        pass   # never break classify on log failure
+    except Exception as _le:
+        # Ship 2'.k: fail-loud. Best-effort principle preserved (we
+        # never block the response), but the failure is visible in
+        # the log so it doesn't hide config / schema / RLS drift.
+        import logging as _lg
+        _lg.getLogger("rag.arion_graph").warning(
+            "chat_consensus_log write failed (silent): %s", _le,
+        )
 
 
 def make_classify_node(
