@@ -6989,6 +6989,28 @@ async def graph_page():
 
 
 # =============================================================================
+# Ship 4'.a: EXTERNAL API — /api/external/v1/*
+# =============================================================================
+# Scoped API keys + fixed-window rate limit + structured error
+# contract. Registered LATE so all internal routes are defined first
+# (order-independent in practice, but keeps grep-ability).
+#
+# See rag/external/__init__.py for the surface + rag/external/errors.py
+# for the response contract.
+
+from fastapi.exceptions import RequestValidationError as _RequestValidationError
+from rag.external import external_router as _external_router
+from rag.external.errors import (
+    external_http_exception_handler         as _external_http_exception_handler,
+    external_validation_exception_handler   as _external_validation_exception_handler,
+)
+
+app.include_router(_external_router)
+app.add_exception_handler(HTTPException,             _external_http_exception_handler)
+app.add_exception_handler(_RequestValidationError,   _external_validation_exception_handler)
+
+
+# =============================================================================
 # ENTRY POINT
 # =============================================================================
 
