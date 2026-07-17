@@ -160,8 +160,8 @@ def _humanize_column(item_id: str) -> str:
     Used as a fallback column header when MUST text is unavailable
     or excessively long for an Excel header row.
     """
-    parts = item_id.split(":")
-    slug = parts[-1] if parts else item_id
+    from rag.id_types import item_slug
+    slug = item_slug(item_id) or item_id
     return slug.replace("_", " ").title()
 
 

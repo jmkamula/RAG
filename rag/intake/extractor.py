@@ -186,11 +186,13 @@ def extract(
             new_leaf_ids = _fetch_leaves_for_controls(added_controls)
             existing_leaves = doc.extraction_metrics["target_leaves"]
             existing_ids = {l.get("leaf_id") for l in existing_leaves}
+            from rag.id_types import leaf_control_ref
             for lid in new_leaf_ids:
                 if lid not in existing_ids:
+                    _ctrl = leaf_control_ref(lid)
                     existing_leaves.append({
                         "leaf_id":     lid,
-                        "control_ref": lid.split(":")[1] if lid.startswith("req:") else None,
+                        "control_ref": _ctrl or None,
                         "role":        "explicit_ref",
                     })
                     existing_ids.add(lid)
@@ -699,10 +701,10 @@ def _extract_templated_xlsx(doc: ParsedDocument) -> Optional[list[DocumentFindin
     for i, item_id in enumerate(columns):
         if not col_has_data[i]:
             continue
-        parts = item_id.split(":")
-        if len(parts) < 3:
+        from rag.id_types import item_control_ref
+        control_ref = item_control_ref(item_id)
+        if not control_ref:
             continue
-        control_ref = parts[1]
         standard_id = _control_ref_to_standard(control_ref)
         findings.append(DocumentFinding(
             upload_id         = doc.upload_id or "",
@@ -729,10 +731,10 @@ def _extract_templated_xlsx(doc: ParsedDocument) -> Optional[list[DocumentFindin
         if not content:
             continue
         item_id = doc_fields[ix]
-        parts = item_id.split(":")
-        if len(parts) < 3:
+        from rag.id_types import item_control_ref
+        control_ref = item_control_ref(item_id)
+        if not control_ref:
             continue
-        control_ref = parts[1]
         standard_id = _control_ref_to_standard(control_ref)
         findings.append(DocumentFinding(
             upload_id         = doc.upload_id or "",
@@ -907,10 +909,10 @@ def _extract_templated_via_table(
         for i, item_id in enumerate(columns):
             if not col_has_data[i]:
                 continue
-            parts = item_id.split(":")
-            if len(parts) < 3:
+            from rag.id_types import item_control_ref
+            control_ref = item_control_ref(item_id)
+            if not control_ref:
                 continue
-            control_ref = parts[1]
             standard_id = _control_ref_to_standard(control_ref)
             findings.append(DocumentFinding(
                 upload_id         = doc.upload_id or "",
@@ -957,10 +959,10 @@ def _extract_templated_via_edit_zones(
             continue
 
         # item:A.5.15:physical_rules → control_ref='A.5.15'
-        parts = item_id.split(":")
-        if len(parts) < 3:
+        from rag.id_types import item_control_ref
+        control_ref = item_control_ref(item_id)
+        if not control_ref:
             continue
-        control_ref = parts[1]
         standard_id = _control_ref_to_standard(control_ref)
 
         evidence = zone_text.strip()[:500]
@@ -1020,10 +1022,10 @@ def _extract_templated_via_full_section(
             finding  = "Comply"
             evidence = cleaned_no_ph[:500]
 
-        parts = item_id.split(":")
-        if len(parts) < 3:
+        from rag.id_types import item_control_ref
+        control_ref = item_control_ref(item_id)
+        if not control_ref:
             continue
-        control_ref = parts[1]
         standard_id = _control_ref_to_standard(control_ref)
 
         findings.append(DocumentFinding(
@@ -1566,8 +1568,8 @@ def _llm_extract_pass2(
     )
 
     # Parse control_ref out of leaf_id: "req:A.5.15:management_approval" → "A.5.15"
-    parts = leaf_id.split(":")
-    ctrl_ref = parts[1] if len(parts) >= 2 else ""
+    from rag.id_types import leaf_control_ref
+    ctrl_ref = leaf_control_ref(leaf_id)
 
     user_prompt = f"""Document: {doc_name}
 
@@ -1789,9 +1791,9 @@ def _llm_extract(
         ctrl_to_items: dict[str, list[tuple[str, str]]] = {}
         for leaf_id, items in leaf_musts.items():
             # leaf_id format: "req:A.5.18:access_rights_procedure" → control "A.5.18"
-            parts = leaf_id.split(":")
-            if len(parts) >= 2:
-                ctrl = parts[1]
+            from rag.id_types import leaf_control_ref
+            ctrl = leaf_control_ref(leaf_id)
+            if ctrl:
                 ctrl_to_items.setdefault(ctrl, []).extend(items)
         if ctrl_to_items:
             blocks = []
@@ -2074,9 +2076,9 @@ def _parse_llm_response(
     valid_items_by_ctrl: dict[str, set[str]] = {}
     if leaf_musts:
         for leaf_id, items_list in leaf_musts.items():
-            parts = leaf_id.split(":")
-            if len(parts) >= 2:
-                ctrl = parts[1]
+            from rag.id_types import leaf_control_ref
+            ctrl = leaf_control_ref(leaf_id)
+            if ctrl:
                 bucket = valid_items_by_ctrl.setdefault(ctrl, set())
                 for iid, _itext in items_list:
                     bucket.add(iid)
@@ -2752,8 +2754,8 @@ def _filter_musts_via_fingerprints(
 
 def _parse_leaf_id(leaf_id: str) -> tuple[str, str]:
     """'req:A.5.15:access_control_policy' → ('A.5.15', 'ISO27001:2022')."""
-    parts = leaf_id.split(":")
-    control_ref = parts[1] if len(parts) >= 2 else ""
+    from rag.id_types import leaf_control_ref
+    control_ref = leaf_control_ref(leaf_id)
     return control_ref, _control_ref_to_standard(control_ref)
 
 

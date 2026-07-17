@@ -195,7 +195,8 @@ class NodeId(str):
 
 # EvidenceRequirement id: "req:A.5.18:policy_document"
 # Schema check enforced at DB level in schema_v50 (external_evidence_source).
-_LEAF_ID_RE = re.compile(r"^req:[A-Za-z0-9.]+:[a-z0-9_]+$")
+# Captured groups: (control_ref, evidence_type).
+_LEAF_ID_RE = re.compile(r"^req:(?P<control_ref>[A-Za-z0-9.]+):(?P<evidence_type>[a-z0-9_]+)$")
 
 
 class LeafId(str):
@@ -203,17 +204,71 @@ class LeafId(str):
 
     Matches the regex enforced at Postgres level in schema_v50 for
     external_evidence_source / external_evidence_verification_log.
+
+    Accessors (Ship 2'.p):
+      .control_ref    — the middle segment (e.g. 'A.5.18')
+      .evidence_type  — the trailing slug (e.g. 'policy_document')
     """
     def __new__(cls, value: str) -> "LeafId":
         if value is None:
             raise ValueError("LeafId cannot be None")
         s = str(value).strip()
-        if not _LEAF_ID_RE.match(s):
+        m = _LEAF_ID_RE.match(s)
+        if not m:
             raise ValueError(
                 f"not a valid leaf id: {value!r} "
                 "(expected 'req:<control_ref>:<evidence_type>')"
             )
-        return super().__new__(cls, s)
+        obj = super().__new__(cls, s)
+        object.__setattr__(obj, "_control_ref",   m.group("control_ref"))
+        object.__setattr__(obj, "_evidence_type", m.group("evidence_type"))
+        return obj
+
+    @property
+    def control_ref(self) -> str:
+        """The control this leaf belongs to (e.g. 'A.5.18')."""
+        return self._control_ref
+
+    @property
+    def evidence_type(self) -> str:
+        """The evidence-type slug (e.g. 'policy_document')."""
+        return self._evidence_type
+
+
+# ChecklistItem id: "item:{control_ref}:{slug}"
+# Ship 2'.p: added type + accessors, previously handled by inline split.
+_ITEM_ID_RE = re.compile(r"^item:(?P<control_ref>[A-Za-z0-9.]+):(?P<slug>[A-Za-z0-9_]+)$")
+
+
+class ItemId(str):
+    """A ChecklistItem's id — 'item:{control_ref}:{slug}'.
+
+    Accessors:
+      .control_ref  — the middle segment (e.g. 'A.5.18')
+      .slug         — the trailing checklist-item slug (e.g. 'access_matrix')
+    """
+    def __new__(cls, value: str) -> "ItemId":
+        if value is None:
+            raise ValueError("ItemId cannot be None")
+        s = str(value).strip()
+        m = _ITEM_ID_RE.match(s)
+        if not m:
+            raise ValueError(
+                f"not a valid item id: {value!r} "
+                "(expected 'item:<control_ref>:<slug>')"
+            )
+        obj = super().__new__(cls, s)
+        object.__setattr__(obj, "_control_ref", m.group("control_ref"))
+        object.__setattr__(obj, "_slug",        m.group("slug"))
+        return obj
+
+    @property
+    def control_ref(self) -> str:
+        return self._control_ref
+
+    @property
+    def slug(self) -> str:
+        return self._slug
 
 
 # ── Predicates for callers that don't want to construct a full type ──
@@ -281,15 +336,77 @@ def standard_of(node_id: str) -> str:
         return ""
 
 
+# ── Leaf/item safe helpers (Ship 2'.p migration target) ─────────────
+
+def leaf_control_ref(leaf_id: str) -> str:
+    """Return the control_ref part of a leaf_id (`req:X:Y` → `X`).
+
+    Fallback: parts[1] of a colon-split. Empty string on unparseable
+    input. Matches the legacy inline patterns retired in Ship 2'.p.
+    """
+    try:
+        return LeafId(leaf_id).control_ref
+    except (ValueError, TypeError):
+        if isinstance(leaf_id, str) and leaf_id.startswith("req:"):
+            parts = leaf_id.split(":")
+            if len(parts) >= 2:
+                return parts[1]
+        return ""
+
+
+def leaf_evidence_type(leaf_id: str) -> str:
+    """Return the evidence-type slug of a leaf_id (`req:X:Y` → `Y`).
+
+    Fallback: parts[-1] of a colon-split. Empty on unparseable.
+    """
+    try:
+        return LeafId(leaf_id).evidence_type
+    except (ValueError, TypeError):
+        if isinstance(leaf_id, str) and ":" in leaf_id:
+            parts = leaf_id.split(":")
+            if len(parts) >= 3:
+                return parts[-1]
+        return ""
+
+
+def item_control_ref(item_id: str) -> str:
+    """Return the control_ref part of an item_id (`item:X:Y` → `X`)."""
+    try:
+        return ItemId(item_id).control_ref
+    except (ValueError, TypeError):
+        if isinstance(item_id, str) and item_id.startswith("item:"):
+            parts = item_id.split(":")
+            if len(parts) >= 2:
+                return parts[1]
+        return ""
+
+
+def item_slug(item_id: str) -> str:
+    """Return the slug part of an item_id (`item:X:Y` → `Y`)."""
+    try:
+        return ItemId(item_id).slug
+    except (ValueError, TypeError):
+        if isinstance(item_id, str) and ":" in item_id:
+            parts = item_id.split(":")
+            if len(parts) >= 3:
+                return parts[-1]
+        return ""
+
+
 __all__ = [
     "TenantUUID",
     "TenantSlug",
     "ControlRef",
     "NodeId",
     "LeafId",
+    "ItemId",
     "is_uuid",
     "is_node_id",
     "is_control_ref",
     "ref_of",
     "standard_of",
+    "leaf_control_ref",
+    "leaf_evidence_type",
+    "item_control_ref",
+    "item_slug",
 ]

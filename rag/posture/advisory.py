@@ -162,8 +162,9 @@ def _humanize_leaf_label(leaf) -> str:
         import re as _re
         t = _re.sub(r"\s*\((?:Annex\s+)?[A-Z]?\.?[\d.]+\)\s*$", "", t).strip()
         return t
-    # Fallback: leaf_id suffix → Title Case
-    slug = leaf.leaf_id.split(":")[-1] if getattr(leaf, "leaf_id", None) else ""
+    # Fallback: leaf_id evidence-type slug → Title Case
+    from rag.id_types import leaf_evidence_type
+    slug = leaf_evidence_type(getattr(leaf, "leaf_id", "") or "")
     return _humanize_evidence_type(slug)
 
 

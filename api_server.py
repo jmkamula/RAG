@@ -6756,10 +6756,11 @@ async def dashboard_cites_needs_verification(
             delta = (now - ndd).days
         else:
             delta = None
+        from rag.id_types import leaf_control_ref, leaf_evidence_type
         buckets[bucket].append({
             "leaf_id":          leaf_id,
-            "leaf_label":       leaf_id.split(":")[-1].replace("_", " "),
-            "control_ref":      leaf_id.split(":")[1] if leaf_id.startswith("req:") else "",
+            "leaf_label":       leaf_evidence_type(leaf_id).replace("_", " "),
+            "control_ref":      leaf_control_ref(leaf_id),
             "system_id":        sys_id,
             "system_name":      sys_name,
             "must_count":       n,

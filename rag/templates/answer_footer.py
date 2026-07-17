@@ -137,12 +137,12 @@ def _fetch_primary_templates(pg_conn, refs: list[str]) -> list[dict]:
         rows = cur.fetchall()
 
     # Group by control_ref, pick the first (highest version due to ORDER BY)
+    from rag.id_types import leaf_control_ref
     by_ref: dict[str, dict] = {}
     for leaf_id, version, source_file in rows:
-        parts = leaf_id.split(":", 2)
-        if len(parts) < 3:
+        ref = leaf_control_ref(leaf_id)
+        if not ref:
             continue
-        ref = parts[1]
         if ref in by_ref:
             continue  # already have the primary for this ref
         by_ref[ref] = {

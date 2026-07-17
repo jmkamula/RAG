@@ -753,7 +753,8 @@ def _pretty_must_slug(must_id: str) -> str:
     """
     if not must_id:
         return ""
-    tail = must_id.split(":")[-1]
+    from rag.id_types import item_slug
+    tail = item_slug(must_id) or must_id
     if "_" in tail:
         prefix, _, rest = tail.partition("_")
         if prefix in _MUST_PREFIX_LABELS:

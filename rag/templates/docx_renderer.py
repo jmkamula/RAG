@@ -107,8 +107,8 @@ def _humanize_item_slug(mid: str) -> str:
     just not visually loud in the rendered doc."""
     if not mid:
         return ""
-    parts = mid.split(":")
-    slug = parts[-1] if parts else mid
+    from rag.id_types import item_slug
+    slug = item_slug(mid) or mid
     return slug.replace("_", " ")
 
 

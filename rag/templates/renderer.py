@@ -254,17 +254,15 @@ def _extract_leaf_title(body_md: str, leaf_id: str) -> str:
     if m:
         return m.group(1).strip()
     # Fallback: req:A.5.18:access_revocation_record → "Access Revocation Record"
-    parts = leaf_id.split(":")
-    slug = parts[-1] if parts else leaf_id
+    from rag.id_types import leaf_evidence_type
+    slug = leaf_evidence_type(leaf_id) or leaf_id
     return slug.replace("_", " ").title()
 
 
 def _extract_control_ref_from_leaf_id(leaf_id: str) -> str:
     """req:A.5.18:access_revocation_record → A.5.18"""
-    parts = leaf_id.split(":")
-    if len(parts) >= 2:
-        return parts[1]
-    return leaf_id
+    from rag.id_types import leaf_control_ref
+    return leaf_control_ref(leaf_id) or leaf_id
 
 
 def _clean_excerpt(text: str) -> str:

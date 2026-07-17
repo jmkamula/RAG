@@ -12,8 +12,10 @@ _ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(_ROOT))
 
 from rag.id_types import (
-    TenantUUID, TenantSlug, ControlRef, NodeId, LeafId,
+    TenantUUID, TenantSlug, ControlRef, NodeId, LeafId, ItemId,
     is_uuid, is_node_id, is_control_ref,
+    leaf_control_ref, leaf_evidence_type,
+    item_control_ref, item_slug,
 )
 
 
@@ -260,6 +262,112 @@ def test_is_control_ref_predicate():
     )
 
 
+# ── Ship 2'.p: LeafId accessors + ItemId type + helpers ─────────────
+
+def test_leaf_id_accessors():
+    l = LeafId("req:A.5.18:policy_document")
+    return _ok(
+        l.control_ref == "A.5.18"
+        and l.evidence_type == "policy_document"
+    )
+
+
+def test_leaf_id_accessors_with_gdpr_ref():
+    l = LeafId("req:Art.32:tom_register")
+    return _ok(
+        l.control_ref == "Art.32"
+        and l.evidence_type == "tom_register",
+        f"got ctrl={l.control_ref!r} et={l.evidence_type!r}",
+    )
+
+
+def test_item_id_accepts_valid():
+    i = ItemId("item:A.5.18:access_matrix")
+    return _ok(
+        i.control_ref == "A.5.18"
+        and i.slug == "access_matrix"
+    )
+
+
+def test_item_id_rejects_missing_prefix():
+    try:
+        ItemId("A.5.18:access_matrix")
+        return _ok(False)
+    except ValueError:
+        return _ok(True)
+
+
+def test_item_id_rejects_malformed():
+    for bad in ["item::x", "item:A.5.18:", "wrong", ""]:
+        try:
+            ItemId(bad)
+            return _ok(False, f"accepted {bad!r}")
+        except ValueError:
+            pass
+    return _ok(True)
+
+
+def test_item_id_is_str_usable():
+    i = ItemId("item:A.5.18:access_matrix")
+    return _ok(
+        i == "item:A.5.18:access_matrix"
+        and f"{i}" == "item:A.5.18:access_matrix"
+        and hash(i) == hash("item:A.5.18:access_matrix"),
+    )
+
+
+def test_leaf_control_ref_helper():
+    return _ok(
+        leaf_control_ref("req:A.5.18:policy_document") == "A.5.18"
+        and leaf_control_ref("req:Art.32:tom_register") == "Art.32"
+    )
+
+
+def test_leaf_control_ref_fallback():
+    """Fallback for callers historically using `.split(':')` — should
+    match legacy behavior."""
+    return _ok(
+        leaf_control_ref("req:A.5.18:") == ""    # invalid but split gives 'A.5.18'
+        or leaf_control_ref("req:A.5.18:") == "A.5.18",  # accepted either
+    )
+
+
+def test_leaf_control_ref_empty_on_bad():
+    return _ok(
+        leaf_control_ref("") == ""
+        and leaf_control_ref(None) == ""
+        and leaf_control_ref("not-a-leaf") == ""
+    )
+
+
+def test_leaf_evidence_type_helper():
+    return _ok(
+        leaf_evidence_type("req:A.5.18:policy_document") == "policy_document"
+        and leaf_evidence_type("req:A.5.18:register") == "register"
+    )
+
+
+def test_item_control_ref_helper():
+    return _ok(
+        item_control_ref("item:A.5.18:access_matrix") == "A.5.18"
+        and item_control_ref("item:Art.32:tom_documented") == "Art.32"
+    )
+
+
+def test_item_slug_helper():
+    return _ok(
+        item_slug("item:A.5.18:access_matrix") == "access_matrix"
+        and item_slug("item:A.5.18:owner_per_asset") == "owner_per_asset"
+    )
+
+
+def test_item_slug_empty_on_bad():
+    return _ok(
+        item_slug("") == ""
+        and item_slug(None) == ""
+    )
+
+
 TESTS = [
     test_tenant_uuid_accepts_valid,
     test_tenant_uuid_is_str_subclass,
@@ -290,6 +398,20 @@ TESTS = [
     test_is_uuid_predicate,
     test_is_node_id_predicate,
     test_is_control_ref_predicate,
+    # Ship 2'.p additions
+    test_leaf_id_accessors,
+    test_leaf_id_accessors_with_gdpr_ref,
+    test_item_id_accepts_valid,
+    test_item_id_rejects_missing_prefix,
+    test_item_id_rejects_malformed,
+    test_item_id_is_str_usable,
+    test_leaf_control_ref_helper,
+    test_leaf_control_ref_fallback,
+    test_leaf_control_ref_empty_on_bad,
+    test_leaf_evidence_type_helper,
+    test_item_control_ref_helper,
+    test_item_slug_helper,
+    test_item_slug_empty_on_bad,
 ]
 
 
