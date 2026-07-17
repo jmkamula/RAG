@@ -103,9 +103,9 @@ When a retire-by date passes, delete the legacy path.
 | ISO 27701 Phase 2 Batch 3 — §A.7.5 + §B.8.5 transfers (12 anchors × 4 = 48 leaves + 30 bridges + posture seed) — PHASE 2 CURATION COMPLETE 49 controls / 196 leaves / 112 bridges | SHIPPED |
 | ISO 27701 Phase 3 — queryable-standards gate flip + LLM scope block (prompt + citation format + Arion primary-framework rewrite) + 3 classifier short-circuits + 6 anchor interleave (_ANCHOR_LEAVES 20→26) + 3 eval cases (#201-203) | SHIPPED |
 | ISO 27701 Phase 4 — 196 template scaffolds + 98 doc_mappings + 49 workbook_mappings (147 mappings covering 75% of leaves; remainder falls through to LLM extractor). ISO 27701 ARC FULLY COMPLETE across Phases 0-4 | SHIPPED |
-| Outbound notification delivery (email/Slack) | DEFERRED |
-| UPDATES_FACT recompute (source-of-truth queries per fact) | DEFERRED |
-| Periodic sweep scheduler for overdue followups | DEFERRED |
+| Outbound notification delivery (email/Slack) — SMTP + Slack webhook workers in `rag/notifications/deliver.py`; wired to `notification_delivery` sweep work_type. Producers exist for cascade events (`rag/cascade/notify.py`); other producers land per feature. | SHIPPED code, wire per producer |
+| UPDATES_FACT recompute — `rag/facts/recompute.py`; wired to `fact_recompute` sweep work_type reading `fact_source_config`. | SHIPPED |
+| Periodic sweep scheduler — `rag/scheduler/tick.py` (Wave 3b, 2026-07-13). Ship 3'.a (2026-07-17) productionizes via `ops/systemd/arioncomply-sweep.timer` (30-min cadence). See "Periodic sweep scheduler" section below. | SHIPPED |
 | ISO 27001:2013→2022 renumbering in source JSONs (12 stale refs) | DEFERRED — data quality |
 
 ## Key memory entries
@@ -193,6 +193,69 @@ kill $(lsof -ti:8080) 2>/dev/null
 # Check logs
 tail -f /tmp/api.log
 grep -E "ERROR|WARNING" /tmp/api.log
+```
+
+## Periodic sweep scheduler
+
+`rag/scheduler/tick.py` is a stateless one-shot: each invocation
+generates a `tick_id`, runs every registered work type, writes
+one `sweep_log` row per (tick, work_type), exits. Cadence lives
+outside the code — systemd timer fires the tick every 30 min.
+
+### One-time install (Ship 3'.a, 2026-07-17)
+
+```bash
+sudo /data/arioncomply/ops/install_sweep_timer.sh
+```
+
+The installer copies `ops/systemd/arioncomply-sweep.{service,timer}`
+into `/etc/systemd/system/`, reloads systemd, enables + starts the
+timer. Idempotent — safe to re-run.
+
+### Manual tick (dev / debugging)
+
+```bash
+# Run every work type once
+PYTHONPATH=/data/arioncomply python3 -m rag.scheduler.tick
+
+# One specific work type
+PYTHONPATH=/data/arioncomply python3 -m rag.scheduler.tick --work fact_recompute
+
+# Dry-run (reads config, doesn't mutate client_facts)
+PYTHONPATH=/data/arioncomply python3 -m rag.scheduler.tick --dry-run --json
+```
+
+### Work types (schema_v65 CHECK constraint)
+
+- `fact_recompute` — reads `fact_source_config`, refreshes
+  `client_facts` for tenants past `refresh_days`.
+- `notification_delivery` — reads undelivered `tenant_notification`,
+  delivers per `tenant_notification_channel` (email + Slack).
+- `overdue_followups` — stub (counts cascade events past
+  `followup_due_at`; delivery lands with the producer arc).
+- `freshness_expiry` — stub (counts stale Comply postures; full
+  freshness-downgrade lands with its own arc).
+
+### Health check
+
+```sql
+-- Recent ticks (paste in psql -U arioncomply -d arioncomply_compliance)
+SELECT tick_id, work_type, status,
+       items_scanned, items_acted_on, items_error,
+       (extract(epoch from (completed_at - started_at)) * 1000)::int AS ms
+  FROM sweep_log
+ WHERE started_at > now() - interval '2 hours'
+ ORDER BY started_at DESC LIMIT 20;
+
+-- Any failed ticks in the last day?
+SELECT * FROM sweep_log
+ WHERE started_at > now() - interval '1 day' AND status = 'failed';
+```
+
+### Disabling
+
+```bash
+sudo systemctl disable --now arioncomply-sweep.timer
 ```
 
 ## Run Evals (always run before restarting after code changes)

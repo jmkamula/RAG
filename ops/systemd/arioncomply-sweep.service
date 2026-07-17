@@ -1,0 +1,23 @@
+[Unit]
+Description=ArionComply periodic sweep tick
+Documentation=https://github.com/jmkamula/RAG/blob/main/CLAUDE.md#periodic-sweep-scheduler
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=arionlabs
+Group=arionlabs
+WorkingDirectory=/data/arioncomply
+EnvironmentFile=-/data/arioncomply/.env
+Environment=PYTHONPATH=/data/arioncomply
+ExecStart=/usr/bin/python3 -m rag.scheduler.tick
+StandardOutput=append:/tmp/arioncomply-sweep.log
+StandardError=inherit
+
+# One tick per firing; fail loud so systemd surfaces trouble.
+TimeoutStartSec=600
+Nice=10
+
+[Install]
+WantedBy=multi-user.target

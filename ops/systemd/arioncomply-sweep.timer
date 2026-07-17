@@ -1,0 +1,19 @@
+[Unit]
+Description=Fire ArionComply sweep tick every 30 minutes
+Documentation=https://github.com/jmkamula/RAG/blob/main/CLAUDE.md#periodic-sweep-scheduler
+
+[Timer]
+# First tick: 2 min after boot, gives Postgres time to be ready.
+OnBootSec=2min
+# Then every 30 minutes.
+OnUnitActiveSec=30min
+# Randomised jitter so multiple tenants on the same host don't tick
+# in lockstep. Small — we don't need much spread on a single VM.
+RandomizedDelaySec=30s
+# Persistent means if the VM was off when a tick was due, we run
+# one on boot to catch up (rather than skipping).
+Persistent=true
+Unit=arioncomply-sweep.service
+
+[Install]
+WantedBy=timers.target
