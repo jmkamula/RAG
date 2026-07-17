@@ -871,6 +871,42 @@ class DocumentPipeline:
                     self._update_status(upload_id, "failed", 0, str(e))
                 except Exception:
                     pass
+                # Ship 3'.e producer: notify tenant of the upload failure.
+                # Dedup key is (kind, related_entity_id=upload_id) via the
+                # partial unique index, so retries on the same upload_id
+                # collapse. Severity 'medium' by default; caller can escalate
+                # to 'high' later if repeat-failure detection is added.
+                try:
+                    from rag.cascade.notify import notify as _notify
+                    import psycopg2 as _pg
+                    _conn = _pg.connect(self.db_url)
+                    try:
+                        with _conn.cursor() as _cur:
+                            _cur.execute(
+                                "SELECT set_config('app.tenant_id', %s, TRUE)",
+                                (tenant_id,),
+                            )
+                            _notify(
+                                _cur,
+                                tenant_id           = tenant_id,
+                                kind                = "upload_failed",
+                                title               = f"Upload failed: {file_name}",
+                                body                = (
+                                    f"{type(e).__name__}: {str(e)[:200]}"
+                                ),
+                                severity            = "medium",
+                                related_entity_kind = "document_upload",
+                                related_entity_id   = upload_id,
+                                related_control_ref = None,
+                                related_event_type  = "upload_failed",
+                            )
+                        _conn.commit()
+                    finally:
+                        _conn.close()
+                except Exception as _e:
+                    logger.warning(
+                        f"upload_failed notify failed: {type(_e).__name__}: {_e}"
+                    )
             return PipelineResult(
                 upload_id       = upload_id,
                 tenant_id       = tenant_id,

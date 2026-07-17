@@ -756,6 +756,50 @@ def _persist_engine_proposals(pg_conn, tenant_id: str, verdicts: dict) -> int:
                         """,
                         (tenant_id, standard_id_full, control_ref),
                     )
+                    # Ship 3'.e producer: notify tenant of the new pending
+                    # Stage-2 verdict. related_entity_id is the posture row
+                    # id so ON CONFLICT dedup collapses re-runs against the
+                    # same control. Severity 'high' when engine proposes NC
+                    # over a live Comply (the auditor-critical case); else
+                    # 'medium'. Best-effort — notify() swallows exceptions.
+                    try:
+                        cur.execute(
+                            """
+                            SELECT id::text
+                              FROM posture_controls
+                             WHERE tenant_id   = %s
+                               AND standard_id = %s
+                               AND control_ref = %s
+                               AND is_active   = TRUE
+                             LIMIT 1
+                            """,
+                            (tenant_id, standard_id_full, control_ref),
+                        )
+                        row = cur.fetchone()
+                        posture_row_id = row[0] if row else None
+                        if posture_row_id:
+                            from rag.cascade.notify import notify as _notify
+                            _sev = "high" if (
+                                posture == "NC" and live_finding == "Comply"
+                            ) else "medium"
+                            _notify(
+                                cur,
+                                tenant_id           = tenant_id,
+                                kind                = "stage2_proposal_ready",
+                                title               = f"Review engine proposal for {control_ref}",
+                                body                = (
+                                    f"Engine proposes {posture} "
+                                    f"(live is {live_finding or 'Not assessed'}). "
+                                    f"Open Stage-2 to accept or reject."
+                                ),
+                                severity            = _sev,
+                                related_entity_kind = "posture_control",
+                                related_entity_id   = posture_row_id,
+                                related_control_ref = control_ref,
+                                related_event_type  = "stage2_proposal_ready",
+                            )
+                    except Exception:
+                        pass
                 written += 1
         pg_conn.commit()
         return written
