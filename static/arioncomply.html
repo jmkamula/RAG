@@ -844,11 +844,12 @@ function renderInbox(d, status) {
   </div>`;
   html += `<div style="border:1px solid #E8E5DA;border-radius:6px;overflow:hidden;background:#fff">`;
   for (const it of d.items) {
-    const p = sevPalette[it.severity] || sevPalette.info;
-    const ts = it.fired_at ? it.fired_at.slice(0,19).replace('T',' ') : '?';
+    const p    = sevPalette[it.severity] || sevPalette.info;
+    const meta = _notifKindMeta(it.kind);
+    const ts   = it.fired_at ? it.fired_at.slice(0,19).replace('T',' ') : '?';
     const isRead = Boolean(it.read_at);
     html += `<div style="padding:10px 14px;border-bottom:1px solid #F0EDDF;background:${isRead ? '#FFF' : p.bg};display:flex;gap:12px;align-items:flex-start">
-      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${p.dot};margin-top:6px;flex-shrink:0"></span>
+      <i class="ti ${esc(meta.icon)}" style="color:${p.dot};margin-top:3px;flex-shrink:0;font-size:16px"></i>
       <div style="flex:1;min-width:0">
         <div style="display:flex;gap:8px;align-items:center;font-size:12px">
           <span style="font-size:9px;font-weight:600;color:${p.dot};letter-spacing:.4px">${p.tag}</span>
@@ -858,6 +859,11 @@ function renderInbox(d, status) {
         </div>
         <div style="margin-top:3px;color:#3A382E;font-size:12px;font-weight:${isRead ? '400' : '500'}">${esc(it.title)}</div>
         ${it.body ? `<div style="margin-top:4px;color:#5C5A4F;font-size:11px;line-height:1.5">${esc(it.body)}</div>` : ''}
+        <div style="margin-top:6px">
+          <button onclick="_notifOpen('${it.id}','${esc(it.kind)}')" style="font-size:10px;padding:3px 8px;background:#fff;color:#534AB7;border:1px solid #C8C5E8;border-radius:3px;cursor:pointer;font-family:inherit">
+            <i class="ti ti-arrow-right" style="font-size:9px"></i> ${esc(meta.actionLabel)}
+          </button>
+        </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:4px">
         ${!isRead ? `<button onclick="_notifAct('${it.id}','read')" title="Mark read" style="font-size:10px;padding:2px 6px;background:#fff;color:#3A382E;border:1px solid #E8E5DA;border-radius:3px;cursor:pointer;font-family:inherit"><i class="ti ti-check"></i></button>` : ''}
@@ -867,6 +873,23 @@ function renderInbox(d, status) {
   }
   html += `</div>`;
   wrap.innerHTML = html;
+}
+
+// Ship 3'.h: click the primary action button on an inbox row —
+// mark read (best-effort) then navigate to the kind's target mode.
+// Non-blocking on the mark-read call: the user's intent is to open
+// the surface, not to wait on the PATCH round-trip. Failures are
+// swallowed silently (the next inbox load will show it still unread).
+async function _notifOpen(id, kind) {
+  try {
+    fetch(`/api/v1/tenant/notifications/${encodeURIComponent(id)}`, {
+      method:  'PATCH',
+      headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
+      body:    JSON.stringify({action: 'read'}),
+    }).catch(() => {});
+  } catch (e) { /* swallow */ }
+  const meta = _notifKindMeta(kind);
+  setMode(meta.mode);
 }
 
 async function _notifAct(id, action) {
@@ -2259,14 +2282,43 @@ function humanizeStandardId(s) {
 // tenant_notification.kind -> short tenant-facing label. Keep in sync
 // with the cascade notify() call sites in rag/cascade/*.py.
 const _NOTIF_KIND_LABEL = {
-  threshold_crossed:   'threshold crossed',
-  cascade_blocked:     'follow-up paused',
-  followup_overdue:    'follow-up overdue',
-  implication_overdue: 'action overdue',
+  threshold_crossed:         'threshold crossed',
+  cascade_blocked:           'follow-up paused',
+  followup_overdue:          'follow-up overdue',
+  implication_overdue:       'action overdue',
+  auto_resolved:             'auto-resolved',
+  freshness_expiry:          'evidence stale',
+  nc_surfaced:               'gap surfaced',
+  upload_processed:          'upload processed',
+  upload_failed:             'upload failed',
+  stage2_proposal_ready:     'engine proposal ready',
+  cite_verification_overdue: 'cited source needs re-verification',
 };
+
+// Ship 3'.h: per-kind visual + deep-link metadata. Icon uses
+// Tabler icon class. Mode names match setMode() in this file.
+// actionLabel is the button text shown in the inbox row.
+const _NOTIF_KIND_META = {
+  threshold_crossed:         {icon: 'ti-alert-triangle',   mode: 'cascade',    actionLabel: 'Open timeline'},
+  cascade_blocked:           {icon: 'ti-pause',            mode: 'cascade',    actionLabel: 'Open timeline'},
+  followup_overdue:          {icon: 'ti-clock-exclamation',mode: 'cascade',    actionLabel: 'Open timeline'},
+  implication_overdue:       {icon: 'ti-alarm',            mode: 'cascade',    actionLabel: 'Open timeline'},
+  auto_resolved:             {icon: 'ti-circle-check',     mode: 'cascade',    actionLabel: 'Open timeline'},
+  freshness_expiry:          {icon: 'ti-hourglass-low',    mode: 'dashboard',  actionLabel: 'Open control'},
+  nc_surfaced:               {icon: 'ti-exclamation-mark', mode: 'dashboard',  actionLabel: 'Open control'},
+  upload_processed:          {icon: 'ti-file-check',       mode: 'docs',       actionLabel: 'Open uploads'},
+  upload_failed:             {icon: 'ti-file-alert',       mode: 'docs',       actionLabel: 'Open uploads'},
+  stage2_proposal_ready:     {icon: 'ti-square-check',     mode: 'queue',      actionLabel: 'Open review queue'},
+  cite_verification_overdue: {icon: 'ti-link-off',         mode: 'dashboard',  actionLabel: 'Open control'},
+};
+
 function humanizeNotifKind(k) {
   if (!k) return '';
   return _NOTIF_KIND_LABEL[k] || String(k).replace(/_/g, ' ');
+}
+
+function _notifKindMeta(k) {
+  return _NOTIF_KIND_META[k] || {icon: 'ti-bell', mode: 'inbox', actionLabel: 'View'};
 }
 
 // Generic slug humanizer for cascade-side slugs (event_type,

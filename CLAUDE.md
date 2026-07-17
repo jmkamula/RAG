@@ -107,6 +107,7 @@ When a retire-by date passes, delete the legacy path.
 | UPDATES_FACT recompute — `rag/facts/recompute.py`; wired to `fact_recompute` sweep work_type reading `fact_source_config`. | SHIPPED |
 | Periodic sweep scheduler — `rag/scheduler/tick.py` (Wave 3b, 2026-07-13). Ship 3'.a (2026-07-17) productionizes via `ops/systemd/arioncomply-sweep.timer` (30-min cadence). See "Periodic sweep scheduler" section below. | SHIPPED |
 | Notification producers — cascade events (built-in) + `freshness_expiry` (Ship 3'.b) + `nc_surfaced` / `upload_processed` (Ship 3'.c) + `stage2_proposal_ready` / `upload_failed` (Ship 3'.e) + `overdue_followups` sweep backstop replacing counting stub (Ship 3'.f) + `cite_verification_overdue` auditor-critical backstop (Ship 3'.g, severity harder than freshness because cite has no in-product artefact). 11 kinds in `tenant_notification_kind_check`. Remaining candidates (UX only): `posture_flip_to_comply`, `api_key_expiring`. | SHIPPED |
+| Inbox per-kind rendering (Ship 3'.h) — humanized labels for all 11 kinds + Tabler icons + one-click "Open X" deep-link buttons (`_notifOpen()` mark-read + `setMode()` jumps tenant to the target surface: dashboard drill-in / queue / docs / cascade timeline). HTML/JS-only; no server code touched. | SHIPPED |
 | ISO 27001:2013→2022 renumbering in source JSONs (12 stale refs) | DEFERRED — data quality |
 
 ## Key memory entries
