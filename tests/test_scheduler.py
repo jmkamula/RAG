@@ -160,6 +160,53 @@ def test_run_tick_writes_sweep_log_row_per_work_type():
         conn.close()
 
 
+def test_freshness_expiry_dry_run_does_not_emit_notifications():
+    """Ship 3'.b: freshness_expiry with dry_run=True must not write
+    to tenant_notification. Verifies via count-before/count-after."""
+    if not _PG:
+        return _ok(True, "skipped — no Postgres")
+    import psycopg2
+    conn = psycopg2.connect(
+        host=os.getenv("PGHOST", "127.0.0.1"),
+        dbname=os.getenv("PGDATABASE", "arioncomply_compliance"),
+        user=os.getenv("PGUSER", "arioncomply_app"),
+        password=os.getenv("PGPASSWORD", ""),
+    )
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT count(*) FROM tenant_notification "
+                        "WHERE kind='freshness_expiry'")
+            before = cur.fetchone()[0]
+        summary = run_tick(work_types=["freshness_expiry"], dry_run=True)
+        with conn.cursor() as cur:
+            cur.execute("SELECT count(*) FROM tenant_notification "
+                        "WHERE kind='freshness_expiry'")
+            after = cur.fetchone()[0]
+        # Also — the sweep should not have errored
+        r = summary["results"][0]
+        return _ok(
+            after == before and r["errored"] == 0,
+            f"dry_run wrote {after - before} notifications (expected 0); "
+            f"errored={r['errored']}",
+        )
+    finally:
+        conn.close()
+
+
+def test_freshness_expiry_summary_shape():
+    """freshness_expiry's detail dict must expose per_tenant + dedup_days."""
+    if not _PG:
+        return _ok(True, "skipped — no Postgres")
+    summary = run_tick(work_types=["freshness_expiry"], dry_run=True)
+    r = summary["results"][0]
+    detail = r.get("detail") or {}
+    return _ok(
+        "per_tenant" in detail and "dedup_days" in detail
+        and detail.get("dedup_days") == 7,
+        f"got {detail}",
+    )
+
+
 def test_run_tick_all_rows_share_tick_id():
     """One tick_id per invocation — all work_type rows must share it."""
     if not _PG:
@@ -193,6 +240,8 @@ TESTS = [
     test_run_tick_dry_run_does_not_write_client_facts,
     test_run_tick_specific_work_type_only,
     test_run_tick_writes_sweep_log_row_per_work_type,
+    test_freshness_expiry_dry_run_does_not_emit_notifications,
+    test_freshness_expiry_summary_shape,
     test_run_tick_all_rows_share_tick_id,
 ]
 

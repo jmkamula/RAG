@@ -229,39 +229,199 @@ def sweep_overdue_followups(pg_conn, tick_id: str, dry_run: bool = False) -> dic
             "acted_on": acted, "errored": errored, "detail": detail}
 
 
+# Dedup window: don't fire another freshness_expiry notification for
+# the same (tenant, control) if one is already unread/undismissed
+# within this many days. Prevents the sweep from spamming the
+# tenant every 30 minutes for the same stale evidence.
+_FRESHNESS_DEDUP_DAYS = 7
+
+
+def _get_freshness_days_per_control(neo_driver, control_ids: list[str]) -> dict[str, int]:
+    """Return {control_id: min freshness_days across its leaves}.
+
+    Traverses SATISFIED_BY → REQUIRES_EVIDENCE to reach the leaf
+    EvidenceRequirement nodes and picks the tightest (smallest)
+    freshness_days across all leaves of the control. Controls whose
+    leaves don't carry `freshness_days` are absent from the result.
+    """
+    if not control_ids:
+        return {}
+    with neo_driver.session() as s:
+        result = s.run("""
+            UNWIND $ids AS cid
+            MATCH (rn:RequirementNode {id: cid})-[:SATISFIED_BY]->(fs:FulfilmentSpec)
+            OPTIONAL MATCH (fs)-[:REQUIRES_EVIDENCE]->(er:EvidenceRequirement)
+            WHERE er.freshness_days IS NOT NULL
+            WITH cid, min(er.freshness_days) AS tightest
+            WHERE tightest IS NOT NULL
+            RETURN cid, tightest
+        """, ids=control_ids)
+        return {r["cid"]: int(r["tightest"]) for r in result}
+
+
 def sweep_freshness_expiry(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
-    """Stub — count posture rows past freshness_days, log for now.
-    Actual freshness downgrade logic lands with a dedicated arc."""
+    """Per-tenant sweep: find Comply postures past their leaves'
+    freshness_days window and emit a tenant_notification per stale
+    control.
+
+    Dedup: skip if an unread/undismissed freshness_expiry notification
+    for the same (tenant, control_ref) exists within the last
+    _FRESHNESS_DEDUP_DAYS.
+
+    Severity ladder:
+      staleness_ratio = (now - last_updated) / freshness_days
+      1.0 - 1.5x  →  medium
+      1.5 - 2.0x  →  high
+      > 2.0x      →  critical
+    """
     row_id = _log_start(pg_conn, tick_id, "freshness_expiry")
-    scanned = 0
-    detail: dict = {"note": "stub — counting only, no downgrade yet"}
+    scanned    = 0
+    acted      = 0
+    errored    = 0
+    per_tenant: dict[str, dict] = {}
     error_type = error_detail = None
+
     try:
-        # Simple heuristic for MVP: count 'Comply' posture_controls
-        # whose last_updated is > 365 days old — likely stale.
-        # Full impl (per-leaf freshness_days join with Neo4j) lands
-        # with the dedicated freshness arc.
+        # Fetch Comply postures across all tenants.
+        # NOTE: we don't JOIN tenants here — under arioncomply_app RLS
+        # the tenants table is tenant-scoped (0 rows visible without
+        # `app.tenant_id` set) so a JOIN would filter every row.
+        # posture_controls has a permissive `app_posture_all` policy
+        # that lets arioncomply_app see all rows for maintenance work.
         with pg_conn.cursor() as cur:
             cur.execute("""
-                SELECT count(*) FROM posture_controls
-                 WHERE is_active = TRUE
-                   AND finding = 'Comply'
-                   AND last_updated < NOW() - INTERVAL '365 days'
+                SELECT pc.tenant_id::text,
+                       pc.node_id,
+                       pc.control_ref,
+                       pc.standard_id,
+                       pc.last_updated
+                  FROM posture_controls pc
+                 WHERE pc.is_active = TRUE
+                   AND pc.finding = 'Comply'
+                   AND pc.last_updated IS NOT NULL
+                ORDER BY pc.tenant_id, pc.node_id
             """)
-            scanned = int(cur.fetchone()[0] or 0)
-            detail["stale_comply_count"] = scanned
+            rows = cur.fetchall()
+
+        # Group by tenant so Neo4j lookups can batch.
+        from collections import defaultdict
+        by_tenant: dict[str, list] = defaultdict(list)
+        for tid, nid, cref, std, lu in rows:
+            by_tenant[tid].append((nid, cref, std, lu))
+        scanned = len(rows)
+
+        # Connect to Neo4j once for the whole sweep.
+        from neo4j import GraphDatabase as _GD
+        neo = _GD.driver(
+            os.getenv("NEO4J_URI",       "bolt://localhost:7687"),
+            auth=(os.getenv("NEO4J_USER",     "neo4j"),
+                  os.getenv("NEO4J_PASSWORD", "")),
+        )
+        try:
+            import datetime as _dt
+            now = _dt.datetime.now(_dt.timezone.utc)
+
+            for tenant_id, tenant_rows in by_tenant.items():
+                control_ids  = [r[0] for r in tenant_rows]
+                freshness    = _get_freshness_days_per_control(neo, control_ids)
+                tenant_acted = 0
+                tenant_dedup = 0
+                tenant_stale = 0
+
+                # Set tenant scope for INSERTs (RLS).
+                with pg_conn.cursor() as cur:
+                    cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                                (tenant_id,))
+                    for nid, cref, std, lu in tenant_rows:
+                        fdays = freshness.get(nid)
+                        if fdays is None:
+                            continue
+                        # Robustness: last_updated might be naive.
+                        lu_aware = lu if lu.tzinfo else lu.replace(tzinfo=_dt.timezone.utc)
+                        stale_days = (now - lu_aware).total_seconds() / 86400.0
+                        if stale_days <= fdays:
+                            continue
+                        tenant_stale += 1
+
+                        if dry_run:
+                            continue
+
+                        # Dedup: existing unread notification for this
+                        # (tenant, control) within the window?
+                        cur.execute("""
+                            SELECT 1 FROM tenant_notification
+                             WHERE tenant_id           = %s::uuid
+                               AND kind                = 'freshness_expiry'
+                               AND related_control_ref = %s
+                               AND read_at IS NULL AND dismissed_at IS NULL
+                               AND fired_at > NOW() - make_interval(days => %s)
+                             LIMIT 1
+                        """, (tenant_id, cref, _FRESHNESS_DEDUP_DAYS))
+                        if cur.fetchone() is not None:
+                            tenant_dedup += 1
+                            continue
+
+                        # Severity ladder.
+                        ratio = stale_days / fdays
+                        if ratio > 2.0:
+                            severity = "critical"
+                        elif ratio > 1.5:
+                            severity = "high"
+                        else:
+                            severity = "medium"
+
+                        title = (
+                            f"Evidence for {cref} has passed its "
+                            f"{fdays}-day freshness window"
+                        )
+                        body = (
+                            f"Your latest Comply evidence for {cref} is "
+                            f"{int(stale_days)} days old — {int(stale_days - fdays)} "
+                            f"days past the {fdays}-day freshness window "
+                            f"defined for this control. Refresh the evidence "
+                            f"to keep the posture auditor-ready."
+                        )
+
+                        cur.execute("""
+                            INSERT INTO tenant_notification (
+                                tenant_id, kind, title, body, severity,
+                                related_control_ref, related_event_type
+                            ) VALUES (
+                                %s::uuid, 'freshness_expiry', %s, %s, %s,
+                                %s, 'evidence_stale'
+                            )
+                        """, (tenant_id, title, body, severity, cref))
+                        tenant_acted += 1
+
+                if tenant_stale or tenant_acted or tenant_dedup:
+                    per_tenant[tenant_id[:8]] = {
+                        "stale":     tenant_stale,
+                        "notified":  tenant_acted,
+                        "deduped":   tenant_dedup,
+                    }
+                acted += tenant_acted
+            # Commit tenant-scoped writes.
+            pg_conn.commit()
+        finally:
+            try: neo.close()
+            except Exception: pass
     except Exception as e:
         error_type = type(e).__name__
         error_detail = str(e)[:400]
-        try:
-            pg_conn.rollback()
-        except Exception:
-            pass
+        errored += 1
+        try: pg_conn.rollback()
+        except Exception: pass
+
     status = "completed" if error_type is None else "failed"
-    _log_complete(pg_conn, row_id, scanned, 0, 0, detail,
+    detail = {
+        "per_tenant":  per_tenant,
+        "dedup_days":  _FRESHNESS_DEDUP_DAYS,
+        "dry_run":     dry_run,
+    }
+    _log_complete(pg_conn, row_id, scanned, acted, errored, detail,
                   status=status, error_type=error_type, error_detail=error_detail)
     return {"work_type": "freshness_expiry", "scanned": scanned,
-            "acted_on": 0, "errored": 0, "detail": detail}
+            "acted_on": acted, "errored": errored, "detail": detail}
 
 
 # ── Public tick runner ───────────────────────────────────────────────
