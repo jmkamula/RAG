@@ -1143,23 +1143,23 @@
         "rationale": "Compliance with policies and standards requires documented evidence of compliance \u2014 the accountability paper trail.",
         "posture_lookup_ref": "ISO27001:2022:A.5.36"
       },
-      "ISO27001:2022:A.9.1": {
-        "related_req_id": "ISO27001:2022:A.9.1",
-        "related_title": "ISO 27001:2022 A.9.1",
+      "ISO27001:2022:9.1": {
+        "related_req_id": "ISO27001:2022:9.1",
+        "related_title": "ISO 27001:2022 9.1",
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
         "rationale": "Monitoring, measurement, analysis and evaluation produces the metrics and records that demonstrate accountability to regulators.",
-        "posture_lookup_ref": "ISO27001:2022:A.9.1"
+        "posture_lookup_ref": "ISO27001:2022:9.1"
       },
-      "ISO27001:2022:A.9.3": {
-        "related_req_id": "ISO27001:2022:A.9.3",
-        "related_title": "ISO 27001:2022 A.9.3",
+      "ISO27001:2022:9.3": {
+        "related_req_id": "ISO27001:2022:9.3",
+        "related_title": "ISO 27001:2022 9.3",
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
         "rationale": "Management review demonstrates top management accountability for GDPR compliance at governance level.",
-        "posture_lookup_ref": "ISO27001:2022:A.9.3"
+        "posture_lookup_ref": "ISO27001:2022:9.3"
       }
     },
     "edges": [],
@@ -6979,14 +6979,14 @@
         "rationale": "Information security roles and responsibilities must include GDPR-specific roles (DPO, controller, processor designations).",
         "posture_lookup_ref": "ISO27001:2022:A.5.2"
       },
-      "ISO27001:2022:A.9.3": {
-        "related_req_id": "ISO27001:2022:A.9.3",
-        "related_title": "ISO 27001:2022 A.9.3",
+      "ISO27001:2022:9.3": {
+        "related_req_id": "ISO27001:2022:9.3",
+        "related_title": "ISO 27001:2022 9.3",
         "related_standard": "ISO27001:2022",
         "relationship_type": "SUPPORTS",
         "confidence": "HIGH",
         "rationale": "Management review produces documented evidence of top management's ongoing accountability for information security and data protection.",
-        "posture_lookup_ref": "ISO27001:2022:A.9.3"
+        "posture_lookup_ref": "ISO27001:2022:9.3"
       }
     },
     "edges": [],
@@ -9600,14 +9600,14 @@
         "rationale": "Independent review of information security provides the formal evaluation and effectiveness assessment required by Art.32(1)(d).",
         "posture_lookup_ref": "ISO27001:2022:A.5.35"
       },
-      "ISO27001:2022:A.9.1": {
-        "related_req_id": "ISO27001:2022:A.9.1",
-        "related_title": "ISO 27001:2022 A.9.1",
+      "ISO27001:2022:9.1": {
+        "related_req_id": "ISO27001:2022:9.1",
+        "related_title": "ISO 27001:2022 9.1",
         "related_standard": "ISO27001:2022",
         "relationship_type": "IMPLEMENTS",
         "confidence": "HIGH",
         "rationale": "Monitoring, measurement, analysis and evaluation is the ISO management system mechanism for ongoing effectiveness testing.",
-        "posture_lookup_ref": "ISO27001:2022:A.9.1"
+        "posture_lookup_ref": "ISO27001:2022:9.1"
       },
       "ISO27001:2022:A.8.16": {
         "related_req_id": "ISO27001:2022:A.8.16",

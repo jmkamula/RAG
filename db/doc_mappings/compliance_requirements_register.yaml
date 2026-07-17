@@ -48,8 +48,14 @@ target_leaves:
     role: scope_note
 
 cross_control_links:
-  - control: "A.18.1"
-    rationale: "Compliance obligations also feed audit / management review"
+  # "A.18.1" was the 2013 Annex A ref for "Compliance with legal and
+  # contractual requirements"; the concept was renumbered to A.5.31
+  # in 2022 (which is already the PRIMARY target of this mapping).
+  # The rationale text — "compliance obligations feed audit /
+  # management review" — actually pointed at ISMS clause 9.2
+  # (Internal audit), so use that as the cross-link now.
+  - control: "9.2"
+    rationale: "Compliance obligations feed internal audit scope"
   - control: "5.2"
     rationale: "Compliance commitment is a top-of-program policy statement"
 
