@@ -56,37 +56,46 @@ CREATE INDEX IF NOT EXISTS idx_doc_uploads_tenant    ON document_uploads(tenant_
 CREATE INDEX IF NOT EXISTS idx_doc_uploads_status    ON document_uploads(extraction_status);
 
 -- ── Document Findings ─────────────────────────────────────────────────────────
-CREATE TABLE IF NOT EXISTS document_findings (
-  id                 UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
-  tenant_id          UUID        NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
-  upload_id          UUID        REFERENCES document_uploads(id) ON DELETE SET NULL,
-  control_ref        TEXT        NOT NULL,
-  standard_id        TEXT        NOT NULL,
-  compliance_status  TEXT        NOT NULL
-    CHECK (compliance_status IN ('Comply','NC','OFI','N/A')),
-  confidence         TEXT        CHECK (confidence IN ('high','medium','low')),
-  evidence_excerpt   TEXT,
-  source_section     TEXT,
-  created_at         TIMESTAMPTZ DEFAULT now()
-);
-
+-- Ship 2'.r (2026-07-17): the CREATE TABLE block that used to live here
+-- was a phantom — schema.sql (v1) had already created `document_findings`
+-- with a different shape (document_id FK to client_documents, `status`
+-- enum, `checklist_item_id`, etc). The `IF NOT EXISTS` on the phantom
+-- caused it to silently no-op; downstream code never used the columns
+-- proposed here (`upload_id`, `compliance_status`, `evidence_excerpt`,
+-- `source_section`) and the phantom index `idx_doc_findings_upload`
+-- errored out silently at load time (no such column).
+--
+-- The CANONICAL `document_findings` definition lives in `db/schema.sql`
+-- + subsequent migrations. Do not add a competing definition here.
+--
+-- The two indexes below (idx_doc_findings_tenant + idx_doc_findings_control)
+-- DID take effect (columns exist) and are preserved to stay idempotent
+-- with what's currently in the live database.
 CREATE INDEX IF NOT EXISTS idx_doc_findings_tenant   ON document_findings(tenant_id);
 CREATE INDEX IF NOT EXISTS idx_doc_findings_control  ON document_findings(control_ref);
-CREATE INDEX IF NOT EXISTS idx_doc_findings_upload   ON document_findings(upload_id);
+-- (idx_doc_findings_upload was never created — column doesn't exist.)
 
 -- Enable RLS
 ALTER TABLE document_uploads ENABLE ROW LEVEL SECURITY;
 ALTER TABLE document_findings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 
--- Permissive policies for arioncomply_app
-CREATE POLICY IF NOT EXISTS app_all_uploads  ON document_uploads
+-- Permissive policies for arioncomply_app.
+-- Ship 2'.r (2026-07-17): PostgreSQL doesn't support `CREATE POLICY
+-- IF NOT EXISTS` — the previous `IF NOT EXISTS` was invalid syntax
+-- that errored silently on every re-run. Use DROP + CREATE for
+-- idempotency (the tenant_isolation policy from schema.sql stays
+-- untouched; these are additive).
+DROP POLICY IF EXISTS app_all_uploads  ON document_uploads;
+CREATE POLICY app_all_uploads  ON document_uploads
   FOR ALL TO arioncomply_app USING (true) WITH CHECK (true);
 
-CREATE POLICY IF NOT EXISTS app_all_findings ON document_findings
+DROP POLICY IF EXISTS app_all_findings ON document_findings;
+CREATE POLICY app_all_findings ON document_findings
   FOR ALL TO arioncomply_app USING (true) WITH CHECK (true);
 
-CREATE POLICY IF NOT EXISTS app_all_users ON users
+DROP POLICY IF EXISTS app_all_users ON users;
+CREATE POLICY app_all_users ON users
   FOR ALL TO arioncomply_app USING (true) WITH CHECK (true);
 
 -- Grants
