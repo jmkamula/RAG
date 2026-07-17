@@ -597,6 +597,38 @@ def _log_status_change(
         ),
     )
 
+    # Ship 3'.c: fire a tenant_notification when a live posture
+    # transitions INTO NC from a non-NC state. Dedup via the
+    # partial unique index in tenant_notification (unread rows
+    # keyed by tenant + kind + related_entity_id + related_control_ref).
+    if status_after == "NC" and status_before != "NC":
+        try:
+            from rag.cascade.notify import notify as _notify
+            _notify(
+                cur,
+                tenant_id           = tenant_id,
+                kind                = "nc_surfaced",
+                title               = f"New non-conformity on {control_ref}",
+                body                = (
+                    f"A non-conformity was identified on "
+                    f"{control_ref} (was: {status_before or 'unassessed'}). "
+                    f"Review the finding + evidence in the queue and "
+                    f"decide on remediation."
+                ),
+                severity            = "high",
+                related_entity_kind = "posture_control",
+                related_entity_id   = posture_id,
+                related_control_ref = control_ref,
+                related_event_type  = "nc_surfaced",
+            )
+        except Exception as _e:
+            # Never let a notification failure break the audit log
+            # write. Best-effort by contract.
+            import logging as _lg
+            _lg.getLogger("rag.intake.posture_writer").debug(
+                "nc_surfaced notify skipped: %s", _e,
+            )
+
 
 def _write_posture_controls(
     groups:    dict[tuple, list[DocumentFinding]],
@@ -974,6 +1006,41 @@ def write_findings(
         f"{posture_updated} posture updated, {posture_created} posture created, "
         f"{posture_skipped} skipped (source guard)"
     )
+
+    # Ship 3'.c: fire one tenant_notification per upload summarising
+    # what landed. Dedup keyed on doc_id (via related_entity_id) so a
+    # retry write doesn't spawn a second notification.
+    if written > 0 and doc_id:
+        try:
+            from rag.cascade.notify import notify as _notify
+            n_controls = len(summary["controls_assessed"])
+            filename = (metadata or {}).get("filename") or "your document"
+            title = (
+                f"Document processed: {written} findings across "
+                f"{n_controls} control{'' if n_controls == 1 else 's'}"
+            )
+            body = (
+                f"We extracted {written} finding{'' if written == 1 else 's'} "
+                f"from {filename}. "
+                f"{posture_updated} posture{'' if posture_updated == 1 else 's'} "
+                f"updated, {posture_created} created. "
+                f"Review the pending items in the Stage-1 queue."
+            )
+            with conn.cursor() as _c:
+                _notify(
+                    _c,
+                    tenant_id           = tenant_id,
+                    kind                = "upload_processed",
+                    title               = title,
+                    body                = body,
+                    severity            = "info",
+                    related_entity_kind = "client_document",
+                    related_entity_id   = doc_id,
+                    related_event_type  = "extraction_completed",
+                )
+        except Exception as _e:
+            logger.debug("upload_processed notify skipped: %s", _e)
+
     return summary
 
 
