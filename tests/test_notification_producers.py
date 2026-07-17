@@ -468,6 +468,173 @@ TESTS += [
 ]
 
 
+# ── posture_flip_to_comply producer tests (Ship 3'.i) ─────────────────
+# Mirror of the nc_surfaced tests — same patterns, inverted direction.
+
+def test_posture_flip_to_comply_fires_from_ofi():
+    from rag.intake.posture_writer import _log_status_change
+    captured, restore = _install_notify_capture()
+    try:
+        cur = _FakeCursor()
+        _log_status_change(
+            cur,
+            tenant_id       = "00000000-0000-0000-0000-000000000001",
+            posture_id      = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+            control_ref     = "A.5.18",
+            standard_id     = "ISO27001:2022",
+            status_before   = "OFI",
+            status_after    = "Comply",
+            confidence      = "high",
+            evidence        = None,
+            source_upload_id= None,
+        )
+        hit = [c for c in captured if c["kind"] == "posture_flip_to_comply"]
+        return _ok(
+            len(hit) == 1
+            and hit[0]["severity"] == "low"
+            and hit[0]["related_control_ref"] == "A.5.18",
+            f"captured={captured}",
+        )
+    finally:
+        restore()
+
+
+def test_posture_flip_to_comply_fires_from_nc():
+    """NC → Comply is the remediation-success case worth surfacing."""
+    from rag.intake.posture_writer import _log_status_change
+    captured, restore = _install_notify_capture()
+    try:
+        cur = _FakeCursor()
+        _log_status_change(
+            cur,
+            tenant_id       = "00000000-0000-0000-0000-000000000001",
+            posture_id      = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+            control_ref     = "A.6.4",
+            standard_id     = "ISO27001:2022",
+            status_before   = "NC",
+            status_after    = "Comply",
+            confidence      = "high",
+            evidence        = None,
+            source_upload_id= None,
+        )
+        hit = [c for c in captured if c["kind"] == "posture_flip_to_comply"]
+        return _ok(len(hit) == 1, f"captured={captured}")
+    finally:
+        restore()
+
+
+def test_posture_flip_to_comply_skips_when_already_comply():
+    from rag.intake.posture_writer import _log_status_change
+    captured, restore = _install_notify_capture()
+    try:
+        cur = _FakeCursor()
+        _log_status_change(
+            cur,
+            tenant_id       = "00000000-0000-0000-0000-000000000001",
+            posture_id      = "cccccccc-cccc-cccc-cccc-cccccccccccc",
+            control_ref     = "A.5.18",
+            standard_id     = "ISO27001:2022",
+            status_before   = "Comply",   # already Comply
+            status_after    = "Comply",
+            confidence      = "high",
+            evidence        = None,
+            source_upload_id= None,
+        )
+        hit = [c for c in captured if c["kind"] == "posture_flip_to_comply"]
+        return _ok(len(hit) == 0, f"unexpected fire: {captured}")
+    finally:
+        restore()
+
+
+def test_posture_flip_to_comply_skips_regression():
+    """Comply → OFI is regression, not a positive-news event."""
+    from rag.intake.posture_writer import _log_status_change
+    captured, restore = _install_notify_capture()
+    try:
+        cur = _FakeCursor()
+        _log_status_change(
+            cur,
+            tenant_id       = "00000000-0000-0000-0000-000000000001",
+            posture_id      = "dddddddd-dddd-dddd-dddd-dddddddddddd",
+            control_ref     = "A.5.18",
+            standard_id     = "ISO27001:2022",
+            status_before   = "Comply",
+            status_after    = "OFI",
+            confidence      = "high",
+            evidence        = None,
+            source_upload_id= None,
+        )
+        hit = [c for c in captured if c["kind"] == "posture_flip_to_comply"]
+        return _ok(len(hit) == 0, f"unexpected fire: {captured}")
+    finally:
+        restore()
+
+
+# ── api_key_expiring producer tests (Ship 3'.i) ───────────────────────
+
+def test_api_key_expiring_wiring():
+    """Sweep function + _WORK_TYPES registration + notify wiring."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    return _ok(
+        'def sweep_api_key_expiring(' in src
+        and '"api_key_expiring":' in src
+        and 'kind                = "api_key_expiring"' in src,
+        "wiring incomplete",
+    )
+
+
+def test_api_key_expiring_severity_buckets():
+    """Three escalating buckets: 30d → medium, 7d → high, 1d → critical."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    return _ok(
+        '("1d",  1,  "critical")' in src
+        and '("7d",  7,  "high")' in src
+        and '("30d", 30, "medium")' in src,
+        "severity buckets missing",
+    )
+
+
+def test_api_key_expiring_bucket_dedup_key():
+    """The partial unique index dedupes on
+    (kind, related_entity_id, related_control_ref); the bucket label
+    goes into related_control_ref so each of the 3 buckets can fire
+    once per key without collision."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    return _ok(
+        "related_control_ref = bucket" in src
+        and "related_entity_id   = key_id" in src,
+        "bucket dedup key missing",
+    )
+
+
+def test_api_key_expiring_excludes_expired_and_null():
+    """Keys past `expires_at` shouldn't warn (they're dead, not
+    expiring). Keys with NULL expires_at shouldn't warn (never
+    expiring)."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    return _ok(
+        "AND expires_at IS NOT NULL" in src
+        and "AND expires_at > NOW()" in src,
+        "expiry-boundary guards missing",
+    )
+
+
+TESTS += [
+    test_posture_flip_to_comply_fires_from_ofi,
+    test_posture_flip_to_comply_fires_from_nc,
+    test_posture_flip_to_comply_skips_when_already_comply,
+    test_posture_flip_to_comply_skips_regression,
+    test_api_key_expiring_wiring,
+    test_api_key_expiring_severity_buckets,
+    test_api_key_expiring_bucket_dedup_key,
+    test_api_key_expiring_excludes_expired_and_null,
+]
+
+
 def main():
     print("─" * 70)
     print("  Notification producer tests (Ship 3'.c)")

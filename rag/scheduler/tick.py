@@ -782,6 +782,162 @@ def sweep_cite_verification_overdue(pg_conn, tick_id: str, dry_run: bool = False
             "errored": errored, "detail": detail}
 
 
+# Ship 3'.i: three escalating warning windows before an API key expires.
+# Buckets ranked oldest-first so the SELECT can pick the tightest one
+# (a key at 3d out lands in the 7d bucket, not 30d). Bucket label goes
+# into related_event_type so the partial unique index dedupes per bucket:
+# tenant gets three heads-up over a key's final month, not a daily nag.
+_API_KEY_WARN_BUCKETS = [
+    ("1d",  1,  "critical"),
+    ("7d",  7,  "high"),
+    ("30d", 30, "medium"),
+]
+
+
+def sweep_api_key_expiring(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
+    """Per-tenant sweep: active API keys approaching their expires_at.
+
+    Fires up to three escalating notifications per key:
+      * 30 days out — medium severity — plan the rotation
+      * 7 days out  — high severity    — schedule the rotation
+      * 1 day out   — critical         — do the rotation NOW
+
+    Each bucket dedups against the partial unique index on the
+    (kind, related_entity_id, related_control_ref) tuple.
+    related_control_ref carries the bucket label ('30d'/'7d'/'1d') so
+    the same key can produce all three notifications in sequence
+    without dedup collision, but a second sweep in the same bucket
+    hits the index and is a no-op.
+
+    Keys with `expires_at IS NULL` (never expiring) are skipped;
+    keys past expiry are also skipped (post-expiry pain isn't a
+    warning — the key is dead).
+
+    Uses api_keys' existing `app_all_api_keys` permissive policy for
+    cross-tenant read.
+    """
+    row_id = _log_start(pg_conn, tick_id, "api_key_expiring")
+    scanned    = 0
+    acted      = 0
+    errored    = 0
+    per_tenant: dict[str, dict] = {}
+    error_type = error_detail = None
+
+    try:
+        from collections import defaultdict
+
+        # Bucket the key by TIGHTEST window it falls into. Postgres
+        # calculates the days remaining once; we CASE-WHEN pick the
+        # bucket label. Excludes already-expired keys.
+        with pg_conn.cursor() as cur:
+            cur.execute("""
+                SELECT tenant_id::text,
+                       id::text,
+                       name,
+                       key_prefix,
+                       expires_at,
+                       EXTRACT(EPOCH FROM (expires_at - NOW())) / 86400.0 AS days_remaining,
+                       CASE
+                         WHEN expires_at <= NOW() + interval '1 day'   THEN '1d'
+                         WHEN expires_at <= NOW() + interval '7 days'  THEN '7d'
+                         WHEN expires_at <= NOW() + interval '30 days' THEN '30d'
+                         ELSE NULL
+                       END AS bucket
+                  FROM api_keys
+                 WHERE is_active  = TRUE
+                   AND expires_at IS NOT NULL
+                   AND expires_at > NOW()
+                   AND expires_at <= NOW() + interval '30 days'
+                 ORDER BY tenant_id, expires_at
+            """)
+            rows = cur.fetchall()
+
+        by_tenant: dict[str, list] = defaultdict(list)
+        for r in rows:
+            by_tenant[r[0]].append(r[1:])
+        scanned = len(rows)
+
+        # Severity map for lookup by bucket label
+        _sev_by_bucket = {b: s for (b, _, s) in _API_KEY_WARN_BUCKETS}
+
+        if dry_run or not by_tenant:
+            _log_complete(
+                pg_conn, row_id, scanned, acted, errored,
+                {"per_tenant": {}, "dry_run": dry_run,
+                 "buckets": [b for (b, _, _) in _API_KEY_WARN_BUCKETS]},
+                status="completed",
+            )
+            return {"work_type": "api_key_expiring",
+                    "scanned": scanned, "acted_on": 0, "errored": 0,
+                    "detail": {"per_tenant": {}, "dry_run": dry_run}}
+
+        from rag.cascade.notify import notify as _notify
+
+        for tenant_id, tenant_rows in by_tenant.items():
+            tenant_acted = 0
+            with pg_conn.cursor() as cur:
+                cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                            (tenant_id,))
+                for (key_id, name, key_prefix, expires_at,
+                     days_remaining, bucket) in tenant_rows:
+                    if bucket is None:
+                        continue
+                    days_left = max(int(days_remaining or 0), 0)
+                    severity  = _sev_by_bucket.get(bucket, "medium")
+
+                    title = (
+                        f"API key '{name}' expires in {days_left} "
+                        f"day{'s' if days_left != 1 else ''}"
+                    )
+                    body = (
+                        f"API key '{name}' (prefix {key_prefix}...) "
+                        f"is set to expire on "
+                        f"{expires_at.strftime('%Y-%m-%d')}. "
+                        f"Rotate it in the Profile page — any client "
+                        f"still using the old key will start failing "
+                        f"once it expires."
+                    )
+                    result = _notify(
+                        cur,
+                        tenant_id           = tenant_id,
+                        kind                = "api_key_expiring",
+                        title               = title,
+                        body                = body,
+                        severity            = severity,
+                        related_entity_kind = "api_key",
+                        related_entity_id   = key_id,
+                        related_control_ref = bucket,
+                        related_event_type  = "api_key_expiring",
+                    )
+                    if result is not None:
+                        tenant_acted += 1
+
+            if tenant_acted or tenant_rows:
+                per_tenant[tenant_id[:8]] = {
+                    "at_risk":  len(tenant_rows),
+                    "notified": tenant_acted,
+                }
+            acted += tenant_acted
+
+        pg_conn.commit()
+    except Exception as e:
+        error_type = type(e).__name__
+        error_detail = str(e)[:400]
+        errored += 1
+        try: pg_conn.rollback()
+        except Exception: pass
+
+    status = "completed" if error_type is None else "failed"
+    detail = {"per_tenant": per_tenant,
+              "buckets":    [b for (b, _, _) in _API_KEY_WARN_BUCKETS],
+              "dry_run":    dry_run}
+    _log_complete(pg_conn, row_id, scanned, acted, errored, detail,
+                  status=status, error_type=error_type, error_detail=error_detail)
+    return {"work_type": "api_key_expiring",
+            "scanned": scanned, "acted_on": acted,
+            "errored": errored, "detail": detail}
+
+
 # ── Public tick runner ───────────────────────────────────────────────
 
 def sweep_notification_delivery(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
@@ -832,6 +988,7 @@ _WORK_TYPES = {
     "overdue_followups":           sweep_overdue_followups,
     "freshness_expiry":            sweep_freshness_expiry,
     "cite_verification_overdue":   sweep_cite_verification_overdue,
+    "api_key_expiring":            sweep_api_key_expiring,
     "notification_delivery":       sweep_notification_delivery,
 }
 

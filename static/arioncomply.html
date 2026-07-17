@@ -2293,6 +2293,8 @@ const _NOTIF_KIND_LABEL = {
   upload_failed:             'upload failed',
   stage2_proposal_ready:     'engine proposal ready',
   cite_verification_overdue: 'cited source needs re-verification',
+  posture_flip_to_comply:    'now compliant',
+  api_key_expiring:          'API key expiring',
 };
 
 // Ship 3'.h: per-kind visual + deep-link metadata. Icon uses
@@ -2310,6 +2312,8 @@ const _NOTIF_KIND_META = {
   upload_failed:             {icon: 'ti-file-alert',       mode: 'docs',       actionLabel: 'Open uploads'},
   stage2_proposal_ready:     {icon: 'ti-square-check',     mode: 'queue',      actionLabel: 'Open review queue'},
   cite_verification_overdue: {icon: 'ti-link-off',         mode: 'dashboard',  actionLabel: 'Open control'},
+  posture_flip_to_comply:    {icon: 'ti-mood-happy',       mode: 'dashboard',  actionLabel: 'Open control'},
+  api_key_expiring:          {icon: 'ti-key',              mode: 'profile',    actionLabel: 'Open profile'},
 };
 
 function humanizeNotifKind(k) {

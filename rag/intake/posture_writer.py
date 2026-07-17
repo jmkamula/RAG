@@ -629,6 +629,39 @@ def _log_status_change(
                 "nc_surfaced notify skipped: %s", _e,
             )
 
+    # Ship 3'.i: mirror of the nc_surfaced hook — fire a positive-news
+    # notification when a live posture transitions INTO Comply from
+    # any non-Comply state (NC, OFI, or unassessed). Severity 'low'
+    # by default — this is auditor-neutral good news, not something
+    # the tenant needs to act on. Skips when status_before was already
+    # Comply (idempotent re-writes) or when the transition is from
+    # 'Not assessed' straight to Comply on a fresh doc upload (still
+    # notify — that IS remediation progress worth surfacing).
+    if status_after == "Comply" and status_before != "Comply":
+        try:
+            from rag.cascade.notify import notify as _notify
+            _from = status_before or "unassessed"
+            _notify(
+                cur,
+                tenant_id           = tenant_id,
+                kind                = "posture_flip_to_comply",
+                title               = f"{control_ref} is now Comply",
+                body                = (
+                    f"Live finding for {control_ref} moved to Comply "
+                    f"(was: {_from}). Remediation evidence is in place."
+                ),
+                severity            = "low",
+                related_entity_kind = "posture_control",
+                related_entity_id   = posture_id,
+                related_control_ref = control_ref,
+                related_event_type  = "posture_flip_to_comply",
+            )
+        except Exception as _e:
+            import logging as _lg
+            _lg.getLogger("rag.intake.posture_writer").debug(
+                "posture_flip_to_comply notify skipped: %s", _e,
+            )
+
 
 def _write_posture_controls(
     groups:    dict[tuple, list[DocumentFinding]],
