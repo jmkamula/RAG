@@ -128,23 +128,39 @@ def _test_state():
                      "inactive_id": inactive_id}
     finally:
         try:
-            with conn.cursor() as cur:
-                cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
-                            (TEST_TENANT_ID,))
-                cur.execute("DELETE FROM api_rate_limit_bucket WHERE key_id IN "
-                            "(SELECT id FROM api_keys WHERE tenant_id=%s::uuid)",
-                            (TEST_TENANT_ID,))
-                cur.execute("DELETE FROM api_keys WHERE tenant_id=%s::uuid",
-                            (TEST_TENANT_ID,))
-                cur.execute("DELETE FROM users WHERE tenant_id=%s::uuid",
-                            (TEST_TENANT_ID,))
-                cur.execute("DELETE FROM tenants WHERE id=%s::uuid",
-                            (TEST_TENANT_ID,))
-            conn.commit()
+            _purge_test_api_keys(conn, TEST_TENANT_ID)
         except Exception:
             conn.rollback()
         finally:
             conn.close()
+
+
+def _purge_test_api_keys(conn, tenant_id: str) -> None:
+    """Surgical cleanup: delete rate-limit buckets + api_keys created
+    by this test run for the throwaway test tenant, but LEAVE the
+    tenant, user, and any audit-log rows in place.
+
+    Why not delete the tenant? Audit-log tables (ai_call_log,
+    chat_casefile_log, chat_consensus_log, intake_trace_log,
+    fact_recompute_log) intentionally have no DELETE grant for
+    arioncomply_app — they're append-only by
+    [[feedback-rls-grant-parity]] design. The RAG pipeline invoked
+    by /query tests writes to those tables, so tenant DELETE would
+    fail on FK constraints.
+
+    Approach: the tenant + user rows are idempotent (ON CONFLICT DO
+    NOTHING on seed), so they persist across runs. Only api_keys +
+    their rate-limit buckets need to be cleaned so the next run's
+    unique-key-hash constraint isn't tripped."""
+    with conn.cursor() as cur:
+        cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+        cur.execute("""
+            DELETE FROM api_rate_limit_bucket
+             WHERE key_id IN (SELECT id FROM api_keys WHERE tenant_id=%s::uuid)
+        """, (tenant_id,))
+        cur.execute("DELETE FROM api_keys WHERE tenant_id=%s::uuid",
+                    (tenant_id,))
+    conn.commit()
 
 
 def _get(path: str, key: str | None = None) -> tuple[int, dict, dict]:
@@ -155,6 +171,34 @@ def _get(path: str, key: str | None = None) -> tuple[int, dict, dict]:
         req.add_header("X-API-Key", key)
     try:
         with urllib.request.urlopen(req, timeout=10) as r:
+            body    = r.read().decode()
+            status  = r.status
+            headers = dict(r.headers)
+    except urllib.error.HTTPError as e:
+        body    = e.read().decode()
+        status  = e.code
+        headers = dict(e.headers or {})
+    try:
+        body_json = json.loads(body) if body else {}
+    except json.JSONDecodeError:
+        body_json = {"raw": body}
+    return status, body_json, headers
+
+
+def _post(path: str, payload: dict, key: str | None = None,
+          timeout: int = 60) -> tuple[int, dict, dict]:
+    """POST with a JSON body. Longer default timeout because /query
+    can invoke the RAG pipeline (multi-second LLM call)."""
+    req = urllib.request.Request(
+        BASE + path,
+        data    = json.dumps(payload).encode(),
+        headers = {"Content-Type": "application/json"},
+        method  = "POST",
+    )
+    if key is not None:
+        req.add_header("X-API-Key", key)
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
             body    = r.read().decode()
             status  = r.status
             headers = dict(r.headers)
@@ -292,6 +336,148 @@ TESTS = [
     test_happy_path_returns_200_body_shape,
     test_rate_limit_headers_on_200,
     test_rate_limit_trip_returns_429_with_retry_after,
+]
+
+
+# ── Ship 4'.b: POST /query tests ──────────────────────────────────────
+
+RAW_KEY_QUERY = "test_ext_key_ship4b_query_" + uuid.uuid4().hex[:8]
+
+
+@contextmanager
+def _test_state_query():
+    """Fixture variant that additionally seeds a key with
+    external:query scope so /query happy-path tests work.
+
+    The internal RAG pipeline queries posture_controls scoped to the
+    tenant. The throwaway test tenant has none, so /query answers
+    will be sparse but the endpoint contract is exercised."""
+    with _test_state() as (conn, seeds):
+        with conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                        (TEST_TENANT_ID,))
+            cur.execute("""
+                INSERT INTO api_keys (tenant_id, user_id, key_hash, key_prefix,
+                                      name, scopes, is_active)
+                VALUES (%s::uuid, %s::uuid, %s, 'test_ext_', 'TEST query key',
+                        ARRAY['external:query'], TRUE)
+                RETURNING id::text
+            """, (TEST_TENANT_ID, TEST_USER_ID, _sha256(RAW_KEY_QUERY)))
+            query_id = cur.fetchone()[0]
+        conn.commit()
+        seeds["query_id"] = query_id
+        yield conn, seeds
+
+
+def test_query_missing_body_returns_422():
+    """Empty POST body → Pydantic validation → 422 structured error."""
+    with _test_state_query() as _:
+        code, body, _h = _post("/api/external/v1/query", {}, key=RAW_KEY_QUERY)
+        return _ok(
+            code == 422
+            and body.get("error", {}).get("code") == "invalid_input",
+            f"code={code} body={body}",
+        )
+
+
+def test_query_empty_question_returns_422():
+    """min_length=1 on QueryRequest.question — empty string rejected."""
+    with _test_state_query() as _:
+        code, body, _h = _post(
+            "/api/external/v1/query", {"question": ""}, key=RAW_KEY_QUERY,
+        )
+        return _ok(
+            code == 422 and body.get("error", {}).get("code") == "invalid_input",
+            f"code={code} body={body}",
+        )
+
+
+def test_query_wrong_scope_returns_403():
+    """/query requires external:query; a key with only external:status
+    should get 403."""
+    with _test_state_query() as _:
+        code, body, _h = _post(
+            "/api/external/v1/query", {"question": "hello?"},
+            key=RAW_KEY_GOOD,   # has external:status but not external:query
+        )
+        return _ok(
+            code == 403
+            and "external:query" in (body.get("error", {}).get("message") or ""),
+            f"code={code} body={body}",
+        )
+
+
+def test_query_happy_path_returns_structured_response():
+    """Happy path: valid key with external:query + a real question →
+    200 with the QueryResponse shape."""
+    with _test_state_query() as _:
+        code, body, headers = _post(
+            "/api/external/v1/query",
+            {"question": "what are our access rights gaps?"},
+            key=RAW_KEY_QUERY,
+        )
+        return _ok(
+            code == 200
+            and isinstance(body.get("answer"), str) and len(body["answer"]) > 0
+            and isinstance(body.get("citations"), list)
+            and body.get("session_id", "").startswith("ext_")
+            and isinstance(body.get("request_id"), str)
+            and isinstance(body.get("latency_ms"), int)
+            and body.get("latency_ms") > 0
+            and body.get("needs_clarification") in (True, False)
+            # Rate-limit headers on 200 (same as /status)
+            and headers.get("x-ratelimit-limit") == "60",
+            f"code={code} body_keys={list(body.keys())} headers={dict(headers)}",
+        )
+
+
+def test_query_session_id_echo_and_multi_turn():
+    """Sending a session_id on turn 1 should be echoed on the response.
+    Turn 2 with the same session_id should also succeed (state persists
+    via the LangGraph checkpointer)."""
+    with _test_state_query() as _:
+        my_sid = "ship4b_test_" + uuid.uuid4().hex[:8]
+        code1, body1, _h1 = _post(
+            "/api/external/v1/query",
+            {"question": "what are our access rights gaps?", "session_id": my_sid},
+            key=RAW_KEY_QUERY,
+        )
+        if code1 != 200 or body1.get("session_id") != my_sid:
+            return _ok(False, f"turn1 code={code1} body={body1}")
+        code2, body2, _h2 = _post(
+            "/api/external/v1/query",
+            {"question": "what about A.5.18?", "session_id": my_sid},
+            key=RAW_KEY_QUERY,
+        )
+        return _ok(
+            code2 == 200 and body2.get("session_id") == my_sid,
+            f"turn2 code={code2} sid={body2.get('session_id')}",
+        )
+
+
+def test_query_bad_session_id_returns_400():
+    """session_id must be letters/digits/hyphens/underscores; SQL
+    fragments / path traversal are rejected at the boundary."""
+    with _test_state_query() as _:
+        code, body, _h = _post(
+            "/api/external/v1/query",
+            {"question": "hello", "session_id": "'; DROP TABLE users; --"},
+            key=RAW_KEY_QUERY,
+        )
+        return _ok(
+            code == 400
+            and body.get("error", {}).get("code") == "invalid_input",
+            f"code={code} body={body}",
+        )
+
+
+TESTS += [
+    test_query_missing_body_returns_422,
+    test_query_empty_question_returns_422,
+    test_query_wrong_scope_returns_403,
+    test_query_happy_path_returns_structured_response,
+    test_query_session_id_echo_and_multi_turn,
+    test_query_bad_session_id_returns_400,
 ]
 
 

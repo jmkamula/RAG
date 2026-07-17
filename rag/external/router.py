@@ -24,6 +24,7 @@ from fastapi import APIRouter, Depends, Request
 
 from rag.external.auth import external_key_with_scope
 from rag.external.endpoints.status import router as status_router
+from rag.external.endpoints.query  import router as query_router
 
 
 external_router = APIRouter(
@@ -37,3 +38,4 @@ external_router = APIRouter(
 )
 
 external_router.include_router(status_router)
+external_router.include_router(query_router)
