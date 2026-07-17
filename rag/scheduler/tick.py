@@ -938,6 +938,158 @@ def sweep_api_key_expiring(pg_conn, tick_id: str, dry_run: bool = False) -> dict
             "errored": errored, "detail": detail}
 
 
+# Ship 3'.k: notification retention thresholds. Fired-agnostic
+# (measured against tenant_notification.fired_at). Conservative
+# defaults — favour keeping data over deleting it.
+_RETENTION_DISMISSED_DAYS = 30    # tenant explicitly said "go away"
+_RETENTION_READ_DAYS      = 90    # tenant saw + acknowledged
+_RETENTION_MAX_AGE_DAYS   = 365   # hard ceiling — even unread
+_RETENTION_ATTEMPT_DAYS   = 90    # delivery-attempt log age
+
+
+def sweep_notification_retention(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
+    """Hard-delete stale tenant_notification + notification_delivery_
+    attempt rows per the retention rules above.
+
+    Deletion rules (union):
+      (a) dismissed_at IS NOT NULL AND fired_at < NOW - _RETENTION_DISMISSED_DAYS
+      (b) read_at      IS NOT NULL AND fired_at < NOW - _RETENTION_READ_DAYS
+      (c) fired_at < NOW - _RETENTION_MAX_AGE_DAYS
+                                 (regardless of read/dismissed state)
+
+    Rule (a) uses a shorter window because the tenant explicitly
+    said "get rid of this" via dismissal. Rule (b) keeps read-but-not-
+    dismissed notifications around longer as an in-app history until
+    the 90-day mark. Rule (c) is the hard ceiling: after a year,
+    everything ages out regardless of whether it was ever read.
+
+    Attempts (notification_delivery_attempt) age out on their own
+    schedule via _RETENTION_ATTEMPT_DAYS keyed on attempted_at.
+    Attempts pointing at now-deleted notifications become orphan
+    rows (no FK enforcement) — they age out on the same
+    _RETENTION_ATTEMPT_DAYS clock, so orphans self-clean.
+
+    No FK cascade from tenant_notification → notification_delivery_
+    attempt: attempts hold notification_id but no FK constraint, by
+    design (delivery is a separate audit stream). Cleanup is
+    orthogonal.
+
+    Cross-tenant SELECT via arioncomply_app's app_notification_all +
+    app_delivery_attempt_all policies (schema_v70). DELETE uses the
+    grants added in schema_v75.
+    """
+    row_id = _log_start(pg_conn, tick_id, "notification_retention")
+    scanned    = 0
+    acted      = 0
+    errored    = 0
+    per_tenant: dict[str, dict] = {}
+    error_type = error_detail = None
+
+    try:
+        if dry_run:
+            # Just count what WOULD be deleted, don't touch anything.
+            with pg_conn.cursor() as cur:
+                cur.execute("""
+                    SELECT count(*) FROM tenant_notification
+                     WHERE (dismissed_at IS NOT NULL
+                            AND fired_at < NOW() - make_interval(days => %s))
+                        OR (read_at      IS NOT NULL
+                            AND fired_at < NOW() - make_interval(days => %s))
+                        OR fired_at < NOW() - make_interval(days => %s)
+                """, (_RETENTION_DISMISSED_DAYS,
+                      _RETENTION_READ_DAYS,
+                      _RETENTION_MAX_AGE_DAYS))
+                notif_would_delete = cur.fetchone()[0] or 0
+                cur.execute("""
+                    SELECT count(*) FROM notification_delivery_attempt
+                     WHERE attempted_at < NOW() - make_interval(days => %s)
+                """, (_RETENTION_ATTEMPT_DAYS,))
+                attempt_would_delete = cur.fetchone()[0] or 0
+            scanned = notif_would_delete + attempt_would_delete
+            _log_complete(
+                pg_conn, row_id, scanned, acted, errored,
+                {"would_delete_notifications": notif_would_delete,
+                 "would_delete_attempts":      attempt_would_delete,
+                 "dry_run":                    True,
+                 "thresholds": {
+                     "dismissed_days": _RETENTION_DISMISSED_DAYS,
+                     "read_days":      _RETENTION_READ_DAYS,
+                     "max_age_days":   _RETENTION_MAX_AGE_DAYS,
+                     "attempt_days":   _RETENTION_ATTEMPT_DAYS,
+                 }},
+                status="completed",
+            )
+            return {"work_type": "notification_retention",
+                    "scanned": scanned, "acted_on": 0, "errored": 0,
+                    "detail": {"would_delete_notifications": notif_would_delete,
+                               "would_delete_attempts":      attempt_would_delete,
+                               "dry_run": True}}
+
+        # Real run — DELETE with RETURNING so we can bucket per-tenant.
+        # Attempts first because a notification-side DELETE might
+        # deprive an attempt row of context (though there's no FK
+        # enforcement, keeping the order clean helps auditors read
+        # the sweep_log entry chronologically).
+        with pg_conn.cursor() as cur:
+            cur.execute("""
+                DELETE FROM notification_delivery_attempt
+                 WHERE attempted_at < NOW() - make_interval(days => %s)
+                RETURNING tenant_id::text
+            """, (_RETENTION_ATTEMPT_DAYS,))
+            attempt_deleted = cur.fetchall()
+
+            cur.execute("""
+                DELETE FROM tenant_notification
+                 WHERE (dismissed_at IS NOT NULL
+                        AND fired_at < NOW() - make_interval(days => %s))
+                    OR (read_at      IS NOT NULL
+                        AND fired_at < NOW() - make_interval(days => %s))
+                    OR fired_at < NOW() - make_interval(days => %s)
+                RETURNING tenant_id::text
+            """, (_RETENTION_DISMISSED_DAYS,
+                  _RETENTION_READ_DAYS,
+                  _RETENTION_MAX_AGE_DAYS))
+            notif_deleted = cur.fetchall()
+
+        # Bucket by tenant
+        from collections import defaultdict
+        counts: dict[str, dict[str, int]] = defaultdict(lambda: {"n": 0, "a": 0})
+        for (tid,) in notif_deleted:
+            counts[tid]["n"] += 1
+        for (tid,) in attempt_deleted:
+            counts[tid]["a"] += 1
+        for tid, c in counts.items():
+            per_tenant[tid[:8]] = {
+                "notifications_deleted": c["n"],
+                "attempts_deleted":      c["a"],
+            }
+
+        scanned = len(notif_deleted) + len(attempt_deleted)
+        acted   = scanned
+        pg_conn.commit()
+    except Exception as e:
+        error_type = type(e).__name__
+        error_detail = str(e)[:400]
+        errored += 1
+        try: pg_conn.rollback()
+        except Exception: pass
+
+    status = "completed" if error_type is None else "failed"
+    detail = {"per_tenant": per_tenant,
+              "thresholds": {
+                  "dismissed_days": _RETENTION_DISMISSED_DAYS,
+                  "read_days":      _RETENTION_READ_DAYS,
+                  "max_age_days":   _RETENTION_MAX_AGE_DAYS,
+                  "attempt_days":   _RETENTION_ATTEMPT_DAYS,
+              },
+              "dry_run": dry_run}
+    _log_complete(pg_conn, row_id, scanned, acted, errored, detail,
+                  status=status, error_type=error_type, error_detail=error_detail)
+    return {"work_type": "notification_retention",
+            "scanned": scanned, "acted_on": acted,
+            "errored": errored, "detail": detail}
+
+
 # ── Public tick runner ───────────────────────────────────────────────
 
 def sweep_notification_delivery(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
@@ -990,6 +1142,7 @@ _WORK_TYPES = {
     "cite_verification_overdue":   sweep_cite_verification_overdue,
     "api_key_expiring":            sweep_api_key_expiring,
     "notification_delivery":       sweep_notification_delivery,
+    "notification_retention":      sweep_notification_retention,
 }
 
 
