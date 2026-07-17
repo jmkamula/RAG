@@ -1374,17 +1374,179 @@ async function loadProfile() {
   const wrap = document.getElementById('profile-wrap');
   wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading profile…</p></div>';
   try {
-    const [profileResp, systemsResp, overridesResp, vocabResp] = await Promise.all([
+    const [profileResp, systemsResp, overridesResp, vocabResp, channelsResp] = await Promise.all([
       api('/api/v1/tenant/profile'),
       api('/api/v1/tenant/external-systems'),
       api('/api/v1/tenant/cascade-overrides').catch(() => ({items: []})),
       api('/api/v1/tenant/cascade-events/vocabulary').catch(() => ({vocabulary: {}})),
+      api('/api/v1/admin/notifications/channels').catch(() => ({channels: []})),
     ]);
     renderProfile(profileResp.profile || []);
     renderExternalSystems(systemsResp.systems || []);
     renderCascadeOverrides(overridesResp.items || [], vocabResp.vocabulary || {});
+    renderNotificationChannels(channelsResp.channels || []);
   } catch (e) {
     wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load your profile. Please refresh in a moment.</p></div>';
+  }
+}
+
+
+// ── Ship 3'.d: notification-channel config ─────────────────────────
+function renderNotificationChannels(channels) {
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  const wrap = document.getElementById('profile-wrap');
+
+  const kindLabel = k => ({
+    email:   'Email',
+    slack:   'Slack',
+    webhook: 'Webhook',
+    sms:     'SMS',
+  }[k] || k);
+  const severityLabel = s => ({
+    info:     'Everything (info+)',
+    low:      'Low+',
+    medium:   'Medium+',
+    high:     'High+',
+    critical: 'Critical only',
+  }[s] || s);
+
+  let rowsHtml = '';
+  if (channels.length === 0) {
+    rowsHtml = `
+      <div style="padding:14px;border:1px dashed #C8C5B8;border-radius:6px;color:#6D6A5A;font-size:13px;text-align:center;background:#fbfaf6">
+        No delivery channels configured yet. Add one below to receive
+        notifications by email or Slack — otherwise they'll wait in
+        your inbox until you check it.
+      </div>`;
+  } else {
+    rowsHtml = channels.map(c => `
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid #E4E1D4;border-radius:6px;margin-bottom:8px;background:#fff">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:600;color:#3A382E;font-size:13px">
+            <i class="ti ti-${c.channel_kind === 'email' ? 'mail' : c.channel_kind === 'slack' ? 'brand-slack' : 'webhook'}" style="margin-right:6px;vertical-align:middle"></i>
+            ${esc(kindLabel(c.channel_kind))}
+            ${c.is_active
+                ? '<span style="font-size:11px;padding:1px 6px;background:#DFF3E1;color:#2C6B3A;border-radius:8px;margin-left:8px;font-weight:normal">active</span>'
+                : '<span style="font-size:11px;padding:1px 6px;background:#F0EDE0;color:#6D6A5A;border-radius:8px;margin-left:8px;font-weight:normal">paused</span>'}
+          </div>
+          <div style="font-size:12px;color:#6D6A5A;margin-top:2px;word-break:break-all">
+            ${esc(c.endpoint)}
+          </div>
+          <div style="font-size:11px;color:#8A8770;margin-top:3px">
+            Sends: ${esc(severityLabel(c.min_severity))}
+          </div>
+        </div>
+        <button onclick="deleteNotificationChannel('${attr(c.id)}')"
+                title="Remove this channel"
+                style="margin-left:12px;padding:6px 10px;background:#fff;border:1px solid #E4E1D4;border-radius:4px;color:#a04040;cursor:pointer;font-size:12px;font-family:inherit">
+          <i class="ti ti-trash"></i> Remove
+        </button>
+      </div>
+    `).join('');
+  }
+
+  const html = `
+    <div style="margin-top:32px;padding-top:20px;border-top:1px solid #E4E1D4">
+      <div style="font-weight:600;color:#3A382E;font-size:15px;margin-bottom:4px">
+        Notification delivery
+      </div>
+      <div style="font-size:12px;color:#6D6A5A;margin-bottom:14px">
+        Where should we send your notifications? Choose email or Slack
+        and we'll deliver findings, cascade events, and freshness alerts
+        as they happen.
+      </div>
+
+      <div id="notif-channels-list" style="margin-bottom:14px">
+        ${rowsHtml}
+      </div>
+
+      <form id="notif-channel-add" onsubmit="addNotificationChannel(event)"
+            style="background:#F7F5EC;padding:14px;border-radius:6px;border:1px solid #E4E1D4">
+        <div style="font-weight:600;color:#3A382E;font-size:13px;margin-bottom:10px">Add a channel</div>
+        <div style="display:grid;grid-template-columns:130px 1fr 140px 100px;gap:10px;align-items:end">
+          <div>
+            <label style="display:block;font-size:11px;color:#6D6A5A;margin-bottom:4px">Type</label>
+            <select id="nc-kind" required
+                    style="width:100%;font-size:13px;padding:6px 8px;border:1px solid #C8C5B8;border-radius:4px;background:#fff;font-family:inherit">
+              <option value="email">Email</option>
+              <option value="slack">Slack webhook</option>
+              <option value="webhook">Generic webhook</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;color:#6D6A5A;margin-bottom:4px">Endpoint</label>
+            <input id="nc-endpoint" required
+                   placeholder="you@company.com  or  https://hooks.slack.com/…"
+                   style="width:100%;font-size:13px;padding:6px 8px;border:1px solid #C8C5B8;border-radius:4px;background:#fff;font-family:inherit">
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;color:#6D6A5A;margin-bottom:4px">Send</label>
+            <select id="nc-severity"
+                    style="width:100%;font-size:13px;padding:6px 8px;border:1px solid #C8C5B8;border-radius:4px;background:#fff;font-family:inherit">
+              <option value="info">Everything (info+)</option>
+              <option value="medium" selected>Medium+</option>
+              <option value="high">High+</option>
+              <option value="critical">Critical only</option>
+            </select>
+          </div>
+          <div>
+            <button type="submit"
+                    style="width:100%;padding:6px 10px;background:#3A382E;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:13px;font-family:inherit">
+              <i class="ti ti-plus"></i> Add
+            </button>
+          </div>
+        </div>
+        <div id="nc-add-err" style="display:none;color:#a04040;font-size:12px;margin-top:8px"></div>
+      </form>
+    </div>
+  `;
+  wrap.insertAdjacentHTML('beforeend', html);
+}
+
+
+async function addNotificationChannel(evt) {
+  evt.preventDefault();
+  const errEl = document.getElementById('nc-add-err');
+  errEl.style.display = 'none';
+  const kind     = document.getElementById('nc-kind').value;
+  const endpoint = document.getElementById('nc-endpoint').value.trim();
+  const severity = document.getElementById('nc-severity').value;
+  if (!endpoint) {
+    errEl.textContent = 'Please enter an endpoint (email address or webhook URL).';
+    errEl.style.display = 'block';
+    return;
+  }
+  const body = new FormData();
+  body.append('channel_kind', kind);
+  body.append('endpoint',     endpoint);
+  body.append('min_severity', severity);
+  body.append('is_active',    'true');
+  try {
+    const r = await fetch('/api/v1/admin/notifications/channels', {
+      method: 'POST', body,
+      headers: { 'X-API-Key': localStorage.getItem('apiKey') || '' },
+    });
+    if (!r.ok) throw new Error(await r.text() || `HTTP ${r.status}`);
+    loadProfile();
+  } catch (e) {
+    errEl.textContent = "Couldn't add the channel: " + (e.message || e);
+    errEl.style.display = 'block';
+  }
+}
+
+
+async function deleteNotificationChannel(id) {
+  if (!confirm('Remove this delivery channel? Existing notifications stay in your inbox.')) return;
+  try {
+    const r = await fetch(`/api/v1/admin/notifications/channels/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+      headers: { 'X-API-Key': localStorage.getItem('apiKey') || '' },
+    });
+    if (!r.ok) throw new Error(await r.text() || `HTTP ${r.status}`);
+    loadProfile();
+  } catch (e) {
+    alert("Couldn't remove the channel: " + (e.message || e));
   }
 }
 

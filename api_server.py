@@ -3761,6 +3761,39 @@ async def admin_notification_channels_list(
         pool.putconn(conn)
 
 
+@app.delete("/api/v1/admin/notifications/channels/{channel_id}", tags=["admin"])
+async def admin_notification_channel_delete(
+    channel_id: UploadIdParam,   # any UUID — reused UploadIdParam validator
+    request:    Request,
+    key_info:   APIKeyInfo = Depends(require_api_key),
+):
+    """Delete a delivery channel for the calling tenant. Idempotent —
+    returns 200 with deleted=0 if the channel didn't exist or belongs
+    to a different tenant (RLS makes the tenant-scoped check natural).
+
+    Ship 3'.d (2026-07-17) — completes the tenant_notification_channel
+    CRUD surface for the frontend UI.
+    """
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                DELETE FROM tenant_notification_channel
+                 WHERE id        = %s::uuid
+                   AND tenant_id = %s::uuid
+                """,
+                (channel_id, key_info.tenant_id),
+            )
+            deleted = cur.rowcount
+        conn.commit()
+        return {"deleted": deleted, "channel_id": channel_id}
+    finally:
+        pool.putconn(conn)
+
+
 @app.post("/api/v1/admin/notifications/deliver", tags=["admin"])
 async def admin_notifications_deliver_now(
     request:  Request,
