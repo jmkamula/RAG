@@ -149,6 +149,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .typing-dot:nth-child(2){animation-delay:0.2s}
 .typing-dot:nth-child(3){animation-delay:0.4s}
 @keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+/* Ship 3'.m: inbox deep-link focus flash. Applied briefly on the
+   target row after _applyNotifFocus() scrolls to it. Purple to
+   match the app's action-color; fades to transparent. */
+.notif-focus-flash{animation:notifFocusFlash 2.2s ease-out}
+@keyframes notifFocusFlash{0%{background:rgba(133,84,217,0.28);box-shadow:0 0 0 2px rgba(133,84,217,0.35)}100%{background:transparent;box-shadow:none}}
 .msg-clarification .msg-bubble{background:#EEEDFE;border:1px solid #AFA9EC;color:#1a1a18;border-radius:10px 10px 10px 2px}
 .clarif-options{display:flex;flex-direction:column;gap:5px;margin-top:8px}
 .clarif-opt{font-size:12px;padding:7px 11px;background:#fff;border:1px solid #AFA9EC;border-radius:7px;cursor:pointer;color:#3C3489;text-align:left;font-weight:500}
@@ -860,7 +865,7 @@ function renderInbox(d, status) {
         <div style="margin-top:3px;color:#3A382E;font-size:12px;font-weight:${isRead ? '400' : '500'}">${esc(it.title)}</div>
         ${it.body ? `<div style="margin-top:4px;color:#5C5A4F;font-size:11px;line-height:1.5">${esc(it.body)}</div>` : ''}
         <div style="margin-top:6px">
-          <button onclick="_notifOpen('${it.id}','${esc(it.kind)}')" style="font-size:10px;padding:3px 8px;background:#fff;color:#534AB7;border:1px solid #C8C5E8;border-radius:3px;cursor:pointer;font-family:inherit">
+          <button onclick="_notifOpen('${it.id}','${esc(it.kind)}',${it.related_control_ref ? `'${esc(it.related_control_ref)}'` : 'null'},${it.related_entity_id ? `'${esc(it.related_entity_id)}'` : 'null'})" style="font-size:10px;padding:3px 8px;background:#fff;color:#534AB7;border:1px solid #C8C5E8;border-radius:3px;cursor:pointer;font-family:inherit">
             <i class="ti ti-arrow-right" style="font-size:9px"></i> ${esc(meta.actionLabel)}
           </button>
         </div>
@@ -875,12 +880,18 @@ function renderInbox(d, status) {
   wrap.innerHTML = html;
 }
 
-// Ship 3'.h: click the primary action button on an inbox row —
-// mark read (best-effort) then navigate to the kind's target mode.
-// Non-blocking on the mark-read call: the user's intent is to open
-// the surface, not to wait on the PATCH round-trip. Failures are
-// swallowed silently (the next inbox load will show it still unread).
-async function _notifOpen(id, kind) {
+// Ship 3'.h + Ship 3'.m: click the primary action button on an inbox
+// row — mark read (best-effort), stash a focus target for the
+// destination loader, then setMode. Non-blocking on the mark-read
+// call: the user's intent is to open the surface, not to wait on
+// the PATCH round-trip. Failures are swallowed silently (the next
+// inbox load will show it still unread).
+//
+// The (ref, entity_id) tuple lets the target loader scroll +
+// highlight the specific row via _applyNotifFocus(). Fields:
+//   ref       — control ref like 'A.5.18' or 'Art.32' (for dashboard/queue)
+//   entity_id — UUID like cascade event / upload / api_key (for cascade/docs/profile)
+async function _notifOpen(id, kind, ref, entity_id) {
   try {
     fetch(`/api/v1/tenant/notifications/${encodeURIComponent(id)}`, {
       method:  'PATCH',
@@ -888,8 +899,34 @@ async function _notifOpen(id, kind) {
       body:    JSON.stringify({action: 'read'}),
     }).catch(() => {});
   } catch (e) { /* swallow */ }
+  window._notifTarget = (ref || entity_id) ? {kind, ref, entity_id} : null;
   const meta = _notifKindMeta(kind);
   setMode(meta.mode);
+}
+
+// Ship 3'.m: called at the end of each mode's render pass. If a
+// notif deep-link set window._notifTarget, find the matching row
+// (via data-focus-ref="X" or data-focus-entity="uuid" attributes)
+// and scroll + flash it. One-shot — clears the target on run so a
+// mode switch back doesn't re-flash. No-op when nothing to focus.
+function _applyNotifFocus() {
+  const t = window._notifTarget;
+  if (!t) return;
+  window._notifTarget = null;
+  let sel = null;
+  if (t.entity_id) sel = `[data-focus-entity="${t.entity_id}"]`;
+  else if (t.ref)  sel = `[data-focus-ref="${t.ref}"]`;
+  if (!sel) return;
+  // Small delay: the loader may still be finishing its DOM writes
+  // when this fires. 60ms lets the render settle without a visible
+  // flicker.
+  setTimeout(() => {
+    const el = document.querySelector(sel);
+    if (!el) return;
+    el.scrollIntoView({behavior: 'smooth', block: 'center'});
+    el.classList.add('notif-focus-flash');
+    setTimeout(() => el.classList.remove('notif-focus-flash'), 2200);
+  }, 60);
 }
 
 async function _notifAct(id, action) {
@@ -1200,6 +1237,7 @@ function renderCascadeTimeline(d) {
   }
   html += `</div>`;
   wrap.innerHTML = html;
+  _applyNotifFocus();
 }
 
 function renderCascadeTimelineRow(it) {
@@ -1254,7 +1292,11 @@ function renderCascadeTimelineRow(it) {
   } else {
     body = esc(JSON.stringify(it));
   }
-  return `<div onclick="openCascadeEventDetail('${attr(it.kind)}','${attr(it.id)}')" style="display:flex;gap:10px;padding:8px 12px;border-bottom:1px solid #F0EDDF;font-size:11px;align-items:flex-start;cursor:pointer" onmouseover="this.style.background='#FAF8F2'" onmouseout="this.style.background=''">
+  const focusAttrs = [
+    `data-focus-entity="${attr(it.id)}"`,
+    it.control_ref ? `data-focus-ref="${attr(it.control_ref)}"` : '',
+  ].filter(Boolean).join(' ');
+  return `<div ${focusAttrs} onclick="openCascadeEventDetail('${attr(it.kind)}','${attr(it.id)}')" style="display:flex;gap:10px;padding:8px 12px;border-bottom:1px solid #F0EDDF;font-size:11px;align-items:flex-start;cursor:pointer" onmouseover="this.style.background='#FAF8F2'" onmouseout="this.style.background=''">
     <span style="display:inline-block;min-width:55px;padding:1px 6px;background:${p.bg};color:${p.color};border-radius:10px;font-size:10px;text-transform:uppercase;letter-spacing:.3px;font-weight:600">${p.label}</span>
     <span style="min-width:135px;color:#5C5A4F;font-family:monospace;font-size:10px">${esc(ts)}</span>
     <span style="flex:1;color:#3A382E;line-height:1.5">${body}</span>
@@ -2236,7 +2278,7 @@ function renderDashboard(d, freshness, implications, followups, kpis) {
         // backslash escapes in attribute values).
         const safe = JSON.stringify({...c, standard_id: fw.standard_id, display_name: fw.display_name})
           .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-        html += `<div class="heat-cell ${cls}${cpCls}" title="${escapeHtml(tip)}" data-ref="${escapeHtml(c.control_ref)}" onclick='selectHeatCell(${safe}, event)'></div>`;
+        html += `<div class="heat-cell ${cls}${cpCls}" title="${escapeHtml(tip)}" data-ref="${escapeHtml(c.control_ref)}" data-focus-ref="${escapeHtml(c.control_ref)}" onclick='selectHeatCell(${safe}, event)'></div>`;
       }
       html += '</div></div>';
     }
@@ -2244,6 +2286,7 @@ function renderDashboard(d, freshness, implications, followups, kpis) {
   }
 
   wrap.innerHTML = html;
+  _applyNotifFocus();
 }
 
 function escapeHtml(s) {
@@ -2798,7 +2841,7 @@ function renderStage1(controls, total) {
   for (const c of controls) {
     const safe = JSON.stringify(c).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
     html += `
-      <div class="qcard" data-ref="${c.control_ref}" onclick='selectStage1(${safe}, event)'>
+      <div class="qcard" data-ref="${c.control_ref}" data-focus-ref="${c.control_ref}" onclick='selectStage1(${safe}, event)'>
         <div class="qcard-top">
           <div>
             <div class="qcard-ref">${c.control_ref}</div>
@@ -2813,6 +2856,7 @@ function renderStage1(controls, total) {
   }
   html += '</div>';
   body.innerHTML = html;
+  _applyNotifFocus();
 }
 
 function renderStage2(proposals, total) {
@@ -2832,7 +2876,7 @@ function renderStage2(proposals, total) {
     const proposed = p.proposed_finding;
     const live     = p.live_finding;
     html += `
-      <div class="qcard" data-ref="${p.control_ref}" onclick='selectStage2(${safe}, event)'>
+      <div class="qcard" data-ref="${p.control_ref}" data-focus-ref="${p.control_ref}" onclick='selectStage2(${safe}, event)'>
         <div class="qcard-top">
           <div>
             <div class="qcard-ref">${p.control_ref}</div>
@@ -2849,6 +2893,7 @@ function renderStage2(proposals, total) {
   }
   html += '</div>';
   body.innerHTML = html;
+  _applyNotifFocus();
 }
 
 async function selectStage1(c, ev) {

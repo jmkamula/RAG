@@ -14,7 +14,7 @@ Each invocation:
   3. Logs one `sweep_log` row per work_type (running → completed/failed)
   4. Exits with code 0 (all completed) or 1 (any failed)
 
-Work types (MVP):
+Work types (registered in _WORK_TYPES at the bottom):
 
   fact_recompute — for each fact in fact_source_config, for each tenant
     whose last recompute is older than refresh_days, call
@@ -22,12 +22,35 @@ Work types (MVP):
     all tenants for one fact in one loop, so a slow config doesn't
     stall the batch.
 
-  overdue_followups (stub) — placeholder for cascade events past
-    followup_due_at. Currently logs the count; delivery hooks land
-    when the notification arc ships.
+  overdue_followups — backstop for cascade write-path (engine.py:1085
+    + posture_overlay.py:205). Marks expected_followup_event rows
+    'overdue' when expires_at has passed; fires followup_overdue +
+    implication_overdue notifications. Severity by cascade_depth.
+    See Ship 3'.f.
 
-  freshness_expiry (stub) — placeholder for posture rows past
-    freshness_days. Currently logs the count.
+  freshness_expiry — Comply postures past their leaf's freshness_days
+    fire a freshness_expiry notification. Severity ladder by
+    staleness_ratio (medium / high / critical). 7-day dedup window.
+    See Ship 3'.b.
+
+  cite_verification_overdue — active external_evidence_source rows
+    past next_review_due. Auditor-critical: severity skews harder
+    than freshness (never-verified → critical, past-due → critical
+    / high). 7-day dedup window. See Ship 3'.g.
+
+  api_key_expiring — api_keys.expires_at approaching. Three
+    escalating buckets (30d medium / 7d high / 1d critical) using
+    the bucket label in related_control_ref for per-bucket dedup.
+    See Ship 3'.i.
+
+  notification_delivery — SMTP + Slack workers (rag.notifications.
+    deliver.deliver_all). Severity gate, dedup on already-delivered,
+    retry until >7 days old. See Ship 3'.a.
+
+  notification_retention — hard-delete stale tenant_notification +
+    notification_delivery_attempt rows. Three delete rules
+    (dismissed 30d / read 90d / max_age 365d) + attempt aging (90d).
+    See Ship 3'.k.
 
 Zero external dependencies beyond psycopg2 + the app code. Safe to
 run multiple invocations concurrently — each writes its own tick_id
