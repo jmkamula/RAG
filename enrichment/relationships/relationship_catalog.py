@@ -2343,7 +2343,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='Art.32.1.d', source_standard_id='GDPR:2016/679',
-        target_ref='A.9.1', target_standard_id='ISO27001:2022',
+        target_ref='9.1', target_standard_id='ISO27001:2022',
         edge_type='IMPLEMENTS',
         rationale='Monitoring, measurement, analysis and evaluation is the ISO management system mechanism for ongoing effectiveness testing.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -2351,7 +2351,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='Art.32.2', source_standard_id='GDPR:2016/679',
-        target_ref='A.6.1.2', target_standard_id='ISO27001:2022',
+        target_ref='6.1.2', target_standard_id='ISO27001:2022',
         edge_type='IMPLEMENTS',
         rationale='Information security risk assessment is the direct implementation of Art.32(2)\'s requirement to assess risks to rights and freedoms when determining appropriate security measures.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -2415,7 +2415,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='Art.35', source_standard_id='GDPR:2016/679',
-        target_ref='A.6.1.2', target_standard_id='ISO27001:2022',
+        target_ref='6.1.2', target_standard_id='ISO27001:2022',
         edge_type='IMPLEMENTS',
         rationale='Information security risk assessment is the ISO framework that most closely aligns with DPIA methodology — Art.35 requires systematic assessment of risks to rights and freedoms, which ISO 6.1.2 structures. DPIA extends this to privacy specifically.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -2575,7 +2575,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='Art.5.2', source_standard_id='GDPR:2016/679',
-        target_ref='A.9.1', target_standard_id='ISO27001:2022',
+        target_ref='9.1', target_standard_id='ISO27001:2022',
         edge_type='IMPLEMENTS',
         rationale='Monitoring, measurement, analysis and evaluation produces the metrics and records that demonstrate accountability to regulators.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -3415,7 +3415,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='Art.24', source_standard_id='GDPR:2016/679',
-        target_ref='A.9.3', target_standard_id='ISO27001:2022',
+        target_ref='9.3', target_standard_id='ISO27001:2022',
         edge_type='SUPPORTS',
         rationale='Management review produces documented evidence of top management\'s ongoing accountability for information security and data protection.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -3607,7 +3607,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='Art.5.2', source_standard_id='GDPR:2016/679',
-        target_ref='A.9.3', target_standard_id='ISO27001:2022',
+        target_ref='9.3', target_standard_id='ISO27001:2022',
         edge_type='SUPPORTS',
         rationale='Management review demonstrates top management accountability for GDPR compliance at governance level.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -4151,7 +4151,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='Art.22', source_standard_id='GDPR:2016/679',
-        target_ref='A.6.1.2', target_standard_id='ISO27001:2022',
+        target_ref='6.1.2', target_standard_id='ISO27001:2022',
         edge_type='GOVERNANCE',
         rationale='Risk assessment must evaluate risks of automated decision-making including profiling — Art.22 requires DPIA in many cases.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -4159,7 +4159,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='Art.32', source_standard_id='GDPR:2016/679',
-        target_ref='A.6.1.2', target_standard_id='ISO27001:2022',
+        target_ref='6.1.2', target_standard_id='ISO27001:2022',
         edge_type='GOVERNANCE',
         rationale='Risk assessment is the explicit mechanism Art.32 requires — \'appropriate to the risk\' means a documented risk assessment must justify the measures chosen. ISO 6.1.2 is the framework.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -4167,7 +4167,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='Art.5', source_standard_id='GDPR:2016/679',
-        target_ref='A.4.1', target_standard_id='ISO27001:2022',
+        target_ref='4.1', target_standard_id='ISO27001:2022',
         edge_type='GOVERNANCE',
         rationale='Understanding the organisation\'s context is the foundation for determining how GDPR principles apply to the business.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -4183,7 +4183,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='Art.5', source_standard_id='GDPR:2016/679',
-        target_ref='A.6.1.2', target_standard_id='ISO27001:2022',
+        target_ref='6.1.2', target_standard_id='ISO27001:2022',
         edge_type='GOVERNANCE',
         rationale='Risk assessment process identifies and addresses risks to personal data principles — the ISO mechanism for systematic GDPR compliance.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -4191,7 +4191,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='Art.6', source_standard_id='GDPR:2016/679',
-        target_ref='A.6.1.2', target_standard_id='ISO27001:2022',
+        target_ref='6.1.2', target_standard_id='ISO27001:2022',
         edge_type='GOVERNANCE',
         rationale='Risk assessment must consider lawfulness risks — processing without a legal basis is a high-probability, high-impact risk.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
@@ -4199,7 +4199,7 @@ XFW_EDGES: list[RelationshipEdge] = [
     ),
     RelationshipEdge(
         source_ref='Art.85', source_standard_id='GDPR:2016/679',
-        target_ref='A.6.1.2', target_standard_id='ISO27001:2022',
+        target_ref='6.1.2', target_standard_id='ISO27001:2022',
         edge_type='GOVERNANCE',
         rationale='Risk assessment should consider Art.85 scenarios where the organisation\'s activities involve expression or information rights that may conflict with data subject rights.',
         citation='iso_nodes_phase1.json + gdpr_nodes_phase2.json (cross_framework_summary)',
