@@ -198,35 +198,201 @@ def sweep_fact_recompute(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
 
 
 def sweep_overdue_followups(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
-    """Stub — count cascade events past followup_due_at, log for now.
-    Actual notification delivery hooks land with the notification arc."""
+    """Backstop sweep for cascade follow-ups that missed the write-path notify.
+
+    The cascade engine (`rag/cascade/engine.py`) and posture overlay
+    (`rag/cascade/posture_overlay.py`) fire `followup_overdue` +
+    `implication_overdue` notifications INLINE when they see a
+    pending expected_followup_event past `expires_at` or a
+    triggered_implication past `due_date`. That path only runs when
+    another verification write triggers cascade reprocessing — if
+    no write happens after the deadline, nothing fires.
+
+    This sweep is the safety net. It runs across all tenants every
+    tick, marks expired expected_followup_event rows as 'overdue'
+    (mirror of engine.py:1085), notifies for both classes, and
+    lets the partial unique index on tenant_notification dedup
+    against write-path notifications that already fired.
+
+    Structure per-tenant so RLS + app.tenant_id GUC work correctly.
+    """
     row_id = _log_start(pg_conn, tick_id, "overdue_followups")
-    scanned = acted = errored = 0
-    detail: dict = {"note": "stub — counting only, no delivery yet"}
+    scanned    = 0
+    acted      = 0
+    errored    = 0
+    per_tenant: dict[str, dict] = {}
     error_type = error_detail = None
+
     try:
-        # Only count if the table exists (defensive for envs without cascade)
+        from collections import defaultdict
+
+        # ── Step 1: gather pending overdue rows across all tenants ──
+        # Uses arioncomply_app's permissive `app_*_all` policies via
+        # `USING (true)` grants added in Ship 3'.d — same pattern as
+        # sweep_freshness_expiry. Table-owner-set RLS on the individual
+        # cascade tables still needs the per-tenant GUC on WRITES.
+        expected_by_tenant:  dict[str, list] = defaultdict(list)
+        implication_by_tenant: dict[str, list] = defaultdict(list)
+
         with pg_conn.cursor() as cur:
-            cur.execute("""
-                SELECT to_regclass('cascade_events') IS NOT NULL
-            """)
-            if cur.fetchone()[0]:
+            if _table_exists(cur, "expected_followup_event"):
                 cur.execute("""
-                    SELECT count(*) FROM cascade_events
-                     WHERE followup_due_at IS NOT NULL
-                       AND followup_due_at < NOW()
-                       AND (acknowledged_at IS NULL OR acknowledged_at = 'epoch'::timestamptz)
+                    SELECT tenant_id::text,
+                           id::text,
+                           source_event_type,
+                           expected_event_type,
+                           window_days,
+                           expires_at
+                      FROM expected_followup_event
+                     WHERE status     = 'pending'
+                       AND expires_at < NOW()
+                     ORDER BY tenant_id, expires_at
                 """)
-                scanned = int(cur.fetchone()[0] or 0)
-                detail["overdue_count"] = scanned
+                for row in cur.fetchall():
+                    expected_by_tenant[row[0]].append(row[1:])
+
+            if _table_exists(cur, "triggered_implication"):
+                cur.execute("""
+                    SELECT tenant_id::text,
+                           id::text,
+                           target_control_ref,
+                           target_standard_id,
+                           expected_action,
+                           due_date,
+                           cascade_depth
+                      FROM triggered_implication
+                     WHERE status   = 'pending'
+                       AND due_date IS NOT NULL
+                       AND due_date < NOW()
+                     ORDER BY tenant_id, due_date
+                """)
+                for row in cur.fetchall():
+                    implication_by_tenant[row[0]].append(row[1:])
+
+        all_tenants = set(expected_by_tenant.keys()) | set(implication_by_tenant.keys())
+        scanned = sum(len(v) for v in expected_by_tenant.values()) + \
+                  sum(len(v) for v in implication_by_tenant.values())
+
+        if dry_run or not all_tenants:
+            _log_complete(
+                pg_conn, row_id, scanned, acted, errored,
+                {"per_tenant": {}, "dry_run": dry_run},
+                status="completed",
+            )
+            return {"work_type": "overdue_followups", "scanned": scanned,
+                    "acted_on": 0, "errored": 0,
+                    "detail": {"per_tenant": {}, "dry_run": dry_run}}
+
+        # ── Step 2: per-tenant mark + notify ────────────────────────
+        from rag.cascade.notify import notify as _notify
+
+        for tenant_id in all_tenants:
+            tenant_acted = 0
+            expected_rows = expected_by_tenant.get(tenant_id, [])
+            impl_rows     = implication_by_tenant.get(tenant_id, [])
+
+            with pg_conn.cursor() as cur:
+                cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                            (tenant_id,))
+
+                # expected_followup_event: mark 'overdue' + notify.
+                # Mirror of engine.py:1085 but scoped to still-pending
+                # rows we already fetched (no re-race).
+                for (fid, src_event, exp_event, window_d, expires_at) in expected_rows:
+                    cur.execute("""
+                        UPDATE expected_followup_event
+                           SET status      = 'overdue',
+                               resolved_at = NOW()
+                         WHERE id     = %s::uuid
+                           AND status = 'pending'
+                        RETURNING id
+                    """, (fid,))
+                    if cur.fetchone() is None:
+                        # Another writer got there first — skip notify.
+                        continue
+
+                    _title = (f"Follow-up overdue: "
+                              f"'{src_event.replace('_',' ')}' expected "
+                              f"'{exp_event.replace('_',' ')}'")
+                    _body  = (f"It's been {window_d} day"
+                              f"{'s' if window_d != 1 else ''} since "
+                              f"'{src_event.replace('_',' ')}' fired and we "
+                              f"still don't have the expected "
+                              f"'{exp_event.replace('_',' ')}' follow-up on "
+                              f"file.")
+                    result = _notify(
+                        cur,
+                        tenant_id           = tenant_id,
+                        kind                = "followup_overdue",
+                        title               = _title,
+                        body                = _body,
+                        severity            = "high",
+                        related_entity_kind = "expected_followup_event",
+                        related_entity_id   = fid,
+                        related_event_type  = src_event,
+                    )
+                    if result is not None:
+                        tenant_acted += 1
+
+                # triggered_implication: notify only. The table has no
+                # 'overdue' status in its CHECK — pending is expected
+                # while the tenant works remediation. Dedup via the
+                # partial unique index (kind + implication_id).
+                for (impl_id, ctrl_ref, std_id, exp_action, due_date, depth) in impl_rows:
+                    _title = (f"Overdue: {ctrl_ref} requires "
+                              f"{exp_action.replace('_',' ')}")
+                    _body  = (f"A cascade follow-up on {ctrl_ref} is past due. "
+                              f"Expected action: "
+                              f"{exp_action.replace('_',' ')}. Depth "
+                              f"{depth} in the cascade path.")
+                    # Severity by cascade depth — deeper implications
+                    # tend to be secondary/derivative and can be lower
+                    # priority; direct (depth 0-1) implications rank
+                    # critical because the parent event's SLA is
+                    # actively slipping.
+                    severity = "critical" if depth <= 1 else "high"
+                    result = _notify(
+                        cur,
+                        tenant_id           = tenant_id,
+                        kind                = "implication_overdue",
+                        title               = _title,
+                        body                = _body,
+                        severity            = severity,
+                        related_entity_kind = "triggered_implication",
+                        related_entity_id   = impl_id,
+                        related_control_ref = ctrl_ref,
+                        related_event_type  = exp_action,
+                    )
+                    if result is not None:
+                        tenant_acted += 1
+
+            if tenant_acted or expected_rows or impl_rows:
+                per_tenant[tenant_id[:8]] = {
+                    "expected_overdue":     len(expected_rows),
+                    "implications_overdue": len(impl_rows),
+                    "notified":             tenant_acted,
+                }
+            acted += tenant_acted
+
+        pg_conn.commit()
     except Exception as e:
         error_type = type(e).__name__
         error_detail = str(e)[:400]
+        errored += 1
+        try: pg_conn.rollback()
+        except Exception: pass
+
     status = "completed" if error_type is None else "failed"
+    detail = {"per_tenant": per_tenant, "dry_run": dry_run}
     _log_complete(pg_conn, row_id, scanned, acted, errored, detail,
                   status=status, error_type=error_type, error_detail=error_detail)
     return {"work_type": "overdue_followups", "scanned": scanned,
             "acted_on": acted, "errored": errored, "detail": detail}
+
+
+def _table_exists(cur, name: str) -> bool:
+    cur.execute("SELECT to_regclass(%s) IS NOT NULL", (name,))
+    return bool(cur.fetchone()[0])
 
 
 # Dedup window: don't fire another freshness_expiry notification for

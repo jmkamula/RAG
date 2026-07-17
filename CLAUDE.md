@@ -106,7 +106,7 @@ When a retire-by date passes, delete the legacy path.
 | Outbound notification delivery (email/Slack) — SMTP + Slack webhook workers in `rag/notifications/deliver.py`; wired to `notification_delivery` sweep work_type. Producers exist for cascade events (`rag/cascade/notify.py`); other producers land per feature. | SHIPPED code, wire per producer |
 | UPDATES_FACT recompute — `rag/facts/recompute.py`; wired to `fact_recompute` sweep work_type reading `fact_source_config`. | SHIPPED |
 | Periodic sweep scheduler — `rag/scheduler/tick.py` (Wave 3b, 2026-07-13). Ship 3'.a (2026-07-17) productionizes via `ops/systemd/arioncomply-sweep.timer` (30-min cadence). See "Periodic sweep scheduler" section below. | SHIPPED |
-| Notification producers — cascade events (built-in) + `freshness_expiry` (Ship 3'.b) + `nc_surfaced` / `upload_processed` (Ship 3'.c) + `stage2_proposal_ready` / `upload_failed` (Ship 3'.e). 10 kinds in `tenant_notification_kind_check`. Two remaining candidates: `cite_verification_overdue`, `posture_flip_to_comply`, `api_key_expiring`. | SHIPPED |
+| Notification producers — cascade events (built-in) + `freshness_expiry` (Ship 3'.b) + `nc_surfaced` / `upload_processed` (Ship 3'.c) + `stage2_proposal_ready` / `upload_failed` (Ship 3'.e) + `overdue_followups` sweep backstop replacing counting stub (Ship 3'.f). 10 kinds in `tenant_notification_kind_check`. Remaining candidates: `cite_verification_overdue`, `posture_flip_to_comply`, `api_key_expiring`. | SHIPPED |
 | ISO 27001:2013→2022 renumbering in source JSONs (12 stale refs) | DEFERRED — data quality |
 
 ## Key memory entries

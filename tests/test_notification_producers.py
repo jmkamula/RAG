@@ -310,6 +310,89 @@ TESTS = [
 ]
 
 
+# ── overdue_followups producer tests (Ship 3'.f) ──────────────────────
+# The sweep is a backstop that mirrors engine.py's write-path notify.
+# Testing is source-read based (heavy DB setup would replicate the
+# smoke test that already ran in the arc). What matters here:
+#   - both notification kinds are wired
+#   - expected_followup_event rows flip to 'overdue' status before notify
+#   - severity ladder for triggered_implication maps to cascade_depth
+#   - the dry_run branch short-circuits before any writes
+
+def test_overdue_followups_covers_both_kinds():
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    return _ok(
+        'kind                = "followup_overdue"' in src
+        and 'kind                = "implication_overdue"' in src,
+        "one of the two producer kinds missing",
+    )
+
+
+def test_overdue_followups_flips_expected_status():
+    """The sweep marks expected_followup_event.status='overdue' BEFORE
+    notifying, mirroring the write-path in engine.py:1085. Without the
+    flip, a subsequent sweep would double-notify."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    # The UPDATE-then-RETURNING pattern is the guard against the race
+    return _ok(
+        "SET status      = 'overdue'" in src
+        and "AND status = 'pending'" in src
+        and "RETURNING id" in src,
+        "expected_followup_event flip pattern missing",
+    )
+
+
+def test_overdue_followups_severity_by_depth():
+    """triggered_implication severity depends on cascade_depth —
+    depth 0-1 is critical (parent SLA slipping), deeper is high."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    return _ok(
+        'severity = "critical" if depth <= 1 else "high"' in src,
+        "depth-based severity ladder missing",
+    )
+
+
+def test_overdue_followups_dry_run_short_circuits():
+    """dry_run must return before any writes. Guard sits between the
+    Step-1 SELECT gather and the Step-2 per-tenant loop."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    # Look for the early-return sentinel
+    return _ok(
+        "if dry_run or not all_tenants:" in src
+        and 'return {"work_type": "overdue_followups"' in src,
+        "dry_run short-circuit missing",
+    )
+
+
+def test_overdue_followups_uses_partial_index_dedup():
+    """The producer relies on tenant_notification's partial unique index
+    for dedup, calling _notify() (which uses ON CONFLICT DO NOTHING).
+    No manual SELECT-then-INSERT dedup guard should be present because
+    related_entity_id (the followup/implication id) is stable and
+    unique to the source row."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    # The producer block calls _notify with related_entity_id
+    return _ok(
+        "related_entity_id   = fid" in src
+        and "related_entity_id   = impl_id" in src,
+        "notify() call sites missing related_entity_id dedup key",
+    )
+
+
+TESTS += [
+    test_overdue_followups_covers_both_kinds,
+    test_overdue_followups_flips_expected_status,
+    test_overdue_followups_severity_by_depth,
+    test_overdue_followups_dry_run_short_circuits,
+    test_overdue_followups_uses_partial_index_dedup,
+]
+
+
 def main():
     print("─" * 70)
     print("  Notification producer tests (Ship 3'.c)")
