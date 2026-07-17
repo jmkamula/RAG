@@ -393,6 +393,81 @@ TESTS += [
 ]
 
 
+# ── cite_verification_overdue producer tests (Ship 3'.g) ──────────────
+
+def test_cite_verification_overdue_wiring():
+    """The sweep is registered in _WORK_TYPES and its function is
+    defined."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    return _ok(
+        'def sweep_cite_verification_overdue(' in src
+        and '"cite_verification_overdue":' in src
+        and 'kind                = "cite_verification_overdue"' in src,
+        "wiring incomplete",
+    )
+
+
+def test_cite_verification_overdue_severity_ladder():
+    """Never-verified past due → critical; verified but past due by
+    >1 cadence → critical; past due by ≤1 cadence → high. Cite
+    verification skews harder than freshness_expiry because there's
+    no in-product artefact."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    return _ok(
+        'if last_verified_at is None:\n                        severity = "critical"' in src
+        and 'elif ratio > 1.0:\n                        severity = "critical"' in src
+        and 'severity = "high"' in src,
+        "severity ladder missing",
+    )
+
+
+def test_cite_verification_overdue_dedup_window():
+    """The 7-day dedup window is belt-and-braces on top of the partial
+    unique index — catches the case where the tenant dismissed a prior
+    notification but the source is still overdue. We respect the
+    dismissal for the window."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    return _ok(
+        "_CITE_VERIFICATION_DEDUP_DAYS = 7" in src
+        and "make_interval(days => %s)" in src
+        and "AND read_at IS NULL AND dismissed_at IS NULL" in src,
+        "dedup pattern missing",
+    )
+
+
+def test_cite_verification_overdue_control_ref_extraction():
+    """leaf_id format is `req:CONTROL_REF:LEAF_KEY` → control_ref = middle segment."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    return _ok(
+        'parts = leaf_id.split(":", 2)' in src
+        and 'control_ref = parts[1]' in src,
+        "control_ref extraction missing",
+    )
+
+
+def test_cite_verification_overdue_dry_run_short_circuits():
+    """dry_run + no data both short-circuit before writes."""
+    import rag.scheduler.tick as tk
+    src = Path(tk.__file__).read_text()
+    return _ok(
+        "if dry_run or not by_tenant:" in src,
+        "dry_run guard missing",
+    )
+
+
+TESTS += [
+    test_cite_verification_overdue_wiring,
+    test_cite_verification_overdue_severity_ladder,
+    test_cite_verification_overdue_dedup_window,
+    test_cite_verification_overdue_control_ref_extraction,
+    test_cite_verification_overdue_dry_run_short_circuits,
+]
+
+
 def main():
     print("─" * 70)
     print("  Notification producer tests (Ship 3'.c)")

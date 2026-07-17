@@ -590,6 +590,198 @@ def sweep_freshness_expiry(pg_conn, tick_id: str, dry_run: bool = False) -> dict
             "acted_on": acted, "errored": errored, "detail": detail}
 
 
+# Dedup window for cite verification — mirror of _FRESHNESS_DEDUP_DAYS.
+# Once we've told the tenant a cite is overdue, don't spam them every
+# 30 min for the same source. Explicit re-verification bumps
+# next_review_due forward + the row falls out of the SELECT anyway.
+_CITE_VERIFICATION_DEDUP_DAYS = 7
+
+
+def sweep_cite_verification_overdue(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
+    """Per-tenant sweep: active external_evidence_source rows whose
+    next_review_due has passed without a fresh verification bumping
+    last_verified_at forward.
+
+    Auditor-critical: a cited system as evidence *without* a recent
+    verification log entry is worse than stale in-product evidence.
+    The tenant is claiming "Okta manages access" but hasn't confirmed
+    that claim is still true.
+
+    Severity ladder — cite verification skews harder than
+    freshness_expiry because there's no artefact in-product at all
+    for the sample review to fall back on:
+      staleness_ratio = (now - next_review_due) / cadence_days
+      never_verified (last_verified_at IS NULL AND past due)   → critical
+      staleness_ratio > 1.0                                     → critical
+      staleness_ratio in (0, 1.0]                              → high
+
+    (staleness_ratio ≤ 0 means past due but by less than one cadence
+    period — still auditor-critical because the promise-of-freshness
+    contract is broken. High rather than critical only because there's
+    time to remediate before the next audit window.)
+
+    Dedup: skip if an unread/undismissed cite_verification_overdue
+    notification for the same (tenant, source_id) exists within the
+    last _CITE_VERIFICATION_DEDUP_DAYS. The partial unique index
+    already handles per-source dedup; the time window is belt-and-
+    braces so re-verification just outside the window still surfaces
+    without re-notify.
+    """
+    row_id = _log_start(pg_conn, tick_id, "cite_verification_overdue")
+    scanned    = 0
+    acted      = 0
+    errored    = 0
+    per_tenant: dict[str, dict] = {}
+    error_type = error_detail = None
+
+    try:
+        from collections import defaultdict
+
+        # Cross-tenant read via arioncomply_app's permissive
+        # `app_external_evidence_source_all` policy (schema_v73).
+        with pg_conn.cursor() as cur:
+            cur.execute("""
+                SELECT tenant_id::text,
+                       id::text,
+                       must_id,
+                       leaf_id,
+                       cadence_days,
+                       last_verified_at,
+                       next_review_due
+                  FROM external_evidence_source
+                 WHERE is_active       = TRUE
+                   AND next_review_due IS NOT NULL
+                   AND next_review_due < NOW()
+                 ORDER BY tenant_id, next_review_due
+            """)
+            rows = cur.fetchall()
+
+        by_tenant: dict[str, list] = defaultdict(list)
+        for r in rows:
+            by_tenant[r[0]].append(r[1:])
+        scanned = len(rows)
+
+        if dry_run or not by_tenant:
+            _log_complete(
+                pg_conn, row_id, scanned, acted, errored,
+                {"per_tenant": {}, "dry_run": dry_run,
+                 "dedup_days": _CITE_VERIFICATION_DEDUP_DAYS},
+                status="completed",
+            )
+            return {"work_type": "cite_verification_overdue",
+                    "scanned": scanned, "acted_on": 0, "errored": 0,
+                    "detail": {"per_tenant": {}, "dry_run": dry_run}}
+
+        import datetime as _dt
+        now = _dt.datetime.now(_dt.timezone.utc)
+
+        for tenant_id, tenant_rows in by_tenant.items():
+            tenant_acted = 0
+            tenant_dedup = 0
+
+            with pg_conn.cursor() as cur:
+                cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                            (tenant_id,))
+                for (src_id, must_id, leaf_id, cadence_days,
+                     last_verified_at, next_review_due) in tenant_rows:
+
+                    # Skip dedup window check.
+                    cur.execute("""
+                        SELECT 1 FROM tenant_notification
+                         WHERE tenant_id         = %s::uuid
+                           AND kind              = 'cite_verification_overdue'
+                           AND related_entity_id = %s::uuid
+                           AND read_at IS NULL AND dismissed_at IS NULL
+                           AND fired_at > NOW() - make_interval(days => %s)
+                         LIMIT 1
+                    """, (tenant_id, src_id, _CITE_VERIFICATION_DEDUP_DAYS))
+                    if cur.fetchone() is not None:
+                        tenant_dedup += 1
+                        continue
+
+                    # Severity ladder.
+                    nrd_aware = (next_review_due if next_review_due.tzinfo
+                                 else next_review_due.replace(tzinfo=_dt.timezone.utc))
+                    days_over = (now - nrd_aware).total_seconds() / 86400.0
+                    ratio = days_over / max(cadence_days, 1)
+
+                    if last_verified_at is None:
+                        severity = "critical"
+                    elif ratio > 1.0:
+                        severity = "critical"
+                    else:
+                        severity = "high"
+
+                    # Extract control ref from leaf_id ('req:A.5.15:policy'
+                    # → 'A.5.15') for display + related_control_ref.
+                    parts = leaf_id.split(":", 2)
+                    control_ref = parts[1] if len(parts) >= 2 else leaf_id
+
+                    if last_verified_at is None:
+                        _hist = "never been verified"
+                    else:
+                        lva = (last_verified_at if last_verified_at.tzinfo
+                               else last_verified_at.replace(tzinfo=_dt.timezone.utc))
+                        days_since = int((now - lva).total_seconds() / 86400.0)
+                        _hist = f"last verified {days_since} days ago"
+
+                    title = (
+                        f"Cited source for {control_ref} is overdue "
+                        f"for verification"
+                    )
+                    body = (
+                        f"The cited external system covering "
+                        f"{must_id} ({_hist}) has passed its "
+                        f"{cadence_days}-day verification cadence by "
+                        f"{int(days_over)} day{'s' if int(days_over) != 1 else ''}. "
+                        f"Auditors expect a fresh verification log "
+                        f"entry — re-verify the cite or downgrade the "
+                        f"claim."
+                    )
+
+                    from rag.cascade.notify import notify as _notify
+                    result = _notify(
+                        cur,
+                        tenant_id           = tenant_id,
+                        kind                = "cite_verification_overdue",
+                        title               = title,
+                        body                = body,
+                        severity            = severity,
+                        related_entity_kind = "external_evidence_source",
+                        related_entity_id   = src_id,
+                        related_control_ref = control_ref,
+                        related_event_type  = "cite_verification_overdue",
+                    )
+                    if result is not None:
+                        tenant_acted += 1
+
+            if tenant_acted or tenant_rows or tenant_dedup:
+                per_tenant[tenant_id[:8]] = {
+                    "overdue":  len(tenant_rows),
+                    "notified": tenant_acted,
+                    "deduped":  tenant_dedup,
+                }
+            acted += tenant_acted
+
+        pg_conn.commit()
+    except Exception as e:
+        error_type = type(e).__name__
+        error_detail = str(e)[:400]
+        errored += 1
+        try: pg_conn.rollback()
+        except Exception: pass
+
+    status = "completed" if error_type is None else "failed"
+    detail = {"per_tenant": per_tenant,
+              "dedup_days": _CITE_VERIFICATION_DEDUP_DAYS,
+              "dry_run":    dry_run}
+    _log_complete(pg_conn, row_id, scanned, acted, errored, detail,
+                  status=status, error_type=error_type, error_detail=error_detail)
+    return {"work_type": "cite_verification_overdue",
+            "scanned": scanned, "acted_on": acted,
+            "errored": errored, "detail": detail}
+
+
 # ── Public tick runner ───────────────────────────────────────────────
 
 def sweep_notification_delivery(pg_conn, tick_id: str, dry_run: bool = False) -> dict:
@@ -636,10 +828,11 @@ def sweep_notification_delivery(pg_conn, tick_id: str, dry_run: bool = False) ->
 
 
 _WORK_TYPES = {
-    "fact_recompute":         sweep_fact_recompute,
-    "overdue_followups":      sweep_overdue_followups,
-    "freshness_expiry":       sweep_freshness_expiry,
-    "notification_delivery":  sweep_notification_delivery,
+    "fact_recompute":              sweep_fact_recompute,
+    "overdue_followups":           sweep_overdue_followups,
+    "freshness_expiry":            sweep_freshness_expiry,
+    "cite_verification_overdue":   sweep_cite_verification_overdue,
+    "notification_delivery":       sweep_notification_delivery,
 }
 
 
