@@ -1511,11 +1511,15 @@ def make_classify_node(
     Node: classify intent.
 
     Ship 1.12 (2026-07-14): retrieval-first consensus layer runs
-    BEFORE the legacy classifier calls. When consensus reaches a
-    confident verdict, the LLM classifier is skipped entirely.
-    Ambiguous verdicts drive a deterministic clarification.
-    Insufficient verdicts fall through to the legacy path.
-    Escape hatch: USE_LEGACY_CLASSIFIER=1 disables consensus entirely.
+    BEFORE the LLM classifier. When consensus reaches a confident
+    verdict, the LLM classifier is skipped entirely. Ambiguous
+    verdicts drive a deterministic clarification. Insufficient
+    verdicts fall through to the LLM classifier (intra-consensus
+    fallback for rare cases).
+
+    Ship 2'.o (2026-07-16): retired the USE_LEGACY_CLASSIFIER
+    escape hatch — consensus always runs. To roll back this arc,
+    git revert the Ship 2'.o commit.
 
     Args:
         classifier:     QueryClassifier (LLM-backed fallback).
@@ -1591,84 +1595,90 @@ def make_classify_node(
         # a confident verdict, the LLM classifier is skipped entirely.
         # See docs / commit 8c40985 for design.
         from rag.consensus import (
-            run_consensus, intent_dict_from_consensus, consensus_layer_enabled,
+            run_consensus, intent_dict_from_consensus,
         )
         from rag.consensus.config import default_config
 
-        if consensus_layer_enabled():
-            import types as _types
-            _tenant_ctx = _types.SimpleNamespace(
-                posture = tenant_posture or {},
-                scope   = _types.SimpleNamespace(
-                    queryable_standards = state["standards"],
-                ),
+        # Ship 2'.o (2026-07-16): consensus always runs. The
+        # USE_LEGACY_CLASSIFIER kill-switch was retired — see
+        # CLAUDE.md legacy tracker. The insufficient-verdict fall-
+        # through to the LLM classifier below is intra-consensus and
+        # remains — that's the design, not a kill switch.
+        import types as _types
+        _tenant_ctx = _types.SimpleNamespace(
+            posture = tenant_posture or {},
+            scope   = _types.SimpleNamespace(
+                queryable_standards = state["standards"],
+            ),
+        )
+        try:
+            _consensus = run_consensus(
+                query               = query,
+                tenant_context      = _tenant_ctx,
+                session_context_arg = session,
+                retriever           = classifier.retriever,
+                cfg                 = default_config(),
             )
-            try:
-                _consensus = run_consensus(
-                    query               = query,
-                    tenant_context      = _tenant_ctx,
-                    session_context_arg = session,
-                    retriever           = classifier.retriever,
-                    cfg                 = default_config(),
+        except Exception as _e:
+            # Consensus errors must never break the classify node.
+            if logger:
+                logger.log_call(
+                    step="consensus_error", model="", system="",
+                    user=str(_e)[:200], response="", latency_ms=0,
                 )
-            except Exception as _e:
-                # Consensus errors must never break the classify node.
-                if logger:
-                    logger.log_call(
-                        step="consensus_error", model="", system="",
-                        user=str(_e)[:200], response="", latency_ms=0,
-                    )
-                _consensus = None
+            _consensus = None
 
-            # Log the consensus decision (silent-fail).
-            _log_consensus_result(
-                state, query, _consensus,
-                tenant_uuid=getattr(classifier.tenant, "tenant_id", None),
-            )
+        # Log the consensus decision (silent-fail).
+        _log_consensus_result(
+            state, query, _consensus,
+            tenant_uuid=getattr(classifier.tenant, "tenant_id", None),
+        )
 
-            # Consensus is "confident" ONLY if it also produced a
-            # question_type opinion. Signals may lock a ref (e.g.
-            # explicit_refs on A.5.18) without knowing whether the
-            # user wants posture / documents / definition. In that
-            # case fall through to the LLM classifier — it has the
-            # semantic breadth to decide.
-            _has_qt = (_consensus is not None
-                       and _consensus.question_type
-                       and _consensus.question_type != "unknown")
-            if _consensus is not None and _consensus.verdict == "confident" and _has_qt:
-                # Skip the LLM classifier entirely — trust consensus.
-                out = intent_dict_from_consensus(_consensus)
-                if logger:
-                    logger.log_call(
-                        step="consensus_confident", model="", system="",
-                        user=query[:200],
-                        response=(
-                            f"verdict={_consensus.verdict} "
-                            f"refs={_consensus.refs[:3]} "
-                            f"qt={_consensus.question_type} "
-                            f"corroborators={_consensus.corroborators}"
-                        ),
-                        latency_ms=_consensus.latency_ms,
-                    )
-                return out
+        # Consensus is "confident" ONLY if it also produced a
+        # question_type opinion. Signals may lock a ref (e.g.
+        # explicit_refs on A.5.18) without knowing whether the
+        # user wants posture / documents / definition. In that
+        # case fall through to the LLM classifier — it has the
+        # semantic breadth to decide.
+        _has_qt = (_consensus is not None
+                   and _consensus.question_type
+                   and _consensus.question_type != "unknown")
+        if _consensus is not None and _consensus.verdict == "confident" and _has_qt:
+            # Skip the LLM classifier entirely — trust consensus.
+            out = intent_dict_from_consensus(_consensus)
+            if logger:
+                logger.log_call(
+                    step="consensus_confident", model="", system="",
+                    user=query[:200],
+                    response=(
+                        f"verdict={_consensus.verdict} "
+                        f"refs={_consensus.refs[:3]} "
+                        f"qt={_consensus.question_type} "
+                        f"corroborators={_consensus.corroborators}"
+                    ),
+                    latency_ms=_consensus.latency_ms,
+                )
+            return out
 
-            if _consensus is not None and _consensus.verdict == "ambiguous":
-                # Emit a deterministic clarification — no LLM needed.
-                out = intent_dict_from_consensus(_consensus)
-                out["clarif_count"]   = state.get("clarif_count", 0) + 1
-                out["turn_count"]     = state.get("turn_count", 0) + 1
-                out["original_query"] = query
-                if logger:
-                    logger.log_call(
-                        step="consensus_ambiguous", model="", system="",
-                        user=query[:200],
-                        response=(_consensus.clarification.question
-                                   if _consensus.clarification else ""),
-                        latency_ms=_consensus.latency_ms,
-                    )
-                return out
+        if _consensus is not None and _consensus.verdict == "ambiguous":
+            # Emit a deterministic clarification — no LLM needed.
+            out = intent_dict_from_consensus(_consensus)
+            out["clarif_count"]   = state.get("clarif_count", 0) + 1
+            out["turn_count"]     = state.get("turn_count", 0) + 1
+            out["original_query"] = query
+            if logger:
+                logger.log_call(
+                    step="consensus_ambiguous", model="", system="",
+                    user=query[:200],
+                    response=(_consensus.clarification.question
+                               if _consensus.clarification else ""),
+                    latency_ms=_consensus.latency_ms,
+                )
+            return out
 
-            # verdict == "insufficient" → fall through to legacy path
+        # verdict == "insufficient" or None → fall through to the
+        # legacy LLM classifier below. This is intra-consensus
+        # fallback (rare), not the retired kill switch.
 
         # First turn: use process_intake (handles ambiguous clusters)
         # Follow-up turns: use classify_query (faster, session-aware)

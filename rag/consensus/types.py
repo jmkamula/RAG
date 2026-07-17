@@ -81,12 +81,14 @@ class ConsensusResult:
 
     verdict:
       "confident"    — top ref + question_type resolved with corroborators;
-                       skip the legacy LLM classifier.
+                       skip the LLM classifier.
       "ambiguous"    — signals disagree in a way that needs the user to
                        choose; emit clarification.
-      "insufficient" — nothing reached the floor; the caller SHOULD fall
-                       through to the legacy LLM classifier
-                       (unless USE_LEGACY_CLASSIFIER=0 is set).
+      "insufficient" — nothing reached the floor; the caller falls
+                       through to the LLM classifier (intra-consensus
+                       fallback). Ship 2'.o (2026-07-16) retired the
+                       USE_LEGACY_CLASSIFIER kill-switch — the layer
+                       always runs.
     """
     verdict:              str
     refs:                 list[str] = field(default_factory=list)

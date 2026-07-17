@@ -48,10 +48,6 @@ def default_config() -> ConsensusConfig:
       CONSENSUS_REFS_TIE_BAND          (float, default 0.05)
       CONSENSUS_MIN_CORROBORATORS      (int,   default 2)
       CONSENSUS_MAX_TOP_K              (int,   default 10)
-      USE_LEGACY_CLASSIFIER            (bool,  default 1)
-                                        false → no LLM fallback on
-                                        insufficient; return clarify
-
     Weight overrides are also available (CONSENSUS_*_WEIGHT) but rarely
     needed for env tuning — those are prime candidates for future
     Postgres pipeline_config once we have log data.
@@ -72,18 +68,14 @@ def default_config() -> ConsensusConfig:
         log_full_signals_json = _env_bool("CONSENSUS_LOG_FULL_SIGNALS", True),
         # LLM fallback is always on when consensus is active — it's how
         # we handle queries the deterministic signals can't classify.
-        # The FULL kill-switch (skip the whole consensus layer) is a
-        # separate env var USE_LEGACY_CLASSIFIER=1 checked at the
-        # graph-node wire-up level, not here.
+        # Ship 2'.o (2026-07-16): the USE_LEGACY_CLASSIFIER escape
+        # hatch was retired. Consensus always runs. When the verdict
+        # is 'insufficient', the classify graph node falls through to
+        # the legacy LLM classifier — that's an intra-consensus
+        # fallback, not a kill switch. `llm_fallback_enabled` below
+        # controls that intra-consensus fallback.
         llm_fallback_enabled  = True,
     )
-
-
-def consensus_layer_enabled() -> bool:
-    """The escape hatch: USE_LEGACY_CLASSIFIER=1 disables the whole
-    consensus layer and routes every query through the legacy LLM
-    classifier. Default OFF (i.e. consensus IS enabled)."""
-    return not _env_bool("USE_LEGACY_CLASSIFIER", False)
 
 
 def gatekeeper_enabled() -> bool:

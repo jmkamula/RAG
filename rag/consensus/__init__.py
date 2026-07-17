@@ -14,7 +14,9 @@ answer it.
 
 This module puts retrieval back at the front, corroborated by 6 other
 cheap deterministic signals. Only when signals don't reach consensus
-does the legacy LLM classifier fire (see USE_LEGACY_CLASSIFIER env).
+does the LLM classifier fire (intra-consensus fallback for rare
+cases). The full kill-switch (USE_LEGACY_CLASSIFIER env) was
+retired in Ship 2'.o (2026-07-16) — consensus always runs.
 
 Signals (see the taxonomies + rules in docs/ship_1_design):
 
@@ -41,11 +43,11 @@ from rag.consensus.types import (
 )
 from rag.consensus.query_consensus import run_consensus, intent_dict_from_consensus
 from rag.consensus.aggregator      import aggregate
-from rag.consensus.config          import consensus_layer_enabled, gatekeeper_enabled
+from rag.consensus.config          import gatekeeper_enabled
 
 __all__ = [
     "SignalOutput", "ConsensusResult", "ConsensusConfig",
     "Clarification", "ClarificationOption",
     "run_consensus", "intent_dict_from_consensus",
-    "aggregate", "consensus_layer_enabled", "gatekeeper_enabled",
+    "aggregate", "gatekeeper_enabled",
 ]

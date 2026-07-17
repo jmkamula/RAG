@@ -77,8 +77,12 @@ When a retire-by date passes, delete the legacy path.
 - **`CASEFILE_ENABLED` env flag** — RETIRED 2026-07-16 in Ship 2'.n.
   The case-file flow is the only path; no flag gate remains. Do NOT
   re-introduce feature flags without an explicit retire-by date.
-- **`USE_LEGACY_CLASSIFIER=1` fallback** — Ship 1's escape hatch.
-  Retire-by: 2026-09-01 if consensus baseline holds.
+- **`USE_LEGACY_CLASSIFIER` kill-switch** — RETIRED 2026-07-17 in
+  Ship 2'.o. `consensus_layer_enabled()` deleted; consensus always
+  runs. The intra-consensus fallback to the LLM classifier on
+  `insufficient` verdict is design-intended, NOT an escape hatch —
+  it stays. Do NOT re-introduce runtime toggles for the consensus
+  layer.
 
 ### Build sequence
 
@@ -328,8 +332,10 @@ Verdict = confident when top_score >= 0.35 AND ≥2 corroborators (with
 - Design principle: deterministic signals lead, LLM fills gaps. NEVER lets
   the LLM override a signal that already fired cleanly.
 
-**Escape hatch**: `USE_LEGACY_CLASSIFIER=1` disables consensus entirely,
-falls back to the pre-Ship-1 LLM classifier path. Default OFF.
+**No escape hatch** as of Ship 2'.o (2026-07-17) — consensus always
+runs. The intra-consensus fallback to the LLM classifier on
+`insufficient` verdict is design-intended, not a kill switch.
+To roll back this arc, `git revert` the Ship 2'.o commit.
 
 **Observability**: every consensus decision logged to `chat_consensus_log`
 (schema_v67). Column `llm_fallback_used` is the tuning signal.
@@ -488,8 +494,13 @@ Follow-up arcs (post Ship 2'.i):
 - Ship 2'.n (2026-07-16) — retired the legacy `rank_and_answer` body
   (~912 LOC) + inline `_infer_primary_std` + file-scope
   `_pick_primary_std` + `CASEFILE_ENABLED` env flag. The case-file
-  flow is now the only path — no gate, no fallback. Baseline: 162/162
-  unit tests + live smoke clean.
+  flow is now the only path — no gate, no fallback. Full eval:
+  207/208 PASS.
+- Ship 2'.o (2026-07-17) — retired `USE_LEGACY_CLASSIFIER` kill-
+  switch + `consensus_layer_enabled()` config helper. Consensus
+  always runs; intra-consensus fallback to LLM classifier on
+  `insufficient` verdict stays (design-intended). All 227 unit
+  tests pass across id_types + api_types + casefile + consensus.
 
 ### Session persistence
 - Sync chat: PostgresSaver (arioncomply_sessions DB)
