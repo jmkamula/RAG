@@ -28,6 +28,8 @@ from rag.external.endpoints.query         import router as query_router
 from rag.external.endpoints.posture       import router as posture_router
 from rag.external.endpoints.notifications import router as notifications_router
 from rag.external.endpoints.documents     import router as documents_router
+from rag.external.endpoints.cascade       import router as cascade_router
+from rag.external.endpoints.bridges       import router as bridges_router
 
 
 external_router = APIRouter(
@@ -45,3 +47,5 @@ external_router.include_router(query_router)
 external_router.include_router(posture_router)
 external_router.include_router(notifications_router)
 external_router.include_router(documents_router)
+external_router.include_router(cascade_router)
+external_router.include_router(bridges_router)
