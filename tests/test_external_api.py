@@ -213,6 +213,44 @@ def _post(path: str, payload: dict, key: str | None = None,
     return status, body_json, headers
 
 
+def _post_multipart(path: str, filename: str, content: bytes,
+                    extra_fields: dict[str, str] | None = None,
+                    key: str | None = None,
+                    timeout: int = 60) -> tuple[int, dict, dict]:
+    """POST multipart/form-data — used for /documents upload."""
+    boundary = "----test-boundary-" + uuid.uuid4().hex
+    parts: list[bytes] = []
+    if extra_fields:
+        for k, v in extra_fields.items():
+            parts.append(f"--{boundary}\r\nContent-Disposition: form-data; name=\"{k}\"\r\n\r\n{v}\r\n".encode())
+    parts.append(f"--{boundary}\r\nContent-Disposition: form-data; name=\"file\"; filename=\"{filename}\"\r\nContent-Type: application/octet-stream\r\n\r\n".encode())
+    parts.append(content)
+    parts.append(f"\r\n--{boundary}--\r\n".encode())
+    body = b"".join(parts)
+    req = urllib.request.Request(
+        BASE + path,
+        data    = body,
+        headers = {"Content-Type": f"multipart/form-data; boundary={boundary}"},
+        method  = "POST",
+    )
+    if key is not None:
+        req.add_header("X-API-Key", key)
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            resp_body = r.read().decode()
+            status    = r.status
+            headers   = dict(r.headers)
+    except urllib.error.HTTPError as e:
+        resp_body = e.read().decode()
+        status    = e.code
+        headers   = dict(e.headers or {})
+    try:
+        body_json = json.loads(resp_body) if resp_body else {}
+    except json.JSONDecodeError:
+        body_json = {"raw": resp_body}
+    return status, body_json, headers
+
+
 def _ok(cond, msg=""):
     return (bool(cond), msg or "ok")
 
@@ -904,6 +942,236 @@ TESTS += [
     test_notifications_single_by_id,
     test_notifications_unknown_id_returns_404,
     test_notifications_malformed_id_returns_400,
+]
+
+
+# ── Ship 4'.e: /evidence + /documents tests ───────────────────────────
+
+RAW_KEY_EVIDENCE_READ  = "test_ext_key_ship4e_read_"  + uuid.uuid4().hex[:8]
+RAW_KEY_EVIDENCE_WRITE = "test_ext_key_ship4e_write_" + uuid.uuid4().hex[:8]
+
+
+@contextmanager
+def _test_state_evidence():
+    """Fixture: seeds a client_documents row + a document_findings row
+    on the test tenant + two api_keys (read + write scopes). Cleanup
+    removes seeded rows + any documents uploaded during the test."""
+    with _test_state() as (conn, seeds):
+        with conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                        (TEST_TENANT_ID,))
+            cur.execute("""
+                INSERT INTO api_keys (tenant_id, user_id, key_hash, key_prefix,
+                                      name, scopes, is_active)
+                VALUES
+                    (%s::uuid, %s::uuid, %s, 'test_ext_',
+                     'TEST evidence-read key', ARRAY['external:evidence:read'], TRUE),
+                    (%s::uuid, %s::uuid, %s, 'test_ext_',
+                     'TEST evidence-write key', ARRAY['external:evidence:write','external:evidence:read'], TRUE)
+                RETURNING id::text
+            """, (TEST_TENANT_ID, TEST_USER_ID, _sha256(RAW_KEY_EVIDENCE_READ),
+                  TEST_TENANT_ID, TEST_USER_ID, _sha256(RAW_KEY_EVIDENCE_WRITE)))
+            _ids = [r[0] for r in cur.fetchall()]
+
+            # Seed a client_documents row + a document_findings row that
+            # references it, so /evidence has data to return.
+            cur.execute("""
+                INSERT INTO client_documents (
+                    id, tenant_id, filename, evidence_type
+                ) VALUES (
+                    gen_random_uuid(), %s::uuid, 'TEST-4e-policy.docx', 'policy'
+                )
+                RETURNING id::text
+            """, (TEST_TENANT_ID,))
+            client_doc_id = cur.fetchone()[0]
+
+            cur.execute("""
+                INSERT INTO document_findings (
+                    tenant_id, document_id, control_ref, standard_id,
+                    status, confidence, excerpt, inference_source
+                ) VALUES (
+                    %s::uuid, %s::uuid, 'A.5.18', 'ISO27001:2022',
+                    'present', 'high', 'TEST-4e: access review Q1 2026',
+                    'templated'
+                )
+                RETURNING id::text
+            """, (TEST_TENANT_ID, client_doc_id))
+            finding_id = cur.fetchone()[0]
+        conn.commit()
+        seeds["client_doc_id"] = client_doc_id
+        seeds["finding_id"]    = finding_id
+        try:
+            yield conn, seeds
+        finally:
+            with conn.cursor() as cur:
+                cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                            (TEST_TENANT_ID,))
+                cur.execute("DELETE FROM document_findings WHERE tenant_id=%s::uuid",
+                            (TEST_TENANT_ID,))
+                cur.execute("DELETE FROM document_uploads WHERE tenant_id=%s::uuid",
+                            (TEST_TENANT_ID,))
+                cur.execute("DELETE FROM client_documents WHERE tenant_id=%s::uuid",
+                            (TEST_TENANT_ID,))
+            conn.commit()
+
+
+def test_evidence_happy_path():
+    with _test_state_evidence() as _:
+        code, body, _h = _get(
+            "/api/external/v1/evidence?control_ref=A.5.18&standard_id=ISO27001:2022",
+            key=RAW_KEY_EVIDENCE_READ,
+        )
+        items = body.get("evidence", [])
+        return _ok(
+            code == 200
+            and body.get("control_ref") == "A.5.18"
+            and body.get("standard_id") == "ISO27001:2022"
+            and body.get("count") >= 1
+            and any(e.get("filename") == "TEST-4e-policy.docx" for e in items)
+            and any(e.get("inference_source") == "templated" for e in items),
+            f"code={code} body={body}",
+        )
+
+
+def test_evidence_scope_check():
+    with _test_state_evidence() as _:
+        code, body, _h = _get(
+            "/api/external/v1/evidence?control_ref=A.5.18&standard_id=ISO27001:2022",
+            key=RAW_KEY_GOOD,  # only external:status
+        )
+        return _ok(
+            code == 403
+            and "external:evidence:read" in (body.get("error", {}).get("message") or ""),
+            f"code={code} body={body}",
+        )
+
+
+def test_evidence_missing_query_params_returns_422():
+    with _test_state_evidence() as _:
+        code, body, _h = _get(
+            "/api/external/v1/evidence",  # no control_ref, no standard_id
+            key=RAW_KEY_EVIDENCE_READ,
+        )
+        return _ok(
+            code == 422 and body.get("error", {}).get("code") == "invalid_input",
+            f"code={code} body={body}",
+        )
+
+
+def test_document_status_unknown_returns_404():
+    with _test_state_evidence() as _:
+        code, body, _h = _get(
+            "/api/external/v1/documents/00000000-0000-0000-0000-999999999999",
+            key=RAW_KEY_EVIDENCE_READ,
+        )
+        return _ok(
+            code == 404 and body.get("error", {}).get("code") == "not_found",
+            f"code={code} body={body}",
+        )
+
+
+def test_document_status_malformed_id_returns_400():
+    with _test_state_evidence() as _:
+        code, body, _h = _get(
+            "/api/external/v1/documents/not-a-uuid",
+            key=RAW_KEY_EVIDENCE_READ,
+        )
+        return _ok(
+            code == 400 and body.get("error", {}).get("code") == "invalid_input",
+            f"code={code} body={body}",
+        )
+
+
+def test_document_upload_happy_path():
+    """Multipart upload of a small markdown doc. Returns pending
+    immediately."""
+    with _test_state_evidence() as _:
+        content = b"# TEST 4e upload\n\nSmall test document for Ship 4'.e.\n"
+        code, body, _h = _post_multipart(
+            "/api/external/v1/documents",
+            filename    = "TEST-4e-upload.md",
+            content     = content,
+            extra_fields= {"declared_standard_id": "ISO27001:2022"},
+            key         = RAW_KEY_EVIDENCE_WRITE,
+        )
+        return _ok(
+            code == 200
+            and body.get("extraction_status") == "pending"
+            and body.get("filename") == "TEST-4e-upload.md"
+            and body.get("byte_size") == len(content)
+            and body.get("upload_id"),
+            f"code={code} body={body}",
+        )
+
+
+def test_document_upload_scope_check():
+    """external:evidence:read alone doesn't grant write."""
+    with _test_state_evidence() as _:
+        code, body, _h = _post_multipart(
+            "/api/external/v1/documents",
+            filename= "TEST-4e-scope.md",
+            content = b"hello",
+            key     = RAW_KEY_EVIDENCE_READ,
+        )
+        return _ok(
+            code == 403
+            and "external:evidence:write" in (body.get("error", {}).get("message") or ""),
+            f"code={code} body={body}",
+        )
+
+
+def test_document_upload_bad_extension_returns_400():
+    with _test_state_evidence() as _:
+        code, body, _h = _post_multipart(
+            "/api/external/v1/documents",
+            filename= "TEST-4e-bad.zip",
+            content = b"not really a zip",
+            key     = RAW_KEY_EVIDENCE_WRITE,
+        )
+        return _ok(
+            code == 400 and body.get("error", {}).get("code") == "invalid_input",
+            f"code={code} body={body}",
+        )
+
+
+def test_document_upload_dedup_returns_canonical():
+    """Uploading the same content twice returns extraction_status
+    'duplicate' + canonical_upload_id pointing at the first upload."""
+    with _test_state_evidence() as _:
+        content = b"# TEST 4e dedup\n\nContent A.\n" + uuid.uuid4().hex.encode()
+        code1, body1, _h = _post_multipart(
+            "/api/external/v1/documents",
+            filename= "TEST-4e-dedup.md",
+            content = content,
+            key     = RAW_KEY_EVIDENCE_WRITE,
+        )
+        if code1 != 200:
+            return _ok(False, f"first upload failed: {body1}")
+        first_id = body1["upload_id"]
+        code2, body2, _h = _post_multipart(
+            "/api/external/v1/documents",
+            filename= "TEST-4e-dedup-again.md",
+            content = content,
+            key     = RAW_KEY_EVIDENCE_WRITE,
+        )
+        return _ok(
+            code2 == 200
+            and body2.get("extraction_status") == "duplicate"
+            and body2.get("canonical_upload_id") == first_id,
+            f"code={code2} body={body2}",
+        )
+
+
+TESTS += [
+    test_evidence_happy_path,
+    test_evidence_scope_check,
+    test_evidence_missing_query_params_returns_422,
+    test_document_status_unknown_returns_404,
+    test_document_status_malformed_id_returns_400,
+    test_document_upload_happy_path,
+    test_document_upload_scope_check,
+    test_document_upload_bad_extension_returns_400,
+    test_document_upload_dedup_returns_canonical,
 ]
 
 

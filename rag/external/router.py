@@ -27,6 +27,7 @@ from rag.external.endpoints.status        import router as status_router
 from rag.external.endpoints.query         import router as query_router
 from rag.external.endpoints.posture       import router as posture_router
 from rag.external.endpoints.notifications import router as notifications_router
+from rag.external.endpoints.documents     import router as documents_router
 
 
 external_router = APIRouter(
@@ -43,3 +44,4 @@ external_router.include_router(status_router)
 external_router.include_router(query_router)
 external_router.include_router(posture_router)
 external_router.include_router(notifications_router)
+external_router.include_router(documents_router)
