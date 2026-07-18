@@ -3,20 +3,42 @@ FastAPI router for /api/external/v1/*.
 
 All endpoints under this router MUST use `external_key_with_scope`
 (rag/external/auth.py) for authentication + scope check + rate
-limit. Endpoints WITHOUT scope enforcement are not allowed.
+limit. Endpoints WITHOUT scope enforcement are not allowed (docs
+pages are the only exception — they're public-by-design).
 
-Currently exposed:
-  * GET /api/external/v1/status — health + tenant context (Ship 4'.a)
+Full surface (Ship 4'.a → 4'.g, all shipped 2026-07-17→18):
 
-Planned (Ship 4'.b onward):
-  * POST /query
-  * GET  /posture
-  * GET  /posture/{control_ref}
-  * GET  /notifications
-  * GET  /evidence/{leaf_id}
-  * POST /documents
-  * GET  /cascade/timeline
-  * GET  /bridges/{control_ref}
+  Status + query
+    GET  /status                             external:status
+    POST /query                              external:query
+
+  Posture family
+    GET  /frameworks                         external:posture:read
+    GET  /posture                            external:posture:read
+    GET  /posture/{control_ref}              external:posture:read
+
+  Notifications
+    GET  /notifications                      external:notifications:read
+    GET  /notifications/{id}                 external:notifications:read
+
+  Documents + evidence
+    POST /documents                          external:evidence:write
+    GET  /documents/{id}                     external:evidence:read
+    GET  /evidence                           external:evidence:read
+
+  Cascade + bridges
+    GET  /cascade/timeline                   external:cascade:read
+    GET  /cascade/implications/{id}          external:cascade:read
+    GET  /bridges                            external:xfw:read
+
+  Docs (no scope — public)
+    GET  /openapi.json
+    GET  /docs                               (Swagger UI)
+    GET  /redoc                              (ReDoc UI)
+
+See [[ship-4-prime-arc-retrospective-2026-07-18]] for the full-arc
+synthesis: architectural constants, test-fixture patterns,
+lessons learned, and follow-up work.
 """
 from __future__ import annotations
 
