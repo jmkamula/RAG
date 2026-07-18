@@ -680,6 +680,233 @@ TESTS += [
 ]
 
 
+# ── Ship 4'.d: /notifications tests ───────────────────────────────────
+
+RAW_KEY_NOTIF = "test_ext_key_ship4d_notif_" + uuid.uuid4().hex[:8]
+
+
+@contextmanager
+def _test_state_notifications():
+    """Fixture: seeds a key with external:notifications:read + 4
+    notifications with distinct kinds/severities so filter tests
+    have data to work with. Teardown removes seeded rows."""
+    with _test_state() as (conn, seeds):
+        with conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                        (TEST_TENANT_ID,))
+            cur.execute("""
+                INSERT INTO api_keys (tenant_id, user_id, key_hash, key_prefix,
+                                      name, scopes, is_active)
+                VALUES (%s::uuid, %s::uuid, %s, 'test_ext_', 'TEST notif key',
+                        ARRAY['external:notifications:read'], TRUE)
+                RETURNING id::text
+            """, (TEST_TENANT_ID, TEST_USER_ID, _sha256(RAW_KEY_NOTIF)))
+            key_id = cur.fetchone()[0]
+
+            # Seed 4 notifications: 2 high (unread), 1 medium (read),
+            # 1 low (dismissed). Deterministic titles for lookup.
+            cur.execute("""
+                INSERT INTO tenant_notification
+                    (tenant_id, kind, title, body, severity, related_control_ref)
+                VALUES
+                    (%s::uuid,'nc_surfaced','TEST-4d-1: unread high',    '','high',   'A.5.18'),
+                    (%s::uuid,'nc_surfaced','TEST-4d-2: unread high 2',  '','high',   'A.6.4'),
+                    (%s::uuid,'freshness_expiry','TEST-4d-3: read medium','','medium','A.5.15')
+                RETURNING id::text
+            """, (TEST_TENANT_ID, TEST_TENANT_ID, TEST_TENANT_ID))
+            ids = [r[0] for r in cur.fetchall()]
+            # Mark the medium one as read
+            cur.execute("""
+                UPDATE tenant_notification SET read_at = NOW()
+                 WHERE id=%s::uuid
+            """, (ids[2],))
+            # 4th notification: low severity + dismissed
+            cur.execute("""
+                INSERT INTO tenant_notification
+                    (tenant_id, kind, title, body, severity, dismissed_at)
+                VALUES (%s::uuid,'auto_resolved','TEST-4d-4: dismissed low','','low', NOW())
+                RETURNING id::text
+            """, (TEST_TENANT_ID,))
+            ids.append(cur.fetchone()[0])
+        conn.commit()
+        seeds["notif_key_id"] = key_id
+        seeds["notif_ids"]    = ids
+        try:
+            yield conn, seeds
+        finally:
+            with conn.cursor() as cur:
+                cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                            (TEST_TENANT_ID,))
+                cur.execute("""
+                    DELETE FROM tenant_notification
+                     WHERE tenant_id=%s::uuid AND title LIKE 'TEST-4d-%%'
+                """, (TEST_TENANT_ID,))
+            conn.commit()
+
+
+def test_notifications_list_happy_path():
+    with _test_state_notifications() as _:
+        code, body, _h = _get(
+            "/api/external/v1/notifications", key=RAW_KEY_NOTIF,
+        )
+        titles = {n["title"] for n in body.get("notifications", [])}
+        # Default: excludes dismissed, so we see 3 not 4
+        return _ok(
+            code == 200
+            and body.get("summary", {}).get("total") == 3
+            and body.get("summary", {}).get("unread") == 2   # 2 high, medium is read
+            and body.get("summary", {}).get("urgent") == 2   # 2 unread + high
+            and "TEST-4d-1: unread high" in titles
+            and "TEST-4d-4: dismissed low" not in titles,
+            f"code={code} summary={body.get('summary')} titles={titles}",
+        )
+
+
+def test_notifications_include_dismissed():
+    with _test_state_notifications() as _:
+        code, body, _h = _get(
+            "/api/external/v1/notifications?include_dismissed=true",
+            key=RAW_KEY_NOTIF,
+        )
+        titles = {n["title"] for n in body.get("notifications", [])}
+        return _ok(
+            code == 200
+            and body.get("summary", {}).get("total") == 4
+            and "TEST-4d-4: dismissed low" in titles,
+            f"code={code} summary={body.get('summary')} titles={titles}",
+        )
+
+
+def test_notifications_unread_only():
+    with _test_state_notifications() as _:
+        code, body, _h = _get(
+            "/api/external/v1/notifications?unread_only=true",
+            key=RAW_KEY_NOTIF,
+        )
+        return _ok(
+            code == 200
+            and body.get("summary", {}).get("total") == 2
+            and body.get("summary", {}).get("unread") == 2,
+            f"code={code} summary={body.get('summary')}",
+        )
+
+
+def test_notifications_kind_filter():
+    with _test_state_notifications() as _:
+        code, body, _h = _get(
+            "/api/external/v1/notifications?kind=nc_surfaced",
+            key=RAW_KEY_NOTIF,
+        )
+        kinds = {n["kind"] for n in body.get("notifications", [])}
+        return _ok(
+            code == 200
+            and kinds == {"nc_surfaced"}
+            and body.get("summary", {}).get("total") == 2,
+            f"kinds={kinds} summary={body.get('summary')}",
+        )
+
+
+def test_notifications_severity_filter():
+    with _test_state_notifications() as _:
+        code, body, _h = _get(
+            "/api/external/v1/notifications?severity=medium",
+            key=RAW_KEY_NOTIF,
+        )
+        return _ok(
+            code == 200
+            and body.get("summary", {}).get("total") == 1
+            and body["notifications"][0]["severity"] == "medium",
+            f"body={body}",
+        )
+
+
+def test_notifications_bad_kind_returns_400():
+    with _test_state_notifications() as _:
+        code, body, _h = _get(
+            "/api/external/v1/notifications?kind=WEIRD_KIND",
+            key=RAW_KEY_NOTIF,
+        )
+        return _ok(
+            code == 400 and body.get("error", {}).get("code") == "invalid_input",
+            f"code={code} body={body}",
+        )
+
+
+def test_notifications_bad_since_returns_400():
+    with _test_state_notifications() as _:
+        code, body, _h = _get(
+            "/api/external/v1/notifications?since=notatimestamp",
+            key=RAW_KEY_NOTIF,
+        )
+        return _ok(
+            code == 400 and body.get("error", {}).get("code") == "invalid_input",
+            f"code={code} body={body}",
+        )
+
+
+def test_notifications_scope_check():
+    with _test_state_notifications() as _:
+        code, body, _h = _get(
+            "/api/external/v1/notifications", key=RAW_KEY_GOOD,
+        )
+        return _ok(
+            code == 403
+            and "external:notifications:read" in (body.get("error", {}).get("message") or ""),
+            f"code={code} body={body}",
+        )
+
+
+def test_notifications_single_by_id():
+    with _test_state_notifications() as (_conn, seeds):
+        nid = seeds["notif_ids"][0]  # the first seeded notification
+        code, body, _h = _get(
+            f"/api/external/v1/notifications/{nid}", key=RAW_KEY_NOTIF,
+        )
+        return _ok(
+            code == 200 and body.get("id") == nid,
+            f"code={code} body={body}",
+        )
+
+
+def test_notifications_unknown_id_returns_404():
+    with _test_state_notifications() as _:
+        code, body, _h = _get(
+            "/api/external/v1/notifications/00000000-0000-0000-0000-999999999999",
+            key=RAW_KEY_NOTIF,
+        )
+        return _ok(
+            code == 404 and body.get("error", {}).get("code") == "not_found",
+            f"code={code} body={body}",
+        )
+
+
+def test_notifications_malformed_id_returns_400():
+    with _test_state_notifications() as _:
+        code, body, _h = _get(
+            "/api/external/v1/notifications/not-a-uuid",
+            key=RAW_KEY_NOTIF,
+        )
+        return _ok(
+            code == 400 and body.get("error", {}).get("code") == "invalid_input",
+            f"code={code} body={body}",
+        )
+
+
+TESTS += [
+    test_notifications_list_happy_path,
+    test_notifications_include_dismissed,
+    test_notifications_unread_only,
+    test_notifications_kind_filter,
+    test_notifications_severity_filter,
+    test_notifications_bad_kind_returns_400,
+    test_notifications_bad_since_returns_400,
+    test_notifications_scope_check,
+    test_notifications_single_by_id,
+    test_notifications_unknown_id_returns_404,
+    test_notifications_malformed_id_returns_400,
+]
+
+
 def main():
     print("─" * 70)
     print("  External API integration tests (Ship 4'.a)")
