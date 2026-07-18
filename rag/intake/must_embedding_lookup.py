@@ -10,7 +10,10 @@ corroborate the control's presence in the doc.
 Companion to `scripts/build_must_index.py` which builds the
 `musts_arioncomply` Chroma collection.
 
-Model: `text-embedding-3-small` (matches the collection).
+Model: `rag.embedding_config.EMBED_MODEL_STANDARD`
+(text-embedding-3-large as of Ship 5'.b, 2026-07-18). One source
+of truth for index-time + query-time model — see the config
+module for the migration story.
 
 Cost: one embedding call per doc (or per chunk if the doc exceeds the
 context budget). Query is a single Chroma nearest-neighbor lookup —
@@ -28,9 +31,11 @@ from typing import Optional
 
 logger = logging.getLogger(__name__)
 
+from rag.embedding_config import EMBED_MODEL_STANDARD
+
 COLLECTION_NAME = "musts_arioncomply"
 CHROMA_DIR      = str(Path(__file__).resolve().parents[2] / "chroma_db")
-EMBED_MODEL     = "text-embedding-3-small"
+EMBED_MODEL     = EMBED_MODEL_STANDARD
 
 # Query budget — take the first N chars of the doc as the query. Docs
 # larger than this are covered by a summary window; the top-K return
@@ -60,11 +65,13 @@ def _get_collection():
             _COLLECTION_CACHE = False
             return None
         import chromadb
-        from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
-        embed_fn = OpenAIEmbeddingFunction(
-            api_key    = os.getenv("OPENAI_API_KEY"),
-            model_name = EMBED_MODEL,
-        )
+        # Use vector/indexer.py's naming-aware embedding function to
+        # match the builder (Ship 5'.b consolidation). This makes the
+        # defensive rebuild in VectorIndexer._make_embed_fn_from_name()
+        # applicable here too — if the stored embedding_function_name
+        # ever disagrees with EMBED_MODEL, we catch it at open time.
+        from vector.indexer import OpenAIEmbeddingFunction
+        embed_fn = OpenAIEmbeddingFunction(model=EMBED_MODEL)
         client = chromadb.PersistentClient(path=CHROMA_DIR)
         col    = client.get_collection(
             name              = COLLECTION_NAME,

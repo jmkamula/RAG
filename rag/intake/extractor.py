@@ -2412,7 +2412,11 @@ def _get_vector_retriever():
         return _VECTOR_RETRIEVER
     try:
         from vector.retriever import VectorRetriever
-        _VECTOR_RETRIEVER = VectorRetriever()
+        from rag.embedding_config import EMBED_MODEL_STANDARD
+        # Explicit embedding model (Ship 5'.b). Was relying on the
+        # defensive _make_embed_fn_from_name rebuild for correctness;
+        # now the caller matches the stored config directly.
+        _VECTOR_RETRIEVER = VectorRetriever(embedding_model=EMBED_MODEL_STANDARD)
         return _VECTOR_RETRIEVER
     except Exception as e:
         logger.warning(

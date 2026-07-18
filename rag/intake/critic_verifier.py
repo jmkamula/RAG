@@ -165,7 +165,9 @@ def _build_extend_pool(
 
     try:
         from vector.retriever import VectorRetriever
-        retriever = VectorRetriever()
+        from rag.embedding_config import EMBED_MODEL_STANDARD
+        # Explicit embedding model (Ship 5'.b) — see extractor.py:2415.
+        retriever = VectorRetriever(embedding_model=EMBED_MODEL_STANDARD)
         query_text = doc_text[:6000]   # match MUST embedding lookup cap
         ctx = retriever.search(
             query     = query_text,

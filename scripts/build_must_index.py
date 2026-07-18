@@ -14,10 +14,14 @@ catalog union — and upserts every ChecklistItem (must + should) into the
 `musts_arioncomply` Chroma collection. Idempotent: rerun on curation
 refresh; the upsert keys on `must_id` so stale rows update in place.
 
-Model: `text-embedding-3-small` (matches the leaf-level collections;
-same vector space enables future hybrid retrieval).
+Model: `rag.embedding_config.EMBED_MODEL_STANDARD`
+(text-embedding-3-large as of Ship 5'.b, 2026-07-18).
+See [[ship-5-prime-a-llm-audit-2026-07-18]] +
+[[ship-5-prime-b-embedding-consolidation-2026-07-18]] for the
+consolidation rationale — everything is on -large now so future
+model migrations are one constant edit + one reindex_all run.
 
-Cost: ~4300 vectors × 3-small pricing ~= $0.05, ~40s runtime.
+Cost: ~5400 vectors × 3-large pricing ~= $0.10, ~60s runtime.
 
 Vector document composition — five layers:
   1. Header:      {standard_id} {control_ref} :: {must_id}
@@ -47,11 +51,12 @@ load_dotenv(str(Path(__file__).parent.parent / ".env"))
 from enrichment.documents.document_requirements import (
     ALL_EVIDENCE_REQUIREMENTS, ALL_DERIVED_SPECS, EvidenceRequirement, ChecklistItem,
 )
+from rag.embedding_config import EMBED_MODEL_STANDARD
 
 
 COLLECTION_NAME = "musts_arioncomply"
 CHROMA_DIR      = str(Path(__file__).parent.parent / "chroma_db")
-EMBED_MODEL     = "text-embedding-3-small"
+EMBED_MODEL     = EMBED_MODEL_STANDARD
 
 
 def _iter_leaves() -> Iterable[EvidenceRequirement]:
@@ -107,17 +112,28 @@ def build_index() -> dict:
             "Set the key in .env before running."
         )
 
-    from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
-    embed_fn = OpenAIEmbeddingFunction(
-        api_key    = os.getenv("OPENAI_API_KEY"),
-        model_name = EMBED_MODEL,
-    )
+    # Use vector/indexer.py's naming-aware OpenAIEmbeddingFunction —
+    # its `.name()` returns e.g. "openai-text-embedding-3-large" and
+    # Chroma stores that in `embedding_function_name` on the
+    # collection. The defensive rebuild in
+    # `VectorIndexer._make_embed_fn_from_name()` uses it to guarantee
+    # index-vs-query alignment across model changes.
+    #
+    # Chroma's stdlib `chromadb.utils.embedding_functions.OpenAIEmbeddingFunction`
+    # does NOT store a name — that was the fragility Ship 5'.a
+    # surfaced. Fixed here.
+    from vector.indexer import OpenAIEmbeddingFunction as _NamingAwareOpenAIEmbeddingFunction
+    embed_fn = _NamingAwareOpenAIEmbeddingFunction(model=EMBED_MODEL)
 
     client = chromadb.PersistentClient(path=CHROMA_DIR)
     col = client.get_or_create_collection(
         name              = COLLECTION_NAME,
         embedding_function= embed_fn,
-        metadata          = {"model": EMBED_MODEL, "source": "document_requirements.py"},
+        metadata          = {
+            "model":                    EMBED_MODEL,
+            "source":                   "document_requirements.py",
+            "embedding_function_name":  embed_fn.name(),
+        },
     )
 
     ids:  list[str] = []
