@@ -1604,14 +1604,18 @@ Omit any MUST you cannot ground. Do not invent quotes. Do not guess."""
 
     from rag.llm_client import call as llm_call
     response = llm_call(
-        system     = _PASS2_SYSTEM_PROMPT,
-        user       = user_prompt,
-        model      = EXTRACT_MODEL,
-        purpose    = "extractor_pass2",
-        max_tokens = 4000,
-        timeout_s  = 60.0,
-        metadata   = {"doc_name": doc_name, "leaf_id": leaf_id,
-                      "evidence_type": evidence_type},
+        system      = _PASS2_SYSTEM_PROMPT,
+        user        = user_prompt,
+        model       = EXTRACT_MODEL,
+        purpose     = "extractor_pass2",
+        max_tokens  = 4000,
+        # temperature=0.0 for structured JSON extraction. Ship 5'.a
+        # audit identified the previous default 0.4 as a determinism
+        # gap — same doc + same prompt should produce the same JSON.
+        temperature = 0.0,
+        timeout_s   = 60.0,
+        metadata    = {"doc_name": doc_name, "leaf_id": leaf_id,
+                       "evidence_type": evidence_type},
     )
     if not response.ok:
         logger.error(
@@ -1819,14 +1823,16 @@ def _llm_extract(
 
     from rag.llm_client import call as llm_call
     response = llm_call(
-        system     = _SYSTEM_PROMPT,
-        user       = user_prompt,
-        model      = EXTRACT_MODEL,
-        purpose    = "extractor",
-        max_tokens = 4000,
-        timeout_s  = 60.0,
-        metadata   = {"doc_name": doc_name, "chunk_hint": chunk_hint,
-                      "n_controls": len(controls)},
+        system      = _SYSTEM_PROMPT,
+        user        = user_prompt,
+        model       = EXTRACT_MODEL,
+        purpose     = "extractor",
+        max_tokens  = 4000,
+        # temperature=0.0 for determinism — see extractor pass-2 note.
+        temperature = 0.0,
+        timeout_s   = 60.0,
+        metadata    = {"doc_name": doc_name, "chunk_hint": chunk_hint,
+                       "n_controls": len(controls)},
     )
     if not response.ok:
         logger.error(

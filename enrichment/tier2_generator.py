@@ -123,7 +123,6 @@ class Tier2Generator:
         self.temperature   = temperature
         self.batch_size    = batch_size
         self.delay         = delay_between
-        self._client       = None
 
         # Load existing output for resume support
         self._existing: dict[str, dict] = {}
@@ -282,15 +281,26 @@ class Tier2Generator:
         """Generate enrichment for a single node. Returns None on failure."""
         prompt = self._build_prompt(node, parent_map)
 
+        # Ship 5'.c: migrated from direct OpenAI SDK to the central
+        # llm_client.call — auto-logs to ai_call_log, provider-neutral
+        # wire routing, structured error return. See
+        # [[ship-5-prime-a-llm-audit-2026-07-18]] finding 1.
         try:
-            client   = self._get_client()
-            response = client.chat.completions.create(
+            from rag.llm_client import call as llm_call
+
+            response = llm_call(
+                system      = "",
+                user        = prompt,
                 model       = self.model,
-                temperature = self.temperature,
+                purpose     = "enrichment_tier2",
                 max_tokens  = 600,
-                messages    = [{"role": "user", "content": prompt}],
+                temperature = self.temperature,
+                metadata    = {"ref": node.ref, "attempt": 1},
             )
-            raw    = response.choices[0].message.content.strip()
+            if not response.ok:
+                print(f"\n    Error: {response.error}", end="")
+                return None
+            raw    = response.text.strip()
             parsed = self._parse_json(raw)
 
             if parsed and self._validate(parsed, node.ref):
@@ -299,13 +309,19 @@ class Tier2Generator:
             # Retry once if parse failed
             print(f"\n    ⚠ Parse failed, retrying...", end="")
             time.sleep(1)
-            response = client.chat.completions.create(
+            response = llm_call(
+                system      = "",
+                user        = prompt,
                 model       = self.model,
-                temperature = 0.0,   # deterministic on retry
+                purpose     = "enrichment_tier2",
                 max_tokens  = 600,
-                messages    = [{"role": "user", "content": prompt}],
+                temperature = 0.0,   # deterministic on retry
+                metadata    = {"ref": node.ref, "attempt": 2},
             )
-            raw    = response.choices[0].message.content.strip()
+            if not response.ok:
+                print(f"\n    Error on retry: {response.error}", end="")
+                return None
+            raw    = response.text.strip()
             parsed = self._parse_json(raw)
             if parsed and self._validate(parsed, node.ref):
                 return parsed
@@ -379,15 +395,6 @@ class Tier2Generator:
                 except json.JSONDecodeError:
                     pass
         return None
-
-    def _get_client(self):
-        if self._client is None:
-            import openai
-            api_key = os.getenv("OPENAI_API_KEY")
-            if not api_key:
-                raise RuntimeError("OPENAI_API_KEY not set")
-            self._client = openai.OpenAI(api_key=api_key)
-        return self._client
 
 
 # ── Pretty printer for sample review ─────────────────────────────────────────

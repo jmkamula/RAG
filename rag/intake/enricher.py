@@ -249,15 +249,18 @@ Return JSON only:
 
     try:
         response = llm_call(
-            system     = "",
-            user       = prompt,
-            model      = "claude-haiku-4-5-20251001",
-            purpose    = "enricher",
-            max_tokens = 300,
-            timeout_s  = 15.0,
-            tenant_id  = getattr(doc, "tenant_id", None),
-            upload_id  = getattr(doc, "upload_id", None),
-            metadata   = {"doc_name": doc.original_name},
+            system      = "",
+            user        = prompt,
+            model       = "claude-haiku-4-5-20251001",
+            purpose     = "enricher",
+            max_tokens  = 300,
+            # temperature=0.0 for structured JSON enrichment — Ship
+            # 5'.a audit determinism fix, same rationale as extractor.
+            temperature = 0.0,
+            timeout_s   = 15.0,
+            tenant_id   = getattr(doc, "tenant_id", None),
+            upload_id   = getattr(doc, "upload_id", None),
+            metadata    = {"doc_name": doc.original_name},
         )
         if not response.ok:
             raise RuntimeError(response.error)
