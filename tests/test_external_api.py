@@ -481,6 +481,205 @@ TESTS += [
 ]
 
 
+# ── Ship 4'.c: /posture endpoint tests ────────────────────────────────
+# The test tenant (77777777-...) has no posture rows seeded, so happy-
+# path responses return empty lists. We seed a couple of rows so the
+# summary/filter logic gets exercised.
+
+RAW_KEY_POSTURE = "test_ext_key_ship4c_posture_" + uuid.uuid4().hex[:8]
+
+
+@contextmanager
+def _test_state_posture():
+    """Fixture variant: seeds a key with external:posture:read + 2
+    posture_controls rows on the test tenant. Cleanup drops the
+    posture rows so successive runs get a clean state."""
+    with _test_state() as (conn, seeds):
+        with conn.cursor() as cur:
+            cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                        (TEST_TENANT_ID,))
+            cur.execute("""
+                INSERT INTO api_keys (tenant_id, user_id, key_hash, key_prefix,
+                                      name, scopes, is_active)
+                VALUES (%s::uuid, %s::uuid, %s, 'test_ext_', 'TEST posture key',
+                        ARRAY['external:posture:read'], TRUE)
+                RETURNING id::text
+            """, (TEST_TENANT_ID, TEST_USER_ID, _sha256(RAW_KEY_POSTURE)))
+            key_id = cur.fetchone()[0]
+
+            # Idempotent posture seed: 2 controls, distinct findings
+            cur.execute("""
+                INSERT INTO posture_controls
+                    (tenant_id, standard_id, control_ref, node_id,
+                     finding, confidence, is_active, gap_description)
+                VALUES
+                    (%s::uuid,'ISO27001:2022','A.5.18',
+                     'ISO27001:2022:A.5.18','NC','high',TRUE,
+                     'TEST: gap for A.5.18'),
+                    (%s::uuid,'ISO27001:2022','A.5.15',
+                     'ISO27001:2022:A.5.15','Comply','high',TRUE,
+                     'TEST: policy in place')
+                ON CONFLICT (tenant_id, standard_id, control_ref) WHERE is_active
+                    DO UPDATE SET finding = EXCLUDED.finding
+            """, (TEST_TENANT_ID, TEST_TENANT_ID))
+        conn.commit()
+        seeds["posture_key_id"] = key_id
+        try:
+            yield conn, seeds
+        finally:
+            with conn.cursor() as cur:
+                cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)",
+                            (TEST_TENANT_ID,))
+                cur.execute("""
+                    DELETE FROM posture_controls
+                     WHERE tenant_id=%s::uuid
+                       AND control_ref IN ('A.5.18','A.5.15')
+                       AND standard_id='ISO27001:2022'
+                """, (TEST_TENANT_ID,))
+            conn.commit()
+
+
+def test_frameworks_happy_path():
+    with _test_state_posture() as _:
+        code, body, _h = _get("/api/external/v1/frameworks", key=RAW_KEY_POSTURE)
+        return _ok(
+            code == 200
+            and isinstance(body.get("frameworks"), list)
+            and any(fw.get("standard_id") == "ISO27001:2022"
+                    for fw in body.get("frameworks", []))
+            and body.get("tenant_id") == TEST_TENANT_ID,
+            f"code={code} body={body}",
+        )
+
+
+def test_frameworks_scope_check():
+    """Key without external:posture:read gets 403."""
+    with _test_state_posture() as _:
+        code, body, _h = _get("/api/external/v1/frameworks", key=RAW_KEY_GOOD)
+        return _ok(
+            code == 403 and "external:posture:read" in (body.get("error", {}).get("message") or ""),
+            f"code={code} body={body}",
+        )
+
+
+def test_posture_snapshot_happy_path():
+    with _test_state_posture() as _:
+        code, body, headers = _get(
+            "/api/external/v1/posture?standard_id=ISO27001:2022",
+            key=RAW_KEY_POSTURE,
+        )
+        controls = body.get("controls", [])
+        refs = {c["ref"] for c in controls if c.get("ref")}
+        return _ok(
+            code == 200
+            and body.get("tenant_id") == TEST_TENANT_ID
+            and "A.5.18" in refs and "A.5.15" in refs
+            and body.get("summary", {}).get("total", 0) >= 2
+            and body.get("summary", {}).get("NC", 0) >= 1
+            and body.get("summary", {}).get("Comply", 0) >= 1
+            and headers.get("x-ratelimit-limit") == "60",
+            f"code={code} refs={refs} summary={body.get('summary')}",
+        )
+
+
+def test_posture_finding_filter():
+    """finding=NC should return only NC rows."""
+    with _test_state_posture() as _:
+        code, body, _h = _get(
+            "/api/external/v1/posture?standard_id=ISO27001:2022&finding=NC",
+            key=RAW_KEY_POSTURE,
+        )
+        controls = body.get("controls", [])
+        findings = {c.get("finding") for c in controls}
+        return _ok(
+            code == 200
+            and findings == {"NC"}
+            and any(c["ref"] == "A.5.18" for c in controls),
+            f"findings={findings} controls_len={len(controls)}",
+        )
+
+
+def test_posture_bad_finding_returns_400():
+    with _test_state_posture() as _:
+        code, body, _h = _get(
+            "/api/external/v1/posture?finding=WEIRD",
+            key=RAW_KEY_POSTURE,
+        )
+        return _ok(
+            code == 400 and body.get("error", {}).get("code") == "invalid_input",
+            f"code={code} body={body}",
+        )
+
+
+def test_posture_bad_changed_since_returns_400():
+    with _test_state_posture() as _:
+        code, body, _h = _get(
+            "/api/external/v1/posture?changed_since=notadate",
+            key=RAW_KEY_POSTURE,
+        )
+        return _ok(
+            code == 400 and body.get("error", {}).get("code") == "invalid_input",
+            f"code={code} body={body}",
+        )
+
+
+def test_posture_drill_in_happy_path():
+    with _test_state_posture() as _:
+        code, body, _h = _get(
+            "/api/external/v1/posture/A.5.18?standard_id=ISO27001:2022",
+            key=RAW_KEY_POSTURE,
+        )
+        return _ok(
+            code == 200
+            and body.get("ref") == "A.5.18"
+            and body.get("standard_id") == "ISO27001:2022"
+            and body.get("finding") == "NC"
+            and body.get("tenant_id") == TEST_TENANT_ID,
+            f"code={code} body={body}",
+        )
+
+
+def test_posture_drill_in_unknown_ref_returns_404():
+    with _test_state_posture() as _:
+        code, body, _h = _get(
+            "/api/external/v1/posture/A.99.99?standard_id=ISO27001:2022",
+            key=RAW_KEY_POSTURE,
+        )
+        return _ok(
+            code == 404
+            and body.get("error", {}).get("code") == "not_found",
+            f"code={code} body={body}",
+        )
+
+
+def test_posture_drill_in_missing_standard_id_returns_422():
+    """standard_id is required — refs like Art.32 can exist across
+    multiple frameworks. Fail loud rather than guess."""
+    with _test_state_posture() as _:
+        code, body, _h = _get(
+            "/api/external/v1/posture/A.5.18",
+            key=RAW_KEY_POSTURE,
+        )
+        return _ok(
+            code == 422
+            and body.get("error", {}).get("code") == "invalid_input",
+            f"code={code} body={body}",
+        )
+
+
+TESTS += [
+    test_frameworks_happy_path,
+    test_frameworks_scope_check,
+    test_posture_snapshot_happy_path,
+    test_posture_finding_filter,
+    test_posture_bad_finding_returns_400,
+    test_posture_bad_changed_since_returns_400,
+    test_posture_drill_in_happy_path,
+    test_posture_drill_in_unknown_ref_returns_404,
+    test_posture_drill_in_missing_standard_id_returns_422,
+]
+
+
 def main():
     print("─" * 70)
     print("  External API integration tests (Ship 4'.a)")
