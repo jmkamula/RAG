@@ -113,11 +113,15 @@ class Tier2Generator:
     def __init__(
         self,
         output_path:    str  = "enrichment/tier2_generated.json",
-        model:          str  = "gpt-4o-mini",
+        # Default sourced from rag.llm_models (Ship 5'.d).
+        model:          str  = None,
         temperature:    float = 0.2,
         batch_size:     int  = 10,
         delay_between:  float = 0.3,   # seconds between API calls
     ):
+        if model is None:
+            from rag.llm_models import MODEL_ENRICHMENT_T2
+            model = MODEL_ENRICHMENT_T2
         self.output_path   = Path(output_path)
         self.model         = model
         self.temperature   = temperature
@@ -464,8 +468,8 @@ def main():
     )
     parser.add_argument(
         "--model",
-        default="gpt-4o-mini",
-        help="OpenAI model to use (default: gpt-4o-mini)",
+        default=None,
+        help="LLM model to use (default: rag.llm_models.MODEL_ENRICHMENT_T2)",
     )
     parser.add_argument(
         "--output",

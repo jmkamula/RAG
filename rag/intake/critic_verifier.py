@@ -387,7 +387,8 @@ def _extract_critic_verifier(
     doc,                        # ParsedDocument
     priming:      list[PrimingControl],
     extend_pool:  list[ExtendPoolControl],
-    model:        str = "claude-sonnet-4-6",
+    # Default sourced from rag.llm_models (Ship 5'.d).
+    model:        str = None,
     max_tokens:   int = 4000,
     timeout_s:    float = 90.0,
 ) -> tuple[dict, Optional[str]]:
@@ -403,6 +404,9 @@ def _extract_critic_verifier(
     interaction + response validation.
     """
     from rag.llm_client import call as llm_call
+    from rag.llm_models import MODEL_EXTRACTOR
+    if model is None:
+        model = MODEL_EXTRACTOR
 
     doc_text = doc.markdown or doc.full_text or ""
     if not doc_text.strip():

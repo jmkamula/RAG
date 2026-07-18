@@ -301,7 +301,9 @@ def gatekeep(
 
 
 def _gatekeeper_model() -> str:
-    """Model for the gatekeeper LLM call. Env-overridable so tenants
-    on local Mistral can point elsewhere."""
-    import os
-    return os.getenv("GATEKEEPER_MODEL", "gpt-4o-mini")
+    """Model for the gatekeeper LLM call. Env-overridable via the
+    existing `GATEKEEPER_MODEL` env var (handled inside
+    rag.llm_models). See MODEL_CONSENSUS_GK for the resolution
+    order."""
+    from rag.llm_models import MODEL_CONSENSUS_GK
+    return MODEL_CONSENSUS_GK

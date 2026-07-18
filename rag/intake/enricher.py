@@ -248,10 +248,11 @@ Return JSON only:
 }}"""
 
     try:
+        from rag.llm_models import MODEL_ENRICHER
         response = llm_call(
             system      = "",
             user        = prompt,
-            model       = "claude-haiku-4-5-20251001",
+            model       = MODEL_ENRICHER,
             purpose     = "enricher",
             max_tokens  = 300,
             # temperature=0.0 for structured JSON enrichment — Ship

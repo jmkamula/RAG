@@ -760,10 +760,15 @@ class QueryClassifier:
         self,
         tenant_profile: TenantProfile,
         retriever,                          # VectorRetriever instance
-        classify_model:     str = "gpt-4o-mini",
-        clarify_model:      str = "gpt-4o-mini",
+        # Model defaults come from rag.llm_models (Ship 5'.d).
+        classify_model:     str = None,
+        clarify_model:      str = None,
         temperature:        float = 0.1,    # low — we want consistency
     ):
+        from rag.llm_models import MODEL_CLASSIFIER
+        if classify_model is None: classify_model = MODEL_CLASSIFIER
+        if clarify_model  is None: clarify_model  = MODEL_CLASSIFIER
+
         # Read LOCAL_LLM_MODEL at init — overrides defaults when set
         local_model = os.getenv("LOCAL_LLM_MODEL")
         if local_model:
@@ -775,7 +780,6 @@ class QueryClassifier:
         self.clf_model   = classify_model
         self.clr_model   = clarify_model
         self.temperature = temperature
-        self._openai     = None
 
     # ── Public API ─────────────────────────────────────────────────────────
 
@@ -1799,25 +1803,4 @@ class QueryClassifier:
                     pass
         return None
 
-    def _get_openai(self):
-        """Lazy-load OpenAI-compatible client (local Mistral or cloud GPT)."""
-        if self._openai is None:
-            import openai
-            local_url = os.getenv("LOCAL_LLM_BASE_URL")
-            if local_url:
-                # Local Mistral via vLLM/llama.cpp
-                self._openai = openai.OpenAI(
-                    base_url = local_url.rstrip("/"),
-                    api_key  = "local",
-                )
-            else:
-                api_key = os.getenv("OPENAI_API_KEY")
-                if not api_key:
-                    raise RuntimeError(
-                        "Neither LOCAL_LLM_BASE_URL nor OPENAI_API_KEY is set.\n"
-                        "  For local Mistral: export LOCAL_LLM_BASE_URL=http://localhost:9000/v1\n"
-                        "  For cloud:         export OPENAI_API_KEY=sk-..."
-                    )
-                self._openai = openai.OpenAI(api_key=api_key)
-        return self._openai
 from rag.chain_logger    import get_logger

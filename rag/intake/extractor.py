@@ -32,8 +32,10 @@ from .ref_normalizer import (
 
 logger = logging.getLogger(__name__)
 
-# Extraction LLM — use Sonnet for quality, Haiku for speed/cost
-EXTRACT_MODEL = "claude-sonnet-4-6"
+# Extraction LLM — sourced from rag.llm_models (Ship 5'.d).
+# EXTRACT_MODEL stays as a local alias for backwards compatibility;
+# override via env `MODEL_EXTRACTOR=...`.
+from rag.llm_models import MODEL_EXTRACTOR as EXTRACT_MODEL  # noqa: E402
 
 # Max controls per LLM call — avoid overwhelming the model
 MAX_CONTROLS_PER_CALL = 25

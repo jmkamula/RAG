@@ -729,13 +729,20 @@ class LLMAnswer:
 
     def __init__(
         self,
-        answer_model:       str   = "gpt-4o",
-        verify_model:       str   = "gpt-4o-mini",
+        # Model defaults come from rag.llm_models (Ship 5'.d config
+        # module). Callers can still override per-instance; env vars
+        # MODEL_CHAT_ANSWER / MODEL_CHAT_VERIFY / VERIFY_MODEL /
+        # LOCAL_LLM_MODEL take precedence in that order.
+        answer_model:       str   = None,
+        verify_model:       str   = None,
         temperature:        float = 0.1,
         max_tokens:         int   = 1500,
         verify:             bool  = True,     # run verification pass
         max_corrections:    int   = 1,        # max regeneration attempts
     ):
+        from rag.llm_models import MODEL_CHAT_ANSWER, MODEL_CHAT_VERIFY
+        if answer_model is None: answer_model = MODEL_CHAT_ANSWER
+        if verify_model is None: verify_model = MODEL_CHAT_VERIFY
         # Read LOCAL_LLM_MODEL at init time so all calls use local model
         local_model = os.getenv("LOCAL_LLM_MODEL")
         if local_model:
@@ -754,7 +761,6 @@ class LLMAnswer:
         self.max_tokens      = max_tokens
         self.run_verify      = verify
         self.max_corrections = max_corrections
-        self._client         = None
 
     # ── Public API ─────────────────────────────────────────────────────────
 
@@ -1973,42 +1979,3 @@ class LLMAnswer:
                     pass
         return None
 
-    def _get_client(self):
-        """
-        Lazy-load OpenAI-compatible client.
-
-        Supports two modes:
-          Local LLM (Mistral via llama.cpp):
-            export LOCAL_LLM_BASE_URL=http://localhost:8080/v1
-            export LOCAL_LLM_MODEL=mistral-small-3.2-24b
-
-          Cloud (GPT-4o fallback):
-            export OPENAI_API_KEY=sk-proj-...
-        """
-        if self._client is None:
-            import openai
-            local_url = os.getenv("LOCAL_LLM_BASE_URL")
-
-            if local_url:
-                # Local Mistral via llama.cpp — OpenAI-compatible API
-                # api_key is required by the SDK but ignored by llama.cpp
-                self._client = openai.OpenAI(
-                    base_url = local_url.rstrip("/"),
-                    api_key  = "local",
-                )
-                # Override model names to use local model
-                local_model = os.getenv("LOCAL_LLM_MODEL")
-                if local_model:
-                    self.answer_model = local_model
-                    self.verify_model = local_model  # same model for verification
-            else:
-                # Cloud GPT-4o fallback
-                api_key = os.getenv("OPENAI_API_KEY")
-                if not api_key:
-                    raise RuntimeError(
-                        "Neither LOCAL_LLM_BASE_URL nor OPENAI_API_KEY is set.\n"
-                        "  For local Mistral:  export LOCAL_LLM_BASE_URL=http://localhost:8080/v1\n"
-                        "  For cloud GPT-4o:   export OPENAI_API_KEY=sk-..."
-                    )
-                self._client = openai.OpenAI(api_key=api_key)
-        return self._client
