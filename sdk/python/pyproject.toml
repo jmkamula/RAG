@@ -1,0 +1,35 @@
+[build-system]
+requires      = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name            = "arioncomply"
+version         = "0.1.0"
+description     = "Python SDK for the ArionComply external API"
+readme          = "README.md"
+requires-python = ">=3.10"
+license         = { text = "Proprietary" }
+authors         = [{ name = "ArionComply" }]
+keywords        = ["compliance", "grc", "rag", "iso27001", "gdpr", "arioncomply"]
+classifiers     = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies    = [
+    "httpx>=0.24,<1.0",
+    "pydantic>=2.0,<3.0",
+]
+
+[project.urls]
+"Documentation" = "https://arioncomply.com/docs/external-api"
+"Source"        = "https://github.com/jmkamula/RAG"
+
+[tool.setuptools.packages.find]
+where   = ["."]
+include = ["arioncomply*"]

@@ -1439,19 +1439,219 @@ async function loadProfile() {
   const wrap = document.getElementById('profile-wrap');
   wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading profile…</p></div>';
   try {
-    const [profileResp, systemsResp, overridesResp, vocabResp, channelsResp] = await Promise.all([
+    const [profileResp, systemsResp, overridesResp, vocabResp, channelsResp, keysResp] = await Promise.all([
       api('/api/v1/tenant/profile'),
       api('/api/v1/tenant/external-systems'),
       api('/api/v1/tenant/cascade-overrides').catch(() => ({items: []})),
       api('/api/v1/tenant/cascade-events/vocabulary').catch(() => ({vocabulary: {}})),
       api('/api/v1/admin/notifications/channels').catch(() => ({channels: []})),
+      api('/api/v1/tenant/api-keys').catch(() => ({keys: []})),
     ]);
     renderProfile(profileResp.profile || []);
     renderExternalSystems(systemsResp.systems || []);
     renderCascadeOverrides(overridesResp.items || [], vocabResp.vocabulary || {});
     renderNotificationChannels(channelsResp.channels || []);
+    renderApiKeys(keysResp.keys || []);
   } catch (e) {
     wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load your profile. Please refresh in a moment.</p></div>';
+  }
+}
+
+
+// ── Ship 4'.g: external API key management ─────────────────────────
+const _EXTERNAL_SCOPES = [
+  {id: 'external:status',              label: 'Health check',        desc: 'Verify a key + read tenant context'},
+  {id: 'external:query',               label: 'Ask questions',       desc: 'Submit compliance questions to the RAG'},
+  {id: 'external:posture:read',        label: 'Read posture',        desc: 'Bulk snapshot, drill-in, frameworks list'},
+  {id: 'external:notifications:read',  label: 'Read notifications',  desc: 'Poll the inbox feed (kind, severity, since)'},
+  {id: 'external:evidence:read',       label: 'Read evidence',       desc: 'Evidence per control + upload status'},
+  {id: 'external:evidence:write',      label: 'Upload documents',    desc: 'POST documents to the intake pipeline'},
+  {id: 'external:cascade:read',        label: 'Read cascade',        desc: 'Cascade timeline + implications drill-in'},
+  {id: 'external:xfw:read',            label: 'Read bridges',        desc: 'Cross-framework mappings (Neo4j graph)'},
+];
+
+function renderApiKeys(keys) {
+  const esc  = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const attr = s => (s == null ? '' : String(s)).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  const wrap = document.getElementById('profile-wrap');
+
+  const active = keys.filter(k => k.is_active);
+  const revoked = keys.filter(k => !k.is_active);
+
+  let html = `<div style="margin-top:24px;border-top:1px solid #E8E5DA;padding-top:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div>
+        <div style="font-size:15px;font-weight:600;color:#3A382E">External API keys</div>
+        <div style="font-size:11px;color:#5C5A4F;margin-top:2px">
+          Programmatic access to the ArionComply external API
+          (${esc(active.length)} active${revoked.length ? ', ' + esc(revoked.length) + ' revoked' : ''}).
+          <a href="/api/external/v1/docs" target="_blank" style="color:#534AB7;text-decoration:none">Open API docs →</a>
+        </div>
+      </div>
+      <button onclick="showCreateApiKey()" style="font-size:12px;padding:6px 12px;background:#534AB7;color:#fff;border:none;border-radius:4px;cursor:pointer;font-family:inherit">
+        <i class="ti ti-plus"></i> New key
+      </button>
+    </div>
+    <div id="new-key-panel"></div>
+    <div id="api-keys-list">`;
+
+  if (!active.length && !revoked.length) {
+    html += `<div class="empty" style="padding:24px;background:#FAF8F2;border-radius:6px">
+      <p style="font-size:12px;color:#5C5A4F;margin:0">No API keys yet. Click "New key" to create one.</p>
+    </div>`;
+  } else {
+    html += `<div style="border:1px solid #E8E5DA;border-radius:6px;overflow:hidden;background:#fff">`;
+    for (const k of [...active, ...revoked]) {
+      const expiresLabel = k.expires_at
+        ? new Date(k.expires_at).toISOString().slice(0,10)
+        : 'Never';
+      const lastUsedLabel = k.last_used_at
+        ? new Date(k.last_used_at).toISOString().slice(0,10)
+        : 'Never';
+      html += `<div style="padding:10px 14px;border-bottom:1px solid #F0EDDF;display:flex;gap:12px;align-items:center;${k.is_active ? '' : 'opacity:0.6'}">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12px;font-weight:600;color:#3A382E">${esc(k.name)}</div>
+          <div style="font-size:10px;color:#9A9785;font-family:monospace;margin-top:2px">${esc(k.key_prefix)}…</div>
+          <div style="margin-top:4px;display:flex;gap:8px;flex-wrap:wrap">
+            ${(k.scopes || []).map(s => `<span style="font-size:9px;padding:1px 6px;background:#EEEDFE;color:#534AB7;border-radius:8px">${esc(s.replace('external:',''))}</span>`).join('')}
+          </div>
+          <div style="font-size:10px;color:#5C5A4F;margin-top:4px">
+            Last used ${esc(lastUsedLabel)} · Expires ${esc(expiresLabel)}
+            ${k.is_active ? '' : ' · <span style="color:#9C2E2E">REVOKED</span>'}
+          </div>
+        </div>
+        ${k.is_active ? `<button onclick="revokeApiKey('${attr(k.id)}','${attr(k.name)}')" title="Revoke" style="font-size:10px;padding:4px 8px;background:#fff;color:#9C2E2E;border:1px solid #E0C8C8;border-radius:3px;cursor:pointer;font-family:inherit">
+          Revoke
+        </button>` : ''}
+      </div>`;
+    }
+    html += `</div>`;
+  }
+  html += `</div></div>`;
+
+  const existing = wrap.querySelector('#api-keys-section');
+  if (existing) existing.remove();
+  const section = document.createElement('div');
+  section.id = 'api-keys-section';
+  section.innerHTML = html;
+  wrap.appendChild(section);
+}
+
+
+function showCreateApiKey() {
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const panel = document.getElementById('new-key-panel');
+  if (!panel) return;
+  panel.innerHTML = `<div style="background:#FAF8F2;border:1px solid #E8E5DA;border-radius:6px;padding:14px;margin-bottom:12px">
+    <div style="font-size:12px;font-weight:600;color:#3A382E;margin-bottom:10px">Create a new API key</div>
+    <div style="margin-bottom:10px">
+      <label style="font-size:10px;color:#5C5A4F;display:block;margin-bottom:4px">Name</label>
+      <input id="newkey-name" type="text" placeholder="e.g. SIEM production, Auditor read-only, ..."
+        style="width:100%;font-size:12px;padding:6px 8px;border:1px solid #E8E5DA;border-radius:3px;font-family:inherit;box-sizing:border-box">
+    </div>
+    <div style="margin-bottom:10px">
+      <label style="font-size:10px;color:#5C5A4F;display:block;margin-bottom:4px">Scopes</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        ${_EXTERNAL_SCOPES.map(s => `
+          <label style="display:flex;gap:6px;align-items:flex-start;font-size:11px;color:#3A382E;cursor:pointer">
+            <input type="checkbox" class="newkey-scope" value="${esc(s.id)}" style="margin-top:2px">
+            <span>
+              <span style="font-weight:500">${esc(s.label)}</span>
+              <span style="font-size:9px;color:#9A9785;font-family:monospace;display:block">${esc(s.id)}</span>
+              <span style="font-size:10px;color:#5C5A4F">${esc(s.desc)}</span>
+            </span>
+          </label>
+        `).join('')}
+      </div>
+    </div>
+    <div style="margin-bottom:12px">
+      <label style="font-size:10px;color:#5C5A4F;display:block;margin-bottom:4px">Expires in days (blank = never)</label>
+      <input id="newkey-expires" type="number" min="1" max="3650" placeholder="365"
+        style="width:120px;font-size:12px;padding:6px 8px;border:1px solid #E8E5DA;border-radius:3px;font-family:inherit">
+    </div>
+    <div style="display:flex;gap:8px">
+      <button onclick="submitCreateApiKey()" style="font-size:12px;padding:6px 12px;background:#534AB7;color:#fff;border:none;border-radius:4px;cursor:pointer;font-family:inherit">
+        Create key
+      </button>
+      <button onclick="document.getElementById('new-key-panel').innerHTML=''" style="font-size:12px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #E8E5DA;border-radius:4px;cursor:pointer;font-family:inherit">
+        Cancel
+      </button>
+    </div>
+  </div>`;
+}
+
+
+async function submitCreateApiKey() {
+  const name    = document.getElementById('newkey-name').value.trim();
+  const scopes  = Array.from(document.querySelectorAll('.newkey-scope:checked')).map(el => el.value);
+  const expires = parseInt(document.getElementById('newkey-expires').value, 10) || null;
+  if (!name)         { alert('Please give the key a name.'); return; }
+  if (!scopes.length){ alert('Please pick at least one scope.'); return; }
+  const body = {name, scopes};
+  if (expires) body.expires_in_days = expires;
+  try {
+    const r = await fetch('/api/v1/tenant/api-keys', {
+      method:  'POST',
+      headers: {'X-API-Key': API_KEY, 'Content-Type': 'application/json'},
+      body:    JSON.stringify(body),
+    });
+    if (!r.ok) {
+      const err = await r.json().catch(() => ({}));
+      alert(`Couldn't create key: ${err.detail || err.error?.message || r.status}`);
+      return;
+    }
+    const created = await r.json();
+    showNewKeyReveal(created);
+    loadProfile();
+  } catch (e) {
+    alert(`Couldn't create key — check your connection and try again.`);
+  }
+}
+
+
+function showNewKeyReveal(created) {
+  const esc = s => (s == null ? '' : String(s)).replace(/</g,'&lt;').replace(/&/g,'&amp;');
+  const panel = document.getElementById('new-key-panel');
+  if (!panel) return;
+  panel.innerHTML = `<div style="background:#FBF3F3;border:1px solid #E0C8C8;border-radius:6px;padding:14px;margin-bottom:12px">
+    <div style="font-size:12px;font-weight:600;color:#9C2E2E;margin-bottom:8px">
+      <i class="ti ti-key"></i> Copy this key NOW — it won't be shown again
+    </div>
+    <div style="display:flex;gap:6px;margin-bottom:10px">
+      <input readonly value="${esc(created.key)}" id="newkey-value"
+        style="flex:1;font-family:monospace;font-size:11px;padding:6px 8px;border:1px solid #E8E5DA;border-radius:3px;background:#fff;box-sizing:border-box">
+      <button onclick="navigator.clipboard.writeText(document.getElementById('newkey-value').value).then(() => this.textContent = 'Copied')" style="font-size:11px;padding:6px 10px;background:#534AB7;color:#fff;border:none;border-radius:3px;cursor:pointer;font-family:inherit">
+        Copy
+      </button>
+    </div>
+    <div style="font-size:10px;color:#5C5A4F">
+      ArionComply stores only the SHA256 hash. If you lose this value, revoke the key
+      and create a new one. Consider storing it in your secrets manager.
+    </div>
+    <div style="margin-top:10px;text-align:right">
+      <button onclick="document.getElementById('new-key-panel').innerHTML=''" style="font-size:12px;padding:6px 12px;background:#fff;color:#3A382E;border:1px solid #E8E5DA;border-radius:4px;cursor:pointer;font-family:inherit">
+        I've saved it — close
+      </button>
+    </div>
+  </div>`;
+}
+
+
+async function revokeApiKey(keyId, name) {
+  if (!confirm(`Revoke API key "${name}"? Any client using it will start failing.`)) return;
+  try {
+    const r = await fetch(`/api/v1/tenant/api-keys/${encodeURIComponent(keyId)}`, {
+      method:  'DELETE',
+      headers: {'X-API-Key': API_KEY},
+    });
+    if (!r.ok) {
+      const err = await r.json().catch(() => ({}));
+      alert(`Couldn't revoke key: ${err.detail || err.error?.message || r.status}`);
+      return;
+    }
+    loadProfile();
+  } catch (e) {
+    alert(`Couldn't revoke key — check your connection and try again.`);
   }
 }
 

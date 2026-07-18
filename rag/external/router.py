@@ -30,6 +30,7 @@ from rag.external.endpoints.notifications import router as notifications_router
 from rag.external.endpoints.documents     import router as documents_router
 from rag.external.endpoints.cascade       import router as cascade_router
 from rag.external.endpoints.bridges       import router as bridges_router
+from rag.external.docs                    import router as docs_router
 
 
 external_router = APIRouter(
@@ -49,3 +50,4 @@ external_router.include_router(notifications_router)
 external_router.include_router(documents_router)
 external_router.include_router(cascade_router)
 external_router.include_router(bridges_router)
+external_router.include_router(docs_router)

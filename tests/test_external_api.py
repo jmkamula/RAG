@@ -1475,6 +1475,162 @@ TESTS += [
 ]
 
 
+# ── Ship 4'.g: docs, SDK, and API-key management tests ────────────────
+
+def test_openapi_docs_served():
+    """Swagger UI + ReDoc HTML pages + filtered OpenAPI JSON all
+    live under /api/external/v1/*."""
+    with _test_state() as _:
+        # openapi.json — check paths and title are external-scoped
+        code, body, _h = _get("/api/external/v1/openapi.json", key=RAW_KEY_GOOD)
+        title  = body.get("info", {}).get("title", "")
+        paths  = body.get("paths", {}) or {}
+        exterior_only = all(p.startswith("/api/external/") for p in paths.keys())
+        return _ok(
+            code == 200
+            and "External" in title
+            and len(paths) >= 12
+            and exterior_only,
+            f"title={title!r} paths_len={len(paths)} exterior_only={exterior_only}",
+        )
+
+
+def test_api_keys_list_endpoint():
+    """/api/v1/tenant/api-keys — list requires ANY valid api_key."""
+    with _test_state() as _:
+        code, body, _h = _get("/api/v1/tenant/api-keys", key=RAW_KEY_GOOD)
+        return _ok(
+            code == 200
+            and isinstance(body.get("keys"), list)
+            and body.get("tenant_id") == TEST_TENANT_ID,
+            f"code={code} body={body}",
+        )
+
+
+def test_api_keys_create_returns_raw_once():
+    with _test_state() as _:
+        code, body, _h = _post(
+            "/api/v1/tenant/api-keys",
+            {"name": "TEST 4g create", "scopes": ["external:status"], "expires_in_days": 30},
+            key=RAW_KEY_GOOD,
+        )
+        # Cleanup: revoke immediately + also delete via superuser DELETE
+        # so the row doesn't linger past this test
+        if code == 200 and body.get("id"):
+            try:
+                conn = _connect()
+                with conn.cursor() as cur:
+                    cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (TEST_TENANT_ID,))
+                    cur.execute("DELETE FROM api_keys WHERE id=%s::uuid", (body["id"],))
+                conn.commit(); conn.close()
+            except Exception:
+                pass
+        return _ok(
+            code == 200
+            and body.get("key", "").startswith("arion_ext_")
+            and body.get("key_prefix", "").startswith("arion_ext_")
+            and body.get("name") == "TEST 4g create"
+            and body.get("scopes") == ["external:status"]
+            and body.get("expires_at"),
+            f"code={code} body_keys={list(body.keys())} name={body.get('name')}",
+        )
+
+
+def test_api_keys_create_bad_scope_returns_400():
+    with _test_state() as _:
+        code, body, _h = _post(
+            "/api/v1/tenant/api-keys",
+            {"name": "TEST bad scope", "scopes": ["external:root"]},
+            key=RAW_KEY_GOOD,
+        )
+        return _ok(
+            code == 400 and "external:root" in str(body),
+            f"code={code} body={body}",
+        )
+
+
+def test_api_keys_revoke_flow():
+    """Create → newly-created key works → revoke → old key rejected."""
+    with _test_state() as _:
+        create_code, created, _h = _post(
+            "/api/v1/tenant/api-keys",
+            {"name": "TEST 4g revoke", "scopes": ["external:status"]},
+            key=RAW_KEY_GOOD,
+        )
+        if create_code != 200:
+            return _ok(False, f"create failed: {created}")
+        raw    = created["key"]
+        new_id = created["id"]
+
+        # New key works
+        code_ok, _b_ok, _h_ok = _get("/api/external/v1/status", key=raw)
+
+        # Revoke
+        req = urllib.request.Request(
+            BASE + f"/api/v1/tenant/api-keys/{new_id}",
+            method="DELETE",
+        )
+        req.add_header("X-API-Key", RAW_KEY_GOOD)
+        try:
+            with urllib.request.urlopen(req, timeout=10) as r:
+                revoke_code = r.status
+        except urllib.error.HTTPError as e:
+            revoke_code = e.code
+
+        # Old key rejected
+        code_401, body_401, _h_401 = _get("/api/external/v1/status", key=raw)
+
+        # Cleanup: hard-delete
+        try:
+            conn = _connect()
+            with conn.cursor() as cur:
+                cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (TEST_TENANT_ID,))
+                cur.execute("DELETE FROM api_keys WHERE id=%s::uuid", (new_id,))
+            conn.commit(); conn.close()
+        except Exception:
+            pass
+
+        return _ok(
+            code_ok == 200
+            and revoke_code == 200
+            and code_401 == 401
+            and body_401.get("error", {}).get("code") == "invalid_api_key",
+            f"code_ok={code_ok} revoke={revoke_code} code_401={code_401}",
+        )
+
+
+def test_api_keys_revoke_self_returns_400():
+    """Can't revoke the key you're authenticated with."""
+    with _test_state() as (_conn, seeds):
+        good_id = seeds["good_id"]
+        req = urllib.request.Request(
+            BASE + f"/api/v1/tenant/api-keys/{good_id}",
+            method="DELETE",
+        )
+        req.add_header("X-API-Key", RAW_KEY_GOOD)
+        try:
+            with urllib.request.urlopen(req, timeout=10) as r:
+                code = r.status
+                body = json.loads(r.read().decode())
+        except urllib.error.HTTPError as e:
+            code = e.code
+            body = json.loads(e.read().decode())
+        return _ok(
+            code == 400 and "Cannot revoke" in str(body),
+            f"code={code} body={body}",
+        )
+
+
+TESTS += [
+    test_openapi_docs_served,
+    test_api_keys_list_endpoint,
+    test_api_keys_create_returns_raw_once,
+    test_api_keys_create_bad_scope_returns_400,
+    test_api_keys_revoke_flow,
+    test_api_keys_revoke_self_returns_400,
+]
+
+
 def main():
     print("─" * 70)
     print("  External API integration tests (Ship 4'.a)")

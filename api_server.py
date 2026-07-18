@@ -48,7 +48,7 @@ from fastapi import (
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 # Ship 2'.k: FastAPI-side ID-shape validators. Every path param that
 # hits a Postgres ::uuid cast is typed via one of the *IdParam aliases
@@ -6986,6 +6986,222 @@ async def admin_cypher(
 async def graph_page():
     """Serve the /graph debug explorer page."""
     return FileResponse(_static / "graph.html")
+
+
+# =============================================================================
+# Ship 4'.g: TENANT-FACING API-KEY MANAGEMENT
+# =============================================================================
+# Create / list / revoke external API keys via the Profile page.
+# Keys are stored SHA256-hashed; the raw key value is returned ONCE
+# at creation and can never be recovered from the server.
+#
+# Scoped under existing api_keys row for the tenant's admin user.
+# Auth: any existing key on the tenant (via require_api_key), so
+# the initial dev key can bootstrap new keys.
+
+_EXTERNAL_SCOPES_ALLOWED = [
+    "external:status",
+    "external:query",
+    "external:posture:read",
+    "external:notifications:read",
+    "external:evidence:read",
+    "external:evidence:write",
+    "external:cascade:read",
+    "external:xfw:read",
+]
+
+
+class ApiKeyCreateRequest(BaseModel):
+    name:       str = Field(..., min_length=1, max_length=200,
+                            description="Human label for the key (e.g. `SIEM production`).")
+    scopes:     list[str] = Field(..., min_length=1,
+                                  description="One or more `external:*` scopes.")
+    expires_in_days: Optional[int] = Field(None, ge=1, le=3650,
+                                           description="Auto-expire after this many days. None = never.")
+
+
+class ApiKeyCreated(BaseModel):
+    id:          str
+    key:         str = Field(..., description="Raw API key — copy now; not recoverable.")
+    key_prefix:  str
+    name:        str
+    scopes:      list[str]
+    created_at:  str
+    expires_at:  Optional[str] = None
+
+
+class ApiKeyRow(BaseModel):
+    id:            str
+    name:          str
+    key_prefix:    str
+    scopes:        list[str]
+    is_active:     bool
+    created_at:    str
+    last_used_at:  Optional[str] = None
+    expires_at:    Optional[str] = None
+
+
+class ApiKeysList(BaseModel):
+    tenant_id: str
+    keys:      list[ApiKeyRow]
+
+
+@app.post("/api/v1/tenant/api-keys",
+          response_model = ApiKeyCreated,
+          tags = ["api_keys"])
+async def api_keys_create(
+    body:     ApiKeyCreateRequest,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Create a new API key. Returns the raw key value ONCE — the
+    tenant must copy it now; the server stores only the SHA256 hash.
+    """
+    bad = [s for s in body.scopes if s not in _EXTERNAL_SCOPES_ALLOWED]
+    if bad:
+        raise HTTPException(
+            status_code = 400,
+            detail      = f"Unknown scope(s): {bad}. Allowed: {_EXTERNAL_SCOPES_ALLOWED}",
+        )
+
+    # Generate a raw key with an easily-recognisable prefix
+    import secrets
+    raw = "arion_ext_" + secrets.token_urlsafe(32)
+    key_hash   = _hash_key(raw)
+    key_prefix = raw[:12]
+
+    expires_at = None
+    if body.expires_in_days:
+        import datetime as _dt
+        expires_at = _dt.datetime.now(_dt.timezone.utc) + _dt.timedelta(days=body.expires_in_days)
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO api_keys (
+                    tenant_id, user_id, key_hash, key_prefix,
+                    name, scopes, is_active, expires_at
+                ) VALUES (
+                    %s::uuid, %s::uuid, %s, %s,
+                    %s, %s, TRUE, %s
+                )
+                RETURNING id::text, created_at
+                """,
+                (key_info.tenant_id, key_info.user_id, key_hash, key_prefix,
+                 body.name, body.scopes, expires_at),
+            )
+            new_id, created_at = cur.fetchone()
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+
+    return ApiKeyCreated(
+        id         = new_id,
+        key        = raw,
+        key_prefix = key_prefix,
+        name       = body.name,
+        scopes     = body.scopes,
+        created_at = created_at.isoformat() if created_at else "",
+        expires_at = expires_at.isoformat() if expires_at else None,
+    )
+
+
+@app.get("/api/v1/tenant/api-keys",
+         response_model = ApiKeysList,
+         tags = ["api_keys"])
+async def api_keys_list(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """List all API keys for the tenant. Raw key values are NEVER
+    returned — only prefix + metadata."""
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT id::text, name, key_prefix, scopes, is_active,
+                       created_at, last_used_at, expires_at
+                  FROM api_keys
+                 WHERE tenant_id = %s::uuid
+                 ORDER BY created_at DESC
+                """,
+                (key_info.tenant_id,),
+            )
+            rows = cur.fetchall()
+    finally:
+        pool.putconn(conn)
+
+    return ApiKeysList(
+        tenant_id = key_info.tenant_id,
+        keys      = [
+            ApiKeyRow(
+                id           = r[0],
+                name         = r[1] or "",
+                key_prefix   = r[2] or "",
+                scopes       = list(r[3] or []),
+                is_active    = bool(r[4]),
+                created_at   = r[5].isoformat() if r[5] else "",
+                last_used_at = r[6].isoformat() if r[6] else None,
+                expires_at   = r[7].isoformat() if r[7] else None,
+            ) for r in rows
+        ],
+    )
+
+
+@app.delete("/api/v1/tenant/api-keys/{key_id}",
+            tags = ["api_keys"])
+async def api_keys_revoke(
+    key_id:   str,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Revoke (soft-delete) an API key by setting is_active=false.
+    The row stays in the DB for audit history."""
+    # Prevent revoking the current auth key — would 401 the next
+    # request. Refuse and require the tenant to use a different key.
+    if key_id == key_info.key_id:
+        raise HTTPException(
+            status_code = 400,
+            detail      = "Cannot revoke the key you are currently authenticated with. "
+                          "Use a different key to revoke this one.",
+        )
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            try:
+                cur.execute(
+                    """
+                    UPDATE api_keys SET is_active = FALSE
+                     WHERE tenant_id = %s::uuid AND id = %s::uuid
+                     RETURNING id::text
+                    """,
+                    (key_info.tenant_id, key_id),
+                )
+                row = cur.fetchone()
+            except Exception:
+                raise HTTPException(
+                    status_code = 400,
+                    detail      = f"key_id must be a UUID; got: {key_id!r}",
+                )
+        conn.commit()
+    finally:
+        pool.putconn(conn)
+
+    if row is None:
+        raise HTTPException(
+            status_code = 404,
+            detail      = f"No key {key_id!r} for this tenant.",
+        )
+    return {"id": row[0], "is_active": False}
 
 
 # =============================================================================
