@@ -27,10 +27,24 @@ JOIN `information_schema.table_privileges`).
   should be followed in the same migration by
   `GRANT SELECT, INSERT, UPDATE, DELETE ON X TO arioncomply_app`,
   unless the table is:
-  * an append-only audit log (`ai_call_log`, `intake_trace_log`,
-    `posture_status_log`) — leave UPDATE + DELETE off by design
+  * **compliance-load-bearing evidence** (`posture_status_log`
+    — the audit trail of posture changes; auditor-required
+    evidence for control history). Leave UPDATE + DELETE off
+    by design. See schema_v79 hardening.
   * a case where least-privilege genuinely matters (rare — the
     permissive policy already gave read/write to everything)
+
+- **Diagnostic logs are NOT audit logs.** Ship 4'.b's addendum
+  (schema_v79) corrected an earlier misclassification: 5 tables
+  I had labeled "audit logs" (`ai_call_log`, `chat_casefile_log`,
+  `chat_consensus_log`, `fact_recompute_log`, `intake_trace_log`)
+  are just diagnostic logs — LLM cost/latency tuning, digest
+  observability, pipeline QA. They're retention-eligible and now
+  have DELETE grants + permissive policies. Only `posture_status_log`
+  is genuinely load-bearing.
+- Also from schema_v79: `ai_call_log` had UPDATE granted but not
+  DELETE — worse than DELETE for integrity (silent history
+  rewrites). Now: `INSERT/SELECT/DELETE` only.
 - Reversal check when auditing: query tables that have the
   `app_*_all` policy pattern and ensure GRANTs align:
 
@@ -49,10 +63,16 @@ SELECT p.tablename,
 ```
 
 - schema_v76 (2026-07-17) aligned the 6 legitimate DELETE
-  candidates. The 3 audit logs (`ai_call_log`, `intake_trace_log`,
-  `posture_status_log`) intentionally remain no-DELETE.
+  candidates. **schema_v79 (Ship 4'.b addendum) corrected the
+  earlier "3 audit logs stay no-DELETE" claim** — 5 tables
+  reclassified from "audit" to "diagnostic" (DELETE granted,
+  retention-eligible). Only `posture_status_log` remains
+  genuinely load-bearing (INSERT/SELECT only + tenant FK
+  hardened from CASCADE to NO ACTION).
 
 Related: [[ship-3-prime-j-delivery-integration-tests-2026-07-17]]
 (where the gap surfaced),
 [[ship-3-prime-d-channel-config-ui-2026-07-17]] (where the
-`app_*_all` policy pattern was established).
+`app_*_all` policy pattern was established),
+[[ship-4-prime-b-audit-log-correction-2026-07-17]] (Ship 4'.b
+addendum that corrected the classification).

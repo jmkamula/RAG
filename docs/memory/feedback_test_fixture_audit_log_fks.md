@@ -7,16 +7,29 @@ metadata:
   originSessionId: 5808ba74-b22a-4a68-b4f1-19f18ce079cd
 ---
 
-Integration tests that invoke the RAG pipeline (or any code that
-writes to append-only audit logs like `ai_call_log`,
-`chat_casefile_log`, `chat_consensus_log`, `intake_trace_log`,
-`fact_recompute_log`) CANNOT delete their test tenant on teardown.
+Integration tests that invoke the RAG pipeline CAN delete their
+test tenant's rows in most tables, but `posture_status_log`
+(compliance-load-bearing audit trail) will block tenant DELETE
+if any posture change was written for that tenant.
 
-**Why:** those tables intentionally have no DELETE grant for
-arioncomply_app (see [[feedback-rls-grant-parity]] — they're
-append-only by design). Their rows FK-reference `tenants(id)`, so
-`DELETE FROM tenants WHERE id=<test_tenant>` fails with
-`ForeignKeyViolation`.
+**Historical note:** Ship 4'.b originally documented this rule
+against 6 tables (`ai_call_log`, `chat_casefile_log`,
+`chat_consensus_log`, `intake_trace_log`, `fact_recompute_log`,
+`posture_status_log`) as "append-only audit logs by design".
+schema_v79 (Ship 4'.b addendum, 2026-07-17) corrected the
+misclassification — 5 of those are diagnostic logs (LLM cost
+tuning, digest observability, pipeline QA) and are now
+retention-eligible with DELETE granted. Only `posture_status_log`
+remains genuinely load-bearing (INSERT/SELECT only + tenant FK
+hardened from CASCADE to NO ACTION).
+
+**Why the fixture pattern still stands:** even though the 5
+diagnostic logs no longer block, using an idempotent tenant +
+surgical-delete-of-what-you-created pattern remains the
+lowest-friction cleanup. It doesn't accumulate DB drift and it
+doesn't require enumerating every table with an FK to
+`tenants(id)` (there are 39). See
+[[ship-4-prime-b-audit-log-correction-2026-07-17]].
 
 **How to apply:**
 
