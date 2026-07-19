@@ -1196,6 +1196,7 @@ class LLMAnswer:
                 system_prompt_tokens  = sys_tokens,
                 user_digest_tokens    = user_tokens,
                 repair_result         = repair_result,
+                answer_text           = answer_text,
                 digest_latency_ms     = digest_ms,
                 repair_latency_ms     = repair_ms,
                 total_latency_ms      = int((time.time() - t0) * 1000),
@@ -1263,6 +1264,7 @@ class LLMAnswer:
         total_latency_ms:     int,
         casefile_enabled:     bool,
         shadow_mode:          bool,
+        answer_text:          str | None = None,
     ) -> None:
         """Write one row to chat_casefile_log — best-effort, silent-fail.
 
@@ -1318,6 +1320,7 @@ class LLMAnswer:
                 system_prompt_tokens = system_prompt_tokens,
                 user_digest_tokens   = user_digest_tokens,
                 repair_result        = repair_result,
+                answer_text          = answer_text,
                 digest_latency_ms    = digest_latency_ms,
                 repair_latency_ms    = repair_latency_ms,
                 total_latency_ms     = total_latency_ms,

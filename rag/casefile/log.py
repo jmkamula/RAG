@@ -11,11 +11,18 @@ import json
 import logging
 from typing import Optional
 
+from rag.casefile.claim_scan import claims_to_json, scan_claims
 from rag.casefile.repair import RepairEvent, RepairResult
 from rag.casefile.types import CaseFile
 
 
 logger = logging.getLogger("rag.casefile.log")
+
+# Ship 6'.d: cap the stored answer body. 8000 chars covers >99% of
+# realistic chat answers (typical: 800–2000). Anything longer is
+# either a rare long-form implementation guide or a defect worth
+# investigating separately.
+_ANSWER_TEXT_CAP = 8000
 
 
 def _repair_events_to_json(events: list[RepairEvent]) -> list[dict]:
@@ -33,6 +40,7 @@ def log_casefile(
     system_prompt_tokens: Optional[int],
     user_digest_tokens:   Optional[int],
     repair_result:        RepairResult,
+    answer_text:          Optional[str] = None,
     session_id:           Optional[str] = None,
     request_id:           Optional[str] = None,
     casefile_enabled:     bool = False,
@@ -74,6 +82,12 @@ def log_casefile(
         if system_prompt_tokens is not None and user_digest_tokens is not None:
             total_tokens = system_prompt_tokens + user_digest_tokens
 
+        # Ship 6'.d: passive claim scan. NEVER blocks or rewrites —
+        # only records what normative claims the LLM made.
+        answer_body = (answer_text or "")[:_ANSWER_TEXT_CAP]
+        claim_events = claims_to_json(scan_claims(answer_body, case_file))
+        claim_events_count = len(claim_events)
+
         with pg_conn.cursor() as cur:
             cur.execute(
                 """
@@ -86,6 +100,7 @@ def log_casefile(
                     casefile_enabled, shadow_mode,
                     digest_latency_ms, repair_latency_ms, total_latency_ms,
                     error_type, error_detail,
+                    answer_text, claim_events, claim_events_count,
                     purge_after
                 ) VALUES (
                     %s::uuid, %s, %s,
@@ -96,6 +111,7 @@ def log_casefile(
                     %s, %s,
                     %s, %s, %s,
                     %s, %s,
+                    %s, %s::jsonb, %s,
                     NOW() + (%s || ' days')::interval
                 )
                 RETURNING id
@@ -109,6 +125,7 @@ def log_casefile(
                     casefile_enabled, shadow_mode,
                     digest_latency_ms, repair_latency_ms, total_latency_ms,
                     error_type, error_detail,
+                    answer_body or None, json.dumps(claim_events), claim_events_count,
                     str(retention_days),
                 ),
             )
