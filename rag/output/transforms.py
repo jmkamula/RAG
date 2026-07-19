@@ -162,6 +162,45 @@ _UUID_RE = re.compile(
 )
 
 
+# ── Markdown-escape artifacts ─────────────────────────────────────
+#
+# Some document extractors (mammoth for DOCX, older PDF paths) emit
+# markdown that escapes ordinary punctuation as backslash sequences
+# — `\-`, `\(`, `\.`, `\)`, etc. When that markdown is stored
+# verbatim into `document_findings.excerpt` or
+# `posture_controls.gap_description`, the backslashes survive into
+# tenant-facing prose ("Server log data \\- IP addresses \\(browser
+# information\\)"), reading as escaping noise.
+#
+# The set below matches every markdown-special ASCII character
+# that pandoc/mammoth/CommonMark implementations escape.
+# See CommonMark §2.4 (Backslash escapes).
+
+_MD_ESCAPE_RE = re.compile(
+    r"\\([\-\(\)\.\+\*_\[\]!|<>#\{\}`~])"
+)
+
+
+def strip_markdown_escapes(text: str) -> str:
+    """Strip backslash-escape prefixes from markdown-special
+    punctuation. Ship 7'.d — surfaced during the 7'.c evaluation
+    checkpoint when we found `\\-`, `\\(`, `\\.` artifacts leaking
+    from extractor output into `posture_controls.gap_description`.
+
+    Only strips backslash-<punct> pairs; leaves `\\n`, `\\t`,
+    `\\\\`, and other legitimate escape sequences alone.
+
+    Example:
+        'Verpex processes: \\\\- Server log data \\\\(IP addresses\\\\)\\\\.' →
+        'Verpex processes: - Server log data (IP addresses).'
+
+    Idempotence: output contains no `\\<punct>` patterns.
+    """
+    if not text:
+        return text
+    return _MD_ESCAPE_RE.sub(r"\1", text)
+
+
 def scrub_uuids(text: str, *, keep_suffix: int = 8) -> str:
     """Replace bare UUIDs with a short trailing suffix so the ID
     is still traceable in a support conversation without dumping
@@ -190,8 +229,9 @@ def scrub_uuids(text: str, *, keep_suffix: int = 8) -> str:
 # Registry of all named transforms so the gateway can look them
 # up by string name. Add new transforms here + import above.
 TRANSFORMS = {
-    "format_standard_id":  format_standard_id,
-    "humanize_snake_case": humanize_snake_case,
-    "scrub_leaf_ids":      scrub_leaf_ids,
-    "scrub_uuids":         scrub_uuids,
+    "format_standard_id":      format_standard_id,
+    "humanize_snake_case":     humanize_snake_case,
+    "scrub_leaf_ids":          scrub_leaf_ids,
+    "scrub_uuids":             scrub_uuids,
+    "strip_markdown_escapes":  strip_markdown_escapes,
 }

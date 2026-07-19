@@ -28,6 +28,7 @@ from rag.output import (
     humanize_snake_case,
     scrub_leaf_ids,
     scrub_uuids,
+    strip_markdown_escapes,
 )
 from rag.output import vocab
 
@@ -143,6 +144,55 @@ def test_scrub_leaf_ids() -> int:
     once  = scrub_leaf_ids("req:A.5.15:foo bar")
     twice = scrub_leaf_ids(once)
     fails += 0 if _check("idempotent", once, twice) else 1
+    return fails
+
+
+def test_strip_markdown_escapes() -> int:
+    """Ship 7'.d — surfaced during 7'.c evaluation: extractor
+    output leaks `\\-`, `\\(`, `\\.` backslash-escaped punctuation
+    into stored gap_description. Transform must strip only
+    markdown-special punctuation escapes, preserving `\\n`, `\\t`,
+    etc."""
+    print("\ntransforms.strip_markdown_escapes")
+    fails = 0
+    fails += 0 if _check(
+        "hyphen + parens + period",
+        strip_markdown_escapes("Verpex processes: \\- Server log data \\(IP addresses\\)\\."),
+        "Verpex processes: - Server log data (IP addresses).",
+    ) else 1
+    fails += 0 if _check(
+        "no artifacts → unchanged",
+        strip_markdown_escapes("Ordinary prose."),
+        "Ordinary prose.",
+    ) else 1
+    # Legitimate whitespace escapes untouched
+    fails += 0 if _check(
+        "preserves \\n / \\t",
+        strip_markdown_escapes("line1\\nline2\\tcol"),
+        "line1\\nline2\\tcol",
+    ) else 1
+    # Idempotence
+    once  = strip_markdown_escapes("test \\- \\.")
+    twice = strip_markdown_escapes(once)
+    fails += 0 if _check("idempotent", once, twice) else 1
+    # Gateway integration — 7'.d added strip_markdown_escapes to
+    # stage2_reason, evidence_prose, cascade_rationale.
+    fails += 0 if _check(
+        "gateway stage2_reason strips",
+        humanize(
+            "Verpex processes\\: \\- server logs\\.",
+            surface="stage2_reason",
+        ),
+        "Verpex processes\\: - server logs.",   # `\:` not in the strip set (: isn't markdown-special)
+    ) else 1
+    fails += 0 if _check(
+        "gateway evidence_prose strips + humanises",
+        humanize(
+            "The obligation covers ISO27001:2022 A.5.15\\. See access_review_required workflow\\.",
+            surface="evidence_prose",
+        ),
+        "The obligation covers ISO 27001:2022 A.5.15. See access review required workflow.",
+    ) else 1
     return fails
 
 
@@ -364,6 +414,7 @@ def main() -> int:
         + test_format_standard_id_exact()
         + test_humanize_snake_case()
         + test_scrub_leaf_ids()
+        + test_strip_markdown_escapes()
         + test_scrub_uuids()
         + test_surface_routing()
         + test_gateway_guard()

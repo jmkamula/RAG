@@ -82,7 +82,10 @@ _SURFACE_DEFAULTS: dict[str, tuple[str, ...]] = {
     ),
     "stage2_reason": (
         # Engine-composed gap reasons. Slugs sneak in from legacy
-        # gap_description prose. Full clean.
+        # gap_description prose. Ship 7'.d adds markdown-escape
+        # stripping — extractor output can carry `\-`, `\(`, `\.`
+        # artifacts from mammoth-processed DOCX.
+        "strip_markdown_escapes",
         "scrub_leaf_ids",
         "humanize_snake_case",
         "format_standard_id",
@@ -96,14 +99,19 @@ _SURFACE_DEFAULTS: dict[str, tuple[str, ...]] = {
     ),
     "cascade_rationale": (
         # SOAR-facing. Keep it minimal — SIEM consumers may parse.
+        # strip_markdown_escapes added Ship 7'.d for the extractor-
+        # sourced portion of rationale strings.
+        "strip_markdown_escapes",
         "humanize_snake_case",
         "format_standard_id",
     ),
     "evidence_prose": (
         # Auditor-facing prose in the Evidence Package + obligation
         # text. Scrub leaf-id leakage that curator authoring may have
-        # embedded, humanise snake_case action verbs, and format
-        # standard-id slugs.
+        # embedded, strip markdown-escapes from extractor sources,
+        # humanise snake_case action verbs, and format standard-id
+        # slugs.
+        "strip_markdown_escapes",
         "scrub_leaf_ids",
         "humanize_snake_case",
         "format_standard_id",

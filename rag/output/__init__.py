@@ -20,6 +20,7 @@ from rag.output.transforms import (
     humanize_snake_case,
     scrub_leaf_ids,
     scrub_uuids,
+    strip_markdown_escapes,
 )
 
 __all__ = [
@@ -31,4 +32,5 @@ __all__ = [
     "humanize_snake_case",
     "scrub_leaf_ids",
     "scrub_uuids",
+    "strip_markdown_escapes",
 ]
