@@ -11,6 +11,7 @@ import json
 import logging
 from typing import Optional
 
+from rag.ai_trace import current_request_id, current_session_id
 from rag.casefile.claim_scan import claims_to_json, scan_claims
 from rag.casefile.repair import RepairEvent, RepairResult
 from rag.casefile.types import CaseFile
@@ -72,6 +73,15 @@ def log_casefile(
         retention_days:        Purge-after horizon.
     """
     try:
+        # Ship 6'.e: fall back to ai_trace ContextVars if the caller
+        # didn't pass ids explicitly. `set_trace_context()` is called
+        # at the API request boundary so every internal LLM call site
+        # picks these up transparently.
+        if session_id is None:
+            session_id = current_session_id()
+        if request_id is None:
+            request_id = current_request_id()
+
         summary  = case_file.summary()
         qtype    = case_file.question_type
         query    = case_file.query

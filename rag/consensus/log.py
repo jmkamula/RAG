@@ -12,6 +12,7 @@ import os
 from typing import Optional
 from dataclasses import asdict, is_dataclass
 
+from rag.ai_trace import current_request_id, current_session_id
 from rag.consensus.types import ConsensusResult, SignalOutput
 
 
@@ -84,6 +85,15 @@ def log_consensus(
         retention_days:    Purge-after horizon (default 90 days).
     """
     try:
+        # Ship 6'.e: fall back to ai_trace ContextVars if the caller
+        # didn't pass ids explicitly. set_trace_context() runs at API
+        # request entry (api_server.py:513) so every internal write
+        # picks them up transparently.
+        if session_id is None:
+            session_id = current_session_id()
+        if request_id is None:
+            request_id = current_request_id()
+
         signals_json = [_signal_to_json(s) for s in (result.signals or [])]
         clarification_json = _clarification_to_json(result.clarification)
 

@@ -90,6 +90,24 @@ def reset_trace_context(tokens: tuple) -> None:
     except Exception:
         pass
 
+
+# Ship 6'.e: read-only accessors so downstream log writers can pull
+# the ambient session_id / request_id (stamped at request entry by
+# `set_trace_context`) without threading them through function
+# signatures. `log_llm_call` already reads these; the chat-log and
+# consensus-log writers now do too.
+
+def current_session_id() -> Optional[str]:
+    return _session_ctx.get()
+
+
+def current_request_id() -> Optional[str]:
+    return _request_ctx.get()
+
+
+def current_tenant_id() -> Optional[str]:
+    return _tenant_ctx.get()
+
 # Per-1M-token USD pricing snapshot 2026-07-10.
 # Update as providers publish new rates. Keys are normalized model
 # names (lowercase, colon-stripped). Sources: openai.com/pricing,

@@ -3331,6 +3331,97 @@ async def admin_uploads_quality(
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Ship 6'.e (2026-07-19): joined LLM decision-trail endpoint.
+#
+# One row per chat turn joining chat_casefile_log ⋈ chat_consensus_log ⋈
+# ai_call_log on request_id. Auditor + engineer surface for tracing a
+# full LLM decision trail. Reads the `chat_llm_decision_trail` view
+# (schema_v83).
+# ─────────────────────────────────────────────────────────────────────────────
+
+@app.get("/api/v1/admin/chat/decision-trail", tags=["admin"])
+async def admin_chat_decision_trail(
+    request:      Request,
+    key_info:     APIKeyInfo         = Depends(require_api_key),
+    request_id:   Optional[str]      = None,
+    session_id:   Optional[str]      = None,
+    hours:        int                = 24,
+    limit:        int                = 50,
+    only_repaired:      bool         = False,
+    only_ungrounded:    bool         = False,
+):
+    """Recent chat turns with the joined LLM decision trail. Reads
+    `chat_llm_decision_trail` (Ship 6'.e).
+
+    Filters:
+      request_id      — pin to a specific turn (returns 0 or 1 row)
+      session_id      — all turns in a session (chronological)
+      hours           — time window (default 24)
+      only_repaired   — preservation-check fired ≥1 repair event
+      only_ungrounded — case-file emitted a claim event whose ref
+                        was NOT in the digest (risky)
+    """
+    hours = max(1, min(hours, 24 * 90))
+    limit = max(1, min(limit, 500))
+
+    where_clauses = ["turn_at > now() - (%s || ' hours')::interval"]
+    params: list = [hours]
+    if request_id:
+        where_clauses.append("request_id = %s")
+        params.append(request_id)
+    if session_id:
+        where_clauses.append("session_id = %s")
+        params.append(session_id)
+    if only_repaired:
+        where_clauses.append("repair_events_count > 0")
+    if only_ungrounded:
+        # jsonb contains-any: at least one claim_events entry with
+        # ref_in_digest = false. Passive scan already writes this flag.
+        where_clauses.append(
+            "claim_events @> '[{\"ref_in_digest\": false}]'::jsonb"
+        )
+
+    sql = f"""
+        SELECT
+            casefile_log_id, request_id, session_id, turn_at,
+            query, question_type,
+            consensus_verdict, consensus_top_refs, consensus_top_conf,
+            consensus_corroborators, consensus_framework, consensus_llm_fallback,
+            prompt_tokens_system, prompt_tokens_digest, prompt_tokens_total,
+            repair_events_count, footers_added,
+            digest_latency_ms, repair_latency_ms, total_latency_ms,
+            claim_events_count, claim_events, answer_len,
+            llm_n_calls, llm_tokens_in, llm_tokens_out, llm_cost_usd,
+            llm_purposes, llm_models
+        FROM chat_llm_decision_trail
+        WHERE {' AND '.join(where_clauses)}
+        ORDER BY turn_at DESC
+        LIMIT %s
+    """
+    params.append(limit)
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id, key_info.user_id)
+        with conn.cursor() as cur:
+            cur.execute(sql, tuple(params))
+            cols = [d[0] for d in cur.description]
+            rows = [dict(zip(cols, r)) for r in cur.fetchall()]
+
+        # JSON-safe: cast timestamps + Decimals
+        for r in rows:
+            if r.get("turn_at") is not None:
+                r["turn_at"] = r["turn_at"].isoformat()
+            if r.get("llm_cost_usd") is not None:
+                r["llm_cost_usd"] = float(r["llm_cost_usd"])
+
+        return {"count": len(rows), "turns": rows}
+    finally:
+        pool.putconn(conn)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Wave 4c (2026-07-11): tenant trace dashboard endpoints.
 #
 # Read-only aggregations across the existing trace tables:
