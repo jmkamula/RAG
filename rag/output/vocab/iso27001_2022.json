@@ -1,0 +1,27 @@
+{
+  "internal_id":   "ISO27001:2022",
+  "display_name":  "ISO 27001:2022",
+  "short_name":    "ISO 27001",
+  "family":        "iso_27000_series",
+
+  "ref_conventions": {
+    "annex_a": {
+      "prefix":          "A.",
+      "pattern":         "^A\\.[0-9]+(\\.[0-9]+)*$",
+      "example":         "A.5.15",
+      "display_format":  "{short_name} {ref}"
+    },
+    "isms_clauses": {
+      "prefix":          "",
+      "pattern":         "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+      "example":         "6.1.2",
+      "display_format":  "{short_name} clause {ref}"
+    }
+  },
+
+  "notes": [
+    "Annex A refs carry the 'A.' prefix in the DB and in display.",
+    "ISMS clauses (chapters 4-10) render bare; a UI may add 'clause' for clarity.",
+    "'ISO 27002:2022' guidance is inseparable from 27001 in practice — treat as same family."
+  ]
+}

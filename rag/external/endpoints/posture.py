@@ -51,7 +51,8 @@ _ALLOWED_FINDINGS = ("NC", "OFI", "Comply", "N/A", "Not assessed")
 
 class PostureControl(BaseModel):
     ref:                 str            = Field(..., description="Control ref, e.g. `A.5.18` or `Art.32`.")
-    standard_id:         str            = Field(..., description="Standard id, e.g. `ISO27001:2022`.")
+    standard_id:         str            = Field(..., description="Canonical standard id (DB slug), e.g. `ISO27001:2022`. Preserved verbatim so machine consumers can key on a stable string.")
+    standard_display:    Optional[str]  = Field(None, description="Human display name for `standard_id`, e.g. `ISO 27001:2022`. Ship 7'.b — non-breaking addition; use this for tenant-facing UI, keep `standard_id` for keying.")
     finding:             Optional[str]  = Field(None, description="Live finding: NC / OFI / Comply / N/A / Not assessed.")
     confirmation_status: Optional[str]  = Field(None, description="`unconfirmed` / `document_confirmed` / `engine_confirmed` / etc.")
     last_updated:        Optional[str]  = Field(None, description="ISO8601 timestamp of the last change to this row.")
@@ -76,14 +77,15 @@ class PostureControlDetail(BaseModel):
     tenant_id:           str
     ref:                 str
     standard_id:         str
-    title:               Optional[str]
-    finding:             Optional[str]
-    confirmation_status: Optional[str]
-    confidence:          Optional[str]
-    last_updated:        Optional[str]
-    gap_description:     Optional[str]
-    action_required:     Optional[str]
-    engine_proposal:     Optional[EngineProposal]
+    standard_display:    Optional[str] = None      # Ship 7'.b — see PostureControl above
+    title:               Optional[str] = None
+    finding:             Optional[str] = None
+    confirmation_status: Optional[str] = None
+    confidence:          Optional[str] = None
+    last_updated:        Optional[str] = None
+    gap_description:     Optional[str] = None
+    action_required:     Optional[str] = None
+    engine_proposal:     Optional[EngineProposal] = None
 
 
 class FrameworkInfo(BaseModel):
@@ -104,14 +106,11 @@ def _iso_now() -> str:
 
 
 def _standard_display(std: str) -> str:
-    # Mirrors api_server._STANDARD_DISPLAY without importing it (avoids
-    # circular import at module load).
-    _DISPLAY = {
-        "ISO27001:2022": "ISO 27001:2022",
-        "ISO27701:2019": "ISO 27701:2019",
-        "GDPR:2016/679": "GDPR (EU 2016/679)",
-    }
-    return _DISPLAY.get(std, std)
+    # Ship 7'.b: single source of truth now lives in rag/output/vocab/.
+    # This wrapper stays for callsite stability; adding new frameworks
+    # is a one-file edit under rag/output/vocab/*.json.
+    from rag.output import format_standard_id_exact
+    return format_standard_id_exact(std)
 
 
 # ── GET /posture ──────────────────────────────────────────────────────
@@ -216,6 +215,7 @@ async def get_posture(
         PostureControl(
             ref                 = ref,
             standard_id         = std,
+            standard_display    = _standard_display(std),
             finding             = fnd,
             confirmation_status = cnf,
             last_updated        = lu.isoformat() if lu else None,
@@ -317,6 +317,7 @@ async def get_posture_control(
         tenant_id           = key.tenant_id,
         ref                 = control_ref,
         standard_id         = standard_id,
+        standard_display    = _standard_display(standard_id),
         title               = title,
         finding             = finding,
         confirmation_status = cnf,

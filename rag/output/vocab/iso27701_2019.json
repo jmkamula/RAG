@@ -1,0 +1,33 @@
+{
+  "internal_id":   "ISO27701:2019",
+  "display_name":  "ISO 27701:2019",
+  "short_name":    "ISO 27701",
+  "family":        "iso_27000_series",
+
+  "ref_conventions": {
+    "annex_a": {
+      "prefix":          "A.",
+      "pattern":         "^A\\.[0-9]+(\\.[0-9]+)*$",
+      "example":         "A.7.2.6",
+      "display_format":  "{short_name} {ref}"
+    },
+    "annex_b": {
+      "prefix":          "B.",
+      "pattern":         "^B\\.[0-9]+(\\.[0-9]+)*$",
+      "example":         "B.8.2.2",
+      "display_format":  "{short_name} {ref}"
+    },
+    "isms_clauses": {
+      "prefix":          "",
+      "pattern":         "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+      "example":         "6.1.2",
+      "display_format":  "{short_name} clause {ref}"
+    }
+  },
+
+  "notes": [
+    "27701 is a PIMS extension to 27001 — Annex A applies to controllers, Annex B to processors.",
+    "Refs are namespaced by prefix (A./B.) — same numeric suffix can appear in both.",
+    "ISMS-clause refs (4-10) are shared with 27001; tenants enrolled in both see them via the primary framework."
+  ]
+}

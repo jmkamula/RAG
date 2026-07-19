@@ -1,0 +1,23 @@
+{
+  "internal_id":   "GDPR:2016/679",
+  "display_name":  "GDPR (EU 2016/679)",
+  "short_name":    "GDPR",
+  "family":        "eu_regulations",
+
+  "ref_conventions": {
+    "articles": {
+      "prefix":          "Art.",
+      "pattern":         "^Art\\.[0-9]+(\\.[0-9]+)*(\\.[a-z])?$",
+      "example":         "Art.32",
+      "subarticle_fmt":  "Art.{n}.{sub}",
+      "letter_fmt":      "Art.{n}.{sub}({letter})",
+      "display_format":  "{short_name} {ref}"
+    }
+  },
+
+  "notes": [
+    "Article refs use the 'Art.' prefix consistently — bare 'Art. 32' with a space appears in some LLM output; both should render as 'Art.32'.",
+    "Sub-article letters render as '(a)' / '(b)' etc.; some LLM output emits '.a' — normalise on display.",
+    "External API's 'GDPR' short name is common in headlines; full 'GDPR (EU 2016/679)' fits legal/prose contexts."
+  ]
+}

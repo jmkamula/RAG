@@ -334,15 +334,22 @@ def sweep_overdue_followups(pg_conn, tick_id: str, dry_run: bool = False) -> dic
                         # Another writer got there first — skip notify.
                         continue
 
+                    # Ship 7'.b — humanise event slugs through the
+                    # output gateway so downstream frameworks (SOC 2,
+                    # NIS2, etc.) get consistent tenant-facing display
+                    # without editing this producer.
+                    from rag.output import humanize as _humanize
+                    src_h = _humanize(src_event, surface="notification_title")
+                    exp_h = _humanize(exp_event, surface="notification_title")
                     _title = (f"Follow-up overdue: "
-                              f"'{src_event.replace('_',' ')}' expected "
-                              f"'{exp_event.replace('_',' ')}'")
-                    _body  = (f"It's been {window_d} day"
-                              f"{'s' if window_d != 1 else ''} since "
-                              f"'{src_event.replace('_',' ')}' fired and we "
-                              f"still don't have the expected "
-                              f"'{exp_event.replace('_',' ')}' follow-up on "
-                              f"file.")
+                              f"'{src_h}' expected '{exp_h}'")
+                    _body  = _humanize(
+                        f"It's been {window_d} day"
+                        f"{'s' if window_d != 1 else ''} since "
+                        f"'{src_event}' fired and we still don't have "
+                        f"the expected '{exp_event}' follow-up on file.",
+                        surface="notification_body",
+                    )
                     result = _notify(
                         cur,
                         tenant_id           = tenant_id,
@@ -362,12 +369,19 @@ def sweep_overdue_followups(pg_conn, tick_id: str, dry_run: bool = False) -> dic
                 # while the tenant works remediation. Dedup via the
                 # partial unique index (kind + implication_id).
                 for (impl_id, ctrl_ref, std_id, exp_action, due_date, depth) in impl_rows:
-                    _title = (f"Overdue: {ctrl_ref} requires "
-                              f"{exp_action.replace('_',' ')}")
-                    _body  = (f"A cascade follow-up on {ctrl_ref} is past due. "
-                              f"Expected action: "
-                              f"{exp_action.replace('_',' ')}. Depth "
-                              f"{depth} in the cascade path.")
+                    # Ship 7'.b — same gateway pass; action slugs
+                    # ('access_review_required') render as prose.
+                    from rag.output import humanize as _humanize
+                    _title = _humanize(
+                        f"Overdue: {ctrl_ref} requires {exp_action}",
+                        surface="notification_title",
+                    )
+                    _body  = _humanize(
+                        f"A cascade follow-up on {ctrl_ref} is past due. "
+                        f"Expected action: {exp_action}. Depth "
+                        f"{depth} in the cascade path.",
+                        surface="notification_body",
+                    )
                     # Severity by cascade depth — deeper implications
                     # tend to be secondary/derivative and can be lower
                     # priority; direct (depth 0-1) implications rank
