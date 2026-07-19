@@ -99,6 +99,31 @@ def _map_confidence(raw: str) -> str:
     return v if v in _CONF_NUMERIC else "medium"
 
 
+# Ship 6'.b: map `inference_source` → the auditor-facing
+# `grounding_method` column added in schema_v81. See
+# [[ship-6-prime-b-grounding-provenance-2026-07-18]].
+_INFERENCE_TO_GROUNDING: dict[str, str] = {
+    "extracted":         "extractor_verbatim",   # LLM + verbatim-substring check (extractor.py:_evidence_grounded)
+    "templated":         "template",             # <<MUST item:X>> markers — deterministic
+    "workbook":          "workbook",             # workbook YAML row-matcher
+    "fingerprint_match": "fingerprint",          # 2-of-N corroboration gate
+    "leaf_scan":         "leaf_scan",            # back-bind to unmet MUSTs (HITL-only)
+    "form":              "form",                 # retired 2026-07-04
+    "xfw_bridge":        "unknown",              # xfw is not evidence itself
+}
+
+
+def _grounding_method(inference_source: str) -> str:
+    """Return the canonical grounding_method for a given
+    inference_source. Defaults to 'unknown' — future new sources
+    should add themselves to _INFERENCE_TO_GROUNDING explicitly
+    rather than fall through."""
+    return _INFERENCE_TO_GROUNDING.get(
+        (inference_source or "extracted").lower(),
+        "unknown",
+    )
+
+
 def _numeric_to_conf_label(value: float) -> str:
     """Convert averaged numeric confidence back to label for DB insert."""
     if value >= 0.8:
@@ -467,7 +492,7 @@ def _write_document_findings(
                             status, confidence, excerpt,
                             section_number, extracted_at,
                             is_active, retention_class,
-                            inference_source,
+                            inference_source, grounding_method,
                             review_status, confirmed_by, confirmed_at,
                             corroborating_signals
                         ) VALUES (
@@ -476,7 +501,7 @@ def _write_document_findings(
                             %s, %s, %s,
                             %s, NOW(),
                             TRUE, %s,
-                            %s,
+                            %s, %s,
                             %s, %s::uuid,
                             CASE WHEN %s = 'approved' THEN NOW() ELSE NULL END,
                             %s
@@ -491,14 +516,16 @@ def _write_document_findings(
                             f.evidence_text[:500] if f.evidence_text else None,
                             f.section,
                             _RETENTION_CLASS,
-                            src,
+                            src, _grounding_method(src),
                             review_status, confirmed_by, review_status,
                             getattr(f, "corroborating_signals", None) or [],
                         ),
                     )
                 else:
                     # No inference_source override → DB default 'extracted',
-                    # default review_status 'pending'.
+                    # default review_status 'pending'. Grounding method is
+                    # 'extractor_verbatim' because the LLM path is the only
+                    # writer that leaves inference_source unset.
                     cur.execute(
                         """
                         INSERT INTO document_findings (
@@ -506,13 +533,15 @@ def _write_document_findings(
                             control_ref, standard_id, checklist_item_id,
                             status, confidence, excerpt,
                             section_number, extracted_at,
-                            is_active, retention_class
+                            is_active, retention_class,
+                            grounding_method
                         ) VALUES (
                             %s, %s, %s,
                             %s, %s, %s,
                             %s, %s, %s,
                             %s, NOW(),
-                            TRUE, %s
+                            TRUE, %s,
+                            'extractor_verbatim'
                         )
                         ON CONFLICT (id) DO NOTHING
                         """,
