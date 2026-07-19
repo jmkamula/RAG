@@ -1169,7 +1169,18 @@ async def document_status(
             row2 = cur.fetchone()
 
             if not row and not row2:
-                raise HTTPException(404, f"Upload not found: {upload_id}")
+                # Ship 7'.c — scrub bare UUID from the tenant-facing
+                # error string; keep the trailing suffix so support
+                # can still correlate against server logs.
+                from rag.output import humanize as _humanize
+                raise HTTPException(
+                    404,
+                    _humanize(
+                        f"We couldn't find that upload ({upload_id}) "
+                        f"for your tenant.",
+                        surface="error_detail",
+                    ),
+                )
 
             dup_of      = None
             series_id   = None
@@ -1309,7 +1320,15 @@ async def list_document_versions(
             rows = cur.fetchall()
 
         if not rows:
-            raise HTTPException(404, f"Series not found: {series_id}")
+            # Ship 7'.c — scrub UUID + soften phrasing.
+            from rag.output import humanize as _humanize
+            raise HTTPException(
+                404,
+                _humanize(
+                    f"We couldn't find that document series ({series_id}).",
+                    surface="error_detail",
+                ),
+            )
 
         versions = [
             DocumentVersion(

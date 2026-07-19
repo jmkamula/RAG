@@ -211,6 +211,11 @@ async def get_posture(
     finally:
         pool.putconn(conn)
 
+    # Ship 7'.c — scrub gap_summary through the gateway so legacy
+    # slug leakage from pre-dejargonize extraction doesn't reach
+    # external consumers. Non-breaking: gap_summary keeps its shape,
+    # just cleaner content.
+    from rag.output import humanize as _humanize
     controls = [
         PostureControl(
             ref                 = ref,
@@ -219,7 +224,7 @@ async def get_posture(
             finding             = fnd,
             confirmation_status = cnf,
             last_updated        = lu.isoformat() if lu else None,
-            gap_summary         = gap or None,
+            gap_summary         = _humanize(gap, surface="stage2_reason") if gap else None,
         )
         for (std, ref, fnd, cnf, lu, gap) in rows
     ]
@@ -299,14 +304,20 @@ async def get_posture_control(
     (finding, cnf, conf, lu, gap, action,
      eng_status, eng_finding, eng_reason) = row
 
+    # Ship 7'.c — engine reason composes _humanize_reason (semantic:
+    # "0/4 children" → "0 of 4 evidence sources satisfied") with the
+    # gateway (jargon scrub). Semantic pass first so the gateway sees
+    # human-readable text.
+    from rag.output import humanize as _gateway_humanize
     engine = None
     if eng_status is not None:
-        # Lazy import to avoid pulling api_server at module load
         try:
             from api_server import _humanize_reason  # noqa: WPS433
             humanized = _humanize_reason(eng_reason or "")
         except Exception:
             humanized = eng_reason
+        # Ship 7'.c — gateway scrub for slug residue.
+        humanized = _gateway_humanize(humanized or "", surface="stage2_reason") or humanized
         engine = EngineProposal(
             status  = eng_status,
             finding = eng_finding,
@@ -323,8 +334,8 @@ async def get_posture_control(
         confirmation_status = cnf,
         confidence          = conf,
         last_updated        = lu.isoformat() if lu else None,
-        gap_description     = gap or None,
-        action_required     = action or None,
+        gap_description     = _gateway_humanize(gap, surface="stage2_reason") if gap else None,
+        action_required     = _gateway_humanize(action, surface="stage2_reason") if action else None,
         engine_proposal     = engine,
     )
 

@@ -47,12 +47,15 @@ class CascadeEvent(BaseModel):
     kind:               str            = Field(..., description="`implication` or `followup`.")
     id:                 str
     ts:                 str            = Field(..., description="Event timestamp (fired_at) — ISO8601.")
-    event_type:         str            = Field(..., description="Source event that triggered this (e.g. `policy_revised`, `nc_finding`).")
+    event_type:         str            = Field(..., description="Source event that triggered this (e.g. `policy_revised`, `nc_finding`) — keyable slug.")
+    event_type_display: Optional[str]  = Field(None, description="Ship 7'.c — human display of `event_type` (e.g. `policy revised`).")
 
     # Implication-specific
     expected_action:    Optional[str]  = None
+    expected_action_display: Optional[str] = Field(None, description="Ship 7'.c — human display of `expected_action`.")
     control_ref:        Optional[str]  = None
     standard_id:        Optional[str]  = None
+    standard_display:   Optional[str]  = Field(None, description="Ship 7'.c — human display of `standard_id` (e.g. `ISO 27001:2022`).")
     cascade_path:       Optional[list] = None
     cascade_depth:      Optional[int]  = None
     status:             Optional[str]  = None
@@ -66,6 +69,7 @@ class CascadeEvent(BaseModel):
 
     # Followup-specific
     expected_event_type: Optional[str] = None
+    expected_event_type_display: Optional[str] = Field(None, description="Ship 7'.c — human display of `expected_event_type`.")
     window_days:         Optional[int] = None
     expires_at:          Optional[str] = None
 
@@ -84,23 +88,26 @@ class ImplicationDetail(BaseModel):
     tenant_id:              str
     fired_at:               str
     source_event_type:      str
-    source_verification_id: Optional[str]
+    source_event_type_display:      Optional[str] = None    # Ship 7'.c
+    source_verification_id: Optional[str] = None
     expected_action:        str
+    expected_action_display:        Optional[str] = None    # Ship 7'.c
     target_control_ref:     str
     target_standard_id:     str
+    target_standard_display:        Optional[str] = None    # Ship 7'.c
     target_requirement_id:  str
     cascade_path:           list
     cascade_depth:          int
     status:                 str
-    resolved_at:            Optional[str]
-    resolved_by:            Optional[str]
-    resolved_evidence_kind: Optional[str]
-    resolved_evidence_id:   Optional[str]
-    dismissed_reason:       Optional[str]
-    rationale:              Optional[str]
-    deadline_string:        Optional[str]
-    due_date:               Optional[str]
-    scope_kind:             Optional[str]
+    resolved_at:            Optional[str] = None
+    resolved_by:            Optional[str] = None
+    resolved_evidence_kind: Optional[str] = None
+    resolved_evidence_id:   Optional[str] = None
+    dismissed_reason:       Optional[str] = None
+    rationale:              Optional[str] = None
+    deadline_string:        Optional[str] = None
+    due_date:               Optional[str] = None
+    scope_kind:             Optional[str] = None
     clock_anchor:           str
 
 
@@ -167,27 +174,41 @@ async def cascade_timeline(
                 )
                 impls = cur.fetchall()
                 imp_count = len(impls)
+                # Ship 7'.c — humanise slugs + scrub rationale through
+                # the output gateway. Non-breaking: raw slug fields
+                # (event_type, expected_action, standard_id) stay
+                # verbatim; *_display companions carry human forms.
+                from rag.output import (
+                    format_standard_id_exact as _fmt_std,
+                    humanize as _humanize,
+                )
                 for r in impls:
                     is_overdue = (r[13] is not None
                                   and r[13] < _dt.datetime.now(_dt.timezone.utc)
                                   and r[8] == "pending")
                     if is_overdue:
                         overdue_count += 1
+                    _event_type      = r[2] or ""
+                    _expected_action = r[3] or ""
+                    _rationale       = (r[12] or "")[:400]
                     events.append(CascadeEvent(
                         kind                    = "implication",
                         id                      = r[0],
                         ts                      = r[1].isoformat() if r[1] else "",
-                        event_type              = r[2] or "",
+                        event_type              = _event_type,
+                        event_type_display      = _humanize(_event_type, surface="cascade_rationale") if _event_type else None,
                         expected_action         = r[3],
+                        expected_action_display = _humanize(_expected_action, surface="cascade_rationale") if _expected_action else None,
                         control_ref             = r[4],
                         standard_id             = r[5],
+                        standard_display        = _fmt_std(r[5]) if r[5] else None,
                         cascade_path            = list(r[6]) if r[6] else [],
                         cascade_depth           = r[7],
                         status                  = r[8],
                         resolved_at             = r[9].isoformat() if r[9] else None,
                         resolved_evidence_kind  = r[10],
                         dismissed_reason        = r[11],
-                        rationale               = (r[12] or "")[:400] or None,
+                        rationale               = _humanize(_rationale, surface="cascade_rationale") if _rationale else None,
                         due_date                = r[13].isoformat() if r[13] else None,
                         clock_anchor            = r[14],
                         scope_kind              = r[15],
@@ -207,17 +228,24 @@ async def cascade_timeline(
                 )
                 fups = cur.fetchall()
                 fu_count = len(fups)
+                # Ship 7'.c — same gateway pass for follow-ups.
+                from rag.output import humanize as _humanize
                 for r in fups:
+                    _event_type   = r[2] or ""
+                    _expected_evt = r[3] or ""
+                    _rationale    = (r[7] or "")[:400]
                     events.append(CascadeEvent(
                         kind                = "followup",
                         id                  = r[0],
                         ts                  = r[1].isoformat() if r[1] else "",
-                        event_type          = r[2] or "",
+                        event_type          = _event_type,
+                        event_type_display  = _humanize(_event_type, surface="cascade_rationale") if _event_type else None,
                         expected_event_type = r[3],
+                        expected_event_type_display = _humanize(_expected_evt, surface="cascade_rationale") if _expected_evt else None,
                         window_days         = r[4],
                         expires_at          = r[5].isoformat() if r[5] else None,
                         status              = r[6],
-                        rationale           = (r[7] or "")[:400] or None,
+                        rationale           = _humanize(_rationale, surface="cascade_rationale") if _rationale else None,
                     ))
     finally:
         pool.putconn(conn)
@@ -302,27 +330,35 @@ async def get_implication(
      dismissed_reason, rationale, deadline_string,
      due_date, scope_kind, clock_anchor) = row
 
+    # Ship 7'.c — display companions + rationale scrub via gateway.
+    from rag.output import (
+        format_standard_id_exact as _fmt_std,
+        humanize as _humanize,
+    )
     return ImplicationDetail(
-        id                     = nid,
-        tenant_id              = tid,
-        fired_at               = fired_at.isoformat() if fired_at else "",
-        source_event_type      = src_evt or "",
-        source_verification_id = src_vid,
-        expected_action        = expected_action or "",
-        target_control_ref     = ctrl_ref or "",
-        target_standard_id     = std_id or "",
-        target_requirement_id  = req_id or "",
-        cascade_path           = list(cascade_path) if cascade_path else [],
-        cascade_depth          = int(depth) if depth is not None else 0,
-        status                 = status_ or "",
-        resolved_at            = resolved_at.isoformat() if resolved_at else None,
-        resolved_by            = resolved_by,
-        resolved_evidence_kind = resolved_evidence_kind,
-        resolved_evidence_id   = resolved_evidence_id,
-        dismissed_reason       = dismissed_reason,
-        rationale              = rationale,
-        deadline_string        = deadline_string,
-        due_date               = due_date.isoformat() if due_date else None,
-        scope_kind             = scope_kind,
-        clock_anchor           = clock_anchor or "verified_at",
+        id                        = nid,
+        tenant_id                 = tid,
+        fired_at                  = fired_at.isoformat() if fired_at else "",
+        source_event_type         = src_evt or "",
+        source_event_type_display = _humanize(src_evt or "", surface="cascade_rationale") or None,
+        source_verification_id    = src_vid,
+        expected_action           = expected_action or "",
+        expected_action_display   = _humanize(expected_action or "", surface="cascade_rationale") or None,
+        target_control_ref        = ctrl_ref or "",
+        target_standard_id        = std_id or "",
+        target_standard_display   = _fmt_std(std_id) if std_id else None,
+        target_requirement_id     = req_id or "",
+        cascade_path              = list(cascade_path) if cascade_path else [],
+        cascade_depth             = int(depth) if depth is not None else 0,
+        status                    = status_ or "",
+        resolved_at               = resolved_at.isoformat() if resolved_at else None,
+        resolved_by               = resolved_by,
+        resolved_evidence_kind    = resolved_evidence_kind,
+        resolved_evidence_id      = resolved_evidence_id,
+        dismissed_reason          = dismissed_reason,
+        rationale                 = _humanize(rationale, surface="cascade_rationale") if rationale else None,
+        deadline_string           = deadline_string,
+        due_date                  = due_date.isoformat() if due_date else None,
+        scope_kind                = scope_kind,
+        clock_anchor              = clock_anchor or "verified_at",
     )

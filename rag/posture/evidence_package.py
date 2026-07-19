@@ -199,18 +199,25 @@ def build_evidence_package(pg_conn, tenant_id: str, leaf_id: str) -> Optional[st
                          f"{n_should_covered} of {n_should_total} covered.")
         lines.append("")
 
+    # Ship 7'.c — Evidence Package prose is auditor-facing. Route
+    # curator-authored fields through the output gateway so any
+    # leaf-id / snake_case / raw standard-id leakage in
+    # `business_description` / leaf `.description` is scrubbed
+    # before it reaches the auditor.
+    from rag.output import humanize as _humanize
+
     # ── What this is about — control-level natural language ──────
     if canon.get("business_description"):
         lines.append("## What this is about")
         lines.append("")
-        lines.append(canon["business_description"])
+        lines.append(_humanize(canon["business_description"], surface="evidence_prose"))
         lines.append("")
 
     # ── This particular artifact — leaf-level natural language ───
     if leaf.description:
         lines.append("## This particular artifact")
         lines.append("")
-        lines.append(leaf.description)
+        lines.append(_humanize(leaf.description, surface="evidence_prose"))
         lines.append("")
 
     # ── Required elements ────────────────────────────────────────

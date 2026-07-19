@@ -260,6 +260,69 @@ def test_pilot_1_external_api() -> int:
     return fails
 
 
+def test_evidence_prose_surface() -> int:
+    """Ship 7'.c — new `evidence_prose` surface for Evidence Package
+    obligation prose. Scrubs leaf ids, humanises snake_case, formats
+    standard ids."""
+    print("\nsurface: evidence_prose (Ship 7'.c)")
+    out = humanize(
+        "This obligation lives under ISO27001:2022 A.5.15. See "
+        "req:A.5.15:access_control_policy for the artefact map. "
+        "It requires access_review_required within 24h.",
+        surface="evidence_prose",
+    )
+    fails = 0
+    fails += 0 if _check(
+        "evidence_prose chain",
+        out,
+        # scrubbed leaf id + humanised slug + formatted std
+        "This obligation lives under ISO 27001:2022 A.5.15. See "
+        "for the artefact map. It requires access review required within 24h.",
+    ) else 1
+    return fails
+
+
+def test_cascade_migration() -> int:
+    """Ship 7'.c — cascade endpoint fields humanised through gateway."""
+    print("\nmigration: cascade endpoint slugs + rationale (Ship 7'.c)")
+    fails = 0
+    fails += 0 if _check(
+        "event_type_display",
+        humanize("policy_revised", surface="cascade_rationale"),
+        "policy revised",
+    ) else 1
+    fails += 0 if _check(
+        "expected_action_display",
+        humanize("access_review_required", surface="cascade_rationale"),
+        "access review required",
+    ) else 1
+    fails += 0 if _check(
+        "rationale scrubbed",
+        humanize(
+            "Triggered by nc_finding on ISO27001:2022 A.5.15; "
+            "expected access_review_required within window.",
+            surface="cascade_rationale",
+        ),
+        "Triggered by nc finding on ISO 27001:2022 A.5.15; "
+        "expected access review required within window.",
+    ) else 1
+    return fails
+
+
+def test_error_uuid_migration() -> int:
+    """Ship 7'.c — HTTPException detail with UUID scrubbed."""
+    print("\nmigration: error_detail UUID scrub (Ship 7'.c)")
+    result = humanize(
+        "We couldn't find that upload (6c6e7102-846c-4aab-87be-91810c4b191b) for your tenant.",
+        surface="error_detail",
+    )
+    return 0 if _check(
+        "UUID → suffix",
+        result,
+        "We couldn't find that upload (…0c4b191b) for your tenant.",
+    ) else 1
+
+
 def test_pilot_2_notification_bodies() -> int:
     print("\npilot 2: notifications — action verbs humanised")
     fails = 0
@@ -305,6 +368,9 @@ def main() -> int:
         + test_surface_routing()
         + test_gateway_guard()
         + test_pilot_1_external_api()
+        + test_evidence_prose_surface()
+        + test_cascade_migration()
+        + test_error_uuid_migration()
         + test_pilot_2_notification_bodies()
     )
     print()

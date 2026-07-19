@@ -99,6 +99,15 @@ _SURFACE_DEFAULTS: dict[str, tuple[str, ...]] = {
         "humanize_snake_case",
         "format_standard_id",
     ),
+    "evidence_prose": (
+        # Auditor-facing prose in the Evidence Package + obligation
+        # text. Scrub leaf-id leakage that curator authoring may have
+        # embedded, humanise snake_case action verbs, and format
+        # standard-id slugs.
+        "scrub_leaf_ids",
+        "humanize_snake_case",
+        "format_standard_id",
+    ),
 }
 
 
