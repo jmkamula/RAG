@@ -135,6 +135,7 @@ When a retire-by date passes, delete the legacy path.
 | MIXED-site migration (Ship 7'.c) — remaining 4 site groups migrated. Cascade endpoint: 4 non-breaking `*_display` fields on CascadeEvent + ImplicationDetail + rationale scrubbed. Posture endpoint: gap_description + action_required + engine reason (semantic + gateway) scrubbed. api_server error UUIDs: 2 specific offenders route through `error_detail` surface. Evidence Package obligation_text + leaf.description scrubbed via new `evidence_prose` surface (registered this arc). 51 tests. Ship 7'.d becomes evaluation checkpoint for polish() need. | SHIPPED |
 | Evaluation checkpoint + markdown-escape fix (Ship 7'.d) — sampled real outputs from all 4 migrated surfaces. Evidence Package + posture (human-authored) + notification bodies read naturally after deterministic gateway. Only real gap: extractor-produced gap_description had `\-`, `\(`, `\.` backslash escapes surviving. Fix: new `strip_markdown_escapes` transform added to stage2_reason / evidence_prose / cascade_rationale chains. **polish() SKIPPED** — deterministic layer sufficient. Ship 7'.e is moot; next is 7'.f arc retrospective. 57 tests. | SHIPPED |
 | Ship 7' arc closed (Ship 7'.f) — retrospective at [[ship-7-prime-arc-retrospective-2026-07-19]]. 4 sub-arcs + skipped + closer, all in one day (shortest since Ship 5'). Framework-aware output gateway: `rag/output/vocab/*.json` per-framework vocabulary + 6 composable transforms + surface hints + gateway_guard. 57 test assertions. Codified properties: vocabulary-as-data (framework = 1 file), opt-in never middleware, non-breaking additive migration (`*_display` companions), idempotent composable transforms. Empirical evaluation checkpoint (7'.d) validated skipping polish() and surfaced markdown-escape leak audit missed. Deferred: chat prose gateway migration, CI grep guards, SDK typed `*_display` fields. | SHIPPED |
+| ISO 27701 gap-close (Ship 8'.a + 8'.b) — `scripts/backfill_markdown_escapes.py` cleans backslash-escape artifacts in stored `posture_controls.gap_description` + `.action_required` + `document_findings.excerpt` (18 + 1110 rows on demo tenant; idempotent, applied via Python `strip_markdown_escapes` for scrub-semantic parity with the gateway). Then 12 new eval cases (#204-215) locking Phase 2 Batches 1/2/3 controller anchors + first B.8 processor coverage + A.7 ambiguity. Suite 208 → 220; iso27701 tag 3 → 15. Baseline floor: **217/220**. Verified false alarm: Arion is legitimately controller + processor per client_facts, so B.8 NC postures are correct — no seed fix needed. See [[ship-8-prime-a-markdown-backfill-2026-07-20]] + [[ship-8-prime-b-iso27701-eval-expansion-2026-07-20]]. | SHIPPED |
 | ISO 27001:2013→2022 renumbering in source JSONs — closed in Ship 3'.l (2026-07-17). Fixed 16 substitutions in gdpr_nodes_phase2.json (A.9.1/A.9.3 → 9.1/9.3 ISMS clauses per rationale text) + 1 in compliance_requirements_register.yaml (A.18.1 → 9.2). Neo4j reloaded; framework_scope_guard still catches 2013 leaks defensively but source data is now clean. | SHIPPED |
 
 ## Key memory entries
@@ -292,7 +293,7 @@ sudo systemctl disable --now arioncomply-sweep.timer
 PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
   --csv results/eval_$(date +%Y%m%d_%H%M).csv --pause 2 \
   2>&1 | grep -E "PASS|FAIL|RESULTS"
-# Must be 205+/208 PASS before any restart (208 cases as of Ship 1 close).
+# Must be 217+/220 PASS before any restart (220 cases as of Ship 8'.b, 2026-07-20).
 # Historically-stochastic cases have been root-caused and stabilised:
 #   #1 + #5 (partial) — STABILISED 2026-06-23 via schema_v43 tenant_must_overrides
 #         (cloud-only A.5.15:physical_rules marked N/A; advisory no
@@ -316,7 +317,9 @@ PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
 #         entries for chatgpt/ai tools/llm use → A.8.19. Signal C emits at
 #         curated_lexicon_weight=1.00 (bumped from 0.30). Curator learnings
 #         are now top-tier signal weight — highest of any signal.
-# Baseline: 207/208 PASS + 1 WARN + 0 FAIL as of Ship 2'.m (2026-07-16).
+# Baseline: 219/220 PASS + 1 WARN + 0 FAIL as of Ship 8'.b (2026-07-20).
+# Prior baseline: 207/208 PASS + 1 WARN + 0 FAIL as of Ship 2'.m (2026-07-16);
+# Ship 8'.b added 12 ISO 27701 Phase-2 lock-in cases (#204-215).
 # Ship 2'.n retired the legacy rank_and_answer path; case-file flow is
 # the ONLY path — no CASEFILE_ENABLED flag remains.
 #   #14, #33 — STABILISED 2026-07-16 in Ship 2'.j via deterministic
@@ -326,7 +329,7 @@ PYTHONPATH=/data/arioncomply python3 tests/eval_suite.py \
 #   #200 — pre-existing gap_analysis vs posture_check mismatch on
 #         "NC findings on identity"; Signal C doesn't fire on this
 #         phrasing. Own arc.
-# Any regression below 205/208 blocks restart. Prefer root-causing new
+# Any regression below 217/220 blocks restart. Prefer root-causing new
 # intermittent failures over labeling them "stochastic" — see #21 arc + Ship 1
 # consensus architecture below.
 # Whenever you add a user-facing feature/fix, append an EvalCase that would

@@ -4065,6 +4065,270 @@ EVAL_CASES = [
             "context humanization prevent the echo."
         ),
     ),
+
+    # ── ISO 27701 Phase 2 curation lock-in (Ship 8'.b, 2026-07-20) ──────────
+    # Phase 2 shipped 49 controls / 196 leaves / 112 bridges but the eval
+    # suite only carried 3 27701 cases (#201-203 for the Phase 3 chat
+    # integration). This batch adds 12 cases covering every Phase 2 batch,
+    # both role blocks (controller A.7.x + processor B.8.x), the range of
+    # posture states Arion carries (NC / OFI / N/A), and the A.7 refs
+    # ambiguity between ISO 27001 physical controls and ISO 27701 PIMS
+    # controller anchors. All structural — assert refs surface + no
+    # clarify — per [[feedback-eval-state-drift]].
+
+    # Batch 1 controller anchors (A.7.2.x) — #202 + #203 already cover
+    # A.7.2.5 (PIA) + A.7.2.6 (processor contracts). Add:
+
+    EvalCase(
+        id=204,
+        query="is ISO 27701 A.7.2.1 compliant?",
+        tags=["posture", "iso27701", "phase2_batch1", "annex_a", "purpose"],
+        expected_refs=["A.7.2.1"],
+        expected_type="posture_check",
+        # Arion: A.7.2.1 = NC (no formal purpose register). Anchors the
+        # Batch 1 batch that shipped 7 controller anchors × 4 leaves.
+        must_contain=["A.7.2.1"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Locks Phase 2 Batch 1 controller anchor A.7.2.1 (identify + "
+            "document purpose of PII processing). NC on Arion — no "
+            "formal purpose register yet."
+        ),
+    ),
+
+    EvalCase(
+        id=205,
+        query="is ISO 27701 A.7.2.7 applicable?",
+        tags=["posture", "iso27701", "phase2_batch1", "n_a", "joint_controller"],
+        expected_refs=["A.7.2.7"],
+        expected_type="posture_check",
+        # A.7.2.7 = N/A on Arion (no joint-controller arrangements per
+        # client_facts.role_joint_controller = false). Locks in
+        # applicability handling on Batch 1.
+        must_contain=["A.7.2.7"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Locks the applicability-driven N/A path for A.7.2.7 (joint "
+            "PII controllers). Arion's client_facts flags "
+            "role_joint_controller = false; posture correctly seeded as "
+            "N/A. Verifies chat surfaces N/A without hedging into OFI."
+        ),
+    ),
+
+    EvalCase(
+        id=206,
+        query="is ISO 27701 A.7.2.8 compliant?",
+        tags=["posture", "iso27701", "phase2_batch1", "ofi", "ropa"],
+        expected_refs=["A.7.2.8"],
+        expected_type="posture_check",
+        # A.7.2.8 = OFI on Arion (partial RoPA — controller side).
+        # OFI = partial-evidence path in the engine.
+        must_contain=["A.7.2.8"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Locks Batch 1 A.7.2.8 (records related to processing PII) "
+            "in the OFI state — partial RoPA is present, formal register "
+            "missing. Verifies OFI surface distinguishes from NC."
+        ),
+    ),
+
+    # Batch 2 subject rights (A.7.3.x) — 10 anchors —
+
+    EvalCase(
+        id=207,
+        query="is ISO 27701 A.7.3.5 (individual data subject rights) compliant?",
+        tags=["posture", "iso27701", "phase2_batch2", "subject_rights"],
+        expected_refs=["A.7.3.5"],
+        expected_type="posture_check",
+        must_contain=["A.7.3.5"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Locks Phase 2 Batch 2 subject-rights anchor A.7.3.5 (access, "
+            "correction, erasure). Bridges to GDPR Art.15-17 — verifies "
+            "the primary posture surfaces regardless of the xfw fanout."
+        ),
+    ),
+
+    EvalCase(
+        id=208,
+        query="is ISO 27701 A.7.3.10 applicable to us?",
+        tags=["posture", "iso27701", "phase2_batch2", "n_a", "automated_decisions"],
+        expected_refs=["A.7.3.10"],
+        expected_type="posture_check",
+        # A.7.3.10 = N/A on Arion (client_facts.automated_decision_making
+        # = false). Same applicability pattern as A.7.2.7.
+        must_contain=["A.7.3.10"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Second applicability-N/A lock-in — A.7.3.10 (automated "
+            "decision-making). Arion's client_facts flag is false; "
+            "posture correctly seeded as N/A. Companion to #205."
+        ),
+    ),
+
+    # Batch 2 PbD (A.7.4.x) — 9 anchors —
+
+    EvalCase(
+        id=209,
+        query="is ISO 27701 A.7.4.5 (end-of-processing) compliant?",
+        tags=["posture", "iso27701", "phase2_batch2", "pbd", "ofi", "retention"],
+        expected_refs=["A.7.4.5"],
+        expected_type="posture_check",
+        # A.7.4.5 = OFI (partial retention triggers, no formal end-of-
+        # processing detection). Locks second-batch OFI path.
+        must_contain=["A.7.4.5"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Locks Batch 2 PbD anchor A.7.4.5 (PII de-identification + "
+            "deletion at end of processing) in the OFI state — customer-"
+            "churn export exists, no formal end-of-processing trigger. "
+            "Second OFI case, complementing #206 which is on Batch 1."
+        ),
+    ),
+
+    EvalCase(
+        id=210,
+        query="is ISO 27701 A.7.4.7 (retention) compliant?",
+        tags=["posture", "iso27701", "phase2_batch2", "pbd", "retention"],
+        expected_refs=["A.7.4.7"],
+        expected_type="posture_check",
+        must_contain=["A.7.4.7"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Locks Batch 2 PbD anchor A.7.4.7 (retention). NC on Arion — "
+            "high-level policy exists, no per-purpose retention schedule."
+        ),
+    ),
+
+    # Batch 3 transfers (A.7.5.x) — 4 anchors —
+
+    EvalCase(
+        id=211,
+        query="is ISO 27701 A.7.5.1 (basis for transfer) compliant?",
+        tags=["posture", "iso27701", "phase2_batch3", "transfers"],
+        expected_refs=["A.7.5.1"],
+        expected_type="posture_check",
+        must_contain=["A.7.5.1"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Locks Phase 2 Batch 3 transfers anchor A.7.5.1 (identify "
+            "basis for PII transfer between jurisdictions). NC on Arion. "
+            "Bridges to GDPR Chapter V Articles 44-49."
+        ),
+    ),
+
+    EvalCase(
+        id=212,
+        query="is ISO 27701 A.7.5.3 (transfer records) compliant?",
+        tags=["posture", "iso27701", "phase2_batch3", "transfers", "records"],
+        expected_refs=["A.7.5.3"],
+        expected_type="posture_check",
+        must_contain=["A.7.5.3"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Locks Batch 3 transfer records anchor A.7.5.3 (records of "
+            "transfer of PII). NC on Arion — no formal transfer event log."
+        ),
+    ),
+
+    # B.8 processor mirrors —
+
+    EvalCase(
+        id=213,
+        query="is ISO 27701 B.8.2.1 (customer agreement) compliant?",
+        tags=["posture", "iso27701", "phase2_batch1", "processor", "annex_b"],
+        expected_refs=["B.8.2.1"],
+        expected_type="posture_check",
+        # B.8.2.1 is the processor-side mirror of A.7.2.6 (controller-
+        # side processor contracts). Arion is BOTH controller AND
+        # processor (client_facts flags true), so B.8 applies.
+        must_contain=["B.8.2.1"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "First B.8 processor-mirror case in the eval suite. Locks the "
+            "Batch 1 processor block. Arion is both controller AND "
+            "processor per client_facts.role_processor=true; B.8.2.1 is "
+            "the processor's customer-agreement obligation. NC — DPA is "
+            "in place with customers but formal contract-scope register "
+            "is missing."
+        ),
+    ),
+
+    EvalCase(
+        id=214,
+        query="is ISO 27701 B.8.2.6 (processor RoPA) compliant?",
+        tags=["posture", "iso27701", "phase2_batch1", "processor", "records", "ofi"],
+        expected_refs=["B.8.2.6"],
+        expected_type="posture_check",
+        # B.8.2.6 = OFI — processor-side RoPA is partial (mirrors
+        # A.7.2.8 controller-side OFI).
+        must_contain=["B.8.2.6"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "B.8 processor OFI case complementing #206 (A.7.2.8 controller "
+            "OFI). Verifies the processor block also surfaces OFI "
+            "distinctly from NC."
+        ),
+    ),
+
+    # Cross-framework / A.7 ambiguity —
+
+    EvalCase(
+        id=215,
+        query="what is A.7 about?",
+        tags=["definition", "iso27701", "iso27001", "ambiguity", "cross_framework"],
+        expected_type="definition",
+        # A.7 in ISO 27001:2022 = "Physical controls" (14 refs A.7.1-14).
+        # A.7 in ISO 27701:2019 = "PIMS-specific requirements for
+        # controllers" (28 refs A.7.2.x-A.7.5.x). A definition query for
+        # bare "A.7" without a standard-id hint should acknowledge both
+        # framings, not silently pick one.
+        must_not_contain=[
+            "I need more information",
+            "not a valid framework",
+        ],
+        notes=(
+            "Locks A.7 ref ambiguity between ISO 27001 (physical) + ISO "
+            "27701 (PIMS controller). Both frameworks use A.7.x. This "
+            "case verifies the chat doesn't silently pick one — "
+            "acceptable responses reference both, or ask a clarifying "
+            "question. Loose assertion per state-drift rule; expanded "
+            "coverage would need a curator-authored ambiguity handler."
+        ),
+    ),
 ]
 
 
