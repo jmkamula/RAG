@@ -380,11 +380,23 @@ def _run_critic_verifier_pass(
         results: list[DocumentFinding] = []
         _seen: set[tuple[str, str, str]] = set()   # (ctrl, item, quote-hash) dedup
 
+        _dropped_shape_cv = 0
         for entry in (parsed.get("confirmed") or []) + (parsed.get("extended") or []):
             quote = entry.get("quote") or ""
             if not _evidence_grounded(quote, doc):
                 # Drop hallucinated quote — the LLM said something in
                 # the doc but our substring/normalise check disagrees.
+                continue
+            # Ship 11'.c — content-shape gate. Drop field-labels,
+            # section-headers, and doc cross-refs that the critic
+            # confirms verbatim but that don't stand as evidence.
+            # MUST-aware: table-field shape preserved when bound to a
+            # register/scope MUST (RoPA field IS the register field).
+            drop, shape_reason = _looks_like_field_or_header(
+                quote, must_id=entry.get("checklist_item_id"),
+            )
+            if drop:
+                _dropped_shape_cv += 1
                 continue
             key = (entry["control_ref"], entry.get("checklist_item_id") or "", quote[:80])
             if key in _seen:
@@ -428,6 +440,8 @@ def _run_critic_verifier_pass(
         doc.extraction_metrics["critic_rejected"]     = len(parsed.get("rejected") or [])
         doc.extraction_metrics["critic_flagged_missing"] = len(parsed.get("flagged_missing_control") or [])
         doc.extraction_metrics["critic_findings_kept"] = len(results)
+        # Ship 11'.c telemetry
+        doc.extraction_metrics["dropped_content_shape"] = _dropped_shape_cv
 
         logger.info(
             "critic_verifier for %s: %d confirmed + %d extended → %d findings kept "
@@ -1929,6 +1943,121 @@ def _looks_like_metadata_block(quote: str) -> bool:
     return all(_is_metadata_key_line(l) for l in lines)
 
 
+# ── Ship 11'.c — excerpt content-shape filter ─────────────────────
+#
+# Ship 10 HITL review (2026-07-20) identified two patterns the
+# critic-verifier's design doesn't cover:
+#
+#   Pattern 1 — Field labels: bullet-column labels from RoPA / DPIA
+#     tables (e.g. "Subprocessors   Any third parties involved",
+#     "Retention Period   Timeframe for keeping the data"). The
+#     mammoth-converted markdown preserves tab-separated column
+#     labels; the LLM confirms them verbatim because they ARE in the
+#     doc. Deterministic shape check drops them.
+#
+#   Pattern 3 — Section headers with control refs / doc cross-refs
+#     (e.g. "Return, Transfer or Deletion of PII (A.8.3.2 / B.8.4.2)",
+#     "Data Subject Rights Handling Procedure (DOC051)"). Headers
+#     lack sentence terminators and end with cited-ref parentheticals.
+#
+# See [[ship-11-prime-c-content-shape-filter-2026-07-20]] for the
+# per-shape rationale.
+
+# 3+ consecutive whitespace runs — mammoth's table-cell separator on
+# collapsed rows. Real prose uses single spaces.
+_MULTIPLE_WHITESPACE_RE = re.compile(r"\s{3,}")
+
+# Trailing parenthetical of control refs: "(A.8.3.2 / B.8.4.2)" or
+# "(A.5.15)" or "(Art.32, Art.35)". Section-header shape.
+_CTRL_REF_TAIL_RE = re.compile(
+    r"\(\s*(?:A\.|B\.|Art\.)?\s*\d+(?:\.\d+)*"
+    r"(?:\s*[,/]\s*(?:A\.|B\.|Art\.)?\s*\d+(?:\.\d+)*)*\s*\)\s*$",
+    re.IGNORECASE,
+)
+
+# Trailing parenthetical of doc cross-references: "(DOC051)", "(DOC-014)".
+_DOC_REF_TAIL_RE = re.compile(r"\(\s*DOC[-_]?\d+\s*\)\s*$", re.IGNORECASE)
+
+# Sentence-terminator at end (allowing trailing quotes / closing brackets).
+_SENTENCE_END_RE = re.compile(r"[.!?][\s\"'\)\]]*$")
+
+# Bullet-marker start with no sentence terminator = list-item fragment.
+_BULLET_START_RE = re.compile(r"^\s*[-*•·]\s+")
+
+
+# MUST-id suffix prefixes that indicate "register field / scope note"
+# semantics — where a RoPA-style table field IS legitimately the
+# expected evidence (register column, scope descriptor). Other prefixes
+# (`rev_` review record, `proc_` procedure content) need substantive
+# prose, so table-field shape SHOULD drop.
+_REGISTER_MUST_PREFIXES = ("reg_", "scope_", "ropa_")
+
+
+def _must_prefix(must_id):
+    """Return the semantic prefix of a MUST-id ('reg_', 'proc_', 'rev_',
+    'scope_', etc.) or empty string when the id has no discernible
+    prefix. Requires a colon-separated MUST-id shape (`item:X:tail`) —
+    bare identifiers without a colon return empty."""
+    if not must_id or ":" not in must_id:
+        return ""
+    tail = must_id.rsplit(":", 1)[-1]
+    m = re.match(r"([a-z]+_)", tail)
+    return m.group(1) if m else ""
+
+
+def _looks_like_field_or_header(quote, must_id=None):
+    """Ship 11'.c gate — return (drop, reason). True when the quote is
+    a field label, section header, or cross-reference stub — content
+    shapes that the LLM confirms verbatim but that don't stand as
+    evidence for their anchor's core obligation.
+
+    Distinct from _looks_like_questionnaire (Y/N checklists) and
+    _looks_like_metadata_block (Owner/Version boilerplate) — those
+    are already caught. This targets column labels + section headers.
+
+    MUST-aware: a table-field-shape quote bound to a register/scope
+    MUST (RoPA field IS the expected register column) is preserved.
+    Only bound to procedure/review MUSTs — or unbound entirely — do
+    table fields drop.
+
+    Passes: full prose sentences ending in .!? / grammatical
+    paragraphs / bullet content that IS a complete sentence.
+    """
+    if not quote:
+        return (False, "empty")
+    stripped = quote.strip()
+    if not stripped:
+        return (False, "whitespace_only")
+
+    # Trailing parenthetical of control refs (section header shape).
+    # Universal drop — a bare "Return, Transfer or Deletion of PII
+    # (A.8.3.2 / B.8.4.2)" is not evidence regardless of MUST prefix.
+    if _CTRL_REF_TAIL_RE.search(stripped) and not _SENTENCE_END_RE.search(stripped):
+        return (True, "section_header_with_ctrl_refs")
+
+    # Trailing parenthetical of doc cross-refs — same universal drop.
+    if _DOC_REF_TAIL_RE.search(stripped) and not _SENTENCE_END_RE.search(stripped):
+        return (True, "doc_cross_ref")
+
+    # Multiple-whitespace runs (mammoth table-cell separator).
+    # MUST-aware: preserve when bound to a register/scope MUST.
+    if _MULTIPLE_WHITESPACE_RE.search(stripped):
+        prefix = _must_prefix(must_id)
+        if prefix in _REGISTER_MUST_PREFIXES:
+            # RoPA field IS a register field — legitimate evidence.
+            pass
+        else:
+            return (True, "table_field_label")
+
+    # Bullet-marker start + no sentence terminator + short = list fragment.
+    if (_BULLET_START_RE.match(stripped)
+            and not _SENTENCE_END_RE.search(stripped)
+            and len(stripped) < 100):
+        return (True, "bullet_fragment")
+
+    return (False, "prose")
+
+
 # TOC detection — doc-level analog of the questionnaire filter.
 # A Table-of-Contents document lists what policies an org HAS; its body
 # is dominated by lines like "2.1 Information Security Policy — Purpose:
@@ -2097,6 +2226,7 @@ def _parse_llm_response(
     dropped_unknown_ref   = 0
     dropped_questionnaire = 0
     dropped_unbound       = 0
+    dropped_content_shape = 0    # Ship 11'.c — field labels + headers + doc cross-refs
     # Catalog crosscheck (schema_v42) — counts only, no rejections. Surfaces
     # cases where the LLM picked a valid MUST id but the evidence quote
     # doesn't match the catalog's keyword fingerprints for that MUST.
@@ -2180,6 +2310,23 @@ def _parse_llm_response(
                 ref, chunk_id,
             )
             continue
+        # Ship 11'.c — content-shape drop. Field labels ("Subprocessors  Any
+        # third parties involved"), section headers with cited refs
+        # ("Return, Transfer or Deletion of PII (A.8.3.2 / B.8.4.2)"),
+        # doc cross-refs ("Data Subject Rights Handling Procedure (DOC051)"),
+        # and bullet-fragment stubs. MUST-aware: preserve table fields
+        # bound to register/scope MUSTs (RoPA columns).
+        shape_drop, shape_reason = _looks_like_field_or_header(
+            evidence, must_id=item.get("checklist_item_id"),
+        )
+        if shape_drop:
+            dropped_content_shape += 1
+            logger.info(
+                "content-shape drop: %s — evidence is a %s, not "
+                "substantive prose (chunk %s)",
+                ref, shape_reason, chunk_id,
+            )
+            continue
 
         # Referential-mention demotion: if the evidence quote cites OTHER
         # control refs but NOT the bound one, the LLM is reading a register-
@@ -2253,15 +2400,17 @@ def _parse_llm_response(
         ))
 
     total_dropped = (dropped_low_conf + dropped_short_quote + dropped_hallucinated
-                     + dropped_unknown_ref + dropped_questionnaire + dropped_unbound)
+                     + dropped_unknown_ref + dropped_questionnaire + dropped_unbound
+                     + dropped_content_shape)
     if total_dropped:
         logger.info(
             "extractor filters dropped %d findings on chunk %s (doc=%s): "
             "low_conf=%d short_quote=%d hallucinated_quote=%d unknown_ref=%d "
-            "questionnaire=%d unbound=%d",
+            "questionnaire=%d unbound=%d content_shape=%d",
             total_dropped, chunk_id, doc.original_name,
             dropped_low_conf, dropped_short_quote, dropped_hallucinated,
             dropped_unknown_ref, dropped_questionnaire, dropped_unbound,
+            dropped_content_shape,
         )
 
     # Accumulate drop counts onto the doc for pipeline-side persistence
@@ -2273,6 +2422,8 @@ def _parse_llm_response(
     m["dropped_unknown_ref"]   = m.get("dropped_unknown_ref", 0)   + dropped_unknown_ref
     m["dropped_questionnaire"] = m.get("dropped_questionnaire", 0) + dropped_questionnaire
     m["dropped_unbound"]       = m.get("dropped_unbound", 0)       + dropped_unbound
+    # Ship 11'.c — content-shape drops (field labels / section headers / cross-refs)
+    m["dropped_content_shape"] = m.get("dropped_content_shape", 0) + dropped_content_shape
     # schema_v42 — crosscheck telemetry
     m["crosscheck_confirmed"]     = m.get("crosscheck_confirmed", 0)     + crosscheck_confirmed
     m["crosscheck_disagreements"] = m.get("crosscheck_disagreements", 0) + crosscheck_disagreements
