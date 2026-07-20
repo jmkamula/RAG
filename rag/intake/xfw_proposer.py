@@ -62,10 +62,95 @@ _PIPELINE_TO_DF_STATUS: dict[str, str] = {
 _SOURCE_STATUSES_TO_PROPAGATE: set[str] = {"comply", "ofi", "n/a", "present", "partial"}
 
 
+# ── Ship 11'.b — bridge source-quality gate ─────────────────────────
+#
+# The Ship 10 HITL review (2026-07-20) surfaced that ~35% of stage-1
+# rejects (17 of 49) came from bridges propagated from weak source
+# findings. Root cause: bridges multiply low-confidence, unbound, or
+# fragment-shape source findings across 3-4 target controls each,
+# amplifying noise 3-4x per weak source.
+#
+# This gate filters source findings BEFORE the bridge walk. Sources
+# that fail the gate produce no bridges. Legitimate mediums with
+# substantive content still propagate.
+#
+# See [[ship-11-prime-a-extractor-quality-plan-2026-07-20]] for the
+# 5-pattern taxonomy this addresses (Pattern 4 — Bridge multiplier).
+
+# Minimum substantive excerpt length. Field-labels ("Subprocessors /
+# Any third parties involved") tend to be short + colon-separated;
+# genuine prose is longer. 40 chars matches the extractor's
+# _MIN_EVIDENCE_LEN (Ship 6'.b grounding).
+_BRIDGE_MIN_EXCERPT_CHARS = 40
+
+# Confidences that are permitted to seed bridges. `low` alone gets
+# blocked; `medium`/`high` proceed subject to the other criteria.
+_BRIDGE_ALLOWED_CONFIDENCES: set[str] = {"medium", "high"}
+
+
+def _bridge_worthy_check(
+    *,
+    inference_source:   Optional[str],
+    confidence:         Optional[str],
+    checklist_item_id:  Optional[str],
+    excerpt:            Optional[str],
+) -> tuple[bool, str]:
+    """Ship 11'.b gate — return (worthy, reason) for a candidate
+    source finding, given its raw fields.
+
+    A source is worthy to seed cross-framework bridges when:
+      1. It's NOT itself a bridge (no bridge-of-bridges cascade).
+      2. Confidence is at least `medium` (drops `low`).
+      3. It's either MUST-bound (checklist_item_id set) OR has a
+         substantive excerpt (≥40 chars of prose). Field-labels + bare
+         section headers fail this check.
+
+    Returns:
+      (True, "ok")                  — bridges may propagate
+      (False, "<specific reason>")  — bridges suppressed; caller
+                                       increments sources_gated
+
+    Takes raw fields (not a DocumentFinding) so both the per-upload
+    path (DocumentFinding objects) and the backfill path (Postgres
+    tuples) can reuse the same gate. See
+    [[ship-11-prime-b-bridge-source-quality-gate-2026-07-20]].
+    """
+    # 1. No bridge-of-bridges — an xfw source can't seed another bridge.
+    if inference_source == "xfw_bridge":
+        return (False, "source_is_bridge")
+
+    # 2. Confidence gate — drop `low` before it multiplies.
+    conf = (confidence or "").lower()
+    if conf not in _BRIDGE_ALLOWED_CONFIDENCES:
+        return (False, f"low_confidence:{conf or 'unset'}")
+
+    # 3. Substance gate — MUST-bound OR substantive excerpt.
+    #    MUST-bound sources have already been vetted by the critic-
+    #    verifier's MUST-binding step, so they carry a stronger prior.
+    must_bound = bool(checklist_item_id)
+    excerpt_s  = excerpt or ""
+    if not must_bound and len(excerpt_s) < _BRIDGE_MIN_EXCERPT_CHARS:
+        return (False, f"fragment_source:{len(excerpt_s)}c_no_must")
+
+    return (True, "ok")
+
+
+def _source_is_bridge_worthy(finding: "DocumentFinding") -> tuple[bool, str]:
+    """Convenience wrapper around _bridge_worthy_check for the
+    per-upload path that passes DocumentFinding objects."""
+    return _bridge_worthy_check(
+        inference_source  = getattr(finding, "inference_source", None),
+        confidence        = getattr(finding, "confidence", None),
+        checklist_item_id = getattr(finding, "checklist_item_id", None),
+        excerpt           = getattr(finding, "evidence_text", None),
+    )
+
+
 @dataclass
 class ProposalSummary:
     tenant_id:        str
     sources_walked:   int = 0
+    sources_gated:    int = 0       # Ship 11'.b — filtered by bridge source-quality gate
     edges_seen:       int = 0
     proposals_written: int = 0
     proposals_skipped: int = 0       # source had no IMPLEMENTS edge, or target out of scope
@@ -74,8 +159,9 @@ class ProposalSummary:
     def __str__(self) -> str:
         return (
             f"xfw_proposer[{self.tenant_id[:8]}]: "
-            f"sources={self.sources_walked} edges={self.edges_seen} "
-            f"written={self.proposals_written} skipped={self.proposals_skipped} "
+            f"sources={self.sources_walked} gated={self.sources_gated} "
+            f"edges={self.edges_seen} written={self.proposals_written} "
+            f"skipped={self.proposals_skipped} "
             f"targets={sorted(self.standards_targeted)}"
         )
 
@@ -476,7 +562,23 @@ def propose_for_findings(
 
     seen_proposals: set[tuple[str, str, str]] = set()
 
+    # Ship 11'.b — bridge source-quality gate. Skip sources that
+    # would produce noisy bridges (low confidence, fragment excerpts,
+    # or already-bridged rows). See [[ship-11-prime-b-...]] for the
+    # per-pattern rationale.
     for f in best_per_source.values():
+        worthy, reason = _source_is_bridge_worthy(f)
+        if not worthy:
+            logger.debug(
+                "xfw_proposer: skipping bridge source %s/%s — %s "
+                "(excerpt=%dc conf=%r must=%r)",
+                f.standard_id, f.control_ref, reason,
+                len(getattr(f, "evidence_text", "") or ""),
+                getattr(f, "confidence", None),
+                getattr(f, "checklist_item_id", None),
+            )
+            summary.sources_gated += 1
+            continue
         summary.sources_walked += 1
         src_id  = _build_source_node_id(f.standard_id, f.control_ref)
         targets = _walk_bridges(driver, src_id)
@@ -568,7 +670,8 @@ def propose_backfill(
             cur.execute(
                 """
                 SELECT DISTINCT ON (document_id, control_ref, standard_id)
-                       document_id, control_ref, standard_id, status, confidence, excerpt
+                       document_id, control_ref, standard_id, status, confidence,
+                       excerpt, checklist_item_id, inference_source
                   FROM document_findings
                  WHERE tenant_id       = %s
                    AND is_active       = TRUE
@@ -579,9 +682,20 @@ def propose_backfill(
             rows = cur.fetchall()
 
         seen_proposals: set[tuple[str, str, str]] = set()
-        for doc_id, ctrl_ref, std_id, status_db, conf, excerpt in rows:
+        for (doc_id, ctrl_ref, std_id, status_db, conf, excerpt,
+             chk_item_src, inf_src) in rows:
             src_status = (status_db or "").lower()
             if src_status not in _SOURCE_STATUSES_TO_PROPAGATE:
+                continue
+            # Ship 11'.b — apply bridge source-quality gate.
+            worthy, reason = _bridge_worthy_check(
+                inference_source  = inf_src,
+                confidence        = conf,
+                checklist_item_id = chk_item_src,
+                excerpt           = excerpt,
+            )
+            if not worthy:
+                summary.sources_gated += 1
                 continue
             summary.sources_walked += 1
             src_id  = _build_source_node_id(std_id, ctrl_ref)
