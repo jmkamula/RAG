@@ -46,6 +46,28 @@ DOC_ETS = {
     "breach_notification", "dsar_response", "arrangement",
 }
 
+# Ship 9'.c (2026-07-20): review_record leaves whose id-suffix
+# matches one of these patterns are doc-shaped annual/periodic review
+# reports (as opposed to per-event review records). Tenants upload
+# them under identifiable filenames like "PIA Program Review 2026.docx"
+# — the doc_mapping catches those filenames.
+#
+# Not lifted into DOC_ETS because review_record is a broad type: 214
+# leaves total, only ~65 are annual/periodic doc-shaped. The rest are
+# per-event log entries.
+_REVIEW_ID_SUFFIXES = (
+    "program_review", "periodic_review", "annual_review",
+)
+
+
+def _is_review_doc(er) -> bool:
+    """True when the leaf represents an annual/periodic review REPORT
+    (a doc-shaped artefact), not a per-event review record."""
+    if er.evidence_type != "review_record":
+        return False
+    suffix = er.id.rsplit(":", 1)[-1]
+    return any(suffix.endswith(s) for s in _REVIEW_ID_SUFFIXES)
+
 OUT_DIR = _ROOT / "db" / "doc_mappings"
 
 # Existing target leaves (skip these — already authored)
@@ -215,8 +237,11 @@ def render(er) -> tuple[str, str]:
 # ─── Main ──────────────────────────────────────────────────────────────────────
 def main() -> int:
     all_ers = list(ALL_EVIDENCE_REQUIREMENTS) + [er for s in ALL_DERIVED_SPECS for er in s.direct_evidence]
-    candidates = [er for er in all_ers
-                  if er.evidence_type in DOC_ETS and er.id not in EXISTING_TARGETS]
+    candidates = [
+        er for er in all_ers
+        if (er.evidence_type in DOC_ETS or _is_review_doc(er))
+        and er.id not in EXISTING_TARGETS
+    ]
 
     # Stable ordering
     def std_key(s): return (0,s) if s.startswith("ISO") else (1,s) if s.startswith("GDPR") else (2,s)

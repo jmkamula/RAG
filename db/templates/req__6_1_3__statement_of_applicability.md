@@ -223,3 +223,73 @@ If you operate sectoral or contractual controls beyond Annex A (PCI
 DSS, HIPAA Technical Safeguards, customer-specific obligations, SOC2
 controls), list them here as additional table rows so the SoA is a
 complete view.
+
+---
+
+## PIMS extension — for ISO 27701-enrolled tenants
+
+If your organisation is enrolled in **ISO/IEC 27701:2019** (Privacy
+Information Management System), your SoA MUST enumerate the 27701
+Annex A + Annex B anchors alongside the 93 ISO 27001 controls above.
+27701's own clause 5.4.1.3 mirrors 27001's 6.1.3 and requires the
+same applicability + implementation-status table for PIMS-specific
+controls.
+
+**49 anchors total** — extend your SoA table below the 93 ISO 27001
+rows with:
+
+- **A.7.2.1 – A.7.2.8** (Batch 1 — 7 controls for identify + lawful
+  basis + consent + PIA + processor contracts + joint controllers +
+  records of processing PII)
+- **A.7.3.1 – A.7.3.10** (Batch 2 — 10 controls for data subject
+  rights: information, providing information, mechanisms to modify
+  or withdraw consent, object, access, correct, erase, controller
+  obligations to inform third parties, provide copy, handle
+  requests, automated decision-making)
+- **A.7.4.1 – A.7.4.9** (Batch 2 PbD — 9 controls: limit collection,
+  limit processing, accuracy, minimisation, de-identification at
+  end of processing, temp files, retention, disposal, transmission)
+- **A.7.5.1 – A.7.5.4** (Batch 3 transfers — 4 controls: basis for
+  transfer, countries, records of transfer, records of disclosure)
+- **B.8.2.1 – B.8.2.6** (Batch 1 processor mirror — 6 controls for
+  customer agreement, org purposes, marketing, infringing
+  instruction, customer obligations, RoPA)
+- **B.8.3.1** (processor subject-rights obligation — route DSAR to
+  controller)
+- **B.8.4.1 – B.8.4.3** (Batch 2 processor retention — 3 controls:
+  temp files, return/transfer/disposal on churn, transmission)
+- **B.8.5.1 – B.8.5.8** (Batch 3 processor transfers — 8 controls:
+  basis for transfer, countries, disclosure records, notification of
+  disclosure requests, legally-binding disclosures, disclosure of
+  subcontractors, engagement of subcontractor, change of
+  subcontractor)
+
+**Applicability by role:**
+
+- If tenant is a **controller only** (`role_controller = true`,
+  `role_processor = false`), only A.7.x applies. Mark all B.8.x
+  rows Not Applicable with justification "Arion acts as controller
+  only — processor obligations do not apply".
+- If tenant is a **processor only**, only B.8.x applies. A.7.x
+  Not Applicable.
+- If tenant is **both** (like ArionComply which is a controller for
+  its own data AND a processor for customer-uploaded PII), enumerate
+  ALL 49 anchors with per-anchor applicability.
+- **A.7.2.7** (joint PII controller) is Not Applicable unless
+  `role_joint_controller = true`.
+- **A.7.3.10** (automated decision-making) is Not Applicable unless
+  `automated_decision_making = true` in your data-processing facts.
+
+**Row format:** identical to the 93 ISO 27001 rows above — the SoA
+is a single table with all applicable controls under one header,
+sorted by standard then ref. Do not fork into a separate document;
+auditors expect one master ledger.
+
+**Example rows:**
+
+| Control Ref | Applicable (Yes/No) | Justification | Implementation Status | Implementing Policy / Procedure |
+|---|---|---|---|---|
+| A.7.2.1 | Yes | PII processing purposes documented per ISO 27701:2019 §5.4.1.1 | Partial — purpose register drafted, per-purpose retention pending | Privacy Program Charter (DOC-041) |
+| A.7.2.7 | No | Arion has no joint-controller arrangements (role_joint_controller = false) | — | — |
+| A.7.3.10 | No | Automated decision-making = false in data-processing facts | — | — |
+| B.8.2.1 | Yes | Arion holds customer-uploaded PII under DPA; processor role active | Partial — DPA in place, contract-scope register pending | Data Processing Agreement (DOC-052) |

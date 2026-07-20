@@ -4329,6 +4329,124 @@ EVAL_CASES = [
             "coverage would need a curator-authored ambiguity handler."
         ),
     ),
+
+    # ── ISO 27701 B.8.3-5 processor mirror lock-in (Ship 9'.a, 2026-07-20) ──
+    # Ship 8'.b covered A.7 controller anchors + B.8.2 processor. This adds
+    # B.8.3 (subject rights processor), B.8.4 (retention processor),
+    # B.8.5 (transfers processor) — 6 cases across the three subsections.
+    # Same structural discipline: must_contain ref + forbid clarify.
+
+    EvalCase(
+        id=216,
+        query="is ISO 27701 B.8.3.1 (obligations to PII principals) compliant?",
+        tags=["posture", "iso27701", "phase2_batch2", "processor", "subject_rights"],
+        expected_refs=["B.8.3.1"],
+        expected_type="posture_check",
+        must_contain=["B.8.3.1"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Only B.8.3.x anchor — processor's obligation to PII "
+            "principals (route DSAR back to the controller). Arion: NC. "
+            "Bridges to A.7.3 controller subject-rights family."
+        ),
+    ),
+
+    EvalCase(
+        id=217,
+        query="is ISO 27701 B.8.4.1 (temporary files) compliant?",
+        tags=["posture", "iso27701", "phase2_batch2", "processor", "retention"],
+        expected_refs=["B.8.4.1"],
+        expected_type="posture_check",
+        must_contain=["B.8.4.1"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Processor-side temp-file retention mirror of A.7.4.6. NC — "
+            "gap_description explicitly says 'Same as A.7.4.6 — no "
+            "systematic periodic sweep of temp files'. Locks that "
+            "controller/processor mirrors surface independently."
+        ),
+    ),
+
+    EvalCase(
+        id=218,
+        query="is ISO 27701 B.8.4.2 (return, transfer or disposal) compliant?",
+        tags=["posture", "iso27701", "phase2_batch2", "processor", "retention", "churn"],
+        expected_refs=["B.8.4.2"],
+        expected_type="posture_check",
+        must_contain=["B.8.4.2"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Processor return-of-PII at customer churn. NC — contract-"
+            "driven export + attestation exists, no formal 90-day "
+            "deletion tracking. Locks Batch 2 B.8 retention mirror."
+        ),
+    ),
+
+    EvalCase(
+        id=219,
+        query="is ISO 27701 B.8.5.1 (subprocessor disclosure) compliant?",
+        tags=["posture", "iso27701", "phase2_batch3", "processor", "transfers", "ofi"],
+        expected_refs=["B.8.5.1"],
+        expected_type="posture_check",
+        must_contain=["B.8.5.1"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "OFI case — Arion discloses Verpex + Cloudflare as "
+            "subprocessors in the trust page. Formal per-tenant "
+            "notification register missing. Second B.8 OFI case, "
+            "complementing #214 (B.8.2.6 processor RoPA OFI)."
+        ),
+    ),
+
+    EvalCase(
+        id=220,
+        query="is ISO 27701 B.8.5.4 (legally binding PII disclosures) compliant?",
+        tags=["posture", "iso27701", "phase2_batch3", "processor", "transfers"],
+        expected_refs=["B.8.5.4"],
+        expected_type="posture_check",
+        must_contain=["B.8.5.4"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Processor obligation on legally-binding disclosure requests "
+            "(law enforcement, national security). Arion: NC — DPA has "
+            "24h notification but no formal request register. Locks "
+            "Batch 3 B.8 transfer/disclosure block."
+        ),
+    ),
+
+    EvalCase(
+        id=221,
+        query="is ISO 27701 B.8.5.8 (subprocessor changes) compliant?",
+        tags=["posture", "iso27701", "phase2_batch3", "processor", "transfers", "subprocessor"],
+        expected_refs=["B.8.5.8"],
+        expected_type="posture_check",
+        must_contain=["B.8.5.8"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Highest B.8 numeric ref — subprocessor change notification "
+            "process. Arion: NC — general-authorisation approach via "
+            "trust page updates + 30-day advance notice. Locks the "
+            "high-tail of the B.8 block."
+        ),
+    ),
 ]
 
 
