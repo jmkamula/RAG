@@ -1,0 +1,20 @@
+{
+  "internal_id":   "ISO27004:2016",
+  "display_name":  "ISO 27004:2016",
+  "short_name":    "ISO 27004",
+  "family":        "iso_27000_series",
+
+  "ref_conventions": {
+    "sections": {
+      "prefix":          "",
+      "pattern":         "^[0-9]+(\\.[0-9]+)*$",
+      "example":         "7.1",
+      "display_format":  "{short_name} §{ref}"
+    }
+  },
+
+  "notes": [
+    "27004 provides guidance on monitoring, measurement, analysis and evaluation — supports ISO 27001 clause 9.1 + monitoring-adjacent Annex A controls (A.5.22, A.5.36, A.5.37, A.7.4, A.8.15, A.8.16).",
+    "Cited as authority in leaf business_description (Ship 12'.c) — no leaves are curated inside 27004 itself pending source texts."
+  ]
+}

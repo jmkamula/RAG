@@ -1,0 +1,20 @@
+{
+  "internal_id":   "ISO27005:2022",
+  "display_name":  "ISO 27005:2022",
+  "short_name":    "ISO 27005",
+  "family":        "iso_27000_series",
+
+  "ref_conventions": {
+    "sections": {
+      "prefix":          "",
+      "pattern":         "^[0-9]+(\\.[0-9]+)*$",
+      "example":         "8.2",
+      "display_format":  "{short_name} §{ref}"
+    }
+  },
+
+  "notes": [
+    "27005 provides guidance on information-security risk management — supports ISO 27001 clauses 6.1 / 8.2 / 8.3 + risk-adjacent Annex A (A.5.5, A.5.7, A.5.24, A.5.29, A.5.30, A.7.5).",
+    "Cited as authority in leaf business_description (Ship 12'.c) — no leaves are curated inside 27005 itself pending source texts."
+  ]
+}
