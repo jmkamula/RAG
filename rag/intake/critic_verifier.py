@@ -47,6 +47,11 @@ class PrimingControl:
     candidate_musts: list[dict] = field(default_factory=list)
         # MUSTs the LLM should verify/confirm
         # each: {"must_id": ..., "text": ..., "source": ...}
+    business_description: str = ""             # Ship 11'.d: curator-authored
+                                                # anchor CORE OBLIGATION summary.
+                                                # Feeds the prompt so the LLM
+                                                # can check quote-to-anchor
+                                                # SEMANTIC fit, not just topic.
 
 
 @dataclass
@@ -131,11 +136,12 @@ def _build_priming_set(
             })
 
         entries.append(PrimingControl(
-            control_ref     = cref,
-            control_title   = meta.get("title", ""),
-            signal_sources  = unique_sources,
-            strength_score  = strength,
-            candidate_musts = candidate_musts,
+            control_ref          = cref,
+            control_title        = meta.get("title", ""),
+            signal_sources       = unique_sources,
+            strength_score       = strength,
+            candidate_musts      = candidate_musts,
+            business_description = meta.get("business_description", ""),
         ))
 
     # Sort: strength DESC, then control_ref ASC for determinism
@@ -217,6 +223,66 @@ RULES:
   if broadly relevant; "low" if only weakly implied (rare — prefer to
   reject).
 
+ANCHOR SEMANTIC FIT — MOST CRITICAL RULE (Ship 11'.d):
+
+For every CONFIRM you make, the verbatim quote must address the
+anchor's CORE OBLIGATION as stated in its `obligation:` line
+(when provided). A single-word keyword match is NOT sufficient —
+the quote must substantively address WHAT the anchor requires.
+
+Wrong-attribution examples to REJECT:
+
+  ❌ Quote "Subprocessors — Any third parties involved" (a RoPA
+     column label) → NOT evidence for A.7.2.6 (Contracts with PII
+     processors). The RoPA lists subprocessors, but the anchor
+     requires processor CONTRACT TERMS + Art.28 alignment. Reject.
+
+  ❌ Quote "Technical safeguards (encryption, access controls,
+     data minimization)" (a safeguards bullet) → NOT evidence for
+     A.7.4.1 (Limit collection) or A.7.4.4 (Minimisation objectives).
+     Mentioning "data minimization" in a safeguards list is not
+     the anchor's core obligation. Reject.
+
+  ❌ Quote "Clarify in contracts who is responsible for data
+     accuracy" → picked A.7.2.6 (processor contracts) because of
+     "contracts", but the anchor is about Art.28 processor
+     obligations, not accuracy assignment. Should map to A.7.4.3
+     (accuracy) if applicable. Reject.
+
+The principle: keyword overlap is necessary but not sufficient.
+Verify the sentence's SEMANTIC directly addresses the anchor's
+CORE OBLIGATION.
+
+MUST-BINDING SEMANTICS — MATCH SHAPE TO PREFIX:
+
+Every MUST id carries a semantic prefix that tells you what SHAPE
+of evidence satisfies it. When picking a MUST for your CONFIRM,
+match the quote's shape to the prefix:
+
+  `proc_*` — procedure content. Needs prose describing a
+             procedure step, decision rule, or process flow.
+             ("Access rights are reviewed quarterly by the ISMS
+             Manager.")
+  `reg_*`  — register field / column entry. Register schema
+             fields, per-row data (customer id, purpose, retention
+             period). Table cells legitimately satisfy these.
+             ("Consent ID  |  Unique reference number")
+  `rev_*`  — review record. Needs an AUDIT RECORD — reviewer
+             name + date + finding + follow-up. Documenting that
+             something IS reviewed is NOT enough; the MUST needs
+             the review OUTPUT.
+             ("Q3 review by DPO: 2 gaps found, remediated by
+             2026-06-01.")
+  `scope_*` — scope statement / applicability. Prose defining
+              WHERE the control applies + WHO/WHAT is in scope.
+              ("This procedure applies to all EU employee data.")
+  `ropa_*` — RoPA-specific field. Same shape as `reg_*` but
+             specifically records-of-processing columns.
+
+If the quote is a procedure sentence bound to a `rev_` MUST, that
+is a wrong binding — pick a `proc_` MUST from the candidate list
+instead, or REJECT the whole confirm.
+
 Respond ONLY with valid JSON matching this schema (no prose before/after):
 
 {
@@ -245,7 +311,10 @@ Respond ONLY with valid JSON matching this schema (no prose before/after):
 
 
 def _format_priming_block(priming: list[PrimingControl]) -> str:
-    """Human-readable priming section for the prompt."""
+    """Human-readable priming section for the prompt. Ship 11'.d:
+    includes each anchor's curated `business_description` so the LLM
+    can check quote-to-anchor semantic fit against the CORE OBLIGATION
+    of the anchor rather than just topic keywords."""
     if not priming:
         return "(no signals proposed anything — extend from the pool below)"
     lines: list[str] = []
@@ -255,6 +324,12 @@ def _format_priming_block(priming: list[PrimingControl]) -> str:
             f'  - control_ref: "{p.control_ref}"  title: "{p.control_title}"  '
             f'signals: {sources}  strength: {p.strength_score}'
         )
+        # Ship 11'.d — curator-authored anchor CORE OBLIGATION. Truncate
+        # to 300 chars to keep the prompt bounded; full text lives on the
+        # RequirementNode for chat / auditor surfaces.
+        if p.business_description:
+            desc = p.business_description.replace("\n", " ")[:300]
+            lines.append(f'      obligation: {desc}')
         # Include up to 5 candidate MUSTs so the LLM can bind to the right one
         for m in p.candidate_musts[:5]:
             mid  = m.get("must_id") or ""
@@ -478,9 +553,19 @@ def _extract_critic_verifier(
 
 
 def build_control_meta_from_neo4j(control_refs: list[str], driver) -> dict[str, dict]:
-    """Build the {control_ref → {title, standard_id, musts:[...]}} map
-    from Neo4j. Used by _build_priming_set to populate control titles
-    and candidate MUSTs. Small query — one round-trip per control set."""
+    """Build the {control_ref → {title, standard_id, business_description,
+    musts:[...]}} map from Neo4j. Used by _build_priming_set to populate
+    control titles + curated business_description (Ship 11'.d) and
+    candidate MUSTs. Small query — one round-trip per control set.
+
+    `business_description` is the curator-authored one-line summary of
+    the anchor's CORE OBLIGATION (e.g. A.7.2.6 = "Contracts with PII
+    processors: identify, document + agree the additional obligations
+    on the customer per Art.28"). The critic prompt uses this so the
+    LLM can verify quote-to-anchor semantic fit rather than just
+    keyword-topic overlap. Falls back to obligation_text when
+    business_description is empty.
+    """
     if not control_refs or driver is None:
         return {}
     try:
@@ -494,6 +579,8 @@ def build_control_meta_from_neo4j(control_refs: list[str], driver) -> dict[str, 
             RETURN rn.ref  AS control_ref,
                    rn.title AS title,
                    rn.standard_id AS standard_id,
+                   coalesce(rn.business_description, rn.obligation_text, '')
+                       AS business_description,
                    collect(DISTINCT {must_id: mi.id, text: mi.text}) AS musts
             """
             out: dict[str, dict] = {}
@@ -503,9 +590,10 @@ def build_control_meta_from_neo4j(control_refs: list[str], driver) -> dict[str, 
                     continue
                 musts = [m for m in (row["musts"] or []) if m.get("must_id")]
                 out[cref] = {
-                    "title":       row["title"] or "",
-                    "standard_id": row["standard_id"] or "",
-                    "musts":       musts,
+                    "title":                row["title"] or "",
+                    "standard_id":          row["standard_id"] or "",
+                    "business_description": row["business_description"] or "",
+                    "musts":                musts,
                 }
             return out
     except Exception as e:
