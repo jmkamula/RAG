@@ -22,10 +22,124 @@ LLM cost. Wired into `_llm_extract_critic_verifier` in Phase 4.
 """
 from __future__ import annotations
 import logging
+import math
 from dataclasses import dataclass, field
 from typing import Optional
 
 logger = logging.getLogger(__name__)
+
+
+# ── Ship 11'.d/redesign — post-critic semantic-fit gate ────────────
+#
+# The critic-verifier grounds quotes verbatim + binds to MUSTs. That
+# doesn't catch cross-anchor keyword drift: "Technical safeguards
+# (encryption, access controls, data minimization)" verbatim in the
+# doc + confirmed for A.7.4.1 (Limit collection) because "data
+# minimization" matched. The quote is a safeguards bullet, not
+# collection-limit prose.
+#
+# Ship 11'.d shipped a prompt-enrichment fix (business_description +
+# MUST-prefix taxonomy in the system prompt) that violated case-file
+# discipline: it grew the prompt 2.3x and destabilized JSON output.
+# Ship 11'.d/redesign replaces that with a DETERMINISTIC POST-CRITIC
+# GATE:
+#
+#   For each critic-confirmed finding, compute cosine similarity
+#   between the quote embedding + the anchor's business_description
+#   embedding. If similarity < threshold, reject.
+#
+# This preserves the case-file principle: LLM composes/confirms;
+# deterministic gates verify semantics AFTER.
+
+_SEMANTIC_FIT_THRESHOLD  = 0.30    # cosine sim below this → reject
+_ANCHOR_EMBED_CACHE: dict[str, list[float]] = {}
+
+
+def _cosine(a: list[float], b: list[float]) -> float:
+    """Cosine similarity between two vectors, 0 when either is zero-norm."""
+    dot = 0.0
+    na  = 0.0
+    nb  = 0.0
+    for x, y in zip(a, b):
+        dot += x * y
+        na  += x * x
+        nb  += y * y
+    if na <= 0.0 or nb <= 0.0:
+        return 0.0
+    return dot / (math.sqrt(na) * math.sqrt(nb))
+
+
+def _get_embed_fn():
+    """Return the shared OpenAI embedding function used across the
+    codebase (Ship 5'.b: text-embedding-3-large). Cached at module
+    scope. Returns None if embedding infrastructure unavailable —
+    caller degrades to passing all findings through (fail-open)."""
+    global _EMBED_FN
+    try:
+        return _EMBED_FN
+    except NameError:
+        pass
+    try:
+        from vector.indexer import OpenAIEmbeddingFunction
+        from rag.embedding_config import EMBED_MODEL_STANDARD
+        _EMBED_FN = OpenAIEmbeddingFunction(model=EMBED_MODEL_STANDARD)
+        return _EMBED_FN
+    except Exception as e:
+        logger.warning("semantic_fit gate: embedding fn unavailable: %s", e)
+        _EMBED_FN = None
+        return None
+
+
+def _embed_anchor_description(desc: str, embed_fn) -> Optional[list[float]]:
+    """Return cached or freshly-embedded vector for an anchor
+    business_description. Cache is process-scoped."""
+    if not desc:
+        return None
+    if desc in _ANCHOR_EMBED_CACHE:
+        return _ANCHOR_EMBED_CACHE[desc]
+    try:
+        out = embed_fn([desc])
+        vec = list(out[0]) if len(out) else None
+    except Exception as e:
+        logger.warning("anchor embed failed: %s", e)
+        vec = None
+    if vec is not None:
+        _ANCHOR_EMBED_CACHE[desc] = vec
+    return vec
+
+
+def _semantic_fit_ok(
+    quote: str,
+    anchor_description: str,
+    embed_fn,
+    threshold: float = _SEMANTIC_FIT_THRESHOLD,
+) -> tuple[bool, str, float]:
+    """Ship 11'.d/redesign gate. Returns (ok, reason, similarity).
+
+    Fail-open policy: if embedding infrastructure is unavailable OR
+    the anchor lacks a business_description, PASS the finding through.
+    The gate is a signal-add, not a signal-required check — the
+    critic + Ship 11'.c filters remain the primary defence.
+    """
+    if embed_fn is None:
+        return (True, "embed_unavailable", 0.0)
+    if not anchor_description or not quote:
+        return (True, "no_description_baseline", 0.0)
+
+    anchor_vec = _embed_anchor_description(anchor_description, embed_fn)
+    if anchor_vec is None:
+        return (True, "anchor_embed_failed", 0.0)
+
+    try:
+        quote_vec = list(embed_fn([quote])[0])
+    except Exception as e:
+        logger.warning("quote embed failed: %s", e)
+        return (True, "quote_embed_failed", 0.0)
+
+    sim = _cosine(anchor_vec, quote_vec)
+    if sim < threshold:
+        return (False, f"semantic_fit_low:{sim:.2f}", sim)
+    return (True, f"semantic_fit_ok:{sim:.2f}", sim)
 
 # Signal-strength scoring for the priming set. When a control appears
 # via multiple signals, all sources count — but the highest-strength
@@ -223,66 +337,6 @@ RULES:
   if broadly relevant; "low" if only weakly implied (rare — prefer to
   reject).
 
-ANCHOR SEMANTIC FIT — MOST CRITICAL RULE (Ship 11'.d):
-
-For every CONFIRM you make, the verbatim quote must address the
-anchor's CORE OBLIGATION as stated in its `obligation:` line
-(when provided). A single-word keyword match is NOT sufficient —
-the quote must substantively address WHAT the anchor requires.
-
-Wrong-attribution examples to REJECT:
-
-  ❌ Quote "Subprocessors — Any third parties involved" (a RoPA
-     column label) → NOT evidence for A.7.2.6 (Contracts with PII
-     processors). The RoPA lists subprocessors, but the anchor
-     requires processor CONTRACT TERMS + Art.28 alignment. Reject.
-
-  ❌ Quote "Technical safeguards (encryption, access controls,
-     data minimization)" (a safeguards bullet) → NOT evidence for
-     A.7.4.1 (Limit collection) or A.7.4.4 (Minimisation objectives).
-     Mentioning "data minimization" in a safeguards list is not
-     the anchor's core obligation. Reject.
-
-  ❌ Quote "Clarify in contracts who is responsible for data
-     accuracy" → picked A.7.2.6 (processor contracts) because of
-     "contracts", but the anchor is about Art.28 processor
-     obligations, not accuracy assignment. Should map to A.7.4.3
-     (accuracy) if applicable. Reject.
-
-The principle: keyword overlap is necessary but not sufficient.
-Verify the sentence's SEMANTIC directly addresses the anchor's
-CORE OBLIGATION.
-
-MUST-BINDING SEMANTICS — MATCH SHAPE TO PREFIX:
-
-Every MUST id carries a semantic prefix that tells you what SHAPE
-of evidence satisfies it. When picking a MUST for your CONFIRM,
-match the quote's shape to the prefix:
-
-  `proc_*` — procedure content. Needs prose describing a
-             procedure step, decision rule, or process flow.
-             ("Access rights are reviewed quarterly by the ISMS
-             Manager.")
-  `reg_*`  — register field / column entry. Register schema
-             fields, per-row data (customer id, purpose, retention
-             period). Table cells legitimately satisfy these.
-             ("Consent ID  |  Unique reference number")
-  `rev_*`  — review record. Needs an AUDIT RECORD — reviewer
-             name + date + finding + follow-up. Documenting that
-             something IS reviewed is NOT enough; the MUST needs
-             the review OUTPUT.
-             ("Q3 review by DPO: 2 gaps found, remediated by
-             2026-06-01.")
-  `scope_*` — scope statement / applicability. Prose defining
-              WHERE the control applies + WHO/WHAT is in scope.
-              ("This procedure applies to all EU employee data.")
-  `ropa_*` — RoPA-specific field. Same shape as `reg_*` but
-             specifically records-of-processing columns.
-
-If the quote is a procedure sentence bound to a `rev_` MUST, that
-is a wrong binding — pick a `proc_` MUST from the candidate list
-instead, or REJECT the whole confirm.
-
 Respond ONLY with valid JSON matching this schema (no prose before/after):
 
 {
@@ -311,10 +365,11 @@ Respond ONLY with valid JSON matching this schema (no prose before/after):
 
 
 def _format_priming_block(priming: list[PrimingControl]) -> str:
-    """Human-readable priming section for the prompt. Ship 11'.d:
-    includes each anchor's curated `business_description` so the LLM
-    can check quote-to-anchor semantic fit against the CORE OBLIGATION
-    of the anchor rather than just topic keywords."""
+    """Human-readable priming section for the prompt. Keep it lean —
+    Ship 11'.d/redesign codified that anchor-semantic verification
+    belongs in a POST-CRITIC deterministic gate, not in the LLM prompt.
+    business_description is fetched onto PrimingControl but consumed
+    downstream by the semantic-fit gate, not by the LLM."""
     if not priming:
         return "(no signals proposed anything — extend from the pool below)"
     lines: list[str] = []
@@ -324,12 +379,6 @@ def _format_priming_block(priming: list[PrimingControl]) -> str:
             f'  - control_ref: "{p.control_ref}"  title: "{p.control_title}"  '
             f'signals: {sources}  strength: {p.strength_score}'
         )
-        # Ship 11'.d — curator-authored anchor CORE OBLIGATION. Truncate
-        # to 300 chars to keep the prompt bounded; full text lives on the
-        # RequirementNode for chat / auditor surfaces.
-        if p.business_description:
-            desc = p.business_description.replace("\n", " ")[:300]
-            lines.append(f'      obligation: {desc}')
         # Include up to 5 candidate MUSTs so the LLM can bind to the right one
         for m in p.candidate_musts[:5]:
             mid  = m.get("must_id") or ""

@@ -381,6 +381,18 @@ def _run_critic_verifier_pass(
         _seen: set[tuple[str, str, str]] = set()   # (ctrl, item, quote-hash) dedup
 
         _dropped_shape_cv = 0
+        _dropped_semantic_cv = 0
+        # Ship 11'.d/redesign — pre-load embed fn + build anchor
+        # description lookup so the semantic-fit gate can run
+        # deterministically post-critic. Fail-open when infra
+        # unavailable.
+        from rag.intake.critic_verifier import _get_embed_fn, _semantic_fit_ok
+        _embed_fn = _get_embed_fn()
+        _anchor_desc_by_ref = {p.control_ref: p.business_description for p in priming}
+        # extend pool entries also carry descriptions (short one-liners)
+        for e in extend_pool:
+            _anchor_desc_by_ref.setdefault(e.control_ref, e.description or "")
+
         for entry in (parsed.get("confirmed") or []) + (parsed.get("extended") or []):
             quote = entry.get("quote") or ""
             if not _evidence_grounded(quote, doc):
@@ -397,6 +409,15 @@ def _run_critic_verifier_pass(
             )
             if drop:
                 _dropped_shape_cv += 1
+                continue
+            # Ship 11'.d/redesign — semantic-fit gate. Cosine similarity
+            # between quote + anchor business_description; drop below
+            # threshold. Follows case-file discipline: LLM composes,
+            # deterministic gate verifies.
+            anchor_desc = _anchor_desc_by_ref.get(entry["control_ref"], "")
+            fit_ok, fit_reason, _sim = _semantic_fit_ok(quote, anchor_desc, _embed_fn)
+            if not fit_ok:
+                _dropped_semantic_cv += 1
                 continue
             key = (entry["control_ref"], entry.get("checklist_item_id") or "", quote[:80])
             if key in _seen:
@@ -442,6 +463,8 @@ def _run_critic_verifier_pass(
         doc.extraction_metrics["critic_findings_kept"] = len(results)
         # Ship 11'.c telemetry
         doc.extraction_metrics["dropped_content_shape"] = _dropped_shape_cv
+        # Ship 11'.d/redesign telemetry
+        doc.extraction_metrics["dropped_semantic_fit"]  = _dropped_semantic_cv
 
         logger.info(
             "critic_verifier for %s: %d confirmed + %d extended → %d findings kept "
@@ -3189,6 +3212,7 @@ def _extract_via_fingerprints(
     covered:  set[str] = set()
     seen:     set[tuple[str, str]] = set()
 
+    dropped_shape_fp = 0
     for m in matches:
         key = (m["leaf_id"], m["must_id"])
         if key in seen:
@@ -3196,6 +3220,16 @@ def _extract_via_fingerprints(
         seen.add(key)
         quote = _extract_quote_around_match(m, doc)
         if not quote:
+            continue
+        # Ship 11'.e — extend Ship 11'.c content-shape filter to the
+        # fingerprint path. Was missing before Ship 11'.e's measurement
+        # showed the FP path emitting field-label + section-header
+        # findings that bypassed the critic-side filter.
+        shape_drop, _shape_reason = _looks_like_field_or_header(
+            quote, must_id=m["must_id"],
+        )
+        if shape_drop:
+            dropped_shape_fp += 1
             continue
         findings.append(DocumentFinding(
             upload_id         = doc.upload_id or "",
@@ -3215,6 +3249,12 @@ def _extract_via_fingerprints(
 
     doc.extraction_metrics["fingerprint_findings"]        = len(findings)
     doc.extraction_metrics["fingerprint_covered_leaves"]  = len(covered)
+    # Ship 11'.e — FP-path content-shape drops (accumulated with the
+    # critic-path counter for a single dropped_content_shape metric).
+    m_dict = doc.extraction_metrics
+    m_dict["dropped_content_shape"] = (
+        m_dict.get("dropped_content_shape", 0) + dropped_shape_fp
+    )
     logger.info(
         "fingerprint extraction for %s: %d findings on %d leaves "
         "(no LLM)", doc.original_name, len(findings), len(covered),
