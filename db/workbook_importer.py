@@ -900,10 +900,23 @@ class WorkbookImporter:
     # ── Write ─────────────────────────────────────────────────────────────────
 
     def _write_rows(self, rows: list[ImportRow], config: SheetConfig) -> None:
-        """Write mapped rows to Postgres using UPSERT."""
+        """Write mapped rows to Postgres using UPSERT.
+
+        Ship 15'.b — for the `risks` table, distinguish new
+        INSERTs from UPDATEs via `RETURNING (xmax = 0)` and fire
+        `emit_risk_added` for genuinely-new rows. Existing rows
+        (subsequent workbook re-uploads) don't re-fire the
+        notification — matches the existing 7-day dedup window.
+        """
         inserts = [r for r in rows if r.action == "insert" and r.mapped]
         if not inserts:
             return
+
+        # Track new-INSERT rows on the `risks` table for the
+        # post-commit notification pass. Deferred until AFTER the
+        # commit so a failed notification insert doesn't roll back
+        # the risk-row upsert.
+        new_risk_notifications: list[tuple[str, str]] = []  # [(ext_ref, threat)]
 
         for row in inserts:
             try:
@@ -911,6 +924,13 @@ class WorkbookImporter:
                     self._upsert_audit(config.table, dict(row.mapped))
                 elif config.table == "incidents":
                     self._upsert_incident(dict(row.mapped))
+                elif config.table == "risks":
+                    was_inserted = self._upsert_risk(row.mapped, config.upsert_on)
+                    if was_inserted:
+                        new_risk_notifications.append((
+                            row.mapped.get("external_ref") or "",
+                            row.mapped.get("threat") or "",
+                        ))
                 else:
                     self._upsert(config.table, row.mapped, config.upsert_on)
                 row.action = "insert"
@@ -919,6 +939,69 @@ class WorkbookImporter:
                 row.reason = str(e)
 
         self._pg.commit()
+
+        # Post-commit — fire risk_added notifications for genuinely-
+        # new rows. Silent-fail per Ship 14'.f emit_risk_added
+        # contract; failures here never affect the workbook import.
+        if new_risk_notifications and self._tenant_id:
+            try:
+                from rag.risk.notify import emit_risk_added
+                for ext_ref, threat in new_risk_notifications:
+                    if ext_ref:
+                        emit_risk_added(self._pg, self._tenant_id,
+                                        ext_ref, threat or None)
+                self._pg.commit()
+            except Exception:
+                try: self._pg.rollback()
+                except Exception: pass
+
+    def _upsert_risk(self, data: dict, conflict_target: str) -> bool:
+        """Ship 15'.b — variant of `_upsert` for the risks table
+        that returns `True` when the row was newly inserted (vs
+        `False` when the conflict fired and it was an update).
+
+        Uses the Postgres `xmax` trick — on INSERT xmax = 0, on
+        UPDATE it's the transaction id of the updater.
+        """
+        insert_data = {k: v for k, v in data.items() if v is not None}
+        if not insert_data:
+            return False
+
+        cols    = list(insert_data.keys())
+        values  = list(insert_data.values())
+        placeholders = ', '.join(['%s'] * len(cols))
+        col_list     = ', '.join(cols)
+
+        if conflict_target.startswith('('):
+            conflict_cols = re.findall(r'\w+', conflict_target)
+        else:
+            conflict_cols = [conflict_target]
+        update_cols = [c for c in cols
+                       if c not in conflict_cols + ['tenant_id', 'id']]
+
+        if not update_cols:
+            sql = (
+                f"INSERT INTO risks ({col_list}) "
+                f"VALUES ({placeholders}) "
+                f"ON CONFLICT {conflict_target} DO NOTHING "
+                f"RETURNING (xmax = 0) AS was_inserted"
+            )
+        else:
+            update_clause = ', '.join(
+                f"{c} = EXCLUDED.{c}" for c in update_cols
+            )
+            sql = (
+                f"INSERT INTO risks ({col_list}) "
+                f"VALUES ({placeholders}) "
+                f"ON CONFLICT {conflict_target} "
+                f"DO UPDATE SET {update_clause} "
+                f"RETURNING (xmax = 0) AS was_inserted"
+            )
+
+        with self._pg.cursor() as cur:
+            cur.execute(sql, values)
+            row = cur.fetchone()
+            return bool(row and row[0])
 
     def _upsert(self, table: str, data: dict, conflict_target: str) -> None:
         """
