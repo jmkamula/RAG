@@ -52,9 +52,11 @@ load_dotenv(str(Path(__file__).parent.parent / ".env"))
 
 
 COL_27003 = "iso27003_2017"
+COL_27004 = "iso27004_2016"
 COL_27005 = "iso27005_2022"
 
 _TEXT_27003 = Path("/data/arioncomply/private/iso27003_2017.txt")
+_TEXT_27004 = Path("/data/arioncomply/private/iso27004_2016.txt")
 _TEXT_27005 = Path("/data/arioncomply/private/iso27005_2022.txt")
 
 
@@ -238,6 +240,9 @@ def main() -> int:
     print("Chunking ISO 27003:2017…")
     chunks_27003 = chunk_standard(_TEXT_27003, "ISO27003:2017")
     print(f"  {len(chunks_27003)} sections extracted")
+    print("Chunking ISO 27004:2016…")
+    chunks_27004 = chunk_standard(_TEXT_27004, "ISO27004:2016")
+    print(f"  {len(chunks_27004)} sections extracted")
     print("Chunking ISO 27005:2022…")
     chunks_27005 = chunk_standard(_TEXT_27005, "ISO27005:2022")
     print(f"  {len(chunks_27005)} sections extracted")
@@ -251,6 +256,7 @@ def main() -> int:
     )
 
     index_collection(client, COL_27003, chunks_27003, embed_fn, dry_run=args.dry_run)
+    index_collection(client, COL_27004, chunks_27004, embed_fn, dry_run=args.dry_run)
     index_collection(client, COL_27005, chunks_27005, embed_fn, dry_run=args.dry_run)
 
     if args.sample and not args.dry_run:
@@ -262,6 +268,10 @@ def main() -> int:
                      "how to define ISMS scope")
         sample_query(client, COL_27003, embed_fn,
                      "management review agenda items")
+        sample_query(client, COL_27004, embed_fn,
+                     "what performance and effectiveness measures to use")
+        sample_query(client, COL_27004, embed_fn,
+                     "who are the roles in a measurement programme")
 
     return 0
 

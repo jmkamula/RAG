@@ -4494,6 +4494,31 @@ EVAL_CASES = [
             "for 'what does X say about Y' phrasing — locked to that."
         ),
     ),
+
+    # ── Ship 13'.e — ISO 27004:2016 re-enrollment + surfacing ────────
+    # Locks that the re-enrolled 27004:2016 guidance reaches chat via
+    # the digest hint (same mechanism as 13'.d cases #222 + #223).
+
+    EvalCase(
+        id=224,
+        query="what does ISO 27004 say about monitoring and measurement?",
+        tags=["definition", "iso27004", "guidance_surface", "ship13e"],
+        expected_refs=["9.1"],
+        expected_type="definition",
+        must_contain=["27004", "9.1"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Ship 13'.e gate: LLM answer must cite ISO 27004 as "
+            "authority on the monitoring / measurement / analysis / "
+            "evaluation guidance for clause 9.1. Locks in the 27004:2016 "
+            "second-edition surface after Ship 13'.a's initial skip and "
+            "13'.e's re-enrollment. Signal C routes via 'monitoring and "
+            "measurement' → 9.1."
+        ),
+    ),
 ]
 
 

@@ -269,23 +269,41 @@ def _render_obligations(
 
 
 def _extract_guidance_hint(business_description: str, max_chars: int = 220) -> str:
-    """Ship 13'.d: return a compact one-sentence guidance hint if the
-    `business_description` carries a `Per ISO 27003:2017` or
-    `Per ISO 27005:2022` paragraph. Returns "" if no marker is
-    present. Trimmed to `max_chars` on a word boundary."""
-    for marker in ("Per ISO 27003:2017", "Per ISO 27005:2022"):
+    """Ship 13'.d/'.e: return a compact one-sentence guidance hint if
+    the `business_description` carries a `Per ISO 27003:2017` /
+    `Per ISO 27004:2016` / `Per ISO 27005:2022` paragraph. Returns
+    "" if no marker is present. Trimmed to `max_chars` on a word
+    boundary.
+
+    When multiple markers are present (e.g. a leaf enriched by both
+    27003 and 27005), the first-appearing paragraph wins — the
+    order in `business_description` was set by the curation arc's
+    ordering (27005 first via Ship 13'.b, then 27003 via 13'.c,
+    then 27004 via 13'.e where applicable)."""
+    markers = (
+        "Per ISO 27003:2017",
+        "Per ISO 27004:2016",
+        "Per ISO 27005:2022",
+    )
+    # Find the EARLIEST-appearing marker so the hint reflects the
+    # first authoritative attribution the reader would encounter.
+    best_idx: int | None = None
+    for marker in markers:
         idx = business_description.find(marker)
-        if idx < 0:
-            continue
-        tail = business_description[idx:]
-        # First sentence ends at ". " or the paragraph end.
-        end = tail.find(". ")
-        sentence = tail if end < 0 else tail[: end + 1]
-        sentence = " ".join(sentence.split())
-        if len(sentence) > max_chars:
-            sentence = sentence[: max_chars - 1].rsplit(" ", 1)[0] + "…"
-        return sentence
-    return ""
+        if idx >= 0 and (best_idx is None or idx < best_idx):
+            best_idx = idx
+    if best_idx is None:
+        return ""
+    tail = business_description[best_idx:]
+    # First sentence ends at ". " OR ".\n" OR paragraph end.
+    # Curation paragraphs join with "\n\n" so post-period whitespace
+    # may be a newline rather than a space.
+    m = re.search(r"\.\s", tail)
+    sentence = tail if m is None else tail[: m.start() + 1]
+    sentence = " ".join(sentence.split())
+    if len(sentence) > max_chars:
+        sentence = sentence[: max_chars - 1].rsplit(" ", 1)[0] + "…"
+    return sentence
 
 
 def _render_demonstrated_by(cf: CaseFile, max_items: int = 8) -> str:

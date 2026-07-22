@@ -285,6 +285,9 @@ DOCUMENT_TOPIC_MAP: dict[str, str] = {
     "internal audit":      "9.2",
     "audit":               "9.2",
     "management review":   "9.3",
+    "monitoring and measurement": "9.1",
+    "monitoring, measurement": "9.1",  # matches "monitoring, measurement, analysis" phrasing
+    "isms performance":    "9.1",
     "isms policy":         "5.2",
     "information security policy": "5.2",
     "isms scope":          "4.3",
