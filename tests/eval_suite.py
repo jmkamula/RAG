@@ -4447,6 +4447,53 @@ EVAL_CASES = [
             "high-tail of the B.8 block."
         ),
     ),
+
+    # ── Ship 13'.d — ISO 27000-family guidance surface ────────────────
+    # Locks in that the Ship 13'.b/'.c prose enrichment reaches the
+    # LLM through the case-file digest's `→ guidance:` hint. Would
+    # have failed pre-Ship-13'.d because business_description was
+    # deprioritised behind obligation_text.
+
+    EvalCase(
+        id=222,
+        query="what does ISO 27005 recommend for risk assessment methodology?",
+        tags=["definition", "iso27005", "guidance_surface", "ship13d"],
+        expected_refs=["6.1.2"],
+        expected_type="definition",
+        must_contain=["27005", "6.1.2"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Ship 13'.d gate: LLM answer must cite ISO 27005 as authority "
+            "for the risk assessment methodology on clause 6.1.2. Locks "
+            "in that the case-file digest's `→ guidance:` hint (fed by "
+            "the Ship 13'.b enrichment paragraph on 6.1.2) surfaces "
+            "27005 at chat time. Question type classifies as 'definition' "
+            "for 'what does X say about Y' phrasing — locked to that."
+        ),
+    ),
+
+    EvalCase(
+        id=223,
+        query="what does ISO 27003 say about ISMS management review?",
+        tags=["definition", "iso27003", "guidance_surface", "ship13d"],
+        expected_refs=["9.3"],
+        expected_type="definition",
+        must_contain=["27003", "9.3"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Ship 13'.d gate: LLM answer must cite ISO 27003 as authority "
+            "for the ISMS management review guidance on clause 9.3. Locks "
+            "in the 27003-enrichment surface via the case-file digest's "
+            "`→ guidance:` hint. Question type classifies as 'definition' "
+            "for 'what does X say about Y' phrasing — locked to that."
+        ),
+    ),
 ]
 
 

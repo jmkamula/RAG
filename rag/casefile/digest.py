@@ -237,9 +237,11 @@ def _render_obligations(
     lines: list[str] = []
     for n in ordered:
         meta = getattr(n, "metadata", {}) or {}
+        obligation = meta.get("obligation_text") or ""
+        bd = meta.get("business_description") or ""
         text = (
-            meta.get("obligation_text")
-            or meta.get("business_description")
+            obligation
+            or bd
             or (getattr(n, "document", "") or "")
             or getattr(n, "title", "")
         )
@@ -249,9 +251,41 @@ def _render_obligations(
         if len(text) > max_chars_each:
             text = text[: max_chars_each - 1] + "…"
         lines.append(f"- {n.ref}: {text}")
+
+        # Ship 13'.d — surface guidance authority as a compact hint.
+        # If business_description carries an ISO 27003/27005 paragraph
+        # (marker `Per ISO 2700`), extract the first sentence and
+        # append as a `  → guidance:` line so the LLM sees the
+        # authority attribution at chat time. Non-load-bearing —
+        # skipped when obligation_text is empty (would double-cite BD).
+        if obligation and bd:
+            hint = _extract_guidance_hint(bd)
+            if hint:
+                lines.append(f"  → guidance: {hint}")
+
     if not lines:
         return ""
     return "OBLIGATIONS:\n" + "\n".join(lines)
+
+
+def _extract_guidance_hint(business_description: str, max_chars: int = 220) -> str:
+    """Ship 13'.d: return a compact one-sentence guidance hint if the
+    `business_description` carries a `Per ISO 27003:2017` or
+    `Per ISO 27005:2022` paragraph. Returns "" if no marker is
+    present. Trimmed to `max_chars` on a word boundary."""
+    for marker in ("Per ISO 27003:2017", "Per ISO 27005:2022"):
+        idx = business_description.find(marker)
+        if idx < 0:
+            continue
+        tail = business_description[idx:]
+        # First sentence ends at ". " or the paragraph end.
+        end = tail.find(". ")
+        sentence = tail if end < 0 else tail[: end + 1]
+        sentence = " ".join(sentence.split())
+        if len(sentence) > max_chars:
+            sentence = sentence[: max_chars - 1].rsplit(" ", 1)[0] + "…"
+        return sentence
+    return ""
 
 
 def _render_demonstrated_by(cf: CaseFile, max_items: int = 8) -> str:
