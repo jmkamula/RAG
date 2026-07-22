@@ -503,12 +503,20 @@ class RowMappers:
             for c in pims_raw if c and c.split(' ', 1)[0]
         })
 
+        # Ship 14'.b (schema_v87) — 5 new columns per ISO 27005:2022 §8.6.1.
+        # All optional; NULL-safe when the canonical template columns are
+        # absent (older uploads pre-Ship-14).
         return {
             'tenant_id':             tenant_id,
             'external_ref':          risk_id,   # used for upsert
             'treatment_option':      option,
+            'treatment_rationale':   _to_str(raw.get('Treatment Rationale')),
             'treatment_action':      _to_str(raw.get('Treatment Action')),
             'control_refs':          control_refs,
+            'resources_required':    _to_str(raw.get('Resources Required')),
+            'performance_indicators': _to_list(raw.get('Performance Indicators')),
+            'constraints':           _to_str(raw.get('Constraints')),
+            'reporting_cadence':     _to_str(raw.get('Reporting Cadence')),
             'implementation_date':   _to_date(raw.get('Implementation Date')),
             'residual_risk_level':   _to_int(raw.get('Residual Risk Level after Treatment')),
             'treatment_status':      status,
