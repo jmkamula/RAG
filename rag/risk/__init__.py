@@ -21,6 +21,7 @@ from rag.risk.queries import (
     fetch_risks,
     fetch_risk_detail,
     fetch_risk_summary,
+    fetch_risks_for_casefile,
     linked_controls_view,
 )
 
@@ -32,5 +33,6 @@ __all__ = [
     "fetch_risks",
     "fetch_risk_detail",
     "fetch_risk_summary",
+    "fetch_risks_for_casefile",
     "linked_controls_view",
 ]

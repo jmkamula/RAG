@@ -91,6 +91,16 @@ class CaseFile:
     tenant:       Optional[Any] = None         # TenantContext-like | None
     last_entity:  Optional[dict] = None
     incidents:    list = field(default_factory=list)
+    # Ship 14'.e — risk-register data for posture_risk question_type.
+    # Optional: only populated when the classifier routes a risk
+    # query. Digest renders a fixed-slot RISKS section from this
+    # field (≤300-token budget); preservation-check extracts the
+    # top-N external_refs as required_risk_refs for the repair pass.
+    # Framework role model discipline: RiskSummary entries carry
+    # linked controls with role + subject metadata pre-attached, so
+    # digest can render program/extension/obligation refs
+    # side-by-side without a second lookup.
+    risks:        list = field(default_factory=list)  # list[dict] — compact RiskSummary view
 
     # ── Basic identity + scope ────────────────────────────────────────
 

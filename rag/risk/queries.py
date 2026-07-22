@@ -281,6 +281,91 @@ def fetch_risk_detail(conn, risk_id: str) -> Optional[RiskDetail]:
         )
 
 
+def fetch_risks_for_casefile(tenant_id: str, top_n: int = 8) -> list[dict]:
+    """Ship 14'.e — compact risk view for the case-file digest.
+
+    Opens its own psycopg2 connection (case-file path doesn't
+    receive one; RAG pipeline is DB-agnostic). Enforces RLS via
+    `SET LOCAL app.tenant_id`. Returns a list of dicts with the
+    fields the RISKS digest section renders. Silent-fail on error
+    (returns []) — the case-file path must never block on risk
+    fetch.
+
+    Fetches top-N by risk_score DESC. Includes only active,
+    non-implemented rows so the digest surfaces relevant risks
+    rather than closed history.
+
+    Framework role model: linked_controls are pre-expanded with
+    role + subject via `linked_controls_view()` so the digest
+    renders side-by-side without a second lookup.
+    """
+    if not tenant_id:
+        return []
+
+    try:
+        import os
+        import psycopg2
+        conn = psycopg2.connect(
+            host     = os.getenv("PGHOST",     "127.0.0.1"),
+            dbname   = os.getenv("PGDATABASE", "arioncomply_compliance"),
+            user     = os.getenv("PGUSER",     "arioncomply_app"),
+            password = os.getenv("PGPASSWORD", ""),
+        )
+    except Exception:
+        return []
+
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                "SET LOCAL app.tenant_id = %s", [tenant_id]
+            )
+            # Include ALL active rows regardless of treatment_status.
+            # The chat surface shows top risks by score; whether a row
+            # is `implemented` is metadata the chat prose carries per
+            # row. Filtering to just non-implemented would produce
+            # empty output on tenants whose entire register is closed
+            # (which is normal for mature tenants with backlogged
+            # completions). Callers who want an open-only view can
+            # filter downstream.
+            cur.execute(
+                "SELECT id::text, external_ref, threat, "
+                "  vulnerability, risk_score, treatment_option, "
+                "  treatment_status, residual_risk_level, "
+                "  review_date::text, "
+                "  coalesce(control_refs, '{}') AS control_refs "
+                "FROM risks "
+                "WHERE is_active = true "
+                "ORDER BY risk_score DESC NULLS LAST, external_ref "
+                "LIMIT %s",
+                [top_n],
+            )
+            rows = cur.fetchall()
+
+            out: list[dict] = []
+            for row in rows:
+                linked = linked_controls_view(list(row[9] or []), cur)
+                out.append({
+                    "id":                  row[0],
+                    "external_ref":        row[1],
+                    "threat":              row[2],
+                    "vulnerability":       row[3],
+                    "risk_score":          row[4],
+                    "treatment_option":    row[5],
+                    "treatment_status":    row[6],
+                    "residual_risk_level": row[7],
+                    "review_date":         row[8],
+                    "linked_controls":     [lc.model_dump() for lc in linked],
+                })
+            return out
+    except Exception:
+        return []
+    finally:
+        try:
+            conn.close()
+        except Exception:
+            pass
+
+
 def fetch_risk_summary(conn) -> RiskSummary:
     """Return the dashboard-friendly aggregate for the current
     tenant — counts, heatmap, top-5."""

@@ -485,6 +485,75 @@ def _render_incidents(cf: CaseFile) -> str:
     return "OPEN INCIDENTS:\n" + "\n".join(lines)
 
 
+def _render_risks(cf: CaseFile, max_items: int = 8, max_chars_each: int = 180) -> str:
+    """Ship 14'.e — RISKS section for POSTURE_RISK queries.
+
+    Fixed-slot digest section per case-file discipline (Ship 2'):
+    - empty when cf.risks is empty; no per-taxonomy branching
+    - top-N by risk_score DESC (already sorted by fetch helper)
+    - each row: external_ref + treatment_status + threat + score/residual
+    - linked controls rendered inline WITHOUT role split
+      (program/extension/obligation refs side-by-side per Ship
+      14'.a addendum framework-role-model discipline)
+    - budget target: ≤300 tokens for 8 rows
+
+    Format per line (single line each — no wrapping):
+      - R-042 [Mitigate, in_progress]  Ransomware in SaaS backups
+          score 15/25  residual 8/25  linked: A.5.15, A.8.13
+    """
+    risks = getattr(cf, "risks", None) or []
+    if not risks:
+        return ""
+
+    lines: list[str] = []
+    shown = risks[:max_items]
+    total = len(risks)
+    header = (
+        f"RISKS (showing {len(shown)} of {total} open):"
+        if total > len(shown) else "RISKS:"
+    )
+    lines.append(header)
+
+    for r in shown:
+        ext_ref  = r.get("external_ref") or "(no-ref)"
+        threat   = (r.get("threat") or r.get("vulnerability") or "").strip()
+        opt      = r.get("treatment_option") or "?"
+        status   = r.get("treatment_status") or "?"
+        score    = r.get("risk_score")
+        residual = r.get("residual_risk_level")
+        review   = r.get("review_date")
+
+        # Line 1: ref + tags + threat
+        threat_short = threat[:max_chars_each] + ("…" if len(threat) > max_chars_each else "")
+        lines.append(f"- {ext_ref} [{opt}, {status}]  {threat_short}")
+
+        # Line 2: scores + linked controls (compact)
+        parts = []
+        if score is not None:
+            parts.append(f"score {score}/25")
+        if residual is not None:
+            parts.append(f"residual {residual}/25")
+        if review:
+            parts.append(f"review {review}")
+
+        # Framework role model discipline: render linked controls
+        # side-by-side. Sort by role rank so reading order is
+        # program → extension → obligation → guidance.
+        linked = r.get("linked_controls") or []
+        if linked:
+            rank = {"program": 1, "extension": 2, "obligation": 3, "guidance": 4}
+            linked_sorted = sorted(linked, key=lambda c: rank.get(c.get("role"), 9))
+            refs = [c.get("ref", "?") for c in linked_sorted[:6]]
+            if len(linked_sorted) > 6:
+                refs.append(f"+{len(linked_sorted) - 6} more")
+            parts.append("linked: " + ", ".join(refs))
+
+        if parts:
+            lines.append("    " + "  ".join(parts))
+
+    return "\n".join(lines)
+
+
 def _render_session(cf: CaseFile) -> str:
     refs = cf.active_session_refs
     if not refs:
@@ -676,6 +745,7 @@ def build_prompt_digest(
         ))
 
     _add(_render_documents(cf, max_items=document_limit))
+    _add(_render_risks(cf))        # Ship 14'.e — POSTURE_RISK section
     _add(_render_session(cf))
     _add(_render_programs(cf))     # framework-role-model context
     _add(_render_scope(cf))        # standards list (kept for continuity)

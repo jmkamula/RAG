@@ -36,6 +36,7 @@ class QuestionType(Enum):
     FREE_ASSESSMENT    = "free_assessment"      # broad overview / where do I stand
     DOCUMENT_INVENTORY = "document_inventory"   # what documents do we need?
     DOCUMENT_CONTENT   = "document_content"     # what must a document contain?
+    POSTURE_RISK       = "posture_risk"         # Ship 14'.e — top risks, overdue reviews, residuals
     UNKNOWN            = "unknown"              # could not classify
 
 class IntakeState(Enum):
@@ -482,6 +483,33 @@ CLEAR_INTENT_PHRASES = [
      "posture_check", []),
     (re.compile(r'\bwhat\s+cascades?\s+(?:were|got|have\s+been)\s+(?:blocked|suppressed)\b', re.IGNORECASE),
      "posture_check", []),
+
+    # Ship 14'.e — Risk register surface. Signal C weight 1.00 —
+    # deterministic routing per Ship 1 discipline (curator vocab
+    # dominates; LLM classifier never invents posture_risk).
+    # Refs empty because the risk register is a tenant-wide
+    # surface; the resolver populates cf.risks from the risks
+    # table + optional linked_controls per row.
+    (re.compile(r'\btop\s+risks?\b', re.IGNORECASE),
+     "posture_risk", []),
+    (re.compile(r'\bhighest\s+risks?\b', re.IGNORECASE),
+     "posture_risk", []),
+    (re.compile(r'\bour\s+risks?\b', re.IGNORECASE),
+     "posture_risk", []),
+    (re.compile(r'\boverdue\s+(?:risks?|risk\s+reviews?)\b', re.IGNORECASE),
+     "posture_risk", []),
+    (re.compile(r'\brisks?\s+(?:overdue|past\s+due|needing\s+review)\b', re.IGNORECASE),
+     "posture_risk", []),
+    (re.compile(r'\bresidual\s+risks?\b', re.IGNORECASE),
+     "posture_risk", []),
+    (re.compile(r'\brisks?\s+above\s+(?:the\s+)?threshold\b', re.IGNORECASE),
+     "posture_risk", []),
+    (re.compile(r'\brisk\s+register\b', re.IGNORECASE),
+     "posture_risk", []),
+    (re.compile(r'\bshow\s+(?:me\s+)?(?:the\s+|our\s+)?risks?\b', re.IGNORECASE),
+     "posture_risk", []),
+    (re.compile(r'\blist\s+(?:the\s+|our\s+)?risks?\b', re.IGNORECASE),
+     "posture_risk", []),
 
     # Encryption / cryptography gaps
     (re.compile(r'\bencryption\s+gaps?\b', re.IGNORECASE),
@@ -1041,6 +1069,7 @@ class QueryClassifier:
                     "implementation":     QuestionType.IMPLEMENTATION,
                     "definition":         QuestionType.DEFINITION,
                     "posture_check":      QuestionType.POSTURE_CHECK,
+                    "posture_risk":       QuestionType.POSTURE_RISK,
                     "document_content":   QuestionType.DOCUMENT_CONTENT,
                     "document_inventory": QuestionType.DOCUMENT_INVENTORY,
                     "cross_framework":    QuestionType.CROSS_FRAMEWORK,
@@ -1654,6 +1683,7 @@ class QueryClassifier:
                     "implementation":     QuestionType.IMPLEMENTATION,
                     "definition":         QuestionType.DEFINITION,
                     "posture_check":      QuestionType.POSTURE_CHECK,
+                    "posture_risk":       QuestionType.POSTURE_RISK,
                     "document_content":   QuestionType.DOCUMENT_CONTENT,
                     "document_inventory": QuestionType.DOCUMENT_INVENTORY,
                     "cross_framework":    QuestionType.CROSS_FRAMEWORK,

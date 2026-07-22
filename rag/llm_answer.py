@@ -1164,6 +1164,15 @@ class LLMAnswer:
             incidents    = list(incident_contexts or []),
         )
 
+        # Ship 14'.e — populate cf.risks when the classifier routes to
+        # POSTURE_RISK. Fail-loud discipline (Ship 2'.n): the fetch
+        # helper is defensive internally but we don't swallow
+        # unexpected exceptions here. Only fires on posture_risk to
+        # avoid a per-turn DB hit on other queries.
+        if cf.question_type == "posture_risk" and _tid:
+            from rag.risk.queries import fetch_risks_for_casefile
+            cf.risks = fetch_risks_for_casefile(_tid, top_n=8)
+
         # ── Render digest ─────────────────────────────────────────────
         t_dig = time.time()
         system_prompt, user_digest = build_prompt_pair(cf)

@@ -237,6 +237,30 @@ def check_and_repair(
         if facts_line:
             footers.append(facts_line)
 
+    # ── 5. Ship 14'.e — Missing risk external_refs ────────────────────
+    # When the classifier routed to POSTURE_RISK and the digest
+    # surfaced N risks, the LLM should cite their external_refs (R-XXX)
+    # in prose. Missing refs land in a dedicated risk-facts footer via
+    # APPEND-ONLY discipline — never rewrites LLM prose.
+    if spec.required_risk_refs:
+        # Text-match on the raw external_ref (e.g. "R-042"). Case-
+        # insensitive to catch "r-042" style variants.
+        text_lower = text.lower()
+        missing_risk_refs = [
+            r for r in spec.required_risk_refs
+            if r and r.lower() not in text_lower
+        ]
+        if missing_risk_refs:
+            for r in missing_risk_refs:
+                events.append(RepairEvent(
+                    kind="missing_risk_ref",
+                    ref=r,
+                    detail=f"risk external_ref '{r}' absent from answer prose",
+                ))
+            footers.append(
+                "↳ Risk register: " + ", ".join(missing_risk_refs)
+            )
+
     # ── Assemble output ──────────────────────────────────────────────
     if footers:
         text = text + "\n\n" + "\n".join(footers)

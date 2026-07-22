@@ -744,8 +744,9 @@ function connect() {
   // sidebar.
   if (mode === 'dashboard')   loadDashboard();
   else if (mode === 'queue')  loadQueue();
-  // Refresh the inbox bell badge on every connect.
+  // Refresh the inbox bell + risks badges on every connect.
   refreshInboxBadge();
+  refreshRiskBadge();
 }
 
 async function api(path, opts={}) {
@@ -844,6 +845,24 @@ async function refreshInboxBadge() {
       badge.textContent = d.unread;
       if (d.urgent > 0) badge.style.background = '#9C2E2E';
       else badge.style.background = '#3C3489';
+    } else {
+      badge.style.display = 'none';
+    }
+  } catch (_) { /* silent */ }
+}
+
+// Ship 14'.e — Risk nav badge: overdue + above_threshold total.
+// Fetched from /api/v1/tenant/risks/summary. Silent-fail on any error.
+async function refreshRiskBadge() {
+  try {
+    const d = await api('/api/v1/tenant/risks/summary');
+    const badge = document.getElementById('nb-risks');
+    if (!badge) return;
+    const attention = (d.overdue || 0) + (d.above_threshold || 0);
+    if (attention > 0) {
+      badge.style.display = '';
+      badge.textContent = attention;
+      badge.style.background = d.above_threshold > 0 ? '#9C2E2E' : '#EF9F27';
     } else {
       badge.style.display = 'none';
     }

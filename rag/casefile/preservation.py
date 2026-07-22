@@ -62,6 +62,10 @@ class PreservationSpec:
     # "for Art.X:" label — kept for the repair pass to build the
     # correct label text.
     bridge_article_refs: list[str]         = field(default_factory=list)
+    # Ship 14'.e — risk external_refs (e.g. "R-042") that the RISKS
+    # digest section surfaced. Repair pass appends any dropped refs
+    # via the existing `↳ Compliance facts: …` footer pattern.
+    required_risk_refs:  list[str]         = field(default_factory=list)
 
     def is_empty(self) -> bool:
         return (
@@ -69,6 +73,7 @@ class PreservationSpec:
             and not self.draft_refs
             and not self.verdict_by_ref
             and not self.bridge_footer
+            and not self.required_risk_refs
         )
 
 
@@ -234,10 +239,20 @@ def extract_preservation_spec(cf: CaseFile) -> PreservationSpec:
 
     bridge_footer, article_refs = _build_bridge_footer(cf)
 
+    # Ship 14'.e — extract risk external_refs from the RISKS digest
+    # section. Repair pass appends any dropped refs to the standard
+    # `↳ Compliance facts:` footer. Only fires when cf.risks is
+    # non-empty (i.e. classifier routed to POSTURE_RISK).
+    required_risk_refs: list[str] = [
+        r.get("external_ref") for r in (getattr(cf, "risks", None) or [])
+        if r.get("external_ref")
+    ]
+
     return PreservationSpec(
         required_refs       = refs,
         draft_refs          = draft_refs,
         verdict_by_ref      = verdict_by_ref,
         bridge_footer       = bridge_footer,
         bridge_article_refs = article_refs,
+        required_risk_refs  = required_risk_refs,
     )

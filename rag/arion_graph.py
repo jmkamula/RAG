@@ -996,6 +996,137 @@ _CASCADE_SUPPRESSION_PATTERNS = [
     re.compile(r'\bwhat\s+cascades?\s+(?:were|got|have\s+been)\s+(?:blocked|suppressed)\b', re.IGNORECASE),
 ]
 
+# Ship 14'.e — Risk register short-circuit patterns. Deterministic
+# routing per case-file discipline; NO LLM inference of intent
+# (Ship 1 curator-lexicon at weight 1.00 is the mirror in the
+# classifier for cases that fall through to the LLM path).
+_RISK_QUERY_PATTERNS = [
+    re.compile(r'\btop\s+risks?\b',           re.IGNORECASE),
+    re.compile(r'\bhighest\s+risks?\b',       re.IGNORECASE),
+    re.compile(r'\bour\s+risks?\b',           re.IGNORECASE),
+    re.compile(r'\boverdue\s+(?:risks?|risk\s+reviews?)\b', re.IGNORECASE),
+    re.compile(r'\brisks?\s+(?:overdue|past\s+due|needing\s+review)\b', re.IGNORECASE),
+    re.compile(r'\bresidual\s+risks?\b',      re.IGNORECASE),
+    re.compile(r'\brisks?\s+above\s+(?:the\s+)?threshold\b', re.IGNORECASE),
+    re.compile(r'\brisk\s+register\b',        re.IGNORECASE),
+    re.compile(r'\bshow\s+(?:me\s+)?(?:the\s+|our\s+)?risks?\b', re.IGNORECASE),
+    re.compile(r'\blist\s+(?:the\s+|our\s+)?risks?\b', re.IGNORECASE),
+]
+
+
+def _is_risk_query(query: str) -> bool:
+    return any(p.search(query) for p in _RISK_QUERY_PATTERNS)
+
+
+def _answer_risk_query(query: str, tenant_id: str) -> Optional[str]:
+    """Deterministic answer for 'top risks' / 'overdue risks' / etc.
+    Loads the tenant's risks table + summary, composes a compact
+    prose answer. Returns None on any error (caller falls through
+    to the LLM path)."""
+    if not tenant_id:
+        return None
+    try:
+        from rag.risk.queries import (
+            fetch_risks_for_casefile,
+            fetch_risk_summary,
+        )
+    except Exception:
+        return None
+
+    try:
+        import psycopg2
+        conn = psycopg2.connect(
+            host     = os.getenv("PGHOST",     "127.0.0.1"),
+            dbname   = os.getenv("PGDATABASE", "arioncomply_compliance"),
+            user     = os.getenv("PGUSER",     "arioncomply_app"),
+            password = os.getenv("PGPASSWORD", ""),
+        )
+    except Exception:
+        return None
+
+    q_lower = (query or "").lower()
+    # Query-mode inference: overdue vs residual vs top (default).
+    is_overdue  = any(w in q_lower for w in ("overdue", "past due", "needing review"))
+    is_residual = "residual" in q_lower or "above" in q_lower and "threshold" in q_lower
+
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SET LOCAL app.tenant_id = %s", (tenant_id,))
+        summary = fetch_risk_summary(conn)
+    except Exception:
+        try: conn.close()
+        except Exception: pass
+        return None
+    finally:
+        # keep conn open for the top-risks fetch below
+        pass
+
+    risks = fetch_risks_for_casefile(tenant_id, top_n=10)
+    try: conn.close()
+    except Exception: pass
+
+    if summary.total == 0 and not risks:
+        return (
+            "You have no risks recorded in the register yet. "
+            "Download the canonical ISO 27005:2022 §8.6.1 risk-register "
+            "template from the Risk register page (or via "
+            "GET /api/v1/tenant/risks/template) to populate it."
+        )
+
+    # Filter for the query mode.
+    if is_overdue:
+        # `overdue` counter from summary is authoritative; fall back
+        # to filtering in-memory when only the summary is populated.
+        header = f"You have {summary.overdue} risk{'s' if summary.overdue != 1 else ''} past their review date and not yet implemented"
+        if summary.overdue == 0:
+            return header + ". Your risk-review cadence is on track."
+    elif is_residual:
+        header = f"You have {summary.above_threshold} risk{'s' if summary.above_threshold != 1 else ''} with residual level 15/25 or higher (top quintile)"
+        if summary.above_threshold == 0:
+            return header + ". All residual risks are within the acceptable range."
+    else:
+        header = (
+            f"Your risk register carries {summary.total} risk{'s' if summary.total != 1 else ''} — "
+            f"{summary.open} open, {summary.overdue} past review, "
+            f"{summary.above_threshold} with residual ≥ 15/25."
+        )
+
+    # Format the top-N compactly.
+    lines: list[str] = [header + "."]
+    if risks:
+        lines.append("")
+        lines.append("Top risks by score:")
+        for r in risks[:5]:
+            ext = r.get("external_ref") or "—"
+            threat = (r.get("threat") or "").strip()
+            score  = r.get("risk_score")
+            opt    = r.get("treatment_option") or "?"
+            status = r.get("treatment_status") or "?"
+            residual = r.get("residual_risk_level")
+            linked = r.get("linked_controls") or []
+            # Framework role model discipline — render program +
+            # extension + obligation refs side-by-side per Ship 14'.a
+            # addendum. Cap at 4 refs for prose readability.
+            rank = {"program":1, "extension":2, "obligation":3, "guidance":4}
+            linked_sorted = sorted(linked, key=lambda c: rank.get(c.get("role"), 9))
+            refs_txt = ", ".join(c.get("ref","?") for c in linked_sorted[:4])
+            if len(linked_sorted) > 4:
+                refs_txt += f", +{len(linked_sorted) - 4} more"
+            score_txt = f"{score}/25" if score is not None else "—"
+            residual_txt = f"; residual {residual}/25" if residual is not None else ""
+            linked_txt = f" [linked: {refs_txt}]" if refs_txt else ""
+            threat_short = threat[:100] + ("…" if len(threat) > 100 else "")
+            lines.append(f"- **{ext}** (score {score_txt}{residual_txt}) — {threat_short} — {opt}, {status}{linked_txt}")
+
+    if summary.by_treatment_option:
+        opts_txt = ", ".join(f"{k}: {v}" for k,v in sorted(summary.by_treatment_option.items()))
+        lines.append("")
+        lines.append(f"Treatment mix: {opts_txt}.")
+
+    lines.append("")
+    lines.append("Grounded in ISO 27005:2022 §8.6.1 (treatment plan) + §7 (assessment).")
+    return "\n".join(lines)
+
 
 def _is_cascade_impl_query(query: str) -> bool:
     return any(p.search(query) for p in _CASCADE_IMPL_PATTERNS)
@@ -2298,6 +2429,28 @@ def make_retrieve_node(
                     cited_refs       = [],
                     answer_source    = "postgres+llm",
                     question_type    = "posture_check",
+                    attach_templates = False,
+                    attach_advisory  = False,
+                )
+
+        # Ship 14'.e — Risk register short-circuit.
+        # Handles "top risks" / "overdue risks" / "residual risks" /
+        # "risk register" — deterministic answer from the risks table.
+        # Framework role model discipline: linked controls render
+        # side-by-side (program / extension / obligation) without a
+        # primary/xfw split.
+        if _is_risk_query(state["query"]):
+            _risk_ans = _answer_risk_query(state["query"], _tid)
+            if _risk_ans:
+                composed = polish_short_circuit_answer(
+                    query=state["query"], deterministic_answer=_risk_ans, llm=llm,
+                )
+                return build_answer_envelope(
+                    state            = state,
+                    answer_text      = composed,
+                    cited_refs       = [],
+                    answer_source    = "postgres+llm",
+                    question_type    = "posture_risk",
                     attach_templates = False,
                     attach_advisory  = False,
                 )
