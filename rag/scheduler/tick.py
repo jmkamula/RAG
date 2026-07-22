@@ -1172,12 +1172,15 @@ def sweep_notification_delivery(pg_conn, tick_id: str, dry_run: bool = False) ->
             "acted_on": acted, "errored": errored, "detail": detail}
 
 
+from rag.risk.notify import sweep_risk_register_notify  # Ship 14'.f
+
 _WORK_TYPES = {
     "fact_recompute":              sweep_fact_recompute,
     "overdue_followups":           sweep_overdue_followups,
     "freshness_expiry":            sweep_freshness_expiry,
     "cite_verification_overdue":   sweep_cite_verification_overdue,
     "api_key_expiring":            sweep_api_key_expiring,
+    "risk_register_notify":        sweep_risk_register_notify,   # Ship 14'.f
     "notification_delivery":       sweep_notification_delivery,
     "notification_retention":      sweep_notification_retention,
 }
