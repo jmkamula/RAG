@@ -4519,6 +4519,76 @@ EVAL_CASES = [
             "measurement' → 9.1."
         ),
     ),
+
+    # ── Ship 14'.g — Risk register chat surfaces ─────────────────
+    # Locks the posture_risk question_type + short-circuit path
+    # added in Ship 14'.e. Each case exercises a different phrasing
+    # variant of the CLEAR_INTENT_PHRASES list and confirms the
+    # deterministic short-circuit fires (not the LLM classifier).
+
+    EvalCase(
+        id=225,
+        query="what are our top risks?",
+        tags=["posture_risk", "risk_register", "ship14e", "short_circuit"],
+        expected_refs=[],
+        expected_type="posture_risk",
+        must_contain=["risk", "27005"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Ship 14'.e gate: 'top risks' must route to "
+            "posture_risk short-circuit (regex match in "
+            "arion_graph.py before the LLM classifier). Answer "
+            "grounded in ISO 27005:2022. Locks the case-file "
+            "architecture case-file-populates-risks + digest "
+            "renders + polish preserves refs pattern."
+        ),
+    ),
+
+    EvalCase(
+        id=226,
+        query="show me our overdue risks",
+        tags=["posture_risk", "risk_register", "ship14e", "short_circuit"],
+        expected_refs=[],
+        expected_type="posture_risk",
+        must_contain=["risk"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Ship 14'.e gate: overdue-mode short-circuit — the "
+            "`_answer_risk_query()` infers overdue vs residual vs "
+            "top from query phrasing. On the Arion demo tenant all "
+            "35 risks are implemented so overdue count is 0; "
+            "answer should confirm that cleanly. Query phrasing "
+            "picked to match the `\\boverdue\\s+risks?\\b` regex "
+            "in CLEAR_INTENT_PHRASES; 'which risks are overdue' "
+            "would not match (verb 'are' between subject and adj)."
+        ),
+    ),
+
+    EvalCase(
+        id=227,
+        query="show me our risk register",
+        tags=["posture_risk", "risk_register", "ship14e", "short_circuit"],
+        expected_refs=[],
+        expected_type="posture_risk",
+        must_contain=["risk"],
+        must_not_contain=[
+            "I need more information", "could you clarify",
+            "not a valid framework",
+        ],
+        notes=(
+            "Ship 14'.e gate: 'risk register' phrasing routes to "
+            "posture_risk (distinct from the intake DocType "
+            "RISK_REGISTER which routes uploaded files). Confirms "
+            "the chat-side vs upload-side vocabulary separation "
+            "is respected."
+        ),
+    ),
 ]
 
 
