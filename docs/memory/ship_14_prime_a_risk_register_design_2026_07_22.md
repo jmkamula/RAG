@@ -243,8 +243,176 @@ All feed the existing cascade timeline + notification producers.
 6. Eval baseline holds at 228/229 PASS + 1 WARN + 0 FAIL or
    better (with 3-4 new cases, likely 231/232 or 232/233)
 
+## Architecture constraints (2026-07-22 addendum)
+
+Two arc-level architectural constraints codified by the user
+after the memo landed. Every sub-arc from 14'.b onward MUST
+respect these.
+
+### 1. Framework role model — program / extension / obligation
+
+Per [[framework-role-model-arc]], the standards taxonomy is
+hierarchical, not peer:
+
+- **program** (ISO 27001, SOC 2, NIST CSF) — the ISMS spine
+- **extension** (ISO 27701, 27018, 27017) — overlays on a program
+- **obligation** (GDPR, NIS2, DORA) — legal mandates,
+  demonstrated by programs + extensions
+- **guidance** (ISO 27002/27003/27004/27005) — code-of-practice
+  companions
+
+The layer split by "primary/xfw" is DEPRECATED (Ship 2'.n
+retired the legacy `rank_and_answer` body that used it). All new
+surfaces must render program + extension + obligation as
+first-class citizens.
+
+**Application to Risk Register:**
+
+- `risks.control_refs TEXT[]` (already exists) can hold refs
+  across ALL four roles. A single risk row can reference
+  `A.5.15` (27001 program), `A.7.5.1` (27701 extension), and
+  `Art.32` (GDPR obligation) in one array. No role filtering.
+- **Dashboard drill-in** must render linked controls WITHOUT
+  splitting by role. Show all linked controls together, with
+  role-band chips (from Ship's framework-role-model Phase 4b
+  dashboard headers) rather than tab-separated sections.
+- **Chat responses** on risk queries surface controls without
+  qualifying "primary standard" vs "cross-framework". The
+  role-model retired that hierarchy.
+- **API responses** carry `role` + `subject` on each linked
+  control (per Phase 4b's `/dashboard/posture` pattern), plus
+  `*_display` companions per Ship 7'.b output-gateway
+  discipline. External SDK consumers filter by role client-side.
+- **DEMONSTRATES cascade honoured.** If a risk links to Art.32
+  (obligation) and Art.32 has DEMONSTRATES sources from ISO
+  27001 A.5.15/A.8.24, the drill-in surface must show the
+  demonstrated-by lineage (per Ship's framework-role-model
+  Phase 4a). This is critical: an obligation-referenced risk
+  gets its posture from the program's demonstration, not from
+  the obligation clause itself.
+- **Cascade events (14'.e)** must NOT be role-gated. A
+  `residual_above_threshold` event fires regardless of which
+  standard's controls the risk references.
+- **`xfw_proposer` skip rule** applies: no bridge proposals in
+  the `program → obligation` direction — that's DEMONSTRATES,
+  handled deterministically. If a risk-related surface ever
+  emits proposals (e.g. "link this risk to Art.32"), respect
+  the same skip.
+
+### 2. Case-file architecture pattern
+
+Per [[ship-2-prime-casefile-arc-2026-07-15]] + Ship 2'.n
+retirement of the legacy `rank_and_answer` body, the chat
+pipeline is ONLY the case-file flow. Ship 14'.e's chat
+surfaces must integrate with this pattern, not around it.
+
+**Application to Risk Register:**
+
+**a. New CaseFile field, not a parallel view.**
+
+Per Ship 2' arc: "The CaseFile is the ground truth. Any new
+signal (session, incidents, doc contexts) enters the CaseFile
+once; digest + preservation both read from it. Never build a
+parallel view."
+
+`rag/casefile/types.py::CaseFile` gets a new optional field:
+```
+risks: list[RiskSummary] | None
+```
+Populated by the resolver when the classifier routes to
+`posture_risk`. `RiskSummary` is a compact dataclass —
+external_ref + threat + treatment_status + risk_score +
+residual_level + review_date + linked control_refs.
+
+**b. New digest slot — fixed budget.**
+
+Add a `RISKS:` section renderer to `rag/casefile/digest.py`,
+following the fixed-slots-empty-omitting discipline. Budget:
+target ≤300 tokens for top-N risks (typically 5-8 rows).
+Empty when `cf.risks is None`. No per-taxonomy branching.
+
+Format (draft):
+```
+RISKS (N of M total):
+- R-042 [high, open]  Ransomware in SaaS backups
+    treat: mitigate  owner: CTO  residual: 12/25
+    linked: A.5.15, A.8.13, Art.32
+- R-017 [medium, in_progress]  Third-party data-processor breach
+    treat: transfer  owner: DPO  residual: 8/25
+    linked: A.5.19, Art.28
+...
+```
+
+Token-budget test explicitly (< 300 tokens for 5 risks) —
+follows Ship 2'.c pattern.
+
+**c. Preservation-check on risk refs.**
+
+Extend `extract_preservation_spec()` in
+`rag/casefile/preservation.py` to include `required_risk_refs`
+— the external_refs of risks the digest surfaced. If the LLM
+drops a risk ref (e.g. mentions "our top ransomware risk" but
+drops "R-042"), the repair pass appends via the existing
+`↳ Compliance facts:` footer pattern (Ship 1.14 discipline).
+APPEND-ONLY — never rewrite LLM prose.
+
+**d. Classifier lock — deterministic routing, no LLM inference.**
+
+Add `posture_risk` question_type behind Signal C at weight 1.00
+(the top-tier per Ship 1). DOCUMENT_TOPIC_MAP entries route
+risk queries deterministically — never rely on the LLM
+classifier or gatekeeper to invent `posture_risk` intent.
+Curator-authored mappings dominate.
+
+Candidate entries:
+- "top risks" / "highest risks" → `posture_risk`
+- "overdue risks" / "risk review" → `posture_risk`
+- "residual risk" / "residual risks" → `posture_risk`
+- "risk register" → `posture_risk` (query-side; distinct from
+  the intake DocType which routes uploads)
+
+Per Ship 1 discipline: "prefer adding CLEAR_INTENT_PHRASES /
+DOCUMENT_TOPIC_MAP entries over prompt-tuning the LLM
+classifier or gatekeeper. Curator additions are top-tier
+signal weight."
+
+**e. Fail-loud, no silent fallback.**
+
+Per Ship 2'.n retirement of `CASEFILE_ENABLED` + the legacy
+fallback path: if the risk resolver errors, the error surfaces.
+No hidden re-routes to legacy paths.
+
+**f. Log to `chat_casefile_log` — observability.**
+
+Existing schema_v68 columns already cover the new slot without
+migration. `case_file_summary` gets a `risks_count` field;
+`repair_events[]` includes any risk-related repair actions.
+No new schema change needed for chat observability.
+
+**g. Digest-hint pattern from Ship 13'.d.**
+
+Continuous — the `→ guidance:` hint mechanism from
+[[ship-13-prime-d-chroma-digest-eval-2026-07-22]] carries over.
+A risk drill-in question hitting 6.1.2 still gets the 27005
+guidance hint on the OBLIGATIONS line for 6.1.2. No new
+mechanism needed.
+
+### Reviewer discipline
+
+Any sub-arc PR must include an explicit line in the memo
+answering:
+1. Does it split by role, or treat all roles first-class?
+2. Does it add a new digest slot, or parallel to the CaseFile?
+3. Does it deterministically route, or rely on LLM inference?
+4. Does it add MUSTs, or maintain guidance-not-normative?
+
+Where the answer is any of the wrong direction, cite the arc
+memo that forbids it and revise.
+
 ## Related
 
+- [[framework-role-model-arc]] — the role model this arc must respect
+- [[ship-2-prime-casefile-arc-2026-07-15]] — the case-file pattern
 - [[ship-13-prime-arc-retrospective-2026-07-22]] — the arc that
   motivated this one; 27005 grounding + digest promotion make
   risk-register a viable product surface
@@ -252,5 +420,7 @@ All feed the existing cascade timeline + notification producers.
   6.1.3 leaves already carry the 27005 authority paragraphs
 - [[templates-v2-anchors-complete-2026-06-25]] — the xlsx
   template pattern Ship 14'.b will reuse
+- [[ship-7-prime-b-output-gateway-skeleton-2026-07-19]] — the
+  `*_display` companion pattern all Ship 14 API responses use
 - Ship 12'.a evidence-cascade concept — risk-register events
   fit naturally into the cascade taxonomy that Ship 6 built
