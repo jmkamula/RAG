@@ -74,6 +74,7 @@ SystemIdParam    = Annotated[str, Path(pattern=_UUID_PATTERN, description="Exter
 NotifIdParam     = Annotated[str, Path(pattern=_UUID_PATTERN, description="Notification UUID")]
 ImplicationIdParam = Annotated[str, Path(pattern=_UUID_PATTERN, description="Cascade-implication UUID")]
 SeriesIdParam    = Annotated[str, Path(pattern=_UUID_PATTERN, description="Series UUID")]
+RiskIdParam      = Annotated[str, Path(pattern=_UUID_PATTERN, description="Risk UUID (Ship 14'.c — risks table)")]
 
 
 # ── Composite / regex-validated params ────────────────────────────────

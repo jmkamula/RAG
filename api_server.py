@@ -65,8 +65,10 @@ from rag.api_types import (
     PostureIdParam, ProposalIdParam, OverrideIdParam, UploadIdParam,
     SystemIdParam, NotifIdParam, ImplicationIdParam, SeriesIdParam,
     ControlRefParam, LeafIdParam, CascadeKindParam, FactKeyParam,
+    RiskIdParam,
     build_thread_id, validate_session_id_shape,
 )
+from fastapi import Query as FastAPIQuery
 
 try:
     from dotenv import load_dotenv
@@ -4780,6 +4782,151 @@ async def put_tenant_profile(
 # rag/posture/leaf_evaluators._fetch_recognised_cites).
 
 
+# ══════════════════════════════════════════════════════════════════════
+# Ship 14'.c — Risk Register internal endpoints
+# ══════════════════════════════════════════════════════════════════════
+
+@app.get("/api/v1/tenant/risks", tags=["risks"])
+async def list_tenant_risks(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    limit:    int = 100,
+    offset:   int = 0,
+    status:   Optional[list[str]] = FastAPIQuery(None),
+):
+    """List the tenant's active risks — flat, paginated.
+
+    Ship 14'.c — first internal API surface for the risks table
+    (schema_v2 + schema_v87). Reuses `rag.risk.queries.fetch_risks`
+    so the shape stays identical to the external `/api/external/v1/risks`
+    endpoint.
+
+    Query params:
+      - `limit` (default 100, max 500) + `offset` for pagination
+      - `status` (repeatable) — filter by treatment_status. Empty = all.
+
+    Framework role model discipline: each returned risk carries a
+    `linked_controls` array where every ref is expanded with role +
+    subject + display name. Program / extension / obligation refs
+    render as first-class citizens; no primary/xfw split.
+    """
+    if limit < 1 or limit > 500:
+        raise HTTPException(status_code=400, detail="limit must be 1-500")
+    if offset < 0:
+        raise HTTPException(status_code=400, detail="offset must be >= 0")
+
+    from rag.risk.queries import fetch_risks
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        rows, total = fetch_risks(conn, limit=limit, offset=offset, status=status)
+    finally:
+        pool.putconn(conn)
+
+    return {
+        "tenant_id": str(key_info.tenant_id),
+        "risks":     [r.model_dump() for r in rows],
+        "total_before_pagination": total,
+        "limit":     limit,
+        "offset":    offset,
+    }
+
+
+@app.get("/api/v1/tenant/risks/summary", tags=["risks"])
+async def tenant_risks_summary(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Dashboard-friendly risk summary for the current tenant.
+
+    Ship 14'.c — feeds the Ship 14'.d dashboard tiles + heatmap.
+
+    Response shape matches `rag.risk.queries.RiskSummary` —
+    total / open / overdue / above_threshold / unassigned counts +
+    per-option + per-status breakdowns + 5x5 heatmap + top-5 rows.
+    Heatmap keys are JSON-safe `L{n}_I{n}` (likelihood x impact).
+    """
+    from rag.risk.queries import fetch_risk_summary
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        summary = fetch_risk_summary(conn)
+    finally:
+        pool.putconn(conn)
+
+    body = summary.model_dump()
+    body["tenant_id"] = str(key_info.tenant_id)
+    return body
+
+
+@app.get("/api/v1/tenant/risks/template", tags=["risks"])
+async def download_risk_register_template(
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Download the canonical risk-register xlsx template.
+
+    Ship 14'.b built the static asset at
+    `db/templates/risk_register_canonical.xlsx` with 4 sheets:
+    Risk Register + Risk Treatment Plan + Guidance + hidden
+    _arion_meta (auto_approve marker for the workbook importer).
+
+    Ship 14'.c wires this endpoint to serve it. Any tenant with
+    a valid API key can pull the template — it's static content,
+    not tenant-specific.
+    """
+    from pathlib import Path
+    template_path = Path("/data/arioncomply/db/templates/risk_register_canonical.xlsx")
+    if not template_path.exists():
+        raise HTTPException(
+            status_code = 500,
+            detail = "Canonical risk-register template not found on disk. "
+                     "Run scripts/build_risk_register_template.py to rebuild.",
+        )
+    from fastapi.responses import Response
+    return Response(
+        content     = template_path.read_bytes(),
+        media_type  = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers     = {
+            "Content-Disposition": 'attachment; filename="risk_register_canonical.xlsx"',
+        },
+    )
+
+
+@app.get("/api/v1/tenant/risks/{risk_id}", tags=["risks"])
+async def get_tenant_risk_detail(
+    risk_id:  RiskIdParam,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Drill-in view of a single risk by UUID.
+
+    Ship 14'.c — feeds the Ship 14'.d dashboard drill-in.
+
+    Returns the full RiskDetail shape (all treatment-plan fields
+    including the 5 columns added by schema_v87 —
+    treatment_rationale / resources_required /
+    performance_indicators / constraints / reporting_cadence).
+
+    404 if the risk doesn't exist OR is scoped out by RLS
+    (never leak cross-tenant existence).
+    """
+    from rag.risk.queries import fetch_risk_detail
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        detail = fetch_risk_detail(conn, str(risk_id))
+    finally:
+        pool.putconn(conn)
+
+    if detail is None:
+        raise HTTPException(status_code=404, detail=f"Risk not found: {risk_id}")
+    return detail.model_dump()
+
+
 @app.get("/api/v1/tenant/external-systems", tags=["templates"])
 async def list_external_systems(
     request:  Request,
@@ -7118,6 +7265,7 @@ _EXTERNAL_SCOPES_ALLOWED = [
     "external:evidence:write",
     "external:cascade:read",
     "external:xfw:read",
+    "external:risks:read",   # Ship 14'.c — risk register bulk + drill-in
 ]
 
 
