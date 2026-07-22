@@ -31,6 +31,7 @@ from arioncomply.models import (
     NotificationsResponse, Notification,
     UploadResponse, DocumentStatus, EvidenceResponse,
     CascadeTimelineResponse, ImplicationDetail, BridgesResponse,
+    RisksListResponse, RiskSummaryResponse, RiskDetail,
 )
 
 
@@ -304,3 +305,47 @@ class Client:
             "/bridges",
             params={"control_ref": control_ref, "standard_id": standard_id},
         ))
+
+    # ── Ship 15'.d — Risk register (external:risks:read) ─────────
+
+    def risks(
+        self,
+        *,
+        status: Optional[Iterable[str]] = None,
+        limit:  int = 200,
+        offset: int = 0,
+    ) -> RisksListResponse:
+        """GET /risks — bulk risk-register snapshot.
+
+        Requires `external:risks:read` scope on the API key.
+
+        Each returned risk carries a `linked_controls` list with
+        role + subject + standard_display metadata per control
+        ref — program / extension / obligation controls render
+        first-class per framework-role-model discipline.
+        """
+        params: dict = {"limit": limit, "offset": offset}
+        if status: params["status"] = list(status)
+        return RisksListResponse.model_validate(
+            self._get("/risks", params=params)
+        )
+
+    def risk_summary(self) -> RiskSummaryResponse:
+        """GET /risks/summary — dashboard-friendly aggregate:
+        counts, per-option and per-status breakdowns, 5x5 heatmap,
+        top-5 rows."""
+        return RiskSummaryResponse.model_validate(
+            self._get("/risks/summary")
+        )
+
+    def risk(self, risk_id: str) -> RiskDetail:
+        """GET /risks/{risk_id} — drill-in view of a single risk.
+
+        Returns the full RiskDetail shape (all treatment-plan
+        fields including the schema_v87 columns —
+        treatment_rationale, resources_required,
+        performance_indicators, constraints, reporting_cadence).
+        """
+        return RiskDetail.model_validate(
+            self._get(f"/risks/{risk_id}")
+        )

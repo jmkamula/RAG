@@ -1384,7 +1384,50 @@ function _renderRiskDetail(r) {
       <div style="height:1px;background:#E8E5DA;margin:14px 0"></div>
       <div style="font-size:11px;color:#7B7B7B;text-transform:uppercase;font-weight:600;margin-bottom:8px">Linked controls <span style="text-transform:none;font-weight:400;color:#9C9A8E">— program / extension / obligation rendered first-class per framework role model</span></div>
       <div>${linked || '<span style="color:#9C9A8E;font-size:11px">No linked controls yet</span>'}</div>
+
+      <!-- Ship 15'.d — DEMONSTRATES traversal placeholder; filled
+           asynchronously by _appendRiskDemonstratedBy() below.
+           When a linked control is an obligation, we fetch its
+           demonstrated-by lineage from the framework-role-model
+           Phase 4a endpoint and render a panel per obligation. -->
+      <div id="risk-demonstrated-by-slot"></div>
     </div>`;
+
+  // Fire-and-forget: iterate obligation-role linked controls,
+  // fetch demonstrated-by, append a panel per obligation. Silent-
+  // fail per Phase 4a convention (any Neo4j / cache error → no
+  // panel rendered, drill-in still complete).
+  _appendRiskDemonstratedBy(r.linked_controls || []);
+}
+
+async function _appendRiskDemonstratedBy(linked) {
+  const slot = document.getElementById('risk-demonstrated-by-slot');
+  if (!slot) return;
+  const obligations = (linked || []).filter(c => c.role === 'obligation');
+  if (!obligations.length) return;
+  for (const c of obligations) {
+    try {
+      const dm = await api(
+        `/api/v1/dashboard/control/${encodeURIComponent(c.ref)}/demonstrated-by`
+        + `?standard_id=${encodeURIComponent(c.standard_id || '')}`
+      );
+      if (dm && dm.demonstrated_by && dm.demonstrated_by.length) {
+        // Render the same panel used on the posture drill-in — this
+        // is the single source of truth for demonstrated-by prose.
+        const wrap = document.createElement('div');
+        wrap.innerHTML = `
+          <div style="margin-top:14px;padding:0 0 0 0">
+            <div style="font-size:10px;color:#7B7B7B;font-weight:600;margin-bottom:4px">
+              For obligation
+              <span style="font-family:'JetBrains Mono',monospace;font-weight:500">${escapeHtml(c.ref)}</span>
+              <span style="color:#9C9A8E;font-weight:400">(${escapeHtml(c.standard_display || c.standard_id || '')})</span>
+            </div>
+            ${renderDemonstratedByPanel(dm)}
+          </div>`;
+        slot.appendChild(wrap);
+      }
+    } catch (_) { /* silent — Phase 4a convention */ }
+  }
 }
 
 

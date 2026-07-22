@@ -253,3 +253,88 @@ class BridgesResponse(BaseModel):
     standard_id: str
     outbound:    list[Bridge]
     inbound:     list[Bridge]
+
+
+# ── Ship 15'.d — Risk register models ────────────────────────────────
+
+
+class LinkedControl(BaseModel):
+    """A control referenced by a risk row, expanded with role +
+    subject metadata per framework-role-model discipline."""
+    control_ref:      str
+    ref:              str
+    standard_id:      str
+    standard_display: str
+    role:             Optional[str] = None
+    subject:          Optional[list[str]] = None
+
+
+class RiskRow(BaseModel):
+    """Compact list-surface shape for a risk."""
+    id:                    str
+    external_ref:          str
+    asset_ref:             Optional[str] = None
+    asset_name:            Optional[str] = None
+    threat:                Optional[str] = None
+    vulnerability:         Optional[str] = None
+    likelihood:            Optional[int] = None
+    impact:                Optional[int] = None
+    risk_score:            Optional[int] = None
+    risk_owner_text:       Optional[str] = None
+    treatment_option:      Optional[str] = None
+    treatment_status:      Optional[str] = None
+    residual_risk_level:   Optional[int] = None
+    review_date:           Optional[str] = None
+    linked_controls:       list[LinkedControl] = Field(default_factory=list)
+
+
+class RiskDetail(RiskRow):
+    """Drill-in shape — RiskRow + full treatment plan."""
+    interested_party:       Optional[str] = None
+    treatment_rationale:    Optional[str] = None
+    treatment_action:       Optional[str] = None
+    resources_required:     Optional[str] = None
+    performance_indicators: list[str] = Field(default_factory=list)
+    constraints:            Optional[str] = None
+    reporting_cadence:      Optional[str] = None
+    implementation_date:    Optional[str] = None
+    effectiveness_review:   Optional[str] = None
+    created_at:             Optional[str] = None
+    updated_at:             Optional[str] = None
+
+
+class RiskSummarySummary(BaseModel):
+    """Nested `summary` field on `RisksListResponse` — subset of
+    the full aggregate that the /risks endpoint returns inline."""
+    total:            int
+    open:             int
+    overdue:          int
+    above_threshold:  int
+    unassigned:       int
+
+
+class RisksListResponse(BaseModel):
+    """GET /api/external/v1/risks response envelope."""
+    tenant_id:               str
+    generated_at:            str
+    risks:                   list[RiskRow]
+    total_before_pagination: int
+    limit:                   int
+    offset:                  int
+    summary:                 RiskSummarySummary
+
+
+class RiskSummaryResponse(BaseModel):
+    """GET /api/external/v1/risks/summary response — full aggregate
+    including per-option / per-status breakdowns + heatmap + top-5."""
+    tenant_id:              str
+    generated_at:           str
+    total:                  int
+    open:                   int
+    overdue:                int
+    above_threshold:        int
+    unassigned:             int
+    by_treatment_option:    dict
+    by_status:              dict
+    heatmap:                dict
+    top_risks:              list[RiskRow]
