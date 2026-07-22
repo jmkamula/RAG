@@ -1170,6 +1170,17 @@ function renderRisks(summary, list) {
     ${treatmentHtml}
     ${fullHtml}
   `;
+
+  // Ship 15'.c — notification deep-link support. When _notifOpen()
+  // sets window._notifTarget with a risk entity_id, scroll + flash
+  // the matching row AND auto-open the drill-in detail panel.
+  const target = window._notifTarget;
+  _applyNotifFocus();
+  if (target && target.entity_id
+      && ['risk_added','risk_treatment_overdue',
+          'residual_above_threshold','risk_review_due'].includes(target.kind)) {
+    setTimeout(() => showRiskDetail(target.entity_id), 120);
+  }
 }
 
 function _tile(label, value, icon, color) {
@@ -1229,7 +1240,7 @@ function _renderTopRisks(top) {
     return `<div style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;padding:14px 16px;color:#7B7B7B;font-size:12px">No top risks to show (all rows have empty risk_score).</div>`;
   }
   const rows = top.map(r => `
-    <tr style="border-top:1px solid #EEECE2;cursor:pointer" onclick="showRiskDetail('${escapeHtml(r.id)}')">
+    <tr data-focus-entity="${escapeHtml(r.id)}" style="border-top:1px solid #EEECE2;cursor:pointer" onclick="showRiskDetail('${escapeHtml(r.id)}')">
       <td style="padding:8px 6px;font-family:'JetBrains Mono',monospace;font-size:11px">${escapeHtml(r.external_ref)}</td>
       <td style="padding:8px 6px">${escapeHtml(r.threat || r.asset_name || '')}</td>
       <td style="padding:8px 6px;text-align:right">${_riskLevelBadge(r.risk_score)}</td>
@@ -1274,7 +1285,7 @@ function _renderTreatmentBreakdown(byOption, byStatus) {
 function _renderFullRiskList(risks) {
   if (!risks || risks.length === 0) return '';
   const rows = risks.map(r => `
-    <tr style="border-top:1px solid #EEECE2;cursor:pointer" onclick="showRiskDetail('${escapeHtml(r.id)}')">
+    <tr data-focus-entity="${escapeHtml(r.id)}" style="border-top:1px solid #EEECE2;cursor:pointer" onclick="showRiskDetail('${escapeHtml(r.id)}')">
       <td style="padding:9px 8px;font-family:'JetBrains Mono',monospace;font-size:11px;white-space:nowrap">${escapeHtml(r.external_ref)}</td>
       <td style="padding:9px 8px;font-size:12px">${escapeHtml(r.threat || '')}<br><span style="font-size:10px;color:#7B7B7B">${escapeHtml(r.asset_name || '')}</span></td>
       <td style="padding:9px 8px;text-align:right">${_riskLevelBadge(r.risk_score)}</td>
@@ -2936,6 +2947,11 @@ const _NOTIF_KIND_LABEL = {
   cite_verification_overdue: 'cited source needs re-verification',
   posture_flip_to_comply:    'now compliant',
   api_key_expiring:          'API key expiring',
+  // Ship 15'.c — risk register kinds
+  risk_added:                'new risk added',
+  risk_treatment_overdue:    'risk treatment overdue',
+  residual_above_threshold:  'residual risk above threshold',
+  risk_review_due:           'risk review due',
 };
 
 // Ship 3'.h: per-kind visual + deep-link metadata. Icon uses
@@ -2955,6 +2971,13 @@ const _NOTIF_KIND_META = {
   cite_verification_overdue: {icon: 'ti-link-off',         mode: 'dashboard',  actionLabel: 'Open control'},
   posture_flip_to_comply:    {icon: 'ti-mood-happy',       mode: 'dashboard',  actionLabel: 'Open control'},
   api_key_expiring:          {icon: 'ti-key',              mode: 'profile',    actionLabel: 'Open profile'},
+  // Ship 15'.c — risk register kinds. All route to the risks
+  // mode; the risk UUID lives in related_entity_id so
+  // _applyNotifFocus() scrolls + flashes the matching row.
+  risk_added:                {icon: 'ti-plus-square',      mode: 'risks',      actionLabel: 'Open risk'},
+  risk_treatment_overdue:    {icon: 'ti-clock-exclamation',mode: 'risks',      actionLabel: 'Open risk'},
+  residual_above_threshold:  {icon: 'ti-alert-triangle',   mode: 'risks',      actionLabel: 'Open risk'},
+  risk_review_due:           {icon: 'ti-calendar-event',   mode: 'risks',      actionLabel: 'Open risk'},
 };
 
 function humanizeNotifKind(k) {
