@@ -4927,6 +4927,179 @@ async def get_tenant_risk_detail(
     return detail.model_dump()
 
 
+# ══════════════════════════════════════════════════════════════════════
+# Ship 15'.a — Risk register write endpoints
+#
+# Internal-only for now. External writes (partner SIEMs pushing risks)
+# would need a new `external:risks:write` scope + external endpoint;
+# deferred until a real partner asks. Internal admin/tenant flow uses
+# POST / PATCH / DELETE.
+# ══════════════════════════════════════════════════════════════════════
+
+@app.post("/api/v1/tenant/risks", tags=["risks"], status_code=201)
+async def create_tenant_risk(
+    payload:  dict,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Create a new risk row.
+
+    Ship 15'.a — internal write surface for the risk register.
+
+    Request body: RiskCreate shape. `external_ref` is required
+    (tenant-authored id like `R-042`, unique per tenant); every
+    other field optional.
+
+    On success (201): returns the created RiskDetail.
+    On duplicate external_ref: 409 with structured error.
+
+    Fires `risk_added` notification (severity `low`) via
+    `emit_risk_added()` after commit — silent-fail; the API
+    response is not affected if the notification insert errors.
+    """
+    from rag.risk.queries import (
+        RiskCreate, create_risk, fetch_risk_detail,
+        DuplicateRiskError,
+    )
+    from rag.risk.notify import emit_risk_added
+
+    try:
+        body = RiskCreate(**payload)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid payload: {e}")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        try:
+            risk_id, ext_ref = create_risk(conn, str(key_info.tenant_id), body)
+            conn.commit()
+        except DuplicateRiskError:
+            conn.rollback()
+            raise HTTPException(
+                status_code=409,
+                detail=f"A risk with external_ref={body.external_ref!r} "
+                       f"already exists for this tenant.",
+            )
+        except HTTPException:
+            raise
+        except Exception as e:
+            conn.rollback()
+            raise HTTPException(status_code=400, detail=f"Insert failed: {e}")
+
+        # Fire write-path notification. Silent-fail — the API
+        # response commits to the DB insert regardless.
+        try:
+            emit_risk_added(conn, str(key_info.tenant_id), ext_ref, body.threat)
+            conn.commit()
+        except Exception:
+            try: conn.rollback()
+            except Exception: pass
+
+        # Fetch the freshly-created row for the response body.
+        detail = fetch_risk_detail(conn, risk_id)
+    finally:
+        pool.putconn(conn)
+
+    if detail is None:
+        raise HTTPException(status_code=500,
+                            detail="Post-insert read failed unexpectedly.")
+    return detail.model_dump()
+
+
+@app.patch("/api/v1/tenant/risks/{risk_id}", tags=["risks"])
+async def patch_tenant_risk(
+    risk_id:  RiskIdParam,
+    payload:  dict,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+):
+    """Partial update on a risk row.
+
+    Ship 15'.a — accepts RiskPatch shape (every field optional).
+    Only sets columns the caller explicitly names; unset fields
+    keep their current DB values. `external_ref` is immutable
+    and rejected if included.
+
+    Returns the updated RiskDetail. 404 if the risk doesn't
+    exist or is scoped out by RLS (never leak cross-tenant
+    existence).
+    """
+    from rag.risk.queries import RiskPatch, update_risk, fetch_risk_detail
+
+    if "external_ref" in payload:
+        raise HTTPException(
+            status_code=400,
+            detail="external_ref is immutable; cannot be changed via PATCH.",
+        )
+    try:
+        body = RiskPatch(**payload)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid payload: {e}")
+
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        try:
+            updated_id = update_risk(conn, str(key_info.tenant_id),
+                                     str(risk_id), body)
+            if updated_id is None:
+                raise HTTPException(status_code=404,
+                                    detail=f"Risk not found: {risk_id}")
+            conn.commit()
+        except HTTPException:
+            raise
+        except Exception as e:
+            conn.rollback()
+            raise HTTPException(status_code=400, detail=f"Update failed: {e}")
+        detail = fetch_risk_detail(conn, str(risk_id))
+    finally:
+        pool.putconn(conn)
+    if detail is None:
+        raise HTTPException(status_code=404, detail=f"Risk not found: {risk_id}")
+    return detail.model_dump()
+
+
+@app.delete("/api/v1/tenant/risks/{risk_id}", tags=["risks"], status_code=204)
+async def delete_tenant_risk(
+    risk_id:  RiskIdParam,
+    request:  Request,
+    key_info: APIKeyInfo = Depends(require_api_key),
+    reason:   Optional[str] = None,
+):
+    """Soft-delete a risk row (sets `is_active = FALSE`).
+
+    Ship 15'.a — the RLS `tenant_isolation` policy filters
+    inactive rows, so subsequent GETs return 404. Row is preserved
+    for auditor provenance + can be restored by flipping
+    `is_active` back to TRUE (superuser only; no restore endpoint).
+
+    `?reason=...` optional but strongly recommended — persisted
+    in `deletion_reason` for the audit trail.
+
+    204 on delete. 404 if the risk doesn't exist.
+    """
+    from rag.risk.queries import soft_delete_risk
+    pool = request.app.state.pg_pool
+    conn = pool.getconn()
+    try:
+        set_session(conn, key_info.tenant_id)
+        try:
+            deleted = soft_delete_risk(conn, str(key_info.tenant_id),
+                                        str(risk_id), reason)
+            conn.commit()
+        except Exception as e:
+            conn.rollback()
+            raise HTTPException(status_code=400, detail=f"Delete failed: {e}")
+    finally:
+        pool.putconn(conn)
+    if not deleted:
+        raise HTTPException(status_code=404, detail=f"Risk not found: {risk_id}")
+    return
+
+
 @app.get("/api/v1/tenant/external-systems", tags=["templates"])
 async def list_external_systems(
     request:  Request,

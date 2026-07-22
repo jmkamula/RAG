@@ -281,6 +281,162 @@ def fetch_risk_detail(conn, risk_id: str) -> Optional[RiskDetail]:
         )
 
 
+# ── Write helpers ────────────────────────────────────────────
+
+
+class RiskCreate(BaseModel):
+    """Request shape for POST /api/v1/tenant/risks. All fields
+    except `external_ref` are optional — the tenant may create a
+    minimal risk row and populate treatment plan fields via PATCH
+    later. schema_v2 CHECK constraints validate integer ranges +
+    treatment_option / treatment_status enum values."""
+    external_ref:            str            = Field(..., min_length=1, description="Tenant-authored unique id (e.g. `R-042`). Must be unique per tenant.")
+    asset_ref:               Optional[str]  = None
+    asset_name:              Optional[str]  = None
+    interested_party:        Optional[str]  = None
+    threat:                  Optional[str]  = None
+    vulnerability:           Optional[str]  = None
+    likelihood:              Optional[int]  = Field(None, ge=1, le=5)
+    impact:                  Optional[int]  = Field(None, ge=1, le=5)
+    risk_score:              Optional[int]  = Field(None, ge=1, le=25)
+    risk_owner_text:         Optional[str]  = None
+    treatment_option:        Optional[str]  = Field(None, description="One of: Mitigate / Accept / Transfer / Avoid.")
+    treatment_action:        Optional[str]  = None
+    treatment_rationale:     Optional[str]  = None
+    resources_required:      Optional[str]  = None
+    performance_indicators:  list[str]      = Field(default_factory=list)
+    constraints:             Optional[str]  = None
+    reporting_cadence:       Optional[str]  = None
+    implementation_date:     Optional[str]  = Field(None, description="ISO date YYYY-MM-DD.")
+    residual_risk_level:     Optional[int]  = Field(None, ge=1, le=25)
+    treatment_status:        Optional[str]  = Field(None, description="One of: open / in_progress / implemented / accepted.")
+    review_date:             Optional[str]  = None
+    effectiveness_review:    Optional[str]  = None
+    control_refs:            list[str]      = Field(default_factory=list, description="Composite refs — e.g. `ISO27001:2022:A.5.15`.")
+
+
+class RiskPatch(BaseModel):
+    """Request shape for PATCH /api/v1/tenant/risks/{id}. Every
+    field is optional; unset fields keep their current DB values.
+    external_ref is IMMUTABLE — PATCH may not change the tenant-
+    authored id (would break dedup + citation stability)."""
+    asset_ref:               Optional[str]  = None
+    asset_name:              Optional[str]  = None
+    interested_party:        Optional[str]  = None
+    threat:                  Optional[str]  = None
+    vulnerability:           Optional[str]  = None
+    likelihood:              Optional[int]  = Field(None, ge=1, le=5)
+    impact:                  Optional[int]  = Field(None, ge=1, le=5)
+    risk_score:              Optional[int]  = Field(None, ge=1, le=25)
+    risk_owner_text:         Optional[str]  = None
+    treatment_option:        Optional[str]  = None
+    treatment_action:        Optional[str]  = None
+    treatment_rationale:     Optional[str]  = None
+    resources_required:      Optional[str]  = None
+    performance_indicators:  Optional[list[str]] = None
+    constraints:             Optional[str]  = None
+    reporting_cadence:       Optional[str]  = None
+    implementation_date:     Optional[str]  = None
+    residual_risk_level:     Optional[int]  = Field(None, ge=1, le=25)
+    treatment_status:        Optional[str]  = None
+    review_date:             Optional[str]  = None
+    effectiveness_review:    Optional[str]  = None
+    control_refs:            Optional[list[str]] = None
+
+
+def create_risk(conn, tenant_id: str, payload: RiskCreate) -> tuple[str, str]:
+    """Create a new risk row. Returns (risk_id, external_ref) on
+    success. Raises `DuplicateRiskError` on external_ref collision,
+    `ValueError` on constraint violation (bad enum / range).
+
+    Callers should invoke `emit_risk_added()` after commit to fire
+    the write-path notification."""
+    cols   = ["tenant_id", "external_ref"]
+    values = [tenant_id, payload.external_ref]
+
+    # Optional columns — include only when non-None so the DB
+    # defaults apply cleanly for empty payloads.
+    for field_name, val in payload.model_dump(exclude={"external_ref"}).items():
+        if val is None:
+            continue
+        # Skip empty lists for text[] columns (Postgres treats them
+        # differently than NULL; keep NULL to match the schema
+        # default and existing rows).
+        if isinstance(val, list) and not val:
+            continue
+        cols.append(field_name)
+        values.append(val)
+
+    placeholders = ", ".join(["%s"] * len(cols))
+    col_list     = ", ".join(cols)
+
+    with conn.cursor() as cur:
+        try:
+            cur.execute(
+                f"INSERT INTO risks ({col_list}) "
+                f"VALUES ({placeholders}) "
+                f"RETURNING id::text, external_ref",
+                values,
+            )
+            row = cur.fetchone()
+            return row[0], row[1]
+        except Exception as e:
+            msg = str(e)
+            if "risks_tenant_id_external_ref_key" in msg:
+                raise DuplicateRiskError(payload.external_ref) from e
+            raise
+
+
+def update_risk(
+    conn, tenant_id: str, risk_id: str, payload: RiskPatch,
+) -> Optional[str]:
+    """Update a risk row. Returns the risk_id on success, None if
+    the id doesn't exist / is scoped out by RLS. Only sets columns
+    the caller explicitly named — unset fields keep DB values."""
+    updates: list[tuple[str, object]] = []
+    for field_name, val in payload.model_dump(exclude_unset=True).items():
+        updates.append((field_name, val))
+    if not updates:
+        return risk_id  # no-op; caller may still want the id back
+
+    set_clause = ", ".join(f"{c} = %s" for c, _ in updates)
+    values     = [v for _, v in updates] + [risk_id]
+
+    with conn.cursor() as cur:
+        cur.execute(
+            f"UPDATE risks SET {set_clause}, updated_at = NOW() "
+            f"WHERE id::text = %s AND is_active = TRUE "
+            f"RETURNING id::text",
+            values,
+        )
+        row = cur.fetchone()
+        return row[0] if row else None
+
+
+def soft_delete_risk(conn, tenant_id: str, risk_id: str, reason: Optional[str]) -> bool:
+    """Soft-delete: set is_active = FALSE (RLS policy filters
+    inactive rows). Returns True on delete, False if the row
+    doesn't exist. Callers should note the reason for auditor
+    provenance."""
+    with conn.cursor() as cur:
+        cur.execute(
+            "UPDATE risks "
+            "   SET is_active = FALSE, "
+            "       deleted_at = NOW(), "
+            "       deletion_reason = %s "
+            " WHERE id::text = %s AND is_active = TRUE "
+            " RETURNING 1",
+            [reason, risk_id],
+        )
+        return cur.fetchone() is not None
+
+
+class DuplicateRiskError(Exception):
+    def __init__(self, external_ref: str):
+        super().__init__(f"Duplicate external_ref: {external_ref}")
+        self.external_ref = external_ref
+
+
 def fetch_risks_for_casefile(tenant_id: str, top_n: int = 8) -> list[dict]:
     """Ship 14'.e — compact risk view for the case-file digest.
 
