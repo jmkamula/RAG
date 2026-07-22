@@ -313,6 +313,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <button class="nav-item" id="nav-cascade" onclick="setMode('cascade')">
       <i class="ti ti-timeline" aria-hidden="true"></i> Cascade timeline
     </button>
+    <button class="nav-item" id="nav-risks" onclick="setMode('risks')">
+      <i class="ti ti-alert-triangle" aria-hidden="true"></i> Risk register
+      <span class="nav-badge" id="nb-risks" style="display:none"
+            title="Risks with residual level above threshold or past review date">—</span>
+    </button>
     <button class="nav-item" id="nav-inbox" onclick="setMode('inbox')">
       <i class="ti ti-bell" aria-hidden="true"></i> Notifications
       <span class="nav-badge" id="nb-inbox" style="display:none"
@@ -584,6 +589,33 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
 
+    <!-- Risks toolbar -->
+    <div class="main-toolbar" id="toolbar-risks" style="display:none">
+      <div>
+        <div class="main-title">Risk register</div>
+        <div class="main-sub">
+          Your assessed risks with treatment plans and residual levels.
+          Grounded in ISO 27005:2022. Download the canonical template to add or update rows in bulk.
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn-sm btn-outline" onclick="downloadRiskTemplate()"
+                title="Download the canonical risk-register xlsx template (Risk Register + Risk Treatment Plan sheets, 27005 §8.6.1 columns)">
+          <i class="ti ti-download" aria-hidden="true"></i> Template
+        </button>
+        <button class="btn-sm btn-outline" onclick="loadRisks()">
+          <i class="ti ti-refresh" aria-hidden="true"></i> Refresh
+        </button>
+      </div>
+    </div>
+
+    <!-- Risks body -->
+    <div class="main-body" id="body-risks" style="display:none">
+      <div id="risks-wrap" style="max-width:1200px;margin:18px auto;padding:0 20px">
+        <div class="empty"><i class="ti ti-loader-2" aria-hidden="true"></i><p>Loading risks…</p></div>
+      </div>
+    </div>
+
     <!-- Trace toolbar -->
     <div class="main-toolbar" id="toolbar-trace" style="display:none">
       <div>
@@ -753,7 +785,7 @@ async function apiForm(path, formData) {
 // ── Mode switching ──
 function setMode(m) {
   mode = m;
-  ['dashboard','queue','chat','docs','profile','cascade','inbox','getstarted','trace'].forEach(x => {
+  ['dashboard','queue','chat','docs','profile','cascade','risks','inbox','getstarted','trace'].forEach(x => {
     const navEl = document.getElementById('nav-'+x);
     if (navEl) navEl.classList.toggle('active', x===m);
     const tbEl  = document.getElementById('toolbar-'+x);
@@ -767,6 +799,7 @@ function setMode(m) {
   if (m === 'dashboard')  loadDashboard();
   if (m === 'profile')    loadProfile();
   if (m === 'cascade')    loadCascadeTimeline();
+  if (m === 'risks')      loadRisks();
   if (m === 'inbox')      loadInbox();
   if (m === 'getstarted') loadGetStarted();
   if (m === 'docs')       populateFrameworkDropdown();
@@ -979,6 +1012,352 @@ async function loadGetStarted() {
 
 // ── Trace page (Wave 4c, 2026-07-11) ──────────────────────────────────
 // Diagnostic timeline: unified view over ai_call_log, intake_trace_log,
+// ─────────────────────────────────────────────────────────────────
+// Ship 14'.d — Risk register mode
+//
+// Framework role model discipline (Ship 14'.a addendum): linked
+// controls from the API arrive pre-expanded with role + subject +
+// standard_display. We render them side-by-side (no primary/xfw
+// split) with a small role-band chip.
+// ─────────────────────────────────────────────────────────────────
+
+async function loadRisks() {
+  const wrap = document.getElementById('risks-wrap');
+  wrap.innerHTML = '<div class="empty"><i class="ti ti-loader-2"></i><p>Loading risks…</p></div>';
+  try {
+    const [summary, list] = await Promise.all([
+      api('/api/v1/tenant/risks/summary'),
+      api('/api/v1/tenant/risks?limit=500'),
+    ]);
+    renderRisks(summary, list);
+  } catch (e) {
+    wrap.innerHTML = '<div class="empty"><i class="ti ti-alert-triangle"></i><p>Couldn\'t load risks. Please refresh in a moment.</p></div>';
+    console.error(e);
+  }
+}
+
+async function downloadRiskTemplate() {
+  try {
+    const r = await fetch(API_URL + '/api/v1/tenant/risks/template', {
+      headers: {'X-API-Key': API_KEY}
+    });
+    if (!r.ok) throw new Error('Template download failed');
+    const blob = await r.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'risk_register_canonical.xlsx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    alert('Template download failed: ' + e.message);
+  }
+}
+
+function _roleChipHtml(role) {
+  if (!role) return '';
+  const label = {
+    program: 'program', extension: 'extension',
+    obligation: 'obligation', guidance: 'guidance'
+  }[role] || role;
+  const bg = {
+    program: '#4B8BBE', extension: '#7B5EA7',
+    obligation: '#B85450', guidance: '#7B7B7B'
+  }[role] || '#7B7B7B';
+  return `<span style="display:inline-block;padding:1px 6px;font-size:9px;font-weight:600;text-transform:uppercase;color:#fff;background:${bg};border-radius:2px;margin-right:4px">${label}</span>`;
+}
+
+function _linkedControlsInline(controls, max=4) {
+  // Order: program → extension → obligation → guidance (role-model
+  // reading order per Phase 4b dashboard headers).
+  const rank = {program:1, extension:2, obligation:3, guidance:4};
+  const sorted = [...controls].sort((a,b) => (rank[a.role]||9) - (rank[b.role]||9));
+  const shown = sorted.slice(0, max);
+  const more  = sorted.length - shown.length;
+  const parts = shown.map(c =>
+    `<span title="${escapeHtml(c.standard_display || c.standard_id)} — ${escapeHtml(c.role || '')}"
+           style="display:inline-block;padding:2px 6px;background:#EEECE2;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:10px;margin:0 4px 4px 0">${_roleChipHtml(c.role)}${escapeHtml(c.ref)}</span>`
+  );
+  if (more > 0) parts.push(`<span style="color:#7B7B7B;font-size:10px">+${more} more</span>`);
+  return parts.join('');
+}
+
+function _riskLevelBadge(score) {
+  if (score == null) return '<span style="color:#9C9A8E">—</span>';
+  const cls = score >= 15 ? 'f-NC' : score >= 8 ? 'f-OFI' : 'f-Comply';
+  const bg  = score >= 15 ? '#D9534F' : score >= 8 ? '#EF9F27' : '#7FB36F';
+  return `<span style="display:inline-block;padding:2px 8px;background:${bg};color:#fff;border-radius:10px;font-size:10px;font-weight:600">${score}/25</span>`;
+}
+
+function _statusPill(status) {
+  if (!status) return '<span style="color:#9C9A8E">—</span>';
+  const bg = {
+    open:         '#EF9F27',
+    in_progress:  '#4B8BBE',
+    implemented:  '#7FB36F',
+    accepted:     '#7B7B7B',
+  }[status] || '#7B7B7B';
+  const label = status.replace(/_/g,' ');
+  return `<span style="display:inline-block;padding:2px 8px;background:${bg};color:#fff;border-radius:10px;font-size:10px;font-weight:500">${escapeHtml(label)}</span>`;
+}
+
+function _optionPill(option) {
+  if (!option) return '';
+  const bg = {
+    Mitigate: '#4B8BBE', Accept: '#7B7B7B',
+    Transfer: '#7B5EA7', Avoid:  '#B85450',
+  }[option] || '#7B7B7B';
+  return `<span style="display:inline-block;padding:1px 6px;background:${bg};color:#fff;border-radius:2px;font-size:9px;font-weight:600;text-transform:uppercase">${escapeHtml(option)}</span>`;
+}
+
+function renderRisks(summary, list) {
+  const wrap = document.getElementById('risks-wrap');
+  if (!summary || (summary.total === 0 && (!list || list.risks.length === 0))) {
+    wrap.innerHTML = `
+      <div class="empty" style="padding:60px 20px">
+        <i class="ti ti-shield-off" aria-hidden="true"></i>
+        <p style="font-size:15px;margin:14px 0 6px">No risks recorded yet</p>
+        <p style="color:#7B7B7B;font-size:12px">
+          Download the canonical <strong>ISO 27005:2022 §8.6.1</strong> risk-register template and upload it to populate this view.
+        </p>
+        <button class="btn-sm btn-outline" style="margin-top:14px" onclick="downloadRiskTemplate()">
+          <i class="ti ti-download" aria-hidden="true"></i> Download template
+        </button>
+      </div>`;
+    return;
+  }
+
+  const tilesHtml = `
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px">
+      ${_tile('Total risks',       summary.total,           'ti-list-check',  '#4B8BBE')}
+      ${_tile('Open',              summary.open,            'ti-progress',    '#EF9F27')}
+      ${_tile('Overdue review',    summary.overdue,         'ti-clock-hour-9','#B85450')}
+      ${_tile('Residual ≥ 15/25',  summary.above_threshold, 'ti-alert-triangle','#D9534F')}
+    </div>`;
+
+  const heatmapHtml = _renderRiskHeatmap(summary.heatmap);
+  const topHtml     = _renderTopRisks(summary.top_risks);
+  const fullHtml    = _renderFullRiskList(list.risks);
+  const treatmentHtml = _renderTreatmentBreakdown(summary.by_treatment_option, summary.by_status);
+
+  wrap.innerHTML = `
+    ${tilesHtml}
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:18px;margin-bottom:18px;align-items:start">
+      ${heatmapHtml}
+      ${topHtml}
+    </div>
+    ${treatmentHtml}
+    ${fullHtml}
+  `;
+}
+
+function _tile(label, value, icon, color) {
+  return `
+    <div style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;padding:14px 16px;display:flex;align-items:center;gap:12px">
+      <div style="width:36px;height:36px;background:${color}20;color:${color};border-radius:6px;display:flex;align-items:center;justify-content:center">
+        <i class="ti ${icon}" style="font-size:18px" aria-hidden="true"></i>
+      </div>
+      <div>
+        <div style="font-size:22px;font-weight:700;color:#3A382E;line-height:1">${value ?? '—'}</div>
+        <div style="font-size:11px;color:#7B7B7B;margin-top:2px">${label}</div>
+      </div>
+    </div>`;
+}
+
+function _renderRiskHeatmap(heatmap) {
+  // Build a 5x5 grid: rows = Impact (5 top → 1 bottom), cols = Likelihood (1 → 5)
+  // Cell class per risk band (Score = L × I): 1-7 low, 8-14 med, 15+ high.
+  let cells = '';
+  for (let imp = 5; imp >= 1; imp--) {
+    for (let lik = 1; lik <= 5; lik++) {
+      const key   = `L${lik}_I${imp}`;
+      const count = heatmap[key] || 0;
+      const score = lik * imp;
+      const band  = score >= 15 ? 'high' : score >= 8 ? 'med' : 'low';
+      const bg    = band === 'high' ? '#D9534F' : band === 'med' ? '#EF9F27' : '#7FB36F';
+      const opacity = count > 0 ? 1.0 : 0.15;
+      cells += `
+        <div title="Likelihood ${lik}, Impact ${imp} — ${count} risk${count===1?'':'s'} (score ${score}/25)"
+             style="width:36px;height:36px;background:${bg};opacity:${opacity};display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;border-radius:3px;cursor:default">
+          ${count > 0 ? count : ''}
+        </div>`;
+    }
+  }
+  return `
+    <div style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;padding:14px 16px">
+      <div style="font-size:12px;font-weight:600;color:#3A382E;margin-bottom:10px">
+        Risk heatmap
+        <span style="color:#7B7B7B;font-weight:400;margin-left:6px">Likelihood × Impact</span>
+      </div>
+      <div style="display:flex;gap:8px">
+        <div style="display:flex;flex-direction:column;justify-content:space-between;font-size:9px;color:#7B7B7B;text-align:right;padding-right:2px">
+          <div>Impact 5</div><div>4</div><div>3</div><div>2</div><div>1</div>
+        </div>
+        <div>
+          <div style="display:grid;grid-template-columns:repeat(5,36px);grid-template-rows:repeat(5,36px);gap:4px">${cells}</div>
+          <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:9px;color:#7B7B7B;padding:0 2px">
+            <span>Lik 1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function _renderTopRisks(top) {
+  if (!top || top.length === 0) {
+    return `<div style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;padding:14px 16px;color:#7B7B7B;font-size:12px">No top risks to show (all rows have empty risk_score).</div>`;
+  }
+  const rows = top.map(r => `
+    <tr style="border-top:1px solid #EEECE2;cursor:pointer" onclick="showRiskDetail('${escapeHtml(r.id)}')">
+      <td style="padding:8px 6px;font-family:'JetBrains Mono',monospace;font-size:11px">${escapeHtml(r.external_ref)}</td>
+      <td style="padding:8px 6px">${escapeHtml(r.threat || r.asset_name || '')}</td>
+      <td style="padding:8px 6px;text-align:right">${_riskLevelBadge(r.risk_score)}</td>
+      <td style="padding:8px 6px">${_statusPill(r.treatment_status)}</td>
+    </tr>`).join('');
+  return `
+    <div style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;padding:14px 16px">
+      <div style="font-size:12px;font-weight:600;color:#3A382E;margin-bottom:8px">Top ${top.length} risks by score</div>
+      <table style="width:100%;font-size:11px;border-collapse:collapse">
+        <thead>
+          <tr style="color:#7B7B7B;text-align:left">
+            <th style="padding:6px 6px 8px;font-weight:600">Ref</th>
+            <th style="padding:6px 6px 8px;font-weight:600">Description</th>
+            <th style="padding:6px 6px 8px;font-weight:600;text-align:right">Score</th>
+            <th style="padding:6px 6px 8px;font-weight:600">Status</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+function _renderTreatmentBreakdown(byOption, byStatus) {
+  const opts = Object.entries(byOption || {});
+  const stats = Object.entries(byStatus || {});
+  if (opts.length === 0 && stats.length === 0) return '';
+  const optHtml = opts.map(([k,v]) => `${_optionPill(k)} <span style="font-size:11px;color:#5C5A4F">${v}</span>`).join(' &nbsp; ');
+  const stHtml  = stats.map(([k,v]) => `${_statusPill(k)} <span style="font-size:11px;color:#5C5A4F">${v}</span>`).join(' &nbsp; ');
+  return `
+    <div style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;padding:12px 16px;margin-bottom:18px;display:flex;gap:24px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:10px;font-weight:600;color:#7B7B7B;text-transform:uppercase;margin-bottom:6px">Treatment option</div>
+        <div>${optHtml || '<span style="color:#9C9A8E;font-size:11px">—</span>'}</div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:600;color:#7B7B7B;text-transform:uppercase;margin-bottom:6px">Status</div>
+        <div>${stHtml || '<span style="color:#9C9A8E;font-size:11px">—</span>'}</div>
+      </div>
+    </div>`;
+}
+
+function _renderFullRiskList(risks) {
+  if (!risks || risks.length === 0) return '';
+  const rows = risks.map(r => `
+    <tr style="border-top:1px solid #EEECE2;cursor:pointer" onclick="showRiskDetail('${escapeHtml(r.id)}')">
+      <td style="padding:9px 8px;font-family:'JetBrains Mono',monospace;font-size:11px;white-space:nowrap">${escapeHtml(r.external_ref)}</td>
+      <td style="padding:9px 8px;font-size:12px">${escapeHtml(r.threat || '')}<br><span style="font-size:10px;color:#7B7B7B">${escapeHtml(r.asset_name || '')}</span></td>
+      <td style="padding:9px 8px;text-align:right">${_riskLevelBadge(r.risk_score)}</td>
+      <td style="padding:9px 8px">${_optionPill(r.treatment_option)}</td>
+      <td style="padding:9px 8px">${_statusPill(r.treatment_status)}</td>
+      <td style="padding:9px 8px;font-size:11px;color:#5C5A4F">${r.residual_risk_level ?? '—'}</td>
+      <td style="padding:9px 8px">${_linkedControlsInline(r.linked_controls, 3)}</td>
+    </tr>`).join('');
+  return `
+    <div style="background:#fff;border:1px solid #E8E5DA;border-radius:6px;padding:14px 16px">
+      <div style="font-size:12px;font-weight:600;color:#3A382E;margin-bottom:10px">All risks (${risks.length})</div>
+      <table style="width:100%;font-size:11px;border-collapse:collapse">
+        <thead>
+          <tr style="color:#7B7B7B;text-align:left">
+            <th style="padding:6px 8px 8px;font-weight:600">Ref</th>
+            <th style="padding:6px 8px 8px;font-weight:600">Threat / Asset</th>
+            <th style="padding:6px 8px 8px;font-weight:600;text-align:right">Score</th>
+            <th style="padding:6px 8px 8px;font-weight:600">Option</th>
+            <th style="padding:6px 8px 8px;font-weight:600">Status</th>
+            <th style="padding:6px 8px 8px;font-weight:600">Residual</th>
+            <th style="padding:6px 8px 8px;font-weight:600">Linked controls</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+async function showRiskDetail(riskId) {
+  try {
+    const d = await api('/api/v1/tenant/risks/' + encodeURIComponent(riskId));
+    _renderRiskDetail(d);
+  } catch (e) {
+    alert('Couldn\'t load risk detail: ' + e.message);
+  }
+}
+
+function _renderRiskDetail(r) {
+  const panel = document.getElementById('detail-panel');
+  const empty = document.getElementById('detail-empty');
+  if (empty) empty.style.display = 'none';
+
+  const kpis = (r.performance_indicators || []).map(k =>
+    `<span style="display:inline-block;padding:2px 8px;background:#EEECE2;border-radius:10px;font-size:10px;margin:0 4px 4px 0">${escapeHtml(k)}</span>`
+  ).join('') || '<span style="color:#9C9A8E;font-size:11px">—</span>';
+
+  const linked = _linkedControlsInline(r.linked_controls || [], 20);
+
+  panel.innerHTML = `
+    <div style="padding:18px 22px;height:100%;overflow-y:auto">
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:14px">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#7B7B7B">${escapeHtml(r.external_ref)}</div>
+          <div style="font-size:16px;font-weight:600;color:#3A382E;margin-top:2px">${escapeHtml(r.threat || 'Untitled risk')}</div>
+          <div style="font-size:11px;color:#7B7B7B;margin-top:4px">${escapeHtml(r.asset_name || '')}</div>
+        </div>
+        <button class="btn-sm btn-outline" onclick="closeDetail()" title="Close detail" style="padding:4px 8px">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+        <div style="background:#EEECE2;padding:10px 12px;border-radius:4px">
+          <div style="font-size:10px;color:#7B7B7B;text-transform:uppercase;font-weight:600;margin-bottom:4px">Risk score</div>
+          <div style="font-size:18px;font-weight:700">${_riskLevelBadge(r.risk_score)}</div>
+          <div style="font-size:10px;color:#7B7B7B;margin-top:2px">
+            Likelihood ${r.likelihood ?? '—'} × Impact ${r.impact ?? '—'}
+          </div>
+        </div>
+        <div style="background:#EEECE2;padding:10px 12px;border-radius:4px">
+          <div style="font-size:10px;color:#7B7B7B;text-transform:uppercase;font-weight:600;margin-bottom:4px">Residual level</div>
+          <div style="font-size:18px;font-weight:700">${r.residual_risk_level != null ? r.residual_risk_level + '/25' : '—'}</div>
+          <div style="font-size:10px;color:#7B7B7B;margin-top:2px">
+            ${_optionPill(r.treatment_option)} ${_statusPill(r.treatment_status)}
+          </div>
+        </div>
+      </div>
+
+      ${r.threat ? `<div style="margin-bottom:12px"><div style="font-size:10px;color:#7B7B7B;text-transform:uppercase;font-weight:600;margin-bottom:4px">Threat</div><div style="font-size:12px">${escapeHtml(r.threat)}</div></div>` : ''}
+      ${r.vulnerability ? `<div style="margin-bottom:12px"><div style="font-size:10px;color:#7B7B7B;text-transform:uppercase;font-weight:600;margin-bottom:4px">Vulnerability</div><div style="font-size:12px">${escapeHtml(r.vulnerability)}</div></div>` : ''}
+      ${r.risk_owner_text ? `<div style="margin-bottom:12px"><div style="font-size:10px;color:#7B7B7B;text-transform:uppercase;font-weight:600;margin-bottom:4px">Risk owner</div><div style="font-size:12px">${escapeHtml(r.risk_owner_text)}</div></div>` : ''}
+
+      <div style="height:1px;background:#E8E5DA;margin:14px 0"></div>
+      <div style="font-size:11px;color:#7B7B7B;text-transform:uppercase;font-weight:600;margin-bottom:8px">Treatment plan <span style="text-transform:none;font-weight:400;color:#9C9A8E">— per ISO 27005:2022 §8.6.1</span></div>
+
+      ${r.treatment_action ? `<div style="margin-bottom:10px"><div style="font-size:10px;color:#7B7B7B;font-weight:600;margin-bottom:2px">Action</div><div style="font-size:12px">${escapeHtml(r.treatment_action)}</div></div>` : ''}
+      ${r.treatment_rationale ? `<div style="margin-bottom:10px"><div style="font-size:10px;color:#7B7B7B;font-weight:600;margin-bottom:2px">Rationale</div><div style="font-size:12px">${escapeHtml(r.treatment_rationale)}</div></div>` : ''}
+      ${r.resources_required ? `<div style="margin-bottom:10px"><div style="font-size:10px;color:#7B7B7B;font-weight:600;margin-bottom:2px">Resources required</div><div style="font-size:12px">${escapeHtml(r.resources_required)}</div></div>` : ''}
+      <div style="margin-bottom:10px"><div style="font-size:10px;color:#7B7B7B;font-weight:600;margin-bottom:4px">Performance indicators</div><div>${kpis}</div></div>
+      ${r.constraints ? `<div style="margin-bottom:10px"><div style="font-size:10px;color:#7B7B7B;font-weight:600;margin-bottom:2px">Constraints</div><div style="font-size:12px">${escapeHtml(r.constraints)}</div></div>` : ''}
+      ${r.reporting_cadence ? `<div style="margin-bottom:10px"><div style="font-size:10px;color:#7B7B7B;font-weight:600;margin-bottom:2px">Reporting cadence</div><div style="font-size:12px">${escapeHtml(r.reporting_cadence)}</div></div>` : ''}
+      ${r.implementation_date ? `<div style="margin-bottom:10px"><div style="font-size:10px;color:#7B7B7B;font-weight:600;margin-bottom:2px">Implementation date</div><div style="font-size:12px">${escapeHtml(r.implementation_date)}</div></div>` : ''}
+      ${r.review_date ? `<div style="margin-bottom:10px"><div style="font-size:10px;color:#7B7B7B;font-weight:600;margin-bottom:2px">Review date</div><div style="font-size:12px">${escapeHtml(r.review_date)}</div></div>` : ''}
+      ${r.effectiveness_review ? `<div style="margin-bottom:10px"><div style="font-size:10px;color:#7B7B7B;font-weight:600;margin-bottom:2px">Effectiveness review</div><div style="font-size:12px">${escapeHtml(r.effectiveness_review)}</div></div>` : ''}
+
+      <div style="height:1px;background:#E8E5DA;margin:14px 0"></div>
+      <div style="font-size:11px;color:#7B7B7B;text-transform:uppercase;font-weight:600;margin-bottom:8px">Linked controls <span style="text-transform:none;font-weight:400;color:#9C9A8E">— program / extension / obligation rendered first-class per framework role model</span></div>
+      <div>${linked || '<span style="color:#9C9A8E;font-size:11px">No linked controls yet</span>'}</div>
+    </div>`;
+}
+
+
 // request_trace_log, posture_history. KPI header + 4 event lists.
 async function loadTrace() {
   const wrap = document.getElementById('trace-wrap');
