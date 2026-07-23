@@ -107,14 +107,29 @@ Schema:
 """ + LLM_OUTPUT_SCHEMA + """
 
 Card content rules:
-1. `intro.text` — 1-2 sentences. Name the primary control + verdict
-   context. Never open with "This response...". Do NOT restate the
-   N-of-M item count (e.g. "1 of 4 items present" / "0 of 18
-   required items present") — the primary card renders that as a
-   per-leaf checklist. Intro's job is to frame WHAT the control
-   requires + the overall verdict tag ("OFI-DRAFT", "NC-DRAFT").
-   Example: "ISO 27001 A.5.15 (Access control) requires authorized
-   access to information and assets. Currently OFI-DRAFT."
+1. `intro.text` — 1-2 sentences. MUST directly answer the query's
+   central question, echoing the query's key terms (e.g. if the
+   query asks "are we certified?" the intro contains
+   "certification" / "certified"; if it asks about ISO 27004, the
+   intro contains "27004"). Never open with "This response...".
+   The ONLY thing you may drop from the digest content is the
+   N-of-M item count ("1 of 4 items present" / "0 of 18 required")
+   — the primary card renders that as a per-leaf checklist.
+   Everything else stays: verdict acronyms (NC, OFI, Comply, DRAFT
+   tags), query framing terms, guidance-standard names (see rule
+   7), role/framework markers.
+   Examples:
+     Query "how do I remediate A.5.15?" →
+       "ISO 27001 A.5.15 (Access control) requires authorized
+        access to information and assets. Currently OFI-DRAFT."
+     Query "are we certified?" →
+       "Arion is currently working toward ISO 27001 certification;
+        multiple controls are NC-DRAFT and require remediation
+        before an external audit can succeed."
+     Query "what does ISO 27004 say about monitoring?" →
+       "ISO 27004 provides guidance on the monitoring, measurement,
+        analysis and evaluation required by ISO 27001 clause 9.1.
+        Currently OFI-DRAFT."
 2. `intro.primary_ref` — the single ref the query is about, when
    the query targets one specific control. Omit for broad queries.
 3. `actions[]` — 0-5 cards. Each card is ONE concrete step.
@@ -133,12 +148,16 @@ Card content rules:
    canonical form ("A.5.15", "Art.32", "9.2") — the backend scans
    these to build the related-cards list.
 7. GUIDANCE citations MUST appear by full ISO standard name in
-   `intro.text`. When the OBLIGATIONS / GUIDANCE section mentions
+   `intro.text` — this rule fires REGARDLESS of how brief the
+   intro must otherwise be (rule 1's N-of-M subtraction does NOT
+   remove this). When the OBLIGATIONS / GUIDANCE section mentions
    a specific ISO family standard (ISO 27002, ISO 27003, ISO
    27004, ISO 27005, ISO 27701, ISO 27017, ISO 27018, ISO 27552,
    ISO 27799), name it verbatim in the intro — "ISO 27005"
    (not just "the risk-management standard"). Auditors trace the
-   guidance path by standard number.
+   guidance path by standard number. When the query itself names
+   an ISO standard (e.g. "what does ISO 27004 say about..."), the
+   intro MUST echo that standard's name back.
 8. LISTING queries — when the user asks "what must X contain",
    "what are the required items", "list the required elements",
    "what should X include": enumerate EVERY item from the
