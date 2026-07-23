@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:Art.40:code_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.40:code_program_review"
+target_control: "Art.40"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.40:rev_adherence_currency"
+    description: "Adherence currency — every active adherence has current monitoring body sign-off"
+    excerpt_keywords:
+      - [adherence, currency, codes]
+
+  - must_id: "item:Art.40:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, codes]
+
+  - must_id: "item:Art.40:rev_monitoring_body_status"
+    description: "Monitoring body status — body still accredited (Art.41) and engaged"
+    excerpt_keywords:
+      - [monitoring, body, status, codes]
+
+  - must_id: "item:Art.40:rev_reviewer"
+    description: "Reviewer identity (DPO + sector compliance lead)"
+    excerpt_keywords:
+      - [reviewer, identity, codes]

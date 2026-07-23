@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:Art.47:bcr_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.47:bcr_program_review"
+target_control: "Art.47"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.47:rev_change_notification"
+    description: "Material-change notification — significant changes notified to lead SA per Art.63 consistency"
+    excerpt_keywords:
+      - [change, notification, binding]
+
+  - must_id: "item:Art.47:rev_complaints_handled"
+    description: "Complaints-handling audit — Art.47.2.i path functioning + SAs receiving cooperation"
+    excerpt_keywords:
+      - [complaints, handled, binding]
+
+  - must_id: "item:Art.47:rev_compliance_audit"
+    description: "Compliance audit — bound entities adhering to BCR provisions (sampled audit results)"
+    excerpt_keywords:
+      - [compliance, audit, binding]
+
+  - must_id: "item:Art.47:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, binding]
+
+  - must_id: "item:Art.47:rev_reviewer"
+    description: "Reviewer identity (DPO + group privacy lead)"
+    excerpt_keywords:
+      - [reviewer, identity, binding]

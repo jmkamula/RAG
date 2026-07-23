@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:Art.40:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.40:applicable_scope"
+target_control: "Art.40"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.40:scope_chosen_codes"
+    description: "Codes chosen for adherence with rationale"
+    excerpt_keywords:
+      - [scope, chosen, codes]
+      - [codes, chosen, adherence, rationale]
+
+  - must_id: "item:Art.40:scope_excluded"
+    description: "Codes considered but not adhered to (rationale)"
+    excerpt_keywords:
+      - [scope, excluded, codes]
+      - [codes, considered, adhered]
+
+  - must_id: "item:Art.40:scope_sector_codes"
+    description: "Sector codes available (cloud, healthcare, advertising, etc.)"
+    excerpt_keywords:
+      - [scope, sector, codes]
+      - [sector, codes, available]

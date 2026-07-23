@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.8.1:endpoint_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.1:endpoint_program_review"
+target_control: "A.8.1"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.1:rev_compliance_sample"
+    description: "Sample-based compliance verification across the register (encryption / patching / EDR coverage)"
+    excerpt_keywords:
+      - [compliance, sample, user]
+
+  - must_id: "item:A.8.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, user]
+
+  - must_id: "item:A.8.1:rev_register_update"
+    description: "Changes propagated to the policy / register"
+    excerpt_keywords:
+      - [register, update, user]
+      - [changes, propagated, policy, register, user]
+
+  - must_id: "item:A.8.1:rev_reviewer"
+    description: "Reviewer identity (IT lead + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [reviewer, identity, user]
+
+  - must_id: "item:A.8.1:rev_scope_check"
+    description: "Cross-check against the applicable scope — any new class or vendor missing"
+    excerpt_keywords:
+      - [scope, check, user]

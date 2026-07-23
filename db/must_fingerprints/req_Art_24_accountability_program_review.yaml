@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.24:accountability_program_review
-# Auto-generated skeleton — review and tighten before commit.
 #
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.24:accountability_program_review"
@@ -11,75 +10,35 @@ target_control: "Art.24"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.24:rev_iso_alignment"
-    description: "ISO 27001 alignment — derived dependencies (5.1/5.3/9.3/A.5.1/A.5.34/A.5.36) still in compliant state"
-    excerpt_keywords:
-      - [iso, alignment]
-      - [iso]
-      - [alignment]
-      - [iso, 27001]
-      - [iso, 27001, alignment]
-      - [27001]
-      - [27001, alignment]
-      - [27001, alignment, derived]
-
-  - must_id: "item:Art.24:rev_role_currency"
-    description: "Role decisions current — no counterparty service-shape change unreflected in role decisions"
-    excerpt_keywords:
-      - [role, currency]
-      - [currency]
-      - [role, decisions]
-      - [role, decisions, current]
-      - [decisions]
-      - [decisions, current]
-      - [decisions, current, counterparty]
-      - [current]
-
-  - must_id: "item:Art.24:rev_register_completeness"
-    description: "Compliance register completeness — every applicable GDPR article has a row with current status"
-    excerpt_keywords:
-      - [completeness]
-      - [compliance]
-      - [compliance, completeness]
-      - [compliance, completeness, every]
-      - [completeness, every]
-      - [completeness, every, gdpr]
-      - [every]
-      - [every, gdpr]
-
   - must_id: "item:Art.24:rev_charter_currency"
     description: "Charter currency check — scope + governance still reflect organisational reality"
     excerpt_keywords:
-      - [charter, currency]
-      - [charter]
-      - [currency]
-      - [charter, currency, check]
-      - [currency, check]
-      - [currency, check, scope]
-      - [check]
-      - [check, scope]
-
-  - must_id: "item:Art.24:rev_reviewer"
-    description: "Reviewer identity (DPO + executive sponsor)"
-    excerpt_keywords:
-      - [reviewer, identity]
-      - [reviewer, identity, dpo]
-      - [identity, dpo]
-      - [identity, dpo, executive]
-      - [dpo]
-      - [dpo, executive]
-      - [dpo, executive, sponsor]
-      - [executive]
+      - [charter, currency, responsibility]
+      - [charter, currency, check, responsibility]
 
   - must_id: "item:Art.24:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date]
-      - [review, date, within]
-      - [date, within]
-      - [date, within, planned]
-      - [within]
-      - [within, planned]
-      - [within, planned, interval]
-      - [planned]
+      - [review, date, planned, interval, responsibility]
 
+  - must_id: "item:Art.24:rev_iso_alignment"
+    description: "ISO 27001 alignment — derived dependencies (5.1/5.3/9.3/A.5.1/A.5.34/A.5.36) still in compliant s..."
+    excerpt_keywords:
+      - [iso, alignment, responsibility]
+
+  - must_id: "item:Art.24:rev_register_completeness"
+    description: "Compliance register completeness — every applicable GDPR article has a row with current status"
+    excerpt_keywords:
+      - [register, completeness, responsibility]
+      - [compliance, register, completeness, responsibility]
+
+  - must_id: "item:Art.24:rev_reviewer"
+    description: "Reviewer identity (DPO + executive sponsor)"
+    excerpt_keywords:
+      - [reviewer, identity, responsibility]
+
+  - must_id: "item:Art.24:rev_role_currency"
+    description: "Role decisions current — no counterparty service-shape change unreflected in role decisions"
+    excerpt_keywords:
+      - [role, currency, responsibility]
+      - [role, decisions, current, responsibility]

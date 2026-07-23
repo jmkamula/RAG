@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:Art.49:derogations_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.49:derogations_program_review"
+target_control: "Art.49"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.49:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, derogations]
+
+  - must_id: "item:Art.49:rev_pattern_detection"
+    description: "Pattern detection — recurring derogation use for same recipient/purpose flagged for Art.46 migration"
+    excerpt_keywords:
+      - [pattern, detection, derogations]
+
+  - must_id: "item:Art.49:rev_reviewer"
+    description: "Reviewer identity (DPO + legal counsel)"
+    excerpt_keywords:
+      - [reviewer, identity, derogations]
+
+  - must_id: "item:Art.49:rev_sa_notifications"
+    description: "SA notifications audit — Art.49.1 second-paragraph notifications dispatched as required"
+    excerpt_keywords:
+      - [notifications, audit, derogations]
+
+  - must_id: "item:Art.49:rev_strict_construction_audit"
+    description: "Strict-construction audit — sampled invocations reviewed against EDPB 2/2018 narrow interpretation"
+    excerpt_keywords:
+      - [strict, construction, audit, derogations]

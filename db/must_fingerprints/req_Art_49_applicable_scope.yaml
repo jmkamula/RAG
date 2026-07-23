@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:Art.49:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.49:applicable_scope"
+target_control: "Art.49"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.49:scope_derogations_used"
+    description: "Derogations actually relied on enumerated (most orgs: a explicit consent + b contract; some: e le..."
+    excerpt_keywords:
+      - [scope, derogations]
+      - [derogations, actually, relied, enumerated]
+
+  - must_id: "item:Art.49:scope_excluded"
+    description: "Derogations explicitly NOT relied on (rationale)"
+    excerpt_keywords:
+      - [scope, excluded, derogations]
+      - [derogations, explicitly, relied]
+
+  - must_id: "item:Art.49:scope_repetitive_test"
+    description: "Operational interpretation of 'non-repetitive' for last-resort derogation"
+    excerpt_keywords:
+      - [scope, repetitive, test, derogations]
+      - [operational, interpretation, non, derogations]

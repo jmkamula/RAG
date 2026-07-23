@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:Art.38:position_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.38:position_program_review"
+target_control: "Art.38"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.38:rev_coi_recheck"
+    description: "COI recheck — DPO role assignments still free of conflicts"
+    excerpt_keywords:
+      - [coi, recheck, position]
+
+  - must_id: "item:Art.38:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, position]
+
+  - must_id: "item:Art.38:rev_independence_audit"
+    description: "Independence audit — no recorded instructions on tasks; no dismissal pressure"
+    excerpt_keywords:
+      - [independence, audit, position]
+
+  - must_id: "item:Art.38:rev_involvement_audit"
+    description: "Involvement audit — DPO invited to all in-scope forums; not bypassed on data-protection decisions"
+    excerpt_keywords:
+      - [involvement, audit, position]
+
+  - must_id: "item:Art.38:rev_reviewer"
+    description: "Reviewer identity (executive sponsor + non-executive director / external counsel if available)"
+    excerpt_keywords:
+      - [reviewer, identity, position]

@@ -1,0 +1,28 @@
+# Per-MUST fingerprint catalog for req:Art.27:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.27:applicable_scope"
+target_control: "Art.27"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.27:scope_art27_2_exception"
+    description: "Art.27.2 exception assessment (occasional processing + no special-category-large-scale + low risk..."
+    excerpt_keywords:
+      - [scope, art27, exception, representatives]
+      - [art, exception, assessment, representatives]
+
+  - must_id: "item:Art.27:scope_establishment"
+    description: "Establishment analysis — where the controller/processor is established + why Art.3.2 applies (off..."
+    excerpt_keywords:
+      - [scope, establishment, representatives]
+      - [establishment, analysis, representatives]
+
+  - must_id: "item:Art.27:scope_member_state_target"
+    description: "MS targeted (Art.27.3 — representative MUST be in one of these)"
+    excerpt_keywords:
+      - [scope, member, state, target, representatives]

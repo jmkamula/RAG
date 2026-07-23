@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.7.12:cabling_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.12:cabling_program_review"
+target_control: "A.7.12"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.7.12:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, cabling]
+
+  - must_id: "item:A.7.12:rev_inspection_coverage"
+    description: "Per-run inspection coverage in period (all runs inspected per planned cadence)"
+    excerpt_keywords:
+      - [inspection, coverage, cabling]
+
+  - must_id: "item:A.7.12:rev_register_update"
+    description: "Changes propagated to the register / procedure"
+    excerpt_keywords:
+      - [register, update, cabling]
+      - [changes, propagated, register, procedure, cabling]
+
+  - must_id: "item:A.7.12:rev_remediation_closure"
+    description: "Remediation closure rate from prior period"
+    excerpt_keywords:
+      - [remediation, closure, cabling]
+      - [remediation, closure, rate, prior, cabling]
+
+  - must_id: "item:A.7.12:rev_reviewer"
+    description: "Reviewer identity (Facilities + Network lead + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, cabling]

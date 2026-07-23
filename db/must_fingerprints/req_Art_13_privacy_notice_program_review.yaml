@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:Art.13:privacy_notice_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.13:privacy_notice_program_review"
+target_control: "Art.13"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.13:rev_collection_coverage"
+    description: "Coverage check — every in-scope collection point still presents the current notice"
+    excerpt_keywords:
+      - [collection, coverage, personal]
+      - [coverage, check, personal]
+
+  - must_id: "item:Art.13:rev_content_currency"
+    description: "Content currency check — notice reflects current Art.30 RoPA + Art.6 basis register"
+    excerpt_keywords:
+      - [content, currency, personal]
+      - [content, currency, check, personal]
+
+  - must_id: "item:Art.13:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, personal]
+
+  - must_id: "item:Art.13:rev_publication_archive"
+    description: "Publication archive check — prior versions retained for audit defensibility"
+    excerpt_keywords:
+      - [publication, archive, personal]
+      - [publication, archive, check, personal]
+
+  - must_id: "item:Art.13:rev_reviewer"
+    description: "Reviewer identity (DPO or Privacy Lead)"
+    excerpt_keywords:
+      - [reviewer, identity, personal]

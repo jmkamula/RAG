@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.6.1:screening_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.6.1:screening_program_review"
+target_control: "A.6.1"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.6.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, screening]
+
+  - must_id: "item:A.6.1:rev_register_check"
+    description: "Per-tier outcome (did every new hire in this tier get the right checks? gaps flagged and remediated)"
+    excerpt_keywords:
+      - [register, check, screening]
+
+  - must_id: "item:A.6.1:rev_register_update"
+    description: "Changes propagated back to the procedure / scope with reference to this review"
+    excerpt_keywords:
+      - [register, update, screening]
+      - [changes, propagated, back, procedure, screening]
+
+  - must_id: "item:A.6.1:rev_rescreen_status"
+    description: "Rescreen status — for roles with ongoing-check obligations, what fraction completed on cadence vs..."
+    excerpt_keywords:
+      - [rescreen, status, screening]
+
+  - must_id: "item:A.6.1:rev_reviewer"
+    description: "Reviewer identity and role recorded (HR lead + InfoSec lead jointly; legal-counsel sign-off where..."
+    excerpt_keywords:
+      - [reviewer, identity, role, recorded, screening]
+
+  - must_id: "item:A.6.1:rev_scope_check"
+    description: "Cross-check against the applicable-roles scope — any new role tier, new jurisdiction, new sectora..."
+    excerpt_keywords:
+      - [scope, check, screening]

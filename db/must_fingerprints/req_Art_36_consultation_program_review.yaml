@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:Art.36:consultation_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.36:consultation_program_review"
+target_control: "Art.36"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.36:rev_advice_handling"
+    description: "Advice handling sample — SA written advice incorporated or formally rejected with rationale recorded"
+    excerpt_keywords:
+      - [advice, handling, prior]
+      - [advice, handling, sample, prior]
+
+  - must_id: "item:Art.36:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, prior]
+
+  - must_id: "item:Art.36:rev_escalation_audit"
+    description: "Escalation audit — every Art.35 DPIA flagging residual high risk has a corresponding Art.36 consu..."
+    excerpt_keywords:
+      - [escalation, audit, prior]
+
+  - must_id: "item:Art.36:rev_reviewer"
+    description: "Reviewer identity (DPO + legal)"
+    excerpt_keywords:
+      - [reviewer, identity, prior]
+
+  - must_id: "item:Art.36:rev_waiting_compliance"
+    description: "Waiting-period compliance — no processing started before SA waiting period elapsed"
+    excerpt_keywords:
+      - [waiting, compliance, prior]

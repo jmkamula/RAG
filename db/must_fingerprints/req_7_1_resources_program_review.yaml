@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:7.1:resources_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:7.1:resources_program_review"
+target_control: "7.1"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:7.1:rev_adequacy"
+    description: "Adequacy check — resources actually provided match the determined need per category"
+    excerpt_keywords:
+      - [adequacy, check, resources]
+
+  - must_id: "item:7.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, resources]
+
+  - must_id: "item:7.1:rev_gap_response"
+    description: "Gap response — any under-resourcing surfaced with remediation plan"
+    excerpt_keywords:
+      - [gap, response, resources]
+
+  - must_id: "item:7.1:rev_reviewer"
+    description: "Reviewer identity (ISMS Manager + finance partner + top management)"
+    excerpt_keywords:
+      - [reviewer, identity, resources]

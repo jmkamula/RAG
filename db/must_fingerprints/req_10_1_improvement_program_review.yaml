@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:10.1:improvement_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:10.1:improvement_program_review"
+target_control: "10.1"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:10.1:rev_closure_quality"
+    description: "Closure-quality check — closed actions have effectiveness assessment, not just 'marked complete'"
+    excerpt_keywords:
+      - [closure, quality, continual]
+
+  - must_id: "item:10.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, continual]
+
+  - must_id: "item:10.1:rev_dimension_coverage"
+    description: "Dimension coverage — improvements span suitability AND adequacy AND effectiveness (not just one)"
+    excerpt_keywords:
+      - [dimension, coverage, continual]
+
+  - must_id: "item:10.1:rev_reviewer"
+    description: "Reviewer identity (ISMS Manager + executive sponsor)"
+    excerpt_keywords:
+      - [reviewer, identity, continual]
+
+  - must_id: "item:10.1:rev_signal_capture"
+    description: "Signal-capture check — every in-scope trigger source produced at least one action OR explicit 'no..."
+    excerpt_keywords:
+      - [signal, capture, continual]

@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:Art.12:transparency_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.12:transparency_program_review"
+target_control: "Art.12"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.12:rev_channel_coverage"
+    description: "Channel coverage check — every in-scope channel is reaching the procedure (no orphan requests)"
+    excerpt_keywords:
+      - [channel, coverage, transparent]
+      - [channel, coverage, check, transparent]
+
+  - must_id: "item:Art.12:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, transparent]
+
+  - must_id: "item:Art.12:rev_refusal_audit"
+    description: "Refusal-grounds audit — refused requests sampled for legitimate Art.12.5 grounds"
+    excerpt_keywords:
+      - [refusal, audit, transparent]
+
+  - must_id: "item:Art.12:rev_reviewer"
+    description: "Reviewer identity (DPO + ops lead)"
+    excerpt_keywords:
+      - [reviewer, identity, transparent]
+
+  - must_id: "item:Art.12:rev_sla_compliance"
+    description: "SLA compliance check — one-month response rate against in-scope requests"
+    excerpt_keywords:
+      - [sla, compliance, transparent]
+      - [sla, compliance, check, transparent]

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.28:processor_program_review
-# Auto-generated skeleton — review and tighten before commit.
 #
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.28:processor_program_review"
@@ -11,63 +10,29 @@ target_control: "Art.28"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.28:rev_security_currency"
-    description: "Security assurance currency — Art.32-equivalent evidence (cert, audit) refreshed within validity period"
+  - must_id: "item:Art.28:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [security, currency]
-      - [security]
-      - [currency]
-      - [security, assurance]
-      - [security, assurance, currency]
-      - [assurance]
-      - [assurance, currency]
-      - [assurance, currency, art]
-
-  - must_id: "item:Art.28:rev_subprocessor_audit"
-    description: "Sub-processor audit — every active sub-processor authorised; unauthorised additions flagged"
-    excerpt_keywords:
-      - [subprocessor, audit]
-      - [subprocessor]
-      - [sub]
-      - [sub, processor]
-      - [sub, processor, audit]
-      - [processor]
-      - [processor, audit]
-      - [processor, audit, every]
+      - [review, date, planned, interval, processor]
 
   - must_id: "item:Art.28:rev_dpa_currency"
-    description: "DPA currency check — every active processor has a current DPA (no expired or pre-onboarding processors active)"
+    description: "DPA currency check — every active processor has a current DPA (no expired or pre-onboarding proce..."
     excerpt_keywords:
-      - [dpa, currency]
-      - [dpa]
-      - [currency]
-      - [dpa, currency, check]
-      - [currency, check]
-      - [currency, check, every]
-      - [check]
-      - [check, every]
+      - [dpa, currency, processor]
+      - [dpa, currency, check, processor]
 
   - must_id: "item:Art.28:rev_reviewer"
     description: "Reviewer identity (DPO + procurement / vendor management lead)"
     excerpt_keywords:
-      - [reviewer, identity]
-      - [reviewer, identity, dpo]
-      - [identity, dpo]
-      - [identity, dpo, procurement]
-      - [dpo]
-      - [dpo, procurement]
-      - [dpo, procurement, vendor]
-      - [procurement]
+      - [reviewer, identity, processor]
 
-  - must_id: "item:Art.28:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:Art.28:rev_security_currency"
+    description: "Security assurance currency — Art.32-equivalent evidence (cert, audit) refreshed within validity ..."
     excerpt_keywords:
-      - [review, date]
-      - [review, date, within]
-      - [date, within]
-      - [date, within, planned]
-      - [within]
-      - [within, planned]
-      - [within, planned, interval]
-      - [planned]
+      - [security, currency, processor]
+      - [security, assurance, currency, processor]
 
+  - must_id: "item:Art.28:rev_subprocessor_audit"
+    description: "Sub-processor audit — every active sub-processor authorised; unauthorised additions flagged"
+    excerpt_keywords:
+      - [subprocessor, audit, processor]

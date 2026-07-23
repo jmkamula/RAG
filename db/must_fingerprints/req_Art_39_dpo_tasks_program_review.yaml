@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:Art.39:dpo_tasks_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.39:dpo_tasks_program_review"
+target_control: "Art.39"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.39:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, tasks]
+
+  - must_id: "item:Art.39:rev_quality_signals"
+    description: "Quality signals — incident-trend reduction, DPIA-handling improvement, SA-interaction outcomes"
+    excerpt_keywords:
+      - [quality, signals, tasks]
+
+  - must_id: "item:Art.39:rev_reviewer"
+    description: "Reviewer identity (executive sponsor)"
+    excerpt_keywords:
+      - [reviewer, identity, tasks]
+
+  - must_id: "item:Art.39:rev_risk_prioritisation_check"
+    description: "Risk prioritisation check — DPO attention skewed toward higher-risk processing"
+    excerpt_keywords:
+      - [risk, prioritisation, check, tasks]
+
+  - must_id: "item:Art.39:rev_task_coverage"
+    description: "Task coverage audit — every Art.39.1 task has corresponding activity-register entries"
+    excerpt_keywords:
+      - [task, coverage, tasks]
+      - [task, coverage, audit, tasks]

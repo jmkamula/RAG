@@ -1,0 +1,47 @@
+# Per-MUST fingerprint catalog for req:A.8.24:crypto_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.24:crypto_program_review"
+target_control: "A.8.24"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.24:rev_algorithm_currency"
+    description: "Algorithm-table currency check vs NIST / national-regulator advisories (deprecated algorithms ret..."
+    excerpt_keywords:
+      - [algorithm, currency, cryptography]
+
+  - must_id: "item:A.8.24:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, planned, interval, cryptography]
+
+  - must_id: "item:A.8.24:rev_exception_inventory"
+    description: "Exception inventory re-confirmed / retired"
+    excerpt_keywords:
+      - [exception, inventory, cryptography]
+
+  - must_id: "item:A.8.24:rev_findings_update"
+    description: "Findings propagated to policy / scope / register"
+    excerpt_keywords:
+      - [findings, update, cryptography]
+      - [findings, propagated, policy, scope, cryptography]
+
+  - must_id: "item:A.8.24:rev_pii_audit"
+    description: "PII-key audit (custodianship + DPIA alignment + cross-border transfer Art.5.1.f impact)"
+    excerpt_keywords:
+      - [pii, audit, cryptography]
+
+  - must_id: "item:A.8.24:rev_reviewer"
+    description: "Reviewer identity (Cryptography SME + InfoSec + Data Protection)"
+    excerpt_keywords:
+      - [reviewer, identity, cryptography]
+
+  - must_id: "item:A.8.24:rev_rotation_compliance"
+    description: "Key-rotation compliance per key class (no overdue active keys without exception)"
+    excerpt_keywords:
+      - [rotation, compliance, cryptography]

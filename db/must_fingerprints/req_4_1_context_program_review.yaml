@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:4.1:context_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:4.1:context_program_review"
+target_control: "4.1"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:4.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, understanding]
+
+  - must_id: "item:4.1:rev_register_currency"
+    description: "Register currency check — every row reviewed for continued relevance, new issues added"
+    excerpt_keywords:
+      - [register, currency, understanding]
+      - [register, currency, check, understanding]
+
+  - must_id: "item:4.1:rev_reviewer"
+    description: "Reviewer identity (ISMS Manager + executive sponsor)"
+    excerpt_keywords:
+      - [reviewer, identity, understanding]
+
+  - must_id: "item:4.1:rev_risk_handoff"
+    description: "Confirmation that handoff to 6.1.2 risk assessment occurred for material issues"
+    excerpt_keywords:
+      - [risk, handoff, understanding]
+      - [confirmation, handoff, risk, assessment, understanding]
+
+  - must_id: "item:4.1:rev_scope_check"
+    description: "Cross-check against the applicable-domains scope — any new domain that should be covered"
+    excerpt_keywords:
+      - [scope, check, understanding]

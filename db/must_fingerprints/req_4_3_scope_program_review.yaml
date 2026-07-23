@@ -1,0 +1,31 @@
+# Per-MUST fingerprint catalog for req:4.3:scope_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:4.3:scope_program_review"
+target_control: "4.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:4.3:rev_change_log"
+    description: "Cross-check against change records — every actual scope change in the year is logged"
+    excerpt_keywords:
+      - [change, log, determining]
+
+  - must_id: "item:4.3:rev_currency"
+    description: "Currency check — scope still matches organisational reality (sites, products, third parties)"
+    excerpt_keywords:
+      - [currency, check, determining]
+
+  - must_id: "item:4.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, determining]
+
+  - must_id: "item:4.3:rev_reviewer"
+    description: "Reviewer identity (ISMS Manager + top management)"
+    excerpt_keywords:
+      - [reviewer, identity, determining]

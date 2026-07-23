@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.8.23:filtering_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.23:filtering_program_review"
+target_control: "A.8.23"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.23:rev_category_currency"
+    description: "Category-list currency check (new malicious-content categories added; obsolete categories retired)"
+    excerpt_keywords:
+      - [category, currency, web]
+
+  - must_id: "item:A.8.23:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, web]
+
+  - must_id: "item:A.8.23:rev_findings_update"
+    description: "Findings propagated to policy / scope"
+    excerpt_keywords:
+      - [findings, update, web]
+      - [findings, propagated, policy, scope, web]
+
+  - must_id: "item:A.8.23:rev_override_trending"
+    description: "Override-volume trending (spikes may indicate category over-blocking or coverage gap)"
+    excerpt_keywords:
+      - [override, trending, web]
+
+  - must_id: "item:A.8.23:rev_reviewer"
+    description: "Reviewer identity (Security Operations + Legal/HR for category boundaries)"
+    excerpt_keywords:
+      - [reviewer, identity, web]

@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.32:program_review
-# Auto-generated skeleton — review and tighten before commit.
 #
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.32:program_review"
@@ -11,63 +10,22 @@ target_control: "Art.32"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
+  - must_id: "item:Art.32:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval]
+
   - must_id: "item:Art.32:rev_iso_alignment"
-    description: "ISO 27001 alignment — implementing controls (A.5.24/A.8.x) still in force; any reductions challenged for Art.32 impact"
+    description: "ISO 27001 alignment — implementing controls (A.5.24/A.8.x) still in force; any reductions challen..."
     excerpt_keywords:
       - [iso, alignment]
-      - [iso]
-      - [alignment]
-      - [iso, 27001]
-      - [iso, 27001, alignment]
-      - [27001]
-      - [27001, alignment]
-      - [27001, alignment, implementing]
 
   - must_id: "item:Art.32:rev_register_currency"
     description: "Register currency — every Art.30 RoPA activity covered with current measures"
     excerpt_keywords:
-      - [currency]
-      - [currency, every]
-      - [currency, every, art]
-      - [every]
-      - [every, art]
-      - [every, art, ropa]
-      - [art]
-      - [art, ropa]
-
-  - must_id: "item:Art.32:rev_appropriateness"
-    description: "Appropriateness re-assessment — measures still proportionate given current threat landscape and tech state-of-art"
-    excerpt_keywords:
-      - [appropriateness]
-      - [appropriateness, assessment]
-      - [appropriateness, assessment, measures]
-      - [assessment]
-      - [assessment, measures]
-      - [assessment, measures, still]
-      - [measures]
-      - [measures, still]
+      - [register, currency]
 
   - must_id: "item:Art.32:rev_reviewer"
     description: "Reviewer identity (DPO + CISO + Risk lead)"
     excerpt_keywords:
       - [reviewer, identity]
-      - [reviewer, identity, dpo]
-      - [identity, dpo]
-      - [identity, dpo, ciso]
-      - [dpo]
-      - [dpo, ciso]
-      - [dpo, ciso, risk]
-      - [ciso]
-
-  - must_id: "item:Art.32:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date]
-      - [review, date, within]
-      - [date, within]
-      - [date, within, planned]
-      - [within]
-      - [within, planned]
-      - [within, planned, interval]
-      - [planned]
-

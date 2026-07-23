@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.8.31:environment_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.31:environment_program_review"
+target_control: "A.8.31"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.31:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, separation]
+
+  - must_id: "item:A.8.31:rev_findings_update"
+    description: "Findings propagated to procedure / register"
+    excerpt_keywords:
+      - [findings, update, separation]
+      - [findings, propagated, procedure, register, separation]
+
+  - must_id: "item:A.8.31:rev_no_prod_data_sample"
+    description: "Sample-based check — no raw production data found in lower environments (auditor-critical for GDPR)"
+    excerpt_keywords:
+      - [prod, data, sample, separation]
+
+  - must_id: "item:A.8.31:rev_per_env_access"
+    description: "Per-env access review (cross-link to A.8.3 + A.5.18 outcomes)"
+    excerpt_keywords:
+      - [env, access, separation]
+
+  - must_id: "item:A.8.31:rev_register_currency"
+    description: "Environment-register currency check"
+    excerpt_keywords:
+      - [register, currency, separation]
+
+  - must_id: "item:A.8.31:rev_reviewer"
+    description: "Reviewer identity (Infrastructure + InfoSec + Engineering leads)"
+    excerpt_keywords:
+      - [reviewer, identity, separation]

@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:Art.29:processing_under_authority_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.29:processing_under_authority_program_review"
+target_control: "Art.29"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.29:rev_authorisation_completeness"
+    description: "Authorisation completeness — every person with access has a register row"
+    excerpt_keywords:
+      - [authorisation, completeness, authority]
+
+  - must_id: "item:Art.29:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, authority]
+
+  - must_id: "item:Art.29:rev_instruction_drift"
+    description: "Instruction-drift sweep — sample processing activities to verify they stay within documented cont..."
+    excerpt_keywords:
+      - [instruction, drift, authority]
+
+  - must_id: "item:Art.29:rev_reviewer"
+    description: "Reviewer identity (DPO + HR + ops lead)"
+    excerpt_keywords:
+      - [reviewer, identity, authority]
+
+  - must_id: "item:Art.29:rev_training_currency"
+    description: "Training currency — A.6.3 / 7.3 training current for every authorised person"
+    excerpt_keywords:
+      - [training, currency, authority]

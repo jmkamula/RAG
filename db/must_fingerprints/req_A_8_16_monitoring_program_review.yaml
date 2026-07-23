@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.8.16:monitoring_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.16:monitoring_program_review"
+target_control: "A.8.16"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.16:rev_coverage"
+    description: "Coverage check against threat-mapping (any uncovered MITRE technique surfaced)"
+    excerpt_keywords:
+      - [coverage, check, threat, monitoring]
+
+  - must_id: "item:A.8.16:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, planned, interval, monitoring]
+
+  - must_id: "item:A.8.16:rev_missed_postmortems"
+    description: "Missed-detection postmortems reviewed (incidents that bypassed monitoring)"
+    excerpt_keywords:
+      - [missed, postmortems, monitoring]
+
+  - must_id: "item:A.8.16:rev_register_update"
+    description: "Findings propagated to register / procedure / scope"
+    excerpt_keywords:
+      - [register, update, monitoring]
+      - [findings, propagated, register, procedure, monitoring]
+
+  - must_id: "item:A.8.16:rev_reviewer"
+    description: "Reviewer identity (Security Operations lead + InfoSec lead)"
+    excerpt_keywords:
+      - [reviewer, identity, monitoring]
+
+  - must_id: "item:A.8.16:rev_threat_intel_feed"
+    description: "Threat-intel feeding effectiveness (cross-link to A.5.7 — new tactics translated to detections)"
+    excerpt_keywords:
+      - [threat, intel, feed, monitoring]

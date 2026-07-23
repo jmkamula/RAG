@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.8.27:architecture_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.27:architecture_program_review"
+target_control: "A.8.27"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.27:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, secure]
+
+  - must_id: "item:A.8.27:rev_findings_update"
+    description: "Findings propagated to policy / register"
+    excerpt_keywords:
+      - [findings, update, secure]
+      - [findings, propagated, policy, register, secure]
+
+  - must_id: "item:A.8.27:rev_pattern_currency"
+    description: "Reference-pattern currency check (no abandoned patterns; new technology patterns added)"
+    excerpt_keywords:
+      - [pattern, currency, secure]
+
+  - must_id: "item:A.8.27:rev_principle_set"
+    description: "Principle-set review (new threats → new principles; obsolete principles retired)"
+    excerpt_keywords:
+      - [principle, set, secure]
+
+  - must_id: "item:A.8.27:rev_reviewer"
+    description: "Reviewer identity (Chief Architect + Security Architect + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, secure]

@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:Art.31:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.31:applicable_scope"
+target_control: "Art.31"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.31:scope_concerned_sas"
+    description: "Concerned SAs enumerated (MS where subjects affected)"
+    excerpt_keywords:
+      - [scope, concerned, sas, cooperation]
+      - [concerned, sas, enumerated, cooperation]
+
+  - must_id: "item:Art.31:scope_lead_sa"
+    description: "Lead supervisory authority identified"
+    excerpt_keywords:
+      - [scope, lead, cooperation]
+      - [lead, supervisory, authority, identified]
+
+  - must_id: "item:Art.31:scope_powers"
+    description: "Art.58 SA powers acknowledged — info access (Art.58.1.a-f), corrective (Art.58.2), authorisation ..."
+    excerpt_keywords:
+      - [scope, powers, cooperation]
+      - [art, powers, acknowledged, cooperation]

@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.8.33:test_data_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.33:test_data_program_review"
+target_control: "A.8.33"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.33:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, test]
+
+  - must_id: "item:A.8.33:rev_findings_update"
+    description: "Findings propagated to procedure / scope"
+    excerpt_keywords:
+      - [findings, update, test]
+      - [findings, propagated, procedure, scope, test]
+
+  - must_id: "item:A.8.33:rev_no_live_pii_check"
+    description: "No-live-PII spot-check in non-production environments (auditor-critical for GDPR)"
+    excerpt_keywords:
+      - [live, pii, check, test]
+
+  - must_id: "item:A.8.33:rev_register_currency"
+    description: "Register-currency check (active datasets all registered; retired datasets archived/deleted)"
+    excerpt_keywords:
+      - [register, currency, test]
+
+  - must_id: "item:A.8.33:rev_retention_compliance"
+    description: "Retention compliance (no datasets surviving past end-of-need)"
+    excerpt_keywords:
+      - [retention, compliance, test]
+
+  - must_id: "item:A.8.33:rev_reviewer"
+    description: "Reviewer identity (Data Engineering + DPO + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, test]

@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:Art.48:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.48:applicable_scope"
+target_control: "Art.48"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.48:scope_agreements"
+    description: "International agreements catalogued (US-EU MLAT, sector-specific agreements)"
+    excerpt_keywords:
+      - [scope, agreements, transfers]
+      - [international, agreements, catalogued, transfers]
+
+  - must_id: "item:Art.48:scope_authority_types"
+    description: "Foreign authority types in scope (law enforcement / national security / tax / regulatory)"
+    excerpt_keywords:
+      - [scope, authority, types, transfers]
+      - [foreign, authority, types, scope, transfers]
+
+  - must_id: "item:Art.48:scope_excluded"
+    description: "Excluded request types (subpoenas without agreement basis — refused absent Art.49 derogation)"
+    excerpt_keywords:
+      - [scope, excluded, transfers]
+      - [excluded, request, types, transfers]

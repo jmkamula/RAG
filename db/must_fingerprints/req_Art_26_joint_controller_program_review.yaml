@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.26:joint_controller_program_review
-# Auto-generated skeleton — review and tighten before commit.
 #
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.26:joint_controller_program_review"
@@ -14,60 +13,24 @@ must_fingerprints:
   - must_id: "item:Art.26:rev_contact_point"
     description: "Contact-point health check — point still reachable, requests being routed correctly"
     excerpt_keywords:
-      - [contact, point]
-      - [contact]
-      - [point]
-      - [contact, point, health]
-      - [point, health]
-      - [point, health, check]
-      - [health]
-      - [health, check]
-
-  - must_id: "item:Art.26:rev_essence_published"
-    description: "Essence-published audit — privacy notice / equivalent surface reflects each arrangement"
-    excerpt_keywords:
-      - [essence, published]
-      - [essence]
-      - [published]
-      - [essence, published, audit]
-      - [published, audit]
-      - [published, audit, privacy]
-      - [audit, privacy]
-      - [audit, privacy, notice]
+      - [contact, point, joint]
 
   - must_id: "item:Art.26:rev_currency"
     description: "Arrangement currency — every active relationship has current signed arrangement"
     excerpt_keywords:
-      - [currency]
-      - [arrangement]
-      - [arrangement, currency]
-      - [arrangement, currency, every]
-      - [currency, every]
-      - [currency, every, active]
-      - [every]
-      - [every, active]
-
-  - must_id: "item:Art.26:rev_reviewer"
-    description: "Reviewer identity (DPO + legal counsel)"
-    excerpt_keywords:
-      - [reviewer, identity]
-      - [reviewer, identity, dpo]
-      - [identity, dpo]
-      - [identity, dpo, legal]
-      - [dpo]
-      - [dpo, legal]
-      - [dpo, legal, counsel]
-      - [legal]
+      - [arrangement, currency, joint]
 
   - must_id: "item:Art.26:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date]
-      - [review, date, within]
-      - [date, within]
-      - [date, within, planned]
-      - [within]
-      - [within, planned]
-      - [within, planned, interval]
-      - [planned]
+      - [review, date, planned, interval, joint]
 
+  - must_id: "item:Art.26:rev_essence_published"
+    description: "Essence-published audit — privacy notice / equivalent surface reflects each arrangement"
+    excerpt_keywords:
+      - [essence, published, joint]
+
+  - must_id: "item:Art.26:rev_reviewer"
+    description: "Reviewer identity (DPO + legal counsel)"
+    excerpt_keywords:
+      - [reviewer, identity, joint]

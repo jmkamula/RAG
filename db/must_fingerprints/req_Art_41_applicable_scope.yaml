@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:Art.41:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.41:applicable_scope"
+target_control: "Art.41"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.41:scope_accreditation"
+    description: "Accreditation source (SA + scope of accreditation)"
+    excerpt_keywords:
+      - [scope, accreditation, monitoring]
+      - [accreditation, source, monitoring]
+
+  - must_id: "item:Art.41:scope_codes_monitored"
+    description: "Codes monitored enumerated"
+    excerpt_keywords:
+      - [scope, codes, monitored, monitoring]
+      - [codes, monitored, enumerated, monitoring]
+
+  - must_id: "item:Art.41:scope_jurisdictions"
+    description: "Jurisdictions covered"
+    excerpt_keywords:
+      - [scope, jurisdictions, monitoring]
+      - [jurisdictions, covered, monitoring]

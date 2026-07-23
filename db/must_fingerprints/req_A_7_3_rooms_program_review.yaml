@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.7.3:rooms_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.3:rooms_program_review"
+target_control: "A.7.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.7.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, securing]
+
+  - must_id: "item:A.7.3:rev_register_check"
+    description: "Per-room outcome (verified / amended / retired / new added)"
+    excerpt_keywords:
+      - [register, check, securing]
+
+  - must_id: "item:A.7.3:rev_register_update"
+    description: "Changes propagated to the live register"
+    excerpt_keywords:
+      - [register, update, securing]
+      - [changes, propagated, live, register, securing]
+
+  - must_id: "item:A.7.3:rev_reviewer"
+    description: "Reviewer identity (Facilities + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, securing]
+
+  - must_id: "item:A.7.3:rev_walkthrough"
+    description: "Physical walkthrough conducted (sample-based) — locking standards verified, signage compliant"
+    excerpt_keywords:
+      - [physical, walkthrough, conducted, securing]

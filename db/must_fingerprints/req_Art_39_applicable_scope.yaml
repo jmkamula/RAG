@@ -1,0 +1,28 @@
+# Per-MUST fingerprint catalog for req:Art.39:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.39:applicable_scope"
+target_control: "Art.39"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.39:scope_additional_tasks"
+    description: "Additional tasks beyond Art.39.1 (if any) consistent with Art.38.6 no-conflict-of-interest rule"
+    excerpt_keywords:
+      - [scope, additional, tasks]
+      - [additional, tasks, beyond, art]
+
+  - must_id: "item:Art.39:scope_risk_prioritisation"
+    description: "Risk-based prioritisation criteria (per Art.39.2 due regard to risk)"
+    excerpt_keywords:
+      - [scope, risk, prioritisation, tasks]
+
+  - must_id: "item:Art.39:scope_tasks_assigned"
+    description: "Tasks formally assigned to DPO (mapping to Art.39.1 a-e)"
+    excerpt_keywords:
+      - [scope, tasks, assigned]
+      - [tasks, formally, assigned, dpo]

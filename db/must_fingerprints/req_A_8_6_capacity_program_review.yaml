@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.8.6:capacity_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.6:capacity_program_review"
+target_control: "A.8.6"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.6:rev_baseline_update"
+    description: "Baseline / threshold updates published from findings"
+    excerpt_keywords:
+      - [baseline, update, capacity]
+      - [baseline, threshold, updates, published, capacity]
+
+  - must_id: "item:A.8.6:rev_breach_patterns"
+    description: "Breach-pattern review (recurring breaches → baseline re-calibration)"
+    excerpt_keywords:
+      - [breach, patterns, capacity]
+
+  - must_id: "item:A.8.6:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, capacity]
+
+  - must_id: "item:A.8.6:rev_forecast_accuracy"
+    description: "Forecast-vs-actual accuracy check across the review window"
+    excerpt_keywords:
+      - [forecast, accuracy, capacity]
+
+  - must_id: "item:A.8.6:rev_reviewer"
+    description: "Reviewer identity (Infrastructure + Finance + Engineering leadership)"
+    excerpt_keywords:
+      - [reviewer, identity, capacity]

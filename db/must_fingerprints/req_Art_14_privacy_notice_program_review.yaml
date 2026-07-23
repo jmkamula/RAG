@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:Art.14:privacy_notice_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.14:privacy_notice_program_review"
+target_control: "Art.14"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.14:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, personal]
+
+  - must_id: "item:Art.14:rev_deadline_compliance"
+    description: "Deadline compliance audit — notice deadlines met per Art.14.3"
+    excerpt_keywords:
+      - [deadline, compliance, personal]
+      - [deadline, compliance, audit, personal]
+
+  - must_id: "item:Art.14:rev_exception_reassessment"
+    description: "Art.14.5 exception re-assessment — exceptions claimed still hold (proportionate-impossibility may..."
+    excerpt_keywords:
+      - [exception, reassessment, personal]
+      - [art, exception, personal]
+
+  - must_id: "item:Art.14:rev_register_currency"
+    description: "Register currency check — every active third-party source has a current row"
+    excerpt_keywords:
+      - [register, currency, personal]
+      - [register, currency, check, personal]
+
+  - must_id: "item:Art.14:rev_reviewer"
+    description: "Reviewer identity (DPO + procurement / data-acquisition lead)"
+    excerpt_keywords:
+      - [reviewer, identity, personal]

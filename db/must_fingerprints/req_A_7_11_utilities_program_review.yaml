@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.7.11:utilities_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.11:utilities_program_review"
+target_control: "A.7.11"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.7.11:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, supporting]
+
+  - must_id: "item:A.7.11:rev_register_update"
+    description: "Changes propagated to the register / procedure"
+    excerpt_keywords:
+      - [register, update, supporting]
+      - [changes, propagated, register, procedure, supporting]
+
+  - must_id: "item:A.7.11:rev_reviewer"
+    description: "Reviewer identity (Facilities + InfoSec + BCP lead)"
+    excerpt_keywords:
+      - [reviewer, identity, supporting]
+
+  - must_id: "item:A.7.11:rev_test_outcomes"
+    description: "Per-utility test outcomes review (UPS/generator tests in period — pass/fail/remediation)"
+    excerpt_keywords:
+      - [test, outcomes, supporting]
+
+  - must_id: "item:A.7.11:rev_vendor_sla"
+    description: "Vendor-SLA review (response times against SLA, breach incidents)"
+    excerpt_keywords:
+      - [vendor, sla, supporting]

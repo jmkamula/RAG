@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.8.32:change_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.32:change_program_review"
+target_control: "A.8.32"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.32:rev_change_incidents"
+    description: "Change-induced incident trending (cross-link to A.5.26 register — change as incident root cause)"
+    excerpt_keywords:
+      - [change, incidents]
+
+  - must_id: "item:A.8.32:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, change]
+
+  - must_id: "item:A.8.32:rev_emergency_ratio"
+    description: "Emergency-change ratio (high ratio signals process bypass)"
+    excerpt_keywords:
+      - [emergency, ratio, change]
+
+  - must_id: "item:A.8.32:rev_findings_update"
+    description: "Findings propagated to procedure / scope"
+    excerpt_keywords:
+      - [findings, update, change]
+      - [findings, propagated, procedure, scope, change]
+
+  - must_id: "item:A.8.32:rev_register_completeness"
+    description: "Register-completeness sample (sample of production changes traced to register)"
+    excerpt_keywords:
+      - [register, completeness, change]
+
+  - must_id: "item:A.8.32:rev_reviewer"
+    description: "Reviewer identity (Change Management lead + Engineering + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, change]

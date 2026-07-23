@@ -1,0 +1,27 @@
+# Per-MUST fingerprint catalog for req:Art.47:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.47:applicable_scope"
+target_control: "Art.47"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.47:scope_entities"
+    description: "Bound entities enumerated (jurisdictions + roles)"
+    excerpt_keywords:
+      - [scope, entities, binding]
+      - [bound, entities, enumerated, binding]
+
+  - must_id: "item:Art.47:scope_extension"
+    description: "New-entity onboarding rule — how a newly-acquired or newly-spun-up entity joins the BCRs (or move..."
+    excerpt_keywords:
+      - [scope, extension, binding]
+
+  - must_id: "item:Art.47:scope_intra_group_flows"
+    description: "Intra-group flows covered (controller-to-controller / controller-to-processor)"
+    excerpt_keywords:
+      - [scope, intra, group, flows, binding]

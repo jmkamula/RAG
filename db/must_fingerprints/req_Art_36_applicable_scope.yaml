@@ -1,0 +1,28 @@
+# Per-MUST fingerprint catalog for req:Art.36:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.36:applicable_scope"
+target_control: "Art.36"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.36:scope_excluded"
+    description: "Out-of-scope processing (residual low/medium risk; DPIA-mitigated to acceptable level)"
+    excerpt_keywords:
+      - [scope, excluded, prior]
+
+  - must_id: "item:Art.36:scope_ms_law"
+    description: "MS law Art.36.5 additional consultation triggers identified per applicable jurisdiction"
+    excerpt_keywords:
+      - [scope, law, prior]
+      - [law, art, additional, consultation]
+
+  - must_id: "item:Art.36:scope_residual_high_risk"
+    description: "Operational interpretation of 'residual high risk' (post-mitigation high likelihood × severity)"
+    excerpt_keywords:
+      - [scope, residual, high, risk, prior]
+      - [operational, interpretation, residual, high, prior]

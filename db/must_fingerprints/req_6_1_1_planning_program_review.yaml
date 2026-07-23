@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:6.1.1:planning_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:6.1.1:planning_program_review"
+target_control: "6.1.1"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:6.1.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, general]
+
+  - must_id: "item:6.1.1:rev_effectiveness"
+    description: "Effectiveness summary across completed actions"
+    excerpt_keywords:
+      - [effectiveness, summary, completed, actions, general]
+
+  - must_id: "item:6.1.1:rev_inputs_currency"
+    description: "Inputs currency check — 4.1 + 4.2 reviewed before this planning cycle"
+    excerpt_keywords:
+      - [inputs, currency, general]
+      - [inputs, currency, check, general]
+
+  - must_id: "item:6.1.1:rev_register_currency"
+    description: "Action register currency check — every row reviewed for status + relevance"
+    excerpt_keywords:
+      - [register, currency, general]
+      - [action, register, currency, check, general]
+
+  - must_id: "item:6.1.1:rev_reviewer"
+    description: "Reviewer identity (ISMS Manager + executive sponsor)"
+    excerpt_keywords:
+      - [reviewer, identity, general]

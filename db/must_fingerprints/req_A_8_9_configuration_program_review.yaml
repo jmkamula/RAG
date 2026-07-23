@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.8.9:configuration_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.9:configuration_program_review"
+target_control: "A.8.9"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.9:rev_baseline_currency"
+    description: "Baseline-vs-vendor-current check (CIS / vendor / NIST version drift)"
+    excerpt_keywords:
+      - [baseline, currency, configuration]
+
+  - must_id: "item:A.8.9:rev_baselines_update"
+    description: "Updated baselines published from findings"
+    excerpt_keywords:
+      - [baselines, update, configuration]
+      - [updated, baselines, published, findings, configuration]
+
+  - must_id: "item:A.8.9:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, configuration]
+
+  - must_id: "item:A.8.9:rev_deviation_inventory"
+    description: "Deviation inventory re-confirmed / retired"
+    excerpt_keywords:
+      - [deviation, inventory, configuration]
+
+  - must_id: "item:A.8.9:rev_drift_effectiveness"
+    description: "Drift-detection effectiveness review (catch rate, MTTR)"
+    excerpt_keywords:
+      - [drift, effectiveness, configuration]
+
+  - must_id: "item:A.8.9:rev_reviewer"
+    description: "Reviewer identity (Infrastructure leads + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, configuration]

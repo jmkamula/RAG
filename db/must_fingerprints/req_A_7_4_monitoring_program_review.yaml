@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.7.4:monitoring_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.4:monitoring_program_review"
+target_control: "A.7.4"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.7.4:rev_coverage_check"
+    description: "Coverage check — blind spots remediated? new areas brought into monitoring scope?"
+    excerpt_keywords:
+      - [coverage, check, physical]
+
+  - must_id: "item:A.7.4:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, physical]
+
+  - must_id: "item:A.7.4:rev_register_update"
+    description: "Changes propagated to the procedure / scope"
+    excerpt_keywords:
+      - [register, update, physical]
+      - [changes, propagated, procedure, scope, physical]
+
+  - must_id: "item:A.7.4:rev_response_sla"
+    description: "Response-SLA analysis (alarm-to-on-site arrival times measured against SLA)"
+    excerpt_keywords:
+      - [response, sla, physical]
+
+  - must_id: "item:A.7.4:rev_reviewer"
+    description: "Reviewer identity (Facilities + SOC + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, physical]

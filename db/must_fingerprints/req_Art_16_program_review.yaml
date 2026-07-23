@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:Art.16:program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.16:program_review"
+target_control: "Art.16"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.16:rev_art19_audit"
+    description: "Art.19 audit — recipient notifications fired (or exceptions documented)"
+    excerpt_keywords:
+      - [art19, audit, right]
+      - [art, audit, right]
+
+  - must_id: "item:Art.16:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, right]
+
+  - must_id: "item:Art.16:rev_reviewer"
+    description: "Reviewer identity (DPO)"
+    excerpt_keywords:
+      - [reviewer, identity, right]
+
+  - must_id: "item:Art.16:rev_sla_compliance"
+    description: "SLA compliance (Art.12.3 one-month)"
+    excerpt_keywords:
+      - [sla, compliance, right]
+
+  - must_id: "item:Art.16:rev_systems_completeness"
+    description: "Systems-completeness check — sampled requests reached every system in scope"
+    excerpt_keywords:
+      - [systems, completeness, right]

@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.8.21:service_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.21:service_program_review"
+target_control: "A.8.21"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.21:rev_a522_link"
+    description: "Cross-link to A.5.22 supplier review outcomes for in-scope vendor services"
+    excerpt_keywords:
+      - [a522, link, network]
+
+  - must_id: "item:A.8.21:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, planned, interval, network]
+
+  - must_id: "item:A.8.21:rev_findings_update"
+    description: "Findings propagated to procedure / register / scope"
+    excerpt_keywords:
+      - [findings, update, network]
+      - [findings, propagated, procedure, register, network]
+
+  - must_id: "item:A.8.21:rev_mechanisms_currency"
+    description: "Security-mechanism currency check (TLS versions / crypto algorithms / authentication strength sti..."
+    excerpt_keywords:
+      - [mechanisms, currency, network]
+
+  - must_id: "item:A.8.21:rev_reviewer"
+    description: "Reviewer identity (Network Engineering + Supplier Management)"
+    excerpt_keywords:
+      - [reviewer, identity, network]
+
+  - must_id: "item:A.8.21:rev_sla_attainment"
+    description: "SLA-attainment trending per service"
+    excerpt_keywords:
+      - [sla, attainment, network]

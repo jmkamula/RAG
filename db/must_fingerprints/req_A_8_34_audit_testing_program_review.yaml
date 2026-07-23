@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.8.34:audit_testing_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.34:audit_testing_program_review"
+target_control: "A.8.34"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.34:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, protection]
+
+  - must_id: "item:A.8.34:rev_evidence_hygiene"
+    description: "Evidence-preservation hygiene check (artefacts retained per chain-of-custody)"
+    excerpt_keywords:
+      - [evidence, hygiene, protection]
+
+  - must_id: "item:A.8.34:rev_findings_update"
+    description: "Findings propagated to policy / scope"
+    excerpt_keywords:
+      - [findings, update, protection]
+      - [findings, propagated, policy, scope, protection]
+
+  - must_id: "item:A.8.34:rev_register_completeness"
+    description: "Register-completeness check (every recent audit engagement in register)"
+    excerpt_keywords:
+      - [register, completeness, protection]
+
+  - must_id: "item:A.8.34:rev_reviewer"
+    description: "Reviewer identity (InfoSec lead + Internal Audit lead)"
+    excerpt_keywords:
+      - [reviewer, identity, protection]
+
+  - must_id: "item:A.8.34:rev_rollback_compliance"
+    description: "Rollback-discipline compliance (no untracked changes introduced during testing)"
+    excerpt_keywords:
+      - [rollback, compliance, protection]

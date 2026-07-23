@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.8.3:access_restriction_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.3:access_restriction_program_review"
+target_control: "A.8.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.3:rev_coverage_check"
+    description: "Coverage check — every in-scope system has an up-to-date matrix in the register"
+    excerpt_keywords:
+      - [coverage, check, access]
+
+  - must_id: "item:A.8.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, access]
+
+  - must_id: "item:A.8.3:rev_recert_compliance"
+    description: "Recertification compliance check — every matrix recertified within cadence"
+    excerpt_keywords:
+      - [recert, compliance, access]
+      - [recertification, compliance, check, access]
+
+  - must_id: "item:A.8.3:rev_register_update"
+    description: "Findings propagated to the matrix register / procedure"
+    excerpt_keywords:
+      - [register, update, access]
+      - [findings, propagated, matrix, register, access]
+
+  - must_id: "item:A.8.3:rev_reviewer"
+    description: "Reviewer identity (IT lead + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [reviewer, identity, access]

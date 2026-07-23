@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:Art.48:foreign_authority_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.48:foreign_authority_program_review"
+target_control: "Art.48"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.48:rev_agreements_currency"
+    description: "Agreements currency — international agreements catalogue refreshed"
+    excerpt_keywords:
+      - [agreements, currency, transfers]
+
+  - must_id: "item:Art.48:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, transfers]
+
+  - must_id: "item:Art.48:rev_register_currency"
+    description: "Register currency — every actual request handled per procedure"
+    excerpt_keywords:
+      - [register, currency, transfers]
+
+  - must_id: "item:Art.48:rev_reviewer"
+    description: "Reviewer identity (DPO + legal counsel + executive sponsor)"
+    excerpt_keywords:
+      - [reviewer, identity, transfers]
+
+  - must_id: "item:Art.48:rev_tabletop"
+    description: "Tabletop exercise — procedure tested at least annually against a hypothetical foreign authority r..."
+    excerpt_keywords:
+      - [tabletop, exercise, transfers]

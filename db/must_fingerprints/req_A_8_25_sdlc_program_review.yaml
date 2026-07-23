@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.8.25:sdlc_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.25:sdlc_program_review"
+target_control: "A.8.25"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.25:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, planned, interval, secure]
+
+  - must_id: "item:A.8.25:rev_exception_inventory"
+    description: "Exception inventory re-confirmed / retired"
+    excerpt_keywords:
+      - [exception, inventory, secure]
+
+  - must_id: "item:A.8.25:rev_findings_update"
+    description: "Findings propagated to policy / scope"
+    excerpt_keywords:
+      - [findings, update, secure]
+      - [findings, propagated, policy, scope, secure]
+
+  - must_id: "item:A.8.25:rev_gate_attainment"
+    description: "Gate-attainment trending per project class"
+    excerpt_keywords:
+      - [gate, attainment, secure]
+
+  - must_id: "item:A.8.25:rev_lifecycle_effectiveness"
+    description: "Lifecycle-effectiveness review (incidents that traced to SDLC gaps)"
+    excerpt_keywords:
+      - [lifecycle, effectiveness, secure]
+
+  - must_id: "item:A.8.25:rev_reviewer"
+    description: "Reviewer identity (Engineering leads + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, secure]

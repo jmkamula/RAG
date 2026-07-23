@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.7.10:media_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.10:media_program_review"
+target_control: "A.7.10"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.7.10:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, storage]
+
+  - must_id: "item:A.7.10:rev_inventory_audit"
+    description: "Inventory audit — sample-based confirmation of media at stated location"
+    excerpt_keywords:
+      - [inventory, audit, storage]
+
+  - must_id: "item:A.7.10:rev_lost_count"
+    description: "Lost-media count for period (every loss has an incident link)"
+    excerpt_keywords:
+      - [lost, count, storage]
+
+  - must_id: "item:A.7.10:rev_register_update"
+    description: "Changes propagated to the register / procedure"
+    excerpt_keywords:
+      - [register, update, storage]
+      - [changes, propagated, register, procedure, storage]
+
+  - must_id: "item:A.7.10:rev_reviewer"
+    description: "Reviewer identity (IT + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, storage]

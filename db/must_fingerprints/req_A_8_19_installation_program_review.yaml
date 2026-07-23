@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.8.19:installation_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.19:installation_program_review"
+target_control: "A.8.19"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.19:rev_allowlist_effectiveness"
+    description: "Allowlist-enforcement effectiveness review (unauthorised-install attempt rate)"
+    excerpt_keywords:
+      - [allowlist, effectiveness, installation]
+
+  - must_id: "item:A.8.19:rev_approved_list_currency"
+    description: "Approved-list currency check (no abandoned tools; vulnerable versions retired)"
+    excerpt_keywords:
+      - [approved, list, currency, installation]
+
+  - must_id: "item:A.8.19:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, installation]
+
+  - must_id: "item:A.8.19:rev_findings_update"
+    description: "Findings propagated to procedure / approved list"
+    excerpt_keywords:
+      - [findings, update, installation]
+      - [findings, propagated, procedure, approved, installation]
+
+  - must_id: "item:A.8.19:rev_reviewer"
+    description: "Reviewer identity (Infrastructure + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, installation]

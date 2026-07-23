@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.8.11:masking_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.11:masking_program_review"
+target_control: "A.8.11"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.11:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, masking]
+
+  - must_id: "item:A.8.11:rev_exception_inventory"
+    description: "Exception inventory re-confirmed / retired"
+    excerpt_keywords:
+      - [exception, inventory, masking]
+
+  - must_id: "item:A.8.11:rev_procedure_update"
+    description: "Findings propagated to procedure / approved-techniques list"
+    excerpt_keywords:
+      - [procedure, update, masking]
+      - [findings, propagated, procedure, approved, masking]
+
+  - must_id: "item:A.8.11:rev_register_currency"
+    description: "Register currency check (refresh timestamps within tolerance)"
+    excerpt_keywords:
+      - [register, currency, masking]
+      - [register, currency, check, masking]
+
+  - must_id: "item:A.8.11:rev_reviewer"
+    description: "Reviewer identity (DPO + Data Engineering + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, masking]

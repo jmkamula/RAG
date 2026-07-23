@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:7.2:competence_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:7.2:competence_program_review"
+target_control: "7.2"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:7.2:rev_currency"
+    description: "Record currency check — turnover, role changes, new hires reflected"
+    excerpt_keywords:
+      - [record, currency, check, competence]
+
+  - must_id: "item:7.2:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, competence]
+
+  - must_id: "item:7.2:rev_effectiveness"
+    description: "Effectiveness sample — completed actions actually changed observed competence"
+    excerpt_keywords:
+      - [effectiveness, sample, competence]
+
+  - must_id: "item:7.2:rev_gap_closure"
+    description: "Gap-closure progress check — open gaps either closed or on a remediation plan"
+    excerpt_keywords:
+      - [gap, closure, competence]
+
+  - must_id: "item:7.2:rev_reviewer"
+    description: "Reviewer identity (HR partner + ISMS Manager + relevant function heads)"
+    excerpt_keywords:
+      - [reviewer, identity, competence]

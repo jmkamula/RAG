@@ -1,0 +1,38 @@
+# Per-MUST fingerprint catalog for req:A.7.7:cd_cs_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.7.7:cd_cs_program_review"
+target_control: "A.7.7"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.7.7:rev_audit_trend"
+    description: "Audit-finding trend (improving / worsening — drives policy/awareness adjustments)"
+    excerpt_keywords:
+      - [audit, trend, clear]
+
+  - must_id: "item:A.7.7:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, clear]
+
+  - must_id: "item:A.7.7:rev_policy_drift"
+    description: "Policy currency check (referenced policies — A.5.12 classification, A.6.7 remote-work — still ali..."
+    excerpt_keywords:
+      - [policy, drift, clear]
+      - [policy, currency, check, clear]
+
+  - must_id: "item:A.7.7:rev_register_update"
+    description: "Changes propagated to the policy"
+    excerpt_keywords:
+      - [register, update, clear]
+      - [changes, propagated, policy, clear]
+
+  - must_id: "item:A.7.7:rev_reviewer"
+    description: "Reviewer identity (Facilities + InfoSec + HR partner)"
+    excerpt_keywords:
+      - [reviewer, identity, clear]

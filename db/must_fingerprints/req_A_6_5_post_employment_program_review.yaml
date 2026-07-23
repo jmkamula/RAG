@@ -1,9 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.6.5:post_employment_program_review
-# Auto-generated skeleton — review and tighten before commit.
 #
-# Used by rag/intake/leaf_driven_scan.py to back-bind existing
-# approved findings to specific MUSTs they semantically satisfy
-# but weren't tagged with at extraction time.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:A.6.5:post_employment_program_review"
@@ -11,75 +10,35 @@ target_control: "A.6.5"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.6.5:rev_register_update"
-    description: "Changes propagated to the procedure / scope with reference to this review"
-    excerpt_keywords:
-      - [update]
-      - [changes]
-      - [changes, propagated]
-      - [changes, propagated, scope]
-      - [propagated]
-      - [propagated, scope]
-      - [propagated, scope, reference]
-      - [scope, reference]
-
   - must_id: "item:A.6.5:rev_breach_history"
-    description: "Breach history review — any post-employment breaches occurred? handled per enforcement approach? lessons captured?"
+    description: "Breach history review — any post-employment breaches occurred? handled per enforcement approach? ..."
     excerpt_keywords:
-      - [breach, history]
-      - [breach]
-      - [history]
-      - [breach, history, review]
-      - [history, review]
-      - [history, review, post]
-      - [review, post]
-      - [review, post, employment]
-
-  - must_id: "item:A.6.5:rev_legal_drift"
-    description: "Employment-law drift check per jurisdiction (legal counsel input on enforceability changes)"
-    excerpt_keywords:
-      - [legal, drift]
-      - [legal]
-      - [drift]
-      - [employment]
-      - [employment, law]
-      - [employment, law, drift]
-      - [law]
-      - [law, drift]
+      - [breach, history, responsibilities]
+      - [breach, history, review, responsibilities]
 
   - must_id: "item:A.6.5:rev_briefing_coverage"
-    description: "Briefing coverage check — every leaver in the period received and acknowledged a briefing (the register's completeness gate)"
+    description: "Briefing coverage check — every leaver in the period received and acknowledged a briefing (the re..."
     excerpt_keywords:
-      - [briefing, coverage]
-      - [briefing]
-      - [coverage]
-      - [briefing, coverage, check]
-      - [coverage, check]
-      - [coverage, check, every]
-      - [check]
-      - [check, every]
-
-  - must_id: "item:A.6.5:rev_reviewer"
-    description: "Reviewer identity (HR lead + InfoSec lead + Legal counsel)"
-    excerpt_keywords:
-      - [reviewer, identity]
-      - [reviewer, identity, lead]
-      - [identity, lead]
-      - [identity, lead, infosec]
-      - [lead]
-      - [lead, infosec]
-      - [lead, infosec, lead]
-      - [infosec]
+      - [briefing, coverage, responsibilities]
+      - [briefing, coverage, check, responsibilities]
 
   - must_id: "item:A.6.5:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date]
-      - [review, date, within]
-      - [date, within]
-      - [date, within, planned]
-      - [within]
-      - [within, planned]
-      - [within, planned, interval]
-      - [planned]
+      - [review, date, planned, interval, responsibilities]
 
+  - must_id: "item:A.6.5:rev_legal_drift"
+    description: "Employment-law drift check per jurisdiction (legal counsel input on enforceability changes)"
+    excerpt_keywords:
+      - [legal, drift, responsibilities]
+
+  - must_id: "item:A.6.5:rev_register_update"
+    description: "Changes propagated to the procedure / scope with reference to this review"
+    excerpt_keywords:
+      - [register, update, responsibilities]
+      - [changes, propagated, procedure, scope, responsibilities]
+
+  - must_id: "item:A.6.5:rev_reviewer"
+    description: "Reviewer identity (HR lead + InfoSec lead + Legal counsel)"
+    excerpt_keywords:
+      - [reviewer, identity, responsibilities]

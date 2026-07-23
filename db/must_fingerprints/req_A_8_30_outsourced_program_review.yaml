@@ -1,0 +1,43 @@
+# Per-MUST fingerprint catalog for req:A.8.30:outsourced_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.30:outsourced_program_review"
+target_control: "A.8.30"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.30:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, outsourced]
+
+  - must_id: "item:A.8.30:rev_findings_update"
+    description: "Findings propagated to procedure / contract terms"
+    excerpt_keywords:
+      - [findings, update, outsourced]
+      - [findings, propagated, procedure, contract, outsourced]
+
+  - must_id: "item:A.8.30:rev_register_currency"
+    description: "Engagement-register currency check"
+    excerpt_keywords:
+      - [register, currency, outsourced]
+
+  - must_id: "item:A.8.30:rev_reviewer"
+    description: "Reviewer identity (Engineering + Supplier Management + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, outsourced]
+
+  - must_id: "item:A.8.30:rev_test_coverage"
+    description: "Delivered-code-test coverage per engagement (was every release tested before merge to production)"
+    excerpt_keywords:
+      - [test, coverage, outsourced]
+
+  - must_id: "item:A.8.30:rev_vendor_incidents"
+    description: "Vendor incident-pattern review (cross-link to A.5.22 supplier review)"
+    excerpt_keywords:
+      - [vendor, incidents, outsourced]
+      - [vendor, incident, outsourced]

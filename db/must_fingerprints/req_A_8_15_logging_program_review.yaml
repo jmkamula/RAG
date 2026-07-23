@@ -1,0 +1,43 @@
+# Per-MUST fingerprint catalog for req:A.8.15:logging_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.15:logging_program_review"
+target_control: "A.8.15"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.15:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, planned, interval, logging]
+
+  - must_id: "item:A.8.15:rev_findings_update"
+    description: "Findings propagated to procedure / source register / scope"
+    excerpt_keywords:
+      - [findings, update, logging]
+      - [findings, propagated, procedure, source, logging]
+
+  - must_id: "item:A.8.15:rev_integrity_check"
+    description: "Integrity-verification spot-check (hash chain or signature validates against retained logs)"
+    excerpt_keywords:
+      - [integrity, check, logging]
+
+  - must_id: "item:A.8.15:rev_retention_compliance"
+    description: "Retention compliance check (no premature deletion; no over-retention of personal data)"
+    excerpt_keywords:
+      - [retention, compliance, logging]
+      - [retention, compliance, check, logging]
+
+  - must_id: "item:A.8.15:rev_reviewer"
+    description: "Reviewer identity (Security Operations + Infrastructure)"
+    excerpt_keywords:
+      - [reviewer, identity, logging]
+
+  - must_id: "item:A.8.15:rev_silent_sources"
+    description: "Silent-source detection — sources missing recent events triaged"
+    excerpt_keywords:
+      - [silent, sources, logging]

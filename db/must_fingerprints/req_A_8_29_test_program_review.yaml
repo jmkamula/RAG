@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.8.29:test_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.29:test_program_review"
+target_control: "A.8.29"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.29:rev_coverage_gaps"
+    description: "Test-coverage gap check vs applicable scope"
+    excerpt_keywords:
+      - [coverage, gaps, testing]
+
+  - must_id: "item:A.8.29:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, planned, interval, testing]
+
+  - must_id: "item:A.8.29:rev_findings_update"
+    description: "Findings propagated to procedure / scope / tooling"
+    excerpt_keywords:
+      - [findings, update, testing]
+      - [findings, propagated, procedure, scope, testing]
+
+  - must_id: "item:A.8.29:rev_pattern_trending"
+    description: "Finding-pattern trending (recurring patterns → SDLC / training / tooling action)"
+    excerpt_keywords:
+      - [pattern, trending, testing]
+
+  - must_id: "item:A.8.29:rev_pen_test_feedback"
+    description: "Pen-test outcomes feeding back into procedure / scope / training"
+    excerpt_keywords:
+      - [pen, test, feedback, testing]
+
+  - must_id: "item:A.8.29:rev_reviewer"
+    description: "Reviewer identity (Security Engineering + Engineering leads)"
+    excerpt_keywords:
+      - [reviewer, identity, testing]

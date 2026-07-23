@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:Art.38:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.38:applicable_scope"
+target_control: "Art.38"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.38:scope_coi_matrix"
+    description: "COI matrix — which other roles DPO cannot also hold (CISO / security architect / product owner of..."
+    excerpt_keywords:
+      - [scope, coi, matrix, position]
+      - [coi, matrix, position]
+
+  - must_id: "item:Art.38:scope_forums"
+    description: "Forums DPO is invited to (board, exec committee, change-management, incident response, vendor onb..."
+    excerpt_keywords:
+      - [scope, forums, position]
+      - [forums, dpo, invited, position]
+
+  - must_id: "item:Art.38:scope_resource_envelope"
+    description: "Resource envelope (budget category + escalation threshold for additional spend)"
+    excerpt_keywords:
+      - [scope, resource, envelope, position]
+      - [resource, envelope, position]

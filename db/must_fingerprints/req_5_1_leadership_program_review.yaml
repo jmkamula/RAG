@@ -1,0 +1,39 @@
+# Per-MUST fingerprint catalog for req:5.1:leadership_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:5.1:leadership_program_review"
+target_control: "5.1"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:5.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, leadership]
+
+  - must_id: "item:5.1:rev_directive_currency"
+    description: "Directive currency check — signed by current top management"
+    excerpt_keywords:
+      - [directive, currency, leadership]
+      - [directive, currency, check, leadership]
+
+  - must_id: "item:5.1:rev_framework_adherence"
+    description: "Framework adherence check — board cadence happened, sponsor activities completed"
+    excerpt_keywords:
+      - [framework, adherence, leadership]
+      - [framework, adherence, check, leadership]
+
+  - must_id: "item:5.1:rev_reaffirmation_completeness"
+    description: "Reaffirmation record completeness — required reaffirmations all present"
+    excerpt_keywords:
+      - [reaffirmation, completeness, leadership]
+      - [reaffirmation, record, completeness, leadership]
+
+  - must_id: "item:5.1:rev_reviewer"
+    description: "Reviewer identity (ISMS Manager + non-executive director if available)"
+    excerpt_keywords:
+      - [reviewer, identity, leadership]

@@ -1,0 +1,42 @@
+# Per-MUST fingerprint catalog for req:A.8.22:segregation_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.22:segregation_program_review"
+target_control: "A.8.22"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.22:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, segregation]
+
+  - must_id: "item:A.8.22:rev_enforcement_coverage"
+    description: "Sample-based enforcement-coverage verification (configured rules match register)"
+    excerpt_keywords:
+      - [enforcement, coverage, segregation]
+
+  - must_id: "item:A.8.22:rev_exception_inventory"
+    description: "Exception inventory re-confirmed / retired"
+    excerpt_keywords:
+      - [exception, inventory, segregation]
+
+  - must_id: "item:A.8.22:rev_findings_update"
+    description: "Findings propagated to procedure / register"
+    excerpt_keywords:
+      - [findings, update, segregation]
+      - [findings, propagated, procedure, register, segregation]
+
+  - must_id: "item:A.8.22:rev_register_completeness"
+    description: "Register-completeness check (new zones registered)"
+    excerpt_keywords:
+      - [register, completeness, segregation]
+
+  - must_id: "item:A.8.22:rev_reviewer"
+    description: "Reviewer identity (Network Engineering + InfoSec + Application Engineering leads)"
+    excerpt_keywords:
+      - [reviewer, identity, segregation]

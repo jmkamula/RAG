@@ -247,19 +247,23 @@ def _yaml_content(
     return "\n".join(lines).rstrip() + "\n"
 
 
-def fetch_27701_leaves(driver) -> dict[str, dict]:
+def fetch_leaves(driver, standard_id: str) -> dict[str, dict]:
     """Return {leaf_id: {control_ref, control_title, must_items:
-    [(must_id, text)...]}}.
+    [(must_id, text)...]}} for the requested standard.
 
     Ship 17'.b — fetches the parent RequirementNode.title alongside
     the ChecklistItem rows. Title feeds `_topic_anchor_tokens`
-    which is injected into every keyword set (see design memo
-    [[ship-17-prime-a-regeneration-design-2026-07-23]])."""
+    which is injected into every keyword set.
+
+    Ship 17'.c — parameterised by `standard_id` so the same
+    regenerator can service ISO 27701 (original scope) and
+    ISO 27001 (Ship 17'.c target)."""
     with driver.session() as s:
-        rows = s.run("""
-            MATCH (rn:RequirementNode {standard_id: 'ISO27701:2019'})
+        rows = s.run(
+            """
+            MATCH (rn:RequirementNode {standard_id: $sid})
             MATCH (er:EvidenceRequirement {control_ref: rn.ref,
-                                            standard_id: 'ISO27701:2019'})
+                                            standard_id: $sid})
             MATCH (er)-[:MUST_CONTAIN]->(item:ChecklistItem)
             RETURN er.id           AS leaf_id,
                    er.control_ref  AS control_ref,
@@ -267,7 +271,9 @@ def fetch_27701_leaves(driver) -> dict[str, dict]:
                    item.id         AS must_id,
                    item.text       AS must_text
             ORDER BY er.id, item.id
-        """).data()
+            """,
+            sid=standard_id,
+        ).data()
 
     out: dict[str, dict] = {}
     for r in rows:
@@ -279,6 +285,11 @@ def fetch_27701_leaves(driver) -> dict[str, dict]:
         })
         out[lid]["must_items"].append((r["must_id"], r["must_text"]))
     return out
+
+
+# Backward-compat alias — external callers use this name today.
+def fetch_27701_leaves(driver) -> dict[str, dict]:
+    return fetch_leaves(driver, "ISO27701:2019")
 
 
 # Ship 17'.b — regenerator discipline. Only overwrite files whose
@@ -309,6 +320,10 @@ def main() -> int:
                     help="Regenerate only leaves whose slug matches "
                          "this substring (Ship 17'.b — e.g. "
                          "'program_review' or 'applicable_scope').")
+    ap.add_argument("--standard", default="ISO27701:2019",
+                    help="Standard id to regenerate (Ship 17'.c — "
+                         "e.g. 'ISO27001:2022'). Default: ISO27701:2019 "
+                         "for backward-compat with Ship 17'.b.")
     ap.add_argument("--force", action="store_true",
                     help="Overwrite hand-authored files too. Default: "
                          "only touch files marked '# Auto-generated'. "
@@ -322,7 +337,7 @@ def main() -> int:
     )
 
     try:
-        leaves = fetch_27701_leaves(driver)
+        leaves = fetch_leaves(driver, args.standard)
     finally:
         driver.close()
 
@@ -376,7 +391,7 @@ def main() -> int:
         yaml_content = _yaml_content(
             leaf_id           = leaf_id,
             target_control    = info["control_ref"] or "",
-            target_standard   = "ISO27701:2019",
+            target_standard   = args.standard,
             must_fingerprints = fingerprints,
         )
         if args.dry_run:

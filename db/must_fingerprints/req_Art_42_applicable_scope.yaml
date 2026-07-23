@@ -1,0 +1,29 @@
+# Per-MUST fingerprint catalog for req:Art.42:applicable_scope
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.42:applicable_scope"
+target_control: "Art.42"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.42:scope_business_case"
+    description: "Business case (customer requirement / Art.46.2.f transfer safeguard / market differentiation)"
+    excerpt_keywords:
+      - [scope, business, case, certification]
+      - [business, case, certification]
+
+  - must_id: "item:Art.42:scope_schemes_available"
+    description: "Available approved schemes enumerated"
+    excerpt_keywords:
+      - [scope, schemes, available, certification]
+      - [available, approved, schemes, enumerated, certification]
+
+  - must_id: "item:Art.42:scope_target_processing"
+    description: "Target processing activities for certification"
+    excerpt_keywords:
+      - [scope, target, processing, certification]
+      - [target, processing, activities, certification]

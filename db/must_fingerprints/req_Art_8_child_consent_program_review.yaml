@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:Art.8:child_consent_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:Art.8:child_consent_program_review"
+target_control: "Art.8"
+target_standard: "GDPR:2016/679"
+
+must_fingerprints:
+  - must_id: "item:Art.8:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, conditions]
+
+  - must_id: "item:Art.8:rev_register_coverage"
+    description: "Register coverage — every in-scope service has consent rows flowing in"
+    excerpt_keywords:
+      - [register, coverage, conditions]
+
+  - must_id: "item:Art.8:rev_reviewer"
+    description: "Reviewer identity (DPO + product lead)"
+    excerpt_keywords:
+      - [reviewer, identity, conditions]
+
+  - must_id: "item:Art.8:rev_threshold_currency"
+    description: "Member State threshold currency — any MS that has changed its age threshold reflected"
+    excerpt_keywords:
+      - [threshold, currency, conditions]
+      - [member, state, threshold, currency, conditions]
+
+  - must_id: "item:Art.8:rev_verification_quality"
+    description: "Age-verification sample audit — claimed-age values look plausible vs other signals"
+    excerpt_keywords:
+      - [verification, quality, conditions]

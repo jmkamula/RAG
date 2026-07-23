@@ -1,0 +1,37 @@
+# Per-MUST fingerprint catalog for req:A.8.12:dlp_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:A.8.12:dlp_program_review"
+target_control: "A.8.12"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:A.8.12:rev_baseline_update"
+    description: "Baseline / ruleset / procedure updates published from findings"
+    excerpt_keywords:
+      - [baseline, update, leakage]
+      - [baseline, ruleset, procedure, updates, leakage]
+
+  - must_id: "item:A.8.12:rev_coverage_gaps"
+    description: "Channel-coverage gap check (new channel / new platform missing)"
+    excerpt_keywords:
+      - [coverage, gaps, leakage]
+
+  - must_id: "item:A.8.12:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, planned, interval, leakage]
+
+  - must_id: "item:A.8.12:rev_exception_inventory"
+    description: "Exception inventory re-confirmed / retired"
+    excerpt_keywords:
+      - [exception, inventory, leakage]
+
+  - must_id: "item:A.8.12:rev_reviewer"
+    description: "Reviewer identity (DLP lead + Data Protection + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, leakage]

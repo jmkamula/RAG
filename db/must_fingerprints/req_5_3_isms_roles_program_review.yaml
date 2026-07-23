@@ -1,0 +1,36 @@
+# Per-MUST fingerprint catalog for req:5.3:isms_roles_program_review
+#
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
+
+schema_version: 1
+target_evidence_requirement: "req:5.3:isms_roles_program_review"
+target_control: "5.3"
+target_standard: "ISO27001:2022"
+
+must_fingerprints:
+  - must_id: "item:5.3:rev_a52_alignment"
+    description: "A.5.2 cross-check — operational role definitions still consistent with management-system roles"
+    excerpt_keywords:
+      - [a52, alignment, organizational]
+
+  - must_id: "item:5.3:rev_change_log"
+    description: "Cross-check against change records — every org-chart change touching ISMS roles is logged"
+    excerpt_keywords:
+      - [change, log, organizational]
+
+  - must_id: "item:5.3:rev_currency"
+    description: "Matrix currency check — every role still has an active holder"
+    excerpt_keywords:
+      - [matrix, currency, check, organizational]
+
+  - must_id: "item:5.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planned, interval, organizational]
+
+  - must_id: "item:5.3:rev_reviewer"
+    description: "Reviewer identity (ISMS Manager + HR partner)"
+    excerpt_keywords:
+      - [reviewer, identity, organizational]
