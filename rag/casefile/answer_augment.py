@@ -164,6 +164,156 @@ def build_intro_only_structured(
     )
 
 
+# ── Ship 20'.c — helpers for Family B/C (intro + related cards) ─────
+
+def _reindex_posture_by_ref(posture_by_node_id: dict) -> dict:
+    """Convert `{node_id: {finding, control_ref, ...}}` (as passed to
+    the graph node) into `{control_ref: rec}` for CaseFileShim.
+
+    Last ref wins on collision (matches CaseFile.posture_by_ref)."""
+    from rag.id_types import ref_of
+    out: dict = {}
+    for nid, rec in (posture_by_node_id or {}).items():
+        ref = (rec or {}).get("control_ref") or ref_of(nid)
+        if ref:
+            out[ref] = rec
+    return out
+
+
+def fetch_control_metadata(refs) -> dict:
+    """Return `{ref: {"title": str, "standard_id": str}}` for the given
+    refs by querying Neo4j `RequirementNode`. Fails silently → returns
+    partial or empty dict.
+
+    Used by short-circuit paths to populate title + standard_id on
+    RelatedCard when the shim has no resolver-provided nodes.
+    """
+    if not refs:
+        return {}
+    try:
+        from rag.posture.advisory import _get_neo_driver
+        driver = _get_neo_driver()
+        if driver is None:
+            return {}
+        wanted = [r for r in refs if r]
+        if not wanted:
+            return {}
+        with driver.session() as session:
+            rows = session.run(
+                """
+                MATCH (rn:RequirementNode)
+                WHERE rn.ref IN $refs
+                RETURN rn.ref          AS ref,
+                       rn.title        AS title,
+                       rn.standard_id  AS standard_id
+                """,
+                refs=wanted,
+            ).data()
+        out: dict = {}
+        for row in rows:
+            ref = row.get("ref")
+            if not ref or ref in out:
+                continue
+            out[ref] = {
+                "title":       row.get("title") or "",
+                "standard_id": row.get("standard_id") or "",
+            }
+        return out
+    except Exception as e:
+        _LOG.debug("fetch_control_metadata failed: %s", e)
+        return {}
+
+
+def build_short_circuit_structured(
+    intro_text: str,
+    *,
+    primary_ref: str = None,
+    extra_refs: list = None,
+    tenant = None,
+    posture_by_node_id: dict = None,
+    pg_conn = None,
+    tenant_id: str = "",
+) -> StructuredAnswer:
+    """Family B/C helper — intro + related cards for short-circuits.
+
+    Union of `primary_ref` + `extra_refs` becomes the set of refs
+    that get RelatedCard entries. For each ref:
+      - Look up standard_id + title from Neo4j (batched, one call)
+      - Read posture from the reindexed posture dict
+      - Build role/verdict/relation via CaseFileShim + build_related_cards
+      - Fetch per-leaf evidence_summary / still_needed / leaves
+        via advisory (same path as LLM-path augment)
+
+    intro_text is passed through unchanged as intro.text (short-
+    circuits already have their own composed prose).
+    """
+    all_refs: list = []
+    seen: set = set()
+    for r in ([primary_ref] if primary_ref else []) + list(extra_refs or []):
+        if r and r not in seen:
+            seen.add(r)
+            all_refs.append(r)
+
+    node_lookup = fetch_control_metadata(all_refs) if all_refs else {}
+
+    posture_by_ref = _reindex_posture_by_ref(posture_by_node_id or {})
+    shim = CaseFileShim(
+        tenant         = tenant,
+        posture_by_ref = posture_by_ref,
+        node_lookup    = node_lookup,
+    )
+
+    # Minimal structured skeleton — LLM path passes StructuredAnswer
+    # with intro + actions[]; short-circuits pass an intro-only skeleton
+    # and let build_related_cards() populate related[] from extra_refs.
+    skeleton = StructuredAnswer(
+        intro   = IntroCard(text=intro_text or "", primary_ref=primary_ref),
+        actions = [],
+        related = [],
+    )
+
+    # Open a short-lived pg connection for advisory data (evidence_summary
+    # / still_needed / leaves) when the caller didn't pass one. Mirrors
+    # the LLM-path augment flow. Best-effort — augment runs with
+    # pg_conn=None on connect failure.
+    _own_conn = None
+    if pg_conn is None and tenant_id and all_refs:
+        try:
+            import os as _os, psycopg2 as _pg2
+            _own_conn = _pg2.connect(
+                host     = _os.getenv("PGHOST",     "127.0.0.1"),
+                dbname   = _os.getenv("PGDATABASE", "arioncomply_compliance"),
+                user     = _os.getenv("PGUSER",     "arioncomply_app"),
+                password = _os.getenv("PGPASSWORD", ""),
+            )
+            with _own_conn.cursor() as _cur:
+                _cur.execute(
+                    "SELECT set_config('app.tenant_id', %s, TRUE)",
+                    (tenant_id,),
+                )
+            pg_conn = _own_conn
+        except Exception as _ce:
+            _LOG.debug(
+                "short-circuit augment pg connect failed (evidence detail skipped): %s",
+                _ce,
+            )
+
+    try:
+        related = build_related_cards(
+            shim,
+            skeleton,
+            pg_conn    = pg_conn,
+            tenant_id  = tenant_id,
+            extra_refs = all_refs,
+        )
+        skeleton.related = related
+    finally:
+        if _own_conn is not None:
+            try: _own_conn.close()
+            except Exception: pass
+    return skeleton
+
+
 _LOG = logging.getLogger("rag.casefile.answer_augment")
 
 # Ref pattern matches: A.5.15 / A.7.2.6 / Art.32 / Art.32.1.b / 9.2 / 10.1

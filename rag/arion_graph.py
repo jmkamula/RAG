@@ -2244,15 +2244,25 @@ def make_retrieve_node(
                 # acknowledged"). Skip templates_block + advisory
                 # appendix — the tenant just told us the gap is OK; no
                 # need to immediately push them a template.
+                # Ship 20'.c — Family B intro + 1 related card.
+                from rag.casefile.answer_augment import build_short_circuit_structured
+                _tid_ack = str(getattr(tenant, "tenant_id", "") or "")
                 return build_answer_envelope(
-                    state            = state,
-                    answer_text      = _ack_answer,
-                    cited_refs       = [_ack_intent.control_ref],
-                    answer_source    = "postgres",
-                    question_type    = "posture_check",
-                    last_entity      = _control_entity(_ack_intent.control_ref),
-                    attach_templates = False,
-                    attach_advisory  = False,
+                    state             = state,
+                    answer_text       = _ack_answer,
+                    cited_refs        = [_ack_intent.control_ref],
+                    answer_source     = "postgres",
+                    question_type     = "posture_check",
+                    last_entity       = _control_entity(_ack_intent.control_ref),
+                    attach_templates  = False,
+                    attach_advisory   = False,
+                    answer_structured = build_short_circuit_structured(
+                        _ack_answer,
+                        primary_ref        = _ack_intent.control_ref,
+                        tenant             = tenant,
+                        posture_by_node_id = posture,
+                        tenant_id          = _tid_ack,
+                    ).model_dump(),
                 )
         except Exception as _ack_exc:
             (get_logger() or _NullLogger()).warning("acknowledge short-circuit failed: %s", _ack_exc)
@@ -2501,15 +2511,30 @@ def make_retrieve_node(
                 composed = polish_short_circuit_answer(
                     query=state["query"], deterministic_answer=_ci_ans, llm=llm,
                 )
+                # Ship 20'.c — Family B intro-only when no ref extracted,
+                # intro + 1 related card when we have one.
+                if _ci_ref:
+                    from rag.casefile.answer_augment import build_short_circuit_structured
+                    _struct = build_short_circuit_structured(
+                        composed,
+                        primary_ref        = _ci_ref,
+                        tenant             = tenant,
+                        posture_by_node_id = posture,
+                        tenant_id          = _tid,
+                    ).model_dump()
+                else:
+                    from rag.casefile.answer_augment import build_intro_only_structured
+                    _struct = build_intro_only_structured(composed).model_dump()
                 return build_answer_envelope(
-                    state            = state,
-                    answer_text      = composed,
-                    cited_refs       = [_ci_ref] if _ci_ref else [],
-                    answer_source    = "postgres+llm",
-                    question_type    = "posture_check",
-                    last_entity      = _control_entity(_ci_ref) if _ci_ref else None,
-                    attach_templates = False,
-                    attach_advisory  = False,
+                    state             = state,
+                    answer_text       = composed,
+                    cited_refs        = [_ci_ref] if _ci_ref else [],
+                    answer_source     = "postgres+llm",
+                    question_type     = "posture_check",
+                    last_entity       = _control_entity(_ci_ref) if _ci_ref else None,
+                    attach_templates  = False,
+                    attach_advisory   = False,
+                    answer_structured = _struct,
                 )
 
         if _is_timeline_query(state["query"]):
@@ -2528,15 +2553,24 @@ def make_retrieve_node(
                     )
                     # Timeline query is a history report ("show me how
                     # A.5.18 evolved"). Skip templates/advisory.
+                    # Ship 20'.c — Family B intro + 1 related card.
+                    from rag.casefile.answer_augment import build_short_circuit_structured
                     return build_answer_envelope(
-                        state            = state,
-                        answer_text      = composed,
-                        cited_refs       = [_ref],
-                        answer_source    = "postgres+llm",
-                        question_type    = "posture_check",
-                        last_entity      = _control_entity(_ref),
-                        attach_templates = False,
-                        attach_advisory  = False,
+                        state             = state,
+                        answer_text       = composed,
+                        cited_refs        = [_ref],
+                        answer_source     = "postgres+llm",
+                        question_type     = "posture_check",
+                        last_entity       = _control_entity(_ref),
+                        attach_templates  = False,
+                        attach_advisory   = False,
+                        answer_structured = build_short_circuit_structured(
+                            composed,
+                            primary_ref        = _ref,
+                            tenant             = tenant,
+                            posture_by_node_id = posture,
+                            tenant_id          = str(getattr(tenant, "tenant_id", "") or ""),
+                        ).model_dump(),
                     )
 
         # ── Postgres short-circuit for upload status questions ─────────────
