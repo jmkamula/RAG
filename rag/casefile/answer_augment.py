@@ -28,6 +28,142 @@ from rag.casefile.answer_schema import (
 )
 
 
+# ── Ship 20'.b — CaseFileShim for short-circuit paths ───────────────
+#
+# build_related_cards() below requires a CaseFile for role/verdict/
+# relation lookup. The LLM path builds one via SimpleNamespace at
+# rank_and_answer:1132. Short-circuits don't carry the resolver
+# outputs — they have `tenant` + `posture`. This shim duck-types the
+# 5 methods build_related_cards uses so short-circuits can reuse it
+# without touching the LLM-path code.
+
+def _norm_finding(f):
+    """Normalize finding to the canonical form CaseFile.needs_draft_tag
+    expects."""
+    if not f: return ""
+    fl = str(f).strip()
+    if fl in ("NC", "OFI", "Comply", "N/A"):
+        return fl
+    up = fl.upper()
+    if up in ("NC", "OFI", "COMPLY"):
+        return {"NC":"NC","OFI":"OFI","COMPLY":"Comply"}[up]
+    return fl
+
+
+class CaseFileShim:
+    """Lightweight duck-typed stand-in for CaseFile.
+
+    Used by short-circuit paths (Ship 20) that need to call
+    build_related_cards without having built a full CaseFile.
+
+    Constructor takes:
+      * tenant         — tenant profile (for scope role_map lookup)
+      * posture_by_ref — dict keyed by ref (NOT node_id — the
+                         short-circuit paths typically only have refs)
+      * node_lookup    — optional dict {ref: {"title": str,
+                         "standard_id": str}} — populated by a
+                         Neo4j fetch when the short-circuit has refs
+                         it wants surfaced as cards
+    """
+    def __init__(self, tenant, posture_by_ref=None, node_lookup=None):
+        self.tenant = tenant
+        self._posture_by_ref = dict(posture_by_ref or {})
+        self._node_lookup    = dict(node_lookup or {})
+
+    # ── CaseFile-duck-typed methods used by build_related_cards ──
+
+    def all_nodes(self):
+        """Return duck-typed nodes exposing `ref`, `title`,
+        `standard_id`, `xfw_edges` for every ref in node_lookup.
+
+        _node_metadata iterates this to find title + standard_id.
+        Short-circuits typically don't carry xfw_edges (bridges are
+        resolved via the LLM path). Return [] when no lookup was
+        prefetched.
+        """
+        from types import SimpleNamespace
+        out = []
+        for ref, meta in self._node_lookup.items():
+            out.append(SimpleNamespace(
+                ref         = ref,
+                title       = meta.get("title", "") or "",
+                standard_id = meta.get("standard_id", "") or "",
+                xfw_edges   = [],
+            ))
+        return out
+
+    def posture_for(self, ref):
+        return self._posture_by_ref.get(ref)
+
+    def needs_draft_tag(self, ref):
+        rec = self.posture_for(ref) or {}
+        finding = _norm_finding(rec.get("finding"))
+        if finding not in ("NC", "OFI", "Comply"):
+            return False
+        return rec.get("confirmation_status") not in (
+            "system_confirmed", "auditor_confirmed",
+        )
+
+    def role_of(self, ref):
+        """Lookup role via tenant.scope role-grouped accessors +
+        Postgres fallback (matches CaseFile.role_of behaviour)."""
+        rec = self.posture_for(ref) or {}
+        sid = rec.get("standard_id") or self._node_lookup.get(ref, {}).get("standard_id")
+        if not sid:
+            return None
+        # Reuse CaseFile's role-map builder to keep behaviour consistent
+        # (framework-role-model-arc). Build a minimal cf-shaped object
+        # for `_load_standards_role_map` to see the scope.
+        from types import SimpleNamespace
+        _cf_like = SimpleNamespace(tenant=self.tenant, resolved=None)
+        # Duck-type CaseFile._role_map by shortcutting into its scope
+        # accessor logic.
+        scope = getattr(self.tenant, "scope", None)
+        if scope is not None:
+            for group_name in ("programs", "extensions", "obligations"):
+                role = group_name.rstrip("s")
+                group = getattr(scope, group_name, None) or []
+                for s in group:
+                    if getattr(s, "id", None) == sid:
+                        return role
+        # Postgres fallback via process-cached loader
+        try:
+            from rag.casefile.types import _load_standards_role_map
+            return _load_standards_role_map().get(sid)
+        except Exception:
+            return None
+
+    def demonstrated_by(self, ref):
+        rec = self.posture_for(ref) or {}
+        return list(rec.get("demonstrated_by") or [])
+
+    @property
+    def tenant_name(self):
+        return getattr(self.tenant, "name", "") or ""
+
+
+# ── Ship 20'.b — helper to build intro-only structured payload ──────
+
+def build_intro_only_structured(
+    answer_text: str,
+    *,
+    primary_ref: str = None,
+) -> StructuredAnswer:
+    """Family A helper — intro-only structured payload.
+
+    Used by short-circuit paths that carry no cited_refs (clarify
+    questions, scope-N/A summaries, cascade prose reports, upload-
+    status answers). Frontend renders as a single intro bubble;
+    consistent with LLM-path envelope so clients don't branch on
+    presence/absence of structured payload.
+    """
+    return StructuredAnswer(
+        intro   = IntroCard(text=answer_text or "", primary_ref=primary_ref),
+        actions = [],
+        related = [],
+    )
+
+
 _LOG = logging.getLogger("rag.casefile.answer_augment")
 
 # Ref pattern matches: A.5.15 / A.7.2.6 / Art.32 / Art.32.1.b / 9.2 / 10.1

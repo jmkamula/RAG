@@ -2144,14 +2144,19 @@ def make_retrieve_node(
             # advisory auto-attach skips anyway; being explicit here for
             # clarity — a clarification response shouldn't try to sell
             # template downloads.
+            # Ship 20'.b — Family A intro-only structured payload
+            from rag.casefile.answer_augment import build_intro_only_structured
             return build_answer_envelope(
-                state            = state,
-                answer_text      = _DEICTIC_CLARIFY_RESPONSE,
-                cited_refs       = [],
-                answer_source    = "deictic_clarify",
-                question_type    = "unknown",
-                attach_templates = False,
-                attach_advisory  = False,
+                state             = state,
+                answer_text       = _DEICTIC_CLARIFY_RESPONSE,
+                cited_refs        = [],
+                answer_source     = "deictic_clarify",
+                question_type     = "unknown",
+                attach_templates  = False,
+                attach_advisory   = False,
+                answer_structured = build_intro_only_structured(
+                    _DEICTIC_CLARIFY_RESPONSE
+                ).model_dump(),
             )
 
         qtype_map = {
@@ -2399,14 +2404,17 @@ def make_retrieve_node(
             )
             # Wave 2 migration. Scope N/A response ("this doesn't apply
             # to us") — no cited_refs, no templates surface makes sense.
+            # Ship 20'.b — Family A intro-only structured payload.
+            from rag.casefile.answer_augment import build_intro_only_structured
             return build_answer_envelope(
-                state            = state,
-                answer_text      = composed,
-                cited_refs       = [],
-                answer_source    = "postgres+llm",
-                question_type    = "gap_analysis",
-                attach_templates = False,
-                attach_advisory  = False,
+                state             = state,
+                answer_text       = composed,
+                cited_refs        = [],
+                answer_source     = "postgres+llm",
+                question_type     = "gap_analysis",
+                attach_templates  = False,
+                attach_advisory   = False,
+                answer_structured = build_intro_only_structured(composed).model_dump(),
             )
 
         # ── Postgres short-circuit for posture timeline queries ────────────
@@ -2429,14 +2437,17 @@ def make_retrieve_node(
                 composed = polish_short_circuit_answer(
                     query=state["query"], deterministic_answer=_fu_ans, llm=llm,
                 )
+                # Ship 20'.b — Family A intro-only structured payload.
+                from rag.casefile.answer_augment import build_intro_only_structured
                 return build_answer_envelope(
-                    state            = state,
-                    answer_text      = composed,
-                    cited_refs       = [],
-                    answer_source    = "postgres+llm",
-                    question_type    = "posture_check",
-                    attach_templates = False,
-                    attach_advisory  = False,
+                    state             = state,
+                    answer_text       = composed,
+                    cited_refs        = [],
+                    answer_source     = "postgres+llm",
+                    question_type     = "posture_check",
+                    attach_templates  = False,
+                    attach_advisory   = False,
+                    answer_structured = build_intro_only_structured(composed).model_dump(),
                 )
 
         # Ship 14'.e — Risk register short-circuit.
@@ -2451,14 +2462,17 @@ def make_retrieve_node(
                 composed = polish_short_circuit_answer(
                     query=state["query"], deterministic_answer=_risk_ans, llm=llm,
                 )
+                # Ship 20'.b — Family A intro-only structured payload.
+                from rag.casefile.answer_augment import build_intro_only_structured
                 return build_answer_envelope(
-                    state            = state,
-                    answer_text      = composed,
-                    cited_refs       = [],
-                    answer_source    = "postgres+llm",
-                    question_type    = "posture_risk",
-                    attach_templates = False,
-                    attach_advisory  = False,
+                    state             = state,
+                    answer_text       = composed,
+                    cited_refs        = [],
+                    answer_source     = "postgres+llm",
+                    question_type     = "posture_risk",
+                    attach_templates  = False,
+                    attach_advisory   = False,
+                    answer_structured = build_intro_only_structured(composed).model_dump(),
                 )
 
         if _is_cascade_suppressions_query(state["query"]):
@@ -2467,14 +2481,17 @@ def make_retrieve_node(
                 composed = polish_short_circuit_answer(
                     query=state["query"], deterministic_answer=_sp_ans, llm=llm,
                 )
+                # Ship 20'.b — Family A intro-only structured payload.
+                from rag.casefile.answer_augment import build_intro_only_structured
                 return build_answer_envelope(
-                    state            = state,
-                    answer_text      = composed,
-                    cited_refs       = [],
-                    answer_source    = "postgres+llm",
-                    question_type    = "posture_check",
-                    attach_templates = False,
-                    attach_advisory  = False,
+                    state             = state,
+                    answer_text       = composed,
+                    cited_refs        = [],
+                    answer_source     = "postgres+llm",
+                    question_type     = "posture_check",
+                    attach_templates  = False,
+                    attach_advisory   = False,
+                    answer_structured = build_intro_only_structured(composed).model_dump(),
                 )
 
         if _is_cascade_impl_query(state["query"]):
@@ -2552,15 +2569,18 @@ def make_retrieve_node(
                 # Wave 2 migration. Upload inventory question — answers
                 # "do we have doc X?"; no cited_refs so templates auto-
                 # skip anyway. Being explicit for clarity.
+                # Ship 20'.b — Family A intro-only structured payload.
+                from rag.casefile.answer_augment import build_intro_only_structured
                 return build_answer_envelope(
-                    state            = state,
-                    answer_text      = composed,
-                    cited_refs       = [],
-                    answer_source    = "postgres+llm",
-                    question_type    = "document_inventory",
-                    last_entity      = last_entity,
-                    attach_templates = False,
-                    attach_advisory  = False,
+                    state             = state,
+                    answer_text       = composed,
+                    cited_refs        = [],
+                    answer_source     = "postgres+llm",
+                    question_type     = "document_inventory",
+                    last_entity       = last_entity,
+                    attach_templates  = False,
+                    attach_advisory   = False,
+                    answer_structured = build_intro_only_structured(composed).model_dump(),
                 )
 
         # ── Resolver: dispatch to per-taxonomy data sources ──────────────
@@ -2602,14 +2622,17 @@ def make_retrieve_node(
             # by convention (the SC has already composed its own citations
             # into the answer text). No templates surface makes sense
             # without cited_refs to route.
+            # Ship 20'.b — Family A intro-only structured payload.
+            from rag.casefile.answer_augment import build_intro_only_structured
             return build_answer_envelope(
-                state            = state,
-                answer_text      = composed,
-                cited_refs       = [],
-                answer_source    = "postgres+llm",
-                question_type    = state["intent_type"],
-                attach_templates = False,
-                attach_advisory  = False,
+                state             = state,
+                answer_text       = composed,
+                cited_refs        = [],
+                answer_source     = "postgres+llm",
+                question_type     = state["intent_type"],
+                attach_templates  = False,
+                attach_advisory   = False,
+                answer_structured = build_intro_only_structured(composed).model_dump(),
             )
 
         # Store resolver trace in state for ANALYTICS display
