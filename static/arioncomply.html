@@ -170,6 +170,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sa-card-body{color:#3A382E}
 .sa-card-refs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
 .sa-related-card{border-left:3px solid #C9C7BC}
+/* Ship 19'.c — primary card highlight + leaf checklist */
+.sa-primary-card{border-left:3px solid #534AB7;background:#FBFAF7}
+.sa-leaf-checklist{display:flex;flex-direction:column;gap:3px;margin-top:6px;padding:6px 8px;background:#F8F6EF;border-radius:6px}
+.sa-leaf-row{display:flex;align-items:center;gap:8px;font-size:12px;line-height:1.5;padding:2px 0}
+.sa-leaf-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0}
+.sa-leaf-yes .sa-leaf-icon{background:#7FB36F;color:#fff}
+.sa-leaf-no  .sa-leaf-icon{background:#EEECE2;color:#7B7970;border:1px solid #D3D1C7}
+.sa-leaf-yes .sa-leaf-title{color:#3A382E}
+.sa-leaf-no  .sa-leaf-title{color:#3A382E}
+.sa-leaf-count{margin-left:auto;font-size:10px;color:#7B7970;font-weight:500}
 .sa-related-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:3px}
 .sa-related-std{font-size:11px;color:#5C5A4F}
 .sa-related-title{font-weight:600;color:#3A382E;font-size:13px;margin-bottom:2px}
@@ -5161,11 +5171,17 @@ function renderStructuredAnswer(s) {
   const attr = t => esc(t).replace(/"/g,'&quot;');
 
   // ── Intro card ────────────────────────────────────────────────
+  // Ship 19'.c — dedupe primary_ref chip when intro.text already
+  // leads with the ref (within the first ~40 chars). Prevents the
+  // "[A.5.15] ISO 27001 A.5.15 (Access control)..." double mention.
   const intro = s.intro || {};
   const introText = renderMd(intro.text || '');
   let introChip = '';
   if (intro.primary_ref) {
-    introChip = `<span class="ref-tag" style="margin-right:6px">${esc(intro.primary_ref)}</span>`;
+    const head = (intro.text || '').slice(0, 40);
+    if (!head.includes(intro.primary_ref)) {
+      introChip = `<span class="ref-tag" style="margin-right:6px">${esc(intro.primary_ref)}</span>`;
+    }
   }
   let html = `<div class="msg-bubble sa-intro">
     ${introChip}${introText}
@@ -5205,13 +5221,43 @@ function renderStructuredAnswer(s) {
                                'sa-badge sa-badge-unknown';
       const draftChip = r.draft
         ? `<span class="sa-draft-chip">DRAFT</span>` : '';
-      const stillHtml = (r.still_needed && r.still_needed.length)
-        ? `<div class="sa-still-needed">Still needed: ${
-            r.still_needed.map(x => `<span class="sa-still-item">${esc(x)}</span>`).join('')
-          }</div>`
-        : '';
+
+      // Ship 19'.c — primary card renders leaves[] as ✓/○ checklist;
+      // other cards keep the compact still_needed chip surface per
+      // the 19'.a primary-only decision. Falls back to chips on
+      // primary too when leaves[] is empty (single-leaf control /
+      // Comply / N/A → advisory returned no per-leaf data).
+      const isPrimary = r.relation === 'primary';
+      const hasLeaves = Array.isArray(r.leaves) && r.leaves.length > 0;
+      let detailHtml;
+      if (isPrimary && hasLeaves) {
+        detailHtml = `<div class="sa-leaf-checklist">${
+          r.leaves.map(lf => {
+            const cls = lf.satisfied ? 'sa-leaf-row sa-leaf-yes' : 'sa-leaf-row sa-leaf-no';
+            const icon = lf.satisfied
+              ? `<span class="sa-leaf-icon">✓</span>`
+              : `<span class="sa-leaf-icon">○</span>`;
+            const count = (lf.n_total > 0)
+              ? `<span class="sa-leaf-count">${lf.n_have} of ${lf.n_total} items</span>`
+              : '';
+            return `<div class="${cls}">
+              ${icon}
+              <span class="sa-leaf-title">${esc(lf.title || '')}</span>
+              ${count}
+            </div>`;
+          }).join('')
+        }</div>`;
+      } else if (r.still_needed && r.still_needed.length) {
+        detailHtml = `<div class="sa-still-needed">Still needed: ${
+          r.still_needed.map(x => `<span class="sa-still-item">${esc(x)}</span>`).join('')
+        }</div>`;
+      } else {
+        detailHtml = '';
+      }
+
       const dashHref = r.dashboard_url || `/#dashboard?control=${encodeURIComponent(r.ref || '')}`;
-      html += `<div class="sa-card sa-related-card" data-focus-ref="${attr(r.ref || '')}">
+      const primaryCls = isPrimary ? ' sa-primary-card' : '';
+      html += `<div class="sa-card sa-related-card${primaryCls}" data-focus-ref="${attr(r.ref || '')}">
         <div class="sa-related-head">
           <span class="ref-tag">${esc(r.ref || '')}</span>
           <span class="sa-related-std">${esc(r.standard_display || r.standard_id || '')}</span>
@@ -5222,7 +5268,7 @@ function renderStructuredAnswer(s) {
         <div class="sa-related-rel">${esc(r.relation_display || 'Related control')}</div>
         ${r.evidence_summary
           ? `<div class="sa-related-ev">${esc(r.evidence_summary)}</div>` : ''}
-        ${stillHtml}
+        ${detailHtml}
         <a class="sa-related-drill" href="${attr(dashHref)}"
            onclick="setMode('dashboard');return true;">
           Open in dashboard →
