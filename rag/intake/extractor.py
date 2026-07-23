@@ -2729,6 +2729,64 @@ def _scope_controls_via_retrieval(
 _LEAF_FINGERPRINT_CACHE = None
 
 
+# ── Ship 16'.b — token-set specificity gate ─────────────────────────
+#
+# Fingerprint auto-generation (scripts/generate_27701_fingerprints.py)
+# templates the same excerpt_keywords shape across every
+# program_review + applicable_scope leaf. Ship 16'.a audit found 338
+# cross-leaf collisions — worst offender `[identity, reviewer]` fires
+# on 64 leaves; `[date, interval, planned, review]` on 48 leaves.
+# Any procedural doc mentioning those phrases attributes to N leaves
+# simultaneously.
+#
+# The specificity gate rejects fingerprint-path matches whose token
+# set is shared across too many leaves. Threshold N=5 per the 16'.a
+# design memo. Reasoning: program_review families have 3-6 leaves
+# per control, so token sets shared across ≥6 leaves are almost
+# certainly the auto-generator's templated shape rather than
+# real per-leaf specificity.
+
+_TOKEN_SET_LEAF_COUNT_CACHE: Optional[dict] = None
+_SPECIFICITY_THRESHOLD = 5
+
+
+def _get_token_set_specificity() -> dict:
+    """Return {frozenset(tokens): leaf_count} for every token set in
+    the fingerprint catalog. Built lazily on first use, cached
+    forever. Empty dict on load failure (gate no-ops)."""
+    global _TOKEN_SET_LEAF_COUNT_CACHE
+    if _TOKEN_SET_LEAF_COUNT_CACHE is not None:
+        return _TOKEN_SET_LEAF_COUNT_CACHE
+    try:
+        from collections import defaultdict
+        counts: dict = defaultdict(set)
+        for leaf_id, fps in _get_leaf_fingerprint_index().items():
+            for fp in fps:
+                for kw_set in fp.excerpt_keywords:
+                    key = frozenset(str(t).lower() for t in kw_set)
+                    if key:
+                        counts[key].add(leaf_id)
+        _TOKEN_SET_LEAF_COUNT_CACHE = {k: len(v) for k, v in counts.items()}
+        over_thresh = sum(
+            1 for v in _TOKEN_SET_LEAF_COUNT_CACHE.values()
+            if v > _SPECIFICITY_THRESHOLD
+        )
+        logger.info(
+            "token-set specificity index: %d unique sets, "
+            "%d shared across >%d leaves (will trigger specificity drops)",
+            len(_TOKEN_SET_LEAF_COUNT_CACHE),
+            over_thresh, _SPECIFICITY_THRESHOLD,
+        )
+        return _TOKEN_SET_LEAF_COUNT_CACHE
+    except Exception as e:
+        logger.warning(
+            "specificity index unavailable (%s: %s) — gate no-ops",
+            type(e).__name__, e,
+        )
+        _TOKEN_SET_LEAF_COUNT_CACHE = {}
+        return {}
+
+
 def _get_leaf_fingerprint_index() -> dict[str, list]:
     """Return {leaf_id: [MustFingerprint, ...]} indexed for quick
     per-leaf scoring. Empty dict on load failure."""
@@ -3212,12 +3270,33 @@ def _extract_via_fingerprints(
     covered:  set[str] = set()
     seen:     set[tuple[str, str]] = set()
 
-    dropped_shape_fp = 0
+    # Ship 16'.b — specificity gate. Load the token-set → leaf-count
+    # index once and reject matches whose token set fires on more
+    # than _SPECIFICITY_THRESHOLD leaves. Root-cause fix for the
+    # 338 cross-leaf collisions the Ship 16'.a audit surfaced.
+    specificity = _get_token_set_specificity()
+
+    dropped_shape_fp        = 0
+    dropped_specificity_fp  = 0    # Ship 16'.b
     for m in matches:
         key = (m["leaf_id"], m["must_id"])
         if key in seen:
             continue
         seen.add(key)
+
+        # Ship 16'.b — specificity gate BEFORE quote extraction. Cheap
+        # dict lookup; short-circuits quote extraction on rejected
+        # matches. If specificity index is empty (load failure) or the
+        # token set isn't in it (edge case), fall through — gate never
+        # false-blocks a legitimate match.
+        matched_kw = m.get("matched_kw") or []
+        if matched_kw and specificity:
+            kw_key = frozenset(str(t).lower() for t in matched_kw)
+            leaf_count = specificity.get(kw_key, 1)
+            if leaf_count > _SPECIFICITY_THRESHOLD:
+                dropped_specificity_fp += 1
+                continue
+
         quote = _extract_quote_around_match(m, doc)
         if not quote:
             continue
@@ -3255,9 +3334,19 @@ def _extract_via_fingerprints(
     m_dict["dropped_content_shape"] = (
         m_dict.get("dropped_content_shape", 0) + dropped_shape_fp
     )
+    # Ship 16'.b — specificity-gate drops. Standalone counter since
+    # this is a new class of drop (not accumulated with any prior
+    # counter). Tuning signal: high value means the gate is doing
+    # measurable work; zero means either no over-broad token sets
+    # matched OR the specificity index failed to load.
+    m_dict["dropped_low_specificity"] = (
+        m_dict.get("dropped_low_specificity", 0) + dropped_specificity_fp
+    )
     logger.info(
         "fingerprint extraction for %s: %d findings on %d leaves "
-        "(no LLM)", doc.original_name, len(findings), len(covered),
+        "(dropped_shape=%d dropped_specificity=%d)",
+        doc.original_name, len(findings), len(covered),
+        dropped_shape_fp, dropped_specificity_fp,
     )
     return findings, covered
 
