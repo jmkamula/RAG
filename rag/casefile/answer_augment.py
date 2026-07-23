@@ -195,10 +195,12 @@ def _standard_display(sid: str) -> str:
 
 
 def _dashboard_url(ref: str, standard_id: str) -> Optional[str]:
-    if not ref or not standard_id:
+    """Match the frontend hash-router pattern (see arioncomply.html —
+    Ship 4a `renderDemonstratedByPanel` uses this shape)."""
+    if not ref:
         return None
     from urllib.parse import quote
-    return f"/#dashboard/control/{quote(ref)}?standard_id={quote(standard_id)}"
+    return f"/#dashboard?control={quote(ref)}"
 
 
 def _node_metadata(cf, ref: str) -> tuple[str, str]:

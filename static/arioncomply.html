@@ -159,6 +159,33 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .clarif-opt{font-size:12px;padding:7px 11px;background:#fff;border:1px solid #AFA9EC;border-radius:7px;cursor:pointer;color:#3C3489;text-align:left;font-weight:500}
 .clarif-opt:hover{background:#EEEDFE}
 .clarif-label{font-size:10px;color:#7F77DD;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+/* Ship 18'.c — structured answer cards */
+.sa-intro{background:#fff;border:1px solid #e5e4df;border-radius:10px 10px 10px 2px;padding:10px 12px;font-size:13px;line-height:1.55;max-width:85%}
+.sa-actions{display:flex;flex-direction:column;gap:6px;margin-top:8px;max-width:85%}
+.sa-related{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-width:85%}
+.sa-related-header{font-size:10px;color:#7B7970;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;padding:0 2px}
+.sa-card{background:#fff;border:1px solid #EEECE2;border-radius:9px;padding:9px 11px;font-size:13px;line-height:1.5}
+.sa-action-card{border-left:3px solid #7F77DD}
+.sa-card-title{font-weight:600;color:#3A382E;margin-bottom:3px;font-size:13px}
+.sa-card-body{color:#3A382E}
+.sa-card-refs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.sa-related-card{border-left:3px solid #C9C7BC}
+.sa-related-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:3px}
+.sa-related-std{font-size:11px;color:#5C5A4F}
+.sa-related-title{font-weight:600;color:#3A382E;font-size:13px;margin-bottom:2px}
+.sa-related-rel{font-size:11px;color:#7B7970;margin-bottom:4px}
+.sa-related-ev{font-size:12px;color:#3A382E;margin-bottom:4px}
+.sa-still-needed{font-size:11px;color:#3A382E;margin-top:4px;line-height:1.9}
+.sa-still-item{display:inline-block;background:#F5F3E8;color:#5C5A4F;padding:2px 7px;border-radius:5px;font-size:11px;margin-right:4px;margin-bottom:2px}
+.sa-related-drill{display:inline-block;margin-top:6px;font-size:11px;color:#534AB7;text-decoration:none;font-weight:500}
+.sa-related-drill:hover{text-decoration:underline}
+.sa-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;color:#fff;letter-spacing:0.3px}
+.sa-badge-nc{background:#D9534F}
+.sa-badge-ofi{background:#EF9F27;color:#3A382E}
+.sa-badge-comply{background:#7FB36F}
+.sa-badge-na{background:#C9C7BC;color:#3A382E}
+.sa-badge-unknown{background:#EEECE2;color:#5C5A4F}
+.sa-draft-chip{font-size:10px;background:#F5F3E8;color:#5C5A4F;padding:2px 6px;border-radius:5px;font-weight:600;letter-spacing:0.3px}
 
 /* ── Documents panel ── */
 .docs-wrap{display:flex;flex-direction:column;gap:12px}
@@ -5067,7 +5094,7 @@ function renderMd(text) {
 }
 
 // ── Chat ──
-function appendMsg(role, text, refs, ms, templatesBlock) {
+function appendMsg(role, text, refs, ms, templatesBlock, structured) {
   const empty = document.getElementById('chat-empty');
   if (empty) empty.remove();
   const sugg = document.getElementById('chat-suggestions');
@@ -5102,9 +5129,17 @@ function appendMsg(role, text, refs, ms, templatesBlock) {
     if (ms) inner += `<div class="msg-meta">${(ms/1000).toFixed(1)}s</div>`;
     div.innerHTML = inner;
   } else {
-    let inner = `<div class="msg-bubble">${renderMd(text)}</div>`;
-    if (refs && refs.length) {
-      inner += `<div class="msg-refs">${refs.map(r=>`<span class="ref-tag">${r}</span>`).join('')}</div>`;
+    // Ship 18'.c — prefer structured card render when present.
+    // Falls back to prose bubble when structured is absent (older
+    // backend versions or LLM emitted malformed JSON).
+    let inner;
+    if (structured && structured.intro) {
+      inner = renderStructuredAnswer(structured);
+    } else {
+      inner = `<div class="msg-bubble">${renderMd(text)}</div>`;
+      if (refs && refs.length) {
+        inner += `<div class="msg-refs">${refs.map(r=>`<span class="ref-tag">${r}</span>`).join('')}</div>`;
+      }
     }
     if (templatesBlock) {
       inner += renderTemplatesBlock(templatesBlock);
@@ -5115,6 +5150,88 @@ function appendMsg(role, text, refs, ms, templatesBlock) {
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
   return div;
+}
+
+// Ship 18'.c — Render StructuredAnswer payload as intro card +
+// action cards + related-control cards. Data shape:
+// rag/casefile/answer_schema.py::StructuredAnswer.
+function renderStructuredAnswer(s) {
+  const esc  = t => (t == null ? '' : String(t))
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const attr = t => esc(t).replace(/"/g,'&quot;');
+
+  // ── Intro card ────────────────────────────────────────────────
+  const intro = s.intro || {};
+  const introText = renderMd(intro.text || '');
+  let introChip = '';
+  if (intro.primary_ref) {
+    introChip = `<span class="ref-tag" style="margin-right:6px">${esc(intro.primary_ref)}</span>`;
+  }
+  let html = `<div class="msg-bubble sa-intro">
+    ${introChip}${introText}
+  </div>`;
+
+  // ── Action cards ──────────────────────────────────────────────
+  const actions = s.actions || [];
+  if (actions.length) {
+    html += `<div class="sa-actions">`;
+    actions.forEach(a => {
+      const title = esc(a.title || '');
+      const body  = renderMd(a.body  || '');
+      const chips = (a.refs || []).map(r =>
+        `<span class="ref-tag">${esc(r)}</span>`
+      ).join('');
+      html += `<div class="sa-card sa-action-card">
+        <div class="sa-card-title">${title}</div>
+        <div class="sa-card-body">${body}</div>
+        ${chips ? `<div class="sa-card-refs">${chips}</div>` : ''}
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // ── Related-control cards ────────────────────────────────────
+  const related = s.related || [];
+  if (related.length) {
+    html += `<div class="sa-related">
+      <div class="sa-related-header">Related controls</div>`;
+    related.forEach(r => {
+      const verdict = (r.verdict || 'Unknown');
+      const badgeCls =
+        verdict === 'NC'     ? 'sa-badge sa-badge-nc'     :
+        verdict === 'OFI'    ? 'sa-badge sa-badge-ofi'    :
+        verdict === 'Comply' ? 'sa-badge sa-badge-comply' :
+        verdict === 'N/A'    ? 'sa-badge sa-badge-na'     :
+                               'sa-badge sa-badge-unknown';
+      const draftChip = r.draft
+        ? `<span class="sa-draft-chip">DRAFT</span>` : '';
+      const stillHtml = (r.still_needed && r.still_needed.length)
+        ? `<div class="sa-still-needed">Still needed: ${
+            r.still_needed.map(x => `<span class="sa-still-item">${esc(x)}</span>`).join('')
+          }</div>`
+        : '';
+      const dashHref = r.dashboard_url || `/#dashboard?control=${encodeURIComponent(r.ref || '')}`;
+      html += `<div class="sa-card sa-related-card" data-focus-ref="${attr(r.ref || '')}">
+        <div class="sa-related-head">
+          <span class="ref-tag">${esc(r.ref || '')}</span>
+          <span class="sa-related-std">${esc(r.standard_display || r.standard_id || '')}</span>
+          <span class="${badgeCls}">${esc(verdict)}</span>
+          ${draftChip}
+        </div>
+        <div class="sa-related-title">${esc(r.title || '')}</div>
+        <div class="sa-related-rel">${esc(r.relation_display || 'Related control')}</div>
+        ${r.evidence_summary
+          ? `<div class="sa-related-ev">${esc(r.evidence_summary)}</div>` : ''}
+        ${stillHtml}
+        <a class="sa-related-drill" href="${attr(dashHref)}"
+           onclick="setMode('dashboard');return true;">
+          Open in dashboard →
+        </a>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+  return html;
 }
 
 // Tier-4 structured templates block rendered under an assistant answer.
@@ -5245,6 +5362,7 @@ async function sendChat() {
   let finalLatency = 0;
   let finalType = 'assistant';
   let finalTemplates = null;
+  let finalStructured = null;   // Ship 18'.c
 
   try {
     const url = API_URL + '/api/v1/chat/stream?question=' + encodeURIComponent(q)
@@ -5279,6 +5397,11 @@ async function sendChat() {
             // Tier-4 structured templates block. Captured here; rendered
             // by appendMsg after the message bubble is finalised below.
             finalTemplates = evt.block || null;
+          } else if (evt.type === 'answer_structured') {
+            // Ship 18'.c — structured card payload. Captured here;
+            // rendered by appendMsg in place of the prose bubble
+            // when present.
+            finalStructured = evt.block || null;
           } else if (evt.type === 'done') {
             finalRefs    = evt.refs || [];
             finalLatency = evt.latency_ms || 0;
@@ -5295,7 +5418,7 @@ async function sendChat() {
 
     bubble.remove();
     const msgRole = finalType === 'clarification' ? 'clarification' : 'assistant';
-    appendMsg(msgRole, fullText || '(no answer)', finalRefs, finalLatency, finalTemplates);
+    appendMsg(msgRole, fullText || '(no answer)', finalRefs, finalLatency, finalTemplates, finalStructured);
     chatHistory.push({role:'assistant', content: fullText});
 
   } catch(e) {

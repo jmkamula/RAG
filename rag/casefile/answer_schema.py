@@ -109,6 +109,25 @@ Card content rules:
 6. When you cite a ref in `intro.text` or `action.body`, keep the
    canonical form ("A.5.15", "Art.32", "9.2") — the backend scans
    these to build the related-cards list.
+7. GUIDANCE citations MUST appear by full ISO standard name in
+   `intro.text`. When the OBLIGATIONS / GUIDANCE section mentions
+   a specific ISO family standard (ISO 27002, ISO 27003, ISO
+   27004, ISO 27005, ISO 27701, ISO 27017, ISO 27018, ISO 27552,
+   ISO 27799), name it verbatim in the intro — "ISO 27005"
+   (not just "the risk-management standard"). Auditors trace the
+   guidance path by standard number.
+8. LISTING queries — when the user asks "what must X contain",
+   "what are the required items", "list the required elements",
+   "what should X include": enumerate EVERY item from the
+   OBLIGATIONS section (or ≥5 if the section carries more) as a
+   NEWLINE-SEPARATED BULLETED LIST inside `intro.text` or a
+   single `action.body`. Each item MUST be on its own line
+   prefixed with "- " (hyphen space). Do NOT emit them inline as
+   a comma-separated sentence — auditors read the bulleted list
+   verbatim. The enumeration IS the answer for these queries.
+   Example format for `intro.text`:
+     "The ISMS scope statement must contain:\n- item one\n- item
+      two\n- item three\n- item four\n- item five"
 
 Never emit prose outside the JSON object. Never wrap in markdown
 code fences. The response body IS the JSON."""
