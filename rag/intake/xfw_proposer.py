@@ -151,6 +151,7 @@ class ProposalSummary:
     tenant_id:        str
     sources_walked:   int = 0
     sources_gated:    int = 0       # Ship 11'.b — filtered by bridge source-quality gate
+    sources_gated_single_must: int = 0   # Ship 16'.c — single-MUST substantiveness gate
     edges_seen:       int = 0
     proposals_written: int = 0
     proposals_skipped: int = 0       # source had no IMPLEMENTS edge, or target out of scope
@@ -160,10 +161,77 @@ class ProposalSummary:
         return (
             f"xfw_proposer[{self.tenant_id[:8]}]: "
             f"sources={self.sources_walked} gated={self.sources_gated} "
+            f"single_must_gated={self.sources_gated_single_must} "
             f"edges={self.edges_seen} written={self.proposals_written} "
             f"skipped={self.proposals_skipped} "
             f"targets={sorted(self.standards_targeted)}"
         )
+
+
+# ── Ship 16'.c — bridge substantiveness gate ─────────────────────────
+#
+# Ship 11'.f measurement surfaced 4 bridge fanouts that survived the
+# Ship 11'.b gate: A.7.2.6 → A.5.19/20/22, A.7.2.8 → A.5.9,
+# A.7.4.7 → A.5.33, A.7.4.8 → A.7.14. Ship 16'.b specificity gate
+# doesn't catch these — the token sets fire on only 2-4 leaves, well
+# under threshold. That means the fanouts came from LEGITIMATE 2-4
+# leaf matches producing OFF-target cross-family bridges.
+#
+# The substantiveness gate closes this: require the source finding
+# to have at least 2 distinct satisfied MUSTs on its leaf before it
+# can seed a bridge. Single-MUST matches (which is what a loose-pair
+# fingerprint hit produces) don't bridge. Rationale: a legitimate
+# policy doc talks about a control's topic through multiple MUSTs;
+# a tangential mention hits exactly one.
+
+_SUBSTANTIVENESS_MIN_MUSTS = 2
+
+
+def _count_musts_per_leaf(findings) -> dict[tuple[str, str], int]:
+    """Return {(standard_id, control_ref): n_distinct_musts} across
+    the findings list. Only counts findings with a checklist_item_id
+    (unbound findings don't contribute to substantiveness — they
+    might be a title match or a keyword sighting)."""
+    per_leaf: dict[tuple[str, str], set[str]] = {}
+    for f in findings:
+        must_id = getattr(f, "checklist_item_id", None)
+        if not must_id:
+            continue
+        std = getattr(f, "standard_id", None)
+        ref = getattr(f, "control_ref", None)
+        if not std or not ref:
+            continue
+        per_leaf.setdefault((std, ref), set()).add(must_id)
+    return {k: len(v) for k, v in per_leaf.items()}
+
+
+def _count_musts_per_leaf_from_rows(rows) -> dict[tuple[str, str], int]:
+    """Same as _count_musts_per_leaf but for the backfill path.
+
+    Row shape from the propose_backfill SELECT:
+      (document_id, control_ref, standard_id, status, confidence,
+       excerpt, checklist_item_id, inference_source)
+
+    Note that DISTINCT ON collapses to one row per
+    (document_id, control_ref, standard_id) — so this counts
+    unique MUSTs across DIFFERENT documents feeding the same
+    (std, ref). That's the right coverage: even if all findings
+    are single-MUST-per-doc, having multiple docs bind different
+    MUSTs on the same leaf means the source is substantiated
+    across the corpus.
+    """
+    per_leaf: dict[tuple[str, str], set[str]] = {}
+    for r in rows:
+        try:
+            control_ref       = r[1]
+            standard_id       = r[2]
+            checklist_item_id = r[6]
+        except (IndexError, TypeError):
+            continue
+        if not checklist_item_id or not control_ref or not standard_id:
+            continue
+        per_leaf.setdefault((standard_id, control_ref), set()).add(checklist_item_id)
+    return {k: len(v) for k, v in per_leaf.items()}
 
 
 # ── Internal helpers ──────────────────────────────────────────────────────────
@@ -562,6 +630,12 @@ def propose_for_findings(
 
     seen_proposals: set[tuple[str, str, str]] = set()
 
+    # Ship 16'.c — pre-loop compute of {(std, ref): n_musts} across
+    # the full findings list. Used by the substantiveness gate to
+    # require ≥2 distinct MUSTs bound on the source leaf before
+    # seeding a bridge. Rationale in the module-level comment.
+    must_counts = _count_musts_per_leaf(findings)
+
     # Ship 11'.b — bridge source-quality gate. Skip sources that
     # would produce noisy bridges (low confidence, fragment excerpts,
     # or already-bridged rows). See [[ship-11-prime-b-...]] for the
@@ -579,6 +653,23 @@ def propose_for_findings(
             )
             summary.sources_gated += 1
             continue
+
+        # Ship 16'.c — substantiveness gate. Legitimate policy doc
+        # coverage of a control produces multiple MUST bindings on
+        # its leaf; tangential mentions produce exactly one. Require
+        # ≥ _SUBSTANTIVENESS_MIN_MUSTS distinct MUSTs bound before
+        # bridging cross-framework.
+        n_musts = must_counts.get((f.standard_id, f.control_ref), 0)
+        if n_musts < _SUBSTANTIVENESS_MIN_MUSTS:
+            logger.debug(
+                "xfw_proposer: skipping bridge source %s/%s — "
+                "single_must (%d MUSTs bound on this leaf; require %d)",
+                f.standard_id, f.control_ref,
+                n_musts, _SUBSTANTIVENESS_MIN_MUSTS,
+            )
+            summary.sources_gated_single_must += 1
+            continue
+
         summary.sources_walked += 1
         src_id  = _build_source_node_id(f.standard_id, f.control_ref)
         targets = _walk_bridges(driver, src_id)
@@ -681,6 +772,11 @@ def propose_backfill(
             )
             rows = cur.fetchall()
 
+        # Ship 16'.c — pre-loop MUST counts for the substantiveness
+        # gate. Uses the same batch-level view as propose_for_findings
+        # so the two paths apply identical semantics.
+        must_counts = _count_musts_per_leaf_from_rows(rows)
+
         seen_proposals: set[tuple[str, str, str]] = set()
         for (doc_id, ctrl_ref, std_id, status_db, conf, excerpt,
              chk_item_src, inf_src) in rows:
@@ -697,6 +793,14 @@ def propose_backfill(
             if not worthy:
                 summary.sources_gated += 1
                 continue
+
+            # Ship 16'.c — substantiveness gate. Same threshold + logic
+            # as propose_for_findings; see module-level comment.
+            n_musts = must_counts.get((std_id, ctrl_ref), 0)
+            if n_musts < _SUBSTANTIVENESS_MIN_MUSTS:
+                summary.sources_gated_single_must += 1
+                continue
+
             summary.sources_walked += 1
             src_id  = _build_source_node_id(std_id, ctrl_ref)
             targets = _walk_bridges(driver, src_id)
