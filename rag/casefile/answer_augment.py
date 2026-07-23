@@ -263,11 +263,16 @@ def build_short_circuit_structured(
         node_lookup    = node_lookup,
     )
 
-    # Minimal structured skeleton — LLM path passes StructuredAnswer
-    # with intro + actions[]; short-circuits pass an intro-only skeleton
-    # and let build_related_cards() populate related[] from extra_refs.
+    # Skeleton with EMPTY intro.text so build_related_cards's
+    # collect_all_refs scan doesn't pick up refs mentioned in the
+    # composed short-circuit prose. Short-circuits are authoritative
+    # about which refs to surface — the caller has already decided
+    # (via primary_ref + extra_refs) which controls become cards.
+    # Otherwise a Stage-1 list_queue prose that mentions 42 controls
+    # by ref would produce 42 cards, blowing past the caller's cap.
+    # The real intro.text is restored below after augmentation.
     skeleton = StructuredAnswer(
-        intro   = IntroCard(text=intro_text or "", primary_ref=primary_ref),
+        intro   = IntroCard(text="", primary_ref=primary_ref),
         actions = [],
         related = [],
     )
@@ -311,6 +316,8 @@ def build_short_circuit_structured(
         if _own_conn is not None:
             try: _own_conn.close()
             except Exception: pass
+    # Restore the real intro text now that ref-scanning is done.
+    skeleton.intro.text = intro_text or ""
     return skeleton
 
 

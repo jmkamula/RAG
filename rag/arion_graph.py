@@ -2320,15 +2320,34 @@ def make_retrieve_node(
                 _refs = [_s1_intent.control_ref] if _s1_intent.control_ref else []
                 # Wave 2 migration. Stage-1 approval is a HITL flow, not
                 # a "what next" surface — skip templates/advisory.
+                # Ship 20'.d — Family C when listing (list_queue action);
+                # Family B when single-control (list_one / approve / reject).
+                from rag.casefile.answer_augment import build_short_circuit_structured
+                _s1_extra: list = []
+                if _s1_intent.action == "list_queue" and _s1_listing:
+                    _s1_extra = [
+                        row.get("control_ref") for row in _s1_listing[:15]
+                        if row.get("control_ref")
+                    ]
+                _s1_primary = _s1_intent.control_ref or None
+                _tid_s1 = str(getattr(tenant, "tenant_id", "") or "")
                 return build_answer_envelope(
-                    state            = state,
-                    answer_text      = _s1_answer,
-                    cited_refs       = _refs,
-                    answer_source    = "postgres",
-                    question_type    = "posture_check",
-                    last_entity      = _control_entity(_s1_intent.control_ref) if _s1_intent.control_ref else {},
-                    attach_templates = False,
-                    attach_advisory  = False,
+                    state             = state,
+                    answer_text       = _s1_answer,
+                    cited_refs        = _refs,
+                    answer_source     = "postgres",
+                    question_type     = "posture_check",
+                    last_entity       = _control_entity(_s1_intent.control_ref) if _s1_intent.control_ref else {},
+                    attach_templates  = False,
+                    attach_advisory   = False,
+                    answer_structured = build_short_circuit_structured(
+                        _s1_answer,
+                        primary_ref        = _s1_primary,
+                        extra_refs         = _s1_extra,
+                        tenant             = tenant,
+                        posture_by_node_id = posture,
+                        tenant_id          = _tid_s1,
+                    ).model_dump(),
                 )
         except Exception as _s1_exc:
             (get_logger() or _NullLogger()).warning("stage1 review short-circuit failed: %s", _s1_exc)
@@ -2388,15 +2407,34 @@ def make_retrieve_node(
                 _refs = [_s2_intent.control_ref] if _s2_intent.control_ref else []
                 # Wave 2 migration. Stage-2 engine approval flow — same
                 # rationale as Stage-1: HITL surface, skip templates/advisory.
+                # Ship 20'.d — Family C when listing; Family B when
+                # single-control (mirrors Stage-1 shape).
+                from rag.casefile.answer_augment import build_short_circuit_structured
+                _s2_extra: list = []
+                if _s2_intent.action == "list_queue" and _s2_listing:
+                    _s2_extra = [
+                        row.get("control_ref") for row in _s2_listing[:15]
+                        if row.get("control_ref")
+                    ]
+                _s2_primary = _s2_intent.control_ref or None
+                _tid_s2 = str(getattr(tenant, "tenant_id", "") or "")
                 return build_answer_envelope(
-                    state            = state,
-                    answer_text      = _s2_answer,
-                    cited_refs       = _refs,
-                    answer_source    = "postgres",
-                    question_type    = "posture_check",
-                    last_entity      = _control_entity(_s2_intent.control_ref) if _s2_intent.control_ref else {},
-                    attach_templates = False,
-                    attach_advisory  = False,
+                    state             = state,
+                    answer_text       = _s2_answer,
+                    cited_refs        = _refs,
+                    answer_source     = "postgres",
+                    question_type     = "posture_check",
+                    last_entity       = _control_entity(_s2_intent.control_ref) if _s2_intent.control_ref else {},
+                    attach_templates  = False,
+                    attach_advisory   = False,
+                    answer_structured = build_short_circuit_structured(
+                        _s2_answer,
+                        primary_ref        = _s2_primary,
+                        extra_refs         = _s2_extra,
+                        tenant             = tenant,
+                        posture_by_node_id = posture,
+                        tenant_id          = _tid_s2,
+                    ).model_dump(),
                 )
         except Exception as _s2_exc:
             (get_logger() or _NullLogger()).warning("stage2 approval short-circuit failed: %s", _s2_exc)
@@ -2732,19 +2770,31 @@ def make_retrieve_node(
                 # with the shared envelope. Same behavior (templates_block
                 # auto-attaches for action-oriented questions when
                 # cited_refs are present) — no expected change.
+                # Ship 20'.d — Family C: intro carrying the enumeration
+                # prose + N related cards (capped 15) for cited_refs.
+                from rag.casefile.answer_augment import build_short_circuit_structured
+                _pe_tid = str(getattr(tenant, "tenant_id", "") or "")
+                _pe_extra = list(_det_refs)[:15]
                 return build_answer_envelope(
-                    answer_text      = _det_text,
-                    cited_refs       = _det_refs,
-                    answer_source    = "posture_enumeration_deterministic",
-                    question_type    = intent.question_type.value,
-                    tenant           = tenant,
-                    intent           = intent,
-                    verified         = True,
-                    was_corrected    = False,
-                    posture_findings = _det_findings,
-                    node_count       = len(all_nodes),
-                    neo4j_ms         = neo4j_ms,
-                    resolver_trace   = _trace,
+                    answer_text       = _det_text,
+                    cited_refs        = _det_refs,
+                    answer_source     = "posture_enumeration_deterministic",
+                    question_type     = intent.question_type.value,
+                    tenant            = tenant,
+                    intent            = intent,
+                    verified          = True,
+                    was_corrected     = False,
+                    posture_findings  = _det_findings,
+                    node_count        = len(all_nodes),
+                    neo4j_ms          = neo4j_ms,
+                    resolver_trace    = _trace,
+                    answer_structured = build_short_circuit_structured(
+                        _det_text,
+                        extra_refs         = _pe_extra,
+                        tenant             = tenant,
+                        posture_by_node_id = posture,
+                        tenant_id          = _pe_tid,
+                    ).model_dump(),
                 )
 
         result = llm.rank_and_answer(
