@@ -142,6 +142,88 @@ class CaseFileShim:
         return getattr(self.tenant, "name", "") or ""
 
 
+# ── Ship 21'.b — structured_to_prose ────────────────────────────────
+#
+# Reconstruct answer_text prose from a StructuredAnswer. Used by
+# both LLM path (rank_and_answer._casefile_flow) and short-circuits
+# that want a canonical prose composition. Emits markdown so SDK/CLI
+# consumers get a readable answer even without card rendering.
+#
+# Format (Ship 21'.a design):
+#   {intro.text}
+#
+#   ## {action.title}
+#   {action.body}
+#
+#   ## Related controls
+#   - **A.5.15** (Access control, ISO 27001:2022) — OFI-DRAFT —
+#     1 of 4 items present
+#   - **10.1** (Continual improvement, ISO 27001:2022) — NC-DRAFT
+#
+# Related section is included ONLY when there's at least one card;
+# omitted for intro-only payloads to keep clarify / N/A / no-refs
+# responses clean.
+
+def structured_to_prose(structured) -> str:
+    """Render a StructuredAnswer as clean markdown prose.
+
+    Replaces the old `title: body` inline reconstruction (Ship
+    18'.b) — that format lost related-card detail entirely, and
+    the `↳ Compliance facts:` footer (retired Ship 21'.b) was
+    covering the gap awkwardly. This helper puts everything the
+    cards show into the prose."""
+    if structured is None:
+        return ""
+
+    lines: list[str] = []
+
+    intro_text = (getattr(structured.intro, "text", None) or "").strip()
+    if intro_text:
+        lines.append(intro_text)
+
+    for a in (structured.actions or []):
+        title = (a.title or "").strip()
+        body  = (a.body  or "").strip()
+        if not (title or body):
+            continue
+        if lines:
+            lines.append("")
+        if title:
+            lines.append(f"## {title}")
+        if body:
+            lines.append(body)
+
+    related = list(structured.related or [])
+    if related:
+        if lines:
+            lines.append("")
+        lines.append("## Related controls")
+        for r in related:
+            ref = (getattr(r, "ref", "") or "").strip()
+            if not ref:
+                continue
+            title    = (getattr(r, "title", "") or "").strip()
+            std_disp = (getattr(r, "standard_display", "") or "").strip()
+            verdict  = (getattr(r, "verdict", "") or "").strip() or "Unknown"
+            draft    = bool(getattr(r, "draft", False))
+            evidence = (getattr(r, "evidence_summary", "") or "").strip()
+
+            verdict_tag = f"{verdict}-DRAFT" if draft and verdict in (
+                "NC", "OFI", "Comply"
+            ) else verdict
+
+            # "(Title, ISO 27001:2022)" — omit each part if missing
+            context_parts = [p for p in (title, std_disp) if p]
+            context = f" ({', '.join(context_parts)})" if context_parts else ""
+
+            entry = f"- **{ref}**{context} — {verdict_tag}"
+            if evidence:
+                entry += f" — {evidence}"
+            lines.append(entry)
+
+    return "\n".join(lines).rstrip()
+
+
 # ── Ship 20'.b — helper to build intro-only structured payload ──────
 
 def build_intro_only_structured(

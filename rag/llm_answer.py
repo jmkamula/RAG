@@ -1108,6 +1108,7 @@ class LLMAnswer:
         from rag.casefile.repair import check_and_repair
         from rag.casefile.answer_augment import (
             parse_structured_answer, augment_and_repair,
+            structured_to_prose,
         )
 
         t0 = time.time()
@@ -1251,12 +1252,13 @@ class LLMAnswer:
 
             # Compose a prose answer_text from the structured payload
             # for backward compat + preservation-check parity.
-            prose_lines = [structured.intro.text]
-            for a in structured.actions:
-                prose_lines.append("")
-                prose_lines.append(f"{a.title}: {a.body}" if a.title else a.body)
+            # Ship 21'.b: use structured_to_prose which emits clean
+            # markdown (## action headings + related-controls section)
+            # instead of the old `title: body` inline format. Related
+            # section carries what the retired ↳ Compliance facts:
+            # footer used to render.
             answer_text = self._normalize_clause_refs(
-                "\n".join([ln for ln in prose_lines if ln is not None]).strip()
+                structured_to_prose(structured)
             )
         else:
             # Fail-open: LLM emitted malformed JSON. Log to

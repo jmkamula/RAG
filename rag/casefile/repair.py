@@ -221,21 +221,21 @@ def check_and_repair(
                 ))
                 footers.append(spec.bridge_footer)
 
-    # ── Build compliance-facts footer for missing refs ───────────────
-    #     (draft/verdict-tag misses are consolidated by ref into the
-    #      same footer entry; we don't add a separate footer per event.)
-    refs_for_footer: set[str] = set(missing_refs)
-    # Also include refs that were present in prose but stripped their
-    # verdict tag — the footer restores the [NC-DRAFT] provenance.
-    for ev in events:
-        if ev.kind in ("missing_draft_near_ref", "missing_verdict_near_ref") and ev.ref:
-            refs_for_footer.add(ev.ref)
-    if refs_for_footer:
-        facts_line = _compliance_facts_footer(
-            sorted(refs_for_footer), spec, cf,
-        )
-        if facts_line:
-            footers.append(facts_line)
+    # ── Compliance-facts footer RETIRED in Ship 21'.b ────────────────
+    # Ship 20 made every chat path emit answer_structured; related[]
+    # cards render every dropped ref with full metadata (verdict, role,
+    # evidence summary, per-leaf checklist). The `↳ Compliance facts:`
+    # append is structurally redundant with those cards + the truncated
+    # tail ("still needed: operating procedure, sc…") was a UX
+    # regression Ship 18/19 already fixed on the card render.
+    #
+    # Repair events (missing_ref / missing_draft_near_ref /
+    # missing_verdict_near_ref) still populate above and land in
+    # chat_casefile_log.repair_events for auditor drill-in via
+    # scripts/audit_retired_footer.sql — the visible prose append is
+    # the only thing removed. `_compliance_facts_footer` helper kept
+    # for any future callers that want to reconstruct the string.
+    # See ship-21-prime-a-footer-retire-design-2026-07-23 memo.
 
     # ── 5. Ship 14'.e — Missing risk external_refs ────────────────────
     # When the classifier routed to POSTURE_RISK and the digest
