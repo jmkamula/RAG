@@ -470,6 +470,12 @@ class ChatResponse(BaseModel):
     # that cite NC/OFI controls. Payload shape:
     # rag/templates/answer_footer.py:build_templates_block.
     templates:  Optional[dict] = None
+    # Ship 18'.b — structured answer payload (intro + actions[] +
+    # related[]). Present when the case-file flow parsed the LLM's
+    # JSON output successfully; absent when the LLM fell back to prose
+    # (frontend falls back to `answer` in that case). Schema:
+    # rag/casefile/answer_schema.py::StructuredAnswer.
+    answer_structured: Optional[dict] = None
 
 
 @app.post("/api/v1/chat", response_model=ChatResponse, tags=["chat"])
@@ -575,12 +581,13 @@ async def chat(
             qtype = qtype.value
 
         return ChatResponse(
-            answer     = answer,
-            type       = qtype,
-            refs       = refs if isinstance(refs, list) else [],
-            trace_id   = trace_id,
-            latency_ms = latency_ms,
-            templates  = result.get("templates_block"),
+            answer            = answer,
+            type              = qtype,
+            refs              = refs if isinstance(refs, list) else [],
+            trace_id          = trace_id,
+            latency_ms        = latency_ms,
+            templates         = result.get("templates_block"),
+            answer_structured = result.get("answer_structured"),
         )
     except Exception as e:
         logger.error(f"Chat error: {e}", exc_info=True)
@@ -668,6 +675,7 @@ async def chat_stream(
             refs            = []
             qtype           = None
             templates_block = None
+            answer_structured: Optional[dict] = None  # Ship 18'.b
 
             async for event in graph.astream_events(state, cfg, version="v2"):
                 kind = event.get("event", "")
@@ -700,6 +708,8 @@ async def chat_stream(
                         # Captured here so we can emit it as its own
                         # SSE event after tokens, before 'done'.
                         templates_block = _out.get("templates_block") or None
+                        # Ship 18'.b structured answer payload.
+                        answer_structured = _out.get("answer_structured") or None
                         if qtype != "clarification":
                             qtype = (_out.get("intent_type")
                                      or _out.get("question_type")
@@ -713,6 +723,12 @@ async def chat_stream(
                         for i in range(0, len(answer_text), 50):
                             yield sse({"type": "token", "text": answer_text[i:i+50]})
                             await asyncio.sleep(0)
+
+            # Ship 18'.b — structured answer event emitted BEFORE
+            # templates so the client swaps its prose-render for
+            # cards, then decorates with any starter downloads.
+            if answer_structured:
+                yield sse({"type": "answer_structured", "block": answer_structured})
 
             # Tier-4 templates block — emit as its own event after tokens
             # so the client can render it as a structured card block

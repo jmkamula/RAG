@@ -2004,6 +2004,10 @@ def build_answer_envelope(
     attach_templates: bool = True,
     attach_advisory:  bool = True,
     confidence:       float = 1.0,
+    # Ship 18'.b — structured answer payload (intro + actions[] + related[]).
+    # Only present on LLM-path returns; deterministic short-circuits emit
+    # prose only for now.
+    answer_structured: dict = None,
 ) -> dict:
     """Standard retrieve() return dict shape + auto-attached UX
     enrichments (templates_block, per-MUST advisory) based on
@@ -2067,6 +2071,8 @@ def build_answer_envelope(
     result["cited_refs"]    = list(cited_refs or [])
     result["answer_source"] = answer_source
     result["confidence"]    = confidence
+    if answer_structured is not None:
+        result["answer_structured"] = answer_structured
     if question_type:
         result["question_type"] = question_type
         result["intent_type"]   = question_type
@@ -2738,18 +2744,19 @@ def make_retrieve_node(
             else None
         )
         return build_answer_envelope(
-            answer_text      = result.answer_text,
-            cited_refs       = result.cited_refs or [],
-            answer_source    = "llm",
-            question_type    = _qt_value,
-            tenant           = tenant,
-            intent           = intent,
-            verified         = result.verified,
-            was_corrected    = result.was_corrected,
-            posture_findings = result.posture_findings,
-            node_count       = len(all_nodes),
-            neo4j_ms         = neo4j_ms,
-            resolver_trace   = _trace,
+            answer_text       = result.answer_text,
+            cited_refs        = result.cited_refs or [],
+            answer_source     = "llm",
+            question_type     = _qt_value,
+            tenant            = tenant,
+            intent            = intent,
+            verified          = result.verified,
+            was_corrected     = result.was_corrected,
+            posture_findings  = result.posture_findings,
+            node_count        = len(all_nodes),
+            neo4j_ms          = neo4j_ms,
+            resolver_trace    = _trace,
+            answer_structured = getattr(result, "answer_structured", None),
         )
 
     return retrieve

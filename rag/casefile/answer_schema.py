@@ -1,0 +1,114 @@
+"""
+Structured chat response schema (Ship 18'.a design).
+
+Payload shape returned to the client alongside the prose `answer`:
+
+    StructuredAnswer:
+        intro:   IntroCard         # required — 1-2 sentence framing
+        actions: list[ActionCard]  # 0..N remediation steps (LLM-authored)
+        related: list[RelatedCard] # 0..N cited/derived refs (backend-derived)
+
+The LLM emits ONLY `intro` + `actions` as JSON (via
+response_format={"type": "json_object"}). `related[]` is 100%
+deterministic — the backend builds it from CaseFile so structural
+metadata (role, verdict, relation, evidence_summary) has no
+hallucination surface.
+
+See docs/memory/ship_18_prime_a_structured_answer_design_2026_07_23.md.
+"""
+from __future__ import annotations
+
+from typing import Optional
+
+from pydantic import BaseModel, Field
+
+
+# ── Card models ─────────────────────────────────────────────────────
+
+class IntroCard(BaseModel):
+    """Top card — 1-2 sentence framing of the query."""
+    text:         str
+    primary_ref:  Optional[str] = None       # e.g. "A.5.15"
+    primary_role: Optional[str] = None       # program / extension / obligation / guidance
+
+
+class ActionCard(BaseModel):
+    """One remediation step. LLM-authored prose + backend-augmented ref chips."""
+    title: str                               # imperative header, ≤80 chars
+    body:  str                               # concrete guidance; names items when known
+    refs:  list[str] = Field(default_factory=list)  # backend-scanned refs mentioned in title+body
+
+
+class RelatedCard(BaseModel):
+    """One cited / derived control ref. 100% backend-derived from CaseFile."""
+    ref:              str
+    standard_id:      str
+    standard_display: str                    # "ISO 27001:2022" (via gateway)
+    title:            str                    # control title from Neo4j
+    role:             str                    # program / extension / obligation / guidance / unknown
+    verdict:          str                    # NC / OFI / Comply / N/A / Unknown
+    draft:            bool = False           # posture unconfirmed
+    relation:         str                    # primary / demonstrated_by / cross_framework_bridge / isms_clause / context
+    relation_display: str                    # gateway-humanized ("Cross-framework link", etc.)
+    evidence_summary: str = ""               # deterministic — "1 of 4 required items present"
+    still_needed:     list[str] = Field(default_factory=list)  # item names with no evidence
+    dashboard_url:    Optional[str] = None   # deep-link to /dashboard drill-in
+
+
+class StructuredAnswer(BaseModel):
+    """Full structured chat response."""
+    intro:   IntroCard
+    actions: list[ActionCard] = Field(default_factory=list)
+    related: list[RelatedCard] = Field(default_factory=list)
+
+
+# ── LLM JSON schema (for prompt inclusion) ──────────────────────────
+#
+# What the LLM sees + emits. We deliberately DROP `related[]` from the
+# LLM-facing schema — LLM emits only `intro + actions`, backend builds
+# `related` deterministically from CaseFile.
+
+LLM_OUTPUT_SCHEMA = """{
+  "intro": {
+    "text": "string, 1-2 sentences framing the answer",
+    "primary_ref": "string, optional — the control ref this query is about (e.g. 'A.5.15')"
+  },
+  "actions": [
+    {
+      "title": "string, imperative, <=80 chars",
+      "body":  "string, concrete guidance; name specific items when known"
+    }
+  ]
+}"""
+
+
+LLM_OUTPUT_RULES = """OUTPUT FORMAT
+Return a single JSON object with exactly two top-level keys: `intro`
+and `actions`. Do NOT emit a `related` array — the backend adds it.
+
+Schema:
+""" + LLM_OUTPUT_SCHEMA + """
+
+Card content rules:
+1. `intro.text` — 1-2 sentences. Name the primary control + verdict
+   context. Never open with "This response...".
+2. `intro.primary_ref` — the single ref the query is about, when
+   the query targets one specific control. Omit for broad queries.
+3. `actions[]` — 0-5 cards. Each card is ONE concrete step.
+   - `title`: short imperative ("Complete the register", "Publish
+     the policy"). Never a restatement of body.
+   - `body`: concrete guidance. When you know specific item names
+     from the POSTURE / OBLIGATIONS section, NAME them. Never write
+     "1 of 4 required items" without naming which items — the
+     tenant needs actionable specifics.
+4. For DEFINITION queries → `actions=[]` (empty). The intro carries
+   the definition; there's no remediation to take.
+5. For POSTURE_STATUS queries → `actions=[]` unless the tenant asks
+   for guidance. The intro summarises status; related cards carry
+   detail.
+6. When you cite a ref in `intro.text` or `action.body`, keep the
+   canonical form ("A.5.15", "Art.32", "9.2") — the backend scans
+   these to build the related-cards list.
+
+Never emit prose outside the JSON object. Never wrap in markdown
+code fences. The response body IS the JSON."""

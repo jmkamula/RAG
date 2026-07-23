@@ -853,9 +853,28 @@ def build_system_prompt(cf: CaseFile) -> str:
     return _SLIM_SYSTEM.format(tenant_name=cf.tenant_name or "the tenant")
 
 
+def build_structured_system_prompt(cf: CaseFile) -> str:
+    """Ship 18'.b — slim system prompt PLUS the JSON output-format
+    rules. Used when calling the LLM with response_format=json_object.
+
+    Same content rules as the prose prompt; the OUTPUT FORMAT section
+    reshapes the response into intro + actions[] JSON. `related[]` is
+    NOT emitted — the backend builds it deterministically."""
+    from rag.casefile.answer_schema import LLM_OUTPUT_RULES
+    base = _SLIM_SYSTEM.format(tenant_name=cf.tenant_name or "the tenant")
+    return base + "\n\n" + LLM_OUTPUT_RULES
+
+
 # ── Combined helper for downstream wiring ────────────────────────────
 
 def build_prompt_pair(cf: CaseFile) -> tuple[str, str]:
     """Return (system_prompt, user_prompt) as a pair — this is what
     rank_and_answer's _call_llm expects."""
     return build_system_prompt(cf), build_prompt_digest(cf)
+
+
+def build_structured_prompt_pair(cf: CaseFile) -> tuple[str, str]:
+    """Ship 18'.b — (structured_system_prompt, user_digest) pair for
+    the JSON-mode LLM call. The digest itself is identical to the
+    prose path; only the system prompt gains the OUTPUT FORMAT rules."""
+    return build_structured_system_prompt(cf), build_prompt_digest(cf)

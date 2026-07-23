@@ -74,6 +74,11 @@ class ArionState(TypedDict):
     # rag/templates/answer_footer.py:build_templates_block.
     # Chat UI renders per-leaf; API consumers get JSON.
     templates_block: dict | None
+    # Ship 18'.b — structured chat response payload
+    # (intro + actions[] + related[]). Populated by the case-file
+    # flow when the LLM emits valid JSON; None when the LLM fell back
+    # to prose. Schema: rag/casefile/answer_schema.py::StructuredAnswer.
+    answer_structured: dict | None
 
     # ── Error handling ─────────────────────────────────────────────────────
     error:        str
@@ -129,6 +134,7 @@ def make_initial_state(tenant: TenantProfile, query: str = "") -> ArionState:
         posture_findings= {},
         answer_source   = "",
         templates_block = None,
+        answer_structured = None,
         error           = "",
         resolver_trace  = None,
         last_entity     = {},

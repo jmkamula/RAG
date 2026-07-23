@@ -116,6 +116,16 @@ _SURFACE_DEFAULTS: dict[str, tuple[str, ...]] = {
         "humanize_snake_case",
         "format_standard_id",
     ),
+    "structured_card": (
+        # Ship 18'.b — Related/Action card display fields
+        # (standard_display, title, relation_display, evidence_summary,
+        # still_needed items). Tenant-facing; may carry extractor prose
+        # → strip markdown escapes; may carry slugs from role/relation
+        # constants → humanise + format standard ids.
+        "strip_markdown_escapes",
+        "humanize_snake_case",
+        "format_standard_id",
+    ),
 }
 
 

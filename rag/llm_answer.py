@@ -26,6 +26,7 @@ import logging
 import re
 import time
 from dataclasses import dataclass, field
+from typing import Optional
 
 from rag.classifier      import QueryIntent, QuestionType
 from rag.chain_logger    import get_logger
@@ -325,6 +326,10 @@ class ComplianceAnswer:
     # per-leaf card block below the answer bubble; API consumers get the
     # same data as JSON on the response.
     templates_block:  dict | None = None
+    # Ship 18'.b — structured answer payload (intro + actions[] + related[]).
+    # None when structured path failed (LLM emitted malformed JSON) — the
+    # prose `answer_text` remains the source of truth in that case.
+    answer_structured: dict | None = None
 
 
 
@@ -1097,10 +1102,13 @@ class LLMAnswer:
         """
         from rag.casefile import CaseFile
         from rag.casefile.digest import (
-            build_prompt_pair, approx_tokens,
+            build_prompt_pair, build_structured_prompt_pair, approx_tokens,
         )
         from rag.casefile.preservation import extract_preservation_spec
         from rag.casefile.repair import check_and_repair
+        from rag.casefile.answer_augment import (
+            parse_structured_answer, augment_and_repair,
+        )
 
         t0 = time.time()
 
@@ -1174,28 +1182,106 @@ class LLMAnswer:
             cf.risks = fetch_risks_for_casefile(_tid, top_n=8)
 
         # ── Render digest ─────────────────────────────────────────────
+        # Ship 18'.b: attempt the structured (JSON) path first; fall
+        # back to prose on any parse failure. Both paths share the same
+        # digest — only the system prompt differs.
         t_dig = time.time()
-        system_prompt, user_digest = build_prompt_pair(cf)
+        system_prompt, user_digest = build_structured_prompt_pair(cf)
         digest_ms = int((time.time() - t_dig) * 1000)
 
         sys_tokens  = approx_tokens(system_prompt)
         user_tokens = approx_tokens(user_digest)
 
-        # ── LLM call ──────────────────────────────────────────────────
+        # ── LLM call (structured) ─────────────────────────────────────
         raw = self._call_llm(
-            system     = system_prompt,
-            user       = user_digest,
-            model      = self.answer_model,
-            max_tokens = self.max_tokens,
-            step       = "rank_answer",
+            system          = system_prompt,
+            user            = user_digest,
+            model           = self.answer_model,
+            max_tokens      = self.max_tokens,
+            step            = "rank_answer",
+            response_format = {"type": "json_object"},
         )
-        answer_text = self._normalize_clause_refs(raw)
 
-        # ── Preservation check + repair ───────────────────────────────
-        t_rep = time.time()
+        # ── Try structured parse ──────────────────────────────────────
+        structured_payload: dict | None = None
+        structured_events: list[dict]   = []
         spec = extract_preservation_spec(cf)
+        structured = parse_structured_answer(raw)
+
+        if structured is not None:
+            # Deterministic augmentation — build related cards + repair
+            # missing required_refs via card insertion (APPEND-ONLY).
+            # Open a short-lived pg connection for advisory data
+            # (evidence_summary / still_needed). Best-effort — augment
+            # runs with pg_conn=None on connect failure.
+            _aug_conn = None
+            try:
+                import os as _os, psycopg2 as _pg2
+                _aug_conn = _pg2.connect(
+                    host     = _os.getenv("PGHOST",     "127.0.0.1"),
+                    dbname   = _os.getenv("PGDATABASE", "arioncomply_compliance"),
+                    user     = _os.getenv("PGUSER",     "arioncomply_app"),
+                    password = _os.getenv("PGPASSWORD", ""),
+                )
+                if _tid:
+                    with _aug_conn.cursor() as _cur:
+                        _cur.execute(
+                            "SELECT set_config('app.tenant_id', %s, TRUE)",
+                            (_tid,),
+                        )
+            except Exception as _ce:
+                logging.getLogger("rag.llm_answer").debug(
+                    "augment pg connect failed (evidence detail skipped): %s", _ce,
+                )
+                _aug_conn = None
+
+            try:
+                structured, structured_events = augment_and_repair(
+                    structured,
+                    cf,
+                    spec,
+                    pg_conn   = _aug_conn,
+                    tenant_id = _tid,
+                )
+                structured_payload = structured.model_dump()
+            finally:
+                if _aug_conn is not None:
+                    try: _aug_conn.close()
+                    except Exception: pass
+
+            # Compose a prose answer_text from the structured payload
+            # for backward compat + preservation-check parity.
+            prose_lines = [structured.intro.text]
+            for a in structured.actions:
+                prose_lines.append("")
+                prose_lines.append(f"{a.title}: {a.body}" if a.title else a.body)
+            answer_text = self._normalize_clause_refs(
+                "\n".join([ln for ln in prose_lines if ln is not None]).strip()
+            )
+        else:
+            # Fail-open: LLM emitted malformed JSON. Log to
+            # repair_events and use the raw text as prose.
+            structured_events.append({
+                "kind":   "structured_parse_failed",
+                "ref":    None,
+                "detail": "LLM output not parseable as StructuredAnswer JSON — "
+                          "falling back to prose path",
+            })
+            answer_text = self._normalize_clause_refs(raw)
+
+        # ── Preservation check + repair (prose path) ──────────────────
+        t_rep = time.time()
         repair_result = check_and_repair(answer_text, spec, cf)
         answer_text = repair_result.text
+        # Merge in structured-path events so the log captures both.
+        if structured_events:
+            from rag.casefile.repair import RepairEvent as _RE
+            for ev in structured_events:
+                repair_result.events.append(_RE(
+                    kind   = ev.get("kind", "structured"),
+                    ref    = ev.get("ref"),
+                    detail = ev.get("detail", ""),
+                ))
         repair_ms = int((time.time() - t_rep) * 1000)
 
         # ── Log to chat_casefile_log (silent-fail) ────────────────────
@@ -1248,18 +1334,19 @@ class LLMAnswer:
 
         latency_ms = int((time.time() - t0) * 1000)
         return ComplianceAnswer(
-            answer_text      = answer_text,
-            question_type    = intent.question_type if intent else None,
-            tenant_name      = tenant_name,
-            cited_refs       = cited_refs,
-            posture_findings = posture_findings,
-            verification     = None,
-            verified         = True,       # preservation check IS verification
-            model_used       = self.answer_model,
-            latency_ms       = latency_ms,
-            was_corrected    = repair_result.repaired,
-            primary_refs     = primary_refs,
-            xfw_refs         = xfw_refs,
+            answer_text       = answer_text,
+            question_type     = intent.question_type if intent else None,
+            tenant_name       = tenant_name,
+            cited_refs        = cited_refs,
+            posture_findings  = posture_findings,
+            verification      = None,
+            verified          = True,       # preservation check IS verification
+            model_used        = self.answer_model,
+            latency_ms        = latency_ms,
+            was_corrected     = repair_result.repaired,
+            primary_refs      = primary_refs,
+            xfw_refs          = xfw_refs,
+            answer_structured = structured_payload,
         )
 
     def _log_casefile_turn(
@@ -1664,6 +1751,7 @@ class LLMAnswer:
         model:      str,
         max_tokens: int = 1500,
         step:       str = "answer",
+        response_format: Optional[dict] = None,
     ) -> str:
         """Single LLM call via the provider-neutral client."""
         from rag.llm_client import call as llm_call
@@ -1679,6 +1767,7 @@ class LLMAnswer:
             temperature = self.temperature,
             timeout_s   = 180.0,
             metadata    = {"step": step},
+            response_format = response_format,
         )
         if not response.ok:
             raise RuntimeError(f"LLM call failed ({model}): {response.error}")

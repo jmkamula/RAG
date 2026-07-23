@@ -103,6 +103,7 @@ def call(
     session_id:  Optional[str]  = None,
     request_id:  Optional[str]  = None,
     metadata:    Optional[dict] = None,
+    response_format: Optional[dict] = None,
 ) -> LlmResponse:
     """Provider-neutral LLM call. Auto-logs to ai_call_log.
 
@@ -137,13 +138,14 @@ def call(
             )
         else:
             text, tokens_in, tokens_out = _call_openai_compatible(
-                system     = system,
-                user       = user,
-                model      = model,
-                max_tokens = max_tokens,
-                temperature= temperature,
-                timeout_s  = timeout_s,
-                messages   = messages,
+                system          = system,
+                user            = user,
+                model           = model,
+                max_tokens      = max_tokens,
+                temperature     = temperature,
+                timeout_s       = timeout_s,
+                messages        = messages,
+                response_format = response_format,
             )
     except urllib.error.HTTPError as e:
         error_type = "HTTPError"
@@ -273,6 +275,7 @@ def _call_openai_compatible(
     temperature: float,
     timeout_s:   float,
     messages:    Optional[list[dict]],
+    response_format: Optional[dict] = None,
 ) -> tuple[str, Optional[int], Optional[int]]:
     api_key = _first_env(_OPENAI_KEY_ENVS)
     if not api_key:
@@ -290,6 +293,8 @@ def _call_openai_compatible(
         "temperature": temperature,
         "messages":    api_messages,
     }
+    if response_format is not None:
+        payload["response_format"] = response_format
     req = urllib.request.Request(
         f"{LLM_ENDPOINT_OPENAI}/chat/completions",
         data    = json.dumps(payload).encode("utf-8"),
