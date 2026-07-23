@@ -13,16 +13,16 @@ must_fingerprints:
   - must_id: "item:B.8.4.3:scope_customer_facing"
     description: "Customer-facing transmission (APIs + webhooks)"
     excerpt_keywords:
-      - [scope, customer, facing]
+      - [scope, customer, facing, pii]
 
   - must_id: "item:B.8.4.3:scope_internal_flows"
     description: "Internal + cross-region flows (backup replication / DR / warehouse)"
     excerpt_keywords:
-      - [scope, internal, flows]
-      - [internal, cross]
+      - [scope, internal, flows, pii]
+      - [internal, cross, pii]
 
   - must_id: "item:B.8.4.3:scope_subprocessor_flows"
     description: "Subprocessor flows (data-sharing with subprocessors)"
     excerpt_keywords:
-      - [scope, subprocessor, flows]
-      - [subprocessor, flows]
+      - [scope, subprocessor, flows, pii]
+      - [subprocessor, flows, pii]

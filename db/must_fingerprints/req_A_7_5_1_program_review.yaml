@@ -18,14 +18,14 @@ must_fingerprints:
   - must_id: "item:A.7.5.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, identify]
 
   - must_id: "item:A.7.5.1:rev_reviewer"
     description: "Reviewer identity (DPO + Legal)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, identify]
 
   - must_id: "item:A.7.5.1:rev_tia_refresh"
     description: "TIA refresh — recent case law + guidance considered"
     excerpt_keywords:
-      - [tia, refresh]
+      - [tia, refresh, identify]

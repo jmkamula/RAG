@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.2.8:rev_accuracy_sample"
     description: "Accuracy sample — random rows verified against source systems"
     excerpt_keywords:
-      - [accuracy, sample]
+      - [accuracy, sample, records]
 
   - must_id: "item:A.7.2.8:rev_completeness"
     description: "Completeness check — RoPA rowcount matches A.7.2.1 register + system inventory"
     excerpt_keywords:
-      - [completeness, check]
+      - [completeness, check, records]
 
   - must_id: "item:A.7.2.8:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, records]
 
   - must_id: "item:A.7.2.8:rev_owner_signoff"
     description: "Owner signoff — designated RoPA owner attests to accuracy + completeness"
     excerpt_keywords:
-      - [owner, signoff]
+      - [owner, signoff, records]
 
   - must_id: "item:A.7.2.8:rev_reviewer"
     description: "Reviewer identity (DPO + Data Protection Council)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, records]

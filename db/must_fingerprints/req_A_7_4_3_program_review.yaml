@@ -13,26 +13,26 @@ must_fingerprints:
   - must_id: "item:A.7.4.3:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, accuracy]
 
   - must_id: "item:A.7.4.3:rev_detection_rate"
     description: "Detection rate check — under-detection surfaces via low incident counts"
     excerpt_keywords:
-      - [detection, rate]
-      - [detection, rate, check]
+      - [detection, rate, accuracy]
+      - [detection, rate, check, accuracy]
 
   - must_id: "item:A.7.4.3:rev_prevention_health"
     description: "Prevention controls health (input validation / duplicate detection / reconciliation)"
     excerpt_keywords:
-      - [prevention, health]
-      - [prevention, controls, health]
+      - [prevention, health, accuracy]
+      - [prevention, controls, health, accuracy]
 
   - must_id: "item:A.7.4.3:rev_reviewer"
     description: "Reviewer identity (DPO + Data Ops)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, accuracy]
 
   - must_id: "item:A.7.4.3:rev_root_cause_closure"
     description: "Root-cause closure — systemic remediations from prior period reviewed for completeness"
     excerpt_keywords:
-      - [root, cause, closure]
+      - [root, cause, closure, accuracy]

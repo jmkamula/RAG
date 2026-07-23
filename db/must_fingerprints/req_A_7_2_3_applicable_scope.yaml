@@ -13,7 +13,7 @@ must_fingerprints:
   - must_id: "item:A.7.2.3:scope_children_thresholds"
     description: "Per-jurisdiction age-of-consent thresholds"
     excerpt_keywords:
-      - [scope, children, thresholds]
+      - [scope, children, thresholds, determine]
 
   - must_id: "item:A.7.2.3:scope_consent_activities"
     description: "Consent-required activity list (marketing / cookies non-essential / research participation / chil..."
@@ -23,4 +23,4 @@ must_fingerprints:
   - must_id: "item:A.7.2.3:scope_special_category_map"
     description: "Special-category consent map — health / biometric / genetic / criminal / children require explici..."
     excerpt_keywords:
-      - [scope, special, category, map]
+      - [scope, special, category, map, determine]

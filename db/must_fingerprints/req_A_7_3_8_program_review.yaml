@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.3.8:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, providing]
 
   - must_id: "item:A.7.3.8:rev_direct_transfer_test"
     description: "Direct-transfer capability tested end-to-end"
     excerpt_keywords:
-      - [direct, transfer, test]
+      - [direct, transfer, test, providing]
 
   - must_id: "item:A.7.3.8:rev_format_currency"
     description: "Format currency — output format aligns with commonly-used industry standards"
     excerpt_keywords:
-      - [format, currency]
+      - [format, currency, providing]
 
   - must_id: "item:A.7.3.8:rev_reviewer"
     description: "Reviewer identity (DPO + Engineering)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, providing]
 
   - must_id: "item:A.7.3.8:rev_scope_leakage_test"
     description: "Scope-leakage test — sampled copies verified to contain only the requesting subject's PII"
     excerpt_keywords:
-      - [scope, leakage, test]
+      - [scope, leakage, test, providing]

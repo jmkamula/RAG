@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.3.1:rev_catalog_currency"
     description: "Catalog currency — recent regulatory / case-law developments incorporated"
     excerpt_keywords:
-      - [catalog, currency]
+      - [catalog, currency, determining]
 
   - must_id: "item:A.7.3.1:rev_channel_health"
     description: "Channel health — fulfilment channels reachable + functional"
     excerpt_keywords:
-      - [channel, health]
+      - [channel, health, determining]
 
   - must_id: "item:A.7.3.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, determining]
 
   - must_id: "item:A.7.3.1:rev_reviewer"
     description: "Reviewer identity (DPO + Legal)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, determining]
 
   - must_id: "item:A.7.3.1:rev_sla_audit"
     description: "SLA audit — sampled A.7.3.9 request register measured against catalog SLAs"
     excerpt_keywords:
-      - [sla, audit]
+      - [sla, audit, determining]

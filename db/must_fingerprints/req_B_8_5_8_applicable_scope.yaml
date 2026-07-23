@@ -18,10 +18,10 @@ must_fingerprints:
   - must_id: "item:B.8.5.8:scope_general_auth_customers"
     description: "Customers on general-authorisation contract per row"
     excerpt_keywords:
-      - [scope, general, auth, customers]
-      - [customers, general]
+      - [scope, general, auth, customers, change]
+      - [customers, general, change]
 
   - must_id: "item:B.8.5.8:scope_specific_auth_exclusion"
     description: "Specific-authorisation customers excluded (they get fresh B.8.5.7 engagement each time)"
     excerpt_keywords:
-      - [scope, specific, auth, exclusion]
+      - [scope, specific, auth, exclusion, change]

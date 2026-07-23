@@ -13,7 +13,7 @@ must_fingerprints:
   - must_id: "item:B.8.5.7:scope_authorisation_mode"
     description: "Authorisation mode per engagement type (general via contract clause / specific per subcontractor)"
     excerpt_keywords:
-      - [scope, authorisation, mode]
+      - [scope, authorisation, mode, engagement]
       - [authorisation, mode, engagement, type]
 
   - must_id: "item:B.8.5.7:scope_engagement_types"

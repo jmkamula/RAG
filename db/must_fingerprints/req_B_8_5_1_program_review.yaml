@@ -18,14 +18,14 @@ must_fingerprints:
   - must_id: "item:B.8.5.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, basis]
 
   - must_id: "item:B.8.5.1:rev_notification_audit"
     description: "Notification audit — advance-notification obligations verified for all changes since last review"
     excerpt_keywords:
-      - [notification, audit]
+      - [notification, audit, basis]
 
   - must_id: "item:B.8.5.1:rev_reviewer"
     description: "Reviewer identity (DPO + Legal + Trust)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, basis]

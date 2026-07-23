@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:A.7.4.8:rev_certificate_audit"
     description: "Certificate audit — sampled disposals have valid certificates"
     excerpt_keywords:
-      - [certificate, audit]
+      - [certificate, audit, disposal]
 
   - must_id: "item:A.7.4.8:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, disposal]
 
   - must_id: "item:A.7.4.8:rev_reviewer"
     description: "Reviewer identity (Infrastructure + DPO)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, disposal]
 
   - must_id: "item:A.7.4.8:rev_technique_currency"
     description: "Technique currency — techniques still appropriate given hardware / cloud evolution"
     excerpt_keywords:
-      - [technique, currency]
+      - [technique, currency, disposal]

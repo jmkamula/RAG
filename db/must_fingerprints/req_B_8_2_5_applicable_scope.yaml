@@ -13,17 +13,17 @@ must_fingerprints:
   - must_id: "item:B.8.2.5:scope_audit_tiers"
     description: "Audit tier map (contract tier → audit rights: e.g. Enterprise → onsite / Business → questionnaire..."
     excerpt_keywords:
-      - [scope, audit, tiers]
-      - [audit, tier, map]
+      - [scope, audit, tiers, customer]
+      - [audit, tier, map, customer]
 
   - must_id: "item:B.8.2.5:scope_certifications_current"
     description: "Current certifications enumerated with expiry"
     excerpt_keywords:
-      - [scope, certifications, current]
-      - [current, certifications, enumerated, expiry]
+      - [scope, certifications, current, customer]
+      - [current, certifications, enumerated, expiry, customer]
 
   - must_id: "item:B.8.2.5:scope_information_types"
     description: "Information types available (certification reports / SOC 2 / ISO 27001 / ISO 27701 / pen test sum..."
     excerpt_keywords:
-      - [scope, information, types]
-      - [information, types, available]
+      - [scope, information, types, customer]
+      - [information, types, available, customer]

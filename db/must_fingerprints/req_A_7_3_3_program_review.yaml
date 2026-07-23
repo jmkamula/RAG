@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:A.7.3.3:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, providing]
 
   - must_id: "item:A.7.3.3:rev_plain_language_audit"
     description: "Plain-language audit — sampled notices reviewed against readability target"
     excerpt_keywords:
-      - [plain, language, audit]
+      - [plain, language, audit, providing]
 
   - must_id: "item:A.7.3.3:rev_reachability_audit"
     description: "Reachability audit — sampled touchpoints verified to serve current notice"
     excerpt_keywords:
-      - [reachability, audit]
+      - [reachability, audit, providing]
 
   - must_id: "item:A.7.3.3:rev_reviewer"
     description: "Reviewer identity (DPO + Product + UX)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, providing]

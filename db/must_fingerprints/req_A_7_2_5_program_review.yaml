@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.2.5:rev_coverage_check"
     description: "Coverage check — every triggered activity has a completed PIA on file"
     excerpt_keywords:
-      - [coverage, check]
+      - [coverage, check, privacy]
 
   - must_id: "item:A.7.2.5:rev_currency_audit"
     description: "Currency audit — PIAs older than currency threshold reviewed for material change"
     excerpt_keywords:
-      - [currency, audit]
+      - [currency, audit, privacy]
 
   - must_id: "item:A.7.2.5:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, privacy]
 
   - must_id: "item:A.7.2.5:rev_reviewer"
     description: "Reviewer identity (DPO + risk owner)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, privacy]
 
   - must_id: "item:A.7.2.5:rev_sa_consultation_audit"
     description: "SA-consultation audit — high-residual-risk PIAs verified to have escalated where required"
     excerpt_keywords:
-      - [consultation, audit]
+      - [consultation, audit, privacy]

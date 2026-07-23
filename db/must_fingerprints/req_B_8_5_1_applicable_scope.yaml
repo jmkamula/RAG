@@ -13,15 +13,15 @@ must_fingerprints:
   - must_id: "item:B.8.5.1:scope_direct_transfers"
     description: "Direct customer-PII transfers (multi-region cloud / backup + DR)"
     excerpt_keywords:
-      - [scope, direct, transfers]
-      - [direct, customer]
+      - [scope, direct, transfers, basis]
+      - [direct, customer, basis]
 
   - must_id: "item:B.8.5.1:scope_subprocessor_transfers"
     description: "Subprocessor-driven transfers (data flowing to subprocessor regions)"
     excerpt_keywords:
-      - [scope, subprocessor, transfers]
+      - [scope, subprocessor, transfers, basis]
 
   - must_id: "item:B.8.5.1:scope_support_access"
     description: "Support-access transfers (support engineers in different regions accessing customer PII)"
     excerpt_keywords:
-      - [scope, support, access]
+      - [scope, support, access, basis]

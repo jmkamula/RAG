@@ -13,16 +13,16 @@ must_fingerprints:
   - must_id: "item:A.7.3.2:scope_contexts"
     description: "Notice contexts enumerated (direct / indirect / cookie / marketing / employee / minor / etc.)"
     excerpt_keywords:
-      - [scope, contexts]
-      - [notice, contexts, enumerated]
+      - [scope, contexts, determining]
+      - [notice, contexts, enumerated, determining]
 
   - must_id: "item:A.7.3.2:scope_exclusions"
     description: "Excluded contexts with rationale"
     excerpt_keywords:
-      - [scope, exclusions]
-      - [excluded, contexts, rationale]
+      - [scope, exclusions, determining]
+      - [excluded, contexts, rationale, determining]
 
   - must_id: "item:A.7.3.2:scope_field_diffs"
     description: "Per-context field differences (e.g. indirect collection triggers additional Art.14 fields; childr..."
     excerpt_keywords:
-      - [scope, field, diffs]
+      - [scope, field, diffs, determining]

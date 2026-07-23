@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.2.1:rev_coverage_check"
     description: "Coverage check — every in-scope activity has a purpose registered"
     excerpt_keywords:
-      - [coverage, check]
+      - [coverage, check, identify]
 
   - must_id: "item:A.7.2.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, identify]
 
   - must_id: "item:A.7.2.1:rev_reviewer"
     description: "Reviewer identity (DPO + Privacy Office)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, identify]
 
   - must_id: "item:A.7.2.1:rev_specificity_audit"
     description: "Specificity audit — sampled purposes reviewed for clarity + non-vagueness"
     excerpt_keywords:
-      - [specificity, audit]
+      - [specificity, audit, identify]
 
   - must_id: "item:A.7.2.1:rev_undocumented_sweep"
     description: "Undocumented-processing sweep — new activities emerged since last review flagged for registration"
     excerpt_keywords:
-      - [undocumented, sweep]
+      - [undocumented, sweep, identify]

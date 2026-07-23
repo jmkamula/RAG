@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:B.8.2.2:rev_customer_verification_health"
     description: "Customer verification health — audits requested + supported within stated SLA"
     excerpt_keywords:
-      - [customer, verification, health]
+      - [customer, verification, health, organization]
 
   - must_id: "item:B.8.2.2:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, organization]
 
   - must_id: "item:B.8.2.2:rev_reviewer"
     description: "Reviewer identity (DPO + Engineering Lead + Compliance)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, organization]
 
   - must_id: "item:B.8.2.2:rev_side_purpose_sweep"
     description: "Side-purpose drift sweep — cross-tenant analytics + ML training pipelines checked for unauthorise..."
     excerpt_keywords:
-      - [side, purpose, sweep]
+      - [side, purpose, sweep, organization]
 
   - must_id: "item:B.8.2.2:rev_technical_binding_audit"
     description: "Technical binding audit — sampled tenant boundaries verified to enforce purpose limits"
     excerpt_keywords:
-      - [technical, binding, audit]
+      - [technical, binding, audit, organization]

@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.3.10:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, automated]
 
   - must_id: "item:A.7.3.10:rev_intervention_test"
     description: "Human-intervention pathway test"
     excerpt_keywords:
-      - [intervention, test]
+      - [intervention, test, automated]
 
   - must_id: "item:A.7.3.10:rev_jurisdiction_currency"
     description: "Jurisdiction-currency check — new full-automation prohibitions surfaced"
     excerpt_keywords:
-      - [jurisdiction, currency]
+      - [jurisdiction, currency, automated]
 
   - must_id: "item:A.7.3.10:rev_notification_audit"
     description: "Notification audit — sampled A.22 systems verified to have subject-notification surfaced"
     excerpt_keywords:
-      - [notification, audit]
+      - [notification, audit, automated]
 
   - must_id: "item:A.7.3.10:rev_reviewer"
     description: "Reviewer identity (DPO + ML/Product lead + Legal)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, automated]

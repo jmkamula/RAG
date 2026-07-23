@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:B.8.5.6:rev_content_audit"
     description: "Content audit — sampled disclosures include countries + obligations mechanism"
     excerpt_keywords:
-      - [content, audit]
+      - [content, audit, disclosure]
 
   - must_id: "item:B.8.5.6:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, disclosure]
 
   - must_id: "item:B.8.5.6:rev_pre_use_audit"
     description: "Pre-use audit — sampled subcontractor onboardings verified against disclosure record"
     excerpt_keywords:
-      - [pre, audit]
+      - [pre, audit, disclosure]
 
   - must_id: "item:B.8.5.6:rev_reviewer"
     description: "Reviewer identity (Trust + Legal + DPO)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, disclosure]

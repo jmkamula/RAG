@@ -13,16 +13,16 @@ must_fingerprints:
   - must_id: "item:A.7.3.3:scope_delivery_channels"
     description: "Delivery channels enumerated with notice-at-collection status per channel"
     excerpt_keywords:
-      - [scope, delivery, channels]
-      - [delivery, channels, enumerated, notice]
+      - [scope, delivery, channels, providing]
+      - [delivery, channels, enumerated, notice, providing]
 
   - must_id: "item:A.7.3.3:scope_exclusions"
     description: "Excluded contexts with rationale (e.g. B2B-only channels where notice is contract-embedded)"
     excerpt_keywords:
-      - [scope, exclusions]
-      - [excluded, contexts, rationale]
+      - [scope, exclusions, providing]
+      - [excluded, contexts, rationale, providing]
 
   - must_id: "item:A.7.3.3:scope_indirect_collection"
     description: "Indirect-collection handling — where PII sourced from third party, notice within reasonable time ..."
     excerpt_keywords:
-      - [scope, indirect, collection]
+      - [scope, indirect, collection, providing]

@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:B.8.2.1:rev_coverage_check"
     description: "Coverage check — every in-scope customer has an executed agreement on file"
     excerpt_keywords:
-      - [coverage, check]
+      - [coverage, check, customer]
 
   - must_id: "item:B.8.2.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, customer]
 
   - must_id: "item:B.8.2.1:rev_gaps_audit"
     description: "Gaps audit — sampled agreements checked for Art.28.3.e-h assistance coverage"
     excerpt_keywords:
-      - [gaps, audit]
+      - [gaps, audit, customer]
 
   - must_id: "item:B.8.2.1:rev_reviewer"
     description: "Reviewer identity (Legal + DPO + Sales Ops)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, customer]

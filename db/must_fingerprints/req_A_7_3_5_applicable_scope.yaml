@@ -13,21 +13,21 @@ must_fingerprints:
   - must_id: "item:A.7.3.5:scope_legitimate_interests"
     description: "Legitimate-interests processing enumerated (Art.21.1 balancing-test objection applies)"
     excerpt_keywords:
-      - [scope, legitimate, interests]
+      - [scope, legitimate, interests, providing]
 
   - must_id: "item:A.7.3.5:scope_marketing_processing"
     description: "Marketing processing enumerated (Art.21.2 absolute objection applies)"
     excerpt_keywords:
-      - [scope, marketing, processing]
-      - [marketing, processing, enumerated]
+      - [scope, marketing, processing, providing]
+      - [marketing, processing, enumerated, providing]
 
   - must_id: "item:A.7.3.5:scope_public_task"
     description: "Public-task processing enumerated (Art.21.1 applies)"
     excerpt_keywords:
-      - [scope, public, task]
+      - [scope, public, task, providing]
 
   - must_id: "item:A.7.3.5:scope_research_stats"
     description: "Research / statistics processing (Art.21.6 applies)"
     excerpt_keywords:
-      - [scope, research, stats]
-      - [research, statistics, processing]
+      - [scope, research, stats, providing]
+      - [research, statistics, processing, providing]

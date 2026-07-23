@@ -13,15 +13,15 @@ must_fingerprints:
   - must_id: "item:A.7.3.8:scope_art_15_universe"
     description: "Art.15.3 (copy) universe — all subjects with PII processed"
     excerpt_keywords:
-      - [scope, art, universe]
+      - [scope, art, universe, providing]
 
   - must_id: "item:A.7.3.8:scope_art_20_universe"
     description: "Art.20 (portability) universe — subset where basis=consent OR contract AND processing is automated"
     excerpt_keywords:
-      - [scope, art, universe]
+      - [scope, art, universe, providing]
 
   - must_id: "item:A.7.3.8:scope_derived_data"
     description: "Derived/inferred data handling — original PII in scope; derived analytics + third-party enrichmen..."
     excerpt_keywords:
-      - [scope, derived, data]
-      - [derived, inferred, data, handling]
+      - [scope, derived, data, providing]
+      - [derived, inferred, data, handling, providing]

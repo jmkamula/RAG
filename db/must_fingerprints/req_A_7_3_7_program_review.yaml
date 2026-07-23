@@ -13,25 +13,25 @@ must_fingerprints:
   - must_id: "item:A.7.3.7:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, pii]
 
   - must_id: "item:A.7.3.7:rev_dispatch_audit"
     description: "Dispatch audit — sampled subject events verified to have generated corresponding third-party noti..."
     excerpt_keywords:
-      - [dispatch, audit]
+      - [dispatch, audit, pii]
 
   - must_id: "item:A.7.3.7:rev_impossibility_audit"
     description: "Impossibility-invocation audit — sampled invocations reviewed for defensibility"
     excerpt_keywords:
-      - [impossibility, audit]
+      - [impossibility, audit, pii]
 
   - must_id: "item:A.7.3.7:rev_recipient_currency"
     description: "Recipient inventory currency — reconciled against A.7.5.4 disclosure register"
     excerpt_keywords:
-      - [recipient, currency]
-      - [recipient, inventory, currency]
+      - [recipient, currency, pii]
+      - [recipient, inventory, currency, pii]
 
   - must_id: "item:A.7.3.7:rev_reviewer"
     description: "Reviewer identity (DPO + Vendor Management)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, pii]

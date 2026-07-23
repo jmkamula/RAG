@@ -13,16 +13,16 @@ must_fingerprints:
   - must_id: "item:A.7.4.1:scope_exclusions"
     description: "Excluded surfaces with rationale (e.g. anonymous analytics)"
     excerpt_keywords:
-      - [scope, exclusions]
-      - [excluded, surfaces, rationale]
+      - [scope, exclusions, limit]
+      - [excluded, surfaces, rationale, limit]
 
   - must_id: "item:A.7.4.1:scope_indirect_map"
     description: "Indirect-collection map (technical logs + inferred data + third-party enrichment)"
     excerpt_keywords:
-      - [scope, indirect, map]
+      - [scope, indirect, map, limit]
 
   - must_id: "item:A.7.4.1:scope_surfaces"
     description: "Collection surfaces enumerated (customer forms / employee onboarding / marketing forms / cookies ..."
     excerpt_keywords:
-      - [scope, surfaces]
+      - [scope, surfaces, limit]
       - [collection, surfaces, enumerated]

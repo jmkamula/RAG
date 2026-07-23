@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:A.7.4.6:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, temporary]
 
   - must_id: "item:A.7.4.6:rev_orphan_sample"
     description: "Orphan-file sample check — random directories checked for temp files past retention"
     excerpt_keywords:
-      - [orphan, sample]
+      - [orphan, sample, temporary]
 
   - must_id: "item:A.7.4.6:rev_reviewer"
     description: "Reviewer identity (Infrastructure + DPO)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, temporary]
 
   - must_id: "item:A.7.4.6:rev_sweep_health"
     description: "Sweep health — cadence honoured, coverage complete"
     excerpt_keywords:
-      - [sweep, health]
+      - [sweep, health, temporary]

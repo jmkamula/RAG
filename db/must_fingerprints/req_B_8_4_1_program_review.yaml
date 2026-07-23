@@ -13,20 +13,20 @@ must_fingerprints:
   - must_id: "item:B.8.4.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, temporary]
 
   - must_id: "item:B.8.4.1:rev_reviewer"
     description: "Reviewer identity (Platform Ops + DPO)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, temporary]
 
   - must_id: "item:B.8.4.1:rev_sweep_health"
     description: "Sweep health check"
     excerpt_keywords:
-      - [sweep, health]
-      - [sweep, health, check]
+      - [sweep, health, temporary]
+      - [sweep, health, check, temporary]
 
   - must_id: "item:B.8.4.1:rev_tenant_isolation_test"
     description: "Tenant isolation test — sampled sweeps confirmed no cross-tenant temp file spillover"
     excerpt_keywords:
-      - [tenant, isolation, test]
+      - [tenant, isolation, test, temporary]

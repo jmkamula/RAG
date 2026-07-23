@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.3.5:rev_absolute_audit"
     description: "Absolute-objection audit — sampled marketing objections verified to have halted processing"
     excerpt_keywords:
-      - [absolute, audit]
+      - [absolute, audit, providing]
 
   - must_id: "item:A.7.3.5:rev_balancing_audit"
     description: "Balancing-test audit — sampled rejections reviewed for defensibility"
     excerpt_keywords:
-      - [balancing, audit]
+      - [balancing, audit, providing]
 
   - must_id: "item:A.7.3.5:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, providing]
 
   - must_id: "item:A.7.3.5:rev_notification_audit"
     description: "Notification-of-right audit — first-communication notices reviewed"
     excerpt_keywords:
-      - [notification, audit]
+      - [notification, audit, providing]
 
   - must_id: "item:A.7.3.5:rev_reviewer"
     description: "Reviewer identity (DPO + Legal)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, providing]

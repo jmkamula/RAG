@@ -37,6 +37,7 @@ import re
 import sys
 from collections import defaultdict
 from pathlib import Path
+from typing import Optional
 
 from dotenv import load_dotenv
 from neo4j import GraphDatabase
@@ -81,6 +82,60 @@ _ID_PREFIX_NOISE = {
 # (e.g. [update] matches any doc discussing any kind of update).
 _MIN_SET_SIZE = 2
 
+# Ship 17'.b — topic-anchor tokens injected into every keyword set to
+# make family-templated MUST texts leaf-distinctive.
+#
+# Root cause (Ship 16'.a + 17'.a): program_review + applicable_scope
+# families share identical MUST texts across every leaf, so the
+# generator's Set-2 (from MUST text) tokenises to the same
+# [review, date, planned, interval] on 48 leaves. Injecting a token
+# from the leaf's RequirementNode.title (which IS distinctive per
+# leaf — "Contracts with PII processors" vs "Retention" etc.)
+# collapses the collision.
+#
+# Generic meta-tokens that appear in most compliance-standard titles
+# are stripped — they'd defeat the purpose of the anchor.
+_TITLE_META_NOISE = {
+    "information", "security", "management", "data",
+    "iso", "iec", "ensure", "ensuring", "processing",
+    # "processing" is generic across the 27701 privacy family;
+    # subject-matter tokens (contracts, retention, disposal,
+    # transfers, notification) survive.
+}
+
+
+def _topic_anchor_tokens(title: str, max_tokens: int = 2) -> list[str]:
+    """Extract 1-2 distinctive tokens from a RequirementNode.title
+    for use as anchor tokens injected into every keyword set on
+    that leaf.
+
+    Uses the existing _tokenize helper (stopword + short-token
+    filter), then additionally strips meta-tokens that recur
+    across compliance titles (information, security, management,
+    etc.). Returns up to `max_tokens` non-meta tokens, order-
+    preserving so the first substantive word wins."""
+    tokens = _tokenize(title)
+    anchors = [t for t in tokens if t not in _TITLE_META_NOISE]
+    return anchors[:max_tokens]
+
+
+def _augment_with_anchor(
+    kw_set: list[str], anchors: list[str],
+) -> list[str]:
+    """Return `kw_set` with at least one anchor token appended.
+    If the set already contains an anchor (rare but possible when
+    the MUST text mentions the leaf topic), it's unchanged.
+    Anchors are appended in given order so the first anchor wins.
+
+    Injecting just ONE anchor per set is intentional — makes the
+    set LEAF-DISTINCTIVE without narrowing it so much that
+    legitimate mentions miss."""
+    if not anchors:
+        return kw_set
+    if any(a in kw_set for a in anchors):
+        return kw_set
+    return kw_set + [anchors[0]]
+
 
 def _tokenize(text: str) -> list[str]:
     """Normalize + tokenize a string. Returns lowercased word tokens
@@ -119,9 +174,17 @@ def _tokens_from_must_text(text: str, max_tokens: int = 4) -> list[str]:
     return tokens[:max_tokens]
 
 
-def _build_keyword_sets(must_id: str, must_text: str) -> list[list[str]]:
+def _build_keyword_sets(
+    must_id: str, must_text: str,
+    topic_anchors: Optional[list[str]] = None,
+) -> list[list[str]]:
     """Compose up to 2 keyword sets per MUST. Deduplicated and
-    filtered to non-trivial sets (≥1 meaningful token)."""
+    filtered to non-trivial sets (≥1 meaningful token).
+
+    Ship 17'.b — when `topic_anchors` is supplied (from the
+    leaf's RequirementNode.title), each generated set is augmented
+    with one anchor token. Turns family-templated sets into
+    leaf-distinctive ones. See `_topic_anchor_tokens` for extraction."""
     sets: list[list[str]] = []
     seen: set[tuple] = set()
 
@@ -131,6 +194,9 @@ def _build_keyword_sets(must_id: str, must_text: str) -> list[list[str]]:
     ):
         if not candidate or len(candidate) < _MIN_SET_SIZE:
             continue
+        # Ship 17'.b — inject a leaf-topic anchor if provided
+        if topic_anchors:
+            candidate = _augment_with_anchor(candidate, topic_anchors)
         key = tuple(sorted(candidate))
         if key in seen:
             continue
@@ -182,13 +248,22 @@ def _yaml_content(
 
 
 def fetch_27701_leaves(driver) -> dict[str, dict]:
-    """Return {leaf_id: {control_ref, must_items: [(must_id, text)...]}}."""
+    """Return {leaf_id: {control_ref, control_title, must_items:
+    [(must_id, text)...]}}.
+
+    Ship 17'.b — fetches the parent RequirementNode.title alongside
+    the ChecklistItem rows. Title feeds `_topic_anchor_tokens`
+    which is injected into every keyword set (see design memo
+    [[ship-17-prime-a-regeneration-design-2026-07-23]])."""
     with driver.session() as s:
         rows = s.run("""
-            MATCH (er:EvidenceRequirement)-[:MUST_CONTAIN]->(item:ChecklistItem)
-            WHERE er.standard_id = 'ISO27701:2019'
+            MATCH (rn:RequirementNode {standard_id: 'ISO27701:2019'})
+            MATCH (er:EvidenceRequirement {control_ref: rn.ref,
+                                            standard_id: 'ISO27701:2019'})
+            MATCH (er)-[:MUST_CONTAIN]->(item:ChecklistItem)
             RETURN er.id           AS leaf_id,
                    er.control_ref  AS control_ref,
+                   rn.title        AS control_title,
                    item.id         AS must_id,
                    item.text       AS must_text
             ORDER BY er.id, item.id
@@ -198,17 +273,47 @@ def fetch_27701_leaves(driver) -> dict[str, dict]:
     for r in rows:
         lid = r["leaf_id"]
         out.setdefault(lid, {
-            "control_ref": r["control_ref"],
-            "must_items":  [],
+            "control_ref":   r["control_ref"],
+            "control_title": r["control_title"] or "",
+            "must_items":    [],
         })
         out[lid]["must_items"].append((r["must_id"], r["must_text"]))
     return out
+
+
+# Ship 17'.b — regenerator discipline. Only overwrite files whose
+# first-6-line header contains "Auto-generated". Hand-authored files
+# (marked with prose like "Reviewed-from-skeleton" or "Hand-authored")
+# stay untouched. See Ship 17'.a design memo.
+_AUTO_GEN_MARKER = "Auto-generated"
+
+
+def _is_auto_generated(path: Path) -> bool:
+    """Return True if the file's first 6 lines contain the auto-gen
+    marker. Missing file → True (safe to write). Any read error →
+    False (defensive)."""
+    if not path.exists():
+        return True
+    try:
+        head = path.read_text(encoding="utf-8", errors="replace").splitlines()[:6]
+    except Exception:
+        return False
+    return any(_AUTO_GEN_MARKER in ln for ln in head)
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true",
                     help="Print what would be written, don't write.")
+    ap.add_argument("--family", default=None,
+                    help="Regenerate only leaves whose slug matches "
+                         "this substring (Ship 17'.b — e.g. "
+                         "'program_review' or 'applicable_scope').")
+    ap.add_argument("--force", action="store_true",
+                    help="Overwrite hand-authored files too. Default: "
+                         "only touch files marked '# Auto-generated'. "
+                         "USE WITH CAUTION — hand-curated tuning is "
+                         "lost on regeneration.")
     args = ap.parse_args()
 
     driver = GraphDatabase.driver(
@@ -221,16 +326,31 @@ def main() -> int:
     finally:
         driver.close()
 
+    # Family filter — Ship 17'.b runs on program_review + applicable_scope
+    # first; 17'.c does the rest.
+    if args.family:
+        leaves = {
+            lid: info for lid, info in leaves.items()
+            if args.family in lid
+        }
+
     print(f"Fetched {len(leaves)} leaves with "
           f"{sum(len(v['must_items']) for v in leaves.values())} MUSTs total")
 
-    written = 0
-    skipped = 0
+    written  = 0
+    skipped  = 0
     empty_sets = 0
+    hand_guarded = 0  # Ship 17'.b — skipped because hand-authored
     for leaf_id, info in sorted(leaves.items()):
+        # Ship 17'.b — topic anchors from the parent
+        # RequirementNode.title. Empty list falls through cleanly:
+        # `_augment_with_anchor` no-ops when anchors=[].
+        anchors = _topic_anchor_tokens(info.get("control_title", ""))
+
         fingerprints: list[dict] = []
         for must_id, must_text in info["must_items"]:
-            kw_sets = _build_keyword_sets(must_id, must_text)
+            kw_sets = _build_keyword_sets(must_id, must_text,
+                                           topic_anchors=anchors)
             if not kw_sets:
                 empty_sets += 1
                 continue
@@ -244,22 +364,32 @@ def main() -> int:
             skipped += 1
             continue
 
+        out_path = _CATALOG_DIR / _yaml_filename(leaf_id)
+
+        # Ship 17'.b — never overwrite hand-authored files unless
+        # --force. This is the safety belt that lets bulk
+        # regeneration run without losing curator work.
+        if not args.force and not _is_auto_generated(out_path):
+            hand_guarded += 1
+            continue
+
         yaml_content = _yaml_content(
             leaf_id           = leaf_id,
             target_control    = info["control_ref"] or "",
             target_standard   = "ISO27701:2019",
             must_fingerprints = fingerprints,
         )
-
-        out_path = _CATALOG_DIR / _yaml_filename(leaf_id)
         if args.dry_run:
             print(f"[dry-run] would write {out_path.name} "
-                  f"({len(fingerprints)} MUSTs)")
+                  f"({len(fingerprints)} MUSTs, anchors={anchors})")
         else:
             out_path.write_text(yaml_content)
             written += 1
 
     print(f"\n✓ wrote {written} fingerprint YAMLs")
+    if hand_guarded:
+        print(f"  {hand_guarded} leaves skipped (hand-authored — "
+              f"use --force to override)")
     if skipped:
         print(f"  {skipped} leaves skipped (all MUSTs produced empty keyword sets)")
     if empty_sets:

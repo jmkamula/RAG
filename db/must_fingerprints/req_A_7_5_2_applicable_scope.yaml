@@ -13,14 +13,14 @@ must_fingerprints:
   - must_id: "item:A.7.5.2:scope_law_enforcement"
     description: "Law-enforcement-request handling (not in advance-disclosed list)"
     excerpt_keywords:
-      - [scope, law, enforcement]
+      - [scope, law, enforcement, countries]
 
   - must_id: "item:A.7.5.2:scope_multi_region_cloud"
     description: "Multi-region cloud + backup destinations included"
     excerpt_keywords:
-      - [scope, multi, region, cloud]
+      - [scope, multi, region, cloud, countries]
 
   - must_id: "item:A.7.5.2:scope_normal_operations"
     description: "Normal-operations destinations (direct + subprocessor + support tier)"
     excerpt_keywords:
-      - [scope, normal, operations]
+      - [scope, normal, operations, countries]

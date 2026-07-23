@@ -13,17 +13,17 @@ must_fingerprints:
   - must_id: "item:A.7.5.1:scope_exclusions"
     description: "Excluded flows (intra-jurisdiction) with rationale"
     excerpt_keywords:
-      - [scope, exclusions]
-      - [excluded, flows]
+      - [scope, exclusions, identify]
+      - [excluded, flows, identify]
 
   - must_id: "item:A.7.5.1:scope_flow_inventory"
     description: "PII flow inventory — every flow map row (from A.7.5.2) with jurisdiction pair"
     excerpt_keywords:
-      - [scope, flow, inventory]
-      - [pii, flow, inventory]
+      - [scope, flow, inventory, identify]
+      - [pii, flow, inventory, identify]
 
   - must_id: "item:A.7.5.1:scope_internal_transfers"
     description: "Internal cross-region transfers (multi-region cloud + branch offices)"
     excerpt_keywords:
-      - [scope, internal, transfers]
-      - [internal, cross]
+      - [scope, internal, transfers, identify]
+      - [internal, cross, identify]

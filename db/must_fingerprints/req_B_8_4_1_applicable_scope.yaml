@@ -13,15 +13,15 @@ must_fingerprints:
   - must_id: "item:B.8.4.1:scope_infrastructure"
     description: "Customer-serving infrastructure enumerated"
     excerpt_keywords:
-      - [scope, infrastructure]
+      - [scope, infrastructure, temporary]
 
   - must_id: "item:B.8.4.1:scope_shared_paths"
     description: "Shared paths where cross-tenant temp file leakage is possible (with mitigation)"
     excerpt_keywords:
-      - [scope, shared, paths]
-      - [shared, paths, cross]
+      - [scope, shared, paths, temporary]
+      - [shared, paths, cross, temporary]
 
   - must_id: "item:B.8.4.1:scope_undeletable"
     description: "Undeletable-file circumstances with rationale + compensating controls"
     excerpt_keywords:
-      - [scope, undeletable]
+      - [scope, undeletable, temporary]

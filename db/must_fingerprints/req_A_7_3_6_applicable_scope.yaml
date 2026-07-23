@@ -13,16 +13,16 @@ must_fingerprints:
   - must_id: "item:A.7.3.6:scope_erasure_exceptions"
     description: "Erasure exceptions enumerated (Art.17.3 legal obligation / freedom of expression / public interes..."
     excerpt_keywords:
-      - [scope, erasure, exceptions]
-      - [erasure, exceptions, enumerated]
+      - [scope, erasure, exceptions, access]
+      - [erasure, exceptions, enumerated, access]
 
   - must_id: "item:A.7.3.6:scope_jurisdiction_restrictions"
     description: "Jurisdiction-specific restrictions on when + how correction/erasure can be requested"
     excerpt_keywords:
-      - [scope, jurisdiction, restrictions]
+      - [scope, jurisdiction, restrictions, access]
 
   - must_id: "item:A.7.3.6:scope_subject_universe"
     description: "Subject universe covered (customers / employees / prospects / research participants / etc.)"
     excerpt_keywords:
-      - [scope, subject, universe]
-      - [subject, universe, covered]
+      - [scope, subject, universe, access]
+      - [subject, universe, covered, access]

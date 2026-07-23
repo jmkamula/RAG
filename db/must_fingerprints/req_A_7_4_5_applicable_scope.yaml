@@ -13,15 +13,15 @@ must_fingerprints:
   - must_id: "item:A.7.4.5:scope_backup_coverage"
     description: "Backup + DR system coverage (PII in backups within scope; deletion propagation policy documented)"
     excerpt_keywords:
-      - [scope, backup, coverage]
-      - [backup, system, coverage]
+      - [scope, backup, coverage, pii]
+      - [backup, system, coverage, pii]
 
   - must_id: "item:A.7.4.5:scope_end_triggers"
     description: "End-trigger enumeration per activity type"
     excerpt_keywords:
-      - [scope, end, triggers]
+      - [scope, end, triggers, pii]
 
   - must_id: "item:A.7.4.5:scope_exceptions"
     description: "Exceptions (legal-hold / active litigation / regulator inspection) with rationale"
     excerpt_keywords:
-      - [scope, exceptions]
+      - [scope, exceptions, pii]

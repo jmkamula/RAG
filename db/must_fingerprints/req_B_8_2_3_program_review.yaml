@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:B.8.2.3:rev_conditionality_check"
     description: "No-conditionality regression check — signup / renewal / support flows not gated on marketing consent"
     excerpt_keywords:
-      - [conditionality, check]
+      - [conditionality, check, marketing]
 
   - must_id: "item:B.8.2.3:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, marketing]
 
   - must_id: "item:B.8.2.3:rev_exception_audit"
     description: "Exception audit — any registered exceptions still defensible + consent evidence current"
     excerpt_keywords:
-      - [exception, audit]
+      - [exception, audit, marketing]
 
   - must_id: "item:B.8.2.3:rev_isolation_audit"
     description: "Isolation audit — marketing systems verified to use own-controller PII only"
     excerpt_keywords:
-      - [isolation, audit]
+      - [isolation, audit, marketing]
 
   - must_id: "item:B.8.2.3:rev_reviewer"
     description: "Reviewer identity (DPO + Marketing Lead)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, marketing]

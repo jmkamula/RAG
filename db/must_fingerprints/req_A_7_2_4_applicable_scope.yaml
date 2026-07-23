@@ -13,15 +13,15 @@ must_fingerprints:
   - must_id: "item:A.7.2.4:scope_consent_activities"
     description: "In-scope activities enumerated (map to A.7.2.3 consent-required list)"
     excerpt_keywords:
-      - [scope, consent, activities]
+      - [scope, consent, activities, obtain]
 
   - must_id: "item:A.7.2.4:scope_exclusions"
     description: "Non-consent activities excluded with rationale (contract necessity / legal obligation basis)"
     excerpt_keywords:
-      - [scope, exclusions]
+      - [scope, exclusions, obtain]
 
   - must_id: "item:A.7.2.4:scope_retention"
     description: "Consent record retention (until withdrawn + statutory retention period for demonstration)"
     excerpt_keywords:
-      - [scope, retention]
+      - [scope, retention, obtain]
       - [consent, record, retention]

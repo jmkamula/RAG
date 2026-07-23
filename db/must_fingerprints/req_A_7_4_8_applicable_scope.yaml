@@ -13,17 +13,17 @@ must_fingerprints:
   - must_id: "item:A.7.4.8:scope_cloud_dependencies"
     description: "Cloud disposal dependencies (provider attestations required, retention windows outside org's cont..."
     excerpt_keywords:
-      - [scope, cloud, dependencies]
+      - [scope, cloud, dependencies, disposal]
       - [cloud, disposal, dependencies]
 
   - must_id: "item:A.7.4.8:scope_contexts"
     description: "Disposal contexts enumerated (end-of-processing / hardware failure / decommission / device return..."
     excerpt_keywords:
-      - [scope, contexts]
+      - [scope, contexts, disposal]
       - [disposal, contexts, enumerated]
 
   - must_id: "item:A.7.4.8:scope_media_types"
     description: "Media types in inventory (SSD / HDD / tape / paper / cloud volume / mobile device)"
     excerpt_keywords:
-      - [scope, media, types]
-      - [media, types, inventory]
+      - [scope, media, types, disposal]
+      - [media, types, inventory, disposal]

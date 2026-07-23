@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:B.8.2.4:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, infringing]
 
   - must_id: "item:B.8.2.4:rev_legislation_currency"
     description: "Legislation currency — cited legislation updated for regulatory changes"
     excerpt_keywords:
-      - [legislation, currency]
+      - [legislation, currency, infringing]
 
   - must_id: "item:B.8.2.4:rev_notification_audit"
     description: "Notification audit — sampled notifications reviewed for accuracy + timeliness"
     excerpt_keywords:
-      - [notification, audit]
+      - [notification, audit, infringing]
 
   - must_id: "item:B.8.2.4:rev_reviewer"
     description: "Reviewer identity (DPO + Legal)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, infringing]
 
   - must_id: "item:B.8.2.4:rev_trigger_health"
     description: "Trigger health — sample of high-risk instruction categories reviewed for missed infringement flags"
     excerpt_keywords:
-      - [trigger, health]
+      - [trigger, health, infringing]

@@ -13,20 +13,20 @@ must_fingerprints:
   - must_id: "item:B.8.4.2:rev_backup_propagation"
     description: "Backup propagation audit — sampled disposals verified to have propagated to backup tiers"
     excerpt_keywords:
-      - [backup, propagation]
-      - [backup, propagation, audit]
+      - [backup, propagation, return]
+      - [backup, propagation, audit, return]
 
   - must_id: "item:B.8.4.2:rev_completion_audit"
     description: "Completion audit — sampled terminations verified end-to-end (data returned + disposal certified)"
     excerpt_keywords:
-      - [completion, audit]
+      - [completion, audit, return]
 
   - must_id: "item:B.8.4.2:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, return]
 
   - must_id: "item:B.8.4.2:rev_reviewer"
     description: "Reviewer identity (Trust + DPO + Platform Ops)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, return]

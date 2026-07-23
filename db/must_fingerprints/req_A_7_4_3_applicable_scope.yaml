@@ -13,15 +13,15 @@ must_fingerprints:
   - must_id: "item:A.7.4.3:scope_high_churn_fields"
     description: "High-churn field categories (contact details / address / employment / preferences)"
     excerpt_keywords:
-      - [scope, high, churn, fields]
+      - [scope, high, churn, fields, accuracy]
 
   - must_id: "item:A.7.4.3:scope_low_churn_fields"
     description: "Low-churn field categories (date of birth / national ID / immutable identifiers)"
     excerpt_keywords:
-      - [scope, low, churn, fields]
+      - [scope, low, churn, fields, accuracy]
 
   - must_id: "item:A.7.4.3:scope_verification_sources"
     description: "Verification source map (postal address vs national registry vs subject self-serve)"
     excerpt_keywords:
-      - [scope, verification, sources]
-      - [verification, source, map]
+      - [scope, verification, sources, accuracy]
+      - [verification, source, map, accuracy]

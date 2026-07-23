@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.2.2:rev_basis_currency"
     description: "Basis currency — every registered activity still has a valid basis in force"
     excerpt_keywords:
-      - [basis, currency]
+      - [basis, currency, identify]
 
   - must_id: "item:A.7.2.2:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, identify]
 
   - must_id: "item:A.7.2.2:rev_lia_reaffirmation"
     description: "LIA reaffirmation — sampled legitimate-interests activities reviewed against current subject-righ..."
     excerpt_keywords:
-      - [lia, reaffirmation]
+      - [lia, reaffirmation, identify]
 
   - must_id: "item:A.7.2.2:rev_reviewer"
     description: "Reviewer identity (DPO + legal counsel)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, identify]
 
   - must_id: "item:A.7.2.2:rev_special_category_audit"
     description: "Special-category audit — dual-basis coverage confirmed where Art.9/10 data processed"
     excerpt_keywords:
-      - [special, category, audit]
+      - [special, category, audit, identify]

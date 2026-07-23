@@ -13,20 +13,20 @@ must_fingerprints:
   - must_id: "item:A.7.4.7:rev_currency_check"
     description: "Schedule currency check — recent regulatory / business changes reflected"
     excerpt_keywords:
-      - [currency, check]
-      - [schedule, currency, check]
+      - [currency, check, retention]
+      - [schedule, currency, check, retention]
 
   - must_id: "item:A.7.4.7:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, retention]
 
   - must_id: "item:A.7.4.7:rev_deletion_audit"
     description: "Deletion audit — sampled records past schedule verified deleted per A.7.4.5"
     excerpt_keywords:
-      - [deletion, audit]
+      - [deletion, audit, retention]
 
   - must_id: "item:A.7.4.7:rev_reviewer"
     description: "Reviewer identity (DPO + Legal + Records Management)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, retention]

@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:B.8.5.7:rev_authorisation_audit"
     description: "Authorisation audit — every engagement traceable to customer authorisation"
     excerpt_keywords:
-      - [authorisation, audit]
+      - [authorisation, audit, engagement]
 
   - must_id: "item:B.8.5.7:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, engagement]
 
   - must_id: "item:B.8.5.7:rev_flowdown_audit"
     description: "Flow-down audit — sampled contracts verified against Annex B coverage"
     excerpt_keywords:
-      - [flowdown, audit]
+      - [flowdown, audit, engagement]
 
   - must_id: "item:B.8.5.7:rev_reviewer"
     description: "Reviewer identity (Procurement + Legal + DPO)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, engagement]

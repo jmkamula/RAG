@@ -13,22 +13,22 @@ must_fingerprints:
   - must_id: "item:A.7.4.9:scope_customer_apis"
     description: "Customer-facing APIs carrying PII"
     excerpt_keywords:
-      - [scope, customer, apis]
+      - [scope, customer, apis, pii]
 
   - must_id: "item:A.7.4.9:scope_email_paths"
     description: "Email + file-sharing paths where PII may be transmitted"
     excerpt_keywords:
-      - [scope, email, paths]
-      - [email, file]
+      - [scope, email, paths, pii]
+      - [email, file, pii]
 
   - must_id: "item:A.7.4.9:scope_integrations"
     description: "Integration endpoints (partner APIs + processor exchanges + third-party enrichment)"
     excerpt_keywords:
-      - [scope, integrations]
-      - [integration, endpoints]
+      - [scope, integrations, pii]
+      - [integration, endpoints, pii]
 
   - must_id: "item:A.7.4.9:scope_internal_transfers"
     description: "Internal transfers (cross-region backup / DR replication / data warehouse loads)"
     excerpt_keywords:
-      - [scope, internal, transfers]
-      - [internal, transfers]
+      - [scope, internal, transfers, pii]
+      - [internal, transfers, pii]

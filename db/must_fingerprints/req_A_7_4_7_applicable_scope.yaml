@@ -13,17 +13,17 @@ must_fingerprints:
   - must_id: "item:A.7.4.7:scope_business_data"
     description: "Business PII categories with business retention rationale"
     excerpt_keywords:
-      - [scope, business, data]
-      - [business, pii, categories, business]
+      - [scope, business, data, retention]
+      - [business, pii, categories, business, retention]
 
   - must_id: "item:A.7.4.7:scope_default_period"
     description: "Default retention period for uncategorised PII"
     excerpt_keywords:
-      - [scope, default, period]
+      - [scope, default, period, retention]
       - [default, retention, period, uncategorised]
 
   - must_id: "item:A.7.4.7:scope_regulated_data"
     description: "Regulated PII categories (health / financial / employment / tax / other jurisdiction-specific)"
     excerpt_keywords:
-      - [scope, regulated, data]
-      - [regulated, pii, categories]
+      - [scope, regulated, data, retention]
+      - [regulated, pii, categories, retention]

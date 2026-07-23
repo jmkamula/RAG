@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:A.7.4.5:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, pii]
 
   - must_id: "item:A.7.4.5:rev_reviewer"
     description: "Reviewer identity (DPO + Data Ops + Infrastructure)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, pii]
 
   - must_id: "item:A.7.4.5:rev_trigger_health"
     description: "Trigger health — end-of-processing detection functioning across activity types"
     excerpt_keywords:
-      - [trigger, health]
+      - [trigger, health, pii]
 
   - must_id: "item:A.7.4.5:rev_verification_audit"
     description: "Verification audit — sampled actions verified to have removed PII across primary + backup"
     excerpt_keywords:
-      - [verification, audit]
+      - [verification, audit, pii]

@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.2.3:rev_artifact_audit"
     description: "Artifact audit — sampled consent forms reviewed against quality standard"
     excerpt_keywords:
-      - [artifact, audit]
+      - [artifact, audit, determine]
 
   - must_id: "item:A.7.2.3:rev_children_audit"
     description: "Children-consent audit — age-gates functioning where age-of-consent applies"
     excerpt_keywords:
-      - [children, audit]
+      - [children, audit, determine]
 
   - must_id: "item:A.7.2.3:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, determine]
 
   - must_id: "item:A.7.2.3:rev_no_bundling_check"
     description: "No-bundling regression check — no service gated behind unrelated consent"
     excerpt_keywords:
-      - [bundling, check]
+      - [bundling, check, determine]
 
   - must_id: "item:A.7.2.3:rev_reviewer"
     description: "Reviewer identity (DPO + UX + Legal)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, determine]

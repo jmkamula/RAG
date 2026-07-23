@@ -18,10 +18,10 @@ must_fingerprints:
   - must_id: "item:B.8.2.1:scope_exclusions"
     description: "Excluded engagements (own-controller services / non-PII services) with rationale"
     excerpt_keywords:
-      - [scope, exclusions]
-      - [excluded, engagements]
+      - [scope, exclusions, customer]
+      - [excluded, engagements, customer]
 
   - must_id: "item:B.8.2.1:scope_pii_processor_test"
     description: "PII-processor test per engagement — processing PII on customer's behalf under customer's instruct..."
     excerpt_keywords:
-      - [scope, pii, processor, test]
+      - [scope, pii, processor, test, customer]

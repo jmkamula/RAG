@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:A.7.3.4:rev_channel_test"
     description: "Channel test — end-to-end withdrawal test per channel"
     excerpt_keywords:
-      - [channel, test]
+      - [channel, test, providing]
 
   - must_id: "item:A.7.3.4:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, providing]
 
   - must_id: "item:A.7.3.4:rev_propagation_audit"
     description: "Propagation audit — sampled withdrawals verified to have stopped downstream processing + notified..."
     excerpt_keywords:
-      - [propagation, audit]
+      - [propagation, audit, providing]
 
   - must_id: "item:A.7.3.4:rev_reviewer"
     description: "Reviewer identity (DPO + Engineering)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, providing]

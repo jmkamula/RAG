@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.4.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, limit]
 
   - must_id: "item:A.7.4.1:rev_default_state_audit"
     description: "Default-state audit — optional fields default off across surfaces"
     excerpt_keywords:
-      - [default, state, audit]
+      - [default, state, audit, limit]
 
   - must_id: "item:A.7.4.1:rev_drift_sweep"
     description: "Drift sweep — new fields added since last review flagged for necessity review"
     excerpt_keywords:
-      - [drift, sweep]
+      - [drift, sweep, limit]
 
   - must_id: "item:A.7.4.1:rev_necessity_audit"
     description: "Necessity audit — sampled fields reviewed against current purpose register"
     excerpt_keywords:
-      - [necessity, audit]
+      - [necessity, audit, limit]
 
   - must_id: "item:A.7.4.1:rev_reviewer"
     description: "Reviewer identity (DPO + Privacy Engineering)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, limit]

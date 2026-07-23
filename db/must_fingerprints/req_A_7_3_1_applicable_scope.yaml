@@ -13,17 +13,17 @@ must_fingerprints:
   - must_id: "item:A.7.3.1:scope_exclusions"
     description: "Excluded jurisdictions / subjects with rationale"
     excerpt_keywords:
-      - [scope, exclusions]
-      - [excluded, jurisdictions, subjects, rationale]
+      - [scope, exclusions, determining]
+      - [excluded, jurisdictions, subjects, rationale, determining]
 
   - must_id: "item:A.7.3.1:scope_jurisdictions"
     description: "Applicable jurisdictions listed with basis per row"
     excerpt_keywords:
-      - [scope, jurisdictions]
-      - [applicable, jurisdictions, listed, basis]
+      - [scope, jurisdictions, determining]
+      - [applicable, jurisdictions, listed, basis, determining]
 
   - must_id: "item:A.7.3.1:scope_subject_categories"
     description: "Subject categories per jurisdiction (customers / employees / minors / patients / etc.)"
     excerpt_keywords:
-      - [scope, subject, categories]
-      - [subject, categories, jurisdiction]
+      - [scope, subject, categories, determining]
+      - [subject, categories, jurisdiction, determining]

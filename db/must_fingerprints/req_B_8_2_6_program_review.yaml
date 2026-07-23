@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:B.8.2.6:rev_accuracy_sample"
     description: "Accuracy sample — random rows verified against customer instruction record + subprocessor list"
     excerpt_keywords:
-      - [accuracy, sample]
+      - [accuracy, sample, records]
 
   - must_id: "item:B.8.2.6:rev_completeness"
     description: "Completeness check — one RoPA row per active customer engagement"
     excerpt_keywords:
-      - [completeness, check]
+      - [completeness, check, records]
 
   - must_id: "item:B.8.2.6:rev_customer_extract_test"
     description: "Customer-extract test — sampled customers requested + received their RoPA row within SLA"
     excerpt_keywords:
-      - [customer, extract, test]
+      - [customer, extract, test, records]
 
   - must_id: "item:B.8.2.6:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, records]
 
   - must_id: "item:B.8.2.6:rev_reviewer"
     description: "Reviewer identity (DPO + Trust Ops)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, records]

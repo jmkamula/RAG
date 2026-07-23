@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:A.7.4.4:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, pii]
 
   - must_id: "item:A.7.4.4:rev_drift_sweep"
     description: "Drift sweep — new processing activities checked for minimisation opportunity"
     excerpt_keywords:
-      - [drift, sweep]
+      - [drift, sweep, pii]
 
   - must_id: "item:A.7.4.4:rev_reviewer"
     description: "Reviewer identity (DPO + Privacy Engineering)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, pii]
 
   - must_id: "item:A.7.4.4:rev_technique_currency"
     description: "Technique currency — techniques still appropriate for risk profile (advances in re-identification..."
     excerpt_keywords:
-      - [technique, currency]
+      - [technique, currency, pii]

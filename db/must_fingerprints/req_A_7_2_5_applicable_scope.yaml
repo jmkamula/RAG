@@ -13,20 +13,20 @@ must_fingerprints:
   - must_id: "item:A.7.2.5:scope_art35_3_mandatory"
     description: "Art.35.3 mandatory categories mapped (systematic evaluation + Art.9/10 large-scale + systematic p..."
     excerpt_keywords:
-      - [scope, art35, mandatory]
-      - [art, mandatory, categories, mapped]
+      - [scope, art35, mandatory, privacy]
+      - [art, mandatory, categories, mapped, privacy]
 
   - must_id: "item:A.7.2.5:scope_exclusions"
     description: "Out-of-scope processing (low-risk / legacy) with rationale"
     excerpt_keywords:
-      - [scope, exclusions]
+      - [scope, exclusions, privacy]
 
   - must_id: "item:A.7.2.5:scope_org_indicators"
     description: "Org-specific high-risk indicators (novel tech / vulnerable subjects / large-scale)"
     excerpt_keywords:
-      - [scope, org, indicators]
+      - [scope, org, indicators, privacy]
 
   - must_id: "item:A.7.2.5:scope_sa_lists"
     description: "SA-published mandatory-DPIA lists per applicable jurisdiction (Art.35.4)"
     excerpt_keywords:
-      - [scope, lists]
+      - [scope, lists, privacy]

@@ -13,8 +13,8 @@ must_fingerprints:
   - must_id: "item:A.7.4.4:scope_candidates"
     description: "Minimisation candidates enumerated (analytics + reporting + ML + test environments + logs)"
     excerpt_keywords:
-      - [scope, candidates]
-      - [minimisation, candidates, enumerated]
+      - [scope, candidates, pii]
+      - [minimisation, candidates, enumerated, pii]
 
   - must_id: "item:A.7.4.4:scope_full_pii_needed"
     description: "Full-PII contexts (operational transactions + notifications + support) with justification"
@@ -24,4 +24,4 @@ must_fingerprints:
   - must_id: "item:A.7.4.4:scope_reidentification_risk"
     description: "Re-identification risk considerations per context (combinations of attributes / auxiliary data / ..."
     excerpt_keywords:
-      - [scope, reidentification, risk]
+      - [scope, reidentification, risk, pii]

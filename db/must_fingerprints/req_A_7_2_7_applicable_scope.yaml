@@ -13,13 +13,13 @@ must_fingerprints:
   - must_id: "item:A.7.2.7:scope_arrangements_list"
     description: "In-scope arrangements enumerated (or 'none' with rationale)"
     excerpt_keywords:
-      - [scope, arrangements, list]
+      - [scope, arrangements, list, joint]
 
   - must_id: "item:A.7.2.7:scope_exclusions"
     description: "Relationships excluded (controller-processor → A.7.2.6 / independent-controllers → contract-not-a..."
     excerpt_keywords:
-      - [scope, exclusions]
-      - [relationships, excluded]
+      - [scope, exclusions, joint]
+      - [relationships, excluded, joint]
 
   - must_id: "item:A.7.2.7:scope_joint_test"
     description: "Joint-control test — jointly determine purposes AND means (both prongs required)"

@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:B.8.5.4:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, notification]
 
   - must_id: "item:B.8.5.4:rev_gag_order_audit"
     description: "Gag-order audit — invocations defensible + post-order notifications issued when possible"
     excerpt_keywords:
-      - [gag, order, audit]
+      - [gag, order, audit, notification]
 
   - must_id: "item:B.8.5.4:rev_reviewer"
     description: "Reviewer identity (Legal + DPO)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, notification]
 
   - must_id: "item:B.8.5.4:rev_timeframe_audit"
     description: "Timeframe audit — notifications within agreed timeframes"
     excerpt_keywords:
-      - [timeframe, audit]
+      - [timeframe, audit, notification]

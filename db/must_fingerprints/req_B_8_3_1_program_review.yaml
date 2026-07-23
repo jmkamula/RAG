@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:B.8.3.1:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, obligations]
 
   - must_id: "item:B.8.3.1:rev_path_currency"
     description: "Support-path currency — technical paths remain functional after product changes"
     excerpt_keywords:
-      - [path, currency]
+      - [path, currency, obligations]
 
   - must_id: "item:B.8.3.1:rev_reviewer"
     description: "Reviewer identity (DPO + Product + Trust)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, obligations]
 
   - must_id: "item:B.8.3.1:rev_sla_audit"
     description: "SLA audit — support responses measured against contract SLAs"
     excerpt_keywords:
-      - [sla, audit]
+      - [sla, audit, obligations]

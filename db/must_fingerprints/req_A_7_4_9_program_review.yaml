@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.4.9:rev_audit_log_retention_check"
     description: "Audit-log retention check — retention meets policy"
     excerpt_keywords:
-      - [audit, log, retention, check]
+      - [audit, log, retention, check, pii]
 
   - must_id: "item:A.7.4.9:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, pii]
 
   - must_id: "item:A.7.4.9:rev_encryption_currency"
     description: "Encryption currency — TLS / cipher-suite standards current (deprecated protocols flagged)"
     excerpt_keywords:
-      - [encryption, currency]
+      - [encryption, currency, pii]
 
   - must_id: "item:A.7.4.9:rev_reviewer"
     description: "Reviewer identity (Infrastructure + Security Engineering + DPO)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, pii]
 
   - must_id: "item:A.7.4.9:rev_shadow_channel_sweep"
     description: "Shadow-channel sweep — unauthorised transmission paths flagged (e.g. developers using consumer fi..."
     excerpt_keywords:
-      - [shadow, channel, sweep]
+      - [shadow, channel, sweep, pii]

@@ -13,16 +13,16 @@ must_fingerprints:
   - must_id: "item:A.7.2.8:scope_coverage_test"
     description: "Coverage test — RoPA rowcount reconciles against A.7.2.1 purpose register + system inventory"
     excerpt_keywords:
-      - [scope, coverage, test]
-      - [coverage, test]
+      - [scope, coverage, test, records]
+      - [coverage, test, records]
 
   - must_id: "item:A.7.2.8:scope_covered_activities"
     description: "Covered activities enumerated (all processing activities the org performs)"
     excerpt_keywords:
-      - [scope, covered, activities]
-      - [covered, activities, enumerated]
+      - [scope, covered, activities, records]
+      - [covered, activities, enumerated, records]
 
   - must_id: "item:A.7.2.8:scope_exclusions"
     description: "Exclusions — anonymous / aggregate processing not in RoPA with rationale"
     excerpt_keywords:
-      - [scope, exclusions]
+      - [scope, exclusions, records]

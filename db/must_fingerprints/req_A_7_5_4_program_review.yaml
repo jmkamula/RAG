@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:A.7.5.4:rev_authority_audit"
     description: "Authority audit — sampled disclosures reviewed for documented authority"
     excerpt_keywords:
-      - [authority, audit]
+      - [authority, audit, records]
 
   - must_id: "item:A.7.5.4:rev_completeness"
     description: "Completeness check — investigation + audit disclosures reconciled"
     excerpt_keywords:
-      - [completeness, check]
+      - [completeness, check, records]
 
   - must_id: "item:A.7.5.4:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, records]
 
   - must_id: "item:A.7.5.4:rev_reviewer"
     description: "Reviewer identity (DPO + Legal)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, records]

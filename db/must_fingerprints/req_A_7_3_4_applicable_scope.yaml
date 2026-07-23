@@ -13,14 +13,14 @@ must_fingerprints:
   - must_id: "item:A.7.3.4:scope_channel_map"
     description: "Per-activity collection channel → withdrawal channel map"
     excerpt_keywords:
-      - [scope, channel, map]
+      - [scope, channel, map, providing]
 
   - must_id: "item:A.7.3.4:scope_consent_activities"
     description: "Consent-based activities enumerated (link to A.7.2.2 lawful basis register)"
     excerpt_keywords:
-      - [scope, consent, activities]
+      - [scope, consent, activities, providing]
 
   - must_id: "item:A.7.3.4:scope_jurisdiction_variance"
     description: "Jurisdiction-specific variations (some jurisdictions restrict when withdrawal is possible)"
     excerpt_keywords:
-      - [scope, jurisdiction, variance]
+      - [scope, jurisdiction, variance, providing]

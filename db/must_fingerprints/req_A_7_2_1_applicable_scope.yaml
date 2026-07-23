@@ -13,15 +13,15 @@ must_fingerprints:
   - must_id: "item:A.7.2.1:scope_activities"
     description: "In-scope processing activities enumerated"
     excerpt_keywords:
-      - [scope, activities]
+      - [scope, activities, identify]
 
   - must_id: "item:A.7.2.1:scope_exclusions"
     description: "Out-of-scope activities (anonymous analytics, aggregate reporting) with rationale"
     excerpt_keywords:
-      - [scope, exclusions]
+      - [scope, exclusions, identify]
 
   - must_id: "item:A.7.2.1:scope_pii_test"
     description: "Operational test for 'involves PII processing' (identifiability + processing operation)"
     excerpt_keywords:
-      - [scope, pii, test]
-      - [operational, test, involves, pii]
+      - [scope, pii, test, identify]
+      - [operational, test, involves, pii, identify]

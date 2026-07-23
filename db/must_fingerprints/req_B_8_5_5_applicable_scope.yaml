@@ -13,16 +13,16 @@ must_fingerprints:
   - must_id: "item:B.8.5.5:scope_authorisation_paths"
     description: "Customer authorisation paths (contract clause / one-off approval / DPA schedule)"
     excerpt_keywords:
-      - [scope, authorisation, paths]
-      - [customer, authorisation, paths]
+      - [scope, authorisation, paths, legally]
+      - [customer, authorisation, paths, legally]
 
   - must_id: "item:B.8.5.5:scope_default_reject"
     description: "Default reject scope (informal / social-engineering / marketing requests)"
     excerpt_keywords:
-      - [scope, default, reject]
+      - [scope, default, reject, legally]
 
   - must_id: "item:B.8.5.5:scope_request_types"
     description: "Request types requiring decision (legal request / third-party request / journalist request / mark..."
     excerpt_keywords:
-      - [scope, request, types]
-      - [request, types, requiring, decision]
+      - [scope, request, types, legally]
+      - [request, types, requiring, decision, legally]

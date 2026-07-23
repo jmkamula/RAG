@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:B.8.4.3:rev_contract_alignment_audit"
     description: "Contract-alignment audit — sampled channels reviewed against customer B.8.2.1 agreements"
     excerpt_keywords:
-      - [contract, alignment, audit]
+      - [contract, alignment, audit, pii]
 
   - must_id: "item:B.8.4.3:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, pii]
 
   - must_id: "item:B.8.4.3:rev_reviewer"
     description: "Reviewer identity (Platform Ops + Security Engineering + DPO)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, pii]
 
   - must_id: "item:B.8.4.3:rev_shadow_channel_sweep"
     description: "Shadow-channel sweep — unauthorised channels flagged"
     excerpt_keywords:
-      - [shadow, channel, sweep]
+      - [shadow, channel, sweep, pii]

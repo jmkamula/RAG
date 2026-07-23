@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:B.8.5.5:rev_classification_audit"
     description: "Classification audit — sampled decisions reviewed for correctness"
     excerpt_keywords:
-      - [classification, audit]
+      - [classification, audit, legally]
 
   - must_id: "item:B.8.5.5:rev_consultation_audit"
     description: "Consultation audit — customer-consultation happened before disclosure"
     excerpt_keywords:
-      - [consultation, audit]
+      - [consultation, audit, legally]
 
   - must_id: "item:B.8.5.5:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, legally]
 
   - must_id: "item:B.8.5.5:rev_reviewer"
     description: "Reviewer identity (Legal + Trust + DPO)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, legally]

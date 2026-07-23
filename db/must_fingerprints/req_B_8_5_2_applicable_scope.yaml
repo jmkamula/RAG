@@ -13,14 +13,14 @@ must_fingerprints:
   - must_id: "item:B.8.5.2:scope_law_enforcement"
     description: "Law-enforcement exception handling documented"
     excerpt_keywords:
-      - [scope, law, enforcement]
+      - [scope, law, enforcement, countries]
 
   - must_id: "item:B.8.5.2:scope_normal"
     description: "Normal-operations destinations enumerated"
     excerpt_keywords:
-      - [scope, normal]
+      - [scope, normal, countries]
 
   - must_id: "item:B.8.5.2:scope_support"
     description: "Support-access destinations (where support engineers in other regions can access customer PII)"
     excerpt_keywords:
-      - [scope, support]
+      - [scope, support, countries]

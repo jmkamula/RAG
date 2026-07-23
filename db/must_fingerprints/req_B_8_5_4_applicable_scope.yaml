@@ -13,16 +13,16 @@ must_fingerprints:
   - must_id: "item:B.8.5.4:scope_gag_order_scope"
     description: "Gag-order-capable jurisdictions (where law can prohibit notification)"
     excerpt_keywords:
-      - [scope, gag, order, scope]
+      - [scope, gag, order, scope, notification]
 
   - must_id: "item:B.8.5.4:scope_jurisdictions"
     description: "Jurisdictions where the org may receive legally-binding requests"
     excerpt_keywords:
-      - [scope, jurisdictions]
-      - [jurisdictions, org, receive, legally]
+      - [scope, jurisdictions, notification]
+      - [jurisdictions, org, receive, legally, notification]
 
   - must_id: "item:B.8.5.4:scope_request_types"
     description: "Request types enumerated (subpoena / court order / national security letter / regulator compulsion)"
     excerpt_keywords:
-      - [scope, request, types]
-      - [request, types, enumerated]
+      - [scope, request, types, notification]
+      - [request, types, enumerated, notification]

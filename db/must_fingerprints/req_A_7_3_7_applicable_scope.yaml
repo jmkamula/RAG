@@ -13,15 +13,15 @@ must_fingerprints:
   - must_id: "item:A.7.3.7:scope_channel_map"
     description: "Per-recipient communication channel (email / API / portal)"
     excerpt_keywords:
-      - [scope, channel, map]
+      - [scope, channel, map, pii]
 
   - must_id: "item:A.7.3.7:scope_exclusions"
     description: "Excluded recipients with rationale (e.g. one-time disclosures with PII already destroyed)"
     excerpt_keywords:
-      - [scope, exclusions]
-      - [excluded, recipients, rationale]
+      - [scope, exclusions, pii]
+      - [excluded, recipients, rationale, pii]
 
   - must_id: "item:A.7.3.7:scope_recipients_list"
     description: "Third-party recipients enumerated (link to A.7.5.4 disclosure register)"
     excerpt_keywords:
-      - [scope, recipients, list]
+      - [scope, recipients, list, pii]

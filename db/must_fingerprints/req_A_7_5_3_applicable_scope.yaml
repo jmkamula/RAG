@@ -13,17 +13,17 @@ must_fingerprints:
   - must_id: "item:A.7.5.3:scope_exclusions"
     description: "Excluded events (intra-org + fully-anonymised aggregates) with rationale"
     excerpt_keywords:
-      - [scope, exclusions]
-      - [excluded, events]
+      - [scope, exclusions, records]
+      - [excluded, events, records]
 
   - must_id: "item:A.7.5.3:scope_recordable_events"
     description: "Recordable transfer types (batch export / API push / support-driven / M&A / rights-fulfilment cas..."
     excerpt_keywords:
-      - [scope, recordable, events]
+      - [scope, recordable, events, records]
       - [recordable, transfer, types]
 
   - must_id: "item:A.7.5.3:scope_retention_period"
     description: "Retention period for transfer records (per A.7.4.7 schedule)"
     excerpt_keywords:
-      - [scope, retention, period]
+      - [scope, retention, period, records]
       - [retention, period, transfer, records]

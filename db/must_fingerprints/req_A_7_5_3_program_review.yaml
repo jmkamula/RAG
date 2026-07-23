@@ -13,20 +13,20 @@ must_fingerprints:
   - must_id: "item:A.7.5.3:rev_completeness"
     description: "Completeness check — actual transfer events reconciled against log"
     excerpt_keywords:
-      - [completeness, check]
+      - [completeness, check, records]
 
   - must_id: "item:A.7.5.3:rev_cooperation_test"
     description: "Cooperation channel test — sampled third parties re-contactable for subject-rights follow-up"
     excerpt_keywords:
-      - [cooperation, test]
-      - [cooperation, channel, test]
+      - [cooperation, test, records]
+      - [cooperation, channel, test, records]
 
   - must_id: "item:A.7.5.3:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, records]
 
   - must_id: "item:A.7.5.3:rev_reviewer"
     description: "Reviewer identity (DPO + Data Ops)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, records]

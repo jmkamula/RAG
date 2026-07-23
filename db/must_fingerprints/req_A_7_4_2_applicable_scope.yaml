@@ -13,17 +13,17 @@ must_fingerprints:
   - must_id: "item:A.7.4.2:scope_exclusions"
     description: "Excluded operations (anonymised / aggregate) with rationale"
     excerpt_keywords:
-      - [scope, exclusions]
-      - [excluded, operations]
+      - [scope, exclusions, limit]
+      - [excluded, operations, limit]
 
   - must_id: "item:A.7.4.2:scope_integrations"
     description: "Integration processing (webhooks + third-party enrichment + backup + DR)"
     excerpt_keywords:
-      - [scope, integrations]
-      - [integration, processing]
+      - [scope, integrations, limit]
+      - [integration, processing, limit]
 
   - must_id: "item:A.7.4.2:scope_internal_operations"
     description: "Internal processing operations enumerated (application queries / reports / dashboards / ML pipeli..."
     excerpt_keywords:
-      - [scope, internal, operations]
-      - [internal, processing, operations, enumerated]
+      - [scope, internal, operations, limit]
+      - [internal, processing, operations, enumerated, limit]

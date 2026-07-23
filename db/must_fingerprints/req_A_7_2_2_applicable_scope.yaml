@@ -13,16 +13,16 @@ must_fingerprints:
   - must_id: "item:A.7.2.2:scope_basis_catalogs"
     description: "Per-jurisdiction basis catalog (Art.6.1 GDPR / CCPA opt-out model / LGPD Art.7)"
     excerpt_keywords:
-      - [scope, basis, catalogs]
+      - [scope, basis, catalogs, identify]
 
   - must_id: "item:A.7.2.2:scope_jurisdictions"
     description: "Applicable jurisdictions listed (with basis for each — establishment / target-market / monitoring)"
     excerpt_keywords:
-      - [scope, jurisdictions]
-      - [applicable, jurisdictions, listed]
+      - [scope, jurisdictions, identify]
+      - [applicable, jurisdictions, listed, identify]
 
   - must_id: "item:A.7.2.2:scope_overlap_rules"
     description: "Overlap rules — where an activity spans jurisdictions, most-restrictive-basis policy documented"
     excerpt_keywords:
-      - [scope, overlap, rules]
-      - [overlap, rules]
+      - [scope, overlap, rules, identify]
+      - [overlap, rules, identify]

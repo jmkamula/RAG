@@ -13,16 +13,16 @@ must_fingerprints:
   - must_id: "item:A.7.5.4:scope_audit"
     description: "External audit disclosures (regulatory + customer audits)"
     excerpt_keywords:
-      - [scope, audit]
-      - [external, audit, disclosures]
+      - [scope, audit, records]
+      - [external, audit, disclosures, records]
 
   - must_id: "item:A.7.5.4:scope_investigation"
     description: "Investigation contexts (internal + external law enforcement)"
     excerpt_keywords:
-      - [scope, investigation]
-      - [investigation, contexts]
+      - [scope, investigation, records]
+      - [investigation, contexts, records]
 
   - must_id: "item:A.7.5.4:scope_normal_disclosures"
     description: "Normal-course disclosures enumerated (recurring integrations)"
     excerpt_keywords:
-      - [scope, normal, disclosures]
+      - [scope, normal, disclosures, records]

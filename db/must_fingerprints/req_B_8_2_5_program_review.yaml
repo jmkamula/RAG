@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:B.8.2.5:rev_audit_rights_audit"
     description: "Audit rights audit — customer audits requested + granted per contract tier"
     excerpt_keywords:
-      - [audit, rights, audit]
+      - [audit, rights, audit, customer]
 
   - must_id: "item:B.8.2.5:rev_certification_health"
     description: "Certification health — currency + scope of shared certifications reviewed"
     excerpt_keywords:
-      - [certification, health]
+      - [certification, health, customer]
 
   - must_id: "item:B.8.2.5:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, customer]
 
   - must_id: "item:B.8.2.5:rev_reviewer"
     description: "Reviewer identity (Trust + Compliance + Sales Ops)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, customer]
 
   - must_id: "item:B.8.2.5:rev_sla_audit"
     description: "SLA audit — sampled requests measured against response SLA"
     excerpt_keywords:
-      - [sla, audit]
+      - [sla, audit, customer]

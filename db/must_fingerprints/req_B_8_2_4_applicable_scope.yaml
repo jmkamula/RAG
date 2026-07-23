@@ -19,11 +19,11 @@ must_fingerprints:
   - must_id: "item:B.8.2.4:scope_priority_topics"
     description: "Priority topics — instruction types most likely to raise infringement issues (retention / disclos..."
     excerpt_keywords:
-      - [scope, priority, topics]
-      - [priority, topics]
+      - [scope, priority, topics, infringing]
+      - [priority, topics, infringing]
 
   - must_id: "item:B.8.2.4:scope_review_capability"
     description: "Review capability disclosure — where technological constraints limit ability to detect infringeme..."
     excerpt_keywords:
-      - [scope, review, capability]
-      - [review, capability, disclosure]
+      - [scope, review, capability, infringing]
+      - [review, capability, disclosure, infringing]

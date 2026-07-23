@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.2.7:rev_coverage_check"
     description: "Coverage check — every joint arrangement identified is documented"
     excerpt_keywords:
-      - [coverage, check]
+      - [coverage, check, joint]
 
   - must_id: "item:A.7.2.7:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, joint]
 
   - must_id: "item:A.7.2.7:rev_essence_publication_audit"
     description: "Essence-publication audit — sampled arrangements verified to have published essence reachable by ..."
     excerpt_keywords:
-      - [essence, publication, audit]
+      - [essence, publication, audit, joint]
 
   - must_id: "item:A.7.2.7:rev_reviewer"
     description: "Reviewer identity (DPO + Legal)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, joint]
 
   - must_id: "item:A.7.2.7:rev_rights_routing_test"
     description: "Rights-routing test — sampled subject requests verified to route correctly regardless of party ad..."
     excerpt_keywords:
-      - [rights, routing, test]
+      - [rights, routing, test, joint]

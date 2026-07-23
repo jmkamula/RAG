@@ -13,15 +13,15 @@ must_fingerprints:
   - must_id: "item:B.8.4.2:scope_ma_events"
     description: "M&A events — where PII moves to another controller (transfer scenario)"
     excerpt_keywords:
-      - [scope, events]
+      - [scope, events, return]
 
   - must_id: "item:B.8.4.2:scope_retention_window"
     description: "Post-termination retention window before disposal (accidental-lapse protection)"
     excerpt_keywords:
-      - [scope, retention, window]
+      - [scope, retention, window, return]
 
   - must_id: "item:B.8.4.2:scope_termination_triggers"
     description: "Termination triggers enumerated (contract expiry / customer offboarding / product discontinuation)"
     excerpt_keywords:
-      - [scope, termination, triggers]
-      - [termination, triggers, enumerated]
+      - [scope, termination, triggers, return]
+      - [termination, triggers, enumerated, return]

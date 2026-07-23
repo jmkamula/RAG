@@ -13,19 +13,19 @@ must_fingerprints:
   - must_id: "item:B.8.5.2:rev_completeness"
     description: "Completeness check — actual customer-PII flows reconciled against register"
     excerpt_keywords:
-      - [completeness, check]
+      - [completeness, check, countries]
 
   - must_id: "item:B.8.5.2:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, countries]
 
   - must_id: "item:B.8.5.2:rev_disclosure_sync"
     description: "Customer-facing disclosure sync (DPA schedule / trust page / on-request material matches register)"
     excerpt_keywords:
-      - [disclosure, sync]
+      - [disclosure, sync, countries]
 
   - must_id: "item:B.8.5.2:rev_reviewer"
     description: "Reviewer identity (Trust + DPO)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, countries]

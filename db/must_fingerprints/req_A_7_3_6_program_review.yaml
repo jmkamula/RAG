@@ -13,24 +13,24 @@ must_fingerprints:
   - must_id: "item:A.7.3.6:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date, planned, interval]
+      - [review, date, planned, interval, access]
 
   - must_id: "item:A.7.3.6:rev_propagation_audit"
     description: "Propagation audit — sampled corrections/erasures verified downstream"
     excerpt_keywords:
-      - [propagation, audit]
+      - [propagation, audit, access]
 
   - must_id: "item:A.7.3.6:rev_refusal_audit"
     description: "Refusal audit — sampled refusals reviewed for defensibility + subject-notification of reason"
     excerpt_keywords:
-      - [refusal, audit]
+      - [refusal, audit, access]
 
   - must_id: "item:A.7.3.6:rev_reviewer"
     description: "Reviewer identity (DPO + Legal + Engineering)"
     excerpt_keywords:
-      - [reviewer, identity]
+      - [reviewer, identity, access]
 
   - must_id: "item:A.7.3.6:rev_sla_audit"
     description: "SLA audit — sampled requests measured against undue-delay standard"
     excerpt_keywords:
-      - [sla, audit]
+      - [sla, audit, access]
