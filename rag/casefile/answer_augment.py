@@ -22,6 +22,7 @@ from typing import Optional
 from rag.casefile.answer_schema import (
     ActionCard,
     IntroCard,
+    LeafState,
     RelatedCard,
     StructuredAnswer,
 )
@@ -279,15 +280,20 @@ def _evidence_summary(
     ref: str,
     standard_id: str,
     verdict: str,
-) -> tuple[str, list[str]]:
-    """Return (summary_text, still_needed_names) for a related card.
+) -> tuple[str, list[str], list[LeafState]]:
+    """Return (summary_text, still_needed_names, leaves) for a related card.
+
+    Ship 19'.b — extended to return per-leaf state so the primary
+    card can render a ✓/○ checklist. leaves[] populated for ALL
+    cards; frontend decides render granularity (primary only, in
+    Ship 19'.c).
 
     Only queries advisory for NC/OFI verdicts on non-empty standards.
-    Fails silently on any error → returns ('', [])."""
+    Fails silently on any error → returns ('', [], [])."""
     if verdict not in ("NC", "OFI"):
-        return "", []
+        return "", [], []
     if not (pg_conn and tenant_id and standard_id and ref):
-        return "", []
+        return "", [], []
 
     try:
         from rag.posture.advisory import build_per_must_advisory_data
@@ -299,16 +305,16 @@ def _evidence_summary(
         )
     except Exception as e:
         _LOG.debug("advisory lookup failed for %s: %s", ref, e)
-        return "", []
+        return "", [], []
 
     if not data:
-        return "", []
+        return "", [], []
 
     n_leaves    = data.get("n_leaves") or 0
     n_satisfied = data.get("n_satisfied") or 0
     n_partial   = data.get("n_partial") or 0
     if not n_leaves:
-        return "", []
+        return "", [], []
 
     if n_partial:
         summary = (
@@ -320,13 +326,26 @@ def _evidence_summary(
 
     # still_needed — leaves not satisfied whose labels we know
     still: list[str] = []
+    # leaves[] — full per-leaf state for primary-card checklist
+    leaves: list[LeafState] = []
     for leaf in data.get("leaves") or []:
-        if leaf.get("satisfied"):
-            continue
         label = leaf.get("leaf_label") or ""
-        if label:
+        if not label:
+            continue
+        satisfied = bool(leaf.get("satisfied"))
+        leaves.append(LeafState(
+            leaf_id             = leaf.get("leaf_id") or "",
+            title               = label,
+            evidence_type       = leaf.get("evidence_type") or "",
+            evidence_type_label = leaf.get("evidence_type_label") or "",
+            satisfied           = satisfied,
+            n_have              = int(leaf.get("n_have") or 0),
+            n_total             = int(leaf.get("n_total") or 0),
+        ))
+        if not satisfied:
             still.append(label)
-    return summary, still[:6]  # cap for card readability
+
+    return summary, still[:6], leaves
 
 
 def build_related_cards(
@@ -374,7 +393,7 @@ def build_related_cards(
         role    = cf.role_of(ref) or "unknown"
 
         relation = _classify_relation(cf, ref, primary_ref, demonstrators)
-        summary, still = _evidence_summary(pg_conn, tenant_id, ref, sid, verdict)
+        summary, still, leaves = _evidence_summary(pg_conn, tenant_id, ref, sid, verdict)
 
         cards.append(RelatedCard(
             ref              = ref,
@@ -388,6 +407,7 @@ def build_related_cards(
             relation_display = _relation_display(relation),
             evidence_summary = summary,
             still_needed     = still,
+            leaves           = leaves,
             dashboard_url    = _dashboard_url(ref, sid),
         ))
 

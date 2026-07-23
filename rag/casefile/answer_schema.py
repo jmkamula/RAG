@@ -39,6 +39,22 @@ class ActionCard(BaseModel):
     refs:  list[str] = Field(default_factory=list)  # backend-scanned refs mentioned in title+body
 
 
+class LeafState(BaseModel):
+    """Ship 19'.b — per-leaf state for the primary-card checklist.
+
+    Populated from `build_per_must_advisory_data.leaves`. Rendered
+    only on the primary card (`relation == "primary"`); other cards
+    keep their compact summary shape.
+    """
+    leaf_id:              str    # e.g. "req:A.5.15:access_control_policy"
+    title:                str    # humanized leaf title (e.g. "Access control policy")
+    evidence_type:        str    # raw slug (e.g. "policy") — kept for tooltip
+    evidence_type_label:  str    # humanized (e.g. "policy document")
+    satisfied:            bool   # True → ✓, False → ○
+    n_have:               int    # per-MUST count of satisfied items
+    n_total:              int    # per-MUST count of total items
+
+
 class RelatedCard(BaseModel):
     """One cited / derived control ref. 100% backend-derived from CaseFile."""
     ref:              str
@@ -52,6 +68,7 @@ class RelatedCard(BaseModel):
     relation_display: str                    # gateway-humanized ("Cross-framework link", etc.)
     evidence_summary: str = ""               # deterministic — "1 of 4 required items present"
     still_needed:     list[str] = Field(default_factory=list)  # item names with no evidence
+    leaves:           list[LeafState] = Field(default_factory=list)  # Ship 19'.b — per-leaf checklist
     dashboard_url:    Optional[str] = None   # deep-link to /dashboard drill-in
 
 
@@ -91,7 +108,13 @@ Schema:
 
 Card content rules:
 1. `intro.text` — 1-2 sentences. Name the primary control + verdict
-   context. Never open with "This response...".
+   context. Never open with "This response...". Do NOT restate the
+   N-of-M item count (e.g. "1 of 4 items present" / "0 of 18
+   required items present") — the primary card renders that as a
+   per-leaf checklist. Intro's job is to frame WHAT the control
+   requires + the overall verdict tag ("OFI-DRAFT", "NC-DRAFT").
+   Example: "ISO 27001 A.5.15 (Access control) requires authorized
+   access to information and assets. Currently OFI-DRAFT."
 2. `intro.primary_ref` — the single ref the query is about, when
    the query targets one specific control. Omit for broad queries.
 3. `actions[]` — 0-5 cards. Each card is ONE concrete step.
