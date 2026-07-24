@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.3.1:proc_documented_extent"
     description: "Documented extent — subject-facing description of which obligations are fulfilled + how"
     excerpt_keywords:
-      - [documented, extent]
-      - [documented, extent, subject]
-      - [extent, subject]
-      - [extent, subject, facing]
-      - [subject, facing]
-      - [subject, facing, description]
-      - [facing, description]
-      - [facing, description, obligations]
+      - [documented, extent, determining]
+      - [documented, extent, subject, determining]
+      - [extent, subject, determining]
+      - [extent, subject, facing, determining]
+      - [subject, facing, determining]
+      - [subject, facing, description, determining]
+      - [facing, description, determining]
+      - [facing, description, obligations, determining]
 
   - must_id: "item:A.7.3.1:proc_contact_parity"
     description: "Contact-point parity — contact channel matches PII-collection channel (email if collected by email, web if collected via web; not phone/fax "
     excerpt_keywords:
-      - [contact, parity]
-      - [contact, point]
-      - [contact, point, parity]
-      - [point, parity]
-      - [point, parity, contact]
-      - [parity, contact]
-      - [parity, contact, channel]
-      - [contact, channel]
+      - [contact, parity, determining]
+      - [contact, point, determining]
+      - [contact, point, parity, determining]
+      - [point, parity, determining]
+      - [point, parity, contact, determining]
+      - [parity, contact, determining]
+      - [parity, contact, channel, determining]
+      - [contact, channel, determining]
 
   - must_id: "item:A.7.3.1:proc_accessibility"
     description: "Accessibility standard — accessible + timely means (WCAG-align, language accessibility, response-time SLA)"
     excerpt_keywords:
-      - [accessibility, standard]
-      - [accessibility, standard, accessible]
-      - [standard, accessible]
-      - [standard, accessible, timely]
-      - [accessible, timely]
-      - [accessible, timely, means]
-      - [timely, means]
-      - [timely, means, wcag]
+      - [accessibility, standard, determining]
+      - [accessibility, standard, accessible, determining]
+      - [standard, accessible, determining]
+      - [standard, accessible, timely, determining]
+      - [accessible, timely, determining]
+      - [accessible, timely, means, determining]
+      - [timely, means, determining]
+      - [timely, means, wcag, determining]
 
   - must_id: "item:A.7.3.1:proc_fulfilment_means"
     description: "Fulfilment means enumerated per obligation (which subject-rights channel handles each right — access / rectification / erasure / portability"
     excerpt_keywords:
-      - [fulfilment, means]
-      - [fulfilment, means, enumerated]
-      - [means, enumerated]
-      - [means, enumerated, obligation]
-      - [enumerated, obligation]
-      - [enumerated, obligation, subject]
-      - [obligation, subject]
-      - [obligation, subject, rights]
+      - [fulfilment, means, determining]
+      - [fulfilment, means, enumerated, determining]
+      - [means, enumerated, determining]
+      - [means, enumerated, obligation, determining]
+      - [enumerated, obligation, determining]
+      - [enumerated, obligation, subject, determining]
+      - [obligation, subject, determining]
+      - [obligation, subject, rights, determining]
 
   - must_id: "item:A.7.3.1:proc_obligation_catalog"
     description: "Obligation catalog per applicable jurisdiction (GDPR + UK GDPR + CCPA + LGPD as applicable) with citation for each obligation"
     excerpt_keywords:
-      - [obligation, catalog]
-      - [obligation, catalog, jurisdiction]
-      - [catalog, jurisdiction]
-      - [catalog, jurisdiction, gdpr]
-      - [jurisdiction, gdpr]
-      - [jurisdiction, gdpr, gdpr]
-      - [gdpr, gdpr]
-      - [gdpr, gdpr, ccpa]
+      - [obligation, catalog, determining]
+      - [obligation, catalog, jurisdiction, determining]
+      - [catalog, jurisdiction, determining]
+      - [catalog, jurisdiction, gdpr, determining]
+      - [jurisdiction, gdpr, determining]
+      - [jurisdiction, gdpr, gdpr, determining]
+      - [gdpr, gdpr, determining]
+      - [gdpr, gdpr, ccpa, determining]
 

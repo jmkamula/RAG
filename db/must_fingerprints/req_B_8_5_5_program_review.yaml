@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.5:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.5:program_review"
@@ -10,22 +11,51 @@ target_control: "B.8.5.5"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.5.5:rev_classification_audit"
-    description: "Classification audit — sampled decisions reviewed for correctness"
-    excerpt_keywords:
-      - [classification, audit, legally]
-
   - must_id: "item:B.8.5.5:rev_consultation_audit"
     description: "Consultation audit — customer-consultation happened before disclosure"
     excerpt_keywords:
       - [consultation, audit, legally]
+      - [consultation, audit, customer, legally]
+      - [audit, customer, legally]
+      - [audit, customer, consultation, legally]
+      - [customer, consultation, legally]
+      - [customer, consultation, happened, legally]
+      - [consultation, happened, legally]
+      - [consultation, happened, before, legally]
 
-  - must_id: "item:B.8.5.5:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:B.8.5.5:rev_classification_audit"
+    description: "Classification audit — sampled decisions reviewed for correctness"
     excerpt_keywords:
-      - [review, date, planned, interval, legally]
+      - [classification, audit, legally]
+      - [classification, audit, sampled, legally]
+      - [audit, sampled, legally]
+      - [audit, sampled, decisions, legally]
+      - [sampled, decisions, legally]
+      - [sampled, decisions, reviewed, legally]
+      - [decisions, reviewed, legally]
+      - [decisions, reviewed, correctness, legally]
 
   - must_id: "item:B.8.5.5:rev_reviewer"
     description: "Reviewer identity (Legal + Trust + DPO)"
     excerpt_keywords:
       - [reviewer, identity, legally]
+      - [reviewer, identity, legal, legally]
+      - [identity, legal, legally]
+      - [identity, legal, trust, legally]
+      - [legal, trust, legally]
+      - [legal, trust, dpo, legally]
+      - [trust, dpo, legally]
+      - [per, revocation, legally]
+
+  - must_id: "item:B.8.5.5:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, legally]
+      - [review, date, within, legally]
+      - [date, within, legally]
+      - [date, within, planned, legally]
+      - [within, planned, legally]
+      - [within, planned, interval, legally]
+      - [planned, interval, legally]
+      - [per, revocation, legally]
+

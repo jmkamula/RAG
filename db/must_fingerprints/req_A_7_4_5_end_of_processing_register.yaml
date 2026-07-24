@@ -14,58 +14,58 @@ must_fingerprints:
   - must_id: "item:A.7.4.5:reg_verification"
     description: "Verification result per row (post-action check confirming PII gone)"
     excerpt_keywords:
-      - [verification, result]
-      - [verification, result, post]
-      - [result, post]
-      - [result, post, action]
-      - [post, action]
-      - [post, action, check]
-      - [action, check]
-      - [action, check, confirming]
+      - [verification, result, pii]
+      - [verification, result, post, pii]
+      - [result, post, pii]
+      - [result, post, action, pii]
+      - [post, action, pii]
+      - [post, action, check, pii]
+      - [action, check, pii]
+      - [action, check, confirming, pii]
 
   - must_id: "item:A.7.4.5:reg_scope"
     description: "Scope per row (which records / systems / backup tier)"
     excerpt_keywords:
-      - [scope, records]
-      - [scope, records, backup]
-      - [records, backup]
-      - [records, backup, tier]
-      - [backup, tier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [scope, records, pii]
+      - [scope, records, backup, pii]
+      - [records, backup, pii]
+      - [records, backup, tier, pii]
+      - [backup, tier, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
 
   - must_id: "item:A.7.4.5:reg_action_type"
     description: "Action type per row (delete / de-identify)"
     excerpt_keywords:
-      - [action, delete]
-      - [action, delete, identify]
-      - [delete, identify]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [action, delete, pii]
+      - [action, delete, identify, pii]
+      - [delete, identify, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
+      - [column, header, pii]
 
   - must_id: "item:A.7.4.5:reg_activity_link"
     description: "Processing activity per row"
     excerpt_keywords:
-      - [processing, activity]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [processing, activity, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
+      - [column, header, pii]
 
   - must_id: "item:A.7.4.5:reg_action_id"
     description: "Unique action identifier per row"
     excerpt_keywords:
-      - [action, id]
-      - [unique, action]
-      - [unique, action, identifier]
-      - [action, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [action, id, pii]
+      - [unique, action, pii]
+      - [unique, action, identifier, pii]
+      - [action, identifier, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
 

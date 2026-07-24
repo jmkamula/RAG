@@ -14,58 +14,58 @@ must_fingerprints:
   - must_id: "item:B.8.4.3:reg_contract_alignment"
     description: "Contract-alignment status per row (in / not-in customer B.8.2.1 agreement)"
     excerpt_keywords:
-      - [contract, alignment]
-      - [contract, alignment, status]
-      - [alignment, status]
-      - [alignment, status, not]
-      - [status, not]
-      - [status, not, customer]
-      - [not, customer]
-      - [not, customer, agreement]
+      - [contract, alignment, pii]
+      - [contract, alignment, status, pii]
+      - [alignment, status, pii]
+      - [alignment, status, not, pii]
+      - [status, not, pii]
+      - [status, not, customer, pii]
+      - [not, customer, pii]
+      - [not, customer, agreement, pii]
 
   - must_id: "item:B.8.4.3:reg_encryption"
     description: "Encryption standard per row"
     excerpt_keywords:
-      - [encryption, standard]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [encryption, standard, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
+      - [column, header, pii]
 
   - must_id: "item:B.8.4.3:reg_endpoint"
     description: "Source + destination endpoints per row"
     excerpt_keywords:
-      - [source, destination]
-      - [source, destination, endpoints]
-      - [destination, endpoints]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [source, destination, pii]
+      - [source, destination, endpoints, pii]
+      - [destination, endpoints, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
+      - [column, header, pii]
 
   - must_id: "item:B.8.4.3:reg_customer"
     description: "Customer per row (if channel is customer-specific)"
     excerpt_keywords:
-      - [customer, channel]
-      - [customer, channel, customer]
-      - [channel, customer]
-      - [channel, customer, specific]
-      - [customer, specific]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [customer, channel, pii]
+      - [customer, channel, customer, pii]
+      - [channel, customer, pii]
+      - [channel, customer, specific, pii]
+      - [customer, specific, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
 
   - must_id: "item:B.8.4.3:reg_channel_id"
     description: "Unique channel identifier per row"
     excerpt_keywords:
-      - [channel, id]
-      - [unique, channel]
-      - [unique, channel, identifier]
-      - [channel, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [channel, id, pii]
+      - [unique, channel, pii]
+      - [unique, channel, identifier, pii]
+      - [channel, identifier, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
 

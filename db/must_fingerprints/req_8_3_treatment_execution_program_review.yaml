@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:8.3:treatment_execution_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:8.3:treatment_execution_program_review"
@@ -10,29 +11,63 @@ target_control: "8.3"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:8.3:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:8.3:rev_soa_currency"
+    description: "SoA currency check — newly implemented controls reflected in the SoA (6.1.3 leaf)"
     excerpt_keywords:
-      - [review, date, planned, interval, risk]
-
-  - must_id: "item:8.3:rev_progress"
-    description: "Progress check — every active plan item status updated; on-track vs slipping called out"
-    excerpt_keywords:
-      - [progress, check, risk]
+      - [soa, currency, risk]
+      - [soa, currency, check, risk]
+      - [currency, check, risk]
+      - [currency, check, newly, risk]
+      - [check, newly, risk]
+      - [check, newly, implemented, risk]
+      - [newly, implemented, risk]
+      - [newly, implemented, controls, risk]
 
   - must_id: "item:8.3:rev_residual_revisit"
     description: "Residual revisit check — completed items had owner re-affirm residual; divergent residuals escalated"
     excerpt_keywords:
       - [residual, revisit, risk]
       - [residual, revisit, check, risk]
+      - [revisit, check, risk]
+      - [revisit, check, completed, risk]
+      - [check, completed, risk]
+      - [check, completed, items, risk]
+      - [completed, items, risk]
+      - [completed, items, had, risk]
+
+  - must_id: "item:8.3:rev_progress"
+    description: "Progress check — every active plan item status updated; on-track vs slipping called out"
+    excerpt_keywords:
+      - [progress, check, risk]
+      - [progress, check, every, risk]
+      - [check, every, risk]
+      - [check, every, active, risk]
+      - [every, active, risk]
+      - [every, active, plan, risk]
+      - [active, plan, risk]
+      - [active, plan, status, risk]
 
   - must_id: "item:8.3:rev_reviewer"
     description: "Reviewer identity (Risk Manager + ISMS Manager + ops lead)"
     excerpt_keywords:
       - [reviewer, identity, risk]
+      - [reviewer, identity, risk]
+      - [identity, risk]
+      - [identity, risk, manager]
+      - [risk, manager]
+      - [risk, manager, isms]
+      - [manager, isms, risk]
+      - [manager, isms, manager, risk]
 
-  - must_id: "item:8.3:rev_soa_currency"
-    description: "SoA currency check — newly implemented controls reflected in the SoA (6.1.3 leaf)"
+  - must_id: "item:8.3:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [soa, currency, risk]
-      - [soa, currency, check, risk]
+      - [review, date, risk]
+      - [review, date, within, risk]
+      - [date, within, risk]
+      - [date, within, planned, risk]
+      - [within, planned, risk]
+      - [within, planned, interval, risk]
+      - [planned, interval, risk]
+      - [per, revocation, risk]
+

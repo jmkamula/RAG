@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.35:dpia_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.35:dpia_program_review"
@@ -10,33 +11,75 @@ target_control: "Art.35"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.35:rev_advice_quality"
-    description: "DPO-advice quality sample — advice substantive, not rubber-stamp"
+  - must_id: "item:Art.35:rev_review_cadence"
+    description: "Review-cadence audit — DPIAs refreshed per Art.35.11 when processing changed"
     excerpt_keywords:
-      - [advice, quality, protection]
+      - [review, cadence, protection]
+      - [review, cadence, audit, protection]
+      - [cadence, audit, protection]
+      - [cadence, audit, dpias, protection]
+      - [audit, dpias, protection]
+      - [audit, dpias, refreshed, protection]
+      - [dpias, refreshed, protection]
+      - [dpias, refreshed, art, protection]
 
   - must_id: "item:Art.35:rev_art36_audit"
     description: "Art.36 escalation audit — residual-high-risk DPIAs escalated to SA where required"
     excerpt_keywords:
       - [art36, audit, protection]
+      - [art, escalation, protection]
       - [art, escalation, audit, protection]
+      - [escalation, audit, protection]
+      - [escalation, audit, residual, protection]
+      - [audit, residual, protection]
+      - [audit, residual, high, protection]
+      - [residual, high, protection]
+
+  - must_id: "item:Art.35:rev_advice_quality"
+    description: "DPO-advice quality sample — advice substantive, not rubber-stamp"
+    excerpt_keywords:
+      - [advice, quality, protection]
+      - [dpo, advice, protection]
+      - [dpo, advice, quality, protection]
+      - [advice, quality, sample, protection]
+      - [quality, sample, protection]
+      - [quality, sample, advice, protection]
+      - [sample, advice, protection]
+      - [sample, advice, substantive, protection]
 
   - must_id: "item:Art.35:rev_coverage"
-    description: "Coverage check — every in-scope activity has a current DPIA OR documented Art.35.5 white-list jus..."
+    description: "Coverage check — every in-scope activity has a current DPIA OR documented Art.35.5 white-list justification"
     excerpt_keywords:
       - [coverage, check, protection]
-
-  - must_id: "item:Art.35:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, protection]
-
-  - must_id: "item:Art.35:rev_review_cadence"
-    description: "Review-cadence audit — DPIAs refreshed per Art.35.11 when processing changed"
-    excerpt_keywords:
-      - [review, cadence, protection]
+      - [coverage, check, every, protection]
+      - [check, every, protection]
+      - [check, every, scope, protection]
+      - [every, scope, protection]
+      - [every, scope, activity, protection]
+      - [scope, activity, protection]
+      - [scope, activity, has, protection]
 
   - must_id: "item:Art.35:rev_reviewer"
     description: "Reviewer identity (DPO + executive sponsor + lead privacy engineer)"
     excerpt_keywords:
       - [reviewer, identity, protection]
+      - [reviewer, identity, dpo, protection]
+      - [identity, dpo, protection]
+      - [identity, dpo, executive, protection]
+      - [dpo, executive, protection]
+      - [dpo, executive, sponsor, protection]
+      - [executive, sponsor, protection]
+      - [executive, sponsor, lead, protection]
+
+  - must_id: "item:Art.35:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, protection]
+      - [review, date, within, protection]
+      - [date, within, protection]
+      - [date, within, planned, protection]
+      - [within, planned, protection]
+      - [within, planned, interval, protection]
+      - [planned, interval, protection]
+      - [per, revocation, protection]
+

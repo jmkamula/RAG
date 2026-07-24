@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:9.2:audit_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:9.2:audit_program_review"
@@ -10,28 +11,63 @@ target_control: "9.2"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:9.2:rev_completion"
-    description: "Completion check — every scheduled audit happened (or deferred with documented reason)"
+  - must_id: "item:9.2:rev_finding_closure"
+    description: "Finding-closure check — last cycle's NCs reached 10.2 closure"
     excerpt_keywords:
-      - [completion, check, internal]
+      - [finding, closure, internal]
+      - [finding, closure, check, internal]
+      - [closure, check, internal]
+      - [closure, check, last, internal]
+      - [check, last, internal]
+      - [check, last, cycle, internal]
+      - [last, cycle, internal]
+      - [last, cycle, ncs, internal]
 
   - must_id: "item:9.2:rev_cycle_progress"
     description: "Cycle progress check — at end-of-cycle every ISMS process audited at least once"
     excerpt_keywords:
       - [cycle, progress, internal]
       - [cycle, progress, check, internal]
+      - [progress, check, internal]
+      - [progress, check, end, internal]
+      - [check, end, internal]
+      - [check, end, cycle, internal]
+      - [end, cycle, internal]
+      - [end, cycle, every, internal]
 
-  - must_id: "item:9.2:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:9.2:rev_completion"
+    description: "Completion check — every scheduled audit happened (or deferred with documented reason)"
     excerpt_keywords:
-      - [review, date, planned, interval, internal]
-
-  - must_id: "item:9.2:rev_finding_closure"
-    description: "Finding-closure check — last cycle's NCs reached 10.2 closure"
-    excerpt_keywords:
-      - [finding, closure, internal]
+      - [completion, check, internal]
+      - [completion, check, every, internal]
+      - [check, every, internal]
+      - [check, every, scheduled, internal]
+      - [every, scheduled, internal]
+      - [every, scheduled, audit]
+      - [scheduled, audit]
+      - [scheduled, audit, happened]
 
   - must_id: "item:9.2:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + lead auditor)"
     excerpt_keywords:
       - [reviewer, identity, internal]
+      - [reviewer, identity, isms, internal]
+      - [identity, isms, internal]
+      - [identity, isms, manager, internal]
+      - [isms, manager, internal]
+      - [isms, manager, lead, internal]
+      - [manager, lead, internal]
+      - [manager, lead, auditor, internal]
+
+  - must_id: "item:9.2:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, internal]
+      - [review, date, within, internal]
+      - [date, within, internal]
+      - [date, within, planned, internal]
+      - [within, planned, internal]
+      - [within, planned, interval, internal]
+      - [planned, interval, internal]
+      - [per, revocation, internal]
+

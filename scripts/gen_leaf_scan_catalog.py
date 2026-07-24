@@ -1,4 +1,4 @@
-"""Generate starter leaf-scan catalog YAML for an EvidenceRequirement.
+"""Generate leaf-scan catalog YAML for an EvidenceRequirement.
 
 Reads the leaf + its MUST_CONTAIN children from Neo4j and emits a YAML
 in the same shape as the hand-authored catalogs in db/must_fingerprints/.
@@ -9,6 +9,9 @@ Heuristics for excerpt_keywords:
      2-3 word noun phrases)
   3. evidence-type-specific scaffolds (register: row, entry; review: cycle,
      last; revocation: disabled, revoked; etc.)
+  4. topic-anchor token from RequirementNode.title, appended to every
+     keyword set to make family-templated MUST texts leaf-distinctive
+     (Ship 17'.b/c → Ship 29 consolidation)
 
 The output is a STARTING POINT, not a finished catalog. The human reviewer
 should:
@@ -17,13 +20,20 @@ should:
   - Tighten overly broad single-token sets if they risk false positives
 
 Usage:
-  python3 scripts/gen_leaf_scan_catalog.py req:A.5.16:identity_management_register
-  python3 scripts/gen_leaf_scan_catalog.py --control A.5.16
+  # Single-leaf / single-control (prints to stdout unless --write)
+  python3 scripts/gen_leaf_scan_catalog.py --leaf req:A.5.16:identity_management_register
   python3 scripts/gen_leaf_scan_catalog.py --control A.5.16 --write
 
-Without --write the YAML is printed to stdout. With --write it lands in
-db/must_fingerprints/<filename>.yaml — but only if a file with that name
-doesn't already exist (the generator never overwrites hand-curated work).
+  # Bulk modes (always write; --dry-run reports without touching disk)
+  python3 scripts/gen_leaf_scan_catalog.py --standard ISO27701:2019
+  python3 scripts/gen_leaf_scan_catalog.py --standard ISO27001:2022 --family program_review
+  python3 scripts/gen_leaf_scan_catalog.py --all-auto-generated --dry-run
+
+Behaviour of --write and --force (consistent across modes):
+  - Default (no --force): overwrite auto-generated files (marked
+    '# Auto-generated' in header); skip hand-authored files.
+  - --force: overwrite everything, including hand-authored. Use with
+    care — curator tuning is lost on regeneration.
 """
 from __future__ import annotations
 
@@ -43,6 +53,30 @@ from neo4j import GraphDatabase
 load_dotenv(_ROOT / ".env")
 
 _CATALOG_DIR = _ROOT / "db" / "must_fingerprints"
+
+# Ship 17'.b — regenerator discipline. Only overwrite files whose
+# first-6-line header contains "# Auto-generated". Hand-authored
+# files use different header prose (e.g. "Reviewed-from-skeleton")
+# and stay untouched unless --force is passed.
+_AUTO_GEN_MARKER = "# Auto-generated"
+
+# Ship 17'.b — topic-anchor tokens injected into every keyword set to
+# make family-templated MUST texts leaf-distinctive.
+#
+# Root cause (Ship 16'.a + 17'.a): program_review + applicable_scope
+# families share identical MUST texts across every leaf, so the
+# generator's description-derived tokens collapse to the same
+# [review, date, planned, interval] on 48 leaves. Injecting a token
+# from the leaf's RequirementNode.title (which IS distinctive per
+# leaf — "Contracts with PII processors" vs "Retention" etc.)
+# breaks the collision.
+#
+# Generic meta-tokens that appear in most compliance-standard titles
+# are stripped — they'd defeat the purpose of the anchor.
+_TITLE_META_NOISE = {
+    "information", "security", "management", "data",
+    "iso", "iec", "ensure", "ensuring", "processing",
+}
 
 # Tokens to drop when extracting from item descriptions — generic English
 # stopwords + register/list-shape words that don't differentiate a MUST.
@@ -201,12 +235,20 @@ def _suggest_keywords(
     item_id:       str,
     item_text:     str,
     evidence_type: str,
+    control_title: str = "",
 ) -> list[list[str]]:
     """Compose the starter excerpt_keywords list for one MUST item.
 
     Strategy: id-derived stems first (highest signal), then description
     phrases (medium signal), then evidence-type scaffolds (low signal,
     cross-leaf safety net). Deduped while preserving order.
+
+    Ship 29'.b — when `control_title` is provided, a topic-anchor
+    token is appended to every keyword set (see `_title_anchor_tokens`).
+    This absorbs the leaf-distinctiveness work Ship 17'.b/c delivered
+    via the specialized generator; consolidation applies anchors to
+    every auto-generated file rather than only 6 family × standard
+    combos.
     """
     suggestions: list[list[str]] = []
     seen: set[tuple[str, ...]] = set()
@@ -253,6 +295,17 @@ def _suggest_keywords(
     if has_multi:
         suggestions = [s for s in suggestions if len(s) >= 2]
 
+    # Ship 29'.b — topic-anchor injection. Consolidated from the
+    # specialized `generate_27701_fingerprints.py` (Ship 17'.b/c).
+    # Anchors run AFTER singleton suppression so a legitimate single-
+    # token set (only path when no multi-token exists) gets promoted
+    # to a distinctive multi-token set.
+    anchors = _title_anchor_tokens(control_title)
+    if anchors:
+        suggestions = [
+            _augment_with_anchor(kw, anchors) for kw in suggestions
+        ]
+
     # Cap at ~8 to keep the human reviewer's eye unburdened — they'll
     # add tenant-vocabulary synonyms manually anyway.
     return suggestions[:8]
@@ -265,35 +318,150 @@ def _role_prefix(item_id: str) -> str:
     return head if head in _ROLE_PREFIX_HINTS else ""
 
 
-def _fetch_leaves(neo, control_ref: str | None, leaf_id: str | None) -> list[dict]:
-    """Fetch leaves either by control_ref (all leaves under that control)
-    or by exact leaf id (one leaf).
+def _title_anchor_tokens(title: str, max_tokens: int = 2) -> list[str]:
+    """Extract 1-2 distinctive tokens from a RequirementNode.title
+    for use as anchor tokens injected into every keyword set on
+    that leaf.
+
+    Filters generic English stopwords, catalog-shape words, and
+    meta-tokens that recur across compliance titles. Returns up to
+    `max_tokens` tokens in title order so the first substantive
+    word wins.
+
+    Ported from `generate_27701_fingerprints.py::_topic_anchor_tokens`
+    in Ship 29'.b."""
+    if not title:
+        return []
+    norm = _PUNCT_RE.sub(" ", title.lower())
+    tokens = [
+        t for t in norm.split()
+        if t
+        and t not in _STOPWORDS
+        and t not in _TITLE_META_NOISE
+        and len(t) > 2
+        and not t.isdigit()
+    ]
+    return tokens[:max_tokens]
+
+
+def _augment_with_anchor(
+    kw_set: list[str], anchors: list[str],
+) -> list[str]:
+    """Return `kw_set` with one anchor token appended. If the set
+    already contains an anchor (rare — happens when the MUST text
+    mentions the leaf topic), it's unchanged. Only the first anchor
+    is used so sets don't grow unboundedly.
+
+    Ported from `generate_27701_fingerprints.py::_augment_with_anchor`
+    in Ship 29'.b."""
+    if not anchors:
+        return kw_set
+    if any(a in kw_set for a in anchors):
+        return kw_set
+    return kw_set + [anchors[0]]
+
+
+def _is_auto_generated(path: Path) -> bool:
+    """Return True if `path` has the '# Auto-generated' marker in
+    its first 6 lines. Missing file → True (safe to write). Read
+    errors → False (defensive)."""
+    if not path.exists():
+        return True
+    try:
+        head = path.read_text(encoding="utf-8", errors="replace").splitlines()[:6]
+    except Exception:
+        return False
+    return any(_AUTO_GEN_MARKER in ln for ln in head)
+
+
+def _target_from_yaml(path: Path) -> str | None:
+    """Pull `target_evidence_requirement` from a YAML file's header
+    by direct string parse (faster than yaml.safe_load and tolerant
+    of non-strict YAML)."""
+    try:
+        with open(path, "r") as f:
+            for _ in range(30):
+                line = f.readline()
+                if not line:
+                    break
+                if line.startswith("target_evidence_requirement:"):
+                    val = line.split(":", 1)[1].strip().strip('"').strip("'")
+                    return val or None
+    except Exception:
+        return None
+    return None
+
+
+_RETURN_FIELDS = """
+    er.id            AS leaf_id,
+    er.control_ref   AS control_ref,
+    er.standard_id   AS standard_id,
+    er.evidence_type AS evidence_type,
+    er.title         AS title,
+    rn.title         AS control_title,
+    collect({id: item.id, text: item.text}) AS items
+"""
+
+
+def _fetch_leaves(
+    neo,
+    control_ref: str | None = None,
+    leaf_id:     str | None = None,
+    standard_id: str | None = None,
+    leaf_ids:    list[str] | None = None,
+) -> list[dict]:
+    """Fetch leaves in one of four modes:
+      * `leaf_id`     — one specific leaf
+      * `control_ref` — every leaf under a control
+      * `standard_id` — every leaf in a standard (bulk)
+      * `leaf_ids`    — an explicit list of leaves (bulk, from
+                        `--all-auto-generated` walk)
+
+    All modes include `RequirementNode.title` (as `control_title`)
+    so `_suggest_keywords` can inject a leaf-distinctive anchor.
     """
     if leaf_id:
-        cypher = """
-            MATCH (er:EvidenceRequirement {id: $leaf_id})
+        cypher = f"""
+            MATCH (er:EvidenceRequirement {{id: $leaf_id}})
+            OPTIONAL MATCH (rn:RequirementNode {{
+                ref: er.control_ref, standard_id: er.standard_id}})
             OPTIONAL MATCH (er)-[:MUST_CONTAIN]->(item:ChecklistItem)
-            RETURN er.id           AS leaf_id,
-                   er.control_ref  AS control_ref,
-                   er.standard_id  AS standard_id,
-                   er.evidence_type AS evidence_type,
-                   er.title        AS title,
-                   collect({id: item.id, text: item.text}) AS items
+            RETURN {_RETURN_FIELDS}
         """
         params = {"leaf_id": leaf_id}
-    else:
-        cypher = """
-            MATCH (er:EvidenceRequirement {control_ref: $control_ref})
+    elif control_ref:
+        cypher = f"""
+            MATCH (er:EvidenceRequirement {{control_ref: $control_ref}})
+            OPTIONAL MATCH (rn:RequirementNode {{
+                ref: er.control_ref, standard_id: er.standard_id}})
             OPTIONAL MATCH (er)-[:MUST_CONTAIN]->(item:ChecklistItem)
-            RETURN er.id           AS leaf_id,
-                   er.control_ref  AS control_ref,
-                   er.standard_id  AS standard_id,
-                   er.evidence_type AS evidence_type,
-                   er.title        AS title,
-                   collect({id: item.id, text: item.text}) AS items
+            RETURN {_RETURN_FIELDS}
             ORDER BY er.id
         """
         params = {"control_ref": control_ref}
+    elif standard_id:
+        cypher = f"""
+            MATCH (er:EvidenceRequirement {{standard_id: $standard_id}})
+            OPTIONAL MATCH (rn:RequirementNode {{
+                ref: er.control_ref, standard_id: er.standard_id}})
+            OPTIONAL MATCH (er)-[:MUST_CONTAIN]->(item:ChecklistItem)
+            RETURN {_RETURN_FIELDS}
+            ORDER BY er.id
+        """
+        params = {"standard_id": standard_id}
+    elif leaf_ids:
+        cypher = f"""
+            MATCH (er:EvidenceRequirement) WHERE er.id IN $leaf_ids
+            OPTIONAL MATCH (rn:RequirementNode {{
+                ref: er.control_ref, standard_id: er.standard_id}})
+            OPTIONAL MATCH (er)-[:MUST_CONTAIN]->(item:ChecklistItem)
+            RETURN {_RETURN_FIELDS}
+            ORDER BY er.id
+        """
+        params = {"leaf_ids": list(leaf_ids)}
+    else:
+        raise ValueError(
+            "one of leaf_id / control_ref / standard_id / leaf_ids required")
     with neo.session() as s:
         return [dict(row) for row in s.run(cypher, **params)]
 
@@ -306,6 +474,7 @@ def _render_yaml(leaf: dict) -> str:
     control_ref   = leaf["control_ref"]
     standard_id   = leaf["standard_id"]
     evidence_type = leaf.get("evidence_type", "")
+    control_title = leaf.get("control_title") or ""
     items         = [it for it in (leaf.get("items") or []) if it.get("id")]
 
     lines: list[str] = []
@@ -329,7 +498,10 @@ def _render_yaml(leaf: dict) -> str:
     for it in items:
         item_id   = it["id"]
         item_text = (it.get("text") or "").strip()
-        kws       = _suggest_keywords(item_id, item_text, evidence_type)
+        kws       = _suggest_keywords(
+            item_id, item_text, evidence_type,
+            control_title=control_title,
+        )
 
         lines.append(f'  - must_id: "{item_id}"')
         # description: first sentence of item.text or a fallback
@@ -353,15 +525,51 @@ def _catalog_filename(leaf_id: str) -> str:
     return _kebab(leaf_id) + ".yaml"
 
 
+def _walk_auto_generated_leaf_ids() -> list[str]:
+    """Walk `db/must_fingerprints/` and return the leaf_ids of files
+    whose header carries the `# Auto-generated` marker. Files that
+    fail to parse (no target_evidence_requirement in first 30 lines)
+    are silently skipped."""
+    ids: list[str] = []
+    if not _CATALOG_DIR.exists():
+        return ids
+    for path in sorted(_CATALOG_DIR.glob("*.yaml")):
+        if not _is_auto_generated(path):
+            continue
+        leaf_id = _target_from_yaml(path)
+        if leaf_id:
+            ids.append(leaf_id)
+    return ids
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     g  = ap.add_mutually_exclusive_group(required=True)
-    g.add_argument("--leaf", help="Exact EvidenceRequirement id (req:...)")
-    g.add_argument("--control", help="Control ref (e.g. A.5.16) — emits one YAML per leaf")
+    g.add_argument("--leaf",
+                   help="Exact EvidenceRequirement id (req:...)")
+    g.add_argument("--control",
+                   help="Control ref (e.g. A.5.16) — emits one YAML per leaf.")
+    g.add_argument("--standard",
+                   help="Standard id (e.g. ISO27001:2022) — bulk-regenerates "
+                        "every leaf in the standard.")
+    g.add_argument("--all-auto-generated", action="store_true",
+                   dest="all_auto_generated",
+                   help="Walk db/must_fingerprints/ and regenerate every file "
+                        "whose header carries the '# Auto-generated' marker. "
+                        "Hand-authored files are skipped.")
+    ap.add_argument("--family",
+                    help="Filter leaves by leaf_id substring (e.g. "
+                         "'program_review'). Combines with --standard or "
+                         "--all-auto-generated.")
     ap.add_argument("--write", action="store_true",
-                    help="Write to db/must_fingerprints/. Without this, prints to stdout.")
+                    help="Write to db/must_fingerprints/. Single-leaf modes "
+                         "default to stdout; bulk modes always write.")
     ap.add_argument("--force", action="store_true",
-                    help="Overwrite existing YAML (default: skip if file exists).")
+                    help="Overwrite hand-authored files too. Default: only "
+                         "touch files marked '# Auto-generated'. USE WITH "
+                         "CAUTION — curator tuning is lost on regeneration.")
+    ap.add_argument("--dry-run", action="store_true", dest="dry_run",
+                    help="Report what would change without touching disk.")
     args = ap.parse_args()
 
     uri  = os.getenv("NEO4J_URI")
@@ -372,32 +580,95 @@ def main() -> int:
         return 1
     neo = GraphDatabase.driver(uri, auth=(user, pw))
 
-    leaves = _fetch_leaves(neo, control_ref=args.control, leaf_id=args.leaf)
+    bulk_mode = bool(args.standard or args.all_auto_generated)
+
+    try:
+        if args.leaf:
+            leaves = _fetch_leaves(neo, leaf_id=args.leaf)
+        elif args.control:
+            leaves = _fetch_leaves(neo, control_ref=args.control)
+        elif args.standard:
+            leaves = _fetch_leaves(neo, standard_id=args.standard)
+        elif args.all_auto_generated:
+            ids = _walk_auto_generated_leaf_ids()
+            if not ids:
+                print("No auto-generated files found in "
+                      f"{_CATALOG_DIR}", file=sys.stderr)
+                return 1
+            leaves = _fetch_leaves(neo, leaf_ids=ids)
+        else:
+            print("ERROR: no mode specified", file=sys.stderr)
+            return 1
+    finally:
+        neo.close()
+
+    if args.family:
+        leaves = [
+            l for l in leaves
+            if args.family in (l.get("leaf_id") or "")
+        ]
+
     if not leaves:
-        target = args.leaf or args.control
-        print(f"No leaves found for {target!r}", file=sys.stderr)
+        target = (args.leaf or args.control or args.standard
+                  or "(all-auto-generated)")
+        extra  = f" family={args.family!r}" if args.family else ""
+        print(f"No leaves matched {target!r}{extra}", file=sys.stderr)
         return 1
 
-    if args.write:
+    print(f"Fetched {len(leaves)} leaves"
+          + (f" (family={args.family!r})" if args.family else ""))
+
+    # For single-leaf modes, default is stdout unless --write.
+    # For bulk modes, default is write (that's the whole point).
+    write_to_disk = args.write or bulk_mode
+    if write_to_disk:
         _CATALOG_DIR.mkdir(parents=True, exist_ok=True)
+
+    n_written  = 0
+    n_unchanged = 0
+    n_hand_guarded = 0
+    n_stdout   = 0
 
     for leaf in leaves:
         if not leaf.get("leaf_id"):
             continue
         yaml_text = _render_yaml(leaf)
-        if not args.write:
+
+        if not write_to_disk:
             print(yaml_text)
             print("---")
+            n_stdout += 1
             continue
 
         path = _CATALOG_DIR / _catalog_filename(leaf["leaf_id"])
-        if path.exists() and not args.force:
-            print(f"  SKIP (exists): {path.name}", file=sys.stderr)
+        # Skip hand-authored files unless --force.
+        if path.exists() and not args.force and not _is_auto_generated(path):
+            n_hand_guarded += 1
             continue
-        path.write_text(yaml_text)
+
+        existing = path.read_text() if path.exists() else ""
+        if existing == yaml_text:
+            n_unchanged += 1
+            continue
+
         n_musts = len([it for it in (leaf.get("items") or []) if it.get("id")])
-        verb = "OVERWROTE" if args.force and path.exists() else "WROTE"
-        print(f"  {verb}: {path.name} ({n_musts} MUSTs)")
+        if args.dry_run:
+            print(f"  [dry-run] would write: {path.name} ({n_musts} MUSTs)")
+        else:
+            path.write_text(yaml_text)
+            print(f"  WROTE: {path.name} ({n_musts} MUSTs)")
+        n_written += 1
+
+    print()
+    if write_to_disk:
+        verb = "would write" if args.dry_run else "wrote"
+        print(f"  {verb}:      {n_written}")
+        print(f"  unchanged:      {n_unchanged}")
+        if n_hand_guarded:
+            print(f"  hand-guarded:   {n_hand_guarded}  "
+                  f"(--force to override)")
+    else:
+        print(f"  emitted to stdout: {n_stdout}")
 
     return 0
 

@@ -14,36 +14,36 @@ must_fingerprints:
   - must_id: "item:7.5:scope_external"
     description: "External-origin classes in scope (regulator guidance, supplier policies referenced, framework docs)"
     excerpt_keywords:
-      - [external, origin]
-      - [external, origin, classes]
-      - [origin, classes]
-      - [origin, classes, scope]
-      - [classes, scope]
-      - [classes, scope, regulator]
-      - [scope, regulator]
-      - [scope, regulator, guidance]
+      - [external, origin, documented]
+      - [external, origin, classes, documented]
+      - [origin, classes, documented]
+      - [origin, classes, scope, documented]
+      - [classes, scope, documented]
+      - [classes, scope, regulator, documented]
+      - [scope, regulator, documented]
+      - [scope, regulator, guidance, documented]
 
   - must_id: "item:7.5:scope_org_determined"
     description: "Organisation-determined classes enumerated (procedures, standards, work instructions)"
     excerpt_keywords:
-      - [org, determined]
-      - [organisation, determined]
-      - [organisation, determined, classes]
-      - [determined, classes]
-      - [determined, classes, enumerated]
-      - [classes, enumerated]
-      - [classes, enumerated, procedures]
-      - [enumerated, procedures]
+      - [org, determined, documented]
+      - [organisation, determined, documented]
+      - [organisation, determined, classes, documented]
+      - [determined, classes, documented]
+      - [determined, classes, enumerated, documented]
+      - [classes, enumerated, documented]
+      - [classes, enumerated, procedures, documented]
+      - [enumerated, procedures, documented]
 
   - must_id: "item:7.5:scope_iso_required"
     description: "ISO 27001:2022-required document classes enumerated (scope statement, policy, SoA, risk register, audit programme, etc.)"
     excerpt_keywords:
-      - [iso, required]
-      - [iso, 27001]
-      - [iso, 27001, 2022]
-      - [27001, 2022]
-      - [27001, 2022, required]
-      - [2022, required]
-      - [2022, required, document]
-      - [required, document]
+      - [iso, required, documented]
+      - [iso, 27001, documented]
+      - [iso, 27001, 2022, documented]
+      - [27001, 2022, documented]
+      - [27001, 2022, required, documented]
+      - [2022, required, documented]
+      - [2022, required, document, documented]
+      - [required, document, documented]
 

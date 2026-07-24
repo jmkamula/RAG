@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.2.3:reg_review_signoff"
     description: "DPO + Legal signoff per artifact version"
     excerpt_keywords:
-      - [review, signoff]
-      - [dpo, legal]
-      - [dpo, legal, signoff]
-      - [legal, signoff]
-      - [legal, signoff, artifact]
-      - [signoff, artifact]
-      - [signoff, artifact, version]
-      - [artifact, version]
+      - [review, signoff, determine]
+      - [dpo, legal, determine]
+      - [dpo, legal, signoff, determine]
+      - [legal, signoff, determine]
+      - [legal, signoff, artifact, determine]
+      - [signoff, artifact, determine]
+      - [signoff, artifact, version, determine]
+      - [artifact, version, determine]
 
   - must_id: "item:A.7.2.3:reg_effective_date"
     description: "Effective date per artifact version"
     excerpt_keywords:
-      - [effective, date]
-      - [effective, date, artifact]
-      - [date, artifact]
-      - [date, artifact, version]
-      - [artifact, version]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [effective, date, determine]
+      - [effective, date, artifact, determine]
+      - [date, artifact, determine]
+      - [date, artifact, version, determine]
+      - [artifact, version, determine]
+      - [per, row, determine]
+      - [each, row, determine]
+      - [column, containing, determine]
 
   - must_id: "item:A.7.2.3:reg_purpose_link"
     description: "Purpose link (which A.7.2.1 purposes this consent authorises)"
     excerpt_keywords:
-      - [purpose, purposes]
+      - [purpose, purposes, determine]
       - [purpose, purposes, consent]
       - [purposes, consent]
       - [purposes, consent, authorises]
       - [consent, authorises]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [per, row, determine]
+      - [each, row, determine]
+      - [column, containing, determine]
 
   - must_id: "item:A.7.2.3:reg_artifact_snapshot"
     description: "Consent artifact snapshot (text + UI screenshot + version)"
     excerpt_keywords:
-      - [artifact, snapshot]
+      - [artifact, snapshot, determine]
       - [consent, artifact]
       - [consent, artifact, snapshot]
-      - [artifact, snapshot, text]
-      - [snapshot, text]
-      - [snapshot, text, screenshot]
-      - [text, screenshot]
-      - [text, screenshot, version]
+      - [artifact, snapshot, text, determine]
+      - [snapshot, text, determine]
+      - [snapshot, text, screenshot, determine]
+      - [text, screenshot, determine]
+      - [text, screenshot, version, determine]
 
   - must_id: "item:A.7.2.3:reg_channel_id"
     description: "Channel identifier per row (web signup / iOS app onboarding / support-call recording opt-in)"
     excerpt_keywords:
-      - [channel, id]
-      - [channel, identifier]
-      - [channel, identifier, web]
-      - [identifier, web]
-      - [identifier, web, signup]
-      - [web, signup]
-      - [web, signup, ios]
-      - [signup, ios]
+      - [channel, id, determine]
+      - [channel, identifier, determine]
+      - [channel, identifier, web, determine]
+      - [identifier, web, determine]
+      - [identifier, web, signup, determine]
+      - [web, signup, determine]
+      - [web, signup, ios, determine]
+      - [signup, ios, determine]
 

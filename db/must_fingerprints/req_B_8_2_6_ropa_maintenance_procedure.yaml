@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:B.8.2.6:proc_customer_availability"
     description: "Customer-availability path — how a customer requests + receives their RoPA row extract"
     excerpt_keywords:
-      - [customer, availability]
-      - [customer, availability, path]
-      - [availability, path]
-      - [availability, path, customer]
-      - [path, customer]
-      - [path, customer, requests]
-      - [customer, requests]
-      - [customer, requests, receives]
+      - [customer, availability, records]
+      - [customer, availability, path, records]
+      - [availability, path, records]
+      - [availability, path, customer, records]
+      - [path, customer, records]
+      - [path, customer, requests, records]
+      - [customer, requests, records]
+      - [customer, requests, receives, records]
 
   - must_id: "item:B.8.2.6:proc_secure_maintenance"
     description: "Secure maintenance — access control + integrity for the processor RoPA"
     excerpt_keywords:
-      - [secure, maintenance]
-      - [secure, maintenance, access]
-      - [maintenance, access]
-      - [maintenance, access, integrity]
-      - [access, integrity]
-      - [access, integrity, processor]
-      - [integrity, processor]
-      - [integrity, processor, ropa]
+      - [secure, maintenance, records]
+      - [secure, maintenance, access, records]
+      - [maintenance, access, records]
+      - [maintenance, access, integrity, records]
+      - [access, integrity, records]
+      - [access, integrity, processor, records]
+      - [integrity, processor, records]
+      - [integrity, processor, ropa, records]
 
   - must_id: "item:B.8.2.6:proc_subprocessor_update"
     description: "Subprocessor change — subprocessor additions / removals trigger RoPA update"
     excerpt_keywords:
-      - [subprocessor, update]
-      - [subprocessor, change]
-      - [subprocessor, change, subprocessor]
-      - [change, subprocessor]
-      - [change, subprocessor, additions]
-      - [subprocessor, additions]
-      - [subprocessor, additions, removals]
-      - [additions, removals]
+      - [subprocessor, update, records]
+      - [subprocessor, change, records]
+      - [subprocessor, change, subprocessor, records]
+      - [change, subprocessor, records]
+      - [change, subprocessor, additions, records]
+      - [subprocessor, additions, records]
+      - [subprocessor, additions, removals, records]
+      - [additions, removals, records]
 
   - must_id: "item:B.8.2.6:proc_instruction_change"
     description: "Instruction-change capture — customer purpose changes trigger RoPA update"
     excerpt_keywords:
-      - [instruction, change]
-      - [instruction, change, capture]
-      - [change, capture]
-      - [change, capture, customer]
-      - [capture, customer]
-      - [capture, customer, purpose]
-      - [customer, purpose]
-      - [customer, purpose, changes]
+      - [instruction, change, records]
+      - [instruction, change, capture, records]
+      - [change, capture, records]
+      - [change, capture, customer, records]
+      - [capture, customer, records]
+      - [capture, customer, purpose, records]
+      - [customer, purpose, records]
+      - [customer, purpose, changes, records]
 
   - must_id: "item:B.8.2.6:proc_onboarding_trigger"
     description: "New-customer onboarding trigger — RoPA row created per new engagement (link to B.8.2.1)"
     excerpt_keywords:
-      - [onboarding, trigger]
-      - [new, customer]
-      - [new, customer, onboarding]
-      - [customer, onboarding]
-      - [customer, onboarding, trigger]
-      - [onboarding, trigger, ropa]
-      - [trigger, ropa]
-      - [trigger, ropa, created]
+      - [onboarding, trigger, records]
+      - [new, customer, records]
+      - [new, customer, onboarding, records]
+      - [customer, onboarding, records]
+      - [customer, onboarding, trigger, records]
+      - [onboarding, trigger, ropa, records]
+      - [trigger, ropa, records]
+      - [trigger, ropa, created, records]
 

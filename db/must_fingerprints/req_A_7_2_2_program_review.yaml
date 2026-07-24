@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.2:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.2:program_review"
@@ -10,27 +11,63 @@ target_control: "A.7.2.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.2.2:rev_special_category_audit"
+    description: "Special-category audit — dual-basis coverage confirmed where Art.9/10 data processed"
+    excerpt_keywords:
+      - [special, category, audit, identify]
+      - [special, category, identify]
+      - [category, audit, identify]
+      - [category, audit, dual, identify]
+      - [audit, dual, identify]
+      - [audit, dual, basis, identify]
+      - [dual, basis, identify]
+      - [dual, basis, coverage, identify]
+
+  - must_id: "item:A.7.2.2:rev_lia_reaffirmation"
+    description: "LIA reaffirmation — sampled legitimate-interests activities reviewed against current subject-rights context"
+    excerpt_keywords:
+      - [lia, reaffirmation, identify]
+      - [lia, reaffirmation, sampled, identify]
+      - [reaffirmation, sampled, identify]
+      - [reaffirmation, sampled, legitimate, identify]
+      - [sampled, legitimate, identify]
+      - [sampled, legitimate, interests, identify]
+      - [legitimate, interests, identify]
+      - [legitimate, interests, activities, identify]
+
   - must_id: "item:A.7.2.2:rev_basis_currency"
     description: "Basis currency — every registered activity still has a valid basis in force"
     excerpt_keywords:
       - [basis, currency, identify]
-
-  - must_id: "item:A.7.2.2:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, identify]
-
-  - must_id: "item:A.7.2.2:rev_lia_reaffirmation"
-    description: "LIA reaffirmation — sampled legitimate-interests activities reviewed against current subject-righ..."
-    excerpt_keywords:
-      - [lia, reaffirmation, identify]
+      - [basis, currency, every, identify]
+      - [currency, every, identify]
+      - [currency, every, registered, identify]
+      - [every, registered, identify]
+      - [every, registered, activity, identify]
+      - [registered, activity, identify]
+      - [registered, activity, still, identify]
 
   - must_id: "item:A.7.2.2:rev_reviewer"
     description: "Reviewer identity (DPO + legal counsel)"
     excerpt_keywords:
       - [reviewer, identity, identify]
+      - [reviewer, identity, dpo, identify]
+      - [identity, dpo, identify]
+      - [identity, dpo, legal, identify]
+      - [dpo, legal, identify]
+      - [dpo, legal, counsel, identify]
+      - [legal, counsel, identify]
+      - [per, revocation, identify]
 
-  - must_id: "item:A.7.2.2:rev_special_category_audit"
-    description: "Special-category audit — dual-basis coverage confirmed where Art.9/10 data processed"
+  - must_id: "item:A.7.2.2:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [special, category, audit, identify]
+      - [review, date, identify]
+      - [review, date, within, identify]
+      - [date, within, identify]
+      - [date, within, planned, identify]
+      - [within, planned, identify]
+      - [within, planned, interval, identify]
+      - [planned, interval, identify]
+      - [per, revocation, identify]
+

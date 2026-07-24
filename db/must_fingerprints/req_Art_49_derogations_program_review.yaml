@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.49:derogations_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.49:derogations_program_review"
@@ -10,27 +11,63 @@ target_control: "Art.49"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.49:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:Art.49:rev_sa_notifications"
+    description: "SA notifications audit — Art.49.1 second-paragraph notifications dispatched as required"
     excerpt_keywords:
-      - [review, date, planned, interval, derogations]
+      - [sa, notifications, derogations]
+      - [notifications, audit, derogations]
+      - [notifications, audit, art, derogations]
+      - [audit, art, derogations]
+      - [audit, art, second, derogations]
+      - [art, second, derogations]
+      - [art, second, paragraph, derogations]
+      - [second, paragraph, derogations]
 
   - must_id: "item:Art.49:rev_pattern_detection"
     description: "Pattern detection — recurring derogation use for same recipient/purpose flagged for Art.46 migration"
     excerpt_keywords:
       - [pattern, detection, derogations]
-
-  - must_id: "item:Art.49:rev_reviewer"
-    description: "Reviewer identity (DPO + legal counsel)"
-    excerpt_keywords:
-      - [reviewer, identity, derogations]
-
-  - must_id: "item:Art.49:rev_sa_notifications"
-    description: "SA notifications audit — Art.49.1 second-paragraph notifications dispatched as required"
-    excerpt_keywords:
-      - [notifications, audit, derogations]
+      - [pattern, detection, recurring, derogations]
+      - [detection, recurring, derogations]
+      - [detection, recurring, derogation, derogations]
+      - [recurring, derogation, derogations]
+      - [recurring, derogation, use, derogations]
+      - [derogation, use, derogations]
+      - [derogation, use, same, derogations]
 
   - must_id: "item:Art.49:rev_strict_construction_audit"
     description: "Strict-construction audit — sampled invocations reviewed against EDPB 2/2018 narrow interpretation"
     excerpt_keywords:
       - [strict, construction, audit, derogations]
+      - [strict, construction, derogations]
+      - [construction, audit, derogations]
+      - [construction, audit, sampled, derogations]
+      - [audit, sampled, derogations]
+      - [audit, sampled, invocations, derogations]
+      - [sampled, invocations, derogations]
+      - [sampled, invocations, reviewed, derogations]
+
+  - must_id: "item:Art.49:rev_reviewer"
+    description: "Reviewer identity (DPO + legal counsel)"
+    excerpt_keywords:
+      - [reviewer, identity, derogations]
+      - [reviewer, identity, dpo, derogations]
+      - [identity, dpo, derogations]
+      - [identity, dpo, legal, derogations]
+      - [dpo, legal, derogations]
+      - [dpo, legal, counsel, derogations]
+      - [legal, counsel, derogations]
+      - [per, revocation, derogations]
+
+  - must_id: "item:Art.49:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, derogations]
+      - [review, date, within, derogations]
+      - [date, within, derogations]
+      - [date, within, planned, derogations]
+      - [within, planned, derogations]
+      - [within, planned, interval, derogations]
+      - [planned, interval, derogations]
+      - [per, revocation, derogations]
+

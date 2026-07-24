@@ -14,59 +14,59 @@ must_fingerprints:
   - must_id: "item:A.7.3.5:reg_propagation_status"
     description: "Downstream propagation status"
     excerpt_keywords:
-      - [propagation, status]
-      - [downstream, propagation]
-      - [downstream, propagation, status]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [propagation, status, providing]
+      - [downstream, propagation, providing]
+      - [downstream, propagation, status, providing]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
+      - [each, entry, providing]
+      - [column, header, providing]
 
   - must_id: "item:A.7.3.5:reg_resolution"
     description: "Resolution per row (processing halted / balancing test rejection with justification)"
     excerpt_keywords:
-      - [resolution, processing]
-      - [resolution, processing, halted]
-      - [processing, halted]
-      - [processing, halted, balancing]
-      - [halted, balancing]
-      - [halted, balancing, test]
-      - [balancing, test]
-      - [balancing, test, rejection]
+      - [resolution, processing, providing]
+      - [resolution, processing, halted, providing]
+      - [processing, halted, providing]
+      - [processing, halted, balancing, providing]
+      - [halted, balancing, providing]
+      - [halted, balancing, test, providing]
+      - [balancing, test, providing]
+      - [balancing, test, rejection, providing]
 
   - must_id: "item:A.7.3.5:reg_objection_type"
     description: "Objection type per row (absolute — marketing/stats; balancing — legitimate interests / public interest)"
     excerpt_keywords:
-      - [objection, absolute]
-      - [objection, absolute, marketing]
-      - [absolute, marketing]
-      - [absolute, marketing, stats]
-      - [marketing, stats]
-      - [marketing, stats, balancing]
-      - [stats, balancing]
-      - [stats, balancing, legitimate]
+      - [objection, absolute, providing]
+      - [objection, absolute, marketing, providing]
+      - [absolute, marketing, providing]
+      - [absolute, marketing, stats, providing]
+      - [marketing, stats, providing]
+      - [marketing, stats, balancing, providing]
+      - [stats, balancing, providing]
+      - [stats, balancing, legitimate, providing]
 
   - must_id: "item:A.7.3.5:reg_subject_id"
     description: "Subject identifier per row"
     excerpt_keywords:
-      - [subject, id]
-      - [subject, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [subject, id, providing]
+      - [subject, identifier, providing]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
+      - [each, entry, providing]
+      - [column, header, providing]
 
   - must_id: "item:A.7.3.5:reg_event_id"
     description: "Unique event identifier per row"
     excerpt_keywords:
-      - [event, id]
-      - [unique, event]
-      - [unique, event, identifier]
-      - [event, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [event, id, providing]
+      - [unique, event, providing]
+      - [unique, event, identifier, providing]
+      - [event, identifier, providing]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
+      - [each, entry, providing]
 

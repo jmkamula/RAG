@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.3:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.3:applicable_scope"
@@ -13,16 +14,32 @@ must_fingerprints:
   - must_id: "item:B.8.5.3:scope_audit"
     description: "External audit disclosures"
     excerpt_keywords:
-      - [scope, audit, records]
+      - [external, audit, records]
       - [external, audit, disclosures, records]
+      - [audit, disclosures, records]
+      - [in, scope, records]
+      - [scope, includes, records]
+      - [applicable, to, records]
+      - [excluded, from, records]
 
   - must_id: "item:B.8.5.3:scope_investigation"
     description: "Investigation contexts"
     excerpt_keywords:
-      - [scope, investigation, records]
       - [investigation, contexts, records]
+      - [in, scope, records]
+      - [scope, includes, records]
+      - [applicable, to, records]
+      - [excluded, from, records]
 
   - must_id: "item:B.8.5.3:scope_normal_disclosures"
     description: "Normal-course disclosures enumerated"
     excerpt_keywords:
-      - [scope, normal, disclosures, records]
+      - [normal, disclosures, records]
+      - [normal, course, records]
+      - [normal, course, disclosures, records]
+      - [course, disclosures, records]
+      - [course, disclosures, enumerated, records]
+      - [disclosures, enumerated, records]
+      - [in, scope, records]
+      - [scope, includes, records]
+

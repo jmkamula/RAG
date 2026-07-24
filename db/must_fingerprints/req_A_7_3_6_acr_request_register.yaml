@@ -14,38 +14,38 @@ must_fingerprints:
   - must_id: "item:A.7.3.6:reg_propagation"
     description: "Propagation status per row (systems updated / third parties notified)"
     excerpt_keywords:
-      - [propagation, status]
-      - [propagation, status, updated]
-      - [status, updated]
-      - [status, updated, third]
-      - [updated, third]
-      - [updated, third, parties]
-      - [third, parties]
-      - [third, parties, notified]
+      - [propagation, status, access]
+      - [propagation, status, updated, access]
+      - [status, updated, access]
+      - [status, updated, third, access]
+      - [updated, third, access]
+      - [updated, third, parties, access]
+      - [third, parties, access]
+      - [third, parties, notified, access]
 
   - must_id: "item:A.7.3.6:reg_outcome"
     description: "Outcome per row (granted / refused with reason / partial)"
     excerpt_keywords:
-      - [outcome, granted]
-      - [outcome, granted, refused]
-      - [granted, refused]
-      - [granted, refused, reason]
-      - [refused, reason]
-      - [refused, reason, partial]
-      - [reason, partial]
-      - [per, row]
+      - [outcome, granted, access]
+      - [outcome, granted, refused, access]
+      - [granted, refused, access]
+      - [granted, refused, reason, access]
+      - [refused, reason, access]
+      - [refused, reason, partial, access]
+      - [reason, partial, access]
+      - [per, row, access]
 
   - must_id: "item:A.7.3.6:reg_received_date"
     description: "Received date + resolution date per row (SLA measurable)"
     excerpt_keywords:
-      - [received, date]
-      - [received, date, resolution]
-      - [date, resolution]
-      - [date, resolution, date]
-      - [resolution, date]
-      - [resolution, date, sla]
-      - [date, sla]
-      - [date, sla, measurable]
+      - [received, date, access]
+      - [received, date, resolution, access]
+      - [date, resolution, access]
+      - [date, resolution, date, access]
+      - [resolution, date, access]
+      - [resolution, date, sla, access]
+      - [date, sla, access]
+      - [date, sla, measurable, access]
 
   - must_id: "item:A.7.3.6:reg_request_type"
     description: "Request type per row (access / correction / erasure)"
@@ -55,31 +55,31 @@ must_fingerprints:
       - [access, correction]
       - [access, correction, erasure]
       - [correction, erasure]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [per, row, access]
+      - [each, row, access]
+      - [column, containing, access]
 
   - must_id: "item:A.7.3.6:reg_subject_id"
     description: "Subject identifier per row (post identity verification)"
     excerpt_keywords:
-      - [subject, id]
-      - [subject, identifier]
-      - [subject, identifier, post]
-      - [identifier, post]
-      - [identifier, post, identity]
-      - [post, identity]
-      - [post, identity, verification]
-      - [identity, verification]
+      - [subject, id, access]
+      - [subject, identifier, access]
+      - [subject, identifier, post, access]
+      - [identifier, post, access]
+      - [identifier, post, identity, access]
+      - [post, identity, access]
+      - [post, identity, verification, access]
+      - [identity, verification, access]
 
   - must_id: "item:A.7.3.6:reg_request_id"
     description: "Unique request identifier per row"
     excerpt_keywords:
-      - [request, id]
-      - [unique, request]
-      - [unique, request, identifier]
-      - [request, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [request, id, access]
+      - [unique, request, access]
+      - [unique, request, identifier, access]
+      - [request, identifier, access]
+      - [per, row, access]
+      - [each, row, access]
+      - [column, containing, access]
+      - [each, entry, access]
 

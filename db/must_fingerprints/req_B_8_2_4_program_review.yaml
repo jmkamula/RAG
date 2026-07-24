@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.4:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.4:program_review"
@@ -10,27 +11,63 @@ target_control: "B.8.2.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.2.4:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, infringing]
-
   - must_id: "item:B.8.2.4:rev_legislation_currency"
     description: "Legislation currency — cited legislation updated for regulatory changes"
     excerpt_keywords:
       - [legislation, currency, infringing]
+      - [legislation, currency, cited, infringing]
+      - [currency, cited, infringing]
+      - [currency, cited, legislation, infringing]
+      - [cited, legislation, infringing]
+      - [cited, legislation, updated, infringing]
+      - [legislation, updated, infringing]
+      - [legislation, updated, regulatory, infringing]
 
   - must_id: "item:B.8.2.4:rev_notification_audit"
     description: "Notification audit — sampled notifications reviewed for accuracy + timeliness"
     excerpt_keywords:
       - [notification, audit, infringing]
-
-  - must_id: "item:B.8.2.4:rev_reviewer"
-    description: "Reviewer identity (DPO + Legal)"
-    excerpt_keywords:
-      - [reviewer, identity, infringing]
+      - [notification, audit, sampled, infringing]
+      - [audit, sampled, infringing]
+      - [audit, sampled, notifications, infringing]
+      - [sampled, notifications, infringing]
+      - [sampled, notifications, reviewed, infringing]
+      - [notifications, reviewed, infringing]
+      - [notifications, reviewed, accuracy, infringing]
 
   - must_id: "item:B.8.2.4:rev_trigger_health"
     description: "Trigger health — sample of high-risk instruction categories reviewed for missed infringement flags"
     excerpt_keywords:
       - [trigger, health, infringing]
+      - [trigger, health, sample, infringing]
+      - [health, sample, infringing]
+      - [health, sample, high, infringing]
+      - [sample, high, infringing]
+      - [sample, high, risk, infringing]
+      - [high, risk, infringing]
+      - [high, risk, instruction]
+
+  - must_id: "item:B.8.2.4:rev_reviewer"
+    description: "Reviewer identity (DPO + Legal)"
+    excerpt_keywords:
+      - [reviewer, identity, infringing]
+      - [reviewer, identity, dpo, infringing]
+      - [identity, dpo, infringing]
+      - [identity, dpo, legal, infringing]
+      - [dpo, legal, infringing]
+      - [per, revocation, infringing]
+      - [per, revoked, identity, infringing]
+      - [revocation, record, infringing]
+
+  - must_id: "item:B.8.2.4:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, infringing]
+      - [review, date, within, infringing]
+      - [date, within, infringing]
+      - [date, within, planned, infringing]
+      - [within, planned, infringing]
+      - [within, planned, interval, infringing]
+      - [planned, interval, infringing]
+      - [per, revocation, infringing]
+

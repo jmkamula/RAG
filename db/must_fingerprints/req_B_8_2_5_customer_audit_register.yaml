@@ -14,38 +14,38 @@ must_fingerprints:
   - must_id: "item:B.8.2.5:reg_response_summary"
     description: "Response summary per row (what was shared / rationale for redaction if any)"
     excerpt_keywords:
-      - [response, summary]
-      - [response, summary, shared]
-      - [summary, shared]
-      - [summary, shared, rationale]
-      - [shared, rationale]
-      - [shared, rationale, redaction]
-      - [rationale, redaction]
-      - [per, row]
+      - [response, summary, customer]
+      - [response, summary, shared, customer]
+      - [summary, shared, customer]
+      - [summary, shared, rationale, customer]
+      - [shared, rationale, customer]
+      - [shared, rationale, redaction, customer]
+      - [rationale, redaction, customer]
+      - [per, row, customer]
 
   - must_id: "item:B.8.2.5:reg_response_date"
     description: "Response date per row (vs stated SLA)"
     excerpt_keywords:
-      - [response, date]
-      - [response, date, stated]
-      - [date, stated]
-      - [date, stated, sla]
-      - [stated, sla]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [response, date, customer]
+      - [response, date, stated, customer]
+      - [date, stated, customer]
+      - [date, stated, sla, customer]
+      - [stated, sla, customer]
+      - [per, row, customer]
+      - [each, row, customer]
+      - [column, containing, customer]
 
   - must_id: "item:B.8.2.5:reg_request_type"
     description: "Request type per row (audit / certification-share / DPIA input / DSAR support / configuration query)"
     excerpt_keywords:
-      - [request, audit]
-      - [request, audit, certification]
-      - [audit, certification]
-      - [audit, certification, share]
-      - [certification, share]
-      - [certification, share, dpia]
-      - [share, dpia]
-      - [share, dpia, input]
+      - [request, audit, customer]
+      - [request, audit, certification, customer]
+      - [audit, certification, customer]
+      - [audit, certification, share, customer]
+      - [certification, share, customer]
+      - [certification, share, dpia, customer]
+      - [share, dpia, customer]
+      - [share, dpia, input, customer]
 
   - must_id: "item:B.8.2.5:reg_customer_id"
     description: "Requesting customer identifier per row"
@@ -54,20 +54,20 @@ must_fingerprints:
       - [requesting, customer]
       - [requesting, customer, identifier]
       - [customer, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [per, row, customer]
+      - [each, row, customer]
+      - [column, containing, customer]
+      - [each, entry, customer]
 
   - must_id: "item:B.8.2.5:reg_request_id"
     description: "Unique request identifier per row"
     excerpt_keywords:
-      - [request, id]
-      - [unique, request]
-      - [unique, request, identifier]
-      - [request, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [request, id, customer]
+      - [unique, request, customer]
+      - [unique, request, identifier, customer]
+      - [request, identifier, customer]
+      - [per, row, customer]
+      - [each, row, customer]
+      - [column, containing, customer]
+      - [each, entry, customer]
 

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.85:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.85:program_review"
@@ -10,28 +11,63 @@ target_control: "Art.85"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.85:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:Art.85:rev_subject_rights_audit"
+    description: "Subject-rights audit — confirm derogations are not over-applied (residual rights still honoured where not legitimately derogated)"
     excerpt_keywords:
-      - [review, date, planned, interval, freedom]
+      - [subject, rights, audit, freedom]
+      - [subject, rights, freedom]
+      - [rights, audit, freedom]
+      - [rights, audit, confirm, freedom]
+      - [audit, confirm, freedom]
+      - [audit, confirm, derogations, freedom]
+      - [confirm, derogations, freedom]
+      - [confirm, derogations, not, freedom]
+
+  - must_id: "item:Art.85:rev_scope_coverage"
+    description: "Scope coverage — every in-scope activity has a derogation basis (or explicit decision to NOT invoke Art.85 for it)"
+    excerpt_keywords:
+      - [scope, coverage, freedom]
+      - [scope, coverage, every, freedom]
+      - [coverage, every, freedom]
+      - [coverage, every, scope, freedom]
+      - [every, scope, freedom]
+      - [every, scope, activity, freedom]
+      - [scope, activity, freedom]
+      - [scope, activity, has, freedom]
 
   - must_id: "item:Art.85:rev_law_currency"
-    description: "Member State law currency check — every cited national-law provision still in force; new MS imple..."
+    description: "Member State law currency check — every cited national-law provision still in force; new MS implementations swept in"
     excerpt_keywords:
       - [law, currency, freedom]
-      - [member, state, law, currency, freedom]
+      - [member, state, freedom]
+      - [member, state, law, freedom]
+      - [state, law, freedom]
+      - [state, law, currency, freedom]
+      - [law, currency, check, freedom]
+      - [currency, check, freedom]
+      - [currency, check, every, freedom]
 
   - must_id: "item:Art.85:rev_reviewer"
     description: "Reviewer identity (DPO + legal counsel + editorial/academic lead)"
     excerpt_keywords:
       - [reviewer, identity, freedom]
+      - [reviewer, identity, dpo, freedom]
+      - [identity, dpo, freedom]
+      - [identity, dpo, legal, freedom]
+      - [dpo, legal, freedom]
+      - [dpo, legal, counsel, freedom]
+      - [legal, counsel, freedom]
+      - [legal, counsel, editorial, freedom]
 
-  - must_id: "item:Art.85:rev_scope_coverage"
-    description: "Scope coverage — every in-scope activity has a derogation basis (or explicit decision to NOT invo..."
+  - must_id: "item:Art.85:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [scope, coverage, freedom]
+      - [review, date, freedom]
+      - [review, date, within, freedom]
+      - [date, within, freedom]
+      - [date, within, planned, freedom]
+      - [within, planned, freedom]
+      - [within, planned, interval, freedom]
+      - [planned, interval, freedom]
+      - [per, revocation, freedom]
 
-  - must_id: "item:Art.85:rev_subject_rights_audit"
-    description: "Subject-rights audit — confirm derogations are not over-applied (residual rights still honoured w..."
-    excerpt_keywords:
-      - [subject, rights, audit, freedom]

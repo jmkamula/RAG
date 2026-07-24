@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.5.25:triage_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.25:triage_program_review"
@@ -11,21 +12,74 @@ target_standard: "ISO27001:2022"
 
 must_fingerprints:
   - must_id: "item:A.5.25:rev_actions"
-    description: "Action items captured (e.g. add monitoring source, adjust severity threshold)"
+    description: "Action items captured (e.g"
     excerpt_keywords:
+      - [action, items, assessment]
       - [action, items, captured, assessment]
+      - [items, captured, assessment]
+      - [items, captured, add, assessment]
+      - [captured, add, assessment]
+      - [captured, add, monitoring, assessment]
+      - [add, monitoring, assessment]
+      - [add, monitoring, source, assessment]
 
   - must_id: "item:A.5.25:rev_calibration"
     description: "Calibration outcome (detection sources / criteria / scale adjusted with rationale)"
     excerpt_keywords:
       - [calibration, outcome, assessment]
+      - [calibration, outcome, detection, assessment]
+      - [outcome, detection, assessment]
+      - [outcome, detection, sources, assessment]
+      - [detection, sources, assessment]
+      - [detection, sources, criteria, assessment]
+      - [sources, criteria, assessment]
+      - [sources, criteria, scale, assessment]
 
-  - must_id: "item:A.5.25:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:A.5.25:rev_missed"
+    description: "Missed-event analysis (events surfaced via lessons-learned that triage didn't catch)"
     excerpt_keywords:
-      - [review, date, planned, interval, assessment]
+      - [missed, event, assessment]
+      - [missed, event, analysis, assessment]
+      - [event, analysis, assessment]
+      - [event, analysis, events, assessment]
+      - [analysis, events, assessment]
+      - [analysis, events, surfaced, assessment]
+      - [events, surfaced, assessment]
+      - [events, surfaced, via, assessment]
+
+  - must_id: "item:A.5.25:rev_fp_rate"
+    description: "False-positive rate analysed across the period"
+    excerpt_keywords:
+      - [fp, rate, assessment]
+      - [false, positive, assessment]
+      - [false, positive, rate, assessment]
+      - [positive, rate, assessment]
+      - [positive, rate, analysed, assessment]
+      - [rate, analysed, assessment]
+      - [rate, analysed, across, assessment]
+      - [analysed, across, assessment]
 
   - must_id: "item:A.5.25:rev_reviewer"
     description: "Reviewer identity (SecOps lead + InfoSec lead jointly)"
     excerpt_keywords:
       - [reviewer, identity, assessment]
+      - [reviewer, identity, secops, assessment]
+      - [identity, secops, assessment]
+      - [identity, secops, lead, assessment]
+      - [secops, lead, assessment]
+      - [secops, lead, infosec, assessment]
+      - [lead, infosec, assessment]
+      - [lead, infosec, lead, assessment]
+
+  - must_id: "item:A.5.25:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, assessment]
+      - [review, date, within, assessment]
+      - [date, within, assessment]
+      - [date, within, planned, assessment]
+      - [within, planned, assessment]
+      - [within, planned, interval, assessment]
+      - [planned, interval, assessment]
+      - [per, revocation, assessment]
+

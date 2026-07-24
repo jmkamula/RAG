@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.5.17:authentication_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.17:authentication_program_review"
@@ -11,37 +12,86 @@ target_standard: "ISO27001:2022"
 
 must_fingerprints:
   - must_id: "item:A.5.17:rev_actions"
-    description: "Action items captured (e.g. expand MFA to remaining identity types, automate rotation for service..."
+    description: "Action items captured (e.g"
     excerpt_keywords:
+      - [action, items, authentication]
       - [action, items, captured, authentication]
+      - [items, captured, authentication]
+      - [items, captured, expand, authentication]
+      - [captured, expand, authentication]
+      - [captured, expand, mfa, authentication]
+      - [expand, mfa, authentication]
+      - [expand, mfa, remaining, authentication]
 
   - must_id: "item:A.5.17:rev_compromise_sample"
-    description: "Compromise-response sample (recent compromise events re-examined: was rotation forced? was scope ..."
+    description: "Compromise-response sample (recent compromise events re-examined: was rotation forced? was scope expansion checked?)"
     excerpt_keywords:
       - [compromise, sample, authentication]
+      - [compromise, response, authentication]
+      - [compromise, response, sample, authentication]
+      - [response, sample, authentication]
+      - [response, sample, recent, authentication]
+      - [sample, recent, authentication]
+      - [sample, recent, compromise, authentication]
+      - [recent, compromise, authentication]
+
+  - must_id: "item:A.5.17:rev_vault_discipline"
+    description: "Vault-discipline audit (sample of production systems re-checked: are credentials in the vault, or in config files / spreadsheets / chat hist"
+    excerpt_keywords:
+      - [vault, discipline, authentication]
+      - [vault, discipline, audit, authentication]
+      - [discipline, audit, authentication]
+      - [discipline, audit, sample, authentication]
+      - [audit, sample, authentication]
+      - [audit, sample, production, authentication]
+      - [sample, production, authentication]
+      - [sample, production, checked, authentication]
+
+  - must_id: "item:A.5.17:rev_mfa_coverage"
+    description: "MFA enrolment coverage audit (% of in-scope identities with MFA enrolled; gap analysis per uncovered identity type)"
+    excerpt_keywords:
+      - [mfa, coverage, authentication]
+      - [mfa, enrolment, authentication]
+      - [mfa, enrolment, coverage, authentication]
+      - [enrolment, coverage, authentication]
+      - [enrolment, coverage, audit, authentication]
+      - [coverage, audit, authentication]
+      - [coverage, audit, scope, authentication]
+      - [audit, scope, authentication]
+
+  - must_id: "item:A.5.17:rev_rotation_compliance"
+    description: "Rotation-compliance audit (sample of credentials past their rotation cadence; root cause per stale credential)"
+    excerpt_keywords:
+      - [rotation, compliance, authentication]
+      - [rotation, compliance, audit, authentication]
+      - [compliance, audit, authentication]
+      - [compliance, audit, sample, authentication]
+      - [audit, sample, authentication]
+      - [audit, sample, credentials, authentication]
+      - [sample, credentials, authentication]
+      - [sample, credentials, past, authentication]
+
+  - must_id: "item:A.5.17:rev_reviewer"
+    description: "Reviewer identity (IT identity-lead + InfoSec lead jointly; vault custodian where vault discipline is in scope)"
+    excerpt_keywords:
+      - [reviewer, identity, authentication]
+      - [reviewer, identity, identity, authentication]
+      - [identity, identity, authentication]
+      - [identity, identity, lead, authentication]
+      - [identity, lead, authentication]
+      - [identity, lead, infosec, authentication]
+      - [lead, infosec, authentication]
+      - [lead, infosec, lead, authentication]
 
   - must_id: "item:A.5.17:rev_date"
     description: "Review date within the planned 180-day interval"
     excerpt_keywords:
-      - [review, date, planned, authentication]
+      - [review, date, authentication]
+      - [review, date, within, authentication]
+      - [date, within, authentication]
+      - [date, within, planned, authentication]
+      - [within, planned, authentication]
+      - [within, planned, 180, authentication]
+      - [planned, 180, authentication]
+      - [planned, 180, day, authentication]
 
-  - must_id: "item:A.5.17:rev_mfa_coverage"
-    description: "MFA enrolment coverage audit (% of in-scope identities with MFA enrolled; gap analysis per uncove..."
-    excerpt_keywords:
-      - [mfa, coverage, authentication]
-      - [mfa, enrolment, coverage, audit, authentication]
-
-  - must_id: "item:A.5.17:rev_reviewer"
-    description: "Reviewer identity (IT identity-lead + InfoSec lead jointly; vault custodian where vault disciplin..."
-    excerpt_keywords:
-      - [reviewer, identity, authentication]
-
-  - must_id: "item:A.5.17:rev_rotation_compliance"
-    description: "Rotation-compliance audit (sample of credentials past their rotation cadence; root cause per stal..."
-    excerpt_keywords:
-      - [rotation, compliance, authentication]
-
-  - must_id: "item:A.5.17:rev_vault_discipline"
-    description: "Vault-discipline audit (sample of production systems re-checked: are credentials in the vault, or..."
-    excerpt_keywords:
-      - [vault, discipline, authentication]

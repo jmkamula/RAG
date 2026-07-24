@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:9.2:owner"
     description: "Named owner of the programme (typically ISMS Manager + independent auditor)"
     excerpt_keywords:
-      - [named, owner]
-      - [named, owner, programme]
-      - [owner, programme]
-      - [owner, programme, typically]
-      - [programme, typically]
-      - [programme, typically, isms]
-      - [typically, isms]
-      - [typically, isms, manager]
+      - [named, owner, internal]
+      - [named, owner, programme, internal]
+      - [owner, programme, internal]
+      - [owner, programme, typically, internal]
+      - [programme, typically, internal]
+      - [programme, typically, isms, internal]
+      - [typically, isms, internal]
+      - [typically, isms, manager, internal]
 
   - must_id: "item:9.2:corrective"
     description: "Corrective action follow-up process"
     excerpt_keywords:
-      - [corrective, action]
-      - [corrective, action, follow]
-      - [action, follow]
+      - [corrective, action, internal]
+      - [corrective, action, follow, internal]
+      - [action, follow, internal]
 
   - must_id: "item:9.2:reporting"
     description: "Reporting process to management defined"
     excerpt_keywords:
-      - [reporting, management]
-      - [reporting, management, defined]
-      - [management, defined]
+      - [reporting, management, internal]
+      - [reporting, management, defined, internal]
+      - [management, defined, internal]
 
   - must_id: "item:9.2:independence"
     description: "Auditor independence and competence requirements"
     excerpt_keywords:
-      - [auditor, independence]
-      - [auditor, independence, competence]
-      - [independence, competence]
-      - [independence, competence, requirements]
-      - [competence, requirements]
+      - [auditor, independence, internal]
+      - [auditor, independence, competence, internal]
+      - [independence, competence, internal]
+      - [independence, competence, requirements, internal]
+      - [competence, requirements, internal]
 
   - must_id: "item:9.2:criteria"
     description: "Audit criteria defined"
     excerpt_keywords:
       - [audit, criteria]
       - [audit, criteria, defined]
-      - [criteria, defined]
+      - [criteria, defined, internal]
 
   - must_id: "item:9.2:scope"
     description: "Audit scope covering all ISMS processes"
     excerpt_keywords:
       - [audit, scope]
       - [audit, scope, covering]
-      - [scope, covering]
-      - [scope, covering, isms]
-      - [covering, isms]
-      - [covering, isms, processes]
-      - [isms, processes]
+      - [scope, covering, internal]
+      - [scope, covering, isms, internal]
+      - [covering, isms, internal]
+      - [covering, isms, processes, internal]
+      - [isms, processes, internal]
 
   - must_id: "item:9.2:frequency"
     description: "Audit frequency defined"
     excerpt_keywords:
       - [audit, frequency]
       - [audit, frequency, defined]
-      - [frequency, defined]
+      - [frequency, defined, internal]
 

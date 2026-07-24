@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.3:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.3:applicable_scope"
@@ -10,18 +11,39 @@ target_control: "A.7.4.3"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.3:scope_high_churn_fields"
-    description: "High-churn field categories (contact details / address / employment / preferences)"
+  - must_id: "item:A.7.4.3:scope_verification_sources"
+    description: "Verification source map (postal address vs national registry vs subject self-serve)"
     excerpt_keywords:
-      - [scope, high, churn, fields, accuracy]
+      - [verification, sources, accuracy]
+      - [verification, source, accuracy]
+      - [verification, source, map, accuracy]
+      - [source, map, accuracy]
+      - [source, map, postal, accuracy]
+      - [map, postal, accuracy]
+      - [map, postal, address, accuracy]
+      - [postal, address, accuracy]
 
   - must_id: "item:A.7.4.3:scope_low_churn_fields"
     description: "Low-churn field categories (date of birth / national ID / immutable identifiers)"
     excerpt_keywords:
-      - [scope, low, churn, fields, accuracy]
+      - [low, churn, fields, accuracy]
+      - [low, churn, accuracy]
+      - [low, churn, categories, accuracy]
+      - [churn, categories, accuracy]
+      - [churn, categories, date, accuracy]
+      - [categories, date, accuracy]
+      - [categories, date, birth, accuracy]
+      - [date, birth, accuracy]
 
-  - must_id: "item:A.7.4.3:scope_verification_sources"
-    description: "Verification source map (postal address vs national registry vs subject self-serve)"
+  - must_id: "item:A.7.4.3:scope_high_churn_fields"
+    description: "High-churn field categories (contact details / address / employment / preferences)"
     excerpt_keywords:
-      - [scope, verification, sources, accuracy]
-      - [verification, source, map, accuracy]
+      - [high, churn, fields, accuracy]
+      - [high, churn, accuracy]
+      - [high, churn, categories, accuracy]
+      - [churn, categories, accuracy]
+      - [churn, categories, contact, accuracy]
+      - [categories, contact, accuracy]
+      - [categories, contact, address, accuracy]
+      - [contact, address, accuracy]
+

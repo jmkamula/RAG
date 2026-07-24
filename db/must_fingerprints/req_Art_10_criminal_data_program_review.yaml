@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.10:criminal_data_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.10:criminal_data_program_review"
@@ -11,27 +12,62 @@ target_standard: "GDPR:2016/679"
 
 must_fingerprints:
   - must_id: "item:Art.10:rev_access_audit"
-    description: "Access audit — restricted-access requirements being enforced (no broad access to criminal-data st..."
+    description: "Access audit — restricted-access requirements being enforced (no broad access to criminal-data stores)"
     excerpt_keywords:
       - [access, audit, personal]
-
-  - must_id: "item:Art.10:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, personal]
-
-  - must_id: "item:Art.10:rev_law_currency"
-    description: "Member State law currency — every cited law still in force; any new MS authorisations swept in"
-    excerpt_keywords:
-      - [law, currency, personal]
-      - [member, state, law, currency, personal]
+      - [access, audit, restricted, personal]
+      - [audit, restricted, personal]
+      - [audit, restricted, access, personal]
+      - [restricted, access, personal]
+      - [restricted, access, requirements, personal]
+      - [access, requirements, personal]
+      - [access, requirements, being, personal]
 
   - must_id: "item:Art.10:rev_retention_audit"
     description: "Retention audit — past-retention-limit records purged"
     excerpt_keywords:
       - [retention, audit, personal]
+      - [retention, audit, past, personal]
+      - [audit, past, personal]
+      - [audit, past, retention, personal]
+      - [past, retention, personal]
+      - [past, retention, limit, personal]
+      - [retention, limit, personal]
+      - [retention, limit, records, personal]
+
+  - must_id: "item:Art.10:rev_law_currency"
+    description: "Member State law currency — every cited law still in force; any new MS authorisations swept in"
+    excerpt_keywords:
+      - [law, currency, personal]
+      - [member, state, personal]
+      - [member, state, law, personal]
+      - [state, law, personal]
+      - [state, law, currency, personal]
+      - [law, currency, every, personal]
+      - [currency, every, personal]
+      - [currency, every, cited, personal]
 
   - must_id: "item:Art.10:rev_reviewer"
     description: "Reviewer identity (DPO + legal counsel)"
     excerpt_keywords:
       - [reviewer, identity, personal]
+      - [reviewer, identity, dpo, personal]
+      - [identity, dpo, personal]
+      - [identity, dpo, legal, personal]
+      - [dpo, legal, personal]
+      - [dpo, legal, counsel, personal]
+      - [legal, counsel, personal]
+      - [per, revocation, personal]
+
+  - must_id: "item:Art.10:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, personal]
+      - [review, date, within, personal]
+      - [date, within, personal]
+      - [date, within, planned, personal]
+      - [within, planned, personal]
+      - [within, planned, interval, personal]
+      - [planned, interval, personal]
+      - [per, revocation, personal]
+

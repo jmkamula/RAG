@@ -14,72 +14,72 @@ must_fingerprints:
   - must_id: "item:A.6.5:reg_obligations_covered"
     description: "Per-row covered obligations list (confidentiality + IP + non-poach + non-compete where applicable per jurisdiction)"
     excerpt_keywords:
-      - [obligations, covered]
-      - [covered, obligations]
-      - [covered, obligations, confidentiality]
-      - [obligations, confidentiality]
-      - [obligations, confidentiality, non]
-      - [confidentiality, non]
-      - [confidentiality, non, poach]
-      - [non, poach]
+      - [obligations, covered, responsibilities]
+      - [covered, obligations, responsibilities]
+      - [covered, obligations, confidentiality, responsibilities]
+      - [obligations, confidentiality, responsibilities]
+      - [obligations, confidentiality, non, responsibilities]
+      - [confidentiality, non, responsibilities]
+      - [confidentiality, non, poach, responsibilities]
+      - [non, poach, responsibilities]
 
   - must_id: "item:A.6.5:reg_acknowledgment"
     description: "Per-row signed acknowledgment evidence (digital signature / signed PDF / recorded receipt of intranet artefact)"
     excerpt_keywords:
-      - [signed, acknowledgment]
-      - [signed, acknowledgment, evidence]
-      - [acknowledgment, evidence]
-      - [acknowledgment, evidence, digital]
-      - [evidence, digital]
-      - [evidence, digital, signature]
-      - [digital, signature]
-      - [digital, signature, signed]
+      - [signed, acknowledgment, responsibilities]
+      - [signed, acknowledgment, evidence, responsibilities]
+      - [acknowledgment, evidence, responsibilities]
+      - [acknowledgment, evidence, digital, responsibilities]
+      - [evidence, digital, responsibilities]
+      - [evidence, digital, signature, responsibilities]
+      - [digital, signature, responsibilities]
+      - [digital, signature, signed, responsibilities]
 
   - must_id: "item:A.6.5:reg_briefer"
     description: "Per-row briefer identity (HR partner; line manager joins for role-change cases)"
     excerpt_keywords:
-      - [briefer, identity]
-      - [briefer, identity, partner]
-      - [identity, partner]
-      - [identity, partner, line]
-      - [partner, line]
-      - [partner, line, manager]
-      - [line, manager]
-      - [line, manager, joins]
+      - [briefer, identity, responsibilities]
+      - [briefer, identity, partner, responsibilities]
+      - [identity, partner, responsibilities]
+      - [identity, partner, line, responsibilities]
+      - [partner, line, responsibilities]
+      - [partner, line, manager, responsibilities]
+      - [line, manager, responsibilities]
+      - [line, manager, joins, responsibilities]
 
   - must_id: "item:A.6.5:reg_briefing_date"
     description: "Per-row briefing date (typically last working day or shortly after; for role change, at point of role transition)"
     excerpt_keywords:
-      - [briefing, date]
-      - [briefing, date, typically]
-      - [date, typically]
-      - [date, typically, last]
-      - [typically, last]
-      - [typically, last, working]
-      - [last, working]
-      - [last, working, day]
+      - [briefing, date, responsibilities]
+      - [briefing, date, typically, responsibilities]
+      - [date, typically, responsibilities]
+      - [date, typically, last, responsibilities]
+      - [typically, last, responsibilities]
+      - [typically, last, working, responsibilities]
+      - [last, working, responsibilities]
+      - [last, working, day, responsibilities]
 
   - must_id: "item:A.6.5:reg_trigger"
     description: "Per-row trigger (termination / contract end / role change within org / retirement)"
     excerpt_keywords:
-      - [trigger, termination]
-      - [trigger, termination, contract]
-      - [termination, contract]
-      - [termination, contract, end]
-      - [contract, end]
-      - [contract, end, role]
-      - [end, role]
-      - [end, role, change]
+      - [trigger, termination, responsibilities]
+      - [trigger, termination, contract, responsibilities]
+      - [termination, contract, responsibilities]
+      - [termination, contract, end, responsibilities]
+      - [contract, end, responsibilities]
+      - [contract, end, role, responsibilities]
+      - [end, role, responsibilities]
+      - [end, role, change, responsibilities]
 
   - must_id: "item:A.6.5:reg_leaver_id"
     description: "Per-row leaver identifier (links to identity register A.5.16; cross-link to A.5.11 return-of-assets record + A.5.16 identity revocation)"
     excerpt_keywords:
-      - [leaver, id]
-      - [leaver, identifier]
-      - [leaver, identifier, identity]
-      - [identifier, identity]
-      - [identifier, identity, cross]
-      - [identity, cross]
-      - [identity, cross, return]
-      - [cross, return]
+      - [leaver, id, responsibilities]
+      - [leaver, identifier, responsibilities]
+      - [leaver, identifier, identity, responsibilities]
+      - [identifier, identity, responsibilities]
+      - [identifier, identity, cross, responsibilities]
+      - [identity, cross, responsibilities]
+      - [identity, cross, return, responsibilities]
+      - [cross, return, responsibilities]
 

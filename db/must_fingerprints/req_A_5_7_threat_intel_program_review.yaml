@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.5.7:threat_intel_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.7:threat_intel_program_review"
@@ -11,33 +12,86 @@ target_standard: "ISO27001:2022"
 
 must_fingerprints:
   - must_id: "item:A.5.7:rev_actions"
-    description: "Action items captured for the program (e.g. add new feed, retire stale source, tune analysis cade..."
+    description: "Action items captured for the program (e.g"
     excerpt_keywords:
-      - [action, items, captured, program, threat]
+      - [action, items, threat]
+      - [action, items, captured, threat]
+      - [items, captured, threat]
+      - [items, captured, program, threat]
+      - [captured, program, threat]
+      - [captured, program, add, threat]
+      - [program, add, threat]
+      - [program, add, new, threat]
+
+  - must_id: "item:A.5.7:rev_missed"
+    description: "Missed-event analysis (events surfaced by A.5.25 triage or A.5.27 lessons that intel didn't flag in advance)"
+    excerpt_keywords:
+      - [missed, event, threat]
+      - [missed, event, analysis, threat]
+      - [event, analysis, threat]
+      - [event, analysis, events, threat]
+      - [analysis, events, threat]
+      - [analysis, events, surfaced, threat]
+      - [events, surfaced, threat]
+      - [events, surfaced, triage, threat]
 
   - must_id: "item:A.5.7:rev_consumer_feedback"
-    description: "Consumer feedback collected from named consumers (sec ops, A.5.21 supplier risk, A.5.25 detection..."
+    description: "Consumer feedback collected from named consumers (sec ops, A.5.21 supplier risk, A.5.25 detection, exec briefing)"
     excerpt_keywords:
       - [consumer, feedback, threat]
-      - [consumer, feedback, collected, named, threat]
-
-  - must_id: "item:A.5.7:rev_date"
-    description: "Review date within the planned 180-day interval"
-    excerpt_keywords:
-      - [review, date, planned, threat]
-
-  - must_id: "item:A.5.7:rev_feed_value"
-    description: "Feed-value analysis per source (which feeds delivered actionable IOCs / advisories; which were dr..."
-    excerpt_keywords:
-      - [feed, value, threat]
+      - [consumer, feedback, collected, threat]
+      - [feedback, collected, threat]
+      - [feedback, collected, named, threat]
+      - [collected, named, threat]
+      - [collected, named, consumers, threat]
+      - [named, consumers, threat]
+      - [named, consumers, sec, threat]
 
   - must_id: "item:A.5.7:rev_products_delivered"
-    description: "Products delivered count and distribution evidenced (proves the program ran, not just the procedu..."
+    description: "Products delivered count and distribution evidenced (proves the program ran, not just the procedure existed)"
     excerpt_keywords:
       - [products, delivered, threat]
-      - [products, delivered, count, distribution, threat]
+      - [products, delivered, count, threat]
+      - [delivered, count, threat]
+      - [delivered, count, distribution, threat]
+      - [count, distribution, threat]
+      - [count, distribution, evidenced, threat]
+      - [distribution, evidenced, threat]
+      - [distribution, evidenced, proves, threat]
+
+  - must_id: "item:A.5.7:rev_feed_value"
+    description: "Feed-value analysis per source (which feeds delivered actionable IOCs / advisories; which were dropped)"
+    excerpt_keywords:
+      - [feed, analysis, threat]
+      - [feed, analysis, source, threat]
+      - [analysis, source, threat]
+      - [analysis, source, feeds, threat]
+      - [source, feeds, threat]
+      - [source, feeds, delivered, threat]
+      - [feeds, delivered, threat]
+      - [feeds, delivered, actionable, threat]
 
   - must_id: "item:A.5.7:rev_reviewer"
     description: "Reviewer identity (program owner + InfoSec lead jointly)"
     excerpt_keywords:
       - [reviewer, identity, threat]
+      - [reviewer, identity, program, threat]
+      - [identity, program, threat]
+      - [identity, program, owner, threat]
+      - [program, owner, threat]
+      - [program, owner, infosec, threat]
+      - [owner, infosec, threat]
+      - [owner, infosec, lead, threat]
+
+  - must_id: "item:A.5.7:rev_date"
+    description: "Review date within the planned 180-day interval"
+    excerpt_keywords:
+      - [review, date, threat]
+      - [review, date, within, threat]
+      - [date, within, threat]
+      - [date, within, planned, threat]
+      - [within, planned, threat]
+      - [within, planned, 180, threat]
+      - [planned, 180, threat]
+      - [planned, 180, day, threat]
+

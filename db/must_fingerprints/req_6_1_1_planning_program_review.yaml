@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:6.1.1:planning_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:6.1.1:planning_program_review"
@@ -10,29 +11,63 @@ target_control: "6.1.1"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:6.1.1:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, general]
-
   - must_id: "item:6.1.1:rev_effectiveness"
     description: "Effectiveness summary across completed actions"
     excerpt_keywords:
-      - [effectiveness, summary, completed, actions, general]
+      - [effectiveness, summary, general]
+      - [effectiveness, summary, across, general]
+      - [summary, across, general]
+      - [summary, across, completed, general]
+      - [across, completed, general]
+      - [across, completed, actions, general]
+      - [completed, actions, general]
+      - [per, revocation, general]
+
+  - must_id: "item:6.1.1:rev_register_currency"
+    description: "Action register currency check — every row reviewed for status + relevance"
+    excerpt_keywords:
+      - [action, currency, general]
+      - [action, currency, check, general]
+      - [currency, check, general]
+      - [currency, check, every, general]
+      - [check, every, general]
+      - [check, every, reviewed, general]
+      - [every, reviewed, general]
+      - [every, reviewed, status, general]
 
   - must_id: "item:6.1.1:rev_inputs_currency"
     description: "Inputs currency check — 4.1 + 4.2 reviewed before this planning cycle"
     excerpt_keywords:
       - [inputs, currency, general]
       - [inputs, currency, check, general]
-
-  - must_id: "item:6.1.1:rev_register_currency"
-    description: "Action register currency check — every row reviewed for status + relevance"
-    excerpt_keywords:
-      - [register, currency, general]
-      - [action, register, currency, check, general]
+      - [currency, check, general]
+      - [currency, check, reviewed, general]
+      - [check, reviewed, general]
+      - [check, reviewed, before, general]
+      - [reviewed, before, general]
+      - [reviewed, before, planning, general]
 
   - must_id: "item:6.1.1:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + executive sponsor)"
     excerpt_keywords:
       - [reviewer, identity, general]
+      - [reviewer, identity, isms, general]
+      - [identity, isms, general]
+      - [identity, isms, manager, general]
+      - [isms, manager, general]
+      - [isms, manager, executive, general]
+      - [manager, executive, general]
+      - [manager, executive, sponsor, general]
+
+  - must_id: "item:6.1.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, general]
+      - [review, date, within, general]
+      - [date, within, general]
+      - [date, within, planned, general]
+      - [within, planned, general]
+      - [within, planned, interval, general]
+      - [planned, interval, general]
+      - [per, revocation, general]
+

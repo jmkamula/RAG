@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.6:capacity_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.6:capacity_program_review"
@@ -14,24 +15,59 @@ must_fingerprints:
     description: "Baseline / threshold updates published from findings"
     excerpt_keywords:
       - [baseline, update, capacity]
-      - [baseline, threshold, updates, published, capacity]
+      - [baseline, threshold, capacity]
+      - [baseline, threshold, updates, capacity]
+      - [threshold, updates, capacity]
+      - [threshold, updates, published, capacity]
+      - [updates, published, capacity]
+      - [updates, published, findings, capacity]
+      - [published, findings, capacity]
 
   - must_id: "item:A.8.6:rev_breach_patterns"
     description: "Breach-pattern review (recurring breaches → baseline re-calibration)"
     excerpt_keywords:
       - [breach, patterns, capacity]
-
-  - must_id: "item:A.8.6:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, capacity]
+      - [breach, pattern, capacity]
+      - [breach, pattern, review, capacity]
+      - [pattern, review, capacity]
+      - [pattern, review, recurring, capacity]
+      - [review, recurring, capacity]
+      - [review, recurring, breaches, capacity]
+      - [recurring, breaches, capacity]
 
   - must_id: "item:A.8.6:rev_forecast_accuracy"
     description: "Forecast-vs-actual accuracy check across the review window"
     excerpt_keywords:
       - [forecast, accuracy, capacity]
+      - [forecast, actual, capacity]
+      - [forecast, actual, accuracy, capacity]
+      - [actual, accuracy, capacity]
+      - [actual, accuracy, check, capacity]
+      - [accuracy, check, capacity]
+      - [accuracy, check, across, capacity]
+      - [check, across, capacity]
 
   - must_id: "item:A.8.6:rev_reviewer"
     description: "Reviewer identity (Infrastructure + Finance + Engineering leadership)"
     excerpt_keywords:
       - [reviewer, identity, capacity]
+      - [reviewer, identity, infrastructure, capacity]
+      - [identity, infrastructure, capacity]
+      - [identity, infrastructure, finance, capacity]
+      - [infrastructure, finance, capacity]
+      - [infrastructure, finance, engineering, capacity]
+      - [finance, engineering, capacity]
+      - [finance, engineering, leadership, capacity]
+
+  - must_id: "item:A.8.6:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, capacity]
+      - [review, date, within, capacity]
+      - [date, within, capacity]
+      - [date, within, planned, capacity]
+      - [within, planned, capacity]
+      - [within, planned, interval, capacity]
+      - [planned, interval, capacity]
+      - [per, revocation, capacity]
+

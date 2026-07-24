@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.14:privacy_notice_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.14:privacy_notice_program_review"
@@ -10,30 +11,63 @@ target_control: "Art.14"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.14:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:Art.14:rev_exception_reassessment"
+    description: "Art.14.5 exception re-assessment — exceptions claimed still hold (proportionate-impossibility may change)"
     excerpt_keywords:
-      - [review, date, planned, interval, personal]
+      - [exception, reassessment, provided]
+      - [art, exception, provided]
+      - [art, exception, assessment, provided]
+      - [exception, assessment, provided]
+      - [exception, assessment, exceptions, provided]
+      - [assessment, exceptions, provided]
+      - [assessment, exceptions, claimed, provided]
+      - [exceptions, claimed, provided]
 
   - must_id: "item:Art.14:rev_deadline_compliance"
     description: "Deadline compliance audit — notice deadlines met per Art.14.3"
     excerpt_keywords:
-      - [deadline, compliance, personal]
-      - [deadline, compliance, audit, personal]
-
-  - must_id: "item:Art.14:rev_exception_reassessment"
-    description: "Art.14.5 exception re-assessment — exceptions claimed still hold (proportionate-impossibility may..."
-    excerpt_keywords:
-      - [exception, reassessment, personal]
-      - [art, exception, personal]
+      - [deadline, compliance, provided]
+      - [deadline, compliance, audit, provided]
+      - [compliance, audit, provided]
+      - [compliance, audit, notice, provided]
+      - [audit, notice, provided]
+      - [audit, notice, deadlines, provided]
+      - [notice, deadlines, provided]
+      - [notice, deadlines, met, provided]
 
   - must_id: "item:Art.14:rev_register_currency"
     description: "Register currency check — every active third-party source has a current row"
     excerpt_keywords:
-      - [register, currency, personal]
-      - [register, currency, check, personal]
+      - [currency, check, provided]
+      - [currency, check, every, provided]
+      - [check, every, provided]
+      - [check, every, active, provided]
+      - [every, active, provided]
+      - [every, active, third, provided]
+      - [active, third, provided]
+      - [active, third, party, provided]
 
   - must_id: "item:Art.14:rev_reviewer"
     description: "Reviewer identity (DPO + procurement / data-acquisition lead)"
     excerpt_keywords:
-      - [reviewer, identity, personal]
+      - [reviewer, identity, provided]
+      - [reviewer, identity, dpo, provided]
+      - [identity, dpo, provided]
+      - [identity, dpo, procurement, provided]
+      - [dpo, procurement, provided]
+      - [dpo, procurement, acquisition, provided]
+      - [procurement, acquisition, provided]
+      - [procurement, acquisition, lead, provided]
+
+  - must_id: "item:Art.14:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, provided]
+      - [review, date, within, provided]
+      - [date, within, provided]
+      - [date, within, planned, provided]
+      - [within, planned, provided]
+      - [within, planned, interval, provided]
+      - [planned, interval, provided]
+      - [per, revocation, provided]
+

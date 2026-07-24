@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:B.8.2.4:proc_notification_records"
     description: "Notification record retention — every issued notice retained for audit"
     excerpt_keywords:
-      - [notification, records]
-      - [notification, retention]
-      - [notification, retention, every]
-      - [retention, every]
-      - [retention, every, issued]
-      - [every, issued]
-      - [every, issued, notice]
-      - [issued, notice]
+      - [notification, records, infringing]
+      - [notification, retention, infringing]
+      - [notification, retention, every, infringing]
+      - [retention, every, infringing]
+      - [retention, every, issued, infringing]
+      - [every, issued, infringing]
+      - [every, issued, notice, infringing]
+      - [issued, notice, infringing]
 
   - must_id: "item:B.8.2.4:proc_processing_pause"
     description: "Processing-pause protocol — where infringement is clear + severe, processing paused pending customer confirmation or withdrawal"
     excerpt_keywords:
-      - [processing, pause]
-      - [processing, pause, protocol]
-      - [pause, protocol]
-      - [pause, protocol, infringement]
-      - [protocol, infringement]
-      - [protocol, infringement, clear]
-      - [infringement, clear]
-      - [infringement, clear, severe]
+      - [processing, pause, infringing]
+      - [processing, pause, protocol, infringing]
+      - [pause, protocol, infringing]
+      - [pause, protocol, infringement, infringing]
+      - [protocol, infringement, infringing]
+      - [protocol, infringement, clear, infringing]
+      - [infringement, clear, infringing]
+      - [infringement, clear, severe, infringing]
 
   - must_id: "item:B.8.2.4:proc_customer_notification"
     description: "Customer notification format — written notice with cited legislation, dispute pathway, and 'processor's opinion' framing"
     excerpt_keywords:
-      - [customer, notification]
-      - [customer, notification, format]
-      - [notification, format]
-      - [notification, format, written]
-      - [format, written]
-      - [format, written, notice]
-      - [written, notice]
-      - [written, notice, cited]
+      - [customer, notification, infringing]
+      - [customer, notification, format, infringing]
+      - [notification, format, infringing]
+      - [notification, format, written, infringing]
+      - [format, written, infringing]
+      - [format, written, notice, infringing]
+      - [written, notice, infringing]
+      - [written, notice, cited, infringing]
 
   - must_id: "item:B.8.2.4:proc_legal_assessment"
     description: "Legal assessment step — DPO / legal counsel assesses the instruction against applicable legislation"
     excerpt_keywords:
-      - [legal, assessment]
-      - [legal, assessment, step]
-      - [assessment, step]
-      - [assessment, step, dpo]
-      - [step, dpo]
-      - [step, dpo, legal]
-      - [dpo, legal]
-      - [dpo, legal, counsel]
+      - [legal, assessment, infringing]
+      - [legal, assessment, step, infringing]
+      - [assessment, step, infringing]
+      - [assessment, step, dpo, infringing]
+      - [step, dpo, infringing]
+      - [step, dpo, legal, infringing]
+      - [dpo, legal, infringing]
+      - [dpo, legal, counsel, infringing]
 
   - must_id: "item:B.8.2.4:proc_review_trigger"
     description: "Review trigger — which channels raise potential infringement (support / legal / engineering / compliance)"
     excerpt_keywords:
-      - [review, trigger]
-      - [review, trigger, channels]
-      - [trigger, channels]
-      - [trigger, channels, raise]
-      - [channels, raise]
-      - [channels, raise, potential]
-      - [raise, potential]
-      - [raise, potential, infringement]
+      - [review, trigger, infringing]
+      - [review, trigger, channels, infringing]
+      - [trigger, channels, infringing]
+      - [trigger, channels, raise, infringing]
+      - [channels, raise, infringing]
+      - [channels, raise, potential, infringing]
+      - [raise, potential, infringing]
+      - [raise, potential, infringement, infringing]
 

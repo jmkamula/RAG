@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.4.2:proc_policy_link"
     description: "Link to information-security + privacy policies (§6.2 / A.5.1) as the governance vehicle"
     excerpt_keywords:
-      - [security, privacy]
-      - [security, privacy, policies]
-      - [privacy, policies]
-      - [privacy, policies, governance]
-      - [policies, governance]
-      - [policies, governance, vehicle]
-      - [governance, vehicle]
-      - [procedure, step]
+      - [security, privacy, limit]
+      - [security, privacy, policies, limit]
+      - [privacy, policies, limit]
+      - [privacy, policies, governance, limit]
+      - [policies, governance, limit]
+      - [policies, governance, vehicle, limit]
+      - [governance, vehicle, limit]
+      - [procedure, step, limit]
 
   - must_id: "item:A.7.4.2:proc_default_minimum"
     description: "Default-minimum — limited to minimum necessary by default; expansions require documented rationale"
     excerpt_keywords:
-      - [default, minimum]
-      - [default, minimum, limited]
-      - [minimum, limited]
-      - [minimum, limited, minimum]
-      - [limited, minimum]
-      - [limited, minimum, necessary]
-      - [minimum, necessary]
-      - [minimum, necessary, default]
+      - [default, minimum, limit]
+      - [default, minimum, limited, limit]
+      - [minimum, limited, limit]
+      - [minimum, limited, minimum, limit]
+      - [limited, minimum, limit]
+      - [limited, minimum, necessary, limit]
+      - [minimum, necessary, limit]
+      - [minimum, necessary, default, limit]
 
   - must_id: "item:A.7.4.2:proc_storage_limit"
     description: "Storage-during-processing limitation — no unnecessary retention in intermediate systems"
     excerpt_keywords:
       - [storage, limit]
-      - [storage, during]
-      - [storage, during, processing]
-      - [during, processing]
-      - [during, processing, limitation]
-      - [processing, limitation]
-      - [processing, limitation, unnecessary]
-      - [limitation, unnecessary]
+      - [storage, during, limit]
+      - [storage, during, processing, limit]
+      - [during, processing, limit]
+      - [during, processing, limitation, limit]
+      - [processing, limitation, limit]
+      - [processing, limitation, unnecessary, limit]
+      - [limitation, unnecessary, limit]
 
   - must_id: "item:A.7.4.2:proc_access_limit"
     description: "Access limitation — role-based access controls scoped by purpose"
     excerpt_keywords:
       - [access, limit]
-      - [access, limitation]
-      - [access, limitation, role]
-      - [limitation, role]
-      - [limitation, role, based]
-      - [role, based]
-      - [role, based, access]
-      - [based, access]
+      - [access, limitation, limit]
+      - [access, limitation, role, limit]
+      - [limitation, role, limit]
+      - [limitation, role, based, limit]
+      - [role, based, limit]
+      - [role, based, access, limit]
+      - [based, access, limit]
 
   - must_id: "item:A.7.4.2:proc_disclosure_limit"
     description: "Disclosure limitation — who PII is disclosed to (internal + external) constrained per purpose"
     excerpt_keywords:
       - [disclosure, limit]
-      - [disclosure, limitation]
-      - [disclosure, limitation, pii]
-      - [limitation, pii]
-      - [limitation, pii, disclosed]
-      - [pii, disclosed]
-      - [pii, disclosed, internal]
-      - [disclosed, internal]
+      - [disclosure, limitation, limit]
+      - [disclosure, limitation, pii, limit]
+      - [limitation, pii, limit]
+      - [limitation, pii, disclosed, limit]
+      - [pii, disclosed, limit]
+      - [pii, disclosed, internal, limit]
+      - [disclosed, internal, limit]
 

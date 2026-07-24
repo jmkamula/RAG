@@ -15,56 +15,56 @@ must_fingerprints:
     description: "Art.35.1 DPIA support pathway — how customer requests DPIA-input from processor"
     excerpt_keywords:
       - [customer, dpia, support]
-      - [art, dpia]
-      - [art, dpia, support]
-      - [dpia, support]
-      - [dpia, support, pathway]
-      - [support, pathway]
+      - [art, dpia, customer]
+      - [art, dpia, support, customer]
+      - [dpia, support, customer]
+      - [dpia, support, pathway, customer]
+      - [support, pathway, customer]
       - [support, pathway, customer]
       - [pathway, customer]
 
   - must_id: "item:B.8.2.1:proc_subject_matter_scope"
     description: "Subject-matter + duration + nature + purpose scope per Art.28.3 requirements"
     excerpt_keywords:
-      - [subject, matter, scope]
-      - [subject, matter]
-      - [subject, matter, duration]
-      - [matter, duration]
-      - [matter, duration, nature]
-      - [duration, nature]
-      - [duration, nature, purpose]
-      - [nature, purpose]
+      - [subject, matter, scope, customer]
+      - [subject, matter, customer]
+      - [subject, matter, duration, customer]
+      - [matter, duration, customer]
+      - [matter, duration, nature, customer]
+      - [duration, nature, customer]
+      - [duration, nature, purpose, customer]
+      - [nature, purpose, customer]
 
   - must_id: "item:B.8.2.1:proc_documented_instructions"
     description: "Documented-instructions mechanism (how instructions are recorded, escalated, disputed)"
     excerpt_keywords:
-      - [documented, instructions]
-      - [documented, instructions, mechanism]
-      - [instructions, mechanism]
-      - [instructions, mechanism, instructions]
-      - [mechanism, instructions]
-      - [mechanism, instructions, recorded]
-      - [instructions, recorded]
-      - [instructions, recorded, escalated]
+      - [documented, instructions, customer]
+      - [documented, instructions, mechanism, customer]
+      - [instructions, mechanism, customer]
+      - [instructions, mechanism, instructions, customer]
+      - [mechanism, instructions, customer]
+      - [mechanism, instructions, recorded, customer]
+      - [instructions, recorded, customer]
+      - [instructions, recorded, escalated, customer]
 
   - must_id: "item:B.8.2.1:proc_assistance_scope"
     description: "Assistance scope enumerated (Art.28.3.e subject rights + Art.28.3.f security + breach notification + PIA support + prior consultation)"
     excerpt_keywords:
-      - [assistance, scope]
-      - [assistance, scope, enumerated]
-      - [scope, enumerated]
-      - [scope, enumerated, art]
-      - [enumerated, art]
-      - [enumerated, art, subject]
-      - [art, subject]
-      - [art, subject, rights]
+      - [assistance, scope, customer]
+      - [assistance, scope, enumerated, customer]
+      - [scope, enumerated, customer]
+      - [scope, enumerated, art, customer]
+      - [enumerated, art, customer]
+      - [enumerated, art, subject, customer]
+      - [art, subject, customer]
+      - [art, subject, rights, customer]
 
   - must_id: "item:B.8.2.1:proc_intake_gate"
     description: "Intake gate — new customer onboarding blocked until PII processing agreement executed"
     excerpt_keywords:
-      - [intake, gate]
-      - [intake, gate, new]
-      - [gate, new]
+      - [intake, gate, customer]
+      - [intake, gate, new, customer]
+      - [gate, new, customer]
       - [gate, new, customer]
       - [new, customer]
       - [new, customer, onboarding]

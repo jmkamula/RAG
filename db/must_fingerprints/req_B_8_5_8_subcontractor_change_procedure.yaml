@@ -14,9 +14,9 @@ must_fingerprints:
   - must_id: "item:B.8.5.8:proc_notification_content"
     description: "Notification content (new subcontractor identity + countries + Annex B coverage summary)"
     excerpt_keywords:
-      - [notification, content]
-      - [notification, content, new]
-      - [content, new]
+      - [notification, content, change]
+      - [notification, content, new, change]
+      - [content, new, change]
       - [content, new, subcontractor]
       - [new, subcontractor]
       - [new, subcontractor, identity]
@@ -26,45 +26,45 @@ must_fingerprints:
   - must_id: "item:B.8.5.8:proc_general_auth_scope"
     description: "General-authorisation scope — under what contract clause is this procedure valid (versus specific-authorisation cases handled in B.8.5.7)"
     excerpt_keywords:
-      - [general, auth, scope]
-      - [general, authorisation]
-      - [general, authorisation, scope]
-      - [authorisation, scope]
-      - [authorisation, scope, under]
-      - [scope, under]
-      - [scope, under, contract]
-      - [under, contract]
+      - [general, auth, scope, change]
+      - [general, authorisation, change]
+      - [general, authorisation, scope, change]
+      - [authorisation, scope, change]
+      - [authorisation, scope, under, change]
+      - [scope, under, change]
+      - [scope, under, contract, change]
+      - [under, contract, change]
 
   - must_id: "item:B.8.5.8:proc_objection_handling"
     description: "Objection handling — customer objection triggers negotiation / termination pathway"
     excerpt_keywords:
-      - [objection, handling]
-      - [objection, handling, customer]
-      - [handling, customer]
-      - [handling, customer, objection]
-      - [customer, objection]
-      - [customer, objection, triggers]
-      - [objection, triggers]
-      - [objection, triggers, negotiation]
+      - [objection, handling, change]
+      - [objection, handling, customer, change]
+      - [handling, customer, change]
+      - [handling, customer, objection, change]
+      - [customer, objection, change]
+      - [customer, objection, triggers, change]
+      - [objection, triggers, change]
+      - [objection, triggers, negotiation, change]
 
   - must_id: "item:B.8.5.8:proc_advance_notification"
     description: "Advance notification with agreed timeframe (opportunity to object)"
     excerpt_keywords:
-      - [advance, notification]
-      - [advance, notification, agreed]
-      - [notification, agreed]
-      - [notification, agreed, timeframe]
-      - [agreed, timeframe]
-      - [agreed, timeframe, opportunity]
-      - [timeframe, opportunity]
-      - [timeframe, opportunity, object]
+      - [advance, notification, change]
+      - [advance, notification, agreed, change]
+      - [notification, agreed, change]
+      - [notification, agreed, timeframe, change]
+      - [agreed, timeframe, change]
+      - [agreed, timeframe, opportunity, change]
+      - [timeframe, opportunity, change]
+      - [timeframe, opportunity, object, change]
 
   - must_id: "item:B.8.5.8:proc_change_trigger"
     description: "Change trigger — every subcontractor addition or replacement triggers notification workflow"
     excerpt_keywords:
       - [change, trigger]
       - [change, trigger, every]
-      - [trigger, every]
+      - [trigger, every, change]
       - [trigger, every, subcontractor]
       - [every, subcontractor]
       - [every, subcontractor, addition]

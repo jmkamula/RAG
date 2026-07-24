@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:B.8.4.3:proc_customer_advice"
     description: "Customer-advice path — where contract silent on transmission requirements, customer consulted before transmission"
     excerpt_keywords:
-      - [customer, advice]
-      - [customer, advice, path]
-      - [advice, path]
-      - [advice, path, contract]
-      - [path, contract]
-      - [path, contract, silent]
-      - [contract, silent]
+      - [customer, advice, pii]
+      - [customer, advice, path, pii]
+      - [advice, path, pii]
+      - [advice, path, contract, pii]
+      - [path, contract, pii]
+      - [path, contract, silent, pii]
+      - [contract, silent, pii]
       - [contract, silent, transmission]
 
   - must_id: "item:B.8.4.3:proc_contract_terms"
     description: "Contract-terms coverage — customer-contract transmission requirements captured (B.8.2.1)"
     excerpt_keywords:
-      - [contract, terms]
-      - [contract, terms, coverage]
-      - [terms, coverage]
-      - [terms, coverage, customer]
-      - [coverage, customer]
-      - [coverage, customer, contract]
-      - [customer, contract]
+      - [contract, terms, pii]
+      - [contract, terms, coverage, pii]
+      - [terms, coverage, pii]
+      - [terms, coverage, customer, pii]
+      - [coverage, customer, pii]
+      - [coverage, customer, contract, pii]
+      - [customer, contract, pii]
       - [customer, contract, transmission]
 
   - must_id: "item:B.8.4.3:proc_audit_data"
     description: "Audit data retention per transmission event"
     excerpt_keywords:
-      - [audit, retention]
+      - [audit, retention, pii]
       - [audit, retention, transmission]
       - [retention, transmission]
       - [retention, transmission, event]
       - [transmission, event]
-      - [procedure, step]
-      - [process, step]
-      - [responsibility, of]
+      - [procedure, step, pii]
+      - [process, step, pii]
+      - [responsibility, of, pii]
 
   - must_id: "item:B.8.4.3:proc_encryption"
     description: "Encryption in transit standard per channel"
     excerpt_keywords:
-      - [encryption, transit]
-      - [encryption, transit, standard]
-      - [transit, standard]
-      - [transit, standard, channel]
-      - [standard, channel]
-      - [procedure, step]
-      - [process, step]
-      - [responsibility, of]
+      - [encryption, transit, pii]
+      - [encryption, transit, standard, pii]
+      - [transit, standard, pii]
+      - [transit, standard, channel, pii]
+      - [standard, channel, pii]
+      - [procedure, step, pii]
+      - [process, step, pii]
+      - [responsibility, of, pii]
 
   - must_id: "item:B.8.4.3:proc_authz_channels"
     description: "Authorised transmission channels per customer"
     excerpt_keywords:
-      - [authz, channels]
+      - [authz, channels, pii]
       - [authorised, transmission]
       - [authorised, transmission, channels]
       - [transmission, channels]
       - [transmission, channels, customer]
-      - [channels, customer]
-      - [procedure, step]
-      - [process, step]
+      - [channels, customer, pii]
+      - [procedure, step, pii]
+      - [process, step, pii]
 

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.10:deletion_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.10:deletion_program_review"
@@ -10,33 +11,75 @@ target_control: "A.8.10"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.8.10:rev_backup_completeness"
-    description: "Backup-sweep completeness sample (no orphan copies surviving)"
+  - must_id: "item:A.8.10:rev_register_update"
+    description: "Findings propagated to procedure / scope"
     excerpt_keywords:
-      - [backup, completeness, deletion]
-
-  - must_id: "item:A.8.10:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, deletion]
+      - [findings, propagated, deletion]
+      - [findings, propagated, scope, deletion]
+      - [propagated, scope, deletion]
+      - [per, revocation, deletion]
+      - [per, revoked, identity, deletion]
+      - [revocation, record, deletion]
+      - [review, findings, deletion]
+      - [audit, outcomes, deletion]
 
   - must_id: "item:A.8.10:rev_legal_hold_inventory"
     description: "Legal-hold inventory re-confirmed / retired"
     excerpt_keywords:
       - [legal, hold, inventory, deletion]
+      - [legal, hold, deletion]
+      - [hold, inventory, deletion]
+      - [hold, inventory, confirmed, deletion]
+      - [inventory, confirmed, deletion]
+      - [inventory, confirmed, retired, deletion]
+      - [confirmed, retired, deletion]
+      - [per, revocation, deletion]
 
-  - must_id: "item:A.8.10:rev_register_update"
-    description: "Findings propagated to procedure / scope"
+  - must_id: "item:A.8.10:rev_backup_completeness"
+    description: "Backup-sweep completeness sample (no orphan copies surviving)"
     excerpt_keywords:
-      - [register, update, deletion]
-      - [findings, propagated, procedure, scope, deletion]
-
-  - must_id: "item:A.8.10:rev_reviewer"
-    description: "Reviewer identity (Data Protection + Infrastructure + Legal jointly)"
-    excerpt_keywords:
-      - [reviewer, identity, deletion]
+      - [backup, completeness, deletion]
+      - [backup, sweep, deletion]
+      - [backup, sweep, completeness, deletion]
+      - [sweep, completeness, deletion]
+      - [sweep, completeness, sample, deletion]
+      - [completeness, sample, deletion]
+      - [completeness, sample, orphan, deletion]
+      - [sample, orphan, deletion]
 
   - must_id: "item:A.8.10:rev_trigger_attainment"
     description: "Retention-trigger attainment check (deletions completed within configured window)"
     excerpt_keywords:
       - [trigger, attainment, deletion]
+      - [retention, trigger, deletion]
+      - [retention, trigger, attainment, deletion]
+      - [trigger, attainment, check, deletion]
+      - [attainment, check, deletion]
+      - [attainment, check, deletions, deletion]
+      - [check, deletions, deletion]
+      - [check, deletions, completed, deletion]
+
+  - must_id: "item:A.8.10:rev_reviewer"
+    description: "Reviewer identity (Data Protection + Infrastructure + Legal jointly)"
+    excerpt_keywords:
+      - [reviewer, identity, deletion]
+      - [reviewer, identity, protection, deletion]
+      - [identity, protection, deletion]
+      - [identity, protection, infrastructure, deletion]
+      - [protection, infrastructure, deletion]
+      - [protection, infrastructure, legal, deletion]
+      - [infrastructure, legal, deletion]
+      - [infrastructure, legal, jointly, deletion]
+
+  - must_id: "item:A.8.10:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, deletion]
+      - [review, date, within, deletion]
+      - [date, within, deletion]
+      - [date, within, planned, deletion]
+      - [within, planned, deletion]
+      - [within, planned, interval, deletion]
+      - [planned, interval, deletion]
+      - [per, revocation, deletion]
+

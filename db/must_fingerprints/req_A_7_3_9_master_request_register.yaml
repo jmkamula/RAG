@@ -14,58 +14,58 @@ must_fingerprints:
   - must_id: "item:A.7.3.9:reg_sla_met_flag"
     description: "SLA-met flag per row (auditor-critical timeliness proof)"
     excerpt_keywords:
-      - [sla, met, flag]
-      - [sla, met]
-      - [met, flag]
-      - [met, flag, auditor]
-      - [flag, auditor]
-      - [flag, auditor, critical]
-      - [auditor, critical]
-      - [auditor, critical, timeliness]
+      - [sla, met, flag, handling]
+      - [sla, met, handling]
+      - [met, flag, handling]
+      - [met, flag, auditor, handling]
+      - [flag, auditor, handling]
+      - [flag, auditor, critical, handling]
+      - [auditor, critical, handling]
+      - [auditor, critical, timeliness, handling]
 
   - must_id: "item:A.7.3.9:reg_routing"
     description: "Routing per row (which sub-procedure handled it)"
     excerpt_keywords:
-      - [routing, sub]
-      - [routing, sub, handled]
-      - [sub, handled]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [routing, sub, handling]
+      - [routing, sub, handled, handling]
+      - [sub, handled, handling]
+      - [per, row, handling]
+      - [each, row, handling]
+      - [column, containing, handling]
+      - [each, entry, handling]
+      - [column, header, handling]
 
   - must_id: "item:A.7.3.9:reg_classified_type"
     description: "Classified type per row (access / correction / erasure / portability / restriction / objection / complaint / other)"
     excerpt_keywords:
-      - [classified, access]
-      - [classified, access, correction]
-      - [access, correction]
-      - [access, correction, erasure]
-      - [correction, erasure]
-      - [correction, erasure, portability]
-      - [erasure, portability]
-      - [erasure, portability, restriction]
+      - [classified, access, handling]
+      - [classified, access, correction, handling]
+      - [access, correction, handling]
+      - [access, correction, erasure, handling]
+      - [correction, erasure, handling]
+      - [correction, erasure, portability, handling]
+      - [erasure, portability, handling]
+      - [erasure, portability, restriction, handling]
 
   - must_id: "item:A.7.3.9:reg_intake_channel"
     description: "Intake channel per row"
     excerpt_keywords:
-      - [intake, channel]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [intake, channel, handling]
+      - [per, row, handling]
+      - [each, row, handling]
+      - [column, containing, handling]
+      - [each, entry, handling]
+      - [column, header, handling]
 
   - must_id: "item:A.7.3.9:reg_request_id"
     description: "Unique request identifier per row"
     excerpt_keywords:
-      - [request, id]
-      - [unique, request]
-      - [unique, request, identifier]
-      - [request, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [request, id, handling]
+      - [unique, request, handling]
+      - [unique, request, identifier, handling]
+      - [request, identifier, handling]
+      - [per, row, handling]
+      - [each, row, handling]
+      - [column, containing, handling]
+      - [each, entry, handling]
 

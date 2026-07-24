@@ -14,72 +14,72 @@ must_fingerprints:
   - must_id: "item:A.7.2.1:proc_downstream_notice"
     description: "Downstream notice — purpose changes propagate to notice + consent + RoPA + PIA"
     excerpt_keywords:
-      - [downstream, notice]
-      - [downstream, notice, purpose]
-      - [notice, purpose]
-      - [notice, purpose, changes]
-      - [purpose, changes]
-      - [purpose, changes, propagate]
-      - [changes, propagate]
-      - [changes, propagate, notice]
+      - [downstream, notice, identify]
+      - [downstream, notice, purpose, identify]
+      - [notice, purpose, identify]
+      - [notice, purpose, changes, identify]
+      - [purpose, changes, identify]
+      - [purpose, changes, propagate, identify]
+      - [changes, propagate, identify]
+      - [changes, propagate, notice, identify]
 
   - must_id: "item:A.7.2.1:proc_change_control"
     description: "Change-control — extending or changing a purpose requires re-review + potentially new consent (§7.2.2)"
     excerpt_keywords:
-      - [change, extending]
-      - [change, extending, changing]
-      - [extending, changing]
-      - [extending, changing, purpose]
-      - [changing, purpose]
-      - [changing, purpose, requires]
-      - [purpose, requires]
-      - [purpose, requires, review]
+      - [change, extending, identify]
+      - [change, extending, changing, identify]
+      - [extending, changing, identify]
+      - [extending, changing, purpose, identify]
+      - [changing, purpose, identify]
+      - [changing, purpose, requires, identify]
+      - [purpose, requires, identify]
+      - [purpose, requires, review, identify]
 
   - must_id: "item:A.7.2.1:proc_review_signoff"
     description: "Review + signoff step (DPO + legal counsel) before purpose enters production register"
     excerpt_keywords:
-      - [review, signoff]
-      - [review, signoff, step]
-      - [signoff, step]
-      - [signoff, step, dpo]
-      - [step, dpo]
-      - [step, dpo, legal]
-      - [dpo, legal]
-      - [dpo, legal, counsel]
+      - [review, signoff, identify]
+      - [review, signoff, step, identify]
+      - [signoff, step, identify]
+      - [signoff, step, dpo, identify]
+      - [step, dpo, identify]
+      - [step, dpo, legal, identify]
+      - [dpo, legal, identify]
+      - [dpo, legal, counsel, identify]
 
   - must_id: "item:A.7.2.1:proc_specificity_test"
     description: "Specificity test — purpose statements must be sufficiently clear + detailed for use in §7.3.2 notice + §7.2.3 consent"
     excerpt_keywords:
-      - [specificity, test]
-      - [specificity, test, purpose]
-      - [test, purpose]
-      - [test, purpose, statements]
-      - [purpose, statements]
-      - [purpose, statements, sufficiently]
-      - [statements, sufficiently]
-      - [statements, sufficiently, clear]
+      - [specificity, test, identify]
+      - [specificity, test, purpose, identify]
+      - [test, purpose, identify]
+      - [test, purpose, statements, identify]
+      - [purpose, statements, identify]
+      - [purpose, statements, sufficiently, identify]
+      - [statements, sufficiently, identify]
+      - [statements, sufficiently, clear, identify]
 
   - must_id: "item:A.7.2.1:proc_documentation_fields"
     description: "Documentation fields per purpose (purpose text, categories of PII, categories of subjects, retention, recipients, legal basis link)"
     excerpt_keywords:
-      - [documentation, fields]
-      - [documentation, fields, purpose]
-      - [fields, purpose]
-      - [fields, purpose, purpose]
-      - [purpose, purpose]
-      - [purpose, purpose, text]
-      - [purpose, text]
-      - [purpose, text, categories]
+      - [documentation, fields, identify]
+      - [documentation, fields, purpose, identify]
+      - [fields, purpose, identify]
+      - [fields, purpose, purpose, identify]
+      - [purpose, purpose, identify]
+      - [purpose, purpose, text, identify]
+      - [purpose, text, identify]
+      - [purpose, text, categories, identify]
 
   - must_id: "item:A.7.2.1:proc_intake_trigger"
     description: "Intake triggers listed (new product launch, new processing activity, new data source, new integration)"
     excerpt_keywords:
-      - [intake, trigger]
-      - [intake, triggers]
-      - [intake, triggers, listed]
-      - [triggers, listed]
-      - [triggers, listed, new]
-      - [listed, new]
-      - [listed, new, product]
-      - [new, product]
+      - [intake, trigger, identify]
+      - [intake, triggers, identify]
+      - [intake, triggers, listed, identify]
+      - [triggers, listed, identify]
+      - [triggers, listed, new, identify]
+      - [listed, new, identify]
+      - [listed, new, product, identify]
+      - [new, product, identify]
 

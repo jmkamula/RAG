@@ -14,48 +14,48 @@ must_fingerprints:
   - must_id: "item:A.6.6:scope_jurisdictions"
     description: "Jurisdictions covered (where signatories sign / where info is protected — drives governing-law clause and enforceability)"
     excerpt_keywords:
-      - [jurisdictions, covered]
-      - [jurisdictions, covered, signatories]
-      - [covered, signatories]
-      - [covered, signatories, sign]
-      - [signatories, sign]
-      - [signatories, sign, info]
-      - [sign, info]
-      - [sign, info, protected]
+      - [jurisdictions, covered, confidentiality]
+      - [jurisdictions, covered, signatories, confidentiality]
+      - [covered, signatories, confidentiality]
+      - [covered, signatories, sign, confidentiality]
+      - [signatories, sign, confidentiality]
+      - [signatories, sign, info, confidentiality]
+      - [sign, info, confidentiality]
+      - [sign, info, protected, confidentiality]
 
   - must_id: "item:A.6.6:scope_variant_mapping"
     description: "Party-to-variant mapping (employees → light employee NDA; contractors → contractor NDA; suppliers → bilateral; M&A → heavy)"
     excerpt_keywords:
-      - [variant, mapping]
-      - [party, variant]
-      - [party, variant, mapping]
-      - [variant, mapping, employees]
-      - [mapping, employees]
-      - [mapping, employees, light]
-      - [employees, light]
-      - [employees, light, employee]
+      - [variant, mapping, confidentiality]
+      - [party, variant, confidentiality]
+      - [party, variant, mapping, confidentiality]
+      - [variant, mapping, employees, confidentiality]
+      - [mapping, employees, confidentiality]
+      - [mapping, employees, light, confidentiality]
+      - [employees, light, confidentiality]
+      - [employees, light, employee, confidentiality]
 
   - must_id: "item:A.6.6:scope_trigger_threshold"
     description: "Trigger threshold per category (which info-class triggers NDA — typically access to confidential class and above; some orgs all-access)"
     excerpt_keywords:
-      - [trigger, threshold]
-      - [trigger, threshold, category]
-      - [threshold, category]
-      - [threshold, category, info]
-      - [category, info]
-      - [category, info, class]
-      - [info, class]
-      - [info, class, triggers]
+      - [trigger, threshold, confidentiality]
+      - [trigger, threshold, category, confidentiality]
+      - [threshold, category, confidentiality]
+      - [threshold, category, info, confidentiality]
+      - [category, info, confidentiality]
+      - [category, info, class, confidentiality]
+      - [info, class, confidentiality]
+      - [info, class, triggers, confidentiality]
 
   - must_id: "item:A.6.6:scope_party_categories"
     description: "Party categories enumerated (employees, contractors, suppliers, visitors, M&A counterparties, partners with joint-development)"
     excerpt_keywords:
-      - [party, categories]
-      - [party, categories, enumerated]
-      - [categories, enumerated]
-      - [categories, enumerated, employees]
-      - [enumerated, employees]
-      - [enumerated, employees, contractors]
-      - [employees, contractors]
-      - [employees, contractors, suppliers]
+      - [party, categories, confidentiality]
+      - [party, categories, enumerated, confidentiality]
+      - [categories, enumerated, confidentiality]
+      - [categories, enumerated, employees, confidentiality]
+      - [enumerated, employees, confidentiality]
+      - [enumerated, employees, contractors, confidentiality]
+      - [employees, contractors, confidentiality]
+      - [employees, contractors, suppliers, confidentiality]
 

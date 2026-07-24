@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.25:sdlc_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.25:sdlc_program_review"
@@ -10,33 +11,75 @@ target_control: "A.8.25"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.8.25:rev_date"
-    description: "Review date within the planned interval (≤180 days)"
-    excerpt_keywords:
-      - [review, date, planned, interval, secure]
-
-  - must_id: "item:A.8.25:rev_exception_inventory"
-    description: "Exception inventory re-confirmed / retired"
-    excerpt_keywords:
-      - [exception, inventory, secure]
-
   - must_id: "item:A.8.25:rev_findings_update"
     description: "Findings propagated to policy / scope"
     excerpt_keywords:
       - [findings, update, secure]
-      - [findings, propagated, policy, scope, secure]
-
-  - must_id: "item:A.8.25:rev_gate_attainment"
-    description: "Gate-attainment trending per project class"
-    excerpt_keywords:
-      - [gate, attainment, secure]
+      - [findings, propagated, secure]
+      - [findings, propagated, scope, secure]
+      - [propagated, scope, secure]
+      - [per, revocation, secure]
+      - [per, revoked, identity, secure]
+      - [revocation, record, secure]
+      - [review, findings, secure]
 
   - must_id: "item:A.8.25:rev_lifecycle_effectiveness"
     description: "Lifecycle-effectiveness review (incidents that traced to SDLC gaps)"
     excerpt_keywords:
       - [lifecycle, effectiveness, secure]
+      - [lifecycle, effectiveness, review, secure]
+      - [effectiveness, review, secure]
+      - [effectiveness, review, incidents, secure]
+      - [review, incidents, secure]
+      - [review, incidents, traced, secure]
+      - [incidents, traced, secure]
+      - [incidents, traced, sdlc, secure]
+
+  - must_id: "item:A.8.25:rev_exception_inventory"
+    description: "Exception inventory re-confirmed / retired"
+    excerpt_keywords:
+      - [exception, inventory, secure]
+      - [exception, inventory, confirmed, secure]
+      - [inventory, confirmed, secure]
+      - [inventory, confirmed, retired, secure]
+      - [confirmed, retired, secure]
+      - [per, revocation, secure]
+      - [per, revoked, identity, secure]
+      - [revocation, record, secure]
+
+  - must_id: "item:A.8.25:rev_gate_attainment"
+    description: "Gate-attainment trending per project class"
+    excerpt_keywords:
+      - [gate, attainment, secure]
+      - [gate, attainment, trending, secure]
+      - [attainment, trending, secure]
+      - [attainment, trending, project, secure]
+      - [trending, project, secure]
+      - [trending, project, class, secure]
+      - [project, class, secure]
+      - [per, revocation, secure]
 
   - must_id: "item:A.8.25:rev_reviewer"
     description: "Reviewer identity (Engineering leads + InfoSec)"
     excerpt_keywords:
       - [reviewer, identity, secure]
+      - [reviewer, identity, engineering, secure]
+      - [identity, engineering, secure]
+      - [identity, engineering, leads, secure]
+      - [engineering, leads, secure]
+      - [engineering, leads, infosec, secure]
+      - [leads, infosec, secure]
+      - [per, revocation, secure]
+
+  - must_id: "item:A.8.25:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, secure]
+      - [review, date, within, secure]
+      - [date, within, secure]
+      - [date, within, planned, secure]
+      - [within, planned, secure]
+      - [within, planned, interval, secure]
+      - [planned, interval, secure]
+      - [planned, interval, 180, secure]
+

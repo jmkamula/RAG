@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.5.13:labelling_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.13:labelling_program_review"
@@ -11,36 +12,86 @@ target_standard: "ISO27001:2022"
 
 must_fingerprints:
   - must_id: "item:A.5.13:rev_actions"
-    description: "Action items captured (e.g. extend labelling to platform X, tighten automation, refresh training ..."
+    description: "Action items captured (e.g"
     excerpt_keywords:
+      - [action, items, labelling]
       - [action, items, captured, labelling]
-
-  - must_id: "item:A.5.13:rev_coverage_trend"
-    description: "Coverage-trend analysis (per-system coverage % delta since last review; investigate any drop)"
-    excerpt_keywords:
-      - [coverage, trend, labelling]
-
-  - must_id: "item:A.5.13:rev_date"
-    description: "Review date within the planned annual interval"
-    excerpt_keywords:
-      - [review, date, planned, annual, labelling]
-
-  - must_id: "item:A.5.13:rev_persistence_audit"
-    description: "Persistence audit (sample of transformed/exported items re-checked — does the label survive copy/..."
-    excerpt_keywords:
-      - [persistence, audit, labelling]
-
-  - must_id: "item:A.5.13:rev_reviewer"
-    description: "Reviewer identity (InfoSec + Data Protection Officer where PII overlays apply jointly)"
-    excerpt_keywords:
-      - [reviewer, identity, labelling]
-
-  - must_id: "item:A.5.13:rev_scheme_alignment"
-    description: "Scheme-alignment audit (labels in active systems match A.5.12 levels; drift triggers re-mapping)"
-    excerpt_keywords:
-      - [scheme, alignment, labelling]
+      - [items, captured, labelling]
+      - [items, captured, extend, labelling]
+      - [captured, extend, labelling]
+      - [captured, extend, labelling]
+      - [extend, labelling]
+      - [extend, labelling, platform]
 
   - must_id: "item:A.5.13:rev_training_sample"
     description: "Training-effectiveness sample (small sample of newly created items per level — labelled correctly?)"
     excerpt_keywords:
       - [training, sample, labelling]
+      - [training, effectiveness, labelling]
+      - [training, effectiveness, sample, labelling]
+      - [effectiveness, sample, labelling]
+      - [effectiveness, sample, small, labelling]
+      - [sample, small, labelling]
+      - [sample, small, sample, labelling]
+      - [small, sample, labelling]
+
+  - must_id: "item:A.5.13:rev_scheme_alignment"
+    description: "Scheme-alignment audit (labels in active systems match A.5.12 levels; drift triggers re-mapping)"
+    excerpt_keywords:
+      - [scheme, alignment, labelling]
+      - [scheme, alignment, audit, labelling]
+      - [alignment, audit, labelling]
+      - [alignment, audit, labels, labelling]
+      - [audit, labels, labelling]
+      - [audit, labels, active, labelling]
+      - [labels, active, labelling]
+      - [labels, active, match, labelling]
+
+  - must_id: "item:A.5.13:rev_persistence_audit"
+    description: "Persistence audit (sample of transformed/exported items re-checked — does the label survive copy/export/conversion?)"
+    excerpt_keywords:
+      - [persistence, audit, labelling]
+      - [persistence, audit, sample, labelling]
+      - [audit, sample, labelling]
+      - [audit, sample, transformed, labelling]
+      - [sample, transformed, labelling]
+      - [sample, transformed, exported, labelling]
+      - [transformed, exported, labelling]
+      - [transformed, exported, items, labelling]
+
+  - must_id: "item:A.5.13:rev_coverage_trend"
+    description: "Coverage-trend analysis (per-system coverage % delta since last review; investigate any drop)"
+    excerpt_keywords:
+      - [coverage, trend, labelling]
+      - [coverage, trend, analysis, labelling]
+      - [trend, analysis, labelling]
+      - [trend, analysis, coverage, labelling]
+      - [analysis, coverage, labelling]
+      - [analysis, coverage, delta, labelling]
+      - [coverage, delta, labelling]
+      - [coverage, delta, since, labelling]
+
+  - must_id: "item:A.5.13:rev_reviewer"
+    description: "Reviewer identity (InfoSec + Data Protection Officer where PII overlays apply jointly)"
+    excerpt_keywords:
+      - [reviewer, identity, labelling]
+      - [reviewer, identity, infosec, labelling]
+      - [identity, infosec, labelling]
+      - [identity, infosec, protection, labelling]
+      - [infosec, protection, labelling]
+      - [infosec, protection, officer, labelling]
+      - [protection, officer, labelling]
+      - [protection, officer, pii, labelling]
+
+  - must_id: "item:A.5.13:rev_date"
+    description: "Review date within the planned annual interval"
+    excerpt_keywords:
+      - [review, date, labelling]
+      - [review, date, within, labelling]
+      - [date, within, labelling]
+      - [date, within, planned, labelling]
+      - [within, planned, labelling]
+      - [within, planned, annual, labelling]
+      - [planned, annual, labelling]
+      - [planned, annual, interval, labelling]
+

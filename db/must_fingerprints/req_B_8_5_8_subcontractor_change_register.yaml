@@ -14,50 +14,50 @@ must_fingerprints:
   - must_id: "item:B.8.5.8:reg_objection_status"
     description: "Objection status per row (none / raised / resolved / termination)"
     excerpt_keywords:
-      - [objection, status]
-      - [objection, status, none]
-      - [status, none]
-      - [status, none, raised]
-      - [none, raised]
-      - [none, raised, resolved]
-      - [raised, resolved]
-      - [raised, resolved, termination]
+      - [objection, status, change]
+      - [objection, status, none, change]
+      - [status, none, change]
+      - [status, none, raised, change]
+      - [none, raised, change]
+      - [none, raised, resolved, change]
+      - [raised, resolved, change]
+      - [raised, resolved, termination, change]
 
   - must_id: "item:B.8.5.8:reg_effective_date"
     description: "Change effective date per row"
     excerpt_keywords:
-      - [effective, date]
+      - [effective, date, change]
       - [change, effective]
       - [change, effective, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, change]
+      - [each, row, change]
+      - [column, containing, change]
+      - [each, entry, change]
+      - [column, header, change]
 
   - must_id: "item:B.8.5.8:reg_notification_date"
     description: "Customer notification date per row"
     excerpt_keywords:
-      - [notification, date]
-      - [customer, notification]
-      - [customer, notification, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [notification, date, change]
+      - [customer, notification, change]
+      - [customer, notification, date, change]
+      - [per, row, change]
+      - [each, row, change]
+      - [column, containing, change]
+      - [each, entry, change]
+      - [column, header, change]
 
   - must_id: "item:B.8.5.8:reg_change_type"
     description: "Change type per row (add / replace / remove)"
     excerpt_keywords:
       - [change, add]
       - [change, add, replace]
-      - [add, replace]
-      - [add, replace, remove]
-      - [replace, remove]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [add, replace, change]
+      - [add, replace, remove, change]
+      - [replace, remove, change]
+      - [per, row, change]
+      - [each, row, change]
+      - [column, containing, change]
 
   - must_id: "item:B.8.5.8:reg_change_id"
     description: "Unique change identifier per row"
@@ -66,8 +66,8 @@ must_fingerprints:
       - [unique, change]
       - [unique, change, identifier]
       - [change, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [per, row, change]
+      - [each, row, change]
+      - [column, containing, change]
+      - [each, entry, change]
 

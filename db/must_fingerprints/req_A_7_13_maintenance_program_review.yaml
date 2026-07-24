@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.13:maintenance_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.13:maintenance_program_review"
@@ -10,29 +11,63 @@ target_control: "A.7.13"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.7.13:rev_cadence_compliance"
-    description: "Cadence compliance per equipment class (% of due-maintenance actually completed in period)"
+  - must_id: "item:A.7.13:rev_register_update"
+    description: "Changes propagated to the procedure / scope"
     excerpt_keywords:
-      - [cadence, compliance, equipment]
-      - [cadence, compliance, equipment, class]
-
-  - must_id: "item:A.7.13:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, equipment]
+      - [changes, propagated, equipment]
+      - [changes, propagated, scope, equipment]
+      - [propagated, scope, equipment]
+      - [per, revocation, equipment]
+      - [per, revoked, identity, equipment]
+      - [revocation, record, equipment]
+      - [review, findings, equipment]
+      - [audit, outcomes, equipment]
 
   - must_id: "item:A.7.13:rev_provider_performance"
     description: "Provider performance review (SLA met / breaches / incident link)"
     excerpt_keywords:
+      - [provider, performance, equipment]
+      - [provider, performance, review, equipment]
       - [performance, review, equipment]
+      - [performance, review, sla, equipment]
+      - [review, sla, equipment]
+      - [review, sla, met, equipment]
+      - [sla, met, equipment]
+      - [sla, met, breaches, equipment]
 
-  - must_id: "item:A.7.13:rev_register_update"
-    description: "Changes propagated to the procedure / scope"
+  - must_id: "item:A.7.13:rev_cadence_compliance"
+    description: "Cadence compliance per equipment class (% of due-maintenance actually completed in period)"
     excerpt_keywords:
-      - [register, update, equipment]
-      - [changes, propagated, procedure, scope, equipment]
+      - [cadence, compliance, equipment]
+      - [cadence, compliance, equipment]
+      - [compliance, equipment]
+      - [compliance, equipment, class]
+      - [equipment, class]
+      - [equipment, class, due]
+      - [class, due, equipment]
+      - [class, due, maintenance]
 
   - must_id: "item:A.7.13:rev_reviewer"
     description: "Reviewer identity (Facilities + IT + InfoSec)"
     excerpt_keywords:
       - [reviewer, identity, equipment]
+      - [reviewer, identity, facilities, equipment]
+      - [identity, facilities, equipment]
+      - [identity, facilities, infosec, equipment]
+      - [facilities, infosec, equipment]
+      - [per, revocation, equipment]
+      - [per, revoked, identity, equipment]
+      - [revocation, record, equipment]
+
+  - must_id: "item:A.7.13:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, equipment]
+      - [review, date, within, equipment]
+      - [date, within, equipment]
+      - [date, within, planned, equipment]
+      - [within, planned, equipment]
+      - [within, planned, interval, equipment]
+      - [planned, interval, equipment]
+      - [per, revocation, equipment]
+

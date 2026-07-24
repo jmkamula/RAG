@@ -14,48 +14,48 @@ must_fingerprints:
   - must_id: "item:9.2:scope_exclusions"
     description: "Any explicit exclusions with rationale (rare — generally all ISMS processes are in scope)"
     excerpt_keywords:
-      - [explicit, exclusions]
-      - [explicit, exclusions, rationale]
-      - [exclusions, rationale]
-      - [exclusions, rationale, rare]
-      - [rationale, rare]
-      - [rationale, rare, generally]
-      - [rare, generally]
-      - [rare, generally, isms]
+      - [explicit, exclusions, internal]
+      - [explicit, exclusions, rationale, internal]
+      - [exclusions, rationale, internal]
+      - [exclusions, rationale, rare, internal]
+      - [rationale, rare, internal]
+      - [rationale, rare, generally, internal]
+      - [rare, generally, internal]
+      - [rare, generally, isms, internal]
 
   - must_id: "item:9.2:scope_high_risk"
     description: "High-risk process audit frequency (annual audit even within longer cycle)"
     excerpt_keywords:
-      - [high, risk]
+      - [high, risk, internal]
       - [high, risk, audit]
       - [risk, audit]
       - [risk, audit, frequency]
       - [audit, frequency]
       - [audit, frequency, annual]
-      - [frequency, annual]
+      - [frequency, annual, internal]
       - [frequency, annual, audit]
 
   - must_id: "item:9.2:scope_rotation"
     description: "Process-rotation plan (which processes audited each year of the cycle)"
     excerpt_keywords:
-      - [rotation, plan]
-      - [rotation, plan, processes]
-      - [plan, processes]
-      - [plan, processes, audited]
-      - [processes, audited]
-      - [processes, audited, year]
-      - [audited, year]
-      - [audited, year, cycle]
+      - [rotation, plan, internal]
+      - [rotation, plan, processes, internal]
+      - [plan, processes, internal]
+      - [plan, processes, audited, internal]
+      - [processes, audited, internal]
+      - [processes, audited, year, internal]
+      - [audited, year, internal]
+      - [audited, year, cycle, internal]
 
   - must_id: "item:9.2:scope_cycle_length"
     description: "Audit cycle length stated (typically 3 years for full ISMS coverage)"
     excerpt_keywords:
-      - [cycle, length]
+      - [cycle, length, internal]
       - [audit, cycle]
       - [audit, cycle, length]
-      - [cycle, length, stated]
-      - [length, stated]
-      - [length, stated, typically]
-      - [stated, typically]
-      - [stated, typically, years]
+      - [cycle, length, stated, internal]
+      - [length, stated, internal]
+      - [length, stated, typically, internal]
+      - [stated, typically, internal]
+      - [stated, typically, years, internal]
 

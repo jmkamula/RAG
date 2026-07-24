@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.12:dlp_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.12:dlp_program_review"
@@ -14,24 +15,71 @@ must_fingerprints:
     description: "Baseline / ruleset / procedure updates published from findings"
     excerpt_keywords:
       - [baseline, update, leakage]
-      - [baseline, ruleset, procedure, updates, leakage]
-
-  - must_id: "item:A.8.12:rev_coverage_gaps"
-    description: "Channel-coverage gap check (new channel / new platform missing)"
-    excerpt_keywords:
-      - [coverage, gaps, leakage]
-
-  - must_id: "item:A.8.12:rev_date"
-    description: "Review date within the planned interval (≤180 days)"
-    excerpt_keywords:
-      - [review, date, planned, interval, leakage]
+      - [baseline, ruleset, leakage]
+      - [baseline, ruleset, updates, leakage]
+      - [ruleset, updates, leakage]
+      - [ruleset, updates, published, leakage]
+      - [updates, published, leakage]
+      - [updates, published, findings, leakage]
+      - [published, findings, leakage]
 
   - must_id: "item:A.8.12:rev_exception_inventory"
     description: "Exception inventory re-confirmed / retired"
     excerpt_keywords:
       - [exception, inventory, leakage]
+      - [exception, inventory, confirmed, leakage]
+      - [inventory, confirmed, leakage]
+      - [inventory, confirmed, retired, leakage]
+      - [confirmed, retired, leakage]
+      - [per, revocation, leakage]
+      - [per, revoked, identity, leakage]
+      - [revocation, record, leakage]
+
+  - must_id: "item:A.8.12:rev_tp_rate"
+    description: "True-positive rate trending (detection effectiveness)"
+    excerpt_keywords:
+      - [tp, rate, leakage]
+      - [true, positive, leakage]
+      - [true, positive, rate, leakage]
+      - [positive, rate, leakage]
+      - [positive, rate, trending, leakage]
+      - [rate, trending, leakage]
+      - [rate, trending, detection, leakage]
+      - [trending, detection, leakage]
+
+  - must_id: "item:A.8.12:rev_coverage_gaps"
+    description: "Channel-coverage gap check (new channel / new platform missing)"
+    excerpt_keywords:
+      - [coverage, gaps, leakage]
+      - [channel, coverage, leakage]
+      - [channel, coverage, gap, leakage]
+      - [coverage, gap, leakage]
+      - [coverage, gap, check, leakage]
+      - [gap, check, leakage]
+      - [gap, check, new, leakage]
+      - [check, new, leakage]
 
   - must_id: "item:A.8.12:rev_reviewer"
     description: "Reviewer identity (DLP lead + Data Protection + InfoSec)"
     excerpt_keywords:
       - [reviewer, identity, leakage]
+      - [reviewer, identity, dlp, leakage]
+      - [identity, dlp, leakage]
+      - [identity, dlp, lead, leakage]
+      - [dlp, lead, leakage]
+      - [dlp, lead, protection, leakage]
+      - [lead, protection, leakage]
+      - [lead, protection, infosec, leakage]
+
+  - must_id: "item:A.8.12:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, leakage]
+      - [review, date, within, leakage]
+      - [date, within, leakage]
+      - [date, within, planned, leakage]
+      - [within, planned, leakage]
+      - [within, planned, interval, leakage]
+      - [planned, interval, leakage]
+      - [planned, interval, 180, leakage]
+

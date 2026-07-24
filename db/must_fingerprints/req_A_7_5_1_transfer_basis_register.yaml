@@ -14,56 +14,56 @@ must_fingerprints:
   - must_id: "item:A.7.5.1:reg_tia_reference"
     description: "TIA reference per row where Art.46 safeguard invoked"
     excerpt_keywords:
-      - [tia, reference]
-      - [tia, reference, art]
-      - [reference, art]
-      - [reference, art, safeguard]
-      - [art, safeguard]
-      - [art, safeguard, invoked]
-      - [safeguard, invoked]
-      - [per, row]
+      - [tia, reference, identify]
+      - [tia, reference, art, identify]
+      - [reference, art, identify]
+      - [reference, art, safeguard, identify]
+      - [art, safeguard, identify]
+      - [art, safeguard, invoked, identify]
+      - [safeguard, invoked, identify]
+      - [per, row, identify]
 
   - must_id: "item:A.7.5.1:reg_basis_cited"
     description: "Basis cited per row (Art.45 adequacy / Art.46 SCC / Art.46 BCR / Art.49 derogation / non-EU equivalent)"
     excerpt_keywords:
       - [basis, cited]
       - [basis, cited, art]
-      - [cited, art]
-      - [cited, art, adequacy]
-      - [art, adequacy]
-      - [art, adequacy, art]
-      - [adequacy, art]
-      - [adequacy, art, scc]
+      - [cited, art, identify]
+      - [cited, art, adequacy, identify]
+      - [art, adequacy, identify]
+      - [art, adequacy, art, identify]
+      - [adequacy, art, identify]
+      - [adequacy, art, scc, identify]
 
   - must_id: "item:A.7.5.1:reg_destination_jurisdiction"
     description: "Destination jurisdiction per row"
     excerpt_keywords:
-      - [destination, jurisdiction]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [destination, jurisdiction, identify]
+      - [per, row, identify]
+      - [each, row, identify]
+      - [column, containing, identify]
+      - [each, entry, identify]
+      - [column, header, identify]
 
   - must_id: "item:A.7.5.1:reg_origin_jurisdiction"
     description: "Origin jurisdiction per row"
     excerpt_keywords:
-      - [origin, jurisdiction]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [origin, jurisdiction, identify]
+      - [per, row, identify]
+      - [each, row, identify]
+      - [column, containing, identify]
+      - [each, entry, identify]
+      - [column, header, identify]
 
   - must_id: "item:A.7.5.1:reg_transfer_id"
     description: "Unique transfer relationship identifier per row"
     excerpt_keywords:
-      - [transfer, id]
-      - [unique, transfer]
-      - [unique, transfer, relationship]
-      - [transfer, relationship]
-      - [transfer, relationship, identifier]
-      - [relationship, identifier]
-      - [per, row]
-      - [each, row]
+      - [transfer, id, identify]
+      - [unique, transfer, identify]
+      - [unique, transfer, relationship, identify]
+      - [transfer, relationship, identify]
+      - [transfer, relationship, identifier, identify]
+      - [relationship, identifier, identify]
+      - [per, row, identify]
+      - [each, row, identify]
 

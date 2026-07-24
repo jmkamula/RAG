@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:6.1.2:risk_assessment_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:6.1.2:risk_assessment_program_review"
@@ -10,29 +11,63 @@ target_control: "6.1.2"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:6.1.2:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:6.1.2:rev_significant_change"
+    description: "Significant-change trigger sweep — 8.2 ad-hoc assessments captured"
     excerpt_keywords:
-      - [review, date, planned, interval, risk]
+      - [significant, change, risk]
+      - [significant, change, trigger, risk]
+      - [change, trigger, risk]
+      - [change, trigger, sweep, risk]
+      - [trigger, sweep, risk]
+      - [trigger, sweep, hoc, risk]
+      - [sweep, hoc, risk]
+      - [sweep, hoc, assessments, risk]
 
   - must_id: "item:6.1.2:rev_methodology_fit"
     description: "Methodology fit check — scoring scale still discriminating, acceptance bands still calibrated"
     excerpt_keywords:
       - [methodology, fit, risk]
       - [methodology, fit, check, risk]
+      - [fit, check, risk]
+      - [fit, check, scoring, risk]
+      - [check, scoring, risk]
+      - [check, scoring, scale, risk]
+      - [scoring, scale, risk]
+      - [scoring, scale, still, risk]
 
   - must_id: "item:6.1.2:rev_register_currency"
     description: "Register currency check — every row reviewed for continued relevance"
     excerpt_keywords:
-      - [register, currency, risk]
-      - [register, currency, check, risk]
+      - [currency, check, risk]
+      - [currency, check, every, risk]
+      - [check, every, risk]
+      - [check, every, reviewed, risk]
+      - [every, reviewed, risk]
+      - [every, reviewed, continued, risk]
+      - [reviewed, continued, risk]
+      - [reviewed, continued, relevance, risk]
 
   - must_id: "item:6.1.2:rev_reviewer"
     description: "Reviewer identity (Risk Manager + ISMS Manager)"
     excerpt_keywords:
       - [reviewer, identity, risk]
+      - [reviewer, identity, risk]
+      - [identity, risk]
+      - [identity, risk, manager]
+      - [risk, manager]
+      - [risk, manager, isms]
+      - [manager, isms, risk]
+      - [manager, isms, manager, risk]
 
-  - must_id: "item:6.1.2:rev_significant_change"
-    description: "Significant-change trigger sweep — 8.2 ad-hoc assessments captured"
+  - must_id: "item:6.1.2:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [significant, change, risk]
+      - [review, date, risk]
+      - [review, date, within, risk]
+      - [date, within, risk]
+      - [date, within, planned, risk]
+      - [within, planned, risk]
+      - [within, planned, interval, risk]
+      - [planned, interval, risk]
+      - [per, revocation, risk]
+

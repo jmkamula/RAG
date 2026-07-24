@@ -14,57 +14,57 @@ must_fingerprints:
   - must_id: "item:7.3:owner"
     description: "Named owner of the programme"
     excerpt_keywords:
-      - [named, owner]
-      - [named, owner, programme]
-      - [owner, programme]
+      - [named, owner, awareness]
+      - [named, owner, programme, awareness]
+      - [owner, programme, awareness]
 
   - must_id: "item:7.3:cadence"
     description: "Delivery cadence stated (onboarding + annual refresher, with refresh on policy update)"
     excerpt_keywords:
-      - [delivery, cadence]
-      - [delivery, cadence, stated]
-      - [cadence, stated]
-      - [cadence, stated, onboarding]
-      - [stated, onboarding]
-      - [stated, onboarding, annual]
-      - [onboarding, annual]
-      - [onboarding, annual, refresher]
+      - [delivery, cadence, awareness]
+      - [delivery, cadence, stated, awareness]
+      - [cadence, stated, awareness]
+      - [cadence, stated, onboarding, awareness]
+      - [stated, onboarding, awareness]
+      - [stated, onboarding, annual, awareness]
+      - [onboarding, annual, awareness]
+      - [onboarding, annual, refresher, awareness]
 
   - must_id: "item:7.3:delivery_method"
     description: "Delivery method stated (LMS module, induction session, periodic refresher)"
     excerpt_keywords:
-      - [delivery, method]
-      - [delivery, method, stated]
-      - [method, stated]
-      - [method, stated, lms]
-      - [stated, lms]
-      - [stated, lms, induction]
-      - [lms, induction]
-      - [lms, induction, session]
+      - [delivery, method, awareness]
+      - [delivery, method, stated, awareness]
+      - [method, stated, awareness]
+      - [method, stated, lms, awareness]
+      - [stated, lms, awareness]
+      - [stated, lms, induction, awareness]
+      - [lms, induction, awareness]
+      - [lms, induction, session, awareness]
 
   - must_id: "item:7.3:nonconformity_consequences"
     description: "Content covers consequences of not conforming to ISMS requirements"
     excerpt_keywords:
-      - [nonconformity, consequences]
-      - [content, consequences]
-      - [content, consequences, not]
-      - [consequences, not]
-      - [consequences, not, conforming]
-      - [not, conforming]
-      - [not, conforming, isms]
-      - [conforming, isms]
+      - [nonconformity, consequences, awareness]
+      - [content, consequences, awareness]
+      - [content, consequences, not, awareness]
+      - [consequences, not, awareness]
+      - [consequences, not, conforming, awareness]
+      - [not, conforming, awareness]
+      - [not, conforming, isms, awareness]
+      - [conforming, isms, awareness]
 
   - must_id: "item:7.3:contribution"
     description: "Content covers contribution to ISMS effectiveness (incl"
     excerpt_keywords:
-      - [content, contribution]
-      - [content, contribution, isms]
-      - [contribution, isms]
-      - [contribution, isms, effectiveness]
-      - [isms, effectiveness]
-      - [isms, effectiveness, incl]
-      - [effectiveness, incl]
-      - [effectiveness, incl, benefits]
+      - [content, contribution, awareness]
+      - [content, contribution, isms, awareness]
+      - [contribution, isms, awareness]
+      - [contribution, isms, effectiveness, awareness]
+      - [isms, effectiveness, awareness]
+      - [isms, effectiveness, incl, awareness]
+      - [effectiveness, incl, awareness]
+      - [effectiveness, incl, benefits, awareness]
 
   - must_id: "item:7.3:policy_awareness"
     description: "Content covers awareness of the InfoSec policy"

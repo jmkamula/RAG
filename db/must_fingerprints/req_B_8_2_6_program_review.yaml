@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.6:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.6:program_review"
@@ -10,27 +11,63 @@ target_control: "B.8.2.6"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:B.8.2.6:rev_customer_extract_test"
+    description: "Customer-extract test — sampled customers requested + received their RoPA row within SLA"
+    excerpt_keywords:
+      - [customer, extract, test, records]
+      - [customer, extract, records]
+      - [extract, test, records]
+      - [extract, test, sampled, records]
+      - [test, sampled, records]
+      - [test, sampled, customers, records]
+      - [sampled, customers, records]
+      - [sampled, customers, requested, records]
+
   - must_id: "item:B.8.2.6:rev_accuracy_sample"
     description: "Accuracy sample — random rows verified against customer instruction record + subprocessor list"
     excerpt_keywords:
       - [accuracy, sample, records]
+      - [accuracy, sample, random, records]
+      - [sample, random, records]
+      - [sample, random, rows, records]
+      - [random, rows, records]
+      - [random, rows, verified, records]
+      - [rows, verified, records]
+      - [rows, verified, against, records]
 
   - must_id: "item:B.8.2.6:rev_completeness"
     description: "Completeness check — one RoPA row per active customer engagement"
     excerpt_keywords:
       - [completeness, check, records]
-
-  - must_id: "item:B.8.2.6:rev_customer_extract_test"
-    description: "Customer-extract test — sampled customers requested + received their RoPA row within SLA"
-    excerpt_keywords:
-      - [customer, extract, test, records]
-
-  - must_id: "item:B.8.2.6:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, records]
+      - [completeness, check, one, records]
+      - [check, one, records]
+      - [check, one, ropa, records]
+      - [one, ropa, records]
+      - [one, ropa, active, records]
+      - [ropa, active, records]
+      - [ropa, active, customer, records]
 
   - must_id: "item:B.8.2.6:rev_reviewer"
     description: "Reviewer identity (DPO + Trust Ops)"
     excerpt_keywords:
       - [reviewer, identity, records]
+      - [reviewer, identity, dpo, records]
+      - [identity, dpo, records]
+      - [identity, dpo, trust, records]
+      - [dpo, trust, records]
+      - [dpo, trust, ops, records]
+      - [trust, ops, records]
+      - [per, revocation, records]
+
+  - must_id: "item:B.8.2.6:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, records]
+      - [review, date, within, records]
+      - [date, within, records]
+      - [date, within, planned, records]
+      - [within, planned, records]
+      - [within, planned, interval, records]
+      - [planned, interval, records]
+      - [per, revocation, records]
+

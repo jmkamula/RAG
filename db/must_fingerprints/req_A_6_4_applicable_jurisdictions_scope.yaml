@@ -14,48 +14,48 @@ must_fingerprints:
   - must_id: "item:A.6.4:scope_legal_review"
     description: "Legal review path stated (when local employment counsel must be engaged before action — typically all dismissal cases + suspension cases ove"
     excerpt_keywords:
-      - [legal, review]
-      - [legal, review, path]
-      - [review, path]
-      - [review, path, stated]
-      - [path, stated]
-      - [path, stated, local]
-      - [stated, local]
-      - [stated, local, employment]
+      - [legal, review, disciplinary]
+      - [legal, review, path, disciplinary]
+      - [review, path, disciplinary]
+      - [review, path, stated, disciplinary]
+      - [path, stated, disciplinary]
+      - [path, stated, local, disciplinary]
+      - [stated, local, disciplinary]
+      - [stated, local, employment, disciplinary]
 
   - must_id: "item:A.6.4:scope_regulator_notify"
     description: "Regulator-notification triggers per jurisdiction (financial-services FSA notification for serious misconduct, healthcare professional body n"
     excerpt_keywords:
-      - [regulator, notify]
-      - [regulator, notification]
-      - [regulator, notification, triggers]
-      - [notification, triggers]
-      - [notification, triggers, jurisdiction]
-      - [triggers, jurisdiction]
-      - [triggers, jurisdiction, financial]
-      - [jurisdiction, financial]
+      - [regulator, notify, disciplinary]
+      - [regulator, notification, disciplinary]
+      - [regulator, notification, triggers, disciplinary]
+      - [notification, triggers, disciplinary]
+      - [notification, triggers, jurisdiction, disciplinary]
+      - [triggers, jurisdiction, disciplinary]
+      - [triggers, jurisdiction, financial, disciplinary]
+      - [jurisdiction, financial, disciplinary]
 
   - must_id: "item:A.6.4:scope_worker_categories"
     description: "Worker categories addressed (employees → full process; contractors → contract-based termination; secondees → escalation to home employer)"
     excerpt_keywords:
-      - [worker, categories]
-      - [worker, categories, addressed]
-      - [categories, addressed]
-      - [categories, addressed, employees]
-      - [addressed, employees]
-      - [addressed, employees, full]
-      - [employees, full]
-      - [employees, full, contractors]
+      - [worker, categories, disciplinary]
+      - [worker, categories, addressed, disciplinary]
+      - [categories, addressed, disciplinary]
+      - [categories, addressed, employees, disciplinary]
+      - [addressed, employees, disciplinary]
+      - [addressed, employees, full, disciplinary]
+      - [employees, full, disciplinary]
+      - [employees, full, contractors, disciplinary]
 
   - must_id: "item:A.6.4:scope_jurisdictions"
     description: "Jurisdictions covered (employment-law variants — at-will US states vs just-cause EU vs notice-period UK — drive process step variations)"
     excerpt_keywords:
-      - [jurisdictions, covered]
-      - [jurisdictions, covered, employment]
-      - [covered, employment]
-      - [covered, employment, law]
-      - [employment, law]
-      - [employment, law, variants]
-      - [law, variants]
-      - [law, variants, will]
+      - [jurisdictions, covered, disciplinary]
+      - [jurisdictions, covered, employment, disciplinary]
+      - [covered, employment, disciplinary]
+      - [covered, employment, law, disciplinary]
+      - [employment, law, disciplinary]
+      - [employment, law, variants, disciplinary]
+      - [law, variants, disciplinary]
+      - [law, variants, will, disciplinary]
 

@@ -14,33 +14,33 @@ must_fingerprints:
   - must_id: "item:B.8.2.4:reg_customer_response"
     description: "Customer response per row (withdrew / defended / disputed / no response)"
     excerpt_keywords:
-      - [customer, response]
-      - [customer, response, withdrew]
-      - [response, withdrew]
-      - [response, withdrew, defended]
-      - [withdrew, defended]
-      - [withdrew, defended, disputed]
-      - [defended, disputed]
-      - [defended, disputed, response]
+      - [customer, response, infringing]
+      - [customer, response, withdrew, infringing]
+      - [response, withdrew, infringing]
+      - [response, withdrew, defended, infringing]
+      - [withdrew, defended, infringing]
+      - [withdrew, defended, disputed, infringing]
+      - [defended, disputed, infringing]
+      - [defended, disputed, response, infringing]
 
   - must_id: "item:B.8.2.4:reg_notification_date"
     description: "Notification issued date per row"
     excerpt_keywords:
-      - [notification, date]
-      - [notification, issued]
-      - [notification, issued, date]
-      - [issued, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [notification, date, infringing]
+      - [notification, issued, infringing]
+      - [notification, issued, date, infringing]
+      - [issued, date, infringing]
+      - [per, row, infringing]
+      - [each, row, infringing]
+      - [column, containing, infringing]
+      - [each, entry, infringing]
 
   - must_id: "item:B.8.2.4:reg_legislation_cited"
     description: "Legislation cited per row (which provision the instruction appears to infringe)"
     excerpt_keywords:
-      - [legislation, cited]
-      - [legislation, cited, provision]
-      - [cited, provision]
+      - [legislation, cited, infringing]
+      - [legislation, cited, provision, infringing]
+      - [cited, provision, infringing]
       - [cited, provision, instruction]
       - [provision, instruction]
       - [provision, instruction, appears]
@@ -52,33 +52,33 @@ must_fingerprints:
     excerpt_keywords:
       - [instruction, summary]
       - [instruction, summary, customer]
-      - [summary, customer]
-      - [summary, customer, asked]
-      - [customer, asked]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [summary, customer, infringing]
+      - [summary, customer, asked, infringing]
+      - [customer, asked, infringing]
+      - [per, row, infringing]
+      - [each, row, infringing]
+      - [column, containing, infringing]
 
   - must_id: "item:B.8.2.4:reg_customer_id"
     description: "Customer identifier per row"
     excerpt_keywords:
-      - [customer, id]
-      - [customer, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [customer, id, infringing]
+      - [customer, identifier, infringing]
+      - [per, row, infringing]
+      - [each, row, infringing]
+      - [column, containing, infringing]
+      - [each, entry, infringing]
+      - [column, header, infringing]
 
   - must_id: "item:B.8.2.4:reg_notification_id"
     description: "Unique notification identifier per row"
     excerpt_keywords:
-      - [notification, id]
-      - [unique, notification]
-      - [unique, notification, identifier]
-      - [notification, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [notification, id, infringing]
+      - [unique, notification, infringing]
+      - [unique, notification, identifier, infringing]
+      - [notification, identifier, infringing]
+      - [per, row, infringing]
+      - [each, row, infringing]
+      - [column, containing, infringing]
+      - [each, entry, infringing]
 

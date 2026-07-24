@@ -14,14 +14,14 @@ must_fingerprints:
   - must_id: "item:B.8.2.3:proc_freely_given_alignment"
     description: "Alignment with Art.7.4 — freely-given consent test factored into any permit granted"
     excerpt_keywords:
-      - [freely, given, alignment]
-      - [alignment, art]
-      - [alignment, art, freely]
-      - [art, freely]
-      - [art, freely, given]
-      - [freely, given]
-      - [freely, given, consent]
-      - [given, consent]
+      - [freely, given, alignment, marketing]
+      - [alignment, art, marketing]
+      - [alignment, art, freely, marketing]
+      - [art, freely, marketing]
+      - [art, freely, given, marketing]
+      - [freely, given, marketing]
+      - [freely, given, consent, marketing]
+      - [given, consent, marketing]
 
   - must_id: "item:B.8.2.3:proc_customer_marketing_permit"
     description: "Customer-marketing permit path — customer explicitly authorises + provides consent evidence"
@@ -30,29 +30,29 @@ must_fingerprints:
       - [customer, marketing]
       - [marketing, permit]
       - [marketing, permit, path]
-      - [permit, path]
-      - [permit, path, customer]
-      - [path, customer]
-      - [path, customer, explicitly]
+      - [permit, path, marketing]
+      - [permit, path, customer, marketing]
+      - [path, customer, marketing]
+      - [path, customer, explicitly, marketing]
 
   - must_id: "item:B.8.2.3:proc_no_conditionality"
     description: "No-conditionality rule — service delivery not conditioned on subject accepting marketing"
     excerpt_keywords:
-      - [no, conditionality]
-      - [conditionality, rule]
-      - [conditionality, rule, service]
-      - [rule, service]
-      - [rule, service, delivery]
-      - [service, delivery]
-      - [service, delivery, not]
-      - [delivery, not]
+      - [no, conditionality, marketing]
+      - [conditionality, rule, marketing]
+      - [conditionality, rule, service, marketing]
+      - [rule, service, marketing]
+      - [rule, service, delivery, marketing]
+      - [service, delivery, marketing]
+      - [service, delivery, not, marketing]
+      - [delivery, not, marketing]
 
   - must_id: "item:B.8.2.3:proc_consent_evidence_requirement"
     description: "Consent evidence requirement — if any marketing/advertising use is permitted, subject-level consent evidence required (from customer or via "
     excerpt_keywords:
-      - [consent, evidence, requirement]
-      - [consent, evidence]
-      - [evidence, requirement]
+      - [consent, evidence, requirement, marketing]
+      - [consent, evidence, marketing]
+      - [evidence, requirement, marketing]
       - [evidence, requirement, marketing]
       - [requirement, marketing]
       - [requirement, marketing, advertising]
@@ -62,12 +62,12 @@ must_fingerprints:
   - must_id: "item:B.8.2.3:proc_default_prohibition"
     description: "Default prohibition — customer PII not usable for org's marketing/advertising by default"
     excerpt_keywords:
-      - [default, prohibition]
-      - [default, prohibition, customer]
-      - [prohibition, customer]
-      - [prohibition, customer, pii]
-      - [customer, pii]
-      - [customer, pii, not]
-      - [pii, not]
-      - [pii, not, usable]
+      - [default, prohibition, marketing]
+      - [default, prohibition, customer, marketing]
+      - [prohibition, customer, marketing]
+      - [prohibition, customer, pii, marketing]
+      - [customer, pii, marketing]
+      - [customer, pii, not, marketing]
+      - [pii, not, marketing]
+      - [pii, not, usable, marketing]
 

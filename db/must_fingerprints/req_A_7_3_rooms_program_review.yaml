@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3:rooms_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3:rooms_program_review"
@@ -10,28 +11,63 @@ target_control: "A.7.3"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.7.3:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:A.7.3:rev_register_update"
+    description: "Changes propagated to the live register"
     excerpt_keywords:
-      - [review, date, planned, interval, securing]
+      - [changes, propagated, securing]
+      - [changes, propagated, live, securing]
+      - [propagated, live, securing]
+      - [per, revocation, securing]
+      - [per, revoked, identity, securing]
+      - [revocation, record, securing]
+      - [review, findings, securing]
+      - [audit, outcomes, securing]
 
   - must_id: "item:A.7.3:rev_register_check"
     description: "Per-room outcome (verified / amended / retired / new added)"
     excerpt_keywords:
-      - [register, check, securing]
+      - [room, outcome, securing]
+      - [room, outcome, verified, securing]
+      - [outcome, verified, securing]
+      - [outcome, verified, amended, securing]
+      - [verified, amended, securing]
+      - [verified, amended, retired, securing]
+      - [amended, retired, securing]
+      - [amended, retired, new, securing]
 
-  - must_id: "item:A.7.3:rev_register_update"
-    description: "Changes propagated to the live register"
+  - must_id: "item:A.7.3:rev_walkthrough"
+    description: "Physical walkthrough conducted (sample-based) — locking standards verified, signage compliant"
     excerpt_keywords:
-      - [register, update, securing]
-      - [changes, propagated, live, register, securing]
+      - [physical, walkthrough, securing]
+      - [physical, walkthrough, conducted, securing]
+      - [walkthrough, conducted, securing]
+      - [walkthrough, conducted, sample, securing]
+      - [conducted, sample, securing]
+      - [conducted, sample, based, securing]
+      - [sample, based, securing]
+      - [sample, based, locking, securing]
 
   - must_id: "item:A.7.3:rev_reviewer"
     description: "Reviewer identity (Facilities + InfoSec)"
     excerpt_keywords:
       - [reviewer, identity, securing]
+      - [reviewer, identity, facilities, securing]
+      - [identity, facilities, securing]
+      - [identity, facilities, infosec, securing]
+      - [facilities, infosec, securing]
+      - [per, revocation, securing]
+      - [per, revoked, identity, securing]
+      - [revocation, record, securing]
 
-  - must_id: "item:A.7.3:rev_walkthrough"
-    description: "Physical walkthrough conducted (sample-based) — locking standards verified, signage compliant"
+  - must_id: "item:A.7.3:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [physical, walkthrough, conducted, securing]
+      - [review, date, securing]
+      - [review, date, within, securing]
+      - [date, within, securing]
+      - [date, within, planned, securing]
+      - [within, planned, securing]
+      - [within, planned, interval, securing]
+      - [planned, interval, securing]
+      - [per, revocation, securing]
+

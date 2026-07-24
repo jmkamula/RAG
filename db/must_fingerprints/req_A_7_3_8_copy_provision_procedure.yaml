@@ -14,72 +14,72 @@ must_fingerprints:
   - must_id: "item:A.7.3.8:proc_response_sla"
     description: "Response-time SLA stated + honoured"
     excerpt_keywords:
-      - [response, sla]
-      - [response, time]
-      - [response, time, sla]
-      - [time, sla]
-      - [time, sla, stated]
-      - [sla, stated]
-      - [sla, stated, honoured]
-      - [stated, honoured]
+      - [response, sla, providing]
+      - [response, time, providing]
+      - [response, time, sla, providing]
+      - [time, sla, providing]
+      - [time, sla, stated, providing]
+      - [sla, stated, providing]
+      - [sla, stated, honoured, providing]
+      - [stated, honoured, providing]
 
   - must_id: "item:A.7.3.8:proc_direct_transfer"
     description: "Direct-transfer capability — where technically feasible, transfer directly to another controller (Art.20.2)"
     excerpt_keywords:
-      - [direct, transfer]
-      - [direct, transfer, capability]
-      - [transfer, capability]
-      - [transfer, capability, technically]
-      - [capability, technically]
-      - [capability, technically, feasible]
-      - [technically, feasible]
-      - [technically, feasible, transfer]
+      - [direct, transfer, providing]
+      - [direct, transfer, capability, providing]
+      - [transfer, capability, providing]
+      - [transfer, capability, technically, providing]
+      - [capability, technically, providing]
+      - [capability, technically, feasible, providing]
+      - [technically, feasible, providing]
+      - [technically, feasible, transfer, providing]
 
   - must_id: "item:A.7.3.8:proc_no_reidentification"
     description: "No-re-identification rule — de-identified data not re-identified solely to fulfil this control"
     excerpt_keywords:
-      - [no, reidentification]
-      - [identification, rule]
-      - [identification, rule, identified]
-      - [rule, identified]
-      - [rule, identified, not]
-      - [identified, not]
-      - [identified, not, identified]
-      - [not, identified]
+      - [no, reidentification, providing]
+      - [identification, rule, providing]
+      - [identification, rule, identified, providing]
+      - [rule, identified, providing]
+      - [rule, identified, not, providing]
+      - [identified, not, providing]
+      - [identified, not, identified, providing]
+      - [not, identified, providing]
 
   - must_id: "item:A.7.3.8:proc_deleted_notification"
     description: "Deleted-PII notification — where PII already deleted per retention policy, subject informed of that fact"
     excerpt_keywords:
-      - [deleted, notification]
-      - [deleted, pii]
-      - [deleted, pii, notification]
-      - [pii, notification]
-      - [pii, notification, pii]
-      - [notification, pii]
-      - [notification, pii, already]
-      - [pii, already]
+      - [deleted, notification, providing]
+      - [deleted, pii, providing]
+      - [deleted, pii, notification, providing]
+      - [pii, notification, providing]
+      - [pii, notification, pii, providing]
+      - [notification, pii, providing]
+      - [notification, pii, already, providing]
+      - [pii, already, providing]
 
   - must_id: "item:A.7.3.8:proc_scope_restriction"
     description: "Scope restriction — copy relates specifically to that subject; no cross-subject leakage"
     excerpt_keywords:
-      - [scope, restriction]
+      - [scope, restriction, providing]
       - [scope, restriction, copy]
       - [restriction, copy]
       - [restriction, copy, relates]
       - [copy, relates]
       - [copy, relates, specifically]
-      - [relates, specifically]
-      - [relates, specifically, subject]
+      - [relates, specifically, providing]
+      - [relates, specifically, subject, providing]
 
   - must_id: "item:A.7.3.8:proc_format_selection"
     description: "Format selection — structured, commonly used, accessible (Art.15.3 + machine-readable for Art.20)"
     excerpt_keywords:
-      - [format, selection]
-      - [format, selection, structured]
-      - [selection, structured]
-      - [selection, structured, commonly]
-      - [structured, commonly]
-      - [structured, commonly, used]
-      - [commonly, used]
-      - [commonly, used, accessible]
+      - [format, selection, providing]
+      - [format, selection, structured, providing]
+      - [selection, structured, providing]
+      - [selection, structured, commonly, providing]
+      - [structured, commonly, providing]
+      - [structured, commonly, used, providing]
+      - [commonly, used, providing]
+      - [commonly, used, accessible, providing]
 

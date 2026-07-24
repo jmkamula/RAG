@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.37:dpo_designation_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.37:dpo_designation_program_review"
@@ -10,28 +11,63 @@ target_control: "Art.37"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.37:rev_criteria_recheck"
-    description: "Criteria recheck — Art.37.1 applicability re-assessed against current processing scope"
-    excerpt_keywords:
-      - [criteria, recheck, designation]
-
-  - must_id: "item:Art.37:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, designation]
-
   - must_id: "item:Art.37:rev_publication_current"
     description: "Publication currency — privacy notice + SA registration still reflect current DPO contact"
     excerpt_keywords:
       - [publication, current, designation]
       - [publication, currency, designation]
+      - [publication, currency, privacy, designation]
+      - [currency, privacy, designation]
+      - [currency, privacy, notice, designation]
+      - [privacy, notice, designation]
+      - [privacy, notice, registration, designation]
+      - [notice, registration, designation]
 
   - must_id: "item:Art.37:rev_qualifications_currency"
     description: "Qualifications currency — DPO continuing-education or certification renewal evidence"
     excerpt_keywords:
       - [qualifications, currency, designation]
+      - [qualifications, currency, dpo, designation]
+      - [currency, dpo, designation]
+      - [currency, dpo, continuing, designation]
+      - [dpo, continuing, designation]
+      - [dpo, continuing, education, designation]
+      - [continuing, education, designation]
+      - [continuing, education, certification, designation]
+
+  - must_id: "item:Art.37:rev_criteria_recheck"
+    description: "Criteria recheck — Art.37.1 applicability re-assessed against current processing scope"
+    excerpt_keywords:
+      - [criteria, recheck, designation]
+      - [criteria, recheck, art, designation]
+      - [recheck, art, designation]
+      - [recheck, art, applicability, designation]
+      - [art, applicability, designation]
+      - [art, applicability, assessed, designation]
+      - [applicability, assessed, designation]
+      - [applicability, assessed, against, designation]
 
   - must_id: "item:Art.37:rev_reviewer"
     description: "Reviewer identity (executive sponsor + legal counsel)"
     excerpt_keywords:
       - [reviewer, identity, designation]
+      - [reviewer, identity, executive, designation]
+      - [identity, executive, designation]
+      - [identity, executive, sponsor, designation]
+      - [executive, sponsor, designation]
+      - [executive, sponsor, legal, designation]
+      - [sponsor, legal, designation]
+      - [sponsor, legal, counsel, designation]
+
+  - must_id: "item:Art.37:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, designation]
+      - [review, date, within, designation]
+      - [date, within, designation]
+      - [date, within, planned, designation]
+      - [within, planned, designation]
+      - [within, planned, interval, designation]
+      - [planned, interval, designation]
+      - [per, revocation, designation]
+

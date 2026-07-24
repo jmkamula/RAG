@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.7:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.7:program_review"
@@ -10,22 +11,51 @@ target_control: "B.8.5.7"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.5.7:rev_authorisation_audit"
-    description: "Authorisation audit — every engagement traceable to customer authorisation"
-    excerpt_keywords:
-      - [authorisation, audit, engagement]
-
-  - must_id: "item:B.8.5.7:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, engagement]
-
   - must_id: "item:B.8.5.7:rev_flowdown_audit"
     description: "Flow-down audit — sampled contracts verified against Annex B coverage"
     excerpt_keywords:
       - [flowdown, audit, engagement]
+      - [flow, down, engagement]
+      - [flow, down, audit, engagement]
+      - [down, audit, engagement]
+      - [down, audit, sampled, engagement]
+      - [audit, sampled, engagement]
+      - [audit, sampled, contracts, engagement]
+      - [sampled, contracts, engagement]
+
+  - must_id: "item:B.8.5.7:rev_authorisation_audit"
+    description: "Authorisation audit — every engagement traceable to customer authorisation"
+    excerpt_keywords:
+      - [authorisation, audit, engagement]
+      - [authorisation, audit, every, engagement]
+      - [audit, every, engagement]
+      - [audit, every, engagement]
+      - [every, engagement]
+      - [every, engagement, traceable]
+      - [engagement, traceable]
+      - [engagement, traceable, customer]
 
   - must_id: "item:B.8.5.7:rev_reviewer"
     description: "Reviewer identity (Procurement + Legal + DPO)"
     excerpt_keywords:
       - [reviewer, identity, engagement]
+      - [reviewer, identity, procurement, engagement]
+      - [identity, procurement, engagement]
+      - [identity, procurement, legal, engagement]
+      - [procurement, legal, engagement]
+      - [procurement, legal, dpo, engagement]
+      - [legal, dpo, engagement]
+      - [per, revocation, engagement]
+
+  - must_id: "item:B.8.5.7:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, engagement]
+      - [review, date, within, engagement]
+      - [date, within, engagement]
+      - [date, within, planned, engagement]
+      - [within, planned, engagement]
+      - [within, planned, interval, engagement]
+      - [planned, interval, engagement]
+      - [per, revocation, engagement]
+

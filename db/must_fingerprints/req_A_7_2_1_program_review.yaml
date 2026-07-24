@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.1:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.1:program_review"
@@ -10,27 +11,63 @@ target_control: "A.7.2.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.1:rev_coverage_check"
-    description: "Coverage check — every in-scope activity has a purpose registered"
+  - must_id: "item:A.7.2.1:rev_undocumented_sweep"
+    description: "Undocumented-processing sweep — new activities emerged since last review flagged for registration"
     excerpt_keywords:
-      - [coverage, check, identify]
-
-  - must_id: "item:A.7.2.1:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, identify]
-
-  - must_id: "item:A.7.2.1:rev_reviewer"
-    description: "Reviewer identity (DPO + Privacy Office)"
-    excerpt_keywords:
-      - [reviewer, identity, identify]
+      - [undocumented, sweep, identify]
+      - [undocumented, processing, identify]
+      - [undocumented, processing, sweep, identify]
+      - [processing, sweep, identify]
+      - [processing, sweep, new, identify]
+      - [sweep, new, identify]
+      - [sweep, new, activities, identify]
+      - [new, activities, identify]
 
   - must_id: "item:A.7.2.1:rev_specificity_audit"
     description: "Specificity audit — sampled purposes reviewed for clarity + non-vagueness"
     excerpt_keywords:
       - [specificity, audit, identify]
+      - [specificity, audit, sampled, identify]
+      - [audit, sampled, identify]
+      - [audit, sampled, purposes, identify]
+      - [sampled, purposes, identify]
+      - [sampled, purposes, reviewed, identify]
+      - [purposes, reviewed, identify]
+      - [purposes, reviewed, clarity, identify]
 
-  - must_id: "item:A.7.2.1:rev_undocumented_sweep"
-    description: "Undocumented-processing sweep — new activities emerged since last review flagged for registration"
+  - must_id: "item:A.7.2.1:rev_coverage_check"
+    description: "Coverage check — every in-scope activity has a purpose registered"
     excerpt_keywords:
-      - [undocumented, sweep, identify]
+      - [coverage, check, identify]
+      - [coverage, check, every, identify]
+      - [check, every, identify]
+      - [check, every, scope, identify]
+      - [every, scope, identify]
+      - [every, scope, activity, identify]
+      - [scope, activity, identify]
+      - [scope, activity, has, identify]
+
+  - must_id: "item:A.7.2.1:rev_reviewer"
+    description: "Reviewer identity (DPO + Privacy Office)"
+    excerpt_keywords:
+      - [reviewer, identity, identify]
+      - [reviewer, identity, dpo, identify]
+      - [identity, dpo, identify]
+      - [identity, dpo, privacy, identify]
+      - [dpo, privacy, identify]
+      - [dpo, privacy, office, identify]
+      - [privacy, office, identify]
+      - [per, revocation, identify]
+
+  - must_id: "item:A.7.2.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, identify]
+      - [review, date, within, identify]
+      - [date, within, identify]
+      - [date, within, planned, identify]
+      - [within, planned, identify]
+      - [within, planned, interval, identify]
+      - [planned, interval, identify]
+      - [per, revocation, identify]
+

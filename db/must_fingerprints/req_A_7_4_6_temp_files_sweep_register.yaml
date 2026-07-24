@@ -14,13 +14,13 @@ must_fingerprints:
   - must_id: "item:A.7.4.6:reg_anomalies_flagged"
     description: "Anomalies flagged per row (unusual accumulation / temp files past retention)"
     excerpt_keywords:
-      - [anomalies, flagged]
-      - [anomalies, flagged, unusual]
-      - [flagged, unusual]
-      - [flagged, unusual, accumulation]
-      - [unusual, accumulation]
-      - [unusual, accumulation, temp]
-      - [accumulation, temp]
+      - [anomalies, flagged, temporary]
+      - [anomalies, flagged, unusual, temporary]
+      - [flagged, unusual, temporary]
+      - [flagged, unusual, accumulation, temporary]
+      - [unusual, accumulation, temporary]
+      - [unusual, accumulation, temp, temporary]
+      - [accumulation, temp, temporary]
       - [accumulation, temp, files]
 
   - must_id: "item:A.7.4.6:reg_files_cleaned"
@@ -28,42 +28,42 @@ must_fingerprints:
     excerpt_keywords:
       - [files, cleaned]
       - [files, cleaned, volume]
-      - [cleaned, volume]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [cleaned, volume, temporary]
+      - [per, row, temporary]
+      - [each, row, temporary]
+      - [column, containing, temporary]
+      - [each, entry, temporary]
+      - [column, header, temporary]
 
   - must_id: "item:A.7.4.6:reg_scan_date"
     description: "Scan date per row"
     excerpt_keywords:
-      - [scan, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [scan, date, temporary]
+      - [per, row, temporary]
+      - [each, row, temporary]
+      - [column, containing, temporary]
+      - [each, entry, temporary]
+      - [column, header, temporary]
 
   - must_id: "item:A.7.4.6:reg_system"
     description: "System / infrastructure component per row"
     excerpt_keywords:
-      - [infrastructure, component]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [infrastructure, component, temporary]
+      - [per, row, temporary]
+      - [each, row, temporary]
+      - [column, containing, temporary]
+      - [each, entry, temporary]
+      - [column, header, temporary]
 
   - must_id: "item:A.7.4.6:reg_sweep_id"
     description: "Unique sweep run identifier per row"
     excerpt_keywords:
-      - [sweep, id]
-      - [unique, sweep]
-      - [unique, sweep, run]
-      - [sweep, run]
-      - [sweep, run, identifier]
-      - [run, identifier]
-      - [per, row]
-      - [each, row]
+      - [sweep, id, temporary]
+      - [unique, sweep, temporary]
+      - [unique, sweep, run, temporary]
+      - [sweep, run, temporary]
+      - [sweep, run, identifier, temporary]
+      - [run, identifier, temporary]
+      - [per, row, temporary]
+      - [each, row, temporary]
 

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.33:breach_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.33:breach_program_review"
@@ -10,28 +11,63 @@ target_control: "Art.33"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.33:rev_72h_compliance"
-    description: "72h-compliance audit — every required notification met the SLA (or had documented Art.33.1 delay ..."
-    excerpt_keywords:
-      - [72h, compliance, notification]
-
-  - must_id: "item:Art.33:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, notification]
-
   - must_id: "item:Art.33:rev_exercise_link"
     description: "A.5.24 exercise integration — Art.33 procedure exercised within the year (table-top or live)"
     excerpt_keywords:
-      - [exercise, link, notification]
       - [exercise, integration, notification]
+      - [exercise, integration, art, notification]
+      - [integration, art, notification]
+      - [integration, art, exercised, notification]
+      - [art, exercised, notification]
+      - [art, exercised, within, notification]
+      - [exercised, within, notification]
+      - [exercised, within, year, notification]
+
+  - must_id: "item:Art.33:rev_severity_audit"
+    description: "Severity-gate audit — sampled 'no-notify' decisions reviewed for defensibility against Art.33.1 risk threshold"
+    excerpt_keywords:
+      - [severity, audit, notification]
+      - [severity, gate, notification]
+      - [severity, gate, audit, notification]
+      - [gate, audit, notification]
+      - [gate, audit, sampled, notification]
+      - [audit, sampled, notification]
+      - [audit, sampled, notify, notification]
+      - [sampled, notify, notification]
+
+  - must_id: "item:Art.33:rev_72h_compliance"
+    description: "72h-compliance audit — every required notification met the SLA (or had documented Art.33.1 delay reason)"
+    excerpt_keywords:
+      - [72h, compliance, notification]
+      - [72h, compliance, audit, notification]
+      - [compliance, audit, notification]
+      - [compliance, audit, every, notification]
+      - [audit, every, notification]
+      - [audit, every, required, notification]
+      - [every, required, notification]
+      - [every, required, notification]
 
   - must_id: "item:Art.33:rev_reviewer"
     description: "Reviewer identity (DPO + legal + incident-response lead)"
     excerpt_keywords:
       - [reviewer, identity, notification]
+      - [reviewer, identity, dpo, notification]
+      - [identity, dpo, notification]
+      - [identity, dpo, legal, notification]
+      - [dpo, legal, notification]
+      - [dpo, legal, incident, notification]
+      - [legal, incident, notification]
+      - [legal, incident, response, notification]
 
-  - must_id: "item:Art.33:rev_severity_audit"
-    description: "Severity-gate audit — sampled 'no-notify' decisions reviewed for defensibility against Art.33.1 r..."
+  - must_id: "item:Art.33:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [severity, audit, notification]
+      - [review, date, notification]
+      - [review, date, within, notification]
+      - [date, within, notification]
+      - [date, within, planned, notification]
+      - [within, planned, notification]
+      - [within, planned, interval, notification]
+      - [planned, interval, notification]
+      - [per, revocation, notification]
+

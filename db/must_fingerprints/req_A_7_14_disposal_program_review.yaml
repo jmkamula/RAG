@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.14:disposal_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.14:disposal_program_review"
@@ -10,28 +11,63 @@ target_control: "A.7.14"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:A.7.14:rev_register_update"
+    description: "Changes propagated to the procedure / scope"
+    excerpt_keywords:
+      - [changes, propagated, secure]
+      - [changes, propagated, scope, secure]
+      - [propagated, scope, secure]
+      - [per, revocation, secure]
+      - [per, revoked, identity, secure]
+      - [revocation, record, secure]
+      - [review, findings, secure]
+      - [audit, outcomes, secure]
+
   - must_id: "item:A.7.14:rev_certificate_audit"
     description: "Certificate audit (sample-based verification that retained certificates match register entries)"
     excerpt_keywords:
       - [certificate, audit, secure]
+      - [certificate, audit, sample, secure]
+      - [audit, sample, secure]
+      - [audit, sample, based, secure]
+      - [sample, based, secure]
+      - [sample, based, verification, secure]
+      - [based, verification, secure]
+      - [based, verification, retained, secure]
 
   - must_id: "item:A.7.14:rev_completeness"
     description: "Completeness check — every retired asset (from A.5.9) has a matching disposal_record"
     excerpt_keywords:
       - [completeness, check, secure]
-
-  - must_id: "item:A.7.14:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, secure]
-
-  - must_id: "item:A.7.14:rev_register_update"
-    description: "Changes propagated to the procedure / scope"
-    excerpt_keywords:
-      - [register, update, secure]
-      - [changes, propagated, procedure, scope, secure]
+      - [completeness, check, every, secure]
+      - [check, every, secure]
+      - [check, every, retired, secure]
+      - [every, retired, secure]
+      - [every, retired, asset, secure]
+      - [retired, asset, secure]
+      - [retired, asset, has, secure]
 
   - must_id: "item:A.7.14:rev_reviewer"
     description: "Reviewer identity (IT + InfoSec + Legal where regulatory disposal applies)"
     excerpt_keywords:
       - [reviewer, identity, secure]
+      - [reviewer, identity, infosec, secure]
+      - [identity, infosec, secure]
+      - [identity, infosec, legal, secure]
+      - [infosec, legal, secure]
+      - [infosec, legal, regulatory, secure]
+      - [legal, regulatory, secure]
+      - [legal, regulatory, disposal]
+
+  - must_id: "item:A.7.14:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, secure]
+      - [review, date, within, secure]
+      - [date, within, secure]
+      - [date, within, planned, secure]
+      - [within, planned, secure]
+      - [within, planned, interval, secure]
+      - [planned, interval, secure]
+      - [per, revocation, secure]
+

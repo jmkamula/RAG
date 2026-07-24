@@ -14,21 +14,21 @@ must_fingerprints:
   - must_id: "item:B.8.5.4:proc_legal_review"
     description: "Legal counsel reviews every request before response"
     excerpt_keywords:
-      - [legal, review]
-      - [legal, counsel]
-      - [legal, counsel, reviews]
-      - [counsel, reviews]
-      - [counsel, reviews, every]
-      - [reviews, every]
-      - [reviews, every, request]
-      - [every, request]
+      - [legal, review, notification]
+      - [legal, counsel, notification]
+      - [legal, counsel, reviews, notification]
+      - [counsel, reviews, notification]
+      - [counsel, reviews, every, notification]
+      - [reviews, every, notification]
+      - [reviews, every, request, notification]
+      - [every, request, notification]
 
   - must_id: "item:B.8.5.4:proc_gag_order_exception"
     description: "Gag-order exception — where notification prohibited by law, notification suppressed with legal-hold record retained for post-order disclosur"
     excerpt_keywords:
-      - [gag, order, exception]
-      - [gag, order]
-      - [order, exception]
+      - [gag, order, exception, notification]
+      - [gag, order, notification]
+      - [order, exception, notification]
       - [order, exception, notification]
       - [exception, notification]
       - [exception, notification, prohibited]
@@ -40,34 +40,34 @@ must_fingerprints:
     excerpt_keywords:
       - [notification, format]
       - [notification, format, contract]
-      - [format, contract]
-      - [format, contract, specified]
-      - [contract, specified]
-      - [contract, specified, content]
-      - [specified, content]
-      - [specified, content, request]
+      - [format, contract, notification]
+      - [format, contract, specified, notification]
+      - [contract, specified, notification]
+      - [contract, specified, content, notification]
+      - [specified, content, notification]
+      - [specified, content, request, notification]
 
   - must_id: "item:B.8.5.4:proc_timeframe"
     description: "Agreed timeframe per customer contract (typically 24-72h)"
     excerpt_keywords:
-      - [agreed, timeframe]
-      - [agreed, timeframe, customer]
-      - [timeframe, customer]
-      - [timeframe, customer, contract]
-      - [customer, contract]
-      - [customer, contract, typically]
-      - [contract, typically]
-      - [contract, typically, 72h]
+      - [agreed, timeframe, notification]
+      - [agreed, timeframe, customer, notification]
+      - [timeframe, customer, notification]
+      - [timeframe, customer, contract, notification]
+      - [customer, contract, notification]
+      - [customer, contract, typically, notification]
+      - [contract, typically, notification]
+      - [contract, typically, 72h, notification]
 
   - must_id: "item:B.8.5.4:proc_request_intake"
     description: "Request intake path — law-enforcement / regulator / court requests routed to Legal"
     excerpt_keywords:
-      - [request, intake]
-      - [request, intake, path]
-      - [intake, path]
-      - [intake, path, law]
-      - [path, law]
-      - [path, law, enforcement]
-      - [law, enforcement]
-      - [law, enforcement, regulator]
+      - [request, intake, notification]
+      - [request, intake, path, notification]
+      - [intake, path, notification]
+      - [intake, path, law, notification]
+      - [path, law, notification]
+      - [path, law, enforcement, notification]
+      - [law, enforcement, notification]
+      - [law, enforcement, regulator, notification]
 

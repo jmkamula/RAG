@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:10.1:improvement_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:10.1:improvement_program_review"
@@ -14,23 +15,59 @@ must_fingerprints:
     description: "Closure-quality check — closed actions have effectiveness assessment, not just 'marked complete'"
     excerpt_keywords:
       - [closure, quality, continual]
-
-  - must_id: "item:10.1:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, continual]
+      - [closure, quality, check, continual]
+      - [quality, check, continual]
+      - [quality, check, closed, continual]
+      - [check, closed, continual]
+      - [check, closed, actions, continual]
+      - [closed, actions, continual]
+      - [closed, actions, have, continual]
 
   - must_id: "item:10.1:rev_dimension_coverage"
     description: "Dimension coverage — improvements span suitability AND adequacy AND effectiveness (not just one)"
     excerpt_keywords:
       - [dimension, coverage, continual]
+      - [dimension, coverage, improvements, continual]
+      - [coverage, improvements, continual]
+      - [coverage, improvements, span, continual]
+      - [improvements, span, continual]
+      - [improvements, span, suitability, continual]
+      - [span, suitability, continual]
+      - [span, suitability, adequacy, continual]
+
+  - must_id: "item:10.1:rev_signal_capture"
+    description: "Signal-capture check — every in-scope trigger source produced at least one action OR explicit 'no opportunities this cycle' rationale"
+    excerpt_keywords:
+      - [signal, capture, continual]
+      - [signal, capture, check, continual]
+      - [capture, check, continual]
+      - [capture, check, every, continual]
+      - [check, every, continual]
+      - [check, every, scope, continual]
+      - [every, scope, continual]
+      - [every, scope, trigger, continual]
 
   - must_id: "item:10.1:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + executive sponsor)"
     excerpt_keywords:
       - [reviewer, identity, continual]
+      - [reviewer, identity, isms, continual]
+      - [identity, isms, continual]
+      - [identity, isms, manager, continual]
+      - [isms, manager, continual]
+      - [isms, manager, executive, continual]
+      - [manager, executive, continual]
+      - [manager, executive, sponsor, continual]
 
-  - must_id: "item:10.1:rev_signal_capture"
-    description: "Signal-capture check — every in-scope trigger source produced at least one action OR explicit 'no..."
+  - must_id: "item:10.1:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [signal, capture, continual]
+      - [review, date, continual]
+      - [review, date, within, continual]
+      - [date, within, continual]
+      - [date, within, planned, continual]
+      - [within, planned, continual]
+      - [within, planned, interval, continual]
+      - [planned, interval, continual]
+      - [per, revocation, continual]
+

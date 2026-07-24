@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.6:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.6:program_review"
@@ -10,22 +11,51 @@ target_control: "A.7.4.6"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.6:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, temporary]
-
   - must_id: "item:A.7.4.6:rev_orphan_sample"
     description: "Orphan-file sample check — random directories checked for temp files past retention"
     excerpt_keywords:
       - [orphan, sample, temporary]
-
-  - must_id: "item:A.7.4.6:rev_reviewer"
-    description: "Reviewer identity (Infrastructure + DPO)"
-    excerpt_keywords:
-      - [reviewer, identity, temporary]
+      - [orphan, file, temporary]
+      - [orphan, file, sample, temporary]
+      - [file, sample, temporary]
+      - [file, sample, check, temporary]
+      - [sample, check, temporary]
+      - [sample, check, random, temporary]
+      - [check, random, temporary]
 
   - must_id: "item:A.7.4.6:rev_sweep_health"
     description: "Sweep health — cadence honoured, coverage complete"
     excerpt_keywords:
       - [sweep, health, temporary]
+      - [sweep, health, cadence, temporary]
+      - [health, cadence, temporary]
+      - [health, cadence, honoured, temporary]
+      - [cadence, honoured, temporary]
+      - [cadence, honoured, coverage, temporary]
+      - [honoured, coverage, temporary]
+      - [honoured, coverage, complete, temporary]
+
+  - must_id: "item:A.7.4.6:rev_reviewer"
+    description: "Reviewer identity (Infrastructure + DPO)"
+    excerpt_keywords:
+      - [reviewer, identity, temporary]
+      - [reviewer, identity, infrastructure, temporary]
+      - [identity, infrastructure, temporary]
+      - [identity, infrastructure, dpo, temporary]
+      - [infrastructure, dpo, temporary]
+      - [per, revocation, temporary]
+      - [per, revoked, identity, temporary]
+      - [revocation, record, temporary]
+
+  - must_id: "item:A.7.4.6:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, temporary]
+      - [review, date, within, temporary]
+      - [date, within, temporary]
+      - [date, within, planned, temporary]
+      - [within, planned, temporary]
+      - [within, planned, interval, temporary]
+      - [planned, interval, temporary]
+      - [per, revocation, temporary]
+

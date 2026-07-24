@@ -14,57 +14,57 @@ must_fingerprints:
   - must_id: "item:A.7.3.1:reg_sla"
     description: "Response-time SLA per row"
     excerpt_keywords:
-      - [response, time]
-      - [response, time, sla]
-      - [time, sla]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [response, time, determining]
+      - [response, time, sla, determining]
+      - [time, sla, determining]
+      - [per, row, determining]
+      - [each, row, determining]
+      - [column, containing, determining]
+      - [each, entry, determining]
+      - [column, header, determining]
 
   - must_id: "item:A.7.3.1:reg_fulfilment_channel"
     description: "Fulfilment channel per row (which A.7.3.2-10 procedure handles it)"
     excerpt_keywords:
-      - [fulfilment, channel]
-      - [fulfilment, channel, handles]
-      - [channel, handles]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [fulfilment, channel, determining]
+      - [fulfilment, channel, handles, determining]
+      - [channel, handles, determining]
+      - [per, row, determining]
+      - [each, row, determining]
+      - [column, containing, determining]
+      - [each, entry, determining]
+      - [column, header, determining]
 
   - must_id: "item:A.7.3.1:reg_jurisdiction"
     description: "Applicable jurisdiction per row"
     excerpt_keywords:
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, determining]
+      - [each, row, determining]
+      - [column, containing, determining]
+      - [each, entry, determining]
+      - [column, header, determining]
 
   - must_id: "item:A.7.3.1:reg_citation"
     description: "Legal / regulatory / business citation per row"
     excerpt_keywords:
-      - [legal, regulatory]
-      - [legal, regulatory, business]
-      - [regulatory, business]
-      - [regulatory, business, citation]
-      - [business, citation]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [legal, regulatory, determining]
+      - [legal, regulatory, business, determining]
+      - [regulatory, business, determining]
+      - [regulatory, business, citation, determining]
+      - [business, citation, determining]
+      - [per, row, determining]
+      - [each, row, determining]
+      - [column, containing, determining]
 
   - must_id: "item:A.7.3.1:reg_obligation_id"
     description: "Unique obligation identifier per row"
     excerpt_keywords:
-      - [obligation, id]
-      - [unique, obligation]
-      - [unique, obligation, identifier]
-      - [obligation, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [obligation, id, determining]
+      - [unique, obligation, determining]
+      - [unique, obligation, identifier, determining]
+      - [obligation, identifier, determining]
+      - [per, row, determining]
+      - [each, row, determining]
+      - [column, containing, determining]
+      - [each, entry, determining]
 

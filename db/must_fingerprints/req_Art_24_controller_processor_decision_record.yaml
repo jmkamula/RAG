@@ -14,58 +14,58 @@ must_fingerprints:
   - must_id: "item:Art.24:role_contract_link"
     description: "Per-row contract link (DPA Art.28 / Art.26 arrangement / Art.46 transfer mechanism)"
     excerpt_keywords:
-      - [role, contract]
-      - [contract, dpa]
-      - [contract, dpa, art]
-      - [dpa, art]
-      - [dpa, art, art]
-      - [art, art]
-      - [art, art, arrangement]
-      - [art, arrangement]
+      - [role, contract, responsibility]
+      - [contract, dpa, responsibility]
+      - [contract, dpa, art, responsibility]
+      - [dpa, art, responsibility]
+      - [dpa, art, art, responsibility]
+      - [art, art, responsibility]
+      - [art, art, arrangement, responsibility]
+      - [art, arrangement, responsibility]
 
   - must_id: "item:Art.24:role_basis"
     description: "Per-row decision basis (who determines means and purposes — EDPB Guidelines 7/2020 test)"
     excerpt_keywords:
-      - [role, basis]
-      - [decision, basis]
-      - [decision, basis, determines]
-      - [basis, determines]
-      - [basis, determines, means]
-      - [determines, means]
-      - [determines, means, purposes]
-      - [means, purposes]
+      - [role, basis, responsibility]
+      - [decision, basis, responsibility]
+      - [decision, basis, determines, responsibility]
+      - [basis, determines, responsibility]
+      - [basis, determines, means, responsibility]
+      - [determines, means, responsibility]
+      - [determines, means, purposes, responsibility]
+      - [means, purposes, responsibility]
 
   - must_id: "item:Art.24:role_chosen"
     description: "Per-row role chosen (controller / processor / joint controller / third party)"
     excerpt_keywords:
-      - [role, chosen]
+      - [role, chosen, responsibility]
       - [role, chosen, controller]
       - [chosen, controller]
       - [chosen, controller, processor]
       - [controller, processor]
       - [controller, processor, joint]
-      - [processor, joint]
+      - [processor, joint, responsibility]
       - [processor, joint, controller]
 
   - must_id: "item:Art.24:role_counterparty"
     description: "Per-row counterparty (customer / vendor / partner)"
     excerpt_keywords:
-      - [role, counterparty]
-      - [counterparty, customer]
-      - [counterparty, customer, vendor]
-      - [customer, vendor]
-      - [customer, vendor, partner]
-      - [vendor, partner]
+      - [role, counterparty, responsibility]
+      - [counterparty, customer, responsibility]
+      - [counterparty, customer, vendor, responsibility]
+      - [customer, vendor, responsibility]
+      - [customer, vendor, partner, responsibility]
+      - [vendor, partner, responsibility]
 
   - must_id: "item:Art.24:role_activity_id"
     description: "Per-row processing activity (Art.30 RoPA reference)"
     excerpt_keywords:
-      - [role, activity, id]
-      - [processing, activity]
-      - [processing, activity, art]
-      - [activity, art]
-      - [activity, art, ropa]
-      - [art, ropa]
-      - [art, ropa, reference]
-      - [ropa, reference]
+      - [role, activity, id, responsibility]
+      - [processing, activity, responsibility]
+      - [processing, activity, art, responsibility]
+      - [activity, art, responsibility]
+      - [activity, art, ropa, responsibility]
+      - [art, ropa, responsibility]
+      - [art, ropa, reference, responsibility]
+      - [ropa, reference, responsibility]
 

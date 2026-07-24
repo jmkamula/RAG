@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.11:masking_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.11:masking_program_review"
@@ -10,29 +11,75 @@ target_control: "A.8.11"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.8.11:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:A.8.11:rev_procedure_update"
+    description: "Findings propagated to procedure / approved-techniques list"
     excerpt_keywords:
-      - [review, date, planned, interval, masking]
+      - [findings, propagated, masking]
+      - [findings, propagated, approved, masking]
+      - [propagated, approved, masking]
+      - [propagated, approved, techniques, masking]
+      - [approved, techniques, masking]
+      - [per, revocation, masking]
+      - [per, revoked, identity, masking]
+      - [revocation, record, masking]
 
   - must_id: "item:A.8.11:rev_exception_inventory"
     description: "Exception inventory re-confirmed / retired"
     excerpt_keywords:
       - [exception, inventory, masking]
-
-  - must_id: "item:A.8.11:rev_procedure_update"
-    description: "Findings propagated to procedure / approved-techniques list"
-    excerpt_keywords:
-      - [procedure, update, masking]
-      - [findings, propagated, procedure, approved, masking]
+      - [exception, inventory, confirmed, masking]
+      - [inventory, confirmed, masking]
+      - [inventory, confirmed, retired, masking]
+      - [confirmed, retired, masking]
+      - [per, revocation, masking]
+      - [per, revoked, identity, masking]
+      - [revocation, record, masking]
 
   - must_id: "item:A.8.11:rev_register_currency"
     description: "Register currency check (refresh timestamps within tolerance)"
     excerpt_keywords:
-      - [register, currency, masking]
-      - [register, currency, check, masking]
+      - [currency, check, masking]
+      - [currency, check, refresh, masking]
+      - [check, refresh, masking]
+      - [check, refresh, timestamps, masking]
+      - [refresh, timestamps, masking]
+      - [refresh, timestamps, within, masking]
+      - [timestamps, within, masking]
+      - [timestamps, within, tolerance, masking]
+
+  - must_id: "item:A.8.11:rev_effectiveness"
+    description: "Re-identification residual-risk sampling outcome (acceptable or technique upgrade required)"
+    excerpt_keywords:
+      - [identification, residual, masking]
+      - [identification, residual, risk, masking]
+      - [residual, risk, masking]
+      - [residual, risk, sampling, masking]
+      - [risk, sampling, masking]
+      - [risk, sampling, outcome, masking]
+      - [sampling, outcome, masking]
+      - [sampling, outcome, acceptable, masking]
 
   - must_id: "item:A.8.11:rev_reviewer"
     description: "Reviewer identity (DPO + Data Engineering + InfoSec)"
     excerpt_keywords:
       - [reviewer, identity, masking]
+      - [reviewer, identity, dpo, masking]
+      - [identity, dpo, masking]
+      - [identity, dpo, engineering, masking]
+      - [dpo, engineering, masking]
+      - [dpo, engineering, infosec, masking]
+      - [engineering, infosec, masking]
+      - [per, revocation, masking]
+
+  - must_id: "item:A.8.11:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, masking]
+      - [review, date, within, masking]
+      - [date, within, masking]
+      - [date, within, planned, masking]
+      - [within, planned, masking]
+      - [within, planned, interval, masking]
+      - [planned, interval, masking]
+      - [per, revocation, masking]
+

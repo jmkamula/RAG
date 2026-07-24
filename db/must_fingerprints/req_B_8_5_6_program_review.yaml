@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.6:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.6:program_review"
@@ -14,18 +15,47 @@ must_fingerprints:
     description: "Content audit — sampled disclosures include countries + obligations mechanism"
     excerpt_keywords:
       - [content, audit, disclosure]
-
-  - must_id: "item:B.8.5.6:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, disclosure]
+      - [content, audit, sampled, disclosure]
+      - [audit, sampled, disclosure]
+      - [audit, sampled, disclosures, disclosure]
+      - [sampled, disclosures, disclosure]
+      - [sampled, disclosures, include, disclosure]
+      - [disclosures, include, disclosure]
+      - [disclosures, include, countries, disclosure]
 
   - must_id: "item:B.8.5.6:rev_pre_use_audit"
     description: "Pre-use audit — sampled subcontractor onboardings verified against disclosure record"
     excerpt_keywords:
-      - [pre, audit, disclosure]
+      - [pre, use, audit, disclosure]
+      - [pre, use, disclosure]
+      - [use, audit, disclosure]
+      - [use, audit, sampled, disclosure]
+      - [audit, sampled, disclosure]
+      - [audit, sampled, subcontractor, disclosure]
+      - [sampled, subcontractor, disclosure]
+      - [sampled, subcontractor, onboardings, disclosure]
 
   - must_id: "item:B.8.5.6:rev_reviewer"
     description: "Reviewer identity (Trust + Legal + DPO)"
     excerpt_keywords:
       - [reviewer, identity, disclosure]
+      - [reviewer, identity, trust, disclosure]
+      - [identity, trust, disclosure]
+      - [identity, trust, legal, disclosure]
+      - [trust, legal, disclosure]
+      - [trust, legal, dpo, disclosure]
+      - [legal, dpo, disclosure]
+      - [per, revocation, disclosure]
+
+  - must_id: "item:B.8.5.6:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, disclosure]
+      - [review, date, within, disclosure]
+      - [date, within, disclosure]
+      - [date, within, planned, disclosure]
+      - [within, planned, disclosure]
+      - [within, planned, interval, disclosure]
+      - [planned, interval, disclosure]
+      - [per, revocation, disclosure]
+

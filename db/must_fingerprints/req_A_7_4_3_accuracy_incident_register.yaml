@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.4.3:reg_root_cause"
     description: "Root cause per row (where a systemic issue emerged, remediation link)"
     excerpt_keywords:
-      - [root, cause]
-      - [root, cause, systemic]
-      - [cause, systemic]
-      - [cause, systemic, issue]
-      - [systemic, issue]
-      - [systemic, issue, emerged]
-      - [issue, emerged]
-      - [issue, emerged, remediation]
+      - [root, cause, accuracy]
+      - [root, cause, systemic, accuracy]
+      - [cause, systemic, accuracy]
+      - [cause, systemic, issue, accuracy]
+      - [systemic, issue, accuracy]
+      - [systemic, issue, emerged, accuracy]
+      - [issue, emerged, accuracy]
+      - [issue, emerged, remediation, accuracy]
 
   - must_id: "item:A.7.4.3:reg_resolution"
     description: "Resolution per row (corrected / cannot-correct-with-reason / erased / pending)"
     excerpt_keywords:
-      - [resolution, corrected]
-      - [resolution, corrected, cannot]
-      - [corrected, cannot]
-      - [corrected, cannot, correct]
-      - [cannot, correct]
-      - [cannot, correct, reason]
-      - [correct, reason]
-      - [correct, reason, erased]
+      - [resolution, corrected, accuracy]
+      - [resolution, corrected, cannot, accuracy]
+      - [corrected, cannot, accuracy]
+      - [corrected, cannot, correct, accuracy]
+      - [cannot, correct, accuracy]
+      - [cannot, correct, reason, accuracy]
+      - [correct, reason, accuracy]
+      - [correct, reason, erased, accuracy]
 
   - must_id: "item:A.7.4.3:reg_pii_scope"
     description: "PII scope per row (which fields / how many subjects affected)"
     excerpt_keywords:
-      - [pii, scope]
-      - [pii, scope, fields]
-      - [scope, fields]
-      - [scope, fields, many]
-      - [fields, many]
-      - [fields, many, subjects]
-      - [many, subjects]
-      - [many, subjects, affected]
+      - [pii, scope, accuracy]
+      - [pii, scope, fields, accuracy]
+      - [scope, fields, accuracy]
+      - [scope, fields, many, accuracy]
+      - [fields, many, accuracy]
+      - [fields, many, subjects, accuracy]
+      - [many, subjects, accuracy]
+      - [many, subjects, affected, accuracy]
 
   - must_id: "item:A.7.4.3:reg_detection_source"
     description: "Detection source per row (internal audit / subject rectification / integration reconciliation / external notification)"
     excerpt_keywords:
-      - [detection, source]
-      - [detection, source, internal]
-      - [source, internal]
-      - [source, internal, audit]
-      - [internal, audit]
-      - [internal, audit, subject]
-      - [audit, subject]
-      - [audit, subject, rectification]
+      - [detection, source, accuracy]
+      - [detection, source, internal, accuracy]
+      - [source, internal, accuracy]
+      - [source, internal, audit, accuracy]
+      - [internal, audit, accuracy]
+      - [internal, audit, subject, accuracy]
+      - [audit, subject, accuracy]
+      - [audit, subject, rectification, accuracy]
 
   - must_id: "item:A.7.4.3:reg_incident_id"
     description: "Unique incident identifier per row"
     excerpt_keywords:
-      - [incident, id]
-      - [unique, incident]
-      - [unique, incident, identifier]
-      - [incident, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [incident, id, accuracy]
+      - [unique, incident, accuracy]
+      - [unique, incident, identifier, accuracy]
+      - [incident, identifier, accuracy]
+      - [per, row, accuracy]
+      - [each, row, accuracy]
+      - [column, containing, accuracy]
+      - [each, entry, accuracy]
 

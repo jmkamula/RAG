@@ -16,58 +16,58 @@ must_fingerprints:
     excerpt_keywords:
       - [collection, mode]
       - [collection, mode, direct]
-      - [mode, direct]
-      - [mode, direct, form]
-      - [direct, form]
-      - [direct, form, cookie]
-      - [form, cookie]
-      - [form, cookie, weblog]
+      - [mode, direct, limit]
+      - [mode, direct, form, limit]
+      - [direct, form, limit]
+      - [direct, form, cookie, limit]
+      - [form, cookie, limit]
+      - [form, cookie, weblog, limit]
 
   - must_id: "item:A.7.4.1:reg_default_state"
     description: "Default state per row (required / opt-in optional / opt-out optional)"
     excerpt_keywords:
-      - [default, state]
-      - [default, state, required]
-      - [state, required]
-      - [state, required, opt]
-      - [required, opt]
-      - [required, opt, optional]
-      - [opt, optional]
-      - [opt, optional, opt]
+      - [default, state, limit]
+      - [default, state, required, limit]
+      - [state, required, limit]
+      - [state, required, opt, limit]
+      - [required, opt, limit]
+      - [required, opt, optional, limit]
+      - [opt, optional, limit]
+      - [opt, optional, opt, limit]
 
   - must_id: "item:A.7.4.1:reg_necessity_rationale"
     description: "Necessity rationale per row (adequate / relevant / necessary explanation)"
     excerpt_keywords:
-      - [necessity, rationale]
-      - [necessity, rationale, adequate]
-      - [rationale, adequate]
-      - [rationale, adequate, relevant]
-      - [adequate, relevant]
-      - [adequate, relevant, necessary]
-      - [relevant, necessary]
-      - [relevant, necessary, explanation]
+      - [necessity, rationale, limit]
+      - [necessity, rationale, adequate, limit]
+      - [rationale, adequate, limit]
+      - [rationale, adequate, relevant, limit]
+      - [adequate, relevant, limit]
+      - [adequate, relevant, necessary, limit]
+      - [relevant, necessary, limit]
+      - [relevant, necessary, explanation, limit]
 
   - must_id: "item:A.7.4.1:reg_purpose_link"
     description: "Purpose link per row (which A.7.2.1 purpose this field supports)"
     excerpt_keywords:
-      - [purpose, purpose]
-      - [purpose, purpose, supports]
-      - [purpose, supports]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [purpose, purpose, limit]
+      - [purpose, purpose, supports, limit]
+      - [purpose, supports, limit]
+      - [per, row, limit]
+      - [each, row, limit]
+      - [column, containing, limit]
+      - [each, entry, limit]
+      - [column, header, limit]
 
   - must_id: "item:A.7.4.1:reg_field_id"
     description: "Unique field identifier per row (form_id + field_name)"
     excerpt_keywords:
-      - [unique, identifier]
-      - [unique, identifier, form_id]
-      - [identifier, form_id]
-      - [identifier, form_id, field_name]
-      - [form_id, field_name]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [unique, identifier, limit]
+      - [unique, identifier, form_id, limit]
+      - [identifier, form_id, limit]
+      - [identifier, form_id, field_name, limit]
+      - [form_id, field_name, limit]
+      - [per, row, limit]
+      - [each, row, limit]
+      - [column, containing, limit]
 

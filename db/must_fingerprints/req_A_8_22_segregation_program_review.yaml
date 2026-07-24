@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.22:segregation_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.22:segregation_program_review"
@@ -10,33 +11,75 @@ target_control: "A.8.22"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.8.22:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:A.8.22:rev_findings_update"
+    description: "Findings propagated to procedure / register"
     excerpt_keywords:
-      - [review, date, planned, interval, segregation]
+      - [findings, update, segregation]
+      - [findings, propagated, segregation]
+      - [per, revocation, segregation]
+      - [per, revoked, identity, segregation]
+      - [revocation, record, segregation]
+      - [review, findings, segregation]
+      - [audit, outcomes, segregation]
+      - [last, reviewed, segregation]
 
   - must_id: "item:A.8.22:rev_enforcement_coverage"
     description: "Sample-based enforcement-coverage verification (configured rules match register)"
     excerpt_keywords:
       - [enforcement, coverage, segregation]
+      - [sample, based, segregation]
+      - [sample, based, enforcement, segregation]
+      - [based, enforcement, segregation]
+      - [based, enforcement, coverage, segregation]
+      - [enforcement, coverage, verification, segregation]
+      - [coverage, verification, segregation]
+      - [coverage, verification, configured, segregation]
 
   - must_id: "item:A.8.22:rev_exception_inventory"
     description: "Exception inventory re-confirmed / retired"
     excerpt_keywords:
       - [exception, inventory, segregation]
-
-  - must_id: "item:A.8.22:rev_findings_update"
-    description: "Findings propagated to procedure / register"
-    excerpt_keywords:
-      - [findings, update, segregation]
-      - [findings, propagated, procedure, register, segregation]
+      - [exception, inventory, confirmed, segregation]
+      - [inventory, confirmed, segregation]
+      - [inventory, confirmed, retired, segregation]
+      - [confirmed, retired, segregation]
+      - [per, revocation, segregation]
+      - [per, revoked, identity, segregation]
+      - [revocation, record, segregation]
 
   - must_id: "item:A.8.22:rev_register_completeness"
     description: "Register-completeness check (new zones registered)"
     excerpt_keywords:
-      - [register, completeness, segregation]
+      - [completeness, check, segregation]
+      - [completeness, check, new, segregation]
+      - [check, new, segregation]
+      - [check, new, zones, segregation]
+      - [new, zones, segregation]
+      - [new, zones, registered, segregation]
+      - [zones, registered, segregation]
+      - [per, revocation, segregation]
 
   - must_id: "item:A.8.22:rev_reviewer"
     description: "Reviewer identity (Network Engineering + InfoSec + Application Engineering leads)"
     excerpt_keywords:
       - [reviewer, identity, segregation]
+      - [reviewer, identity, network, segregation]
+      - [identity, network, segregation]
+      - [identity, network, engineering, segregation]
+      - [network, engineering, segregation]
+      - [network, engineering, infosec, segregation]
+      - [engineering, infosec, segregation]
+      - [engineering, infosec, application, segregation]
+
+  - must_id: "item:A.8.22:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, segregation]
+      - [review, date, within, segregation]
+      - [date, within, segregation]
+      - [date, within, planned, segregation]
+      - [within, planned, segregation]
+      - [within, planned, interval, segregation]
+      - [planned, interval, segregation]
+      - [per, revocation, segregation]
+

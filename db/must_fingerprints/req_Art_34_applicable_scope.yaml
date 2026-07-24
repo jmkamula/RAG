@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.34:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.34:applicable_scope"
@@ -11,18 +12,38 @@ target_standard: "GDPR:2016/679"
 
 must_fingerprints:
   - must_id: "item:Art.34:scope_art33_boundary"
-    description: "Boundary with Art.33 — Art.33 fires lower (any breach of personal data not 'unlikely to result in..."
+    description: "Boundary with Art.33 — Art.33 fires lower (any breach of personal data not 'unlikely to result in risk'); Art.34 fires higher (high risk onl"
     excerpt_keywords:
-      - [scope, art33, boundary, communication]
+      - [art33, boundary, communication]
       - [boundary, art, communication]
+      - [boundary, art, art, communication]
+      - [art, art, communication]
+      - [art, art, fires, communication]
+      - [art, fires, communication]
+      - [art, fires, lower, communication]
+      - [fires, lower, communication]
 
   - must_id: "item:Art.34:scope_exception_criteria"
-    description: "Art.34.3 exception criteria operationalised (encryption deemed appropriate / risk-mitigation meas..."
+    description: "Art.34.3 exception criteria operationalised (encryption deemed appropriate / risk-mitigation measures / disproportionate effort definition)"
     excerpt_keywords:
-      - [scope, exception, criteria, communication]
-      - [art, exception, criteria, operationalised, communication]
+      - [exception, criteria, communication]
+      - [art, exception, communication]
+      - [art, exception, criteria, communication]
+      - [exception, criteria, operationalised, communication]
+      - [criteria, operationalised, communication]
+      - [criteria, operationalised, encryption, communication]
+      - [operationalised, encryption, communication]
+      - [operationalised, encryption, deemed, communication]
 
   - must_id: "item:Art.34:scope_high_risk_test"
     description: "High-risk test operational criteria (likelihood × severity × number affected × category sensitivity)"
     excerpt_keywords:
-      - [scope, high, risk, test, communication]
+      - [high, risk, test, communication]
+      - [high, risk, communication]
+      - [risk, test, communication]
+      - [risk, test, operational, communication]
+      - [test, operational, communication]
+      - [test, operational, criteria, communication]
+      - [operational, criteria, communication]
+      - [operational, criteria, likelihood, communication]
+

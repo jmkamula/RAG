@@ -14,71 +14,71 @@ must_fingerprints:
   - must_id: "item:Art.20:third_party_rights"
     description: "Third-party rights protection (Art.20.4 — must not adversely affect others)"
     excerpt_keywords:
-      - [third, party, rights]
-      - [third, party]
-      - [party, rights]
-      - [party, rights, protection]
-      - [rights, protection]
-      - [rights, protection, art]
-      - [protection, art]
-      - [protection, art, not]
+      - [third, party, rights, right]
+      - [third, party, right]
+      - [party, rights, right]
+      - [party, rights, protection, right]
+      - [rights, protection, right]
+      - [rights, protection, art, right]
+      - [protection, art, right]
+      - [protection, art, not, right]
 
   - must_id: "item:Art.20:scope_boundary"
     description: "Scope boundary — only data 'provided by' the subject (excludes derived data and observed data per EDPB guidance)"
     excerpt_keywords:
-      - [scope, boundary]
-      - [scope, boundary, only]
-      - [boundary, only]
-      - [boundary, only, provided]
-      - [only, provided]
-      - [only, provided, subject]
-      - [provided, subject]
-      - [provided, subject, excludes]
+      - [scope, boundary, right]
+      - [scope, boundary, only, right]
+      - [boundary, only, right]
+      - [boundary, only, provided, right]
+      - [only, provided, right]
+      - [only, provided, subject, right]
+      - [provided, subject, right]
+      - [provided, subject, excludes, right]
 
   - must_id: "item:Art.20:direct_transmission"
     description: "Direct controller-to-controller transmission supported where technically feasible (Art.20.2)"
     excerpt_keywords:
-      - [direct, transmission]
-      - [direct, controller]
-      - [direct, controller, controller]
-      - [controller, controller]
-      - [controller, controller, transmission]
-      - [controller, transmission]
-      - [controller, transmission, supported]
-      - [transmission, supported]
+      - [direct, transmission, right]
+      - [direct, controller, right]
+      - [direct, controller, controller, right]
+      - [controller, controller, right]
+      - [controller, controller, transmission, right]
+      - [controller, transmission, right]
+      - [controller, transmission, supported, right]
+      - [transmission, supported, right]
 
   - must_id: "item:Art.20:export_format"
     description: "Export format documented (JSON / CSV / XML — machine-readable, structured, commonly used)"
     excerpt_keywords:
-      - [export, format]
-      - [export, format, documented]
-      - [format, documented]
-      - [format, documented, json]
-      - [documented, json]
-      - [documented, json, csv]
-      - [json, csv]
-      - [json, csv, xml]
+      - [export, format, right]
+      - [export, format, documented, right]
+      - [format, documented, right]
+      - [format, documented, json, right]
+      - [documented, json, right]
+      - [documented, json, csv, right]
+      - [json, csv, right]
+      - [json, csv, xml, right]
 
   - must_id: "item:Art.20:applicability_check"
     description: "Applicability assessment per request (basis = consent/contract AND automated processing)"
     excerpt_keywords:
-      - [applicability, check]
-      - [applicability, assessment]
-      - [applicability, assessment, request]
-      - [assessment, request]
-      - [assessment, request, basis]
-      - [request, basis]
-      - [request, basis, consent]
-      - [basis, consent]
+      - [applicability, check, right]
+      - [applicability, assessment, right]
+      - [applicability, assessment, request, right]
+      - [assessment, request, right]
+      - [assessment, request, basis, right]
+      - [request, basis, right]
+      - [request, basis, consent, right]
+      - [basis, consent, right]
 
   - must_id: "item:Art.20:intake_channel"
     description: "Intake channel via Art.12 procedure"
     excerpt_keywords:
-      - [intake, channel]
-      - [intake, channel, via]
-      - [channel, via]
-      - [channel, via, art]
-      - [via, art]
-      - [procedure, step]
-      - [responsibility, of]
+      - [intake, channel, right]
+      - [intake, channel, via, right]
+      - [channel, via, right]
+      - [channel, via, art, right]
+      - [via, art, right]
+      - [procedure, step, right]
+      - [responsibility, of, right]
 

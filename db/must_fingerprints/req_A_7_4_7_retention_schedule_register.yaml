@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.4.7:reg_deletion_trigger"
     description: "Deletion trigger per row (calendar-based / event-based)"
     excerpt_keywords:
-      - [deletion, trigger]
-      - [deletion, trigger, calendar]
-      - [trigger, calendar]
-      - [trigger, calendar, based]
-      - [calendar, based]
-      - [calendar, based, event]
-      - [based, event]
-      - [based, event, based]
+      - [deletion, trigger, retention]
+      - [deletion, trigger, calendar, retention]
+      - [trigger, calendar, retention]
+      - [trigger, calendar, based, retention]
+      - [calendar, based, retention]
+      - [calendar, based, event, retention]
+      - [based, event, retention]
+      - [based, event, based, retention]
 
   - must_id: "item:A.7.4.7:reg_citation"
     description: "Citation per row (specific statute / regulation / business rationale document)"
     excerpt_keywords:
-      - [citation, specific]
-      - [citation, specific, statute]
-      - [specific, statute]
-      - [specific, statute, regulation]
-      - [statute, regulation]
-      - [statute, regulation, business]
-      - [regulation, business]
-      - [regulation, business, rationale]
+      - [citation, specific, retention]
+      - [citation, specific, statute, retention]
+      - [specific, statute, retention]
+      - [specific, statute, regulation, retention]
+      - [statute, regulation, retention]
+      - [statute, regulation, business, retention]
+      - [regulation, business, retention]
+      - [regulation, business, rationale, retention]
 
   - must_id: "item:A.7.4.7:reg_rationale_type"
     description: "Rationale type per row (legal / regulatory / business)"
     excerpt_keywords:
-      - [rationale, legal]
-      - [rationale, legal, regulatory]
-      - [legal, regulatory]
-      - [legal, regulatory, business]
-      - [regulatory, business]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [rationale, legal, retention]
+      - [rationale, legal, regulatory, retention]
+      - [legal, regulatory, retention]
+      - [legal, regulatory, business, retention]
+      - [regulatory, business, retention]
+      - [per, row, retention]
+      - [each, row, retention]
+      - [column, containing, retention]
 
   - must_id: "item:A.7.4.7:reg_retention_period"
     description: "Retention period per row (with unit — years / months / until event)"
     excerpt_keywords:
       - [retention, period]
       - [retention, period, unit]
-      - [period, unit]
-      - [period, unit, years]
-      - [unit, years]
-      - [unit, years, months]
-      - [years, months]
-      - [years, months, until]
+      - [period, unit, retention]
+      - [period, unit, years, retention]
+      - [unit, years, retention]
+      - [unit, years, months, retention]
+      - [years, months, retention]
+      - [years, months, until, retention]
 
   - must_id: "item:A.7.4.7:reg_category_id"
     description: "Category / activity combination identifier per row"
     excerpt_keywords:
-      - [category, id]
-      - [category, activity]
-      - [category, activity, combination]
-      - [activity, combination]
-      - [activity, combination, identifier]
-      - [combination, identifier]
-      - [per, row]
-      - [each, row]
+      - [category, id, retention]
+      - [category, activity, retention]
+      - [category, activity, combination, retention]
+      - [activity, combination, retention]
+      - [activity, combination, identifier, retention]
+      - [combination, identifier, retention]
+      - [per, row, retention]
+      - [each, row, retention]
 

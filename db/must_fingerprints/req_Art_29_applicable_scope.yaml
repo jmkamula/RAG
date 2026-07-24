@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.29:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.29:applicable_scope"
@@ -10,17 +11,39 @@ target_control: "Art.29"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.29:scope_personnel_categories"
-    description: "Personnel categories in scope (employees + contractors + embedded third-party staff)"
-    excerpt_keywords:
-      - [scope, personnel, categories, authority]
-
-  - must_id: "item:Art.29:scope_processor_role"
-    description: "Org-role classification — does the org act as processor for any customer (Art.29 binds the org's ..."
-    excerpt_keywords:
-      - [scope, processor, role, authority]
-
   - must_id: "item:Art.29:scope_subprocessor_boundary"
     description: "Sub-processor boundary — sub-processors are Art.28 territory not Art.29"
     excerpt_keywords:
-      - [scope, subprocessor, boundary, authority]
+      - [subprocessor, boundary, under]
+      - [sub, processor, under]
+      - [sub, processor, boundary, under]
+      - [processor, boundary, under]
+      - [processor, boundary, sub, under]
+      - [boundary, sub, under]
+      - [boundary, sub, processors, under]
+      - [sub, processors, under]
+
+  - must_id: "item:Art.29:scope_processor_role"
+    description: "Org-role classification — does the org act as processor for any customer (Art.29 binds the org's own staff in that capacity)?"
+    excerpt_keywords:
+      - [processor, role, under]
+      - [org, role, under]
+      - [org, role, classification, under]
+      - [role, classification, under]
+      - [role, classification, does, under]
+      - [classification, does, under]
+      - [classification, does, org, under]
+      - [does, org, under]
+
+  - must_id: "item:Art.29:scope_personnel_categories"
+    description: "Personnel categories in scope (employees + contractors + embedded third-party staff)"
+    excerpt_keywords:
+      - [personnel, categories, under]
+      - [personnel, categories, scope, under]
+      - [categories, scope, under]
+      - [categories, scope, employees, under]
+      - [scope, employees, under]
+      - [scope, employees, contractors, under]
+      - [employees, contractors, under]
+      - [employees, contractors, embedded, under]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.5.16:identity_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.16:identity_program_review"
@@ -11,36 +12,86 @@ target_standard: "ISO27001:2022"
 
 must_fingerprints:
   - must_id: "item:A.5.16:rev_actions"
-    description: "Action items captured (e.g. tighten auto-suspend threshold, expand HR-cascade automation, retire ..."
+    description: "Action items captured (e.g"
     excerpt_keywords:
+      - [action, items, identity]
       - [action, items, captured, identity]
+      - [items, captured, identity]
+      - [items, captured, tighten, identity]
+      - [captured, tighten, identity]
+      - [captured, tighten, auto, identity]
+      - [tighten, auto, identity]
+      - [tighten, auto, suspend, identity]
 
   - must_id: "item:A.5.16:rev_contractor_expiry"
-    description: "Contractor-expiry verification (audit that expired contractor identities are actually disabled, n..."
+    description: "Contractor-expiry verification (audit that expired contractor identities are actually disabled, not just flagged)"
     excerpt_keywords:
       - [contractor, expiry, identity]
+      - [contractor, expiry, verification, identity]
+      - [expiry, verification, identity]
+      - [expiry, verification, audit, identity]
+      - [verification, audit, identity]
+      - [verification, audit, expired, identity]
+      - [audit, expired, identity]
+      - [audit, expired, contractor, identity]
 
-  - must_id: "item:A.5.16:rev_date"
-    description: "Review date within the planned 180-day interval"
+  - must_id: "item:A.5.16:rev_service_hygiene"
+    description: "Service-account hygiene audit (sample of service accounts re-validated: owner still employed, scope still appropriate, expiry not lapsed)"
     excerpt_keywords:
-      - [review, date, planned, identity]
+      - [service, hygiene, identity]
+      - [service, account, identity]
+      - [service, account, hygiene, identity]
+      - [account, hygiene, identity]
+      - [account, hygiene, audit, identity]
+      - [hygiene, audit, identity]
+      - [hygiene, audit, sample, identity]
+      - [audit, sample, identity]
+
+  - must_id: "item:A.5.16:rev_termination_sla"
+    description: "Termination-SLA analysis (gap between leaver effective_date and identity_revocation date; outliers investigated)"
+    excerpt_keywords:
+      - [termination, sla, identity]
+      - [termination, sla, analysis, identity]
+      - [sla, analysis, identity]
+      - [sla, analysis, gap, identity]
+      - [analysis, gap, identity]
+      - [analysis, gap, between, identity]
+      - [gap, between, identity]
+      - [gap, between, leaver, identity]
 
   - must_id: "item:A.5.16:rev_orphan_analysis"
     description: "Orphan analysis (identities without active HR record / business reason; remediation per orphan)"
     excerpt_keywords:
       - [orphan, analysis, identity]
+      - [orphan, analysis, identities, identity]
+      - [analysis, identities, identity]
+      - [analysis, identities, without, identity]
+      - [identities, without, identity]
+      - [identities, without, active, identity]
+      - [without, active, identity]
+      - [without, active, business, identity]
 
   - must_id: "item:A.5.16:rev_reviewer"
     description: "Reviewer identity (IT identity-lead + HR partner + InfoSec lead jointly)"
     excerpt_keywords:
       - [reviewer, identity]
+      - [reviewer, identity, identity]
+      - [identity, identity]
+      - [identity, identity, lead]
+      - [identity, lead]
+      - [identity, lead, partner]
+      - [lead, partner, identity]
+      - [lead, partner, infosec, identity]
 
-  - must_id: "item:A.5.16:rev_service_hygiene"
-    description: "Service-account hygiene audit (sample of service accounts re-validated: owner still employed, sco..."
+  - must_id: "item:A.5.16:rev_date"
+    description: "Review date within the planned 180-day interval"
     excerpt_keywords:
-      - [service, hygiene, identity]
+      - [review, date, identity]
+      - [review, date, within, identity]
+      - [date, within, identity]
+      - [date, within, planned, identity]
+      - [within, planned, identity]
+      - [within, planned, 180, identity]
+      - [planned, 180, identity]
+      - [planned, 180, day, identity]
 
-  - must_id: "item:A.5.16:rev_termination_sla"
-    description: "Termination-SLA analysis (gap between leaver effective_date and identity_revocation date; outlier..."
-    excerpt_keywords:
-      - [termination, sla, identity]

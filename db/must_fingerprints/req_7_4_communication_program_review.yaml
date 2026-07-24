@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:7.4:communication_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:7.4:communication_program_review"
@@ -15,24 +16,58 @@ must_fingerprints:
     excerpt_keywords:
       - [audience, coverage, communication]
       - [audience, coverage, check, communication]
-
-  - must_id: "item:7.4:rev_cadence_check"
-    description: "Cadence check — planned communications actually delivered on time"
-    excerpt_keywords:
-      - [cadence, check, communication]
-
-  - must_id: "item:7.4:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, communication]
+      - [coverage, check, communication]
+      - [coverage, check, every, communication]
+      - [check, every, communication]
+      - [check, every, scope, communication]
+      - [every, scope, communication]
+      - [every, scope, audience, communication]
 
   - must_id: "item:7.4:rev_mandated_deadlines"
     description: "Mandated deadlines check — every regulator-mandated comm met its SLA"
     excerpt_keywords:
       - [mandated, deadlines, communication]
       - [mandated, deadlines, check, communication]
+      - [deadlines, check, communication]
+      - [deadlines, check, every, communication]
+      - [check, every, communication]
+      - [check, every, regulator, communication]
+      - [every, regulator, communication]
+      - [every, regulator, mandated, communication]
+
+  - must_id: "item:7.4:rev_cadence_check"
+    description: "Cadence check — planned communications actually delivered on time"
+    excerpt_keywords:
+      - [cadence, check, communication]
+      - [cadence, check, planned, communication]
+      - [check, planned, communication]
+      - [check, planned, communications, communication]
+      - [planned, communications, communication]
+      - [planned, communications, actually, communication]
+      - [communications, actually, communication]
+      - [communications, actually, delivered, communication]
 
   - must_id: "item:7.4:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + comms lead)"
     excerpt_keywords:
       - [reviewer, identity, communication]
+      - [reviewer, identity, isms, communication]
+      - [identity, isms, communication]
+      - [identity, isms, manager, communication]
+      - [isms, manager, communication]
+      - [isms, manager, comms, communication]
+      - [manager, comms, communication]
+      - [manager, comms, lead, communication]
+
+  - must_id: "item:7.4:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, communication]
+      - [review, date, within, communication]
+      - [date, within, communication]
+      - [date, within, planned, communication]
+      - [within, planned, communication]
+      - [within, planned, interval, communication]
+      - [planned, interval, communication]
+      - [per, revocation, communication]
+

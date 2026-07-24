@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.12:cabling_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.12:cabling_program_review"
@@ -10,29 +11,62 @@ target_control: "A.7.12"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.7.12:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, cabling]
-
-  - must_id: "item:A.7.12:rev_inspection_coverage"
-    description: "Per-run inspection coverage in period (all runs inspected per planned cadence)"
-    excerpt_keywords:
-      - [inspection, coverage, cabling]
-
   - must_id: "item:A.7.12:rev_register_update"
     description: "Changes propagated to the register / procedure"
     excerpt_keywords:
-      - [register, update, cabling]
-      - [changes, propagated, register, procedure, cabling]
+      - [changes, propagated, cabling]
+      - [per, revocation, cabling]
+      - [per, revoked, identity, cabling]
+      - [revocation, record, cabling]
+      - [review, findings, cabling]
+      - [audit, outcomes, cabling]
+      - [last, reviewed, cabling]
 
   - must_id: "item:A.7.12:rev_remediation_closure"
     description: "Remediation closure rate from prior period"
     excerpt_keywords:
       - [remediation, closure, cabling]
-      - [remediation, closure, rate, prior, cabling]
+      - [remediation, closure, rate, cabling]
+      - [closure, rate, cabling]
+      - [closure, rate, prior, cabling]
+      - [rate, prior, cabling]
+      - [rate, prior, period, cabling]
+      - [prior, period, cabling]
+      - [per, revocation, cabling]
+
+  - must_id: "item:A.7.12:rev_inspection_coverage"
+    description: "Per-run inspection coverage in period (all runs inspected per planned cadence)"
+    excerpt_keywords:
+      - [inspection, coverage, cabling]
+      - [run, inspection, cabling]
+      - [run, inspection, coverage, cabling]
+      - [inspection, coverage, period, cabling]
+      - [coverage, period, cabling]
+      - [coverage, period, runs, cabling]
+      - [period, runs, cabling]
+      - [period, runs, inspected, cabling]
 
   - must_id: "item:A.7.12:rev_reviewer"
     description: "Reviewer identity (Facilities + Network lead + InfoSec)"
     excerpt_keywords:
       - [reviewer, identity, cabling]
+      - [reviewer, identity, facilities, cabling]
+      - [identity, facilities, cabling]
+      - [identity, facilities, network, cabling]
+      - [facilities, network, cabling]
+      - [facilities, network, lead, cabling]
+      - [network, lead, cabling]
+      - [network, lead, infosec, cabling]
+
+  - must_id: "item:A.7.12:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, cabling]
+      - [review, date, within, cabling]
+      - [date, within, cabling]
+      - [date, within, planned, cabling]
+      - [within, planned, cabling]
+      - [within, planned, interval, cabling]
+      - [planned, interval, cabling]
+      - [per, revocation, cabling]
+

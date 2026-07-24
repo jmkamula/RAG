@@ -14,50 +14,50 @@ must_fingerprints:
   - must_id: "item:Art.28:reg_security_check"
     description: "Per-row Art.32-equivalent security assurance source (certification / audit report / questionnaire)"
     excerpt_keywords:
-      - [security, check]
-      - [art, equivalent]
-      - [art, equivalent, security]
-      - [equivalent, security]
-      - [equivalent, security, assurance]
-      - [security, assurance]
-      - [security, assurance, source]
-      - [assurance, source]
+      - [security, check, processor]
+      - [art, equivalent, processor]
+      - [art, equivalent, security, processor]
+      - [equivalent, security, processor]
+      - [equivalent, security, assurance, processor]
+      - [security, assurance, processor]
+      - [security, assurance, source, processor]
+      - [assurance, source, processor]
 
   - must_id: "item:Art.28:reg_subprocessors"
     description: "Per-row authorised sub-processor list (or 'none')"
     excerpt_keywords:
-      - [authorised, sub]
+      - [authorised, sub, processor]
       - [authorised, sub, processor]
       - [sub, processor]
       - [sub, processor, none]
       - [processor, none]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [per, row, processor]
+      - [each, row, processor]
+      - [column, containing, processor]
 
   - must_id: "item:Art.28:reg_dpa_version"
     description: "Per-row DPA version + execution date"
     excerpt_keywords:
-      - [dpa, version]
-      - [dpa, version, execution]
-      - [version, execution]
-      - [version, execution, date]
-      - [execution, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [dpa, version, processor]
+      - [dpa, version, execution, processor]
+      - [version, execution, processor]
+      - [version, execution, date, processor]
+      - [execution, date, processor]
+      - [per, row, processor]
+      - [each, row, processor]
+      - [column, containing, processor]
 
   - must_id: "item:Art.28:reg_data_categories"
     description: "Per-row data categories processed (cross-link to Art.30 RoPA)"
     excerpt_keywords:
-      - [categories, processed]
-      - [categories, processed, cross]
-      - [processed, cross]
-      - [processed, cross, art]
-      - [cross, art]
-      - [cross, art, ropa]
-      - [art, ropa]
-      - [per, row]
+      - [categories, processed, processor]
+      - [categories, processed, cross, processor]
+      - [processed, cross, processor]
+      - [processed, cross, art, processor]
+      - [cross, art, processor]
+      - [cross, art, ropa, processor]
+      - [art, ropa, processor]
+      - [per, row, processor]
 
   - must_id: "item:Art.28:reg_processor_id"
     description: "Processor identifier per row (entity name, jurisdiction)"
@@ -65,9 +65,9 @@ must_fingerprints:
       - [processor, id]
       - [processor, identifier]
       - [processor, identifier, entity]
-      - [identifier, entity]
-      - [identifier, entity, name]
-      - [entity, name]
-      - [entity, name, jurisdiction]
-      - [name, jurisdiction]
+      - [identifier, entity, processor]
+      - [identifier, entity, name, processor]
+      - [entity, name, processor]
+      - [entity, name, jurisdiction, processor]
+      - [name, jurisdiction, processor]
 

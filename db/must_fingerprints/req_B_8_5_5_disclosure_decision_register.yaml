@@ -14,26 +14,26 @@ must_fingerprints:
   - must_id: "item:B.8.5.5:reg_customer_authorisation"
     description: "Customer authorisation reference per row (contract clause / one-off approval)"
     excerpt_keywords:
-      - [customer, authorisation]
-      - [customer, authorisation, reference]
-      - [authorisation, reference]
-      - [authorisation, reference, contract]
-      - [reference, contract]
-      - [reference, contract, clause]
-      - [contract, clause]
-      - [contract, clause, one]
+      - [customer, authorisation, legally]
+      - [customer, authorisation, reference, legally]
+      - [authorisation, reference, legally]
+      - [authorisation, reference, contract, legally]
+      - [reference, contract, legally]
+      - [reference, contract, clause, legally]
+      - [contract, clause, legally]
+      - [contract, clause, one, legally]
 
   - must_id: "item:B.8.5.5:reg_outcome"
     description: "Outcome per row (rejected / accepted / customer-consulted)"
     excerpt_keywords:
-      - [outcome, rejected]
-      - [outcome, rejected, accepted]
-      - [rejected, accepted]
-      - [rejected, accepted, customer]
-      - [accepted, customer]
-      - [accepted, customer, consulted]
-      - [customer, consulted]
-      - [per, row]
+      - [outcome, rejected, legally]
+      - [outcome, rejected, accepted, legally]
+      - [rejected, accepted, legally]
+      - [rejected, accepted, customer, legally]
+      - [accepted, customer, legally]
+      - [accepted, customer, consulted, legally]
+      - [customer, consulted, legally]
+      - [per, row, legally]
 
   - must_id: "item:B.8.5.5:reg_binding_classification"
     description: "Binding classification per row (legally binding / not binding)"
@@ -50,22 +50,22 @@ must_fingerprints:
   - must_id: "item:B.8.5.5:reg_request_source"
     description: "Request source per row"
     excerpt_keywords:
-      - [request, source]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [request, source, legally]
+      - [per, row, legally]
+      - [each, row, legally]
+      - [column, containing, legally]
+      - [each, entry, legally]
+      - [column, header, legally]
 
   - must_id: "item:B.8.5.5:reg_decision_id"
     description: "Unique decision identifier per row"
     excerpt_keywords:
-      - [decision, id]
-      - [unique, decision]
-      - [unique, decision, identifier]
-      - [decision, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [decision, id, legally]
+      - [unique, decision, legally]
+      - [unique, decision, identifier, legally]
+      - [decision, identifier, legally]
+      - [per, row, legally]
+      - [each, row, legally]
+      - [column, containing, legally]
+      - [each, entry, legally]
 

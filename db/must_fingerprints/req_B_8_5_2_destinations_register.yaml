@@ -14,44 +14,44 @@ must_fingerprints:
   - must_id: "item:B.8.5.2:reg_basis_link"
     description: "Basis link per row (link to B.8.5.1)"
     excerpt_keywords:
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, countries]
+      - [each, row, countries]
+      - [column, containing, countries]
+      - [each, entry, countries]
+      - [column, header, countries]
 
   - must_id: "item:B.8.5.2:reg_customer_disclosure"
     description: "Customer disclosure status per row (published in DPA schedule / trust page / on request)"
     excerpt_keywords:
-      - [customer, disclosure]
-      - [customer, disclosure, status]
-      - [disclosure, status]
-      - [disclosure, status, published]
-      - [status, published]
-      - [status, published, dpa]
-      - [published, dpa]
-      - [published, dpa, schedule]
+      - [customer, disclosure, countries]
+      - [customer, disclosure, status, countries]
+      - [disclosure, status, countries]
+      - [disclosure, status, published, countries]
+      - [status, published, countries]
+      - [status, published, dpa, countries]
+      - [published, dpa, countries]
+      - [published, dpa, schedule, countries]
 
   - must_id: "item:B.8.5.2:reg_role"
     description: "Role per row (direct storage / subprocessor / support access)"
     excerpt_keywords:
-      - [role, direct]
-      - [role, direct, storage]
-      - [direct, storage]
-      - [direct, storage, subprocessor]
-      - [storage, subprocessor]
-      - [storage, subprocessor, support]
-      - [subprocessor, support]
-      - [subprocessor, support, access]
+      - [role, direct, countries]
+      - [role, direct, storage, countries]
+      - [direct, storage, countries]
+      - [direct, storage, subprocessor, countries]
+      - [storage, subprocessor, countries]
+      - [storage, subprocessor, support, countries]
+      - [subprocessor, support, countries]
+      - [subprocessor, support, access, countries]
 
   - must_id: "item:B.8.5.2:reg_destination_id"
     description: "Destination identifier per row"
     excerpt_keywords:
-      - [destination, id]
-      - [destination, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [destination, id, countries]
+      - [destination, identifier, countries]
+      - [per, row, countries]
+      - [each, row, countries]
+      - [column, containing, countries]
+      - [each, entry, countries]
+      - [column, header, countries]
 

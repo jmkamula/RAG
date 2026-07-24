@@ -14,69 +14,69 @@ must_fingerprints:
   - must_id: "item:A.7.2.4:reg_channel"
     description: "Collection channel per row (web / mobile / paper / verbal)"
     excerpt_keywords:
-      - [collection, channel]
-      - [collection, channel, web]
-      - [channel, web]
-      - [channel, web, mobile]
-      - [web, mobile]
-      - [web, mobile, paper]
-      - [mobile, paper]
-      - [mobile, paper, verbal]
+      - [collection, channel, obtain]
+      - [collection, channel, web, obtain]
+      - [channel, web, obtain]
+      - [channel, web, mobile, obtain]
+      - [web, mobile, obtain]
+      - [web, mobile, paper, obtain]
+      - [mobile, paper, obtain]
+      - [mobile, paper, verbal, obtain]
 
   - must_id: "item:A.7.2.4:reg_artifact_version"
     description: "Artifact version consented to per row (link to A.7.2.3 register)"
     excerpt_keywords:
-      - [artifact, version]
-      - [artifact, version, consented]
-      - [version, consented]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [artifact, version, obtain]
+      - [artifact, version, consented, obtain]
+      - [version, consented, obtain]
+      - [per, row, obtain]
+      - [each, row, obtain]
+      - [column, containing, obtain]
+      - [each, entry, obtain]
+      - [column, header, obtain]
 
   - must_id: "item:A.7.2.4:reg_purposes_consented"
     description: "Purposes consented to per row (list of A.7.2.1 purpose ids)"
     excerpt_keywords:
-      - [purposes, consented]
-      - [purposes, consented, purpose]
-      - [consented, purpose]
-      - [consented, purpose, ids]
-      - [purpose, ids]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [purposes, consented, obtain]
+      - [purposes, consented, purpose, obtain]
+      - [consented, purpose, obtain]
+      - [consented, purpose, ids, obtain]
+      - [purpose, ids, obtain]
+      - [per, row, obtain]
+      - [each, row, obtain]
+      - [column, containing, obtain]
 
   - must_id: "item:A.7.2.4:reg_timestamp"
     description: "Timestamp of consent per row"
     excerpt_keywords:
       - [timestamp, consent]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, obtain]
+      - [each, row, obtain]
+      - [column, containing, obtain]
+      - [each, entry, obtain]
+      - [column, header, obtain]
 
   - must_id: "item:A.7.2.4:reg_subject_id"
     description: "Subject identifier per row"
     excerpt_keywords:
-      - [subject, id]
-      - [subject, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [subject, id, obtain]
+      - [subject, identifier, obtain]
+      - [per, row, obtain]
+      - [each, row, obtain]
+      - [column, containing, obtain]
+      - [each, entry, obtain]
+      - [column, header, obtain]
 
   - must_id: "item:A.7.2.4:reg_event_id"
     description: "Unique consent event id per row"
     excerpt_keywords:
-      - [event, id]
+      - [event, id, obtain]
       - [unique, consent]
       - [unique, consent, event]
       - [consent, event]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [per, row, obtain]
+      - [each, row, obtain]
+      - [column, containing, obtain]
+      - [each, entry, obtain]
 

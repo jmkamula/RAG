@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.5.8:project_security_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.8:project_security_program_review"
@@ -11,36 +12,86 @@ target_standard: "ISO27001:2022"
 
 must_fingerprints:
   - must_id: "item:A.5.8:rev_actions"
-    description: "Action items captured for the program (e.g. update templates, retrain PMs, tighten tiering criter..."
+    description: "Action items captured for the program (e.g"
     excerpt_keywords:
-      - [action, items, captured, program, project]
+      - [action, items, project]
+      - [action, items, captured, project]
+      - [items, captured, project]
+      - [items, captured, program, project]
+      - [captured, program, project]
+      - [captured, program, update, project]
+      - [program, update, project]
+      - [program, update, templates, project]
 
   - must_id: "item:A.5.8:rev_capacity"
-    description: "InfoSec capacity vs project pipeline reviewed (gates fail silently when reviewer capacity is exha..."
+    description: "InfoSec capacity vs project pipeline reviewed (gates fail silently when reviewer capacity is exhausted)"
     excerpt_keywords:
-      - [infosec, capacity, project, pipeline]
+      - [infosec, capacity, project]
+      - [infosec, capacity, project]
+      - [capacity, project]
+      - [capacity, project, pipeline]
+      - [project, pipeline]
+      - [project, pipeline, reviewed]
+      - [pipeline, reviewed, project]
+      - [pipeline, reviewed, gates, project]
 
-  - must_id: "item:A.5.8:rev_date"
-    description: "Review date within the planned annual interval"
+  - must_id: "item:A.5.8:rev_tiering"
+    description: "Tiering audit (sample of projects re-tiered to validate the tier criteria are still calibrated to actual risk)"
     excerpt_keywords:
-      - [review, date, planned, annual, project]
+      - [tiering, audit, project]
+      - [tiering, audit, sample, project]
+      - [audit, sample, project]
+      - [audit, sample, projects, project]
+      - [sample, projects, project]
+      - [sample, projects, tiered, project]
+      - [projects, tiered, project]
+      - [projects, tiered, validate, project]
+
+  - must_id: "item:A.5.8:rev_late_detection"
+    description: "Late-detection analysis (security issues surfaced at or after go-live that should have been caught earlier)"
+    excerpt_keywords:
+      - [late, detection, project]
+      - [late, detection, analysis, project]
+      - [detection, analysis, project]
+      - [detection, analysis, security, project]
+      - [analysis, security, project]
+      - [analysis, security, issues, project]
+      - [security, issues, project]
+      - [security, issues, surfaced, project]
 
   - must_id: "item:A.5.8:rev_gate_skip"
     description: "Gate-skip rate analysed (projects that bypassed gates; root cause and remediation per skip)"
     excerpt_keywords:
       - [gate, skip, project]
-
-  - must_id: "item:A.5.8:rev_late_detection"
-    description: "Late-detection analysis (security issues surfaced at or after go-live that should have been caugh..."
-    excerpt_keywords:
-      - [late, detection, project]
+      - [gate, skip, rate, project]
+      - [skip, rate, project]
+      - [skip, rate, analysed, project]
+      - [rate, analysed, project]
+      - [rate, analysed, projects, project]
+      - [analysed, projects, project]
+      - [analysed, projects, bypassed, project]
 
   - must_id: "item:A.5.8:rev_reviewer"
     description: "Reviewer identity (InfoSec lead + PMO/project office head jointly)"
     excerpt_keywords:
       - [reviewer, identity, project]
+      - [reviewer, identity, infosec, project]
+      - [identity, infosec, project]
+      - [identity, infosec, lead, project]
+      - [infosec, lead, project]
+      - [infosec, lead, pmo, project]
+      - [lead, pmo, project]
+      - [lead, pmo, project]
 
-  - must_id: "item:A.5.8:rev_tiering"
-    description: "Tiering audit (sample of projects re-tiered to validate the tier criteria are still calibrated to..."
+  - must_id: "item:A.5.8:rev_date"
+    description: "Review date within the planned annual interval"
     excerpt_keywords:
-      - [tiering, audit, project]
+      - [review, date, project]
+      - [review, date, within, project]
+      - [date, within, project]
+      - [date, within, planned, project]
+      - [within, planned, project]
+      - [within, planned, annual, project]
+      - [planned, annual, project]
+      - [planned, annual, interval, project]
+

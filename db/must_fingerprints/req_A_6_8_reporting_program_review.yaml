@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.6.8:reporting_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.6.8:reporting_program_review"
@@ -10,41 +11,87 @@ target_control: "A.6.8"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.6.8:rev_acknowledgment_rate"
-    description: "Acknowledgment rate to reporters (where reporter known) — drives reporter satisfaction and ongoin..."
-    excerpt_keywords:
-      - [acknowledgment, rate, event]
-      - [acknowledgment, rate, reporters, event]
-
-  - must_id: "item:A.6.8:rev_channel_mix"
-    description: "Channel-mix analysis (which channels are being used; under-used channels may need awareness promo..."
-    excerpt_keywords:
-      - [channel, mix, event]
-
-  - must_id: "item:A.6.8:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, event]
-
   - must_id: "item:A.6.8:rev_register_update"
     description: "Changes propagated to the procedure / scope with reference to this review"
     excerpt_keywords:
-      - [register, update, event]
-      - [changes, propagated, procedure, scope, event]
+      - [changes, propagated, event]
+      - [changes, propagated, scope, event]
+      - [propagated, scope, event]
+      - [propagated, scope, reference, event]
+      - [scope, reference, event]
+      - [scope, reference, review, event]
+      - [reference, review, event]
+      - [per, revocation, event]
+
+  - must_id: "item:A.6.8:rev_acknowledgment_rate"
+    description: "Acknowledgment rate to reporters (where reporter known) — drives reporter satisfaction and ongoing willingness to report"
+    excerpt_keywords:
+      - [acknowledgment, rate, event]
+      - [acknowledgment, rate, reporters, event]
+      - [rate, reporters, event]
+      - [rate, reporters, reporter, event]
+      - [reporters, reporter, event]
+      - [reporters, reporter, known, event]
+      - [reporter, known, event]
+      - [reporter, known, reporter, event]
+
+  - must_id: "item:A.6.8:rev_triage_handoff"
+    description: "Triage handoff check — every report reached A.5.25 triage; no reports lost in the handoff; cycle time from report to triage measured"
+    excerpt_keywords:
+      - [triage, handoff, event]
+      - [triage, handoff, check, event]
+      - [handoff, check, event]
+      - [handoff, check, every, event]
+      - [check, every, event]
+      - [check, every, report, event]
+      - [every, report, event]
+      - [every, report, reached, event]
+
+  - must_id: "item:A.6.8:rev_channel_mix"
+    description: "Channel-mix analysis (which channels are being used; under-used channels may need awareness promotion or retirement)"
+    excerpt_keywords:
+      - [channel, mix, event]
+      - [channel, mix, analysis, event]
+      - [mix, analysis, event]
+      - [mix, analysis, channels, event]
+      - [analysis, channels, event]
+      - [analysis, channels, being, event]
+      - [channels, being, event]
+      - [channels, being, used, event]
+
+  - must_id: "item:A.6.8:rev_volume_trend"
+    description: "Volume trend analysis (report rate per segment — sudden drops may indicate under-reporting; sudden spikes may indicate a campaign or a known"
+    excerpt_keywords:
+      - [volume, trend, event]
+      - [volume, trend, analysis, event]
+      - [trend, analysis, event]
+      - [trend, analysis, report, event]
+      - [analysis, report, event]
+      - [analysis, report, rate, event]
+      - [report, rate, event]
+      - [report, rate, segment, event]
 
   - must_id: "item:A.6.8:rev_reviewer"
     description: "Reviewer identity (InfoSec lead + HR partner; Legal for whistleblower-territory cases)"
     excerpt_keywords:
       - [reviewer, identity, event]
+      - [reviewer, identity, infosec, event]
+      - [identity, infosec, event]
+      - [identity, infosec, lead, event]
+      - [infosec, lead, event]
+      - [infosec, lead, partner, event]
+      - [lead, partner, event]
+      - [lead, partner, legal, event]
 
-  - must_id: "item:A.6.8:rev_triage_handoff"
-    description: "Triage handoff check — every report reached A.5.25 triage; no reports lost in the handoff; cycle ..."
+  - must_id: "item:A.6.8:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [triage, handoff, event]
-      - [triage, handoff, check, event]
+      - [review, date, event]
+      - [review, date, within, event]
+      - [date, within, event]
+      - [date, within, planned, event]
+      - [within, planned, event]
+      - [within, planned, interval, event]
+      - [planned, interval, event]
+      - [per, revocation, event]
 
-  - must_id: "item:A.6.8:rev_volume_trend"
-    description: "Volume trend analysis (report rate per segment — sudden drops may indicate under-reporting; sudde..."
-    excerpt_keywords:
-      - [volume, trend, event]
-      - [volume, trend, analysis, event]

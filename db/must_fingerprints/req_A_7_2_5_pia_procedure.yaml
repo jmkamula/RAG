@@ -14,72 +14,72 @@ must_fingerprints:
   - must_id: "item:A.7.2.5:proc_29134_alignment"
     description: "Alignment with ISO/IEC 29134 methodology (referenced by §7.2.5)"
     excerpt_keywords:
-      - [29134, alignment]
-      - [alignment, iso]
-      - [alignment, iso, iec]
-      - [iso, iec]
-      - [iso, iec, 29134]
-      - [iec, 29134]
-      - [iec, 29134, methodology]
-      - [29134, methodology]
+      - [29134, alignment, privacy]
+      - [alignment, iso, privacy]
+      - [alignment, iso, iec, privacy]
+      - [iso, iec, privacy]
+      - [iso, iec, 29134, privacy]
+      - [iec, 29134, privacy]
+      - [iec, 29134, methodology, privacy]
+      - [29134, methodology, privacy]
 
   - must_id: "item:A.7.2.5:proc_prior_consultation"
     description: "Prior-consultation trigger — where residual high risk remains, SA consulted per Art.36"
     excerpt_keywords:
-      - [prior, consultation]
-      - [prior, consultation, trigger]
-      - [consultation, trigger]
-      - [consultation, trigger, residual]
-      - [trigger, residual]
-      - [trigger, residual, high]
-      - [residual, high]
-      - [residual, high, risk]
+      - [prior, consultation, privacy]
+      - [prior, consultation, trigger, privacy]
+      - [consultation, trigger, privacy]
+      - [consultation, trigger, residual, privacy]
+      - [trigger, residual, privacy]
+      - [trigger, residual, high, privacy]
+      - [residual, high, privacy]
+      - [residual, high, risk, privacy]
 
   - must_id: "item:A.7.2.5:proc_signoff"
     description: "Signoff — DPO signoff + business-owner signoff before processing commences"
     excerpt_keywords:
-      - [signoff, dpo]
-      - [signoff, dpo, signoff]
-      - [dpo, signoff]
-      - [dpo, signoff, business]
-      - [signoff, business]
-      - [signoff, business, owner]
-      - [business, owner]
-      - [business, owner, signoff]
+      - [signoff, dpo, privacy]
+      - [signoff, dpo, signoff, privacy]
+      - [dpo, signoff, privacy]
+      - [dpo, signoff, business, privacy]
+      - [signoff, business, privacy]
+      - [signoff, business, owner, privacy]
+      - [business, owner, privacy]
+      - [business, owner, signoff, privacy]
 
   - must_id: "item:A.7.2.5:proc_consultation"
     description: "Stakeholder consultation — DPO opinion (Art.35.2) + subject-representative views where appropriate (Art.35.9)"
     excerpt_keywords:
-      - [stakeholder, consultation]
-      - [stakeholder, consultation, dpo]
-      - [consultation, dpo]
-      - [consultation, dpo, opinion]
-      - [dpo, opinion]
-      - [dpo, opinion, art]
-      - [opinion, art]
-      - [opinion, art, subject]
+      - [stakeholder, consultation, privacy]
+      - [stakeholder, consultation, dpo, privacy]
+      - [consultation, dpo, privacy]
+      - [consultation, dpo, opinion, privacy]
+      - [dpo, opinion, privacy]
+      - [dpo, opinion, art, privacy]
+      - [opinion, art, privacy]
+      - [opinion, art, subject, privacy]
 
   - must_id: "item:A.7.2.5:proc_assessment_scope"
     description: "Assessment scope — PII types + storage + transfers + retention + risks to subjects + safeguards + residual risk"
     excerpt_keywords:
-      - [assessment, scope]
-      - [assessment, scope, pii]
-      - [scope, pii]
-      - [scope, pii, types]
-      - [pii, types]
-      - [pii, types, storage]
-      - [types, storage]
-      - [types, storage, transfers]
+      - [assessment, scope, privacy]
+      - [assessment, scope, pii, privacy]
+      - [scope, pii, privacy]
+      - [scope, pii, types, privacy]
+      - [pii, types, privacy]
+      - [pii, types, storage, privacy]
+      - [types, storage, privacy]
+      - [types, storage, transfers, privacy]
 
   - must_id: "item:A.7.2.5:proc_trigger_criteria"
     description: "Trigger criteria — new processing / material changes / high-risk indicators (Art.35.3 mandatory list: systematic evaluation + large-scale sp"
     excerpt_keywords:
-      - [trigger, criteria]
-      - [trigger, criteria, new]
-      - [criteria, new]
-      - [criteria, new, processing]
-      - [new, processing]
-      - [new, processing, material]
-      - [processing, material]
-      - [processing, material, changes]
+      - [trigger, criteria, privacy]
+      - [trigger, criteria, new, privacy]
+      - [criteria, new, privacy]
+      - [criteria, new, processing, privacy]
+      - [new, processing, privacy]
+      - [new, processing, material, privacy]
+      - [processing, material, privacy]
+      - [processing, material, changes, privacy]
 

@@ -14,46 +14,46 @@ must_fingerprints:
   - must_id: "item:A.7.3.3:reg_deployment_date"
     description: "Deployment date per row"
     excerpt_keywords:
-      - [deployment, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [deployment, date, providing]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
+      - [each, entry, providing]
+      - [column, header, providing]
 
   - must_id: "item:A.7.3.3:reg_notice_version"
     description: "Notice version served per row (link to A.7.3.2 artifact register)"
     excerpt_keywords:
-      - [notice, version]
-      - [notice, version, served]
-      - [version, served]
-      - [version, served, artifact]
-      - [served, artifact]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [notice, version, providing]
+      - [notice, version, served, providing]
+      - [version, served, providing]
+      - [version, served, artifact, providing]
+      - [served, artifact, providing]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
 
   - must_id: "item:A.7.3.3:reg_touchpoint_type"
     description: "Touchpoint type per row (signup / renewal / cookie banner / just-in-time prompt / periodic reminder)"
     excerpt_keywords:
-      - [touchpoint, signup]
-      - [touchpoint, signup, renewal]
-      - [signup, renewal]
-      - [signup, renewal, cookie]
-      - [renewal, cookie]
-      - [renewal, cookie, banner]
-      - [cookie, banner]
-      - [cookie, banner, just]
+      - [touchpoint, signup, providing]
+      - [touchpoint, signup, renewal, providing]
+      - [signup, renewal, providing]
+      - [signup, renewal, cookie, providing]
+      - [renewal, cookie, providing]
+      - [renewal, cookie, banner, providing]
+      - [cookie, banner, providing]
+      - [cookie, banner, just, providing]
 
   - must_id: "item:A.7.3.3:reg_touchpoint_id"
     description: "Unique touchpoint identifier per row"
     excerpt_keywords:
-      - [touchpoint, id]
-      - [unique, touchpoint]
-      - [unique, touchpoint, identifier]
-      - [touchpoint, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [touchpoint, id, providing]
+      - [unique, touchpoint, providing]
+      - [unique, touchpoint, identifier, providing]
+      - [touchpoint, identifier, providing]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
+      - [each, entry, providing]
 

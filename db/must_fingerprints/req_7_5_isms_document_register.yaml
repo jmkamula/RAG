@@ -14,76 +14,76 @@ must_fingerprints:
   - must_id: "item:7.5:reg_classification"
     description: "Information classification per row (cross-link to A.5.12)"
     excerpt_keywords:
-      - [classification, cross]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [classification, cross, documented]
+      - [per, row, documented]
+      - [each, row, documented]
+      - [column, containing, documented]
+      - [each, entry, documented]
+      - [column, header, documented]
 
   - must_id: "item:7.5:reg_next_review"
     description: "Next review date per row (drives staleness alerts)"
     excerpt_keywords:
-      - [next, review]
-      - [next, review, date]
-      - [review, date]
-      - [review, date, staleness]
-      - [date, staleness]
-      - [date, staleness, alerts]
-      - [staleness, alerts]
-      - [per, row]
+      - [next, review, documented]
+      - [next, review, date, documented]
+      - [review, date, documented]
+      - [review, date, staleness, documented]
+      - [date, staleness, documented]
+      - [date, staleness, alerts, documented]
+      - [staleness, alerts, documented]
+      - [per, row, documented]
 
   - must_id: "item:7.5:reg_approval_date"
     description: "Last approval date per row"
     excerpt_keywords:
-      - [approval, date]
-      - [last, approval]
-      - [last, approval, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [approval, date, documented]
+      - [last, approval, documented]
+      - [last, approval, date, documented]
+      - [per, row, documented]
+      - [each, row, documented]
+      - [column, containing, documented]
+      - [each, entry, documented]
+      - [column, header, documented]
 
   - must_id: "item:7.5:reg_version"
     description: "Current version per row"
     excerpt_keywords:
-      - [current, version]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [current, version, documented]
+      - [per, row, documented]
+      - [each, row, documented]
+      - [column, containing, documented]
+      - [each, entry, documented]
+      - [column, header, documented]
 
   - must_id: "item:7.5:reg_owner"
     description: "Document owner per row"
     excerpt_keywords:
-      - [document, owner]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [document, owner, documented]
+      - [per, row, documented]
+      - [each, row, documented]
+      - [column, containing, documented]
+      - [each, entry, documented]
+      - [column, header, documented]
 
   - must_id: "item:7.5:reg_title"
     description: "Document title per row"
     excerpt_keywords:
-      - [document, title]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [document, title, documented]
+      - [per, row, documented]
+      - [each, row, documented]
+      - [column, containing, documented]
+      - [each, entry, documented]
+      - [column, header, documented]
 
   - must_id: "item:7.5:reg_doc_id"
     description: "Unique document identifier per row"
     excerpt_keywords:
-      - [doc, id]
-      - [unique, document]
-      - [unique, document, identifier]
-      - [document, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [doc, id, documented]
+      - [unique, document, documented]
+      - [unique, document, identifier, documented]
+      - [document, identifier, documented]
+      - [per, row, documented]
+      - [each, row, documented]
+      - [column, containing, documented]
+      - [each, entry, documented]
 

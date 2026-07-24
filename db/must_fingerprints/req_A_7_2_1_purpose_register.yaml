@@ -14,72 +14,72 @@ must_fingerprints:
   - must_id: "item:A.7.2.1:reg_retention"
     description: "Retention period per purpose"
     excerpt_keywords:
-      - [retention, period]
-      - [retention, period, purpose]
-      - [period, purpose]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [retention, period, identify]
+      - [retention, period, purpose, identify]
+      - [period, purpose, identify]
+      - [per, row, identify]
+      - [each, row, identify]
+      - [column, containing, identify]
+      - [each, entry, identify]
+      - [column, header, identify]
 
   - must_id: "item:A.7.2.1:reg_lawful_basis_link"
     description: "Lawful basis link (which A.7.2.2 basis row this purpose relies on)"
     excerpt_keywords:
-      - [lawful, basis]
-      - [lawful, basis, basis]
-      - [basis, basis]
-      - [basis, basis, purpose]
-      - [basis, purpose]
-      - [basis, purpose, relies]
-      - [purpose, relies]
-      - [per, row]
+      - [lawful, basis, identify]
+      - [lawful, basis, basis, identify]
+      - [basis, basis, identify]
+      - [basis, basis, purpose, identify]
+      - [basis, purpose, identify]
+      - [basis, purpose, relies, identify]
+      - [purpose, relies, identify]
+      - [per, row, identify]
 
   - must_id: "item:A.7.2.1:reg_categories"
     description: "Categories of PII + categories of subjects per row"
     excerpt_keywords:
-      - [categories, pii]
-      - [categories, pii, categories]
-      - [pii, categories]
-      - [pii, categories, subjects]
-      - [categories, subjects]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [categories, pii, identify]
+      - [categories, pii, categories, identify]
+      - [pii, categories, identify]
+      - [pii, categories, subjects, identify]
+      - [categories, subjects, identify]
+      - [per, row, identify]
+      - [each, row, identify]
+      - [column, containing, identify]
 
   - must_id: "item:A.7.2.1:reg_activity_link"
     description: "Processing activity link (which §7.2.8 RoPA row(s) implement this purpose)"
     excerpt_keywords:
-      - [processing, activity]
-      - [processing, activity, ropa]
-      - [activity, ropa]
-      - [activity, ropa, implement]
-      - [ropa, implement]
-      - [ropa, implement, purpose]
-      - [implement, purpose]
-      - [per, row]
+      - [processing, activity, identify]
+      - [processing, activity, ropa, identify]
+      - [activity, ropa, identify]
+      - [activity, ropa, implement, identify]
+      - [ropa, implement, identify]
+      - [ropa, implement, purpose, identify]
+      - [implement, purpose, identify]
+      - [per, row, identify]
 
   - must_id: "item:A.7.2.1:reg_purpose_text"
     description: "Purpose statement text (clear + specific)"
     excerpt_keywords:
-      - [purpose, text]
-      - [purpose, statement]
-      - [purpose, statement, text]
-      - [statement, text]
-      - [statement, text, clear]
-      - [text, clear]
-      - [text, clear, specific]
-      - [clear, specific]
+      - [purpose, text, identify]
+      - [purpose, statement, identify]
+      - [purpose, statement, text, identify]
+      - [statement, text, identify]
+      - [statement, text, clear, identify]
+      - [text, clear, identify]
+      - [text, clear, specific, identify]
+      - [clear, specific, identify]
 
   - must_id: "item:A.7.2.1:reg_purpose_id"
     description: "Unique purpose identifier per row"
     excerpt_keywords:
-      - [purpose, id]
-      - [unique, purpose]
-      - [unique, purpose, identifier]
-      - [purpose, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [purpose, id, identify]
+      - [unique, purpose, identify]
+      - [unique, purpose, identifier, identify]
+      - [purpose, identifier, identify]
+      - [per, row, identify]
+      - [each, row, identify]
+      - [column, containing, identify]
+      - [each, entry, identify]
 

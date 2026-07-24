@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.13:privacy_notice_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.13:privacy_notice_program_review"
@@ -10,30 +11,63 @@ target_control: "Art.13"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
+  - must_id: "item:Art.13:rev_publication_archive"
+    description: "Publication archive check — prior versions retained for audit defensibility"
+    excerpt_keywords:
+      - [publication, archive, provided]
+      - [publication, archive, check, provided]
+      - [archive, check, provided]
+      - [archive, check, prior, provided]
+      - [check, prior, provided]
+      - [check, prior, versions, provided]
+      - [prior, versions, provided]
+      - [prior, versions, retained, provided]
+
   - must_id: "item:Art.13:rev_collection_coverage"
     description: "Coverage check — every in-scope collection point still presents the current notice"
     excerpt_keywords:
-      - [collection, coverage, personal]
-      - [coverage, check, personal]
+      - [collection, coverage, provided]
+      - [coverage, check, provided]
+      - [coverage, check, every, provided]
+      - [check, every, provided]
+      - [check, every, scope, provided]
+      - [every, scope, provided]
+      - [every, scope, collection, provided]
+      - [scope, collection, provided]
 
   - must_id: "item:Art.13:rev_content_currency"
     description: "Content currency check — notice reflects current Art.30 RoPA + Art.6 basis register"
     excerpt_keywords:
-      - [content, currency, personal]
-      - [content, currency, check, personal]
-
-  - must_id: "item:Art.13:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, personal]
-
-  - must_id: "item:Art.13:rev_publication_archive"
-    description: "Publication archive check — prior versions retained for audit defensibility"
-    excerpt_keywords:
-      - [publication, archive, personal]
-      - [publication, archive, check, personal]
+      - [content, currency, provided]
+      - [content, currency, check, provided]
+      - [currency, check, provided]
+      - [currency, check, notice, provided]
+      - [check, notice, provided]
+      - [check, notice, reflects, provided]
+      - [notice, reflects, provided]
+      - [notice, reflects, current, provided]
 
   - must_id: "item:Art.13:rev_reviewer"
     description: "Reviewer identity (DPO or Privacy Lead)"
     excerpt_keywords:
-      - [reviewer, identity, personal]
+      - [reviewer, identity, provided]
+      - [reviewer, identity, dpo, provided]
+      - [identity, dpo, provided]
+      - [identity, dpo, privacy, provided]
+      - [dpo, privacy, provided]
+      - [dpo, privacy, lead, provided]
+      - [privacy, lead, provided]
+      - [per, revocation, provided]
+
+  - must_id: "item:Art.13:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, provided]
+      - [review, date, within, provided]
+      - [date, within, provided]
+      - [date, within, planned, provided]
+      - [within, planned, provided]
+      - [within, planned, interval, provided]
+      - [planned, interval, provided]
+      - [per, revocation, provided]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.41:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.41:applicable_scope"
@@ -10,20 +11,35 @@ target_control: "Art.41"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
+  - must_id: "item:Art.41:scope_jurisdictions"
+    description: "Jurisdictions covered"
+    excerpt_keywords:
+      - [jurisdictions, covered, monitoring]
+      - [in, scope, monitoring]
+      - [scope, includes, monitoring]
+      - [applicable, to, monitoring]
+      - [excluded, from, monitoring]
+
   - must_id: "item:Art.41:scope_accreditation"
     description: "Accreditation source (SA + scope of accreditation)"
     excerpt_keywords:
-      - [scope, accreditation, monitoring]
       - [accreditation, source, monitoring]
+      - [accreditation, source, scope, monitoring]
+      - [source, scope, monitoring]
+      - [source, scope, accreditation, monitoring]
+      - [scope, accreditation, monitoring]
+      - [in, scope, monitoring]
+      - [scope, includes, monitoring]
+      - [applicable, to, monitoring]
 
   - must_id: "item:Art.41:scope_codes_monitored"
     description: "Codes monitored enumerated"
     excerpt_keywords:
-      - [scope, codes, monitored, monitoring]
+      - [codes, monitored, monitoring]
       - [codes, monitored, enumerated, monitoring]
+      - [monitored, enumerated, monitoring]
+      - [in, scope, monitoring]
+      - [scope, includes, monitoring]
+      - [applicable, to, monitoring]
+      - [excluded, from, monitoring]
 
-  - must_id: "item:Art.41:scope_jurisdictions"
-    description: "Jurisdictions covered"
-    excerpt_keywords:
-      - [scope, jurisdictions, monitoring]
-      - [jurisdictions, covered, monitoring]

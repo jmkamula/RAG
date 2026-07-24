@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.1:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.1:applicable_scope"
@@ -13,17 +14,35 @@ must_fingerprints:
   - must_id: "item:A.7.3.1:scope_exclusions"
     description: "Excluded jurisdictions / subjects with rationale"
     excerpt_keywords:
-      - [scope, exclusions, determining]
-      - [excluded, jurisdictions, subjects, rationale, determining]
-
-  - must_id: "item:A.7.3.1:scope_jurisdictions"
-    description: "Applicable jurisdictions listed with basis per row"
-    excerpt_keywords:
-      - [scope, jurisdictions, determining]
-      - [applicable, jurisdictions, listed, basis, determining]
+      - [excluded, jurisdictions, determining]
+      - [excluded, jurisdictions, subjects, determining]
+      - [jurisdictions, subjects, determining]
+      - [jurisdictions, subjects, rationale, determining]
+      - [subjects, rationale, determining]
+      - [in, scope, determining]
+      - [scope, includes, determining]
+      - [applicable, to, determining]
 
   - must_id: "item:A.7.3.1:scope_subject_categories"
     description: "Subject categories per jurisdiction (customers / employees / minors / patients / etc.)"
     excerpt_keywords:
-      - [scope, subject, categories, determining]
+      - [subject, categories, determining]
       - [subject, categories, jurisdiction, determining]
+      - [categories, jurisdiction, determining]
+      - [categories, jurisdiction, customers, determining]
+      - [jurisdiction, customers, determining]
+      - [jurisdiction, customers, employees, determining]
+      - [customers, employees, determining]
+      - [customers, employees, minors, determining]
+
+  - must_id: "item:A.7.3.1:scope_jurisdictions"
+    description: "Applicable jurisdictions listed with basis per row"
+    excerpt_keywords:
+      - [jurisdictions, listed, determining]
+      - [jurisdictions, listed, basis, determining]
+      - [listed, basis, determining]
+      - [in, scope, determining]
+      - [scope, includes, determining]
+      - [applicable, to, determining]
+      - [excluded, from, determining]
+

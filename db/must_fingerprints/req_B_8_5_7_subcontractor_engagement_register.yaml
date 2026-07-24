@@ -17,56 +17,56 @@ must_fingerprints:
       - [engagement, date]
       - [engagement, effective]
       - [engagement, effective, date]
-      - [effective, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [effective, date, engagement]
+      - [per, row, engagement]
+      - [each, row, engagement]
+      - [column, containing, engagement]
+      - [each, entry, engagement]
 
   - must_id: "item:B.8.5.7:reg_annex_b_coverage"
     description: "Annex B controls covered per row (all / itemised)"
     excerpt_keywords:
-      - [annex, b, coverage]
-      - [annex, controls]
-      - [annex, controls, covered]
-      - [controls, covered]
-      - [controls, covered, itemised]
-      - [covered, itemised]
-      - [per, row]
-      - [each, row]
+      - [annex, b, coverage, engagement]
+      - [annex, controls, engagement]
+      - [annex, controls, covered, engagement]
+      - [controls, covered, engagement]
+      - [controls, covered, itemised, engagement]
+      - [covered, itemised, engagement]
+      - [per, row, engagement]
+      - [each, row, engagement]
 
   - must_id: "item:B.8.5.7:reg_contract_reference"
     description: "Executed contract reference per row"
     excerpt_keywords:
-      - [contract, reference]
-      - [executed, contract]
-      - [executed, contract, reference]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [contract, reference, engagement]
+      - [executed, contract, engagement]
+      - [executed, contract, reference, engagement]
+      - [per, row, engagement]
+      - [each, row, engagement]
+      - [column, containing, engagement]
+      - [each, entry, engagement]
+      - [column, header, engagement]
 
   - must_id: "item:B.8.5.7:reg_customer_authorisation"
     description: "Customer authorisation reference per row (general or specific)"
     excerpt_keywords:
-      - [customer, authorisation]
-      - [customer, authorisation, reference]
-      - [authorisation, reference]
-      - [authorisation, reference, general]
-      - [reference, general]
-      - [reference, general, specific]
-      - [general, specific]
-      - [per, row]
+      - [customer, authorisation, engagement]
+      - [customer, authorisation, reference, engagement]
+      - [authorisation, reference, engagement]
+      - [authorisation, reference, general, engagement]
+      - [reference, general, engagement]
+      - [reference, general, specific, engagement]
+      - [general, specific, engagement]
+      - [per, row, engagement]
 
   - must_id: "item:B.8.5.7:reg_subcontractor_id"
     description: "Subcontractor identifier per row"
     excerpt_keywords:
       - [subcontractor, id]
       - [subcontractor, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, engagement]
+      - [each, row, engagement]
+      - [column, containing, engagement]
+      - [each, entry, engagement]
+      - [column, header, engagement]
 

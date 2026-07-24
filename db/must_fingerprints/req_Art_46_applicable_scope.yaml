@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.46:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.46:applicable_scope"
@@ -10,19 +11,39 @@ target_control: "Art.46"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
+  - must_id: "item:Art.46:scope_tia_methodology"
+    description: "TIA methodology (EDPB six-step / template-based / ad-hoc per transfer)"
+    excerpt_keywords:
+      - [tia, methodology, transfers]
+      - [tia, methodology, edpb, transfers]
+      - [methodology, edpb, transfers]
+      - [methodology, edpb, six, transfers]
+      - [edpb, six, transfers]
+      - [edpb, six, step, transfers]
+      - [six, step, transfers]
+      - [six, step, template, transfers]
+
   - must_id: "item:Art.46:scope_mechanism_mix"
     description: "Mechanism mix in use (SCCs predominantly / some BCRs / any ad-hoc clauses)"
     excerpt_keywords:
-      - [scope, mechanism, mix, transfers]
       - [mechanism, mix, transfers]
+      - [mechanism, mix, use, transfers]
+      - [mix, use, transfers]
+      - [mix, use, sccs, transfers]
+      - [use, sccs, transfers]
+      - [use, sccs, predominantly, transfers]
+      - [sccs, predominantly, transfers]
+      - [sccs, predominantly, some, transfers]
 
   - must_id: "item:Art.46:scope_non_adequate_transfers"
     description: "Non-adequate transfers enumerated (cross-link to Art.44 register filtered by mechanism=Art.46)"
     excerpt_keywords:
-      - [scope, non, adequate, transfers]
+      - [non, adequate, transfers]
+      - [non, adequate, transfers]
+      - [adequate, transfers]
+      - [adequate, transfers, enumerated]
+      - [transfers, enumerated]
+      - [transfers, enumerated, cross]
+      - [enumerated, cross, transfers]
+      - [enumerated, cross, art, transfers]
 
-  - must_id: "item:Art.46:scope_tia_methodology"
-    description: "TIA methodology (EDPB six-step / template-based / ad-hoc per transfer)"
-    excerpt_keywords:
-      - [scope, tia, methodology, transfers]
-      - [tia, methodology, transfers]

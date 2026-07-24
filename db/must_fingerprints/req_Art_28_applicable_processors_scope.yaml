@@ -14,14 +14,14 @@ must_fingerprints:
   - must_id: "item:Art.28:scope_exclusions"
     description: "Out-of-scope vendors (those processing only their own data, intra-group with no GDPR transfer)"
     excerpt_keywords:
-      - [out, scope]
-      - [out, scope, vendors]
-      - [scope, vendors]
-      - [scope, vendors, processing]
-      - [vendors, processing]
-      - [vendors, processing, only]
-      - [processing, only]
-      - [processing, only, their]
+      - [out, scope, processor]
+      - [out, scope, vendors, processor]
+      - [scope, vendors, processor]
+      - [scope, vendors, processing, processor]
+      - [vendors, processing, processor]
+      - [vendors, processing, only, processor]
+      - [processing, only, processor]
+      - [processing, only, their, processor]
 
   - must_id: "item:Art.28:scope_controller_vs_processor"
     description: "Controller-vs-processor decision criteria (means & purpose test per EDPB guidelines)"
@@ -31,19 +31,19 @@ must_fingerprints:
       - [controller, processor, decision]
       - [processor, decision]
       - [processor, decision, criteria]
-      - [decision, criteria]
-      - [decision, criteria, means]
-      - [criteria, means]
+      - [decision, criteria, processor]
+      - [decision, criteria, means, processor]
+      - [criteria, means, processor]
 
   - must_id: "item:Art.28:scope_processor_types"
     description: "Processor types in scope (cloud / SaaS providers, payroll, marketing platforms, analytics, support ticketing, etc.)"
     excerpt_keywords:
       - [processor, types]
       - [processor, types, scope]
-      - [types, scope]
-      - [types, scope, cloud]
-      - [scope, cloud]
-      - [scope, cloud, saas]
-      - [cloud, saas]
-      - [cloud, saas, providers]
+      - [types, scope, processor]
+      - [types, scope, cloud, processor]
+      - [scope, cloud, processor]
+      - [scope, cloud, saas, processor]
+      - [cloud, saas, processor]
+      - [cloud, saas, providers, processor]
 

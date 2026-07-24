@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.5.33:records_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.33:records_program_review"
@@ -10,39 +11,87 @@ target_control: "A.5.33"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.5.33:rev_date"
-    description: "Review date within the planned interval (typically within 12 months of last review)"
-    excerpt_keywords:
-      - [review, date, planned, interval, protection]
-
-  - must_id: "item:A.5.33:rev_disposal_audit"
-    description: "Disposal audit — sample of classes past retention end-date confirmed disposed (certificate of des..."
-    excerpt_keywords:
-      - [disposal, audit, protection]
-
-  - must_id: "item:A.5.33:rev_legal_hold_status"
-    description: "Active legal-hold status reviewed (which classes/rows currently held, by whom, on what basis, exp..."
-    excerpt_keywords:
-      - [legal, hold, status, protection]
-      - [active, legal, protection]
-
   - must_id: "item:A.5.33:rev_register_update"
     description: "Changes propagated back to the live schedule with reference to this review"
     excerpt_keywords:
-      - [register, update, protection]
-      - [changes, propagated, back, live, protection]
+      - [changes, propagated, protection]
+      - [changes, propagated, back, protection]
+      - [propagated, back, protection]
+      - [propagated, back, live, protection]
+      - [back, live, protection]
+      - [back, live, schedule, protection]
+      - [live, schedule, protection]
+      - [live, schedule, reference, protection]
 
-  - must_id: "item:A.5.33:rev_reviewer"
-    description: "Reviewer identity and role recorded (records manager / compliance lead with legal-counsel sign-of..."
+  - must_id: "item:A.5.33:rev_legal_hold_status"
+    description: "Active legal-hold status reviewed (which classes/rows currently held, by whom, on what basis, expected release trigger) — stale unreleased h"
     excerpt_keywords:
-      - [reviewer, identity, role, recorded, protection]
+      - [legal, hold, status, protection]
+      - [active, legal, protection]
+      - [active, legal, hold, protection]
+      - [legal, hold, protection]
+      - [hold, status, protection]
+      - [hold, status, reviewed, protection]
+      - [status, reviewed, protection]
+      - [status, reviewed, classes, protection]
 
-  - must_id: "item:A.5.33:rev_schedule_check"
-    description: "Per-class outcome (verified / amended / retired / new added) with retention-still-adequate and pr..."
+  - must_id: "item:A.5.33:rev_disposal_audit"
+    description: "Disposal audit — sample of classes past retention end-date confirmed disposed (certificate of destruction present) or held under documented "
     excerpt_keywords:
-      - [schedule, check, protection]
+      - [disposal, audit, protection]
+      - [disposal, audit, sample, protection]
+      - [audit, sample, protection]
+      - [audit, sample, classes, protection]
+      - [sample, classes, protection]
+      - [sample, classes, past, protection]
+      - [classes, past, protection]
+      - [classes, past, retention, protection]
 
   - must_id: "item:A.5.33:rev_scope_check"
-    description: "Cross-check against the records-categories scope — any new business activity / legal driver / dat..."
+    description: "Cross-check against the records-categories scope — any new business activity / legal driver / data category that should add classes"
     excerpt_keywords:
       - [scope, check, protection]
+      - [cross, check, protection]
+      - [cross, check, against, protection]
+      - [check, against, protection]
+      - [check, against, records]
+      - [against, records]
+      - [against, records, categories]
+      - [records, categories]
+
+  - must_id: "item:A.5.33:rev_schedule_check"
+    description: "Per-class outcome (verified / amended / retired / new added) with retention-still-adequate and protection-class-still-adequate confirmation"
+    excerpt_keywords:
+      - [schedule, check, protection]
+      - [class, outcome, protection]
+      - [class, outcome, verified, protection]
+      - [outcome, verified, protection]
+      - [outcome, verified, amended, protection]
+      - [verified, amended, protection]
+      - [verified, amended, retired, protection]
+      - [amended, retired, protection]
+
+  - must_id: "item:A.5.33:rev_reviewer"
+    description: "Reviewer identity and role recorded (records manager / compliance lead with legal-counsel sign-off where material)"
+    excerpt_keywords:
+      - [reviewer, identity, protection]
+      - [reviewer, identity, role, protection]
+      - [identity, role, protection]
+      - [identity, role, recorded, protection]
+      - [role, recorded, protection]
+      - [role, recorded, records]
+      - [recorded, records]
+      - [recorded, records, manager]
+
+  - must_id: "item:A.5.33:rev_date"
+    description: "Review date within the planned interval (typically within 12 months of last review)"
+    excerpt_keywords:
+      - [review, date, protection]
+      - [review, date, within, protection]
+      - [date, within, protection]
+      - [date, within, planned, protection]
+      - [within, planned, protection]
+      - [within, planned, interval, protection]
+      - [planned, interval, protection]
+      - [planned, interval, typically, protection]
+

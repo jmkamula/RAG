@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.4.3:proc_up_to_date_check"
     description: "Up-to-date check cadence per PII category (e.g"
     excerpt_keywords:
-      - [up, date, check]
-      - [date, check]
-      - [date, check, cadence]
-      - [check, cadence]
-      - [check, cadence, pii]
-      - [cadence, pii]
-      - [cadence, pii, category]
-      - [pii, category]
+      - [up, date, check, accuracy]
+      - [date, check, accuracy]
+      - [date, check, cadence, accuracy]
+      - [check, cadence, accuracy]
+      - [check, cadence, pii, accuracy]
+      - [cadence, pii, accuracy]
+      - [cadence, pii, category, accuracy]
+      - [pii, category, accuracy]
 
   - must_id: "item:A.7.4.3:proc_correction_link"
     description: "Cross-link to A.7.3.6 correction procedure — subject-initiated rectification handled there"
     excerpt_keywords:
-      - [cross, correction]
-      - [cross, correction, subject]
-      - [correction, subject]
-      - [correction, subject, initiated]
-      - [subject, initiated]
-      - [subject, initiated, rectification]
-      - [initiated, rectification]
-      - [initiated, rectification, handled]
+      - [cross, correction, accuracy]
+      - [cross, correction, subject, accuracy]
+      - [correction, subject, accuracy]
+      - [correction, subject, initiated, accuracy]
+      - [subject, initiated, accuracy]
+      - [subject, initiated, rectification, accuracy]
+      - [initiated, rectification, accuracy]
+      - [initiated, rectification, handled, accuracy]
 
   - must_id: "item:A.7.4.3:proc_lifecycle_coverage"
     description: "Lifecycle coverage — applies at collection + processing + storage + sharing + disposal stages"
     excerpt_keywords:
-      - [lifecycle, coverage]
-      - [lifecycle, coverage, collection]
-      - [coverage, collection]
-      - [coverage, collection, processing]
-      - [collection, processing]
-      - [collection, processing, storage]
-      - [processing, storage]
-      - [processing, storage, sharing]
+      - [lifecycle, coverage, accuracy]
+      - [lifecycle, coverage, collection, accuracy]
+      - [coverage, collection, accuracy]
+      - [coverage, collection, processing, accuracy]
+      - [collection, processing, accuracy]
+      - [collection, processing, storage, accuracy]
+      - [processing, storage, accuracy]
+      - [processing, storage, sharing, accuracy]
 
   - must_id: "item:A.7.4.3:proc_inaccuracy_response"
     description: "Inaccuracy response — how the org responds when inaccuracy is detected (internal + subject-flagged)"
     excerpt_keywords:
-      - [inaccuracy, response]
-      - [inaccuracy, response, org]
-      - [response, org]
-      - [response, org, responds]
-      - [org, responds]
-      - [org, responds, inaccuracy]
-      - [responds, inaccuracy]
-      - [responds, inaccuracy, detected]
+      - [inaccuracy, response, accuracy]
+      - [inaccuracy, response, org, accuracy]
+      - [response, org, accuracy]
+      - [response, org, responds, accuracy]
+      - [org, responds, accuracy]
+      - [org, responds, inaccuracy, accuracy]
+      - [responds, inaccuracy, accuracy]
+      - [responds, inaccuracy, detected, accuracy]
 
   - must_id: "item:A.7.4.3:proc_inaccuracy_prevention"
     description: "Inaccuracy prevention — technical + procedural controls (input validation + duplicate detection + integration reconciliation)"
     excerpt_keywords:
-      - [inaccuracy, prevention]
-      - [inaccuracy, prevention, technical]
-      - [prevention, technical]
-      - [prevention, technical, procedural]
-      - [technical, procedural]
-      - [technical, procedural, controls]
-      - [procedural, controls]
-      - [procedural, controls, input]
+      - [inaccuracy, prevention, accuracy]
+      - [inaccuracy, prevention, technical, accuracy]
+      - [prevention, technical, accuracy]
+      - [prevention, technical, procedural, accuracy]
+      - [technical, procedural, accuracy]
+      - [technical, procedural, controls, accuracy]
+      - [procedural, controls, accuracy]
+      - [procedural, controls, input, accuracy]
 

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.5.28:evidence_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.28:evidence_program_review"
@@ -11,36 +12,86 @@ target_standard: "ISO27001:2022"
 
 must_fingerprints:
   - must_id: "item:A.5.28:rev_actions"
-    description: "Action items captured for the program (e.g. retrain on new tooling, update jurisdiction tagging, ..."
+    description: "Action items captured for the program (e.g"
     excerpt_keywords:
-      - [action, items, captured, program, collection]
+      - [action, items, collection]
+      - [action, items, captured, collection]
+      - [items, captured, collection]
+      - [items, captured, program, collection]
+      - [captured, program, collection]
+      - [captured, program, retrain, collection]
+      - [program, retrain, collection]
+      - [program, retrain, new, collection]
+
+  - must_id: "item:A.5.28:rev_legal_alignment"
+    description: "Alignment-with-current-legal-standards check (jurisdictional updates, regulator guidance, case law shifts considered)"
+    excerpt_keywords:
+      - [legal, alignment, collection]
+      - [alignment, current, collection]
+      - [alignment, current, legal, collection]
+      - [current, legal, collection]
+      - [current, legal, standards, collection]
+      - [legal, standards, collection]
+      - [legal, standards, check, collection]
+      - [standards, check, collection]
 
   - must_id: "item:A.5.28:rev_competence"
-    description: "Competence/training status of authorised personnel reviewed (certifications current, new staff on..."
+    description: "Competence/training status of authorised personnel reviewed (certifications current, new staff onboarded properly)"
     excerpt_keywords:
-      - [competence, training, status, authorised, collection]
+      - [competence, training, collection]
+      - [competence, training, status, collection]
+      - [training, status, collection]
+      - [training, status, authorised, collection]
+      - [status, authorised, collection]
+      - [status, authorised, personnel, collection]
+      - [authorised, personnel, collection]
+      - [authorised, personnel, reviewed, collection]
 
   - must_id: "item:A.5.28:rev_custody_incidents"
-    description: "Custody-incident analysis (any broken-seal events, missing-handover signatures, unauthorised acce..."
+    description: "Custody-incident analysis (any broken-seal events, missing-handover signatures, unauthorised access flagged for review)"
     excerpt_keywords:
       - [custody, incidents, collection]
-
-  - must_id: "item:A.5.28:rev_date"
-    description: "Review date within the planned annual interval"
-    excerpt_keywords:
-      - [review, date, planned, annual, collection]
+      - [custody, incident, collection]
+      - [custody, incident, analysis, collection]
+      - [incident, analysis, collection]
+      - [incident, analysis, broken, collection]
+      - [analysis, broken, collection]
+      - [analysis, broken, seal, collection]
+      - [broken, seal, collection]
 
   - must_id: "item:A.5.28:rev_integrity_audit"
     description: "Integrity-verification audit (sample of register rows re-hashed; mismatches investigated)"
     excerpt_keywords:
       - [integrity, audit, collection]
-
-  - must_id: "item:A.5.28:rev_legal_alignment"
-    description: "Alignment-with-current-legal-standards check (jurisdictional updates, regulator guidance, case la..."
-    excerpt_keywords:
-      - [legal, alignment, collection]
+      - [integrity, verification, collection]
+      - [integrity, verification, audit, collection]
+      - [verification, audit, collection]
+      - [verification, audit, sample, collection]
+      - [audit, sample, collection]
+      - [audit, sample, rows, collection]
+      - [sample, rows, collection]
 
   - must_id: "item:A.5.28:rev_reviewer"
     description: "Reviewer identity (InfoSec lead + legal/compliance counsel jointly)"
     excerpt_keywords:
       - [reviewer, identity, collection]
+      - [reviewer, identity, infosec, collection]
+      - [identity, infosec, collection]
+      - [identity, infosec, lead, collection]
+      - [infosec, lead, collection]
+      - [infosec, lead, legal, collection]
+      - [lead, legal, collection]
+      - [lead, legal, compliance, collection]
+
+  - must_id: "item:A.5.28:rev_date"
+    description: "Review date within the planned annual interval"
+    excerpt_keywords:
+      - [review, date, collection]
+      - [review, date, within, collection]
+      - [date, within, collection]
+      - [date, within, planned, collection]
+      - [within, planned, collection]
+      - [within, planned, annual, collection]
+      - [planned, annual, collection]
+      - [planned, annual, interval, collection]
+

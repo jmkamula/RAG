@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.9:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.9:applicable_scope"
@@ -10,25 +11,51 @@ target_control: "A.7.4.9"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.9:scope_customer_apis"
-    description: "Customer-facing APIs carrying PII"
-    excerpt_keywords:
-      - [scope, customer, apis, pii]
-
   - must_id: "item:A.7.4.9:scope_email_paths"
     description: "Email + file-sharing paths where PII may be transmitted"
     excerpt_keywords:
-      - [scope, email, paths, pii]
+      - [email, paths, pii]
       - [email, file, pii]
-
-  - must_id: "item:A.7.4.9:scope_integrations"
-    description: "Integration endpoints (partner APIs + processor exchanges + third-party enrichment)"
-    excerpt_keywords:
-      - [scope, integrations, pii]
-      - [integration, endpoints, pii]
+      - [email, file, sharing, pii]
+      - [file, sharing, pii]
+      - [file, sharing, paths, pii]
+      - [sharing, paths, pii]
+      - [sharing, paths, pii]
+      - [paths, pii]
 
   - must_id: "item:A.7.4.9:scope_internal_transfers"
     description: "Internal transfers (cross-region backup / DR replication / data warehouse loads)"
     excerpt_keywords:
-      - [scope, internal, transfers, pii]
       - [internal, transfers, pii]
+      - [internal, transfers, cross, pii]
+      - [transfers, cross, pii]
+      - [transfers, cross, region, pii]
+      - [cross, region, pii]
+      - [cross, region, backup, pii]
+      - [region, backup, pii]
+      - [region, backup, replication, pii]
+
+  - must_id: "item:A.7.4.9:scope_integrations"
+    description: "Integration endpoints (partner APIs + processor exchanges + third-party enrichment)"
+    excerpt_keywords:
+      - [integration, endpoints, pii]
+      - [integration, endpoints, partner, pii]
+      - [endpoints, partner, pii]
+      - [endpoints, partner, apis, pii]
+      - [partner, apis, pii]
+      - [partner, apis, processor, pii]
+      - [apis, processor, pii]
+      - [apis, processor, exchanges, pii]
+
+  - must_id: "item:A.7.4.9:scope_customer_apis"
+    description: "Customer-facing APIs carrying PII"
+    excerpt_keywords:
+      - [customer, apis, pii]
+      - [customer, facing, pii]
+      - [customer, facing, apis, pii]
+      - [facing, apis, pii]
+      - [facing, apis, carrying, pii]
+      - [apis, carrying, pii]
+      - [apis, carrying, pii]
+      - [carrying, pii]
+

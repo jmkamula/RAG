@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.2:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.2:applicable_scope"
@@ -13,14 +14,36 @@ must_fingerprints:
   - must_id: "item:B.8.2.2:scope_data_flows"
     description: "Data-flow map — customer PII vs own-controller PII boundary documented"
     excerpt_keywords:
-      - [scope, data, flows, organization]
+      - [flow, map, organization]
+      - [flow, map, customer, organization]
+      - [map, customer, organization]
+      - [map, customer, pii, organization]
+      - [customer, pii, organization]
+      - [customer, pii, own, organization]
+      - [pii, own, organization]
+      - [pii, own, controller, organization]
 
   - must_id: "item:B.8.2.2:scope_own_controller"
-    description: "Own-controller carve-out — services where org acts as controller (billing / marketing to prospect..."
+    description: "Own-controller carve-out — services where org acts as controller (billing / marketing to prospects) excluded with rationale"
     excerpt_keywords:
-      - [scope, own, controller, organization]
+      - [own, controller, organization]
+      - [own, controller, carve, organization]
+      - [controller, carve, organization]
+      - [controller, carve, out, organization]
+      - [carve, out, organization]
+      - [carve, out, services, organization]
+      - [out, services, organization]
+      - [out, services, org, organization]
 
   - must_id: "item:B.8.2.2:scope_services"
     description: "In-scope services enumerated (customer-PII processing services)"
     excerpt_keywords:
       - [scope, services, organization]
+      - [scope, services, enumerated, organization]
+      - [services, enumerated, organization]
+      - [services, enumerated, customer, organization]
+      - [enumerated, customer, organization]
+      - [enumerated, customer, pii, organization]
+      - [customer, pii, organization]
+      - [customer, pii, processing, organization]
+

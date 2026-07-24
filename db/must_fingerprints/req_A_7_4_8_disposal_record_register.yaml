@@ -15,57 +15,57 @@ must_fingerprints:
     description: "Disposal date per row"
     excerpt_keywords:
       - [disposal, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, disposal]
+      - [each, row, disposal]
+      - [column, containing, disposal]
+      - [each, entry, disposal]
+      - [column, header, disposal]
 
   - must_id: "item:A.7.4.8:reg_certificate_ref"
     description: "Disposal certificate / attestation reference per row"
     excerpt_keywords:
-      - [certificate, ref]
+      - [certificate, ref, disposal]
       - [disposal, certificate]
       - [disposal, certificate, attestation]
-      - [certificate, attestation]
-      - [certificate, attestation, reference]
-      - [attestation, reference]
-      - [per, row]
-      - [each, row]
+      - [certificate, attestation, disposal]
+      - [certificate, attestation, reference, disposal]
+      - [attestation, reference, disposal]
+      - [per, row, disposal]
+      - [each, row, disposal]
 
   - must_id: "item:A.7.4.8:reg_technique"
     description: "Technique per row (cryptographic erase / overwrite / degaussing / shredding / provider attestation)"
     excerpt_keywords:
-      - [technique, cryptographic]
-      - [technique, cryptographic, erase]
-      - [cryptographic, erase]
-      - [cryptographic, erase, overwrite]
-      - [erase, overwrite]
-      - [erase, overwrite, degaussing]
-      - [overwrite, degaussing]
-      - [overwrite, degaussing, shredding]
+      - [technique, cryptographic, disposal]
+      - [technique, cryptographic, erase, disposal]
+      - [cryptographic, erase, disposal]
+      - [cryptographic, erase, overwrite, disposal]
+      - [erase, overwrite, disposal]
+      - [erase, overwrite, degaussing, disposal]
+      - [overwrite, degaussing, disposal]
+      - [overwrite, degaussing, shredding, disposal]
 
   - must_id: "item:A.7.4.8:reg_media_type"
     description: "Media type per row (SSD / HDD / paper / tape / cloud volume)"
     excerpt_keywords:
-      - [media, ssd]
-      - [media, ssd, hdd]
-      - [ssd, hdd]
-      - [ssd, hdd, paper]
-      - [hdd, paper]
-      - [hdd, paper, tape]
-      - [paper, tape]
-      - [paper, tape, cloud]
+      - [media, ssd, disposal]
+      - [media, ssd, hdd, disposal]
+      - [ssd, hdd, disposal]
+      - [ssd, hdd, paper, disposal]
+      - [hdd, paper, disposal]
+      - [hdd, paper, tape, disposal]
+      - [paper, tape, disposal]
+      - [paper, tape, cloud, disposal]
 
   - must_id: "item:A.7.4.8:reg_action_id"
     description: "Unique disposal action identifier per row"
     excerpt_keywords:
-      - [action, id]
+      - [action, id, disposal]
       - [unique, disposal]
       - [unique, disposal, action]
       - [disposal, action]
       - [disposal, action, identifier]
-      - [action, identifier]
-      - [per, row]
-      - [each, row]
+      - [action, identifier, disposal]
+      - [per, row, disposal]
+      - [each, row, disposal]
 

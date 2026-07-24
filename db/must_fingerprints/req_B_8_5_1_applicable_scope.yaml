@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.1:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.1:applicable_scope"
@@ -10,18 +11,39 @@ target_control: "B.8.5.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.5.1:scope_direct_transfers"
-    description: "Direct customer-PII transfers (multi-region cloud / backup + DR)"
+  - must_id: "item:B.8.5.1:scope_support_access"
+    description: "Support-access transfers (support engineers in different regions accessing customer PII)"
     excerpt_keywords:
-      - [scope, direct, transfers, basis]
-      - [direct, customer, basis]
+      - [support, access, basis]
+      - [support, access, transfers, basis]
+      - [access, transfers, basis]
+      - [access, transfers, support, basis]
+      - [transfers, support, basis]
+      - [transfers, support, engineers, basis]
+      - [support, engineers, basis]
+      - [support, engineers, different, basis]
 
   - must_id: "item:B.8.5.1:scope_subprocessor_transfers"
     description: "Subprocessor-driven transfers (data flowing to subprocessor regions)"
     excerpt_keywords:
-      - [scope, subprocessor, transfers, basis]
+      - [subprocessor, transfers, basis]
+      - [subprocessor, driven, basis]
+      - [subprocessor, driven, transfers, basis]
+      - [driven, transfers, basis]
+      - [driven, transfers, flowing, basis]
+      - [transfers, flowing, basis]
+      - [transfers, flowing, subprocessor, basis]
+      - [flowing, subprocessor, basis]
 
-  - must_id: "item:B.8.5.1:scope_support_access"
-    description: "Support-access transfers (support engineers in different regions accessing customer PII)"
+  - must_id: "item:B.8.5.1:scope_direct_transfers"
+    description: "Direct customer-PII transfers (multi-region cloud / backup + DR)"
     excerpt_keywords:
-      - [scope, support, access, basis]
+      - [direct, transfers, basis]
+      - [direct, customer, basis]
+      - [direct, customer, pii]
+      - [customer, pii]
+      - [customer, pii, transfers]
+      - [pii, transfers]
+      - [pii, transfers, multi]
+      - [transfers, multi, basis]
+

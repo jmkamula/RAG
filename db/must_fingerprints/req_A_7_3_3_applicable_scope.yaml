@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.3:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.3:applicable_scope"
@@ -10,19 +11,39 @@ target_control: "A.7.3.3"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.3.3:scope_exclusions"
+    description: "Excluded contexts with rationale (e.g"
+    excerpt_keywords:
+      - [excluded, contexts, providing]
+      - [excluded, contexts, rationale, providing]
+      - [contexts, rationale, providing]
+      - [contexts, rationale, b2b, providing]
+      - [rationale, b2b, providing]
+      - [rationale, b2b, only, providing]
+      - [b2b, only, providing]
+      - [b2b, only, channels, providing]
+
+  - must_id: "item:A.7.3.3:scope_indirect_collection"
+    description: "Indirect-collection handling — where PII sourced from third party, notice within reasonable time per Art.14.3"
+    excerpt_keywords:
+      - [indirect, collection, providing]
+      - [indirect, collection, handling, providing]
+      - [collection, handling, providing]
+      - [collection, handling, pii]
+      - [handling, pii]
+      - [handling, pii, sourced]
+      - [pii, sourced]
+      - [pii, sourced, third]
+
   - must_id: "item:A.7.3.3:scope_delivery_channels"
     description: "Delivery channels enumerated with notice-at-collection status per channel"
     excerpt_keywords:
-      - [scope, delivery, channels, providing]
-      - [delivery, channels, enumerated, notice, providing]
+      - [delivery, channels, providing]
+      - [delivery, channels, enumerated, providing]
+      - [channels, enumerated, providing]
+      - [channels, enumerated, notice, providing]
+      - [enumerated, notice, providing]
+      - [enumerated, notice, collection, providing]
+      - [notice, collection, providing]
+      - [notice, collection, status, providing]
 
-  - must_id: "item:A.7.3.3:scope_exclusions"
-    description: "Excluded contexts with rationale (e.g. B2B-only channels where notice is contract-embedded)"
-    excerpt_keywords:
-      - [scope, exclusions, providing]
-      - [excluded, contexts, rationale, providing]
-
-  - must_id: "item:A.7.3.3:scope_indirect_collection"
-    description: "Indirect-collection handling — where PII sourced from third party, notice within reasonable time ..."
-    excerpt_keywords:
-      - [scope, indirect, collection, providing]

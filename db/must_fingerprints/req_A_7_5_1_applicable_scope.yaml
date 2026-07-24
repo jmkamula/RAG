@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.5.1:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.1:applicable_scope"
@@ -13,17 +14,36 @@ must_fingerprints:
   - must_id: "item:A.7.5.1:scope_exclusions"
     description: "Excluded flows (intra-jurisdiction) with rationale"
     excerpt_keywords:
-      - [scope, exclusions, identify]
       - [excluded, flows, identify]
-
-  - must_id: "item:A.7.5.1:scope_flow_inventory"
-    description: "PII flow inventory — every flow map row (from A.7.5.2) with jurisdiction pair"
-    excerpt_keywords:
-      - [scope, flow, inventory, identify]
-      - [pii, flow, inventory, identify]
+      - [excluded, flows, intra, identify]
+      - [flows, intra, identify]
+      - [flows, intra, jurisdiction, identify]
+      - [intra, jurisdiction, identify]
+      - [intra, jurisdiction, rationale, identify]
+      - [jurisdiction, rationale, identify]
+      - [in, scope, identify]
 
   - must_id: "item:A.7.5.1:scope_internal_transfers"
     description: "Internal cross-region transfers (multi-region cloud + branch offices)"
     excerpt_keywords:
-      - [scope, internal, transfers, identify]
+      - [internal, transfers, identify]
       - [internal, cross, identify]
+      - [internal, cross, region, identify]
+      - [cross, region, identify]
+      - [cross, region, transfers, identify]
+      - [region, transfers, identify]
+      - [region, transfers, multi, identify]
+      - [transfers, multi, identify]
+
+  - must_id: "item:A.7.5.1:scope_flow_inventory"
+    description: "PII flow inventory — every flow map row (from A.7.5.2) with jurisdiction pair"
+    excerpt_keywords:
+      - [flow, inventory, identify]
+      - [pii, flow, identify]
+      - [pii, flow, inventory, identify]
+      - [flow, inventory, every, identify]
+      - [inventory, every, identify]
+      - [inventory, every, flow, identify]
+      - [every, flow, identify]
+      - [every, flow, map, identify]
+

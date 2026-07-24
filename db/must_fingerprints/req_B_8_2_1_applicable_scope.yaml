@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.1:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.1:applicable_scope"
@@ -10,18 +11,39 @@ target_control: "B.8.2.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.2.1:scope_customer_list"
-    description: "In-scope customer engagements enumerated"
-    excerpt_keywords:
-      - [scope, customer, list]
-
   - must_id: "item:B.8.2.1:scope_exclusions"
     description: "Excluded engagements (own-controller services / non-PII services) with rationale"
     excerpt_keywords:
-      - [scope, exclusions, customer]
       - [excluded, engagements, customer]
+      - [excluded, engagements, own, customer]
+      - [engagements, own, customer]
+      - [engagements, own, controller, customer]
+      - [own, controller, customer]
+      - [own, controller, services, customer]
+      - [controller, services, customer]
+      - [controller, services, non, customer]
+
+  - must_id: "item:B.8.2.1:scope_customer_list"
+    description: "In-scope customer engagements enumerated"
+    excerpt_keywords:
+      - [scope, customer]
+      - [scope, customer, engagements]
+      - [customer, engagements]
+      - [customer, engagements, enumerated]
+      - [engagements, enumerated, customer]
+      - [in, scope, customer]
+      - [scope, includes, customer]
+      - [applicable, to, customer]
 
   - must_id: "item:B.8.2.1:scope_pii_processor_test"
-    description: "PII-processor test per engagement — processing PII on customer's behalf under customer's instruct..."
+    description: "PII-processor test per engagement — processing PII on customer's behalf under customer's instructions"
     excerpt_keywords:
-      - [scope, pii, processor, test, customer]
+      - [pii, processor, test, customer]
+      - [pii, processor, customer]
+      - [processor, test, customer]
+      - [processor, test, engagement, customer]
+      - [test, engagement, customer]
+      - [test, engagement, processing, customer]
+      - [engagement, processing, customer]
+      - [engagement, processing, pii, customer]
+

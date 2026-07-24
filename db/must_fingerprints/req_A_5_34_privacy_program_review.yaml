@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.5.34:privacy_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.34:privacy_program_review"
@@ -10,51 +11,111 @@ target_control: "A.5.34"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:A.5.34:rev_register_update"
+    description: "Changes propagated back to the live register with reference to this review"
+    excerpt_keywords:
+      - [changes, propagated, privacy]
+      - [changes, propagated, back, privacy]
+      - [propagated, back, privacy]
+      - [propagated, back, live, privacy]
+      - [back, live, privacy]
+      - [back, live, reference, privacy]
+      - [live, reference, privacy]
+      - [live, reference, review, privacy]
+
+  - must_id: "item:A.5.34:rev_dpia_review"
+    description: "DPIA completion status reviewed (any high-risk processing without a completed DPIA flagged; DPIAs older than 24 months refreshed where proce"
+    excerpt_keywords:
+      - [dpia, review, privacy]
+      - [dpia, completion, privacy]
+      - [dpia, completion, status, privacy]
+      - [completion, status, privacy]
+      - [completion, status, reviewed, privacy]
+      - [status, reviewed, privacy]
+      - [status, reviewed, high, privacy]
+      - [reviewed, high, privacy]
+
+  - must_id: "item:A.5.34:rev_transfer_validity"
+    description: "Transfer-mechanism validity check (SCCs current edition, adequacy decisions still standing — e.g"
+    excerpt_keywords:
+      - [transfer, validity, privacy]
+      - [transfer, mechanism, privacy]
+      - [transfer, mechanism, validity, privacy]
+      - [mechanism, validity, privacy]
+      - [mechanism, validity, check, privacy]
+      - [validity, check, privacy]
+      - [validity, check, sccs, privacy]
+      - [check, sccs, privacy]
+
   - must_id: "item:A.5.34:rev_breach_history"
-    description: "Breach history for the period (every personal-data breach in scope confirmed handled per Art.33 7..."
+    description: "Breach history for the period (every personal-data breach in scope confirmed handled per Art.33 72h notification + Art.34 data-subject notif"
     excerpt_keywords:
       - [breach, history, privacy]
       - [breach, history, period, privacy]
+      - [history, period, privacy]
+      - [history, period, every, privacy]
+      - [period, every, privacy]
+      - [period, every, personal, privacy]
+      - [every, personal, privacy]
+      - [every, personal, breach, privacy]
+
+  - must_id: "item:A.5.34:rev_dsar_metrics"
+    description: "DSAR metrics review (volumes, response times against SLA, refusal/extension rates, complaints to supervisory authority) — operational privac"
+    excerpt_keywords:
+      - [dsar, metrics, privacy]
+      - [dsar, metrics, review, privacy]
+      - [metrics, review, privacy]
+      - [metrics, review, volumes, privacy]
+      - [review, volumes, privacy]
+      - [review, volumes, response, privacy]
+      - [volumes, response, privacy]
+      - [volumes, response, times, privacy]
+
+  - must_id: "item:A.5.34:rev_scope_check"
+    description: "Cross-check against the privacy applicability scope — any new jurisdiction, regulated activity, data subject category that should add regist"
+    excerpt_keywords:
+      - [scope, check, privacy]
+      - [cross, check, privacy]
+      - [cross, check, against, privacy]
+      - [check, against, privacy]
+      - [check, against, privacy]
+      - [against, privacy]
+      - [against, privacy, applicability]
+      - [privacy, applicability]
+
+  - must_id: "item:A.5.34:rev_register_check"
+    description: "Per-activity outcome (verified / amended / retired / new added) with lawful-basis-still-valid and retention-still-adequate confirmation"
+    excerpt_keywords:
+      - [activity, outcome, privacy]
+      - [activity, outcome, verified, privacy]
+      - [outcome, verified, privacy]
+      - [outcome, verified, amended, privacy]
+      - [verified, amended, privacy]
+      - [verified, amended, retired, privacy]
+      - [amended, retired, privacy]
+      - [amended, retired, new, privacy]
+
+  - must_id: "item:A.5.34:rev_reviewer"
+    description: "Reviewer identity and role recorded (DPO or Privacy Officer + InfoSec lead jointly; legal-counsel sign-off where law has shifted materially)"
+    excerpt_keywords:
+      - [reviewer, identity, privacy]
+      - [reviewer, identity, role, privacy]
+      - [identity, role, privacy]
+      - [identity, role, recorded, privacy]
+      - [role, recorded, privacy]
+      - [role, recorded, dpo, privacy]
+      - [recorded, dpo, privacy]
+      - [recorded, dpo, privacy]
 
   - must_id: "item:A.5.34:rev_date"
     description: "Review date within the planned interval (typically within 12 months of last review)"
     excerpt_keywords:
-      - [review, date, planned, interval, privacy]
+      - [review, date, privacy]
+      - [review, date, within, privacy]
+      - [date, within, privacy]
+      - [date, within, planned, privacy]
+      - [within, planned, privacy]
+      - [within, planned, interval, privacy]
+      - [planned, interval, privacy]
+      - [planned, interval, typically, privacy]
 
-  - must_id: "item:A.5.34:rev_dpia_review"
-    description: "DPIA completion status reviewed (any high-risk processing without a completed DPIA flagged; DPIAs..."
-    excerpt_keywords:
-      - [dpia, review, privacy]
-      - [dpia, completion, status, reviewed, privacy]
-
-  - must_id: "item:A.5.34:rev_dsar_metrics"
-    description: "DSAR metrics review (volumes, response times against SLA, refusal/extension rates, complaints to ..."
-    excerpt_keywords:
-      - [dsar, metrics, privacy]
-      - [dsar, metrics, review, privacy]
-
-  - must_id: "item:A.5.34:rev_register_check"
-    description: "Per-activity outcome (verified / amended / retired / new added) with lawful-basis-still-valid and..."
-    excerpt_keywords:
-      - [register, check, privacy]
-
-  - must_id: "item:A.5.34:rev_register_update"
-    description: "Changes propagated back to the live register with reference to this review"
-    excerpt_keywords:
-      - [register, update, privacy]
-      - [changes, propagated, back, live, privacy]
-
-  - must_id: "item:A.5.34:rev_reviewer"
-    description: "Reviewer identity and role recorded (DPO or Privacy Officer + InfoSec lead jointly; legal-counsel..."
-    excerpt_keywords:
-      - [reviewer, identity, role, recorded, privacy]
-
-  - must_id: "item:A.5.34:rev_scope_check"
-    description: "Cross-check against the privacy applicability scope — any new jurisdiction, regulated activity, d..."
-    excerpt_keywords:
-      - [scope, check, privacy]
-
-  - must_id: "item:A.5.34:rev_transfer_validity"
-    description: "Transfer-mechanism validity check (SCCs current edition, adequacy decisions still standing — e.g...."
-    excerpt_keywords:
-      - [transfer, validity, privacy]

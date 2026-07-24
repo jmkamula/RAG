@@ -14,59 +14,59 @@ must_fingerprints:
   - must_id: "item:A.7.3.8:reg_response_time"
     description: "Response time per row (vs SLA)"
     excerpt_keywords:
-      - [response, time]
-      - [response, time, sla]
-      - [time, sla]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [response, time, providing]
+      - [response, time, sla, providing]
+      - [time, sla, providing]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
+      - [each, entry, providing]
+      - [column, header, providing]
 
   - must_id: "item:A.7.3.8:reg_scope_summary"
     description: "Scope summary per row (what PII was included)"
     excerpt_keywords:
-      - [scope, summary]
-      - [scope, summary, pii]
-      - [summary, pii]
-      - [summary, pii, included]
-      - [pii, included]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [scope, summary, providing]
+      - [scope, summary, pii, providing]
+      - [summary, pii, providing]
+      - [summary, pii, included, providing]
+      - [pii, included, providing]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
 
   - must_id: "item:A.7.3.8:reg_format_delivered"
     description: "Format delivered per row (JSON / CSV / PDF / structured export)"
     excerpt_keywords:
-      - [format, delivered]
-      - [format, delivered, json]
-      - [delivered, json]
-      - [delivered, json, csv]
-      - [json, csv]
-      - [json, csv, pdf]
-      - [csv, pdf]
-      - [csv, pdf, structured]
+      - [format, delivered, providing]
+      - [format, delivered, json, providing]
+      - [delivered, json, providing]
+      - [delivered, json, csv, providing]
+      - [json, csv, providing]
+      - [json, csv, pdf, providing]
+      - [csv, pdf, providing]
+      - [csv, pdf, structured, providing]
 
   - must_id: "item:A.7.3.8:reg_subject_id"
     description: "Subject identifier per row"
     excerpt_keywords:
-      - [subject, id]
-      - [subject, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [subject, id, providing]
+      - [subject, identifier, providing]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
+      - [each, entry, providing]
+      - [column, header, providing]
 
   - must_id: "item:A.7.3.8:reg_request_id"
     description: "Unique request identifier per row"
     excerpt_keywords:
-      - [request, id]
-      - [unique, request]
-      - [unique, request, identifier]
-      - [request, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [request, id, providing]
+      - [unique, request, providing]
+      - [unique, request, identifier, providing]
+      - [request, identifier, providing]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
+      - [each, entry, providing]
 

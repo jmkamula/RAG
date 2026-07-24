@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2:entry_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2:entry_program_review"
@@ -10,28 +11,63 @@ target_control: "A.7.2"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.7.2:rev_access_lists"
-    description: "Per-area access-list review outcome (active / amended / revoked) — cross-link to A.5.18 access re..."
+  - must_id: "item:A.7.2:rev_register_update"
+    description: "Changes propagated to the procedure / authorisation lists"
     excerpt_keywords:
-      - [access, lists, physical]
+      - [changes, propagated, physical]
+      - [changes, propagated, authorisation, physical]
+      - [propagated, authorisation, physical]
+      - [propagated, authorisation, lists, physical]
+      - [authorisation, lists, physical]
+      - [per, revocation, physical]
+      - [per, revoked, identity, physical]
+      - [revocation, record, physical]
 
   - must_id: "item:A.7.2:rev_anomalies"
     description: "Anomaly review (flagged events from the register triaged)"
     excerpt_keywords:
       - [anomaly, review, physical]
+      - [anomaly, review, flagged, physical]
+      - [review, flagged, physical]
+      - [review, flagged, events, physical]
+      - [flagged, events, physical]
+      - [flagged, events, triaged, physical]
+      - [events, triaged, physical]
+      - [per, revocation, physical]
 
-  - must_id: "item:A.7.2:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:A.7.2:rev_access_lists"
+    description: "Per-area access-list review outcome (active / amended / revoked) — cross-link to A.5.18 access review"
     excerpt_keywords:
-      - [review, date, planned, interval, physical]
-
-  - must_id: "item:A.7.2:rev_register_update"
-    description: "Changes propagated to the procedure / authorisation lists"
-    excerpt_keywords:
-      - [register, update, physical]
-      - [changes, propagated, procedure, authorisation, physical]
+      - [access, lists, physical]
+      - [area, access, physical]
+      - [area, access, review, physical]
+      - [access, review, physical]
+      - [access, review, outcome, physical]
+      - [review, outcome, physical]
+      - [review, outcome, active, physical]
+      - [outcome, active, physical]
 
   - must_id: "item:A.7.2:rev_reviewer"
     description: "Reviewer identity (Facilities + InfoSec)"
     excerpt_keywords:
       - [reviewer, identity, physical]
+      - [reviewer, identity, facilities, physical]
+      - [identity, facilities, physical]
+      - [identity, facilities, infosec, physical]
+      - [facilities, infosec, physical]
+      - [per, revocation, physical]
+      - [per, revoked, identity, physical]
+      - [revocation, record, physical]
+
+  - must_id: "item:A.7.2:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, physical]
+      - [review, date, within, physical]
+      - [date, within, physical]
+      - [date, within, planned, physical]
+      - [within, planned, physical]
+      - [within, planned, interval, physical]
+      - [planned, interval, physical]
+      - [per, revocation, physical]
+

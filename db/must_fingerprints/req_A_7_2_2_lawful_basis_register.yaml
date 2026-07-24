@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.2.2:reg_purpose_link"
     description: "Purpose link (which A.7.2.1 purpose(s) this basis authorises)"
     excerpt_keywords:
-      - [purpose, purpose]
-      - [purpose, purpose, basis]
-      - [purpose, basis]
-      - [purpose, basis, authorises]
-      - [basis, authorises]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [purpose, purpose, identify]
+      - [purpose, purpose, basis, identify]
+      - [purpose, basis, identify]
+      - [purpose, basis, authorises, identify]
+      - [basis, authorises, identify]
+      - [per, row, identify]
+      - [each, row, identify]
+      - [column, containing, identify]
 
   - must_id: "item:A.7.2.2:reg_lia_reference"
     description: "LIA reference per row where basis is legitimate interests"
     excerpt_keywords:
-      - [lia, reference]
-      - [lia, reference, basis]
-      - [reference, basis]
-      - [reference, basis, legitimate]
-      - [basis, legitimate]
-      - [basis, legitimate, interests]
-      - [legitimate, interests]
-      - [per, row]
+      - [lia, reference, identify]
+      - [lia, reference, basis, identify]
+      - [reference, basis, identify]
+      - [reference, basis, legitimate, identify]
+      - [basis, legitimate, identify]
+      - [basis, legitimate, interests, identify]
+      - [legitimate, interests, identify]
+      - [per, row, identify]
 
   - must_id: "item:A.7.2.2:reg_special_category_basis"
     description: "Special-category basis where applicable (Art.9.2.a-j / Art.10 basis)"
     excerpt_keywords:
-      - [special, category, basis]
-      - [special, category]
-      - [category, basis]
-      - [category, basis, art]
-      - [basis, art]
-      - [basis, art, art]
-      - [art, art]
-      - [art, art, basis]
+      - [special, category, basis, identify]
+      - [special, category, identify]
+      - [category, basis, identify]
+      - [category, basis, art, identify]
+      - [basis, art, identify]
+      - [basis, art, art, identify]
+      - [art, art, identify]
+      - [art, art, basis, identify]
 
   - must_id: "item:A.7.2.2:reg_primary_basis"
     description: "Primary basis cited per row (Art.6.1.a-f or equivalent)"
     excerpt_keywords:
-      - [primary, basis]
-      - [primary, basis, cited]
-      - [basis, cited]
-      - [basis, cited, art]
-      - [cited, art]
-      - [cited, art, equivalent]
-      - [art, equivalent]
-      - [per, row]
+      - [primary, basis, identify]
+      - [primary, basis, cited, identify]
+      - [basis, cited, identify]
+      - [basis, cited, art, identify]
+      - [cited, art, identify]
+      - [cited, art, equivalent, identify]
+      - [art, equivalent, identify]
+      - [per, row, identify]
 
   - must_id: "item:A.7.2.2:reg_activity_id"
     description: "Processing activity identifier per row"
     excerpt_keywords:
-      - [activity, id]
-      - [processing, activity]
-      - [processing, activity, identifier]
-      - [activity, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [activity, id, identify]
+      - [processing, activity, identify]
+      - [processing, activity, identifier, identify]
+      - [activity, identifier, identify]
+      - [per, row, identify]
+      - [each, row, identify]
+      - [column, containing, identify]
+      - [each, entry, identify]
 

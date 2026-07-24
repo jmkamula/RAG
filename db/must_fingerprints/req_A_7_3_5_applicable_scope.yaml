@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.5:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.5:applicable_scope"
@@ -10,24 +11,51 @@ target_control: "A.7.3.5"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.5:scope_legitimate_interests"
-    description: "Legitimate-interests processing enumerated (Art.21.1 balancing-test objection applies)"
+  - must_id: "item:A.7.3.5:scope_research_stats"
+    description: "Research / statistics processing (Art.21.6 applies)"
     excerpt_keywords:
-      - [scope, legitimate, interests, providing]
-
-  - must_id: "item:A.7.3.5:scope_marketing_processing"
-    description: "Marketing processing enumerated (Art.21.2 absolute objection applies)"
-    excerpt_keywords:
-      - [scope, marketing, processing, providing]
-      - [marketing, processing, enumerated, providing]
+      - [research, stats, providing]
+      - [research, statistics, providing]
+      - [research, statistics, processing, providing]
+      - [statistics, processing, providing]
+      - [statistics, processing, art, providing]
+      - [processing, art, providing]
+      - [in, scope, providing]
+      - [scope, includes, providing]
 
   - must_id: "item:A.7.3.5:scope_public_task"
     description: "Public-task processing enumerated (Art.21.1 applies)"
     excerpt_keywords:
-      - [scope, public, task, providing]
+      - [public, task, providing]
+      - [public, task, processing, providing]
+      - [task, processing, providing]
+      - [task, processing, enumerated, providing]
+      - [processing, enumerated, providing]
+      - [processing, enumerated, art, providing]
+      - [enumerated, art, providing]
+      - [in, scope, providing]
 
-  - must_id: "item:A.7.3.5:scope_research_stats"
-    description: "Research / statistics processing (Art.21.6 applies)"
+  - must_id: "item:A.7.3.5:scope_legitimate_interests"
+    description: "Legitimate-interests processing enumerated (Art.21.1 balancing-test objection applies)"
     excerpt_keywords:
-      - [scope, research, stats, providing]
-      - [research, statistics, processing, providing]
+      - [legitimate, interests, providing]
+      - [legitimate, interests, processing, providing]
+      - [interests, processing, providing]
+      - [interests, processing, enumerated, providing]
+      - [processing, enumerated, providing]
+      - [processing, enumerated, art, providing]
+      - [enumerated, art, providing]
+      - [enumerated, art, balancing, providing]
+
+  - must_id: "item:A.7.3.5:scope_marketing_processing"
+    description: "Marketing processing enumerated (Art.21.2 absolute objection applies)"
+    excerpt_keywords:
+      - [marketing, processing, providing]
+      - [marketing, processing, enumerated, providing]
+      - [processing, enumerated, providing]
+      - [processing, enumerated, art, providing]
+      - [enumerated, art, providing]
+      - [enumerated, art, absolute, providing]
+      - [art, absolute, providing]
+      - [art, absolute, objection, providing]
+

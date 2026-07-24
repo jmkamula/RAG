@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.4.9:proc_recipient_verification"
     description: "Recipient verification — PII reaches intended destination + not intercepted"
     excerpt_keywords:
-      - [recipient, verification]
+      - [recipient, verification, pii]
       - [recipient, verification, pii]
       - [verification, pii]
       - [verification, pii, reaches]
       - [pii, reaches]
       - [pii, reaches, intended]
-      - [reaches, intended]
-      - [reaches, intended, destination]
+      - [reaches, intended, pii]
+      - [reaches, intended, destination, pii]
 
   - must_id: "item:A.7.4.9:proc_integrity_verification"
     description: "Integrity verification (checksums / signed payloads for critical transmissions)"
     excerpt_keywords:
-      - [integrity, verification]
-      - [integrity, verification, checksums]
-      - [verification, checksums]
-      - [verification, checksums, signed]
-      - [checksums, signed]
-      - [checksums, signed, payloads]
-      - [signed, payloads]
-      - [signed, payloads, critical]
+      - [integrity, verification, pii]
+      - [integrity, verification, checksums, pii]
+      - [verification, checksums, pii]
+      - [verification, checksums, signed, pii]
+      - [checksums, signed, pii]
+      - [checksums, signed, payloads, pii]
+      - [signed, payloads, pii]
+      - [signed, payloads, critical, pii]
 
   - must_id: "item:A.7.4.9:proc_audit_logs"
     description: "Audit log retention for every transmission (who + what + when + where)"
     excerpt_keywords:
-      - [audit, logs]
-      - [audit, retention]
-      - [audit, retention, every]
-      - [retention, every]
+      - [audit, logs, pii]
+      - [audit, retention, pii]
+      - [audit, retention, every, pii]
+      - [retention, every, pii]
       - [retention, every, transmission]
       - [every, transmission]
-      - [procedure, step]
-      - [process, step]
+      - [procedure, step, pii]
+      - [process, step, pii]
 
   - must_id: "item:A.7.4.9:proc_encryption"
     description: "Encryption-in-transit standard (TLS 1.2+ / VPN / SFTP / etc.) per channel"
     excerpt_keywords:
-      - [encryption, transit]
-      - [encryption, transit, standard]
-      - [transit, standard]
-      - [transit, standard, tls]
-      - [standard, tls]
-      - [standard, tls, vpn]
-      - [tls, vpn]
-      - [tls, vpn, sftp]
+      - [encryption, transit, pii]
+      - [encryption, transit, standard, pii]
+      - [transit, standard, pii]
+      - [transit, standard, tls, pii]
+      - [standard, tls, pii]
+      - [standard, tls, vpn, pii]
+      - [tls, vpn, pii]
+      - [tls, vpn, sftp, pii]
 
   - must_id: "item:A.7.4.9:proc_authz_channels"
     description: "Authorised transmission channels defined (secure protocols + endpoints + auth requirements)"
     excerpt_keywords:
-      - [authz, channels]
+      - [authz, channels, pii]
       - [authorised, transmission]
       - [authorised, transmission, channels]
       - [transmission, channels]
       - [transmission, channels, defined]
-      - [channels, defined]
-      - [channels, defined, secure]
-      - [defined, secure]
+      - [channels, defined, pii]
+      - [channels, defined, secure, pii]
+      - [defined, secure, pii]
 

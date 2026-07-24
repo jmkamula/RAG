@@ -14,71 +14,71 @@ must_fingerprints:
   - must_id: "item:A.7.3.10:proc_cross_link_art22"
     description: "Cross-link to A.7.2.5 PIA and the Art.22 4-leaf procedure register — no double-registration; this control handles the SUBJECT-facing obligat"
     excerpt_keywords:
-      - [cross, art22]
-      - [cross, pia]
-      - [cross, pia, art]
-      - [pia, art]
-      - [pia, art, leaf]
-      - [art, leaf]
-      - [art, leaf, double]
-      - [leaf, double]
+      - [cross, art22, automated]
+      - [cross, pia, automated]
+      - [cross, pia, art, automated]
+      - [pia, art, automated]
+      - [pia, art, leaf, automated]
+      - [art, leaf, automated]
+      - [art, leaf, double, automated]
+      - [leaf, double, automated]
 
   - must_id: "item:A.7.3.10:proc_jurisdiction_prohibition"
     description: "Jurisdiction-specific full-automation prohibition awareness (§7.3.10 NOTE — some jurisdictions restrict full automation)"
     excerpt_keywords:
-      - [jurisdiction, prohibition]
-      - [jurisdiction, specific]
-      - [jurisdiction, specific, full]
-      - [specific, full]
-      - [specific, full, automation]
-      - [full, automation]
-      - [full, automation, prohibition]
-      - [automation, prohibition]
+      - [jurisdiction, prohibition, automated]
+      - [jurisdiction, specific, automated]
+      - [jurisdiction, specific, full, automated]
+      - [specific, full, automated]
+      - [specific, full, automation, automated]
+      - [full, automation, automated]
+      - [full, automation, prohibition, automated]
+      - [automation, prohibition, automated]
 
   - must_id: "item:A.7.3.10:proc_human_intervention"
     description: "Human intervention pathway (Art.22.3)"
     excerpt_keywords:
-      - [human, intervention]
-      - [human, intervention, pathway]
-      - [intervention, pathway]
-      - [intervention, pathway, art]
-      - [pathway, art]
-      - [procedure, step]
-      - [process, step]
-      - [responsibility, of]
+      - [human, intervention, automated]
+      - [human, intervention, pathway, automated]
+      - [intervention, pathway, automated]
+      - [intervention, pathway, art, automated]
+      - [pathway, art, automated]
+      - [procedure, step, automated]
+      - [process, step, automated]
+      - [responsibility, of, automated]
 
   - must_id: "item:A.7.3.10:proc_objection_pathway"
     description: "Objection pathway — subjects can object to automated decision-making"
     excerpt_keywords:
-      - [objection, pathway]
-      - [objection, pathway, subjects]
-      - [pathway, subjects]
-      - [pathway, subjects, can]
-      - [subjects, can]
-      - [subjects, can, object]
-      - [can, object]
+      - [objection, pathway, automated]
+      - [objection, pathway, subjects, automated]
+      - [pathway, subjects, automated]
+      - [pathway, subjects, can, automated]
+      - [subjects, can, automated]
+      - [subjects, can, object, automated]
+      - [can, object, automated]
       - [can, object, automated]
 
   - must_id: "item:A.7.3.10:proc_meaningful_logic"
     description: "Meaningful information about the logic + envisaged consequences"
     excerpt_keywords:
-      - [meaningful, logic]
-      - [meaningful, about]
-      - [meaningful, about, logic]
-      - [about, logic]
-      - [about, logic, envisaged]
-      - [logic, envisaged]
-      - [logic, envisaged, consequences]
-      - [envisaged, consequences]
+      - [meaningful, logic, automated]
+      - [meaningful, about, automated]
+      - [meaningful, about, logic, automated]
+      - [about, logic, automated]
+      - [about, logic, envisaged, automated]
+      - [logic, envisaged, automated]
+      - [logic, envisaged, consequences, automated]
+      - [envisaged, consequences, automated]
 
   - must_id: "item:A.7.3.10:proc_notification_of_existence"
     description: "Notification-of-existence — subjects informed that automated decision-making occurs (Art.13.2.f + 14.2.g)"
     excerpt_keywords:
-      - [notification, existence]
-      - [notification, existence, subjects]
-      - [existence, subjects]
-      - [existence, subjects, informed]
-      - [subjects, informed]
+      - [notification, existence, automated]
+      - [notification, existence, subjects, automated]
+      - [existence, subjects, automated]
+      - [existence, subjects, informed, automated]
+      - [subjects, informed, automated]
       - [subjects, informed, automated]
       - [informed, automated]
       - [informed, automated, decision]

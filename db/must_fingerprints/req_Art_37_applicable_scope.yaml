@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.37:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.37:applicable_scope"
@@ -10,19 +11,39 @@ target_control: "Art.37"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.37:scope_criteria_test"
-    description: "Art.37.1 criteria test operationalised (a public authority / b core activities = systematic monit..."
+  - must_id: "item:Art.37:scope_voluntary_assessment"
+    description: "Voluntary-designation assessment — even when not mandatory, did the org choose to designate (rationale recorded)"
     excerpt_keywords:
-      - [scope, criteria, test, designation]
-      - [art, criteria, test, operationalised, designation]
+      - [voluntary, assessment, designation]
+      - [voluntary, designation]
+      - [voluntary, designation, assessment]
+      - [designation, assessment]
+      - [designation, assessment, even]
+      - [assessment, even, designation]
+      - [assessment, even, not, designation]
+      - [even, not, designation]
 
   - must_id: "item:Art.37:scope_ms_law_overlay"
     description: "MS law overlay — Art.37.4 second sentence (MS may require designation in additional cases)"
     excerpt_keywords:
-      - [scope, law, overlay, designation]
+      - [ms, law, overlay, designation]
       - [law, overlay, designation]
+      - [law, overlay, art, designation]
+      - [overlay, art, designation]
+      - [overlay, art, second, designation]
+      - [art, second, designation]
+      - [art, second, sentence, designation]
+      - [second, sentence, designation]
 
-  - must_id: "item:Art.37:scope_voluntary_assessment"
-    description: "Voluntary-designation assessment — even when not mandatory, did the org choose to designate (rati..."
+  - must_id: "item:Art.37:scope_criteria_test"
+    description: "Art.37.1 criteria test operationalised (a public authority / b core activities = systematic monitoring large-scale / c core activities = lar"
     excerpt_keywords:
-      - [scope, voluntary, assessment, designation]
+      - [criteria, test, designation]
+      - [art, criteria, designation]
+      - [art, criteria, test, designation]
+      - [criteria, test, operationalised, designation]
+      - [test, operationalised, designation]
+      - [test, operationalised, public, designation]
+      - [operationalised, public, designation]
+      - [operationalised, public, authority, designation]
+

@@ -14,84 +14,84 @@ must_fingerprints:
   - must_id: "item:A.7.3.6:proc_refusal_reasoning"
     description: "Refusal reasoning — where request refused / cannot be met, subject informed of reasons + right to complain"
     excerpt_keywords:
-      - [refusal, reasoning]
-      - [refusal, reasoning, request]
-      - [reasoning, request]
-      - [reasoning, request, refused]
-      - [request, refused]
-      - [request, refused, cannot]
-      - [refused, cannot]
-      - [refused, cannot, met]
+      - [refusal, reasoning, access]
+      - [refusal, reasoning, request, access]
+      - [reasoning, request, access]
+      - [reasoning, request, refused, access]
+      - [request, refused, access]
+      - [request, refused, cannot, access]
+      - [refused, cannot, access]
+      - [refused, cannot, met, access]
 
   - must_id: "item:A.7.3.6:proc_response_sla"
     description: "Response-time SLA stated + honoured (undue delay standard)"
     excerpt_keywords:
-      - [response, sla]
-      - [response, time]
-      - [response, time, sla]
-      - [time, sla]
-      - [time, sla, stated]
-      - [sla, stated]
-      - [sla, stated, honoured]
-      - [stated, honoured]
+      - [response, sla, access]
+      - [response, time, access]
+      - [response, time, sla, access]
+      - [time, sla, access]
+      - [time, sla, stated, access]
+      - [sla, stated, access]
+      - [sla, stated, honoured, access]
+      - [stated, honoured, access]
 
   - must_id: "item:A.7.3.6:proc_downstream_propagation"
     description: "Downstream propagation — corrections/erasures pushed to systems + third parties (see A.7.3.7)"
     excerpt_keywords:
-      - [downstream, propagation]
-      - [downstream, propagation, corrections]
-      - [propagation, corrections]
-      - [propagation, corrections, erasures]
-      - [corrections, erasures]
-      - [corrections, erasures, pushed]
-      - [erasures, pushed]
-      - [erasures, pushed, third]
+      - [downstream, propagation, access]
+      - [downstream, propagation, corrections, access]
+      - [propagation, corrections, access]
+      - [propagation, corrections, erasures, access]
+      - [corrections, erasures, access]
+      - [corrections, erasures, pushed, access]
+      - [erasures, pushed, access]
+      - [erasures, pushed, third, access]
 
   - must_id: "item:A.7.3.6:proc_erasure_flow"
     description: "Erasure flow — including retention-limit + legal-obligation exceptions"
     excerpt_keywords:
-      - [erasure, flow]
-      - [erasure, flow, including]
-      - [flow, including]
-      - [flow, including, retention]
-      - [including, retention]
-      - [including, retention, limit]
-      - [retention, limit]
-      - [retention, limit, legal]
+      - [erasure, flow, access]
+      - [erasure, flow, including, access]
+      - [flow, including, access]
+      - [flow, including, retention, access]
+      - [including, retention, access]
+      - [including, retention, limit, access]
+      - [retention, limit, access]
+      - [retention, limit, legal, access]
 
   - must_id: "item:A.7.3.6:proc_correction_flow"
     description: "Correction flow — including subject-dispute path when correction is disputed"
     excerpt_keywords:
       - [correction, flow]
       - [correction, flow, including]
-      - [flow, including]
-      - [flow, including, subject]
-      - [including, subject]
-      - [including, subject, dispute]
-      - [subject, dispute]
-      - [subject, dispute, path]
+      - [flow, including, access]
+      - [flow, including, subject, access]
+      - [including, subject, access]
+      - [including, subject, dispute, access]
+      - [subject, dispute, access]
+      - [subject, dispute, path, access]
 
   - must_id: "item:A.7.3.6:proc_access_flow"
     description: "Access flow — Art.15 fields + copy of PII processed (link to A.7.3.8)"
     excerpt_keywords:
       - [access, flow]
       - [access, flow, art]
-      - [flow, art]
-      - [flow, art, fields]
-      - [art, fields]
-      - [art, fields, copy]
-      - [fields, copy]
-      - [fields, copy, pii]
+      - [flow, art, access]
+      - [flow, art, fields, access]
+      - [art, fields, access]
+      - [art, fields, copy, access]
+      - [fields, copy, access]
+      - [fields, copy, pii, access]
 
   - must_id: "item:A.7.3.6:proc_identity_verification"
     description: "Identity verification step (proportionate — avoids granting rights to imposters)"
     excerpt_keywords:
-      - [identity, verification]
-      - [identity, verification, step]
-      - [verification, step]
-      - [verification, step, proportionate]
-      - [step, proportionate]
-      - [step, proportionate, avoids]
-      - [proportionate, avoids]
-      - [proportionate, avoids, granting]
+      - [identity, verification, access]
+      - [identity, verification, step, access]
+      - [verification, step, access]
+      - [verification, step, proportionate, access]
+      - [step, proportionate, access]
+      - [step, proportionate, avoids, access]
+      - [proportionate, avoids, access]
+      - [proportionate, avoids, granting, access]
 

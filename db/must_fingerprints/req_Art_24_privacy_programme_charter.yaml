@@ -14,70 +14,70 @@ must_fingerprints:
   - must_id: "item:Art.24:charter_review_cadence"
     description: "Review cadence stated (annual minimum)"
     excerpt_keywords:
-      - [charter, review, cadence]
-      - [review, cadence]
-      - [review, cadence, stated]
-      - [cadence, stated]
-      - [cadence, stated, annual]
-      - [stated, annual]
-      - [stated, annual, minimum]
-      - [annual, minimum]
+      - [charter, review, cadence, responsibility]
+      - [review, cadence, responsibility]
+      - [review, cadence, stated, responsibility]
+      - [cadence, stated, responsibility]
+      - [cadence, stated, annual, responsibility]
+      - [stated, annual, responsibility]
+      - [stated, annual, minimum, responsibility]
+      - [annual, minimum, responsibility]
 
   - must_id: "item:Art.24:charter_approval"
     description: "Approved by top management with date"
     excerpt_keywords:
-      - [charter, approval]
-      - [approved, top]
-      - [approved, top, management]
-      - [top, management]
-      - [top, management, date]
-      - [management, date]
+      - [charter, approval, responsibility]
+      - [approved, top, responsibility]
+      - [approved, top, management, responsibility]
+      - [top, management, responsibility]
+      - [top, management, date, responsibility]
+      - [management, date, responsibility]
 
   - must_id: "item:Art.24:charter_owner"
     description: "Named programme owner (typically DPO or Chief Privacy Officer)"
     excerpt_keywords:
-      - [charter, owner]
-      - [named, programme]
-      - [named, programme, owner]
-      - [programme, owner]
-      - [programme, owner, typically]
-      - [owner, typically]
-      - [owner, typically, dpo]
-      - [typically, dpo]
+      - [charter, owner, responsibility]
+      - [named, programme, responsibility]
+      - [named, programme, owner, responsibility]
+      - [programme, owner, responsibility]
+      - [programme, owner, typically, responsibility]
+      - [owner, typically, responsibility]
+      - [owner, typically, dpo, responsibility]
+      - [typically, dpo, responsibility]
 
   - must_id: "item:Art.24:charter_governance"
     description: "Governance forum cadence (privacy steering committee, frequency, attendees)"
     excerpt_keywords:
-      - [charter, governance]
-      - [governance, forum]
-      - [governance, forum, cadence]
-      - [forum, cadence]
-      - [forum, cadence, privacy]
-      - [cadence, privacy]
-      - [cadence, privacy, steering]
-      - [privacy, steering]
+      - [charter, governance, responsibility]
+      - [governance, forum, responsibility]
+      - [governance, forum, cadence, responsibility]
+      - [forum, cadence, responsibility]
+      - [forum, cadence, privacy, responsibility]
+      - [cadence, privacy, responsibility]
+      - [cadence, privacy, steering, responsibility]
+      - [privacy, steering, responsibility]
 
   - must_id: "item:Art.24:charter_scope"
     description: "Scope of the privacy programme (which legal entities, processing activities, geographies)"
     excerpt_keywords:
-      - [charter, scope]
-      - [scope, privacy]
-      - [scope, privacy, programme]
-      - [privacy, programme]
-      - [privacy, programme, legal]
-      - [programme, legal]
-      - [programme, legal, entities]
-      - [legal, entities]
+      - [charter, scope, responsibility]
+      - [scope, privacy, responsibility]
+      - [scope, privacy, programme, responsibility]
+      - [privacy, programme, responsibility]
+      - [privacy, programme, legal, responsibility]
+      - [programme, legal, responsibility]
+      - [programme, legal, entities, responsibility]
+      - [legal, entities, responsibility]
 
   - must_id: "item:Art.24:charter_purpose"
     description: "Statement of GDPR compliance objective + accountability commitment"
     excerpt_keywords:
-      - [charter, purpose]
-      - [statement, gdpr]
-      - [statement, gdpr, compliance]
-      - [gdpr, compliance]
-      - [gdpr, compliance, objective]
-      - [compliance, objective]
-      - [compliance, objective, accountability]
-      - [objective, accountability]
+      - [charter, purpose, responsibility]
+      - [statement, gdpr, responsibility]
+      - [statement, gdpr, compliance, responsibility]
+      - [gdpr, compliance, responsibility]
+      - [gdpr, compliance, objective, responsibility]
+      - [compliance, objective, responsibility]
+      - [compliance, objective, accountability, responsibility]
+      - [objective, accountability, responsibility]
 

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.18:restriction_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.18:restriction_program_review"
@@ -10,28 +11,63 @@ target_control: "Art.18"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.18:rev_active_restrictions"
-    description: "Active-restrictions check — every active row still has a valid Art.18.1 ground"
-    excerpt_keywords:
-      - [active, restrictions, right]
-
   - must_id: "item:Art.18:rev_art19_compliance"
     description: "Art.19 notification compliance — recipient notifications fired for new/lifted restrictions"
     excerpt_keywords:
       - [art19, compliance, right]
+      - [art, notification, right]
       - [art, notification, compliance, right]
-
-  - must_id: "item:Art.18:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, right]
+      - [notification, compliance, right]
+      - [notification, compliance, recipient, right]
+      - [compliance, recipient, right]
+      - [compliance, recipient, notifications, right]
+      - [recipient, notifications, right]
 
   - must_id: "item:Art.18:rev_exception_compliance"
     description: "Exception compliance — restricted records only used per Art.18.2 exceptions"
     excerpt_keywords:
       - [exception, compliance, right]
+      - [exception, compliance, restricted, right]
+      - [compliance, restricted, right]
+      - [compliance, restricted, records, right]
+      - [restricted, records, right]
+      - [restricted, records, only, right]
+      - [records, only, right]
+      - [records, only, used, right]
+
+  - must_id: "item:Art.18:rev_active_restrictions"
+    description: "Active-restrictions check — every active row still has a valid Art.18.1 ground"
+    excerpt_keywords:
+      - [active, restrictions, right]
+      - [active, restrictions, check, right]
+      - [restrictions, check, right]
+      - [restrictions, check, every, right]
+      - [check, every, right]
+      - [check, every, active, right]
+      - [every, active, right]
+      - [every, active, still, right]
 
   - must_id: "item:Art.18:rev_reviewer"
     description: "Reviewer identity (DPO + ops lead)"
     excerpt_keywords:
       - [reviewer, identity, right]
+      - [reviewer, identity, dpo, right]
+      - [identity, dpo, right]
+      - [identity, dpo, ops, right]
+      - [dpo, ops, right]
+      - [dpo, ops, lead, right]
+      - [ops, lead, right]
+      - [per, revocation, right]
+
+  - must_id: "item:Art.18:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, right]
+      - [review, date, within, right]
+      - [date, within, right]
+      - [date, within, planned, right]
+      - [within, planned, right]
+      - [within, planned, interval, right]
+      - [planned, interval, right]
+      - [per, revocation, right]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.47:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.47:applicable_scope"
@@ -10,18 +11,39 @@ target_control: "Art.47"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
+  - must_id: "item:Art.47:scope_extension"
+    description: "New-entity onboarding rule — how a newly-acquired or newly-spun-up entity joins the BCRs (or moves to alternative safeguard)"
+    excerpt_keywords:
+      - [new, entity, binding]
+      - [new, entity, onboarding, binding]
+      - [entity, onboarding, binding]
+      - [entity, onboarding, rule, binding]
+      - [onboarding, rule, binding]
+      - [onboarding, rule, newly, binding]
+      - [rule, newly, binding]
+      - [rule, newly, acquired, binding]
+
   - must_id: "item:Art.47:scope_entities"
     description: "Bound entities enumerated (jurisdictions + roles)"
     excerpt_keywords:
-      - [scope, entities, binding]
+      - [bound, entities, binding]
       - [bound, entities, enumerated, binding]
-
-  - must_id: "item:Art.47:scope_extension"
-    description: "New-entity onboarding rule — how a newly-acquired or newly-spun-up entity joins the BCRs (or move..."
-    excerpt_keywords:
-      - [scope, extension, binding]
+      - [entities, enumerated, binding]
+      - [entities, enumerated, jurisdictions, binding]
+      - [enumerated, jurisdictions, binding]
+      - [enumerated, jurisdictions, roles, binding]
+      - [jurisdictions, roles, binding]
+      - [in, scope, binding]
 
   - must_id: "item:Art.47:scope_intra_group_flows"
     description: "Intra-group flows covered (controller-to-controller / controller-to-processor)"
     excerpt_keywords:
-      - [scope, intra, group, flows, binding]
+      - [intra, group, flows, binding]
+      - [intra, group, binding]
+      - [group, flows, binding]
+      - [group, flows, covered, binding]
+      - [flows, covered, binding]
+      - [flows, covered, controller, binding]
+      - [covered, controller, binding]
+      - [covered, controller, controller, binding]
+

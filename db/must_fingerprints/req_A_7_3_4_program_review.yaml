@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.4:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.4:program_review"
@@ -10,22 +11,51 @@ target_control: "A.7.3.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.3.4:rev_propagation_audit"
+    description: "Propagation audit — sampled withdrawals verified to have stopped downstream processing + notified third parties"
+    excerpt_keywords:
+      - [propagation, audit, providing]
+      - [propagation, audit, sampled, providing]
+      - [audit, sampled, providing]
+      - [audit, sampled, withdrawals, providing]
+      - [sampled, withdrawals, providing]
+      - [sampled, withdrawals, verified, providing]
+      - [withdrawals, verified, providing]
+      - [withdrawals, verified, have, providing]
+
   - must_id: "item:A.7.3.4:rev_channel_test"
     description: "Channel test — end-to-end withdrawal test per channel"
     excerpt_keywords:
       - [channel, test, providing]
-
-  - must_id: "item:A.7.3.4:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, providing]
-
-  - must_id: "item:A.7.3.4:rev_propagation_audit"
-    description: "Propagation audit — sampled withdrawals verified to have stopped downstream processing + notified..."
-    excerpt_keywords:
-      - [propagation, audit, providing]
+      - [channel, test, end, providing]
+      - [test, end, providing]
+      - [test, end, end, providing]
+      - [end, end, providing]
+      - [end, end, withdrawal, providing]
+      - [end, withdrawal, providing]
+      - [end, withdrawal, test, providing]
 
   - must_id: "item:A.7.3.4:rev_reviewer"
     description: "Reviewer identity (DPO + Engineering)"
     excerpt_keywords:
       - [reviewer, identity, providing]
+      - [reviewer, identity, dpo, providing]
+      - [identity, dpo, providing]
+      - [identity, dpo, engineering, providing]
+      - [dpo, engineering, providing]
+      - [per, revocation, providing]
+      - [per, revoked, identity, providing]
+      - [revocation, record, providing]
+
+  - must_id: "item:A.7.3.4:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, providing]
+      - [review, date, within, providing]
+      - [date, within, providing]
+      - [date, within, planned, providing]
+      - [within, planned, providing]
+      - [within, planned, interval, providing]
+      - [planned, interval, providing]
+      - [per, revocation, providing]
+

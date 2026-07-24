@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.5:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.5:applicable_scope"
@@ -10,23 +11,51 @@ target_control: "A.7.2.5"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.5:scope_art35_3_mandatory"
-    description: "Art.35.3 mandatory categories mapped (systematic evaluation + Art.9/10 large-scale + systematic p..."
-    excerpt_keywords:
-      - [scope, art35, mandatory, privacy]
-      - [art, mandatory, categories, mapped, privacy]
-
   - must_id: "item:A.7.2.5:scope_exclusions"
     description: "Out-of-scope processing (low-risk / legacy) with rationale"
     excerpt_keywords:
-      - [scope, exclusions, privacy]
+      - [out, scope, privacy]
+      - [out, scope, processing, privacy]
+      - [scope, processing, privacy]
+      - [scope, processing, low, privacy]
+      - [processing, low, privacy]
+      - [processing, low, risk, privacy]
+      - [low, risk, privacy]
+      - [low, risk, legacy, privacy]
 
   - must_id: "item:A.7.2.5:scope_org_indicators"
     description: "Org-specific high-risk indicators (novel tech / vulnerable subjects / large-scale)"
     excerpt_keywords:
-      - [scope, org, indicators, privacy]
+      - [org, indicators, privacy]
+      - [org, specific, privacy]
+      - [org, specific, high, privacy]
+      - [specific, high, privacy]
+      - [specific, high, risk, privacy]
+      - [high, risk, privacy]
+      - [high, risk, indicators, privacy]
+      - [risk, indicators, privacy]
 
   - must_id: "item:A.7.2.5:scope_sa_lists"
     description: "SA-published mandatory-DPIA lists per applicable jurisdiction (Art.35.4)"
     excerpt_keywords:
-      - [scope, lists, privacy]
+      - [sa, lists, privacy]
+      - [published, mandatory, privacy]
+      - [published, mandatory, dpia, privacy]
+      - [mandatory, dpia, privacy]
+      - [mandatory, dpia, lists, privacy]
+      - [dpia, lists, privacy]
+      - [dpia, lists, jurisdiction, privacy]
+      - [lists, jurisdiction, privacy]
+
+  - must_id: "item:A.7.2.5:scope_art35_3_mandatory"
+    description: "Art.35.3 mandatory categories mapped (systematic evaluation + Art.9/10 large-scale + systematic public monitoring)"
+    excerpt_keywords:
+      - [art35, 3, mandatory, privacy]
+      - [art, mandatory, privacy]
+      - [art, mandatory, categories, privacy]
+      - [mandatory, categories, privacy]
+      - [mandatory, categories, mapped, privacy]
+      - [categories, mapped, privacy]
+      - [categories, mapped, systematic, privacy]
+      - [mapped, systematic, privacy]
+

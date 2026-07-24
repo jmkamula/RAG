@@ -16,55 +16,55 @@ must_fingerprints:
     excerpt_keywords:
       - [disclosure, mode]
       - [disclosure, mode, public]
-      - [mode, public]
-      - [mode, public, trust]
-      - [public, trust]
-      - [public, trust, page]
-      - [trust, page]
-      - [trust, page, dpa]
+      - [mode, public, disclosure]
+      - [mode, public, trust, disclosure]
+      - [public, trust, disclosure]
+      - [public, trust, page, disclosure]
+      - [trust, page, disclosure]
+      - [trust, page, dpa, disclosure]
 
   - must_id: "item:B.8.5.6:reg_countries"
     description: "Countries + international orgs disclosed per row"
     excerpt_keywords:
-      - [countries, international]
-      - [countries, international, orgs]
-      - [international, orgs]
-      - [international, orgs, disclosed]
-      - [orgs, disclosed]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [countries, international, disclosure]
+      - [countries, international, orgs, disclosure]
+      - [international, orgs, disclosure]
+      - [international, orgs, disclosed, disclosure]
+      - [orgs, disclosed, disclosure]
+      - [per, row, disclosure]
+      - [each, row, disclosure]
+      - [column, containing, disclosure]
 
   - must_id: "item:B.8.5.6:reg_disclosure_date"
     description: "Disclosure date per row (pre-use)"
     excerpt_keywords:
       - [disclosure, date]
       - [disclosure, date, pre]
-      - [date, pre]
-      - [date, pre, use]
-      - [pre, use]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [date, pre, disclosure]
+      - [date, pre, use, disclosure]
+      - [pre, use, disclosure]
+      - [per, row, disclosure]
+      - [each, row, disclosure]
+      - [column, containing, disclosure]
 
   - must_id: "item:B.8.5.6:reg_customer_id"
     description: "Customer per row"
     excerpt_keywords:
-      - [customer, id]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [customer, id, disclosure]
+      - [per, row, disclosure]
+      - [each, row, disclosure]
+      - [column, containing, disclosure]
+      - [each, entry, disclosure]
+      - [column, header, disclosure]
 
   - must_id: "item:B.8.5.6:reg_subcontractor_id"
     description: "Subcontractor identifier per row"
     excerpt_keywords:
-      - [subcontractor, id]
-      - [subcontractor, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [subcontractor, id, disclosure]
+      - [subcontractor, identifier, disclosure]
+      - [per, row, disclosure]
+      - [each, row, disclosure]
+      - [column, containing, disclosure]
+      - [each, entry, disclosure]
+      - [column, header, disclosure]
 

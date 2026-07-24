@@ -14,9 +14,9 @@ must_fingerprints:
   - must_id: "item:A.7.3.10:reg_resolution"
     description: "Resolution per row (human-reviewed decision / procedure applied / dismissed with reason)"
     excerpt_keywords:
-      - [resolution, human]
-      - [resolution, human, reviewed]
-      - [human, reviewed]
+      - [resolution, human, automated]
+      - [resolution, human, reviewed, automated]
+      - [human, reviewed, automated]
       - [human, reviewed, decision]
       - [reviewed, decision]
       - [reviewed, decision, dismissed]
@@ -27,44 +27,44 @@ must_fingerprints:
     description: "Automated system involved per row"
     excerpt_keywords:
       - [automated, involved]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, automated]
+      - [each, row, automated]
+      - [column, containing, automated]
+      - [each, entry, automated]
+      - [column, header, automated]
 
   - must_id: "item:A.7.3.10:reg_event_type"
     description: "Event type per row (objection / human-intervention request / contest / expression-of-view)"
     excerpt_keywords:
-      - [event, objection]
-      - [event, objection, human]
-      - [objection, human]
-      - [objection, human, intervention]
-      - [human, intervention]
-      - [human, intervention, request]
-      - [intervention, request]
-      - [intervention, request, contest]
+      - [event, objection, automated]
+      - [event, objection, human, automated]
+      - [objection, human, automated]
+      - [objection, human, intervention, automated]
+      - [human, intervention, automated]
+      - [human, intervention, request, automated]
+      - [intervention, request, automated]
+      - [intervention, request, contest, automated]
 
   - must_id: "item:A.7.3.10:reg_subject_id"
     description: "Subject identifier per row"
     excerpt_keywords:
-      - [subject, id]
-      - [subject, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [subject, id, automated]
+      - [subject, identifier, automated]
+      - [per, row, automated]
+      - [each, row, automated]
+      - [column, containing, automated]
+      - [each, entry, automated]
+      - [column, header, automated]
 
   - must_id: "item:A.7.3.10:reg_event_id"
     description: "Unique event identifier per row"
     excerpt_keywords:
-      - [event, id]
-      - [unique, event]
-      - [unique, event, identifier]
-      - [event, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [event, id, automated]
+      - [unique, event, automated]
+      - [unique, event, identifier, automated]
+      - [event, identifier, automated]
+      - [per, row, automated]
+      - [each, row, automated]
+      - [column, containing, automated]
+      - [each, entry, automated]
 

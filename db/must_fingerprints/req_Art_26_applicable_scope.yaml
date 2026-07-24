@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.26:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.26:applicable_scope"
@@ -13,17 +14,36 @@ must_fingerprints:
   - must_id: "item:Art.26:scope_excluded"
     description: "Excluded relationships (independent-controllers / controller-processor / no joint decision)"
     excerpt_keywords:
-      - [scope, excluded, joint]
       - [excluded, relationships, joint]
-
-  - must_id: "item:Art.26:scope_joint_relationships"
-    description: "Relationships qualifying as joint controllership enumerated"
-    excerpt_keywords:
-      - [scope, joint, relationships]
-      - [relationships, qualifying, joint, controllership]
+      - [excluded, relationships, independent, joint]
+      - [relationships, independent, joint]
+      - [relationships, independent, controllers]
+      - [independent, controllers]
+      - [independent, controllers, controller]
+      - [controllers, controller]
+      - [controllers, controller, processor]
 
   - must_id: "item:Art.26:scope_test_criteria"
     description: "Test criteria for joint controllership (joint decision on means + purposes) per EDPB 7/2020"
     excerpt_keywords:
-      - [scope, test, criteria, joint]
-      - [test, criteria, joint, controllership]
+      - [test, criteria, joint]
+      - [test, criteria, joint]
+      - [criteria, joint]
+      - [criteria, joint, controllership]
+      - [joint, controllership]
+      - [joint, controllership, joint]
+      - [controllership, joint]
+      - [controllership, joint, decision]
+
+  - must_id: "item:Art.26:scope_joint_relationships"
+    description: "Relationships qualifying as joint controllership enumerated"
+    excerpt_keywords:
+      - [joint, relationships]
+      - [relationships, qualifying, joint]
+      - [relationships, qualifying, joint]
+      - [qualifying, joint]
+      - [qualifying, joint, controllership]
+      - [joint, controllership]
+      - [joint, controllership, enumerated]
+      - [controllership, enumerated, joint]
+

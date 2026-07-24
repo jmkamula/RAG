@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.1:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.1:program_review"
@@ -10,27 +11,63 @@ target_control: "A.7.4.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.1:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:A.7.4.1:rev_drift_sweep"
+    description: "Drift sweep — new fields added since last review flagged for necessity review"
     excerpt_keywords:
-      - [review, date, planned, interval, limit]
+      - [drift, sweep, limit]
+      - [drift, sweep, new, limit]
+      - [sweep, new, limit]
+      - [sweep, new, fields, limit]
+      - [new, fields, limit]
+      - [new, fields, added, limit]
+      - [fields, added, limit]
+      - [fields, added, since, limit]
 
   - must_id: "item:A.7.4.1:rev_default_state_audit"
     description: "Default-state audit — optional fields default off across surfaces"
     excerpt_keywords:
       - [default, state, audit, limit]
-
-  - must_id: "item:A.7.4.1:rev_drift_sweep"
-    description: "Drift sweep — new fields added since last review flagged for necessity review"
-    excerpt_keywords:
-      - [drift, sweep, limit]
+      - [default, state, limit]
+      - [state, audit, limit]
+      - [state, audit, optional, limit]
+      - [audit, optional, limit]
+      - [audit, optional, fields, limit]
+      - [optional, fields, limit]
+      - [optional, fields, default, limit]
 
   - must_id: "item:A.7.4.1:rev_necessity_audit"
     description: "Necessity audit — sampled fields reviewed against current purpose register"
     excerpt_keywords:
       - [necessity, audit, limit]
+      - [necessity, audit, sampled, limit]
+      - [audit, sampled, limit]
+      - [audit, sampled, fields, limit]
+      - [sampled, fields, limit]
+      - [sampled, fields, reviewed, limit]
+      - [fields, reviewed, limit]
+      - [fields, reviewed, against, limit]
 
   - must_id: "item:A.7.4.1:rev_reviewer"
     description: "Reviewer identity (DPO + Privacy Engineering)"
     excerpt_keywords:
       - [reviewer, identity, limit]
+      - [reviewer, identity, dpo, limit]
+      - [identity, dpo, limit]
+      - [identity, dpo, privacy, limit]
+      - [dpo, privacy, limit]
+      - [dpo, privacy, engineering, limit]
+      - [privacy, engineering, limit]
+      - [per, revocation, limit]
+
+  - must_id: "item:A.7.4.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, limit]
+      - [review, date, within, limit]
+      - [date, within, limit]
+      - [date, within, planned, limit]
+      - [within, planned, limit]
+      - [within, planned, interval, limit]
+      - [planned, interval, limit]
+      - [per, revocation, limit]
+

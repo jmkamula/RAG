@@ -14,48 +14,48 @@ must_fingerprints:
   - must_id: "item:B.8.5.3:proc_source_of_disclosure"
     description: "Internal source (which team/system released data) captured"
     excerpt_keywords:
-      - [source, disclosure]
-      - [internal, source]
-      - [internal, source, team]
-      - [source, team]
-      - [source, team, released]
-      - [team, released]
-      - [team, released, captured]
-      - [released, captured]
+      - [source, disclosure, records]
+      - [internal, source, records]
+      - [internal, source, team, records]
+      - [source, team, records]
+      - [source, team, released, records]
+      - [team, released, records]
+      - [team, released, captured, records]
+      - [released, captured, records]
 
   - must_id: "item:B.8.5.3:proc_authority_source"
     description: "Source of authority captured per disclosure"
     excerpt_keywords:
-      - [authority, source]
-      - [source, authority]
-      - [source, authority, captured]
-      - [authority, captured]
-      - [authority, captured, disclosure]
-      - [captured, disclosure]
-      - [procedure, step]
-      - [process, step]
+      - [authority, source, records]
+      - [source, authority, records]
+      - [source, authority, captured, records]
+      - [authority, captured, records]
+      - [authority, captured, disclosure, records]
+      - [captured, disclosure, records]
+      - [procedure, step, records]
+      - [process, step, records]
 
   - must_id: "item:B.8.5.3:proc_investigation_audit"
     description: "Investigation + external audit disclosures also recorded"
     excerpt_keywords:
-      - [investigation, audit]
-      - [investigation, external]
-      - [investigation, external, audit]
-      - [external, audit]
-      - [external, audit, disclosures]
-      - [audit, disclosures]
-      - [audit, disclosures, also]
-      - [disclosures, also]
+      - [investigation, audit, records]
+      - [investigation, external, records]
+      - [investigation, external, audit, records]
+      - [external, audit, records]
+      - [external, audit, disclosures, records]
+      - [audit, disclosures, records]
+      - [audit, disclosures, also, records]
+      - [disclosures, also, records]
 
   - must_id: "item:B.8.5.3:proc_normal_disclosures"
     description: "Normal-course disclosures recorded"
     excerpt_keywords:
-      - [normal, disclosures]
-      - [normal, course]
-      - [normal, course, disclosures]
-      - [course, disclosures]
-      - [course, disclosures, recorded]
-      - [disclosures, recorded]
-      - [procedure, step]
-      - [process, step]
+      - [normal, disclosures, records]
+      - [normal, course, records]
+      - [normal, course, disclosures, records]
+      - [course, disclosures, records]
+      - [course, disclosures, recorded, records]
+      - [disclosures, recorded, records]
+      - [procedure, step, records]
+      - [process, step, records]
 

@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:B.8.5.1:reg_change_history"
     description: "Change history per row (all previous bases + notification dates)"
     excerpt_keywords:
-      - [change, history]
-      - [change, history, previous]
-      - [history, previous]
-      - [history, previous, bases]
-      - [previous, bases]
-      - [previous, bases, notification]
-      - [bases, notification]
-      - [bases, notification, dates]
+      - [change, history, basis]
+      - [change, history, previous, basis]
+      - [history, previous, basis]
+      - [history, previous, bases, basis]
+      - [previous, bases, basis]
+      - [previous, bases, notification, basis]
+      - [bases, notification, basis]
+      - [bases, notification, dates, basis]
 
   - must_id: "item:B.8.5.1:reg_customer_notification_date"
     description: "Customer notification date per row"
     excerpt_keywords:
-      - [customer, notification, date]
-      - [customer, notification]
-      - [notification, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [customer, notification, date, basis]
+      - [customer, notification, basis]
+      - [notification, date, basis]
+      - [per, row, basis]
+      - [each, row, basis]
+      - [column, containing, basis]
+      - [each, entry, basis]
+      - [column, header, basis]
 
   - must_id: "item:B.8.5.1:reg_basis"
     description: "Basis cited per row (Art.45/46/47/49 or equivalent)"
     excerpt_keywords:
       - [basis, cited]
       - [basis, cited, art]
-      - [cited, art]
-      - [cited, art, equivalent]
-      - [art, equivalent]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [cited, art, basis]
+      - [cited, art, equivalent, basis]
+      - [art, equivalent, basis]
+      - [per, row, basis]
+      - [each, row, basis]
+      - [column, containing, basis]
 
   - must_id: "item:B.8.5.1:reg_jurisdiction_pair"
     description: "Origin + destination jurisdiction per row"
     excerpt_keywords:
-      - [jurisdiction, pair]
-      - [origin, destination]
-      - [origin, destination, jurisdiction]
-      - [destination, jurisdiction]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [jurisdiction, pair, basis]
+      - [origin, destination, basis]
+      - [origin, destination, jurisdiction, basis]
+      - [destination, jurisdiction, basis]
+      - [per, row, basis]
+      - [each, row, basis]
+      - [column, containing, basis]
+      - [each, entry, basis]
 
   - must_id: "item:B.8.5.1:reg_relationship_id"
     description: "Unique transfer relationship identifier per row"
     excerpt_keywords:
-      - [relationship, id]
-      - [unique, transfer]
-      - [unique, transfer, relationship]
-      - [transfer, relationship]
-      - [transfer, relationship, identifier]
-      - [relationship, identifier]
-      - [per, row]
-      - [each, row]
+      - [relationship, id, basis]
+      - [unique, transfer, basis]
+      - [unique, transfer, relationship, basis]
+      - [transfer, relationship, basis]
+      - [transfer, relationship, identifier, basis]
+      - [relationship, identifier, basis]
+      - [per, row, basis]
+      - [each, row, basis]
 

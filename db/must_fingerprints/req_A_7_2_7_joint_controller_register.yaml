@@ -14,33 +14,33 @@ must_fingerprints:
   - must_id: "item:A.7.2.7:reg_effective_dates"
     description: "Effective / termination dates per row"
     excerpt_keywords:
-      - [effective, dates]
-      - [effective, termination]
-      - [effective, termination, dates]
-      - [termination, dates]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [effective, dates, joint]
+      - [effective, termination, joint]
+      - [effective, termination, dates, joint]
+      - [termination, dates, joint]
+      - [per, row, joint]
+      - [each, row, joint]
+      - [column, containing, joint]
+      - [each, entry, joint]
 
   - must_id: "item:A.7.2.7:reg_essence_url"
     description: "Essence-of-arrangement URL / publication reference per row"
     excerpt_keywords:
-      - [essence, url]
-      - [essence, arrangement]
-      - [essence, arrangement, url]
-      - [arrangement, url]
-      - [arrangement, url, publication]
-      - [url, publication]
-      - [url, publication, reference]
-      - [publication, reference]
+      - [essence, url, joint]
+      - [essence, arrangement, joint]
+      - [essence, arrangement, url, joint]
+      - [arrangement, url, joint]
+      - [arrangement, url, publication, joint]
+      - [url, publication, joint]
+      - [url, publication, reference, joint]
+      - [publication, reference, joint]
 
   - must_id: "item:A.7.2.7:reg_processing_scope"
     description: "Processing scope per row (activities + PII categories jointly handled)"
     excerpt_keywords:
-      - [processing, scope]
-      - [processing, scope, activities]
-      - [scope, activities]
+      - [processing, scope, joint]
+      - [processing, scope, activities, joint]
+      - [scope, activities, joint]
       - [scope, activities, pii]
       - [activities, pii]
       - [activities, pii, categories]
@@ -50,36 +50,36 @@ must_fingerprints:
   - must_id: "item:A.7.2.7:reg_document_reference"
     description: "Executed arrangement document reference per row"
     excerpt_keywords:
-      - [document, reference]
-      - [executed, arrangement]
-      - [executed, arrangement, document]
-      - [arrangement, document]
-      - [arrangement, document, reference]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [document, reference, joint]
+      - [executed, arrangement, joint]
+      - [executed, arrangement, document, joint]
+      - [arrangement, document, joint]
+      - [arrangement, document, reference, joint]
+      - [per, row, joint]
+      - [each, row, joint]
+      - [column, containing, joint]
 
   - must_id: "item:A.7.2.7:reg_co_controller"
     description: "Co-controller identity per row (legal entity)"
     excerpt_keywords:
-      - [co, controller]
-      - [controller, identity]
-      - [controller, identity, legal]
-      - [identity, legal]
-      - [identity, legal, entity]
-      - [legal, entity]
-      - [per, row]
-      - [each, row]
+      - [co, controller, joint]
+      - [controller, identity, joint]
+      - [controller, identity, legal, joint]
+      - [identity, legal, joint]
+      - [identity, legal, entity, joint]
+      - [legal, entity, joint]
+      - [per, row, joint]
+      - [each, row, joint]
 
   - must_id: "item:A.7.2.7:reg_arrangement_id"
     description: "Unique arrangement identifier per row"
     excerpt_keywords:
-      - [arrangement, id]
-      - [unique, arrangement]
-      - [unique, arrangement, identifier]
-      - [arrangement, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [arrangement, id, joint]
+      - [unique, arrangement, joint]
+      - [unique, arrangement, identifier, joint]
+      - [arrangement, identifier, joint]
+      - [per, row, joint]
+      - [each, row, joint]
+      - [column, containing, joint]
+      - [each, entry, joint]
 

@@ -14,71 +14,71 @@ must_fingerprints:
   - must_id: "item:A.7.3.7:proc_subject_disclosure"
     description: "Subject-disclosure obligation — on request, org informs the subject of recipients notified (Art.19)"
     excerpt_keywords:
-      - [subject, disclosure]
-      - [subject, disclosure, obligation]
-      - [disclosure, obligation]
-      - [disclosure, obligation, request]
-      - [obligation, request]
-      - [obligation, request, org]
-      - [request, org]
-      - [request, org, informs]
+      - [subject, disclosure, pii]
+      - [subject, disclosure, obligation, pii]
+      - [disclosure, obligation, pii]
+      - [disclosure, obligation, request, pii]
+      - [obligation, request, pii]
+      - [obligation, request, org, pii]
+      - [request, org, pii]
+      - [request, org, informs, pii]
 
   - must_id: "item:A.7.3.7:proc_impossibility_exception"
     description: "Impossibility / disproportionate-effort exception documented per Art.19"
     excerpt_keywords:
-      - [impossibility, exception]
-      - [impossibility, disproportionate]
-      - [impossibility, disproportionate, effort]
-      - [disproportionate, effort]
-      - [disproportionate, effort, exception]
-      - [effort, exception]
-      - [effort, exception, documented]
-      - [exception, documented]
+      - [impossibility, exception, pii]
+      - [impossibility, disproportionate, pii]
+      - [impossibility, disproportionate, effort, pii]
+      - [disproportionate, effort, pii]
+      - [disproportionate, effort, exception, pii]
+      - [effort, exception, pii]
+      - [effort, exception, documented, pii]
+      - [exception, documented, pii]
 
   - must_id: "item:A.7.3.7:proc_ack_receipt"
     description: "Acknowledgement of receipt monitored"
     excerpt_keywords:
-      - [ack, receipt]
-      - [acknowledgement, receipt]
-      - [acknowledgement, receipt, monitored]
-      - [receipt, monitored]
-      - [procedure, step]
-      - [process, step]
-      - [responsibility, of]
+      - [ack, receipt, pii]
+      - [acknowledgement, receipt, pii]
+      - [acknowledgement, receipt, monitored, pii]
+      - [receipt, monitored, pii]
+      - [procedure, step, pii]
+      - [process, step, pii]
+      - [responsibility, of, pii]
 
   - must_id: "item:A.7.3.7:proc_notification_format"
     description: "Notification format standardised (e.g"
     excerpt_keywords:
-      - [notification, format]
-      - [notification, format, standardised]
-      - [format, standardised]
-      - [format, standardised, structured]
-      - [standardised, structured]
-      - [standardised, structured, message]
-      - [structured, message]
-      - [structured, message, subject]
+      - [notification, format, pii]
+      - [notification, format, standardised, pii]
+      - [format, standardised, pii]
+      - [format, standardised, structured, pii]
+      - [standardised, structured, pii]
+      - [standardised, structured, message, pii]
+      - [structured, message, pii]
+      - [structured, message, subject, pii]
 
   - must_id: "item:A.7.3.7:proc_trigger_map"
     description: "Trigger map — which subject events (withdrawal / correction / erasure / restriction / objection) require third-party notification"
     excerpt_keywords:
-      - [trigger, map]
-      - [trigger, map, subject]
-      - [map, subject]
-      - [map, subject, events]
-      - [subject, events]
-      - [subject, events, withdrawal]
-      - [events, withdrawal]
-      - [events, withdrawal, correction]
+      - [trigger, map, pii]
+      - [trigger, map, subject, pii]
+      - [map, subject, pii]
+      - [map, subject, events, pii]
+      - [subject, events, pii]
+      - [subject, events, withdrawal, pii]
+      - [events, withdrawal, pii]
+      - [events, withdrawal, correction, pii]
 
   - must_id: "item:A.7.3.7:proc_recipient_inventory"
     description: "Recipient inventory — active communication channels with every third party PII has been shared with (link to A.7.5.4 disclosure register)"
     excerpt_keywords:
-      - [recipient, inventory]
-      - [recipient, inventory, active]
-      - [inventory, active]
-      - [inventory, active, communication]
-      - [active, communication]
-      - [active, communication, channels]
-      - [communication, channels]
-      - [communication, channels, every]
+      - [recipient, inventory, pii]
+      - [recipient, inventory, active, pii]
+      - [inventory, active, pii]
+      - [inventory, active, communication, pii]
+      - [active, communication, pii]
+      - [active, communication, channels, pii]
+      - [communication, channels, pii]
+      - [communication, channels, every, pii]
 

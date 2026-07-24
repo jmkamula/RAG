@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.4.3:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.3:applicable_scope"
@@ -10,19 +11,39 @@ target_control: "B.8.4.3"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.4.3:scope_customer_facing"
-    description: "Customer-facing transmission (APIs + webhooks)"
-    excerpt_keywords:
-      - [scope, customer, facing, pii]
-
   - must_id: "item:B.8.4.3:scope_internal_flows"
     description: "Internal + cross-region flows (backup replication / DR / warehouse)"
     excerpt_keywords:
-      - [scope, internal, flows, pii]
+      - [internal, flows, pii]
       - [internal, cross, pii]
+      - [internal, cross, region, pii]
+      - [cross, region, pii]
+      - [cross, region, flows, pii]
+      - [region, flows, pii]
+      - [region, flows, backup, pii]
+      - [flows, backup, pii]
 
   - must_id: "item:B.8.4.3:scope_subprocessor_flows"
     description: "Subprocessor flows (data-sharing with subprocessors)"
     excerpt_keywords:
-      - [scope, subprocessor, flows, pii]
       - [subprocessor, flows, pii]
+      - [subprocessor, flows, sharing, pii]
+      - [flows, sharing, pii]
+      - [flows, sharing, subprocessors, pii]
+      - [sharing, subprocessors, pii]
+      - [in, scope, pii]
+      - [scope, includes, pii]
+      - [applicable, to, pii]
+
+  - must_id: "item:B.8.4.3:scope_customer_facing"
+    description: "Customer-facing transmission (APIs + webhooks)"
+    excerpt_keywords:
+      - [customer, facing, pii]
+      - [customer, facing, transmission]
+      - [facing, transmission]
+      - [facing, transmission, apis]
+      - [transmission, apis]
+      - [transmission, apis, webhooks]
+      - [apis, webhooks, pii]
+      - [in, scope, pii]
+

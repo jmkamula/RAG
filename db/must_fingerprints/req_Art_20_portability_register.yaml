@@ -14,59 +14,59 @@ must_fingerprints:
   - must_id: "item:Art.20:reg_delivery_date"
     description: "Per-row delivery date (within Art.12.3 SLA)"
     excerpt_keywords:
-      - [delivery, date]
-      - [delivery, date, within]
-      - [date, within]
-      - [date, within, art]
-      - [within, art]
-      - [within, art, sla]
-      - [art, sla]
-      - [per, row]
+      - [delivery, date, right]
+      - [delivery, date, within, right]
+      - [date, within, right]
+      - [date, within, art, right]
+      - [within, art, right]
+      - [within, art, sla, right]
+      - [art, sla, right]
+      - [per, row, right]
 
   - must_id: "item:Art.20:reg_destination"
     description: "Per-row destination (export to subject / direct controller transmission)"
     excerpt_keywords:
-      - [destination, export]
-      - [destination, export, subject]
-      - [export, subject]
-      - [export, subject, direct]
-      - [subject, direct]
-      - [subject, direct, controller]
-      - [direct, controller]
-      - [direct, controller, transmission]
+      - [destination, export, right]
+      - [destination, export, subject, right]
+      - [export, subject, right]
+      - [export, subject, direct, right]
+      - [subject, direct, right]
+      - [subject, direct, controller, right]
+      - [direct, controller, right]
+      - [direct, controller, transmission, right]
 
   - must_id: "item:Art.20:reg_format_delivered"
     description: "Per-row delivered format"
     excerpt_keywords:
-      - [format, delivered]
-      - [delivered, format]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [format, delivered, right]
+      - [delivered, format, right]
+      - [per, row, right]
+      - [each, row, right]
+      - [column, containing, right]
+      - [each, entry, right]
+      - [column, header, right]
 
   - must_id: "item:Art.20:reg_applicability_decision"
     description: "Per-row applicability decision (in-scope / out-of-scope with grounds)"
     excerpt_keywords:
-      - [applicability, decision]
-      - [applicability, decision, scope]
-      - [decision, scope]
-      - [decision, scope, out]
-      - [scope, out]
-      - [scope, out, scope]
-      - [out, scope]
-      - [out, scope, grounds]
+      - [applicability, decision, right]
+      - [applicability, decision, scope, right]
+      - [decision, scope, right]
+      - [decision, scope, out, right]
+      - [scope, out, right]
+      - [scope, out, scope, right]
+      - [out, scope, right]
+      - [out, scope, grounds, right]
 
   - must_id: "item:Art.20:reg_request_id"
     description: "Per-row request id (Art.12 register cross-reference)"
     excerpt_keywords:
-      - [request, id]
-      - [request, art]
-      - [request, art, cross]
-      - [art, cross]
-      - [art, cross, reference]
-      - [cross, reference]
-      - [per, row]
-      - [each, row]
+      - [request, id, right]
+      - [request, art, right]
+      - [request, art, cross, right]
+      - [art, cross, right]
+      - [art, cross, reference, right]
+      - [cross, reference, right]
+      - [per, row, right]
+      - [each, row, right]
 

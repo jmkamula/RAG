@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.49:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.49:applicable_scope"
@@ -10,20 +11,39 @@ target_control: "Art.49"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.49:scope_derogations_used"
-    description: "Derogations actually relied on enumerated (most orgs: a explicit consent + b contract; some: e le..."
+  - must_id: "item:Art.49:scope_repetitive_test"
+    description: "Operational interpretation of 'non-repetitive' for last-resort derogation"
     excerpt_keywords:
-      - [scope, derogations]
-      - [derogations, actually, relied, enumerated]
+      - [repetitive, test, derogations]
+      - [operational, interpretation, derogations]
+      - [operational, interpretation, non, derogations]
+      - [interpretation, non, derogations]
+      - [interpretation, non, repetitive, derogations]
+      - [non, repetitive, derogations]
+      - [non, repetitive, last, derogations]
+      - [repetitive, last, derogations]
 
   - must_id: "item:Art.49:scope_excluded"
     description: "Derogations explicitly NOT relied on (rationale)"
     excerpt_keywords:
-      - [scope, excluded, derogations]
-      - [derogations, explicitly, relied]
+      - [derogations, explicitly]
+      - [derogations, explicitly, not]
+      - [explicitly, not, derogations]
+      - [explicitly, not, relied, derogations]
+      - [not, relied, derogations]
+      - [not, relied, rationale, derogations]
+      - [relied, rationale, derogations]
+      - [in, scope, derogations]
 
-  - must_id: "item:Art.49:scope_repetitive_test"
-    description: "Operational interpretation of 'non-repetitive' for last-resort derogation"
+  - must_id: "item:Art.49:scope_derogations_used"
+    description: "Derogations actually relied on enumerated (most orgs: a explicit consent + b contract; some: e legal claims)"
     excerpt_keywords:
-      - [scope, repetitive, test, derogations]
-      - [operational, interpretation, non, derogations]
+      - [derogations, used]
+      - [derogations, actually]
+      - [derogations, actually, relied]
+      - [actually, relied, derogations]
+      - [actually, relied, enumerated, derogations]
+      - [relied, enumerated, derogations]
+      - [relied, enumerated, most, derogations]
+      - [enumerated, most, derogations]
+

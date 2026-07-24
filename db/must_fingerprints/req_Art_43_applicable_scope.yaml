@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.43:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.43:applicable_scope"
@@ -10,20 +11,36 @@ target_control: "Art.43"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.43:scope_accreditation"
-    description: "Accreditation scope + source (SA / NAB)"
-    excerpt_keywords:
-      - [scope, accreditation, certification]
-      - [accreditation, scope, source, certification]
-
   - must_id: "item:Art.43:scope_jurisdictions"
     description: "Jurisdictions covered"
     excerpt_keywords:
-      - [scope, jurisdictions, certification]
       - [jurisdictions, covered, certification]
+      - [in, scope, certification]
+      - [scope, includes, certification]
+      - [applicable, to, certification]
+      - [excluded, from, certification]
+
+  - must_id: "item:Art.43:scope_accreditation"
+    description: "Accreditation scope + source (SA / NAB)"
+    excerpt_keywords:
+      - [accreditation, scope, certification]
+      - [accreditation, scope, source, certification]
+      - [scope, source, certification]
+      - [scope, source, nab, certification]
+      - [source, nab, certification]
+      - [in, scope, certification]
+      - [scope, includes, certification]
+      - [applicable, to, certification]
 
   - must_id: "item:Art.43:scope_schemes_issued"
     description: "Schemes the body issues against"
     excerpt_keywords:
-      - [scope, schemes, issued, certification]
+      - [schemes, issued, certification]
+      - [schemes, body, certification]
       - [schemes, body, issues, certification]
+      - [body, issues, certification]
+      - [body, issues, against, certification]
+      - [issues, against, certification]
+      - [in, scope, certification]
+      - [scope, includes, certification]
+

@@ -14,52 +14,52 @@ must_fingerprints:
   - must_id: "item:B.8.5.3:reg_source_of_authority"
     description: "Source of authority per row"
     excerpt_keywords:
-      - [source, authority]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [source, authority, records]
+      - [per, row, records]
+      - [each, row, records]
+      - [column, containing, records]
+      - [each, entry, records]
+      - [column, header, records]
 
   - must_id: "item:B.8.5.3:reg_timestamp"
     description: "Timestamp per row"
     excerpt_keywords:
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, records]
+      - [each, row, records]
+      - [column, containing, records]
+      - [each, entry, records]
+      - [column, header, records]
 
   - must_id: "item:B.8.5.3:reg_recipient"
     description: "Recipient per row"
     excerpt_keywords:
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, records]
+      - [each, row, records]
+      - [column, containing, records]
+      - [each, entry, records]
+      - [column, header, records]
 
   - must_id: "item:B.8.5.3:reg_customer"
     description: "Customer whose PII was disclosed per row"
     excerpt_keywords:
-      - [customer, whose]
+      - [customer, whose, records]
       - [customer, whose, pii]
       - [whose, pii]
       - [whose, pii, disclosed]
       - [pii, disclosed]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [per, row, records]
+      - [each, row, records]
+      - [column, containing, records]
 
   - must_id: "item:B.8.5.3:reg_disclosure_id"
     description: "Unique disclosure identifier per row"
     excerpt_keywords:
-      - [disclosure, id]
-      - [unique, disclosure]
-      - [unique, disclosure, identifier]
-      - [disclosure, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [disclosure, id, records]
+      - [unique, disclosure, records]
+      - [unique, disclosure, identifier, records]
+      - [disclosure, identifier, records]
+      - [per, row, records]
+      - [each, row, records]
+      - [column, containing, records]
+      - [each, entry, records]
 

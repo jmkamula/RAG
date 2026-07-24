@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.5.26:ir_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.26:ir_program_review"
@@ -10,45 +11,99 @@ target_control: "A.5.26"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:A.5.26:rev_identity_pair_25"
+    description: "Bidirectional A.5.25 ↔ A.5.26 lifecycle pair check — every register row traces back to an A.5.25 triage decision (no orphan incidents) and e"
+    excerpt_keywords:
+      - [identity, pair, 25, response]
+      - [bidirectional, lifecycle, response]
+      - [bidirectional, lifecycle, pair, response]
+      - [lifecycle, pair, response]
+      - [lifecycle, pair, check, response]
+      - [pair, check, response]
+      - [pair, check, every, response]
+      - [check, every, response]
+
   - must_id: "item:A.5.26:rev_72h_feasibility"
-    description: "Art.33 72h feasibility audited empirically across the period — count of personal-data incidents, ..."
+    description: "Art.33 72h feasibility audited empirically across the period — count of personal-data incidents, count notified within 72h, root cause of an"
     excerpt_keywords:
       - [72h, feasibility, response]
-      - [art, 72h, feasibility, audited, response]
+      - [art, 72h, response]
+      - [art, 72h, feasibility, response]
+      - [72h, feasibility, audited, response]
+      - [feasibility, audited, response]
+      - [feasibility, audited, empirically, response]
+      - [audited, empirically, response]
+      - [audited, empirically, across, response]
 
   - must_id: "item:A.5.26:rev_actions"
-    description: "Action items captured (e.g. revise containment runbook, refresh contact list, schedule exercise)"
+    description: "Action items captured (e.g"
     excerpt_keywords:
+      - [action, items, response]
       - [action, items, captured, response]
-
-  - must_id: "item:A.5.26:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, response]
-
-  - must_id: "item:A.5.26:rev_exercise"
-    description: "Tabletop / simulation outcomes reviewed (or scheduled-but-not-yet-run noted)"
-    excerpt_keywords:
-      - [tabletop, simulation, outcomes, reviewed, response]
-
-  - must_id: "item:A.5.26:rev_identity_pair_25"
-    description: "Bidirectional A.5.25 ↔ A.5.26 lifecycle pair check — every register row traces back to an A.5.25 ..."
-    excerpt_keywords:
-      - [identity, pair, response]
-      - [bidirectional, lifecycle, pair, check, response]
-
-  - must_id: "item:A.5.26:rev_metrics"
-    description: "MTTC / MTTR / containment-success metrics analysed across the period"
-    excerpt_keywords:
-      - [mttc, mttr, containment, response]
+      - [items, captured, response]
+      - [items, captured, revise, response]
+      - [captured, revise, response]
+      - [captured, revise, containment, response]
+      - [revise, containment, response]
+      - [revise, containment, runbook, response]
 
   - must_id: "item:A.5.26:rev_procedure_currency"
     description: "Procedure currency assessed against threat landscape + new control changes"
     excerpt_keywords:
-      - [procedure, currency, response]
-      - [procedure, currency, assessed, threat, response]
+      - [currency, assessed, response]
+      - [currency, assessed, against, response]
+      - [assessed, against, response]
+      - [assessed, against, threat, response]
+      - [against, threat, response]
+      - [against, threat, landscape, response]
+      - [threat, landscape, response]
+      - [threat, landscape, new, response]
+
+  - must_id: "item:A.5.26:rev_exercise"
+    description: "Tabletop / simulation outcomes reviewed (or scheduled-but-not-yet-run noted)"
+    excerpt_keywords:
+      - [tabletop, simulation, response]
+      - [tabletop, simulation, outcomes, response]
+      - [simulation, outcomes, response]
+      - [simulation, outcomes, reviewed, response]
+      - [outcomes, reviewed, response]
+      - [outcomes, reviewed, scheduled, response]
+      - [reviewed, scheduled, response]
+      - [reviewed, scheduled, but, response]
+
+  - must_id: "item:A.5.26:rev_metrics"
+    description: "MTTC / MTTR / containment-success metrics analysed across the period"
+    excerpt_keywords:
+      - [mttc, mttr, response]
+      - [mttc, mttr, containment, response]
+      - [mttr, containment, response]
+      - [mttr, containment, success, response]
+      - [containment, success, response]
+      - [containment, success, metrics, response]
+      - [success, metrics, response]
+      - [success, metrics, analysed, response]
 
   - must_id: "item:A.5.26:rev_reviewer"
     description: "Reviewer identity (Incident Manager + InfoSec lead jointly)"
     excerpt_keywords:
       - [reviewer, identity, response]
+      - [reviewer, identity, incident, response]
+      - [identity, incident, response]
+      - [identity, incident, manager, response]
+      - [incident, manager, response]
+      - [incident, manager, infosec, response]
+      - [manager, infosec, response]
+      - [manager, infosec, lead, response]
+
+  - must_id: "item:A.5.26:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, response]
+      - [review, date, within, response]
+      - [date, within, response]
+      - [date, within, planned, response]
+      - [within, planned, response]
+      - [within, planned, interval, response]
+      - [planned, interval, response]
+      - [per, revocation, response]
+

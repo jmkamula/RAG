@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.44:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.44:applicable_scope"
@@ -10,20 +11,39 @@ target_control: "Art.44"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.44:scope_eu_eea"
-    description: "EU/EEA boundary — which destinations are within / outside the GDPR territorial scope"
-    excerpt_keywords:
-      - [scope, eea, general]
-      - [eea, boundary, general]
-
   - must_id: "item:Art.44:scope_excluded_flows"
     description: "Excluded flows (purely-internal within EU/EEA; transit-only; non-personal data)"
     excerpt_keywords:
-      - [scope, excluded, flows, general]
       - [excluded, flows, general]
+      - [excluded, flows, purely, general]
+      - [flows, purely, general]
+      - [flows, purely, internal, general]
+      - [purely, internal, general]
+      - [purely, internal, within, general]
+      - [internal, within, general]
+      - [internal, within, eea, general]
+
+  - must_id: "item:Art.44:scope_eu_eea"
+    description: "EU/EEA boundary — which destinations are within / outside the GDPR territorial scope"
+    excerpt_keywords:
+      - [eu, eea, general]
+      - [eea, boundary, general]
+      - [eea, boundary, destinations, general]
+      - [boundary, destinations, general]
+      - [boundary, destinations, within, general]
+      - [destinations, within, general]
+      - [destinations, within, outside, general]
+      - [within, outside, general]
 
   - must_id: "item:Art.44:scope_transfer_definition"
     description: "Operational definition of 'transfer' per EDPB 05/2021 three cumulative criteria"
     excerpt_keywords:
-      - [scope, transfer, definition, general]
-      - [operational, definition, transfer, edpb, general]
+      - [transfer, definition, general]
+      - [operational, definition, general]
+      - [operational, definition, transfer, general]
+      - [definition, transfer, general]
+      - [definition, transfer, edpb, general]
+      - [transfer, edpb, general]
+      - [transfer, edpb, 2021, general]
+      - [edpb, 2021, general]
+

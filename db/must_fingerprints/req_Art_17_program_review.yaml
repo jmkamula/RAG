@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.17:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.17:program_review"
@@ -10,28 +11,63 @@ target_control: "Art.17"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.17:rev_backup_handling"
-    description: "Backup-handling sample — backups actually purged on cycle, immutable records correctly flagged-no..."
-    excerpt_keywords:
-      - [backup, handling, right]
-
-  - must_id: "item:Art.17:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, right]
-
   - must_id: "item:Art.17:rev_exception_defensibility"
     description: "Art.17.3 exception sample — refused requests have defensible exception grounds"
     excerpt_keywords:
       - [exception, defensibility, right]
+      - [art, exception, right]
       - [art, exception, sample, right]
+      - [exception, sample, right]
+      - [exception, sample, refused, right]
+      - [sample, refused, right]
+      - [sample, refused, requests, right]
+      - [refused, requests, right]
 
-  - must_id: "item:Art.17:rev_reviewer"
-    description: "Reviewer identity (DPO + ops lead)"
+  - must_id: "item:Art.17:rev_backup_handling"
+    description: "Backup-handling sample — backups actually purged on cycle, immutable records correctly flagged-not-erased"
     excerpt_keywords:
-      - [reviewer, identity, right]
+      - [backup, handling, right]
+      - [backup, handling, sample, right]
+      - [handling, sample, right]
+      - [handling, sample, backups, right]
+      - [sample, backups, right]
+      - [sample, backups, actually, right]
+      - [backups, actually, right]
+      - [backups, actually, purged, right]
 
   - must_id: "item:Art.17:rev_sla_compliance"
     description: "SLA compliance (Art.12.3 one-month)"
     excerpt_keywords:
       - [sla, compliance, right]
+      - [sla, compliance, art, right]
+      - [compliance, art, right]
+      - [compliance, art, one, right]
+      - [art, one, right]
+      - [art, one, month, right]
+      - [one, month, right]
+      - [per, revocation, right]
+
+  - must_id: "item:Art.17:rev_reviewer"
+    description: "Reviewer identity (DPO + ops lead)"
+    excerpt_keywords:
+      - [reviewer, identity, right]
+      - [reviewer, identity, dpo, right]
+      - [identity, dpo, right]
+      - [identity, dpo, ops, right]
+      - [dpo, ops, right]
+      - [dpo, ops, lead, right]
+      - [ops, lead, right]
+      - [per, revocation, right]
+
+  - must_id: "item:Art.17:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, right]
+      - [review, date, within, right]
+      - [date, within, right]
+      - [date, within, planned, right]
+      - [within, planned, right]
+      - [within, planned, interval, right]
+      - [planned, interval, right]
+      - [per, revocation, right]
+

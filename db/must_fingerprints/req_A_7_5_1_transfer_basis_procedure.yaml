@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.5.1:proc_intra_jurisdiction"
     description: "Intra-jurisdiction exclusion rule (§7.5.1 NOTE — where sender + recipient same jurisdiction, applicable law is the same)"
     excerpt_keywords:
-      - [intra, jurisdiction]
-      - [intra, jurisdiction, exclusion]
-      - [jurisdiction, exclusion]
-      - [jurisdiction, exclusion, rule]
-      - [exclusion, rule]
-      - [exclusion, rule, note]
-      - [rule, note]
-      - [rule, note, sender]
+      - [intra, jurisdiction, identify]
+      - [intra, jurisdiction, exclusion, identify]
+      - [jurisdiction, exclusion, identify]
+      - [jurisdiction, exclusion, rule, identify]
+      - [exclusion, rule, identify]
+      - [exclusion, rule, note, identify]
+      - [rule, note, identify]
+      - [rule, note, sender, identify]
 
   - must_id: "item:A.7.5.1:proc_schrems_tia"
     description: "Schrems II Transfer Impact Assessment — for Art.46 safeguard transfers, assess third-country legal environment + supplementary measures per "
     excerpt_keywords:
-      - [schrems, tia]
-      - [schrems, transfer]
-      - [schrems, transfer, impact]
-      - [transfer, impact]
-      - [transfer, impact, assessment]
-      - [impact, assessment]
-      - [impact, assessment, art]
-      - [assessment, art]
+      - [schrems, tia, identify]
+      - [schrems, transfer, identify]
+      - [schrems, transfer, impact, identify]
+      - [transfer, impact, identify]
+      - [transfer, impact, assessment, identify]
+      - [impact, assessment, identify]
+      - [impact, assessment, art, identify]
+      - [assessment, art, identify]
 
   - must_id: "item:A.7.5.1:proc_sa_review"
     description: "SA-review awareness — some jurisdictions require transfer agreements reviewed by supervisory authority"
     excerpt_keywords:
-      - [sa, review]
-      - [review, awareness]
-      - [review, awareness, some]
-      - [awareness, some]
-      - [awareness, some, jurisdictions]
-      - [some, jurisdictions]
-      - [some, jurisdictions, require]
-      - [jurisdictions, require]
+      - [sa, review, identify]
+      - [review, awareness, identify]
+      - [review, awareness, some, identify]
+      - [awareness, some, identify]
+      - [awareness, some, jurisdictions, identify]
+      - [some, jurisdictions, identify]
+      - [some, jurisdictions, require, identify]
+      - [jurisdictions, require, identify]
 
   - must_id: "item:A.7.5.1:proc_documented_compliance"
     description: "Documented compliance with legislation/regulation applicable at origin AND destination jurisdiction per transfer"
     excerpt_keywords:
-      - [documented, compliance]
-      - [documented, compliance, legislation]
-      - [compliance, legislation]
-      - [compliance, legislation, regulation]
-      - [legislation, regulation]
-      - [legislation, regulation, origin]
-      - [regulation, origin]
-      - [regulation, origin, destination]
+      - [documented, compliance, identify]
+      - [documented, compliance, legislation, identify]
+      - [compliance, legislation, identify]
+      - [compliance, legislation, regulation, identify]
+      - [legislation, regulation, identify]
+      - [legislation, regulation, origin, identify]
+      - [regulation, origin, identify]
+      - [regulation, origin, destination, identify]
 
   - must_id: "item:A.7.5.1:proc_transfer_hierarchy"
     description: "Transfer basis hierarchy — adequacy decision (Art.45) → appropriate safeguards (Art.46: SCCs, BCRs, codes, certification) → derogations (Art"
     excerpt_keywords:
-      - [transfer, hierarchy]
+      - [transfer, hierarchy, identify]
       - [transfer, basis]
       - [transfer, basis, hierarchy]
       - [basis, hierarchy]
       - [basis, hierarchy, adequacy]
-      - [hierarchy, adequacy]
-      - [hierarchy, adequacy, decision]
-      - [adequacy, decision]
+      - [hierarchy, adequacy, identify]
+      - [hierarchy, adequacy, decision, identify]
+      - [adequacy, decision, identify]
 

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.4.2:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.2:applicable_scope"
@@ -10,18 +11,39 @@ target_control: "B.8.4.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.4.2:scope_ma_events"
-    description: "M&A events — where PII moves to another controller (transfer scenario)"
-    excerpt_keywords:
-      - [scope, events, return]
-
   - must_id: "item:B.8.4.2:scope_retention_window"
     description: "Post-termination retention window before disposal (accidental-lapse protection)"
     excerpt_keywords:
-      - [scope, retention, window, return]
+      - [retention, window, return]
+      - [post, termination, return]
+      - [post, termination, retention, return]
+      - [termination, retention, return]
+      - [termination, retention, window, return]
+      - [retention, window, before, return]
+      - [window, before, return]
+      - [window, before, disposal, return]
+
+  - must_id: "item:B.8.4.2:scope_ma_events"
+    description: "M&A events — where PII moves to another controller (transfer scenario)"
+    excerpt_keywords:
+      - [ma, events, return]
+      - [events, pii, return]
+      - [events, pii, moves, return]
+      - [pii, moves, return]
+      - [pii, moves, another, return]
+      - [moves, another, return]
+      - [moves, another, controller, return]
+      - [another, controller, return]
 
   - must_id: "item:B.8.4.2:scope_termination_triggers"
     description: "Termination triggers enumerated (contract expiry / customer offboarding / product discontinuation)"
     excerpt_keywords:
-      - [scope, termination, triggers, return]
+      - [termination, triggers, return]
       - [termination, triggers, enumerated, return]
+      - [triggers, enumerated, return]
+      - [triggers, enumerated, contract, return]
+      - [enumerated, contract, return]
+      - [enumerated, contract, expiry, return]
+      - [contract, expiry, return]
+      - [contract, expiry, customer, return]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.34:subject_communication_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.34:subject_communication_program_review"
@@ -11,26 +12,62 @@ target_standard: "GDPR:2016/679"
 
 must_fingerprints:
   - must_id: "item:Art.34:rev_content_quality"
-    description: "Content-quality audit — communications used plain language, included DPO contact, described concr..."
+    description: "Content-quality audit — communications used plain language, included DPO contact, described concrete measures"
     excerpt_keywords:
       - [content, quality, communication]
+      - [content, quality, audit, communication]
+      - [quality, audit, communication]
+      - [quality, audit, communications, communication]
+      - [audit, communications, communication]
+      - [audit, communications, used, communication]
+      - [communications, used, communication]
+      - [communications, used, plain, communication]
 
-  - must_id: "item:Art.34:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:Art.34:rev_exception_audit"
+    description: "Exception-claim audit — Art.34.3 exception claims reviewed for legitimacy (especially encryption-deemed-appropriate where keys may also have"
     excerpt_keywords:
-      - [review, date, planned, interval, communication]
+      - [exception, audit, communication]
+      - [exception, claim, communication]
+      - [exception, claim, audit, communication]
+      - [claim, audit, communication]
+      - [claim, audit, art, communication]
+      - [audit, art, communication]
+      - [audit, art, exception, communication]
+      - [art, exception, communication]
 
   - must_id: "item:Art.34:rev_decision_defensibility"
     description: "High-risk decision defensibility — sampled decisions reviewed against criteria"
     excerpt_keywords:
       - [decision, defensibility, communication]
-
-  - must_id: "item:Art.34:rev_exception_audit"
-    description: "Exception-claim audit — Art.34.3 exception claims reviewed for legitimacy (especially encryption-..."
-    excerpt_keywords:
-      - [exception, audit, communication]
+      - [high, risk, communication]
+      - [high, risk, decision, communication]
+      - [risk, decision, communication]
+      - [risk, decision, defensibility, communication]
+      - [decision, defensibility, sampled, communication]
+      - [defensibility, sampled, communication]
+      - [defensibility, sampled, decisions, communication]
 
   - must_id: "item:Art.34:rev_reviewer"
     description: "Reviewer identity (DPO + legal + incident-response lead)"
     excerpt_keywords:
       - [reviewer, identity, communication]
+      - [reviewer, identity, dpo, communication]
+      - [identity, dpo, communication]
+      - [identity, dpo, legal, communication]
+      - [dpo, legal, communication]
+      - [dpo, legal, incident, communication]
+      - [legal, incident, communication]
+      - [legal, incident, response, communication]
+
+  - must_id: "item:Art.34:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, communication]
+      - [review, date, within, communication]
+      - [date, within, communication]
+      - [date, within, planned, communication]
+      - [within, planned, communication]
+      - [within, planned, interval, communication]
+      - [planned, interval, communication]
+      - [per, revocation, communication]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:6.2:objectives_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:6.2:objectives_program_review"
@@ -10,28 +11,63 @@ target_control: "6.2"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:6.2:rev_alignment"
-    description: "Alignment check — objectives still consistent with current 5.2 policy + 6.1.2 risk results"
-    excerpt_keywords:
-      - [alignment, check, objectives]
-
-  - must_id: "item:6.2:rev_currency"
-    description: "Register currency check — every objective reviewed (refreshed / closed / re-targeted)"
-    excerpt_keywords:
-      - [register, currency, check, objectives]
-
-  - must_id: "item:6.2:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, objectives]
-
   - must_id: "item:6.2:rev_kpi_health"
     description: "KPI health check — measurements actually flowing for measurable objectives"
     excerpt_keywords:
       - [kpi, health, objectives]
       - [kpi, health, check, objectives]
+      - [health, check, objectives]
+      - [health, check, measurements, objectives]
+      - [check, measurements, objectives]
+      - [check, measurements, actually, objectives]
+      - [measurements, actually, objectives]
+      - [measurements, actually, flowing, objectives]
+
+  - must_id: "item:6.2:rev_alignment"
+    description: "Alignment check — objectives still consistent with current 5.2 policy + 6.1.2 risk results"
+    excerpt_keywords:
+      - [alignment, check, objectives]
+      - [alignment, check, objectives]
+      - [check, objectives]
+      - [check, objectives, still]
+      - [objectives, still]
+      - [objectives, still, consistent]
+      - [still, consistent, objectives]
+      - [still, consistent, current, objectives]
+
+  - must_id: "item:6.2:rev_currency"
+    description: "Register currency check — every objective reviewed (refreshed / closed / re-targeted)"
+    excerpt_keywords:
+      - [currency, check, objectives]
+      - [currency, check, every, objectives]
+      - [check, every, objectives]
+      - [check, every, objective, objectives]
+      - [every, objective, objectives]
+      - [every, objective, reviewed, objectives]
+      - [objective, reviewed, objectives]
+      - [objective, reviewed, refreshed, objectives]
 
   - must_id: "item:6.2:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + function heads)"
     excerpt_keywords:
       - [reviewer, identity, objectives]
+      - [reviewer, identity, isms, objectives]
+      - [identity, isms, objectives]
+      - [identity, isms, manager, objectives]
+      - [isms, manager, objectives]
+      - [isms, manager, function, objectives]
+      - [manager, function, objectives]
+      - [manager, function, heads, objectives]
+
+  - must_id: "item:6.2:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, objectives]
+      - [review, date, within, objectives]
+      - [date, within, objectives]
+      - [date, within, planned, objectives]
+      - [within, planned, objectives]
+      - [within, planned, interval, objectives]
+      - [planned, interval, objectives]
+      - [per, revocation, objectives]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.8:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.8:program_review"
@@ -10,22 +11,51 @@ target_control: "B.8.5.8"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.5.8:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:B.8.5.8:rev_objection_audit"
+    description: "Objection audit — objection outcomes reviewed for consistency"
     excerpt_keywords:
-      - [review, date, planned, interval, change]
+      - [objection, audit, change]
+      - [objection, audit, objection, change]
+      - [audit, objection, change]
+      - [audit, objection, outcomes, change]
+      - [objection, outcomes, change]
+      - [objection, outcomes, reviewed, change]
+      - [outcomes, reviewed, change]
+      - [outcomes, reviewed, consistency, change]
 
   - must_id: "item:B.8.5.8:rev_notification_audit"
     description: "Notification audit — sampled changes verified against timeframe"
     excerpt_keywords:
       - [notification, audit, change]
-
-  - must_id: "item:B.8.5.8:rev_objection_audit"
-    description: "Objection audit — objection outcomes reviewed for consistency"
-    excerpt_keywords:
-      - [objection, audit, change]
+      - [notification, audit, sampled, change]
+      - [audit, sampled, change]
+      - [audit, sampled, changes, change]
+      - [sampled, changes, change]
+      - [sampled, changes, verified, change]
+      - [changes, verified, change]
+      - [changes, verified, against, change]
 
   - must_id: "item:B.8.5.8:rev_reviewer"
     description: "Reviewer identity (Trust + Legal)"
     excerpt_keywords:
       - [reviewer, identity, change]
+      - [reviewer, identity, trust, change]
+      - [identity, trust, change]
+      - [identity, trust, legal, change]
+      - [trust, legal, change]
+      - [per, revocation, change]
+      - [per, revoked, identity, change]
+      - [revocation, record, change]
+
+  - must_id: "item:B.8.5.8:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, change]
+      - [review, date, within, change]
+      - [date, within, change]
+      - [date, within, planned, change]
+      - [within, planned, change]
+      - [within, planned, interval, change]
+      - [planned, interval, change]
+      - [per, revocation, change]
+

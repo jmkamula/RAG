@@ -14,50 +14,50 @@ must_fingerprints:
   - must_id: "item:A.6.6:owner"
     description: "Named owner of the template (Legal counsel with InfoSec partner)"
     excerpt_keywords:
-      - [named, owner]
-      - [named, owner, template]
-      - [owner, template]
-      - [owner, template, legal]
-      - [template, legal]
-      - [template, legal, counsel]
-      - [legal, counsel]
-      - [legal, counsel, infosec]
+      - [named, owner, confidentiality]
+      - [named, owner, template, confidentiality]
+      - [owner, template, confidentiality]
+      - [owner, template, legal, confidentiality]
+      - [template, legal, confidentiality]
+      - [template, legal, counsel, confidentiality]
+      - [legal, counsel, confidentiality]
+      - [legal, counsel, infosec, confidentiality]
 
   - must_id: "item:A.6.6:last_reviewed"
     description: "Last-reviewed date on the template (review evidence — drives the freshness check)"
     excerpt_keywords:
-      - [last, reviewed]
-      - [last, reviewed, date]
-      - [reviewed, date]
-      - [reviewed, date, template]
-      - [date, template]
-      - [date, template, review]
-      - [template, review]
-      - [template, review, evidence]
+      - [last, reviewed, confidentiality]
+      - [last, reviewed, date, confidentiality]
+      - [reviewed, date, confidentiality]
+      - [reviewed, date, template, confidentiality]
+      - [date, template, confidentiality]
+      - [date, template, review, confidentiality]
+      - [template, review, confidentiality]
+      - [template, review, evidence, confidentiality]
 
   - must_id: "item:A.6.6:signature_requirement"
     description: "Signature requirement enforced before access granted (no access without signed NDA — gates A.5.18 access grant for non-employees)"
     excerpt_keywords:
-      - [signature, requirement]
-      - [signature, requirement, enforced]
-      - [requirement, enforced]
-      - [requirement, enforced, before]
-      - [enforced, before]
-      - [enforced, before, access]
-      - [before, access]
-      - [before, access, granted]
+      - [signature, requirement, confidentiality]
+      - [signature, requirement, enforced, confidentiality]
+      - [requirement, enforced, confidentiality]
+      - [requirement, enforced, before, confidentiality]
+      - [enforced, before, confidentiality]
+      - [enforced, before, access, confidentiality]
+      - [before, access, confidentiality]
+      - [before, access, granted, confidentiality]
 
   - must_id: "item:A.6.6:return_destruction"
     description: "Return or destruction obligation at end of relationship (with certified-destruction option for paper, secure-deletion for digital — links to"
     excerpt_keywords:
-      - [return, destruction]
-      - [return, destruction, obligation]
-      - [destruction, obligation]
-      - [destruction, obligation, end]
-      - [obligation, end]
-      - [obligation, end, relationship]
-      - [end, relationship]
-      - [end, relationship, certified]
+      - [return, destruction, confidentiality]
+      - [return, destruction, obligation, confidentiality]
+      - [destruction, obligation, confidentiality]
+      - [destruction, obligation, end, confidentiality]
+      - [obligation, end, confidentiality]
+      - [obligation, end, relationship, confidentiality]
+      - [end, relationship, confidentiality]
+      - [end, relationship, certified, confidentiality]
 
   - must_id: "item:A.6.6:duration"
     description: "Duration of confidentiality obligation (indefinite for trade secrets; time-limited for non-trade-secret confidential info — typically 3-5 ye"
@@ -66,32 +66,32 @@ must_fingerprints:
       - [duration, confidentiality, obligation]
       - [confidentiality, obligation]
       - [confidentiality, obligation, indefinite]
-      - [obligation, indefinite]
-      - [obligation, indefinite, trade]
-      - [indefinite, trade]
-      - [indefinite, trade, secrets]
+      - [obligation, indefinite, confidentiality]
+      - [obligation, indefinite, trade, confidentiality]
+      - [indefinite, trade, confidentiality]
+      - [indefinite, trade, secrets, confidentiality]
 
   - must_id: "item:A.6.6:info_classes"
     description: "Information classes protected (cross-link to A.5.12 classification — confidential / restricted / trade-secret tiers; PII overlay where appli"
     excerpt_keywords:
-      - [info, classes]
-      - [classes, protected]
-      - [classes, protected, cross]
-      - [protected, cross]
-      - [protected, cross, classification]
-      - [cross, classification]
-      - [cross, classification, confidential]
-      - [classification, confidential]
+      - [info, classes, confidentiality]
+      - [classes, protected, confidentiality]
+      - [classes, protected, cross, confidentiality]
+      - [protected, cross, confidentiality]
+      - [protected, cross, classification, confidentiality]
+      - [cross, classification, confidentiality]
+      - [cross, classification, confidential, confidentiality]
+      - [classification, confidential, confidentiality]
 
   - must_id: "item:A.6.6:parties_covered"
     description: "Parties covered (employees, contractors, suppliers, visitors with access to sensitive info, M&A counterparties)"
     excerpt_keywords:
-      - [parties, covered]
-      - [parties, covered, employees]
-      - [covered, employees]
-      - [covered, employees, contractors]
-      - [employees, contractors]
-      - [employees, contractors, suppliers]
-      - [contractors, suppliers]
-      - [contractors, suppliers, visitors]
+      - [parties, covered, confidentiality]
+      - [parties, covered, employees, confidentiality]
+      - [covered, employees, confidentiality]
+      - [covered, employees, contractors, confidentiality]
+      - [employees, contractors, confidentiality]
+      - [employees, contractors, suppliers, confidentiality]
+      - [contractors, suppliers, confidentiality]
+      - [contractors, suppliers, visitors, confidentiality]
 

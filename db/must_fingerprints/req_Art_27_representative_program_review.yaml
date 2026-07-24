@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.27:representative_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.27:representative_program_review"
@@ -10,28 +11,63 @@ target_control: "Art.27"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.27:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, representatives]
-
-  - must_id: "item:Art.27:rev_designation_currency"
-    description: "Designation currency — representative still operating, mandate still valid"
-    excerpt_keywords:
-      - [designation, currency, representatives]
-
   - must_id: "item:Art.27:rev_exception_recheck"
     description: "Art.27.2 exception re-check where claimed — processing-pattern shift may invalidate the exception"
     excerpt_keywords:
       - [exception, recheck, representatives]
       - [art, exception, representatives]
+      - [art, exception, check, representatives]
+      - [exception, check, representatives]
+      - [exception, check, claimed, representatives]
+      - [check, claimed, representatives]
+      - [check, claimed, processing, representatives]
+      - [claimed, processing, representatives]
 
   - must_id: "item:Art.27:rev_operations_sample"
     description: "Operations sample — interactions handled within SLAs, no failed escalations"
     excerpt_keywords:
       - [operations, sample, representatives]
+      - [operations, sample, interactions, representatives]
+      - [sample, interactions, representatives]
+      - [sample, interactions, handled, representatives]
+      - [interactions, handled, representatives]
+      - [interactions, handled, within, representatives]
+      - [handled, within, representatives]
+      - [handled, within, slas, representatives]
+
+  - must_id: "item:Art.27:rev_designation_currency"
+    description: "Designation currency — representative still operating, mandate still valid"
+    excerpt_keywords:
+      - [designation, currency, representatives]
+      - [designation, currency, representative, representatives]
+      - [currency, representative, representatives]
+      - [currency, representative, still, representatives]
+      - [representative, still, representatives]
+      - [representative, still, operating, representatives]
+      - [still, operating, representatives]
+      - [still, operating, mandate, representatives]
 
   - must_id: "item:Art.27:rev_reviewer"
     description: "Reviewer identity (DPO + legal counsel)"
     excerpt_keywords:
       - [reviewer, identity, representatives]
+      - [reviewer, identity, dpo, representatives]
+      - [identity, dpo, representatives]
+      - [identity, dpo, legal, representatives]
+      - [dpo, legal, representatives]
+      - [dpo, legal, counsel, representatives]
+      - [legal, counsel, representatives]
+      - [per, revocation, representatives]
+
+  - must_id: "item:Art.27:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, representatives]
+      - [review, date, within, representatives]
+      - [date, within, representatives]
+      - [date, within, planned, representatives]
+      - [within, planned, representatives]
+      - [within, planned, interval, representatives]
+      - [planned, interval, representatives]
+      - [per, revocation, representatives]
+

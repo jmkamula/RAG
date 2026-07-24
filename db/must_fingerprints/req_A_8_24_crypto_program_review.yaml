@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.24:crypto_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.24:crypto_program_review"
@@ -10,38 +11,87 @@ target_control: "A.8.24"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.8.24:rev_algorithm_currency"
-    description: "Algorithm-table currency check vs NIST / national-regulator advisories (deprecated algorithms ret..."
+  - must_id: "item:A.8.24:rev_findings_update"
+    description: "Findings propagated to policy / scope / register"
     excerpt_keywords:
-      - [algorithm, currency, cryptography]
-
-  - must_id: "item:A.8.24:rev_date"
-    description: "Review date within the planned interval (≤180 days)"
-    excerpt_keywords:
-      - [review, date, planned, interval, cryptography]
+      - [findings, update, use]
+      - [findings, propagated, use]
+      - [findings, propagated, scope, use]
+      - [propagated, scope, use]
+      - [per, revocation, use]
+      - [per, revoked, identity, use]
+      - [revocation, record, use]
+      - [review, findings, use]
 
   - must_id: "item:A.8.24:rev_exception_inventory"
     description: "Exception inventory re-confirmed / retired"
     excerpt_keywords:
-      - [exception, inventory, cryptography]
-
-  - must_id: "item:A.8.24:rev_findings_update"
-    description: "Findings propagated to policy / scope / register"
-    excerpt_keywords:
-      - [findings, update, cryptography]
-      - [findings, propagated, policy, scope, cryptography]
+      - [exception, inventory, use]
+      - [exception, inventory, confirmed, use]
+      - [inventory, confirmed, use]
+      - [inventory, confirmed, retired, use]
+      - [confirmed, retired, use]
+      - [per, revocation, use]
+      - [per, revoked, identity, use]
+      - [revocation, record, use]
 
   - must_id: "item:A.8.24:rev_pii_audit"
     description: "PII-key audit (custodianship + DPIA alignment + cross-border transfer Art.5.1.f impact)"
     excerpt_keywords:
-      - [pii, audit, cryptography]
-
-  - must_id: "item:A.8.24:rev_reviewer"
-    description: "Reviewer identity (Cryptography SME + InfoSec + Data Protection)"
-    excerpt_keywords:
-      - [reviewer, identity, cryptography]
+      - [pii, audit, use]
+      - [pii, key, use]
+      - [pii, key, audit, use]
+      - [key, audit, use]
+      - [key, audit, custodianship, use]
+      - [audit, custodianship, use]
+      - [audit, custodianship, dpia, use]
+      - [custodianship, dpia, use]
 
   - must_id: "item:A.8.24:rev_rotation_compliance"
     description: "Key-rotation compliance per key class (no overdue active keys without exception)"
     excerpt_keywords:
-      - [rotation, compliance, cryptography]
+      - [rotation, compliance, use]
+      - [key, rotation, use]
+      - [key, rotation, compliance, use]
+      - [rotation, compliance, key, use]
+      - [compliance, key, use]
+      - [compliance, key, class, use]
+      - [key, class, use]
+      - [key, class, overdue, use]
+
+  - must_id: "item:A.8.24:rev_algorithm_currency"
+    description: "Algorithm-table currency check vs NIST / national-regulator advisories (deprecated algorithms retired)"
+    excerpt_keywords:
+      - [algorithm, currency, use]
+      - [algorithm, currency, check, use]
+      - [currency, check, use]
+      - [currency, check, nist, use]
+      - [check, nist, use]
+      - [check, nist, national, use]
+      - [nist, national, use]
+      - [nist, national, regulator, use]
+
+  - must_id: "item:A.8.24:rev_reviewer"
+    description: "Reviewer identity (Cryptography SME + InfoSec + Data Protection)"
+    excerpt_keywords:
+      - [reviewer, identity, use]
+      - [reviewer, identity, cryptography]
+      - [identity, cryptography]
+      - [identity, cryptography, sme]
+      - [cryptography, sme]
+      - [cryptography, sme, infosec]
+      - [sme, infosec, use]
+      - [sme, infosec, protection, use]
+
+  - must_id: "item:A.8.24:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, use]
+      - [review, date, within, use]
+      - [date, within, use]
+      - [date, within, planned, use]
+      - [within, planned, use]
+      - [within, planned, interval, use]
+      - [planned, interval, use]
+      - [planned, interval, 180, use]
+

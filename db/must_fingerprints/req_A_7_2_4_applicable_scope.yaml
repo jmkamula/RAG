@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.4:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.4:applicable_scope"
@@ -10,18 +11,39 @@ target_control: "A.7.2.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.4:scope_consent_activities"
-    description: "In-scope activities enumerated (map to A.7.2.3 consent-required list)"
-    excerpt_keywords:
-      - [scope, consent, activities, obtain]
-
   - must_id: "item:A.7.2.4:scope_exclusions"
     description: "Non-consent activities excluded with rationale (contract necessity / legal obligation basis)"
     excerpt_keywords:
-      - [scope, exclusions, obtain]
+      - [non, consent]
+      - [non, consent, activities]
+      - [consent, activities]
+      - [consent, activities, excluded]
+      - [activities, excluded, obtain]
+      - [activities, excluded, rationale, obtain]
+      - [excluded, rationale, obtain]
+      - [excluded, rationale, contract, obtain]
 
   - must_id: "item:A.7.2.4:scope_retention"
     description: "Consent record retention (until withdrawn + statutory retention period for demonstration)"
     excerpt_keywords:
-      - [scope, retention, obtain]
-      - [consent, record, retention]
+      - [consent, retention]
+      - [consent, retention, until]
+      - [retention, until, obtain]
+      - [retention, until, withdrawn, obtain]
+      - [until, withdrawn, obtain]
+      - [until, withdrawn, statutory, obtain]
+      - [withdrawn, statutory, obtain]
+      - [withdrawn, statutory, retention, obtain]
+
+  - must_id: "item:A.7.2.4:scope_consent_activities"
+    description: "In-scope activities enumerated (map to A.7.2.3 consent-required list)"
+    excerpt_keywords:
+      - [consent, activities]
+      - [scope, activities, obtain]
+      - [scope, activities, enumerated, obtain]
+      - [activities, enumerated, obtain]
+      - [activities, enumerated, map, obtain]
+      - [enumerated, map, obtain]
+      - [enumerated, map, consent]
+      - [map, consent]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:5.2:isp_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:5.2:isp_program_review"
@@ -10,30 +11,63 @@ target_control: "5.2"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:5.2:rev_approval_currency"
-    description: "Approval currency check — signed by current top management"
-    excerpt_keywords:
-      - [approval, currency, policy]
-      - [approval, currency, check, policy]
-
   - must_id: "item:5.2:rev_comms_completeness"
     description: "Communication completeness check — required audience is covered and current"
     excerpt_keywords:
-      - [comms, completeness, policy]
-      - [communication, completeness, check, policy]
+      - [comms, completeness]
+      - [communication, completeness]
+      - [communication, completeness, check]
+      - [completeness, check]
+      - [completeness, check, required]
+      - [check, required]
+      - [check, required, audience]
+      - [required, audience]
 
-  - must_id: "item:5.2:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:5.2:rev_approval_currency"
+    description: "Approval currency check — signed by current top management"
     excerpt_keywords:
-      - [review, date, planned, interval, policy]
+      - [approval, currency]
+      - [approval, currency, check]
+      - [currency, check]
+      - [currency, check, signed]
+      - [check, signed]
+      - [check, signed, current]
+      - [signed, current]
+      - [signed, current, top]
 
   - must_id: "item:5.2:rev_policy_currency"
     description: "Policy currency check — still appropriate to organisational purpose and scope"
     excerpt_keywords:
-      - [policy, currency]
-      - [policy, currency, check]
+      - [currency, check]
+      - [currency, check, still]
+      - [check, still]
+      - [check, still, appropriate]
+      - [still, appropriate]
+      - [still, appropriate, organisational]
+      - [appropriate, organisational]
+      - [appropriate, organisational, purpose]
 
   - must_id: "item:5.2:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + top management sponsor)"
     excerpt_keywords:
-      - [reviewer, identity, policy]
+      - [reviewer, identity]
+      - [reviewer, identity, isms]
+      - [identity, isms]
+      - [identity, isms, manager]
+      - [isms, manager]
+      - [isms, manager, top]
+      - [manager, top]
+      - [manager, top, management]
+
+  - must_id: "item:5.2:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date]
+      - [review, date, within]
+      - [date, within]
+      - [date, within, planned]
+      - [within, planned]
+      - [within, planned, interval]
+      - [planned, interval]
+      - [per, revocation]
+

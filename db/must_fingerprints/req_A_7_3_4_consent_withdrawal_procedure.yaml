@@ -14,72 +14,72 @@ must_fingerprints:
   - must_id: "item:A.7.3.4:proc_pre_withdrawal_valid"
     description: "Pre-withdrawal processing remains valid; post-withdrawal processing halts (Art.7.3 — no retroactive effect)"
     excerpt_keywords:
-      - [pre, withdrawal, valid]
-      - [pre, withdrawal]
-      - [pre, withdrawal, processing]
-      - [withdrawal, processing]
-      - [withdrawal, processing, remains]
-      - [processing, remains]
-      - [processing, remains, valid]
-      - [remains, valid]
+      - [pre, withdrawal, valid, providing]
+      - [pre, withdrawal, providing]
+      - [pre, withdrawal, processing, providing]
+      - [withdrawal, processing, providing]
+      - [withdrawal, processing, remains, providing]
+      - [processing, remains, providing]
+      - [processing, remains, valid, providing]
+      - [remains, valid, providing]
 
   - must_id: "item:A.7.3.4:proc_propagation"
     description: "Downstream propagation — withdrawal cascades to systems + authorised users + third parties (see A.7.3.7)"
     excerpt_keywords:
-      - [downstream, propagation]
-      - [downstream, propagation, withdrawal]
-      - [propagation, withdrawal]
-      - [propagation, withdrawal, cascades]
-      - [withdrawal, cascades]
-      - [withdrawal, cascades, authorised]
-      - [cascades, authorised]
-      - [cascades, authorised, users]
+      - [downstream, propagation, providing]
+      - [downstream, propagation, withdrawal, providing]
+      - [propagation, withdrawal, providing]
+      - [propagation, withdrawal, cascades, providing]
+      - [withdrawal, cascades, providing]
+      - [withdrawal, cascades, authorised, providing]
+      - [cascades, authorised, providing]
+      - [cascades, authorised, users, providing]
 
   - must_id: "item:A.7.3.4:proc_response_sla"
     description: "Response-time SLA stated + honoured"
     excerpt_keywords:
-      - [response, sla]
-      - [response, time]
-      - [response, time, sla]
-      - [time, sla]
-      - [time, sla, stated]
-      - [sla, stated]
-      - [sla, stated, honoured]
-      - [stated, honoured]
+      - [response, sla, providing]
+      - [response, time, providing]
+      - [response, time, sla, providing]
+      - [time, sla, providing]
+      - [time, sla, stated, providing]
+      - [sla, stated, providing]
+      - [sla, stated, honoured, providing]
+      - [stated, honoured, providing]
 
   - must_id: "item:A.7.3.4:proc_modification_paths"
     description: "Modification paths (partial withdrawal / opt-in-to-fewer-purposes / restrict processing)"
     excerpt_keywords:
-      - [modification, paths]
-      - [modification, paths, partial]
-      - [paths, partial]
-      - [paths, partial, withdrawal]
-      - [partial, withdrawal]
-      - [partial, withdrawal, opt]
-      - [withdrawal, opt]
-      - [withdrawal, opt, fewer]
+      - [modification, paths, providing]
+      - [modification, paths, partial, providing]
+      - [paths, partial, providing]
+      - [paths, partial, withdrawal, providing]
+      - [partial, withdrawal, providing]
+      - [partial, withdrawal, opt, providing]
+      - [withdrawal, opt, providing]
+      - [withdrawal, opt, fewer, providing]
 
   - must_id: "item:A.7.3.4:proc_easy_as_giving"
     description: "Withdrawal as easy as giving — no additional hurdles beyond original consent process (Art.7.3)"
     excerpt_keywords:
-      - [easy, giving]
-      - [withdrawal, easy]
-      - [withdrawal, easy, giving]
-      - [easy, giving, additional]
-      - [giving, additional]
-      - [giving, additional, hurdles]
-      - [additional, hurdles]
-      - [additional, hurdles, beyond]
+      - [easy, giving, providing]
+      - [withdrawal, easy, providing]
+      - [withdrawal, easy, giving, providing]
+      - [easy, giving, additional, providing]
+      - [giving, additional, providing]
+      - [giving, additional, hurdles, providing]
+      - [additional, hurdles, providing]
+      - [additional, hurdles, beyond, providing]
 
   - must_id: "item:A.7.3.4:proc_channel_parity"
     description: "Channel parity — withdrawal via same medium as collection (email if email, web if web; not phone/fax fallback)"
     excerpt_keywords:
-      - [channel, parity]
-      - [channel, parity, withdrawal]
-      - [parity, withdrawal]
-      - [parity, withdrawal, via]
-      - [withdrawal, via]
-      - [withdrawal, via, same]
-      - [via, same]
-      - [via, same, medium]
+      - [channel, parity, providing]
+      - [channel, parity, withdrawal, providing]
+      - [parity, withdrawal, providing]
+      - [parity, withdrawal, via, providing]
+      - [withdrawal, via, providing]
+      - [withdrawal, via, same, providing]
+      - [via, same, providing]
+      - [via, same, medium, providing]
 

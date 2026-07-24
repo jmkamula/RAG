@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.6.5:post_employment_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.6.5:post_employment_program_review"
@@ -10,35 +11,75 @@ target_control: "A.6.5"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:A.6.5:rev_register_update"
+    description: "Changes propagated to the procedure / scope with reference to this review"
+    excerpt_keywords:
+      - [changes, propagated, responsibilities]
+      - [changes, propagated, scope, responsibilities]
+      - [propagated, scope, responsibilities]
+      - [propagated, scope, reference, responsibilities]
+      - [scope, reference, responsibilities]
+      - [scope, reference, review, responsibilities]
+      - [reference, review, responsibilities]
+      - [per, revocation, responsibilities]
+
   - must_id: "item:A.6.5:rev_breach_history"
-    description: "Breach history review — any post-employment breaches occurred? handled per enforcement approach? ..."
+    description: "Breach history review — any post-employment breaches occurred? handled per enforcement approach? lessons captured?"
     excerpt_keywords:
       - [breach, history, responsibilities]
       - [breach, history, review, responsibilities]
-
-  - must_id: "item:A.6.5:rev_briefing_coverage"
-    description: "Briefing coverage check — every leaver in the period received and acknowledged a briefing (the re..."
-    excerpt_keywords:
-      - [briefing, coverage, responsibilities]
-      - [briefing, coverage, check, responsibilities]
-
-  - must_id: "item:A.6.5:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, responsibilities]
+      - [history, review, responsibilities]
+      - [history, review, post, responsibilities]
+      - [review, post, responsibilities]
+      - [review, post, employment, responsibilities]
+      - [post, employment, responsibilities]
+      - [post, employment, breaches, responsibilities]
 
   - must_id: "item:A.6.5:rev_legal_drift"
     description: "Employment-law drift check per jurisdiction (legal counsel input on enforceability changes)"
     excerpt_keywords:
       - [legal, drift, responsibilities]
+      - [employment, law, responsibilities]
+      - [employment, law, drift, responsibilities]
+      - [law, drift, responsibilities]
+      - [law, drift, check, responsibilities]
+      - [drift, check, responsibilities]
+      - [drift, check, jurisdiction, responsibilities]
+      - [check, jurisdiction, responsibilities]
 
-  - must_id: "item:A.6.5:rev_register_update"
-    description: "Changes propagated to the procedure / scope with reference to this review"
+  - must_id: "item:A.6.5:rev_briefing_coverage"
+    description: "Briefing coverage check — every leaver in the period received and acknowledged a briefing (the register's completeness gate)"
     excerpt_keywords:
-      - [register, update, responsibilities]
-      - [changes, propagated, procedure, scope, responsibilities]
+      - [briefing, coverage, responsibilities]
+      - [briefing, coverage, check, responsibilities]
+      - [coverage, check, responsibilities]
+      - [coverage, check, every, responsibilities]
+      - [check, every, responsibilities]
+      - [check, every, leaver, responsibilities]
+      - [every, leaver, responsibilities]
+      - [every, leaver, period, responsibilities]
 
   - must_id: "item:A.6.5:rev_reviewer"
     description: "Reviewer identity (HR lead + InfoSec lead + Legal counsel)"
     excerpt_keywords:
       - [reviewer, identity, responsibilities]
+      - [reviewer, identity, lead, responsibilities]
+      - [identity, lead, responsibilities]
+      - [identity, lead, infosec, responsibilities]
+      - [lead, infosec, responsibilities]
+      - [lead, infosec, lead, responsibilities]
+      - [infosec, lead, responsibilities]
+      - [infosec, lead, legal, responsibilities]
+
+  - must_id: "item:A.6.5:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, responsibilities]
+      - [review, date, within, responsibilities]
+      - [date, within, responsibilities]
+      - [date, within, planned, responsibilities]
+      - [within, planned, responsibilities]
+      - [within, planned, interval, responsibilities]
+      - [planned, interval, responsibilities]
+      - [per, revocation, responsibilities]
+

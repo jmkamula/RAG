@@ -14,7 +14,7 @@ must_fingerprints:
   - must_id: "item:Art.26:signature"
     description: "Signed by both joint controllers with date"
     excerpt_keywords:
-      - [signed, both]
+      - [signed, both, joint]
       - [signed, both, joint]
       - [both, joint]
       - [both, joint, controllers]
@@ -25,45 +25,45 @@ must_fingerprints:
   - must_id: "item:Art.26:data_subject_against_either"
     description: "Statement that subject may exercise rights against either controller (Art.26.3)"
     excerpt_keywords:
-      - [subject, against, either]
-      - [statement, subject]
-      - [statement, subject, may]
-      - [subject, may]
-      - [subject, may, exercise]
-      - [may, exercise]
-      - [may, exercise, rights]
-      - [exercise, rights]
+      - [subject, against, either, joint]
+      - [statement, subject, joint]
+      - [statement, subject, may, joint]
+      - [subject, may, joint]
+      - [subject, may, exercise, joint]
+      - [may, exercise, joint]
+      - [may, exercise, rights, joint]
+      - [exercise, rights, joint]
 
   - must_id: "item:Art.26:contact_point"
     description: "Contact point for data subjects identified"
     excerpt_keywords:
-      - [contact, point]
-      - [contact, point, subjects]
-      - [point, subjects]
-      - [point, subjects, identified]
-      - [subjects, identified]
+      - [contact, point, joint]
+      - [contact, point, subjects, joint]
+      - [point, subjects, joint]
+      - [point, subjects, identified, joint]
+      - [subjects, identified, joint]
 
   - must_id: "item:Art.26:relationship_essence"
     description: "Essence of the arrangement made available to data subjects (in privacy notice or similar)"
     excerpt_keywords:
-      - [relationship, essence]
-      - [essence, arrangement]
-      - [essence, arrangement, made]
-      - [arrangement, made]
-      - [arrangement, made, available]
-      - [made, available]
-      - [made, available, subjects]
-      - [available, subjects]
+      - [relationship, essence, joint]
+      - [essence, arrangement, joint]
+      - [essence, arrangement, made, joint]
+      - [arrangement, made, joint]
+      - [arrangement, made, available, joint]
+      - [made, available, joint]
+      - [made, available, subjects, joint]
+      - [available, subjects, joint]
 
   - must_id: "item:Art.26:respective_responsibilities"
     description: "Respective responsibilities for compliance allocated (Art.13/14 information, Art.15-22 rights, Art.32 security, Art.33-34 breach)"
     excerpt_keywords:
-      - [respective, responsibilities]
-      - [respective, responsibilities, compliance]
-      - [responsibilities, compliance]
-      - [responsibilities, compliance, allocated]
-      - [compliance, allocated]
-      - [compliance, allocated, art]
-      - [allocated, art]
-      - [allocated, art, art]
+      - [respective, responsibilities, joint]
+      - [respective, responsibilities, compliance, joint]
+      - [responsibilities, compliance, joint]
+      - [responsibilities, compliance, allocated, joint]
+      - [compliance, allocated, joint]
+      - [compliance, allocated, art, joint]
+      - [allocated, art, joint]
+      - [allocated, art, art, joint]
 

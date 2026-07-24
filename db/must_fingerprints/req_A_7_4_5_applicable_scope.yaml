@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.5:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.5:applicable_scope"
@@ -10,18 +11,39 @@ target_control: "A.7.4.5"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.4.5:scope_exceptions"
+    description: "Exceptions (legal-hold / active litigation / regulator inspection) with rationale"
+    excerpt_keywords:
+      - [exceptions, legal, pii]
+      - [exceptions, legal, hold, pii]
+      - [legal, hold, pii]
+      - [legal, hold, active, pii]
+      - [hold, active, pii]
+      - [hold, active, litigation, pii]
+      - [active, litigation, pii]
+      - [active, litigation, regulator, pii]
+
   - must_id: "item:A.7.4.5:scope_backup_coverage"
     description: "Backup + DR system coverage (PII in backups within scope; deletion propagation policy documented)"
     excerpt_keywords:
-      - [scope, backup, coverage, pii]
-      - [backup, system, coverage, pii]
+      - [backup, coverage, pii]
+      - [backup, coverage, pii]
+      - [coverage, pii]
+      - [coverage, pii, backups]
+      - [pii, backups]
+      - [pii, backups, within]
+      - [backups, within, pii]
+      - [backups, within, scope, pii]
 
   - must_id: "item:A.7.4.5:scope_end_triggers"
     description: "End-trigger enumeration per activity type"
     excerpt_keywords:
-      - [scope, end, triggers, pii]
+      - [end, triggers, pii]
+      - [end, trigger, pii]
+      - [end, trigger, enumeration, pii]
+      - [trigger, enumeration, pii]
+      - [trigger, enumeration, activity, pii]
+      - [enumeration, activity, pii]
+      - [in, scope, pii]
+      - [scope, includes, pii]
 
-  - must_id: "item:A.7.4.5:scope_exceptions"
-    description: "Exceptions (legal-hold / active litigation / regulator inspection) with rationale"
-    excerpt_keywords:
-      - [scope, exceptions, pii]

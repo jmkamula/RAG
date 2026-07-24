@@ -15,59 +15,59 @@ must_fingerprints:
     description: "Where processing requires non-minimised PII (identified purpose demands it), justification documented"
     excerpt_keywords:
       - [full, pii, justification]
-      - [processing, requires]
-      - [processing, requires, non]
-      - [requires, non]
-      - [requires, non, minimised]
-      - [non, minimised]
+      - [processing, requires, pii]
+      - [processing, requires, non, pii]
+      - [requires, non, pii]
+      - [requires, non, minimised, pii]
+      - [non, minimised, pii]
       - [non, minimised, pii]
       - [minimised, pii]
 
   - must_id: "item:A.7.4.4:proc_technical_config"
     description: "Technical configurations documented (how the minimisation is implemented in code / infrastructure)"
     excerpt_keywords:
-      - [technical, config]
-      - [technical, configurations]
-      - [technical, configurations, documented]
-      - [configurations, documented]
-      - [configurations, documented, minimisation]
-      - [documented, minimisation]
-      - [documented, minimisation, implemented]
-      - [minimisation, implemented]
+      - [technical, config, pii]
+      - [technical, configurations, pii]
+      - [technical, configurations, documented, pii]
+      - [configurations, documented, pii]
+      - [configurations, documented, minimisation, pii]
+      - [documented, minimisation, pii]
+      - [documented, minimisation, implemented, pii]
+      - [minimisation, implemented, pii]
 
   - must_id: "item:A.7.4.4:proc_deidentification_technique"
     description: "De-identification technique selection referencing ISO/IEC 20889 taxonomy"
     excerpt_keywords:
-      - [deidentification, technique]
-      - [identification, technique]
-      - [identification, technique, selection]
-      - [technique, selection]
-      - [technique, selection, referencing]
-      - [selection, referencing]
-      - [selection, referencing, iso]
-      - [referencing, iso]
+      - [deidentification, technique, pii]
+      - [identification, technique, pii]
+      - [identification, technique, selection, pii]
+      - [technique, selection, pii]
+      - [technique, selection, referencing, pii]
+      - [selection, referencing, pii]
+      - [selection, referencing, iso, pii]
+      - [referencing, iso, pii]
 
   - must_id: "item:A.7.4.4:proc_mechanism_map"
     description: "Mechanism map — de-identification / pseudonymisation / aggregation / generalisation / suppression per activity"
     excerpt_keywords:
-      - [mechanism, map]
-      - [mechanism, map, identification]
-      - [map, identification]
-      - [map, identification, pseudonymisation]
-      - [identification, pseudonymisation]
-      - [identification, pseudonymisation, aggregation]
-      - [pseudonymisation, aggregation]
-      - [pseudonymisation, aggregation, generalisation]
+      - [mechanism, map, pii]
+      - [mechanism, map, identification, pii]
+      - [map, identification, pii]
+      - [map, identification, pseudonymisation, pii]
+      - [identification, pseudonymisation, pii]
+      - [identification, pseudonymisation, aggregation, pii]
+      - [pseudonymisation, aggregation, pii]
+      - [pseudonymisation, aggregation, generalisation, pii]
 
   - must_id: "item:A.7.4.4:proc_objectives_stated"
     description: "Minimization objectives stated per processing activity (target level of identifiability required)"
     excerpt_keywords:
-      - [objectives, stated]
+      - [objectives, stated, pii]
       - [minimization, objectives]
       - [minimization, objectives, stated]
-      - [objectives, stated, processing]
-      - [stated, processing]
-      - [stated, processing, activity]
-      - [processing, activity]
-      - [processing, activity, target]
+      - [objectives, stated, processing, pii]
+      - [stated, processing, pii]
+      - [stated, processing, activity, pii]
+      - [processing, activity, pii]
+      - [processing, activity, target, pii]
 

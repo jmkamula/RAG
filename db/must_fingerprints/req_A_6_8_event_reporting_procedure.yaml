@@ -14,74 +14,74 @@ must_fingerprints:
   - must_id: "item:A.6.8:owner"
     description: "Named owner of the procedure (typically InfoSec on-call with HR + Legal partners for sensitive cases)"
     excerpt_keywords:
-      - [named, owner]
-      - [named, owner, typically]
-      - [owner, typically]
-      - [owner, typically, infosec]
-      - [typically, infosec]
-      - [typically, infosec, call]
-      - [infosec, call]
-      - [infosec, call, legal]
+      - [named, owner, event]
+      - [named, owner, typically, event]
+      - [owner, typically, event]
+      - [owner, typically, infosec, event]
+      - [typically, infosec, event]
+      - [typically, infosec, call, event]
+      - [infosec, call, event]
+      - [infosec, call, legal, event]
 
   - must_id: "item:A.6.8:handoff_to_triage"
     description: "Handoff to triage process (A.5.25 assessment-and-decision) on receipt — drives traceability from report through to closure"
     excerpt_keywords:
-      - [handoff, triage]
-      - [handoff, triage, assessment]
-      - [triage, assessment]
-      - [triage, assessment, decision]
-      - [assessment, decision]
-      - [assessment, decision, receipt]
-      - [decision, receipt]
-      - [decision, receipt, traceability]
+      - [handoff, triage, event]
+      - [handoff, triage, assessment, event]
+      - [triage, assessment, event]
+      - [triage, assessment, decision, event]
+      - [assessment, decision, event]
+      - [assessment, decision, receipt, event]
+      - [decision, receipt, event]
+      - [decision, receipt, traceability, event]
 
   - must_id: "item:A.6.8:no_blame"
     description: "No-blame / non-retaliation statement encourages honest reporting (drives reporting culture; under-reporting is the #1 risk for incident prog"
     excerpt_keywords:
-      - [no, blame]
-      - [blame, non]
-      - [blame, non, retaliation]
-      - [non, retaliation]
-      - [non, retaliation, statement]
-      - [retaliation, statement]
-      - [retaliation, statement, encourages]
-      - [statement, encourages]
+      - [no, blame, event]
+      - [blame, non, event]
+      - [blame, non, retaliation, event]
+      - [non, retaliation, event]
+      - [non, retaliation, statement, event]
+      - [retaliation, statement, event]
+      - [retaliation, statement, encourages, event]
+      - [statement, encourages, event]
 
   - must_id: "item:A.6.8:timeliness"
     description: "Timeliness expectation (e.g"
     excerpt_keywords:
-      - [timeliness, expectation]
-      - [timeliness, expectation, soon]
-      - [expectation, soon]
-      - [expectation, soon, practicable]
-      - [soon, practicable]
-      - [soon, practicable, within]
-      - [practicable, within]
-      - [practicable, within, hours]
+      - [timeliness, expectation, event]
+      - [timeliness, expectation, soon, event]
+      - [expectation, soon, event]
+      - [expectation, soon, practicable, event]
+      - [soon, practicable, event]
+      - [soon, practicable, within, event]
+      - [practicable, within, event]
+      - [practicable, within, hours, event]
 
   - must_id: "item:A.6.8:what_to_report"
     description: "What to report — observed events, suspected events, near-misses (no judgement required at reporting stage; over-reporting is preferred to un"
     excerpt_keywords:
-      - [report, observed]
-      - [report, observed, events]
-      - [observed, events]
-      - [observed, events, suspected]
-      - [events, suspected]
-      - [events, suspected, events]
-      - [suspected, events]
-      - [suspected, events, near]
+      - [report, observed, event]
+      - [report, observed, events, event]
+      - [observed, events, event]
+      - [observed, events, suspected, event]
+      - [events, suspected, event]
+      - [events, suspected, events, event]
+      - [suspected, events, event]
+      - [suspected, events, near, event]
 
   - must_id: "item:A.6.8:audience"
     description: "Procedure addresses all personnel (employees, contractors, third parties with access)"
     excerpt_keywords:
-      - [addresses, personnel]
-      - [addresses, personnel, employees]
-      - [personnel, employees]
-      - [personnel, employees, contractors]
-      - [employees, contractors]
-      - [employees, contractors, third]
-      - [contractors, third]
-      - [contractors, third, parties]
+      - [addresses, personnel, event]
+      - [addresses, personnel, employees, event]
+      - [personnel, employees, event]
+      - [personnel, employees, contractors, event]
+      - [employees, contractors, event]
+      - [employees, contractors, third, event]
+      - [contractors, third, event]
+      - [contractors, third, parties, event]
 
   - must_id: "item:A.6.8:channels"
     description: "Multiple reporting channels offered (email, hotline, portal, manager, ticket system) — drives discoverability and accessibility under variou"
@@ -90,8 +90,8 @@ must_fingerprints:
       - [multiple, reporting, channels]
       - [reporting, channels]
       - [reporting, channels, offered]
-      - [channels, offered]
-      - [channels, offered, email]
-      - [offered, email]
-      - [offered, email, hotline]
+      - [channels, offered, event]
+      - [channels, offered, email, event]
+      - [offered, email, event]
+      - [offered, email, hotline, event]
 

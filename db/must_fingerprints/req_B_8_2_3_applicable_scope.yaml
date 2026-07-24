@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.3:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.3:applicable_scope"
@@ -13,16 +14,36 @@ must_fingerprints:
   - must_id: "item:B.8.2.3:scope_exceptions"
     description: "Documented exceptions (empty for most processors) with rationale"
     excerpt_keywords:
-      - [scope, exceptions, marketing]
       - [documented, exceptions, marketing]
-
-  - must_id: "item:B.8.2.3:scope_marketing_channels"
-    description: "Marketing channels enumerated (email marketing / retargeting / in-product prompts / third-party a..."
-    excerpt_keywords:
-      - [scope, marketing, channels]
-      - [marketing, channels, enumerated]
+      - [documented, exceptions, empty, marketing]
+      - [exceptions, empty, marketing]
+      - [exceptions, empty, most, marketing]
+      - [empty, most, marketing]
+      - [empty, most, processors, marketing]
+      - [most, processors, marketing]
+      - [most, processors, rationale, marketing]
 
   - must_id: "item:B.8.2.3:scope_pii_isolation"
     description: "Customer-PII isolation posture (marketing systems use own-controller data only)"
     excerpt_keywords:
-      - [scope, pii, isolation, marketing]
+      - [pii, isolation, marketing]
+      - [customer, pii, marketing]
+      - [customer, pii, isolation, marketing]
+      - [pii, isolation, posture, marketing]
+      - [isolation, posture, marketing]
+      - [isolation, posture, marketing]
+      - [posture, marketing]
+      - [posture, marketing, use]
+
+  - must_id: "item:B.8.2.3:scope_marketing_channels"
+    description: "Marketing channels enumerated (email marketing / retargeting / in-product prompts / third-party ad platforms)"
+    excerpt_keywords:
+      - [marketing, channels]
+      - [marketing, channels, enumerated]
+      - [channels, enumerated, marketing]
+      - [channels, enumerated, email, marketing]
+      - [enumerated, email, marketing]
+      - [enumerated, email, marketing]
+      - [email, marketing]
+      - [email, marketing, retargeting]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.5.2:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.2:applicable_scope"
@@ -10,17 +11,39 @@ target_control: "A.7.5.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.5.2:scope_law_enforcement"
-    description: "Law-enforcement-request handling (not in advance-disclosed list)"
-    excerpt_keywords:
-      - [scope, law, enforcement, countries]
-
   - must_id: "item:A.7.5.2:scope_multi_region_cloud"
     description: "Multi-region cloud + backup destinations included"
     excerpt_keywords:
-      - [scope, multi, region, cloud, countries]
+      - [multi, region, cloud, countries]
+      - [multi, region, countries]
+      - [region, cloud, countries]
+      - [region, cloud, backup, countries]
+      - [cloud, backup, countries]
+      - [cloud, backup, destinations, countries]
+      - [backup, destinations, countries]
+      - [backup, destinations, included, countries]
+
+  - must_id: "item:A.7.5.2:scope_law_enforcement"
+    description: "Law-enforcement-request handling (not in advance-disclosed list)"
+    excerpt_keywords:
+      - [law, enforcement, countries]
+      - [law, enforcement, request, countries]
+      - [enforcement, request, countries]
+      - [enforcement, request, handling, countries]
+      - [request, handling, countries]
+      - [request, handling, not, countries]
+      - [handling, not, countries]
+      - [handling, not, advance, countries]
 
   - must_id: "item:A.7.5.2:scope_normal_operations"
     description: "Normal-operations destinations (direct + subprocessor + support tier)"
     excerpt_keywords:
-      - [scope, normal, operations, countries]
+      - [normal, operations, countries]
+      - [normal, operations, destinations, countries]
+      - [operations, destinations, countries]
+      - [operations, destinations, direct, countries]
+      - [destinations, direct, countries]
+      - [destinations, direct, subprocessor, countries]
+      - [direct, subprocessor, countries]
+      - [direct, subprocessor, support, countries]
+

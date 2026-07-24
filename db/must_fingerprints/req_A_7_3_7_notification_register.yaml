@@ -14,58 +14,58 @@ must_fingerprints:
   - must_id: "item:A.7.3.7:reg_ack_received"
     description: "Acknowledgement received flag + date per row"
     excerpt_keywords:
-      - [ack, received]
-      - [acknowledgement, received]
-      - [acknowledgement, received, flag]
-      - [received, flag]
-      - [received, flag, date]
-      - [flag, date]
-      - [per, row]
-      - [each, row]
+      - [ack, received, pii]
+      - [acknowledgement, received, pii]
+      - [acknowledgement, received, flag, pii]
+      - [received, flag, pii]
+      - [received, flag, date, pii]
+      - [flag, date, pii]
+      - [per, row, pii]
+      - [each, row, pii]
 
   - must_id: "item:A.7.3.7:reg_dispatch_date"
     description: "Dispatch date per row"
     excerpt_keywords:
-      - [dispatch, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [dispatch, date, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
+      - [column, header, pii]
 
   - must_id: "item:A.7.3.7:reg_trigger_event"
     description: "Trigger event per row (which subject event caused the notification)"
     excerpt_keywords:
-      - [trigger, event]
-      - [trigger, event, subject]
-      - [event, subject]
-      - [event, subject, event]
-      - [subject, event]
-      - [subject, event, caused]
-      - [event, caused]
-      - [event, caused, notification]
+      - [trigger, event, pii]
+      - [trigger, event, subject, pii]
+      - [event, subject, pii]
+      - [event, subject, event, pii]
+      - [subject, event, pii]
+      - [subject, event, caused, pii]
+      - [event, caused, pii]
+      - [event, caused, notification, pii]
 
   - must_id: "item:A.7.3.7:reg_recipient"
     description: "Recipient third party per row"
     excerpt_keywords:
-      - [recipient, third]
-      - [recipient, third, party]
-      - [third, party]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [recipient, third, pii]
+      - [recipient, third, party, pii]
+      - [third, party, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
+      - [column, header, pii]
 
   - must_id: "item:A.7.3.7:reg_notification_id"
     description: "Unique notification identifier per row"
     excerpt_keywords:
-      - [notification, id]
-      - [unique, notification]
-      - [unique, notification, identifier]
-      - [notification, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [notification, id, pii]
+      - [unique, notification, pii]
+      - [unique, notification, identifier, pii]
+      - [notification, identifier, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
 

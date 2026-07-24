@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.6:lawful_basis_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.6:lawful_basis_program_review"
@@ -10,28 +11,63 @@ target_control: "Art.6"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.6:rev_basis_appropriateness"
-    description: "Basis-appropriateness sample — high-volume / high-sensitivity activities re-evaluated for whether..."
-    excerpt_keywords:
-      - [basis, appropriateness, lawfulness]
-
-  - must_id: "item:Art.6:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, lawfulness]
-
-  - must_id: "item:Art.6:rev_register_currency"
-    description: "Register currency check — every Art.30 RoPA activity has a current Art.6 basis assignment"
-    excerpt_keywords:
-      - [register, currency, lawfulness]
-      - [register, currency, check, lawfulness]
-
   - must_id: "item:Art.6:rev_regulator_guidance"
     description: "Regulator-guidance sweep — EDPB / supervisory authority guidance updates considered for impact"
     excerpt_keywords:
       - [regulator, guidance, lawfulness]
+      - [regulator, guidance, sweep, lawfulness]
+      - [guidance, sweep, lawfulness]
+      - [guidance, sweep, edpb, lawfulness]
+      - [sweep, edpb, lawfulness]
+      - [sweep, edpb, supervisory, lawfulness]
+      - [edpb, supervisory, lawfulness]
+      - [edpb, supervisory, authority, lawfulness]
+
+  - must_id: "item:Art.6:rev_basis_appropriateness"
+    description: "Basis-appropriateness sample — high-volume / high-sensitivity activities re-evaluated for whether the chosen basis still fits"
+    excerpt_keywords:
+      - [basis, appropriateness, lawfulness]
+      - [basis, appropriateness, sample, lawfulness]
+      - [appropriateness, sample, lawfulness]
+      - [appropriateness, sample, high, lawfulness]
+      - [sample, high, lawfulness]
+      - [sample, high, volume, lawfulness]
+      - [high, volume, lawfulness]
+      - [high, volume, high, lawfulness]
+
+  - must_id: "item:Art.6:rev_register_currency"
+    description: "Register currency check — every Art.30 RoPA activity has a current Art.6 basis assignment"
+    excerpt_keywords:
+      - [currency, check, lawfulness]
+      - [currency, check, every, lawfulness]
+      - [check, every, lawfulness]
+      - [check, every, art, lawfulness]
+      - [every, art, lawfulness]
+      - [every, art, ropa, lawfulness]
+      - [art, ropa, lawfulness]
+      - [art, ropa, activity, lawfulness]
 
   - must_id: "item:Art.6:rev_reviewer"
     description: "Reviewer identity (DPO or Privacy Lead)"
     excerpt_keywords:
       - [reviewer, identity, lawfulness]
+      - [reviewer, identity, dpo, lawfulness]
+      - [identity, dpo, lawfulness]
+      - [identity, dpo, privacy, lawfulness]
+      - [dpo, privacy, lawfulness]
+      - [dpo, privacy, lead, lawfulness]
+      - [privacy, lead, lawfulness]
+      - [per, revocation, lawfulness]
+
+  - must_id: "item:Art.6:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, lawfulness]
+      - [review, date, within, lawfulness]
+      - [date, within, lawfulness]
+      - [date, within, planned, lawfulness]
+      - [within, planned, lawfulness]
+      - [within, planned, interval, lawfulness]
+      - [planned, interval, lawfulness]
+      - [per, revocation, lawfulness]
+

@@ -14,14 +14,14 @@ must_fingerprints:
   - must_id: "item:B.8.5.4:reg_response_outcome"
     description: "Response outcome per row (data disclosed / request rejected / partial)"
     excerpt_keywords:
-      - [response, outcome]
-      - [response, outcome, disclosed]
-      - [outcome, disclosed]
-      - [outcome, disclosed, request]
-      - [disclosed, request]
-      - [disclosed, request, rejected]
-      - [request, rejected]
-      - [request, rejected, partial]
+      - [response, outcome, notification]
+      - [response, outcome, disclosed, notification]
+      - [outcome, disclosed, notification]
+      - [outcome, disclosed, request, notification]
+      - [disclosed, request, notification]
+      - [disclosed, request, rejected, notification]
+      - [request, rejected, notification]
+      - [request, rejected, partial, notification]
 
   - must_id: "item:B.8.5.4:reg_customer_notification"
     description: "Customer notification date per row (or gag-order flag)"
@@ -30,44 +30,44 @@ must_fingerprints:
       - [customer, notification, date]
       - [notification, date]
       - [notification, date, gag]
-      - [date, gag]
-      - [date, gag, order]
-      - [gag, order]
-      - [gag, order, flag]
+      - [date, gag, notification]
+      - [date, gag, order, notification]
+      - [gag, order, notification]
+      - [gag, order, flag, notification]
 
   - must_id: "item:B.8.5.4:reg_customer_affected"
     description: "Customer(s) whose PII was targeted per row"
     excerpt_keywords:
-      - [customer, affected]
-      - [customer, whose]
+      - [customer, affected, notification]
+      - [customer, whose, notification]
       - [customer, whose, pii]
       - [whose, pii]
       - [whose, pii, targeted]
       - [pii, targeted]
-      - [per, row]
-      - [each, row]
+      - [per, row, notification]
+      - [each, row, notification]
 
   - must_id: "item:B.8.5.4:reg_requester"
     description: "Requesting authority per row (law enforcement / regulator / court)"
     excerpt_keywords:
-      - [requesting, authority]
-      - [requesting, authority, law]
-      - [authority, law]
-      - [authority, law, enforcement]
-      - [law, enforcement]
-      - [law, enforcement, regulator]
-      - [enforcement, regulator]
-      - [enforcement, regulator, court]
+      - [requesting, authority, notification]
+      - [requesting, authority, law, notification]
+      - [authority, law, notification]
+      - [authority, law, enforcement, notification]
+      - [law, enforcement, notification]
+      - [law, enforcement, regulator, notification]
+      - [enforcement, regulator, notification]
+      - [enforcement, regulator, court, notification]
 
   - must_id: "item:B.8.5.4:reg_request_id"
     description: "Unique request identifier per row"
     excerpt_keywords:
-      - [request, id]
-      - [unique, request]
-      - [unique, request, identifier]
-      - [request, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [request, id, notification]
+      - [unique, request, notification]
+      - [unique, request, identifier, notification]
+      - [request, identifier, notification]
+      - [per, row, notification]
+      - [each, row, notification]
+      - [column, containing, notification]
+      - [each, entry, notification]
 

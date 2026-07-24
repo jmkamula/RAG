@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.4.8:proc_cross_link_a528"
     description: "Cross-link to A.5.28 evidence handling — disposal_record shape reused for evidence forensics"
     excerpt_keywords:
-      - [cross, a528]
-      - [cross, evidence]
-      - [cross, evidence, handling]
-      - [evidence, handling]
-      - [evidence, handling, disposal_record]
-      - [handling, disposal_record]
-      - [handling, disposal_record, shape]
-      - [disposal_record, shape]
+      - [cross, a528, disposal]
+      - [cross, evidence, disposal]
+      - [cross, evidence, handling, disposal]
+      - [evidence, handling, disposal]
+      - [evidence, handling, disposal_record, disposal]
+      - [handling, disposal_record, disposal]
+      - [handling, disposal_record, shape, disposal]
+      - [disposal_record, shape, disposal]
 
   - must_id: "item:A.7.4.8:proc_certificate"
     description: "Disposal certificate / attestation captured per action"
     excerpt_keywords:
       - [disposal, certificate]
       - [disposal, certificate, attestation]
-      - [certificate, attestation]
-      - [certificate, attestation, captured]
-      - [attestation, captured]
-      - [attestation, captured, action]
-      - [captured, action]
-      - [procedure, step]
+      - [certificate, attestation, disposal]
+      - [certificate, attestation, captured, disposal]
+      - [attestation, captured, disposal]
+      - [attestation, captured, action, disposal]
+      - [captured, action, disposal]
+      - [procedure, step, disposal]
 
   - must_id: "item:A.7.4.8:proc_media_lifecycle"
     description: "Media lifecycle coverage (production + backup + archive + failed hardware + decommissioned equipment)"
     excerpt_keywords:
-      - [media, lifecycle]
-      - [media, lifecycle, coverage]
-      - [lifecycle, coverage]
-      - [lifecycle, coverage, production]
-      - [coverage, production]
-      - [coverage, production, backup]
-      - [production, backup]
-      - [production, backup, archive]
+      - [media, lifecycle, disposal]
+      - [media, lifecycle, coverage, disposal]
+      - [lifecycle, coverage, disposal]
+      - [lifecycle, coverage, production, disposal]
+      - [coverage, production, disposal]
+      - [coverage, production, backup, disposal]
+      - [production, backup, disposal]
+      - [production, backup, archive, disposal]
 
   - must_id: "item:A.7.4.8:proc_technique_selection"
     description: "Technique selection factors (nature + extent of PII + metadata associations + media characteristics)"
     excerpt_keywords:
-      - [technique, selection]
-      - [technique, selection, factors]
-      - [selection, factors]
-      - [selection, factors, nature]
-      - [factors, nature]
-      - [factors, nature, extent]
-      - [nature, extent]
-      - [nature, extent, pii]
+      - [technique, selection, disposal]
+      - [technique, selection, factors, disposal]
+      - [selection, factors, disposal]
+      - [selection, factors, nature, disposal]
+      - [factors, nature, disposal]
+      - [factors, nature, extent, disposal]
+      - [nature, extent, disposal]
+      - [nature, extent, pii, disposal]
 
   - must_id: "item:A.7.4.8:proc_technique_map"
     description: "Technique map per media type (electronic — cryptographic erase + overwrite / physical — shredding + degaussing / cloud — provider-attested)"
     excerpt_keywords:
-      - [technique, map]
-      - [technique, map, media]
-      - [map, media]
-      - [map, media, electronic]
-      - [media, electronic]
-      - [media, electronic, cryptographic]
-      - [electronic, cryptographic]
-      - [electronic, cryptographic, erase]
+      - [technique, map, disposal]
+      - [technique, map, media, disposal]
+      - [map, media, disposal]
+      - [map, media, electronic, disposal]
+      - [media, electronic, disposal]
+      - [media, electronic, cryptographic, disposal]
+      - [electronic, cryptographic, disposal]
+      - [electronic, cryptographic, erase, disposal]
 

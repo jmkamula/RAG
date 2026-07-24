@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.1:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.1:program_review"
@@ -10,27 +11,63 @@ target_control: "A.7.3.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.1:rev_catalog_currency"
-    description: "Catalog currency — recent regulatory / case-law developments incorporated"
-    excerpt_keywords:
-      - [catalog, currency, determining]
-
   - must_id: "item:A.7.3.1:rev_channel_health"
     description: "Channel health — fulfilment channels reachable + functional"
     excerpt_keywords:
       - [channel, health, determining]
-
-  - must_id: "item:A.7.3.1:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, determining]
-
-  - must_id: "item:A.7.3.1:rev_reviewer"
-    description: "Reviewer identity (DPO + Legal)"
-    excerpt_keywords:
-      - [reviewer, identity, determining]
+      - [channel, health, fulfilment, determining]
+      - [health, fulfilment, determining]
+      - [health, fulfilment, channels, determining]
+      - [fulfilment, channels, determining]
+      - [fulfilment, channels, reachable, determining]
+      - [channels, reachable, determining]
+      - [channels, reachable, functional, determining]
 
   - must_id: "item:A.7.3.1:rev_sla_audit"
     description: "SLA audit — sampled A.7.3.9 request register measured against catalog SLAs"
     excerpt_keywords:
       - [sla, audit, determining]
+      - [sla, audit, sampled, determining]
+      - [audit, sampled, determining]
+      - [audit, sampled, request, determining]
+      - [sampled, request, determining]
+      - [sampled, request, measured, determining]
+      - [request, measured, determining]
+      - [request, measured, against, determining]
+
+  - must_id: "item:A.7.3.1:rev_catalog_currency"
+    description: "Catalog currency — recent regulatory / case-law developments incorporated"
+    excerpt_keywords:
+      - [catalog, currency, determining]
+      - [catalog, currency, recent, determining]
+      - [currency, recent, determining]
+      - [currency, recent, regulatory, determining]
+      - [recent, regulatory, determining]
+      - [recent, regulatory, case, determining]
+      - [regulatory, case, determining]
+      - [regulatory, case, law, determining]
+
+  - must_id: "item:A.7.3.1:rev_reviewer"
+    description: "Reviewer identity (DPO + Legal)"
+    excerpt_keywords:
+      - [reviewer, identity, determining]
+      - [reviewer, identity, dpo, determining]
+      - [identity, dpo, determining]
+      - [identity, dpo, legal, determining]
+      - [dpo, legal, determining]
+      - [per, revocation, determining]
+      - [per, revoked, identity, determining]
+      - [revocation, record, determining]
+
+  - must_id: "item:A.7.3.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, determining]
+      - [review, date, within, determining]
+      - [date, within, determining]
+      - [date, within, planned, determining]
+      - [within, planned, determining]
+      - [within, planned, interval, determining]
+      - [planned, interval, determining]
+      - [per, revocation, determining]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.8:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.8:applicable_scope"
@@ -10,19 +11,39 @@ target_control: "A.7.2.8"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.2.8:scope_exclusions"
+    description: "Exclusions — anonymous / aggregate processing not in RoPA with rationale"
+    excerpt_keywords:
+      - [exclusions, anonymous, records]
+      - [exclusions, anonymous, aggregate, records]
+      - [anonymous, aggregate, records]
+      - [anonymous, aggregate, processing, records]
+      - [aggregate, processing, records]
+      - [aggregate, processing, not, records]
+      - [processing, not, records]
+      - [processing, not, ropa, records]
+
   - must_id: "item:A.7.2.8:scope_coverage_test"
     description: "Coverage test — RoPA rowcount reconciles against A.7.2.1 purpose register + system inventory"
     excerpt_keywords:
-      - [scope, coverage, test, records]
       - [coverage, test, records]
+      - [coverage, test, ropa, records]
+      - [test, ropa, records]
+      - [test, ropa, rowcount, records]
+      - [ropa, rowcount, records]
+      - [ropa, rowcount, reconciles, records]
+      - [rowcount, reconciles, records]
+      - [rowcount, reconciles, against, records]
 
   - must_id: "item:A.7.2.8:scope_covered_activities"
     description: "Covered activities enumerated (all processing activities the org performs)"
     excerpt_keywords:
-      - [scope, covered, activities, records]
+      - [covered, activities, records]
       - [covered, activities, enumerated, records]
+      - [activities, enumerated, records]
+      - [activities, enumerated, processing, records]
+      - [enumerated, processing, records]
+      - [enumerated, processing, activities, records]
+      - [processing, activities, records]
+      - [processing, activities, org, records]
 
-  - must_id: "item:A.7.2.8:scope_exclusions"
-    description: "Exclusions — anonymous / aggregate processing not in RoPA with rationale"
-    excerpt_keywords:
-      - [scope, exclusions, records]

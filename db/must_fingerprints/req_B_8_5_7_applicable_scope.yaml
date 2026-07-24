@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.7:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.7:applicable_scope"
@@ -13,11 +14,24 @@ must_fingerprints:
   - must_id: "item:B.8.5.7:scope_authorisation_mode"
     description: "Authorisation mode per engagement type (general via contract clause / specific per subcontractor)"
     excerpt_keywords:
-      - [scope, authorisation, mode, engagement]
-      - [authorisation, mode, engagement, type]
+      - [authorisation, mode, engagement]
+      - [authorisation, mode, engagement]
+      - [mode, engagement]
+      - [mode, engagement, general]
+      - [engagement, general]
+      - [engagement, general, via]
+      - [general, via, engagement]
+      - [general, via, contract, engagement]
 
   - must_id: "item:B.8.5.7:scope_engagement_types"
-    description: "Engagement types enumerated (SaaS subprocessor / infrastructure provider / support-outsourcing / ..."
+    description: "Engagement types enumerated (SaaS subprocessor / infrastructure provider / support-outsourcing / one-off contractor)"
     excerpt_keywords:
-      - [scope, engagement, types]
+      - [engagement, types]
       - [engagement, types, enumerated]
+      - [types, enumerated, engagement]
+      - [types, enumerated, saas, engagement]
+      - [enumerated, saas, engagement]
+      - [enumerated, saas, subprocessor, engagement]
+      - [saas, subprocessor, engagement]
+      - [saas, subprocessor, infrastructure, engagement]
+

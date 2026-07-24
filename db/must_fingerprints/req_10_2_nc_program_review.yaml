@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:10.2:nc_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:10.2:nc_program_review"
@@ -10,32 +11,75 @@ target_control: "10.2"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:10.2:rev_isms_change_pattern"
+    description: "ISMS-change pattern check — high-volume NC areas drove 6.3 ISMS changes where systemic causes warranted it"
+    excerpt_keywords:
+      - [isms, change, pattern, nonconformity]
+      - [isms, change, nonconformity]
+      - [change, pattern, nonconformity]
+      - [change, pattern, check, nonconformity]
+      - [pattern, check, nonconformity]
+      - [pattern, check, high, nonconformity]
+      - [check, high, nonconformity]
+      - [check, high, volume, nonconformity]
+
+  - must_id: "item:10.2:rev_recurrence_check"
+    description: "Recurrence check — closed NCs sampled for whether the same nature recurred (effectiveness failure signal)"
+    excerpt_keywords:
+      - [recurrence, check, nonconformity]
+      - [recurrence, check, closed, nonconformity]
+      - [check, closed, nonconformity]
+      - [check, closed, ncs, nonconformity]
+      - [closed, ncs, nonconformity]
+      - [closed, ncs, sampled, nonconformity]
+      - [ncs, sampled, nonconformity]
+      - [ncs, sampled, whether, nonconformity]
+
+  - must_id: "item:10.2:rev_root_cause_quality"
+    description: "Root-cause-quality sample — sampled NCs reviewed for blame-free systemic analysis (not 'human error' as the only cause)"
+    excerpt_keywords:
+      - [root, cause, quality, nonconformity]
+      - [root, cause, nonconformity]
+      - [cause, quality, nonconformity]
+      - [cause, quality, sample, nonconformity]
+      - [quality, sample, nonconformity]
+      - [quality, sample, sampled, nonconformity]
+      - [sample, sampled, nonconformity]
+      - [sample, sampled, ncs, nonconformity]
+
   - must_id: "item:10.2:rev_closure_progress"
     description: "Closure-progress check — open NCs aging beyond expected closure time escalated"
     excerpt_keywords:
       - [closure, progress, nonconformity]
-
-  - must_id: "item:10.2:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, nonconformity]
-
-  - must_id: "item:10.2:rev_isms_change_pattern"
-    description: "ISMS-change pattern check — high-volume NC areas drove 6.3 ISMS changes where systemic causes war..."
-    excerpt_keywords:
-      - [isms, change, pattern, nonconformity]
-
-  - must_id: "item:10.2:rev_recurrence_check"
-    description: "Recurrence check — closed NCs sampled for whether the same nature recurred (effectiveness failure..."
-    excerpt_keywords:
-      - [recurrence, check, nonconformity]
+      - [closure, progress, check, nonconformity]
+      - [progress, check, nonconformity]
+      - [progress, check, open, nonconformity]
+      - [check, open, nonconformity]
+      - [check, open, ncs, nonconformity]
+      - [open, ncs, nonconformity]
+      - [open, ncs, aging, nonconformity]
 
   - must_id: "item:10.2:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + lead auditor)"
     excerpt_keywords:
       - [reviewer, identity, nonconformity]
+      - [reviewer, identity, isms, nonconformity]
+      - [identity, isms, nonconformity]
+      - [identity, isms, manager, nonconformity]
+      - [isms, manager, nonconformity]
+      - [isms, manager, lead, nonconformity]
+      - [manager, lead, nonconformity]
+      - [manager, lead, auditor, nonconformity]
 
-  - must_id: "item:10.2:rev_root_cause_quality"
-    description: "Root-cause-quality sample — sampled NCs reviewed for blame-free systemic analysis (not 'human err..."
+  - must_id: "item:10.2:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [root, cause, quality, nonconformity]
+      - [review, date, nonconformity]
+      - [review, date, within, nonconformity]
+      - [date, within, nonconformity]
+      - [date, within, planned, nonconformity]
+      - [within, planned, nonconformity]
+      - [within, planned, interval, nonconformity]
+      - [planned, interval, nonconformity]
+      - [per, revocation, nonconformity]
+

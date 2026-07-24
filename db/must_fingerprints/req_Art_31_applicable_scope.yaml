@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.31:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.31:applicable_scope"
@@ -10,20 +11,39 @@ target_control: "Art.31"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
+  - must_id: "item:Art.31:scope_powers"
+    description: "Art.58 SA powers acknowledged — info access (Art.58.1.a-f), corrective (Art.58.2), authorisation (Art.58.3)"
+    excerpt_keywords:
+      - [art, powers, cooperation]
+      - [art, powers, acknowledged, cooperation]
+      - [powers, acknowledged, cooperation]
+      - [powers, acknowledged, info, cooperation]
+      - [acknowledged, info, cooperation]
+      - [acknowledged, info, access, cooperation]
+      - [info, access, cooperation]
+      - [info, access, art, cooperation]
+
   - must_id: "item:Art.31:scope_concerned_sas"
     description: "Concerned SAs enumerated (MS where subjects affected)"
     excerpt_keywords:
-      - [scope, concerned, sas, cooperation]
+      - [concerned, sas, cooperation]
       - [concerned, sas, enumerated, cooperation]
+      - [sas, enumerated, cooperation]
+      - [sas, enumerated, subjects, cooperation]
+      - [enumerated, subjects, cooperation]
+      - [enumerated, subjects, affected, cooperation]
+      - [subjects, affected, cooperation]
+      - [in, scope, cooperation]
 
   - must_id: "item:Art.31:scope_lead_sa"
     description: "Lead supervisory authority identified"
     excerpt_keywords:
-      - [scope, lead, cooperation]
-      - [lead, supervisory, authority, identified]
+      - [lead, sa, cooperation]
+      - [lead, supervisory]
+      - [lead, supervisory, authority]
+      - [supervisory, authority]
+      - [supervisory, authority, identified]
+      - [authority, identified, cooperation]
+      - [in, scope, cooperation]
+      - [scope, includes, cooperation]
 
-  - must_id: "item:Art.31:scope_powers"
-    description: "Art.58 SA powers acknowledged — info access (Art.58.1.a-f), corrective (Art.58.2), authorisation ..."
-    excerpt_keywords:
-      - [scope, powers, cooperation]
-      - [art, powers, acknowledged, cooperation]

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.5:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.5:applicable_scope"
@@ -10,20 +11,39 @@ target_control: "B.8.2.5"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.2.5:scope_audit_tiers"
-    description: "Audit tier map (contract tier → audit rights: e.g. Enterprise → onsite / Business → questionnaire..."
-    excerpt_keywords:
-      - [scope, audit, tiers, customer]
-      - [audit, tier, map, customer]
-
   - must_id: "item:B.8.2.5:scope_certifications_current"
     description: "Current certifications enumerated with expiry"
     excerpt_keywords:
-      - [scope, certifications, current, customer]
-      - [current, certifications, enumerated, expiry, customer]
+      - [certifications, current, customer]
+      - [current, certifications, customer]
+      - [current, certifications, enumerated, customer]
+      - [certifications, enumerated, customer]
+      - [certifications, enumerated, expiry, customer]
+      - [enumerated, expiry, customer]
+      - [in, scope, customer]
+      - [scope, includes, customer]
+
+  - must_id: "item:B.8.2.5:scope_audit_tiers"
+    description: "Audit tier map (contract tier → audit rights: e.g"
+    excerpt_keywords:
+      - [audit, tiers, customer]
+      - [audit, tier, customer]
+      - [audit, tier, map, customer]
+      - [tier, map, customer]
+      - [tier, map, contract, customer]
+      - [map, contract, customer]
+      - [map, contract, tier, customer]
+      - [contract, tier, customer]
 
   - must_id: "item:B.8.2.5:scope_information_types"
-    description: "Information types available (certification reports / SOC 2 / ISO 27001 / ISO 27701 / pen test sum..."
+    description: "Information types available (certification reports / SOC 2 / ISO 27001 / ISO 27701 / pen test summaries / architecture whitepapers)"
     excerpt_keywords:
-      - [scope, information, types, customer]
-      - [information, types, available, customer]
+      - [types, available, customer]
+      - [types, available, certification, customer]
+      - [available, certification, customer]
+      - [available, certification, reports, customer]
+      - [certification, reports, customer]
+      - [certification, reports, soc, customer]
+      - [reports, soc, customer]
+      - [reports, soc, iso, customer]
+

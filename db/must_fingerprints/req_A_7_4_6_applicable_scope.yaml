@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.6:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.6:applicable_scope"
@@ -10,19 +11,39 @@ target_control: "A.7.4.6"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.4.6:scope_undeletable_exceptions"
+    description: "Undeletable-file exceptions (circumstances where deletion isn't possible per §7.4.6) with rationale + compensating controls"
+    excerpt_keywords:
+      - [undeletable, exceptions, temporary]
+      - [undeletable, file, temporary]
+      - [undeletable, file, exceptions, temporary]
+      - [file, exceptions, temporary]
+      - [file, exceptions, circumstances, temporary]
+      - [exceptions, circumstances, temporary]
+      - [exceptions, circumstances, deletion, temporary]
+      - [circumstances, deletion, temporary]
+
   - must_id: "item:A.7.4.6:scope_file_types"
     description: "File types per surface (application temp / journal / roll-back / cache spillover)"
     excerpt_keywords:
-      - [scope, file, types, temporary]
+      - [file, types, temporary]
       - [file, types, surface, temporary]
+      - [types, surface, temporary]
+      - [types, surface, application, temporary]
+      - [surface, application, temporary]
+      - [surface, application, temp, temporary]
+      - [application, temp, temporary]
+      - [application, temp, journal, temporary]
 
   - must_id: "item:A.7.4.6:scope_infrastructure"
-    description: "Infrastructure surfaces enumerated (app servers + DB + cache + queue + log processors + backup st..."
+    description: "Infrastructure surfaces enumerated (app servers + DB + cache + queue + log processors + backup staging)"
     excerpt_keywords:
-      - [scope, infrastructure, temporary]
+      - [infrastructure, surfaces, temporary]
       - [infrastructure, surfaces, enumerated, temporary]
+      - [surfaces, enumerated, temporary]
+      - [surfaces, enumerated, app, temporary]
+      - [enumerated, app, temporary]
+      - [enumerated, app, servers, temporary]
+      - [app, servers, temporary]
+      - [app, servers, cache, temporary]
 
-  - must_id: "item:A.7.4.6:scope_undeletable_exceptions"
-    description: "Undeletable-file exceptions (circumstances where deletion isn't possible per §7.4.6) with rationa..."
-    excerpt_keywords:
-      - [scope, undeletable, exceptions, temporary]

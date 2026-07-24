@@ -14,96 +14,96 @@ must_fingerprints:
   - must_id: "item:A.7.2.6:proc_exclusion_justification"
     description: "Justification required if any Annex B control is excluded from contract (§5.4.1.3)"
     excerpt_keywords:
-      - [exclusion, justification]
-      - [justification, required]
-      - [justification, required, annex]
-      - [required, annex]
-      - [required, annex, excluded]
-      - [annex, excluded]
-      - [annex, excluded, contract]
-      - [excluded, contract]
+      - [exclusion, justification, contracts]
+      - [justification, required, contracts]
+      - [justification, required, annex, contracts]
+      - [required, annex, contracts]
+      - [required, annex, excluded, contracts]
+      - [annex, excluded, contracts]
+      - [annex, excluded, contract, contracts]
+      - [excluded, contract, contracts]
 
   - must_id: "item:A.7.2.6:proc_audit_rights"
     description: "Audit rights (Art.28.3.h) — processor makes available all information + contributes to audits"
     excerpt_keywords:
-      - [audit, rights]
-      - [audit, rights, art]
-      - [rights, art]
-      - [rights, art, processor]
-      - [art, processor]
-      - [art, processor, makes]
-      - [processor, makes]
-      - [processor, makes, available]
+      - [audit, rights, contracts]
+      - [audit, rights, art, contracts]
+      - [rights, art, contracts]
+      - [rights, art, processor, contracts]
+      - [art, processor, contracts]
+      - [art, processor, makes, contracts]
+      - [processor, makes, contracts]
+      - [processor, makes, available, contracts]
 
   - must_id: "item:A.7.2.6:proc_return_or_delete"
     description: "End-of-service disposition (Art.28.3.g) — return or delete all PII with certification"
     excerpt_keywords:
-      - [return, delete]
-      - [end, service]
-      - [end, service, disposition]
-      - [service, disposition]
-      - [service, disposition, art]
-      - [disposition, art]
-      - [disposition, art, return]
-      - [art, return]
+      - [return, delete, contracts]
+      - [end, service, contracts]
+      - [end, service, disposition, contracts]
+      - [service, disposition, contracts]
+      - [service, disposition, art, contracts]
+      - [disposition, art, contracts]
+      - [disposition, art, return, contracts]
+      - [art, return, contracts]
 
   - must_id: "item:A.7.2.6:proc_subprocessor_gate"
     description: "Subprocessor consent gate (Art.28.2 + Art.28.4) — general or specific written authorisation"
     excerpt_keywords:
-      - [subprocessor, gate]
-      - [subprocessor, consent]
-      - [subprocessor, consent, gate]
-      - [consent, gate]
-      - [consent, gate, art]
-      - [gate, art]
-      - [gate, art, art]
-      - [art, art]
+      - [subprocessor, gate, contracts]
+      - [subprocessor, consent, contracts]
+      - [subprocessor, consent, gate, contracts]
+      - [consent, gate, contracts]
+      - [consent, gate, art, contracts]
+      - [gate, art, contracts]
+      - [gate, art, art, contracts]
+      - [art, art, contracts]
 
   - must_id: "item:A.7.2.6:proc_documented_instructions"
     description: "Documented-instructions clause (Art.28.3.a) — processor acts only on written controller instructions"
     excerpt_keywords:
-      - [documented, instructions]
-      - [documented, instructions, clause]
-      - [instructions, clause]
-      - [instructions, clause, art]
-      - [clause, art]
-      - [clause, art, processor]
-      - [art, processor]
-      - [art, processor, acts]
+      - [documented, instructions, contracts]
+      - [documented, instructions, clause, contracts]
+      - [instructions, clause, contracts]
+      - [instructions, clause, art, contracts]
+      - [clause, art, contracts]
+      - [clause, art, processor, contracts]
+      - [art, processor, contracts]
+      - [art, processor, acts, contracts]
 
   - must_id: "item:A.7.2.6:proc_annex_b_scope"
     description: "Annex B implementation scope — which B.8.x controls apply per processor engagement (default: all)"
     excerpt_keywords:
-      - [annex, b, scope]
-      - [annex, implementation]
-      - [annex, implementation, scope]
-      - [implementation, scope]
-      - [implementation, scope, controls]
-      - [scope, controls]
-      - [scope, controls, apply]
-      - [controls, apply]
+      - [annex, b, scope, contracts]
+      - [annex, implementation, contracts]
+      - [annex, implementation, scope, contracts]
+      - [implementation, scope, contracts]
+      - [implementation, scope, controls, contracts]
+      - [scope, controls, contracts]
+      - [scope, controls, apply, contracts]
+      - [controls, apply, contracts]
 
   - must_id: "item:A.7.2.6:proc_art28_3_terms"
     description: "Art.28.3 terms coverage (subject matter + duration + nature + purpose + PII categories + subject categories + controller/processor obligatio"
     excerpt_keywords:
-      - [art28, 3, terms]
-      - [art, terms]
-      - [art, terms, coverage]
-      - [terms, coverage]
-      - [terms, coverage, subject]
-      - [coverage, subject]
-      - [coverage, subject, matter]
-      - [subject, matter]
+      - [art28, 3, terms, contracts]
+      - [art, terms, contracts]
+      - [art, terms, coverage, contracts]
+      - [terms, coverage, contracts]
+      - [terms, coverage, subject, contracts]
+      - [coverage, subject, contracts]
+      - [coverage, subject, matter, contracts]
+      - [subject, matter, contracts]
 
   - must_id: "item:A.7.2.6:proc_written_form"
     description: "Written form required — no verbal or informal processor arrangements"
     excerpt_keywords:
-      - [written, form]
-      - [written, form, required]
-      - [form, required]
-      - [form, required, verbal]
-      - [required, verbal]
-      - [required, verbal, informal]
-      - [verbal, informal]
-      - [verbal, informal, processor]
+      - [written, form, contracts]
+      - [written, form, required, contracts]
+      - [form, required, contracts]
+      - [form, required, verbal, contracts]
+      - [required, verbal, contracts]
+      - [required, verbal, informal, contracts]
+      - [verbal, informal, contracts]
+      - [verbal, informal, processor, contracts]
 

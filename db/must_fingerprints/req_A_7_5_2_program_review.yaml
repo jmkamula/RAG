@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.5.2:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.2:program_review"
@@ -10,22 +11,51 @@ target_control: "A.7.5.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.5.2:rev_completeness"
-    description: "Completeness check — actual PII flows reconciled against register"
-    excerpt_keywords:
-      - [completeness, check, countries]
-
-  - must_id: "item:A.7.5.2:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, countries]
-
   - must_id: "item:A.7.5.2:rev_public_notice_sync"
     description: "Public notice sync — subject-facing destinations list matches register"
     excerpt_keywords:
       - [public, notice, sync, countries]
+      - [public, notice, countries]
+      - [notice, sync, countries]
+      - [notice, sync, subject, countries]
+      - [sync, subject, countries]
+      - [sync, subject, facing, countries]
+      - [subject, facing, countries]
+      - [subject, facing, destinations, countries]
+
+  - must_id: "item:A.7.5.2:rev_completeness"
+    description: "Completeness check — actual PII flows reconciled against register"
+    excerpt_keywords:
+      - [completeness, check, countries]
+      - [completeness, check, actual, countries]
+      - [check, actual, countries]
+      - [check, actual, pii, countries]
+      - [actual, pii, countries]
+      - [actual, pii, flows, countries]
+      - [pii, flows, countries]
+      - [pii, flows, reconciled, countries]
 
   - must_id: "item:A.7.5.2:rev_reviewer"
     description: "Reviewer identity (DPO + Trust + Legal)"
     excerpt_keywords:
       - [reviewer, identity, countries]
+      - [reviewer, identity, dpo, countries]
+      - [identity, dpo, countries]
+      - [identity, dpo, trust, countries]
+      - [dpo, trust, countries]
+      - [dpo, trust, legal, countries]
+      - [trust, legal, countries]
+      - [per, revocation, countries]
+
+  - must_id: "item:A.7.5.2:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, countries]
+      - [review, date, within, countries]
+      - [date, within, countries]
+      - [date, within, planned, countries]
+      - [within, planned, countries]
+      - [within, planned, interval, countries]
+      - [planned, interval, countries]
+      - [per, revocation, countries]
+

@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.2.2:proc_basis_change"
     description: "Basis change procedure — changing basis requires re-assessment and often subject notice (§7.3.3)"
     excerpt_keywords:
-      - [basis, change]
-      - [basis, change, changing]
-      - [change, changing]
-      - [change, changing, basis]
-      - [changing, basis]
-      - [changing, basis, requires]
-      - [basis, requires]
-      - [basis, requires, assessment]
+      - [basis, change, identify]
+      - [basis, change, changing, identify]
+      - [change, changing, identify]
+      - [change, changing, basis, identify]
+      - [changing, basis, identify]
+      - [changing, basis, requires, identify]
+      - [basis, requires, identify]
+      - [basis, requires, assessment, identify]
 
   - must_id: "item:A.7.2.2:proc_special_category_overlay"
     description: "Special-category overlay (Art.9/10 basis required in addition to Art.6 for health, biometric, criminal, etc.)"
     excerpt_keywords:
-      - [special, category, overlay]
-      - [special, category]
-      - [category, overlay]
-      - [category, overlay, art]
-      - [overlay, art]
-      - [overlay, art, basis]
-      - [art, basis]
-      - [art, basis, required]
+      - [special, category, overlay, identify]
+      - [special, category, identify]
+      - [category, overlay, identify]
+      - [category, overlay, art, identify]
+      - [overlay, art, identify]
+      - [overlay, art, basis, identify]
+      - [art, basis, identify]
+      - [art, basis, required, identify]
 
   - must_id: "item:A.7.2.2:proc_lia_procedure"
     description: "Legitimate-interests balancing test procedure (necessity + balancing against subject rights)"
     excerpt_keywords:
-      - [legitimate, interests]
-      - [legitimate, interests, balancing]
-      - [interests, balancing]
-      - [interests, balancing, test]
-      - [balancing, test]
-      - [balancing, test, necessity]
-      - [test, necessity]
-      - [test, necessity, balancing]
+      - [legitimate, interests, identify]
+      - [legitimate, interests, balancing, identify]
+      - [interests, balancing, identify]
+      - [interests, balancing, test, identify]
+      - [balancing, test, identify]
+      - [balancing, test, necessity, identify]
+      - [test, necessity, identify]
+      - [test, necessity, balancing, identify]
 
   - must_id: "item:A.7.2.2:proc_selection_test"
     description: "Selection test per basis (consent — freely given + specific + unambiguous; contract — necessity; legal obligation — cited law; vital interes"
     excerpt_keywords:
-      - [selection, test]
-      - [selection, test, basis]
-      - [test, basis]
-      - [test, basis, consent]
-      - [basis, consent]
-      - [basis, consent, freely]
-      - [consent, freely]
-      - [consent, freely, given]
+      - [selection, test, identify]
+      - [selection, test, basis, identify]
+      - [test, basis, identify]
+      - [test, basis, consent, identify]
+      - [basis, consent, identify]
+      - [basis, consent, freely, identify]
+      - [consent, freely, identify]
+      - [consent, freely, given, identify]
 
   - must_id: "item:A.7.2.2:proc_basis_catalog"
     description: "Basis catalog — enumerated permitted bases per applicable jurisdiction (GDPR Art.6.1.a-f; other jurisdictions as applicable)"
     excerpt_keywords:
-      - [basis, catalog]
-      - [basis, catalog, enumerated]
-      - [catalog, enumerated]
-      - [catalog, enumerated, permitted]
-      - [enumerated, permitted]
-      - [enumerated, permitted, bases]
-      - [permitted, bases]
-      - [permitted, bases, jurisdiction]
+      - [basis, catalog, identify]
+      - [basis, catalog, enumerated, identify]
+      - [catalog, enumerated, identify]
+      - [catalog, enumerated, permitted, identify]
+      - [enumerated, permitted, identify]
+      - [enumerated, permitted, bases, identify]
+      - [permitted, bases, identify]
+      - [permitted, bases, jurisdiction, identify]
 

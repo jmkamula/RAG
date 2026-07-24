@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.8:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.8:applicable_scope"
@@ -10,18 +11,39 @@ target_control: "A.7.3.8"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.8:scope_art_15_universe"
-    description: "Art.15.3 (copy) universe — all subjects with PII processed"
+  - must_id: "item:A.7.3.8:scope_derived_data"
+    description: "Derived/inferred data handling — original PII in scope; derived analytics + third-party enrichment typically out of scope"
     excerpt_keywords:
-      - [scope, art, universe, providing]
+      - [derived, inferred, providing]
+      - [derived, inferred, handling, providing]
+      - [inferred, handling, providing]
+      - [inferred, handling, original, providing]
+      - [handling, original, providing]
+      - [handling, original, pii, providing]
+      - [original, pii, providing]
+      - [original, pii, scope, providing]
 
   - must_id: "item:A.7.3.8:scope_art_20_universe"
     description: "Art.20 (portability) universe — subset where basis=consent OR contract AND processing is automated"
     excerpt_keywords:
-      - [scope, art, universe, providing]
+      - [art, 20, universe, providing]
+      - [art, portability, providing]
+      - [art, portability, universe, providing]
+      - [portability, universe, providing]
+      - [portability, universe, subset, providing]
+      - [universe, subset, providing]
+      - [universe, subset, basis, providing]
+      - [subset, basis, providing]
 
-  - must_id: "item:A.7.3.8:scope_derived_data"
-    description: "Derived/inferred data handling — original PII in scope; derived analytics + third-party enrichmen..."
+  - must_id: "item:A.7.3.8:scope_art_15_universe"
+    description: "Art.15.3 (copy) universe — all subjects with PII processed"
     excerpt_keywords:
-      - [scope, derived, data, providing]
-      - [derived, inferred, data, handling, providing]
+      - [art, 15, universe, providing]
+      - [art, copy]
+      - [art, copy, universe]
+      - [copy, universe]
+      - [copy, universe, subjects]
+      - [universe, subjects, providing]
+      - [universe, subjects, pii, providing]
+      - [subjects, pii, providing]
+

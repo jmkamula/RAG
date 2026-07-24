@@ -14,57 +14,57 @@ must_fingerprints:
   - must_id: "item:A.7.4.2:reg_access_group"
     description: "Access group per row (which internal roles can perform this operation)"
     excerpt_keywords:
-      - [access, group]
-      - [access, group, internal]
-      - [group, internal]
-      - [group, internal, roles]
-      - [internal, roles]
-      - [internal, roles, can]
-      - [roles, can]
-      - [roles, can, perform]
+      - [access, group, limit]
+      - [access, group, internal, limit]
+      - [group, internal, limit]
+      - [group, internal, roles, limit]
+      - [internal, roles, limit]
+      - [internal, roles, can, limit]
+      - [roles, can, limit]
+      - [roles, can, perform, limit]
 
   - must_id: "item:A.7.4.2:reg_pii_scope"
     description: "PII scope per row (which fields / categories)"
     excerpt_keywords:
-      - [pii, scope]
-      - [pii, scope, fields]
-      - [scope, fields]
-      - [scope, fields, categories]
-      - [fields, categories]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [pii, scope, limit]
+      - [pii, scope, fields, limit]
+      - [scope, fields, limit]
+      - [scope, fields, categories, limit]
+      - [fields, categories, limit]
+      - [per, row, limit]
+      - [each, row, limit]
+      - [column, containing, limit]
 
   - must_id: "item:A.7.4.2:reg_purpose_link"
     description: "Purpose link per row (A.7.2.1)"
     excerpt_keywords:
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, limit]
+      - [each, row, limit]
+      - [column, containing, limit]
+      - [each, entry, limit]
+      - [column, header, limit]
 
   - must_id: "item:A.7.4.2:reg_operation_type"
     description: "Operation type per row (query / report / analytics / ML training / export / integration)"
     excerpt_keywords:
-      - [operation, query]
-      - [operation, query, report]
-      - [query, report]
-      - [query, report, analytics]
-      - [report, analytics]
-      - [report, analytics, training]
-      - [analytics, training]
-      - [analytics, training, export]
+      - [operation, query, limit]
+      - [operation, query, report, limit]
+      - [query, report, limit]
+      - [query, report, analytics, limit]
+      - [report, analytics, limit]
+      - [report, analytics, training, limit]
+      - [analytics, training, limit]
+      - [analytics, training, export, limit]
 
   - must_id: "item:A.7.4.2:reg_operation_id"
     description: "Unique operation identifier per row"
     excerpt_keywords:
-      - [operation, id]
-      - [unique, operation]
-      - [unique, operation, identifier]
-      - [operation, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [operation, id, limit]
+      - [unique, operation, limit]
+      - [unique, operation, identifier, limit]
+      - [operation, identifier, limit]
+      - [per, row, limit]
+      - [each, row, limit]
+      - [column, containing, limit]
+      - [each, entry, limit]
 

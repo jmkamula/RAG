@@ -14,84 +14,84 @@ must_fingerprints:
   - must_id: "item:A.6.8:reg_closure_date"
     description: "Per-row closure date (every report reaches a closed state, no open-forever)"
     excerpt_keywords:
-      - [closure, date]
-      - [closure, date, every]
-      - [date, every]
-      - [date, every, report]
-      - [every, report]
-      - [every, report, reaches]
-      - [report, reaches]
-      - [report, reaches, closed]
+      - [closure, date, event]
+      - [closure, date, every, event]
+      - [date, every, event]
+      - [date, every, report, event]
+      - [every, report, event]
+      - [every, report, reaches, event]
+      - [report, reaches, event]
+      - [report, reaches, closed, event]
 
   - must_id: "item:A.6.8:reg_triage_outcome"
     description: "Per-row triage outcome (incident-confirmed → A.5.26 register; false-positive-closed; near-miss-filed-for-trend; pending-investigation)"
     excerpt_keywords:
-      - [triage, outcome]
-      - [triage, outcome, incident]
-      - [outcome, incident]
-      - [outcome, incident, confirmed]
-      - [incident, confirmed]
-      - [incident, confirmed, false]
-      - [confirmed, false]
-      - [confirmed, false, positive]
+      - [triage, outcome, event]
+      - [triage, outcome, incident, event]
+      - [outcome, incident, event]
+      - [outcome, incident, confirmed, event]
+      - [incident, confirmed, event]
+      - [incident, confirmed, false, event]
+      - [confirmed, false, event]
+      - [confirmed, false, positive, event]
 
   - must_id: "item:A.6.8:reg_summary"
     description: "Per-row content summary (one-line headline + classification — observed / suspected / near-miss)"
     excerpt_keywords:
-      - [content, summary]
-      - [content, summary, one]
-      - [summary, one]
-      - [summary, one, line]
-      - [one, line]
-      - [one, line, headline]
-      - [line, headline]
-      - [line, headline, classification]
+      - [content, summary, event]
+      - [content, summary, one, event]
+      - [summary, one, event]
+      - [summary, one, line, event]
+      - [one, line, event]
+      - [one, line, headline, event]
+      - [line, headline, event]
+      - [line, headline, classification, event]
 
   - must_id: "item:A.6.8:reg_report_timestamp"
     description: "Per-row report timestamp (drives timeliness analysis — gap between event time and report time)"
     excerpt_keywords:
-      - [report, timestamp]
-      - [report, timestamp, timeliness]
-      - [timestamp, timeliness]
-      - [timestamp, timeliness, analysis]
-      - [timeliness, analysis]
-      - [timeliness, analysis, gap]
-      - [analysis, gap]
-      - [analysis, gap, between]
+      - [report, timestamp, event]
+      - [report, timestamp, timeliness, event]
+      - [timestamp, timeliness, event]
+      - [timestamp, timeliness, analysis, event]
+      - [timeliness, analysis, event]
+      - [timeliness, analysis, gap, event]
+      - [analysis, gap, event]
+      - [analysis, gap, between, event]
 
   - must_id: "item:A.6.8:reg_reporter"
     description: "Per-row reporter identity or 'anonymous' (anonymous reports are first-class; non-attribution is the point of the option)"
     excerpt_keywords:
-      - [reporter, identity]
-      - [reporter, identity, anonymous]
-      - [identity, anonymous]
-      - [identity, anonymous, anonymous]
-      - [anonymous, anonymous]
-      - [anonymous, anonymous, reports]
-      - [anonymous, reports]
-      - [anonymous, reports, first]
+      - [reporter, identity, event]
+      - [reporter, identity, anonymous, event]
+      - [identity, anonymous, event]
+      - [identity, anonymous, anonymous, event]
+      - [anonymous, anonymous, event]
+      - [anonymous, anonymous, reports, event]
+      - [anonymous, reports, event]
+      - [anonymous, reports, first, event]
 
   - must_id: "item:A.6.8:reg_channel"
     description: "Per-row channel used (drives channel-mix analysis — are some channels under-used?)"
     excerpt_keywords:
-      - [channel, used]
-      - [channel, used, channel]
-      - [used, channel]
-      - [used, channel, mix]
-      - [channel, mix]
-      - [channel, mix, analysis]
-      - [mix, analysis]
-      - [mix, analysis, some]
+      - [channel, used, event]
+      - [channel, used, channel, event]
+      - [used, channel, event]
+      - [used, channel, mix, event]
+      - [channel, mix, event]
+      - [channel, mix, analysis, event]
+      - [mix, analysis, event]
+      - [mix, analysis, some, event]
 
   - must_id: "item:A.6.8:reg_report_id"
     description: "Per-row report identifier (links to A.5.25 triage record where the report was triaged)"
     excerpt_keywords:
-      - [report, id]
-      - [report, identifier]
-      - [report, identifier, triage]
-      - [identifier, triage]
-      - [identifier, triage, report]
-      - [triage, report]
-      - [triage, report, triaged]
-      - [report, triaged]
+      - [report, id, event]
+      - [report, identifier, event]
+      - [report, identifier, triage, event]
+      - [identifier, triage, event]
+      - [identifier, triage, report, event]
+      - [triage, report, event]
+      - [triage, report, triaged, event]
+      - [report, triaged, event]
 

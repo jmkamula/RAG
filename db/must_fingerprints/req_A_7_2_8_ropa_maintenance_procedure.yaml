@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.2.8:proc_secure_maintenance"
     description: "Secure maintenance — access control + integrity for the RoPA itself"
     excerpt_keywords:
-      - [secure, maintenance]
-      - [secure, maintenance, access]
-      - [maintenance, access]
-      - [maintenance, access, integrity]
-      - [access, integrity]
-      - [access, integrity, ropa]
-      - [integrity, ropa]
-      - [integrity, ropa, itself]
+      - [secure, maintenance, records]
+      - [secure, maintenance, access, records]
+      - [maintenance, access, records]
+      - [maintenance, access, integrity, records]
+      - [access, integrity, records]
+      - [access, integrity, ropa, records]
+      - [integrity, ropa, records]
+      - [integrity, ropa, itself, records]
 
   - must_id: "item:A.7.2.8:proc_reconciliation"
     description: "Reconciliation cadence — against §7.2.1 purpose register + §7.2.2 basis register + §7.2.5 PIA register"
     excerpt_keywords:
-      - [reconciliation, cadence]
-      - [reconciliation, cadence, against]
-      - [cadence, against]
-      - [cadence, against, purpose]
-      - [against, purpose]
-      - [against, purpose, basis]
-      - [purpose, basis]
-      - [purpose, basis, pia]
+      - [reconciliation, cadence, records]
+      - [reconciliation, cadence, against, records]
+      - [cadence, against, records]
+      - [cadence, against, purpose, records]
+      - [against, purpose, records]
+      - [against, purpose, basis, records]
+      - [purpose, basis, records]
+      - [purpose, basis, pia, records]
 
   - must_id: "item:A.7.2.8:proc_retire_activity"
     description: "Retirement — activities that stop generate a retirement record (not deletion) for audit history"
     excerpt_keywords:
-      - [retire, activity]
-      - [retirement, activities]
-      - [retirement, activities, stop]
-      - [activities, stop]
-      - [activities, stop, generate]
-      - [stop, generate]
-      - [stop, generate, retirement]
-      - [generate, retirement]
+      - [retire, activity, records]
+      - [retirement, activities, records]
+      - [retirement, activities, stop, records]
+      - [activities, stop, records]
+      - [activities, stop, generate, records]
+      - [stop, generate, records]
+      - [stop, generate, retirement, records]
+      - [generate, retirement, records]
 
   - must_id: "item:A.7.2.8:proc_change_capture"
     description: "Change-capture — activity changes trigger RoPA update within stated SLA"
     excerpt_keywords:
-      - [change, capture]
-      - [change, capture, activity]
-      - [capture, activity]
-      - [capture, activity, changes]
-      - [activity, changes]
-      - [activity, changes, trigger]
-      - [changes, trigger]
-      - [changes, trigger, ropa]
+      - [change, capture, records]
+      - [change, capture, activity, records]
+      - [capture, activity, records]
+      - [capture, activity, changes, records]
+      - [activity, changes, records]
+      - [activity, changes, trigger, records]
+      - [changes, trigger, records]
+      - [changes, trigger, ropa, records]
 
   - must_id: "item:A.7.2.8:proc_add_activity"
     description: "New-activity intake trigger + workflow (new product launch / new integration / new data source)"
     excerpt_keywords:
-      - [add, activity]
-      - [new, activity]
-      - [new, activity, intake]
-      - [activity, intake]
-      - [activity, intake, trigger]
-      - [intake, trigger]
-      - [intake, trigger, workflow]
-      - [trigger, workflow]
+      - [add, activity, records]
+      - [new, activity, records]
+      - [new, activity, intake, records]
+      - [activity, intake, records]
+      - [activity, intake, trigger, records]
+      - [intake, trigger, records]
+      - [intake, trigger, workflow, records]
+      - [trigger, workflow, records]
 

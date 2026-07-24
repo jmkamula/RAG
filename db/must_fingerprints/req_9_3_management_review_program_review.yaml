@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:9.3:management_review_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:9.3:management_review_program_review"
@@ -14,24 +15,59 @@ must_fingerprints:
     description: "Action-closure check — decisions from prior reviews tracked to 10.1/10.2 closure"
     excerpt_keywords:
       - [action, closure, review]
+      - [action, closure, check, review]
+      - [closure, check, review]
+      - [closure, check, decisions, review]
+      - [check, decisions, review]
+      - [check, decisions, prior, review]
+      - [decisions, prior, review]
+      - [decisions, prior, reviews, review]
+
+  - must_id: "item:9.3:rev_inputs_completeness"
+    description: "Inputs-completeness check — every 9.3.2 a-g input was present in each review's minutes"
+    excerpt_keywords:
+      - [inputs, completeness, review]
+      - [inputs, completeness, check, review]
+      - [completeness, check, review]
+      - [completeness, check, every, review]
+      - [check, every, review]
+      - [check, every, input, review]
+      - [every, input, review]
+      - [every, input, present, review]
 
   - must_id: "item:9.3:rev_cadence_met"
     description: "Cadence check — every planned review happened (or was rescheduled with rationale)"
     excerpt_keywords:
       - [cadence, met, review]
       - [cadence, check, review]
-
-  - must_id: "item:9.3:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval]
-
-  - must_id: "item:9.3:rev_inputs_completeness"
-    description: "Inputs-completeness check — every 9.3.2 a-g input was present in each review's minutes"
-    excerpt_keywords:
-      - [inputs, completeness, review]
+      - [cadence, check, every, review]
+      - [check, every, review]
+      - [check, every, planned, review]
+      - [every, planned, review]
+      - [every, planned, review]
+      - [planned, review]
 
   - must_id: "item:9.3:rev_reviewer"
     description: "Reviewer identity (ISMS Manager)"
     excerpt_keywords:
       - [reviewer, identity, review]
+      - [reviewer, identity, isms, review]
+      - [identity, isms, review]
+      - [identity, isms, manager, review]
+      - [isms, manager, review]
+      - [per, revocation, review]
+      - [per, revoked, identity, review]
+      - [revocation, record, review]
+
+  - must_id: "item:9.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date]
+      - [review, date, within]
+      - [date, within, review]
+      - [date, within, planned, review]
+      - [within, planned, review]
+      - [within, planned, interval, review]
+      - [planned, interval, review]
+      - [per, revocation, review]
+

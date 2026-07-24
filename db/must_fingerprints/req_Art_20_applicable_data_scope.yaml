@@ -14,36 +14,36 @@ must_fingerprints:
   - must_id: "item:Art.20:scope_exclusions"
     description: "Out-of-scope activities (basis legal obligation / vital interests / public task / legitimate interests; manual processing)"
     excerpt_keywords:
-      - [out, scope]
-      - [out, scope, activities]
-      - [scope, activities]
-      - [scope, activities, basis]
-      - [activities, basis]
-      - [activities, basis, legal]
-      - [basis, legal]
-      - [basis, legal, obligation]
+      - [out, scope, right]
+      - [out, scope, activities, right]
+      - [scope, activities, right]
+      - [scope, activities, basis, right]
+      - [activities, basis, right]
+      - [activities, basis, legal, right]
+      - [basis, legal, right]
+      - [basis, legal, obligation, right]
 
   - must_id: "item:Art.20:scope_data_categorisation"
     description: "Categorisation rules — what counts as 'provided by' the subject vs derived/observed (EDPB Guidelines WP242 reference)"
     excerpt_keywords:
-      - [categorisation, rules]
-      - [categorisation, rules, counts]
-      - [rules, counts]
-      - [rules, counts, provided]
-      - [counts, provided]
-      - [counts, provided, subject]
-      - [provided, subject]
-      - [provided, subject, derived]
+      - [categorisation, rules, right]
+      - [categorisation, rules, counts, right]
+      - [rules, counts, right]
+      - [rules, counts, provided, right]
+      - [counts, provided, right]
+      - [counts, provided, subject, right]
+      - [provided, subject, right]
+      - [provided, subject, derived, right]
 
   - must_id: "item:Art.20:scope_in_scope_activities"
     description: "Art.30 RoPA activities in scope (basis consent / contract AND automated)"
     excerpt_keywords:
-      - [scope, activities]
-      - [art, ropa]
-      - [art, ropa, activities]
-      - [ropa, activities]
-      - [ropa, activities, scope]
-      - [activities, scope]
-      - [activities, scope, basis]
-      - [scope, basis]
+      - [scope, activities, right]
+      - [art, ropa, right]
+      - [art, ropa, activities, right]
+      - [ropa, activities, right]
+      - [ropa, activities, scope, right]
+      - [activities, scope, right]
+      - [activities, scope, basis, right]
+      - [scope, basis, right]
 

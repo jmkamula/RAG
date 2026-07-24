@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.6:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.6:applicable_scope"
@@ -13,15 +14,35 @@ must_fingerprints:
   - must_id: "item:B.8.5.6:scope_exclusions"
     description: "Excluded suppliers (no PII contact) with rationale"
     excerpt_keywords:
-      - [scope, exclusions, disclosure]
       - [excluded, suppliers, disclosure]
-
-  - must_id: "item:B.8.5.6:scope_pii_processing_test"
-    description: "PII-processing test per supplier (does the supplier touch customer PII?)"
-    excerpt_keywords:
-      - [scope, pii, processing, test, disclosure]
+      - [excluded, suppliers, pii, disclosure]
+      - [suppliers, pii, disclosure]
+      - [suppliers, pii, contact, disclosure]
+      - [pii, contact, disclosure]
+      - [pii, contact, rationale, disclosure]
+      - [contact, rationale, disclosure]
+      - [in, scope, disclosure]
 
   - must_id: "item:B.8.5.6:scope_subcontractor_list"
     description: "In-scope subcontractors enumerated"
     excerpt_keywords:
-      - [scope, subcontractor, list, disclosure]
+      - [scope, subcontractors]
+      - [scope, subcontractors, enumerated]
+      - [subcontractors, enumerated]
+      - [in, scope, disclosure]
+      - [scope, includes, disclosure]
+      - [applicable, to, disclosure]
+      - [excluded, from, disclosure]
+
+  - must_id: "item:B.8.5.6:scope_pii_processing_test"
+    description: "PII-processing test per supplier (does the supplier touch customer PII?)"
+    excerpt_keywords:
+      - [pii, processing, test, disclosure]
+      - [pii, processing, disclosure]
+      - [processing, test, disclosure]
+      - [processing, test, supplier, disclosure]
+      - [test, supplier, disclosure]
+      - [test, supplier, does, disclosure]
+      - [supplier, does, disclosure]
+      - [supplier, does, supplier, disclosure]
+

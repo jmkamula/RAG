@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.20:portability_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.20:portability_program_review"
@@ -10,30 +11,63 @@ target_control: "Art.20"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.20:rev_applicability_consistency"
-    description: "Applicability consistency audit — like requests handled like ways across the year"
+  - must_id: "item:Art.20:rev_sla_compliance"
+    description: "SLA compliance against Art.12.3 (one month)"
     excerpt_keywords:
-      - [applicability, consistency, right]
-      - [applicability, consistency, audit, right]
-
-  - must_id: "item:Art.20:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, right]
+      - [sla, compliance, right]
+      - [sla, compliance, against, right]
+      - [compliance, against, right]
+      - [compliance, against, art, right]
+      - [against, art, right]
+      - [against, art, one, right]
+      - [art, one, right]
+      - [art, one, month, right]
 
   - must_id: "item:Art.20:rev_format_currency"
     description: "Export format currency — chosen format still commonly used industry-wide"
     excerpt_keywords:
       - [format, currency, right]
+      - [export, format, right]
       - [export, format, currency, right]
+      - [format, currency, chosen, right]
+      - [currency, chosen, right]
+      - [currency, chosen, format, right]
+      - [chosen, format, right]
+      - [chosen, format, still, right]
+
+  - must_id: "item:Art.20:rev_applicability_consistency"
+    description: "Applicability consistency audit — like requests handled like ways across the year"
+    excerpt_keywords:
+      - [applicability, consistency, right]
+      - [applicability, consistency, audit, right]
+      - [consistency, audit, right]
+      - [consistency, audit, like, right]
+      - [audit, like, right]
+      - [audit, like, requests, right]
+      - [like, requests, right]
+      - [like, requests, handled, right]
 
   - must_id: "item:Art.20:rev_reviewer"
     description: "Reviewer identity (DPO + product lead)"
     excerpt_keywords:
       - [reviewer, identity, right]
+      - [reviewer, identity, dpo, right]
+      - [identity, dpo, right]
+      - [identity, dpo, product, right]
+      - [dpo, product, right]
+      - [dpo, product, lead, right]
+      - [product, lead, right]
+      - [per, revocation, right]
 
-  - must_id: "item:Art.20:rev_sla_compliance"
-    description: "SLA compliance against Art.12.3 (one month)"
+  - must_id: "item:Art.20:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [sla, compliance, right]
-      - [sla, compliance, art, right]
+      - [review, date, right]
+      - [review, date, within, right]
+      - [date, within, right]
+      - [date, within, planned, right]
+      - [within, planned, right]
+      - [within, planned, interval, right]
+      - [planned, interval, right]
+      - [per, revocation, right]
+

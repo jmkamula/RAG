@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.7:consent_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.7:consent_program_review"
@@ -10,29 +11,63 @@ target_control: "Art.7"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.7:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, conditions]
-
-  - must_id: "item:Art.7:rev_mechanism_audit"
-    description: "Mechanism audit — capture UI still distinguishable, freely-given, no pre-ticked options"
-    excerpt_keywords:
-      - [mechanism, audit, conditions]
-
   - must_id: "item:Art.7:rev_register_currency"
     description: "Register currency check — consent events for all in-scope activities are landing in the register"
     excerpt_keywords:
-      - [register, currency, conditions]
-      - [register, currency, check, conditions]
-
-  - must_id: "item:Art.7:rev_reviewer"
-    description: "Reviewer identity (DPO or Privacy Lead + product lead)"
-    excerpt_keywords:
-      - [reviewer, identity, conditions]
+      - [currency, check, conditions]
+      - [currency, check, consent]
+      - [check, consent]
+      - [check, consent, events]
+      - [consent, events]
+      - [consent, events, scope]
+      - [events, scope, conditions]
+      - [events, scope, activities, conditions]
 
   - must_id: "item:Art.7:rev_withdrawal_sla"
     description: "Withdrawal SLA check — withdrawal requests processed within the published timeline"
     excerpt_keywords:
       - [withdrawal, sla, conditions]
       - [withdrawal, sla, check, conditions]
+      - [sla, check, conditions]
+      - [sla, check, withdrawal, conditions]
+      - [check, withdrawal, conditions]
+      - [check, withdrawal, requests, conditions]
+      - [withdrawal, requests, conditions]
+      - [withdrawal, requests, processed, conditions]
+
+  - must_id: "item:Art.7:rev_mechanism_audit"
+    description: "Mechanism audit — capture UI still distinguishable, freely-given, no pre-ticked options"
+    excerpt_keywords:
+      - [mechanism, audit, conditions]
+      - [mechanism, audit, capture, conditions]
+      - [audit, capture, conditions]
+      - [audit, capture, still, conditions]
+      - [capture, still, conditions]
+      - [capture, still, distinguishable, conditions]
+      - [still, distinguishable, conditions]
+      - [still, distinguishable, freely, conditions]
+
+  - must_id: "item:Art.7:rev_reviewer"
+    description: "Reviewer identity (DPO or Privacy Lead + product lead)"
+    excerpt_keywords:
+      - [reviewer, identity, conditions]
+      - [reviewer, identity, dpo, conditions]
+      - [identity, dpo, conditions]
+      - [identity, dpo, privacy, conditions]
+      - [dpo, privacy, conditions]
+      - [dpo, privacy, lead, conditions]
+      - [privacy, lead, conditions]
+      - [privacy, lead, product, conditions]
+
+  - must_id: "item:Art.7:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, conditions]
+      - [review, date, within, conditions]
+      - [date, within, conditions]
+      - [date, within, planned, conditions]
+      - [within, planned, conditions]
+      - [within, planned, interval, conditions]
+      - [planned, interval, conditions]
+      - [per, revocation, conditions]
+

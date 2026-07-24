@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:7.3:awareness_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:7.3:awareness_program_review"
@@ -10,28 +11,63 @@ target_control: "7.3"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:7.3:rev_content_currency"
-    description: "Content currency check — material still reflects current 5.2 policy"
+  - must_id: "item:7.3:rev_refresher"
+    description: "Refresher cadence check — annual refreshers actually delivered"
     excerpt_keywords:
-      - [content, currency, awareness]
-      - [content, currency, check, awareness]
+      - [refresher, cadence, awareness]
+      - [refresher, cadence, check, awareness]
+      - [cadence, check, awareness]
+      - [cadence, check, annual, awareness]
+      - [check, annual, awareness]
+      - [check, annual, refreshers, awareness]
+      - [annual, refreshers, awareness]
+      - [annual, refreshers, actually, awareness]
 
   - must_id: "item:7.3:rev_coverage"
     description: "Coverage check — register completion rate against the in-scope audience"
     excerpt_keywords:
       - [coverage, check, awareness]
+      - [coverage, check, completion, awareness]
+      - [check, completion, awareness]
+      - [check, completion, rate, awareness]
+      - [completion, rate, awareness]
+      - [completion, rate, against, awareness]
+      - [rate, against, awareness]
+      - [rate, against, scope, awareness]
 
-  - must_id: "item:7.3:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:7.3:rev_content_currency"
+    description: "Content currency check — material still reflects current 5.2 policy"
     excerpt_keywords:
-      - [review, date, planned, interval, awareness]
-
-  - must_id: "item:7.3:rev_refresher"
-    description: "Refresher cadence check — annual refreshers actually delivered"
-    excerpt_keywords:
-      - [refresher, cadence, check, awareness]
+      - [content, currency, awareness]
+      - [content, currency, check, awareness]
+      - [currency, check, awareness]
+      - [currency, check, material, awareness]
+      - [check, material, awareness]
+      - [check, material, still, awareness]
+      - [material, still, awareness]
+      - [material, still, reflects, awareness]
 
   - must_id: "item:7.3:rev_reviewer"
     description: "Reviewer identity (HR partner + ISMS Manager)"
     excerpt_keywords:
       - [reviewer, identity, awareness]
+      - [reviewer, identity, partner, awareness]
+      - [identity, partner, awareness]
+      - [identity, partner, isms, awareness]
+      - [partner, isms, awareness]
+      - [partner, isms, manager, awareness]
+      - [isms, manager, awareness]
+      - [per, revocation, awareness]
+
+  - must_id: "item:7.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, awareness]
+      - [review, date, within, awareness]
+      - [date, within, awareness]
+      - [date, within, planned, awareness]
+      - [within, planned, awareness]
+      - [within, planned, interval, awareness]
+      - [planned, interval, awareness]
+      - [per, revocation, awareness]
+

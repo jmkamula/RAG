@@ -18,34 +18,34 @@ must_fingerprints:
       - [minimisation, records, themselves]
       - [records, themselves]
       - [records, themselves, only]
-      - [themselves, only]
-      - [themselves, only, strictly]
-      - [only, strictly]
-      - [only, strictly, needed]
+      - [themselves, only, records]
+      - [themselves, only, strictly, records]
+      - [only, strictly, records]
+      - [only, strictly, needed, records]
 
   - must_id: "item:A.7.5.3:proc_retention_policy"
     description: "Retention period policy for transfer records (link to A.7.4.7)"
     excerpt_keywords:
-      - [retention, period]
+      - [retention, period, records]
       - [retention, period, transfer]
       - [period, transfer]
       - [period, transfer, records]
       - [transfer, records]
-      - [procedure, step]
-      - [process, step]
-      - [responsibility, of]
+      - [procedure, step, records]
+      - [process, step, records]
+      - [responsibility, of, records]
 
   - must_id: "item:A.7.5.3:proc_cooperation_channel"
     description: "Cooperation channel — third parties can be re-contacted for subject-rights follow-up"
     excerpt_keywords:
-      - [cooperation, channel]
-      - [cooperation, channel, third]
-      - [channel, third]
-      - [channel, third, parties]
-      - [third, parties]
-      - [third, parties, can]
-      - [parties, can]
-      - [parties, can, contacted]
+      - [cooperation, channel, records]
+      - [cooperation, channel, third, records]
+      - [channel, third, records]
+      - [channel, third, parties, records]
+      - [third, parties, records]
+      - [third, parties, can, records]
+      - [parties, can, records]
+      - [parties, can, contacted, records]
 
   - must_id: "item:A.7.5.3:proc_rights_transfer"
     description: "Rights-transfer capture — modifications / erasure transfers arising from subject requests"
@@ -54,20 +54,20 @@ must_fingerprints:
       - [rights, transfer, capture]
       - [transfer, capture]
       - [transfer, capture, modifications]
-      - [capture, modifications]
-      - [capture, modifications, erasure]
-      - [modifications, erasure]
-      - [modifications, erasure, transfers]
+      - [capture, modifications, records]
+      - [capture, modifications, erasure, records]
+      - [modifications, erasure, records]
+      - [modifications, erasure, transfers, records]
 
   - must_id: "item:A.7.5.3:proc_transfer_event_capture"
     description: "Transfer event capture (to + from third parties)"
     excerpt_keywords:
       - [transfer, event, capture]
       - [transfer, event]
-      - [event, capture]
-      - [event, capture, third]
-      - [capture, third]
-      - [capture, third, parties]
-      - [third, parties]
-      - [procedure, step]
+      - [event, capture, records]
+      - [event, capture, third, records]
+      - [capture, third, records]
+      - [capture, third, parties, records]
+      - [third, parties, records]
+      - [procedure, step, records]
 

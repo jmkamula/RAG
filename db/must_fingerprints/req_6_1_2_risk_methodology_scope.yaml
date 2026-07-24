@@ -14,48 +14,48 @@ must_fingerprints:
   - must_id: "item:6.1.2:scope_exclusions"
     description: "Exclusions stated explicitly with rationale"
     excerpt_keywords:
-      - [exclusions, stated]
-      - [exclusions, stated, explicitly]
-      - [stated, explicitly]
-      - [stated, explicitly, rationale]
-      - [explicitly, rationale]
-      - [in, scope]
-      - [scope, includes]
-      - [applicable, to]
+      - [exclusions, stated, risk]
+      - [exclusions, stated, explicitly, risk]
+      - [stated, explicitly, risk]
+      - [stated, explicitly, rationale, risk]
+      - [explicitly, rationale, risk]
+      - [in, scope, risk]
+      - [scope, includes, risk]
+      - [applicable, to, risk]
 
   - must_id: "item:6.1.2:scope_asset_classes"
     description: "Asset/process classes in scope enumerated (data, systems, people, suppliers, premises)"
     excerpt_keywords:
-      - [asset, classes]
-      - [asset, classes, scope]
-      - [classes, scope]
-      - [classes, scope, enumerated]
-      - [scope, enumerated]
-      - [scope, enumerated, people]
-      - [enumerated, people]
-      - [enumerated, people, suppliers]
+      - [asset, classes, risk]
+      - [asset, classes, scope, risk]
+      - [classes, scope, risk]
+      - [classes, scope, enumerated, risk]
+      - [scope, enumerated, risk]
+      - [scope, enumerated, people, risk]
+      - [enumerated, people, risk]
+      - [enumerated, people, suppliers, risk]
 
   - must_id: "item:6.1.2:scope_acceptance_bands"
     description: "Acceptance bands stated (low/medium/high → accept/treat thresholds)"
     excerpt_keywords:
-      - [acceptance, bands]
-      - [acceptance, bands, stated]
-      - [bands, stated]
-      - [bands, stated, low]
-      - [stated, low]
-      - [stated, low, medium]
-      - [low, medium]
-      - [low, medium, high]
+      - [acceptance, bands, risk]
+      - [acceptance, bands, stated, risk]
+      - [bands, stated, risk]
+      - [bands, stated, low, risk]
+      - [stated, low, risk]
+      - [stated, low, medium, risk]
+      - [low, medium, risk]
+      - [low, medium, high, risk]
 
   - must_id: "item:6.1.2:scope_scoring_scale"
     description: "Scoring scale stated (e.g"
     excerpt_keywords:
-      - [scoring, scale]
-      - [scoring, scale, stated]
-      - [scale, stated]
-      - [scale, stated, qualitative]
-      - [stated, qualitative]
-      - [stated, qualitative, ale]
-      - [qualitative, ale]
-      - [qualitative, ale, quantitative]
+      - [scoring, scale, risk]
+      - [scoring, scale, stated, risk]
+      - [scale, stated, risk]
+      - [scale, stated, qualitative, risk]
+      - [stated, qualitative, risk]
+      - [stated, qualitative, ale, risk]
+      - [qualitative, ale, risk]
+      - [qualitative, ale, quantitative, risk]
 

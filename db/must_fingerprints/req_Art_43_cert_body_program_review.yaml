@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.43:cert_body_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.43:cert_body_program_review"
@@ -10,28 +11,63 @@ target_control: "Art.43"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.43:rev_accreditation_currency"
-    description: "Accreditation currency — SA / NAB accreditation still in force"
-    excerpt_keywords:
-      - [accreditation, currency, certification]
-
   - must_id: "item:Art.43:rev_complaint_handling"
     description: "Complaint handling audit — complaints processed within fair procedural standards"
     excerpt_keywords:
       - [complaint, handling, certification]
       - [complaint, handling, audit, certification]
-
-  - must_id: "item:Art.43:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, certification]
+      - [handling, audit, certification]
+      - [handling, audit, complaints, certification]
+      - [audit, complaints, certification]
+      - [audit, complaints, processed, certification]
+      - [complaints, processed, certification]
+      - [complaints, processed, within, certification]
 
   - must_id: "item:Art.43:rev_issuance_audit"
     description: "Issuance audit — sampled decisions reviewed against published criteria (Art.43.5)"
     excerpt_keywords:
       - [issuance, audit, certification]
+      - [issuance, audit, sampled, certification]
+      - [audit, sampled, certification]
+      - [audit, sampled, decisions, certification]
+      - [sampled, decisions, certification]
+      - [sampled, decisions, reviewed, certification]
+      - [decisions, reviewed, certification]
+      - [decisions, reviewed, against, certification]
+
+  - must_id: "item:Art.43:rev_accreditation_currency"
+    description: "Accreditation currency — SA / NAB accreditation still in force"
+    excerpt_keywords:
+      - [accreditation, currency, certification]
+      - [accreditation, currency, nab, certification]
+      - [currency, nab, certification]
+      - [currency, nab, accreditation, certification]
+      - [nab, accreditation, certification]
+      - [nab, accreditation, still, certification]
+      - [accreditation, still, certification]
+      - [accreditation, still, force, certification]
 
   - must_id: "item:Art.43:rev_reviewer"
     description: "Reviewer identity (executive sponsor + independent counsel)"
     excerpt_keywords:
       - [reviewer, identity, certification]
+      - [reviewer, identity, executive, certification]
+      - [identity, executive, certification]
+      - [identity, executive, sponsor, certification]
+      - [executive, sponsor, certification]
+      - [executive, sponsor, independent, certification]
+      - [sponsor, independent, certification]
+      - [sponsor, independent, counsel, certification]
+
+  - must_id: "item:Art.43:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, certification]
+      - [review, date, within, certification]
+      - [date, within, certification]
+      - [date, within, planned, certification]
+      - [within, planned, certification]
+      - [within, planned, interval, certification]
+      - [planned, interval, certification]
+      - [per, revocation, certification]
+

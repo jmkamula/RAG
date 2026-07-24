@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.9:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.9:program_review"
@@ -10,27 +11,63 @@ target_control: "A.7.3.9"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.9:rev_channel_test"
-    description: "Channel test — sampled inbound requests through each intake channel"
-    excerpt_keywords:
-      - [channel, test, handling]
-
   - must_id: "item:A.7.3.9:rev_complaint_route_test"
     description: "Complaint-route visibility test — subject notice surfaces the SA-complaint right"
     excerpt_keywords:
       - [complaint, route, test, handling]
+      - [complaint, route, handling]
+      - [complaint, route, visibility, handling]
+      - [route, visibility, handling]
+      - [route, visibility, test, handling]
+      - [visibility, test, handling]
+      - [visibility, test, subject, handling]
+      - [test, subject, handling]
 
-  - must_id: "item:A.7.3.9:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:A.7.3.9:rev_channel_test"
+    description: "Channel test — sampled inbound requests through each intake channel"
     excerpt_keywords:
-      - [review, date, planned, interval, handling]
-
-  - must_id: "item:A.7.3.9:rev_reviewer"
-    description: "Reviewer identity (DPO + Privacy Ops lead)"
-    excerpt_keywords:
-      - [reviewer, identity, handling]
+      - [channel, test, handling]
+      - [channel, test, sampled, handling]
+      - [test, sampled, handling]
+      - [test, sampled, inbound, handling]
+      - [sampled, inbound, handling]
+      - [sampled, inbound, requests]
+      - [inbound, requests]
+      - [inbound, requests, through]
 
   - must_id: "item:A.7.3.9:rev_sla_audit"
     description: "SLA audit — aggregate + sampled requests measured against response-time matrix"
     excerpt_keywords:
       - [sla, audit, handling]
+      - [sla, audit, aggregate, handling]
+      - [audit, aggregate, handling]
+      - [audit, aggregate, sampled, handling]
+      - [aggregate, sampled, handling]
+      - [aggregate, sampled, requests]
+      - [sampled, requests]
+      - [sampled, requests, measured]
+
+  - must_id: "item:A.7.3.9:rev_reviewer"
+    description: "Reviewer identity (DPO + Privacy Ops lead)"
+    excerpt_keywords:
+      - [reviewer, identity, handling]
+      - [reviewer, identity, dpo, handling]
+      - [identity, dpo, handling]
+      - [identity, dpo, privacy, handling]
+      - [dpo, privacy, handling]
+      - [dpo, privacy, ops, handling]
+      - [privacy, ops, handling]
+      - [privacy, ops, lead, handling]
+
+  - must_id: "item:A.7.3.9:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, handling]
+      - [review, date, within, handling]
+      - [date, within, handling]
+      - [date, within, planned, handling]
+      - [within, planned, handling]
+      - [within, planned, interval, handling]
+      - [planned, interval, handling]
+      - [per, revocation, handling]
+

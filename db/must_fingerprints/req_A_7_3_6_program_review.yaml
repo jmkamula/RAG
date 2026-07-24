@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.6:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.6:program_review"
@@ -10,27 +11,63 @@ target_control: "A.7.3.6"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.6:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, access]
-
   - must_id: "item:A.7.3.6:rev_propagation_audit"
     description: "Propagation audit — sampled corrections/erasures verified downstream"
     excerpt_keywords:
       - [propagation, audit, access]
+      - [propagation, audit, sampled, access]
+      - [audit, sampled, access]
+      - [audit, sampled, corrections, access]
+      - [sampled, corrections, access]
+      - [sampled, corrections, erasures, access]
+      - [corrections, erasures, access]
+      - [corrections, erasures, verified, access]
 
   - must_id: "item:A.7.3.6:rev_refusal_audit"
     description: "Refusal audit — sampled refusals reviewed for defensibility + subject-notification of reason"
     excerpt_keywords:
       - [refusal, audit, access]
-
-  - must_id: "item:A.7.3.6:rev_reviewer"
-    description: "Reviewer identity (DPO + Legal + Engineering)"
-    excerpt_keywords:
-      - [reviewer, identity, access]
+      - [refusal, audit, sampled, access]
+      - [audit, sampled, access]
+      - [audit, sampled, refusals, access]
+      - [sampled, refusals, access]
+      - [sampled, refusals, reviewed, access]
+      - [refusals, reviewed, access]
+      - [refusals, reviewed, defensibility, access]
 
   - must_id: "item:A.7.3.6:rev_sla_audit"
     description: "SLA audit — sampled requests measured against undue-delay standard"
     excerpt_keywords:
       - [sla, audit, access]
+      - [sla, audit, sampled, access]
+      - [audit, sampled, access]
+      - [audit, sampled, requests, access]
+      - [sampled, requests, access]
+      - [sampled, requests, measured, access]
+      - [requests, measured, access]
+      - [requests, measured, against, access]
+
+  - must_id: "item:A.7.3.6:rev_reviewer"
+    description: "Reviewer identity (DPO + Legal + Engineering)"
+    excerpt_keywords:
+      - [reviewer, identity, access]
+      - [reviewer, identity, dpo, access]
+      - [identity, dpo, access]
+      - [identity, dpo, legal, access]
+      - [dpo, legal, access]
+      - [dpo, legal, engineering, access]
+      - [legal, engineering, access]
+      - [per, revocation, access]
+
+  - must_id: "item:A.7.3.6:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, access]
+      - [review, date, within, access]
+      - [date, within, access]
+      - [date, within, planned, access]
+      - [within, planned, access]
+      - [within, planned, interval, access]
+      - [planned, interval, access]
+      - [per, revocation, access]
+

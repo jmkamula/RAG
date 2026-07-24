@@ -14,50 +14,50 @@ must_fingerprints:
   - must_id: "item:B.8.5.1:proc_international_agreements"
     description: "International-transfer agreement types identified (Model Contract Clauses / BCRs / CBPRs) per relevant country pair"
     excerpt_keywords:
-      - [international, agreements]
-      - [international, transfer]
-      - [international, transfer, agreement]
-      - [transfer, agreement]
-      - [transfer, agreement, types]
-      - [agreement, types]
-      - [agreement, types, identified]
-      - [types, identified]
+      - [international, agreements, basis]
+      - [international, transfer, basis]
+      - [international, transfer, agreement, basis]
+      - [transfer, agreement, basis]
+      - [transfer, agreement, types, basis]
+      - [agreement, types, basis]
+      - [agreement, types, identified, basis]
+      - [types, identified, basis]
 
   - must_id: "item:B.8.5.1:proc_carve_out_limits"
     description: "Carve-out limits — where contract permits changes without notification (e.g"
     excerpt_keywords:
-      - [carve, out, limits]
-      - [carve, out]
-      - [out, limits]
-      - [out, limits, contract]
-      - [limits, contract]
-      - [limits, contract, permits]
-      - [contract, permits]
-      - [contract, permits, changes]
+      - [carve, out, limits, basis]
+      - [carve, out, basis]
+      - [out, limits, basis]
+      - [out, limits, contract, basis]
+      - [limits, contract, basis]
+      - [limits, contract, permits, basis]
+      - [contract, permits, basis]
+      - [contract, permits, changes, basis]
 
   - must_id: "item:B.8.5.1:proc_advance_notification"
     description: "Advance notification of changes with agreed timeframe (customer can object / terminate)"
     excerpt_keywords:
-      - [advance, notification]
-      - [advance, notification, changes]
-      - [notification, changes]
-      - [notification, changes, agreed]
-      - [changes, agreed]
-      - [changes, agreed, timeframe]
-      - [agreed, timeframe]
-      - [agreed, timeframe, customer]
+      - [advance, notification, basis]
+      - [advance, notification, changes, basis]
+      - [notification, changes, basis]
+      - [notification, changes, agreed, basis]
+      - [changes, agreed, basis]
+      - [changes, agreed, timeframe, basis]
+      - [agreed, timeframe, basis]
+      - [agreed, timeframe, customer, basis]
 
   - must_id: "item:B.8.5.1:proc_customer_information"
     description: "Customer information — transfer arrangements (suppliers, other parties, other countries) disclosed"
     excerpt_keywords:
-      - [customer, transfer]
-      - [customer, transfer, arrangements]
-      - [transfer, arrangements]
-      - [transfer, arrangements, suppliers]
-      - [arrangements, suppliers]
-      - [arrangements, suppliers, other]
-      - [suppliers, other]
-      - [suppliers, other, parties]
+      - [customer, transfer, basis]
+      - [customer, transfer, arrangements, basis]
+      - [transfer, arrangements, basis]
+      - [transfer, arrangements, suppliers, basis]
+      - [arrangements, suppliers, basis]
+      - [arrangements, suppliers, other, basis]
+      - [suppliers, other, basis]
+      - [suppliers, other, parties, basis]
 
   - must_id: "item:B.8.5.1:proc_basis_documentation"
     description: "Compliance basis documented per transfer relationship (SCC / BCR / CBPR / adequacy)"
@@ -67,7 +67,7 @@ must_fingerprints:
       - [compliance, basis, documented]
       - [basis, documented]
       - [basis, documented, transfer]
-      - [documented, transfer]
-      - [documented, transfer, relationship]
-      - [transfer, relationship]
+      - [documented, transfer, basis]
+      - [documented, transfer, relationship, basis]
+      - [transfer, relationship, basis]
 

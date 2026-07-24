@@ -14,21 +14,21 @@ must_fingerprints:
   - must_id: "item:A.7.4.5:proc_records"
     description: "Record of end-of-processing action (link to A.7.4.5 register)"
     excerpt_keywords:
-      - [end, processing]
-      - [end, processing, action]
-      - [processing, action]
-      - [procedure, step]
-      - [process, step]
-      - [responsibility, of]
+      - [end, processing, pii]
+      - [end, processing, action, pii]
+      - [processing, action, pii]
+      - [procedure, step, pii]
+      - [process, step, pii]
+      - [responsibility, of, pii]
 
   - must_id: "item:A.7.4.5:proc_verification"
     description: "Verification — post-action verification that PII is actually gone / de-identified across all systems + backups"
     excerpt_keywords:
-      - [verification, post]
-      - [verification, post, action]
-      - [post, action]
-      - [post, action, verification]
-      - [action, verification]
+      - [verification, post, pii]
+      - [verification, post, action, pii]
+      - [post, action, pii]
+      - [post, action, verification, pii]
+      - [action, verification, pii]
       - [action, verification, pii]
       - [verification, pii]
       - [verification, pii, actually]
@@ -36,36 +36,36 @@ must_fingerprints:
   - must_id: "item:A.7.4.5:proc_deidentification_standard"
     description: "De-identification standard — resulting data cannot reasonably permit re-identification"
     excerpt_keywords:
-      - [deidentification, standard]
+      - [deidentification, standard, pii]
       - [identification, standard]
       - [identification, standard, resulting]
-      - [standard, resulting]
-      - [standard, resulting, cannot]
-      - [resulting, cannot]
-      - [resulting, cannot, reasonably]
-      - [cannot, reasonably]
+      - [standard, resulting, pii]
+      - [standard, resulting, cannot, pii]
+      - [resulting, cannot, pii]
+      - [resulting, cannot, reasonably, pii]
+      - [cannot, reasonably, pii]
 
   - must_id: "item:A.7.4.5:proc_delete_or_deidentify"
     description: "Delete-or-de-identify decision rule per activity"
     excerpt_keywords:
-      - [delete, deidentify]
-      - [delete, identify]
-      - [delete, identify, decision]
-      - [identify, decision]
-      - [identify, decision, rule]
-      - [decision, rule]
-      - [decision, rule, activity]
-      - [rule, activity]
+      - [delete, deidentify, pii]
+      - [delete, identify, pii]
+      - [delete, identify, decision, pii]
+      - [identify, decision, pii]
+      - [identify, decision, rule, pii]
+      - [decision, rule, pii]
+      - [decision, rule, activity, pii]
+      - [rule, activity, pii]
 
   - must_id: "item:A.7.4.5:proc_end_of_processing_trigger"
     description: "End-of-processing trigger definition per activity (purpose fulfilled / consent withdrawn / retention lapsed / no further processing anticipa"
     excerpt_keywords:
-      - [end, processing, trigger]
-      - [end, processing]
-      - [processing, trigger]
-      - [processing, trigger, definition]
-      - [trigger, definition]
-      - [trigger, definition, activity]
-      - [definition, activity]
-      - [definition, activity, purpose]
+      - [end, processing, trigger, pii]
+      - [end, processing, pii]
+      - [processing, trigger, pii]
+      - [processing, trigger, definition, pii]
+      - [trigger, definition, pii]
+      - [trigger, definition, activity, pii]
+      - [definition, activity, pii]
+      - [definition, activity, purpose, pii]
 

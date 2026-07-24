@@ -14,59 +14,59 @@ must_fingerprints:
   - must_id: "item:A.7.3.3:proc_visual_aids"
     description: "Visual aids where helpful (icons, diagrams — per §7.3.3 NOTE)"
     excerpt_keywords:
-      - [visual, aids]
-      - [visual, aids, helpful]
-      - [aids, helpful]
-      - [aids, helpful, icons]
-      - [helpful, icons]
-      - [helpful, icons, diagrams]
-      - [icons, diagrams]
-      - [icons, diagrams, note]
+      - [visual, aids, providing]
+      - [visual, aids, helpful, providing]
+      - [aids, helpful, providing]
+      - [aids, helpful, icons, providing]
+      - [helpful, icons, providing]
+      - [helpful, icons, diagrams, providing]
+      - [icons, diagrams, providing]
+      - [icons, diagrams, note, providing]
 
   - must_id: "item:A.7.3.3:proc_layered_design"
     description: "Layered / progressive design (short summary + expandable detail) where notice is long"
     excerpt_keywords:
-      - [layered, design]
-      - [layered, progressive]
-      - [layered, progressive, design]
-      - [progressive, design]
-      - [progressive, design, short]
-      - [design, short]
-      - [design, short, summary]
-      - [short, summary]
+      - [layered, design, providing]
+      - [layered, progressive, providing]
+      - [layered, progressive, design, providing]
+      - [progressive, design, providing]
+      - [progressive, design, short, providing]
+      - [design, short, providing]
+      - [design, short, summary, providing]
+      - [short, summary, providing]
 
   - must_id: "item:A.7.3.3:proc_plain_language"
     description: "Plain-language standard — reading-level target, jargon audit, tested against target audience"
     excerpt_keywords:
-      - [plain, language]
-      - [plain, language, standard]
-      - [language, standard]
-      - [language, standard, reading]
-      - [standard, reading]
-      - [standard, reading, level]
-      - [reading, level]
-      - [reading, level, target]
+      - [plain, language, providing]
+      - [plain, language, standard, providing]
+      - [language, standard, providing]
+      - [language, standard, reading, providing]
+      - [standard, reading, providing]
+      - [standard, reading, level, providing]
+      - [reading, level, providing]
+      - [reading, level, target, providing]
 
   - must_id: "item:A.7.3.3:proc_permanent_access"
     description: "Permanent accessibility — notice available at stable URL / in-product location at any time"
     excerpt_keywords:
-      - [permanent, access]
-      - [permanent, accessibility]
-      - [permanent, accessibility, notice]
-      - [accessibility, notice]
-      - [accessibility, notice, available]
-      - [notice, available]
-      - [notice, available, stable]
-      - [available, stable]
+      - [permanent, access, providing]
+      - [permanent, accessibility, providing]
+      - [permanent, accessibility, notice, providing]
+      - [accessibility, notice, providing]
+      - [accessibility, notice, available, providing]
+      - [notice, available, providing]
+      - [notice, available, stable, providing]
+      - [available, stable, providing]
 
   - must_id: "item:A.7.3.3:proc_at_collection"
     description: "At-collection delivery — notice presented when PII is collected (form, signup flow, kiosk)"
     excerpt_keywords:
-      - [collection, delivery]
-      - [collection, delivery, notice]
-      - [delivery, notice]
-      - [delivery, notice, presented]
-      - [notice, presented]
+      - [collection, delivery, providing]
+      - [collection, delivery, notice, providing]
+      - [delivery, notice, providing]
+      - [delivery, notice, presented, providing]
+      - [notice, presented, providing]
       - [notice, presented, pii]
       - [presented, pii]
       - [presented, pii, collected]

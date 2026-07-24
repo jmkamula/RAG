@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.39:dpo_tasks_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.39:dpo_tasks_program_review"
@@ -10,28 +11,63 @@ target_control: "Art.39"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.39:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, tasks]
-
   - must_id: "item:Art.39:rev_quality_signals"
     description: "Quality signals — incident-trend reduction, DPIA-handling improvement, SA-interaction outcomes"
     excerpt_keywords:
       - [quality, signals, tasks]
-
-  - must_id: "item:Art.39:rev_reviewer"
-    description: "Reviewer identity (executive sponsor)"
-    excerpt_keywords:
-      - [reviewer, identity, tasks]
+      - [quality, signals, incident, tasks]
+      - [signals, incident, tasks]
+      - [signals, incident, trend, tasks]
+      - [incident, trend, tasks]
+      - [incident, trend, reduction, tasks]
+      - [trend, reduction, tasks]
+      - [trend, reduction, dpia, tasks]
 
   - must_id: "item:Art.39:rev_risk_prioritisation_check"
     description: "Risk prioritisation check — DPO attention skewed toward higher-risk processing"
     excerpt_keywords:
       - [risk, prioritisation, check, tasks]
+      - [risk, prioritisation, tasks]
+      - [prioritisation, check, tasks]
+      - [prioritisation, check, dpo, tasks]
+      - [check, dpo, tasks]
+      - [check, dpo, attention, tasks]
+      - [dpo, attention, tasks]
+      - [dpo, attention, skewed, tasks]
 
   - must_id: "item:Art.39:rev_task_coverage"
     description: "Task coverage audit — every Art.39.1 task has corresponding activity-register entries"
     excerpt_keywords:
       - [task, coverage, tasks]
       - [task, coverage, audit, tasks]
+      - [coverage, audit, tasks]
+      - [coverage, audit, every, tasks]
+      - [audit, every, tasks]
+      - [audit, every, art, tasks]
+      - [every, art, tasks]
+      - [every, art, task, tasks]
+
+  - must_id: "item:Art.39:rev_reviewer"
+    description: "Reviewer identity (executive sponsor)"
+    excerpt_keywords:
+      - [reviewer, identity, tasks]
+      - [reviewer, identity, executive, tasks]
+      - [identity, executive, tasks]
+      - [identity, executive, sponsor, tasks]
+      - [executive, sponsor, tasks]
+      - [per, revocation, tasks]
+      - [per, revoked, identity, tasks]
+      - [revocation, record, tasks]
+
+  - must_id: "item:Art.39:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, tasks]
+      - [review, date, within, tasks]
+      - [date, within, tasks]
+      - [date, within, planned, tasks]
+      - [within, planned, tasks]
+      - [within, planned, interval, tasks]
+      - [planned, interval, tasks]
+      - [per, revocation, tasks]
+

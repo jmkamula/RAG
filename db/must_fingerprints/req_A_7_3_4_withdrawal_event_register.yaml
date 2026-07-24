@@ -14,56 +14,56 @@ must_fingerprints:
   - must_id: "item:A.7.3.4:reg_propagation_status"
     description: "Propagation status per row (downstream systems notified / third parties informed)"
     excerpt_keywords:
-      - [propagation, status]
-      - [propagation, status, downstream]
-      - [status, downstream]
-      - [status, downstream, notified]
-      - [downstream, notified]
-      - [downstream, notified, third]
-      - [notified, third]
-      - [notified, third, parties]
+      - [propagation, status, providing]
+      - [propagation, status, downstream, providing]
+      - [status, downstream, providing]
+      - [status, downstream, notified, providing]
+      - [downstream, notified, providing]
+      - [downstream, notified, third, providing]
+      - [notified, third, providing]
+      - [notified, third, parties, providing]
 
   - must_id: "item:A.7.3.4:reg_timestamp"
     description: "Timestamp per row"
     excerpt_keywords:
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
+      - [each, entry, providing]
+      - [column, header, providing]
 
   - must_id: "item:A.7.3.4:reg_event_type"
     description: "Event type per row (modification / partial withdrawal / full withdrawal)"
     excerpt_keywords:
-      - [event, modification]
-      - [event, modification, partial]
-      - [modification, partial]
-      - [modification, partial, withdrawal]
-      - [partial, withdrawal]
-      - [partial, withdrawal, full]
-      - [withdrawal, full]
-      - [withdrawal, full, withdrawal]
+      - [event, modification, providing]
+      - [event, modification, partial, providing]
+      - [modification, partial, providing]
+      - [modification, partial, withdrawal, providing]
+      - [partial, withdrawal, providing]
+      - [partial, withdrawal, full, providing]
+      - [withdrawal, full, providing]
+      - [withdrawal, full, withdrawal, providing]
 
   - must_id: "item:A.7.3.4:reg_subject_id"
     description: "Subject identifier per row"
     excerpt_keywords:
-      - [subject, id]
-      - [subject, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [subject, id, providing]
+      - [subject, identifier, providing]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
+      - [each, entry, providing]
+      - [column, header, providing]
 
   - must_id: "item:A.7.3.4:reg_event_id"
     description: "Unique event identifier per row"
     excerpt_keywords:
-      - [event, id]
-      - [unique, event]
-      - [unique, event, identifier]
-      - [event, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [event, id, providing]
+      - [unique, event, providing]
+      - [unique, event, identifier, providing]
+      - [event, identifier, providing]
+      - [per, row, providing]
+      - [each, row, providing]
+      - [column, containing, providing]
+      - [each, entry, providing]
 

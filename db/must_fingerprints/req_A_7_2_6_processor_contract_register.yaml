@@ -14,47 +14,47 @@ must_fingerprints:
   - must_id: "item:A.7.2.6:reg_expiry"
     description: "Contract expiry / renewal date per row"
     excerpt_keywords:
-      - [contract, expiry]
-      - [contract, expiry, renewal]
-      - [expiry, renewal]
-      - [expiry, renewal, date]
-      - [renewal, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [contract, expiry, contracts]
+      - [contract, expiry, renewal, contracts]
+      - [expiry, renewal, contracts]
+      - [expiry, renewal, date, contracts]
+      - [renewal, date, contracts]
+      - [per, row, contracts]
+      - [each, row, contracts]
+      - [column, containing, contracts]
 
   - must_id: "item:A.7.2.6:reg_subprocessor_flag"
     description: "Subprocessors permitted flag + list per row"
     excerpt_keywords:
-      - [subprocessor, flag]
-      - [subprocessors, permitted]
-      - [subprocessors, permitted, flag]
-      - [permitted, flag]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [subprocessor, flag, contracts]
+      - [subprocessors, permitted, contracts]
+      - [subprocessors, permitted, flag, contracts]
+      - [permitted, flag, contracts]
+      - [per, row, contracts]
+      - [each, row, contracts]
+      - [column, containing, contracts]
+      - [each, entry, contracts]
 
   - must_id: "item:A.7.2.6:reg_annex_b_coverage"
     description: "Annex B controls covered per row (either 'all' or itemised subset with justification link)"
     excerpt_keywords:
-      - [annex, b, coverage]
-      - [annex, controls]
-      - [annex, controls, covered]
-      - [controls, covered]
-      - [controls, covered, either]
-      - [covered, either]
-      - [covered, either, itemised]
-      - [either, itemised]
+      - [annex, b, coverage, contracts]
+      - [annex, controls, contracts]
+      - [annex, controls, covered, contracts]
+      - [controls, covered, contracts]
+      - [controls, covered, either, contracts]
+      - [covered, either, contracts]
+      - [covered, either, itemised, contracts]
+      - [either, itemised, contracts]
 
   - must_id: "item:A.7.2.6:reg_service_scope"
     description: "Service scope per row (what the processor does + PII categories involved)"
     excerpt_keywords:
-      - [service, scope]
-      - [service, scope, processor]
-      - [scope, processor]
-      - [scope, processor, does]
-      - [processor, does]
+      - [service, scope, contracts]
+      - [service, scope, processor, contracts]
+      - [scope, processor, contracts]
+      - [scope, processor, does, contracts]
+      - [processor, does, contracts]
       - [processor, does, pii]
       - [does, pii]
       - [does, pii, categories]
@@ -62,24 +62,24 @@ must_fingerprints:
   - must_id: "item:A.7.2.6:reg_contract_reference"
     description: "Executed contract reference (document + version + signature date)"
     excerpt_keywords:
-      - [contract, reference]
-      - [executed, contract]
-      - [executed, contract, reference]
-      - [contract, reference, document]
-      - [reference, document]
-      - [reference, document, version]
-      - [document, version]
-      - [document, version, signature]
+      - [contract, reference, contracts]
+      - [executed, contract, contracts]
+      - [executed, contract, reference, contracts]
+      - [contract, reference, document, contracts]
+      - [reference, document, contracts]
+      - [reference, document, version, contracts]
+      - [document, version, contracts]
+      - [document, version, signature, contracts]
 
   - must_id: "item:A.7.2.6:reg_processor_id"
     description: "Processor identifier per row (legal entity name)"
     excerpt_keywords:
-      - [processor, id]
-      - [processor, identifier]
-      - [processor, identifier, legal]
-      - [identifier, legal]
-      - [identifier, legal, entity]
-      - [legal, entity]
-      - [legal, entity, name]
-      - [entity, name]
+      - [processor, id, contracts]
+      - [processor, identifier, contracts]
+      - [processor, identifier, legal, contracts]
+      - [identifier, legal, contracts]
+      - [identifier, legal, entity, contracts]
+      - [legal, entity, contracts]
+      - [legal, entity, name, contracts]
+      - [entity, name, contracts]
 

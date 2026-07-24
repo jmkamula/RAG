@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.16:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.16:program_review"
@@ -15,23 +16,58 @@ must_fingerprints:
     excerpt_keywords:
       - [art19, audit, right]
       - [art, audit, right]
+      - [art, audit, recipient, right]
+      - [audit, recipient, right]
+      - [audit, recipient, notifications, right]
+      - [recipient, notifications, right]
+      - [recipient, notifications, fired, right]
+      - [notifications, fired, right]
 
-  - must_id: "item:Art.16:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:Art.16:rev_systems_completeness"
+    description: "Systems-completeness check — sampled requests reached every system in scope"
     excerpt_keywords:
-      - [review, date, planned, interval, right]
-
-  - must_id: "item:Art.16:rev_reviewer"
-    description: "Reviewer identity (DPO)"
-    excerpt_keywords:
-      - [reviewer, identity, right]
+      - [completeness, check, right]
+      - [completeness, check, sampled, right]
+      - [check, sampled, right]
+      - [check, sampled, requests, right]
+      - [sampled, requests, right]
+      - [sampled, requests, reached, right]
+      - [requests, reached, right]
+      - [requests, reached, every, right]
 
   - must_id: "item:Art.16:rev_sla_compliance"
     description: "SLA compliance (Art.12.3 one-month)"
     excerpt_keywords:
       - [sla, compliance, right]
+      - [sla, compliance, art, right]
+      - [compliance, art, right]
+      - [compliance, art, one, right]
+      - [art, one, right]
+      - [art, one, month, right]
+      - [one, month, right]
+      - [per, revocation, right]
 
-  - must_id: "item:Art.16:rev_systems_completeness"
-    description: "Systems-completeness check — sampled requests reached every system in scope"
+  - must_id: "item:Art.16:rev_reviewer"
+    description: "Reviewer identity (DPO)"
     excerpt_keywords:
-      - [systems, completeness, right]
+      - [reviewer, identity, right]
+      - [reviewer, identity, dpo, right]
+      - [identity, dpo, right]
+      - [per, revocation, right]
+      - [per, revoked, identity, right]
+      - [revocation, record, right]
+      - [review, findings, right]
+      - [audit, outcomes, right]
+
+  - must_id: "item:Art.16:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, right]
+      - [review, date, within, right]
+      - [date, within, right]
+      - [date, within, planned, right]
+      - [within, planned, right]
+      - [within, planned, interval, right]
+      - [planned, interval, right]
+      - [per, revocation, right]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.36:consultation_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.36:consultation_program_review"
@@ -15,23 +16,58 @@ must_fingerprints:
     excerpt_keywords:
       - [advice, handling, prior]
       - [advice, handling, sample, prior]
-
-  - must_id: "item:Art.36:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, prior]
-
-  - must_id: "item:Art.36:rev_escalation_audit"
-    description: "Escalation audit — every Art.35 DPIA flagging residual high risk has a corresponding Art.36 consu..."
-    excerpt_keywords:
-      - [escalation, audit, prior]
-
-  - must_id: "item:Art.36:rev_reviewer"
-    description: "Reviewer identity (DPO + legal)"
-    excerpt_keywords:
-      - [reviewer, identity, prior]
+      - [handling, sample, prior]
+      - [handling, sample, written, prior]
+      - [sample, written, prior]
+      - [sample, written, advice, prior]
+      - [written, advice, prior]
+      - [written, advice, incorporated, prior]
 
   - must_id: "item:Art.36:rev_waiting_compliance"
     description: "Waiting-period compliance — no processing started before SA waiting period elapsed"
     excerpt_keywords:
       - [waiting, compliance, prior]
+      - [waiting, period, prior]
+      - [waiting, period, compliance, prior]
+      - [period, compliance, prior]
+      - [period, compliance, processing, prior]
+      - [compliance, processing, prior]
+      - [compliance, processing, started, prior]
+      - [processing, started, prior]
+
+  - must_id: "item:Art.36:rev_escalation_audit"
+    description: "Escalation audit — every Art.35 DPIA flagging residual high risk has a corresponding Art.36 consultation row"
+    excerpt_keywords:
+      - [escalation, audit, prior]
+      - [escalation, audit, every, prior]
+      - [audit, every, prior]
+      - [audit, every, art, prior]
+      - [every, art, prior]
+      - [every, art, dpia, prior]
+      - [art, dpia, prior]
+      - [art, dpia, flagging, prior]
+
+  - must_id: "item:Art.36:rev_reviewer"
+    description: "Reviewer identity (DPO + legal)"
+    excerpt_keywords:
+      - [reviewer, identity, prior]
+      - [reviewer, identity, dpo, prior]
+      - [identity, dpo, prior]
+      - [identity, dpo, legal, prior]
+      - [dpo, legal, prior]
+      - [per, revocation, prior]
+      - [per, revoked, identity, prior]
+      - [revocation, record, prior]
+
+  - must_id: "item:Art.36:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, prior]
+      - [review, date, within, prior]
+      - [date, within, prior]
+      - [date, within, planned, prior]
+      - [within, planned, prior]
+      - [within, planned, interval, prior]
+      - [planned, interval, prior]
+      - [per, revocation, prior]
+

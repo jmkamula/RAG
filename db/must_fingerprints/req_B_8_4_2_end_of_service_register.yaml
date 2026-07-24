@@ -14,26 +14,26 @@ must_fingerprints:
   - must_id: "item:B.8.4.2:reg_certification_ref"
     description: "Certification reference issued to customer"
     excerpt_keywords:
-      - [certification, ref]
-      - [certification, reference]
-      - [certification, reference, issued]
-      - [reference, issued]
-      - [reference, issued, customer]
-      - [issued, customer]
-      - [per, row]
-      - [each, row]
+      - [certification, ref, return]
+      - [certification, reference, return]
+      - [certification, reference, issued, return]
+      - [reference, issued, return]
+      - [reference, issued, customer, return]
+      - [issued, customer, return]
+      - [per, row, return]
+      - [each, row, return]
 
   - must_id: "item:B.8.4.2:reg_completion_date"
     description: "Completion date per row (return delivered / disposal complete)"
     excerpt_keywords:
-      - [completion, date]
+      - [completion, date, return]
       - [completion, date, return]
       - [date, return]
       - [date, return, delivered]
       - [return, delivered]
       - [return, delivered, disposal]
-      - [delivered, disposal]
-      - [delivered, disposal, complete]
+      - [delivered, disposal, return]
+      - [delivered, disposal, complete, return]
 
   - must_id: "item:B.8.4.2:reg_action_type"
     description: "Action type per row (return / transfer / dispose / hybrid)"
@@ -44,29 +44,29 @@ must_fingerprints:
       - [return, transfer, dispose]
       - [transfer, dispose]
       - [transfer, dispose, hybrid]
-      - [dispose, hybrid]
-      - [per, row]
+      - [dispose, hybrid, return]
+      - [per, row, return]
 
   - must_id: "item:B.8.4.2:reg_termination_date"
     description: "Contract termination date per row"
     excerpt_keywords:
-      - [termination, date]
-      - [contract, termination]
-      - [contract, termination, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [termination, date, return]
+      - [contract, termination, return]
+      - [contract, termination, date, return]
+      - [per, row, return]
+      - [each, row, return]
+      - [column, containing, return]
+      - [each, entry, return]
+      - [column, header, return]
 
   - must_id: "item:B.8.4.2:reg_customer_id"
     description: "Customer identifier per row"
     excerpt_keywords:
-      - [customer, id]
-      - [customer, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [customer, id, return]
+      - [customer, identifier, return]
+      - [per, row, return]
+      - [each, row, return]
+      - [column, containing, return]
+      - [each, entry, return]
+      - [column, header, return]
 

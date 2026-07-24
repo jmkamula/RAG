@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.4.7:proc_cross_link_a533"
     description: "Cross-link to A.5.33 records retention (records-programme) — retention schedules coherent across the two frames"
     excerpt_keywords:
-      - [cross, a533]
-      - [cross, records]
+      - [cross, a533, retention]
+      - [cross, records, retention]
       - [cross, records, retention]
       - [records, retention]
       - [records, retention, records]
       - [retention, records]
       - [retention, records, programme]
-      - [records, programme]
+      - [records, programme, retention]
 
   - must_id: "item:A.7.4.7:proc_deletion_trigger"
     description: "Deletion trigger — schedule expiry triggers A.7.4.5 end-of-processing action"
     excerpt_keywords:
-      - [deletion, trigger]
-      - [deletion, trigger, schedule]
-      - [trigger, schedule]
-      - [trigger, schedule, expiry]
-      - [schedule, expiry]
-      - [schedule, expiry, triggers]
-      - [expiry, triggers]
-      - [expiry, triggers, end]
+      - [deletion, trigger, retention]
+      - [deletion, trigger, schedule, retention]
+      - [trigger, schedule, retention]
+      - [trigger, schedule, expiry, retention]
+      - [schedule, expiry, retention]
+      - [schedule, expiry, triggers, retention]
+      - [expiry, triggers, retention]
+      - [expiry, triggers, end, retention]
 
   - must_id: "item:A.7.4.7:proc_periodic_review"
     description: "Periodic review — schedule refreshed on regulatory change or business shift"
     excerpt_keywords:
-      - [periodic, review]
-      - [periodic, review, schedule]
-      - [review, schedule]
-      - [review, schedule, refreshed]
-      - [schedule, refreshed]
-      - [schedule, refreshed, regulatory]
-      - [refreshed, regulatory]
-      - [refreshed, regulatory, change]
+      - [periodic, review, retention]
+      - [periodic, review, schedule, retention]
+      - [review, schedule, retention]
+      - [review, schedule, refreshed, retention]
+      - [schedule, refreshed, retention]
+      - [schedule, refreshed, regulatory, retention]
+      - [refreshed, regulatory, retention]
+      - [refreshed, regulatory, change, retention]
 
   - must_id: "item:A.7.4.7:proc_conflict_resolution"
     description: "Conflict-resolution rule — where legal + regulatory + business requirements conflict, documented risk-based decision"
     excerpt_keywords:
-      - [conflict, resolution]
-      - [conflict, resolution, rule]
-      - [resolution, rule]
-      - [resolution, rule, legal]
-      - [rule, legal]
-      - [rule, legal, regulatory]
-      - [legal, regulatory]
-      - [legal, regulatory, business]
+      - [conflict, resolution, retention]
+      - [conflict, resolution, rule, retention]
+      - [resolution, rule, retention]
+      - [resolution, rule, legal, retention]
+      - [rule, legal, retention]
+      - [rule, legal, regulatory, retention]
+      - [legal, regulatory, retention]
+      - [legal, regulatory, business, retention]
 
   - must_id: "item:A.7.4.7:proc_retention_schedules"
     description: "Retention schedules per PII category + activity (with legal + regulatory + business rationale)"
     excerpt_keywords:
       - [retention, schedules]
       - [retention, schedules, pii]
-      - [schedules, pii]
-      - [schedules, pii, category]
-      - [pii, category]
-      - [pii, category, activity]
-      - [category, activity]
-      - [category, activity, legal]
+      - [schedules, pii, retention]
+      - [schedules, pii, category, retention]
+      - [pii, category, retention]
+      - [pii, category, activity, retention]
+      - [category, activity, retention]
+      - [category, activity, legal, retention]
 

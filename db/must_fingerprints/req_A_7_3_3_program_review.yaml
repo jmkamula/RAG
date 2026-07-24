@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.3:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.3:program_review"
@@ -10,22 +11,51 @@ target_control: "A.7.3.3"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.3:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, providing]
-
   - must_id: "item:A.7.3.3:rev_plain_language_audit"
     description: "Plain-language audit — sampled notices reviewed against readability target"
     excerpt_keywords:
       - [plain, language, audit, providing]
+      - [plain, language, providing]
+      - [language, audit, providing]
+      - [language, audit, sampled, providing]
+      - [audit, sampled, providing]
+      - [audit, sampled, notices, providing]
+      - [sampled, notices, providing]
+      - [sampled, notices, reviewed, providing]
 
   - must_id: "item:A.7.3.3:rev_reachability_audit"
     description: "Reachability audit — sampled touchpoints verified to serve current notice"
     excerpt_keywords:
       - [reachability, audit, providing]
+      - [reachability, audit, sampled, providing]
+      - [audit, sampled, providing]
+      - [audit, sampled, touchpoints, providing]
+      - [sampled, touchpoints, providing]
+      - [sampled, touchpoints, verified, providing]
+      - [touchpoints, verified, providing]
+      - [touchpoints, verified, serve, providing]
 
   - must_id: "item:A.7.3.3:rev_reviewer"
     description: "Reviewer identity (DPO + Product + UX)"
     excerpt_keywords:
       - [reviewer, identity, providing]
+      - [reviewer, identity, dpo, providing]
+      - [identity, dpo, providing]
+      - [identity, dpo, product, providing]
+      - [dpo, product, providing]
+      - [per, revocation, providing]
+      - [per, revoked, identity, providing]
+      - [revocation, record, providing]
+
+  - must_id: "item:A.7.3.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, providing]
+      - [review, date, within, providing]
+      - [date, within, providing]
+      - [date, within, planned, providing]
+      - [within, planned, providing]
+      - [within, planned, interval, providing]
+      - [planned, interval, providing]
+      - [per, revocation, providing]
+

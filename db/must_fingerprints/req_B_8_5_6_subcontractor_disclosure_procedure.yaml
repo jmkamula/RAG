@@ -14,33 +14,33 @@ must_fingerprints:
   - must_id: "item:B.8.5.6:proc_customer_contract_link"
     description: "Customer contract link — subcontracting provisions in the B.8.2.1 agreement"
     excerpt_keywords:
-      - [customer, contract]
-      - [customer, contract, subcontracting]
-      - [contract, subcontracting]
-      - [contract, subcontracting, provisions]
-      - [subcontracting, provisions]
-      - [subcontracting, provisions, agreement]
-      - [provisions, agreement]
-      - [procedure, step]
+      - [customer, contract, disclosure]
+      - [customer, contract, subcontracting, disclosure]
+      - [contract, subcontracting, disclosure]
+      - [contract, subcontracting, provisions, disclosure]
+      - [subcontracting, provisions, disclosure]
+      - [subcontracting, provisions, agreement, disclosure]
+      - [provisions, agreement, disclosure]
+      - [procedure, step, disclosure]
 
   - must_id: "item:B.8.5.6:proc_countries_always_public"
     description: "Countries list always public — per §8.5.6 last paragraph, the destination country list is disclosed in all cases"
     excerpt_keywords:
-      - [countries, always, public]
-      - [countries, always]
-      - [always, public]
-      - [always, public, last]
-      - [public, last]
-      - [public, last, paragraph]
-      - [last, paragraph]
-      - [last, paragraph, destination]
+      - [countries, always, public, disclosure]
+      - [countries, always, disclosure]
+      - [always, public, disclosure]
+      - [always, public, last, disclosure]
+      - [public, last, disclosure]
+      - [public, last, paragraph, disclosure]
+      - [last, paragraph, disclosure]
+      - [last, paragraph, destination, disclosure]
 
   - must_id: "item:B.8.5.6:proc_nda_path"
     description: "NDA path — where public disclosure raises security risk, disclosure under NDA + on customer request"
     excerpt_keywords:
-      - [nda, path]
-      - [nda, path, public]
-      - [path, public]
+      - [nda, path, disclosure]
+      - [nda, path, public, disclosure]
+      - [path, public, disclosure]
       - [path, public, disclosure]
       - [public, disclosure]
       - [public, disclosure, raises]
@@ -52,22 +52,22 @@ must_fingerprints:
     excerpt_keywords:
       - [disclosure, content]
       - [disclosure, content, subcontractor]
-      - [content, subcontractor]
-      - [content, subcontractor, identity]
-      - [subcontractor, identity]
-      - [subcontractor, identity, countries]
-      - [identity, countries]
-      - [identity, countries, international]
+      - [content, subcontractor, disclosure]
+      - [content, subcontractor, identity, disclosure]
+      - [subcontractor, identity, disclosure]
+      - [subcontractor, identity, countries, disclosure]
+      - [identity, countries, disclosure]
+      - [identity, countries, international, disclosure]
 
   - must_id: "item:B.8.5.6:proc_pre_use_disclosure"
     description: "Pre-use disclosure — customer informed before subcontractor onboards"
     excerpt_keywords:
       - [pre, use, disclosure]
-      - [pre, use]
+      - [pre, use, disclosure]
       - [use, disclosure]
       - [use, disclosure, customer]
       - [disclosure, customer]
       - [disclosure, customer, informed]
-      - [customer, informed]
-      - [customer, informed, before]
+      - [customer, informed, disclosure]
+      - [customer, informed, before, disclosure]
 

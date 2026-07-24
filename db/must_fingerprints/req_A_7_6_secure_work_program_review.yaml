@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.6:secure_work_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.6:secure_work_program_review"
@@ -10,29 +11,62 @@ target_control: "A.7.6"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.7.6:rev_compliance_check"
-    description: "Compliance sampling — sessions verified against permit/escort/device-restriction rules"
+  - must_id: "item:A.7.6:rev_register_update"
+    description: "Changes propagated to the procedure"
     excerpt_keywords:
-      - [compliance, check, working]
-      - [compliance, sampling, working]
-
-  - must_id: "item:A.7.6:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, working]
+      - [changes, propagated, working]
+      - [per, revocation, working]
+      - [per, revoked, identity, working]
+      - [revocation, record, working]
+      - [review, findings, working]
+      - [audit, outcomes, working]
+      - [last, reviewed, working]
 
   - must_id: "item:A.7.6:rev_incidents"
     description: "Incidents review (escort failures, device-intrusion events) — closure status"
     excerpt_keywords:
       - [incidents, review, working]
+      - [incidents, review, escort, working]
+      - [review, escort, working]
+      - [review, escort, failures, working]
+      - [escort, failures, working]
+      - [escort, failures, device, working]
+      - [failures, device, working]
+      - [failures, device, intrusion, working]
 
-  - must_id: "item:A.7.6:rev_register_update"
-    description: "Changes propagated to the procedure"
+  - must_id: "item:A.7.6:rev_compliance_check"
+    description: "Compliance sampling — sessions verified against permit/escort/device-restriction rules"
     excerpt_keywords:
-      - [register, update, working]
-      - [changes, propagated, procedure, working]
+      - [compliance, check, working]
+      - [compliance, sampling, working]
+      - [compliance, sampling, sessions, working]
+      - [sampling, sessions, working]
+      - [sampling, sessions, verified, working]
+      - [sessions, verified, working]
+      - [sessions, verified, against, working]
+      - [verified, against, working]
 
   - must_id: "item:A.7.6:rev_reviewer"
     description: "Reviewer identity (Facilities + InfoSec)"
     excerpt_keywords:
       - [reviewer, identity, working]
+      - [reviewer, identity, facilities, working]
+      - [identity, facilities, working]
+      - [identity, facilities, infosec, working]
+      - [facilities, infosec, working]
+      - [per, revocation, working]
+      - [per, revoked, identity, working]
+      - [revocation, record, working]
+
+  - must_id: "item:A.7.6:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, working]
+      - [review, date, within, working]
+      - [date, within, working]
+      - [date, within, planned, working]
+      - [within, planned, working]
+      - [within, planned, interval, working]
+      - [planned, interval, working]
+      - [per, revocation, working]
+

@@ -14,72 +14,72 @@ must_fingerprints:
   - must_id: "item:A.6.6:reg_expiry_or_active"
     description: "Per-row status (active / expired-with-surviving-obligations / superseded-by-new-version)"
     excerpt_keywords:
-      - [expiry, active]
-      - [status, active]
-      - [status, active, expired]
-      - [active, expired]
-      - [active, expired, surviving]
-      - [expired, surviving]
-      - [expired, surviving, obligations]
-      - [surviving, obligations]
+      - [expiry, active, confidentiality]
+      - [status, active, confidentiality]
+      - [status, active, expired, confidentiality]
+      - [active, expired, confidentiality]
+      - [active, expired, surviving, confidentiality]
+      - [expired, surviving, confidentiality]
+      - [expired, surviving, obligations, confidentiality]
+      - [surviving, obligations, confidentiality]
 
   - must_id: "item:A.6.6:reg_signature_method"
     description: "Per-row signature method (wet / e-signature platform reference — ensures non-repudiation)"
     excerpt_keywords:
-      - [signature, method]
-      - [signature, method, wet]
-      - [method, wet]
-      - [method, wet, signature]
-      - [wet, signature]
-      - [wet, signature, platform]
-      - [signature, platform]
-      - [signature, platform, reference]
+      - [signature, method, confidentiality]
+      - [signature, method, wet, confidentiality]
+      - [method, wet, confidentiality]
+      - [method, wet, signature, confidentiality]
+      - [wet, signature, confidentiality]
+      - [wet, signature, platform, confidentiality]
+      - [signature, platform, confidentiality]
+      - [signature, platform, reference, confidentiality]
 
   - must_id: "item:A.6.6:reg_signature_date"
     description: "Per-row signature date (proves signing happened BEFORE access granted per A.5.18)"
     excerpt_keywords:
-      - [signature, date]
-      - [signature, date, proves]
-      - [date, proves]
-      - [date, proves, signing]
-      - [proves, signing]
-      - [proves, signing, happened]
-      - [signing, happened]
-      - [signing, happened, before]
+      - [signature, date, confidentiality]
+      - [signature, date, proves, confidentiality]
+      - [date, proves, confidentiality]
+      - [date, proves, signing, confidentiality]
+      - [proves, signing, confidentiality]
+      - [proves, signing, happened, confidentiality]
+      - [signing, happened, confidentiality]
+      - [signing, happened, before, confidentiality]
 
   - must_id: "item:A.6.6:reg_template_version"
     description: "Per-row template version (drives currency check — old-version signers may need re-signing on material template changes)"
     excerpt_keywords:
-      - [template, version]
-      - [template, version, currency]
-      - [version, currency]
-      - [version, currency, check]
-      - [currency, check]
-      - [currency, check, old]
-      - [check, old]
-      - [check, old, version]
+      - [template, version, confidentiality]
+      - [template, version, currency, confidentiality]
+      - [version, currency, confidentiality]
+      - [version, currency, check, confidentiality]
+      - [currency, check, confidentiality]
+      - [currency, check, old, confidentiality]
+      - [check, old, confidentiality]
+      - [check, old, version, confidentiality]
 
   - must_id: "item:A.6.6:reg_variant"
     description: "Per-row NDA variant (employee / contractor / supplier-bilateral / M&A / visitor — matches the template variant_tiers SHOULD)"
     excerpt_keywords:
-      - [nda, variant]
-      - [nda, variant, employee]
-      - [variant, employee]
-      - [variant, employee, contractor]
-      - [employee, contractor]
-      - [employee, contractor, supplier]
-      - [contractor, supplier]
-      - [contractor, supplier, bilateral]
+      - [nda, variant, confidentiality]
+      - [nda, variant, employee, confidentiality]
+      - [variant, employee, confidentiality]
+      - [variant, employee, contractor, confidentiality]
+      - [employee, contractor, confidentiality]
+      - [employee, contractor, supplier, confidentiality]
+      - [contractor, supplier, confidentiality]
+      - [contractor, supplier, bilateral, confidentiality]
 
   - must_id: "item:A.6.6:reg_signatory_id"
     description: "Per-row signatory identifier (links to identity register A.5.16 for employees; supplier register A.5.19 for contractors; visitor-log for vis"
     excerpt_keywords:
-      - [signatory, id]
-      - [signatory, identifier]
-      - [signatory, identifier, identity]
-      - [identifier, identity]
-      - [identifier, identity, employees]
-      - [identity, employees]
-      - [identity, employees, supplier]
-      - [employees, supplier]
+      - [signatory, id, confidentiality]
+      - [signatory, identifier, confidentiality]
+      - [signatory, identifier, identity, confidentiality]
+      - [identifier, identity, confidentiality]
+      - [identifier, identity, employees, confidentiality]
+      - [identity, employees, confidentiality]
+      - [identity, employees, supplier, confidentiality]
+      - [employees, supplier, confidentiality]
 

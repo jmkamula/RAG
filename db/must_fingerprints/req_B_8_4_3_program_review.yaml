@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.4.3:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.3:program_review"
@@ -10,22 +11,51 @@ target_control: "B.8.4.3"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:B.8.4.3:rev_shadow_channel_sweep"
+    description: "Shadow-channel sweep — unauthorised channels flagged"
+    excerpt_keywords:
+      - [shadow, channel, sweep, pii]
+      - [shadow, channel, pii]
+      - [channel, sweep, pii]
+      - [channel, sweep, unauthorised, pii]
+      - [sweep, unauthorised, pii]
+      - [sweep, unauthorised, channels, pii]
+      - [unauthorised, channels, pii]
+      - [unauthorised, channels, flagged, pii]
+
   - must_id: "item:B.8.4.3:rev_contract_alignment_audit"
     description: "Contract-alignment audit — sampled channels reviewed against customer B.8.2.1 agreements"
     excerpt_keywords:
       - [contract, alignment, audit, pii]
-
-  - must_id: "item:B.8.4.3:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, pii]
+      - [contract, alignment, pii]
+      - [alignment, audit, pii]
+      - [alignment, audit, sampled, pii]
+      - [audit, sampled, pii]
+      - [audit, sampled, channels, pii]
+      - [sampled, channels, pii]
+      - [sampled, channels, reviewed, pii]
 
   - must_id: "item:B.8.4.3:rev_reviewer"
     description: "Reviewer identity (Platform Ops + Security Engineering + DPO)"
     excerpt_keywords:
       - [reviewer, identity, pii]
+      - [reviewer, identity, platform, pii]
+      - [identity, platform, pii]
+      - [identity, platform, ops, pii]
+      - [platform, ops, pii]
+      - [platform, ops, security, pii]
+      - [ops, security, pii]
+      - [ops, security, engineering, pii]
 
-  - must_id: "item:B.8.4.3:rev_shadow_channel_sweep"
-    description: "Shadow-channel sweep — unauthorised channels flagged"
+  - must_id: "item:B.8.4.3:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [shadow, channel, sweep, pii]
+      - [review, date, pii]
+      - [review, date, within, pii]
+      - [date, within, pii]
+      - [date, within, planned, pii]
+      - [within, planned, pii]
+      - [within, planned, interval, pii]
+      - [planned, interval, pii]
+      - [per, revocation, pii]
+

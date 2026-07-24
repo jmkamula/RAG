@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:Art.26:reg_signed_date"
     description: "Per-row arrangement signature date"
     excerpt_keywords:
-      - [signed, date]
-      - [arrangement, signature]
-      - [arrangement, signature, date]
-      - [signature, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [signed, date, joint]
+      - [arrangement, signature, joint]
+      - [arrangement, signature, date, joint]
+      - [signature, date, joint]
+      - [per, row, joint]
+      - [each, row, joint]
+      - [column, containing, joint]
+      - [each, entry, joint]
 
   - must_id: "item:Art.26:reg_essence_published"
     description: "Per-row essence-of-arrangement published location (privacy notice URL)"
     excerpt_keywords:
-      - [essence, published]
-      - [essence, arrangement]
-      - [essence, arrangement, published]
-      - [arrangement, published]
-      - [arrangement, published, location]
-      - [published, location]
-      - [published, location, privacy]
-      - [location, privacy]
+      - [essence, published, joint]
+      - [essence, arrangement, joint]
+      - [essence, arrangement, published, joint]
+      - [arrangement, published, joint]
+      - [arrangement, published, location, joint]
+      - [published, location, joint]
+      - [published, location, privacy, joint]
+      - [location, privacy, joint]
 
   - must_id: "item:Art.26:reg_responsibilities"
     description: "Per-row responsibility split summary"
     excerpt_keywords:
-      - [responsibility, split]
-      - [responsibility, split, summary]
-      - [split, summary]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [responsibility, split, joint]
+      - [responsibility, split, summary, joint]
+      - [split, summary, joint]
+      - [per, row, joint]
+      - [each, row, joint]
+      - [column, containing, joint]
+      - [each, entry, joint]
+      - [column, header, joint]
 
   - must_id: "item:Art.26:reg_activity"
     description: "Per-row processing activity (Art.30 RoPA reference)"
     excerpt_keywords:
-      - [processing, activity]
-      - [processing, activity, art]
-      - [activity, art]
-      - [activity, art, ropa]
-      - [art, ropa]
-      - [art, ropa, reference]
-      - [ropa, reference]
-      - [per, row]
+      - [processing, activity, joint]
+      - [processing, activity, art, joint]
+      - [activity, art, joint]
+      - [activity, art, ropa, joint]
+      - [art, ropa, joint]
+      - [art, ropa, reference, joint]
+      - [ropa, reference, joint]
+      - [per, row, joint]
 
   - must_id: "item:Art.26:reg_counterparty"
     description: "Per-row joint-controller counterparty"
     excerpt_keywords:
       - [joint, controller]
       - [joint, controller, counterparty]
-      - [controller, counterparty]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [controller, counterparty, joint]
+      - [per, row, joint]
+      - [each, row, joint]
+      - [column, containing, joint]
+      - [each, entry, joint]
+      - [column, header, joint]
 

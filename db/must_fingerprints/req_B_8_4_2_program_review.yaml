@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.4.2:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.2:program_review"
@@ -15,18 +16,46 @@ must_fingerprints:
     excerpt_keywords:
       - [backup, propagation, return]
       - [backup, propagation, audit, return]
+      - [propagation, audit, return]
+      - [propagation, audit, sampled, return]
+      - [audit, sampled, return]
+      - [audit, sampled, disposals, return]
+      - [sampled, disposals, return]
+      - [sampled, disposals, verified, return]
 
   - must_id: "item:B.8.4.2:rev_completion_audit"
     description: "Completion audit — sampled terminations verified end-to-end (data returned + disposal certified)"
     excerpt_keywords:
       - [completion, audit, return]
-
-  - must_id: "item:B.8.4.2:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, return]
+      - [completion, audit, sampled, return]
+      - [audit, sampled, return]
+      - [audit, sampled, terminations, return]
+      - [sampled, terminations, return]
+      - [sampled, terminations, verified, return]
+      - [terminations, verified, return]
+      - [terminations, verified, end, return]
 
   - must_id: "item:B.8.4.2:rev_reviewer"
     description: "Reviewer identity (Trust + DPO + Platform Ops)"
     excerpt_keywords:
       - [reviewer, identity, return]
+      - [reviewer, identity, trust, return]
+      - [identity, trust, return]
+      - [identity, trust, dpo, return]
+      - [trust, dpo, return]
+      - [trust, dpo, platform, return]
+      - [dpo, platform, return]
+      - [dpo, platform, ops, return]
+
+  - must_id: "item:B.8.4.2:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, return]
+      - [review, date, within, return]
+      - [date, within, return]
+      - [date, within, planned, return]
+      - [within, planned, return]
+      - [within, planned, interval, return]
+      - [planned, interval, return]
+      - [per, revocation, return]
+

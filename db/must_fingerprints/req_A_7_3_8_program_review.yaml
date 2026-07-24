@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.8:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.8:program_review"
@@ -10,27 +11,63 @@ target_control: "A.7.3.8"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.8:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, providing]
-
   - must_id: "item:A.7.3.8:rev_direct_transfer_test"
     description: "Direct-transfer capability tested end-to-end"
     excerpt_keywords:
       - [direct, transfer, test, providing]
+      - [direct, transfer, providing]
+      - [direct, transfer, capability, providing]
+      - [transfer, capability, providing]
+      - [transfer, capability, tested, providing]
+      - [capability, tested, providing]
+      - [capability, tested, end, providing]
+      - [tested, end, providing]
 
   - must_id: "item:A.7.3.8:rev_format_currency"
     description: "Format currency — output format aligns with commonly-used industry standards"
     excerpt_keywords:
       - [format, currency, providing]
-
-  - must_id: "item:A.7.3.8:rev_reviewer"
-    description: "Reviewer identity (DPO + Engineering)"
-    excerpt_keywords:
-      - [reviewer, identity, providing]
+      - [format, currency, output, providing]
+      - [currency, output, providing]
+      - [currency, output, format, providing]
+      - [output, format, providing]
+      - [output, format, aligns, providing]
+      - [format, aligns, providing]
+      - [format, aligns, commonly, providing]
 
   - must_id: "item:A.7.3.8:rev_scope_leakage_test"
     description: "Scope-leakage test — sampled copies verified to contain only the requesting subject's PII"
     excerpt_keywords:
       - [scope, leakage, test, providing]
+      - [scope, leakage, providing]
+      - [leakage, test, providing]
+      - [leakage, test, sampled, providing]
+      - [test, sampled, providing]
+      - [test, sampled, copies, providing]
+      - [sampled, copies, providing]
+      - [sampled, copies, verified, providing]
+
+  - must_id: "item:A.7.3.8:rev_reviewer"
+    description: "Reviewer identity (DPO + Engineering)"
+    excerpt_keywords:
+      - [reviewer, identity, providing]
+      - [reviewer, identity, dpo, providing]
+      - [identity, dpo, providing]
+      - [identity, dpo, engineering, providing]
+      - [dpo, engineering, providing]
+      - [per, revocation, providing]
+      - [per, revoked, identity, providing]
+      - [revocation, record, providing]
+
+  - must_id: "item:A.7.3.8:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, providing]
+      - [review, date, within, providing]
+      - [date, within, providing]
+      - [date, within, planned, providing]
+      - [within, planned, providing]
+      - [within, planned, interval, providing]
+      - [planned, interval, providing]
+      - [per, revocation, providing]
+

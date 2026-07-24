@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.5.4:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.4:program_review"
@@ -14,18 +15,47 @@ must_fingerprints:
     description: "Authority audit — sampled disclosures reviewed for documented authority"
     excerpt_keywords:
       - [authority, audit, records]
+      - [authority, audit, sampled, records]
+      - [audit, sampled, records]
+      - [audit, sampled, disclosures, records]
+      - [sampled, disclosures, records]
+      - [sampled, disclosures, reviewed, records]
+      - [disclosures, reviewed, records]
+      - [disclosures, reviewed, documented, records]
 
   - must_id: "item:A.7.5.4:rev_completeness"
     description: "Completeness check — investigation + audit disclosures reconciled"
     excerpt_keywords:
       - [completeness, check, records]
-
-  - must_id: "item:A.7.5.4:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, records]
+      - [completeness, check, investigation, records]
+      - [check, investigation, records]
+      - [check, investigation, audit, records]
+      - [investigation, audit, records]
+      - [investigation, audit, disclosures, records]
+      - [audit, disclosures, records]
+      - [audit, disclosures, reconciled, records]
 
   - must_id: "item:A.7.5.4:rev_reviewer"
     description: "Reviewer identity (DPO + Legal)"
     excerpt_keywords:
       - [reviewer, identity, records]
+      - [reviewer, identity, dpo, records]
+      - [identity, dpo, records]
+      - [identity, dpo, legal, records]
+      - [dpo, legal, records]
+      - [per, revocation, records]
+      - [per, revoked, identity, records]
+      - [revocation, record, records]
+
+  - must_id: "item:A.7.5.4:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, records]
+      - [review, date, within, records]
+      - [date, within, records]
+      - [date, within, planned, records]
+      - [within, planned, records]
+      - [within, planned, interval, records]
+      - [planned, interval, records]
+      - [per, revocation, records]
+

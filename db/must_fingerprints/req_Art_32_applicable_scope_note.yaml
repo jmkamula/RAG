@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.32:applicable_scope_note
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.32:applicable_scope_note"
@@ -11,17 +12,38 @@ target_standard: "GDPR:2016/679"
 
 must_fingerprints:
   - must_id: "item:Art.32:scope_authority_compliance"
-    description: "Art.32.4 — persons acting under authority (employees, contractors, processors) bound by instructi..."
+    description: "Art.32.4 — persons acting under authority (employees, contractors, processors) bound by instructions or law"
     excerpt_keywords:
-      - [scope, authority, compliance]
+      - [authority, compliance]
+      - [art, persons]
+      - [art, persons, acting]
+      - [persons, acting]
+      - [persons, acting, under]
+      - [acting, under]
+      - [acting, under, authority]
+      - [under, authority]
+
+  - must_id: "item:Art.32:scope_risk_factors"
+    description: "Art.32.2 risk factors enumerated (accidental or unlawful destruction / loss / alteration / unauthorised disclosure or access)"
+    excerpt_keywords:
+      - [risk, factors]
+      - [art, risk]
+      - [art, risk, factors]
+      - [risk, factors, enumerated]
+      - [factors, enumerated]
+      - [factors, enumerated, accidental]
+      - [enumerated, accidental]
+      - [enumerated, accidental, unlawful]
 
   - must_id: "item:Art.32:scope_processing_activities"
     description: "Processing activities in scope (cross-link to Art.30 RoPA)"
     excerpt_keywords:
-      - [scope, processing, activities]
+      - [processing, activities]
+      - [processing, activities, scope]
+      - [activities, scope]
+      - [activities, scope, cross]
+      - [scope, cross]
+      - [scope, cross, art]
+      - [cross, art]
+      - [cross, art, ropa]
 
-  - must_id: "item:Art.32:scope_risk_factors"
-    description: "Art.32.2 risk factors enumerated (accidental or unlawful destruction / loss / alteration / unauth..."
-    excerpt_keywords:
-      - [scope, risk, factors]
-      - [art, risk, factors, enumerated]

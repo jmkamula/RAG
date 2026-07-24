@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.5:authentication_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.5:authentication_program_review"
@@ -10,33 +11,75 @@ target_control: "A.8.5"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.8.5:rev_anomaly_outcomes"
-    description: "Anomaly-detection outcomes reviewed (true-positive rate, missed-detection postmortems)"
-    excerpt_keywords:
-      - [anomaly, outcomes, secure]
-
   - must_id: "item:A.8.5:rev_baseline_update"
     description: "Baseline / procedure updates published from findings"
     excerpt_keywords:
       - [baseline, update, secure]
-      - [baseline, procedure, updates, published, secure]
+      - [baseline, updates, secure]
+      - [baseline, updates, published, secure]
+      - [updates, published, secure]
+      - [updates, published, findings, secure]
+      - [published, findings, secure]
+      - [per, revocation, secure]
+      - [per, revoked, identity, secure]
 
-  - must_id: "item:A.8.5:rev_date"
-    description: "Review date within the planned interval (≤180 days)"
+  - must_id: "item:A.8.5:rev_anomaly_outcomes"
+    description: "Anomaly-detection outcomes reviewed (true-positive rate, missed-detection postmortems)"
     excerpt_keywords:
-      - [review, date, planned, interval, secure]
+      - [anomaly, outcomes, secure]
+      - [anomaly, detection, secure]
+      - [anomaly, detection, outcomes, secure]
+      - [detection, outcomes, secure]
+      - [detection, outcomes, reviewed, secure]
+      - [outcomes, reviewed, secure]
+      - [outcomes, reviewed, true, secure]
+      - [reviewed, true, secure]
 
   - must_id: "item:A.8.5:rev_exception_inventory"
     description: "Exception inventory re-confirmed / retired"
     excerpt_keywords:
       - [exception, inventory, secure]
-
-  - must_id: "item:A.8.5:rev_reviewer"
-    description: "Reviewer identity (IAM lead + InfoSec lead jointly)"
-    excerpt_keywords:
-      - [reviewer, identity, secure]
+      - [exception, inventory, confirmed, secure]
+      - [inventory, confirmed, secure]
+      - [inventory, confirmed, retired, secure]
+      - [confirmed, retired, secure]
+      - [per, revocation, secure]
+      - [per, revoked, identity, secure]
+      - [revocation, record, secure]
 
   - must_id: "item:A.8.5:rev_threat_landscape"
     description: "Threat-landscape review (new attack patterns since last review — feed from threat intel A.5.7)"
     excerpt_keywords:
       - [threat, landscape, secure]
+      - [threat, landscape, review, secure]
+      - [landscape, review, secure]
+      - [landscape, review, new, secure]
+      - [review, new, secure]
+      - [review, new, attack, secure]
+      - [new, attack, secure]
+      - [new, attack, patterns, secure]
+
+  - must_id: "item:A.8.5:rev_reviewer"
+    description: "Reviewer identity (IAM lead + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [reviewer, identity, secure]
+      - [reviewer, identity, iam, secure]
+      - [identity, iam, secure]
+      - [identity, iam, lead, secure]
+      - [iam, lead, secure]
+      - [iam, lead, infosec, secure]
+      - [lead, infosec, secure]
+      - [lead, infosec, lead, secure]
+
+  - must_id: "item:A.8.5:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, secure]
+      - [review, date, within, secure]
+      - [date, within, secure]
+      - [date, within, planned, secure]
+      - [within, planned, secure]
+      - [within, planned, interval, secure]
+      - [planned, interval, secure]
+      - [planned, interval, 180, secure]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.1:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.1:applicable_scope"
@@ -11,18 +12,38 @@ target_standard: "ISO27701:2019"
 
 must_fingerprints:
   - must_id: "item:A.7.4.1:scope_exclusions"
-    description: "Excluded surfaces with rationale (e.g. anonymous analytics)"
+    description: "Excluded surfaces with rationale (e.g"
     excerpt_keywords:
-      - [scope, exclusions, limit]
+      - [excluded, surfaces, limit]
       - [excluded, surfaces, rationale, limit]
+      - [surfaces, rationale, limit]
+      - [surfaces, rationale, anonymous, limit]
+      - [rationale, anonymous, limit]
+      - [rationale, anonymous, analytics, limit]
+      - [anonymous, analytics, limit]
+      - [in, scope, limit]
 
   - must_id: "item:A.7.4.1:scope_indirect_map"
     description: "Indirect-collection map (technical logs + inferred data + third-party enrichment)"
     excerpt_keywords:
-      - [scope, indirect, map, limit]
+      - [indirect, map, limit]
+      - [indirect, collection]
+      - [indirect, collection, map]
+      - [collection, map]
+      - [collection, map, technical]
+      - [map, technical, limit]
+      - [map, technical, logs, limit]
+      - [technical, logs, limit]
 
   - must_id: "item:A.7.4.1:scope_surfaces"
-    description: "Collection surfaces enumerated (customer forms / employee onboarding / marketing forms / cookies ..."
+    description: "Collection surfaces enumerated (customer forms / employee onboarding / marketing forms / cookies / weblogs / API webhooks / integrations)"
     excerpt_keywords:
-      - [scope, surfaces, limit]
+      - [collection, surfaces]
       - [collection, surfaces, enumerated]
+      - [surfaces, enumerated, limit]
+      - [surfaces, enumerated, customer, limit]
+      - [enumerated, customer, limit]
+      - [enumerated, customer, forms, limit]
+      - [customer, forms, limit]
+      - [customer, forms, employee, limit]
+

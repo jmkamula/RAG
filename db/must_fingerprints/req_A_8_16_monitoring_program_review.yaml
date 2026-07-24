@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.16:monitoring_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.16:monitoring_program_review"
@@ -10,33 +11,87 @@ target_control: "A.8.16"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.8.16:rev_coverage"
-    description: "Coverage check against threat-mapping (any uncovered MITRE technique surfaced)"
-    excerpt_keywords:
-      - [coverage, check, threat, monitoring]
-
-  - must_id: "item:A.8.16:rev_date"
-    description: "Review date within the planned interval (≤180 days)"
-    excerpt_keywords:
-      - [review, date, planned, interval, monitoring]
-
-  - must_id: "item:A.8.16:rev_missed_postmortems"
-    description: "Missed-detection postmortems reviewed (incidents that bypassed monitoring)"
-    excerpt_keywords:
-      - [missed, postmortems, monitoring]
-
   - must_id: "item:A.8.16:rev_register_update"
     description: "Findings propagated to register / procedure / scope"
     excerpt_keywords:
-      - [register, update, monitoring]
-      - [findings, propagated, register, procedure, monitoring]
-
-  - must_id: "item:A.8.16:rev_reviewer"
-    description: "Reviewer identity (Security Operations lead + InfoSec lead)"
-    excerpt_keywords:
-      - [reviewer, identity, monitoring]
+      - [findings, propagated, monitoring]
+      - [findings, propagated, scope, monitoring]
+      - [propagated, scope, monitoring]
+      - [per, revocation, monitoring]
+      - [per, revoked, identity, monitoring]
+      - [revocation, record, monitoring]
+      - [review, findings, monitoring]
+      - [audit, outcomes, monitoring]
 
   - must_id: "item:A.8.16:rev_threat_intel_feed"
     description: "Threat-intel feeding effectiveness (cross-link to A.5.7 — new tactics translated to detections)"
     excerpt_keywords:
       - [threat, intel, feed, monitoring]
+      - [threat, intel, monitoring]
+      - [threat, intel, feeding, monitoring]
+      - [intel, feeding, monitoring]
+      - [intel, feeding, effectiveness, monitoring]
+      - [feeding, effectiveness, monitoring]
+      - [feeding, effectiveness, cross, monitoring]
+      - [effectiveness, cross, monitoring]
+
+  - must_id: "item:A.8.16:rev_missed_postmortems"
+    description: "Missed-detection postmortems reviewed (incidents that bypassed monitoring)"
+    excerpt_keywords:
+      - [missed, postmortems, monitoring]
+      - [missed, detection, monitoring]
+      - [missed, detection, postmortems, monitoring]
+      - [detection, postmortems, monitoring]
+      - [detection, postmortems, reviewed, monitoring]
+      - [postmortems, reviewed, monitoring]
+      - [postmortems, reviewed, incidents, monitoring]
+      - [reviewed, incidents, monitoring]
+
+  - must_id: "item:A.8.16:rev_tp_trending"
+    description: "True-positive rate trending review per detection"
+    excerpt_keywords:
+      - [tp, trending, monitoring]
+      - [true, positive, monitoring]
+      - [true, positive, rate, monitoring]
+      - [positive, rate, monitoring]
+      - [positive, rate, trending, monitoring]
+      - [rate, trending, monitoring]
+      - [rate, trending, review, monitoring]
+      - [trending, review, monitoring]
+
+  - must_id: "item:A.8.16:rev_coverage"
+    description: "Coverage check against threat-mapping (any uncovered MITRE technique surfaced)"
+    excerpt_keywords:
+      - [coverage, check, monitoring]
+      - [coverage, check, against, monitoring]
+      - [check, against, monitoring]
+      - [check, against, threat, monitoring]
+      - [against, threat, monitoring]
+      - [against, threat, mapping, monitoring]
+      - [threat, mapping, monitoring]
+      - [threat, mapping, uncovered, monitoring]
+
+  - must_id: "item:A.8.16:rev_reviewer"
+    description: "Reviewer identity (Security Operations lead + InfoSec lead)"
+    excerpt_keywords:
+      - [reviewer, identity, monitoring]
+      - [reviewer, identity, security, monitoring]
+      - [identity, security, monitoring]
+      - [identity, security, operations, monitoring]
+      - [security, operations, monitoring]
+      - [security, operations, lead, monitoring]
+      - [operations, lead, monitoring]
+      - [operations, lead, infosec, monitoring]
+
+  - must_id: "item:A.8.16:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, monitoring]
+      - [review, date, within, monitoring]
+      - [date, within, monitoring]
+      - [date, within, planned, monitoring]
+      - [within, planned, monitoring]
+      - [within, planned, interval, monitoring]
+      - [planned, interval, monitoring]
+      - [planned, interval, 180, monitoring]
+

@@ -14,84 +14,84 @@ must_fingerprints:
   - must_id: "item:A.7.2.5:reg_review_due"
     description: "Next review due date per row (triggered by change or periodic)"
     excerpt_keywords:
-      - [review, due]
-      - [next, review]
-      - [next, review, due]
-      - [review, due, date]
-      - [due, date]
-      - [due, date, triggered]
-      - [date, triggered]
-      - [date, triggered, change]
+      - [review, due, privacy]
+      - [next, review, privacy]
+      - [next, review, due, privacy]
+      - [review, due, date, privacy]
+      - [due, date, privacy]
+      - [due, date, triggered, privacy]
+      - [date, triggered, privacy]
+      - [date, triggered, change, privacy]
 
   - must_id: "item:A.7.2.5:reg_sa_consultation"
     description: "SA consultation flag per row (Art.36 invoked yes/no)"
     excerpt_keywords:
-      - [sa, consultation]
-      - [consultation, flag]
-      - [consultation, flag, art]
-      - [flag, art]
-      - [flag, art, invoked]
-      - [art, invoked]
-      - [art, invoked, yes]
-      - [invoked, yes]
+      - [sa, consultation, privacy]
+      - [consultation, flag, privacy]
+      - [consultation, flag, art, privacy]
+      - [flag, art, privacy]
+      - [flag, art, invoked, privacy]
+      - [art, invoked, privacy]
+      - [art, invoked, yes, privacy]
+      - [invoked, yes, privacy]
 
   - must_id: "item:A.7.2.5:reg_residual_risk"
     description: "Residual-risk rating per row (low/medium/high after mitigations)"
     excerpt_keywords:
-      - [residual, risk]
-      - [residual, risk, rating]
-      - [risk, rating]
-      - [risk, rating, low]
-      - [rating, low]
-      - [rating, low, medium]
-      - [low, medium]
-      - [low, medium, high]
+      - [residual, risk, privacy]
+      - [residual, risk, rating, privacy]
+      - [risk, rating, privacy]
+      - [risk, rating, low, privacy]
+      - [rating, low, privacy]
+      - [rating, low, medium, privacy]
+      - [low, medium, privacy]
+      - [low, medium, high, privacy]
 
   - must_id: "item:A.7.2.5:reg_signoff"
     description: "Signoff identities per row (DPO + business owner)"
     excerpt_keywords:
-      - [signoff, identities]
-      - [signoff, identities, dpo]
-      - [identities, dpo]
-      - [identities, dpo, business]
-      - [dpo, business]
-      - [dpo, business, owner]
-      - [business, owner]
-      - [per, row]
+      - [signoff, identities, privacy]
+      - [signoff, identities, dpo, privacy]
+      - [identities, dpo, privacy]
+      - [identities, dpo, business, privacy]
+      - [dpo, business, privacy]
+      - [dpo, business, owner, privacy]
+      - [business, owner, privacy]
+      - [per, row, privacy]
 
   - must_id: "item:A.7.2.5:reg_completion_date"
     description: "PIA completion date per row"
     excerpt_keywords:
-      - [completion, date]
-      - [pia, completion]
-      - [pia, completion, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [completion, date, privacy]
+      - [pia, completion, privacy]
+      - [pia, completion, date, privacy]
+      - [per, row, privacy]
+      - [each, row, privacy]
+      - [column, containing, privacy]
+      - [each, entry, privacy]
+      - [column, header, privacy]
 
   - must_id: "item:A.7.2.5:reg_processing_activity"
     description: "Processing activity assessed per row"
     excerpt_keywords:
-      - [processing, activity]
-      - [processing, activity, assessed]
-      - [activity, assessed]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [processing, activity, privacy]
+      - [processing, activity, assessed, privacy]
+      - [activity, assessed, privacy]
+      - [per, row, privacy]
+      - [each, row, privacy]
+      - [column, containing, privacy]
+      - [each, entry, privacy]
+      - [column, header, privacy]
 
   - must_id: "item:A.7.2.5:reg_pia_id"
     description: "Unique PIA identifier per row"
     excerpt_keywords:
-      - [pia, id]
-      - [unique, pia]
-      - [unique, pia, identifier]
-      - [pia, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [pia, id, privacy]
+      - [unique, pia, privacy]
+      - [unique, pia, identifier, privacy]
+      - [pia, identifier, privacy]
+      - [per, row, privacy]
+      - [each, row, privacy]
+      - [column, containing, privacy]
+      - [each, entry, privacy]
 

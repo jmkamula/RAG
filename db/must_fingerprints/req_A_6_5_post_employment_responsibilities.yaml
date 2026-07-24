@@ -14,84 +14,84 @@ must_fingerprints:
   - must_id: "item:A.6.5:owner"
     description: "Named owner of the procedure (HR with InfoSec + Legal partners)"
     excerpt_keywords:
-      - [named, owner]
-      - [named, owner, infosec]
-      - [owner, infosec]
-      - [owner, infosec, legal]
-      - [infosec, legal]
-      - [infosec, legal, partners]
-      - [legal, partners]
-      - [procedure, step]
+      - [named, owner, responsibilities]
+      - [named, owner, infosec, responsibilities]
+      - [owner, infosec, responsibilities]
+      - [owner, infosec, legal, responsibilities]
+      - [infosec, legal, responsibilities]
+      - [infosec, legal, partners, responsibilities]
+      - [legal, partners, responsibilities]
+      - [procedure, step, responsibilities]
 
   - must_id: "item:A.6.5:offboarding_integration"
     description: "Integration with operational offboarding (A.5.11 asset return, A.5.16 identity revocation, A.5.17 credential revocation, A.5.18 access revoc"
     excerpt_keywords:
-      - [offboarding, integration]
-      - [integration, operational]
-      - [integration, operational, offboarding]
-      - [operational, offboarding]
-      - [operational, offboarding, asset]
-      - [offboarding, asset]
-      - [offboarding, asset, return]
-      - [asset, return]
+      - [offboarding, integration, responsibilities]
+      - [integration, operational, responsibilities]
+      - [integration, operational, offboarding, responsibilities]
+      - [operational, offboarding, responsibilities]
+      - [operational, offboarding, asset, responsibilities]
+      - [offboarding, asset, responsibilities]
+      - [offboarding, asset, return, responsibilities]
+      - [asset, return, responsibilities]
 
   - must_id: "item:A.6.5:role_change_scope"
     description: "Coverage of role change within the organisation, not just termination (joiner-mover-leaver — mover is the typically-missed leg)"
     excerpt_keywords:
-      - [role, change, scope]
-      - [coverage, role]
-      - [coverage, role, change]
-      - [role, change]
-      - [role, change, within]
-      - [change, within]
-      - [change, within, organisation]
-      - [within, organisation]
+      - [role, change, scope, responsibilities]
+      - [coverage, role, responsibilities]
+      - [coverage, role, change, responsibilities]
+      - [role, change, responsibilities]
+      - [role, change, within, responsibilities]
+      - [change, within, responsibilities]
+      - [change, within, organisation, responsibilities]
+      - [within, organisation, responsibilities]
 
   - must_id: "item:A.6.5:enforcement"
     description: "Enforcement approach (legal action for breach, breach of contract claims, regulatory referral where misconduct + sectoral notification oblig"
     excerpt_keywords:
-      - [enforcement, approach]
-      - [enforcement, approach, legal]
-      - [approach, legal]
-      - [approach, legal, action]
-      - [legal, action]
-      - [legal, action, breach]
-      - [action, breach]
-      - [action, breach, breach]
+      - [enforcement, approach, responsibilities]
+      - [enforcement, approach, legal, responsibilities]
+      - [approach, legal, responsibilities]
+      - [approach, legal, action, responsibilities]
+      - [legal, action, responsibilities]
+      - [legal, action, breach, responsibilities]
+      - [action, breach, responsibilities]
+      - [action, breach, breach, responsibilities]
 
   - must_id: "item:A.6.5:communication"
     description: "Communication mechanism to leavers (exit briefing with signed acknowledgment; reminder letter; intranet reference) — drives the leaver-brief"
     excerpt_keywords:
-      - [communication, mechanism]
-      - [communication, mechanism, leavers]
-      - [mechanism, leavers]
-      - [mechanism, leavers, exit]
-      - [leavers, exit]
-      - [leavers, exit, briefing]
-      - [exit, briefing]
-      - [exit, briefing, signed]
+      - [communication, mechanism, responsibilities]
+      - [communication, mechanism, leavers, responsibilities]
+      - [mechanism, leavers, responsibilities]
+      - [mechanism, leavers, exit, responsibilities]
+      - [leavers, exit, responsibilities]
+      - [leavers, exit, briefing, responsibilities]
+      - [exit, briefing, responsibilities]
+      - [exit, briefing, signed, responsibilities]
 
   - must_id: "item:A.6.5:duration"
     description: "Duration of each obligation (indefinite for confidentiality; time-limited for non-compete; per-jurisdiction limits where law caps duration)"
     excerpt_keywords:
-      - [duration, obligation]
-      - [duration, obligation, indefinite]
-      - [obligation, indefinite]
-      - [obligation, indefinite, confidentiality]
-      - [indefinite, confidentiality]
-      - [indefinite, confidentiality, time]
-      - [confidentiality, time]
-      - [confidentiality, time, limited]
+      - [duration, obligation, responsibilities]
+      - [duration, obligation, indefinite, responsibilities]
+      - [obligation, indefinite, responsibilities]
+      - [obligation, indefinite, confidentiality, responsibilities]
+      - [indefinite, confidentiality, responsibilities]
+      - [indefinite, confidentiality, time, responsibilities]
+      - [confidentiality, time, responsibilities]
+      - [confidentiality, time, limited, responsibilities]
 
   - must_id: "item:A.6.5:surviving_duties"
     description: "Surviving duties enumerated (confidentiality — typically indefinite; IP protection; non-disparagement; non-poach where lawful; non-compete w"
     excerpt_keywords:
-      - [surviving, duties]
-      - [surviving, duties, enumerated]
-      - [duties, enumerated]
-      - [duties, enumerated, confidentiality]
-      - [enumerated, confidentiality]
-      - [enumerated, confidentiality, typically]
-      - [confidentiality, typically]
-      - [confidentiality, typically, indefinite]
+      - [surviving, duties, responsibilities]
+      - [surviving, duties, enumerated, responsibilities]
+      - [duties, enumerated, responsibilities]
+      - [duties, enumerated, confidentiality, responsibilities]
+      - [enumerated, confidentiality, responsibilities]
+      - [enumerated, confidentiality, typically, responsibilities]
+      - [confidentiality, typically, responsibilities]
+      - [confidentiality, typically, indefinite, responsibilities]
 

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:7.1:resources_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:7.1:resources_program_review"
@@ -10,22 +11,51 @@ target_control: "7.1"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:7.1:rev_adequacy"
-    description: "Adequacy check — resources actually provided match the determined need per category"
-    excerpt_keywords:
-      - [adequacy, check, resources]
-
-  - must_id: "item:7.1:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, resources]
-
   - must_id: "item:7.1:rev_gap_response"
     description: "Gap response — any under-resourcing surfaced with remediation plan"
     excerpt_keywords:
       - [gap, response, resources]
+      - [gap, response, under, resources]
+      - [response, under, resources]
+      - [response, under, resourcing, resources]
+      - [under, resourcing, resources]
+      - [under, resourcing, surfaced, resources]
+      - [resourcing, surfaced, resources]
+      - [resourcing, surfaced, remediation, resources]
+
+  - must_id: "item:7.1:rev_adequacy"
+    description: "Adequacy check — resources actually provided match the determined need per category"
+    excerpt_keywords:
+      - [adequacy, check, resources]
+      - [adequacy, check, resources]
+      - [check, resources]
+      - [check, resources, actually]
+      - [resources, actually]
+      - [resources, actually, provided]
+      - [actually, provided, resources]
+      - [actually, provided, match, resources]
 
   - must_id: "item:7.1:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + finance partner + top management)"
     excerpt_keywords:
       - [reviewer, identity, resources]
+      - [reviewer, identity, isms, resources]
+      - [identity, isms, resources]
+      - [identity, isms, manager, resources]
+      - [isms, manager, resources]
+      - [isms, manager, finance, resources]
+      - [manager, finance, resources]
+      - [manager, finance, partner, resources]
+
+  - must_id: "item:7.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, resources]
+      - [review, date, within, resources]
+      - [date, within, resources]
+      - [date, within, planned, resources]
+      - [within, planned, resources]
+      - [within, planned, interval, resources]
+      - [planned, interval, resources]
+      - [per, revocation, resources]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.2:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.2:applicable_scope"
@@ -10,17 +11,39 @@ target_control: "B.8.5.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:B.8.5.2:scope_support"
+    description: "Support-access destinations (where support engineers in other regions can access customer PII)"
+    excerpt_keywords:
+      - [support, access, countries]
+      - [support, access, destinations, countries]
+      - [access, destinations, countries]
+      - [access, destinations, support, countries]
+      - [destinations, support, countries]
+      - [destinations, support, engineers, countries]
+      - [support, engineers, countries]
+      - [support, engineers, other, countries]
+
   - must_id: "item:B.8.5.2:scope_law_enforcement"
     description: "Law-enforcement exception handling documented"
     excerpt_keywords:
-      - [scope, law, enforcement, countries]
+      - [law, enforcement, countries]
+      - [law, enforcement, exception, countries]
+      - [enforcement, exception, countries]
+      - [enforcement, exception, handling, countries]
+      - [exception, handling, countries]
+      - [exception, handling, documented, countries]
+      - [handling, documented, countries]
+      - [in, scope, countries]
 
   - must_id: "item:B.8.5.2:scope_normal"
     description: "Normal-operations destinations enumerated"
     excerpt_keywords:
-      - [scope, normal, countries]
+      - [normal, operations, countries]
+      - [normal, operations, destinations, countries]
+      - [operations, destinations, countries]
+      - [operations, destinations, enumerated, countries]
+      - [destinations, enumerated, countries]
+      - [in, scope, countries]
+      - [scope, includes, countries]
+      - [applicable, to, countries]
 
-  - must_id: "item:B.8.5.2:scope_support"
-    description: "Support-access destinations (where support engineers in other regions can access customer PII)"
-    excerpt_keywords:
-      - [scope, support, countries]

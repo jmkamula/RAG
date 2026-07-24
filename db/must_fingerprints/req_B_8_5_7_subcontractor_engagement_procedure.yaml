@@ -14,34 +14,34 @@ must_fingerprints:
   - must_id: "item:B.8.5.7:proc_exclusion_justification"
     description: "Justification for any excluded Annex B control per subcontractor (§5.4.1.3)"
     excerpt_keywords:
-      - [exclusion, justification]
-      - [justification, excluded]
-      - [justification, excluded, annex]
-      - [excluded, annex]
+      - [exclusion, justification, engagement]
+      - [justification, excluded, engagement]
+      - [justification, excluded, annex, engagement]
+      - [excluded, annex, engagement]
       - [excluded, annex, subcontractor]
       - [annex, subcontractor]
-      - [procedure, step]
-      - [process, step]
+      - [procedure, step, engagement]
+      - [process, step, engagement]
 
   - must_id: "item:B.8.5.7:proc_risk_assessment_reflection"
     description: "Contract scope reflects risk assessment (§5.4.1.2) + subprocessing scope (§6.12)"
     excerpt_keywords:
-      - [risk, assessment, reflection]
-      - [contract, scope]
-      - [contract, scope, reflects]
-      - [scope, reflects]
-      - [scope, reflects, risk]
-      - [reflects, risk]
-      - [reflects, risk, assessment]
-      - [risk, assessment]
+      - [risk, assessment, reflection, engagement]
+      - [contract, scope, engagement]
+      - [contract, scope, reflects, engagement]
+      - [scope, reflects, engagement]
+      - [scope, reflects, risk, engagement]
+      - [reflects, risk, engagement]
+      - [reflects, risk, assessment, engagement]
+      - [risk, assessment, engagement]
 
   - must_id: "item:B.8.5.7:proc_annex_b_flowdown"
     description: "Annex B flow-down — subcontractor contract requires Annex B controls (default: all)"
     excerpt_keywords:
-      - [annex, b, flowdown]
-      - [annex, flow]
-      - [annex, flow, down]
-      - [flow, down]
+      - [annex, b, flowdown, engagement]
+      - [annex, flow, engagement]
+      - [annex, flow, down, engagement]
+      - [flow, down, engagement]
       - [flow, down, subcontractor]
       - [down, subcontractor]
       - [down, subcontractor, contract]
@@ -50,22 +50,22 @@ must_fingerprints:
   - must_id: "item:B.8.5.7:proc_written_contract"
     description: "Written contract with each subcontractor"
     excerpt_keywords:
-      - [written, contract]
+      - [written, contract, engagement]
       - [written, contract, subcontractor]
       - [contract, subcontractor]
-      - [procedure, step]
-      - [process, step]
-      - [responsibility, of]
+      - [procedure, step, engagement]
+      - [process, step, engagement]
+      - [responsibility, of, engagement]
 
   - must_id: "item:B.8.5.7:proc_customer_authorisation"
     description: "Customer written authorisation prior to processing (Art.28.2 general or specific authorisation)"
     excerpt_keywords:
-      - [customer, authorisation]
-      - [customer, written]
-      - [customer, written, authorisation]
-      - [written, authorisation]
-      - [written, authorisation, prior]
-      - [authorisation, prior]
-      - [authorisation, prior, processing]
-      - [prior, processing]
+      - [customer, authorisation, engagement]
+      - [customer, written, engagement]
+      - [customer, written, authorisation, engagement]
+      - [written, authorisation, engagement]
+      - [written, authorisation, prior, engagement]
+      - [authorisation, prior, engagement]
+      - [authorisation, prior, processing, engagement]
+      - [prior, processing, engagement]
 

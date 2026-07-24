@@ -14,83 +14,83 @@ must_fingerprints:
   - must_id: "item:A.6.4:owner"
     description: "Named owner of the procedure (HR with InfoSec partner)"
     excerpt_keywords:
-      - [named, owner]
-      - [named, owner, infosec]
-      - [owner, infosec]
-      - [owner, infosec, partner]
-      - [infosec, partner]
-      - [procedure, step]
-      - [responsibility, of]
+      - [named, owner, disciplinary]
+      - [named, owner, infosec, disciplinary]
+      - [owner, infosec, disciplinary]
+      - [owner, infosec, partner, disciplinary]
+      - [infosec, partner, disciplinary]
+      - [procedure, step, disciplinary]
+      - [responsibility, of, disciplinary]
 
   - must_id: "item:A.6.4:communicated"
     description: "Communicated to personnel and interested parties (in employment contract, code of conduct, intranet, awareness training)"
     excerpt_keywords:
-      - [communicated, personnel]
-      - [communicated, personnel, interested]
-      - [personnel, interested]
-      - [personnel, interested, parties]
-      - [interested, parties]
-      - [interested, parties, employment]
-      - [parties, employment]
-      - [parties, employment, contract]
+      - [communicated, personnel, disciplinary]
+      - [communicated, personnel, interested, disciplinary]
+      - [personnel, interested, disciplinary]
+      - [personnel, interested, parties, disciplinary]
+      - [interested, parties, disciplinary]
+      - [interested, parties, employment, disciplinary]
+      - [parties, employment, disciplinary]
+      - [parties, employment, contract, disciplinary]
 
   - must_id: "item:A.6.4:action_range"
     description: "Range of actions defined (verbal warning, written warning, suspension, termination, legal referral, regulator notification where mandatory)"
     excerpt_keywords:
-      - [action, range]
-      - [range, actions]
-      - [range, actions, defined]
-      - [actions, defined]
-      - [actions, defined, verbal]
-      - [defined, verbal]
-      - [defined, verbal, warning]
-      - [verbal, warning]
+      - [action, range, disciplinary]
+      - [range, actions, disciplinary]
+      - [range, actions, defined, disciplinary]
+      - [actions, defined, disciplinary]
+      - [actions, defined, verbal, disciplinary]
+      - [defined, verbal, disciplinary]
+      - [defined, verbal, warning, disciplinary]
+      - [verbal, warning, disciplinary]
 
   - must_id: "item:A.6.4:decision_authority"
     description: "Decision authority named (HR + line management + Legal as appropriate; escalation to executive for senior personnel)"
     excerpt_keywords:
-      - [decision, authority]
-      - [decision, authority, named]
-      - [authority, named]
-      - [authority, named, line]
-      - [named, line]
-      - [named, line, management]
-      - [line, management]
-      - [line, management, legal]
+      - [decision, authority, disciplinary]
+      - [decision, authority, named, disciplinary]
+      - [authority, named, disciplinary]
+      - [authority, named, line, disciplinary]
+      - [named, line, disciplinary]
+      - [named, line, management, disciplinary]
+      - [line, management, disciplinary]
+      - [line, management, legal, disciplinary]
 
   - must_id: "item:A.6.4:investigation_step"
     description: "Investigation step before action, with right of explanation (procedural fairness — drives employment-tribunal defensibility)"
     excerpt_keywords:
-      - [investigation, step]
-      - [investigation, step, before]
-      - [step, before]
-      - [step, before, action]
-      - [before, action]
-      - [before, action, right]
-      - [action, right]
-      - [action, right, explanation]
+      - [investigation, step, disciplinary]
+      - [investigation, step, before, disciplinary]
+      - [step, before, disciplinary]
+      - [step, before, action, disciplinary]
+      - [before, action, disciplinary]
+      - [before, action, right, disciplinary]
+      - [action, right, disciplinary]
+      - [action, right, explanation, disciplinary]
 
   - must_id: "item:A.6.4:violation_scope"
     description: "Scope of violations covered (policy breach, negligence, deliberate misuse, repeated non-compliance with awareness training, deliberate circu"
     excerpt_keywords:
-      - [violation, scope]
-      - [scope, violations]
-      - [scope, violations, covered]
-      - [violations, covered]
-      - [violations, covered, breach]
-      - [covered, breach]
-      - [covered, breach, negligence]
-      - [breach, negligence]
+      - [violation, scope, disciplinary]
+      - [scope, violations, disciplinary]
+      - [scope, violations, covered, disciplinary]
+      - [violations, covered, disciplinary]
+      - [violations, covered, breach, disciplinary]
+      - [covered, breach, disciplinary]
+      - [covered, breach, negligence, disciplinary]
+      - [breach, negligence, disciplinary]
 
   - must_id: "item:A.6.4:formalised"
     description: "Formalised in writing with HR + Legal review (drives consistent application; ad-hoc disciplinary action is a fairness / employment-tribunal "
     excerpt_keywords:
-      - [formalised, writing]
-      - [formalised, writing, legal]
-      - [writing, legal]
-      - [writing, legal, review]
-      - [legal, review]
-      - [legal, review, consistent]
-      - [review, consistent]
-      - [review, consistent, application]
+      - [formalised, writing, disciplinary]
+      - [formalised, writing, legal, disciplinary]
+      - [writing, legal, disciplinary]
+      - [writing, legal, review, disciplinary]
+      - [legal, review, disciplinary]
+      - [legal, review, consistent, disciplinary]
+      - [review, consistent, disciplinary]
+      - [review, consistent, application, disciplinary]
 

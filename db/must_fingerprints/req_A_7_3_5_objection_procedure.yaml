@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.3.5:proc_response_sla"
     description: "Response-time SLA stated + honoured"
     excerpt_keywords:
-      - [response, sla]
-      - [response, time]
-      - [response, time, sla]
-      - [time, sla]
-      - [time, sla, stated]
-      - [sla, stated]
-      - [sla, stated, honoured]
-      - [stated, honoured]
+      - [response, sla, providing]
+      - [response, time, providing]
+      - [response, time, sla, providing]
+      - [time, sla, providing]
+      - [time, sla, stated, providing]
+      - [sla, stated, providing]
+      - [sla, stated, honoured, providing]
+      - [stated, honoured, providing]
 
   - must_id: "item:A.7.3.5:proc_information_provision"
     description: "Information provision — subjects informed of objection right at first communication (Art.21.4)"
     excerpt_keywords:
-      - [provision, subjects]
-      - [provision, subjects, informed]
-      - [subjects, informed]
-      - [subjects, informed, objection]
-      - [informed, objection]
-      - [informed, objection, right]
-      - [objection, right]
-      - [objection, right, first]
+      - [provision, subjects, providing]
+      - [provision, subjects, informed, providing]
+      - [subjects, informed, providing]
+      - [subjects, informed, objection, providing]
+      - [informed, objection, providing]
+      - [informed, objection, right, providing]
+      - [objection, right, providing]
+      - [objection, right, first, providing]
 
   - must_id: "item:A.7.3.5:proc_balancing_test"
     description: "Legitimate-interests balancing test — org demonstrates compelling grounds override subject rights or objection prevails"
     excerpt_keywords:
-      - [balancing, test]
-      - [legitimate, interests]
-      - [legitimate, interests, balancing]
-      - [interests, balancing]
-      - [interests, balancing, test]
-      - [balancing, test, org]
-      - [test, org]
-      - [test, org, demonstrates]
+      - [balancing, test, providing]
+      - [legitimate, interests, providing]
+      - [legitimate, interests, balancing, providing]
+      - [interests, balancing, providing]
+      - [interests, balancing, test, providing]
+      - [balancing, test, org, providing]
+      - [test, org, providing]
+      - [test, org, demonstrates, providing]
 
   - must_id: "item:A.7.3.5:proc_absolute_objection"
     description: "Absolute objection handling (Art.21.2 marketing → processing must stop immediately)"
     excerpt_keywords:
-      - [absolute, objection]
-      - [absolute, objection, handling]
-      - [objection, handling]
-      - [objection, handling, art]
-      - [handling, art]
-      - [handling, art, marketing]
-      - [art, marketing]
-      - [art, marketing, processing]
+      - [absolute, objection, providing]
+      - [absolute, objection, handling, providing]
+      - [objection, handling, providing]
+      - [objection, handling, art, providing]
+      - [handling, art, providing]
+      - [handling, art, marketing, providing]
+      - [art, marketing, providing]
+      - [art, marketing, processing, providing]
 
   - must_id: "item:A.7.3.5:proc_channel_consistency"
     description: "Channel consistency with service type (online services offer online objection; §7.3.5 implementation guidance)"
     excerpt_keywords:
-      - [channel, consistency]
-      - [channel, consistency, service]
-      - [consistency, service]
-      - [consistency, service, online]
-      - [service, online]
-      - [service, online, services]
-      - [online, services]
-      - [online, services, offer]
+      - [channel, consistency, providing]
+      - [channel, consistency, service, providing]
+      - [consistency, service, providing]
+      - [consistency, service, online, providing]
+      - [service, online, providing]
+      - [service, online, services, providing]
+      - [online, services, providing]
+      - [online, services, offer, providing]
 

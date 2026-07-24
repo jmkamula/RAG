@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.3.2:reg_signoff"
     description: "DPO + Legal signoff per version"
     excerpt_keywords:
-      - [dpo, legal]
-      - [dpo, legal, signoff]
-      - [legal, signoff]
-      - [legal, signoff, version]
-      - [signoff, version]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [dpo, legal, determining]
+      - [dpo, legal, signoff, determining]
+      - [legal, signoff, determining]
+      - [legal, signoff, version, determining]
+      - [signoff, version, determining]
+      - [per, row, determining]
+      - [each, row, determining]
+      - [column, containing, determining]
 
   - must_id: "item:A.7.3.2:reg_version_effective"
     description: "Version + effective date per row"
     excerpt_keywords:
-      - [version, effective]
-      - [version, effective, date]
-      - [effective, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [version, effective, determining]
+      - [version, effective, date, determining]
+      - [effective, date, determining]
+      - [per, row, determining]
+      - [each, row, determining]
+      - [column, containing, determining]
+      - [each, entry, determining]
+      - [column, header, determining]
 
   - must_id: "item:A.7.3.2:reg_field_coverage"
     description: "Field coverage per row (which A.7.3.2 fields the notice covers)"
     excerpt_keywords:
-      - [coverage, fields]
-      - [coverage, fields, notice]
-      - [fields, notice]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [coverage, fields, determining]
+      - [coverage, fields, notice, determining]
+      - [fields, notice, determining]
+      - [per, row, determining]
+      - [each, row, determining]
+      - [column, containing, determining]
+      - [each, entry, determining]
+      - [column, header, determining]
 
   - must_id: "item:A.7.3.2:reg_audience"
     description: "Target audience per row (public / customer / employee / minor / EU / US / etc.)"
     excerpt_keywords:
-      - [target, audience]
-      - [target, audience, public]
-      - [audience, public]
-      - [audience, public, customer]
-      - [public, customer]
-      - [public, customer, employee]
-      - [customer, employee]
-      - [customer, employee, minor]
+      - [target, audience, determining]
+      - [target, audience, public, determining]
+      - [audience, public, determining]
+      - [audience, public, customer, determining]
+      - [public, customer, determining]
+      - [public, customer, employee, determining]
+      - [customer, employee, determining]
+      - [customer, employee, minor, determining]
 
   - must_id: "item:A.7.3.2:reg_notice_id"
     description: "Unique notice identifier per row"
     excerpt_keywords:
-      - [notice, id]
-      - [unique, notice]
-      - [unique, notice, identifier]
-      - [notice, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [notice, id, determining]
+      - [unique, notice, determining]
+      - [unique, notice, identifier, determining]
+      - [notice, identifier, determining]
+      - [per, row, determining]
+      - [each, row, determining]
+      - [column, containing, determining]
+      - [each, entry, determining]
 

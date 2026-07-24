@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.4:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.4:applicable_scope"
@@ -13,16 +14,36 @@ must_fingerprints:
   - must_id: "item:B.8.5.4:scope_gag_order_scope"
     description: "Gag-order-capable jurisdictions (where law can prohibit notification)"
     excerpt_keywords:
-      - [scope, gag, order, scope, notification]
+      - [gag, order, scope, notification]
+      - [gag, order, notification]
+      - [gag, order, capable, notification]
+      - [order, capable, notification]
+      - [order, capable, jurisdictions, notification]
+      - [capable, jurisdictions, notification]
+      - [capable, jurisdictions, law, notification]
+      - [jurisdictions, law, notification]
 
   - must_id: "item:B.8.5.4:scope_jurisdictions"
     description: "Jurisdictions where the org may receive legally-binding requests"
     excerpt_keywords:
-      - [scope, jurisdictions, notification]
-      - [jurisdictions, org, receive, legally, notification]
+      - [jurisdictions, org, notification]
+      - [jurisdictions, org, may, notification]
+      - [org, may, notification]
+      - [org, may, receive, notification]
+      - [may, receive, notification]
+      - [may, receive, legally, notification]
+      - [receive, legally, notification]
+      - [receive, legally, binding, notification]
 
   - must_id: "item:B.8.5.4:scope_request_types"
     description: "Request types enumerated (subpoena / court order / national security letter / regulator compulsion)"
     excerpt_keywords:
-      - [scope, request, types, notification]
+      - [request, types, notification]
       - [request, types, enumerated, notification]
+      - [types, enumerated, notification]
+      - [types, enumerated, subpoena, notification]
+      - [enumerated, subpoena, notification]
+      - [enumerated, subpoena, court, notification]
+      - [subpoena, court, notification]
+      - [subpoena, court, order, notification]
+

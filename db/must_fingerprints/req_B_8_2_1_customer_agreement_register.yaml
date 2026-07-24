@@ -14,38 +14,38 @@ must_fingerprints:
   - must_id: "item:B.8.2.1:reg_term"
     description: "Term / expiry / renewal per row"
     excerpt_keywords:
-      - [term, expiry]
-      - [term, expiry, renewal]
-      - [expiry, renewal]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [term, expiry, customer]
+      - [term, expiry, renewal, customer]
+      - [expiry, renewal, customer]
+      - [per, row, customer]
+      - [each, row, customer]
+      - [column, containing, customer]
+      - [each, entry, customer]
+      - [column, header, customer]
 
   - must_id: "item:B.8.2.1:reg_instructions_channel"
     description: "Documented-instructions channel per row (email log / ticket queue / portal)"
     excerpt_keywords:
-      - [instructions, channel]
-      - [documented, instructions]
-      - [documented, instructions, channel]
-      - [instructions, channel, email]
-      - [channel, email]
-      - [channel, email, ticket]
-      - [email, ticket]
-      - [email, ticket, queue]
+      - [instructions, channel, customer]
+      - [documented, instructions, customer]
+      - [documented, instructions, channel, customer]
+      - [instructions, channel, email, customer]
+      - [channel, email, customer]
+      - [channel, email, ticket, customer]
+      - [email, ticket, customer]
+      - [email, ticket, queue, customer]
 
   - must_id: "item:B.8.2.1:reg_assistance_coverage"
     description: "Assistance coverage per row (which Art.28.3.e-h obligations addressed)"
     excerpt_keywords:
-      - [assistance, coverage]
-      - [assistance, coverage, art]
-      - [coverage, art]
-      - [coverage, art, obligations]
-      - [art, obligations]
-      - [art, obligations, addressed]
-      - [obligations, addressed]
-      - [per, row]
+      - [assistance, coverage, customer]
+      - [assistance, coverage, art, customer]
+      - [coverage, art, customer]
+      - [coverage, art, obligations, customer]
+      - [art, obligations, customer]
+      - [art, obligations, addressed, customer]
+      - [obligations, addressed, customer]
+      - [per, row, customer]
 
   - must_id: "item:B.8.2.1:reg_agreement_reference"
     description: "Executed agreement document reference per row"
@@ -55,18 +55,18 @@ must_fingerprints:
       - [executed, agreement, document]
       - [agreement, document]
       - [agreement, document, reference]
-      - [document, reference]
-      - [per, row]
-      - [each, row]
+      - [document, reference, customer]
+      - [per, row, customer]
+      - [each, row, customer]
 
   - must_id: "item:B.8.2.1:reg_customer_id"
     description: "Customer identifier per row"
     excerpt_keywords:
       - [customer, id]
       - [customer, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, customer]
+      - [each, row, customer]
+      - [column, containing, customer]
+      - [each, entry, customer]
+      - [column, header, customer]
 

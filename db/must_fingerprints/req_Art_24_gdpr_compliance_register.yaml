@@ -14,69 +14,69 @@ must_fingerprints:
   - must_id: "item:Art.24:reg_last_assessed"
     description: "Per-row last-assessed date (drives staleness)"
     excerpt_keywords:
-      - [last, assessed]
-      - [last, assessed, date]
-      - [assessed, date]
-      - [assessed, date, staleness]
-      - [date, staleness]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [last, assessed, responsibility]
+      - [last, assessed, date, responsibility]
+      - [assessed, date, responsibility]
+      - [assessed, date, staleness, responsibility]
+      - [date, staleness, responsibility]
+      - [per, row, responsibility]
+      - [each, row, responsibility]
+      - [column, containing, responsibility]
 
   - must_id: "item:Art.24:reg_owner"
     description: "Per-row owner"
     excerpt_keywords:
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, responsibility]
+      - [each, row, responsibility]
+      - [column, containing, responsibility]
+      - [each, entry, responsibility]
+      - [column, header, responsibility]
 
   - must_id: "item:Art.24:reg_status"
     description: "Per-row implementation status (implemented / partial / planned / N/A)"
     excerpt_keywords:
-      - [implementation, status]
-      - [implementation, status, implemented]
-      - [status, implemented]
-      - [status, implemented, partial]
-      - [implemented, partial]
-      - [implemented, partial, planned]
-      - [partial, planned]
-      - [per, row]
+      - [implementation, status, responsibility]
+      - [implementation, status, implemented, responsibility]
+      - [status, implemented, responsibility]
+      - [status, implemented, partial, responsibility]
+      - [implemented, partial, responsibility]
+      - [implemented, partial, planned, responsibility]
+      - [partial, planned, responsibility]
+      - [per, row, responsibility]
 
   - must_id: "item:Art.24:reg_implementing_artefact"
     description: "Per-row link to the implementing artefact (procedure / policy / register / DPA / certification)"
     excerpt_keywords:
-      - [implementing, artefact]
-      - [implementing, artefact, dpa]
-      - [artefact, dpa]
-      - [artefact, dpa, certification]
-      - [dpa, certification]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [implementing, artefact, responsibility]
+      - [implementing, artefact, dpa, responsibility]
+      - [artefact, dpa, responsibility]
+      - [artefact, dpa, certification, responsibility]
+      - [dpa, certification, responsibility]
+      - [per, row, responsibility]
+      - [each, row, responsibility]
+      - [column, containing, responsibility]
 
   - must_id: "item:Art.24:reg_applicability"
     description: "Per-row applicability assessment (in scope / N/A with reason)"
     excerpt_keywords:
-      - [applicability, assessment]
-      - [applicability, assessment, scope]
-      - [assessment, scope]
-      - [assessment, scope, reason]
-      - [scope, reason]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [applicability, assessment, responsibility]
+      - [applicability, assessment, scope, responsibility]
+      - [assessment, scope, responsibility]
+      - [assessment, scope, reason, responsibility]
+      - [scope, reason, responsibility]
+      - [per, row, responsibility]
+      - [each, row, responsibility]
+      - [column, containing, responsibility]
 
   - must_id: "item:Art.24:reg_article_id"
     description: "Per-row GDPR article identifier"
     excerpt_keywords:
-      - [article, id]
-      - [gdpr, article]
-      - [gdpr, article, identifier]
-      - [article, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [article, id, responsibility]
+      - [gdpr, article, responsibility]
+      - [gdpr, article, identifier, responsibility]
+      - [article, identifier, responsibility]
+      - [per, row, responsibility]
+      - [each, row, responsibility]
+      - [column, containing, responsibility]
+      - [each, entry, responsibility]
 

@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:A.7.3.2:proc_signoff"
     description: "DPO + Legal signoff for notice text changes before deploy"
     excerpt_keywords:
-      - [dpo, legal]
-      - [dpo, legal, signoff]
-      - [legal, signoff]
-      - [legal, signoff, notice]
-      - [signoff, notice]
-      - [signoff, notice, text]
-      - [notice, text]
-      - [notice, text, changes]
+      - [dpo, legal, determining]
+      - [dpo, legal, signoff, determining]
+      - [legal, signoff, determining]
+      - [legal, signoff, notice, determining]
+      - [signoff, notice, determining]
+      - [signoff, notice, text, determining]
+      - [notice, text, determining]
+      - [notice, text, changes, determining]
 
   - must_id: "item:A.7.3.2:proc_update_on_change"
     description: "Update-on-change — purpose changes / new processing trigger a notice update within stated SLA"
     excerpt_keywords:
-      - [update, change]
-      - [update, change, purpose]
-      - [change, purpose]
-      - [change, purpose, changes]
-      - [purpose, changes]
-      - [purpose, changes, new]
-      - [changes, new]
-      - [changes, new, processing]
+      - [update, change, determining]
+      - [update, change, purpose, determining]
+      - [change, purpose, determining]
+      - [change, purpose, changes, determining]
+      - [purpose, changes, determining]
+      - [purpose, changes, new, determining]
+      - [changes, new, determining]
+      - [changes, new, processing, determining]
 
   - must_id: "item:A.7.3.2:proc_medium_selection"
     description: "Medium selection — which channels (privacy notice URL, layered notices, in-product prompts, contract clauses)"
     excerpt_keywords:
-      - [medium, selection]
-      - [medium, selection, channels]
-      - [selection, channels]
-      - [selection, channels, privacy]
-      - [channels, privacy]
-      - [channels, privacy, notice]
-      - [privacy, notice]
-      - [privacy, notice, url]
+      - [medium, selection, determining]
+      - [medium, selection, channels, determining]
+      - [selection, channels, determining]
+      - [selection, channels, privacy, determining]
+      - [channels, privacy, determining]
+      - [channels, privacy, notice, determining]
+      - [privacy, notice, determining]
+      - [privacy, notice, url, determining]
 
   - must_id: "item:A.7.3.2:proc_timing_rules"
     description: "Timing rules — when information is provided (prior to processing / at collection / within X days of request / just-in-time / periodic freque"
     excerpt_keywords:
-      - [timing, rules]
-      - [timing, rules, provided]
-      - [rules, provided]
-      - [rules, provided, prior]
-      - [provided, prior]
-      - [provided, prior, processing]
-      - [prior, processing]
-      - [prior, processing, collection]
+      - [timing, rules, determining]
+      - [timing, rules, provided, determining]
+      - [rules, provided, determining]
+      - [rules, provided, prior, determining]
+      - [provided, prior, determining]
+      - [provided, prior, processing, determining]
+      - [prior, processing, determining]
+      - [prior, processing, collection, determining]
 
   - must_id: "item:A.7.3.2:proc_field_catalog"
     description: "Field catalog — every information item that must be provided (purposes + controller identity + basis + source + statutory/contractual + righ"
     excerpt_keywords:
-      - [catalog, every]
-      - [catalog, every, provided]
-      - [every, provided]
-      - [every, provided, purposes]
-      - [provided, purposes]
-      - [provided, purposes, controller]
-      - [purposes, controller]
-      - [purposes, controller, identity]
+      - [catalog, every, determining]
+      - [catalog, every, provided, determining]
+      - [every, provided, determining]
+      - [every, provided, purposes, determining]
+      - [provided, purposes, determining]
+      - [provided, purposes, controller, determining]
+      - [purposes, controller, determining]
+      - [purposes, controller, identity, determining]
 

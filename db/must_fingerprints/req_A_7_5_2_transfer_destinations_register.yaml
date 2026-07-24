@@ -14,57 +14,57 @@ must_fingerprints:
   - must_id: "item:A.7.5.2:reg_public_disclosure"
     description: "Public-disclosure status per row (in privacy notice / DPA schedule)"
     excerpt_keywords:
-      - [public, disclosure]
-      - [public, disclosure, status]
-      - [disclosure, status]
-      - [disclosure, status, privacy]
-      - [status, privacy]
-      - [status, privacy, notice]
-      - [privacy, notice]
-      - [privacy, notice, dpa]
+      - [public, disclosure, countries]
+      - [public, disclosure, status, countries]
+      - [disclosure, status, countries]
+      - [disclosure, status, privacy, countries]
+      - [status, privacy, countries]
+      - [status, privacy, notice, countries]
+      - [privacy, notice, countries]
+      - [privacy, notice, dpa, countries]
 
   - must_id: "item:A.7.5.2:reg_effective_date"
     description: "Effective date per row (when destination added)"
     excerpt_keywords:
-      - [effective, date]
-      - [effective, date, destination]
-      - [date, destination]
-      - [date, destination, added]
-      - [destination, added]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [effective, date, countries]
+      - [effective, date, destination, countries]
+      - [date, destination, countries]
+      - [date, destination, added, countries]
+      - [destination, added, countries]
+      - [per, row, countries]
+      - [each, row, countries]
+      - [column, containing, countries]
 
   - must_id: "item:A.7.5.2:reg_basis_link"
     description: "Basis link per row (link to A.7.5.1 register)"
     excerpt_keywords:
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, countries]
+      - [each, row, countries]
+      - [column, containing, countries]
+      - [each, entry, countries]
+      - [column, header, countries]
 
   - must_id: "item:A.7.5.2:reg_transfer_type"
     description: "Transfer type per row (direct storage / subprocessing / support access / M&A)"
     excerpt_keywords:
-      - [transfer, direct]
-      - [transfer, direct, storage]
-      - [direct, storage]
-      - [direct, storage, subprocessing]
-      - [storage, subprocessing]
-      - [storage, subprocessing, support]
-      - [subprocessing, support]
-      - [subprocessing, support, access]
+      - [transfer, direct, countries]
+      - [transfer, direct, storage, countries]
+      - [direct, storage, countries]
+      - [direct, storage, subprocessing, countries]
+      - [storage, subprocessing, countries]
+      - [storage, subprocessing, support, countries]
+      - [subprocessing, support, countries]
+      - [subprocessing, support, access, countries]
 
   - must_id: "item:A.7.5.2:reg_destination_id"
     description: "Destination identifier per row (country ISO code or international org name)"
     excerpt_keywords:
-      - [destination, id]
-      - [destination, identifier]
-      - [destination, identifier, country]
-      - [identifier, country]
-      - [identifier, country, iso]
-      - [country, iso]
-      - [country, iso, code]
-      - [iso, code]
+      - [destination, id, countries]
+      - [destination, identifier, countries]
+      - [destination, identifier, country, countries]
+      - [identifier, country, countries]
+      - [identifier, country, iso, countries]
+      - [country, iso, countries]
+      - [country, iso, code, countries]
+      - [iso, code, countries]
 

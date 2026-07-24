@@ -14,21 +14,21 @@ must_fingerprints:
   - must_id: "item:A.7.4.1:proc_removal_procedure"
     description: "Field-removal procedure — periodic sweep of collected fields that are no longer necessary"
     excerpt_keywords:
-      - [removal, periodic]
-      - [removal, periodic, sweep]
-      - [periodic, sweep]
-      - [periodic, sweep, collected]
-      - [sweep, collected]
-      - [sweep, collected, fields]
-      - [collected, fields]
-      - [collected, fields, longer]
+      - [removal, periodic, limit]
+      - [removal, periodic, sweep, limit]
+      - [periodic, sweep, limit]
+      - [periodic, sweep, collected, limit]
+      - [sweep, collected, limit]
+      - [sweep, collected, fields, limit]
+      - [collected, fields, limit]
+      - [collected, fields, longer, limit]
 
   - must_id: "item:A.7.4.1:proc_field_review"
     description: "Data-field review — each new field added to a collection form goes through necessity review before deploy"
     excerpt_keywords:
-      - [review, new]
-      - [review, new, added]
-      - [new, added]
+      - [review, new, limit]
+      - [review, new, added, limit]
+      - [new, added, limit]
       - [new, added, collection]
       - [added, collection]
       - [added, collection, form]
@@ -38,14 +38,14 @@ must_fingerprints:
   - must_id: "item:A.7.4.1:proc_default_off"
     description: "Privacy-by-default — optional collections disabled by default; enabled only by explicit subject choice"
     excerpt_keywords:
-      - [default, off]
-      - [privacy, default]
-      - [privacy, default, optional]
-      - [default, optional]
-      - [default, optional, collections]
-      - [optional, collections]
-      - [optional, collections, disabled]
-      - [collections, disabled]
+      - [default, off, limit]
+      - [privacy, default, limit]
+      - [privacy, default, optional, limit]
+      - [default, optional, limit]
+      - [default, optional, collections, limit]
+      - [optional, collections, limit]
+      - [optional, collections, disabled, limit]
+      - [collections, disabled, limit]
 
   - must_id: "item:A.7.4.1:proc_indirect_collection"
     description: "Indirect collection scoped (weblogs / cookies / device signals / third-party enrichment) — same necessity test applied"
@@ -54,20 +54,20 @@ must_fingerprints:
       - [indirect, collection, scoped]
       - [collection, scoped]
       - [collection, scoped, weblogs]
-      - [scoped, weblogs]
-      - [scoped, weblogs, cookies]
-      - [weblogs, cookies]
-      - [weblogs, cookies, device]
+      - [scoped, weblogs, limit]
+      - [scoped, weblogs, cookies, limit]
+      - [weblogs, cookies, limit]
+      - [weblogs, cookies, device, limit]
 
   - must_id: "item:A.7.4.1:proc_necessity_test"
     description: "Necessity test per data field — adequate + relevant + necessary for stated purpose"
     excerpt_keywords:
-      - [necessity, test]
-      - [necessity, test, adequate]
-      - [test, adequate]
-      - [test, adequate, relevant]
-      - [adequate, relevant]
-      - [adequate, relevant, necessary]
-      - [relevant, necessary]
-      - [relevant, necessary, stated]
+      - [necessity, test, limit]
+      - [necessity, test, adequate, limit]
+      - [test, adequate, limit]
+      - [test, adequate, relevant, limit]
+      - [adequate, relevant, limit]
+      - [adequate, relevant, necessary, limit]
+      - [relevant, necessary, limit]
+      - [relevant, necessary, stated, limit]
 

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.36:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.36:applicable_scope"
@@ -13,16 +14,36 @@ must_fingerprints:
   - must_id: "item:Art.36:scope_excluded"
     description: "Out-of-scope processing (residual low/medium risk; DPIA-mitigated to acceptable level)"
     excerpt_keywords:
-      - [scope, excluded, prior]
+      - [out, scope, prior]
+      - [out, scope, processing, prior]
+      - [scope, processing, prior]
+      - [scope, processing, residual, prior]
+      - [processing, residual, prior]
+      - [processing, residual, low, prior]
+      - [residual, low, prior]
+      - [residual, low, medium, prior]
 
   - must_id: "item:Art.36:scope_ms_law"
     description: "MS law Art.36.5 additional consultation triggers identified per applicable jurisdiction"
     excerpt_keywords:
-      - [scope, law, prior]
-      - [law, art, additional, consultation]
+      - [ms, law, prior]
+      - [law, art, prior]
+      - [law, art, additional, prior]
+      - [art, additional, prior]
+      - [art, additional, consultation]
+      - [additional, consultation]
+      - [additional, consultation, triggers]
+      - [consultation, triggers]
 
   - must_id: "item:Art.36:scope_residual_high_risk"
     description: "Operational interpretation of 'residual high risk' (post-mitigation high likelihood × severity)"
     excerpt_keywords:
-      - [scope, residual, high, risk, prior]
-      - [operational, interpretation, residual, high, prior]
+      - [residual, high, risk, prior]
+      - [operational, interpretation, prior]
+      - [operational, interpretation, residual, prior]
+      - [interpretation, residual, prior]
+      - [interpretation, residual, high, prior]
+      - [residual, high, prior]
+      - [high, risk, prior]
+      - [high, risk, post, prior]
+

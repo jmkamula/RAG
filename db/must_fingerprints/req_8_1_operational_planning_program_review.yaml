@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:8.1:operational_planning_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:8.1:operational_planning_program_review"
@@ -11,28 +12,62 @@ target_standard: "ISO27001:2022"
 
 must_fingerprints:
   - must_id: "item:8.1:rev_c6_handoff"
-    description: "Clause 6 handoff check — every 6.1.1 planned action reached operational implementation OR was def..."
+    description: "Clause 6 handoff check — every 6.1.1 planned action reached operational implementation OR was deferred"
     excerpt_keywords:
+      - [c6, handoff, operational]
+      - [clause, handoff, operational]
       - [clause, handoff, check, operational]
+      - [handoff, check, operational]
+      - [handoff, check, every, operational]
+      - [check, every, operational]
+      - [check, every, planned, operational]
+      - [every, planned, operational]
 
-  - must_id: "item:8.1:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:8.1:rev_outsourced_oversight"
+    description: "Outsourced oversight check — every outsourced process has current supplier-side evidence (A.5.19/A.5.20)"
     excerpt_keywords:
-      - [review, date, planned, interval, operational]
+      - [outsourced, oversight, operational]
+      - [outsourced, oversight, check, operational]
+      - [oversight, check, operational]
+      - [oversight, check, every, operational]
+      - [check, every, operational]
+      - [check, every, outsourced, operational]
+      - [every, outsourced, operational]
+      - [every, outsourced, has, operational]
 
   - must_id: "item:8.1:rev_execution_completeness"
     description: "Execution completeness check — every scheduled process iteration logged"
     excerpt_keywords:
       - [execution, completeness, operational]
       - [execution, completeness, check, operational]
-
-  - must_id: "item:8.1:rev_outsourced_oversight"
-    description: "Outsourced oversight check — every outsourced process has current supplier-side evidence (A.5.19/..."
-    excerpt_keywords:
-      - [outsourced, oversight, operational]
-      - [outsourced, oversight, check, operational]
+      - [completeness, check, operational]
+      - [completeness, check, every, operational]
+      - [check, every, operational]
+      - [check, every, scheduled, operational]
+      - [every, scheduled, operational]
+      - [every, scheduled, iteration, operational]
 
   - must_id: "item:8.1:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + ops lead)"
     excerpt_keywords:
       - [reviewer, identity, operational]
+      - [reviewer, identity, isms, operational]
+      - [identity, isms, operational]
+      - [identity, isms, manager, operational]
+      - [isms, manager, operational]
+      - [isms, manager, ops, operational]
+      - [manager, ops, operational]
+      - [manager, ops, lead, operational]
+
+  - must_id: "item:8.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, operational]
+      - [review, date, within, operational]
+      - [date, within, operational]
+      - [date, within, planned, operational]
+      - [within, planned, operational]
+      - [within, planned, interval, operational]
+      - [planned, interval, operational]
+      - [per, revocation, operational]
+

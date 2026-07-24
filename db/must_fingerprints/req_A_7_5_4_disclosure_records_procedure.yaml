@@ -14,55 +14,55 @@ must_fingerprints:
   - must_id: "item:A.7.5.4:proc_retention_link"
     description: "Retention link to A.7.4.7"
     excerpt_keywords:
-      - [procedure, step]
-      - [process, step]
-      - [responsibility, of]
+      - [procedure, step, records]
+      - [process, step, records]
+      - [responsibility, of, records]
 
   - must_id: "item:A.7.5.4:proc_intake_gate"
     description: "Intake gate — disclosures gated on documented request record before release"
     excerpt_keywords:
-      - [intake, gate]
-      - [intake, gate, disclosures]
-      - [gate, disclosures]
-      - [gate, disclosures, gated]
-      - [disclosures, gated]
-      - [disclosures, gated, documented]
-      - [gated, documented]
-      - [gated, documented, request]
+      - [intake, gate, records]
+      - [intake, gate, disclosures, records]
+      - [gate, disclosures, records]
+      - [gate, disclosures, gated, records]
+      - [disclosures, gated, records]
+      - [disclosures, gated, documented, records]
+      - [gated, documented, records]
+      - [gated, documented, request, records]
 
   - must_id: "item:A.7.5.4:proc_authority_source"
     description: "Source-of-authority recording per row (contract / law / court order / regulator request)"
     excerpt_keywords:
-      - [authority, source]
-      - [source, authority]
-      - [source, authority, recording]
-      - [authority, recording]
-      - [authority, recording, contract]
-      - [recording, contract]
-      - [recording, contract, law]
-      - [contract, law]
+      - [authority, source, records]
+      - [source, authority, records]
+      - [source, authority, recording, records]
+      - [authority, recording, records]
+      - [authority, recording, contract, records]
+      - [recording, contract, records]
+      - [recording, contract, law, records]
+      - [contract, law, records]
 
   - must_id: "item:A.7.5.4:proc_investigation_disclosures"
     description: "Investigation / audit disclosures — one-off recording of lawful investigation + external audit disclosures"
     excerpt_keywords:
-      - [investigation, disclosures]
-      - [investigation, audit]
-      - [investigation, audit, disclosures]
-      - [audit, disclosures]
-      - [audit, disclosures, one]
-      - [disclosures, one]
-      - [disclosures, one, off]
-      - [one, off]
+      - [investigation, disclosures, records]
+      - [investigation, audit, records]
+      - [investigation, audit, disclosures, records]
+      - [audit, disclosures, records]
+      - [audit, disclosures, one, records]
+      - [disclosures, one, records]
+      - [disclosures, one, off, records]
+      - [one, off, records]
 
   - must_id: "item:A.7.5.4:proc_normal_disclosures"
     description: "Normal-course disclosures — recurring disclosures documented per relationship"
     excerpt_keywords:
-      - [normal, disclosures]
-      - [normal, course]
-      - [normal, course, disclosures]
-      - [course, disclosures]
-      - [course, disclosures, recurring]
-      - [disclosures, recurring]
-      - [disclosures, recurring, disclosures]
-      - [recurring, disclosures]
+      - [normal, disclosures, records]
+      - [normal, course, records]
+      - [normal, course, disclosures, records]
+      - [course, disclosures, records]
+      - [course, disclosures, recurring, records]
+      - [disclosures, recurring, records]
+      - [disclosures, recurring, disclosures, records]
+      - [recurring, disclosures, records]
 

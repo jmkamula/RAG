@@ -14,58 +14,58 @@ must_fingerprints:
   - must_id: "item:A.7.4.9:reg_audit_log_retention"
     description: "Audit log retention per row"
     excerpt_keywords:
-      - [audit, retention]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [audit, retention, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
+      - [column, header, pii]
 
   - must_id: "item:A.7.4.9:reg_auth_mechanism"
     description: "Authentication mechanism per row (mutual TLS / OAuth / API key + IP allowlist / etc.)"
     excerpt_keywords:
-      - [auth, mechanism]
-      - [authentication, mechanism]
-      - [authentication, mechanism, mutual]
-      - [mechanism, mutual]
-      - [mechanism, mutual, tls]
-      - [mutual, tls]
-      - [mutual, tls, oauth]
-      - [tls, oauth]
+      - [auth, mechanism, pii]
+      - [authentication, mechanism, pii]
+      - [authentication, mechanism, mutual, pii]
+      - [mechanism, mutual, pii]
+      - [mechanism, mutual, tls, pii]
+      - [mutual, tls, pii]
+      - [mutual, tls, oauth, pii]
+      - [tls, oauth, pii]
 
   - must_id: "item:A.7.4.9:reg_encryption"
     description: "Encryption standard per row (TLS 1.2 / TLS 1.3 / VPN / SFTP / etc.)"
     excerpt_keywords:
-      - [encryption, standard]
-      - [encryption, standard, tls]
-      - [standard, tls]
-      - [standard, tls, tls]
-      - [tls, tls]
-      - [tls, tls, vpn]
-      - [tls, vpn]
-      - [tls, vpn, sftp]
+      - [encryption, standard, pii]
+      - [encryption, standard, tls, pii]
+      - [standard, tls, pii]
+      - [standard, tls, tls, pii]
+      - [tls, tls, pii]
+      - [tls, tls, vpn, pii]
+      - [tls, vpn, pii]
+      - [tls, vpn, sftp, pii]
 
   - must_id: "item:A.7.4.9:reg_endpoint"
     description: "Source + destination endpoints per row"
     excerpt_keywords:
-      - [source, destination]
-      - [source, destination, endpoints]
-      - [destination, endpoints]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [source, destination, pii]
+      - [source, destination, endpoints, pii]
+      - [destination, endpoints, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
+      - [column, header, pii]
 
   - must_id: "item:A.7.4.9:reg_channel_id"
     description: "Unique channel identifier per row"
     excerpt_keywords:
-      - [channel, id]
-      - [unique, channel]
-      - [unique, channel, identifier]
-      - [channel, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [channel, id, pii]
+      - [unique, channel, pii]
+      - [unique, channel, identifier, pii]
+      - [channel, identifier, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
 

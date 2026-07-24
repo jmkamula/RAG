@@ -14,84 +14,84 @@ must_fingerprints:
   - must_id: "item:A.7.3.9:proc_complaint_route"
     description: "Complaint route — subjects informed of right to complain to SA (Art.77 route)"
     excerpt_keywords:
-      - [complaint, route]
-      - [complaint, route, subjects]
-      - [route, subjects]
-      - [route, subjects, informed]
-      - [subjects, informed]
-      - [subjects, informed, right]
-      - [informed, right]
-      - [informed, right, complain]
+      - [complaint, route, handling]
+      - [complaint, route, subjects, handling]
+      - [route, subjects, handling]
+      - [route, subjects, informed, handling]
+      - [subjects, informed, handling]
+      - [subjects, informed, right, handling]
+      - [informed, right, handling]
+      - [informed, right, complain, handling]
 
   - must_id: "item:A.7.3.9:proc_delay_notification"
     description: "Delay notification — where response takes longer than SLA, subject informed of reason + revised timeline"
     excerpt_keywords:
-      - [delay, notification]
-      - [delay, notification, response]
-      - [notification, response]
-      - [notification, response, takes]
-      - [response, takes]
-      - [response, takes, longer]
-      - [takes, longer]
-      - [takes, longer, than]
+      - [delay, notification, handling]
+      - [delay, notification, response, handling]
+      - [notification, response, handling]
+      - [notification, response, takes, handling]
+      - [response, takes, handling]
+      - [response, takes, longer, handling]
+      - [takes, longer, handling]
+      - [takes, longer, than, handling]
 
   - must_id: "item:A.7.3.9:proc_fee_policy"
     description: "Fee policy (jurisdictions permit fees for excessive/repetitive; document rules)"
     excerpt_keywords:
-      - [fee, jurisdictions]
-      - [fee, jurisdictions, permit]
-      - [jurisdictions, permit]
-      - [jurisdictions, permit, fees]
-      - [permit, fees]
-      - [permit, fees, excessive]
-      - [fees, excessive]
-      - [fees, excessive, repetitive]
+      - [fee, jurisdictions, handling]
+      - [fee, jurisdictions, permit, handling]
+      - [jurisdictions, permit, handling]
+      - [jurisdictions, permit, fees, handling]
+      - [permit, fees, handling]
+      - [permit, fees, excessive, handling]
+      - [fees, excessive, handling]
+      - [fees, excessive, repetitive, handling]
 
   - must_id: "item:A.7.3.9:proc_response_times"
     description: "Response times documented in privacy policy per jurisdiction"
     excerpt_keywords:
-      - [response, times]
-      - [response, times, documented]
-      - [times, documented]
-      - [times, documented, privacy]
-      - [documented, privacy]
-      - [documented, privacy, jurisdiction]
-      - [privacy, jurisdiction]
-      - [procedure, step]
+      - [response, times, handling]
+      - [response, times, documented, handling]
+      - [times, documented, handling]
+      - [times, documented, privacy, handling]
+      - [documented, privacy, handling]
+      - [documented, privacy, jurisdiction, handling]
+      - [privacy, jurisdiction, handling]
+      - [procedure, step, handling]
 
   - must_id: "item:A.7.3.9:proc_triage_routing"
     description: "Triage + routing — request classified + routed to correct A.7.3.x sub-procedure"
     excerpt_keywords:
-      - [triage, routing]
-      - [triage, routing, request]
-      - [routing, request]
-      - [routing, request, classified]
-      - [request, classified]
-      - [request, classified, routed]
-      - [classified, routed]
-      - [classified, routed, correct]
+      - [triage, routing, handling]
+      - [triage, routing, request, handling]
+      - [routing, request, handling]
+      - [routing, request, classified, handling]
+      - [request, classified, handling]
+      - [request, classified, routed, handling]
+      - [classified, routed, handling]
+      - [classified, routed, correct, handling]
 
   - must_id: "item:A.7.3.9:proc_identity_verification"
     description: "Identity verification (proportionate — not overly onerous)"
     excerpt_keywords:
-      - [identity, verification]
-      - [identity, verification, proportionate]
-      - [verification, proportionate]
-      - [verification, proportionate, not]
-      - [proportionate, not]
-      - [proportionate, not, overly]
-      - [not, overly]
-      - [not, overly, onerous]
+      - [identity, verification, handling]
+      - [identity, verification, proportionate, handling]
+      - [verification, proportionate, handling]
+      - [verification, proportionate, not, handling]
+      - [proportionate, not, handling]
+      - [proportionate, not, overly, handling]
+      - [not, overly, handling]
+      - [not, overly, onerous, handling]
 
   - must_id: "item:A.7.3.9:proc_intake_channels"
     description: "Intake channels enumerated (email, web form, in-product, phone, mail)"
     excerpt_keywords:
-      - [intake, channels]
-      - [intake, channels, enumerated]
-      - [channels, enumerated]
-      - [channels, enumerated, email]
-      - [enumerated, email]
-      - [enumerated, email, web]
-      - [email, web]
-      - [email, web, form]
+      - [intake, channels, handling]
+      - [intake, channels, enumerated, handling]
+      - [channels, enumerated, handling]
+      - [channels, enumerated, email, handling]
+      - [enumerated, email, handling]
+      - [enumerated, email, web, handling]
+      - [email, web, handling]
+      - [email, web, form, handling]
 

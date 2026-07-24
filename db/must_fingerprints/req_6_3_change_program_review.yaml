@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:6.3:change_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:6.3:change_program_review"
@@ -14,24 +15,59 @@ must_fingerprints:
     description: "A.8.32 boundary check — no technical changes mis-routed to 6.3, no ISMS changes mis-routed to A.8.32"
     excerpt_keywords:
       - [boundary, check, planning]
-
-  - must_id: "item:6.3:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, planning]
-
-  - must_id: "item:6.3:rev_register_currency"
-    description: "Register currency check — every approved change reached implementation OR was withdrawn"
-    excerpt_keywords:
-      - [register, currency, planning]
-      - [register, currency, check, planning]
-
-  - must_id: "item:6.3:rev_reviewer"
-    description: "Reviewer identity (ISMS Manager + change-management lead)"
-    excerpt_keywords:
-      - [reviewer, identity, planning]
+      - [boundary, check, technical, planning]
+      - [check, technical, planning]
+      - [check, technical, changes]
+      - [technical, changes]
+      - [technical, changes, mis]
+      - [changes, mis]
+      - [changes, mis, routed]
 
   - must_id: "item:6.3:rev_silent_changes"
     description: "Silent-change sweep — verify no scope / policy / roles changes happened without a register entry"
     excerpt_keywords:
       - [silent, changes]
+      - [silent, change, planning]
+      - [silent, change, sweep, planning]
+      - [change, sweep, planning]
+      - [change, sweep, verify, planning]
+      - [sweep, verify, planning]
+      - [sweep, verify, scope, planning]
+      - [verify, scope, planning]
+
+  - must_id: "item:6.3:rev_register_currency"
+    description: "Register currency check — every approved change reached implementation OR was withdrawn"
+    excerpt_keywords:
+      - [currency, check, planning]
+      - [currency, check, every, planning]
+      - [check, every, planning]
+      - [check, every, approved, planning]
+      - [every, approved, planning]
+      - [every, approved, change, planning]
+      - [approved, change, planning]
+      - [approved, change, reached, planning]
+
+  - must_id: "item:6.3:rev_reviewer"
+    description: "Reviewer identity (ISMS Manager + change-management lead)"
+    excerpt_keywords:
+      - [reviewer, identity, planning]
+      - [reviewer, identity, isms, planning]
+      - [identity, isms, planning]
+      - [identity, isms, manager, planning]
+      - [isms, manager, planning]
+      - [isms, manager, change, planning]
+      - [manager, change, planning]
+      - [manager, change, management, planning]
+
+  - must_id: "item:6.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, planning]
+      - [review, date, within, planning]
+      - [date, within, planning]
+      - [date, within, planned, planning]
+      - [within, planned, planning]
+      - [within, planned, interval, planning]
+      - [planned, interval, planning]
+      - [per, revocation, planning]
+

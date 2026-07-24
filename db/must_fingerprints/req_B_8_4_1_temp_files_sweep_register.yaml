@@ -14,53 +14,53 @@ must_fingerprints:
   - must_id: "item:B.8.4.1:reg_tenant_boundary_check"
     description: "Tenant-boundary integrity check per row"
     excerpt_keywords:
-      - [tenant, boundary, check]
-      - [tenant, boundary]
-      - [tenant, boundary, integrity]
-      - [boundary, integrity]
-      - [boundary, integrity, check]
-      - [integrity, check]
-      - [per, row]
-      - [each, row]
+      - [tenant, boundary, check, temporary]
+      - [tenant, boundary, temporary]
+      - [tenant, boundary, integrity, temporary]
+      - [boundary, integrity, temporary]
+      - [boundary, integrity, check, temporary]
+      - [integrity, check, temporary]
+      - [per, row, temporary]
+      - [each, row, temporary]
 
   - must_id: "item:B.8.4.1:reg_files_cleaned"
     description: "Files cleaned per row"
     excerpt_keywords:
       - [files, cleaned]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, temporary]
+      - [each, row, temporary]
+      - [column, containing, temporary]
+      - [each, entry, temporary]
+      - [column, header, temporary]
 
   - must_id: "item:B.8.4.1:reg_scan_date"
     description: "Scan date per row"
     excerpt_keywords:
-      - [scan, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [scan, date, temporary]
+      - [per, row, temporary]
+      - [each, row, temporary]
+      - [column, containing, temporary]
+      - [each, entry, temporary]
+      - [column, header, temporary]
 
   - must_id: "item:B.8.4.1:reg_system"
     description: "System / component per row"
     excerpt_keywords:
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, temporary]
+      - [each, row, temporary]
+      - [column, containing, temporary]
+      - [each, entry, temporary]
+      - [column, header, temporary]
 
   - must_id: "item:B.8.4.1:reg_sweep_id"
     description: "Unique sweep run identifier per row"
     excerpt_keywords:
-      - [sweep, id]
-      - [unique, sweep]
-      - [unique, sweep, run]
-      - [sweep, run]
-      - [sweep, run, identifier]
-      - [run, identifier]
-      - [per, row]
-      - [each, row]
+      - [sweep, id, temporary]
+      - [unique, sweep, temporary]
+      - [unique, sweep, run, temporary]
+      - [sweep, run, temporary]
+      - [sweep, run, identifier, temporary]
+      - [run, identifier, temporary]
+      - [per, row, temporary]
+      - [each, row, temporary]
 

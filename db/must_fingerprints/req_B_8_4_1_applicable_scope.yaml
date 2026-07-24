@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.4.1:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.1:applicable_scope"
@@ -10,18 +11,39 @@ target_control: "B.8.4.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.4.1:scope_infrastructure"
-    description: "Customer-serving infrastructure enumerated"
+  - must_id: "item:B.8.4.1:scope_undeletable"
+    description: "Undeletable-file circumstances with rationale + compensating controls"
     excerpt_keywords:
-      - [scope, infrastructure, temporary]
+      - [undeletable, file, temporary]
+      - [undeletable, file, circumstances, temporary]
+      - [file, circumstances, temporary]
+      - [file, circumstances, rationale, temporary]
+      - [circumstances, rationale, temporary]
+      - [circumstances, rationale, compensating, temporary]
+      - [rationale, compensating, temporary]
+      - [rationale, compensating, controls, temporary]
 
   - must_id: "item:B.8.4.1:scope_shared_paths"
     description: "Shared paths where cross-tenant temp file leakage is possible (with mitigation)"
     excerpt_keywords:
-      - [scope, shared, paths, temporary]
+      - [shared, paths, temporary]
       - [shared, paths, cross, temporary]
+      - [paths, cross, temporary]
+      - [paths, cross, tenant, temporary]
+      - [cross, tenant, temporary]
+      - [cross, tenant, temp, temporary]
+      - [tenant, temp, temporary]
+      - [tenant, temp, file, temporary]
 
-  - must_id: "item:B.8.4.1:scope_undeletable"
-    description: "Undeletable-file circumstances with rationale + compensating controls"
+  - must_id: "item:B.8.4.1:scope_infrastructure"
+    description: "Customer-serving infrastructure enumerated"
     excerpt_keywords:
-      - [scope, undeletable, temporary]
+      - [customer, serving, temporary]
+      - [customer, serving, infrastructure, temporary]
+      - [serving, infrastructure, temporary]
+      - [serving, infrastructure, enumerated, temporary]
+      - [infrastructure, enumerated, temporary]
+      - [in, scope, temporary]
+      - [scope, includes, temporary]
+      - [applicable, to, temporary]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.15:logging_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.15:logging_program_review"
@@ -10,34 +11,75 @@ target_control: "A.8.15"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.8.15:rev_date"
-    description: "Review date within the planned interval (≤180 days)"
-    excerpt_keywords:
-      - [review, date, planned, interval, logging]
-
   - must_id: "item:A.8.15:rev_findings_update"
     description: "Findings propagated to procedure / source register / scope"
     excerpt_keywords:
       - [findings, update, logging]
-      - [findings, propagated, procedure, source, logging]
+      - [findings, propagated, logging]
+      - [findings, propagated, source, logging]
+      - [propagated, source, logging]
+      - [propagated, source, scope, logging]
+      - [source, scope, logging]
+      - [per, revocation, logging]
+      - [per, revoked, identity, logging]
 
   - must_id: "item:A.8.15:rev_integrity_check"
     description: "Integrity-verification spot-check (hash chain or signature validates against retained logs)"
     excerpt_keywords:
       - [integrity, check, logging]
+      - [integrity, verification, logging]
+      - [integrity, verification, spot, logging]
+      - [verification, spot, logging]
+      - [verification, spot, check, logging]
+      - [spot, check, logging]
+      - [spot, check, hash, logging]
+      - [check, hash, logging]
 
   - must_id: "item:A.8.15:rev_retention_compliance"
     description: "Retention compliance check (no premature deletion; no over-retention of personal data)"
     excerpt_keywords:
       - [retention, compliance, logging]
       - [retention, compliance, check, logging]
-
-  - must_id: "item:A.8.15:rev_reviewer"
-    description: "Reviewer identity (Security Operations + Infrastructure)"
-    excerpt_keywords:
-      - [reviewer, identity, logging]
+      - [compliance, check, logging]
+      - [compliance, check, premature, logging]
+      - [check, premature, logging]
+      - [check, premature, deletion, logging]
+      - [premature, deletion, logging]
+      - [premature, deletion, over, logging]
 
   - must_id: "item:A.8.15:rev_silent_sources"
     description: "Silent-source detection — sources missing recent events triaged"
     excerpt_keywords:
       - [silent, sources, logging]
+      - [silent, source, logging]
+      - [silent, source, detection, logging]
+      - [source, detection, logging]
+      - [source, detection, sources, logging]
+      - [detection, sources, logging]
+      - [detection, sources, missing, logging]
+      - [sources, missing, logging]
+
+  - must_id: "item:A.8.15:rev_reviewer"
+    description: "Reviewer identity (Security Operations + Infrastructure)"
+    excerpt_keywords:
+      - [reviewer, identity, logging]
+      - [reviewer, identity, security, logging]
+      - [identity, security, logging]
+      - [identity, security, operations, logging]
+      - [security, operations, logging]
+      - [security, operations, infrastructure, logging]
+      - [operations, infrastructure, logging]
+      - [per, revocation, logging]
+
+  - must_id: "item:A.8.15:rev_date"
+    description: "Review date within the planned interval (≤180 days)"
+    excerpt_keywords:
+      - [review, date, logging]
+      - [review, date, within, logging]
+      - [date, within, logging]
+      - [date, within, planned, logging]
+      - [within, planned, logging]
+      - [within, planned, interval, logging]
+      - [planned, interval, logging]
+      - [planned, interval, 180, logging]
+

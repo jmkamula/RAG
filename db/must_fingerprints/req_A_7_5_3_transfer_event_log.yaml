@@ -14,67 +14,67 @@ must_fingerprints:
   - must_id: "item:A.7.5.3:reg_basis_link"
     description: "Basis link per row (which A.7.5.1 basis authorised this transfer)"
     excerpt_keywords:
-      - [basis, basis]
-      - [basis, basis, authorised]
-      - [basis, authorised]
+      - [basis, basis, records]
+      - [basis, basis, authorised, records]
+      - [basis, authorised, records]
       - [basis, authorised, transfer]
       - [authorised, transfer]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [per, row, records]
+      - [each, row, records]
+      - [column, containing, records]
 
   - must_id: "item:A.7.5.3:reg_timestamp"
     description: "Timestamp per row"
     excerpt_keywords:
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [per, row, records]
+      - [each, row, records]
+      - [column, containing, records]
+      - [each, entry, records]
+      - [column, header, records]
 
   - must_id: "item:A.7.5.3:reg_pii_scope"
     description: "PII scope per row (categories + volume)"
     excerpt_keywords:
-      - [pii, scope]
-      - [pii, scope, categories]
-      - [scope, categories]
-      - [scope, categories, volume]
-      - [categories, volume]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
+      - [pii, scope, records]
+      - [pii, scope, categories, records]
+      - [scope, categories, records]
+      - [scope, categories, volume, records]
+      - [categories, volume, records]
+      - [per, row, records]
+      - [each, row, records]
+      - [column, containing, records]
 
   - must_id: "item:A.7.5.3:reg_third_party"
     description: "Third party per row"
     excerpt_keywords:
-      - [third, party]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [third, party, records]
+      - [per, row, records]
+      - [each, row, records]
+      - [column, containing, records]
+      - [each, entry, records]
+      - [column, header, records]
 
   - must_id: "item:A.7.5.3:reg_direction"
     description: "Direction per row (outbound to third party / inbound from third party)"
     excerpt_keywords:
-      - [direction, outbound]
-      - [direction, outbound, third]
-      - [outbound, third]
-      - [outbound, third, party]
-      - [third, party]
-      - [third, party, inbound]
-      - [party, inbound]
-      - [party, inbound, third]
+      - [direction, outbound, records]
+      - [direction, outbound, third, records]
+      - [outbound, third, records]
+      - [outbound, third, party, records]
+      - [third, party, records]
+      - [third, party, inbound, records]
+      - [party, inbound, records]
+      - [party, inbound, third, records]
 
   - must_id: "item:A.7.5.3:reg_event_id"
     description: "Unique transfer event identifier per row"
     excerpt_keywords:
-      - [event, id]
+      - [event, id, records]
       - [unique, transfer]
       - [unique, transfer, event]
       - [transfer, event]
       - [transfer, event, identifier]
-      - [event, identifier]
-      - [per, row]
-      - [each, row]
+      - [event, identifier, records]
+      - [per, row, records]
+      - [each, row, records]
 

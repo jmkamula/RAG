@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.12:transparency_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.12:transparency_program_review"
@@ -15,24 +16,58 @@ must_fingerprints:
     excerpt_keywords:
       - [channel, coverage, transparent]
       - [channel, coverage, check, transparent]
-
-  - must_id: "item:Art.12:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, transparent]
+      - [coverage, check, transparent]
+      - [coverage, check, every, transparent]
+      - [check, every, transparent]
+      - [check, every, scope, transparent]
+      - [every, scope, transparent]
+      - [every, scope, channel, transparent]
 
   - must_id: "item:Art.12:rev_refusal_audit"
     description: "Refusal-grounds audit — refused requests sampled for legitimate Art.12.5 grounds"
     excerpt_keywords:
       - [refusal, audit, transparent]
-
-  - must_id: "item:Art.12:rev_reviewer"
-    description: "Reviewer identity (DPO + ops lead)"
-    excerpt_keywords:
-      - [reviewer, identity, transparent]
+      - [refusal, grounds, transparent]
+      - [refusal, grounds, audit, transparent]
+      - [grounds, audit, transparent]
+      - [grounds, audit, refused, transparent]
+      - [audit, refused, transparent]
+      - [audit, refused, requests, transparent]
+      - [refused, requests, transparent]
 
   - must_id: "item:Art.12:rev_sla_compliance"
     description: "SLA compliance check — one-month response rate against in-scope requests"
     excerpt_keywords:
       - [sla, compliance, transparent]
       - [sla, compliance, check, transparent]
+      - [compliance, check, transparent]
+      - [compliance, check, one, transparent]
+      - [check, one, transparent]
+      - [check, one, month, transparent]
+      - [one, month, transparent]
+      - [one, month, response, transparent]
+
+  - must_id: "item:Art.12:rev_reviewer"
+    description: "Reviewer identity (DPO + ops lead)"
+    excerpt_keywords:
+      - [reviewer, identity, transparent]
+      - [reviewer, identity, dpo, transparent]
+      - [identity, dpo, transparent]
+      - [identity, dpo, ops, transparent]
+      - [dpo, ops, transparent]
+      - [dpo, ops, lead, transparent]
+      - [ops, lead, transparent]
+      - [per, revocation, transparent]
+
+  - must_id: "item:Art.12:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, transparent]
+      - [review, date, within, transparent]
+      - [date, within, transparent]
+      - [date, within, planned, transparent]
+      - [within, planned, transparent]
+      - [within, planned, interval, transparent]
+      - [planned, interval, transparent]
+      - [per, revocation, transparent]
+

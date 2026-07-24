@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.7:cd_cs_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.7:cd_cs_program_review"
@@ -10,29 +11,62 @@ target_control: "A.7.7"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:A.7.7:rev_register_update"
+    description: "Changes propagated to the policy"
+    excerpt_keywords:
+      - [changes, propagated, clear]
+      - [per, revocation, clear]
+      - [per, revoked, identity, clear]
+      - [revocation, record, clear]
+      - [review, findings, clear]
+      - [audit, outcomes, clear]
+      - [last, reviewed, clear]
+
+  - must_id: "item:A.7.7:rev_policy_drift"
+    description: "Policy currency check (referenced policies — A.5.12 classification, A.6.7 remote-work — still aligned)"
+    excerpt_keywords:
+      - [currency, check, clear]
+      - [currency, check, referenced, clear]
+      - [check, referenced, clear]
+      - [check, referenced, policies, clear]
+      - [referenced, policies, clear]
+      - [referenced, policies, classification, clear]
+      - [policies, classification, clear]
+      - [policies, classification, remote, clear]
+
   - must_id: "item:A.7.7:rev_audit_trend"
     description: "Audit-finding trend (improving / worsening — drives policy/awareness adjustments)"
     excerpt_keywords:
       - [audit, trend, clear]
-
-  - must_id: "item:A.7.7:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, clear]
-
-  - must_id: "item:A.7.7:rev_policy_drift"
-    description: "Policy currency check (referenced policies — A.5.12 classification, A.6.7 remote-work — still ali..."
-    excerpt_keywords:
-      - [policy, drift, clear]
-      - [policy, currency, check, clear]
-
-  - must_id: "item:A.7.7:rev_register_update"
-    description: "Changes propagated to the policy"
-    excerpt_keywords:
-      - [register, update, clear]
-      - [changes, propagated, policy, clear]
+      - [audit, finding, clear]
+      - [audit, finding, trend, clear]
+      - [finding, trend, clear]
+      - [finding, trend, improving, clear]
+      - [trend, improving, clear]
+      - [trend, improving, worsening, clear]
+      - [improving, worsening, clear]
 
   - must_id: "item:A.7.7:rev_reviewer"
     description: "Reviewer identity (Facilities + InfoSec + HR partner)"
     excerpt_keywords:
       - [reviewer, identity, clear]
+      - [reviewer, identity, facilities, clear]
+      - [identity, facilities, clear]
+      - [identity, facilities, infosec, clear]
+      - [facilities, infosec, clear]
+      - [facilities, infosec, partner, clear]
+      - [infosec, partner, clear]
+      - [per, revocation, clear]
+
+  - must_id: "item:A.7.7:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, clear]
+      - [review, date, within, clear]
+      - [date, within, clear]
+      - [date, within, planned, clear]
+      - [within, planned, clear]
+      - [within, planned, interval, clear]
+      - [planned, interval, clear]
+      - [per, revocation, clear]
+

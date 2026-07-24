@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.45:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.45:applicable_scope"
@@ -10,19 +11,39 @@ target_control: "Art.45"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.45:scope_destinations"
-    description: "Adequate destinations in use (e.g. UK, Japan, US-DPF certified)"
+  - must_id: "item:Art.45:scope_excluded"
+    description: "Destinations specifically NOT relying on adequacy (fall to Art.46/49)"
     excerpt_keywords:
-      - [scope, destinations, transfers]
-      - [adequate, destinations, transfers]
+      - [destinations, specifically, transfers]
+      - [destinations, specifically, not, transfers]
+      - [specifically, not, transfers]
+      - [specifically, not, relying, transfers]
+      - [not, relying, transfers]
+      - [not, relying, adequacy, transfers]
+      - [relying, adequacy, transfers]
+      - [relying, adequacy, fall, transfers]
 
   - must_id: "item:Art.45:scope_eligibility_proof"
     description: "Eligibility-proof method per destination (Commission register / DPF list / etc.)"
     excerpt_keywords:
-      - [scope, eligibility, proof, transfers]
+      - [eligibility, proof, transfers]
+      - [eligibility, proof, method, transfers]
+      - [proof, method, transfers]
+      - [proof, method, destination, transfers]
+      - [method, destination, transfers]
+      - [method, destination, commission, transfers]
+      - [destination, commission, transfers]
+      - [destination, commission, dpf, transfers]
 
-  - must_id: "item:Art.45:scope_excluded"
-    description: "Destinations specifically NOT relying on adequacy (fall to Art.46/49)"
+  - must_id: "item:Art.45:scope_destinations"
+    description: "Adequate destinations in use (e.g"
     excerpt_keywords:
-      - [scope, excluded, transfers]
-      - [destinations, specifically, relying, adequacy, transfers]
+      - [adequate, destinations, transfers]
+      - [adequate, destinations, use, transfers]
+      - [destinations, use, transfers]
+      - [destinations, use, japan, transfers]
+      - [use, japan, transfers]
+      - [use, japan, dpf, transfers]
+      - [japan, dpf, transfers]
+      - [japan, dpf, certified, transfers]
+

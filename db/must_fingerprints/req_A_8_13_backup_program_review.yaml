@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.13:backup_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.13:backup_program_review"
@@ -10,33 +11,75 @@ target_control: "A.8.13"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.8.13:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, backup]
-
   - must_id: "item:A.8.13:rev_procedure_update"
     description: "Findings propagated to procedure / scope"
     excerpt_keywords:
-      - [procedure, update, backup]
-      - [findings, propagated, procedure, scope, backup]
-
-  - must_id: "item:A.8.13:rev_reviewer"
-    description: "Reviewer identity (Backup Operations + Infrastructure + InfoSec)"
-    excerpt_keywords:
-      - [reviewer, identity, backup]
-
-  - must_id: "item:A.8.13:rev_scope_completeness"
-    description: "Scope-completeness check (new in-scope system covered)"
-    excerpt_keywords:
-      - [scope, completeness, backup]
-
-  - must_id: "item:A.8.13:rev_test_attainment"
-    description: "Restore-test attainment per tier (cadence met, RPO met)"
-    excerpt_keywords:
-      - [test, attainment, backup]
+      - [findings, propagated, backup]
+      - [findings, propagated, scope, backup]
+      - [propagated, scope, backup]
+      - [per, revocation, backup]
+      - [per, revoked, identity, backup]
+      - [revocation, record, backup]
+      - [review, findings, backup]
+      - [audit, outcomes, backup]
 
   - must_id: "item:A.8.13:rev_threat_posture"
     description: "Threat-posture review (ransomware-resilience: immutability / air-gap / 3-2-1 still adequate)"
     excerpt_keywords:
       - [threat, posture, backup]
+      - [threat, posture, review, backup]
+      - [posture, review, backup]
+      - [posture, review, ransomware, backup]
+      - [review, ransomware, backup]
+      - [review, ransomware, resilience, backup]
+      - [ransomware, resilience, backup]
+      - [ransomware, resilience, immutability, backup]
+
+  - must_id: "item:A.8.13:rev_scope_completeness"
+    description: "Scope-completeness check (new in-scope system covered)"
+    excerpt_keywords:
+      - [scope, completeness, backup]
+      - [scope, completeness, check, backup]
+      - [completeness, check, backup]
+      - [completeness, check, new, backup]
+      - [check, new, backup]
+      - [check, new, scope, backup]
+      - [new, scope, backup]
+      - [new, scope, covered, backup]
+
+  - must_id: "item:A.8.13:rev_test_attainment"
+    description: "Restore-test attainment per tier (cadence met, RPO met)"
+    excerpt_keywords:
+      - [test, attainment, backup]
+      - [restore, test, backup]
+      - [restore, test, attainment, backup]
+      - [test, attainment, tier, backup]
+      - [attainment, tier, backup]
+      - [attainment, tier, cadence, backup]
+      - [tier, cadence, backup]
+      - [tier, cadence, met, backup]
+
+  - must_id: "item:A.8.13:rev_reviewer"
+    description: "Reviewer identity (Backup Operations + Infrastructure + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, backup]
+      - [reviewer, identity, backup]
+      - [identity, backup]
+      - [identity, backup, operations]
+      - [backup, operations]
+      - [backup, operations, infrastructure]
+      - [operations, infrastructure, backup]
+      - [operations, infrastructure, infosec, backup]
+
+  - must_id: "item:A.8.13:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, backup]
+      - [review, date, within, backup]
+      - [date, within, backup]
+      - [date, within, planned, backup]
+      - [within, planned, backup]
+      - [within, planned, interval, backup]
+      - [planned, interval, backup]
+      - [per, revocation, backup]
+

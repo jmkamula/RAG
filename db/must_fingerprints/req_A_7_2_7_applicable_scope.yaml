@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.7:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.7:applicable_scope"
@@ -10,18 +11,39 @@ target_control: "A.7.2.7"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.2.7:scope_exclusions"
+    description: "Relationships excluded (controller-processor → A.7.2.6 / independent-controllers → contract-not-arrangement)"
+    excerpt_keywords:
+      - [relationships, excluded, joint]
+      - [relationships, excluded, controller, joint]
+      - [excluded, controller, joint]
+      - [excluded, controller, processor, joint]
+      - [controller, processor, joint]
+      - [controller, processor, independent, joint]
+      - [processor, independent, joint]
+      - [processor, independent, controllers, joint]
+
   - must_id: "item:A.7.2.7:scope_arrangements_list"
     description: "In-scope arrangements enumerated (or 'none' with rationale)"
     excerpt_keywords:
-      - [scope, arrangements, list, joint]
-
-  - must_id: "item:A.7.2.7:scope_exclusions"
-    description: "Relationships excluded (controller-processor → A.7.2.6 / independent-controllers → contract-not-a..."
-    excerpt_keywords:
-      - [scope, exclusions, joint]
-      - [relationships, excluded, joint]
+      - [scope, arrangements, joint]
+      - [scope, arrangements, enumerated, joint]
+      - [arrangements, enumerated, joint]
+      - [arrangements, enumerated, none, joint]
+      - [enumerated, none, joint]
+      - [enumerated, none, rationale, joint]
+      - [none, rationale, joint]
+      - [in, scope, joint]
 
   - must_id: "item:A.7.2.7:scope_joint_test"
     description: "Joint-control test — jointly determine purposes AND means (both prongs required)"
     excerpt_keywords:
-      - [scope, joint, test]
+      - [joint, test]
+      - [joint, test, jointly]
+      - [test, jointly, joint]
+      - [test, jointly, determine, joint]
+      - [jointly, determine, joint]
+      - [jointly, determine, purposes, joint]
+      - [determine, purposes, joint]
+      - [determine, purposes, means, joint]
+

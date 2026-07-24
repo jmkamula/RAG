@@ -14,10 +14,10 @@ must_fingerprints:
   - must_id: "item:A.7.2.3:proc_special_category_overlay"
     description: "Special-category explicit-consent overlay (Art.9.2.a explicit consent for health/biometric)"
     excerpt_keywords:
-      - [special, category, overlay]
-      - [special, category]
-      - [special, category, explicit]
-      - [category, explicit]
+      - [special, category, overlay, determine]
+      - [special, category, determine]
+      - [special, category, explicit, determine]
+      - [category, explicit, determine]
       - [category, explicit, consent]
       - [explicit, consent]
       - [explicit, consent, overlay]
@@ -26,60 +26,60 @@ must_fingerprints:
   - must_id: "item:A.7.2.3:proc_children_overlay"
     description: "Children-consent overlay — parental consent thresholds per jurisdiction (age of consent varies GDPR Art.8)"
     excerpt_keywords:
-      - [children, overlay]
+      - [children, overlay, determine]
       - [children, consent]
       - [children, consent, overlay]
       - [consent, overlay]
       - [consent, overlay, parental]
-      - [overlay, parental]
+      - [overlay, parental, determine]
       - [overlay, parental, consent]
       - [parental, consent]
 
   - must_id: "item:A.7.2.3:proc_no_bundling"
     description: "No-bundling rule — consent not conditioned on service delivery except where genuinely necessary"
     excerpt_keywords:
-      - [no, bundling]
-      - [bundling, rule]
+      - [no, bundling, determine]
+      - [bundling, rule, determine]
       - [bundling, rule, consent]
       - [rule, consent]
       - [rule, consent, not]
       - [consent, not]
       - [consent, not, conditioned]
-      - [not, conditioned]
+      - [not, conditioned, determine]
 
   - must_id: "item:A.7.2.3:proc_quality_standard"
     description: "Consent-quality standard (freely given / specific / unambiguous / clear affirmative act)"
     excerpt_keywords:
-      - [quality, standard]
+      - [quality, standard, determine]
       - [consent, quality]
       - [consent, quality, standard]
-      - [quality, standard, freely]
-      - [standard, freely]
-      - [standard, freely, given]
-      - [freely, given]
-      - [freely, given, specific]
+      - [quality, standard, freely, determine]
+      - [standard, freely, determine]
+      - [standard, freely, given, determine]
+      - [freely, given, determine]
+      - [freely, given, specific, determine]
 
   - must_id: "item:A.7.2.3:proc_collection_mechanism"
     description: "Collection mechanism per channel (web form / mobile app / physical form / verbal with recording)"
     excerpt_keywords:
-      - [collection, mechanism]
-      - [collection, mechanism, channel]
-      - [mechanism, channel]
-      - [mechanism, channel, web]
-      - [channel, web]
-      - [channel, web, form]
-      - [web, form]
-      - [web, form, mobile]
+      - [collection, mechanism, determine]
+      - [collection, mechanism, channel, determine]
+      - [mechanism, channel, determine]
+      - [mechanism, channel, web, determine]
+      - [channel, web, determine]
+      - [channel, web, form, determine]
+      - [web, form, determine]
+      - [web, form, mobile, determine]
 
   - must_id: "item:A.7.2.3:proc_when_consent_required"
     description: "When-consent-required rules per activity (basis catalog references — see A.7.2.2)"
     excerpt_keywords:
       - [consent, required]
       - [consent, required, rules]
-      - [required, rules]
-      - [required, rules, activity]
-      - [rules, activity]
-      - [rules, activity, basis]
-      - [activity, basis]
-      - [activity, basis, catalog]
+      - [required, rules, determine]
+      - [required, rules, activity, determine]
+      - [rules, activity, determine]
+      - [rules, activity, basis, determine]
+      - [activity, basis, determine]
+      - [activity, basis, catalog, determine]
 

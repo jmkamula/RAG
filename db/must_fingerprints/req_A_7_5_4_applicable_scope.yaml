@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.5.4:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.4:applicable_scope"
@@ -13,16 +14,36 @@ must_fingerprints:
   - must_id: "item:A.7.5.4:scope_audit"
     description: "External audit disclosures (regulatory + customer audits)"
     excerpt_keywords:
-      - [scope, audit, records]
+      - [external, audit, records]
       - [external, audit, disclosures, records]
+      - [audit, disclosures, records]
+      - [audit, disclosures, regulatory, records]
+      - [disclosures, regulatory, records]
+      - [disclosures, regulatory, customer, records]
+      - [regulatory, customer, records]
+      - [regulatory, customer, audits, records]
 
   - must_id: "item:A.7.5.4:scope_investigation"
     description: "Investigation contexts (internal + external law enforcement)"
     excerpt_keywords:
-      - [scope, investigation, records]
       - [investigation, contexts, records]
+      - [investigation, contexts, internal, records]
+      - [contexts, internal, records]
+      - [contexts, internal, external, records]
+      - [internal, external, records]
+      - [internal, external, law, records]
+      - [external, law, records]
+      - [external, law, enforcement, records]
 
   - must_id: "item:A.7.5.4:scope_normal_disclosures"
     description: "Normal-course disclosures enumerated (recurring integrations)"
     excerpt_keywords:
-      - [scope, normal, disclosures, records]
+      - [normal, disclosures, records]
+      - [normal, course, records]
+      - [normal, course, disclosures, records]
+      - [course, disclosures, records]
+      - [course, disclosures, enumerated, records]
+      - [disclosures, enumerated, records]
+      - [disclosures, enumerated, recurring, records]
+      - [enumerated, recurring, records]
+

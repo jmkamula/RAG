@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.3:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.3:program_review"
@@ -10,27 +11,63 @@ target_control: "A.7.2.3"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.3:rev_artifact_audit"
-    description: "Artifact audit — sampled consent forms reviewed against quality standard"
-    excerpt_keywords:
-      - [artifact, audit, determine]
-
   - must_id: "item:A.7.2.3:rev_children_audit"
     description: "Children-consent audit — age-gates functioning where age-of-consent applies"
     excerpt_keywords:
       - [children, audit, determine]
-
-  - must_id: "item:A.7.2.3:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, determine]
+      - [children, consent]
+      - [children, consent, audit]
+      - [consent, audit]
+      - [consent, audit, age]
+      - [audit, age, determine]
+      - [audit, age, gates, determine]
+      - [age, gates, determine]
 
   - must_id: "item:A.7.2.3:rev_no_bundling_check"
     description: "No-bundling regression check — no service gated behind unrelated consent"
     excerpt_keywords:
-      - [bundling, check, determine]
+      - [no, bundling, check, determine]
+      - [bundling, regression, determine]
+      - [bundling, regression, check, determine]
+      - [regression, check, determine]
+      - [regression, check, service, determine]
+      - [check, service, determine]
+      - [check, service, gated, determine]
+      - [service, gated, determine]
+
+  - must_id: "item:A.7.2.3:rev_artifact_audit"
+    description: "Artifact audit — sampled consent forms reviewed against quality standard"
+    excerpt_keywords:
+      - [artifact, audit, determine]
+      - [artifact, audit, sampled, determine]
+      - [audit, sampled, determine]
+      - [audit, sampled, consent]
+      - [sampled, consent]
+      - [sampled, consent, forms]
+      - [consent, forms]
+      - [consent, forms, reviewed]
 
   - must_id: "item:A.7.2.3:rev_reviewer"
     description: "Reviewer identity (DPO + UX + Legal)"
     excerpt_keywords:
       - [reviewer, identity, determine]
+      - [reviewer, identity, dpo, determine]
+      - [identity, dpo, determine]
+      - [identity, dpo, legal, determine]
+      - [dpo, legal, determine]
+      - [per, revocation, determine]
+      - [per, revoked, identity, determine]
+      - [revocation, record, determine]
+
+  - must_id: "item:A.7.2.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, determine]
+      - [review, date, within, determine]
+      - [date, within, determine]
+      - [date, within, planned, determine]
+      - [within, planned, determine]
+      - [within, planned, interval, determine]
+      - [planned, interval, determine]
+      - [per, revocation, determine]
+

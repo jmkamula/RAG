@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.1:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.1:program_review"
@@ -10,22 +11,51 @@ target_control: "B.8.2.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.2.1:rev_coverage_check"
-    description: "Coverage check — every in-scope customer has an executed agreement on file"
-    excerpt_keywords:
-      - [coverage, check, customer]
-
-  - must_id: "item:B.8.2.1:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, customer]
-
   - must_id: "item:B.8.2.1:rev_gaps_audit"
     description: "Gaps audit — sampled agreements checked for Art.28.3.e-h assistance coverage"
     excerpt_keywords:
       - [gaps, audit, customer]
+      - [gaps, audit, sampled, customer]
+      - [audit, sampled, customer]
+      - [audit, sampled, agreements, customer]
+      - [sampled, agreements, customer]
+      - [sampled, agreements, checked, customer]
+      - [agreements, checked, customer]
+      - [agreements, checked, art, customer]
+
+  - must_id: "item:B.8.2.1:rev_coverage_check"
+    description: "Coverage check — every in-scope customer has an executed agreement on file"
+    excerpt_keywords:
+      - [coverage, check, customer]
+      - [coverage, check, every, customer]
+      - [check, every, customer]
+      - [check, every, scope, customer]
+      - [every, scope, customer]
+      - [every, scope, customer]
+      - [scope, customer]
+      - [scope, customer, has]
 
   - must_id: "item:B.8.2.1:rev_reviewer"
     description: "Reviewer identity (Legal + DPO + Sales Ops)"
     excerpt_keywords:
       - [reviewer, identity, customer]
+      - [reviewer, identity, legal, customer]
+      - [identity, legal, customer]
+      - [identity, legal, dpo, customer]
+      - [legal, dpo, customer]
+      - [legal, dpo, sales, customer]
+      - [dpo, sales, customer]
+      - [dpo, sales, ops, customer]
+
+  - must_id: "item:B.8.2.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, customer]
+      - [review, date, within, customer]
+      - [date, within, customer]
+      - [date, within, planned, customer]
+      - [within, planned, customer]
+      - [within, planned, interval, customer]
+      - [planned, interval, customer]
+      - [per, revocation, customer]
+

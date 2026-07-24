@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.29:processing_under_authority_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.29:processing_under_authority_program_review"
@@ -10,27 +11,63 @@ target_control: "Art.29"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.29:rev_authorisation_completeness"
-    description: "Authorisation completeness — every person with access has a register row"
-    excerpt_keywords:
-      - [authorisation, completeness, authority]
-
-  - must_id: "item:Art.29:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, authority]
-
   - must_id: "item:Art.29:rev_instruction_drift"
-    description: "Instruction-drift sweep — sample processing activities to verify they stay within documented cont..."
+    description: "Instruction-drift sweep — sample processing activities to verify they stay within documented controller instructions"
     excerpt_keywords:
-      - [instruction, drift, authority]
-
-  - must_id: "item:Art.29:rev_reviewer"
-    description: "Reviewer identity (DPO + HR + ops lead)"
-    excerpt_keywords:
-      - [reviewer, identity, authority]
+      - [instruction, drift, under]
+      - [instruction, drift, sweep, under]
+      - [drift, sweep, under]
+      - [drift, sweep, sample, under]
+      - [sweep, sample, under]
+      - [sweep, sample, processing, under]
+      - [sample, processing, under]
+      - [sample, processing, activities, under]
 
   - must_id: "item:Art.29:rev_training_currency"
     description: "Training currency — A.6.3 / 7.3 training current for every authorised person"
     excerpt_keywords:
-      - [training, currency, authority]
+      - [training, currency, under]
+      - [training, currency, training, under]
+      - [currency, training, under]
+      - [currency, training, current, under]
+      - [training, current, under]
+      - [training, current, every, under]
+      - [current, every, under]
+      - [current, every, authorised, under]
+
+  - must_id: "item:Art.29:rev_authorisation_completeness"
+    description: "Authorisation completeness — every person with access has a register row"
+    excerpt_keywords:
+      - [authorisation, completeness, under]
+      - [authorisation, completeness, every, under]
+      - [completeness, every, under]
+      - [completeness, every, person, under]
+      - [every, person, under]
+      - [every, person, access, under]
+      - [person, access, under]
+      - [person, access, has, under]
+
+  - must_id: "item:Art.29:rev_reviewer"
+    description: "Reviewer identity (DPO + HR + ops lead)"
+    excerpt_keywords:
+      - [reviewer, identity, under]
+      - [reviewer, identity, dpo, under]
+      - [identity, dpo, under]
+      - [identity, dpo, ops, under]
+      - [dpo, ops, under]
+      - [dpo, ops, lead, under]
+      - [ops, lead, under]
+      - [per, revocation, under]
+
+  - must_id: "item:Art.29:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, under]
+      - [review, date, within, under]
+      - [date, within, under]
+      - [date, within, planned, under]
+      - [within, planned, under]
+      - [within, planned, interval, under]
+      - [planned, interval, under]
+      - [per, revocation, under]
+

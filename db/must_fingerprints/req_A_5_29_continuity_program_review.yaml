@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.5.29:continuity_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.29:continuity_program_review"
@@ -11,36 +12,86 @@ target_standard: "ISO27001:2022"
 
 must_fingerprints:
   - must_id: "item:A.5.29:rev_actions"
-    description: "Action items captured (e.g. add scenario, retire stale fallback, refresh communication paths, exp..."
+    description: "Action items captured (e.g"
     excerpt_keywords:
-      - [action, items, captured, disruption]
+      - [action, items, during]
+      - [action, items, captured, during]
+      - [items, captured, during]
+      - [items, captured, add, during]
+      - [captured, add, during]
+      - [captured, add, scenario, during]
+      - [add, scenario, during]
+      - [add, scenario, retire, during]
+
+  - must_id: "item:A.5.29:rev_real_divergence"
+    description: "Real-disruption divergence analysis (where actual disruptions diverged from the plan — what was missing? what assumed? what proved unnecessa"
+    excerpt_keywords:
+      - [real, divergence, during]
+      - [real, disruption]
+      - [real, disruption, divergence]
+      - [disruption, divergence]
+      - [disruption, divergence, analysis]
+      - [divergence, analysis, during]
+      - [divergence, analysis, actual, during]
+      - [analysis, actual, during]
+
+  - must_id: "item:A.5.29:rev_fallback_validity"
+    description: "Fallback-validity check (sample of fallbacks re-validated: would they actually work? are dependencies still in place? are owners still in ro"
+    excerpt_keywords:
+      - [fallback, validity, during]
+      - [fallback, validity, check, during]
+      - [validity, check, during]
+      - [validity, check, sample, during]
+      - [check, sample, during]
+      - [check, sample, fallbacks, during]
+      - [sample, fallbacks, during]
+      - [sample, fallbacks, validated, during]
+
+  - must_id: "item:A.5.29:rev_test_results"
+    description: "Test-result analysis (last N tests reviewed; gaps surfaced; remediation per gap; ratio of scenarios tested vs total)"
+    excerpt_keywords:
+      - [test, results, during]
+      - [test, result, during]
+      - [test, result, analysis, during]
+      - [result, analysis, during]
+      - [result, analysis, last, during]
+      - [analysis, last, during]
+      - [analysis, last, tests, during]
+      - [last, tests, during]
+
+  - must_id: "item:A.5.29:rev_scenario_currency"
+    description: "Scenario-currency audit (each scenario in the register re-validated: still plausible? still relevant? new scenarios that should be added?)"
+    excerpt_keywords:
+      - [scenario, currency, during]
+      - [scenario, currency, audit, during]
+      - [currency, audit, during]
+      - [currency, audit, scenario, during]
+      - [audit, scenario, during]
+      - [audit, scenario, validated, during]
+      - [scenario, validated, during]
+      - [scenario, validated, still, during]
+
+  - must_id: "item:A.5.29:rev_reviewer"
+    description: "Reviewer identity (CISO + BCP-program owner + Legal where regulatory comms scope; supplier-management lead where supplier-dep scenarios in s"
+    excerpt_keywords:
+      - [reviewer, identity, during]
+      - [reviewer, identity, ciso, during]
+      - [identity, ciso, during]
+      - [identity, ciso, bcp, during]
+      - [ciso, bcp, during]
+      - [ciso, bcp, program, during]
+      - [bcp, program, during]
+      - [bcp, program, owner, during]
 
   - must_id: "item:A.5.29:rev_date"
     description: "Review date within the planned 180-day interval"
     excerpt_keywords:
-      - [review, date, planned, disruption]
+      - [review, date, during]
+      - [review, date, within, during]
+      - [date, within, during]
+      - [date, within, planned, during]
+      - [within, planned, during]
+      - [within, planned, 180, during]
+      - [planned, 180, during]
+      - [planned, 180, day, during]
 
-  - must_id: "item:A.5.29:rev_fallback_validity"
-    description: "Fallback-validity check (sample of fallbacks re-validated: would they actually work? are dependen..."
-    excerpt_keywords:
-      - [fallback, validity, disruption]
-
-  - must_id: "item:A.5.29:rev_real_divergence"
-    description: "Real-disruption divergence analysis (where actual disruptions diverged from the plan — what was m..."
-    excerpt_keywords:
-      - [real, divergence, disruption]
-
-  - must_id: "item:A.5.29:rev_reviewer"
-    description: "Reviewer identity (CISO + BCP-program owner + Legal where regulatory comms scope; supplier-manage..."
-    excerpt_keywords:
-      - [reviewer, identity, disruption]
-
-  - must_id: "item:A.5.29:rev_scenario_currency"
-    description: "Scenario-currency audit (each scenario in the register re-validated: still plausible? still relev..."
-    excerpt_keywords:
-      - [scenario, currency, disruption]
-
-  - must_id: "item:A.5.29:rev_test_results"
-    description: "Test-result analysis (last N tests reviewed; gaps surfaced; remediation per gap; ratio of scenari..."
-    excerpt_keywords:
-      - [test, results, disruption]

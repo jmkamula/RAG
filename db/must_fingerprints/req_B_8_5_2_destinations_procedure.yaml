@@ -14,45 +14,45 @@ must_fingerprints:
   - must_id: "item:B.8.5.2:proc_alignment_8_5_1"
     description: "Alignment with B.8.5.1 basis register"
     excerpt_keywords:
-      - [alignment, 8, 5, 1]
-      - [alignment, basis]
-      - [procedure, step]
-      - [process, step]
-      - [responsibility, of]
+      - [alignment, 8, 5, 1, countries]
+      - [alignment, basis, countries]
+      - [procedure, step, countries]
+      - [process, step, countries]
+      - [responsibility, of, countries]
 
   - must_id: "item:B.8.5.2:proc_law_enforcement_exception"
     description: "Law enforcement exception handled per §8.5.4 + §8.5.5"
     excerpt_keywords:
-      - [law, enforcement, exception]
-      - [law, enforcement]
-      - [enforcement, exception]
-      - [enforcement, exception, handled]
-      - [exception, handled]
-      - [procedure, step]
-      - [process, step]
-      - [responsibility, of]
+      - [law, enforcement, exception, countries]
+      - [law, enforcement, countries]
+      - [enforcement, exception, countries]
+      - [enforcement, exception, handled, countries]
+      - [exception, handled, countries]
+      - [procedure, step, countries]
+      - [process, step, countries]
+      - [responsibility, of, countries]
 
   - must_id: "item:B.8.5.2:proc_subprocessor_inclusion"
     description: "Subprocessor-derived destinations included"
     excerpt_keywords:
-      - [subprocessor, inclusion]
-      - [subprocessor, derived]
-      - [subprocessor, derived, destinations]
-      - [derived, destinations]
-      - [derived, destinations, included]
-      - [destinations, included]
-      - [procedure, step]
-      - [process, step]
+      - [subprocessor, inclusion, countries]
+      - [subprocessor, derived, countries]
+      - [subprocessor, derived, destinations, countries]
+      - [derived, destinations, countries]
+      - [derived, destinations, included, countries]
+      - [destinations, included, countries]
+      - [procedure, step, countries]
+      - [process, step, countries]
 
   - must_id: "item:B.8.5.2:proc_destinations_publication"
     description: "Destinations publication per customer (customer receives the list of countries + international orgs)"
     excerpt_keywords:
-      - [destinations, publication]
-      - [destinations, publication, customer]
-      - [publication, customer]
-      - [publication, customer, customer]
-      - [customer, customer]
-      - [customer, customer, receives]
-      - [customer, receives]
+      - [destinations, publication, countries]
+      - [destinations, publication, customer, countries]
+      - [publication, customer, countries]
+      - [publication, customer, customer, countries]
+      - [customer, customer, countries]
+      - [customer, customer, receives, countries]
+      - [customer, receives, countries]
       - [customer, receives, countries]
 

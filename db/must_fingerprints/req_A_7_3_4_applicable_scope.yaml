@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.4:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.4:applicable_scope"
@@ -10,17 +11,39 @@ target_control: "A.7.3.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.3.4:scope_jurisdiction_variance"
+    description: "Jurisdiction-specific variations (some jurisdictions restrict when withdrawal is possible)"
+    excerpt_keywords:
+      - [jurisdiction, variance, providing]
+      - [jurisdiction, specific, providing]
+      - [jurisdiction, specific, variations, providing]
+      - [specific, variations, providing]
+      - [specific, variations, some, providing]
+      - [variations, some, providing]
+      - [variations, some, jurisdictions, providing]
+      - [some, jurisdictions, providing]
+
   - must_id: "item:A.7.3.4:scope_channel_map"
     description: "Per-activity collection channel → withdrawal channel map"
     excerpt_keywords:
-      - [scope, channel, map, providing]
+      - [channel, map, providing]
+      - [activity, collection, providing]
+      - [activity, collection, channel, providing]
+      - [collection, channel, providing]
+      - [collection, channel, withdrawal, providing]
+      - [channel, withdrawal, providing]
+      - [channel, withdrawal, channel, providing]
+      - [withdrawal, channel, providing]
 
   - must_id: "item:A.7.3.4:scope_consent_activities"
     description: "Consent-based activities enumerated (link to A.7.2.2 lawful basis register)"
     excerpt_keywords:
-      - [scope, consent, activities, providing]
+      - [consent, activities, providing]
+      - [consent, based, providing]
+      - [consent, based, activities, providing]
+      - [based, activities, providing]
+      - [based, activities, enumerated, providing]
+      - [activities, enumerated, providing]
+      - [activities, enumerated, lawful, providing]
+      - [enumerated, lawful, providing]
 
-  - must_id: "item:A.7.3.4:scope_jurisdiction_variance"
-    description: "Jurisdiction-specific variations (some jurisdictions restrict when withdrawal is possible)"
-    excerpt_keywords:
-      - [scope, jurisdiction, variance, providing]

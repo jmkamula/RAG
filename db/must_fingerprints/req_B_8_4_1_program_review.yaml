@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.4.1:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.1:program_review"
@@ -10,23 +11,51 @@ target_control: "B.8.4.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.4.1:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:B.8.4.1:rev_tenant_isolation_test"
+    description: "Tenant isolation test — sampled sweeps confirmed no cross-tenant temp file spillover"
     excerpt_keywords:
-      - [review, date, planned, interval, temporary]
-
-  - must_id: "item:B.8.4.1:rev_reviewer"
-    description: "Reviewer identity (Platform Ops + DPO)"
-    excerpt_keywords:
-      - [reviewer, identity, temporary]
+      - [tenant, isolation, test, temporary]
+      - [tenant, isolation, temporary]
+      - [isolation, test, temporary]
+      - [isolation, test, sampled, temporary]
+      - [test, sampled, temporary]
+      - [test, sampled, sweeps, temporary]
+      - [sampled, sweeps, temporary]
+      - [sampled, sweeps, confirmed, temporary]
 
   - must_id: "item:B.8.4.1:rev_sweep_health"
     description: "Sweep health check"
     excerpt_keywords:
       - [sweep, health, temporary]
       - [sweep, health, check, temporary]
+      - [health, check, temporary]
+      - [per, revocation, temporary]
+      - [per, revoked, identity, temporary]
+      - [revocation, record, temporary]
+      - [review, findings, temporary]
+      - [audit, outcomes, temporary]
 
-  - must_id: "item:B.8.4.1:rev_tenant_isolation_test"
-    description: "Tenant isolation test — sampled sweeps confirmed no cross-tenant temp file spillover"
+  - must_id: "item:B.8.4.1:rev_reviewer"
+    description: "Reviewer identity (Platform Ops + DPO)"
     excerpt_keywords:
-      - [tenant, isolation, test, temporary]
+      - [reviewer, identity, temporary]
+      - [reviewer, identity, platform, temporary]
+      - [identity, platform, temporary]
+      - [identity, platform, ops, temporary]
+      - [platform, ops, temporary]
+      - [platform, ops, dpo, temporary]
+      - [ops, dpo, temporary]
+      - [per, revocation, temporary]
+
+  - must_id: "item:B.8.4.1:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, temporary]
+      - [review, date, within, temporary]
+      - [date, within, temporary]
+      - [date, within, planned, temporary]
+      - [within, planned, temporary]
+      - [within, planned, interval, temporary]
+      - [planned, interval, temporary]
+      - [per, revocation, temporary]
+

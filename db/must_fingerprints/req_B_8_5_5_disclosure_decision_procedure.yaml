@@ -14,47 +14,47 @@ must_fingerprints:
   - must_id: "item:B.8.5.5:proc_source_variety"
     description: "Source variety awareness — courts, tribunals, admin authorities, any jurisdiction"
     excerpt_keywords:
-      - [source, variety]
-      - [source, variety, awareness]
-      - [variety, awareness]
-      - [variety, awareness, courts]
-      - [awareness, courts]
-      - [awareness, courts, tribunals]
-      - [courts, tribunals]
-      - [courts, tribunals, admin]
+      - [source, variety, legally]
+      - [source, variety, awareness, legally]
+      - [variety, awareness, legally]
+      - [variety, awareness, courts, legally]
+      - [awareness, courts, legally]
+      - [awareness, courts, tribunals, legally]
+      - [courts, tribunals, legally]
+      - [courts, tribunals, admin, legally]
 
   - must_id: "item:B.8.5.5:proc_contractual_scope"
     description: "Contractually-agreed scope — what customer-authorised requests look like (per B.8.2.1 agreement clauses)"
     excerpt_keywords:
-      - [contractual, scope]
-      - [contractually, agreed]
-      - [contractually, agreed, scope]
-      - [agreed, scope]
-      - [agreed, scope, customer]
-      - [scope, customer]
-      - [scope, customer, authorised]
-      - [customer, authorised]
+      - [contractual, scope, legally]
+      - [contractually, agreed, legally]
+      - [contractually, agreed, scope, legally]
+      - [agreed, scope, legally]
+      - [agreed, scope, customer, legally]
+      - [scope, customer, legally]
+      - [scope, customer, authorised, legally]
+      - [customer, authorised, legally]
 
   - must_id: "item:B.8.5.5:proc_customer_consultation"
     description: "Customer consultation before disclosure of contractually-agreed requests"
     excerpt_keywords:
-      - [customer, consultation]
-      - [customer, consultation, before]
-      - [consultation, before]
-      - [consultation, before, disclosure]
-      - [before, disclosure]
-      - [before, disclosure, contractually]
-      - [disclosure, contractually]
-      - [disclosure, contractually, agreed]
+      - [customer, consultation, legally]
+      - [customer, consultation, before, legally]
+      - [consultation, before, legally]
+      - [consultation, before, disclosure, legally]
+      - [before, disclosure, legally]
+      - [before, disclosure, contractually, legally]
+      - [disclosure, contractually, legally]
+      - [disclosure, contractually, agreed, legally]
 
   - must_id: "item:B.8.5.5:proc_default_reject"
     description: "Default reject rule — non-binding disclosure requests rejected"
     excerpt_keywords:
-      - [default, reject]
-      - [default, reject, rule]
-      - [reject, rule]
-      - [reject, rule, non]
-      - [rule, non]
+      - [default, reject, legally]
+      - [default, reject, rule, legally]
+      - [reject, rule, legally]
+      - [reject, rule, non, legally]
+      - [rule, non, legally]
       - [rule, non, binding]
       - [non, binding]
       - [non, binding, disclosure]
@@ -65,9 +65,9 @@ must_fingerprints:
       - [binding, assessment]
       - [binding, not]
       - [binding, not, assessment]
-      - [not, assessment]
-      - [not, assessment, legal]
-      - [assessment, legal]
-      - [assessment, legal, counsel]
-      - [legal, counsel]
+      - [not, assessment, legally]
+      - [not, assessment, legal, legally]
+      - [assessment, legal, legally]
+      - [assessment, legal, counsel, legally]
+      - [legal, counsel, legally]
 

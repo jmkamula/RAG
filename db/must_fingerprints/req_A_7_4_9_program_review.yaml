@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.9:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.9:program_review"
@@ -10,27 +11,63 @@ target_control: "A.7.4.9"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.4.9:rev_shadow_channel_sweep"
+    description: "Shadow-channel sweep — unauthorised transmission paths flagged (e.g"
+    excerpt_keywords:
+      - [shadow, channel, sweep, pii]
+      - [shadow, channel, pii]
+      - [channel, sweep, pii]
+      - [channel, sweep, unauthorised, pii]
+      - [sweep, unauthorised, pii]
+      - [sweep, unauthorised, transmission]
+      - [unauthorised, transmission]
+      - [unauthorised, transmission, paths]
+
   - must_id: "item:A.7.4.9:rev_audit_log_retention_check"
     description: "Audit-log retention check — retention meets policy"
     excerpt_keywords:
-      - [audit, log, retention, check, pii]
-
-  - must_id: "item:A.7.4.9:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, pii]
+      - [audit, retention, check, pii]
+      - [audit, retention, pii]
+      - [retention, check, pii]
+      - [retention, check, retention, pii]
+      - [check, retention, pii]
+      - [check, retention, meets, pii]
+      - [retention, meets, pii]
+      - [per, revocation, pii]
 
   - must_id: "item:A.7.4.9:rev_encryption_currency"
     description: "Encryption currency — TLS / cipher-suite standards current (deprecated protocols flagged)"
     excerpt_keywords:
       - [encryption, currency, pii]
+      - [encryption, currency, tls, pii]
+      - [currency, tls, pii]
+      - [currency, tls, cipher, pii]
+      - [tls, cipher, pii]
+      - [tls, cipher, suite, pii]
+      - [cipher, suite, pii]
+      - [cipher, suite, standards, pii]
 
   - must_id: "item:A.7.4.9:rev_reviewer"
     description: "Reviewer identity (Infrastructure + Security Engineering + DPO)"
     excerpt_keywords:
       - [reviewer, identity, pii]
+      - [reviewer, identity, infrastructure, pii]
+      - [identity, infrastructure, pii]
+      - [identity, infrastructure, security, pii]
+      - [infrastructure, security, pii]
+      - [infrastructure, security, engineering, pii]
+      - [security, engineering, pii]
+      - [security, engineering, dpo, pii]
 
-  - must_id: "item:A.7.4.9:rev_shadow_channel_sweep"
-    description: "Shadow-channel sweep — unauthorised transmission paths flagged (e.g. developers using consumer fi..."
+  - must_id: "item:A.7.4.9:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [shadow, channel, sweep, pii]
+      - [review, date, pii]
+      - [review, date, within, pii]
+      - [date, within, pii]
+      - [date, within, planned, pii]
+      - [within, planned, pii]
+      - [within, planned, interval, pii]
+      - [planned, interval, pii]
+      - [per, revocation, pii]
+

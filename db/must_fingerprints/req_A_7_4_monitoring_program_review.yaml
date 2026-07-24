@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4:monitoring_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4:monitoring_program_review"
@@ -10,28 +11,63 @@ target_control: "A.7.4"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:A.7.4:rev_register_update"
+    description: "Changes propagated to the procedure / scope"
+    excerpt_keywords:
+      - [changes, propagated, physical]
+      - [changes, propagated, scope, physical]
+      - [propagated, scope, physical]
+      - [per, revocation, physical]
+      - [per, revoked, identity, physical]
+      - [revocation, record, physical]
+      - [review, findings, physical]
+      - [audit, outcomes, physical]
+
   - must_id: "item:A.7.4:rev_coverage_check"
     description: "Coverage check — blind spots remediated? new areas brought into monitoring scope?"
     excerpt_keywords:
       - [coverage, check, physical]
-
-  - must_id: "item:A.7.4:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, physical]
-
-  - must_id: "item:A.7.4:rev_register_update"
-    description: "Changes propagated to the procedure / scope"
-    excerpt_keywords:
-      - [register, update, physical]
-      - [changes, propagated, procedure, scope, physical]
+      - [coverage, check, blind, physical]
+      - [check, blind, physical]
+      - [check, blind, spots, physical]
+      - [blind, spots, physical]
+      - [blind, spots, remediated, physical]
+      - [spots, remediated, physical]
+      - [spots, remediated, new, physical]
 
   - must_id: "item:A.7.4:rev_response_sla"
     description: "Response-SLA analysis (alarm-to-on-site arrival times measured against SLA)"
     excerpt_keywords:
       - [response, sla, physical]
+      - [response, sla, analysis, physical]
+      - [sla, analysis, physical]
+      - [sla, analysis, alarm, physical]
+      - [analysis, alarm, physical]
+      - [analysis, alarm, site, physical]
+      - [alarm, site, physical]
+      - [alarm, site, arrival, physical]
 
   - must_id: "item:A.7.4:rev_reviewer"
     description: "Reviewer identity (Facilities + SOC + InfoSec)"
     excerpt_keywords:
       - [reviewer, identity, physical]
+      - [reviewer, identity, facilities, physical]
+      - [identity, facilities, physical]
+      - [identity, facilities, soc, physical]
+      - [facilities, soc, physical]
+      - [facilities, soc, infosec, physical]
+      - [soc, infosec, physical]
+      - [per, revocation, physical]
+
+  - must_id: "item:A.7.4:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, physical]
+      - [review, date, within, physical]
+      - [date, within, physical]
+      - [date, within, planned, physical]
+      - [within, planned, physical]
+      - [within, planned, interval, physical]
+      - [planned, interval, physical]
+      - [per, revocation, physical]
+

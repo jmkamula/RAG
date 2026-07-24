@@ -14,72 +14,72 @@ must_fingerprints:
   - must_id: "item:6.1.2:personal_data"
     description: "Personal data processing risks explicitly addressed"
     excerpt_keywords:
-      - [personal, processing]
-      - [personal, processing, risks]
-      - [processing, risks]
-      - [processing, risks, explicitly]
-      - [risks, explicitly]
-      - [risks, explicitly, addressed]
-      - [explicitly, addressed]
+      - [personal, processing, risk]
+      - [personal, processing, risks, risk]
+      - [processing, risks, risk]
+      - [processing, risks, explicitly, risk]
+      - [risks, explicitly, risk]
+      - [risks, explicitly, addressed, risk]
+      - [explicitly, addressed, risk]
 
   - must_id: "item:6.1.2:evaluation"
     description: "Risks evaluated against acceptance criteria"
     excerpt_keywords:
-      - [risks, evaluated]
-      - [risks, evaluated, against]
-      - [evaluated, against]
-      - [evaluated, against, acceptance]
-      - [against, acceptance]
-      - [against, acceptance, criteria]
-      - [acceptance, criteria]
+      - [risks, evaluated, risk]
+      - [risks, evaluated, against, risk]
+      - [evaluated, against, risk]
+      - [evaluated, against, acceptance, risk]
+      - [against, acceptance, risk]
+      - [against, acceptance, criteria, risk]
+      - [acceptance, criteria, risk]
 
   - must_id: "item:6.1.2:likelihood"
     description: "Realistic likelihood assessed"
     excerpt_keywords:
-      - [realistic, likelihood]
-      - [realistic, likelihood, assessed]
-      - [likelihood, assessed]
+      - [realistic, likelihood, risk]
+      - [realistic, likelihood, assessed, risk]
+      - [likelihood, assessed, risk]
 
   - must_id: "item:6.1.2:consequences"
     description: "Potential consequences analysed"
     excerpt_keywords:
-      - [potential, consequences]
-      - [potential, consequences, analysed]
-      - [consequences, analysed]
+      - [potential, consequences, risk]
+      - [potential, consequences, analysed, risk]
+      - [consequences, analysed, risk]
 
   - must_id: "item:6.1.2:owners"
     description: "Risk owners identified"
     excerpt_keywords:
       - [risk, owners]
       - [risk, owners, identified]
-      - [owners, identified]
+      - [owners, identified, risk]
 
   - must_id: "item:6.1.2:identification"
     description: "Risks to confidentiality, integrity and availability identified"
     excerpt_keywords:
-      - [risks, confidentiality]
-      - [risks, confidentiality, integrity]
-      - [confidentiality, integrity]
-      - [confidentiality, integrity, availability]
-      - [integrity, availability]
-      - [integrity, availability, identified]
-      - [availability, identified]
+      - [risks, confidentiality, risk]
+      - [risks, confidentiality, integrity, risk]
+      - [confidentiality, integrity, risk]
+      - [confidentiality, integrity, availability, risk]
+      - [integrity, availability, risk]
+      - [integrity, availability, identified, risk]
+      - [availability, identified, risk]
 
   - must_id: "item:6.1.2:consistency"
     description: "Consistent and comparable results produced"
     excerpt_keywords:
-      - [consistent, comparable]
-      - [consistent, comparable, results]
-      - [comparable, results]
-      - [comparable, results, produced]
-      - [results, produced]
+      - [consistent, comparable, risk]
+      - [consistent, comparable, results, risk]
+      - [comparable, results, risk]
+      - [comparable, results, produced, risk]
+      - [results, produced, risk]
 
   - must_id: "item:6.1.2:criteria"
     description: "Risk acceptance criteria defined"
     excerpt_keywords:
       - [risk, acceptance]
       - [risk, acceptance, criteria]
-      - [acceptance, criteria]
-      - [acceptance, criteria, defined]
-      - [criteria, defined]
+      - [acceptance, criteria, risk]
+      - [acceptance, criteria, defined, risk]
+      - [criteria, defined, risk]
 

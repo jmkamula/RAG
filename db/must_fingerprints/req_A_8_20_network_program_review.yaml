@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.20:network_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.20:network_program_review"
@@ -10,28 +11,63 @@ target_control: "A.8.20"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.8.20:rev_architecture"
-    description: "Architecture review — zone model still matches threat landscape + business reality"
-    excerpt_keywords:
-      - [architecture, review, networks]
-
-  - must_id: "item:A.8.20:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, networks]
-
   - must_id: "item:A.8.20:rev_findings_update"
     description: "Findings propagated to policy / register / scope"
     excerpt_keywords:
       - [findings, update, networks]
-      - [findings, propagated, policy, register, networks]
+      - [findings, propagated, networks]
+      - [findings, propagated, scope, networks]
+      - [propagated, scope, networks]
+      - [per, revocation, networks]
+      - [per, revoked, identity, networks]
+      - [revocation, record, networks]
+      - [review, findings, networks]
 
   - must_id: "item:A.8.20:rev_register_completeness"
     description: "Register-completeness check (every new segment registered)"
     excerpt_keywords:
-      - [register, completeness, networks]
+      - [completeness, check, networks]
+      - [completeness, check, every, networks]
+      - [check, every, networks]
+      - [check, every, new, networks]
+      - [every, new, networks]
+      - [every, new, segment, networks]
+      - [new, segment, networks]
+      - [new, segment, registered, networks]
+
+  - must_id: "item:A.8.20:rev_architecture"
+    description: "Architecture review — zone model still matches threat landscape + business reality"
+    excerpt_keywords:
+      - [architecture, review, networks]
+      - [architecture, review, zone, networks]
+      - [review, zone, networks]
+      - [review, zone, model, networks]
+      - [zone, model, networks]
+      - [zone, model, still, networks]
+      - [model, still, networks]
+      - [model, still, matches, networks]
 
   - must_id: "item:A.8.20:rev_reviewer"
     description: "Reviewer identity (Network Engineering + InfoSec)"
     excerpt_keywords:
       - [reviewer, identity, networks]
+      - [reviewer, identity, network, networks]
+      - [identity, network, networks]
+      - [identity, network, engineering, networks]
+      - [network, engineering, networks]
+      - [network, engineering, infosec, networks]
+      - [engineering, infosec, networks]
+      - [per, revocation, networks]
+
+  - must_id: "item:A.8.20:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, networks]
+      - [review, date, within, networks]
+      - [date, within, networks]
+      - [date, within, planned, networks]
+      - [within, planned, networks]
+      - [within, planned, interval, networks]
+      - [planned, interval, networks]
+      - [per, revocation, networks]
+

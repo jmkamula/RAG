@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.10:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.10:program_review"
@@ -10,27 +11,63 @@ target_control: "A.7.3.10"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.10:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:A.7.3.10:rev_jurisdiction_currency"
+    description: "Jurisdiction-currency check — new full-automation prohibitions surfaced"
     excerpt_keywords:
-      - [review, date, planned, interval, automated]
+      - [jurisdiction, currency, automated]
+      - [jurisdiction, currency, check, automated]
+      - [currency, check, automated]
+      - [currency, check, new, automated]
+      - [check, new, automated]
+      - [check, new, full, automated]
+      - [new, full, automated]
+      - [new, full, automation, automated]
 
   - must_id: "item:A.7.3.10:rev_intervention_test"
     description: "Human-intervention pathway test"
     excerpt_keywords:
       - [intervention, test, automated]
-
-  - must_id: "item:A.7.3.10:rev_jurisdiction_currency"
-    description: "Jurisdiction-currency check — new full-automation prohibitions surfaced"
-    excerpt_keywords:
-      - [jurisdiction, currency, automated]
+      - [human, intervention, automated]
+      - [human, intervention, pathway, automated]
+      - [intervention, pathway, automated]
+      - [intervention, pathway, test, automated]
+      - [pathway, test, automated]
+      - [per, revocation, automated]
+      - [per, revoked, identity, automated]
 
   - must_id: "item:A.7.3.10:rev_notification_audit"
     description: "Notification audit — sampled A.22 systems verified to have subject-notification surfaced"
     excerpt_keywords:
       - [notification, audit, automated]
+      - [notification, audit, sampled, automated]
+      - [audit, sampled, automated]
+      - [audit, sampled, verified, automated]
+      - [sampled, verified, automated]
+      - [sampled, verified, have, automated]
+      - [verified, have, automated]
+      - [verified, have, subject, automated]
 
   - must_id: "item:A.7.3.10:rev_reviewer"
     description: "Reviewer identity (DPO + ML/Product lead + Legal)"
     excerpt_keywords:
       - [reviewer, identity, automated]
+      - [reviewer, identity, dpo, automated]
+      - [identity, dpo, automated]
+      - [identity, dpo, product, automated]
+      - [dpo, product, automated]
+      - [dpo, product, lead, automated]
+      - [product, lead, automated]
+      - [product, lead, legal, automated]
+
+  - must_id: "item:A.7.3.10:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, automated]
+      - [review, date, within, automated]
+      - [date, within, automated]
+      - [date, within, planned, automated]
+      - [within, planned, automated]
+      - [within, planned, interval, automated]
+      - [planned, interval, automated]
+      - [per, revocation, automated]
+

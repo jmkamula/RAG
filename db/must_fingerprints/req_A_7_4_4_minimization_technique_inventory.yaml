@@ -14,48 +14,48 @@ must_fingerprints:
   - must_id: "item:A.7.4.4:reg_implementation"
     description: "Implementation reference per row (code repo / config file / infrastructure component)"
     excerpt_keywords:
-      - [implementation, reference]
-      - [implementation, reference, code]
-      - [reference, code]
-      - [reference, code, repo]
-      - [code, repo]
-      - [code, repo, config]
-      - [repo, config]
-      - [repo, config, file]
+      - [implementation, reference, pii]
+      - [implementation, reference, code, pii]
+      - [reference, code, pii]
+      - [reference, code, repo, pii]
+      - [code, repo, pii]
+      - [code, repo, config, pii]
+      - [repo, config, pii]
+      - [repo, config, file, pii]
 
   - must_id: "item:A.7.4.4:reg_technique"
     description: "Technique per row (masking / generalisation / suppression / noise addition / k-anonymity / differential privacy / etc.)"
     excerpt_keywords:
-      - [technique, masking]
-      - [technique, masking, generalisation]
-      - [masking, generalisation]
-      - [masking, generalisation, suppression]
-      - [generalisation, suppression]
-      - [generalisation, suppression, noise]
-      - [suppression, noise]
-      - [suppression, noise, addition]
+      - [technique, masking, pii]
+      - [technique, masking, generalisation, pii]
+      - [masking, generalisation, pii]
+      - [masking, generalisation, suppression, pii]
+      - [generalisation, suppression, pii]
+      - [generalisation, suppression, noise, pii]
+      - [suppression, noise, pii]
+      - [suppression, noise, addition, pii]
 
   - must_id: "item:A.7.4.4:reg_objective"
     description: "Minimization objective per row (target identifiability level — identified / pseudonymised / anonymised)"
     excerpt_keywords:
       - [minimization, objective]
       - [minimization, objective, target]
-      - [objective, target]
-      - [objective, target, identifiability]
-      - [target, identifiability]
-      - [target, identifiability, level]
-      - [identifiability, level]
-      - [identifiability, level, identified]
+      - [objective, target, pii]
+      - [objective, target, identifiability, pii]
+      - [target, identifiability, pii]
+      - [target, identifiability, level, pii]
+      - [identifiability, level, pii]
+      - [identifiability, level, identified, pii]
 
   - must_id: "item:A.7.4.4:reg_activity_id"
     description: "Processing activity identifier per row"
     excerpt_keywords:
-      - [activity, id]
-      - [processing, activity]
-      - [processing, activity, identifier]
-      - [activity, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [activity, id, pii]
+      - [processing, activity, pii]
+      - [processing, activity, identifier, pii]
+      - [activity, identifier, pii]
+      - [per, row, pii]
+      - [each, row, pii]
+      - [column, containing, pii]
+      - [each, entry, pii]
 

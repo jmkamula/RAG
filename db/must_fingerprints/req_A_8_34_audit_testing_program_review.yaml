@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.34:audit_testing_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.34:audit_testing_program_review"
@@ -10,33 +11,75 @@ target_control: "A.8.34"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.8.34:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:A.8.34:rev_findings_update"
+    description: "Findings propagated to policy / scope"
     excerpt_keywords:
-      - [review, date, planned, interval, protection]
+      - [findings, update, protection]
+      - [findings, propagated, protection]
+      - [findings, propagated, scope, protection]
+      - [propagated, scope, protection]
+      - [per, revocation, protection]
+      - [per, revoked, identity, protection]
+      - [revocation, record, protection]
+      - [review, findings, protection]
 
   - must_id: "item:A.8.34:rev_evidence_hygiene"
     description: "Evidence-preservation hygiene check (artefacts retained per chain-of-custody)"
     excerpt_keywords:
       - [evidence, hygiene, protection]
-
-  - must_id: "item:A.8.34:rev_findings_update"
-    description: "Findings propagated to policy / scope"
-    excerpt_keywords:
-      - [findings, update, protection]
-      - [findings, propagated, policy, scope, protection]
-
-  - must_id: "item:A.8.34:rev_register_completeness"
-    description: "Register-completeness check (every recent audit engagement in register)"
-    excerpt_keywords:
-      - [register, completeness, protection]
-
-  - must_id: "item:A.8.34:rev_reviewer"
-    description: "Reviewer identity (InfoSec lead + Internal Audit lead)"
-    excerpt_keywords:
-      - [reviewer, identity, protection]
+      - [evidence, preservation, protection]
+      - [evidence, preservation, hygiene, protection]
+      - [preservation, hygiene, protection]
+      - [preservation, hygiene, check, protection]
+      - [hygiene, check, protection]
+      - [hygiene, check, artefacts, protection]
+      - [check, artefacts, protection]
 
   - must_id: "item:A.8.34:rev_rollback_compliance"
     description: "Rollback-discipline compliance (no untracked changes introduced during testing)"
     excerpt_keywords:
       - [rollback, compliance, protection]
+      - [rollback, discipline, protection]
+      - [rollback, discipline, compliance, protection]
+      - [discipline, compliance, protection]
+      - [discipline, compliance, untracked, protection]
+      - [compliance, untracked, protection]
+      - [compliance, untracked, changes, protection]
+      - [untracked, changes, protection]
+
+  - must_id: "item:A.8.34:rev_register_completeness"
+    description: "Register-completeness check (every recent audit engagement in register)"
+    excerpt_keywords:
+      - [completeness, check, protection]
+      - [completeness, check, every, protection]
+      - [check, every, protection]
+      - [check, every, recent, protection]
+      - [every, recent, protection]
+      - [every, recent, audit, protection]
+      - [recent, audit, protection]
+      - [recent, audit, engagement, protection]
+
+  - must_id: "item:A.8.34:rev_reviewer"
+    description: "Reviewer identity (InfoSec lead + Internal Audit lead)"
+    excerpt_keywords:
+      - [reviewer, identity, protection]
+      - [reviewer, identity, infosec, protection]
+      - [identity, infosec, protection]
+      - [identity, infosec, lead, protection]
+      - [infosec, lead, protection]
+      - [infosec, lead, internal, protection]
+      - [lead, internal, protection]
+      - [lead, internal, audit, protection]
+
+  - must_id: "item:A.8.34:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, protection]
+      - [review, date, within, protection]
+      - [date, within, protection]
+      - [date, within, planned, protection]
+      - [within, planned, protection]
+      - [within, planned, interval, protection]
+      - [planned, interval, protection]
+      - [per, revocation, protection]
+

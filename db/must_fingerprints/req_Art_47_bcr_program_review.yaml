@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.47:bcr_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.47:bcr_program_review"
@@ -14,23 +15,59 @@ must_fingerprints:
     description: "Material-change notification — significant changes notified to lead SA per Art.63 consistency"
     excerpt_keywords:
       - [change, notification, binding]
+      - [material, change, binding]
+      - [material, change, notification, binding]
+      - [change, notification, significant, binding]
+      - [notification, significant, binding]
+      - [notification, significant, changes, binding]
+      - [significant, changes, binding]
+      - [significant, changes, notified, binding]
 
   - must_id: "item:Art.47:rev_complaints_handled"
     description: "Complaints-handling audit — Art.47.2.i path functioning + SAs receiving cooperation"
     excerpt_keywords:
       - [complaints, handled, binding]
+      - [complaints, handling, binding]
+      - [complaints, handling, audit, binding]
+      - [handling, audit, binding]
+      - [handling, audit, art, binding]
+      - [audit, art, binding]
+      - [audit, art, path, binding]
+      - [art, path, binding]
 
   - must_id: "item:Art.47:rev_compliance_audit"
     description: "Compliance audit — bound entities adhering to BCR provisions (sampled audit results)"
     excerpt_keywords:
       - [compliance, audit, binding]
-
-  - must_id: "item:Art.47:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, binding]
+      - [compliance, audit, bound, binding]
+      - [audit, bound, binding]
+      - [audit, bound, entities, binding]
+      - [bound, entities, binding]
+      - [bound, entities, adhering, binding]
+      - [entities, adhering, binding]
+      - [entities, adhering, bcr, binding]
 
   - must_id: "item:Art.47:rev_reviewer"
     description: "Reviewer identity (DPO + group privacy lead)"
     excerpt_keywords:
       - [reviewer, identity, binding]
+      - [reviewer, identity, dpo, binding]
+      - [identity, dpo, binding]
+      - [identity, dpo, group, binding]
+      - [dpo, group, binding]
+      - [dpo, group, privacy, binding]
+      - [group, privacy, binding]
+      - [group, privacy, lead, binding]
+
+  - must_id: "item:Art.47:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, binding]
+      - [review, date, within, binding]
+      - [date, within, binding]
+      - [date, within, planned, binding]
+      - [within, planned, binding]
+      - [within, planned, interval, binding]
+      - [planned, interval, binding]
+      - [per, revocation, binding]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.48:foreign_authority_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.48:foreign_authority_program_review"
@@ -14,23 +15,59 @@ must_fingerprints:
     description: "Agreements currency — international agreements catalogue refreshed"
     excerpt_keywords:
       - [agreements, currency, transfers]
+      - [agreements, currency, international, transfers]
+      - [currency, international, transfers]
+      - [currency, international, agreements, transfers]
+      - [international, agreements, transfers]
+      - [international, agreements, catalogue, transfers]
+      - [agreements, catalogue, transfers]
+      - [agreements, catalogue, refreshed, transfers]
 
-  - must_id: "item:Art.48:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:Art.48:rev_tabletop"
+    description: "Tabletop exercise — procedure tested at least annually against a hypothetical foreign authority request (mirrors A.5.24 IR exercises)"
     excerpt_keywords:
-      - [review, date, planned, interval, transfers]
+      - [tabletop, exercise, transfers]
+      - [tabletop, exercise, tested, transfers]
+      - [exercise, tested, transfers]
+      - [exercise, tested, least, transfers]
+      - [tested, least, transfers]
+      - [tested, least, annually, transfers]
+      - [least, annually, transfers]
+      - [least, annually, against, transfers]
 
   - must_id: "item:Art.48:rev_register_currency"
     description: "Register currency — every actual request handled per procedure"
     excerpt_keywords:
-      - [register, currency, transfers]
+      - [currency, every, transfers]
+      - [currency, every, actual, transfers]
+      - [every, actual, transfers]
+      - [every, actual, request, transfers]
+      - [actual, request, transfers]
+      - [actual, request, handled, transfers]
+      - [request, handled, transfers]
+      - [per, revocation, transfers]
 
   - must_id: "item:Art.48:rev_reviewer"
     description: "Reviewer identity (DPO + legal counsel + executive sponsor)"
     excerpt_keywords:
       - [reviewer, identity, transfers]
+      - [reviewer, identity, dpo, transfers]
+      - [identity, dpo, transfers]
+      - [identity, dpo, legal, transfers]
+      - [dpo, legal, transfers]
+      - [dpo, legal, counsel, transfers]
+      - [legal, counsel, transfers]
+      - [legal, counsel, executive, transfers]
 
-  - must_id: "item:Art.48:rev_tabletop"
-    description: "Tabletop exercise — procedure tested at least annually against a hypothetical foreign authority r..."
+  - must_id: "item:Art.48:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [tabletop, exercise, transfers]
+      - [review, date, transfers]
+      - [review, date, within, transfers]
+      - [date, within, transfers]
+      - [date, within, planned, transfers]
+      - [within, planned, transfers]
+      - [within, planned, interval, transfers]
+      - [planned, interval, transfers]
+      - [per, revocation, transfers]
+

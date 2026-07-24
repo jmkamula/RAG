@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.2:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.2:program_review"
@@ -14,23 +15,59 @@ must_fingerprints:
     description: "Customer verification health — audits requested + supported within stated SLA"
     excerpt_keywords:
       - [customer, verification, health, organization]
-
-  - must_id: "item:B.8.2.2:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, organization]
-
-  - must_id: "item:B.8.2.2:rev_reviewer"
-    description: "Reviewer identity (DPO + Engineering Lead + Compliance)"
-    excerpt_keywords:
-      - [reviewer, identity, organization]
+      - [customer, verification, organization]
+      - [verification, health, organization]
+      - [verification, health, audits, organization]
+      - [health, audits, organization]
+      - [health, audits, requested, organization]
+      - [audits, requested, organization]
+      - [audits, requested, supported, organization]
 
   - must_id: "item:B.8.2.2:rev_side_purpose_sweep"
-    description: "Side-purpose drift sweep — cross-tenant analytics + ML training pipelines checked for unauthorise..."
+    description: "Side-purpose drift sweep — cross-tenant analytics + ML training pipelines checked for unauthorised customer-PII use"
     excerpt_keywords:
       - [side, purpose, sweep, organization]
+      - [side, purpose, organization]
+      - [side, purpose, drift, organization]
+      - [purpose, drift, organization]
+      - [purpose, drift, sweep, organization]
+      - [drift, sweep, organization]
+      - [drift, sweep, cross, organization]
+      - [sweep, cross, organization]
 
   - must_id: "item:B.8.2.2:rev_technical_binding_audit"
     description: "Technical binding audit — sampled tenant boundaries verified to enforce purpose limits"
     excerpt_keywords:
       - [technical, binding, audit, organization]
+      - [technical, binding, organization]
+      - [binding, audit, organization]
+      - [binding, audit, sampled, organization]
+      - [audit, sampled, organization]
+      - [audit, sampled, tenant, organization]
+      - [sampled, tenant, organization]
+      - [sampled, tenant, boundaries, organization]
+
+  - must_id: "item:B.8.2.2:rev_reviewer"
+    description: "Reviewer identity (DPO + Engineering Lead + Compliance)"
+    excerpt_keywords:
+      - [reviewer, identity, organization]
+      - [reviewer, identity, dpo, organization]
+      - [identity, dpo, organization]
+      - [identity, dpo, engineering, organization]
+      - [dpo, engineering, organization]
+      - [dpo, engineering, lead, organization]
+      - [engineering, lead, organization]
+      - [engineering, lead, compliance, organization]
+
+  - must_id: "item:B.8.2.2:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, organization]
+      - [review, date, within, organization]
+      - [date, within, organization]
+      - [date, within, planned, organization]
+      - [within, planned, organization]
+      - [within, planned, interval, organization]
+      - [planned, interval, organization]
+      - [per, revocation, organization]
+

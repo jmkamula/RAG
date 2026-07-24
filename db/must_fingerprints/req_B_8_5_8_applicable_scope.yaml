@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.8:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.8:applicable_scope"
@@ -10,18 +11,39 @@ target_control: "B.8.5.8"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:B.8.5.8:scope_specific_auth_exclusion"
+    description: "Specific-authorisation customers excluded (they get fresh B.8.5.7 engagement each time)"
+    excerpt_keywords:
+      - [specific, auth, exclusion, change]
+      - [specific, authorisation, change]
+      - [specific, authorisation, customers, change]
+      - [authorisation, customers, change]
+      - [authorisation, customers, excluded, change]
+      - [customers, excluded, change]
+      - [customers, excluded, they, change]
+      - [excluded, they, change]
+
   - must_id: "item:B.8.5.8:scope_change_types"
     description: "Change types in scope (add / replace / remove)"
     excerpt_keywords:
-      - [scope, change, types]
+      - [change, types]
+      - [change, types, scope]
+      - [types, scope, change]
+      - [types, scope, add, change]
+      - [scope, add, change]
+      - [scope, add, replace, change]
+      - [add, replace, change]
+      - [add, replace, remove, change]
 
   - must_id: "item:B.8.5.8:scope_general_auth_customers"
     description: "Customers on general-authorisation contract per row"
     excerpt_keywords:
-      - [scope, general, auth, customers, change]
+      - [general, auth, customers, change]
       - [customers, general, change]
+      - [customers, general, authorisation, change]
+      - [general, authorisation, change]
+      - [general, authorisation, contract, change]
+      - [authorisation, contract, change]
+      - [in, scope, change]
+      - [scope, includes, change]
 
-  - must_id: "item:B.8.5.8:scope_specific_auth_exclusion"
-    description: "Specific-authorisation customers excluded (they get fresh B.8.5.7 engagement each time)"
-    excerpt_keywords:
-      - [scope, specific, auth, exclusion, change]

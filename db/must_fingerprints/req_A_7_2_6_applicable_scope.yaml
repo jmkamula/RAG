@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.6:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.6:applicable_scope"
@@ -13,16 +14,36 @@ must_fingerprints:
   - must_id: "item:A.7.2.6:scope_exclusions"
     description: "Excluded relationships (independent controllers / joint controllers → A.7.2.7 / non-PII vendors)"
     excerpt_keywords:
-      - [scope, exclusions, contracts]
       - [excluded, relationships, contracts]
+      - [excluded, relationships, independent, contracts]
+      - [relationships, independent, contracts]
+      - [relationships, independent, controllers, contracts]
+      - [independent, controllers, contracts]
+      - [independent, controllers, joint, contracts]
+      - [controllers, joint, contracts]
+      - [controllers, joint, controllers, contracts]
 
   - must_id: "item:A.7.2.6:scope_processor_list"
     description: "In-scope processors enumerated with classification rationale"
     excerpt_keywords:
-      - [scope, processor, list, contracts]
+      - [scope, processors, contracts]
+      - [scope, processors, enumerated, contracts]
+      - [processors, enumerated, contracts]
+      - [processors, enumerated, classification, contracts]
+      - [enumerated, classification, contracts]
+      - [enumerated, classification, rationale, contracts]
+      - [classification, rationale, contracts]
+      - [in, scope, contracts]
 
   - must_id: "item:A.7.2.6:scope_processor_test"
-    description: "Processor test — supplier processes PII on org's behalf under org's instructions (not for its own..."
+    description: "Processor test — supplier processes PII on org's behalf under org's instructions (not for its own purposes)"
     excerpt_keywords:
-      - [scope, processor, test, contracts]
       - [processor, test, contracts]
+      - [processor, test, supplier, contracts]
+      - [test, supplier, contracts]
+      - [test, supplier, processes, contracts]
+      - [supplier, processes, contracts]
+      - [supplier, processes, pii]
+      - [processes, pii]
+      - [processes, pii, org]
+

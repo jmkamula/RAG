@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.8.17:sync_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.17:sync_program_review"
@@ -10,29 +11,63 @@ target_control: "A.8.17"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.8.17:rev_date"
-    description: "Review date within the planned interval"
+  - must_id: "item:A.8.17:rev_findings_update"
+    description: "Findings propagated to procedure / scope"
     excerpt_keywords:
-      - [review, date, planned, interval, clock]
+      - [findings, update, clock]
+      - [findings, propagated, clock]
+      - [findings, propagated, scope, clock]
+      - [propagated, scope, clock]
+      - [per, revocation, clock]
+      - [per, revoked, identity, clock]
+      - [revocation, record, clock]
+      - [review, findings, clock]
+
+  - must_id: "item:A.8.17:rev_scope_completeness"
+    description: "Scope-completeness check (new system class covered)"
+    excerpt_keywords:
+      - [scope, completeness, clock]
+      - [scope, completeness, check, clock]
+      - [completeness, check, clock]
+      - [completeness, check, new, clock]
+      - [check, new, clock]
+      - [check, new, class, clock]
+      - [new, class, clock]
+      - [new, class, covered, clock]
 
   - must_id: "item:A.8.17:rev_drift_compliance"
     description: "Drift compliance per class (samples within tolerance)"
     excerpt_keywords:
       - [drift, compliance, clock]
       - [drift, compliance, class, clock]
-
-  - must_id: "item:A.8.17:rev_findings_update"
-    description: "Findings propagated to procedure / scope"
-    excerpt_keywords:
-      - [findings, update, clock]
-      - [findings, propagated, procedure, scope, clock]
+      - [compliance, class, clock]
+      - [compliance, class, samples, clock]
+      - [class, samples, clock]
+      - [class, samples, within, clock]
+      - [samples, within, clock]
+      - [samples, within, tolerance, clock]
 
   - must_id: "item:A.8.17:rev_reviewer"
     description: "Reviewer identity (Infrastructure lead + Security Operations)"
     excerpt_keywords:
       - [reviewer, identity, clock]
+      - [reviewer, identity, infrastructure, clock]
+      - [identity, infrastructure, clock]
+      - [identity, infrastructure, lead, clock]
+      - [infrastructure, lead, clock]
+      - [infrastructure, lead, security, clock]
+      - [lead, security, clock]
+      - [lead, security, operations, clock]
 
-  - must_id: "item:A.8.17:rev_scope_completeness"
-    description: "Scope-completeness check (new system class covered)"
+  - must_id: "item:A.8.17:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [scope, completeness, clock]
+      - [review, date, clock]
+      - [review, date, within, clock]
+      - [date, within, clock]
+      - [date, within, planned, clock]
+      - [within, planned, clock]
+      - [within, planned, interval, clock]
+      - [planned, interval, clock]
+      - [per, revocation, clock]
+

@@ -14,72 +14,72 @@ must_fingerprints:
   - must_id: "item:A.6.6:rev_register_update"
     description: "Changes propagated to the live template and to the signer-re-signing plan"
     excerpt_keywords:
-      - [changes, propagated]
-      - [changes, propagated, live]
-      - [propagated, live]
-      - [propagated, live, template]
-      - [live, template]
-      - [live, template, signer]
-      - [template, signer]
-      - [template, signer, signing]
+      - [changes, propagated, confidentiality]
+      - [changes, propagated, live, confidentiality]
+      - [propagated, live, confidentiality]
+      - [propagated, live, template, confidentiality]
+      - [live, template, confidentiality]
+      - [live, template, signer, confidentiality]
+      - [template, signer, confidentiality]
+      - [template, signer, signing, confidentiality]
 
   - must_id: "item:A.6.6:rev_signer_currency"
     description: "Signer-currency analysis (% on current template version; plan for re-signing the gap where material clauses changed)"
     excerpt_keywords:
-      - [signer, currency]
-      - [signer, currency, analysis]
-      - [currency, analysis]
-      - [currency, analysis, current]
-      - [analysis, current]
-      - [analysis, current, template]
-      - [current, template]
-      - [current, template, version]
+      - [signer, currency, confidentiality]
+      - [signer, currency, analysis, confidentiality]
+      - [currency, analysis, confidentiality]
+      - [currency, analysis, current, confidentiality]
+      - [analysis, current, confidentiality]
+      - [analysis, current, template, confidentiality]
+      - [current, template, confidentiality]
+      - [current, template, version, confidentiality]
 
   - must_id: "item:A.6.6:rev_enforceability"
     description: "Enforceability check per jurisdiction (legal counsel input — case-law shifts, Schrems-style impacts on cross-border data flows in NDA scope)"
     excerpt_keywords:
-      - [enforceability, check]
-      - [enforceability, check, jurisdiction]
-      - [check, jurisdiction]
-      - [check, jurisdiction, legal]
-      - [jurisdiction, legal]
-      - [jurisdiction, legal, counsel]
-      - [legal, counsel]
-      - [legal, counsel, input]
+      - [enforceability, check, confidentiality]
+      - [enforceability, check, jurisdiction, confidentiality]
+      - [check, jurisdiction, confidentiality]
+      - [check, jurisdiction, legal, confidentiality]
+      - [jurisdiction, legal, confidentiality]
+      - [jurisdiction, legal, counsel, confidentiality]
+      - [legal, counsel, confidentiality]
+      - [legal, counsel, input, confidentiality]
 
   - must_id: "item:A.6.6:rev_classification_drift"
     description: "Information-classification drift check — has A.5.12 classification scheme changed in ways affecting NDA info_classes?"
     excerpt_keywords:
-      - [classification, drift]
-      - [classification, drift, check]
-      - [drift, check]
-      - [drift, check, has]
-      - [check, has]
-      - [check, has, classification]
-      - [has, classification]
-      - [has, classification, scheme]
+      - [classification, drift, confidentiality]
+      - [classification, drift, check, confidentiality]
+      - [drift, check, confidentiality]
+      - [drift, check, has, confidentiality]
+      - [check, has, confidentiality]
+      - [check, has, classification, confidentiality]
+      - [has, classification, confidentiality]
+      - [has, classification, scheme, confidentiality]
 
   - must_id: "item:A.6.6:rev_reviewer"
     description: "Reviewer identity (Legal counsel + InfoSec lead jointly)"
     excerpt_keywords:
-      - [reviewer, identity]
-      - [reviewer, identity, legal]
-      - [identity, legal]
-      - [identity, legal, counsel]
-      - [legal, counsel]
-      - [legal, counsel, infosec]
-      - [counsel, infosec]
-      - [counsel, infosec, lead]
+      - [reviewer, identity, confidentiality]
+      - [reviewer, identity, legal, confidentiality]
+      - [identity, legal, confidentiality]
+      - [identity, legal, counsel, confidentiality]
+      - [legal, counsel, confidentiality]
+      - [legal, counsel, infosec, confidentiality]
+      - [counsel, infosec, confidentiality]
+      - [counsel, infosec, lead, confidentiality]
 
   - must_id: "item:A.6.6:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [review, date]
-      - [review, date, within]
-      - [date, within]
-      - [date, within, planned]
-      - [within, planned]
-      - [within, planned, interval]
-      - [planned, interval]
-      - [per, revocation]
+      - [review, date, confidentiality]
+      - [review, date, within, confidentiality]
+      - [date, within, confidentiality]
+      - [date, within, planned, confidentiality]
+      - [within, planned, confidentiality]
+      - [within, planned, interval, confidentiality]
+      - [planned, interval, confidentiality]
+      - [per, revocation, confidentiality]
 

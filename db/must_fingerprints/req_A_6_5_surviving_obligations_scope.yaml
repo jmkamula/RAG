@@ -14,48 +14,48 @@ must_fingerprints:
   - must_id: "item:A.6.5:scope_worker_categories"
     description: "Worker categories addressed (employees vs contractors vs interns — different obligation scope)"
     excerpt_keywords:
-      - [worker, categories]
-      - [worker, categories, addressed]
-      - [categories, addressed]
-      - [categories, addressed, employees]
-      - [addressed, employees]
-      - [addressed, employees, contractors]
-      - [employees, contractors]
-      - [employees, contractors, interns]
+      - [worker, categories, responsibilities]
+      - [worker, categories, addressed, responsibilities]
+      - [categories, addressed, responsibilities]
+      - [categories, addressed, employees, responsibilities]
+      - [addressed, employees, responsibilities]
+      - [addressed, employees, contractors, responsibilities]
+      - [employees, contractors, responsibilities]
+      - [employees, contractors, interns, responsibilities]
 
   - must_id: "item:A.6.5:scope_jurisdictional_limits"
     description: "Jurisdictional limits on enforceability (US California voids non-compete; EU restricts duration; UK courts test reasonableness)"
     excerpt_keywords:
-      - [jurisdictional, limits]
-      - [jurisdictional, limits, enforceability]
-      - [limits, enforceability]
-      - [limits, enforceability, california]
-      - [enforceability, california]
-      - [enforceability, california, voids]
-      - [california, voids]
-      - [california, voids, non]
+      - [jurisdictional, limits, responsibilities]
+      - [jurisdictional, limits, enforceability, responsibilities]
+      - [limits, enforceability, responsibilities]
+      - [limits, enforceability, california, responsibilities]
+      - [enforceability, california, responsibilities]
+      - [enforceability, california, voids, responsibilities]
+      - [california, voids, responsibilities]
+      - [california, voids, non, responsibilities]
 
   - must_id: "item:A.6.5:scope_role_mapping"
     description: "Role-to-obligation mapping (executive level may have extended non-compete; standard staff only confidentiality + IP; sales/CSM commonly have"
     excerpt_keywords:
-      - [role, mapping]
-      - [role, obligation]
-      - [role, obligation, mapping]
-      - [obligation, mapping]
-      - [obligation, mapping, executive]
-      - [mapping, executive]
-      - [mapping, executive, level]
-      - [executive, level]
+      - [role, mapping, responsibilities]
+      - [role, obligation, responsibilities]
+      - [role, obligation, mapping, responsibilities]
+      - [obligation, mapping, responsibilities]
+      - [obligation, mapping, executive, responsibilities]
+      - [mapping, executive, responsibilities]
+      - [mapping, executive, level, responsibilities]
+      - [executive, level, responsibilities]
 
   - must_id: "item:A.6.5:scope_obligation_catalogue"
     description: "Obligation catalogue enumerated (confidentiality / IP / non-disparagement / non-poach / non-compete / cooperation-with-investigations)"
     excerpt_keywords:
-      - [obligation, catalogue]
-      - [obligation, catalogue, enumerated]
-      - [catalogue, enumerated]
-      - [catalogue, enumerated, confidentiality]
-      - [enumerated, confidentiality]
-      - [enumerated, confidentiality, non]
-      - [confidentiality, non]
-      - [confidentiality, non, disparagement]
+      - [obligation, catalogue, responsibilities]
+      - [obligation, catalogue, enumerated, responsibilities]
+      - [catalogue, enumerated, responsibilities]
+      - [catalogue, enumerated, confidentiality, responsibilities]
+      - [enumerated, confidentiality, responsibilities]
+      - [enumerated, confidentiality, non, responsibilities]
+      - [confidentiality, non, responsibilities]
+      - [confidentiality, non, disparagement, responsibilities]
 

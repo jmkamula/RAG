@@ -14,36 +14,36 @@ must_fingerprints:
   - must_id: "item:A.8.8:scope_exclusions"
     description: "Exclusion rationale (vendor-managed assets covered via supplier obligations A.5.20)"
     excerpt_keywords:
-      - [exclusion, rationale]
-      - [exclusion, rationale, vendor]
-      - [rationale, vendor]
-      - [rationale, vendor, managed]
-      - [vendor, managed]
-      - [vendor, managed, assets]
-      - [managed, assets]
-      - [managed, assets, covered]
+      - [exclusion, rationale, technical]
+      - [exclusion, rationale, vendor, technical]
+      - [rationale, vendor, technical]
+      - [rationale, vendor, managed, technical]
+      - [vendor, managed, technical]
+      - [vendor, managed, assets, technical]
+      - [managed, assets, technical]
+      - [managed, assets, covered, technical]
 
   - must_id: "item:A.8.8:scope_coverage_pct"
     description: "Target coverage percentage per class (with rationale for gaps)"
     excerpt_keywords:
-      - [coverage, pct]
-      - [target, coverage]
-      - [target, coverage, percentage]
-      - [coverage, percentage]
-      - [coverage, percentage, class]
-      - [percentage, class]
-      - [percentage, class, rationale]
-      - [class, rationale]
+      - [coverage, pct, technical]
+      - [target, coverage, technical]
+      - [target, coverage, percentage, technical]
+      - [coverage, percentage, technical]
+      - [coverage, percentage, class, technical]
+      - [percentage, class, technical]
+      - [percentage, class, rationale, technical]
+      - [class, rationale, technical]
 
   - must_id: "item:A.8.8:scope_asset_classes"
     description: "Asset classes enumerated with scanning approach per class"
     excerpt_keywords:
-      - [asset, classes]
-      - [asset, classes, enumerated]
-      - [classes, enumerated]
-      - [classes, enumerated, scanning]
-      - [enumerated, scanning]
-      - [enumerated, scanning, approach]
-      - [scanning, approach]
-      - [scanning, approach, class]
+      - [asset, classes, technical]
+      - [asset, classes, enumerated, technical]
+      - [classes, enumerated, technical]
+      - [classes, enumerated, scanning, technical]
+      - [enumerated, scanning, technical]
+      - [enumerated, scanning, approach, technical]
+      - [scanning, approach, technical]
+      - [scanning, approach, class, technical]
 

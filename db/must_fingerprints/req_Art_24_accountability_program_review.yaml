@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:Art.24:accountability_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.24:accountability_program_review"
@@ -10,35 +11,75 @@ target_control: "Art.24"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.24:rev_charter_currency"
-    description: "Charter currency check — scope + governance still reflect organisational reality"
-    excerpt_keywords:
-      - [charter, currency, responsibility]
-      - [charter, currency, check, responsibility]
-
-  - must_id: "item:Art.24:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, responsibility]
-
   - must_id: "item:Art.24:rev_iso_alignment"
-    description: "ISO 27001 alignment — derived dependencies (5.1/5.3/9.3/A.5.1/A.5.34/A.5.36) still in compliant s..."
+    description: "ISO 27001 alignment — derived dependencies (5.1/5.3/9.3/A.5.1/A.5.34/A.5.36) still in compliant state"
     excerpt_keywords:
       - [iso, alignment, responsibility]
-
-  - must_id: "item:Art.24:rev_register_completeness"
-    description: "Compliance register completeness — every applicable GDPR article has a row with current status"
-    excerpt_keywords:
-      - [register, completeness, responsibility]
-      - [compliance, register, completeness, responsibility]
-
-  - must_id: "item:Art.24:rev_reviewer"
-    description: "Reviewer identity (DPO + executive sponsor)"
-    excerpt_keywords:
-      - [reviewer, identity, responsibility]
+      - [iso, 27001, responsibility]
+      - [iso, 27001, alignment, responsibility]
+      - [27001, alignment, responsibility]
+      - [27001, alignment, derived, responsibility]
+      - [alignment, derived, responsibility]
+      - [alignment, derived, dependencies, responsibility]
+      - [derived, dependencies, responsibility]
 
   - must_id: "item:Art.24:rev_role_currency"
     description: "Role decisions current — no counterparty service-shape change unreflected in role decisions"
     excerpt_keywords:
       - [role, currency, responsibility]
+      - [role, decisions, responsibility]
       - [role, decisions, current, responsibility]
+      - [decisions, current, responsibility]
+      - [decisions, current, counterparty, responsibility]
+      - [current, counterparty, responsibility]
+      - [current, counterparty, service, responsibility]
+      - [counterparty, service, responsibility]
+
+  - must_id: "item:Art.24:rev_register_completeness"
+    description: "Compliance register completeness — every applicable GDPR article has a row with current status"
+    excerpt_keywords:
+      - [compliance, completeness, responsibility]
+      - [compliance, completeness, every, responsibility]
+      - [completeness, every, responsibility]
+      - [completeness, every, gdpr, responsibility]
+      - [every, gdpr, responsibility]
+      - [every, gdpr, article, responsibility]
+      - [gdpr, article, responsibility]
+      - [gdpr, article, has, responsibility]
+
+  - must_id: "item:Art.24:rev_charter_currency"
+    description: "Charter currency check — scope + governance still reflect organisational reality"
+    excerpt_keywords:
+      - [charter, currency, responsibility]
+      - [charter, currency, check, responsibility]
+      - [currency, check, responsibility]
+      - [currency, check, scope, responsibility]
+      - [check, scope, responsibility]
+      - [check, scope, governance, responsibility]
+      - [scope, governance, responsibility]
+      - [scope, governance, still, responsibility]
+
+  - must_id: "item:Art.24:rev_reviewer"
+    description: "Reviewer identity (DPO + executive sponsor)"
+    excerpt_keywords:
+      - [reviewer, identity, responsibility]
+      - [reviewer, identity, dpo, responsibility]
+      - [identity, dpo, responsibility]
+      - [identity, dpo, executive, responsibility]
+      - [dpo, executive, responsibility]
+      - [dpo, executive, sponsor, responsibility]
+      - [executive, sponsor, responsibility]
+      - [per, revocation, responsibility]
+
+  - must_id: "item:Art.24:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, responsibility]
+      - [review, date, within, responsibility]
+      - [date, within, responsibility]
+      - [date, within, planned, responsibility]
+      - [within, planned, responsibility]
+      - [within, planned, interval, responsibility]
+      - [planned, interval, responsibility]
+      - [per, revocation, responsibility]
+

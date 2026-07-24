@@ -14,46 +14,46 @@ must_fingerprints:
   - must_id: "item:A.7.5.2:proc_change_notification"
     description: "Change notification — new destinations added trigger notice update"
     excerpt_keywords:
-      - [change, notification]
-      - [change, notification, new]
-      - [notification, new]
-      - [notification, new, destinations]
-      - [new, destinations]
-      - [new, destinations, added]
-      - [destinations, added]
-      - [destinations, added, trigger]
+      - [change, notification, countries]
+      - [change, notification, new, countries]
+      - [notification, new, countries]
+      - [notification, new, destinations, countries]
+      - [new, destinations, countries]
+      - [new, destinations, added, countries]
+      - [destinations, added, countries]
+      - [destinations, added, trigger, countries]
 
   - must_id: "item:A.7.5.2:proc_alignment_7_5_1"
     description: "Alignment with A.7.5.1 — every destination has a documented basis"
     excerpt_keywords:
-      - [alignment, 7, 5, 1]
-      - [alignment, every]
-      - [alignment, every, destination]
-      - [every, destination]
-      - [every, destination, has]
-      - [destination, has]
-      - [destination, has, documented]
-      - [has, documented]
+      - [alignment, 7, 5, 1, countries]
+      - [alignment, every, countries]
+      - [alignment, every, destination, countries]
+      - [every, destination, countries]
+      - [every, destination, has, countries]
+      - [destination, has, countries]
+      - [destination, has, documented, countries]
+      - [has, documented, countries]
 
   - must_id: "item:A.7.5.2:proc_law_enforcement_exception"
     description: "Law enforcement exception — cases where destinations cannot be specified in advance (§7.5.2 last paragraph)"
     excerpt_keywords:
-      - [law, enforcement, exception]
-      - [law, enforcement]
-      - [enforcement, exception]
-      - [enforcement, exception, cases]
-      - [exception, cases]
-      - [exception, cases, destinations]
-      - [cases, destinations]
-      - [cases, destinations, cannot]
+      - [law, enforcement, exception, countries]
+      - [law, enforcement, countries]
+      - [enforcement, exception, countries]
+      - [enforcement, exception, cases, countries]
+      - [exception, cases, countries]
+      - [exception, cases, destinations, countries]
+      - [cases, destinations, countries]
+      - [cases, destinations, cannot, countries]
 
   - must_id: "item:A.7.5.2:proc_subcontractor_inclusion"
     description: "Subcontractor destinations included — countries where subcontracted processing occurs"
     excerpt_keywords:
-      - [subcontractor, inclusion]
-      - [subcontractor, destinations]
-      - [subcontractor, destinations, included]
-      - [destinations, included]
+      - [subcontractor, inclusion, countries]
+      - [subcontractor, destinations, countries]
+      - [subcontractor, destinations, included, countries]
+      - [destinations, included, countries]
       - [destinations, included, countries]
       - [included, countries]
       - [included, countries, subcontracted]
@@ -62,7 +62,7 @@ must_fingerprints:
   - must_id: "item:A.7.5.2:proc_destinations_publication"
     description: "Destinations list publication — countries + international orgs made available to customers/subjects"
     excerpt_keywords:
-      - [destinations, publication]
+      - [destinations, publication, countries]
       - [destinations, publication, countries]
       - [publication, countries]
       - [publication, countries, international]

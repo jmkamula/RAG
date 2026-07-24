@@ -2731,7 +2731,7 @@ _LEAF_FINGERPRINT_CACHE = None
 
 # ── Ship 16'.b — token-set specificity gate ─────────────────────────
 #
-# Fingerprint auto-generation (scripts/generate_27701_fingerprints.py)
+# Fingerprint auto-generation (scripts/gen_leaf_scan_catalog.py)
 # templates the same excerpt_keywords shape across every
 # program_review + applicable_scope leaf. Ship 16'.a audit found 338
 # cross-leaf collisions — worst offender `[identity, reviewer]` fires

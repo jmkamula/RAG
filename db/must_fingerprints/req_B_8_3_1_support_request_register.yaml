@@ -14,60 +14,60 @@ must_fingerprints:
   - must_id: "item:B.8.3.1:reg_sla_met"
     description: "SLA-met flag per row"
     excerpt_keywords:
-      - [sla, met]
-      - [sla, met, flag]
-      - [met, flag]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [sla, met, obligations]
+      - [sla, met, flag, obligations]
+      - [met, flag, obligations]
+      - [per, row, obligations]
+      - [each, row, obligations]
+      - [column, containing, obligations]
+      - [each, entry, obligations]
+      - [column, header, obligations]
 
   - must_id: "item:B.8.3.1:reg_response"
     description: "Response per row (what was provided / done)"
     excerpt_keywords:
-      - [response, provided]
-      - [response, provided, done]
-      - [provided, done]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [response, provided, obligations]
+      - [response, provided, done, obligations]
+      - [provided, done, obligations]
+      - [per, row, obligations]
+      - [each, row, obligations]
+      - [column, containing, obligations]
+      - [each, entry, obligations]
+      - [column, header, obligations]
 
   - must_id: "item:B.8.3.1:reg_request_type"
     description: "Request type per row (rectification support / erasure support / portability export / restriction / info-for-Art.15)"
     excerpt_keywords:
-      - [request, rectification]
-      - [request, rectification, support]
-      - [rectification, support]
-      - [rectification, support, erasure]
-      - [support, erasure]
-      - [support, erasure, support]
-      - [erasure, support]
-      - [erasure, support, portability]
+      - [request, rectification, obligations]
+      - [request, rectification, support, obligations]
+      - [rectification, support, obligations]
+      - [rectification, support, erasure, obligations]
+      - [support, erasure, obligations]
+      - [support, erasure, support, obligations]
+      - [erasure, support, obligations]
+      - [erasure, support, portability, obligations]
 
   - must_id: "item:B.8.3.1:reg_customer_id"
     description: "Requesting customer identifier per row"
     excerpt_keywords:
-      - [customer, id]
-      - [requesting, customer]
-      - [requesting, customer, identifier]
-      - [customer, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [customer, id, obligations]
+      - [requesting, customer, obligations]
+      - [requesting, customer, identifier, obligations]
+      - [customer, identifier, obligations]
+      - [per, row, obligations]
+      - [each, row, obligations]
+      - [column, containing, obligations]
+      - [each, entry, obligations]
 
   - must_id: "item:B.8.3.1:reg_request_id"
     description: "Unique request identifier per row"
     excerpt_keywords:
-      - [request, id]
-      - [unique, request]
-      - [unique, request, identifier]
-      - [request, identifier]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
+      - [request, id, obligations]
+      - [unique, request, obligations]
+      - [unique, request, identifier, obligations]
+      - [request, identifier, obligations]
+      - [per, row, obligations]
+      - [each, row, obligations]
+      - [column, containing, obligations]
+      - [each, entry, obligations]
 

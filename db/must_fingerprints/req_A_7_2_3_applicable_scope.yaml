@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.3:applicable_scope
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.3:applicable_scope"
@@ -10,17 +11,39 @@ target_control: "A.7.2.3"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.2.3:scope_special_category_map"
+    description: "Special-category consent map — health / biometric / genetic / criminal / children require explicit consent unless another Art.9.2 basis appl"
+    excerpt_keywords:
+      - [special, category, map, determine]
+      - [special, category, determine]
+      - [special, category, consent]
+      - [category, consent]
+      - [category, consent, map]
+      - [consent, map]
+      - [consent, map, health]
+      - [map, health, determine]
+
   - must_id: "item:A.7.2.3:scope_children_thresholds"
     description: "Per-jurisdiction age-of-consent thresholds"
     excerpt_keywords:
-      - [scope, children, thresholds, determine]
+      - [children, thresholds, determine]
+      - [jurisdiction, age, determine]
+      - [jurisdiction, age, consent]
+      - [age, consent]
+      - [age, consent, thresholds]
+      - [consent, thresholds]
+      - [in, scope, determine]
+      - [scope, includes, determine]
 
   - must_id: "item:A.7.2.3:scope_consent_activities"
-    description: "Consent-required activity list (marketing / cookies non-essential / research participation / chil..."
+    description: "Consent-required activity list (marketing / cookies non-essential / research participation / children)"
     excerpt_keywords:
-      - [scope, consent, activities]
+      - [consent, activities]
+      - [consent, required]
+      - [consent, required, activity]
+      - [required, activity, determine]
+      - [required, activity, marketing, determine]
+      - [activity, marketing, determine]
+      - [activity, marketing, cookies, determine]
+      - [marketing, cookies, determine]
 
-  - must_id: "item:A.7.2.3:scope_special_category_map"
-    description: "Special-category consent map — health / biometric / genetic / criminal / children require explici..."
-    excerpt_keywords:
-      - [scope, special, category, map, determine]

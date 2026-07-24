@@ -14,21 +14,21 @@ must_fingerprints:
   - must_id: "item:A.7.2.4:proc_unambiguous_test"
     description: "Unambiguous test — clear affirmative action, no pre-ticked boxes, no consent by silence"
     excerpt_keywords:
-      - [unambiguous, test]
-      - [unambiguous, test, clear]
-      - [test, clear]
-      - [test, clear, affirmative]
-      - [clear, affirmative]
-      - [clear, affirmative, action]
-      - [affirmative, action]
-      - [affirmative, action, pre]
+      - [unambiguous, test, obtain]
+      - [unambiguous, test, clear, obtain]
+      - [test, clear, obtain]
+      - [test, clear, affirmative, obtain]
+      - [clear, affirmative, obtain]
+      - [clear, affirmative, action, obtain]
+      - [affirmative, action, obtain]
+      - [affirmative, action, pre, obtain]
 
   - must_id: "item:A.7.2.4:proc_specific_test"
     description: "Specific test — one consent per purpose (or granular per-purpose selection)"
     excerpt_keywords:
-      - [specific, test]
-      - [specific, test, one]
-      - [test, one]
+      - [specific, test, obtain]
+      - [specific, test, one, obtain]
+      - [test, one, obtain]
       - [test, one, consent]
       - [one, consent]
       - [one, consent, purpose]
@@ -38,14 +38,14 @@ must_fingerprints:
   - must_id: "item:A.7.2.4:proc_freely_given_test"
     description: "Freely-given test — no detriment for refusal, no bundled coercion"
     excerpt_keywords:
-      - [freely, given, test]
-      - [freely, given]
-      - [given, test]
-      - [given, test, detriment]
-      - [test, detriment]
-      - [test, detriment, refusal]
-      - [detriment, refusal]
-      - [detriment, refusal, bundled]
+      - [freely, given, test, obtain]
+      - [freely, given, obtain]
+      - [given, test, obtain]
+      - [given, test, detriment, obtain]
+      - [test, detriment, obtain]
+      - [test, detriment, refusal, obtain]
+      - [detriment, refusal, obtain]
+      - [detriment, refusal, bundled, obtain]
 
   - must_id: "item:A.7.2.4:proc_pre_consent_information"
     description: "Pre-consent information delivery per §7.3.3 (linked to A.7.3.3)"
@@ -53,20 +53,20 @@ must_fingerprints:
       - [pre, consent]
       - [pre, consent, delivery]
       - [consent, delivery]
-      - [procedure, step]
-      - [process, step]
-      - [responsibility, of]
+      - [procedure, step, obtain]
+      - [process, step, obtain]
+      - [responsibility, of, obtain]
 
   - must_id: "item:A.7.2.4:proc_demonstration_pathway"
     description: "Demonstration pathway — subject requests proof of consent, org retrieves record within stated SLA"
     excerpt_keywords:
-      - [demonstration, pathway]
-      - [demonstration, pathway, subject]
-      - [pathway, subject]
-      - [pathway, subject, requests]
-      - [subject, requests]
-      - [subject, requests, proof]
-      - [requests, proof]
+      - [demonstration, pathway, obtain]
+      - [demonstration, pathway, subject, obtain]
+      - [pathway, subject, obtain]
+      - [pathway, subject, requests, obtain]
+      - [subject, requests, obtain]
+      - [subject, requests, proof, obtain]
+      - [requests, proof, obtain]
       - [requests, proof, consent]
 
   - must_id: "item:A.7.2.4:proc_record_fields"
@@ -74,10 +74,10 @@ must_fingerprints:
     excerpt_keywords:
       - [consent, fields]
       - [consent, fields, subject]
-      - [fields, subject]
-      - [fields, subject, identifier]
-      - [subject, identifier]
-      - [subject, identifier, timestamp]
-      - [identifier, timestamp]
-      - [identifier, timestamp, purposes]
+      - [fields, subject, obtain]
+      - [fields, subject, identifier, obtain]
+      - [subject, identifier, obtain]
+      - [subject, identifier, timestamp, obtain]
+      - [identifier, timestamp, obtain]
+      - [identifier, timestamp, purposes, obtain]
 

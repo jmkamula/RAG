@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.4:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.4:program_review"
@@ -10,27 +11,63 @@ target_control: "A.7.2.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.2.4:rev_withdrawal_propagation"
+    description: "Withdrawal propagation — sampled withdrawals verified to have stopped downstream processing"
+    excerpt_keywords:
+      - [withdrawal, propagation, obtain]
+      - [withdrawal, propagation, sampled, obtain]
+      - [propagation, sampled, obtain]
+      - [propagation, sampled, withdrawals, obtain]
+      - [sampled, withdrawals, obtain]
+      - [sampled, withdrawals, verified, obtain]
+      - [withdrawals, verified, obtain]
+      - [withdrawals, verified, have, obtain]
+
   - must_id: "item:A.7.2.4:rev_completeness_audit"
     description: "Completeness audit — sampled consented users have retrievable records"
     excerpt_keywords:
       - [completeness, audit, obtain]
-
-  - must_id: "item:A.7.2.4:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, obtain]
+      - [completeness, audit, sampled, obtain]
+      - [audit, sampled, obtain]
+      - [audit, sampled, consented, obtain]
+      - [sampled, consented, obtain]
+      - [sampled, consented, users, obtain]
+      - [consented, users, obtain]
+      - [consented, users, have, obtain]
 
   - must_id: "item:A.7.2.4:rev_retrievability"
     description: "Retrievability test — sampled consent events retrieved within stated SLA"
     excerpt_keywords:
       - [retrievability, test, obtain]
+      - [retrievability, test, sampled, obtain]
+      - [test, sampled, obtain]
+      - [test, sampled, consent]
+      - [sampled, consent]
+      - [sampled, consent, events]
+      - [consent, events]
+      - [consent, events, retrieved]
 
   - must_id: "item:A.7.2.4:rev_reviewer"
     description: "Reviewer identity (DPO + Engineering)"
     excerpt_keywords:
       - [reviewer, identity, obtain]
+      - [reviewer, identity, dpo, obtain]
+      - [identity, dpo, obtain]
+      - [identity, dpo, engineering, obtain]
+      - [dpo, engineering, obtain]
+      - [per, revocation, obtain]
+      - [per, revoked, identity, obtain]
+      - [revocation, record, obtain]
 
-  - must_id: "item:A.7.2.4:rev_withdrawal_propagation"
-    description: "Withdrawal propagation — sampled withdrawals verified to have stopped downstream processing"
+  - must_id: "item:A.7.2.4:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [withdrawal, propagation, obtain]
+      - [review, date, obtain]
+      - [review, date, within, obtain]
+      - [date, within, obtain]
+      - [date, within, planned, obtain]
+      - [within, planned, obtain]
+      - [within, planned, interval, obtain]
+      - [planned, interval, obtain]
+      - [per, revocation, obtain]
+

@@ -14,21 +14,21 @@ must_fingerprints:
   - must_id: "item:B.8.4.1:proc_periodic_check"
     description: "Periodic check that temp files are deleted"
     excerpt_keywords:
-      - [periodic, check]
-      - [periodic, check, temp]
-      - [check, temp]
+      - [periodic, check, temporary]
+      - [periodic, check, temp, temporary]
+      - [check, temp, temporary]
       - [check, temp, files]
       - [temp, files]
       - [temp, files, deleted]
       - [files, deleted]
-      - [procedure, step]
+      - [procedure, step, temporary]
 
   - must_id: "item:B.8.4.1:proc_tenant_isolation"
     description: "Tenant isolation of temp files — no cross-tenant leakage in shared infrastructure"
     excerpt_keywords:
-      - [tenant, isolation]
-      - [tenant, isolation, temp]
-      - [isolation, temp]
+      - [tenant, isolation, temporary]
+      - [tenant, isolation, temp, temporary]
+      - [isolation, temp, temporary]
       - [isolation, temp, files]
       - [temp, files]
       - [temp, files, cross]
@@ -38,11 +38,11 @@ must_fingerprints:
   - must_id: "item:B.8.4.1:proc_gc_procedure"
     description: "Garbage collection procedure identifying unused files + last-use timestamp"
     excerpt_keywords:
-      - [garbage, collection]
-      - [garbage, collection, identifying]
-      - [collection, identifying]
-      - [collection, identifying, unused]
-      - [identifying, unused]
+      - [garbage, collection, temporary]
+      - [garbage, collection, identifying, temporary]
+      - [collection, identifying, temporary]
+      - [collection, identifying, unused, temporary]
+      - [identifying, unused, temporary]
       - [identifying, unused, files]
       - [unused, files]
       - [unused, files, last]
@@ -50,24 +50,24 @@ must_fingerprints:
   - must_id: "item:B.8.4.1:proc_period"
     description: "Disposal period stated per taxonomy category"
     excerpt_keywords:
-      - [disposal, period]
-      - [disposal, period, stated]
-      - [period, stated]
-      - [period, stated, taxonomy]
-      - [stated, taxonomy]
-      - [stated, taxonomy, category]
-      - [taxonomy, category]
-      - [procedure, step]
+      - [disposal, period, temporary]
+      - [disposal, period, stated, temporary]
+      - [period, stated, temporary]
+      - [period, stated, taxonomy, temporary]
+      - [stated, taxonomy, temporary]
+      - [stated, taxonomy, category, temporary]
+      - [taxonomy, category, temporary]
+      - [procedure, step, temporary]
 
   - must_id: "item:B.8.4.1:proc_temp_taxonomy"
     description: "Temp file taxonomy (customer-facing multi-tenant apps + shared infrastructure + integration middleware)"
     excerpt_keywords:
-      - [temp, taxonomy]
-      - [temp, file]
-      - [temp, file, taxonomy]
-      - [file, taxonomy]
-      - [file, taxonomy, customer]
-      - [taxonomy, customer]
-      - [taxonomy, customer, facing]
-      - [customer, facing]
+      - [temp, taxonomy, temporary]
+      - [temp, file, temporary]
+      - [temp, file, taxonomy, temporary]
+      - [file, taxonomy, temporary]
+      - [file, taxonomy, customer, temporary]
+      - [taxonomy, customer, temporary]
+      - [taxonomy, customer, facing, temporary]
+      - [customer, facing, temporary]
 

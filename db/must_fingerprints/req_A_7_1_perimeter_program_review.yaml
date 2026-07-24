@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.1:perimeter_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.1:perimeter_program_review"
@@ -10,28 +11,63 @@ target_control: "A.7.1"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.7.1:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, physical]
-
   - must_id: "item:A.7.1:rev_register_update"
     description: "Changes propagated to the live register"
     excerpt_keywords:
-      - [register, update, physical]
-      - [changes, propagated, live, register, physical]
+      - [changes, propagated, physical]
+      - [changes, propagated, live, physical]
+      - [propagated, live, physical]
+      - [per, revocation, physical]
+      - [per, revoked, identity, physical]
+      - [revocation, record, physical]
+      - [review, findings, physical]
+      - [audit, outcomes, physical]
+
+  - must_id: "item:A.7.1:rev_scope_check"
+    description: "Cross-check against the applicable-sites scope — any new site or sub-let that should add a register entry"
+    excerpt_keywords:
+      - [scope, check, physical]
+      - [cross, check, physical]
+      - [cross, check, against, physical]
+      - [check, against, physical]
+      - [check, against, sites, physical]
+      - [against, sites, physical]
+      - [against, sites, scope, physical]
+      - [sites, scope, physical]
+
+  - must_id: "item:A.7.1:rev_walkthrough"
+    description: "Physical walkthrough conducted per site (sample-based for multi-site orgs) — barriers verified present and functional"
+    excerpt_keywords:
+      - [physical, walkthrough]
+      - [physical, walkthrough, conducted]
+      - [walkthrough, conducted, physical]
+      - [walkthrough, conducted, site, physical]
+      - [conducted, site, physical]
+      - [conducted, site, sample, physical]
+      - [site, sample, physical]
+      - [site, sample, based, physical]
 
   - must_id: "item:A.7.1:rev_reviewer"
     description: "Reviewer identity (Facilities lead + InfoSec lead jointly)"
     excerpt_keywords:
       - [reviewer, identity, physical]
+      - [reviewer, identity, facilities, physical]
+      - [identity, facilities, physical]
+      - [identity, facilities, lead, physical]
+      - [facilities, lead, physical]
+      - [facilities, lead, infosec, physical]
+      - [lead, infosec, physical]
+      - [lead, infosec, lead, physical]
 
-  - must_id: "item:A.7.1:rev_scope_check"
-    description: "Cross-check against the applicable-sites scope — any new site or sub-let that should add a regist..."
+  - must_id: "item:A.7.1:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [scope, check, physical]
+      - [review, date, physical]
+      - [review, date, within, physical]
+      - [date, within, physical]
+      - [date, within, planned, physical]
+      - [within, planned, physical]
+      - [within, planned, interval, physical]
+      - [planned, interval, physical]
+      - [per, revocation, physical]
 
-  - must_id: "item:A.7.1:rev_walkthrough"
-    description: "Physical walkthrough conducted per site (sample-based for multi-site orgs) — barriers verified pr..."
-    excerpt_keywords:
-      - [physical, walkthrough, conducted, site]

@@ -14,58 +14,58 @@ must_fingerprints:
   - must_id: "item:7.3:reg_expiry"
     description: "Expiry / next-due date per row (drives refresher trigger)"
     excerpt_keywords:
-      - [expiry, next]
-      - [expiry, next, due]
-      - [next, due]
-      - [next, due, date]
-      - [due, date]
-      - [due, date, refresher]
-      - [date, refresher]
-      - [date, refresher, trigger]
+      - [expiry, next, awareness]
+      - [expiry, next, due, awareness]
+      - [next, due, awareness]
+      - [next, due, date, awareness]
+      - [due, date, awareness]
+      - [due, date, refresher, awareness]
+      - [date, refresher, awareness]
+      - [date, refresher, trigger, awareness]
 
   - must_id: "item:7.3:reg_acknowledgement"
     description: "Acknowledgement per row (signed receipt, LMS attestation, quiz pass)"
     excerpt_keywords:
-      - [acknowledgement, signed]
-      - [acknowledgement, signed, receipt]
-      - [signed, receipt]
-      - [signed, receipt, lms]
-      - [receipt, lms]
-      - [receipt, lms, attestation]
-      - [lms, attestation]
-      - [lms, attestation, quiz]
+      - [acknowledgement, signed, awareness]
+      - [acknowledgement, signed, receipt, awareness]
+      - [signed, receipt, awareness]
+      - [signed, receipt, lms, awareness]
+      - [receipt, lms, awareness]
+      - [receipt, lms, attestation, awareness]
+      - [lms, attestation, awareness]
+      - [lms, attestation, quiz, awareness]
 
   - must_id: "item:7.3:reg_completion_date"
     description: "Completion date per row"
     excerpt_keywords:
-      - [completion, date]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [completion, date, awareness]
+      - [per, row, awareness]
+      - [each, row, awareness]
+      - [column, containing, awareness]
+      - [each, entry, awareness]
+      - [column, header, awareness]
 
   - must_id: "item:7.3:reg_module"
     description: "Module identifier per row (policy module, contribution module, consequences module)"
     excerpt_keywords:
-      - [identifier, contribution]
-      - [identifier, contribution, consequences]
-      - [contribution, consequences]
-      - [per, row]
-      - [each, row]
-      - [column, containing]
-      - [each, entry]
-      - [column, header]
+      - [identifier, contribution, awareness]
+      - [identifier, contribution, consequences, awareness]
+      - [contribution, consequences, awareness]
+      - [per, row, awareness]
+      - [each, row, awareness]
+      - [column, containing, awareness]
+      - [each, entry, awareness]
+      - [column, header, awareness]
 
   - must_id: "item:7.3:reg_subject_id"
     description: "Subject identifier per row (employee or contractor)"
     excerpt_keywords:
-      - [subject, id]
-      - [subject, identifier]
-      - [subject, identifier, employee]
-      - [identifier, employee]
-      - [identifier, employee, contractor]
-      - [employee, contractor]
-      - [per, row]
-      - [each, row]
+      - [subject, id, awareness]
+      - [subject, identifier, awareness]
+      - [subject, identifier, employee, awareness]
+      - [identifier, employee, awareness]
+      - [identifier, employee, contractor, awareness]
+      - [employee, contractor, awareness]
+      - [per, row, awareness]
+      - [each, row, awareness]
 

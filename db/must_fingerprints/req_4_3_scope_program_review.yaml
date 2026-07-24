@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:4.3:scope_program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:4.3:scope_program_review"
@@ -13,19 +14,48 @@ must_fingerprints:
   - must_id: "item:4.3:rev_change_log"
     description: "Cross-check against change records — every actual scope change in the year is logged"
     excerpt_keywords:
-      - [change, log, determining]
+      - [cross, check, determining]
+      - [cross, check, against, determining]
+      - [check, against, determining]
+      - [check, against, change, determining]
+      - [against, change, determining]
+      - [against, change, records, determining]
+      - [change, records, determining]
+      - [change, records, every, determining]
 
   - must_id: "item:4.3:rev_currency"
     description: "Currency check — scope still matches organisational reality (sites, products, third parties)"
     excerpt_keywords:
       - [currency, check, determining]
-
-  - must_id: "item:4.3:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, determining]
+      - [currency, check, scope]
+      - [check, scope]
+      - [check, scope, still]
+      - [scope, still]
+      - [scope, still, matches]
+      - [still, matches, determining]
+      - [still, matches, organisational, determining]
 
   - must_id: "item:4.3:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + top management)"
     excerpt_keywords:
       - [reviewer, identity, determining]
+      - [reviewer, identity, isms, determining]
+      - [identity, isms, determining]
+      - [identity, isms, manager, determining]
+      - [isms, manager, determining]
+      - [isms, manager, top, determining]
+      - [manager, top, determining]
+      - [manager, top, management, determining]
+
+  - must_id: "item:4.3:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, determining]
+      - [review, date, within, determining]
+      - [date, within, determining]
+      - [date, within, planned, determining]
+      - [within, planned, determining]
+      - [within, planned, interval, determining]
+      - [planned, interval, determining]
+      - [per, revocation, determining]
+

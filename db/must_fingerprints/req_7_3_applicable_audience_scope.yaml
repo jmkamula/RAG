@@ -14,36 +14,36 @@ must_fingerprints:
   - must_id: "item:7.3:scope_external"
     description: "External-party coverage stated (auditors, embedded vendor staff, visiting researchers as relevant)"
     excerpt_keywords:
-      - [external, party]
-      - [external, party, coverage]
-      - [party, coverage]
-      - [party, coverage, stated]
-      - [coverage, stated]
-      - [coverage, stated, auditors]
-      - [stated, auditors]
-      - [stated, auditors, embedded]
+      - [external, party, awareness]
+      - [external, party, coverage, awareness]
+      - [party, coverage, awareness]
+      - [party, coverage, stated, awareness]
+      - [coverage, stated, awareness]
+      - [coverage, stated, auditors, awareness]
+      - [stated, auditors, awareness]
+      - [stated, auditors, embedded, awareness]
 
   - must_id: "item:7.3:scope_contractors"
     description: "Contractor coverage stated (which contractor classes are in scope; cross-link to A.5.19 supplier)"
     excerpt_keywords:
-      - [contractor, coverage]
-      - [contractor, coverage, stated]
-      - [coverage, stated]
-      - [coverage, stated, contractor]
-      - [stated, contractor]
-      - [stated, contractor, classes]
-      - [contractor, classes]
-      - [contractor, classes, scope]
+      - [contractor, coverage, awareness]
+      - [contractor, coverage, stated, awareness]
+      - [coverage, stated, awareness]
+      - [coverage, stated, contractor, awareness]
+      - [stated, contractor, awareness]
+      - [stated, contractor, classes, awareness]
+      - [contractor, classes, awareness]
+      - [contractor, classes, scope, awareness]
 
   - must_id: "item:7.3:scope_employees"
     description: "Employee coverage stated (all employees, all locations)"
     excerpt_keywords:
-      - [employee, coverage]
-      - [employee, coverage, stated]
-      - [coverage, stated]
-      - [coverage, stated, employees]
-      - [stated, employees]
-      - [stated, employees, locations]
-      - [employees, locations]
-      - [in, scope]
+      - [employee, coverage, awareness]
+      - [employee, coverage, stated, awareness]
+      - [coverage, stated, awareness]
+      - [coverage, stated, employees, awareness]
+      - [stated, employees, awareness]
+      - [stated, employees, locations, awareness]
+      - [employees, locations, awareness]
+      - [in, scope, awareness]
 

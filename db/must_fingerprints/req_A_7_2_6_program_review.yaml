@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.6:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.6:program_review"
@@ -10,32 +11,75 @@ target_control: "A.7.2.6"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.6:rev_coverage_check"
-    description: "Coverage check — every engaged processor has a signed contract on file"
-    excerpt_keywords:
-      - [coverage, check, contracts]
-
-  - must_id: "item:A.7.2.6:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, contracts]
-
-  - must_id: "item:A.7.2.6:rev_expiry_sweep"
-    description: "Expiry sweep — contracts approaching renewal flagged"
-    excerpt_keywords:
-      - [expiry, sweep, contracts]
-
   - must_id: "item:A.7.2.6:rev_missing_terms_audit"
     description: "Missing-terms audit — sampled contracts checked against Art.28.3 mandatory list"
     excerpt_keywords:
       - [missing, terms, audit, contracts]
-
-  - must_id: "item:A.7.2.6:rev_reviewer"
-    description: "Reviewer identity (DPO + Procurement + Legal)"
-    excerpt_keywords:
-      - [reviewer, identity, contracts]
+      - [missing, terms, contracts]
+      - [terms, audit, contracts]
+      - [terms, audit, sampled, contracts]
+      - [audit, sampled, contracts]
+      - [audit, sampled, contracts]
+      - [sampled, contracts]
+      - [sampled, contracts, checked]
 
   - must_id: "item:A.7.2.6:rev_subprocessor_audit"
     description: "Subprocessor audit — sampled contracts checked for current subprocessor authorisation"
     excerpt_keywords:
       - [subprocessor, audit, contracts]
+      - [subprocessor, audit, sampled, contracts]
+      - [audit, sampled, contracts]
+      - [audit, sampled, contracts]
+      - [sampled, contracts]
+      - [sampled, contracts, checked]
+      - [contracts, checked]
+      - [contracts, checked, current]
+
+  - must_id: "item:A.7.2.6:rev_expiry_sweep"
+    description: "Expiry sweep — contracts approaching renewal flagged"
+    excerpt_keywords:
+      - [expiry, sweep, contracts]
+      - [expiry, sweep, contracts]
+      - [sweep, contracts]
+      - [sweep, contracts, approaching]
+      - [contracts, approaching]
+      - [contracts, approaching, renewal]
+      - [approaching, renewal, contracts]
+      - [approaching, renewal, flagged, contracts]
+
+  - must_id: "item:A.7.2.6:rev_coverage_check"
+    description: "Coverage check — every engaged processor has a signed contract on file"
+    excerpt_keywords:
+      - [coverage, check, contracts]
+      - [coverage, check, every, contracts]
+      - [check, every, contracts]
+      - [check, every, engaged, contracts]
+      - [every, engaged, contracts]
+      - [every, engaged, processor, contracts]
+      - [engaged, processor, contracts]
+      - [engaged, processor, has, contracts]
+
+  - must_id: "item:A.7.2.6:rev_reviewer"
+    description: "Reviewer identity (DPO + Procurement + Legal)"
+    excerpt_keywords:
+      - [reviewer, identity, contracts]
+      - [reviewer, identity, dpo, contracts]
+      - [identity, dpo, contracts]
+      - [identity, dpo, procurement, contracts]
+      - [dpo, procurement, contracts]
+      - [dpo, procurement, legal, contracts]
+      - [procurement, legal, contracts]
+      - [per, revocation, contracts]
+
+  - must_id: "item:A.7.2.6:rev_date"
+    description: "Review date within the planned interval"
+    excerpt_keywords:
+      - [review, date, contracts]
+      - [review, date, within, contracts]
+      - [date, within, contracts]
+      - [date, within, planned, contracts]
+      - [within, planned, contracts]
+      - [within, planned, interval, contracts]
+      - [planned, interval, contracts]
+      - [per, revocation, contracts]
+

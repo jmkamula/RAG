@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.4:program_review
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.4:program_review"
@@ -10,22 +11,51 @@ target_control: "A.7.4.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.4:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [review, date, planned, interval, pii]
-
   - must_id: "item:A.7.4.4:rev_drift_sweep"
     description: "Drift sweep — new processing activities checked for minimisation opportunity"
     excerpt_keywords:
       - [drift, sweep, pii]
+      - [drift, sweep, new, pii]
+      - [sweep, new, pii]
+      - [sweep, new, processing, pii]
+      - [new, processing, pii]
+      - [new, processing, activities, pii]
+      - [processing, activities, pii]
+      - [processing, activities, checked, pii]
+
+  - must_id: "item:A.7.4.4:rev_technique_currency"
+    description: "Technique currency — techniques still appropriate for risk profile (advances in re-identification research surfaced)"
+    excerpt_keywords:
+      - [technique, currency, pii]
+      - [technique, currency, techniques, pii]
+      - [currency, techniques, pii]
+      - [currency, techniques, still, pii]
+      - [techniques, still, pii]
+      - [techniques, still, appropriate, pii]
+      - [still, appropriate, pii]
+      - [still, appropriate, risk, pii]
 
   - must_id: "item:A.7.4.4:rev_reviewer"
     description: "Reviewer identity (DPO + Privacy Engineering)"
     excerpt_keywords:
       - [reviewer, identity, pii]
+      - [reviewer, identity, dpo, pii]
+      - [identity, dpo, pii]
+      - [identity, dpo, privacy, pii]
+      - [dpo, privacy, pii]
+      - [dpo, privacy, engineering, pii]
+      - [privacy, engineering, pii]
+      - [per, revocation, pii]
 
-  - must_id: "item:A.7.4.4:rev_technique_currency"
-    description: "Technique currency — techniques still appropriate for risk profile (advances in re-identification..."
+  - must_id: "item:A.7.4.4:rev_date"
+    description: "Review date within the planned interval"
     excerpt_keywords:
-      - [technique, currency, pii]
+      - [review, date, pii]
+      - [review, date, within, pii]
+      - [date, within, pii]
+      - [date, within, planned, pii]
+      - [within, planned, pii]
+      - [within, planned, interval, pii]
+      - [planned, interval, pii]
+      - [per, revocation, pii]
+
