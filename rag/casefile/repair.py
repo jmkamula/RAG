@@ -200,26 +200,31 @@ def check_and_repair(
                        f"'{verdict}' not adjacent",
             ))
 
-    # ── 4. Missing bridge footer ─────────────────────────────────────
+    # ── 4. Missing bridge footer (RETIRED Ship 22'.b) ───────────────
+    # Ship 20 made every chat path emit answer_structured;
+    # cross_framework_bridge + demonstrated_by cards in related[]
+    # render every ISO 27001 control linked to a cited GDPR article
+    # (see rag/casefile/answer_augment.py::_collect_demonstrators +
+    # _classify_relation). The bridge footer is structurally
+    # redundant with those cards, so we retire the visible append.
+    #
+    # Repair events still fire for observability — auditors reading
+    # chat_casefile_log.repair_events can identify bridge misses via
+    # kind="missing_bridge_footer" and drill in through
+    # scripts/audit_retired_footer.sql.
     if spec.bridge_footer:
-        # Ship 1.14 already skips its own bridge footer append when
-        # every bridge ref is present. Mirror that: only complain if
-        # the footer or its content isn't already in the text.
-        footer_present = spec.bridge_footer in text
-        if not footer_present:
-            # Also check for a partial footer — text may already carry
-            # some of the bridge refs via the LLM's own citation.
-            # (This matches llm_answer.py:1626 behaviour.)
-            footer_refs = set(_REF_RE.findall(spec.bridge_footer))
-            missing_bridge_refs = footer_refs - refs_present
-            if missing_bridge_refs:
-                events.append(RepairEvent(
-                    kind="missing_bridge_footer",
-                    ref=None,
-                    detail=f"bridge footer absent + refs {sorted(missing_bridge_refs)} "
-                           f"missing from answer",
-                ))
-                footers.append(spec.bridge_footer)
+        footer_refs = set(_REF_RE.findall(spec.bridge_footer))
+        missing_bridge_refs = footer_refs - refs_present
+        if missing_bridge_refs and spec.bridge_footer not in text:
+            events.append(RepairEvent(
+                kind="missing_bridge_footer",
+                ref=None,
+                detail=f"bridge footer absent + refs {sorted(missing_bridge_refs)} "
+                       f"missing from answer",
+            ))
+            # NO footer append. `_build_bridge_footer` helper kept in
+            # preservation.py for any future caller that wants to
+            # reconstruct the string.
 
     # ── Compliance-facts footer RETIRED in Ship 21'.b ────────────────
     # Ship 20 made every chat path emit answer_structured; related[]

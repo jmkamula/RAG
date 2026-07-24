@@ -17,14 +17,20 @@
 -- Usage — recent 24h all-tenant sweep:
 --   Change WHERE clause below to `AND created_at > now() - interval '24 hours'`.
 
--- Every repair event on every turn since Ship 21 rollout:
+-- Every repair event on every turn since the Ship 21/22 rollout:
 --   * kind        — missing_ref | missing_draft_near_ref |
 --                   missing_verdict_near_ref | missing_bridge_footer |
---                   missing_ref_structured | structured_parse_failed
---   * ref         — control ref the LLM dropped from prose
+--                   missing_risk_ref | missing_ref_structured |
+--                   structured_parse_failed
+--   * ref         — control ref the LLM dropped from prose (or
+--                   NULL for footer-level misses like bridge)
 --   * detail      — human-readable note the repair layer generated
 -- All of these were previously appended to the visible prose as
--- `↳ Compliance facts: ...`. Now they live here exclusively.
+-- `↳ Compliance facts: ...` (Ship 21'.b retirement), `↳ Bridges to
+-- ISO 27001 ...` (Ship 22'.b retirement), or `↳ Risk register: ...`
+-- (Ship 22'.c retirement). Now they live here exclusively; the
+-- card render + `## Related controls` / `## Risks` prose sections
+-- carry the equivalent auditor-visible content.
 
 SELECT c.created_at::timestamp(0)                         AS ts,
        c.tenant_id,
