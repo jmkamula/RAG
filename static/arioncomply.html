@@ -5210,12 +5210,35 @@ function renderStructuredAnswer(s) {
     html += `</div>`;
   }
 
-  // ── Related-control cards ────────────────────────────────────
+  // ── Related-control cards (Ship 23'.c: role-grouped) ─────────
+  // Cards group into sections by role: Primary, Programs,
+  // Extensions, Obligations, Management-system clauses, Other.
+  // Ordering matches structured_to_prose so the card render + the
+  // prose reconstruction stay in sync.
   const related = s.related || [];
   if (related.length) {
-    html += `<div class="sa-related">
-      <div class="sa-related-header">Related controls</div>`;
+    const groups = {
+      primary: [], program: [], extension: [], obligation: [],
+      isms_clause: [], other: []
+    };
     related.forEach(r => {
+      const rel = r.relation || '';
+      if (rel === 'primary') groups.primary.push(r);
+      else if (rel === 'program') groups.program.push(r);
+      else if (rel === 'extension') groups.extension.push(r);
+      else if (rel === 'obligation' || rel === 'demonstrated_by') {
+        // legacy demonstrated_by → route to card's actual role
+        const cardRole = r.role || '';
+        if (cardRole === 'program') groups.program.push(r);
+        else if (cardRole === 'extension') groups.extension.push(r);
+        else if (cardRole === 'obligation') groups.obligation.push(r);
+        else groups.other.push(r);
+      }
+      else if (rel === 'isms_clause') groups.isms_clause.push(r);
+      else groups.other.push(r);
+    });
+
+    const renderCard = (r) => {
       const verdict = (r.verdict || 'Unknown');
       const badgeCls =
         verdict === 'NC'     ? 'sa-badge sa-badge-nc'     :
@@ -5226,11 +5249,6 @@ function renderStructuredAnswer(s) {
       const draftChip = r.draft
         ? `<span class="sa-draft-chip">DRAFT</span>` : '';
 
-      // Ship 19'.c — primary card renders leaves[] as ✓/○ checklist;
-      // other cards keep the compact still_needed chip surface per
-      // the 19'.a primary-only decision. Falls back to chips on
-      // primary too when leaves[] is empty (single-leaf control /
-      // Comply / N/A → advisory returned no per-leaf data).
       const isPrimary = r.relation === 'primary';
       const hasLeaves = Array.isArray(r.leaves) && r.leaves.length > 0;
       let detailHtml;
@@ -5261,7 +5279,7 @@ function renderStructuredAnswer(s) {
 
       const dashHref = r.dashboard_url || `/#dashboard?control=${encodeURIComponent(r.ref || '')}`;
       const primaryCls = isPrimary ? ' sa-primary-card' : '';
-      html += `<div class="sa-card sa-related-card${primaryCls}" data-focus-ref="${attr(r.ref || '')}">
+      return `<div class="sa-card sa-related-card${primaryCls}" data-focus-ref="${attr(r.ref || '')}">
         <div class="sa-related-head">
           <span class="ref-tag">${esc(r.ref || '')}</span>
           <span class="sa-related-std">${esc(r.standard_display || r.standard_id || '')}</span>
@@ -5278,8 +5296,29 @@ function renderStructuredAnswer(s) {
           Open in dashboard →
         </a>
       </div>`;
+    };
+
+    // Section defs: [group_key, header_label]. Sections omitted
+    // when their group is empty. Primary renders with no header
+    // (it's the auditor's own focus of the answer).
+    const sections = [
+      ['primary',     null],
+      ['program',     'Programs'],
+      ['extension',   'Extensions'],
+      ['obligation',  'Obligations'],
+      ['isms_clause', 'Management-system clauses'],
+      ['other',       'Related controls'],
+    ];
+    sections.forEach(([key, header]) => {
+      const cards = groups[key] || [];
+      if (!cards.length) return;
+      html += `<div class="sa-related">`;
+      if (header !== null) {
+        html += `<div class="sa-related-header">${esc(header)}</div>`;
+      }
+      cards.forEach(r => { html += renderCard(r); });
+      html += `</div>`;
     });
-    html += `</div>`;
   }
 
   // ── Risk cards (Ship 22'.c) ──────────────────────────────────

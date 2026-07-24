@@ -194,15 +194,50 @@ def structured_to_prose(structured) -> str:
         if body:
             lines.append(body)
 
+    # Ship 23'.c — group related cards into role-labeled sections
+    # (Primary → Programs → Extensions → Obligations → Other).
+    # Ordering + section headers make the auditor's mental model
+    # explicit: "here's the primary control; here are the ISO 27001
+    # programs implementing it; here are the ISO 27701 privacy
+    # extensions on top; here are the GDPR obligations it demonstrates."
     related = list(structured.related or [])
     if related:
-        if lines:
-            lines.append("")
-        lines.append("## Related controls")
+        groups: dict[str, list] = {
+            "primary": [], "program": [], "extension": [],
+            "obligation": [], "isms_clause": [], "other": [],
+        }
         for r in related:
+            rel = getattr(r, "relation", "") or ""
+            if rel == "primary":
+                groups["primary"].append(r)
+            elif rel == "program":
+                groups["program"].append(r)
+            elif rel == "extension":
+                groups["extension"].append(r)
+            elif rel in ("obligation", "demonstrated_by"):
+                # `demonstrated_by` (legacy) shows programs/extensions
+                # demonstrating an obligation; from the primary-is-
+                # obligation perspective these cards ARE programs +
+                # extensions. Group by the card's role rather than
+                # the legacy label.
+                card_role = getattr(r, "role", "") or ""
+                if card_role == "program":
+                    groups["program"].append(r)
+                elif card_role == "extension":
+                    groups["extension"].append(r)
+                elif card_role == "obligation":
+                    groups["obligation"].append(r)
+                else:
+                    groups["other"].append(r)
+            elif rel == "isms_clause":
+                groups["isms_clause"].append(r)
+            else:
+                groups["other"].append(r)
+
+        def _fmt_card(r) -> str:
             ref = (getattr(r, "ref", "") or "").strip()
             if not ref:
-                continue
+                return ""
             title    = (getattr(r, "title", "") or "").strip()
             std_disp = (getattr(r, "standard_display", "") or "").strip()
             verdict  = (getattr(r, "verdict", "") or "").strip() or "Unknown"
@@ -212,15 +247,36 @@ def structured_to_prose(structured) -> str:
             verdict_tag = f"{verdict}-DRAFT" if draft and verdict in (
                 "NC", "OFI", "Comply"
             ) else verdict
-
-            # "(Title, ISO 27001:2022)" — omit each part if missing
             context_parts = [p for p in (title, std_disp) if p]
             context = f" ({', '.join(context_parts)})" if context_parts else ""
-
             entry = f"- **{ref}**{context} — {verdict_tag}"
             if evidence:
                 entry += f" — {evidence}"
-            lines.append(entry)
+            return entry
+
+        # Section headers per role group. Sections omitted when empty.
+        section_headers = [
+            ("primary",     None),                # rendered without a header
+            ("program",     "## Programs"),
+            ("extension",   "## Extensions"),
+            ("obligation",  "## Obligations"),
+            ("isms_clause", "## Management-system clauses"),
+            ("other",       "## Related controls"),
+        ]
+        for group_key, header in section_headers:
+            group_cards = groups.get(group_key) or []
+            if not group_cards:
+                continue
+            if header is not None:
+                if lines:
+                    lines.append("")
+                lines.append(header)
+            for r in group_cards:
+                entry = _fmt_card(r)
+                if entry:
+                    if header is None and lines and not lines[-1].startswith("- "):
+                        lines.append("")
+                    lines.append(entry)
 
     # Ship 22'.c — risks section replaces the retired
     # `↳ Risk register: R-...` footer.
@@ -584,14 +640,11 @@ def _norm_verdict(finding: str) -> str:
 
 
 def _relation_display(relation: str) -> str:
-    """Human-readable label for the relation slug."""
-    return {
-        "primary":                "Primary control",
-        "demonstrated_by":        "Demonstrates this obligation",
-        "cross_framework_bridge": "Cross-framework link",
-        "isms_clause":            "Management-system clause",
-        "context":                "Related control",
-    }.get(relation, "Related control")
+    """Human-readable label for the relation slug. Delegates to
+    `_relation_display_for` — Ship 23'.c added role-aware slugs
+    (program / extension / obligation) so the frontend + prose can
+    group by role section."""
+    return _relation_display_for(relation)
 
 
 def _standard_display(sid: str) -> str:
@@ -639,31 +692,120 @@ def _classify_relation(
     demonstrated_by_primary: set[str],
 ) -> str:
     """Determine the relation slug for a ref, given the query's
-    primary_ref + the set of demonstrators of the primary."""
+    primary_ref + the set of demonstrators of the primary.
+
+    Ship 23'.c: added role-aware slugs (`program` / `extension` /
+    `obligation`) so the frontend + prose can group by role section.
+    """
     if primary_ref and ref == primary_ref:
         return "primary"
-    if ref in demonstrated_by_primary:
-        return "demonstrated_by"
 
-    # ISMS management-system clauses look like 4.x / 5.x / ... / 10.x
-    # (no A. prefix, no Art. prefix). Everything else with these numbers
-    # is body-clause context to an Annex A primary.
-    if re.match(r"^\d+\.\d+(?:\.\d+)?$", ref):
-        # If the primary is an Annex A control (A.*) then the ISMS
-        # clause is management-system context; otherwise it's context.
-        if primary_ref and primary_ref.startswith("A."):
-            return "isms_clause"
-        return "isms_clause"
-
-    # Same-standard vs cross-standard classification
+    # Ship 23'.c — classify by role first (both for demonstrators and
+    # generic cross-standard neighbors). The legacy `demonstrated_by`
+    # label collapsed programs + extensions into one bucket; the
+    # role-grouped surface wants them split.
+    ref_title, ref_sid = _node_metadata(cf, ref)
     primary_sid = ""
     if primary_ref:
         _, primary_sid = _node_metadata(cf, primary_ref)
-    ref_title, ref_sid = _node_metadata(cf, ref)
+    is_cross_standard = bool(primary_sid and ref_sid and primary_sid != ref_sid)
+    is_demonstrator   = ref in demonstrated_by_primary
 
-    if primary_sid and ref_sid and primary_sid != ref_sid:
+    # ISMS management-system clauses look like 4.x / 5.x / ... / 10.x
+    # (no A. prefix, no Art. prefix). Applies within the same standard
+    # (both refs are ISO 27001); cross-standard ISMS clauses still
+    # exist as programs in the role model.
+    if not is_cross_standard and re.match(r"^\d+\.\d+(?:\.\d+)?$", ref):
+        return "isms_clause"
+
+    if is_cross_standard or is_demonstrator:
+        # Look up the role of the ref's standard — the frontend
+        # groups by these buckets: Programs / Extensions / Obligations.
+        role = cf.role_of(ref) or ""
+        if role == "program":
+            return "program"
+        if role == "extension":
+            return "extension"
+        if role == "obligation":
+            return "obligation"
         return "cross_framework_bridge"
+
+    # Same-standard sub-articles or in-family relatives
     return "context"
+
+
+def _relation_display_for(relation: str) -> str:
+    """Human-readable label displayed on the card. Extended in
+    Ship 23'.c with role-aware labels."""
+    return {
+        "primary":                "Primary control",
+        "demonstrated_by":        "Demonstrates this obligation",
+        "cross_framework_bridge": "Cross-framework link",
+        "isms_clause":            "Management-system clause",
+        "context":                "Related control",
+        # Ship 23'.c — role-aware section labels
+        "program":                "Program (implementing standard)",
+        "extension":              "Extension (privacy overlay)",
+        "obligation":             "Obligation (legal/regulatory)",
+    }.get(relation, "Related control")
+
+
+def fetch_cross_role_neighbors(refs) -> list[dict]:
+    """Ship 23'.c — return every cross-standard neighbor of the given refs.
+
+    Deterministic Neo4j fetch — no LLM emission. Returns rows shaped:
+      { source_ref, neighbor_ref, neighbor_standard_id, neighbor_title,
+        edge_type, direction }
+
+    direction is "outbound" (this ref → neighbor) or "inbound"
+    (neighbor → this ref). Both directions matter because SUPPORTS
+    is authored one-way (ext → program) but the program query wants
+    to see extensions extending IT (inbound direction).
+
+    Silent-fail → returns [] on any error.
+    """
+    if not refs:
+        return []
+    try:
+        from rag.posture.advisory import _get_neo_driver
+        driver = _get_neo_driver()
+        if driver is None:
+            return []
+        wanted = [r for r in refs if r]
+        if not wanted:
+            return []
+        with driver.session() as session:
+            rows = session.run(
+                """
+                MATCH (a:RequirementNode)-[r:DEMONSTRATES|IMPLEMENTS|SUPPORTS|GOVERNANCE]-(b:RequirementNode)
+                WHERE a.ref IN $refs
+                  AND a.standard_id <> b.standard_id
+                RETURN a.ref               AS source_ref,
+                       b.ref               AS neighbor_ref,
+                       b.standard_id       AS neighbor_standard_id,
+                       b.title             AS neighbor_title,
+                       type(r)             AS edge_type,
+                       startNode(r).ref    AS start_ref
+                """,
+                refs=wanted,
+            ).data()
+        out: list[dict] = []
+        for row in rows:
+            src = row.get("source_ref")
+            direction = ("outbound" if row.get("start_ref") == src
+                         else "inbound")
+            out.append({
+                "source_ref":           src,
+                "neighbor_ref":         row.get("neighbor_ref"),
+                "neighbor_standard_id": row.get("neighbor_standard_id"),
+                "neighbor_title":       row.get("neighbor_title") or "",
+                "edge_type":            row.get("edge_type"),
+                "direction":            direction,
+            })
+        return out
+    except Exception as e:
+        _LOG.debug("fetch_cross_role_neighbors failed: %s", e)
+        return []
 
 
 def _collect_demonstrators(cf, primary_ref: Optional[str]) -> set[str]:
@@ -787,7 +929,20 @@ def build_related_cards(
             seen.add(r)
             all_refs.append(r)
 
-    primary_ref = structured.intro.primary_ref or (cited[0] if cited else None)
+    # Ship 23'.c — normalize primary_ref before use. The LLM
+    # sometimes emits variants like "GDPR Art. 32" instead of the
+    # canonical "Art.32"; without normalization, primary_ref
+    # doesn't match any known ref and the card classifier can't
+    # look up its standard_id, causing every cross-role card to
+    # fall through to "context".
+    raw_primary = structured.intro.primary_ref
+    normalized  = _refs_in(raw_primary) if raw_primary else []
+    primary_ref = (normalized[0] if normalized else None) or (cited[0] if cited else None)
+    # Store the normalised form back on the intro so downstream
+    # consumers (frontend chip, SDK) see the canonical form.
+    if primary_ref and structured.intro.primary_ref != primary_ref:
+        structured.intro.primary_ref = primary_ref
+
     demonstrators = _collect_demonstrators(cf, primary_ref)
 
     # Ship 22'.d — auto-inject obligation demonstrators as cards.
@@ -812,9 +967,44 @@ def build_related_cards(
             seen.add(dref)
             all_refs.append(dref)
 
+    # Ship 23'.c — auto-inject cross-role neighbors for every cited
+    # ref (program → extensions; extension → parent programs;
+    # obligation → programs + extensions demonstrating it). The
+    # deterministic Neo4j traversal via fetch_cross_role_neighbors
+    # covers the directions the DEMONSTRATED_BY overlay doesn't
+    # (e.g. SUPPORTS: 27701 → 27001 inbound direction when the
+    # primary is a program). Without this, a program query only
+    # shows its own primary card + demonstrated_by obligations —
+    # no extensions.
+    cross_role_ns = fetch_cross_role_neighbors(list(cited))
+    ns_titles: dict[str, str] = {}
+    ns_sids:   dict[str, str] = {}
+    for row in cross_role_ns:
+        nref = row.get("neighbor_ref")
+        if not nref or nref in seen:
+            continue
+        seen.add(nref)
+        all_refs.append(nref)
+        # Cache title + standard_id so the card render below can use
+        # them without another lookup (short-circuit CaseFileShim
+        # doesn't have these controls in its node_lookup).
+        if nref not in ns_titles and (row.get("neighbor_title") or "").strip():
+            ns_titles[nref] = row["neighbor_title"]
+        if nref not in ns_sids and (row.get("neighbor_standard_id") or "").strip():
+            ns_sids[nref]   = row["neighbor_standard_id"]
+
     cards: list[RelatedCard] = []
     for ref in all_refs:
         title, sid = _node_metadata(cf, ref)
+
+        # Ship 23'.c — fall back to the cross-role-neighbor fetch's
+        # inline title + standard_id when _node_metadata returned
+        # empty (short-circuit CaseFileShim path with no resolver
+        # nodes, or LLM path where the ref wasn't in graph_nodes).
+        if not title and ref in ns_titles:
+            title = ns_titles[ref]
+        if not sid and ref in ns_sids:
+            sid = ns_sids[ref]
 
         # Skip refs we can't identify at all — no title, no standard.
         # Prevents surfacing arbitrary numeric strings.
@@ -845,14 +1035,22 @@ def build_related_cards(
             dashboard_url    = _dashboard_url(ref, sid),
         ))
 
-    # Sort: primary first, then demonstrated_by, cross-framework, isms
-    # clause, context. Within each bucket, keep insertion order.
+    # Sort: primary first, then by role-group order (Ship 23'.c).
+    # Program → Extension → Obligation is the auditor's mental model:
+    #   "here's the primary control, here are the programs that
+    #   implement / are implemented by it, here are the privacy
+    #   extensions on top, here are the legal obligations."
+    # cross_framework_bridge stays as a fallback for cards whose
+    # role_of() couldn't resolve (should be rare post Ship 23'.b).
     _ORDER = {
         "primary":                0,
-        "demonstrated_by":        1,
-        "cross_framework_bridge": 2,
-        "isms_clause":            3,
-        "context":                4,
+        "program":                1,
+        "extension":              2,
+        "obligation":             3,
+        "demonstrated_by":        4,   # legacy — same bucket as programs/extensions
+        "cross_framework_bridge": 5,
+        "isms_clause":            6,
+        "context":                7,
     }
     cards.sort(key=lambda c: (_ORDER.get(c.relation, 9), 0))
 

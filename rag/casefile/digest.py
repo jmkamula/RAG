@@ -341,7 +341,7 @@ def _render_demonstrated_by(cf: CaseFile, max_items: int = 8) -> str:
             elif src_std == "ISO27701:2019":
                 std_lbl = "ISO 27701 "
             finding = src.get("finding") or ""
-            edge    = src.get("via_edge", "").lower()
+            edge    = (src.get("via_edge") or "").lower()
             entry   = f"{std_lbl}{src_ref}"
             if finding in ("NC", "OFI", "Comply"):
                 entry += f" [{finding}]"
