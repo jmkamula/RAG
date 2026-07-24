@@ -176,6 +176,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sa-risks{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-width:85%}
 .sa-risk-card{border-left:3px solid #D9534F}
 .sa-risk-score{font-size:11px;font-weight:700;background:#EEECE2;color:#5C5A4F;padding:2px 7px;border-radius:5px}
+/* Ship 25'.b — overflow tail on capped role sections */
+.sa-overflow{font-size:11px;color:#7B7970;padding:6px 8px 2px 8px;font-style:italic}
+.sa-overflow a{color:#534AB7;text-decoration:none;font-weight:500;font-style:normal}
+.sa-overflow a:hover{text-decoration:underline}
 .sa-leaf-checklist{display:flex;flex-direction:column;gap:3px;margin-top:6px;padding:6px 8px;background:#F8F6EF;border-radius:6px}
 .sa-leaf-row{display:flex;align-items:center;gap:8px;font-size:12px;line-height:1.5;padding:2px 0}
 .sa-leaf-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0}
@@ -5298,18 +5302,24 @@ function renderStructuredAnswer(s) {
       </div>`;
     };
 
-    // Section defs: [group_key, header_label]. Sections omitted
-    // when their group is empty. Primary renders with no header
-    // (it's the auditor's own focus of the answer).
+    // Section defs: [group_key, header_label, relation_keys_for_overflow].
+    // Sections omitted when their group is empty. Primary renders
+    // with no header (it's the auditor's own focus of the answer).
+    // The `other` section combines context + cross_framework_bridge
+    // overflow counts.
     const sections = [
-      ['primary',     null],
-      ['program',     'Programs'],
-      ['extension',   'Extensions'],
-      ['obligation',  'Obligations'],
-      ['isms_clause', 'Management-system clauses'],
-      ['other',       'Related controls'],
+      ['primary',     null,                          ['primary']],
+      ['program',     'Programs',                    ['program']],
+      ['extension',   'Extensions',                  ['extension']],
+      ['obligation',  'Obligations',                 ['obligation']],
+      ['isms_clause', 'Management-system clauses',   ['isms_clause']],
+      ['other',       'Related controls',            ['context', 'cross_framework_bridge']],
     ];
-    sections.forEach(([key, header]) => {
+    // Ship 25'.b — overflow_counts arrives as {relation: {shown, total}}.
+    const overflowCounts = s.overflow_counts || {};
+    const primaryRefForDrill = (s.intro && s.intro.primary_ref) || '';
+
+    sections.forEach(([key, header, relationKeys]) => {
       const cards = groups[key] || [];
       if (!cards.length) return;
       html += `<div class="sa-related">`;
@@ -5317,6 +5327,26 @@ function renderStructuredAnswer(s) {
         html += `<div class="sa-related-header">${esc(header)}</div>`;
       }
       cards.forEach(r => { html += renderCard(r); });
+
+      // Ship 25'.b — overflow chip. Sum shown+total across the
+      // relation keys backing this section.
+      let shownSum = 0, totalSum = 0;
+      relationKeys.forEach(rk => {
+        const oc = overflowCounts[rk];
+        if (!oc) return;
+        shownSum += (oc.shown | 0);
+        totalSum += (oc.total | 0);
+      });
+      if (totalSum > shownSum && shownSum > 0) {
+        const dashHref = primaryRefForDrill
+          ? `/#dashboard?control=${encodeURIComponent(primaryRefForDrill)}`
+          : '/#dashboard';
+        html += `<div class="sa-overflow">
+          Showing ${shownSum} of ${totalSum} —
+          <a href="${attr(dashHref)}"
+             onclick="setMode('dashboard');return true;">open dashboard →</a>
+        </div>`;
+      }
       html += `</div>`;
     });
   }

@@ -255,15 +255,21 @@ def structured_to_prose(structured) -> str:
             return entry
 
         # Section headers per role group. Sections omitted when empty.
+        # relation_key is the raw slug used to look up overflow_counts;
+        # section_key is the frontend/prose grouping bucket.
         section_headers = [
-            ("primary",     None),                # rendered without a header
-            ("program",     "## Programs"),
-            ("extension",   "## Extensions"),
-            ("obligation",  "## Obligations"),
-            ("isms_clause", "## Management-system clauses"),
-            ("other",       "## Related controls"),
+            # (section_key, header, relation_key(s) for overflow lookup)
+            ("primary",     None,                              ("primary",)),
+            ("program",     "## Programs",                     ("program",)),
+            ("extension",   "## Extensions",                   ("extension",)),
+            ("obligation",  "## Obligations",                  ("obligation",)),
+            ("isms_clause", "## Management-system clauses",    ("isms_clause",)),
+            ("other",       "## Related controls",             ("context", "cross_framework_bridge")),
         ]
-        for group_key, header in section_headers:
+        overflow_counts = getattr(structured, "overflow_counts", None) or {}
+        primary_ref_for_drill = (getattr(structured.intro, "primary_ref", "") or "").strip()
+
+        for group_key, header, relation_keys in section_headers:
             group_cards = groups.get(group_key) or []
             if not group_cards:
                 continue
@@ -277,6 +283,25 @@ def structured_to_prose(structured) -> str:
                     if header is None and lines and not lines[-1].startswith("- "):
                         lines.append("")
                     lines.append(entry)
+            # Ship 25'.b — overflow tail per section. Sum across relation
+            # keys because `other` combines context + cross_framework_bridge.
+            shown_sum = 0
+            total_sum = 0
+            for rk in relation_keys:
+                oc = overflow_counts.get(rk)
+                if not oc:
+                    continue
+                shown_sum += int(oc.get("shown", 0))
+                total_sum += int(oc.get("total", 0))
+            if total_sum > shown_sum > 0:
+                if primary_ref_for_drill:
+                    tail = (
+                        f"_Showing {shown_sum} of {total_sum} — "
+                        f"see all in the dashboard for {primary_ref_for_drill}._"
+                    )
+                else:
+                    tail = f"_Showing {shown_sum} of {total_sum} — see all in the dashboard._"
+                lines.append(tail)
 
     # Ship 22'.c — risks section replaces the retired
     # `↳ Risk register: R-...` footer.
@@ -902,6 +927,55 @@ def _evidence_summary(
     return summary, still[:6], leaves
 
 
+# ── Ship 25'.b — per-role fanout cap ────────────────────────────────
+#
+# Ship 24's coverage completion made Art.32 surface 55 cross-role
+# cards (48 Programs alone). The role-grouped surface (Ship 23'.c)
+# needs a cap to stay useful on high-fanout obligations + broad
+# programs.
+
+_CROSS_ROLE_SECTION_CAP = 8
+
+# Verdict severity — auditor triage first, settled states last.
+_VERDICT_SEVERITY = {
+    "NC":      0,
+    "OFI":     1,
+    "Comply":  2,
+    "N/A":     3,
+    "Unknown": 4,
+}
+
+# Role sections subject to the cap. Primary is NEVER capped.
+_CAPPABLE_RELATIONS = {
+    "program", "extension", "obligation",
+    "demonstrated_by",       # legacy label — same section as program/extension
+    "cross_framework_bridge",
+    "isms_clause",
+    "context",
+}
+
+
+def _rank_key(card, fanout_map: dict) -> tuple:
+    """Deterministic ranking key for cross-role cards.
+
+    Order (highest priority first):
+      1. Verdict severity — NC > OFI > Comply > N/A > Unknown
+      2. DRAFT flag — draft ranked higher than confirmed
+      3. Fanout centrality — cards with more cross-role edges
+      4. Ref — alphabetical tie-breaker
+    """
+    verdict  = getattr(card, "verdict", "") or "Unknown"
+    draft    = bool(getattr(card, "draft", False))
+    ref      = getattr(card, "ref", "") or ""
+    fanout   = fanout_map.get(ref, 0)
+    return (
+        _VERDICT_SEVERITY.get(verdict, 5),
+        0 if draft else 1,          # draft first → 0 before 1
+        -fanout,                    # higher fanout → lower key
+        ref,
+    )
+
+
 def build_related_cards(
     cf,
     structured: StructuredAnswer,
@@ -1052,15 +1126,60 @@ def build_related_cards(
         "isms_clause":            6,
         "context":                7,
     }
-    cards.sort(key=lambda c: (_ORDER.get(c.relation, 9), 0))
+
+    # Ship 25'.b — per-role cap with deterministic ranking.
+    # Group cards by relation, rank each group by
+    # (verdict severity, DRAFT, fanout, ref), cap at
+    # _CROSS_ROLE_SECTION_CAP, and track {shown, total} per role
+    # on the structured payload so the frontend + prose render an
+    # overflow tail.
+    #
+    # Build a fanout map: how many cross-role neighbors did the
+    # audit surface for each ref? Cards with higher fanout are more
+    # "central" in the graph and rise to the top within their group
+    # after verdict + draft sorting.
+    fanout_map: dict = {}
+    for row in cross_role_ns:
+        nref = row.get("neighbor_ref")
+        if nref:
+            fanout_map[nref] = fanout_map.get(nref, 0) + 1
+
+    # Group cards by relation, keeping insertion order within each
+    # group for stability during ranking ties.
+    _by_relation: dict = {}
+    for c in cards:
+        _by_relation.setdefault(c.relation, []).append(c)
+
+    capped_cards: list[RelatedCard] = []
+    overflow: dict = {}
+    for rel in sorted(_by_relation.keys(), key=lambda r: _ORDER.get(r, 9)):
+        group = _by_relation[rel]
+        if rel == "primary" or rel not in _CAPPABLE_RELATIONS:
+            # Primary always kept whole (never > 1); non-cappable
+            # relations (should be empty post-Ship-23'.c) also pass
+            # through.
+            capped_cards.extend(group)
+            continue
+        # Rank + cap
+        ranked = sorted(group, key=lambda c: _rank_key(c, fanout_map))
+        total = len(ranked)
+        shown = ranked[:_CROSS_ROLE_SECTION_CAP]
+        capped_cards.extend(shown)
+        if total > _CROSS_ROLE_SECTION_CAP:
+            overflow[rel] = {"shown": len(shown), "total": total}
+
+    # Attach overflow signal to the structured payload for downstream
+    # rendering. Frontend + prose consume this to emit the tail.
+    if overflow:
+        structured.overflow_counts = overflow
 
     # Now that we've done any ordering, fill each action card's `refs`
     # so the UI can render chips consistent with related-card presence.
-    known_refs = {c.ref for c in cards}
+    known_refs = {c.ref for c in capped_cards}
     for action in structured.actions:
         action.refs = [r for r in action.refs if r in known_refs]
 
-    return cards
+    return capped_cards
 
 
 # ── Ship 22'.c — risk-card builder ──────────────────────────────────

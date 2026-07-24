@@ -99,6 +99,12 @@ class StructuredAnswer(BaseModel):
     actions: list[ActionCard] = Field(default_factory=list)
     related: list[RelatedCard] = Field(default_factory=list)
     risks:   list[RiskCard]   = Field(default_factory=list)   # Ship 22'.c
+    # Ship 25'.b — per-role overflow signal for capped sections.
+    # Shape: `{role: {"shown": int, "total": int}}` for roles where
+    # the total exceeded the per-section cap (default 8). Frontend +
+    # prose render an `_Showing N of M — open dashboard →_` tail.
+    # Empty dict when no section overflowed.
+    overflow_counts: dict = Field(default_factory=dict)
 
 
 # ── LLM JSON schema (for prompt inclusion) ──────────────────────────
