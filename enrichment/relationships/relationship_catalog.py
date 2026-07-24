@@ -5767,6 +5767,537 @@ A8_TECH_GDPR_BRIDGE_EDGES: list[RelationshipEdge] = [
 ]
 
 
+# ── Ship 24 — Coverage completion (2026-07-24) ──────────────────────────────
+# Fills the remaining meaningful gaps surfaced by Ship 23'.a audit.
+# Three sub-batches:
+#   1. A5_A6_ISMS_GDPR_EDGES     — 27 edges closing A.5 org + A.6 people +
+#                                   ISMS-with-obvious-GDPR-ties
+#   2. A7_PHYSICAL_GDPR_EDGES    — 13 edges giving every A.7 physical
+#                                   control a GDPR Art.32 bridge (catalog
+#                                   must be tenant-agnostic; cloud-only
+#                                   orgs mark N/A but bank/hospital/mfr
+#                                   tenants have real premises)
+#   3. ISMS_CONTEXT_LEADERSHIP_GDPR_EDGES — 7 edges giving ISMS 4-5
+#                                   Context + Leadership clauses Art.24
+#                                   accountability bridges (+ Art.37 DPO
+#                                   for 5.3 roles)
+#   4. ISO27701_WEAK_TIES_EDGES  — 8 SUPPORTS edges for identity /
+#                                   authentication / incident / personnel
+#                                   controls where PII overlay is real
+
+A5_A6_ISMS_GDPR_EDGES: list[RelationshipEdge] = [
+    # ── A.5 Organisational (10 edges) ─────────────────────────────────
+    RelationshipEdge(
+        source_ref='A.5.5', source_standard_id='ISO27001:2022',
+        target_ref='Art.33', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.5.5 contact with authorities is the primary channel for GDPR Art.33 breach notification to the supervisory authority.',
+        citation='ISO/IEC 27002:2022 §5.5 + GDPR Art.33.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.6', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='A.5.6 contact with special interest groups feeds threat intelligence to the Art.32.1.d regular testing + evaluation leg.',
+        citation='ISO/IEC 27002:2022 §5.6 + GDPR Art.32.1.d',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.7', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.5.7 threat intelligence feeds the "regularly test + evaluate" leg of Art.32.1.d security-measure effectiveness.',
+        citation='ISO/IEC 27002:2022 §5.7 + GDPR Art.32.1.d',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.10', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.5.10 acceptable-use policy establishes personnel-side handling of PII assets, an Art.32.1 confidentiality measure.',
+        citation='ISO/IEC 27002:2022 §5.10 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.11', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.5.11 return of assets prevents PII leakage post-departure via retained hardware or accounts, an Art.32.1 confidentiality measure.',
+        citation='ISO/IEC 27002:2022 §5.11 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.13', source_standard_id='ISO27001:2022',
+        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.5.13 labelling of information supports Art.5.1.b purpose limitation and Art.5.1.f integrity through classification-driven handling.',
+        citation='ISO/IEC 27002:2022 §5.13 + GDPR Art.5.1.b,f',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.13', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Classification labels enable the differentiated technical protection Art.32.1 requires — high-sensitivity PII gets stronger controls.',
+        citation='ISO/IEC 27002:2022 §5.13 + GDPR Art.32.1',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.16', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.5.16 identity management is the foundational access-control TOM of Art.32.1 — you can\'t restrict access without identifying subjects.',
+        citation='ISO/IEC 27002:2022 §5.16 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.17', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.5.17 authentication information (credentials) is a core Art.32.1 confidentiality + integrity measure — compromised creds compromise PII.',
+        citation='ISO/IEC 27002:2022 §5.17 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.5.27', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.5.27 learning from incidents feeds Art.32.1.d "regularly evaluate the effectiveness" — post-incident lessons drive control improvement.',
+        citation='ISO/IEC 27002:2022 §5.27 + GDPR Art.32.1.d',
+        role='high',
+    ),
+
+    # ── A.6 People (4 edges) ──────────────────────────────────────────
+    RelationshipEdge(
+        source_ref='A.6.1', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.6.1 background screening reduces insider risk for PII-processing roles, an Art.32.1 personnel-side confidentiality measure.',
+        citation='ISO/IEC 27002:2022 §6.1 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.6.5', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.6.5 post-termination responsibilities preserve PII confidentiality after role change or departure.',
+        citation='ISO/IEC 27002:2022 §6.5 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.6.6', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.6.6 confidentiality / NDA agreements create the legal wrapper for PII confidentiality with personnel + contractors.',
+        citation='ISO/IEC 27002:2022 §6.6 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.6.7', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.6.7 remote-working controls extend Art.32.1 TOM to non-office environments where PII is accessed.',
+        citation='ISO/IEC 27002:2022 §6.7 + GDPR Art.32.1',
+        role='high',
+    ),
+
+    # ── ISMS clauses 6-10 with obvious GDPR ties (13 edges) ─────────
+    RelationshipEdge(
+        source_ref='6.1.1', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 6.1.1 general planning of risk actions is a foundational Art.24 controller-accountability step — deciding what to do about risks.',
+        citation='ISO/IEC 27001:2022 §6.1.1 + GDPR Art.24.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='6.1.3', source_standard_id='ISO27001:2022',
+        target_ref='Art.35', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 6.1.3 risk treatment overlaps materially with GDPR Art.35 DPIA outputs — both document risk decisions + mitigating controls.',
+        citation='ISO/IEC 27001:2022 §6.1.3 + GDPR Art.35',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='6.1.3', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Risk-treatment decisions are documented as part of Art.24 controller-accountability evidence.',
+        citation='ISO/IEC 27001:2022 §6.1.3 + GDPR Art.24.1',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='6.2', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 6.2 documented objectives are one of the artefacts controllers cite under Art.24 accountability.',
+        citation='ISO/IEC 27001:2022 §6.2 + GDPR Art.24.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='6.3', source_standard_id='ISO27001:2022',
+        target_ref='Art.25', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 6.3 change planning is the operational surface of Art.25 privacy-by-design — every change is a design decision that must consider privacy impact.',
+        citation='ISO/IEC 27001:2022 §6.3 + GDPR Art.25.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='7.2', source_standard_id='ISO27001:2022',
+        target_ref='Art.39', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 7.2 personnel competence (training + awareness) is one of Art.39.1.b DPO monitoring tasks — ensuring staff are trained on PII handling.',
+        citation='ISO/IEC 27001:2022 §7.2 + GDPR Art.39.1.b',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='7.3', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 7.3 personnel awareness of PII-handling responsibilities is an Art.32.1 organisational measure.',
+        citation='ISO/IEC 27001:2022 §7.3 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='7.3', source_standard_id='ISO27001:2022',
+        target_ref='Art.29', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Processors and subprocessors act only on documented instructions — Art.29; awareness training encodes this rule for personnel.',
+        citation='ISO/IEC 27001:2022 §7.3 + GDPR Art.29',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='7.4', source_standard_id='ISO27001:2022',
+        target_ref='Art.13', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 7.4 internal + external communication frameworks support Art.13 information-to-be-provided-to-subjects obligations at the collection point.',
+        citation='ISO/IEC 27001:2022 §7.4 + GDPR Art.13',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='7.5', source_standard_id='ISO27001:2022',
+        target_ref='Art.30', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 7.5 documented information includes the record of processing activities (RoPA) required by Art.30.',
+        citation='ISO/IEC 27001:2022 §7.5 + GDPR Art.30',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='8.1', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 8.1 operational planning + control is Art.24 controller accountability at the day-to-day operational layer.',
+        citation='ISO/IEC 27001:2022 §8.1 + GDPR Art.24.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='9.2', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 9.2 internal audit is one of the primary Art.24 controller-accountability mechanisms — independent verification of controls.',
+        citation='ISO/IEC 27001:2022 §9.2 + GDPR Art.24.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='10.1', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 10.1 continual improvement of the ISMS demonstrates ongoing Art.24 controller-accountability — accountability is not one-time.',
+        citation='ISO/IEC 27001:2022 §10.1 + GDPR Art.24.1',
+        role='high',
+    ),
+]
+
+
+A7_PHYSICAL_GDPR_EDGES: list[RelationshipEdge] = [
+    # Ship 24 (2026-07-24) — every A.7 physical control DEMONSTRATES
+    # Art.32. Catalog is tenant-agnostic; cloud-only orgs like Arion
+    # mark N/A but bank/hospital/manufacturer tenants have real physical
+    # operations. Each control aligns to Art.32.1 confidentiality /
+    # integrity / availability legs.
+    RelationshipEdge(
+        source_ref='A.7.1', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.1 physical security perimeters prevent unauthorised physical access to PII-processing facilities, Art.32.1 confidentiality.',
+        citation='ISO/IEC 27002:2022 §7.1 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.2', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.2 physical entry controls to PII-processing facilities, Art.32.1 confidentiality.',
+        citation='ISO/IEC 27002:2022 §7.2 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.3 securing offices, rooms and facilities restricts room-level access to PII processing, Art.32.1 confidentiality.',
+        citation='ISO/IEC 27002:2022 §7.3 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.4 physical security monitoring (CCTV, intrusion detection) is an Art.32.1.d regular monitoring measure for the physical layer.',
+        citation='ISO/IEC 27002:2022 §7.4 + GDPR Art.32.1.d',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.5', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.5 protection against fire / flood / earthquake / other environmental threats preserves Art.32.1.b availability + integrity.',
+        citation='ISO/IEC 27002:2022 §7.5 + GDPR Art.32.1.b',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.6', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.6 working-in-secure-areas restrictions preserve Art.32.1 confidentiality where sensitive PII is handled.',
+        citation='ISO/IEC 27002:2022 §7.6 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.7', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.7 clear desk / clear screen prevents bystander PII exposure at unattended workstations, Art.32.1 confidentiality.',
+        citation='ISO/IEC 27002:2022 §7.7 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.8', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.8 equipment siting places PII-processing hardware to reduce exposure, Art.32.1 confidentiality + integrity.',
+        citation='ISO/IEC 27002:2022 §7.8 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.10', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.10 storage media controls (backups, portable drives holding PII), Art.32.1 confidentiality + integrity.',
+        citation='ISO/IEC 27002:2022 §7.10 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.11', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.11 supporting utilities (power, cooling, network) preserve Art.32.1.b availability of PII-processing systems.',
+        citation='ISO/IEC 27002:2022 §7.11 + GDPR Art.32.1.b',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.12', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.12 cabling security prevents tap-based interception of PII in transit through physical media, Art.32.1 confidentiality.',
+        citation='ISO/IEC 27002:2022 §7.12 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.13', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.13 equipment maintenance preserves Art.32.1.b availability + integrity of PII-processing hardware.',
+        citation='ISO/IEC 27002:2022 §7.13 + GDPR Art.32.1.b',
+        role='high',
+    ),
+]
+
+
+ISMS_CONTEXT_LEADERSHIP_GDPR_EDGES: list[RelationshipEdge] = [
+    # Ship 24 (2026-07-24) — ISMS 4-5 Context + Leadership clauses have
+    # Art.24 accountability relationships. The ISMS itself IS the
+    # accountability framework GDPR Art.24 requires from controllers.
+    RelationshipEdge(
+        source_ref='4.2', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 4.2 identifies interested parties whose needs shape controller responsibility — PII principals + supervisory authorities are the Art.24 accountability audience.',
+        citation='ISO/IEC 27001:2022 §4.2 + GDPR Art.24.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='4.3', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 4.3 scope determination establishes the perimeter within which Art.24 controller responsibility applies.',
+        citation='ISO/IEC 27001:2022 §4.3 + GDPR Art.24.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='4.4', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 4.4 establishment of the information-security management system is itself the accountability framework Art.24 requires.',
+        citation='ISO/IEC 27001:2022 §4.4 + GDPR Art.24.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='5.1', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 5.1 top-management leadership + commitment is the executive accountability Art.24 requires from controllers.',
+        citation='ISO/IEC 27001:2022 §5.1 + GDPR Art.24.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='5.2', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 5.2 information-security policy is one of the primary documented Art.24 accountability artefacts.',
+        citation='ISO/IEC 27001:2022 §5.2 + GDPR Art.24.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='5.3', source_standard_id='ISO27001:2022',
+        target_ref='Art.37', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 5.3 organisational roles + responsibilities is where DPO designation (Art.37) is captured — role clarity + independence.',
+        citation='ISO/IEC 27001:2022 §5.3 + GDPR Art.37',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='5.3', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='Role and responsibility clarity underlies Art.24 controller accountability — you can\'t be accountable if roles are undefined.',
+        citation='ISO/IEC 27001:2022 §5.3 + GDPR Art.24.1',
+        role='medium',
+    ),
+]
+
+
+SHIP24_COMPLETENESS_EDGES: list[RelationshipEdge] = [
+    # Ship 24 completeness — 5 edges surfaced by post-implementation
+    # audit that were missing from the original mapping table. Same
+    # discipline (Art.24 for ISMS process clauses, Art.32 for tech
+    # controls, Art.35 for risk clauses).
+    RelationshipEdge(
+        source_ref='7.1', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='SUPPORTS',
+        rationale='ISMS 7.1 resource allocation is a foundational Art.24 accountability step — controllers must resource their PII-processing controls appropriately.',
+        citation='ISO/IEC 27001:2022 §7.1 + GDPR Art.24.1',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='8.2', source_standard_id='ISO27001:2022',
+        target_ref='Art.35', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 8.2 information-security risk assessment is the operational counterpart of GDPR Art.35 DPIA at the security-risk layer.',
+        citation='ISO/IEC 27001:2022 §8.2 + GDPR Art.35',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='8.3', source_standard_id='ISO27001:2022',
+        target_ref='Art.35', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 8.3 information-security risk treatment executes the mitigations Art.35 DPIA identifies for PII-processing risks.',
+        citation='ISO/IEC 27001:2022 §8.3 + GDPR Art.35',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='10.2', source_standard_id='ISO27001:2022',
+        target_ref='Art.24', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='ISMS 10.2 nonconformity + corrective action closes the control-effectiveness loop Art.24 controller-accountability requires.',
+        citation='ISO/IEC 27001:2022 §10.2 + GDPR Art.24.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.9', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.7.9 security of assets off-premises extends Art.32.1 TOM to laptops / mobile devices / removable media that carry PII outside the office.',
+        citation='ISO/IEC 27002:2022 §7.9 + GDPR Art.32.1',
+        role='high',
+    ),
+]
+
+
+ISO27701_WEAK_TIES_EDGES: list[RelationshipEdge] = [
+    # Ship 24 (2026-07-24) — 8 SUPPORTS edges where the PII overlay on
+    # an ISO 27001 control is real but 27701 doesn't have a matching
+    # anchor. Each ties an existing 27701 extension to the 27001
+    # control that has natural PII relevance.
+    RelationshipEdge(
+        source_ref='A.7.3.4', source_standard_id='ISO27701:2019',
+        target_ref='A.5.16', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.3.4 consent modify / withdraw depends on identifying + authenticating the PII principal — 27001 A.5.16 identity management is the general control the extension leverages.',
+        citation='ISO/IEC 27701:2019 §7.3.4 + ISO/IEC 27002:2022 §5.16',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.9', source_standard_id='ISO27701:2019',
+        target_ref='A.5.16', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.3.9 handling requests requires identity verification of the requestor — 27001 A.5.16 identity management is the general control.',
+        citation='ISO/IEC 27701:2019 §7.3.9 + ISO/IEC 27002:2022 §5.16',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.9', source_standard_id='ISO27701:2019',
+        target_ref='A.5.17', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='Verifying requestor identity for PII principal requests leans on the authentication controls at 27001 A.5.17.',
+        citation='ISO/IEC 27701:2019 §7.3.9 + ISO/IEC 27002:2022 §5.17',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.9', source_standard_id='ISO27701:2019',
+        target_ref='A.5.27', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='Request-handling patterns feed the incident-learning loop at 27001 A.5.27 when patterns emerge (e.g. surge in erasure requests indicates a systemic issue).',
+        citation='ISO/IEC 27701:2019 §7.3.9 + ISO/IEC 27002:2022 §5.27',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.5', source_standard_id='ISO27701:2019',
+        target_ref='A.5.11', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.5 PII de-identification / deletion at end of processing is a specific instance of the general end-of-lifecycle asset-return pattern at 27001 A.5.11.',
+        citation='ISO/IEC 27701:2019 §7.4.5 + ISO/IEC 27002:2022 §5.11',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.5', source_standard_id='ISO27701:2019',
+        target_ref='A.6.5', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.5 deletion extends to cleanup of PII access held by employees at 27001 A.6.5 post-termination handling.',
+        citation='ISO/IEC 27701:2019 §7.4.5 + ISO/IEC 27002:2022 §6.5',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.2.6', source_standard_id='ISO27701:2019',
+        target_ref='A.6.6', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.2.6 processor contract terms include NDA-like confidentiality obligations, aligning with 27001 A.6.6 confidentiality / NDA controls.',
+        citation='ISO/IEC 27701:2019 §7.2.6 + ISO/IEC 27002:2022 §6.6',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.4', source_standard_id='ISO27701:2019',
+        target_ref='A.5.13', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.4 PII minimisation objectives leverage classification labels at 27001 A.5.13 to make minimisation decisions per data class.',
+        citation='ISO/IEC 27701:2019 §7.4.4 + ISO/IEC 27002:2022 §5.13',
+        role='medium',
+    ),
+]
+
+
 ALL_EDGES: list[RelationshipEdge] = (
     INTRA_ISO_EDGES
     + INTRA_GDPR_EDGES
@@ -5777,4 +6308,9 @@ ALL_EDGES: list[RelationshipEdge] = (
     + ISO27701_BATCH3_EDGES
     + ISO27701_BATCH4_PARENT_EDGES
     + A8_TECH_GDPR_BRIDGE_EDGES
+    + A5_A6_ISMS_GDPR_EDGES
+    + A7_PHYSICAL_GDPR_EDGES
+    + ISMS_CONTEXT_LEADERSHIP_GDPR_EDGES
+    + SHIP24_COMPLETENESS_EDGES
+    + ISO27701_WEAK_TIES_EDGES
 )
