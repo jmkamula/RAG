@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.34:applicable_scope
 #
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.34 scope note.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.34:applicable_scope"
@@ -8,24 +10,19 @@ target_control: "Art.34"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.34:scope_high_risk_test"
-    description: "High-risk test operational criteria"
-    excerpt_keywords:
-      - [art, 34, high, risk, test]
-      - [likelihood, severity, number, affected]
-      - [art, 34, high, risk, criteria]
-
   - must_id: "item:Art.34:scope_art33_boundary"
-    description: "Boundary with Art.33"
+    description: "Boundary with Art.33 — Art.33 fires lower (any breach of personal data not 'unlikely to result in..."
     excerpt_keywords:
-      - ["Art.33"]
-      - [art, 33, art, 34, boundary]
-      - [breach, gate, art, 34]
+      - [scope, art33, boundary, communication]
+      - [boundary, art, communication]
 
   - must_id: "item:Art.34:scope_exception_criteria"
-    description: "Art.34.3 exception criteria operationalised"
+    description: "Art.34.3 exception criteria operationalised (encryption deemed appropriate / risk-mitigation meas..."
     excerpt_keywords:
-      - ["Art.34.3"]
-      - [art, 34, 3, exception, criteria]
-      - [art, 34, encryption, exception]
-      - [art, 34, risk, mitigation, measures]
+      - [scope, exception, criteria, communication]
+      - [art, exception, criteria, operationalised, communication]
+
+  - must_id: "item:Art.34:scope_high_risk_test"
+    description: "High-risk test operational criteria (likelihood × severity × number affected × category sensitivity)"
+    excerpt_keywords:
+      - [scope, high, risk, test, communication]

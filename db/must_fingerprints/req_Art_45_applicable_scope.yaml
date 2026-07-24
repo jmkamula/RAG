@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.45:applicable_scope
 #
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.45 scope note.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.45:applicable_scope"
@@ -9,23 +11,18 @@ target_standard: "GDPR:2016/679"
 
 must_fingerprints:
   - must_id: "item:Art.45:scope_destinations"
-    description: "Adequate destinations in use"
+    description: "Adequate destinations in use (e.g. UK, Japan, US-DPF certified)"
     excerpt_keywords:
-      - [adequacy, destinations, in, use]
-      - [uk, japan, adequate]
-      - [us, dpf, certified]
-      - [adequate, country, list]
+      - [scope, destinations, transfers]
+      - [adequate, destinations, transfers]
 
   - must_id: "item:Art.45:scope_eligibility_proof"
-    description: "Eligibility-proof method per destination"
+    description: "Eligibility-proof method per destination (Commission register / DPF list / etc.)"
     excerpt_keywords:
-      - [commission, register, proof]
-      - [dpf, list, eligibility, proof]
-      - [adequacy, eligibility, method]
+      - [scope, eligibility, proof, transfers]
 
   - must_id: "item:Art.45:scope_excluded"
-    description: "Destinations specifically NOT relying on adequacy"
+    description: "Destinations specifically NOT relying on adequacy (fall to Art.46/49)"
     excerpt_keywords:
-      - [adequacy, excluded, destination]
-      - [adequacy, fall, to, art, 46]
-      - [adequacy, fall, to, art, 49]
+      - [scope, excluded, transfers]
+      - [destinations, specifically, relying, adequacy, transfers]

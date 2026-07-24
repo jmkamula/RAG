@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:5.2:isp_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. ISMS clause 5.2 review record.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:5.2:isp_program_review"
@@ -8,36 +10,30 @@ target_control: "5.2"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:5.2:rev_approval_currency"
+    description: "Approval currency check — signed by current top management"
+    excerpt_keywords:
+      - [approval, currency, policy]
+      - [approval, currency, check, policy]
+
+  - must_id: "item:5.2:rev_comms_completeness"
+    description: "Communication completeness check — required audience is covered and current"
+    excerpt_keywords:
+      - [comms, completeness, policy]
+      - [communication, completeness, check, policy]
+
   - must_id: "item:5.2:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [isp, program, review, date]
-      - [isp, reviewed, on]
-      - [isms, isp, reviewed]
+      - [review, date, planned, interval, policy]
+
+  - must_id: "item:5.2:rev_policy_currency"
+    description: "Policy currency check — still appropriate to organisational purpose and scope"
+    excerpt_keywords:
+      - [policy, currency]
+      - [policy, currency, check]
 
   - must_id: "item:5.2:rev_reviewer"
     description: "Reviewer identity (ISMS Manager + top management sponsor)"
     excerpt_keywords:
-      - [isp, reviewed, by, isms, manager]
-      - [isp, top, management, sponsor, review]
-
-  - must_id: "item:5.2:rev_policy_currency"
-    description: "Policy currency check"
-    excerpt_keywords:
-      - [isp, currency, check]
-      - [isp, still, appropriate]
-      - [isp, organisational, purpose, current]
-
-  - must_id: "item:5.2:rev_approval_currency"
-    description: "Approval currency check"
-    excerpt_keywords:
-      - [isp, approval, currency]
-      - [isp, current, top, management, signed]
-      - [isp, approval, refresh]
-
-  - must_id: "item:5.2:rev_comms_completeness"
-    description: "Communication completeness check"
-    excerpt_keywords:
-      - [isp, communication, completeness]
-      - [isp, audience, current]
-      - [isp, comms, audit]
+      - [reviewer, identity, policy]

@@ -15,71 +15,69 @@ must_fingerprints:
     description: "Review cadence stated (annual minimum)"
     excerpt_keywords:
       - [charter, review, cadence]
-      - [charter]
-      - [cadence]
       - [review, cadence]
       - [review, cadence, stated]
       - [cadence, stated]
       - [cadence, stated, annual]
       - [stated, annual]
+      - [stated, annual, minimum]
+      - [annual, minimum]
 
   - must_id: "item:Art.24:charter_approval"
     description: "Approved by top management with date"
     excerpt_keywords:
       - [charter, approval]
-      - [charter]
-      - [approval]
       - [approved, top]
       - [approved, top, management]
-      - [top]
       - [top, management]
       - [top, management, date]
+      - [management, date]
 
   - must_id: "item:Art.24:charter_owner"
     description: "Named programme owner (typically DPO or Chief Privacy Officer)"
     excerpt_keywords:
       - [charter, owner]
-      - [charter]
       - [named, programme]
       - [named, programme, owner]
-      - [programme]
       - [programme, owner]
       - [programme, owner, typically]
       - [owner, typically]
+      - [owner, typically, dpo]
+      - [typically, dpo]
 
   - must_id: "item:Art.24:charter_governance"
     description: "Governance forum cadence (privacy steering committee, frequency, attendees)"
     excerpt_keywords:
       - [charter, governance]
-      - [charter]
-      - [governance]
       - [governance, forum]
       - [governance, forum, cadence]
-      - [forum]
       - [forum, cadence]
       - [forum, cadence, privacy]
+      - [cadence, privacy]
+      - [cadence, privacy, steering]
+      - [privacy, steering]
 
   - must_id: "item:Art.24:charter_scope"
     description: "Scope of the privacy programme (which legal entities, processing activities, geographies)"
     excerpt_keywords:
       - [charter, scope]
-      - [charter]
       - [scope, privacy]
       - [scope, privacy, programme]
-      - [privacy]
       - [privacy, programme]
       - [privacy, programme, legal]
-      - [programme]
+      - [programme, legal]
+      - [programme, legal, entities]
+      - [legal, entities]
 
   - must_id: "item:Art.24:charter_purpose"
     description: "Statement of GDPR compliance objective + accountability commitment"
     excerpt_keywords:
       - [charter, purpose]
-      - [charter]
-      - [purpose]
-      - [statement]
       - [statement, gdpr]
       - [statement, gdpr, compliance]
-      - [gdpr]
       - [gdpr, compliance]
+      - [gdpr, compliance, objective]
+      - [compliance, objective]
+      - [compliance, objective, accountability]
+      - [objective, accountability]
 

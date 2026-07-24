@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.25:program_review
 #
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.25 program review.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.25:program_review"
@@ -8,36 +10,24 @@ target_control: "Art.25"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
+  - must_id: "item:Art.25:rev_certification_validity"
+    description: "If Art.25.3 certification used — certification still in validity period"
+    excerpt_keywords:
+      - [certification, validity, protection]
+      - [art, certification, protection]
+
   - must_id: "item:Art.25:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [dpbd, program, review, date]
-      - [art, 25, reviewed, on]
+      - [review, date, planned, interval, protection]
+
+  - must_id: "item:Art.25:rev_defaults_currency"
+    description: "Defaults register currency check (cross-leaf — defaults still match deployed system state)"
+    excerpt_keywords:
+      - [defaults, currency, protection]
+      - [defaults, register, currency, check, protection]
 
   - must_id: "item:Art.25:rev_reviewer"
     description: "Reviewer identity (DPO + product + engineering)"
     excerpt_keywords:
-      - [dpbd, reviewed, by, dpo]
-      - [dpbd, product, lead, review]
-      - [dpbd, engineering, review]
-
-  - must_id: "item:Art.25:rev_coverage"
-    description: "Design-coverage check"
-    excerpt_keywords:
-      - [dpbd, design, coverage, audit]
-      - [in, scope, design, dpbd, review]
-      - [dpbd, review, coverage, audit]
-
-  - must_id: "item:Art.25:rev_defaults_currency"
-    description: "Defaults register currency check"
-    excerpt_keywords:
-      - [default, settings, currency]
-      - [defaults, match, deployed]
-      - [art, 25, defaults, refresh]
-
-  - must_id: "item:Art.25:rev_certification_validity"
-    description: "If Art.25.3 certification used"
-    excerpt_keywords:
-      - ["Art.25.3"]
-      - [art, 25, 3, certification]
-      - [dpbd, certification, validity]
+      - [reviewer, identity, protection]

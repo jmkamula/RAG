@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.4.2:return_transfer_disposal_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.2:return_transfer_disposal_procedure"
@@ -13,30 +14,72 @@ must_fingerprints:
   - must_id: "item:B.8.4.2:proc_certification"
     description: "Certification / attestation of completion issued to customer"
     excerpt_keywords:
-      - [certification, attestation, completion, issued]
+      - [certification, attestation]
+      - [certification, attestation, completion]
+      - [attestation, completion]
+      - [attestation, completion, issued]
+      - [completion, issued]
+      - [completion, issued, customer]
+      - [issued, customer]
+      - [procedure, step]
+
+  - must_id: "item:B.8.4.2:proc_lapse_protection"
+    description: "Lapse-of-contract protection — retention period defined before disposal after contract termination (accidental lapse protection)"
+    excerpt_keywords:
+      - [lapse, protection]
+      - [lapse, contract]
+      - [lapse, contract, protection]
+      - [contract, protection]
+      - [contract, protection, retention]
+      - [protection, retention]
+      - [protection, retention, period]
+      - [retention, period]
 
   - must_id: "item:B.8.4.2:proc_customer_visibility"
     description: "Customer visibility — disposal policy made available to customer on request"
     excerpt_keywords:
       - [customer, visibility]
+      - [customer, visibility, disposal]
+      - [visibility, disposal]
+      - [visibility, disposal, made]
+      - [disposal, made]
+      - [disposal, made, available]
+      - [made, available]
+      - [made, available, customer]
 
   - must_id: "item:B.8.4.2:proc_disposal_capability"
     description: "Secure disposal capability — including from backups + DR + continuity systems"
     excerpt_keywords:
       - [disposal, capability]
+      - [secure, disposal]
       - [secure, disposal, capability]
-
-  - must_id: "item:B.8.4.2:proc_lapse_protection"
-    description: "Lapse-of-contract protection — retention period defined before disposal after contract terminatio..."
-    excerpt_keywords:
-      - [lapse, protection]
-
-  - must_id: "item:B.8.4.2:proc_return_capability"
-    description: "Return capability — export PII to customer in structured format at end of service"
-    excerpt_keywords:
-      - [return, capability]
+      - [disposal, capability, including]
+      - [capability, including]
+      - [capability, including, backups]
+      - [including, backups]
+      - [including, backups, continuity]
 
   - must_id: "item:B.8.4.2:proc_transfer_capability"
     description: "Transfer capability — hand PII to nominated third party at customer request"
     excerpt_keywords:
       - [transfer, capability]
+      - [transfer, capability, hand]
+      - [capability, hand]
+      - [capability, hand, pii]
+      - [hand, pii]
+      - [hand, pii, nominated]
+      - [pii, nominated]
+      - [pii, nominated, third]
+
+  - must_id: "item:B.8.4.2:proc_return_capability"
+    description: "Return capability — export PII to customer in structured format at end of service"
+    excerpt_keywords:
+      - [return, capability]
+      - [return, capability, export]
+      - [capability, export]
+      - [capability, export, pii]
+      - [export, pii]
+      - [export, pii, customer]
+      - [pii, customer]
+      - [pii, customer, structured]
+

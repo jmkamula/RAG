@@ -15,47 +15,47 @@ must_fingerprints:
     description: "Legal review path stated (when local employment counsel must be engaged before action — typically all dismissal cases + suspension cases ove"
     excerpt_keywords:
       - [legal, review]
-      - [legal]
       - [legal, review, path]
       - [review, path]
       - [review, path, stated]
-      - [path]
       - [path, stated]
       - [path, stated, local]
+      - [stated, local]
+      - [stated, local, employment]
 
   - must_id: "item:A.6.4:scope_regulator_notify"
     description: "Regulator-notification triggers per jurisdiction (financial-services FSA notification for serious misconduct, healthcare professional body n"
     excerpt_keywords:
       - [regulator, notify]
-      - [regulator]
-      - [notify]
       - [regulator, notification]
       - [regulator, notification, triggers]
-      - [notification]
       - [notification, triggers]
       - [notification, triggers, jurisdiction]
+      - [triggers, jurisdiction]
+      - [triggers, jurisdiction, financial]
+      - [jurisdiction, financial]
 
   - must_id: "item:A.6.4:scope_worker_categories"
     description: "Worker categories addressed (employees → full process; contractors → contract-based termination; secondees → escalation to home employer)"
     excerpt_keywords:
       - [worker, categories]
-      - [worker]
-      - [categories]
       - [worker, categories, addressed]
       - [categories, addressed]
       - [categories, addressed, employees]
-      - [addressed]
       - [addressed, employees]
+      - [addressed, employees, full]
+      - [employees, full]
+      - [employees, full, contractors]
 
   - must_id: "item:A.6.4:scope_jurisdictions"
     description: "Jurisdictions covered (employment-law variants — at-will US states vs just-cause EU vs notice-period UK — drive process step variations)"
     excerpt_keywords:
-      - [jurisdictions]
       - [jurisdictions, covered]
       - [jurisdictions, covered, employment]
-      - [covered]
       - [covered, employment]
       - [covered, employment, law]
-      - [employment]
       - [employment, law]
+      - [employment, law, variants]
+      - [law, variants]
+      - [law, variants, will]
 

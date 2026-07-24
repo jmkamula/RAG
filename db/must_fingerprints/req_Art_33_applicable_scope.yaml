@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.33:applicable_scope
 #
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.33 scope note.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.33:applicable_scope"
@@ -9,30 +11,24 @@ target_standard: "GDPR:2016/679"
 
 must_fingerprints:
   - must_id: "item:Art.33:scope_breach_definition"
-    description: "Operational definition of 'personal data breach' per Art.4(12)"
+    description: "Operational definition of 'personal data breach' per Art.4(12) — breach of security leading to ac..."
     excerpt_keywords:
-      - ["Art.4"]
-      - [personal, data, breach, definition]
-      - [art, 4, 12, breach, definition]
-      - [breach, of, security, definition]
+      - [scope, breach, definition, notification]
+      - [operational, definition, personal, data]
 
   - must_id: "item:Art.33:scope_excluded_events"
-    description: "Excluded events"
+    description: "Excluded events (security events NOT involving personal data; minor near-misses)"
     excerpt_keywords:
-      - [art, 33, excluded, events]
-      - [security, event, not, personal, data]
-      - [art, 33, near, miss, excluded]
+      - [scope, excluded, events, notification]
+      - [excluded, events, notification]
 
   - must_id: "item:Art.33:scope_high_risk_overlay"
-    description: "High-risk overlay (when Art.34 also triggers)"
+    description: "High-risk overlay (when Art.34 subject notification ALSO triggers — boundary to Art.34 leaf)"
     excerpt_keywords:
-      - ["Art.34"]
-      - [art, 33, art, 34, boundary]
-      - [breach, high, risk, overlay]
+      - [scope, high, risk, overlay, notification]
 
   - must_id: "item:Art.33:scope_lead_sa"
-    description: "Lead supervisory authority identified"
+    description: "Lead supervisory authority identified per main-establishment rules (Art.56)"
     excerpt_keywords:
-      - ["Art.56"]
-      - [lead, supervisory, authority, identified]
-      - [art, 56, main, establishment, sa]
+      - [scope, lead, notification]
+      - [lead, supervisory, authority, identified, notification]

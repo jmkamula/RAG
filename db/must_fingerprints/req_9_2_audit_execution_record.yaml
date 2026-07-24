@@ -14,46 +14,42 @@ must_fingerprints:
   - must_id: "item:9.2:rec_handoff"
     description: "Per-audit handoff to 10.2 NC/CA procedure where findings include nonconformities"
     excerpt_keywords:
-      - [handoff]
       - [audit, handoff]
       - [audit, handoff, findings]
       - [handoff, findings]
       - [handoff, findings, include]
-      - [findings]
       - [findings, include]
       - [findings, include, nonconformities]
+      - [include, nonconformities]
 
   - must_id: "item:9.2:rec_findings"
     description: "Per-audit findings list (conformities + nonconformities + observations)"
     excerpt_keywords:
-      - [findings]
       - [audit, findings]
       - [audit, findings, conformities]
       - [findings, conformities]
       - [findings, conformities, nonconformities]
-      - [conformities]
       - [conformities, nonconformities]
       - [conformities, nonconformities, observations]
+      - [nonconformities, observations]
 
   - must_id: "item:9.2:rec_date"
     description: "Per-audit execution date"
     excerpt_keywords:
       - [audit, execution]
       - [audit, execution, date]
-      - [execution]
       - [execution, date]
 
   - must_id: "item:9.2:rec_auditor"
     description: "Per-audit auditor identity + independence assertion"
     excerpt_keywords:
-      - [auditor]
       - [audit, auditor]
       - [audit, auditor, identity]
       - [auditor, identity]
       - [auditor, identity, independence]
       - [identity, independence]
       - [identity, independence, assertion]
-      - [independence]
+      - [independence, assertion]
 
   - must_id: "item:9.2:rec_scope"
     description: "Per-audit scope (which ISMS process / area was audited)"
@@ -62,10 +58,9 @@ must_fingerprints:
       - [audit, scope, isms]
       - [scope, isms]
       - [scope, isms, area]
-      - [isms]
       - [isms, area]
       - [isms, area, audited]
-      - [area]
+      - [area, audited]
 
   - must_id: "item:9.2:rec_audit_id"
     description: "Unique audit identifier per row"
@@ -74,5 +69,4 @@ must_fingerprints:
       - [unique, audit]
       - [unique, audit, identifier]
       - [audit, identifier]
-      - [identifier]
 

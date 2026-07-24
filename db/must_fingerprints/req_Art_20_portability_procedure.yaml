@@ -15,71 +15,70 @@ must_fingerprints:
     description: "Third-party rights protection (Art.20.4 — must not adversely affect others)"
     excerpt_keywords:
       - [third, party, rights]
-      - [third]
-      - [party]
-      - [rights]
       - [third, party]
       - [party, rights]
       - [party, rights, protection]
       - [rights, protection]
+      - [rights, protection, art]
+      - [protection, art]
+      - [protection, art, not]
 
   - must_id: "item:Art.20:scope_boundary"
     description: "Scope boundary — only data 'provided by' the subject (excludes derived data and observed data per EDPB guidance)"
     excerpt_keywords:
-      - [boundary]
       - [scope, boundary]
       - [scope, boundary, only]
       - [boundary, only]
       - [boundary, only, provided]
-      - [only]
       - [only, provided]
       - [only, provided, subject]
+      - [provided, subject]
+      - [provided, subject, excludes]
 
   - must_id: "item:Art.20:direct_transmission"
     description: "Direct controller-to-controller transmission supported where technically feasible (Art.20.2)"
     excerpt_keywords:
       - [direct, transmission]
-      - [direct]
-      - [transmission]
       - [direct, controller]
       - [direct, controller, controller]
-      - [controller]
       - [controller, controller]
       - [controller, controller, transmission]
+      - [controller, transmission]
+      - [controller, transmission, supported]
+      - [transmission, supported]
 
   - must_id: "item:Art.20:export_format"
     description: "Export format documented (JSON / CSV / XML — machine-readable, structured, commonly used)"
     excerpt_keywords:
       - [export, format]
-      - [export]
-      - [format]
       - [export, format, documented]
       - [format, documented]
       - [format, documented, json]
-      - [documented]
       - [documented, json]
+      - [documented, json, csv]
+      - [json, csv]
+      - [json, csv, xml]
 
   - must_id: "item:Art.20:applicability_check"
     description: "Applicability assessment per request (basis = consent/contract AND automated processing)"
     excerpt_keywords:
       - [applicability, check]
-      - [applicability]
-      - [check]
       - [applicability, assessment]
       - [applicability, assessment, request]
-      - [assessment]
       - [assessment, request]
       - [assessment, request, basis]
+      - [request, basis]
+      - [request, basis, consent]
+      - [basis, consent]
 
   - must_id: "item:Art.20:intake_channel"
     description: "Intake channel via Art.12 procedure"
     excerpt_keywords:
       - [intake, channel]
-      - [intake]
-      - [channel]
       - [intake, channel, via]
       - [channel, via]
       - [channel, via, art]
-      - [via]
       - [via, art]
+      - [procedure, step]
+      - [responsibility, of]
 

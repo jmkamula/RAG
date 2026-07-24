@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.4:minimization_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.4:minimization_procedure"
@@ -10,30 +11,63 @@ target_control: "A.7.4.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.4:proc_deidentification_technique"
-    description: "De-identification technique selection referencing ISO/IEC 20889 taxonomy"
-    excerpt_keywords:
-      - [deidentification, technique]
-
   - must_id: "item:A.7.4.4:proc_full_pii_justification"
-    description: "Where processing requires non-minimised PII (identified purpose demands it), justification docume..."
+    description: "Where processing requires non-minimised PII (identified purpose demands it), justification documented"
     excerpt_keywords:
       - [full, pii, justification]
+      - [processing, requires]
       - [processing, requires, non]
-
-  - must_id: "item:A.7.4.4:proc_mechanism_map"
-    description: "Mechanism map — de-identification / pseudonymisation / aggregation / generalisation / suppression..."
-    excerpt_keywords:
-      - [mechanism, map]
-
-  - must_id: "item:A.7.4.4:proc_objectives_stated"
-    description: "Minimization objectives stated per processing activity (target level of identifiability required)"
-    excerpt_keywords:
-      - [objectives, stated]
-      - [minimization, objectives, stated, processing]
+      - [requires, non]
+      - [requires, non, minimised]
+      - [non, minimised]
+      - [non, minimised, pii]
+      - [minimised, pii]
 
   - must_id: "item:A.7.4.4:proc_technical_config"
     description: "Technical configurations documented (how the minimisation is implemented in code / infrastructure)"
     excerpt_keywords:
       - [technical, config]
+      - [technical, configurations]
       - [technical, configurations, documented]
+      - [configurations, documented]
+      - [configurations, documented, minimisation]
+      - [documented, minimisation]
+      - [documented, minimisation, implemented]
+      - [minimisation, implemented]
+
+  - must_id: "item:A.7.4.4:proc_deidentification_technique"
+    description: "De-identification technique selection referencing ISO/IEC 20889 taxonomy"
+    excerpt_keywords:
+      - [deidentification, technique]
+      - [identification, technique]
+      - [identification, technique, selection]
+      - [technique, selection]
+      - [technique, selection, referencing]
+      - [selection, referencing]
+      - [selection, referencing, iso]
+      - [referencing, iso]
+
+  - must_id: "item:A.7.4.4:proc_mechanism_map"
+    description: "Mechanism map — de-identification / pseudonymisation / aggregation / generalisation / suppression per activity"
+    excerpt_keywords:
+      - [mechanism, map]
+      - [mechanism, map, identification]
+      - [map, identification]
+      - [map, identification, pseudonymisation]
+      - [identification, pseudonymisation]
+      - [identification, pseudonymisation, aggregation]
+      - [pseudonymisation, aggregation]
+      - [pseudonymisation, aggregation, generalisation]
+
+  - must_id: "item:A.7.4.4:proc_objectives_stated"
+    description: "Minimization objectives stated per processing activity (target level of identifiability required)"
+    excerpt_keywords:
+      - [objectives, stated]
+      - [minimization, objectives]
+      - [minimization, objectives, stated]
+      - [objectives, stated, processing]
+      - [stated, processing]
+      - [stated, processing, activity]
+      - [processing, activity]
+      - [processing, activity, target]
+

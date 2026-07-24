@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.6:processor_contract_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.6:processor_contract_register"
@@ -10,36 +11,75 @@ target_control: "A.7.2.6"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.6:reg_annex_b_coverage"
-    description: "Annex B controls covered per row (either 'all' or itemised subset with justification link)"
-    excerpt_keywords:
-      - [annex, coverage]
-      - [annex, controls, covered, row]
-
-  - must_id: "item:A.7.2.6:reg_contract_reference"
-    description: "Executed contract reference (document + version + signature date)"
-    excerpt_keywords:
-      - [contract, reference]
-      - [executed, contract, reference]
-
   - must_id: "item:A.7.2.6:reg_expiry"
     description: "Contract expiry / renewal date per row"
     excerpt_keywords:
-      - [contract, expiry, renewal, date]
-
-  - must_id: "item:A.7.2.6:reg_processor_id"
-    description: "Processor identifier per row (legal entity name)"
-    excerpt_keywords:
-      - [processor, identifier, row]
-
-  - must_id: "item:A.7.2.6:reg_service_scope"
-    description: "Service scope per row (what the processor does + PII categories involved)"
-    excerpt_keywords:
-      - [service, scope]
-      - [service, scope, row]
+      - [contract, expiry]
+      - [contract, expiry, renewal]
+      - [expiry, renewal]
+      - [expiry, renewal, date]
+      - [renewal, date]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
 
   - must_id: "item:A.7.2.6:reg_subprocessor_flag"
     description: "Subprocessors permitted flag + list per row"
     excerpt_keywords:
       - [subprocessor, flag]
-      - [subprocessors, permitted, flag, list]
+      - [subprocessors, permitted]
+      - [subprocessors, permitted, flag]
+      - [permitted, flag]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+
+  - must_id: "item:A.7.2.6:reg_annex_b_coverage"
+    description: "Annex B controls covered per row (either 'all' or itemised subset with justification link)"
+    excerpt_keywords:
+      - [annex, b, coverage]
+      - [annex, controls]
+      - [annex, controls, covered]
+      - [controls, covered]
+      - [controls, covered, either]
+      - [covered, either]
+      - [covered, either, itemised]
+      - [either, itemised]
+
+  - must_id: "item:A.7.2.6:reg_service_scope"
+    description: "Service scope per row (what the processor does + PII categories involved)"
+    excerpt_keywords:
+      - [service, scope]
+      - [service, scope, processor]
+      - [scope, processor]
+      - [scope, processor, does]
+      - [processor, does]
+      - [processor, does, pii]
+      - [does, pii]
+      - [does, pii, categories]
+
+  - must_id: "item:A.7.2.6:reg_contract_reference"
+    description: "Executed contract reference (document + version + signature date)"
+    excerpt_keywords:
+      - [contract, reference]
+      - [executed, contract]
+      - [executed, contract, reference]
+      - [contract, reference, document]
+      - [reference, document]
+      - [reference, document, version]
+      - [document, version]
+      - [document, version, signature]
+
+  - must_id: "item:A.7.2.6:reg_processor_id"
+    description: "Processor identifier per row (legal entity name)"
+    excerpt_keywords:
+      - [processor, id]
+      - [processor, identifier]
+      - [processor, identifier, legal]
+      - [identifier, legal]
+      - [identifier, legal, entity]
+      - [legal, entity]
+      - [legal, entity, name]
+      - [entity, name]
+

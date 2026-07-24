@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.5.37:procedures_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. Operating-procedures program audit.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.37:procedures_program_review"
@@ -8,50 +10,39 @@ target_control: "A.5.37"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
-  - must_id: "item:A.5.37:rev_date"
-    description: "Review date within the planned interval"
-    excerpt_keywords:
-      - [operating, procedures, review, date]
-      - [procedures, program, reviewed, on]
-
-  - must_id: "item:A.5.37:rev_reviewer"
-    description: "Reviewer identity (operations lead + InfoSec lead)"
-    excerpt_keywords:
-      - [operating, procedures, reviewed, by]
-      - [operations, lead, procedure, review]
-      - [infosec, lead, procedure, review]
-
-  - must_id: "item:A.5.37:rev_register_check"
-    description: "Per-procedure outcome"
-    excerpt_keywords:
-      - [procedure, per, row, outcome]
-      - [procedure, verified, amended, retired]
-      - [procedure, new, added, audit]
-
-  - must_id: "item:A.5.37:rev_register_update"
-    description: "Changes propagated back to the live register"
-    excerpt_keywords:
-      - [procedures, register, updated, after, review]
-      - [procedures, catalogue, refresh]
-
-  - must_id: "item:A.5.37:rev_scope_check"
-    description: "Cross-check against the applicable-facilities scope"
-    excerpt_keywords:
-      - [procedures, scope, cross, check]
-      - [new, facility, procedure, needed]
-      - [new, saas, procedure, needed]
-
   - must_id: "item:A.5.37:rev_accuracy_sample"
-    description: "Accuracy sampling — operator walked through a sample procedure"
+    description: "Accuracy sampling — operator walked through a sample procedure end-to-end? procedure matches curr..."
     excerpt_keywords:
-      - [procedure, accuracy, sample]
-      - [operator, walked, through, procedure]
-      - [procedure, matches, system, reality]
+      - [accuracy, sample, documented]
+      - [accuracy, sampling, documented]
+
+  - must_id: "item:A.5.37:rev_date"
+    description: "Review date within the planned interval (typically within 12 months of last review)"
+    excerpt_keywords:
+      - [review, date, planned, interval, documented]
 
   - must_id: "item:A.5.37:rev_emergency_review"
-    description: "Emergency-use procedure review"
+    description: "Emergency-use procedure review — confirmed available and accurate for DR/incident scenarios (thes..."
     excerpt_keywords:
-      - [emergency, procedure, review]
-      - [dr, procedure, accurate]
-      - [incident, procedure, available]
-      - [emergency, procedure, currency]
+      - [emergency, review, documented]
+
+  - must_id: "item:A.5.37:rev_register_check"
+    description: "Per-procedure outcome (verified / amended / retired / new added) with availability-mechanism-stil..."
+    excerpt_keywords:
+      - [register, check, documented]
+
+  - must_id: "item:A.5.37:rev_register_update"
+    description: "Changes propagated back to the live register with reference to this review"
+    excerpt_keywords:
+      - [register, update, documented]
+      - [changes, propagated, back, live, documented]
+
+  - must_id: "item:A.5.37:rev_reviewer"
+    description: "Reviewer identity and role recorded (operations lead + InfoSec lead jointly)"
+    excerpt_keywords:
+      - [reviewer, identity, role, recorded, documented]
+
+  - must_id: "item:A.5.37:rev_scope_check"
+    description: "Cross-check against the applicable-facilities scope — any new system / SaaS environment / facilit..."
+    excerpt_keywords:
+      - [scope, check, documented]

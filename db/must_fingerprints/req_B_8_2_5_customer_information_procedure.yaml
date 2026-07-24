@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.5:customer_information_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.5:customer_information_procedure"
@@ -10,28 +11,63 @@ target_control: "B.8.2.5"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.2.5:proc_audit_support"
-    description: "Audit support pathway — how customers request + receive audit info within stated SLA"
-    excerpt_keywords:
-      - [audit, support]
-      - [audit, support, pathway]
-
   - must_id: "item:B.8.2.5:proc_contract_alignment"
     description: "Contract alignment — audit + information rights consistent with B.8.2.1 agreement + Art.28.3.h"
     excerpt_keywords:
       - [contract, alignment]
-
-  - must_id: "item:B.8.2.5:proc_information_catalog"
-    description: "Information catalog — what the org routinely makes available (certifications / audit reports / se..."
-    excerpt_keywords:
-      - [information, catalog]
+      - [contract, alignment, audit]
+      - [alignment, audit]
+      - [alignment, audit, rights]
+      - [audit, rights]
+      - [audit, rights, consistent]
+      - [rights, consistent]
+      - [rights, consistent, agreement]
 
   - must_id: "item:B.8.2.5:proc_information_request"
     description: "Ad-hoc information request pathway — customer inquiries routed + responded within stated SLA"
     excerpt_keywords:
-      - [information, request]
+      - [hoc, request]
+      - [hoc, request, pathway]
+      - [request, pathway]
+      - [request, pathway, customer]
+      - [pathway, customer]
+      - [pathway, customer, inquiries]
+      - [customer, inquiries]
+      - [customer, inquiries, routed]
 
   - must_id: "item:B.8.2.5:proc_third_party_audit"
     description: "Third-party audit acceptance — customer-mandated auditor engagement rules"
     excerpt_keywords:
       - [third, party, audit]
+      - [third, party]
+      - [party, audit]
+      - [party, audit, acceptance]
+      - [audit, acceptance]
+      - [audit, acceptance, customer]
+      - [acceptance, customer]
+      - [acceptance, customer, mandated]
+
+  - must_id: "item:B.8.2.5:proc_audit_support"
+    description: "Audit support pathway — how customers request + receive audit info within stated SLA"
+    excerpt_keywords:
+      - [audit, support]
+      - [audit, support, pathway]
+      - [support, pathway]
+      - [support, pathway, customers]
+      - [pathway, customers]
+      - [pathway, customers, request]
+      - [customers, request]
+      - [customers, request, receive]
+
+  - must_id: "item:B.8.2.5:proc_information_catalog"
+    description: "Information catalog — what the org routinely makes available (certifications / audit reports / security whitepaper / DPIA input / data flow "
+    excerpt_keywords:
+      - [catalog, org]
+      - [catalog, org, routinely]
+      - [org, routinely]
+      - [org, routinely, makes]
+      - [routinely, makes]
+      - [routinely, makes, available]
+      - [makes, available]
+      - [makes, available, certifications]
+

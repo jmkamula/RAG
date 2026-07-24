@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.2:notice_artifact_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.2:notice_artifact_register"
@@ -10,29 +11,63 @@ target_control: "A.7.3.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.2:reg_audience"
-    description: "Target audience per row (public / customer / employee / minor / EU / US / etc.)"
-    excerpt_keywords:
-      - [target, audience, row]
-
-  - must_id: "item:A.7.3.2:reg_field_coverage"
-    description: "Field coverage per row (which A.7.3.2 fields the notice covers)"
-    excerpt_keywords:
-      - [field, coverage]
-      - [field, coverage, row]
-
-  - must_id: "item:A.7.3.2:reg_notice_id"
-    description: "Unique notice identifier per row"
-    excerpt_keywords:
-      - [unique, notice, identifier, row]
-
   - must_id: "item:A.7.3.2:reg_signoff"
     description: "DPO + Legal signoff per version"
     excerpt_keywords:
-      - [dpo, legal, signoff, version]
+      - [dpo, legal]
+      - [dpo, legal, signoff]
+      - [legal, signoff]
+      - [legal, signoff, version]
+      - [signoff, version]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
 
   - must_id: "item:A.7.3.2:reg_version_effective"
     description: "Version + effective date per row"
     excerpt_keywords:
       - [version, effective]
-      - [version, effective, date, row]
+      - [version, effective, date]
+      - [effective, date]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:A.7.3.2:reg_field_coverage"
+    description: "Field coverage per row (which A.7.3.2 fields the notice covers)"
+    excerpt_keywords:
+      - [coverage, fields]
+      - [coverage, fields, notice]
+      - [fields, notice]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:A.7.3.2:reg_audience"
+    description: "Target audience per row (public / customer / employee / minor / EU / US / etc.)"
+    excerpt_keywords:
+      - [target, audience]
+      - [target, audience, public]
+      - [audience, public]
+      - [audience, public, customer]
+      - [public, customer]
+      - [public, customer, employee]
+      - [customer, employee]
+      - [customer, employee, minor]
+
+  - must_id: "item:A.7.3.2:reg_notice_id"
+    description: "Unique notice identifier per row"
+    excerpt_keywords:
+      - [notice, id]
+      - [unique, notice]
+      - [unique, notice, identifier]
+      - [notice, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

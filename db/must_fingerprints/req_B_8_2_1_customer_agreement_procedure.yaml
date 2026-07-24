@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.1:customer_agreement_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.1:customer_agreement_procedure"
@@ -10,29 +11,63 @@ target_control: "B.8.2.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.2.1:proc_assistance_scope"
-    description: "Assistance scope enumerated (Art.28.3.e subject rights + Art.28.3.f security + breach notificatio..."
-    excerpt_keywords:
-      - [assistance, scope]
-      - [assistance, scope, enumerated]
-
   - must_id: "item:B.8.2.1:proc_customer_dpia_support"
     description: "Art.35.1 DPIA support pathway — how customer requests DPIA-input from processor"
     excerpt_keywords:
       - [customer, dpia, support]
-      - [art, dpia, support, pathway]
-
-  - must_id: "item:B.8.2.1:proc_documented_instructions"
-    description: "Documented-instructions mechanism (how instructions are recorded, escalated, disputed)"
-    excerpt_keywords:
-      - [documented, instructions]
-
-  - must_id: "item:B.8.2.1:proc_intake_gate"
-    description: "Intake gate — new customer onboarding blocked until PII processing agreement executed"
-    excerpt_keywords:
-      - [intake, gate]
+      - [art, dpia]
+      - [art, dpia, support]
+      - [dpia, support]
+      - [dpia, support, pathway]
+      - [support, pathway]
+      - [support, pathway, customer]
+      - [pathway, customer]
 
   - must_id: "item:B.8.2.1:proc_subject_matter_scope"
     description: "Subject-matter + duration + nature + purpose scope per Art.28.3 requirements"
     excerpt_keywords:
       - [subject, matter, scope]
+      - [subject, matter]
+      - [subject, matter, duration]
+      - [matter, duration]
+      - [matter, duration, nature]
+      - [duration, nature]
+      - [duration, nature, purpose]
+      - [nature, purpose]
+
+  - must_id: "item:B.8.2.1:proc_documented_instructions"
+    description: "Documented-instructions mechanism (how instructions are recorded, escalated, disputed)"
+    excerpt_keywords:
+      - [documented, instructions]
+      - [documented, instructions, mechanism]
+      - [instructions, mechanism]
+      - [instructions, mechanism, instructions]
+      - [mechanism, instructions]
+      - [mechanism, instructions, recorded]
+      - [instructions, recorded]
+      - [instructions, recorded, escalated]
+
+  - must_id: "item:B.8.2.1:proc_assistance_scope"
+    description: "Assistance scope enumerated (Art.28.3.e subject rights + Art.28.3.f security + breach notification + PIA support + prior consultation)"
+    excerpt_keywords:
+      - [assistance, scope]
+      - [assistance, scope, enumerated]
+      - [scope, enumerated]
+      - [scope, enumerated, art]
+      - [enumerated, art]
+      - [enumerated, art, subject]
+      - [art, subject]
+      - [art, subject, rights]
+
+  - must_id: "item:B.8.2.1:proc_intake_gate"
+    description: "Intake gate — new customer onboarding blocked until PII processing agreement executed"
+    excerpt_keywords:
+      - [intake, gate]
+      - [intake, gate, new]
+      - [gate, new]
+      - [gate, new, customer]
+      - [new, customer]
+      - [new, customer, onboarding]
+      - [customer, onboarding]
+      - [customer, onboarding, blocked]
+

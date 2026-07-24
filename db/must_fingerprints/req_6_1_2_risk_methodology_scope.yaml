@@ -14,48 +14,48 @@ must_fingerprints:
   - must_id: "item:6.1.2:scope_exclusions"
     description: "Exclusions stated explicitly with rationale"
     excerpt_keywords:
-      - [exclusions]
       - [exclusions, stated]
       - [exclusions, stated, explicitly]
       - [stated, explicitly]
       - [stated, explicitly, rationale]
-      - [explicitly]
       - [explicitly, rationale]
-      - [rationale]
+      - [in, scope]
+      - [scope, includes]
+      - [applicable, to]
 
   - must_id: "item:6.1.2:scope_asset_classes"
     description: "Asset/process classes in scope enumerated (data, systems, people, suppliers, premises)"
     excerpt_keywords:
       - [asset, classes]
-      - [asset]
-      - [classes]
       - [asset, classes, scope]
       - [classes, scope]
       - [classes, scope, enumerated]
       - [scope, enumerated]
       - [scope, enumerated, people]
+      - [enumerated, people]
+      - [enumerated, people, suppliers]
 
   - must_id: "item:6.1.2:scope_acceptance_bands"
     description: "Acceptance bands stated (low/medium/high → accept/treat thresholds)"
     excerpt_keywords:
       - [acceptance, bands]
-      - [acceptance]
-      - [bands]
       - [acceptance, bands, stated]
       - [bands, stated]
       - [bands, stated, low]
       - [stated, low]
       - [stated, low, medium]
+      - [low, medium]
+      - [low, medium, high]
 
   - must_id: "item:6.1.2:scope_scoring_scale"
     description: "Scoring scale stated (e.g"
     excerpt_keywords:
       - [scoring, scale]
-      - [scoring]
-      - [scale]
       - [scoring, scale, stated]
       - [scale, stated]
       - [scale, stated, qualitative]
       - [stated, qualitative]
       - [stated, qualitative, ale]
+      - [qualitative, ale]
+      - [qualitative, ale, quantitative]
 

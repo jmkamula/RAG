@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.4:consent_withdrawal_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.4:consent_withdrawal_procedure"
@@ -10,33 +11,75 @@ target_control: "A.7.3.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.4:proc_channel_parity"
-    description: "Channel parity — withdrawal via same medium as collection (email if email, web if web; not phone/..."
-    excerpt_keywords:
-      - [channel, parity]
-
-  - must_id: "item:A.7.3.4:proc_easy_as_giving"
-    description: "Withdrawal as easy as giving — no additional hurdles beyond original consent process (Art.7.3)"
-    excerpt_keywords:
-      - [easy, giving]
-      - [withdrawal, easy, giving]
-
-  - must_id: "item:A.7.3.4:proc_modification_paths"
-    description: "Modification paths (partial withdrawal / opt-in-to-fewer-purposes / restrict processing)"
-    excerpt_keywords:
-      - [modification, paths]
-
   - must_id: "item:A.7.3.4:proc_pre_withdrawal_valid"
-    description: "Pre-withdrawal processing remains valid; post-withdrawal processing halts (Art.7.3 — no retroacti..."
+    description: "Pre-withdrawal processing remains valid; post-withdrawal processing halts (Art.7.3 — no retroactive effect)"
     excerpt_keywords:
       - [pre, withdrawal, valid]
+      - [pre, withdrawal]
+      - [pre, withdrawal, processing]
+      - [withdrawal, processing]
+      - [withdrawal, processing, remains]
+      - [processing, remains]
+      - [processing, remains, valid]
+      - [remains, valid]
 
   - must_id: "item:A.7.3.4:proc_propagation"
-    description: "Downstream propagation — withdrawal cascades to systems + authorised users + third parties (see A..."
+    description: "Downstream propagation — withdrawal cascades to systems + authorised users + third parties (see A.7.3.7)"
     excerpt_keywords:
       - [downstream, propagation]
+      - [downstream, propagation, withdrawal]
+      - [propagation, withdrawal]
+      - [propagation, withdrawal, cascades]
+      - [withdrawal, cascades]
+      - [withdrawal, cascades, authorised]
+      - [cascades, authorised]
+      - [cascades, authorised, users]
 
   - must_id: "item:A.7.3.4:proc_response_sla"
     description: "Response-time SLA stated + honoured"
     excerpt_keywords:
       - [response, sla]
+      - [response, time]
+      - [response, time, sla]
+      - [time, sla]
+      - [time, sla, stated]
+      - [sla, stated]
+      - [sla, stated, honoured]
+      - [stated, honoured]
+
+  - must_id: "item:A.7.3.4:proc_modification_paths"
+    description: "Modification paths (partial withdrawal / opt-in-to-fewer-purposes / restrict processing)"
+    excerpt_keywords:
+      - [modification, paths]
+      - [modification, paths, partial]
+      - [paths, partial]
+      - [paths, partial, withdrawal]
+      - [partial, withdrawal]
+      - [partial, withdrawal, opt]
+      - [withdrawal, opt]
+      - [withdrawal, opt, fewer]
+
+  - must_id: "item:A.7.3.4:proc_easy_as_giving"
+    description: "Withdrawal as easy as giving — no additional hurdles beyond original consent process (Art.7.3)"
+    excerpt_keywords:
+      - [easy, giving]
+      - [withdrawal, easy]
+      - [withdrawal, easy, giving]
+      - [easy, giving, additional]
+      - [giving, additional]
+      - [giving, additional, hurdles]
+      - [additional, hurdles]
+      - [additional, hurdles, beyond]
+
+  - must_id: "item:A.7.3.4:proc_channel_parity"
+    description: "Channel parity — withdrawal via same medium as collection (email if email, web if web; not phone/fax fallback)"
+    excerpt_keywords:
+      - [channel, parity]
+      - [channel, parity, withdrawal]
+      - [parity, withdrawal]
+      - [parity, withdrawal, via]
+      - [withdrawal, via]
+      - [withdrawal, via, same]
+      - [via, same]
+      - [via, same, medium]
+

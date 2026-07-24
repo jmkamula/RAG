@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.5.26:ir_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. IR program audit cycle.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.26:ir_program_review"
@@ -8,63 +10,45 @@ target_control: "A.5.26"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:A.5.26:rev_72h_feasibility"
+    description: "Art.33 72h feasibility audited empirically across the period — count of personal-data incidents, ..."
+    excerpt_keywords:
+      - [72h, feasibility, response]
+      - [art, 72h, feasibility, audited, response]
+
+  - must_id: "item:A.5.26:rev_actions"
+    description: "Action items captured (e.g. revise containment runbook, refresh contact list, schedule exercise)"
+    excerpt_keywords:
+      - [action, items, captured, response]
+
   - must_id: "item:A.5.26:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [ir, program, review, date]
-      - [incident, response, program, reviewed]
-      - [ir, reviewed, on]
+      - [review, date, planned, interval, response]
 
-  - must_id: "item:A.5.26:rev_reviewer"
-    description: "Reviewer identity (Incident Manager + InfoSec lead jointly)"
+  - must_id: "item:A.5.26:rev_exercise"
+    description: "Tabletop / simulation outcomes reviewed (or scheduled-but-not-yet-run noted)"
     excerpt_keywords:
-      - [incident, manager, ir, review]
-      - [infosec, lead, ir, review]
-      - [ir, program, reviewer]
+      - [tabletop, simulation, outcomes, reviewed, response]
+
+  - must_id: "item:A.5.26:rev_identity_pair_25"
+    description: "Bidirectional A.5.25 ↔ A.5.26 lifecycle pair check — every register row traces back to an A.5.25 ..."
+    excerpt_keywords:
+      - [identity, pair, response]
+      - [bidirectional, lifecycle, pair, check, response]
 
   - must_id: "item:A.5.26:rev_metrics"
-    description: "MTTC / MTTR / containment-success metrics analysed"
+    description: "MTTC / MTTR / containment-success metrics analysed across the period"
     excerpt_keywords:
-      - [mttc, analysed]
-      - [mttr, analysed]
-      - [containment, success, metrics]
-      - [ir, metrics, analysis]
+      - [mttc, mttr, containment, response]
 
   - must_id: "item:A.5.26:rev_procedure_currency"
     description: "Procedure currency assessed against threat landscape + new control changes"
     excerpt_keywords:
-      - [ir, procedure, currency]
-      - [ir, procedure, threat, landscape]
-      - [ir, procedure, refresh, needed]
+      - [procedure, currency, response]
+      - [procedure, currency, assessed, threat, response]
 
-  - must_id: "item:A.5.26:rev_exercise"
-    description: "Tabletop / simulation outcomes reviewed"
+  - must_id: "item:A.5.26:rev_reviewer"
+    description: "Reviewer identity (Incident Manager + InfoSec lead jointly)"
     excerpt_keywords:
-      - [tabletop, outcome, reviewed]
-      - [ir, simulation, outcome]
-      - [ir, exercise, scheduled]
-      - [ir, drill, outcomes]
-
-  - must_id: "item:A.5.26:rev_72h_feasibility"
-    description: "Art.33 72h feasibility audited empirically"
-    excerpt_keywords:
-      - ["Art.33"]
-      - [72, hour, feasibility, audit]
-      - [notification, within, 72h, count]
-      - [breach, notification, feasibility]
-
-  - must_id: "item:A.5.26:rev_identity_pair_25"
-    description: "Bidirectional A.5.25 ↔ A.5.26 lifecycle pair check"
-    excerpt_keywords:
-      - ["A.5.25"]
-      - [bidirectional, pair, check, incident]
-      - [no, orphan, incident, register]
-      - [triage, to, incident, traceability]
-
-  - must_id: "item:A.5.26:rev_actions"
-    description: "Action items captured"
-    excerpt_keywords:
-      - [ir, review, action, items]
-      - [containment, runbook, revised]
-      - [ir, contact, list, refreshed]
-      - [ir, exercise, scheduled, action]
+      - [reviewer, identity, response]

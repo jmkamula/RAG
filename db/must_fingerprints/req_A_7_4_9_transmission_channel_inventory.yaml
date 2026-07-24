@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.9:transmission_channel_inventory
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.9:transmission_channel_inventory"
@@ -13,26 +14,58 @@ must_fingerprints:
   - must_id: "item:A.7.4.9:reg_audit_log_retention"
     description: "Audit log retention per row"
     excerpt_keywords:
-      - [audit, log, retention]
-      - [audit, log, retention, row]
+      - [audit, retention]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:A.7.4.9:reg_auth_mechanism"
     description: "Authentication mechanism per row (mutual TLS / OAuth / API key + IP allowlist / etc.)"
     excerpt_keywords:
       - [auth, mechanism]
-      - [authentication, mechanism, row]
-
-  - must_id: "item:A.7.4.9:reg_channel_id"
-    description: "Unique channel identifier per row"
-    excerpt_keywords:
-      - [unique, channel, identifier, row]
+      - [authentication, mechanism]
+      - [authentication, mechanism, mutual]
+      - [mechanism, mutual]
+      - [mechanism, mutual, tls]
+      - [mutual, tls]
+      - [mutual, tls, oauth]
+      - [tls, oauth]
 
   - must_id: "item:A.7.4.9:reg_encryption"
     description: "Encryption standard per row (TLS 1.2 / TLS 1.3 / VPN / SFTP / etc.)"
     excerpt_keywords:
-      - [encryption, standard, row]
+      - [encryption, standard]
+      - [encryption, standard, tls]
+      - [standard, tls]
+      - [standard, tls, tls]
+      - [tls, tls]
+      - [tls, tls, vpn]
+      - [tls, vpn]
+      - [tls, vpn, sftp]
 
   - must_id: "item:A.7.4.9:reg_endpoint"
     description: "Source + destination endpoints per row"
     excerpt_keywords:
-      - [source, destination, endpoints, row]
+      - [source, destination]
+      - [source, destination, endpoints]
+      - [destination, endpoints]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:A.7.4.9:reg_channel_id"
+    description: "Unique channel identifier per row"
+    excerpt_keywords:
+      - [channel, id]
+      - [unique, channel]
+      - [unique, channel, identifier]
+      - [channel, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.3:marketing_exception_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.3:marketing_exception_register"
@@ -14,24 +15,59 @@ must_fingerprints:
     description: "Marketing activity scope per row (targeted advertising channels + creative)"
     excerpt_keywords:
       - [activity, scope]
-      - [marketing, activity, scope, row]
+      - [marketing, activity]
+      - [marketing, activity, scope]
+      - [activity, scope, targeted]
+      - [scope, targeted]
+      - [scope, targeted, advertising]
+      - [targeted, advertising]
+      - [targeted, advertising, channels]
 
-  - must_id: "item:B.8.2.3:reg_customer_id"
-    description: "Customer identifier per row (which customer's PII involved)"
+  - must_id: "item:B.8.2.3:reg_subject_consent"
+    description: "Subject-level consent evidence path per row (customer-obtained + provided to processor OR processor-obtained direct)"
     excerpt_keywords:
-      - [customer, identifier, row]
+      - [subject, consent]
+      - [subject, level]
+      - [subject, level, consent]
+      - [level, consent]
+      - [level, consent, evidence]
+      - [consent, evidence]
+      - [consent, evidence, path]
+      - [evidence, path]
 
   - must_id: "item:B.8.2.3:reg_customer_permit"
     description: "Customer-permit document reference per row (contract clause / signed permit)"
     excerpt_keywords:
       - [customer, permit]
+      - [customer, permit, document]
+      - [permit, document]
+      - [permit, document, reference]
+      - [document, reference]
+      - [document, reference, contract]
+      - [reference, contract]
+      - [reference, contract, clause]
+
+  - must_id: "item:B.8.2.3:reg_customer_id"
+    description: "Customer identifier per row (which customer's PII involved)"
+    excerpt_keywords:
+      - [customer, id]
+      - [customer, identifier]
+      - [customer, identifier, customer]
+      - [identifier, customer]
+      - [identifier, customer, pii]
+      - [customer, pii]
+      - [customer, pii, involved]
+      - [pii, involved]
 
   - must_id: "item:B.8.2.3:reg_exception_id"
     description: "Unique exception identifier per row"
     excerpt_keywords:
-      - [unique, exception, identifier, row]
+      - [exception, id]
+      - [unique, exception]
+      - [unique, exception, identifier]
+      - [exception, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
 
-  - must_id: "item:B.8.2.3:reg_subject_consent"
-    description: "Subject-level consent evidence path per row (customer-obtained + provided to processor OR process..."
-    excerpt_keywords:
-      - [subject, consent]

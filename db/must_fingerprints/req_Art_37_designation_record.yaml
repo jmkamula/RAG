@@ -15,31 +15,30 @@ must_fingerprints:
     description: "Per-row publication evidence (privacy notice URL + SA notification confirmation)"
     excerpt_keywords:
       - [publication, evidence]
-      - [publication]
-      - [evidence]
       - [publication, evidence, privacy]
       - [evidence, privacy]
       - [evidence, privacy, notice]
-      - [privacy]
       - [privacy, notice]
+      - [privacy, notice, url]
+      - [notice, url]
+      - [notice, url, notification]
 
   - must_id: "item:Art.37:reg_employment_type"
     description: "Per-row employment type (internal staff / external service contract)"
     excerpt_keywords:
-      - [employment]
       - [employment, internal]
       - [employment, internal, staff]
-      - [internal]
       - [internal, staff]
       - [internal, staff, external]
-      - [staff]
       - [staff, external]
+      - [staff, external, service]
+      - [external, service]
+      - [external, service, contract]
 
   - must_id: "item:Art.37:reg_designation_date"
     description: "Per-row designation date"
     excerpt_keywords:
       - [designation, date]
-      - [designation]
       - [per, row]
       - [each, row]
       - [column, containing]
@@ -50,19 +49,18 @@ must_fingerprints:
     description: "Per-row qualifications evidence (CV / certifications / professional experience)"
     excerpt_keywords:
       - [qualifications, evidence]
-      - [qualifications]
-      - [evidence]
       - [qualifications, evidence, certifications]
       - [evidence, certifications]
       - [evidence, certifications, professional]
-      - [certifications]
       - [certifications, professional]
+      - [certifications, professional, experience]
+      - [professional, experience]
+      - [per, row]
 
   - must_id: "item:Art.37:reg_dpo_identity"
     description: "DPO identity per row"
     excerpt_keywords:
       - [dpo, identity]
-      - [dpo]
       - [per, row]
       - [each, row]
       - [column, containing]

@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.10:criminal_data_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.10 program review.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.10:criminal_data_program_review"
@@ -8,35 +10,28 @@ target_control: "Art.10"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
+  - must_id: "item:Art.10:rev_access_audit"
+    description: "Access audit — restricted-access requirements being enforced (no broad access to criminal-data st..."
+    excerpt_keywords:
+      - [access, audit, personal]
+
   - must_id: "item:Art.10:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [criminal, data, review, date]
-      - [art, 10, program, reviewed, on]
+      - [review, date, planned, interval, personal]
+
+  - must_id: "item:Art.10:rev_law_currency"
+    description: "Member State law currency — every cited law still in force; any new MS authorisations swept in"
+    excerpt_keywords:
+      - [law, currency, personal]
+      - [member, state, law, currency, personal]
+
+  - must_id: "item:Art.10:rev_retention_audit"
+    description: "Retention audit — past-retention-limit records purged"
+    excerpt_keywords:
+      - [retention, audit, personal]
 
   - must_id: "item:Art.10:rev_reviewer"
     description: "Reviewer identity (DPO + legal counsel)"
     excerpt_keywords:
-      - [criminal, data, reviewed, by, dpo]
-      - [criminal, data, legal, counsel, review]
-
-  - must_id: "item:Art.10:rev_law_currency"
-    description: "Member State law currency check"
-    excerpt_keywords:
-      - [member, state, law, currency]
-      - [criminal, ms, law, in, force]
-      - [new, ms, authorisation, criminal]
-
-  - must_id: "item:Art.10:rev_access_audit"
-    description: "Access audit"
-    excerpt_keywords:
-      - [criminal, data, access, audit]
-      - [restricted, access, criminal]
-      - [no, broad, access, criminal, data]
-
-  - must_id: "item:Art.10:rev_retention_audit"
-    description: "Retention audit"
-    excerpt_keywords:
-      - [criminal, data, retention, audit]
-      - [past, retention, criminal, purged]
-      - [criminal, data, retention, limit, audit]
+      - [reviewer, identity, personal]

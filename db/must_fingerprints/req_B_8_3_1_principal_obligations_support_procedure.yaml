@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.3.1:principal_obligations_support_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.3.1:principal_obligations_support_procedure"
@@ -10,24 +11,63 @@ target_control: "B.8.3.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.3.1:proc_contract_scope"
-    description: "Contract-scope reference — support scope specified in the B.8.2.1 customer agreement"
-    excerpt_keywords:
-      - [contract, scope]
-
   - must_id: "item:B.8.3.1:proc_correction_erasure"
     description: "Correction + erasure in timely fashion (example given in §8.3.1)"
     excerpt_keywords:
       - [correction, erasure]
-      - [correction, erasure, timely, fashion]
+      - [correction, erasure, timely]
+      - [erasure, timely]
+      - [erasure, timely, fashion]
+      - [timely, fashion]
+      - [timely, fashion, example]
+      - [fashion, example]
+      - [fashion, example, given]
+
+  - must_id: "item:B.8.3.1:proc_sla"
+    description: "Response-time SLA per support-request type stated + honoured"
+    excerpt_keywords:
+      - [response, time]
+      - [response, time, sla]
+      - [time, sla]
+      - [time, sla, support]
+      - [sla, support]
+      - [sla, support, request]
+      - [support, request]
+      - [support, request, stated]
+
+  - must_id: "item:B.8.3.1:proc_contract_scope"
+    description: "Contract-scope reference — support scope specified in the B.8.2.1 customer agreement"
+    excerpt_keywords:
+      - [contract, scope]
+      - [contract, scope, reference]
+      - [scope, reference]
+      - [scope, reference, support]
+      - [reference, support]
+      - [reference, support, scope]
+      - [support, scope]
+      - [support, scope, specified]
 
   - must_id: "item:B.8.3.1:proc_informational_support"
-    description: "Informational support — customer can request info about processing (as processor's records permit..."
+    description: "Informational support — customer can request info about processing (as processor's records permit) to inform Art.15 responses"
     excerpt_keywords:
       - [informational, support]
+      - [informational, support, customer]
+      - [support, customer]
+      - [support, customer, can]
+      - [customer, can]
+      - [customer, can, request]
+      - [can, request]
+      - [can, request, info]
 
   - must_id: "item:B.8.3.1:proc_technical_support"
-    description: "Technical support paths — APIs / features / configuration to fulfil rectification, erasure, porta..."
+    description: "Technical support paths — APIs / features / configuration to fulfil rectification, erasure, portability, restriction"
     excerpt_keywords:
       - [technical, support]
       - [technical, support, paths]
+      - [support, paths]
+      - [support, paths, apis]
+      - [paths, apis]
+      - [paths, apis, features]
+      - [apis, features]
+      - [apis, features, configuration]
+

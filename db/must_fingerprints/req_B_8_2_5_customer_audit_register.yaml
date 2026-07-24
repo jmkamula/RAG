@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.5:customer_audit_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.5:customer_audit_register"
@@ -10,30 +11,63 @@ target_control: "B.8.2.5"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.2.5:reg_customer_id"
-    description: "Requesting customer identifier per row"
+  - must_id: "item:B.8.2.5:reg_response_summary"
+    description: "Response summary per row (what was shared / rationale for redaction if any)"
     excerpt_keywords:
-      - [requesting, customer, identifier, row]
-
-  - must_id: "item:B.8.2.5:reg_request_id"
-    description: "Unique request identifier per row"
-    excerpt_keywords:
-      - [unique, request, identifier, row]
-
-  - must_id: "item:B.8.2.5:reg_request_type"
-    description: "Request type per row (audit / certification-share / DPIA input / DSAR support / configuration query)"
-    excerpt_keywords:
-      - [request, type]
-      - [request, type, row]
+      - [response, summary]
+      - [response, summary, shared]
+      - [summary, shared]
+      - [summary, shared, rationale]
+      - [shared, rationale]
+      - [shared, rationale, redaction]
+      - [rationale, redaction]
+      - [per, row]
 
   - must_id: "item:B.8.2.5:reg_response_date"
     description: "Response date per row (vs stated SLA)"
     excerpt_keywords:
       - [response, date]
-      - [response, date, row]
+      - [response, date, stated]
+      - [date, stated]
+      - [date, stated, sla]
+      - [stated, sla]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
 
-  - must_id: "item:B.8.2.5:reg_response_summary"
-    description: "Response summary per row (what was shared / rationale for redaction if any)"
+  - must_id: "item:B.8.2.5:reg_request_type"
+    description: "Request type per row (audit / certification-share / DPIA input / DSAR support / configuration query)"
     excerpt_keywords:
-      - [response, summary]
-      - [response, summary, row]
+      - [request, audit]
+      - [request, audit, certification]
+      - [audit, certification]
+      - [audit, certification, share]
+      - [certification, share]
+      - [certification, share, dpia]
+      - [share, dpia]
+      - [share, dpia, input]
+
+  - must_id: "item:B.8.2.5:reg_customer_id"
+    description: "Requesting customer identifier per row"
+    excerpt_keywords:
+      - [customer, id]
+      - [requesting, customer]
+      - [requesting, customer, identifier]
+      - [customer, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+
+  - must_id: "item:B.8.2.5:reg_request_id"
+    description: "Unique request identifier per row"
+    excerpt_keywords:
+      - [request, id]
+      - [unique, request]
+      - [unique, request, identifier]
+      - [request, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

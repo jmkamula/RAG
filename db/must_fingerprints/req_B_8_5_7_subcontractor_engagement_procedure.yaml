@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.7:subcontractor_engagement_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.7:subcontractor_engagement_procedure"
@@ -10,32 +11,61 @@ target_control: "B.8.5.7"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.5.7:proc_annex_b_flowdown"
-    description: "Annex B flow-down — subcontractor contract requires Annex B controls (default: all)"
-    excerpt_keywords:
-      - [annex, flowdown]
-      - [annex, flow]
-
-  - must_id: "item:B.8.5.7:proc_customer_authorisation"
-    description: "Customer written authorisation prior to processing (Art.28.2 general or specific authorisation)"
-    excerpt_keywords:
-      - [customer, authorisation]
-      - [customer, written, authorisation, prior]
-
   - must_id: "item:B.8.5.7:proc_exclusion_justification"
     description: "Justification for any excluded Annex B control per subcontractor (§5.4.1.3)"
     excerpt_keywords:
       - [exclusion, justification]
-      - [justification, excluded, annex, control]
+      - [justification, excluded]
+      - [justification, excluded, annex]
+      - [excluded, annex]
+      - [excluded, annex, subcontractor]
+      - [annex, subcontractor]
+      - [procedure, step]
+      - [process, step]
 
   - must_id: "item:B.8.5.7:proc_risk_assessment_reflection"
     description: "Contract scope reflects risk assessment (§5.4.1.2) + subprocessing scope (§6.12)"
     excerpt_keywords:
       - [risk, assessment, reflection]
-      - [contract, scope, reflects, risk]
+      - [contract, scope]
+      - [contract, scope, reflects]
+      - [scope, reflects]
+      - [scope, reflects, risk]
+      - [reflects, risk]
+      - [reflects, risk, assessment]
+      - [risk, assessment]
+
+  - must_id: "item:B.8.5.7:proc_annex_b_flowdown"
+    description: "Annex B flow-down — subcontractor contract requires Annex B controls (default: all)"
+    excerpt_keywords:
+      - [annex, b, flowdown]
+      - [annex, flow]
+      - [annex, flow, down]
+      - [flow, down]
+      - [flow, down, subcontractor]
+      - [down, subcontractor]
+      - [down, subcontractor, contract]
+      - [subcontractor, contract]
 
   - must_id: "item:B.8.5.7:proc_written_contract"
     description: "Written contract with each subcontractor"
     excerpt_keywords:
       - [written, contract]
       - [written, contract, subcontractor]
+      - [contract, subcontractor]
+      - [procedure, step]
+      - [process, step]
+      - [responsibility, of]
+
+  - must_id: "item:B.8.5.7:proc_customer_authorisation"
+    description: "Customer written authorisation prior to processing (Art.28.2 general or specific authorisation)"
+    excerpt_keywords:
+      - [customer, authorisation]
+      - [customer, written]
+      - [customer, written, authorisation]
+      - [written, authorisation]
+      - [written, authorisation, prior]
+      - [authorisation, prior]
+      - [authorisation, prior, processing]
+      - [prior, processing]
+

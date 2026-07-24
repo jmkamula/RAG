@@ -15,49 +15,49 @@ must_fingerprints:
     description: "Per-row covered obligations list (confidentiality + IP + non-poach + non-compete where applicable per jurisdiction)"
     excerpt_keywords:
       - [obligations, covered]
-      - [obligations]
-      - [covered]
       - [covered, obligations]
       - [covered, obligations, confidentiality]
       - [obligations, confidentiality]
       - [obligations, confidentiality, non]
-      - [confidentiality]
+      - [confidentiality, non]
+      - [confidentiality, non, poach]
+      - [non, poach]
 
   - must_id: "item:A.6.5:reg_acknowledgment"
     description: "Per-row signed acknowledgment evidence (digital signature / signed PDF / recorded receipt of intranet artefact)"
     excerpt_keywords:
-      - [acknowledgment]
-      - [signed]
       - [signed, acknowledgment]
       - [signed, acknowledgment, evidence]
       - [acknowledgment, evidence]
       - [acknowledgment, evidence, digital]
-      - [evidence]
       - [evidence, digital]
+      - [evidence, digital, signature]
+      - [digital, signature]
+      - [digital, signature, signed]
 
   - must_id: "item:A.6.5:reg_briefer"
     description: "Per-row briefer identity (HR partner; line manager joins for role-change cases)"
     excerpt_keywords:
-      - [briefer]
       - [briefer, identity]
       - [briefer, identity, partner]
       - [identity, partner]
       - [identity, partner, line]
-      - [partner]
       - [partner, line]
       - [partner, line, manager]
+      - [line, manager]
+      - [line, manager, joins]
 
   - must_id: "item:A.6.5:reg_briefing_date"
     description: "Per-row briefing date (typically last working day or shortly after; for role change, at point of role transition)"
     excerpt_keywords:
       - [briefing, date]
-      - [briefing]
       - [briefing, date, typically]
       - [date, typically]
       - [date, typically, last]
-      - [typically]
       - [typically, last]
       - [typically, last, working]
+      - [last, working]
+      - [last, working, day]
 
   - must_id: "item:A.6.5:reg_trigger"
     description: "Per-row trigger (termination / contract end / role change within org / retirement)"
@@ -66,20 +66,20 @@ must_fingerprints:
       - [trigger, termination, contract]
       - [termination, contract]
       - [termination, contract, end]
-      - [contract]
       - [contract, end]
       - [contract, end, role]
-      - [end]
+      - [end, role]
+      - [end, role, change]
 
   - must_id: "item:A.6.5:reg_leaver_id"
     description: "Per-row leaver identifier (links to identity register A.5.16; cross-link to A.5.11 return-of-assets record + A.5.16 identity revocation)"
     excerpt_keywords:
       - [leaver, id]
-      - [leaver]
       - [leaver, identifier]
       - [leaver, identifier, identity]
-      - [identifier]
       - [identifier, identity]
       - [identifier, identity, cross]
       - [identity, cross]
+      - [identity, cross, return]
+      - [cross, return]
 

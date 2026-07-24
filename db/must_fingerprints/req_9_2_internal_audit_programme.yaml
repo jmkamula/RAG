@@ -18,51 +18,40 @@ must_fingerprints:
       - [named, owner, programme]
       - [owner, programme]
       - [owner, programme, typically]
-      - [programme]
       - [programme, typically]
       - [programme, typically, isms]
-      - [typically]
+      - [typically, isms]
+      - [typically, isms, manager]
 
   - must_id: "item:9.2:corrective"
     description: "Corrective action follow-up process"
     excerpt_keywords:
-      - [corrective]
       - [corrective, action]
       - [corrective, action, follow]
-      - [action]
       - [action, follow]
-      - [follow]
 
   - must_id: "item:9.2:reporting"
     description: "Reporting process to management defined"
     excerpt_keywords:
-      - [reporting]
       - [reporting, management]
       - [reporting, management, defined]
-      - [management]
       - [management, defined]
-      - [defined]
 
   - must_id: "item:9.2:independence"
     description: "Auditor independence and competence requirements"
     excerpt_keywords:
-      - [independence]
-      - [auditor]
       - [auditor, independence]
       - [auditor, independence, competence]
       - [independence, competence]
       - [independence, competence, requirements]
-      - [competence]
       - [competence, requirements]
 
   - must_id: "item:9.2:criteria"
     description: "Audit criteria defined"
     excerpt_keywords:
-      - [criteria]
       - [audit, criteria]
       - [audit, criteria, defined]
       - [criteria, defined]
-      - [defined]
 
   - must_id: "item:9.2:scope"
     description: "Audit scope covering all ISMS processes"
@@ -71,17 +60,14 @@ must_fingerprints:
       - [audit, scope, covering]
       - [scope, covering]
       - [scope, covering, isms]
-      - [covering]
       - [covering, isms]
       - [covering, isms, processes]
-      - [isms]
+      - [isms, processes]
 
   - must_id: "item:9.2:frequency"
     description: "Audit frequency defined"
     excerpt_keywords:
-      - [frequency]
       - [audit, frequency]
       - [audit, frequency, defined]
       - [frequency, defined]
-      - [defined]
 

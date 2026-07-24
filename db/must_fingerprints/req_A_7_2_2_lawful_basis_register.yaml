@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.2:lawful_basis_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.2:lawful_basis_register"
@@ -10,29 +11,63 @@ target_control: "A.7.2.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.2:reg_activity_id"
-    description: "Processing activity identifier per row"
+  - must_id: "item:A.7.2.2:reg_purpose_link"
+    description: "Purpose link (which A.7.2.1 purpose(s) this basis authorises)"
     excerpt_keywords:
-      - [processing, activity, identifier, row]
+      - [purpose, purpose]
+      - [purpose, purpose, basis]
+      - [purpose, basis]
+      - [purpose, basis, authorises]
+      - [basis, authorises]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
 
   - must_id: "item:A.7.2.2:reg_lia_reference"
     description: "LIA reference per row where basis is legitimate interests"
     excerpt_keywords:
       - [lia, reference]
-      - [lia, reference, row, basis]
-
-  - must_id: "item:A.7.2.2:reg_primary_basis"
-    description: "Primary basis cited per row (Art.6.1.a-f or equivalent)"
-    excerpt_keywords:
-      - [primary, basis]
-      - [primary, basis, cited, row]
-
-  - must_id: "item:A.7.2.2:reg_purpose_link"
-    description: "Purpose link (which A.7.2.1 purpose(s) this basis authorises)"
-    excerpt_keywords:
-      - [purpose, link]
+      - [lia, reference, basis]
+      - [reference, basis]
+      - [reference, basis, legitimate]
+      - [basis, legitimate]
+      - [basis, legitimate, interests]
+      - [legitimate, interests]
+      - [per, row]
 
   - must_id: "item:A.7.2.2:reg_special_category_basis"
     description: "Special-category basis where applicable (Art.9.2.a-j / Art.10 basis)"
     excerpt_keywords:
       - [special, category, basis]
+      - [special, category]
+      - [category, basis]
+      - [category, basis, art]
+      - [basis, art]
+      - [basis, art, art]
+      - [art, art]
+      - [art, art, basis]
+
+  - must_id: "item:A.7.2.2:reg_primary_basis"
+    description: "Primary basis cited per row (Art.6.1.a-f or equivalent)"
+    excerpt_keywords:
+      - [primary, basis]
+      - [primary, basis, cited]
+      - [basis, cited]
+      - [basis, cited, art]
+      - [cited, art]
+      - [cited, art, equivalent]
+      - [art, equivalent]
+      - [per, row]
+
+  - must_id: "item:A.7.2.2:reg_activity_id"
+    description: "Processing activity identifier per row"
+    excerpt_keywords:
+      - [activity, id]
+      - [processing, activity]
+      - [processing, activity, identifier]
+      - [activity, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

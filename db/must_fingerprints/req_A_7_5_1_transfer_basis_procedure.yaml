@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.5.1:transfer_basis_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.1:transfer_basis_procedure"
@@ -10,25 +11,63 @@ target_control: "A.7.5.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.5.1:proc_documented_compliance"
-    description: "Documented compliance with legislation/regulation applicable at origin AND destination jurisdicti..."
-    excerpt_keywords:
-      - [documented, compliance]
-      - [documented, compliance, legislation, regulation]
-
   - must_id: "item:A.7.5.1:proc_intra_jurisdiction"
-    description: "Intra-jurisdiction exclusion rule (§7.5.1 NOTE — where sender + recipient same jurisdiction, appl..."
+    description: "Intra-jurisdiction exclusion rule (§7.5.1 NOTE — where sender + recipient same jurisdiction, applicable law is the same)"
     excerpt_keywords:
       - [intra, jurisdiction]
+      - [intra, jurisdiction, exclusion]
+      - [jurisdiction, exclusion]
+      - [jurisdiction, exclusion, rule]
+      - [exclusion, rule]
+      - [exclusion, rule, note]
+      - [rule, note]
+      - [rule, note, sender]
 
   - must_id: "item:A.7.5.1:proc_schrems_tia"
-    description: "Schrems II Transfer Impact Assessment — for Art.46 safeguard transfers, assess third-country lega..."
+    description: "Schrems II Transfer Impact Assessment — for Art.46 safeguard transfers, assess third-country legal environment + supplementary measures per "
     excerpt_keywords:
       - [schrems, tia]
-      - [schrems, transfer, impact, assessment]
+      - [schrems, transfer]
+      - [schrems, transfer, impact]
+      - [transfer, impact]
+      - [transfer, impact, assessment]
+      - [impact, assessment]
+      - [impact, assessment, art]
+      - [assessment, art]
+
+  - must_id: "item:A.7.5.1:proc_sa_review"
+    description: "SA-review awareness — some jurisdictions require transfer agreements reviewed by supervisory authority"
+    excerpt_keywords:
+      - [sa, review]
+      - [review, awareness]
+      - [review, awareness, some]
+      - [awareness, some]
+      - [awareness, some, jurisdictions]
+      - [some, jurisdictions]
+      - [some, jurisdictions, require]
+      - [jurisdictions, require]
+
+  - must_id: "item:A.7.5.1:proc_documented_compliance"
+    description: "Documented compliance with legislation/regulation applicable at origin AND destination jurisdiction per transfer"
+    excerpt_keywords:
+      - [documented, compliance]
+      - [documented, compliance, legislation]
+      - [compliance, legislation]
+      - [compliance, legislation, regulation]
+      - [legislation, regulation]
+      - [legislation, regulation, origin]
+      - [regulation, origin]
+      - [regulation, origin, destination]
 
   - must_id: "item:A.7.5.1:proc_transfer_hierarchy"
-    description: "Transfer basis hierarchy — adequacy decision (Art.45) → appropriate safeguards (Art.46: SCCs, BCR..."
+    description: "Transfer basis hierarchy — adequacy decision (Art.45) → appropriate safeguards (Art.46: SCCs, BCRs, codes, certification) → derogations (Art"
     excerpt_keywords:
       - [transfer, hierarchy]
+      - [transfer, basis]
       - [transfer, basis, hierarchy]
+      - [basis, hierarchy]
+      - [basis, hierarchy, adequacy]
+      - [hierarchy, adequacy]
+      - [hierarchy, adequacy, decision]
+      - [adequacy, decision]
+

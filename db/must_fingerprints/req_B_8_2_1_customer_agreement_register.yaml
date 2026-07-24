@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.1:customer_agreement_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.1:customer_agreement_register"
@@ -10,29 +11,62 @@ target_control: "B.8.2.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.2.1:reg_agreement_reference"
-    description: "Executed agreement document reference per row"
+  - must_id: "item:B.8.2.1:reg_term"
+    description: "Term / expiry / renewal per row"
     excerpt_keywords:
-      - [agreement, reference]
-      - [executed, agreement, document, reference]
-
-  - must_id: "item:B.8.2.1:reg_assistance_coverage"
-    description: "Assistance coverage per row (which Art.28.3.e-h obligations addressed)"
-    excerpt_keywords:
-      - [assistance, coverage]
-      - [assistance, coverage, row]
-
-  - must_id: "item:B.8.2.1:reg_customer_id"
-    description: "Customer identifier per row"
-    excerpt_keywords:
-      - [customer, identifier, row]
+      - [term, expiry]
+      - [term, expiry, renewal]
+      - [expiry, renewal]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:B.8.2.1:reg_instructions_channel"
     description: "Documented-instructions channel per row (email log / ticket queue / portal)"
     excerpt_keywords:
       - [instructions, channel]
+      - [documented, instructions]
+      - [documented, instructions, channel]
+      - [instructions, channel, email]
+      - [channel, email]
+      - [channel, email, ticket]
+      - [email, ticket]
+      - [email, ticket, queue]
 
-  - must_id: "item:B.8.2.1:reg_term"
-    description: "Term / expiry / renewal per row"
+  - must_id: "item:B.8.2.1:reg_assistance_coverage"
+    description: "Assistance coverage per row (which Art.28.3.e-h obligations addressed)"
     excerpt_keywords:
-      - [term, expiry, renewal, row]
+      - [assistance, coverage]
+      - [assistance, coverage, art]
+      - [coverage, art]
+      - [coverage, art, obligations]
+      - [art, obligations]
+      - [art, obligations, addressed]
+      - [obligations, addressed]
+      - [per, row]
+
+  - must_id: "item:B.8.2.1:reg_agreement_reference"
+    description: "Executed agreement document reference per row"
+    excerpt_keywords:
+      - [agreement, reference]
+      - [executed, agreement]
+      - [executed, agreement, document]
+      - [agreement, document]
+      - [agreement, document, reference]
+      - [document, reference]
+      - [per, row]
+      - [each, row]
+
+  - must_id: "item:B.8.2.1:reg_customer_id"
+    description: "Customer identifier per row"
+    excerpt_keywords:
+      - [customer, id]
+      - [customer, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+

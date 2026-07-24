@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.45:adequacy_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.45 program review.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.45:adequacy_program_review"
@@ -11,32 +13,24 @@ must_fingerprints:
   - must_id: "item:Art.45:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [adequacy, program, review, date]
-      - [art, 45, reviewed, on]
+      - [review, date, planned, interval, transfers]
+
+  - must_id: "item:Art.45:rev_decision_currency"
+    description: "Decision currency — every cited adequacy decision still in force (not repealed, suspended, or inv..."
+    excerpt_keywords:
+      - [decision, currency, transfers]
+
+  - must_id: "item:Art.45:rev_fallback_readiness"
+    description: "Fallback readiness — if a decision were invalidated, Art.46 fallback (e.g. SCCs) pre-staged with ..."
+    excerpt_keywords:
+      - [fallback, readiness, transfers]
+
+  - must_id: "item:Art.45:rev_recipient_recheck"
+    description: "Recipient-eligibility recheck — certifications still active (US-DPF, etc.)"
+    excerpt_keywords:
+      - [recipient, recheck, transfers]
 
   - must_id: "item:Art.45:rev_reviewer"
     description: "Reviewer identity (DPO + legal counsel)"
     excerpt_keywords:
-      - [adequacy, reviewed, by, dpo]
-      - [adequacy, legal, counsel, review]
-
-  - must_id: "item:Art.45:rev_decision_currency"
-    description: "Decision currency"
-    excerpt_keywords:
-      - [adequacy, decision, currency]
-      - [adequacy, decision, in, force]
-      - [adequacy, decision, not, repealed, suspended]
-
-  - must_id: "item:Art.45:rev_recipient_recheck"
-    description: "Recipient-eligibility recheck"
-    excerpt_keywords:
-      - [us, dpf, certification, active, recheck]
-      - [recipient, eligibility, recheck]
-      - [adequacy, certification, audit]
-
-  - must_id: "item:Art.45:rev_fallback_readiness"
-    description: "Fallback readiness"
-    excerpt_keywords:
-      - [adequacy, fallback, readiness]
-      - [sccs, pre, staged, invalidation]
-      - [art, 46, fallback, vendor]
+      - [reviewer, identity, transfers]

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.7:joint_controller_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.7:joint_controller_register"
@@ -10,30 +11,75 @@ target_control: "A.7.2.7"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.7:reg_arrangement_id"
-    description: "Unique arrangement identifier per row"
-    excerpt_keywords:
-      - [unique, arrangement, identifier, row]
-
-  - must_id: "item:A.7.2.7:reg_document_reference"
-    description: "Executed arrangement document reference per row"
-    excerpt_keywords:
-      - [document, reference]
-      - [executed, arrangement, document, reference]
-
   - must_id: "item:A.7.2.7:reg_effective_dates"
     description: "Effective / termination dates per row"
     excerpt_keywords:
       - [effective, dates]
-      - [effective, termination, dates, row]
+      - [effective, termination]
+      - [effective, termination, dates]
+      - [termination, dates]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
 
   - must_id: "item:A.7.2.7:reg_essence_url"
     description: "Essence-of-arrangement URL / publication reference per row"
     excerpt_keywords:
       - [essence, url]
+      - [essence, arrangement]
+      - [essence, arrangement, url]
+      - [arrangement, url]
+      - [arrangement, url, publication]
+      - [url, publication]
+      - [url, publication, reference]
+      - [publication, reference]
 
   - must_id: "item:A.7.2.7:reg_processing_scope"
     description: "Processing scope per row (activities + PII categories jointly handled)"
     excerpt_keywords:
       - [processing, scope]
-      - [processing, scope, row]
+      - [processing, scope, activities]
+      - [scope, activities]
+      - [scope, activities, pii]
+      - [activities, pii]
+      - [activities, pii, categories]
+      - [pii, categories]
+      - [pii, categories, jointly]
+
+  - must_id: "item:A.7.2.7:reg_document_reference"
+    description: "Executed arrangement document reference per row"
+    excerpt_keywords:
+      - [document, reference]
+      - [executed, arrangement]
+      - [executed, arrangement, document]
+      - [arrangement, document]
+      - [arrangement, document, reference]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+
+  - must_id: "item:A.7.2.7:reg_co_controller"
+    description: "Co-controller identity per row (legal entity)"
+    excerpt_keywords:
+      - [co, controller]
+      - [controller, identity]
+      - [controller, identity, legal]
+      - [identity, legal]
+      - [identity, legal, entity]
+      - [legal, entity]
+      - [per, row]
+      - [each, row]
+
+  - must_id: "item:A.7.2.7:reg_arrangement_id"
+    description: "Unique arrangement identifier per row"
+    excerpt_keywords:
+      - [arrangement, id]
+      - [unique, arrangement]
+      - [unique, arrangement, identifier]
+      - [arrangement, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

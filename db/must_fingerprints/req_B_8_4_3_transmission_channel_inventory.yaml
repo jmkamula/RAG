@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.4.3:transmission_channel_inventory
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.3:transmission_channel_inventory"
@@ -10,27 +11,61 @@ target_control: "B.8.4.3"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.4.3:reg_channel_id"
-    description: "Unique channel identifier per row"
-    excerpt_keywords:
-      - [unique, channel, identifier, row]
-
   - must_id: "item:B.8.4.3:reg_contract_alignment"
     description: "Contract-alignment status per row (in / not-in customer B.8.2.1 agreement)"
     excerpt_keywords:
       - [contract, alignment]
-
-  - must_id: "item:B.8.4.3:reg_customer"
-    description: "Customer per row (if channel is customer-specific)"
-    excerpt_keywords:
-      - [customer, row]
+      - [contract, alignment, status]
+      - [alignment, status]
+      - [alignment, status, not]
+      - [status, not]
+      - [status, not, customer]
+      - [not, customer]
+      - [not, customer, agreement]
 
   - must_id: "item:B.8.4.3:reg_encryption"
     description: "Encryption standard per row"
     excerpt_keywords:
-      - [encryption, standard, row]
+      - [encryption, standard]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:B.8.4.3:reg_endpoint"
     description: "Source + destination endpoints per row"
     excerpt_keywords:
-      - [source, destination, endpoints, row]
+      - [source, destination]
+      - [source, destination, endpoints]
+      - [destination, endpoints]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:B.8.4.3:reg_customer"
+    description: "Customer per row (if channel is customer-specific)"
+    excerpt_keywords:
+      - [customer, channel]
+      - [customer, channel, customer]
+      - [channel, customer]
+      - [channel, customer, specific]
+      - [customer, specific]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+
+  - must_id: "item:B.8.4.3:reg_channel_id"
+    description: "Unique channel identifier per row"
+    excerpt_keywords:
+      - [channel, id]
+      - [unique, channel]
+      - [unique, channel, identifier]
+      - [channel, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

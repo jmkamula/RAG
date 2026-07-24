@@ -243,6 +243,16 @@ def _suggest_keywords(
     for scaffold in _evidence_type_scaffold(evidence_type):
         _add(scaffold)
 
+    # Ship 28'.b — suppress redundant singletons. When the item has
+    # 2+ token alternatives available, drop all single-token variants
+    # (they're covered by the more-specific bigram/trigram sets and
+    # only create false-positive matches). Preserve singletons as
+    # last-resort safety net when NO multi-token alternative exists.
+    # See ship_28_prime_a_singleton_fix_design_2026_07_24 memo.
+    has_multi = any(len(s) >= 2 for s in suggestions)
+    if has_multi:
+        suggestions = [s for s in suggestions if len(s) >= 2]
+
     # Cap at ~8 to keep the human reviewer's eye unburdened — they'll
     # add tenant-vocabulary synonyms manually anyway.
     return suggestions[:8]

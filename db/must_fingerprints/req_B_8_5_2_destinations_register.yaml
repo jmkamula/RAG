@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.2:destinations_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.2:destinations_register"
@@ -13,21 +14,44 @@ must_fingerprints:
   - must_id: "item:B.8.5.2:reg_basis_link"
     description: "Basis link per row (link to B.8.5.1)"
     excerpt_keywords:
-      - [basis, link]
-      - [basis, link, row]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:B.8.5.2:reg_customer_disclosure"
     description: "Customer disclosure status per row (published in DPA schedule / trust page / on request)"
     excerpt_keywords:
       - [customer, disclosure]
-      - [customer, disclosure, status, row]
-
-  - must_id: "item:B.8.5.2:reg_destination_id"
-    description: "Destination identifier per row"
-    excerpt_keywords:
-      - [destination, identifier, row]
+      - [customer, disclosure, status]
+      - [disclosure, status]
+      - [disclosure, status, published]
+      - [status, published]
+      - [status, published, dpa]
+      - [published, dpa]
+      - [published, dpa, schedule]
 
   - must_id: "item:B.8.5.2:reg_role"
     description: "Role per row (direct storage / subprocessor / support access)"
     excerpt_keywords:
-      - [role, row]
+      - [role, direct]
+      - [role, direct, storage]
+      - [direct, storage]
+      - [direct, storage, subprocessor]
+      - [storage, subprocessor]
+      - [storage, subprocessor, support]
+      - [subprocessor, support]
+      - [subprocessor, support, access]
+
+  - must_id: "item:B.8.5.2:reg_destination_id"
+    description: "Destination identifier per row"
+    excerpt_keywords:
+      - [destination, id]
+      - [destination, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+

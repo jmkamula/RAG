@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.4:infringing_instruction_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.4:infringing_instruction_procedure"
@@ -10,30 +11,63 @@ target_control: "B.8.2.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:B.8.2.4:proc_notification_records"
+    description: "Notification record retention — every issued notice retained for audit"
+    excerpt_keywords:
+      - [notification, records]
+      - [notification, retention]
+      - [notification, retention, every]
+      - [retention, every]
+      - [retention, every, issued]
+      - [every, issued]
+      - [every, issued, notice]
+      - [issued, notice]
+
+  - must_id: "item:B.8.2.4:proc_processing_pause"
+    description: "Processing-pause protocol — where infringement is clear + severe, processing paused pending customer confirmation or withdrawal"
+    excerpt_keywords:
+      - [processing, pause]
+      - [processing, pause, protocol]
+      - [pause, protocol]
+      - [pause, protocol, infringement]
+      - [protocol, infringement]
+      - [protocol, infringement, clear]
+      - [infringement, clear]
+      - [infringement, clear, severe]
+
   - must_id: "item:B.8.2.4:proc_customer_notification"
-    description: "Customer notification format — written notice with cited legislation, dispute pathway, and 'proce..."
+    description: "Customer notification format — written notice with cited legislation, dispute pathway, and 'processor's opinion' framing"
     excerpt_keywords:
       - [customer, notification]
       - [customer, notification, format]
+      - [notification, format]
+      - [notification, format, written]
+      - [format, written]
+      - [format, written, notice]
+      - [written, notice]
+      - [written, notice, cited]
 
   - must_id: "item:B.8.2.4:proc_legal_assessment"
     description: "Legal assessment step — DPO / legal counsel assesses the instruction against applicable legislation"
     excerpt_keywords:
       - [legal, assessment]
       - [legal, assessment, step]
-
-  - must_id: "item:B.8.2.4:proc_notification_records"
-    description: "Notification record retention — every issued notice retained for audit"
-    excerpt_keywords:
-      - [notification, records]
-      - [notification, record, retention]
-
-  - must_id: "item:B.8.2.4:proc_processing_pause"
-    description: "Processing-pause protocol — where infringement is clear + severe, processing paused pending custo..."
-    excerpt_keywords:
-      - [processing, pause]
+      - [assessment, step]
+      - [assessment, step, dpo]
+      - [step, dpo]
+      - [step, dpo, legal]
+      - [dpo, legal]
+      - [dpo, legal, counsel]
 
   - must_id: "item:B.8.2.4:proc_review_trigger"
-    description: "Review trigger — which channels raise potential infringement (support / legal / engineering / com..."
+    description: "Review trigger — which channels raise potential infringement (support / legal / engineering / compliance)"
     excerpt_keywords:
       - [review, trigger]
+      - [review, trigger, channels]
+      - [trigger, channels]
+      - [trigger, channels, raise]
+      - [channels, raise]
+      - [channels, raise, potential]
+      - [raise, potential]
+      - [raise, potential, infringement]
+

@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.13:backup_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. Backup program audit cycle.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.13:backup_program_review"
@@ -11,43 +13,30 @@ must_fingerprints:
   - must_id: "item:A.8.13:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [backup, program, review, date]
-      - [backup, reviewed, on]
-      - [backup, program, audit, date]
-
-  - must_id: "item:A.8.13:rev_reviewer"
-    description: "Reviewer identity (Backup Operations + Infrastructure + InfoSec)"
-    excerpt_keywords:
-      - [backup, reviewed, by]
-      - [backup, operations, review]
-      - [backup, infrastructure, review]
-
-  - must_id: "item:A.8.13:rev_test_attainment"
-    description: "Restore-test attainment per tier"
-    excerpt_keywords:
-      - [restore, test, attainment]
-      - [restore, test, cadence, met]
-      - [restore, test, sla, attainment]
-      - [restore, test, per, tier, attainment]
-
-  - must_id: "item:A.8.13:rev_scope_completeness"
-    description: "Scope-completeness check"
-    excerpt_keywords:
-      - [backup, scope, completeness]
-      - [new, system, backup, coverage]
-      - [backup, scope, gap]
-
-  - must_id: "item:A.8.13:rev_threat_posture"
-    description: "Threat-posture review (ransomware-resilience)"
-    excerpt_keywords:
-      - [ransomware, resilience, backup]
-      - [immutable, backup, posture]
-      - [air, gap, posture]
-      - [3, 2, 1, posture]
+      - [review, date, planned, interval, backup]
 
   - must_id: "item:A.8.13:rev_procedure_update"
     description: "Findings propagated to procedure / scope"
     excerpt_keywords:
-      - [backup, findings, propagated]
-      - [backup, procedure, updated]
-      - [backup, scope, updated, after, review]
+      - [procedure, update, backup]
+      - [findings, propagated, procedure, scope, backup]
+
+  - must_id: "item:A.8.13:rev_reviewer"
+    description: "Reviewer identity (Backup Operations + Infrastructure + InfoSec)"
+    excerpt_keywords:
+      - [reviewer, identity, backup]
+
+  - must_id: "item:A.8.13:rev_scope_completeness"
+    description: "Scope-completeness check (new in-scope system covered)"
+    excerpt_keywords:
+      - [scope, completeness, backup]
+
+  - must_id: "item:A.8.13:rev_test_attainment"
+    description: "Restore-test attainment per tier (cadence met, RPO met)"
+    excerpt_keywords:
+      - [test, attainment, backup]
+
+  - must_id: "item:A.8.13:rev_threat_posture"
+    description: "Threat-posture review (ransomware-resilience: immutability / air-gap / 3-2-1 still adequate)"
+    excerpt_keywords:
+      - [threat, posture, backup]

@@ -14,36 +14,36 @@ must_fingerprints:
   - must_id: "item:A.8.8:scope_exclusions"
     description: "Exclusion rationale (vendor-managed assets covered via supplier obligations A.5.20)"
     excerpt_keywords:
-      - [exclusions]
-      - [exclusion]
       - [exclusion, rationale]
       - [exclusion, rationale, vendor]
-      - [rationale]
       - [rationale, vendor]
       - [rationale, vendor, managed]
-      - [vendor]
+      - [vendor, managed]
+      - [vendor, managed, assets]
+      - [managed, assets]
+      - [managed, assets, covered]
 
   - must_id: "item:A.8.8:scope_coverage_pct"
     description: "Target coverage percentage per class (with rationale for gaps)"
     excerpt_keywords:
       - [coverage, pct]
-      - [coverage]
-      - [pct]
-      - [target]
       - [target, coverage]
       - [target, coverage, percentage]
       - [coverage, percentage]
       - [coverage, percentage, class]
+      - [percentage, class]
+      - [percentage, class, rationale]
+      - [class, rationale]
 
   - must_id: "item:A.8.8:scope_asset_classes"
     description: "Asset classes enumerated with scanning approach per class"
     excerpt_keywords:
       - [asset, classes]
-      - [asset]
-      - [classes]
       - [asset, classes, enumerated]
       - [classes, enumerated]
       - [classes, enumerated, scanning]
-      - [enumerated]
       - [enumerated, scanning]
+      - [enumerated, scanning, approach]
+      - [scanning, approach]
+      - [scanning, approach, class]
 

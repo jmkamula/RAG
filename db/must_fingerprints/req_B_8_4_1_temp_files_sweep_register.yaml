@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.4.1:temp_files_sweep_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.1:temp_files_sweep_register"
@@ -10,29 +11,56 @@ target_control: "B.8.4.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:B.8.4.1:reg_tenant_boundary_check"
+    description: "Tenant-boundary integrity check per row"
+    excerpt_keywords:
+      - [tenant, boundary, check]
+      - [tenant, boundary]
+      - [tenant, boundary, integrity]
+      - [boundary, integrity]
+      - [boundary, integrity, check]
+      - [integrity, check]
+      - [per, row]
+      - [each, row]
+
   - must_id: "item:B.8.4.1:reg_files_cleaned"
     description: "Files cleaned per row"
     excerpt_keywords:
       - [files, cleaned]
-      - [files, cleaned, row]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:B.8.4.1:reg_scan_date"
     description: "Scan date per row"
     excerpt_keywords:
       - [scan, date]
-      - [scan, date, row]
-
-  - must_id: "item:B.8.4.1:reg_sweep_id"
-    description: "Unique sweep run identifier per row"
-    excerpt_keywords:
-      - [unique, sweep, run, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:B.8.4.1:reg_system"
     description: "System / component per row"
     excerpt_keywords:
-      - [system, component, row]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
-  - must_id: "item:B.8.4.1:reg_tenant_boundary_check"
-    description: "Tenant-boundary integrity check per row"
+  - must_id: "item:B.8.4.1:reg_sweep_id"
+    description: "Unique sweep run identifier per row"
     excerpt_keywords:
-      - [tenant, boundary, check]
+      - [sweep, id]
+      - [unique, sweep]
+      - [unique, sweep, run]
+      - [sweep, run]
+      - [sweep, run, identifier]
+      - [run, identifier]
+      - [per, row]
+      - [each, row]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.2:purpose_limitation_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.2:purpose_limitation_procedure"
@@ -15,23 +16,58 @@ must_fingerprints:
     excerpt_keywords:
       - [customer, verification]
       - [customer, verification, pathway]
+      - [verification, pathway]
+      - [verification, pathway, customer]
+      - [pathway, customer]
+      - [pathway, customer, can]
+      - [customer, can]
+      - [customer, can, audit]
+
+  - must_id: "item:B.8.2.2:proc_technical_justification"
+    description: "Technical-justification carve-out procedure — where processor must choose method for capacity reasons (per §8.2.2 implementation), justifica"
+    excerpt_keywords:
+      - [technical, justification]
+      - [technical, justification, carve]
+      - [justification, carve]
+      - [justification, carve, out]
+      - [carve, out]
+      - [carve, out, processor]
+      - [out, processor]
+      - [out, processor, choose]
+
+  - must_id: "item:B.8.2.2:proc_no_side_purpose"
+    description: "No-side-purpose rule — customer PII not used for own analytics / ML training / product improvement without express permission"
+    excerpt_keywords:
+      - [no, side, purpose]
+      - [side, purpose]
+      - [side, purpose, rule]
+      - [purpose, rule]
+      - [purpose, rule, customer]
+      - [rule, customer]
+      - [rule, customer, pii]
+      - [customer, pii]
+
+  - must_id: "item:B.8.2.2:proc_technical_binding"
+    description: "Technical binding — engineering controls that prevent processing beyond stated purposes (tenant isolation / data-tag enforcement / access sc"
+    excerpt_keywords:
+      - [technical, binding]
+      - [technical, binding, engineering]
+      - [binding, engineering]
+      - [binding, engineering, controls]
+      - [engineering, controls]
+      - [engineering, controls, prevent]
+      - [controls, prevent]
+      - [controls, prevent, processing]
 
   - must_id: "item:B.8.2.2:proc_instruction_capture"
     description: "Instruction capture — customer purposes recorded per engagement (contract + change-notices)"
     excerpt_keywords:
       - [instruction, capture]
+      - [instruction, capture, customer]
+      - [capture, customer]
+      - [capture, customer, purposes]
+      - [customer, purposes]
+      - [customer, purposes, recorded]
+      - [purposes, recorded]
+      - [purposes, recorded, engagement]
 
-  - must_id: "item:B.8.2.2:proc_no_side_purpose"
-    description: "No-side-purpose rule — customer PII not used for own analytics / ML training / product improvemen..."
-    excerpt_keywords:
-      - [side, purpose]
-
-  - must_id: "item:B.8.2.2:proc_technical_binding"
-    description: "Technical binding — engineering controls that prevent processing beyond stated purposes (tenant i..."
-    excerpt_keywords:
-      - [technical, binding]
-
-  - must_id: "item:B.8.2.2:proc_technical_justification"
-    description: "Technical-justification carve-out procedure — where processor must choose method for capacity rea..."
-    excerpt_keywords:
-      - [technical, justification]

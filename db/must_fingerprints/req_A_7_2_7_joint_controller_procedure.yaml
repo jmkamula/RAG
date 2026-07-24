@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.7:joint_controller_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.7:joint_controller_procedure"
@@ -10,35 +11,75 @@ target_control: "A.7.2.7"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.7:proc_arrangement_form"
-    description: "Documented arrangement form — contract or equivalent binding document"
-    excerpt_keywords:
-      - [arrangement, form]
-      - [documented, arrangement, form]
-
   - must_id: "item:A.7.2.7:proc_breach_coordination"
     description: "Breach-notification coordination — who notifies SA + subjects"
     excerpt_keywords:
       - [breach, coordination]
+      - [breach, notification]
+      - [breach, notification, coordination]
+      - [notification, coordination]
+      - [notification, coordination, notifies]
+      - [coordination, notifies]
+      - [coordination, notifies, subjects]
+      - [notifies, subjects]
 
-  - must_id: "item:A.7.2.7:proc_classification_test"
-    description: "Classification test — when a relationship is joint control (jointly determine purposes + means) v..."
+  - must_id: "item:A.7.2.7:proc_rights_exercise"
+    description: "Single point of contact + subject-rights routing (subjects can exercise against either controller regardless of arrangement)"
     excerpt_keywords:
-      - [classification, test]
+      - [rights, exercise]
+      - [single, point]
+      - [single, point, contact]
+      - [point, contact]
+      - [point, contact, subject]
+      - [contact, subject]
+      - [contact, subject, rights]
+      - [subject, rights]
 
   - must_id: "item:A.7.2.7:proc_essence_publication"
     description: "Essence-of-arrangement publication — subject-facing summary of who does what, per Art.26.2"
     excerpt_keywords:
       - [essence, publication]
-
-  - must_id: "item:A.7.2.7:proc_rights_exercise"
-    description: "Single point of contact + subject-rights routing (subjects can exercise against either controller..."
-    excerpt_keywords:
-      - [rights, exercise]
-      - [single, point, contact, subject]
+      - [essence, arrangement]
+      - [essence, arrangement, publication]
+      - [arrangement, publication]
+      - [arrangement, publication, subject]
+      - [publication, subject]
+      - [publication, subject, facing]
+      - [subject, facing]
 
   - must_id: "item:A.7.2.7:proc_role_allocation"
-    description: "Role + responsibility allocation (security / notice / rights fulfilment / breach notification / D..."
+    description: "Role + responsibility allocation (security / notice / rights fulfilment / breach notification / DPIA)"
     excerpt_keywords:
       - [role, allocation]
+      - [role, responsibility]
       - [role, responsibility, allocation]
+      - [responsibility, allocation]
+      - [responsibility, allocation, security]
+      - [allocation, security]
+      - [allocation, security, notice]
+      - [security, notice]
+
+  - must_id: "item:A.7.2.7:proc_arrangement_form"
+    description: "Documented arrangement form — contract or equivalent binding document"
+    excerpt_keywords:
+      - [arrangement, form]
+      - [documented, arrangement]
+      - [documented, arrangement, form]
+      - [arrangement, form, contract]
+      - [form, contract]
+      - [form, contract, equivalent]
+      - [contract, equivalent]
+      - [contract, equivalent, binding]
+
+  - must_id: "item:A.7.2.7:proc_classification_test"
+    description: "Classification test — when a relationship is joint control (jointly determine purposes + means) vs controller-processor vs independent contr"
+    excerpt_keywords:
+      - [classification, test]
+      - [classification, test, relationship]
+      - [test, relationship]
+      - [test, relationship, joint]
+      - [relationship, joint]
+      - [relationship, joint, jointly]
+      - [joint, jointly]
+      - [joint, jointly, determine]
+

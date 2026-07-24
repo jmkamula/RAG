@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.3:notice_delivery_log
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.3:notice_delivery_log"
@@ -14,21 +15,45 @@ must_fingerprints:
     description: "Deployment date per row"
     excerpt_keywords:
       - [deployment, date]
-      - [deployment, date, row]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:A.7.3.3:reg_notice_version"
     description: "Notice version served per row (link to A.7.3.2 artifact register)"
     excerpt_keywords:
       - [notice, version]
-      - [notice, version, served, row]
-
-  - must_id: "item:A.7.3.3:reg_touchpoint_id"
-    description: "Unique touchpoint identifier per row"
-    excerpt_keywords:
-      - [unique, touchpoint, identifier, row]
+      - [notice, version, served]
+      - [version, served]
+      - [version, served, artifact]
+      - [served, artifact]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
 
   - must_id: "item:A.7.3.3:reg_touchpoint_type"
     description: "Touchpoint type per row (signup / renewal / cookie banner / just-in-time prompt / periodic reminder)"
     excerpt_keywords:
-      - [touchpoint, type]
-      - [touchpoint, type, row]
+      - [touchpoint, signup]
+      - [touchpoint, signup, renewal]
+      - [signup, renewal]
+      - [signup, renewal, cookie]
+      - [renewal, cookie]
+      - [renewal, cookie, banner]
+      - [cookie, banner]
+      - [cookie, banner, just]
+
+  - must_id: "item:A.7.3.3:reg_touchpoint_id"
+    description: "Unique touchpoint identifier per row"
+    excerpt_keywords:
+      - [touchpoint, id]
+      - [unique, touchpoint]
+      - [unique, touchpoint, identifier]
+      - [touchpoint, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

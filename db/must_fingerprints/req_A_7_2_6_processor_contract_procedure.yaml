@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.6:processor_contract_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.6:processor_contract_procedure"
@@ -10,47 +11,99 @@ target_control: "A.7.2.6"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.6:proc_annex_b_scope"
-    description: "Annex B implementation scope — which B.8.x controls apply per processor engagement (default: all)"
+  - must_id: "item:A.7.2.6:proc_exclusion_justification"
+    description: "Justification required if any Annex B control is excluded from contract (§5.4.1.3)"
     excerpt_keywords:
-      - [annex, scope]
-      - [annex, implementation, scope]
-
-  - must_id: "item:A.7.2.6:proc_art28_3_terms"
-    description: "Art.28.3 terms coverage (subject matter + duration + nature + purpose + PII categories + subject ..."
-    excerpt_keywords:
-      - [art28, terms]
-      - [art, terms, coverage]
+      - [exclusion, justification]
+      - [justification, required]
+      - [justification, required, annex]
+      - [required, annex]
+      - [required, annex, excluded]
+      - [annex, excluded]
+      - [annex, excluded, contract]
+      - [excluded, contract]
 
   - must_id: "item:A.7.2.6:proc_audit_rights"
     description: "Audit rights (Art.28.3.h) — processor makes available all information + contributes to audits"
     excerpt_keywords:
       - [audit, rights]
-
-  - must_id: "item:A.7.2.6:proc_documented_instructions"
-    description: "Documented-instructions clause (Art.28.3.a) — processor acts only on written controller instructions"
-    excerpt_keywords:
-      - [documented, instructions]
-
-  - must_id: "item:A.7.2.6:proc_exclusion_justification"
-    description: "Justification required if any Annex B control is excluded from contract (§5.4.1.3)"
-    excerpt_keywords:
-      - [exclusion, justification]
-      - [justification, required, annex, control]
+      - [audit, rights, art]
+      - [rights, art]
+      - [rights, art, processor]
+      - [art, processor]
+      - [art, processor, makes]
+      - [processor, makes]
+      - [processor, makes, available]
 
   - must_id: "item:A.7.2.6:proc_return_or_delete"
     description: "End-of-service disposition (Art.28.3.g) — return or delete all PII with certification"
     excerpt_keywords:
       - [return, delete]
+      - [end, service]
+      - [end, service, disposition]
+      - [service, disposition]
+      - [service, disposition, art]
+      - [disposition, art]
+      - [disposition, art, return]
+      - [art, return]
 
   - must_id: "item:A.7.2.6:proc_subprocessor_gate"
     description: "Subprocessor consent gate (Art.28.2 + Art.28.4) — general or specific written authorisation"
     excerpt_keywords:
       - [subprocessor, gate]
+      - [subprocessor, consent]
       - [subprocessor, consent, gate]
+      - [consent, gate]
+      - [consent, gate, art]
+      - [gate, art]
+      - [gate, art, art]
+      - [art, art]
+
+  - must_id: "item:A.7.2.6:proc_documented_instructions"
+    description: "Documented-instructions clause (Art.28.3.a) — processor acts only on written controller instructions"
+    excerpt_keywords:
+      - [documented, instructions]
+      - [documented, instructions, clause]
+      - [instructions, clause]
+      - [instructions, clause, art]
+      - [clause, art]
+      - [clause, art, processor]
+      - [art, processor]
+      - [art, processor, acts]
+
+  - must_id: "item:A.7.2.6:proc_annex_b_scope"
+    description: "Annex B implementation scope — which B.8.x controls apply per processor engagement (default: all)"
+    excerpt_keywords:
+      - [annex, b, scope]
+      - [annex, implementation]
+      - [annex, implementation, scope]
+      - [implementation, scope]
+      - [implementation, scope, controls]
+      - [scope, controls]
+      - [scope, controls, apply]
+      - [controls, apply]
+
+  - must_id: "item:A.7.2.6:proc_art28_3_terms"
+    description: "Art.28.3 terms coverage (subject matter + duration + nature + purpose + PII categories + subject categories + controller/processor obligatio"
+    excerpt_keywords:
+      - [art28, 3, terms]
+      - [art, terms]
+      - [art, terms, coverage]
+      - [terms, coverage]
+      - [terms, coverage, subject]
+      - [coverage, subject]
+      - [coverage, subject, matter]
+      - [subject, matter]
 
   - must_id: "item:A.7.2.6:proc_written_form"
     description: "Written form required — no verbal or informal processor arrangements"
     excerpt_keywords:
       - [written, form]
       - [written, form, required]
+      - [form, required]
+      - [form, required, verbal]
+      - [required, verbal]
+      - [required, verbal, informal]
+      - [verbal, informal]
+      - [verbal, informal, processor]
+

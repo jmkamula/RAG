@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.10:deletion_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. Deletion program audit cycle.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.10:deletion_program_review"
@@ -8,49 +10,33 @@ target_control: "A.8.10"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:A.8.10:rev_backup_completeness"
+    description: "Backup-sweep completeness sample (no orphan copies surviving)"
+    excerpt_keywords:
+      - [backup, completeness, deletion]
+
   - must_id: "item:A.8.10:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [deletion, program, review, date]
-      - [deletion, review, conducted]
-      - [deletion, reviewed, on]
-
-  - must_id: "item:A.8.10:rev_reviewer"
-    description: "Reviewer identity (Data Protection + Infrastructure + Legal jointly)"
-    excerpt_keywords:
-      - [deletion, reviewed, by]
-      - [data, protection, deletion, review]
-      - [infrastructure, deletion, review]
-      - [legal, sign, off, deletion, review]
-
-  - must_id: "item:A.8.10:rev_trigger_attainment"
-    description: "Retention-trigger attainment check"
-    excerpt_keywords:
-      - [retention, trigger, attainment]
-      - [deletion, within, window]
-      - [retention, sla, deletion]
-      - [retention, target, met]
-
-  - must_id: "item:A.8.10:rev_backup_completeness"
-    description: "Backup-sweep completeness sample"
-    excerpt_keywords:
-      - [backup, sweep, completeness]
-      - [orphan, copy, sample]
-      - [backup, deletion, sample]
-      - [no, orphan, copies, surviving]
+      - [review, date, planned, interval, deletion]
 
   - must_id: "item:A.8.10:rev_legal_hold_inventory"
     description: "Legal-hold inventory re-confirmed / retired"
     excerpt_keywords:
-      - [legal, hold, inventory, review]
-      - [legal, hold, retired]
-      - [hold, inventory, re, confirmed]
-      - [active, holds, review]
+      - [legal, hold, inventory, deletion]
 
   - must_id: "item:A.8.10:rev_register_update"
     description: "Findings propagated to procedure / scope"
     excerpt_keywords:
-      - [deletion, findings, propagated]
-      - [deletion, procedure, updated]
-      - [deletion, scope, updated]
-      - [deletion, register, refreshed]
+      - [register, update, deletion]
+      - [findings, propagated, procedure, scope, deletion]
+
+  - must_id: "item:A.8.10:rev_reviewer"
+    description: "Reviewer identity (Data Protection + Infrastructure + Legal jointly)"
+    excerpt_keywords:
+      - [reviewer, identity, deletion]
+
+  - must_id: "item:A.8.10:rev_trigger_attainment"
+    description: "Retention-trigger attainment check (deletions completed within configured window)"
+    excerpt_keywords:
+      - [trigger, attainment, deletion]

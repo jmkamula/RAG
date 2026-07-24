@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.1:purpose_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.1:purpose_procedure"
@@ -10,35 +11,75 @@ target_control: "A.7.2.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.1:proc_change_control"
-    description: "Change-control — extending or changing a purpose requires re-review + potentially new consent (§7..."
-    excerpt_keywords:
-      - [change, control]
-
-  - must_id: "item:A.7.2.1:proc_documentation_fields"
-    description: "Documentation fields per purpose (purpose text, categories of PII, categories of subjects, retent..."
-    excerpt_keywords:
-      - [documentation, fields]
-      - [documentation, fields, purpose]
-
   - must_id: "item:A.7.2.1:proc_downstream_notice"
     description: "Downstream notice — purpose changes propagate to notice + consent + RoPA + PIA"
     excerpt_keywords:
       - [downstream, notice]
+      - [downstream, notice, purpose]
+      - [notice, purpose]
+      - [notice, purpose, changes]
+      - [purpose, changes]
+      - [purpose, changes, propagate]
+      - [changes, propagate]
+      - [changes, propagate, notice]
 
-  - must_id: "item:A.7.2.1:proc_intake_trigger"
-    description: "Intake triggers listed (new product launch, new processing activity, new data source, new integra..."
+  - must_id: "item:A.7.2.1:proc_change_control"
+    description: "Change-control — extending or changing a purpose requires re-review + potentially new consent (§7.2.2)"
     excerpt_keywords:
-      - [intake, trigger]
-      - [intake, triggers, listed]
+      - [change, extending]
+      - [change, extending, changing]
+      - [extending, changing]
+      - [extending, changing, purpose]
+      - [changing, purpose]
+      - [changing, purpose, requires]
+      - [purpose, requires]
+      - [purpose, requires, review]
 
   - must_id: "item:A.7.2.1:proc_review_signoff"
     description: "Review + signoff step (DPO + legal counsel) before purpose enters production register"
     excerpt_keywords:
       - [review, signoff]
       - [review, signoff, step]
+      - [signoff, step]
+      - [signoff, step, dpo]
+      - [step, dpo]
+      - [step, dpo, legal]
+      - [dpo, legal]
+      - [dpo, legal, counsel]
 
   - must_id: "item:A.7.2.1:proc_specificity_test"
-    description: "Specificity test — purpose statements must be sufficiently clear + detailed for use in §7.3.2 not..."
+    description: "Specificity test — purpose statements must be sufficiently clear + detailed for use in §7.3.2 notice + §7.2.3 consent"
     excerpt_keywords:
       - [specificity, test]
+      - [specificity, test, purpose]
+      - [test, purpose]
+      - [test, purpose, statements]
+      - [purpose, statements]
+      - [purpose, statements, sufficiently]
+      - [statements, sufficiently]
+      - [statements, sufficiently, clear]
+
+  - must_id: "item:A.7.2.1:proc_documentation_fields"
+    description: "Documentation fields per purpose (purpose text, categories of PII, categories of subjects, retention, recipients, legal basis link)"
+    excerpt_keywords:
+      - [documentation, fields]
+      - [documentation, fields, purpose]
+      - [fields, purpose]
+      - [fields, purpose, purpose]
+      - [purpose, purpose]
+      - [purpose, purpose, text]
+      - [purpose, text]
+      - [purpose, text, categories]
+
+  - must_id: "item:A.7.2.1:proc_intake_trigger"
+    description: "Intake triggers listed (new product launch, new processing activity, new data source, new integration)"
+    excerpt_keywords:
+      - [intake, trigger]
+      - [intake, triggers]
+      - [intake, triggers, listed]
+      - [triggers, listed]
+      - [triggers, listed, new]
+      - [listed, new]
+      - [listed, new, product]
+      - [new, product]
+

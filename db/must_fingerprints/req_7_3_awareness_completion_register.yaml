@@ -14,32 +14,31 @@ must_fingerprints:
   - must_id: "item:7.3:reg_expiry"
     description: "Expiry / next-due date per row (drives refresher trigger)"
     excerpt_keywords:
-      - [expiry]
       - [expiry, next]
       - [expiry, next, due]
-      - [next]
       - [next, due]
       - [next, due, date]
-      - [due]
       - [due, date]
+      - [due, date, refresher]
+      - [date, refresher]
+      - [date, refresher, trigger]
 
   - must_id: "item:7.3:reg_acknowledgement"
     description: "Acknowledgement per row (signed receipt, LMS attestation, quiz pass)"
     excerpt_keywords:
-      - [acknowledgement]
       - [acknowledgement, signed]
       - [acknowledgement, signed, receipt]
-      - [signed]
       - [signed, receipt]
       - [signed, receipt, lms]
-      - [receipt]
       - [receipt, lms]
+      - [receipt, lms, attestation]
+      - [lms, attestation]
+      - [lms, attestation, quiz]
 
   - must_id: "item:7.3:reg_completion_date"
     description: "Completion date per row"
     excerpt_keywords:
       - [completion, date]
-      - [completion]
       - [per, row]
       - [each, row]
       - [column, containing]
@@ -49,24 +48,24 @@ must_fingerprints:
   - must_id: "item:7.3:reg_module"
     description: "Module identifier per row (policy module, contribution module, consequences module)"
     excerpt_keywords:
-      - [identifier]
       - [identifier, contribution]
       - [identifier, contribution, consequences]
-      - [contribution]
       - [contribution, consequences]
-      - [consequences]
       - [per, row]
       - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:7.3:reg_subject_id"
     description: "Subject identifier per row (employee or contractor)"
     excerpt_keywords:
       - [subject, id]
-      - [subject]
       - [subject, identifier]
       - [subject, identifier, employee]
-      - [identifier]
       - [identifier, employee]
       - [identifier, employee, contractor]
-      - [employee]
+      - [employee, contractor]
+      - [per, row]
+      - [each, row]
 

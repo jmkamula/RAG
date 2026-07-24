@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.3:accuracy_incident_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.3:accuracy_incident_register"
@@ -10,30 +11,63 @@ target_control: "A.7.4.3"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.3:reg_detection_source"
-    description: "Detection source per row (internal audit / subject rectification / integration reconciliation / e..."
+  - must_id: "item:A.7.4.3:reg_root_cause"
+    description: "Root cause per row (where a systemic issue emerged, remediation link)"
     excerpt_keywords:
-      - [detection, source]
-      - [detection, source, row]
+      - [root, cause]
+      - [root, cause, systemic]
+      - [cause, systemic]
+      - [cause, systemic, issue]
+      - [systemic, issue]
+      - [systemic, issue, emerged]
+      - [issue, emerged]
+      - [issue, emerged, remediation]
 
-  - must_id: "item:A.7.4.3:reg_incident_id"
-    description: "Unique incident identifier per row"
+  - must_id: "item:A.7.4.3:reg_resolution"
+    description: "Resolution per row (corrected / cannot-correct-with-reason / erased / pending)"
     excerpt_keywords:
-      - [unique, incident, identifier, row]
+      - [resolution, corrected]
+      - [resolution, corrected, cannot]
+      - [corrected, cannot]
+      - [corrected, cannot, correct]
+      - [cannot, correct]
+      - [cannot, correct, reason]
+      - [correct, reason]
+      - [correct, reason, erased]
 
   - must_id: "item:A.7.4.3:reg_pii_scope"
     description: "PII scope per row (which fields / how many subjects affected)"
     excerpt_keywords:
       - [pii, scope]
-      - [pii, scope, row]
+      - [pii, scope, fields]
+      - [scope, fields]
+      - [scope, fields, many]
+      - [fields, many]
+      - [fields, many, subjects]
+      - [many, subjects]
+      - [many, subjects, affected]
 
-  - must_id: "item:A.7.4.3:reg_resolution"
-    description: "Resolution per row (corrected / cannot-correct-with-reason / erased / pending)"
+  - must_id: "item:A.7.4.3:reg_detection_source"
+    description: "Detection source per row (internal audit / subject rectification / integration reconciliation / external notification)"
     excerpt_keywords:
-      - [resolution, row]
+      - [detection, source]
+      - [detection, source, internal]
+      - [source, internal]
+      - [source, internal, audit]
+      - [internal, audit]
+      - [internal, audit, subject]
+      - [audit, subject]
+      - [audit, subject, rectification]
 
-  - must_id: "item:A.7.4.3:reg_root_cause"
-    description: "Root cause per row (where a systemic issue emerged, remediation link)"
+  - must_id: "item:A.7.4.3:reg_incident_id"
+    description: "Unique incident identifier per row"
     excerpt_keywords:
-      - [root, cause]
-      - [root, cause, row]
+      - [incident, id]
+      - [unique, incident]
+      - [unique, incident, identifier]
+      - [incident, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

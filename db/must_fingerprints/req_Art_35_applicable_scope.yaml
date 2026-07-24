@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.35:applicable_scope
 #
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.35 scope note.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.35:applicable_scope"
@@ -9,30 +11,25 @@ target_standard: "GDPR:2016/679"
 
 must_fingerprints:
   - must_id: "item:Art.35:scope_mandatory"
-    description: "Art.35.3 mandatory categories"
+    description: "Art.35.3 mandatory categories (a-c) operationalised — systematic evaluation / large-scale special..."
     excerpt_keywords:
-      - ["Art.35.3"]
-      - [art, 35, 3, mandatory, categories]
-      - [systematic, evaluation, dpia]
-      - [large, scale, special, category, dpia]
+      - [scope, mandatory, protection]
+      - [art, mandatory, categories, protection]
 
   - must_id: "item:Art.35:scope_org_criteria"
-    description: "Org's own 'likely high risk' criteria"
+    description: "Org's own 'likely high risk' criteria (typically EDPB Guidelines 248 nine-criteria approach: scor..."
     excerpt_keywords:
-      - [edpb, guidelines, 248]
-      - [nine, criteria, approach]
-      - [dpia, likely, high, risk, criteria]
+      - [scope, org, criteria, protection]
+      - [org, own, likely, high, protection]
 
   - must_id: "item:Art.35:scope_sa_list"
     description: "Lead SA Art.35.4 published list integrated"
     excerpt_keywords:
-      - ["Art.35.4"]
-      - [art, 35, 4, sa, list]
-      - [supervisory, authority, published, dpia, list]
+      - [scope, list, protection]
+      - [lead, art, published, list, protection]
 
   - must_id: "item:Art.35:scope_white_list"
-    description: "Art.35.5 SA white-list activities (NOT requiring DPIA)"
+    description: "Art.35.5 SA white-list activities (NOT requiring DPIA) considered"
     excerpt_keywords:
-      - ["Art.35.5"]
-      - [art, 35, 5, white, list]
-      - [dpia, not, required, white, list]
+      - [scope, white, list, protection]
+      - [art, white, protection]

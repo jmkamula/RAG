@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.4:disclosure_request_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.4:disclosure_request_register"
@@ -10,29 +11,63 @@ target_control: "B.8.5.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.5.4:reg_customer_affected"
-    description: "Customer(s) whose PII was targeted per row"
+  - must_id: "item:B.8.5.4:reg_response_outcome"
+    description: "Response outcome per row (data disclosed / request rejected / partial)"
     excerpt_keywords:
-      - [customer, affected]
+      - [response, outcome]
+      - [response, outcome, disclosed]
+      - [outcome, disclosed]
+      - [outcome, disclosed, request]
+      - [disclosed, request]
+      - [disclosed, request, rejected]
+      - [request, rejected]
+      - [request, rejected, partial]
 
   - must_id: "item:B.8.5.4:reg_customer_notification"
     description: "Customer notification date per row (or gag-order flag)"
     excerpt_keywords:
       - [customer, notification]
-      - [customer, notification, date, row]
+      - [customer, notification, date]
+      - [notification, date]
+      - [notification, date, gag]
+      - [date, gag]
+      - [date, gag, order]
+      - [gag, order]
+      - [gag, order, flag]
 
-  - must_id: "item:B.8.5.4:reg_request_id"
-    description: "Unique request identifier per row"
+  - must_id: "item:B.8.5.4:reg_customer_affected"
+    description: "Customer(s) whose PII was targeted per row"
     excerpt_keywords:
-      - [unique, request, identifier, row]
+      - [customer, affected]
+      - [customer, whose]
+      - [customer, whose, pii]
+      - [whose, pii]
+      - [whose, pii, targeted]
+      - [pii, targeted]
+      - [per, row]
+      - [each, row]
 
   - must_id: "item:B.8.5.4:reg_requester"
     description: "Requesting authority per row (law enforcement / regulator / court)"
     excerpt_keywords:
-      - [requesting, authority, row]
+      - [requesting, authority]
+      - [requesting, authority, law]
+      - [authority, law]
+      - [authority, law, enforcement]
+      - [law, enforcement]
+      - [law, enforcement, regulator]
+      - [enforcement, regulator]
+      - [enforcement, regulator, court]
 
-  - must_id: "item:B.8.5.4:reg_response_outcome"
-    description: "Response outcome per row (data disclosed / request rejected / partial)"
+  - must_id: "item:B.8.5.4:reg_request_id"
+    description: "Unique request identifier per row"
     excerpt_keywords:
-      - [response, outcome]
-      - [response, outcome, row]
+      - [request, id]
+      - [unique, request]
+      - [unique, request, identifier]
+      - [request, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

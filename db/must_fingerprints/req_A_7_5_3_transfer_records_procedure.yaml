@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.5.3:transfer_records_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.3:transfer_records_procedure"
@@ -10,28 +11,63 @@ target_control: "A.7.5.3"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.5.3:proc_cooperation_channel"
-    description: "Cooperation channel — third parties can be re-contacted for subject-rights follow-up"
-    excerpt_keywords:
-      - [cooperation, channel]
-
   - must_id: "item:A.7.5.3:proc_minimisation"
     description: "Data minimisation applied to records themselves — only strictly needed information retained"
     excerpt_keywords:
-      - [data, minimisation, applied, records]
+      - [minimisation, records]
+      - [minimisation, records, themselves]
+      - [records, themselves]
+      - [records, themselves, only]
+      - [themselves, only]
+      - [themselves, only, strictly]
+      - [only, strictly]
+      - [only, strictly, needed]
 
   - must_id: "item:A.7.5.3:proc_retention_policy"
     description: "Retention period policy for transfer records (link to A.7.4.7)"
     excerpt_keywords:
-      - [retention, policy]
-      - [retention, period, policy, transfer]
+      - [retention, period]
+      - [retention, period, transfer]
+      - [period, transfer]
+      - [period, transfer, records]
+      - [transfer, records]
+      - [procedure, step]
+      - [process, step]
+      - [responsibility, of]
+
+  - must_id: "item:A.7.5.3:proc_cooperation_channel"
+    description: "Cooperation channel — third parties can be re-contacted for subject-rights follow-up"
+    excerpt_keywords:
+      - [cooperation, channel]
+      - [cooperation, channel, third]
+      - [channel, third]
+      - [channel, third, parties]
+      - [third, parties]
+      - [third, parties, can]
+      - [parties, can]
+      - [parties, can, contacted]
 
   - must_id: "item:A.7.5.3:proc_rights_transfer"
     description: "Rights-transfer capture — modifications / erasure transfers arising from subject requests"
     excerpt_keywords:
       - [rights, transfer]
+      - [rights, transfer, capture]
+      - [transfer, capture]
+      - [transfer, capture, modifications]
+      - [capture, modifications]
+      - [capture, modifications, erasure]
+      - [modifications, erasure]
+      - [modifications, erasure, transfers]
 
   - must_id: "item:A.7.5.3:proc_transfer_event_capture"
     description: "Transfer event capture (to + from third parties)"
     excerpt_keywords:
       - [transfer, event, capture]
+      - [transfer, event]
+      - [event, capture]
+      - [event, capture, third]
+      - [capture, third]
+      - [capture, third, parties]
+      - [third, parties]
+      - [procedure, step]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.5.1:transfer_basis_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.1:transfer_basis_register"
@@ -10,31 +11,59 @@ target_control: "A.7.5.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.5.1:reg_tia_reference"
+    description: "TIA reference per row where Art.46 safeguard invoked"
+    excerpt_keywords:
+      - [tia, reference]
+      - [tia, reference, art]
+      - [reference, art]
+      - [reference, art, safeguard]
+      - [art, safeguard]
+      - [art, safeguard, invoked]
+      - [safeguard, invoked]
+      - [per, row]
+
   - must_id: "item:A.7.5.1:reg_basis_cited"
-    description: "Basis cited per row (Art.45 adequacy / Art.46 SCC / Art.46 BCR / Art.49 derogation / non-EU equiv..."
+    description: "Basis cited per row (Art.45 adequacy / Art.46 SCC / Art.46 BCR / Art.49 derogation / non-EU equivalent)"
     excerpt_keywords:
       - [basis, cited]
-      - [basis, cited, row]
+      - [basis, cited, art]
+      - [cited, art]
+      - [cited, art, adequacy]
+      - [art, adequacy]
+      - [art, adequacy, art]
+      - [adequacy, art]
+      - [adequacy, art, scc]
 
   - must_id: "item:A.7.5.1:reg_destination_jurisdiction"
     description: "Destination jurisdiction per row"
     excerpt_keywords:
       - [destination, jurisdiction]
-      - [destination, jurisdiction, row]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:A.7.5.1:reg_origin_jurisdiction"
     description: "Origin jurisdiction per row"
     excerpt_keywords:
       - [origin, jurisdiction]
-      - [origin, jurisdiction, row]
-
-  - must_id: "item:A.7.5.1:reg_tia_reference"
-    description: "TIA reference per row where Art.46 safeguard invoked"
-    excerpt_keywords:
-      - [tia, reference]
-      - [tia, reference, row, art]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:A.7.5.1:reg_transfer_id"
     description: "Unique transfer relationship identifier per row"
     excerpt_keywords:
-      - [unique, transfer, relationship, identifier]
+      - [transfer, id]
+      - [unique, transfer]
+      - [unique, transfer, relationship]
+      - [transfer, relationship]
+      - [transfer, relationship, identifier]
+      - [relationship, identifier]
+      - [per, row]
+      - [each, row]
+

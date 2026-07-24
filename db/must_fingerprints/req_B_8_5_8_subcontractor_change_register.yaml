@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.8:subcontractor_change_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.8:subcontractor_change_register"
@@ -10,31 +11,63 @@ target_control: "B.8.5.8"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.5.8:reg_change_id"
-    description: "Unique change identifier per row"
+  - must_id: "item:B.8.5.8:reg_objection_status"
+    description: "Objection status per row (none / raised / resolved / termination)"
     excerpt_keywords:
-      - [unique, change, identifier, row]
-
-  - must_id: "item:B.8.5.8:reg_change_type"
-    description: "Change type per row (add / replace / remove)"
-    excerpt_keywords:
-      - [change, type]
-      - [change, type, row]
+      - [objection, status]
+      - [objection, status, none]
+      - [status, none]
+      - [status, none, raised]
+      - [none, raised]
+      - [none, raised, resolved]
+      - [raised, resolved]
+      - [raised, resolved, termination]
 
   - must_id: "item:B.8.5.8:reg_effective_date"
     description: "Change effective date per row"
     excerpt_keywords:
       - [effective, date]
-      - [change, effective, date, row]
+      - [change, effective]
+      - [change, effective, date]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:B.8.5.8:reg_notification_date"
     description: "Customer notification date per row"
     excerpt_keywords:
       - [notification, date]
-      - [customer, notification, date, row]
+      - [customer, notification]
+      - [customer, notification, date]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
-  - must_id: "item:B.8.5.8:reg_objection_status"
-    description: "Objection status per row (none / raised / resolved / termination)"
+  - must_id: "item:B.8.5.8:reg_change_type"
+    description: "Change type per row (add / replace / remove)"
     excerpt_keywords:
-      - [objection, status]
-      - [objection, status, row]
+      - [change, add]
+      - [change, add, replace]
+      - [add, replace]
+      - [add, replace, remove]
+      - [replace, remove]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+
+  - must_id: "item:B.8.5.8:reg_change_id"
+    description: "Unique change identifier per row"
+    excerpt_keywords:
+      - [change, id]
+      - [unique, change]
+      - [unique, change, identifier]
+      - [change, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

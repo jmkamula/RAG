@@ -14,36 +14,36 @@ must_fingerprints:
   - must_id: "item:Art.28:scope_exclusions"
     description: "Out-of-scope vendors (those processing only their own data, intra-group with no GDPR transfer)"
     excerpt_keywords:
-      - [exclusions]
-      - [out]
       - [out, scope]
       - [out, scope, vendors]
       - [scope, vendors]
       - [scope, vendors, processing]
-      - [vendors]
       - [vendors, processing]
+      - [vendors, processing, only]
+      - [processing, only]
+      - [processing, only, their]
 
   - must_id: "item:Art.28:scope_controller_vs_processor"
     description: "Controller-vs-processor decision criteria (means & purpose test per EDPB guidelines)"
     excerpt_keywords:
       - [controller, vs, processor]
-      - [controller]
-      - [vs]
-      - [processor]
       - [controller, processor]
       - [controller, processor, decision]
       - [processor, decision]
       - [processor, decision, criteria]
+      - [decision, criteria]
+      - [decision, criteria, means]
+      - [criteria, means]
 
   - must_id: "item:Art.28:scope_processor_types"
     description: "Processor types in scope (cloud / SaaS providers, payroll, marketing platforms, analytics, support ticketing, etc.)"
     excerpt_keywords:
       - [processor, types]
-      - [processor]
-      - [types]
       - [processor, types, scope]
       - [types, scope]
       - [types, scope, cloud]
       - [scope, cloud]
       - [scope, cloud, saas]
+      - [cloud, saas]
+      - [cloud, saas, providers]
 

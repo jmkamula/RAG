@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.4.2:end_of_service_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.2:end_of_service_register"
@@ -10,31 +11,62 @@ target_control: "B.8.4.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.4.2:reg_action_type"
-    description: "Action type per row (return / transfer / dispose / hybrid)"
-    excerpt_keywords:
-      - [action, type]
-      - [action, type, row]
-
   - must_id: "item:B.8.4.2:reg_certification_ref"
     description: "Certification reference issued to customer"
     excerpt_keywords:
       - [certification, ref]
-      - [certification, reference, issued, customer]
+      - [certification, reference]
+      - [certification, reference, issued]
+      - [reference, issued]
+      - [reference, issued, customer]
+      - [issued, customer]
+      - [per, row]
+      - [each, row]
 
   - must_id: "item:B.8.4.2:reg_completion_date"
     description: "Completion date per row (return delivered / disposal complete)"
     excerpt_keywords:
       - [completion, date]
-      - [completion, date, row]
+      - [completion, date, return]
+      - [date, return]
+      - [date, return, delivered]
+      - [return, delivered]
+      - [return, delivered, disposal]
+      - [delivered, disposal]
+      - [delivered, disposal, complete]
 
-  - must_id: "item:B.8.4.2:reg_customer_id"
-    description: "Customer identifier per row"
+  - must_id: "item:B.8.4.2:reg_action_type"
+    description: "Action type per row (return / transfer / dispose / hybrid)"
     excerpt_keywords:
-      - [customer, identifier, row]
+      - [action, return]
+      - [action, return, transfer]
+      - [return, transfer]
+      - [return, transfer, dispose]
+      - [transfer, dispose]
+      - [transfer, dispose, hybrid]
+      - [dispose, hybrid]
+      - [per, row]
 
   - must_id: "item:B.8.4.2:reg_termination_date"
     description: "Contract termination date per row"
     excerpt_keywords:
       - [termination, date]
-      - [contract, termination, date, row]
+      - [contract, termination]
+      - [contract, termination, date]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:B.8.4.2:reg_customer_id"
+    description: "Customer identifier per row"
+    excerpt_keywords:
+      - [customer, id]
+      - [customer, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.5.2:transfer_destinations_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.2:transfer_destinations_register"
@@ -10,36 +11,60 @@ target_control: "A.7.5.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.5.2:reg_basis_link"
-    description: "Basis link per row (link to A.7.5.1 register)"
+  - must_id: "item:A.7.5.2:reg_public_disclosure"
+    description: "Public-disclosure status per row (in privacy notice / DPA schedule)"
     excerpt_keywords:
-      - [destinations, basis, link]
-      - [transfer, basis, register, row]
-      - [destination, transfer, basis]
-
-  - must_id: "item:A.7.5.2:reg_destination_id"
-    description: "Destination identifier per row (country ISO code or international org name)"
-    excerpt_keywords:
-      - [destination, identifier, row]
-      - [country, iso, code]
-      - [destination, country, code]
+      - [public, disclosure]
+      - [public, disclosure, status]
+      - [disclosure, status]
+      - [disclosure, status, privacy]
+      - [status, privacy]
+      - [status, privacy, notice]
+      - [privacy, notice]
+      - [privacy, notice, dpa]
 
   - must_id: "item:A.7.5.2:reg_effective_date"
     description: "Effective date per row (when destination added)"
     excerpt_keywords:
-      - [destination, effective, date]
+      - [effective, date]
       - [effective, date, destination]
-      - [transfer, effective, date]
+      - [date, destination]
+      - [date, destination, added]
+      - [destination, added]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
 
-  - must_id: "item:A.7.5.2:reg_public_disclosure"
-    description: "Public-disclosure status per row (in privacy notice / DPA schedule)"
+  - must_id: "item:A.7.5.2:reg_basis_link"
+    description: "Basis link per row (link to A.7.5.1 register)"
     excerpt_keywords:
-      - [transfer, public, disclosure]
-      - [destinations, public, disclosure]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:A.7.5.2:reg_transfer_type"
     description: "Transfer type per row (direct storage / subprocessing / support access / M&A)"
     excerpt_keywords:
-      - [transfer, type, row]
-      - [transfer, type, destination]
+      - [transfer, direct]
+      - [transfer, direct, storage]
+      - [direct, storage]
       - [direct, storage, subprocessing]
+      - [storage, subprocessing]
+      - [storage, subprocessing, support]
+      - [subprocessing, support]
+      - [subprocessing, support, access]
+
+  - must_id: "item:A.7.5.2:reg_destination_id"
+    description: "Destination identifier per row (country ISO code or international org name)"
+    excerpt_keywords:
+      - [destination, id]
+      - [destination, identifier]
+      - [destination, identifier, country]
+      - [identifier, country]
+      - [identifier, country, iso]
+      - [country, iso]
+      - [country, iso, code]
+      - [iso, code]
+

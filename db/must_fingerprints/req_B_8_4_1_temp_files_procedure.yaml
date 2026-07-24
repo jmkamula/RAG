@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.4.1:temp_files_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.4.1:temp_files_procedure"
@@ -10,30 +11,63 @@ target_control: "B.8.4.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.4.1:proc_gc_procedure"
-    description: "Garbage collection procedure identifying unused files + last-use timestamp"
-    excerpt_keywords:
-      - [garbage, collection, procedure, identifying]
-
-  - must_id: "item:B.8.4.1:proc_period"
-    description: "Disposal period stated per taxonomy category"
-    excerpt_keywords:
-      - [disposal, period, stated, taxonomy]
-
   - must_id: "item:B.8.4.1:proc_periodic_check"
     description: "Periodic check that temp files are deleted"
     excerpt_keywords:
       - [periodic, check]
-      - [periodic, check, temp, files]
-
-  - must_id: "item:B.8.4.1:proc_temp_taxonomy"
-    description: "Temp file taxonomy (customer-facing multi-tenant apps + shared infrastructure + integration middl..."
-    excerpt_keywords:
-      - [temp, taxonomy]
-      - [temp, file, taxonomy]
+      - [periodic, check, temp]
+      - [check, temp]
+      - [check, temp, files]
+      - [temp, files]
+      - [temp, files, deleted]
+      - [files, deleted]
+      - [procedure, step]
 
   - must_id: "item:B.8.4.1:proc_tenant_isolation"
     description: "Tenant isolation of temp files — no cross-tenant leakage in shared infrastructure"
     excerpt_keywords:
       - [tenant, isolation]
-      - [tenant, isolation, temp, files]
+      - [tenant, isolation, temp]
+      - [isolation, temp]
+      - [isolation, temp, files]
+      - [temp, files]
+      - [temp, files, cross]
+      - [files, cross]
+      - [files, cross, tenant]
+
+  - must_id: "item:B.8.4.1:proc_gc_procedure"
+    description: "Garbage collection procedure identifying unused files + last-use timestamp"
+    excerpt_keywords:
+      - [garbage, collection]
+      - [garbage, collection, identifying]
+      - [collection, identifying]
+      - [collection, identifying, unused]
+      - [identifying, unused]
+      - [identifying, unused, files]
+      - [unused, files]
+      - [unused, files, last]
+
+  - must_id: "item:B.8.4.1:proc_period"
+    description: "Disposal period stated per taxonomy category"
+    excerpt_keywords:
+      - [disposal, period]
+      - [disposal, period, stated]
+      - [period, stated]
+      - [period, stated, taxonomy]
+      - [stated, taxonomy]
+      - [stated, taxonomy, category]
+      - [taxonomy, category]
+      - [procedure, step]
+
+  - must_id: "item:B.8.4.1:proc_temp_taxonomy"
+    description: "Temp file taxonomy (customer-facing multi-tenant apps + shared infrastructure + integration middleware)"
+    excerpt_keywords:
+      - [temp, taxonomy]
+      - [temp, file]
+      - [temp, file, taxonomy]
+      - [file, taxonomy]
+      - [file, taxonomy, customer]
+      - [taxonomy, customer]
+      - [taxonomy, customer, facing]
+      - [customer, facing]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.5:disclosure_decision_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.5:disclosure_decision_register"
@@ -10,30 +11,61 @@ target_control: "B.8.5.5"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.5.5:reg_binding_classification"
-    description: "Binding classification per row (legally binding / not binding)"
-    excerpt_keywords:
-      - [binding, classification]
-      - [binding, classification, row]
-
   - must_id: "item:B.8.5.5:reg_customer_authorisation"
     description: "Customer authorisation reference per row (contract clause / one-off approval)"
     excerpt_keywords:
       - [customer, authorisation]
-      - [customer, authorisation, reference, row]
-
-  - must_id: "item:B.8.5.5:reg_decision_id"
-    description: "Unique decision identifier per row"
-    excerpt_keywords:
-      - [unique, decision, identifier, row]
+      - [customer, authorisation, reference]
+      - [authorisation, reference]
+      - [authorisation, reference, contract]
+      - [reference, contract]
+      - [reference, contract, clause]
+      - [contract, clause]
+      - [contract, clause, one]
 
   - must_id: "item:B.8.5.5:reg_outcome"
     description: "Outcome per row (rejected / accepted / customer-consulted)"
     excerpt_keywords:
-      - [outcome, row]
+      - [outcome, rejected]
+      - [outcome, rejected, accepted]
+      - [rejected, accepted]
+      - [rejected, accepted, customer]
+      - [accepted, customer]
+      - [accepted, customer, consulted]
+      - [customer, consulted]
+      - [per, row]
+
+  - must_id: "item:B.8.5.5:reg_binding_classification"
+    description: "Binding classification per row (legally binding / not binding)"
+    excerpt_keywords:
+      - [binding, classification]
+      - [binding, classification, legally]
+      - [classification, legally]
+      - [classification, legally, binding]
+      - [legally, binding]
+      - [legally, binding, not]
+      - [binding, not]
+      - [binding, not, binding]
 
   - must_id: "item:B.8.5.5:reg_request_source"
     description: "Request source per row"
     excerpt_keywords:
       - [request, source]
-      - [request, source, row]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:B.8.5.5:reg_decision_id"
+    description: "Unique decision identifier per row"
+    excerpt_keywords:
+      - [decision, id]
+      - [unique, decision]
+      - [unique, decision, identifier]
+      - [decision, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

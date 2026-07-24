@@ -14,36 +14,36 @@ must_fingerprints:
   - must_id: "item:7.3:scope_external"
     description: "External-party coverage stated (auditors, embedded vendor staff, visiting researchers as relevant)"
     excerpt_keywords:
-      - [external]
       - [external, party]
       - [external, party, coverage]
-      - [party]
       - [party, coverage]
       - [party, coverage, stated]
-      - [coverage]
       - [coverage, stated]
+      - [coverage, stated, auditors]
+      - [stated, auditors]
+      - [stated, auditors, embedded]
 
   - must_id: "item:7.3:scope_contractors"
     description: "Contractor coverage stated (which contractor classes are in scope; cross-link to A.5.19 supplier)"
     excerpt_keywords:
-      - [contractors]
-      - [contractor]
       - [contractor, coverage]
       - [contractor, coverage, stated]
-      - [coverage]
       - [coverage, stated]
       - [coverage, stated, contractor]
       - [stated, contractor]
+      - [stated, contractor, classes]
+      - [contractor, classes]
+      - [contractor, classes, scope]
 
   - must_id: "item:7.3:scope_employees"
     description: "Employee coverage stated (all employees, all locations)"
     excerpt_keywords:
-      - [employees]
-      - [employee]
       - [employee, coverage]
       - [employee, coverage, stated]
-      - [coverage]
       - [coverage, stated]
       - [coverage, stated, employees]
       - [stated, employees]
+      - [stated, employees, locations]
+      - [employees, locations]
+      - [in, scope]
 

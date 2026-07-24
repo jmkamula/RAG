@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.7:retention_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.7:retention_procedure"
@@ -10,28 +11,63 @@ target_control: "A.7.4.7"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.7:proc_conflict_resolution"
-    description: "Conflict-resolution rule — where legal + regulatory + business requirements conflict, documented ..."
-    excerpt_keywords:
-      - [conflict, resolution]
-
   - must_id: "item:A.7.4.7:proc_cross_link_a533"
-    description: "Cross-link to A.5.33 records retention (records-programme) — retention schedules coherent across ..."
+    description: "Cross-link to A.5.33 records retention (records-programme) — retention schedules coherent across the two frames"
     excerpt_keywords:
-      - [cross, link, a533]
+      - [cross, a533]
+      - [cross, records]
+      - [cross, records, retention]
+      - [records, retention]
+      - [records, retention, records]
+      - [retention, records]
+      - [retention, records, programme]
+      - [records, programme]
 
   - must_id: "item:A.7.4.7:proc_deletion_trigger"
     description: "Deletion trigger — schedule expiry triggers A.7.4.5 end-of-processing action"
     excerpt_keywords:
       - [deletion, trigger]
+      - [deletion, trigger, schedule]
+      - [trigger, schedule]
+      - [trigger, schedule, expiry]
+      - [schedule, expiry]
+      - [schedule, expiry, triggers]
+      - [expiry, triggers]
+      - [expiry, triggers, end]
 
   - must_id: "item:A.7.4.7:proc_periodic_review"
     description: "Periodic review — schedule refreshed on regulatory change or business shift"
     excerpt_keywords:
       - [periodic, review]
+      - [periodic, review, schedule]
+      - [review, schedule]
+      - [review, schedule, refreshed]
+      - [schedule, refreshed]
+      - [schedule, refreshed, regulatory]
+      - [refreshed, regulatory]
+      - [refreshed, regulatory, change]
+
+  - must_id: "item:A.7.4.7:proc_conflict_resolution"
+    description: "Conflict-resolution rule — where legal + regulatory + business requirements conflict, documented risk-based decision"
+    excerpt_keywords:
+      - [conflict, resolution]
+      - [conflict, resolution, rule]
+      - [resolution, rule]
+      - [resolution, rule, legal]
+      - [rule, legal]
+      - [rule, legal, regulatory]
+      - [legal, regulatory]
+      - [legal, regulatory, business]
 
   - must_id: "item:A.7.4.7:proc_retention_schedules"
     description: "Retention schedules per PII category + activity (with legal + regulatory + business rationale)"
     excerpt_keywords:
       - [retention, schedules]
-      - [retention, schedules, pii, category]
+      - [retention, schedules, pii]
+      - [schedules, pii]
+      - [schedules, pii, category]
+      - [pii, category]
+      - [pii, category, activity]
+      - [category, activity]
+      - [category, activity, legal]
+

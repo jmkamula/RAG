@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.2:processing_limitation_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.2:processing_limitation_procedure"
@@ -10,30 +11,63 @@ target_control: "A.7.4.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.2:proc_access_limit"
-    description: "Access limitation — role-based access controls scoped by purpose"
+  - must_id: "item:A.7.4.2:proc_policy_link"
+    description: "Link to information-security + privacy policies (§6.2 / A.5.1) as the governance vehicle"
     excerpt_keywords:
-      - [access, limit]
-      - [access, limitation]
+      - [security, privacy]
+      - [security, privacy, policies]
+      - [privacy, policies]
+      - [privacy, policies, governance]
+      - [policies, governance]
+      - [policies, governance, vehicle]
+      - [governance, vehicle]
+      - [procedure, step]
 
   - must_id: "item:A.7.4.2:proc_default_minimum"
     description: "Default-minimum — limited to minimum necessary by default; expansions require documented rationale"
     excerpt_keywords:
       - [default, minimum]
+      - [default, minimum, limited]
+      - [minimum, limited]
+      - [minimum, limited, minimum]
+      - [limited, minimum]
+      - [limited, minimum, necessary]
+      - [minimum, necessary]
+      - [minimum, necessary, default]
+
+  - must_id: "item:A.7.4.2:proc_storage_limit"
+    description: "Storage-during-processing limitation — no unnecessary retention in intermediate systems"
+    excerpt_keywords:
+      - [storage, limit]
+      - [storage, during]
+      - [storage, during, processing]
+      - [during, processing]
+      - [during, processing, limitation]
+      - [processing, limitation]
+      - [processing, limitation, unnecessary]
+      - [limitation, unnecessary]
+
+  - must_id: "item:A.7.4.2:proc_access_limit"
+    description: "Access limitation — role-based access controls scoped by purpose"
+    excerpt_keywords:
+      - [access, limit]
+      - [access, limitation]
+      - [access, limitation, role]
+      - [limitation, role]
+      - [limitation, role, based]
+      - [role, based]
+      - [role, based, access]
+      - [based, access]
 
   - must_id: "item:A.7.4.2:proc_disclosure_limit"
     description: "Disclosure limitation — who PII is disclosed to (internal + external) constrained per purpose"
     excerpt_keywords:
       - [disclosure, limit]
       - [disclosure, limitation]
+      - [disclosure, limitation, pii]
+      - [limitation, pii]
+      - [limitation, pii, disclosed]
+      - [pii, disclosed]
+      - [pii, disclosed, internal]
+      - [disclosed, internal]
 
-  - must_id: "item:A.7.4.2:proc_policy_link"
-    description: "Link to information-security + privacy policies (§6.2 / A.5.1) as the governance vehicle"
-    excerpt_keywords:
-      - [policy, link]
-      - [link, information]
-
-  - must_id: "item:A.7.4.2:proc_storage_limit"
-    description: "Storage-during-processing limitation — no unnecessary retention in intermediate systems"
-    excerpt_keywords:
-      - [storage, limit]

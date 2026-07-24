@@ -15,59 +15,58 @@ must_fingerprints:
     description: "Per-row delivery date (within Art.12.3 SLA)"
     excerpt_keywords:
       - [delivery, date]
-      - [delivery]
       - [delivery, date, within]
       - [date, within]
       - [date, within, art]
-      - [within]
       - [within, art]
       - [within, art, sla]
+      - [art, sla]
+      - [per, row]
 
   - must_id: "item:Art.20:reg_destination"
     description: "Per-row destination (export to subject / direct controller transmission)"
     excerpt_keywords:
-      - [destination]
       - [destination, export]
       - [destination, export, subject]
-      - [export]
       - [export, subject]
       - [export, subject, direct]
-      - [subject]
       - [subject, direct]
+      - [subject, direct, controller]
+      - [direct, controller]
+      - [direct, controller, transmission]
 
   - must_id: "item:Art.20:reg_format_delivered"
     description: "Per-row delivered format"
     excerpt_keywords:
       - [format, delivered]
-      - [format]
-      - [delivered]
       - [delivered, format]
       - [per, row]
       - [each, row]
       - [column, containing]
       - [each, entry]
+      - [column, header]
 
   - must_id: "item:Art.20:reg_applicability_decision"
     description: "Per-row applicability decision (in-scope / out-of-scope with grounds)"
     excerpt_keywords:
       - [applicability, decision]
-      - [applicability]
-      - [decision]
       - [applicability, decision, scope]
       - [decision, scope]
       - [decision, scope, out]
       - [scope, out]
       - [scope, out, scope]
+      - [out, scope]
+      - [out, scope, grounds]
 
   - must_id: "item:Art.20:reg_request_id"
     description: "Per-row request id (Art.12 register cross-reference)"
     excerpt_keywords:
       - [request, id]
-      - [request]
       - [request, art]
       - [request, art, cross]
-      - [art]
       - [art, cross]
       - [art, cross, reference]
       - [cross, reference]
+      - [per, row]
+      - [each, row]
 

@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.8.14:redundancy_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. Redundancy program review.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:A.8.14:redundancy_program_review"
@@ -8,43 +10,33 @@ target_control: "A.8.14"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:A.8.14:rev_baseline_update"
+    description: "Baseline / runbook updates published from findings"
+    excerpt_keywords:
+      - [baseline, update, redundancy]
+      - [baseline, runbook, updates, published, redundancy]
+
+  - must_id: "item:A.8.14:rev_bia_alignment"
+    description: "Cross-check with A.5.30 BIA (any availability-tier change → redundancy approach re-evaluation)"
+    excerpt_keywords:
+      - [bia, alignment, redundancy]
+
   - must_id: "item:A.8.14:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [redundancy, program, review, date]
-      - [failover, program, reviewed]
+      - [review, date, planned, interval, redundancy]
 
   - must_id: "item:A.8.14:rev_reviewer"
-    description: "Reviewer identity (Site Reliability + Infrastructure)"
+    description: "Reviewer identity (Site Reliability + Infrastructure + business-service owners)"
     excerpt_keywords:
-      - [redundancy, reviewed, by]
-      - [sre, redundancy, review]
-      - [infrastructure, redundancy, review]
+      - [reviewer, identity, redundancy]
 
   - must_id: "item:A.8.14:rev_service_list"
-    description: "Critical-service list re-confirmed"
+    description: "Critical-service list re-confirmed (new service in scope; retired service removed)"
     excerpt_keywords:
-      - [critical, service, list, re, confirmed]
-      - [redundancy, service, list, audit]
-      - [new, service, in, scope, redundancy]
+      - [service, list, redundancy]
 
   - must_id: "item:A.8.14:rev_test_attainment"
-    description: "Failover-test attainment per service"
+    description: "Failover-test attainment per service (cadence met; targets met)"
     excerpt_keywords:
-      - [failover, test, attainment]
-      - [failover, cadence, met]
-      - [failover, target, met]
-
-  - must_id: "item:A.8.14:rev_bia_alignment"
-    description: "Cross-check with A.5.30 BIA"
-    excerpt_keywords:
-      - ["A.5.30"]
-      - [bia, alignment, redundancy]
-      - [availability, tier, change, redundancy]
-
-  - must_id: "item:A.8.14:rev_baseline_update"
-    description: "Baseline / runbook updates published"
-    excerpt_keywords:
-      - [redundancy, baseline, updated]
-      - [failover, runbook, updated]
-      - [redundancy, findings, propagated]
+      - [test, attainment, redundancy]

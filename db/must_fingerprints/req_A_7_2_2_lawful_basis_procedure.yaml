@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.2:lawful_basis_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.2:lawful_basis_procedure"
@@ -10,29 +11,63 @@ target_control: "A.7.2.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.2:proc_basis_catalog"
-    description: "Basis catalog — enumerated permitted bases per applicable jurisdiction (GDPR Art.6.1.a-f; other j..."
-    excerpt_keywords:
-      - [basis, catalog]
-
   - must_id: "item:A.7.2.2:proc_basis_change"
     description: "Basis change procedure — changing basis requires re-assessment and often subject notice (§7.3.3)"
     excerpt_keywords:
       - [basis, change]
-      - [basis, change, procedure]
+      - [basis, change, changing]
+      - [change, changing]
+      - [change, changing, basis]
+      - [changing, basis]
+      - [changing, basis, requires]
+      - [basis, requires]
+      - [basis, requires, assessment]
+
+  - must_id: "item:A.7.2.2:proc_special_category_overlay"
+    description: "Special-category overlay (Art.9/10 basis required in addition to Art.6 for health, biometric, criminal, etc.)"
+    excerpt_keywords:
+      - [special, category, overlay]
+      - [special, category]
+      - [category, overlay]
+      - [category, overlay, art]
+      - [overlay, art]
+      - [overlay, art, basis]
+      - [art, basis]
+      - [art, basis, required]
 
   - must_id: "item:A.7.2.2:proc_lia_procedure"
     description: "Legitimate-interests balancing test procedure (necessity + balancing against subject rights)"
     excerpt_keywords:
-      - [lia, procedure]
+      - [legitimate, interests]
+      - [legitimate, interests, balancing]
+      - [interests, balancing]
+      - [interests, balancing, test]
+      - [balancing, test]
+      - [balancing, test, necessity]
+      - [test, necessity]
+      - [test, necessity, balancing]
 
   - must_id: "item:A.7.2.2:proc_selection_test"
-    description: "Selection test per basis (consent — freely given + specific + unambiguous; contract — necessity; ..."
+    description: "Selection test per basis (consent — freely given + specific + unambiguous; contract — necessity; legal obligation — cited law; vital interes"
     excerpt_keywords:
       - [selection, test]
       - [selection, test, basis]
+      - [test, basis]
+      - [test, basis, consent]
+      - [basis, consent]
+      - [basis, consent, freely]
+      - [consent, freely]
+      - [consent, freely, given]
 
-  - must_id: "item:A.7.2.2:proc_special_category_overlay"
-    description: "Special-category overlay (Art.9/10 basis required in addition to Art.6 for health, biometric, cri..."
+  - must_id: "item:A.7.2.2:proc_basis_catalog"
+    description: "Basis catalog — enumerated permitted bases per applicable jurisdiction (GDPR Art.6.1.a-f; other jurisdictions as applicable)"
     excerpt_keywords:
-      - [special, category, overlay]
+      - [basis, catalog]
+      - [basis, catalog, enumerated]
+      - [catalog, enumerated]
+      - [catalog, enumerated, permitted]
+      - [enumerated, permitted]
+      - [enumerated, permitted, bases]
+      - [permitted, bases]
+      - [permitted, bases, jurisdiction]
+

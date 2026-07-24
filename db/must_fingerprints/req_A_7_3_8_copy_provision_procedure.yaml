@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.8:copy_provision_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.8:copy_provision_procedure"
@@ -10,27 +11,75 @@ target_control: "A.7.3.8"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.8:proc_deleted_notification"
-    description: "Deleted-PII notification — where PII already deleted per retention policy, subject informed of th..."
-    excerpt_keywords:
-      - [deleted, notification]
-
-  - must_id: "item:A.7.3.8:proc_direct_transfer"
-    description: "Direct-transfer capability — where technically feasible, transfer directly to another controller ..."
-    excerpt_keywords:
-      - [direct, transfer]
-
-  - must_id: "item:A.7.3.8:proc_format_selection"
-    description: "Format selection — structured, commonly used, accessible (Art.15.3 + machine-readable for Art.20)"
-    excerpt_keywords:
-      - [format, selection]
-
   - must_id: "item:A.7.3.8:proc_response_sla"
     description: "Response-time SLA stated + honoured"
     excerpt_keywords:
       - [response, sla]
+      - [response, time]
+      - [response, time, sla]
+      - [time, sla]
+      - [time, sla, stated]
+      - [sla, stated]
+      - [sla, stated, honoured]
+      - [stated, honoured]
+
+  - must_id: "item:A.7.3.8:proc_direct_transfer"
+    description: "Direct-transfer capability — where technically feasible, transfer directly to another controller (Art.20.2)"
+    excerpt_keywords:
+      - [direct, transfer]
+      - [direct, transfer, capability]
+      - [transfer, capability]
+      - [transfer, capability, technically]
+      - [capability, technically]
+      - [capability, technically, feasible]
+      - [technically, feasible]
+      - [technically, feasible, transfer]
+
+  - must_id: "item:A.7.3.8:proc_no_reidentification"
+    description: "No-re-identification rule — de-identified data not re-identified solely to fulfil this control"
+    excerpt_keywords:
+      - [no, reidentification]
+      - [identification, rule]
+      - [identification, rule, identified]
+      - [rule, identified]
+      - [rule, identified, not]
+      - [identified, not]
+      - [identified, not, identified]
+      - [not, identified]
+
+  - must_id: "item:A.7.3.8:proc_deleted_notification"
+    description: "Deleted-PII notification — where PII already deleted per retention policy, subject informed of that fact"
+    excerpt_keywords:
+      - [deleted, notification]
+      - [deleted, pii]
+      - [deleted, pii, notification]
+      - [pii, notification]
+      - [pii, notification, pii]
+      - [notification, pii]
+      - [notification, pii, already]
+      - [pii, already]
 
   - must_id: "item:A.7.3.8:proc_scope_restriction"
     description: "Scope restriction — copy relates specifically to that subject; no cross-subject leakage"
     excerpt_keywords:
       - [scope, restriction]
+      - [scope, restriction, copy]
+      - [restriction, copy]
+      - [restriction, copy, relates]
+      - [copy, relates]
+      - [copy, relates, specifically]
+      - [relates, specifically]
+      - [relates, specifically, subject]
+
+  - must_id: "item:A.7.3.8:proc_format_selection"
+    description: "Format selection — structured, commonly used, accessible (Art.15.3 + machine-readable for Art.20)"
+    excerpt_keywords:
+      - [format, selection]
+      - [format, selection, structured]
+      - [selection, structured]
+      - [selection, structured, commonly]
+      - [structured, commonly]
+      - [structured, commonly, used]
+      - [commonly, used]
+      - [commonly, used, accessible]
+

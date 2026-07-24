@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.10:automated_decision_obligations_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.10:automated_decision_obligations_procedure"
@@ -11,33 +12,74 @@ target_standard: "ISO27701:2019"
 
 must_fingerprints:
   - must_id: "item:A.7.3.10:proc_cross_link_art22"
-    description: "Cross-link to A.7.2.5 PIA and the Art.22 4-leaf procedure register — no double-registration; this..."
+    description: "Cross-link to A.7.2.5 PIA and the Art.22 4-leaf procedure register — no double-registration; this control handles the SUBJECT-facing obligat"
     excerpt_keywords:
-      - [cross, link, art22]
+      - [cross, art22]
+      - [cross, pia]
+      - [cross, pia, art]
+      - [pia, art]
+      - [pia, art, leaf]
+      - [art, leaf]
+      - [art, leaf, double]
+      - [leaf, double]
+
+  - must_id: "item:A.7.3.10:proc_jurisdiction_prohibition"
+    description: "Jurisdiction-specific full-automation prohibition awareness (§7.3.10 NOTE — some jurisdictions restrict full automation)"
+    excerpt_keywords:
+      - [jurisdiction, prohibition]
+      - [jurisdiction, specific]
+      - [jurisdiction, specific, full]
+      - [specific, full]
+      - [specific, full, automation]
+      - [full, automation]
+      - [full, automation, prohibition]
+      - [automation, prohibition]
 
   - must_id: "item:A.7.3.10:proc_human_intervention"
     description: "Human intervention pathway (Art.22.3)"
     excerpt_keywords:
       - [human, intervention]
       - [human, intervention, pathway]
-
-  - must_id: "item:A.7.3.10:proc_jurisdiction_prohibition"
-    description: "Jurisdiction-specific full-automation prohibition awareness (§7.3.10 NOTE — some jurisdictions re..."
-    excerpt_keywords:
-      - [jurisdiction, prohibition]
-
-  - must_id: "item:A.7.3.10:proc_meaningful_logic"
-    description: "Meaningful information about the logic + envisaged consequences"
-    excerpt_keywords:
-      - [meaningful, logic]
-      - [meaningful, information, about, logic]
-
-  - must_id: "item:A.7.3.10:proc_notification_of_existence"
-    description: "Notification-of-existence — subjects informed that automated decision-making occurs (Art.13.2.f +..."
-    excerpt_keywords:
-      - [notification, existence]
+      - [intervention, pathway]
+      - [intervention, pathway, art]
+      - [pathway, art]
+      - [procedure, step]
+      - [process, step]
+      - [responsibility, of]
 
   - must_id: "item:A.7.3.10:proc_objection_pathway"
     description: "Objection pathway — subjects can object to automated decision-making"
     excerpt_keywords:
       - [objection, pathway]
+      - [objection, pathway, subjects]
+      - [pathway, subjects]
+      - [pathway, subjects, can]
+      - [subjects, can]
+      - [subjects, can, object]
+      - [can, object]
+      - [can, object, automated]
+
+  - must_id: "item:A.7.3.10:proc_meaningful_logic"
+    description: "Meaningful information about the logic + envisaged consequences"
+    excerpt_keywords:
+      - [meaningful, logic]
+      - [meaningful, about]
+      - [meaningful, about, logic]
+      - [about, logic]
+      - [about, logic, envisaged]
+      - [logic, envisaged]
+      - [logic, envisaged, consequences]
+      - [envisaged, consequences]
+
+  - must_id: "item:A.7.3.10:proc_notification_of_existence"
+    description: "Notification-of-existence — subjects informed that automated decision-making occurs (Art.13.2.f + 14.2.g)"
+    excerpt_keywords:
+      - [notification, existence]
+      - [notification, existence, subjects]
+      - [existence, subjects]
+      - [existence, subjects, informed]
+      - [subjects, informed]
+      - [subjects, informed, automated]
+      - [informed, automated]
+      - [informed, automated, decision]
+

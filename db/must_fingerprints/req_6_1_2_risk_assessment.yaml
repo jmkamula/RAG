@@ -14,89 +14,71 @@ must_fingerprints:
   - must_id: "item:6.1.2:personal_data"
     description: "Personal data processing risks explicitly addressed"
     excerpt_keywords:
-      - [personal]
       - [personal, processing]
       - [personal, processing, risks]
-      - [processing]
       - [processing, risks]
       - [processing, risks, explicitly]
-      - [risks]
       - [risks, explicitly]
+      - [risks, explicitly, addressed]
+      - [explicitly, addressed]
 
   - must_id: "item:6.1.2:evaluation"
     description: "Risks evaluated against acceptance criteria"
     excerpt_keywords:
-      - [evaluation]
-      - [risks]
       - [risks, evaluated]
       - [risks, evaluated, against]
-      - [evaluated]
       - [evaluated, against]
       - [evaluated, against, acceptance]
-      - [against]
+      - [against, acceptance]
+      - [against, acceptance, criteria]
+      - [acceptance, criteria]
 
   - must_id: "item:6.1.2:likelihood"
     description: "Realistic likelihood assessed"
     excerpt_keywords:
-      - [likelihood]
-      - [realistic]
       - [realistic, likelihood]
       - [realistic, likelihood, assessed]
       - [likelihood, assessed]
-      - [assessed]
 
   - must_id: "item:6.1.2:consequences"
     description: "Potential consequences analysed"
     excerpt_keywords:
-      - [consequences]
-      - [potential]
       - [potential, consequences]
       - [potential, consequences, analysed]
       - [consequences, analysed]
-      - [analysed]
 
   - must_id: "item:6.1.2:owners"
     description: "Risk owners identified"
     excerpt_keywords:
-      - [owners]
-      - [risk]
       - [risk, owners]
       - [risk, owners, identified]
       - [owners, identified]
-      - [identified]
 
   - must_id: "item:6.1.2:identification"
     description: "Risks to confidentiality, integrity and availability identified"
     excerpt_keywords:
-      - [identification]
-      - [risks]
       - [risks, confidentiality]
       - [risks, confidentiality, integrity]
-      - [confidentiality]
       - [confidentiality, integrity]
       - [confidentiality, integrity, availability]
-      - [integrity]
+      - [integrity, availability]
+      - [integrity, availability, identified]
+      - [availability, identified]
 
   - must_id: "item:6.1.2:consistency"
     description: "Consistent and comparable results produced"
     excerpt_keywords:
-      - [consistency]
-      - [consistent]
       - [consistent, comparable]
       - [consistent, comparable, results]
-      - [comparable]
       - [comparable, results]
       - [comparable, results, produced]
-      - [results]
+      - [results, produced]
 
   - must_id: "item:6.1.2:criteria"
     description: "Risk acceptance criteria defined"
     excerpt_keywords:
-      - [criteria]
-      - [risk]
       - [risk, acceptance]
       - [risk, acceptance, criteria]
-      - [acceptance]
       - [acceptance, criteria]
       - [acceptance, criteria, defined]
       - [criteria, defined]

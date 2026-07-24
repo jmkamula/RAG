@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.3:notice_delivery_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.3:notice_delivery_procedure"
@@ -10,25 +11,63 @@ target_control: "A.7.3.3"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.3.3:proc_visual_aids"
+    description: "Visual aids where helpful (icons, diagrams — per §7.3.3 NOTE)"
+    excerpt_keywords:
+      - [visual, aids]
+      - [visual, aids, helpful]
+      - [aids, helpful]
+      - [aids, helpful, icons]
+      - [helpful, icons]
+      - [helpful, icons, diagrams]
+      - [icons, diagrams]
+      - [icons, diagrams, note]
+
   - must_id: "item:A.7.3.3:proc_layered_design"
     description: "Layered / progressive design (short summary + expandable detail) where notice is long"
     excerpt_keywords:
       - [layered, design]
+      - [layered, progressive]
       - [layered, progressive, design]
+      - [progressive, design]
+      - [progressive, design, short]
+      - [design, short]
+      - [design, short, summary]
+      - [short, summary]
+
+  - must_id: "item:A.7.3.3:proc_plain_language"
+    description: "Plain-language standard — reading-level target, jargon audit, tested against target audience"
+    excerpt_keywords:
+      - [plain, language]
+      - [plain, language, standard]
+      - [language, standard]
+      - [language, standard, reading]
+      - [standard, reading]
+      - [standard, reading, level]
+      - [reading, level]
+      - [reading, level, target]
 
   - must_id: "item:A.7.3.3:proc_permanent_access"
     description: "Permanent accessibility — notice available at stable URL / in-product location at any time"
     excerpt_keywords:
       - [permanent, access]
       - [permanent, accessibility]
+      - [permanent, accessibility, notice]
+      - [accessibility, notice]
+      - [accessibility, notice, available]
+      - [notice, available]
+      - [notice, available, stable]
+      - [available, stable]
 
-  - must_id: "item:A.7.3.3:proc_plain_language"
-    description: "Plain-language standard — reading-level target, jargon audit, tested against target audience"
+  - must_id: "item:A.7.3.3:proc_at_collection"
+    description: "At-collection delivery — notice presented when PII is collected (form, signup flow, kiosk)"
     excerpt_keywords:
-      - [plain, language]
+      - [collection, delivery]
+      - [collection, delivery, notice]
+      - [delivery, notice]
+      - [delivery, notice, presented]
+      - [notice, presented]
+      - [notice, presented, pii]
+      - [presented, pii]
+      - [presented, pii, collected]
 
-  - must_id: "item:A.7.3.3:proc_visual_aids"
-    description: "Visual aids where helpful (icons, diagrams — per §7.3.3 NOTE)"
-    excerpt_keywords:
-      - [visual, aids]
-      - [visual, aids, helpful]

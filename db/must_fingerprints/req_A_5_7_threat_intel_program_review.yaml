@@ -1,7 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.5.7:threat_intel_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. Review-record patterns specific to
-# threat-intel program audit output.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.7:threat_intel_program_review"
@@ -9,62 +10,34 @@ target_control: "A.5.7"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:A.5.7:rev_actions"
+    description: "Action items captured for the program (e.g. add new feed, retire stale source, tune analysis cade..."
+    excerpt_keywords:
+      - [action, items, captured, program, threat]
+
+  - must_id: "item:A.5.7:rev_consumer_feedback"
+    description: "Consumer feedback collected from named consumers (sec ops, A.5.21 supplier risk, A.5.25 detection..."
+    excerpt_keywords:
+      - [consumer, feedback, threat]
+      - [consumer, feedback, collected, named, threat]
+
   - must_id: "item:A.5.7:rev_date"
     description: "Review date within the planned 180-day interval"
     excerpt_keywords:
-      - [intel, program, review, date]
-      - [reviewed, on]
-      - [180, day, review]
-      - [intel, review, conducted]
+      - [review, date, planned, threat]
+
+  - must_id: "item:A.5.7:rev_feed_value"
+    description: "Feed-value analysis per source (which feeds delivered actionable IOCs / advisories; which were dr..."
+    excerpt_keywords:
+      - [feed, value, threat]
+
+  - must_id: "item:A.5.7:rev_products_delivered"
+    description: "Products delivered count and distribution evidenced (proves the program ran, not just the procedu..."
+    excerpt_keywords:
+      - [products, delivered, threat]
+      - [products, delivered, count, distribution, threat]
 
   - must_id: "item:A.5.7:rev_reviewer"
     description: "Reviewer identity (program owner + InfoSec lead jointly)"
     excerpt_keywords:
-      - [program, owner, review]
-      - [intel, program, owner]
-      - [infosec, lead, review]
-      - [reviewed, by, intel]
-
-  - must_id: "item:A.5.7:rev_feed_value"
-    description: "Feed-value analysis per source"
-    excerpt_keywords:
-      - [feed, value, analysis]
-      - [actionable, iocs]
-      - [feeds, dropped]
-      - [feeds, retained]
-      - [intel, feed, retention]
-
-  - must_id: "item:A.5.7:rev_consumer_feedback"
-    description: "Consumer feedback collected from named consumers"
-    excerpt_keywords:
-      - [consumer, feedback]
-      - [sec, ops, feedback]
-      - [exec, feedback, intel]
-      - ["A.5.21"]
-      - ["A.5.25"]
-
-  - must_id: "item:A.5.7:rev_products_delivered"
-    description: "Products delivered count and distribution evidenced"
-    excerpt_keywords:
-      - [products, delivered]
-      - [briefings, delivered]
-      - [advisories, distributed]
-      - [intel, products, count]
-
-  - must_id: "item:A.5.7:rev_missed"
-    description: "Missed-event analysis"
-    excerpt_keywords:
-      - [missed, events]
-      - [intel, miss, analysis]
-      - [intel, gap, analysis]
-      - [missed, by, intel]
-      - ["A.5.27"]
-
-  - must_id: "item:A.5.7:rev_actions"
-    description: "Action items captured for the program"
-    excerpt_keywords:
-      - [action, items, intel, program]
-      - [new, feed, added]
-      - [stale, feed, retired]
-      - [analysis, cadence, tuned]
-      - [intel, improvement, action]
+      - [reviewer, identity, threat]

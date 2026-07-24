@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.8:ropa_maintenance_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.8:ropa_maintenance_procedure"
@@ -10,27 +11,63 @@ target_control: "A.7.2.8"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.8:proc_add_activity"
-    description: "New-activity intake trigger + workflow (new product launch / new integration / new data source)"
+  - must_id: "item:A.7.2.8:proc_secure_maintenance"
+    description: "Secure maintenance — access control + integrity for the RoPA itself"
     excerpt_keywords:
-      - [add, activity]
-
-  - must_id: "item:A.7.2.8:proc_change_capture"
-    description: "Change-capture — activity changes trigger RoPA update within stated SLA"
-    excerpt_keywords:
-      - [change, capture]
+      - [secure, maintenance]
+      - [secure, maintenance, access]
+      - [maintenance, access]
+      - [maintenance, access, integrity]
+      - [access, integrity]
+      - [access, integrity, ropa]
+      - [integrity, ropa]
+      - [integrity, ropa, itself]
 
   - must_id: "item:A.7.2.8:proc_reconciliation"
-    description: "Reconciliation cadence — against §7.2.1 purpose register + §7.2.2 basis register + §7.2.5 PIA reg..."
+    description: "Reconciliation cadence — against §7.2.1 purpose register + §7.2.2 basis register + §7.2.5 PIA register"
     excerpt_keywords:
       - [reconciliation, cadence]
+      - [reconciliation, cadence, against]
+      - [cadence, against]
+      - [cadence, against, purpose]
+      - [against, purpose]
+      - [against, purpose, basis]
+      - [purpose, basis]
+      - [purpose, basis, pia]
 
   - must_id: "item:A.7.2.8:proc_retire_activity"
     description: "Retirement — activities that stop generate a retirement record (not deletion) for audit history"
     excerpt_keywords:
       - [retire, activity]
+      - [retirement, activities]
+      - [retirement, activities, stop]
+      - [activities, stop]
+      - [activities, stop, generate]
+      - [stop, generate]
+      - [stop, generate, retirement]
+      - [generate, retirement]
 
-  - must_id: "item:A.7.2.8:proc_secure_maintenance"
-    description: "Secure maintenance — access control + integrity for the RoPA itself"
+  - must_id: "item:A.7.2.8:proc_change_capture"
+    description: "Change-capture — activity changes trigger RoPA update within stated SLA"
     excerpt_keywords:
-      - [secure, maintenance]
+      - [change, capture]
+      - [change, capture, activity]
+      - [capture, activity]
+      - [capture, activity, changes]
+      - [activity, changes]
+      - [activity, changes, trigger]
+      - [changes, trigger]
+      - [changes, trigger, ropa]
+
+  - must_id: "item:A.7.2.8:proc_add_activity"
+    description: "New-activity intake trigger + workflow (new product launch / new integration / new data source)"
+    excerpt_keywords:
+      - [add, activity]
+      - [new, activity]
+      - [new, activity, intake]
+      - [activity, intake]
+      - [activity, intake, trigger]
+      - [intake, trigger]
+      - [intake, trigger, workflow]
+      - [trigger, workflow]
+

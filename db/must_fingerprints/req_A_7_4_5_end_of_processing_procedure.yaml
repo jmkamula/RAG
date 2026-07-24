@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.5:end_of_processing_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.5:end_of_processing_procedure"
@@ -10,22 +11,61 @@ target_control: "A.7.4.5"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:A.7.4.5:proc_records"
+    description: "Record of end-of-processing action (link to A.7.4.5 register)"
+    excerpt_keywords:
+      - [end, processing]
+      - [end, processing, action]
+      - [processing, action]
+      - [procedure, step]
+      - [process, step]
+      - [responsibility, of]
+
+  - must_id: "item:A.7.4.5:proc_verification"
+    description: "Verification — post-action verification that PII is actually gone / de-identified across all systems + backups"
+    excerpt_keywords:
+      - [verification, post]
+      - [verification, post, action]
+      - [post, action]
+      - [post, action, verification]
+      - [action, verification]
+      - [action, verification, pii]
+      - [verification, pii]
+      - [verification, pii, actually]
+
   - must_id: "item:A.7.4.5:proc_deidentification_standard"
     description: "De-identification standard — resulting data cannot reasonably permit re-identification"
     excerpt_keywords:
       - [deidentification, standard]
+      - [identification, standard]
+      - [identification, standard, resulting]
+      - [standard, resulting]
+      - [standard, resulting, cannot]
+      - [resulting, cannot]
+      - [resulting, cannot, reasonably]
+      - [cannot, reasonably]
 
   - must_id: "item:A.7.4.5:proc_delete_or_deidentify"
     description: "Delete-or-de-identify decision rule per activity"
     excerpt_keywords:
       - [delete, deidentify]
+      - [delete, identify]
+      - [delete, identify, decision]
+      - [identify, decision]
+      - [identify, decision, rule]
+      - [decision, rule]
+      - [decision, rule, activity]
+      - [rule, activity]
 
   - must_id: "item:A.7.4.5:proc_end_of_processing_trigger"
-    description: "End-of-processing trigger definition per activity (purpose fulfilled / consent withdrawn / retent..."
+    description: "End-of-processing trigger definition per activity (purpose fulfilled / consent withdrawn / retention lapsed / no further processing anticipa"
     excerpt_keywords:
       - [end, processing, trigger]
+      - [end, processing]
+      - [processing, trigger]
+      - [processing, trigger, definition]
+      - [trigger, definition]
+      - [trigger, definition, activity]
+      - [definition, activity]
+      - [definition, activity, purpose]
 
-  - must_id: "item:A.7.4.5:proc_records"
-    description: "Record of end-of-processing action (link to A.7.4.5 register)"
-    excerpt_keywords:
-      - [record, end]

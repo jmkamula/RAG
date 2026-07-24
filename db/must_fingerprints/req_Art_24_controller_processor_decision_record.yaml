@@ -15,59 +15,57 @@ must_fingerprints:
     description: "Per-row contract link (DPA Art.28 / Art.26 arrangement / Art.46 transfer mechanism)"
     excerpt_keywords:
       - [role, contract]
-      - [contract]
       - [contract, dpa]
       - [contract, dpa, art]
-      - [dpa]
       - [dpa, art]
       - [dpa, art, art]
-      - [art]
+      - [art, art]
+      - [art, art, arrangement]
+      - [art, arrangement]
 
   - must_id: "item:Art.24:role_basis"
     description: "Per-row decision basis (who determines means and purposes — EDPB Guidelines 7/2020 test)"
     excerpt_keywords:
       - [role, basis]
-      - [basis]
-      - [decision]
       - [decision, basis]
       - [decision, basis, determines]
       - [basis, determines]
       - [basis, determines, means]
-      - [determines]
+      - [determines, means]
+      - [determines, means, purposes]
+      - [means, purposes]
 
   - must_id: "item:Art.24:role_chosen"
     description: "Per-row role chosen (controller / processor / joint controller / third party)"
     excerpt_keywords:
       - [role, chosen]
-      - [chosen]
       - [role, chosen, controller]
       - [chosen, controller]
       - [chosen, controller, processor]
-      - [controller]
       - [controller, processor]
       - [controller, processor, joint]
+      - [processor, joint]
+      - [processor, joint, controller]
 
   - must_id: "item:Art.24:role_counterparty"
     description: "Per-row counterparty (customer / vendor / partner)"
     excerpt_keywords:
       - [role, counterparty]
-      - [counterparty]
       - [counterparty, customer]
       - [counterparty, customer, vendor]
-      - [customer]
       - [customer, vendor]
       - [customer, vendor, partner]
-      - [vendor]
+      - [vendor, partner]
 
   - must_id: "item:Art.24:role_activity_id"
     description: "Per-row processing activity (Art.30 RoPA reference)"
     excerpt_keywords:
       - [role, activity, id]
-      - [activity]
-      - [processing]
       - [processing, activity]
       - [processing, activity, art]
       - [activity, art]
       - [activity, art, ropa]
-      - [art]
+      - [art, ropa]
+      - [art, ropa, reference]
+      - [ropa, reference]
 

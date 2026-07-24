@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.3.1:support_request_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.3.1:support_request_register"
@@ -10,28 +11,63 @@ target_control: "B.8.3.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.3.1:reg_customer_id"
-    description: "Requesting customer identifier per row"
-    excerpt_keywords:
-      - [requesting, customer, identifier, row]
-
-  - must_id: "item:B.8.3.1:reg_request_id"
-    description: "Unique request identifier per row"
-    excerpt_keywords:
-      - [unique, request, identifier, row]
-
-  - must_id: "item:B.8.3.1:reg_request_type"
-    description: "Request type per row (rectification support / erasure support / portability export / restriction ..."
-    excerpt_keywords:
-      - [request, type]
-      - [request, type, row]
-
-  - must_id: "item:B.8.3.1:reg_response"
-    description: "Response per row (what was provided / done)"
-    excerpt_keywords:
-      - [response, row]
-
   - must_id: "item:B.8.3.1:reg_sla_met"
     description: "SLA-met flag per row"
     excerpt_keywords:
       - [sla, met]
+      - [sla, met, flag]
+      - [met, flag]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:B.8.3.1:reg_response"
+    description: "Response per row (what was provided / done)"
+    excerpt_keywords:
+      - [response, provided]
+      - [response, provided, done]
+      - [provided, done]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:B.8.3.1:reg_request_type"
+    description: "Request type per row (rectification support / erasure support / portability export / restriction / info-for-Art.15)"
+    excerpt_keywords:
+      - [request, rectification]
+      - [request, rectification, support]
+      - [rectification, support]
+      - [rectification, support, erasure]
+      - [support, erasure]
+      - [support, erasure, support]
+      - [erasure, support]
+      - [erasure, support, portability]
+
+  - must_id: "item:B.8.3.1:reg_customer_id"
+    description: "Requesting customer identifier per row"
+    excerpt_keywords:
+      - [customer, id]
+      - [requesting, customer]
+      - [requesting, customer, identifier]
+      - [customer, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+
+  - must_id: "item:B.8.3.1:reg_request_id"
+    description: "Unique request identifier per row"
+    excerpt_keywords:
+      - [request, id]
+      - [unique, request]
+      - [unique, request, identifier]
+      - [request, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

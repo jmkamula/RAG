@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.5:objection_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.5:objection_register"
@@ -10,29 +11,62 @@ target_control: "A.7.3.5"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.5:reg_event_id"
-    description: "Unique event identifier per row"
-    excerpt_keywords:
-      - [unique, event, identifier, row]
-
-  - must_id: "item:A.7.3.5:reg_objection_type"
-    description: "Objection type per row (absolute — marketing/stats; balancing — legitimate interests / public int..."
-    excerpt_keywords:
-      - [objection, type]
-      - [objection, type, row]
-
   - must_id: "item:A.7.3.5:reg_propagation_status"
     description: "Downstream propagation status"
     excerpt_keywords:
       - [propagation, status]
+      - [downstream, propagation]
       - [downstream, propagation, status]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:A.7.3.5:reg_resolution"
     description: "Resolution per row (processing halted / balancing test rejection with justification)"
     excerpt_keywords:
-      - [resolution, row]
+      - [resolution, processing]
+      - [resolution, processing, halted]
+      - [processing, halted]
+      - [processing, halted, balancing]
+      - [halted, balancing]
+      - [halted, balancing, test]
+      - [balancing, test]
+      - [balancing, test, rejection]
+
+  - must_id: "item:A.7.3.5:reg_objection_type"
+    description: "Objection type per row (absolute — marketing/stats; balancing — legitimate interests / public interest)"
+    excerpt_keywords:
+      - [objection, absolute]
+      - [objection, absolute, marketing]
+      - [absolute, marketing]
+      - [absolute, marketing, stats]
+      - [marketing, stats]
+      - [marketing, stats, balancing]
+      - [stats, balancing]
+      - [stats, balancing, legitimate]
 
   - must_id: "item:A.7.3.5:reg_subject_id"
     description: "Subject identifier per row"
     excerpt_keywords:
-      - [subject, identifier, row]
+      - [subject, id]
+      - [subject, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:A.7.3.5:reg_event_id"
+    description: "Unique event identifier per row"
+    excerpt_keywords:
+      - [event, id]
+      - [unique, event]
+      - [unique, event, identifier]
+      - [event, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

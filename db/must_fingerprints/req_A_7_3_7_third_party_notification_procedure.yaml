@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.7:third_party_notification_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.7:third_party_notification_procedure"
@@ -10,35 +11,74 @@ target_control: "A.7.3.7"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.7:proc_ack_receipt"
-    description: "Acknowledgement of receipt monitored"
+  - must_id: "item:A.7.3.7:proc_subject_disclosure"
+    description: "Subject-disclosure obligation — on request, org informs the subject of recipients notified (Art.19)"
     excerpt_keywords:
-      - [ack, receipt]
-      - [acknowledgement, receipt, monitored]
+      - [subject, disclosure]
+      - [subject, disclosure, obligation]
+      - [disclosure, obligation]
+      - [disclosure, obligation, request]
+      - [obligation, request]
+      - [obligation, request, org]
+      - [request, org]
+      - [request, org, informs]
 
   - must_id: "item:A.7.3.7:proc_impossibility_exception"
     description: "Impossibility / disproportionate-effort exception documented per Art.19"
     excerpt_keywords:
       - [impossibility, exception]
       - [impossibility, disproportionate]
+      - [impossibility, disproportionate, effort]
+      - [disproportionate, effort]
+      - [disproportionate, effort, exception]
+      - [effort, exception]
+      - [effort, exception, documented]
+      - [exception, documented]
+
+  - must_id: "item:A.7.3.7:proc_ack_receipt"
+    description: "Acknowledgement of receipt monitored"
+    excerpt_keywords:
+      - [ack, receipt]
+      - [acknowledgement, receipt]
+      - [acknowledgement, receipt, monitored]
+      - [receipt, monitored]
+      - [procedure, step]
+      - [process, step]
+      - [responsibility, of]
 
   - must_id: "item:A.7.3.7:proc_notification_format"
-    description: "Notification format standardised (e.g. structured message with subject ref, event type, expected ..."
+    description: "Notification format standardised (e.g"
     excerpt_keywords:
       - [notification, format]
       - [notification, format, standardised]
-
-  - must_id: "item:A.7.3.7:proc_recipient_inventory"
-    description: "Recipient inventory — active communication channels with every third party PII has been shared wi..."
-    excerpt_keywords:
-      - [recipient, inventory]
-
-  - must_id: "item:A.7.3.7:proc_subject_disclosure"
-    description: "Subject-disclosure obligation — on request, org informs the subject of recipients notified (Art.19)"
-    excerpt_keywords:
-      - [subject, disclosure]
+      - [format, standardised]
+      - [format, standardised, structured]
+      - [standardised, structured]
+      - [standardised, structured, message]
+      - [structured, message]
+      - [structured, message, subject]
 
   - must_id: "item:A.7.3.7:proc_trigger_map"
-    description: "Trigger map — which subject events (withdrawal / correction / erasure / restriction / objection) ..."
+    description: "Trigger map — which subject events (withdrawal / correction / erasure / restriction / objection) require third-party notification"
     excerpt_keywords:
       - [trigger, map]
+      - [trigger, map, subject]
+      - [map, subject]
+      - [map, subject, events]
+      - [subject, events]
+      - [subject, events, withdrawal]
+      - [events, withdrawal]
+      - [events, withdrawal, correction]
+
+  - must_id: "item:A.7.3.7:proc_recipient_inventory"
+    description: "Recipient inventory — active communication channels with every third party PII has been shared with (link to A.7.5.4 disclosure register)"
+    excerpt_keywords:
+      - [recipient, inventory]
+      - [recipient, inventory, active]
+      - [inventory, active]
+      - [inventory, active, communication]
+      - [active, communication]
+      - [active, communication, channels]
+      - [communication, channels]
+      - [communication, channels, every]
+

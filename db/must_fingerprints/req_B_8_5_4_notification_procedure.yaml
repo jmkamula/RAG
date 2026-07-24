@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.4:notification_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.4:notification_procedure"
@@ -10,29 +11,63 @@ target_control: "B.8.5.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.5.4:proc_gag_order_exception"
-    description: "Gag-order exception — where notification prohibited by law, notification suppressed with legal-ho..."
-    excerpt_keywords:
-      - [gag, order, exception]
-
   - must_id: "item:B.8.5.4:proc_legal_review"
     description: "Legal counsel reviews every request before response"
     excerpt_keywords:
       - [legal, review]
-      - [legal, counsel, reviews, request]
+      - [legal, counsel]
+      - [legal, counsel, reviews]
+      - [counsel, reviews]
+      - [counsel, reviews, every]
+      - [reviews, every]
+      - [reviews, every, request]
+      - [every, request]
+
+  - must_id: "item:B.8.5.4:proc_gag_order_exception"
+    description: "Gag-order exception — where notification prohibited by law, notification suppressed with legal-hold record retained for post-order disclosur"
+    excerpt_keywords:
+      - [gag, order, exception]
+      - [gag, order]
+      - [order, exception]
+      - [order, exception, notification]
+      - [exception, notification]
+      - [exception, notification, prohibited]
+      - [notification, prohibited]
+      - [notification, prohibited, law]
 
   - must_id: "item:B.8.5.4:proc_notification_format"
     description: "Notification format (contract-specified content — request source + PII scope + response deadline)"
     excerpt_keywords:
       - [notification, format]
+      - [notification, format, contract]
+      - [format, contract]
+      - [format, contract, specified]
+      - [contract, specified]
+      - [contract, specified, content]
+      - [specified, content]
+      - [specified, content, request]
+
+  - must_id: "item:B.8.5.4:proc_timeframe"
+    description: "Agreed timeframe per customer contract (typically 24-72h)"
+    excerpt_keywords:
+      - [agreed, timeframe]
+      - [agreed, timeframe, customer]
+      - [timeframe, customer]
+      - [timeframe, customer, contract]
+      - [customer, contract]
+      - [customer, contract, typically]
+      - [contract, typically]
+      - [contract, typically, 72h]
 
   - must_id: "item:B.8.5.4:proc_request_intake"
     description: "Request intake path — law-enforcement / regulator / court requests routed to Legal"
     excerpt_keywords:
       - [request, intake]
       - [request, intake, path]
+      - [intake, path]
+      - [intake, path, law]
+      - [path, law]
+      - [path, law, enforcement]
+      - [law, enforcement]
+      - [law, enforcement, regulator]
 
-  - must_id: "item:B.8.5.4:proc_timeframe"
-    description: "Agreed timeframe per customer contract (typically 24-72h)"
-    excerpt_keywords:
-      - [agreed, timeframe, customer, contract]

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.6:subcontractor_disclosure_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.6:subcontractor_disclosure_procedure"
@@ -10,28 +11,63 @@ target_control: "B.8.5.6"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.5.6:proc_countries_always_public"
-    description: "Countries list always public — per §8.5.6 last paragraph, the destination country list is disclos..."
-    excerpt_keywords:
-      - [countries, always, public]
-      - [countries, list, always, public]
-
   - must_id: "item:B.8.5.6:proc_customer_contract_link"
     description: "Customer contract link — subcontracting provisions in the B.8.2.1 agreement"
     excerpt_keywords:
-      - [customer, contract, link]
+      - [customer, contract]
+      - [customer, contract, subcontracting]
+      - [contract, subcontracting]
+      - [contract, subcontracting, provisions]
+      - [subcontracting, provisions]
+      - [subcontracting, provisions, agreement]
+      - [provisions, agreement]
+      - [procedure, step]
 
-  - must_id: "item:B.8.5.6:proc_disclosure_content"
-    description: "Disclosure content (subcontractor identity + countries + international orgs + obligations mechanism)"
+  - must_id: "item:B.8.5.6:proc_countries_always_public"
+    description: "Countries list always public — per §8.5.6 last paragraph, the destination country list is disclosed in all cases"
     excerpt_keywords:
-      - [disclosure, content]
+      - [countries, always, public]
+      - [countries, always]
+      - [always, public]
+      - [always, public, last]
+      - [public, last]
+      - [public, last, paragraph]
+      - [last, paragraph]
+      - [last, paragraph, destination]
 
   - must_id: "item:B.8.5.6:proc_nda_path"
     description: "NDA path — where public disclosure raises security risk, disclosure under NDA + on customer request"
     excerpt_keywords:
       - [nda, path]
+      - [nda, path, public]
+      - [path, public]
+      - [path, public, disclosure]
+      - [public, disclosure]
+      - [public, disclosure, raises]
+      - [disclosure, raises]
+      - [disclosure, raises, security]
+
+  - must_id: "item:B.8.5.6:proc_disclosure_content"
+    description: "Disclosure content (subcontractor identity + countries + international orgs + obligations mechanism)"
+    excerpt_keywords:
+      - [disclosure, content]
+      - [disclosure, content, subcontractor]
+      - [content, subcontractor]
+      - [content, subcontractor, identity]
+      - [subcontractor, identity]
+      - [subcontractor, identity, countries]
+      - [identity, countries]
+      - [identity, countries, international]
 
   - must_id: "item:B.8.5.6:proc_pre_use_disclosure"
     description: "Pre-use disclosure — customer informed before subcontractor onboards"
     excerpt_keywords:
-      - [pre, disclosure]
+      - [pre, use, disclosure]
+      - [pre, use]
+      - [use, disclosure]
+      - [use, disclosure, customer]
+      - [disclosure, customer]
+      - [disclosure, customer, informed]
+      - [customer, informed]
+      - [customer, informed, before]
+

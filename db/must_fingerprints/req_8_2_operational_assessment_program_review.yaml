@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:8.2:operational_assessment_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. ISMS clause 8.2 program review.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:8.2:operational_assessment_program_review"
@@ -8,36 +10,27 @@ target_control: "8.2"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:8.2:rev_cadence_met"
+    description: "Cadence-met check — every scheduled assessment for each tier happened"
+    excerpt_keywords:
+      - [cadence, met, risk]
+
   - must_id: "item:8.2:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [operational, risk, program, review, date]
-      - [operational, risk, reviewed, on]
+      - [review, date, planned, interval, risk]
 
   - must_id: "item:8.2:rev_reviewer"
     description: "Reviewer identity (Risk Manager + ISMS Manager)"
     excerpt_keywords:
-      - [operational, risk, reviewed, by]
-      - [risk, manager, isms, manager, review]
-
-  - must_id: "item:8.2:rev_cadence_met"
-    description: "Cadence-met check"
-    excerpt_keywords:
-      - [operational, risk, cadence, met]
-      - [scheduled, assessment, per, tier, happened]
-      - [risk, assessment, cadence, audit]
-
-  - must_id: "item:8.2:rev_triggers_fired"
-    description: "Trigger-firing sweep"
-    excerpt_keywords:
-      - [significant, change, trigger, fired]
-      - [ad, hoc, assessment, audit]
-      - [trigger, firing, sweep]
+      - [reviewer, identity, risk]
 
   - must_id: "item:8.2:rev_treatment_handoff"
-    description: "Treatment handoff — every new risk found flows to 6.1.3 / 8.3"
+    description: "Treatment handoff — every new risk found flows to 6.1.3 / 8.3 treatment"
     excerpt_keywords:
-      - ["6.1.3"]
-      - ["8.3"]
-      - [new, risk, treatment, handoff]
-      - [risk, assessment, to, treatment, flow]
+      - [treatment, handoff, risk]
+
+  - must_id: "item:8.2:rev_triggers_fired"
+    description: "Trigger-firing sweep — significant changes during the year that should have triggered ad-hoc asse..."
+    excerpt_keywords:
+      - [triggers, fired, risk]

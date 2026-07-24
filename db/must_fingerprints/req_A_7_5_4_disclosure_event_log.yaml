@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.5.4:disclosure_event_log
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.4:disclosure_event_log"
@@ -10,35 +11,70 @@ target_control: "A.7.5.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.5.4:reg_disclosure_id"
-    description: "Unique disclosure identifier per row"
+  - must_id: "item:A.7.5.4:reg_source_of_disclosure"
+    description: "Internal source of disclosure per row (which team / system released the data)"
     excerpt_keywords:
-      - [unique, disclosure, identifier, row]
-
-  - must_id: "item:A.7.5.4:reg_pii_scope"
-    description: "PII scope per row (what was disclosed)"
-    excerpt_keywords:
-      - [pii, scope]
-      - [pii, scope, row]
-
-  - must_id: "item:A.7.5.4:reg_recipient"
-    description: "Recipient identity per row"
-    excerpt_keywords:
-      - [recipient, identity, row]
+      - [source, disclosure]
+      - [internal, source]
+      - [internal, source, disclosure]
+      - [source, disclosure, team]
+      - [disclosure, team]
+      - [disclosure, team, released]
+      - [team, released]
+      - [per, row]
 
   - must_id: "item:A.7.5.4:reg_source_of_authority"
     description: "Source of authority per row (statute / contract / court order / customer instruction)"
     excerpt_keywords:
       - [source, authority]
-      - [source, authority, row]
-
-  - must_id: "item:A.7.5.4:reg_source_of_disclosure"
-    description: "Internal source of disclosure per row (which team / system released the data)"
-    excerpt_keywords:
-      - [source, disclosure]
-      - [internal, source, disclosure, row]
+      - [source, authority, statute]
+      - [authority, statute]
+      - [authority, statute, contract]
+      - [statute, contract]
+      - [statute, contract, court]
+      - [contract, court]
+      - [contract, court, order]
 
   - must_id: "item:A.7.5.4:reg_timestamp"
     description: "Timestamp per row"
     excerpt_keywords:
-      - [timestamp, row]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:A.7.5.4:reg_pii_scope"
+    description: "PII scope per row (what was disclosed)"
+    excerpt_keywords:
+      - [pii, scope]
+      - [pii, scope, disclosed]
+      - [scope, disclosed]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:A.7.5.4:reg_recipient"
+    description: "Recipient identity per row"
+    excerpt_keywords:
+      - [recipient, identity]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:A.7.5.4:reg_disclosure_id"
+    description: "Unique disclosure identifier per row"
+    excerpt_keywords:
+      - [disclosure, id]
+      - [unique, disclosure]
+      - [unique, disclosure, identifier]
+      - [disclosure, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

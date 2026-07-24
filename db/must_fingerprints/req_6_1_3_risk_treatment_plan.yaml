@@ -14,72 +14,69 @@ must_fingerprints:
   - must_id: "item:6.1.3:approval"
     description: "Risk owners' approval of the plan AND acceptance of residual risks recorded"
     excerpt_keywords:
-      - [approval]
-      - [risk]
       - [risk, owners]
       - [risk, owners, approval]
-      - [owners]
       - [owners, approval]
       - [owners, approval, plan]
       - [approval, plan]
+      - [approval, plan, acceptance]
+      - [plan, acceptance]
+      - [plan, acceptance, residual]
 
   - must_id: "item:6.1.3:owners"
     description: "Risk treatment owners identified per treated risk"
     excerpt_keywords:
-      - [owners]
-      - [risk]
       - [risk, treatment]
       - [risk, treatment, owners]
-      - [treatment]
       - [treatment, owners]
       - [treatment, owners, identified]
       - [owners, identified]
+      - [owners, identified, treated]
+      - [identified, treated]
+      - [identified, treated, risk]
 
   - must_id: "item:6.1.3:residual"
     description: "Residual risk identified per treated risk"
     excerpt_keywords:
-      - [residual]
       - [residual, risk]
       - [residual, risk, identified]
-      - [risk]
       - [risk, identified]
       - [risk, identified, treated]
-      - [identified]
       - [identified, treated]
+      - [identified, treated, risk]
+      - [treated, risk]
 
   - must_id: "item:6.1.3:soa_ref"
     description: "Reference to the live Statement of Applicability (the SoA leaf)"
     excerpt_keywords:
       - [soa, ref]
-      - [soa]
-      - [ref]
       - [reference, live]
       - [reference, live, statement]
-      - [live]
       - [live, statement]
       - [live, statement, applicability]
+      - [statement, applicability]
+      - [statement, applicability, soa]
+      - [applicability, soa]
 
   - must_id: "item:6.1.3:controls"
     description: "Controls determined to implement the chosen options"
     excerpt_keywords:
-      - [controls]
       - [controls, determined]
       - [controls, determined, implement]
-      - [determined]
       - [determined, implement]
       - [determined, implement, chosen]
-      - [implement]
       - [implement, chosen]
+      - [implement, chosen, options]
+      - [chosen, options]
 
   - must_id: "item:6.1.3:options"
     description: "Risk treatment options selected for each risk"
     excerpt_keywords:
-      - [options]
-      - [risk]
       - [risk, treatment]
       - [risk, treatment, options]
-      - [treatment]
       - [treatment, options]
       - [treatment, options, selected]
       - [options, selected]
+      - [options, selected, risk]
+      - [selected, risk]
 

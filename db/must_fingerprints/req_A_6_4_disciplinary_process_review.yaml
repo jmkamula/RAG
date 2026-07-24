@@ -14,50 +14,50 @@ must_fingerprints:
   - must_id: "item:A.6.4:rev_register_update"
     description: "Changes propagated to the procedure with reference to this review"
     excerpt_keywords:
-      - [update]
-      - [changes]
       - [changes, propagated]
       - [changes, propagated, reference]
-      - [propagated]
       - [propagated, reference]
       - [propagated, reference, review]
       - [reference, review]
+      - [per, revocation]
+      - [per, revoked, identity]
+      - [revocation, record]
 
   - must_id: "item:A.6.4:rev_lessons_propagated"
     description: "Lessons-propagation check — did case-driven lessons feed back to awareness curriculum (A.6.3), control updates, or policy amendments?"
     excerpt_keywords:
       - [lessons, propagated]
-      - [lessons]
-      - [propagated]
       - [lessons, propagation]
       - [lessons, propagation, check]
-      - [propagation]
       - [propagation, check]
       - [propagation, check, did]
+      - [check, did]
+      - [check, did, case]
+      - [did, case]
 
   - must_id: "item:A.6.4:rev_legal_drift"
     description: "Employment-law drift check per jurisdiction (legal counsel input)"
     excerpt_keywords:
       - [legal, drift]
-      - [legal]
-      - [drift]
-      - [employment]
       - [employment, law]
       - [employment, law, drift]
-      - [law]
       - [law, drift]
+      - [law, drift, check]
+      - [drift, check]
+      - [drift, check, jurisdiction]
+      - [check, jurisdiction]
 
   - must_id: "item:A.6.4:rev_consistency"
     description: "Consistency analysis — case outcomes reviewed for consistent application across cases / demographics (avoids discriminatory enforcement patt"
     excerpt_keywords:
-      - [consistency]
       - [consistency, analysis]
       - [consistency, analysis, case]
-      - [analysis]
       - [analysis, case]
       - [analysis, case, outcomes]
-      - [case]
       - [case, outcomes]
+      - [case, outcomes, reviewed]
+      - [outcomes, reviewed]
+      - [outcomes, reviewed, consistent]
 
   - must_id: "item:A.6.4:rev_reviewer"
     description: "Reviewer identity (HR lead + InfoSec lead + Legal counsel)"
@@ -66,10 +66,10 @@ must_fingerprints:
       - [reviewer, identity, lead]
       - [identity, lead]
       - [identity, lead, infosec]
-      - [lead]
       - [lead, infosec]
       - [lead, infosec, lead]
-      - [infosec]
+      - [infosec, lead]
+      - [infosec, lead, legal]
 
   - must_id: "item:A.6.4:rev_date"
     description: "Review date within the planned interval"
@@ -78,8 +78,8 @@ must_fingerprints:
       - [review, date, within]
       - [date, within]
       - [date, within, planned]
-      - [within]
       - [within, planned]
       - [within, planned, interval]
-      - [planned]
+      - [planned, interval]
+      - [per, revocation]
 

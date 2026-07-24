@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.2:purpose_adherence_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.2:purpose_adherence_register"
@@ -10,31 +11,62 @@ target_control: "B.8.2.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.2.2:reg_binding_controls"
-    description: "Binding controls per row (tenant isolation config / data-tag enforcement / access scoping)"
-    excerpt_keywords:
-      - [binding, controls]
-      - [binding, controls, row]
-
-  - must_id: "item:B.8.2.2:reg_customer_id"
-    description: "Customer identifier per row"
-    excerpt_keywords:
-      - [customer, identifier, row]
-
   - must_id: "item:B.8.2.2:reg_last_verified"
     description: "Last verification date per row"
     excerpt_keywords:
       - [last, verified]
-      - [last, verification, date, row]
+      - [last, verification]
+      - [last, verification, date]
+      - [verification, date]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
 
   - must_id: "item:B.8.2.2:reg_permitted_secondary"
     description: "Permitted secondary uses per row (where customer has authorised anonymised aggregate use)"
     excerpt_keywords:
       - [permitted, secondary]
-      - [permitted, secondary, uses, row]
+      - [permitted, secondary, uses]
+      - [secondary, uses]
+      - [secondary, uses, customer]
+      - [uses, customer]
+      - [uses, customer, has]
+      - [customer, has]
+      - [customer, has, authorised]
+
+  - must_id: "item:B.8.2.2:reg_binding_controls"
+    description: "Binding controls per row (tenant isolation config / data-tag enforcement / access scoping)"
+    excerpt_keywords:
+      - [binding, controls]
+      - [binding, controls, tenant]
+      - [controls, tenant]
+      - [controls, tenant, isolation]
+      - [tenant, isolation]
+      - [tenant, isolation, config]
+      - [isolation, config]
+      - [isolation, config, tag]
 
   - must_id: "item:B.8.2.2:reg_stated_purposes"
     description: "Stated customer purposes per row (from B.8.2.1 agreement)"
     excerpt_keywords:
       - [stated, purposes]
-      - [stated, customer, purposes, row]
+      - [stated, customer]
+      - [stated, customer, purposes]
+      - [customer, purposes]
+      - [customer, purposes, agreement]
+      - [purposes, agreement]
+      - [per, row]
+      - [each, row]
+
+  - must_id: "item:B.8.2.2:reg_customer_id"
+    description: "Customer identifier per row"
+    excerpt_keywords:
+      - [customer, id]
+      - [customer, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+

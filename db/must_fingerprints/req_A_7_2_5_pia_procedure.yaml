@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.5:pia_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.5:pia_procedure"
@@ -13,24 +14,72 @@ must_fingerprints:
   - must_id: "item:A.7.2.5:proc_29134_alignment"
     description: "Alignment with ISO/IEC 29134 methodology (referenced by §7.2.5)"
     excerpt_keywords:
-      - [alignment, iso, iec, methodology]
-
-  - must_id: "item:A.7.2.5:proc_assessment_scope"
-    description: "Assessment scope — PII types + storage + transfers + retention + risks to subjects + safeguards +..."
-    excerpt_keywords:
-      - [assessment, scope]
-
-  - must_id: "item:A.7.2.5:proc_consultation"
-    description: "Stakeholder consultation — DPO opinion (Art.35.2) + subject-representative views where appropriat..."
-    excerpt_keywords:
-      - [stakeholder, consultation]
+      - [29134, alignment]
+      - [alignment, iso]
+      - [alignment, iso, iec]
+      - [iso, iec]
+      - [iso, iec, 29134]
+      - [iec, 29134]
+      - [iec, 29134, methodology]
+      - [29134, methodology]
 
   - must_id: "item:A.7.2.5:proc_prior_consultation"
     description: "Prior-consultation trigger — where residual high risk remains, SA consulted per Art.36"
     excerpt_keywords:
       - [prior, consultation]
+      - [prior, consultation, trigger]
+      - [consultation, trigger]
+      - [consultation, trigger, residual]
+      - [trigger, residual]
+      - [trigger, residual, high]
+      - [residual, high]
+      - [residual, high, risk]
+
+  - must_id: "item:A.7.2.5:proc_signoff"
+    description: "Signoff — DPO signoff + business-owner signoff before processing commences"
+    excerpt_keywords:
+      - [signoff, dpo]
+      - [signoff, dpo, signoff]
+      - [dpo, signoff]
+      - [dpo, signoff, business]
+      - [signoff, business]
+      - [signoff, business, owner]
+      - [business, owner]
+      - [business, owner, signoff]
+
+  - must_id: "item:A.7.2.5:proc_consultation"
+    description: "Stakeholder consultation — DPO opinion (Art.35.2) + subject-representative views where appropriate (Art.35.9)"
+    excerpt_keywords:
+      - [stakeholder, consultation]
+      - [stakeholder, consultation, dpo]
+      - [consultation, dpo]
+      - [consultation, dpo, opinion]
+      - [dpo, opinion]
+      - [dpo, opinion, art]
+      - [opinion, art]
+      - [opinion, art, subject]
+
+  - must_id: "item:A.7.2.5:proc_assessment_scope"
+    description: "Assessment scope — PII types + storage + transfers + retention + risks to subjects + safeguards + residual risk"
+    excerpt_keywords:
+      - [assessment, scope]
+      - [assessment, scope, pii]
+      - [scope, pii]
+      - [scope, pii, types]
+      - [pii, types]
+      - [pii, types, storage]
+      - [types, storage]
+      - [types, storage, transfers]
 
   - must_id: "item:A.7.2.5:proc_trigger_criteria"
-    description: "Trigger criteria — new processing / material changes / high-risk indicators (Art.35.3 mandatory l..."
+    description: "Trigger criteria — new processing / material changes / high-risk indicators (Art.35.3 mandatory list: systematic evaluation + large-scale sp"
     excerpt_keywords:
       - [trigger, criteria]
+      - [trigger, criteria, new]
+      - [criteria, new]
+      - [criteria, new, processing]
+      - [new, processing]
+      - [new, processing, material]
+      - [processing, material]
+      - [processing, material, changes]
+

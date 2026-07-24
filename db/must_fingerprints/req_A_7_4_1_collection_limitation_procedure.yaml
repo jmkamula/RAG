@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.1:collection_limitation_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.1:collection_limitation_procedure"
@@ -10,29 +11,63 @@ target_control: "A.7.4.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.1:proc_default_off"
-    description: "Privacy-by-default — optional collections disabled by default; enabled only by explicit subject c..."
+  - must_id: "item:A.7.4.1:proc_removal_procedure"
+    description: "Field-removal procedure — periodic sweep of collected fields that are no longer necessary"
     excerpt_keywords:
-      - [default, off]
+      - [removal, periodic]
+      - [removal, periodic, sweep]
+      - [periodic, sweep]
+      - [periodic, sweep, collected]
+      - [sweep, collected]
+      - [sweep, collected, fields]
+      - [collected, fields]
+      - [collected, fields, longer]
 
   - must_id: "item:A.7.4.1:proc_field_review"
-    description: "Data-field review — each new field added to a collection form goes through necessity review befor..."
+    description: "Data-field review — each new field added to a collection form goes through necessity review before deploy"
     excerpt_keywords:
-      - [field, review]
+      - [review, new]
+      - [review, new, added]
+      - [new, added]
+      - [new, added, collection]
+      - [added, collection]
+      - [added, collection, form]
+      - [collection, form]
+      - [collection, form, goes]
+
+  - must_id: "item:A.7.4.1:proc_default_off"
+    description: "Privacy-by-default — optional collections disabled by default; enabled only by explicit subject choice"
+    excerpt_keywords:
+      - [default, off]
+      - [privacy, default]
+      - [privacy, default, optional]
+      - [default, optional]
+      - [default, optional, collections]
+      - [optional, collections]
+      - [optional, collections, disabled]
+      - [collections, disabled]
 
   - must_id: "item:A.7.4.1:proc_indirect_collection"
-    description: "Indirect collection scoped (weblogs / cookies / device signals / third-party enrichment) — same n..."
+    description: "Indirect collection scoped (weblogs / cookies / device signals / third-party enrichment) — same necessity test applied"
     excerpt_keywords:
       - [indirect, collection]
       - [indirect, collection, scoped]
+      - [collection, scoped]
+      - [collection, scoped, weblogs]
+      - [scoped, weblogs]
+      - [scoped, weblogs, cookies]
+      - [weblogs, cookies]
+      - [weblogs, cookies, device]
 
   - must_id: "item:A.7.4.1:proc_necessity_test"
     description: "Necessity test per data field — adequate + relevant + necessary for stated purpose"
     excerpt_keywords:
       - [necessity, test]
-      - [necessity, test, data, field]
+      - [necessity, test, adequate]
+      - [test, adequate]
+      - [test, adequate, relevant]
+      - [adequate, relevant]
+      - [adequate, relevant, necessary]
+      - [relevant, necessary]
+      - [relevant, necessary, stated]
 
-  - must_id: "item:A.7.4.1:proc_removal_procedure"
-    description: "Field-removal procedure — periodic sweep of collected fields that are no longer necessary"
-    excerpt_keywords:
-      - [removal, procedure]

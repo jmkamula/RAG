@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.44:applicable_scope
 #
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.44 scope note.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.44:applicable_scope"
@@ -8,23 +10,20 @@ target_control: "Art.44"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.44:scope_transfer_definition"
-    description: "Operational definition of 'transfer' per EDPB 05/2021"
-    excerpt_keywords:
-      - [edpb, 05, 2021]
-      - [transfer, three, cumulative, criteria]
-      - [transfer, operational, definition]
-
   - must_id: "item:Art.44:scope_eu_eea"
-    description: "EU/EEA boundary"
+    description: "EU/EEA boundary — which destinations are within / outside the GDPR territorial scope"
     excerpt_keywords:
-      - [eu, eea, boundary, transfer]
-      - [gdpr, territorial, scope, transfer]
-      - [transfer, within, eu, eea]
+      - [scope, eea, general]
+      - [eea, boundary, general]
 
   - must_id: "item:Art.44:scope_excluded_flows"
-    description: "Excluded flows"
+    description: "Excluded flows (purely-internal within EU/EEA; transit-only; non-personal data)"
     excerpt_keywords:
-      - [transfer, excluded, internal, eu]
-      - [transit, only, transfer, excluded]
-      - [non, personal, data, transfer, excluded]
+      - [scope, excluded, flows, general]
+      - [excluded, flows, general]
+
+  - must_id: "item:Art.44:scope_transfer_definition"
+    description: "Operational definition of 'transfer' per EDPB 05/2021 three cumulative criteria"
+    excerpt_keywords:
+      - [scope, transfer, definition, general]
+      - [operational, definition, transfer, edpb, general]

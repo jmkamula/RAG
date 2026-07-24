@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.8:subcontractor_change_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.8:subcontractor_change_procedure"
@@ -10,28 +11,63 @@ target_control: "B.8.5.8"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.5.8:proc_advance_notification"
-    description: "Advance notification with agreed timeframe (opportunity to object)"
-    excerpt_keywords:
-      - [advance, notification]
-      - [advance, notification, agreed, timeframe]
-
-  - must_id: "item:B.8.5.8:proc_change_trigger"
-    description: "Change trigger — every subcontractor addition or replacement triggers notification workflow"
-    excerpt_keywords:
-      - [change, trigger]
-
-  - must_id: "item:B.8.5.8:proc_general_auth_scope"
-    description: "General-authorisation scope — under what contract clause is this procedure valid (versus specific..."
-    excerpt_keywords:
-      - [general, auth, scope]
-
   - must_id: "item:B.8.5.8:proc_notification_content"
     description: "Notification content (new subcontractor identity + countries + Annex B coverage summary)"
     excerpt_keywords:
       - [notification, content]
+      - [notification, content, new]
+      - [content, new]
+      - [content, new, subcontractor]
+      - [new, subcontractor]
+      - [new, subcontractor, identity]
+      - [subcontractor, identity]
+      - [subcontractor, identity, countries]
+
+  - must_id: "item:B.8.5.8:proc_general_auth_scope"
+    description: "General-authorisation scope — under what contract clause is this procedure valid (versus specific-authorisation cases handled in B.8.5.7)"
+    excerpt_keywords:
+      - [general, auth, scope]
+      - [general, authorisation]
+      - [general, authorisation, scope]
+      - [authorisation, scope]
+      - [authorisation, scope, under]
+      - [scope, under]
+      - [scope, under, contract]
+      - [under, contract]
 
   - must_id: "item:B.8.5.8:proc_objection_handling"
     description: "Objection handling — customer objection triggers negotiation / termination pathway"
     excerpt_keywords:
       - [objection, handling]
+      - [objection, handling, customer]
+      - [handling, customer]
+      - [handling, customer, objection]
+      - [customer, objection]
+      - [customer, objection, triggers]
+      - [objection, triggers]
+      - [objection, triggers, negotiation]
+
+  - must_id: "item:B.8.5.8:proc_advance_notification"
+    description: "Advance notification with agreed timeframe (opportunity to object)"
+    excerpt_keywords:
+      - [advance, notification]
+      - [advance, notification, agreed]
+      - [notification, agreed]
+      - [notification, agreed, timeframe]
+      - [agreed, timeframe]
+      - [agreed, timeframe, opportunity]
+      - [timeframe, opportunity]
+      - [timeframe, opportunity, object]
+
+  - must_id: "item:B.8.5.8:proc_change_trigger"
+    description: "Change trigger — every subcontractor addition or replacement triggers notification workflow"
+    excerpt_keywords:
+      - [change, trigger]
+      - [change, trigger, every]
+      - [trigger, every]
+      - [trigger, every, subcontractor]
+      - [every, subcontractor]
+      - [every, subcontractor, addition]
+      - [subcontractor, addition]
+      - [subcontractor, addition, replacement]
+

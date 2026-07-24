@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.1:transfer_basis_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.1:transfer_basis_procedure"
@@ -10,29 +11,63 @@ target_control: "B.8.5.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
+  - must_id: "item:B.8.5.1:proc_international_agreements"
+    description: "International-transfer agreement types identified (Model Contract Clauses / BCRs / CBPRs) per relevant country pair"
+    excerpt_keywords:
+      - [international, agreements]
+      - [international, transfer]
+      - [international, transfer, agreement]
+      - [transfer, agreement]
+      - [transfer, agreement, types]
+      - [agreement, types]
+      - [agreement, types, identified]
+      - [types, identified]
+
+  - must_id: "item:B.8.5.1:proc_carve_out_limits"
+    description: "Carve-out limits — where contract permits changes without notification (e.g"
+    excerpt_keywords:
+      - [carve, out, limits]
+      - [carve, out]
+      - [out, limits]
+      - [out, limits, contract]
+      - [limits, contract]
+      - [limits, contract, permits]
+      - [contract, permits]
+      - [contract, permits, changes]
+
   - must_id: "item:B.8.5.1:proc_advance_notification"
     description: "Advance notification of changes with agreed timeframe (customer can object / terminate)"
     excerpt_keywords:
       - [advance, notification]
-      - [advance, notification, changes, agreed]
+      - [advance, notification, changes]
+      - [notification, changes]
+      - [notification, changes, agreed]
+      - [changes, agreed]
+      - [changes, agreed, timeframe]
+      - [agreed, timeframe]
+      - [agreed, timeframe, customer]
+
+  - must_id: "item:B.8.5.1:proc_customer_information"
+    description: "Customer information — transfer arrangements (suppliers, other parties, other countries) disclosed"
+    excerpt_keywords:
+      - [customer, transfer]
+      - [customer, transfer, arrangements]
+      - [transfer, arrangements]
+      - [transfer, arrangements, suppliers]
+      - [arrangements, suppliers]
+      - [arrangements, suppliers, other]
+      - [suppliers, other]
+      - [suppliers, other, parties]
 
   - must_id: "item:B.8.5.1:proc_basis_documentation"
     description: "Compliance basis documented per transfer relationship (SCC / BCR / CBPR / adequacy)"
     excerpt_keywords:
       - [basis, documentation]
-      - [compliance, basis, documented, transfer]
+      - [compliance, basis]
+      - [compliance, basis, documented]
+      - [basis, documented]
+      - [basis, documented, transfer]
+      - [documented, transfer]
+      - [documented, transfer, relationship]
+      - [transfer, relationship]
 
-  - must_id: "item:B.8.5.1:proc_carve_out_limits"
-    description: "Carve-out limits — where contract permits changes without notification (e.g. supplier swaps withi..."
-    excerpt_keywords:
-      - [carve, out, limits]
-
-  - must_id: "item:B.8.5.1:proc_customer_information"
-    description: "Customer information — transfer arrangements (suppliers, other parties, other countries) disclosed"
-    excerpt_keywords:
-      - [customer, information]
-
-  - must_id: "item:B.8.5.1:proc_international_agreements"
-    description: "International-transfer agreement types identified (Model Contract Clauses / BCRs / CBPRs) per rel..."
-    excerpt_keywords:
-      - [international, agreements]

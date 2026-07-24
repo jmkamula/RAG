@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.6:temp_files_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.6:temp_files_procedure"
@@ -10,24 +11,51 @@ target_control: "A.7.4.6"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.6:proc_disposal_period"
-    description: "Disposal period stated per taxonomy category"
+  - must_id: "item:A.7.4.6:proc_periodic_check"
+    description: "Periodic check that unused temp files are deleted within the identified period"
     excerpt_keywords:
-      - [disposal, period]
-      - [disposal, period, stated, taxonomy]
+      - [periodic, check]
+      - [periodic, check, unused]
+      - [check, unused]
+      - [check, unused, temp]
+      - [unused, temp]
+      - [unused, temp, files]
+      - [temp, files]
+      - [temp, files, deleted]
 
   - must_id: "item:A.7.4.6:proc_garbage_collection"
     description: "Garbage-collection procedure — identifies unused temp files + last-use timestamp"
     excerpt_keywords:
       - [garbage, collection]
+      - [garbage, collection, identifies]
+      - [collection, identifies]
+      - [collection, identifies, unused]
+      - [identifies, unused]
+      - [identifies, unused, temp]
+      - [unused, temp]
+      - [unused, temp, files]
 
-  - must_id: "item:A.7.4.6:proc_periodic_check"
-    description: "Periodic check that unused temp files are deleted within the identified period"
+  - must_id: "item:A.7.4.6:proc_disposal_period"
+    description: "Disposal period stated per taxonomy category"
     excerpt_keywords:
-      - [periodic, check]
-      - [periodic, check, unused, temp]
+      - [disposal, period]
+      - [disposal, period, stated]
+      - [period, stated]
+      - [period, stated, taxonomy]
+      - [stated, taxonomy]
+      - [stated, taxonomy, category]
+      - [taxonomy, category]
+      - [procedure, step]
 
   - must_id: "item:A.7.4.6:proc_temp_file_taxonomy"
-    description: "Temp file taxonomy (application temp / file-system journal / database roll-back / cache / in-memo..."
+    description: "Temp file taxonomy (application temp / file-system journal / database roll-back / cache / in-memory dump)"
     excerpt_keywords:
       - [temp, file, taxonomy]
+      - [temp, file]
+      - [file, taxonomy]
+      - [file, taxonomy, application]
+      - [taxonomy, application]
+      - [taxonomy, application, temp]
+      - [application, temp]
+      - [application, temp, file]
+

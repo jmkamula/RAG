@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.33:breach_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.33 program review.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.33:breach_program_review"
@@ -8,36 +10,28 @@ target_control: "Art.33"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
+  - must_id: "item:Art.33:rev_72h_compliance"
+    description: "72h-compliance audit — every required notification met the SLA (or had documented Art.33.1 delay ..."
+    excerpt_keywords:
+      - [72h, compliance, notification]
+
   - must_id: "item:Art.33:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [art, 33, program, review, date]
-      - [art, 33, reviewed, on]
+      - [review, date, planned, interval, notification]
+
+  - must_id: "item:Art.33:rev_exercise_link"
+    description: "A.5.24 exercise integration — Art.33 procedure exercised within the year (table-top or live)"
+    excerpt_keywords:
+      - [exercise, link, notification]
+      - [exercise, integration, notification]
 
   - must_id: "item:Art.33:rev_reviewer"
     description: "Reviewer identity (DPO + legal + incident-response lead)"
     excerpt_keywords:
-      - [art, 33, reviewed, by, dpo]
-      - [art, 33, legal, lead, review]
-      - [art, 33, ir, lead, review]
-
-  - must_id: "item:Art.33:rev_72h_compliance"
-    description: "72h-compliance audit"
-    excerpt_keywords:
-      - [72, hour, compliance, audit]
-      - [art, 33, sla, met, audit]
-      - [art, 33, 1, delay, reason, audit]
+      - [reviewer, identity, notification]
 
   - must_id: "item:Art.33:rev_severity_audit"
-    description: "Severity-gate audit"
+    description: "Severity-gate audit — sampled 'no-notify' decisions reviewed for defensibility against Art.33.1 r..."
     excerpt_keywords:
-      - [art, 33, severity, gate, audit]
-      - [no, notify, decision, defensibility]
-      - [art, 33, 1, risk, threshold, audit]
-
-  - must_id: "item:Art.33:rev_exercise_link"
-    description: "A.5.24 exercise integration"
-    excerpt_keywords:
-      - ["A.5.24"]
-      - [art, 33, exercise, integration]
-      - [art, 33, tabletop, exercise]
+      - [severity, audit, notification]

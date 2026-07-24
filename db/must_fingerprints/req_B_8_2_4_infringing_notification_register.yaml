@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.4:infringing_notification_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.4:infringing_notification_register"
@@ -10,36 +11,74 @@ target_control: "B.8.2.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.2.4:reg_customer_id"
-    description: "Customer identifier per row"
-    excerpt_keywords:
-      - [customer, identifier, row]
-
   - must_id: "item:B.8.2.4:reg_customer_response"
     description: "Customer response per row (withdrew / defended / disputed / no response)"
     excerpt_keywords:
       - [customer, response]
-      - [customer, response, row]
-
-  - must_id: "item:B.8.2.4:reg_instruction_summary"
-    description: "Instruction summary per row (what the customer asked for)"
-    excerpt_keywords:
-      - [instruction, summary]
-      - [instruction, summary, row]
-
-  - must_id: "item:B.8.2.4:reg_legislation_cited"
-    description: "Legislation cited per row (which provision the instruction appears to infringe)"
-    excerpt_keywords:
-      - [legislation, cited]
-      - [legislation, cited, row]
+      - [customer, response, withdrew]
+      - [response, withdrew]
+      - [response, withdrew, defended]
+      - [withdrew, defended]
+      - [withdrew, defended, disputed]
+      - [defended, disputed]
+      - [defended, disputed, response]
 
   - must_id: "item:B.8.2.4:reg_notification_date"
     description: "Notification issued date per row"
     excerpt_keywords:
       - [notification, date]
-      - [notification, issued, date, row]
+      - [notification, issued]
+      - [notification, issued, date]
+      - [issued, date]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+
+  - must_id: "item:B.8.2.4:reg_legislation_cited"
+    description: "Legislation cited per row (which provision the instruction appears to infringe)"
+    excerpt_keywords:
+      - [legislation, cited]
+      - [legislation, cited, provision]
+      - [cited, provision]
+      - [cited, provision, instruction]
+      - [provision, instruction]
+      - [provision, instruction, appears]
+      - [instruction, appears]
+      - [instruction, appears, infringe]
+
+  - must_id: "item:B.8.2.4:reg_instruction_summary"
+    description: "Instruction summary per row (what the customer asked for)"
+    excerpt_keywords:
+      - [instruction, summary]
+      - [instruction, summary, customer]
+      - [summary, customer]
+      - [summary, customer, asked]
+      - [customer, asked]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+
+  - must_id: "item:B.8.2.4:reg_customer_id"
+    description: "Customer identifier per row"
+    excerpt_keywords:
+      - [customer, id]
+      - [customer, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:B.8.2.4:reg_notification_id"
     description: "Unique notification identifier per row"
     excerpt_keywords:
-      - [unique, notification, identifier, row]
+      - [notification, id]
+      - [unique, notification]
+      - [unique, notification, identifier]
+      - [notification, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

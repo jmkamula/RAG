@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.2.6:processor_ropa_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.2.6:processor_ropa_register"
@@ -10,37 +11,74 @@ target_control: "B.8.2.6"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.2.6:ropa_customer_id"
-    description: "Customer identifier per row (each controller the org processes for)"
-    excerpt_keywords:
-      - [ropa, customer]
-      - [customer, identifier, row]
-
-  - must_id: "item:B.8.2.6:ropa_processing_categories"
-    description: "Categories of processing carried out per customer per row (Art.30.2.b)"
-    excerpt_keywords:
-      - [ropa, processing, categories]
-      - [categories, processing, carried, out]
-
   - must_id: "item:B.8.2.6:ropa_processor_dpo"
     description: "Processor DPO / representative contact if applicable (Art.30.2.a)"
     excerpt_keywords:
       - [ropa, processor, dpo]
-      - [processor, dpo, representative, contact]
+      - [processor, dpo]
+      - [processor, dpo, representative]
+      - [dpo, representative]
+      - [dpo, representative, contact]
+      - [representative, contact]
+      - [representative, contact, art]
+      - [contact, art]
+
+  - must_id: "item:B.8.2.6:ropa_subprocessor_list"
+    description: "Subprocessor list per row (Art.30.2 + Art.28.2)"
+    excerpt_keywords:
+      - [ropa, subprocessor]
+      - [subprocessor, art]
+      - [subprocessor, art, art]
+      - [art, art]
+      - [per, row]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:B.8.2.6:ropa_security_measures"
     description: "General description of technical + organizational measures per row (Art.30.2.d)"
     excerpt_keywords:
       - [ropa, security, measures]
-      - [general, description, technical, organizational]
-
-  - must_id: "item:B.8.2.6:ropa_subprocessor_list"
-    description: "Subprocessor list per row (Art.30.2 + Art.28.2)"
-    excerpt_keywords:
-      - [ropa, subprocessor, list]
-      - [subprocessor, list, row]
+      - [general, description]
+      - [general, description, technical]
+      - [description, technical]
+      - [description, technical, organizational]
+      - [technical, organizational]
+      - [technical, organizational, measures]
+      - [organizational, measures]
 
   - must_id: "item:B.8.2.6:ropa_transfers"
     description: "Third-country / international-org transfers per row (Art.30.2.c) with cited safeguards"
     excerpt_keywords:
       - [ropa, transfers]
+      - [third, country]
+      - [third, country, international]
+      - [country, international]
+      - [country, international, org]
+      - [international, org]
+      - [international, org, transfers]
+      - [org, transfers]
+
+  - must_id: "item:B.8.2.6:ropa_processing_categories"
+    description: "Categories of processing carried out per customer per row (Art.30.2.b)"
+    excerpt_keywords:
+      - [ropa, processing, categories]
+      - [categories, processing]
+      - [categories, processing, carried]
+      - [processing, carried]
+      - [processing, carried, out]
+      - [carried, out]
+      - [carried, out, customer]
+      - [out, customer]
+
+  - must_id: "item:B.8.2.6:ropa_customer_id"
+    description: "Customer identifier per row (each controller the org processes for)"
+    excerpt_keywords:
+      - [ropa, customer, id]
+      - [customer, identifier]
+      - [customer, identifier, controller]
+      - [identifier, controller]
+      - [identifier, controller, org]
+      - [controller, org]
+      - [controller, org, processes]
+      - [org, processes]
+

@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.4:minimization_technique_inventory
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.4:minimization_technique_inventory"
@@ -10,22 +11,51 @@ target_control: "A.7.4.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.4:reg_activity_id"
-    description: "Processing activity identifier per row"
-    excerpt_keywords:
-      - [processing, activity, identifier, row]
-
   - must_id: "item:A.7.4.4:reg_implementation"
     description: "Implementation reference per row (code repo / config file / infrastructure component)"
     excerpt_keywords:
-      - [implementation, reference, row]
-
-  - must_id: "item:A.7.4.4:reg_objective"
-    description: "Minimization objective per row (target identifiability level — identified / pseudonymised / anony..."
-    excerpt_keywords:
-      - [minimization, objective, row]
+      - [implementation, reference]
+      - [implementation, reference, code]
+      - [reference, code]
+      - [reference, code, repo]
+      - [code, repo]
+      - [code, repo, config]
+      - [repo, config]
+      - [repo, config, file]
 
   - must_id: "item:A.7.4.4:reg_technique"
-    description: "Technique per row (masking / generalisation / suppression / noise addition / k-anonymity / differ..."
+    description: "Technique per row (masking / generalisation / suppression / noise addition / k-anonymity / differential privacy / etc.)"
     excerpt_keywords:
-      - [technique, row]
+      - [technique, masking]
+      - [technique, masking, generalisation]
+      - [masking, generalisation]
+      - [masking, generalisation, suppression]
+      - [generalisation, suppression]
+      - [generalisation, suppression, noise]
+      - [suppression, noise]
+      - [suppression, noise, addition]
+
+  - must_id: "item:A.7.4.4:reg_objective"
+    description: "Minimization objective per row (target identifiability level — identified / pseudonymised / anonymised)"
+    excerpt_keywords:
+      - [minimization, objective]
+      - [minimization, objective, target]
+      - [objective, target]
+      - [objective, target, identifiability]
+      - [target, identifiability]
+      - [target, identifiability, level]
+      - [identifiability, level]
+      - [identifiability, level, identified]
+
+  - must_id: "item:A.7.4.4:reg_activity_id"
+    description: "Processing activity identifier per row"
+    excerpt_keywords:
+      - [activity, id]
+      - [processing, activity]
+      - [processing, activity, identifier]
+      - [activity, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

@@ -14,50 +14,50 @@ must_fingerprints:
   - must_id: "item:A.6.6:rev_register_update"
     description: "Changes propagated to the live template and to the signer-re-signing plan"
     excerpt_keywords:
-      - [update]
-      - [changes]
       - [changes, propagated]
       - [changes, propagated, live]
-      - [propagated]
       - [propagated, live]
       - [propagated, live, template]
-      - [live]
+      - [live, template]
+      - [live, template, signer]
+      - [template, signer]
+      - [template, signer, signing]
 
   - must_id: "item:A.6.6:rev_signer_currency"
     description: "Signer-currency analysis (% on current template version; plan for re-signing the gap where material clauses changed)"
     excerpt_keywords:
       - [signer, currency]
-      - [signer]
-      - [currency]
       - [signer, currency, analysis]
       - [currency, analysis]
       - [currency, analysis, current]
-      - [analysis]
       - [analysis, current]
+      - [analysis, current, template]
+      - [current, template]
+      - [current, template, version]
 
   - must_id: "item:A.6.6:rev_enforceability"
     description: "Enforceability check per jurisdiction (legal counsel input — case-law shifts, Schrems-style impacts on cross-border data flows in NDA scope)"
     excerpt_keywords:
-      - [enforceability]
       - [enforceability, check]
       - [enforceability, check, jurisdiction]
-      - [check]
       - [check, jurisdiction]
       - [check, jurisdiction, legal]
-      - [jurisdiction]
       - [jurisdiction, legal]
+      - [jurisdiction, legal, counsel]
+      - [legal, counsel]
+      - [legal, counsel, input]
 
   - must_id: "item:A.6.6:rev_classification_drift"
     description: "Information-classification drift check — has A.5.12 classification scheme changed in ways affecting NDA info_classes?"
     excerpt_keywords:
       - [classification, drift]
-      - [classification]
-      - [drift]
       - [classification, drift, check]
       - [drift, check]
       - [drift, check, has]
-      - [check]
       - [check, has]
+      - [check, has, classification]
+      - [has, classification]
+      - [has, classification, scheme]
 
   - must_id: "item:A.6.6:rev_reviewer"
     description: "Reviewer identity (Legal counsel + InfoSec lead jointly)"
@@ -66,10 +66,10 @@ must_fingerprints:
       - [reviewer, identity, legal]
       - [identity, legal]
       - [identity, legal, counsel]
-      - [legal]
       - [legal, counsel]
       - [legal, counsel, infosec]
-      - [counsel]
+      - [counsel, infosec]
+      - [counsel, infosec, lead]
 
   - must_id: "item:A.6.6:rev_date"
     description: "Review date within the planned interval"
@@ -78,8 +78,8 @@ must_fingerprints:
       - [review, date, within]
       - [date, within]
       - [date, within, planned]
-      - [within]
       - [within, planned]
       - [within, planned, interval]
-      - [planned]
+      - [planned, interval]
+      - [per, revocation]
 

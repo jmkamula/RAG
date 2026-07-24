@@ -15,71 +15,71 @@ must_fingerprints:
     description: "Per-row status (active / expired-with-surviving-obligations / superseded-by-new-version)"
     excerpt_keywords:
       - [expiry, active]
-      - [expiry]
       - [status, active]
       - [status, active, expired]
       - [active, expired]
       - [active, expired, surviving]
       - [expired, surviving]
       - [expired, surviving, obligations]
+      - [surviving, obligations]
 
   - must_id: "item:A.6.6:reg_signature_method"
     description: "Per-row signature method (wet / e-signature platform reference — ensures non-repudiation)"
     excerpt_keywords:
       - [signature, method]
-      - [signature]
-      - [method]
       - [signature, method, wet]
       - [method, wet]
       - [method, wet, signature]
-      - [wet]
       - [wet, signature]
+      - [wet, signature, platform]
+      - [signature, platform]
+      - [signature, platform, reference]
 
   - must_id: "item:A.6.6:reg_signature_date"
     description: "Per-row signature date (proves signing happened BEFORE access granted per A.5.18)"
     excerpt_keywords:
       - [signature, date]
-      - [signature]
       - [signature, date, proves]
       - [date, proves]
       - [date, proves, signing]
-      - [proves]
       - [proves, signing]
       - [proves, signing, happened]
+      - [signing, happened]
+      - [signing, happened, before]
 
   - must_id: "item:A.6.6:reg_template_version"
     description: "Per-row template version (drives currency check — old-version signers may need re-signing on material template changes)"
     excerpt_keywords:
       - [template, version]
-      - [template]
-      - [version]
       - [template, version, currency]
       - [version, currency]
       - [version, currency, check]
-      - [currency]
       - [currency, check]
+      - [currency, check, old]
+      - [check, old]
+      - [check, old, version]
 
   - must_id: "item:A.6.6:reg_variant"
     description: "Per-row NDA variant (employee / contractor / supplier-bilateral / M&A / visitor — matches the template variant_tiers SHOULD)"
     excerpt_keywords:
-      - [variant]
-      - [nda]
       - [nda, variant]
       - [nda, variant, employee]
       - [variant, employee]
       - [variant, employee, contractor]
-      - [employee]
       - [employee, contractor]
+      - [employee, contractor, supplier]
+      - [contractor, supplier]
+      - [contractor, supplier, bilateral]
 
   - must_id: "item:A.6.6:reg_signatory_id"
     description: "Per-row signatory identifier (links to identity register A.5.16 for employees; supplier register A.5.19 for contractors; visitor-log for vis"
     excerpt_keywords:
       - [signatory, id]
-      - [signatory]
       - [signatory, identifier]
       - [signatory, identifier, identity]
-      - [identifier]
       - [identifier, identity]
       - [identifier, identity, employees]
       - [identity, employees]
+      - [identity, employees, supplier]
+      - [employees, supplier]
 

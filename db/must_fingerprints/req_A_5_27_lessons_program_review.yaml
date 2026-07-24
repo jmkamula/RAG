@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.5.27:lessons_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. Lessons program audit cycle.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.27:lessons_program_review"
@@ -8,44 +10,27 @@ target_control: "A.5.27"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:A.5.27:rev_actions"
+    description: "Action items captured for the program (e.g. tighten root-cause typing, expand pattern scope)"
+    excerpt_keywords:
+      - [action, items, captured, program, learning]
+
+  - must_id: "item:A.5.27:rev_closure_rate"
+    description: "Action-closure rate analysed (open / aged / closed) against targets"
+    excerpt_keywords:
+      - [closure, rate, learning]
+
   - must_id: "item:A.5.27:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [lessons, program, review, date]
-      - [lessons, reviewed, on]
-      - [lessons, program, audit, date]
+      - [review, date, planned, interval, learning]
 
   - must_id: "item:A.5.27:rev_reviewer"
-    description: "Reviewer identity (program owner + InfoSec lead)"
+    description: "Reviewer identity (program owner + InfoSec lead jointly)"
     excerpt_keywords:
-      - [lessons, program, reviewed, by]
-      - [lessons, program, owner, review]
-      - [infosec, lead, lessons, review]
-
-  - must_id: "item:A.5.27:rev_closure_rate"
-    description: "Action-closure rate analysed"
-    excerpt_keywords:
-      - [lessons, closure, rate]
-      - [lessons, aged, action]
-      - [lessons, action, open, count]
-
-  - must_id: "item:A.5.27:rev_repeat"
-    description: "Repeat-incident analysis"
-    excerpt_keywords:
-      - [repeat, incident, analysis]
-      - [lesson, prevented, later, incident]
-      - [recurring, incident, lessons]
+      - [reviewer, identity, learning]
 
   - must_id: "item:A.5.27:rev_training_impact"
     description: "Training-impact evidence reviewed where lessons drove curriculum changes"
     excerpt_keywords:
-      - [training, impact, lesson]
-      - [lesson, curriculum, change]
-      - [training, evidence, post, lesson]
-
-  - must_id: "item:A.5.27:rev_actions"
-    description: "Action items captured for the program"
-    excerpt_keywords:
-      - [lessons, program, action, items]
-      - [tighten, root, cause, typing]
-      - [expand, pattern, scope, lesson]
+      - [training, impact, learning]

@@ -14,48 +14,48 @@ must_fingerprints:
   - must_id: "item:A.6.8:scope_jurisdictions"
     description: "Jurisdictions covered (whistleblower-protection law variations — EU Whistleblower Directive, US Sarbanes-Oxley, sectoral protections)"
     excerpt_keywords:
-      - [jurisdictions]
       - [jurisdictions, covered]
       - [jurisdictions, covered, whistleblower]
-      - [covered]
       - [covered, whistleblower]
       - [covered, whistleblower, protection]
-      - [whistleblower]
       - [whistleblower, protection]
+      - [whistleblower, protection, law]
+      - [protection, law]
+      - [protection, law, variations]
 
   - must_id: "item:A.6.8:scope_sensitive_paths"
     description: "Sensitive-case escalation paths stated (insider-threat suspicion → InfoSec-only intake bypassing line management; whistleblower-territory → "
     excerpt_keywords:
       - [sensitive, paths]
-      - [sensitive]
-      - [paths]
       - [sensitive, case]
       - [sensitive, case, escalation]
-      - [case]
       - [case, escalation]
       - [case, escalation, paths]
+      - [escalation, paths]
+      - [escalation, paths, stated]
+      - [paths, stated]
 
   - must_id: "item:A.6.8:scope_channel_surfacing"
     description: "Channel-surfacing per segment (employees see it in onboarding training + intranet; contractors see it at onboarding briefing; visitors see i"
     excerpt_keywords:
       - [channel, surfacing]
-      - [channel]
-      - [surfacing]
       - [channel, surfacing, segment]
       - [surfacing, segment]
       - [surfacing, segment, employees]
-      - [segment]
       - [segment, employees]
+      - [segment, employees, see]
+      - [employees, see]
+      - [employees, see, onboarding]
 
   - must_id: "item:A.6.8:scope_audience_segments"
     description: "Audience segments enumerated (employees, contractors, suppliers' staff with access, visitors, customers in some sectors — anyone who might o"
     excerpt_keywords:
       - [audience, segments]
-      - [audience]
-      - [segments]
       - [audience, segments, enumerated]
       - [segments, enumerated]
       - [segments, enumerated, employees]
-      - [enumerated]
       - [enumerated, employees]
+      - [enumerated, employees, contractors]
+      - [employees, contractors]
+      - [employees, contractors, suppliers]
 

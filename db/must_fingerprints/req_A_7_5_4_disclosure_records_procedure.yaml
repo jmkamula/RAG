@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.5.4:disclosure_records_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.5.4:disclosure_records_procedure"
@@ -10,28 +11,58 @@ target_control: "A.7.5.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.5.4:proc_authority_source"
-    description: "Source-of-authority recording per row (contract / law / court order / regulator request)"
+  - must_id: "item:A.7.5.4:proc_retention_link"
+    description: "Retention link to A.7.4.7"
     excerpt_keywords:
-      - [authority, source]
+      - [procedure, step]
+      - [process, step]
+      - [responsibility, of]
 
   - must_id: "item:A.7.5.4:proc_intake_gate"
     description: "Intake gate — disclosures gated on documented request record before release"
     excerpt_keywords:
       - [intake, gate]
+      - [intake, gate, disclosures]
+      - [gate, disclosures]
+      - [gate, disclosures, gated]
+      - [disclosures, gated]
+      - [disclosures, gated, documented]
+      - [gated, documented]
+      - [gated, documented, request]
+
+  - must_id: "item:A.7.5.4:proc_authority_source"
+    description: "Source-of-authority recording per row (contract / law / court order / regulator request)"
+    excerpt_keywords:
+      - [authority, source]
+      - [source, authority]
+      - [source, authority, recording]
+      - [authority, recording]
+      - [authority, recording, contract]
+      - [recording, contract]
+      - [recording, contract, law]
+      - [contract, law]
 
   - must_id: "item:A.7.5.4:proc_investigation_disclosures"
-    description: "Investigation / audit disclosures — one-off recording of lawful investigation + external audit di..."
+    description: "Investigation / audit disclosures — one-off recording of lawful investigation + external audit disclosures"
     excerpt_keywords:
       - [investigation, disclosures]
+      - [investigation, audit]
       - [investigation, audit, disclosures]
+      - [audit, disclosures]
+      - [audit, disclosures, one]
+      - [disclosures, one]
+      - [disclosures, one, off]
+      - [one, off]
 
   - must_id: "item:A.7.5.4:proc_normal_disclosures"
     description: "Normal-course disclosures — recurring disclosures documented per relationship"
     excerpt_keywords:
       - [normal, disclosures]
+      - [normal, course]
+      - [normal, course, disclosures]
+      - [course, disclosures]
+      - [course, disclosures, recurring]
+      - [disclosures, recurring]
+      - [disclosures, recurring, disclosures]
+      - [recurring, disclosures]
 
-  - must_id: "item:A.7.5.4:proc_retention_link"
-    description: "Retention link to A.7.4.7"
-    excerpt_keywords:
-      - [retention, link]

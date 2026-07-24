@@ -14,48 +14,48 @@ must_fingerprints:
   - must_id: "item:A.6.6:scope_jurisdictions"
     description: "Jurisdictions covered (where signatories sign / where info is protected — drives governing-law clause and enforceability)"
     excerpt_keywords:
-      - [jurisdictions]
       - [jurisdictions, covered]
       - [jurisdictions, covered, signatories]
-      - [covered]
       - [covered, signatories]
       - [covered, signatories, sign]
-      - [signatories]
       - [signatories, sign]
+      - [signatories, sign, info]
+      - [sign, info]
+      - [sign, info, protected]
 
   - must_id: "item:A.6.6:scope_variant_mapping"
     description: "Party-to-variant mapping (employees → light employee NDA; contractors → contractor NDA; suppliers → bilateral; M&A → heavy)"
     excerpt_keywords:
       - [variant, mapping]
-      - [variant]
-      - [mapping]
-      - [party]
       - [party, variant]
       - [party, variant, mapping]
       - [variant, mapping, employees]
       - [mapping, employees]
+      - [mapping, employees, light]
+      - [employees, light]
+      - [employees, light, employee]
 
   - must_id: "item:A.6.6:scope_trigger_threshold"
     description: "Trigger threshold per category (which info-class triggers NDA — typically access to confidential class and above; some orgs all-access)"
     excerpt_keywords:
       - [trigger, threshold]
-      - [threshold]
       - [trigger, threshold, category]
       - [threshold, category]
       - [threshold, category, info]
-      - [category]
       - [category, info]
       - [category, info, class]
+      - [info, class]
+      - [info, class, triggers]
 
   - must_id: "item:A.6.6:scope_party_categories"
     description: "Party categories enumerated (employees, contractors, suppliers, visitors, M&A counterparties, partners with joint-development)"
     excerpt_keywords:
       - [party, categories]
-      - [party]
-      - [categories]
       - [party, categories, enumerated]
       - [categories, enumerated]
       - [categories, enumerated, employees]
-      - [enumerated]
       - [enumerated, employees]
+      - [enumerated, employees, contractors]
+      - [employees, contractors]
+      - [employees, contractors, suppliers]
 

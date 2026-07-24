@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.2:notice_content_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.2:notice_content_procedure"
@@ -10,27 +11,63 @@ target_control: "A.7.3.2"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.2:proc_field_catalog"
-    description: "Field catalog — every information item that must be provided (purposes + controller identity + ba..."
-    excerpt_keywords:
-      - [field, catalog]
-
-  - must_id: "item:A.7.3.2:proc_medium_selection"
-    description: "Medium selection — which channels (privacy notice URL, layered notices, in-product prompts, contr..."
-    excerpt_keywords:
-      - [medium, selection]
-
   - must_id: "item:A.7.3.2:proc_signoff"
     description: "DPO + Legal signoff for notice text changes before deploy"
     excerpt_keywords:
-      - [dpo, legal, signoff, notice]
-
-  - must_id: "item:A.7.3.2:proc_timing_rules"
-    description: "Timing rules — when information is provided (prior to processing / at collection / within X days ..."
-    excerpt_keywords:
-      - [timing, rules]
+      - [dpo, legal]
+      - [dpo, legal, signoff]
+      - [legal, signoff]
+      - [legal, signoff, notice]
+      - [signoff, notice]
+      - [signoff, notice, text]
+      - [notice, text]
+      - [notice, text, changes]
 
   - must_id: "item:A.7.3.2:proc_update_on_change"
     description: "Update-on-change — purpose changes / new processing trigger a notice update within stated SLA"
     excerpt_keywords:
       - [update, change]
+      - [update, change, purpose]
+      - [change, purpose]
+      - [change, purpose, changes]
+      - [purpose, changes]
+      - [purpose, changes, new]
+      - [changes, new]
+      - [changes, new, processing]
+
+  - must_id: "item:A.7.3.2:proc_medium_selection"
+    description: "Medium selection — which channels (privacy notice URL, layered notices, in-product prompts, contract clauses)"
+    excerpt_keywords:
+      - [medium, selection]
+      - [medium, selection, channels]
+      - [selection, channels]
+      - [selection, channels, privacy]
+      - [channels, privacy]
+      - [channels, privacy, notice]
+      - [privacy, notice]
+      - [privacy, notice, url]
+
+  - must_id: "item:A.7.3.2:proc_timing_rules"
+    description: "Timing rules — when information is provided (prior to processing / at collection / within X days of request / just-in-time / periodic freque"
+    excerpt_keywords:
+      - [timing, rules]
+      - [timing, rules, provided]
+      - [rules, provided]
+      - [rules, provided, prior]
+      - [provided, prior]
+      - [provided, prior, processing]
+      - [prior, processing]
+      - [prior, processing, collection]
+
+  - must_id: "item:A.7.3.2:proc_field_catalog"
+    description: "Field catalog — every information item that must be provided (purposes + controller identity + basis + source + statutory/contractual + righ"
+    excerpt_keywords:
+      - [catalog, every]
+      - [catalog, every, provided]
+      - [every, provided]
+      - [every, provided, purposes]
+      - [provided, purposes]
+      - [provided, purposes, controller]
+      - [purposes, controller]
+      - [purposes, controller, identity]
+

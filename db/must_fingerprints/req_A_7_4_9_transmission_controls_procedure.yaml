@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.4.9:transmission_controls_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.4.9:transmission_controls_procedure"
@@ -10,24 +11,63 @@ target_control: "A.7.4.9"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.4.9:proc_audit_logs"
-    description: "Audit log retention for every transmission (who + what + when + where)"
+  - must_id: "item:A.7.4.9:proc_recipient_verification"
+    description: "Recipient verification — PII reaches intended destination + not intercepted"
     excerpt_keywords:
-      - [audit, logs]
-      - [audit, log, retention, transmission]
-
-  - must_id: "item:A.7.4.9:proc_authz_channels"
-    description: "Authorised transmission channels defined (secure protocols + endpoints + auth requirements)"
-    excerpt_keywords:
-      - [authz, channels]
-      - [authorised, transmission, channels, defined]
+      - [recipient, verification]
+      - [recipient, verification, pii]
+      - [verification, pii]
+      - [verification, pii, reaches]
+      - [pii, reaches]
+      - [pii, reaches, intended]
+      - [reaches, intended]
+      - [reaches, intended, destination]
 
   - must_id: "item:A.7.4.9:proc_integrity_verification"
     description: "Integrity verification (checksums / signed payloads for critical transmissions)"
     excerpt_keywords:
       - [integrity, verification]
+      - [integrity, verification, checksums]
+      - [verification, checksums]
+      - [verification, checksums, signed]
+      - [checksums, signed]
+      - [checksums, signed, payloads]
+      - [signed, payloads]
+      - [signed, payloads, critical]
 
-  - must_id: "item:A.7.4.9:proc_recipient_verification"
-    description: "Recipient verification — PII reaches intended destination + not intercepted"
+  - must_id: "item:A.7.4.9:proc_audit_logs"
+    description: "Audit log retention for every transmission (who + what + when + where)"
     excerpt_keywords:
-      - [recipient, verification]
+      - [audit, logs]
+      - [audit, retention]
+      - [audit, retention, every]
+      - [retention, every]
+      - [retention, every, transmission]
+      - [every, transmission]
+      - [procedure, step]
+      - [process, step]
+
+  - must_id: "item:A.7.4.9:proc_encryption"
+    description: "Encryption-in-transit standard (TLS 1.2+ / VPN / SFTP / etc.) per channel"
+    excerpt_keywords:
+      - [encryption, transit]
+      - [encryption, transit, standard]
+      - [transit, standard]
+      - [transit, standard, tls]
+      - [standard, tls]
+      - [standard, tls, vpn]
+      - [tls, vpn]
+      - [tls, vpn, sftp]
+
+  - must_id: "item:A.7.4.9:proc_authz_channels"
+    description: "Authorised transmission channels defined (secure protocols + endpoints + auth requirements)"
+    excerpt_keywords:
+      - [authz, channels]
+      - [authorised, transmission]
+      - [authorised, transmission, channels]
+      - [transmission, channels]
+      - [transmission, channels, defined]
+      - [channels, defined]
+      - [channels, defined, secure]
+      - [defined, secure]
+

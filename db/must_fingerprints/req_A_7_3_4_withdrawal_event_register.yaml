@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.4:withdrawal_event_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.4:withdrawal_event_register"
@@ -10,29 +11,59 @@ target_control: "A.7.3.4"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.4:reg_event_id"
-    description: "Unique event identifier per row"
-    excerpt_keywords:
-      - [unique, event, identifier, row]
-
-  - must_id: "item:A.7.3.4:reg_event_type"
-    description: "Event type per row (modification / partial withdrawal / full withdrawal)"
-    excerpt_keywords:
-      - [event, type]
-      - [event, type, row]
-
   - must_id: "item:A.7.3.4:reg_propagation_status"
     description: "Propagation status per row (downstream systems notified / third parties informed)"
     excerpt_keywords:
       - [propagation, status]
-      - [propagation, status, row]
-
-  - must_id: "item:A.7.3.4:reg_subject_id"
-    description: "Subject identifier per row"
-    excerpt_keywords:
-      - [subject, identifier, row]
+      - [propagation, status, downstream]
+      - [status, downstream]
+      - [status, downstream, notified]
+      - [downstream, notified]
+      - [downstream, notified, third]
+      - [notified, third]
+      - [notified, third, parties]
 
   - must_id: "item:A.7.3.4:reg_timestamp"
     description: "Timestamp per row"
     excerpt_keywords:
-      - [timestamp, row]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:A.7.3.4:reg_event_type"
+    description: "Event type per row (modification / partial withdrawal / full withdrawal)"
+    excerpt_keywords:
+      - [event, modification]
+      - [event, modification, partial]
+      - [modification, partial]
+      - [modification, partial, withdrawal]
+      - [partial, withdrawal]
+      - [partial, withdrawal, full]
+      - [withdrawal, full]
+      - [withdrawal, full, withdrawal]
+
+  - must_id: "item:A.7.3.4:reg_subject_id"
+    description: "Subject identifier per row"
+    excerpt_keywords:
+      - [subject, id]
+      - [subject, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:A.7.3.4:reg_event_id"
+    description: "Unique event identifier per row"
+    excerpt_keywords:
+      - [event, id]
+      - [unique, event]
+      - [unique, event, identifier]
+      - [event, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

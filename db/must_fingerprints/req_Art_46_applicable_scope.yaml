@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.46:applicable_scope
 #
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.46 scope note.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.46:applicable_scope"
@@ -8,23 +10,19 @@ target_control: "Art.46"
 target_standard: "GDPR:2016/679"
 
 must_fingerprints:
-  - must_id: "item:Art.46:scope_non_adequate_transfers"
-    description: "Non-adequate transfers enumerated"
-    excerpt_keywords:
-      - [art, 46, non, adequate, transfers]
-      - [art, 44, mechanism, art, 46]
-      - [transfers, requiring, safeguards]
-
   - must_id: "item:Art.46:scope_mechanism_mix"
-    description: "Mechanism mix in use"
+    description: "Mechanism mix in use (SCCs predominantly / some BCRs / any ad-hoc clauses)"
     excerpt_keywords:
-      - [sccs, predominantly]
-      - [bcrs, in, use]
-      - [ad, hoc, clauses, transfer]
+      - [scope, mechanism, mix, transfers]
+      - [mechanism, mix, transfers]
+
+  - must_id: "item:Art.46:scope_non_adequate_transfers"
+    description: "Non-adequate transfers enumerated (cross-link to Art.44 register filtered by mechanism=Art.46)"
+    excerpt_keywords:
+      - [scope, non, adequate, transfers]
 
   - must_id: "item:Art.46:scope_tia_methodology"
-    description: "TIA methodology"
+    description: "TIA methodology (EDPB six-step / template-based / ad-hoc per transfer)"
     excerpt_keywords:
-      - [edpb, six, step, tia]
-      - [tia, methodology, template]
-      - [tia, ad, hoc, per, transfer]
+      - [scope, tia, methodology, transfers]
+      - [tia, methodology, transfers]

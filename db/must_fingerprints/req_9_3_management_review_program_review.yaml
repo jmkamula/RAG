@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:9.3:management_review_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. ISMS clause 9.3 program review.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:9.3:management_review_program_review"
@@ -8,35 +10,28 @@ target_control: "9.3"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:9.3:rev_action_closure"
+    description: "Action-closure check — decisions from prior reviews tracked to 10.1/10.2 closure"
+    excerpt_keywords:
+      - [action, closure, review]
+
+  - must_id: "item:9.3:rev_cadence_met"
+    description: "Cadence check — every planned review happened (or was rescheduled with rationale)"
+    excerpt_keywords:
+      - [cadence, met, review]
+      - [cadence, check, review]
+
   - must_id: "item:9.3:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [management, review, program, review, date]
-      - [management, review, program, reviewed, on]
+      - [review, date, planned, interval]
+
+  - must_id: "item:9.3:rev_inputs_completeness"
+    description: "Inputs-completeness check — every 9.3.2 a-g input was present in each review's minutes"
+    excerpt_keywords:
+      - [inputs, completeness, review]
 
   - must_id: "item:9.3:rev_reviewer"
     description: "Reviewer identity (ISMS Manager)"
     excerpt_keywords:
-      - [management, review, program, reviewed, by]
-      - [isms, manager, program, review]
-
-  - must_id: "item:9.3:rev_cadence_met"
-    description: "Cadence check"
-    excerpt_keywords:
-      - [management, review, cadence, met]
-      - [planned, management, review, happened]
-      - [management, review, rescheduled, rationale]
-
-  - must_id: "item:9.3:rev_inputs_completeness"
-    description: "Inputs-completeness check"
-    excerpt_keywords:
-      - [management, review, inputs, completeness]
-      - [9, 3, 2, a, g, completeness]
-      - [management, review, minutes, inputs, audit]
-
-  - must_id: "item:9.3:rev_action_closure"
-    description: "Action-closure check"
-    excerpt_keywords:
-      - [management, review, action, closure]
-      - [prior, review, decisions, closed]
-      - ["10.1", "10.2"]
+      - [reviewer, identity, review]

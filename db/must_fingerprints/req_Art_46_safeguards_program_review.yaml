@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:Art.46:safeguards_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. GDPR Art.46 program review.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:Art.46:safeguards_program_review"
@@ -11,32 +13,26 @@ must_fingerprints:
   - must_id: "item:Art.46:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [safeguards, program, review, date]
-      - [art, 46, reviewed, on]
+      - [review, date, planned, interval, transfers]
 
   - must_id: "item:Art.46:rev_reviewer"
     description: "Reviewer identity (DPO + legal counsel)"
     excerpt_keywords:
-      - [safeguards, reviewed, by, dpo]
-      - [safeguards, legal, counsel, review]
-
-  - must_id: "item:Art.46:rev_tia_currency"
-    description: "TIA currency"
-    excerpt_keywords:
-      - [tia, currency]
-      - [tia, refreshed, third, country, law]
-      - [tia, materially, changed]
+      - [reviewer, identity, transfers]
 
   - must_id: "item:Art.46:rev_sccs_version"
-    description: "SCCs version audit"
+    description: "SCCs version audit — any old-version SCCs identified for migration"
     excerpt_keywords:
-      - [sccs, version, audit]
-      - [sccs, old, version, migration]
-      - [sccs, 2021, 914, migration]
+      - [sccs, version, transfers]
+      - [sccs, version, audit, transfers]
 
   - must_id: "item:Art.46:rev_supplementary_audit"
-    description: "Supplementary measures audit"
+    description: "Supplementary measures audit — applied measures (encryption keys, pseudonymisation, etc.) actuall..."
     excerpt_keywords:
-      - [supplementary, measures, audit]
-      - [encryption, keys, in, place, vendor]
-      - [supplementary, pseudonymisation, audit]
+      - [supplementary, audit, transfers]
+      - [supplementary, measures, audit, transfers]
+
+  - must_id: "item:Art.46:rev_tia_currency"
+    description: "TIA currency — TIAs refreshed where third-country law has changed materially"
+    excerpt_keywords:
+      - [tia, currency, transfers]

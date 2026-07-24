@@ -23,48 +23,48 @@ must_fingerprints:
   - must_id: "item:Art.32:reg_appropriateness"
     description: "Per-row appropriateness justification (state of art / cost / nature of processing weighted against risk)"
     excerpt_keywords:
-      - [appropriateness]
       - [appropriateness, justification]
       - [appropriateness, justification, state]
-      - [justification]
       - [justification, state]
       - [justification, state, art]
-      - [state]
       - [state, art]
+      - [state, art, cost]
+      - [art, cost]
+      - [art, cost, nature]
 
   - must_id: "item:Art.32:reg_measures"
     description: "Per-row T&O measures applied (pseudonymisation / encryption / CIA / resilience / restoration)"
     excerpt_keywords:
-      - [measures]
       - [measures, pseudonymisation]
       - [measures, pseudonymisation, encryption]
-      - [pseudonymisation]
       - [pseudonymisation, encryption]
       - [pseudonymisation, encryption, cia]
-      - [encryption]
       - [encryption, cia]
+      - [encryption, cia, resilience]
+      - [cia, resilience]
+      - [cia, resilience, restoration]
 
   - must_id: "item:Art.32:reg_risk_assessment"
     description: "Per-row risk-to-rights-and-freedoms assessment (likelihood + severity)"
     excerpt_keywords:
       - [risk, assessment]
-      - [risk]
-      - [assessment]
       - [risk, rights]
       - [risk, rights, freedoms]
-      - [rights]
       - [rights, freedoms]
       - [rights, freedoms, assessment]
+      - [freedoms, assessment]
+      - [freedoms, assessment, likelihood]
+      - [assessment, likelihood]
 
   - must_id: "item:Art.32:reg_activity_id"
     description: "Per-row processing activity (Art.30 RoPA cross-reference)"
     excerpt_keywords:
       - [activity, id]
-      - [activity]
-      - [processing]
       - [processing, activity]
       - [processing, activity, art]
       - [activity, art]
       - [activity, art, ropa]
-      - [art]
+      - [art, ropa]
+      - [art, ropa, cross]
+      - [ropa, cross]
 

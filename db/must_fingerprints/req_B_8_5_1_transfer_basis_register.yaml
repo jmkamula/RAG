@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:B.8.5.1:transfer_basis_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:B.8.5.1:transfer_basis_register"
@@ -10,30 +11,63 @@ target_control: "B.8.5.1"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:B.8.5.1:reg_basis"
-    description: "Basis cited per row (Art.45/46/47/49 or equivalent)"
-    excerpt_keywords:
-      - [basis, cited, row]
-
   - must_id: "item:B.8.5.1:reg_change_history"
     description: "Change history per row (all previous bases + notification dates)"
     excerpt_keywords:
       - [change, history]
-      - [change, history, row]
+      - [change, history, previous]
+      - [history, previous]
+      - [history, previous, bases]
+      - [previous, bases]
+      - [previous, bases, notification]
+      - [bases, notification]
+      - [bases, notification, dates]
 
   - must_id: "item:B.8.5.1:reg_customer_notification_date"
     description: "Customer notification date per row"
     excerpt_keywords:
       - [customer, notification, date]
-      - [customer, notification, date, row]
+      - [customer, notification]
+      - [notification, date]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:B.8.5.1:reg_basis"
+    description: "Basis cited per row (Art.45/46/47/49 or equivalent)"
+    excerpt_keywords:
+      - [basis, cited]
+      - [basis, cited, art]
+      - [cited, art]
+      - [cited, art, equivalent]
+      - [art, equivalent]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
 
   - must_id: "item:B.8.5.1:reg_jurisdiction_pair"
     description: "Origin + destination jurisdiction per row"
     excerpt_keywords:
       - [jurisdiction, pair]
-      - [origin, destination, jurisdiction, row]
+      - [origin, destination]
+      - [origin, destination, jurisdiction]
+      - [destination, jurisdiction]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
 
   - must_id: "item:B.8.5.1:reg_relationship_id"
     description: "Unique transfer relationship identifier per row"
     excerpt_keywords:
-      - [unique, transfer, relationship, identifier]
+      - [relationship, id]
+      - [unique, transfer]
+      - [unique, transfer, relationship]
+      - [transfer, relationship]
+      - [transfer, relationship, identifier]
+      - [relationship, identifier]
+      - [per, row]
+      - [each, row]
+

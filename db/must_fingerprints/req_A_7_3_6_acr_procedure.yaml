@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.6:acr_procedure
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.6:acr_procedure"
@@ -10,38 +11,87 @@ target_control: "A.7.3.6"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.6:proc_access_flow"
-    description: "Access flow — Art.15 fields + copy of PII processed (link to A.7.3.8)"
+  - must_id: "item:A.7.3.6:proc_refusal_reasoning"
+    description: "Refusal reasoning — where request refused / cannot be met, subject informed of reasons + right to complain"
     excerpt_keywords:
-      - [access, flow]
+      - [refusal, reasoning]
+      - [refusal, reasoning, request]
+      - [reasoning, request]
+      - [reasoning, request, refused]
+      - [request, refused]
+      - [request, refused, cannot]
+      - [refused, cannot]
+      - [refused, cannot, met]
 
-  - must_id: "item:A.7.3.6:proc_correction_flow"
-    description: "Correction flow — including subject-dispute path when correction is disputed"
+  - must_id: "item:A.7.3.6:proc_response_sla"
+    description: "Response-time SLA stated + honoured (undue delay standard)"
     excerpt_keywords:
-      - [correction, flow]
+      - [response, sla]
+      - [response, time]
+      - [response, time, sla]
+      - [time, sla]
+      - [time, sla, stated]
+      - [sla, stated]
+      - [sla, stated, honoured]
+      - [stated, honoured]
 
   - must_id: "item:A.7.3.6:proc_downstream_propagation"
     description: "Downstream propagation — corrections/erasures pushed to systems + third parties (see A.7.3.7)"
     excerpt_keywords:
       - [downstream, propagation]
+      - [downstream, propagation, corrections]
+      - [propagation, corrections]
+      - [propagation, corrections, erasures]
+      - [corrections, erasures]
+      - [corrections, erasures, pushed]
+      - [erasures, pushed]
+      - [erasures, pushed, third]
 
   - must_id: "item:A.7.3.6:proc_erasure_flow"
     description: "Erasure flow — including retention-limit + legal-obligation exceptions"
     excerpt_keywords:
       - [erasure, flow]
+      - [erasure, flow, including]
+      - [flow, including]
+      - [flow, including, retention]
+      - [including, retention]
+      - [including, retention, limit]
+      - [retention, limit]
+      - [retention, limit, legal]
+
+  - must_id: "item:A.7.3.6:proc_correction_flow"
+    description: "Correction flow — including subject-dispute path when correction is disputed"
+    excerpt_keywords:
+      - [correction, flow]
+      - [correction, flow, including]
+      - [flow, including]
+      - [flow, including, subject]
+      - [including, subject]
+      - [including, subject, dispute]
+      - [subject, dispute]
+      - [subject, dispute, path]
+
+  - must_id: "item:A.7.3.6:proc_access_flow"
+    description: "Access flow — Art.15 fields + copy of PII processed (link to A.7.3.8)"
+    excerpt_keywords:
+      - [access, flow]
+      - [access, flow, art]
+      - [flow, art]
+      - [flow, art, fields]
+      - [art, fields]
+      - [art, fields, copy]
+      - [fields, copy]
+      - [fields, copy, pii]
 
   - must_id: "item:A.7.3.6:proc_identity_verification"
     description: "Identity verification step (proportionate — avoids granting rights to imposters)"
     excerpt_keywords:
       - [identity, verification]
       - [identity, verification, step]
+      - [verification, step]
+      - [verification, step, proportionate]
+      - [step, proportionate]
+      - [step, proportionate, avoids]
+      - [proportionate, avoids]
+      - [proportionate, avoids, granting]
 
-  - must_id: "item:A.7.3.6:proc_refusal_reasoning"
-    description: "Refusal reasoning — where request refused / cannot be met, subject informed of reasons + right to..."
-    excerpt_keywords:
-      - [refusal, reasoning]
-
-  - must_id: "item:A.7.3.6:proc_response_sla"
-    description: "Response-time SLA stated + honoured (undue delay standard)"
-    excerpt_keywords:
-      - [response, sla]

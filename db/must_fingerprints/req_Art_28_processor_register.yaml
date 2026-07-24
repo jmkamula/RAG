@@ -15,59 +15,59 @@ must_fingerprints:
     description: "Per-row Art.32-equivalent security assurance source (certification / audit report / questionnaire)"
     excerpt_keywords:
       - [security, check]
-      - [security]
-      - [check]
-      - [art]
       - [art, equivalent]
       - [art, equivalent, security]
-      - [equivalent]
       - [equivalent, security]
+      - [equivalent, security, assurance]
+      - [security, assurance]
+      - [security, assurance, source]
+      - [assurance, source]
 
   - must_id: "item:Art.28:reg_subprocessors"
     description: "Per-row authorised sub-processor list (or 'none')"
     excerpt_keywords:
-      - [subprocessors]
-      - [authorised]
       - [authorised, sub]
       - [authorised, sub, processor]
-      - [sub]
       - [sub, processor]
       - [sub, processor, none]
-      - [processor]
+      - [processor, none]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
 
   - must_id: "item:Art.28:reg_dpa_version"
     description: "Per-row DPA version + execution date"
     excerpt_keywords:
       - [dpa, version]
-      - [dpa]
-      - [version]
       - [dpa, version, execution]
       - [version, execution]
       - [version, execution, date]
-      - [execution]
       - [execution, date]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
 
   - must_id: "item:Art.28:reg_data_categories"
     description: "Per-row data categories processed (cross-link to Art.30 RoPA)"
     excerpt_keywords:
-      - [categories]
       - [categories, processed]
       - [categories, processed, cross]
-      - [processed]
       - [processed, cross]
       - [processed, cross, art]
       - [cross, art]
       - [cross, art, ropa]
+      - [art, ropa]
+      - [per, row]
 
   - must_id: "item:Art.28:reg_processor_id"
     description: "Processor identifier per row (entity name, jurisdiction)"
     excerpt_keywords:
       - [processor, id]
-      - [processor]
       - [processor, identifier]
       - [processor, identifier, entity]
-      - [identifier]
       - [identifier, entity]
       - [identifier, entity, name]
-      - [entity]
+      - [entity, name]
+      - [entity, name, jurisdiction]
+      - [name, jurisdiction]
 

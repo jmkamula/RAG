@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.3.6:acr_request_register
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.3.6:acr_request_register"
@@ -10,34 +11,75 @@ target_control: "A.7.3.6"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.3.6:reg_outcome"
-    description: "Outcome per row (granted / refused with reason / partial)"
-    excerpt_keywords:
-      - [outcome, row]
-
   - must_id: "item:A.7.3.6:reg_propagation"
     description: "Propagation status per row (systems updated / third parties notified)"
     excerpt_keywords:
-      - [propagation, status, row]
+      - [propagation, status]
+      - [propagation, status, updated]
+      - [status, updated]
+      - [status, updated, third]
+      - [updated, third]
+      - [updated, third, parties]
+      - [third, parties]
+      - [third, parties, notified]
+
+  - must_id: "item:A.7.3.6:reg_outcome"
+    description: "Outcome per row (granted / refused with reason / partial)"
+    excerpt_keywords:
+      - [outcome, granted]
+      - [outcome, granted, refused]
+      - [granted, refused]
+      - [granted, refused, reason]
+      - [refused, reason]
+      - [refused, reason, partial]
+      - [reason, partial]
+      - [per, row]
 
   - must_id: "item:A.7.3.6:reg_received_date"
     description: "Received date + resolution date per row (SLA measurable)"
     excerpt_keywords:
       - [received, date]
-      - [received, date, resolution, date]
-
-  - must_id: "item:A.7.3.6:reg_request_id"
-    description: "Unique request identifier per row"
-    excerpt_keywords:
-      - [unique, request, identifier, row]
+      - [received, date, resolution]
+      - [date, resolution]
+      - [date, resolution, date]
+      - [resolution, date]
+      - [resolution, date, sla]
+      - [date, sla]
+      - [date, sla, measurable]
 
   - must_id: "item:A.7.3.6:reg_request_type"
     description: "Request type per row (access / correction / erasure)"
     excerpt_keywords:
-      - [request, type]
-      - [request, type, row]
+      - [request, access]
+      - [request, access, correction]
+      - [access, correction]
+      - [access, correction, erasure]
+      - [correction, erasure]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
 
   - must_id: "item:A.7.3.6:reg_subject_id"
     description: "Subject identifier per row (post identity verification)"
     excerpt_keywords:
-      - [subject, identifier, row]
+      - [subject, id]
+      - [subject, identifier]
+      - [subject, identifier, post]
+      - [identifier, post]
+      - [identifier, post, identity]
+      - [post, identity]
+      - [post, identity, verification]
+      - [identity, verification]
+
+  - must_id: "item:A.7.3.6:reg_request_id"
+    description: "Unique request identifier per row"
+    excerpt_keywords:
+      - [request, id]
+      - [unique, request]
+      - [unique, request, identifier]
+      - [request, identifier]
+      - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
+

@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:8.3:treatment_execution_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. ISMS clause 8.3 program review.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:8.3:treatment_execution_program_review"
@@ -11,32 +13,26 @@ must_fingerprints:
   - must_id: "item:8.3:rev_date"
     description: "Review date within the planned interval"
     excerpt_keywords:
-      - [treatment, program, review, date]
-      - [treatment, reviewed, on]
+      - [review, date, planned, interval, risk]
+
+  - must_id: "item:8.3:rev_progress"
+    description: "Progress check — every active plan item status updated; on-track vs slipping called out"
+    excerpt_keywords:
+      - [progress, check, risk]
+
+  - must_id: "item:8.3:rev_residual_revisit"
+    description: "Residual revisit check — completed items had owner re-affirm residual; divergent residuals escalated"
+    excerpt_keywords:
+      - [residual, revisit, risk]
+      - [residual, revisit, check, risk]
 
   - must_id: "item:8.3:rev_reviewer"
     description: "Reviewer identity (Risk Manager + ISMS Manager + ops lead)"
     excerpt_keywords:
-      - [treatment, reviewed, by]
-      - [risk, manager, isms, treatment, review]
-
-  - must_id: "item:8.3:rev_progress"
-    description: "Progress check"
-    excerpt_keywords:
-      - [treatment, progress, check]
-      - [treatment, on, track, slipping]
-      - [treatment, item, status, update]
-
-  - must_id: "item:8.3:rev_residual_revisit"
-    description: "Residual revisit check"
-    excerpt_keywords:
-      - [treatment, residual, revisit]
-      - [residual, divergence, treatment]
-      - [residual, escalation]
+      - [reviewer, identity, risk]
 
   - must_id: "item:8.3:rev_soa_currency"
-    description: "SoA currency check"
+    description: "SoA currency check — newly implemented controls reflected in the SoA (6.1.3 leaf)"
     excerpt_keywords:
-      - [soa, currency, check]
-      - [statement, of, applicability, currency]
-      - [newly, implemented, control, soa]
+      - [soa, currency, risk]
+      - [soa, currency, check, risk]

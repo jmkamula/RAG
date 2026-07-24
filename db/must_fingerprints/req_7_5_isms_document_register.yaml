@@ -14,7 +14,6 @@ must_fingerprints:
   - must_id: "item:7.5:reg_classification"
     description: "Information classification per row (cross-link to A.5.12)"
     excerpt_keywords:
-      - [classification]
       - [classification, cross]
       - [per, row]
       - [each, row]
@@ -26,31 +25,29 @@ must_fingerprints:
     description: "Next review date per row (drives staleness alerts)"
     excerpt_keywords:
       - [next, review]
-      - [next]
       - [next, review, date]
       - [review, date]
       - [review, date, staleness]
       - [date, staleness]
       - [date, staleness, alerts]
-      - [staleness]
+      - [staleness, alerts]
+      - [per, row]
 
   - must_id: "item:7.5:reg_approval_date"
     description: "Last approval date per row"
     excerpt_keywords:
       - [approval, date]
-      - [approval]
       - [last, approval]
       - [last, approval, date]
       - [per, row]
       - [each, row]
       - [column, containing]
       - [each, entry]
+      - [column, header]
 
   - must_id: "item:7.5:reg_version"
     description: "Current version per row"
     excerpt_keywords:
-      - [version]
-      - [current]
       - [current, version]
       - [per, row]
       - [each, row]
@@ -61,7 +58,6 @@ must_fingerprints:
   - must_id: "item:7.5:reg_owner"
     description: "Document owner per row"
     excerpt_keywords:
-      - [document]
       - [document, owner]
       - [per, row]
       - [each, row]
@@ -72,8 +68,6 @@ must_fingerprints:
   - must_id: "item:7.5:reg_title"
     description: "Document title per row"
     excerpt_keywords:
-      - [title]
-      - [document]
       - [document, title]
       - [per, row]
       - [each, row]
@@ -85,11 +79,11 @@ must_fingerprints:
     description: "Unique document identifier per row"
     excerpt_keywords:
       - [doc, id]
-      - [doc]
       - [unique, document]
       - [unique, document, identifier]
-      - [document]
       - [document, identifier]
-      - [identifier]
       - [per, row]
+      - [each, row]
+      - [column, containing]
+      - [each, entry]
 

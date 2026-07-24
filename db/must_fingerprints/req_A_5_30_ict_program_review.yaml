@@ -1,6 +1,8 @@
 # Per-MUST fingerprint catalog for req:A.5.30:ict_program_review
 #
-# Reviewed-from-skeleton 2026-06-14. ICT readiness program audit cycle.
+# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
+# from catalog MUST ids + text. Suitable for coarse coverage;
+# hand-refinement per leaf recommended for tight precision.
 
 schema_version: 1
 target_evidence_requirement: "req:A.5.30:ict_program_review"
@@ -8,55 +10,38 @@ target_control: "A.5.30"
 target_standard: "ISO27001:2022"
 
 must_fingerprints:
+  - must_id: "item:A.5.30:rev_actions"
+    description: "Action items captured (e.g. add new service, tighten RTO for service that consistently misses, re..."
+    excerpt_keywords:
+      - [action, items, captured, ict]
+
   - must_id: "item:A.5.30:rev_date"
     description: "Review date within the planned 180-day interval"
     excerpt_keywords:
-      - [ict, program, review, date]
-      - [ict, readiness, reviewed, on]
-      - [180, day, ict, review]
-
-  - must_id: "item:A.5.30:rev_reviewer"
-    description: "Reviewer identity"
-    excerpt_keywords:
-      - [ict, readiness, reviewed, by]
-      - [cto, ict, review]
-      - [bcp, program, owner, ict, review]
-      - [cfo, critical, service, signoff]
-
-  - must_id: "item:A.5.30:rev_rto_compliance"
-    description: "RTO/RPO compliance audit"
-    excerpt_keywords:
-      - [rto, compliance, audit]
-      - [rpo, compliance, audit]
-      - [rto, gap, per, service]
-      - [rto, target, gap]
-
-  - must_id: "item:A.5.30:rev_restore_success"
-    description: "Restore-success-rate analysis"
-    excerpt_keywords:
-      - [restore, success, rate]
-      - [restore, attempted, sample]
-      - [failed, restore, investigated]
-      - [restore, success, analysis]
-
-  - must_id: "item:A.5.30:rev_scenario_coverage"
-    description: "Scenario-coverage audit"
-    excerpt_keywords:
-      - [scenarios, tested, via, recovery]
-      - [scenarios, still, untested]
-      - [bcp, scenario, coverage, audit]
+      - [review, date, planned, ict]
 
   - must_id: "item:A.5.30:rev_dependency_check"
-    description: "Dependency-currency check"
+    description: "Dependency-currency check (sample of services where dependency map re-validated against current r..."
     excerpt_keywords:
-      - [dependency, currency, check]
-      - [dependency, map, validated]
-      - [dependency, shifts, flagged]
+      - [dependency, check, ict]
 
-  - must_id: "item:A.5.30:rev_actions"
-    description: "Action items captured"
+  - must_id: "item:A.5.30:rev_restore_success"
+    description: "Restore-success-rate analysis (last N restores attempted; success rate; failed restores investiga..."
     excerpt_keywords:
-      - [ict, review, action, items]
-      - [tighten, rto, for, service]
-      - [retire, stale, scenario, ict]
-      - [refresh, test, ict]
+      - [restore, success, ict]
+
+  - must_id: "item:A.5.30:rev_reviewer"
+    description: "Reviewer identity (CTO/IT-ops head + BCP-program owner + InfoSec lead jointly; CFO sign-off where..."
+    excerpt_keywords:
+      - [reviewer, identity, ict]
+
+  - must_id: "item:A.5.30:rev_rto_compliance"
+    description: "RTO/RPO compliance audit (sample of services re-tested; gap to target per service; root cause per..."
+    excerpt_keywords:
+      - [rto, compliance, ict]
+      - [rto, rpo, compliance, audit, ict]
+
+  - must_id: "item:A.5.30:rev_scenario_coverage"
+    description: "Scenario-coverage audit (which scenarios from A.5.29 register actually tested via real recovery; ..."
+    excerpt_keywords:
+      - [scenario, coverage, ict]

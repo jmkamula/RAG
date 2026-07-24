@@ -1,8 +1,9 @@
 # Per-MUST fingerprint catalog for req:A.7.2.8:pii_processing_ropa
+# Auto-generated skeleton — review and tighten before commit.
 #
-# Auto-generated 2026-07-06 by scripts/generate_27701_fingerprints.py
-# from catalog MUST ids + text. Suitable for coarse coverage;
-# hand-refinement per leaf recommended for tight precision.
+# Used by rag/intake/leaf_driven_scan.py to back-bind existing
+# approved findings to specific MUSTs they semantically satisfy
+# but weren't tagged with at extraction time.
 
 schema_version: 1
 target_evidence_requirement: "req:A.7.2.8:pii_processing_ropa"
@@ -10,50 +11,95 @@ target_control: "A.7.2.8"
 target_standard: "ISO27701:2019"
 
 must_fingerprints:
-  - must_id: "item:A.7.2.8:ropa_activity_id"
-    description: "Unique processing-activity identifier per row"
-    excerpt_keywords:
-      - [ropa, activity]
-      - [unique, processing]
-
   - must_id: "item:A.7.2.8:ropa_owner"
     description: "Named owner responsible for accuracy + completeness"
     excerpt_keywords:
       - [ropa, owner]
-      - [named, owner, responsible, accuracy]
-
-  - must_id: "item:A.7.2.8:ropa_pii_categories"
-    description: "Categories of PII per row + categories of subjects (e.g. employees, customers, minors)"
-    excerpt_keywords:
-      - [ropa, pii, categories]
-      - [categories, pii, row, categories]
-
-  - must_id: "item:A.7.2.8:ropa_recipients"
-    description: "Categories of recipients per row (including third countries + international orgs)"
-    excerpt_keywords:
-      - [ropa, recipients]
-      - [categories, recipients, row]
-
-  - must_id: "item:A.7.2.8:ropa_retention"
-    description: "Retention period per row (or criteria)"
-    excerpt_keywords:
-      - [ropa, retention]
-      - [retention, period, row]
+      - [named, owner]
+      - [named, owner, responsible]
+      - [owner, responsible]
+      - [owner, responsible, accuracy]
+      - [responsible, accuracy]
+      - [responsible, accuracy, completeness]
+      - [accuracy, completeness]
 
   - must_id: "item:A.7.2.8:ropa_security_measures"
     description: "General description of technical + organizational security measures per row"
     excerpt_keywords:
       - [ropa, security, measures]
-      - [general, description, technical, organizational]
+      - [general, description]
+      - [general, description, technical]
+      - [description, technical]
+      - [description, technical, organizational]
+      - [technical, organizational]
+      - [technical, organizational, security]
+      - [organizational, security]
+
+  - must_id: "item:A.7.2.8:ropa_retention"
+    description: "Retention period per row (or criteria)"
+    excerpt_keywords:
+      - [ropa, retention]
+      - [retention, period]
+      - [retention, period, criteria]
+      - [period, criteria]
+      - [per, row]
+      - [each, entry]
+      - [column, header]
 
   - must_id: "item:A.7.2.8:ropa_transfer_safeguards"
     description: "Transfer safeguards per row where third-country transfer occurs (Chap V mechanism cited)"
     excerpt_keywords:
       - [ropa, transfer, safeguards]
-      - [transfer, safeguards, row, third]
+      - [transfer, safeguards]
+      - [transfer, safeguards, third]
+      - [safeguards, third]
+      - [safeguards, third, country]
+      - [third, country]
+      - [third, country, transfer]
+      - [country, transfer]
+
+  - must_id: "item:A.7.2.8:ropa_recipients"
+    description: "Categories of recipients per row (including third countries + international orgs)"
+    excerpt_keywords:
+      - [ropa, recipients]
+      - [categories, recipients]
+      - [categories, recipients, including]
+      - [recipients, including]
+      - [recipients, including, third]
+      - [including, third]
+      - [including, third, countries]
+      - [third, countries]
+
+  - must_id: "item:A.7.2.8:ropa_pii_categories"
+    description: "Categories of PII per row + categories of subjects (e.g"
+    excerpt_keywords:
+      - [ropa, pii, categories]
+      - [categories, pii]
+      - [categories, pii, categories]
+      - [pii, categories]
+      - [pii, categories, subjects]
+      - [categories, subjects]
+      - [categories, subjects, employees]
+      - [subjects, employees]
 
   - must_id: "item:A.7.2.8:ropa_type_purpose"
     description: "Type + purpose of processing per row (link to A.7.2.1 register)"
     excerpt_keywords:
-      - [ropa, type, purpose]
-      - [type, purpose, processing, row]
+      - [ropa, purpose]
+      - [purpose, processing]
+      - [per, row]
+      - [each, entry]
+      - [column, header]
+
+  - must_id: "item:A.7.2.8:ropa_activity_id"
+    description: "Unique processing-activity identifier per row"
+    excerpt_keywords:
+      - [ropa, activity, id]
+      - [unique, processing]
+      - [unique, processing, activity]
+      - [processing, activity]
+      - [processing, activity, identifier]
+      - [activity, identifier]
+      - [per, row]
+      - [each, entry]
+
