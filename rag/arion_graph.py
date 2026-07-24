@@ -2510,8 +2510,13 @@ def make_retrieve_node(
                 composed = polish_short_circuit_answer(
                     query=state["query"], deterministic_answer=_risk_ans, llm=llm,
                 )
-                # Ship 20'.b — Family A intro-only structured payload.
-                from rag.casefile.answer_augment import build_intro_only_structured
+                # Ship 22'.c — Family A intro + risk cards. Fetch the
+                # same top-N risks the case-file path uses so this
+                # short-circuit's RiskCard[] matches other risk
+                # surfaces on the tenant.
+                from rag.casefile.answer_augment import build_short_circuit_structured
+                from rag.risk.queries import fetch_risks_for_casefile
+                _risks_data = fetch_risks_for_casefile(_tid, top_n=8) if _tid else []
                 return build_answer_envelope(
                     state             = state,
                     answer_text       = composed,
@@ -2520,7 +2525,13 @@ def make_retrieve_node(
                     question_type     = "posture_risk",
                     attach_templates  = False,
                     attach_advisory   = False,
-                    answer_structured = build_intro_only_structured(composed).model_dump(),
+                    answer_structured = build_short_circuit_structured(
+                        composed,
+                        tenant             = tenant,
+                        posture_by_node_id = posture,
+                        tenant_id          = _tid,
+                        risks_data         = _risks_data,
+                    ).model_dump(),
                 )
 
         if _is_cascade_suppressions_query(state["query"]):

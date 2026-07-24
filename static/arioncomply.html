@@ -172,6 +172,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sa-related-card{border-left:3px solid #C9C7BC}
 /* Ship 19'.c — primary card highlight + leaf checklist */
 .sa-primary-card{border-left:3px solid #534AB7;background:#FBFAF7}
+/* Ship 22'.c — risk cards */
+.sa-risks{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-width:85%}
+.sa-risk-card{border-left:3px solid #D9534F}
+.sa-risk-score{font-size:11px;font-weight:700;background:#EEECE2;color:#5C5A4F;padding:2px 7px;border-radius:5px}
 .sa-leaf-checklist{display:flex;flex-direction:column;gap:3px;margin-top:6px;padding:6px 8px;background:#F8F6EF;border-radius:6px}
 .sa-leaf-row{display:flex;align-items:center;gap:8px;font-size:12px;line-height:1.5;padding:2px 0}
 .sa-leaf-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0}
@@ -5272,6 +5276,48 @@ function renderStructuredAnswer(s) {
         <a class="sa-related-drill" href="${attr(dashHref)}"
            onclick="setMode('dashboard');return true;">
           Open in dashboard →
+        </a>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // ── Risk cards (Ship 22'.c) ──────────────────────────────────
+  // Rendered below Related when structured.risks is non-empty.
+  // Replaces the retired `↳ Risk register: R-...` prose footer.
+  const risks = s.risks || [];
+  if (risks.length) {
+    html += `<div class="sa-risks">
+      <div class="sa-related-header">Risks</div>`;
+    risks.forEach(rk => {
+      const ext    = esc(rk.external_ref || '');
+      const threat = esc(rk.threat || '');
+      const score  = (rk.risk_score != null) ? esc(String(rk.risk_score)) : '';
+      const treat  = esc(rk.treatment_status || '');
+      const owner  = esc(rk.risk_owner_text || '');
+      const linked = (rk.linked_controls || []).slice(0, 6);
+      const dashHref = rk.dashboard_url || '/#risks';
+      const linkedHtml = linked.length
+        ? `<div class="sa-related-ev">Linked: ${
+            linked.map(x => `<span class="ref-tag">${esc(x)}</span>`).join(' ')
+          }${(rk.linked_controls || []).length > linked.length ? ` <span class="sa-still-item">+${(rk.linked_controls || []).length - linked.length} more</span>` : ''}</div>`
+        : '';
+      const scoreBadge = score
+        ? `<span class="sa-risk-score">${score}/25</span>` : '';
+      const treatBadge = treat
+        ? `<span class="sa-still-item">${treat}</span>` : '';
+      html += `<div class="sa-card sa-risk-card" data-focus-entity="${ext}">
+        <div class="sa-related-head">
+          <span class="ref-tag">${ext}</span>
+          ${scoreBadge}
+          ${treatBadge}
+        </div>
+        ${threat ? `<div class="sa-related-title">${threat}</div>` : ''}
+        ${owner  ? `<div class="sa-related-rel">Owner: ${owner}</div>` : ''}
+        ${linkedHtml}
+        <a class="sa-related-drill" href="${dashHref}"
+           onclick="setMode('risks');return true;">
+          Open risk register →
         </a>
       </div>`;
     });

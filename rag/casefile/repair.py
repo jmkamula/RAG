@@ -242,29 +242,32 @@ def check_and_repair(
     # for any future callers that want to reconstruct the string.
     # See ship-21-prime-a-footer-retire-design-2026-07-23 memo.
 
-    # ── 5. Ship 14'.e — Missing risk external_refs ────────────────────
-    # When the classifier routed to POSTURE_RISK and the digest
-    # surfaced N risks, the LLM should cite their external_refs (R-XXX)
-    # in prose. Missing refs land in a dedicated risk-facts footer via
-    # APPEND-ONLY discipline — never rewrites LLM prose.
+    # ── 5. Risk footer RETIRED in Ship 22'.c ─────────────────────────
+    # Ship 22'.c added RiskCard + `risks: list[RiskCard]` to
+    # StructuredAnswer, populated deterministically from
+    # CaseFile.risks in augment_and_repair. `structured_to_prose`
+    # renders a `## Risks` section listing every risk with threat +
+    # score + treatment status + linked controls. The
+    # `↳ Risk register: R-...` prose append is structurally
+    # redundant.
+    #
+    # Repair events (missing_risk_ref) still fire for observability —
+    # auditors reading chat_casefile_log.repair_events can identify
+    # LLM drops via scripts/audit_retired_footer.sql.
     if spec.required_risk_refs:
-        # Text-match on the raw external_ref (e.g. "R-042"). Case-
-        # insensitive to catch "r-042" style variants.
         text_lower = text.lower()
         missing_risk_refs = [
             r for r in spec.required_risk_refs
             if r and r.lower() not in text_lower
         ]
-        if missing_risk_refs:
-            for r in missing_risk_refs:
-                events.append(RepairEvent(
-                    kind="missing_risk_ref",
-                    ref=r,
-                    detail=f"risk external_ref '{r}' absent from answer prose",
-                ))
-            footers.append(
-                "↳ Risk register: " + ", ".join(missing_risk_refs)
-            )
+        for r in missing_risk_refs:
+            events.append(RepairEvent(
+                kind="missing_risk_ref",
+                ref=r,
+                detail=f"risk external_ref '{r}' absent from answer prose",
+            ))
+        # NO footer append. RiskCard[] in the structured payload +
+        # the `## Risks` prose section carry the equivalent content.
 
     # ── Assemble output ──────────────────────────────────────────────
     if footers:

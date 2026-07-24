@@ -24,6 +24,7 @@ from rag.casefile.answer_schema import (
     IntroCard,
     LeafState,
     RelatedCard,
+    RiskCard,
     StructuredAnswer,
 )
 
@@ -221,6 +222,35 @@ def structured_to_prose(structured) -> str:
                 entry += f" — {evidence}"
             lines.append(entry)
 
+    # Ship 22'.c — risks section replaces the retired
+    # `↳ Risk register: R-...` footer.
+    risks = list(getattr(structured, "risks", None) or [])
+    if risks:
+        if lines:
+            lines.append("")
+        lines.append("## Risks")
+        for rk in risks:
+            ext = (getattr(rk, "external_ref", "") or "").strip()
+            if not ext:
+                continue
+            threat = (getattr(rk, "threat", "") or "").strip()
+            score  = getattr(rk, "risk_score", None)
+            treat  = (getattr(rk, "treatment_status", "") or "").strip()
+            linked = list(getattr(rk, "linked_controls", None) or [])
+
+            entry = f"- **{ext}**"
+            if threat:
+                entry += f" — {threat}"
+            if score is not None:
+                entry += f" — score {score}/25"
+            if treat:
+                entry += f" — treatment: {treat}"
+            if linked:
+                entry += f" — linked {', '.join(linked[:6])}"
+                if len(linked) > 6:
+                    entry += f" (+{len(linked)-6} more)"
+            lines.append(entry)
+
     return "\n".join(lines).rstrip()
 
 
@@ -315,6 +345,7 @@ def build_short_circuit_structured(
     posture_by_node_id: dict = None,
     pg_conn = None,
     tenant_id: str = "",
+    risks_data: list = None,
 ) -> StructuredAnswer:
     """Family B/C helper — intro + related cards for short-circuits.
 
@@ -400,6 +431,12 @@ def build_short_circuit_structured(
             except Exception: pass
     # Restore the real intro text now that ref-scanning is done.
     skeleton.intro.text = intro_text or ""
+
+    # Ship 22'.c — attach risk cards when the caller supplied them
+    # (typically the risk short-circuit at arion_graph.py:2454).
+    if risks_data:
+        skeleton.risks = build_risk_cards(risks_data)
+
     return skeleton
 
 
@@ -806,6 +843,57 @@ def build_related_cards(
     return cards
 
 
+# ── Ship 22'.c — risk-card builder ──────────────────────────────────
+
+def build_risk_cards(risks_data) -> list[RiskCard]:
+    """Deterministic conversion of `CaseFile.risks[]` (or the same
+    dict list from `fetch_risks_for_casefile`) into RiskCard[].
+
+    Every field derives from the tenant's risk-register row; no LLM
+    emission surface. Silent-fail per row on unexpected shape."""
+    from urllib.parse import quote
+    out: list[RiskCard] = []
+    for entry in (risks_data or []):
+        if not isinstance(entry, dict):
+            continue
+        ext = (entry.get("external_ref") or "").strip()
+        if not ext:
+            continue
+        # linked_controls is a list of dicts from linked_controls_view;
+        # each dict has "ref" + "role" + "subject". Flatten to refs
+        # ordered by role (program → extension → obligation) for a
+        # scannable card body.
+        role_order = {"program": 0, "extension": 1, "obligation": 2}
+        linked_raw = list(entry.get("linked_controls") or [])
+        linked_sorted = sorted(
+            [lc for lc in linked_raw if isinstance(lc, dict)],
+            key=lambda lc: (
+                role_order.get((lc.get("role") or "").lower(), 99),
+                lc.get("ref") or "",
+            ),
+        )
+        linked_refs = [lc.get("ref") for lc in linked_sorted if lc.get("ref")]
+
+        # Dashboard drill-in — routes to /#risks?risk_id=<uuid>
+        risk_id = (entry.get("id") or "").strip()
+        dash_url = f"/#risks?risk_id={quote(risk_id)}" if risk_id else None
+
+        out.append(RiskCard(
+            external_ref        = ext,
+            threat              = entry.get("threat") or None,
+            vulnerability       = entry.get("vulnerability") or None,
+            risk_score          = entry.get("risk_score"),
+            residual_risk_level = entry.get("residual_risk_level"),
+            treatment_option    = entry.get("treatment_option") or None,
+            treatment_status    = entry.get("treatment_status") or None,
+            risk_owner_text     = entry.get("risk_owner_text") or None,
+            review_date         = entry.get("review_date") or None,
+            linked_controls     = linked_refs,
+            dashboard_url       = dash_url,
+        ))
+    return out
+
+
 # ── Preservation-check verification ─────────────────────────────────
 
 def augment_and_repair(
@@ -839,6 +927,13 @@ def augment_and_repair(
     )
     structured.related = related
 
+    # Ship 22'.c — attach risk cards from CaseFile.risks (populated by
+    # Ship 14'.e for posture_risk queries). Deterministic; every field
+    # derives from the risk-register row.
+    cf_risks = getattr(cf, "risks", None) or []
+    if cf_risks:
+        structured.risks = build_risk_cards(cf_risks)
+
     # Preservation-check repair events — record what would have been
     # missing from prose alone (auditor trail; the card presence
     # already handles it).
@@ -868,6 +963,26 @@ def augment_and_repair(
                     "kind":   "missing_draft_structured",
                     "ref":    ref,
                     "detail": f"draft ref '{ref}' present but card.draft=False",
+                })
+
+    # Ship 22'.c — risk-refs auditor parity. Repair events fire when
+    # the LLM's prose dropped a risk external_ref, exactly as the
+    # retired risk footer would have surfaced. Structured payload
+    # renders every risk as a RiskCard (already attached above); the
+    # events log the drop for observability via
+    # scripts/audit_retired_footer.sql.
+    if spec and getattr(spec, "required_risk_refs", None):
+        text_scan = (structured.intro.text or "").lower()
+        for a in (structured.actions or []):
+            text_scan += " " + (a.title or "").lower()
+            text_scan += " " + (a.body  or "").lower()
+        for r in (spec.required_risk_refs or []):
+            if r and r.lower() not in text_scan:
+                events.append({
+                    "kind":   "missing_risk_ref",
+                    "ref":    r,
+                    "detail": f"risk external_ref '{r}' absent from "
+                              f"intro/actions — surfaced via RiskCard",
                 })
 
     return structured, events

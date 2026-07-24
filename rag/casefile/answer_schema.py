@@ -72,11 +72,33 @@ class RelatedCard(BaseModel):
     dashboard_url:    Optional[str] = None   # deep-link to /dashboard drill-in
 
 
+class RiskCard(BaseModel):
+    """Ship 22'.c — one risk-register entry.
+
+    Risks aren't controls: no standard_id / verdict / role / leaves.
+    Populated from CaseFile.risks[] (Ship 14'.e — top-8 by risk_score
+    for posture_risk queries). Fully deterministic — no LLM emission
+    of risk metadata.
+    """
+    external_ref:      str                            # "R-042"
+    threat:            Optional[str] = None           # tenant-authored description
+    vulnerability:     Optional[str] = None
+    risk_score:        Optional[int] = None           # likelihood * impact, 0-25
+    residual_risk_level: Optional[int] = None
+    treatment_option:  Optional[str] = None           # "avoid" / "reduce" / "transfer" / "accept"
+    treatment_status:  Optional[str] = None           # "in_treatment" / "accepted" / "implemented"
+    risk_owner_text:   Optional[str] = None           # display name
+    review_date:       Optional[str] = None           # ISO date string
+    linked_controls:   list[str] = Field(default_factory=list)  # control refs (ordered by role)
+    dashboard_url:     Optional[str] = None           # /#risks?risk_id=<uuid>
+
+
 class StructuredAnswer(BaseModel):
     """Full structured chat response."""
     intro:   IntroCard
     actions: list[ActionCard] = Field(default_factory=list)
     related: list[RelatedCard] = Field(default_factory=list)
+    risks:   list[RiskCard]   = Field(default_factory=list)   # Ship 22'.c
 
 
 # ── LLM JSON schema (for prompt inclusion) ──────────────────────────
