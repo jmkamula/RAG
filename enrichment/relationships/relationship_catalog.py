@@ -5250,6 +5250,523 @@ ISO27701_BATCH3_EDGES: list[RelationshipEdge] = [
 ]
 
 
+# ── ISO 27701:2019 Batch 4 — Parent-program SUPPORTS backfill (Ship 23'.b) ───
+# Surfaced by scripts/audit_cross_role_edges.py — 30 ISO 27701 extension
+# controls had no SUPPORTS → ISO 27001 parent edge, blocking the role-aware
+# chat surface's "extension query → surface parent programs" path.
+#
+# Mapping strategy:
+#   * Controller-side (A.7.2.x, A.7.3.x, A.7.4.x): SUPPORTS A.5.34 as the
+#     ISO 27001 privacy anchor. Where a specific supporting ISO control is
+#     obvious from ISO/IEC 27002:2022 §5.34 or the 27701 clause text, add
+#     it as a secondary edge.
+#   * Processor-side (B.8.x): SUPPORTS A.5.19/A.5.20 supplier controls,
+#     since processor obligations are supplier-contract-shaped.
+# High-confidence mappings only; secondary edges added where the ISO 27002
+# or 27701 clause text makes the relationship explicit.
+# Author: 2026-07-24. See ship_23_prime_a_audit_2026_07_24 memo.
+
+ISO27701_BATCH4_PARENT_EDGES: list[RelationshipEdge] = [
+    # ── A.7.2.x — Controller conditions for collection + processing ─────────
+    RelationshipEdge(
+        source_ref='A.7.2.1', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.2.1 identify and document purpose of PII processing implements 27001 A.5.34 privacy protection through purpose specification — the foundational scoping decision.',
+        citation='ISO/IEC 27701:2019 §7.2.1 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.2.2', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.2.2 identifying lawful basis implements 27001 A.5.34 by grounding processing legitimacy in law.',
+        citation='ISO/IEC 27701:2019 §7.2.2 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.2.2', source_standard_id='ISO27701:2019',
+        target_ref='A.5.31', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='Lawful-basis identification depends on legal / statutory / regulatory requirements catalogued under 27001 A.5.31.',
+        citation='ISO/IEC 27701:2019 §7.2.2 + ISO/IEC 27002:2022 §5.31',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.2.3', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.2.3 determining when consent is required is a scoping decision that implements 27001 A.5.34 privacy protection.',
+        citation='ISO/IEC 27701:2019 §7.2.3 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.2.4', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.2.4 obtaining + recording consent operationalises 27001 A.5.34 through evidence of lawful basis.',
+        citation='ISO/IEC 27701:2019 §7.2.4 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.2.4', source_standard_id='ISO27701:2019',
+        target_ref='A.5.9', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='Consent records are a class of information whose retention + management falls under 27001 A.5.9 inventory / asset lifecycle controls.',
+        citation='ISO/IEC 27701:2019 §7.2.4 + ISO/IEC 27002:2022 §5.9',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.2.5', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.2.5 privacy impact assessment operationalises 27001 A.5.34 by identifying + treating PII-specific risks.',
+        citation='ISO/IEC 27701:2019 §7.2.5 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.2.5', source_standard_id='ISO27701:2019',
+        target_ref='6.1.2', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='Privacy impact assessment is a specialised form of 27001 6.1.2 information security risk assessment applied to PII scope.',
+        citation='ISO/IEC 27701:2019 §7.2.5 + ISO/IEC 27001:2022 §6.1.2',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.2.7', source_standard_id='ISO27701:2019',
+        target_ref='A.5.19', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.2.7 joint PII controller arrangements are a supplier-relationship instance covered by 27001 A.5.19 information security in supplier relationships.',
+        citation='ISO/IEC 27701:2019 §7.2.7 + ISO/IEC 27002:2022 §5.19',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.2.7', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='Joint controllership is a PII-specific arrangement type under 27001 A.5.34 privacy protection.',
+        citation='ISO/IEC 27701:2019 §7.2.7 + ISO/IEC 27002:2022 §5.34',
+        role='medium',
+    ),
+
+    # ── A.7.3.x — Obligations to PII principals (subject rights) ────────────
+    RelationshipEdge(
+        source_ref='A.7.3.1', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.3.1 determining + fulfilling PII principal obligations operationalises 27001 A.5.34 privacy protection.',
+        citation='ISO/IEC 27701:2019 §7.3.1 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.1', source_standard_id='ISO27701:2019',
+        target_ref='A.5.31', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='PII principal rights are grounded in legal/regulatory requirements catalogued under 27001 A.5.31.',
+        citation='ISO/IEC 27701:2019 §7.3.1 + ISO/IEC 27002:2022 §5.31',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.2', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.3.2 determining information for PII principals scopes the transparency artefacts required by 27001 A.5.34.',
+        citation='ISO/IEC 27701:2019 §7.3.2 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.3', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.3.3 providing information to PII principals delivers the transparency artefacts required by 27001 A.5.34.',
+        citation='ISO/IEC 27701:2019 §7.3.3 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.4', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.3.4 providing consent modification / withdrawal mechanisms operationalises 27001 A.5.34 respect for principal choice.',
+        citation='ISO/IEC 27701:2019 §7.3.4 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.5', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.3.5 objection-to-processing mechanism operationalises 27001 A.5.34 respect for principal choice.',
+        citation='ISO/IEC 27701:2019 §7.3.5 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.7', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.3.7 informing third parties of principal-initiated changes propagates 27001 A.5.34 protection downstream.',
+        citation='ISO/IEC 27701:2019 §7.3.7 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.7', source_standard_id='ISO27701:2019',
+        target_ref='A.5.19', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='Third-party propagation depends on the supplier-relationship management framework under 27001 A.5.19.',
+        citation='ISO/IEC 27701:2019 §7.3.7 + ISO/IEC 27002:2022 §5.19',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.8', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.3.8 providing PII copies to principals operationalises 27001 A.5.34 access-to-own-data protection.',
+        citation='ISO/IEC 27701:2019 §7.3.8 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.9', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.3.9 handling PII principal requests is the operational surface of 27001 A.5.34 privacy protection.',
+        citation='ISO/IEC 27701:2019 §7.3.9 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.3.10', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.3.10 automated decision-making controls are a PII-specific application of 27001 A.5.34 protection.',
+        citation='ISO/IEC 27701:2019 §7.3.10 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+
+    # ── A.7.4.x — Privacy by design / minimisation ──────────────────────────
+    RelationshipEdge(
+        source_ref='A.7.4.1', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.1 limit collection operationalises 27001 A.5.34 minimisation principle at the collection interface.',
+        citation='ISO/IEC 27701:2019 §7.4.1 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.2', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.2 limit processing operationalises 27001 A.5.34 minimisation principle at the processing layer.',
+        citation='ISO/IEC 27701:2019 §7.4.2 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.3', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.3 accuracy and quality of PII operationalises 27001 A.5.34 data-integrity aspect of privacy protection.',
+        citation='ISO/IEC 27701:2019 §7.4.3 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.4', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.4 PII minimisation objectives directly implement 27001 A.5.34 minimisation principle at the policy layer.',
+        citation='ISO/IEC 27701:2019 §7.4.4 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.6', source_standard_id='ISO27701:2019',
+        target_ref='A.8.10', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 A.7.4.6 temporary files handling operationalises 27001 A.8.10 information deletion for transient PII copies.',
+        citation='ISO/IEC 27701:2019 §7.4.6 + ISO/IEC 27002:2022 §8.10',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.7.4.6', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='Temporary-file discipline is a privacy-protection concern under 27001 A.5.34 — transient PII must be cleaned up.',
+        citation='ISO/IEC 27701:2019 §7.4.6 + ISO/IEC 27002:2022 §5.34',
+        role='medium',
+    ),
+
+    # ── B.8.2.x — Processor conditions for collection + processing ──────────
+    RelationshipEdge(
+        source_ref='B.8.2.2', source_standard_id='ISO27701:2019',
+        target_ref='A.5.20', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.2.2 processing only for organisation-authorised purposes is a supplier-agreement term covered by 27001 A.5.20.',
+        citation='ISO/IEC 27701:2019 §8.2.2 + ISO/IEC 27002:2022 §5.20',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.2.3', source_standard_id='ISO27701:2019',
+        target_ref='A.5.20', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.2.3 marketing/advertising use restriction is a supplier-agreement term under 27001 A.5.20.',
+        citation='ISO/IEC 27701:2019 §8.2.3 + ISO/IEC 27002:2022 §5.20',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.2.4', source_standard_id='ISO27701:2019',
+        target_ref='A.5.20', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.2.4 handling of infringing controller instructions is a supplier-agreement clause under 27001 A.5.20.',
+        citation='ISO/IEC 27701:2019 §8.2.4 + ISO/IEC 27002:2022 §5.20',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.2.5', source_standard_id='ISO27701:2019',
+        target_ref='A.5.19', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.2.5 customer obligations to the processor is a supplier-relationship term under 27001 A.5.19.',
+        citation='ISO/IEC 27701:2019 §8.2.5 + ISO/IEC 27002:2022 §5.19',
+        role='high',
+    ),
+
+    # ── B.8.3.x — Processor obligations to PII principals ───────────────────
+    RelationshipEdge(
+        source_ref='B.8.3.1', source_standard_id='ISO27701:2019',
+        target_ref='A.5.34', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.3.1 processor obligations to PII principals operationalises 27001 A.5.34 downstream when the processor receives principal requests.',
+        citation='ISO/IEC 27701:2019 §8.3.1 + ISO/IEC 27002:2022 §5.34',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.3.1', source_standard_id='ISO27701:2019',
+        target_ref='A.5.19', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='Processor-side handling of principal requests is bounded by the supplier-relationship framework at 27001 A.5.19.',
+        citation='ISO/IEC 27701:2019 §8.3.1 + ISO/IEC 27002:2022 §5.19',
+        role='medium',
+    ),
+
+    # ── B.8.4.x — Processor privacy by design ───────────────────────────────
+    RelationshipEdge(
+        source_ref='B.8.4.1', source_standard_id='ISO27701:2019',
+        target_ref='A.8.10', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.4.1 processor temporary files handling operationalises 27001 A.8.10 information deletion for transient PII copies.',
+        citation='ISO/IEC 27701:2019 §8.4.1 + ISO/IEC 27002:2022 §8.10',
+        role='high',
+    ),
+
+    # ── B.8.5.x — Processor transfers + disclosure ──────────────────────────
+    RelationshipEdge(
+        source_ref='B.8.5.2', source_standard_id='ISO27701:2019',
+        target_ref='A.5.14', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.5.2 disclosure of countries + international organisations receiving PII operationalises 27001 A.5.14 information transfer controls for processor-side transparency.',
+        citation='ISO/IEC 27701:2019 §8.5.2 + ISO/IEC 27002:2022 §5.14',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.3', source_standard_id='ISO27701:2019',
+        target_ref='A.5.14', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.5.3 records of PII disclosure to third parties are the audit trail for 27001 A.5.14 information transfers.',
+        citation='ISO/IEC 27701:2019 §8.5.3 + ISO/IEC 27002:2022 §5.14',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.3', source_standard_id='ISO27701:2019',
+        target_ref='A.5.9', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='Disclosure records are a class of information asset under 27001 A.5.9 inventory / lifecycle controls.',
+        citation='ISO/IEC 27701:2019 §8.5.3 + ISO/IEC 27002:2022 §5.9',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.4', source_standard_id='ISO27701:2019',
+        target_ref='A.5.14', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.5.4 notification of PII disclosure requests operationalises the transparency wrapper on 27001 A.5.14 information transfers.',
+        citation='ISO/IEC 27701:2019 §8.5.4 + ISO/IEC 27002:2022 §5.14',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.5', source_standard_id='ISO27701:2019',
+        target_ref='A.5.14', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='27701 B.8.5.5 legally binding PII disclosure handling is the special-case pathway for 27001 A.5.14 transfers under legal compulsion.',
+        citation='ISO/IEC 27701:2019 §8.5.5 + ISO/IEC 27002:2022 §5.14',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='B.8.5.5', source_standard_id='ISO27701:2019',
+        target_ref='A.5.31', target_standard_id='ISO27001:2022',
+        edge_type='SUPPORTS',
+        rationale='Legally binding disclosure requests fall under 27001 A.5.31 legal / statutory / regulatory requirements framework.',
+        citation='ISO/IEC 27701:2019 §8.5.5 + ISO/IEC 27002:2022 §5.31',
+        role='medium',
+    ),
+]
+
+
+# ── Ship 23'.b Gap 3 — A.8 Technological → GDPR bridges ─────────────────────
+# Surfaced by audit_cross_role_edges.py — 15 of 34 A.8.x controls (44%)
+# had no GDPR relationship despite being technical-security controls that
+# naturally demonstrate Art.32 (Security of processing) or Art.25 (Privacy
+# by design). Every A.8 tech control DEMONSTRATES at least Art.32; a few
+# also demonstrate Art.25 (SDLC-adjacent) or Art.28 (outsourced work).
+# High-confidence mappings only.
+
+A8_TECH_GDPR_BRIDGE_EDGES: list[RelationshipEdge] = [
+    RelationshipEdge(
+        source_ref='A.8.1', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.1 user endpoint device security is a technical measure for GDPR Art.32 security of processing, particularly for PII accessed from endpoints.',
+        citation='ISO/IEC 27002:2022 §8.1 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.4', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.4 source-code access controls prevent unauthorised alteration of PII-processing systems, an Art.32 confidentiality + integrity measure.',
+        citation='ISO/IEC 27002:2022 §8.4 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.6', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.6 capacity management demonstrates the availability leg of GDPR Art.32.1.b resilience of processing systems.',
+        citation='ISO/IEC 27002:2022 §8.6 + GDPR Art.32.1.b',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.17', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.17 clock synchronization preserves log-timeline integrity required to demonstrate Art.32 security controls to auditors + Art.33 breach-notification timing.',
+        citation='ISO/IEC 27002:2022 §8.17 + GDPR Art.32.1.d',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.18', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.18 privileged utility program controls limit high-power access to PII systems, a direct Art.32.1.b integrity + confidentiality measure.',
+        citation='ISO/IEC 27002:2022 §8.18 + GDPR Art.32.1.b',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.19', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.19 software installation controls prevent unauthorised code introduction into PII-processing systems, an Art.32 integrity measure.',
+        citation='ISO/IEC 27002:2022 §8.19 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.21', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.21 security of network services demonstrates the network-layer confidentiality + availability of GDPR Art.32.1 security of processing.',
+        citation='ISO/IEC 27002:2022 §8.21 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.22', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.22 network segregation limits lateral movement between PII processing zones, an Art.32.1 confidentiality + integrity measure.',
+        citation='ISO/IEC 27002:2022 §8.22 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.23', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.23 web filtering restricts outbound exfiltration of PII + inbound compromise routes, an Art.32.1 confidentiality measure.',
+        citation='ISO/IEC 27002:2022 §8.23 + GDPR Art.32.1',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.28', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.28 secure coding practices embed security into PII-processing applications, an Art.32.1 integrity + confidentiality measure.',
+        citation='ISO/IEC 27002:2022 §8.28 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.28', source_standard_id='ISO27001:2022',
+        target_ref='Art.25', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='Secure coding is a foundational practice for GDPR Art.25 data protection by design — security baked in at build time.',
+        citation='ISO/IEC 27002:2022 §8.28 + GDPR Art.25.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.30', source_standard_id='ISO27001:2022',
+        target_ref='Art.28', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.30 outsourced-development controls establish the security expectations for external processors of PII-processing systems, aligning with Art.28 processor contract terms.',
+        citation='ISO/IEC 27002:2022 §8.30 + GDPR Art.28.3',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.30', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.30 outsourced-development security posture propagates Art.32.1 requirements down to development suppliers.',
+        citation='ISO/IEC 27002:2022 §8.30 + GDPR Art.32.1',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.31', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.31 separation of development, test, and production environments isolates PII in production from development-time risks, an Art.32.1 integrity + confidentiality measure.',
+        citation='ISO/IEC 27002:2022 §8.31 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.31', source_standard_id='ISO27001:2022',
+        target_ref='Art.25', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='Environment separation is a Art.25 privacy-by-design measure preventing test-time PII exposure in production.',
+        citation='ISO/IEC 27002:2022 §8.31 + GDPR Art.25.1',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.32', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.32 change management preserves the integrity of PII-processing systems across modifications, an Art.32.1.b measure.',
+        citation='ISO/IEC 27002:2022 §8.32 + GDPR Art.32.1.b',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.33', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.33 protection of test information prevents PII leakage through non-production test datasets, an Art.32.1 confidentiality measure.',
+        citation='ISO/IEC 27002:2022 §8.33 + GDPR Art.32.1',
+        role='high',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.33', source_standard_id='ISO27001:2022',
+        target_ref='Art.5', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='Test information controls demonstrate purpose limitation (Art.5.1.b) — PII may not leak into test datasets for purposes outside the collection basis.',
+        citation='ISO/IEC 27002:2022 §8.33 + GDPR Art.5.1.b',
+        role='medium',
+    ),
+    RelationshipEdge(
+        source_ref='A.8.34', source_standard_id='ISO27001:2022',
+        target_ref='Art.32', target_standard_id='GDPR:2016/679',
+        edge_type='DEMONSTRATES',
+        rationale='A.8.34 protection of information systems during audit testing prevents audit-driven disruption to PII availability, an Art.32.1.b measure.',
+        citation='ISO/IEC 27002:2022 §8.34 + GDPR Art.32.1.b',
+        role='high',
+    ),
+]
+
+
 ALL_EDGES: list[RelationshipEdge] = (
     INTRA_ISO_EDGES
     + INTRA_GDPR_EDGES
@@ -5258,4 +5775,6 @@ ALL_EDGES: list[RelationshipEdge] = (
     + ISO27701_BATCH1_EDGES
     + ISO27701_BATCH2_EDGES
     + ISO27701_BATCH3_EDGES
+    + ISO27701_BATCH4_PARENT_EDGES
+    + A8_TECH_GDPR_BRIDGE_EDGES
 )
