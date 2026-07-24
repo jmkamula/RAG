@@ -790,6 +790,28 @@ def build_related_cards(
     primary_ref = structured.intro.primary_ref or (cited[0] if cited else None)
     demonstrators = _collect_demonstrators(cf, primary_ref)
 
+    # Ship 22'.d — auto-inject obligation demonstrators as cards.
+    # When ANY cited obligation ref (GDPR Art.5 / Art.32 / NIS2 /
+    # DORA article, including sub-articles like Art.32.1.d whose
+    # parents carry the DEMONSTRATED_BY overlay) has DEMONSTRATED_BY
+    # relationships, pull the implementing controls in as cards even
+    # if the LLM didn't cite them in prose. Mirrors the retired
+    # ↳ Bridges to footer's guarantee that ISO bridge refs surface
+    # on cross-framework queries.
+    #
+    # We iterate all cited refs (not just primary_ref) because the
+    # LLM may prose-cite a sub-article first, making primary_ref =
+    # Art.32.1.d — but the demonstrated_by overlay lives on Art.32.
+    # `_collect_demonstrators` handles the None/unknown case gracefully.
+    all_demonstrators = set(demonstrators)
+    for ref in list(cited):
+        for dref in _collect_demonstrators(cf, ref):
+            all_demonstrators.add(dref)
+    for dref in sorted(all_demonstrators):
+        if dref and dref not in seen:
+            seen.add(dref)
+            all_refs.append(dref)
+
     cards: list[RelatedCard] = []
     for ref in all_refs:
         title, sid = _node_metadata(cf, ref)
