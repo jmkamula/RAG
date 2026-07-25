@@ -65,14 +65,20 @@ def _load_upload_paths():
         conn.close()
 
 
-def _run_one_doc(filename, storage_path, upload_id):
-    """Read + enrich + run BOTH pipelines. Returns dict of per-path metrics."""
+def _run_one_doc(filename, storage_path, upload_id, capture_arbiter_verdicts=None):
+    """Read + enrich + run BOTH pipelines. Returns dict of per-path metrics.
+
+    Ship 34'.b — when `capture_arbiter_verdicts` is a list, append
+    per-candidate LLM-arbiter records (for HITL sample review).
+    """
     from rag.intake.readers  import read_document
     from rag.intake.enricher import enrich
     from rag.intake.extractor import extract
     from rag.intake.doc_pipeline import DocumentPipeline
     from rag.intake.consensus_extraction import default_config
     from rag.intake.consensus_extraction.orchestrator import run_extraction_consensus
+    from rag.intake.consensus_extraction.log import log_consensus_result, build_candidates_sample
+    from rag.intake.consensus_extraction.signals.semantic_fit_gate import _fetch_must_texts
 
     doc = read_document(storage_path, upload_id=upload_id,
                         original_filename=filename)
@@ -121,8 +127,50 @@ def _run_one_doc(filename, storage_path, upload_id):
         )
         scoped_leaf_ids = _fetch_leaves_for_controls(scoped[:40])
 
+    # First pass: aggregator-only (LLM disabled) to capture pre-LLM arbiter zone
+    cfg_no_llm = default_config().with_overrides(llm_arbiter_enabled=False)
+    pre_llm = run_extraction_consensus(doc, scoped_leaf_ids, cfg_no_llm)
+    pre_llm_arbiter_keys = {v.candidate for v in pre_llm.arbiter_zone()}
+    pre_llm_arbiter_by_key = {v.candidate: v for v in pre_llm.arbiter_zone()}
+
+    # Second pass: with LLM arbiter enabled — get the final verdicts
     cfg = default_config().with_overrides(llm_arbiter_enabled=True)
     consensus_result = run_extraction_consensus(doc, scoped_leaf_ids, cfg)
+
+    # Ship 34'.b — capture arbiter-decided candidates for HITL review
+    if capture_arbiter_verdicts is not None:
+        # Look up MUST canonical text for all arbiter candidates
+        arbiter_must_ids = list({k[1] for k in pre_llm_arbiter_keys if k[1]})
+        must_texts = _fetch_must_texts(arbiter_must_ids) if arbiter_must_ids else {}
+
+        # For each pre-LLM arbiter candidate, find final verdict + emit record
+        for k in pre_llm_arbiter_keys:
+            pre_v = pre_llm_arbiter_by_key[k]
+            # Find the same candidate in the post-LLM result
+            post_v = next((v for v in consensus_result.verdicts if v.candidate == k), None)
+            if post_v is None:
+                continue
+            final = post_v.verdict
+            # Map final verdict → LLM decision (assuming pre-LLM was 'arbiter')
+            if final == "accept":
+                llm_v = "accept"
+            elif final == "drop":
+                llm_v = "reject"
+            else:
+                llm_v = "unresolved"   # LLM error / fail-open
+            capture_arbiter_verdicts.append({
+                "filename":     filename,
+                "leaf_id":      k[0],
+                "must_id":      k[1],
+                "control_ref":  pre_v.control_ref,
+                "standard_id":  pre_v.standard_id,
+                "score":        pre_v.score,
+                "corroborators": pre_v.corroborators,
+                "signals":      pre_v.signals,
+                "excerpt":      (pre_v.fingerprint_excerpt or "")[:400] if pre_v.fingerprint_excerpt else None,
+                "must_text":    must_texts.get(k[1] or "", "")[:400],
+                "llm_verdict":  llm_v,
+            })
 
     # Aggregate metrics for Path A
     by_source_A = Counter()
@@ -165,6 +213,8 @@ def main():
     paths = _load_upload_paths()
     all_metrics = {}
     total_a = total_b_accept = total_b_arbiter = total_b_drop = 0
+    # Ship 34'.b — accumulate arbiter-verdict records across all 5 docs
+    arbiter_verdicts: list[dict] = []
 
     for filename in SHIP10_BASELINE:
         entry = paths.get(filename)
@@ -178,7 +228,8 @@ def main():
 
         print(f"\n→ {filename}")
         try:
-            m = _run_one_doc(filename, storage_path, upload_id)
+            m = _run_one_doc(filename, storage_path, upload_id,
+                             capture_arbiter_verdicts=arbiter_verdicts)
         except Exception as e:
             import traceback
             print(f"    ✗ error: {type(e).__name__}: {e}")
@@ -217,6 +268,16 @@ def main():
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(all_metrics, indent=2, default=str))
     print(f"\n  Full metrics: {out}")
+
+    # Ship 34'.b — dump arbiter verdicts for HITL sample review
+    if arbiter_verdicts:
+        arb_out = Path("/data/arioncomply/results") / f"ship34b_arbiter_verdicts_{ts}.json"
+        arb_out.write_text(json.dumps(arbiter_verdicts, indent=2, default=str))
+        print(f"  Arbiter verdicts: {arb_out}  ({len(arbiter_verdicts)} candidates)")
+        # Quick breakdown
+        from collections import Counter
+        by_verdict = Counter(r["llm_verdict"] for r in arbiter_verdicts)
+        print(f"    LLM decisions: {dict(by_verdict)}")
 
     return 0
 

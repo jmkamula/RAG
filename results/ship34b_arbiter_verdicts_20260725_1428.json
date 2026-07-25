@@ -1,0 +1,1480 @@
+[
+  {
+    "filename": "Data Quality Accuracy Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:confidentiality",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Confidentiality obligations on processor staff",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Quality Accuracy Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:deletion",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Deletion or return of data at end of service",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Quality Accuracy Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:assistance",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Assistance with Art.32-36 obligations",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Quality Accuracy Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:audit",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Audit rights and information to demonstrate compliance",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Quality Accuracy Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:rights",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Assistance with data subject rights",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Quality Accuracy Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:subprocessors",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Sub-processor restrictions and approval process",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:security",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Security measures per Art.32",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:confidentiality",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Confidentiality obligations on processor staff",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:deletion",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Deletion or return of data at end of service",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "leaf_id": "req:Art.25:dpbd_procedure",
+    "must_id": "item:Art.25:proc_record",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Per-review record retained (which design, which decisions, which measures)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "leaf_id": "req:Art.25:dpbd_procedure",
+    "must_id": "item:Art.25:proc_checkpoint",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Design-stage checkpoint stated (when DPbD review happens in the product / system development lifecycle)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:assistance",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Assistance with Art.32-36 obligations",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "leaf_id": "req:Art.25:dpbd_procedure",
+    "must_id": "item:Art.25:proc_authority",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Decision authority for DPbD outcomes (DPO + product lead + engineering lead)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:audit",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Audit rights and information to demonstrate compliance",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:instructions",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Process only on documented controller instructions",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:rights",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Assistance with data subject rights",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:subprocessors",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Sub-processor restrictions and approval process",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_art28_3_terms",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Art.28.3 terms coverage (subject matter + duration + nature + purpose + PII categories + subject categories + controller/processor obligations)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:B.8.2.6:ropa_maintenance_procedure",
+    "must_id": "item:B.8.2.6:proc_instruction_change",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Instruction-change capture \u2014 customer purpose changes trigger RoPA update",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:B.8.2.6:ropa_maintenance_procedure",
+    "must_id": "item:B.8.2.6:proc_onboarding_trigger",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "New-customer onboarding trigger \u2014 RoPA row created per new engagement (link to B.8.2.1)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_documented_instructions",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Documented-instructions clause (Art.28.3.a) \u2014 processor acts only on written controller instructions",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:B.8.2.6:ropa_maintenance_procedure",
+    "must_id": "item:B.8.2.6:proc_secure_maintenance",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Secure maintenance \u2014 access control + integrity for the processor RoPA",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:B.8.2.6:ropa_maintenance_procedure",
+    "must_id": "item:B.8.2.6:proc_customer_availability",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Customer-availability path \u2014 how a customer requests + receives their RoPA row extract",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:B.8.2.6:program_review",
+    "must_id": "item:B.8.2.6:rev_reviewer",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Reviewer identity (DPO + Trust Ops)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:B.8.2.6:program_review",
+    "must_id": "item:B.8.2.6:rev_accuracy_sample",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Accuracy sample \u2014 random rows verified against customer instruction record + subprocessor list",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_return_or_delete",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "End-of-service disposition (Art.28.3.g) \u2014 return or delete all PII with certification",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:A.7.2.8:ropa_maintenance_procedure",
+    "must_id": "item:A.7.2.8:proc_retire_activity",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Retirement \u2014 activities that stop generate a retirement record (not deletion) for audit history",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:B.8.2.6:program_review",
+    "must_id": "item:B.8.2.6:rev_customer_extract_test",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Customer-extract test \u2014 sampled customers requested + received their RoPA row within SLA",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:B.8.2.6:program_review",
+    "must_id": "item:B.8.2.6:rev_date",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Review date within the planned interval",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:A.7.2.8:ropa_maintenance_procedure",
+    "must_id": "item:A.7.2.8:proc_reconciliation",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Reconciliation cadence \u2014 against \u00a77.2.1 purpose register + \u00a77.2.2 basis register + \u00a77.2.5 PIA register",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_audit_rights",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Audit rights (Art.28.3.h) \u2014 processor makes available all information + contributes to audits",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_annex_b_scope",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Annex B implementation scope \u2014 which B.8.x controls apply per processor engagement (default: all)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_subprocessor_gate",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Subprocessor consent gate (Art.28.2 + Art.28.4) \u2014 general or specific written authorisation",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_written_form",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Written form required \u2014 no verbal or informal processor arrangements",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:A.7.2.8:ropa_maintenance_procedure",
+    "must_id": "item:A.7.2.8:proc_secure_maintenance",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Secure maintenance \u2014 access control + integrity for the RoPA itself",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:A.7.2.8:ropa_maintenance_procedure",
+    "must_id": "item:A.7.2.8:proc_change_capture",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Change-capture \u2014 activity changes trigger RoPA update within stated SLA",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_exclusion_justification",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Justification required if any Annex B control is excluded from contract (\u00a75.4.1.3)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Records of Processing Activities.docx",
+    "leaf_id": "req:B.8.2.6:program_review",
+    "must_id": "item:B.8.2.6:rev_completeness",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Completeness check \u2014 one RoPA row per active customer engagement",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.8.10:information_deletion_procedure",
+    "must_id": "item:A.8.10:retention_trigger",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Retention trigger source (cross-link to A.5.33 records protection retention schedule)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.8.10:information_deletion_procedure",
+    "must_id": "item:A.8.10:legal_hold",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Legal-hold integration overriding deletion (with documented hold rationale and termination criteria)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.34:privacy_and_pii_protection_policy",
+    "must_id": "item:A.5.34:security_controls_ref",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "References security controls applied to PII (links to A.8.x technical controls \u2014 encryption A.8.24, access control A.5.15/A.8.3, logging A.8.15/A.8.16, pseudonymisation A.8.11; satisfies GDPR Art.32 integration with Art.5.1.f)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.34:pii_processing_register",
+    "must_id": "item:A.5.34:reg_retention",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Retention period per activity (concrete duration with start/end triggers; cross-link to A.5.33 records schedule \u2014 no arbitrary numbers)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.8.10:information_deletion_procedure",
+    "must_id": "item:A.8.10:verification",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Verification of deletion (audit log entry / sample re-read / certificate of destruction for hardware)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.8.10:applicable_deletion_scope",
+    "must_id": "item:A.8.10:scope_classes",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Information classes enumerated with retention trigger source per class (cross-link to A.5.33)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.12:information_classification_scheme",
+    "must_id": "item:A.5.12:classification_authority",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Decision authority for classifying information (owner-led by default)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:assistance",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Assistance with Art.32-36 obligations",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.12:information_classification_scheme",
+    "must_id": "item:A.5.12:level_definitions",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Definition and indicative examples per level",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.33:breach_notification",
+    "must_id": "item:Art.33:dpo_contact",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Contact details of DPO or other contact point",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.34:privacy_and_pii_protection_policy",
+    "must_id": "item:A.5.34:breach_handling",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Breach handling reference (cross-link to A.5.24/A.5.26 incident family + GDPR Art.33 supervisory-authority notification within 72h + GDPR Art.34 data-subject notification where high risk)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.34:pii_processing_register",
+    "must_id": "item:A.5.34:reg_controls_applied",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Security controls applied per activity (encryption at rest/in transit, access control class, pseudonymisation where used \u2014 cross-link to A.8.x and GDPR Art.32)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.8.10:information_deletion_procedure",
+    "must_id": "item:A.8.10:gdpr_erasure_path",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "GDPR Art.17 erasure path (DSAR-triggered deletion) cross-link to A.5.34 PII protection",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:confidentiality",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Confidentiality obligations on processor staff",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.8.10:information_deletion_procedure",
+    "must_id": "item:A.8.10:scope_systems",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Scope covers backups + replicas + caches + audit copies (NOT only primary systems \u2014 common GDPR pitfall)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:deletion",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Deletion or return of data at end of service",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.33:breach_notification",
+    "must_id": "item:Art.33:consequences",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Likely consequences of the breach",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:instructions",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Process only on documented controller instructions",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.8.10:applicable_deletion_scope",
+    "must_id": "item:A.8.10:scope_vendor_managed",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Vendor-managed data delegated to A.5.19/A.5.20 supplier obligations (contractual deletion-on-termination)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.12:information_classification_scheme",
+    "must_id": "item:A.5.12:handling_per_level",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Handling implications per level (links to A.5.13 labelling, A.5.10 acceptable use, A.5.14 transfer)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.12:information_classification_scheme",
+    "must_id": "item:A.5.12:cia_dimensions",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Each level addresses confidentiality, integrity, and availability dimensions",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.8.10:applicable_deletion_scope",
+    "must_id": "item:A.8.10:scope_media_methods",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Media classes enumerated with required deletion method per class",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.12:information_classification_scheme",
+    "must_id": "item:A.5.12:levels_defined",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Classification levels defined (e.g. Public / Internal / Confidential / Restricted)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.8.10:information_deletion_procedure",
+    "must_id": "item:A.8.10:deletion_methods",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Deletion methods per media class (logical delete / overwrite / crypto-erase / physical destruction)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:audit",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Audit rights and information to demonstrate compliance",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.34:pii_processing_register",
+    "must_id": "item:A.5.34:reg_transfers",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Cross-border transfers per activity (destination jurisdictions + legal mechanism \u2014 SCCs / adequacy / BCRs / derogations; explicit 'none' where applicable)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:rights",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Assistance with data subject rights",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.33:breach_notification",
+    "must_id": "item:Art.33:nature",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Nature of the breach including categories and approximate number of data subjects",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:subprocessors",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Sub-processor restrictions and approval process",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:security",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Security measures per Art.32",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.34:privacy_applicability_scope",
+    "must_id": "item:A.5.34:scope_controller_role",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Controller vs Processor vs Joint Controller status per processing context (drives different obligation sets \u2014 Art.24-31 for controllers, Art.28 for processors, Art.26 for joint controllers)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.12:information_classification_scheme",
+    "must_id": "item:A.5.12:default_class",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Default classification for unclassified information (typically 'Internal' as fail-safe)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.34:privacy_applicability_scope",
+    "must_id": "item:A.5.34:scope_regulated_activities",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Regulated activities pulling in sectoral privacy regimes (healthcare \u2192 HIPAA, financial \u2192 GLBA/PSD2/DORA-privacy overlap, telco \u2192 ePrivacy, public sector \u2192 FERPA/government-records laws, advertising/profiling \u2192 ePrivacy)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.33:breach_notification",
+    "must_id": "item:Art.33:measures",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Measures taken or proposed to address the breach",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.34:privacy_applicability_scope",
+    "must_id": "item:A.5.34:scope_jurisdictions",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Jurisdictions covered (HQ + places of business + data subject residency + processing locations + transfer destinations \u2014 each may impose distinct privacy obligations)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:A.5.34:privacy_and_pii_protection_policy",
+    "must_id": "item:A.5.34:transfer_restrictions",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Cross-border transfer discipline (which transfers happen, on what legal basis \u2014 SCCs / adequacy / BCRs / derogations; cross-link to A.5.14 transfer policy + GDPR Art.44-49)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Consent Management Procedure.docx",
+    "leaf_id": "req:Art.33:breach_notification",
+    "must_id": "item:Art.33:timing",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "excerpt": null,
+    "must_text": "Notified within 72 hours of becoming aware",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_art28_3_terms",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Art.28.3 terms coverage (subject matter + duration + nature + purpose + PII categories + subject categories + controller/processor obligations)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:A.7.2.1:purpose_procedure",
+    "must_id": "item:A.7.2.1:proc_documentation_fields",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Documentation fields per purpose (purpose text, categories of PII, categories of subjects, retention, recipients, legal basis link)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_documented_instructions",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Documented-instructions clause (Art.28.3.a) \u2014 processor acts only on written controller instructions",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:B.8.2.1:customer_agreement_procedure",
+    "must_id": "item:B.8.2.1:proc_assistance_scope",
+    "control_ref": "B.8.2.1",
+    "standard_id": "ISO27701:2019",
+    "score": 0.7,
+    "corroborators": 4,
+    "signals": [
+      "fingerprint_keyword",
+      "must_semantic_topk",
+      "per_protocol_scope",
+      "semantic_fit_gate",
+      "evidence_uniqueness"
+    ],
+    "excerpt": "- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)",
+    "must_text": "Assistance scope enumerated (Art.28.3.e subject rights + Art.28.3.f security + breach notification + PIA support + prior consultation)",
+    "llm_verdict": "accept"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_return_or_delete",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "End-of-service disposition (Art.28.3.g) \u2014 return or delete all PII with certification",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:B.8.2.2:purpose_limitation_procedure",
+    "must_id": "item:B.8.2.2:proc_technical_justification",
+    "control_ref": "B.8.2.2",
+    "standard_id": "ISO27701:2019",
+    "score": 0.7,
+    "corroborators": 4,
+    "signals": [
+      "fingerprint_keyword",
+      "must_semantic_topk",
+      "per_protocol_scope",
+      "semantic_fit_gate",
+      "evidence_uniqueness"
+    ],
+    "excerpt": "This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:",
+    "must_text": "Technical-justification carve-out procedure \u2014 where processor must choose method for capacity reasons (per \u00a78.2.2 implementation), justification documented + surfaced to customer",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:B.8.2.1:customer_agreement_procedure",
+    "must_id": "item:B.8.2.1:proc_customer_dpia_support",
+    "control_ref": "B.8.2.1",
+    "standard_id": "ISO27701:2019",
+    "score": 0.7,
+    "corroborators": 4,
+    "signals": [
+      "fingerprint_keyword",
+      "must_semantic_topk",
+      "per_protocol_scope",
+      "semantic_fit_gate",
+      "evidence_uniqueness"
+    ],
+    "excerpt": "- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)",
+    "must_text": "Art.35.1 DPIA support pathway \u2014 how customer requests DPIA-input from processor",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:B.8.2.1:customer_agreement_procedure",
+    "must_id": "item:B.8.2.1:proc_intake_gate",
+    "control_ref": "B.8.2.1",
+    "standard_id": "ISO27701:2019",
+    "score": 0.7,
+    "corroborators": 4,
+    "signals": [
+      "fingerprint_keyword",
+      "must_semantic_topk",
+      "per_protocol_scope",
+      "semantic_fit_gate",
+      "evidence_uniqueness"
+    ],
+    "excerpt": "- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)",
+    "must_text": "Intake gate \u2014 new customer onboarding blocked until PII processing agreement executed",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:B.8.2.2:purpose_limitation_procedure",
+    "must_id": "item:B.8.2.2:proc_instruction_capture",
+    "control_ref": "B.8.2.2",
+    "standard_id": "ISO27701:2019",
+    "score": 0.7,
+    "corroborators": 4,
+    "signals": [
+      "fingerprint_keyword",
+      "must_semantic_topk",
+      "per_protocol_scope",
+      "semantic_fit_gate",
+      "evidence_uniqueness"
+    ],
+    "excerpt": "- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)",
+    "must_text": "Instruction capture \u2014 customer purposes recorded per engagement (contract + change-notices)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:B.8.2.2:purpose_limitation_procedure",
+    "must_id": "item:B.8.2.2:proc_customer_verification",
+    "control_ref": "B.8.2.2",
+    "standard_id": "ISO27701:2019",
+    "score": 0.7,
+    "corroborators": 4,
+    "signals": [
+      "fingerprint_keyword",
+      "must_semantic_topk",
+      "per_protocol_scope",
+      "semantic_fit_gate",
+      "evidence_uniqueness"
+    ],
+    "excerpt": "- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)",
+    "must_text": "Customer verification pathway \u2014 customer can audit purpose-limitation compliance",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:B.8.4.2:return_transfer_disposal_procedure",
+    "must_id": "item:B.8.4.2:proc_lapse_protection",
+    "control_ref": "B.8.4.2",
+    "standard_id": "ISO27701:2019",
+    "score": 0.7,
+    "corroborators": 4,
+    "signals": [
+      "fingerprint_keyword",
+      "must_semantic_topk",
+      "per_protocol_scope",
+      "semantic_fit_gate",
+      "evidence_uniqueness"
+    ],
+    "excerpt": "- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)",
+    "must_text": "Lapse-of-contract protection \u2014 retention period defined before disposal after contract termination (accidental lapse protection)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:B.8.2.1:customer_agreement_procedure",
+    "must_id": "item:B.8.2.1:proc_subject_matter_scope",
+    "control_ref": "B.8.2.1",
+    "standard_id": "ISO27701:2019",
+    "score": 0.7,
+    "corroborators": 4,
+    "signals": [
+      "fingerprint_keyword",
+      "must_semantic_topk",
+      "per_protocol_scope",
+      "semantic_fit_gate",
+      "evidence_uniqueness"
+    ],
+    "excerpt": "- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)",
+    "must_text": "Subject-matter + duration + nature + purpose scope per Art.28.3 requirements",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_audit_rights",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Audit rights (Art.28.3.h) \u2014 processor makes available all information + contributes to audits",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_annex_b_scope",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Annex B implementation scope \u2014 which B.8.x controls apply per processor engagement (default: all)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_subprocessor_gate",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Subprocessor consent gate (Art.28.2 + Art.28.4) \u2014 general or specific written authorisation",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_written_form",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Written form required \u2014 no verbal or informal processor arrangements",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:Art.29:processing_under_authority_procedure",
+    "must_id": "item:Art.29:instructions_source",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Instructions source documented (DPA terms + change orders / customer support tickets / contract amendments)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:B.8.2.1:customer_agreement_procedure",
+    "must_id": "item:B.8.2.1:proc_documented_instructions",
+    "control_ref": "B.8.2.1",
+    "standard_id": "ISO27701:2019",
+    "score": 0.7,
+    "corroborators": 4,
+    "signals": [
+      "fingerprint_keyword",
+      "must_semantic_topk",
+      "per_protocol_scope",
+      "semantic_fit_gate",
+      "evidence_uniqueness"
+    ],
+    "excerpt": "- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)",
+    "must_text": "Documented-instructions mechanism (how instructions are recorded, escalated, disputed)",
+    "llm_verdict": "reject"
+  },
+  {
+    "filename": "Processor Operations Procedures.docx",
+    "leaf_id": "req:B.8.2.2:purpose_limitation_procedure",
+    "must_id": "item:B.8.2.2:proc_technical_binding",
+    "control_ref": null,
+    "standard_id": null,
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "excerpt": null,
+    "must_text": "Technical binding \u2014 engineering controls that prevent processing beyond stated purposes (tenant isolation / data-tag enforcement / access scoping)",
+    "llm_verdict": "reject"
+  }
+]
