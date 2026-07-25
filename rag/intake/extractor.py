@@ -274,6 +274,22 @@ def extract(
     elif scoped_leaf_ids:
         fp_leaf_pool = list(scoped_leaf_ids)
 
+    # Ship 35 — full-replacement cutover for the extraction consensus
+    # module. When USE_CONSENSUS_EXTRACTION=1, consensus REPLACES
+    # _extract_via_fingerprints + _run_critic_verifier_pass + the concat
+    # entirely. Default OFF (existing path unchanged). See
+    # docs/memory/ship_35_prime_a_cutover_design_2026_07_25.md.
+    #
+    # Trade-off: full replacement LOSES the LLM discovery pass (finds
+    # candidates in body text with no deterministic signal). Bounded
+    # to opted-in tenants by default-OFF; intake_consensus_log
+    # telemetry drives post-cutover tuning + rollout decisions.
+    _consensus_flag = os.getenv("USE_CONSENSUS_EXTRACTION", "0").lower()
+    if _consensus_flag not in ("0", "false", "no", "off"):
+        findings = _extract_via_consensus(doc, fp_leaf_pool)
+        _finalize_yield_metrics(doc, findings)
+        return findings
+
     fp_findings: list[DocumentFinding] = []
     fp_covered: set[str] = set()
     if fp_leaf_pool:
@@ -308,6 +324,93 @@ def extract(
 
     findings = fp_findings + llm_findings
     _finalize_yield_metrics(doc, findings)
+    return findings
+
+
+def _extract_via_consensus(
+    doc:             "ParsedDocument",
+    scoped_leaf_ids: list[str],
+) -> list[DocumentFinding]:
+    """Ship 35 — cutover entry point for the extraction consensus module.
+
+    Runs consensus (aggregator + LLM arbiter) and materialises each
+    accepted CandidateVerdict as a DocumentFinding compatible with the
+    existing writer. Silent-fail on log-write; extraction never blocks
+    on telemetry.
+
+    Attempts to persist per-doc consensus telemetry to
+    intake_consensus_log via a fresh DB connection (writer is
+    silent-fail).
+    """
+    from rag.intake.consensus_extraction import default_config
+    from rag.intake.consensus_extraction.orchestrator import (
+        run_extraction_consensus,
+    )
+
+    if not scoped_leaf_ids:
+        return []
+
+    cfg = default_config().with_overrides(llm_arbiter_enabled=True)
+    result = run_extraction_consensus(doc, scoped_leaf_ids, cfg)
+
+    # Materialise accepted verdicts as DocumentFindings
+    findings: list[DocumentFinding] = []
+    for v in result.accepted():
+        leaf_id, must_id = v.candidate
+        if not v.control_ref or not v.standard_id:
+            continue   # fingerprint metadata missing — cannot bind
+        findings.append(DocumentFinding(
+            upload_id         = doc.upload_id or "",
+            tenant_id         = "",
+            document_name     = doc.original_name,
+            control_ref       = v.control_ref,
+            standard_id       = v.standard_id,
+            finding           = "Comply",
+            evidence_text     = (v.fingerprint_excerpt or "")[:2000],
+            confidence        = "medium",
+            checklist_item_id = must_id,
+            extraction_path   = "consensus",
+            chunk_id          = f"cons:{v.control_ref}",
+            inference_source  = "fingerprint_match",   # keep compat with writer
+        ))
+
+    # Persist telemetry — silent-fail. Writer opens its own connection.
+    try:
+        import psycopg2
+        from rag.intake.consensus_extraction.log import (
+            log_consensus_result, build_candidates_sample,
+        )
+        conn = psycopg2.connect(
+            host="127.0.0.1", dbname="arioncomply_compliance",
+            user="arioncomply", password="",
+        )
+        try:
+            # Tenant/upload from doc (extractor doesn't have tenant_id
+            # in the doc directly; writer will fill from upload row).
+            # For log purposes, pull tenant from the upload row.
+            tenant_id = None
+            with conn.cursor() as cur:
+                cur.execute(
+                    "SELECT tenant_id::text FROM document_uploads "
+                    "WHERE id = %s::uuid LIMIT 1",
+                    (doc.upload_id,),
+                )
+                row = cur.fetchone()
+                if row:
+                    tenant_id = row[0]
+            if tenant_id:
+                log_consensus_result(
+                    pg_conn           = conn,
+                    tenant_id         = tenant_id,
+                    upload_id         = doc.upload_id,
+                    result            = result,
+                    candidates_sample = build_candidates_sample(result),
+                )
+        finally:
+            conn.close()
+    except Exception as e:
+        logger.debug("consensus telemetry write skipped: %s", e)
+
     return findings
 
 

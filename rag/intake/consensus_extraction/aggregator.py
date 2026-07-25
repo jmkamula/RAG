@@ -97,7 +97,19 @@ def aggregate_extraction(
     for candidate in sorted(fused_scores.keys()):
         score = fused_scores[candidate]
         corrob = corroborators.get(candidate, 0)
-        if score >= cfg.accept_floor and corrob >= cfg.min_corroborators:
+        excerpt = fp_excerpts.get(candidate)
+
+        # Ship 34'.c finding — no-excerpt-auto-drop invariant. When a
+        # candidate has no fingerprint_excerpt, there is no doc-body
+        # text for the arbiter LLM to evaluate. Ship 34 HITL sample:
+        # 17 of 20 sampled arbiter rejects were no-excerpt candidates
+        # (scope signals voted "leaf in-scope" but no fingerprint
+        # match); LLM correctly rejected all 17. Save the LLM
+        # roundtrip by dropping deterministically. Scope signals
+        # alone should not authorize LLM review.
+        if not excerpt:
+            verdict = "drop"; n_drop += 1
+        elif score >= cfg.accept_floor and corrob >= cfg.min_corroborators:
             verdict = "accept"; n_accept += 1
         elif score >= cfg.arbiter_floor:
             verdict = "arbiter"; n_arbiter += 1
@@ -109,7 +121,7 @@ def aggregate_extraction(
             corroborators        = corrob,
             signals              = signals_by_c.get(candidate, []),
             verdict              = verdict,
-            fingerprint_excerpt  = fp_excerpts.get(candidate),
+            fingerprint_excerpt  = excerpt,
             fingerprint_position = fp_positions.get(candidate),
             control_ref          = fp_control_refs.get(candidate),
             standard_id          = fp_standard_ids.get(candidate),
