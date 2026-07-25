@@ -50,23 +50,39 @@ def run_extraction_consensus(
 
     t0 = time.time()
 
-    # Round 1: signals that don't depend on other signals
-    sig_explicit_ref   = explicit_ref.compute(doc, scoped_leaf_ids, cfg)
-    sig_doc_mappings   = doc_mappings_target.compute(doc, scoped_leaf_ids, cfg)
-    sig_fingerprint    = fingerprint_keyword.compute(doc, scoped_leaf_ids, cfg)
+    # Ship 39'.b — scope widening. must_semantic_topk now emits
+    # candidates for ANY Chroma-surfaced MUST (Ship 39 layer-3 fix).
+    # For those candidates to receive corroboration from the other
+    # signals (fingerprint_keyword, semantic_fit_gate, etc.), the
+    # OTHER signals also need to operate on the widened scope.
+    # Otherwise Chroma-surfaced Art.35 MUSTs for a DPIA doc get
+    # single-signal score=0.30 and drop below arbiter_floor.
+    #
+    # Approach: run must_semantic_topk FIRST, union its leaf set
+    # into scoped_leaf_ids, then run the rest of the signals on the
+    # widened set. Restores critic-verifier's extend_pool discovery
+    # breadth.
     sig_must_semantic  = must_semantic_topk.compute(doc, scoped_leaf_ids, cfg)
-    sig_per_protocol   = per_protocol_scope.compute(doc, scoped_leaf_ids, cfg)
+    widened_leaf_ids = list({*scoped_leaf_ids,
+                             *(lid for (lid, _mid) in sig_must_semantic.candidates.keys()
+                               if lid)})
+
+    # Round 1: signals that don't depend on other signals (widened scope)
+    sig_explicit_ref   = explicit_ref.compute(doc, widened_leaf_ids, cfg)
+    sig_doc_mappings   = doc_mappings_target.compute(doc, widened_leaf_ids, cfg)
+    sig_fingerprint    = fingerprint_keyword.compute(doc, widened_leaf_ids, cfg)
+    sig_per_protocol   = per_protocol_scope.compute(doc, widened_leaf_ids, cfg)
 
     # Round 2: signals that depend on fingerprint_keyword's excerpts
     sig_semantic_fit    = semantic_fit_gate.compute(
-        doc, scoped_leaf_ids, cfg, fingerprint_signal=sig_fingerprint,
+        doc, widened_leaf_ids, cfg, fingerprint_signal=sig_fingerprint,
     )
     sig_content_shape   = content_shape_penalty.compute(
-        doc, scoped_leaf_ids, cfg, fingerprint_signal=sig_fingerprint,
+        doc, widened_leaf_ids, cfg, fingerprint_signal=sig_fingerprint,
     )
     # Ship 33'.b v3: cross-candidate signal — penalises multi-attribution
     sig_evidence_uniq   = evidence_uniqueness.compute(
-        doc, scoped_leaf_ids, cfg, fingerprint_signal=sig_fingerprint,
+        doc, widened_leaf_ids, cfg, fingerprint_signal=sig_fingerprint,
     )
 
     signals = [
