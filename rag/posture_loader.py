@@ -470,7 +470,8 @@ def _fetch_not_assessed_obligation_rows(
                     control_ref, standard_id, finding, confidence,
                     gap_description, action_required, source, source_authority,
                     platform_ref, external_ref, soa_notes, remediation_status,
-                    linked_policies, last_updated, engine_proposal_status
+                    linked_policies, last_updated, engine_proposal_status,
+                    confirmation_status
                 FROM posture_controls
                 WHERE tenant_id = %s
                   AND finding = 'Not assessed'
@@ -858,22 +859,30 @@ def load_client_facts(pg_conn, tenant_id: str):
     from enrichment.obligations.client_facts import ClientFacts
 
     defaults = {
-        "sector":                   "technology",
-        "processes_personal_data":  True,
-        "eu_data_subjects":         True,
-        "role_controller":          True,
-        "role_processor":           False,
-        "special_category_data":    False,
-        "childrens_data":           False,
-        "develops_software":        False,
-        "uses_cloud_services":      True,
-        "uses_processors":          True,
-        "has_remote_workers":       True,
-        "has_physical_premises":    False,
-        "large_scale_processing":   False,
-        "high_risk_processing":     False,
-        "transfers_data_outside_eu":False,
-        "collected_via":            "workbook",
+        "sector":                    "technology",
+        "processes_personal_data":   True,
+        "eu_data_subjects":          True,
+        "uk_data_subjects":          False,
+        "role_controller":           True,
+        "role_processor":            False,
+        "role_joint_controller":     False,
+        "special_category_data":     False,
+        "criminal_conviction_data":  False,
+        "childrens_data":            False,
+        "automated_decision_making": False,
+        "profiling":                 False,
+        "develops_software":         False,
+        "uses_cloud_services":       True,
+        "uses_processors":           True,
+        "has_remote_workers":        True,
+        "has_physical_premises":     False,
+        "large_scale_processing":    False,
+        "systematic_monitoring":     False,
+        "high_risk_processing":      False,
+        "employee_count_250_plus":   False,
+        "public_authority":          False,
+        "transfers_data_outside_eu": False,
+        "collected_via":             "workbook",
     }
 
     try:
@@ -884,17 +893,25 @@ def load_client_facts(pg_conn, tenant_id: str):
                     sector,
                     processes_personal_data,
                     eu_data_subjects,
+                    uk_data_subjects,
                     role_controller,
                     role_processor,
+                    role_joint_controller,
                     special_category_data,
+                    criminal_conviction_data,
                     childrens_data,
+                    automated_decision_making,
+                    profiling,
                     develops_software,
                     uses_cloud_services,
                     uses_processors,
                     has_remote_workers,
                     has_physical_premises,
                     large_scale_processing,
+                    systematic_monitoring,
                     high_risk_processing,
+                    employee_count_250_plus,
+                    public_authority,
                     transfers_data_outside_eu,
                     collected_via
                 FROM client_facts
