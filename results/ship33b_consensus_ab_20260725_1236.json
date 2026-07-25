@@ -1,0 +1,136 @@
+{
+  "Data Quality Accuracy Procedure.docx": {
+    "path_a": {
+      "total": 15,
+      "by_source": {
+        "fingerprint_match": 5,
+        "extracted": 10
+      },
+      "unique_evidence": 13
+    },
+    "path_b": {
+      "total_candidates": 9,
+      "n_accept": 3,
+      "n_arbiter": 0,
+      "n_drop": 6,
+      "signals_fired": 6,
+      "signal_counts": {
+        "explicit_ref": 0,
+        "doc_mappings_target": 0,
+        "fingerprint_keyword": 6,
+        "must_semantic_topk": 6,
+        "semantic_fit_gate": 6,
+        "content_shape_penalty": 1
+      },
+      "unique_evidence_accept": 3,
+      "latency_ms": 2447
+    }
+  },
+  "Data Protection Impact Assessment (DPIA) Procedure.docx": {
+    "path_a": {
+      "total": 27,
+      "by_source": {
+        "fingerprint_match": 9,
+        "extracted": 18
+      },
+      "unique_evidence": 18
+    },
+    "path_b": {
+      "total_candidates": 27,
+      "n_accept": 8,
+      "n_arbiter": 1,
+      "n_drop": 18,
+      "signals_fired": 6,
+      "signal_counts": {
+        "explicit_ref": 0,
+        "doc_mappings_target": 0,
+        "fingerprint_keyword": 9,
+        "must_semantic_topk": 24,
+        "semantic_fit_gate": 9,
+        "content_shape_penalty": 0
+      },
+      "unique_evidence_accept": 3,
+      "latency_ms": 3174
+    }
+  },
+  "Records of Processing Activities.docx": {
+    "path_a": {
+      "total": 24,
+      "by_source": {
+        "fingerprint_match": 5,
+        "extracted": 19
+      },
+      "unique_evidence": 16
+    },
+    "path_b": {
+      "total_candidates": 85,
+      "n_accept": 3,
+      "n_arbiter": 0,
+      "n_drop": 82,
+      "signals_fired": 6,
+      "signal_counts": {
+        "explicit_ref": 0,
+        "doc_mappings_target": 0,
+        "fingerprint_keyword": 5,
+        "must_semantic_topk": 80,
+        "semantic_fit_gate": 5,
+        "content_shape_penalty": 0
+      },
+      "unique_evidence_accept": 1,
+      "latency_ms": 1935
+    }
+  },
+  "Consent Management Procedure.docx": {
+    "path_a": {
+      "total": 56,
+      "by_source": {
+        "fingerprint_match": 33,
+        "extracted": 23
+      },
+      "unique_evidence": 30
+    },
+    "path_b": {
+      "total_candidates": 44,
+      "n_accept": 20,
+      "n_arbiter": 0,
+      "n_drop": 24,
+      "signals_fired": 6,
+      "signal_counts": {
+        "explicit_ref": 0,
+        "doc_mappings_target": 0,
+        "fingerprint_keyword": 33,
+        "must_semantic_topk": 11,
+        "semantic_fit_gate": 33,
+        "content_shape_penalty": 0
+      },
+      "unique_evidence_accept": 6,
+      "latency_ms": 10393
+    }
+  },
+  "Processor Operations Procedures.docx": {
+    "path_a": {
+      "total": 143,
+      "by_source": {
+        "fingerprint_match": 121,
+        "extracted": 22
+      },
+      "unique_evidence": 27
+    },
+    "path_b": {
+      "total_candidates": 219,
+      "n_accept": 72,
+      "n_arbiter": 1,
+      "n_drop": 146,
+      "signals_fired": 5,
+      "signal_counts": {
+        "explicit_ref": 0,
+        "fingerprint_keyword": 121,
+        "must_semantic_topk": 108,
+        "semantic_fit_gate": 121,
+        "content_shape_penalty": 0
+      },
+      "unique_evidence_accept": 10,
+      "latency_ms": 39333
+    }
+  }
+}
