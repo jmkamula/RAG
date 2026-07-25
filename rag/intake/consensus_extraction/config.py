@@ -63,6 +63,10 @@ class ExtractionConsensusConfig:
 
     # Feature flags
     llm_arbiter_enabled:       bool = False    # False in shadow mode; True post-cutover
+    # Ship 37'.b — toggle for the no-excerpt-auto-drop invariant.
+    # Default True (Ship 35 shape). Set False to bypass the invariant
+    # for measurement / HITL sampling of what the invariant drops.
+    no_excerpt_auto_drop:      bool = True
 
     def with_overrides(self, **kwargs) -> "ExtractionConsensusConfig":
         from dataclasses import replace

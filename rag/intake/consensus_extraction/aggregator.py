@@ -107,7 +107,11 @@ def aggregate_extraction(
         # match); LLM correctly rejected all 17. Save the LLM
         # roundtrip by dropping deterministically. Scope signals
         # alone should not authorize LLM review.
-        if not excerpt:
+        #
+        # Ship 37'.b — toggle via cfg.no_excerpt_auto_drop. Default
+        # True (Ship 35 shape). Set False for HITL sampling of what
+        # the invariant drops.
+        if not excerpt and cfg.no_excerpt_auto_drop:
             verdict = "drop"; n_drop += 1
         elif score >= cfg.accept_floor and corrob >= cfg.min_corroborators:
             verdict = "accept"; n_accept += 1

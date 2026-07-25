@@ -1,0 +1,664 @@
+[
+  {
+    "leaf_id": "req:A.7.4.3:accuracy_incident_register",
+    "must_id": "item:A.7.4.3:reg_pii_scope",
+    "must_text": "PII scope per row (which fields / how many subjects affected)",
+    "score": 1.1,
+    "corroborators": 2,
+    "signals": [
+      "explicit_ref",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "accept",
+    "doc_snippet_first_2k": "# Data Quality & Accuracy Maintenance Procedure\n\n__ Document ID: DOC050__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nTo ensure all personal data processed by Arion Networks is accurate, up to date, and relevant, in line with:\n\n- GDPR Article 5\\(1\\)\\(d\\)\n- ISO/IEC 27701:2019 A\\.7\\.4\\.3\n\n__2\\. Scope__\n\nApplies to:\n\n- Data collected directly from individuals\n- Client\\-provided data handled under processing contracts\n- Training participants and platform account data\n\n__3\\. Principles__\n\n- Data must be:\n\t- Accurate and complete\n\t- Kept up to date where necessary\n\t- Corrected or deleted if inaccurate\n\n__4\\. Implementation Measures__\n\n__4\\.1 At Collection__\n\n- Use structured forms with validation \\(e\\.g\\., date formats, email check\\)\n- Collect only verifiable data where possible\n\n__4\\.2 Post\\-Collection Controls__\n\n- Allow users to view and update their data \\(e\\.g\\., via account portal\\)\n- Provide clear contact for update requests \\(e\\.g\\., privacy@arionnetworks\\.com\\)\n- Include review cycles in data retention and DPIA evaluations\n\n__4\\.3 For Processor Data__\n\n- Clarify in contracts who is responsible for data accuracy\n- Follow client instructions for updates and corrections\n- Avoid altering source data unless contractually permitted\n\n__4\\.4 Quarterly Verification \\(PII Systems\\)__\n\n- During quarterly access reviews per Access Management Process, the Office Manager spot\\-checks data accuracy for minimum 2 random personnel records \n- Contact details \\(email, phone, address\\) are verified as current \n- Any identified inaccuracies are corrected immediately \n- Results documented in Access Register \\- PII Systems\n\n__5\\. Review and Correction Process__\n\n- Any identified errors must be:\n\t- Logged and assessed within 2 business days\n\t- Corrected within 5 business days\n- Correction efforts are tracked as part of the DSR R",
+    "doc_topic_tokens": [
+      "accuracy",
+      "dataquality",
+      "personaldata",
+      "validation",
+      "correction",
+      "retention",
+      "collection",
+      "gdpr"
+    ],
+    "filename": "Data Quality Accuracy Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.7.4.3:accuracy_incident_register",
+    "must_id": "item:A.7.4.3:reg_incident_id",
+    "must_text": "Unique incident identifier per row",
+    "score": 1.1,
+    "corroborators": 2,
+    "signals": [
+      "explicit_ref",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "accept",
+    "doc_snippet_first_2k": "# Data Quality & Accuracy Maintenance Procedure\n\n__ Document ID: DOC050__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nTo ensure all personal data processed by Arion Networks is accurate, up to date, and relevant, in line with:\n\n- GDPR Article 5\\(1\\)\\(d\\)\n- ISO/IEC 27701:2019 A\\.7\\.4\\.3\n\n__2\\. Scope__\n\nApplies to:\n\n- Data collected directly from individuals\n- Client\\-provided data handled under processing contracts\n- Training participants and platform account data\n\n__3\\. Principles__\n\n- Data must be:\n\t- Accurate and complete\n\t- Kept up to date where necessary\n\t- Corrected or deleted if inaccurate\n\n__4\\. Implementation Measures__\n\n__4\\.1 At Collection__\n\n- Use structured forms with validation \\(e\\.g\\., date formats, email check\\)\n- Collect only verifiable data where possible\n\n__4\\.2 Post\\-Collection Controls__\n\n- Allow users to view and update their data \\(e\\.g\\., via account portal\\)\n- Provide clear contact for update requests \\(e\\.g\\., privacy@arionnetworks\\.com\\)\n- Include review cycles in data retention and DPIA evaluations\n\n__4\\.3 For Processor Data__\n\n- Clarify in contracts who is responsible for data accuracy\n- Follow client instructions for updates and corrections\n- Avoid altering source data unless contractually permitted\n\n__4\\.4 Quarterly Verification \\(PII Systems\\)__\n\n- During quarterly access reviews per Access Management Process, the Office Manager spot\\-checks data accuracy for minimum 2 random personnel records \n- Contact details \\(email, phone, address\\) are verified as current \n- Any identified inaccuracies are corrected immediately \n- Results documented in Access Register \\- PII Systems\n\n__5\\. Review and Correction Process__\n\n- Any identified errors must be:\n\t- Logged and assessed within 2 business days\n\t- Corrected within 5 business days\n- Correction efforts are tracked as part of the DSR R",
+    "doc_topic_tokens": [
+      "accuracy",
+      "dataquality",
+      "personaldata",
+      "validation",
+      "correction",
+      "retention",
+      "collection",
+      "gdpr"
+    ],
+    "filename": "Data Quality Accuracy Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:Art.28:data_processing_agreement",
+    "must_id": "item:Art.28:confidentiality",
+    "must_text": "Confidentiality obligations on processor staff",
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "# Data Quality & Accuracy Maintenance Procedure\n\n__ Document ID: DOC050__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nTo ensure all personal data processed by Arion Networks is accurate, up to date, and relevant, in line with:\n\n- GDPR Article 5\\(1\\)\\(d\\)\n- ISO/IEC 27701:2019 A\\.7\\.4\\.3\n\n__2\\. Scope__\n\nApplies to:\n\n- Data collected directly from individuals\n- Client\\-provided data handled under processing contracts\n- Training participants and platform account data\n\n__3\\. Principles__\n\n- Data must be:\n\t- Accurate and complete\n\t- Kept up to date where necessary\n\t- Corrected or deleted if inaccurate\n\n__4\\. Implementation Measures__\n\n__4\\.1 At Collection__\n\n- Use structured forms with validation \\(e\\.g\\., date formats, email check\\)\n- Collect only verifiable data where possible\n\n__4\\.2 Post\\-Collection Controls__\n\n- Allow users to view and update their data \\(e\\.g\\., via account portal\\)\n- Provide clear contact for update requests \\(e\\.g\\., privacy@arionnetworks\\.com\\)\n- Include review cycles in data retention and DPIA evaluations\n\n__4\\.3 For Processor Data__\n\n- Clarify in contracts who is responsible for data accuracy\n- Follow client instructions for updates and corrections\n- Avoid altering source data unless contractually permitted\n\n__4\\.4 Quarterly Verification \\(PII Systems\\)__\n\n- During quarterly access reviews per Access Management Process, the Office Manager spot\\-checks data accuracy for minimum 2 random personnel records \n- Contact details \\(email, phone, address\\) are verified as current \n- Any identified inaccuracies are corrected immediately \n- Results documented in Access Register \\- PII Systems\n\n__5\\. Review and Correction Process__\n\n- Any identified errors must be:\n\t- Logged and assessed within 2 business days\n\t- Corrected within 5 business days\n- Correction efforts are tracked as part of the DSR R",
+    "doc_topic_tokens": [
+      "accuracy",
+      "dataquality",
+      "personaldata",
+      "validation",
+      "correction",
+      "retention",
+      "collection",
+      "gdpr"
+    ],
+    "filename": "Data Quality Accuracy Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.7.4.3:accuracy_procedure",
+    "must_id": "item:A.7.4.3:proc_inaccuracy_response",
+    "must_text": "Inaccuracy response \u2014 how the org responds when inaccuracy is detected (internal + subject-flagged)",
+    "score": 2.0,
+    "corroborators": 4,
+    "signals": [
+      "explicit_ref",
+      "doc_mappings_target",
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "accept",
+    "doc_snippet_first_2k": "# Data Quality & Accuracy Maintenance Procedure\n\n__ Document ID: DOC050__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nTo ensure all personal data processed by Arion Networks is accurate, up to date, and relevant, in line with:\n\n- GDPR Article 5\\(1\\)\\(d\\)\n- ISO/IEC 27701:2019 A\\.7\\.4\\.3\n\n__2\\. Scope__\n\nApplies to:\n\n- Data collected directly from individuals\n- Client\\-provided data handled under processing contracts\n- Training participants and platform account data\n\n__3\\. Principles__\n\n- Data must be:\n\t- Accurate and complete\n\t- Kept up to date where necessary\n\t- Corrected or deleted if inaccurate\n\n__4\\. Implementation Measures__\n\n__4\\.1 At Collection__\n\n- Use structured forms with validation \\(e\\.g\\., date formats, email check\\)\n- Collect only verifiable data where possible\n\n__4\\.2 Post\\-Collection Controls__\n\n- Allow users to view and update their data \\(e\\.g\\., via account portal\\)\n- Provide clear contact for update requests \\(e\\.g\\., privacy@arionnetworks\\.com\\)\n- Include review cycles in data retention and DPIA evaluations\n\n__4\\.3 For Processor Data__\n\n- Clarify in contracts who is responsible for data accuracy\n- Follow client instructions for updates and corrections\n- Avoid altering source data unless contractually permitted\n\n__4\\.4 Quarterly Verification \\(PII Systems\\)__\n\n- During quarterly access reviews per Access Management Process, the Office Manager spot\\-checks data accuracy for minimum 2 random personnel records \n- Contact details \\(email, phone, address\\) are verified as current \n- Any identified inaccuracies are corrected immediately \n- Results documented in Access Register \\- PII Systems\n\n__5\\. Review and Correction Process__\n\n- Any identified errors must be:\n\t- Logged and assessed within 2 business days\n\t- Corrected within 5 business days\n- Correction efforts are tracked as part of the DSR R",
+    "doc_topic_tokens": [
+      "accuracy",
+      "dataquality",
+      "personaldata",
+      "validation",
+      "correction",
+      "retention",
+      "collection",
+      "gdpr"
+    ],
+    "filename": "Data Quality Accuracy Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.7.4.3:accuracy_procedure",
+    "must_id": "item:A.7.4.3:proc_inaccuracy_prevention",
+    "must_text": "Inaccuracy prevention \u2014 technical + procedural controls (input validation + duplicate detection + integration reconciliation)",
+    "score": 2.0,
+    "corroborators": 4,
+    "signals": [
+      "explicit_ref",
+      "doc_mappings_target",
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "accept",
+    "doc_snippet_first_2k": "# Data Quality & Accuracy Maintenance Procedure\n\n__ Document ID: DOC050__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nTo ensure all personal data processed by Arion Networks is accurate, up to date, and relevant, in line with:\n\n- GDPR Article 5\\(1\\)\\(d\\)\n- ISO/IEC 27701:2019 A\\.7\\.4\\.3\n\n__2\\. Scope__\n\nApplies to:\n\n- Data collected directly from individuals\n- Client\\-provided data handled under processing contracts\n- Training participants and platform account data\n\n__3\\. Principles__\n\n- Data must be:\n\t- Accurate and complete\n\t- Kept up to date where necessary\n\t- Corrected or deleted if inaccurate\n\n__4\\. Implementation Measures__\n\n__4\\.1 At Collection__\n\n- Use structured forms with validation \\(e\\.g\\., date formats, email check\\)\n- Collect only verifiable data where possible\n\n__4\\.2 Post\\-Collection Controls__\n\n- Allow users to view and update their data \\(e\\.g\\., via account portal\\)\n- Provide clear contact for update requests \\(e\\.g\\., privacy@arionnetworks\\.com\\)\n- Include review cycles in data retention and DPIA evaluations\n\n__4\\.3 For Processor Data__\n\n- Clarify in contracts who is responsible for data accuracy\n- Follow client instructions for updates and corrections\n- Avoid altering source data unless contractually permitted\n\n__4\\.4 Quarterly Verification \\(PII Systems\\)__\n\n- During quarterly access reviews per Access Management Process, the Office Manager spot\\-checks data accuracy for minimum 2 random personnel records \n- Contact details \\(email, phone, address\\) are verified as current \n- Any identified inaccuracies are corrected immediately \n- Results documented in Access Register \\- PII Systems\n\n__5\\. Review and Correction Process__\n\n- Any identified errors must be:\n\t- Logged and assessed within 2 business days\n\t- Corrected within 5 business days\n- Correction efforts are tracked as part of the DSR R",
+    "doc_topic_tokens": [
+      "accuracy",
+      "dataquality",
+      "personaldata",
+      "validation",
+      "correction",
+      "retention",
+      "collection",
+      "gdpr"
+    ],
+    "filename": "Data Quality Accuracy Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:Art.25:dpbd_procedure",
+    "must_id": "item:Art.25:proc_authority",
+    "must_text": "Decision authority for DPbD outcomes (DPO + product lead + engineering lead)",
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "# Data Protection Impact Assessment \\(DPIA\\) Procedure\n\n__ Document ID: DOC049__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n## __1\\. Purpose__\n\nThis procedure defines how Arion Networks conducts Data Protection Impact Assessments \\(DPIAs\\) to identify and mitigate privacy risks in accordance with:\n\n- GDPR Article 35\n- ISO/IEC 27701:2019 control A\\.7\\.2\\.5\n- Privacy and Information Security and Data Management Policy \\(DOC003\\)\n\n## __2\\. Scope__\n\nApplies to all processing activities that may present high risk to data subject rights and freedoms, including new systems, significant changes to existing processing, or regulatory requirements\\.\n\n## __3\\. When DPIA is Required__\n\n### __3\\.1 Mandatory DPIA Triggers__\n\nDPIA must be conducted when processing:\n\n- __High Risk to Rights and Freedoms__: New processing presents significant privacy risks\n- __Significant Changes__: Major modifications to existing processing activities or technologies\n- __Regulatory Requirements__: Mandated by data protection authorities or industry regulations\n- __New Technology__: Implementation of new technologies that process personal data\n- __Large Scale Processing__: Systematic processing of large amounts of personal data\n\n### __3\\.2 DPIA Decision Tree__\n\n1. Does processing involve personal data? \u2192 If NO, no DPIA needed\n2. Is it a new processing activity or significant change? \u2192 If NO, no DPIA needed\n3. Does it present high risk to data subject rights? \u2192 If NO, document decision\n4. If YES to ALL above \u2192 __DPIA Required__\n\n## __4\\. DPIA Process__\n\n### __Step 1: Initiate DPIA__\n\n- __Trigger__: Identified by project owner, Data Protection & Risk Manager, or during risk assessment\n- __Assignment__: Data Protection & Risk Manager assigns DPIA reference ID\n- __Documentation__: Log in DPIA Log Sheet\n\n### __Step 2: Gather Information__\n\nComplete DPIA assessmen",
+    "doc_topic_tokens": [
+      "privacy",
+      "dpia",
+      "risk",
+      "gdpr",
+      "dataprotection",
+      "mitigation",
+      "rights",
+      "freedoms"
+    ],
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.7.2.5:pia_register",
+    "must_id": "item:A.7.2.5:reg_signoff",
+    "must_text": "Signoff identities per row (DPO + business owner)",
+    "score": 1.1,
+    "corroborators": 2,
+    "signals": [
+      "explicit_ref",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "accept",
+    "doc_snippet_first_2k": "# Data Protection Impact Assessment \\(DPIA\\) Procedure\n\n__ Document ID: DOC049__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n## __1\\. Purpose__\n\nThis procedure defines how Arion Networks conducts Data Protection Impact Assessments \\(DPIAs\\) to identify and mitigate privacy risks in accordance with:\n\n- GDPR Article 35\n- ISO/IEC 27701:2019 control A\\.7\\.2\\.5\n- Privacy and Information Security and Data Management Policy \\(DOC003\\)\n\n## __2\\. Scope__\n\nApplies to all processing activities that may present high risk to data subject rights and freedoms, including new systems, significant changes to existing processing, or regulatory requirements\\.\n\n## __3\\. When DPIA is Required__\n\n### __3\\.1 Mandatory DPIA Triggers__\n\nDPIA must be conducted when processing:\n\n- __High Risk to Rights and Freedoms__: New processing presents significant privacy risks\n- __Significant Changes__: Major modifications to existing processing activities or technologies\n- __Regulatory Requirements__: Mandated by data protection authorities or industry regulations\n- __New Technology__: Implementation of new technologies that process personal data\n- __Large Scale Processing__: Systematic processing of large amounts of personal data\n\n### __3\\.2 DPIA Decision Tree__\n\n1. Does processing involve personal data? \u2192 If NO, no DPIA needed\n2. Is it a new processing activity or significant change? \u2192 If NO, no DPIA needed\n3. Does it present high risk to data subject rights? \u2192 If NO, document decision\n4. If YES to ALL above \u2192 __DPIA Required__\n\n## __4\\. DPIA Process__\n\n### __Step 1: Initiate DPIA__\n\n- __Trigger__: Identified by project owner, Data Protection & Risk Manager, or during risk assessment\n- __Assignment__: Data Protection & Risk Manager assigns DPIA reference ID\n- __Documentation__: Log in DPIA Log Sheet\n\n### __Step 2: Gather Information__\n\nComplete DPIA assessmen",
+    "doc_topic_tokens": [
+      "privacy",
+      "dpia",
+      "risk",
+      "gdpr",
+      "dataprotection",
+      "mitigation",
+      "rights",
+      "freedoms"
+    ],
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:Art.35:dpia_procedure",
+    "must_id": "item:Art.35:trigger_criteria",
+    "must_text": "Trigger criteria \u2014 Art.35.3 mandatory cases (systematic monitoring / special-category large-scale / public-area large-scale monitoring) PLUS SA-published list + sectoral guidance",
+    "score": 2.0,
+    "corroborators": 4,
+    "signals": [
+      "explicit_ref",
+      "doc_mappings_target",
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "accept",
+    "doc_snippet_first_2k": "# Data Protection Impact Assessment \\(DPIA\\) Procedure\n\n__ Document ID: DOC049__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n## __1\\. Purpose__\n\nThis procedure defines how Arion Networks conducts Data Protection Impact Assessments \\(DPIAs\\) to identify and mitigate privacy risks in accordance with:\n\n- GDPR Article 35\n- ISO/IEC 27701:2019 control A\\.7\\.2\\.5\n- Privacy and Information Security and Data Management Policy \\(DOC003\\)\n\n## __2\\. Scope__\n\nApplies to all processing activities that may present high risk to data subject rights and freedoms, including new systems, significant changes to existing processing, or regulatory requirements\\.\n\n## __3\\. When DPIA is Required__\n\n### __3\\.1 Mandatory DPIA Triggers__\n\nDPIA must be conducted when processing:\n\n- __High Risk to Rights and Freedoms__: New processing presents significant privacy risks\n- __Significant Changes__: Major modifications to existing processing activities or technologies\n- __Regulatory Requirements__: Mandated by data protection authorities or industry regulations\n- __New Technology__: Implementation of new technologies that process personal data\n- __Large Scale Processing__: Systematic processing of large amounts of personal data\n\n### __3\\.2 DPIA Decision Tree__\n\n1. Does processing involve personal data? \u2192 If NO, no DPIA needed\n2. Is it a new processing activity or significant change? \u2192 If NO, no DPIA needed\n3. Does it present high risk to data subject rights? \u2192 If NO, document decision\n4. If YES to ALL above \u2192 __DPIA Required__\n\n## __4\\. DPIA Process__\n\n### __Step 1: Initiate DPIA__\n\n- __Trigger__: Identified by project owner, Data Protection & Risk Manager, or during risk assessment\n- __Assignment__: Data Protection & Risk Manager assigns DPIA reference ID\n- __Documentation__: Log in DPIA Log Sheet\n\n### __Step 2: Gather Information__\n\nComplete DPIA assessmen",
+    "doc_topic_tokens": [
+      "privacy",
+      "dpia",
+      "risk",
+      "gdpr",
+      "dataprotection",
+      "mitigation",
+      "rights",
+      "freedoms"
+    ],
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.7.2.5:pia_register",
+    "must_id": "item:A.7.2.5:reg_sa_consultation",
+    "must_text": "SA consultation flag per row (Art.36 invoked yes/no)",
+    "score": 1.1,
+    "corroborators": 2,
+    "signals": [
+      "explicit_ref",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "accept",
+    "doc_snippet_first_2k": "# Data Protection Impact Assessment \\(DPIA\\) Procedure\n\n__ Document ID: DOC049__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n## __1\\. Purpose__\n\nThis procedure defines how Arion Networks conducts Data Protection Impact Assessments \\(DPIAs\\) to identify and mitigate privacy risks in accordance with:\n\n- GDPR Article 35\n- ISO/IEC 27701:2019 control A\\.7\\.2\\.5\n- Privacy and Information Security and Data Management Policy \\(DOC003\\)\n\n## __2\\. Scope__\n\nApplies to all processing activities that may present high risk to data subject rights and freedoms, including new systems, significant changes to existing processing, or regulatory requirements\\.\n\n## __3\\. When DPIA is Required__\n\n### __3\\.1 Mandatory DPIA Triggers__\n\nDPIA must be conducted when processing:\n\n- __High Risk to Rights and Freedoms__: New processing presents significant privacy risks\n- __Significant Changes__: Major modifications to existing processing activities or technologies\n- __Regulatory Requirements__: Mandated by data protection authorities or industry regulations\n- __New Technology__: Implementation of new technologies that process personal data\n- __Large Scale Processing__: Systematic processing of large amounts of personal data\n\n### __3\\.2 DPIA Decision Tree__\n\n1. Does processing involve personal data? \u2192 If NO, no DPIA needed\n2. Is it a new processing activity or significant change? \u2192 If NO, no DPIA needed\n3. Does it present high risk to data subject rights? \u2192 If NO, document decision\n4. If YES to ALL above \u2192 __DPIA Required__\n\n## __4\\. DPIA Process__\n\n### __Step 1: Initiate DPIA__\n\n- __Trigger__: Identified by project owner, Data Protection & Risk Manager, or during risk assessment\n- __Assignment__: Data Protection & Risk Manager assigns DPIA reference ID\n- __Documentation__: Log in DPIA Log Sheet\n\n### __Step 2: Gather Information__\n\nComplete DPIA assessmen",
+    "doc_topic_tokens": [
+      "privacy",
+      "dpia",
+      "risk",
+      "gdpr",
+      "dataprotection",
+      "mitigation",
+      "rights",
+      "freedoms"
+    ],
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:Art.35:dpia_procedure",
+    "must_id": "item:Art.35:dpo_advice",
+    "must_text": "DPO advice mandatory (Art.35.2) \u2014 DPO consulted during DPIA, advice recorded",
+    "score": 2.0,
+    "corroborators": 4,
+    "signals": [
+      "explicit_ref",
+      "doc_mappings_target",
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "accept",
+    "doc_snippet_first_2k": "# Data Protection Impact Assessment \\(DPIA\\) Procedure\n\n__ Document ID: DOC049__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n## __1\\. Purpose__\n\nThis procedure defines how Arion Networks conducts Data Protection Impact Assessments \\(DPIAs\\) to identify and mitigate privacy risks in accordance with:\n\n- GDPR Article 35\n- ISO/IEC 27701:2019 control A\\.7\\.2\\.5\n- Privacy and Information Security and Data Management Policy \\(DOC003\\)\n\n## __2\\. Scope__\n\nApplies to all processing activities that may present high risk to data subject rights and freedoms, including new systems, significant changes to existing processing, or regulatory requirements\\.\n\n## __3\\. When DPIA is Required__\n\n### __3\\.1 Mandatory DPIA Triggers__\n\nDPIA must be conducted when processing:\n\n- __High Risk to Rights and Freedoms__: New processing presents significant privacy risks\n- __Significant Changes__: Major modifications to existing processing activities or technologies\n- __Regulatory Requirements__: Mandated by data protection authorities or industry regulations\n- __New Technology__: Implementation of new technologies that process personal data\n- __Large Scale Processing__: Systematic processing of large amounts of personal data\n\n### __3\\.2 DPIA Decision Tree__\n\n1. Does processing involve personal data? \u2192 If NO, no DPIA needed\n2. Is it a new processing activity or significant change? \u2192 If NO, no DPIA needed\n3. Does it present high risk to data subject rights? \u2192 If NO, document decision\n4. If YES to ALL above \u2192 __DPIA Required__\n\n## __4\\. DPIA Process__\n\n### __Step 1: Initiate DPIA__\n\n- __Trigger__: Identified by project owner, Data Protection & Risk Manager, or during risk assessment\n- __Assignment__: Data Protection & Risk Manager assigns DPIA reference ID\n- __Documentation__: Log in DPIA Log Sheet\n\n### __Step 2: Gather Information__\n\nComplete DPIA assessmen",
+    "doc_topic_tokens": [
+      "privacy",
+      "dpia",
+      "risk",
+      "gdpr",
+      "dataprotection",
+      "mitigation",
+      "rights",
+      "freedoms"
+    ],
+    "filename": "Data Protection Impact Assessment (DPIA) Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:B.8.2.6:ropa_maintenance_procedure",
+    "must_id": "item:B.8.2.6:proc_secure_maintenance",
+    "must_text": "Secure maintenance \u2014 access control + integrity for the processor RoPA",
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "# Records of Processing Activities \\(RoPA\\) Procedure\n\n__Document ID: DOC057__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nThis procedure defines how Arion Networks s\\.r\\.o\\. maintains its Records of Processing Activities \\(RoPA\\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \\(Controls A\\.8\\.2\\.1 and A\\.8\\.2\\.2\\)\\. It ensures that all personal data processing is documented, reviewed, and auditable\\.\n\n__2\\. Scope__\n\nThis procedure applies to all business units, systems, processes, and services that involve the collection, use, storage, or transmission of personally identifiable information \\(PII\\) by Arion Networks s\\.r\\.o\\. in the role of either PII Controller or Processor\\.\n\n__3\\. Roles and Responsibilities__\n\nRoles are stated in DOC003: [https://labguides\\.sharepoint\\.com/:w:/r/sites/labguide/\\_layouts/15/Doc\\.aspx?sourcedoc=%7B376BAAE8\\-4D45\\-4EF9\\-BDC0\\-5C4906ED7FFF%7D&file=Information%20Security%20%26%20Data%20Management%20Policy\\.docx&action=default&mobileredirect=true](https://labguides.sharepoint.com/:w:/r/sites/labguide/_layouts/15/Doc.aspx?sourcedoc=%7B376BAAE8-4D45-4EF9-BDC0-5C4906ED7FFF%7D&file=Information%20Security%20%26%20Data%20Management%20Policy.docx&action=default&mobileredirect=true)\n\n__4\\. RoPA Fields__Each processing activity must include:\n\nField\n\nDescription\n\nProcessing Activity ID\n\nUnique identifier\n\nName of Activity\n\nDescriptive title\n\nPurpose of Processing\n\nWhy the data is being processed\n\nLegal Basis\n\nLawful basis \\(e\\.g\\. consent, contract, legal obligation\\)\n\nCategories of PII\n\nTypes of personal data involved\n\nCategories of Data Subjects\n\nWhose data is being processed\n\nData Recipients\n\nInternal or external recipients\n\nInternational Transfers\n\nDetails of transfers outside the EU/EEA, if applicable\n\nRetention Period\n\nTimeframe for keeping the data\n\nTechnical & Organiza",
+    "doc_topic_tokens": [
+      "activities",
+      "ropa",
+      "gdpr",
+      "controller",
+      "processor",
+      "documentation",
+      "pii",
+      "personaldata"
+    ],
+    "filename": "Records of Processing Activities.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:B.8.2.6:program_review",
+    "must_id": "item:B.8.2.6:rev_customer_extract_test",
+    "must_text": "Customer-extract test \u2014 sampled customers requested + received their RoPA row within SLA",
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "# Records of Processing Activities \\(RoPA\\) Procedure\n\n__Document ID: DOC057__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nThis procedure defines how Arion Networks s\\.r\\.o\\. maintains its Records of Processing Activities \\(RoPA\\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \\(Controls A\\.8\\.2\\.1 and A\\.8\\.2\\.2\\)\\. It ensures that all personal data processing is documented, reviewed, and auditable\\.\n\n__2\\. Scope__\n\nThis procedure applies to all business units, systems, processes, and services that involve the collection, use, storage, or transmission of personally identifiable information \\(PII\\) by Arion Networks s\\.r\\.o\\. in the role of either PII Controller or Processor\\.\n\n__3\\. Roles and Responsibilities__\n\nRoles are stated in DOC003: [https://labguides\\.sharepoint\\.com/:w:/r/sites/labguide/\\_layouts/15/Doc\\.aspx?sourcedoc=%7B376BAAE8\\-4D45\\-4EF9\\-BDC0\\-5C4906ED7FFF%7D&file=Information%20Security%20%26%20Data%20Management%20Policy\\.docx&action=default&mobileredirect=true](https://labguides.sharepoint.com/:w:/r/sites/labguide/_layouts/15/Doc.aspx?sourcedoc=%7B376BAAE8-4D45-4EF9-BDC0-5C4906ED7FFF%7D&file=Information%20Security%20%26%20Data%20Management%20Policy.docx&action=default&mobileredirect=true)\n\n__4\\. RoPA Fields__Each processing activity must include:\n\nField\n\nDescription\n\nProcessing Activity ID\n\nUnique identifier\n\nName of Activity\n\nDescriptive title\n\nPurpose of Processing\n\nWhy the data is being processed\n\nLegal Basis\n\nLawful basis \\(e\\.g\\. consent, contract, legal obligation\\)\n\nCategories of PII\n\nTypes of personal data involved\n\nCategories of Data Subjects\n\nWhose data is being processed\n\nData Recipients\n\nInternal or external recipients\n\nInternational Transfers\n\nDetails of transfers outside the EU/EEA, if applicable\n\nRetention Period\n\nTimeframe for keeping the data\n\nTechnical & Organiza",
+    "doc_topic_tokens": [
+      "activities",
+      "ropa",
+      "gdpr",
+      "controller",
+      "processor",
+      "documentation",
+      "pii",
+      "personaldata"
+    ],
+    "filename": "Records of Processing Activities.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_audit_rights",
+    "must_text": "Audit rights (Art.28.3.h) \u2014 processor makes available all information + contributes to audits",
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "# Records of Processing Activities \\(RoPA\\) Procedure\n\n__Document ID: DOC057__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nThis procedure defines how Arion Networks s\\.r\\.o\\. maintains its Records of Processing Activities \\(RoPA\\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \\(Controls A\\.8\\.2\\.1 and A\\.8\\.2\\.2\\)\\. It ensures that all personal data processing is documented, reviewed, and auditable\\.\n\n__2\\. Scope__\n\nThis procedure applies to all business units, systems, processes, and services that involve the collection, use, storage, or transmission of personally identifiable information \\(PII\\) by Arion Networks s\\.r\\.o\\. in the role of either PII Controller or Processor\\.\n\n__3\\. Roles and Responsibilities__\n\nRoles are stated in DOC003: [https://labguides\\.sharepoint\\.com/:w:/r/sites/labguide/\\_layouts/15/Doc\\.aspx?sourcedoc=%7B376BAAE8\\-4D45\\-4EF9\\-BDC0\\-5C4906ED7FFF%7D&file=Information%20Security%20%26%20Data%20Management%20Policy\\.docx&action=default&mobileredirect=true](https://labguides.sharepoint.com/:w:/r/sites/labguide/_layouts/15/Doc.aspx?sourcedoc=%7B376BAAE8-4D45-4EF9-BDC0-5C4906ED7FFF%7D&file=Information%20Security%20%26%20Data%20Management%20Policy.docx&action=default&mobileredirect=true)\n\n__4\\. RoPA Fields__Each processing activity must include:\n\nField\n\nDescription\n\nProcessing Activity ID\n\nUnique identifier\n\nName of Activity\n\nDescriptive title\n\nPurpose of Processing\n\nWhy the data is being processed\n\nLegal Basis\n\nLawful basis \\(e\\.g\\. consent, contract, legal obligation\\)\n\nCategories of PII\n\nTypes of personal data involved\n\nCategories of Data Subjects\n\nWhose data is being processed\n\nData Recipients\n\nInternal or external recipients\n\nInternational Transfers\n\nDetails of transfers outside the EU/EEA, if applicable\n\nRetention Period\n\nTimeframe for keeping the data\n\nTechnical & Organiza",
+    "doc_topic_tokens": [
+      "activities",
+      "ropa",
+      "gdpr",
+      "controller",
+      "processor",
+      "documentation",
+      "pii",
+      "personaldata"
+    ],
+    "filename": "Records of Processing Activities.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:B.8.2.6:program_review",
+    "must_id": "item:B.8.2.6:rev_date",
+    "must_text": "Review date within the planned interval",
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "# Records of Processing Activities \\(RoPA\\) Procedure\n\n__Document ID: DOC057__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nThis procedure defines how Arion Networks s\\.r\\.o\\. maintains its Records of Processing Activities \\(RoPA\\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \\(Controls A\\.8\\.2\\.1 and A\\.8\\.2\\.2\\)\\. It ensures that all personal data processing is documented, reviewed, and auditable\\.\n\n__2\\. Scope__\n\nThis procedure applies to all business units, systems, processes, and services that involve the collection, use, storage, or transmission of personally identifiable information \\(PII\\) by Arion Networks s\\.r\\.o\\. in the role of either PII Controller or Processor\\.\n\n__3\\. Roles and Responsibilities__\n\nRoles are stated in DOC003: [https://labguides\\.sharepoint\\.com/:w:/r/sites/labguide/\\_layouts/15/Doc\\.aspx?sourcedoc=%7B376BAAE8\\-4D45\\-4EF9\\-BDC0\\-5C4906ED7FFF%7D&file=Information%20Security%20%26%20Data%20Management%20Policy\\.docx&action=default&mobileredirect=true](https://labguides.sharepoint.com/:w:/r/sites/labguide/_layouts/15/Doc.aspx?sourcedoc=%7B376BAAE8-4D45-4EF9-BDC0-5C4906ED7FFF%7D&file=Information%20Security%20%26%20Data%20Management%20Policy.docx&action=default&mobileredirect=true)\n\n__4\\. RoPA Fields__Each processing activity must include:\n\nField\n\nDescription\n\nProcessing Activity ID\n\nUnique identifier\n\nName of Activity\n\nDescriptive title\n\nPurpose of Processing\n\nWhy the data is being processed\n\nLegal Basis\n\nLawful basis \\(e\\.g\\. consent, contract, legal obligation\\)\n\nCategories of PII\n\nTypes of personal data involved\n\nCategories of Data Subjects\n\nWhose data is being processed\n\nData Recipients\n\nInternal or external recipients\n\nInternational Transfers\n\nDetails of transfers outside the EU/EEA, if applicable\n\nRetention Period\n\nTimeframe for keeping the data\n\nTechnical & Organiza",
+    "doc_topic_tokens": [
+      "activities",
+      "ropa",
+      "gdpr",
+      "controller",
+      "processor",
+      "documentation",
+      "pii",
+      "personaldata"
+    ],
+    "filename": "Records of Processing Activities.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.7.2.8:ropa_maintenance_procedure",
+    "must_id": "item:A.7.2.8:proc_secure_maintenance",
+    "must_text": "Secure maintenance \u2014 access control + integrity for the RoPA itself",
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "# Records of Processing Activities \\(RoPA\\) Procedure\n\n__Document ID: DOC057__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nThis procedure defines how Arion Networks s\\.r\\.o\\. maintains its Records of Processing Activities \\(RoPA\\) in accordance with GDPR Article 30 and ISO/IEC 27701:2019 \\(Controls A\\.8\\.2\\.1 and A\\.8\\.2\\.2\\)\\. It ensures that all personal data processing is documented, reviewed, and auditable\\.\n\n__2\\. Scope__\n\nThis procedure applies to all business units, systems, processes, and services that involve the collection, use, storage, or transmission of personally identifiable information \\(PII\\) by Arion Networks s\\.r\\.o\\. in the role of either PII Controller or Processor\\.\n\n__3\\. Roles and Responsibilities__\n\nRoles are stated in DOC003: [https://labguides\\.sharepoint\\.com/:w:/r/sites/labguide/\\_layouts/15/Doc\\.aspx?sourcedoc=%7B376BAAE8\\-4D45\\-4EF9\\-BDC0\\-5C4906ED7FFF%7D&file=Information%20Security%20%26%20Data%20Management%20Policy\\.docx&action=default&mobileredirect=true](https://labguides.sharepoint.com/:w:/r/sites/labguide/_layouts/15/Doc.aspx?sourcedoc=%7B376BAAE8-4D45-4EF9-BDC0-5C4906ED7FFF%7D&file=Information%20Security%20%26%20Data%20Management%20Policy.docx&action=default&mobileredirect=true)\n\n__4\\. RoPA Fields__Each processing activity must include:\n\nField\n\nDescription\n\nProcessing Activity ID\n\nUnique identifier\n\nName of Activity\n\nDescriptive title\n\nPurpose of Processing\n\nWhy the data is being processed\n\nLegal Basis\n\nLawful basis \\(e\\.g\\. consent, contract, legal obligation\\)\n\nCategories of PII\n\nTypes of personal data involved\n\nCategories of Data Subjects\n\nWhose data is being processed\n\nData Recipients\n\nInternal or external recipients\n\nInternational Transfers\n\nDetails of transfers outside the EU/EEA, if applicable\n\nRetention Period\n\nTimeframe for keeping the data\n\nTechnical & Organiza",
+    "doc_topic_tokens": [
+      "activities",
+      "ropa",
+      "gdpr",
+      "controller",
+      "processor",
+      "documentation",
+      "pii",
+      "personaldata"
+    ],
+    "filename": "Records of Processing Activities.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.5.12:information_classification_scheme",
+    "must_id": "item:A.5.12:default_class",
+    "must_text": "Default classification for unclassified information (typically 'Internal' as fail-safe)",
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "__Consent Management Procedure__\n\n__ Document ID: DOC048__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nThis procedure outlines how Arion Networks s\\.r\\.o\\. obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:\n\n- GDPR Article 6\\(1\\)\\(a\\), Article 7\n- ISO/IEC 27701:2019 control A\\.7\\.5\\.5\n- CCPA/CPRA consumer opt\\-out rights\n\nThis procedure is aligned with the Privacy Policy \\(last updated 29 August 2025\\) and the Cookie Policy \\(last updated 29 August 2025\\), which define when consent is required for website and service\\-related processing\\.\n\n__2\\. Scope__\n\nThis procedure applies to all processing activities by Arion Networks where consent is used as the legal basis under GDPR Article 6\\(1\\)\\(a\\)\\. Consent is __not__ required in every case of personal data processing\\. The organization distinguishes between processing that relies on consent and processing that relies on other lawful bases\\. \n\nApplies to all personal data processing where:\n\n- Consent is the legal basis for processing\n- Individuals have the right to opt out of data use \\(e\\.g\\., for marketing, analytics, or third\\-party sharing\\)\n- Regulatory or contractual obligations require consent or preference recording\n- __Essential cookies \\(e\\.g\\., Cloudflare, PHPSESSID\\):__ Processed on the basis of legitimate interest \\(Art\\. 6\\(1\\)\\(f\\) GDPR\\)\\. *No consent required\\.*\n- __Website contact form inquiries:__ Processed on the basis of legitimate interest / steps prior to contract \\(Art\\. 6\\(1\\)\\(f\\) / 6\\(1\\)\\(b\\) GDPR\\)\\. *No consent required\\.*\n- __Non\\-essential cookies \\(e\\.g\\., analytics, chat, advertising\\):__ Currently disabled\\. If reintroduced, explicit consent will be required before activation \\(Art\\. 6\\(1\\)\\(a\\) GDPR\\)\\.\n- __Newsletter or marketing communications \\(",
+    "doc_topic_tokens": [
+      "consent",
+      "personal",
+      "data",
+      "gdpr",
+      "withdrawal",
+      "legal",
+      "basis",
+      "privacy",
+      "cookies"
+    ],
+    "filename": "Consent Management Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.5.12:information_classification_scheme",
+    "must_id": "item:A.5.12:classification_authority",
+    "must_text": "Decision authority for classifying information (owner-led by default)",
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "__Consent Management Procedure__\n\n__ Document ID: DOC048__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nThis procedure outlines how Arion Networks s\\.r\\.o\\. obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:\n\n- GDPR Article 6\\(1\\)\\(a\\), Article 7\n- ISO/IEC 27701:2019 control A\\.7\\.5\\.5\n- CCPA/CPRA consumer opt\\-out rights\n\nThis procedure is aligned with the Privacy Policy \\(last updated 29 August 2025\\) and the Cookie Policy \\(last updated 29 August 2025\\), which define when consent is required for website and service\\-related processing\\.\n\n__2\\. Scope__\n\nThis procedure applies to all processing activities by Arion Networks where consent is used as the legal basis under GDPR Article 6\\(1\\)\\(a\\)\\. Consent is __not__ required in every case of personal data processing\\. The organization distinguishes between processing that relies on consent and processing that relies on other lawful bases\\. \n\nApplies to all personal data processing where:\n\n- Consent is the legal basis for processing\n- Individuals have the right to opt out of data use \\(e\\.g\\., for marketing, analytics, or third\\-party sharing\\)\n- Regulatory or contractual obligations require consent or preference recording\n- __Essential cookies \\(e\\.g\\., Cloudflare, PHPSESSID\\):__ Processed on the basis of legitimate interest \\(Art\\. 6\\(1\\)\\(f\\) GDPR\\)\\. *No consent required\\.*\n- __Website contact form inquiries:__ Processed on the basis of legitimate interest / steps prior to contract \\(Art\\. 6\\(1\\)\\(f\\) / 6\\(1\\)\\(b\\) GDPR\\)\\. *No consent required\\.*\n- __Non\\-essential cookies \\(e\\.g\\., analytics, chat, advertising\\):__ Currently disabled\\. If reintroduced, explicit consent will be required before activation \\(Art\\. 6\\(1\\)\\(a\\) GDPR\\)\\.\n- __Newsletter or marketing communications \\(",
+    "doc_topic_tokens": [
+      "consent",
+      "personal",
+      "data",
+      "gdpr",
+      "withdrawal",
+      "legal",
+      "basis",
+      "privacy",
+      "cookies"
+    ],
+    "filename": "Consent Management Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.5.12:information_classification_scheme",
+    "must_id": "item:A.5.12:levels_defined",
+    "must_text": "Classification levels defined (e.g. Public / Internal / Confidential / Restricted)",
+    "score": 0.6,
+    "corroborators": 1,
+    "signals": [
+      "doc_mappings_target"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "__Consent Management Procedure__\n\n__ Document ID: DOC048__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nThis procedure outlines how Arion Networks s\\.r\\.o\\. obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:\n\n- GDPR Article 6\\(1\\)\\(a\\), Article 7\n- ISO/IEC 27701:2019 control A\\.7\\.5\\.5\n- CCPA/CPRA consumer opt\\-out rights\n\nThis procedure is aligned with the Privacy Policy \\(last updated 29 August 2025\\) and the Cookie Policy \\(last updated 29 August 2025\\), which define when consent is required for website and service\\-related processing\\.\n\n__2\\. Scope__\n\nThis procedure applies to all processing activities by Arion Networks where consent is used as the legal basis under GDPR Article 6\\(1\\)\\(a\\)\\. Consent is __not__ required in every case of personal data processing\\. The organization distinguishes between processing that relies on consent and processing that relies on other lawful bases\\. \n\nApplies to all personal data processing where:\n\n- Consent is the legal basis for processing\n- Individuals have the right to opt out of data use \\(e\\.g\\., for marketing, analytics, or third\\-party sharing\\)\n- Regulatory or contractual obligations require consent or preference recording\n- __Essential cookies \\(e\\.g\\., Cloudflare, PHPSESSID\\):__ Processed on the basis of legitimate interest \\(Art\\. 6\\(1\\)\\(f\\) GDPR\\)\\. *No consent required\\.*\n- __Website contact form inquiries:__ Processed on the basis of legitimate interest / steps prior to contract \\(Art\\. 6\\(1\\)\\(f\\) / 6\\(1\\)\\(b\\) GDPR\\)\\. *No consent required\\.*\n- __Non\\-essential cookies \\(e\\.g\\., analytics, chat, advertising\\):__ Currently disabled\\. If reintroduced, explicit consent will be required before activation \\(Art\\. 6\\(1\\)\\(a\\) GDPR\\)\\.\n- __Newsletter or marketing communications \\(",
+    "doc_topic_tokens": [
+      "consent",
+      "personal",
+      "data",
+      "gdpr",
+      "withdrawal",
+      "legal",
+      "basis",
+      "privacy",
+      "cookies"
+    ],
+    "filename": "Consent Management Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.5.34:privacy_applicability_scope",
+    "must_id": "item:A.5.34:scope_jurisdictions",
+    "must_text": "Jurisdictions covered (HQ + places of business + data subject residency + processing locations + transfer destinations \u2014 each may impose distinct privacy obligations)",
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "__Consent Management Procedure__\n\n__ Document ID: DOC048__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nThis procedure outlines how Arion Networks s\\.r\\.o\\. obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:\n\n- GDPR Article 6\\(1\\)\\(a\\), Article 7\n- ISO/IEC 27701:2019 control A\\.7\\.5\\.5\n- CCPA/CPRA consumer opt\\-out rights\n\nThis procedure is aligned with the Privacy Policy \\(last updated 29 August 2025\\) and the Cookie Policy \\(last updated 29 August 2025\\), which define when consent is required for website and service\\-related processing\\.\n\n__2\\. Scope__\n\nThis procedure applies to all processing activities by Arion Networks where consent is used as the legal basis under GDPR Article 6\\(1\\)\\(a\\)\\. Consent is __not__ required in every case of personal data processing\\. The organization distinguishes between processing that relies on consent and processing that relies on other lawful bases\\. \n\nApplies to all personal data processing where:\n\n- Consent is the legal basis for processing\n- Individuals have the right to opt out of data use \\(e\\.g\\., for marketing, analytics, or third\\-party sharing\\)\n- Regulatory or contractual obligations require consent or preference recording\n- __Essential cookies \\(e\\.g\\., Cloudflare, PHPSESSID\\):__ Processed on the basis of legitimate interest \\(Art\\. 6\\(1\\)\\(f\\) GDPR\\)\\. *No consent required\\.*\n- __Website contact form inquiries:__ Processed on the basis of legitimate interest / steps prior to contract \\(Art\\. 6\\(1\\)\\(f\\) / 6\\(1\\)\\(b\\) GDPR\\)\\. *No consent required\\.*\n- __Non\\-essential cookies \\(e\\.g\\., analytics, chat, advertising\\):__ Currently disabled\\. If reintroduced, explicit consent will be required before activation \\(Art\\. 6\\(1\\)\\(a\\) GDPR\\)\\.\n- __Newsletter or marketing communications \\(",
+    "doc_topic_tokens": [
+      "consent",
+      "personal",
+      "data",
+      "gdpr",
+      "withdrawal",
+      "legal",
+      "basis",
+      "privacy",
+      "cookies"
+    ],
+    "filename": "Consent Management Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.5.34:privacy_applicability_scope",
+    "must_id": "item:A.5.34:scope_regulated_activities",
+    "must_text": "Regulated activities pulling in sectoral privacy regimes (healthcare \u2192 HIPAA, financial \u2192 GLBA/PSD2/DORA-privacy overlap, telco \u2192 ePrivacy, public sector \u2192 FERPA/government-records laws, advertising/profiling \u2192 ePrivacy)",
+    "score": 0.7,
+    "corroborators": 2,
+    "signals": [
+      "doc_mappings_target",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "__Consent Management Procedure__\n\n__ Document ID: DOC048__\n\n__Owner__: DPO\n\n__Version__: 1\n\n__Reviewed by__: PIMS Manager\n\n__Reviewed on__: 17 Nov 2025\n\n__Approved by__: PIMS Owner\n\n__Approved on:__ 20 Nov 2025\n\n__Next Review Date:__ 20 Nov 2026\n\n__1\\. Purpose__\n\nThis procedure outlines how Arion Networks s\\.r\\.o\\. obtains, records, and manages consent for the processing of personal data, including mechanisms for withdrawal, in alignment with:\n\n- GDPR Article 6\\(1\\)\\(a\\), Article 7\n- ISO/IEC 27701:2019 control A\\.7\\.5\\.5\n- CCPA/CPRA consumer opt\\-out rights\n\nThis procedure is aligned with the Privacy Policy \\(last updated 29 August 2025\\) and the Cookie Policy \\(last updated 29 August 2025\\), which define when consent is required for website and service\\-related processing\\.\n\n__2\\. Scope__\n\nThis procedure applies to all processing activities by Arion Networks where consent is used as the legal basis under GDPR Article 6\\(1\\)\\(a\\)\\. Consent is __not__ required in every case of personal data processing\\. The organization distinguishes between processing that relies on consent and processing that relies on other lawful bases\\. \n\nApplies to all personal data processing where:\n\n- Consent is the legal basis for processing\n- Individuals have the right to opt out of data use \\(e\\.g\\., for marketing, analytics, or third\\-party sharing\\)\n- Regulatory or contractual obligations require consent or preference recording\n- __Essential cookies \\(e\\.g\\., Cloudflare, PHPSESSID\\):__ Processed on the basis of legitimate interest \\(Art\\. 6\\(1\\)\\(f\\) GDPR\\)\\. *No consent required\\.*\n- __Website contact form inquiries:__ Processed on the basis of legitimate interest / steps prior to contract \\(Art\\. 6\\(1\\)\\(f\\) / 6\\(1\\)\\(b\\) GDPR\\)\\. *No consent required\\.*\n- __Non\\-essential cookies \\(e\\.g\\., analytics, chat, advertising\\):__ Currently disabled\\. If reintroduced, explicit consent will be required before activation \\(Art\\. 6\\(1\\)\\(a\\) GDPR\\)\\.\n- __Newsletter or marketing communications \\(",
+    "doc_topic_tokens": [
+      "consent",
+      "personal",
+      "data",
+      "gdpr",
+      "withdrawal",
+      "legal",
+      "basis",
+      "privacy",
+      "cookies"
+    ],
+    "filename": "Consent Management Procedure.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:Art.28:processor_program_review",
+    "must_id": "item:Art.28:rev_reviewer",
+    "must_text": "Reviewer identity (DPO + procurement / vendor management lead)",
+    "score": 1.1,
+    "corroborators": 2,
+    "signals": [
+      "explicit_ref",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "accept",
+    "doc_snippet_first_2k": "__Processor Operations Procedure __\n\n__Document ID: DOC066__\n\n__Owner:__ Data Protection & Risk Manager  \n__Version:__ 1\\.0  \n__ Reviewed by__: PIMS Manager\n\n__Reviewed on__: \n\n__Approved by__: \n\n__Approved on:__ \n\n__Next Review Date:__   \n\n\n# 1\\. Purpose\n\n This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:\n\n- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)\n\nComplies with ISO/IEC 27701:2019 and GDPR Article 28\\(3\\)\\.\n\n# 2\\. Scope\n\nApplies to all services where Arion Networks acts as a processor or subprocessor of personal data on behalf of a client \\(controller\\)\\. Includes consulting services, SaaS tools, custom deployments,  subprocessed workstreams and eny other services involving client PII processing\\.\n\n# 3\\. Logging Processing Operations \\(A\\.8\\.3\\.1\\)\n\n- Maintain a log for each client engagement where Arion processes PII\n- Each log entry must include:\n\t- Processing purpose\n\t- Data categories\n\t- Processing duration\n\t- Subprocessors used\n\t- Security measures applied\n\t- Access control details\n- Logs must be:\n\t- Created during onboarding\n\t- Reviewed at least annually or upon significant change\n\t- Retained for 5 years after end of engagement\n\n__Fields in Processor Operations Log__\n\n__Field__\n\n__Description__\n\nClient ID\n\nUnique client identifier\n\nCustomer Name\n\nName of customer organization\n\nProcessing Purpose\n\nPurposes documented in customer DPA\n\nService Type\n\ne\\.g\\., compliance automation, vulnerability analysis\n\nPII Categories\n\nData types involved\n\nAccess Control\n\nWho had access, what level\n\nProcessing Duration\n\nContractual or technical lifespan\n\nSubprocessors\n\nAny used in processing chain\n\nSecurity Controls\n\nSummary of encryption, segregation, MFA, etc\\.\n\n## 3\\.1 Purpose Limitation \\(B\\.8\\.2\\.2\\)\"\n\n- Arion processes customer PII ONLY for purposes specified",
+    "doc_topic_tokens": [
+      "processor",
+      "logging",
+      "deletion",
+      "subprocessor",
+      "gdpr",
+      "personaldata",
+      "contracttermination",
+      "activities",
+      "obligations"
+    ],
+    "filename": "Processor Operations Procedures.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:Art.28:processor_program_review",
+    "must_id": "item:Art.28:rev_security_currency",
+    "must_text": "Security assurance currency \u2014 Art.32-equivalent evidence (cert, audit) refreshed within validity period",
+    "score": 1.1,
+    "corroborators": 2,
+    "signals": [
+      "explicit_ref",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "accept",
+    "doc_snippet_first_2k": "__Processor Operations Procedure __\n\n__Document ID: DOC066__\n\n__Owner:__ Data Protection & Risk Manager  \n__Version:__ 1\\.0  \n__ Reviewed by__: PIMS Manager\n\n__Reviewed on__: \n\n__Approved by__: \n\n__Approved on:__ \n\n__Next Review Date:__   \n\n\n# 1\\. Purpose\n\n This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:\n\n- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)\n\nComplies with ISO/IEC 27701:2019 and GDPR Article 28\\(3\\)\\.\n\n# 2\\. Scope\n\nApplies to all services where Arion Networks acts as a processor or subprocessor of personal data on behalf of a client \\(controller\\)\\. Includes consulting services, SaaS tools, custom deployments,  subprocessed workstreams and eny other services involving client PII processing\\.\n\n# 3\\. Logging Processing Operations \\(A\\.8\\.3\\.1\\)\n\n- Maintain a log for each client engagement where Arion processes PII\n- Each log entry must include:\n\t- Processing purpose\n\t- Data categories\n\t- Processing duration\n\t- Subprocessors used\n\t- Security measures applied\n\t- Access control details\n- Logs must be:\n\t- Created during onboarding\n\t- Reviewed at least annually or upon significant change\n\t- Retained for 5 years after end of engagement\n\n__Fields in Processor Operations Log__\n\n__Field__\n\n__Description__\n\nClient ID\n\nUnique client identifier\n\nCustomer Name\n\nName of customer organization\n\nProcessing Purpose\n\nPurposes documented in customer DPA\n\nService Type\n\ne\\.g\\., compliance automation, vulnerability analysis\n\nPII Categories\n\nData types involved\n\nAccess Control\n\nWho had access, what level\n\nProcessing Duration\n\nContractual or technical lifespan\n\nSubprocessors\n\nAny used in processing chain\n\nSecurity Controls\n\nSummary of encryption, segregation, MFA, etc\\.\n\n## 3\\.1 Purpose Limitation \\(B\\.8\\.2\\.2\\)\"\n\n- Arion processes customer PII ONLY for purposes specified",
+    "doc_topic_tokens": [
+      "processor",
+      "logging",
+      "deletion",
+      "subprocessor",
+      "gdpr",
+      "personaldata",
+      "contracttermination",
+      "activities",
+      "obligations"
+    ],
+    "filename": "Processor Operations Procedures.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.7.2.1:purpose_procedure",
+    "must_id": "item:A.7.2.1:proc_documentation_fields",
+    "must_text": "Documentation fields per purpose (purpose text, categories of PII, categories of subjects, retention, recipients, legal basis link)",
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "__Processor Operations Procedure __\n\n__Document ID: DOC066__\n\n__Owner:__ Data Protection & Risk Manager  \n__Version:__ 1\\.0  \n__ Reviewed by__: PIMS Manager\n\n__Reviewed on__: \n\n__Approved by__: \n\n__Approved on:__ \n\n__Next Review Date:__   \n\n\n# 1\\. Purpose\n\n This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:\n\n- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)\n\nComplies with ISO/IEC 27701:2019 and GDPR Article 28\\(3\\)\\.\n\n# 2\\. Scope\n\nApplies to all services where Arion Networks acts as a processor or subprocessor of personal data on behalf of a client \\(controller\\)\\. Includes consulting services, SaaS tools, custom deployments,  subprocessed workstreams and eny other services involving client PII processing\\.\n\n# 3\\. Logging Processing Operations \\(A\\.8\\.3\\.1\\)\n\n- Maintain a log for each client engagement where Arion processes PII\n- Each log entry must include:\n\t- Processing purpose\n\t- Data categories\n\t- Processing duration\n\t- Subprocessors used\n\t- Security measures applied\n\t- Access control details\n- Logs must be:\n\t- Created during onboarding\n\t- Reviewed at least annually or upon significant change\n\t- Retained for 5 years after end of engagement\n\n__Fields in Processor Operations Log__\n\n__Field__\n\n__Description__\n\nClient ID\n\nUnique client identifier\n\nCustomer Name\n\nName of customer organization\n\nProcessing Purpose\n\nPurposes documented in customer DPA\n\nService Type\n\ne\\.g\\., compliance automation, vulnerability analysis\n\nPII Categories\n\nData types involved\n\nAccess Control\n\nWho had access, what level\n\nProcessing Duration\n\nContractual or technical lifespan\n\nSubprocessors\n\nAny used in processing chain\n\nSecurity Controls\n\nSummary of encryption, segregation, MFA, etc\\.\n\n## 3\\.1 Purpose Limitation \\(B\\.8\\.2\\.2\\)\"\n\n- Arion processes customer PII ONLY for purposes specified",
+    "doc_topic_tokens": [
+      "processor",
+      "logging",
+      "deletion",
+      "subprocessor",
+      "gdpr",
+      "personaldata",
+      "contracttermination",
+      "activities",
+      "obligations"
+    ],
+    "filename": "Processor Operations Procedures.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:B.8.2.2:purpose_limitation_procedure",
+    "must_id": "item:B.8.2.2:proc_technical_binding",
+    "must_text": "Technical binding \u2014 engineering controls that prevent processing beyond stated purposes (tenant isolation / data-tag enforcement / access scoping)",
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "__Processor Operations Procedure __\n\n__Document ID: DOC066__\n\n__Owner:__ Data Protection & Risk Manager  \n__Version:__ 1\\.0  \n__ Reviewed by__: PIMS Manager\n\n__Reviewed on__: \n\n__Approved by__: \n\n__Approved on:__ \n\n__Next Review Date:__   \n\n\n# 1\\. Purpose\n\n This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:\n\n- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)\n\nComplies with ISO/IEC 27701:2019 and GDPR Article 28\\(3\\)\\.\n\n# 2\\. Scope\n\nApplies to all services where Arion Networks acts as a processor or subprocessor of personal data on behalf of a client \\(controller\\)\\. Includes consulting services, SaaS tools, custom deployments,  subprocessed workstreams and eny other services involving client PII processing\\.\n\n# 3\\. Logging Processing Operations \\(A\\.8\\.3\\.1\\)\n\n- Maintain a log for each client engagement where Arion processes PII\n- Each log entry must include:\n\t- Processing purpose\n\t- Data categories\n\t- Processing duration\n\t- Subprocessors used\n\t- Security measures applied\n\t- Access control details\n- Logs must be:\n\t- Created during onboarding\n\t- Reviewed at least annually or upon significant change\n\t- Retained for 5 years after end of engagement\n\n__Fields in Processor Operations Log__\n\n__Field__\n\n__Description__\n\nClient ID\n\nUnique client identifier\n\nCustomer Name\n\nName of customer organization\n\nProcessing Purpose\n\nPurposes documented in customer DPA\n\nService Type\n\ne\\.g\\., compliance automation, vulnerability analysis\n\nPII Categories\n\nData types involved\n\nAccess Control\n\nWho had access, what level\n\nProcessing Duration\n\nContractual or technical lifespan\n\nSubprocessors\n\nAny used in processing chain\n\nSecurity Controls\n\nSummary of encryption, segregation, MFA, etc\\.\n\n## 3\\.1 Purpose Limitation \\(B\\.8\\.2\\.2\\)\"\n\n- Arion processes customer PII ONLY for purposes specified",
+    "doc_topic_tokens": [
+      "processor",
+      "logging",
+      "deletion",
+      "subprocessor",
+      "gdpr",
+      "personaldata",
+      "contracttermination",
+      "activities",
+      "obligations"
+    ],
+    "filename": "Processor Operations Procedures.docx",
+    "control_ref": null,
+    "standard_id": null
+  },
+  {
+    "leaf_id": "req:A.7.2.6:processor_contract_procedure",
+    "must_id": "item:A.7.2.6:proc_audit_rights",
+    "must_text": "Audit rights (Art.28.3.h) \u2014 processor makes available all information + contributes to audits",
+    "score": 0.4,
+    "corroborators": 2,
+    "signals": [
+      "must_semantic_topk",
+      "per_protocol_scope"
+    ],
+    "verdict_pre_invariant": "arbiter",
+    "doc_snippet_first_2k": "__Processor Operations Procedure __\n\n__Document ID: DOC066__\n\n__Owner:__ Data Protection & Risk Manager  \n__Version:__ 1\\.0  \n__ Reviewed by__: PIMS Manager\n\n__Reviewed on__: \n\n__Approved by__: \n\n__Approved on:__ \n\n__Next Review Date:__   \n\n\n# 1\\. Purpose\n\n This procedure defines Arion Networks' operational responsibilities when acting as a data processor, including:\n\n- Logging processing activities \\(A\\.8\\.3\\.1\\)\n- Secure return or deletion of personal data upon contract termination \\(A\\.8\\.3\\.2\\)\n- Assisting customers with their GDPR obligations \\(B\\.8\\.2\\.1\\)\n\nComplies with ISO/IEC 27701:2019 and GDPR Article 28\\(3\\)\\.\n\n# 2\\. Scope\n\nApplies to all services where Arion Networks acts as a processor or subprocessor of personal data on behalf of a client \\(controller\\)\\. Includes consulting services, SaaS tools, custom deployments,  subprocessed workstreams and eny other services involving client PII processing\\.\n\n# 3\\. Logging Processing Operations \\(A\\.8\\.3\\.1\\)\n\n- Maintain a log for each client engagement where Arion processes PII\n- Each log entry must include:\n\t- Processing purpose\n\t- Data categories\n\t- Processing duration\n\t- Subprocessors used\n\t- Security measures applied\n\t- Access control details\n- Logs must be:\n\t- Created during onboarding\n\t- Reviewed at least annually or upon significant change\n\t- Retained for 5 years after end of engagement\n\n__Fields in Processor Operations Log__\n\n__Field__\n\n__Description__\n\nClient ID\n\nUnique client identifier\n\nCustomer Name\n\nName of customer organization\n\nProcessing Purpose\n\nPurposes documented in customer DPA\n\nService Type\n\ne\\.g\\., compliance automation, vulnerability analysis\n\nPII Categories\n\nData types involved\n\nAccess Control\n\nWho had access, what level\n\nProcessing Duration\n\nContractual or technical lifespan\n\nSubprocessors\n\nAny used in processing chain\n\nSecurity Controls\n\nSummary of encryption, segregation, MFA, etc\\.\n\n## 3\\.1 Purpose Limitation \\(B\\.8\\.2\\.2\\)\"\n\n- Arion processes customer PII ONLY for purposes specified",
+    "doc_topic_tokens": [
+      "processor",
+      "logging",
+      "deletion",
+      "subprocessor",
+      "gdpr",
+      "personaldata",
+      "contracttermination",
+      "activities",
+      "obligations"
+    ],
+    "filename": "Processor Operations Procedures.docx",
+    "control_ref": null,
+    "standard_id": null
+  }
+]
