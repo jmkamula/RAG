@@ -68,6 +68,16 @@ class ExtractionConsensusConfig:
     # for measurement / HITL sampling of what the invariant drops.
     no_excerpt_auto_drop:      bool = True
 
+    # Ship 38'.b — invariant escape clause. When invariant is on AND
+    # the candidate has no excerpt BUT score ≥ escape_score AND
+    # corroborators ≥ escape_corrob, route to arbiter (LLM decides)
+    # instead of hard-drop. Ship 37 HITL: 4 of 6 should-have-accepted
+    # cases had score ≥ 1.5 + corrob ≥ 3 (primary-subject MUSTs on
+    # docs where multiple signals corroborated but fingerprint didn't
+    # fire).
+    no_excerpt_escape_score:   float = 1.5
+    no_excerpt_escape_corrob:  int   = 3
+
     def with_overrides(self, **kwargs) -> "ExtractionConsensusConfig":
         from dataclasses import replace
         return replace(self, **kwargs)

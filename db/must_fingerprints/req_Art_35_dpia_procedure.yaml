@@ -16,6 +16,11 @@ must_fingerprints:
       - [systematic, monitoring, dpia]
       - [special, category, large, scale, dpia]
       - [public, area, dpia]
+      # Ship 38'.b curator additions — verb-driven doc-prose patterns
+      - [mandatory, dpia, trigger]
+      - [dpia, trigger]
+      - [high, risk, trigger]
+      - [trigger, identified]
 
   - must_id: "item:Art.35:content_minimum"
     description: "Minimum content per Art.35.7"
@@ -33,6 +38,11 @@ must_fingerprints:
       - [art, 35, 2, dpo, advice]
       - [dpo, consulted, during, dpia]
       - [dpia, dpo, advice, recorded]
+      # Ship 38'.b curator additions
+      - [pims, manager, reviews, dpia]
+      - [dpo, dpia, review]
+      - [dpia, approved]
+      - [dpo, dpia]
 
   - must_id: "item:Art.35:subject_consultation"
     description: "Subject consultation considered (Art.35.9)"

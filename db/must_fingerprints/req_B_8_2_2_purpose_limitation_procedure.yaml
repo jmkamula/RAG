@@ -58,6 +58,12 @@ must_fingerprints:
       - [engineering, controls, prevent, organization]
       - [controls, prevent, organization]
       - [controls, prevent, processing, organization]
+      # Ship 38'.b curator additions — verb-driven doc-prose patterns
+      - [access, control]
+      - [tenant, isolate]
+      - [isolate, requested]
+      - [export, isolate]
+      - [documented, instructions]
 
   - must_id: "item:B.8.2.2:proc_instruction_capture"
     description: "Instruction capture — customer purposes recorded per engagement (contract + change-notices)"

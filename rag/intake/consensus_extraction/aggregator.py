@@ -111,8 +111,18 @@ def aggregate_extraction(
         # Ship 37'.b — toggle via cfg.no_excerpt_auto_drop. Default
         # True (Ship 35 shape). Set False for HITL sampling of what
         # the invariant drops.
+        #
+        # Ship 38'.b — escape clause: no-excerpt candidates with
+        # STRONG multi-signal corroboration route to arbiter (LLM
+        # decides) instead of hard-drop. Catches primary-subject
+        # cases where fingerprint doesn't fire but multiple scope +
+        # semantic signals corroborate. Ship 37 HITL basis.
         if not excerpt and cfg.no_excerpt_auto_drop:
-            verdict = "drop"; n_drop += 1
+            if (score >= cfg.no_excerpt_escape_score
+                    and corrob >= cfg.no_excerpt_escape_corrob):
+                verdict = "arbiter"; n_arbiter += 1
+            else:
+                verdict = "drop"; n_drop += 1
         elif score >= cfg.accept_floor and corrob >= cfg.min_corroborators:
             verdict = "accept"; n_accept += 1
         elif score >= cfg.arbiter_floor:

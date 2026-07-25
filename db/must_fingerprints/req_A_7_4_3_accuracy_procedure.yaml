@@ -58,6 +58,11 @@ must_fingerprints:
       - [org, responds, inaccuracy, accuracy]
       - [responds, inaccuracy, accuracy]
       - [responds, inaccuracy, detected, accuracy]
+      # Ship 38'.b curator additions — verb-driven doc-prose patterns
+      - [corrected, inaccurate]
+      - [correction, process]
+      - [correction, tracked]
+      - [review, correction]
 
   - must_id: "item:A.7.4.3:proc_inaccuracy_prevention"
     description: "Inaccuracy prevention — technical + procedural controls (input validation + duplicate detection + integration reconciliation)"
@@ -70,4 +75,9 @@ must_fingerprints:
       - [technical, procedural, controls, accuracy]
       - [procedural, controls, accuracy]
       - [procedural, controls, input, accuracy]
+      # Ship 38'.b curator additions
+      - [structured, validation]
+      - [validation, forms]
+      - [verifiable, data]
+      - [validation, check]
 
