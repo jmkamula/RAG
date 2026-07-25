@@ -121,7 +121,7 @@ def _run_one_doc(filename, storage_path, upload_id):
         )
         scoped_leaf_ids = _fetch_leaves_for_controls(scoped[:40])
 
-    cfg = default_config()
+    cfg = default_config().with_overrides(llm_arbiter_enabled=True)
     consensus_result = run_extraction_consensus(doc, scoped_leaf_ids, cfg)
 
     # Aggregate metrics for Path A

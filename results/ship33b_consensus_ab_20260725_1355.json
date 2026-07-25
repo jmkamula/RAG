@@ -1,0 +1,146 @@
+{
+  "Data Quality Accuracy Procedure.docx": {
+    "path_a": {
+      "total": 16,
+      "by_source": {
+        "fingerprint_match": 5,
+        "extracted": 11
+      },
+      "unique_evidence": 14
+    },
+    "path_b": {
+      "total_candidates": 30,
+      "n_accept": 23,
+      "n_arbiter": 0,
+      "n_drop": 7,
+      "signals_fired": 8,
+      "signal_counts": {
+        "explicit_ref": 21,
+        "doc_mappings_target": 29,
+        "fingerprint_keyword": 6,
+        "must_semantic_topk": 6,
+        "per_protocol_scope": 5,
+        "semantic_fit_gate": 6,
+        "content_shape_penalty": 1,
+        "evidence_uniqueness": 0
+      },
+      "unique_evidence_accept": 5,
+      "latency_ms": 5740
+    }
+  },
+  "Data Protection Impact Assessment (DPIA) Procedure.docx": {
+    "path_a": {
+      "total": 27,
+      "by_source": {
+        "fingerprint_match": 9,
+        "extracted": 18
+      },
+      "unique_evidence": 17
+    },
+    "path_b": {
+      "total_candidates": 53,
+      "n_accept": 32,
+      "n_arbiter": 0,
+      "n_drop": 21,
+      "signals_fired": 8,
+      "signal_counts": {
+        "explicit_ref": 30,
+        "doc_mappings_target": 43,
+        "fingerprint_keyword": 9,
+        "must_semantic_topk": 24,
+        "per_protocol_scope": 12,
+        "semantic_fit_gate": 9,
+        "content_shape_penalty": 0,
+        "evidence_uniqueness": 6
+      },
+      "unique_evidence_accept": 3,
+      "latency_ms": 6369
+    }
+  },
+  "Records of Processing Activities.docx": {
+    "path_a": {
+      "total": 23,
+      "by_source": {
+        "fingerprint_match": 5,
+        "extracted": 18
+      },
+      "unique_evidence": 15
+    },
+    "path_b": {
+      "total_candidates": 120,
+      "n_accept": 29,
+      "n_arbiter": 0,
+      "n_drop": 91,
+      "signals_fired": 8,
+      "signal_counts": {
+        "explicit_ref": 24,
+        "doc_mappings_target": 50,
+        "fingerprint_keyword": 5,
+        "must_semantic_topk": 80,
+        "per_protocol_scope": 42,
+        "semantic_fit_gate": 5,
+        "content_shape_penalty": 0,
+        "evidence_uniqueness": 0
+      },
+      "unique_evidence_accept": 2,
+      "latency_ms": 7199
+    }
+  },
+  "Consent Management Procedure.docx": {
+    "path_a": {
+      "total": 57,
+      "by_source": {
+        "fingerprint_match": 33,
+        "extracted": 24
+      },
+      "unique_evidence": 32
+    },
+    "path_b": {
+      "total_candidates": 122,
+      "n_accept": 78,
+      "n_arbiter": 0,
+      "n_drop": 44,
+      "signals_fired": 8,
+      "signal_counts": {
+        "explicit_ref": 66,
+        "doc_mappings_target": 115,
+        "fingerprint_keyword": 33,
+        "must_semantic_topk": 11,
+        "per_protocol_scope": 66,
+        "semantic_fit_gate": 33,
+        "content_shape_penalty": 0,
+        "evidence_uniqueness": 15
+      },
+      "unique_evidence_accept": 10,
+      "latency_ms": 17261
+    }
+  },
+  "Processor Operations Procedures.docx": {
+    "path_a": {
+      "total": 149,
+      "by_source": {
+        "fingerprint_match": 121,
+        "extracted": 28
+      },
+      "unique_evidence": 30
+    },
+    "path_b": {
+      "total_candidates": 408,
+      "n_accept": 35,
+      "n_arbiter": 0,
+      "n_drop": 373,
+      "signals_fired": 7,
+      "signal_counts": {
+        "explicit_ref": 21,
+        "fingerprint_keyword": 121,
+        "must_semantic_topk": 108,
+        "per_protocol_scope": 320,
+        "semantic_fit_gate": 121,
+        "content_shape_penalty": 0,
+        "evidence_uniqueness": 103
+      },
+      "unique_evidence_accept": 8,
+      "latency_ms": 41659
+    }
+  }
+}

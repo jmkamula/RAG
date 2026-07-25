@@ -81,6 +81,18 @@ def run_extraction_consensus(
     ]
 
     result = aggregate_extraction(signals, cfg)
+
+    # Ship 33'.c — LLM batched arbiter for candidates in the borderline
+    # zone (0.40 ≤ score < 0.75). Bounded: cannot invent, cannot override
+    # auto-accept or auto-drop. Fail-open: on LLM error, arbiter-zone
+    # candidates stay 'arbiter' (caller can decide how to treat).
+    if cfg.llm_arbiter_enabled and result.n_arbiter > 0:
+        from rag.intake.consensus_extraction.gatekeeper import arbitrate
+        arbitrate(
+            doc_name = getattr(doc, "original_name", "<unknown>"),
+            result   = result,
+        )
+
     result.latency_ms = int((time.time() - t0) * 1000)
 
     logger.info(
