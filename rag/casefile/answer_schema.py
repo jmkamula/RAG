@@ -146,14 +146,28 @@ Card content rules:
    Everything else stays: verdict acronyms (NC, OFI, Comply, DRAFT
    tags), query framing terms, guidance-standard names (see rule
    7), role/framework markers.
+
+   IMPORTANT — use the DIGEST verdict tag verbatim. If the digest
+   shows [NC], write "NC" (not "NC-DRAFT"). Only append "-DRAFT"
+   when the digest tag itself includes it ([NC-DRAFT] / [OFI-DRAFT]
+   / [Comply-DRAFT]). The digest reflects live confirmation status;
+   echoing a stale "-DRAFT" suffix contradicts what the tenant sees
+   on their dashboard. (Ship 30 fix, 2026-07-25.)
+
    Examples:
-     Query "how do I remediate A.5.15?" →
+     Digest shows "A.5.15 [OFI-DRAFT] register incomplete",
+     query "how do I remediate A.5.15?" →
        "ISO 27001 A.5.15 (Access control) requires authorized
         access to information and assets. Currently OFI-DRAFT."
+     Digest shows "B.8.4.1 [NC] no systematic temp-file sweep",
+     query "posture on B.8.4.1?" →
+       "ISO 27701 B.8.4.1 (Temporary files) requires periodic
+        verification that unused temp files are deleted. Currently
+        NC — no systematic sweep in place."
      Query "are we certified?" →
        "Arion is currently working toward ISO 27001 certification;
-        multiple controls are NC-DRAFT and require remediation
-        before an external audit can succeed."
+        several controls remain NC and require remediation before
+        an external audit can succeed."
      Query "what does ISO 27004 say about monitoring?" →
        "ISO 27004 provides guidance on the monitoring, measurement,
         analysis and evaluation required by ISO 27001 clause 9.1.

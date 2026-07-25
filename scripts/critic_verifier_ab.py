@@ -221,12 +221,32 @@ def run_phase(critic_on: bool, pg) -> dict:
 
 
 def main():
+    from datetime import datetime, timezone
+
+    # Ship 30 hygiene: record start-of-run so the residue sweep at exit
+    # only affects findings this script produced.
+    _run_start = datetime.now(timezone.utc)
+
     pg = psycopg2.connect(**DB_PARAMS)
     try:
         baseline = run_phase(critic_on=False, pg=pg)
         critic   = run_phase(critic_on=True,  pg=pg)
     finally:
         pg.close()
+        # Ship 30 hygiene: this script re-extracts real docs on the demo
+        # tenant + writes pending findings via the real pipeline. Sweep
+        # the residue on exit so the Stage-1 queue doesn't accumulate.
+        try:
+            from scripts.dev.demo_tenant_cleanup import cleanup_measurement_residue
+            result = cleanup_measurement_residue(
+                tenant_id = TENANT_ID,
+                since     = _run_start,
+                dry_run   = False,
+                reason    = "critic_verifier_ab — measurement residue auto-cleanup",
+            )
+            print(f"\n⤷ Ship 30 hygiene sweep: {result}")
+        except Exception as _e:
+            print(f"\n⤷ Ship 30 hygiene sweep skipped: {type(_e).__name__}: {_e}")
 
     # Comparison table
     print("\n" + "="*100)

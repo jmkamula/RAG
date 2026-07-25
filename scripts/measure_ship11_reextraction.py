@@ -2,10 +2,18 @@
 """
 Ship 11'.e — re-extraction measurement checkpoint.
 
-Dry-run extractor on the 5 documents Ship 10's HITL review covered
+Re-runs the extractor on the 5 documents Ship 10's HITL review covered
 (Data Quality Accuracy, DPIA, RoPA, Consent Management, Processor
 Operations). Reports finding counts + counter breakdown per doc.
-Does NOT touch the DB — pure measurement.
+
+⚠ TOUCHES THE DB. The extraction paths this invokes (fingerprint +
+xfw_proposer) write pending findings to document_findings via the real
+posture_writer pipeline. In Ship 11'.e (2026-07-21) this left 102
+orphan findings that surfaced in the demo tenant's Stage-1 queue and
+were swept in Ship 30. To avoid recurrence, this script now calls
+scripts/dev/demo_tenant_cleanup.py::cleanup_measurement_residue()
+on exit via a finally block. See
+[[ship-30-prime-a-demo-tenant-hygiene-design-2026-07-25]].
 
 Compares against Ship 10 baseline:
   DQA:          9 findings (4 approve / 5 reject) →  ?
@@ -114,10 +122,34 @@ def _extract_one(filename, storage_path, upload_id):
 
 
 def main():
+    from datetime import datetime, timezone
+    from scripts.dev.demo_tenant_cleanup import cleanup_measurement_residue
+
     print("─" * 72)
     print(" Ship 11'.e — re-extraction measurement")
     print("─" * 72)
 
+    # Ship 30 hygiene: record start-of-run so the residue sweep at exit
+    # only affects findings this script produced.
+    _run_start = datetime.now(timezone.utc)
+
+    try:
+        _measure_body()
+    finally:
+        # Ship 30 hygiene: measurement runs on the demo tenant leave
+        # pending findings in the Stage-1 queue that no one ever
+        # approves. Sweep our own residue on exit. Safe no-op if the
+        # extraction path errored before writing anything.
+        result = cleanup_measurement_residue(
+            tenant_id = TENANT,
+            since     = _run_start,
+            dry_run   = False,
+            reason    = "measure_ship11_reextraction — measurement residue auto-cleanup",
+        )
+        print(f"\n  ⤷ Ship 30 hygiene sweep: {result}")
+
+
+def _measure_body():
     paths = _load_upload_paths()
     total_new = 0
     total_baseline = sum(v[0] for v in SHIP10_BASELINE.values())
