@@ -352,7 +352,7 @@ def build_advisory_data_for_refs(
         neo4j_driver = _get_neo_driver()
 
     from .engine_runner import _build_eval_context
-    from rag.spec_composer import build_spec_resolver as _bsr
+    from rag.posture.spec_builder import build_spec_resolver as _bsr
 
     out: dict[str, Optional[dict]] = {}
     shared_ctx = None
