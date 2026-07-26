@@ -277,6 +277,16 @@ _static = Path("/data/arioncomply/static")
 _static.mkdir(parents=True, exist_ok=True)
 app.mount("/ui", StaticFiles(directory=str(_static), html=True), name="ui")
 
+# Root redirect: chat emits deep-links like `/#dashboard?control=A.5.15`
+# which resolve to `http://host:8080/` before the hash. Without this
+# handler, that path 404s. Preserve the browser's hash by 302-ing to
+# the SPA — the hash never reaches the server, so it survives the
+# redirect intact.
+from fastapi.responses import RedirectResponse
+@app.get("/", include_in_schema=False)
+async def _root_redirect():
+    return RedirectResponse(url="/ui/arioncomply.html", status_code=302)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins     = CORS_ORIGINS,
