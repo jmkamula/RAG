@@ -134,6 +134,46 @@ def _numeric_to_conf_label(value: float) -> str:
 
 
 # =============================================================================
+# Ship 42'.b — evidence_group_id computation for per-doc dedup at write time.
+#
+# Rows sharing the same (document_id, control_ref, normalized_excerpt) get
+# the same evidence_group_id. Surface layers (Stage-1, advisory, evidence
+# package, chat) filter DISTINCT ON to display 1 row per group. Engine
+# per-MUST recognition (leaf_evaluators._fetch_recognised_items) reads
+# checklist_item_id = ANY(...) unchanged and sees all N rows.
+#
+# See docs/memory/ship_42_prime_a_dedup_design_2026_07_26.md.
+# =============================================================================
+
+import hashlib
+
+_EXCERPT_ESCAPE_RE = re.compile(r"\\([\\\-\(\)\.])")
+_EXCERPT_WS_RE = re.compile(r"\s+")
+
+
+def _normalize_excerpt(text: Optional[str]) -> str:
+    """Whitespace-collapse, case-fold, strip common markdown escapes.
+    Bounded at 500 chars for safety (matches document_findings.excerpt cap)."""
+    if not text:
+        return ""
+    t = _EXCERPT_ESCAPE_RE.sub(r"\1", text)
+    t = _EXCERPT_WS_RE.sub(" ", t).strip().lower()
+    return t[:500]
+
+
+def _evidence_group_id(document_id: str, control_ref: str,
+                       excerpt: Optional[str]) -> Optional[str]:
+    """Return 16-char sha1 prefix of (document_id, control_ref,
+    normalized_excerpt). Returns None if excerpt is empty — engine still
+    sees the row, but surface layers won't collapse groupless rows."""
+    normalized = _normalize_excerpt(excerpt)
+    if not normalized:
+        return None
+    key = f"{document_id}|{control_ref}|{normalized}"
+    return hashlib.sha1(key.encode()).hexdigest()[:16]
+
+
+# =============================================================================
 # PRE-FLIGHT: ensure client_documents record exists
 # Called BEFORE the main transaction opens — uses autocommit-safe pattern.
 # =============================================================================
@@ -483,6 +523,16 @@ def _write_document_findings(
                     review_status = "pending"
                     confirmed_by  = None
 
+                # Ship 42'.b — evidence_group_id stamp for per-doc dedup.
+                # Same excerpt on same control gets same group_id; surface
+                # layers collapse to 1 row per group.
+                evidence_excerpt = (
+                    f.evidence_text[:500] if f.evidence_text else None
+                )
+                group_id = _evidence_group_id(
+                    doc_id, f.control_ref, evidence_excerpt,
+                )
+
                 if src:
                     cur.execute(
                         """
@@ -494,7 +544,7 @@ def _write_document_findings(
                             is_active, retention_class,
                             inference_source, grounding_method,
                             review_status, confirmed_by, confirmed_at,
-                            corroborating_signals
+                            corroborating_signals, evidence_group_id
                         ) VALUES (
                             %s, %s, %s,
                             %s, %s, %s,
@@ -504,7 +554,7 @@ def _write_document_findings(
                             %s, %s,
                             %s, %s::uuid,
                             CASE WHEN %s = 'approved' THEN NOW() ELSE NULL END,
-                            %s
+                            %s, %s
                         )
                         ON CONFLICT (id) DO NOTHING
                         """,
@@ -513,12 +563,13 @@ def _write_document_findings(
                             f.control_ref, f.standard_id, f.checklist_item_id,
                             _map_df_status(f.finding),
                             _map_confidence(f.confidence),
-                            f.evidence_text[:500] if f.evidence_text else None,
+                            evidence_excerpt,
                             f.section,
                             _RETENTION_CLASS,
                             src, _grounding_method(src),
                             review_status, confirmed_by, review_status,
                             getattr(f, "corroborating_signals", None) or [],
+                            group_id,
                         ),
                     )
                 else:
@@ -534,14 +585,14 @@ def _write_document_findings(
                             status, confidence, excerpt,
                             section_number, extracted_at,
                             is_active, retention_class,
-                            grounding_method
+                            grounding_method, evidence_group_id
                         ) VALUES (
                             %s, %s, %s,
                             %s, %s, %s,
                             %s, %s, %s,
                             %s, NOW(),
                             TRUE, %s,
-                            'extractor_verbatim'
+                            'extractor_verbatim', %s
                         )
                         ON CONFLICT (id) DO NOTHING
                         """,
@@ -550,9 +601,10 @@ def _write_document_findings(
                             f.control_ref, f.standard_id, f.checklist_item_id,
                             _map_df_status(f.finding),
                             _map_confidence(f.confidence),
-                            f.evidence_text[:500] if f.evidence_text else None,
+                            evidence_excerpt,
                             f.section,
                             _RETENTION_CLASS,
+                            group_id,
                         ),
                     )
                 cur.execute(f"RELEASE SAVEPOINT {sp}")

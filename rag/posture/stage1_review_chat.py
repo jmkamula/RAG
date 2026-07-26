@@ -245,21 +245,38 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
 
     with pg_conn.cursor() as cur:
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
+        # Ship 42'.b — collapse rows sharing the same evidence_group_id
+        # (same excerpt on same control) to a single auditor-facing row.
+        # Legacy rows (evidence_group_id NULL) are counted individually via
+        # COALESCE to df.id::text. Engine per-MUST recognition is unaffected —
+        # engine reads df.checklist_item_id = ANY() directly, no group filter.
         cur.execute(
             """
-            SELECT df.id::text, df.status, df.confidence, df.excerpt,
-                   df.extracted_at::text,
-                   df.inferred_from_control_ref, df.inferred_from_standard_id,
-                   df.inference_source,
-                   df.checklist_item_id,
-                   cd.filename, cd.document_title
-              FROM document_findings df
-              LEFT JOIN client_documents cd ON cd.id = df.document_id
-             WHERE df.tenant_id     = %s
-               AND df.control_ref   = %s
-               AND df.review_status = 'pending'
-               AND df.is_active     = TRUE
-             ORDER BY df.extracted_at
+            WITH ranked AS (
+                SELECT df.id::text AS finding_id, df.status, df.confidence,
+                       df.excerpt, df.extracted_at::text AS extracted_at,
+                       df.inferred_from_control_ref,
+                       df.inferred_from_standard_id, df.inference_source,
+                       df.checklist_item_id, cd.filename, cd.document_title,
+                       ROW_NUMBER() OVER (
+                           PARTITION BY COALESCE(df.evidence_group_id,
+                                                 df.id::text)
+                           ORDER BY df.extracted_at
+                       ) AS rn
+                  FROM document_findings df
+                  LEFT JOIN client_documents cd ON cd.id = df.document_id
+                 WHERE df.tenant_id     = %s
+                   AND df.control_ref   = %s
+                   AND df.review_status = 'pending'
+                   AND df.is_active     = TRUE
+            )
+            SELECT finding_id, status, confidence, excerpt, extracted_at,
+                   inferred_from_control_ref, inferred_from_standard_id,
+                   inference_source, checklist_item_id, filename,
+                   document_title
+              FROM ranked
+             WHERE rn = 1
+             ORDER BY extracted_at
             """,
             (tenant_id, control_ref),
         )
@@ -303,12 +320,19 @@ def list_pending_for_control(pg_conn, tenant_id: str, control_ref: str) -> list[
 def list_queue(pg_conn, tenant_id: str) -> list[dict]:
     """Return per-control pending counts so the user can pick which queue
     to drain first. Sorted by count desc — controls with the most pending
-    findings first."""
+    findings first.
+
+    Ship 42'.b — counts distinct evidence groups (not raw rows). Same
+    excerpt on same control = 1 auditor item, regardless of how many MUSTs
+    it covers. Legacy rows (NULL evidence_group_id) fall back to counting
+    per-row via COALESCE to id::text.
+    """
     with pg_conn.cursor() as cur:
         cur.execute("SELECT set_config('app.tenant_id', %s, TRUE)", (tenant_id,))
         cur.execute(
             """
-            SELECT control_ref, standard_id, count(*) AS n
+            SELECT control_ref, standard_id,
+                   count(DISTINCT COALESCE(evidence_group_id, id::text)) AS n
               FROM document_findings
              WHERE tenant_id     = %s
                AND review_status = 'pending'
