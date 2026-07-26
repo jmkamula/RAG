@@ -363,8 +363,22 @@ class DocumentPipeline:
                 )
 
             # ── Stage 3: Get controls + Extract ──────────────────────────────
-            logger.info(f"Stage 3: Loading controls for {doc.standard_ids}")
-            controls = self._get_controls(doc.standard_ids)
+            # Ship 40'.b — under consensus extraction, widen standard_ids to
+            # all Neo4j-loaded standards so cross-framework controls
+            # (e.g. GDPR obligations paired to ISO 27701 extensions) are
+            # available for consensus signals. Enricher assigns per-doc
+            # standard_ids based on doc content; consensus needs the full
+            # framework surface to attribute cross-framework evidence.
+            std_ids_for_load = doc.standard_ids
+            if os.getenv("USE_CONSENSUS_EXTRACTION") == "1":
+                std_ids_for_load = self._all_graph_standards() or doc.standard_ids
+                if std_ids_for_load != doc.standard_ids:
+                    logger.info(
+                        f"Consensus scope widening: {doc.standard_ids} → "
+                        f"{std_ids_for_load}"
+                    )
+            logger.info(f"Stage 3: Loading controls for {std_ids_for_load}")
+            controls = self._get_controls(std_ids_for_load)
             logger.info(
                 f"Stage 3: Extracting via {doc.extraction_path.value} path "
                 f"({len(controls)} controls available)"
@@ -950,6 +964,38 @@ class DocumentPipeline:
 
     # ── Helpers ───────────────────────────────────────────────────────────────
 
+    _graph_standards_cache: Optional[list[str]] = None
+
+    def _all_graph_standards(self) -> list[str]:
+        """Return all standard_ids present in Neo4j RequirementNode.
+
+        Cached across calls in this instance. Silent fallback to []
+        on Neo4j error — caller degrades to per-doc standard_ids."""
+        if self._graph_standards_cache is not None:
+            return self._graph_standards_cache
+        try:
+            from neo4j import GraphDatabase
+            driver = GraphDatabase.driver(
+                os.getenv("NEO4J_URI"),
+                auth=(os.getenv("NEO4J_USER"), os.getenv("NEO4J_PASSWORD")),
+            )
+            try:
+                with driver.session() as s:
+                    result = s.run(
+                        "MATCH (n:RequirementNode) "
+                        "RETURN DISTINCT n.standard_id AS sid ORDER BY sid"
+                    )
+                    self._graph_standards_cache = [r["sid"] for r in result if r["sid"]]
+            finally:
+                driver.close()
+        except Exception as e:
+            logger.warning(
+                f"_all_graph_standards Neo4j query failed: "
+                f"{type(e).__name__}: {e}"
+            )
+            self._graph_standards_cache = []
+        return self._graph_standards_cache
+
     def _get_controls(self, standard_ids: list[str]) -> list[dict]:
         all_controls = []
         for std in standard_ids:
@@ -973,6 +1019,22 @@ class DocumentPipeline:
         # DEMONSTRATES source in tenant scope stay in the list so
         # direct extraction still works for pure-legal content
         # (Art.7 consent mechanics, Art.30 records, etc).
+        #
+        # Ship 40'.a — bypass Phase 3 filter under consensus extraction.
+        # Phase 3's "prevent LLM guessing bias" rationale applied to the
+        # OLD LLM discovery pipeline. Consensus has its own discipline:
+        # fingerprint excerpt requirement + 8-signal aggregator + bounded
+        # LLM arbiter. Direct cross-framework findings become an auditor-
+        # facing feature. DEMONSTRATES overlay in posture_loader remains
+        # as belt-and-suspenders backstop when consensus doesn't surface
+        # a direct finding.
+        if os.getenv("USE_CONSENSUS_EXTRACTION") == "1":
+            logger.info(
+                f"Phase 3 filter BYPASSED under consensus "
+                f"({len(all_controls)} controls in scope)"
+            )
+            return all_controls
+
         filtered = self._filter_demonstrated_obligations(all_controls, standard_ids)
         excluded = len(all_controls) - len(filtered)
         if excluded:
