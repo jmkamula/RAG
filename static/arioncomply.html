@@ -769,6 +769,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="toast" id="toast"></div>
 
 <script>
+// Bump on JS behaviour changes so you can verify fresh code from console:
+//   window.ARION_JS_VERSION should print the latest stamp.
+window.ARION_JS_VERSION = '2026-07-26-chat-persistence';
+console.info('[Arion] JS version', window.ARION_JS_VERSION);
 let API_URL = document.getElementById('api-url').value;
 let API_KEY = document.getElementById('api-key').value;
 let mode = 'dashboard';
@@ -916,6 +920,74 @@ function _inferStandardId(ref) {
   return 'ISO27001:2022';
 }
 window.addEventListener('hashchange', _applyHashRoute);
+
+// ── Chat persistence (session_id + rendered messages) ─────────────────
+// window.* is memory-only and disappears on any full page navigation.
+// localStorage survives reloads so the server treats the next question
+// as a follow-up in the same conversation (needed for the "why?" /
+// "what about X?" carry-over pattern).
+const _CHAT_SID_KEY = 'arion.chat.session_id';
+const _CHAT_HTML_KEY = 'arion.chat.messages_html';
+const _CHAT_HISTORY_KEY = 'arion.chat.history';
+
+function _getOrCreateSessionId() {
+  let s = null;
+  try { s = localStorage.getItem(_CHAT_SID_KEY); } catch (_e) {}
+  if (!s) {
+    s = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    try { localStorage.setItem(_CHAT_SID_KEY, s); } catch (_e) {}
+  }
+  window._sessionId = s;
+  return s;
+}
+function _newChatSession() {
+  try {
+    localStorage.removeItem(_CHAT_SID_KEY);
+    localStorage.removeItem(_CHAT_HTML_KEY);
+    localStorage.removeItem(_CHAT_HISTORY_KEY);
+  } catch (_e) {}
+  window._sessionId = undefined;
+}
+// Persist the current chat DOM to localStorage so the messages come
+// back on page reload. Debounced so streaming updates don't spam
+// storage. Called after every append + on beforeunload.
+let _chatPersistTimer = null;
+function _persistChatDom() {
+  if (_chatPersistTimer) clearTimeout(_chatPersistTimer);
+  _chatPersistTimer = setTimeout(() => {
+    try {
+      const el = document.getElementById('chat-messages');
+      if (!el) return;
+      // Skip persistence when only the empty state is visible.
+      const hasMsgs = el.querySelector('.msg');
+      if (!hasMsgs) { localStorage.removeItem(_CHAT_HTML_KEY); return; }
+      localStorage.setItem(_CHAT_HTML_KEY, el.innerHTML);
+      localStorage.setItem(_CHAT_HISTORY_KEY, JSON.stringify(chatHistory || []));
+    } catch (_e) { /* quota exceeded, private mode, etc — silent */ }
+  }, 500);
+}
+function _restoreChatDom() {
+  try {
+    const html = localStorage.getItem(_CHAT_HTML_KEY);
+    if (!html) return;
+    const el = document.getElementById('chat-messages');
+    if (!el) return;
+    el.innerHTML = html;
+    const emp = document.getElementById('chat-empty');
+    if (emp) emp.style.display = 'none';
+    const raw = localStorage.getItem(_CHAT_HISTORY_KEY);
+    if (raw) chatHistory = JSON.parse(raw) || [];
+  } catch (_e) { /* silent */ }
+}
+window.addEventListener('beforeunload', () => {
+  try {
+    const el = document.getElementById('chat-messages');
+    if (el && el.querySelector('.msg')) {
+      localStorage.setItem(_CHAT_HTML_KEY, el.innerHTML);
+      localStorage.setItem(_CHAT_HISTORY_KEY, JSON.stringify(chatHistory || []));
+    }
+  } catch (_e) {}
+});
 
 // Populate the intake framework dropdown from the tenant's queryable
 // standards (scope_loader output). Fetches once per Docs-mode entry;
@@ -5797,11 +5869,12 @@ async function sendChat() {
 
   appendMsg('user', q);
   chatHistory.push({role:'user', content:q});
+  _persistChatDom();
   showTyping();
 
   const btn = document.getElementById('btn-send');
   btn.disabled = true;
-  const sid = 'ui_' + (window._sessionId || (window._sessionId = Date.now().toString(36)));
+  const sid = 'ui_' + _getOrCreateSessionId();
 
   removeTyping();
   const bubble = document.createElement('div');
@@ -5873,6 +5946,7 @@ async function sendChat() {
     const msgRole = finalType === 'clarification' ? 'clarification' : 'assistant';
     appendMsg(msgRole, fullText || '(no answer)', finalRefs, finalLatency, finalTemplates, finalStructured);
     chatHistory.push({role:'assistant', content: fullText});
+    _persistChatDom();
 
   } catch(e) {
     bubble.remove();
@@ -5881,6 +5955,7 @@ async function sendChat() {
     appendMsg('assistant',
       'Sorry, the connection dropped before I could finish. Please try again.',
       [], 0);
+    _persistChatDom();
   } finally {
     btn.disabled = false;
     input.focus();
@@ -5904,10 +5979,10 @@ function sendClarification(option) {
 
 function clearChat() {
   chatHistory = [];
-  // New session id so the backend starts a fresh conversation thread;
-  // follow-up questions after this point won't inherit any context from
-  // the prior chat.
-  window._sessionId = Date.now().toString(36);
+  // New session id + clear persisted messages so the backend starts a
+  // fresh conversation thread; follow-up questions after this point
+  // won't inherit any context from the prior chat.
+  _newChatSession();
   document.getElementById('chat-messages').innerHTML = `
     <div class="chat-empty" id="chat-empty">
       <i class="ti ti-message-2" aria-hidden="true"></i>
@@ -6491,6 +6566,11 @@ function toastError(fallback, err) {
 }
 
 connect();
+
+// Restore chat DOM + history from localStorage so a page reload
+// doesn't wipe the conversation. Runs BEFORE hash route so an
+// incoming #chat deep-link sees the restored state.
+_restoreChatDom();
 
 // Apply any hash route present on initial load (bookmarked / shared
 // deep-link like #dashboard?control=A.5.15).

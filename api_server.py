@@ -275,14 +275,31 @@ except Exception as _e:
 # Serve static UI files
 _static = Path("/data/arioncomply/static")
 _static.mkdir(parents=True, exist_ok=True)
+from fastapi.responses import RedirectResponse, FileResponse
+
+# Explicit SPA route MUST be defined BEFORE the StaticFiles mount at
+# /ui — otherwise the mount catches the request first. Explicit
+# no-cache header so browsers don't serve stale JS after we ship UI
+# changes.
+@app.get("/ui/arioncomply.html", include_in_schema=False)
+async def _serve_spa():
+    return FileResponse(
+        str(_static / "arioncomply.html"),
+        media_type = "text/html; charset=utf-8",
+        headers    = {
+            "Cache-Control": "no-cache, must-revalidate",
+            "Pragma":        "no-cache",
+        },
+    )
+
 app.mount("/ui", StaticFiles(directory=str(_static), html=True), name="ui")
 
-# Root redirect: chat emits deep-links like `/#dashboard?control=A.5.15`
-# which resolve to `http://host:8080/` before the hash. Without this
+# Root redirect: chat emits deep-links like `#dashboard?control=A.5.15`
+# and legacy deep-links used a leading slash (`/#dashboard?...`) that
+# resolved to `http://host:8080/` before the hash. Without this
 # handler, that path 404s. Preserve the browser's hash by 302-ing to
 # the SPA — the hash never reaches the server, so it survives the
 # redirect intact.
-from fastapi.responses import RedirectResponse
 @app.get("/", include_in_schema=False)
 async def _root_redirect():
     return RedirectResponse(url="/ui/arioncomply.html", status_code=302)
