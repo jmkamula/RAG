@@ -1024,6 +1024,20 @@ def write_findings(
         return {"written": 0, "posture_updated": 0, "posture_created": 0,
                 "controls_assessed": []}
 
+    # Ship 44'.d — OTel span. write_findings is the terminal writer;
+    # tracing shows total findings-in vs findings-persisted vs
+    # posture-updated across all extraction paths.
+    from rag.telemetry import get_tracer
+    _tracer = get_tracer(__name__)
+    _span_cm = _tracer.start_as_current_span("arion.writer.write_findings")
+    _span = _span_cm.__enter__()
+    try:
+        _span.set_attribute("arion.tenant_id", str(tenant_id)[:64])
+        _span.set_attribute("arion.upload_id", str(upload_id)[:64])
+        _span.set_attribute("arion.writer.n_findings_input", len(findings))
+    except Exception:
+        pass
+
     # Stamp IDs
     for f in findings:
         f.tenant_id = tenant_id
@@ -1154,6 +1168,21 @@ def write_findings(
                 )
         except Exception as _e:
             logger.debug("upload_processed notify skipped: %s", _e)
+
+    try:
+        _span.set_attribute("arion.writer.n_written", summary.get("written", 0))
+        _span.set_attribute("arion.writer.n_posture_updated",
+                            summary.get("posture_updated", 0))
+        _span.set_attribute("arion.writer.n_posture_created",
+                            summary.get("posture_created", 0))
+        _span.set_attribute("arion.writer.n_skipped",
+                            summary.get("skipped", 0))
+        _span.set_attribute("arion.writer.n_controls_assessed",
+                            len(summary.get("controls_assessed", [])))
+    except Exception:
+        pass
+    try: _span_cm.__exit__(None, None, None)
+    except Exception: pass
 
     return summary
 

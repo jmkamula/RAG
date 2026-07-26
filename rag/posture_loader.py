@@ -76,6 +76,20 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
       posture_controls doesn't already know. Engine failure is silent
       fallback to posture_controls per the layered design.
     """
+    # Ship 44'.d — OTel span. load_posture is called on every chat
+    # turn AND every dashboard request; tracing helps see where time
+    # goes when it's slow.
+    from rag.telemetry import get_tracer
+    _tracer = get_tracer(__name__)
+    _span_cm = _tracer.start_as_current_span("arion.posture.load")
+    _span = _span_cm.__enter__()
+    try:
+        _span.set_attribute("arion.tenant_id", str(tenant_id)[:64])
+    except Exception:
+        pass
+    import time as _time
+    _t0 = _time.time()
+
     try:
         with pg_conn.cursor() as cur:
             # Set tenant context for RLS enforcement
@@ -119,6 +133,14 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
 
     except Exception as e:
         logger.error(f"load_posture failed for {tenant_id}: {e}")
+        if _span is not None:
+            try:
+                from opentelemetry import trace as _t
+                _span.set_status(_t.Status(_t.StatusCode.ERROR, "load_posture failed"))
+            except Exception:
+                pass
+            try: _span_cm.__exit__(None, None, None)
+            except Exception: pass
         return {}
 
     posture = {}
@@ -178,6 +200,32 @@ def load_posture(pg_conn, tenant_id: str) -> dict:
         f"demonstrates_overlays={demonstrates_overlays}; "
         f"demonstrates_materialised={materialised})"
     )
+
+    if _span is not None:
+        try:
+            _span.set_attribute("arion.posture.n_controls", len(posture))
+            _span.set_attribute("arion.posture.n_nc",
+                                sum(1 for r in posture.values() if r['finding']=='NC'))
+            _span.set_attribute("arion.posture.n_ofi",
+                                sum(1 for r in posture.values() if r['finding']=='OFI'))
+            _span.set_attribute("arion.posture.n_comply",
+                                sum(1 for r in posture.values() if r['finding']=='Comply'))
+            _span.set_attribute("arion.posture.n_na",
+                                sum(1 for r in posture.values() if r['finding']=='N/A'))
+            _span.set_attribute("arion.posture.engine_overrides", int(engine_overrides))
+            _span.set_attribute("arion.posture.demonstrates_overlays",
+                                int(demonstrates_overlays))
+            _span.set_attribute("arion.posture.demonstrates_materialised",
+                                int(materialised))
+            _span.set_attribute("arion.posture.cascade_proposals",
+                                int(cascade_proposals))
+            _span.set_attribute("arion.posture.latency_ms",
+                                int((_time.time() - _t0) * 1000))
+        except Exception:
+            pass
+        try: _span_cm.__exit__(None, None, None)
+        except Exception: pass
+
     return posture
 
 

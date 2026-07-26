@@ -222,6 +222,14 @@ def extract_preservation_spec(cf: CaseFile) -> PreservationSpec:
 
     Never writes; the CaseFile is treated as immutable.
     """
+    # Ship 44'.d — span for preservation-spec extraction. Cheap
+    # function but useful signal for how many refs the preservation
+    # check will police on a per-turn basis.
+    from rag.telemetry import get_tracer
+    _tracer = get_tracer(__name__)
+    _span_cm = _tracer.start_as_current_span("arion.casefile.extract_preservation_spec")
+    _span = _span_cm.__enter__()
+
     refs = _required_refs(cf)
     posture = cf.posture_by_ref()
 
@@ -248,7 +256,7 @@ def extract_preservation_spec(cf: CaseFile) -> PreservationSpec:
         if r.get("external_ref")
     ]
 
-    return PreservationSpec(
+    spec = PreservationSpec(
         required_refs       = refs,
         draft_refs          = draft_refs,
         verdict_by_ref      = verdict_by_ref,
@@ -256,3 +264,19 @@ def extract_preservation_spec(cf: CaseFile) -> PreservationSpec:
         bridge_article_refs = article_refs,
         required_risk_refs  = required_risk_refs,
     )
+
+    try:
+        _span.set_attribute("arion.casefile.spec.n_required_refs", len(refs))
+        _span.set_attribute("arion.casefile.spec.n_draft_refs", len(draft_refs))
+        _span.set_attribute("arion.casefile.spec.n_verdicts", len(verdict_by_ref))
+        _span.set_attribute("arion.casefile.spec.n_bridge_articles", len(article_refs))
+        _span.set_attribute("arion.casefile.spec.n_required_risk_refs",
+                            len(required_risk_refs))
+        _span.set_attribute("arion.casefile.spec.has_bridge_footer",
+                            bool(bridge_footer))
+    except Exception:
+        pass
+    try: _span_cm.__exit__(None, None, None)
+    except Exception: pass
+
+    return spec

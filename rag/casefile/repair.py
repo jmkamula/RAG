@@ -157,11 +157,34 @@ def check_and_repair(
     Returns a RepairResult with the (possibly extended) text + a list
     of RepairEvents describing what was fixed.
     """
+    # Ship 44'.d — OTel span. Case-file's preservation-check repair
+    # pass is the deterministic guarantee that LLM prose doesn't drop
+    # required refs. Trace event count → how often the LLM slips.
+    from rag.telemetry import get_tracer
+    _tracer = get_tracer(__name__)
+    _span_cm = _tracer.start_as_current_span("arion.casefile.check_and_repair")
+    _span = _span_cm.__enter__()
+
     text = (answer_text or "").rstrip()
     events:  list[RepairEvent] = []
     footers: list[str]         = []
 
+    try:
+        _span.set_attribute("arion.casefile.repair.input_chars", len(text))
+        _span.set_attribute("arion.casefile.repair.n_required_refs",
+                            len(spec.required_refs))
+        _span.set_attribute("arion.casefile.repair.n_draft_refs",
+                            len(spec.draft_refs))
+    except Exception:
+        pass
+
     if spec.is_empty():
+        try:
+            _span.set_attribute("arion.casefile.repair.spec_empty", True)
+        except Exception:
+            pass
+        try: _span_cm.__exit__(None, None, None)
+        except Exception: pass
         return RepairResult(text=text)
 
     refs_present = _refs_in_text(text)
@@ -272,5 +295,21 @@ def check_and_repair(
     # ── Assemble output ──────────────────────────────────────────────
     if footers:
         text = text + "\n\n" + "\n".join(footers)
+
+    try:
+        _span.set_attribute("arion.casefile.repair.events_count", len(events))
+        _span.set_attribute("arion.casefile.repair.footers_added", len(footers))
+        _span.set_attribute("arion.casefile.repair.output_chars", len(text))
+        # Repair event kinds — counts by kind (privacy-safe: no content)
+        kind_counts: dict[str, int] = {}
+        for e in events:
+            k = getattr(e, "kind", "unknown")
+            kind_counts[k] = kind_counts.get(k, 0) + 1
+        for k, n in kind_counts.items():
+            _span.set_attribute(f"arion.casefile.repair.n_{k}", n)
+    except Exception:
+        pass
+    try: _span_cm.__exit__(None, None, None)
+    except Exception: pass
 
     return RepairResult(text=text, events=events, footers_added=list(footers))

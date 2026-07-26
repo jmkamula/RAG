@@ -39,10 +39,35 @@ def compute_engine_verdicts(
     unaffected controls' posture_controls values alone" — never blocks the
     primary read.
     """
+    # Ship 44'.d — OTel span. This is a heavy call (touches all curated
+    # controls × their MUSTs); worth tracing for latency debugging.
+    from rag.telemetry import get_tracer
+    _tracer = get_tracer(__name__)
+    _span_cm = _tracer.start_as_current_span("arion.engine.compute_verdicts")
+    _span = _span_cm.__enter__()
+    try:
+        try:
+            _span.set_attribute("arion.tenant_id", str(tenant_id)[:64])
+        except Exception:
+            pass
+    except Exception:
+        _span = None
+
+    import time as _time
+    _t0 = _time.time()
+
     try:
         control_ids = list_curated_control_ids(neo4j_driver)
     except Exception as e:
         logger.warning("engine_runner: list_curated_control_ids failed: %s", e)
+        if _span is not None:
+            try:
+                from opentelemetry import trace as _t
+                _span.set_status(_t.Status(_t.StatusCode.ERROR, "list_curated_control_ids failed"))
+            except Exception:
+                pass
+            try: _span_cm.__exit__(None, None, None)
+            except Exception: pass
         return {}
 
     if not control_ids:
@@ -75,6 +100,19 @@ def compute_engine_verdicts(
                 )
                 # Skip; caller falls back to posture_controls for this one.
                 continue
+
+    if _span is not None:
+        try:
+            _span.set_attribute("arion.engine.n_controls_evaluated",
+                                len(control_ids))
+            _span.set_attribute("arion.engine.n_verdicts_emitted",
+                                len(verdicts))
+            _span.set_attribute("arion.engine.latency_ms",
+                                int((_time.time() - _t0) * 1000))
+        except Exception:
+            pass
+        try: _span_cm.__exit__(None, None, None)
+        except Exception: pass
 
     return verdicts
 

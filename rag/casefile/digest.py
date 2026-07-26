@@ -870,11 +870,55 @@ def build_structured_system_prompt(cf: CaseFile) -> str:
 def build_prompt_pair(cf: CaseFile) -> tuple[str, str]:
     """Return (system_prompt, user_prompt) as a pair — this is what
     rank_and_answer's _call_llm expects."""
-    return build_system_prompt(cf), build_prompt_digest(cf)
+    # Ship 44'.d — span for case-file digest build. Tracks token
+    # estimates so we can see when digests grow unexpectedly (case-file
+    # discipline's whole point is compact digests).
+    from rag.telemetry import get_tracer
+    _tracer = get_tracer(__name__)
+    with _tracer.start_as_current_span("arion.casefile.build_prompt_pair") as span:
+        system_prompt = build_system_prompt(cf)
+        user_prompt = build_prompt_digest(cf)
+        try:
+            span.set_attribute("arion.casefile.system_chars", len(system_prompt))
+            span.set_attribute("arion.casefile.user_chars", len(user_prompt))
+            # ~4 chars per token rough estimate
+            span.set_attribute("arion.casefile.system_tokens_est",
+                                len(system_prompt) // 4)
+            span.set_attribute("arion.casefile.user_tokens_est",
+                                len(user_prompt) // 4)
+            span.set_attribute("arion.casefile.n_posture_lines",
+                                len(getattr(cf, 'posture_lines', []) or []))
+            span.set_attribute("arion.casefile.n_bridges",
+                                len(getattr(cf, 'bridges', []) or []))
+        except Exception:
+            pass
+        return system_prompt, user_prompt
 
 
 def build_structured_prompt_pair(cf: CaseFile) -> tuple[str, str]:
     """Ship 18'.b — (structured_system_prompt, user_digest) pair for
     the JSON-mode LLM call. The digest itself is identical to the
     prose path; only the system prompt gains the OUTPUT FORMAT rules."""
-    return build_structured_system_prompt(cf), build_prompt_digest(cf)
+    # Ship 44'.d — span mirrors build_prompt_pair so both call sites
+    # produce the same telemetry shape.
+    from rag.telemetry import get_tracer
+    _tracer = get_tracer(__name__)
+    with _tracer.start_as_current_span(
+        "arion.casefile.build_structured_prompt_pair"
+    ) as span:
+        system_prompt = build_structured_system_prompt(cf)
+        user_prompt = build_prompt_digest(cf)
+        try:
+            span.set_attribute("arion.casefile.system_chars", len(system_prompt))
+            span.set_attribute("arion.casefile.user_chars", len(user_prompt))
+            span.set_attribute("arion.casefile.system_tokens_est",
+                                len(system_prompt) // 4)
+            span.set_attribute("arion.casefile.user_tokens_est",
+                                len(user_prompt) // 4)
+            span.set_attribute("arion.casefile.n_posture_lines",
+                                len(getattr(cf, 'posture_lines', []) or []))
+            span.set_attribute("arion.casefile.n_bridges",
+                                len(getattr(cf, 'bridges', []) or []))
+        except Exception:
+            pass
+        return system_prompt, user_prompt
