@@ -125,6 +125,38 @@ def call(
     error_type  = None
     error_detail: Optional[str] = None
 
+    # Ship 44'.c — OTel span for every LLM call. urllib path doesn't
+    # get openinference-instrumentation-openai auto-spans; emit our own
+    # gen_ai.* semantic-convention attributes so Phoenix + Jaeger see
+    # the call as an LLM invocation. Content (prompt / completion) only
+    # captured when OTEL_PRIVACY_LEVEL=debug via capture_content().
+    from rag.telemetry import get_tracer, capture_content
+    _tracer = get_tracer(__name__)
+    _span_ctx = _tracer.start_as_current_span(f"gen_ai.chat.{purpose}")
+    _span = _span_ctx.__enter__() if hasattr(_span_ctx, "__enter__") else None
+    try:
+        if _span is not None:
+            try:
+                _span.set_attribute("gen_ai.system",
+                    "anthropic" if wire == "anthropic" else "openai")
+                _span.set_attribute("gen_ai.operation.name", "chat")
+                _span.set_attribute("gen_ai.request.model", model)
+                _span.set_attribute("gen_ai.request.max_tokens", int(max_tokens))
+                _span.set_attribute("gen_ai.request.temperature", float(temperature))
+                _span.set_attribute("arion.llm.purpose", purpose)
+                if tenant_id:  _span.set_attribute("arion.tenant_id", str(tenant_id)[:64])
+                if session_id: _span.set_attribute("arion.session_id", str(session_id)[:64])
+                if request_id: _span.set_attribute("arion.request_id", str(request_id)[:64])
+                if capture_content():
+                    if system: _span.set_attribute("gen_ai.prompt.0.role", "system")
+                    if system: _span.set_attribute("gen_ai.prompt.0.content", (system or "")[:500])
+                    _span.set_attribute("gen_ai.prompt.1.role", "user")
+                    _span.set_attribute("gen_ai.prompt.1.content", (user or "")[:500])
+            except Exception:
+                pass
+    except Exception:
+        _span = None
+
     try:
         if wire == "anthropic":
             text, tokens_in, tokens_out = _call_anthropic(
@@ -162,6 +194,30 @@ def call(
         error_detail = str(e)[:200]
 
     latency_ms = int((time.time() - t0) * 1000)
+
+    # Ship 44'.c — close the LLM span with response metadata.
+    if _span is not None:
+        try:
+            _span.set_attribute("gen_ai.response.model", model)
+            if tokens_in is not None:
+                _span.set_attribute("gen_ai.usage.input_tokens", int(tokens_in))
+            if tokens_out is not None:
+                _span.set_attribute("gen_ai.usage.output_tokens", int(tokens_out))
+            _span.set_attribute("arion.llm.latency_ms", latency_ms)
+            if error_type:
+                _span.set_attribute("arion.llm.error_type", error_type)
+                from opentelemetry import trace as _t
+                _span.set_status(_t.Status(_t.StatusCode.ERROR,
+                                            f"{error_type}: {error_detail or ''}"[:200]))
+            if capture_content() and text:
+                _span.set_attribute("gen_ai.completion.0.role", "assistant")
+                _span.set_attribute("gen_ai.completion.0.content", text[:500])
+        except Exception:
+            pass
+        try:
+            _span_ctx.__exit__(None, None, None)
+        except Exception:
+            pass
 
     # Trace — silent-fail via log_llm_call
     _prompt_for_log = _serialize_prompt(system, user, messages)

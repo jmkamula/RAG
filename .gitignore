@@ -29,3 +29,4 @@ archive/
 # Claude Code runtime locks (per-session)
 .claude/scheduled_tasks.lock
 private/
+.phoenix/
