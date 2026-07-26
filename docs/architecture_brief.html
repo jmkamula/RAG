@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ArionComply — Architecture & Innovation Brief</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+  --fg: #1a1a1a;
+  --muted: #666;
+  --accent: #1c76fc;
+  --accent-soft: #eaf2ff;
+  --border: #e2e2e2;
+  --code-bg: #f5f5f7;
+  --mono: "SF Mono", Menlo, "Cascadia Code", monospace;
+  --serif: "Charter", "Iowan Old Style", Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+body {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--fg);
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+h1 { font-size: 2.4em; margin: 0.2em 0 0.1em; letter-spacing: -0.02em; }
+h2 { font-size: 1.6em; margin: 1.8em 0 0.5em; padding-bottom: 0.3em;
+     border-bottom: 2px solid var(--border); letter-spacing: -0.01em; }
+h3 { font-size: 1.2em; margin: 1.4em 0 0.4em; color: var(--fg); }
+h4 { font-size: 1.02em; margin: 1em 0 0.3em; color: var(--muted);
+     text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
+.hero {
+  padding: 24px 28px;
+  background: var(--accent-soft);
+  border-radius: 8px;
+  margin: 24px 0 32px;
+  border-left: 4px solid var(--accent);
+}
+.hero p { margin: 0.4em 0; }
+.hero em { color: var(--accent); font-weight: 600; font-style: normal; }
+.hero .subtitle {
+  color: var(--muted);
+  font-size: 0.9em;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.callout {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 12px 0;
+  background: #fafafa;
+}
+.callout strong { color: var(--accent); }
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 16px 0;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+.card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+.card h4 { margin-top: 0; }
+.card p { margin: 0.3em 0; font-size: 0.94em; }
+code, .mono { font-family: var(--mono); font-size: 0.9em; }
+code {
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: #333;
+}
+pre {
+  background: var(--code-bg);
+  padding: 14px 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.85em;
+  line-height: 1.5;
+  border-left: 3px solid var(--accent);
+}
+.ascii {
+  background: var(--code-bg);
+  padding: 16px 20px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 0.85em;
+  white-space: pre;
+  overflow-x: auto;
+  border-left: 3px solid var(--accent);
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 12px 0;
+  font-size: 0.94em;
+}
+th, td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  background: var(--code-bg);
+  font-weight: 600;
+  color: var(--fg);
+}
+tr:last-child td { border-bottom: none; }
+.badge {
+  display: inline-block;
+  font-size: 0.72em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin: 0 4px 0 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.badge-green { background: #e6f7ec; color: #0f7b3a; }
+.badge-amber { background: #fff5e0; color: #a25b00; }
+.badge-red   { background: #fde7ea; color: #b0303f; }
+.trace-link {
+  font-family: var(--mono);
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent);
+  padding-bottom: 1px;
+}
+a { color: var(--accent); }
+.muted { color: var(--muted); }
+.footer {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.88em;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+<h1>ArionComply</h1>
+<p class="subtitle">Compliance Program Ledger &middot; Architecture &amp; Innovation Brief &middot; 2026-07-26</p>
+<p><em>ArionComply is a compliance program ledger, not a generic evidence repository.</em>
+Our role: track where evidence lives, its freshness, its ownership, and its
+auditor-readable provenance &mdash; while the tenant keeps evidence sovereignty
+in the systems that already hold their data (Odoo HR, Okta IAM, ServiceNow CMDB,
+document workflows).</p>
+<p>Under the hood, it is a cross-platform Retrieval-Augmented Generation stack
+purpose-built for compliance: a role-aware graph of requirements, a
+deterministic case-file &amp; preservation-check discipline for LLM answers,
+a nine-signal consensus extractor for evidence discovery, and a dual-backend
+OpenTelemetry stack to make every decision observable.</p>
+</div>
+
+<h2>1. Where we are today</h2>
+
+<div class="grid-3">
+<div class="card">
+<h4>Deployed</h4>
+<p><span class="badge badge-green">Live</span> Chat &middot; Dashboard &middot; Stage-1 queue &middot; Evidence Package &middot; Risk Register &middot; External REST API + Python SDK</p>
+</div>
+<div class="card">
+<h4>Frameworks curated</h4>
+<p><span class="badge badge-green">100%</span> ISO 27001:2022 &middot; ISO 27701:2019 &middot; ISO 27003/4/5 (guidance) &middot; GDPR :2016/679<br>
+<span class="muted">490 curated posture rows &middot; 4293 checklist items</span></p>
+</div>
+<div class="card">
+<h4>Observability</h4>
+<p><span class="badge badge-green">Live</span> Jaeger &middot; Arize Phoenix &middot; OTel GenAI semconv &middot; 3-tier privacy gating</p>
+</div>
+</div>
+
+<h2>2. Architecture at a glance</h2>
+
+<div class="ascii">
+      ┌──────────────────────────────────────────────────────────────┐
+      │                       Tenant Surfaces                        │
+      │  Chat &nbsp;&nbsp;&nbsp; Dashboard &nbsp;&nbsp; Documents &nbsp;&nbsp; Risks &nbsp;&nbsp; Get Started    │
+      └──────────────────┬───────────────────────┬───────────────────┘
+                         │                       │
+              FastAPI + Python SDK &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SSE stream
+                         │                       │
+      ┌──────────────────┴───────────────────────┴───────────────────┐
+      │                    Case-file discipline                     │
+      │  Case-file digest → LLM (bounded) → preservation-check       │
+      │  → deterministic repair (APPEND-ONLY footer)                 │
+      └────────────┬────────────────────────────┬────────────────────┘
+                   │                            │
+              7-signal chat consensus &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9-signal extraction consensus
+              (Ship 1 arc)                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Ship 32-43 arc-family)
+                   │                            │
+      ┌────────────┴────────────────────────────┴────────────────────┐
+      │                     Role-aware graph                         │
+      │  Program (ISO 27001)  Extension (ISO 27701)                  │
+      │  Obligation (GDPR)    Guidance (ISO 27003/4/5)               │
+      │  DEMONSTRATES  IMPLEMENTS  SUPPORTS  ENABLES  GOVERNANCE     │
+      └────────────┬────────────────────────────┬────────────────────┘
+                   │                            │
+                 Neo4j                      Chroma (semantic)
+                 (structural &amp; role)         (BM25 + embeddings)
+                          │
+                          └──────── Postgres ─────────
+                                     (posture, findings, tenant state)
+
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Everything traced end-to-end via OpenTelemetry
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; → Jaeger (waterfalls) + Arize Phoenix (LLM UI)
+</div>
+
+<h3>2.1 Datastore choices &mdash; and why</h3>
+
+<table>
+<thead><tr><th>Store</th><th>Role</th><th>Why this &amp; not X</th></tr></thead>
+<tbody>
+<tr><td><strong>Neo4j</strong></td>
+    <td>Requirement graph, role model, cross-framework edges
+        (<code>DEMONSTRATES</code>, <code>IMPLEMENTS</code>, <code>SUPPORTS</code>...)</td>
+    <td>Compliance is fundamentally a graph problem: an obligation like
+        <em>GDPR Art. 35 DPIA</em> is <em>demonstrated by</em> an ISO 27701
+        A.7.2.5 program leaf that itself <em>satisfies</em> ISO 27001 6.1.2.
+        Relational joins would mask the semantics.</td></tr>
+<tr><td><strong>Postgres</strong></td>
+    <td>Posture, findings, evidence, tenant state, RLS-scoped multi-tenancy</td>
+    <td>Tenant isolation via Row-Level Security is battle-tested. Every
+        auditor-load-bearing table (posture_controls, document_findings,
+        posture_status_log) is here, with append-only compliance semantics
+        where auditors need them.</td></tr>
+<tr><td><strong>ChromaDB</strong></td>
+    <td>Semantic embeddings for query &rarr; requirement retrieval;
+        per-framework collections</td>
+    <td>Purpose-built for RAG. One embedding model (<code>text-embedding-3-large</code>)
+        across all four collections after Ship 5' consolidation. Retrieved
+        via consensus signals, not raw top-K.</td></tr>
+<tr><td><strong>Jaeger + Phoenix</strong></td>
+    <td>Distributed tracing: Jaeger for infrastructure spans, Phoenix
+        for LLM-first UI</td>
+    <td>Both consume OTLP; SDK exports to both in parallel. Traces are
+        portable to any OTel-native backend (Grafana Tempo, Honeycomb,
+        Langfuse) without rewrites.</td></tr>
+</tbody>
+</table>
+
+<h2>3. Breakthrough innovations</h2>
+
+<h3>3.1 <span class="badge">Ship 2'</span> Case-file discipline: bounded LLM + APPEND-ONLY preservation-check</h3>
+<p>The chat pipeline gives the LLM a compact <em>case-file digest</em>
+(~450&ndash;650 tokens: query, posture, cited refs, cross-framework
+bridges, session context) rather than the pre-Ship-2' <em>21,731-token
+average prompt</em>. After the LLM answers, a <em>preservation-check</em>
+runs deterministically: every required ref, <code>[DRAFT]</code> tag,
+verdict prefix, and cross-framework bridge line that the LLM was expected
+to include is verified. Missing elements are <em>appended</em> as a
+footer &mdash; never rewriting LLM prose. This means:</p>
+<ul>
+<li><strong>The LLM cannot silently drop compliance-load-bearing facts.</strong>
+    If it did, the deterministic repair pass restores them.</li>
+<li><strong>The LLM cannot invent controls or refs.</strong> The digest is the
+    only ground truth; the repair pass only <em>preserves</em>, never <em>adds</em>.</li>
+<li><strong>Auditor safety by construction.</strong> No stochastic decision
+    is compliance-load-bearing.</li>
+</ul>
+
+<h3>3.2 <span class="badge">Ship 32-43</span> Nine-signal extraction consensus</h3>
+<p>Evidence extraction from tenant documents runs a nine-signal consensus
+similar in spirit to the chat pipeline, with signals ordered by
+compliance-authority (highest first):</p>
+<div class="ascii">
+   Signal                        Weight    What it captures
+   ──────────────────────────    ──────    ─────────────────────────────────
+   explicit_ref                    1.00    doc verbatim cites "A.5.15" or "Art.32"
+   doc_mappings_target             0.60    curator-authored filename → leaf map
+   fingerprint_keyword             0.50    Ship 28/29 exact-token-set catalog
+   must_semantic_topk              0.30    Chroma embedding top-K
+   bm25_topk                       0.25    lexical relevance (Ship 43)
+   per_protocol_scope              0.10    per-standard Chroma retrieval
+   semantic_fit_gate               ±0.30    post-fingerprint cosine verifier
+   content_shape_penalty           −0.50    sentence looks like a field/header
+   evidence_uniqueness             −0.50    cross-candidate anti-multi-attribution
+</div>
+<p>Candidates need <em>corroboration</em> (2+ signals) to auto-accept; a
+bounded LLM arbiter (cannot invent, cannot override auto-accept)
+adjudicates the middle band. Result on Arion demo across 5 baseline docs:
+<strong>+42% recall</strong> vs pre-arc, and cross-framework GDPR
+findings surface directly (Art.35 on a DPIA doc) where the previous
+LLM discovery pipeline missed them entirely.</p>
+
+<h3>3.3 <span class="badge">Ship 40</span> Framework role model: obligations &amp; demonstrators</h3>
+<p>Frameworks are not siblings. ISO 27001 is a <em>program</em>; ISO 27701 is an
+<em>extension</em> of ISO 27001; GDPR is a set of <em>obligations</em>
+demonstrated by programs &amp; extensions; ISO 27003/4/5 is <em>guidance</em>.
+Edges in Neo4j encode which programs <em>DEMONSTRATE</em> which obligations.
+Posture propagates: if A.7.2.5 (ISO 27701 privacy risk assessment) is
+Comply, then Art.35 (GDPR DPIA) posture materialises via the
+<code>_apply_demonstrates_overlay</code> at posture-load time &mdash; without
+duplicating evidence.</p>
+
+<h3>3.4 <span class="badge">Ship 42</span> Two-view semantics: engine vs. auditor UI</h3>
+<p>Same table, two views. Engine reads per-MUST rows for
+<code>checklist_item_id = ANY(...)</code> recognition (needs N rows for N MUSTs).
+Auditor UI wants 1 row per unique (excerpt, control_ref). Ship 42
+resolved the tension with an <code>evidence_group_id</code> column stamped
+at write, and surface-layer queries doing
+<code>DISTINCT ON (evidence_group_id)</code>. Persistence stays
+engine-friendly; the auditor sees clean single-citation views.
+<strong>60% reduction in Stage-1 queue visual size</strong> after backfilling
+legacy rows.</p>
+
+<h3>3.5 <span class="badge">Ship 44</span> Dual-backend OTel: Jaeger + Phoenix</h3>
+<p>Every request, DB query, LLM call, LangGraph node, consensus signal,
+posture load, and preservation-check event is a span. Two backends
+consume the same OTLP export:</p>
+<ul>
+<li><strong>Jaeger</strong> for general trace waterfalls, service map, dependency graph.</li>
+<li><strong>Arize Phoenix</strong> for LLM-first UI: prompt/completion viewer,
+RAG evaluation-ready.</li>
+</ul>
+<p>Spans use the emerging <em>OpenTelemetry Semantic Conventions for GenAI</em>
+(<code>gen_ai.*</code>) so traces are portable to Grafana Tempo, Honeycomb,
+Langfuse, or any OTel-native backend. A 3-tier privacy env
+(<code>OTEL_PRIVACY_LEVEL={off, observability, debug}</code>) gates whether
+content attributes (LLM prompts, evidence excerpts, chat query text) are
+captured &mdash; safe by default.</p>
+
+<h3>3.6 <span class="badge">Ship 45</span> N+1 fix via batched EvalContext + TTL cache</h3>
+<p>Ship 44's tracing revealed that the chat's retrieve node spent 79% of
+its latency in two nested per-ref loops (<code>build_related_cards</code>
+and <code>build_templates_block</code>), each rebuilding an
+<code>EvalContext</code> (Postgres + Neo4j scan) + fresh Neo4j session +
+fresh spec resolver per call. Ship 45 batched via
+<code>build_advisory_data_for_refs</code> (shared context across all refs
+in one call) plus a 30-second TTL cache on the invariant Neo4j
+<code>_load_er_evidence_types</code> scan. Result on the deterministic
+posture-enumeration path: <strong>chat latency 11.7s → 7.3s (-37%);
+2290 → 1169 SELECTs (-49%)</strong>.</p>
+
+<h2>4. Live telemetry &mdash; sample traces</h2>
+
+<div class="callout">
+<p>Both trace UIs bind to <code>127.0.0.1</code> only. From a workstation:
+<code>ssh -L 16686:127.0.0.1:16686 -L 6006:127.0.0.1:6006 -i ~/.ssh/arioncomplySK.pem arionlabs@172.211.244.144</code></p>
+<p>Then:
+<a href="http://localhost:16686/">Jaeger UI</a> &middot;
+<a href="http://localhost:6006/">Phoenix UI</a></p>
+</div>
+
+<h3>4.1 What to look for in a chat trace</h3>
+<p class="muted">Trace shape for a typical &quot;top NC findings&quot; chat query
+(deterministic short-circuit path):</p>
+<div class="ascii">
+POST /api/v1/chat                                7.3s
+├── LangGraph                                    7.3s
+│   ├── classify                                 3.8s
+│   │   └── gen_ai.chat.consensus_gatekeeper     1.2s
+│   ├── retrieve                                 3.5s
+│   │   ├── arion.resolver.resolve               220ms
+│   │   │   ├── arion.resolver.vector_search     170ms
+│   │   │   ├── arion.resolver.graph_expand      50ms
+│   │   │   └── arion.graph_expander.get_
+│   │   │       incident_obligations             6ms
+│   │   ├── arion.answer_augment.build_
+│   │   │   short_circuit_structured            2.8s
+│   │   │   └── arion.answer_augment.
+│   │   │       build_related_cards             2.7s
+│   │   └── [templates_block enrichment]         ~500ms
+│   └── update_session                           1ms
+└── [server span response]
+</div>
+
+<h3>4.2 What to look for in an intake pipeline trace</h3>
+<p class="muted">Trace shape for a doc re-extract via consensus:</p>
+<div class="ascii">
+POST /api/v1/admin/uploads/{id}/reextract        14ms  (async task)
+└── arion.consensus.run                          31s
+    ├── arion.consensus.signal.must_semantic_topk    680ms
+    ├── arion.consensus.signal.bm25_topk           1.5s
+    ├── arion.consensus.signal.explicit_ref         8ms
+    ├── arion.consensus.signal.doc_mappings_target 10ms
+    ├── arion.consensus.signal.fingerprint_keyword 7.8s  ← dominant
+    ├── arion.consensus.signal.per_protocol_scope 665ms
+    ├── arion.consensus.signal.semantic_fit_gate  ~50ms
+    ├── arion.consensus.signal.content_shape_penalty ~50ms
+    ├── arion.consensus.signal.evidence_uniqueness   ~20ms
+    ├── arion.consensus.aggregate                  30ms
+    └── arion.consensus.arbitrate                 1.1s
+        └── gen_ai.chat.consensus_gatekeeper       1.1s
+</div>
+<p>fingerprint_keyword (Ship 28/29 catalog) is the current dominant
+cost &mdash; a Ship 47+ candidate for per-leaf profiling.</p>
+
+<h3>4.3 Phoenix &mdash; where LLM interactions are inspected</h3>
+<p>Every OpenAI SDK call auto-instruments via OpenInference and lands in
+Phoenix with the OTel GenAI semantic conventions: model, input+output
+tokens, latency, and (in debug tier) prompt+completion content. Phoenix
+groups them per LLM call so you can see:</p>
+<ul>
+<li>What the case-file digest sent to the LLM (~2k tokens)</li>
+<li>What the LLM returned (structured JSON via
+<code>response_format=&#123;&quot;type&quot;: &quot;json_object&quot;&#125;</code>)</li>
+<li>The consensus arbiter's per-candidate LLM decisions</li>
+<li>Chroma queries (auto-instrumented via httpx)</li>
+</ul>
+
+<h2>5. What's next</h2>
+
+<h3>Near-term (Ship 47&ndash;52)</h3>
+<ul>
+<li><strong>Retrieve LLM-path deeper profile</strong> &mdash;
+    <code>build_related_cards</code> is still 4.5s on the LLM chat path;
+    Ship 44/45 traces will point to specific hotspots.</li>
+<li><strong>fingerprint_keyword decomposition</strong> &mdash; the 7.8s
+    consensus catalog walk; per-leaf timing to find the specific hot
+    files.</li>
+<li><strong>Broader-doc eval on 68 more Arion docs</strong> &mdash;
+    Ship 41-43 covered 5 baseline docs; extending validates BM25 + dedup
+    at scale.</li>
+<li><strong>Persistent Jaeger &amp; Phoenix storage</strong> &mdash;
+    in-memory today; badger + Postgres for post-demo continuous
+    observability.</li>
+</ul>
+
+<h3>Strategic bets</h3>
+<ul>
+<li><strong>Default-ON consensus extraction</strong> &mdash; currently
+opt-in per tenant behind <code>USE_CONSENSUS_EXTRACTION=1</code>. After
+broader-doc eval passes, flip the default and retire the legacy
+fingerprint+critic+concat paths.</li>
+<li><strong>Multi-tenant broader eval</strong> &mdash; onboard 2-3 test
+tenants to validate the role model + consensus across doc variety.</li>
+<li><strong>LLM cost tracking + budgets</strong> &mdash; OTel captures
+token counts; the dashboard needs per-tenant cost surfacing + rate
+limits.</li>
+<li><strong>External API webhook subscriptions</strong> &mdash; posture-
+change / new-finding / cascade-event events over webhook to enable
+customer automation. External REST API + Python SDK already ship.</li>
+</ul>
+
+<h2>6. Delivery velocity</h2>
+
+<table>
+<thead><tr><th>Arc family</th><th>Ships</th><th>Delivered</th></tr></thead>
+<tbody>
+<tr><td>Framework curation</td><td>Ship 1-13</td>
+    <td>4 frameworks curated to multi-leaf spec (ISO 27001 + ISO 27701 + GDPR + ISO 27000-family guidance)</td></tr>
+<tr><td>Case-file chat discipline</td><td>Ship 2'</td>
+    <td>Chat prompts 21k tokens &rarr; ~650 tokens; preservation-check + APPEND-ONLY repair; case-file is the only chat path</td></tr>
+<tr><td>Risk register</td><td>Ship 14-15</td>
+    <td>Full CRUD + dashboard + chat surfaces + notifications + DEMONSTRATES drill-in + SDK typed methods</td></tr>
+<tr><td>External API + SDK</td><td>Ship 4</td>
+    <td>14 endpoints, 8 <code>external:*</code> scopes, 59 integration tests, Python SDK, filtered OpenAPI</td></tr>
+<tr><td>Extraction consensus</td><td>Ship 32-43</td>
+    <td>9-signal consensus + LLM arbiter; +42% recall; cross-framework extraction; BM25 signal; per-doc dedup</td></tr>
+<tr><td>Observability</td><td>Ship 44-45</td>
+    <td>Dual-backend OTel (Jaeger + Phoenix); 3-tier privacy; N+1 fix -37% chat latency</td></tr>
+</tbody>
+</table>
+
+<div class="footer">
+<p><strong>ArionComply</strong> &middot; Compliance program ledger for cross-platform RAG</p>
+<p>Deployed to Azure VM 172.211.244.144 &middot; Repository:
+<a href="https://github.com/jmkamula/RAG">github.com/jmkamula/RAG</a></p>
+<p>All arc retrospectives in <code>docs/memory/</code>. Current arc: Ship 46
+(demo-readiness). Prior state captured in
+<code>ship_46_prime_b_prioritised_backlog_2026_07_26.md</code>.</p>
+</div>
+
+</body>
+</html>
