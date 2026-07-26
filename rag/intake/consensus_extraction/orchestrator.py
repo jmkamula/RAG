@@ -24,6 +24,7 @@ from rag.intake.consensus_extraction.signals import (
     fingerprint_keyword,
     doc_mappings_target,
     must_semantic_topk,
+    bm25_topk,
     explicit_ref,
     per_protocol_scope,
     semantic_fit_gate,
@@ -63,9 +64,15 @@ def run_extraction_consensus(
     # widened set. Restores critic-verifier's extend_pool discovery
     # breadth.
     sig_must_semantic  = must_semantic_topk.compute(doc, scoped_leaf_ids, cfg)
-    widened_leaf_ids = list({*scoped_leaf_ids,
-                             *(lid for (lid, _mid) in sig_must_semantic.candidates.keys()
-                               if lid)})
+    # Ship 43'.b — BM25 lexical discovery-mode signal. Same widening
+    # pattern as must_semantic_topk: candidates outside scoped_leaf_ids
+    # join the widened pool via union.
+    sig_bm25           = bm25_topk.compute(doc, scoped_leaf_ids, cfg)
+    widened_leaf_ids = list({
+        *scoped_leaf_ids,
+        *(lid for (lid, _mid) in sig_must_semantic.candidates.keys() if lid),
+        *(lid for (lid, _mid) in sig_bm25.candidates.keys() if lid),
+    })
 
     # Round 1: signals that don't depend on other signals (widened scope)
     sig_explicit_ref   = explicit_ref.compute(doc, widened_leaf_ids, cfg)
@@ -90,6 +97,7 @@ def run_extraction_consensus(
         sig_doc_mappings,
         sig_fingerprint,
         sig_must_semantic,
+        sig_bm25,
         sig_per_protocol,
         sig_semantic_fit,
         sig_content_shape,

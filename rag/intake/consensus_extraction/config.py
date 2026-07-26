@@ -61,6 +61,17 @@ class ExtractionConsensusConfig:
     must_semantic_topk:        int = 30
     per_protocol_topk:         int = 20
 
+    # Ship 43'.b — BM25 lexical scoring as 9th consensus signal.
+    # Complements must_semantic (embeddings/semantic) with lexical
+    # relevance ranking. Same discovery-mode shape as must_semantic:
+    # emits candidates outside scoped_leaf_ids via top-K + score floor.
+    # Weight 0.25 sits between fingerprint (0.50, exact-token-set) and
+    # must_semantic (0.30, semantic-only) — lexical fuzzy is stronger
+    # than pure semantic but weaker than curated exact match.
+    bm25_weight:               float = 0.25
+    bm25_topk:                 int   = 30
+    bm25_score_floor:          float = 1.0
+
     # Feature flags
     llm_arbiter_enabled:       bool = False    # False in shadow mode; True post-cutover
     # Ship 37'.b — toggle for the no-excerpt-auto-drop invariant.
