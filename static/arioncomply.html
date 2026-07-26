@@ -852,6 +852,54 @@ function setMode(m) {
   if (m === 'trace')      loadTrace();
 }
 
+// Hash routing — chat surfaces emit `#dashboard?control=A.5.15` deep-links.
+// Parses the hash + switches modes + opens the drill-in for the requested
+// control on the dashboard. Non-page-navigating so client state (chat
+// history, filters, etc.) survives clicks.
+let _pendingDrillInRef = null;
+function _applyHashRoute() {
+  const raw = (location.hash || '').replace(/^#/, '');
+  if (!raw) return;
+  const [modeName, query] = raw.split('?');
+  const params = new URLSearchParams(query || '');
+  const knownModes = new Set(['dashboard','queue','chat','docs','profile',
+                              'cascade','risks','inbox','getstarted','trace']);
+  if (!knownModes.has(modeName)) return;
+  setMode(modeName);
+  if (modeName === 'dashboard') {
+    const ref = params.get('control');
+    if (ref) {
+      _pendingDrillInRef = ref;
+      _tryDrillInto(ref, /*attemptsLeft=*/20);
+    }
+  }
+}
+// Look for the requested control in the loaded dashboard data + click into
+// its heatmap cell. Retries up to 20× (200ms each) while `dashData` hydrates
+// — because loadDashboard is async and the hash may fire before it resolves.
+function _tryDrillInto(ref, attemptsLeft) {
+  if (_pendingDrillInRef !== ref) return;   // superseded by newer nav
+  if (typeof dashData === 'undefined' || !dashData || !dashData.frameworks) {
+    if (attemptsLeft > 0) setTimeout(() => _tryDrillInto(ref, attemptsLeft - 1), 200);
+    return;
+  }
+  let target = null;
+  for (const fw of (dashData.frameworks || [])) {
+    for (const c of (fw.cells || fw.controls || [])) {
+      if (c.control_ref === ref) { target = { ...c, display_name: fw.display_name }; break; }
+    }
+    if (target) break;
+  }
+  if (target && typeof selectHeatCell === 'function') {
+    _pendingDrillInRef = null;
+    try { selectHeatCell(target, { stopPropagation: () => {} }); } catch (_e) { /* silent */ }
+  } else if (attemptsLeft > 0) {
+    // Cells may still be rendering; try again shortly.
+    setTimeout(() => _tryDrillInto(ref, attemptsLeft - 1), 200);
+  }
+}
+window.addEventListener('hashchange', _applyHashRoute);
+
 // Populate the intake framework dropdown from the tenant's queryable
 // standards (scope_loader output). Fetches once per Docs-mode entry;
 // idempotent — bails if already populated with more than the default.
@@ -1866,7 +1914,7 @@ function renderGetStarted(d) {
            style="background:#3A382E;color:#fff;padding:6px 14px;border-radius:4px;text-decoration:none">
           <i class="ti ti-download"></i> Download starter
         </a>
-        <a href="/#dashboard?control=${attr(nx.control_ref)}"
+        <a href="#dashboard?control=${attr(nx.control_ref)}"
            style="color:#534AB7;text-decoration:none">See details in dashboard →</a>
       </div>
     </div>`;
@@ -1905,7 +1953,7 @@ function renderGetStarted(d) {
            <i class="ti ti-${a.is_tabular?'table':'file-text'}"></i> ${esc(primary.label)}
         </button>
         ${alt ? `<a href="#" onclick="event.preventDefault();downloadTemplateForLeaf('${attr(a.leaf_id)}','${attr(alt.format)}')" style="font-size:10px;color:#5C5A4F;text-decoration:none">.md</a>` : ''}
-        <a href="/#dashboard?control=${attr(a.control_ref)}" title="See in dashboard" style="color:#534AB7;text-decoration:none;font-size:11px">→</a>
+        <a href="#dashboard?control=${attr(a.control_ref)}" title="See in dashboard" style="color:#534AB7;text-decoration:none;font-size:11px">→</a>
       </div>`;
     }
     anchorsHtml += `</div></div>`;
@@ -4939,7 +4987,7 @@ function renderDemonstratedByPanel(dm) {
     const srcRef = srcParts.slice(2).join(':') || it.src_id || '?';
     const stdShort = humanizeStandardId(it.src_std || '');
     const pill = pillWithLabel(it.finding || '—');
-    const drill = `<a href="/#dashboard?control=${encodeURIComponent(srcRef)}"
+    const drill = `<a href="#dashboard?control=${encodeURIComponent(srcRef)}"
                      style="color:#534AB7;text-decoration:none;font-size:11px;margin-left:4px"
                      title="Open this control in the dashboard">→</a>`;
     return `<div style="padding:6px 10px;background:#fff;border:1px solid #E8E5DA;border-radius:5px;margin-top:4px;font-size:11px;line-height:1.5">
@@ -5508,7 +5556,7 @@ function renderStructuredAnswer(s) {
         detailHtml = '';
       }
 
-      const dashHref = r.dashboard_url || `/#dashboard?control=${encodeURIComponent(r.ref || '')}`;
+      const dashHref = r.dashboard_url || `#dashboard?control=${encodeURIComponent(r.ref || '')}`;
       const primaryCls = isPrimary ? ' sa-primary-card' : '';
       return `<div class="sa-card sa-related-card${primaryCls}" data-focus-ref="${attr(r.ref || '')}">
         <div class="sa-related-head">
@@ -5566,7 +5614,7 @@ function renderStructuredAnswer(s) {
       });
       if (totalSum > shownSum && shownSum > 0) {
         const dashHref = primaryRefForDrill
-          ? `/#dashboard?control=${encodeURIComponent(primaryRefForDrill)}`
+          ? `#dashboard?control=${encodeURIComponent(primaryRefForDrill)}`
           : '/#dashboard';
         html += `<div class="sa-overflow">
           Showing ${shownSum} of ${totalSum} —
@@ -6426,6 +6474,10 @@ function toastError(fallback, err) {
 }
 
 connect();
+
+// Apply any hash route present on initial load (bookmarked / shared
+// deep-link like #dashboard?control=A.5.15).
+if (location.hash) _applyHashRoute();
 </script>
 </body>
 </html>
