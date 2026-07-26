@@ -584,13 +584,31 @@ class Resolver:
             n_vector = entry.vector_n if entry.vector_n > 0 else n_vector
             n_expand = entry.expand_n if entry.expand_n > 0 else n_expand
 
+        # Ship 45'.b — OTel spans for vector search + graph expand.
+        from rag.telemetry import get_tracer
+        _tracer = get_tracer(__name__)
+
         extra = extra_node_ids or []
 
         # Vector retrieval — skipped if policy says use_vector=False
         if entry is None or entry.use_vector:
-            vector_t0 = time.time()
-            v_results = self._retriever.search(req.query, n=n_vector, standards=req.standards)
-            vector_ms = int((time.time() - vector_t0) * 1000)
+            with _tracer.start_as_current_span("arion.resolver.vector_search") as _vs:
+                vector_t0 = time.time()
+                v_results = self._retriever.search(req.query, n=n_vector, standards=req.standards)
+                vector_ms = int((time.time() - vector_t0) * 1000)
+                try:
+                    _vs.set_attribute("arion.resolver.vector.n_requested", int(n_vector))
+                    _vs.set_attribute("arion.resolver.vector.n_results",
+                                        len(getattr(v_results, "results", []) or []))
+                    _vs.set_attribute("arion.resolver.vector.n_standards",
+                                        len(req.standards or []))
+                    _vs.set_attribute("arion.resolver.vector.ms", vector_ms)
+                    _top = getattr(v_results, "results", []) or []
+                    if _top:
+                        _vs.set_attribute("arion.resolver.vector.top_score",
+                                            float(getattr(_top[0], "score", 0.0)))
+                except Exception:
+                    pass
             vector_ids = [
                 r.node_id for r in v_results.results[:n_expand]
                 if r.node_id not in extra
@@ -604,9 +622,25 @@ class Resolver:
 
         # Graph expansion — skipped if policy says use_graph=False
         if entry is None or entry.use_graph:
-            neo4j_t0 = time.time()
-            gr       = self._expand(node_ids, req)
-            neo4j_ms = int((time.time() - neo4j_t0) * 1000)
+            with _tracer.start_as_current_span("arion.resolver.graph_expand") as _ge:
+                try:
+                    _ge.set_attribute("arion.resolver.graph.n_input_ids", len(node_ids))
+                    _ge.set_attribute("arion.resolver.graph.n_extra", len(extra))
+                except Exception:
+                    pass
+                neo4j_t0 = time.time()
+                gr       = self._expand(node_ids, req)
+                neo4j_ms = int((time.time() - neo4j_t0) * 1000)
+                try:
+                    _ge.set_attribute("arion.resolver.graph.n_primary",
+                                        len(gr.primary_nodes or []))
+                    _ge.set_attribute("arion.resolver.graph.n_secondary",
+                                        len(gr.secondary_nodes or []))
+                    _ge.set_attribute("arion.resolver.graph.n_doc_contexts",
+                                        len(gr.doc_contexts or {}))
+                    _ge.set_attribute("arion.resolver.graph.ms", neo4j_ms)
+                except Exception:
+                    pass
         else:
             gr       = GraphResult.empty()
             neo4j_ms = 0
@@ -623,9 +657,29 @@ class Resolver:
     # --- dispatch ---
 
     def resolve(self, request: ResolveRequest) -> ResolvedContext:
+        # Ship 45'.b — OTel span for the resolve dispatch. Handler
+        # spans nest below via _run_handler(). Sub-spans on
+        # vector_search / graph_expand fire from _retrieve_and_expand.
+        from rag.telemetry import get_tracer
+        _tracer = get_tracer(__name__)
+        _outer_cm = _tracer.start_as_current_span("arion.resolver.resolve")
+        _outer_span = _outer_cm.__enter__()
+
         t0      = time.time()
         entry   = get_taxonomy_type(request.classifier_type)
         handler = self._handlers.get(entry.type_id, self._resolve_default)
+
+        try:
+            _outer_span.set_attribute("arion.resolver.type_id", entry.type_id)
+            _outer_span.set_attribute("arion.resolver.handler", handler.__name__)
+            _outer_span.set_attribute("arion.resolver.classifier_type",
+                                        str(request.classifier_type))
+            _outer_span.set_attribute("arion.tenant_id",
+                                        str(request.tenant_id or "")[:64])
+            _outer_span.set_attribute("arion.resolver.n_standards",
+                                        len(request.standards or []))
+        except Exception:
+            pass
 
         posture = self._posture if entry.use_posture else {}
         # Resolve tenant_id — prefer explicit field, fall back to tenant_context
@@ -669,7 +723,18 @@ class Resolver:
                 # When more types are added, the pattern extends here.
                 pass  # handler itself returns short_circuit_answer
 
-            result = handler(request, entry)
+            # Per-handler span so the Jaeger waterfall names the
+            # handler dispatch clearly (POSTURE_STATUS vs
+            # REMEDIATION_GUIDE etc.).
+            with _tracer.start_as_current_span(
+                f"arion.resolver.handler.{entry.type_id}"
+            ) as _h_span:
+                try:
+                    _h_span.set_attribute("arion.resolver.handler",
+                                            handler.__name__)
+                except Exception:
+                    pass
+                result = handler(request, entry)
             gn = result.graph_nodes
             trace.nodes_primary   = len(gn.primary_nodes)
             trace.nodes_secondary = len(gn.secondary_nodes)
@@ -721,6 +786,13 @@ class Resolver:
                 f"  call:  {trace.error_call}\n"
                 f"  hint:  {trace.error_hint}"
             )
+            try:
+                from opentelemetry import trace as _t
+                _outer_span.set_status(_t.Status(_t.StatusCode.ERROR, trace.error[:200]))
+            except Exception:
+                pass
+            try: _outer_cm.__exit__(None, None, None)
+            except Exception: pass
             # Return empty context with trace — caller (arion_graph.py) handles errors
             # Re-raising here discards the trace; returning preserves observability
             return result
@@ -728,6 +800,30 @@ class Resolver:
         trace.total_ms = round((time.time() - t0) * 1000)
         result.trace   = trace
         logger.info(f"[resolver] {trace.summary_line()}")
+
+        try:
+            _outer_span.set_attribute("arion.resolver.total_ms", trace.total_ms)
+            _outer_span.set_attribute("arion.resolver.neo4j_ms",
+                                        int(trace.neo4j_ms or 0))
+            _outer_span.set_attribute("arion.resolver.vector_ms",
+                                        int(trace.vector_ms or 0))
+            _outer_span.set_attribute("arion.resolver.postgres_ms",
+                                        int(trace.postgres_ms or 0))
+            _outer_span.set_attribute("arion.resolver.nodes_primary",
+                                        int(trace.nodes_primary or 0))
+            _outer_span.set_attribute("arion.resolver.nodes_secondary",
+                                        int(trace.nodes_secondary or 0))
+            _outer_span.set_attribute("arion.resolver.doc_contexts",
+                                        int(trace.doc_contexts or 0))
+            _outer_span.set_attribute("arion.resolver.vector_results",
+                                        int(trace.vector_results or 0))
+            _outer_span.set_attribute("arion.resolver.short_circuit",
+                                        bool(trace.short_circuit))
+        except Exception:
+            pass
+        try: _outer_cm.__exit__(None, None, None)
+        except Exception: pass
+
         return result
 
     # --- Tier 1: DB-first ---

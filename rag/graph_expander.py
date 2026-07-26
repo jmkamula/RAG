@@ -414,19 +414,48 @@ class GraphExpander:
         if not node_ids:
             return self._empty_context()
 
-        # Ship 1.7: _graph_expand uses split NODE_BUDGET_PRIMARY +
-        # NODE_BUDGET_XFW internally. The `budget` arg here is only
-        # used by the vector-only fallback path (which has no xfw
-        # traversal) — for that path we sum both budgets.
-        budget = (NODE_BUDGET_PRIMARY.get(intent.question_type, 12)
-                  + NODE_BUDGET_XFW.get(intent.question_type, 6))
+        # Ship 45'.b — OTel span for the expand entry point.
+        from rag.telemetry import get_tracer
+        _tracer = get_tracer(__name__)
+        with _tracer.start_as_current_span("arion.graph_expander.expand") as _span:
+            try:
+                _span.set_attribute("arion.graph_expander.n_input_ids", len(node_ids))
+                _span.set_attribute("arion.graph_expander.question_type",
+                                    str(intent.question_type))
+            except Exception:
+                pass
 
-        # Try graph expansion
-        if self._is_online():
-            return self._graph_expand(node_ids, intent, budget)
-        else:
-            print("  ⚠ Neo4j offline — using vector-only expansion")
-            return self._vector_only_expand(node_ids, intent, budget)
+            # Ship 1.7: _graph_expand uses split NODE_BUDGET_PRIMARY +
+            # NODE_BUDGET_XFW internally. The `budget` arg here is only
+            # used by the vector-only fallback path (which has no xfw
+            # traversal) — for that path we sum both budgets.
+            budget = (NODE_BUDGET_PRIMARY.get(intent.question_type, 12)
+                      + NODE_BUDGET_XFW.get(intent.question_type, 6))
+
+            # Try graph expansion
+            if self._is_online():
+                try: _span.set_attribute("arion.graph_expander.path", "graph")
+                except Exception: pass
+                result = self._graph_expand(node_ids, intent, budget)
+            else:
+                try: _span.set_attribute("arion.graph_expander.path", "vector_only")
+                except Exception: pass
+                print("  ⚠ Neo4j offline — using vector-only expansion")
+                result = self._vector_only_expand(node_ids, intent, budget)
+
+            try:
+                _span.set_attribute("arion.graph_expander.n_primary_out",
+                                    len(getattr(result, "primary_nodes", []) or []))
+                _span.set_attribute("arion.graph_expander.n_secondary_out",
+                                    len(getattr(result, "secondary_nodes", []) or []))
+                _span.set_attribute("arion.graph_expander.n_xfw_out",
+                                    len(getattr(result, "xfw_nodes", []) or []))
+                _span.set_attribute("arion.graph_expander.n_doc_contexts",
+                                    len(getattr(result, "doc_contexts", {}) or {}))
+                _span.set_attribute("arion.graph_expander.budget", int(budget))
+            except Exception:
+                pass
+            return result
 
     def test_connection(self) -> bool:
         """Test Neo4j connectivity. Returns True if connected."""
@@ -1167,8 +1196,20 @@ class GraphExpander:
 
         Background: memory/incident_obligations_model.md.
         """
+        # Ship 45'.b — OTel span wrapping the whole call.
+        from rag.telemetry import get_tracer
+        _tracer = get_tracer(__name__)
+        _cm = _tracer.start_as_current_span("arion.graph_expander.get_incident_obligations")
+        _span = _cm.__enter__()
+        try:
+            _span.set_attribute("arion.tenant_id", str(tenant_id)[:64])
+            _span.set_attribute("arion.n_standards", len(standards or []))
+        except Exception:
+            pass
         conn = self._get_pg_conn()
         if conn is None:
+            try: _cm.__exit__(None, None, None)
+            except Exception: pass
             return []
 
         try:
@@ -1245,6 +1286,13 @@ class GraphExpander:
                 conn.commit()
             except Exception:
                 pass
+            try:
+                _span.set_attribute("arion.incident_obligations.n_contexts",
+                                    len(contexts))
+            except Exception:
+                pass
+            try: _cm.__exit__(None, None, None)
+            except Exception: pass
             return contexts
 
         except Exception:
@@ -1252,6 +1300,8 @@ class GraphExpander:
                 conn.rollback()
             except Exception:
                 pass
+            try: _cm.__exit__(None, None, None)
+            except Exception: pass
             return []
         finally:
             self._release_pg_conn(conn)

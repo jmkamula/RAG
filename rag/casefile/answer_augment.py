@@ -441,6 +441,22 @@ def build_short_circuit_structured(
     intro_text is passed through unchanged as intro.text (short-
     circuits already have their own composed prose).
     """
+    # Ship 45'.b — OTel span. This function is a suspect for the
+    # 7s post-resolver latency in retrieve (Ship 44'.d hunt).
+    from rag.telemetry import get_tracer as _gt
+    _tracer_sc = _gt(__name__)
+    _sc_cm = _tracer_sc.start_as_current_span(
+        "arion.answer_augment.build_short_circuit_structured"
+    )
+    _sc_span = _sc_cm.__enter__()
+    try:
+        _sc_span.set_attribute("arion.answer.n_extra_refs",
+                                len(extra_refs or []))
+        _sc_span.set_attribute("arion.answer.has_primary_ref",
+                                bool(primary_ref))
+    except Exception:
+        pass
+
     all_refs: list = []
     seen: set = set()
     for r in ([primary_ref] if primary_ref else []) + list(extra_refs or []):
@@ -517,6 +533,14 @@ def build_short_circuit_structured(
     # (typically the risk short-circuit at arion_graph.py:2454).
     if risks_data:
         skeleton.risks = build_risk_cards(risks_data)
+
+    try:
+        _sc_span.set_attribute("arion.answer.n_related_cards",
+                                len(skeleton.related or []))
+    except Exception:
+        pass
+    try: _sc_cm.__exit__(None, None, None)
+    except Exception: pass
 
     return skeleton
 
@@ -994,6 +1018,18 @@ def build_related_cards(
     Cards are ordered:  primary → demonstrated_by → cross_framework →
     isms_clause → context.
     """
+    # Ship 45'.b — trace this function; it does per-ref Neo4j +
+    # Postgres lookups that may be N+1.
+    from rag.telemetry import get_tracer as _gt_rc
+    _tr_rc = _gt_rc(__name__)
+    _rc_cm = _tr_rc.start_as_current_span("arion.answer_augment.build_related_cards")
+    _rc_span = _rc_cm.__enter__()
+    try:
+        _rc_span.set_attribute("arion.answer.n_extra_refs",
+                                len(extra_refs or []))
+    except Exception:
+        pass
+
     cited = collect_all_refs(structured)
     extras = list(extra_refs or [])
     all_refs: list[str] = []
@@ -1178,6 +1214,13 @@ def build_related_cards(
     known_refs = {c.ref for c in capped_cards}
     for action in structured.actions:
         action.refs = [r for r in action.refs if r in known_refs]
+
+    try:
+        _rc_span.set_attribute("arion.answer.n_capped_cards", len(capped_cards))
+    except Exception:
+        pass
+    try: _rc_cm.__exit__(None, None, None)
+    except Exception: pass
 
     return capped_cards
 
