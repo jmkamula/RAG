@@ -856,7 +856,6 @@ function setMode(m) {
 // Parses the hash + switches modes + opens the drill-in for the requested
 // control on the dashboard. Non-page-navigating so client state (chat
 // history, filters, etc.) survives clicks.
-let _pendingDrillInRef = null;
 function _applyHashRoute() {
   const raw = (location.hash || '').replace(/^#/, '');
   if (!raw) return;
@@ -868,35 +867,53 @@ function _applyHashRoute() {
   setMode(modeName);
   if (modeName === 'dashboard') {
     const ref = params.get('control');
-    if (ref) {
-      _pendingDrillInRef = ref;
-      _tryDrillInto(ref, /*attemptsLeft=*/20);
-    }
+    if (ref) _openControlDetail(ref);
   }
 }
-// Look for the requested control in the loaded dashboard data + click into
-// its heatmap cell. Retries up to 20× (200ms each) while `dashData` hydrates
-// — because loadDashboard is async and the hash may fire before it resolves.
-function _tryDrillInto(ref, attemptsLeft) {
-  if (_pendingDrillInRef !== ref) return;   // superseded by newer nav
-  if (typeof dashData === 'undefined' || !dashData || !dashData.frameworks) {
-    if (attemptsLeft > 0) setTimeout(() => _tryDrillInto(ref, attemptsLeft - 1), 200);
-    return;
-  }
-  let target = null;
-  for (const fw of (dashData.frameworks || [])) {
-    for (const c of (fw.cells || fw.controls || [])) {
-      if (c.control_ref === ref) { target = { ...c, display_name: fw.display_name }; break; }
+// Open the drill-in detail panel for a control ref immediately, without
+// waiting for dashData to hydrate. Fabricates a minimal control object
+// with a heuristic standard_id derived from the ref shape (Art.* → GDPR;
+// B.* / A.x.y.z 4-segment → 27701; else 27001). selectHeatCell's async
+// fetches (canonical title, engine reason, advisory, etc.) fill in the
+// rest.
+function _openControlDetail(ref) {
+  if (!ref) return;
+  const stdId = _inferStandardId(ref);
+  const displayNameByStd = {
+    'ISO27001:2022':  'ISO 27001:2022',
+    'ISO27701:2019':  'ISO 27701:2019',
+    'GDPR:2016/679':  'GDPR (EU 2016/679)',
+  };
+  const stub = {
+    control_ref:  ref,
+    standard_id:  stdId,
+    display_name: displayNameByStd[stdId] || stdId,
+    finding:      '',  // pill blank until fetch fills it
+  };
+  // Prefer the real hydrated row if dashData has it (accurate finding etc).
+  if (typeof dashData !== 'undefined' && dashData && dashData.frameworks) {
+    for (const fw of dashData.frameworks) {
+      for (const c of (fw.cells || fw.controls || [])) {
+        if (c.control_ref === ref && (!stdId || c.standard_id === stdId)) {
+          Object.assign(stub, c, { display_name: fw.display_name || stub.display_name });
+          break;
+        }
+      }
     }
-    if (target) break;
   }
-  if (target && typeof selectHeatCell === 'function') {
-    _pendingDrillInRef = null;
-    try { selectHeatCell(target, { stopPropagation: () => {} }); } catch (_e) { /* silent */ }
-  } else if (attemptsLeft > 0) {
-    // Cells may still be rendering; try again shortly.
-    setTimeout(() => _tryDrillInto(ref, attemptsLeft - 1), 200);
+  if (typeof selectHeatCell === 'function') {
+    try { selectHeatCell(stub, { stopPropagation: () => {} }); } catch (_e) { /* silent */ }
   }
+}
+function _inferStandardId(ref) {
+  if (!ref) return 'ISO27001:2022';
+  if (/^Art\./i.test(ref)) return 'GDPR:2016/679';
+  if (/^B\./i.test(ref))   return 'ISO27701:2019';
+  // A.x.y (3-segment: A.5.15) → 27001 Annex A
+  // A.x.y.z (4-segment: A.7.2.5) → 27701 Annex A/B
+  const parts = ref.split('.');
+  if (ref.startsWith('A.') && parts.length >= 4) return 'ISO27701:2019';
+  return 'ISO27001:2022';
 }
 window.addEventListener('hashchange', _applyHashRoute);
 
