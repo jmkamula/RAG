@@ -1,0 +1,32 @@
+[Unit]
+Description=ArionComply Arize Phoenix LLM tracing UI
+Documentation=https://github.com/jmkamula/RAG/blob/main/docs/memory/ship_44_prime_a_addendum_llm_instrumentation_2026_07_26.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=arionlabs
+Group=arionlabs
+WorkingDirectory=/data/arioncomply
+Environment=PHOENIX_HOST=127.0.0.1
+Environment=PHOENIX_PORT=6006
+Environment=PHOENIX_GRPC_PORT=6317
+Environment=PHOENIX_WORKING_DIR=/data/arioncomply/.phoenix
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 -m phoenix.server.main serve
+Restart=on-failure
+RestartSec=5s
+
+# Bind 127.0.0.1 only — Phoenix stores full LLM prompts/completions
+# when TRACELOOP_TRACE_CONTENT=true or debug privacy tier is enabled.
+
+# gRPC receiver on 6317 (not 4317 — Jaeger owns 4317).
+# UI on 6006 (Phoenix default).
+
+StandardOutput=append:/tmp/arioncomply-phoenix.log
+StandardError=inherit
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

@@ -262,6 +262,16 @@ app = FastAPI(
     lifespan    = lifespan,
 )
 
+# ── OpenTelemetry bootstrap (Ship 44) ────────────────────────────────────────
+# Register OTel + FastAPI instrumentation BEFORE middleware + routes so that
+# every incoming request gets a server-kind span as trace root. Skipping the
+# bootstrap step (OTEL_ENABLED != 1) is a no-op.
+try:
+    from rag.telemetry import bootstrap_telemetry as _bootstrap_telemetry
+    _bootstrap_telemetry(fastapi_app=app)
+except Exception as _e:
+    logger.warning(f"OTel bootstrap at import failed (non-fatal): {_e}")
+
 # Serve static UI files
 _static = Path("/data/arioncomply/static")
 _static.mkdir(parents=True, exist_ok=True)
@@ -389,7 +399,42 @@ def require_scope(scope: str):
 async def add_trace_id(request: Request, call_next):
     trace_id = request.headers.get("X-Trace-Id", str(uuid.uuid4()))
     request.state.trace_id = trace_id
-    response = await call_next(request)
+
+    # Ship 44'.b — wrap request handling in a server-kind OTel span so
+    # every downstream span (LangGraph nodes, DB queries, LLM calls) is
+    # a child of this request. Without this wrap, downstream spans
+    # become orphan single-span traces in Jaeger. This coexists with
+    # OpenTelemetryMiddleware — the ASGI middleware runs deeper but
+    # doesn't produce server spans on Starlette 1.x + FastAPI 0.140.
+    try:
+        from opentelemetry import trace as _otel_trace
+        _tracer = _otel_trace.get_tracer("arioncomply.request")
+        span_ctx = _tracer.start_as_current_span(
+            f"{request.method} {request.url.path}",
+            kind=_otel_trace.SpanKind.SERVER,
+        )
+    except Exception:
+        span_ctx = None
+
+    if span_ctx is not None:
+        with span_ctx as span:
+            try:
+                span.set_attribute("http.method", request.method)
+                span.set_attribute("http.route", request.url.path)
+                span.set_attribute("http.scheme", request.url.scheme)
+                span.set_attribute("arion.trace_id", trace_id)
+                if "x-tenant-id" in request.headers:
+                    span.set_attribute("arion.tenant_id", request.headers["x-tenant-id"])
+            except Exception:
+                pass
+            response = await call_next(request)
+            try:
+                span.set_attribute("http.status_code", response.status_code)
+            except Exception:
+                pass
+    else:
+        response = await call_next(request)
+
     response.headers["X-Trace-Id"] = trace_id
     return response
 
