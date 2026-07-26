@@ -398,26 +398,28 @@ def build_templates_block(
         # per-MUST breakdown (items_missing, upload_hint) that the chat
         # answer used to append as prose. Task #204: unify per-MUST
         # advisory + template download into a single structured payload.
-        # Per-ref call is idempotent + cached inside build_per_must_...;
-        # skips silently when the control isn't multi-leaf curated.
+        # Ship 45'.c — batched via build_advisory_data_for_refs (one
+        # shared eval_ctx + one shared Neo4j session across all refs).
+        # Was N+1: 40 refs × per-call _build_eval_context + fresh session
+        # + fresh spec_resolver = ~3.3s on a typical top-NC query.
         advisory_by_leaf: dict[str, dict] = {}
         try:
-            from rag.posture.advisory import build_per_must_advisory_data
-            for ref in gap_refs:
-                if ref.startswith("Art."):
-                    _std = "GDPR:2016/679"
-                elif ref.startswith("B."):
-                    _std = "ISO27701:2019"
-                elif ref.startswith("A.") and ref.count(".") >= 3:
-                    _std = "ISO27701:2019"
-                else:
-                    _std = "ISO27001:2022"
-                _adv = build_per_must_advisory_data(
-                    pg_conn     = pg_conn,
-                    tenant_id   = tenant_id,
-                    control_ref = ref,
-                    standard_id = _std,
-                )
+            from rag.posture.advisory import build_advisory_data_for_refs
+            def _std_for(_ref: str) -> str:
+                if _ref.startswith("Art."):
+                    return "GDPR:2016/679"
+                if _ref.startswith("B."):
+                    return "ISO27701:2019"
+                if _ref.startswith("A.") and _ref.count(".") >= 3:
+                    return "ISO27701:2019"
+                return "ISO27001:2022"
+            _refs_by_std = [(r, _std_for(r)) for r in gap_refs]
+            _batched = build_advisory_data_for_refs(
+                pg_conn      = pg_conn,
+                tenant_id    = tenant_id,
+                refs_by_std  = _refs_by_std,
+            )
+            for _adv in _batched.values():
                 if _adv:
                     for _lf in (_adv.get("leaves") or []):
                         _lid = _lf.get("leaf_id")

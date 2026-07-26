@@ -193,6 +193,10 @@ def build_per_must_advisory_data(
     control_ref:  str,
     standard_id:  str = "ISO27001:2022",
     neo4j_driver = None,
+    *,
+    pre_built_ctx = None,
+    shared_session = None,
+    shared_resolver = None,
 ) -> Optional[dict]:
     """Return structured advisory data for the given control, or None if no
     advisory is warranted.
@@ -241,7 +245,12 @@ def build_per_must_advisory_data(
 
     full_id = f"{standard_id}:{control_ref}"
     try:
-        verdict = evaluate_one_control(pg_conn, neo4j_driver, tenant_id, full_id)
+        verdict = evaluate_one_control(
+            pg_conn, neo4j_driver, tenant_id, full_id,
+            pre_built_ctx   = pre_built_ctx,
+            shared_session  = shared_session,
+            shared_resolver = shared_resolver,
+        )
     except Exception as e:
         logger.warning("advisory: evaluate_one_control failed for %s: %s", full_id, e)
         return None
@@ -317,6 +326,78 @@ def build_per_must_advisory_data(
         "leaves":      leaves_out,
         "source":      _source_label(control_ref, standard_id),
     }
+
+
+def build_advisory_data_for_refs(
+    pg_conn,
+    tenant_id: str,
+    refs_by_std: list[tuple[str, str]],
+    neo4j_driver = None,
+) -> dict[str, Optional[dict]]:
+    """Ship 45'.c — batched advisory build for many (control_ref, standard_id).
+
+    Was N+1 in `build_templates_block`: 40 refs × per-call
+    `_build_eval_context` (Postgres + Neo4j) + fresh Neo4j session +
+    fresh `build_spec_resolver`. Now shared once, reused across all refs.
+
+    Returns a dict {control_ref: advisory_data_or_None}.
+
+    On any setup failure (Neo4j driver / eval_ctx), falls back to
+    per-ref uncached calls so partial results still land.
+    """
+    if not refs_by_std:
+        return {}
+
+    if neo4j_driver is None:
+        neo4j_driver = _get_neo_driver()
+
+    from .engine_runner import _build_eval_context
+    from rag.spec_composer import build_spec_resolver as _bsr
+
+    out: dict[str, Optional[dict]] = {}
+    shared_ctx = None
+    session_cm = None
+    session = None
+    resolver = None
+
+    try:
+        if neo4j_driver is not None:
+            try:
+                shared_ctx = _build_eval_context(pg_conn, neo4j_driver, tenant_id)
+            except Exception as e:
+                logger.warning("build_advisory_data_for_refs: eval_ctx failed: %s", e)
+            try:
+                session_cm = neo4j_driver.session()
+                session = session_cm.__enter__()
+                resolver = _bsr(session)
+            except Exception as e:
+                logger.warning("build_advisory_data_for_refs: session/resolver failed: %s", e)
+                session = None
+                resolver = None
+
+        for control_ref, standard_id in refs_by_std:
+            try:
+                out[control_ref] = build_per_must_advisory_data(
+                    pg_conn         = pg_conn,
+                    tenant_id       = tenant_id,
+                    control_ref     = control_ref,
+                    standard_id     = standard_id,
+                    neo4j_driver    = neo4j_driver,
+                    pre_built_ctx   = shared_ctx,
+                    shared_session  = session,
+                    shared_resolver = resolver,
+                )
+            except Exception as e:
+                logger.warning("build_advisory_data_for_refs(%s): %s", control_ref, e)
+                out[control_ref] = None
+    finally:
+        if session_cm is not None:
+            try:
+                session_cm.__exit__(None, None, None)
+            except Exception:
+                pass
+
+    return out
 
 
 # ── Evidence-class breakdown (dashboard drill-in) ───────────────────────────

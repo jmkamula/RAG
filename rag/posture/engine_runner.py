@@ -122,6 +122,10 @@ def evaluate_one_control(
     neo4j_driver,
     tenant_id: str,
     control_id: str,
+    *,
+    pre_built_ctx: Optional[EvalContext] = None,
+    shared_session = None,
+    shared_resolver = None,
 ) -> Optional[ControlVerdict]:
     """Evaluate a single control without iterating the full curated set.
 
@@ -129,15 +133,28 @@ def evaluate_one_control(
     proposal without paying the full compute_engine_verdicts cost. Same
     error-tolerant contract: returns None on any failure rather than
     raising.
+
+    Ship 45'.c — batch callers (e.g. build_advisory_data_for_refs) can
+    pass pre-built shared context to avoid the per-call
+    `_build_eval_context` + `build_spec_resolver` + fresh Neo4j session
+    overhead. Legacy callers that omit these args see identical
+    behavior.
     """
     try:
-        eval_ctx = _build_eval_context(pg_conn, neo4j_driver, tenant_id)
+        eval_ctx = pre_built_ctx or _build_eval_context(pg_conn, neo4j_driver, tenant_id)
     except Exception as e:
         logger.warning("evaluate_one_control: building EvalContext failed: %s", e)
         return None
 
     evaluator = GenericLeafEvaluator(pg_conn, neo4j_driver, tenant_id)
     try:
+        if shared_session is not None and shared_resolver is not None:
+            spec = build_spec_descriptor(shared_session, control_id)
+            if spec is None:
+                return None
+            return evaluate_control(spec, evaluator, eval_ctx,
+                                    spec_resolver=shared_resolver)
+
         with neo4j_driver.session() as s:
             resolver = build_spec_resolver(s)
             spec = build_spec_descriptor(s, control_id)
@@ -152,8 +169,13 @@ def evaluate_one_control(
 # ── EvalContext assembly ──────────────────────────────────────────────────────
 
 def _build_eval_context(pg_conn, neo4j_driver, tenant_id: str) -> EvalContext:
+    # Ship 45'.c — micro-cache `_load_er_evidence_types` because the
+    # Neo4j scan of all EvidenceRequirement nodes is invariant across
+    # tenants + across a single chat turn's many evaluate_one_control
+    # calls. TTL 30s protects against catalog reloads without paying
+    # the ~50ms Neo4j scan on every ref.
+    er_evidence_types = _cached_er_evidence_types(neo4j_driver)
     facts = _load_facts(pg_conn, tenant_id)
-    er_evidence_types = _load_er_evidence_types(neo4j_driver)
     se = _make_supply_exists_fn(pg_conn, tenant_id, er_evidence_types)
     sc = _make_supply_count_fn(pg_conn, tenant_id, er_evidence_types)
     return EvalContext(
@@ -161,6 +183,24 @@ def _build_eval_context(pg_conn, neo4j_driver, tenant_id: str) -> EvalContext:
         supply_exists_fn=se,
         supply_count_fn=sc,
     )
+
+
+_ER_TYPES_CACHE: dict[str, tuple[float, dict]] = {}
+_ER_TYPES_TTL_S = 30.0
+
+def _cached_er_evidence_types(neo4j_driver) -> dict:
+    """TTL cache wrapping _load_er_evidence_types. Driver id used as
+    cache key; catalog is invariant across tenants."""
+    import time as _t
+    key = str(id(neo4j_driver))
+    hit = _ER_TYPES_CACHE.get(key)
+    if hit is not None:
+        ts, val = hit
+        if (_t.monotonic() - ts) < _ER_TYPES_TTL_S:
+            return val
+    val = _load_er_evidence_types(neo4j_driver)
+    _ER_TYPES_CACHE[key] = (_t.monotonic(), val)
+    return val
 
 
 def _load_er_evidence_types(neo4j_driver) -> dict[str, str | None]:

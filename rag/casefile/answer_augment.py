@@ -883,6 +883,8 @@ def _evidence_summary(
     ref: str,
     standard_id: str,
     verdict: str,
+    *,
+    prebuilt_advisory: Optional[dict] = None,
 ) -> tuple[str, list[str], list[LeafState]]:
     """Return (summary_text, still_needed_names, leaves) for a related card.
 
@@ -891,6 +893,10 @@ def _evidence_summary(
     cards; frontend decides render granularity (primary only, in
     Ship 19'.c).
 
+    Ship 45'.c — accepts `prebuilt_advisory` from a batched
+    `build_advisory_data_for_refs` call to avoid the per-ref N+1.
+    Falls back to per-ref lookup for backward compatibility.
+
     Only queries advisory for NC/OFI verdicts on non-empty standards.
     Fails silently on any error → returns ('', [], [])."""
     if verdict not in ("NC", "OFI"):
@@ -898,17 +904,19 @@ def _evidence_summary(
     if not (pg_conn and tenant_id and standard_id and ref):
         return "", [], []
 
-    try:
-        from rag.posture.advisory import build_per_must_advisory_data
-        data = build_per_must_advisory_data(
-            pg_conn      = pg_conn,
-            tenant_id    = tenant_id,
-            control_ref  = ref,
-            standard_id  = standard_id,
-        )
-    except Exception as e:
-        _LOG.debug("advisory lookup failed for %s: %s", ref, e)
-        return "", [], []
+    data = prebuilt_advisory
+    if data is None:
+        try:
+            from rag.posture.advisory import build_per_must_advisory_data
+            data = build_per_must_advisory_data(
+                pg_conn      = pg_conn,
+                tenant_id    = tenant_id,
+                control_ref  = ref,
+                standard_id  = standard_id,
+            )
+        except Exception as e:
+            _LOG.debug("advisory lookup failed for %s: %s", ref, e)
+            return "", [], []
 
     if not data:
         return "", [], []
@@ -1103,6 +1111,35 @@ def build_related_cards(
         if nref not in ns_sids and (row.get("neighbor_standard_id") or "").strip():
             ns_sids[nref]   = row["neighbor_standard_id"]
 
+    # Ship 45'.c — batch-precompute advisory data for all NC/OFI refs
+    # before the card loop. Was N+1: each _evidence_summary call built
+    # a fresh EvalContext + Neo4j session + spec resolver. Now built
+    # once + reused for every ref.
+    _refs_by_std_for_batch: list[tuple[str, str]] = []
+    _seen_batch: set[tuple[str, str]] = set()
+    for _ref in all_refs:
+        _t, _s = _node_metadata(cf, _ref)
+        if not _s and _ref in ns_sids: _s = ns_sids[_ref]
+        if not _s: continue
+        _p = cf.posture_for(_ref) or {}
+        _v = _norm_verdict(_p.get("finding") or "")
+        if _v not in ("NC", "OFI"): continue
+        _key = (_ref, _s)
+        if _key in _seen_batch: continue
+        _seen_batch.add(_key)
+        _refs_by_std_for_batch.append(_key)
+    _advisory_batch: dict[str, dict] = {}
+    if _refs_by_std_for_batch and pg_conn is not None and tenant_id:
+        try:
+            from rag.posture.advisory import build_advisory_data_for_refs
+            _advisory_batch = build_advisory_data_for_refs(
+                pg_conn     = pg_conn,
+                tenant_id   = tenant_id,
+                refs_by_std = _refs_by_std_for_batch,
+            ) or {}
+        except Exception as _e:
+            _LOG.debug("build_advisory_data_for_refs failed: %s", _e)
+
     cards: list[RelatedCard] = []
     for ref in all_refs:
         title, sid = _node_metadata(cf, ref)
@@ -1127,7 +1164,10 @@ def build_related_cards(
         role    = cf.role_of(ref) or "unknown"
 
         relation = _classify_relation(cf, ref, primary_ref, demonstrators)
-        summary, still, leaves = _evidence_summary(pg_conn, tenant_id, ref, sid, verdict)
+        summary, still, leaves = _evidence_summary(
+            pg_conn, tenant_id, ref, sid, verdict,
+            prebuilt_advisory = _advisory_batch.get(ref),
+        )
 
         cards.append(RelatedCard(
             ref              = ref,
