@@ -20,6 +20,8 @@ import os
 import sys
 from typing import Any
 
+import glob
+import re
 import yaml
 from dotenv import load_dotenv
 from neo4j import GraphDatabase
@@ -292,6 +294,128 @@ h1 { font-size: 1.8em; margin: 0 0 8px; letter-spacing: -0.02em; }
   padding: 4px 10px;
 }
 
+/* ── Chat + Intake consensus panels ─────────────────────────────────── */
+.consensus-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 0 auto 32px;
+  max-width: 1000px;
+}
+.consensus-panel {
+  border-radius: 6px;
+  padding: 14px 18px;
+  background: #fff;
+}
+.consensus-panel.chat {
+  border: 2px solid #7a5cbe;
+  background: #f4f0fa;
+}
+.consensus-panel.intake {
+  border: 2px solid #cc7a1a;
+  background: #fdf5eb;
+}
+.consensus-title {
+  font-size: 0.85em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 4px;
+}
+.consensus-panel.chat .consensus-title { color: #5c3ea4; }
+.consensus-panel.intake .consensus-title { color: #a05c15; }
+.consensus-sub {
+  font-size: 0.75em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.artifact {
+  margin: 6px 0 10px;
+  padding: 8px 10px;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #d0d0d0;
+}
+.artifact-label {
+  font-size: 0.68em;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.artifact code, .artifact .mono {
+  font-size: 0.82em;
+}
+.pattern-row {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  padding: 3px 0;
+}
+.qtype-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.7em;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #efe6fa;
+  color: #5c3ea4;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.ref-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72em;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #eaf2ff;
+  color: var(--accent);
+  font-weight: 600;
+}
+.ref-badge.self {
+  background: var(--accent);
+  color: #fff;
+}
+.tokens-chip {
+  display: inline-flex;
+  gap: 3px;
+  padding: 2px 6px;
+  background: #fff;
+  border: 1px solid #cc7a1a;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.75em;
+  color: #6b3f0a;
+  margin: 2px 3px 2px 0;
+}
+.tokens-chip .fp-token + .fp-token::before {
+  color: #b58a20;
+}
+.target-leaf-chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72em;
+  padding: 2px 6px;
+  background: #f0f7ea;
+  border: 1px solid var(--leaf-border);
+  border-radius: 3px;
+  color: #2c5820;
+  margin: 2px 3px 2px 0;
+}
+.target-leaf-chip.self {
+  background: var(--leaf-border);
+  color: #fff;
+}
+.empty-panel {
+  font-size: 0.8em;
+  color: var(--muted);
+  font-style: italic;
+  padding: 10px 4px;
+}
+
 /* ── Footer ─────────────────────────────────────────────────────────── */
 .footer {
   margin-top: 60px;
@@ -320,6 +444,103 @@ def _leaf_to_fingerprint_path(leaf_id: str) -> str:
     # req:A.5.15:access_control_policy → req_A_5_15_access_control_policy.yaml
     slug = leaf_id.replace(":", "_").replace(".", "_")
     return f"/data/arioncomply/db/must_fingerprints/{slug}.yaml"
+
+
+def _chat_artifacts(control_ref: str) -> dict:
+    """Introspect rag/classifier.py's CLEAR_INTENT_PHRASES + DOCUMENT_TOPIC_MAP
+    and return whatever routes chat queries to this control_ref.
+
+    Returns:
+        {
+          'intent_phrases': [{'pattern': str, 'question_type': str, 'refs': [...]}],
+          'topic_phrases':  [{'phrase': str, 'ref': str}],
+        }
+    """
+    # Add project root to sys.path so we can import the classifier module.
+    sys.path.insert(0, "/data/arioncomply")
+    try:
+        from rag.classifier import CLEAR_INTENT_PHRASES, DOCUMENT_TOPIC_MAP
+    except Exception:
+        return {'intent_phrases': [], 'topic_phrases': []}
+
+    intents = []
+    for entry in CLEAR_INTENT_PHRASES:
+        if len(entry) < 3:
+            continue
+        pat, qtype, refs = entry[0], entry[1], entry[2]
+        if control_ref in (refs or []):
+            intents.append({
+                'pattern':       pat.pattern if hasattr(pat, 'pattern') else str(pat),
+                'question_type': qtype,
+                'refs':          list(refs or []),
+            })
+
+    topics = [
+        {'phrase': phrase, 'ref': ref}
+        for phrase, ref in (DOCUMENT_TOPIC_MAP or {}).items()
+        if ref == control_ref
+    ]
+
+    return {'intent_phrases': intents, 'topic_phrases': topics}
+
+
+def _intake_artifacts(control_ref: str, leaf_ids: list[str]) -> dict:
+    """Walk db/doc_mappings/*.yaml + db/workbook_mappings/*.yaml, return
+    the mappings whose target_leaves land on this control's leaves.
+
+    Returns:
+        {
+          'doc_mappings':      [{'mapping_id', 'filename_fingerprints', ...}],
+          'workbook_mappings': [{'mapping_id', 'sheet_match', 'target_leaves'}],
+        }
+    """
+    leaf_set = set(leaf_ids)
+    doc_matches: list[dict] = []
+
+    for fp in glob.glob("/data/arioncomply/db/doc_mappings/*.yaml"):
+        try:
+            with open(fp) as f:
+                d = yaml.safe_load(f) or {}
+        except Exception:
+            continue
+        # A mapping targets this control if ANY of its target_leaves' leaf_id
+        # is in leaf_set, OR any target names the control_ref explicitly.
+        targets = d.get("target_leaves") or []
+        hit_leaves = [t for t in targets
+                      if (t.get("leaf_id") in leaf_set) or (t.get("control_ref") == control_ref)]
+        if not hit_leaves:
+            continue
+        doc_matches.append({
+            'file':                  os.path.basename(fp),
+            'mapping_id':            d.get('mapping_id', '?'),
+            'filename_fingerprints': d.get('filename_fingerprints') or [],
+            'body_fingerprints':     d.get('body_fingerprints') or [],
+            'min_body_chars':        d.get('min_body_chars'),
+            'target_leaves':         targets,  # full list — highlight ours
+            'hit_leaves':            hit_leaves,
+        })
+
+    wb_matches: list[dict] = []
+    for fp in glob.glob("/data/arioncomply/db/workbook_mappings/*.yaml"):
+        try:
+            with open(fp) as f:
+                d = yaml.safe_load(f) or {}
+        except Exception:
+            continue
+        # Workbook mappings vary in shape; scan for control_ref / leaf_id
+        # references anywhere in the doc.
+        raw = yaml.safe_dump(d)
+        if not any(lid in raw for lid in leaf_ids) and control_ref not in raw:
+            continue
+        wb_matches.append({
+            'file':          os.path.basename(fp),
+            'mapping_id':    d.get('mapping_id') or d.get('id') or os.path.basename(fp),
+            'sheet_match':   d.get('sheet_match') or d.get('sheet_name_fingerprints') or [],
+            'target_leaves': d.get('target_leaves') or [],
+            'row_mapping':   d.get('row_mapping') or {},
+        })
+
+    return {'doc_mappings': doc_matches, 'workbook_mappings': wb_matches}
 
 
 def _load_fingerprints(leaf_id: str) -> dict:
@@ -492,6 +713,124 @@ def render(control_ref: str, standard_id: str, out_path: str) -> None:
 
     leaves_html = "\n".join(render_leaf(L) for L in leaves)
 
+    # ── Chat consensus panel ──────────────────────────────────────────
+    chat = _chat_artifacts(control_ref)
+    def render_chat_panel():
+        n_intent = len(chat['intent_phrases'])
+        n_topic = len(chat['topic_phrases'])
+        if n_intent == 0 and n_topic == 0:
+            body = '<div class="empty-panel">No CLEAR_INTENT_PHRASES or DOCUMENT_TOPIC_MAP entries route to this control. Chat falls back to Signal B (explicit ref) + Signal A (Chroma semantic) + LLM classifier.</div>'
+        else:
+            parts = []
+            if n_intent:
+                intent_rows = []
+                for ip in chat['intent_phrases']:
+                    ref_chips = "".join(
+                        f'<span class="ref-badge{" self" if r == control_ref else ""}">{esc(r)}</span> '
+                        for r in ip['refs']
+                    )
+                    intent_rows.append(
+                        f'<div class="pattern-row">'
+                        f'<span class="qtype-badge">{esc(ip["question_type"])}</span> '
+                        f'<code>{esc(ip["pattern"])}</code> → {ref_chips}'
+                        f'</div>'
+                    )
+                parts.append(
+                    f'<div class="artifact">'
+                    f'<div class="artifact-label">CLEAR_INTENT_PHRASES ({n_intent}) — Signal C, weight 1.00</div>'
+                    f'{"".join(intent_rows)}'
+                    f'</div>'
+                )
+            if n_topic:
+                topic_rows = []
+                for t in chat['topic_phrases']:
+                    topic_rows.append(
+                        f'<div class="pattern-row">'
+                        f'"<strong>{esc(t["phrase"])}</strong>" → '
+                        f'<span class="ref-badge self">{esc(t["ref"])}</span>'
+                        f'</div>'
+                    )
+                parts.append(
+                    f'<div class="artifact">'
+                    f'<div class="artifact-label">DOCUMENT_TOPIC_MAP ({n_topic}) — Signal C, weight 1.00</div>'
+                    f'{"".join(topic_rows)}'
+                    f'</div>'
+                )
+            body = "".join(parts)
+        return f'''
+        <div class="consensus-panel chat">
+          <div class="consensus-title">💬 Chat consensus — how queries route here</div>
+          <div class="consensus-sub">Signal C (curator-authored lexicon). Top-tier weight 1.00 —
+            these deterministically pin the resolved ref.</div>
+          {body}
+        </div>
+        '''
+
+    # ── Intake consensus panel ────────────────────────────────────────
+    leaf_ids = [L['id'] for L in leaves]
+    intake = _intake_artifacts(control_ref, leaf_ids)
+
+    def render_intake_panel():
+        n_doc = len(intake['doc_mappings'])
+        n_wb = len(intake['workbook_mappings'])
+        if n_doc == 0 and n_wb == 0:
+            body = '<div class="empty-panel">No doc_mappings or workbook_mappings target this control. Intake falls back to fingerprint_keyword (per-MUST catalog, shown below) + must_semantic_topk (Chroma) + BM25 signals.</div>'
+        else:
+            parts = []
+            for dm in intake['doc_mappings']:
+                fn_chips = "".join(
+                    '<span class="tokens-chip">' +
+                    "".join(f'<span class="fp-token">{esc(t)}</span>' for t in (fp.get('tokens') or [])) +
+                    '</span>'
+                    for fp in dm['filename_fingerprints']
+                )
+                body_chips = "".join(
+                    '<span class="tokens-chip">' +
+                    "".join(f'<span class="fp-token">{esc(t)}</span>' for t in (fp.get('tokens') or [])) +
+                    '</span>'
+                    for fp in dm['body_fingerprints']
+                )
+                # Highlight target leaves that belong to THIS control
+                leaf_set = set(leaf_ids)
+                target_chips = "".join(
+                    f'<span class="target-leaf-chip{" self" if t.get("leaf_id") in leaf_set else ""}">'
+                    f'{esc(t.get("control_ref") or "?")} · {esc(t.get("role") or "")}'
+                    f'</span>'
+                    for t in dm['target_leaves']
+                )
+                min_body = (f' · min_body_chars={dm["min_body_chars"]}' if dm.get('min_body_chars') else '')
+                parts.append(
+                    f'<div class="artifact">'
+                    f'<div class="artifact-label">doc_mapping · <code>{esc(dm["mapping_id"])}</code>{esc(min_body)}</div>'
+                    f'{"<div><em style=\"font-size:0.72em;color:#666\">Filename fingerprints:</em><br>" + fn_chips + "</div>" if fn_chips else ""}'
+                    f'{"<div style=\"margin-top:6px\"><em style=\"font-size:0.72em;color:#666\">Body fingerprints:</em><br>" + body_chips + "</div>" if body_chips else ""}'
+                    f'{"<div style=\"margin-top:6px\"><em style=\"font-size:0.72em;color:#666\">Target leaves:</em><br>" + target_chips + "</div>" if target_chips else ""}'
+                    f'</div>'
+                )
+            for wb in intake['workbook_mappings']:
+                parts.append(
+                    f'<div class="artifact">'
+                    f'<div class="artifact-label">workbook_mapping · <code>{esc(wb["mapping_id"])}</code></div>'
+                    f'<div class="mono" style="font-size:0.75em;color:#666">{esc(wb["file"])}</div>'
+                    f'</div>'
+                )
+            body = "".join(parts)
+        return f'''
+        <div class="consensus-panel intake">
+          <div class="consensus-title">📄 Intake consensus — how docs route here</div>
+          <div class="consensus-sub">doc_mappings (filename + body fingerprints → target leaves) run BEFORE
+            the 9-signal extractor kicks in, tightening scope.</div>
+          {body}
+        </div>
+        '''
+
+    consensus_row_html = f'''
+      <div class="consensus-row">
+        {render_chat_panel()}
+        {render_intake_panel()}
+      </div>
+    '''
+
     doc = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -511,6 +850,8 @@ def render(control_ref: str, standard_id: str, out_path: str) -> None:
   <div class="legend-item"><span class="legend-swatch" style="background:var(--must-fill);border-color:var(--must-border);border-style:solid"></span> MUST (mandatory)</div>
   <div class="legend-item"><span class="legend-swatch" style="background:var(--should-fill);border-color:var(--should-border);border-style:dashed"></span> SHOULD (recommended)</div>
   <div class="legend-item"><span class="legend-swatch" style="background:#fffbe6;border-color:#e0b74c"></span> Fingerprint token-set (extraction keyword catalog)</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#f4f0fa;border-color:#7a5cbe"></span> Chat consensus artifact</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#fdf5eb;border-color:#cc7a1a"></span> Intake consensus artifact</div>
 </div>
 
 <div class="tree">
@@ -523,6 +864,8 @@ def render(control_ref: str, standard_id: str, out_path: str) -> None:
   </div>
 
   <div class="control-to-leaves"></div>
+
+  {consensus_row_html}
 
   <div class="leaves">
     {leaves_html}

@@ -271,6 +271,128 @@ h1 { font-size: 1.8em; margin: 0 0 8px; letter-spacing: -0.02em; }
   padding: 4px 10px;
 }
 
+/* ── Chat + Intake consensus panels ─────────────────────────────────── */
+.consensus-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 0 auto 32px;
+  max-width: 1000px;
+}
+.consensus-panel {
+  border-radius: 6px;
+  padding: 14px 18px;
+  background: #fff;
+}
+.consensus-panel.chat {
+  border: 2px solid #7a5cbe;
+  background: #f4f0fa;
+}
+.consensus-panel.intake {
+  border: 2px solid #cc7a1a;
+  background: #fdf5eb;
+}
+.consensus-title {
+  font-size: 0.85em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 4px;
+}
+.consensus-panel.chat .consensus-title { color: #5c3ea4; }
+.consensus-panel.intake .consensus-title { color: #a05c15; }
+.consensus-sub {
+  font-size: 0.75em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.artifact {
+  margin: 6px 0 10px;
+  padding: 8px 10px;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #d0d0d0;
+}
+.artifact-label {
+  font-size: 0.68em;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.artifact code, .artifact .mono {
+  font-size: 0.82em;
+}
+.pattern-row {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  padding: 3px 0;
+}
+.qtype-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.7em;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #efe6fa;
+  color: #5c3ea4;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.ref-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72em;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #eaf2ff;
+  color: var(--accent);
+  font-weight: 600;
+}
+.ref-badge.self {
+  background: var(--accent);
+  color: #fff;
+}
+.tokens-chip {
+  display: inline-flex;
+  gap: 3px;
+  padding: 2px 6px;
+  background: #fff;
+  border: 1px solid #cc7a1a;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.75em;
+  color: #6b3f0a;
+  margin: 2px 3px 2px 0;
+}
+.tokens-chip .fp-token + .fp-token::before {
+  color: #b58a20;
+}
+.target-leaf-chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72em;
+  padding: 2px 6px;
+  background: #f0f7ea;
+  border: 1px solid var(--leaf-border);
+  border-radius: 3px;
+  color: #2c5820;
+  margin: 2px 3px 2px 0;
+}
+.target-leaf-chip.self {
+  background: var(--leaf-border);
+  color: #fff;
+}
+.empty-panel {
+  font-size: 0.8em;
+  color: var(--muted);
+  font-style: italic;
+  padding: 10px 4px;
+}
+
 /* ── Footer ─────────────────────────────────────────────────────────── */
 .footer {
   margin-top: 60px;
@@ -301,6 +423,8 @@ a { color: var(--accent); }
   <div class="legend-item"><span class="legend-swatch" style="background:var(--must-fill);border-color:var(--must-border);border-style:solid"></span> MUST (mandatory)</div>
   <div class="legend-item"><span class="legend-swatch" style="background:var(--should-fill);border-color:var(--should-border);border-style:dashed"></span> SHOULD (recommended)</div>
   <div class="legend-item"><span class="legend-swatch" style="background:#fffbe6;border-color:#e0b74c"></span> Fingerprint token-set (extraction keyword catalog)</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#f4f0fa;border-color:#7a5cbe"></span> Chat consensus artifact</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#fdf5eb;border-color:#cc7a1a"></span> Intake consensus artifact</div>
 </div>
 
 <div class="tree">
@@ -313,6 +437,27 @@ a { color: var(--accent); }
   </div>
 
   <div class="control-to-leaves"></div>
+
+  
+      <div class="consensus-row">
+        
+        <div class="consensus-panel chat">
+          <div class="consensus-title">💬 Chat consensus — how queries route here</div>
+          <div class="consensus-sub">Signal C (curator-authored lexicon). Top-tier weight 1.00 —
+            these deterministically pin the resolved ref.</div>
+          <div class="artifact"><div class="artifact-label">CLEAR_INTENT_PHRASES (1) — Signal C, weight 1.00</div><div class="pattern-row"><span class="qtype-badge">gap_analysis</span> <code>\baccess\s+(?:control|review)\s+(?:gaps?|issues?|status)\b</code> → <span class="ref-badge">A.5.18</span> <span class="ref-badge self">A.5.15</span> </div></div><div class="artifact"><div class="artifact-label">DOCUMENT_TOPIC_MAP (1) — Signal C, weight 1.00</div><div class="pattern-row">"<strong>access control</strong>" → <span class="ref-badge self">A.5.15</span></div></div>
+        </div>
+        
+        
+        <div class="consensus-panel intake">
+          <div class="consensus-title">📄 Intake consensus — how docs route here</div>
+          <div class="consensus-sub">doc_mappings (filename + body fingerprints → target leaves) run BEFORE
+            the 9-signal extractor kicks in, tightening scope.</div>
+          <div class="artifact"><div class="artifact-label">doc_mapping · <code>doc.ISO27001_2022.A_5_15.management_approval</code></div><div><em style="font-size:0.72em;color:#666">Filename fingerprints:</em><br><span class="tokens-chip"><span class="fp-token">access</span><span class="fp-token">control</span><span class="fp-token">policy</span></span><span class="tokens-chip"><span class="fp-token">access</span><span class="fp-token">control</span><span class="fp-token">pol</span></span><span class="tokens-chip"><span class="fp-token">management</span><span class="fp-token">approval</span><span class="fp-token">access</span></span><span class="tokens-chip"><span class="fp-token">mgmt</span><span class="fp-token">approval</span><span class="fp-token">access</span></span><span class="tokens-chip"><span class="fp-token">management</span><span class="fp-token">approval</span></span><span class="tokens-chip"><span class="fp-token">mgmt</span><span class="fp-token">approval</span></span></div><div style="margin-top:6px"><em style="font-size:0.72em;color:#666">Target leaves:</em><br><span class="target-leaf-chip self">A.5.15 · approval</span></div></div><div class="artifact"><div class="artifact-label">doc_mapping · <code>doc.ISO27001_2022.A_5_15.periodic_review</code></div><div><em style="font-size:0.72em;color:#666">Filename fingerprints:</em><br><span class="tokens-chip"><span class="fp-token">access</span><span class="fp-token">control</span><span class="fp-token">policy</span></span><span class="tokens-chip"><span class="fp-token">access</span><span class="fp-token">control</span><span class="fp-token">pol</span></span><span class="tokens-chip"><span class="fp-token">periodic</span><span class="fp-token">access</span><span class="fp-token">control</span></span><span class="tokens-chip"><span class="fp-token">periodic</span><span class="fp-token">access</span></span></div><div style="margin-top:6px"><em style="font-size:0.72em;color:#666">Target leaves:</em><br><span class="target-leaf-chip self">A.5.15 · review_record</span></div></div><div class="artifact"><div class="artifact-label">doc_mapping · <code>doc.iso.A_5_15.access_control_policy</code> · min_body_chars=800</div><div><em style="font-size:0.72em;color:#666">Filename fingerprints:</em><br><span class="tokens-chip"><span class="fp-token">access</span><span class="fp-token">control</span><span class="fp-token">policy</span></span><span class="tokens-chip"><span class="fp-token">access</span><span class="fp-token">management</span><span class="fp-token">policy</span></span><span class="tokens-chip"><span class="fp-token">logical</span><span class="fp-token">access</span><span class="fp-token">policy</span></span><span class="tokens-chip"><span class="fp-token">user</span><span class="fp-token">access</span><span class="fp-token">policy</span></span><span class="tokens-chip"><span class="fp-token">identity</span><span class="fp-token">access</span><span class="fp-token">policy</span></span><span class="tokens-chip"><span class="fp-token">iam</span><span class="fp-token">policy</span></span><span class="tokens-chip"><span class="fp-token">access</span><span class="fp-token">control</span><span class="fp-token">procedure</span></span><span class="tokens-chip"><span class="fp-token">access</span><span class="fp-token">management</span><span class="fp-token">procedure</span></span><span class="tokens-chip"><span class="fp-token">logical</span><span class="fp-token">access</span><span class="fp-token">procedure</span></span><span class="tokens-chip"><span class="fp-token">user</span><span class="fp-token">access</span><span class="fp-token">procedure</span></span><span class="tokens-chip"><span class="fp-token">identity</span><span class="fp-token">access</span><span class="fp-token">procedure</span></span><span class="tokens-chip"><span class="fp-token">iam</span><span class="fp-token">procedure</span></span></div><div style="margin-top:6px"><em style="font-size:0.72em;color:#666">Body fingerprints:</em><br><span class="tokens-chip"><span class="fp-token">access</span><span class="fp-token">granted</span></span><span class="tokens-chip"><span class="fp-token">least</span><span class="fp-token">privilege</span></span><span class="tokens-chip"><span class="fp-token">role</span><span class="fp-token">based</span><span class="fp-token">access</span></span><span class="tokens-chip"><span class="fp-token">rbac</span></span></div><div style="margin-top:6px"><em style="font-size:0.72em;color:#666">Target leaves:</em><br><span class="target-leaf-chip self">A.5.15 · policy</span><span class="target-leaf-chip">A.5.18 · procedure</span><span class="target-leaf-chip">A.5.16 · procedure</span><span class="target-leaf-chip">A.5.17 · procedure</span></div></div><div class="artifact"><div class="artifact-label">doc_mapping · <code>doc.ISO27001_2022.A_5_15.communication_record</code></div><div><em style="font-size:0.72em;color:#666">Filename fingerprints:</em><br><span class="tokens-chip"><span class="fp-token">access</span><span class="fp-token">control</span><span class="fp-token">policy</span></span><span class="tokens-chip"><span class="fp-token">access</span><span class="fp-token">control</span><span class="fp-token">pol</span></span><span class="tokens-chip"><span class="fp-token">access</span><span class="fp-token">control</span></span></div><div style="margin-top:6px"><em style="font-size:0.72em;color:#666">Target leaves:</em><br><span class="target-leaf-chip self">A.5.15 · communication_record</span></div></div>
+        </div>
+        
+      </div>
+    
 
   <div class="leaves">
     
