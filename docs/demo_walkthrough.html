@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ArionComply — Demo Walkthrough</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+  --fg: #1a1a1a;
+  --muted: #666;
+  --accent: #1c76fc;
+  --accent-soft: #eaf2ff;
+  --border: #e2e2e2;
+  --code-bg: #f5f5f7;
+  --mono: "SF Mono", Menlo, "Cascadia Code", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+body {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--fg);
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+h1 { font-size: 2.2em; margin: 0.2em 0 0.1em; letter-spacing: -0.02em; }
+h2 { font-size: 1.5em; margin: 1.8em 0 0.5em; padding-bottom: 0.3em;
+     border-bottom: 2px solid var(--border); letter-spacing: -0.01em; }
+h3 { font-size: 1.15em; margin: 1.4em 0 0.4em; color: var(--fg); }
+h4 { font-size: 1em; margin: 1em 0 0.3em; color: var(--muted);
+     text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
+.hero {
+  padding: 24px 28px;
+  background: var(--accent-soft);
+  border-radius: 8px;
+  margin: 24px 0 32px;
+  border-left: 4px solid var(--accent);
+}
+.hero p { margin: 0.4em 0; }
+.hero .subtitle {
+  color: var(--muted);
+  font-size: 0.88em;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.act {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin: 20px 0;
+  background: #fafafa;
+}
+.act h2 {
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.act .duration {
+  display: inline-block;
+  font-size: 0.72em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  margin-left: 8px;
+  vertical-align: middle;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.step {
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  margin: 12px 0;
+  background: #fff;
+  border-radius: 0 4px 4px 0;
+}
+.step h4 {
+  margin-top: 0;
+  color: var(--accent);
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+  font-size: 0.98em;
+}
+.step .say {
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+  margin-top: 10px;
+  color: #333;
+  font-style: italic;
+}
+.step .say::before {
+  content: "🗣 ";
+  font-style: normal;
+  color: var(--accent);
+  margin-right: 4px;
+}
+.step .point {
+  color: #333;
+}
+.step .point::before {
+  content: "👉 ";
+  margin-right: 2px;
+}
+code, .mono { font-family: var(--mono); font-size: 0.88em; }
+code {
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: #333;
+}
+pre {
+  background: var(--code-bg);
+  padding: 14px 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.85em;
+  line-height: 1.5;
+  border-left: 3px solid var(--accent);
+}
+kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  font-family: var(--mono);
+  font-size: 0.85em;
+  color: #333;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 12px 0;
+  font-size: 0.94em;
+}
+th, td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  background: var(--code-bg);
+  font-weight: 600;
+}
+tr:last-child td { border-bottom: none; }
+.badge {
+  display: inline-block;
+  font-size: 0.72em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin: 0 4px 0 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+a { color: var(--accent); }
+.muted { color: var(--muted); }
+.callout {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  background: #fffef2;
+  border-left: 3px solid #d4a017;
+}
+.callout strong { color: #806000; }
+.footer {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.88em;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+<h1>ArionComply — Demo Walkthrough</h1>
+<p class="subtitle">Engineering review · 15-minute end-to-end · 2026-07-27</p>
+<p>Concrete script covering all four surfaces + observability. Every step
+names what to click, what to say, and which architecture arc it
+demonstrates. Fallbacks at the bottom if something breaks.</p>
+<p style="margin-top:12px">Companion:
+<a href="architecture_brief.html">architecture_brief.html</a> —
+one-pager with datastore choices + breakthrough innovations.</p>
+</div>
+
+<h2>Pre-demo setup <span class="duration" style="background:#999">30 sec</span></h2>
+
+<div class="step">
+<h4>1. SSH tunnel from your workstation</h4>
+<pre>ssh -L 8001:127.0.0.1:8001 -L 16686:127.0.0.1:16686 -L 6006:127.0.0.1:6006 \
+    -i ~/.ssh/arioncomplySK.pem arionlabs@172.211.244.144</pre>
+</div>
+
+<div class="step">
+<h4>2. Ensure the docs server is running (on the VM)</h4>
+<pre>cd /data/arioncomply/docs && \
+  nohup python3 -m http.server 8001 --bind 127.0.0.1 > /tmp/docs_http.log 2>&amp;1 &amp;</pre>
+</div>
+
+<div class="step">
+<h4>3. Open the four browser tabs</h4>
+<ul>
+<li><a href="architecture_brief.html">http://localhost:8001/architecture_brief.html</a> — one-pager</li>
+<li><a href="http://localhost:8080/" target="_blank">http://localhost:8080/</a> — the SPA</li>
+<li><a href="http://localhost:16686/" target="_blank">http://localhost:16686/</a> — Jaeger (leave on "Find Traces" for <code>arioncomply-api</code>)</li>
+<li><a href="http://localhost:6006/" target="_blank">http://localhost:6006/</a> — Phoenix</li>
+</ul>
+</div>
+
+<div class="callout">
+<strong>Warm the caches</strong> — fire this once before the audience sees the chat.
+The first shot is 30s cold; subsequent 4-7s thanks to the Ship 45 posture cache.
+<pre>curl -s -X POST http://localhost:8080/api/v1/chat \
+  -H "X-API-Key: arion_dev_key_2026" -H "Content-Type: application/json" \
+  --max-time 60 -d '{"question":"our top NC findings?"}' > /dev/null</pre>
+</div>
+
+<div class="act">
+<h2>Act 1 — The architecture brief <span class="duration">60 sec</span></h2>
+
+<div class="step">
+<div class="point">Show <a href="architecture_brief.html"><code>architecture_brief.html</code></a>.
+Scroll to the ASCII diagram — point at the four layers: Surfaces → Case-file discipline
+→ Consensus → Role-aware graph.</div>
+<div class="say">This is a compliance program ledger, not another evidence repository.
+We track <em>where</em> evidence lives, its freshness, its ownership. Tenants keep
+sovereignty in the systems they already run — Odoo HR, Okta IAM, ServiceNow CMDB.
+Under the hood it's a cross-platform RAG stack purpose-built for compliance.
+Everything's traced end-to-end. Let me show you.</div>
+</div>
+</div>
+
+<div class="act">
+<h2>Act 2 — Chat <span class="duration">3 min</span></h2>
+<p class="muted">Demonstrates: <span class="badge">Case-file discipline (Ship 2')</span>
+<span class="badge">7-signal consensus (Ship 1)</span>
+<span class="badge">Role model (Ship 40)</span>
+<span class="badge">Chat persistence (Ship 46)</span></p>
+
+<div class="step">
+<h4>Query 1: "our top NC findings on access control?"</h4>
+<div class="point">Type in chat, hit Enter. Response ~3-4s (deterministic short-circuit).</div>
+<div class="say">This answer bypasses the LLM entirely. Posture data is authoritative —
+NC/OFI counts, cited refs, links back to the dashboard. Note the <code>[DRAFT]</code>
+tags on unconfirmed postures.</div>
+</div>
+
+<div class="step">
+<h4>Query 2: "how do we close the A.5.15 gap?"</h4>
+<div class="point">Response ~6-8s (LLM path via case-file).</div>
+<div class="say">The LLM gets a compact digest — query, posture, cited refs, cross-framework
+bridges — ~650 tokens vs the pre-Ship-2' 21k-token average. It composes prose, then a
+deterministic preservation-check verifies every required ref, <code>[DRAFT]</code> tag,
+and verdict prefix is present. Missing elements get appended in a footer — never rewriting
+LLM prose. The LLM cannot silently drop compliance-load-bearing facts.</div>
+</div>
+
+<div class="step">
+<h4>Query 3: "what about DPIAs?"</h4>
+<div class="point">Deictic follow-up — uses <code>last_entity</code> from prior turn.
+Classifier routes to <code>cross_framework</code>. Point at the bridges footer:
+"↳ Bridges to ISO 27001 for Art.35: ..."</div>
+<div class="say">This is the framework role model. GDPR is an <em>obligation</em> framework;
+ISO 27701 is an <em>extension</em> that DEMONSTRATES many GDPR articles; ISO 27001 is the
+<em>program</em> underneath. When you ask about DPIAs, we walk the DEMONSTRATES edges and
+cite both frameworks with proper role semantics.</div>
+</div>
+
+<div class="step">
+<h4>Click a chat-link → drill-in</h4>
+<div class="point">URL bar shows <code>#dashboard?control=A.5.15</code> — no page reload.
+Detail panel opens immediately with canonical title, engine verdict reason, per-leaf
+breakdown. Then click <strong>Chat</strong> nav back — conversation still there.</div>
+<div class="say">Deep-link into any control from chat. Chat state persists across
+navigation — localStorage-backed session_id means the server-side conversation context
+also survives page reload.</div>
+</div>
+</div>
+
+<div class="act">
+<h2>Act 3 — Dashboard <span class="duration">2 min</span></h2>
+<p class="muted">Demonstrates: <span class="badge">Framework role model</span>
+<span class="badge">DEMONSTRATES overlay</span>
+<span class="badge">Engine verdict computation</span></p>
+
+<div class="step">
+<h4>Point at the framework-tabbed heatmap</h4>
+<div class="point">ISO 27001 / ISO 27701 / GDPR tabs. Colours: red NC, amber OFI,
+green Comply, grey Not assessed.</div>
+<div class="say">This tenant is mid-cycle assessment — 88 NC, 12 OFI on ISO 27001.
+What you're looking at is a struggling tenant. The tool's job is to help them close
+gaps, not to make the numbers look green.</div>
+</div>
+
+<div class="step">
+<h4>Click a cell — say <code>A.5.34</code> (privacy protection, ISO 27001)</h4>
+<div class="point">Detail panel shows canonical title, obligation text, engine verdict
+reason ("0 of 4 leaves satisfied"), per-leaf breakdown with ✓/○ markers,
+<strong>cross-role neighbors</strong> section (ISO 27701 A.7.2.5 extension + Art.24 obligation).</div>
+<div class="say">The engine evaluates every curated multi-leaf spec. Here it says
+"0 of 4 leaves satisfied" — we see which specific leaves are missing evidence.
+The cross-role section shows the DEMONSTRATED_BY overlay: if we satisfy the ISO 27701
+extension leaves, this control's evidence auto-materialises.</div>
+</div>
+
+<div class="step">
+<h4>Point at cite freshness card / cascade KPIs (if any)</h4>
+<div class="say">If the tenant is using cited evidence — pointers into Odoo or Okta
+rather than uploaded docs — this card tracks verification cadence. Auditors want to
+know when evidence was last reconciled.</div>
+</div>
+</div>
+
+<div class="act">
+<h2>Act 4 — Documents <span class="duration">2 min</span></h2>
+<p class="muted">Demonstrates: <span class="badge">Extraction consensus (Ship 32-43)</span>
+<span class="badge">Two-view semantics (Ship 42)</span>
+<span class="badge">Evidence Package</span></p>
+
+<div class="step">
+<h4>Click Documents (or "Stage-1 review queue" nav)</h4>
+<div class="point">Empty queue — 0 pending items.</div>
+<div class="say">Fresh state. We cleared 340 findings this morning. Those came from
+repeated re-extractions of the same 5 baseline documents as we shipped extraction
+consensus improvements — Ship 40 (Phase 3 bypass for cross-framework), Ship 42
+(<code>evidence_group_id</code> dedup), Ship 43 (BM25 lexical signal), Ship 45 (N+1
+fix). Same evidence, better attribution.</div>
+</div>
+
+<div class="step">
+<h4>Click into an existing document → Evidence Package</h4>
+<div class="point">Markdown-rendered coverage summary: "Fully covered — 7 of 7
+required elements covered (100%)". Per-MUST breakdown. Guidance citations
+(ISO 27002 §5.15, etc.).</div>
+<div class="say">This is what an auditor sees for one document's coverage of one leaf.
+Every claim has a provenance. If you upload a docx or xlsx via our templates, we
+auto-approve the findings because the tenant authored them; anything the LLM extracts
+goes through Stage-1 HITL review first.</div>
+</div>
+
+<div class="step">
+<h4>Explain the two-view semantics briefly</h4>
+<div class="say">This is Ship 42's contribution. Engine reads one row per MUST for its
+<code>checklist_item_id = ANY(...)</code> query — needs N rows for N MUSTs to compute
+the verdict. Auditor UI wants 1 row per unique excerpt-plus-control-ref for a clean
+citation view. Same table, two views, via an <code>evidence_group_id</code> column
+stamped at write time and <code>DISTINCT ON</code> at read time. 60% reduction in
+queue visual size on this tenant.</div>
+</div>
+
+<div class="callout">
+<strong>Optional live re-extract</strong>: trigger a doc re-extract via the admin API
+(~30s). Meanwhile, switch to Jaeger and show the intake trace appearing in real time.
+Only if you're comfortable with the timing.
+</div>
+</div>
+
+<div class="act">
+<h2>Act 5 — Risk Register <span class="duration">1 min</span></h2>
+<p class="muted">Demonstrates: <span class="badge">Risk arc (Ship 14/15)</span>
+<span class="badge">DEMONSTRATES traversal reuse</span></p>
+
+<div class="step">
+<h4>Click Risks</h4>
+<div class="point">35 real risks, heatmap grid, treatment plans,
+<code>linked_controls</code> with role-coloured chips.</div>
+</div>
+
+<div class="step">
+<h4>Click into R002 (Client Data Contacts — social engineering)</h4>
+<div class="point">Full treatment plan (5 fields from ISO 27005 §8.6.1: rationale,
+resources, KPIs, constraints, cadence). Linked controls: <code>6.3</code> (program)
+alongside PIMS extensions. DEMONSTRATES panel (for obligation-linked risks).</div>
+<div class="say">The risks table existed in schema_v2 but was disconnected from the
+compliance graph. We wired it: linked_controls carry role, subject, and standard_display;
+obligation-linked risks show their program+extension demonstrators. That's the same
+DEMONSTRATES traversal from the framework role model, reused across a fifth product
+surface.</div>
+</div>
+</div>
+
+<div class="act">
+<h2>Act 6 — Observability <span class="duration">3 min</span></h2>
+<p class="muted">Demonstrates: <span class="badge">Dual-backend OTel (Ship 44)</span>
+<span class="badge">GenAI semconv</span>
+<span class="badge">N+1 fix (Ship 45)</span></p>
+
+<div class="step">
+<h4>Switch to Jaeger</h4>
+<div class="point">Service: <code>arioncomply-api</code>. Operation:
+<code>POST /api/v1/chat</code>. Find Traces. Click the most recent chat trace.</div>
+</div>
+
+<div class="step">
+<h4>Show the waterfall</h4>
+<div class="point">
+<ul>
+<li>Root: <code>POST /api/v1/chat</code> — full request</li>
+<li><code>classify</code> node — ~3s</li>
+<li><code>retrieve</code> node — ~3.5s (after Ship 45's N+1 fix; was 7.7s pre-fix)</li>
+<li>Inside retrieve: <code>arion.resolver.resolve</code>,
+<code>arion.resolver.vector_search</code>, <code>arion.resolver.graph_expand</code>,
+<code>arion.answer_augment.build_related_cards</code></li>
+<li>LLM call: <code>gen_ai.chat.rank_answer</code></li>
+</ul>
+</div>
+<div class="say">Every request is a trace. Every LangGraph node, every DB query, every
+LLM call. Auto-instrumentation via OpenInference for the LLM stack — traces conform
+to the OTel Semantic Conventions for GenAI, so they're portable to Grafana Tempo,
+Honeycomb, Langfuse, any OTel-native tool. Custom <code>arion.*</code> spans wrap
+our proprietary bits: consensus signals, engine verdict computation, case-file
+digest, preservation-check.</div>
+</div>
+
+<div class="step">
+<h4>Switch to Phoenix</h4>
+<div class="point">Click the same trace or a recent one. Open an LLM span — show the
+prompt, completion, model, tokens.</div>
+<div class="say">Phoenix is LLM-first. Same trace, different UI. See the actual prompt
+we sent, the completion, token counts, latency. This is with
+<code>OTEL_PRIVACY_LEVEL=debug</code> on this VM. Production or prod-like tenants run
+at <code>observability</code> tier — same span structure, no content attributes.</div>
+</div>
+
+<div class="step">
+<h4>Point out the 9-signal consensus (intake trace)</h4>
+<div class="point">Find an intake trace (POST to
+<code>/api/v1/admin/uploads/{id}/reextract</code>). Show
+<code>arion.consensus.run</code> → 9 signal spans + aggregate + arbitrate.</div>
+<div class="say">This is extraction. Nine signals: explicit refs, doc mappings,
+fingerprint keywords, semantic top-K, BM25 lexical, per-protocol scope, content
+shape penalty, semantic fit gate, evidence uniqueness. Candidates need corroboration
+to auto-accept. A bounded LLM arbiter adjudicates the middle band — cannot invent,
+cannot override auto-accept. 42% recall lift over the prior LLM-only pipeline; cross-
+framework findings surface directly.</div>
+</div>
+</div>
+
+<div class="act">
+<h2>Closing <span class="duration">30 sec</span></h2>
+
+<div class="step">
+<h4>Back to the architecture brief, scroll to "What's next"</h4>
+<div class="say">Near-term: profile <code>build_related_cards</code> deeper (still 4.5s
+on the LLM chat path), decompose fingerprint_keyword (7.8s in consensus), broader-doc
+eval beyond the 5 baseline docs. Strategic: default-ON consensus after eval, multi-tenant
+onboarding, external webhook subscriptions on the REST API. Everything shipped is in
+the memory dir — 40+ arc retrospectives — so anyone joining the team can walk the same
+path we did.</div>
+</div>
+</div>
+
+<h2>Fallbacks if something breaks</h2>
+
+<table>
+<thead><tr><th>Symptom</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td>Chat takes 30 seconds on first shot</td>
+    <td>You forgot to warm the cache. Fire the pre-demo <code>curl</code> command,
+        wait ~30s, then subsequent chats are 4-7s. Recover by explaining "posture
+        cache misses cost — see Ship 45'.c retro".</td></tr>
+<tr><td>Jaeger UI empty</td>
+    <td><code>sudo systemctl restart arioncomply-jaeger</code> — wait ~5s, refresh.</td></tr>
+<tr><td>Phoenix UI empty</td>
+    <td><code>sudo systemctl restart arioncomply-phoenix</code> — wait ~10s, refresh.</td></tr>
+<tr><td>API returns 500</td>
+    <td>Check <code>/tmp/api.log</code>. If <em>RAG pipeline failed</em>, verify
+        Chroma is on port 8000: <code>lsof -i :8000</code> should show a
+        <code>chroma</code> process, not <code>python3 http.server</code>.
+        Restart Chroma:
+        <code>nohup /home/arionlabs/.local/bin/chroma run --host 127.0.0.1
+        --port 8000 --path /data/arioncomply/chroma_db > /tmp/chroma.log 2>&amp;1 &amp;</code></td></tr>
+<tr><td>Chat conversation gone after reload</td>
+    <td>Verify <kbd>window.ARION_JS_VERSION</kbd> in browser console prints
+        <code>2026-07-26-chat-persistence</code>. If not, hard-reload
+        (<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> or
+        <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd>).</td></tr>
+<tr><td>Dashboard shows nothing</td>
+    <td>API key: check the top-right corner has the correct key filled in
+        (default: <code>arion_dev_key_2026</code>). Click Connect.</td></tr>
+</tbody>
+</table>
+
+<div class="footer">
+<p><strong>ArionComply demo walkthrough</strong> · 2026-07-27</p>
+<p>Companion: <a href="architecture_brief.html">architecture_brief.html</a> ·
+Repository: <a href="https://github.com/jmkamula/RAG">github.com/jmkamula/RAG</a></p>
+<p>Arc retrospectives: <code>/data/arioncomply/docs/memory/</code></p>
+</div>
+
+</body>
+</html>
