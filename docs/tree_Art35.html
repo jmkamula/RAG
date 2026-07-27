@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Art.35 — Data protection impact assessment</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+  --fg: #1a1a1a;
+  --muted: #666;
+  --accent: #1c76fc;
+  --accent-soft: #eaf2ff;
+  --leaf-fill: #f0f7ea;
+  --leaf-border: #6aa84f;
+  --must-fill: #fff;
+  --must-border: #b0b0b0;
+  --should-fill: #fafafa;
+  --should-border: #d0d0d0;
+  --should-fg: #555;
+  --border: #d0d0d0;
+  --line: #999;
+  --code-bg: #f5f5f7;
+  --mono: "SF Mono", Menlo, "Cascadia Code", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--fg);
+  margin: 0;
+  padding: 24px 32px;
+  background: #fafafa;
+}
+h1 { font-size: 1.8em; margin: 0 0 8px; letter-spacing: -0.02em; }
+.subtitle { color: var(--muted); font-size: 0.85em; margin-bottom: 24px; }
+.legend {
+  display: flex;
+  gap: 20px;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 16px 0 32px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1.5px solid;
+}
+
+/* ── Control (root) ─────────────────────────────────────────────────── */
+.tree { padding: 20px 0; }
+.control-node {
+  background: var(--accent);
+  color: #fff;
+  padding: 16px 22px;
+  border-radius: 8px;
+  margin: 0 auto 40px;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(28, 118, 252, 0.15);
+}
+.control-node .ref {
+  font-family: var(--mono);
+  font-size: 1.3em;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.control-node .title {
+  font-size: 1.05em;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.control-node .std {
+  font-size: 0.8em;
+  opacity: 0.85;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+.control-node .obligation {
+  font-size: 0.85em;
+  font-weight: 400;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.25);
+  text-align: left;
+  color: rgba(255,255,255,0.95);
+  font-style: italic;
+}
+.control-node .spec {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  margin-top: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Connecting line control → leaves ───────────────────────────────── */
+.control-to-leaves {
+  position: relative;
+  height: 30px;
+  margin-top: -20px;
+}
+.control-to-leaves::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+
+/* ── Leaves row ─────────────────────────────────────────────────────── */
+.leaves {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 8px;
+}
+.leaf {
+  background: var(--leaf-fill);
+  border: 2px solid var(--leaf-border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  position: relative;
+}
+.leaf::before {
+  /* connecting bar from control */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  width: 2px;
+  height: 10px;
+  background: var(--line);
+}
+.leaf-header {
+  border-bottom: 1px dashed var(--leaf-border);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+.leaf-id {
+  font-family: var(--mono);
+  font-size: 0.72em;
+  color: #4a7f37;
+  word-break: break-all;
+}
+.leaf-title {
+  font-weight: 600;
+  font-size: 1em;
+  color: #2c5820;
+  margin-top: 3px;
+}
+.leaf-meta {
+  font-size: 0.72em;
+  color: var(--muted);
+  margin-top: 4px;
+  font-family: var(--mono);
+}
+
+/* ── MUSTs + SHOULDs ────────────────────────────────────────────────── */
+.checklist-group {
+  margin-top: 10px;
+}
+.group-label {
+  font-size: 0.7em;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.ci {
+  padding: 6px 10px;
+  margin: 4px 0;
+  border-radius: 3px;
+  font-size: 0.85em;
+  line-height: 1.35;
+}
+.ci-must {
+  background: var(--must-fill);
+  border-left: 3px solid var(--must-border);
+}
+.ci-should {
+  background: var(--should-fill);
+  border-left: 3px dashed var(--should-border);
+  color: var(--should-fg);
+}
+.ci-id {
+  font-family: var(--mono);
+  font-size: 0.75em;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 2px;
+}
+.ci-text { display: block; }
+
+/* ── Fingerprints ───────────────────────────────────────────────────── */
+.fp-block {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--leaf-border);
+}
+.fp-group-label {
+  font-size: 0.7em;
+  color: #7a5e00;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.fp-must {
+  margin: 4px 0 8px;
+  padding: 6px 10px;
+  background: #fffbe6;
+  border-left: 3px solid #e0b74c;
+  border-radius: 3px;
+  font-size: 0.82em;
+}
+.fp-must-id {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  color: #7a5e00;
+  display: block;
+  margin-bottom: 4px;
+}
+.fp-sets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.fp-tokens {
+  display: inline-flex;
+  gap: 3px;
+  padding: 2px 6px;
+  background: #fff;
+  border: 1px solid #e0b74c;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.75em;
+  color: #5c4200;
+}
+.fp-token {
+  padding: 0 2px;
+}
+.fp-token + .fp-token::before {
+  content: "+";
+  color: #b58a20;
+  margin-right: 3px;
+}
+.fp-empty {
+  font-size: 0.75em;
+  color: var(--muted);
+  font-style: italic;
+  padding: 4px 10px;
+}
+
+/* ── Chat + Intake consensus panels ─────────────────────────────────── */
+.consensus-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 0 auto 32px;
+  max-width: 1000px;
+}
+.consensus-panel {
+  border-radius: 6px;
+  padding: 14px 18px;
+  background: #fff;
+}
+.consensus-panel.chat {
+  border: 2px solid #7a5cbe;
+  background: #f4f0fa;
+}
+.consensus-panel.intake {
+  border: 2px solid #cc7a1a;
+  background: #fdf5eb;
+}
+.consensus-title {
+  font-size: 0.85em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 4px;
+}
+.consensus-panel.chat .consensus-title { color: #5c3ea4; }
+.consensus-panel.intake .consensus-title { color: #a05c15; }
+.consensus-sub {
+  font-size: 0.75em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.artifact {
+  margin: 6px 0 10px;
+  padding: 8px 10px;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #d0d0d0;
+}
+.artifact-label {
+  font-size: 0.68em;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.artifact code, .artifact .mono {
+  font-size: 0.82em;
+}
+.pattern-row {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  padding: 3px 0;
+}
+.qtype-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.7em;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #efe6fa;
+  color: #5c3ea4;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.ref-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72em;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #eaf2ff;
+  color: var(--accent);
+  font-weight: 600;
+}
+.ref-badge.self {
+  background: var(--accent);
+  color: #fff;
+}
+.tokens-chip {
+  display: inline-flex;
+  gap: 3px;
+  padding: 2px 6px;
+  background: #fff;
+  border: 1px solid #cc7a1a;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.75em;
+  color: #6b3f0a;
+  margin: 2px 3px 2px 0;
+}
+.tokens-chip .fp-token + .fp-token::before {
+  color: #b58a20;
+}
+.target-leaf-chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72em;
+  padding: 2px 6px;
+  background: #f0f7ea;
+  border: 1px solid var(--leaf-border);
+  border-radius: 3px;
+  color: #2c5820;
+  margin: 2px 3px 2px 0;
+}
+.target-leaf-chip.self {
+  background: var(--leaf-border);
+  color: #fff;
+}
+.empty-panel {
+  font-size: 0.8em;
+  color: var(--muted);
+  font-style: italic;
+  padding: 10px 4px;
+}
+
+/* ── Cross-framework bridges panel ──────────────────────────────────── */
+.bridges-panel {
+  border: 2px solid #4a90a4;
+  background: #eaf5f9;
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 0 auto 32px;
+  max-width: 1000px;
+}
+.bridges-panel .consensus-title { color: #2c5866; }
+.bridges-dir {
+  margin: 8px 0;
+}
+.bridges-dir-label {
+  font-size: 0.72em;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.bridge-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 10px;
+  margin: 4px 0;
+  background: #fff;
+  border-radius: 4px;
+  border-left: 3px solid #4a90a4;
+  font-size: 0.85em;
+}
+.edge-type {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: #d4e8ef;
+  color: #2c5866;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  min-width: 100px;
+  text-align: center;
+}
+.bridge-target {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--fg);
+}
+.bridge-std {
+  font-size: 0.72em;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+.bridge-rationale {
+  color: #444;
+  font-style: italic;
+  font-size: 0.85em;
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ── Signal weights cheatsheet ──────────────────────────────────────── */
+.weights-block {
+  background: #f5f5f7;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 32px auto;
+  max-width: 1000px;
+}
+.weights-title {
+  font-size: 0.9em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #333;
+  margin: 0 0 12px;
+}
+.weights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.weight-stack h4 {
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 8px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+}
+.weight-row {
+  display: grid;
+  grid-template-columns: 120px 60px 1fr;
+  gap: 8px;
+  align-items: baseline;
+  padding: 4px 0;
+  font-size: 0.85em;
+}
+.weight-name {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--fg);
+}
+.weight-val {
+  font-family: var(--mono);
+  font-weight: 700;
+  text-align: right;
+}
+.weight-val.pos { color: #0f7b3a; }
+.weight-val.neg { color: #b0303f; }
+.weight-val.dyn { color: #7a5cbe; }
+.weight-note {
+  color: var(--muted);
+  font-size: 0.82em;
+  font-style: italic;
+}
+.thresh-row {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  font-size: 0.82em;
+  color: #555;
+  font-family: var(--mono);
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────── */
+.footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.82em;
+  text-align: center;
+}
+code {
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.85em;
+}
+a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<h1>Art.35 — Data protection impact assessment</h1>
+<p class="subtitle">GDPR (EU 2016/679) · curation-graph view · 4 leaves · 22 MUSTs · 4 SHOULDs</p>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--accent);border-color:var(--accent)"></span> Control (RequirementNode)</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--leaf-fill);border-color:var(--leaf-border)"></span> Leaf (EvidenceRequirement)</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--must-fill);border-color:var(--must-border);border-style:solid"></span> MUST (mandatory)</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--should-fill);border-color:var(--should-border);border-style:dashed"></span> SHOULD (recommended)</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#fffbe6;border-color:#e0b74c"></span> Fingerprint token-set (extraction keyword catalog)</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#f4f0fa;border-color:#7a5cbe"></span> Chat consensus artifact</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#fdf5eb;border-color:#cc7a1a"></span> Intake consensus artifact</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#eaf5f9;border-color:#4a90a4"></span> Cross-framework bridge</div>
+</div>
+
+<div class="tree">
+  <div class="control-node">
+    <div class="ref">Art.35</div>
+    <div class="title">Data protection impact assessment</div>
+    <div class="std">GDPR (EU 2016/679)</div>
+    
+    <div class="spec">Spec op=ALL · requires ALL 4 leaves</div>
+  </div>
+
+  <div class="control-to-leaves"></div>
+
+  
+      <div class="consensus-row">
+        
+        <div class="consensus-panel chat">
+          <div class="consensus-title">💬 Chat consensus — how queries route here</div>
+          <div class="consensus-sub">Signal C (curator-authored lexicon). Top-tier weight 1.00 —
+            these deterministically pin the resolved ref.</div>
+          <div class="empty-panel">No CLEAR_INTENT_PHRASES or DOCUMENT_TOPIC_MAP entries route to this control. Chat falls back to Signal B (explicit ref) + Signal A (Chroma semantic) + LLM classifier.</div>
+        </div>
+        
+        
+        <div class="consensus-panel intake">
+          <div class="consensus-title">📄 Intake consensus — how docs route here</div>
+          <div class="consensus-sub">doc_mappings (filename + body fingerprints → target leaves) run BEFORE
+            the 9-signal extractor kicks in, tightening scope.</div>
+          <div class="artifact"><div class="artifact-label">doc_mapping · <code>doc.GDPR_2016_679.Art_35.dpia_procedure</code></div><div><em style="font-size:0.72em;color:#666">Filename fingerprints:</em><br><span class="tokens-chip"><span class="fp-token">impact</span><span class="fp-token">assessment</span><span class="fp-token">procedure</span></span><span class="tokens-chip"><span class="fp-token">impact</span><span class="fp-token">assessment</span><span class="fp-token">proc</span></span><span class="tokens-chip"><span class="fp-token">data</span><span class="fp-token">protection</span><span class="fp-token">impact</span></span><span class="tokens-chip"><span class="fp-token">data</span><span class="fp-token">protection</span></span></div><div style="margin-top:6px"><em style="font-size:0.72em;color:#666">Target leaves:</em><br><span class="target-leaf-chip self">Art.35 · procedure</span></div></div><div class="artifact"><div class="artifact-label">doc_mapping · <code>doc.GDPR_2016_679.Art_35.dpia_program_review</code></div><div><em style="font-size:0.72em;color:#666">Filename fingerprints:</em><br><span class="tokens-chip"><span class="fp-token">dpia</span><span class="fp-token">program</span><span class="fp-token">review</span></span><span class="tokens-chip"><span class="fp-token">dpia</span><span class="fp-token">program</span></span></div><div style="margin-top:6px"><em style="font-size:0.72em;color:#666">Target leaves:</em><br><span class="target-leaf-chip self">Art.35 · review_record</span></div></div><div class="artifact"><div class="artifact-label">doc_mapping · <code>doc.GDPR_2016_679.Art_35.applicable_scope</code></div><div><em style="font-size:0.72em;color:#666">Filename fingerprints:</em><br><span class="tokens-chip"><span class="fp-token">applicable</span><span class="fp-token">dpia</span><span class="fp-token">scope</span></span><span class="tokens-chip"><span class="fp-token">applicable</span><span class="fp-token">dpia</span></span></div><div style="margin-top:6px"><em style="font-size:0.72em;color:#666">Target leaves:</em><br><span class="target-leaf-chip self">Art.35 · scope_note</span></div></div><div class="artifact"><div class="artifact-label">workbook_mapping · <code>workbook.GDPR_2016_679.Art_35.dpia_register</code></div><div class="mono" style="font-size:0.75em;color:#666">gdpr_2016_679_art_35_dpia_register.yaml</div></div><div class="artifact"><div class="artifact-label">workbook_mapping · <code>workbook.gdpr.Art_25.default_settings_record</code></div><div class="mono" style="font-size:0.75em;color:#666">default_settings_record.yaml</div></div>
+        </div>
+        
+      </div>
+    
+
+  
+        <div class="bridges-panel">
+          <div class="consensus-title">🔗 Cross-framework bridges — role-model edges</div>
+          <div class="consensus-sub">Neo4j curated edges (Ship 40 framework role model + Ship 15 rationale
+            text). Drives DEMONSTRATES posture propagation and cross-framework citation footers in chat.</div>
+          
+        <div class="bridges-dir">
+          <div class="bridges-dir-label">Outbound from Art.35 (4)</div>
+          <div class="bridge-row"><span class="edge-type">IMPLEMENTS</span><span class="bridge-target">6.1.2</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">Information security risk assessment is the ISO framework that most closely aligns with DPIA methodology — Art.35 requires systematic assessment of risks to rights and freedoms, wh</span></div><div class="bridge-row"><span class="edge-type">IMPLEMENTS</span><span class="bridge-target">A.5.8</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">Information security in project management must include DPIA as a required gate for projects involving high-risk processing.</span></div><div class="bridge-row"><span class="edge-type">SUPPORTS</span><span class="bridge-target">A.5.31</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">Legal requirements control must include DPIA obligations — identifying when a DPIA is legally required (profiling, systematic monitoring, large-scale special category processing).</span></div><div class="bridge-row"><span class="edge-type">SUPPORTS</span><span class="bridge-target">A.8.25</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">Secure development lifecycle must integrate DPIA as a mandatory step for new systems processing personal data at high risk.</span></div>
+        </div>
+        
+          
+        <div class="bridges-dir">
+          <div class="bridges-dir-label">Inbound to Art.35 (15)</div>
+          <div class="bridge-row"><span class="edge-type">DEMONSTRATES</span><span class="bridge-target">B.8.2.1</span><span class="bridge-std">(ISO27701)</span><span class="bridge-rationale">27701 B.8.2.1 covers Art.35.1 processor DPIA support obligation.</span></div><div class="bridge-row"><span class="edge-type">DEMONSTRATES</span><span class="bridge-target">8.3</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">ISMS 8.3 information-security risk treatment executes the mitigations Art.35 DPIA identifies for PII-processing risks.</span></div><div class="bridge-row"><span class="edge-type">DEMONSTRATES</span><span class="bridge-target">8.2</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">ISMS 8.2 information-security risk assessment is the operational counterpart of GDPR Art.35 DPIA at the security-risk layer.</span></div><div class="bridge-row"><span class="edge-type">DEMONSTRATES</span><span class="bridge-target">6.1.3</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">ISMS 6.1.3 risk treatment overlaps materially with GDPR Art.35 DPIA outputs — both document risk decisions + mitigating controls.</span></div><div class="bridge-row"><span class="edge-type">DEMONSTRATES</span><span class="bridge-target">A.7.2.5</span><span class="bridge-std">(ISO27701)</span><span class="bridge-rationale">27701 A.7.2.5 is the certifiable operationalisation of GDPR Art.35 Data Protection Impact Assessment — triggers, assessment scope, mitigations, DPO opinion.</span></div><div class="bridge-row"><span class="edge-type">DEMONSTRATES</span><span class="bridge-target">A.8.25</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">Secure development lifecycle must integrate DPIA as a mandatory step for new systems processing personal data at high risk.</span></div><div class="bridge-row"><span class="edge-type">DEMONSTRATES</span><span class="bridge-target">A.5.8</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">Information security in project management must include DPIA as a required gate for projects involving high-risk processing.</span></div><div class="bridge-row"><span class="edge-type">DEMONSTRATES</span><span class="bridge-target">A.5.31</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">Legal requirements control must include DPIA obligations — identifying when a DPIA is legally required (profiling, systematic monitoring, large-scale special category processing).</span></div><div class="bridge-row"><span class="edge-type">DEMONSTRATES</span><span class="bridge-target">6.1.2</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">Information security risk assessment is the ISO framework that most closely aligns with DPIA methodology — Art.35 requires systematic assessment of risks to rights and freedoms, wh</span></div><div class="bridge-row"><span class="edge-type">IMPLEMENTS</span><span class="bridge-target">6.1.2</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">Information security risk assessment is the ISO framework that most closely aligns with DPIA methodology — Art.35 requires systematic assessment of risks to rights and freedoms, wh</span></div><div class="bridge-row"><span class="edge-type">IMPLEMENTS</span><span class="bridge-target">A.5.8</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">Information security in project management must include DPIA as a required gate for projects involving high-risk processing.</span></div><div class="bridge-row"><span class="edge-type">IMPLEMENTS</span><span class="bridge-target">A.7.2.5</span><span class="bridge-std">(ISO27701)</span><span class="bridge-rationale">27701 A.7.2.5 is the certifiable operationalisation of GDPR Art.35 Data Protection Impact Assessment — triggers, assessment scope, mitigations, DPO opinion.</span></div><div class="bridge-row"><span class="edge-type">IMPLEMENTS</span><span class="bridge-target">B.8.2.1</span><span class="bridge-std">(ISO27701)</span><span class="bridge-rationale">27701 B.8.2.1 covers Art.35.1 processor DPIA support obligation.</span></div><div class="bridge-row"><span class="edge-type">SUPPORTS</span><span class="bridge-target">A.5.31</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">Legal requirements control must include DPIA obligations — identifying when a DPIA is legally required (profiling, systematic monitoring, large-scale special category processing).</span></div><div class="bridge-row"><span class="edge-type">SUPPORTS</span><span class="bridge-target">A.8.25</span><span class="bridge-std">(ISO27001)</span><span class="bridge-rationale">Secure development lifecycle must integrate DPIA as a mandatory step for new systems processing personal data at high risk.</span></div>
+        </div>
+        
+        </div>
+        
+
+  <div class="leaves">
+    
+        <div class="leaf">
+          <div class="leaf-header">
+            <div class="leaf-id">req:Art.35:applicable_scope</div>
+            <div class="leaf-title">Applicable DPIA Scope</div>
+            <div class="leaf-meta">type=scope_note · freshness=none</div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">MUSTs (4)</div>
+            <div class="ci ci-must"><span class="ci-id">item:Art.35:scope_mandatory</span><span class="ci-text">Art.35.3 mandatory categories (a-c) operationalised — systematic evaluation / large-scale special category / large-scale systematic public monitoring</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:scope_org_criteria</span><span class="ci-text">Org&#x27;s own &#x27;likely high risk&#x27; criteria (typically EDPB Guidelines 248 nine-criteria approach: scoring with ≥2 of 9 = DPIA required)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:scope_sa_list</span><span class="ci-text">Lead SA Art.35.4 published list integrated</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:scope_white_list</span><span class="ci-text">Art.35.5 SA white-list activities (NOT requiring DPIA) considered</span></div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">SHOULDs (1)</div>
+            <div class="ci ci-should"><span class="ci-id">item:Art.35:scope_change_drivers</span><span class="ci-text">Trigger list (new product/feature launch, processing-pattern shift, SA list update)</span></div>
+          </div>
+          
+          <div class="fp-block">
+            <div class="fp-group-label">FINGERPRINTS (4/5 MUSTs+SHOULDs covered)</div>
+            <div class="fp-must"><span class="fp-must-id">item:Art.35:scope_mandatory</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">mandatory</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">mandatory</span><span class="fp-token">categories</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">mandatory</span><span class="fp-token">categories</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">mandatory</span><span class="fp-token">categories</span><span class="fp-token">operationalised</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">categories</span><span class="fp-token">operationalised</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">categories</span><span class="fp-token">operationalised</span><span class="fp-token">systematic</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">operationalised</span><span class="fp-token">systematic</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">operationalised</span><span class="fp-token">systematic</span><span class="fp-token">evaluation</span><span class="fp-token">protection</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:scope_org_criteria</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">org</span><span class="fp-token">criteria</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">org</span><span class="fp-token">own</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">org</span><span class="fp-token">own</span><span class="fp-token">likely</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">own</span><span class="fp-token">likely</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">own</span><span class="fp-token">likely</span><span class="fp-token">high</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">likely</span><span class="fp-token">high</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">likely</span><span class="fp-token">high</span><span class="fp-token">risk</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">high</span><span class="fp-token">risk</span><span class="fp-token">protection</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:scope_sa_list</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">lead</span><span class="fp-token">art</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">lead</span><span class="fp-token">art</span><span class="fp-token">published</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">published</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">published</span><span class="fp-token">integrated</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">published</span><span class="fp-token">integrated</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">in</span><span class="fp-token">scope</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">scope</span><span class="fp-token">includes</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">applicable</span><span class="fp-token">to</span><span class="fp-token">protection</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:scope_white_list</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">white</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">white</span><span class="fp-token">activities</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">white</span><span class="fp-token">activities</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">white</span><span class="fp-token">activities</span><span class="fp-token">not</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">activities</span><span class="fp-token">not</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">activities</span><span class="fp-token">not</span><span class="fp-token">requiring</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">not</span><span class="fp-token">requiring</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">not</span><span class="fp-token">requiring</span><span class="fp-token">dpia</span><span class="fp-token">protection</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:scope_change_drivers</span><span class="fp-empty">no fingerprint entry</span></div>
+          </div>
+        
+        </div>
+        
+
+        <div class="leaf">
+          <div class="leaf-header">
+            <div class="leaf-id">req:Art.35:dpia_procedure</div>
+            <div class="leaf-title">Data Protection Impact Assessment Procedure</div>
+            <div class="leaf-meta">type=procedure · freshness=none</div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">MUSTs (6)</div>
+            <div class="ci ci-must"><span class="ci-id">item:Art.35:art36_escalation</span><span class="ci-text">Art.36 prior-consultation escalation — when residual high risk remains, escalate to SA</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:content_minimum</span><span class="ci-text">Minimum content per Art.35.7 (systematic description + necessity/proportionality + risks + measures to address)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:dpo_advice</span><span class="ci-text">DPO advice mandatory (Art.35.2) — DPO consulted during DPIA, advice recorded</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:review_trigger</span><span class="ci-text">Review trigger — DPIA reviewed when processing risk changes (Art.35.11)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:subject_consultation</span><span class="ci-text">Subject consultation considered (Art.35.9) — where appropriate, views of subjects/representatives sought</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:trigger_criteria</span><span class="ci-text">Trigger criteria — Art.35.3 mandatory cases (systematic monitoring / special-category large-scale / public-area large-scale monitoring) PLUS SA-published list + sectoral guidance</span></div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">SHOULDs (1)</div>
+            <div class="ci ci-should"><span class="ci-id">item:Art.35:proc_owner</span><span class="ci-text">Named owner (DPO)</span></div>
+          </div>
+          
+          <div class="fp-block">
+            <div class="fp-group-label">FINGERPRINTS (6/7 MUSTs+SHOULDs covered)</div>
+            <div class="fp-must"><span class="fp-must-id">item:Art.35:art36_escalation</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">Art.36</span></span><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">36</span><span class="fp-token">prior</span><span class="fp-token">consultation</span></span><span class="fp-tokens"><span class="fp-token">residual</span><span class="fp-token">high</span><span class="fp-token">risk</span><span class="fp-token">escalate</span><span class="fp-token">sa</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:content_minimum</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">Art.35.7</span></span><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">35</span><span class="fp-token">7</span><span class="fp-token">content</span></span><span class="fp-tokens"><span class="fp-token">systematic</span><span class="fp-token">description</span><span class="fp-token">dpia</span></span><span class="fp-tokens"><span class="fp-token">necessity</span><span class="fp-token">proportionality</span><span class="fp-token">dpia</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">measures</span><span class="fp-token">address</span><span class="fp-token">risk</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:dpo_advice</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">Art.35.2</span></span><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">35</span><span class="fp-token">2</span><span class="fp-token">dpo</span><span class="fp-token">advice</span></span><span class="fp-tokens"><span class="fp-token">dpo</span><span class="fp-token">consulted</span><span class="fp-token">during</span><span class="fp-token">dpia</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">dpo</span><span class="fp-token">advice</span><span class="fp-token">recorded</span></span><span class="fp-tokens"><span class="fp-token">pims</span><span class="fp-token">manager</span><span class="fp-token">reviews</span><span class="fp-token">dpia</span></span><span class="fp-tokens"><span class="fp-token">dpo</span><span class="fp-token">dpia</span><span class="fp-token">review</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">approved</span></span><span class="fp-tokens"><span class="fp-token">dpo</span><span class="fp-token">dpia</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:review_trigger</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">Art.35.11</span></span><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">35</span><span class="fp-token">11</span><span class="fp-token">review</span><span class="fp-token">trigger</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">processing</span><span class="fp-token">risk</span><span class="fp-token">change</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">refreshed</span><span class="fp-token">when</span><span class="fp-token">changes</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:subject_consultation</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">Art.35.9</span></span><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">35</span><span class="fp-token">9</span><span class="fp-token">subject</span><span class="fp-token">consultation</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">subject</span><span class="fp-token">views</span><span class="fp-token">sought</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">representative</span><span class="fp-token">consulted</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:trigger_criteria</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">Art.35.3</span></span><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">35</span><span class="fp-token">3</span><span class="fp-token">mandatory</span><span class="fp-token">cases</span></span><span class="fp-tokens"><span class="fp-token">systematic</span><span class="fp-token">monitoring</span><span class="fp-token">dpia</span></span><span class="fp-tokens"><span class="fp-token">special</span><span class="fp-token">category</span><span class="fp-token">large</span><span class="fp-token">scale</span><span class="fp-token">dpia</span></span><span class="fp-tokens"><span class="fp-token">public</span><span class="fp-token">area</span><span class="fp-token">dpia</span></span><span class="fp-tokens"><span class="fp-token">mandatory</span><span class="fp-token">dpia</span><span class="fp-token">trigger</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">trigger</span></span><span class="fp-tokens"><span class="fp-token">high</span><span class="fp-token">risk</span><span class="fp-token">trigger</span></span><span class="fp-tokens"><span class="fp-token">trigger</span><span class="fp-token">identified</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:proc_owner</span><span class="fp-empty">no fingerprint entry</span></div>
+          </div>
+        
+        </div>
+        
+
+        <div class="leaf">
+          <div class="leaf-header">
+            <div class="leaf-id">req:Art.35:dpia_program_review</div>
+            <div class="leaf-title">DPIA Program Review</div>
+            <div class="leaf-meta">type=review_record · freshness=365d</div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">MUSTs (6)</div>
+            <div class="ci ci-must"><span class="ci-id">item:Art.35:rev_advice_quality</span><span class="ci-text">DPO-advice quality sample — advice substantive, not rubber-stamp</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:rev_art36_audit</span><span class="ci-text">Art.36 escalation audit — residual-high-risk DPIAs escalated to SA where required</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:rev_coverage</span><span class="ci-text">Coverage check — every in-scope activity has a current DPIA OR documented Art.35.5 white-list justification</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:rev_date</span><span class="ci-text">Review date within the planned interval</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:rev_review_cadence</span><span class="ci-text">Review-cadence audit — DPIAs refreshed per Art.35.11 when processing changed</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:rev_reviewer</span><span class="ci-text">Reviewer identity (DPO + executive sponsor + lead privacy engineer)</span></div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">SHOULDs (1)</div>
+            <div class="ci ci-should"><span class="ci-id">item:Art.35:rev_next_date</span><span class="ci-text">Next planned review date stated</span></div>
+          </div>
+          
+          <div class="fp-block">
+            <div class="fp-group-label">FINGERPRINTS (6/7 MUSTs+SHOULDs covered)</div>
+            <div class="fp-must"><span class="fp-must-id">item:Art.35:rev_advice_quality</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">advice</span><span class="fp-token">quality</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">dpo</span><span class="fp-token">advice</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">dpo</span><span class="fp-token">advice</span><span class="fp-token">quality</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">advice</span><span class="fp-token">quality</span><span class="fp-token">sample</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">quality</span><span class="fp-token">sample</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">quality</span><span class="fp-token">sample</span><span class="fp-token">advice</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">sample</span><span class="fp-token">advice</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">sample</span><span class="fp-token">advice</span><span class="fp-token">substantive</span><span class="fp-token">protection</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:rev_art36_audit</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">art36</span><span class="fp-token">audit</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">escalation</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">art</span><span class="fp-token">escalation</span><span class="fp-token">audit</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">escalation</span><span class="fp-token">audit</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">escalation</span><span class="fp-token">audit</span><span class="fp-token">residual</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">audit</span><span class="fp-token">residual</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">audit</span><span class="fp-token">residual</span><span class="fp-token">high</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">residual</span><span class="fp-token">high</span><span class="fp-token">protection</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:rev_coverage</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">coverage</span><span class="fp-token">check</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">coverage</span><span class="fp-token">check</span><span class="fp-token">every</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">check</span><span class="fp-token">every</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">check</span><span class="fp-token">every</span><span class="fp-token">scope</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">every</span><span class="fp-token">scope</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">every</span><span class="fp-token">scope</span><span class="fp-token">activity</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">scope</span><span class="fp-token">activity</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">scope</span><span class="fp-token">activity</span><span class="fp-token">has</span><span class="fp-token">protection</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:rev_date</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">review</span><span class="fp-token">date</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">review</span><span class="fp-token">date</span><span class="fp-token">within</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">date</span><span class="fp-token">within</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">date</span><span class="fp-token">within</span><span class="fp-token">planned</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">within</span><span class="fp-token">planned</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">within</span><span class="fp-token">planned</span><span class="fp-token">interval</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">planned</span><span class="fp-token">interval</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">per</span><span class="fp-token">revocation</span><span class="fp-token">protection</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:rev_review_cadence</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">review</span><span class="fp-token">cadence</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">review</span><span class="fp-token">cadence</span><span class="fp-token">audit</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">cadence</span><span class="fp-token">audit</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">cadence</span><span class="fp-token">audit</span><span class="fp-token">dpias</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">audit</span><span class="fp-token">dpias</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">audit</span><span class="fp-token">dpias</span><span class="fp-token">refreshed</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">dpias</span><span class="fp-token">refreshed</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">dpias</span><span class="fp-token">refreshed</span><span class="fp-token">art</span><span class="fp-token">protection</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:rev_reviewer</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">reviewer</span><span class="fp-token">identity</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">reviewer</span><span class="fp-token">identity</span><span class="fp-token">dpo</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">identity</span><span class="fp-token">dpo</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">identity</span><span class="fp-token">dpo</span><span class="fp-token">executive</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">dpo</span><span class="fp-token">executive</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">dpo</span><span class="fp-token">executive</span><span class="fp-token">sponsor</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">executive</span><span class="fp-token">sponsor</span><span class="fp-token">protection</span></span><span class="fp-tokens"><span class="fp-token">executive</span><span class="fp-token">sponsor</span><span class="fp-token">lead</span><span class="fp-token">protection</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:rev_next_date</span><span class="fp-empty">no fingerprint entry</span></div>
+          </div>
+        
+        </div>
+        
+
+        <div class="leaf">
+          <div class="leaf-header">
+            <div class="leaf-id">req:Art.35:dpia_register</div>
+            <div class="leaf-title">DPIA Register</div>
+            <div class="leaf-meta">type=register · freshness=365d</div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">MUSTs (6)</div>
+            <div class="ci ci-must"><span class="ci-id">item:Art.35:reg_dpia_id</span><span class="ci-text">Per-row DPIA identifier</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:reg_dpo_advice_date</span><span class="ci-text">Per-row DPO advice date + summary</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:reg_outcome</span><span class="ci-text">Per-row outcome (proceed / mitigate-then-proceed / Art.36 consult / abandon)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:reg_processing_activity</span><span class="ci-text">Per-row processing activity (Art.30 RoPA cross-reference)</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:reg_residual_risk</span><span class="ci-text">Per-row residual-risk level after mitigations</span></div>
+<div class="ci ci-must"><span class="ci-id">item:Art.35:reg_trigger</span><span class="ci-text">Per-row trigger (Art.35.3.a-c / SA list / sectoral / risk-based)</span></div>
+          </div>
+          <div class="checklist-group">
+            <div class="group-label">SHOULDs (1)</div>
+            <div class="ci ci-should"><span class="ci-id">item:Art.35:reg_review_date</span><span class="ci-text">Per-row next review date</span></div>
+          </div>
+          
+          <div class="fp-block">
+            <div class="fp-group-label">FINGERPRINTS (6/7 MUSTs+SHOULDs covered)</div>
+            <div class="fp-must"><span class="fp-must-id">item:Art.35:reg_dpia_id</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">register</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">id</span><span class="fp-token">column</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">identifier</span><span class="fp-token">per</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:reg_dpo_advice_date</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">dpo</span><span class="fp-token">advice</span><span class="fp-token">date</span></span><span class="fp-tokens"><span class="fp-token">dpo</span><span class="fp-token">advice</span><span class="fp-token">dpia</span><span class="fp-token">summary</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">dpo</span><span class="fp-token">consulted</span><span class="fp-token">True</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:reg_outcome</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">proceed</span><span class="fp-token">outcome</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">mitigate</span><span class="fp-token">then</span><span class="fp-token">proceed</span></span><span class="fp-tokens"><span class="fp-token">Art.36</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">abandon</span><span class="fp-token">outcome</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:reg_processing_activity</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">Art.30</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">ropa</span><span class="fp-token">cross</span><span class="fp-token">reference</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">processing</span><span class="fp-token">activity</span><span class="fp-token">ref</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:reg_residual_risk</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">residual</span><span class="fp-token">risk</span><span class="fp-token">level</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">residual</span><span class="fp-token">after</span><span class="fp-token">mitigation</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:reg_trigger</span><div class="fp-sets"><span class="fp-tokens"><span class="fp-token">Art.35.3</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">trigger</span><span class="fp-token">per</span><span class="fp-token">row</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">sa</span><span class="fp-token">list</span><span class="fp-token">trigger</span></span><span class="fp-tokens"><span class="fp-token">dpia</span><span class="fp-token">risk</span><span class="fp-token">based</span><span class="fp-token">trigger</span></span></div></div><div class="fp-must"><span class="fp-must-id">item:Art.35:reg_review_date</span><span class="fp-empty">no fingerprint entry</span></div>
+          </div>
+        
+        </div>
+        
+  </div>
+
+  
+        <div class="weights-block">
+          <div class="weights-title">Signal weights cheatsheet</div>
+          <div class="weights-grid">
+            <div class="weight-stack">
+              <h4>💬 Chat consensus (7 signals)</h4>
+              <div class="weight-row"><span class="weight-name">explicit_ref</span><span class="weight-val pos">1.00</span><span class="weight-note">Signal B — user typed the ref</span></div><div class="weight-row"><span class="weight-name">curated_lexicon</span><span class="weight-val pos">1.00</span><span class="weight-note">Signal C — CLEAR_INTENT_PHRASES + DOCUMENT_TOPIC_MAP</span></div><div class="weight-row"><span class="weight-name">retrieval</span><span class="weight-val dyn">≈0.35-0.70</span><span class="weight-note">Signal A — Chroma cosine</span></div><div class="weight-row"><span class="weight-name">framework_hint</span><span class="weight-val pos">0.20</span><span class="weight-note">Signal F — &#x27;GDPR&#x27; / &#x27;ISO 27001&#x27; in query</span></div><div class="weight-row"><span class="weight-name">posture_boost</span><span class="weight-val pos">0.15</span><span class="weight-note">Signal D — NC/OFI relevance boost</span></div><div class="weight-row"><span class="weight-name">session_context</span><span class="weight-val pos">0.10</span><span class="weight-note">Signal G — deictic follow-up carrying refs</span></div><div class="weight-row"><span class="weight-name">graph_tightness</span><span class="weight-val dyn">±0.05-0.10</span><span class="weight-note">Signal E — family clustering modifier</span></div>
+              <div class="thresh-row">
+                accept: score ≥ 0.75 AND ≥ 2 corroborators · else LLM gatekeeper decides
+              </div>
+            </div>
+            <div class="weight-stack">
+              <h4>📄 Intake consensus (9 signals)</h4>
+              <div class="weight-row"><span class="weight-name">explicit_ref</span><span class="weight-val pos">1.00</span><span class="weight-note">doc verbatim cites the ref</span></div><div class="weight-row"><span class="weight-name">doc_mappings</span><span class="weight-val pos">0.60</span><span class="weight-note">curator-authored filename → leaf map</span></div><div class="weight-row"><span class="weight-name">fingerprint</span><span class="weight-val pos">0.50</span><span class="weight-note">Ship 28/29 exact-token-set catalog</span></div><div class="weight-row"><span class="weight-name">must_semantic</span><span class="weight-val pos">0.30</span><span class="weight-note">Chroma embedding top-K on MUST text</span></div><div class="weight-row"><span class="weight-name">bm25</span><span class="weight-val pos">0.25</span><span class="weight-note">Ship 43 lexical relevance (rank_bm25)</span></div><div class="weight-row"><span class="weight-name">per_protocol</span><span class="weight-val pos">0.10</span><span class="weight-note">per-standard Chroma retrieval</span></div><div class="weight-row"><span class="weight-name">semantic_fit</span><span class="weight-val dyn">±0.30</span><span class="weight-note">post-fingerprint cosine gate (pass / fail)</span></div><div class="weight-row"><span class="weight-name">content_shape</span><span class="weight-val neg">-0.50</span><span class="weight-note">sentence looks like a field/header</span></div><div class="weight-row"><span class="weight-name">evidence_uniq</span><span class="weight-val neg">-0.50</span><span class="weight-note">cross-candidate anti-multi-attribution</span></div>
+              <div class="thresh-row">
+                accept_floor 0.75 · arbiter_floor 0.40 · min_corroborators 2
+              </div>
+            </div>
+          </div>
+        </div>
+        
+</div>
+
+<div class="footer">
+Generated from Neo4j curation graph · <a href="architecture_brief.html">architecture brief</a> · <a href="demo_walkthrough.html">demo walkthrough</a>
+</div>
+
+</body>
+</html>
