@@ -1,0 +1,51 @@
+[Unit]
+Description=ArionComply API server (FastAPI + LangGraph)
+Documentation=https://github.com/jmkamula/RAG/blob/main/CLAUDE.md
+After=network-online.target postgresql.service arioncomply-chroma.service arioncomply-jaeger.service
+Wants=network-online.target
+Requires=postgresql.service arioncomply-chroma.service
+
+[Service]
+Type=simple
+User=arionlabs
+Group=arionlabs
+WorkingDirectory=/data/arioncomply
+
+# .env carries CHROMA_HOST/PORT + NEO4J_URI/USER/PASSWORD + DATABASE_URL +
+# OPENAI_API_KEY + any other secrets. `-` prefix means "missing is OK";
+# systemd still parses whatever is present.
+EnvironmentFile=-/data/arioncomply/.env
+
+# Explicit env — kept here so behaviour is legible in `systemctl show`.
+# Runtime feature flags:
+#   USE_CONSENSUS_EXTRACTION=1 — Arion demo runs the Ship 33+ consensus
+#                                extractor (opt-in per Ship 35 cutover flag)
+#   OTEL_ENABLED=1              — enable OpenTelemetry (Ship 44)
+#   OTEL_PRIVACY_LEVEL=debug    — internal-only VM; observability tier is
+#                                the production default (Ship 44 addendum)
+Environment=PYTHONPATH=/data/arioncomply
+Environment=PYTHONUNBUFFERED=1
+Environment=USE_CONSENSUS_EXTRACTION=1
+Environment=OTEL_ENABLED=1
+Environment=OTEL_PRIVACY_LEVEL=debug
+
+ExecStart=/usr/bin/python3 /data/arioncomply/api_server.py
+
+# Auto-restart on unclean exit, but bail out if we start crash-looping.
+Restart=on-failure
+RestartSec=5s
+StartLimitInterval=60s
+StartLimitBurst=3
+
+StandardOutput=append:/tmp/arioncomply-api.log
+StandardError=inherit
+LimitNOFILE=65536
+
+# Reasonable graceful-shutdown budget: FastAPI needs a moment to drain
+# in-flight requests + close the Postgres pool. Force-kill after 20s.
+TimeoutStopSec=20s
+KillMode=mixed
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target

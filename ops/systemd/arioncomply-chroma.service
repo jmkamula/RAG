@@ -1,0 +1,39 @@
+[Unit]
+Description=ArionComply ChromaDB vector store (HTTP mode)
+Documentation=https://github.com/jmkamula/RAG/blob/main/CLAUDE.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=arionlabs
+Group=arionlabs
+WorkingDirectory=/data/arioncomply
+Environment=PYTHONUNBUFFERED=1
+
+# Chroma listens on 127.0.0.1:8000. arioncomply-api reads CHROMA_HOST/PORT
+# from .env; those default to localhost:8000 which matches this bind.
+# Data persists to /data/arioncomply/chroma_db (5 embedding collections
+# on text-embedding-3-large per Ship 5'.b consolidation).
+ExecStart=/home/arionlabs/.local/bin/chroma run \
+    --host 127.0.0.1 \
+    --port 8000 \
+    --path /data/arioncomply/chroma_db
+
+Restart=on-failure
+RestartSec=5s
+StartLimitInterval=60s
+StartLimitBurst=3
+
+StandardOutput=append:/tmp/arioncomply-chroma.log
+StandardError=inherit
+LimitNOFILE=65536
+
+# Chroma loads collections lazily; give it up to 30s to shut down cleanly
+# so in-progress writes flush to SQLite.
+TimeoutStopSec=30s
+KillMode=mixed
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
