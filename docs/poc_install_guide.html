@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ArionComply — POC Install Guide</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+  --fg: #1a1a1a;
+  --muted: #666;
+  --accent: #1c76fc;
+  --accent-soft: #eaf2ff;
+  --border: #e2e2e2;
+  --code-bg: #f5f5f7;
+  --step-fill: #f9fbff;
+  --mono: "SF Mono", Menlo, "Cascadia Code", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+body {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--fg);
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+h1 { font-size: 2.2em; margin: 0 0 8px; letter-spacing: -0.02em; }
+h2 { font-size: 1.4em; margin: 2em 0 0.5em; padding-bottom: 0.3em;
+     border-bottom: 2px solid var(--border); }
+h3 { font-size: 1.08em; margin: 1.4em 0 0.4em; color: var(--fg); }
+.hero {
+  padding: 22px 26px;
+  background: var(--accent-soft);
+  border-radius: 8px;
+  margin: 24px 0 32px;
+  border-left: 4px solid var(--accent);
+}
+.hero .subtitle {
+  color: var(--muted);
+  font-size: 0.88em;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.step {
+  background: var(--step-fill);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin: 14px 0;
+}
+.step h3 {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-weight: 600;
+}
+.callout {
+  padding: 12px 16px;
+  margin: 12px 0;
+  border-radius: 5px;
+  border-left: 3px solid #d4a017;
+  background: #fffef2;
+}
+.callout.info {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+}
+.callout.warn strong { color: #806000; }
+.callout.info strong { color: var(--accent); }
+code, .mono { font-family: var(--mono); font-size: 0.88em; }
+code {
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+pre {
+  background: var(--code-bg);
+  padding: 14px 16px;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.85em;
+  line-height: 1.5;
+  border-left: 3px solid var(--accent);
+}
+kbd {
+  padding: 1px 6px;
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 12px 0;
+  font-size: 0.94em;
+}
+th, td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+th { background: var(--code-bg); font-weight: 600; }
+tr:last-child td { border-bottom: none; }
+a { color: var(--accent); }
+.muted { color: var(--muted); }
+.footer {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.88em;
+}
+.badge {
+  display: inline-block;
+  font-size: 0.72em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin: 0 4px 0 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+<h1>ArionComply — POC Install Guide</h1>
+<p class="subtitle">Fresh VM → running system · Ship 47 · 2026-07-27</p>
+<p>One-command install for a customer POC. Fresh Ubuntu VM to a
+working ArionComply with a first tenant provisioned in ~10 minutes.</p>
+<p style="margin-top:12px;font-size:0.9em">Companion:
+<a href="architecture_brief.html">architecture brief</a> ·
+<a href="demo_walkthrough.html">demo walkthrough</a> ·
+<a href="tree_A5_15.html">per-control anatomy example</a></p>
+</div>
+
+<h2>Prerequisites</h2>
+
+<div class="step">
+<h3>VM</h3>
+<ul>
+  <li>Ubuntu 22.04 or 24.04 (LTS)</li>
+  <li>4 vCPU / 8 GB RAM / 40 GB disk minimum. Comfortable at 8 vCPU / 16 GB / 100 GB.</li>
+  <li>Outbound HTTPS to <code>api.openai.com</code>, <code>debian.neo4j.com</code>,
+      <code>pypi.org</code>, and <code>github.com</code>. No inbound port
+      requirements beyond SSH.</li>
+  <li>Regular user with <code>sudo</code>. Don't run the installer as root.</li>
+</ul>
+</div>
+
+<div class="step">
+<h3>Credentials you'll need at install time</h3>
+<ul>
+  <li>A password of your choosing for the <code>arioncomply</code> Postgres role
+      (schema owner)</li>
+  <li>A password of your choosing for the <code>arioncomply_app</code> Postgres
+      role (RLS-scoped app user)</li>
+  <li>A password of your choosing for the <code>neo4j</code> user</li>
+  <li>An OpenAI API key (or leave blank if using Anthropic / a local model —
+      configure post-install)</li>
+</ul>
+</div>
+
+<h2>Install — three commands</h2>
+
+<pre>git clone https://github.com/jmkamula/RAG.git /data/arioncomply
+cd /data/arioncomply
+bash deploy/install.sh</pre>
+
+<p>The installer prompts for the four passwords above (or reads them from env
+if you pass <code>--yes</code> for CI mode). Then it runs through nine stages
+with progress printed at each step:</p>
+
+<table>
+<thead><tr><th>Stage</th><th>What happens</th></tr></thead>
+<tbody>
+<tr><td><strong>1. System packages</strong></td>
+    <td><code>apt install postgresql-16 python3-pip curl lsof git</code></td></tr>
+<tr><td><strong>2. Neo4j</strong></td>
+    <td>Adds debian.neo4j.com apt repo, installs Neo4j 5, sets initial password.</td></tr>
+<tr><td><strong>3. Postgres bootstrap</strong></td>
+    <td>Creates roles <code>arioncomply</code> + <code>arioncomply_app</code>,
+        databases <code>arioncomply_compliance</code> + <code>arioncomply_sessions</code>,
+        installs <code>pgcrypto</code> + <code>pg_trgm</code> extensions.</td></tr>
+<tr><td><strong>4. Schema + seed</strong></td>
+    <td>Applies <code>db/baseline/schema_baseline.sql</code> (77 tables, 15 views,
+        75 RLS policies) + <code>db/baseline/seed_curator_data.sql</code>
+        (9 standards, retention policies, RBAC role catalog).</td></tr>
+<tr><td><strong>5. Python dependencies</strong></td>
+    <td><code>pip install -r deploy/requirements.txt</code> (289 packages).</td></tr>
+<tr><td><strong>6. .env file</strong></td>
+    <td>Copies <code>deploy/.env.example</code> to <code>/data/arioncomply/.env</code>
+        (chmod 600) with the passwords + OpenAI key substituted in.</td></tr>
+<tr><td><strong>7. Chroma + systemd</strong></td>
+    <td>Creates <code>/data/arioncomply/chroma_db</code>, installs Chroma + API
+        systemd units, enables + starts the Chroma service.</td></tr>
+<tr><td><strong>8. Neo4j graph load</strong></td>
+    <td>Runs <code>enrichment/documents/load_to_neo4j.py</code>. Loads all
+        curated frameworks (ISO 27001 / 27701 / 27003/4/5 / GDPR) + role-model
+        edges. ~1-2 minutes.</td></tr>
+<tr><td><strong>9. API startup</strong></td>
+    <td>Starts <code>arioncomply-api.service</code>, waits for
+        <code>/docs</code> to respond 200.</td></tr>
+</tbody>
+</table>
+
+<div class="callout info">
+<strong>Idempotent</strong> — safe to re-run. If Postgres roles already exist,
+their passwords are updated to what you supply. Existing schemas are left in
+place. Existing systemd units are re-copied but not restarted.
+</div>
+
+<h2>Provision your first tenant</h2>
+
+<div class="step">
+<h3>Run <code>create_tenant.py</code></h3>
+<pre>cd /data/arioncomply
+PYTHONPATH=. python3 scripts/dev/create_tenant.py \
+    --name "Customer Corp" \
+    --industry technology \
+    --country GB \
+    --cloud-only \
+    --employee-count 200 \
+    --admin-email admin@customer.example \
+    --admin-name "Customer Admin"</pre>
+<p>Output includes an <strong>API key printed once</strong> — copy it immediately.
+The raw key is SHA-256 hashed before storage; no way to retrieve it later.</p>
+</div>
+
+<div class="step">
+<h3>What the script provisions</h3>
+<ul>
+  <li>One tenant row + one admin user</li>
+  <li>Enrollment in ISO 27001:2022 + GDPR:2016/679 by default
+      (override with <code>--frameworks ISO27001:2022 ISO27701:2019 GDPR:2016/679</code>)</li>
+  <li>Baseline <code>client_facts</code>: GDPR controller with EU + UK subjects.
+      The tenant tunes this via the Profile UI post-install.</li>
+  <li>Initial <code>posture_controls</code> rows — one per curated control in
+      each enrolled framework, all set to <code>'Not assessed'</code>.
+      ~430 rows for the default enrollment.</li>
+  <li>One admin API key with scopes: <code>chat, hitl, documents, posture</code>.</li>
+</ul>
+</div>
+
+<h2>Verify</h2>
+
+<div class="step">
+<h3>Health check</h3>
+<pre># Postgres + roles
+sudo -u postgres psql -tAc "\l" | grep arion
+
+# Neo4j
+curl -s -o /dev/null -w "neo4j:  %{http_code}\n" http://127.0.0.1:7474/
+
+# Chroma
+curl -s -o /dev/null -w "chroma: %{http_code}\n" http://127.0.0.1:8000/api/v2/heartbeat
+
+# API
+curl -s -o /dev/null -w "api:    %{http_code}\n" http://127.0.0.1:8080/docs</pre>
+<p>All four should return <code>200</code>. If any returns nothing, check
+<code>journalctl -u arioncomply-{api,chroma}</code>.</p>
+</div>
+
+<div class="step">
+<h3>End-to-end test with the API key</h3>
+<pre>KEY=arion_...  # the key create_tenant printed
+
+# Dashboard posture — should show all-zero counts (fresh tenant)
+curl -s -H "X-API-Key: $KEY" http://127.0.0.1:8080/api/v1/dashboard/posture | \
+    python3 -m json.tool | head -30
+
+# Sanity chat query
+curl -s -X POST -H "X-API-Key: $KEY" \
+     -H "Content-Type: application/json" \
+     -d '{"question":"what is our posture on ISO 27001?"}' \
+     http://127.0.0.1:8080/api/v1/chat | python3 -m json.tool | head</pre>
+</div>
+
+<h2>Access the UI</h2>
+
+<div class="step">
+<h3>SSH tunnel from your workstation</h3>
+<pre>ssh -L 8080:127.0.0.1:8080 -i ~/.ssh/your-key &lt;user&gt;@&lt;vm-ip&gt;</pre>
+<p>Then open <a href="http://localhost:8080/">http://localhost:8080/</a> in a
+browser. Set the API key in the top-right corner using the value from
+<code>create_tenant.py</code>.</p>
+</div>
+
+<h2>Optional — observability stack</h2>
+
+<p>Trace every request end-to-end through Jaeger + Arize Phoenix.</p>
+
+<pre>sudo bash /data/arioncomply/ops/install_jaeger.sh</pre>
+
+<p>Then flip <code>OTEL_ENABLED=1</code> in <code>/data/arioncomply/.env</code>
+and restart the API:</p>
+
+<pre>sudo systemctl restart arioncomply-api</pre>
+
+<p>Tunnel the UIs to your workstation:</p>
+
+<pre>ssh -L 16686:127.0.0.1:16686 -L 6006:127.0.0.1:6006 -L 8080:127.0.0.1:8080 \
+    -i ~/.ssh/your-key &lt;user&gt;@&lt;vm-ip&gt;</pre>
+
+<p>Then:</p>
+<ul>
+  <li><a href="http://localhost:16686/">http://localhost:16686/</a> — Jaeger (traces + service map)</li>
+  <li><a href="http://localhost:6006/">http://localhost:6006/</a> — Phoenix (LLM prompt/completion viewer)</li>
+</ul>
+
+<div class="callout warn">
+<strong>Privacy tier</strong> — <code>OTEL_PRIVACY_LEVEL=debug</code> puts
+prompt/completion content in the trace UIs. Use only when the VM is on an
+internal network. For production installs set
+<code>OTEL_PRIVACY_LEVEL=observability</code> (default) — paths + latencies +
+token counts only, no content.
+</div>
+
+<h2>Troubleshooting</h2>
+
+<table>
+<thead><tr><th>Symptom</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td><code>install.sh</code> fails at step 4 with a syntax error in
+    <code>schema_baseline.sql</code></td>
+    <td>Verify Postgres 16.x (not 15 or older) — the baseline uses
+        PG-16 features. <code>psql --version</code>.</td></tr>
+<tr><td>Neo4j graph load prints <em>ClientError</em> or blank output</td>
+    <td>Wait ~30s more; Neo4j takes time to warm up on first boot. Re-run
+        <code>PYTHONPATH=/data/arioncomply python3
+        enrichment/documents/load_to_neo4j.py</code>.</td></tr>
+<tr><td>API returns 500 with <em>RAG pipeline failed</em></td>
+    <td>Chroma isn't up. Check <code>sudo systemctl status arioncomply-chroma</code>.
+        Common cause: something else on :8000 (e.g. a Python http.server started
+        by mistake).</td></tr>
+<tr><td>Chat is 30 seconds cold</td>
+    <td>First chat after startup rebuilds posture cache + engine overlay.
+        Subsequent chats 4-8s. Fire a warm-up curl before demoing.</td></tr>
+<tr><td><code>psycopg2.errors.InsufficientPrivilege: new row violates RLS
+    policy</code> when running admin scripts</td>
+    <td>Scripts that INSERT into tenant-scoped tables must run as the
+        <code>arioncomply</code> owner role, not <code>arioncomply_app</code>.
+        <code>create_tenant.py</code> handles this via <code>_admin_dsn()</code>;
+        pattern to follow for any custom scripts.</td></tr>
+<tr><td>Firewall rules</td>
+    <td>Only the SSH port needs to be reachable. All ArionComply services
+        (:8080, :8000, :7474, :7687, :16686, :6006) bind
+        <code>127.0.0.1</code>. Access via SSH tunnel.</td></tr>
+</tbody>
+</table>
+
+<h2>Uninstall / reset</h2>
+
+<div class="step">
+<h3>Nuclear reset</h3>
+<pre>sudo systemctl stop arioncomply-{api,chroma,jaeger,phoenix} 2>/dev/null
+sudo systemctl disable arioncomply-{api,chroma,jaeger,phoenix} 2>/dev/null
+sudo rm /etc/systemd/system/arioncomply-*.service /etc/systemd/system/arioncomply-*.timer
+sudo systemctl daemon-reload
+
+sudo -u postgres psql -c "DROP DATABASE IF EXISTS arioncomply_compliance;"
+sudo -u postgres psql -c "DROP DATABASE IF EXISTS arioncomply_sessions;"
+sudo -u postgres psql -c "DROP ROLE IF EXISTS arioncomply_app;"
+sudo -u postgres psql -c "DROP ROLE IF EXISTS arioncomply;"
+
+sudo systemctl stop neo4j
+sudo apt-get purge -y neo4j
+sudo rm -rf /var/lib/neo4j /etc/neo4j
+
+sudo rm -rf /data/arioncomply</pre>
+<p>Then re-run <code>bash deploy/install.sh</code> for a clean slate.</p>
+</div>
+
+<div class="footer">
+<p><strong>ArionComply POC install guide</strong> · 2026-07-27</p>
+<p>Companion documents:
+<a href="architecture_brief.html">architecture brief</a> ·
+<a href="demo_walkthrough.html">demo walkthrough</a> ·
+<a href="tree_A5_15.html">per-control anatomy (A.5.15)</a></p>
+<p>Repository: <a href="https://github.com/jmkamula/RAG">github.com/jmkamula/RAG</a></p>
+</div>
+
+</body>
+</html>
